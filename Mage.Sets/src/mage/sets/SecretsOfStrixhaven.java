@@ -24,7 +24,9 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         this.blockName = "Secrets of Strixhaven"; // for sorting in GUI
         this.hasBasicLands = true;
 
+        cards.add(new SetCardInfo("Aberrant Manawurm", 138, Rarity.UNCOMMON, mage.cards.a.AberrantManawurm.class));
         cards.add(new SetCardInfo("Abigale, Poet Laureate", 170, Rarity.UNCOMMON, mage.cards.a.AbigalePoetLaureate.class));
+        cards.add(new SetCardInfo("Abstract Paintmage", 171, Rarity.UNCOMMON, mage.cards.a.AbstractPaintmage.class));
         cards.add(new SetCardInfo("Adventurous Eater", 72, Rarity.COMMON, mage.cards.a.AdventurousEater.class));
         cards.add(new SetCardInfo("Ajani's Response", 6, Rarity.COMMON, mage.cards.a.AjanisResponse.class));
         cards.add(new SetCardInfo("Ancestral Anger", 106, Rarity.COMMON, mage.cards.a.AncestralAnger.class));
@@ -34,6 +36,7 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Ark of Hunger", 344, Rarity.RARE, mage.cards.a.ArkOfHunger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arnyn, Deathbloom Botanist", 74, Rarity.UNCOMMON, mage.cards.a.ArnynDeathbloomBotanist.class));
         cards.add(new SetCardInfo("Artistic Process", 108, Rarity.UNCOMMON, mage.cards.a.ArtisticProcess.class));
+        cards.add(new SetCardInfo("Ascendant Dustspeaker", 8, Rarity.COMMON, mage.cards.a.AscendantDustspeaker.class));
         cards.add(new SetCardInfo("Banishing Betrayal", 38, Rarity.COMMON, mage.cards.b.BanishingBetrayal.class));
         cards.add(new SetCardInfo("Berta, Wise Extrapolator", 175, Rarity.RARE, mage.cards.b.BertaWiseExtrapolator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Berta, Wise Extrapolator", 346, Rarity.RARE, mage.cards.b.BertaWiseExtrapolator.class, NON_FULL_USE_VARIOUS));
@@ -50,17 +53,22 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Charging Strifeknight", 110, Rarity.UNCOMMON, mage.cards.c.ChargingStrifeknight.class));
         cards.add(new SetCardInfo("Chase Inspiration", 41, Rarity.COMMON, mage.cards.c.ChaseInspiration.class));
         cards.add(new SetCardInfo("Cheerful Osteomancer", 76, Rarity.COMMON, mage.cards.c.CheerfulOsteomancer.class));
+        cards.add(new SetCardInfo("Chelonian Tackle", 142, Rarity.UNCOMMON, mage.cards.c.ChelonianTackle.class));
         cards.add(new SetCardInfo("Colorstorm Stallion", 180, Rarity.RARE, mage.cards.c.ColorstormStallion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Colorstorm Stallion", 299, Rarity.RARE, mage.cards.c.ColorstormStallion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Colossus of the Blood Age", 181, Rarity.UNCOMMON, mage.cards.c.ColossusOfTheBloodAge.class));
+        cards.add(new SetCardInfo("Comforting Counsel", 143, Rarity.RARE, mage.cards.c.ComfortingCounsel.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Comforting Counsel", 338, Rarity.RARE, mage.cards.c.ComfortingCounsel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Conciliator's Duelist", 182, Rarity.RARE, mage.cards.c.ConciliatorsDuelist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Conciliator's Duelist", 348, Rarity.RARE, mage.cards.c.ConciliatorsDuelist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cost of Brilliance", 77, Rarity.COMMON, mage.cards.c.CostOfBrilliance.class));
         cards.add(new SetCardInfo("Cuboid Colony", 183, Rarity.UNCOMMON, mage.cards.c.CuboidColony.class));
         cards.add(new SetCardInfo("Daydream", 9, Rarity.UNCOMMON, mage.cards.d.Daydream.class));
         cards.add(new SetCardInfo("Deathcap Glade", 253, Rarity.RARE, mage.cards.d.DeathcapGlade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deathcap Glade", 301, Rarity.RARE, mage.cards.d.DeathcapGlade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deluge Virtuoso", 42, Rarity.COMMON, mage.cards.d.DelugeVirtuoso.class));
         cards.add(new SetCardInfo("Diary of Dreams", 248, Rarity.UNCOMMON, mage.cards.d.DiaryOfDreams.class));
+        cards.add(new SetCardInfo("Dig Site Inventory", 10, Rarity.COMMON, mage.cards.d.DigSiteInventory.class));
         cards.add(new SetCardInfo("Dissection Practice", 79, Rarity.UNCOMMON, mage.cards.d.DissectionPractice.class));
         cards.add(new SetCardInfo("Dreamroot Cascade", 254, Rarity.RARE, mage.cards.d.DreamrootCascade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dreamroot Cascade", 302, Rarity.RARE, mage.cards.d.DreamrootCascade.class, NON_FULL_USE_VARIOUS));
@@ -86,6 +94,8 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Exhibition Tidecaller", 48, Rarity.RARE, mage.cards.e.ExhibitionTidecaller.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Expressive Firedancer", 114, Rarity.COMMON, mage.cards.e.ExpressiveFiredancer.class));
         cards.add(new SetCardInfo("Fields of Strife", 255, Rarity.COMMON, mage.cards.f.FieldsOfStrife.class));
+        cards.add(new SetCardInfo("Fix What's Broken", 188, Rarity.RARE, mage.cards.f.FixWhatsBroken.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fix What's Broken", 350, Rarity.RARE, mage.cards.f.FixWhatsBroken.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Flashback", 115, Rarity.RARE, mage.cards.f.Flashback.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Flashback", 333, Rarity.RARE, mage.cards.f.Flashback.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Foolish Fate", 83, Rarity.UNCOMMON, mage.cards.f.FoolishFate.class));
@@ -138,6 +148,7 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Maelstrom Artisan", 122, Rarity.RARE, mage.cards.m.MaelstromArtisan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Maelstrom Artisan", 334, Rarity.RARE, mage.cards.m.MaelstromArtisan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mage Tower Referee", 249, Rarity.COMMON, mage.cards.m.MageTowerReferee.class));
+        cards.add(new SetCardInfo("Masterful Flourish", 89, Rarity.COMMON, mage.cards.m.MasterfulFlourish.class));
         cards.add(new SetCardInfo("Mathemagics", 320, Rarity.MYTHIC, mage.cards.m.Mathemagics.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mathemagics", 58, Rarity.MYTHIC, mage.cards.m.Mathemagics.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Melancholic Poet", 90, Rarity.COMMON, mage.cards.m.MelancholicPoet.class));
@@ -148,6 +159,8 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Molten Note", 204, Rarity.UNCOMMON, mage.cards.m.MoltenNote.class));
         cards.add(new SetCardInfo("Molten-Core Maestro", 125, Rarity.RARE, mage.cards.m.MoltenCoreMaestro.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Molten-Core Maestro", 335, Rarity.RARE, mage.cards.m.MoltenCoreMaestro.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Moment of Reckoning", 205, Rarity.RARE, mage.cards.m.MomentOfReckoning.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Moment of Reckoning", 353, Rarity.RARE, mage.cards.m.MomentOfReckoning.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 270, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 278, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 279, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
@@ -173,6 +186,8 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Planar Engineering", 340, Rarity.RARE, mage.cards.p.PlanarEngineering.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Poisoner's Apprentice", 92, Rarity.UNCOMMON, mage.cards.p.PoisonersApprentice.class));
         cards.add(new SetCardInfo("Potioner's Trove", 251, Rarity.COMMON, mage.cards.p.PotionersTrove.class));
+        cards.add(new SetCardInfo("Postmortem Professor", 93, Rarity.RARE, mage.cards.p.PostmortemProfessor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Postmortem Professor", 327, Rarity.RARE, mage.cards.p.PostmortemProfessor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Practiced Offense", 25, Rarity.RARE, mage.cards.p.PracticedOffense.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Practiced Offense", 313, Rarity.RARE, mage.cards.p.PracticedOffense.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Practiced Scrollsmith", 210, Rarity.UNCOMMON, mage.cards.p.PracticedScrollsmith.class));
@@ -258,6 +273,8 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Unsubtle Mockery", 136, Rarity.COMMON, mage.cards.u.UnsubtleMockery.class));
         cards.add(new SetCardInfo("Vastlands Scavenger", 166, Rarity.RARE, mage.cards.v.VastlandsScavenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vastlands Scavenger", 342, Rarity.RARE, mage.cards.v.VastlandsScavenger.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vicious Rivalry", 241, Rarity.RARE, mage.cards.v.ViciousRivalry.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vicious Rivalry", 359, Rarity.RARE, mage.cards.v.ViciousRivalry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wander Off", 104, Rarity.COMMON, mage.cards.w.WanderOff.class));
         cards.add(new SetCardInfo("Wild Hypothesis", 167, Rarity.COMMON, mage.cards.w.WildHypothesis.class));
         cards.add(new SetCardInfo("Wisdom of Ages", 323, Rarity.RARE, mage.cards.w.WisdomOfAges.class, NON_FULL_USE_VARIOUS));
