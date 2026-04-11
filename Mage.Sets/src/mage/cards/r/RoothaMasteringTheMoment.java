@@ -16,7 +16,7 @@ import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
-import mage.game.permanent.token.custom.CreatureToken;
+import mage.game.permanent.token.ElementalXXFlyingHasteToken;
 import mage.game.stack.Spell;
 import mage.watchers.common.SpellsCastWatcher;
 import mage.cards.CardImpl;
