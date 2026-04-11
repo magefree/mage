@@ -4,6 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.ConditionalColoredManaAbility;
@@ -31,8 +32,8 @@ public final class HydroChanneler extends CardImpl {
         this.addAbility(new ConditionalColoredManaAbility(Mana.BlueMana(1), new InstantOrSorcerySpellManaBuilder()));
 
         // {1}, {T}: Add one mana of any color. Spend this mana only to cast an instant or sorcery spell.
-        Ability ability = new ConditionalAnyColorManaAbility(1, new InstantOrSorcerySpellManaBuilder());
-        ability.addCost(new ManaCostsImpl<>("{1}"));
+        Ability ability = new ConditionalAnyColorManaAbility(new ManaCostsImpl<>("{1}"), 1, new InstantOrSorcerySpellManaBuilder());
+        ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
 
