@@ -2963,6 +2963,19 @@
 |TOK:TMC|Ooze||BiogenicOozeToken|
 |TOK:TMC|Treasure||TreasureToken|
 
+# SOS
+|TOK:SOS|Elemental|1|Elemental33BlueRedToken|
+|TOK:SOS|Elemental|2|Elemental33BlueRedToken|
+|TOK:SOS|Fractal|1|FractalToken|
+|TOK:SOS|Fractal|2|FractalToken|
+|TOK:SOS|Inkling|1|Inkling11Token|
+|TOK:SOS|Inkling|2|Inkling11Token|
+|TOK:SOS|Pest|1|PestBlackGreenAttacksToken|
+|TOK:SOS|Pest|2|PestBlackGreenAttacksToken|
+|TOK:SOS|Spirit|1|Spirit22RedWhiteToken|
+|TOK:SOS|Spirit|2|Spirit22RedWhiteToken|
+|TOK:SOS|Treasure||TreasureToken|
+
 # JVC
 |TOK:JVC|Elemental Shaman||ElementalShamanToken|
 
