@@ -193,6 +193,7 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Quandrix, the Proof", 286, Rarity.MYTHIC, mage.cards.q.QuandrixTheProof.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Quick Study", 65, Rarity.COMMON, mage.cards.q.QuickStudy.class));
         cards.add(new SetCardInfo("Quill-Blade Laureate", 27, Rarity.UNCOMMON, mage.cards.q.QuillBladeLaureate.class));
+        cards.add(new SetCardInfo("Rabid Attack", 96, Rarity.UNCOMMON, mage.cards.r.RabidAttack.class));
         cards.add(new SetCardInfo("Rancorous Archaic", 2, Rarity.COMMON, mage.cards.r.RancorousArchaic.class));
         cards.add(new SetCardInfo("Rapier Wit", 28, Rarity.COMMON, mage.cards.r.RapierWit.class));
         cards.add(new SetCardInfo("Rapturous Moment", 219, Rarity.UNCOMMON, mage.cards.r.RapturousMoment.class));
