@@ -38,8 +38,10 @@ public final class Efflorescence extends CardImpl {
                         new GainAbilityTargetEffect(TrampleAbility.getInstance()),
                         new GainAbilityTargetEffect(IndestructibleAbility.getInstance())
                 ), YouGainedLifeCondition.getZero(),
-                "that creature also gains trample and indestructible until end of turn"
-            ).concatBy("<br>" + AbilityWord.INFUSION.formatWord())
+                AbilityWord.INFUSION.formatWord() +
+                    "If you gained life this turn, " +
+                    "that creature also gains trample and indestructible until end of turn"
+            )
         );
         this.getSpellAbility().addHint(ControllerGainedLifeCount.getHint());
         this.getSpellAbility().addWatcher(new PlayerGainedLifeWatcher());
