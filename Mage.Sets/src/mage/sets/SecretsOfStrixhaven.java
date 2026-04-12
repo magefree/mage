@@ -261,6 +261,7 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Root Manipulation", 222, Rarity.UNCOMMON, mage.cards.r.RootManipulation.class));
         cards.add(new SetCardInfo("Rubble Rouser", 128, Rarity.COMMON, mage.cards.r.RubbleRouser.class));
         cards.add(new SetCardInfo("Run Behind", 66, Rarity.COMMON, mage.cards.r.RunBehind.class));
+        cards.add(new SetCardInfo("Scathing Shadelock", 98, Rarity.UNCOMMON, mage.cards.s.ScathingShadelock.class));
         cards.add(new SetCardInfo("Scolding Administrator", 224, Rarity.UNCOMMON, mage.cards.s.ScoldingAdministrator.class));
         cards.add(new SetCardInfo("Seize the Spoils", 129, Rarity.COMMON, mage.cards.s.SeizeTheSpoils.class));
         cards.add(new SetCardInfo("Send in the Pest", 100, Rarity.COMMON, mage.cards.s.SendInThePest.class));
