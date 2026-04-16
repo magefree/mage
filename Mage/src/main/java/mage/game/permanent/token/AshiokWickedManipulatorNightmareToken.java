@@ -3,8 +3,6 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.abilities.condition.common.WasCardExiledThisTurnCondition;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.hint.ConditionHint;
-import mage.abilities.hint.Hint;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
@@ -14,8 +12,6 @@ import mage.counters.CounterType;
  * @author Susucr
  */
 public final class AshiokWickedManipulatorNightmareToken extends TokenImpl {
-
-    private static final Hint hint = new ConditionHint(WasCardExiledThisTurnCondition.instance);
 
     /**
      * /!\ You need to add CardsExiledThisTurnWatcher to any card using this token
@@ -30,7 +26,7 @@ public final class AshiokWickedManipulatorNightmareToken extends TokenImpl {
 
         this.addAbility(new BeginningOfCombatTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance())
-        ).withInterveningIf(WasCardExiledThisTurnCondition.instance).addHint(hint));
+        ).withInterveningIf(WasCardExiledThisTurnCondition.instance).addHint(WasCardExiledThisTurnCondition.getHint()));
     }
 
     private AshiokWickedManipulatorNightmareToken(final AshiokWickedManipulatorNightmareToken token) {

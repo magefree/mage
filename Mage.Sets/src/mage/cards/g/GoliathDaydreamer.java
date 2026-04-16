@@ -13,10 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterInstantOrSorcerySpell;
-import mage.filter.predicate.card.CastFromZonePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -32,13 +29,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class GoliathDaydreamer extends CardImpl {
-
-    private static final FilterSpell filter = new FilterInstantOrSorcerySpell("an instant or sorcery spell from your hand");
-
-    static {
-        filter.add(new CastFromZonePredicate(Zone.HAND));
-    }
-
     public GoliathDaydreamer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
 
@@ -49,7 +39,8 @@ public final class GoliathDaydreamer extends CardImpl {
 
         // Whenever you cast an instant or sorcery spell from your hand, exile that card with a dream counter on it instead of putting it into your graveyard as it resolves.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new GoliathDaydreamerExileEffect(), filter, false, SetTargetPointer.SPELL
+                Zone.BATTLEFIELD, new GoliathDaydreamerExileEffect(), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
+                false, SetTargetPointer.SPELL, Zone.HAND
         ));
 
         // Whenever this creature attacks, you may cast a spell from among cards you own in exile with dream counters on them without paying its mana cost.
@@ -109,7 +100,7 @@ class GoliathDaydreamerExileEffect extends ReplacementEffectImpl {
         return Zone.STACK.match(zEvent.getFromZone())
                 && Zone.GRAVEYARD.match(zEvent.getToZone())
                 && spell != null
-                && event.getSourceId().equals(spell.getId())
+                && !event.getSourceId().equals(spell.getId())
                 && Optional
                 .ofNullable(spell.getMainCard())
                 .map(MageItem::getId)

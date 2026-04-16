@@ -22,9 +22,10 @@ import java.util.Set;
 public final class VolosJournalToken extends TokenImpl {
 
     public VolosJournalToken() {
-        super("Volo's Journal", "Volo's Journal, a legendary colorless artifact token with hexproof and \"Whenever you cast a creature spell, note one of its creature types that hasn't been noted for this artifact.\"");
+        super("Volo's Journal", "Volo's Journal, a legendary colorless Book artifact token with hexproof and \"Whenever you cast a creature spell, note one of its creature types that hasn't been noted for this artifact.\"");
         this.supertype.add(SuperType.LEGENDARY);
         this.cardType.add(CardType.ARTIFACT);
+        this.subtype.add(SubType.BOOK);
         this.addAbility(HexproofAbility.getInstance());
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new VolosJournalTokenEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false

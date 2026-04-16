@@ -22,9 +22,9 @@ public final class MysteriousTome extends TransformingDoubleFacedCard {
 
     public MysteriousTome(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
-                new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{2}{U}",
+                new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.BOOK}, "{2}{U}",
                 "Chilling Chronicle",
-                new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "U"
+                new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.BOOK}, "U"
         );
 
         // Mysterious Tome

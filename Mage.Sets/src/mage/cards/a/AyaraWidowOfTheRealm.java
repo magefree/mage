@@ -116,6 +116,7 @@ class AyaraFurnaceQueenEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
+        player.moveCards(card, Zone.BATTLEFIELD, source, game);
         Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent == null) {
             return false;

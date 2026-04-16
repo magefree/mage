@@ -8,6 +8,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -24,6 +25,8 @@ public final class ThranTome extends CardImpl {
 
     public ThranTome(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
+
+        this.subtype.add(SubType.BOOK);
 
         // Reveal the top three cards of your library. Target opponent chooses one of those cards. Put that card into your graveyard, then draw two cards.
         Ability ability = new SimpleActivatedAbility(new ThranTomeEffect(), new ManaCostsImpl<>("{5}"));

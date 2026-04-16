@@ -40,7 +40,6 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class TarriansJournal extends TransformingDoubleFacedCard {
@@ -57,7 +56,7 @@ public class TarriansJournal extends TransformingDoubleFacedCard {
 
     public TarriansJournal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
-                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{1}{B}",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.BOOK}, "{1}{B}",
                 "The Tomb of Aclazotz",
                 new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.LAND}, new SubType[]{SubType.CAVE}, ""
         );

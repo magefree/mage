@@ -35,6 +35,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Anarchy", 170, Rarity.UNCOMMON, mage.cards.a.Anarchy.class, RETRO_ART));
         cards.add(new SetCardInfo("Arctic Foxes", 2, Rarity.COMMON, mage.cards.a.ArcticFoxes.class, RETRO_ART));
         cards.add(new SetCardInfo("Arcum's Sleigh", 309, Rarity.UNCOMMON, mage.cards.a.ArcumsSleigh.class, RETRO_ART));
+        cards.add(new SetCardInfo("Arcum's Weathervane", 310, Rarity.UNCOMMON, mage.cards.a.ArcumsWeathervane.class));
         cards.add(new SetCardInfo("Arenson's Aura", 3, Rarity.COMMON, mage.cards.a.ArensonsAura.class, RETRO_ART));
         cards.add(new SetCardInfo("Armor of Faith", 4, Rarity.COMMON, mage.cards.a.ArmorOfFaith.class, RETRO_ART));
         cards.add(new SetCardInfo("Arnjlot's Ascent", 57, Rarity.COMMON, mage.cards.a.ArnjlotsAscent.class, RETRO_ART));

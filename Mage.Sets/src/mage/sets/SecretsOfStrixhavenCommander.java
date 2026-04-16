@@ -104,6 +104,7 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Desolate Mire", 367, Rarity.RARE, mage.cards.d.DesolateMire.class));
         cards.add(new SetCardInfo("Determined Iteration", 122, Rarity.RARE, mage.cards.d.DeterminedIteration.class));
         cards.add(new SetCardInfo("Dig Through Time", 195, Rarity.RARE, mage.cards.d.DigThroughTime.class));
+        cards.add(new SetCardInfo("Dina, Essence Brewer", 1, Rarity.MYTHIC, mage.cards.d.DinaEssenceBrewer.class));
         cards.add(new SetCardInfo("Dina, Soul Steeper", 305, Rarity.UNCOMMON, mage.cards.d.DinaSoulSteeper.class));
         cards.add(new SetCardInfo("Dirgur Focusmage", 18, Rarity.RARE, mage.cards.d.DirgurFocusmage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dirgur Focusmage", 68, Rarity.RARE, mage.cards.d.DirgurFocusmage.class, NON_FULL_USE_VARIOUS));
@@ -120,6 +121,7 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Entrancing Melody", 196, Rarity.RARE, mage.cards.e.EntrancingMelody.class));
         cards.add(new SetCardInfo("Eriette of the Charmed Apple", 307, Rarity.MYTHIC, mage.cards.e.ErietteOfTheCharmedApple.class));
         cards.add(new SetCardInfo("Eureka Moment", 308, Rarity.COMMON, mage.cards.e.EurekaMoment.class));
+        cards.add(new SetCardInfo("Excava, the Risen Past", 2, Rarity.MYTHIC, mage.cards.e.ExcavaTheRisenPast.class));
         cards.add(new SetCardInfo("Exotic Orchard", 369, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Expansion Algorithm", 19, Rarity.RARE, mage.cards.e.ExpansionAlgorithm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Expansion Algorithm", 69, Rarity.RARE, mage.cards.e.ExpansionAlgorithm.class, NON_FULL_USE_VARIOUS));
@@ -178,6 +180,7 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kami of Whispered Hopes", 273, Rarity.UNCOMMON, mage.cards.k.KamiOfWhisperedHopes.class));
         cards.add(new SetCardInfo("Karmic Guide", 151, Rarity.RARE, mage.cards.k.KarmicGuide.class));
         cards.add(new SetCardInfo("Keen Duelist", 218, Rarity.RARE, mage.cards.k.KeenDuelist.class));
+        cards.add(new SetCardInfo("Killian, Decisive Mentor", 4, Rarity.MYTHIC, mage.cards.k.KillianDecisiveMentor.class));
         cards.add(new SetCardInfo("Killian, Ink Duelist", 317, Rarity.UNCOMMON, mage.cards.k.KillianInkDuelist.class));
         cards.add(new SetCardInfo("Kor Spiritdancer", 152, Rarity.RARE, mage.cards.k.KorSpiritdancer.class));
         cards.add(new SetCardInfo("Laelia, the Blade Reforged", 246, Rarity.RARE, mage.cards.l.LaeliaTheBladeReforged.class));
@@ -275,6 +278,7 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rip Apart", 328, Rarity.UNCOMMON, mage.cards.r.RipApart.class));
         cards.add(new SetCardInfo("Rite of Replication", 202, Rarity.RARE, mage.cards.r.RiteOfReplication.class));
         cards.add(new SetCardInfo("Rogue's Passage", 400, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
+        cards.add(new SetCardInfo("Rootha, Mastering the Moment", 8, Rarity.MYTHIC, mage.cards.r.RoothaMasteringTheMoment.class));
         cards.add(new SetCardInfo("Rootha, Mercurial Artist", 329, Rarity.UNCOMMON, mage.cards.r.RoothaMercurialArtist.class));
         cards.add(new SetCardInfo("Rousing Refrain", 253, Rarity.RARE, mage.cards.r.RousingRefrain.class));
         cards.add(new SetCardInfo("Rugged Prairie", 401, Rarity.RARE, mage.cards.r.RuggedPrairie.class));
@@ -313,6 +317,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Stonecoil Serpent", 356, Rarity.RARE, mage.cards.s.StonecoilSerpent.class));
         cards.add(new SetCardInfo("Storm-Kiln Artist", 255, Rarity.UNCOMMON, mage.cards.s.StormKilnArtist.class));
         cards.add(new SetCardInfo("Stormcatch Mentor", 331, Rarity.UNCOMMON, mage.cards.s.StormcatchMentor.class));
+        cards.add(new SetCardInfo("Striding Shotcaller", 50, Rarity.RARE, mage.cards.s.StridingShotcaller.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Striding Shotcaller", 98, Rarity.RARE, mage.cards.s.StridingShotcaller.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stroke of Genius", 203, Rarity.RARE, mage.cards.s.StrokeOfGenius.class));
         cards.add(new SetCardInfo("Study Hall", 407, Rarity.COMMON, mage.cards.s.StudyHall.class));
         cards.add(new SetCardInfo("Sulfur Falls", 408, Rarity.RARE, mage.cards.s.SulfurFalls.class));

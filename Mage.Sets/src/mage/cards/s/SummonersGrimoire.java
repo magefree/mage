@@ -28,6 +28,7 @@ public final class SummonersGrimoire extends CardImpl {
     public SummonersGrimoire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}{G}");
 
+        this.subtype.add(SubType.BOOK);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Job select

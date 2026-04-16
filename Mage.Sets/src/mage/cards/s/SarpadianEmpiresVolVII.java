@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -13,24 +12,22 @@ import mage.cards.CardSetInfo;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.game.Game;
-import mage.game.permanent.token.CamaridToken;
-import mage.game.permanent.token.CitizenToken;
-import mage.game.permanent.token.GoblinToken;
-import mage.game.permanent.token.SaprolingToken;
-import mage.game.permanent.token.ThrullToken;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.*;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public final class SarpadianEmpiresVolVII extends CardImpl {
 
     public SarpadianEmpiresVolVII(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
+
+        this.subtype.add(SubType.BOOK);
 
         // As Sarpadian Empires, Vol. VII enters the battlefield, choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.
         this.addAbility(new AsEntersBattlefieldAbility(new SarpadianEmpiresChooseTokenEffect()));
