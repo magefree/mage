@@ -12,6 +12,7 @@ import mage.interfaces.PluginException;
 import mage.interfaces.plugin.CardPlugin;
 import mage.interfaces.plugin.CounterPlugin;
 import mage.interfaces.plugin.ThemePlugin;
+import mage.util.ThreadUtils;
 import mage.view.CardView;
 import mage.view.PermanentView;
 import net.xeoh.plugins.base.PluginManager;
@@ -77,6 +78,7 @@ public enum Plugins implements MagePlugins {
 
     @Override
     public void updateGamePanel(Map<String, JComponent> ui) {
+        ThreadUtils.ensureRunInGUISwingThread();
         if (MageFrame.isLite() || MageFrame.isGray() || themePlugin == null) {
             return;
         }
@@ -85,6 +87,7 @@ public enum Plugins implements MagePlugins {
 
     @Override
     public JComponent updateTablePanel(Map<String, JComponent> ui) {
+        ThreadUtils.ensureRunInGUISwingThread();
         if (MageFrame.isLite() || MageFrame.isGray() || themePlugin == null) {
             return null;
         }
@@ -133,6 +136,7 @@ public enum Plugins implements MagePlugins {
 
     @Override
     public int sortPermanents(Map<String, JComponent> ui, Map<UUID, MageCard> cards, boolean topRow) {
+        ThreadUtils.ensureRunInGUISwingThread();
         if (this.cardPlugin != null) {
             return this.cardPlugin.sortPermanents(ui, cards, PreferencesDialog.getCachedValue("nonLandPermanentsInOnePile", "false").equals("true"), topRow);
         }
@@ -187,6 +191,7 @@ public enum Plugins implements MagePlugins {
 
     @Override
     public void onAddCard(MageCard card, int count) {
+        ThreadUtils.ensureRunInGUISwingThread();
         if (this.cardPlugin != null) {
             this.cardPlugin.onAddCard(card, count);
         }
@@ -194,6 +199,7 @@ public enum Plugins implements MagePlugins {
 
     @Override
     public void onRemoveCard(MageCard card, int count) {
+        ThreadUtils.ensureRunInGUISwingThread();
         if (this.cardPlugin != null) {
             this.cardPlugin.onRemoveCard(card, count);
         }

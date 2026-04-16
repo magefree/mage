@@ -142,7 +142,6 @@ public class MageUI {
         while (!j.isEnabled()) {
             TimeUnit.MILLISECONDS.sleep(10);
         }
-        Thread t = new Thread(() -> j.doClick());
-        t.start();
+        SwingUtilities.invokeLater(j::doClick);
     }
 }
