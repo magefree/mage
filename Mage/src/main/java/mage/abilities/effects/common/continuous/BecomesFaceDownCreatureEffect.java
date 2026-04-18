@@ -59,7 +59,26 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
         MORPHED,
         MEGAMORPHED,
         DISGUISED,
-        CLOAKED
+        CLOAKED,
+        CUSTOM_33 {
+            @Override
+            public int getPower() {
+                return 3;
+            }
+
+            @Override
+            public int getToughness() {
+                return 3;
+            }
+        };
+
+        public int getPower() {
+            return 2;
+        }
+
+        public int getToughness() {
+            return 2;
+        }
     }
 
     protected int zoneChangeCounter;
@@ -137,6 +156,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
                 break;
             case MANUAL:
             case MANIFESTED:
+            case CUSTOM_33:
                 // no face up abilities
                 break;
             default:
@@ -216,6 +236,8 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
                     case CLOAKED:
                         permanent.setCloaked(true);
                         break;
+                    case CUSTOM_33:
+                        break;
                     default:
                         throw new UnsupportedOperationException("FaceDownType not yet supported: " + faceDownType);
                 }
@@ -238,11 +260,15 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
         } else if (permanent.isCloaked()) {
             return BecomesFaceDownCreatureEffect.FaceDownType.CLOAKED;
         } else if (permanent.isFaceDown(game)) {
+            if (permanent.getPower().getModifiedBaseValue() == 3 && permanent.getPower().getModifiedBaseValue() == 3) {
+                return BecomesFaceDownCreatureEffect.FaceDownType.CUSTOM_33;
+            }
             return BecomesFaceDownCreatureEffect.FaceDownType.MANUAL;
         } else {
             return null;
         }
     }
+
 
     /**
      * Convert any object (card, token) to face down (remove/hide all face up information and make it a 2/2 creature)
@@ -318,8 +344,8 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
             }
         }
 
-        object.getPower().setModifiedBaseValue(2);
-        object.getToughness().setModifiedBaseValue(2);
+        object.getPower().setModifiedBaseValue(faceDownType.getPower());
+        object.getToughness().setModifiedBaseValue(faceDownType.getToughness());
 
         // image
         String tokenName;
@@ -338,6 +364,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
                 tokenName = TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_CLOAK;
                 break;
             case MANUAL:
+            case CUSTOM_33:
                 tokenName = TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MANUAL;
                 break;
             default:
