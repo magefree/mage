@@ -373,6 +373,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Umbral Expanse", 108, Rarity.RARE, mage.cards.u.UmbralExpanse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Umbral Expanse", 60, Rarity.RARE, mage.cards.u.UmbralExpanse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Unbound Flourishing", 126, Rarity.MYTHIC, mage.cards.u.UnboundFlourishing.class));
+        cards.add(new SetCardInfo("Vanguard of the Restless", 16, Rarity.RARE, mage.cards.v.VanguardOfTheRestless.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vanguard of the Restless", 66, Rarity.RARE, mage.cards.v.VanguardOfTheRestless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vanishing Verse", 335, Rarity.RARE, mage.cards.v.VanishingVerse.class));
         cards.add(new SetCardInfo("Veinwitch Coven", 228, Rarity.RARE, mage.cards.v.VeinwitchCoven.class));
         cards.add(new SetCardInfo("Venerable Warsinger", 336, Rarity.RARE, mage.cards.v.VenerableWarsinger.class));
