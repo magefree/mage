@@ -6,6 +6,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
@@ -32,6 +33,7 @@ public final class AntiquitiesOnTheLoose extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{W}{W}");
 
         // Create two 2/2 red and white Spirit creature tokens. Then if this spell was cast from anywhere other than your hand, put a +1/+1 counter on each Spirit you control.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new Spirit22RedWhiteToken(), 2));
         this.getSpellAbility().addEffect(new AntiquitiesOnTheLooseEffect());
 
         // Flashback {4}{W}{W}
@@ -54,8 +56,8 @@ class AntiquitiesOnTheLooseEffect extends OneShotEffect {
 
     AntiquitiesOnTheLooseEffect() {
         super(Outcome.Benefit);
-        staticText = "create two 2/2 red and white Spirit creature tokens. " +
-                "Then if this spell was cast from anywhere other than your hand, put two +1/+1 counters on each Spirit you control";
+        staticText = "then if this spell was cast from anywhere other than your hand, "
+        + "put two +1/+1 counters on each Spirit you control";
     }
 
     private AntiquitiesOnTheLooseEffect(final AntiquitiesOnTheLooseEffect effect) {
@@ -69,9 +71,6 @@ class AntiquitiesOnTheLooseEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Token token = new Spirit22RedWhiteToken();
-        token.putOntoBattlefield(2, game, source);
-
         Spell spell = Optional
                 .ofNullable(source.getSourceObjectIfItStillExists(game))
                 .filter(Spell.class::isInstance)
