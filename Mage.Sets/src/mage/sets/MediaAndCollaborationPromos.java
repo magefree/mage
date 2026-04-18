@@ -22,6 +22,7 @@ public class MediaAndCollaborationPromos extends ExpansionSet {
 
         // some cards are non-English (most are Japanese, Jamuraan Lion has a German printing), but it's ok - scryfall can download it
 
+        cards.add(new SetCardInfo("Aang, Air Nomad", "2025-25", Rarity.RARE, mage.cards.a.AangAirNomad.class));
         cards.add(new SetCardInfo("Ajani, Mentor of Heroes", "2024-3", Rarity.MYTHIC, mage.cards.a.AjaniMentorOfHeroes.class));
         cards.add(new SetCardInfo("Ancestral Mask", "2025-2", Rarity.RARE, mage.cards.a.AncestralMask.class));
         cards.add(new SetCardInfo("Archangel", "2000-4", Rarity.RARE, mage.cards.a.Archangel.class, RETRO_ART));
@@ -35,11 +36,14 @@ public class MediaAndCollaborationPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Chrome Host Seedshark", "2025-20", Rarity.RARE, mage.cards.c.ChromeHostSeedshark.class));
         cards.add(new SetCardInfo("Cloud, Midgar Mercenary", "2025-21", Rarity.MYTHIC, mage.cards.c.CloudMidgarMercenary.class));
         cards.add(new SetCardInfo("Cloud, Planet's Champion", "2025-13", Rarity.MYTHIC, mage.cards.c.CloudPlanetsChampion.class));
+        cards.add(new SetCardInfo("Command Tower", "2026-01", Rarity.RARE, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Counterspell", "2021-1", Rarity.RARE, mage.cards.c.Counterspell.class));
-        cards.add(new SetCardInfo("Crop Rotation", "2020-7", Rarity.RARE, mage.cards.c.CropRotation.class));
+        cards.add(new SetCardInfo("Crop Rotation", "2020-7", Rarity.RARE, mage.cards.c.CropRotation.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Crop Rotation", "2026-02", Rarity.RARE, mage.cards.c.CropRotation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Culling the Weak", "2023-8", Rarity.RARE, mage.cards.c.CullingTheWeak.class));
         cards.add(new SetCardInfo("Cunning Sparkmage", "2010-2", Rarity.UNCOMMON, mage.cards.c.CunningSparkmage.class));
-        cards.add(new SetCardInfo("Dark Ritual", "2020-4", Rarity.RARE, mage.cards.d.DarkRitual.class));
+        cards.add(new SetCardInfo("Dark Ritual", "2020-4", Rarity.RARE, mage.cards.d.DarkRitual.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dark Ritual", "2025-8", Rarity.RARE, mage.cards.d.DarkRitual.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Darksteel Juggernaut", "2010-1", Rarity.RARE, mage.cards.d.DarksteelJuggernaut.class));
         cards.add(new SetCardInfo("Daxos, Blessed by the Sun", "2020-2", Rarity.UNCOMMON, mage.cards.d.DaxosBlessedByTheSun.class));
         cards.add(new SetCardInfo("Diabolic Edict", "2019-2", Rarity.RARE, mage.cards.d.DiabolicEdict.class, NON_FULL_USE_VARIOUS));
@@ -50,10 +54,12 @@ public class MediaAndCollaborationPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Fireball", "1995-1", Rarity.COMMON, mage.cards.f.Fireball.class, RETRO_ART));
         cards.add(new SetCardInfo("Frantic Search", "2022-4", Rarity.RARE, mage.cards.f.FranticSearch.class));
         cards.add(new SetCardInfo("Gingerbrute", "2023-3", Rarity.RARE, mage.cards.g.Gingerbrute.class, RETRO_ART));
+        cards.add(new SetCardInfo("Gishath, Sun's Avatar", "2026-5", Rarity.MYTHIC, mage.cards.g.GishathSunsAvatar.class));
         cards.add(new SetCardInfo("Gush", "2024-4", Rarity.RARE, mage.cards.g.Gush.class));
         cards.add(new SetCardInfo("Harald, King of Skemfar", "2021-3", Rarity.RARE, mage.cards.h.HaraldKingOfSkemfar.class));
         cards.add(new SetCardInfo("Heliod's Pilgrim", "2020-6", Rarity.RARE, mage.cards.h.HeliodsPilgrim.class));
         cards.add(new SetCardInfo("Hypnotic Sprite", "2019-5", Rarity.RARE, mage.cards.h.HypnoticSprite.class));
+        cards.add(new SetCardInfo("Iroh, Grand Lotus", "2025-24", Rarity.RARE, mage.cards.i.IrohGrandLotus.class));
         cards.add(new SetCardInfo("Jace Beleren", "2009-1", Rarity.MYTHIC, mage.cards.j.JaceBeleren.class));
         cards.add(new SetCardInfo("Jace, Memory Adept", "2024-2", Rarity.MYTHIC, mage.cards.j.JaceMemoryAdept.class));
         cards.add(new SetCardInfo("Jamuraan Lion", "1996-3", Rarity.COMMON, mage.cards.j.JamuraanLion.class, RETRO_ART));
@@ -68,6 +74,7 @@ public class MediaAndCollaborationPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Parallax Dementia", "2000-6", Rarity.COMMON, mage.cards.p.ParallaxDementia.class, RETRO_ART));
         cards.add(new SetCardInfo("Patchwork Banner", "2024-7", Rarity.RARE, mage.cards.p.PatchworkBanner.class));
         cards.add(new SetCardInfo("Phantasmal Dragon", "2011-1", Rarity.UNCOMMON, mage.cards.p.PhantasmalDragon.class));
+        cards.add(new SetCardInfo("Peter Parker", "2025-22", Rarity.MYTHIC, mage.cards.p.PeterParker.class));
         cards.add(new SetCardInfo("Phyrexian Rager", "2000-5", Rarity.COMMON, mage.cards.p.PhyrexianRager.class, RETRO_ART));
         cards.add(new SetCardInfo("Pyromancer's Gauntlet", "2023-6", Rarity.RARE, mage.cards.p.PyromancersGauntlet.class, RETRO_ART));
         cards.add(new SetCardInfo("Ruin Crab", "2023-4", Rarity.RARE, mage.cards.r.RuinCrab.class, RETRO_ART));
@@ -81,22 +88,26 @@ public class MediaAndCollaborationPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Shrieking Drake", "1997-2", Rarity.COMMON, mage.cards.s.ShriekingDrake.class, RETRO_ART));
         cards.add(new SetCardInfo("Silver Drake", "2000-2", Rarity.COMMON, mage.cards.s.SilverDrake.class, RETRO_ART));
         cards.add(new SetCardInfo("Snuff Out", "2024-1", Rarity.RARE, mage.cards.s.SnuffOut.class));
+        cards.add(new SetCardInfo("Spider-Man, Miles Morales", "2025-23", Rarity.MYTHIC, mage.cards.s.SpiderManMilesMorales.class));
         cards.add(new SetCardInfo("Spined Wurm", "2001-1", Rarity.COMMON, mage.cards.s.SpinedWurm.class, RETRO_ART));
         cards.add(new SetCardInfo("Sprite Dragon", "2020-5", Rarity.RARE, mage.cards.s.SpriteDragon.class));
         cards.add(new SetCardInfo("Staggering Insight", "2020-3", Rarity.RARE, mage.cards.s.StaggeringInsight.class));
         cards.add(new SetCardInfo("Stream of Life", "1997-4", Rarity.COMMON, mage.cards.s.StreamOfLife.class, RETRO_ART));
+        cards.add(new SetCardInfo("Swords to Plowshares", "2026-4", Rarity.RARE, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Talruum Champion", "1997-1", Rarity.COMMON, mage.cards.t.TalruumChampion.class, RETRO_ART));
         cards.add(new SetCardInfo("Tangled Florahedron", "2020-8", Rarity.UNCOMMON, mage.cards.t.TangledFlorahedron.class));
         cards.add(new SetCardInfo("Thorn Elemental", "2000-3", Rarity.RARE, mage.cards.t.ThornElemental.class, RETRO_ART));
         cards.add(new SetCardInfo("Ultimecia, Temporal Threat", "2025-11", Rarity.RARE, mage.cards.u.UltimeciaTemporalThreat.class));
         cards.add(new SetCardInfo("Usher of the Fallen", "2022-3", Rarity.RARE, mage.cards.u.UsherOfTheFallen.class));
         cards.add(new SetCardInfo("Voltaic Key", "2020-1", Rarity.RARE, mage.cards.v.VoltaicKey.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Voltaic Key", "2024-6", Rarity.RARE, mage.cards.v.VoltaicKey.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Voltaic Key", "2025-4", Rarity.RARE, mage.cards.v.VoltaicKey.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Warstorm Surge", "2026-6", Rarity.RARE, mage.cards.w.WarstormSurge.class));
         cards.add(new SetCardInfo("Warmonger", "1999-2", Rarity.UNCOMMON, mage.cards.w.Warmonger.class, RETRO_ART));
         cards.add(new SetCardInfo("Wild Growth", "2022-2", Rarity.RARE, mage.cards.w.WildGrowth.class));
         cards.add(new SetCardInfo("Winged Boots", "2023-7", Rarity.RARE, mage.cards.w.WingedBoots.class));
         cards.add(new SetCardInfo("Worn Powerstone", "2023-2", Rarity.RARE, mage.cards.w.WornPowerstone.class));
         cards.add(new SetCardInfo("Wrath of God", "2025-3", Rarity.RARE, mage.cards.w.WrathOfGod.class));
+        cards.add(new SetCardInfo("Zack Fair", "2026-03", Rarity.RARE, mage.cards.z.ZackFair.class));
         cards.add(new SetCardInfo("Zhalfirin Knight", "1996-2", Rarity.COMMON, mage.cards.z.ZhalfirinKnight.class, RETRO_ART));
     }
 }
