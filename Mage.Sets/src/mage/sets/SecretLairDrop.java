@@ -2499,8 +2499,8 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Tidal Barracuda", 7105, Rarity.RARE, mage.cards.t.TidalBarracuda.class));
         cards.add(new SetCardInfo("Master of the Feast", 7106, Rarity.RARE, mage.cards.m.MasterOfTheFeast.class));
         cards.add(new SetCardInfo("Invasion Plans", 7107, Rarity.RARE, mage.cards.i.InvasionPlans.class));
-        cards.add(new SetCardInfo("Mountain", 7126, Rarity.RARE, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Mountain", 7128, Rarity.RARE, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 7126, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 7128, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Miren, the Moaning Well", 7108, Rarity.RARE, mage.cards.m.MirenTheMoaningWell.class));
         cards.add(new SetCardInfo("Jace, the Mind Sculptor", 8001, Rarity.MYTHIC, mage.cards.j.JaceTheMindSculptor.class));
         cards.add(new SetCardInfo("Doom Blade", 9990, Rarity.RARE, mage.cards.d.DoomBlade.class));
