@@ -20,7 +20,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.Spirit22RedWhiteToken;
-import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 
 /**
