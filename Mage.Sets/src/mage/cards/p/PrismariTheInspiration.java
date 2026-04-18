@@ -44,7 +44,7 @@ public final class PrismariTheInspiration extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Ward--Pay 5 life.
-        this.addAbility(new WardAbility(new PayLifeCost(5)));
+        this.addAbility(new WardAbility(new PayLifeCost(5), false));
 
         // Instant and sorcery spells you cast have storm.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(new StormAbility(), filter))

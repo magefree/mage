@@ -29,7 +29,7 @@ public final class ForumNecroscribe extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Ward--Discard a card.
-        this.addAbility(new WardAbility(new DiscardCardCost()));
+        this.addAbility(new WardAbility(new DiscardCardCost(), false));
 
         // Repartee -- Whenever you cast an instant or sorcery spell that targets a creature, return target creature card from your graveyard to the battlefield.
         Ability ability = new ReparteeAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());
