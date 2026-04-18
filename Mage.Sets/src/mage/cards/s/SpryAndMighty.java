@@ -31,7 +31,7 @@ public final class SpryAndMighty extends CardImpl {
     public SpryAndMighty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}");
 
-        // Choose two creatures you control. You draw X cards and the chosen creatures get +X/+X and gain trample until end of turn, where X is the difference between the chosen creatures' powers.
+        // Choose exactly two creatures you control. You draw X cards and the chosen creatures get +X/+X and gain trample until end of turn, where X is the difference between the chosen creatures' powers.
         this.getSpellAbility().addEffect(new SpryAndMightyEffect());
     }
 
@@ -49,7 +49,7 @@ class SpryAndMightyEffect extends OneShotEffect {
 
     SpryAndMightyEffect() {
         super(Outcome.Benefit);
-        staticText = "choose two creatures you control. You draw X cards and the chosen creatures get +X/+X " +
+        staticText = "choose exactly two creatures you control. You draw X cards and the chosen creatures get +X/+X " +
                 "and gain trample until end of turn, where X is the difference between the chosen creatures' powers";
     }
 
