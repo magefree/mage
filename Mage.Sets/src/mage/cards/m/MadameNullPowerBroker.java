@@ -18,7 +18,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -81,9 +80,7 @@ class MadameNullPowerBrokerEffect extends OneShotEffect {
         if (power < 1 || !CardUtil.tryPayLife(power, player, source, game)) {
             return false;
         }
-        Optional.ofNullable(getTargetPointer().getFirst(game, source))
-                .map(game::getPermanent)
-                .ifPresent(p -> p.addCounters(CounterType.P1P1.createInstance(power), source, game));
+        permanent.addCounters(CounterType.P1P1.createInstance(power), source, game);
         return true;
     }
 }
