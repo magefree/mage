@@ -21,7 +21,7 @@ public final class Damn extends CardImpl {
 
         // Destroy target creature. A creature destroyed this way can’t be regenerated.
         // Overload {2}{W}{W} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of “target” with “each.”)
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{2}{W}{W}"),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{2}{W}{W}"),
                 new TargetCreaturePermanent(), new DestroyTargetEffect(true)
                         .setText("destroy target creature. A creature destroyed this way can't be regenerated"));
     }

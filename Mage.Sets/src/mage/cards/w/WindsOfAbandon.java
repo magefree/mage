@@ -31,7 +31,7 @@ public final class WindsOfAbandon extends CardImpl {
 
         // Exile target creature you don't control. For each creature exiled this way, its controller searches their library for a basic land card. Those players put those cards onto the battlefield tapped, then shuffle their libraries.
         // Overload {4}{W}{W}
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{4}{W}{W}"),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{4}{W}{W}"),
                 new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL), new WindsOfAbandonEffect());
     }
 

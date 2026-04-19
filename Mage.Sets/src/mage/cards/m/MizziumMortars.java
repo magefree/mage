@@ -22,7 +22,7 @@ public final class MizziumMortars extends CardImpl {
 
         // Mizzium Mortars deals 4 damage to target creature you don't control.
         // Overload {3}{R}{R}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{3}{R}{R}{R}"),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{3}{R}{R}{R}"),
                 new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL), new DamageTargetEffect(4));
     }
 

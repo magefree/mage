@@ -28,7 +28,7 @@ public final class CyclonicRift extends CardImpl {
 
         // Return target nonland permanent you don't control to its owner's hand.
         // Overload {6}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{6}{U}"),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{6}{U}"),
                 new TargetPermanent(filter), new ReturnToHandTargetEffect());
     }
 

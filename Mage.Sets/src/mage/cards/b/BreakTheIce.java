@@ -34,7 +34,7 @@ public final class BreakTheIce extends CardImpl {
 
         // Destroy target land that is snow or could produce {C}.
         // Overload {4}{B}{B}
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{4}{B}{B}"),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{4}{B}{B}"),
                 new TargetPermanent(filter), new DestroyTargetEffect());
     }
 

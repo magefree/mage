@@ -34,7 +34,7 @@ public final class RiseAndShine extends CardImpl {
 
         // Target noncreature artifact you control becomes a 0/0 artifact creature. Put four +1/+1 counters on each artifact that became a creature this way.
         // Overload {4}{U}{U}
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{4}{U}{U}"), new TargetPermanent(filter),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{4}{U}{U}"), new TargetPermanent(filter),
             new AddCardTypeTargetEffect(Duration.EndOfGame, CardType.ARTIFACT, CardType.CREATURE).setText("Target noncreature artifact you control becomes"),
             new SetBasePowerToughnessTargetEffect(0, 0, Duration.EndOfGame).setText(" a 0/0 artifact creature"),
             new AddCountersTargetEffect(CounterType.P1P1.createInstance(4)).setText("Put four +1/+1 counters on each artifact that became a creature this way"));

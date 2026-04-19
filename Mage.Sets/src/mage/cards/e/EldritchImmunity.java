@@ -33,7 +33,7 @@ public final class EldritchImmunity extends CardImpl {
 
         // Target creature you control gains protection from each color until end of turn.
         // Overload {4}{C}
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{4}{C}"),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{4}{C}"),
                 new TargetControlledCreaturePermanent(), new GainAbilityTargetEffect(new ProtectionAbility(filter)));
     }
 

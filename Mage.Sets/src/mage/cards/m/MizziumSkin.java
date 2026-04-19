@@ -30,7 +30,7 @@ public final class MizziumSkin extends CardImpl {
 
         // Target creature you control gets +0/+1 and gains hexproof until end of turn.
         // Overload {1}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{1}{U}"),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{1}{U}"),
                 new TargetPermanent(FILTER_PERMANENT_CREATURE_CONTROLLED), new BoostTargetEffect(0,1, Duration.EndOfTurn).setText("target creature you control gets +0/+1"),
                 new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn).setText("and gains hexproof until end of turn"));
     }

@@ -24,7 +24,7 @@ public final class Dynacharge extends CardImpl {
 
         // Target creature you control gets +2/+0 until end of turn.
         // Overload {2}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{2}{R}"),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{2}{R}"),
                 new TargetControlledCreaturePermanent(), new BoostTargetEffect(2,0, Duration.EndOfTurn));
     }
 

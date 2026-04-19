@@ -21,7 +21,7 @@ public final class CorporealProjection extends CardImpl {
 
         // Target creature you control gains myriad until end of turn.
         // Overload {3}{U}{U}{R}{R}
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{3}{U}{U}{R}{R}"),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{3}{U}{U}{R}{R}"),
                 new TargetControlledCreaturePermanent(), new GainAbilityTargetEffect(new MyriadAbility(false)));
     }
 

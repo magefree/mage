@@ -28,7 +28,7 @@ public final class FangsOfKalonia extends CardImpl {
 
         // Put a +1/+1 counter on target creature you control, then double the number of +1/+1 counters on each creature that had a +1/+1 counter put on it this way.
         // Overload {4}{G}{G}
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{4}{G}{G}"),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{4}{G}{G}"),
                 new TargetControlledCreaturePermanent(), new FangsOfKaloniaEffect());
     }
 

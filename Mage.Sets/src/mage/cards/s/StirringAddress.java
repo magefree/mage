@@ -21,7 +21,7 @@ public final class StirringAddress extends CardImpl {
 
         // Target creature you control gets +2/+2 until end of turn.
         // Overload {5}{W}
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{5}{W}"), new TargetControlledCreaturePermanent(),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{5}{W}"), new TargetControlledCreaturePermanent(),
                 new BoostTargetEffect(2, 2, Duration.EndOfTurn));
     }
 

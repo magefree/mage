@@ -36,7 +36,7 @@ public final class StreetSpasm extends CardImpl {
 
         // Street Spasm deals X damage to target creature without flying you don't control.
         // Overload {X}{X}{R}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{X}{X}{R}{R}"), new TargetPermanent(filter),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{X}{X}{R}{R}"), new TargetPermanent(filter),
                 new DamageTargetEffect(GetXValue.instance));
     }
 

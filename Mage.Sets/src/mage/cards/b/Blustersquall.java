@@ -23,7 +23,7 @@ public final class Blustersquall extends CardImpl {
         // Tap target creature you don't control.
 
         // Overload {3}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{3}{U}"),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{3}{U}"),
                 new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL), new TapTargetEffect());
     }
 

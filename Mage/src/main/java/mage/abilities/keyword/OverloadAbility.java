@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
  */
 public class OverloadAbility extends SpellAbility {
 
-    public static void ImplementOverloadAbility(Card card, ManaCosts costs, Target target, Effect... effects) {
+    public static void implementOverloadAbility(Card card, ManaCosts costs, Target target, Effect... effects) {
         card.getSpellAbility().addTarget(target.copy());
         Ability overload = new OverloadAbility(card, costs);
         for (Effect effect : effects) {

@@ -29,7 +29,7 @@ public final class Teleportal extends CardImpl {
 
         // Target creature you control gets +1/+0 until end of turn and can't be blocked this turn.
         // Overload {3}{U}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{3}{U}{R}"), new TargetControlledCreaturePermanent(),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{3}{U}{R}"), new TargetControlledCreaturePermanent(),
                 new BoostTargetEffect(1, 0, Duration.EndOfTurn),
                 new CantBeBlockedTargetEffect().setText("and can't be blocked this turn"));
     }

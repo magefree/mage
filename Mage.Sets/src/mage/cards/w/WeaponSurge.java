@@ -33,7 +33,7 @@ public final class WeaponSurge extends CardImpl {
 
         // Target creature you control gets +1/+0 and gains first strike until end of turn.
         // Overload {1}{R}
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{1}{R}"), new TargetControlledCreaturePermanent(),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{1}{R}"), new TargetControlledCreaturePermanent(),
                 new BoostTargetEffect(1,0, Duration.EndOfTurn).setText("target creature you control gets +1/+0"),
                 new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn).setText("and gains first strike until end of turn"));
     }

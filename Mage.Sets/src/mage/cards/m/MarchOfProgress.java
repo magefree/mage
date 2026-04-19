@@ -27,8 +27,7 @@ public final class MarchOfProgress extends CardImpl {
 
         // Choose target artifact creature you control. For each creature chosen this way, create a token that's a copy of it.
         // Overload {6}{U}
-        // TODO: fix
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{6}{U}"),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{6}{U}"),
                 new TargetPermanent(filter), new CreateTokenCopyTargetEffect()
                         .setText("Choose target artifact creature you control. For each creature chosen this way, create a token that's a copy of it."));
     }

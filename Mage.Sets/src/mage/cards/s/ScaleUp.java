@@ -28,7 +28,7 @@ public final class ScaleUp extends CardImpl {
 
         // Until end of turn, target creature you control becomes a green Wurm with base power and toughness 6/4.
         // Overload {4}{G}{G}
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{4}{G}{G}"), new TargetControlledCreaturePermanent(),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{4}{G}{G}"), new TargetControlledCreaturePermanent(),
                 new BecomesCreatureTargetEffect(
                         new CreatureToken(6, 4, "green Wurm with base power and toughness 6/4")
                                 .withColor("G").withSubType(SubType.WURM),

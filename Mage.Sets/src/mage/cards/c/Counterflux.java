@@ -44,7 +44,7 @@ public final class Counterflux extends CardImpl {
 
         // Counter target spell you don't control.
         // Overload {1}{U}{U}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{1}{U}{U}{R}"),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{1}{U}{U}{R}"),
                 new TargetSpell(filter), new CounterTargetEffect());
     }
 

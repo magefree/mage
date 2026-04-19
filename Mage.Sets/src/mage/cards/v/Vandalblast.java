@@ -28,7 +28,7 @@ public final class Vandalblast extends CardImpl {
 
         // Destroy target artifact you don't control.
         // Overload {4}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{4}{R}"),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{4}{R}"),
                 new TargetPermanent(FILTER), new DestroyTargetEffect());
     }
 

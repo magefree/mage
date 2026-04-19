@@ -20,7 +20,7 @@ public final class MindRake extends CardImpl {
 
         // Target player discards two cards.
         // Overload {1}{B}
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{1}{B}"),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{1}{B}"),
                 new TargetPlayer(), new DiscardTargetEffect(2));
     }
 

@@ -30,7 +30,7 @@ public final class SpectacularShowdown extends CardImpl {
 
         // Put a double strike counter on target creature, then goad each creature that had a double strike counter put on it this way.
         // Overload {4}{R}{R}{R}
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{4}{R}{R}{R}"),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{4}{R}{R}{R}"),
                 new TargetCreaturePermanent(), new SpectacularShowdownEffect());
     }
 

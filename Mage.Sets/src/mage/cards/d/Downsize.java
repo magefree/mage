@@ -23,7 +23,7 @@ public final class Downsize extends CardImpl {
 
         // Target creature you don't control gets -4/-0 until end of turn.
         // Overload {2}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        OverloadAbility.ImplementOverloadAbility(this, new ManaCostsImpl<>("{2}{U}"),
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{2}{U}"),
                 new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL), new BoostTargetEffect(-4, 0, Duration.EndOfTurn));
     }
 
