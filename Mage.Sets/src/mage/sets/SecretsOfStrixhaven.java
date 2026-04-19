@@ -79,6 +79,8 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Deluge Virtuoso", 42, Rarity.COMMON, mage.cards.d.DelugeVirtuoso.class));
         cards.add(new SetCardInfo("Diary of Dreams", 248, Rarity.UNCOMMON, mage.cards.d.DiaryOfDreams.class));
         cards.add(new SetCardInfo("Dig Site Inventory", 10, Rarity.COMMON, mage.cards.d.DigSiteInventory.class));
+        cards.add(new SetCardInfo("Dina's Guidance", 184, Rarity.RARE, mage.cards.d.DinasGuidance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dina's Guidance", 349, Rarity.RARE, mage.cards.d.DinasGuidance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dissection Practice", 79, Rarity.UNCOMMON, mage.cards.d.DissectionPractice.class));
         cards.add(new SetCardInfo("Divergent Equation", 43, Rarity.UNCOMMON, mage.cards.d.DivergentEquation.class));
         cards.add(new SetCardInfo("Dreamroot Cascade", 254, Rarity.RARE, mage.cards.d.DreamrootCascade.class, NON_FULL_USE_VARIOUS));
