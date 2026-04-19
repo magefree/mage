@@ -310,6 +310,8 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Sundering Archaic", 3, Rarity.UNCOMMON, mage.cards.s.SunderingArchaic.class));
         cards.add(new SetCardInfo("Sundown Pass", 264, Rarity.RARE, mage.cards.s.SundownPass.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sundown Pass", 305, Rarity.RARE, mage.cards.s.SundownPass.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Suspend Aggression", 236, Rarity.RARE, mage.cards.s.SuspendAggression.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Suspend Aggression", 357, Rarity.RARE, mage.cards.s.SuspendAggression.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 269, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 276, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 277, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
