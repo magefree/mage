@@ -153,6 +153,7 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Glittering Massif", 376, Rarity.RARE, mage.cards.g.GlitteringMassif.class));
         cards.add(new SetCardInfo("Goldspan Dragon", 245, Rarity.MYTHIC, mage.cards.g.GoldspanDragon.class));
         cards.add(new SetCardInfo("Goldvein Hydra", 270, Rarity.MYTHIC, mage.cards.g.GoldveinHydra.class));
+        cards.add(new SetCardInfo("Gorma, the Gullet", 3, Rarity.MYTHIC, mage.cards.g.GormaTheGullet.class));
         cards.add(new SetCardInfo("Grim Backwoods", 377, Rarity.RARE, mage.cards.g.GrimBackwoods.class));
         cards.add(new SetCardInfo("Guardian Augmenter", 271, Rarity.RARE, mage.cards.g.GuardianAugmenter.class));
         cards.add(new SetCardInfo("Guardian Scalelord", 149, Rarity.RARE, mage.cards.g.GuardianScalelord.class));
