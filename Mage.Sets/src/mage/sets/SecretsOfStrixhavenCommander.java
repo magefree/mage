@@ -67,6 +67,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cascade Bluffs", 364, Rarity.RARE, mage.cards.c.CascadeBluffs.class));
         cards.add(new SetCardInfo("Casualties of War", 300, Rarity.RARE, mage.cards.c.CasualtiesOfWar.class));
         cards.add(new SetCardInfo("Caves of Koilos", 365, Rarity.RARE, mage.cards.c.CavesOfKoilos.class));
+        cards.add(new SetCardInfo("Ceaseless Conflict", 12, Rarity.RARE, mage.cards.c.CeaselessConflict.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ceaseless Conflict", 62, Rarity.RARE, mage.cards.c.CeaselessConflict.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chain Reaction", 121, Rarity.RARE, mage.cards.c.ChainReaction.class));
         cards.add(new SetCardInfo("Chains of Custody", 139, Rarity.COMMON, mage.cards.c.ChainsOfCustody.class));
         cards.add(new SetCardInfo("Changing Loyalty", 23, Rarity.RARE, mage.cards.c.ChangingLoyalty.class, NON_FULL_USE_VARIOUS));
