@@ -161,6 +161,7 @@ public abstract class AbilityImpl implements Ability {
         newIdInternal(UUID.randomUUID());
     }
 
+    @Override
     public void newIdKeepingLinkage() {
         newIdInternal(this.linkageId);
     }

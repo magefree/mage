@@ -449,11 +449,21 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
      */
     @Override
     public Ability addAbility(Ability ability, UUID sourceId, Game game, boolean fromExistingObject) {
+        return addAbility(ability, sourceId, game, fromExistingObject, false);
+    }
+
+    protected Ability addAbility(Ability ability, UUID sourceId, Game game, boolean fromExistingObject, boolean preserveLinkage) {
         // singleton abilities -- only one instance
         // other abilities -- any amount of instances
         if (!abilities.containsKey(ability.getId())) {
             Ability copyAbility = ability.copy();
-            copyAbility.newId(); // needed so that source can get an ability multiple times (e.g. Raging Ravine)
+            if (preserveLinkage) {
+                // copied permanent spells need fresh ids on the token permanent while keeping the
+                // same linkage grouping that was set up when the spell was cast or copied.
+                copyAbility.newIdKeepingLinkage();
+            } else {
+                copyAbility.newId(); // needed so that source can get an ability multiple times (e.g. Raging Ravine)
+            }
             copyAbility.setControllerId(controllerId);
             copyAbility.setSourceId(objectId);
             // triggered abilities must be added to the state().triggers

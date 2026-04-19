@@ -21,9 +21,31 @@ public class OffspringTest extends CardTestPlayerBase {
     private static final String vinelasher = "Iridescent Vinelasher";
     private static final String bandit = "Prosperous Bandit";
     private static final String lion = "Silvercoat Lion";
+    private static final String genericGrantSource = "Generic Offspring Grant Source";
 
     // CR 702.175a/b: Offspring is an additional cost and creates a linked ETB trigger; multiple instances are paid separately.
     // CR 607.2i, 607.5: linked abilities remain linked per instance, including abilities gained from other effects.
+    // Keep these mechanic regressions generic; actual Zinnia coverage stays in ZinniaValleysVoiceTest.
+
+    private void addGenericOffspringGrantSource(String name) {
+        // Zinnia is currently the only printed card in the test card pool that grants Offspring to creature spells.
+        // This helper isolates the generic granted-Offspring engine path and lets these tests cover multiple
+        // independent grant sources without mixing in Zinnia-specific copy/legend/creature behavior.
+        FilterNonlandCard creatureSpells = new FilterNonlandCard("creature spells");
+        creatureSpells.add(CardType.CREATURE.getPredicate());
+        addCustomCardWithAbility(
+                name,
+                playerA,
+                new SimpleStaticAbility(
+                        Zone.BATTLEFIELD,
+                        new GainAbilityControlledSpellsEffect(new OffspringAbility("{2}"), creatureSpells)
+                ),
+                null,
+                CardType.ENCHANTMENT,
+                "",
+                Zone.BATTLEFIELD
+        );
+    }
 
     private Permanent getCreature(String name, boolean isToken) {
         for (Permanent permanent : currentGame.getBattlefield().getActivePermanents(playerA.getId(), currentGame)) {
@@ -115,7 +137,8 @@ public class OffspringTest extends CardTestPlayerBase {
 
     @Test
     public void testHumilityInResponseNoCopyWithPrintedAndGrantedOffspring() {
-        addCard(Zone.BATTLEFIELD, playerA, "Zinnia, Valley's Voice");
+        // Use a generic noncreature grant source so this stays a mechanic regression, not a Zinnia card test.
+        addGenericOffspringGrantSource(genericGrantSource);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
         addCard(Zone.HAND, playerA, vinelasher);
 
@@ -123,45 +146,6 @@ public class OffspringTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Vedalken Orrery");
         addCard(Zone.HAND, playerB, "Humility");
 
-        setChoice(playerA, true);
-        setChoice(playerA, true);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, vinelasher);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Humility", true);
-
-        setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.END_TURN);
-        execute();
-
-        assertPermanentCount(playerA, vinelasher, 1);
-        assertTokenCount(playerA, vinelasher, 0);
-        assertPowerToughness(playerA, vinelasher, 1, 1);
-    }
-
-    @Test
-    public void testHumilityInResponseNoCopyWithPrintedAndGrantedOffspringFromNonCreatureSource() {
-        FilterNonlandCard creatureSpells = new FilterNonlandCard("creature spells");
-        creatureSpells.add(CardType.CREATURE.getPredicate());
-        addCustomCardWithAbility(
-                "offspring grant source",
-                playerA,
-                new SimpleStaticAbility(
-                        Zone.BATTLEFIELD,
-                        new GainAbilityControlledSpellsEffect(new OffspringAbility("{2}"), creatureSpells)
-                ),
-                null,
-                CardType.ENCHANTMENT,
-                "",
-                Zone.BATTLEFIELD
-        );
-
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
-        addCard(Zone.HAND, playerA, vinelasher);
-
-        addCard(Zone.BATTLEFIELD, playerB, "Plains", 4);
-        addCard(Zone.BATTLEFIELD, playerB, "Vedalken Orrery");
-        addCard(Zone.HAND, playerB, "Humility");
-
-        // pay both offspring costs so the granted delayed trigger is definitely created
         setChoice(playerA, true);
         setChoice(playerA, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, vinelasher);
@@ -178,33 +162,8 @@ public class OffspringTest extends CardTestPlayerBase {
 
     @Test
     public void testTwoGrantedOffspringAbilitiesOnePayment() {
-        FilterNonlandCard creatureSpells = new FilterNonlandCard("creature spells");
-        creatureSpells.add(CardType.CREATURE.getPredicate());
-
-        addCustomCardWithAbility(
-                "offspring grant source A",
-                playerA,
-                new SimpleStaticAbility(
-                        Zone.BATTLEFIELD,
-                        new GainAbilityControlledSpellsEffect(new OffspringAbility("{2}"), creatureSpells)
-                ),
-                null,
-                CardType.ENCHANTMENT,
-                "",
-                Zone.BATTLEFIELD
-        );
-        addCustomCardWithAbility(
-                "offspring grant source B",
-                playerA,
-                new SimpleStaticAbility(
-                        Zone.BATTLEFIELD,
-                        new GainAbilityControlledSpellsEffect(new OffspringAbility("{2}"), creatureSpells)
-                ),
-                null,
-                CardType.ENCHANTMENT,
-                "",
-                Zone.BATTLEFIELD
-        );
+        addGenericOffspringGrantSource("Generic Offspring Grant Source A");
+        addGenericOffspringGrantSource("Generic Offspring Grant Source B");
 
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
         addCard(Zone.HAND, playerA, lion);
@@ -223,15 +182,14 @@ public class OffspringTest extends CardTestPlayerBase {
 
     @Test
     public void testGrantedOffspringSourceRemovedBeforeEtbNoCopy() {
-        addCard(Zone.BATTLEFIELD, playerA, "Zinnia, Valley's Voice");
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addGenericOffspringGrantSource(genericGrantSource);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
         addCard(Zone.HAND, playerA, lion);
-        addCard(Zone.HAND, playerA, "Path to Exile");
+        addCard(Zone.HAND, playerA, "Disenchant");
 
         setChoice(playerA, true);
-        setChoice(playerA, false);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lion);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Path to Exile", "Zinnia, Valley's Voice");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Disenchant", genericGrantSource);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -243,7 +201,7 @@ public class OffspringTest extends CardTestPlayerBase {
 
     @Test
     public void testPrintedAndGrantedOffspringOnePayment() {
-        addCard(Zone.BATTLEFIELD, playerA, "Zinnia, Valley's Voice");
+        addGenericOffspringGrantSource(genericGrantSource);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
@@ -263,7 +221,7 @@ public class OffspringTest extends CardTestPlayerBase {
 
     @Test
     public void testPrintedAndGrantedOffspringTwoPayments() {
-        addCard(Zone.BATTLEFIELD, playerA, "Zinnia, Valley's Voice");
+        addGenericOffspringGrantSource(genericGrantSource);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
@@ -331,7 +289,7 @@ public class OffspringTest extends CardTestPlayerBase {
 
     @Test
     public void testPrintedAndGrantedOffspringRollbackClearsOldPayments() {
-        addCard(Zone.BATTLEFIELD, playerA, "Zinnia, Valley's Voice");
+        addGenericOffspringGrantSource(genericGrantSource);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
         addCard(Zone.HAND, playerA, bandit);
 

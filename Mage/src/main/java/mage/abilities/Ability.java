@@ -39,6 +39,12 @@ public interface Ability extends Controllable, Serializable {
     void newId();
 
     /**
+     * Assigns a new {@link java.util.UUID} while preserving the linkage id used
+     * to associate linked abilities.
+     */
+    void newIdKeepingLinkage();
+
+    /**
      * Assigns a new {@link java.util.UUID}
      */
     void newOriginalId(); // TODO: delete newOriginalId???

@@ -13,6 +13,7 @@ public class ZinniaValleysVoiceTest extends CardTestPlayerBase {
 
     // CR 702.175a/b: Offspring is an additional cost and creates a linked ETB trigger; multiple instances are paid separately.
     // CR 607.2i, 607.5: linked abilities remain linked per instance, including abilities gained from other effects.
+    // Keep actual Zinnia integration here; generic granted-Offspring regressions live in OffspringTest.
 
     @Test
     public void testGrantsOffspringToCreatureSpells() {
@@ -32,7 +33,7 @@ public class ZinniaValleysVoiceTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testGrantedOffspringSourceRemovedBeforeEtbNoCopy() {
+    public void testZinniaRemovedBeforeGrantedOffspringEtbNoCopy() {
         addCard(Zone.BATTLEFIELD, playerA, zinnia);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.HAND, playerA, lion);

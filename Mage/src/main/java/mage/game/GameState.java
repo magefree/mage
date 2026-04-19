@@ -1458,12 +1458,8 @@ public class GameState implements Serializable, Copyable<GameState> {
             // must use new id, so you can add multiple instances of the same ability
             // (example: gained Cascade from multiple Imoti, Celebrant of Bounty)
             newAbility = ability.copy();
-            if (newAbility instanceof AbilityImpl) {
-                // keep linkage id stable across applyEffects cycles so linked-ability tags stay consistent (CR 607)
-                ((AbilityImpl) newAbility).newIdKeepingLinkage();
-            } else {
-                newAbility.newId();
-            }
+            // keep linkage id stable across applyEffects cycles so linked-ability tags stay consistent (CR 607)
+            newAbility.newIdKeepingLinkage();
         }
         newAbility.setSourceId(attachedTo.getId());
         newAbility.setControllerId(attachedTo.getOwnerId());

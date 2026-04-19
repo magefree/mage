@@ -98,14 +98,9 @@ public class PermanentToken extends PermanentImpl {
             // first time -> create ContinuousEffects only once
             // so sourceId must be null (keep triggered abilities forever?)
             for (Ability ability : token.getAbilities()) {
-                if (preserveCopiedSpellLinkage) {
-                    // A resolving copied permanent spell becomes a token permanent, but it is still the
-                    // same spell-to-permanent transition for linked costs like Offspring and Squad.
-                    addAbilityKeepingLinkage(ability, game);
-                } else {
-                    // Don't add subabilities since the original token already has them in its abilities list.
-                    this.addAbility(ability, null, game, true);
-                }
+                // Don't add subabilities since the original token already has them in its abilities list.
+                // Copied permanent spells still need that behavior; they just keep the spell's linkage grouping.
+                this.addAbility(ability, null, game, true, preserveCopiedSpellLinkage);
             }
         }
         this.abilities.setControllerId(this.controllerId);
@@ -133,18 +128,6 @@ public class PermanentToken extends PermanentImpl {
         if (token.getCopySourceCard() instanceof RoomCard) {
             RoomCard.setRoomCharacteristics(this, game);
         }
-    }
-
-    private void addAbilityKeepingLinkage(Ability ability, Game game) {
-        if (abilities.containsKey(ability.getId())) {
-            return;
-        }
-        ability.setControllerId(controllerId);
-        ability.setSourceId(objectId);
-        if (game != null) {
-            game.getState().addAbility(ability, null, this);
-        }
-        abilities.add(ability);
     }
 
     @Override
