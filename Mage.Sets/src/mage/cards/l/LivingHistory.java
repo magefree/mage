@@ -5,13 +5,12 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.CardLeftYourGraveyardThisTurnCondition;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.Game;
 import mage.game.permanent.token.Spirit22RedWhiteToken;
 import mage.target.common.TargetAttackingCreature;
 import mage.watchers.common.CardsLeftGraveyardWatcher;
@@ -30,7 +29,7 @@ public final class LivingHistory extends CardImpl {
 
         // Whenever you attack, if a card left your graveyard this turn, target attacking creature gets +2/+0 until end of turn.
         Ability ability = new AttacksWithCreaturesTriggeredAbility(new BoostTargetEffect(2, 0), 1)
-            .withInterveningIf(LivingHistoryCondition.instance);
+            .withInterveningIf(CardLeftYourGraveyardThisTurnCondition.instance);
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability, new CardsLeftGraveyardWatcher());
     }
@@ -42,23 +41,5 @@ public final class LivingHistory extends CardImpl {
     @Override
     public LivingHistory copy() {
         return new LivingHistory(this);
-    }
-}
-
-enum LivingHistoryCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return !game
-            .getState()
-            .getWatcher(CardsLeftGraveyardWatcher.class)
-            .getCardsThatLeftGraveyard(source.getControllerId(), game)
-            .isEmpty();
-    }
-
-    @Override
-    public String toString() {
-        return "if a card left your graveyard this turn";
     }
 }
