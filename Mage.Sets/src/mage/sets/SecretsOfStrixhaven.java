@@ -53,6 +53,7 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Borrowed Knowledge", 178, Rarity.UNCOMMON, mage.cards.b.BorrowedKnowledge.class));
         cards.add(new SetCardInfo("Brush Off", 39, Rarity.UNCOMMON, mage.cards.b.BrushOff.class));
         cards.add(new SetCardInfo("Burrog Banemaker", 75, Rarity.COMMON, mage.cards.b.BurrogBanemaker.class));
+        cards.add(new SetCardInfo("Burrog Barrage", 141, Rarity.COMMON, mage.cards.b.BurrogBarrage.class));
         cards.add(new SetCardInfo("Campus Composer", 40, Rarity.UNCOMMON, mage.cards.c.CampusComposer.class));
         cards.add(new SetCardInfo("Cauldron of Essence", 179, Rarity.RARE, mage.cards.c.CauldronOfEssence.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cauldron of Essence", 347, Rarity.RARE, mage.cards.c.CauldronOfEssence.class, NON_FULL_USE_VARIOUS));
