@@ -355,6 +355,8 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Witherbloom, the Balancer", 288, Rarity.MYTHIC, mage.cards.w.WitherbloomTheBalancer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Withering Curse", 105, Rarity.MYTHIC, mage.cards.w.WitheringCurse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Withering Curse", 330, Rarity.MYTHIC, mage.cards.w.WitheringCurse.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Zaffai and the Tempests", 246, Rarity.RARE, mage.cards.z.ZaffaiAndTheTempests.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Zaffai and the Tempests", 360, Rarity.RARE, mage.cards.z.ZaffaiAndTheTempests.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zealous Lorecaster", 137, Rarity.COMMON, mage.cards.z.ZealousLorecaster.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
