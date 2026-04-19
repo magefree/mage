@@ -1,46 +1,90 @@
-
-package mage.cards.c;
+package mage.cards.y;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpecialAction;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.mana.BasicManaEffect;
+import mage.abilities.effects.common.BecomePreparedSourceEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateSpecialActionEffect;
 import mage.abilities.effects.common.RemoveSpecialActionEffect;
-import mage.cards.CardImpl;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
+import mage.constants.SubType;
+import mage.counters.CounterType;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.cards.CardSetInfo;
+import mage.cards.PrepareCard;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
- * @author emerald000
+ * @author muz
  */
-public final class Channel extends CardImpl {
+public final class YavimayaBloomsage extends PrepareCard {
 
-    public Channel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}{G}");
+    public YavimayaBloomsage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}", "Channel", new CardType[]{CardType.SORCERY}, "{G}{G}");
 
+        this.subtype.add(SubType.DRYAD);
+        this.subtype.add(SubType.DRUID);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // At the beginning of your end step, put a +1/+1 counter on target creature you control. Then if that creature has power 7 or greater, this creature becomes prepared.
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
+        ability.addEffect(new ConditionalOneShotEffect(
+            new BecomePreparedSourceEffect(),
+            YavimayaBloomsageCondition.instance,
+            "Then if that creature has toughness 7 or greater, this creature becomes prepared"
+        ));
+        ability.addTarget(new TargetControlledCreaturePermanent());
+        this.addAbility(ability);
+
+        // Channel
+        // Sorcery {G}{G}
         // Until end of turn, any time you could activate a mana ability, you may pay 1 life. If you do, add {C}.
-        this.getSpellAbility().addEffect(new ChannelEffect());
+        this.getSpellCard().getSpellAbility().addEffect(new ChannelEffect());
     }
 
-    private Channel(final Channel card) {
+    private YavimayaBloomsage(final YavimayaBloomsage card) {
         super(card);
     }
 
     @Override
-    public Channel copy() {
-        return new Channel(this);
+    public YavimayaBloomsage copy() {
+        return new YavimayaBloomsage(this);
+    }
+}
+
+enum YavimayaBloomsageCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent != null) {
+            return permanent.getToughness().getValue() >= 7;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "that creature has toughness 7 or greater";
     }
 }
 

@@ -394,6 +394,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Woe Strider", 231, Rarity.RARE, mage.cards.w.WoeStrider.class));
         cards.add(new SetCardInfo("Woodland Cemetery", 424, Rarity.RARE, mage.cards.w.WoodlandCemetery.class));
         cards.add(new SetCardInfo("Yahenni, Undying Partisan", 232, Rarity.RARE, mage.cards.y.YahenniUndyingPartisan.class));
+        cards.add(new SetCardInfo("Yavimaya Bloomsage", 44, Rarity.RARE, mage.cards.y.YavimayaBloomsage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yavimaya Bloomsage", 92, Rarity.RARE, mage.cards.y.YavimayaBloomsage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yavimaya Coast", 425, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
         cards.add(new SetCardInfo("Zimone's Hypothesis", 206, Rarity.RARE, mage.cards.z.ZimonesHypothesis.class));
         cards.add(new SetCardInfo("Zimone, All-Questioning", 340, Rarity.RARE, mage.cards.z.ZimoneAllQuestioning.class));
