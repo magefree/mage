@@ -1,5 +1,6 @@
 package mage.cards.m;
 
+import java.util.Optional;
 import java.util.UUID;
 import mage.ApprovingObject;
 import mage.MageInt;
@@ -96,7 +97,7 @@ class MagarOfTheMagicStringsEffect extends OneShotEffect {
 class MagarOfTheMagicStringsCardTypeEffect extends BecomesFaceDownCreatureEffect {
 
     MagarOfTheMagicStringsCardTypeEffect(MageObjectReference objectReference) {
-        super(null, objectReference, BecomesFaceDownCreatureEffect.FaceDownType.CUSTOM_33);
+        super(null, objectReference, BecomesFaceDownCreatureEffect.FaceDownType.MANUAL_33);
     }
 
     private MagarOfTheMagicStringsCardTypeEffect(final MagarOfTheMagicStringsCardTypeEffect effect) {
@@ -135,7 +136,7 @@ class MagarOfTheMagicStringsCastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         final Player player = game.getPlayer(source.getControllerId());
-        final Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
+        final Card card = Optional.of(game.getCard(this.getTargetPointer().getFirst(game, source))).map(Card::getMainCard).orElse(null);
         if (player == null || card == null) {
             return false;
         }

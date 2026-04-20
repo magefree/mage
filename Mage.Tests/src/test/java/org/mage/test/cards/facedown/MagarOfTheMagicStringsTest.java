@@ -145,4 +145,26 @@ public class MagarOfTheMagicStringsTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, EmptyNames.FACE_DOWN_CARD.getTestCommand(), 3, 3);
     }
 
+    @Test
+    public void testGraveyardCast() {
+        addCard(Zone.GRAVEYARD, playerA, "Balduvian Bears", 10);
+        addCard(Zone.GRAVEYARD, playerA, "The Final Days");
+        addCard(Zone.BATTLEFIELD, playerA, "Magar of the Magic Strings");
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{B}{R}:");
+        addTarget(playerA, "The Final Days");
+
+        attack(3, playerA, EmptyNames.FACE_DOWN_CARD.getTestCommand());
+        setChoice(playerA, true);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Horror Token", 10);
+    }
+
 }

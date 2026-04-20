@@ -55,12 +55,17 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
 
     public enum FaceDownType {
         MANIFESTED,
-        MANUAL,
+        MANUAL {
+            @Override
+            public boolean isManual() {
+                return true;
+            }
+        },
         MORPHED,
         MEGAMORPHED,
         DISGUISED,
         CLOAKED,
-        CUSTOM_33 {
+        MANUAL_33 {
             @Override
             public int getPower() {
                 return 3;
@@ -70,6 +75,11 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
             public int getToughness() {
                 return 3;
             }
+
+            @Override
+            public boolean isManual() {
+                return true;
+            }
         };
 
         public int getPower() {
@@ -78,6 +88,10 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
 
         public int getToughness() {
             return 2;
+        }
+
+        public boolean isManual() {
+            return false;
         }
     }
 
@@ -154,13 +168,13 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
                     )));
                 }
                 break;
-            case MANUAL:
             case MANIFESTED:
-            case CUSTOM_33:
                 // no face up abilities
                 break;
             default:
-                throw new IllegalArgumentException("Un-supported face down type: " + faceDownType);
+                if (!faceDownType.isManual()) {
+                    throw new IllegalArgumentException("Un-supported face down type: " + faceDownType);
+                }
         }
 
         staticText = "{this} becomes a 2/2 face-down creature, with no text, no name, no subtypes, and no mana cost";
@@ -196,7 +210,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (faceDownType == FaceDownType.MANUAL) {
+        if (faceDownType.isManual()) {
             Permanent permanent;
             if (objectReference != null) {
                 permanent = objectReference.getPermanent(game);
@@ -223,7 +237,6 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
                 foundPermanent = true;
                 switch (faceDownType) {
                     case MANIFESTED:
-                    case MANUAL: // sets manifested image // TODO: wtf
                         permanent.setManifested(true);
                         break;
                     case MORPHED:
@@ -236,10 +249,10 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
                     case CLOAKED:
                         permanent.setCloaked(true);
                         break;
-                    case CUSTOM_33:
-                        break;
                     default:
-                        throw new UnsupportedOperationException("FaceDownType not yet supported: " + faceDownType);
+                        if (!faceDownType.isManual()) {
+                            throw new UnsupportedOperationException("FaceDownType not yet supported: " + faceDownType);
+                        }
                 }
             }
             makeFaceDownObject(game, source.getSourceId(), permanent, faceDownType, this.additionalAbilities);
@@ -261,7 +274,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
             return BecomesFaceDownCreatureEffect.FaceDownType.CLOAKED;
         } else if (permanent.isFaceDown(game)) {
             if (permanent.getPower().getModifiedBaseValue() == 3 && permanent.getPower().getModifiedBaseValue() == 3) {
-                return BecomesFaceDownCreatureEffect.FaceDownType.CUSTOM_33;
+                return BecomesFaceDownCreatureEffect.FaceDownType.MANUAL_33;
             }
             return BecomesFaceDownCreatureEffect.FaceDownType.MANUAL;
         } else {
@@ -363,12 +376,13 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
             case CLOAKED:
                 tokenName = TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_CLOAK;
                 break;
-            case MANUAL:
-            case CUSTOM_33:
-                tokenName = TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MANUAL;
-                break;
             default:
-                throw new IllegalArgumentException("Un-supported face down type for image: " + faceDownType);
+                if (faceDownType.isManual()) {
+                    tokenName = TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MANUAL;
+                }
+                else {
+                    throw new IllegalArgumentException("Un-supported face down type for image: " + faceDownType);
+                }
         }
 
         Token faceDownToken = new EmptyToken();
