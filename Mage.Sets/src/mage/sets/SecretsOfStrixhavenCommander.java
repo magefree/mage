@@ -288,6 +288,7 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Scorched Geyser", 102, Rarity.RARE, mage.cards.s.ScorchedGeyser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scorched Geyser", 54, Rarity.RARE, mage.cards.s.ScorchedGeyser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Screams from Within", 119, Rarity.UNCOMMON, mage.cards.s.ScreamsFromWithin.class));
+        cards.add(new SetCardInfo("Scriv, the Obligator", 9, Rarity.MYTHIC, mage.cards.s.ScrivTheObligator.class));
         cards.add(new SetCardInfo("Secret Rendezvous", 166, Rarity.UNCOMMON, mage.cards.s.SecretRendezvous.class));
         cards.add(new SetCardInfo("Selfless Spirit", 167, Rarity.RARE, mage.cards.s.SelflessSpirit.class));
         cards.add(new SetCardInfo("Sentinel's Eyes", 168, Rarity.COMMON, mage.cards.s.SentinelsEyes.class));

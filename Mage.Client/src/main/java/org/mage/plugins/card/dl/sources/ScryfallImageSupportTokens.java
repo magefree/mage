@@ -2945,7 +2945,7 @@ public class ScryfallImageSupportTokens {
             put("SOC/Beast", "https://api.scryfall.com/cards/tsoc/14?format=image");
             put("SOC/Boar", "https://api.scryfall.com/cards/tsoc/15?format=image");
             put("SOC/Cat", "https://api.scryfall.com/cards/tsoc/2?format=image");
-            // put("SOC/Contract", "https://api.scryfall.com/cards/tsoc/3?format=image");
+            put("SOC/Contract", "https://api.scryfall.com/cards/tsoc/3?format=image");
             put("SOC/Dragon Illusion", "https://api.scryfall.com/cards/tsoc/13?format=image");
             put("SOC/Eldrazi Spawn", "https://api.scryfall.com/cards/tsoc/1?format=image");
             put("SOC/Elemental/1", "https://api.scryfall.com/cards/tsoc/19?format=image");
