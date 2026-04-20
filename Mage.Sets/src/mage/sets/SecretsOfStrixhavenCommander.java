@@ -46,6 +46,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Assassin's Trophy", 294, Rarity.RARE, mage.cards.a.AssassinsTrophy.class));
         cards.add(new SetCardInfo("Astral Cornucopia", 342, Rarity.RARE, mage.cards.a.AstralCornucopia.class));
         cards.add(new SetCardInfo("Atsushi, the Blazing Sky", 236, Rarity.MYTHIC, mage.cards.a.AtsushiTheBlazingSky.class));
+        cards.add(new SetCardInfo("Augusta, Order Returned", 11, Rarity.RARE, mage.cards.a.AugustaOrderReturned.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Augusta, Order Returned", 61, Rarity.RARE, mage.cards.a.AugustaOrderReturned.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Awakening Zone", 262, Rarity.RARE, mage.cards.a.AwakeningZone.class));
         cards.add(new SetCardInfo("Balefire Liege", 295, Rarity.RARE, mage.cards.b.BalefireLiege.class));
         cards.add(new SetCardInfo("Battlefield Forge", 362, Rarity.RARE, mage.cards.b.BattlefieldForge.class));
