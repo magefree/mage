@@ -18,6 +18,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -74,7 +75,7 @@ class GreatHallOfTheBiblioplexEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
             return false;
         }
@@ -82,14 +83,14 @@ class GreatHallOfTheBiblioplexEffect extends OneShotEffect {
             return true;
         }
         game.addEffect(new BecomesCreatureSourceEffect(
-            new CreatureToken(2, 4, "2/4 Wizard creature with \"Whenever you cast an instant or sorcery spell, this creature gets +1/+0 until end of turn.\"")
+            new CreatureToken(2, 4, "2/4 Wizard creature with \"Whenever you cast an instant or sorcery spell, this creature gets +1/+0 until end of turn.\"", SubType.WIZARD)
                 .withAbility(new SpellCastControllerTriggeredAbility(
                     new BoostSourceEffect(1, 0, Duration.EndOfTurn),
                     StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
                     false
                 )),
             CardType.LAND,
-            Duration.WhileOnBattlefield
+            Duration.Custom
         ), source);
         return true;
     }
