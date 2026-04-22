@@ -2,7 +2,6 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.Mana;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -111,23 +110,9 @@ class WildgrowthArchaicEffect extends ReplacementEffectImpl {
         if (spell == null) {
             return false;
         }
-        Mana mana = spell.getSpellAbility().getManaCostsToPay().getUsedManaToPay();
-        int colorCount = 0;
-        if (mana.getBlack() > 0) {
-            colorCount++;
-        }
-        if (mana.getBlue() > 0) {
-            colorCount++;
-        }
-        if (mana.getGreen() > 0) {
-            colorCount++;
-        }
-        if (mana.getRed() > 0) {
-            colorCount++;
-        }
-        if (mana.getWhite() > 0) {
-            colorCount++;
-        }
+        int colorCount = ColorsOfManaSpentToCastCount.countColors(
+            spell.getSpellAbility().getManaCostsToPay().getUsedManaToPay()
+        );
         creature.addCounters(CounterType.P1P1.createInstance(colorCount),
             source.getControllerId(), source, game, event.getAppliedEffects());
         return false; // Must return false, otherwise creature doesn't enter battlefield
