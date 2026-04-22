@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -55,7 +56,7 @@ class ZimonesExperimentEffect extends LookLibraryAndPickControllerEffect {
         ));
     }
 
-    public ZimonesExperimentEffect() {
+    ZimonesExperimentEffect() {
         super(5, 2, filterCard, PutCards.HAND, PutCards.BOTTOM_RANDOM);
         this.revealCards = true;
         this.staticText = "look at the top five cards of your library. "
@@ -83,7 +84,12 @@ class ZimonesExperimentEffect extends LookLibraryAndPickControllerEffect {
         Cards landCards = new CardsImpl();
         Cards creatureCards = new CardsImpl();
         for (UUID cardId : pickedCards) {
-            if (game.getCard(cardId).isLand(game)) {
+            Card card = game.getCard(cardId);
+            if (card == null) {
+                continue;
+            }
+
+            if (card.isLand(game)) {
                 landCards.add(cardId);
             } else {
                 creatureCards.add(cardId);
