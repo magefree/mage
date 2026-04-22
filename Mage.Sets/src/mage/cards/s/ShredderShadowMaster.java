@@ -93,14 +93,14 @@ class ShredderShadowMasterTriggeredAbility extends TriggeredAbilityImpl {
 
 class ShredderShadowMasterEffect extends OneShotEffect {
 
-    public ShredderShadowMasterEffect() {
+    ShredderShadowMasterEffect() {
         super(Outcome.Benefit);
-        this.staticText = "for each opponent, create a token that's a copy of {this} "
+        this.staticText = "for each other opponent, create a token that's a copy of {this} "
             + "tapped and attacking that player, except it isn't legendary. "
             + "Sacrifice those tokens at the end of combat";
     }
 
-    protected ShredderShadowMasterEffect(final ShredderShadowMasterEffect effect) {
+    private ShredderShadowMasterEffect(final ShredderShadowMasterEffect effect) {
         super(effect);
     }
 
@@ -112,7 +112,7 @@ class ShredderShadowMasterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        Permanent sourceObject = source.getSourcePermanentOrLKI(game);
         if (controller == null || sourceObject == null) {
             return false;
         }
