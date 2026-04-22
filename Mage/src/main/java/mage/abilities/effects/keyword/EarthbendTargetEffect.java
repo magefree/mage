@@ -44,7 +44,7 @@ public class EarthbendTargetEffect extends OneShotEffect {
         this.withReminderText = withReminderText;
     }
 
-    private EarthbendTargetEffect(final EarthbendTargetEffect effect) {
+    protected EarthbendTargetEffect(final EarthbendTargetEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.withReminderText = effect.withReminderText;
