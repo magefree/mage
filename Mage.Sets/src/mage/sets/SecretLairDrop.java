@@ -2489,7 +2489,9 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Piper of the Swarm", 7074, Rarity.RARE, mage.cards.p.PiperOfTheSwarm.class, FULL_ART));
         cards.add(new SetCardInfo("Regrowth", 7075, Rarity.RARE, mage.cards.r.Regrowth.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Big Score", 7076, Rarity.RARE, mage.cards.b.BigScore.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Slime Against Humanity", 7083, Rarity.RARE, mage.cards.s.SlimeAgainstHumanity.class));
+        cards.add(new SetCardInfo("Slime Against Humanity", 7077, Rarity.RARE, mage.cards.s.SlimeAgainstHumanity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Slime Against Humanity", 7078, Rarity.RARE, mage.cards.s.SlimeAgainstHumanity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Slime Against Humanity", 7083, Rarity.RARE, mage.cards.s.SlimeAgainstHumanity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Academy Manufactor", 7094, Rarity.RARE, mage.cards.a.AcademyManufactor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ruin Crab", 7095, Rarity.RARE, mage.cards.r.RuinCrab.class));
         cards.add(new SetCardInfo("Big Score", 7096, Rarity.RARE, mage.cards.b.BigScore.class, NON_FULL_USE_VARIOUS));
