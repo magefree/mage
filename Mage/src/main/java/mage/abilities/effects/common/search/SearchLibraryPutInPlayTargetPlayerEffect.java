@@ -10,6 +10,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
  * @author LevelX2
  */
@@ -53,22 +56,29 @@ public class SearchLibraryPutInPlayTargetPlayerEffect extends SearchEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player == null) {
+        List<UUID> targets = getTargetPointer().getTargets(game, source);
+        if (targets.isEmpty()) {
             return false;
         }
-
-        if (this.optional) {
-            if (!player.chooseUse(outcome, "Search your library for " + target.getDescription() + '?', source, game)) {
-                return true;
+        for (UUID targetId : targets) {
+            Player player = game.getPlayer(targetId);
+            if (player == null) {
+                continue;
             }
-        }
 
-        if (player.searchLibrary(target, source, game) && !target.getTargets().isEmpty()) {
-            player.moveCards(new CardsImpl(target.getTargets()).getCards(game),
-                    Zone.BATTLEFIELD, source, game, tapped, false, ownerIsController, null);
+            if (this.optional) {
+                if (!player.chooseUse(outcome, "Search your library for " + target.getDescription() + '?', source, game)) {
+                    continue;
+                }
+            }
+
+            TargetCardInLibrary targetCopy = target.copy();
+            if (player.searchLibrary(targetCopy, source, game) && !targetCopy.getTargets().isEmpty()) {
+                player.moveCards(new CardsImpl(targetCopy.getTargets()).getCards(game),
+                        Zone.BATTLEFIELD, source, game, tapped, false, ownerIsController, null);
+            }
+            player.shuffleLibrary(source, game);
         }
-        player.shuffleLibrary(source, game);
         return true;
     }
 
