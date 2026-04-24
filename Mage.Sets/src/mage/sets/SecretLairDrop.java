@@ -2324,6 +2324,11 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Zombify", 2389, Rarity.RARE, mage.cards.z.Zombify.class));
         cards.add(new SetCardInfo("Abrade", 2390, Rarity.RARE, mage.cards.a.Abrade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shared Roots", 2391, Rarity.RARE, mage.cards.s.SharedRoots.class));
+        cards.add(new SetCardInfo("Expropriate", 2396, Rarity.MYTHIC, mage.cards.e.Expropriate.class));
+        cards.add(new SetCardInfo("Narset, Parter of Veils", 2397, Rarity.RARE, mage.cards.n.NarsetParterOfVeils.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Worst Fears", 2398, Rarity.MYTHIC, mage.cards.w.WorstFears.class));
+        cards.add(new SetCardInfo("Scrawling Crawler", 2399, Rarity.RARE, mage.cards.s.ScrawlingCrawler.class));
+        cards.add(new SetCardInfo("Winter Orb", 2400, Rarity.RARE, mage.cards.w.WinterOrb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lucy MacLean, Positively Armed", 2447, Rarity.MYTHIC, mage.cards.l.LucyMacLeanPositivelyArmed.class));
         cards.add(new SetCardInfo("The Ghoul, Gunslinger", 2448, Rarity.MYTHIC, mage.cards.t.TheGhoulGunslinger.class));
         cards.add(new SetCardInfo("Maximus, Knight Apparent", 2449, Rarity.MYTHIC, mage.cards.m.MaximusKnightApparent.class));
