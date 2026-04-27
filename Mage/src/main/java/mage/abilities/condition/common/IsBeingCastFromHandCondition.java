@@ -26,7 +26,7 @@ public enum IsBeingCastFromHandCondition implements Condition {
         }
         if (object instanceof Spell) { // needed to check if it can be cast by alternate cost
             Spell spell = (Spell) object;
-            return Zone.HAND.equals(spell.getFromZone());
+            return Zone.HAND.equals(spell.getFromZone()) && spell.getOwnerId().equals(source.getControllerId());
         }
         if (object instanceof Card) { // needed for the check what's playable
             Card card = (Card) object;
