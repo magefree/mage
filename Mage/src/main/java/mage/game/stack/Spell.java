@@ -1008,6 +1008,14 @@ public class Spell extends StackObjectImpl implements Card {
         return this.fromZone;
     }
 
+    public boolean wasCast() {
+        return !this.fromZone.match(Zone.STACK);
+    }
+
+    public boolean wasCastFrom(Zone zone) {
+        return this.wasCast() && this.fromZone.match(zone);
+    }
+
     @Override
     public void setCopy(boolean isCopy, MageObject copyFrom) {
         this.copy = isCopy;

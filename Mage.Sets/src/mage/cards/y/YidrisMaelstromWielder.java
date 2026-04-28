@@ -70,10 +70,9 @@ class YidrisMaelstromWielderGainCascadeEffect extends ContinuousEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (StackObject stackObject : game.getStack()) {
-                // only spells cast, so no copies of spells
-                if ((stackObject instanceof Spell) && !stackObject.isCopy() && stackObject.isControlledBy(source.getControllerId())) {
+                if ((stackObject instanceof Spell) && stackObject.isControlledBy(source.getControllerId())) {
                     Spell spell = (Spell) stackObject;
-                    if (spell.getFromZone() == Zone.HAND) {
+                    if (spell.wasCastFrom(Zone.HAND)) {
                         game.getState().addOtherAbility(spell.getCard(), cascadeAbility);
                     }
                 }
