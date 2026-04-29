@@ -18,6 +18,7 @@ import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.*;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.PrepareCard;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -1804,6 +1805,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void setPrepared(boolean prepared, Game game) {
+        // 722.3a Some spells and abilities cause a permanent with a prepare spell to become prepared or state that a permanent enters prepared.
+        // If that permanent has the alternative characteristics of a prepare spell, this gives the permanent the “prepared” designation.
+        // Prepared is a designation that acts as a marker which rules and effects can identify.
+        // A permanent can’t gain this designation unless it has a prepare spell,
+        // Additionally, a permanent can’t gain this designation if the permanent already has it.
+        if (prepared && !(getMainCard() instanceof PrepareCard)) {
+            return;
+        }
         if (this.prepared == prepared) {
             return;
         }
