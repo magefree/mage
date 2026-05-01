@@ -16,8 +16,8 @@ public final class TheHobbit extends ExpansionSet {
     }
 
     private TheHobbit() {
-        super("The Hobbit", "HOB", ExpansionSet.buildDate(2024, 8, 14), SetType.CUSTOM_SET);
-        // super("The Hobbit", "HOB", ExpansionSet.buildDate(2024, 8, 14), SetType.EXPANSION); TODO: Once mtgjson/Scryfall have the set, change to EXPANSION
+        super("The Hobbit", "HOB", ExpansionSet.buildDate(2026, 8, 14), SetType.CUSTOM_SET);
+        // super("The Hobbit", "HOB", ExpansionSet.buildDate(2026, 8, 14), SetType.EXPANSION); TODO: Once mtgjson/Scryfall have the set, change to EXPANSION
         this.blockName = "The Hobbit"; // for sorting in GUI
         this.hasBasicLands = false; // TODO: Enable once basic collector numbers are known
 
