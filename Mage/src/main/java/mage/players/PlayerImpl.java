@@ -1519,7 +1519,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         int bookmark = game.bookmarkState();
         //20260116 - 109.4a
         //The controller of a mana ability is determined as though it were on the stack.
-        ability.newId();
         ability.setControllerId(playerId);
         if (ability.activate(game, false) && ability.resolve(game)) {
             if (ability.isUndoPossible()) {
