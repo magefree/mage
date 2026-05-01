@@ -23,7 +23,6 @@ public final class RealityFracture extends ExpansionSet {
 
         // this.enablePlayBooster(305); TODO: Enable later
 
-
-
+        cards.add(new SetCardInfo("Stingcaster Mage", 329, Rarity.MYTHIC, mage.cards.s.StingcasterMage.class));
     }
 }

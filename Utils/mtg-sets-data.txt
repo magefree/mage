@@ -236,6 +236,7 @@ Pro Tour Promos|PPRO|ProTourPromos|
 Portal Three Kingdoms|PTK|PortalThreeKingdoms|
 Ravnica Allegiance|RNA|RavnicaAllegiance|
 Ravnica: City of Guilds|RAV|RavnicaCityOfGuilds|
+Reality Fracture|FRA|RealityFracture|
 Jurassic World Collection|REX|JurassicWorldCollection|
 Rivals of Ixalan|RIX|RivalsOfIxalan|
 Rise of the Eldrazi|ROE|RiseOfTheEldrazi|
