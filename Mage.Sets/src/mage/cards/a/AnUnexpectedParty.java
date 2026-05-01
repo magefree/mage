@@ -34,15 +34,14 @@ public final class AnUnexpectedParty extends AdventureCard {
 
         // As this enchantment enters, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));
-
         // Creatures you control of the chosen type get +2/+2.
-        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(
-                2, 2, Duration.WhileOnBattlefield, filter, false
-        )));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false)));
 
         // At the Door
         // Create X 2/2 red Dwarf creature tokens.
         this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new Dwarf22Token(), GetXValue.instance));
+
+        this.finalizeAdventure();
     }
 
     private AnUnexpectedParty(final AnUnexpectedParty card) {
