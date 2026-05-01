@@ -22,7 +22,7 @@ public final class TheHobbit extends ExpansionSet {
 
         // this.enablePlayBooster(305); TODO: Enable later
 
-        //cards.add(new SetCardInfo("An Unexpected Party", 29, Rarity.RARE, mage.cards.a.AnUnexpectedParty.class));
+        cards.add(new SetCardInfo("An Unexpected Party", 29, Rarity.RARE, mage.cards.a.AnUnexpectedParty.class));
         //cards.add(new SetCardInfo("My Precious", 176, Rarity.RARE, mage.cards.m.MyPrecious.class));
         //cards.add(new SetCardInfo("My Precious", 235, Rarity.RARE, mage.cards.m.MyPrecious.class));
         //cards.add(new SetCardInfo("Tom, Bert, and William", 169, Rarity.RARE, mage.cards.t.TomBertAndWilliam.class));

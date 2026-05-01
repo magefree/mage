@@ -272,6 +272,7 @@ Tenth Edition|TenthEdition|
 The Brothers' War|TheBrothersWar|
 The Brothers' War Commander|TheBrothersWarCommander|
 The Dark|TheDark|
+The Hobbit|TheHobbit|
 Theros|Theros|
 Theros Beyond Death|TherosBeyondDeath|
 Throne of Eldraine|ThroneOfEldraine|
