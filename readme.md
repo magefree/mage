@@ -1,6 +1,5 @@
 # XMage — Magic, Another Game Engine
 
-[![Build Status](https://app.travis-ci.com/magefree/mage.svg?branch=master)](https://app.travis-ci.com/magefree/mage)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=magefree_mage&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=magefree_mage)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=magefree_mage&metric=coverage)](https://sonarcloud.io/summary/new_code?id=magefree_mage)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=magefree_mage&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=magefree_mage)
@@ -8,17 +7,17 @@
 [![commints since latest release](https://img.shields.io/github/commits-since/magefree/mage/latest)](https://github.com/magefree/mage/commits/)
 [![Join the chat at https://gitter.im/magefree/mage](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/magefree/mage?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-XMage allows you to play Magic against one or more online players or computer opponents. 
-It includes full rules enforcement for over **28 000** unique cards and more than 73 000 reprints from different editions. 
+XMage allows you to play Magic against one or more online players or computer opponents.
+It includes full rules enforcement for over **28 000** unique cards and more than 73 000 reprints from different editions.
 You can also find custom sets like Star Wars. All regular sets have nearly all implemented cards.
 
-It supports single matches and tournaments with dozens of game modes like duel, multiplayer, standard, modern, commander, 
+It supports single matches and tournaments with dozens of game modes like duel, multiplayer, standard, modern, commander,
 pauper, oathbreaker, historic, freeform, richman and much more.
 
-Local server supports a [special test mode](https://github.com/magefree/mage/wiki/Development-Testing-Tools) for 
+Local server supports a [special test mode](https://github.com/magefree/mage/wiki/Development-Testing-Tools) for
 testing combos and other game situations with pre-defined conditions.
 
-There are [public servers](http://xmage.today/servers/) where you can play XMage against other players. 
+There are [public servers](http://xmage.today/servers/) where you can play XMage against other players.
 You can also host your own server to play against the AI and/or your friends.
 
 XMage community and resources:
@@ -28,7 +27,7 @@ XMage community and resources:
 * [Reddit XMage discord channel](https://discord.gg/Pqf42yn);
 * [Latest changes](https://github.com/magefree/mage/commits/master);
 * [Latest news](https://jaydi85.github.io/xmage-web-news/news.html);
-* [Latest releases](https://github.com/magefree/mage/releases); 
+* [Latest releases](https://github.com/magefree/mage/releases);
 * [Project documentation](https://github.com/magefree/mage/wiki).
 
 Servers status:
@@ -57,21 +56,21 @@ The best way to report bug or feature request is [github's issues page](https://
 
 * Download [latest XMage launcher and app files](http://xmage.today/) and un-pack it to any folder like `D:\games\xmage`;
 * You need to have [Java version 8 or later](http://java.com/) to run launcher.
-  
+
 [Wiki page](https://github.com/magefree/mage/wiki) contains detail information about private or public server setup.
 
 ### Server options
 
 The XMage server locates by default the configuration file from the current working directory to the relative path `config/config.xml`
 (`config\config.xml` in Windows). To change this location, start the server with the property `xmage.config.path` set
-to the desired location, for example `-Dxmage.config.path=config/otherconfig.xml`. The option can be set from the 
+to the desired location, for example `-Dxmage.config.path=config/otherconfig.xml`. The option can be set from the
 XMageLauncher in `Settings > Java > Server java options`.
 
 ## Troubleshooting / FAQ
 
 Github issues page contain [popular problems and fixes](https://github.com/magefree/mage/issues?q=is%3Aissue+label%3AFAQ+):
 * [Any: program freezes on startup (white/blue/black screen)](https://github.com/magefree/mage/issues/4461#issuecomment-361108597);
-* [Any: can't download images or it stops after some time](https://www.reddit.com/r/XMage/comments/agmcjf/new_xmage_release_with_ravnica_allegiance_rna/); 
+* [Any: can't download images or it stops after some time](https://www.reddit.com/r/XMage/comments/agmcjf/new_xmage_release_with_ravnica_allegiance_rna/);
 * [Any: can't run client, could not open ...jvm.cfg](https://github.com/magefree/mage/issues/1272#issuecomment-529789018);
 * [Any: no texts or small buttons in launcher](https://github.com/magefree/mage/issues/4126);
 * [Windows: ugly cards, buttons or other GUI drawing artifacts](https://github.com/magefree/mage/issues/4626#issuecomment-374640070);
@@ -113,14 +112,14 @@ More info about [XRender](https://docs.oracle.com/javase/8/docs/technotes/guides
 
 #### Increase memory usage
 
-This is not guaranteed to yield improvements, but it depends on your use-case. 
+This is not guaranteed to yield improvements, but it depends on your use-case.
 If you have a lot of RAM to spare, you can increase the initial heap size for good measure.
 More details about [memory settings](https://stackoverflow.com/a/57839720/8401696):
 * `-Xmx2G`
 
 ## Developer
 
-Full project documentation and instructions for developers can be found in [wiki pages](http://github.com/magefree/mage/wiki/). 
+Full project documentation and instructions for developers can be found in [wiki pages](http://github.com/magefree/mage/wiki/).
 
 First steps for Xmage's developers:
 * [Setting up your Development Environment](https://github.com/magefree/mage/wiki/Setting-up-your-Development-Environment)
