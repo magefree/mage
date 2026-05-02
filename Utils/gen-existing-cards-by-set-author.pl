@@ -8,7 +8,6 @@ use strict;
 
 my $dataFile = "mtg-cards-data.txt";
 my $setsFile = "mtg-sets-data.txt";
-my $knownSetsFile = "known-sets.txt";
 
 
 my %cards;
@@ -46,7 +45,7 @@ while(my $line = <DATA>) {
         my $cardInfo = "$data[0],,,$data[2]";
 
         push(@setCards, $cardInfo);
-    } else { 
+    } else {
         $all_sets {$data[1]} = 1;
     }
 }
@@ -56,7 +55,7 @@ my $potentialSideA;
 my @tempSetCards;
 
 foreach $potentialSideA (sort @setCards) {
-    #print (">>$potentialSideA\n"); 
+    #print (">>$potentialSideA\n");
     if ($potentialSideA =~ m/.*,,,(\d+)(a)$/) {
         my $cardNumSideB = $1 . "b";
         my $val;
@@ -113,7 +112,7 @@ if ($cardsFound == 0) {
     if (!$foundPossibleSet) {
         print ("Couldn't find any matching set for '$setName'. \n");
     }
-    
+
     print "(Note: Looked at $numPossibleSets sets in total).\nPress the enter key to exit.";
     $setName = <STDIN>;
     exit;
@@ -127,10 +126,10 @@ while(my $line = <DATA>) {
 }
 close(DATA);
 
-open (DATA, $knownSetsFile) || die "can't open $knownSetsFile";
+open (DATA, $setsFile) || die "can't open $setsFile";
 while(my $line = <DATA>) {
     my @data = split('\\|', $line);
-    $knownSets{$data[0]}= $data[1];
+    $knownSets{$data[0]}= $data[2];
 }
 close(DATA);
 
@@ -156,7 +155,7 @@ foreach $name_collectorid (sort @setCards)
 {
     my $cardName;
     my $cardNr;
-    $name_collectorid =~ m/^(.*),,,(.*)$/; 
+    $name_collectorid =~ m/^(.*),,,(.*)$/;
     $cardName = $1;
     $cardNr = $2;
     {
