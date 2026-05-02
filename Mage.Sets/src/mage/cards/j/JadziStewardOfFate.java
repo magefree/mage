@@ -27,7 +27,7 @@ public final class JadziStewardOfFate extends PrepareCard {
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.FRACTAL);
 
     public JadziStewardOfFate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}", "Oracle's Gift", new CardType[]{CardType.SORCERY}, "{X}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}", "Oracle's Gift", new CardType[]{CardType.SORCERY}, "{X}{X}{U}");
 
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
