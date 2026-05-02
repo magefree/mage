@@ -16,8 +16,7 @@ public final class RealityFracture extends ExpansionSet {
     }
 
     private RealityFracture() {
-        super("Reality Fracture", "FRA", ExpansionSet.buildDate(2026, 10, 2), SetType.CUSTOM_SET);
-        // super("Reality Fracture", "FRA", ExpansionSet.buildDate(2026, 10, 2), SetType.EXPANSION); TODO: Once mtgjson/Scryfall have the set, change to EXPANSION
+        super("Reality Fracture", "FRA", ExpansionSet.buildDate(2026, 10, 2), SetType.EXPANSION);
         this.blockName = "Reality Fracture"; // for sorting in GUI
         this.hasBasicLands = false; // TODO: Enable once basic collector numbers are known
 
