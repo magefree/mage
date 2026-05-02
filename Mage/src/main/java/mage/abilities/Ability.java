@@ -39,6 +39,11 @@ public interface Ability extends Controllable, Serializable {
     void newId();
 
     /**
+     * Assigns a new {@link java.util.UUID} based on the input String. Will always generate the same UUID from a given String.
+     */
+    void newDeterministicId(String string);
+
+    /**
      * Assigns a new {@link java.util.UUID}
      */
     void newOriginalId(); // TODO: delete newOriginalId???
