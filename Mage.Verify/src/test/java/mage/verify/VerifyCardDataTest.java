@@ -983,6 +983,10 @@ public class VerifyCardDataTest {
         ignoreBoosterSets.add("Unhinged");
         ignoreBoosterSets.add("Unstable");
         ignoreBoosterSets.add("Unfinity");
+        // spellbook boosters, not for draft
+        ignoreBoosterSets.add("Signature Spellbook: Jace");
+        ignoreBoosterSets.add("Signature Spellbook: Gideon");
+        ignoreBoosterSets.add("Signature Spellbook: Chandra");
         // other
         ignoreBoosterSets.add("Secret Lair Drop"); // cards shop
         ignoreBoosterSets.add("Ugin's Fate"); // promo, not draftable
