@@ -161,6 +161,7 @@
 |EMBLEM:EOE|Emblem Tezzeret||TezzeretCruelCaptainEmblem|
 |EMBLEM:ECL|Emblem Oko||OkoShadowmoorScionEmblem|
 |EMBLEM:SOS|Emblem Dellian||ProfessorDellianFelEmblem|
+|EMBLEM:FRA|Emblem Chandra||ChandraChillOfComplianceEmblem|
 
 
 # ALL PLANES
