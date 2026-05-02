@@ -48,6 +48,11 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Smaug the Magnificent", 249, Rarity.MYTHIC, mage.cards.s.SmaugTheMagnificent.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Smaug the Magnificent", 265, Rarity.MYTHIC, mage.cards.s.SmaugTheMagnificent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 196, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART));
+        cards.add(new SetCardInfo("The Arkenstone", 170, Rarity.MYTHIC, mage.cards.t.TheArkenstone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Arkenstone", 234, Rarity.MYTHIC, mage.cards.t.TheArkenstone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Arkenstone", 247, Rarity.MYTHIC, mage.cards.t.TheArkenstone.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Arkenstone", 270, Rarity.MYTHIC, mage.cards.t.TheArkenstone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Arkenstone", 283, Rarity.MYTHIC, mage.cards.t.TheArkenstone.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Tom, Bert, and William", 169, Rarity.RARE, mage.cards.t.TomBertAndWilliam.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tom, Bert, and William", 312, Rarity.RARE, mage.cards.t.TomBertAndWilliam.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wood Elves", 142, Rarity.COMMON, mage.cards.w.WoodElves.class));
