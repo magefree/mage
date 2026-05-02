@@ -159,7 +159,7 @@
                         <!-- tree view report -->
                         <!-- **************** -->
                         <!-- for full logs: use xmage.build.tests.treeViewRunnerShowAllLogs -->
-                        <!-- for ai logs in ci build: use .travis/log4j.properties -->
+                        <!-- for ai logs in ci build: use .ci/log4j.properties -->
                         <!-- for default maven logs: delete or comment all settings below -->
                         <consoleOutputReporter>
                             <disable>true</disable>
