@@ -34,6 +34,9 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Super-Skrull", 115, Rarity.RARE, mage.cards.s.SuperSkrull.class));
         cards.add(new SetCardInfo("The Coming of Galactus", 212, Rarity.MYTHIC, mage.cards.t.TheComingOfGalactus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Coming of Galactus", 307, Rarity.MYTHIC, mage.cards.t.TheComingOfGalactus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Mind Stone", 21, Rarity.MYTHIC, mage.cards.t.TheMindStone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Mind Stone", 385, Rarity.MYTHIC, mage.cards.t.TheMindStone.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Mind Stone", 386, Rarity.MYTHIC, mage.cards.t.TheMindStone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Sentry, Golden Guardian", 35, Rarity.RARE, mage.cards.t.TheSentryGoldenGuardian.class));
     }
 }
