@@ -6,7 +6,7 @@ import mage.constants.SetType;
 
 /**
  * https://scryfall.com/sets/mar
- * 
+ *
  * @author ReSech
  */
 public class MarvelUniverse extends ExpansionSet {
@@ -26,17 +26,30 @@ public class MarvelUniverse extends ExpansionSet {
         cards.add(new SetCardInfo("Arachnogenesis", 31, Rarity.MYTHIC, mage.cards.a.Arachnogenesis.class));
         cards.add(new SetCardInfo("Arasta of the Endless Web", 32, Rarity.MYTHIC, mage.cards.a.ArastaOfTheEndlessWeb.class));
         cards.add(new SetCardInfo("Beast Within", 33, Rarity.MYTHIC, mage.cards.b.BeastWithin.class));
+        cards.add(new SetCardInfo("Chaos Warp", 69, Rarity.MYTHIC, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Clever Impersonator", 8, Rarity.MYTHIC, mage.cards.c.CleverImpersonator.class));
         cards.add(new SetCardInfo("Comeuppance", 1, Rarity.MYTHIC, mage.cards.c.Comeuppance.class));
         cards.add(new SetCardInfo("Counterspell", 9, Rarity.MYTHIC, mage.cards.c.Counterspell.class));
+        cards.add(new SetCardInfo("Dauthi Voidwalker", 63, Rarity.MYTHIC, mage.cards.d.DauthiVoidwalker.class));
+        cards.add(new SetCardInfo("Dig Through Time", 54, Rarity.MYTHIC, mage.cards.d.DigThroughTime.class));
+        cards.add(new SetCardInfo("Ephemerate", 44, Rarity.MYTHIC, mage.cards.e.Ephemerate.class));
+        cards.add(new SetCardInfo("Extinction Event", 65, Rarity.MYTHIC, mage.cards.e.ExtinctionEvent.class));
         cards.add(new SetCardInfo("Feed the Swarm", 16, Rarity.MYTHIC, mage.cards.f.FeedTheSwarm.class));
+        cards.add(new SetCardInfo("Force of Vigor", 77, Rarity.MYTHIC, mage.cards.f.ForceOfVigor.class));
         cards.add(new SetCardInfo("Goblin Bombardment", 23, Rarity.MYTHIC, mage.cards.g.GoblinBombardment.class));
-        cards.add(new SetCardInfo("Heroic Intervention", 34, Rarity.MYTHIC, mage.cards.h.HeroicIntervention.class));
+        cards.add(new SetCardInfo("Harbinger of the Seas", 55, Rarity.MYTHIC, mage.cards.h.HarbingerOfTheSeas.class));
+        cards.add(new SetCardInfo("Heroic Intervention", 34, Rarity.MYTHIC, mage.cards.h.HeroicIntervention.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Heroic Intervention", 78, Rarity.MYTHIC, mage.cards.h.HeroicIntervention.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Heroic Intervention", 79, Rarity.MYTHIC, mage.cards.h.HeroicIntervention.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Heroic Intervention", 80, Rarity.MYTHIC, mage.cards.h.HeroicIntervention.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hex", 17, Rarity.MYTHIC, mage.cards.h.Hex.class));
+        cards.add(new SetCardInfo("Horn of Greed", 98, Rarity.MYTHIC, mage.cards.h.HornOfGreed.class));
         cards.add(new SetCardInfo("Hunter's Insight", 35, Rarity.MYTHIC, mage.cards.h.HuntersInsight.class));
         cards.add(new SetCardInfo("Infernal Grasp", 18, Rarity.MYTHIC, mage.cards.i.InfernalGrasp.class));
         cards.add(new SetCardInfo("Leyline Binding", 2, Rarity.MYTHIC, mage.cards.l.LeylineBinding.class));
+        cards.add(new SetCardInfo("Lord of Atlantis", 56, Rarity.MYTHIC, mage.cards.l.LordOfAtlantis.class));
         cards.add(new SetCardInfo("Lorthos, the Tidemaker", 10, Rarity.MYTHIC, mage.cards.l.LorthosTheTidemaker.class));
+        cards.add(new SetCardInfo("Massacre Girl", 67, Rarity.MYTHIC, mage.cards.m.MassacreGirl.class));
         cards.add(new SetCardInfo("Mindbreak Trap", 11, Rarity.MYTHIC, mage.cards.m.MindbreakTrap.class));
         cards.add(new SetCardInfo("Mystic Confluence", 12, Rarity.MYTHIC, mage.cards.m.MysticConfluence.class));
         cards.add(new SetCardInfo("Najeela, the Blade-Blossom", 24, Rarity.MYTHIC, mage.cards.n.NajeelaTheBladeBlossom.class));
