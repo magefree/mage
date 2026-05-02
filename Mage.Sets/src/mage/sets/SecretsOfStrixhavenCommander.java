@@ -20,7 +20,7 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
     }
 
     private SecretsOfStrixhavenCommander() {
-        super("Secrets of Strixhaven Commander", "SOC", ExpansionSet.buildDate(2026, 4, 24), SetType.EXPANSION);
+        super("Secrets of Strixhaven Commander", "SOC", ExpansionSet.buildDate(2026, 4, 24), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Abrade", 234, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
