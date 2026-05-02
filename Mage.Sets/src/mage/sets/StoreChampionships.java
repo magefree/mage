@@ -22,6 +22,7 @@ public final class StoreChampionships extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("Abhorrent Oculus", 50, Rarity.RARE, mage.cards.a.AbhorrentOculus.class));
         cards.add(new SetCardInfo("Aether Channeler", 11, Rarity.RARE, mage.cards.a.AetherChanneler.class));
         cards.add(new SetCardInfo("Angel of Despair", 22, Rarity.RARE, mage.cards.a.AngelOfDespair.class));
         cards.add(new SetCardInfo("Annex Sentry", 7, Rarity.RARE, mage.cards.a.AnnexSentry.class));
@@ -43,7 +44,9 @@ public final class StoreChampionships extends ExpansionSet {
         cards.add(new SetCardInfo("Gifted Aetherborn", 13, Rarity.RARE, mage.cards.g.GiftedAetherborn.class));
         cards.add(new SetCardInfo("Gilded Goose", 5, Rarity.RARE, mage.cards.g.GildedGoose.class));
         cards.add(new SetCardInfo("Gleeful Demolition", 36, Rarity.RARE, mage.cards.g.GleefulDemolition.class));
+        cards.add(new SetCardInfo("Goblin Bombardment", 45, Rarity.RARE, mage.cards.g.GoblinBombardment.class));
         cards.add(new SetCardInfo("Goddric, Cloaked Reveler", 38, Rarity.RARE, mage.cards.g.GoddricCloakedReveler.class, FULL_ART));
+        cards.add(new SetCardInfo("Guide of Souls", 46, Rarity.RARE, mage.cards.g.GuideOfSouls.class));
         cards.add(new SetCardInfo("Hollow One", 25, Rarity.RARE, mage.cards.h.HollowOne.class));
         cards.add(new SetCardInfo("Koth, Fire of Resistance", 9, Rarity.RARE, mage.cards.k.KothFireOfResistance.class));
         cards.add(new SetCardInfo("Lier, Disciple of the Drowned", 20, Rarity.RARE, mage.cards.l.LierDiscipleOfTheDrowned.class, FULL_ART));
@@ -51,9 +54,11 @@ public final class StoreChampionships extends ExpansionSet {
         cards.add(new SetCardInfo("Monastery Swiftspear", 27, Rarity.RARE, mage.cards.m.MonasterySwiftspear.class));
         cards.add(new SetCardInfo("Moonshaker Cavalry", 17, Rarity.MYTHIC, mage.cards.m.MoonshakerCavalry.class, FULL_ART));
         cards.add(new SetCardInfo("Mortify", 21, Rarity.RARE, mage.cards.m.Mortify.class));
+        cards.add(new SetCardInfo("Ocelot Pride", 47, Rarity.RARE, mage.cards.o.OcelotPride.class, FULL_ART));
         cards.add(new SetCardInfo("Omnath, Locus of Creation", 6, Rarity.MYTHIC, mage.cards.o.OmnathLocusOfCreation.class, FULL_ART));
         cards.add(new SetCardInfo("Preacher of the Schism", 34, Rarity.RARE, mage.cards.p.PreacherOfTheSchism.class));
         cards.add(new SetCardInfo("Preordain", 39, Rarity.RARE, mage.cards.p.Preordain.class));
+        cards.add(new SetCardInfo("Psychic Frog", 49, Rarity.RARE, mage.cards.p.PsychicFrog.class));
         cards.add(new SetCardInfo("Reality Smasher", 31, Rarity.RARE, mage.cards.r.RealitySmasher.class));
         cards.add(new SetCardInfo("Shark Typhoon", 28, Rarity.RARE, mage.cards.s.SharkTyphoon.class));
         cards.add(new SetCardInfo("Slickshot Show-Off", 43, Rarity.RARE, mage.cards.s.SlickshotShowOff.class));
@@ -62,6 +67,7 @@ public final class StoreChampionships extends ExpansionSet {
         cards.add(new SetCardInfo("Tail Swipe", 15, Rarity.RARE, mage.cards.t.TailSwipe.class));
         cards.add(new SetCardInfo("Thalia and The Gitrog Monster", 12, Rarity.MYTHIC, mage.cards.t.ThaliaAndTheGitrogMonster.class, FULL_ART));
         cards.add(new SetCardInfo("Transcendent Message", 16, Rarity.RARE, mage.cards.t.TranscendentMessage.class));
+        cards.add(new SetCardInfo("Unearth", 48, Rarity.RARE, mage.cards.u.Unearth.class));
         cards.add(new SetCardInfo("Urza's Saga", 29, Rarity.RARE, mage.cards.u.UrzasSaga.class, FULL_ART));
         cards.add(new SetCardInfo("Vengevine", 26, Rarity.RARE, mage.cards.v.Vengevine.class, FULL_ART));
         cards.add(new SetCardInfo("Virtue of Persistence", 35, Rarity.MYTHIC, mage.cards.v.VirtueOfPersistence.class));
