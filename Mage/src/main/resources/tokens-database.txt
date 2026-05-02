@@ -3006,6 +3006,10 @@
 |TOK:SOC|Worm||BlackGreenWormToken|
 |TOK:SOC|Zombie||ZombieDecayedToken|
 
+# HOB
+|TOK:HOB|Dwarf||Dwarf22Token|
+|TOK:HOB|Treasure||TreasureToken|
+
 # JVC
 |TOK:JVC|Elemental Shaman||ElementalShamanToken|
 
