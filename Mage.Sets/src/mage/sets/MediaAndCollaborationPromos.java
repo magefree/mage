@@ -37,7 +37,8 @@ public class MediaAndCollaborationPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Cloud, Midgar Mercenary", "2025-21", Rarity.MYTHIC, mage.cards.c.CloudMidgarMercenary.class));
         cards.add(new SetCardInfo("Cloud, Planet's Champion", "2025-13", Rarity.MYTHIC, mage.cards.c.CloudPlanetsChampion.class));
         cards.add(new SetCardInfo("Command Tower", "2026-01", Rarity.RARE, mage.cards.c.CommandTower.class));
-        cards.add(new SetCardInfo("Counterspell", "2021-1", Rarity.RARE, mage.cards.c.Counterspell.class));
+        cards.add(new SetCardInfo("Counterspell", "2021-1", Rarity.RARE, mage.cards.c.Counterspell.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Counterspell", "2026-7", Rarity.RARE, mage.cards.c.Counterspell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crop Rotation", "2020-7", Rarity.RARE, mage.cards.c.CropRotation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crop Rotation", "2026-02", Rarity.RARE, mage.cards.c.CropRotation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Culling the Weak", "2023-8", Rarity.RARE, mage.cards.c.CullingTheWeak.class));
