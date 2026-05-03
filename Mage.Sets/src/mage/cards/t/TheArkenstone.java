@@ -28,7 +28,7 @@ public final class TheArkenstone extends AdventureCard {
     }
 
     public TheArkenstone(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, new CardType[]{CardType.SORCERY}, "{5}", "Seek the Heart", "{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, new CardType[]{CardType.SORCERY}, "{5}", "Seek the Heart", "{2}{W}");
 
         this.supertype.add(SuperType.LEGENDARY);
 
@@ -39,6 +39,7 @@ public final class TheArkenstone extends AdventureCard {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DrawCardSourceControllerEffect(1)));
 
         // Seek the Heart
+        // Sorcery {2}{W}
         // Search your library for a legendary creature card, reveal it, put it into your hand, then shuffle.
         this.getSpellCard().getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));
 
