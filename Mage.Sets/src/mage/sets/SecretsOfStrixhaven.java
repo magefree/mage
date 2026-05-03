@@ -135,6 +135,8 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Fractal Tender", 190, Rarity.UNCOMMON, mage.cards.f.FractalTender.class));
         cards.add(new SetCardInfo("Fractalize", 51, Rarity.UNCOMMON, mage.cards.f.Fractalize.class));
         cards.add(new SetCardInfo("Garrison Excavator", 116, Rarity.UNCOMMON, mage.cards.g.GarrisonExcavator.class));
+        cards.add(new SetCardInfo("Geometer's Arthropod", 191, Rarity.RARE, mage.cards.g.GeometersArthropod.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Geometer's Arthropod", 300, Rarity.RARE, mage.cards.g.GeometersArthropod.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Germination Practicum", 149, Rarity.MYTHIC, mage.cards.g.GerminationPracticum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Germination Practicum", 296, Rarity.MYTHIC, mage.cards.g.GerminationPracticum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glorious Decay", 150, Rarity.COMMON, mage.cards.g.GloriousDecay.class));

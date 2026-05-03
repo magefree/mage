@@ -2980,7 +2980,7 @@
 |TOK:SOC|Beast||BeastToken|
 |TOK:SOC|Boar||Boar2Token|
 |TOK:SOC|Cat||CatToken|
-# |TOK:SOC|Contract||ContractToken| TODO: Once Scriv, the Obligator is implemented
+|TOK:SOC|Contract||ContractToken|
 |TOK:SOC|Dragon Illusion||DragonIllusionToken|
 |TOK:SOC|Eldrazi Spawn||EldraziSpawnToken|
 |TOK:SOC|Elemental|1|ElementalXXFlyingHasteToken|

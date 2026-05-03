@@ -46,6 +46,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Assassin's Trophy", 294, Rarity.RARE, mage.cards.a.AssassinsTrophy.class));
         cards.add(new SetCardInfo("Astral Cornucopia", 342, Rarity.RARE, mage.cards.a.AstralCornucopia.class));
         cards.add(new SetCardInfo("Atsushi, the Blazing Sky", 236, Rarity.MYTHIC, mage.cards.a.AtsushiTheBlazingSky.class));
+        cards.add(new SetCardInfo("Augusta, Order Returned", 11, Rarity.RARE, mage.cards.a.AugustaOrderReturned.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Augusta, Order Returned", 61, Rarity.RARE, mage.cards.a.AugustaOrderReturned.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Awakening Zone", 262, Rarity.RARE, mage.cards.a.AwakeningZone.class));
         cards.add(new SetCardInfo("Balefire Liege", 295, Rarity.RARE, mage.cards.b.BalefireLiege.class));
         cards.add(new SetCardInfo("Battlefield Forge", 362, Rarity.RARE, mage.cards.b.BattlefieldForge.class));
@@ -130,6 +132,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Faerie Mastermind", 114, Rarity.RARE, mage.cards.f.FaerieMastermind.class));
         cards.add(new SetCardInfo("Faithless Looting", 244, Rarity.COMMON, mage.cards.f.FaithlessLooting.class));
         cards.add(new SetCardInfo("Fallen Ideal", 117, Rarity.UNCOMMON, mage.cards.f.FallenIdeal.class));
+        cards.add(new SetCardInfo("Fateful Tempest", 31, Rarity.RARE, mage.cards.f.FatefulTempest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fateful Tempest", 79, Rarity.RARE, mage.cards.f.FatefulTempest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fellwar Stone", 347, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Feral Appetite", 38, Rarity.RARE, mage.cards.f.FeralAppetite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Feral Appetite", 86, Rarity.RARE, mage.cards.f.FeralAppetite.class, NON_FULL_USE_VARIOUS));
@@ -153,6 +157,7 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Glittering Massif", 376, Rarity.RARE, mage.cards.g.GlitteringMassif.class));
         cards.add(new SetCardInfo("Goldspan Dragon", 245, Rarity.MYTHIC, mage.cards.g.GoldspanDragon.class));
         cards.add(new SetCardInfo("Goldvein Hydra", 270, Rarity.MYTHIC, mage.cards.g.GoldveinHydra.class));
+        cards.add(new SetCardInfo("Gorma, the Gullet", 3, Rarity.MYTHIC, mage.cards.g.GormaTheGullet.class));
         cards.add(new SetCardInfo("Grim Backwoods", 377, Rarity.RARE, mage.cards.g.GrimBackwoods.class));
         cards.add(new SetCardInfo("Guardian Augmenter", 271, Rarity.RARE, mage.cards.g.GuardianAugmenter.class));
         cards.add(new SetCardInfo("Guardian Scalelord", 149, Rarity.RARE, mage.cards.g.GuardianScalelord.class));
@@ -174,6 +179,7 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Infernal Grasp", 216, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class));
         cards.add(new SetCardInfo("Ingenious Prodigy", 115, Rarity.RARE, mage.cards.i.IngeniousProdigy.class));
         cards.add(new SetCardInfo("Inkshield", 316, Rarity.RARE, mage.cards.i.Inkshield.class));
+        cards.add(new SetCardInfo("Intermediate Chirography", 26, Rarity.RARE, mage.cards.i.IntermediateChirography.class));
         cards.add(new SetCardInfo("Isolated Chapel", 382, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
         cards.add(new SetCardInfo("Jadar, Ghoulcaller of Nephalia", 217, Rarity.RARE, mage.cards.j.JadarGhoulcallerOfNephalia.class));
         cards.add(new SetCardInfo("Kami of Ancient Law", 150, Rarity.COMMON, mage.cards.k.KamiOfAncientLaw.class));
@@ -269,6 +275,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Relic Retriever", 83, Rarity.RARE, mage.cards.r.RelicRetriever.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reliquary Tower", 398, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Remorseful Cleric", 164, Rarity.RARE, mage.cards.r.RemorsefulCleric.class));
+        cards.add(new SetCardInfo("Renegade Bull", 36, Rarity.RARE, mage.cards.r.RenegadeBull.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Renegade Bull", 84, Rarity.RARE, mage.cards.r.RenegadeBull.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Replication Technique", 200, Rarity.RARE, mage.cards.r.ReplicationTechnique.class));
         cards.add(new SetCardInfo("Resculpt", 201, Rarity.COMMON, mage.cards.r.Resculpt.class));
         cards.add(new SetCardInfo("Restless Spire", 399, Rarity.RARE, mage.cards.r.RestlessSpire.class));
@@ -288,6 +296,7 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Scorched Geyser", 102, Rarity.RARE, mage.cards.s.ScorchedGeyser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scorched Geyser", 54, Rarity.RARE, mage.cards.s.ScorchedGeyser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Screams from Within", 119, Rarity.UNCOMMON, mage.cards.s.ScreamsFromWithin.class));
+        cards.add(new SetCardInfo("Scriv, the Obligator", 9, Rarity.MYTHIC, mage.cards.s.ScrivTheObligator.class));
         cards.add(new SetCardInfo("Secret Rendezvous", 166, Rarity.UNCOMMON, mage.cards.s.SecretRendezvous.class));
         cards.add(new SetCardInfo("Selfless Spirit", 167, Rarity.RARE, mage.cards.s.SelflessSpirit.class));
         cards.add(new SetCardInfo("Sentinel's Eyes", 168, Rarity.COMMON, mage.cards.s.SentinelsEyes.class));
@@ -373,6 +382,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Umbral Expanse", 108, Rarity.RARE, mage.cards.u.UmbralExpanse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Umbral Expanse", 60, Rarity.RARE, mage.cards.u.UmbralExpanse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Unbound Flourishing", 126, Rarity.MYTHIC, mage.cards.u.UnboundFlourishing.class));
+        cards.add(new SetCardInfo("Vanguard of the Restless", 16, Rarity.RARE, mage.cards.v.VanguardOfTheRestless.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vanguard of the Restless", 66, Rarity.RARE, mage.cards.v.VanguardOfTheRestless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vanishing Verse", 335, Rarity.RARE, mage.cards.v.VanishingVerse.class));
         cards.add(new SetCardInfo("Veinwitch Coven", 228, Rarity.RARE, mage.cards.v.VeinwitchCoven.class));
         cards.add(new SetCardInfo("Venerable Warsinger", 336, Rarity.RARE, mage.cards.v.VenerableWarsinger.class));
@@ -394,6 +405,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Woe Strider", 231, Rarity.RARE, mage.cards.w.WoeStrider.class));
         cards.add(new SetCardInfo("Woodland Cemetery", 424, Rarity.RARE, mage.cards.w.WoodlandCemetery.class));
         cards.add(new SetCardInfo("Yahenni, Undying Partisan", 232, Rarity.RARE, mage.cards.y.YahenniUndyingPartisan.class));
+        cards.add(new SetCardInfo("Yavimaya Bloomsage", 44, Rarity.RARE, mage.cards.y.YavimayaBloomsage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yavimaya Bloomsage", 92, Rarity.RARE, mage.cards.y.YavimayaBloomsage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yavimaya Coast", 425, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
         cards.add(new SetCardInfo("Zimone's Hypothesis", 206, Rarity.RARE, mage.cards.z.ZimonesHypothesis.class));
         cards.add(new SetCardInfo("Zimone, All-Questioning", 340, Rarity.RARE, mage.cards.z.ZimoneAllQuestioning.class));
