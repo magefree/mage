@@ -2931,6 +2931,7 @@ public class ScryfallImageSupportTokens {
             // SOS
             put("SOS/Elemental/1", "https://api.scryfall.com/cards/tsos/2?format=image");
             put("SOS/Elemental/2", "https://api.scryfall.com/cards/tsos/3?format=image");
+            put("SOS/Emblem Dellian", "https://api.scryfall.com/cards/tsos/13?format=image");
             put("SOS/Fractal/1", "https://api.scryfall.com/cards/tsos/4?format=image");
             put("SOS/Fractal/2", "https://api.scryfall.com/cards/tsos/5?format=image");
             put("SOS/Inkling/1", "https://api.scryfall.com/cards/tsos/6?format=image");
