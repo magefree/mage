@@ -12,15 +12,21 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.filter.FilterSpell;
 
 /**
  *
  * @author muz
  */
 public final class VisionSynthezoidAvenger extends CardImpl {
+
+    private static final FilterSpell filter = new FilterSpell("a spell, if it isn't that player's turn");
+
+    static {
+        filter.add(TargetController.INACTIVE.getControllerPredicate());
+    }
 
     public VisionSynthezoidAvenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
@@ -37,7 +43,10 @@ public final class VisionSynthezoidAvenger extends CardImpl {
         // Whenever a player casts a spell, if it isn't that player's turn, choose one --
         // * Put a +1/+1 counter on Vision.
         // * Vision phases out.
-        this.addAbility(new VisionSynthezoidAvengerTriggeredAbility());
+        SpellCastAllTriggeredAbility ability = new SpellCastAllTriggeredAbility(
+            new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, false);
+        ability.addMode(new Mode(new PhaseOutSourceEffect()));
+        this.addAbility(ability);
     }
 
     private VisionSynthezoidAvenger(final VisionSynthezoidAvenger card) {
@@ -47,28 +56,5 @@ public final class VisionSynthezoidAvenger extends CardImpl {
     @Override
     public VisionSynthezoidAvenger copy() {
         return new VisionSynthezoidAvenger(this);
-    }
-}
-
-class VisionSynthezoidAvengerTriggeredAbility extends SpellCastAllTriggeredAbility {
-
-    VisionSynthezoidAvengerTriggeredAbility() {
-        super(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
-        this.setTriggerPhrase("Whenever a player casts a spell, if it isn't that player's turn, ");
-        this.addMode(new Mode(new PhaseOutSourceEffect()));
-    }
-
-    private VisionSynthezoidAvengerTriggeredAbility(final VisionSynthezoidAvengerTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public VisionSynthezoidAvengerTriggeredAbility copy() {
-        return new VisionSynthezoidAvengerTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return !game.isActivePlayer(event.getPlayerId()) && super.checkTrigger(event, game);
     }
 }
