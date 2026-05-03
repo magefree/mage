@@ -15,7 +15,6 @@ import mage.abilities.hint.common.ConditionPermanentHint;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.WatcherScope;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -121,8 +120,7 @@ class ZaffaiAndTheTempestsEffect extends AsThoughEffectImpl {
                 || watcher.isAbilityUsed(new MageObjectReference(sourceObject, game))) {
             return false;
         }
-        Zone zone = game.getState().getZone(card.getId());
-        if (!Zone.HAND.match(zone)) {
+        if (!controller.getHand().contains(card.getId())) {
             return false;
         }
 
