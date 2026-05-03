@@ -26,8 +26,10 @@ import mage.target.common.TargetAnyTarget;
  */
 public final class SmaugTheMagnificent extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.TREASURE, "Treasures you control");
-    private static final PermanentsOnBattlefieldCount xValue = new PermanentsOnBattlefieldCount(filter);
+    private static final PermanentsOnBattlefieldCount xValue = new PermanentsOnBattlefieldCount(
+        new FilterControlledPermanent(SubType.TREASURE, "Treasures you control")
+    );
+    private static final ValueHint hint = new ValueHint("Treasures you control", xValue);
 
     public SmaugTheMagnificent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
@@ -47,7 +49,7 @@ public final class SmaugTheMagnificent extends CardImpl {
         Ability ability = new AttacksTriggeredAbility(new DamageTargetEffect(xValue)
             .setText("he deals damage equal to the number of Treasures you control to any target"), false);
         ability.addTarget(new TargetAnyTarget());
-        ability.addHint(new ValueHint("Treasures you control", xValue));
+        ability.addHint(hint);
         this.addAbility(ability);
 
         // At the beginning of your upkeep, create a Treasure token.
