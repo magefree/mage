@@ -9,6 +9,7 @@ import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.AdventureCard;
+import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -27,6 +28,7 @@ public final class AnUnexpectedParty extends AdventureCard {
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
+        filter.add(ChosenSubtypePredicate.TRUE);
     }
 
     public AnUnexpectedParty(UUID ownerId, CardSetInfo setInfo) {
