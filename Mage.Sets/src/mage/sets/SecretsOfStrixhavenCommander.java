@@ -217,6 +217,7 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Moonshaker Cavalry", 110, Rarity.MYTHIC, mage.cards.m.MoonshakerCavalry.class));
         cards.add(new SetCardInfo("Morbid Opportunist", 219, Rarity.UNCOMMON, mage.cards.m.MorbidOpportunist.class));
         cards.add(new SetCardInfo("Mortality Spear", 321, Rarity.UNCOMMON, mage.cards.m.MortalitySpear.class));
+        cards.add(new SetCardInfo("Muddle, the Ever-Changing", 5, Rarity.MYTHIC, mage.cards.m.MuddleTheEverChanging.class));
         cards.add(new SetCardInfo("Mycoloth", 276, Rarity.RARE, mage.cards.m.Mycoloth.class));
         cards.add(new SetCardInfo("Mystic Sanctuary", 388, Rarity.COMMON, mage.cards.m.MysticSanctuary.class));
         cards.add(new SetCardInfo("Naktamun Lorespinner", 33, Rarity.RARE, mage.cards.n.NaktamunLorespinner.class, NON_FULL_USE_VARIOUS));
