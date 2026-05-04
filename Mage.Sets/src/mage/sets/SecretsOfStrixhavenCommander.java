@@ -410,6 +410,7 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Yavimaya Coast", 425, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
         cards.add(new SetCardInfo("Zimone's Hypothesis", 206, Rarity.RARE, mage.cards.z.ZimonesHypothesis.class));
         cards.add(new SetCardInfo("Zimone, All-Questioning", 340, Rarity.RARE, mage.cards.z.ZimoneAllQuestioning.class));
+        cards.add(new SetCardInfo("Zimone, Infinite Analyst", 10, Rarity.MYTHIC, mage.cards.z.ZimoneInfiniteAnalyst.class));
         cards.add(new SetCardInfo("Zimone, Quandrix Prodigy", 341, Rarity.UNCOMMON, mage.cards.z.ZimoneQuandrixProdigy.class));
         cards.add(new SetCardInfo("Zulaport Cutthroat", 233, Rarity.UNCOMMON, mage.cards.z.ZulaportCutthroat.class));
 
