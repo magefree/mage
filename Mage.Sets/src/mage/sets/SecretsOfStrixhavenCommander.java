@@ -251,6 +251,7 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Plumb the Forbidden", 224, Rarity.UNCOMMON, mage.cards.p.PlumbTheForbidden.class));
         cards.add(new SetCardInfo("Priest of Forgotten Gods", 225, Rarity.RARE, mage.cards.p.PriestOfForgottenGods.class));
         cards.add(new SetCardInfo("Primal Might", 283, Rarity.RARE, mage.cards.p.PrimalMight.class));
+        cards.add(new SetCardInfo("Primo, the Unbounded", 6, Rarity.MYTHIC, mage.cards.p.PrimoTheUnbounded.class));
         cards.add(new SetCardInfo("Primordial Hydra", 284, Rarity.MYTHIC, mage.cards.p.PrimordialHydra.class));
         cards.add(new SetCardInfo("Prismari Campus", 394, Rarity.COMMON, mage.cards.p.PrismariCampus.class));
         cards.add(new SetCardInfo("Prismari Command", 323, Rarity.RARE, mage.cards.p.PrismariCommand.class));
