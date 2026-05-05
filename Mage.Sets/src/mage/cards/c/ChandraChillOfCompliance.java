@@ -3,18 +3,20 @@ package mage.cards.c;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.ConditionalMana;
 import mage.Mana;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.SpellAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.ConditionalMana;
+import mage.MageObject;
+import mage.abilities.SpellAbility;
+import mage.abilities.costs.Cost;
+import mage.abilities.effects.mana.AddConditionalManaEffect;
+import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.*;
 import mage.constants.*;
@@ -39,10 +41,10 @@ public final class ChandraChillOfCompliance extends CardImpl {
         this.setStartingLoyalty(3);
 
         // +1: Surveil 1. If you put a noncreature, nonland card into your graveyard this way, put that card into your hand.
-        this.addAbility(new LoyaltyAbility(new ChandraChillOfComplianceSurveilEffect(), +1));
+        this.addAbility(new LoyaltyAbility(new ChandraChillOfComplianceSurveilEffect(), 1));
 
         // +1: Add {U}. Spend this mana only to cast a noncreature spell.
-        this.addAbility(new LoyaltyAbility(new ChandraChillOfComplianceManaEffect(), +1));
+        this.addAbility(new LoyaltyAbility(new AddConditionalManaEffect(Mana.BlueMana(1), new ChandraChillOfComplianceManaBuilder()), 1));
 
         // −X: Tap target artifact or creature. Put X stun counters on it.
         LoyaltyAbility ability = new LoyaltyAbility(new TapTargetEffect());
@@ -63,6 +65,7 @@ public final class ChandraChillOfCompliance extends CardImpl {
     public ChandraChillOfCompliance copy() {
         return new ChandraChillOfCompliance(this);
     }
+
 }
 
 class ChandraChillOfComplianceSurveilEffect extends OneShotEffect {
@@ -103,37 +106,21 @@ class ChandraChillOfComplianceSurveilEffect extends OneShotEffect {
     }
 }
 
-class ChandraChillOfComplianceManaEffect extends OneShotEffect {
-
-    ChandraChillOfComplianceManaEffect() {
-        super(Outcome.PutManaInPool);
-        staticText = "Add {U}. Spend this mana only to cast a noncreature spell";
-    }
-
-    private ChandraChillOfComplianceManaEffect(final ChandraChillOfComplianceManaEffect effect) {
-        super(effect);
+class ChandraChillOfComplianceManaBuilder extends ConditionalManaBuilder {
+    @Override
+    public ConditionalMana build(Object... options) {
+        ConditionalMana conditionalMana = new ConditionalMana(this.mana);
+        conditionalMana.addCondition(new ChandraChillOfComplianceManaCondition());
+        return conditionalMana;
     }
 
     @Override
-    public ChandraChillOfComplianceManaEffect copy() {
-        return new ChandraChillOfComplianceManaEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        ConditionalMana mana = new ConditionalMana(Mana.BlueMana(1));
-        mana.addCondition(new ChandraChillOfComplianceManaCondition());
-        player.getManaPool().addMana(mana, game, source);
-        return true;
+    public String getRule() {
+        return "Spend this mana only to cast a noncreature spell";
     }
 }
 
 class ChandraChillOfComplianceManaCondition extends ManaCondition {
-
     @Override
     public boolean apply(Game game, Ability source) {
         if (!(source instanceof SpellAbility) || source.isActivated()) {

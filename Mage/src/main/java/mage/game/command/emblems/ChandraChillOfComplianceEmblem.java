@@ -18,7 +18,6 @@ public final class ChandraChillOfComplianceEmblem extends Emblem {
     public ChandraChillOfComplianceEmblem() {
         super("Emblem Chandra");
         Effect effect = new DrawCardSourceControllerEffect(1);
-        effect.setText("draw a card");
         Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.NONE);
         getAbilities().add(ability);
     }
