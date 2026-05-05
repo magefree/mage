@@ -235,6 +235,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Oran-Rief, the Vastwood", 391, Rarity.RARE, mage.cards.o.OranRiefTheVastwood.class));
         cards.add(new SetCardInfo("Overflowing Basin", 392, Rarity.RARE, mage.cards.o.OverflowingBasin.class));
         cards.add(new SetCardInfo("Oversimplify", 322, Rarity.RARE, mage.cards.o.Oversimplify.class));
+        cards.add(new SetCardInfo("Owlin Spiralmancer", 22, Rarity.RARE, mage.cards.o.OwlinSpiralmancer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Owlin Spiralmancer", 72, Rarity.RARE, mage.cards.o.OwlinSpiralmancer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ozolith, the Shattered Spire", 281, Rarity.RARE, mage.cards.o.OzolithTheShatteredSpire.class));
         cards.add(new SetCardInfo("Parasitic Impetus", 222, Rarity.COMMON, mage.cards.p.ParasiticImpetus.class));
         cards.add(new SetCardInfo("Patchwork Banner", 353, Rarity.UNCOMMON, mage.cards.p.PatchworkBanner.class));
