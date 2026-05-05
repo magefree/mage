@@ -188,6 +188,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Keen Duelist", 218, Rarity.RARE, mage.cards.k.KeenDuelist.class));
         cards.add(new SetCardInfo("Killian, Decisive Mentor", 4, Rarity.MYTHIC, mage.cards.k.KillianDecisiveMentor.class));
         cards.add(new SetCardInfo("Killian, Ink Duelist", 317, Rarity.UNCOMMON, mage.cards.k.KillianInkDuelist.class));
+        cards.add(new SetCardInfo("Kinetic Ooze", 39, Rarity.RARE, mage.cards.k.KineticOoze.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kinetic Ooze", 87, Rarity.RARE, mage.cards.k.KineticOoze.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kor Spiritdancer", 152, Rarity.RARE, mage.cards.k.KorSpiritdancer.class));
         cards.add(new SetCardInfo("Laelia, the Blade Reforged", 246, Rarity.RARE, mage.cards.l.LaeliaTheBladeReforged.class));
         cards.add(new SetCardInfo("Land Tax", 153, Rarity.MYTHIC, mage.cards.l.LandTax.class));
