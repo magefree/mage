@@ -11,13 +11,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.ConditionalMana;
-import mage.MageObject;
-import mage.abilities.SpellAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.effects.mana.AddConditionalManaEffect;
-import mage.abilities.mana.builder.ConditionalManaBuilder;
-import mage.abilities.mana.conditional.ManaCondition;
+import mage.abilities.mana.conditional.ConditionalSpellManaBuilder;
 import mage.cards.*;
 import mage.constants.*;
 import mage.counters.CounterType;
@@ -44,7 +39,7 @@ public final class ChandraChillOfCompliance extends CardImpl {
         this.addAbility(new LoyaltyAbility(new ChandraChillOfComplianceSurveilEffect(), 1));
 
         // +1: Add {U}. Spend this mana only to cast a noncreature spell.
-        this.addAbility(new LoyaltyAbility(new AddConditionalManaEffect(Mana.BlueMana(1), new ChandraChillOfComplianceManaBuilder()), 1));
+        this.addAbility(new LoyaltyAbility(new AddConditionalManaEffect(Mana.BlueMana(1), new ConditionalSpellManaBuilder(StaticFilters.FILTER_SPELL_A_NON_CREATURE)), 1));
 
         // −X: Tap target artifact or creature. Put X stun counters on it.
         LoyaltyAbility ability = new LoyaltyAbility(new TapTargetEffect());
@@ -103,35 +98,5 @@ class ChandraChillOfComplianceSurveilEffect extends OneShotEffect {
             }
         }
         return true;
-    }
-}
-
-class ChandraChillOfComplianceManaBuilder extends ConditionalManaBuilder {
-    @Override
-    public ConditionalMana build(Object... options) {
-        ConditionalMana conditionalMana = new ConditionalMana(this.mana);
-        conditionalMana.addCondition(new ChandraChillOfComplianceManaCondition());
-        return conditionalMana;
-    }
-
-    @Override
-    public String getRule() {
-        return "Spend this mana only to cast a noncreature spell";
-    }
-}
-
-class ChandraChillOfComplianceManaCondition extends ManaCondition {
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (!(source instanceof SpellAbility) || source.isActivated()) {
-            return false;
-        }
-        MageObject object = game.getObject(source);
-        return object != null && !object.isCreature(game);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, UUID originalId, Cost costToPay) {
-        return apply(game, source);
     }
 }
