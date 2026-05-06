@@ -102,7 +102,7 @@ class WorldWarHulkEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.addEffect(new WorldWarHulkCastWithoutManaEffect(source.getControllerId()), source);
+        game.addEffect(new WorldWarHulkCastWithoutManaEffect(), source);
         return true;
     }
 }
@@ -120,7 +120,7 @@ class WorldWarHulkCastWithoutManaEffect extends ContinuousEffectImpl {
         public boolean apply(Game game, Ability source) {
             SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
             if (watcher != null) {
-                long count = watcher.getSpellsCastThisTurn(playerId).stream()
+                long count = watcher.getSpellsCastThisTurn(source.getControllerId()).stream()
                         .filter(spell -> filter.match(spell, game))
                         .count();
                 return count == spellCastCount;
@@ -129,20 +129,21 @@ class WorldWarHulkCastWithoutManaEffect extends ContinuousEffectImpl {
         }
     }
 
-    private final FilterCard filter;
-    private final UUID playerId;
-    private int spellCastCount;
-    private AlternativeCostSourceAbility alternativeCostSourceAbility;
+    private static final FilterCard filter = new FilterCard("red or green creature spell");
 
-    WorldWarHulkCastWithoutManaEffect(UUID playerId) {
-        super(Duration.EndOfTurn, Layer.RulesEffects, SubLayer.NA, Outcome.PlayForFree);
-        this.playerId = playerId;
-        this.filter = new FilterCard("red or green creature spell");
+    static {
         filter.add(CardType.CREATURE.getPredicate());
         filter.add(Predicates.or(
             new ColorPredicate(ObjectColor.RED),
             new ColorPredicate(ObjectColor.GREEN)
         ));
+    }
+
+    private int spellCastCount;
+    private AlternativeCostSourceAbility alternativeCostSourceAbility;
+
+    WorldWarHulkCastWithoutManaEffect() {
+        super(Duration.EndOfTurn, Layer.RulesEffects, SubLayer.NA, Outcome.PlayForFree);
         staticText = "The next red or green creature spell you cast this turn can be cast without paying its mana cost";
     }
 
@@ -151,7 +152,7 @@ class WorldWarHulkCastWithoutManaEffect extends ContinuousEffectImpl {
         super.init(source, game);
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         if (watcher != null) {
-            spellCastCount = (int) watcher.getSpellsCastThisTurn(playerId).stream()
+            spellCastCount = (int) watcher.getSpellsCastThisTurn(source.getControllerId()).stream()
                     .filter(spell -> filter.match(spell, game))
                     .count();
             Condition condition = new WorldWarHulkCondition(spellCastCount);
@@ -163,16 +164,14 @@ class WorldWarHulkCastWithoutManaEffect extends ContinuousEffectImpl {
 
     private WorldWarHulkCastWithoutManaEffect(final WorldWarHulkCastWithoutManaEffect effect) {
         super(effect);
-        this.playerId = effect.playerId;
         this.used = effect.used;
         this.spellCastCount = effect.spellCastCount;
-        this.filter = effect.filter;
         this.alternativeCostSourceAbility = effect.alternativeCostSourceAbility;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(playerId);
+        Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
         }
