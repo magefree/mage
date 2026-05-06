@@ -2,24 +2,23 @@ package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.EffectKeyValue;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.VariableManaCostPredicate;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.util.CardUtil;
+import mage.watchers.common.FirstXSpellCastThisTurnWatcher;
 
 /**
  *
@@ -29,11 +28,9 @@ public final class NevThePracticalDean extends CardImpl {
 
     private static final FilterCreaturePermanent filter =
         new FilterCreaturePermanent("creatures you control with counters on them");
-    private static final FilterSpell filter2 = new FilterSpell("spell with {X} in its mana cost");
 
     static {
         filter.add(CounterAnyPredicate.instance);
-        filter2.add(VariableManaCostPredicate.instance);
     }
 
     public NevThePracticalDean(UUID ownerId, CardSetInfo setInfo) {
@@ -51,9 +48,7 @@ public final class NevThePracticalDean extends CardImpl {
         ).setText("creatures you control with counters on them have trample")));
 
         // Whenever you cast your first spell with {X} in its mana cost each turn, put X +1/+1 counters on Nev.
-        this.addAbility(new SpellCastControllerTriggeredAbility(
-            new NevAddXCountersEffect(), filter2, false
-        ).setTriggersLimitEachTurn(1));
+        this.addAbility(new NevTriggeredAbility(), new FirstXSpellCastThisTurnWatcher());
     }
 
     private NevThePracticalDean(final NevThePracticalDean card) {
@@ -66,37 +61,42 @@ public final class NevThePracticalDean extends CardImpl {
     }
 }
 
-class NevAddXCountersEffect extends OneShotEffect {
+class NevTriggeredAbility extends TriggeredAbilityImpl {
 
-    NevAddXCountersEffect() {
-        super(Outcome.Benefit);
-        staticText = "put X +1/+1 counters on {this}";
+    NevTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(), new EffectKeyValue("xValue", "X")), false);
+        setTriggerPhrase("Whenever you cast your first spell with {X} in its mana cost each turn, ");
     }
 
-    private NevAddXCountersEffect(final NevAddXCountersEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public NevAddXCountersEffect copy() {
-        return new NevAddXCountersEffect(this);
+    private NevTriggeredAbility(final NevTriggeredAbility ability) {
+        super(ability);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Spell spell = (Spell) getValue("spellCast");
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (!event.getPlayerId().equals(getControllerId())) {
+            return false;
+        }
+        Spell spell = game.getStack().getSpell(event.getTargetId());
         if (spell == null) {
             return false;
         }
+        FirstXSpellCastThisTurnWatcher watcher = game.getState().getWatcher(FirstXSpellCastThisTurnWatcher.class);
+        if (watcher == null || !spell.getId().equals(watcher.getFirstXSpellId(getControllerId()))) {
+            return false;
+        }
         int xValue = CardUtil.getSourceCostsTag(game, spell.getSpellAbility(), "X", 0);
-        if (xValue <= 0) {
-            return false;
-        }
-        Permanent nev = source.getSourcePermanentIfItStillExists(game);
-        if (nev == null) {
-            return false;
-        }
-        nev.addCounters(CounterType.P1P1.createInstance(xValue), source.getControllerId(), source, game);
-        return true;
+        getEffects().setValue("xValue", xValue);
+        return xValue > 0;
+    }
+
+    @Override
+    public NevTriggeredAbility copy() {
+        return new NevTriggeredAbility(this);
     }
 }
