@@ -23,6 +23,8 @@ public class WizardsPlayNetwork2026 extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Access Tunnel", 9, Rarity.RARE, mage.cards.a.AccessTunnel.class, RETRO_ART));
+        cards.add(new SetCardInfo("An Unexpected Party", 10, Rarity.RARE, mage.cards.a.AnUnexpectedParty.class));
+        cards.add(new SetCardInfo("Bilbo, Luckwearer", 11, Rarity.RARE, mage.cards.b.BilboLuckwearer.class));
         cards.add(new SetCardInfo("Courier of Comestibles", 6, Rarity.RARE, mage.cards.c.CourierOfComestibles.class));
         cards.add(new SetCardInfo("Farhaven Elf", 2, Rarity.RARE, mage.cards.f.FarhavenElf.class, RETRO_ART));
         cards.add(new SetCardInfo("Gilded Lotus", 3, Rarity.RARE, mage.cards.g.GildedLotus.class));
@@ -31,6 +33,7 @@ public class WizardsPlayNetwork2026 extends ExpansionSet {
         cards.add(new SetCardInfo("Nowhere to Run", 1, Rarity.RARE, mage.cards.n.NowhereToRun.class, RETRO_ART));
         cards.add(new SetCardInfo("Spicy Oatmeal Pizza", 7, Rarity.RARE, mage.cards.s.SpicyOatmealPizza.class));
         cards.add(new SetCardInfo("The Eternal Wanderer", 4, Rarity.RARE, mage.cards.t.TheEternalWanderer.class));
+        cards.add(new SetCardInfo("Tom, Bert, and William", 14, Rarity.RARE, mage.cards.t.TomBertAndWilliam.class));
         cards.add(new SetCardInfo("Wood Elves", 13, Rarity.RARE, mage.cards.w.WoodElves.class));
     }
 }
