@@ -6,12 +6,12 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.AttackedThisTurnOpponentsCount;
 import mage.abilities.effects.common.combat.GoadAllEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
-import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
+import mage.watchers.common.PlayersAttackedThisTurnWatcher;
 
 /**
  *
@@ -25,12 +25,14 @@ public final class FastForward extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}");
 
         // This spell costs {1} less to cast for each opponent you attacked this turn.
-        this.addAbility(new SimpleStaticAbility(
-            Zone.ALL,
-            new SpellCostReductionForEachSourceEffect(1, AttackedThisTurnOpponentsCount.instance)
+        this.addAbility(
+            new SimpleStaticAbility(
+                Zone.ALL,
+                new SpellCostReductionForEachSourceEffect(1, AttackedThisTurnOpponentsCount.instance)
                 .setText("this spell costs {1} less to cast for each opponent you attacked this turn")
-        )
-        .addHint(new ValueHint("Opponents you attacked this turn", AttackedThisTurnOpponentsCount.instance)));
+            ).addHint(AttackedThisTurnOpponentsCount.getHint()),
+            new PlayersAttackedThisTurnWatcher()
+        );
 
         // Goad all creatures your opponents control.
         this.getSpellAbility().addEffect(new GoadAllEffect(filter)
