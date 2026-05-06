@@ -7,8 +7,8 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.DoubleCountersTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.cards.CardImpl;
@@ -21,7 +21,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.SecondTargetPointer;
@@ -66,7 +65,7 @@ public final class KineticOoze extends CardImpl {
         ));
 
         ability.addEffect(new ConditionalOneShotEffect(
-            new KineticOozeDoubleCountersEffect(),
+            new DoubleCountersTargetEffect(CounterType.P1P1),
             new KineticOozeXOrMoreCondition(10),
             "If X is 10 or more, double the number of +1/+1 counters on any number of other target creatures"
         ).setTargetPointer(new SecondTargetPointer()));
@@ -128,41 +127,5 @@ enum KineticOozeTargetAdjuster implements TargetAdjuster {
             filter3.add(AnotherPredicate.instance);
             ability.addTarget(new TargetPermanent(0, Integer.MAX_VALUE, filter3));
         }
-    }
-}
-
-class KineticOozeDoubleCountersEffect extends OneShotEffect {
-
-    KineticOozeDoubleCountersEffect() {
-        super(Outcome.Benefit);
-        staticText = "double the number of +1/+1 counters on any number of other target creatures";
-    }
-
-    private KineticOozeDoubleCountersEffect(final KineticOozeDoubleCountersEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public KineticOozeDoubleCountersEffect copy() {
-        return new KineticOozeDoubleCountersEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
-            Permanent permanent = game.getPermanent(targetId);
-            if (permanent == null) {
-                continue;
-            }
-            int count = permanent.getCounters(game).getCount(CounterType.P1P1);
-            if (count > 0) {
-                permanent.addCounters(
-                    CounterType.P1P1.createInstance(count),
-                    source.getControllerId(),
-                    source, game
-                );
-            }
-        }
-        return true;
     }
 }

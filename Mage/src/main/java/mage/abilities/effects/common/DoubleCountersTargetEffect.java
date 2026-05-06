@@ -1,5 +1,6 @@
 package mage.abilities.effects.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -37,19 +38,24 @@ public class DoubleCountersTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent == null) {
-            return false;
+        boolean applied = false;
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(targetId);
+            if (permanent == null) {
+                continue;
+            }
+            if (counterType != null) {
+                permanent.addCounters(counterType.createInstance(
+                        permanent.getCounters(game).getCount(counterType)
+                ), source.getControllerId(), source, game);
+            } else {
+                for (Counter counter : permanent.getCounters(game).copy().values()) {
+                    permanent.addCounters(counter, source, game);
+                }
+            }
+            applied = true;
         }
-        if (counterType != null) {
-            return permanent.addCounters(counterType.createInstance(
-                    permanent.getCounters(game).getCount(counterType)
-            ), source.getControllerId(), source, game);
-        }
-        for (Counter counter : permanent.getCounters(game).copy().values()) {
-            permanent.addCounters(counter, source, game);
-        }
-        return true;
+        return applied;
     }
 
     @Override
