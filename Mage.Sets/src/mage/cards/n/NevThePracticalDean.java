@@ -92,7 +92,7 @@ class NevAddXCountersEffect extends OneShotEffect {
         if (xValue <= 0) {
             return false;
         }
-        Permanent nev = game.getPermanent(source.getSourceId());
+        Permanent nev = source.getSourcePermanentIfItStillExists(game);
         if (nev == null) {
             return false;
         }
