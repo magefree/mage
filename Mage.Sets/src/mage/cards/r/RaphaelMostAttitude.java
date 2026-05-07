@@ -46,7 +46,9 @@ public final class RaphaelMostAttitude extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // Alliance -- Whenever another creature you control enters, you may exile the top card of your library.
-        this.addAbility(new AllianceAbility(new ExileCardsFromTopOfLibraryControllerEffect(1, true)));
+        AllianceAbility allianceAbility = new AllianceAbility(new ExileCardsFromTopOfLibraryControllerEffect(1, true));
+        allianceAbility.setOptional(true);
+        this.addAbility(allianceAbility);
 
         // Whenever Raphael attacks, until end of turn, you may play a card exiled with Raphael.
         this.addAbility(new AttacksTriggeredAbility(new RaphaelMostAttitudeEffect(), false));
