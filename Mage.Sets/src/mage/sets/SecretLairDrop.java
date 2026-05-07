@@ -2344,9 +2344,9 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 2418, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 2419, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 2420, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Goblin Chieftain", 2424, Rarity.LAND, mage.cards.g.GoblinChieftain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Goblin Lackey", 2425, Rarity.LAND, mage.cards.g.GoblinLackey.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Vandalblast", 2426, Rarity.LAND, mage.cards.v.Vandalblast.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Goblin Chieftain", 2424, Rarity.RARE, mage.cards.g.GoblinChieftain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Goblin Lackey", 2425, Rarity.RARE, mage.cards.g.GoblinLackey.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vandalblast", 2426, Rarity.UNCOMMON, mage.cards.v.Vandalblast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lucy MacLean, Positively Armed", 2447, Rarity.MYTHIC, mage.cards.l.LucyMacLeanPositivelyArmed.class));
         cards.add(new SetCardInfo("The Ghoul, Gunslinger", 2448, Rarity.MYTHIC, mage.cards.t.TheGhoulGunslinger.class));
         cards.add(new SetCardInfo("Maximus, Knight Apparent", 2449, Rarity.MYTHIC, mage.cards.m.MaximusKnightApparent.class));
