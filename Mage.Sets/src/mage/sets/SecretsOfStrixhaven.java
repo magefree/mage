@@ -102,6 +102,8 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Embrace the Paradox", 186, Rarity.COMMON, mage.cards.e.EmbraceTheParadox.class));
         cards.add(new SetCardInfo("Emeritus of Abundance", 145, Rarity.MYTHIC, mage.cards.e.EmeritusOfAbundance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Emeritus of Abundance", 339, Rarity.MYTHIC, mage.cards.e.EmeritusOfAbundance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Emeritus of Conflict", 113, Rarity.MYTHIC, mage.cards.e.EmeritusOfConflict.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Emeritus of Conflict", 332, Rarity.MYTHIC, mage.cards.e.EmeritusOfConflict.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Emeritus of Ideation", 306, Rarity.MYTHIC, mage.cards.e.EmeritusOfIdeation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Emeritus of Ideation", 315, Rarity.MYTHIC, mage.cards.e.EmeritusOfIdeation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Emeritus of Ideation", 45, Rarity.MYTHIC, mage.cards.e.EmeritusOfIdeation.class, NON_FULL_USE_VARIOUS));
