@@ -1547,7 +1547,8 @@
 |TOK:SLD|Food|4|FoodToken|
 |TOK:SLD|Food|5|FoodToken|
 |TOK:SLD|Food|6|FoodToken|
-|TOK:SLD|Goblin||GoblinToken|
+|TOK:SLD|Goblin|1|GoblinToken|
+|TOK:SLD|Goblin|2|GoblinToken|
 |TOK:SLD|Hydra||ZaxaraTheExemplaryHydraToken|
 |TOK:SLD|Icingdeath, Frost Tongue||IcingdeathFrostTongueToken|
 |TOK:SLD|Marit Lage||MaritLageToken|
