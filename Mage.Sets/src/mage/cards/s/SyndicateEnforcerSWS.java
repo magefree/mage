@@ -1,25 +1,25 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,10 +55,8 @@ public final class SyndicateEnforcerSWS extends CardImpl {
 
 class SyndicateEnforcerTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final Effect effect = new CantBlockTargetEffect(Duration.EndOfTurn);
-
-    public SyndicateEnforcerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, effect, false);
+    SyndicateEnforcerTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new CantBlockTargetEffect(Duration.EndOfTurn), false);
     }
 
     private SyndicateEnforcerTriggeredAbility(final SyndicateEnforcerTriggeredAbility ability) {
@@ -80,6 +78,7 @@ class SyndicateEnforcerTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getData().equals(CounterType.BOUNTY.getName())) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
             if (permanent != null) {
+                getEffects().setTargetPointer(new FixedTarget(permanent.getId(), game));
                 return true;
             }
         }
@@ -88,6 +87,6 @@ class SyndicateEnforcerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a bounty counter is placed on a creature an opponents controls, that creature can't block this turn.";
+        return "Whenever a bounty counter is placed on a creature an opponent controls, that creature can't block this turn.";
     }
 }

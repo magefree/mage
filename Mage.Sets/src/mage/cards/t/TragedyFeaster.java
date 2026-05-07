@@ -39,7 +39,7 @@ public final class TragedyFeaster extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Ward--Discard a card.
-        this.addAbility(new WardAbility(new DiscardCardCost()));
+        this.addAbility(new WardAbility(new DiscardCardCost(), false));
 
         // Infusion -- At the beginning of your end step, sacrifice a permanent unless you gained life this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new ConditionalOneShotEffect(

@@ -94,4 +94,26 @@ public class StationTest extends CardTestPlayerBase {
         assertTapped(devils, true);
         checkSpacecraft(3);
     }
+
+    // https://github.com/magefree/mage/issues/14046
+    @Test
+    public void testEntropicBattlecruiser() {
+        addCard(Zone.BATTLEFIELD, playerA, "Entropic Battlecruiser");
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears");
+        addCard(Zone.HAND, playerA, "Specter's Wail");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.HAND, playerB, "Wastes"); // to discard
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Station");
+        setChoice(playerA, "Balduvian Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Specter's Wail");
+        addTarget(playerA, playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertLife(playerB, 17);
+    }
 }

@@ -7,7 +7,6 @@ use Scalar::Util qw(looks_like_number);
 
 my $dataFile = "mtg-cards-data.txt";
 my $setsFile = "mtg-sets-data.txt";
-my $knownSetsFile = "known-sets.txt";
 my $templateFile = "issue_tracker.tmpl";
 
 my %sets;
@@ -15,11 +14,11 @@ my %knownSets;
 
 my @setCards;
 
-open (DATA, $knownSetsFile) || die "can't open $knownSetsFile";
+open (DATA, $setsFile) || die "can't open $setsFile";
 while(my $line = <DATA>) {
     chomp $line;
     my @data = split('\\|', $line);
-    $knownSets{$data[0]} = $data[1];
+    $knownSets{$data[0]} = $data[2];
 }
 close(DATA);
 

@@ -18,7 +18,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -40,15 +40,27 @@ public final class HiredMuscle extends CardImpl {
         this.flipCard = true;
         this.flipCardName = "Scarmaker";
 
+        Ability ability = new SimpleActivatedAbility(
+            new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn),
+            new RemoveCountersSourceCost(CounterType.KI.createInstance())
+        );
+        ability.addTarget(new TargetCreaturePermanent());
+
+        CreatureToken flipToken = new CreatureToken(4, 4, "", SubType.SPIRIT)
+            .withName("Scarmaker")
+            .withSuperType(SuperType.LEGENDARY)
+            .withColor("B")
+            .withAbility(ability);
+
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Hired Muscle.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.KI.createInstance()),
-                StaticFilters.FILTER_SPELL_SPIRIT_OR_ARCANE, true
+            new AddCountersSourceEffect(CounterType.KI.createInstance()),
+            StaticFilters.FILTER_SPELL_SPIRIT_OR_ARCANE, true
         ));
 
         // At the beginning of the end step, if there are two or more ki counters on Hired Muscle, you may flip it.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                TargetController.NEXT, new FlipSourceEffect(new Scarmaker()).setText("flip it"), true, condition
+            TargetController.NEXT, new FlipSourceEffect(flipToken).setText("flip it"), true, condition
         ));
     }
 
@@ -59,33 +71,5 @@ public final class HiredMuscle extends CardImpl {
     @Override
     public HiredMuscle copy() {
         return new HiredMuscle(this);
-    }
-}
-
-class Scarmaker extends TokenImpl {
-
-    Scarmaker() {
-        super("Scarmaker", "");
-        this.supertype.add(SuperType.LEGENDARY);
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add(SubType.SPIRIT);
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-
-        // Remove a ki counter from Scarmaker: Target creature gains fear until end of turn.
-        Ability ability = new SimpleActivatedAbility(
-                new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn),
-                new RemoveCountersSourceCost(CounterType.KI.createInstance()));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
-    }
-
-    private Scarmaker(final Scarmaker token) {
-        super(token);
-    }
-
-    public Scarmaker copy() {
-        return new Scarmaker(this);
     }
 }

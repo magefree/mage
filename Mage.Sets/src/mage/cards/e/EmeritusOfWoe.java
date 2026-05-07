@@ -41,7 +41,7 @@ public final class EmeritusOfWoe extends PrepareCard {
         // Demonic Tutor
         // Sorcery {1}{B}
         // Search your library for a card, put that card into your hand, then shuffle.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false, true));
+        this.getSpellCard().getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false, true));
     }
 
     private EmeritusOfWoe(final EmeritusOfWoe card) {

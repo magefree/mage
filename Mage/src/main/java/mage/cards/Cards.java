@@ -24,15 +24,15 @@ public interface Cards extends Set<UUID>, Serializable, Copyable<Cards> {
      *
      * @param cardId UUID of the card to get
      * @param game   the current game
-     * @return       The Card corresponding to the UUID, or null if that UUID is not in the set
+     * @return The Card corresponding to the UUID, or null if that UUID is not in the set
      */
     Card get(UUID cardId, Game game);
 
     /**
      * Remove a specific card from the set in a safe manner.
      *
-     * @param card  the card to remove from this set
-     * @return      boolean indicating if removing the card was done successfully
+     * @param card the card to remove from this set
+     * @return boolean indicating if removing the card was done successfully
      */
     boolean remove(Card card);
 
@@ -42,7 +42,9 @@ public interface Cards extends Set<UUID>, Serializable, Copyable<Cards> {
 
     /**
      * Warning: this method ignores ObjectSourcePlayer predicates in the filter
+     * Use the 4-argument one when in doubt.
      */
+    @Deprecated
     Set<Card> getCards(FilterCard filter, Game game);
 
     Set<Card> getCards(FilterCard filter, UUID playerId, Ability source, Game game);
@@ -52,8 +54,8 @@ public interface Cards extends Set<UUID>, Serializable, Copyable<Cards> {
     /**
      * Get a collection view of the unique non-null cards in this set.
      *
-     * @param game  The current game
-     * @return      Collection of unique non-null cards.
+     * @param game The current game
+     * @return Collection of unique non-null cards.
      */
     Collection<Card> getUniqueCards(Game game);
 

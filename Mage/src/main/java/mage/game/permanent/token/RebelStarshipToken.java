@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class RebelStarshipToken extends TokenImpl {
 
     public RebelStarshipToken() {
-        super("B-Wing Token", "2/3 blue Rebel Starship artifact creature tokens with spaceflight name B-Wing");
+        super("B-Wing Token", "2/3 blue Rebel Starship artifact creature tokens with spaceflight named B-Wing");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         cardType.add(CardType.ARTIFACT);

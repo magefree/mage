@@ -41,7 +41,7 @@ public class SneakAbility extends SpellAbility {
         this.clearManaCosts();
         this.clearManaCostsToPay();
         this.addCost(new ManaCostsImpl<>(manaString));
-        this.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)));
+        this.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)).setText(""));
 
         this.setRuleAtTheTop(true);
     }

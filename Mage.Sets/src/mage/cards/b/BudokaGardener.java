@@ -18,7 +18,7 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.DokaiWeaverofLifeToken;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -79,7 +79,16 @@ class BudokaGardenerEffect extends OneShotEffect {
             return false;
         }
 
-        return new FlipSourceEffect(new DokaiWeaverofLife()).apply(game, source);
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new DokaiWeaverofLifeToken()), new ManaCostsImpl<>("{4}{G}{G}"));
+        ability.addCost(new TapSourceCost());
+
+        CreatureToken flipToken = new CreatureToken(3, 3, "", SubType.HUMAN, SubType.MONK)
+            .withName("Dokai, Weaver of Life")
+            .withColor("G")
+            .withSuperType(SuperType.LEGENDARY)
+            .withAbility(ability);
+
+        return new FlipSourceEffect(flipToken).apply(game, source);
     }
 
     @Override
@@ -87,30 +96,4 @@ class BudokaGardenerEffect extends OneShotEffect {
         return new BudokaGardenerEffect(this);
     }
 
-}
-
-class DokaiWeaverofLife extends TokenImpl {
-
-    DokaiWeaverofLife() {
-        super("Dokai, Weaver of Life", "");
-        this.supertype.add(SuperType.LEGENDARY);
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add(SubType.HUMAN, SubType.MONK);
-        power = new MageInt(3);
-        toughness = new MageInt(3);
-
-        // {4}{G}{G}, {T}: Create an X/X green Elemental creature token, where X is the number of lands you control.
-        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new DokaiWeaverofLifeToken()), new ManaCostsImpl<>("{4}{G}{G}"));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
-    }
-
-    private DokaiWeaverofLife(final DokaiWeaverofLife token) {
-        super(token);
-    }
-
-    public DokaiWeaverofLife copy() {
-        return new DokaiWeaverofLife(this);
-    }
 }

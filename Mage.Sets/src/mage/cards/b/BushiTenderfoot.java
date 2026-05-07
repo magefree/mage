@@ -11,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 import java.util.UUID;
 
@@ -29,8 +29,15 @@ public final class BushiTenderfoot extends CardImpl {
         this.flipCard = true;
         this.flipCardName = "Kenzo the Hardhearted";
 
+        CreatureToken flipToken = new CreatureToken(3, 4, "", SubType.HUMAN, SubType.SAMURAI)
+            .withName("Kenzo the Hardhearted")
+            .withSuperType(SuperType.LEGENDARY)
+            .withColor("W")
+            .withAbility(DoubleStrikeAbility.getInstance())
+            .withAbility(new BushidoAbility(2));
+
         // When a creature dealt damage by Bushi Tenderfoot this turn dies, flip Bushi Tenderfoot.
-        Effect effect = new FlipSourceEffect(new KenzoTheHardhearted());
+        Effect effect = new FlipSourceEffect(flipToken);
         effect.setText("flip {this}");
         this.addAbility(new DealtDamageAndDiedTriggeredAbility(effect));
     }
@@ -42,30 +49,5 @@ public final class BushiTenderfoot extends CardImpl {
     @Override
     public BushiTenderfoot copy() {
         return new BushiTenderfoot(this);
-    }
-}
-
-class KenzoTheHardhearted extends TokenImpl {
-
-    KenzoTheHardhearted() {
-        super("Kenzo the Hardhearted", "");
-        this.supertype.add(SuperType.LEGENDARY);
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add(SubType.HUMAN, SubType.SAMURAI);
-        power = new MageInt(3);
-        toughness = new MageInt(4);
-
-        // Double strike; bushido 2 (When this blocks or becomes blocked, it gets +2/+2 until end of turn.)
-        this.addAbility(DoubleStrikeAbility.getInstance());
-        this.addAbility(new BushidoAbility(2));
-    }
-
-    private KenzoTheHardhearted(final KenzoTheHardhearted token) {
-        super(token);
-    }
-
-    public KenzoTheHardhearted copy() {
-        return new KenzoTheHardhearted(this);
     }
 }

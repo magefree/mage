@@ -49,8 +49,12 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Cackling Slasher", 85, Rarity.COMMON, mage.cards.c.CacklingSlasher.class));
         cards.add(new SetCardInfo("Cathartic Parting", 171, Rarity.UNCOMMON, mage.cards.c.CatharticParting.class));
         cards.add(new SetCardInfo("Cautious Survivor", 172, Rarity.COMMON, mage.cards.c.CautiousSurvivor.class));
+        cards.add(new SetCardInfo("Central Elevator // Promising Stairs", 44, Rarity.RARE, mage.cards.c.CentralElevatorPromisingStairs.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Central Elevator // Promising Stairs", 336, Rarity.RARE, mage.cards.c.CentralElevatorPromisingStairs.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chainsaw", 128, Rarity.RARE, mage.cards.c.Chainsaw.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chainsaw", 314, Rarity.RARE, mage.cards.c.Chainsaw.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Charred Foyer // Warped Space", 340, Rarity.MYTHIC, mage.cards.c.CharredFoyerWarpedSpace.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Charred Foyer // Warped Space", 129, Rarity.MYTHIC, mage.cards.c.CharredFoyerWarpedSpace.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Clammy Prowler", 45, Rarity.COMMON, mage.cards.c.ClammyProwler.class));
         cards.add(new SetCardInfo("Clockwork Percussionist", 130, Rarity.COMMON, mage.cards.c.ClockworkPercussionist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Clockwork Percussionist", 295, Rarity.COMMON, mage.cards.c.ClockworkPercussionist.class, NON_FULL_USE_VARIOUS));

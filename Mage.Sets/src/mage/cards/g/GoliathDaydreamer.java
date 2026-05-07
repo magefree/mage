@@ -76,7 +76,7 @@ class GoliathDaydreamerExileEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Spell sourceSpell = game.getSpell(getTargetPointer().getFirst(game, source));
-        if (sourceSpell == null || sourceSpell.isCopy()) {
+        if (sourceSpell == null || !sourceSpell.wasCast()) {
             return false;
         }
         Player player = game.getPlayer(sourceSpell.getOwnerId());

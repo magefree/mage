@@ -3,6 +3,7 @@ package mage.client.components;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
 import mage.cards.decks.DeckValidatorError;
+import org.mage.card.arcane.ManaSymbols;
 import org.unbescape.html.HtmlEscape;
 import org.unbescape.html.HtmlEscapeLevel;
 import org.unbescape.html.HtmlEscapeType;
@@ -100,6 +101,10 @@ public class LegalityLabel extends JLabel {
         return HtmlEscape.escapeHtml(string, HtmlEscapeType.HTML4_NAMED_REFERENCES_DEFAULT_TO_HEXA, HtmlEscapeLevel.LEVEL_0_ONLY_MARKUP_SIGNIFICANT_EXCEPT_APOS);
     }
 
+    protected String formatTooltipText(String string) {
+        return ManaSymbols.replaceSymbolsWithHTML(escapeHtml(string), ManaSymbols.Type.TOOLTIP);
+    }
+
     protected String formatInvalidTooltip(java.util.List<DeckValidatorError> sortedErrorsList) {
         return sortedErrorsList.stream()
                 .reduce("<html><body>"
@@ -107,7 +112,7 @@ public class LegalityLabel extends JLabel {
                                 + "<u>The following problems have been found (click to select problem cards):</u>"
                                 + "<br>"
                                 + "<table style=\"table-layout: fixed; width: " + TOOLTIP_TABLE_WIDTH + "px\">",
-                        (str, error) -> String.format("%s<tr><td style=\"word-wrap: break-word\"><b>%s</b></td><td style=\"word-wrap: break-word\">%s</td></tr>", str, escapeHtml(error.getGroup()), escapeHtml(error.getMessage())), String::concat)
+                (str, error) -> String.format("%s<tr><td style=\"word-wrap: break-word\"><b>%s</b></td><td style=\"word-wrap: break-word\">%s</td></tr>", str, formatTooltipText(error.getGroup()), formatTooltipText(error.getMessage())), String::concat)
                 + "</table>"
                 + "</body></html>";
     }
@@ -119,7 +124,7 @@ public class LegalityLabel extends JLabel {
                                 + "<u>The following problems have been found (click to select problem cards):</u>"
                                 + "<br>"
                                 + "<table style=\"table-layout: fixed; width: " + TOOLTIP_TABLE_WIDTH + "px\">",
-                        (str, error) -> String.format("%s<tr><td style=\"word-wrap: break-word\"><b>%s</b></td><td style=\"word-wrap: break-word\">%s</td></tr>", str, escapeHtml(error.getGroup()), escapeHtml(error.getMessage())), String::concat)
+                (str, error) -> String.format("%s<tr><td style=\"word-wrap: break-word\"><b>%s</b></td><td style=\"word-wrap: break-word\">%s</td></tr>", str, formatTooltipText(error.getGroup()), formatTooltipText(error.getMessage())), String::concat)
                 + "</table>"
                 + "</body></html>";
     }

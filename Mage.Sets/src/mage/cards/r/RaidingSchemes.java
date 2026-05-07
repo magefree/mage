@@ -65,7 +65,7 @@ class GainConspireEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         for (StackObject stackObject : game.getStack()) {
             // only spells cast, so no copies of spells
-            if (!(stackObject instanceof Spell) || stackObject.isCopy()
+            if (!(stackObject instanceof Spell) || !((Spell)stackObject).wasCast()
                     || !stackObject.isControlledBy(source.getControllerId())) {
                 continue;
             }

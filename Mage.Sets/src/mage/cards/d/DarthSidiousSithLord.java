@@ -53,8 +53,8 @@ public final class DarthSidiousSithLord extends CardImpl {
         // -9: Darth Sidious deals 7 damage to target player. That player discards seven cards, then sacrificies seven permanents.
         ability = new LoyaltyAbility(new DamageTargetEffect(7), -9);
         ability.addTarget(new TargetPlayer());
-        ability.addEffect(new DiscardTargetEffect(7));
-        ability.addEffect(new SacrificeEffect(new FilterPermanent(), 7, "then"));
+        ability.addEffect(new DiscardTargetEffect(7).withTargetDescription("That player"));
+        ability.addEffect(new SacrificeEffect(new FilterPermanent(), 7, ", then"));
         this.addAbility(ability);
     }
 

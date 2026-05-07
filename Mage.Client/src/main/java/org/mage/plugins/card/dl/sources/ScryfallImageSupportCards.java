@@ -628,6 +628,8 @@ public class ScryfallImageSupportCards {
             add("SOA"); // Secrets of Strixhaven Mystical Archive
             add("MSH"); // Marvel Super Heroes
             add("MSC"); // Marvel Super Heroes Commander
+            add("HOC"); // The Hobbit Commander
+            add("FRA"); // Reality Fracture
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards

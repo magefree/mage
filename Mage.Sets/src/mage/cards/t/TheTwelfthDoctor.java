@@ -81,11 +81,12 @@ class TheTwelfthDoctorGainDemonstrateEffect extends ContinuousEffectImpl {
 
         for (StackObject stackObject : game.getStack()) {
             if ((stackObject instanceof Spell)
-                    && !stackObject.isCopy()
                     && stackObject.isControlledBy(source.getControllerId())) {
                 Spell spell = (Spell) stackObject;
-                if (FirstSpellCastFromNotHandEachTurnCondition.instance.apply(game, source)) {
-                    game.getState().addOtherAbility(spell.getCard(), new DemonstrateAbility());
+                if (spell.wasCast()) {
+                    if (FirstSpellCastFromNotHandEachTurnCondition.instance.apply(game, source)) {
+                        game.getState().addOtherAbility(spell.getCard(), new DemonstrateAbility());
+                    }
                 }
             }
         }

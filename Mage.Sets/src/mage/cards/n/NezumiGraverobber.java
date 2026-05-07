@@ -17,12 +17,10 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
@@ -75,13 +73,26 @@ class NezumiGraverobberFlipEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (card != null) {
-            Player player = game.getPlayer(card.getOwnerId());
-            if (player != null) {
-                if (player.getGraveyard().isEmpty()) {
-                    return new FlipSourceEffect(new NighteyesTheDesecratorToken()).apply(game, source);
-                }
-            }
+        if (card == null) {
+            return false;
+        }
+
+        Player player = game.getPlayer(card.getOwnerId());
+        if (player == null) {
+            return false;
+        }
+
+        if (player.getGraveyard().isEmpty()) {
+            Ability ability = new SimpleActivatedAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{4}{B}"));
+            ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
+
+            CreatureToken flipToken = new CreatureToken(4, 2, "", SubType.RAT, SubType.WIZARD)
+                .withName("Nighteyes the Desecrator")
+                .withSuperType(SuperType.LEGENDARY)
+                .withColor("B")
+                .withAbility(ability);
+
+            return new FlipSourceEffect(flipToken).apply(game, source);
         }
         return false;
     }
@@ -91,29 +102,4 @@ class NezumiGraverobberFlipEffect extends OneShotEffect {
         return new NezumiGraverobberFlipEffect(this);
     }
 
-}
-
-class NighteyesTheDesecratorToken extends TokenImpl {
-    
-    NighteyesTheDesecratorToken() {            
-        super("Nighteyes the Desecrator", "");
-       this.supertype.add(SuperType.LEGENDARY);
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add(SubType.RAT);
-        subtype.add(SubType.WIZARD);
-        power = new MageInt(4);
-        toughness = new MageInt(2);
-        // {4}{B}: Put target creature card from a graveyard onto the battlefield under your control.
-        Ability ability = new SimpleActivatedAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{4}{B}"));
-        ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
-        this.addAbility(ability);
-    }
-    private NighteyesTheDesecratorToken(final NighteyesTheDesecratorToken token) {
-        super(token);
-    }
-
-    public NighteyesTheDesecratorToken copy() {
-        return new NighteyesTheDesecratorToken(this);
-    }
 }

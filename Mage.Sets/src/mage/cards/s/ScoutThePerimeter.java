@@ -1,8 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
@@ -12,6 +9,8 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponentsCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,9 +25,8 @@ public final class ScoutThePerimeter extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterLandCard()), true));
 
         // Put a bounty counter on up to one target creature an opponent controls.
-        Effect effect = new AddCountersTargetEffect(CounterType.BOUNTY.createInstance());
-        effect.setText("Put a bounty counter on up to one target creature an opponent controls");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.BOUNTY.createInstance())
+                .concatBy("<br>"));
         this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent(0, 1));
     }
 

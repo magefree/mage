@@ -4,7 +4,6 @@ use strict;
 
 my $dataFile = 'mtg-cards-data.txt';
 my $setsFile = 'mtg-sets-data.txt';
-my $knownSetsFile = 'known-sets.txt';
 
 my $cards_count = 0;
 
@@ -34,10 +33,10 @@ while(my $line = <DATA>) {
 }
 close(DATA);
 
-open (DATA, $knownSetsFile) || die "can't open $knownSetsFile";
+open (DATA, $setsFile) || die "can't open $setsFile";
 while(my $line = <DATA>) {
     my @data = split('\\|', $line);
-    $knownSets{$data[1]}= $data[0];
+    $knownSets{$data[2]}= $data[0];
 }
 close(DATA);
 

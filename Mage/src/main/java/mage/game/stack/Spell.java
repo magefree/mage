@@ -848,7 +848,7 @@ public class Spell extends StackObjectImpl implements Card {
         Card copiedPart = (Card) mapOldToNew.get(this.card.getId());
 
         // copy spell
-        Spell spellCopy = new Spell(copiedPart, this.ability.copySpell(this.card, copiedPart), this.controllerId, this.fromZone, game, true);
+        Spell spellCopy = new Spell(copiedPart, this.ability.copySpell(this.card, copiedPart), this.controllerId, Zone.STACK, game, true);
         UUID copiedSourceId = spellCopy.ability.getSourceId();
 
         // non-fused spell:
@@ -1006,6 +1006,15 @@ public class Spell extends StackObjectImpl implements Card {
 
     public Zone getFromZone() {
         return this.fromZone;
+    }
+
+    // If fromZone is STACK, then spell was a copy created on stack, not cast
+    public boolean wasCast() {
+        return !this.fromZone.match(Zone.STACK);
+    }
+
+    public boolean wasCastFrom(Zone zone) {
+        return this.wasCast() && this.fromZone.match(zone);
     }
 
     @Override

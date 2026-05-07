@@ -1,20 +1,19 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.cost.AbilitiesCostReductionControllerEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,10 +31,10 @@ public final class NerfHerder extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(MonstrosityAbility.class, "Monstrosity")));
 
         // Each creature you control with a +1/+1 counter on it has trample.
-        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 TrampleAbility.getInstance(),
                 Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1))
+                StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1))
         );
     }
 

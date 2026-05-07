@@ -82,7 +82,7 @@ class JinSakaiGhostOfTsushimaTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
+        Permanent permanent = game.getPermanent(event.getSourceId());
         if (permanent == null
                 || !permanent.isControlledBy(getControllerId())
                 || game.getPlayer(game.getCombat().getDefenderId(permanent.getId())) == null) {

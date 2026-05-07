@@ -8,13 +8,29 @@ use strict;
 my $authorFile = 'author.txt';
 my $dataFile = 'mtg-cards-data.txt';
 my $setsFile = 'mtg-sets-data.txt';
-my $knownSetsFile = 'known-sets.txt';
 my $keywordsFile = 'keywords.txt';
 
 my %cards;
 my %sets;
 my %knownSets;
 my %keywords;
+
+sub parseCardDataLine {
+    my ($line, $lineNumber) = @_;
+    chomp $line;
+    my @data = split('\|', $line, -1);
+
+    if (@data == 10 && $data[9] eq '') {
+        pop @data;
+    }
+
+    if (@data != 9) {
+        die "$dataFile line $lineNumber has " . scalar(@data)
+            . " pipe-separated fields; expected 9: $line\n";
+    }
+
+    return @data;
+}
 
 sub toCamelCase {
     my $string = $_[0];
@@ -43,7 +59,11 @@ if (-e $authorFile) {
 open(DATA, $dataFile) || die "can't open $dataFile : $!";
 while (my $line = <DATA>) {
     my @data = split('\\|', $line);
-    $cards{$data[0]}{$data[1]}{$data[2]} = \@data;
+    $cards{$data[0]}{$data[1]}{$data[2]} = {
+        data => [@data],
+        line => $line,
+        lineNumber => $.
+    };
 }
 close(DATA);
 
@@ -55,10 +75,10 @@ while (my $line = <DATA>) {
 }
 close(DATA);
 
-open(DATA, $knownSetsFile) || die "can't open $knownSetsFile : $!";
+open(DATA, $setsFile) || die "can't open $setsFile : $!";
 while (my $line = <DATA>) {
     my @data = split('\\|', $line);
-    $knownSets{$data[0]} = $data[1];
+    $knownSets{$data[0]} = $data[2];
 }
 close(DATA);
 
@@ -141,7 +161,8 @@ foreach my $setName (keys %{$cards{$originalName}}) {
     }
     foreach my $cardNumber (sort keys %{$cards{$originalName}{$setName}}) {
         my $setFileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . ".java";
-        @card = @{${cards {$originalName}{ $setName }{$cardNumber}}};
+        my $cardData = $cards{$originalName}{$setName}{$cardNumber};
+        @card = parseCardDataLine($cardData->{line}, $cardData->{lineNumber});
         my $line = "        cards.add(new SetCardInfo(\"" . $card[0] . "\", " . $card[2] . ", Rarity." . $raritiesConversion{$card[3]} . ", mage.cards." . $vars{'cardNameFirstLetter'} . "." . $vars{'className'} . ".class" . $printingString . "));\n";
         @ARGV = ($setFileName);
         $^I = '.bak';

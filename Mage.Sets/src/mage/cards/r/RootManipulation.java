@@ -31,7 +31,7 @@ public final class RootManipulation extends CardImpl {
         ).setText("Until end of turn, creatures you control get +2/+2"));
         this.getSpellAbility().addEffect(
             new GainAbilityControlledEffect(
-                new MenaceAbility(false),
+                new MenaceAbility(true),
                 Duration.EndOfTurn,
                 StaticFilters.FILTER_CONTROLLED_CREATURE
             ).setText("and gain menace")

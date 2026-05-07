@@ -29,7 +29,7 @@ public final class ColorstormStallion extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Ward {1}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}"), false));
 
         // Haste
         this.addAbility(HasteAbility.getInstance());

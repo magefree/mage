@@ -25,12 +25,12 @@ public final class AcquireTarget extends CardImpl {
         // Target player draws two cards and loses 2 life. 
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));
-        this.getSpellAbility().addEffect(new LoseLifeTargetEffect(2).concatBy("and"));
+        this.getSpellAbility().addEffect(new LoseLifeTargetEffect(2).withTargetDescription("and"));
 
         // Put a bounty counter on up to one target creature an opponent controls.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.BOUNTY.createInstance())
                 .setTargetPointer(new SecondTargetPointer())
-                .setText("Put a bounty counter on up to one target creature an opponent controls."));
+                .setText("<br>Put a bounty counter on up to one target creature an opponent controls."));
         this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent(0, 1));
     }
 

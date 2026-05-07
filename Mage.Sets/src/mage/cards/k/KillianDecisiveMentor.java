@@ -84,6 +84,6 @@ class KillianDecisiveMentorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getBattlefield().contains(filter, event.getPlayerId(), this, game, 1);
+        return game.getBattlefield().contains(filter, getControllerId(), this, game, 1);
     }
 }

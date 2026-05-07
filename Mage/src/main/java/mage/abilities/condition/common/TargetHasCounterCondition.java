@@ -67,6 +67,6 @@ public class TargetHasCounterCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if it has a " + counterType.getName() + " on it";
+        return "if it has a " + counterType.getName() + "counter on it";
     }
 }

@@ -21,11 +21,10 @@ import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.SnakeToken;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,11 +42,22 @@ public final class OrochiEggwatcher extends CardImpl {
         this.flipCard = true;
         this.flipCardName = "Shidako, Broodmistress";
 
+        Ability flipAbility = new SimpleActivatedAbility(
+            new BoostTargetEffect(3, 3, Duration.EndOfTurn),
+            new ManaCostsImpl<>("{G}"));
+        flipAbility.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
+        flipAbility.addTarget(new TargetCreaturePermanent());
+
+        CreatureToken flipToken = new CreatureToken(3, 3, "", SubType.SNAKE, SubType.SHAMAN)
+                .withName("Shidako, Broodmistress")
+                .withSuperType(SuperType.LEGENDARY)
+                .withColor("G")
+                .withAbility(flipAbility);
+
         // {2}{G}, {T}: Create a 1/1 green Snake creature token. If you control ten or more creatures, flip Orochi Eggwatcher.
-        Ability ability;
-        ability = new SimpleActivatedAbility(new CreateTokenEffect(new SnakeToken()), new ManaCostsImpl<>("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new SnakeToken()), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new ConditionalOneShotEffect(new FlipSourceEffect(new ShidakoBroodmistress()),
+        ability.addEffect(new ConditionalOneShotEffect(new FlipSourceEffect(flipToken),
                 new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent(), ComparisonType.MORE_THAN, 9), "If you control ten or more creatures, flip {this}"));
         this.addAbility(ability.addHint(new ValueHint("Creatures you control", new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE))));
     }
@@ -59,34 +69,5 @@ public final class OrochiEggwatcher extends CardImpl {
     @Override
     public OrochiEggwatcher copy() {
         return new OrochiEggwatcher(this);
-    }
-}
-
-class ShidakoBroodmistress extends TokenImpl {
-
-    ShidakoBroodmistress() {
-        super("Shidako, Broodmistress", "");
-        this.supertype.add(SuperType.LEGENDARY);
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add(SubType.SNAKE);
-        subtype.add(SubType.SHAMAN);
-        power = new MageInt(3);
-        toughness = new MageInt(3);
-        // {G}, Sacrifice a creature: Target creature gets +3/+3 until end of turn.
-        Ability ability;
-        ability = new SimpleActivatedAbility(
-                new BoostTargetEffect(3, 3, Duration.EndOfTurn),
-                new ManaCostsImpl<>("{G}"));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
-    }
-    private ShidakoBroodmistress(final ShidakoBroodmistress token) {
-        super(token);
-    }
-
-    public ShidakoBroodmistress copy() {
-        return new ShidakoBroodmistress(this);
     }
 }

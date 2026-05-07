@@ -27,7 +27,6 @@ public final class BottomlessPoolLockerRoom extends RoomCard {
         // Whenever one or more creatures you control deal combat damage to a player, draw a card.
         super(ownerId, setInfo,
                 "{U}", "{4}{U}");
-        this.subtype.add(SubType.ROOM);
 
         // Left half ability - "When you unlock this door, return up to one target creature to its owner’s hand."
         UnlockThisDoorTriggeredAbility left = new UnlockThisDoorTriggeredAbility(

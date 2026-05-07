@@ -4,11 +4,9 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
 import mage.watchers.common.CardsLeftGraveyardWatcher;
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.CardLeftYourGraveyardThisTurnCondition;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
@@ -39,7 +37,7 @@ public final class RelicRetriever extends CardImpl {
                 TargetController.ANY,
                 new CreateTokenEffect(new TreasureToken()),
                 false,
-                RelicRetrieverCondition.instance
+                CardLeftYourGraveyardThisTurnCondition.instance
             ),
             new CardsLeftGraveyardWatcher()
         );
@@ -52,23 +50,5 @@ public final class RelicRetriever extends CardImpl {
     @Override
     public RelicRetriever copy() {
         return new RelicRetriever(this);
-    }
-}
-
-enum RelicRetrieverCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return !game
-            .getState()
-            .getWatcher(CardsLeftGraveyardWatcher.class)
-            .getCardsThatLeftGraveyard(source.getControllerId(), game)
-            .isEmpty();
-    }
-
-    @Override
-    public String toString() {
-        return "if a card left your graveyard this turn";
     }
 }
