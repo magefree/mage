@@ -114,9 +114,13 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dirgur Focusmage", 68, Rarity.RARE, mage.cards.d.DirgurFocusmage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doomwake Giant", 212, Rarity.RARE, mage.cards.d.DoomwakeGiant.class));
         cards.add(new SetCardInfo("Drumbellower", 143, Rarity.RARE, mage.cards.d.Drumbellower.class));
+        cards.add(new SetCardInfo("Eccentric Pestfinder", 46, Rarity.RARE, mage.cards.e.EccentricPestfinder.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Eccentric Pestfinder", 94, Rarity.RARE, mage.cards.e.EccentricPestfinder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eclipsed Steppe", 101, Rarity.RARE, mage.cards.e.EclipsedSteppe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eclipsed Steppe", 53, Rarity.RARE, mage.cards.e.EclipsedSteppe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eidolon of Countless Battles", 144, Rarity.RARE, mage.cards.e.EidolonOfCountlessBattles.class));
+        cards.add(new SetCardInfo("Eiganjo Dynastorian", 13, Rarity.RARE, mage.cards.e.EiganjoDynastorian.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Eiganjo Dynastorian", 63, Rarity.RARE, mage.cards.e.EiganjoDynastorian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eldrazi Conscription", 131, Rarity.RARE, mage.cards.e.EldraziConscription.class));
         cards.add(new SetCardInfo("Elementalist's Palette", 346, Rarity.RARE, mage.cards.e.ElementalistsPalette.class));
         cards.add(new SetCardInfo("Elusive Otter", 306, Rarity.RARE, mage.cards.e.ElusiveOtter.class));
