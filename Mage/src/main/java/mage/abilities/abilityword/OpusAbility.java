@@ -25,7 +25,7 @@ public class OpusAbility extends SpellCastControllerTriggeredAbility {
         super(null, StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false);
         if (doInstead) {
             this.addEffect(new ConditionalOneShotEffect(
-                    wrapEffect(mainEffect), wrapEffect(extraEffect), OpusCondition.instance, text
+                    wrapEffect(extraEffect), wrapEffect(mainEffect), OpusCondition.instance, text
             ));
         } else {
             this.addEffect(mainEffect);
