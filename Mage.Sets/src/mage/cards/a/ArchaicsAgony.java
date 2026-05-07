@@ -27,7 +27,7 @@ public final class ArchaicsAgony extends CardImpl {
         // Converge -- Archaic's Agony deals X damage to target creature, where X is the number of colors of mana spent to cast this spell. Exile cards from the top of your library equal to the excess damage dealt to that creature this way. You may play those cards until the end of your next turn.
         this.getSpellAbility().addEffect(new ArchaicsAgonyEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
+        this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE).addHint(ColorsOfManaSpentToCastCount.getHint());
     }
 
     private ArchaicsAgony(final ArchaicsAgony card) {

@@ -28,7 +28,7 @@ public final class ExertInfluence extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");
 
         // <i>Converge</i>-Gain control of target creature if its power is less than or equal to the number of colors spent to cast Exert Influence.
-        getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
+        getSpellAbility().setAbilityWord(AbilityWord.CONVERGE).addHint(ColorsOfManaSpentToCastCount.getHint());
         getSpellAbility().addEffect(new ExertInfluenceEffect());
         getSpellAbility().addTarget(new TargetCreaturePermanent());
 

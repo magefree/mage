@@ -52,6 +52,7 @@ public final class WildgrowthArchaic extends CardImpl {
             ), null, AbilityWord.CONVERGE.formatWord() + "{this} enters with a +1/+1 counter " +
             "on it for each color of mana spent to cast it.", null
         ));
+        this.getSpellAbility().addHint(ColorsOfManaSpentToCastCount.getHint());
 
         // Whenever you cast a creature spell, that creature enters with X additional +1/+1
         // counters on it, where X is the number of colors of mana spent to cast it.
@@ -59,7 +60,7 @@ public final class WildgrowthArchaic extends CardImpl {
             new WildgrowthArchaicEffect(),
             StaticFilters.FILTER_SPELL_A_CREATURE,
             false, SetTargetPointer.SPELL
-        ));
+        ).addHint(ColorsOfManaSpentToCastCount.getHint()));
 
     }
 

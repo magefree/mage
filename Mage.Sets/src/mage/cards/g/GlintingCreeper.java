@@ -34,6 +34,7 @@ public final class GlintingCreeper extends CardImpl {
                 CounterType.P1P1.createInstance(), xValue, true
         ), null, "<i>Converge</i> &mdash; {this} enters " +
                 "with two +1/+1 counters on it for each color of mana spent to cast it.", null));
+        this.getSpellAbility().addHint(ColorsOfManaSpentToCastCount.getHint());
 
         // Glinting Creeper can't be blocked by creatures with power 2 or less.
         this.addAbility(new DauntAbility());

@@ -49,7 +49,7 @@ public final class SunderingArchaic extends CardImpl {
         // Converge -- When this creature enters, exile target nonland permanent an opponent controls with mana value less than or equal to the number of colors of mana spent to cast this creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect());
         ability.addTarget(new TargetPermanent(filter));
-        ability.setAbilityWord(AbilityWord.CONVERGE);
+        ability.setAbilityWord(AbilityWord.CONVERGE).addHint(ColorsOfManaSpentToCastCount.getHint());
         this.addAbility(ability);
 
         // {2}: Put target card from a graveyard on the bottom of its owner's library.

@@ -51,12 +51,13 @@ public final class MagmabloodArchaic extends CardImpl {
             ), null, AbilityWord.CONVERGE.formatWord() + "{this} enters with a +1/+1 counter " +
             "on it for each color of mana spent to cast it.", null
         ));
+        this.getSpellAbility().addHint(ColorsOfManaSpentToCastCount.getHint());
 
         // Whenever you cast an instant or sorcery spell, creatures you control get +1/+0 until end of turn for each color of mana spent to cast that spell.
         this.addAbility(new SpellCastControllerTriggeredAbility(
             new BoostControlledEffect(MagmabloodArchaicManaSpentValue.instance, StaticValue.get(0), Duration.EndOfTurn),
             StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
-        ));
+        ).addHint(ColorsOfManaSpentToCastCount.getHint()));
     }
 
     private MagmabloodArchaic(final MagmabloodArchaic card) {

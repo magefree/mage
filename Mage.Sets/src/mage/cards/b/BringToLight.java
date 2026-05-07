@@ -29,7 +29,7 @@ public final class BringToLight extends CardImpl {
         // cost less than or equal to the number of colors of mana spent to cast Bring to Light, exile that card,
         // then shuffle your library. You may cast that card without paying its mana cost.
         this.getSpellAbility().addEffect(new BringToLightEffect());
-        this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
+        this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE).addHint(ColorsOfManaSpentToCastCount.getHint());
     }
 
     private BringToLight(final BringToLight card) {

@@ -40,6 +40,7 @@ public final class RancorousArchaic extends CardImpl {
                 ), null, AbilityWord.CONVERGE.formatWord() + "{this} enters with a +1/+1 counter " +
                 "on it for each color of mana spent to cast it.", null
         ));
+        this.getSpellAbility().addHint(ColorsOfManaSpentToCastCount.getHint());
     }
 
     private RancorousArchaic(final RancorousArchaic card) {
