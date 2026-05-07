@@ -3,7 +3,6 @@ package mage.cards.s;
 import java.util.UUID;
 
 import mage.abilities.Mode;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamageWithPowerFromOneToAnotherTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
@@ -52,8 +51,7 @@ public final class SpecialMove extends CardImpl {
 
         // * Dash Attack -- Put two +1/+1 counters on target attacking or blocking creature you control.
         this.getSpellAbility().addMode(new Mode(new AddCountersTargetEffect(
-            CounterType.P1P1.createInstance(),
-            StaticValue.get(2)
+            CounterType.P1P1.createInstance(2)
         )).addTarget(new TargetPermanent(filter))
             .withFlavorWord("Dash Attack"));
 
