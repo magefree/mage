@@ -43,6 +43,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("The Mind Stone", 386, Rarity.MYTHIC, mage.cards.t.TheMindStone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Sentry, Golden Guardian", 35, Rarity.RARE, mage.cards.t.TheSentryGoldenGuardian.class));
         cards.add(new SetCardInfo("The Vision", 255, Rarity.RARE, mage.cards.t.TheVision.class));
+        cards.add(new SetCardInfo("Thor Odinson", 234, Rarity.UNCOMMON, mage.cards.t.ThorOdinson.class));
         cards.add(new SetCardInfo("World War Hulk", 197, Rarity.RARE, mage.cards.w.WorldWarHulk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("World War Hulk", 304, Rarity.RARE, mage.cards.w.WorldWarHulk.class, NON_FULL_USE_VARIOUS));
     }
