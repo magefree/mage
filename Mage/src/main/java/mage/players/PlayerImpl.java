@@ -5311,7 +5311,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
                 if (Zone.EXILED.equals(game.getState().getZone(card.getId()))) { // only if target zone was not replaced
                     String visibleName;
-                    if (withName) {
+                    if (withName && !(card instanceof PermanentToken)) {
                         // warning, withName param used to forced name show of the face down card (see 708.9.)
                         if (card.getName().isEmpty()) {
                             throw new IllegalStateException("Wrong code usage: method must find real card name, but found nothing", new Throwable());
