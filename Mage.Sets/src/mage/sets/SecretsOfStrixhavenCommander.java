@@ -199,6 +199,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kor Spiritdancer", 152, Rarity.RARE, mage.cards.k.KorSpiritdancer.class));
         cards.add(new SetCardInfo("Laelia, the Blade Reforged", 246, Rarity.RARE, mage.cards.l.LaeliaTheBladeReforged.class));
         cards.add(new SetCardInfo("Land Tax", 153, Rarity.MYTHIC, mage.cards.l.LandTax.class));
+        cards.add(new SetCardInfo("Lattice Library", 40, Rarity.RARE, mage.cards.l.LatticeLibrary.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lattice Library", 88, Rarity.RARE, mage.cards.l.LatticeLibrary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leitmotif Composer", 20, Rarity.RARE, mage.cards.l.LeitmotifComposer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leitmotif Composer", 70, Rarity.RARE, mage.cards.l.LeitmotifComposer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lifeblood Hydra", 274, Rarity.RARE, mage.cards.l.LifebloodHydra.class));
@@ -235,6 +237,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Nature's Lore", 278, Rarity.UNCOMMON, mage.cards.n.NaturesLore.class));
         cards.add(new SetCardInfo("Necroblossom Snarl", 389, Rarity.RARE, mage.cards.n.NecroblossomSnarl.class));
         cards.add(new SetCardInfo("Nether Traitor", 220, Rarity.RARE, mage.cards.n.NetherTraitor.class));
+        cards.add(new SetCardInfo("Nev, the Practical Dean", 41, Rarity.RARE, mage.cards.n.NevThePracticalDean.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nev, the Practical Dean", 89, Rarity.RARE, mage.cards.n.NevThePracticalDean.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Night's Whisper", 221, Rarity.COMMON, mage.cards.n.NightsWhisper.class));
         cards.add(new SetCardInfo("Nils, Discipline Enforcer", 158, Rarity.RARE, mage.cards.n.NilsDisciplineEnforcer.class));
         cards.add(new SetCardInfo("Ohran Frostfang", 279, Rarity.RARE, mage.cards.o.OhranFrostfang.class));
@@ -246,6 +250,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Oran-Rief, the Vastwood", 391, Rarity.RARE, mage.cards.o.OranRiefTheVastwood.class));
         cards.add(new SetCardInfo("Overflowing Basin", 392, Rarity.RARE, mage.cards.o.OverflowingBasin.class));
         cards.add(new SetCardInfo("Oversimplify", 322, Rarity.RARE, mage.cards.o.Oversimplify.class));
+        cards.add(new SetCardInfo("Owlin Spiralmancer", 22, Rarity.RARE, mage.cards.o.OwlinSpiralmancer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Owlin Spiralmancer", 72, Rarity.RARE, mage.cards.o.OwlinSpiralmancer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ozolith, the Shattered Spire", 281, Rarity.RARE, mage.cards.o.OzolithTheShatteredSpire.class));
         cards.add(new SetCardInfo("Parasitic Impetus", 222, Rarity.COMMON, mage.cards.p.ParasiticImpetus.class));
         cards.add(new SetCardInfo("Patchwork Banner", 353, Rarity.UNCOMMON, mage.cards.p.PatchworkBanner.class));
@@ -424,6 +430,7 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Yavimaya Coast", 425, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
         cards.add(new SetCardInfo("Zimone's Hypothesis", 206, Rarity.RARE, mage.cards.z.ZimonesHypothesis.class));
         cards.add(new SetCardInfo("Zimone, All-Questioning", 340, Rarity.RARE, mage.cards.z.ZimoneAllQuestioning.class));
+        cards.add(new SetCardInfo("Zimone, Infinite Analyst", 10, Rarity.MYTHIC, mage.cards.z.ZimoneInfiniteAnalyst.class));
         cards.add(new SetCardInfo("Zimone, Quandrix Prodigy", 341, Rarity.UNCOMMON, mage.cards.z.ZimoneQuandrixProdigy.class));
         cards.add(new SetCardInfo("Zulaport Cutthroat", 233, Rarity.UNCOMMON, mage.cards.z.ZulaportCutthroat.class));
 
