@@ -204,6 +204,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Lifeblood Hydra", 274, Rarity.RARE, mage.cards.l.LifebloodHydra.class));
         cards.add(new SetCardInfo("Lightning Greaves", 350, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Llanowar Wastes", 383, Rarity.RARE, mage.cards.l.LlanowarWastes.class));
+        cards.add(new SetCardInfo("Lorehold Archivist", 49, Rarity.RARE, mage.cards.l.LoreholdArchivist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lorehold Archivist", 97, Rarity.RARE, mage.cards.l.LoreholdArchivist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lorehold Campus", 384, Rarity.COMMON, mage.cards.l.LoreholdCampus.class));
         cards.add(new SetCardInfo("Lotus Field", 385, Rarity.RARE, mage.cards.l.LotusField.class));
         cards.add(new SetCardInfo("Magma Opus", 318, Rarity.MYTHIC, mage.cards.m.MagmaOpus.class));
