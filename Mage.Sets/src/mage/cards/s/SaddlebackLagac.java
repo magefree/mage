@@ -1,16 +1,11 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.keyword.SupportEffect;
+import mage.abilities.keyword.SupportAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -19,12 +14,6 @@ import java.util.UUID;
  */
 public final class SaddlebackLagac extends CardImpl {
 
-    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("target creatures");
-
-    static {
-        FILTER.add(AnotherPredicate.instance);
-    }
-
     public SaddlebackLagac(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add(SubType.LIZARD);
@@ -32,9 +21,7 @@ public final class SaddlebackLagac extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Saddleback Lagac enters the battlefield, support 2.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SupportEffect(this, 2, true), false);
-        ability.addTarget(new TargetCreaturePermanent(0, 2));
-        this.addAbility(ability);
+        this.addAbility(new SupportAbility(this, 2));
     }
 
     private SaddlebackLagac(final SaddlebackLagac card) {
