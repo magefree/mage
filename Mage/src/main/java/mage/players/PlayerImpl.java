@@ -1517,9 +1517,10 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     protected boolean playManaAbility(ActivatedManaAbilityImpl ability, Game game) {
         int bookmark = game.bookmarkState();
-        //20260116 - 109.4a
-        //The controller of a mana ability is determined as though it were on the stack.
-        ability.newId();
+        // 20260116 - 109.4a
+        // The controller of a mana ability is determined as though it were on the stack.
+        // Don't generate a new id because it's not necessary and breaks mana events, see #14822
+        // ability.newId();
         ability.setControllerId(playerId);
         if (ability.activate(game, false) && ability.resolve(game)) {
             if (ability.isUndoPossible()) {

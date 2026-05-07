@@ -34,7 +34,6 @@ public final class UnholyAnnexRitualChamber extends RoomCard {
 
     public UnholyAnnexRitualChamber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, "{2}{B}", "{3}{B}{B}");
-        this.subtype.add(SubType.ROOM);
 
         // Unholy Annex: At the beginning of your end step, draw a card. If you control a Demon, each opponent loses 2 life and you gain 2 life. Otherwise, you lose 2 life.
         Ability left = new BeginningOfEndStepTriggeredAbility(new DrawCardSourceControllerEffect(1));

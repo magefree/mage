@@ -26,7 +26,7 @@ public final class TheBattleOfYavin extends CardImpl {
     public TheBattleOfYavin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
 
-        // For each nonland permanent target opponent controls, that player sacrificies it unless they pay X life.
+        // For each nonland permanent target opponent controls, that player sacrifices it unless they pay X life.
         this.getSpellAbility().addEffect(new TheBattleOfYavinEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
 
@@ -46,7 +46,7 @@ class TheBattleOfYavinEffect extends OneShotEffect {
 
     TheBattleOfYavinEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "For each nonland permanent target opponent controls, that player sacrificies it unless they pay X life";
+        this.staticText = "For each nonland permanent target opponent controls, that player sacrifices it unless they pay X life";
     }
 
     private TheBattleOfYavinEffect(final TheBattleOfYavinEffect effect) {

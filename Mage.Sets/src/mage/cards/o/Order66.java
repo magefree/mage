@@ -20,7 +20,8 @@ public final class Order66 extends CardImpl {
 
         // Put a bounty counter on each creature you don't control, then destroy all creatures you don't control.
         this.getSpellAbility().addEffect(new AddCountersAllEffect(CounterType.BOUNTY.createInstance(), StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
-        this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL)
+                .setText(", then destroy all creatures you don't control"));
     }
 
     private Order66(final Order66 card) {

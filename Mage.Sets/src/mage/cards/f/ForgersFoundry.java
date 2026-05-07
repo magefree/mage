@@ -127,7 +127,7 @@ class ForgersFoundryExileEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Spell sourceSpell = game.getStack().getSpell(morSpell.getSourceId());
-        if (sourceSpell == null || sourceSpell.isCopy()) {
+        if (sourceSpell == null || !sourceSpell.wasCast()) {
             return false;
         }
         Player player = game.getPlayer(sourceSpell.getOwnerId());
@@ -150,7 +150,7 @@ class ForgersFoundryExileEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Spell sourceSpell = morSpell.getSpell(game);
-        if (sourceSpell == null || sourceSpell.isCopy()) {
+        if (sourceSpell == null || !sourceSpell.wasCast()) {
             return false;
         }
         Player player = game.getPlayer(sourceSpell.getOwnerId());

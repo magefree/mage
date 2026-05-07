@@ -36,6 +36,8 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Biogenic Ooze", 49, Rarity.RARE, mage.cards.b.BiogenicOoze.class));
         cards.add(new SetCardInfo("Blasphemous Act", 47, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Casey Jones, Asphalt Hooligan", 115, Rarity.RARE, mage.cards.c.CaseyJonesAsphaltHooligan.class));
+        cards.add(new SetCardInfo("Casey Jones, Back Alley Brute", 22, Rarity.RARE, mage.cards.c.CaseyJonesBackAlleyBrute.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Casey Jones, Back Alley Brute", 90, Rarity.RARE, mage.cards.c.CaseyJonesBackAlleyBrute.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chromatic Lantern", 58, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
         cards.add(new SetCardInfo("Cinder Glade", 61, Rarity.RARE, mage.cards.c.CinderGlade.class));
         cards.add(new SetCardInfo("City of Brass", 62, Rarity.RARE, mage.cards.c.CityOfBrass.class));
@@ -53,6 +55,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Donatello, the Brains", 2, Rarity.MYTHIC, mage.cards.d.DonatelloTheBrains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Donatello, the Brains", 85, Rarity.MYTHIC, mage.cards.d.DonatelloTheBrains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Donnie & April, Adorkable Duo", 111, Rarity.RARE, mage.cards.d.DonnieAndAprilAdorkableDuo.class));
+        cards.add(new SetCardInfo("Double Jump // Flying Kick", 35, Rarity.RARE, mage.cards.d.DoubleJumpFlyingKick.class));
         cards.add(new SetCardInfo("Dragonskull Summit", 64, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Endless Foot Assault", 8, Rarity.RARE, mage.cards.e.EndlessFootAssault.class));
         cards.add(new SetCardInfo("Electric Seaweed", 23, Rarity.RARE, mage.cards.e.ElectricSeaweed.class));
@@ -77,6 +80,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Leonardo, Worldly Warrior", 101, Rarity.MYTHIC, mage.cards.l.LeonardoWorldlyWarrior.class));
         cards.add(new SetCardInfo("Leonardo, the Balance", 1, Rarity.MYTHIC, mage.cards.l.LeonardoTheBalance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leonardo, the Balance", 83, Rarity.MYTHIC, mage.cards.l.LeonardoTheBalance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Level Up", 31, Rarity.RARE, mage.cards.l.LevelUp.class));
         cards.add(new SetCardInfo("Manhole Cover", 130, Rarity.UNCOMMON, mage.cards.m.ManholeCover.class));
         cards.add(new SetCardInfo("Michelangelo, On the Scene", 124, Rarity.MYTHIC, mage.cards.m.MichelangeloOnTheScene.class));
         cards.add(new SetCardInfo("Michelangelo, the Heart", 5, Rarity.MYTHIC, mage.cards.m.MichelangeloTheHeart.class, NON_FULL_USE_VARIOUS));
@@ -97,10 +101,13 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Rocksteady, Mutant Marauder", 33, Rarity.RARE, mage.cards.r.RocksteadyMutantMarauder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rocksteady, Mutant Marauder", 94, Rarity.RARE, mage.cards.r.RocksteadyMutantMarauder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rootbound Crag", 72, Rarity.RARE, mage.cards.r.RootboundCrag.class));
+        cards.add(new SetCardInfo("Shredder, Shadow Master", 20, Rarity.RARE, mage.cards.s.ShredderShadowMaster.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shredder, Shadow Master", 88, Rarity.RARE, mage.cards.s.ShredderShadowMaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Smoldering Marsh", 73, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
         cards.add(new SetCardInfo("Sodden Verdure", 74, Rarity.RARE, mage.cards.s.SoddenVerdure.class));
         cards.add(new SetCardInfo("Sol Ring", 59, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Spire Garden", 75, Rarity.RARE, mage.cards.s.SpireGarden.class));
+        cards.add(new SetCardInfo("Splinter & Leo, Father & Son", 103, Rarity.RARE, mage.cards.s.SplinterAndLeoFatherAndSon.class));
         cards.add(new SetCardInfo("Splinter, Aging Champion", 104, Rarity.RARE, mage.cards.s.SplinterAgingChampion.class));
         cards.add(new SetCardInfo("Splinter, the Mentor", 3, Rarity.MYTHIC, mage.cards.s.SplinterTheMentor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Splinter, the Mentor", 89, Rarity.MYTHIC, mage.cards.s.SplinterTheMentor.class, NON_FULL_USE_VARIOUS));
@@ -121,6 +128,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Together Forever", 44, Rarity.RARE, mage.cards.t.TogetherForever.class));
         cards.add(new SetCardInfo("Tokka & Rahzar, Unsupervised", 28, Rarity.RARE, mage.cards.t.TokkaAndRahzarUnsupervised.class));
         cards.add(new SetCardInfo("Triceraton Regenta", 105, Rarity.COMMON, mage.cards.t.TriceratonRegenta.class));
+        cards.add(new SetCardInfo("Turtle Tracks", 129, Rarity.UNCOMMON, mage.cards.t.TurtleTracks.class));
         cards.add(new SetCardInfo("Undergrowth Stadium", 80, Rarity.RARE, mage.cards.u.UndergrowthStadium.class));
         cards.add(new SetCardInfo("Utrom Monitor", 113, Rarity.COMMON, mage.cards.u.UtromMonitor.class));
         cards.add(new SetCardInfo("Vanquish the Horde", 45, Rarity.RARE, mage.cards.v.VanquishTheHorde.class));

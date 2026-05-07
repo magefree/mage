@@ -38,22 +38,27 @@ public class ColorsOfManaSpentToCastCount implements DynamicValue {
         }
         if (spell != null) {
             // NOT the cmc of the spell on the stack
-            Mana mana = spell.getSpellAbility().getManaCostsToPay().getUsedManaToPay();
-            if (mana.getBlack() > 0) {
-                count++;
-            }
-            if (mana.getBlue() > 0) {
-                count++;
-            }
-            if (mana.getGreen() > 0) {
-                count++;
-            }
-            if (mana.getRed() > 0) {
-                count++;
-            }
-            if (mana.getWhite() > 0) {
-                count++;
-            }
+            count = countColors(spell.getSpellAbility().getManaCostsToPay().getUsedManaToPay());
+        }
+        return count;
+    }
+
+    public static int countColors(Mana mana) {
+        int count = 0;
+        if (mana.getBlack() > 0) {
+            count++;
+        }
+        if (mana.getBlue() > 0) {
+            count++;
+        }
+        if (mana.getGreen() > 0) {
+            count++;
+        }
+        if (mana.getRed() > 0) {
+            count++;
+        }
+        if (mana.getWhite() > 0) {
+            count++;
         }
         return count;
     }

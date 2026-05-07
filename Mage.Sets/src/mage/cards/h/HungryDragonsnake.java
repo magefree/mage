@@ -1,9 +1,7 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldOpponentTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -11,9 +9,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,8 +38,9 @@ public final class HungryDragonsnake extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever a creature enters the battlefield under an opponents's control, put a +1/+1 counter on Hungry Dragonsnake.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, false
+        this.addAbility(new EntersBattlefieldOpponentTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                StaticFilters.FILTER_PERMANENT_A_CREATURE, false
         ));
     }
 

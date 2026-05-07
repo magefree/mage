@@ -127,10 +127,12 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Jennika, Bad Apple Big Sister", 203, Rarity.COMMON, mage.cards.j.JennikaBadAppleBigSister.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Karai's Technique", 152, Rarity.UNCOMMON, mage.cards.k.KaraisTechnique.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Karai's Technique", 244, Rarity.UNCOMMON, mage.cards.k.KaraisTechnique.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Karai, Future of the Foot", 151, Rarity.UNCOMMON, mage.cards.k.KaraiFutureOfTheFoot.class));
         cards.add(new SetCardInfo("Kitsune's Technique", 229, Rarity.RARE, mage.cards.k.KitsunesTechnique.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kitsune's Technique", 42, Rarity.RARE, mage.cards.k.KitsunesTechnique.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kitsune, Dragon's Daughter", 262, Rarity.RARE, mage.cards.k.KitsuneDragonsDaughter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kitsune, Dragon's Daughter", 41, Rarity.RARE, mage.cards.k.KitsuneDragonsDaughter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Koya, Death from Above", 11, Rarity.UNCOMMON, mage.cards.k.KoyaDeathFromAbove.class));
         cards.add(new SetCardInfo("Krang & Shredder", 153, Rarity.RARE, mage.cards.k.KrangAndShredder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Krang & Shredder", 201, Rarity.RARE, mage.cards.k.KrangAndShredder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Krang & Shredder", 245, Rarity.RARE, mage.cards.k.KrangAndShredder.class, NON_FULL_USE_VARIOUS));
@@ -301,6 +303,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("The Last Ronin", 154, Rarity.MYTHIC, mage.cards.t.TheLastRonin.class));
         cards.add(new SetCardInfo("The Last Ronin's Technique", 12, Rarity.UNCOMMON, mage.cards.t.TheLastRoninsTechnique.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Last Ronin's Technique", 223, Rarity.UNCOMMON, mage.cards.t.TheLastRoninsTechnique.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Neutrinos", 160, Rarity.UNCOMMON, mage.cards.t.TheNeutrinos.class));
         cards.add(new SetCardInfo("The Ooze", 177, Rarity.RARE, mage.cards.t.TheOoze.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Ooze", 277, Rarity.RARE, mage.cards.t.TheOoze.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tokka & Rahzar, Terrible Twos", 171, Rarity.RARE, mage.cards.t.TokkaAndRahzarTerribleTwos.class, NON_FULL_USE_VARIOUS));

@@ -983,6 +983,10 @@ public class VerifyCardDataTest {
         ignoreBoosterSets.add("Unhinged");
         ignoreBoosterSets.add("Unstable");
         ignoreBoosterSets.add("Unfinity");
+        // spellbook boosters, not for draft
+        ignoreBoosterSets.add("Signature Spellbook: Jace");
+        ignoreBoosterSets.add("Signature Spellbook: Gideon");
+        ignoreBoosterSets.add("Signature Spellbook: Chandra");
         // other
         ignoreBoosterSets.add("Secret Lair Drop"); // cards shop
         ignoreBoosterSets.add("Ugin's Fate"); // promo, not draftable
@@ -1157,10 +1161,10 @@ public class VerifyCardDataTest {
                 if (ignoreBoosterSets.contains(set.getName())) {
                     continue;
                 }
-                // error example: wrong booster settings (set MUST HAVE booster, but haven't) - 2020 - J22 - Jumpstart 2022 - boosters: [jumpstart]
-                errorsList.add(String.format("Error: wrong booster settings (set %s booster, but %s) - %s%s",
-                        (needBooster ? "MUST HAVE" : "MUST HAVEN'T"),
-                        (set.hasBoosters() ? "have" : "haven't"),
+                // error example: wrong booster settings (set must have boosters, but it does not) - 2020 - J22 - Jumpstart 2022 - boosters: [jumpstart]
+                errorsList.add(String.format("Error: wrong booster settings (set %s have boosters, but it %s) - %s%s",
+                    (needBooster ? "must" : "must not"),
+                    (set.hasBoosters() ? "does" : "does not"),
                         set.getReleaseYear() + " - " + set.getCode() + " - " + set.getName(),
                         (jsonSet.booster == null ? "" : " - boosters: " + jsonSet.booster.keySet())
                 ));

@@ -32,7 +32,7 @@ public final class CheerfulOsteomancer extends PrepareCard {
         // Sorcery {B}
         // Return target creature card from your graveyard to your hand.
         this.getSpellCard().getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
+        this.getSpellCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
     }
 
     private CheerfulOsteomancer(final CheerfulOsteomancer card) {

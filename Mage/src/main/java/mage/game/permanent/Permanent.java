@@ -87,7 +87,7 @@ public interface Permanent extends Card, Controllable {
 
     boolean isPrepared();
 
-    void setPrepared(boolean prepared,Game game);
+    void setPrepared(boolean prepared, Game game);
 
     int getClassLevel();
 
@@ -361,6 +361,8 @@ public interface Permanent extends Card, Controllable {
      */
     boolean canUseActivatedAbilities(Game game);
 
+    boolean removeFromCombat(Game game);
+
     /**
      * Removes this permanent from combat
      *
@@ -369,8 +371,6 @@ public interface Permanent extends Card, Controllable {
      *                  false if removed because it left the battlefield
      * @return true if permanent was attacking or blocking
      */
-    boolean removeFromCombat(Game game);
-
     boolean removeFromCombat(Game game, boolean withEvent);
 
     boolean isDeathtouched();

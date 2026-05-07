@@ -6,7 +6,7 @@ use strict;
 
 
 my $dataFile = 'mtg-cards-data.txt';
-my $knownSetsFile = "known-sets.txt";
+my $setsFile = "mtg-sets-data.txt";
 
 my %knownSets;
 my @setCards;
@@ -32,15 +32,15 @@ while(my $line = <DATA>) {
 }
 close(DATA);
 
-open (DATA, $knownSetsFile) || die "can't open $knownSetsFile";
+open (DATA, $setsFile) || die "can't open $setsFile";
 while(my $line = <DATA>) {
     my @data = split('\\|', $line);
-    $knownSets{$data[0]}= $data[1];
+    $knownSets{$data[0]}= $data[2];
 }
 close(DATA);
 
 if(!exists $knownSets{$setName}) {
-    die "You must add the set to known-sets.txt\n";
+    die "You must add the set to mtg-sets-data.txt\n";
 }
 
 my $packageName = $knownSets{$setName};

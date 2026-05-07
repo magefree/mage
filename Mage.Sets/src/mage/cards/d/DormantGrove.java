@@ -40,7 +40,7 @@ public final class DormantGrove extends TransformingDoubleFacedCard {
         Ability ability = new BeginningOfCombatTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         ability.addEffect(new ConditionalOneShotEffect(
                 new TransformSourceEffect(),
-                DormatGroveCondition.instance,
+                DormantGroveCondition.instance,
                 "Then if that creature has toughness 6 or greater, transform {this}"
         ));
         ability.addTarget(new TargetControlledCreaturePermanent());
@@ -69,7 +69,7 @@ public final class DormantGrove extends TransformingDoubleFacedCard {
     }
 }
 
-enum DormatGroveCondition implements Condition {
+enum DormantGroveCondition implements Condition {
     instance;
 
     @Override

@@ -179,6 +179,7 @@ public enum CounterType {
     PHYLACTERY("phylactery"),
     PHYRESIS("phyresis"),
     PIN("pin"),
+    PLAN("plan"),
     PLAGUE("plague"),
     PLOT("plot"),
     POLYP("polyp"),

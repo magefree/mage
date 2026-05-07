@@ -44,7 +44,7 @@ public final class FractalTender extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Increment
         this.addAbility(new IncrementAbility());

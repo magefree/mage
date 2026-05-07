@@ -6,6 +6,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.BountyAbility;
 import mage.cards.CardImpl;
@@ -13,6 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -42,7 +44,11 @@ public final class OpenSeason extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new OpenSeasonRestrictionEffect()));
 
         // Bounty - Whenever a creature an opponent controls with a bounty counter on it dies, that creature's controller loses 2 life. Each other player gains 2 life.
-        this.addAbility(new BountyAbility(new OpenSeasonEffect(), false, true));
+        ability = new BountyAbility(
+                new LoseLifeTargetEffect(2).withTargetDescription("that creature's controller"),
+                false, SetTargetPointer.PLAYER);
+        ability.addEffect(new OpenSeasonEffect());
+        this.addAbility(ability);
 
     }
 
@@ -89,8 +95,8 @@ class OpenSeasonRestrictionEffect extends RestrictionEffect {
 class OpenSeasonEffect extends OneShotEffect {
 
     OpenSeasonEffect() {
-        super(Outcome.LoseLife);
-        staticText = "that creature's controller loses 2 life. Each other player gains 2 life";
+        super(Outcome.GainLife);
+        staticText = "Each other player gains 2 life";
     }
 
     private OpenSeasonEffect(final OpenSeasonEffect effect) {
@@ -104,18 +110,16 @@ class OpenSeasonEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID controller = game.getControllerId(source.getFirstTarget());
-        if (controller != null) {
-            game.getPlayer(controller).loseLife(2, game, source, false);
-            for (UUID playerId : game.getOpponents(controller)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    player.gainLife(2, game, source);
-                }
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            if (playerId.equals(getTargetPointer().getFirst(game, source))) {
+                continue;
             }
-            return true;
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                player.gainLife(2, game, source);
+            }
         }
-        return false;
+        return true;
     }
 
 }

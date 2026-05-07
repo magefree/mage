@@ -1,7 +1,6 @@
 package mage.cards.v;
 
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
@@ -28,12 +27,9 @@ public final class Vandalblast extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
 
         // Destroy target artifact you don't control.
-        this.getSpellAbility().addTarget(new TargetPermanent(FILTER));
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-
         // Overload {4}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        this.addAbility(new OverloadAbility(this, new DestroyAllEffect(FILTER), new ManaCostsImpl<>("{4}{R}")));
-
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{4}{R}"),
+                new TargetPermanent(FILTER), new DestroyTargetEffect());
     }
 
     private Vandalblast(final Vandalblast card) {

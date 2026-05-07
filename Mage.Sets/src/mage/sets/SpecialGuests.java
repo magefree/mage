@@ -21,7 +21,10 @@ public final class SpecialGuests extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("Adrix and Nev, Twincasters", 156, Rarity.MYTHIC, mage.cards.a.AdrixAndNevTwincasters.class));
         cards.add(new SetCardInfo("Akroma's Memorial", 81, Rarity.MYTHIC, mage.cards.a.AkromasMemorial.class));
+        cards.add(new SetCardInfo("Archaeomancer", 149, Rarity.MYTHIC, mage.cards.a.Archaeomancer.class));
+        cards.add(new SetCardInfo("Archmage Emeritus", 150, Rarity.MYTHIC, mage.cards.a.ArchmageEmeritus.class));
         cards.add(new SetCardInfo("Arid Mesa", 109, Rarity.MYTHIC, mage.cards.a.AridMesa.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arid Mesa", 114, Rarity.MYTHIC, mage.cards.a.AridMesa.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bitterblossom", 133, Rarity.MYTHIC, mage.cards.b.Bitterblossom.class));
@@ -39,6 +42,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Chandra's Ignition", 99, Rarity.MYTHIC, mage.cards.c.ChandrasIgnition.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chrome Mox", 102, Rarity.MYTHIC, mage.cards.c.ChromeMox.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chrome Mox", 92, Rarity.MYTHIC, mage.cards.c.ChromeMox.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Codie, Vociferous Codex", 157, Rarity.MYTHIC, mage.cards.c.CodieVociferousCodex.class));
         cards.add(new SetCardInfo("Collected Company", 72, Rarity.MYTHIC, mage.cards.c.CollectedCompany.class));
         cards.add(new SetCardInfo("Condemn", 74, Rarity.MYTHIC, mage.cards.c.Condemn.class));
         cards.add(new SetCardInfo("Crashing Footfalls", 25, Rarity.MYTHIC, mage.cards.c.CrashingFootfalls.class));
@@ -53,6 +57,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Dolmen Gate", 145, Rarity.MYTHIC, mage.cards.d.DolmenGate.class));
         cards.add(new SetCardInfo("Door of Destinies", 146, Rarity.MYTHIC, mage.cards.d.DoorOfDestinies.class));
         cards.add(new SetCardInfo("Drown in the Loch", 27, Rarity.MYTHIC, mage.cards.d.DrownInTheLoch.class));
+        cards.add(new SetCardInfo("Dualcaster Mage", 153, Rarity.MYTHIC, mage.cards.d.DualcasterMage.class));
         cards.add(new SetCardInfo("Eerie Ultimatum", 104, Rarity.MYTHIC, mage.cards.e.EerieUltimatum.class));
         cards.add(new SetCardInfo("Embercleave", 77, Rarity.MYTHIC, mage.cards.e.Embercleave.class));
         cards.add(new SetCardInfo("Emergent Ultimatum", 105, Rarity.MYTHIC, mage.cards.e.EmergentUltimatum.class));
@@ -79,6 +84,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Green Sun's Zenith", 127, Rarity.MYTHIC, mage.cards.g.GreenSunsZenith.class, FULL_ART));
         cards.add(new SetCardInfo("Grief", 46, Rarity.MYTHIC, mage.cards.g.Grief.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grief", 51, Rarity.MYTHIC, mage.cards.g.Grief.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Grim Haruspex", 152, Rarity.MYTHIC, mage.cards.g.GrimHaruspex.class));
         cards.add(new SetCardInfo("Grim Tutor", 76, Rarity.MYTHIC, mage.cards.g.GrimTutor.class));
         cards.add(new SetCardInfo("Hallowed Haunting", 64, Rarity.MYTHIC, mage.cards.h.HallowedHaunting.class));
         cards.add(new SetCardInfo("Heat Shimmer", 137, Rarity.MYTHIC, mage.cards.h.HeatShimmer.class));
@@ -90,11 +96,14 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Kinsbaile Cavalier", 130, Rarity.MYTHIC, mage.cards.k.KinsbaileCavalier.class));
         cards.add(new SetCardInfo("Leaf-Crowned Visionary", 140, Rarity.MYTHIC, mage.cards.l.LeafCrownedVisionary.class));
         cards.add(new SetCardInfo("Ledger Shredder", 55, Rarity.MYTHIC, mage.cards.l.LedgerShredder.class));
+        cards.add(new SetCardInfo("Library of Leng", 158, Rarity.MYTHIC, mage.cards.l.LibraryOfLeng.class));
+        cards.add(new SetCardInfo("Library of Alexandria", "158a", Rarity.MYTHIC, mage.cards.l.LibraryOfAlexandria.class));
         cards.add(new SetCardInfo("Lord of Atlantis", 1, Rarity.RARE, mage.cards.l.LordOfAtlantis.class));
         cards.add(new SetCardInfo("Lord of the Undead", 88, Rarity.MYTHIC, mage.cards.l.LordOfTheUndead.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lord of the Undead", 98, Rarity.MYTHIC, mage.cards.l.LordOfTheUndead.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lord Windgrace", 14, Rarity.MYTHIC, mage.cards.l.LordWindgrace.class));
         cards.add(new SetCardInfo("Maddening Hex", 70, Rarity.MYTHIC, mage.cards.m.MaddeningHex.class));
+        cards.add(new SetCardInfo("Magus of the Library", 154, Rarity.MYTHIC, mage.cards.m.MagusOfTheLibrary.class));
         cards.add(new SetCardInfo("Magus of the Moon", 125, Rarity.MYTHIC, mage.cards.m.MagusOfTheMoon.class, FULL_ART));
         cards.add(new SetCardInfo("Malcolm, Keen-Eyed Navigator", 2, Rarity.UNCOMMON, mage.cards.m.MalcolmKeenEyedNavigator.class));
         cards.add(new SetCardInfo("Mana Crypt", "17a", Rarity.MYTHIC, mage.cards.m.ManaCrypt.class, NON_FULL_USE_VARIOUS));
@@ -113,6 +122,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Misty Rainforest", 111, Rarity.MYTHIC, mage.cards.m.MistyRainforest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Misty Rainforest", 116, Rarity.MYTHIC, mage.cards.m.MistyRainforest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Morbid Opportunist", 32, Rarity.MYTHIC, mage.cards.m.MorbidOpportunist.class));
+        cards.add(new SetCardInfo("Murmuring Mystic", 151, Rarity.MYTHIC, mage.cards.m.MurmuringMystic.class));
         cards.add(new SetCardInfo("Mystic Snake", 35, Rarity.MYTHIC, mage.cards.m.MysticSnake.class));
         cards.add(new SetCardInfo("Nexus of Fate", 122, Rarity.MYTHIC, mage.cards.n.NexusOfFate.class, FULL_ART));
         cards.add(new SetCardInfo("Notion Thief", 36, Rarity.MYTHIC, mage.cards.n.NotionThief.class));
@@ -155,6 +165,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Subtlety", 50, Rarity.MYTHIC, mage.cards.s.Subtlety.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sword of Fire and Ice", 62, Rarity.MYTHIC, mage.cards.s.SwordOfFireAndIce.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 54, Rarity.MYTHIC, mage.cards.s.SwordsToPlowshares.class));
+        cards.add(new SetCardInfo("Sylvan Library", 155, Rarity.MYTHIC, mage.cards.s.SylvanLibrary.class));
         cards.add(new SetCardInfo("Sylvan Tutor", 59, Rarity.MYTHIC, mage.cards.s.SylvanTutor.class));
         cards.add(new SetCardInfo("Temporal Manipulation", 82, Rarity.MYTHIC, mage.cards.t.TemporalManipulation.class));
         cards.add(new SetCardInfo("Thought-Knot Seer", 39, Rarity.MYTHIC, mage.cards.t.ThoughtKnotSeer.class));

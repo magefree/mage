@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.CardLeftYourGraveyardThisTurnCondition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
@@ -16,7 +16,6 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.watchers.common.CardsLeftGraveyardWatcher;
 
@@ -47,7 +46,7 @@ public final class PrimaryResearch extends CardImpl {
                 TargetController.YOU,
                 new DrawCardSourceControllerEffect(1),
                 false,
-                PrimaryResearchCondition.instance
+                CardLeftYourGraveyardThisTurnCondition.instance
             ),
             new CardsLeftGraveyardWatcher()
         );
@@ -60,23 +59,5 @@ public final class PrimaryResearch extends CardImpl {
     @Override
     public PrimaryResearch copy() {
         return new PrimaryResearch(this);
-    }
-}
-
-enum PrimaryResearchCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return !game
-            .getState()
-            .getWatcher(CardsLeftGraveyardWatcher.class)
-            .getCardsThatLeftGraveyard(source.getControllerId(), game)
-            .isEmpty();
-    }
-
-    @Override
-    public String toString() {
-        return "if a card left your graveyard this turn";
     }
 }
