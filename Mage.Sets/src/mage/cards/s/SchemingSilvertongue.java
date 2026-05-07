@@ -52,7 +52,7 @@ public final class SchemingSilvertongue extends PrepareCard {
         // Sorcery {B}{B}
         // Target player draws two cards and loses 2 life.
         this.getSpellCard().getSpellAbility().addEffect(new DrawCardTargetEffect(2));
-        this.getSpellCard().getSpellAbility().addEffect(new LoseLifeTargetEffect(2).concatBy("and"));
+        this.getSpellCard().getSpellAbility().addEffect(new LoseLifeTargetEffect(2).withTargetDescription("and"));
         this.getSpellCard().getSpellAbility().addTarget(new TargetPlayer());
     }
 
