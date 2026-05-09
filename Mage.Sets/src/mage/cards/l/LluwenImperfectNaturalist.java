@@ -96,7 +96,7 @@ class LluwenImperfectNaturalistEffect extends OneShotEffect {
         TargetCard target = new TargetCard(
                 0, 1, Zone.ALL, StaticFilters.FILTER_CARD_CREATURE_OR_LAND
         );
-        player.choose(Outcome.DrawCard, target, source, game);
+        player.choose(Outcome.DrawCard, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
             player.putCardsOnTopOfLibrary(card, game, source, false);
