@@ -740,7 +740,9 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         enableDialogButtons();
 
         // reset GUI and cards to use new images
-        GUISizeHelper.refreshGUIAndCards(false);
+        SwingUtilities.invokeLater(() -> {
+            GUISizeHelper.refreshGUIAndCards(false);
+        });
     }
 
     private final class DownloadTask implements Runnable {

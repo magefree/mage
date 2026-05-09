@@ -1,6 +1,5 @@
 package org.mage.card.arcane;
 
-import mage.cards.Card;
 import mage.cards.MageCard;
 import mage.util.ThreadUtils;
 
@@ -9,6 +8,8 @@ import javax.swing.Timer;
 import java.awt.*;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public abstract class Animation {
 
@@ -33,8 +34,8 @@ public abstract class Animation {
      * Note: Animations register themselves during construction and deregister
      * when finish() gets called.
      */
-    private static final Map<UUID, Set<Animation>> activeByGameId = new HashMap<>();
-    private static final Map<Object, Animation> activeByTarget = new HashMap<>();
+    private static final ConcurrentMap<UUID, Set<Animation>> activeByGameId = new ConcurrentHashMap<>();
+    private static final ConcurrentMap<Object, Animation> activeByTarget = new ConcurrentHashMap<>();
 
     private final Timer animationTimer;
     private FrameTimer frameTimer;
