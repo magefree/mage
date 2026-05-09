@@ -1,7 +1,9 @@
 package org.mage.test.cards.single.mkc;
 
+import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -53,7 +55,8 @@ public class VeiledAscensionTest extends CardTestPlayerBase {
 
         execute();
 
-        //assertCounterCount("face down creature", CounterType.FLYING, 1); // doesn't work because the creature is face down and has no name, so it can't be found by the test framework
+        assertCounterCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), CounterType.FLYING, 1);
+
     }
 
     @Test
@@ -75,6 +78,6 @@ public class VeiledAscensionTest extends CardTestPlayerBase {
 
         execute();
 
-        //assertCounterCount("face down creature", CounterType.FLYING, 1); // doesn't work because the creature is face down and has no name, so it can't be found by the test framework
+        assertCounterCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), CounterType.FLYING, 1);
     }
 }
