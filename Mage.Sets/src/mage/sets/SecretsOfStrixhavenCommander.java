@@ -63,6 +63,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodghast", 210, Rarity.RARE, mage.cards.b.Bloodghast.class));
         cards.add(new SetCardInfo("Blossoming Bogbeast", 264, Rarity.RARE, mage.cards.b.BlossomingBogbeast.class));
         cards.add(new SetCardInfo("Bojuka Bog", 363, Rarity.COMMON, mage.cards.b.BojukaBog.class));
+        cards.add(new SetCardInfo("Brass Infiniscope", 51, Rarity.RARE, mage.cards.b.BrassInfiniscope.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Brass Infiniscope", 99, Rarity.RARE, mage.cards.b.BrassInfiniscope.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Brazen Borrower", 190, Rarity.MYTHIC, mage.cards.b.BrazenBorrower.class));
         cards.add(new SetCardInfo("Breena, the Demagogue", 298, Rarity.MYTHIC, mage.cards.b.BreenaTheDemagogue.class));
         cards.add(new SetCardInfo("Brudiclad, Telchor Engineer", 299, Rarity.MYTHIC, mage.cards.b.BrudicladTelchorEngineer.class));
