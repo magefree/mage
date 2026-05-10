@@ -1574,6 +1574,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TAKE_SPECIAL_ACTION,
                 action.getId(), action, getId()))) {
             int bookmark = game.bookmarkState();
+            action.setControllerId(playerId); // for Volrath's Curse / Lost in Thought
             if (action.activate(game, false)) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TAKEN_SPECIAL_ACTION,
                         action.getId(), action, getId()));
