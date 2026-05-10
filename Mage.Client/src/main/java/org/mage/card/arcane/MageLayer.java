@@ -244,6 +244,23 @@ public class MageLayer extends MageCard {
         return new MageCardSpace(0, 0, Math.round(renderHeight * 0f), 0);
     }
 
+    private static MageCardSpace getAnimationOuterSpace(int width, int height) {
+        // Cards are rotate around (width / 2, height - width / 2).
+        double originX = width / 2d;
+        double originY = height - originX;
+
+        // We compute the distance from origin to the outermost point, which is the maximum radius
+        // of a rotation.
+        double maxRadius = Math.hypot(originX, originY);
+
+        int left = (int) Math.ceil(Math.max(0d, maxRadius - originX));
+        int right = (int) Math.ceil(Math.max(0d, maxRadius - (width - originY)));
+        int top = (int) Math.ceil(Math.max(0d, maxRadius - originY));
+        int bottom = (int) Math.ceil(Math.max(0d, maxRadius - (height - originY)));
+
+        return new MageCardSpace(left, right, top, bottom);
+    }
+
     @Override
     public void setCardBounds(int x, int y, int width, int height) {
         // base idea: child layers should not know about parent layer
@@ -264,8 +281,7 @@ public class MageLayer extends MageCard {
             MageCardSpace innerSpace = getAdditionalSpaces(width, height);
 
             // extra space for animation and other drawing
-            // WTF, I'm tired with render calcs, so make BIG draw spaces for any needs
-            MageCardSpace outerSpace = new MageCardSpace(width * 2, width * 2, height * 2, height * 2);
+            MageCardSpace outerSpace = getAnimationOuterSpace(width, height);
             //MageCardSpace outerSpace = new MageCardSpace(50, 30, 150, 20);
             this.lastOuterSpace = outerSpace;
 
