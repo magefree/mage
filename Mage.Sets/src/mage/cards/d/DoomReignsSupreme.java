@@ -5,11 +5,12 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.common.SacrificeSourceTriggeredAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
-import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -48,14 +49,9 @@ public final class DoomReignsSupreme extends CardImpl {
         ability.addEffect(new AddCountersSourceEffect(CounterType.PLAN.createInstance()));
         this.addAbility(ability);
 
-        // When the fifth plan counter is put on this enchantment, sacrifice it.
+        // When the fifth plan counter is put on this enchantment, sacrifice it. When you do, target opponent exiles the top five cards of
+        // their library. You may cast up to two spells from among the exiled cards without paying their mana costs.
         this.addAbility(new DoomReignsSupremeCounterTriggeredAbility());
-
-        // When you sacrifice this enchantment, target opponent exiles the top five cards of their library.
-        // You may cast up to two spells from among the exiled cards without paying their mana costs.
-        ability = new SacrificeSourceTriggeredAbility(new DoomReignsSupremeExileEffect());
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);
     }
 
     private DoomReignsSupreme(final DoomReignsSupreme card) {
@@ -70,8 +66,18 @@ public final class DoomReignsSupreme extends CardImpl {
 
 class DoomReignsSupremeCounterTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static DoWhenCostPaid makeEffect() {
+        ReflexiveTriggeredAbility reflexive = new ReflexiveTriggeredAbility(
+            new DoomReignsSupremeExileEffect(), false,
+            "target opponent exiles the top five cards of their library. "
+            + "You may cast up to two spells from among the exiled cards without paying their mana costs"
+        );
+        reflexive.addTarget(new TargetOpponent());
+        return new DoWhenCostPaid(reflexive, new SacrificeSourceCost(), "Sacrifice {this}?", false);
+    }
+
     DoomReignsSupremeCounterTriggeredAbility() {
-        super(Zone.ALL, new SacrificeSourceEffect(), false);
+        super(Zone.ALL, makeEffect(), false);
         setTriggerPhrase("When the fifth plan counter is put on {this}, ");
     }
 
