@@ -5,11 +5,14 @@ import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
+import mage.abilities.effects.common.ReturnCardChosenFromGraveyardEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.PutCards;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -17,7 +20,6 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -30,16 +32,23 @@ import java.util.UUID;
 public final class SayItsName extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("other cards named Say Its Name from your graveyard");
+    private static final FilterCard filterCreatureOrLand = new FilterCard("creature or land card from your graveyard");
     static {
         filter.add(AnotherPredicate.instance);
         filter.add(new NamePredicate("Say Its Name"));
+        filterCreatureOrLand.add(Predicates.or(
+                CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate()
+        ));
     }
 
     public SayItsName(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
         // Mill three cards. Then you may return a creature or land card from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new SayItsNameMillEffect());
+        this.getSpellAbility().addEffect(new MillCardsControllerEffect(3));
+        this.getSpellAbility().addEffect(new ReturnCardChosenFromGraveyardEffect(true,
+                filterCreatureOrLand, PutCards.HAND).concatBy("Then"));
 
         // Exile this card and two other cards named Say Its Name from your graveyard: Search your graveyard, hand, and/or library for a card named Altanak, the Thrice-Called and put it onto the battlefield. If you search your library this way, shuffle. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
@@ -59,49 +68,6 @@ public final class SayItsName extends CardImpl {
     @Override
     public SayItsName copy() {
         return new SayItsName(this);
-    }
-}
-
-class SayItsNameMillEffect extends OneShotEffect {
-
-    private static final FilterCard filter = new FilterCard("creature or land card from your graveyard");
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                CardType.LAND.getPredicate()
-        ));
-    }
-
-    SayItsNameMillEffect() {
-        super(Outcome.Benefit);
-        staticText = "Mill three cards. Then you may return a creature or land card from your graveyard to your hand";
-    }
-
-    private SayItsNameMillEffect(final SayItsNameMillEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SayItsNameMillEffect copy() {
-        return new SayItsNameMillEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        player.millCards(3, source, game);
-        if (player.getGraveyard().count(filter, game) < 1) {
-            return true;
-        }
-        TargetCard target = new TargetCardInYourGraveyard(
-                0, 1, filter, true
-        );
-        player.choose(outcome, target, source, game);
-        player.moveCards(game.getCard(target.getFirstTarget()), Zone.HAND, source, game);
-        return true;
     }
 }
 

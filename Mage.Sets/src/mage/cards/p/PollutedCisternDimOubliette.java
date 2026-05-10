@@ -5,21 +5,18 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.UnlockThisDoorTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
+import mage.abilities.effects.common.ReturnCardChosenFromGraveyardEffect;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.RoomCard;
-import mage.constants.Outcome;
+import mage.constants.PutCards;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
-import mage.players.Player;
-import mage.target.TargetCard;
-import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.Collection;
 import java.util.Set;
@@ -40,7 +37,8 @@ public final class PollutedCisternDimOubliette extends RoomCard {
         // Dim Oubliette
         // When you unlock this door, mill three cards, then return a creature card from your graveyard to the battlefield.
         Ability ability = new UnlockThisDoorTriggeredAbility(new MillCardsControllerEffect(3), false, false);
-        ability.addEffect(new DimOublietteEffect());
+        ability.addEffect(new ReturnCardChosenFromGraveyardEffect(false,
+                StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD, PutCards.BATTLEFIELD).concatBy(", then"));
         this.getRightHalfCard().addAbility(ability);
     }
 
@@ -119,35 +117,5 @@ class PollutedCisternTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getAllEffects().setValue("cards", zEvent.getCards());
         return true;
-    }
-}
-
-class DimOublietteEffect extends OneShotEffect {
-
-    DimOublietteEffect() {
-        super(Outcome.Benefit);
-        staticText = ", then return a creature card from your graveyard to the battlefield";
-    }
-
-    private DimOublietteEffect(final DimOublietteEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DimOublietteEffect copy() {
-        return new DimOublietteEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null || player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game) < 1) {
-            return false;
-        }
-        TargetCard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
-        target.withNotTarget(true);
-        player.choose(outcome, target, source, game);
-        Card card = game.getCard(target.getFirstTarget());
-        return card != null && player.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
 }
