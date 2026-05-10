@@ -1,12 +1,7 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CommanderCastFromCommandZoneValue;
@@ -18,6 +13,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +51,7 @@ public final class VanguardOfTheRestless extends CardImpl {
         ).addHint(CommanderCastFromCommandZoneValue.getHint()));
 
         // Whenever a Spirit you control enters, you may pay {2}{W}. If you do, return this card from your graveyard to the battlefield.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
             Zone.GRAVEYARD,
             new DoIfCostPaid(
                 new ReturnSourceFromGraveyardToBattlefieldEffect(),

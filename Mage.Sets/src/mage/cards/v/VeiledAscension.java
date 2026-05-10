@@ -14,18 +14,10 @@ import mage.filter.predicate.card.FaceDownPredicate;
 import mage.constants.*;
 import mage.abilities.effects.common.EntersWithCountersControlledEffect;
 
-
 import java.util.UUID;
 
 /**
  * @author greenlovecat
- * 
- * 
- * When this enchantment enters, put a flying counter on each face-down creature you control.
- *
- * Face-down creatures you control enter with a flying counter on them.
- * 
- * At the beginning of your upkeep, you may cloak the top card of your library.
  */
 
 public final class VeiledAscension extends CardImpl {
@@ -47,7 +39,7 @@ public final class VeiledAscension extends CardImpl {
         // Face-down creatures you control enter the battlefield with a flying counter on them.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersWithCountersControlledEffect(
                 filter, CounterType.FLYING.createInstance(), false
-        ).setText("Face-down creatures you control enter the battlefield with a flying counter on them.")));
+        ).setText("Face-down creatures you control enter with a flying counter on them")));
 
         // At the beginning of your upkeep, you may cloak the top card of your library.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ManifestEffect(StaticValue.get(1), false, true), true));
