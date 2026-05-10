@@ -52,7 +52,7 @@ public class ReturnCardChosenFromGraveyardEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        if (controller.getGraveyard().count(filter, game) < 1) {
+        if (controller.getGraveyard().count(filter, controller.getId(), source, game) < 1) {
             return true;
         }
         TargetCard target = new TargetCardInYourGraveyard(
