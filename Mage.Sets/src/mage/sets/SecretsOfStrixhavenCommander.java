@@ -178,6 +178,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hateful Eidolon", 215, Rarity.UNCOMMON, mage.cards.h.HatefulEidolon.class));
         cards.add(new SetCardInfo("Haunted Mire", 379, Rarity.COMMON, mage.cards.h.HauntedMire.class));
         cards.add(new SetCardInfo("Haywire Mite", 349, Rarity.UNCOMMON, mage.cards.h.HaywireMite.class));
+        cards.add(new SetCardInfo("Herald of Amity", 15, Rarity.RARE, mage.cards.h.HeraldOfAmity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Herald of Amity", 65, Rarity.RARE, mage.cards.h.HeraldOfAmity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("High Market", 380, Rarity.RARE, mage.cards.h.HighMarket.class));
         cards.add(new SetCardInfo("Hinterland Harbor", 381, Rarity.RARE, mage.cards.h.HinterlandHarbor.class));
         cards.add(new SetCardInfo("Hofri Ghostforge", 314, Rarity.MYTHIC, mage.cards.h.HofriGhostforge.class));
