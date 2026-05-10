@@ -39,7 +39,7 @@ public final class TauntFromTheRampart extends CardImpl {
 class TauntFromTheRampartEffect extends GoadAllEffect {
 
     private static final FilterPermanent filter1 = new FilterOpponentsCreaturePermanent(
-            "creatures your opponents control. Until your next turn, those creatures can’t block"
+            "creatures your opponents control. Until your next turn, those creatures can't block"
     );
 
     TauntFromTheRampartEffect() {
