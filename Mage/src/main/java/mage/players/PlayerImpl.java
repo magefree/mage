@@ -1597,6 +1597,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TAKE_SPECIAL_MANA_PAYMENT,
                 action.getId(), action, getId()))) {
             int bookmark = game.bookmarkState();
+            action.setControllerId(playerId);
             if (action.activate(game, false)) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TAKEN_SPECIAL_MANA_PAYMENT,
                         action.getId(), action, getId()));
