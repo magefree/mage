@@ -339,6 +339,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Solemn Simulacrum", 355, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Songbirds' Blessing", 174, Rarity.RARE, mage.cards.s.SongbirdsBlessing.class));
         cards.add(new SetCardInfo("Spirit Mantle", 175, Rarity.UNCOMMON, mage.cards.s.SpiritMantle.class));
+        cards.add(new SetCardInfo("Spirit of Resilience", 37, Rarity.RARE, mage.cards.s.SpiritOfResilience.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Spirit of Resilience", 85, Rarity.RARE, mage.cards.s.SpiritOfResilience.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Springbloom Druid", 287, Rarity.COMMON, mage.cards.s.SpringbloomDruid.class));
         cards.add(new SetCardInfo("Squee, Goblin Nabob", 254, Rarity.UNCOMMON, mage.cards.s.SqueeGoblinNabob.class));
         cards.add(new SetCardInfo("Sram, Senior Edificer", 176, Rarity.RARE, mage.cards.s.SramSeniorEdificer.class));
