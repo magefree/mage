@@ -6,20 +6,25 @@ import mage.util.ThreadUtils;
 import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ConcurrentMap;
 
 public abstract class Animation {
 
     private static final boolean ENABLED = true;
+    private static final long MS_TO_NANO = 1000000;
 
     private static final long TRANSFORM_CARD_DURATION_MS = 600;
     private static final long CARD_SHOW_HIDE_DURATION_MS = 250;
     private static final long CARD_TAP_DURATION_MS = 300;
 
     private static final long TARGET_MILLIS_PER_FRAME = 30;
+    private static final long MAX_MILLIS_PER_FRAME = 100;
 
     private static CardPanel enlargedCardPanel;
     private static CardPanel enlargedAnimationPanel;
@@ -32,18 +37,69 @@ public abstract class Animation {
      * fading-in will cancel the fade animation and start the tap animation.
      *
      * Note: Animations register themselves during construction and deregister
-     * when finish() gets called.
+     * when cleanup() gets called.
      */
     private static final ConcurrentMap<UUID, Set<Animation>> activeByGameId = new ConcurrentHashMap<>();
     private static final ConcurrentMap<Object, Animation> activeByTarget = new ConcurrentHashMap<>();
 
-    private final Timer animationTimer;
-    private FrameTimer frameTimer;
-    private long elapsed;
-    private final long duration;
-    private boolean finished;
-    private final Object target;
-    private final UUID gameId;
+    /**
+     * List of animations to add/schedule. Can be accessesd thread-safe.
+     */
+    private static final ConcurrentLinkedQueue<Animation> pendingAdd = new ConcurrentLinkedQueue<>();
+
+    /**
+     * Shared Swing timer that processes ticks on the EDT. All animation callbacks must
+     * be run from the animation timer.
+     */
+    private static final Timer timer =  new Timer((int)TARGET_MILLIS_PER_FRAME, timeTick());
+
+    /**
+     * List of currently running animations. Private to the timer tick handler!
+     */
+    private static final List<Animation> animations = new ArrayList<>();
+
+    private Object target;
+    private UUID gameId;
+    private final long duration; // relative in ms
+    private final long delay; // relative in ms
+    private long lastProcessTime; // in ns
+    private long scheduledAtTime; // in ns
+    private long startedAtTime; // in ns
+
+    enum State {
+        Starting,
+        Running,
+        Finished,
+        Canceled,
+    };
+    private State state = State.Starting;
+
+    private static ActionListener timeTick() {
+        return e -> {
+            // Move all pending animations to the animations list that
+            // is safe to iterate on the EDT.
+            animations.addAll(pendingAdd);
+            pendingAdd.clear();
+
+            List<Animation> pendingRemove = new ArrayList<>();
+
+            final long time = System.nanoTime();
+            for (Animation animation : animations) {
+                State state = animation.process(time);
+                if (state == State.Finished) {
+                    pendingRemove.add(animation);
+                }
+            }
+
+            // Remove all finished animations
+            animations.removeAll(pendingRemove);
+            pendingRemove.forEach(Animation::cleanup);
+
+            // Stop the timer if not needed
+            if (animations.isEmpty())
+                timer.stop();
+        };
+    }
 
     public Animation(UUID gameId, Object target, long duration) {
         this(gameId, target, duration, 0);
@@ -52,67 +108,84 @@ public abstract class Animation {
     public Animation(UUID gameId, Object target, long duration, long delay) {
         this.target = target;
         this.gameId = gameId;
-        this.duration = Math.max(1, duration);
+        this.duration = duration * MS_TO_NANO;
+        this.delay = delay * MS_TO_NANO;
 
-        if (!ENABLED) {
+        if (!ENABLED || duration <= 0) {
             UI.invokeLater(() -> {
                 start();
-                //update(1.0f);
+                update(1f);
                 end();
             });
 
-            animationTimer = null;
+            // We never added this animation to any list, so we can just return
             return;
         }
-
-        animationTimer = new Timer((int) TARGET_MILLIS_PER_FRAME, e -> {
-            if (finished) {
-                return;
-            }
-
-            if (frameTimer == null) {
-                start();
-                frameTimer = new FrameTimer();
-            }
-
-            elapsed += frameTimer.getTimeSinceLastFrame();
-            if (elapsed >= this.duration) {
-                elapsed = this.duration;
-            }
-
-            update(elapsed / (float) this.duration);
-
-            if (elapsed == this.duration) {
-                finish();
-            }
-        });
 
         cancelRunningAnimation(this.target);
         if (this.target != null) {
             activeByTarget.put(this.target, this);
         }
         if (this.gameId != null) {
-            Set<Animation> set = activeByGameId.getOrDefault(this.gameId, null);
-            if (set == null) {
-                set = new HashSet<Animation>();
-                activeByGameId.put(this.gameId, set);
-            }
-            set.add(this);
+            activeByGameId.computeIfAbsent(this.gameId, ignore -> new HashSet<>()).add(this);
         }
 
-        animationTimer.setInitialDelay((int) Math.max(0, delay));
-        animationTimer.start();
+        pendingAdd.add(this);
+        if (!timer.isRunning())
+            timer.start();
+    }
+
+    /**
+     * Returns the animation state [0,1] for the time in ms.
+     * @param time Current time in nanoseconds
+     * @return The state/percentage of the animation
+     */
+    public float getPercentageForTime(long time) {
+        return (float)Math.min(duration, Math.max(0, time - startedAtTime)) / (float)duration;
+    }
+
+    /**
+     * Process a single animation tick by advancing the animations state and percentage.
+     * @param time System time in nanoseconds
+     * @return State of the animation
+     */
+    private State process(long time) {
+        if (state == State.Starting) {
+            if (scheduledAtTime == 0) {
+                scheduledAtTime = time + delay;
+            }
+
+            if (scheduledAtTime <= time) {
+                startedAtTime = time;
+                start();
+                state = State.Running;
+            }
+        } else {
+            if (time - startedAtTime >= duration || state == State.Canceled) {
+                update(1f);
+                end();
+                state = State.Finished;
+            } else {
+                // To smooth animations while the EDT is busy, we
+                // limit time "jumps" to MAX_MILLIS_PER_FRAME, but we
+                // still end animations on time, to not stress the EDT even more.
+                long timeElapsed = time - lastProcessTime;
+                long smoothedTime = lastProcessTime + Math.min(timeElapsed, MAX_MILLIS_PER_FRAME * MS_TO_NANO);
+                update(getPercentageForTime(smoothedTime));
+            }
+        }
+
+        lastProcessTime = time;
+        return state;
     }
 
     protected abstract void update(float percentage);
 
     protected void cancel() {
-        if (elapsed < duration && !finished) {
-            // Update to the final animation state if not already finished.
-            elapsed = duration;
-            update(1f);
-        }
-        finish();
+        // The animation timer + process will do the cleanup
+        // safely on the EDT for us.
+        state = State.Canceled;
+        cleanup();
     }
 
     protected void start() {
@@ -121,69 +194,22 @@ public abstract class Animation {
     protected void end() {
     }
 
-    private void finish() {
-        if (finished) {
-            return;
-        }
-        finished = true;
+    private void cleanup() {
         if (target != null) {
             activeByTarget.remove(target);
         }
+        target = null;
+
         if (gameId != null) {
-            Set<Animation> set = activeByGameId.getOrDefault(gameId, null);
-            if (set != null) {
-                set.remove(this);
-            }
-        }
-        if (animationTimer != null) {
-            animationTimer.stop();
-        }
-        end();
-    }
-
-    /**
-     * Uses averaging of the time between the past few frames to provide smooth
-     * animation.
-     */
-    private static class FrameTimer {
-
-        private static final int SAMPLES = 6;
-        private static final long MAX_FRAME = 100; // Max time for one frame, to weed out spikes.
-
-        private final long[] samples = new long[SAMPLES];
-        private int sampleIndex;
-
-        public FrameTimer() {
-            long currentTime = System.currentTimeMillis();
-            for (int i = SAMPLES - 1; i >= 0; i--) {
-                samples[i] = currentTime - (SAMPLES - i) * TARGET_MILLIS_PER_FRAME;
-            }
-        }
-
-        public long getTimeSinceLastFrame() {
-            long currentTime = System.currentTimeMillis();
-
-            int id = sampleIndex - 1;
-            if (id < 0) {
-                id += SAMPLES;
-            }
-
-            long timeSinceLastSample = currentTime - samples[id];
-
-            // If the slice was too big, advance all the previous times by the diff.
-            if (timeSinceLastSample > MAX_FRAME) {
-                long diff = timeSinceLastSample - MAX_FRAME;
-                for (int i = 0; i < SAMPLES; i++) {
-                    samples[i] += diff;
+            Set<Animation> byGameId = activeByGameId.getOrDefault(gameId, null);
+            if (byGameId != null) {
+                byGameId.remove(this);
+                if (byGameId.isEmpty()) {
+                    activeByGameId.remove(gameId);
                 }
             }
-
-            long timeSinceOldestSample = currentTime - samples[sampleIndex];
-            samples[sampleIndex] = currentTime;
-            sampleIndex = (sampleIndex + 1) % SAMPLES;
-
-            return timeSinceOldestSample / (long) SAMPLES;
         }
+        gameId = null;
     }
 
     /**
@@ -201,7 +227,6 @@ public abstract class Animation {
         for (Animation animation : animations) {
             animation.cancel();
         }
-        activeByGameId.remove(gameId);
     }
 
     /**
