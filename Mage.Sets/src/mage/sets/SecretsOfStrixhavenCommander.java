@@ -24,6 +24,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Abrade", 234, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
+        cards.add(new SetCardInfo("Abstract Performance", 17, Rarity.RARE, mage.cards.a.AbstractPerformance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Abstract Performance", 67, Rarity.RARE, mage.cards.a.AbstractPerformance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Advanced Reconstruction", 30, Rarity.RARE, mage.cards.a.AdvancedReconstruction.class));
         cards.add(new SetCardInfo("Aether Gale", 186, Rarity.UNCOMMON, mage.cards.a.AetherGale.class));
         cards.add(new SetCardInfo("Ajani's Chosen", 132, Rarity.RARE, mage.cards.a.AjanisChosen.class));
