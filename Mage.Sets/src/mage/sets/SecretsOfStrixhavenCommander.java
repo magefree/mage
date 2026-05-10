@@ -241,6 +241,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Nether Traitor", 220, Rarity.RARE, mage.cards.n.NetherTraitor.class));
         cards.add(new SetCardInfo("Nev, the Practical Dean", 41, Rarity.RARE, mage.cards.n.NevThePracticalDean.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nev, the Practical Dean", 89, Rarity.RARE, mage.cards.n.NevThePracticalDean.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nexus Mentality", 21, Rarity.RARE, mage.cards.n.NexusMentality.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nexus Mentality", 71, Rarity.RARE, mage.cards.n.NexusMentality.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Night's Whisper", 221, Rarity.COMMON, mage.cards.n.NightsWhisper.class));
         cards.add(new SetCardInfo("Nils, Discipline Enforcer", 158, Rarity.RARE, mage.cards.n.NilsDisciplineEnforcer.class));
         cards.add(new SetCardInfo("Ohran Frostfang", 279, Rarity.RARE, mage.cards.o.OhranFrostfang.class));
