@@ -1,7 +1,6 @@
 package mage.cards.v;
 
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.SpecialAction;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -144,7 +143,7 @@ class VolrathsCurseSpecialAction extends SpecialAction {
     public VolrathsCurseSpecialAction() {
         super(Zone.BATTLEFIELD);
         this.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT));
-        this.addEffect(new VolrathsCurseIgnoreEffect(VolrathsCurse.keyString));
+        this.addEffect(new VolrathsCurseIgnoreEffect());
         this.setMayActivate(TargetController.CONTROLLER_ATTACHED_TO);
     }
 
@@ -160,7 +159,7 @@ class VolrathsCurseSpecialAction extends SpecialAction {
 
 class VolrathsCurseIgnoreEffect extends OneShotEffect {
 
-    VolrathsCurseIgnoreEffect(final String keyString) {
+    VolrathsCurseIgnoreEffect() {
         super(Outcome.Benefit);
         this.staticText = "That creature's controller may sacrifice a permanent for that player to ignore this effect until end of turn";
     }
@@ -176,7 +175,15 @@ class VolrathsCurseIgnoreEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        String key = source.getSourceId().toString() + source.getStackMomentSourceZCC() + VolrathsCurse.keyString + game.getTurnNum() + ((ActivatedAbilityImpl) source).getActivatorId();
+        Permanent enchantment = source.getSourcePermanentOrLKI(game);
+        if (enchantment == null) {
+            return false;
+        }
+        Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
+        if (enchanted == null) {
+            return false;
+        }
+        String key = source.getSourceId().toString() + source.getStackMomentSourceZCC() + VolrathsCurse.keyString + game.getTurnNum() + enchanted.getControllerId();
         game.getState().setValue(key, true);
         return true;
     }
