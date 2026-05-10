@@ -52,7 +52,8 @@ public final class LevelUp extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAttachedEffect(CounterType.P1P1.createInstance(), "enchanted creature"), false));
 
         // Enchanted creature has "Whenever this creature attacks, double the number of +1/+1 counters on it. Then if it has power 10 or greater, draw a card."
-        AttacksTriggeredAbility attacksAbility = new AttacksTriggeredAbility(new DoubleCountersSourceEffect(CounterType.P1P1), false);
+        AttacksTriggeredAbility attacksAbility = new AttacksTriggeredAbility(new DoubleCountersSourceEffect(CounterType.P1P1)
+                .setText("double the number of +1/+1 counters on it"), false);
         attacksAbility.addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1),
                 new SourceMatchesFilterCondition("its power is 10 or greater", filter),

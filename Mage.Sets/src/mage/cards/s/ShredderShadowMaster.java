@@ -97,7 +97,7 @@ class ShredderShadowMasterEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.staticText = "for each other opponent, create a token that's a copy of {this} "
             + "tapped and attacking that player, except it isn't legendary. "
-            + "Sacrifice those tokens at the end of combat";
+            + "Sacrifice those tokens at end of combat";
     }
 
     private ShredderShadowMasterEffect(final ShredderShadowMasterEffect effect) {

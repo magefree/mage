@@ -21,7 +21,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetSacrifice;
 import mage.target.targetpointer.FixedTarget;
@@ -140,7 +139,7 @@ class DarkIntimationsGraveyardEffect extends OneShotEffect {
 
     DarkIntimationsGraveyardEffect() {
         super(Outcome.Benefit);
-        this.staticText = "exile {this} from your graveyard. That planeswalker enters the battlefield with an additional loyalty counter on it";
+        this.staticText = "exile this card from your graveyard. That planeswalker enters with an additional loyalty counter on it";
     }
 
     private DarkIntimationsGraveyardEffect(final DarkIntimationsGraveyardEffect effect) {
@@ -176,7 +175,7 @@ class DarkIntimationsReplacementEffect extends ReplacementEffectImpl {
 
     DarkIntimationsReplacementEffect() {
         super(Duration.OneUse, Outcome.Benefit);
-        staticText = "That planeswalker enters the battlefield with an additional loyalty counter on it";
+        staticText = "That planeswalker enters with an additional loyalty counter on it";
     }
 
     private DarkIntimationsReplacementEffect(final DarkIntimationsReplacementEffect effect) {
