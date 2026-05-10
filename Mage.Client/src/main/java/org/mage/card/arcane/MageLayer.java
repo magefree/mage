@@ -245,20 +245,29 @@ public class MageLayer extends MageCard {
     }
 
     private static MageCardSpace getAnimationOuterSpace(int width, int height) {
+        // We add some padding to the card to not clip icons sitting on the card's border
+        // (commander crown, reach)This is a generous approximation that leaves a lot of space.
+        final double paddingFactor = 0.25;
+        int paddingX = (int) (width * paddingFactor);
+        int paddingY = (int) (height * paddingFactor);
+
         // Cards are rotate around (width / 2, height - width / 2).
         double originX = width / 2d;
         double originY = height - originX;
 
         // We compute the distance from origin to the outermost point, which is the maximum radius
-        // of a rotation.
-        double maxRadius = Math.hypot(originX, originY);
+        // of a rotation for the topRadius and the distance to the bottom left point for the bottomRadius.
+        double topRadius = Math.hypot(originX, originY);
+        int right = (int) Math.ceil(Math.max(0d, topRadius - (width - originX)));
+        int top = (int) Math.ceil(Math.max(0d, topRadius - originY));
 
-        int left = (int) Math.ceil(Math.max(0d, maxRadius - originX));
-        int right = (int) Math.ceil(Math.max(0d, maxRadius - (width - originY)));
-        int top = (int) Math.ceil(Math.max(0d, maxRadius - originY));
-        int bottom = (int) Math.ceil(Math.max(0d, maxRadius - (height - originY)));
+        // A card never rotates outsides [0, 90] degree, so we do not need the big radius
+        // padding on the bottom and left side.
+        double bottomRadius = Math.hypot(width - originX, height - originY);
+        int left = (int) Math.ceil(Math.max(0d, bottomRadius - originX));
+        int bottom = (int) Math.ceil(Math.max(0d, bottomRadius - (height - originY)));
 
-        return new MageCardSpace(left, right, top, bottom);
+        return new MageCardSpace(left + paddingX, right + paddingX, top + paddingY, bottom + paddingY);
     }
 
     @Override
@@ -269,7 +278,7 @@ public class MageLayer extends MageCard {
         // * scale the current layer to fit additional elemenst like icons
         // * draw child layer with new sizes
         //
-        // animation logic (maybe it can be change in the future):
+        // animation logic (maybe it can be changed in the future):
         // * animation implemented as g2d graphic context scale in Paint() method
         // * all layers and elements must be moved as one object
         // * only the main panel (child) can do a calcs for the animation (so send parent sizes to recalc it)
@@ -282,7 +291,6 @@ public class MageLayer extends MageCard {
 
             // extra space for animation and other drawing
             MageCardSpace outerSpace = getAnimationOuterSpace(width, height);
-            //MageCardSpace outerSpace = new MageCardSpace(50, 30, 150, 20);
             this.lastOuterSpace = outerSpace;
 
             // construct new spaces (outer + inner)
