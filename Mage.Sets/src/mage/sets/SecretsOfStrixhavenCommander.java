@@ -151,6 +151,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Flickering Ward", 109, Rarity.UNCOMMON, mage.cards.f.FlickeringWard.class));
         cards.add(new SetCardInfo("Flooded Grove", 373, Rarity.RARE, mage.cards.f.FloodedGrove.class));
         cards.add(new SetCardInfo("Forgotten Ancient", 267, Rarity.RARE, mage.cards.f.ForgottenAncient.class));
+        cards.add(new SetCardInfo("Forum Filibuster", 14, Rarity.RARE, mage.cards.f.ForumFilibuster.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forum Filibuster", 64, Rarity.RARE, mage.cards.f.ForumFilibuster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fractal Harness", 268, Rarity.RARE, mage.cards.f.FractalHarness.class));
         cards.add(new SetCardInfo("Fracture", 310, Rarity.UNCOMMON, mage.cards.f.Fracture.class));
         cards.add(new SetCardInfo("Frostboil Snarl", 374, Rarity.RARE, mage.cards.f.FrostboilSnarl.class));
