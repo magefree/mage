@@ -173,15 +173,7 @@ class LostInThoughtIgnoreEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent enchantment = source.getSourcePermanentOrLKI(game);
-        if (enchantment == null) {
-            return false;
-        }
-        Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
-        if (enchanted == null) {
-            return false;
-        }
-        String key = source.getSourceId().toString() + source.getStackMomentSourceZCC() + LostInThought.keyString + game.getTurnNum() + enchanted.getControllerId();
+        String key = source.getSourceId().toString() + source.getStackMomentSourceZCC() + LostInThought.keyString + game.getTurnNum() + source.getControllerId();
         game.getState().setValue(key, true);
         return true;
     }
