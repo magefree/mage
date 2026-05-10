@@ -55,8 +55,8 @@ class AntiquitiesOnTheLooseEffect extends OneShotEffect {
 
     AntiquitiesOnTheLooseEffect() {
         super(Outcome.Benefit);
-        staticText = "then if this spell was cast from anywhere other than your hand, "
-        + "put two +1/+1 counters on each Spirit you control";
+        staticText = "Then if this spell was cast from anywhere other than your hand, "
+        + "put a +1/+1 counter on each Spirit you control";
     }
 
     private AntiquitiesOnTheLooseEffect(final AntiquitiesOnTheLooseEffect effect) {
@@ -76,7 +76,7 @@ class AntiquitiesOnTheLooseEffect extends OneShotEffect {
                 .map(Spell.class::cast)
                 .orElse(null);
         if (spell != null && !Zone.HAND.match(spell.getFromZone())) {
-            new AddCountersAllEffect(CounterType.P1P1.createInstance(2), filter).apply(game, source);
+            new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter).apply(game, source);
         }
 
         return true;
