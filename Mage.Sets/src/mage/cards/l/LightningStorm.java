@@ -1,7 +1,6 @@
 package mage.cards.l;
 
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -115,7 +114,7 @@ class LightningStormAddCounterEffect extends OneShotEffect {
         Spell spell = game.getStack().getSpell(source.getSourceId());
         if (spell != null) {
             spell.addCounters(CounterType.CHARGE.createInstance(2), source.getControllerId(), source, game);
-            spell.chooseNewTargets(game, ((ActivatedAbilityImpl) source).getActivatorId(), false, false, null);
+            spell.chooseNewTargets(game, source.getControllerId(), false, false, null);
             return true;
         }
         return false;

@@ -1,9 +1,6 @@
 package mage.abilities.effects.common.turn;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -39,15 +36,8 @@ public class SkipNextTurnSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID playerId = null;
-        if (source instanceof ActivatedAbilityImpl) {
-            playerId = ((ActivatedAbilityImpl) source).getActivatorId(); // for Lethal Vapors
-        }
-        if (playerId == null) {
-            playerId = source.getControllerId();
-        }
         for (int i = 0; i < numberOfTurns; i++) {
-            game.getState().getTurnMods().add(new TurnMod(playerId).withSkipTurn());
+            game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withSkipTurn());
         }
         return true;
     }
