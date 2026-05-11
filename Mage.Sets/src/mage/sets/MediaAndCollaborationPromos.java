@@ -25,6 +25,7 @@ public class MediaAndCollaborationPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Aang, Air Nomad", "2025-25", Rarity.RARE, mage.cards.a.AangAirNomad.class));
         cards.add(new SetCardInfo("Ajani, Mentor of Heroes", "2024-3", Rarity.MYTHIC, mage.cards.a.AjaniMentorOfHeroes.class));
         cards.add(new SetCardInfo("Ancestral Mask", "2025-2", Rarity.RARE, mage.cards.a.AncestralMask.class));
+        cards.add(new SetCardInfo("Appa, Aang's Companion", "2026-08", Rarity.RARE, mage.cards.a.AppaAangsCompanion.class));
         cards.add(new SetCardInfo("Archangel", "2000-4", Rarity.RARE, mage.cards.a.Archangel.class, RETRO_ART));
         cards.add(new SetCardInfo("Ascendant Evincar", "2000-7", Rarity.RARE, mage.cards.a.AscendantEvincar.class, RETRO_ART));
         cards.add(new SetCardInfo("Avalanche Riders", "2023-5", Rarity.RARE, mage.cards.a.AvalancheRiders.class));
@@ -36,11 +37,11 @@ public class MediaAndCollaborationPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Chrome Host Seedshark", "2025-20", Rarity.RARE, mage.cards.c.ChromeHostSeedshark.class));
         cards.add(new SetCardInfo("Cloud, Midgar Mercenary", "2025-21", Rarity.MYTHIC, mage.cards.c.CloudMidgarMercenary.class));
         cards.add(new SetCardInfo("Cloud, Planet's Champion", "2025-13", Rarity.MYTHIC, mage.cards.c.CloudPlanetsChampion.class));
-        cards.add(new SetCardInfo("Command Tower", "2026-01", Rarity.RARE, mage.cards.c.CommandTower.class));
+        cards.add(new SetCardInfo("Command Tower", "2026-1", Rarity.RARE, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Counterspell", "2021-1", Rarity.RARE, mage.cards.c.Counterspell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Counterspell", "2026-7", Rarity.RARE, mage.cards.c.Counterspell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crop Rotation", "2020-7", Rarity.RARE, mage.cards.c.CropRotation.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Crop Rotation", "2026-02", Rarity.RARE, mage.cards.c.CropRotation.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Crop Rotation", "2026-2", Rarity.RARE, mage.cards.c.CropRotation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Culling the Weak", "2023-8", Rarity.RARE, mage.cards.c.CullingTheWeak.class));
         cards.add(new SetCardInfo("Cunning Sparkmage", "2010-2", Rarity.UNCOMMON, mage.cards.c.CunningSparkmage.class));
         cards.add(new SetCardInfo("Dark Ritual", "2020-4", Rarity.RARE, mage.cards.d.DarkRitual.class, NON_FULL_USE_VARIOUS));
@@ -60,6 +61,7 @@ public class MediaAndCollaborationPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Harald, King of Skemfar", "2021-3", Rarity.RARE, mage.cards.h.HaraldKingOfSkemfar.class));
         cards.add(new SetCardInfo("Heliod's Pilgrim", "2020-6", Rarity.RARE, mage.cards.h.HeliodsPilgrim.class));
         cards.add(new SetCardInfo("Hypnotic Sprite", "2019-5", Rarity.RARE, mage.cards.h.HypnoticSprite.class));
+        cards.add(new SetCardInfo("Hulking Raptor", "2026-9", Rarity.RARE, mage.cards.h.HulkingRaptor.class));
         cards.add(new SetCardInfo("Iroh, Grand Lotus", "2025-24", Rarity.RARE, mage.cards.i.IrohGrandLotus.class));
         cards.add(new SetCardInfo("Jace Beleren", "2009-1", Rarity.MYTHIC, mage.cards.j.JaceBeleren.class));
         cards.add(new SetCardInfo("Jace, Memory Adept", "2024-2", Rarity.MYTHIC, mage.cards.j.JaceMemoryAdept.class));
@@ -97,6 +99,7 @@ public class MediaAndCollaborationPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Swords to Plowshares", "2026-4", Rarity.RARE, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Talruum Champion", "1997-1", Rarity.COMMON, mage.cards.t.TalruumChampion.class, RETRO_ART));
         cards.add(new SetCardInfo("Tangled Florahedron", "2020-8", Rarity.UNCOMMON, mage.cards.t.TangledFlorahedron.class));
+        cards.add(new SetCardInfo("The Goose Mother", "2026-10", Rarity.RARE, mage.cards.t.TheGooseMother.class));
         cards.add(new SetCardInfo("Thorn Elemental", "2000-3", Rarity.RARE, mage.cards.t.ThornElemental.class, RETRO_ART));
         cards.add(new SetCardInfo("Ultimecia, Temporal Threat", "2025-11", Rarity.RARE, mage.cards.u.UltimeciaTemporalThreat.class));
         cards.add(new SetCardInfo("Usher of the Fallen", "2022-3", Rarity.RARE, mage.cards.u.UsherOfTheFallen.class));
@@ -108,7 +111,7 @@ public class MediaAndCollaborationPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Winged Boots", "2023-7", Rarity.RARE, mage.cards.w.WingedBoots.class));
         cards.add(new SetCardInfo("Worn Powerstone", "2023-2", Rarity.RARE, mage.cards.w.WornPowerstone.class));
         cards.add(new SetCardInfo("Wrath of God", "2025-3", Rarity.RARE, mage.cards.w.WrathOfGod.class));
-        cards.add(new SetCardInfo("Zack Fair", "2026-03", Rarity.RARE, mage.cards.z.ZackFair.class));
+        cards.add(new SetCardInfo("Zack Fair", "2026-3", Rarity.RARE, mage.cards.z.ZackFair.class));
         cards.add(new SetCardInfo("Zhalfirin Knight", "1996-2", Rarity.COMMON, mage.cards.z.ZhalfirinKnight.class, RETRO_ART));
     }
 }
