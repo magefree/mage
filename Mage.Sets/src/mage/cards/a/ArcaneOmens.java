@@ -21,7 +21,7 @@ public final class ArcaneOmens extends CardImpl {
         // Converge -- Target player discards X cards, where X is the number of colors of mana spent to cast this spell.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(ColorsOfManaSpentToCastCount.getInstance()));
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
+        this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE).addHint(ColorsOfManaSpentToCastCount.getHint());
     }
 
     private ArcaneOmens(final ArcaneOmens card) {

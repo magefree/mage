@@ -27,7 +27,7 @@ public final class RoilmagesTrick extends CardImpl {
 
         // <i>Converge</i> &mdash; Creatures your opponents control get -X/-0 until end of turn,
         // where X is the number of colors of mana spent to cast this spell.
-        this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
+        this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE).addHint(ColorsOfManaSpentToCastCount.getHint());
         this.getSpellAbility().addEffect(new BoostAllEffect(
                 xValue, StaticValue.get(0), Duration.EndOfTurn,
                 StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, false, null

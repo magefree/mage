@@ -35,7 +35,7 @@ public final class TranscendentArchaic extends CardImpl {
 
         // Converge -- When this creature enters, you may draw X cards, where X is the number of colors of mana spent to cast this spell. If you draw one or more cards this way, discard two cards.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TranscendentArchaicEffect(), true);
-        ability.setAbilityWord(AbilityWord.CONVERGE);
+        ability.setAbilityWord(AbilityWord.CONVERGE).addHint(ColorsOfManaSpentToCastCount.getHint());
         this.addAbility(ability);
     }
 

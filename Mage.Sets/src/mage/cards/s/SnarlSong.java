@@ -24,7 +24,7 @@ public final class SnarlSong extends CardImpl {
                 ". Put X +1/+1 counters on each of them"
         ));
         this.getSpellAbility().addEffect(new GainLifeEffect(ColorsOfManaSpentToCastCount.getInstance()).concatBy("and"));
-        this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
+        this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE).addHint(ColorsOfManaSpentToCastCount.getHint());
     }
 
     private SnarlSong(final SnarlSong card) {
