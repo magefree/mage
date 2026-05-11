@@ -159,6 +159,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fracture", 310, Rarity.UNCOMMON, mage.cards.f.Fracture.class));
         cards.add(new SetCardInfo("Frostboil Snarl", 374, Rarity.RARE, mage.cards.f.FrostboilSnarl.class));
         cards.add(new SetCardInfo("Furycalm Snarl", 375, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
+        cards.add(new SetCardInfo("Furygale Flocking", 32, Rarity.RARE, mage.cards.f.FurygaleFlocking.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Furygale Flocking", 80, Rarity.RARE, mage.cards.f.FurygaleFlocking.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Galazeth Prismari", 311, Rarity.MYTHIC, mage.cards.g.GalazethPrismari.class));
         cards.add(new SetCardInfo("Ghostly Prison", 146, Rarity.UNCOMMON, mage.cards.g.GhostlyPrison.class));
         cards.add(new SetCardInfo("Ghoulish Impetus", 214, Rarity.RARE, mage.cards.g.GhoulishImpetus.class));
