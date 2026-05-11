@@ -191,6 +191,8 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Infernal Grasp", 216, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class));
         cards.add(new SetCardInfo("Ingenious Prodigy", 115, Rarity.RARE, mage.cards.i.IngeniousProdigy.class));
         cards.add(new SetCardInfo("Inkshield", 316, Rarity.RARE, mage.cards.i.Inkshield.class));
+        cards.add(new SetCardInfo("Inspired Skypainter", 48, Rarity.RARE, mage.cards.i.InspiredSkypainter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Inspired Skypainter", 96, Rarity.RARE, mage.cards.i.InspiredSkypainter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Intermediate Chirography", 26, Rarity.RARE, mage.cards.i.IntermediateChirography.class));
         cards.add(new SetCardInfo("Isolated Chapel", 382, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
         cards.add(new SetCardInfo("Jadar, Ghoulcaller of Nephalia", 217, Rarity.RARE, mage.cards.j.JadarGhoulcallerOfNephalia.class));
