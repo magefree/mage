@@ -31,5 +31,6 @@ public class WizardsPlayNetwork2026 extends ExpansionSet {
         cards.add(new SetCardInfo("Nowhere to Run", 1, Rarity.RARE, mage.cards.n.NowhereToRun.class, RETRO_ART));
         cards.add(new SetCardInfo("Spicy Oatmeal Pizza", 7, Rarity.RARE, mage.cards.s.SpicyOatmealPizza.class));
         cards.add(new SetCardInfo("The Eternal Wanderer", 4, Rarity.RARE, mage.cards.t.TheEternalWanderer.class));
+        cards.add(new SetCardInfo("Wood Elves", 13, Rarity.RARE, mage.cards.w.WoodElves.class));
     }
 }
