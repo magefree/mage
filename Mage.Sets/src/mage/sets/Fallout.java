@@ -391,6 +391,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("HELIOS One", 441, Rarity.RARE, mage.cards.h.HELIOSOne.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("HELIOS One", 677, Rarity.RARE, mage.cards.h.HELIOSOne.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("HELIOS One", 969, Rarity.RARE, mage.cards.h.HELIOSOne.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Harold and Bob, First Numens", 78, Rarity.RARE, mage.cards.h.HaroldAndBobFirstNumens.class));
         cards.add(new SetCardInfo("Heroic Intervention", 202, Rarity.RARE, mage.cards.h.HeroicIntervention.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Heroic Intervention", 471, Rarity.RARE, mage.cards.h.HeroicIntervention.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Heroic Intervention", 730, Rarity.RARE, mage.cards.h.HeroicIntervention.class, NON_FULL_USE_VARIOUS));
