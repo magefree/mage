@@ -96,7 +96,8 @@ public enum SubType {
     ASSASSIN("Assassin", SubTypeSet.CreatureType),
     ASSEMBLY_WORKER("Assembly-Worker", SubTypeSet.CreatureType),
     ASTARTES("Astartes", SubTypeSet.CreatureType),
-    ATAT("AT-AT", SubTypeSet.CreatureType, true),
+    ATAT("AT-AT", SubTypeSet.CreatureType, true), // Star Wars
+    ATHLETE("Athlete", SubTypeSet.CreatureType, true), // Unknown Event
     ATOG("Atog", SubTypeSet.CreatureType),
     AUROCHS("Aurochs", SubTypeSet.CreatureType),
     AUTOBOT("Autobot", SubTypeSet.CreatureType, true), // H17, Grimlock
