@@ -46,7 +46,7 @@ public final class BattletideAlchemist extends CardImpl {
 class BattletideAlchemistEffect extends PreventionEffectImpl {
 
     BattletideAlchemistEffect() {
-        super(Duration.WhileOnBattlefield, 0, false, false, new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.CLERIC, "Clerics")));
+        super(Duration.WhileOnBattlefield, -1, false, false, new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.CLERIC, "Clerics")));
         this.staticText = "If a source would deal damage to a player, you may prevent X of that damage, where X is the number of Clerics you control";
     }
 
@@ -61,6 +61,8 @@ class BattletideAlchemistEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        amountToPrevent = amountToPreventDynamic.calculate(game, source, this);
+
         Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(event.getTargetId());
         if (controller != null && targetPlayer != null) {
@@ -75,5 +77,4 @@ class BattletideAlchemistEffect extends PreventionEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
     }
-
 }

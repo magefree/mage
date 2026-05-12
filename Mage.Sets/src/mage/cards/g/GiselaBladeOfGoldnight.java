@@ -100,7 +100,7 @@ class GiselaBladeOfGoldnightDoubleDamageEffect extends ReplacementEffectImpl {
 class GiselaBladeOfGoldnightPreventionEffect extends PreventionEffectImpl {
 
     GiselaBladeOfGoldnightPreventionEffect() {
-        super(Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield, -1, false, false);
         this.staticText = "If a source would deal damage to you or a permanent you control, " +
                 "prevent half that damage, rounded up";
     }
@@ -122,6 +122,7 @@ class GiselaBladeOfGoldnightPreventionEffect extends PreventionEffectImpl {
 
     @Override
     protected PreventionEffectData preventDamageAction(GameEvent event, Ability source, Game game) {
-        return game.preventDamage(event, source, game, Math.floorDiv(event.getAmount(), 2) + (event.getAmount() % 2));
+        amountToPrevent = Math.floorDiv(event.getAmount(), 2) + (event.getAmount() % 2);
+        return super.preventDamageAction(event, source, game);
     }
 }

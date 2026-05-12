@@ -4,14 +4,14 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.PreventDamageToSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterAnyTarget;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -48,7 +48,7 @@ public class PhyrexianVindicator extends CardImpl {
     }
 }
 
-class PhyrexianVindicatorEffect extends ReplacementEffectImpl {
+class PhyrexianVindicatorEffect extends PreventDamageToSourceEffect {
 
     private static final FilterAnyTarget filter = new FilterAnyTarget("any other target");
 
@@ -56,8 +56,8 @@ class PhyrexianVindicatorEffect extends ReplacementEffectImpl {
         filter.getPermanentFilter().add(AnotherPredicate.instance);
     }
 
-    public PhyrexianVindicatorEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.PreventDamage);
+    PhyrexianVindicatorEffect() {
+        super(Duration.WhileOnBattlefield, Integer.MAX_VALUE);
         staticText = "If damage would be dealt to {this}, prevent that damage. When damage is prevented this way, " +
                 "{this} deals that much damage to any other target.";
     }
@@ -73,25 +73,15 @@ class PhyrexianVindicatorEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        int damage = game.preventDamage(event, source, game, Integer.MAX_VALUE).getPreventedDamage();
-        if (damage > 0) {
+        PreventionEffectData preventionEffectData = preventDamageAction(event, source, game);
+        if (preventionEffectData.getPreventedDamage() > 0) {
             ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                    new DamageTargetEffect(damage), false,
+                    new DamageTargetEffect(preventionEffectData.getPreventedDamage()), false,
                     "{this} deals that much damage to any other target"
             );
             ability.addTarget(new TargetPermanentOrPlayer(filter));
             game.fireReflexiveTriggeredAbility(ability, source);
         }
         return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGE_PERMANENT;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getTargetId().equals(source.getSourceId());
     }
 }

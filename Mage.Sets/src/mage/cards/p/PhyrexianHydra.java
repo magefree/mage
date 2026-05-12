@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.PreventionEffectData;
-import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.common.PreventDamageToSourceEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -46,10 +46,10 @@ public final class PhyrexianHydra extends CardImpl {
 
 }
 
-class PhyrexianHydraEffect extends PreventionEffectImpl {
+class PhyrexianHydraEffect extends PreventDamageToSourceEffect {
 
     PhyrexianHydraEffect() {
-        super(Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield, Integer.MAX_VALUE);
         staticText = "If damage would be dealt to {this}, prevent that damage. Put a -1/-1 counter on {this} for each 1 damage prevented this way";
     }
 
@@ -71,14 +71,6 @@ class PhyrexianHydraEffect extends PreventionEffectImpl {
                 permanent.addCounters(CounterType.M1M1.createInstance(preventionEffectData.getPreventedDamage()), source.getControllerId(), source, game);
             }
             return false;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            return event.getTargetId().equals(source.getSourceId());
         }
         return false;
     }
