@@ -50,10 +50,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Animal Friend", 600, Rarity.RARE, mage.cards.a.AnimalFriend.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Animal Friend", 72, Rarity.RARE, mage.cards.a.AnimalFriend.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Animal Friend", 925, Rarity.RARE, mage.cards.a.AnimalFriend.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Aradesh, the Founder", 362, Rarity.RARE, mage.cards.a.AradeshTheFounder.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Aradesh, the Founder", 537, Rarity.RARE, mage.cards.a.AradeshTheFounder.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Aradesh, the Founder", 890, Rarity.RARE, mage.cards.a.AradeshTheFounder.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Aradesh, the Founder", 9, Rarity.RARE, mage.cards.a.AradeshTheFounder.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aradesh, the Founder", 362, Rarity.RARE, mage.cards.a.AradeshTheFounder.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aradesh, the Founder", 537, Rarity.RARE, mage.cards.a.AradeshTheFounder.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aradesh, the Founder", 890, Rarity.RARE, mage.cards.a.AradeshTheFounder.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aradesh, the Founder", 9, Rarity.RARE, mage.cards.a.AradeshTheFounder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcade Gannon", 407, Rarity.RARE, mage.cards.a.ArcadeGannon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcade Gannon", 620, Rarity.RARE, mage.cards.a.ArcadeGannon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcade Gannon", 92, Rarity.RARE, mage.cards.a.ArcadeGannon.class, NON_FULL_USE_VARIOUS));
