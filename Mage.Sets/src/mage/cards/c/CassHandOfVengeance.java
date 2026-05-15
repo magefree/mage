@@ -3,9 +3,7 @@ package mage.cards.c;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -29,6 +27,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.card.AuraCardCanAttachToPermanentId;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -126,14 +125,17 @@ class CassHandOfVengeanceEffect extends OneShotEffect {
 
         Cards validAuras = new CardsImpl();
         List<Permanent> validEquipment = new ArrayList<>();
-        collectAttachments(dyingCreature, controller, game, validAuras, validEquipment);
+        collectAttachments(dyingCreature, controller, game, targetCreature.getId(), validAuras, validEquipment);
 
         returnAuras(validAuras, targetCreature, controller, source, game);
         reattachEquipment(validEquipment, targetCreature, controller, source, game);
         return true;
     }
 
-    private void collectAttachments(Permanent dyingCreature, Player controller, Game game, Cards validAuras, List<Permanent> validEquipment) {
+    private void collectAttachments(Permanent dyingCreature, Player controller, Game game, UUID targetCreatureId, Cards validAuras, List<Permanent> validEquipment) {
+        FilterCard auraFilter = new FilterCard("Aura cards from your graveyard that were attached to the dying creature");
+        auraFilter.add(SubType.AURA.getPredicate());
+        auraFilter.add(new AuraCardCanAttachToPermanentId(targetCreatureId));
         for (UUID attachmentId : dyingCreature.getAttachments()) {
             Permanent lki = game.getPermanentOrLKIBattlefield(attachmentId);
             if (lki == null) {
@@ -141,7 +143,8 @@ class CassHandOfVengeanceEffect extends OneShotEffect {
             }
             if (lki.isEnchantment(game)) {
                 Card card = game.getCard(attachmentId);
-                if (card != null && controller.getGraveyard().contains(attachmentId)) {
+                if (card != null && controller.getGraveyard().contains(attachmentId)
+                        && auraFilter.match(card, game)) {
                     validAuras.add(card);
                 }
             } else if (lki.hasSubtype(SubType.EQUIPMENT, game)) {
@@ -159,15 +162,14 @@ class CassHandOfVengeanceEffect extends OneShotEffect {
         }
         TargetCard auraTarget = new TargetCard(0, validAuras.size(), Zone.GRAVEYARD,
                 new FilterCard("Aura cards from your graveyard that were attached to the dying creature"));
-        controller.choose(Outcome.Benefit, validAuras, auraTarget, source, game);
-        Set<Card> chosenAuras = auraTarget.getTargets().stream()
-                .map(game::getCard)
-                .filter(Objects::nonNull)
-                .filter(card -> !targetCreature.cantBeAttachedBy(card, source, game, true))
-                .collect(Collectors.toSet());
-        chosenAuras.forEach(card -> game.getState().setValue("attachTo:" + card.getId(), targetCreature));
-        controller.moveCards(chosenAuras, Zone.BATTLEFIELD, source, game);
-        for (Card card : chosenAuras) {
+        controller.chooseTarget(Outcome.Benefit, validAuras, auraTarget, source, game);
+        for (UUID id : auraTarget.getTargets()) {
+            Card card = game.getCard(id);
+            if (card == null) {
+                continue;
+            }
+            game.getState().setValue("attachTo:" + card.getId(), targetCreature);
+            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             Permanent aura = game.getPermanent(card.getId());
             if (aura != null) {
                 targetCreature.addAttachment(aura.getId(), source, game);
