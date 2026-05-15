@@ -175,10 +175,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Captain of the Watch", 448, Rarity.RARE, mage.cards.c.CaptainOfTheWatch.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain of the Watch", 685, Rarity.RARE, mage.cards.c.CaptainOfTheWatch.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain of the Watch", 976, Rarity.RARE, mage.cards.c.CaptainOfTheWatch.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Cass, Hand of Vengeance", 410, Rarity.RARE, mage.cards.c.CassHandOfVengeance.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Cass, Hand of Vengeance", 625, Rarity.RARE, mage.cards.c.CassHandOfVengeance.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Cass, Hand of Vengeance", 938, Rarity.RARE, mage.cards.c.CassHandOfVengeance.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Cass, Hand of Vengeance", 97, Rarity.RARE, mage.cards.c.CassHandOfVengeance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cass, Hand of Vengeance", 410, Rarity.RARE, mage.cards.c.CassHandOfVengeance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cass, Hand of Vengeance", 625, Rarity.RARE, mage.cards.c.CassHandOfVengeance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cass, Hand of Vengeance", 938, Rarity.RARE, mage.cards.c.CassHandOfVengeance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cass, Hand of Vengeance", 97, Rarity.RARE, mage.cards.c.CassHandOfVengeance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Casualties of War", 1004, Rarity.RARE, mage.cards.c.CasualtiesOfWar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Casualties of War", 213, Rarity.RARE, mage.cards.c.CasualtiesOfWar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Casualties of War", 476, Rarity.RARE, mage.cards.c.CasualtiesOfWar.class, NON_FULL_USE_VARIOUS));
