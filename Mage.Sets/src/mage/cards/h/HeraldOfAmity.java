@@ -11,8 +11,17 @@ import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.*;
-import mage.constants.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.CastManaAdjustment;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.Game;
@@ -24,7 +33,6 @@ import mage.util.CardUtil;
 import java.util.UUID;
 
 /**
- *
  * @author muz
  */
 public final class HeraldOfAmity extends CardImpl {
@@ -55,8 +63,8 @@ public final class HeraldOfAmity extends CardImpl {
 
         // Whenever this creature attacks, it gets +X/+X until end of turn, where X is the number of Auras you control.
         this.addAbility(new AttacksTriggeredAbility(
-            new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, "it")
-                .setText("it gets +X/+X until end of turn, where X is the number of Auras you control")
+                new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, "it")
+                        .setText("it gets +X/+X until end of turn, where X is the number of Auras you control")
         ).addHint(new ValueHint("Auras you control", xValue)));
     }
 
@@ -81,7 +89,7 @@ class HeraldOfAmityEffect extends OneShotEffect {
     HeraldOfAmityEffect() {
         super(Outcome.PlayForFree);
         staticText = "exile the top eight cards of your library. You may cast an Aura spell from among them "
-            + "without paying its mana cost. Then put the rest on the bottom of your library in a random order";
+                + "without paying its mana cost. Then put the rest on the bottom of your library in a random order";
     }
 
     private HeraldOfAmityEffect(final HeraldOfAmityEffect effect) {
@@ -106,9 +114,7 @@ class HeraldOfAmityEffect extends OneShotEffect {
         controller.moveCardsToExile(exiled.getCards(game), source, game, true, exileId, exileZoneName);
         exiled.retainZone(Zone.EXILED, game);
 
-        // Find Aura cards among them
         Cards auras = new CardsImpl(exiled.getCards(filter, source.getControllerId(), source, game));
-
         if (!auras.isEmpty()) {
             TargetCard target = new TargetCard(0, 1, Zone.EXILED, filter);
             target.withNotTarget(true);
@@ -122,7 +128,6 @@ class HeraldOfAmityEffect extends OneShotEffect {
             }
         }
 
-        // Put the rest on the bottom in a random order
         if (!exiled.isEmpty()) {
             controller.putCardsOnBottomOfLibrary(exiled, game, source, false);
         }
