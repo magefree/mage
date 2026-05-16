@@ -39,7 +39,7 @@ public final class KillianDecisiveMentor extends CardImpl {
         // Whenever an enchantment you control enters, tap up to one target creature and goad it.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(new TapTargetEffect(), StaticFilters.FILTER_CONTROLLED_PERMANENT_ENCHANTMENT);
         ability.addEffect(new GoadTargetEffect().setText("and goad it"));
-        ability.addTarget(new TargetCreaturePermanent(0, 1));
+        ability.addTarget(new TargetCreaturePermanent(0, 1).withChooseHint("to tap and goad"));
         this.addAbility(ability);
 
         // Whenever one or more creatures that are enchanted by an Aura you control attack, draw a card.
