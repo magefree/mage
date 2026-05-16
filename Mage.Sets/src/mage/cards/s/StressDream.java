@@ -20,7 +20,7 @@ public final class StressDream extends CardImpl {
 
         // Stress Dream deals 5 damage to up to one target creature. Look at the top two cards of your library. Put one of those cards into your hand and the other on the bottom of your library.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1).withChooseHint("to deal 5 damage to"));
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
                 2, 1, PutCards.HAND, PutCards.BOTTOM_ANY
         ));
