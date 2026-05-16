@@ -1,25 +1,27 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.MayCastTargetCardEffect;
-import mage.cards.*;
-import mage.constants.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
+import mage.target.Target;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
-import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
 
 /**
- *
- * @author muz
+ * @author Susucr
  */
 public final class AbstractPerformance extends CardImpl {
 
@@ -45,11 +47,11 @@ public final class AbstractPerformance extends CardImpl {
 class AbstractPerformanceEffect extends OneShotEffect {
 
     AbstractPerformanceEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Exile the top four cards of your library in a face-down pile, then exile the top four cards "
-            + "of your library in a face-up pile. An opponent chooses one of those piles. Put that pile into your "
-            + "graveyard. Look at the cards in the other pile. You may cast a spell from among them without paying "
-            + "its mana cost. Put the rest into your hand";
+        super(Outcome.Benefit);
+        staticText = "exile the top four cards of your library in a face-down pile, then exile the top four "
+                + "cards of your library in a face-up pile. An opponent chooses one of those piles. Put that "
+                + "pile into your graveyard. Look at the cards in the other pile. You may cast a spell from "
+                + "among them without paying its mana cost. Put the rest into your hand";
     }
 
     private AbstractPerformanceEffect(final AbstractPerformanceEffect effect) {
@@ -61,19 +63,17 @@ class AbstractPerformanceEffect extends OneShotEffect {
         return new AbstractPerformanceEffect(this);
     }
 
-    private Cards exileTopFour(Player controller, Ability source, Game game, boolean reveal) {
-        Set<Card> toExile = controller.getLibrary().getTopCards(game, 4);
-        controller.moveCardsToExile(toExile, source, game, reveal, null, "");
-        Cards exiled = new CardsImpl();
-        for (Card card : toExile) {
+    private static Cards exileTopCards(Player controller, Ability source, Game game, int amount, boolean faceDown) {
+        Set<Card> cardsToExile = controller.getLibrary().getTopCards(game, amount);
+        controller.moveCardsToExile(cardsToExile, source, game, !faceDown, null, "");
+        Cards exiledCards = new CardsImpl();
+        for (Card card : cardsToExile) {
             if (game.getState().getZone(card.getId()) == Zone.EXILED) {
-                if (!reveal) {
-                    card.setFaceDown(true, game);
-                }
-                exiled.add(card.getId());
+                card.setFaceDown(faceDown, game);
+                exiledCards.add(card);
             }
         }
-        return exiled;
+        return exiledCards;
     }
 
     private static void turnFaceUp(Cards cards, Game game) {
@@ -85,41 +85,21 @@ class AbstractPerformanceEffect extends OneShotEffect {
         }
     }
 
-    private static Player selectOpponent(Player controller, Ability source, Game game) {
-        Set<UUID> opponents = game.getOpponents(source.getControllerId());
+    private static Player chooseOpponent(Player controller, Ability source, Game game) {
+        Set<UUID> opponents = game.getOpponents(controller.getId());
         if (opponents.isEmpty()) {
             return null;
         }
         if (opponents.size() == 1) {
             return game.getPlayer(opponents.iterator().next());
         }
-        TargetOpponent targetOpponent = new TargetOpponent(true);
+        Target targetOpponent = new TargetOpponent(true);
         controller.chooseTarget(Outcome.Neutral, targetOpponent, source, game);
-        return game.getPlayer(targetOpponent.getFirstTarget());
-    }
-
-    private static void mayCastSpellForFree(Player controller, Cards remainingPile, Ability source, Game game) {
-        Cards spellsInPile = new CardsImpl();
-
-        for (UUID cardId : remainingPile) {
-            Card card = game.getCard(cardId);
-            if (card != null && !card.isLand(game) && game.getState().getZone(cardId) == Zone.EXILED) {
-                spellsInPile.add(cardId);
-            }
+        Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
+        if (opponent != null) {
+            game.informPlayers(controller.getLogName() + " chose " + opponent.getLogName() + " to choose a pile");
         }
-        if (spellsInPile.isEmpty()) {
-            return;
-        }
-
-        TargetCard target = new TargetCard(0, 1, Zone.EXILED, StaticFilters.FILTER_CARD_NON_LAND);
-        controller.choose(Outcome.PlayForFree, spellsInPile, target, source, game);
-        if (target.getFirstTarget() == null) {
-            return;
-        }
-
-        Effect effect = new MayCastTargetCardEffect(CastManaAdjustment.WITHOUT_PAYING_MANA_COST);
-        effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
-        effect.apply(game, source);
+        return opponent;
     }
 
     @Override
@@ -128,51 +108,41 @@ class AbstractPerformanceEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Player opponent = selectOpponent(controller, source, game);
+        Player opponent = chooseOpponent(controller, source, game);
         if (opponent == null) {
             return false;
         }
 
-        // Exile the top four cards of your library in a face-down pile
-        Cards pile1 = exileTopFour(controller, source, game, false);
+        Cards faceDownPile = exileTopCards(controller, source, game, 4, true);
+        Cards faceUpPile = exileTopCards(controller, source, game, 4, false);
+        controller.revealCards(source, "Face-up pile", faceUpPile, game);
+        game.informPlayers(controller.getLogName() + " exiles " + faceDownPile.size() + " cards in a face-down pile");
 
-        // then exile the top four cards of your library in a face-up pile.
-        Cards pile2 = exileTopFour(controller, source, game, true);
-        controller.revealCards(source, "Face-up pile", pile2, game);
-
-        // An opponent chooses one of those piles. Put that pile into your graveyard.
-        boolean chosePile1 = opponent.choosePile(
-            Outcome.Neutral,
-            "Choose a pile to put into your opponent's graveyard.",
-            new ArrayList<>(pile1.getCards(game)),
-            new ArrayList<>(pile2.getCards(game)),
-            game
+        boolean chooseFaceDown = opponent.chooseUse(
+                outcome,
+                "Choose a pile to put into " + controller.getLogName() + "'s graveyard.",
+                null,
+                "Face-down",
+                "Face-up",
+                source,
+                game
         );
+        Cards graveyardPile = chooseFaceDown ? faceDownPile : faceUpPile;
+        Cards otherPile = chooseFaceDown ? faceUpPile : faceDownPile;
 
-        Cards graveyardPile;
-        Cards remainingPile;
-        if (chosePile1) {
-            graveyardPile = pile1;
-            remainingPile = pile2;
-        } else {
-            graveyardPile = pile2;
-            remainingPile = pile1;
-        }
-
+        game.informPlayers(opponent.getLogName() + " chooses the "
+                + (chooseFaceDown ? "face-down" : "face-up") + " pile to put into "
+                + controller.getLogName() + "'s graveyard");
         turnFaceUp(graveyardPile, game);
         controller.moveCards(graveyardPile, Zone.GRAVEYARD, source, game);
 
-        // Look at the cards in the other pile.
-        turnFaceUp(remainingPile, game);
-        controller.lookAtCards(source, "Other pile", remainingPile, game);
-
-        // You may cast a spell from among them without paying its mana cost.
-        mayCastSpellForFree(controller, remainingPile, source, game);
-
-        // Put the rest into your hand.
-        remainingPile.retainZone(Zone.EXILED, game);
-        controller.moveCards(remainingPile, Zone.HAND, source, game);
-
+        controller.lookAtCards(source, "Other pile", otherPile, game);
+        CardUtil.castSpellWithAttributesForFree(controller, source, game, otherPile, StaticFilters.FILTER_CARD);
+        otherPile.retainZone(Zone.EXILED, game);
+        if (!otherPile.isEmpty()) {
+            turnFaceUp(otherPile, game);
+            controller.moveCards(otherPile, Zone.HAND, source, game);
+        }
         return true;
     }
 }
