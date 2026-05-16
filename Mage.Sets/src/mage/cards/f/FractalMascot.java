@@ -34,7 +34,7 @@ public final class FractalMascot extends CardImpl {
         // When this creature enters, tap target creature an opponent controls. Put a stun counter on it.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect());
         ability.addEffect(new AddCountersTargetEffect(CounterType.STUN.createInstance()).setText("Put a stun counter on it"));
-        ability.addTarget(new TargetOpponentsCreaturePermanent());
+        ability.addTarget(new TargetOpponentsCreaturePermanent().withChooseHint("to tap and put a stun counter on"));
         this.addAbility(ability);
     }
 
