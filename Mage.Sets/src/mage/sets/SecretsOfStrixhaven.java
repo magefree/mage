@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class SecretsOfStrixhaven extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Abigale, Poet Laureate", "Adventurous Eater", "Blazing Firesinger", "Campus Composer", "Cheerful Osteomancer", "Decorum Dissertation", "Echocasting Symposium", "Elite Interceptor", "Emeritus of Abundance", "Emeritus of Conflict", "Emeritus of Ideation", "Emeritus of Truce", "Emeritus of Woe", "Encouraging Aviator", "Germination Practicum", "Goblin Glasswright", "Grave Researcher", "Harmonized Trio", "Honorbound Page", "Improvisation Capstone", "Infirmary Healer", "Jadzi, Steward of Fate", "Joined Researchers", "Kirol, History Buff", "Landscape Painter", "Leech Collector", "Lluwen, Exchange Student", "Maelstrom Artisan", "Pigment Wrangler", "Quill-Blade Laureate", "Restoration Seminar", "Sanar, Unfinished Genius", "Scathing Shadelock", "Scheming Silvertongue", "Skycoach Conductor", "Spellbook Seeker", "Spiritcall Enthusiast", "Strife Scholar", "Studious First-Year", "Tam, Observant Sequencer", "Vastlands Scavenger");
+    private static final List<String> unfinished = Arrays.asList();
     private static final SecretsOfStrixhaven instance = new SecretsOfStrixhaven();
 
     public static SecretsOfStrixhaven getInstance() {
@@ -162,8 +162,8 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Harmonized Trio", 52, Rarity.RARE, mage.cards.h.HarmonizedTrio.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Harsh Annotation", 18, Rarity.UNCOMMON, mage.cards.h.HarshAnnotation.class));
         cards.add(new SetCardInfo("Heated Argument", 118, Rarity.COMMON, mage.cards.h.HeatedArgument.class));
-        cards.add(new SetCardInfo("Homesickness", 53, Rarity.UNCOMMON, mage.cards.h.Homesickness.class));
         cards.add(new SetCardInfo("Honorbound Page", 19, Rarity.COMMON, mage.cards.h.HonorboundPage.class));
+        cards.add(new SetCardInfo("Homesickness", 53, Rarity.UNCOMMON, mage.cards.h.Homesickness.class));
         cards.add(new SetCardInfo("Hungry Graffalon", 151, Rarity.COMMON, mage.cards.h.HungryGraffalon.class));
         cards.add(new SetCardInfo("Hydro-Channeler", 54, Rarity.COMMON, mage.cards.h.HydroChanneler.class));
         cards.add(new SetCardInfo("Imperious Inkmage", 195, Rarity.COMMON, mage.cards.i.ImperiousInkmage.class));
@@ -292,8 +292,8 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Run Behind", 66, Rarity.COMMON, mage.cards.r.RunBehind.class));
         cards.add(new SetCardInfo("Sanar, Unfinished Genius", 223, Rarity.UNCOMMON, mage.cards.s.SanarUnfinishedGenius.class));
         cards.add(new SetCardInfo("Scathing Shadelock", 98, Rarity.UNCOMMON, mage.cards.s.ScathingShadelock.class));
-        cards.add(new SetCardInfo("Scheming Silvertongue", 329, Rarity.RARE, mage.cards.s.SchemingSilvertongue.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scheming Silvertongue", 99, Rarity.RARE, mage.cards.s.SchemingSilvertongue.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Scheming Silvertongue", 329, Rarity.RARE, mage.cards.s.SchemingSilvertongue.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scolding Administrator", 224, Rarity.UNCOMMON, mage.cards.s.ScoldingAdministrator.class));
         cards.add(new SetCardInfo("Seize the Spoils", 129, Rarity.COMMON, mage.cards.s.SeizeTheSpoils.class));
         cards.add(new SetCardInfo("Send in the Pest", 100, Rarity.COMMON, mage.cards.s.SendInThePest.class));
