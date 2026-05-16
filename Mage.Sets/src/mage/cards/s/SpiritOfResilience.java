@@ -6,8 +6,16 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.*;
-import mage.constants.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -23,7 +31,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author muz
  */
 public final class SpiritOfResilience extends CardImpl {
@@ -80,10 +87,10 @@ class SpiritOfResilienceTrigger extends TriggeredAbilityImpl {
         }
 
         List<UUID> leavingIds = zEvent.getCards().stream()
-            .filter(Objects::nonNull)
-            .filter(card -> card.isOwnedBy(getControllerId()))
-            .map(Card::getId)
-            .collect(Collectors.toList());
+                .filter(Objects::nonNull)
+                .filter(card -> card.isOwnedBy(getControllerId()))
+                .map(Card::getId)
+                .collect(Collectors.toList());
         if (leavingIds.isEmpty()) {
             return false;
         }
