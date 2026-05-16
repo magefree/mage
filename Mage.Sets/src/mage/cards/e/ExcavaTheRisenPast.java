@@ -68,7 +68,8 @@ public final class ExcavaTheRisenPast extends CardImpl {
         // Whenever Excava attacks, return up to one target artifact, creature, or non-Aura enchantment card with mana value 3 or less from your graveyard to the battlefield with a finality counter on it.
         // It's a 1/1 Spirit creature with flying in addition to its other types.
         Ability ability = new AttacksTriggeredAbility(new ExcavaTheRisenPastEffect());
-        ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter));
+        ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter)
+                .withChooseHint("to return from your graveyard with a finality counter"));
         this.addAbility(ability);
     }
 
