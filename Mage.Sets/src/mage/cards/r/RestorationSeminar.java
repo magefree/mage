@@ -2,6 +2,7 @@ package mage.cards.r;
 
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.ParadigmAbility;
+import mage.abilities.keyword.ParadigmFirstResolveEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -31,6 +32,7 @@ public final class RestorationSeminar extends CardImpl {
 
         // Return target nonland permanent card from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        this.getSpellAbility().addEffect(new ParadigmFirstResolveEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
 
         // Paradigm
