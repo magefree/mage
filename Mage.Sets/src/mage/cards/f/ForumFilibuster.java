@@ -1,8 +1,5 @@
 package mage.cards.f;
 
-import java.util.List;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -24,8 +21,10 @@ import mage.game.permanent.token.InklingToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author muz
  */
 public final class ForumFilibuster extends CardImpl {
@@ -33,7 +32,8 @@ public final class ForumFilibuster extends CardImpl {
     public ForumFilibuster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
 
-        // At the beginning of your upkeep, create a 2/1 white and black Inkling creature token with flying. When you do, return up to one target Aura or Equipment card from your graveyard to the battlefield attached to that token.
+        // At the beginning of your upkeep, create a 2/1 white and black Inkling creature token with flying.
+        // When you do, return up to one target Aura or Equipment card from your graveyard to the battlefield attached to that token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ForumFilibusterEffect()));
     }
 
@@ -51,9 +51,9 @@ class ForumFilibusterEffect extends OneShotEffect {
 
     ForumFilibusterEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "create a 2/1 white and black Inkling creature token with flying. " +
-            "When you do, return up to one target Aura or Equipment card from your graveyard " +
-            "to the battlefield attached to that token";
+        staticText = "create a 2/1 white and black Inkling creature token with flying. "
+                + "When you do, return up to one target Aura or Equipment card from your graveyard "
+                + "to the battlefield attached to that token";
     }
 
     private ForumFilibusterEffect(final ForumFilibusterEffect effect) {
@@ -80,18 +80,19 @@ class ForumFilibusterEffect extends OneShotEffect {
         UUID tokenId = tokenIds.get(0);
         FilterCard filter = new FilterCard("Aura or Equipment card from your graveyard");
         filter.add(Predicates.or(
-            Predicates.and(
-                SubType.AURA.getPredicate(),
-                new AuraCardCanAttachToPermanentId(tokenId)
-            ),
-            SubType.EQUIPMENT.getPredicate()
+                Predicates.and(
+                        SubType.AURA.getPredicate(),
+                        new AuraCardCanAttachToPermanentId(tokenId)
+                ),
+                SubType.EQUIPMENT.getPredicate()
         ));
 
         ReflexiveTriggeredAbility reflexive = new ReflexiveTriggeredAbility(
-            new ForumFilibusterAttachEffect(tokenId), false,
-            "when you do, return up to one target Aura or Equipment card from your graveyard to the battlefield attached to that token"
+                new ForumFilibusterAttachEffect(tokenId), false,
+                "when you do, return up to one target Aura or Equipment card from your graveyard to the battlefield attached to that token"
         );
-        reflexive.addTarget(new TargetCardInYourGraveyard(0, 1, filter));
+        reflexive.addTarget(new TargetCardInYourGraveyard(0, 1, filter)
+                .withChooseHint("to return from your graveyard attached to the token"));
         game.fireReflexiveTriggeredAbility(reflexive, source);
         return true;
     }
