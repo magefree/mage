@@ -11,13 +11,12 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MyriadAbility;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetControlledPermanent;
 import mage.util.functions.CopyApplier;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,7 +30,8 @@ import mage.constants.Outcome;
  */
 public final class MuddleTheEverChanging extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("nonlegendary creature you control");
+    private static final FilterControlledCreaturePermanent filter
+            = new FilterControlledCreaturePermanent("nonlegendary creature you control");
 
     static {
         filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
@@ -52,7 +52,8 @@ public final class MuddleTheEverChanging extends CardImpl {
             new MuddleTheEverChangingCopySelfEffect(),
             StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
         );
-        ability.addTarget(new TargetPermanent(0, 1, filter));
+        ability.addTarget(new TargetControlledPermanent(0, 1, filter, false)
+                .withChooseHint("for Muddle to copy until end of turn"));
         this.addAbility(ability);
     }
 
