@@ -39,13 +39,15 @@ public final class BurrogBarrage extends CardImpl {
             BurrogBarrageCondition.instance,
             "Target creature you control gets +1/+0 until end of turn if you've cast another instant or sorcery spell this turn"
         ));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent()
+                .withChooseHint("+1/+0 and deals damage"));
 
         this.getSpellAbility().addEffect(
             new DamageWithPowerFromOneToAnotherTargetEffect()
                 .setText("Then it deals damage equal to its power to up to one target creature an opponent controls")
         );
-        this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent(0, 1)
+                .withChooseHint("to take damage"));
         this.getSpellAbility().addHint(hint);
     }
 
