@@ -26,6 +26,7 @@ import mage.server.managers.ManagerFactory;
 import mage.server.record.TableRecorderImpl;
 import mage.server.tournament.TournamentFactory;
 import mage.server.util.ServerMessagesUtil;
+import mage.util.RandomUtil;
 import mage.view.ChatMessage;
 import org.apache.log4j.Logger;
 
@@ -42,6 +43,7 @@ import java.util.concurrent.TimeUnit;
 public class TableController {
 
     private static final Logger logger = Logger.getLogger(TableController.class);
+    public static final String GAME_RANDOM_SEED_PROPERTY = "xmage.game.randomSeed";
 
     private final ManagerFactory managerFactory;
     private final UUID userId; // table owner/creator (null in tourney's table)
@@ -668,6 +670,7 @@ public class TableController {
 
     private void startGame(UUID choosingPlayerId) throws GameException {
         try {
+            applyGameRandomSeed();
             match.startGame();
             table.initGame();
             GameOptions gameOptions = new GameOptions();
@@ -733,6 +736,20 @@ public class TableController {
                     // game ended by error, so don't add it to ended stats
                 }
             }
+        }
+    }
+
+    private void applyGameRandomSeed() {
+        String seedProperty = System.getProperty(GAME_RANDOM_SEED_PROPERTY);
+        if (seedProperty == null || seedProperty.trim().isEmpty()) {
+            return;
+        }
+        try {
+            long seed = Long.parseLong(seedProperty.trim());
+            RandomUtil.setSeed(seed);
+            logger.info("Game random seed set to " + seed + " for match " + match.getId());
+        } catch (NumberFormatException e) {
+            logger.warn("Ignoring invalid " + GAME_RANDOM_SEED_PROPERTY + " value: " + seedProperty);
         }
     }
 

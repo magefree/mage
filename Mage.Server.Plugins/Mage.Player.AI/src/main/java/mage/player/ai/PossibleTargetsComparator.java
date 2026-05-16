@@ -7,6 +7,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.player.ai.score.AiHandCardValue;
 import mage.player.ai.score.GameStateEvaluator2;
 import mage.players.PlayableObjectsList;
 import mage.players.Player;
@@ -24,10 +25,16 @@ public class PossibleTargetsComparator {
     UUID abilityControllerId;
     Game game;
     PlayableObjectsList playableItems = new PlayableObjectsList();
+    private final boolean useHandQualityDiscardSort;
 
     public PossibleTargetsComparator(UUID abilityControllerId, Game game) {
+        this(abilityControllerId, game, false);
+    }
+
+    public PossibleTargetsComparator(UUID abilityControllerId, Game game, boolean useHandQualityDiscardSort) {
         this.abilityControllerId = abilityControllerId;
         this.game = game;
+        this.useHandQualityDiscardSort = useHandQualityDiscardSort;
     }
 
     public void findPlayableItems() {
@@ -41,6 +48,18 @@ public class PossibleTargetsComparator {
         } else {
             return getScoreFromLife(item);
         }
+    }
+
+    private int getScoreFromHandCard(MageItem item) {
+        if (item instanceof Card) {
+            return AiHandCardValue.estimateKeepValue(
+                    game,
+                    (Card) item,
+                    abilityControllerId,
+                    playableItems.containsObject(item.getId())
+            ).getKeepScore();
+        }
+        return getScoreFromBattlefield(item);
     }
 
     private String getName(MageItem item) {
@@ -101,6 +120,11 @@ public class PossibleTargetsComparator {
             getScoreFromBattlefield(o1)
     );
 
+    private final Comparator<MageItem> BY_DISCARD_KEEP_SCORE = (o1, o2) -> Integer.compare(
+            getScoreFromHandCard(o1),
+            getScoreFromHandCard(o2)
+    );
+
     private final Comparator<MageItem> BY_PLAYABLE = (o1, o2) -> Boolean.compare(
             this.playableItems.containsObject(o2.getId()),
             this.playableItems.containsObject(o1.getId())
@@ -143,10 +167,25 @@ public class PossibleTargetsComparator {
     public final Comparator<MageItem> ANY_MOST_VALUABLE_LAST = ANY_MOST_VALUABLE_FIRST.reversed();
 
     /**
-     * Sorting for discard effects - put the biggest unplayable at the top, lands at the end anyway
+     * Sorting for discard effects - default keeps the original Mad AI ordering; strategic AI can opt into hand keep value.
      */
     public final Comparator<MageItem> ANY_UNPLAYABLE_AND_USELESS = BY_LAND.reversed()
             .thenComparing(BY_PLAYABLE.reversed())
-            .thenComparing(ANY_MOST_VALUABLE_FIRST);
+            .thenComparing(this::compareDiscardPriority);
+
+    private int compareDiscardPriority(MageItem o1, MageItem o2) {
+        if (!useHandQualityDiscardSort) {
+            return ANY_MOST_VALUABLE_FIRST.compare(o1, o2);
+        }
+        int keepScoreCompare = BY_DISCARD_KEEP_SCORE.compare(o1, o2);
+        if (keepScoreCompare != 0) {
+            return keepScoreCompare;
+        }
+        int nameCompare = BY_NAME.compare(o1, o2);
+        if (nameCompare != 0) {
+            return nameCompare;
+        }
+        return BY_ID.compare(o1, o2);
+    }
 
 }

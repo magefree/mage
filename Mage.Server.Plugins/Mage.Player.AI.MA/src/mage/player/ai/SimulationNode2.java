@@ -17,9 +17,11 @@ public class SimulationNode2 implements Serializable {
 
     protected static int nodeCount;
 
+    protected int nodeNumber;
     protected Game game;
     protected int gameValue; // game state hash to monitor changes
     protected int score;
+    protected AiStrategyScore strategyScore;
     protected List<Ability> abilities;
     protected int depth;
     protected List<SimulationNode2> children = new ArrayList<>();
@@ -35,7 +37,7 @@ public class SimulationNode2 implements Serializable {
         this.depth = depth;
         this.playerId = playerId;
         game.setCustomData(this);
-        nodeCount++;
+        nodeNumber = ++nodeCount;
     }
 
     public SimulationNode2(SimulationNode2 parent, Game game, List<Ability> abilities, int depth, UUID playerId) {
@@ -55,6 +57,10 @@ public class SimulationNode2 implements Serializable {
 
     public static int getCount() {
         return nodeCount;
+    }
+
+    public int getNodeNumber() {
+        return nodeNumber;
     }
 
     public Game getGame() {
@@ -111,5 +117,13 @@ public class SimulationNode2 implements Serializable {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public AiStrategyScore getStrategyScore() {
+        return strategyScore;
+    }
+
+    public void setStrategyScore(AiStrategyScore strategyScore) {
+        this.strategyScore = strategyScore;
     }
 }

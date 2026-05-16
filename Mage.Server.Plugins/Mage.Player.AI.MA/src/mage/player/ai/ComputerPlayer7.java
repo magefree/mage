@@ -3,7 +3,7 @@ package mage.player.ai;
 import mage.abilities.Ability;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
-import mage.player.ai.score.GameStateEvaluator2;
+import mage.player.ai.util.CombatUtil;
 import org.apache.log4j.Logger;
 
 import java.util.Date;
@@ -22,6 +22,10 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
 
     public ComputerPlayer7(String name, RangeOfInfluence range, int skill) {
         super(name, range, skill);
+    }
+
+    protected ComputerPlayer7(java.util.UUID id, int skill) {
+        super(id, skill);
     }
 
     public ComputerPlayer7(final ComputerPlayer7 player) {
@@ -54,6 +58,12 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 // 09.03.2020:
                 // in old version it passes opponent's pre-combat step (game.isActivePlayer(playerId) -> pass(game))
                 // why?!
+                if (shouldPassPriorityWhenCombatCanWinAllOpponents(game)
+                        && game.getStack().isEmpty()
+                        && CombatUtil.canWinByAttacking(game, this)) {
+                    pass(game);
+                    return false;
+                }
                 printBattlefieldScore(game, "Sim PRIORITY on MAIN 1");
                 if (actions.isEmpty()) {
                     calculateActions(game);
@@ -112,7 +122,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
 
     protected void calculateActions(Game game) {
         if (!getNextAction(game)) {
-            currentScore = GameStateEvaluator2.evaluate(playerId, game).getTotalScore();
+            currentScore = evaluator.evaluate(playerId, game).getTotalScore();
             Game sim = createSimulation(game);
             SimulationNode2.resetCount();
             root = new SimulationNode2(null, sim, maxDepth, playerId);
@@ -148,6 +158,10 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
         } else {
             logger.debug("Next Action exists!");
         }
+    }
+
+    protected boolean shouldPassPriorityWhenCombatCanWinAllOpponents(Game game) {
+        return false;
     }
 
     @Override

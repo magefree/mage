@@ -1,0 +1,31 @@
+package mage.cards.decks.analysis;
+
+/**
+ * Generic strategic roles inferred from deck card metadata.
+ */
+public enum DeckRole {
+    THREAT,
+    CHEAP_THREAT,
+    LARGE_THREAT,
+    REMOVAL,
+    BOARD_WIPE,
+    CARD_DRAW,
+    RAMP,
+    MANA_FIXING,
+    TOKEN_MAKER,
+    SACRIFICE_OUTLET,
+    SACRIFICE_FODDER_PROVIDER,
+    SACRIFICE_FODDER,
+    DEATH_PAYOFF,
+    GRAVEYARD_RECURSION,
+    DISCARD_OR_SELF_MILL,
+    LIFE_GAIN,
+    LIFE_GAIN_PAYOFF,
+    ARTIFACT_OR_ENCHANTMENT_PAYOFF,
+    PLUS_ONE_COUNTER_MAKER,
+    PLUS_ONE_COUNTER_PAYOFF,
+    X_SPELL,
+    X_SPELL_PAYOFF,
+    COUNTER_OR_PROTECTION,
+    COMBAT_TRICK
+}

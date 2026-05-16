@@ -224,9 +224,32 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
         processControlledPlayers(sourceGame, player, gameView);
         processWatchedHands(sourceGame, userId, gameView);
+        gameView.setAiCompanionEnabled(isAiCompanionEnabled());
+        gameView.setAiCompanionAdvice(getAiCompanionAdvice(sourceGame, playerId));
         //TODO: should player who controls another player's turn be able to look at all these cards?
 
         return gameView;
+    }
+
+    private static boolean isAiCompanionEnabled() {
+        return Boolean.getBoolean("xmage.ai.companion");
+    }
+
+    private static String getAiCompanionAdvice(Game game, UUID playerId) {
+        if (!isAiCompanionEnabled()) {
+            return "";
+        }
+        try {
+            Class<?> advisorClass = Class.forName("mage.player.ai.AiCompanionAdvisor");
+            Object advice = advisorClass
+                    .getMethod("getAdvice", Game.class, UUID.class)
+                    .invoke(null, game, playerId);
+            return advice == null ? "" : advice.toString();
+        } catch (ClassNotFoundException e) {
+            return "AI companion unavailable: mage-player-ai-ma is not loaded.";
+        } catch (ReflectiveOperationException | RuntimeException e) {
+            return "AI companion unavailable: " + e.getMessage();
+        }
     }
 
     private static void processControlledPlayers(Game game, Player player, GameView gameView) {

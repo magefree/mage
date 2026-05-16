@@ -48,6 +48,10 @@ public class ComputerPlayerControllableProxy extends ComputerPlayer7 {
         super(name, range, skill);
     }
 
+    protected ComputerPlayerControllableProxy(UUID id, int skill) {
+        super(id, skill);
+    }
+
     public ComputerPlayerControllableProxy(final ComputerPlayerControllableProxy player) {
         super(player);
         this.lastControllingPlayer = player;
@@ -58,11 +62,11 @@ public class ComputerPlayerControllableProxy extends ComputerPlayer7 {
         return new ComputerPlayerControllableProxy(this);
     }
 
-    private boolean isUnderMe(Game game) {
+    protected boolean isUnderMe(Game game) {
         return game.isSimulation() || this.isGameUnderControl();
     }
 
-    private Player getControllingPlayer(Game game) {
+    protected Player getControllingPlayer(Game game) {
         Player player = game.getPlayer(this.getTurnControlledBy());
         this.lastControllingPlayer = player.prepareControllableProxy(this);
         return this.lastControllingPlayer;

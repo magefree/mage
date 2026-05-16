@@ -97,6 +97,22 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
     }
 
     @Test
+    public void test_Attack_Lethal_UsesToughnessDamage() {
+        setLife(playerB, 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Assault Formation");
+        addCard(Zone.BATTLEFIELD, playerA, "Yoked Ox"); // 0/4, deals 4 with Assault Formation
+
+        checkAttackers("x1 toughness lethal attack", 1, playerA, "Yoked Ox");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 0);
+    }
+
+    @Test
     public void test_Attack_1_small_vs_1_big() {
         addCard(Zone.BATTLEFIELD, playerA, "Arbor Elf", 1); // 1/1
         addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 1); // 2/2

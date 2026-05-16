@@ -35,12 +35,17 @@ public class PossibleTargetsSelector {
     List<MageItem> any = new ArrayList<>(); // for outcomes with any target like copy
 
     public PossibleTargetsSelector(Outcome outcome, Target target, UUID abilityControllerId, Ability source, Game game) {
+        this(outcome, target, abilityControllerId, source, game, false);
+    }
+
+    public PossibleTargetsSelector(Outcome outcome, Target target, UUID abilityControllerId, Ability source, Game game,
+                                   boolean useHandQualityDiscardSort) {
         this.outcome = outcome;
         this.target = target;
         this.abilityControllerId = abilityControllerId;
         this.source = source;
         this.game = game;
-        this.comparators = new PossibleTargetsComparator(abilityControllerId, game);
+        this.comparators = new PossibleTargetsComparator(abilityControllerId, game, useHandQualityDiscardSort);
     }
 
     public void findNewTargets(Set<UUID> fromTargetsList) {

@@ -135,6 +135,12 @@ public class TestPlayer implements Player {
         computerPlayer.setTestPlayerLink(this);
     }
 
+    public TestPlayer(TestComputerPlayerMadStrategic computerPlayer) {
+        this.computerPlayer = computerPlayer;
+        AIPlayer = false;
+        computerPlayer.setTestPlayerLink(this);
+    }
+
     public TestPlayer(TestComputerPlayerMonteCarlo computerPlayer) {
         this.computerPlayer = computerPlayer;
         AIPlayer = false;

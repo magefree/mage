@@ -40,6 +40,7 @@ import org.w3c.dom.Element;
 
 import javax.management.MBeanServer;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
@@ -75,10 +76,12 @@ public final class Main {
     private static final String adminPasswordArg = "-adminPassword=";
     private static final String adminPasswordProp = "xmage.adminPassword";
     private static final String configPathProp = "xmage.config.path";
+    private static final String aiOptionsPathProp = "xmage.ai.options.path";
 
     private static final File pluginFolder = new File("plugins");
     private static final File extensionFolder = new File("extensions");
     private static final String defaultConfigPath = Paths.get("config", "config.xml").toString();
+    private static final String defaultAiOptionsPath = Paths.get("config", "ai-strategy.properties").toString();
 
     public static final PluginClassLoader classLoader = new PluginClassLoader();
     private static TransporterServer server;
@@ -102,6 +105,8 @@ public final class Main {
         logger.info("Logging level: " + logger.getEffectiveLevel());
         logger.info("Default charset: " + Charset.defaultCharset());
         String adminPassword = "";
+
+        loadAiOptions();
 
         // enable test mode by default for developer build (if you run it from source code)
         testMode |= version.isDeveloperBuild();
@@ -311,6 +316,31 @@ public final class Main {
         } catch (Exception ex) {
             logger.fatal("Failed to start server - " + connection.toString(), ex);
         }
+    }
+
+    private static void loadAiOptions() {
+        String aiOptionsPath = System.getProperty(aiOptionsPathProp, defaultAiOptionsPath);
+        File aiOptionsFile = new File(aiOptionsPath);
+        if (!aiOptionsFile.exists()) {
+            logger.info(String.format("AI options file not found at path=%s; using JVM/system defaults", aiOptionsPath));
+            return;
+        }
+        Properties properties = new Properties();
+        try (FileInputStream input = new FileInputStream(aiOptionsFile)) {
+            properties.load(input);
+        } catch (IOException e) {
+            logger.warn(String.format("Could not read AI options from path=%s; using JVM/system defaults", aiOptionsPath), e);
+            return;
+        }
+        int loaded = 0;
+        for (String propertyName : properties.stringPropertyNames()) {
+            if (System.getProperty(propertyName) != null) {
+                continue;
+            }
+            System.setProperty(propertyName, properties.getProperty(propertyName));
+            loaded++;
+        }
+        logger.info(String.format("Loaded %d AI option(s) from path=%s", loaded, aiOptionsPath));
     }
 
     static void initStatistics() {

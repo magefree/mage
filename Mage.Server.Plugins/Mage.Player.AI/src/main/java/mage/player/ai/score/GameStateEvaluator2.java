@@ -151,6 +151,9 @@ public final class GameStateEvaluator2 {
 
     public static class PlayerEvaluateScore {
 
+        private static final int MAX_REAL_SCORE = Integer.MAX_VALUE - 1;
+        private static final int MIN_REAL_SCORE = Integer.MIN_VALUE + 1;
+
         private UUID playerId;
         private int playerLifeScore = 0;
         private int playerHandScore = 0;
@@ -183,19 +186,41 @@ public final class GameStateEvaluator2 {
             return this.playerId;
         }
 
+        private static int saturatedAdd(int left, int right) {
+            long value = (long) left + right;
+            if (value > MAX_REAL_SCORE) {
+                return MAX_REAL_SCORE;
+            }
+            if (value < MIN_REAL_SCORE) {
+                return MIN_REAL_SCORE;
+            }
+            return (int) value;
+        }
+
+        private static int saturatedSubtract(int left, int right) {
+            long value = (long) left - right;
+            if (value > MAX_REAL_SCORE) {
+                return MAX_REAL_SCORE;
+            }
+            if (value < MIN_REAL_SCORE) {
+                return MIN_REAL_SCORE;
+            }
+            return (int) value;
+        }
+
         public int getPlayerScore() {
-            return playerLifeScore + playerHandScore + playerPermanentsScore;
+            return saturatedAdd(saturatedAdd(playerLifeScore, playerHandScore), playerPermanentsScore);
         }
 
         public int getOpponentScore() {
-            return opponentLifeScore + opponentHandScore + opponentPermanentsScore;
+            return saturatedAdd(saturatedAdd(opponentLifeScore, opponentHandScore), opponentPermanentsScore);
         }
 
         public int getTotalScore() {
             if (specialScore != 0) {
                 return specialScore;
             } else {
-                return getPlayerScore() - getOpponentScore();
+                return saturatedSubtract(getPlayerScore(), getOpponentScore());
             }
         }
 
@@ -209,6 +234,18 @@ public final class GameStateEvaluator2 {
 
         public int getPlayerPermanentsScore() {
             return playerPermanentsScore;
+        }
+
+        public int getOpponentLifeScore() {
+            return opponentLifeScore;
+        }
+
+        public int getOpponentHandScore() {
+            return opponentHandScore;
+        }
+
+        public int getOpponentPermanentsScore() {
+            return opponentPermanentsScore;
         }
 
         public String getPlayerInfoFull() {

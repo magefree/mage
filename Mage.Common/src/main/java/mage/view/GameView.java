@@ -61,6 +61,8 @@ public class GameView implements Serializable {
     private final String priorityPlayerName;
     private final int turn;
     private boolean special = false;
+    private boolean aiCompanionEnabled = false;
+    private String aiCompanionAdvice = "";
     private final boolean rollbackTurnsAllowed;
 
     // for debug only
@@ -318,6 +320,22 @@ public class GameView implements Serializable {
 
     public boolean getSpecial() {
         return special;
+    }
+
+    public String getAiCompanionAdvice() {
+        return aiCompanionAdvice;
+    }
+
+    public void setAiCompanionAdvice(String aiCompanionAdvice) {
+        this.aiCompanionAdvice = aiCompanionAdvice == null ? "" : aiCompanionAdvice;
+    }
+
+    public boolean isAiCompanionEnabled() {
+        return aiCompanionEnabled;
+    }
+
+    public void setAiCompanionEnabled(boolean aiCompanionEnabled) {
+        this.aiCompanionEnabled = aiCompanionEnabled;
     }
 
     public int getPriorityTime() {

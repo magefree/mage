@@ -1,12 +1,17 @@
 package org.mage.test.AI.basic;
 
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.ElfWarriorToken;
 import mage.game.stack.StackObject;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -66,6 +71,35 @@ public class PreventRepeatedActionsTest extends CardTestPlayerBaseAI {
         assertPermanentCount(playerA, "Phyrexian Vault", 1);
         assertTapped("Basalt Monolith", true);
         assertTappedCount("Plains", false, 3);
+    }
+
+    /**
+     * A repeatable resource engine can be correct, but if the current board already wins through combat,
+     * the AI should move to combat instead of spending priority on extra loop iterations.
+     */
+    @Test
+    public void test_RepeatableTokenEngine_PassesWhenCombatAlreadyWinsGame() {
+        setLife(playerB, 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Midnight Guard@guard"); // 2/3
+
+        runCode("grant repeatable token engine", 1, PhaseStep.UPKEEP, playerA, (info, player, game) -> {
+            Permanent guard = game.getPermanent(playerA.getAliasByName("@guard"));
+            Assert.assertNotNull(guard);
+
+            Ability tokenAbility = new SimpleActivatedAbility(
+                    new CreateTokenEffect(new ElfWarriorToken()),
+                    new TapSourceCost()
+            );
+            guard.addAbility(tokenAbility, guard.getId(), game);
+        });
+
+        checkAttackers("already lethal attack", 1, playerA, "Midnight Guard");
+
+        setStopAt(1, PhaseStep.DECLARE_ATTACKERS);
+        setStrictChooseMode(true);
+        execute();
+
+        assertPermanentCount(playerA, "Elf Warrior Token", 0);
     }
 
     @Test
