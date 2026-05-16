@@ -21,7 +21,8 @@ public final class ProctorsGaze extends CardImpl {
 
         // Return up to one target nonland permanent to its owner's hand. Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetNonlandPermanent(0, 1));
+        this.getSpellAbility().addTarget(new TargetNonlandPermanent(0, 1)
+                .withChooseHint("to return to its owner's hand"));
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(
                 new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true
         ));
