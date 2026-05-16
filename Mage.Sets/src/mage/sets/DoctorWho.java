@@ -879,10 +879,10 @@ public final class DoctorWho extends ExpansionSet {
         //cards.add(new SetCardInfo("The Cheetah Planet", 574, Rarity.COMMON, mage.cards.t.TheCheetahPlanet.class));
         cards.add(new SetCardInfo("The Curse of Fenric", 118, Rarity.RARE, mage.cards.t.TheCurseOfFenric.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Curse of Fenric", 723, Rarity.RARE, mage.cards.t.TheCurseOfFenric.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Cyber-Controller", 119, Rarity.RARE, mage.cards.t.TheCyberController.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Cyber-Controller", 405, Rarity.RARE, mage.cards.t.TheCyberController.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Cyber-Controller", 724, Rarity.RARE, mage.cards.t.TheCyberController.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Cyber-Controller", 996, Rarity.RARE, mage.cards.t.TheCyberController.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Cyber-Controller", 119, Rarity.RARE, mage.cards.t.TheCyberController.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Cyber-Controller", 405, Rarity.RARE, mage.cards.t.TheCyberController.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Cyber-Controller", 724, Rarity.RARE, mage.cards.t.TheCyberController.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Cyber-Controller", 996, Rarity.RARE, mage.cards.t.TheCyberController.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Dalek Emperor", 120, Rarity.RARE, mage.cards.t.TheDalekEmperor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Dalek Emperor", 406, Rarity.RARE, mage.cards.t.TheDalekEmperor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Dalek Emperor", 725, Rarity.RARE, mage.cards.t.TheDalekEmperor.class, NON_FULL_USE_VARIOUS));
