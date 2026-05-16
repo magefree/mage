@@ -29,21 +29,21 @@ public final class PrismariCommand extends CardImpl {
 
         // • Prismari Command deals 2 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetAnyTarget().withChooseHint("to deal 2 damage to"));
 
         // • Target player draws two cards, then discards two cards.
         Mode mode = new Mode(new DrawDiscardTargetEffect(2, 2));
-        mode.addTarget(new TargetPlayer());
+        mode.addTarget(new TargetPlayer().withChooseHint("to draw and discard"));
         this.getSpellAbility().addMode(mode);
 
         // • Target player creates a Treasure token.
         mode = new Mode(new CreateTokenTargetEffect(new TreasureToken()));
-        mode.addTarget(new TargetPlayer());
+        mode.addTarget(new TargetPlayer().withChooseHint("to create a Treasure token"));
         this.getSpellAbility().addMode(mode);
 
         // • Destroy target artifact.
         mode = new Mode(new DestroyTargetEffect());
-        mode.addTarget(new TargetArtifactPermanent());
+        mode.addTarget(new TargetArtifactPermanent().withChooseHint("to destroy"));
         this.getSpellAbility().addMode(mode);
     }
 
