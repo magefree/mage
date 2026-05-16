@@ -44,17 +44,18 @@ public final class RalZarekGuestLecturer extends CardImpl {
 
         // -1: Any number of target players each discard a card.
         Ability ability = new LoyaltyAbility(new DiscardTargetEffect(1), -1);
-        ability.addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));
+        ability.addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false).withChooseHint("to discard a card"));
         this.addAbility(ability);
 
         // -2: Return target creature card with mana value 3 or less from your graveyard to the battlefield.
         ability = new LoyaltyAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), -2);
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        ability.addTarget(new TargetCardInYourGraveyard(filter)
+                .withChooseHint("to return from your graveyard to battlefield"));
         this.addAbility(ability);
 
         // -7: Flip five coins. Target opponent skips their next X turns, where X is the number of coins that came up heads.
         ability = new LoyaltyAbility(new RalZarekGuestLecturerEffect(), -7);
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponent().withChooseHint("to skip their next turns"));
         this.addAbility(ability);
     }
 
