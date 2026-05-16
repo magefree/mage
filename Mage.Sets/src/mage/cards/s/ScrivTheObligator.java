@@ -41,7 +41,7 @@ public final class ScrivTheObligator extends CardImpl {
         // Whenever Scriv enters or attacks, create a white Aura enchantment token named Contract attached to target creature an opponent controls.
         // The token has enchant creature and "Whenever enchanted creature attacks, it gets +2/+0 until end of turn if it's attacking one of your opponents. Otherwise, its controller loses 2 life."
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new ScrivTheObligatorEffect());
-        ability.addTarget(new TargetOpponentsCreaturePermanent());
+        ability.addTarget(new TargetOpponentsCreaturePermanent().withChooseHint("to attach Contract to"));
         this.addAbility(ability);
     }
 
