@@ -27,7 +27,7 @@ public final class RapierWit extends CardImpl {
                 new AddCountersTargetEffect(CounterType.STUN.createInstance()),
                 MyTurnCondition.instance, "If it's your turn, put a stun counter on it"
         ));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("to tap; stun if it's your turn"));
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
