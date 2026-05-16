@@ -1,40 +1,34 @@
 package mage.cards.f;
 
-import java.util.Objects;
-import java.util.UUID;
-
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
+import mage.abilities.effects.common.DamagePlayersEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.choices.TwoChoiceVote;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTargets;
-import mage.util.CardUtil;
+
+import java.util.Objects;
+import java.util.UUID;
 
 /**
- *
- * @author muz
+ * @author Codex
  */
 public final class FatefulTempest extends CardImpl {
 
     public FatefulTempest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
-        // Council's dilemma -- Starting with you, each player votes for past or present.
-        // You mill a card for each past vote, then Fateful Tempest deals damage to each opponent equal to the total mana value of cards milled this way.
-        // Exile the top card of your library for each present vote. Until the end of your next turn, you may play the exiled cards.
+        // Council's dilemma -- Starting with you, each player votes for past or present. You mill a card for each past vote, then Fateful Tempest deals damage to each opponent equal to the total mana value of cards milled this way. Exile the top card of your library for each present vote. Until the end of your next turn, you may play the exiled cards.
         this.getSpellAbility().addEffect(new FatefulTempestEffect());
         this.getSpellAbility().setAbilityWord(AbilityWord.COUNCILS_DILEMMA);
     }
@@ -53,9 +47,9 @@ class FatefulTempestEffect extends OneShotEffect {
 
     FatefulTempestEffect() {
         super(Outcome.Benefit);
-        staticText = "starting with you, each player votes for past or present. " +
-                "You mill a card for each past vote, then Fateful Tempest deals damage to each opponent equal to the total mana value of cards milled this way. " +
-                "Exile the top card of your library for each present vote. Until the end of your next turn, you may play the exiled cards.";
+        staticText = "starting with you, each player votes for past or present. "
+                + "You mill a card for each past vote, then {this} deals damage to each opponent equal to the total mana value of cards milled this way. "
+                + "Exile the top card of your library for each present vote. Until the end of your next turn, you may play the exiled cards";
     }
 
     private FatefulTempestEffect(final FatefulTempestEffect effect) {
@@ -69,52 +63,30 @@ class FatefulTempestEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TwoChoiceVote voteHandler = new TwoChoiceVote(
-                "Past (mill and deal damage)",
-                "Present (exile and play this turn)",
-                Outcome.Detriment
-        );
-        voteHandler.doVotes(source, game);
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return false;
         }
-        int pastVotes = voteHandler.getVoteCount(true);
-        int presentVotes = voteHandler.getVoteCount(false);
+
+        TwoChoiceVote vote = new TwoChoiceVote("Past (mill a card)", "Present (exile top card)", Outcome.Detriment);
+        vote.doVotes(source, game);
+
+        int pastVotes = vote.getVoteCount(true);
+        int presentVotes = vote.getVoteCount(false);
 
         if (pastVotes > 0) {
-            int totalValue = player
-                .millCards(pastVotes, source, game)
-                .getCards(game)
-                .stream()
-                .filter(Objects::nonNull)
-                .mapToInt(MageObject::getManaValue)
-                .sum();
-            for (UUID opponentId : game.getOpponents(player.getId())) {
-                Player opponent = game.getPlayer(opponentId);
-                if (opponent != null) {
-                    opponent.damage(totalValue, source.getSourceId(), source, game);
-                }
-            }
+            Cards cards = player.millCards(pastVotes, source, game);
+            int damage = cards
+                    .getCards(game)
+                    .stream()
+                    .filter(Objects::nonNull)
+                    .mapToInt(Card::getManaValue)
+                    .sum();
+            new DamagePlayersEffect(damage, TargetController.OPPONENT).apply(game, source);
         }
-
         if (presentVotes > 0) {
-            Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, presentVotes));
-            if (!cards.isEmpty()) {
-                player.moveCardsToExile(
-                        cards.getCards(game), source, game, true,
-                        CardUtil.getExileZoneId(game, source),
-                        CardUtil.getSourceName(game, source)
-                );
-                cards.retainZone(Zone.EXILED, game);
-                if (!cards.isEmpty()) {
-                    ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, Duration.UntilEndOfYourNextTurn);
-                    effect.setTargetPointer(new FixedTargets(cards, game));
-                    game.addEffect(effect, source);
-                }
-            }
+            new ExileTopXMayPlayUntilEffect(presentVotes, Duration.UntilEndOfYourNextTurn).apply(game, source);
         }
-
         return true;
     }
 }
