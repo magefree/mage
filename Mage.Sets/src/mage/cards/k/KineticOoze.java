@@ -25,9 +25,9 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.Targets;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.SecondTargetPointer;
+import mage.target.Targets;
 import mage.util.CardUtil;
 
 /**
