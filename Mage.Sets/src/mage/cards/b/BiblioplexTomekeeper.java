@@ -28,11 +28,12 @@ public final class BiblioplexTomekeeper extends CardImpl {
         // When this creature enters, choose up to one --
         // * Target creature becomes prepared.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BecomePreparedTargetEffect(true));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent().withChooseHint("to become prepared"));
         ability.getModes().setMinModes(0);
 
         // * Target creature becomes unprepared.
-        ability.addMode(new Mode(new BecomePreparedTargetEffect(false)).addTarget(new TargetCreaturePermanent()));
+        ability.addMode(new Mode(new BecomePreparedTargetEffect(false))
+                .addTarget(new TargetCreaturePermanent().withChooseHint("to become unprepared")));
         this.addAbility(ability);
     }
 
