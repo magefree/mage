@@ -30,12 +30,13 @@ public final class GloriousDecay extends CardImpl {
 
         // * Glorious Decay deals 4 damage to target creature with flying.
         this.getSpellAbility().addMode(new Mode(new DamageTargetEffect(4))
-                .addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_FLYING)));
+                .addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_FLYING)
+                        .withChooseHint("to deal 4 damage to")));
 
         // * Exile target card from a graveyard. Draw a card.
         this.getSpellAbility().addMode(new Mode(new ExileTargetEffect())
                 .addEffect(new DrawCardSourceControllerEffect(1))
-                .addTarget(new TargetCardInGraveyard()));
+                .addTarget(new TargetCardInGraveyard().withChooseHint("to exile from a graveyard")));
     }
 
     private GloriousDecay(final GloriousDecay card) {
