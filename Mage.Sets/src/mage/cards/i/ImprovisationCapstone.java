@@ -4,6 +4,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ParadigmAbility;
+import mage.abilities.keyword.ParadigmFirstResolveEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -28,6 +29,7 @@ public final class ImprovisationCapstone extends CardImpl {
 
         // Exile cards from the top of your library until you exile cards with total mana value 4 or greater. You may cast any number of spells from among them without paying their mana costs.
         this.getSpellAbility().addEffect(new ImprovisationCapstoneEffect());
+        this.getSpellAbility().addEffect(new ParadigmFirstResolveEffect());
 
         // Paradigm
         this.addAbility(new ParadigmAbility());
