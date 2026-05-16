@@ -3,6 +3,7 @@ package mage.cards.d;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.ParadigmAbility;
+import mage.abilities.keyword.ParadigmFirstResolveEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,6 +25,7 @@ public final class DecorumDissertation extends CardImpl {
         // Target player draws two cards and loses 2 life.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(2).withTargetDescription("and"));
+        this.getSpellAbility().addEffect(new ParadigmFirstResolveEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Paradigm
