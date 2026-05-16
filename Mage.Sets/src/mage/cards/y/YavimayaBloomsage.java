@@ -1,63 +1,56 @@
 package mage.cards.y;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpecialAction;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.BecomePreparedSourceEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateSpecialActionEffect;
 import mage.abilities.effects.common.RemoveSpecialActionEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
+import mage.cards.CardSetInfo;
+import mage.cards.PrepareCard;
+import mage.cards.PrepareUtil;
+import mage.constants.AbilityType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.cards.CardSetInfo;
-import mage.cards.PrepareCard;
-import mage.constants.AbilityType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+
+import java.util.UUID;
 
 /**
- *
  * @author muz
  */
 public final class YavimayaBloomsage extends PrepareCard {
 
     public YavimayaBloomsage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}", "Channel", new CardType[]{CardType.SORCERY}, "{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}", "Channel", CardType.SORCERY, "{G}{G}");
 
         this.subtype.add(SubType.DRYAD);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // At the beginning of your end step, put a +1/+1 counter on target creature you control. Then if that creature has power 7 or greater, this creature becomes prepared.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        ability.addEffect(new ConditionalOneShotEffect(
-            new BecomePreparedSourceEffect(),
-            YavimayaBloomsageCondition.instance,
-            "Then if that creature has toughness 7 or greater, this creature becomes prepared"
-        ));
+        // At the beginning of your end step, put a +1/+1 counter on target creature you control.
+        // Then if that creature has power 7 or greater, this creature becomes prepared.
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new YavimayaBloomsageEffect());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 
         // Channel
         // Sorcery {G}{G}
         // Until end of turn, any time you could activate a mana ability, you may pay 1 life. If you do, add {C}.
-        this.getSpellCard().getSpellAbility().addEffect(new ChannelEffect());
+        this.getSpellCard().getSpellAbility().addEffect(new YavimayaBloomsageChannelEffect());
     }
 
     private YavimayaBloomsage(final YavimayaBloomsage card) {
@@ -70,85 +63,67 @@ public final class YavimayaBloomsage extends PrepareCard {
     }
 }
 
-enum YavimayaBloomsageCondition implements Condition {
-    instance;
+class YavimayaBloomsageChannelEffect extends OneShotEffect {
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            return permanent.getToughness().getValue() >= 7;
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "that creature has toughness 7 or greater";
-    }
-}
-
-class ChannelEffect extends OneShotEffect {
-
-    ChannelEffect() {
+    YavimayaBloomsageChannelEffect() {
         super(Outcome.PutManaInPool);
-        this.staticText = "Until end of turn, any time you could activate a mana ability, you may pay 1 life. If you do, add {C}";
+        staticText = "until end of turn, any time you could activate a mana ability, you may pay 1 life. If you do, add {C}";
     }
 
-    private ChannelEffect(final ChannelEffect effect) {
+    private YavimayaBloomsageChannelEffect(final YavimayaBloomsageChannelEffect effect) {
         super(effect);
     }
 
     @Override
-    public ChannelEffect copy() {
-        return new ChannelEffect(this);
+    public YavimayaBloomsageChannelEffect copy() {
+        return new YavimayaBloomsageChannelEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SpecialAction specialAction = new ChannelSpecialAction();
+        SpecialAction specialAction = new YavimayaBloomsageChannelSpecialAction();
         new CreateSpecialActionEffect(specialAction).apply(game, source);
-
-        // Create a hidden delayed triggered ability to remove the special action at end of turn.
-        new CreateDelayedTriggeredAbilityEffect(new ChannelDelayedTriggeredAbility(specialAction.getId()), false).apply(game, source);
+        new CreateDelayedTriggeredAbilityEffect(
+                new YavimayaBloomsageChannelDelayedTriggeredAbility(specialAction.getId()), false
+        ).apply(game, source);
         return true;
     }
 }
 
-class ChannelSpecialAction extends SpecialAction {
+class YavimayaBloomsageChannelSpecialAction extends SpecialAction {
 
-    ChannelSpecialAction() {
+    YavimayaBloomsageChannelSpecialAction() {
         super();
         this.abilityType = AbilityType.SPECIAL_MANA_PAYMENT;
         this.addCost(new PayLifeCost(1));
         this.addEffect(new BasicManaEffect(Mana.ColorlessMana(1)));
     }
 
-    private ChannelSpecialAction(final ChannelSpecialAction ability) {
+    private YavimayaBloomsageChannelSpecialAction(final YavimayaBloomsageChannelSpecialAction ability) {
         super(ability);
     }
 
     @Override
-    public ChannelSpecialAction copy() {
-        return new ChannelSpecialAction(this);
+    public YavimayaBloomsageChannelSpecialAction copy() {
+        return new YavimayaBloomsageChannelSpecialAction(this);
     }
 }
 
-class ChannelDelayedTriggeredAbility extends DelayedTriggeredAbility {
+class YavimayaBloomsageChannelDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    ChannelDelayedTriggeredAbility(UUID specialActionId) {
+    YavimayaBloomsageChannelDelayedTriggeredAbility(UUID specialActionId) {
         super(new RemoveSpecialActionEffect(specialActionId), Duration.OneUse);
         this.usesStack = false;
         this.setRuleVisible(false);
     }
 
-    private ChannelDelayedTriggeredAbility(final ChannelDelayedTriggeredAbility ability) {
+    private YavimayaBloomsageChannelDelayedTriggeredAbility(final YavimayaBloomsageChannelDelayedTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public ChannelDelayedTriggeredAbility copy() {
-        return new ChannelDelayedTriggeredAbility(this);
+    public YavimayaBloomsageChannelDelayedTriggeredAbility copy() {
+        return new YavimayaBloomsageChannelDelayedTriggeredAbility(this);
     }
 
     @Override
@@ -158,6 +133,42 @@ class ChannelDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        return true;
+    }
+}
+
+class YavimayaBloomsageEffect extends OneShotEffect {
+
+    YavimayaBloomsageEffect() {
+        super(Outcome.BoostCreature);
+        staticText = "put a +1/+1 counter on target creature you control. Then if that creature has power 7 or greater, this creature becomes prepared";
+    }
+
+    private YavimayaBloomsageEffect(final YavimayaBloomsageEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public YavimayaBloomsageEffect copy() {
+        return new YavimayaBloomsageEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent target = game.getPermanent(source.getFirstTarget());
+        if (target == null) {
+            return false;
+        }
+        target.addCounters(CounterType.P1P1.createInstance(), source, game);
+        game.applyEffects();
+        target = game.getPermanent(source.getFirstTarget());
+        if (target == null) {
+            return true;
+        }
+        if (target.getPower().getValue() >= 7) {
+            Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+            PrepareUtil.prepare(sourcePermanent, game, source);
+        }
         return true;
     }
 }
