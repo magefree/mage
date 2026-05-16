@@ -1090,6 +1090,5 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Young Deathclaws", 125, Rarity.UNCOMMON, mage.cards.y.YoungDeathclaws.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Young Deathclaws", 653, Rarity.UNCOMMON, mage.cards.y.YoungDeathclaws.class, NON_FULL_USE_VARIOUS));
 
-        cards.removeIf(card -> HIDE_MUTATE_CARDS && MUTATE_CARD_NAMES.contains(card.getName()));
     }
 }

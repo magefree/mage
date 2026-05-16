@@ -51,7 +51,6 @@ public final class IshkanahBroodmother extends CardImpl {
                 "Sporecap Spider",
                 "Twin-Silk Spider"
         ));
-        spellbook.removeIf(card -> ExpansionSet.HIDE_MUTATE_CARDS && ExpansionSet.MUTATE_CARD_NAMES.contains(card));
     }
 
     public IshkanahBroodmother(UUID ownerId, CardSetInfo setInfo) {
