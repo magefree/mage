@@ -117,6 +117,9 @@ class ProtectorOfTheWastesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getSourceId().equals(this.getSourceId());
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
+            return Objects.equals(event.getTargetId(), this.getSourceId());
+        }
+        return Objects.equals(event.getSourceId(), this.getSourceId());
     }
 }
