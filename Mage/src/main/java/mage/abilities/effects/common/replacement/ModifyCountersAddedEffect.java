@@ -23,9 +23,11 @@ public class ModifyCountersAddedEffect extends ReplacementEffectImpl {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature, false);
         this.filter = filter;
         this.counterType = counterType;
-        staticText = "if one or more " + (counterType != null ? counterType + " " : "") + "counters would be put on " +
-                CardUtil.addArticle(filter.getMessage()) + ", that many plus one " +
-                (counterType != null ? counterType : "of each of those kinds of") + " counters are put on it instead";
+        String counterPrefix = counterType != null ? counterType.toString() + " " : "";
+        String counterDescription = counterType != null ? counterType.toString() : "of each of those kinds of";
+        staticText = "if one or more " + counterPrefix + "counters would be put on "
+                + CardUtil.addArticle(filter.getMessage()) + ", that many plus one "
+                + counterDescription + " counters are put on it instead";
     }
 
     private ModifyCountersAddedEffect(final ModifyCountersAddedEffect effect) {

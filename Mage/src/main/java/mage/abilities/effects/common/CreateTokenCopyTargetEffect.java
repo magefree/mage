@@ -338,6 +338,9 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             }
             sb.append(" attacking");
         }
+        if (hasHaste) {
+            sb.append(number == 1 ? ". That token gains haste" : ". Those tokens gain haste");
+        }
         return sb.toString();
     }
 

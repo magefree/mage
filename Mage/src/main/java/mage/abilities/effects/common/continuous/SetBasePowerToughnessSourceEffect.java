@@ -79,6 +79,14 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
         this.toughness = effect.toughness;
     }
 
+    public DynamicValue getPowerValue() {
+        return power;
+    }
+
+    public DynamicValue getToughnessValue() {
+        return toughness;
+    }
+
     @Override
     public SetBasePowerToughnessSourceEffect copy() {
         return new SetBasePowerToughnessSourceEffect(this);
