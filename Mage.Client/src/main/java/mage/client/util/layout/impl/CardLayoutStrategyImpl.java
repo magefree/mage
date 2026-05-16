@@ -66,6 +66,25 @@ public class CardLayoutStrategyImpl implements CardLayoutStrategy {
                 groupAttachments(battlefieldPanel, mainPanel, cards, permanent);
             }
         }
+
+        mainPanel.setPreferredSize(getPreferredSizeForLaidOutCards(mainPanel, cards, battlefieldWidth, height));
+    }
+
+    private Dimension getPreferredSizeForLaidOutCards(JLayeredPane mainPanel, Map<UUID, MageCard> cards, int battlefieldWidth, int layoutHeight) {
+        Dimension preferredSize = mainPanel.getPreferredSize();
+        int preferredWidth = Math.max(preferredSize.width, battlefieldWidth - 30);
+        int preferredHeight = Math.max(preferredSize.height, layoutHeight);
+
+        for (MageCard card : cards.values()) {
+            if (card.getTopPanelRef() == null || card.getTopPanelRef().getParent() != mainPanel) {
+                continue;
+            }
+            Rectangle bounds = card.getCardLocation().getCardBounds();
+            preferredWidth = Math.max(preferredWidth, bounds.x + bounds.width);
+            preferredHeight = Math.max(preferredHeight, bounds.y + bounds.height);
+        }
+
+        return new Dimension(preferredWidth, preferredHeight);
     }
 
     private void groupAttachments(BattlefieldPanel battlefieldPanel, JLayeredPane mainPanel, Map<UUID, MageCard> cards, PermanentView permanentWithAttachmentsView) {
@@ -153,9 +172,9 @@ public class CardLayoutStrategyImpl implements CardLayoutStrategy {
                 attachments++;
                 if (attachedPermanent.getAttachments() != null && !attachedPermanent.getAttachments().isEmpty()) {
                     AttachmentLayoutInfos attachmentLayoutInfos = calculateNeededNumberOfVerticalColumns(currentCol, battlefieldPanel, cards, attachedPermanent);
+                    attachments += attachmentLayoutInfos.getAttachments();
                     if (attachmentLayoutInfos.getColumns() > maxCol) {
                         maxCol = attachmentLayoutInfos.getColumns();
-                        attachments += attachmentLayoutInfos.getAttachments();
                     }
                 }
             }

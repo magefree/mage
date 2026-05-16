@@ -150,9 +150,7 @@ public class CardPluginImpl implements CardPlugin {
             }
 
             if ((!perm.isLand() && !perm.isToken()) || (perm.isCreature() && !perm.isToken())) {
-                Stack newStack = new Stack();
-                newStack.add(perm);
-                workingRow.add(newStack);
+                workingRow.add(createStack(cards, card, perm));
                 continue;
             }
 
@@ -218,23 +216,26 @@ public class CardPluginImpl implements CardPlugin {
                 }
             }
 
-            Stack stack = new Stack();
-
-            if (perm.getOriginalPermanent().getAttachments() != null
-                    && !perm.getOriginalPermanent().getAttachments().isEmpty()
-                    && !perm.getOriginalPermanent().isAttachedTo()) {
-                // get the number of all attachements and sub attachments
-                AttachmentLayoutInfos ali = calculateNeededNumberOfVerticalColumns(0, cards, card);
-                stack.setMaxAttachedCount(ali.getAttachments());
-                stack.setAttachmentColumns(ali.getColumns());
-            }
-
-            stack.add(perm);
+            Stack stack = createStack(cards, card, perm);
             workingRow.add(insertIndex == -1 ? workingRow.size() : insertIndex, stack);
 
         }
 
         return workingRow;
+    }
+
+    private Stack createStack(Map<UUID, MageCard> cards, MageCard card, MagePermanent perm) {
+        Stack stack = new Stack();
+        if (perm.getOriginalPermanent().getAttachments() != null
+                && !perm.getOriginalPermanent().getAttachments().isEmpty()
+                && !perm.getOriginalPermanent().isAttachedTo()) {
+            // get the number of all attachments and sub attachments
+            AttachmentLayoutInfos ali = calculateNeededNumberOfVerticalColumns(0, cards, card);
+            stack.setMaxAttachedCount(ali.getAttachments());
+            stack.setAttachmentColumns(ali.getColumns());
+        }
+        stack.add(perm);
+        return stack;
     }
 
     @Override
@@ -487,9 +488,9 @@ public class CardPluginImpl implements CardPlugin {
                         && !attachedPerm.getOriginalPermanent().getAttachments().isEmpty()) {
                     AttachmentLayoutInfos attachmentLayoutInfos = calculateNeededNumberOfVerticalColumns(currentCol,
                             cards, attachedCard);
+                    attachments += attachmentLayoutInfos.getAttachments();
                     if (attachmentLayoutInfos.getColumns() > maxCol) {
                         maxCol = attachmentLayoutInfos.getColumns();
-                        attachments += attachmentLayoutInfos.getAttachments();
                     }
                 }
             }

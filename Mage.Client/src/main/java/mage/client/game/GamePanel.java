@@ -115,6 +115,11 @@ public final class GamePanel extends javax.swing.JPanel {
     private final PickNumberDialog pickNumber;
     private final PickMultiNumberDialog pickMultiNumber;
     private JLayeredPane jLayeredPane;
+    private JFrame chatAndLogsFrame;
+    private JPanel chatAndLogsContainer;
+    private JPanel detachedChatPlaceholder;
+    private JButton btnToggleChatAndLogsWindow;
+    private boolean chatAndLogsDetached;
     private String chosenHandKey = "You";
     private final skipButtonsList skipButtons = new skipButtonsList();
 
@@ -371,6 +376,7 @@ public final class GamePanel extends javax.swing.JPanel {
         initComponents = false;
 
         setGUISize(true);
+        popOutChatAndLogs();
     }
 
     private Map<String, JComponent> getUIComponents(JLayeredPane jLayeredPane) {
@@ -394,6 +400,7 @@ public final class GamePanel extends javax.swing.JPanel {
     public void cleanUp() {
         MageFrame.removeGame(gameId);
 
+        disposeChatAndLogsFrame();
         this.gameChatPanel.cleanUp();
         this.userChatPanel.cleanUp();
 
@@ -790,6 +797,9 @@ public final class GamePanel extends javax.swing.JPanel {
     private void restoreSplittersByQueue(Map<String, MageSplitter> splittersQueue) {
         if (splittersQueue.isEmpty()) {
             isSplittersFullyRestored = true;
+            if (chatAndLogsDetached) {
+                hideDetachedChatDockArea();
+            }
             return;
         }
 
@@ -809,6 +819,95 @@ public final class GamePanel extends javax.swing.JPanel {
         int height = Math.round(width * GUISizeHelper.CARD_WIDTH_TO_HEIGHT_COEF);
         bigCard.setPreferredSize(new Dimension(width, height));
         bigCard.setMaximumSize(new Dimension(Short.MAX_VALUE, height));
+    }
+
+    private void popOutChatAndLogs() {
+        if (chatAndLogsFrame != null && chatAndLogsFrame.isVisible()) {
+            chatAndLogsFrame.toFront();
+            return;
+        }
+
+        if (detachedChatPlaceholder == null) {
+            detachedChatPlaceholder = new JPanel(new BorderLayout());
+            detachedChatPlaceholder.setMinimumSize(new Dimension(0, 0));
+            detachedChatPlaceholder.setPreferredSize(new Dimension(0, 0));
+        }
+
+        chatAndLogsDetached = true;
+        splitBattlefieldAndChats.setRightComponent(detachedChatPlaceholder);
+        hideDetachedChatDockArea();
+        updateChatAndLogsWindowButton();
+
+        if (chatAndLogsFrame == null) {
+            chatAndLogsFrame = new JFrame("XMage - Chat and system messages");
+            chatAndLogsFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+            chatAndLogsFrame.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    dockChatAndLogs();
+                }
+            });
+            chatAndLogsFrame.setSize(520, 720);
+            chatAndLogsFrame.setLocationByPlatform(true);
+        }
+
+        chatAndLogsFrame.getContentPane().removeAll();
+        chatAndLogsFrame.getContentPane().setLayout(new BorderLayout());
+        chatAndLogsFrame.getContentPane().add(chatAndLogsContainer, BorderLayout.CENTER);
+        chatAndLogsFrame.setVisible(true);
+        chatAndLogsContainer.revalidate();
+        chatAndLogsContainer.repaint();
+    }
+
+    private void dockChatAndLogs() {
+        if (chatAndLogsFrame != null) {
+            chatAndLogsFrame.getContentPane().remove(chatAndLogsContainer);
+            chatAndLogsFrame.setVisible(false);
+        }
+        chatAndLogsDetached = false;
+        splitBattlefieldAndChats.setRightComponent(chatAndLogsContainer);
+        updateChatAndLogsWindowButton();
+        splitBattlefieldAndChats.resetToPreferredSizes();
+        splitBattlefieldAndChats.setDividerLocation(0.80);
+        splitBattlefieldAndChats.revalidate();
+        splitBattlefieldAndChats.repaint();
+    }
+
+    private void hideDetachedChatDockArea() {
+        if (detachedChatPlaceholder != null) {
+            detachedChatPlaceholder.setMinimumSize(new Dimension(0, 0));
+            detachedChatPlaceholder.setPreferredSize(new Dimension(0, 0));
+        }
+        splitBattlefieldAndChats.getLeftComponent().setMinimumSize(new Dimension(0, 0));
+        splitBattlefieldAndChats.setDividerLocation(1.0d);
+        splitBattlefieldAndChats.revalidate();
+        splitBattlefieldAndChats.repaint();
+    }
+
+    private void disposeChatAndLogsFrame() {
+        if (chatAndLogsFrame != null) {
+            chatAndLogsFrame.getContentPane().removeAll();
+            chatAndLogsFrame.dispose();
+            chatAndLogsFrame = null;
+        }
+    }
+
+    private void toggleChatAndLogsWindow() {
+        if (chatAndLogsDetached) {
+            dockChatAndLogs();
+        } else {
+            popOutChatAndLogs();
+        }
+    }
+
+    private void updateChatAndLogsWindowButton() {
+        if (btnToggleChatAndLogsWindow == null) {
+            return;
+        }
+        btnToggleChatAndLogsWindow.setText(chatAndLogsDetached ? "Dock" : "Pop out");
+        btnToggleChatAndLogsWindow.setToolTipText(chatAndLogsDetached
+                ? "Dock chat and system messages back into the game panel"
+                : "Pop out chat and system messages into a separate window");
     }
 
     private void sizeToScreen() {
@@ -2366,13 +2465,25 @@ public final class GamePanel extends javax.swing.JPanel {
         splitChatAndLogs.setTopComponent(userChatPanel);
         splitChatAndLogs.setBottomComponent(gameChatPanel);
 
+        btnToggleChatAndLogsWindow = new JButton();
+        btnToggleChatAndLogsWindow.setFocusable(false);
+        btnToggleChatAndLogsWindow.addActionListener(evt -> toggleChatAndLogsWindow());
+        updateChatAndLogsWindowButton();
+
+        JPanel chatAndLogsToolbar = new JPanel(new FlowLayout(FlowLayout.RIGHT, 2, 2));
+        chatAndLogsToolbar.add(btnToggleChatAndLogsWindow);
+
+        chatAndLogsContainer = new JPanel(new BorderLayout());
+        chatAndLogsContainer.add(chatAndLogsToolbar, BorderLayout.NORTH);
+        chatAndLogsContainer.add(splitChatAndLogs, BorderLayout.CENTER);
+
         // split: [battlefield + hand + stack] <|> [chats]
         splitBattlefieldAndChats = new javax.swing.JSplitPane();
         splitBattlefieldAndChats.setBorder(null);
         splitBattlefieldAndChats.setResizeWeight(DIVIDER_KEEP_RIGHT_COMPONENT);
         splitBattlefieldAndChats.setOneTouchExpandable(true);
         splitBattlefieldAndChats.setLeftComponent(pnlHelperHandButtonsStackArea);
-        splitBattlefieldAndChats.setRightComponent(splitChatAndLogs);
+        splitBattlefieldAndChats.setRightComponent(chatAndLogsContainer);
 
         // warning, it's important to store/restore splitters in same order as real life GUI
         // from outer to inner (otherwise panels will be hidden or weird)
