@@ -24,14 +24,15 @@ public final class Homesickness extends CardImpl {
 
         // Target player draws two cards. Tap up to two target creatures. Put a stun counter on each of them.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer().withChooseHint("to draw two cards"));
         this.getSpellAbility().addEffect(new TapTargetEffect()
             .setText("tap up to two target creatures")
             .setTargetPointer(new SecondTargetPointer()));
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.STUN.createInstance())
             .setText("put a stun counter on each of them")
             .setTargetPointer(new SecondTargetPointer()));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2)
+                .withChooseHint("to tap and put a stun counter on"));
     }
 
     private Homesickness(final Homesickness card) {
