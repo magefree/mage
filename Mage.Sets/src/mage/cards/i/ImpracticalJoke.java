@@ -21,7 +21,8 @@ public final class ImpracticalJoke extends CardImpl {
         // Damage can't be prevented this turn. Impractical Joke deals 3 damage to up to one target creature or planeswalker.
         this.getSpellAbility().addEffect(new DamageCantBePreventedEffect(Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker(0, 1));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker(0, 1)
+                .withChooseHint("to deal 3 damage to"));
     }
 
     private ImpracticalJoke(final ImpracticalJoke card) {
