@@ -38,7 +38,7 @@ public final class NilsDisciplineEnforcer extends CardImpl {
         Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new NilsDisciplineEnforcerCountersEffect()
         );
-        ability.addTarget(new TargetCreaturePermanent(0, 1));
+        ability.addTarget(new TargetCreaturePermanent(0, 1).withChooseHint("to put a +1/+1 counter on"));
         ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, false));
         this.addAbility(ability);
 
