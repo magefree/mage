@@ -31,9 +31,9 @@ public final class BrassInfiniscope extends CardImpl {
 
         // {T}: Add {C}{C}. When you next cast a spell with {X} in its mana cost this turn, you draw a card and gain half X life, rounded down.
         SimpleManaAbility manaAbility = new SimpleManaAbility(
-            Zone.BATTLEFIELD,
-            new BrassInfiniscopeManaEffect(),
-            new TapSourceCost()
+                Zone.BATTLEFIELD,
+                new BrassInfiniscopeManaEffect(),
+                new TapSourceCost()
         );
         manaAbility.setUndoPossible(false);
         this.addAbility(manaAbility);
@@ -81,8 +81,8 @@ class BrassInfiniscopeManaEffect extends ManaEffect {
         boolean result = super.apply(game, source);
         if (!game.inCheckPlayableState()) {
             game.addDelayedTriggeredAbility(
-                new CastNextSpellDelayedTriggeredAbility(new BrassInfiniscopeDelayedEffect(), filter, false),
-                source
+                    new CastNextSpellDelayedTriggeredAbility(new BrassInfiniscopeDelayedEffect(), filter, false),
+                    source
             );
         }
         return result;
