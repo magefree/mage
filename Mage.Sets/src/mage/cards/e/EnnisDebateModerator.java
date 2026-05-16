@@ -35,7 +35,8 @@ public final class EnnisDebateModerator extends CardImpl {
 
         // When Ennis enters, exile up to one other target creature you control. Return that card to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileReturnBattlefieldNextEndStepTargetEffect());
-        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL)
+                .withChooseHint("to exile and return to battlefield at the next end step"));
         this.addAbility(ability);
 
         // At the beginning of your end step, if one or more cards were put into exile this turn, put a +1/+1 counter on Ennis.
