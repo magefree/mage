@@ -27,7 +27,8 @@ public final class DivergentEquation extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect()
             .setText("Return up to X target instant and/or sorcery cards from your graveyard to your hand")
         );
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 1, filter));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 1, filter)
+                .withChooseHint("to return from your graveyard to hand"));
         this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
 
         // Exile Divergent Equation.
