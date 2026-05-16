@@ -44,7 +44,7 @@ public final class JadziStewardOfFate extends PrepareCard {
         // Oracle's Gift
         // Sorcery {X}{X}{U}
         // Create X 0/0 green and blue Fractal creature tokens, then put X +1/+1 counters on each Fractal you control.
-        this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new FractalToken()));
+        this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new FractalToken(), GetXValue.instance));
         this.getSpellCard().getSpellAbility().addEffect(new AddCountersAllEffect(
                 CounterType.P1P1.createInstance(), GetXValue.instance, filter
         ).concatBy(", then"));
