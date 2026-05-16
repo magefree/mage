@@ -61,7 +61,8 @@ public final class MoseoVeinsNewDean extends CardImpl {
                 .setText("return up to one target creature card with mana value X or less " +
                         "from your graveyard to the battlefield, " +
                         "where X is the amount of life you gained this turn"));
-        ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter));
+        ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter)
+                .withChooseHint("to return from your graveyard to battlefield"));
         ability.withInterveningIf(YouGainedLifeCondition.getZero());
         ability.setAbilityWord(AbilityWord.INFUSION);
         ability.addHint(ControllerGainedLifeCount.getHint());
