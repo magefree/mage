@@ -62,6 +62,7 @@ Utils/*implemented.txt
 # build tools
 mage-bundle.zip
 .env
+.research/
 
 # build targets
 /deploy
