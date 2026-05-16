@@ -37,11 +37,11 @@ public final class StealTheShow extends CardImpl {
 
         // * Target player discards any number of cards, then draws that many cards.
         this.getSpellAbility().addEffect(new StealTheShowEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer().withChooseHint("to discard and draw"));
 
         // * Steal the Show deals damage equal to the number of instant and sorcery cards in your graveyard to target creature or planeswalker.
         this.getSpellAbility().addMode(new Mode(new DamageTargetEffect(xValue))
-                .addTarget(new TargetCreatureOrPlaneswalker()));
+                .addTarget(new TargetCreatureOrPlaneswalker().withChooseHint("to deal damage to")));
         this.getSpellAbility().addHint(hint);
     }
 
