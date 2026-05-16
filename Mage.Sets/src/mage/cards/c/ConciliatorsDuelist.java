@@ -35,7 +35,8 @@ public final class ConciliatorsDuelist extends CardImpl {
 
         // Repartee -- Whenever you cast an instant or sorcery spell that targets a creature, exile up to one target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.
         ability = new ReparteeAbility(new ExileReturnBattlefieldNextEndStepTargetEffect());
-        ability.addTarget(new TargetCreaturePermanent(0, 1));
+        ability.addTarget(new TargetCreaturePermanent(0, 1)
+                .withChooseHint("to exile and return to battlefield at the next end step"));
         this.addAbility(ability);
     }
 
