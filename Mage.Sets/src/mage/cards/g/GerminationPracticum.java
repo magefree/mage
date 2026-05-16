@@ -2,6 +2,7 @@ package mage.cards.g;
 
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.ParadigmAbility;
+import mage.abilities.keyword.ParadigmFirstResolveEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,8 +24,9 @@ public final class GerminationPracticum extends CardImpl {
 
         // Put two +1/+1 counters on each creature you control.
         this.getSpellAbility().addEffect(new AddCountersAllEffect(
-                CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE
+                CounterType.P1P1.createInstance(2), StaticFilters.FILTER_CONTROLLED_CREATURE
         ));
+        this.getSpellAbility().addEffect(new ParadigmFirstResolveEffect());
 
         // Paradigm
         this.addAbility(new ParadigmAbility());
