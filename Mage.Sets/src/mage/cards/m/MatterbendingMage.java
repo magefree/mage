@@ -39,7 +39,8 @@ public final class MatterbendingMage extends CardImpl {
 
         // When this creature enters, return up to one other target creature to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
-        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_ANOTHER_TARGET_CREATURE)
+                .withChooseHint("to return to its owner's hand"));
         this.addAbility(ability);
 
         // Whenever you cast a spell with {X} in its mana cost, this creature can't be blocked this turn.
