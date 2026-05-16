@@ -1,5 +1,7 @@
 package mage.cards.k;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -21,7 +23,9 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+import mage.target.Targets;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.SecondTargetPointer;
 import mage.util.CardUtil;
@@ -68,7 +72,7 @@ public final class KineticOoze extends CardImpl {
             new DoubleCountersTargetEffect(CounterType.P1P1),
             new KineticOozeXOrMoreCondition(10),
             "If X is 10 or more, double the number of +1/+1 counters on any number of other target creatures"
-        ).setTargetPointer(new SecondTargetPointer()));
+        ).setTargetPointer(new KineticOozeSecondTargetPointer()));
 
         ability.addTarget(new TargetPermanent(0, 1, filter));
         ability.setTargetAdjuster(KineticOozeTargetAdjuster.instance);
@@ -82,6 +86,56 @@ public final class KineticOoze extends CardImpl {
     @Override
     public KineticOoze copy() {
         return new KineticOoze(this);
+    }
+}
+
+class KineticOozeSecondTargetPointer extends SecondTargetPointer {
+
+    KineticOozeSecondTargetPointer() {
+        super();
+    }
+
+    private KineticOozeSecondTargetPointer(final KineticOozeSecondTargetPointer targetPointer) {
+        super(targetPointer);
+    }
+
+    @Override
+    public void init(Game game, Ability source) {
+        if (source.getTargets().size() < 2) {
+            this.setInitialized();
+            return;
+        }
+        super.init(game, source);
+    }
+
+    @Override
+    public List<UUID> getTargets(Game game, Ability source) {
+        return source.getTargets().size() < 2
+                ? Collections.emptyList()
+                : super.getTargets(game, source);
+    }
+
+    @Override
+    public UUID getFirst(Game game, Ability source) {
+        return source.getTargets().size() < 2 ? null : super.getFirst(game, source);
+    }
+
+    @Override
+    public Permanent getFirstTargetPermanentOrLKI(Game game, Ability source) {
+        return source.getTargets().size() < 2 ? null : super.getFirstTargetPermanentOrLKI(game, source);
+    }
+
+    @Override
+    public String describeTargets(Targets targets, String defaultDescription) {
+        if (targetDescription != null) {
+            return targetDescription;
+        }
+        return targets.size() < 2 ? defaultDescription : super.describeTargets(targets, defaultDescription);
+    }
+
+    @Override
+    public KineticOozeSecondTargetPointer copy() {
+        return new KineticOozeSecondTargetPointer(this);
     }
 }
 
@@ -119,13 +173,15 @@ enum KineticOozeTargetAdjuster implements TargetAdjuster {
             CardType.ENCHANTMENT.getPredicate()
         ));
         filter2.add(new ManaValuePredicate(ComparisonType.OR_LESS, x));
-        ability.addTarget(new TargetPermanent(0, 1, filter2));
+        ability.addTarget(new TargetPermanent(0, 1, filter2)
+                .withChooseHint("to destroy"));
 
         // Any number of other target creatures
         if (x >= 10) {
             FilterCreaturePermanent filter3 = new FilterCreaturePermanent("other target creatures");
             filter3.add(AnotherPredicate.instance);
-            ability.addTarget(new TargetPermanent(0, Integer.MAX_VALUE, filter3));
+            ability.addTarget(new TargetPermanent(0, Integer.MAX_VALUE, filter3)
+                    .withChooseHint("to double +1/+1 counters on another creature"));
         }
     }
 }
