@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.keyword.ParadigmAbility;
+import mage.abilities.keyword.ParadigmFirstResolveEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -31,8 +32,9 @@ public final class EchocastingSymposium extends CardImpl {
 
         // Target player creates a token that's a copy of target creature you control.
         this.getSpellAbility().addEffect(new EchocastingSymposiumEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getSpellAbility().addEffect(new ParadigmFirstResolveEffect());
+        this.getSpellAbility().addTarget(new TargetPlayer().withChooseHint("to create the token"));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent().withChooseHint("to copy"));
 
         // Paradigm
         this.addAbility(new ParadigmAbility());
