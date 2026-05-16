@@ -32,11 +32,13 @@ public final class PracticedOffense extends CardImpl {
 
         // Put a +1/+1 counter on each creature target player controls. Target creature gains your choice of double strike or lifelink until end of turn.
         this.getSpellAbility().addEffect(new PracticedOffenseEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer()
+                .withChooseHint("whose creatures get +1/+1 counters"));
         this.getSpellAbility().addEffect(new GainsChoiceOfAbilitiesEffect(
            DoubleStrikeAbility.getInstance(), LifelinkAbility.getInstance()
         ).setTargetPointer(new SecondTargetPointer()));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent()
+                .withChooseHint("to gain double strike or lifelink"));
 
         // Flashback {1}{W}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{1}{W}")));
