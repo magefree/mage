@@ -26,11 +26,12 @@ public final class CostOfBrilliance extends CardImpl {
         // Target player draws two cards and loses 2 life. Put a +1/+1 counter on up to one target creature.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(2).setTargetPointer(new FirstTargetPointer()));
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(2).withTargetDescription("and").setTargetPointer(new FirstTargetPointer()));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer().withChooseHint("to draw two and lose 2 life"));
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance())
             .setText("Put a +1/+1 counter on up to one target creature")
             .setTargetPointer(new SecondTargetPointer()));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1)
+                .withChooseHint("to put a +1/+1 counter on"));
     }
 
     private CostOfBrilliance(final CostOfBrilliance card) {
