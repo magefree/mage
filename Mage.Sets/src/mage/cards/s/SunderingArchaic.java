@@ -30,7 +30,7 @@ import java.util.UUID;
  */
 public final class SunderingArchaic extends CardImpl {
 
-    private static FilterPermanent filter = new FilterNonlandPermanent(
+    private static final FilterPermanent filter = new FilterNonlandPermanent(
             "nonland permanent an opponent controls with mana value less "
                     + "than or equal to the number of colors of mana spent to cast this creature");
 
@@ -48,7 +48,7 @@ public final class SunderingArchaic extends CardImpl {
 
         // Converge -- When this creature enters, exile target nonland permanent an opponent controls with mana value less than or equal to the number of colors of mana spent to cast this creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter).withChooseHint("to exile from battlefield"));
         ability.setAbilityWord(AbilityWord.CONVERGE).addHint(ColorsOfManaSpentToCastCount.getHint());
         this.addAbility(ability);
 
@@ -57,7 +57,7 @@ public final class SunderingArchaic extends CardImpl {
                 new PutOnLibraryTargetEffect(false),
                 new GenericManaCost(2)
         );
-        ability.addTarget(new TargetCardInGraveyard());
+        ability.addTarget(new TargetCardInGraveyard().withChooseHint("to put from a graveyard on bottom of library"));
         this.addAbility(ability);
     }
 
