@@ -2134,7 +2134,13 @@ public final class CardUtil {
             res.add(mainCard);
             res.add(mainCard.getLeftHalfCard());
             res.add(mainCard.getRightHalfCard());
-        } else if (object instanceof CardWithSpellOption || object instanceof SpellOptionCard) {
+        } else if (object instanceof PrepareSpellCard) {
+            res.add(object);
+        } else if (object instanceof SpellOptionCard) {
+            CardWithSpellOption mainCard = ((SpellOptionCard) object).getParentCard();
+            res.add(mainCard);
+            res.add(mainCard.getSpellCard());
+        } else if (object instanceof CardWithSpellOption) {
             CardWithSpellOption mainCard = (CardWithSpellOption) ((Card) object).getMainCard();
             res.add(mainCard);
             res.add(mainCard.getSpellCard());

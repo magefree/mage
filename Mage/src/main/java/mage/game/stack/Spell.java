@@ -839,13 +839,20 @@ public class Spell extends StackObjectImpl implements Card {
     public Spell copySpell(Game game, Ability source, UUID newController) {
         // copied spells must use copied cards
         // spell can be from card's part (mdf/adventure), but you must copy FULL card
-        Card copiedMainCard = game.copyCard(this.card.getMainCard(), source, newController);
-        // find copied part
-        Map<UUID, MageObject> mapOldToNew = CardUtil.getOriginalToCopiedPartsMap(this.card.getMainCard(), copiedMainCard);
-        if (!mapOldToNew.containsKey(this.card.getId())) {
-            throw new IllegalStateException("Can't find card id after main card copy: " + copiedMainCard.getName());
+        Card copiedPart;
+        if (this.card instanceof PrepareSpellCard
+                && game.getState().getZone(this.card.getId()) == Zone.STACK
+                && game.getState().getZone(this.card.getMainCard().getId()) == Zone.BATTLEFIELD) {
+            copiedPart = game.getState().copyCardPartForStack(this.card, newController);
+        } else {
+            Card copiedMainCard = game.copyCard(this.card.getMainCard(), source, newController);
+            // find copied part
+            Map<UUID, MageObject> mapOldToNew = CardUtil.getOriginalToCopiedPartsMap(this.card.getMainCard(), copiedMainCard);
+            if (!mapOldToNew.containsKey(this.card.getId())) {
+                throw new IllegalStateException("Can't find card id after main card copy: " + copiedMainCard.getName());
+            }
+            copiedPart = (Card) mapOldToNew.get(this.card.getId());
         }
-        Card copiedPart = (Card) mapOldToNew.get(this.card.getId());
 
         // copy spell
         Spell spellCopy = new Spell(copiedPart, this.ability.copySpell(this.card, copiedPart), this.controllerId, Zone.STACK, game, true);

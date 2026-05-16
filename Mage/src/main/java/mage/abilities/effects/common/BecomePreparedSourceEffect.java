@@ -2,6 +2,7 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.PrepareUtil;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -28,10 +29,6 @@ public class BecomePreparedSourceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent == null) {
-            return false;
-        }
-        permanent.setPrepared(true, game);
-        return true;
+        return PrepareUtil.prepare(permanent, game, source);
     }
 }

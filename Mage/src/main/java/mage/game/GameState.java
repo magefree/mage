@@ -1154,6 +1154,16 @@ public class GameState implements Serializable, Copyable<GameState> {
         addCard(card, Zone.OUTSIDE);
     }
 
+    public void addCopiedCard(Card card) {
+        copiedCards.put(card.getId(), card);
+        addCard(card);
+    }
+
+    public void addCopiedCard(Card card, Zone zone) {
+        copiedCards.put(card.getId(), card);
+        addCard(card, zone);
+    }
+
     private void addCard(Card card, Zone zone) {
         setZone(card.getId(), zone);
 
@@ -1679,6 +1689,22 @@ public class GameState implements Serializable, Copyable<GameState> {
         });
 
         return copiedCard;
+    }
+
+    public Card copyCardPartForStack(Card cardPartToCopy, UUID newController) {
+        if (getZone(cardPartToCopy.getId()) != Zone.STACK) {
+            throw new IllegalArgumentException("Wrong code usage. You can copy only stack card parts: " + cardPartToCopy.getName(), new Throwable());
+        }
+
+        Card copiedCardPart = cardPartToCopy.copy();
+        prepareCardForCopy(cardPartToCopy, copiedCardPart, newController);
+
+        copiedCards.put(copiedCardPart.getId(), copiedCardPart);
+        addCard(copiedCardPart, Zone.STACK);
+
+        // copied cards removes from game after battlefield/stack leaves, so remember it here as workaround to fix freeze,
+        this.setValue(COPIED_CARD_KEY + copiedCardPart.getId(), copiedCardPart.copy());
+        return copiedCardPart;
     }
 
     private void prepareCardForCopy(Card originalCard, Card copiedCard, UUID newController) {

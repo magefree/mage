@@ -993,6 +993,10 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean removeFromBattlefield(Permanent permanent, Ability source, Game game) {
+        if (permanent.isPrepared()) {
+            PrepareUtil.cleanupPrepareSpellCopy(permanent, game);
+            permanent.setPrepared(false, game);
+        }
         permanent.removeFromCombat(game, false);
         game.getBattlefield().removePermanent(permanent.getId());
         if (permanent.getAttachedTo() != null) {
@@ -4118,6 +4122,9 @@ public abstract class PlayerImpl implements Player, Serializable {
             TransformingDoubleFacedCard mainCard = (TransformingDoubleFacedCard) object;
             getPlayableFromObjectSingle(game, fromZone, mainCard.getLeftHalfCard(), mainCard.getLeftHalfCard().getAbilities(game), availableMana, output);
             getPlayableFromObjectSingle(game, fromZone, mainCard, mainCard.getSharedAbilities(game), availableMana, output);
+        } else if (object instanceof PrepareCard) {
+            PrepareCard prepareCard = (PrepareCard) object;
+            getPlayableFromObjectSingle(game, fromZone, prepareCard, prepareCard.getSharedAbilities(game), availableMana, output);
         } else if (object instanceof CardWithSpellOption) {
             // adventure must use different card characteristics for different spells (main or adventure)
             CardWithSpellOption cardWithSpellOption = (CardWithSpellOption) object;
@@ -4466,7 +4473,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
                 // main card - must be marked playable in GUI
                 Card card = game.getCard(ability.getSourceId());
-                if (card != null && card.getMainCard().getId() != card.getId()) {
+                if (card != null && !(card instanceof PrepareSpellCard) && card.getMainCard().getId() != card.getId()) {
                     putToPlayableObjects(playableObjects, card.getMainCard().getId(), ability);
                 }
 

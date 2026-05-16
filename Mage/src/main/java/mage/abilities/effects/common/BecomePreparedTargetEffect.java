@@ -3,6 +3,7 @@ package mage.abilities.effects.common;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.PrepareUtil;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -32,11 +33,9 @@ public class BecomePreparedTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent == null) {
-            return false;
-        }
-        permanent.setPrepared(prepared, game);
-        return true;
+        return prepared
+                ? PrepareUtil.prepare(permanent, game, source)
+                : PrepareUtil.unprepare(permanent, game);
     }
 
     @Override

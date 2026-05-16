@@ -19,7 +19,8 @@ public enum SpellAbilityType {
     MODAL_RIGHT("RightModal SpellAbility"),
     SPLICE("Spliced SpellAbility"),
     ADVENTURE_SPELL("Adventure SpellAbility"),
-    OMEN_SPELL("Omen SpellAbility");
+    OMEN_SPELL("Omen SpellAbility"),
+    PREPARE_SPELL("Prepare SpellAbility");
 
     private final String text;
 
