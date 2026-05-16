@@ -35,7 +35,7 @@ public final class StartledRelicSloth extends CardImpl {
 
         // At the beginning of combat on your turn, exile up to one target card from a graveyard.
         Ability ability = new BeginningOfCombatTriggeredAbility(new ExileTargetEffect());
-        ability.addTarget(new TargetCardInGraveyard(0, 1));
+        ability.addTarget(new TargetCardInGraveyard(0, 1).withChooseHint("to exile from a graveyard"));
         this.addAbility(ability);
     }
 
