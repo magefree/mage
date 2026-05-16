@@ -30,7 +30,8 @@ public final class RabidAttack extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(ability)
             .setText("and gain \"When this creature dies, draw a card.\" until end of turn"));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE)
+                .withChooseHint("+1/+0 and draw when it dies"));
     }
 
     private RabidAttack(final RabidAttack card) {
