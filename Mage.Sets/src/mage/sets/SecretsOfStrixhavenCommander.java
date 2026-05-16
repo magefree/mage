@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class SecretsOfStrixhavenCommander extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Defacing Duskmage", "Dirgur Focusmage", "Eccentric Pestfinder", "Eiganjo Dynastorian", "Inspired Skypainter", "Lorehold Archivist", "Naktamun Lorespinner", "Stensian Sanguinist", "Striding Shotcaller", "Yavimaya Bloomsage");
+    private static final List<String> unfinished = Arrays.asList("Defacing Duskmage", "Dirgur Focusmage", "Eccentric Pestfinder", "Inspired Skypainter", "Lorehold Archivist", "Naktamun Lorespinner", "Stensian Sanguinist", "Striding Shotcaller", "Yavimaya Bloomsage");
     private static final SecretsOfStrixhavenCommander instance = new SecretsOfStrixhavenCommander();
 
     public static SecretsOfStrixhavenCommander getInstance() {
