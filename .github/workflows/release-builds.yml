@@ -1,0 +1,237 @@
+name: Release builds
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: "Build channel"
+        required: true
+        type: choice
+        default: test
+        options:
+          - test
+          - stable
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-builds-${{ github.event_name == 'push' && 'beta' || inputs.channel || 'test' }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Build and publish
+    runs-on: ubuntu-latest
+
+    env:
+      DISPATCH_CHANNEL: ${{ inputs.channel || '' }}
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5
+        with:
+          java-version: "17"
+          distribution: temurin
+          cache: maven
+
+      - name: Resolve release metadata
+        id: release
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ "${GITHUB_EVENT_NAME}" = "push" ]; then
+            channel="beta"
+          elif [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
+            channel="test"
+          else
+            channel="${DISPATCH_CHANNEL:-test}"
+          fi
+
+          if [ "${channel}" = "stable" ] && [ "${GITHUB_REF}" != "refs/heads/main" ]; then
+            echo "Stable releases must be run from main." >&2
+            exit 1
+          fi
+
+          short_sha="${GITHUB_SHA:0:12}"
+          build_stamp="$(date -u +'%Y-%m-%d-%H%MZ')"
+          version="$(mvn -q -DforceStdout help:evaluate -Dexpression=project.version)"
+
+          if [ "${channel}" = "beta" ]; then
+            tag="beta"
+            title="Beta build ${short_sha}"
+            prerelease="true"
+            asset_suffix="beta"
+          elif [ "${channel}" = "test" ]; then
+            tag="test-${short_sha}"
+            title="Test build ${short_sha}"
+            prerelease="true"
+            asset_suffix="test-${short_sha}"
+          else
+            tag="stable"
+            title="Stable build ${short_sha}"
+            prerelease="false"
+            asset_suffix="stable"
+          fi
+
+          if [ "${channel}" = "stable" ]; then
+            xmage_version="${version} (${channel}-${build_stamp}-${short_sha})"
+          else
+            xmage_version="${version}-dev (${channel}-${build_stamp}-${short_sha})"
+          fi
+
+          {
+            echo "channel=${channel}"
+            echo "tag=${tag}"
+            echo "title=${title}"
+            echo "prerelease=${prerelease}"
+            echo "asset_suffix=${asset_suffix}"
+            echo "short_sha=${short_sha}"
+            echo "build_stamp=${build_stamp}"
+            echo "version=${version}"
+            echo "xmage_version=${xmage_version}"
+          } >> "${GITHUB_OUTPUT}"
+
+      - name: Build client and server
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mvn -B -DskipTests \
+            -Dxmage.dataCollectors.printGameLogs=false \
+            -Dlog4j.configuration=file:"${GITHUB_WORKSPACE}/.travis/log4j.properties" \
+            -pl Mage.Client,Mage.Server -am install
+
+          mvn -B -DskipTests -pl Mage.Client,Mage.Server package assembly:single
+
+      - name: Prepare release artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p dist bundle/mage-client bundle/mage-server
+
+          bundle_name="xmage-${{ steps.release.outputs.asset_suffix }}.zip"
+          bundle_url="https://github.com/${GITHUB_REPOSITORY}/releases/download/${{ steps.release.outputs.tag }}/${bundle_name}"
+
+          unzip -q Mage.Client/target/mage-client.zip -d bundle/mage-client
+          unzip -q Mage.Server/target/mage-server.zip -d bundle/mage-server
+
+          (
+            cd bundle
+            zip -qr "../dist/${bundle_name}" mage-client mage-server
+          )
+
+          bundle_sha="$(sha256sum "dist/${bundle_name}" | awk '{print $1}')"
+
+          (
+            cd dist
+            sha256sum "${bundle_name}" > SHA256SUMS.txt
+          )
+
+          cat > dist/build.json <<EOF
+          {
+            "repository": "${GITHUB_REPOSITORY}",
+            "channel": "${{ steps.release.outputs.channel }}",
+            "tag": "${{ steps.release.outputs.tag }}",
+            "version": "${{ steps.release.outputs.version }}",
+            "launcher_version": "${{ steps.release.outputs.xmage_version }}",
+            "build_stamp": "${{ steps.release.outputs.build_stamp }}",
+            "commit": "${GITHUB_SHA}",
+            "build_number": "${GITHUB_RUN_NUMBER}",
+            "assets": {
+              "full": {
+                "name": "${bundle_name}",
+                "sha256": "${bundle_sha}",
+                "url": "${bundle_url}"
+              }
+            }
+          }
+          EOF
+
+          cat > dist/config.json <<EOF
+          {
+            "java": {
+              "version": "1.8.0_201",
+              "location": "https://xmage.today/java/jre-8u201-"
+            },
+            "XMage": {
+              "version": "${{ steps.release.outputs.xmage_version }}",
+              "location": "${bundle_url}",
+              "locations": [],
+              "full": "${bundle_url}",
+              "torrent": "",
+              "images": "",
+              "Launcher": {
+                "version": "0.3.8",
+                "location": "https://beta.xmage.today/files/XMageLauncher-0.3.8.jar"
+              }
+            }
+          }
+          EOF
+
+          cat > dist/RELEASE_NOTES.md <<EOF
+          ${{ steps.release.outputs.title }}
+
+          Channel: ${{ steps.release.outputs.channel }}
+          Commit: ${GITHUB_SHA}
+          Build: ${GITHUB_RUN_NUMBER}
+
+          Assets:
+          - ${bundle_name}
+          - config.json
+
+          Verify downloads with SHA256SUMS.txt.
+          EOF
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mage-${{ steps.release.outputs.channel }}-${{ steps.release.outputs.short_sha }}
+          path: dist/
+
+      - name: Publish GitHub release
+        if: steps.release.outputs.channel != 'test'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          tag="${{ steps.release.outputs.tag }}"
+          title="${{ steps.release.outputs.title }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git tag -f "${tag}" "${GITHUB_SHA}"
+          git push -f origin "refs/tags/${tag}"
+
+          if gh release view "${tag}" >/dev/null 2>&1; then
+            gh release upload "${tag}" dist/* --clobber
+
+            if [ "${{ steps.release.outputs.channel }}" = "beta" ]; then
+              gh release edit "${tag}" --title "${title}" --notes-file dist/RELEASE_NOTES.md --prerelease
+            else
+              gh release edit "${tag}" --title "${title}" --notes-file dist/RELEASE_NOTES.md
+            fi
+          else
+            if [ "${{ steps.release.outputs.channel }}" = "beta" ]; then
+              gh release create "${tag}" dist/* \
+                --target "${GITHUB_SHA}" \
+                --title "${title}" \
+                --notes-file dist/RELEASE_NOTES.md \
+                --prerelease
+            else
+              gh release create "${tag}" dist/* \
+                --target "${GITHUB_SHA}" \
+                --title "${title}" \
+                --notes-file dist/RELEASE_NOTES.md
+            fi
+          fi
