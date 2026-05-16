@@ -1,7 +1,5 @@
 package mage.cards.f;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -22,13 +20,14 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.game.permanent.token.Elemental33BlueRedToken;
 import mage.game.permanent.token.Token;
+import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author muz
  */
 public final class FurygaleFlocking extends CardImpl {
@@ -62,8 +61,8 @@ class FurygaleFlockingEffect extends OneShotEffect {
 
     FurygaleFlockingEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "for each opponent, create two 3/3 blue and red Elemental creature tokens with flying " +
-                "that attack that opponent this turn if able. They gain haste until end of turn";
+        staticText = "for each opponent, create two 3/3 blue and red Elemental creature tokens with flying "
+                + "that attack that opponent this turn if able. They gain haste until end of turn";
     }
 
     private FurygaleFlockingEffect(final FurygaleFlockingEffect effect) {
@@ -82,9 +81,9 @@ class FurygaleFlockingEffect extends OneShotEffect {
             token.putOntoBattlefield(2, game, source, source.getControllerId());
             for (UUID tokenId : token.getLastAddedTokenIds()) {
                 game.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance())
-                    .setTargetPointer(new FixedTarget(tokenId, game)), source);
+                        .setTargetPointer(new FixedTarget(tokenId, game)), source);
                 game.addEffect(new FurygaleFlockingAttackEffect(opponentId)
-                    .setTargetPointer(new FixedTarget(tokenId, game)), source);
+                        .setTargetPointer(new FixedTarget(tokenId, game)), source);
             }
         }
         return true;
