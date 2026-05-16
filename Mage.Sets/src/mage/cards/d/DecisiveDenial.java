@@ -30,8 +30,9 @@ public final class DecisiveDenial extends CardImpl {
         this.getSpellAbility().addEffect(new FightTargetsEffect()
                 .setText("target creature you control fights target creature you don't control. " +
                         "<i>(Each deals damage equal to its power to the other.)</i>"));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent().withChooseHint("to fight"));
+        this.getSpellAbility().addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL)
+                .withChooseHint("to fight"));
 
         // • Counter target noncreature spell unless its controller pays {3}.
         Mode mode = new Mode(new CounterUnlessPaysEffect(new GenericManaCost(3)));
