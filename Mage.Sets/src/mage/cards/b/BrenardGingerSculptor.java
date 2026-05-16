@@ -9,7 +9,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.token.FoodAbility;
 import mage.cards.Card;
@@ -59,7 +59,7 @@ public final class BrenardGingerSculptor extends CardImpl {
         // Each creature you control that's a Food or a Golem gets +2/+2 and has trample.
         Ability ability = new SimpleStaticAbility(new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, foodOrGolemCreature)
             .setText("each creature you control that's a Food or a Golem gets +2/+2"));
-        ability.addEffect(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, foodOrGolemCreature).setText("and has trample."));
+        ability.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, foodOrGolemCreature).setText("and has trample."));
         this.addAbility(ability);
 
         // Whenever another nontoken creature you control dies, you may exile it. If you do, create a token that's a copy of that creature, except it's a 1/1 Food Golem artifact creature in addition to its other types and it has "2, {T}, Sacrifice this artifact: You gain 3 life."
