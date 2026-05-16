@@ -33,7 +33,7 @@ public final class SpellbookSeeker extends PrepareCard {
         // Careful Study
         // Sorcery {U}
         // Draw two cards, then discard two cards.
-        this.getSpellCard().getSpellAbility().addEffect(new DrawDiscardControllerEffect(2, 1));
+        this.getSpellCard().getSpellAbility().addEffect(new DrawDiscardControllerEffect(2, 2));
     }
 
     private SpellbookSeeker(final SpellbookSeeker card) {
