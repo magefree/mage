@@ -24,7 +24,7 @@ public final class DissectionPractice extends CardImpl {
         // Target opponent loses 1 life and you gain 1 life.
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(1));
         this.getSpellAbility().addEffect(new GainLifeEffect(1).concatBy("and"));
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponent().withChooseHint("to lose 1 life"));
 
         // Up to one target creature gets +1/+1 until end of turn.
         this.getSpellAbility().addEffect(
