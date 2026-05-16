@@ -1,21 +1,19 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.BecomePreparedSourceEffect;
-import mage.abilities.meta.OrTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.PrepareCard;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -25,8 +23,9 @@ import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTargets;
 
+import java.util.UUID;
+
 /**
- *
  * @author muz
  */
 public final class InspiredSkypainter extends PrepareCard {
@@ -52,18 +51,18 @@ public final class InspiredSkypainter extends PrepareCard {
 
         // When this creature enters and whenever one or more creature tokens you control deal combat damage to a player, this creature becomes prepared.
         this.addAbility(new OrTriggeredAbility(
-            Zone.BATTLEFIELD,
-            new BecomePreparedSourceEffect(),
-            false,
-            "When this creature enters and whenever one or more creature tokens you control deal combat damage to a player, ",
-            new EntersBattlefieldTriggeredAbility(null),
-            new OneOrMoreCombatDamagePlayerTriggeredAbility(null, filter)
+                Zone.BATTLEFIELD,
+                new BecomePreparedSourceEffect(),
+                false,
+                "When this creature enters and whenever one or more creature tokens you control deal combat damage to a player, ",
+                new EntersBattlefieldTriggeredAbility(null),
+                new OneOrMoreCombatDamagePlayerTriggeredAbility(null, filter)
         ));
 
         // Maestro's Gift
         // Sorcery {3}{U}{R}
         // Create a token that's a copy of target creature you control. That token gains haste until end of turn.
-        this.getSpellCard().getSpellAbility().addEffect(new InspiredSkypainterSpellEffect());
+        this.getSpellCard().getSpellAbility().addEffect(new InspiredSkypainterEffect());
         this.getSpellCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 
@@ -77,28 +76,29 @@ public final class InspiredSkypainter extends PrepareCard {
     }
 }
 
-class InspiredSkypainterSpellEffect extends OneShotEffect {
+class InspiredSkypainterEffect extends CreateTokenCopyTargetEffect {
 
-    InspiredSkypainterSpellEffect() {
-        super(Outcome.PutCreatureInPlay);
+    InspiredSkypainterEffect() {
+        super(null, null, false);
         staticText = "create a token that's a copy of target creature you control. That token gains haste until end of turn";
     }
 
-    private InspiredSkypainterSpellEffect(final InspiredSkypainterSpellEffect effect) {
+    private InspiredSkypainterEffect(final InspiredSkypainterEffect effect) {
         super(effect);
     }
 
     @Override
-    public InspiredSkypainterSpellEffect copy() {
-        return new InspiredSkypainterSpellEffect(this);
+    public InspiredSkypainterEffect copy() {
+        return new InspiredSkypainterEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();
-        effect.apply(game, source);
-        game.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance())
-            .setTargetPointer(new FixedTargets(effect.getAddedPermanents(), game)), source);
+        if (!super.apply(game, source)) {
+            return false;
+        }
+        game.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn)
+                .setTargetPointer(new FixedTargets(getAddedPermanents(), game)), source);
         return true;
     }
 }
