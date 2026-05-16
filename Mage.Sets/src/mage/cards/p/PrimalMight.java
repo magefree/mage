@@ -24,13 +24,15 @@ public final class PrimalMight extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}");
 
         // Target creature you control gets +X/+X until end of turn. Then it fights up to one target creature you don’t control.
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent()
+                .withChooseHint("+X/+X and fights"));
         this.getSpellAbility().addEffect(new BoostTargetEffect(GetXValue.instance, GetXValue.instance, Duration.EndOfTurn));
         //
         this.getSpellAbility().addEffect(new FightTargetsEffect()
                 .concatBy("Then")
                 .setText("it fights up to one target creature you don't control"));
-        this.getSpellAbility().addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false));
+        this.getSpellAbility().addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false)
+                .withChooseHint("to fight"));
 
     }
 
