@@ -25,6 +25,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Abhorrent Oculus", 344, Rarity.MYTHIC, mage.cards.a.AbhorrentOculus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Abhorrent Oculus", 42, Rarity.MYTHIC, mage.cards.a.AbhorrentOculus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Acrobatic Cheerleader", 1, Rarity.COMMON, mage.cards.a.AcrobaticCheerleader.class));
+        cards.add(new SetCardInfo("A-Leyline of Resonance", "A-143", Rarity.RARE, mage.cards.a.ALeylineOfResonance.class));
         cards.add(new SetCardInfo("Altanak, the Thrice-Called", 166, Rarity.UNCOMMON, mage.cards.a.AltanakTheThriceCalled.class));
         cards.add(new SetCardInfo("Anthropede", 167, Rarity.COMMON, mage.cards.a.Anthropede.class));
         cards.add(new SetCardInfo("Appendage Amalgam", 83, Rarity.COMMON, mage.cards.a.AppendageAmalgam.class));
