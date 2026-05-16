@@ -47,7 +47,8 @@ public final class StridingShotcaller extends PrepareCard {
                 .setText("put a +1/+1 counter on each of up to X target creatures"));
         this.getSpellCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance())
                 .setText("Those creatures gain flying until end of turn"));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
+        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1)
+                .withChooseHint("to put a counter on and grant flying"));
         this.getSpellCard().getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
