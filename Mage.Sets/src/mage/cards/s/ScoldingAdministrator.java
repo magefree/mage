@@ -40,7 +40,7 @@ public final class ScoldingAdministrator extends CardImpl {
         Ability ability = new DiesSourceTriggeredAbility(new PutSavedPermanentCountersTargetEffect("permanentLeftBattlefield"))
                 .withTriggerCondition(SourceHasCountersCondition.instance) // don't want to check intervening if on resolution
                 .setTriggerPhrase("When {this} dies, ");
-        ability.addTarget(new TargetCreaturePermanent(0, 1));
+        ability.addTarget(new TargetCreaturePermanent(0, 1).withChooseHint("to put this creature's counters on"));
         this.addAbility(ability);
     }
 
