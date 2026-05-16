@@ -2930,6 +2930,7 @@ public class ScryfallImageSupportTokens {
             put("REX/Treasure", "https://api.scryfall.com/cards/trex/2?format=image");
 
             // SOS
+            put("SOS/Copy", "https://api.scryfall.com/cards/tsos/1?format=image");
             put("SOS/Elemental/1", "https://api.scryfall.com/cards/tsos/2?format=image");
             put("SOS/Elemental/2", "https://api.scryfall.com/cards/tsos/3?format=image");
             put("SOS/Emblem Dellian", "https://api.scryfall.com/cards/tsos/13?format=image");
@@ -2942,11 +2943,14 @@ public class ScryfallImageSupportTokens {
             put("SOS/Spirit/1", "https://api.scryfall.com/cards/tsos/10?format=image");
             put("SOS/Spirit/2", "https://api.scryfall.com/cards/tsos/11?format=image");
             put("SOS/Treasure", "https://api.scryfall.com/cards/tsos/12?format=image");
+            put("SOS/Emblem Dellian", "https://api.scryfall.com/cards/tsos/13?format=image");
+            put("SOS/Punchcard // Punchcard", "https://api.scryfall.com/cards/tsos/14?format=image");
 
             // SOC
             put("SOC/Beast", "https://api.scryfall.com/cards/tsoc/14?format=image");
             put("SOC/Boar", "https://api.scryfall.com/cards/tsoc/15?format=image");
             put("SOC/Cat", "https://api.scryfall.com/cards/tsoc/2?format=image");
+            put("SOC/City's Blessing", "https://api.scryfall.com/cards/tsoc/29?format=image");
             put("SOC/Contract", "https://api.scryfall.com/cards/tsoc/3?format=image");
             put("SOC/Dragon Illusion", "https://api.scryfall.com/cards/tsoc/13?format=image");
             put("SOC/Eldrazi Spawn", "https://api.scryfall.com/cards/tsoc/1?format=image");
@@ -2959,6 +2963,7 @@ public class ScryfallImageSupportTokens {
             put("SOC/Goat", "https://api.scryfall.com/cards/tsoc/4?format=image");
             put("SOC/Illusion", "https://api.scryfall.com/cards/tsoc/7?format=image");
             put("SOC/Inkling", "https://api.scryfall.com/cards/tsoc/22?format=image");
+            put("SOC/Manifest", "https://api.scryfall.com/cards/tsoc/30?format=image");
             put("SOC/Pegasus", "https://api.scryfall.com/cards/tsoc/5?format=image");
             put("SOC/Pest", "https://api.scryfall.com/cards/tsoc/23?format=image");
             put("SOC/Phyrexian Germ", "https://api.scryfall.com/cards/tsoc/9?format=image");
@@ -2967,8 +2972,8 @@ public class ScryfallImageSupportTokens {
             put("SOC/Rogue", "https://api.scryfall.com/cards/tsoc/10?format=image");
             put("SOC/Saproling", "https://api.scryfall.com/cards/tsoc/18?format=image");
             put("SOC/Snake", "https://api.scryfall.com/cards/tsoc/11?format=image");
-            put("SOC/Spirit", "https://api.scryfall.com/cards/tsoc/25?format=image");
-            put("SOC/Spirit", "https://api.scryfall.com/cards/tsoc/6?format=image");
+            put("SOC/Spirit/1", "https://api.scryfall.com/cards/tsoc/25?format=image");
+            put("SOC/Spirit/2", "https://api.scryfall.com/cards/tsoc/6?format=image");
             put("SOC/Thopter", "https://api.scryfall.com/cards/tsoc/28?format=image");
             put("SOC/Worm", "https://api.scryfall.com/cards/tsoc/26?format=image");
             put("SOC/Zombie", "https://api.scryfall.com/cards/tsoc/12?format=image");

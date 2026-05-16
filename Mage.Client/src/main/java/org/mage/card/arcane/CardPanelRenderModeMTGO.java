@@ -7,6 +7,7 @@ import mage.client.util.ImageCaches;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.cards.repository.TokenRepository;
 import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
@@ -321,6 +322,24 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         return new CardPanelAttributes(getCardWidth(), getCardHeight(), isChoosable(), isSelected(), isTransformed());
     }
 
+    private boolean shouldRenderFaceDownImageDirectly() {
+        if (!getGameCard().isFaceDown()
+                || !TokenRepository.XMAGE_TOKENS_SET_CODE.equals(getGameCard().getExpansionSetCode())) {
+            return false;
+        }
+
+        switch (getGameCard().getImageFileName()) {
+            case TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MANUAL:
+            case TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST:
+            case TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_CLOAK:
+            case TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MORPH:
+            case TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_DISGUISE:
+                return true;
+            default:
+                return false;
+        }
+    }
+
     /**
      * Render the card to a new BufferedImage at it's current dimensions
      *
@@ -340,12 +359,52 @@ public class CardPanelRenderModeMTGO extends CardPanel {
             g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
             g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
-            // Draw card itself
-            cardRenderer.draw(g2, getAttributes(), image);
+            if (shouldRenderFaceDownImageDirectly() && artImage != null) {
+                g2.drawImage(artImage, 0, 0, cardWidth, cardHeight, null);
+                drawStateOutline(g2, cardWidth, cardHeight);
+                cardRenderer.drawGameOverlays(g2, getAttributes());
+            } else {
+                // Draw card itself
+                cardRenderer.draw(g2, getAttributes(), image);
+            }
         } finally {
             g2.dispose();
         }
 
         return image;
+    }
+
+    private void drawStateOutline(Graphics2D g, int cardWidth, int cardHeight) {
+        Color borderColor;
+        if (isSelected()) {
+            borderColor = Color.green;
+        } else if (isChoosable()) {
+            borderColor = new Color(250, 250, 0, 230);
+        } else if (getGameCard().isPlayable()) {
+            borderColor = new Color(153, 102, 204, 200);
+        } else if (getGameCard().isCanAttack() || getGameCard().isCanBlock()) {
+            borderColor = new Color(255, 50, 50, 230);
+        } else {
+            return;
+        }
+
+        int strokeWidth = Math.max(2, Math.round(cardWidth * 0.03f));
+        int cornerRadius = Math.max(3, Math.round(cardWidth * 0.1f));
+        int inset = strokeWidth / 2;
+        Stroke oldStroke = g.getStroke();
+        try {
+            g.setColor(borderColor);
+            g.setStroke(new BasicStroke(strokeWidth));
+            g.drawRoundRect(
+                    inset,
+                    inset,
+                    cardWidth - strokeWidth,
+                    cardHeight - strokeWidth,
+                    cornerRadius,
+                    cornerRadius
+            );
+        } finally {
+            g.setStroke(oldStroke);
+        }
     }
 }

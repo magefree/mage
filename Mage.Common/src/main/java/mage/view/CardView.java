@@ -972,6 +972,7 @@ public class CardView extends SimpleCardView {
         this.expansionSetCode = designation.getExpansionSetCode();
         this.imageFileName = designation.getImageFileName();
         this.imageNumber = designation.getImageNumber();
+        this.usesVariousArt = designation.getUsesVariousArt();
         this.rarity = Rarity.SPECIAL;
 
         // no playable/chooseable marks for designations

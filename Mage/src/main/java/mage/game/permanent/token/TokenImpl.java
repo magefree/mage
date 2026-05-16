@@ -22,10 +22,12 @@ import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
 import mage.target.Target;
+import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Each token must have default constructor without params (GUI require for card viewer)
@@ -197,6 +199,13 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             return foundInfo;
         }
 
+        // If the exact token class has no image entry, reuse the closest existing token image.
+        // Some tokens have no paper printing, but can still use a visually similar token image.
+        foundInfo = findSimilarTokenInfo(token, setCode);
+        if (foundInfo != null) {
+            return foundInfo;
+        }
+
         // auto-image for creature token (it's a private token without official image, so try to find same paper image)
         if (token instanceof CreatureToken) {
             // TODO: return default creature token image
@@ -207,6 +216,81 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         // - un-implemented token set (must add missing images to tokens database);
         // - another use cases with unknown tokens
         return new TokenInfo(TokenType.TOKEN, "Unknown", TokenRepository.XMAGE_TOKENS_SET_CODE, 0);
+    }
+
+    private static TokenInfo findSimilarTokenInfo(TokenImpl token, String preferredSetCode) {
+        String needName = normalizeTokenName(token.getName());
+        List<TokenInfo> sameNameTokens = TokenRepository.instance
+                .getByType(TokenType.TOKEN)
+                .stream()
+                .filter(info -> normalizeTokenName(info.getName()).equals(needName))
+                .collect(Collectors.toList());
+        if (sameNameTokens.isEmpty()) {
+            return null;
+        }
+
+        Map<TokenInfo, Integer> scoredTokens = sameNameTokens
+                .stream()
+                .collect(Collectors.toMap(info -> info, info -> getSimilarityScore(token, info)));
+        int bestScore = scoredTokens.values().stream().mapToInt(Integer::intValue).max().orElse(0);
+        List<TokenInfo> bestTokens = scoredTokens
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() == bestScore)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+
+        List<TokenInfo> preferredTokens = bestTokens
+                .stream()
+                .filter(info -> info.getSetCode().equals(preferredSetCode))
+                .collect(Collectors.toList());
+        return RandomUtil.randomFromCollection(preferredTokens.isEmpty() ? bestTokens : preferredTokens);
+    }
+
+    private static int getSimilarityScore(TokenImpl token, TokenInfo info) {
+        TokenImpl candidate = createTokenFromInfo(info);
+        if (candidate == null) {
+            return 0;
+        }
+
+        int score = 0;
+        if (Objects.equals(token.getColor(null), candidate.getColor(null))) {
+            score += 8;
+        }
+        if (Objects.equals(token.getPower().getValue(), candidate.getPower().getValue())
+                && Objects.equals(token.getToughness().getValue(), candidate.getToughness().getValue())) {
+            score += 8;
+        }
+        if (Objects.equals(token.getCardType(null), candidate.getCardType(null))) {
+            score += 4;
+        }
+        if (Objects.equals(token.getSubtype(null), candidate.getSubtype(null))) {
+            score += 4;
+        }
+        if (Objects.equals(
+                token.getAbilities().stream().map(Ability::getClass).collect(Collectors.toSet()),
+                candidate.getAbilities().stream().map(Ability::getClass).collect(Collectors.toSet()))) {
+            score += 2;
+        }
+        return score;
+    }
+
+    private static TokenImpl createTokenFromInfo(TokenInfo info) {
+        try {
+            Class<?> tokenClass = Class.forName(info.getFullClassFileName());
+            if (!TokenImpl.class.isAssignableFrom(tokenClass)) {
+                return null;
+            }
+            Constructor<?> constructor = tokenClass.getConstructor();
+            return (TokenImpl) constructor.newInstance();
+        } catch (Exception e) {
+            logger.debug("Can't create token for image similarity check: " + info, e);
+            return null;
+        }
+    }
+
+    private static String normalizeTokenName(String name) {
+        return name.replace(" Token", "");
     }
 
     @Override

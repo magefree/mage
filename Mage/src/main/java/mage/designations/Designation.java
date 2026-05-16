@@ -9,6 +9,8 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.FrameStyle;
+import mage.cards.repository.TokenInfo;
+import mage.cards.repository.TokenRepository;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -43,6 +45,7 @@ public abstract class Designation extends MageObjectImpl {
         this.unique = unique;
         this.name = designationType.toString();
         this.frameStyle = FrameStyle.M15_NORMAL;
+        this.initXmageImageInfo();
     }
 
     protected Designation(final Designation designation) {
@@ -86,6 +89,18 @@ public abstract class Designation extends MageObjectImpl {
 
     public DesignationType getDesignationType() {
         return designationType;
+    }
+
+    private void initXmageImageInfo() {
+        TokenInfo foundInfo = TokenRepository.instance.findPreferredTokenInfoForXmage(this.name, this.getId());
+        if (foundInfo == null) {
+            return;
+        }
+        this.setExpansionSetCode(foundInfo.getSetCode());
+        this.setUsesVariousArt(false);
+        this.setCardNumber("0");
+        this.setImageFileName(foundInfo.getName());
+        this.setImageNumber(foundInfo.getImageNumber());
     }
 
     @Override

@@ -224,6 +224,16 @@ public abstract class CardRenderer {
         }
     }
 
+    public void drawGameOverlays(Graphics2D g, CardPanelAttributes attribs) {
+        layout(attribs.cardWidth, attribs.cardHeight);
+        isSelected = attribs.isSelected;
+        isChoosable = attribs.isChoosable;
+        if (!cardView.isAbility()) {
+            drawOverlays(g);
+            drawCounters(g);
+        }
+    }
+
     // Template methods to be implemented by sub classes
     // For instance, for the Modern vs Old border card frames
     protected abstract void drawBorder(Graphics2D g);

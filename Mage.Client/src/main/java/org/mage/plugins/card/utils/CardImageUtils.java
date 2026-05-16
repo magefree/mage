@@ -155,7 +155,8 @@ public final class CardImageUtils {
         boolean isTokenRepository = card.getMageObjectType().isUseTokensRepository()
                 || card.getExpansionSetCode().equals(TokenRepository.XMAGE_TOKENS_SET_CODE);
         // if token from a card then must use card repository instead
-        if (isTokenRepository && !card.getCardNumber().isEmpty()) {
+        // XMAGE helper images use collector id "0" and still live in the tokens repository.
+        if (isTokenRepository && !card.getCardNumber().isEmpty() && !"0".equals(card.getCardNumber())) {
             isTokenRepository = false;
         }
 

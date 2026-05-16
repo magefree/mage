@@ -3002,8 +3002,8 @@
 |TOK:SOC|Rogue||RogueToken|
 |TOK:SOC|Saproling||SaprolingToken|
 |TOK:SOC|Snake||OphiomancerSnakeToken|
-|TOK:SOC|Spirit||Spirit32Token|
-|TOK:SOC|Spirit||SpiritWhiteToken|
+|TOK:SOC|Spirit|1|Spirit32Token|
+|TOK:SOC|Spirit|2|SpiritWhiteToken|
 |TOK:SOC|Thopter||ThopterColorlessToken|
 |TOK:SOC|Worm||BlackGreenWormToken|
 |TOK:SOC|Zombie||ZombieDecayedToken|
