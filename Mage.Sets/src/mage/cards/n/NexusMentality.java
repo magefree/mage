@@ -1,7 +1,5 @@
 package mage.cards.n;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.common.ControlACommanderCondition;
@@ -11,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.Counter;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.other.AnotherTargetPredicate;
@@ -19,19 +16,24 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
- *
- * @author muz
+ * @author TheElk801
  */
 public final class NexusMentality extends CardImpl {
 
     private static final FilterControlledPermanent filter
+            = new FilterControlledPermanent("nonland permanent you control");
+    private static final FilterControlledPermanent anotherFilter
             = new FilterControlledPermanent("another target nonland permanent you control");
 
     static {
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
-        filter.add(new AnotherTargetPredicate(2));
+        anotherFilter.add(Predicates.not(CardType.LAND.getPredicate()));
+        anotherFilter.add(new AnotherTargetPredicate(2));
     }
 
     public NexusMentality(UUID ownerId, CardSetInfo setInfo) {
@@ -44,15 +46,17 @@ public final class NexusMentality extends CardImpl {
         this.getSpellAbility().getModes().setMoreCondition(2, ControlACommanderCondition.instance);
 
         // * Move all counters from target nonland permanent you control onto another target nonland permanent you control.
-        this.getSpellAbility().addEffect(new NexusMentalityMoveEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND)
-            .withChooseHint("to move counters from").setTargetTag(1));
-        this.getSpellAbility().addTarget(new TargetPermanent(filter)
-            .withChooseHint("to move counters to").setTargetTag(2));
+        this.getSpellAbility().addEffect(new NexusMentalityMoveCountersEffect());
+        this.getSpellAbility().addTarget(new TargetControlledPermanent(filter)
+                .withChooseHint("to move counters from").setTargetTag(1));
+        this.getSpellAbility().addTarget(new TargetPermanent(anotherFilter)
+                .withChooseHint("to move counters to").setTargetTag(2));
 
         // * Remove all counters from target nonland permanent you control. Draw a card for each counter removed this way.
-    this.getSpellAbility().addMode(new Mode(new NexusMentalityDrawEffect())
-            .addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND)));
+        Mode mode = new Mode(new NexusMentalityRemoveCountersEffect());
+        mode.addTarget(new TargetControlledPermanent(filter)
+                .withChooseHint("to remove counters from and draw"));
+        this.getSpellAbility().addMode(mode);
     }
 
     private NexusMentality(final NexusMentality card) {
@@ -65,64 +69,69 @@ public final class NexusMentality extends CardImpl {
     }
 }
 
-class NexusMentalityMoveEffect extends OneShotEffect {
+class NexusMentalityMoveCountersEffect extends OneShotEffect {
 
-    NexusMentalityMoveEffect() {
-        super(Outcome.Neutral);
-        staticText = "Move all counters from target nonland permanent you control onto another target nonland permanent you control";
+    NexusMentalityMoveCountersEffect() {
+        super(Outcome.Benefit);
+        staticText = "move all counters from target nonland permanent you control " +
+                "onto another target nonland permanent you control";
     }
 
-    private NexusMentalityMoveEffect(final NexusMentalityMoveEffect effect) {
+    private NexusMentalityMoveCountersEffect(final NexusMentalityMoveCountersEffect effect) {
         super(effect);
     }
 
     @Override
-    public NexusMentalityMoveEffect copy() {
-        return new NexusMentalityMoveEffect(this);
+    public NexusMentalityMoveCountersEffect copy() {
+        return new NexusMentalityMoveCountersEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent from = game.getPermanent(getTargetPointer().getFirst(game, source));
-        Permanent to = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (from == null || to == null) {
+        Permanent fromPermanent = game.getPermanent(source.getModes().getMode().getTargets().get(0).getFirstTarget());
+        Permanent toPermanent = game.getPermanent(source.getModes().getMode().getTargets().get(1).getFirstTarget());
+        if (fromPermanent == null || toPermanent == null) {
             return false;
         }
-        Permanent copy = from.copy();
-        for (Counter counter : copy.getCounters(game).values()) {
-            from.removeCounters(counter, source, game);
-            to.addCounters(counter, source.getControllerId(), source, game);
+        for (Counter counter : fromPermanent.copy().getCounters(game).values()) {
+            fromPermanent.removeCounters(counter, source, game);
+            toPermanent.addCounters(counter, source.getControllerId(), source, game);
         }
         return true;
     }
 }
 
-class NexusMentalityDrawEffect extends OneShotEffect {
+class NexusMentalityRemoveCountersEffect extends OneShotEffect {
 
-    NexusMentalityDrawEffect() {
+    NexusMentalityRemoveCountersEffect() {
         super(Outcome.DrawCard);
-        staticText = "Remove all counters from target nonland permanent you control. Draw a card for each counter removed this way";
+        staticText = "remove all counters from target nonland permanent you control. " +
+                "Draw a card for each counter removed this way";
     }
 
-    private NexusMentalityDrawEffect(final NexusMentalityDrawEffect effect) {
+    private NexusMentalityRemoveCountersEffect(final NexusMentalityRemoveCountersEffect effect) {
         super(effect);
     }
 
     @Override
-    public NexusMentalityDrawEffect copy() {
-        return new NexusMentalityDrawEffect(this);
+    public NexusMentalityRemoveCountersEffect copy() {
+        return new NexusMentalityRemoveCountersEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (controller == null || permanent == null) {
+        Permanent permanent = game.getPermanent(source.getModes().getMode().getTargets().get(0).getFirstTarget());
+        Player player = game.getPlayer(source.getControllerId());
+        if (permanent == null || player == null) {
             return false;
         }
-        int countersRemoved = permanent.removeAllCounters(source, game);
-        if (countersRemoved > 0) {
-            controller.drawCards(countersRemoved, source, game);
+        int counterCount = 0;
+        for (Counter counter : permanent.copy().getCounters(game).values()) {
+            counterCount += counter.getCount();
+            permanent.removeCounters(counter, source, game);
+        }
+        if (counterCount > 0) {
+            player.drawCards(counterCount, source, game);
         }
         return true;
     }
