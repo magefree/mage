@@ -42,22 +42,24 @@ public final class QuandrixCommand extends CardImpl {
 
         // • Return target creature or planeswalker to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker()
+                .withChooseHint("to return to its owner's hand"));
 
         // • Counter target artifact or enchantment spell.
         Mode mode = new Mode(new CounterTargetEffect());
-        mode.addTarget(new TargetSpell(filter));
+        mode.addTarget(new TargetSpell(filter).withChooseHint("to counter"));
         this.getSpellAbility().addMode(mode);
 
         // • Put two +1/+1 counters on target creature.
         mode = new Mode(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)));
-        mode.addTarget(new TargetCreaturePermanent());
+        mode.addTarget(new TargetCreaturePermanent().withChooseHint("to put two +1/+1 counters on"));
         this.getSpellAbility().addMode(mode);
 
         // • Target player shuffles up to three target cards from their graveyard into their library.
         mode = new Mode(new TargetPlayerShufflesTargetCardsEffect());
-        mode.addTarget(new TargetPlayer());
-        mode.addTarget(new TargetCardInTargetPlayersGraveyard(3));
+        mode.addTarget(new TargetPlayer().withChooseHint("whose graveyard is shuffled"));
+        mode.addTarget(new TargetCardInTargetPlayersGraveyard(3)
+                .withChooseHint("to shuffle from that graveyard into library"));
         this.getSpellAbility().addMode(mode);
     }
 
