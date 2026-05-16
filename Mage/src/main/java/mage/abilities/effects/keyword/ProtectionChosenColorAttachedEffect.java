@@ -39,6 +39,7 @@ public class ProtectionChosenColorAttachedEffect extends ContinuousEffectImpl {
             this.protectionAbility = effect.protectionAbility.copy();
         }
         this.notRemoveItself = effect.notRemoveItself;
+        this.notRemoveControlled = effect.notRemoveControlled;
     }
 
     @Override
@@ -67,7 +68,7 @@ public class ProtectionChosenColorAttachedEffect extends ContinuousEffectImpl {
             }
             if (protectionAbility != null) {
                 Permanent attachedTo = game.getPermanent(attachement.getAttachedTo());
-                if (attachedTo != null) {
+                if (attachedTo != null && attachedTo.getZoneChangeCounter(game) == attachement.getAttachedToZoneChangeCounter()) {
                     attachedTo.addAbility(protectionAbility, source.getSourceId(), game);
                 }
                 return true;

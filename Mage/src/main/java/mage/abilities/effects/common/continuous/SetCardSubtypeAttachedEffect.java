@@ -33,16 +33,12 @@ public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment == null || equipment.getAttachedTo() == null) {
-            return true;
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
+        if (permanent == null) {
+            return false;
         }
-        Permanent target = game.getPermanent(equipment.getAttachedTo());
-        if (target == null) {
-            return true;
-        }
-        target.removeAllCreatureTypes(game);
-        target.addSubType(game, setSubtypes);
+        permanent.removeAllCreatureTypes(game);
+        permanent.addSubType(game, setSubtypes);
         return true;
     }
 
