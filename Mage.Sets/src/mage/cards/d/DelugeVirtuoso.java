@@ -33,7 +33,7 @@ public final class DelugeVirtuoso extends CardImpl {
         // When this creature enters, tap target creature an opponent controls and put a stun counter on it.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect());
         ability.addEffect(new AddCountersTargetEffect(CounterType.STUN.createInstance()).setText("and put a stun counter on it"));
-        ability.addTarget(new TargetOpponentsCreaturePermanent());
+        ability.addTarget(new TargetOpponentsCreaturePermanent().withChooseHint("to tap and put a stun counter on"));
         this.addAbility(ability);
 
         // Opus -- Whenever you cast an instant or sorcery spell, this creature gets +1/+1 until end of turn. If five or more mana was spent to cast that spell, this creature gets +2/+2 until end of turn instead.
