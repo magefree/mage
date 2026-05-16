@@ -43,7 +43,7 @@ public final class GuardianOfFaith extends CardImpl {
 
         // When Guardian of Faith enters the battlefield, any number of other target creatures you control phase out.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PhaseOutTargetEffect());
-        ability.addTarget(new TargetPermanent(0, Integer.MAX_VALUE, filter));
+        ability.addTarget(new TargetPermanent(0, Integer.MAX_VALUE, filter).withChooseHint("to phase out"));
         this.addAbility(ability);
     }
 
