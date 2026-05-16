@@ -29,7 +29,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import java.util.UUID;
 
 /**
- * @author muz
+ * @author TheElk801
  */
 public final class YavimayaBloomsage extends PrepareCard {
 
