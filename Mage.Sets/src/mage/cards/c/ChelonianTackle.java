@@ -23,8 +23,10 @@ public final class ChelonianTackle extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(0, 10));
         this.getSpellAbility().addEffect(new FightTargetsEffect()
             .setText("Then it fights up to one target creature an opponent controls"));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent(0, 1));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent()
+                .withChooseHint("+0/+10 and fights"));
+        this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent(0, 1)
+                .withChooseHint("to fight"));
     }
 
     private ChelonianTackle(final ChelonianTackle card) {
