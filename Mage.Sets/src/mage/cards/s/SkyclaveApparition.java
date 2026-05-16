@@ -46,7 +46,7 @@ public final class SkyclaveApparition extends CardImpl {
 
         // When Skyclave Apparition enters the battlefield, exile up to one target nonland, nontoken permanent you don't control with converted mana cost 4 or less.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect());
-        ability.addTarget(new TargetPermanent(0, 1, filter, false));
+        ability.addTarget(new TargetPermanent(0, 1, filter, false).withChooseHint("to exile until {this} leaves"));
         this.addAbility(ability);
 
         // When Skyclave Apparition leaves the battlefield, the exiled card's owner creates an X/X blue Illusion creature token, where X is the converted mana cost of the exiled card.
