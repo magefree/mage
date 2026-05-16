@@ -36,12 +36,13 @@ public final class AscendantDustspeaker extends CardImpl {
 
         // When this creature enters, put a +1/+1 counter on another target creature you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL)
+                .withChooseHint("to put a +1/+1 counter on"));
         this.addAbility(ability);
 
         // At the beginning of combat on your turn, exile up to one target card from a graveyard.
         Ability ability2 = new BeginningOfCombatTriggeredAbility(new ExileTargetEffect());
-        ability2.addTarget(new TargetCardInGraveyard(0, 1));
+        ability2.addTarget(new TargetCardInGraveyard(0, 1).withChooseHint("to exile from a graveyard"));
         this.addAbility(ability2);
     }
 
