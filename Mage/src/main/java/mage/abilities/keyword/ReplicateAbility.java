@@ -1,10 +1,14 @@
 package mage.abilities.keyword;
 
+import mage.Mana;
+import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.*;
+import mage.abilities.mana.ManaOptions;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -16,14 +20,20 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.util.CardUtil;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.UUID;
 
 /**
  * @author LevelX2
  */
 public class ReplicateAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
+
+    public static final String REPLICATE_COST_PLAN_KEY_PREFIX = "optional-additional:replicate:";
+    private static final String REPLICATE_COST_PLAN_KEY = "optional-additional:replicate";
 
     private static final String keywordText = "Replicate";
     private static final String reminderTextMana = "When you cast this spell, "
@@ -40,7 +50,7 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
         this.additionalCost = new OptionalAdditionalCostImpl(keywordText, reminderTextMana, cost);
         this.additionalCost.setRepeatable(true);
         setRuleAtTheTop(true);
-        addSubAbility(new ReplicateTriggeredAbility(this.getId()));
+        addSubAbility(new ReplicateTriggeredAbility(this.getId(), this.additionalCost.getText(true)));
     }
 
     protected ReplicateAbility(final ReplicateAbility ability) {
@@ -87,6 +97,18 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
         }
 
         this.resetReplicate();
+        int plannedCount = CastCostPlan.getOptionalAdditionalCostCount(ability, getCostPlanKey());
+        if (plannedCount == 0 && hasSingleReplicateAbility(ability.getSourceObject(game), game)) {
+            plannedCount = CastCostPlan.getOptionalAdditionalCostCount(ability, REPLICATE_COST_PLAN_KEY);
+        }
+        if (plannedCount > 0) {
+            for (int i = 0; i < plannedCount && player.canRespond(); i++) {
+                additionalCost.activate();
+                addReplicateCostToAbility(ability);
+            }
+            return;
+        }
+
         boolean again = true;
         while (player.canRespond() && again) {
             String times = "";
@@ -103,14 +125,101 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
                 again = false;
             } else {
                 additionalCost.activate();
-                for (Iterator it = ((Costs) additionalCost).iterator(); it.hasNext(); ) {
-                    Cost cost = (Cost) it.next();
-                    if (cost instanceof ManaCostsImpl) {
-                        ability.addManaCostsToPay((ManaCostsImpl) cost.copy());
-                    } else {
-                        ability.addCost(cost.copy());
-                    }
-                }
+                addReplicateCostToAbility(ability);
+            }
+        }
+    }
+
+    @Override
+    public List<Ability> getOptionalAdditionalCostVariants(Ability ability, Game game) {
+        if (!(ability instanceof SpellAbility) || additionalCost == null || !additionalCost.isRepeatable()) {
+            return new ArrayList<>();
+        }
+        List<Ability> variants = new ArrayList<>();
+        for (int count = 1; count <= CastCostPlan.DEFAULT_MAX_REPEAT_COUNT; count++) {
+            if (!canPayReplicateCount(ability, game, count)) {
+                break;
+            }
+            Ability variant = CastCostPlan.withOptionalAdditionalCostCount(
+                    ability,
+                    getCostPlanKey(),
+                    count,
+                    "with-replicate-" + count
+            );
+            CastCostPlan.setOptionalAdditionalCostCount(variant, REPLICATE_COST_PLAN_KEY, count);
+            variants.add(variant);
+        }
+        return variants;
+    }
+
+    public static int getSelectedReplicateCount(Ability ability) {
+        return Math.max(
+                CastCostPlan.getOptionalAdditionalCostCount(ability, REPLICATE_COST_PLAN_KEY),
+                CastCostPlan.getOptionalAdditionalCostCountByPrefix(ability, REPLICATE_COST_PLAN_KEY_PREFIX)
+        );
+    }
+
+    private String getCostPlanKey() {
+        return getCostPlanKey(getSourceId(), getOriginalId(), additionalCost.getText(true));
+    }
+
+    static String getCostPlanKey(UUID sourceId, UUID fallbackId, String costText) {
+        UUID stableSourceId = sourceId == null ? fallbackId : sourceId;
+        return REPLICATE_COST_PLAN_KEY_PREFIX + stableSourceId + ':' + costText;
+    }
+
+    static boolean hasSingleReplicateAbility(MageObject sourceObject, Game game) {
+        if (sourceObject == null) {
+            return true;
+        }
+        int replicateAbilities = 0;
+        for (Ability sourceAbility : CardUtil.getAbilities(sourceObject, game)) {
+            if (sourceAbility instanceof ReplicateAbility) {
+                replicateAbilities++;
+            }
+        }
+        return replicateAbilities <= 1;
+    }
+
+    private boolean canPayReplicateCount(Ability ability, Game game, int count) {
+        Player player = game.getPlayer(ability.getControllerId());
+        if (player == null || !(ability instanceof ActivatedAbility)) {
+            return false;
+        }
+
+        Ability testAbility = ability.copy();
+        for (int i = 0; i < count; i++) {
+            if (!additionalCost.canPay(testAbility, this, testAbility.getControllerId(), game)) {
+                return false;
+            }
+            addReplicateCostToAbility(testAbility);
+        }
+        if (!((ActivatedAbility) testAbility).canActivate(testAbility.getControllerId(), game).canActivate()) {
+            return false;
+        }
+
+        testAbility.adjustX(game);
+        game.getContinuousEffects().costModification(testAbility, game);
+        ManaOptions requiredMana = testAbility.getManaCostsToPay().getOptions(player.canPayLifeCost(testAbility));
+        if (requiredMana.isEmpty()) {
+            return true;
+        }
+        ManaOptions availableMana = player.getManaAvailable(game);
+        for (Mana mana : requiredMana) {
+            if (availableMana.enough(mana)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void addReplicateCostToAbility(Ability ability) {
+        for (Iterator it = ((Costs) additionalCost).iterator(); it.hasNext(); ) {
+            Cost cost = (Cost) it.next();
+            if (cost instanceof ManaCostsImpl) {
+                ability.addManaCostsToPay((ManaCostsImpl) cost.copy());
+            } else {
+                ability.addCost(cost.copy());
             }
         }
     }
@@ -133,16 +242,19 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
 class ReplicateTriggeredAbility extends TriggeredAbilityImpl {
 
     private UUID replicateId; // need to correspond only to own replicate ability, not any other instances of replicate ability
+    private String replicateCostText;
 
-    public ReplicateTriggeredAbility(UUID replicateId) {
+    public ReplicateTriggeredAbility(UUID replicateId, String replicateCostText) {
         super(Zone.STACK, new ReplicateCopyEffect());
         this.replicateId = replicateId;
+        this.replicateCostText = replicateCostText;
         this.setRuleVisible(false);
     }
 
     private ReplicateTriggeredAbility(final ReplicateTriggeredAbility ability) {
         super(ability);
         this.replicateId = ability.replicateId;
+        this.replicateCostText = ability.replicateCostText;
     }
 
     @Override
@@ -167,6 +279,20 @@ class ReplicateTriggeredAbility extends TriggeredAbilityImpl {
         Card card = ((Spell) spell).getCard();
         if (card == null) {
             return false;
+        }
+        int plannedCount = CastCostPlan.getOptionalAdditionalCostCount(
+                ((Spell) spell).getSpellAbility(),
+                ReplicateAbility.getCostPlanKey(spell.getSourceId(), replicateId, replicateCostText)
+        );
+        if (plannedCount == 0 && ReplicateAbility.hasSingleReplicateAbility(card, game)) {
+            plannedCount = ReplicateAbility.getSelectedReplicateCount(((Spell) spell).getSpellAbility());
+        }
+        if (plannedCount > 0) {
+            for (Effect effect : this.getEffects()) {
+                effect.setValue("ReplicateSpell", spell);
+                effect.setValue("ReplicateCount", plannedCount);
+            }
+            return true;
         }
         for (Ability ability : card.getAbilities(game)) {
             if (!(ability instanceof ReplicateAbility) || !ability.isActivated() || ability.getId() != replicateId) {

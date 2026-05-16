@@ -1,6 +1,7 @@
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.costs.*;
@@ -16,7 +17,9 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * 702.25. Buyback
@@ -32,6 +35,8 @@ import java.util.Iterator;
  * @author LevelX2
  */
 public class BuybackAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
+
+    public static final String BUYBACK_COST_PLAN_KEY = "optional-additional:buyback";
 
     private static final String keywordText = "Buyback";
     private static final String reminderTextCost = "You may {cost} in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.";
@@ -139,17 +144,45 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
                 this.resetBuyback(game);
                 // TODO: add AI support to find mana available to pay buyback
                 //  canPay checks only single mana available, not total mana usage
-                if (player.chooseUse(/*Outcome.Benefit*/ Outcome.AIDontUseIt, "Pay " + buybackCost.getText(false) + " ?", ability, game)) {
+                if (CastCostPlan.isOptionalAdditionalCostSelected(ability, BUYBACK_COST_PLAN_KEY)
+                        || player.chooseUse(/*Outcome.Benefit*/ Outcome.AIDontUseIt, "Pay " + buybackCost.getText(false) + " ?", ability, game)) {
                     activateBuyback(game, true);
-                    for (Iterator it = ((Costs) buybackCost).iterator(); it.hasNext(); ) {
-                        Cost cost = (Cost) it.next();
-                        if (cost instanceof ManaCostsImpl) {
-                            ability.addManaCostsToPay((ManaCostsImpl) cost.copy());
-                        } else {
-                            ability.addCost(cost.copy());
-                        }
-                    }
+                    addBuybackCostsToAbility(ability);
                 }
+            }
+        }
+    }
+
+    @Override
+    public List<Ability> getOptionalAdditionalCostVariants(Ability ability, Game game) {
+        if (!(ability instanceof SpellAbility)) {
+            return Collections.emptyList();
+        }
+        Player player = game.getPlayer(ability.getControllerId());
+        if (player == null || !buybackCost.canPay(ability, this, ability.getControllerId(), game)) {
+            return Collections.emptyList();
+        }
+        Ability variant = CastCostPlan.withOptionalAdditionalCost(
+                ability,
+                BUYBACK_COST_PLAN_KEY,
+                "with-buyback"
+        );
+        Ability testAbility = variant.copy();
+        addBuybackCostsToAbility(testAbility);
+        if (testAbility instanceof ActivatedAbility
+                && !((ActivatedAbility) testAbility).canActivate(testAbility.getControllerId(), game).canActivate()) {
+            return Collections.emptyList();
+        }
+        return Collections.singletonList(CastCostPlan.withSourcePreserved(variant));
+    }
+
+    private void addBuybackCostsToAbility(Ability ability) {
+        for (Iterator it = ((Costs) buybackCost).iterator(); it.hasNext(); ) {
+            Cost cost = (Cost) it.next();
+            if (cost instanceof ManaCostsImpl) {
+                ability.addManaCostsToPay((ManaCostsImpl) cost.copy());
+            } else {
+                ability.addCost(cost.copy());
             }
         }
     }

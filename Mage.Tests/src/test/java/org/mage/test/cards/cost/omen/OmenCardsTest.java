@@ -2,10 +2,39 @@ package org.mage.test.cards.cost.omen;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.view.CardView;
+import mage.view.GameView;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class OmenCardsTest extends CardTestPlayerBase {
+
+    @Test
+    public void testOmenStackViewUsesParentCardImage() {
+        addCard(Zone.HAND, playerA, "Dirgur Island Dragon");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Bear Cub");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Skimming Strike", "Bear Cub");
+        runCode("check omen stack image", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(playerA);
+            CardView spellView = gameView.getStack().values().stream().findFirst().orElse(null);
+            Assert.assertNotNull("omen spell must be on stack", spellView);
+
+            Assert.assertEquals("wrong displayed spell name", "Skimming Strike", spellView.getName());
+            Assert.assertEquals("wrong set code", "TDM", spellView.getExpansionSetCode());
+            Assert.assertFalse("wrong card number", spellView.getCardNumber().isEmpty());
+            Assert.assertEquals("wrong image file name", "Dirgur Island Dragon", spellView.getImageFileName());
+            Assert.assertEquals("wrong image number", 0, spellView.getImageNumber());
+            Assert.assertTrue("wrong uses various art", spellView.getUsesVariousArt());
+        });
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+    }
 
     @Test
     public void testDirgurIslandDragonShuffle() {

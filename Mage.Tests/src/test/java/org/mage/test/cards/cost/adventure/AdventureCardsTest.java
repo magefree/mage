@@ -4,6 +4,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
+import mage.view.CardView;
+import mage.view.GameView;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -12,6 +14,31 @@ public class AdventureCardsTest extends CardTestPlayerBase {
 
     String abilityBrazenBorrowerMainCast = "Cast Brazen Borrower";
     String abilityBrazenBorrowerAdventureCast = "Cast Petty Theft";
+
+    @Test
+    public void testAdventureStackViewUsesParentCardImage() {
+        addCard(Zone.HAND, playerA, "BLC-Realm-Cloaked Giant");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Off");
+        runCode("check adventure stack image", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(playerA);
+            CardView spellView = gameView.getStack().values().stream().findFirst().orElse(null);
+            Assert.assertNotNull("adventure spell must be on stack", spellView);
+
+            Assert.assertEquals("wrong displayed spell name", "Cast Off", spellView.getName());
+            Assert.assertEquals("wrong set code", "BLC", spellView.getExpansionSetCode());
+            Assert.assertEquals("wrong card number", "149", spellView.getCardNumber());
+            Assert.assertEquals("wrong image file name", "Realm-Cloaked Giant", spellView.getImageFileName());
+            Assert.assertEquals("wrong image number", 0, spellView.getImageNumber());
+            Assert.assertFalse("wrong uses various art", spellView.getUsesVariousArt());
+        });
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+    }
 
     @Test
     public void testCastTreatsToShare() {

@@ -62,6 +62,23 @@ public class AdventureSpellCard extends CardImpl implements SpellOptionCard {
     }
 
     @Override
+    public boolean getUsesVariousArt() {
+        return adventureCardParent.getUsesVariousArt();
+    }
+
+    @Override
+    public String getImageFileName() {
+        return adventureCardParent.getImageFileName().isEmpty()
+                ? adventureCardParent.getName()
+                : adventureCardParent.getImageFileName();
+    }
+
+    @Override
+    public Integer getImageNumber() {
+        return adventureCardParent.getImageNumber();
+    }
+
+    @Override
     public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         return adventureCardParent.moveToZone(toZone, source, game, flag, appliedEffects);
     }

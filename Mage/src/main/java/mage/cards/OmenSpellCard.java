@@ -59,6 +59,23 @@ public class OmenSpellCard extends CardImpl implements SpellOptionCard {
     }
 
     @Override
+    public boolean getUsesVariousArt() {
+        return omenCardParent.getUsesVariousArt();
+    }
+
+    @Override
+    public String getImageFileName() {
+        return omenCardParent.getImageFileName().isEmpty()
+                ? omenCardParent.getName()
+                : omenCardParent.getImageFileName();
+    }
+
+    @Override
+    public Integer getImageNumber() {
+        return omenCardParent.getImageNumber();
+    }
+
+    @Override
     public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         return omenCardParent.moveToZone(toZone, source, game, flag, appliedEffects);
     }
