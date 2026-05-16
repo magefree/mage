@@ -94,8 +94,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean phasedIn = true;
     protected boolean indirectPhase = false;
     protected boolean faceDown;
-    protected boolean attacking;
+    protected MageObjectReference attacking; // refers to defenderId if attacking, null if not attacking
     protected int blocking;
+    protected final Set<MageObjectReference> blockingSet = new HashSet<>(); // refers to blocked creatures
     // number of creatures the permanent can block
     protected int maxBlocks = 1;
     // minimal number of creatures the creature can be blocked by
@@ -161,6 +162,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.faceDown = permanent.faceDown;
         this.attacking = permanent.attacking;
         this.blocking = permanent.blocking;
+        this.blockingSet.addAll(permanent.blockingSet);
         this.maxBlocks = permanent.maxBlocks;
         this.deathtouched = permanent.deathtouched;
         this.solved = permanent.solved;
@@ -797,7 +799,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean isAttacking() {
-        return attacking;
+        return attacking != null;
     }
 
     @Override
@@ -1630,13 +1632,39 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public void setAttacking(boolean attacking) {
-        this.attacking = attacking;
+    public void setAttacking(MageObjectReference defender) {
+        this.attacking = defender;
+    }
+
+    @Override
+    public MageObjectReference getAttacking() {
+        return this.attacking;
     }
 
     @Override
     public void setBlocking(int blocking) {
         this.blocking = blocking;
+    }
+
+    @Override
+    public void addBlocking(UUID attackerId, Game game) {
+        this.blockingSet.add(new MageObjectReference(attackerId, game));
+    }
+
+    @Override
+    public void removeBlocking(UUID attackerId, Game game) {
+        this.blockingSet.remove(new MageObjectReference(attackerId, game));
+    }
+
+    @Override
+    public void clearBlocking() {
+        this.blockingSet.clear();
+        this.blocking = 0;
+    }
+
+    @Override
+    public Set<MageObjectReference> getBlockingRefs() {
+        return new HashSet<>(blockingSet);
     }
 
     @Override
