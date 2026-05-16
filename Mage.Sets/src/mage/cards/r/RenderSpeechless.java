@@ -27,14 +27,15 @@ public final class RenderSpeechless extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(
             StaticFilters.FILTER_CARD_NON_LAND
         ));
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponent().withChooseHint("to reveal and discard"));
 
         // Put two +1/+1 counters on up to one target creature.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(2));
         effect.setText("<br>Put two +1/+1 counters on up to one target creature");
         effect.setTargetPointer(new SecondTargetPointer());
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1)
+                .withChooseHint("to put two +1/+1 counters on"));
     }
 
     private RenderSpeechless(final RenderSpeechless card) {
