@@ -2355,7 +2355,7 @@ public class VerifyCardDataTest {
         }
 
         String refLowerText = ref.text.toLowerCase(Locale.ENGLISH);
-        String cardLowerText = String.join("\n", card.getRules()).toLowerCase(Locale.ENGLISH);
+        String cardLowerText = String.join("\n", getRulesForReferenceCheck(card)).toLowerCase(Locale.ENGLISH);
 
         // special check: kicker ability must be in rules
         if (card.getAbilities().containsClass(MultikickerAbility.class) && card.getRules().stream().noneMatch(rule -> rule.contains("Multikicker"))) {
@@ -2764,6 +2764,18 @@ public class VerifyCardDataTest {
         return "this permanent";
     }
 
+    private List<String> getRulesForReferenceCheck(Card card) {
+        List<String> rules = new ArrayList<>(card.getRules());
+        if (card instanceof CardWithSpellOption) {
+            SpellOptionCard spellCard = ((CardWithSpellOption) card).getSpellCard();
+            if (spellCard != null) {
+                spellCard.getRules().forEach(rules::remove);
+            }
+            rules.removeIf(s -> s.startsWith("Adventure ") || s.startsWith("Omen "));
+        }
+        return rules;
+    }
+
     private String prepareRule(Card card, String rule) {
         // remove and optimize rule text for analyze
         String newRule = rule;
@@ -3060,10 +3072,8 @@ public class VerifyCardDataTest {
             }
         }
 
-        String[] cardRules = card
-                .getRules()
+        String[] cardRules = getRulesForReferenceCheck(card)
                 .stream()
-                .filter(s -> !(card instanceof CardWithSpellOption) || !(s.startsWith("Adventure ") || s.startsWith("Omen ")))
                 .collect(Collectors.joining("\n"))
                 .replace("<br>", "\n")
                 .replace("<br/>", "\n")
