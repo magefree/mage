@@ -1,14 +1,6 @@
 package mage.cards.r;
 
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.target.common.TargetCardInYourGraveyard;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -22,10 +14,17 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
+import mage.game.Game;
+import mage.game.stack.Spell;
+import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.Optional;
+import java.util.UUID;
 
 /**
- *
- * @author muz
+ * @author TheElk801
  */
 public final class RenegadeBull extends CardImpl {
 
@@ -40,14 +39,19 @@ public final class RenegadeBull extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever you cast an instant or sorcery spell, this creature gets +X/+0 until end of turn, where X is that spell's mana value.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(
-            RenegadeBullValue.instance, StaticValue.get(0), Duration.EndOfTurn
-        ), StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new BoostSourceEffect(RenegadeBullSpellManaValue.instance, StaticValue.get(0), Duration.EndOfTurn)
+                        .setText("this creature gets +X/+0 until end of turn, where X is that spell's mana value"),
+                StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
+        ));
 
         // Whenever this creature attacks, exile up to one target instant or sorcery card from your graveyard and copy it. You may cast the copy without paying its mana cost.
         Ability ability = new AttacksTriggeredAbility(new ExileTargetCardCopyAndCastEffect(true)
-            .setText("exile up to one target instant or sorcery card from your graveyard and copy it. You may cast the copy without paying its mana cost"));
-        ability.addTarget(new TargetCardInYourGraveyard(0, 1, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD));
+                .setText("exile up to one target instant or sorcery card from your graveyard and copy it. " +
+                        "You may cast the copy without paying its mana cost"));
+        ability.addTarget(new TargetCardInYourGraveyard(
+                0, 1, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD
+        ));
         this.addAbility(ability);
     }
 
@@ -61,30 +65,29 @@ public final class RenegadeBull extends CardImpl {
     }
 }
 
-enum RenegadeBullValue implements DynamicValue {
+enum RenegadeBullSpellManaValue implements DynamicValue {
     instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return Optional
-            .ofNullable((Spell) effect.getValue("spellCast"))
-            .filter(Objects::nonNull)
-            .map(Spell::getManaValue)
-            .orElse(0);
+                .ofNullable((Spell) effect.getValue("spellCast"))
+                .map(Spell::getManaValue)
+                .orElse(0);
     }
 
     @Override
-    public RenegadeBullValue copy() {
+    public RenegadeBullSpellManaValue copy() {
         return this;
-    }
-
-    @Override
-    public String getMessage() {
-        return "that spell's mana value";
     }
 
     @Override
     public String toString() {
         return "X";
+    }
+
+    @Override
+    public String getMessage() {
+        return "that spell's mana value";
     }
 }
