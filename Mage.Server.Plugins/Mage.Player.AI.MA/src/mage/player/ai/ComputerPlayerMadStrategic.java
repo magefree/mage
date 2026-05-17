@@ -11,6 +11,7 @@ import mage.game.permanent.Permanent;
 import mage.player.ai.scoring.AiScoringContext;
 import mage.player.ai.scoring.AiScoringEngine;
 import mage.player.ai.scoring.AiScoringEngineFactory;
+import mage.player.ai.util.CombatUtil;
 import mage.players.Player;
 import mage.target.Target;
 
@@ -254,6 +255,12 @@ public class ComputerPlayerMadStrategic extends ComputerPlayerControllableProxy 
             }
         }
         return lowestLife;
+    }
+
+    @Override
+    protected List<Permanent> chooseLethalAttackers(Game game, List<Permanent> attackersList,
+                                                    List<Permanent> possibleBlockers, Player defender) {
+        return CombatUtil.canKillOpponentWithMinimalAttackers(game, attackersList, possibleBlockers, defender);
     }
 
     private static boolean isStrategicBehaviorApplied(String enabledProperty, String applyProperty) {

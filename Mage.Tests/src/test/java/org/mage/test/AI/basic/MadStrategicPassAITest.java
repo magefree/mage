@@ -129,6 +129,21 @@ public class MadStrategicPassAITest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
+    public void strategicAiUsesMinimalLethalAttackersAgainstDefenselessOpponent() {
+        setLife(playerB, 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 3);
+
+        aiPlayStep(1, PhaseStep.DECLARE_ATTACKERS, playerA);
+        checkAttackers("minimal lethal attack", 1, playerA, "Balduvian Bears^Balduvian Bears");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertLife(playerB, 0);
+    }
+
+    @Test
     public void strategicNodeDebugLimitScalesWithRaisedNodeBudget() {
         ExposedStrategicPlayer ai = new ExposedStrategicPlayer();
 

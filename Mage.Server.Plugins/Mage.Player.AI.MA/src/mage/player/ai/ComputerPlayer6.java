@@ -2114,7 +2114,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, activePlayerId, activePlayerId))) {
             Player attackingPlayer = game.getPlayer(activePlayerId);
 
-            // check alpha strike first (all in attack to kill a player)
+            // check lethal strike first
             for (UUID defenderId : game.getOpponents(playerId, true)) {
                 Player defender = game.getPlayer(defenderId);
                 if (!defender.isInGame()) {
@@ -2126,7 +2126,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
                     continue;
                 }
                 List<Permanent> possibleBlockers = defender.getAvailableBlockers(game);
-                List<Permanent> killers = CombatUtil.canKillOpponent(game, attackersList, possibleBlockers, defender);
+                List<Permanent> killers = chooseLethalAttackers(game, attackersList, possibleBlockers, defender);
                 if (!killers.isEmpty()) {
                     Set<UUID> attackersBefore = traceCombatAttackersBefore(game);
                     for (Permanent attacker : killers) {
@@ -2299,6 +2299,11 @@ public class ComputerPlayer6 extends ComputerPlayer {
                 );
             }
         }
+    }
+
+    protected List<Permanent> chooseLethalAttackers(Game game, List<Permanent> attackersList,
+                                                    List<Permanent> possibleBlockers, Player defender) {
+        return CombatUtil.canKillOpponent(game, attackersList, possibleBlockers, defender);
     }
 
     @Override
