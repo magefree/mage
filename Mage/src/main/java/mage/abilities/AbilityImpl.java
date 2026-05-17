@@ -1739,6 +1739,19 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
+    public Permanent getPermanentSourceAttachedToIfItStillExists(Game game) {
+        Permanent aura = getSourcePermanentIfItStillExists(game);
+        if (aura == null) {
+            return null;
+        }
+        Permanent enchanted = game.getPermanent(aura.getAttachedTo());
+        if (enchanted == null || enchanted.getZoneChangeCounter(game) != aura.getAttachedToZoneChangeCounter()) {
+            return null;
+        }
+        return enchanted;
+    }
+
+    @Override
     public void setSourceObjectZoneChangeCounter(int sourceObjectZoneChangeCounter) {
         this.sourceObjectZoneChangeCounter = sourceObjectZoneChangeCounter;
     }

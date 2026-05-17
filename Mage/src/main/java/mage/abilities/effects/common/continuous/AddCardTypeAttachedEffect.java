@@ -33,13 +33,11 @@ public class AddCardTypeAttachedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            Permanent target = game.getPermanent(equipment.getAttachedTo());
-            if (target != null) {
-                target.addCardType(game, addedCardType);
-            }
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
+        if (permanent == null) {
+            return false;
         }
+        permanent.addCardType(game, addedCardType);
         return true;
     }
 

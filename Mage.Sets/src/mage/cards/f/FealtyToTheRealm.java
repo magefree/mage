@@ -78,11 +78,7 @@ class FealtyToTheRealmEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
-        if (enchantment == null || game.getMonarchId() == null) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
         if (permanent == null) {
             return false;
         }

@@ -34,17 +34,11 @@ public class SetBasePowerEnchantedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment == null || enchantment.getAttachedTo() == null) {
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
+        if (permanent == null) {
             return false;
         }
-
-        Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
-        if (enchanted == null) {
-            return false;
-        }
-
-        enchanted.getPower().setModifiedBaseValue(power);
+        permanent.getPower().setModifiedBaseValue(power);
         return true;
     }
 }
