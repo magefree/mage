@@ -95,7 +95,7 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
                     }
                     // This shouldn't be necessary, but just in case
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), defenderId, game)) {
-                        permanent.setBlocking(0);
+                        permanent.clearBlocking();
                     }
 
                     boolean declinedChoice = false;
@@ -146,7 +146,7 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
                     }
                     // Clear all test Blocking values before assigning piles
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), defenderId, game)) {
-                        permanent.setBlocking(0);
+                        permanent.clearBlocking();
                     }
                     masterMap.put(defenderId, masterList);
                 }
