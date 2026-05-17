@@ -5,6 +5,7 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReachAbility;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.player.ai.AiStrategyScore;
@@ -101,7 +102,10 @@ public final class DefenseReserveScoreModule implements AiScoreModule {
                 continue;
             }
             int pressure = 0;
-            for (Permanent attacker : opponent.getAvailableAttackers(playerId, game)) {
+            for (Permanent attacker : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, opponentId, game)) {
+                if (!attacker.canAttackInPrinciple(playerId, game)) {
+                    continue;
+                }
                 pressure += estimateAttackerValue(attacker, game);
             }
             if (pressure > 0) {

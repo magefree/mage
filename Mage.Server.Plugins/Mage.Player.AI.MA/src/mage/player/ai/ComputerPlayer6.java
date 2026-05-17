@@ -919,8 +919,9 @@ public class ComputerPlayer6 extends ComputerPlayer {
             if (opponent == null || !opponent.isInGame() || opponent.hasLost()) {
                 continue;
             }
-            int pressure = opponent.getAvailableAttackers(playerId, game)
+            int pressure = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, opponentId, game)
                     .stream()
+                    .filter(attacker -> attacker.canAttackInPrinciple(playerId, game))
                     .mapToInt(attacker -> CombatUtil.getCombatDamageValue(attacker, game))
                     .sum();
             if (pressure > 0) {
