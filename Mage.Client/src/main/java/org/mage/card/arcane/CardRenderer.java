@@ -474,6 +474,9 @@ public abstract class CardRenderer {
             // "Token" is shown on the type line. As recent printing of tokens do.
             spType.append("Token ");
         }
+        if (cardView.isPrepareSpell()) {
+            spType.append("Prepare ");
+        }
         for (SuperType superType : cardView.getSuperTypes()) {
             spType.append(superType).append(' ');
         }

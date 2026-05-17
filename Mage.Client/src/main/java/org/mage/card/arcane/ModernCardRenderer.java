@@ -171,6 +171,8 @@ public class ModernCardRenderer extends CardRenderer {
 
     // Is an adventure or omen
     protected boolean isCardWithSpellOption = false;
+    protected ArrayList<TextboxRule> prepareTextboxRules = new ArrayList<>();
+    protected ArrayList<TextboxRule> prepareTextboxKeywords = new ArrayList<>();
 
     public ModernCardRenderer(CardView card) {
         // Pass off to parent
@@ -182,6 +184,9 @@ public class ModernCardRenderer extends CardRenderer {
         if (cardView.isSplitCard()) {
             isCardWithSpellOption = cardView.getRightSplitTypeLine().contains(SUB_TYPE_ADVENTURE)
                                 || cardView.getRightSplitTypeLine().contains(SUB_TYPE_OMEN);
+        }
+        if (cardView.isPrepareCard() && cardView.getPrepareRules() != null) {
+            parseRules(cardView.getPrepareRules(), prepareTextboxKeywords, prepareTextboxRules);
         }
     }
 
@@ -667,6 +672,8 @@ public class ModernCardRenderer extends CardRenderer {
             drawRulesText(g, textboxKeywords, textboxRules,
                     contentWidth / 2 + totalContentInset + 4, typeLineY + boxHeight + 2,
                     contentWidth / 2 - 8, cardHeight - typeLineY - boxHeight - 4 - borderWidth * 3, false);
+        } else if (cardView.isPrepareCard()) {
+            drawPrepareTextBoxes(g, attribs, borderPaint, boxColor);
         } else if (!isZenUst) {
             drawRulesText(g, textboxKeywords, textboxRules,
                     totalContentInset + 2, typeLineY + boxHeight + 2,
@@ -675,6 +682,53 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Draw the bottom right stuff
         drawBottomRight(g, attribs, borderPaint, boxColor);
+    }
+
+    private void drawPrepareTextBoxes(Graphics2D g, CardPanelAttributes attribs, Paint borderPaint, Color boxColor) {
+        int textY = typeLineY + boxHeight + 2;
+        int textH = cardHeight - typeLineY - boxHeight - 4 - borderWidth * 3;
+        int gap = Math.max(2, contentInset / 2);
+        int prepareW = Math.max(contentWidth / 3, 46);
+        prepareW = Math.min(prepareW, contentWidth - 38);
+        int rulesW = contentWidth - prepareW - gap - 4;
+
+        drawRulesText(g, textboxKeywords, textboxRules,
+                totalContentInset + 2, textY,
+                rulesW, textH, false);
+
+        int prepareX = totalContentInset + 2 + rulesW + gap;
+        int prepareY = textY;
+        int prepareH = textH;
+
+        g.setColor(new Color(0, 0, 0, 130));
+        g.drawRect(prepareX - 1, prepareY - 1, prepareW + 1, prepareH + 1);
+        g.setColor(new Color(248, 244, 219, 235));
+        g.fillRect(prepareX, prepareY, prepareW, prepareH);
+
+        int headerH = Math.max(10, boxHeight - 2);
+        CardRendererUtils.drawRoundedBox(g,
+                prepareX, prepareY,
+                prepareW, headerH,
+                Math.max(2, contentInset / 2),
+                borderPaint, boxColor);
+        drawNameLine(g, attribs, cardView.getPrepareName(), ManaSymbols.getClearManaCost(cardView.getPrepareCostsStr()),
+                prepareX + 2, prepareY,
+                prepareW - 4, headerH);
+
+        int typeY = prepareY + headerH;
+        int typeH = Math.max(9, headerH - 1);
+        CardRendererUtils.drawRoundedBox(g,
+                prepareX, typeY,
+                prepareW, typeH,
+                Math.max(2, contentInset / 2),
+                borderPaint, boxColor);
+        drawTypeLine(g, attribs, cardView.getPrepareTypeLine(),
+                prepareX + 2, typeY,
+                prepareW - 4, typeH, false);
+
+        drawRulesText(g, prepareTextboxKeywords, prepareTextboxRules,
+                prepareX + 2, typeY + typeH + 2,
+                prepareW - 4, prepareH - headerH - typeH - 4, false);
     }
 
     public void drawZendikarCurvedFace(Graphics2D g2, BufferedImage image, int x, int y, int x2, int y2,

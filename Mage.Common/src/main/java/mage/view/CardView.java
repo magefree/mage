@@ -116,6 +116,12 @@ public class CardView extends SimpleCardView {
     protected String rightSplitCostsStr;
     protected List<String> rightSplitRules;
     protected String rightSplitTypeLine;
+    protected boolean prepareCard;
+    protected boolean prepareSpell;
+    protected String prepareName;
+    protected String prepareCostsStr;
+    protected List<String> prepareRules;
+    protected String prepareTypeLine;
 
     protected boolean isDoubleFacedCard;
 
@@ -238,6 +244,12 @@ public class CardView extends SimpleCardView {
         this.rightSplitCostsStr = cardView.rightSplitCostsStr;
         this.rightSplitRules = cardView.rightSplitRules == null ? null : new ArrayList<>(cardView.rightSplitRules);
         this.rightSplitTypeLine = cardView.rightSplitTypeLine;
+        this.prepareCard = cardView.prepareCard;
+        this.prepareSpell = cardView.prepareSpell;
+        this.prepareName = cardView.prepareName;
+        this.prepareCostsStr = cardView.prepareCostsStr;
+        this.prepareRules = cardView.prepareRules == null ? null : new ArrayList<>(cardView.prepareRules);
+        this.prepareTypeLine = cardView.prepareTypeLine;
 
         this.isDoubleFacedCard = cardView.isDoubleFacedCard;
 
@@ -276,6 +288,9 @@ public class CardView extends SimpleCardView {
 
     private static String getCardTypeLine(Game game, Card card) {
         StringBuilder sbType = new StringBuilder();
+        if (card instanceof PrepareSpellCard) {
+            sbType.append("Prepare ");
+        }
         for (SuperType superType : card.getSuperType(game)) {
             sbType.append(superType).append(' ');
         }
@@ -289,6 +304,22 @@ public class CardView extends SimpleCardView {
             }
         }
         return sbType.toString();
+    }
+
+    private static PrepareCard getPrepareMainCard(Card card) {
+        if (card instanceof PrepareCard) {
+            return (PrepareCard) card;
+        }
+        Card mainCard = card.getMainCard();
+        return mainCard instanceof PrepareCard ? (PrepareCard) mainCard : null;
+    }
+
+    private static List<String> getRulesForView(Game game, Card card) {
+        if (card instanceof PrepareSpellCard) {
+            return card.getRules(game);
+        }
+        PrepareCard prepareCard = getPrepareMainCard(card);
+        return prepareCard == null ? card.getRules(game) : prepareCard.getRulesForMainCardView(card, game);
     }
 
     /**
@@ -340,6 +371,7 @@ public class CardView extends SimpleCardView {
         // permanent data
         if (showFaceUp) {
             this.setOriginalValues(card);
+            this.prepareSpell = card instanceof PrepareSpellCard;
         }
 
         if (game != null) {
@@ -440,7 +472,18 @@ public class CardView extends SimpleCardView {
                 fullCardName = mainCard.getLeftHalfCard().getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + mainCard.getRightHalfCard().getName();
                 this.manaCostLeftStr = mainCard.getLeftHalfCard().getManaCostSymbols();
                 this.manaCostRightStr = new ArrayList<>();
-            }  else if (card instanceof CardWithSpellOption) {
+            } else if (card instanceof PrepareCard) {
+                PrepareCard prepareCard = (PrepareCard) card;
+                SpellOptionCard spellOptionCard = prepareCard.getSpellCard();
+                this.prepareCard = true;
+                this.prepareName = spellOptionCard.getName();
+                this.prepareCostsStr = String.join("", spellOptionCard.getManaCostSymbols());
+                this.prepareRules = prepareCard.getPrepareRulesForView(game);
+                this.prepareTypeLine = prepareCard.getPrepareTypeLineForView(game);
+                fullCardName = card.getName();
+                this.manaCostLeftStr = card.getManaCostSymbols();
+                this.manaCostRightStr = new ArrayList<>();
+            } else if (card instanceof CardWithSpellOption) {
                 this.isSplitCard = true;
                 CardWithSpellOption mainCard = ((CardWithSpellOption) card);
                 leftSplitName = mainCard.getName();
@@ -469,7 +512,7 @@ public class CardView extends SimpleCardView {
             this.name = card.getName();
             this.displayName = card.getName();
             this.displayFullName = fullCardName;
-            this.rules = new ArrayList<>(card.getRules(game));
+            this.rules = new ArrayList<>(getRulesForView(game, card));
             this.manaValue = card.getManaValue();
         }
 
@@ -707,6 +750,16 @@ public class CardView extends SimpleCardView {
         // icon - ring-bearer
         if (permanent.isRingBearer()) {
             this.cardIcons.add(CardIconImpl.RINGBEARER);
+        }
+
+        // icon - prepared
+        if (permanent.isPrepared()) {
+            UUID prepareSpellCopyId = PrepareUtil.getPrepareSpellCopyId(permanent.getId(), game);
+            Card prepareSpellCopy = prepareSpellCopyId == null ? null : game.getCard(prepareSpellCopyId);
+            String hint = prepareSpellCopy == null
+                    ? "Prepared"
+                    : "Prepared: " + prepareSpellCopy.getName();
+            this.cardIcons.add(new CardIconImpl(CardIconType.PREPARED, hint));
         }
 
         // icon - restrictions (search it in card hints)
@@ -1436,6 +1489,30 @@ public class CardView extends SimpleCardView {
         return rightSplitTypeLine;
     }
 
+    public boolean isPrepareCard() {
+        return prepareCard;
+    }
+
+    public boolean isPrepareSpell() {
+        return prepareSpell;
+    }
+
+    public String getPrepareName() {
+        return prepareName;
+    }
+
+    public String getPrepareCostsStr() {
+        return prepareCostsStr;
+    }
+
+    public List<String> getPrepareRules() {
+        return prepareRules;
+    }
+
+    public String getPrepareTypeLine() {
+        return prepareTypeLine;
+    }
+
     public ArtRect getArtRect() {
         return artRect;
     }
@@ -1546,6 +1623,9 @@ public class CardView extends SimpleCardView {
 
     public String getTypeText() {
         StringBuilder typeText = new StringBuilder();
+        if (isPrepareSpell()) {
+            typeText.append("Prepare ");
+        }
         if (!getSuperTypes().isEmpty()) {
             typeText.append(String.join(" ", getSuperTypes().stream().map(SuperType::toString).collect(Collectors.toList())));
             typeText.append(" ");
