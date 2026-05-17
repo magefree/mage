@@ -75,7 +75,6 @@ class MirrormindCrownEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return source.isControlledBy(event.getPlayerId())
-                && game.isActivePlayer(source.getControllerId())
                 && !CreatedTokenWatcher.checkPlayer(source.getControllerId(), game)
                 && Optional
                 .ofNullable(source.getSourcePermanentIfItStillExists(game))
