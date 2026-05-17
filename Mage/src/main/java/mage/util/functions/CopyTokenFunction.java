@@ -56,6 +56,13 @@ public class CopyTokenFunction {
         // with its back face up. This rule does not apply to tokens that are created with their own set of
         // characteristics and enter the battlefield as a copy of a transforming permanent due to a replacement effect.
 
+        // handle mutate characteristics first
+        if (source instanceof Permanent && ((Permanent) source).getMutateCount() > 0) {
+            ((Permanent) source).reset(game);
+            copyToToken(target, source, game);
+            return;
+        }
+
         // from token permanent
         if (source instanceof PermanentToken) {
             // create token from another token

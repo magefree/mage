@@ -10,6 +10,7 @@ import mage.counters.CounterType;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.GameState;
+import mage.game.stack.Spell;
 import mage.util.CardUtil;
 
 import java.util.List;
@@ -56,6 +57,14 @@ public interface Permanent extends Card, Controllable {
     void setTransformed(boolean value);
 
     int getTransformCount();
+
+    boolean mutate(Card mutation, Spell source, Game game);
+
+    int getMutateCount();
+
+    List<UUID> getMutateObjects();
+
+    boolean isMutatedOver();
 
     boolean isPhasedIn();
 

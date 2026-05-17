@@ -4,9 +4,10 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
- * @author TheElk801
+ * @author xenohedron
  */
 public enum SourceMutatedCount implements DynamicValue {
 
@@ -14,8 +15,8 @@ public enum SourceMutatedCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        // TODO: Implement this
-        return 0;
+        Permanent sourcePermanent = sourceAbility.getSourcePermanentOrLKI(game);
+        return (sourcePermanent == null) ? 0 : sourcePermanent.getMutateCount();
     }
 
     @Override
