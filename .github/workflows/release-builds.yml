@@ -83,11 +83,11 @@ jobs:
             asset_suffix="stable"
           fi
 
-          if [ "${channel}" = "stable" ]; then
-            xmage_version="${version} (${channel}-${build_stamp}-${short_sha})"
-          else
-            xmage_version="${version}-dev (${channel}-${build_stamp}-${short_sha})"
-          fi
+          # XMage Launcher compares the full version string lexicographically.
+          # Keep all channels in the same shape and put the chronological
+          # field before channel metadata so stable and beta can replace each
+          # other whenever a newer build exists.
+          xmage_version="${version}-${build_stamp}-${short_sha}-${channel}"
 
           {
             echo "channel=${channel}"

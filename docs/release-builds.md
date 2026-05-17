@@ -32,10 +32,12 @@ Each release contains:
 
 The zip file is assembled from the upstream Maven assembly descriptors in `Mage.Client` and `Mage.Server`.
 
-`config.json` exposes a launcher version with both a UTC build timestamp and the commit SHA, for example:
+`config.json` exposes a launcher version with a UTC build timestamp, the commit SHA, and the channel, for example:
 
-- `1.4.58-dev (beta-2026-05-16-1432Z-697d4fdbd4cd)`
-- `1.4.58 (stable-2026-05-16-1432Z-697d4fdbd4cd)`
+- `1.4.58-2026-05-16-1432Z-697d4fdbd4cd-beta`
+- `1.4.58-2026-05-16-1505Z-697d4fdbd4cd-stable`
+
+All channels use the same sortable prefix, so the XMage Launcher can move between `stable` and `beta` when the target channel has a newer build. Channel metadata is kept after the chronological field so it does not dominate the launcher's alphabetic comparison.
 
 ## Publishing
 
