@@ -19,6 +19,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -85,6 +86,7 @@ class TheReaperKingNoMoreTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.isDiesEvent()) {
             Permanent permanent = zEvent.getTarget();
             if (permanent != null
+                    && !(permanent instanceof PermanentToken)
                     && permanent.getCounters(game).containsKey(CounterType.M1M1)
                     && game.getOpponents(controllerId).contains(permanent.getControllerId())) {
                 for (Effect effect : this.getEffects()) {
