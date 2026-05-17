@@ -21,6 +21,7 @@ public final class MorningtidesLight extends CardImpl {
 
         // Exile any number of target creatures. At the beginning of the next end step, return those cards to the battlefield tapped under their owners' control.
         this.getSpellAbility().addEffect(new ExileReturnBattlefieldNextEndStepTargetEffect()
+                .returnTapped(true)
                 .setText("exile any number of target creatures. At the beginning of the next end step, " +
                         "return those cards to the battlefield tapped under their owners' control"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));

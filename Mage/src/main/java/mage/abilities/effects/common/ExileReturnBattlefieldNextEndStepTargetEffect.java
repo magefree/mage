@@ -25,12 +25,14 @@ public class ExileReturnBattlefieldNextEndStepTargetEffect extends OneShotEffect
     private boolean yourControl;
     private boolean textThatCard;
     private boolean exiledOnly;
+    private boolean returnTapped;
 
     public ExileReturnBattlefieldNextEndStepTargetEffect() {
         super(Outcome.Neutral);
         this.yourControl = false;
         this.textThatCard = true;
         this.exiledOnly = false;
+        this.returnTapped = false;
     }
 
     protected ExileReturnBattlefieldNextEndStepTargetEffect(final ExileReturnBattlefieldNextEndStepTargetEffect effect) {
@@ -38,6 +40,7 @@ public class ExileReturnBattlefieldNextEndStepTargetEffect extends OneShotEffect
         this.yourControl = effect.yourControl;
         this.textThatCard = effect.textThatCard;
         this.exiledOnly = effect.exiledOnly;
+        this.returnTapped = effect.returnTapped;
     }
 
     public ExileReturnBattlefieldNextEndStepTargetEffect underYourControl(boolean yourControl) {
@@ -52,6 +55,11 @@ public class ExileReturnBattlefieldNextEndStepTargetEffect extends OneShotEffect
 
     public ExileReturnBattlefieldNextEndStepTargetEffect returnExiledOnly(boolean exiledOnly) {
         this.exiledOnly = exiledOnly;
+        return this;
+    }
+
+    public ExileReturnBattlefieldNextEndStepTargetEffect returnTapped(boolean returnTapped) {
+        this.returnTapped = returnTapped;
         return this;
     }
 
@@ -71,8 +79,8 @@ public class ExileReturnBattlefieldNextEndStepTargetEffect extends OneShotEffect
         }
         controller.moveCardsToExile(toExile, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
         Effect effect = yourControl
-                ? new ReturnToBattlefieldUnderYourControlTargetEffect(exiledOnly)
-                : new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, exiledOnly);
+                ? new ReturnToBattlefieldUnderYourControlTargetEffect(exiledOnly, returnTapped)
+                : new ReturnToBattlefieldUnderOwnerControlTargetEffect(returnTapped, exiledOnly);
         effect.setTargetPointer(new FixedTargets(toExile
                 .stream()
                 .map(Card::getMainCard)
@@ -101,6 +109,9 @@ public class ExileReturnBattlefieldNextEndStepTargetEffect extends OneShotEffect
             text += plural ? "them" : "it";
         }
         text += " to the battlefield";
+        if (returnTapped) {
+            text += " tapped";
+        }
         if (yourControl) {
             text += " under your control";
         } else {
