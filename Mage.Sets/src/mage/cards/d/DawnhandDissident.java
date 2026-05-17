@@ -20,8 +20,10 @@ import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -65,6 +67,13 @@ public final class DawnhandDissident extends CardImpl {
 }
 
 class DawnhandDissidentEffect extends AsThoughEffectImpl {
+
+    private static final FilterControlledCreaturePermanent filter
+            = new FilterControlledCreaturePermanent("creatures you control with counters");
+
+    static {
+        filter.add(CounterAnyPredicate.instance);
+    }
 
     DawnhandDissidentEffect() {
         super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.AIDontUseIt);
@@ -112,7 +121,7 @@ class DawnhandDissidentEffect extends AsThoughEffectImpl {
         Costs<Cost> newCosts = new CostsImpl<>();
         newCosts.addAll(card.getSpellAbility().getCosts());
         newCosts.add(new RemoveCounterCost(
-                new TargetControlledCreaturePermanent(), null, 3
+                new TargetControlledPermanent(1, 3, filter, true), null, 3
         ).setText("remove three counters from among creatures you control"));
         player.setCastSourceIdWithAlternateMana(
                 card.getId(), card.getManaCost(), newCosts
