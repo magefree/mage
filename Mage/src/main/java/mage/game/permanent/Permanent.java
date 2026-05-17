@@ -298,9 +298,19 @@ public interface Permanent extends Card, Controllable {
 
     int getBlocking();
 
-    void setAttacking(boolean attacking);
+    void setAttacking(MageObjectReference defender);
+
+    MageObjectReference getAttacking();
 
     void setBlocking(int blocking);
+
+    void addBlocking(UUID attackerId, Game game);
+
+    void removeBlocking(UUID attackerId, Game game);
+
+    void clearBlocking();
+
+    Set<MageObjectReference> getBlockingRefs();
 
     int getMaxBlocks();
 

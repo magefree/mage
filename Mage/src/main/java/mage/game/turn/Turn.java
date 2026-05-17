@@ -339,7 +339,6 @@ public class Turn implements Serializable {
             if (permanent != null) {
                 permanent.removeFromCombat(game);
             }
-            game.getCombat().removeAttacker(attackerId, game);
         }
         for (UUID blockerId : game.getCombat().getBlockers()) {
             Permanent permanent = game.getPermanent(blockerId);

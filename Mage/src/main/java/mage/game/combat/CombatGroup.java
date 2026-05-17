@@ -1,5 +1,6 @@
 package mage.game.combat;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.ControllerAssignCombatDamageToBlockersAbility;
 import mage.abilities.common.ControllerDivideCombatDamageAbility;
@@ -584,6 +585,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         Permanent blocker = game.getPermanent(blockerId);
         if (blockerId != null && blocker != null) {
             blocker.setBlocking(blocker.getBlocking() + 1);
+            for (UUID attackerId : attackers) {
+                blocker.addBlocking(attackerId, game);
+            }
             blockers.add(blockerId);
             this.blocked = true;
             this.players.put(blockerId, playerId);
@@ -782,6 +786,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 }
             }
             attacker.clearBandedCards();
+            attacker.setAttacking(new MageObjectReference(newDefenderId, game));
         }
         Permanent permanent = game.getPermanent(newDefenderId);
         if (permanent != null) {
