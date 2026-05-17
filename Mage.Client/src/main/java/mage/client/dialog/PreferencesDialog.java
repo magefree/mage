@@ -132,6 +132,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_STOP_ALL_MAIN_PHASES = "stopOnAllMainPhases";
     public static final String KEY_STOP_ALL_END_PHASES = "stopOnAllEndPhases";
     public static final String KEY_STOP_NEW_STACK_OBJECTS = "stopOnNewStackObjects";
+    public static final String KEY_SHOW_STACK_TARGET_ARROWS = "showStackTargetArrows";
     public static final String KEY_PASS_PRIORITY_CAST = "passPriorityCast";
     public static final String KEY_PASS_PRIORITY_ACTIVATION = "passPriorityActivation";
     public static final String KEY_AUTO_ORDER_TRIGGER = "autoOrderTrigger";
@@ -998,6 +999,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbStopBlockWithAny = new javax.swing.JCheckBox();
         cbStopBlockWithZero = new javax.swing.JCheckBox();
         cbStopOnNewStackObjects = new javax.swing.JCheckBox();
+        cbShowStackTargetArrows = new javax.swing.JCheckBox();
         cbStopOnAllMain = new javax.swing.JCheckBox();
         cbStopOnAllEnd = new javax.swing.JCheckBox();
         cbPassPriorityCast = new javax.swing.JCheckBox();
@@ -2420,7 +2422,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jLabelEndOfTurn.setText("End of turn:");
 
         phases_stopSettings.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "SKIP settings"));
-        phases_stopSettings.setLayout(new java.awt.GridLayout(10, 1));
+        phases_stopSettings.setLayout(new java.awt.GridLayout(11, 1));
 
         cbStopAttack.setSelected(true);
         cbStopAttack.setText("STOP skips on declare attackers if attackers are available");
@@ -2440,6 +2442,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbStopOnNewStackObjects.setActionCommand("");
         cbStopOnNewStackObjects.setPreferredSize(new java.awt.Dimension(300, 25));
         phases_stopSettings.add(cbStopOnNewStackObjects);
+
+        cbShowStackTargetArrows.setText("Show target arrows for stack objects without mouse-over");
+        cbShowStackTargetArrows.setToolTipText("Draws target arrows for cards and abilities currently on the stack.");
+        cbShowStackTargetArrows.setActionCommand("");
+        cbShowStackTargetArrows.setPreferredSize(new java.awt.Dimension(300, 25));
+        phases_stopSettings.add(cbShowStackTargetArrows);
 
         cbStopOnAllMain.setText("Skip to MAIN step (F7): stop on any main steps (on) or stop on your main step (off)");
         cbStopOnAllMain.setActionCommand("");
@@ -3049,6 +3057,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbStopOnAllMain, KEY_STOP_ALL_MAIN_PHASES, "true", "false");
         save(prefs, dialog.cbStopOnAllEnd, KEY_STOP_ALL_END_PHASES, "true", "false");
         save(prefs, dialog.cbStopOnNewStackObjects, KEY_STOP_NEW_STACK_OBJECTS, "true", "false");
+        save(prefs, dialog.cbShowStackTargetArrows, KEY_SHOW_STACK_TARGET_ARROWS, "true", "false");
         save(prefs, dialog.cbPassPriorityCast, KEY_PASS_PRIORITY_CAST, "true", "false");
         save(prefs, dialog.cbPassPriorityActivation, KEY_PASS_PRIORITY_ACTIVATION, "true", "false");
         save(prefs, dialog.cbAutoOrderTrigger, KEY_AUTO_ORDER_TRIGGER, "true", "false");
@@ -3482,6 +3491,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.cbStopOnAllMain, KEY_STOP_ALL_MAIN_PHASES, "true", "false");
         load(prefs, dialog.cbStopOnAllEnd, KEY_STOP_ALL_END_PHASES, "true", "false");
         load(prefs, dialog.cbStopOnNewStackObjects, KEY_STOP_NEW_STACK_OBJECTS, "true", "false");
+        load(prefs, dialog.cbShowStackTargetArrows, KEY_SHOW_STACK_TARGET_ARROWS, "true", "false");
         load(prefs, dialog.cbPassPriorityCast, KEY_PASS_PRIORITY_CAST, "true", "false");
         load(prefs, dialog.cbPassPriorityActivation, KEY_PASS_PRIORITY_ACTIVATION, "true", "false");
         load(prefs, dialog.cbAutoOrderTrigger, KEY_AUTO_ORDER_TRIGGER, "true", "true");
@@ -4094,6 +4104,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox cbStopOnAllEnd;
     private javax.swing.JCheckBox cbStopOnAllMain;
     private javax.swing.JCheckBox cbStopOnNewStackObjects;
+    private javax.swing.JCheckBox cbShowStackTargetArrows;
     private javax.swing.JComboBox<String> cbTargetAutoChooseLevel;
     private javax.swing.JComboBox<ThemeType> cbTheme;
     private javax.swing.JCheckBox cbUseDefaultBackground;

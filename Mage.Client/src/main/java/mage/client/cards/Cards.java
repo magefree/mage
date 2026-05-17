@@ -2,12 +2,15 @@
 
  import mage.abilities.icon.CardIconRenderSettings;
  import mage.cards.MageCard;
+ import mage.cards.action.TransferData;
  import mage.client.dialog.PreferencesDialog;
  import mage.client.plugins.adapters.MageActionCallback;
  import mage.client.plugins.impl.Plugins;
  import mage.client.util.CardsViewUtil;
  import mage.client.util.ClientDefaultSettings;
  import mage.client.util.GUISizeHelper;
+ import mage.client.util.gui.ArrowBuilder;
+ import mage.client.util.gui.ArrowUtil;
  import mage.constants.Zone;
  import mage.util.DebugUtil;
  import mage.view.*;
@@ -33,6 +36,7 @@
      private boolean dontDisplayTapped = false;
      private Zone zone;
      private int lastLoadedCardsCount = 0;
+     private UUID lastGameId;
      private final JScrollPane parentScrollPane;
 
      /**
@@ -66,6 +70,8 @@
              jScrollPane1.setOpaque(false);
              jScrollPane1.getViewport().setOpaque(false);
              jScrollPane1.setBorder(EMPTY_BORDER);
+             jScrollPane1.getHorizontalScrollBar().addAdjustmentListener(e -> redrawStackTargetArrowsIfEnabled());
+             jScrollPane1.getVerticalScrollBar().addAdjustmentListener(e -> redrawStackTargetArrowsIfEnabled());
          }
 
          if (Plugins.instance.isCardPluginLoaded()) {
@@ -129,6 +135,7 @@
 
      public boolean loadCards(CardsView cardsView, BigCard bigCard, UUID gameId, boolean revertOrder) {
          boolean changed = false;
+         this.lastGameId = gameId;
 
          // auto-move scrollbars to the end of the list
          boolean moveScrollbar;
@@ -214,6 +221,8 @@
          this.revalidate();
          this.repaint();
 
+         redrawStackTargetArrowsIfEnabled();
+
          // auto-scroll (must use it at the end)
          if (changed && moveScrollbar) {
              SwingUtilities.invokeLater(() -> {
@@ -223,10 +232,56 @@
                  if (parentScrollPane != null) {
                      parentScrollPane.getHorizontalScrollBar().setValue(parentScrollPane.getHorizontalScrollBar().getMaximum());
                  }
+                 redrawStackTargetArrowsIfEnabled();
              });
          }
 
          return changed;
+     }
+
+     public void redrawStackTargetArrowsIfEnabled() {
+         if (lastGameId == null || zone != Zone.STACK) {
+             return;
+         }
+
+         SwingUtilities.invokeLater(() -> {
+             ArrowBuilder.getBuilder().removeArrowsByType(lastGameId, ArrowBuilder.Type.STACK_TARGET);
+
+             if (!PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_STACK_TARGET_ARROWS, "false").equals("true")
+                     || cards.isEmpty()
+                     || !isShowing()) {
+                 return;
+             }
+
+             Component parentComponent = SwingUtilities.getRoot(this);
+             if (parentComponent == null || !parentComponent.isShowing()) {
+                 return;
+             }
+
+             Point parentPoint;
+             try {
+                 parentPoint = parentComponent.getLocationOnScreen();
+             } catch (IllegalComponentStateException e) {
+                 return;
+             }
+
+             for (MageCard mageCard : cards.values()) {
+                 if (!mageCard.isShowing() || mageCard.getOriginal().getTargets() == null || mageCard.getOriginal().getTargets().isEmpty()) {
+                     continue;
+                 }
+
+                 TransferData data = new TransferData();
+                 data.setComponent(mageCard);
+                 data.setCard(mageCard.getOriginal());
+                 data.setGameId(lastGameId);
+                 try {
+                     data.setLocationOnScreen(mageCard.getCardLocationOnScreen().getCardPoint());
+                 } catch (IllegalComponentStateException e) {
+                     continue;
+                 }
+                 ArrowUtil.drawArrowsForTargets(data, parentPoint, ArrowBuilder.Type.STACK_TARGET);
+             }
+         });
      }
 
      public void sizeCards(Dimension cardDimension) {

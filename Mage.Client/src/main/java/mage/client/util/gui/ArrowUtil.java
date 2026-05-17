@@ -88,6 +88,10 @@ public final class ArrowUtil {
     }
 
     public static void drawArrowsForTargets(TransferData data, Point parentPoint) {
+        drawArrowsForTargets(data, parentPoint, ArrowBuilder.Type.TARGET);
+    }
+
+    public static void drawArrowsForTargets(TransferData data, Point parentPoint, ArrowBuilder.Type arrowType) {
         java.util.List<UUID> targets = data.getCard().getTargets();
         if (targets == null) {
             return;
@@ -101,7 +105,7 @@ public final class ArrowUtil {
             if (p != null) {
                 Point target = p.getLocationOnScreen();
                 target.translate(-parentPoint.x, -parentPoint.y);
-                ArrowBuilder.getBuilder().addArrow(data.getGameId(), (int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() - 40, Color.red, ArrowBuilder.Type.TARGET);
+                ArrowBuilder.getBuilder().addArrow(data.getGameId(), (int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() - 40, Color.red, arrowType);
                 continue;
             }
 
@@ -110,7 +114,7 @@ public final class ArrowUtil {
                 if (permanent != null) {
                     Point target = permanent.getCardLocationOnScreen().getCardPoint();
                     target.translate(-parentPoint.x, -parentPoint.y);
-                    ArrowBuilder.getBuilder().addArrow(data.getGameId(), (int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() + 10, Color.red, ArrowBuilder.Type.TARGET);
+                    ArrowBuilder.getBuilder().addArrow(data.getGameId(), (int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() + 10, Color.red, arrowType);
                     continue;
                 }
 
@@ -123,7 +127,7 @@ public final class ArrowUtil {
                             Point target = p.getLocationOnScreen();
                             target.translate(-parentPoint.x, -parentPoint.y);
                             int yOffset = p.isSmallMode() ? (PlayAreaPanel.PANEL_HEIGHT - PlayAreaPanel.PANEL_HEIGHT_SMALL) : 0;
-                            ArrowBuilder.getBuilder().addArrow(data.getGameId(), (int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 15, (int) target.getY() + 145 - yOffset, Color.red, ArrowBuilder.Type.TARGET);
+                            ArrowBuilder.getBuilder().addArrow(data.getGameId(), (int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 15, (int) target.getY() + 145 - yOffset, Color.red, arrowType);
                         }
                     }
                 }

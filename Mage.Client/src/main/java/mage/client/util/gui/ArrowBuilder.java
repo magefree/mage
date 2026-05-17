@@ -38,7 +38,7 @@ public class ArrowBuilder {
     private int currentHeight;
 
     public enum Type {
-        PAIRED, BANDED, SOURCE, TARGET, COMBAT, ENCHANT_PLAYERS
+        PAIRED, BANDED, SOURCE, TARGET, STACK_TARGET, COMBAT, ENCHANT_PLAYERS
     }
 
     /**

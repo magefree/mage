@@ -1601,6 +1601,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private void displayStack(GameView game, BigCard bigCard, FeedbackPanel feedbackPanel, UUID gameId) {
         this.stackObjects.loadCards(game.getStack(), bigCard, gameId, true);
+        this.stackObjects.redrawStackTargetArrowsIfEnabled();
     }
 
     private void updateActivePhase(PhaseStep currentStep) {
