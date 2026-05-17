@@ -2446,6 +2446,7 @@ public final class GamePanel extends javax.swing.JPanel {
         //pnlShortCuts.setPreferredSize(new Dimension(410, 72));
 
         stackObjects = new mage.client.cards.Cards();
+        stackObjects.setZone(Zone.STACK);
 
         // split: [hand] <|> [stack]
         splitHandAndStack = new javax.swing.JSplitPane();
