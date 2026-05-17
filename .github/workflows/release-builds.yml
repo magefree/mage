@@ -20,8 +20,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: release-builds-${{ github.event_name == 'push' && 'beta' || inputs.channel || 'test' }}
-  cancel-in-progress: false
+  group: release-builds-${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || github.event_name == 'push' && 'beta' || inputs.channel || 'test' }}
+  cancel-in-progress: true
 
 jobs:
   publish:
