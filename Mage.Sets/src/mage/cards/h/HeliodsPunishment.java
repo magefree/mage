@@ -76,8 +76,8 @@ class HeliodsPunishmentLoseAllAbilitiesEnchantedEffect extends ContinuousEffectI
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourceEnchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (sourceEnchantment != null && sourceEnchantment.getAttachedTo() != null) {
-            Permanent attachedTo = game.getPermanent(sourceEnchantment.getAttachedTo());
+        if (sourceEnchantment != null) {
+            Permanent attachedTo = source.getPermanentSourceAttachedToIfItStillExists(game);
             if (attachedTo != null) {
                 attachedTo.removeAllAbilities(source.getSourceId(), game);
                 HeliodsPunishmentEffect effect = new HeliodsPunishmentEffect(sourceEnchantment.getName());

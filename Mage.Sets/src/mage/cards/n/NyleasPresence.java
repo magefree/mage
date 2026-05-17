@@ -74,15 +74,11 @@ class NyleasPresenceLandTypeEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment == null || enchantment.getAttachedTo() == null) {
-            return true;
-        }
-        Permanent land = game.getPermanent(enchantment.getAttachedTo());
+        Permanent land = source.getPermanentSourceAttachedToIfItStillExists(game);
         if (land == null) {
-            return true;
+            return false;
         }
-        land.addSubType(game,SubType.getBasicLands());
+        land.addSubType(game, SubType.getBasicLands());
         land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
         land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
         land.addAbility(new BlackManaAbility(), source.getSourceId(), game);

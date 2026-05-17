@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
 
-    protected List<SubType> landTypes = new ArrayList<>();
+    private final List<SubType> landTypes = new ArrayList<>();
 
     public BecomesBasicLandEnchantedEffect(SubType... landNames) {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
@@ -39,15 +39,11 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment == null || enchantment.getAttachedTo() == null) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
         if (permanent == null) {
             return false;
         }
-        // lands intrictically have the mana ability associated with their type, so added here in layer 4
+        // lands intrinsically have the mana ability associated with their type, so added here in layer 4
         permanent.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
         permanent.addSubType(game, landTypes);
         permanent.removeAllAbilities(source.getSourceId(), game);

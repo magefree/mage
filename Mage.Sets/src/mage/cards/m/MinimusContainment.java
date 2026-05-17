@@ -68,11 +68,7 @@ class MinimusContainmentEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent aura = source.getSourcePermanentIfItStillExists(game);
-        if (aura == null) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(aura.getAttachedTo());
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
         if (permanent == null) {
             return false;
         }

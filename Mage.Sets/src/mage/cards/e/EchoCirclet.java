@@ -44,7 +44,7 @@ public final class EchoCirclet extends CardImpl {
 class EchoCircletEffect extends ContinuousEffectImpl {
 
     EchoCircletEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         staticText = "Equipped creature can block an additional creature each combat";
     }
 
@@ -58,33 +58,16 @@ class EchoCircletEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent perm = game.getPermanent(source.getSourceId());
-        if (perm != null && perm.getAttachedTo() != null) {
-            Permanent equipped = game.getPermanent(perm.getAttachedTo());
-            if (equipped != null) {
-                switch (layer) {
-                    case RulesEffects:
-                        // maxBlocks = 0 equals to "can block any number of creatures"
-                        if (equipped.getMaxBlocks() > 0) {
-                            equipped.setMaxBlocks(equipped.getMaxBlocks() + 1);
-                        }
-                        break;
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
     public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
+        if (permanent == null) {
+            return false;
+        }
+        // maxBlocks = 0 equals to "can block any number of creatures"
+        if (permanent.getMaxBlocks() > 0) {
+            permanent.setMaxBlocks(permanent.getMaxBlocks() + 1);
+        }
+        return true;
     }
 
 }

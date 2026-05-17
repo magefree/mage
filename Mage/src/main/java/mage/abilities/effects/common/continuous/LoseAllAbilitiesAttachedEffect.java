@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -13,7 +11,7 @@ import mage.game.permanent.Permanent;
  */
 public class LoseAllAbilitiesAttachedEffect extends ContinuousEffectImpl {
 
-    protected AttachmentType attachmentType;
+    private final AttachmentType attachmentType;
 
     public LoseAllAbilitiesAttachedEffect(AttachmentType attachmentType) {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
@@ -33,15 +31,12 @@ public class LoseAllAbilitiesAttachedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            Permanent creature = game.getPermanent(equipment.getAttachedTo());
-            if (creature != null) {
-                creature.removeAllAbilities(source.getSourceId(), game);
-                return true;
-            }
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
+        if (permanent == null) {
+            return false;
         }
-        return false;
+        permanent.removeAllAbilities(source.getSourceId(), game);
+        return true;
     }
 
     private void setText() {

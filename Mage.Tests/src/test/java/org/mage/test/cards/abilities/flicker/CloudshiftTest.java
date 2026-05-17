@@ -405,7 +405,6 @@ public class CloudshiftTest extends CardTestPlayerBase {
     private static final String lignify = "Lignify"; // {1}{G} Aura - enchanted creature loses all abilities and is a 0/4 Treefolk
 
     @Test
-    @Ignore("Failing, see #9839, perhaps due to game.getState.processAction(game) not cleaning up Permanent::removeAllAbilities in time")
     public void testEntersTriggerNotSuppressed() {
         addCard(Zone.BATTLEFIELD, playerA, "Savannah", 3);
         addCard(Zone.BATTLEFIELD, playerA, kor);
@@ -429,7 +428,6 @@ public class CloudshiftTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore("Failing, see #9839, perhaps due to game.getState.processAction(game) not cleaning up MageObject::removeAllSubTypes in time")
     public void testEntersSubtype() {
         String mystic = "Elvish Mystic";
         String vanguard = "Elvish Vanguard"; // Whenever another Elf enters the battlefield, put a +1/+1 counter on Elvish Vanguard.

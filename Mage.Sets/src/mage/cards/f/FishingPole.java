@@ -116,7 +116,7 @@ class FishingPoleEffect extends ContinuousEffectImpl {
         if (fishingPole == null) {
             return false;
         }
-        Permanent creature = game.getPermanent(fishingPole.getAttachedTo());
+        Permanent creature = source.getPermanentSourceAttachedToIfItStillExists(game);
         if (creature == null) {
             return false;
         }

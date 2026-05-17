@@ -2,17 +2,20 @@ package mage.cards.g;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.EquippedHasSubtypeCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -20,6 +23,9 @@ import java.util.UUID;
  * @author weirddan455
  */
 public final class GiftOfFangs extends CardImpl {
+
+    private static final Condition condition1 = new EquippedHasSubtypeCondition(SubType.VAMPIRE);
+    private static final Condition condition2 = new InvertCondition(condition1);
 
     public GiftOfFangs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");
@@ -34,7 +40,15 @@ public final class GiftOfFangs extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2 as long as it's a Vampire. Otherwise, it gets -2/-2.
-        this.addAbility(new SimpleStaticAbility(new GiftOfFangsEffect()));
+        ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
+                new BoostEnchantedEffect(2, 2), condition1,
+                "Enchanted creature gets +2/+2 as long as it's a Vampire"
+        ));
+        ability.addEffect(new ConditionalContinuousEffect(
+                new BoostEnchantedEffect(-2, -2), condition2,
+                "Otherwise, it gets -2/-2"
+        ));
+        this.addAbility(ability);
     }
 
     private GiftOfFangs(final GiftOfFangs card) {
@@ -44,63 +58,5 @@ public final class GiftOfFangs extends CardImpl {
     @Override
     public GiftOfFangs copy() {
         return new GiftOfFangs(this);
-    }
-}
-
-class GiftOfFangsEffect extends ContinuousEffectImpl {
-
-    GiftOfFangsEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.Neutral);
-        staticText = "Enchanted creature gets +2/+2 as long as it's a Vampire. Otherwise, it gets -2/-2";
-    }
-
-    private GiftOfFangsEffect(final GiftOfFangsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GiftOfFangsEffect copy() {
-        return new GiftOfFangsEffect(this);
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        if (getAffectedObjectsSetAtInit(source)) {
-            // Added boosts of activated or triggered abilities exist independent from the source they are created by
-            // so a continuous effect for the permanent itself with the attachment is created
-            Permanent equipment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-            if (equipment != null && equipment.getAttachedTo() != null) {
-                this.setTargetPointer(new FixedTarget(equipment.getAttachedTo(), game.getState().getZoneChangeCounter(equipment.getAttachedTo())));
-            }
-        }
-
-        super.init(source, game); // must call at the end due target pointer setup
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = null;
-        if (getAffectedObjectsSet()) {
-            permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (permanent == null) {
-                discard();
-                return true;
-            }
-        } else {
-            Permanent equipment = game.getPermanent(source.getSourceId());
-            if (equipment != null && equipment.getAttachedTo() != null) {
-                permanent = game.getPermanent(equipment.getAttachedTo());
-            }
-        }
-        if (permanent != null) {
-            if (permanent.hasSubtype(SubType.VAMPIRE, game)) {
-                permanent.addPower(2);
-                permanent.addToughness(2);
-            } else {
-                permanent.addPower(-2);
-                permanent.addToughness(-2);
-            }
-        }
-        return true;
     }
 }

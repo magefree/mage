@@ -43,14 +43,11 @@ public class CantBeBlockedByMoreThanOneAttachedEffect extends ContinuousEffectIm
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
-        if (attachment != null && attachment.getAttachedTo() != null) {
-            Permanent perm = game.getPermanent(attachment.getAttachedTo());
-            if (perm != null) {
-                perm.setMaxBlockedBy(amount);
-                return true;
-            }
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
+        if (permanent == null) {
+            return false;
         }
-        return false;
+        permanent.setMaxBlockedBy(amount);
+        return true;
     }
 }
