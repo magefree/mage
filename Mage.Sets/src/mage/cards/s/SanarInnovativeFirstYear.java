@@ -12,6 +12,7 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -112,6 +113,11 @@ class SanarInnovativeFirstYearTarget extends TargetCardInLibrary {
                         .map(s -> "a " + s + " card")
                         .collect(Collectors.toList())
         ));
+        filterCard.add(Predicates.or(color
+                .getColors()
+                .stream()
+                .map(ColorPredicate::new)
+                .collect(Collectors.toList())));
         filterCard.add(Predicates.not(ColorlessPredicate.instance));
         return filterCard;
     }
