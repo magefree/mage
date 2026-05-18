@@ -41,7 +41,7 @@ public class DialogManager extends JComponent implements MouseListener, MouseMot
 
     public enum MTGDialogs {
         NONE, ABOUT, MESSAGE, ASSIGN_DAMAGE, MANA_CHOICE, CHOICE, EMBLEMS, GRAVEYARD, DialogContainer, COMBAT,
-        CHOOSE_DECK, CHOOSE_COMMON, REVEAL, EXILE
+        CHOOSE_DECK, CHOOSE_COMMON, REVEAL, EXILE, MUTATE
     }
 
     /**
@@ -125,6 +125,35 @@ public class DialogManager extends JComponent implements MouseListener, MouseMot
         params.gameId = gameId;
         params.setCards(cards);
         dialogContainer = new DialogContainer(MTGDialogs.EXILE, params);
+        dialogContainer.setVisible(true);
+        add(dialogContainer);
+
+        this.currentDialog = MTGDialogs.DialogContainer;
+
+        setDlgBounds(new Rectangle(x, y, w, h));
+
+        dialogContainer.showDialog(true);
+
+        setVisible(true);
+    }
+
+    public void showMutateDialog(CardsView cards, BigCard bigCard, UUID gameId) {
+
+        int w = 720;
+        int h = 550;
+
+        int height = getHeight();
+        int width = getWidth();
+
+        int x = ((width - w) / 2);
+        int y = ((height - h) / 2);
+
+        DlgParams params = new DlgParams();
+        params.rect = new Rectangle(x, y, w, h);
+        params.bigCard = bigCard;
+        params.gameId = gameId;
+        params.setCards(cards);
+        dialogContainer = new DialogContainer(MTGDialogs.MUTATE, params);
         dialogContainer.setVisible(true);
         add(dialogContainer);
 
