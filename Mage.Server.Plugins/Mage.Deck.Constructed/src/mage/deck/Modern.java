@@ -47,6 +47,7 @@ public class Modern extends Constructed {
         banned.add("Hypergenesis");
         banned.add("Jegantha, the Wellspring");
         banned.add("Krark-Clan Ironworks");
+        banned.add("Lotus Field");
         banned.add("Lurrus of the Dream-Den");
         banned.add("Mental Misstep");
         banned.add("Mycosynth Lattice");
@@ -54,6 +55,7 @@ public class Modern extends Constructed {
         banned.add("Nadu, Winged Wisdom");
         banned.add("Oko, Thief of Crowns");
         banned.add("Once Upon a Time");
+        banned.add("Phlage, Titan of Fire's Fury");
         banned.add("Ponder");
         banned.add("Punishing Fire");
         banned.add("Rite of Flame");
@@ -68,12 +70,10 @@ public class Modern extends Constructed {
         banned.add("Tibalt's Trickery");
         banned.add("Treasure Cruise");
         banned.add("Tree of Tales");
-        banned.add("Umezawa's Jitte");
         banned.add("Underworld Breach");
         banned.add("Up the Beanstalk");
         banned.add("Uro, Titan of Nature's Wrath");
         banned.add("Vault of Whispers");
-        banned.add("Violent Outburst");
         banned.add("Yorion, Sky Nomad");
     }
 }
