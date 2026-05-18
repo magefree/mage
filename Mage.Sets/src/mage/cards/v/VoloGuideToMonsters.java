@@ -44,7 +44,7 @@ public final class VoloGuideToMonsters extends CardImpl {
 
         // Whenever you cast a creature spell that doesn't share a creature type with a creature you control or a creature card in your graveyard, copy that spell.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CopyTargetStackObjectEffect(true)
+                new CopyTargetStackObjectEffect(false, true, false)
                         .setText("copy that spell"),
                 filter, false, SetTargetPointer.SPELL
         ));
