@@ -2506,6 +2506,12 @@ public class HumanPlayer extends PlayerImpl {
                 }
             }
 
+            // skip dialog when choice is mandatory but no remaining options are valild
+            // https://github.com/magefree/mage/issues/14805
+            if (modeMap.size() == 0 && !modes.isMayChooseNone()) {
+                return null;
+            }
+
             // done button for "for up" choices only
             boolean canEndChoice = (modes.getSelectedModes().size() >= modes.getMinModes() && modes.getMaxPawPrints() == 0) ||
                     (modes.getSelectedPawPrints() >= modes.getMaxPawPrints() && modes.getMaxPawPrints() > 0) ||
