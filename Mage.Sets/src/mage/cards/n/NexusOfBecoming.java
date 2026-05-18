@@ -8,6 +8,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.DoubleFacedCard;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -75,6 +76,9 @@ class NexusOfBecomingEffect extends OneShotEffect {
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;
+        }
+        if (card instanceof DoubleFacedCard) { // DFCs are treated as their left half (front face) when not on the stack/in play.
+            card = ((DoubleFacedCard) card).getLeftHalfCard();
         }
         player.moveCards(card, Zone.EXILED, source, game);
         return new CreateTokenCopyTargetEffect(
