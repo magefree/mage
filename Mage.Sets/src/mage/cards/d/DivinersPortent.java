@@ -37,7 +37,7 @@ public final class DivinersPortent extends CardImpl {
 
         // 15+ | Scry X, then draw X cards.
         effect.addTableEntry(15, Integer.MAX_VALUE,
-                new ScryEffect(GetXValue.instance),
+                new ScryEffect(GetXValue.instance, false),
                 new DrawCardSourceControllerEffect(GetXValue.instance).concatBy(", then")
         );
     }

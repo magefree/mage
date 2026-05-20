@@ -62,7 +62,7 @@ class SplinterRadicalRatEffect extends ReplacementEffectImpl {
 
     SplinterRadicalRatEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "if a triggered ability of an Ninja you control triggers, that ability triggers an additional time";
+        staticText = "if an ability of a Ninja creature you control triggers, that ability triggers an additional time";
     }
 
     private SplinterRadicalRatEffect(final SplinterRadicalRatEffect effect) {
@@ -84,6 +84,7 @@ class SplinterRadicalRatEffect extends ReplacementEffectImpl {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         return permanent != null
                 && permanent.isControlledBy(source.getControllerId())
+                && permanent.isCreature(game)
                 && permanent.hasSubtype(SubType.NINJA, game);
     }
 

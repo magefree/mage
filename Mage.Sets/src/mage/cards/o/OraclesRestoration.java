@@ -22,7 +22,7 @@ public final class OraclesRestoration extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1, true));
-        this.getSpellAbility().addEffect(new GainLifeEffect(1).concatBy("and"));
+        this.getSpellAbility().addEffect(new GainLifeEffect(1).setText("and gain 1 life"));
     }
 
     private OraclesRestoration(final OraclesRestoration card) {

@@ -153,7 +153,7 @@ public final class StaticFilters {
         FILTER_CARD_CREATURE_A_GRAVEYARD.setLockedFilter(true);
     }
 
-    public static final FilterCard FILTER_CARD_NON_CREATURE = new FilterCard();
+    public static final FilterCard FILTER_CARD_NON_CREATURE = new FilterCard("noncreature card");
 
     static {
         FILTER_CARD_NON_CREATURE.add(Predicates.not(CardType.CREATURE.getPredicate()));

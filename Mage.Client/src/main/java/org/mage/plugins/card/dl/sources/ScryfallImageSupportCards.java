@@ -624,8 +624,12 @@ public class ScryfallImageSupportCards {
             add("TMC"); // Teenage Mutant Ninja Turtles Eternal
             add("PZA"); // Teenage Mutant Ninja Turtles Source Material
             add("SOS"); // Secrets of Strixhaven
+            add("SOC"); // Secrets of Strixhaven Commander
+            add("SOA"); // Secrets of Strixhaven Mystical Archive
             add("MSH"); // Marvel Super Heroes
             add("MSC"); // Marvel Super Heroes Commander
+            add("HOC"); // The Hobbit Commander
+            add("FRA"); // Reality Fracture
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards
@@ -738,6 +742,16 @@ public class ScryfallImageSupportCards {
             // normal cards
             put("SLD/Counterspell/99999SCTLR", "https://api.scryfall.com/cards/sld/SCTLR/"); // see issue 11157
             put("SLD/Viscera Seer/99999VS", "https://api.scryfall.com/cards/sld/VS/"); // see issue 11157
+            put("SLD/Deadly Dispute/1IFIYW", "https://api.scryfall.com/cards/sld/IFIYW-1/"); // see issue 11157
+            put("SLD/Lightning Bolt/2IFIYW", "https://api.scryfall.com/cards/sld/IFIYW-2/"); // see issue 11157
+            put("SLD/Thrill of Possibility/3IFIYW", "https://api.scryfall.com/cards/sld/IFIYW-3/"); // see issue 11157
+            put("SLD/Lightning Greaves/4IFIYW", "https://api.scryfall.com/cards/sld/IFIYW-4/"); // see issue 11157
+            put("SLD/Sol Ring/5IFIYW", "https://api.scryfall.com/cards/sld/IFIYW-5/"); // see issue 11157
+            put("SLD/Deadly Dispute/6IFIYW", "https://api.scryfall.com/cards/sld/IFIYW-6/"); // see issue 11157
+            put("SLD/Lightning Bolt/7IFIYW", "https://api.scryfall.com/cards/sld/IFIYW-7/"); // see issue 11157
+            put("SLD/Thrill of Possibility/8IFIYW", "https://api.scryfall.com/cards/sld/IFIYW-8/"); // see issue 11157
+            put("SLD/Lightning Greaves/9IFIYW", "https://api.scryfall.com/cards/sld/IFIYW-9/"); // see issue 11157
+            put("SLD/Sol Ring/10IFIYW", "https://api.scryfall.com/cards/sld/IFIYW-10/"); // see issue 11157
 
             // CALC - custom alchemy version of cards.
             put("CALC/C-Pillar of the Paruns", "https://api.scryfall.com/cards/dis/176/");

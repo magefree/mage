@@ -1,21 +1,22 @@
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AllianceAbility;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.GainsChoiceOfAbilitiesEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.MenaceAbility;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.filter.StaticFilters;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +44,7 @@ public final class WingnutBatOnTheBelfry extends CardImpl {
         ));
 
         // Whenever Wingnut attacks, each other attacking creature gets +1/+0 until end of turn.
-        this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURE, true)));
+        this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(1, 0, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURE, true)));
     }
 
     private WingnutBatOnTheBelfry(final WingnutBatOnTheBelfry card) {

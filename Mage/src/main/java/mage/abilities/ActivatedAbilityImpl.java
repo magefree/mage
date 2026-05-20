@@ -42,7 +42,6 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     protected Condition condition;
     protected TimingRule timing = TimingRule.INSTANT;
     protected TargetController mayActivate = TargetController.YOU;
-    protected UUID activatorId;
 
     protected ActivatedAbilityImpl(AbilityType abilityType, Zone zone) {
         super(abilityType, zone);
@@ -52,7 +51,6 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         super(ability);
         timing = ability.timing;
         mayActivate = ability.mayActivate;
-        activatorId = ability.activatorId;
         maxActivationsPerTurn = ability.maxActivationsPerTurn;
         maxActivationsPerGame = ability.maxActivationsPerGame;
         condition = ability.condition;
@@ -148,11 +146,6 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         }
 
         // all fine, can be activated
-        // TODO: WTF, must be rework to remove data change in canActivate call
-        //  (it can be called from any place by any player or card).
-        //  game.inCheckPlayableState() can't be a help here cause some cards checking activating status,
-        //  activatorId must be removed
-        this.activatorId = playerId;
 
         if (approvingObjects.isEmpty()) {
             return ActivationStatus.withoutApprovingObject(true);
@@ -185,10 +178,6 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     public ActivatedAbilityImpl setMayActivate(TargetController mayActivate) {
         this.mayActivate = mayActivate;
         return this;
-    }
-
-    public UUID getActivatorId() {
-        return this.activatorId;
     }
 
     public TimingRule getTiming() {

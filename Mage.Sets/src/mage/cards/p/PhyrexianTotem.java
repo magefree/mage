@@ -33,11 +33,11 @@ public final class PhyrexianTotem extends CardImpl {
         // {tap}: Add {B}.
         this.addAbility(new BlackManaAbility());
 
-        // {2}{B}: {this} becomes a 5/5 black Horror artifact creature with trample until end of turn.
+        // {2}{B}: {this} becomes a 5/5 black Phyrexian Horror artifact creature with trample until end of turn.
         this.addAbility(new SimpleActivatedAbility(
             new BecomesCreatureSourceEffect(
                 new CreatureToken(
-                    5, 5, "5/5 black Horror artifact creature with trample", SubType.HORROR
+                    5, 5, "5/5 black Phyrexian Horror artifact creature with trample", SubType.PHYREXIAN, SubType.HORROR
                 ).withColor("B").withType(CardType.ARTIFACT).withAbility(TrampleAbility.getInstance()),
                 CardType.ARTIFACT,
                 Duration.EndOfTurn

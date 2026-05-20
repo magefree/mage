@@ -10,6 +10,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
@@ -36,10 +37,11 @@ public final class ExplodingBarrel extends CardImpl {
 
         // {8}, {T}, Sacrifice this artifact: It deals 20 damage to target creature. This ability costs {1} less to activate for each pressure counter on this artifact. Activate only as sorcery.
         Ability ability2 = new ActivateAsSorceryActivatedAbility(
-                new DamageTargetEffect(20), new ManaCostsImpl<>("{8}"));
+                new DamageTargetEffect(20, "it"), new ManaCostsImpl<>("{8}"));
         ability2.addCost(new TapSourceCost());
         ability2.addCost(new SacrificeSourceCost());
         ability2.addTarget(new TargetCreaturePermanent());
+        ability2.addEffect(new InfoEffect("This ability costs {1} less to activate for each pressure counter on this artifact"));
         this.addAbility(ability2.setCostAdjuster(ExplodingBarrelAdjuster.instance));
     }
 

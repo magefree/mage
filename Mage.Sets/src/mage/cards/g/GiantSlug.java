@@ -54,7 +54,7 @@ class GiantSlugEffect extends OneShotEffect {
 
     GiantSlugEffect() {
         super(Outcome.AddAbility);
-        this.staticText = "At the beginning of your next upkeep, choose a basic land type. " +
+        this.staticText = "choose a basic land type. " +
                 "{this} gains landwalk of the chosen type until the end of that turn";
     }
 

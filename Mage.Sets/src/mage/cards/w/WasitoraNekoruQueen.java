@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -12,17 +11,17 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WasitoraCatDragonToken;
 import mage.players.Player;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetSacrifice;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,7 +62,7 @@ class WasitoraNekoruQueenEffect extends OneShotEffect {
 
     WasitoraNekoruQueenEffect() {
         super(Outcome.Benefit);
-        staticText = "that player sacrifices a creature. If the player can't, you create a 3/3 black, red, and green Cat Dragon creature token with flying";
+        staticText = "that player sacrifices a creature of their choice. If the player can't, you create a 3/3 black, red, and green Cat Dragon creature token with flying";
     }
 
     private WasitoraNekoruQueenEffect(final WasitoraNekoruQueenEffect effect) {

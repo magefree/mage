@@ -30,7 +30,6 @@ public class Pauper extends Constructed {
         banned.add("Arcum's Astrolabe");
         banned.add("Atog");
         banned.add("Basking Broodscale");
-        banned.add("Bonder's Ornament");
         banned.add("Chatterstorm");
         banned.add("Cloud of Faeries");
         banned.add("Cloudpost");

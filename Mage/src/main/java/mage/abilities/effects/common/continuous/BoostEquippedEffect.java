@@ -13,15 +13,13 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
-import java.util.Optional;
-
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class BoostEquippedEffect extends ContinuousEffectImpl {
 
-    private DynamicValue power;
-    private DynamicValue toughness;
+    private final DynamicValue power;
+    private final DynamicValue toughness;
     private boolean fixedTarget = false;
 
     public BoostEquippedEffect(int power, int toughness) {
@@ -75,13 +73,7 @@ public class BoostEquippedEffect extends ContinuousEffectImpl {
         if (fixedTarget) {
             creature = game.getPermanent(getTargetPointer().getFirst(game, source));
         } else {
-            creature = Optional
-                    .ofNullable(source)
-                    .map(Ability::getSourceId)
-                    .map(game::getPermanent)
-                    .map(Permanent::getAttachedTo)
-                    .map(game::getPermanent)
-                    .orElse(null);
+            creature = source.getPermanentSourceAttachedToIfItStillExists(game);
         }
         if (creature != null) {
             creature.addPower(power.calculate(game, source, this));

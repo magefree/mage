@@ -38,7 +38,7 @@ public final class DeekahFractalTheorist extends CardImpl {
 
         // Magecraft — Whenever you cast or copy an instant or sorcery spell, create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it, where X is that spell's mana value.
         this.addAbility(new MagecraftAbility(FractalToken.getEffect(
-                DeekahFractalTheoristValue.instance, "Put X +1/+1 counters on it, " +
+                DeekahFractalTheoristValue.instance, ". Put X +1/+1 counters on it, " +
                         "where X is that spell's mana value"
         )));
 

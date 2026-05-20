@@ -1517,9 +1517,10 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     protected boolean playManaAbility(ActivatedManaAbilityImpl ability, Game game) {
         int bookmark = game.bookmarkState();
-        //20260116 - 109.4a
-        //The controller of a mana ability is determined as though it were on the stack.
-        ability.newId();
+        // 20260116 - 109.4a
+        // The controller of a mana ability is determined as though it were on the stack.
+        // Don't generate a new id because it's not necessary and breaks mana events, see #14822
+        // ability.newId();
         ability.setControllerId(playerId);
         if (ability.activate(game, false) && ability.resolve(game)) {
             if (ability.isUndoPossible()) {
@@ -1573,6 +1574,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TAKE_SPECIAL_ACTION,
                 action.getId(), action, getId()))) {
             int bookmark = game.bookmarkState();
+            action.setControllerId(playerId); // for Volrath's Curse / Lost in Thought
             if (action.activate(game, false)) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TAKEN_SPECIAL_ACTION,
                         action.getId(), action, getId()));
@@ -1595,6 +1597,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TAKE_SPECIAL_MANA_PAYMENT,
                 action.getId(), action, getId()))) {
             int bookmark = game.bookmarkState();
+            action.setControllerId(playerId);
             if (action.activate(game, false)) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TAKEN_SPECIAL_MANA_PAYMENT,
                         action.getId(), action, getId()));
@@ -5310,7 +5313,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
                 if (Zone.EXILED.equals(game.getState().getZone(card.getId()))) { // only if target zone was not replaced
                     String visibleName;
-                    if (withName) {
+                    if (withName && !(card instanceof PermanentToken)) {
                         // warning, withName param used to forced name show of the face down card (see 708.9.)
                         if (card.getName().isEmpty()) {
                             throw new IllegalStateException("Wrong code usage: method must find real card name, but found nothing", new Throwable());

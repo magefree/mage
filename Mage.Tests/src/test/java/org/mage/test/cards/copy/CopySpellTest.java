@@ -979,4 +979,22 @@ public class CopySpellTest extends CardTestPlayerBase {
         assertTapped(engine, true);
         assertLife(playerA, 20 + 1);
     }
+
+    @Test
+    public void testCopyOnStack() {
+        addCard(Zone.BATTLEFIELD, playerA, "Silverquill, the Disputant");
+        addCard(Zone.HAND, playerA, "Transpose");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Transpose");
+        setChoice(playerA, true);
+        setChoice(playerA, "Balduvian Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Wizard Token", 1);
+    }
 }

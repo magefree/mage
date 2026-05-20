@@ -67,7 +67,7 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = null;
+        Permanent permanent;
         if (getAffectedObjectsSet()) {
             permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent == null) {
@@ -75,10 +75,7 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
                 return true;
             }
         } else {
-            Permanent equipment = game.getPermanent(source.getSourceId());
-            if (equipment != null && equipment.getAttachedTo() != null) {
-                permanent = game.getPermanent(equipment.getAttachedTo());
-            }
+            permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
         }
         if (permanent != null) {
             permanent.addPower(power.calculate(game, source, this));

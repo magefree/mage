@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
  */
 public final class RatKingVerminister extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.RAT);
+    private static final FilterPermanent filter = new FilterPermanent(SubType.RAT, "Rats");
 
     public RatKingVerminister(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

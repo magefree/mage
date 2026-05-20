@@ -31,7 +31,7 @@ import java.util.UUID;
  */
 public final class RagostDeftGastronaut extends CardImpl {
 
-    private static final Condition condition = new YouGainedLifeCondition();
+    private static final Condition condition = YouGainedLifeCondition.getZero();
     private static final Hint hint = new ConditionHint(condition);
 
     public RagostDeftGastronaut(UUID ownerId, CardSetInfo setInfo) {

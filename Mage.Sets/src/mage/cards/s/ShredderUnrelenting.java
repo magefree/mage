@@ -37,7 +37,7 @@ public final class ShredderUnrelenting extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Whenever Shredder enters or attacks, another target creature you control gains deathtouch until end of turn.
-        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new GainAbilityTargetEffect(DeathtouchAbility.getInstance()), true);
+        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new GainAbilityTargetEffect(DeathtouchAbility.getInstance()), false);
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
     }

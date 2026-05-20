@@ -6,6 +6,8 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.CompanionAbility;
 import mage.abilities.keyword.CompanionCondition;
 import mage.abilities.mana.ConditionalColoredManaAbility;
@@ -106,7 +108,14 @@ class JeganthaManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source, UUID originalId, Cost costsToPay) {
-        // TODO find a better method.  this one forces the user to pay off the generic mana before continuing.
-        return source.getManaCostsToPay().getUnpaid().getMana().getGeneric() == 0;
+        if (costsToPay instanceof ManaCosts) {
+            // allowed to contribute towards any overall costs which contain colored costs
+            return ((ManaCosts)costsToPay).getMana().countColored() > 0;
+        }
+        if (costsToPay instanceof ManaCost) {
+            // not allowed to pay for specific cost components consisting of generic mana
+            return ((ManaCost)costsToPay).getUnpaid().getMana().getGeneric() == 0;
+        }
+        return false;
     }
 }

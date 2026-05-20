@@ -1,23 +1,24 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.RedMutantToken;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +40,7 @@ public final class SallyPrideLionessLeader extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Sally Pride enters, create X 2/2 red Mutant creature tokens, where X is the number of nontoken creatures you control.
-        this.addAbility(new EntersBattlefieldAbility(new CreateTokenEffect(new RedMutantToken(), xValue)).addHint(hint));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new RedMutantToken(), xValue)).addHint(hint));
 
         // Whenever Sally Pride attacks, put a +1/+1 counter on each creature you control.
         this.addAbility(new AttacksTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE)));

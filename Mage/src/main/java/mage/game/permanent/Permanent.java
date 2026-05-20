@@ -85,6 +85,10 @@ public interface Permanent extends Card, Controllable {
 
     void setPrototyped(boolean value);
 
+    boolean isPrepared();
+
+    void setPrepared(boolean prepared, Game game);
+
     int getClassLevel();
 
     /**
@@ -294,9 +298,19 @@ public interface Permanent extends Card, Controllable {
 
     int getBlocking();
 
-    void setAttacking(boolean attacking);
+    void setAttacking(MageObjectReference defender);
+
+    MageObjectReference getAttacking();
 
     void setBlocking(int blocking);
+
+    void addBlocking(UUID attackerId, Game game);
+
+    void removeBlocking(UUID attackerId, Game game);
+
+    void clearBlocking();
+
+    Set<MageObjectReference> getBlockingRefs();
 
     int getMaxBlocks();
 
@@ -357,6 +371,8 @@ public interface Permanent extends Card, Controllable {
      */
     boolean canUseActivatedAbilities(Game game);
 
+    boolean removeFromCombat(Game game);
+
     /**
      * Removes this permanent from combat
      *
@@ -365,8 +381,6 @@ public interface Permanent extends Card, Controllable {
      *                  false if removed because it left the battlefield
      * @return true if permanent was attacking or blocking
      */
-    boolean removeFromCombat(Game game);
-
     boolean removeFromCombat(Game game, boolean withEvent);
 
     boolean isDeathtouched();

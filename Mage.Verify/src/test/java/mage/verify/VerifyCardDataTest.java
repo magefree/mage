@@ -10,6 +10,7 @@ import mage.abilities.common.*;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.ColorsOfManaSpentToCastCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.effects.common.FightTargetsEffect;
@@ -179,7 +180,7 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
-        subtypesToIgnore.add("Sorcerer"); // temporary
+        subtypesToIgnore.add("Book"); // temporary
 
         // number
         // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
@@ -187,7 +188,6 @@ public class VerifyCardDataTest {
         // rarity
         // skipListAddName(SKIP_LIST_RARITY, set, cardName);
         skipListAddName(SKIP_LIST_RARITY, "CMR", "The Prismatic Piper"); // Collation is not yet set up for CMR https://www.lethe.xyz/mtg/collation/cmr.html
-        skipListAddName(SKIP_LIST_RARITY, "TLE", "Teferi's Protection"); // temporary
 
         // missing abilities
         // skipListAddName(SKIP_LIST_MISSING_ABILITIES, set, cardName);
@@ -984,6 +984,10 @@ public class VerifyCardDataTest {
         ignoreBoosterSets.add("Unhinged");
         ignoreBoosterSets.add("Unstable");
         ignoreBoosterSets.add("Unfinity");
+        // spellbook boosters, not for draft
+        ignoreBoosterSets.add("Signature Spellbook: Jace");
+        ignoreBoosterSets.add("Signature Spellbook: Gideon");
+        ignoreBoosterSets.add("Signature Spellbook: Chandra");
         // other
         ignoreBoosterSets.add("Secret Lair Drop"); // cards shop
         ignoreBoosterSets.add("Ugin's Fate"); // promo, not draftable
@@ -1158,10 +1162,10 @@ public class VerifyCardDataTest {
                 if (ignoreBoosterSets.contains(set.getName())) {
                     continue;
                 }
-                // error example: wrong booster settings (set MUST HAVE booster, but haven't) - 2020 - J22 - Jumpstart 2022 - boosters: [jumpstart]
-                errorsList.add(String.format("Error: wrong booster settings (set %s booster, but %s) - %s%s",
-                        (needBooster ? "MUST HAVE" : "MUST HAVEN'T"),
-                        (set.hasBoosters() ? "have" : "haven't"),
+                // error example: wrong booster settings (set must have boosters, but it does not) - 2020 - J22 - Jumpstart 2022 - boosters: [jumpstart]
+                errorsList.add(String.format("Error: wrong booster settings (set %s have boosters, but it %s) - %s%s",
+                    (needBooster ? "must" : "must not"),
+                    (set.hasBoosters() ? "does" : "does not"),
                         set.getReleaseYear() + " - " + set.getCode() + " - " + set.getName(),
                         (jsonSet.booster == null ? "" : " - boosters: " + jsonSet.booster.keySet())
                 ));
@@ -2575,6 +2579,7 @@ public class VerifyCardDataTest {
         cardHints.put(MonarchHint.class, "the monarch");
         cardHints.put(InitiativeHint.class, "the initiative");
         cardHints.put(CurrentDungeonHint.class, "venture into");
+        cardHints.put(ColorsOfManaSpentToCastCount.getHint().getClass(), "Converge —");
         for (Class hintClass : cardHints.keySet()) {
             String lookupText = cardHints.get(hintClass);
             boolean needHint = ref.text.contains(lookupText);

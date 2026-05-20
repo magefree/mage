@@ -80,7 +80,7 @@ class AnheloThePainterGainCausalityEffect extends ContinuousEffectImpl {
         boolean applied = false;
         for (StackObject stackObject : game.getStack()) {
             if (!(stackObject instanceof Spell)
-                    || stackObject.isCopy()
+                    || !((Spell)stackObject).wasCast()
                     || !stackObject.isControlledBy(source.getControllerId())
                     || !AnheloThePainterWatcher.checkSpell(stackObject, game) ) {
                 continue;
@@ -128,7 +128,7 @@ class AnheloThePainterWatcher extends Watcher {
     }
 
     static boolean checkSpell(StackObject stackObject, Game game) {
-        if (stackObject.isCopy() || !(stackObject instanceof Spell)) {
+        if (!(stackObject instanceof Spell) || !((Spell)stackObject).wasCast()) {
             return false;
         }
 

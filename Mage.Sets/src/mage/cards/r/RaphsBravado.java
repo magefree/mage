@@ -24,7 +24,7 @@ public final class RaphsBravado extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(new BoostAllEffect(
                 1, 0, Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_ATTACKING_CREATURES, false
-        ), MyTurnCondition.instance, "uring your turn, attacking creatures get +1/+0")));
+        ), MyTurnCondition.instance, "During your turn, attacking creatures get +1/+0")));
     }
 
     private RaphsBravado(final RaphsBravado card) {

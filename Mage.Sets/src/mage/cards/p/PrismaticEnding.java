@@ -5,6 +5,7 @@ import mage.abilities.dynamicvalue.common.ColorsOfManaSpentToCastCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -24,6 +25,7 @@ public final class PrismaticEnding extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{W}");
 
         // Converge — Exile target nonland permanent if its mana value is less than or equal to the number of colors of mana spent to cast this spell.
+        this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE).addHint(ColorsOfManaSpentToCastCount.getHint());
         this.getSpellAbility().addEffect(new PrismaticEndingEffect());
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }

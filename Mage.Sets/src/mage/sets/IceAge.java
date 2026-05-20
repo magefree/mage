@@ -35,6 +35,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Anarchy", 170, Rarity.UNCOMMON, mage.cards.a.Anarchy.class, RETRO_ART));
         cards.add(new SetCardInfo("Arctic Foxes", 2, Rarity.COMMON, mage.cards.a.ArcticFoxes.class, RETRO_ART));
         cards.add(new SetCardInfo("Arcum's Sleigh", 309, Rarity.UNCOMMON, mage.cards.a.ArcumsSleigh.class, RETRO_ART));
+        cards.add(new SetCardInfo("Arcum's Weathervane", 310, Rarity.UNCOMMON, mage.cards.a.ArcumsWeathervane.class));
         cards.add(new SetCardInfo("Arenson's Aura", 3, Rarity.COMMON, mage.cards.a.ArensonsAura.class, RETRO_ART));
         cards.add(new SetCardInfo("Armor of Faith", 4, Rarity.COMMON, mage.cards.a.ArmorOfFaith.class, RETRO_ART));
         cards.add(new SetCardInfo("Arnjlot's Ascent", 57, Rarity.COMMON, mage.cards.a.ArnjlotsAscent.class, RETRO_ART));
@@ -55,6 +56,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Blinking Spirit", 8, Rarity.RARE, mage.cards.b.BlinkingSpirit.class, RETRO_ART));
         cards.add(new SetCardInfo("Blizzard", 227, Rarity.RARE, mage.cards.b.Blizzard.class, RETRO_ART));
         cards.add(new SetCardInfo("Blue Scarab", 9, Rarity.UNCOMMON, mage.cards.b.BlueScarab.class, RETRO_ART));
+        cards.add(new SetCardInfo("Bone Shaman", 176, Rarity.COMMON, mage.cards.b.BoneShaman.class));
         cards.add(new SetCardInfo("Brainstorm", 61, Rarity.COMMON, mage.cards.b.Brainstorm.class, RETRO_ART));
         cards.add(new SetCardInfo("Brand of Ill Omen", 177, Rarity.RARE, mage.cards.b.BrandOfIllOmen.class, RETRO_ART));
         cards.add(new SetCardInfo("Breath of Dreams", 62, Rarity.UNCOMMON, mage.cards.b.BreathOfDreams.class, RETRO_ART));

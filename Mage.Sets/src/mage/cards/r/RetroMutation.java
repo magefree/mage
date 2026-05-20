@@ -46,7 +46,7 @@ public final class RetroMutation extends CardImpl {
             "Enchanted creature is a Turtle with base power and toughness 0/1",
             Duration.WhileOnBattlefield
         ));
-        ability.addEffect(new CantAttackAttachedEffect(AttachmentType.AURA).setText("It can't attack "));
+        ability.addEffect(new CantAttackAttachedEffect(AttachmentType.AURA).setText("It can't attack"));
         ability.addEffect(new LoseAllAbilitiesAttachedEffect(AttachmentType.AURA).setText("and loses all abilities"));
         this.addAbility(ability);
     }

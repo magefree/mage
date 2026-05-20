@@ -26,7 +26,7 @@ public final class MindTransferProtocol extends CardImpl {
         this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(
             new CreatureToken(4, 5).withType(CardType.ARTIFACT),
             false, false, Duration.EndOfTurn
-        ));
+        ).setText("Until end of turn, target artifact or creature becomes an artifact creature with base power and toughness 4/5"));
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));

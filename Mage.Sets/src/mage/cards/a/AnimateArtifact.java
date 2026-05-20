@@ -74,11 +74,7 @@ class AnimateArtifactContinuousEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         // Not sure, if this is layerwise handled absolutely correctly
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment == null) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
         if (permanent == null || permanent.isCreature(game)) {
             return false;
         }

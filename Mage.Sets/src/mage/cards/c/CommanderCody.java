@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class CommanderCody extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-token Trooper creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken Trooper creatures");
 
     static {
         filter.add(TokenPredicate.FALSE);

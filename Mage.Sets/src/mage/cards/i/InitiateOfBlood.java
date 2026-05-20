@@ -14,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -33,11 +33,20 @@ public final class InitiateOfBlood extends CardImpl {
         this.flipCard = true;
         this.flipCardName = "Goka the Unjust";
 
-        // {T}: Initiate of Blood deals 1 damage to target creature that was dealt damage this turn. 
+        Ability flipAbility = new SimpleActivatedAbility(new DamageTargetEffect(4), new TapSourceCost());
+        flipAbility.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_DAMAGED_THIS_TURN));
+
+        CreatureToken flipToken = new CreatureToken(4, 4, "", SubType.OGRE, SubType.SHAMAN)
+            .withName("Goka the Unjust")
+            .withColor("R")
+            .withSuperType(SuperType.LEGENDARY)
+            .withAbility(flipAbility);
+
+        // {T}: Initiate of Blood deals 1 damage to target creature that was dealt damage this turn.
         // When that creature dies this turn, flip Initiate of Blood.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new WhenTargetDiesDelayedTriggeredAbility(
-                new FlipSourceEffect(new GokaTheUnjust()).setText("flip {this}")
+                new FlipSourceEffect(flipToken).setText("flip {this}")
         )));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_DAMAGED_THIS_TURN));
         this.addAbility(ability);
@@ -50,31 +59,5 @@ public final class InitiateOfBlood extends CardImpl {
     @Override
     public InitiateOfBlood copy() {
         return new InitiateOfBlood(this);
-    }
-}
-
-class GokaTheUnjust extends TokenImpl {
-
-    GokaTheUnjust() {
-        super("Goka the Unjust", "");
-        this.supertype.add(SuperType.LEGENDARY);
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add(SubType.OGRE, SubType.SHAMAN);
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-
-        // {T}: Goka the Unjust deals 4 damage to target creature that was dealt damage this turn.
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(4), new TapSourceCost());
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_DAMAGED_THIS_TURN));
-        this.addAbility(ability);
-    }
-
-    private GokaTheUnjust(final GokaTheUnjust token) {
-        super(token);
-    }
-
-    public GokaTheUnjust copy() {
-        return new GokaTheUnjust(this);
     }
 }

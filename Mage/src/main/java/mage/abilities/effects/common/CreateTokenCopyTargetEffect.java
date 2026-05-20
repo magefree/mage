@@ -18,13 +18,13 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
-import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.functions.CopyApplier;
 import mage.util.functions.CopyTokenFunction;
 import mage.util.functions.EmptyCopyApplier;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -160,77 +160,76 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID targetId;
-        if (getTargetPointer() instanceof FixedTarget) {
-            targetId = ((FixedTarget) getTargetPointer()).getTarget();
-        } else {
-            targetId = getTargetPointer().getFirst(game, source);
-        }
-        Permanent permanent;
+        List<Permanent> targetList = new ArrayList<>();
+        List<Token> creationList = new ArrayList<>();
         if (savedPermanent != null) {
-            permanent = savedPermanent;
+            targetList.add(savedPermanent);
         } else if (useLKI) {
-            permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
+            targetList.add(getTargetPointer().getFirstTargetPermanentOrLKI(game, source));
         } else {
-            permanent = game.getPermanentOrLKIBattlefield(targetId);
+            targetList = getTargetPointer().getTargets(game, source).stream().map(game::getPermanentOrLKIBattlefield).collect(Collectors.toList());
         }
-
-        // can target card or permanent
-        Card copyFrom = null;
-        CopyApplier applier = null;
-        if (permanent != null) {
-            // handle copies of copies
-            Permanent copyFromPermanent = permanent;
-            for (ContinuousEffect effect : game.getState().getContinuousEffects().getLayeredEffects(game)) {
-                if (effect instanceof CopyEffect) {
-                    CopyEffect copyEffect = (CopyEffect) effect;
-                    // there is another copy effect that our targetPermanent copies stats from
-                    if (copyEffect.getSourceId().equals(permanent.getId())) {
-                        MageObject object = ((CopyEffect) effect).getTarget();
-                        if (object instanceof Permanent) {
-                            copyFromPermanent = (Permanent) object;
-                            if (copyEffect.getApplier() != null) {
-                                applier = copyEffect.getApplier();
+        for (Permanent permanent: targetList) {
+            // can target card or permanent
+            Card copyFrom;
+            CopyApplier applier = null;
+            if (permanent != null) {
+                // handle copies of copies
+                Permanent copyFromPermanent = permanent;
+                for (ContinuousEffect effect : game.getState().getContinuousEffects().getLayeredEffects(game)) {
+                    if (effect instanceof CopyEffect) {
+                        CopyEffect copyEffect = (CopyEffect) effect;
+                        // there is another copy effect that our targetPermanent copies stats from
+                        if (copyEffect.getSourceId().equals(permanent.getId())) {
+                            MageObject object = ((CopyEffect) effect).getTarget();
+                            if (object instanceof Permanent) {
+                                copyFromPermanent = (Permanent) object;
+                                if (copyEffect.getApplier() != null) {
+                                    applier = copyEffect.getApplier();
+                                }
                             }
                         }
                     }
                 }
-            }
-            // check if permanent was copying, but copy effect is no longer active
-            if (applier == null) {
-                if (permanent.isCopy() && permanent.getCopyFrom() instanceof Permanent) {
-                    copyFromPermanent = (Permanent) permanent.getCopyFrom();
+                // check if permanent was copying, but copy effect is no longer active
+                if (applier == null) {
+                    if (permanent.isCopy() && permanent.getCopyFrom() instanceof Permanent) {
+                        copyFromPermanent = (Permanent) permanent.getCopyFrom();
+                    }
+                    applier = new EmptyCopyApplier();
                 }
+                copyFrom = copyFromPermanent;
+            } else {
+                copyFrom = game.getCard(getTargetPointer().getFirst(game, source));
                 applier = new EmptyCopyApplier();
             }
-            copyFrom = copyFromPermanent;
-        } else {
-            copyFrom = game.getCard(getTargetPointer().getFirst(game, source));
-            applier = new EmptyCopyApplier();
-        }
 
-        if (copyFrom == null) {
-            return false;
-        }
+            if (copyFrom == null) {
+                continue;
+            }
 
-        // create token and modify all attributes permanently (without game usage)
-        Token token = CopyTokenFunction.createTokenCopy(copyFrom, game); // needed so that entersBattlefield triggered abilities see the attributes (e.g. Master Biomancer)
-        applier.apply(game, token, source, targetId);
-        // the active face should have the modified attributes
-        if (token.isEntersTransformed()) {
-            applyAdditionsToToken(token.getBackFace());
-        } else {
-            applyAdditionsToToken(token);
+            // create token and modify all attributes permanently (without game usage)
+            Token token = CopyTokenFunction.createTokenCopy(copyFrom, game); // needed so that entersBattlefield triggered abilities see the attributes (e.g. Master Biomancer)
+            applier.apply(game, token, source, copyFrom.getId());
+            // the active face should have the modified attributes
+            if (token.isEntersTransformed()) {
+                applyAdditionsToToken(token.getBackFace());
+            } else {
+                applyAdditionsToToken(token);
+            }
+            creationList.add(token);
         }
-
-        token.putOntoBattlefield(number, game, source, playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedPlayer, attachedTo);
-        for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
-            Permanent tokenPermanent = game.getPermanent(tokenId);
-            if (tokenPermanent != null) {
-                addedTokenPermanents.add(tokenPermanent);
-                // TODO: Workaround to add counters to all created tokens, necessary for correct interactions with cards like Chatterfang, Squirrel General and Ochre Jelly / Printlifter Ooze. See #10786
-                if (counter != null && numberOfCounters > 0) {
-                    tokenPermanent.addCounters(counter.createInstance(numberOfCounters), source.getControllerId(), source, game);
+        if (!creationList.isEmpty()) {
+            Token firstToken = creationList.get(0);
+            firstToken.putOntoBattlefield(number, game, source, playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedPlayer, attachedTo, true, creationList);
+            for (UUID tokenId : firstToken.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
+                Permanent tokenPermanent = game.getPermanent(tokenId);
+                if (tokenPermanent != null) {
+                    addedTokenPermanents.add(tokenPermanent);
+                    // TODO: Workaround to add counters to all created tokens, necessary for correct interactions with cards like Chatterfang, Squirrel General and Ochre Jelly / Printlifter Ooze. See #10786
+                    if (counter != null && numberOfCounters > 0) {
+                        tokenPermanent.addCounters(counter.createInstance(numberOfCounters), source.getControllerId(), source, game);
+                    }
                 }
             }
         }

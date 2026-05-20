@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class WartimeProtestors extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.ALLY, "another Ally you control");
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.ALLY, "another Ally");
 
     static {
         filter.add(AnotherPredicate.instance);

@@ -7,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.Pest11GainLifeToken;
+import mage.game.permanent.token.PestBlackGreenDiesToken;
 
 import java.util.UUID;
 
@@ -25,7 +25,7 @@ public final class ProfessorOfZoomancy extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Professor of Zoomancy enters the battlefield, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new Pest11GainLifeToken())));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PestBlackGreenDiesToken())));
     }
 
     private ProfessorOfZoomancy(final ProfessorOfZoomancy card) {

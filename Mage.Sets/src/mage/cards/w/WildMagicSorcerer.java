@@ -78,14 +78,12 @@ class WildMagicSorcererGainCascadeFirstSpellCastFromExileEffect extends Continuo
         }
 
         for (StackObject stackObject : game.getStack()) {
-            // only spells cast, so no copies of spells
-            if ((stackObject instanceof Spell)
-                    && !stackObject.isCopy()
-                    && stackObject.isControlledBy(source.getControllerId())) {
+            if ((stackObject instanceof Spell) && stackObject.isControlledBy(source.getControllerId())) {
                 Spell spell = (Spell) stackObject;
-
-                if (FirstSpellCastFromExileEachTurnCondition.instance.apply(game, source)) {
-                    game.getState().addOtherAbility(spell.getCard(), cascadeAbility);
+                if (spell.wasCast()) {
+                    if (FirstSpellCastFromExileEachTurnCondition.instance.apply(game, source)) {
+                        game.getState().addOtherAbility(spell.getCard(), cascadeAbility);
+                    }
                 }
             }
         }
@@ -134,8 +132,7 @@ class WildMagicSorcererWatcher extends Watcher {
     }
 
     static boolean checkSpell(StackObject stackObject, Game game) {
-        if (stackObject.isCopy()
-                || !(stackObject instanceof Spell)) {
+        if (!(stackObject instanceof Spell) || !((Spell)stackObject).wasCast()) {
             return false;
         }
         WildMagicSorcererWatcher watcher = game.getState().getWatcher(WildMagicSorcererWatcher.class);

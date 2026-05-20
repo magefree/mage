@@ -449,18 +449,13 @@ public abstract class AbilityImpl implements Ability {
             game.getContinuousEffects().costModification(this, game);
         }
 
-        UUID activatorId = controllerId;
-        if ((this instanceof ActivatedAbilityImpl) && ((ActivatedAbilityImpl) this).getActivatorId() != null) {
-            activatorId = ((ActivatedAbilityImpl) this).getActivatorId();
-        }
-
         //20100716 - 601.2f  (noMana is not used here, because mana costs were cleared for this ability before adding additional costs and applying cost modification effects)
-        if (!getManaCostsToPay().pay(this, game, this, activatorId, false, null)) {
+        if (!getManaCostsToPay().pay(this, game, this, controllerId, false, null)) {
             return false; // cancel during mana payment
         }
 
         //20100716 - 601.2g
-        if (!getCosts().pay(this, game, this, activatorId, noMana, null)) {
+        if (!getCosts().pay(this, game, this, controllerId, noMana, null)) {
             logger.debug("activate failed - non mana costs");
             return false;
         }
@@ -648,7 +643,7 @@ public abstract class AbilityImpl implements Ability {
             if (!(variableCost instanceof VariableManaCost) && !((Cost) variableCost).isPaid()) {
                 int xValue = variableCost.announceXValue(this, game);
                 Cost fixedCost = variableCost.getFixedCostsFromAnnouncedValue(xValue);
-                addCost(fixedCost);
+                addCost(fixedCost, this.getCosts().indexOf(variableCost));
                 // set the xcosts to paid
                 variableCost.setAmount(xValue, xValue, false);
                 ((Cost) variableCost).setPaid();
@@ -1097,6 +1092,10 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public void addCost(Cost cost) {
+        this.addCost(cost, -1);
+    }
+
+    public void addCost(Cost cost, int index) {
         if (cost == null) {
             return;
         }
@@ -1112,7 +1111,11 @@ public abstract class AbilityImpl implements Ability {
                 manaCosts.add((ManaCost) cost);
                 manaCostsToPay.add((ManaCost) cost);
             } else {
-                costs.add(cost);
+                if (index < 0) {
+                    costs.add(cost);
+                } else {
+                    costs.add(index, cost);
+                }
             }
         }
     }
@@ -1733,6 +1736,19 @@ public abstract class AbilityImpl implements Ability {
             permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, getStackMomentSourceZCC());
         }
         return permanent;
+    }
+
+    @Override
+    public Permanent getPermanentSourceAttachedToIfItStillExists(Game game) {
+        Permanent aura = getSourcePermanentIfItStillExists(game);
+        if (aura == null) {
+            return null;
+        }
+        Permanent enchanted = game.getPermanent(aura.getAttachedTo());
+        if (enchanted == null || enchanted.getZoneChangeCounter(game) != aura.getAttachedToZoneChangeCounter()) {
+            return null;
+        }
+        return enchanted;
     }
 
     @Override

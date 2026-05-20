@@ -20,7 +20,7 @@ public enum AffinityType {
     CREATURES(new FilterControlledCreaturePermanent("creatures"), CreaturesYouControlHint.instance),
     ARTIFACT_CREATURES(AffinityFilters.ARTIFACT_CREATURES),
     ENCHANTMENTS(new FilterControlledEnchantmentPermanent("enchantments")),
-    PLANESWALKERS(new FilterControlledPlaneswalkerPermanent("planeswalker")),
+    PLANESWALKERS(new FilterControlledPlaneswalkerPermanent("planeswalkers")),
 
     EQUIPMENT(new FilterControlledPermanent(SubType.EQUIPMENT, "Equipment"), "Equipment"),
     AURAS(new FilterControlledPermanent(SubType.AURA, "Auras")),

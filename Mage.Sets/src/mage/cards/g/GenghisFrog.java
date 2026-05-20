@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.MutagenToken;
 
 import java.util.UUID;
@@ -20,7 +19,7 @@ import java.util.UUID;
  */
 public final class GenghisFrog extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.MUTANT);
+    private static final FilterPermanent filter = new FilterPermanent(SubType.MUTANT);
 
     public GenghisFrog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{U}");

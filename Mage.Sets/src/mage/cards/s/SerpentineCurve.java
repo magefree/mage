@@ -30,7 +30,7 @@ public final class SerpentineCurve extends CardImpl {
 
         // Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it, where X is one plus the total number of instant and sorcery cards you own in exile and in your graveyard.
         this.getSpellAbility().addEffect(FractalToken.getEffect(
-                xValue, "Put X +1/+1 counters on it, where X is one plus the total number " +
+                xValue, ". Put X +1/+1 counters on it, where X is one plus the total number " +
                         "of instant and sorcery cards you own in exile and in your graveyard"
         ));
         this.getSpellAbility().addHint(hint);

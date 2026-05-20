@@ -40,6 +40,8 @@ public enum MageIdentifier {
     LockeTreasureHunterWatcher,
     TheFourthDoctorWatcher,
     AccessMazeWatcher,
+    ZaffaiAndTheTempestsWatcher("Without paying manacost"),
+    MikeyAndDonWatcher,
 
     // ----------------------------//
     //       alternate casts       //
@@ -81,7 +83,6 @@ public enum MageIdentifier {
     MeTheImmortalAlternateCast,
     WithoutPayingManaCostAlternateCast,
     AlurenAlternateCast,
-    OfferingAlternateCast,
     TheRuinousPowersAlternateCast,
     FiresOfMountDoomAlternateCast,
     PrimalPrayersAlternateCast,

@@ -25,7 +25,7 @@ import mage.target.TargetPermanent;
  */
 public final class TurtleLair extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a Turtle or Ninja spell");
+    private static final FilterSpell filter = new FilterSpell("a Ninja or Turtle spell");
     private static final FilterPermanent filter2 = new FilterPermanent("Ninja or Turtle");
 
     static {

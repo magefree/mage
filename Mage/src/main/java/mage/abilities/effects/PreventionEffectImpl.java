@@ -70,9 +70,9 @@ public abstract class PreventionEffectImpl extends ReplacementEffectImpl impleme
         if (!preventionData.isError() && !preventionData.isReplaced()) {
             if (consumable) {
                 amountToPrevent = preventionData.getRemainingAmount();
-            }
-            if (amountToPrevent == 0) {
-                this.discard();
+                if (amountToPrevent == 0) {
+                    this.discard();
+                }
             }
         }
         return preventionData;
@@ -80,6 +80,9 @@ public abstract class PreventionEffectImpl extends ReplacementEffectImpl impleme
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        if (!consumable && amountToPreventDynamic != null) {
+            amountToPrevent = amountToPreventDynamic.calculate(game, source, this);
+        }
         preventDamageAction(event, source, game);
         // damage amount is reduced or set to 0 so complete replacement of damage event is never neccessary
         return false;

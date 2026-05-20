@@ -34,7 +34,7 @@ public final class InsatiableRakghoul extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Insatiable Rakghoul enters the battlefield with a +1/+1 counter on it, if a non-artifact creature died this turn.
-        this.addAbility(new EntersBattlefieldAbility(new InsatiableRakghoulEffect(), false), new NonArtifactCreaturesDiedWatcher());
+        this.addAbility(new EntersBattlefieldAbility(new InsatiableRakghoulEffect(), false), new InsatiableRakghoulWatcher());
     }
 
     private InsatiableRakghoul(final InsatiableRakghoul card) {
@@ -51,7 +51,7 @@ class InsatiableRakghoulEffect extends OneShotEffect {
 
     InsatiableRakghoulEffect() {
         super(Outcome.BoostCreature);
-        staticText = "with a +1/+1 counter on it if a non-artifact creature died this turn";
+        staticText = "with a +1/+1 counter on it if a nonartifact creature died this turn";
     }
 
     private InsatiableRakghoulEffect(final InsatiableRakghoulEffect effect) {
@@ -62,7 +62,7 @@ class InsatiableRakghoulEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            NonArtifactCreaturesDiedWatcher watcher = game.getState().getWatcher(NonArtifactCreaturesDiedWatcher.class);
+            InsatiableRakghoulWatcher watcher = game.getState().getWatcher(InsatiableRakghoulWatcher.class);
             if (watcher != null && watcher.conditionMet()) {
                 Permanent permanent = game.getPermanentEntering(source.getSourceId());
                 if (permanent != null) {
@@ -80,9 +80,9 @@ class InsatiableRakghoulEffect extends OneShotEffect {
     }
 }
 
-class NonArtifactCreaturesDiedWatcher extends Watcher {
+class InsatiableRakghoulWatcher extends Watcher {
 
-    public NonArtifactCreaturesDiedWatcher() {
+    InsatiableRakghoulWatcher() {
         super(WatcherScope.GAME);
     }
 

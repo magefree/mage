@@ -29,7 +29,7 @@ public final class Pain101 extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 new DiesSourceTriggeredAbility(new ReturnSourceFromGraveyardToBattlefieldEffect(true, true), false),
                 Duration.EndOfTurn,
-                "and gains \"When this creature dies, return it to the battlefield tapped under its owner's control.\""
+                "and \"When this creature dies, return it to the battlefield tapped under its owner's control.\""
         ));
     }
 

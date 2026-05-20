@@ -12,6 +12,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
@@ -33,6 +34,8 @@ public final class TomeOfLegends extends CardImpl {
 
     public TomeOfLegends(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
+
+        this.subtype.add(SubType.BOOK);
 
         // Tome of Legends enters the battlefield with a page counter on it.
         this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.PAGE.createInstance()));

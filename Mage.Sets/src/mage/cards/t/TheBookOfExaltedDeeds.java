@@ -39,6 +39,7 @@ public final class TheBookOfExaltedDeeds extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{W}{W}{W}");
 
         this.supertype.add(SuperType.LEGENDARY);
+        this.subtype.add(SubType.BOOK);
 
         // At the beginning of your end step, if you gained 3 or more life this turn, create a 3/3 white Angel creature token with flying.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new Angel33Token()))

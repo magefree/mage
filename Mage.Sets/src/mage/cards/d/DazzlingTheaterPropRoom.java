@@ -8,7 +8,6 @@ import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.RoomCard;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
@@ -30,7 +29,6 @@ public final class DazzlingTheaterPropRoom extends RoomCard {
 
     public DazzlingTheaterPropRoom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, "{3}{W}", "{2}{W}");
-        this.subtype.add(SubType.ROOM);
 
         // Dazzling Theater: Creature spells you cast have convoke.
         Ability left = new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(new ConvokeAbility(), filter));

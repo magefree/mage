@@ -14,6 +14,7 @@ import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -29,6 +30,8 @@ public final class MazemindTome extends CardImpl {
 
     public MazemindTome(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
+
+        this.subtype.add(SubType.BOOK);
 
         // {T}, Put a page counter on Mazemind Tome: Scry 1.
         Ability ability = new SimpleActivatedAbility(new ScryEffect(1), new TapSourceCost());

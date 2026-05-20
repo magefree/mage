@@ -27,7 +27,7 @@ public final class MouserFoundry extends CardImpl {
         this.addAbility(new EntersBattlefieldOrLeavesSourceTriggeredAbility(new CreateTokenEffect(new Robot11Token()), false));
 
         // {4}{R}, Sacrifice this artifact: It deals 3 damage to target creature.
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(3), new ManaCostsImpl<>("{4}{R}"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(3, "it"), new ManaCostsImpl<>("{4}{R}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

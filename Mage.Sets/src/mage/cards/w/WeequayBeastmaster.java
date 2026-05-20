@@ -1,7 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BecomesMonstrousTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,8 +10,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +31,8 @@ public final class WeequayBeastmaster extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(MonstrosityAbility.class, "Monstrosity")));
 
         // Whenever a creature you control becomes monstrous, put an additional +1/+1 counter on that creature.
-        this.addAbility(new BecomesMonstrousTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance())));
+        this.addAbility(new BecomesMonstrousTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance())
+                .setText("put an additional +1/+1 counter on that creature")));
     }
 
     private WeequayBeastmaster(final WeequayBeastmaster card) {

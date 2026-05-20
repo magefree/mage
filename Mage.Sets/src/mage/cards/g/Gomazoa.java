@@ -1,9 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,24 +10,22 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.WatcherScope;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.watchers.Watcher;
+
+import java.util.*;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class Gomazoa extends CardImpl {
 
     public Gomazoa(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add(SubType.JELLYFISH);
 
         this.power = new MageInt(0);
@@ -44,7 +38,7 @@ public final class Gomazoa extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {tap}: Put Gomazoa and each creature it's blocking on top of their owners' libraries, then those players shuffle their libraries.
-        this.addAbility(new SimpleActivatedAbility(new GomazoaEffect(), new TapSourceCost()), new BlockedByWatcher());
+        this.addAbility(new SimpleActivatedAbility(new GomazoaEffect(), new TapSourceCost()));
 
     }
 
@@ -77,63 +71,34 @@ class GomazoaEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            List<UUID> players = new ArrayList<>();
-            Permanent gomazoa = game.getPermanent(source.getSourceId());
-            if (gomazoa != null) {
-                controller.moveCardToLibraryWithInfo(gomazoa, source, game, Zone.BATTLEFIELD, true, true);
-                players.add(gomazoa.getOwnerId());
-            }
-
-            BlockedByWatcher watcher = game.getState().getWatcher(BlockedByWatcher.class, source.getSourceId());
-
-            for (UUID blockedById : watcher.getBlockedByWatcher()) {
-                Permanent blockedByGomazoa = game.getPermanent(blockedById);
-                if (blockedByGomazoa != null && blockedByGomazoa.isAttacking()) {
-                    players.add(blockedByGomazoa.getOwnerId());
-                    Player owner = game.getPlayer(blockedByGomazoa.getOwnerId());
-                    if (owner != null) {
-                        owner.moveCardToLibraryWithInfo(blockedByGomazoa, source, game, Zone.BATTLEFIELD, true, true);
-                    }
-                }
-            }
-            for (UUID player : players) {
-                Player owner = game.getPlayer(player);
-                if (owner != null) {
-                    owner.shuffleLibrary(source, game);
-                }
-            }
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
-
-    }
-}
-
-class BlockedByWatcher extends Watcher {
-
-    public List<UUID> getBlockedByWatcher() {
-        return blockedByWatcher;
-    }
-
-    private List<UUID> blockedByWatcher = new ArrayList<>();
-
-    public BlockedByWatcher() {
-        super(WatcherScope.CARD);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
-            if (sourceId.equals(event.getSourceId()) && !blockedByWatcher.contains(event.getTargetId())) {
-                blockedByWatcher.add(event.getTargetId());
-            }
+        List<Permanent> permanents = new ArrayList<>();
+        Set<UUID> playersToShuffle = new HashSet<>();
+        Permanent gomazoa = source.getSourcePermanentIfItStillExists(game);
+        if (gomazoa != null) {
+            permanents.add(gomazoa);
+            playersToShuffle.add(gomazoa.getOwnerId());
+        } else {
+            gomazoa = source.getSourcePermanentOrLKI(game);
         }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        blockedByWatcher.clear();
+        if (gomazoa != null) {
+            gomazoa.getBlockingRefs().stream()
+                    .map(mor -> mor.getPermanent(game))
+                    .filter(Objects::nonNull)
+                    .forEach(blocked -> {
+                        permanents.add(blocked);
+                        playersToShuffle.add(blocked.getOwnerId());
+                    });
+        }
+        for (Permanent permanent : permanents) {
+            controller.moveCardToLibraryWithInfo(permanent, source, game, Zone.BATTLEFIELD, true, true);
+        }
+        playersToShuffle.stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .forEach(p -> p.shuffleLibrary(source, game));
+        return true;
     }
 }

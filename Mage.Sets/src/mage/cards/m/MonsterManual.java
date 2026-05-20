@@ -9,6 +9,7 @@ import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -24,6 +25,8 @@ public final class MonsterManual extends AdventureCard {
 
     public MonsterManual(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, new CardType[]{CardType.SORCERY}, "{3}{G}", "Zoological Study", "{2}{G}");
+
+        this.subtype.add(SubType.BOOK);
 
         // {1}{G}, {T}: You may put a creature card from your hand onto the battlefield.
         Ability ability = new SimpleActivatedAbility(

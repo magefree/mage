@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -9,7 +8,6 @@ import mage.abilities.condition.common.RevoltCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -17,8 +15,9 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -30,12 +29,8 @@ import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.RevoltWatcher;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +38,7 @@ import mage.constants.Outcome;
  */
 public final class PizzaFaceGastromancer extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("other target creature or artifact");
+    private static final FilterPermanent filter = new FilterPermanent("other target artifact or creature");
     static {
         filter.add(Predicates.or(
                 CardType.CREATURE.getPredicate(),
@@ -68,7 +63,7 @@ public final class PizzaFaceGastromancer extends CardImpl {
         // control this turn, put three +1/+1 counters on up to one other target artifact or creature.
         // If it isn't a creature, it becomes a 0/0 Mutant creature in addition to its other types.
         Ability triggeredAbility = new BeginningOfEndStepTriggeredAbility(
-            new AddCountersTargetEffect(CounterType.P1P1.createInstance(), StaticValue.get(3)))
+            new AddCountersTargetEffect(CounterType.P1P1.createInstance(3)))
                 .withInterveningIf(RevoltCondition.instance)
                 .addHint(RevoltCondition.getHint())
                 .setAbilityWord(AbilityWord.DISAPPEAR);

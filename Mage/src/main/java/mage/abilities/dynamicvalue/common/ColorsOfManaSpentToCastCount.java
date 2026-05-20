@@ -6,6 +6,8 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -17,6 +19,7 @@ import mage.game.stack.Spell;
 public class ColorsOfManaSpentToCastCount implements DynamicValue {
 
     private static final ColorsOfManaSpentToCastCount instance = new ColorsOfManaSpentToCastCount();
+    private static final Hint hint = new ValueHint("Colors of mana spent", instance);
 
     private Object readResolve() throws ObjectStreamException {
         return instance;
@@ -38,22 +41,27 @@ public class ColorsOfManaSpentToCastCount implements DynamicValue {
         }
         if (spell != null) {
             // NOT the cmc of the spell on the stack
-            Mana mana = spell.getSpellAbility().getManaCostsToPay().getUsedManaToPay();
-            if (mana.getBlack() > 0) {
-                count++;
-            }
-            if (mana.getBlue() > 0) {
-                count++;
-            }
-            if (mana.getGreen() > 0) {
-                count++;
-            }
-            if (mana.getRed() > 0) {
-                count++;
-            }
-            if (mana.getWhite() > 0) {
-                count++;
-            }
+            count = countColors(spell.getSpellAbility().getManaCostsToPay().getUsedManaToPay());
+        }
+        return count;
+    }
+
+    public static int countColors(Mana mana) {
+        int count = 0;
+        if (mana.getBlack() > 0) {
+            count++;
+        }
+        if (mana.getBlue() > 0) {
+            count++;
+        }
+        if (mana.getGreen() > 0) {
+            count++;
+        }
+        if (mana.getRed() > 0) {
+            count++;
+        }
+        if (mana.getWhite() > 0) {
+            count++;
         }
         return count;
     }
@@ -71,6 +79,10 @@ public class ColorsOfManaSpentToCastCount implements DynamicValue {
     @Override
     public String getMessage() {
         return "the number of colors of mana spent to cast this spell";
+    }
+
+    public static Hint getHint() {
+        return hint;
     }
 
 }

@@ -26,6 +26,7 @@ public class Pioneer extends Constructed {
         banned.add("Amalia Benavides Aguirre");
         banned.add("Balustrade Spy");
         banned.add("Bloodstained Mire");
+        banned.add("Cori-Steel Cutter");
         banned.add("Felidar Guardian");
         banned.add("Field of the Dead");
         banned.add("Flooded Strand");

@@ -117,7 +117,7 @@ class MetamorphicAlterationEffect extends ContinuousEffectImpl {
                 || copied == null) {
             return false;
         }
-        Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
         if (permanent == null) {
             return false;
         }

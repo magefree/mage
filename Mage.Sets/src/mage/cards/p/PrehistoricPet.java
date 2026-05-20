@@ -8,6 +8,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
@@ -52,6 +53,7 @@ public final class PrehistoricPet extends CardImpl {
             new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{1}{W}"), MyTurnCondition.instance
         );
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
+        ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
 

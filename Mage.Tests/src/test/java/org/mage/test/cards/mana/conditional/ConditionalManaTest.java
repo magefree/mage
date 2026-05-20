@@ -458,4 +458,50 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         Assert.assertEquals("Incorrect number of mana", 5, manaOptions.size());
     }
 
+    // https://github.com/magefree/mage/issues/9796
+    @Test
+    public void testJeganthaYes() {
+        addCard(Zone.BATTLEFIELD, playerA, "Jegantha, the Wellspring");
+        addCard(Zone.HAND, playerA, "Lost Auramancers");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lost Auramancers");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Lost Auramancers", 1);
+    }
+
+    @Test
+    public void testJeganthaYes2() {
+        addCard(Zone.BATTLEFIELD, playerA, "Jegantha, the Wellspring");
+        addCard(Zone.HAND, playerA, "Honden of Infinite Rage");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Honden of Infinite Rage");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Honden of Infinite Rage", 1);
+    }
+
+    @Test
+    public void testJeganthaNo() {
+        addCard(Zone.BATTLEFIELD, playerA, "Jegantha, the Wellspring");
+        addCard(Zone.HAND, playerA, "Lost Auramancers");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+
+        checkPlayableAbility("nope", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lost Auramancers", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Lost Auramancers", 0);
+    }
 }

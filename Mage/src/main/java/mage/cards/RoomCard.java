@@ -6,10 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.RoomAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SpellAbilityType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -24,6 +21,7 @@ public abstract class RoomCard extends SplitCard {
 
     protected RoomCard(UUID ownerId, CardSetInfo setInfo, String costsLeft, String costsRight) {
         super(ownerId, setInfo, costsLeft, costsRight, SpellAbilityType.SPLIT, new CardType[]{CardType.ENCHANTMENT});
+        this.addSubType(SubType.ROOM);
 
         String[] names = setInfo.getName().split(" // ");
 

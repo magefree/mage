@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 public final class AerithLastAncient extends CardImpl {
 
-    private static final Condition condition = new YouGainedLifeCondition();
+    private static final Condition condition = YouGainedLifeCondition.getZero();
     private static final Condition condition2 = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 6);
 
     public AerithLastAncient(UUID ownerId, CardSetInfo setInfo) {

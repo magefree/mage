@@ -582,7 +582,12 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
             } else if (this.getMinModes() == 0 && this.getMaxModes(null, null) == 1) {
                 sb.append("up to one");
             } else if (this.getMinModes() == 0 && this.getMaxModes(null, null) > 2) {
-                sb.append("any number");
+                if (isMayChooseSameModeMoreThanOnce()) {
+                    sb.append("up to ");
+                    sb.append(CardUtil.numberToText(this.getMaxModes(null, null)));
+                } else {
+                    sb.append("any number");
+                }
             } else if (this.getMinModes() == 1 && this.getMaxModes(null, null) == 2) {
                 sb.append("one or both");
             } else if (this.getMinModes() == 1 && this.getMaxModes(null, null) > 2) {

@@ -101,13 +101,17 @@ public abstract class AbstractCommander extends Constructed {
             boolean valid = true;
             for (Card card : deck.getCards()) {
                 if (!ManaUtil.isColorIdentityCompatible(colorIdentity, card.getColorIdentity())) {
-                    addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (need " + colorIdentity + ", but get " + card.getColorIdentity() + ")", true);
+                    FilterMana restrictedColor = card.getColorIdentity().copy();
+                    restrictedColor.removeAll(colorIdentity);
+                    addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color identity (includes " + restrictedColor + ", but your commander(s) allow only " + colorIdentity + ")", true);
                     valid = false;
                 }
             }
             for (Card card : deck.getSideboard()) {
                 if (!ManaUtil.isColorIdentityCompatible(colorIdentity, card.getColorIdentity())) {
-                    addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (need " + colorIdentity + ", but get " + card.getColorIdentity() + ")", true);
+                    FilterMana restrictedColor = card.getColorIdentity().copy();
+                    restrictedColor.removeAll(colorIdentity);
+                    addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color identity (includes " + restrictedColor + ", but your commander(s) allow only " + colorIdentity + ")", true);
                     valid = false;
                 }
             }

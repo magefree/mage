@@ -39,7 +39,7 @@ public final class WeatherMaker extends CardImpl {
         this.addAbility(manaAbility);
 
         // {T}, Remove three charge counters from this artifact: It deals 3 damage to any target.
-        Ability damageAbility = new SimpleActivatedAbility(new DamageTargetEffect(3), new TapSourceCost());
+        Ability damageAbility = new SimpleActivatedAbility(new DamageTargetEffect(3, "it"), new TapSourceCost());
         damageAbility.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(3)));
         damageAbility.addTarget(new TargetAnyTarget());
         this.addAbility(damageAbility);

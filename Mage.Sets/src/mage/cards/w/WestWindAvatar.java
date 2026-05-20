@@ -2,6 +2,7 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -55,7 +56,7 @@ public final class WestWindAvatar extends CardImpl {
         )));
 
         // Disappear -- At the beginning of your end step, if a permanent left the battlefield under your control this turn, draw a card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1))
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DrawCardSourceControllerEffect(1))
             .withInterveningIf(RevoltCondition.instance)
             .addHint(RevoltCondition.getHint())
             .setAbilityWord(AbilityWord.DISAPPEAR), new RevoltWatcher());

@@ -160,6 +160,8 @@
 |EMBLEM:FIN|Emblem Sephiroth||SephirothOneWingedAngelEmblem|
 |EMBLEM:EOE|Emblem Tezzeret||TezzeretCruelCaptainEmblem|
 |EMBLEM:ECL|Emblem Oko||OkoShadowmoorScionEmblem|
+|EMBLEM:SOS|Emblem Dellian||ProfessorDellianFelEmblem|
+|EMBLEM:FRA|Emblem Chandra||ChandraChillOfComplianceEmblem|
 
 
 # ALL PLANES
@@ -1329,7 +1331,7 @@
 |TOK:STX|Elemental||Elemental44Token|
 |TOK:STX|Fractal||FractalToken|
 |TOK:STX|Inkling||InklingToken|
-|TOK:STX|Pest||Pest11GainLifeToken|
+|TOK:STX|Pest||PestBlackGreenDiesToken|
 |TOK:STX|Spirit||Spirit32Token|
 |TOK:STX|Treasure||TreasureToken|
 
@@ -1545,7 +1547,8 @@
 |TOK:SLD|Food|4|FoodToken|
 |TOK:SLD|Food|5|FoodToken|
 |TOK:SLD|Food|6|FoodToken|
-|TOK:SLD|Goblin||GoblinToken|
+|TOK:SLD|Goblin|1|GoblinToken|
+|TOK:SLD|Goblin|2|GoblinToken|
 |TOK:SLD|Hydra||ZaxaraTheExemplaryHydraToken|
 |TOK:SLD|Icingdeath, Frost Tongue||IcingdeathFrostTongueToken|
 |TOK:SLD|Marit Lage||MaritLageToken|
@@ -2483,7 +2486,7 @@
 |TOK:OTP|Human Cleric||OutlawsMerrimentClericToken|
 |TOK:OTP|Human Rogue||OutlawsMerrimentRogueToken|
 |TOK:OTP|Human Warrior||OutlawsMerrimentWarriorToken|
-|TOK:OTP|Pest||Pest11GainLifeToken|
+|TOK:OTP|Pest||PestBlackGreenDiesToken|
 
 # SCD
 |TOK:SCD|Beast||BeastToken|
@@ -2609,7 +2612,7 @@
 |TOK:BLC|Human Soldier||HumanSoldierToken|
 |TOK:BLC|Illusion||CustomIllusionToken|
 |TOK:BLC|Octopus||OctopusToken|
-|TOK:BLC|Pest||Pest11GainLifeToken|
+|TOK:BLC|Pest||PestBlackGreenDiesToken|
 |TOK:BLC|Phyrexian Golem||PhyrexianGolemToken|
 |TOK:BLC|Raccoon||RaccoonToken|
 |TOK:BLC|Rat||RatToken|
@@ -2882,7 +2885,7 @@
 |TOK:EOC|Golem|3|TitanForgeGolemToken|
 |TOK:EOC|Incubator||IncubatorToken|
 |TOK:EOC|Insect||XiraBlackInsectToken|
-|TOK:EOC|Pest||Pest11GainLifeToken|
+|TOK:EOC|Pest||PestBlackGreenDiesToken|
 |TOK:EOC|Phyrexian||Phyrexian00Token|
 |TOK:EOC|Shapeshifter||ShapeshifterDeathtouchToken|
 |TOK:EOC|Thopter||ThopterColorlessToken|
@@ -2961,6 +2964,49 @@
 |TOK:TMC|Clue||ClueArtifactToken|
 |TOK:TMC|Ooze||BiogenicOozeToken|
 |TOK:TMC|Treasure||TreasureToken|
+
+# SOS
+|TOK:SOS|Elemental|1|Elemental33BlueRedToken|
+|TOK:SOS|Elemental|2|Elemental33BlueRedToken|
+|TOK:SOS|Fractal|1|FractalToken|
+|TOK:SOS|Fractal|2|FractalToken|
+|TOK:SOS|Inkling|1|Inkling11Token|
+|TOK:SOS|Inkling|2|Inkling11Token|
+|TOK:SOS|Pest|1|PestBlackGreenAttacksToken|
+|TOK:SOS|Pest|2|PestBlackGreenAttacksToken|
+|TOK:SOS|Spirit|1|Spirit22RedWhiteToken|
+|TOK:SOS|Spirit|2|Spirit22RedWhiteToken|
+|TOK:SOS|Treasure||TreasureToken|
+
+# SOC
+|TOK:SOC|Beast||BeastToken|
+|TOK:SOC|Boar||Boar2Token|
+|TOK:SOC|Cat||CatToken|
+|TOK:SOC|Contract||ContractToken|
+|TOK:SOC|Dragon Illusion||DragonIllusionToken|
+|TOK:SOC|Eldrazi Spawn||EldraziSpawnToken|
+|TOK:SOC|Elemental|1|ElementalXXFlyingHasteToken|
+|TOK:SOC|Elemental|2|Elemental44Token|
+|TOK:SOC|Elemental|3|Elemental11BlueRedToken|
+|TOK:SOC|Food||FoodToken|
+|TOK:SOC|Frog Lizard||FrogLizardToken|
+|TOK:SOC|Fungus Beast||FungusBeastToken|
+|TOK:SOC|Goat||GoatToken|
+|TOK:SOC|Illusion||CustomIllusionToken|
+|TOK:SOC|Inkling||InklingToken|
+|TOK:SOC|Pegasus||Pegasus22Token|
+|TOK:SOC|Pest||PestBlackGreenDiesToken|
+|TOK:SOC|Phyrexian Germ||PhyrexianGermToken|
+|TOK:SOC|Phyrexian Myr||BrudicladTelchorMyrToken|
+|TOK:SOC|Primo, the Indivisible||PrimoTheIndivisibleToken|
+|TOK:SOC|Rogue||RogueToken|
+|TOK:SOC|Saproling||SaprolingToken|
+|TOK:SOC|Snake||OphiomancerSnakeToken|
+|TOK:SOC|Spirit||Spirit32Token|
+|TOK:SOC|Spirit||SpiritWhiteToken|
+|TOK:SOC|Thopter||ThopterColorlessToken|
+|TOK:SOC|Worm||BlackGreenWormToken|
+|TOK:SOC|Zombie||ZombieDecayedToken|
 
 # JVC
 |TOK:JVC|Elemental Shaman||ElementalShamanToken|

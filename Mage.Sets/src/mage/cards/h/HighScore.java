@@ -31,7 +31,7 @@ public final class HighScore extends CardImpl {
             new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1),
                 ControlsCreatureGreatestPowerCondition.instance,
-                "draw a card if you control the creature with the greatest power among creatures on the battlefield"
+                "draw a card if you control a creature with the greatest power among creatures on the battlefield"
             )
         ));
     }

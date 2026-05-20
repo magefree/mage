@@ -23,7 +23,7 @@ public final class PainfulTruths extends CardImpl {
                 .setText("you draw X cards"));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(ColorsOfManaSpentToCastCount.getInstance())
                 .setText("and lose X life, where X is the number of colors of mana spent to cast this spell"));
-        this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
+        this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE).addHint(ColorsOfManaSpentToCastCount.getHint());
     }
 
     private PainfulTruths(final PainfulTruths card) {

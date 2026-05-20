@@ -53,13 +53,9 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment == null) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
         if (permanent == null) {
-            return true;
+            return false;
         }
         switch (layer) {
             case TypeChangingEffects_4:

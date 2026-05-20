@@ -4,7 +4,6 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.keyword.SupportEffect;
 import mage.cards.Card;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.TargetPermanent;
@@ -33,13 +32,9 @@ public class SupportAbility extends EntersBattlefieldTriggeredAbility {
     public SupportAbility(Card card, int amount, boolean otherPermanent) {
         super(new SupportEffect(card, amount, otherPermanent));
         if (card.isInstantOrSorcery()) {
-            return;
+            throw new IllegalStateException("Wrong code usage: use SupportEffect directly instead");
         }
-        if (!card.isCreature()) {
-            addTarget(new TargetPermanent(0, amount, StaticFilters.FILTER_PERMANENT_CREATURES));
-        } else {
-            addTarget(new TargetPermanent(0, amount, filter));
-        }
+        addTarget(new TargetPermanent(0, amount, filter));
     }
 
 

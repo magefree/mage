@@ -10,14 +10,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -30,14 +29,9 @@ public final class SpectacularShowdown extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");
 
         // Put a double strike counter on target creature, then goad each creature that had a double strike counter put on it this way.
-        this.getSpellAbility().addEffect(new SpectacularShowdownEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-
         // Overload {4}{R}{R}{R}
-        this.addAbility(new OverloadAbility(
-                this, new SpectacularShowdownOverloadEffect(),
-                new ManaCostsImpl<>("{4}{R}{R}{R}")
-        ));
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{4}{R}{R}{R}"),
+                new TargetCreaturePermanent(), new SpectacularShowdownEffect());
     }
 
     private SpectacularShowdown(final SpectacularShowdown card) {
@@ -69,43 +63,8 @@ class SpectacularShowdownEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent == null || !permanent.addCounters(
-                CounterType.DOUBLE_STRIKE.createInstance(), source, game
-        )) {
-            return false;
-        }
-        game.addEffect(new GoadTargetEffect().setTargetPointer(new FixedTarget(permanent, game)), source);
-        return true;
-    }
-}
-
-class SpectacularShowdownOverloadEffect extends OneShotEffect {
-
-    SpectacularShowdownOverloadEffect() {
-        super(Outcome.Benefit);
-        staticText = "put a double strike counter on each creature, " +
-                "then goad each creature that had a double strike counter put on it this way";
-    }
-
-    private SpectacularShowdownOverloadEffect(final SpectacularShowdownOverloadEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SpectacularShowdownOverloadEffect copy() {
-        return new SpectacularShowdownOverloadEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game
-                .getBattlefield()
-                .getActivePermanents(
-                        StaticFilters.FILTER_PERMANENT_CREATURE,
-                        source.getControllerId(), source, game
-                )
-                .stream()
+        List<Permanent> permanents = getTargetPointer().getTargets(game, source)
+                .stream().map(game::getPermanent).filter(Objects::nonNull)
                 .filter(permanent -> permanent.addCounters(
                         CounterType.DOUBLE_STRIKE.createInstance(), source, game
                 ))

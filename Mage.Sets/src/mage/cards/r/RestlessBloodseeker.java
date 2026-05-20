@@ -30,7 +30,7 @@ import java.util.UUID;
  */
 public final class RestlessBloodseeker extends TransformingDoubleFacedCard {
 
-    private static final Condition condition = new YouGainedLifeCondition();
+    private static final Condition condition = YouGainedLifeCondition.getZero();
     private static final Hint hint = new ConditionHint(condition, "You gained life this turn");
     private static final FilterControlledPermanent filter
             = new FilterControlledPermanent(SubType.BLOOD, "Blood tokens");

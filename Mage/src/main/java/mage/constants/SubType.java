@@ -57,6 +57,7 @@ public enum SubType {
     ATTRACTION("Attraction", SubTypeSet.ArtifactType),
     BLOOD("Blood", SubTypeSet.ArtifactType),
     BOBBLEHEAD("Bobblehead", SubTypeSet.ArtifactType),
+    BOOK("Book", SubTypeSet.ArtifactType),
     CLUE("Clue", SubTypeSet.ArtifactType),
     CONTRAPTION("Contraption", SubTypeSet.ArtifactType),
     EQUIPMENT("Equipment", SubTypeSet.ArtifactType),
@@ -95,7 +96,8 @@ public enum SubType {
     ASSASSIN("Assassin", SubTypeSet.CreatureType),
     ASSEMBLY_WORKER("Assembly-Worker", SubTypeSet.CreatureType),
     ASTARTES("Astartes", SubTypeSet.CreatureType),
-    ATAT("AT-AT", SubTypeSet.CreatureType, true),
+    ATAT("AT-AT", SubTypeSet.CreatureType, true), // Star Wars
+    ATHLETE("Athlete", SubTypeSet.CreatureType, true), // Unknown Event
     ATOG("Atog", SubTypeSet.CreatureType),
     AUROCHS("Aurochs", SubTypeSet.CreatureType),
     AUTOBOT("Autobot", SubTypeSet.CreatureType, true), // H17, Grimlock
@@ -207,6 +209,7 @@ public enum SubType {
     GARGOYLE("Gargoyle", SubTypeSet.CreatureType),
     GERM("Germ", SubTypeSet.CreatureType),
     GIANT("Giant", SubTypeSet.CreatureType),
+    GIRAFFE("Giraffe", SubTypeSet.CreatureType),
     GITH("Gith", SubTypeSet.CreatureType),
     GLIMMER("Glimmer", SubTypeSet.CreatureType),
     GNOLL("Gnoll", SubTypeSet.CreatureType),
@@ -491,6 +494,7 @@ public enum SubType {
     DAKKON("Dakkon", SubTypeSet.PlaneswalkerType),
     DARETTI("Daretti", SubTypeSet.PlaneswalkerType),
     DAVRIEL("Davriel", SubTypeSet.PlaneswalkerType),
+    DELLIAN("Dellian", SubTypeSet.PlaneswalkerType),
     DIHADA("Dihada", SubTypeSet.PlaneswalkerType),
     DOMRI("Domri", SubTypeSet.PlaneswalkerType),
     DOOKU("Dooku", SubTypeSet.PlaneswalkerType, true), // Star Wars

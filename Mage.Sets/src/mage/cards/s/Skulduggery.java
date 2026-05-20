@@ -1,29 +1,19 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.SecondTargetPointer;
 
-import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
+import java.util.UUID;
 
 /**
- *
- * @author TheElk801
+ * @author TheElk801, Susucr
  */
 public final class Skulduggery extends CardImpl {
 
@@ -31,7 +21,13 @@ public final class Skulduggery extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
         // Until end of turn, target creature you control gets +1/+1 and target creature an opponent controls gets -1/-1.
-        this.getSpellAbility().addEffect(new SkulduggeryEffect());
+        this.getSpellAbility().addEffect(
+                new BoostTargetEffect(1, 1)
+                        .setText("Until end of turn, target creature you control gets +1/+1"));
+        this.getSpellAbility().addEffect(
+                new BoostTargetEffect(-1, -1)
+                        .setTargetPointer(new SecondTargetPointer())
+                        .setText("and target creature an opponent controls gets -1/-1."));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetPermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
     }
@@ -43,39 +39,5 @@ public final class Skulduggery extends CardImpl {
     @Override
     public Skulduggery copy() {
         return new Skulduggery(this);
-    }
-}
-
-class SkulduggeryEffect extends OneShotEffect {
-
-    SkulduggeryEffect() {
-        super(Outcome.BoostCreature);
-        this.staticText = "Until end of turn, target creature you control gets +1/+1 and target creature an opponent controls gets -1/-1";
-    }
-
-    private SkulduggeryEffect(final SkulduggeryEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SkulduggeryEffect copy() {
-        return new SkulduggeryEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            ContinuousEffect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
-            effect.setTargetPointer(new FixedTarget(permanent, game));
-            game.addEffect(effect, source);
-        }
-        permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (permanent != null) {
-            ContinuousEffect effect = new BoostTargetEffect(-1, -1, Duration.EndOfTurn);
-            effect.setTargetPointer(new FixedTarget(permanent, game));
-            game.addEffect(effect, source);
-        }
-        return true;
     }
 }

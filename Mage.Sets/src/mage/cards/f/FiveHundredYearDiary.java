@@ -38,6 +38,7 @@ public final class FiveHundredYearDiary extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}{U}");
 
         this.supertype.add(SuperType.LEGENDARY);
+        this.subtype.add(SubType.BOOK);
         this.subtype.add(SubType.CLUE);
 
         // Five Hundred Year Diary enters the battlefield tapped.

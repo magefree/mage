@@ -22,7 +22,7 @@ import mage.constants.Duration;
  */
 public final class LeonardoBigBrother extends CardImpl {
 
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_OTHER_CONTROLLED_CREATURES, 1);
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE, 1);
 
     public LeonardoBigBrother(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

@@ -31,7 +31,7 @@ public final class ArcadeCabinet extends CardImpl {
         this.addAbility(ability);
 
         // {2}, {T}, Sacrifice a token: Double the number of counters on target creature.
-        Ability ability1 = new SimpleActivatedAbility(new DoubleCountersTargetEffect(), new GenericManaCost(2));
+        ability = new SimpleActivatedAbility(new DoubleCountersTargetEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_TOKEN));
         ability.addTarget(new TargetCreaturePermanent());

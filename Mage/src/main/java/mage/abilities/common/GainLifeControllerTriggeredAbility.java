@@ -24,7 +24,11 @@ public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public GainLifeControllerTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        this(Zone.BATTLEFIELD, effect, optional, setTargetPointer);
+    }
+
+    public GainLifeControllerTriggeredAbility(Zone zone, Effect effect, boolean optional, boolean setTargetPointer) {
+        super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
         setTriggerPhrase("Whenever you gain life, ");
     }

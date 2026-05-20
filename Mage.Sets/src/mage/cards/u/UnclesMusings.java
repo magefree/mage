@@ -27,7 +27,7 @@ public final class UnclesMusings extends CardImpl {
                         "where X is the number of colors of mana spent to cast this spell"));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 1, StaticFilters.FILTER_CARD_PERMANENT));
         this.getSpellAbility().setTargetAdjuster(new TargetsCountAdjuster(ColorsOfManaSpentToCastCount.getInstance()));
-        this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
+        this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE).addHint(ColorsOfManaSpentToCastCount.getHint());
 
         // Exile Uncle's Musings.
         this.getSpellAbility().addEffect(new ExileSpellEffect().concatBy("<br>"));

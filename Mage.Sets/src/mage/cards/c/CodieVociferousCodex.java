@@ -18,9 +18,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author TheElk801
@@ -31,6 +31,7 @@ public final class CodieVociferousCodex extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
 
         this.supertype.add(SuperType.LEGENDARY);
+        this.subtype.add(SubType.BOOK);
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);

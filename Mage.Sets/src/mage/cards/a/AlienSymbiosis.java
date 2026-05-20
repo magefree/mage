@@ -49,7 +49,8 @@ public final class AlienSymbiosis extends CardImpl {
         this.addAbility(ability);
 
         // You may cast this card from your graveyard by discarding a card in addition to paying its other costs.
-        this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, new AlienSymbiosisGraveyardEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, new AlienSymbiosisGraveyardEffect())
+                .setIdentifier(MageIdentifier.AlienSymbiosisAlternateCast));
     }
 
     private AlienSymbiosis(final AlienSymbiosis card) {

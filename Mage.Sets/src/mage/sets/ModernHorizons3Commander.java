@@ -157,6 +157,8 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Hideous Taskmaster", 57, Rarity.RARE, mage.cards.h.HideousTaskmaster.class));
         cards.add(new SetCardInfo("Horizon of Progress", 78, Rarity.RARE, mage.cards.h.HorizonOfProgress.class));
         cards.add(new SetCardInfo("Hour of Promise", 232, Rarity.RARE, mage.cards.h.HourOfPromise.class));
+        cards.add(new SetCardInfo("Hourglass of the Lost", 40, Rarity.RARE, mage.cards.h.HourglassOfTheLost.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hourglass of the Lost", 92, Rarity.RARE, mage.cards.h.HourglassOfTheLost.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hydra Broodmaster", 233, Rarity.RARE, mage.cards.h.HydraBroodmaster.class));
         cards.add(new SetCardInfo("Hydroid Krasis", 266, Rarity.RARE, mage.cards.h.HydroidKrasis.class));
         cards.add(new SetCardInfo("Idol of Oblivion", 297, Rarity.UNCOMMON, mage.cards.i.IdolOfOblivion.class));
@@ -267,6 +269,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Suffer the Past", 205, Rarity.UNCOMMON, mage.cards.s.SufferThePast.class));
         cards.add(new SetCardInfo("Sulfurous Springs", 381, Rarity.RARE, mage.cards.s.SulfurousSprings.class));
         cards.add(new SetCardInfo("Summary Dismissal", 193, Rarity.RARE, mage.cards.s.SummaryDismissal.class));
+        cards.add(new SetCardInfo("Sunken Palace", 81, Rarity.RARE, mage.cards.s.SunkenPalace.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 173, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Sylvan Scrying", 248, Rarity.UNCOMMON, mage.cards.s.SylvanScrying.class));
         cards.add(new SetCardInfo("Syphon Mind", 206, Rarity.COMMON, mage.cards.s.SyphonMind.class));

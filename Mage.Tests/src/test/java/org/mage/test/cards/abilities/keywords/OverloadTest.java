@@ -145,4 +145,28 @@ public class OverloadTest extends CardTestPlayerBase {
         assertHandCount(playerB, "Balduvian Bears", 1);
         assertPermanentCount(playerB, "Spectral Bears", 1);
     }
+
+    @Test
+    public void test_MarchOfProgress_SingleEvent() {
+        addCard(Zone.HAND, playerA, "March of Progress", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 14);
+        addCard(Zone.BATTLEFIELD, playerA, "Peregrin Took");
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite");
+        addCard(Zone.BATTLEFIELD, playerA, "Ornithopter");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "March of Progress with overload");
+        checkPermanentCount("Memnite count 1", 1, PhaseStep.BEGIN_COMBAT, playerA, "Memnite", 2);
+        checkPermanentCount("Ornithopter count 1", 1, PhaseStep.BEGIN_COMBAT, playerA, "Ornithopter", 2);
+        checkPermanentCount("Food count 1", 1, PhaseStep.BEGIN_COMBAT, playerA, "Food Token", 1);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "March of Progress with overload");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Memnite", 4);
+        assertPermanentCount(playerA, "Ornithopter", 4);
+        assertPermanentCount(playerA, "Food Token", 2);
+    }
 }

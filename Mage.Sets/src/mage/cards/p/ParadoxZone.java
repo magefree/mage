@@ -32,10 +32,9 @@ public final class ParadoxZone extends CardImpl {
         Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new DoubleCountersSourceEffect(CounterType.GROWTH)
         );
-        Effect effect = FractalToken.getEffect(
-                xValue, "Put X +1/+1 counters on it, where X is the number of growth counters on {this}"
-        );
-        ability.addEffect(effect.concatBy("Then"));
+        ability.addEffect(FractalToken.getEffect(
+                xValue, ". Put X +1/+1 counters on it, where X is the number of growth counters on {this}"
+        ).concatBy("Then"));
         this.addAbility(ability);
     }
 

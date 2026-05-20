@@ -18,6 +18,7 @@ import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.*;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.PrepareCard;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -73,6 +74,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean monstrous;
     protected boolean renowned;
     protected boolean suspected;
+    protected boolean prepared;
     protected boolean harnessed = false;
     protected boolean manifested = false;
     protected boolean cloaked = false;
@@ -92,8 +94,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean phasedIn = true;
     protected boolean indirectPhase = false;
     protected boolean faceDown;
-    protected boolean attacking;
+    protected MageObjectReference attacking; // refers to defenderId if attacking, null if not attacking
     protected int blocking;
+    protected final Set<MageObjectReference> blockingSet = new HashSet<>(); // refers to blocked creatures
     // number of creatures the permanent can block
     protected int maxBlocks = 1;
     // minimal number of creatures the creature can be blocked by
@@ -159,6 +162,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.faceDown = permanent.faceDown;
         this.attacking = permanent.attacking;
         this.blocking = permanent.blocking;
+        this.blockingSet.addAll(permanent.blockingSet);
         this.maxBlocks = permanent.maxBlocks;
         this.deathtouched = permanent.deathtouched;
         this.solved = permanent.solved;
@@ -181,6 +185,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.monstrous = permanent.monstrous;
         this.renowned = permanent.renowned;
         this.suspected = permanent.suspected;
+        this.prepared = permanent.prepared;
         this.harnessed = permanent.harnessed;
         this.ringBearerFlag = permanent.ringBearerFlag;
         this.classLevel = permanent.classLevel;
@@ -794,7 +799,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean isAttacking() {
-        return attacking;
+        return attacking != null;
     }
 
     @Override
@@ -1627,13 +1632,39 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public void setAttacking(boolean attacking) {
-        this.attacking = attacking;
+    public void setAttacking(MageObjectReference defender) {
+        this.attacking = defender;
+    }
+
+    @Override
+    public MageObjectReference getAttacking() {
+        return this.attacking;
     }
 
     @Override
     public void setBlocking(int blocking) {
         this.blocking = blocking;
+    }
+
+    @Override
+    public void addBlocking(UUID attackerId, Game game) {
+        this.blockingSet.add(new MageObjectReference(attackerId, game));
+    }
+
+    @Override
+    public void removeBlocking(UUID attackerId, Game game) {
+        this.blockingSet.remove(new MageObjectReference(attackerId, game));
+    }
+
+    @Override
+    public void clearBlocking() {
+        this.blockingSet.clear();
+        this.blocking = 0;
+    }
+
+    @Override
+    public Set<MageObjectReference> getBlockingRefs() {
+        return new HashSet<>(blockingSet);
     }
 
     @Override
@@ -1791,6 +1822,34 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
 
         this.ringBearerFlag = value;
+    }
+
+    private static final String preparedInfoKey = "IS_PREPARED";
+
+    @Override
+    public boolean isPrepared() {
+        return prepared;
+    }
+
+    @Override
+    public void setPrepared(boolean prepared, Game game) {
+        // 722.3a Some spells and abilities cause a permanent with a prepare spell to become prepared or state that a permanent enters prepared.
+        // If that permanent has the alternative characteristics of a prepare spell, this gives the permanent the “prepared” designation.
+        // Prepared is a designation that acts as a marker which rules and effects can identify.
+        // A permanent can’t gain this designation unless it has a prepare spell,
+        // Additionally, a permanent can’t gain this designation if the permanent already has it.
+        if (prepared && !(getMainCard() instanceof PrepareCard)) {
+            return;
+        }
+        if (this.prepared == prepared) {
+            return;
+        }
+        this.prepared = prepared;
+        if (this.prepared) {
+            addInfo(preparedInfoKey, CardUtil.addToolTipMarkTags("Prepared"), game);
+        } else {
+            addInfo(preparedInfoKey, null, game);
+        }
     }
 
     @Override

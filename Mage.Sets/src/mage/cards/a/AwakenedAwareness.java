@@ -73,18 +73,12 @@ class AwakenedAwarenessEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
-        if (enchantment == null) {
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
+        if (permanent == null || !permanent.isCreature(game)) {
             return false;
         }
-
-        Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-        if (creature == null || !creature.isCreature(game)) {
-            return false;
-        }
-
-        creature.getPower().setModifiedBaseValue(1);
-        creature.getToughness().setModifiedBaseValue(1);
+        permanent.getPower().setModifiedBaseValue(1);
+        permanent.getToughness().setModifiedBaseValue(1);
         return true;
     }
 }

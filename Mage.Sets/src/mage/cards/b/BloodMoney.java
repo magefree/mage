@@ -64,6 +64,7 @@ class BloodMoneyEffect extends OneShotEffect {
             }
         }
         if (count > 0) {
+            game.processAction();
             new TreasureToken().putOntoBattlefield(count, game, source, source.getControllerId(), true, false);
         }
         return true;

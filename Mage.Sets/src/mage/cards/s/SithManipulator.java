@@ -31,13 +31,13 @@ public final class SithManipulator extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Sith Manipulator enters the battlefield, return target creature to its owner's hand.
-        // <i>Hate</i> &mdash; If opponent lost life from source other than combat damage this turn, put that card on top of its owner's library instead.
+        // <i>Hate</i> &mdash; If opponent lost life from a source other than combat damage this turn, put that card on top of its owner's library instead.
         Effect effect = new ConditionalOneShotEffect(
                 new PutOnLibraryTargetEffect(true),
                 new ReturnToHandTargetEffect(),
                 HateCondition.instance,
                 "return target creature to its owner's hand." +
-                        "<br><i>Hate</i> &mdash; If opponent lost life from source other than combat damage this turn, " +
+                        "<br><i>Hate</i> &mdash; If opponent lost life from a source other than combat damage this turn, " +
                         "put that card on top of its owner's library instead"
         );
         Ability ability = new EntersBattlefieldTriggeredAbility(effect);

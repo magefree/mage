@@ -1,8 +1,9 @@
 package mage.cards.e;
 
-import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.CompoundCondition;
+import mage.abilities.condition.common.CardLeftYourGraveyardThisTurnCondition;
+import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
@@ -10,7 +11,6 @@ import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.Game;
 import mage.game.permanent.token.ZombieDruidToken;
 import mage.watchers.common.CardsLeftGraveyardWatcher;
 
@@ -30,7 +30,9 @@ public final class EssenceAnchor extends CardImpl {
         // {T}: Create a 2/2 black Zombie Druid creature token. Activate only during your turn and only if a card left your graveyard this turn.
         this.addAbility(new ActivateIfConditionActivatedAbility(
                 new CreateTokenEffect(new ZombieDruidToken()),
-                new TapSourceCost(), EssenceAnchorCondition.instance
+                new TapSourceCost(), new CompoundCondition(
+                        "during your turn and only if a card left your graveyard this turn",
+                        MyTurnCondition.instance, CardLeftYourGraveyardThisTurnCondition.instance)
         ), new CardsLeftGraveyardWatcher());
     }
 
@@ -41,24 +43,5 @@ public final class EssenceAnchor extends CardImpl {
     @Override
     public EssenceAnchor copy() {
         return new EssenceAnchor(this);
-    }
-}
-
-enum EssenceAnchorCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return game.isActivePlayer(source.getControllerId())
-                && !game
-                .getState()
-                .getWatcher(CardsLeftGraveyardWatcher.class)
-                .getCardsThatLeftGraveyard(source.getControllerId(), game)
-                .isEmpty();
-    }
-
-    @Override
-    public String toString() {
-        return "during your turn and only if a card left your graveyard this turn";
     }
 }

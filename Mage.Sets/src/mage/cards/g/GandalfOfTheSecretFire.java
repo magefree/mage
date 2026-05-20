@@ -112,7 +112,7 @@ class GandalfOfTheSecretFireEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         Spell sourceSpell = morSpell.getSpell(game);
-        if (controller == null || sourceSpell == null || sourceSpell.isCopy()) {
+        if (controller == null || sourceSpell == null || !sourceSpell.wasCast()) {
             return false;
         }
         controller.moveCards(sourceSpell, Zone.EXILED, source, game);

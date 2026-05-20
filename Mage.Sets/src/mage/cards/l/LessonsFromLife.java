@@ -19,7 +19,7 @@ public final class LessonsFromLife extends CardImpl {
 
         // Draw three cards. You may put a land card from your hand onto the battlefield tapped.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
-        this.getSpellAbility().addEffect(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A));
+        this.getSpellAbility().addEffect(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A, false, true));
     }
 
     private LessonsFromLife(final LessonsFromLife card) {

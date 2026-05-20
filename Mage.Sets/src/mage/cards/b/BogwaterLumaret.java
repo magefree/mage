@@ -26,7 +26,7 @@ public final class BogwaterLumaret extends CardImpl {
 
         // Whenever this creature or another creature you control enters, you gain 1 life.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
-                new GainLifeEffect(1), StaticFilters.FILTER_PERMANENT_CREATURE, true, true
+                new GainLifeEffect(1), StaticFilters.FILTER_PERMANENT_CREATURE, false, true
         ));
     }
 

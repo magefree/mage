@@ -30,6 +30,7 @@ Demonstrate|new|
 Delve|new|
 Dethrone|new|
 Devoid|color|
+Devour|number|
 Defender|instance|
 Disguise|card, cost|
 Disturb|cost|
@@ -71,6 +72,7 @@ Hexproof|instance|
 Hideaway|number|
 Impending|manaString|
 Improvise|new|
+Increment|new|
 Indestructible|instance|
 Infect|instance|
 Intimidate|instance|
@@ -102,6 +104,7 @@ Nightbound|new|
 Ninjutsu|manaString|
 Offspring|manaString|
 Outlast|cost|
+Paradigm|new|
 Partner|instance|
 Persist|new|
 Phasing|instance|

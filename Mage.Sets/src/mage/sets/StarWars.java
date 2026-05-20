@@ -304,7 +304,7 @@ public final class StarWars extends ExpansionSet {
         cards.add(new SetCardInfo("Riot Trooper", 411, Rarity.COMMON, mage.cards.r.RiotTrooper.class));
         cards.add(new SetCardInfo("Rocket Trooper", 118, Rarity.RARE, mage.cards.r.RocketTrooper.class));
         cards.add(new SetCardInfo("Rogue's Passage", 248, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
-        cards.add(new SetCardInfo("Rule of two", 86, Rarity.UNCOMMON, mage.cards.r.RuleOfTwo.class));
+        cards.add(new SetCardInfo("Rule of Two", 86, Rarity.UNCOMMON, mage.cards.r.RuleOfTwo.class));
         cards.add(new SetCardInfo("Rumination", 54, Rarity.COMMON, mage.cards.r.Rumination.class));
         cards.add(new SetCardInfo("Rumor Monger", 206, Rarity.UNCOMMON, mage.cards.r.RumorMonger.class));
         cards.add(new SetCardInfo("Sabacc Game", 55, Rarity.UNCOMMON, mage.cards.s.SabaccGame.class));

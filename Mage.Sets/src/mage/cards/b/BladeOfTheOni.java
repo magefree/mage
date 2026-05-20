@@ -66,11 +66,7 @@ class BladeOfTheOniEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
-        if (sourcePermanent == null) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(sourcePermanent.getAttachedTo());
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
         if (permanent == null) {
             return false;
         }

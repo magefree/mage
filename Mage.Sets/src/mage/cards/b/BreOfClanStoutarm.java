@@ -39,7 +39,7 @@ import mage.constants.Outcome;
  */
 public final class BreOfClanStoutarm extends CardImpl {
 
-    private static final Condition condition = new YouGainedLifeCondition();
+    private static final Condition condition = YouGainedLifeCondition.getZero();
 
     public BreOfClanStoutarm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");

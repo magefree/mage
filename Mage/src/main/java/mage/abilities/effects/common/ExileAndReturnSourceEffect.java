@@ -70,6 +70,7 @@ public class ExileAndReturnSourceEffect extends OneShotEffect {
             return true;
         }
         controller.moveCards(permanent, Zone.EXILED, source, game);
+        game.processAction();
         putCards.moveCard(
                 returnUnderYourControl ? controller : game.getPlayer(permanent.getOwnerId()),
                 permanent.getMainCard(), source, game, "card"

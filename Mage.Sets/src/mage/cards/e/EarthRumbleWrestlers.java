@@ -3,8 +3,8 @@ package mage.cards.e;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.OrCondition;
 import mage.abilities.condition.common.LandfallCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -36,7 +36,7 @@ public final class EarthRumbleWrestlers extends CardImpl {
         filter.add(CardType.CREATURE.getPredicate());
     }
 
-    private static final Condition condition = new CompoundCondition(
+    private static final Condition condition = new OrCondition(
             "you control a land creature or a land entered the battlefield under your control this turn",
             new PermanentsOnTheBattlefieldCondition(filter), LandfallCondition.instance
     );

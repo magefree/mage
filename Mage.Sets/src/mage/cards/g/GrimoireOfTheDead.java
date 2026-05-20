@@ -35,6 +35,7 @@ public final class GrimoireOfTheDead extends CardImpl {
     public GrimoireOfTheDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.supertype.add(SuperType.LEGENDARY);
+        this.subtype.add(SubType.BOOK);
 
         // {1}, {tap}, Discard a card: Put a study counter on Grimoire of the Dead.
         Ability ability1 = new SimpleActivatedAbility(

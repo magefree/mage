@@ -31,7 +31,7 @@ public final class TogetherAsOne extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget().withChooseHint("deal damage"));
         this.getSpellAbility().addEffect(new GainLifeEffect(ColorsOfManaSpentToCastCount.getInstance())
                 .concatBy(", and"));
-        this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
+        this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE).addHint(ColorsOfManaSpentToCastCount.getHint());
     }
 
     private TogetherAsOne(final TogetherAsOne card) {

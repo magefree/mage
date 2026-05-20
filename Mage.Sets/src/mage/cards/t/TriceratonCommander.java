@@ -1,13 +1,9 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.permanent.token.DinosaurSoldierToken;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -17,6 +13,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.game.permanent.token.DinosaurSoldierToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +52,7 @@ public final class TriceratonCommander extends CardImpl {
         this.addAbility(ability);
 
         // When this creature enters, create X 2/2 white Dinosaur Soldier creature tokens.
-        this.addAbility(new EntersBattlefieldAbility(new CreateTokenEffect(new DinosaurSoldierToken(), GetXValue.instance)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new DinosaurSoldierToken(), GetXValue.instance)));
     }
 
     private TriceratonCommander(final TriceratonCommander card) {

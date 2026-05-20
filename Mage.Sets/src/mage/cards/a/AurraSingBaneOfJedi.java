@@ -102,7 +102,7 @@ class SacrificeAllEffect extends OneShotEffect {
 
     SacrificeAllEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "and sacrificies all creatures they control";
+        staticText = "and sacrifices all creatures they control";
     }
 
     private SacrificeAllEffect(final SacrificeAllEffect effect) {

@@ -178,6 +178,26 @@ public enum CardRepository {
         return names;
     }
 
+    public synchronized Set<String> getLandNames() {
+        Set<String> names = namesQueryCache.computeIfAbsent("getLandNames", x -> new TreeSet<>());
+        if (!names.isEmpty()) {
+            return names;
+        }
+        try {
+            QueryBuilder<CardInfo, Object> qb = cardsDao.queryBuilder();
+            qb.distinct().selectColumns("name", "doubleFacedSecondSideName", "secondSideName", "flipCardName", "spellOptionCardName");
+            qb.where().like("types", new SelectArg('%' + CardType.LAND.name() + '%'));
+            List<CardInfo> results = cardsDao.query(qb.prepare());
+            for (CardInfo card : results) {
+                addNewNames(card, names);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting land names from DB, possible low memory: " + e, e);
+            processMemoryErrors(e);
+        }
+        return names;
+    }
+
     public synchronized Set<String> getNonLandNames() {
         Set<String> names = namesQueryCache.computeIfAbsent("getNonLandNames", x -> new TreeSet<>());
         if (!names.isEmpty()) {

@@ -19,6 +19,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -34,6 +35,8 @@ public final class SarevoksTome extends CardImpl {
 
     public SarevoksTome(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
+
+        this.subtype.add(SubType.BOOK);
 
         // When Sarevok's Tome enters the battlefield, you take the initiative.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()).addHint(InitiativeHint.instance));

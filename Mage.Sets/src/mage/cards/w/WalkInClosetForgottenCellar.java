@@ -7,7 +7,6 @@ import mage.abilities.effects.common.ruleModifying.PlayFromGraveyardControllerEf
 import mage.cards.CardSetInfo;
 import mage.cards.RoomCard;
 import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -19,7 +18,6 @@ public final class WalkInClosetForgottenCellar extends RoomCard {
 
     public WalkInClosetForgottenCellar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, "{2}{G}", "{3}{G}{G}");
-        this.subtype.add(SubType.ROOM);
 
         // Walk-In Closet: You may play lands from your graveyard.
         SimpleStaticAbility left = new SimpleStaticAbility(PlayFromGraveyardControllerEffect.playLands());

@@ -109,12 +109,11 @@ class ShayCormacEffect extends ContinuousEffectImpl {
             if (permanent == null) {
                 continue;
             }
-            // I know the removeIf is deprecated but I can't see any reason not to use it based on what the removeAbility method actually does
-            permanent.getAbilities(game).removeIf(HexproofBaseAbility.class::isInstance);
+            permanent.getAbilities(game).stream().filter(HexproofBaseAbility.class::isInstance).forEach(ability -> permanent.removeAbility(ability, source.getSourceId(), game));
             permanent.removeAbility(IndestructibleAbility.getInstance(), source.getSourceId(), game);
-            permanent.getAbilities(game).removeIf(ProtectionAbility.class::isInstance);
+            permanent.getAbilities(game).stream().filter(ProtectionAbility.class::isInstance).forEach(ability -> permanent.removeAbility(ability, source.getSourceId(), game));
             permanent.removeAbility(ShroudAbility.getInstance(), source.getSourceId(), game);
-            permanent.getAbilities(game).removeIf(WardAbility.class::isInstance);
+            permanent.getAbilities(game).stream().filter(WardAbility.class::isInstance).forEach(ability -> permanent.removeAbility(ability, source.getSourceId(), game));
         }
         return true;
     }
