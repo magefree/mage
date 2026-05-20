@@ -1,5 +1,7 @@
 package mage.cards.w;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -114,7 +116,7 @@ class WinterCynicalOpportunistEffect extends OneShotEffect {
         }
 
         Cards toExile = new CardsImpl();
-        java.util.Set<CardType> types = new java.util.HashSet<>();
+        Set<CardType> types = new HashSet<>();
 
         for (UUID cardId : target.getTargets()) {
             Card card = player.getGraveyard().get(cardId, game);
