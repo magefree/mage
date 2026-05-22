@@ -7,12 +7,13 @@ import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.BeholdAndExileCost;
 import mage.abilities.costs.common.BlightCost;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.effects.common.ReturnExiledCardToHandEffect;
+import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.abilities.effects.keyword.BlightTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -40,7 +41,7 @@ public final class ChampionOfTheWeird extends CardImpl {
         this.addAbility(ability);
 
         // When this creature leaves the battlefield, return the exiled card to its owner's hand.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnExiledCardToHandEffect()));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.HAND)));
     }
 
     private ChampionOfTheWeird(final ChampionOfTheWeird card) {
