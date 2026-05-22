@@ -111,7 +111,7 @@ class EsperOriginsEffect extends OneShotEffect {
         if (player == null || spell == null) {
             return false;
         }
-        Card card = spell.getMainCard();
+        Card card = spell.getCard();
         player.moveCards(card, Zone.EXILED, source, game);
         game.setEnterWithCounters(card.getId(), new Counters(CounterType.FINALITY.createInstance()));
         game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId(), Boolean.TRUE);
