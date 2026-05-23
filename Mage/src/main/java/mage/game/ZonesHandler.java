@@ -90,7 +90,7 @@ public final class ZonesHandler {
                 Card card = game.getCard(info.event.getTargetId());
                 if (card instanceof DoubleFacedCard || card instanceof DoubleFacedCardHalf) {
                     boolean forceToMainSide = false;
-                    Boolean enterTransformed = (Boolean) game.getState().getValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId());
+                    Boolean enterTransformed = (Boolean) game.getState().getValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId() + card.getZoneChangeCounter(game));
                     if (enterTransformed == null) {
                         enterTransformed = false;
                     }
@@ -380,7 +380,7 @@ public final class ZonesHandler {
              * it enters the battlefield with its back face up. If a player is instructed to put a card that isn't a double-faced card
              * onto the battlefield transformed or converted, that card stays in its current zone.
              */
-            boolean wantToTransform = Boolean.TRUE.equals(game.getState().getValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId()));
+            boolean wantToTransform = Boolean.TRUE.equals(game.getState().getValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId() + card.getZoneChangeCounter(game)));
             if (wantToTransform && !(card instanceof DoubleFacedCardHalf)) {
                 isGoodToMove = card.isTransformable() && card.getSecondCardFace().isPermanent(game);
             } else {
