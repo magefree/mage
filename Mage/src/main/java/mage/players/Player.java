@@ -725,6 +725,18 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean putCardOnTopXOfLibrary(Card card, Game game, Ability source, int xFromTheTop, boolean withName);
 
     /**
+     * Moves the cards to the top x position of the library
+     *
+     * @param cards
+     * @param game
+     * @param source
+     * @param xFromTheTop
+     * @param withName    - show card name in game logs for all players
+     * @return
+     */
+    boolean putCardsOnTopXOfLibrary(Cards cards, Game game, Ability source, int xFromTheTop, boolean withName);
+
+    /**
      * Moves the cards from cards to the top of players library.
      *
      * @param cards    - list of cards that have to be moved
