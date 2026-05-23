@@ -1,18 +1,22 @@
 package mage.abilities.common;
 
-import mage.MageObject;
-import mage.MageObjectReference;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
+
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -20,7 +24,7 @@ import mage.players.Player;
 public class GodEternalDiesTriggeredAbility extends TriggeredAbilityImpl {
 
     public GodEternalDiesTriggeredAbility() {
-        super(Zone.ALL, null, true);
+        super(Zone.ALL, new GodEternalEffect(), true);
         setLeavesTheBattlefieldTrigger(true);
     }
 
@@ -43,8 +47,8 @@ public class GodEternalDiesTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getTargetId().equals(this.getSourceId())) {
-            this.getEffects().clear();
-            this.addEffect(new GodEternalEffect(new MageObjectReference(zEvent.getTarget(), game)));
+            this.getEffects().setTargetPointer(new FixedTargets(
+                    CardUtil.getAllCardsFromPermanentLeftBattlefield(zEvent.getTarget(), game), game));
             return true;
         }
         return false;
@@ -64,16 +68,12 @@ public class GodEternalDiesTriggeredAbility extends TriggeredAbilityImpl {
 
 class GodEternalEffect extends OneShotEffect {
 
-    private final MageObjectReference mor;
-
-    GodEternalEffect(MageObjectReference mor) {
+    GodEternalEffect() {
         super(Outcome.Benefit);
-        this.mor = mor;
     }
 
     private GodEternalEffect(final GodEternalEffect effect) {
         super(effect);
-        this.mor = effect.mor;
     }
 
     @Override
@@ -84,13 +84,15 @@ class GodEternalEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Cards cards = getTargetPointer().getTargets(game, source)
+                .stream()
+                .map(game::getCard)
+                .filter(Objects::nonNull)
+                .map(MageItem::getId)
+                .collect(Collectors.toCollection(CardsImpl::new));
+        if (player == null || cards.isEmpty()) {
             return false;
         }
-        Card card = game.getCard(mor.getSourceId());
-        if (card == null || card.getZoneChangeCounter(game) - 1 != mor.getZoneChangeCounter()) {
-            return false;
-        }
-        return player.putCardOnTopXOfLibrary(card, game, source, 3, true);
+        return player.putCardsOnTopXOfLibrary(cards, game, source, 3, true);
     }
 }
