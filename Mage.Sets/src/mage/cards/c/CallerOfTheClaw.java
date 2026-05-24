@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -18,9 +17,10 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.BearToken;
 import mage.watchers.Watcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -72,7 +72,7 @@ class CallerOfTheClawWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
             Permanent card = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (card != null && card.isOwnedBy(this.controllerId) && card.isCreature(game) && !(card instanceof PermanentToken)) {
+            if (card != null && card.isOwnedBy(this.controllerId) && card.isCreature(game) && !card.isToken()) {
                 creaturesCount++;
             }
         }

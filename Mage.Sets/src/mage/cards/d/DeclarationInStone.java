@@ -13,7 +13,6 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
@@ -70,12 +69,12 @@ class DeclarationInStoneEffect extends OneShotEffect {
         int nonTokenCount = 0;
         if (CardUtil.haveEmptyName(targetPermanent)) { // face down creature
             cardsToExile.add(targetPermanent);
-            if (!(targetPermanent instanceof PermanentToken)) {
+            if (!targetPermanent.isToken()) {
                 nonTokenCount++;
             }
         } else {
             if (cardsToExile.add(targetPermanent)
-                    && !(targetPermanent instanceof PermanentToken)) {
+                    && !targetPermanent.isToken()) {
                 nonTokenCount++;
             }
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, targetPermanent.getControllerId(), game)) {
@@ -83,15 +82,15 @@ class DeclarationInStoneEffect extends OneShotEffect {
                         && CardUtil.haveSameNames(permanent, targetPermanent)) {
                     cardsToExile.add(permanent);
                     // exiled count only matters for non-tokens
-                    if (!(permanent instanceof PermanentToken)) {
+                    if (!targetPermanent.isToken()) {
                         nonTokenCount++;
                     }
                 }
             }
         }
         controller.moveCards(cardsToExile, Zone.EXILED, source, game);
-        game.processAction();
         if (nonTokenCount > 0) {
+            game.processAction();
             new InvestigateTargetEffect(nonTokenCount)
                     .setTargetPointer(new FixedTarget(targetPermanent.getControllerId()))
                     .apply(game, source);

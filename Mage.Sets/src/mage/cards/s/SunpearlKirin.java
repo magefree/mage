@@ -14,7 +14,6 @@ import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
@@ -85,9 +84,10 @@ class SunpearlKirinEffect extends OneShotEffect {
         if (player == null || permanent == null) {
             return false;
         }
-        boolean isToken = permanent instanceof PermanentToken;
+        boolean isToken = permanent.isToken();
         player.moveCards(permanent, Zone.HAND, source, game);
         if (isToken) {
+            game.processAction();
             player.drawCards(1, source, game);
         }
         return true;

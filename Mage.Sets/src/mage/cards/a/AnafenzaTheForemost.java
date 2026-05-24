@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import mage.MageInt;
@@ -19,7 +18,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
@@ -87,7 +85,7 @@ class AnafenzaTheForemostEffect extends ReplacementEffectImpl {
         if (controller != null) {
             if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
                 Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-                if (permanent != null && !(permanent instanceof PermanentToken)) {
+                if (permanent != null && !permanent.isToken()) {
                     return controller.moveCards(permanent, Zone.EXILED, source, game);
                 }
             } else {

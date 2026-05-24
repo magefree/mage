@@ -12,7 +12,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.util.CardUtil;
 
 /**
@@ -85,7 +84,7 @@ public class GraveyardFromAnywhereExileReplacementEffect extends ReplacementEffe
             return true;
         }
         Permanent token = game.getPermanent(event.getTargetId());
-        if (tokens && (token instanceof PermanentToken && (!onlyYou || token.isOwnedBy(source.getControllerId())))) {
+        if (tokens && (token.isToken() && (!onlyYou || token.isOwnedBy(source.getControllerId())))) {
             return true;
         }
         return false;

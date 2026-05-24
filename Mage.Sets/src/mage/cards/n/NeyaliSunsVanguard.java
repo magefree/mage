@@ -18,7 +18,6 @@ import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
@@ -120,7 +119,7 @@ class NeyaliSunsVanguardWatcher extends Watcher {
             return;
         }
         Permanent permanent = game.getPermanent(event.getSourceId());
-        if (permanent instanceof PermanentToken) {
+        if (permanent != null && permanent.isToken()) {
             set.add(permanent.getControllerId());
         }
     }
