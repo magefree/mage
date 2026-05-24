@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 
 import java.util.UUID;
 
@@ -83,7 +82,7 @@ class LegionLoyalistCantBeBlockedByTokensEffect extends RestrictionEffect {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return !(blocker instanceof PermanentToken);
+        return !blocker.isToken();
     }
 
     @Override

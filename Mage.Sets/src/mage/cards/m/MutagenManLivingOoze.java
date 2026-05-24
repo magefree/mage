@@ -1,15 +1,6 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
-import mage.game.permanent.token.MutagenToken;
-import mage.players.Player;
-import mage.util.CardUtil;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -19,10 +10,14 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.*;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.token.MutagenToken;
+import mage.players.Player;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 
 /**
@@ -92,7 +87,7 @@ class MutagenManLivingOozeEffect extends CostModificationEffectImpl {
         Permanent permanent = game.getPermanentOrLKIBattlefield(abilityToModify.getSourceId());
         return permanent != null
             && permanent.isArtifact(game)
-            && (permanent instanceof PermanentToken)
+            && permanent.isToken()
             && permanent.isControlledBy(source.getControllerId());
     }
 

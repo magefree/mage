@@ -12,7 +12,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 
 import java.util.UUID;
 
@@ -77,7 +76,7 @@ class MirkwoodBatsTriggeredAbility extends TriggeredAbilityImpl {
                 return true;
             case SACRIFICED_PERMANENT:
                 Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-                return permanent instanceof PermanentToken;
+                return permanent != null && permanent.isToken();
             default:
                 return false;
         }
