@@ -1136,6 +1136,53 @@ public abstract class PlayerImpl implements Player, Serializable {
         return true;
     }
 
+    @Override
+    public boolean putCardsOnTopXOfLibrary(Cards cards, Game game, Ability source, int xFromTheTop, boolean withName) {
+        if (cards.isEmpty()) {
+            return false;
+        }
+        Map<UUID, Cards> playerMap = new HashMap<>();
+        for (Card card : cards.getCards(game)) {
+            playerMap.computeIfAbsent(card.getOwnerId(), k -> new CardsImpl()).add(card);
+        }
+        for (UUID playerId : game.getState().getPlayersInRange(this.getId(), game)) {
+            Player owner = game.getPlayer(playerId);
+            Cards ownedCards = playerMap.getOrDefault(playerId, new CardsImpl());
+            if (owner != null && !ownedCards.isEmpty()) {
+                if (owner.getLibrary().size() + 1 < xFromTheTop) {
+                    owner.putCardsOnBottomOfLibrary(ownedCards, game, source, true);
+                    continue;
+                }
+                if (ownedCards.size() == 1) {
+                    owner.putCardOnTopXOfLibrary(ownedCards.getRandom(game), game, source, xFromTheTop, withName);
+                    continue;
+                }
+                // 401.4. If an effect puts two or more cards in a specific position in a library at the same time,
+                // the owner of those cards may arrange them in any order.
+                // That library's owner doesn't reveal the order in which the cards go into the library.
+                TargetCard target = new TargetCard(Zone.ALL,
+                        new FilterCard("card ORDER to put " + CardUtil.numberToOrdinalText(xFromTheTop) +
+                                " from the TOP of your library (last one chosen will be topmost)"));
+                target.setRequired(true);
+                while (ownedCards.size() > 1
+                        && owner.canRespond()
+                        && owner.choose(Outcome.Neutral, ownedCards, target, source, game)) {
+                    UUID targetObjectId = target.getFirstTarget();
+                    if (targetObjectId == null) {
+                        break;
+                    }
+                    ownedCards.remove(targetObjectId);
+                    owner.putCardOnTopXOfLibrary(game.getCard((targetObjectId)), game, source, xFromTheTop, false);
+                    target.clearChosen();
+                }
+                for (UUID c : ownedCards) {
+                    owner.putCardOnTopXOfLibrary(game.getCard((c)), game, source, xFromTheTop, false);
+                }
+            }
+        }
+        return true;
+    }
+
     /**
      * Can be cards or permanents that go to library
      *

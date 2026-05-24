@@ -3079,6 +3079,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public boolean putCardsOnTopXOfLibrary(Cards cards, Game game, Ability source, int xFromTheTop, boolean withName) {
+        return computerPlayer.putCardsOnTopXOfLibrary(cards, game, source, xFromTheTop, withName);
+    }
+
+    @Override
     public boolean putCardsOnTopOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder) {
         return computerPlayer.putCardsOnTopOfLibrary(cards, game, source, anyOrder);
     }
