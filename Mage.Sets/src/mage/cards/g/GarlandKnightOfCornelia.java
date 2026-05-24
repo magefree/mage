@@ -94,7 +94,7 @@ class GarlandKnightOfCorneliaEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
-        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId(), Boolean.TRUE);
+        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId() + card.getZoneChangeCounter(game), Boolean.TRUE);
         return player.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
 }

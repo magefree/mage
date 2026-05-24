@@ -119,8 +119,11 @@ class GoldenGuardianReturnTransformedEffect extends OneShotEffect {
         if (controller == null || game.getState().getZone(source.getSourceId()) != Zone.GRAVEYARD) {
             return false;
         }
-        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
         Card card = game.getCard(source.getSourceId());
-        return card != null && controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+        if (card == null) {
+            return false;
+        }
+        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId() + card.getZoneChangeCounter(game), Boolean.TRUE);
+        return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
 }

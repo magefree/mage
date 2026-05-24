@@ -93,7 +93,7 @@ class JourneyToEternityReturnTransformedSourceEffect extends OneShotEffect {
             if (zone == Zone.BATTLEFIELD || !zone.isPublicZone()) {
                 return true;
             }
-            game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
+            game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId() + card.getZoneChangeCounter(game), Boolean.TRUE);
             controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, false, null);
         }
         return true;

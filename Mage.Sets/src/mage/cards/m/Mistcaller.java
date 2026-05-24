@@ -88,7 +88,7 @@ class ContainmentPriestReplacementEffect extends ReplacementEffectImpl {
         if (((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD) {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
-                Object entersTransformed = game.getState().getValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + event.getTargetId());
+                Object entersTransformed = game.getState().getValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + event.getTargetId() + card.getZoneChangeCounter(game));
                 if (entersTransformed instanceof Boolean && (Boolean) entersTransformed && card.getSecondCardFace() != null) {
                     card = card.getSecondCardFace();
                 }
