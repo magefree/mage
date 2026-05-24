@@ -69,6 +69,8 @@ public interface Permanent extends Card, Controllable {
 
     boolean phaseOut(Game game, boolean indirectPhase);
 
+    boolean isToken();
+
     boolean isMonstrous();
 
     void setMonstrous(boolean value);
