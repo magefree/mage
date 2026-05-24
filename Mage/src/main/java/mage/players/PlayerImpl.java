@@ -1150,11 +1150,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             Cards ownedCards = playerMap.getOrDefault(playerId, new CardsImpl());
             if (owner != null && !ownedCards.isEmpty()) {
                 if (owner.getLibrary().size() + 1 < xFromTheTop) {
-                    putCardsOnBottomOfLibrary(ownedCards, game, source, true);
+                    owner.putCardsOnBottomOfLibrary(ownedCards, game, source, true);
                     continue;
                 }
                 if (ownedCards.size() == 1) {
-                    putCardOnTopXOfLibrary(ownedCards.getRandom(game), game, source, xFromTheTop, withName);
+                    owner.putCardOnTopXOfLibrary(ownedCards.getRandom(game), game, source, xFromTheTop, withName);
                     continue;
                 }
                 // 401.4. If an effect puts two or more cards in a specific position in a library at the same time,
@@ -1172,11 +1172,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                         break;
                     }
                     ownedCards.remove(targetObjectId);
-                    putCardOnTopXOfLibrary(game.getCard((targetObjectId)), game, source, xFromTheTop, false);
+                    owner.putCardOnTopXOfLibrary(game.getCard((targetObjectId)), game, source, xFromTheTop, false);
                     target.clearChosen();
                 }
                 for (UUID c : ownedCards) {
-                    putCardOnTopXOfLibrary(game.getCard((c)), game, source, xFromTheTop, false);
+                    owner.putCardOnTopXOfLibrary(game.getCard((c)), game, source, xFromTheTop, false);
                 }
             }
         }
