@@ -73,6 +73,7 @@
         <gameType name="Tiny Leaders Two Player Duel" jar="mage-game-tinyleadersduel-${project.version}.jar" className="mage.game.TinyLeadersDuelMatch" typeName="mage.game.TinyLeadersDuelType"/>
         <gameType name="Canadian Highlander Two Player Duel" jar="mage-game-canadianhighlanderduel-${project.version}.jar" className="mage.game.CanadianHighlanderDuelMatch" typeName="mage.game.CanadianHighlanderDuelType"/>
         <gameType name="Penny Dreadful Commander Free For All" jar="mage-game-pennydreadfulcommanderfreeforall-${project.version}.jar" className="mage.game.PennyDreadfulCommanderFreeForAllMatch" typeName="mage.game.PennyDreadfulCommanderFreeForAllType"/>
+        <gameType name="Pauper Commander Free For All" jar="mage-game-paupercommanderfreeforall-${project.version}.jar" className="mage.game.PauperCommanderFreeForAllMatch" typeName="mage.game.PauperCommanderFreeForAllType"/>
         <gameType name="Freeform Commander Two Player Duel" jar="mage-game-freeformcommanderduel-${project.version}.jar" className="mage.game.FreeformCommanderDuelMatch" typeName="mage.game.FreeformCommanderDuelType"/>
         <gameType name="Freeform Commander Free For All" jar="mage-game-freeformcommanderfreeforall-${project.version}.jar" className="mage.game.FreeformCommanderFreeForAllMatch" typeName="mage.game.FreeformCommanderFreeForAllType"/>
         <gameType name="Freeform Unlimited Commander" jar="mage-game-freeformunlimitedcommander-${project.version}.jar" className="mage.game.FreeformUnlimitedCommanderMatch" typeName="mage.game.FreeformUnlimitedCommanderType"/>
@@ -198,6 +199,7 @@
         <deckType name="Variant Magic - Tiny Leaders" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.TinyLeaders"/>
         <deckType name="Variant Magic - Momir Basic" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Momir"/>
         <deckType name="Variant Magic - Penny Dreadful Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.PennyDreadfulCommander"/>
+        <deckType name="Variant Magic - Pauper Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.PauperCommander"/>
         <deckType name="Variant Magic - Freeform Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.FreeformCommander"/>
         <deckType name="Variant Magic - Freeform Unlimited Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.FreeformUnlimitedCommander"/>
         <deckType name="Variant Magic - Brawl" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Brawl"/>
