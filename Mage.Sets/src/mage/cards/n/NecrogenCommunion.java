@@ -3,16 +3,13 @@ package mage.cards.n;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlAttachedEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.ToxicAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -40,9 +37,8 @@ public final class NecrogenCommunion extends CardImpl {
         ));
 
         // When enchanted creature dies, return that card to the battlefield under your control.
-        this.addAbility(new DiesAttachedTriggeredAbility(
-                new ReturnToBattlefieldUnderYourControlAttachedEffect(), "enchanted creature"
-        ));
+        this.addAbility(new DiesAttachedTriggeredAbility(new ReturnToBattlefieldUnderYourControlTargetEffect(),
+                "enchanted creature", false, true, SetTargetPointer.CARD));
     }
 
     private NecrogenCommunion(final NecrogenCommunion card) {
