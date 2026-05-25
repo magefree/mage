@@ -1,14 +1,15 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +25,8 @@ public final class EndlessCockroaches extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Endless Cockroaches dies, return it to its owner's hand.
-        this.addAbility(new DiesSourceTriggeredAbility(new ReturnToHandSourceEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new ReturnToHandTargetEffect()
+                .setText("return it to its owner's hand"), false, SetTargetPointer.CARD));
     }
 
     private EndlessCockroaches(final EndlessCockroaches card) {
