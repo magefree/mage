@@ -3,7 +3,7 @@ package mage.cards.f;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlAttachedEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlashAbility;
@@ -11,8 +11,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -42,9 +42,10 @@ public final class FungalFortitude extends CardImpl {
 
         // When enchanted creature dies, return it to the battlefield tapped under its owner's control.
         this.addAbility(new DiesAttachedTriggeredAbility(
-                new ReturnToBattlefieldUnderOwnerControlAttachedEffect("it", true),
+                new ReturnToBattlefieldUnderOwnerControlTargetEffect(true, false)
+                        .setText("return it to the battlefield tapped under its owner's control"),
                 "enchanted creature",
-                false
+                false, true, SetTargetPointer.CARD
         ));
     }
 

@@ -11,6 +11,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 /**
  * "When enchanted/equipped creature dies" triggered ability
@@ -72,14 +74,13 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!((ZoneChangeEvent) event).isDiesEvent()) {
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        Permanent creatureDied = zEvent.getTarget();
+        if (creatureDied == null || !zEvent.isDiesEvent()) {
             return false;
         }
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         boolean triggered = false;
-        if (zEvent.getTarget() != null
-                && zEvent.getTarget().getAttachments() != null
-                && zEvent.getTarget().getAttachments().contains(this.getSourceId())) {
+        if (creatureDied.getAttachments().contains(this.getSourceId())) {
             triggered = true;
         } else {
             // If the attachment and attachedTo went to graveyard at the same time, the trigger applies.
@@ -105,40 +106,22 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
         if (!triggered) {
             return false;
         }
-        if (zEvent.getTarget() == null) {
-            return true;
-        }
-        getEffects().setValue("attachedTo", zEvent.getTarget());
-        getEffects().setValue("zcc", zEvent.getTarget().getZoneChangeCounter(game) + 1); // zone change info from battlefield
+        getEffects().setValue("attachedTo", creatureDied);
+        getEffects().setValue("zcc", creatureDied.getZoneChangeCounter(game) + 1); // zone change info from battlefield
         if (setTargetPointer == SetTargetPointer.ATTACHED_TO_CONTROLLER) {
-            Permanent attachment = game.getPermanentOrLKIBattlefield(getSourceId());
-            if (attachment != null
-                    && attachment.getAttachedTo() != null) {
-                Permanent attachedTo = (Permanent) game.getLastKnownInformation(attachment.getAttachedTo(),
-                        Zone.BATTLEFIELD, attachment.getAttachedToZoneChangeCounter());
-                if (attachedTo != null) {
-                    getEffects().setTargetPointer(new FixedTarget(attachedTo.getControllerId()));
-                }
-            }
+            getEffects().setTargetPointer(new FixedTarget(creatureDied.getControllerId()));
         }
-        if (setTargetPointer == SetTargetPointer.CARD
-                || setTargetPointer == SetTargetPointer.PERMANENT) {
-            Permanent attachment = game.getPermanentOrLKIBattlefield(getSourceId());
+        if (setTargetPointer == SetTargetPointer.CARD) {
             if (rememberSource) {
-                // set targetpointer to the attachement
+                // set targetpointer to the attachment
+                Permanent attachment = game.getPermanentOrLKIBattlefield(getSourceId());
                 if (attachment != null) {
                     getEffects().setTargetPointer(new FixedTarget(attachment.getId()));
                 }
             } else {
                 // set targetpointer to the creature that died
-                if (attachment != null
-                        && attachment.getAttachedTo() != null) {
-                    Permanent attachedTo = (Permanent) game.getLastKnownInformation(attachment.getAttachedTo(),
-                            Zone.BATTLEFIELD, attachment.getAttachedToZoneChangeCounter());
-                    if (attachedTo != null) {
-                        getEffects().setTargetPointer(new FixedTarget(attachedTo.getId()));
-                    }
-                }
+                getEffects().setTargetPointer(new FixedTargets(
+                        CardUtil.getAllCardsFromPermanentLeftBattlefield(creatureDied, game), game));
             }
         }
         return true;
