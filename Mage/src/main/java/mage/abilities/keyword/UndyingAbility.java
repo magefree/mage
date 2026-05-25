@@ -17,7 +17,7 @@ public class UndyingAbility extends DiesSourceTriggeredAbility {
 
     public UndyingAbility() {
         super(new ReturnToBattlefieldUnderOwnerControlWithCounterTargetEffect(
-                CounterType.P1P1.createInstance(), false));
+                CounterType.P1P1.createInstance()));
     }
 
     protected UndyingAbility(final UndyingAbility ability) {

@@ -14,7 +14,7 @@ public class PersistAbility extends DiesSourceTriggeredAbility {
 
     public PersistAbility() {
         super(new ReturnToBattlefieldUnderOwnerControlWithCounterTargetEffect(
-                CounterType.M1M1.createInstance(), false));
+                CounterType.M1M1.createInstance()));
     }
 
     protected PersistAbility(final PersistAbility ability) {
