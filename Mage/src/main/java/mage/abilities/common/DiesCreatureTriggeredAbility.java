@@ -12,6 +12,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
 /**
@@ -90,7 +91,7 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
                 this.getAllEffects().setTargetPointer(new FixedTarget(event.getPlayerId(), game));
                 break;
             case PERMANENT:
-                this.getAllEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+                this.getAllEffects().setTargetPointer(new FixedTargets(CardUtil.getAllCardsFromPermanentLeftBattlefield(zEvent.getTarget(), game), game));
                 break;
             case NONE:
                 break;
