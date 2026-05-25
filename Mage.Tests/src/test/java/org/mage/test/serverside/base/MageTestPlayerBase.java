@@ -422,7 +422,7 @@ public abstract class MageTestPlayerBase {
         );
 
         // exile
-        ability = new SimpleActivatedAbility(new ReturnFromExileEffect(Zone.HAND).setText("return from exile"), new ManaCostsImpl<>(""));
+        ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect().setText("return from exile"), new ManaCostsImpl<>(""));
         ability.addTarget(new TargetCardInExile(StaticFilters.FILTER_CARD));
         addCustomCardWithAbility(
                 "return from exile for " + controller.getName(),
