@@ -7,6 +7,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.Card;
+import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -14,7 +15,10 @@ import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
+
+import java.util.Set;
 
 /**
  * @author spjspj
@@ -64,7 +68,8 @@ class DarettiScrapSavantTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.isDiesEvent()
                 && zEvent.getTarget().isArtifact(game)
                 && zEvent.getTarget().isOwnedBy(this.controllerId)) {
-            this.getEffects().setTargetPointer(new FixedTarget(zEvent.getTargetId(), game));
+            this.getEffects().setTargetPointer(new FixedTargets(
+                    CardUtil.getAllCardsFromPermanentLeftBattlefield(zEvent.getTarget(), game), game));
             return true;
         }
         return false;
@@ -89,10 +94,10 @@ class DarettiScrapSavantEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
+        Set<Card> cards = new CardsImpl(getTargetPointer().getTargets(game, source)).getCards(game);
+        if (!cards.isEmpty()) {
             Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
-            effect.setTargetPointer(new FixedTarget(card, game));
+            effect.setTargetPointer(new FixedTargets(cards, game));
             effect.setText("return that card to the battlefield at the beginning of the next end step");
             game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect, TargetController.ANY), source);
             return true;
