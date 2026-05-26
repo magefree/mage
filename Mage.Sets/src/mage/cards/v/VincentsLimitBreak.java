@@ -5,7 +5,7 @@ import mage.abilities.Mode;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.abilities.keyword.TieredAbility;
@@ -14,6 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -96,8 +97,9 @@ class VincentsLimitBreakEffect extends OneShotEffect {
             return false;
         }
         game.addEffect(new GainAbilityTargetEffect(new DiesSourceTriggeredAbility(
-                new ReturnSourceFromGraveyardToBattlefieldEffect(true, true), false
-        )).setTargetPointer(new FixedTarget(permanent, game)), source);
+                new ReturnToBattlefieldUnderOwnerControlTargetEffect(true, false)
+                        .setText("return it to the battlefield tapped under its owner's control"),
+                false, SetTargetPointer.CARD)).setTargetPointer(new FixedTarget(permanent, game)), source);
         game.addEffect(new SetBasePowerToughnessTargetEffect(
                 power, toughness, Duration.EndOfTurn
         ).setTargetPointer(new FixedTarget(permanent, game)), source);

@@ -10,7 +10,7 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.AsThoughEffect;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.game.Game;
@@ -80,7 +80,7 @@ class PlaneswalkersMischiefEffect extends OneShotEffect {
                 AsThoughEffect effect = new PlaneswalkersMischiefCastFromExileEffect();
                 effect.setTargetPointer(new FixedTarget(revealedCard.getId()));
                 game.addEffect(effect, source);
-                OneShotEffect effect2 = new ReturnFromExileEffect(Zone.HAND);
+                OneShotEffect effect2 = new ReturnFromExileForSourceEffect(Zone.HAND);
                 Condition condition = new PlaneswalkersMischiefCondition(source.getSourceId(), revealedCard.getId());
                 ConditionalOneShotEffect effect3 = new ConditionalOneShotEffect(effect2, condition, "if you haven't cast it, return it to its owner's hand.");
                 DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect3);

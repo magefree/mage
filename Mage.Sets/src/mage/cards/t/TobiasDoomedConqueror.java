@@ -18,7 +18,6 @@ import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.ZombieToken;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
@@ -105,7 +104,7 @@ class TobiasDoomedConquerorWatcher extends Watcher {
         if (!zEvent.isDiesEvent()
                 || zEvent.getTarget() == null
                 || !zEvent.getTarget().isCreature(game)
-                || zEvent.getTarget() instanceof PermanentToken) {
+                || zEvent.getTarget().isToken()) {
             return;
         }
         playerMap.compute(zEvent.getTarget().getControllerId(), CardUtil::setOrIncrementValue);

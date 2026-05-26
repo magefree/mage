@@ -1,17 +1,13 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -19,12 +15,12 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.game.Game;
 import mage.game.permanent.token.TheLocustGodInsectToken;
-import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +47,9 @@ public final class TheLocustGod extends CardImpl {
         this.addAbility(ability);
 
         // When The Locust God dies, return it to its owner's hand at the beginning of the next end step.
-        this.addAbility(new DiesSourceTriggeredAbility(new TheLocustGodEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
+                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnToHandTargetEffect())
+        ).setText("return it to its owner's hand at the beginning of the next end step"), false, SetTargetPointer.CARD));
     }
 
     private TheLocustGod(final TheLocustGod card) {
@@ -61,35 +59,5 @@ public final class TheLocustGod extends CardImpl {
     @Override
     public TheLocustGod copy() {
         return new TheLocustGod(this);
-    }
-}
-
-class TheLocustGodEffect extends OneShotEffect {
-
-    private static final String effectText = "return it to its owner's hand at the beginning of the next end step";
-
-    TheLocustGodEffect() {
-        super(Outcome.Benefit);
-        staticText = effectText;
-    }
-
-    private TheLocustGodEffect(final TheLocustGodEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        // Create delayed triggered ability
-        Effect effect = new ReturnToHandTargetEffect();
-        effect.setText("return {this} to its owner's hand");
-        effect.setTargetPointer(new FixedTarget(source.getSourceId(), source.getStackMomentSourceZCC()));
-        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-        game.addDelayedTriggeredAbility(delayedAbility, source);
-        return true;
-    }
-
-    @Override
-    public TheLocustGodEffect copy() {
-        return new TheLocustGodEffect(this);
     }
 }

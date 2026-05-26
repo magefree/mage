@@ -1,15 +1,18 @@
 package mage.abilities.effects.common;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.UUID;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -35,19 +38,15 @@ public class PutIntoLibraryNFromTopTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean result = false;
-        for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
-            Permanent permanent = game.getPermanent(permanentId);
-            if (permanent == null) {
-                continue;
-            }
-            Player player = game.getPlayer(permanent.getOwnerId());
-            if (player == null) {
-                continue;
-            }
-            result |= player.putCardOnTopXOfLibrary(permanent, game, source, position, true);
-        }
-        return result;
+        Cards cards = getTargetPointer().getTargets(game, source)
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .map(MageItem::getId)
+                .collect(Collectors.toCollection(CardsImpl::new));
+        Player player = game.getPlayer(source.getControllerId());
+        return player != null && !cards.isEmpty()
+                && player.putCardsOnTopXOfLibrary(cards, game, source, position, true);
     }
 
     @Override

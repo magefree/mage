@@ -101,14 +101,11 @@ public class PromiseOfTomorrowTest extends CardTestCommander4Players {
         // destroy creature
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Balduvian Bears");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkExileCount("after die", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 1);
-
-        // possible bug: Promise of Tomorrow tries to move commander card to exile from command zone with error
         setChoice(playerA, true); // move commander from graveyard to command zone
-        setChoice(playerA, false); // move commander from exile to command zone
+        checkExileCount("after die", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 0);
 
-        // must return
-        checkPermanentCount("after return", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 1);
+        // no return
+        checkPermanentCount("after return", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 0);
         checkGraveyardCount("after return", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Promise of Tomorrow", 1);
 
         setStrictChooseMode(true);

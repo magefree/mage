@@ -5,9 +5,9 @@ import mage.abilities.Mode;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
@@ -69,7 +69,7 @@ public class ExileReturnBattlefieldNextEndStepTargetEffect extends OneShotEffect
         if (controller == null) {
             return false;
         }
-        Set<Card> toExile = getTargetPointer().getTargets(game, source)
+        Set<Permanent> toExile = getTargetPointer().getTargets(game, source)
                 .stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
@@ -81,10 +81,7 @@ public class ExileReturnBattlefieldNextEndStepTargetEffect extends OneShotEffect
         Effect effect = yourControl
                 ? new ReturnToBattlefieldUnderYourControlTargetEffect(exiledOnly, returnTapped)
                 : new ReturnToBattlefieldUnderOwnerControlTargetEffect(returnTapped, exiledOnly);
-        effect.setTargetPointer(new FixedTargets(toExile
-                .stream()
-                .map(Card::getMainCard)
-                .collect(Collectors.toSet()), game));
+        effect.setTargetPointer(new FixedTargets(CardUtil.getAllCardsFromPermanentsLeftBattlefield(toExile, game), game));
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
         return true;
     }

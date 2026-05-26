@@ -27,4 +27,24 @@ public class EarthbendTest extends CardTestPlayerBase {
         assertType("Forest", CardType.CREATURE, true);
     }
 
+    @Test
+    public void testEarthbendTDFC() {
+        addCard(Zone.BATTLEFIELD, playerA, "Azusa's Many Journeys");
+        addCard(Zone.BATTLEFIELD, playerA, "Ashaya, Soul of the Wild");
+        addCard(Zone.HAND, playerA, "Earthbending Lesson");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.HAND, playerA, "Fell");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+
+        castSpell(7, PhaseStep.PRECOMBAT_MAIN, playerA, "Earthbending Lesson");
+        addTarget(playerA, "Likeness of the Seeker");
+        castSpell(7, PhaseStep.POSTCOMBAT_MAIN, playerA, "Fell");
+        addTarget(playerA, "Likeness of the Seeker");
+
+        setStrictChooseMode(true);
+        setStopAt(7, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Azusa's Many Journeys", 1);
+    }
 }

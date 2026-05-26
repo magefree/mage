@@ -3085,6 +3085,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public boolean putCardsOnTopXOfLibrary(Cards cards, Game game, Ability source, int xFromTheTop, boolean withName) {
+        return computerPlayer.putCardsOnTopXOfLibrary(cards, game, source, xFromTheTop, withName);
+    }
+
+    @Override
     public boolean putCardsOnTopOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder) {
         return computerPlayer.putCardsOnTopOfLibrary(cards, game, source, anyOrder);
     }
@@ -3955,7 +3960,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean moveCardsToExile(Set<Card> cards, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName) {
+    public boolean moveCardsToExile(Set<? extends Card> cards, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName) {
         return computerPlayer.moveCardsToExile(cards, source, game, withName, exileId, exileZoneName);
     }
 

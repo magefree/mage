@@ -60,7 +60,11 @@ public class SpellTransformedAbility extends SpellAbility {
     @Override
     public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
         if (super.activate(game, allowedIdentifiers, noMana)) {
-            game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + getSourceId(), Boolean.TRUE);
+            final Card card = game.getCard(this.getSourceId());
+            if (card == null) {
+                return false;
+            }
+            game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + getSourceId() + card.getZoneChangeCounter(game), Boolean.TRUE);
             return true;
         }
         return false;

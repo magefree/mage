@@ -184,7 +184,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             return false;
         }
         // in case of transformable enchantments
-        if (Boolean.TRUE.equals(game.getState().getValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId()))
+        if (Boolean.TRUE.equals(game.getState().getValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId() + card.getZoneChangeCounter(game)))
                 && card.getSecondCardFace() != null) {
             card = card.getSecondCardFace();
         }

@@ -12,7 +12,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.ZombieToken;
 
 import java.util.UUID;
@@ -74,7 +73,7 @@ class SkullSkaabTriggeredAbility extends TriggeredAbilityImpl {
                 && exploiter.isCreature(game)
                 && exploited.isCreature(game)
                 && exploiter.isControlledBy(getControllerId())
-                && !(exploited instanceof PermanentToken);
+                && !exploited.isToken();
     }
 
     @Override

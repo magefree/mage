@@ -9,7 +9,6 @@ import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Spirit32Token;
 
 import java.util.UUID;
@@ -61,7 +60,7 @@ class CeaselessConflictEffect extends OneShotEffect {
                 source.getControllerId(), source, game
         )) {
             boolean controlledByYou = permanent.isControlledBy(source.getControllerId());
-            boolean nontoken = !(permanent instanceof PermanentToken);
+            boolean nontoken = !permanent.isToken();
             if (permanent.destroy(source, game) && controlledByYou && nontoken) {
                 count++;
             }

@@ -1,10 +1,7 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -14,10 +11,9 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -28,6 +24,8 @@ import mage.game.permanent.PermanentToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.functions.EmptyCopyApplier;
+
+import java.util.UUID;
 
 /**
  *
@@ -88,7 +86,7 @@ class InfiniteReflectionTriggeredEffect extends OneShotEffect {
             Permanent toCopyFromPermanent = game.getPermanent(sourcePermanent.getAttachedTo());
             if (toCopyFromPermanent != null) {
                 for (Permanent toCopyToPermanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-                    if (!toCopyToPermanent.equals(toCopyFromPermanent) && !(toCopyToPermanent instanceof PermanentToken)) {
+                    if (!toCopyToPermanent.equals(toCopyFromPermanent) && !toCopyToPermanent.isToken()) {
                         game.copyPermanent(toCopyFromPermanent, toCopyToPermanent.getId(), source, new EmptyCopyApplier());
                     }
                 }

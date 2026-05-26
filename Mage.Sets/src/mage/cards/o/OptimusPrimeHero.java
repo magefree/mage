@@ -105,7 +105,7 @@ class OptimusPrimeHeroEffect extends OneShotEffect {
         if (backSide == null) {
             return true;
         }
-        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + backSide.getId(), true);
+        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + backSide.getId() + backSide.getZoneChangeCounter(game), true);
         controller.moveCards(backSide, Zone.BATTLEFIELD, source, game);
         return true;
     }

@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.WarpAbility;
@@ -12,6 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
@@ -34,9 +35,10 @@ public final class PerigeeBeckoner extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(2, 0)
                 .setText("until end of turn, another target creature you control gets +2/+0"));
         ability.addEffect(new GainAbilityTargetEffect(new DiesSourceTriggeredAbility(
-                new ReturnSourceFromGraveyardToBattlefieldEffect(true, true), false
-        ), Duration.EndOfTurn, "and gains \"When this creature dies, " +
-                "return it to the battlefield tapped under its owner's control.\""));
+                new ReturnToBattlefieldUnderOwnerControlTargetEffect(true, false)
+                        .setText("return it to the battlefield tapped under its owner's control"),
+                false, SetTargetPointer.CARD), Duration.EndOfTurn,
+                "and gains \"When this creature dies, return it to the battlefield tapped under its owner's control.\""));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
 

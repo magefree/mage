@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.SaprolingToken;
 
 import java.util.UUID;
@@ -78,7 +77,7 @@ class InfestedThrinaxTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (!zEvent.isDiesEvent()
-                || zEvent.getTarget() instanceof PermanentToken
+                || zEvent.getTarget().isToken()
                 || !zEvent.getTarget().isCreature(game)
                 || !zEvent.getTarget().isControlledBy(getControllerId())) {
             return false;

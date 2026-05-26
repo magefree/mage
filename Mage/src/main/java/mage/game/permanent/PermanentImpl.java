@@ -1744,6 +1744,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public boolean isToken() {
+        return this instanceof PermanentToken;
+    }
+
+    @Override
     public boolean isMonstrous() {
         return this.monstrous;
     }

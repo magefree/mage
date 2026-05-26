@@ -1294,6 +1294,18 @@ public final class CardUtil {
         return game.getPermanent(CardUtil.getDefaultCardSideForBattlefield(game, card).getId());
     }
 
+    public static Set<Card> getAllCardsFromPermanentLeftBattlefield(Permanent target, Game game) {
+        return getAllCardsFromPermanentsLeftBattlefield(Collections.singletonList(target), game);
+    }
+
+    public static Set<Card> getAllCardsFromPermanentsLeftBattlefield(Collection<Permanent> targets, Game game) {
+        Set<Card> toReturn = new LinkedHashSet<>();
+        targets.forEach(card -> {
+            toReturn.add(card.getMainCard());
+        });
+        return toReturn;
+    }
+
     /**
      * Return card name for same name searching
      *

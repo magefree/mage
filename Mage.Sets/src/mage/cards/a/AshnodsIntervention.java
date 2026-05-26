@@ -1,9 +1,7 @@
 package mage.cards.a;
 
-import java.util.UUID;
-
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
@@ -14,6 +12,10 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,8 +46,8 @@ public final class AshnodsIntervention extends CardImpl {
 
 class AshnodsInterventionAbility extends TriggeredAbilityImpl {
 
-    public AshnodsInterventionAbility() {
-        super(Zone.ALL, new ReturnToHandSourceEffect());
+    AshnodsInterventionAbility() {
+        super(Zone.ALL, new ReturnToHandTargetEffect());
         setLeavesTheBattlefieldTrigger(true);
     }
 
@@ -66,8 +68,13 @@ class AshnodsInterventionAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getTargetId().equals(sourceId) && zEvent.getFromZone() == Zone.BATTLEFIELD
-                && (zEvent.getToZone() == Zone.GRAVEYARD || zEvent.getToZone() == Zone.EXILED);
+        if (zEvent.getTargetId().equals(sourceId) && zEvent.getFromZone() == Zone.BATTLEFIELD
+                && (zEvent.getToZone() == Zone.GRAVEYARD || zEvent.getToZone() == Zone.EXILED)) {
+            getEffects().setTargetPointer(new FixedTargets(
+                    CardUtil.getAllCardsFromPermanentLeftBattlefield(zEvent.getTarget(), game), game));
+            return true;
+        }
+        return false;
     }
 
     @Override
