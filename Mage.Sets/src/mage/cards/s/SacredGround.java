@@ -11,7 +11,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -64,8 +65,11 @@ class SacredGroundTriggeredAbility extends TriggeredAbilityImpl {
             ZoneChangeEvent zce = (ZoneChangeEvent) event;
             if (zce.isDiesEvent()) {
                 Permanent targetPermanent = zce.getTarget();
-                if (targetPermanent.isLand(game) && targetPermanent.isOwnedBy(getControllerId())) {
-                    getEffects().get(0).setTargetPointer(new FixedTarget(targetPermanent, game));
+                if (targetPermanent != null
+                        && targetPermanent.isLand(game)
+                        && targetPermanent.isOwnedBy(getControllerId())) {
+                    getEffects().setTargetPointer(new FixedTargets(
+                            CardUtil.getAllCardsFromPermanentLeftBattlefield(targetPermanent, game), game));
                     return true;
                 }
             }

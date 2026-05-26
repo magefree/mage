@@ -12,6 +12,7 @@ import mage.game.events.ZoneChangeBatchEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 import java.util.List;
 import java.util.Objects;
@@ -71,8 +72,8 @@ public class DiesOneOrMoreTriggeredAbility extends TriggeredAbilityImpl implemen
         if (setTargetPointer) {
             this.getAllEffects().setTargetPointer(new FixedTargets(
                     events.stream()
-                            .map(GameEvent::getTargetId)
-                            .map(game::getCard)
+                            .map(ZoneChangeEvent::getTarget)
+                            .flatMap(x -> CardUtil.getAllCardsFromPermanentLeftBattlefield(x, game).stream())
                             .filter(Objects::nonNull)
                             .collect(Collectors.toSet()),
                     game

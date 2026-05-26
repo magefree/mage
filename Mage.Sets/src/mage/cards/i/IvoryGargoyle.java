@@ -7,10 +7,8 @@ import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.ExileSourceEffect;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
-import mage.abilities.effects.common.SkipNextDrawStepControllerEffect;
+import mage.abilities.effects.common.*;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -35,9 +33,10 @@ public final class IvoryGargoyle extends CardImpl {
 
         // When Ivory Gargoyle dies, return it to the battlefield under its owner's control at the beginning of the next end step and you skip your next draw step.
         Ability ability = new DiesSourceTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnSourceFromGraveyardToBattlefieldEffect(false, true)
+                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false)
                         .setText("return it to the battlefield under its owner's control at the beginning of the next end step")
-                ).setTriggerPhrase("")).setText("return it to the battlefield under its owner's control at the beginning of the next end step"));
+                ).setTriggerPhrase("")).setText("return it to the battlefield under its owner's control at the beginning of the next end step"),
+                false, SetTargetPointer.CARD);
         ability.addEffect(new SkipNextDrawStepControllerEffect().concatBy("and"));
         this.addAbility(ability);
 

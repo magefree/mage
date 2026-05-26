@@ -1,15 +1,16 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,8 +27,10 @@ public final class WeatherseedTreefolk extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
+
         // When Weatherseed Treefolk dies, return it to its owner's hand.
-        this.addAbility(new DiesSourceTriggeredAbility(new ReturnToHandSourceEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new ReturnToHandTargetEffect()
+                .setText("return it to its owner's hand"), false, SetTargetPointer.CARD));
     }
 
     private WeatherseedTreefolk(final WeatherseedTreefolk card) {

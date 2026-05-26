@@ -3,10 +3,11 @@ package mage.cards.p;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -19,7 +20,10 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -65,24 +69,19 @@ class PiasRevolutionReturnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            UUID permanentId = (UUID) this.getValue("permanentId");
-            Permanent permanent = game.getPermanentOrLKIBattlefield(permanentId);
-            if (permanent != null) {
-                Player opponent = game.getPlayer(source.getFirstTarget());
-                if (opponent != null) {
-                    if (opponent.chooseUse(outcome,
-                            "Have Pia's Revolution deal 3 damage to you to prevent that " + permanent.getIdName() + " returns to " + controller.getName() + "'s hand?",
-                            source, game)) {
-                        opponent.damage(3, source.getSourceId(), source, game);
-                    } else if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
-                        controller.moveCards(game.getCard(permanentId), Zone.HAND, source, game);
-                    }
-                }
-            }
-            return true;
+        Set<Card> cards = new CardsImpl(getTargetPointer().getTargets(game, source)).getCards(game);
+        if (controller == null || cards.isEmpty()) {
+            return false;
         }
-        return false;
+        Player opponent = game.getPlayer(source.getFirstTarget());
+        if (opponent != null && opponent.chooseUse(outcome,
+                "Have Pia's Revolution deal 3 damage to you to prevent return to hand effect?",
+                source, game)) {
+            opponent.damage(3, source.getSourceId(), source, game);
+        } else {
+            controller.moveCards(cards, Zone.HAND, source, game);
+        }
+        return true;
     }
 }
 
@@ -95,7 +94,7 @@ class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
         filter.add(TargetController.YOU.getOwnerPredicate());
     }
 
-    public PiasRevolutionTriggeredAbility() {
+    PiasRevolutionTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PiasRevolutionReturnEffect(), false);
         setTriggerPhrase("Whenever a nontoken artifact is put into your graveyard from the battlefield, ");
         setLeavesTheBattlefieldTrigger(true);
@@ -119,11 +118,11 @@ class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()) {
-            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+            Permanent permanent = zEvent.getTarget();
             if (permanent != null && filter.match(permanent, controllerId, this, game)) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setValue("permanentId", event.getTargetId());
-                }
+                getEffects().setTargetPointer(new FixedTargets(
+                        CardUtil.getAllCardsFromPermanentLeftBattlefield(permanent, game), game
+                ));
                 return true;
             }
         }

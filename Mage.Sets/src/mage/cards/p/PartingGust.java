@@ -93,7 +93,7 @@ class PartingGustExileReturnEffect extends OneShotEffect {
             return false;
         }
         controller.moveCardsToExile(toExile, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
-        Effect effect = new ReturnToBattlefieldUnderOwnerControlWithCounterTargetEffect(CounterType.P1P1.createInstance(), false, false);
+        Effect effect = new ReturnToBattlefieldUnderOwnerControlWithCounterTargetEffect(CounterType.P1P1.createInstance());
         effect.setTargetPointer(new FixedTargets(toExile
                 .stream()
                 .map(Card::getMainCard)

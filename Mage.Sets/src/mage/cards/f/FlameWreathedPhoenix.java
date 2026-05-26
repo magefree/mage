@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.TributeNotPaidCondition;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -14,6 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 
 import java.util.UUID;
@@ -41,7 +42,8 @@ public final class FlameWreathedPhoenix extends CardImpl {
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield).setText("it gains haste")
         ).withInterveningIf(TributeNotPaidCondition.instance);
         ability.addEffect(new GainAbilitySourceEffect(
-                new DiesSourceTriggeredAbility(new ReturnToHandSourceEffect())
+                new DiesSourceTriggeredAbility(new ReturnToHandTargetEffect()
+                        .setText("return it to its owner's hand"), false, SetTargetPointer.CARD)
         ).setText("and \"When this creature dies, return it to its owner's hand.\""));
         this.addAbility(ability);
     }
