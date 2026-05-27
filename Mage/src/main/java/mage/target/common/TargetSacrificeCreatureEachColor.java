@@ -15,6 +15,7 @@ import mage.util.CardUtil;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -53,20 +54,22 @@ public class TargetSacrificeCreatureEachColor extends TargetSacrifice {
     }
 
     @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(playerId, id, source, game)) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(id);
-        if (permanent == null) {
-            return false;
-        }
-        if (this.getTargets().isEmpty()) {
-            return true;
-        }
-        Cards cards = new CardsImpl(this.getTargets());
-        cards.add(permanent);
-        return colorAssigner.getRoleCount(cards, game) >= cards.size();
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
+
+        // only valid roles
+        Cards existingTargets = new CardsImpl(this.getTargets());
+        possibleTargets.removeIf(id -> {
+            Permanent permanent = game.getPermanent(id);
+            if (permanent == null) {
+                return true;
+            }
+            Cards newTargets = existingTargets.copy();
+            newTargets.add(permanent);
+            return colorAssigner.hasSharedRoles(newTargets, game);
+        });
+
+        return possibleTargets;
     }
 
     @Override

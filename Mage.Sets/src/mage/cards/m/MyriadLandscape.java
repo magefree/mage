@@ -1,6 +1,7 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
+import mage.abilities.assignment.common.SubTypeAssignment;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -9,10 +10,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.mana.ColorlessManaAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -22,6 +20,8 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.Arrays;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -72,6 +72,8 @@ class TargetCardInLibrarySharingLandType extends TargetCardInLibrary {
         filterBasicLandCard.add(SuperType.BASIC.getPredicate());
     }
 
+    private static final SubTypeAssignment subTypeAssigner = new SubTypeAssignment(SubType.getBasicLands().toArray(new SubType[0]));
+
     TargetCardInLibrarySharingLandType(int minNumTargets, int maxNumTargets) {
         super(minNumTargets, maxNumTargets, filterBasicLandCard);
     }
@@ -81,23 +83,26 @@ class TargetCardInLibrarySharingLandType extends TargetCardInLibrary {
     }
 
     @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability source, Cards cards, Game game) {
-        if (!super.canTarget(playerId, id, source, cards, game)) {
-            return false;
-        }
-        if (getTargets().isEmpty()) {
-            // first target
-            return true;
-        }
-        Card card1 = game.getCard(getTargets().get(0));
-        Card card2 = game.getCard(id);
-        return card1 != null
-                && card2 != null
-                && card1
-                .getSubtype(game)
-                .stream()
-                .filter(SubType.getLandTypes()::contains)
-                .anyMatch(subType -> card2.hasSubtype(subType, game));
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
+
+        // only valid roles
+        Cards existingTargets = new CardsImpl(this.getTargets());
+        possibleTargets.removeIf(id -> {
+            Card card = game.getCard(id);
+            if (card == null) {
+                return true;
+            }
+            // first target is valid all the time
+            if (getTargets().isEmpty()) {
+                return false;
+            }
+            Cards newTargets = existingTargets.copy();
+            newTargets.add(card);
+            return !subTypeAssigner.hasSharedRoles(newTargets, game);
+        });
+
+        return possibleTargets;
     }
 
     @Override

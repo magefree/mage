@@ -64,6 +64,9 @@ public class PossibleTargetsSelector {
                 .collect(Collectors.toList());
 
         // split targets between me and opponents
+        this.me.clear();
+        this.opponents.clear();
+        this.any.clear();
         found.forEach(item -> {
             if (isMyItem(abilityControllerId, item)) {
                 this.me.add(item);
