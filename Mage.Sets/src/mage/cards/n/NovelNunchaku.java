@@ -83,7 +83,7 @@ class NovelNunchakuEffect extends OneShotEffect {
                 new NovelNunchakuFightEffect().setTargetPointer(new FixedTarget(creature.getId(), game)),
                 false, "equipped creature fights up to one target creature an opponent controls"
         );
-        reflexive.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        reflexive.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE));
         game.fireReflexiveTriggeredAbility(reflexive, source);
         return true;
     }
