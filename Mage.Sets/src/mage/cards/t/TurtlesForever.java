@@ -18,6 +18,7 @@ import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -55,16 +56,14 @@ public final class TurtlesForever extends CardImpl {
 
 class TurtlesForeverEffect extends OneShotEffect {
 
-    private static final FilterCard libraryFilter = new FilterCreatureCard("legendary creature cards with different names");
-    private static final FilterCard sideboardFilter = new FilterCreatureCard("legendary creature card with a different name from outside the game");
+    private static final FilterCard filter = new FilterCreatureCard("legendary creature cards");
 
     static {
-        libraryFilter.add(SuperType.LEGENDARY.getPredicate());
-        sideboardFilter.add(SuperType.LEGENDARY.getPredicate());
+        filter.add(SuperType.LEGENDARY.getPredicate());
     }
 
     TurtlesForeverEffect() {
-        super(Outcome.DrawCard);
+        super(Outcome.Benefit);
         this.staticText = "search your library and/or outside the game for exactly four legendary creature cards "
                 + "you own with different names, then reveal those cards. An opponent chooses two of them. "
                 + "Put the chosen cards into your hand and shuffle the rest into your library";
@@ -86,7 +85,7 @@ class TurtlesForeverEffect extends OneShotEffect {
             return false;
         }
 
-        TargetCardInLibrary libraryTarget = new TargetCardWithDifferentNameInLibrary(0, 4, libraryFilter);
+        TargetCardInLibrary libraryTarget = new TargetCardWithDifferentNameInLibrary(0, 4, filter);
         libraryTarget.withNotTarget(true);
         libraryTarget.withChooseHint("Step 1 of 2: Search library");
         controller.searchLibrary(libraryTarget, source, game);
@@ -96,38 +95,29 @@ class TurtlesForeverEffect extends OneShotEffect {
         int remainingCards = 4 - cards.size();
         if (remainingCards > 0) {
             Cards sideboardCards = controller.getSideboard();
-            Set<Card> filteredSideboard = sideboardCards.getCards(sideboardFilter, game);
+            Set<Card> filteredSideboard = sideboardCards.getCards(filter, controller.getId(), source, game);
             if (!filteredSideboard.isEmpty()) {
-                Cards availableSideboard = new CardsImpl();
-                for (Card card : filteredSideboard) {
-                    if (card.isOwnedBy(controller.getId())) {
-                        availableSideboard.add(card);
-                    }
-                }
-                if (!availableSideboard.isEmpty()) {
-                    TargetCard sideboardTarget = new TargetCard(0, remainingCards, Zone.OUTSIDE, sideboardFilter) {
-                        @Override
-                        public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
-                            if (!super.canTarget(playerId, id, source, game)) {
-                                return false;
-                            }
-                            Card card = game.getCard(id);
-                            Set<Card> disallowedCards = this.getTargets().stream()
-                                    .map(game::getCard)
-                                    .collect(Collectors.toSet());
-                            Set<Card> checkList = new HashSet<>();
-                            checkList.addAll(disallowedCards);
-                            checkList.addAll(cards.getCards(game));
-                            return card != null && checkList.stream()
-                                    .filter(Objects::nonNull)
-                                    .noneMatch(c -> CardUtil.haveSameNames(c, card));
+                Cards availableSideboard = new CardsImpl(filteredSideboard);
+                TargetCard sideboardTarget = new TargetCard(0, remainingCards, Zone.OUTSIDE, filter) {
+                    @Override
+                    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+                        if (!super.canTarget(playerId, id, source, game)) {
+                            return false;
                         }
-                    };
-                    sideboardTarget.withNotTarget(true);
-                    sideboardTarget.withChooseHint("Step 2 of 2: Search outside the game");
-                    controller.choose(Outcome.DrawCard, availableSideboard, sideboardTarget, source, game);
-                    cards.addAll(sideboardTarget.getTargets());
-                }
+                        Card card = game.getCard(id);
+                        Set<Card> disallowedCards = this.getTargets().stream()
+                                .map(game::getCard)
+                                .collect(Collectors.toSet());
+                        Set<Card> checkList = new HashSet<>();
+                        checkList.addAll(disallowedCards);
+                        checkList.addAll(cards.getCards(game));
+                        return isValidSideboardTarget(card, checkList);
+                    }
+                };
+                sideboardTarget.withNotTarget(true);
+                sideboardTarget.withChooseHint("Step 2 of 2: Search outside the game");
+                controller.choose(Outcome.Benefit, availableSideboard, sideboardTarget, source, game);
+                cards.addAll(sideboardTarget.getTargets());
             }
         }
 
@@ -144,9 +134,9 @@ class TurtlesForeverEffect extends OneShotEffect {
         Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
         Cards toHand = new CardsImpl();
         if (opponent != null) {
-            FilterCard choiceFilter = new FilterCard("cards to put into the controller's hand");
-            TargetCard chosenCards = new TargetCard(2, Zone.ALL, choiceFilter);
+            TargetCard chosenCards = new TargetCard(2, Zone.ALL, StaticFilters.FILTER_CARD);
             chosenCards.withNotTarget(true);
+            chosenCards.withChooseHint("2 cards to put into controller's hand");
             opponent.choose(outcome, cards, chosenCards, source, game);
             toHand.addAll(chosenCards.getTargets());
         }
@@ -158,5 +148,12 @@ class TurtlesForeverEffect extends OneShotEffect {
         controller.shuffleLibrary(source, game);
 
         return true;
+    }
+
+    private boolean isValidSideboardTarget(Card target, Set<Card> checkList) {
+        return target != null
+                && checkList.stream()
+                .filter(Objects::nonNull)
+                .noneMatch(c -> CardUtil.haveSameNames(c, target));
     }
 }
