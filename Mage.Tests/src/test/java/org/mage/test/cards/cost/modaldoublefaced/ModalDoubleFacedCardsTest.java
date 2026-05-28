@@ -1267,4 +1267,23 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         assertTappedCount("Snow-Covered Forest", true, 1);
         assertLife(playerB, 20 - 3);
     }
+
+    // https://github.com/magefree/mage/issues/14817
+    @Test
+    public void test_Graveyard_MustApplyCardTypes() {
+        addCard(Zone.GRAVEYARD, playerA, "Akoum Warrior");
+        addCard(Zone.BATTLEFIELD, playerA, "Biotransference");
+        addCard(Zone.HAND, playerA, "Refurbish");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Refurbish");
+        addTarget(playerA, "Akoum Warrior");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Akoum Warrior", 1);
+        assertType("Akoum Warrior", CardType.ARTIFACT, true);
+    }
 }
