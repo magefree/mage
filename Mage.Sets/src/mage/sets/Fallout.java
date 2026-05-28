@@ -831,10 +831,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Strength Bobblehead", 1057, Rarity.UNCOMMON, mage.cards.s.StrengthBobblehead.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Strength Bobblehead", 143, Rarity.UNCOMMON, mage.cards.s.StrengthBobblehead.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Strength Bobblehead", 671, Rarity.UNCOMMON, mage.cards.s.StrengthBobblehead.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Strong Back", 402, Rarity.RARE, mage.cards.s.StrongBack.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Strong Back", 611, Rarity.RARE, mage.cards.s.StrongBack.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Strong Back", 83, Rarity.RARE, mage.cards.s.StrongBack.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Strong Back", 930, Rarity.RARE, mage.cards.s.StrongBack.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strong Back", 402, Rarity.RARE, mage.cards.s.StrongBack.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strong Back", 611, Rarity.RARE, mage.cards.s.StrongBack.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strong Back", 83, Rarity.RARE, mage.cards.s.StrongBack.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strong Back", 930, Rarity.RARE, mage.cards.s.StrongBack.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Strong, the Brutish Thespian", 403, Rarity.RARE, mage.cards.s.StrongTheBrutishThespian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Strong, the Brutish Thespian", 612, Rarity.RARE, mage.cards.s.StrongTheBrutishThespian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Strong, the Brutish Thespian", 84, Rarity.RARE, mage.cards.s.StrongTheBrutishThespian.class, NON_FULL_USE_VARIOUS));
