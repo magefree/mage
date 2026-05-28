@@ -106,14 +106,16 @@ class StrongBackEquipEffect extends CostModificationEffectImpl {
                 || !source.isControlledBy(abilityToModify.getControllerId())) {
             return false;
         }
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment == null || enchantment.getAttachedTo() == null) {
+        Permanent enchanted = source.getPermanentSourceAttachedToIfItStillExists(game);
+        if (enchanted == null) {
             return false;
         }
-        UUID enchantedId = enchantment.getAttachedTo();
+        UUID enchantedId = enchanted.getId();
         if (game.getStack().getStackObject(abilityToModify.getId()) != null) {
+            // real cast
             return CardUtil.getAllSelectedTargets(abilityToModify, game).contains(enchantedId);
         } else {
+            // playable
             return CardUtil.getAllPossibleTargets(abilityToModify, game).contains(enchantedId);
         }
     }
@@ -151,14 +153,16 @@ class StrongBackAuraSpellEffect extends CostModificationEffectImpl {
         if (card == null || !card.hasSubtype(SubType.AURA, game)) {
             return false;
         }
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment == null || enchantment.getAttachedTo() == null) {
+        Permanent enchanted = source.getPermanentSourceAttachedToIfItStillExists(game);
+        if (enchanted == null) {
             return false;
         }
-        UUID enchantedId = enchantment.getAttachedTo();
+        UUID enchantedId = enchanted.getId();
         if (game.getStack().getStackObject(abilityToModify.getId()) != null) {
+            // real cast
             return CardUtil.getAllSelectedTargets(abilityToModify, game).contains(enchantedId);
         } else {
+            // playable
             return CardUtil.getAllPossibleTargets(abilityToModify, game).contains(enchantedId);
         }
     }
