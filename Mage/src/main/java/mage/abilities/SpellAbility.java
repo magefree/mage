@@ -195,9 +195,9 @@ public class SpellAbility extends ActivatedAbilityImpl {
             if (getSpellAbilityType() == SpellAbilityType.BASE_ALTERNATE) {
                 Player player = game.getPlayer(playerId);
                 if (player != null
-                        && player.getCastSourceIdWithAlternateMana()
+                        && !player.getCastSourceIdWithAlternateMana()
                         .getOrDefault(getSourceId(), Collections.emptySet())
-                        .contains(MageIdentifier.Default)
+                        .isEmpty()
                 ) {
                     return ActivationStatus.getFalse();
                 }
