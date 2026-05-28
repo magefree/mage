@@ -84,7 +84,7 @@ public class GraveyardFromAnywhereExileReplacementEffect extends ReplacementEffe
             return true;
         }
         Permanent token = game.getPermanent(event.getTargetId());
-        if (tokens && (token.isToken() && (!onlyYou || token.isOwnedBy(source.getControllerId())))) {
+        if (tokens && (token != null && token.isToken() && (!onlyYou || token.isOwnedBy(source.getControllerId())))) {
             return true;
         }
         return false;
