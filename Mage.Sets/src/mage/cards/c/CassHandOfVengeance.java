@@ -35,6 +35,7 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -170,7 +171,7 @@ class CassHandOfVengeanceEffect extends OneShotEffect {
             }
             game.getState().setValue("attachTo:" + card.getId(), targetCreature);
             controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-            Permanent aura = game.getPermanent(card.getId());
+            Permanent aura = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
             if (aura != null) {
                 targetCreature.addAttachment(aura.getId(), source, game);
             }
