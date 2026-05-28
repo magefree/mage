@@ -21,6 +21,7 @@ public final class AlchemySecretsOfStrixhaven extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("Glorifying Verse", 19, Rarity.RARE, mage.cards.g.GlorifyingVerse.class));
         cards.add(new SetCardInfo("Grave Studies", 20, Rarity.UNCOMMON, mage.cards.g.GraveStudies.class));
     }
 }
