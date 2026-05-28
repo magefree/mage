@@ -94,7 +94,7 @@ class BrillianceUnleashedEffect extends OneShotEffect {
                 game.addEffect(new BecomesCreatureTargetEffect(
                     new CreatureToken(3, 3, "3/3 Robot artifact creature with flying", SubType.ROBOT)
                         .withType(CardType.ARTIFACT).withAbility(FlyingAbility.getInstance()),
-                    false, true, Duration.Custom
+                    false, false, Duration.Custom
                 ).setTargetPointer(new FixedTarget(permanent, game)), source);
             }
         }
