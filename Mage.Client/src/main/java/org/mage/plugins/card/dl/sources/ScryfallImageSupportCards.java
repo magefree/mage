@@ -626,6 +626,7 @@ public class ScryfallImageSupportCards {
             add("SOS"); // Secrets of Strixhaven
             add("SOC"); // Secrets of Strixhaven Commander
             add("SOA"); // Secrets of Strixhaven Mystical Archive
+            add("YSOS"); // Alchemy: Secrets of Strixhaven
             add("MSH"); // Marvel Super Heroes
             add("MSC"); // Marvel Super Heroes Commander
             add("HOC"); // The Hobbit Commander
