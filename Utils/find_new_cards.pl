@@ -76,19 +76,12 @@ sub get_name_of_card_from_class
     if ($line =~ m/Mage.Sets.*[\/\\]([^\/\\]+)\.java/img)
     {
         my $class_name = $1;
-        my $card_name = $class_name;
-        if (exists ($cn_classes {$card_name}))
+        if (exists ($cn_classes {$class_name}))
         {
-            return ($cn_classes {$card_name});
+            return ($cn_classes {$class_name});
         }
-        $card_name =~ s/(.)([A-Z])/$1 $2/g;
-        $card_name =~ s/\d//g;
-        $card_name =~ s/ The / the /g;
-        $card_name =~ s/ Of / of /g;
-        $card_name =~ s/ To / to /g;
-        $card_name =~ s/ And / and /g;
-        $card_name =~ s/ For / for /g;
-        return $card_name;
+        # card class not found in SetCardInfo
+        return "UNKNOWN_CARD_OR_WITHOUT_SET_$class_name";
     }
     return "";
 }
