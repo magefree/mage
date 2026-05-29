@@ -125,7 +125,7 @@ public abstract class NthTargetPointer extends TargetPointerImpl {
 
     @Override
     public Permanent getFirstTargetPermanentOrLKI(Game game, Ability source) {
-        if (source.getTargets().size() < this.targetIndex) {
+        if (source.getTargets().size() <= this.targetIndex) {
             wrongTargetsUsage(source);
             return null;
         }
