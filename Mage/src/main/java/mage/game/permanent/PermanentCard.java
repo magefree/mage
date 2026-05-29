@@ -1,6 +1,7 @@
 package mage.game.permanent;
 
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
@@ -98,6 +99,15 @@ public class PermanentCard extends PermanentImpl {
         if (otherAbilities != null) {
             abilities.addAll(otherAbilities);
         }
+        MageObjectReference enteringMOR = new MageObjectReference(card.getId(), card.getZoneChangeCounter(game), game);
+        Abilities<Ability> enteringAbilities = game.getState().getEnteringAbilities(enteringMOR);
+        if (enteringAbilities != null) {
+            for (Ability ability : enteringAbilities) {
+                if (!abilities.contains(ability)) {
+                    abilities.add(ability);
+                }
+            }
+        }
         if (card instanceof LevelerCard) {
             maxLevelCounters = ((LevelerCard) card).getMaxLevelCounters();
         }
@@ -120,6 +130,17 @@ public class PermanentCard extends PermanentImpl {
             copyFromCard(secondSideCard, game, true);
         } else {
             copyFromCard(card, game, true);
+        }
+        if (game != null) {
+            MageObjectReference enteringMOR = new MageObjectReference(this.getId(), this.getZoneChangeCounter(game), game);
+            Abilities<Ability> enteringAbilities = game.getState().getEnteringAbilities(enteringMOR);
+            if (enteringAbilities != null) {
+                for (Ability ability : enteringAbilities) {
+                    if (!this.abilities.contains(ability)) {
+                        this.abilities.add(ability);
+                    }
+                }
+            }
         }
         power.resetToBaseValue();
         toughness.resetToBaseValue();

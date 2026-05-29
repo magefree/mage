@@ -39,9 +39,22 @@ public interface Ability extends Controllable, Serializable {
     void newId();
 
     /**
+     * Assigns a new {@link java.util.UUID} while preserving the linkage id used
+     * to associate linked abilities.
+     */
+    void newIdKeepingLinkage();
+
+    /**
      * Assigns a new {@link java.util.UUID}
      */
     void newOriginalId(); // TODO: delete newOriginalId???
+
+    /**
+     * Remap this ability to a deterministic identity for a specific granting/copy seed.
+     * Implementations should keep the identity stable for the same seed while making it
+     * distinct from other sources.
+     */
+    void remapForSource(UUID sourceSeed);
 
     /**
      * Gets the {@link AbilityType} of this ability.
@@ -459,6 +472,13 @@ public interface Ability extends Controllable, Serializable {
      * @return originalId
      */
     UUID getOriginalId();
+
+    /**
+     * Get the linkage id used to associate linked abilities (CR 607).
+     *
+     * @return linkage id
+     */
+    UUID getLinkageId();
 
     /**
      * Sets the ability word for the given ability. An ability word is a word

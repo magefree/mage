@@ -358,6 +358,13 @@ public class Spell extends StackObjectImpl implements Card {
                     permId = card.getId();
                     MageObjectReference mor = new MageObjectReference(getSpellAbility());
                     game.storePermanentCostsTags(mor, getSpellAbility());
+                    MageObjectReference enteringMor = new MageObjectReference(
+                            card.getId(), card.getZoneChangeCounter(game) + 1, game
+                    );
+                    Abilities<Ability> enteringAbilities = game.getState().getAllOtherAbilities(card.getId());
+                    if (enteringAbilities != null && !enteringAbilities.isEmpty()) {
+                        game.getState().storeEnteringAbilities(enteringMor, enteringAbilities);
+                    }
                     permanentCreated = controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
                 }
                 if (permanentCreated) {
@@ -391,6 +398,13 @@ public class Spell extends StackObjectImpl implements Card {
             if (bestow) {
                 MageObjectReference mor = new MageObjectReference(getSpellAbility());
                 game.storePermanentCostsTags(mor, getSpellAbility());
+                MageObjectReference enteringMor = new MageObjectReference(
+                        card.getId(), card.getZoneChangeCounter(game) + 1, game
+                );
+                Abilities<Ability> enteringAbilities = game.getState().getAllOtherAbilities(card.getId());
+                if (enteringAbilities != null && !enteringAbilities.isEmpty()) {
+                    game.getState().storeEnteringAbilities(enteringMor, enteringAbilities);
+                }
                 return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
             } else {
                 //20091005 - 608.2b
@@ -408,6 +422,13 @@ public class Spell extends StackObjectImpl implements Card {
         } else {
             MageObjectReference mor = new MageObjectReference(getSpellAbility());
             game.storePermanentCostsTags(mor, getSpellAbility());
+            MageObjectReference enteringMor = new MageObjectReference(
+                    card.getId(), card.getZoneChangeCounter(game) + 1, game
+            );
+            Abilities<Ability> enteringAbilities = game.getState().getAllOtherAbilities(card.getId());
+            if (enteringAbilities != null && !enteringAbilities.isEmpty()) {
+                game.getState().storeEnteringAbilities(enteringMor, enteringAbilities);
+            }
             return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
         }
     }
@@ -867,7 +888,7 @@ public class Spell extends StackObjectImpl implements Card {
                 continue;
             }
             SpellAbility newAbility = spellAbility.copy(); // e.g. spliced spell
-            newAbility.newId();
+            newAbility.newIdKeepingLinkage();
             newAbility.setSourceId(copiedSourceId);
             spellCopy.addSpellAbility(newAbility);
         }

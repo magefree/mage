@@ -269,7 +269,8 @@ public class SpellAbility extends ActivatedAbilityImpl {
         UUID copiedSourceId = mapOldToNew.getOrDefault(this.getSourceId(), copiedCard).getId();
 
         SpellAbility spell = new SpellAbility(this);
-        spell.newId();
+        // keep linkage id stable so linked-ability tags remain readable on copied spells
+        spell.newIdKeepingLinkage();
         spell.setSourceId(copiedSourceId);
         return spell;
     }

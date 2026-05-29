@@ -228,7 +228,12 @@ public class TriggeredAbilities extends LinkedHashMap<String, TriggeredAbility> 
                     .map(p -> "- " + p.toString())
                     .collect(Collectors.joining("\n")) + "\n");
         }
-        MageObject object = game.getObject(ability.getSourceId());
+        // ETB triggers on copied permanent spells must validate against the entering permanent,
+        // not the copied card/spell object that still exists under the same source id.
+        MageObject object = game.getPermanentEntering(ability.getSourceId());
+        if (object == null) {
+            object = game.getObject(ability.getSourceId());
+        }
         if (ability.isInUseableZone(game, object, event)) {
             if (event == null || !game.getContinuousEffects().preventedByRuleModification(event, ability, game, false)) {
                 if (object != null) {

@@ -24,9 +24,15 @@ public class PermanentToken extends PermanentImpl {
     // this PermanentToken resets to it on each game cycle
     // TODO: see PermanentCard.card for usage research and fixes
     protected Token token;
+    private final boolean preserveCopiedSpellLinkage;
 
     public PermanentToken(Token token, UUID controllerId, Game game) {
+        this(token, controllerId, game, false);
+    }
+
+    public PermanentToken(Token token, UUID controllerId, Game game, boolean preserveCopiedSpellLinkage) {
         super(controllerId, controllerId, token.getName()); // random id
+        this.preserveCopiedSpellLinkage = preserveCopiedSpellLinkage;
         this.token = token.copy();
         this.token.getAbilities().newOriginalId(); // neccessary if token has ability like DevourAbility()
         this.token.getAbilities().setSourceId(objectId);
@@ -49,6 +55,7 @@ public class PermanentToken extends PermanentImpl {
     protected PermanentToken(final PermanentToken permanent) {
         super(permanent);
         this.token = permanent.token.copy();
+        this.preserveCopiedSpellLinkage = permanent.preserveCopiedSpellLinkage;
     }
 
     @Override
@@ -91,8 +98,9 @@ public class PermanentToken extends PermanentImpl {
             // first time -> create ContinuousEffects only once
             // so sourceId must be null (keep triggered abilities forever?)
             for (Ability ability : token.getAbilities()) {
-                //Don't add subabilities since the original token already has them in its abilities list
-                this.addAbility(ability, null, game, true);
+                // Don't add subabilities since the original token already has them in its abilities list.
+                // Copied permanent spells still need that behavior; they just keep the spell's linkage grouping.
+                this.addAbility(ability, null, game, true, preserveCopiedSpellLinkage);
             }
         }
         this.abilities.setControllerId(this.controllerId);

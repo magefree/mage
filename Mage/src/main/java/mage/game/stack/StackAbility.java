@@ -499,7 +499,17 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public void newIdKeepingLinkage() {
+        this.ability.newIdKeepingLinkage();
+    }
+
+    @Override
     public void newOriginalId() {
+    }
+
+    @Override
+    public void remapForSource(UUID sourceSeed) {
+        ability.remapForSource(sourceSeed);
     }
 
     @Override
@@ -571,6 +581,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     @Override
     public UUID getOriginalId() {
         return this.ability.getOriginalId();
+    }
+
+    @Override
+    public UUID getLinkageId() {
+        return this.ability.getLinkageId();
     }
 
     @Override
@@ -745,7 +760,8 @@ public class StackAbility extends StackObjectImpl implements Ability {
     @Override
     public void createSingleCopy(UUID newControllerId, StackObjectCopyApplier applier, MageObjectReferencePredicate newTargetFilterPredicate, Game game, Ability source, boolean chooseNewTargets) {
         Ability newAbility = this.ability.copy();
-        newAbility.newId();
+        // keep linkage id stable for linked-ability tags across stack copies
+        newAbility.newIdKeepingLinkage();
         newAbility.setControllerId(newControllerId);
 
         StackAbility newStackAbility = new StackAbility(newAbility, newControllerId);

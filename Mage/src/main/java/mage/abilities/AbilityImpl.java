@@ -51,6 +51,7 @@ import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -65,6 +66,7 @@ public abstract class AbilityImpl implements Ability {
 
     protected UUID id;
     private UUID originalId; // TODO: delete originalId???
+    private UUID linkageId;
     protected AbilityType abilityType;
     protected UUID controllerId;
     protected UUID sourceId;
@@ -101,6 +103,7 @@ public abstract class AbilityImpl implements Ability {
     protected AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
         this.originalId = id;
+        this.linkageId = UUID.randomUUID();
         this.abilityType = abilityType;
         this.zone = zone;
         this.manaCosts = new ManaCostsImpl<>();
@@ -112,6 +115,7 @@ public abstract class AbilityImpl implements Ability {
     protected AbilityImpl(final AbilityImpl ability) {
         this.id = ability.id;
         this.originalId = ability.originalId;
+        this.linkageId = ability.linkageId;
         this.abilityType = ability.abilityType;
         this.controllerId = ability.controllerId;
         this.sourceId = ability.sourceId;
@@ -154,21 +158,75 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public void newId() {
-        if (!(this instanceof MageSingleton)) {
-            this.id = UUID.randomUUID();
-        }
-        getEffects().newId();
+        newIdInternal(UUID.randomUUID());
+    }
 
-        for (Ability sub : getSubAbilities()) {
-            sub.newId();
-        }
+    @Override
+    public void newIdKeepingLinkage() {
+        newIdInternal(this.linkageId);
     }
 
     @Override
     public void newOriginalId() {
+        newOriginalIdInternal(this.linkageId);
+    }
+
+    @Override
+    public void remapForSource(UUID sourceSeed) {
+        remapForSourceInternal(
+                sourceSeed,
+                deterministicId(sourceSeed, "linkage", this.linkageId)
+        );
+    }
+
+    protected void newIdInternal(UUID newLinkageId) {
+        if (!(this instanceof MageSingleton)) {
+            this.id = UUID.randomUUID();
+        }
+        setLinkageIdInternal(newLinkageId);
+        getEffects().newId();
+        for (Ability sub : getSubAbilities()) {
+            if (sub instanceof AbilityImpl) {
+                ((AbilityImpl) sub).newIdInternal(newLinkageId);
+            } else {
+                sub.newId();
+            }
+        }
+    }
+
+    protected void newOriginalIdInternal(UUID newLinkageId) {
         this.id = UUID.randomUUID();
         this.originalId = id;
+        setLinkageIdInternal(newLinkageId);
         getEffects().newId();
+        for (Ability sub : getSubAbilities()) {
+            if (sub instanceof AbilityImpl) {
+                ((AbilityImpl) sub).newOriginalIdInternal(newLinkageId);
+            } else {
+                sub.newId();
+            }
+        }
+    }
+
+    protected void remapForSourceInternal(UUID sourceSeed, UUID newLinkageId) {
+        UUID newOriginalId = deterministicId(sourceSeed, "ability", this.originalId);
+        this.id = newOriginalId;
+        this.originalId = newOriginalId;
+        setLinkageIdInternal(newLinkageId);
+        getEffects().newId();
+        for (Ability sub : getSubAbilities()) {
+            if (sub instanceof AbilityImpl) {
+                ((AbilityImpl) sub).remapForSourceInternal(sourceSeed, newLinkageId);
+            } else {
+                sub.remapForSource(sourceSeed);
+            }
+        }
+    }
+
+    private static UUID deterministicId(UUID sourceSeed, String kind, UUID baseId) {
+        return UUID.nameUUIDFromBytes(
+                (kind + '|' + sourceSeed + '|' + baseId).getBytes(StandardCharsets.UTF_8)
+        );
     }
 
     @Override
@@ -199,6 +257,20 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public boolean isManaAbility() {
         return this.abilityType.isManaAbility();
+    }
+
+    @Override
+    public UUID getLinkageId() {
+        return linkageId;
+    }
+
+    protected void setLinkageIdInternal(UUID linkageId) {
+        this.linkageId = linkageId;
+        for (Ability sub : getSubAbilities()) {
+            if (sub instanceof AbilityImpl) {
+                ((AbilityImpl) sub).setLinkageIdInternal(linkageId);
+            }
+        }
     }
 
     @Override
@@ -1016,6 +1088,9 @@ public abstract class AbilityImpl implements Ability {
         }
         ability.setSourceId(this.sourceId);
         ability.setControllerId(this.controllerId);
+        if (ability instanceof AbilityImpl) {
+            ((AbilityImpl) ability).setLinkageIdInternal(this.linkageId);
+        }
         subAbilities.add(ability);
     }
 
