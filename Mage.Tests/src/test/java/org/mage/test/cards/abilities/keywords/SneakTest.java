@@ -88,6 +88,40 @@ public class SneakTest extends CardTestCommanderDuelBase {
     }
 
     @Test
+    public void testCreatureSneakPlaneswalkerBouncedOnStack() {
+        // When the attacked planeswalker is bounced while the sneak spell is on the
+        // stack, the sneaked creature should enter tapped but NOT be assigned to any
+        // combat group (since the original defender no longer exists).
+        String sorin = "Sorin, Solemn Visitor";
+
+        addCard(Zone.BATTLEFIELD, playerA, "Godless Shrine", 4);
+        addCard(Zone.BATTLEFIELD, playerA, goblin);
+        addCard(Zone.HAND, playerA, karai);
+        addCard(Zone.BATTLEFIELD, playerB, sorin);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.HAND, playerB, "Boomerang");
+
+        attack(1, playerA, goblin, sorin);
+
+        // playerA casts karai with Sneak targeting sorin's combat group
+        castSpell(1, PhaseStep.DECLARE_BLOCKERS, playerA, karai + " with Sneak");
+        setChoice(playerA, goblin);
+        // playerB responds by bouncing their own planeswalker (Boomerang hits any permanent)
+        castSpell(1, PhaseStep.DECLARE_BLOCKERS, playerB, "Boomerang", sorin);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertHandCount(playerA, goblin, 1);       // goblin returned as sneak cost
+        assertPermanentCount(playerA, karai, 1);
+        assertTappedCount(karai, true, 1);          // entered tapped via Sneak
+        assertPermanentCount(playerB, sorin, 0);
+        assertHandCount(playerB, sorin, 1);         // sorin successfully bounced
+        assertLife(playerB, 40);                    // karai not in combat, goblin returned to hand
+    }
+
+    @Test
     public void testCreatureSneakFromCommandZoneEntersTappedAndAttacking() {
         addCard(Zone.BATTLEFIELD, playerA, "Godless Shrine", 4);
         addCard(Zone.BATTLEFIELD, playerA, goblin);
