@@ -38,5 +38,11 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("M.O.D.O.K., Evil Intellect", "XXX3", Rarity.RARE, mage.cards.m.MODOKEvilIntellect.class));
         cards.add(new SetCardInfo("Thanos, Death's Consort", "XXX4", Rarity.RARE, mage.cards.t.ThanosDeathsConsort.class));
         cards.add(new SetCardInfo("Ultron, Machine Overlord", "XXX5", Rarity.RARE, mage.cards.u.UltronMachineOverlord.class));
+        cards.add(new SetCardInfo("Iron Man, Futurist Paragon", "XXX7", Rarity.RARE, mage.cards.i.IronManFuturistParagon.class));
+        cards.add(new SetCardInfo("Hulk, Always Angry", "XXX8", Rarity.RARE, mage.cards.h.HulkAlwaysAngry.class));
+        cards.add(new SetCardInfo("Thor, Guardian of Midgard", "XXX9", Rarity.RARE, mage.cards.t.ThorGuardianOfMidgard.class));
+        cards.add(new SetCardInfo("Black Widow, Intel Expert", "XXX10", Rarity.RARE, mage.cards.b.BlackWidowIntelExpert.class));
+        cards.add(new SetCardInfo("Captain America, Unbowed", "XXX11", Rarity.RARE, mage.cards.c.CaptainAmericaUnbowed.class));
+        cards.add(new SetCardInfo("Hawkeye, Trick Shot", "XXX12", Rarity.RARE, mage.cards.h.HawkeyeTrickShot.class));
     }
 }
