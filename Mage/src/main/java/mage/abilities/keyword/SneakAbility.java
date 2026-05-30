@@ -31,6 +31,19 @@ import java.util.UUID;
 
 /**
  * @author TheElk801
+ *
+ * 702.190. Sneak
+ *
+ * 702.190a Sneak is a keyword that represents a static ability that functions
+ * while the spell with sneak is on the stack. “Sneak [cost]” means “Any time
+ * you could cast an instant during your declare blockers step, you may cast
+ * this spell by paying [cost] and returning an unblocked creature you control
+ * to its owner’s hand rather than paying this spell’s mana cost.”
+ *
+ * 702.190b A permanent spell whose sneak cost was paid enters the battlefield
+ * tapped and attacking (see rule 506.3a). It will be attacking the same
+ * player, planeswalker, or battle as the creature that was returned to its
+ * owner’s hand to pay the sneak cost of the spell that became that permanent.
  */
 public class SneakAbility extends SpellAbility {
 
