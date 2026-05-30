@@ -66,12 +66,6 @@ public class SneakAbility extends SpellAbility {
 
     @Override
     public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
-        // Step check must run before super.activate() to avoid paying costs
-        // (returning the attacker to hand) if the timing is invalid
-        if (game.getStep() == null
-                || game.getStep().getType() != PhaseStep.DECLARE_BLOCKERS) {
-            return false;
-        }
         // Lazily sync the mode's effects and targets from the card's spell ability.
         // This allows SneakAbility to be declared before addEffect/addTarget are
         // called on the card's spell ability (i.e. construction order doesn't matter).
