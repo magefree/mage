@@ -31,5 +31,12 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("The Fantastic Four", 741, Rarity.MYTHIC, mage.cards.t.TheFantasticFour.class));
         cards.add(new SetCardInfo("The Thing", 4, Rarity.MYTHIC, mage.cards.t.TheThing.class));
         cards.add(new SetCardInfo("Vision, Synthezoid Avenger", 460, Rarity.RARE, mage.cards.v.VisionSynthezoidAvenger.class));
+
+        //TODO: Correct these collectors numbers and rarities once confirmed
+        cards.add(new SetCardInfo("Abomination, Irradiated Brute", "XXX1", Rarity.RARE, mage.cards.a.AbominationIrradiatedBrute.class));
+        cards.add(new SetCardInfo("Loki, God of Lies", "XXX2", Rarity.RARE, mage.cards.l.LokiGodOfLies.class));
+        cards.add(new SetCardInfo("M.O.D.O.K., Evil Intellect", "XXX3", Rarity.RARE, mage.cards.m.MODOKEvilIntellect.class));
+        cards.add(new SetCardInfo("Thanos, Death's Consort", "XXX4", Rarity.RARE, mage.cards.t.ThanosDeathsConsort.class));
+        cards.add(new SetCardInfo("Ultron, Machine Overlord", "XXX5", Rarity.RARE, mage.cards.u.UltronMachineOverlord.class));
     }
 }
