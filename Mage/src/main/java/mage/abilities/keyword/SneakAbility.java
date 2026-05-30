@@ -113,24 +113,7 @@ public class SneakAbility extends SpellAbility {
         // can find the synced targets on the ability. The adjustTargets override above
         // prevents the second run (inside super) from overwriting those selections.
         adjustTargets(game);
-        if (!super.activate(game, allowedIdentifiers, noMana)) {
-            return false;
-        }
-        for (Cost cost : this.getCosts()) {
-            if (cost instanceof SneakReturnAttackerToHandCost) {
-                this.setCostsTag(SNEAK_ACTIVATION_VALUE_KEY, null);
-                UUID defenderId = ((SneakReturnAttackerToHandCost) cost).getDefenderId();
-                if (defenderId != null) {
-                    MageObjectReference sneakSpellMOR = new MageObjectReference(this.getSourceId(), game);
-                    game.getState().addEffect(
-                            new SneakEntersTappedAndAttackingEffect(sneakSpellMOR, defenderId),
-                            this
-                    );
-                }
-                break;
-            }
-        }
-        return true;
+        return super.activate(game, allowedIdentifiers, noMana);
     }
 
     @Override
@@ -249,6 +232,23 @@ class SneakReturnAttackerToHandCost extends ReturnToHandChosenControlledPermanen
     }
 
     @Override
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        if (!super.pay(ability, game, source, controllerId, noMana, costToPay)) {
+            return false;
+        }
+        // Register the ETB effect now that defenderId is known (set in addReturnTarget during super.pay())
+        ability.setCostsTag(SneakAbility.SNEAK_ACTIVATION_VALUE_KEY, null);
+        if (defenderId != null) {
+            MageObjectReference sneakSpellMOR = new MageObjectReference(ability.getSourceId(), game);
+            game.getState().addEffect(
+                    new SneakEntersTappedAndAttackingEffect(sneakSpellMOR, defenderId),
+                    ability
+            );
+        }
+        return true;
+    }
+
+    @Override
     protected void addReturnTarget(Game game, Permanent permanent) {
         super.addReturnTarget(game, permanent);
         defenderId = game.getCombat().getDefenderId(permanent.getId());
@@ -257,9 +257,5 @@ class SneakReturnAttackerToHandCost extends ReturnToHandChosenControlledPermanen
     @Override
     public SneakReturnAttackerToHandCost copy() {
         return new SneakReturnAttackerToHandCost(this);
-    }
-
-    UUID getDefenderId() {
-        return defenderId;
     }
 }
