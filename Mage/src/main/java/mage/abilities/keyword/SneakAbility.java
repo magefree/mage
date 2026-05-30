@@ -30,7 +30,7 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author TheElk801, muz
  *
  * 702.190. Sneak
  *
@@ -62,6 +62,22 @@ public class SneakAbility extends SpellAbility {
         this.addCost(new SneakReturnAttackerToHandCost());
 
         this.setRuleAtTheTop(true);
+
+        // Sync targets and effects from the card's spell ability at target-selection
+        // time. This allows SneakAbility to be constructed before addEffect/addTarget
+        // are called on the card's spell ability (construction order doesn't matter).
+        this.setTargetAdjuster((ability, game) -> {
+            Card sourceCard = game.getCard(ability.getSourceId());
+            if (sourceCard == null) {
+                return;
+            }
+            Mode sneakMode = ability.getModes().getMode();
+            Mode cardMode = sourceCard.getSpellAbility().getModes().getMode();
+            sneakMode.getTargets().clear();
+            cardMode.getTargets().forEach(t -> sneakMode.addTarget(t.copy()));
+            sneakMode.getEffects().clear();
+            cardMode.getEffects().forEach(e -> sneakMode.addEffect(e.copy()));
+        });
     }
 
     protected SneakAbility(final SneakAbility ability) {
@@ -78,19 +94,25 @@ public class SneakAbility extends SpellAbility {
     }
 
     @Override
-    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
-        // Lazily sync the mode's effects and targets from the card's spell ability.
-        // This allows SneakAbility to be declared before addEffect/addTarget are
-        // called on the card's spell ability (i.e. construction order doesn't matter).
-        Card card = game.getCard(this.getSourceId());
-        if (card != null) {
-            Mode sneakMode = this.getModes().getMode();
-            Mode cardMode = card.getSpellAbility().getModes().getMode();
-            sneakMode.getTargets().clear();
-            cardMode.getTargets().forEach(t -> sneakMode.addTarget(t.copy()));
-            sneakMode.getEffects().clear();
-            cardMode.getEffects().forEach(e -> sneakMode.addEffect(e.copy()));
+    public void adjustTargets(Game game) {
+        // Skip the second run (inside AbilityImpl.activate's mode loop) if
+        // test-mode addTargets has already stored selections on the targets.
+        // For non-test mode the second run is allowed to proceed normally,
+        // since no selections exist yet and the targets need to be rebuilt.
+        boolean hasSelections = getModes().getMode().getTargets().stream()
+                .anyMatch(t -> !t.getTargets().isEmpty());
+        if (!hasSelections) {
+            super.adjustTargets(game);
         }
+    }
+
+    @Override
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
+        // Pre-run target adjustment before super.activate() so that the test-mode
+        // addTargets call (which fires before adjustTargets inside AbilityImpl.activate)
+        // can find the synced targets on the ability. The adjustTargets override above
+        // prevents the second run (inside super) from overwriting those selections.
+        adjustTargets(game);
         if (!super.activate(game, allowedIdentifiers, noMana)) {
             return false;
         }
