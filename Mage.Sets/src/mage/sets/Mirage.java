@@ -88,7 +88,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Crystal Golem", 298, Rarity.UNCOMMON, mage.cards.c.CrystalGolem.class, RETRO_ART));
         cards.add(new SetCardInfo("Crystal Vein", 325, Rarity.UNCOMMON, mage.cards.c.CrystalVein.class, RETRO_ART));
         cards.add(new SetCardInfo("Cursed Totem", 299, Rarity.RARE, mage.cards.c.CursedTotem.class, RETRO_ART));
-//        cards.add(new SetCardInfo("Cycle of Life", 211, Rarity.RARE, mage.cards.c.CycleOfLife.class, RETRO_ART));
+        cards.add(new SetCardInfo("Cycle of Life", 211, Rarity.RARE, mage.cards.c.CycleOfLife.class, RETRO_ART));
         cards.add(new SetCardInfo("Daring Apprentice", 60, Rarity.RARE, mage.cards.d.DaringApprentice.class, RETRO_ART));
         cards.add(new SetCardInfo("Dark Banishing", 115, Rarity.COMMON, mage.cards.d.DarkBanishing.class, RETRO_ART));
         cards.add(new SetCardInfo("Dark Ritual", 116, Rarity.COMMON, mage.cards.d.DarkRitual.class, RETRO_ART));
