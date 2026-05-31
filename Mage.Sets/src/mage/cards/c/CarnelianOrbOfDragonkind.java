@@ -1,24 +1,19 @@
 package mage.cards.c;
 
-import mage.MageObject;
 import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.ManaSpentOnSpellGainsAbilityEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.watchers.Watcher;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.filter.common.FilterCreatureSpell;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -27,17 +22,20 @@ import java.util.UUID;
  */
 public final class CarnelianOrbOfDragonkind extends CardImpl {
 
+    private static final FilterCreatureSpell filter = new FilterCreatureSpell("a Dragon creature spell");
+    static {
+        filter.add(SubType.DRAGON.getPredicate());
+    }
+
     public CarnelianOrbOfDragonkind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{R}");
 
         // {T}: Add {R}. If that mana is spent on a Dragon creature spell, it gains haste until end of turn.
-        Mana mana = Mana.RedMana(1);
-        mana.setFlag(true);
-        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, mana, new TapSourceCost());
-        ability.getEffects().get(0).setText("Add {R}. If that mana is spent on a Dragon creature spell, it gains haste until end of turn.");
+        SimpleManaAbility ability = new SimpleManaAbility(
+                new BasicManaEffect(Mana.RedMana(1)), new TapSourceCost());
+        ability.addEffect(new ManaSpentOnSpellGainsAbilityEffect(filter,
+                new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn, null, true)));
         this.addAbility(ability);
-
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CarnelianOrbOfDragonkindHasteEffect()), new CarnelianOrbOfDragonkindWatcher());
     }
 
     private CarnelianOrbOfDragonkind(final CarnelianOrbOfDragonkind card) {
@@ -47,81 +45,5 @@ public final class CarnelianOrbOfDragonkind extends CardImpl {
     @Override
     public CarnelianOrbOfDragonkind copy() {
         return new CarnelianOrbOfDragonkind(this);
-    }
-}
-
-class CarnelianOrbOfDragonkindWatcher extends Watcher {
-
-    private final List<UUID> creatures = new ArrayList<>();
-
-    public CarnelianOrbOfDragonkindWatcher() {
-        super(WatcherScope.CARD);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.MANA_PAID) {
-            return;
-        }
-
-        MageObject target = game.getObject(event.getTargetId());
-        if (!(target instanceof Spell)) {
-            return;
-        }
-
-        // Mana from Orb
-        if (!event.getFlag()) {
-            return;
-        }
-
-        if (event.getSourceId() == null || !event.getSourceId().equals(this.getSourceId())) {
-            return;
-        }
-
-        if (target.isCreature(game) && target.hasSubtype(SubType.DRAGON, game)) {
-            this.creatures.add(((Spell) target).getCard().getId());
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        creatures.clear();
-    }
-
-    public boolean creatureCastWithOrbsMana(UUID permanentId){
-        return creatures.contains(permanentId);
-    }
-
-}
-
-class CarnelianOrbOfDragonkindHasteEffect extends ContinuousEffectImpl {
-
-    CarnelianOrbOfDragonkindHasteEffect() {
-        super(Duration.EndOfGame, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-    }
-
-    private CarnelianOrbOfDragonkindHasteEffect(final CarnelianOrbOfDragonkindHasteEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CarnelianOrbOfDragonkindHasteEffect copy() {
-        return new CarnelianOrbOfDragonkindHasteEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        CarnelianOrbOfDragonkindWatcher watcher = game.getState().getWatcher(CarnelianOrbOfDragonkindWatcher.class, source.getSourceId());
-        if (watcher == null) {
-            return false;
-        }
-
-        for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
-            if (watcher.creatureCastWithOrbsMana(perm.getId())) {
-                perm.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
-            }
-        }
-        return true;
     }
 }
