@@ -166,6 +166,11 @@ public class CardPanelRenderModeMTGO extends CardPanel {
 
     @Override
     protected void paintCard(Graphics2D g) {
+        final float alpha = getAlpha();
+        if (alpha != 1.0f) {
+            g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, alpha));
+        }
+
         // Render the card if we don't have an image ready to use
         if (cardImage == null) {
             // Try to get card image from cache based on our card characteristics
