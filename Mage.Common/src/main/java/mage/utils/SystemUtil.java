@@ -784,7 +784,7 @@ public final class SystemUtil {
      * @return added cards list
      */
     private static Set<Card> addNewCardsToGame(Game game, String cardName, String setCode, int amount, Player owner) {
-        CardInfo cardInfo = CardLookup.instance.lookupCardInfo(cardName, setCode, null);
+        CardInfo cardInfo = CardLookup.instance.lookupCardInfo(new CardCriteria().name(cardName).setCodes(setCode)).stream().findAny().orElse(null);
         if (cardInfo == null || amount <= 0) {
             return null;
         }

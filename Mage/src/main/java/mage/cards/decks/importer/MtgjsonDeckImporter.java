@@ -4,11 +4,11 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.util.JsonUtil;
 
 import java.util.List;
-import java.util.Optional;
 
 
 /**
@@ -63,7 +63,7 @@ public class MtgjsonDeckImporter extends JsonDeckImporter {
             }
 
             int num = JsonUtil.getAsInt(card, "count");
-            CardInfo cardInfo = getCardLookup().lookupCardInfo(name, setCode, null);
+            CardInfo cardInfo = getCardLookup().lookupCardInfo(new CardCriteria().name(name).setCodes(setCode)).stream().findAny().orElse(null);
             if (cardInfo == null) {
                 sbMessage.append("Could not find card: '").append(name).append("'\n");
             } else {
