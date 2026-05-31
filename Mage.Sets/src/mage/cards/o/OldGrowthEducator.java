@@ -39,7 +39,7 @@ public final class OldGrowthEducator extends CardImpl {
 
         // Infusion -- When this creature enters, put two +1/+1 counters on it if you gained life this turn.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), YouGainedLifeCondition.getZero(),
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), YouGainedLifeCondition.getZero(),
                 "put two +1/+1 counters on it if you gained life this turn"
         )).setAbilityWord(AbilityWord.INFUSION).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
