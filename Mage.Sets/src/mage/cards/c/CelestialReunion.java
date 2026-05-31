@@ -109,9 +109,7 @@ class CelestialReunionAbility extends StaticAbility implements OptionalAdditiona
         }
 
         additionalCost.activate();
-        for (Cost cost : ((Costs<Cost>) additionalCost)) {
-            ability.getCosts().add(cost.copy());
-        }
+        ability.addCost(additionalCost.copy());
         ability.setCostsTag(CELESTIAL_REUNION_ACTIVATION_VALUE_KEY, null);
     }
 
