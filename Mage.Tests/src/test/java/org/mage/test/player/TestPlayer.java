@@ -2153,15 +2153,6 @@ public class TestPlayer implements Player {
         }
     }
 
-    private void assertAliasSupportInTargets(boolean methodSupportAliases) {
-        // TODO: add alias support for all false methods (replace name compare by isObjectHaveTargetNameOrAlias)
-        if (!methodSupportAliases && !targets.isEmpty()) {
-            if (targets.get(0).contains(ALIAS_PREFIX)) {
-                Assert.fail("That target method do not support aliases, but found " + targets.get(0));
-            }
-        }
-    }
-
     private void chooseStrictModeFailed(String choiceType, Game game, String reason) {
         chooseStrictModeFailed(choiceType, game, reason, false);
     }
@@ -2341,7 +2332,6 @@ public class TestPlayer implements Player {
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
         UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
 
-        assertAliasSupportInTargets(true);
         if (!targets.isEmpty()) {
 
             // skip targets
@@ -2365,8 +2355,7 @@ public class TestPlayer implements Player {
                     String playerName = targetDefinition.substring(targetDefinition.indexOf("targetPlayer=") + 13);
                     for (Player player : game.getPlayers().values()) {
                         if (player.getName().equals(playerName)
-                                && target.canTarget(abilityControllerId, player.getId(), source, game)
-                                && !target.contains(player.getId())) {
+                                && target.possibleTargets(abilityControllerId, source, game).contains(player.getId())) {
                             target.addTarget(player.getId(), source, game);
                             targetsRemoveCurrent(targetDefinition, game, "on choose target - player");
                             return true;
@@ -2409,7 +2398,7 @@ public class TestPlayer implements Player {
                         }
                         for (Permanent permanent : game.getBattlefield().getActivePermanents((FilterPermanent) filter, abilityControllerId, source, game)) {
                             if (hasObjectTargetNameOrAlias(permanent, targetName) || (permanent.getName() + '-' + permanent.getExpansionSetCode()).equals(targetName)) { // TODO: remove exp code search?
-                                if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.contains(permanent.getId())) {
+                                if (target.possibleTargets(abilityControllerId, source, game).contains(permanent.getId())) {
                                     if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
                                         target.addTarget(permanent.getId(), source, game);
                                         targetFound = true;
@@ -2439,7 +2428,7 @@ public class TestPlayer implements Player {
                     for (String targetName : targetList) {
                         for (Card card : computerPlayer.getHand().getCards(((TargetCard) target.getOriginalTarget()).getFilter(), abilityControllerId, source, game)) {
                             if (hasObjectTargetNameOrAlias(card, targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) { // TODO: remove set code search?
-                                if (target.canTarget(abilityControllerId, card.getId(), source, game) && !target.contains(card.getId())) {
+                                if (target.possibleTargets(abilityControllerId, source, game).contains(card.getId())) {
                                     target.addTarget(card.getId(), source, game);
                                     targetFound = true;
                                     break; // return to next targetName
@@ -2477,7 +2466,7 @@ public class TestPlayer implements Player {
                     for (String targetName : targetList) {
                         for (Card card : game.getExile().getCardsInRange(filter, abilityControllerId, source, game)) {
                             if (hasObjectTargetNameOrAlias(card, targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) { // TODO: remove set code search?
-                                if (target.canTarget(abilityControllerId, card.getId(), source, game) && !target.contains(card.getId())) {
+                                if (target.possibleTargets(abilityControllerId, source, game).contains(card.getId())) {
                                     target.addTarget(card.getId(), source, game);
                                     targetFound = true;
                                     break; // return to next targetName
@@ -2502,7 +2491,7 @@ public class TestPlayer implements Player {
                     for (String targetName : targetList) {
                         for (Card card : game.getBattlefield().getAllActivePermanents()) {
                             if (hasObjectTargetNameOrAlias(card, targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) { // TODO: remove set code search?
-                                if (targetFull.canTarget(abilityControllerId, card.getId(), source, game) && !targetFull.contains(card.getId())) {
+                                if (target.possibleTargets(abilityControllerId, source, game).contains(card.getId())) {
                                     targetFull.add(card.getId(), game);
                                     targetFound = true;
                                     break; // return to next targetName
@@ -2554,7 +2543,7 @@ public class TestPlayer implements Player {
                             Player player = game.getPlayer(playerId);
                             for (Card card : player.getGraveyard().getCards(targetFull.getFilter(), abilityControllerId, source, game)) {
                                 if (hasObjectTargetNameOrAlias(card, targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) { // TODO: remove set code search?
-                                    if (target.canTarget(abilityControllerId, card.getId(), source, game) && !target.contains(card.getId())) {
+                                    if (target.possibleTargets(abilityControllerId, source, game).contains(card.getId())) {
                                         target.addTarget(card.getId(), source, game);
                                         targetFound = true;
                                         break IterateGraveyards;  // return to next targetName
@@ -2583,7 +2572,7 @@ public class TestPlayer implements Player {
                     for (String targetName : targetList) {
                         for (StackObject stackObject : game.getStack()) {
                             if (hasObjectTargetNameOrAlias(stackObject, targetName)) {
-                                if (target.canTarget(abilityControllerId, stackObject.getId(), source, game) && !target.contains(stackObject.getId())) {
+                                if (target.possibleTargets(abilityControllerId, source, game).contains(stackObject.getId())) {
                                     target.addTarget(stackObject.getId(), source, game);
                                     targetFound = true;
                                     break; // return to next targetName
@@ -2644,7 +2633,6 @@ public class TestPlayer implements Player {
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
 
-        assertAliasSupportInTargets(false);
         if (!targets.isEmpty()) {
 
             // skip targets
@@ -2660,8 +2648,7 @@ public class TestPlayer implements Player {
                 for (String targetName : targetList) {
                     for (Card card : cards.getCards(game)) {
                         if (hasObjectTargetNameOrAlias(card, targetName)
-                                && !target.contains(card.getId())
-                                && target.canTarget(abilityControllerId, card.getId(), source, cards, game)) {
+                                && target.possibleTargets(abilityControllerId, source, game, cards).contains(card.getId())) {
                             target.addTarget(card.getId(), source, game);
                             targetFound = true;
                             break;
@@ -4247,8 +4234,6 @@ public class TestPlayer implements Player {
         }
 
         UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
-
-        assertAliasSupportInTargets(true);
 
         while (!targets.isEmpty()) {
 
