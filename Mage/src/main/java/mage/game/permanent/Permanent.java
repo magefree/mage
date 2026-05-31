@@ -64,6 +64,8 @@ public interface Permanent extends Card, Controllable {
 
     List<UUID> getMutateObjects();
 
+    List<UUID> getMutateForView();
+
     boolean isMutatedOver();
 
     boolean isPhasedIn();

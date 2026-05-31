@@ -43,6 +43,7 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -113,6 +114,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected int attachedToZoneChangeCounter;
     protected MageObjectReference pairedPermanent;
     protected final List<UUID> mutations = new ArrayList<>(); // refers to objects merged with this permanent
+    protected final List<UUID> mutationsForView = new ArrayList<>(); // ordered cards in mutate stack, includes this card
     protected Abilities<Ability> mutatedAbilities = new AbilitiesImpl<>();
     protected Card topMutation;
     protected List<UUID> bandedCards = new ArrayList<>();
@@ -194,6 +196,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.pairedPermanent = permanent.pairedPermanent;
         this.bandedCards.addAll(permanent.bandedCards);
         this.mutations.addAll(permanent.mutations);
+        this.mutationsForView.addAll(permanent.mutationsForView);
         this.mutatedAbilities = permanent.mutatedAbilities.copy();
         this.topMutation = permanent.topMutation == null ? null : permanent.topMutation.copy();
         this.timesLoyaltyUsed = permanent.timesLoyaltyUsed;
@@ -736,6 +739,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (controller == null) {
             return false;
         }
+        mutations.add(mutation.getId());
+        if (mutationsForView.isEmpty()) {
+            mutationsForView.add(this.getId());
+        }
         mutation.setZone(Zone.OUTSIDE, game);
         if (!source.isCopy()) {
             game.getState().updateZoneChangeCounter(mutation.getId());
@@ -749,9 +756,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             mutatedAbilities.add(a);
         });
         if (shouldMutateUnder) {
-            mutations.add(mutation.getId());
+            mutationsForView.add(mutation.getId());
         } else {
-            mutations.add(0, mutation.getId());
+            mutationsForView.add(0, mutation.getId());
             topMutation = mutation.copy();
             faceDown = mutation.isFaceDown(game);
         }
@@ -804,6 +811,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public List<UUID> getMutateObjects() {
         return new ArrayList<>(mutations);
+    }
+
+    @Override
+    public List<UUID> getMutateForView() {
+        return new ArrayList<>(mutationsForView);
     }
 
     @Override

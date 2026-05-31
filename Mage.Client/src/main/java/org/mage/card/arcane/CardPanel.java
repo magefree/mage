@@ -203,7 +203,10 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             showMutateButton.setIcon(new ImageIcon(ImageManagerImpl.instance.getMutateImage()));
             showMutateButton.addActionListener(e -> {
                 if (!DialogManager.getManager(gameId).isVisible()) {
-                    DialogManager.getManager(gameId).showMutateDialog(permanentView.getMutateView(), null, gameId);
+                    if (this.getGameCard() instanceof PermanentView) {
+                        MutateView mutateView = ((PermanentView) this.getGameCard()).getMutateView();
+                        DialogManager.getManager(gameId).showMutateDialog(mutateView, null, gameId);
+                    }
                 }
             });
 

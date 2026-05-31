@@ -1,6 +1,5 @@
 package mage.view;
 
-import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -19,10 +18,12 @@ public class MutateView extends CardsView {
     public MutateView(Permanent permanent, Game game) {
         this.name = permanent.getName();
         this.id = permanent.getId();
-        permanent.getMutateObjects().stream()
-                .map(game::getCard)
-                .filter(Objects::nonNull)
-                .forEach(c -> this.put(c.getId(), new CardView(c, game, false)));
+        if (game != null) {
+            permanent.getMutateForView().stream()
+                    .map(game::getCard)
+                    .filter(Objects::nonNull)
+                    .forEach(c -> this.put(c.getId(), new CardView(c, game, false)));
+        }
     }
 
     public String getName() {
