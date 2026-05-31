@@ -2272,4 +2272,39 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
         return true;
     }
+
+    @Override
+    public boolean lockDoor(Game game, Ability source, boolean isLeftDoor) {
+        // Check if already locked
+        boolean thisDoorUnlocked = isLeftDoor ? leftHalfUnlocked : rightHalfUnlocked;
+        if (!thisDoorUnlocked) {
+            return false;
+        }
+
+        // Log the lock
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            String doorSide = isLeftDoor ? "left" : "right";
+            game.informPlayers(controller.getLogName() + " locked the " + doorSide + " door of "
+                    + getLogName() + CardUtil.getSourceLogName(game, source));
+        }
+
+        // Update unlock state
+        if (isLeftDoor) {
+            leftHalfUnlocked = false;
+        } else {
+            rightHalfUnlocked = false;
+        }
+
+        // Update intrinsic stats/abilities from unlocking
+        // find the RoomCharacteristicsEffect applied by this permanent's ability
+        Abilities<Ability> abilities = this.getAbilities(game);
+        for (Ability ability : abilities) {
+            if (ability instanceof RoomAbility) {
+                ((RoomAbility) ability).restoreUnlockedStats(game, this);
+                break;
+            }
+        }
+        return true;
+    }
 }
