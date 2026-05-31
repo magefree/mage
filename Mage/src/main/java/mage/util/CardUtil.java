@@ -1302,6 +1302,11 @@ public final class CardUtil {
         Set<Card> toReturn = new LinkedHashSet<>();
         targets.forEach(card -> {
             toReturn.add(card.getMainCard());
+            card.getMutateObjects().stream()
+                    .map(game::getCard)
+                    .filter(Objects::nonNull)
+                    .map(Card::getMainCard)
+                    .forEach(toReturn::add);
         });
         return toReturn;
     }

@@ -58,6 +58,7 @@ public class PermanentToken extends PermanentImpl {
         } else {
             copyFromToken(token, game, true);
         }
+        applyMutate(game);
         super.reset(game);
         // Because the P/T objects have there own base value for reset we have to take it from there instead of from the basic token object
         this.power.resetToBaseValue();
@@ -178,4 +179,5 @@ public class PermanentToken extends PermanentImpl {
             copyFromToken(token, game, false);
         }
     }
+
 }

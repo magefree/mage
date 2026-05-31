@@ -14,17 +14,21 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Spirit31Token;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author TheElk801, Grath
  */
 public final class GhostlyDancers extends CardImpl {
 
@@ -56,6 +60,7 @@ public final class GhostlyDancers extends CardImpl {
 }
 
 class GhostlyDancersEffect extends OneShotEffect {
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.ROOM);
 
     GhostlyDancersEffect() {
         super(Outcome.Benefit);
@@ -73,15 +78,44 @@ class GhostlyDancersEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // TODO: 7/7/25 this needs to be refactored when rooms are implemented
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null || player.getGraveyard().count(StaticFilters.FILTER_CARD_ENCHANTMENT, game) < 1) {
+        if (player == null) {
             return false;
         }
-        TargetCard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ENCHANTMENT);
-        target.withNotTarget(true);
-        player.choose(outcome, target, source, game);
-        Card card = game.getCard(target.getFirstTarget());
-        return card != null && player.moveCards(card, Zone.HAND, source, game);
+        if (player.chooseUse(
+                Outcome.PutCreatureInPlay,
+                "Return an enchantment card from your graveyard to your hand or unlock a locked door of a Room you control?", "",
+                "return an enchantment", "unlock a room",
+                source, game
+        )) {
+             if (player.getGraveyard().count(StaticFilters.FILTER_CARD_ENCHANTMENT, game) < 1) {
+                 return false;
+             }
+            TargetCard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ENCHANTMENT);
+            target.withNotTarget(true);
+            player.choose(outcome, target, source, game);
+            Card card = game.getCard(target.getFirstTarget());
+            return card != null && player.moveCards(card, Zone.HAND, source, game);
+        } else {
+            TargetPermanent target = new TargetPermanent(1, 1, filter);
+            target.withNotTarget(true);
+            player.choose(outcome, target, source, game);
+            Permanent permanent = game.getPermanent(target.getFirstTarget());
+            if (permanent == null || permanent.isLeftDoorUnlocked() && permanent.isRightDoorUnlocked()) {
+                return false;
+            }
+            boolean unlockLeft;
+            if (!permanent.isLeftDoorUnlocked() && permanent.isRightDoorUnlocked()) {
+                unlockLeft = true;
+            } else if (permanent.isLeftDoorUnlocked() && !permanent.isRightDoorUnlocked()) {
+                unlockLeft = false;
+            } else {
+                unlockLeft = player.chooseUse(
+                        Outcome.Neutral, "Unlock the left door or the right door?",
+                        null, "Left", "Right", source, game
+                );
+            }
+            return permanent.unlockDoor(game, source, unlockLeft);
+        }
     }
 }

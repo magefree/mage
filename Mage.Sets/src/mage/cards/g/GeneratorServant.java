@@ -1,26 +1,22 @@
 package mage.cards.g;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.ManaSpentOnSpellGainsAbilityEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.watchers.Watcher;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,14 +32,13 @@ public final class GeneratorServant extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}, Sacrifice Generator Servant: Add {C}{C}. If that mana is spent on a creature spell, it gains haste until end of turn.
-        Mana mana = Mana.ColorlessMana(2);
-        mana.setFlag(true); // used to indicate this mana ability
-        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, mana, new TapSourceCost());
+        SimpleManaAbility ability = new SimpleManaAbility(
+                new BasicManaEffect(Mana.ColorlessMana(2)), new TapSourceCost());
+        ability.addEffect(new ManaSpentOnSpellGainsAbilityEffect(StaticFilters.FILTER_SPELL_CREATURE,
+                new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn, null, true)));
         ability.addCost(new SacrificeSourceCost());
-        ability.getEffects().get(0).setText("Add {C}{C}. If that mana is spent on a creature spell, it gains haste until end of turn.");
         this.addAbility(ability);
 
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new GeneratorServantHasteEffect()), new GeneratorServantWatcher());
     }
 
     private GeneratorServant(final GeneratorServant card) {
@@ -53,81 +48,5 @@ public final class GeneratorServant extends CardImpl {
     @Override
     public GeneratorServant copy() {
         return new GeneratorServant(this);
-    }
-}
-
-class GeneratorServantWatcher extends Watcher {
-
-    private final List<UUID> creatures = new ArrayList<>();
-
-    public GeneratorServantWatcher() {
-        super(WatcherScope.CARD);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.MANA_PAID) {
-            return;
-        }
-
-        MageObject target = game.getObject(event.getTargetId());
-        if (!(target instanceof Spell)) {
-            return;
-        }
-
-        // Mana from Generator Servant
-        if (!event.getFlag()) {
-            return;
-        }
-
-        if (event.getSourceId() == null || !event.getSourceId().equals(this.getSourceId())) {
-            return;
-        }
-
-        if (target.isCreature(game)) {
-            this.creatures.add(((Spell) target).getCard().getId());
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        creatures.clear();
-    }
-
-    public boolean creatureCastWithServantsMana(UUID permanentId){
-        return creatures.contains(permanentId);
-    }
-
-}
-
-class GeneratorServantHasteEffect extends ContinuousEffectImpl {
-
-    GeneratorServantHasteEffect() {
-        super(Duration.EndOfGame, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-    }
-
-    private GeneratorServantHasteEffect(final GeneratorServantHasteEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GeneratorServantHasteEffect copy() {
-        return new GeneratorServantHasteEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        GeneratorServantWatcher watcher = game.getState().getWatcher(GeneratorServantWatcher.class, source.getSourceId());
-        if (watcher == null) {
-            return false;
-        }
-
-        for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
-            if (watcher.creatureCastWithServantsMana(perm.getId())) {
-                perm.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
-            }
-        }
-        return true;
     }
 }

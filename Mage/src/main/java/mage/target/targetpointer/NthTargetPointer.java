@@ -6,6 +6,7 @@ import mage.cards.Card;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackAbility;
 import mage.target.Targets;
 
 import java.util.*;
@@ -53,9 +54,13 @@ public abstract class NthTargetPointer extends TargetPointerImpl {
     }
 
     private void wrongTargetsUsage(Ability source) {
-        if (this.targetIndex > 0 && source.getTargetAdjuster() == null) {
+        if (this.targetIndex > 0 && source.getTargetAdjuster() == null && !(source instanceof StackAbility)) {
             // first target pointer is default, so must be ignored
+            // TODO: ignoring first target pointer means this doesn't actually catch some cases:
+            //      - no target added for first target pointer (usually caught by VerifyCardDataTest)
+            //      - triggered ability without target pointer set properly (common error by careless devs)
             // also legitimate use case with target adjuster e.g. Jilt
+            // TriggeredAbility target adjuster not part of corresponding StackAbility, see #14938
             throw new IllegalStateException("Wrong code usage: source ability miss targets setup for target pointer - "
                     + this.getClass().getSimpleName() + " - " + source.getClass().getSimpleName() + " - " + source);
         }

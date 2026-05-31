@@ -10,6 +10,7 @@ import mage.counters.CounterType;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.GameState;
+import mage.game.stack.Spell;
 import mage.util.CardUtil;
 
 import java.util.List;
@@ -56,6 +57,16 @@ public interface Permanent extends Card, Controllable {
     void setTransformed(boolean value);
 
     int getTransformCount();
+
+    boolean mutate(Card mutation, Spell source, Game game);
+
+    int getMutateCount();
+
+    List<UUID> getMutateObjects();
+
+    List<UUID> getMutateForView();
+
+    boolean isMutatedOver();
 
     boolean isPhasedIn();
 
@@ -518,6 +529,8 @@ public interface Permanent extends Card, Controllable {
     boolean unlockRoomOnCast(Game game);
 
     boolean unlockDoor(Game game, Ability source, boolean isLeftDoor);
+
+    boolean lockDoor(Game game, Ability source, boolean isLeftDoor);
 
     @Override
     Permanent copy();

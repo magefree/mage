@@ -82,9 +82,7 @@ public class BeholdAbility extends StaticAbility implements OptionalAdditionalSo
         }
 
         additionalCost.activate();
-        for (Cost cost : ((Costs<Cost>) additionalCost)) {
-            ability.getCosts().add(cost.copy());
-        }
+        ability.addCost(additionalCost.copy());
         ability.setCostsTag(BEHOLD_ACTIVATION_VALUE_KEY, null);
     }
 

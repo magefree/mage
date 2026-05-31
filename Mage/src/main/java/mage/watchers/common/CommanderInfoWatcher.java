@@ -1,12 +1,8 @@
 package mage.watchers.common;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageObject;
 import mage.cards.Card;
 import mage.cards.DoubleFacedCard;
-import mage.cards.DoubleFacedCardHalf;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -14,6 +10,10 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.Watcher;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /* 20130711
  *903.14a A player that's been dealt 21 or more combat damage by the same commander
@@ -38,27 +38,18 @@ public class CommanderInfoWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (checkCommanderDamage && event.getType() == GameEvent.EventType.DAMAGED_PLAYER && event instanceof DamagedPlayerEvent) {
-            Card sourceCard = game.getCard(event.getSourceId());
-            if (sourceCard == null) {
+            Permanent commander = game.getPermanent(event.getSourceId());
+            Player player = game.getPlayer(event.getTargetId());
+            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
+            if (commander == null || player == null || !damageEvent.isCombatDamage()) {
                 return;
             }
-            sourceCard = sourceCard.getMainCard();
-            if (sourceId.equals(sourceCard.getId())) {
-                DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-                if (damageEvent.isCombatDamage()) {
-                    UUID playerUUID = event.getTargetId();
-                    Integer damage = damageToPlayer.getOrDefault(playerUUID, 0);
-                    damage += damageEvent.getAmount();
-                    damageToPlayer.put(playerUUID, damage);
-                    Player player = game.getPlayer(playerUUID);
-                    MageObject commander = game.getObject(event.getSourceId());
-                    if (player != null && commander != null) {
-                        if (!game.isSimulation()) {
-                            game.informPlayers(commander.getLogName() + " did " + damage + " combat damage to " + player.getLogName() + " during the game.");
-                        }
-                        this.addCardInfoToCommander(game);
-                    }
-                }
+            if (sourceId.equals(commander.getMainCard().getId()) || commander.getMutateObjects().contains(sourceId)) {
+                Integer damage = damageToPlayer.getOrDefault(player.getId(), 0);
+                damage += damageEvent.getAmount();
+                damageToPlayer.put(player.getId(), damage);
+                game.informPlayers(commander.getLogName() + " did " + damage + " combat damage to " + player.getLogName() + " during the game.");
+                this.addCardInfoToCommander(game);
             }
         }
         // Add card info to the commander

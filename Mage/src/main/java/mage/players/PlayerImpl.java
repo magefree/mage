@@ -5351,6 +5351,11 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         boolean result = false;
         if (card.moveToExile(exileId, exileName, source, game)) {
+            if (card instanceof Permanent)
+                ((Permanent) card).getMutateObjects().stream()
+                        .map(game::getCard)
+                        .filter(Objects::nonNull)
+                        .forEach(c -> c.moveToExile(exileId, exileName, source, game));
             if (!game.isSimulation()) {
                 if (card instanceof PermanentCard) {
                     // in case it's face down or name was changed by copying from other permanent

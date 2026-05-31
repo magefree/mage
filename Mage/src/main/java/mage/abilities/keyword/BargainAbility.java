@@ -96,9 +96,7 @@ public class BargainAbility extends StaticAbility implements OptionalAdditionalS
         }
 
         additionalCost.activate();
-        for (Cost cost : ((Costs<Cost>) additionalCost)) {
-            ability.getCosts().add(cost.copy());
-        }
+        ability.addCost(additionalCost.copy());
         ability.setCostsTag(BARGAIN_ACTIVATION_VALUE_KEY, null);
     }
 
