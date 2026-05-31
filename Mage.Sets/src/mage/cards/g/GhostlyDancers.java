@@ -78,7 +78,6 @@ class GhostlyDancersEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // TODO: 7/7/25 this needs to be refactored when rooms are implemented
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return false;
