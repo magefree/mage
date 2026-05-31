@@ -9,6 +9,8 @@ import mage.players.PlayerType;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -18,8 +20,14 @@ public class TablePlayerPanel extends javax.swing.JPanel {
 
     protected final PlayerTypeEventSource playerTypeEventSource = new PlayerTypeEventSource();
 
+    /**
+     * Creates a TablePlayerPanel and initializes its UI components.
+     *
+     * Configures the embedded NewPlayerPanel to allow random deck folder selection and keeps it hidden initially.
+     */
     public TablePlayerPanel() {
         initComponents();
+        this.newPlayerPanel.setAllowRandomDeckFolder(true);
         this.newPlayerPanel.setVisible(false);
     }
 
@@ -41,13 +49,50 @@ public class TablePlayerPanel extends javax.swing.JPanel {
         this.newPlayerPanel.setSkillLevel(playerSkill);
     }
 
+    /**
+     * Builds a display name for an AI player by appending the last one or two characters of the provided label to the configured computer name.
+     *
+     * @param label the player label (for example "Player 1"); the method will use up to the last two characters of this label
+     * @return the AI player name composed of the configured computer name, a space, and the trimmed suffix extracted from {@code label}
+     */
     public static String extractAiPlayerNumberFromLabel(String label) {
         return ClientDefaultSettings.computerName + " " + label.substring(Math.max(0, label.length() - 2)).trim();
     }
 
+    /**
+     * Attempts to join the specified table in the given room using an empty set of previously used deck paths.
+     *
+     * @param roomId the UUID of the room to join
+     * @param tableId the UUID of the table to join
+     * @return true if the join operation succeeded, false otherwise
+     * @throws IOException if an I/O error occurs while joining
+     * @throws ClassNotFoundException if a required class cannot be found during join
+     */
     public boolean joinTable(UUID roomId, UUID tableId) throws IOException, ClassNotFoundException {
+        return joinTable(roomId, tableId, new HashSet<>());
+    }
+
+    /**
+     * Joins the specified table using the currently selected player type and configuration, resolving an AI deck from available paths when needed.
+     *
+     * @param roomId        the UUID of the room to join
+     * @param tableId       the UUID of the table to join
+     * @param usedDeckPaths a set of deck file paths that should be avoided when selecting a random AI deck
+     * @return              `true` when the selected player type is HUMAN or when joining the table succeeds; `false` otherwise
+     * @throws IOException              if an I/O error occurs while importing a deck or communicating with the server
+     * @throws ClassNotFoundException   if a required class cannot be found during deserialization when joining
+     */
+    public boolean joinTable(UUID roomId, UUID tableId, Set<String> usedDeckPaths) throws IOException, ClassNotFoundException {
         if (this.cbPlayerType.getSelectedItem() != PlayerType.HUMAN) {
-            return SessionHandler.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), (PlayerType) this.cbPlayerType.getSelectedItem(), this.newPlayerPanel.getSkillLevel(), DeckImporter.importDeckFromFile(this.newPlayerPanel.getDeckFile(), true), "");
+            String deckFile = RandomDeckSelector.resolveDeckPath(this.newPlayerPanel.getDeckFile(), usedDeckPaths);
+            return SessionHandler.joinTable(
+                    roomId,
+                    tableId,
+                    this.newPlayerPanel.getPlayerName(),
+                    (PlayerType) this.cbPlayerType.getSelectedItem(),
+                    this.newPlayerPanel.getSkillLevel(),
+                    DeckImporter.importDeckFromFile(deckFile, true),
+                    "");
         }
         return true;
     }

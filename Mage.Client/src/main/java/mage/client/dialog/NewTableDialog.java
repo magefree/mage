@@ -24,7 +24,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -497,6 +499,15 @@ public class NewTableDialog extends MageDialog {
         this.hideDialog();
     }
 
+    /**
+     * Handle the OK button: validate options, persist them, create a server table, and join AI players and the host.
+     *
+     * <p>If validation fails the method returns without side effects. If table creation fails an error dialog is shown
+     * and the method returns. If any AI player or the host fails to join the newly created table the table is removed
+     * and the local `table` reference is cleared. Exceptions during join or deck import are passed to {@code handleError}.
+     *
+     * @param evt the action event that triggered this handler
+     */
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
 
         MatchOptions options = getMatchOptions();
@@ -515,9 +526,10 @@ public class NewTableDialog extends MageDialog {
         }
         try {
             // join AI
+            Set<String> usedAiDeckPaths = new HashSet<>();
             for (TablePlayerPanel player : players) {
                 if (player.getPlayerType() != PlayerType.HUMAN) {
-                    if (!player.joinTable(roomId, table.getTableId())) {
+                    if (!player.joinTable(roomId, table.getTableId(), usedAiDeckPaths)) {
                         // error message must be sent by a server
                         SessionHandler.removeTable(roomId, table.getTableId());
                         table = null;
