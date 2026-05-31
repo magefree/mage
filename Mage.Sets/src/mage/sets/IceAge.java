@@ -238,6 +238,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Marton Stromgald", 199, Rarity.RARE, mage.cards.m.MartonStromgald.class, RETRO_ART));
         cards.add(new SetCardInfo("Melee", 200, Rarity.UNCOMMON, mage.cards.m.Melee.class, RETRO_ART));
         cards.add(new SetCardInfo("Melting", 201, Rarity.UNCOMMON, mage.cards.m.Melting.class, RETRO_ART));
+        cards.add(new SetCardInfo("Mercenaries", 44, Rarity.RARE, mage.cards.m.Mercenaries.class, RETRO_ART));
         cards.add(new SetCardInfo("Merieke Ri Berit", 297, Rarity.RARE, mage.cards.m.MeriekeRiBerit.class, RETRO_ART));
         cards.add(new SetCardInfo("Mesmeric Trance", 83, Rarity.RARE, mage.cards.m.MesmericTrance.class, RETRO_ART));
         cards.add(new SetCardInfo("Meteor Shower", 202, Rarity.COMMON, mage.cards.m.MeteorShower.class, RETRO_ART));
