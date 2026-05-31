@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.DiscardCardControllerTriggeredAbility;
+import mage.abilities.effects.common.DiscardOneOrMoreCardsTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -16,9 +16,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterArtifactCard;
-
+import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import java.util.UUID;
 
 /**
@@ -26,9 +25,7 @@ import java.util.UUID;
  */
 public final class MishraExcavationProdigy extends CardImpl {
 
-    private static final FilterCard filter = new FilterArtifactCard("one or more artifact cards");
-
-    public MishraExcavationProdigy(UUID ownerId, CardSetInfo setInfo) {
+        public MishraExcavationProdigy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
         this.supertype.add(SuperType.LEGENDARY);
@@ -47,8 +44,11 @@ public final class MishraExcavationProdigy extends CardImpl {
         this.addAbility(ability);
 
         // Whenever you discard one or more artifact cards, add {R}{R}. This ability triggers only once each turn.
-        this.addAbility(new DiscardCardControllerTriggeredAbility(
-                new BasicManaEffect(Mana.RedMana(2)), false, filter
+        this.addAbility(new DiscardOneOrMoreCardsTriggeredAbility(
+                Zone.BATTLEFIELD,
+                new BasicManaEffect(Mana.RedMana(2)),
+                false,
+                StaticFilters.FILTER_CARD_ARTIFACTS
         ).setTriggersLimitEachTurn(1));
     }
 
