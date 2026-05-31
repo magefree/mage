@@ -1,10 +1,8 @@
 package mage.game.permanent;
 
-import mage.ApprovingObject;
-import mage.MageObject;
-import mage.MageObjectReference;
-import mage.ObjectColor;
+import mage.*;
 import mage.abilities.Abilities;
+import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.RoomAbility;
@@ -45,6 +43,7 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -114,6 +113,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected UUID attachedTo;
     protected int attachedToZoneChangeCounter;
     protected MageObjectReference pairedPermanent;
+    protected final List<UUID> mutations = new ArrayList<>(); // refers to objects merged with this permanent
+    protected final List<UUID> mutationsForView = new ArrayList<>(); // ordered cards in mutate stack, includes this card
+    protected Abilities<Ability> mutatedAbilities = new AbilitiesImpl<>();
+    protected Card topMutation;
     protected List<UUID> bandedCards = new ArrayList<>();
     protected Counters counters;
     protected List<MarkedDamageInfo> markedDamage;
@@ -192,6 +195,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.goadingPlayers.addAll(permanent.goadingPlayers);
         this.pairedPermanent = permanent.pairedPermanent;
         this.bandedCards.addAll(permanent.bandedCards);
+        this.mutations.addAll(permanent.mutations);
+        this.mutationsForView.addAll(permanent.mutationsForView);
+        this.mutatedAbilities = permanent.mutatedAbilities.copy();
+        this.topMutation = permanent.topMutation == null ? null : permanent.topMutation.copy();
         this.timesLoyaltyUsed = permanent.timesLoyaltyUsed;
         this.loyaltyActivationsAvailable = permanent.loyaltyActivationsAvailable;
         this.legendRuleApplies = permanent.legendRuleApplies;
@@ -724,6 +731,96 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public int getTransformCount() {
         return transformCount;
+    }
+
+    @Override
+    public boolean mutate(Card mutation, Spell source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        mutations.add(mutation.getId());
+        if (mutationsForView.isEmpty()) {
+            mutationsForView.add(this.getId());
+        }
+        mutation.setZone(Zone.OUTSIDE, game);
+        if (!source.isCopy()) {
+            game.getState().updateZoneChangeCounter(mutation.getId());
+        }
+        boolean shouldMutateUnder = controller.chooseUse(Outcome.Neutral,
+                "Select whether to mutate " + source.getLogName() + " UNDER or OVER " + getLogName(),
+                null, "Under", "Over", source.getSpellAbility(), game);
+        mutation.getAbilities().copy().forEach(a -> {
+            a.setSourceId(this.getId());
+            a.setControllerId(this.getControllerId());
+            mutatedAbilities.add(a);
+        });
+        if (shouldMutateUnder) {
+            mutationsForView.add(mutation.getId());
+        } else {
+            mutationsForView.add(0, mutation.getId());
+            topMutation = mutation.copy();
+            faceDown = mutation.isFaceDown(game);
+        }
+        applyMutate(game);
+        game.processAction(); // for layer 6 lose abilities to prevent mutate triggers
+        game.fireEvent(GameEvent.getEvent(
+                GameEvent.EventType.CREATURE_MUTATED, this.getId(),
+                source.getSpellAbility(), source.getControllerId()
+        ));
+        return true;
+    }
+
+    protected void applyMutate(Game game) {
+        if (mutations.isEmpty()) {
+            return;
+        }
+        if (topMutation != null) {
+            this.name = topMutation.getName();
+            this.manaCost = topMutation.getManaCost().copy();
+            this.color = topMutation.getColor(game).copy();
+            this.frameColor = topMutation.getFrameColor(game);
+            this.frameStyle = topMutation.getFrameStyle();
+            this.supertype.clear();
+            this.supertype.addAll(topMutation.getSuperType(game));
+            this.cardType.clear();
+            this.cardType.addAll(topMutation.getCardType(game));
+            this.subtype.copyFrom(topMutation.getSubtype(game));
+            this.power = new MageInt(topMutation.getPower().getModifiedBaseValue());
+            this.toughness = new MageInt(topMutation.getToughness().getModifiedBaseValue());
+            this.startingLoyalty = topMutation.getStartingLoyalty();
+            this.startingDefense = topMutation.getStartingDefense();
+            CardUtil.copySetAndCardNumber(this, topMutation);
+            this.rarity = topMutation.getRarity();
+        }
+        for (Ability ability : mutatedAbilities) {
+            if (!faceDown || ability.getWorksFaceDown()) {
+                this.addAbility(ability, this.getId(), game, true);
+            }
+        }
+        this.abilities.stream()
+                .filter(MutateAbility.class::isInstance)
+                .forEach(ability -> ability.setRuleVisible(false)); // less gui clutter
+    }
+
+    @Override
+    public int getMutateCount() {
+        return mutations.size();
+    }
+
+    @Override
+    public List<UUID> getMutateObjects() {
+        return new ArrayList<>(mutations);
+    }
+
+    @Override
+    public List<UUID> getMutateForView() {
+        return new ArrayList<>(mutationsForView);
+    }
+
+    @Override
+    public boolean isMutatedOver() {
+        return topMutation != null;
     }
 
     @Override
@@ -1745,7 +1842,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean isToken() {
-        return this instanceof PermanentToken;
+        if (topMutation == null) {
+            return this instanceof PermanentToken;
+        } else {
+            return topMutation instanceof PermanentToken;
+        }
     }
 
     @Override
@@ -2179,6 +2280,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 zoneChangeInfo = new ZoneChangeInfo.Library(event, flag /* put on top */);
             } else {
                 zoneChangeInfo = new ZoneChangeInfo(event);
+            }
+            for (UUID id : mutations) {
+                Card card = game.getCard(id);
+                if (card != null) {
+                    card.setZone(Zone.BATTLEFIELD, game);
+                    card.moveToZone(toZone, source, game, flag, appliedEffects);
+                }
             }
             return ZonesHandler.moveCard(zoneChangeInfo, game, source);
         }

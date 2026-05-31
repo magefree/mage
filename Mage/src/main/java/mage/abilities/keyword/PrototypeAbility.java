@@ -107,7 +107,7 @@ class PrototypeEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null || !permanent.isPrototyped()) {
+        if (permanent == null || !permanent.isPrototyped() || permanent.isMutatedOver()) {
             return false;
         }
         permanent.setManaCost(new ManaCostsImpl<>(manaString));

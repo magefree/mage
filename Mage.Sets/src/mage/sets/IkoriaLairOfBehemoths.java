@@ -64,6 +64,9 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Boon of the Wish-Giver", 43, Rarity.UNCOMMON, mage.cards.b.BoonOfTheWishGiver.class));
         cards.add(new SetCardInfo("Boot Nipper", 76, Rarity.COMMON, mage.cards.b.BootNipper.class));
         cards.add(new SetCardInfo("Bristling Boar", 146, Rarity.COMMON, mage.cards.b.BristlingBoar.class));
+        cards.add(new SetCardInfo("Brokkos, Apex of Forever", 179, Rarity.MYTHIC, mage.cards.b.BrokkosApexOfForever.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Brokkos, Apex of Forever", 299, Rarity.MYTHIC, mage.cards.b.BrokkosApexOfForever.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Brokkos, Apex of Forever", 378, Rarity.MYTHIC, mage.cards.b.BrokkosApexOfForever.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bushmeat Poacher", 77, Rarity.COMMON, mage.cards.b.BushmeatPoacher.class));
         cards.add(new SetCardInfo("Call of the Death-Dweller", 78, Rarity.UNCOMMON, mage.cards.c.CallOfTheDeathDweller.class));
         cards.add(new SetCardInfo("Capture Sphere", 44, Rarity.COMMON, mage.cards.c.CaptureSphere.class));
@@ -420,7 +423,6 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Zirda, the Dawnwaker", 233, Rarity.RARE, mage.cards.z.ZirdaTheDawnwaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zirda, the Dawnwaker", 360, Rarity.RARE, mage.cards.z.ZirdaTheDawnwaker.class, NON_FULL_USE_VARIOUS));
 
-        cards.removeIf(card -> HIDE_MUTATE_CARDS && MUTATE_CARD_NAMES.contains(card.getName()));
     }
 
     @Override

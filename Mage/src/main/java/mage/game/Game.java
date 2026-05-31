@@ -802,17 +802,18 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
      * @return
      */
     default boolean isCommanderObject(Player player, MageObject object) {
-        UUID idToCheck = null;
-        if (object instanceof Spell) {
-            idToCheck = ((Spell) object).getCard().getId();
-        }
-        if (object instanceof CommandObject) {
-            idToCheck = object.getId();
-        }
+        Set<UUID> toCheck = new HashSet<>();
         if (object instanceof Card) {
-            idToCheck = ((Card) object).getMainCard().getId();
+            toCheck.add(((Card) object).getMainCard().getId());
+            if (object instanceof Permanent) {
+                toCheck.addAll(((Permanent) object).getMutateObjects());
+            }
+        } else if (object instanceof CommandObject) {
+            toCheck.add(object.getId());
         }
-        return idToCheck != null && this.getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER, false).contains(idToCheck);
+        return toCheck.stream().anyMatch(id ->
+                this.getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER, false)
+                        .contains(id));
     }
 
     void setGameStopped(boolean gameStopped);

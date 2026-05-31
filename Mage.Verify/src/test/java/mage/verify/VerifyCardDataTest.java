@@ -2405,13 +2405,6 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "legendary nonpermanent cards need to have LegendarySpellAbility");
         }
 
-        // special check: mutate is not supported yet, so must be removed from sets
-        if (card.getAbilities().containsClass(MutateAbility.class)) {
-            // how-to fix: add that code at the end of the set
-            // cards.removeIf(card -> HIDE_MUTATE_CARDS && MUTATE_CARD_NAMES.contains(card.getName()));
-            fail(card, "abilities", "mutate cards aren't implemented and shouldn't be available");
-        }
-
         // special check: some new creature's ETB must use When this creature enters instead When {this} enters
         if (EntersBattlefieldTriggeredAbility.ENABLE_TRIGGER_PHRASE_AUTO_FIX) {
             if (etbTriggerPhrases.isEmpty()) {
