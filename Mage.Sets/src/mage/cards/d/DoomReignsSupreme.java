@@ -73,7 +73,7 @@ class DoomReignsSupremeCounterTriggeredAbility extends TriggeredAbilityImpl {
             + "You may cast up to two spells from among the exiled cards without paying their mana costs"
         );
         reflexive.addTarget(new TargetOpponent());
-        return new DoWhenCostPaid(reflexive, new SacrificeSourceCost(), "Sacrifice {this}?", false);
+        return new DoWhenCostPaid(reflexive, new SacrificeSourceCost().setText("sacrifice it"), "Sacrifice {this}?", false);
     }
 
     DoomReignsSupremeCounterTriggeredAbility() {

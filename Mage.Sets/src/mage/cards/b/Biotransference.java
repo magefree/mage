@@ -48,7 +48,7 @@ class BiotransferenceEffect extends ModifyObjectAllMultiZoneEffect {
             new FilterControlledCreatureSpell("creature spells you control"),
             new FilterOwnedCreatureCard("creature cards you own"),
             (obj, source, game) -> { game.getState().getCreateMageObjectAttribute(obj, game).getCardType().add(CardType.ARTIFACT); },
-            CardType.ARTIFACT.getPluralName() + " in addition to their other types"
+            "artifacts in addition to their other types"
         );
         this.dependencyTypes.add(DependencyType.ArtifactAddingRemoving); // March of the Machines
     }
