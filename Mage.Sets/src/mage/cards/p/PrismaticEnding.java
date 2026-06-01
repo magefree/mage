@@ -44,7 +44,7 @@ class PrismaticEndingEffect extends OneShotEffect {
 
     PrismaticEndingEffect() {
         super(Outcome.Benefit);
-        staticText = "<i>Converge</i> &mdash; Exile target nonland permanent if its mana value " +
+        staticText = "Exile target nonland permanent if its mana value " +
                 "is less than or equal to the number of colors of mana spent to cast this spell";
     }
 

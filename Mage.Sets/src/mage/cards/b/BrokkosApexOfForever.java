@@ -51,7 +51,7 @@ class BrokkosMutateFromGraveyardEffect extends AsThoughEffectImpl {
 
     BrokkosMutateFromGraveyardEffect() {
         super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.PutCreatureInPlay);
-        staticText = "You may cast {this} from your graveyard using its mutate ability";
+        staticText = "You may cast this card from your graveyard using its mutate ability";
     }
 
     private BrokkosMutateFromGraveyardEffect(final BrokkosMutateFromGraveyardEffect effect) {

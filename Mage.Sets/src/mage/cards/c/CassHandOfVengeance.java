@@ -60,7 +60,7 @@ public final class CassHandOfVengeance extends CardImpl {
         TriggeredAbility ability = new DiesThisOrAnotherTriggeredAbility(
             new CassHandOfVengeanceEffect(),
             false,
-            StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
+            StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL
         ).withInterveningIf(CassHandOfVengeanceCondition.instance);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

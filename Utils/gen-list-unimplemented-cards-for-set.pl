@@ -147,8 +147,8 @@ $unimplementedUrl .= join("or", @unimplementedNames) . "&unique=cards";
 
 # Read template file
 my $template = Text::Template->new(TYPE => 'FILE', SOURCE => $templateFile, DELIMITERS => [ '[=', '=]' ]);
-$vars{'unimplemented'} = join("\n", @unimplementedCards);
-$vars{'implemented'} = join("\n", @implementedCards);
+$vars{'unimplemented'} = join("\n", sort @unimplementedCards);
+$vars{'implemented'} = join("\n", sort @implementedCards);
 $vars{'setName'} = $setName;
 $vars{'unimplementedUrl'} = $unimplementedUrl;
 my $result = $template->fill_in(HASH => \%vars);
