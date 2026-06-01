@@ -226,6 +226,7 @@ public final class Tempest extends ExpansionSet {
         cards.add(new SetCardInfo("Natural Spring", 239, Rarity.COMMON, mage.cards.n.NaturalSpring.class, RETRO_ART));
         cards.add(new SetCardInfo("Nature's Revolt", 240, Rarity.RARE, mage.cards.n.NaturesRevolt.class, RETRO_ART));
         cards.add(new SetCardInfo("Needle Storm", 241, Rarity.UNCOMMON, mage.cards.n.NeedleStorm.class, RETRO_ART));
+        cards.add(new SetCardInfo("No Quarter", 193, Rarity.RARE, mage.cards.n.NoQuarter.class, RETRO_ART));
         cards.add(new SetCardInfo("Nurturing Licid", 242, Rarity.UNCOMMON, mage.cards.n.NurturingLicid.class, RETRO_ART));
         cards.add(new SetCardInfo("Opportunist", 194, Rarity.UNCOMMON, mage.cards.o.Opportunist.class, RETRO_ART));
         cards.add(new SetCardInfo("Oracle en-Vec", 31, Rarity.RARE, mage.cards.o.OracleEnVec.class, RETRO_ART));
