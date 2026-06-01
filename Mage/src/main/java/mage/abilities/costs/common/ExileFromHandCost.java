@@ -75,6 +75,8 @@ public class ExileFromHandCost extends CostImpl {
                 vmc.setAmount(cmc, cmc, false);
                 vmc.setPaid();
                 ability.addManaCostsToPay(vmc);
+
+                ability.setCostsTag("X", cmc);
             }
         }
         return paid;
