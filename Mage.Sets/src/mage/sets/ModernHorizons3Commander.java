@@ -96,6 +96,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Decoction Module", 288, Rarity.UNCOMMON, mage.cards.d.DecoctionModule.class));
         cards.add(new SetCardInfo("Deepfathom Skulker", 180, Rarity.RARE, mage.cards.d.DeepfathomSkulker.class));
         cards.add(new SetCardInfo("Demolition Field", 335, Rarity.UNCOMMON, mage.cards.d.DemolitionField.class));
+        cards.add(new SetCardInfo("Desert Warfare", 64, Rarity.RARE, mage.cards.d.DesertWarfare.class));
         cards.add(new SetCardInfo("Desert of the Indomitable", 336, Rarity.COMMON, mage.cards.d.DesertOfTheIndomitable.class));
         cards.add(new SetCardInfo("Desert of the Mindful", 337, Rarity.COMMON, mage.cards.d.DesertOfTheMindful.class));
         cards.add(new SetCardInfo("Disa the Restless", 1, Rarity.MYTHIC, mage.cards.d.DisaTheRestless.class));
