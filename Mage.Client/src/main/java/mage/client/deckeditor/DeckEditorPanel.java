@@ -759,6 +759,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
             try {
                 DeckImporter importer = DeckImporter.getDeckImporter(file.getPath());
+                importer.setPreferences(MageFrame.getPreferences());
 
                 if (importer != null) {
                     StringBuilder errorMessages = new StringBuilder();
@@ -822,7 +823,13 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 StringBuilder errorMessages = new StringBuilder();
                 MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
                 try {
-                    Deck deckToAppend = Deck.load(DeckImporter.importDeckFromFile(tempDeckPath, errorMessages, false), true, true);
+                    DeckImporter deckImporter = DeckImporter.getDeckImporter(tempDeckPath);
+                    DeckCardLists deckCardLists = new DeckCardLists();
+                    if (deckImporter != null) {
+                        deckImporter.setPreferences(MageFrame.getPreferences());
+                        deckCardLists = deckImporter.importDeck(tempDeckPath, errorMessages, false);
+                    }
+                    Deck deckToAppend = Deck.load(deckCardLists, true, true);
                     processAndShowImportErrors(errorMessages);
                     this.deck = Deck.append(deckToAppend, this.deck);
                     refreshDeck(false, true);
@@ -924,7 +931,14 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
         try {
             StringBuilder errorMessages = new StringBuilder();
-            Deck newDeck = Deck.load(DeckImporter.importDeckFromFile(file, errorMessages, saveAutoFixedFile), true, true);
+            DeckImporter deckImporter = DeckImporter.getDeckImporter(file);
+            DeckCardLists deckCardLists = new DeckCardLists();
+            if (deckImporter != null) {
+                deckImporter.setPreferences(MageFrame.getPreferences());
+                deckCardLists = deckImporter.importDeck(file, errorMessages, saveAutoFixedFile);
+            }
+
+            Deck newDeck = Deck.load(deckCardLists, true, true);
             processAndShowImportErrors(errorMessages);
 
             if (newDeck != null) {
