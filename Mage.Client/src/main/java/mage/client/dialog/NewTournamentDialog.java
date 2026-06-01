@@ -18,6 +18,7 @@ import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.table.TournamentPlayerPanel;
 import mage.client.util.IgnoreList;
+import mage.client.util.RecentDecklistUtil;
 import mage.client.util.gui.FastSearchUtil;
 import mage.constants.*;
 import mage.game.GameException;
@@ -97,8 +98,9 @@ public class NewTournamentDialog extends MageDialog {
         this.roomId = roomId;
         if (!lastSessionId.equals(SessionHandler.getSessionId())) {
             lastSessionId = SessionHandler.getSessionId();
-            this.player1Panel.setPlayerName(SessionHandler.getUserName());
-            this.player1Panel.showLevel(false); // no computer
+            player1Panel.setPlayerName(SessionHandler.getUserName());
+            player1Panel.showLevel(false); // no computer
+            player1Panel.loadRecentDeckFiles();
             cbTournamentType.setModel(new DefaultComboBoxModel(SessionHandler.getTournamentTypes().toArray()));
 
             cbGameType.setModel(new DefaultComboBoxModel(SessionHandler.getTournamentGameTypes().toArray()));
@@ -809,7 +811,7 @@ public class NewTournamentDialog extends MageDialog {
             fcSelectDeck.setAcceptAllFileFilterUsed(false);
             fcSelectDeck.addChoosableFileFilter(new DeckFileFilter("dck", "XMage's deck files (*.dck)"));
         }
-        String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
+        String lastFolder = RecentDecklistUtil.getRecentDecklistDir();
         if (!lastFolder.isEmpty()) {
             fcSelectDeck.setCurrentDirectory(new File(lastFolder));
         }
@@ -829,7 +831,7 @@ public class NewTournamentDialog extends MageDialog {
             fcJumpstartSelectDeck.setAcceptAllFileFilterUsed(false);
             fcJumpstartSelectDeck.addChoosableFileFilter(new DeckFileFilter("txt", "Jumpstart Packs (*.txt)"));
         }
-        String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
+        String lastFolder = RecentDecklistUtil.getRecentDecklistDir();
         if (!lastFolder.isEmpty()) {
             fcJumpstartSelectDeck.setCurrentDirectory(new File(lastFolder));
         }
