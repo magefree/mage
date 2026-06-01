@@ -75,4 +75,28 @@ public class AbuelosAwakeningTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, talisman, 0);
         assertGraveyardCount(playerA, talisman, 1);
     }
+
+    @Test
+    public void testAbuelosAwakeningFlicker() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.GRAVEYARD, playerA, "Shorikai, Genesis Engine");
+        addCard(Zone.HAND, playerA, abuelosAwakening);
+        addCard(Zone.HAND, playerA, "Flicker");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, abuelosAwakening, "Shorikai, Genesis Engine");
+        setChoiceAmount(playerA, 0);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flicker", "Shorikai, Genesis Engine");
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertType("Shorikai, Genesis Engine", CardType.ARTIFACT, true); // should still be artifact
+
+        // after being blinked, should no longer be a creature and should revert to base power/toughness
+        assertType("Shorikai, Genesis Engine", CardType.CREATURE, false);
+        assertBasePowerToughness(playerA, "Shorikai, Genesis Engine", 8, 8);
+    }
 }
