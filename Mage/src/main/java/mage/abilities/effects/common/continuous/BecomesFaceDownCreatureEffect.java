@@ -55,11 +55,44 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
 
     public enum FaceDownType {
         MANIFESTED,
-        MANUAL,
+        MANUAL {
+            @Override
+            public boolean isManual() {
+                return true;
+            }
+        },
         MORPHED,
         MEGAMORPHED,
         DISGUISED,
-        CLOAKED
+        CLOAKED,
+        MANUAL_33 {
+            @Override
+            public int getPower() {
+                return 3;
+            }
+
+            @Override
+            public int getToughness() {
+                return 3;
+            }
+
+            @Override
+            public boolean isManual() {
+                return true;
+            }
+        };
+
+        public int getPower() {
+            return 2;
+        }
+
+        public int getToughness() {
+            return 2;
+        }
+
+        public boolean isManual() {
+            return false;
+        }
     }
 
     protected int zoneChangeCounter;
@@ -135,12 +168,13 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
                     )));
                 }
                 break;
-            case MANUAL:
             case MANIFESTED:
                 // no face up abilities
                 break;
             default:
-                throw new IllegalArgumentException("Un-supported face down type: " + faceDownType);
+                if (!faceDownType.isManual()) {
+                    throw new IllegalArgumentException("Un-supported face down type: " + faceDownType);
+                }
         }
 
         staticText = "{this} becomes a 2/2 face-down creature, with no text, no name, no subtypes, and no mana cost";
@@ -176,7 +210,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (faceDownType == FaceDownType.MANUAL) {
+        if (faceDownType.isManual()) {
             Permanent permanent;
             if (objectReference != null) {
                 permanent = objectReference.getPermanent(game);
@@ -203,7 +237,6 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
                 foundPermanent = true;
                 switch (faceDownType) {
                     case MANIFESTED:
-                    case MANUAL: // sets manifested image // TODO: wtf
                         permanent.setManifested(true);
                         break;
                     case MORPHED:
@@ -217,7 +250,9 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
                         permanent.setCloaked(true);
                         break;
                     default:
-                        throw new UnsupportedOperationException("FaceDownType not yet supported: " + faceDownType);
+                        if (!faceDownType.isManual()) {
+                            throw new UnsupportedOperationException("FaceDownType not yet supported: " + faceDownType);
+                        }
                 }
             }
             makeFaceDownObject(game, source.getSourceId(), permanent, faceDownType, this.additionalAbilities);
@@ -238,11 +273,15 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
         } else if (permanent.isCloaked()) {
             return BecomesFaceDownCreatureEffect.FaceDownType.CLOAKED;
         } else if (permanent.isFaceDown(game)) {
+            if (permanent.getPower().getModifiedBaseValue() == 3 && permanent.getPower().getModifiedBaseValue() == 3) {
+                return BecomesFaceDownCreatureEffect.FaceDownType.MANUAL_33;
+            }
             return BecomesFaceDownCreatureEffect.FaceDownType.MANUAL;
         } else {
             return null;
         }
     }
+
 
     /**
      * Convert any object (card, token) to face down (remove/hide all face up information and make it a 2/2 creature)
@@ -318,8 +357,8 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
             }
         }
 
-        object.getPower().setModifiedBaseValue(2);
-        object.getToughness().setModifiedBaseValue(2);
+        object.getPower().setModifiedBaseValue(faceDownType.getPower());
+        object.getToughness().setModifiedBaseValue(faceDownType.getToughness());
 
         // image
         String tokenName;
@@ -337,11 +376,13 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
             case CLOAKED:
                 tokenName = TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_CLOAK;
                 break;
-            case MANUAL:
-                tokenName = TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MANUAL;
-                break;
             default:
-                throw new IllegalArgumentException("Un-supported face down type for image: " + faceDownType);
+                if (faceDownType.isManual()) {
+                    tokenName = TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MANUAL;
+                }
+                else {
+                    throw new IllegalArgumentException("Un-supported face down type for image: " + faceDownType);
+                }
         }
 
         Token faceDownToken = new EmptyToken();
