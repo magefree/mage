@@ -38,11 +38,11 @@ public class GlimpseOfTomorrowTest extends CardTestCommanderDuelBase {
         //   onto the battlefield, then the same for Auras, then the rest on the bottom.
         addCard(Zone.LIBRARY, playerA, "Glimpse of Tomorrow", 1);
 
-        // cast the commander from the command zone (no tax on first cast)
+        // cast the commander from the command zone
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Plargg, Dean of Chaos");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
-        // activate the impulse ability -> reveals + casts Glimpse of Tomorrow for free
+        // activate the ability -> reveal + casts Glimpse of Tomorrow for free
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{R}, {T}: Reveal");
         setChoice(playerA, "Yes"); // yes, cast the revealed Glimpse of Tomorrow
 
