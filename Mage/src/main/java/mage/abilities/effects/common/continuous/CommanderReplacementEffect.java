@@ -100,7 +100,17 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!commanderId.equals(event.getTargetId())) {
+        // A commander is registered by its main card id, but a permanent leaving the
+        // battlefield reports the id of the object that was on the battlefield. For an
+        // MDFC commander that's the half card id, not the main card id, so a raw
+        // commanderId.equals(targetId) never matches and the replacement is skipped.
+        // Normalize the event target to its main card id before comparing.
+        UUID eventCardId = event.getTargetId();
+        Card eventCard = game.getCard(eventCardId);
+        if (eventCard != null) {
+            eventCardId = eventCard.getMainCard().getId();
+        }
+        if (!commanderId.equals(eventCardId)) {
             return false;
         }
 
@@ -129,7 +139,6 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
         }
         return false;
     }
-
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
