@@ -281,6 +281,7 @@ public class GameEvent implements Serializable {
          playerId    id of the player who will be control new copied spell/ability
          amount      number on copies
          */
+        SPELL_RESOLVED,
         COPY_STACKOBJECT,
         /* COPIED_STACKOBJECT, TODO: make same logic in params for COPY_STACKOBJECT and COPIED_STACKOBJECT
          targetId    id of the new copied spell/ability
