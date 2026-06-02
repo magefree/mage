@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author North
@@ -46,6 +47,8 @@ public class CardCriteria {
     // compare numerical card numbers (123b -> 123)
     private int minCardNumber;
     private int maxCardNumber;
+    // compare exact card numbers (overrides minCardNumber, maxCardNumber)
+    private String cardNumber;
 
     public CardCriteria() {
         this.setCodes = new ArrayList<>();
@@ -154,7 +157,7 @@ public class CardCriteria {
     }
 
     public CardCriteria setCodes(List<String> setCodes) {
-        this.setCodes.addAll(setCodes);
+        setCodes.stream().filter(Objects::nonNull).forEach(this.setCodes::add);
         return this;
     }
 
@@ -205,6 +208,11 @@ public class CardCriteria {
 
     public CardCriteria maxCardNumber(int maxCardNumber) {
         this.maxCardNumber = maxCardNumber;
+        return this;
+    }
+
+    public CardCriteria cardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
         return this;
     }
 
@@ -342,14 +350,20 @@ public class CardCriteria {
             clausesCount++;
         }
 
-        if (minCardNumber != Integer.MIN_VALUE) {
-            where.ge("cardNumberAsInt", minCardNumber);
+        if (cardNumber != null) {
+            where.eq("cardNumber", new SelectArg(cardNumber));
             clausesCount++;
         }
+        else {
+            if (minCardNumber != Integer.MIN_VALUE) {
+                where.ge("cardNumberAsInt", minCardNumber);
+                clausesCount++;
+            }
 
-        if (maxCardNumber != Integer.MAX_VALUE) {
-            where.le("cardNumberAsInt", maxCardNumber);
-            clausesCount++;
+            if (maxCardNumber != Integer.MAX_VALUE) {
+                where.le("cardNumberAsInt", maxCardNumber);
+                clausesCount++;
+            }
         }
 
         if (clausesCount > 0) {
@@ -504,6 +518,10 @@ public class CardCriteria {
 
     public int getMaxCardNumber() {
         return maxCardNumber;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
     }
 
 }

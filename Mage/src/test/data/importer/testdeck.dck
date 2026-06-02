@@ -1,0 +1,4 @@
+1 [WAR:2*] Ugin, the Ineffable
+1 [ODY:72+] Cephalid Looter
+LAYOUT MAIN:(1,2)(CARD_TYPE,false,0)|([WAR:2*])([ODY:72+])
+LAYOUT SIDEBOARD:(0,0)(NONE,false,50)|

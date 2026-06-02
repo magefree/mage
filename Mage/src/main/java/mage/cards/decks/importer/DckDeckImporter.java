@@ -4,6 +4,7 @@ import mage.cards.decks.CardNameUtil;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLayout;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 
@@ -27,7 +28,7 @@ public class DckDeckImporter extends PlainTextDeckImporter {
 
     private static final Pattern layoutStackPattern = Pattern.compile("\\(([^)]*)\\)");
 
-    private static final Pattern layoutStackEntryPattern = Pattern.compile("\\[(\\w+[^:]*\\w*):(\\w+\\w*)]"); // test cases: [JR:64ab],[JR:64],[MPSAK1321:43],[MPSAKH:9],[MPS123-AKH:32],[MPS-13AKH:30],[MPS-AKH:49],[MPS-AKH:11], [PUMA:U16]
+    private static final Pattern layoutStackEntryPattern = Pattern.compile("\\[(\\w+[^:]*\\w*):(\\w+[\\w\\*\\+]*)]"); // test cases: [JR:64ab],[JR:64],[MPSAK1321:43],[MPSAKH:9],[MPS123-AKH:32],[MPS-13AKH:30],[MPS-AKH:49],[MPS-AKH:11], [PUMA:U16], [WAR:2*], [ODY:72+]
 
     // possible fixes for card numbers: [code:123] -> [code:456]
     // possible fixes for card numbers with name: [code:123] card1 -> [code:456] card2
@@ -82,7 +83,9 @@ public class DckDeckImporter extends PlainTextDeckImporter {
             DeckCardInfo deckCardInfo = null;
 
             // search by set/number
-            CardInfo foundedCard = CardRepository.instance.findCard(setCode, cardNum, true);
+            CardInfo foundedCard = this.getCardLookup().lookupCardInfo(
+                new CardCriteria().setCodes(setCode).cardNumber(cardNum).nightCard(false)
+            ).stream().findAny().orElse(null);
             boolean wasOutdated = false;
             if ((foundedCard != null) && !foundedCard.getName().equals(cardName)) {
                 sbMessage.append("Line ").append(lineCount).append(": ").append("found outdated card number or name, will try to replace: ").append(line).append('\n');

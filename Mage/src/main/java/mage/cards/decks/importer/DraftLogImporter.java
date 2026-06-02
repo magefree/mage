@@ -2,6 +2,7 @@ package mage.cards.decks.importer;
 
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 
 import java.util.regex.Matcher;
@@ -29,7 +30,7 @@ public class DraftLogImporter extends PlainTextDeckImporter {
         Matcher pickMatcher = PICK_PATTERN.matcher(line);
         if (pickMatcher.matches()) {
             String name = pickMatcher.group(1);
-            CardInfo cardInfo = getCardLookup().lookupCardInfo(name, currentSet, null);
+            CardInfo cardInfo = getCardLookup().lookupCardInfo(new CardCriteria().name(name).setCodes(currentSet)).stream().findAny().orElse(null);
             if (cardInfo != null) {
                 deckList.getCards().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
             } else {

@@ -2,6 +2,7 @@ package mage.cards.decks.importer;
 
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 
 /**
@@ -34,13 +35,12 @@ public class MWSDeckImporter extends PlainTextDeckImporter {
         String lineName = line.substring(delim + 1).trim();
         try {
             int num = Integer.parseInt(lineNum);
-            CardInfo cardInfo = null;
-            if (setCode.isEmpty()) {
-                cardInfo = getCardLookup().lookupCardInfo(lineName, setCode, null);
-            } else {
-                cardInfo = getCardLookup().lookupCardInfo(lineName);
+            final CardCriteria criteria = new CardCriteria().name(lineName);
+            if (!setCode.isEmpty()) {
+                criteria.setCodes(setCode);
             }
 
+            final CardInfo cardInfo = this.getCardLookup().lookupCardInfo(criteria).stream().findAny().orElse(null);
             if (cardInfo == null) {
                 sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append('\n');
             } else {

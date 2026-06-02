@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import mage.cards.decks.CardNameUtil;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 
 import java.util.Collections;
@@ -62,17 +63,16 @@ public class MtgaImporter extends PlainTextDeckImporter {
             return;
         }
 
-        CardInfo found;
         int count = Integer.parseInt(pattern.group(1));
         String name = pattern.group(2);
+        final CardCriteria criteria = new CardCriteria().name(name);
         if (pattern.group(3) != null) {
             String set = SET_REMAPPING.getOrDefault(pattern.group(3), pattern.group(3));
             String cardNumber = pattern.groupCount() >= 4 ? pattern.group(4) : null;
-            found = lookup.lookupCardInfo(name, set, cardNumber);
-        } else {
-            found = lookup.lookupCardInfo(name, null, null);
-        }
+            criteria.setCodes(set).cardNumber(cardNumber);
+        };
 
+        final CardInfo found = this.getCardLookup().lookupCardInfo(criteria).stream().findAny().orElse(null);
         if (found == null) {
             sbMessage.append("Could not find card for '").append(line).append("'\n");
             return;

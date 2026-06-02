@@ -10,7 +10,6 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.Zone;
 import mage.game.command.Emblem;
-import mage.util.CardUtil;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,11 +28,9 @@ public final class EmblemOfCard extends Emblem {
             String setCode,
             String infoTypeForError
     ) {
-        int intCardNumber = CardUtil.parseCardNumberAsInt(cardNumber);
         List<CardInfo> found = CardRepository.instance.findCards(new CardCriteria()
                 .name(cardName)
-                .minCardNumber(intCardNumber)
-                .maxCardNumber(intCardNumber)
+                .cardNumber(cardNumber)
                 .setCodes(setCode));
         return found.stream()
                 .filter(ci -> ci.getCardNumber().equals(cardNumber))
