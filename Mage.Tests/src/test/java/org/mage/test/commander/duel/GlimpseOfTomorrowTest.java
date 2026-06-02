@@ -48,7 +48,6 @@ public class GlimpseOfTomorrowTest extends CardTestCommanderDuelBase {
 
         // Glimpse resolves and shuffles every permanent you own — including Plargg, the
         // commander — into the library. The commander replacement SHOULD prompt here.
-        // It currently does not, so this choice goes unused and the asserts below fail.
         setChoice(playerA, true); // return commander to command zone
 
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
