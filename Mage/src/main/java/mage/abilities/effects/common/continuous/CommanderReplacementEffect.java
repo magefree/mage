@@ -139,6 +139,7 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
         }
         return false;
     }
+
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
