@@ -30,6 +30,9 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Doctor Doom", 95, Rarity.MYTHIC, mage.cards.d.DoctorDoom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doom Reigns Supreme", 96, Rarity.RARE, mage.cards.d.DoomReignsSupreme.class));
         cards.add(new SetCardInfo("Iron Man, Master of Machines", 216, Rarity.UNCOMMON, mage.cards.i.IronManMasterOfMachines.class));
+        cards.add(new SetCardInfo("Madame Hydra", 221, Rarity.UNCOMMON, mage.cards.m.MadameHydra.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Madame Hydra", 318, Rarity.UNCOMMON, mage.cards.m.MadameHydra.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Madame Hydra", 451, Rarity.UNCOMMON, mage.cards.m.MadameHydra.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Moon Girl and Devil Dinosaur", 223, Rarity.RARE, mage.cards.m.MoonGirlAndDevilDinosaur.class));
         cards.add(new SetCardInfo("Namor the Sub-Mariner", 391, Rarity.MYTHIC, mage.cards.n.NamorTheSubMariner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Namor the Sub-Mariner", 69, Rarity.MYTHIC, mage.cards.n.NamorTheSubMariner.class, NON_FULL_USE_VARIOUS));
