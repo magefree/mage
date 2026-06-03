@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesClassLevelTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldOneOrMoreTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -15,6 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
@@ -43,9 +44,11 @@ public final class CaretakersTalent extends CardImpl {
         this.addAbility(new ClassReminderAbility());
 
         // Whenever one or more tokens you control enter, draw a card. This ability triggers only once each turn.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_PERMANENT_TOKEN
-        ).setTriggerPhrase("Whenever one or more tokens you control enter, ").setTriggersLimitEachTurn(1));
+        this.addAbility(new EntersBattlefieldOneOrMoreTriggeredAbility(
+                new DrawCardSourceControllerEffect(1),
+                StaticFilters.FILTER_PERMANENT_TOKENS,
+                TargetController.YOU
+        ).setTriggersLimitEachTurn(1));
 
         // {W}: Level 2
         this.addAbility(new ClassLevelAbility(2, "{W}"));
