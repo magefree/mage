@@ -64,6 +64,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 296, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gathering Place", 266, Rarity.RARE, mage.cards.g.GatheringPlace.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gathering Place", 381, Rarity.RARE, mage.cards.g.GatheringPlace.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gleaming Bastion", 267, Rarity.RARE, mage.cards.g.GleamingBastion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gleaming Bastion", 382, Rarity.RARE, mage.cards.g.GleamingBastion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Human Torch, Johnny Storm", 136, Rarity.UNCOMMON, mage.cards.h.HumanTorchJohnnyStorm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Human Torch, Johnny Storm", 321, Rarity.UNCOMMON, mage.cards.h.HumanTorchJohnnyStorm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Invisible Woman, Sue Storm", 17, Rarity.UNCOMMON, mage.cards.i.InvisibleWomanSueStorm.class, NON_FULL_USE_VARIOUS));
