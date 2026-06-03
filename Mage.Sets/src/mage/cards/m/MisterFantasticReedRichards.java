@@ -4,9 +4,9 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.TargetController;
 import mage.filter.StaticFilters;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldOneOrMoreTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
@@ -33,12 +33,12 @@ public final class MisterFantasticReedRichards extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // Whenever one or more tokens you control enter, you may draw a card.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-            Zone.BATTLEFIELD,
+        this.addAbility(new EntersBattlefieldOneOrMoreTriggeredAbility(
             new DrawCardSourceControllerEffect(1),
-            StaticFilters.FILTER_PERMANENT_TOKEN,
+            StaticFilters.FILTER_PERMANENT_TOKENS,
+            TargetController.YOU,
             true
-        ).setTriggerPhrase("Whenever one or more tokens you control enter, "));
+        ));
     }
 
     private MisterFantasticReedRichards(final MisterFantasticReedRichards card) {
