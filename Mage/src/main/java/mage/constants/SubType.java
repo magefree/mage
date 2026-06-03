@@ -270,6 +270,7 @@ public enum SubType {
     KOORIVAR("Koorivar", SubTypeSet.CreatureType, true),
     KOR("Kor", SubTypeSet.CreatureType),
     KRAKEN("Kraken", SubTypeSet.CreatureType),
+    KREE("Kree", SubTypeSet.CreatureType),
     // L
     LADYOFPROPERETIQUETTE("Lady of Proper Etiquette", SubTypeSet.CreatureType, true), // Unglued
     LAMIA("Lamia", SubTypeSet.CreatureType),
