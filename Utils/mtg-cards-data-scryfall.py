@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import sys
 import time
 import unicodedata
 from urllib.error import HTTPError, URLError
@@ -96,8 +97,26 @@ rarity_map = {
     'mythic': 'M'
 }
 
+def parse_set_codes(argv):
+    if len(argv) > 1:
+        candidates = argv[1:]
+    else:
+        user_input = input("Enter space-separated set codes: ").strip()
+        if not user_input:
+            raise SystemExit("No set codes provided.")
+        candidates = user_input.split()
+
+    set_codes = []
+    for code in candidates:
+        normalized = code.strip().lower()
+        if not re.fullmatch(r'[a-z0-9]+', normalized):
+            raise SystemExit(f"Invalid set code: {code}")
+        set_codes.append(normalized)
+
+    return set_codes
+
 # Loop through each set
-sets_data = ['msh', 'msc', 'mar']
+sets_data = parse_set_codes(sys.argv)
 for set_code in sets_data:
     file_path = set_code.upper() + "-scryfall.json"
 
@@ -130,5 +149,7 @@ for set_code in sets_data:
             output += create_card_line(card['set_name'], card['collector_number'], rarity, card)
 
     # Save the output to a file
-    with open(f"{set_code}.txt", 'w', encoding='utf-8') as file:
+    output_file_path = f"{set_code}.txt"
+    with open(output_file_path, 'w', encoding='utf-8') as file:
         file.write(output)
+    print(f"Saved output to {os.path.abspath(output_file_path)}")
