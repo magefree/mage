@@ -149,7 +149,7 @@ for set_code in sets_data:
             output += create_card_line(card['set_name'], card['collector_number'], rarity, card)
 
     # Save the output to a file
-    output_file_path = f"{set_code}.txt"
+    output_file_path = f"{set_code}-data.txt"
     with open(output_file_path, 'w', encoding='utf-8') as file:
         file.write(output)
     print(f"Saved output to {os.path.abspath(output_file_path)}")
