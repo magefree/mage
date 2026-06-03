@@ -49,6 +49,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Construct a Cosmic Cube", 90, Rarity.RARE, mage.cards.c.ConstructACosmicCube.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crossbones, Malicious Mercenary", 91, Rarity.UNCOMMON, mage.cards.c.CrossbonesMaliciousMercenary.class));
         cards.add(new SetCardInfo("Dark Deed", 93, Rarity.UNCOMMON, mage.cards.d.DarkDeed.class));
+        cards.add(new SetCardInfo("Dark Fortress", 264, Rarity.RARE, mage.cards.d.DarkFortress.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dark Fortress", 380, Rarity.RARE, mage.cards.d.DarkFortress.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doctor Doom", 394, Rarity.MYTHIC, mage.cards.d.DoctorDoom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doctor Doom", 95, Rarity.MYTHIC, mage.cards.d.DoctorDoom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doom Reigns Supreme", 96, Rarity.RARE, mage.cards.d.DoomReignsSupreme.class));
