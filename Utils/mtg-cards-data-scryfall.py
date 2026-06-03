@@ -123,7 +123,7 @@ for set_code in sets_data:
     # Check if file doesn't exist or is stale (older than 24 hours)
     if is_file_stale(file_path, 24):
         print(f"Fetching fresh data for {set_code} (file is stale or doesn't exist)...")
-        query = urlencode({'q': f'set:{set_code} order:set unique:prints'})
+        query = urlencode({'q': f'set:{set_code}', 'order': 'set', 'unique': 'prints', 'include_extras': 'true'})
         jsn = fetch_data(f"https://api.scryfall.com/cards/search?{query}")
         with open(file_path, 'w') as file:
             json.dump(jsn, file)
