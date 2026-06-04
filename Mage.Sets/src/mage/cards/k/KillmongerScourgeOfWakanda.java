@@ -2,15 +2,15 @@ package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -48,12 +48,13 @@ public final class KillmongerScourgeOfWakanda extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Killmonger enters, you may sacrifice another creature. When you do, destroy target nonland permanent an opponent controls.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(
-            new DestroyTargetEffect(),
-            new SacrificeTargetCost(StaticFilters.FILTER_ANOTHER_CREATURE)
-        ));
-        ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability);
+        ReflexiveTriggeredAbility reflexive = new ReflexiveTriggeredAbility(new DestroyTargetEffect(), false);
+        reflexive.addTarget(new TargetPermanent(filter));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DoWhenCostPaid(
+            reflexive,
+            new SacrificeTargetCost(StaticFilters.FILTER_ANOTHER_CREATURE),
+            "Sacrifice another creature?"
+        )));
 
         // As long as there are two or more creature cards in your graveyard, Killmonger gets +2/+1.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
