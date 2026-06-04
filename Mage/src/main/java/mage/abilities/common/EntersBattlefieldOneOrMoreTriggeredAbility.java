@@ -23,7 +23,11 @@ public class EntersBattlefieldOneOrMoreTriggeredAbility extends TriggeredAbility
     private final TargetController targetController;
 
     public EntersBattlefieldOneOrMoreTriggeredAbility(Effect effect, FilterPermanent filter, TargetController targetController) {
-        super(Zone.BATTLEFIELD, effect);
+        this(effect, filter, targetController, false);
+    }
+
+    public EntersBattlefieldOneOrMoreTriggeredAbility(Effect effect, FilterPermanent filter, TargetController targetController, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.targetController = targetController;
         setTriggerPhrase(generateTriggerPhrase());
