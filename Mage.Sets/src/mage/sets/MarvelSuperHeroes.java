@@ -21,6 +21,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Abomination, Terrifying Titan", 198, Rarity.UNCOMMON, mage.cards.a.AbominationTerrifyingTitan.class));
+        cards.add(new SetCardInfo("Agent 13, Sharon Carter", 1, Rarity.UNCOMMON, mage.cards.a.Agent13SharonCarter.class));
         cards.add(new SetCardInfo("Agent Phil Coulson", 4, Rarity.RARE, mage.cards.a.AgentPhilCoulson.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Agent Phil Coulson", 402, Rarity.RARE, mage.cards.a.AgentPhilCoulson.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arc Reactor", 243, Rarity.RARE, mage.cards.a.ArcReactor.class, NON_FULL_USE_VARIOUS));
