@@ -23,6 +23,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Abomination, Terrifying Titan", 198, Rarity.UNCOMMON, mage.cards.a.AbominationTerrifyingTitan.class));
         cards.add(new SetCardInfo("Agent Phil Coulson", 4, Rarity.RARE, mage.cards.a.AgentPhilCoulson.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Agent Phil Coulson", 402, Rarity.RARE, mage.cards.a.AgentPhilCoulson.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ant-Man, Colony Commander", 201, Rarity.UNCOMMON, mage.cards.a.AntManColonyCommander.class));
         cards.add(new SetCardInfo("Arc Reactor", 243, Rarity.RARE, mage.cards.a.ArcReactor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arc Reactor", 310, Rarity.RARE, mage.cards.a.ArcReactor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Armor Wars", 203, Rarity.RARE, mage.cards.a.ArmorWars.class, NON_FULL_USE_VARIOUS));
