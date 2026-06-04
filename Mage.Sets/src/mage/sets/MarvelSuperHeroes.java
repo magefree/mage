@@ -21,6 +21,9 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         this.hasBasicLands = false; // temporary
 
         cards.add(new SetCardInfo("Attuma, Atlantean Warlord", 47, Rarity.UNCOMMON, mage.cards.a.AttumaAtlanteanWarlord.class));
+        cards.add(new SetCardInfo("Avengers Assemble!", 297, Rarity.MYTHIC, mage.cards.a.AvengersAssemble.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Avengers Assemble!", 341, Rarity.MYTHIC, mage.cards.a.AvengersAssemble.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Avengers Assemble!", 6, Rarity.MYTHIC, mage.cards.a.AvengersAssemble.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Baron Helmut Zemo", 87, Rarity.RARE, mage.cards.b.BaronHelmutZemo.class));
         cards.add(new SetCardInfo("Bruce Banner", 390, Rarity.MYTHIC, mage.cards.b.BruceBanner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bruce Banner", 49, Rarity.MYTHIC, mage.cards.b.BruceBanner.class, NON_FULL_USE_VARIOUS));
