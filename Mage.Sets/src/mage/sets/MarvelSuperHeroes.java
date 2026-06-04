@@ -24,6 +24,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Baron Helmut Zemo", 87, Rarity.RARE, mage.cards.b.BaronHelmutZemo.class));
         cards.add(new SetCardInfo("Bruce Banner", 390, Rarity.MYTHIC, mage.cards.b.BruceBanner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bruce Banner", 49, Rarity.MYTHIC, mage.cards.b.BruceBanner.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Captain America's Shield", 244, Rarity.RARE, mage.cards.c.CaptainAmericasShield.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Captain America's Shield", 317, Rarity.RARE, mage.cards.c.CaptainAmericasShield.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain America, Super-Soldier", 387, Rarity.MYTHIC, mage.cards.c.CaptainAmericaSuperSoldier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain America, Super-Soldier", 9, Rarity.MYTHIC, mage.cards.c.CaptainAmericaSuperSoldier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doctor Doom", 394, Rarity.MYTHIC, mage.cards.d.DoctorDoom.class, NON_FULL_USE_VARIOUS));
