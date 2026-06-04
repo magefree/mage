@@ -77,7 +77,7 @@ def create_face_line(set_name, collector_number, rarity, card, power, toughness)
         .replace('•', '*')
         .strip()
     )
-    oracle_text = re.sub(r" \(.*?\)", "", oracle_text)
+    oracle_text = re.sub(r" \([^\)]*\)", "", oracle_text)
     # Replace accented characters in oracle text
     oracle_text = replace_accented_chars(oracle_text)
 
@@ -123,8 +123,9 @@ for set_code in sets_data:
     # Check if file doesn't exist or is stale (older than 24 hours)
     if is_file_stale(file_path, 24):
         print(f"Fetching fresh data for {set_code} (file is stale or doesn't exist)...")
-        query = urlencode({'q': f'set:{set_code}', 'order': 'set', 'unique': 'prints', 'include_extras': 'true'})
+        query = urlencode({'q': f's:{set_code}', 'order': 'set', 'unique': 'prints', 'include_extras': 'true'})
         jsn = fetch_data(f"https://api.scryfall.com/cards/search?{query}")
+        print(f"https://api.scryfall.com/cards/search?{query}")
         with open(file_path, 'w') as file:
             json.dump(jsn, file)
         print(f"Saved fresh data to {file_path}")
@@ -148,8 +149,33 @@ for set_code in sets_data:
         else:
             output += create_card_line(card['set_name'], card['collector_number'], rarity, card)
 
-    # Save the output to a file
-    output_file_path = f"{set_code}-data.txt"
-    with open(output_file_path, 'w', encoding='utf-8') as file:
-        file.write(output)
-    print(f"Saved output to {os.path.abspath(output_file_path)}")
+    # Replace in place: remove existing lines for this set, then append new ones
+    data_file_path = 'mtg-cards-data.txt'
+    set_name = cards_data[0]['set_name'] if cards_data else None
+
+    if set_name:
+        if os.path.exists(data_file_path):
+            with open(data_file_path, 'r', encoding='utf-8') as f:
+                existing_lines = f.readlines()
+            insert_pos = None
+            kept_lines = []
+            for line in existing_lines:
+                parts = line.split('|')
+                if len(parts) >= 2 and parts[1] == set_name:
+                    if insert_pos is None:
+                        insert_pos = len(kept_lines)
+                    # drop the old line; new lines will be inserted at insert_pos
+                else:
+                    kept_lines.append(line)
+            if insert_pos is None:
+                insert_pos = len(kept_lines)  # new set — append to end
+        else:
+            kept_lines = []
+            insert_pos = 0
+
+        new_lines = output.splitlines(keepends=True)
+        kept_lines[insert_pos:insert_pos] = new_lines
+
+        with open(data_file_path, 'w', encoding='utf-8') as f:
+            f.writelines(kept_lines)
+        print(f"Updated {data_file_path} with {len(output.splitlines())} lines for '{set_name}'")
