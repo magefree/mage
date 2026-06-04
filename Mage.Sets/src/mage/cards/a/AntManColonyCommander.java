@@ -5,9 +5,10 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.PutCounterOnPermanentTriggeredAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,12 +37,15 @@ public final class AntManColonyCommander extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Ant-Man attacks, you may pay {1}. When you do, put a +1/+1 counter on target creature.
-        Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(
-            new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-            new ManaCostsImpl<>("{1}")
-        ));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        ReflexiveTriggeredAbility reflexive = new ReflexiveTriggeredAbility(
+            new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false
+        );
+        reflexive.addTarget(new TargetCreaturePermanent());
+        this.addAbility(new AttacksTriggeredAbility(new DoWhenCostPaid(
+            reflexive,
+            new ManaCostsImpl<>("{1}"),
+            "Pay {1}?"
+        )));
 
         // Whenever you put a +1/+1 counter on a creature, create a 1/1 green Insect creature token. This ability triggers only once each turn.
         Ability ability2 = new PutCounterOnPermanentTriggeredAbility(
