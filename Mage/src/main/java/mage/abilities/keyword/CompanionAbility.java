@@ -55,8 +55,9 @@ public class CompanionAbility extends SpecialAction {
     public ActivationStatus canActivate(UUID playerId, Game game) {
         // Check that the card is actually a companion.
         Card card = game.getState().getCompanion().getCard(getSourceId(), game);
-        return card != null
-                ? super.canActivate(playerId, game)
-                : ActivationStatus.getFalse();
+        if (card != null && game.getState().getZone(card.getId()) == Zone.OUTSIDE) {
+            return super.canActivate(playerId, game);
+        }
+        return ActivationStatus.getFalse();
     }
 }
