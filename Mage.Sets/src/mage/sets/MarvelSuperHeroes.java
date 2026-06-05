@@ -56,6 +56,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Elektra, Daughter of the Hand", 366, Rarity.RARE, mage.cards.e.ElektraDaughterOfTheHand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elektra, Daughter of the Hand", 395, Rarity.RARE, mage.cards.e.ElektraDaughterOfTheHand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elektra, Daughter of the Hand", 97, Rarity.RARE, mage.cards.e.ElektraDaughterOfTheHand.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Falcon, Winged Wonder", 52, Rarity.UNCOMMON, mage.cards.f.FalconWingedWonder.class));
         cards.add(new SetCardInfo("Forest", 285, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 286, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 295, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
