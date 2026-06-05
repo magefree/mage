@@ -70,6 +70,10 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 290, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kang, Temporal Tyrant", 217, Rarity.UNCOMMON, mage.cards.k.KangTemporalTyrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kang, Temporal Tyrant", 450, Rarity.UNCOMMON, mage.cards.k.KangTemporalTyrant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("King T'Challa", 219, Rarity.MYTHIC, mage.cards.k.KingTChalla.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("King T'Challa", 346, Rarity.MYTHIC, mage.cards.k.KingTChalla.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("King T'Challa", 373, Rarity.MYTHIC, mage.cards.k.KingTChalla.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("King T'Challa", 399, Rarity.MYTHIC, mage.cards.k.KingTChalla.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Madame Hydra", 221, Rarity.UNCOMMON, mage.cards.m.MadameHydra.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Madame Hydra", 318, Rarity.UNCOMMON, mage.cards.m.MadameHydra.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Madame Hydra", 451, Rarity.UNCOMMON, mage.cards.m.MadameHydra.class, NON_FULL_USE_VARIOUS));
