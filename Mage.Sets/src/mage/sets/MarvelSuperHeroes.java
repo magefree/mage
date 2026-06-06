@@ -45,6 +45,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Atlantean Cavalry", 45, Rarity.COMMON, mage.cards.a.AtlanteanCavalry.class));
         cards.add(new SetCardInfo("Atlantis Attacks", 46, Rarity.COMMON, mage.cards.a.AtlantisAttacks.class));
         cards.add(new SetCardInfo("Attuma, Atlantean Warlord", 47, Rarity.UNCOMMON, mage.cards.a.AttumaAtlanteanWarlord.class));
+        cards.add(new SetCardInfo("Avengers: Under Siege", 205, Rarity.RARE, mage.cards.a.AvengersUnderSiege.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Avengers: Under Siege", 306, Rarity.RARE, mage.cards.a.AvengersUnderSiege.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avengers Assemble!", 297, Rarity.MYTHIC, mage.cards.a.AvengersAssemble.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avengers Assemble!", 341, Rarity.MYTHIC, mage.cards.a.AvengersAssemble.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avengers Assemble!", 6, Rarity.MYTHIC, mage.cards.a.AvengersAssemble.class, NON_FULL_USE_VARIOUS));
@@ -235,7 +237,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Shang-Chi, Master of Kung Fu", 396, Rarity.MYTHIC, mage.cards.s.ShangChiMasterOfKungFu.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("She-Hulk, Jade Defender", 188, Rarity.UNCOMMON, mage.cards.s.SheHulkJadeDefender.class));
         cards.add(new SetCardInfo("Shuri, Wakandan Inventor", 75, Rarity.UNCOMMON, mage.cards.s.ShuriWakandanInventor.class));
-        cards.add(new SetCardInfo("Spider-Woman, Secret Agent", 229, Rarity.UNCOMMON, mage.cards.s.SpiderWomanSecretAgent.class));  
+        cards.add(new SetCardInfo("Spider-Woman, Secret Agent", 229, Rarity.UNCOMMON, mage.cards.s.SpiderWomanSecretAgent.class));
         cards.add(new SetCardInfo("Stark Industries", 272, Rarity.COMMON, mage.cards.s.StarkIndustries.class));
         cards.add(new SetCardInfo("Stark Industries Executive", 153, Rarity.COMMON, mage.cards.s.StarkIndustriesExecutive.class));
         cards.add(new SetCardInfo("Subterranean Cavern", 273, Rarity.COMMON, mage.cards.s.SubterraneanCavern.class));
