@@ -1,8 +1,7 @@
 package org.mage.plugins.card.dl.sources;
 
-import org.tritonus.share.ArraySet;
-
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -18,7 +17,7 @@ public class ScryfallImageSupportCards {
     static final Pattern REGEXP_DIRECT_KEY_SET_CODE_PATTERN = Pattern.compile("(\\w+)\\/", Pattern.MULTILINE);
     static final Pattern REGEXP_DIRECT_KEY_CARD_NAME_PATTERN = Pattern.compile("\\/(.+?)\\/", Pattern.MULTILINE);
 
-    private static final Set<String> supportedSets = new ArraySet<String>() {
+    private static final Set<String> supportedSets = new LinkedHashSet<String>() {
         {
             // Sorted by release date, as listed on Scryfall
             // Commented sets are not available on XMage, most likely because they are non-English sets.
