@@ -110,6 +110,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("The Unbeatable Squirrel Girl", 193, Rarity.RARE, mage.cards.t.TheUnbeatableSquirrelGirl.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Unbeatable Squirrel Girl", 371, Rarity.RARE, mage.cards.t.TheUnbeatableSquirrelGirl.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Vision", 255, Rarity.RARE, mage.cards.t.TheVision.class));
+        cards.add(new SetCardInfo("The Wondrous Wasp", 84, Rarity.RARE, mage.cards.t.TheWondrousWasp.class));
         cards.add(new SetCardInfo("Thor Odinson", 234, Rarity.UNCOMMON, mage.cards.t.ThorOdinson.class));
         cards.add(new SetCardInfo("Thunderbolts Conspiracy", 117, Rarity.RARE, mage.cards.t.ThunderboltsConspiracy.class));
         cards.add(new SetCardInfo("Tigra, Feline Fury", 191, Rarity.UNCOMMON, mage.cards.t.TigraFelineFury.class));
