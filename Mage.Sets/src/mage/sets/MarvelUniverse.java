@@ -71,11 +71,13 @@ public class MarvelUniverse extends ExpansionSet {
         cards.add(new SetCardInfo("Monstrous Rage", 72, Rarity.MYTHIC, mage.cards.m.MonstrousRage.class));
         cards.add(new SetCardInfo("Mystic Confluence", 12, Rarity.MYTHIC, mage.cards.m.MysticConfluence.class));
         cards.add(new SetCardInfo("Najeela, the Blade-Blossom", 24, Rarity.MYTHIC, mage.cards.n.NajeelaTheBladeBlossom.class));
+        cards.add(new SetCardInfo("Narset's Reversal", 58, Rarity.MYTHIC, mage.cards.n.NarsetsReversal.class));
         cards.add(new SetCardInfo("Nine Lives", 3, Rarity.MYTHIC, mage.cards.n.NineLives.class));
         cards.add(new SetCardInfo("No Mercy", 68, Rarity.MYTHIC, mage.cards.n.NoMercy.class));
         cards.add(new SetCardInfo("Opposition Agent", 19, Rarity.MYTHIC, mage.cards.o.OppositionAgent.class));
         cards.add(new SetCardInfo("Parallel Lives", 36, Rarity.MYTHIC, mage.cards.p.ParallelLives.class));
-        cards.add(new SetCardInfo("Path to Exile", 4, Rarity.MYTHIC, mage.cards.p.PathToExile.class));
+        cards.add(new SetCardInfo("Path to Exile", 4, Rarity.MYTHIC, mage.cards.p.PathToExile.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Path to Exile", 47, Rarity.MYTHIC, mage.cards.p.PathToExile.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ponder", 13, Rarity.MYTHIC, mage.cards.p.Ponder.class));
         cards.add(new SetCardInfo("Primal Vigor", 81, Rarity.MYTHIC, mage.cards.p.PrimalVigor.class));
         cards.add(new SetCardInfo("Privileged Position", 92, Rarity.MYTHIC, mage.cards.p.PrivilegedPosition.class));
@@ -86,6 +88,7 @@ public class MarvelUniverse extends ExpansionSet {
         cards.add(new SetCardInfo("Reprieve", 5, Rarity.MYTHIC, mage.cards.r.Reprieve.class));
         cards.add(new SetCardInfo("Rest in Peace", 6, Rarity.MYTHIC, mage.cards.r.RestInPeace.class));
         cards.add(new SetCardInfo("Return to the Ranks", 48, Rarity.MYTHIC, mage.cards.r.ReturnToTheRanks.class));
+        cards.add(new SetCardInfo("Righteous Fury", 49, Rarity.MYTHIC, mage.cards.r.RighteousFury.class));
         cards.add(new SetCardInfo("Rite of Replication", 14, Rarity.MYTHIC, mage.cards.r.RiteOfReplication.class));
         cards.add(new SetCardInfo("Savage Beating", 26, Rarity.MYTHIC, mage.cards.s.SavageBeating.class));
         cards.add(new SetCardInfo("Saw in Half", 21, Rarity.MYTHIC, mage.cards.s.SawInHalf.class));
