@@ -42,14 +42,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected UUID ownerId;
     protected Rarity rarity;
     protected Class<? extends Card> meldsWithClazz;
-    protected Class<? extends MeldCard> meldsToClazz;
-    protected MeldCard meldsToCard;
+    protected Card meldsToCard;
     protected Card secondSideCard;
-    protected boolean nightCard;
     protected SpellAbility spellAbility;
     protected boolean flipCard;
     protected String flipCardName;
-    protected boolean morphCard;
     protected List<UUID> attachments = new ArrayList<>();
     protected boolean extraDeckCard = false;
 
@@ -64,6 +61,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         this.setExpansionSetCode(setInfo.getExpansionSetCode());
         this.setUsesVariousArt(setInfo.getUsesVariousArt());
         this.setCardNumber(setInfo.getCardNumber());
+        this.setMeldsToNumber(setInfo.getMeldNumber());
         this.setImageFileName(""); // use default
         this.setImageNumber(0);
         this.cardType.addAll(Arrays.asList(cardTypes));
@@ -93,7 +91,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             }
         }
 
-        this.morphCard = false;
     }
 
     private void setDefaultColor() {
@@ -121,13 +118,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         ownerId = card.ownerId;
         rarity = card.rarity;
 
-        nightCard = card.nightCard;
         if (card.secondSideCard != null) {
             secondSideCard = card.secondSideCard.copy();
         }
 
         meldsWithClazz = card.meldsWithClazz;
-        meldsToClazz = card.meldsToClazz;
         meldsToCard = null; // will be set on first getMeldsToCard call if card has one
         if (card.meldsToCard instanceof MockableCard) {
             // workaround to support gui's mock cards
@@ -137,7 +132,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         spellAbility = null; // will be set on first getSpellAbility call if card has one
         flipCard = card.flipCard;
         flipCardName = card.flipCardName;
-        morphCard = card.morphCard;
         extraDeckCard = card.extraDeckCard;
 
         this.attachments.addAll(card.attachments);
@@ -662,11 +656,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         // must be non strict search in any sets, not one set
         // example: if set contains only one card side
         // method used in cards database creating, so can't use repository here
-        ExpansionSet.SetCardInfo info = Sets.findCardByClass(cardClazz, this.getExpansionSetCode(), this.getCardNumber());
+        ExpansionSet.SetCardInfo info = Sets.findCardByClass(cardClazz, this.getExpansionSetCode(), getMeldsToNumber());
         if (info == null) {
             return null;
         }
-        return createCard(cardClazz, new CardSetInfo(info.getName(), this.getExpansionSetCode(), info.getCardNumber(), info.getRarity(), info.getGraphicInfo()));
+        return createCard(cardClazz, new CardSetInfo(info.getName(), this.getExpansionSetCode(), info.getCardNumber(), info.getMeldNumber(), info.getRarity(), info.getGraphicInfo()));
     }
 
     @Override
@@ -684,27 +678,32 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public Class<? extends Card> getMeldsToClazz() {
-        return this.meldsToClazz;
+    public Card getMeldedWith(Game game) {
+        return game.getState().getCardState(this.objectId).getMeldedWith();
     }
 
     @Override
-    public MeldCard getMeldsToCard() {
+    public void setMeldedWith(Card meldedWith, Game game) {
+        game.getState().getCardState(this.objectId).setMeldedWith(meldedWith);
+    }
+
+    @Override
+    public Card getMeldsToCard() {
         // init card on first call
-        if (meldsToClazz == null && meldsToCard == null) {
+        // only for regular cards that a part of meld to show back side in GUI
+        if (this instanceof MeldCard || this instanceof MeldCardHalf || (meldsWithClazz == null && meldsToCard == null)) {
             return null;
         }
 
         if (meldsToCard == null) {
-            meldsToCard = (MeldCard) initSecondSideCard(meldsToClazz);
+            MeldCard meldCard = (MeldCard) initSecondSideCard(meldsWithClazz);
+            if (meldCard == null) {
+                return null;
+            }
+            meldsToCard = meldCard.getRightHalfCard();
         }
 
         return meldsToCard;
-    }
-
-    @Override
-    public boolean isNightCard() {
-        return this.nightCard;
     }
 
     @Override

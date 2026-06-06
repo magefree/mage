@@ -439,7 +439,7 @@ public final class ZendikarRising extends ExpansionSet {
         cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria()
                 .setCodes(this.code)
                 .rarities(rarity)
-                .modalDoubleFaced(true)
+                .doubleFacedCard(true)
                 .maxCardNumber(maxCardNumberInBooster)));
         return cardInfos;
     }

@@ -30,7 +30,6 @@ public final class FangFearlessLCie extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         this.meldsWithClazz = mage.cards.v.VanilleCheerfulLCie.class;
-        this.meldsToClazz = mage.cards.r.RagnarokDivineDeliverance.class;
 
         // Whenever one or more cards leave your graveyard, you draw a card and you lose 1 life. This ability triggers only once each turn.
         Ability ability = new CardsLeaveGraveyardTriggeredAbility(

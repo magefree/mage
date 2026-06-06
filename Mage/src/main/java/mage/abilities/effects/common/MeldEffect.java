@@ -5,10 +5,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.cards.MeldCard;
-import mage.cards.repository.CardCriteria;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -20,8 +16,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-
-import java.util.List;
 
 /**
  * @author emerald000
@@ -82,7 +76,7 @@ public class MeldEffect extends OneShotEffect {
         controller.choose(outcome, target, source, game);
 
         Permanent meldWithPermanent = game.getPermanent(target.getFirstTarget());
-        if (sourcePermanent == null || meldWithPermanent == null) {
+        if (meldWithPermanent == null) {
             return false;
         }
 
@@ -95,8 +89,9 @@ public class MeldEffect extends OneShotEffect {
         Cards cards = new CardsImpl(sourcePermanent);
         cards.add(meldWithPermanent);
         controller.moveCards(cards, Zone.EXILED, source, game);
-        // Create the meld card and move it to the battlefield.
-        Card sourceCard = cards.get(sourcePermanent.getId(), game);
+        cards.retainZone(Zone.EXILED, game);
+        // Make sure the cards can actually meld
+        Card sourceCard = cards.get(sourcePermanent.getId(), game).getMainCard();
         Card meldWithCard = cards.get(meldWithPermanent.getId(), game);
         if (sourceCard == null
                 || meldWithCard == null
@@ -104,23 +99,12 @@ public class MeldEffect extends OneShotEffect {
                 || !meldWithCard.meldsWith(sourceCard)) {
             return true;
         }
-        List<CardInfo> cardInfoList = CardRepository.instance.findCards(
-                new CardCriteria()
-                        .name(meldIntoName)
-                        .setCodes(sourceCard.getExpansionSetCode())
-                        .nightCard(true)
-        );
-        if (cardInfoList.isEmpty()) {
-            return false;
+        Card meldCard = sourceCard.getSecondCardFace();
+        if (meldCard == null) {
+            // should not happen
+            throw new IllegalStateException("Wrong code usage: meld card not found for " + sourceCard.getName());
         }
-        MeldCard meldCard = (MeldCard) cardInfoList.get(0).createCard().copy();
-        meldCard.setOwnerId(controller.getId());
-        meldCard.setTopHalfCard(meldWithCard, game);
-        meldCard.setBottomHalfCard(sourceCard, game);
-        meldCard.setMelded(true, game);
-        game.addMeldCard(meldCard.getId(), meldCard);
-        game.getState().addCard(meldCard);
-        meldCard.setZone(Zone.EXILED, game);
+        meldCard.setMeldedWith(meldWithCard, game);
         controller.moveCards(meldCard, Zone.BATTLEFIELD, source, game, attacking, false, false, null);
         if (attacking) {
             game.getCombat().addAttackingCreature(meldCard.getId(), game);

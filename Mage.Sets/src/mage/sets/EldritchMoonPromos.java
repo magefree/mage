@@ -24,8 +24,7 @@ public class EldritchMoonPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Assembled Alphas", "117s", Rarity.RARE, mage.cards.a.AssembledAlphas.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bedlam Reveler", "118s", Rarity.RARE, mage.cards.b.BedlamReveler.class));
         cards.add(new SetCardInfo("Bloodhall Priest", "181s", Rarity.RARE, mage.cards.b.BloodhallPriest.class));
-        cards.add(new SetCardInfo("Brisela, Voice of Nightmares", "15bs", Rarity.MYTHIC, mage.cards.b.BriselaVoiceOfNightmares.class));
-        cards.add(new SetCardInfo("Bruna, the Fading Light", "15s", Rarity.RARE, mage.cards.b.BrunaTheFadingLight.class));
+        cards.add(new SetCardInfo("Bruna, the Fading Light", "15s", "15bs", Rarity.RARE, mage.cards.b.BrunaTheFadingLight.class));
         cards.add(new SetCardInfo("Coax from the Blind Eternities", "51s", Rarity.RARE, mage.cards.c.CoaxFromTheBlindEternities.class));
         cards.add(new SetCardInfo("Collective Brutality", "85s", Rarity.RARE, mage.cards.c.CollectiveBrutality.class));
         cards.add(new SetCardInfo("Collective Defiance", "123s", Rarity.RARE, mage.cards.c.CollectiveDefiance.class));
@@ -43,11 +42,10 @@ public class EldritchMoonPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Eternal Scourge", "7s", Rarity.RARE, mage.cards.e.EternalScourge.class));
         cards.add(new SetCardInfo("Geier Reach Sanitarium", "203s", Rarity.RARE, mage.cards.g.GeierReachSanitarium.class));
         cards.add(new SetCardInfo("Gisa and Geralf", "183s", Rarity.MYTHIC, mage.cards.g.GisaAndGeralf.class));
-        cards.add(new SetCardInfo("Gisela, the Broken Blade", "28s", Rarity.MYTHIC, mage.cards.g.GiselaTheBrokenBlade.class));
+        cards.add(new SetCardInfo("Gisela, the Broken Blade", "28s", "15bs", Rarity.MYTHIC, mage.cards.g.GiselaTheBrokenBlade.class));
         cards.add(new SetCardInfo("Grim Flayer", "184s", Rarity.MYTHIC, mage.cards.g.GrimFlayer.class));
-        cards.add(new SetCardInfo("Hanweir Battlements", "204s", Rarity.RARE, mage.cards.h.HanweirBattlements.class));
-        cards.add(new SetCardInfo("Hanweir Garrison", "130s", Rarity.RARE, mage.cards.h.HanweirGarrison.class));
-        cards.add(new SetCardInfo("Hanweir, the Writhing Township", "130bs", Rarity.RARE, mage.cards.h.HanweirTheWrithingTownship.class));
+        cards.add(new SetCardInfo("Hanweir Battlements", "204s", "130bs", Rarity.RARE, mage.cards.h.HanweirBattlements.class));
+        cards.add(new SetCardInfo("Hanweir Garrison", "130s", "130bs", Rarity.RARE, mage.cards.h.HanweirGarrison.class));
         cards.add(new SetCardInfo("Harmless Offering", "131s", Rarity.RARE, mage.cards.h.HarmlessOffering.class));
         cards.add(new SetCardInfo("Heron's Grace Champion", 185, Rarity.RARE, mage.cards.h.HeronsGraceChampion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Heron's Grace Champion", "185s", Rarity.RARE, mage.cards.h.HeronsGraceChampion.class, NON_FULL_USE_VARIOUS));

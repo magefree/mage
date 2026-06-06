@@ -73,18 +73,19 @@ public interface Card extends MageObject, Ownerable {
 
     SpellAbility getSecondFaceSpellAbility();
 
-    //TODO: remove after meld converted to DFC
-    boolean isNightCard();
-
     default boolean meldsWith(Card card) {
         return false;
     }
 
-    default Class<? extends Card> getMeldsToClazz() {
+    default Card getMeldedWith(Game game) {
         return null;
     }
 
-    default MeldCard getMeldsToCard() {
+    default void setMeldedWith(Card card, Game game) {
+        throw new UnsupportedOperationException("Wrong code usage: can't set meld for " + this.getClass().getName());
+    }
+
+    default Card getMeldsToCard() {
         return null;
     }
 

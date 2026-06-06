@@ -2,13 +2,12 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.cards.MeldCard;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -65,20 +64,12 @@ public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffe
             if (returnFromExileZoneOnly) {
                 for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
                     UUID mainCardId = CardUtil.getMainCardId(game, targetId);
+                    Permanent lkiPermanent = game.getPermanentOrLKIBattlefield(targetId);
                     if (game.getExile().containsId(mainCardId, game)) {
                         cardsToBattlefield.add(mainCardId);
-                    } else {
-                        Card card = game.getCard(targetId);
-                        if (card instanceof MeldCard) {
-                            MeldCard meldCard = (MeldCard) card;
-                            Card topCard = meldCard.getTopHalfCard();
-                            Card bottomCard = meldCard.getBottomHalfCard();
-                            if (topCard.getZoneChangeCounter(game) == meldCard.getTopLastZoneChangeCounter() && game.getExile().containsId(topCard.getId(), game)) {
-                                cardsToBattlefield.add(topCard);
-                            }
-                            if (bottomCard.getZoneChangeCounter(game) == meldCard.getBottomLastZoneChangeCounter() && game.getExile().containsId(bottomCard.getId(), game)) {
-                                cardsToBattlefield.add(bottomCard);
-                            }
+                        if (lkiPermanent != null && lkiPermanent.getMainCard().getMeldedWith(game) != null) {
+                            // check for meld
+                            cardsToBattlefield.add(lkiPermanent.getMainCard().getMeldedWith(game));
                         }
                     }
                 }

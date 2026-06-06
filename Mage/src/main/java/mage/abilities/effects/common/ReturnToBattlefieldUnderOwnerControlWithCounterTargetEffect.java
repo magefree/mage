@@ -2,6 +2,7 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.cards.Card;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
@@ -42,7 +43,11 @@ public class ReturnToBattlefieldUnderOwnerControlWithCounterTargetEffect extends
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID cardId : getCardsToReturn(game, source)) {
-            game.setEnterWithCounters(cardId, counters.copy());
+            Card card = game.getCard(cardId);
+            if (card == null) {
+                continue;
+            }
+            game.setEnterWithCounters(CardUtil.getDefaultCardSideForBattlefield(game, card).getId(), counters.copy());
         }
         return super.apply(game, source);
     }

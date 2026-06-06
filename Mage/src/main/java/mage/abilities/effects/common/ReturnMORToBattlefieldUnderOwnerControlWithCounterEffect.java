@@ -4,12 +4,12 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
-import mage.cards.MeldCard;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 // TODO: refactor into ReturnToBattlefieldUnderOwnerControlWithCounterTargetEffect
@@ -59,10 +59,10 @@ public class ReturnMORToBattlefieldUnderOwnerControlWithCounterEffect extends On
         if (card != null && objectToReturn.refersTo(card, game)) {
             Player owner = game.getPlayer(card.getOwnerId());
             if (owner != null) {
-                if (card instanceof MeldCard) {
-                    MeldCard meldCard = (MeldCard) card;
-                    game.setEnterWithCounters(meldCard.getTopHalfCard().getId(), counters);
-                    game.setEnterWithCounters(meldCard.getBottomHalfCard().getId(), counters);
+                Permanent lkiPermanent = objectToReturn.getPermanentOrLKIBattlefield(game);
+                if (lkiPermanent != null && lkiPermanent.getMainCard().getMeldedWith(game) != null) {
+                    game.setEnterWithCounters(lkiPermanent.getId(), counters);
+                    game.setEnterWithCounters(lkiPermanent.getMeldedWith(game).getId(), counters);
                 } else {
                     game.setEnterWithCounters(objectToReturn.getSourceId(), counters);
                 }

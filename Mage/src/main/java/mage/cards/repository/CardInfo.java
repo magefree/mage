@@ -45,6 +45,10 @@ public class CardInfo {
      */
     @DatabaseField(indexName = "cardNumberAsInt_index")
     protected int cardNumberAsInt;
+    @DatabaseField(indexName = "setCode_meldNumber_index")
+    protected String meldCardNumber;
+    @DatabaseField(indexName = "meldCardNumberAsInt_index")
+    protected int meldCardNumberAsInt;
     @DatabaseField(indexName = "className_index")
     protected String className;
     @DatabaseField
@@ -96,12 +100,6 @@ public class CardInfo {
     @DatabaseField
     protected boolean flipCard;
     @DatabaseField
-    protected boolean doubleFaced;
-    @DatabaseField(indexName = "nightCard_index")
-    protected boolean nightCard;
-    @DatabaseField
-    protected boolean meldCard;
-    @DatabaseField
     protected String flipCardName;
     @DatabaseField
     protected String secondSideName;
@@ -127,6 +125,10 @@ public class CardInfo {
         this.name = card.getName();
         this.cardNumber = card.getCardNumber();
         this.cardNumberAsInt = CardUtil.parseCardNumberAsInt(card.getCardNumber());
+        this.meldCardNumber = card.getMeldsToNumber();
+        if (!this.meldCardNumber.isEmpty()) {
+            this.meldCardNumberAsInt = CardUtil.parseCardNumberAsInt(card.getMeldsToNumber());
+        }
         this.setCode = card.getExpansionSetCode();
         this.className = card.getClass().getCanonicalName();
         this.power = card.getPower().toString();
@@ -145,9 +147,6 @@ public class CardInfo {
             this.meldsToCardName = meldToCard.getName();
         }
 
-        this.doubleFaced = card.isTransformable() && card.getSecondCardFace() != null;
-        this.nightCard = card.isNightCard();
-        this.meldCard = card instanceof MeldCard;
         Card secondSide = card.getSecondCardFace();
         if (secondSide != null) {
             this.secondSideName = secondSide.getName();
@@ -239,7 +238,7 @@ public class CardInfo {
      * Create normal card (with full abilities)
      */
     public Card createCard() {
-        return CardImpl.createCard(className, new CardSetInfo(name, setCode, cardNumber, rarity, new CardGraphicInfo(FrameStyle.valueOf(frameStyle), variousArt)));
+        return CardImpl.createCard(className, new CardSetInfo(name, setCode, cardNumber, meldCardNumber, rarity, new CardGraphicInfo(FrameStyle.valueOf(frameStyle), variousArt)));
     }
 
     /**
@@ -447,16 +446,8 @@ public class CardInfo {
         return meldsToCardName;
     }
 
-    public boolean isDoubleFaced() {
-        return doubleFaced;
-    }
-
-    public boolean isNightCard() {
-        return nightCard;
-    }
-
-    public boolean isMeldCard() {
-        return meldCard;
+    public String getMeldCardNumber() {
+        return meldCardNumber;
     }
 
     public String getSecondSideName() {

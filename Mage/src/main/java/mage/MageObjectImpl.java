@@ -36,6 +36,7 @@ public abstract class MageObjectImpl implements MageObject {
 
     private String expansionSetCode = "";
     private String cardNumber = "";
+    private String meldsToNumber = "";
     private boolean usesVariousArt = false;
     private String imageFileName = "";
     private int imageNumber = 0;
@@ -80,6 +81,7 @@ public abstract class MageObjectImpl implements MageObject {
         expansionSetCode = object.expansionSetCode;
         usesVariousArt = object.usesVariousArt;
         cardNumber = object.cardNumber;
+        meldsToNumber = object.meldsToNumber;
         imageFileName = object.imageFileName;
         imageNumber = object.imageNumber;
         power = object.power.copy();
@@ -283,6 +285,16 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
+    }
+
+    @Override
+    public void setMeldsToNumber(String meldsToNumber) {
+        this.meldsToNumber = meldsToNumber;
+    }
+
+    @Override
+    public String getMeldsToNumber() {
+        return meldsToNumber;
     }
 
     @Override

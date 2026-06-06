@@ -30,9 +30,7 @@ public class CardCriteria {
     private final List<SubType> subtypes;
     private final List<Rarity> rarities;
     private Boolean variousArt;
-    private Boolean doubleFaced;
-    private Boolean modalDoubleFaced;
-    private Boolean nightCard;
+    private Boolean doubleFacedCard;
     private boolean black;
     private boolean blue;
     private boolean green;
@@ -56,7 +54,6 @@ public class CardCriteria {
         this.supertypes = new ArrayList<>();
         this.notSupertypes = new ArrayList<>();
         this.subtypes = new ArrayList<>();
-        this.nightCard = false;
 
         this.black = true;
         this.blue = true;
@@ -104,18 +101,8 @@ public class CardCriteria {
         return this;
     }
 
-    public CardCriteria doubleFaced(boolean doubleFaced) {
-        this.doubleFaced = doubleFaced;
-        return this;
-    }
-
-    public CardCriteria modalDoubleFaced(boolean modalDoubleFaced) {
-        this.modalDoubleFaced = modalDoubleFaced;
-        return this;
-    }
-
-    public CardCriteria nightCard(Boolean nightCard) {
-        this.nightCard = nightCard;
+    public CardCriteria doubleFacedCard(boolean doubleFacedCard) {
+        this.doubleFacedCard = doubleFacedCard;
         return this;
     }
 
@@ -219,10 +206,6 @@ public class CardCriteria {
         Where where = qb.where();
 
         int clausesCount = 0;
-        if (nightCard != null) {
-            where.eq("nightCard", nightCard);
-            clausesCount++;
-        }
         where.eq("splitCardHalf", false);
         clausesCount++;
         if (nameContains != null) {
@@ -243,13 +226,8 @@ public class CardCriteria {
             clausesCount++;
         }
 
-        if (doubleFaced != null) {
-            where.eq("doubleFaced", doubleFaced);
-            clausesCount++;
-        }
-
-        if (modalDoubleFaced != null) {
-            where.eq("modalDoubleFacedCard", modalDoubleFaced);
+        if (doubleFacedCard != null) {
+            where.eq("doubleFacedCard", doubleFacedCard);
             clausesCount++;
         }
 
@@ -450,12 +428,8 @@ public class CardCriteria {
         return variousArt;
     }
 
-    public Boolean getDoubleFaced() {
-        return doubleFaced;
-    }
-
-    public Boolean getModalDoubleFaced() {
-        return modalDoubleFaced;
+    public Boolean getDoubleFacedCard() {
+        return doubleFacedCard;
     }
 
     public boolean isBlack() {

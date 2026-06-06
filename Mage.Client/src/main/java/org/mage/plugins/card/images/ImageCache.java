@@ -171,14 +171,14 @@ public final class ImageCache {
      * Find image for current side
      */
     public static ImageCacheData getCardImageOriginal(CardView card) {
-        return getCardImage(getKey(card, card.getName(), 0));
+        return getCardImage(getKey(card, card.getName(), 0, false));
     }
 
     /**
      * Find image for other side
      */
     public static ImageCacheData getCardImageAlternate(CardView card) {
-        return getCardImage(getKey(card, card.getAlternateName(), 0));
+        return getCardImage(getKey(card, card.getAlternateName(), 0, true));
     }
 
     public static ImageCacheData getCardIconImage(String resourceName, int iconSize, String cardColorName) {
@@ -229,18 +229,20 @@ public final class ImageCache {
      * Generate key for images cache (it must contain all info to search and load image from the disk)
      *
      * @param card
-     * @param cardName  - can be alternative name
-     * @param imageSize - size info, 0 to use original image (with max size)
+     * @param cardName        - can be alternative name
+     * @param imageSize       - size info, 0 to use original image (with max size)
+     * @param alternateNumber
      */
-    private static String getKey(CardView card, String cardName, int imageSize) {
+    private static String getKey(CardView card, String cardName, int imageSize, boolean alternateNumber) {
         String imageFileName = card.getImageFileName();
         if (imageFileName.isEmpty()) {
             imageFileName = cardName;
         }
+        String cardNumber = alternateNumber && !card.getAlternateNumber().isEmpty() ? card.getAlternateNumber() : card.getCardNumber();
         return imageFileName.replace(" Token", "")
                 + '#' + card.getExpansionSetCode()
                 + '#' + card.getImageNumber()
-                + '#' + card.getCardNumber()
+                + '#' + cardNumber
                 + '#' + imageSize
                 + (card.getUsesVariousArt() ? "#usesVariousArt" : "");
     }
@@ -315,7 +317,7 @@ public final class ImageCache {
      * @return
      */
     public static ImageCacheData getCardImage(CardView card, int width, int height) {
-        String key = getKey(card, card.getName(), width);
+        String key = getKey(card, card.getName(), width, false);
         ImageCacheData data = getCardImage(key);
         if (data.getImage() == null) {
             LOGGER.debug("Image doesn't exists in the cache: " + key);
@@ -343,7 +345,7 @@ public final class ImageCache {
      * @return
      */
     public static ImageCacheData tryGetImage(CardView card, int width, int height) {
-        String key = getKey(card, card.getName(), width);
+        String key = getKey(card, card.getName(), width, false);
         ImageCacheData data = tryGetImage(key);
         if (data.getImage() == null) {
             LOGGER.debug(key + " not found");

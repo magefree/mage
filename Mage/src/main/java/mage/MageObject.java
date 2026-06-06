@@ -30,6 +30,14 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
 
     void setCardNumber(String cardNumber);
 
+    default String getMeldsToNumber() {
+        throw new UnsupportedOperationException("Not supported");
+    }
+
+    default void setMeldsToNumber(String meldsToNumber) {
+        throw new UnsupportedOperationException("Not supported");
+    }
+
     Integer getImageNumber();
 
     void setImageNumber(Integer imageNumber);
