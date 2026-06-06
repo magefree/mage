@@ -1857,7 +1857,11 @@ public class VerifyCardDataTest {
     }
 
     private void check(Card card, int cardIndex) {
-        MtgJsonCard ref = MtgJsonService.cardFromSet(card.getExpansionSetCode(), card.getName(), card.getCardNumber());
+        String cardNumber = card.getCardNumber();
+        if (card instanceof MeldCardHalf && ((MeldCardHalf) card).isBackSide()) {
+            cardNumber = card.getMeldsToNumber();
+        }
+        MtgJsonCard ref = MtgJsonService.cardFromSet(card.getExpansionSetCode(), card.getName(), cardNumber);
         if (ref != null) {
             if ((card instanceof CardWithSpellOption || card instanceof SpellOptionCard) && ref.layout.equals("reversible_card")) {
                 // TODO: Remove when MtgJson updated

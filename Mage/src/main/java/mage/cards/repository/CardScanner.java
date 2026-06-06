@@ -95,7 +95,7 @@ public final class CardScanner {
             }
             for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
                 cards.add(CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
-                        setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo())));
+                        setInfo.getCardNumber(), setInfo.getMeldNumber(), setInfo.getRarity(), setInfo.getGraphicInfo())));
             }
         }
         return cards;

@@ -20,7 +20,7 @@ public enum SpellAbilityType {
     SPLICE("Spliced SpellAbility"),
     ADVENTURE_SPELL("Adventure SpellAbility"),
     OMEN_SPELL("Omen SpellAbility"),
-    MELD("Meld SpellAbility"),
+    MELD("Meld SpellAbility", false),
     MELD_LEFT("MeldLeft SpellAbility"),
     MELD_RIGHT("MeldRight SpellAbility");
 
