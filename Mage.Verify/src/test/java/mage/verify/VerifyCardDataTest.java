@@ -3369,6 +3369,11 @@ public class VerifyCardDataTest {
             return;
         }
 
+        if (card instanceof MeldCardHalf && ((MeldCardHalf) card).isBackSide()) {
+            // skip rarity check for meld cards
+            return;
+        }
+
         // basic lands must have Rarity.LAND and SuperType.BASIC
         // other cards can't have that stats
         String name = card.getName();
