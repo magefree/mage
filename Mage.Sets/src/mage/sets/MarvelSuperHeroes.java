@@ -90,6 +90,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Ronin, Shadow Stalker", 112, Rarity.UNCOMMON, mage.cards.r.RoninShadowStalker.class));
         cards.add(new SetCardInfo("S.H.I.E.L.D. Flying Car", 404, Rarity.RARE, mage.cards.s.SHIELDFlyingCar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("S.H.I.E.L.D. Flying Car", 74, Rarity.RARE, mage.cards.s.SHIELDFlyingCar.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Super Intelligence", 77, Rarity.UNCOMMON, mage.cards.s.SuperIntelligence.class));
         cards.add(new SetCardInfo("Super-Skrull", 115, Rarity.RARE, mage.cards.s.SuperSkrull.class));
         cards.add(new SetCardInfo("Swamp", 282, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 292, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
