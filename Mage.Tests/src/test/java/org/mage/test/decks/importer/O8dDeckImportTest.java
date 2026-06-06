@@ -1,6 +1,8 @@
-package mage.cards.decks.importer;
+package org.mage.test.decks.importer;
 
 import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.importer.CardLookup;
+import mage.cards.decks.importer.O8dDeckImporter;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -8,13 +10,13 @@ import java.nio.file.Paths;
 
 import static org.junit.Assert.assertEquals;
 
-public class MtgaImporterTest {
+public class O8dDeckImportTest {
 
     private static final FakeCardLookup LOOKUP = new FakeCardLookup();
 
     @Test
     public void testImport() {
-        MtgaImporter importer = new MtgaImporter() {
+        O8dDeckImporter importer = new O8dDeckImporter() {
             @Override
             public CardLookup getCardLookup() {
                 return LOOKUP;
@@ -22,26 +24,16 @@ public class MtgaImporterTest {
         };
         StringBuilder errors = new StringBuilder();
         DeckCardLists deck = importer.importDeck(
-                Paths.get("src", "test", "data", "importer", "testdeck.mtga").toString(),
+                Paths.get("src", "test", "data", "importer", "testdeck.o8d").toString(),
                 errors,
                 false
         );
 
         Assert.assertEquals("", errors.toString());
         TestDeckChecker.checker()
-                .addMain("Niv-Mizzet Reborn", 2)
-                .addMain("Teferi, Time Raveler", 1)
-                .addMain("Dovin's Veto", 1)
-                .addMain("Knight of Autumn", 1)
-                .addMain("Expansion // Explosion", 1)
                 .addMain("Forest", 1)
-                .addMain("Teferi, Hero of Dominaria", 1)
-                .addMain("Benalish Marshal", 3)
-
-                .addSide("Unmoored Ego", 3)
-                .addSide("Beacon Bolt", 1)
-
-                .verify(deck, 11, 4);
+                .addSide("Island", 2)
+                .verify(deck, 1, 2);
     }
 
 }

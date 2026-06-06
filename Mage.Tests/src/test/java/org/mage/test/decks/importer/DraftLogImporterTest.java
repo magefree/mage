@@ -1,6 +1,8 @@
-package mage.cards.decks.importer;
+package org.mage.test.decks.importer;
 
 import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.importer.CardLookup;
+import mage.cards.decks.importer.DraftLogImporter;
 import org.junit.Assert;
 import org.junit.Test;
 

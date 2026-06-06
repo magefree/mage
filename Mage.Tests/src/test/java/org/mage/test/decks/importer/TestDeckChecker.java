@@ -1,4 +1,4 @@
-package mage.cards.decks.importer;
+package org.mage.test.decks.importer;
 
 import mage.cards.decks.DeckCardLists;
 

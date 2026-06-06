@@ -1,7 +1,9 @@
-package mage.cards.decks.exporter;
+package org.mage.test.decks.exporter;
 
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.exporter.DeckExporter;
+import mage.cards.decks.exporter.XmageDeckExporter;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -9,7 +11,7 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 
-public class MtgOnlineDeckExporterTest {
+public class XmageDeckExporterTest {
 
     @Test
     public void writeDeck() throws IOException {
@@ -22,14 +24,14 @@ public class MtgOnlineDeckExporterTest {
         deck.getSideboard().add(new DeckCardInfo("Island", "1", "RNA", 2));
         deck.getSideboard().add(new DeckCardInfo("Island", "1", "RNA", 5)); // must combine
         deck.getSideboard().add(new DeckCardInfo("Mountain", "2", "RNA", 3));
-        DeckExporter exporter = new MtgOnlineDeckExporter();
+        DeckExporter exporter = new XmageDeckExporter();
         exporter.writeDeck(baos, deck);
-        assertEquals("2 Forest" + System.lineSeparator() +
-                        "8 Plains" + System.lineSeparator() +
-                        "1 Mountain" + System.lineSeparator() +
-                        System.lineSeparator() +
-                        "7 Island" + System.lineSeparator() +
-                        "3 Mountain" + System.lineSeparator(),
+        assertEquals("2 [RNA:1] Forest" + System.lineSeparator() +
+                        "8 [RNA:2] Plains" + System.lineSeparator() +
+                        "1 [RNA:3] Mountain" + System.lineSeparator() +
+                        "SB: 7 [RNA:1] Island" + System.lineSeparator() +
+                        "SB: 3 [RNA:2] Mountain" + System.lineSeparator(),
                 baos.toString());
     }
+
 }
