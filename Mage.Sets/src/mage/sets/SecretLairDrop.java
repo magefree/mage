@@ -2444,6 +2444,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 2542, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 2543, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 2544, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Tippy-Toe, Terrific Partner", 2625, Rarity.RARE, mage.cards.t.TippyToeTerrificPartner.class));
         cards.add(new SetCardInfo("Secret Rendezvous", 2648, Rarity.RARE, mage.cards.s.SecretRendezvous.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rune-Scarred Demon", 2649, Rarity.RARE, mage.cards.r.RuneScarredDemon.class));
         cards.add(new SetCardInfo("Terror of the Peaks", 2650, Rarity.MYTHIC, mage.cards.t.TerrorOfThePeaks.class));
