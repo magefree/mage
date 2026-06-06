@@ -71,9 +71,6 @@ public class MockCard extends CardImpl implements MockableCard {
                         .getSecondCardFace();
             }
         }
-        if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty() && !card.isDoubleFacedCard()) {
-            this.secondSideCard = new MockCard(CardRepository.instance.findCardWithPreferredSetAndNumber(card.getSecondSideName(), card.getSetCode(), card.getCardNumber()));
-        }
 
         if (card.isCardWithSpellOption()) {
             this.spellOptionName = card.getSecondSideName();
@@ -146,8 +143,8 @@ public class MockCard extends CardImpl implements MockableCard {
                 return manaCostLeftStr;
             case RIGHT:
                 return manaCostRightStr;
-            default:
             case ALL:
+            default:
                 return manaCostStr;
         }
     }

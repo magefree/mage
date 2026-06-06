@@ -420,7 +420,7 @@ public class TestCardRenderDialog extends MageDialog {
 
         List<CardView> cardViews = new ArrayList<>();
 
-        /* test face down
+        //* test face down
         cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "263", 0, 0, 0, false, false, null)); // mountain
         cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "185", 0, 0, 0, true, false, null)); // Judith, the Scourge Diva
         cardViews.add(createHandCard(game, playerYou.getId(), "DIS", "153")); // Odds // Ends (split card)
@@ -489,7 +489,7 @@ public class TestCardRenderDialog extends MageDialog {
         cardViews.add(createPermanentCard(game, playerYou.getId(), "FIN", "211", 0, 0, 0, false, true, null)); // Ragnarok, Divine Deliverence
         //*/
 
-        //* test variant double faced cards (main and second sides must be same pair)
+        /* test variant double faced cards (main and second sides must be same pair)
         // Jacob Hauken, Inspector -> Hauken's Insight
         cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "65"));
         cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "320"));
