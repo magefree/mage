@@ -102,6 +102,7 @@ public class MarvelUniverse extends ExpansionSet {
         cards.add(new SetCardInfo("Steely Resolve", 83, Rarity.MYTHIC, mage.cards.s.SteelyResolve.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 94, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Sundering Growth", 95, Rarity.MYTHIC, mage.cards.s.SunderingGrowth.class));
+        cards.add(new SetCardInfo("Sword of Fire and Ice", 100, Rarity.MYTHIC, mage.cards.s.SwordOfFireAndIce.class));
         cards.add(new SetCardInfo("Tangle", 38, Rarity.MYTHIC, mage.cards.t.Tangle.class));
         cards.add(new SetCardInfo("Teferi's Protection", 51, Rarity.MYTHIC, mage.cards.t.TeferisProtection.class));
         cards.add(new SetCardInfo("Terminate", 40, Rarity.MYTHIC, mage.cards.t.Terminate.class));
