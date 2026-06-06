@@ -555,7 +555,11 @@ public final class CardUtil {
 
     /**
      * Parse card number as int (support base [123] and alternative numbers
-     * [123b], [U123]).
+     * [123b], [U123]). For inner purpose only like cards sorting.
+     * <p>
+     * From scryfall: card numbers should be considered to be plaintext strings. they may contain multiple
+     * non-digit components, may contain no digits at all, and may not correspond to anything
+     * at all seen on the card
      *
      * @param cardNumber origin card number
      * @return int
@@ -563,24 +567,16 @@ public final class CardUtil {
     public static int parseCardNumberAsInt(String cardNumber) {
 
         if (cardNumber == null || cardNumber.isEmpty()) {
-            throw new IllegalArgumentException("Card number is empty.");
+            throw new IllegalArgumentException("Card number cannot be null or empty");
         }
 
-        try {
-            if (!Character.isDigit(cardNumber.charAt(0))) {
-                // U123
-                return Integer.parseInt(cardNumber.substring(1));
-            } else if (!Character.isDigit(cardNumber.charAt(cardNumber.length() - 1))) {
-                // 123b
-                return Integer.parseInt(cardNumber.substring(0, cardNumber.length() - 1));
-            } else {
-                // 123
-                return Integer.parseInt(cardNumber);
-            }
-        } catch (NumberFormatException e) {
-            // wrong numbers like RA5 and etc
-            return -1;
+        // example: 123, U123, 123b, 123*, 123+
+        String cardNumberNormalized = cardNumber.replaceAll("[\\D]", "");
+        if (cardNumberNormalized.isEmpty()) {
+            throw new IllegalArgumentException("Card number must contain at least one digit"); // require by xmage
         }
+
+        return Integer.parseInt(cardNumberNormalized);
     }
 
     /**

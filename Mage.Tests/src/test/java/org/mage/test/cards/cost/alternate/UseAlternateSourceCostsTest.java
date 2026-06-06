@@ -203,4 +203,30 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
     }
+
+    @Test
+    public void testSetXOnStack() {
+        skipInitShuffling();
+
+        addCard(Zone.LIBRARY, playerA, "Balduvian Bears", 4);
+        addCard(Zone.HAND, playerA, "Harmonize"); // {2}{G}{G}
+        // You may exile a green card with converted mana cost X from your hand rather than pay Nourishing Shoal's mana cost.
+        // You gain X life.
+        addCard(Zone.HAND, playerA, "Nourishing Shoal"); // {X}{G}{G}
+        // Whenever you cast a spell with {X} in its mana cost, look at the top X cards of your library.
+        // Put one of them into your hand and the rest on the bottom of your library in a random order.
+        addCard(Zone.BATTLEFIELD, playerA, "Geometer's Arthropod");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nourishing Shoal");
+        setChoice(playerA, "Cast with alternative cost: Exile a green card with mana value X from your hand (source: Nourishing Shoal");
+        setChoice(playerA, "Harmonize");
+        addTarget(playerA, "Balduvian Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 24);
+        assertHandCount(playerA, "Balduvian Bears", 1);
+    }
 }

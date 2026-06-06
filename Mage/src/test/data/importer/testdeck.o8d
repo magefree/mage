@@ -1,8 +1,0 @@
-<deck>
-  <section name="Main">
-    <card qty="1">Forest</card>
-  </section>
-  <section name="Sideboard">
-    <card qty="2">Island</card>
-  </section>
-</deck>
