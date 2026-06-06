@@ -253,5 +253,10 @@ public abstract class CardWithPartsImpl<P extends SubCard<C>, C extends CardWith
         }
         return allAbilities;
     }
+
+    @Override
+    public UUID getIdForBattlefield(Game game, Ability source) {
+        return getDefaultCardSide().getId();
+    }
 }
 

@@ -1,6 +1,5 @@
 package mage.cards.k;
 
-import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -32,27 +31,26 @@ public final class KellanDaringTraveler extends AdventureCard {
     private static final Hint hint = new ValueHint("Number of opponents controlling an artifact", KellanDynamicValue.instance);
 
     public KellanDaringTraveler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{1}{W}", "Journey On", "{G}");
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.FAERIE, SubType.SCOUT}, "{1}{W}",
+                "Journey On",
+                new CardType[]{CardType.SORCERY}, "{G}");
 
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.FAERIE);
-        this.subtype.add(SubType.SCOUT);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+        // Kellan, Daring Traveler
+        this.getLeftHalfCard().setPT(2, 3);
 
         // Whenever Kellan, Daring Traveler attacks, reveal the top card of your library. If it's a creature card with mana value 3 or less, put it into your hand. Otherwise, you may put it into your graveyard.
-        this.addAbility(new AttacksTriggeredAbility(new KellanDaringTravelerEffect()));
+        this.getLeftHalfCard().addAbility(new AttacksTriggeredAbility(new KellanDaringTravelerEffect()));
 
         // Journey On
         // Create X Map tokens, where X is one plus the number of opponents who control an artifact.
-        this.getSpellCard().getSpellAbility().addEffect(
+        this.getRightHalfCard().getSpellAbility().addEffect(
                 new CreateTokenEffect(new MapToken(), xValue)
                         .setText("create X Map tokens, where X is one plus the number of opponents who control an artifact")
         );
-        this.getSpellCard().getSpellAbility().addHint(hint);
+        this.getRightHalfCard().getSpellAbility().addHint(hint);
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private KellanDaringTraveler(final KellanDaringTraveler card) {

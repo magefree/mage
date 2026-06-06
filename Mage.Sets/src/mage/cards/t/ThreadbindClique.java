@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import mage.MageInt;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.AdventureCard;
@@ -26,21 +25,23 @@ public final class ThreadbindClique extends AdventureCard {
     }
 
     public ThreadbindClique(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{3}{U}", "Rip the Seams", "{2}{W}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.FAERIE}, "{3}{U}",
+                "Rip the Seams",
+                new CardType[]{CardType.INSTANT}, "{2}{W}");
 
-        this.subtype.add(SubType.FAERIE);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        // Threadbind Clique
+        this.getLeftHalfCard().setPT(3, 3);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Rip the Seams
         // Destroy target tapped creature.
-        this.getSpellCard().getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getRightHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetPermanent(filter));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private ThreadbindClique(final ThreadbindClique card) {

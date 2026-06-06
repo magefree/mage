@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -11,7 +10,10 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.*;
+import mage.cards.AdventureCard;
+import mage.cards.Card;
+import mage.cards.CardPart;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -29,25 +31,27 @@ import java.util.UUID;
 public final class TlincalliHunter extends AdventureCard {
 
     public TlincalliHunter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{5}{G}{G}", "Retrieve Prey", "{1}{G}");
-        
-        this.subtype.add(SubType.SCORPION);
-        this.subtype.add(SubType.SCOUT);
-        this.power = new MageInt(7);
-        this.toughness = new MageInt(7);
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.SCORPION, SubType.SCOUT}, "{5}{G}{G}",
+                "Retrieve Prey",
+                new CardType[]{CardType.SORCERY}, "{1}{G}");
+
+        // Tlincalli Hunter
+        this.getLeftHalfCard().setPT(7, 7);
 
         // Trample
-        this.addAbility(TrampleAbility.getInstance());
+        this.getLeftHalfCard().addAbility(TrampleAbility.getInstance());
 
         // Once each turn, you may pay {0} rather than pay the mana cost for a creature spell you cast from exile.
-        this.addAbility(new SimpleStaticAbility(
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(
                 new TlincalliHunterAddAltCostEffect()));
 
         // Retrieve Prey
         // Exile target creature card from your graveyard. Until the end of your next turn, you may cast that card.
-        this.getSpellCard().getSpellAbility().addEffect(new RetrievePreyEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-        this.finalizeAdventure();
+        this.getRightHalfCard().getSpellAbility().addEffect(new RetrievePreyEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+
+        finalizeCard();
     }
 
     private TlincalliHunter(final TlincalliHunter card) {
@@ -66,7 +70,7 @@ enum ExiledCreatureSpellCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source);
-        if (object instanceof CardPart || object instanceof SpellOptionCard) {
+        if (object instanceof CardPart) {
             UUID mainCardId = ((Card) object).getMainCard().getId();
             object = game.getObject(mainCardId);
         }

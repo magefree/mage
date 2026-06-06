@@ -338,10 +338,6 @@ public abstract class GameImpl implements Game {
                 Card rightCard = ((CardWithParts) card).getRightHalfCard();
                 rightCard.setOwnerId(ownerId);
                 addCardToState(rightCard);
-            } else if (card instanceof CardWithSpellOption) {
-                Card spellCard = ((CardWithSpellOption) card).getSpellCard();
-                spellCard.setOwnerId(ownerId);
-                addCardToState(spellCard);
             }
         }
     }

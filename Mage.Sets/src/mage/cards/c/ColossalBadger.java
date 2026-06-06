@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -25,21 +24,23 @@ import java.util.UUID;
 public final class ColossalBadger extends AdventureCard {
 
     public ColossalBadger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{5}{G}", "Dig Deep", "{1}{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.BADGER}, "{5}{G}",
+                "Dig Deep",
+                new CardType[]{CardType.SORCERY}, "{1}{G}");
 
-        this.subtype.add(SubType.BADGER);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(5);
+        // Colossal Badger
+        this.getLeftHalfCard().setPT(6, 5);
 
         // When Colossal Badger enters the battlefield, you gain 3 life.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3)));
+        this.getLeftHalfCard().addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3)));
 
         // Dig Deep
         // Choose target creature. Mill four cards, then put a +1/+1 counter on that creature for each creature card milled this way.
-        this.getSpellCard().getSpellAbility().addEffect(new ColossalBadgerEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getRightHalfCard().getSpellAbility().addEffect(new ColossalBadgerEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private ColossalBadger(final ColossalBadger card) {

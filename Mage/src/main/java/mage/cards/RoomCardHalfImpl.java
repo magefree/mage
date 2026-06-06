@@ -1,5 +1,6 @@
 package mage.cards;
 
+import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
@@ -7,6 +8,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -44,5 +46,25 @@ public class RoomCardHalfImpl extends SplitCardHalfImpl implements RoomCardHalf 
         }
 
         return super.cast(game, fromZone, ability, controllerId);
+    }
+
+    @Override
+    public void setZone(Zone zone, Game game) {
+        game.setZone(this.getId(), zone);
+        game.setZone(getParentCard().getId(), zone);
+
+        Card otherHalf = getOtherSide();
+
+        if (Objects.requireNonNull(zone) == Zone.STACK) {
+            game.setZone(otherHalf.getId(), Zone.OUTSIDE);
+        } else {
+            game.setZone(otherHalf.getId(), zone);
+        }
+        getParentCard().checkGoodZones(game);
+    }
+
+    @Override
+    public UUID getIdForBattlefield(Game game, Ability source) {
+        return getParentCard().getId();
     }
 }

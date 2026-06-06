@@ -1,12 +1,10 @@
 package mage.abilities.effects.common.asthought;
 
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
-import mage.constants.AsThoughEffectType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 
 import java.util.UUID;
@@ -17,7 +15,7 @@ import java.util.UUID;
 public class MayCastFromGraveyardAsAdventureEffect extends AsThoughEffectImpl {
 
     public MayCastFromGraveyardAsAdventureEffect() {
-        super(AsThoughEffectType.CAST_ADVENTURE_FROM_NOT_OWN_HAND_ZONE, Duration.UntilEndOfYourNextTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.UntilEndOfYourNextTurn, Outcome.Benefit);
         staticText = "you may cast it from your graveyard as an Adventure until the end of your next turn";
     }
 
@@ -36,19 +34,28 @@ public class MayCastFromGraveyardAsAdventureEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (!source.isControlledBy(affectedControllerId)) {
+    public boolean applies(UUID sourceId, Ability affectedAbility, Ability source, Game game, UUID affectedControllerId) {
+        if (!source.isControlledBy(affectedControllerId) || !(affectedAbility instanceof SpellAbility)) {
             return false;
         }
-        Card card = game.getCard(sourceId);
-        if (card == null || card.getMainCard() == null || !card.getMainCard().getId().equals(source.getSourceId())) {
+        if (((SpellAbility) affectedAbility).getSpellAbilityType() != SpellAbilityType.ADVENTURE_OMEN_RIGHT) {
             return false;
         }
-
+        Card card = game.getCard(affectedAbility.getSourceId());
         Card sourceCard = game.getCard(source.getSourceId());
+        if (card == null || sourceCard == null) {
+            return false;
+        }
+        // should have the same main card id
+        if (!card.getMainCard().getId().equals(sourceCard.getMainCard().getId())) {
+            return false;
+        }
 
-        return sourceCard != null
-                && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD
-                && source.getStackMomentSourceZCC() == sourceCard.getZoneChangeCounter(game);
+        return game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD && source.getStackMomentSourceZCC() == sourceCard.getZoneChangeCounter(game);
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        throw new IllegalArgumentException("Wrong code usage: can't call applies method on empty affectedAbility");
     }
 }

@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import mage.MageInt;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
@@ -16,18 +15,19 @@ import java.util.UUID;
 public final class CuriousPair extends AdventureCard {
 
     public CuriousPair(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{1}{G}", "Treats to Share", "{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.PEASANT}, "{1}{G}",
+                "Treats to Share",
+                new CardType[]{CardType.SORCERY}, "{G}");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.PEASANT);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+        // Curious Pair
+        this.getLeftHalfCard().setPT(1, 3);
 
         // Treats to Share
         // Create a Food token.
-        this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new FoodToken()));
+        this.getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new FoodToken()));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private CuriousPair(final CuriousPair card) {

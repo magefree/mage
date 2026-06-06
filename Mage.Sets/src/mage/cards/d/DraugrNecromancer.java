@@ -6,7 +6,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardWithParts;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.CardState;
@@ -180,8 +183,6 @@ class DraugrNecromancerSpendAnyManaEffect extends AsThoughEffectImpl implements 
             CardState cardState;
             if (card instanceof CardWithParts) {
                 cardState = game.getLastKnownInformationCard(((CardWithParts) card).getDefaultCardSide().getId(), Zone.EXILED);
-            } else if (card instanceof CardWithSpellOption) {
-                cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
             } else {
                 cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
             }

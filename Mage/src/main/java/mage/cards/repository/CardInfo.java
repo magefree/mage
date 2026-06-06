@@ -152,13 +152,11 @@ public class CardInfo {
             this.secondSideName = secondSide.getName();
         }
 
-        if (card instanceof CardWithSpellOption) {
-            this.cardWithSpellOption = true;
-            this.secondSideName = ((CardWithSpellOption) card).getSpellCard().getName();
-        }
-
         if (card instanceof CardWithParts) {
             this.doubleFacedCard = card instanceof DoubleFacedCard;
+            if (card instanceof CardWithSpellOption) {
+                this.cardWithSpellOption = true;
+            }
             this.secondSideName = ((CardWithParts) card).getRightHalfCard().getName();
         }
 
@@ -181,10 +179,6 @@ public class CardInfo {
         if (card instanceof CardWithParts) {
             List<String> manaCostLeft = ((CardWithParts) card).getLeftHalfCard().getManaCostSymbols();
             List<String> manaCostRight = ((CardWithParts) card).getRightHalfCard().getManaCostSymbols();
-            this.setManaCosts(CardUtil.concatManaSymbols(SPLIT_MANA_SEPARATOR_FULL, manaCostLeft, manaCostRight));
-        } else if (card instanceof CardWithSpellOption) {
-            List<String> manaCostLeft = ((CardWithSpellOption) card).getSpellCard().getManaCostSymbols();
-            List<String> manaCostRight = card.getManaCostSymbols();
             this.setManaCosts(CardUtil.concatManaSymbols(SPLIT_MANA_SEPARATOR_FULL, manaCostLeft, manaCostRight));
         } else {
             this.setManaCosts(card.getManaCostSymbols());

@@ -61,4 +61,12 @@ public class MeldCardHalf extends DoubleFacedCardHalf<MeldCard> {
     public MeldCardHalf copy() {
         return new MeldCardHalf(this);
     }
+
+    @Override
+    public UUID getIdForBattlefield(Game game, Ability source) {
+        if (getMeldedWith(game) != null) {
+            return getParentCard().getRightHalfCard().getId();
+        }
+        return super.getIdForBattlefield(game, source);
+    }
 }

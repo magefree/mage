@@ -1,11 +1,10 @@
 package mage.cards.b;
 
-import mage.MageInt;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.mana.GreenManaAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -32,27 +31,29 @@ public final class BrightcapBadger extends AdventureCard {
     }
 
     public BrightcapBadger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{3}{G}", "Fungus Frolic", "{2}{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.BADGER, SubType.DRUID}, "{3}{G}",
+                "Fungus Frolic",
+                new CardType[]{CardType.INSTANT}, "{2}{G}");
 
-        this.subtype.add(SubType.BADGER);
-        this.subtype.add(SubType.DRUID);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        // Brightcap Badger
+        this.getLeftHalfCard().setPT(3, 4);
 
         // Each Fungus and Saproling you control has "{T}: Add {G}."
-        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new GreenManaAbility(), Duration.WhileOnBattlefield, filter
         )));
 
         // At the beginning of your end step, create a 1/1 green Saproling token.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+        this.getLeftHalfCard().addAbility(new BeginningOfEndStepTriggeredAbility(
                 new CreateTokenEffect(new SaprolingToken())
         ));
 
         // Fungus Frolic
         // Create two 1/1 green Saproling creature tokens.
-        this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), 2));
-        this.finalizeAdventure();
+        this.getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), 2));
+
+        finalizeCard();
     }
 
     private BrightcapBadger(final BrightcapBadger card) {

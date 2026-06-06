@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import mage.MageInt;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.AdventureCard;
@@ -25,20 +24,22 @@ public final class RealmCloakedGiant extends AdventureCard {
     }
 
     public RealmCloakedGiant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{5}{W}{W}", "Cast Off", "{3}{W}{W}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GIANT}, "{5}{W}{W}",
+                "Cast Off",
+                new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
 
-        this.subtype.add(SubType.GIANT);
-        this.power = new MageInt(7);
-        this.toughness = new MageInt(7);
+        // Realm-Cloaked Giant
+        this.getLeftHalfCard().setPT(7, 7);
 
         // Vigilance
-        this.addAbility(VigilanceAbility.getInstance());
+        this.getLeftHalfCard().addAbility(VigilanceAbility.getInstance());
 
         // Cast Off
         // Destroy all non-Giant creatures.
-        this.getSpellCard().getSpellAbility().addEffect(new DestroyAllEffect(filter));
+        this.getRightHalfCard().getSpellAbility().addEffect(new DestroyAllEffect(filter));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private RealmCloakedGiant(final RealmCloakedGiant card) {

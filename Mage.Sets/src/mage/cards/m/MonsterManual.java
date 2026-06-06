@@ -24,7 +24,10 @@ import java.util.UUID;
 public final class MonsterManual extends AdventureCard {
 
     public MonsterManual(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, new CardType[]{CardType.SORCERY}, "{3}{G}", "Zoological Study", "{2}{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.ARTIFACT}, "{3}{G}",
+                "Zoological Study",
+                new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         this.subtype.add(SubType.BOOK);
 
@@ -34,13 +37,13 @@ public final class MonsterManual extends AdventureCard {
                 new ManaCostsImpl<>("{1}{G}")
         );
         ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
 
         // Zoological Study
         // Mill five cards, then return a creature card milled this way to your hand.
-        this.getSpellCard().getSpellAbility().addEffect(new ZoologicalStudyEffect());
+        this.getRightHalfCard().getSpellAbility().addEffect(new ZoologicalStudyEffect());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private MonsterManual(final MonsterManual card) {

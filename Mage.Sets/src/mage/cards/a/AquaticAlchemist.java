@@ -27,23 +27,28 @@ import java.util.stream.Collectors;
 public final class AquaticAlchemist extends AdventureCard {
 
     public AquaticAlchemist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{1}{U}", "Bubble Up", "{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ELEMENTAL}, "{1}{U}", 
+                "Bubble Up",
+                new CardType[]{CardType.SORCERY}, "{2}{U}");
 
-        this.subtype.add(SubType.ELEMENTAL);
+        
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
+        // Aquatic Alchemist
+        this.getLeftHalfCard().setPT(1, 3);
+
         // Whenever you cast your first instant or sorcery spell each turn, Aquatic Alchemist gets +2/+0 until end of turn.
-        this.addAbility(new AquaticAlchemistTriggeredAbility());
+        this.getLeftHalfCard().addAbility(new AquaticAlchemistTriggeredAbility());
 
         // Bubble up
         // Put target instant or sorcery card from your graveyard on top of your library.
-        this.getSpellCard().getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(
+        this.getRightHalfCard().getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(
                 StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD
         ));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private AquaticAlchemist(final AquaticAlchemist card) {

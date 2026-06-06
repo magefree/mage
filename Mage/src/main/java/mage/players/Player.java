@@ -197,10 +197,6 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean canLoseByZeroOrLessLife();
 
-    void setPlotFromTopOfLibrary(boolean canPlotFromTopOfLibrary);
-
-    boolean canPlotFromTopOfLibrary();
-
     void setDrawsFromBottom(boolean drawsFromBottom);
 
     boolean isDrawsFromBottom();

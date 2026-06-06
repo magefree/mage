@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -34,29 +33,33 @@ public final class MoonshaePixie extends AdventureCard {
     private static final Hint hint = new ValueHint("Opponents dealt damage this turn", MoonshaePixieValue.instance);
 
     public MoonshaePixie(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{3}{U}", "Pixie Dust", "{1}{U}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.FAERIE}, "{3}{U}",
+                "Pixie Dust",
+                new CardType[]{CardType.INSTANT}, "{1}{U}");
 
-        this.subtype.add(SubType.FAERIE);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        // Moonshae Pixie
+        this.getLeftHalfCard().setPT(2, 2);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // When Moonshae Pixie enters the battlefield, draw cards equal to the number of opponents who were dealt combat damage this turn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(
+        Ability ability = new EntersBattlefieldTriggeredAbility(
                 new DrawCardSourceControllerEffect(MoonshaePixieValue.instance)
                         .setText("draw cards equal to the number of opponents who were dealt combat damage this turn")
-        ).addHint(hint), new MoonshaePixieWatcher());
+        ).addHint(hint);
+        ability.addWatcher(new MoonshaePixieWatcher());
+        this.getLeftHalfCard().addAbility(ability);
 
         // Pixie Dust
         // Up to three target creatures gain flying until end of turn.
-        this.getSpellCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance()));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(
+        this.getRightHalfCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance()));
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetPermanent(
                 0, 3, StaticFilters.FILTER_PERMANENT_CREATURES
         ));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private MoonshaePixie(final MoonshaePixie card) {

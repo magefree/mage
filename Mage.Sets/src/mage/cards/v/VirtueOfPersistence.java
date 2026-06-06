@@ -1,10 +1,10 @@
 package mage.cards.v;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -21,22 +21,26 @@ import java.util.UUID;
 public final class VirtueOfPersistence extends AdventureCard {
 
     public VirtueOfPersistence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, new CardType[]{CardType.SORCERY}, "{5}{B}{B}", "Locthwain Scorn", "{1}{B}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.ENCHANTMENT}, "{5}{B}{B}",
+                "Locthwain Scorn",
+                new CardType[]{CardType.SORCERY}, "{1}{B}");
 
+        // Virtue of Persistence
         // At the beginning of your upkeep, put target creature card from a graveyard onto the battlefield under your control.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect()
         );
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
 
         // Locthwain Scorn
         // Target creature gets -3/-3 until end of turn. You gain 2 life.
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellCard().getSpellAbility().addEffect(new BoostTargetEffect(-3, -3, Duration.EndOfTurn));
-        this.getSpellCard().getSpellAbility().addEffect(new GainLifeEffect(2));
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getRightHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(-3, -3, Duration.EndOfTurn));
+        this.getRightHalfCard().getSpellAbility().addEffect(new GainLifeEffect(2));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private VirtueOfPersistence(final VirtueOfPersistence card) {

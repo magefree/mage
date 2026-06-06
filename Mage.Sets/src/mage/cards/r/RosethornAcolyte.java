@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import mage.MageInt;
 import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.AdventureCard;
@@ -16,21 +15,22 @@ import java.util.UUID;
 public final class RosethornAcolyte extends AdventureCard {
 
     public RosethornAcolyte(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{2}{G}", "Seasonal Ritual", "{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ELF, SubType.DRUID}, "{2}{G}",
+                "Seasonal Ritual",
+                new CardType[]{CardType.SORCERY}, "{G}");
 
-        this.subtype.add(SubType.ELF);
-        this.subtype.add(SubType.DRUID);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+        // Rosethorn Acolyte
+        this.getLeftHalfCard().setPT(2, 3);
 
         // {T}: Add one mana of any color.
-        this.addAbility(new AnyColorManaAbility());
+        this.getLeftHalfCard().addAbility(new AnyColorManaAbility());
 
         // Seasonal Ritual
         // Add one mana of any color.
-        this.getSpellCard().getSpellAbility().addEffect(new AddManaOfAnyColorEffect());
+        this.getRightHalfCard().getSpellAbility().addEffect(new AddManaOfAnyColorEffect());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private RosethornAcolyte(final RosethornAcolyte card) {

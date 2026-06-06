@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import mage.MageInt;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.DauntAbility;
 import mage.cards.AdventureCard;
@@ -18,22 +17,23 @@ import java.util.UUID;
 public final class StormkeldVanguard extends AdventureCard {
 
     public StormkeldVanguard(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{4}{G}{G}", "Bear Down", "{1}{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GIANT, SubType.WARRIOR}, "{4}{G}{G}",
+                "Bear Down",
+                new CardType[]{CardType.SORCERY}, "{1}{G}");
 
-        this.subtype.add(SubType.GIANT);
-        this.subtype.add(SubType.WARRIOR);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(7);
+        // Stormkeld Vanguard
+        this.getLeftHalfCard().setPT(6, 7);
 
         // Stormkeld Vanguard can't be blocked by creatures with power 2 or less.
-        this.addAbility(new DauntAbility());
+        this.getLeftHalfCard().addAbility(new DauntAbility());
 
         // Bear Down
         // Destroy target artifact or enchantment.
-        this.getSpellCard().getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
+        this.getRightHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private StormkeldVanguard(final StormkeldVanguard card) {

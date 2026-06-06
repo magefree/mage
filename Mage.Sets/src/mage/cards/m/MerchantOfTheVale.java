@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
@@ -20,27 +19,28 @@ import java.util.UUID;
 public final class MerchantOfTheVale extends AdventureCard {
 
     public MerchantOfTheVale(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{2}{R}", "Haggle", "{R}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.PEASANT}, "{2}{R}",
+                "Haggle",
+                new CardType[]{CardType.INSTANT}, "{R}");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.PEASANT);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+        // Merchant of the Vale
+        this.getLeftHalfCard().setPT(2, 3);
 
         // {2}{R}, Discard a card: Draw a card.
         Ability ability = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}{R}")
         );
         ability.addCost(new DiscardCardCost());
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
 
         // Haggle
         // You may discard a card. If you do, draw a card.
-        this.getSpellCard().getSpellAbility().addEffect(new DoIfCostPaid(
+        this.getRightHalfCard().getSpellAbility().addEffect(new DoIfCostPaid(
                 new DrawCardSourceControllerEffect(1), new DiscardCardCost()
         ));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private MerchantOfTheVale(final MerchantOfTheVale card) {

@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import mage.MageInt;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.AdventureCard;
@@ -17,22 +16,22 @@ import java.util.UUID;
 public final class ArdenvaleTactician extends AdventureCard {
 
     public ArdenvaleTactician(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{1}{W}{W}", "Dizzying Swoop", "{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.KNIGHT}, "{1}{W}{W}",
+                "Dizzying Swoop",
+                new CardType[]{CardType.INSTANT}, "{1}{W}");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.KNIGHT);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+        // Ardenvale Tactician
+        this.getLeftHalfCard().setPT(2, 3);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Dizzying Swoop
         // Tap up to two target creatures.
-        this.getSpellCard().getSpellAbility().addEffect(new TapTargetEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
+        this.getRightHalfCard().getSpellAbility().addEffect(new TapTargetEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private ArdenvaleTactician(final ArdenvaleTactician card) {

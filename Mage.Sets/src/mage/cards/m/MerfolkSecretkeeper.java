@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import mage.MageInt;
 import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
@@ -16,19 +15,20 @@ import java.util.UUID;
 public final class MerfolkSecretkeeper extends AdventureCard {
 
     public MerfolkSecretkeeper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{U}", "Venture Deeper", "{U}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.MERFOLK, SubType.WIZARD}, "{U}",
+                "Venture Deeper",
+                new CardType[]{CardType.SORCERY}, "{U}");
 
-        this.subtype.add(SubType.MERFOLK);
-        this.subtype.add(SubType.WIZARD);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(4);
+        // Merfolk Secretkeeper
+        this.getLeftHalfCard().setPT(0, 4);
 
         // Venture Deeper
         // Target player puts the top four cards of their library into their graveyard.
-        this.getSpellCard().getSpellAbility().addEffect(new MillCardsTargetEffect(4));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetPlayer());
+        this.getRightHalfCard().getSpellAbility().addEffect(new MillCardsTargetEffect(4));
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private MerfolkSecretkeeper(final MerfolkSecretkeeper card) {

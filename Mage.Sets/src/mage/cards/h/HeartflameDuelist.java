@@ -1,6 +1,5 @@
 package mage.cards.h;
 
-import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -10,7 +9,6 @@ import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetAnyTarget;
@@ -29,23 +27,24 @@ public final class HeartflameDuelist extends AdventureCard {
     }
 
     public HeartflameDuelist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{1}{W}", "Heartflame Slash", "{2}{R}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.KNIGHT}, "{1}{W}",
+                "Heartflame Slash",
+                new CardType[]{CardType.INSTANT}, "{2}{R}");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.KNIGHT);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(1);
+        // Heartflame Duelist
+        this.getLeftHalfCard().setPT(3, 1);
 
         // Instant and sorcery spells you control have lifelink.
         Effect effect = new GainAbilityControlledSpellsEffect(LifelinkAbility.getInstance(), filter);
-        this.addAbility(new SimpleStaticAbility(effect));
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(effect));
 
         // Heartflame Slash
         // Heartflame Slash deals 3 damage to any target.
-        this.getSpellCard().getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getRightHalfCard().getSpellAbility().addEffect(new DamageTargetEffect(3));
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetAnyTarget());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private HeartflameDuelist(final HeartflameDuelist card) {

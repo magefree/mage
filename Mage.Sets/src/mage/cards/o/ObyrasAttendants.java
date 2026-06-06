@@ -1,6 +1,5 @@
 package mage.cards.o;
 
-import mage.MageInt;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.AdventureCard;
@@ -17,22 +16,23 @@ import java.util.UUID;
 public final class ObyrasAttendants extends AdventureCard {
 
     public ObyrasAttendants(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{4}{U}", "Desperate Parry", "{1}{U}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.FAERIE, SubType.WIZARD}, "{4}{U}",
+                "Desperate Parry",
+                new CardType[]{CardType.INSTANT}, "{1}{U}");
 
-        this.subtype.add(SubType.FAERIE);
-        this.subtype.add(SubType.WIZARD);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        // Obyra's Attendants
+        this.getLeftHalfCard().setPT(3, 4);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Desperate Parry
         // Target creature gets -4/-0 until end of turn.
-        this.getSpellCard().getSpellAbility().addEffect(new BoostTargetEffect(-4, 0));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getRightHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(-4, 0));
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private ObyrasAttendants(final ObyrasAttendants card) {

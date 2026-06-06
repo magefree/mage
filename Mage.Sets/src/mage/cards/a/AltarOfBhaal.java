@@ -23,8 +23,12 @@ import java.util.UUID;
 public final class AltarOfBhaal extends AdventureCard {
 
     public AltarOfBhaal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, new CardType[]{CardType.SORCERY}, "{1}{B}", "Bone Offering", "{2}{B}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.ARTIFACT}, "{1}{B}",
+                "Bone Offering",
+                new CardType[]{CardType.SORCERY}, "{2}{B}");
 
+        // Altar of Bhaal
         // {2}{B}, {T}, Exile a creature you control: Return target creature card from your graveyard to the battlefield. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{2}{B}")
@@ -32,13 +36,13 @@ public final class AltarOfBhaal extends AdventureCard {
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_A_CREATURE)));
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
 
         // Bone Offering
         // Create a tapped 4/1 black Skeleton creature token with menace.
-        this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new SkeletonMenaceToken(), 1, true, false));
+        this.getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new SkeletonMenaceToken(), 1, true, false));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private AltarOfBhaal(final AltarOfBhaal card) {

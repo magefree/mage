@@ -1,6 +1,6 @@
 package mage.cards.s;
 
-import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CastNoncreatureSpellThisTurnCondition;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
@@ -20,25 +20,26 @@ import java.util.UUID;
 public final class SwordCoastSerpent extends AdventureCard {
 
     public SwordCoastSerpent(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{5}{U}{U}", "Capsizing Wave", "{1}{U}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.SERPENT, SubType.DRAGON}, "{5}{U}{U}",
+                "Capsizing Wave",
+                new CardType[]{CardType.INSTANT}, "{1}{U}");
 
-        this.subtype.add(SubType.SERPENT);
-        this.subtype.add(SubType.DRAGON);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
+        // Sword Coast Serpent
+        this.getLeftHalfCard().setPT(6, 6);
 
         // Sword Coast Serpent can't be blocked as long as you've cast a noncreature spell this turn.
-        this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
                 new CantBeBlockedSourceEffect(), CastNoncreatureSpellThisTurnCondition.instance,
                 "{this} can't be blocked as long as you've cast a noncreature spell this turn"
         )).addHint(CastNoncreatureSpellThisTurnCondition.getHint()));
 
         // Capsizing Wave
         // Return target creature to its owner's hand.
-        this.getSpellCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getRightHalfCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private SwordCoastSerpent(final SwordCoastSerpent card) {

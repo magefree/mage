@@ -37,17 +37,21 @@ public final class VirtueOfStrength extends AdventureCard {
     }
 
     public VirtueOfStrength(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, new CardType[]{CardType.SORCERY}, "{5}{G}{G}", "Garenbrig Growth", "{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.ENCHANTMENT}, "{5}{G}{G}",
+                "Garenbrig Growth",
+                new CardType[]{CardType.SORCERY}, "{G}");
 
+        // Virtue of Strength
         // If you tap a basic land for mana, it produces three times as much of that mana instead.
-        this.addAbility(new SimpleStaticAbility(new VirtueOfStrengthReplacementEffect()));
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new VirtueOfStrengthReplacementEffect()));
 
         // Garenbrig Growth
         // Return target creature or land card from your graveyard to your hand.
-        this.getSpellCard().getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
+        this.getRightHalfCard().getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private VirtueOfStrength(final VirtueOfStrength card) {

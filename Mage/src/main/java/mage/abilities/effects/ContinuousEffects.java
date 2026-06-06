@@ -548,23 +548,11 @@ public class ContinuousEffects implements Serializable {
             }
 
             UUID idToCheck;
-            if (!type.needPlayCardAbility() && objectToCheck instanceof CardWithParts) {
+            if (!type.needPlayCardAbility() && (objectToCheck instanceof CardWithParts || objectToCheck instanceof CardPart)) {
                 // each split side uses own characteristics to check for playing, all other cases must use main card
                 // rules:
                 // 708.4. In every zone except the stack, the characteristics of a split card are those of its two halves combined.
-                idToCheck = ((CardWithParts) objectToCheck).getMainCard().getId();
-            } else if (!type.needPlayCardAbility() && objectToCheck instanceof CardWithSpellOption) {
-                // adventure/omen spell uses alternative characteristics for spell/stack, all other cases must use main card
-                idToCheck = ((CardWithSpellOption) objectToCheck).getMainCard().getId();
-            } else if (!type.needPlayCardAbility() && objectToCheck instanceof CardPart) {
-                // each mdf side uses own characteristics to check for playing, all other cases must use main card
-                // rules:
-                // "If an effect allows you to play a land or cast a spell from among a group of cards,
-                // you may play or cast a modal double-faced card with any face that fits the criteria
-                // of that effect. For example, if Sejiri Shelter / Sejiri Glacier is in your graveyard
-                // and an effect allows you to play lands from your graveyard, you could play Sejiri Glacier.
-                // That effect doesn't allow you to cast Sejiri Shelter."
-                idToCheck = ((CardPart<?>) objectToCheck).getMainCard().getId();
+                idToCheck = ((Card) objectToCheck).getMainCard().getId();
             } else {
                 idToCheck = objectId;
             }
@@ -657,7 +645,7 @@ public class ContinuousEffects implements Serializable {
                 Set<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
                 for (Ability ability : abilities) {
                     if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, null)) {
-                        if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
+                        if (effect.getDuration() != Duration.OneUse && !effect.isUsed()) {
                             asThoughEffectsList.add(effect);
                             break;
                         }

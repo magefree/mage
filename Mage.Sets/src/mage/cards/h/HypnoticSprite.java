@@ -1,6 +1,5 @@
 package mage.cards.h;
 
-import mage.MageInt;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.AdventureCard;
@@ -26,21 +25,23 @@ public final class HypnoticSprite extends AdventureCard {
     }
 
     public HypnoticSprite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{U}{U}", "Mesmeric Glare", "{2}{U}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.FAERIE}, "{U}{U}",
+                "Mesmeric Glare",
+                new CardType[]{CardType.INSTANT}, "{2}{U}");
 
-        this.subtype.add(SubType.FAERIE);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        // Hypnotic Sprite
+        this.getLeftHalfCard().setPT(2, 1);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Mesmeric Glare
         // Counter target spell with converted mana cost 3 or less.
-        this.getSpellCard().getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getRightHalfCard().getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetSpell(filter));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private HypnoticSprite(final HypnoticSprite card) {

@@ -10,7 +10,10 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.IndestructibleAbility;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardPart;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
@@ -54,7 +57,7 @@ enum IsBeingCastFromHandCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source);
-        if (object instanceof CardPart || object instanceof SpellOptionCard) {
+        if (object instanceof CardPart) {
             UUID mainCardId = ((Card) object).getMainCard().getId();
             object = game.getObject(mainCardId);
         }

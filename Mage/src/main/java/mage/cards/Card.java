@@ -303,4 +303,11 @@ public interface Card extends MageObject, Ownerable {
      * @return
      */
     boolean hasSubTypeForDeckbuilding(SubType subType);
+
+    /**
+     * Used by {@link mage.game.ZonesHandler}. Gets the id for the card that should move to the battlefield.
+     * For normal cards, this is the same as the card id. For cards with parts, they will have their own implementation.
+     * @return UUID of the card to move to battlefield
+     */
+    UUID getIdForBattlefield(Game game, Ability source);
 }

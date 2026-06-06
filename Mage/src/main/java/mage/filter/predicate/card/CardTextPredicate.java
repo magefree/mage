@@ -72,10 +72,8 @@ public class CardTextPredicate implements Predicate<Card> {
             String fullName = input.getName();
             if (input instanceof MockCard) {
                 fullName = ((MockCard) input).getFullName(true);
-            } else if (input instanceof ModalDoubleFacedCard) {
-                fullName = input.getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + ((ModalDoubleFacedCard) input).getRightHalfCard().getName();
-            } else if (input instanceof CardWithSpellOption) {
-                fullName = input.getName() + MockCard.CARD_WITH_SPELL_OPTION_NAME_SEPARATOR + ((CardWithSpellOption) input).getSpellCard().getName();
+            } else if (input instanceof ModalDoubleFacedCard || input instanceof CardWithSpellOption) {
+                fullName = input.getName() + MockCard.CARD_WITH_PARTS_NAME_SEPARATOR + ((CardWithParts) input).getRightHalfCard().getName();
             }
             if (textHasTokens(fullName, true)) {
                 return saveAndReturnUniqueFind(input);
@@ -88,9 +86,6 @@ public class CardTextPredicate implements Predicate<Card> {
             if (input instanceof CardWithParts) {
                 fullRules.addAll(((CardWithParts) input).getLeftHalfCard().getRules(game));
                 fullRules.addAll(((CardWithParts) input).getRightHalfCard().getRules(game));
-            }
-            if (input instanceof CardWithSpellOption) {
-                fullRules.addAll(((CardWithSpellOption) input).getSpellCard().getRules(game));
             }
             if (textHasTokens(String.join("@", fullRules), true)) {
                 return saveAndReturnUniqueFind(input);

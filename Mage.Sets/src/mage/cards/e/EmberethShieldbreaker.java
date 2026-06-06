@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import mage.MageInt;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
@@ -16,19 +15,20 @@ import java.util.UUID;
 public final class EmberethShieldbreaker extends AdventureCard {
 
     public EmberethShieldbreaker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{1}{R}", "Battle Display", "{R}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.KNIGHT}, "{1}{R}",
+                "Battle Display",
+                new CardType[]{CardType.SORCERY}, "{R}");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.KNIGHT);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        // Embereth Shieldbreaker
+        this.getLeftHalfCard().setPT(2, 1);
 
         // Battle Display
         // Destroy target artifact.
-        this.getSpellCard().getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetArtifactPermanent());
+        this.getRightHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetArtifactPermanent());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private EmberethShieldbreaker(final EmberethShieldbreaker card) {

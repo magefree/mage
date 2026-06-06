@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesWithLessPowerEffect;
@@ -21,25 +20,27 @@ import java.util.UUID;
 public final class ElusiveOtter extends AdventureCard {
 
     public ElusiveOtter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{U}", "Grove's Bounty", "{X}{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.OTTER}, "{U}",
+                "Grove's Bounty",
+                new CardType[]{CardType.SORCERY}, "{X}{G}");
 
-        this.subtype.add(SubType.OTTER);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        // Elusive Otter
+        this.getLeftHalfCard().setPT(1, 1);
 
         // Prowess
-        this.addAbility(new ProwessAbility());
+        this.getLeftHalfCard().addAbility(new ProwessAbility());
 
         // Creatures with power less than Elusive Otter's power can't block it.
-        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByCreaturesWithLessPowerEffect()));
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new CantBeBlockedByCreaturesWithLessPowerEffect()));
 
         // Grove's Bounty
         // Distribute X +1/+1 counters among any number of target creatures you control.
-        this.getSpellCard().getSpellAbility().addEffect(new DistributeCountersEffect());
-        this.getSpellCard().getSpellAbility().addTarget(
+        this.getRightHalfCard().getSpellAbility().addEffect(new DistributeCountersEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(
                 new TargetCreaturePermanentAmount(GetXValue.instance, StaticFilters.FILTER_CONTROLLED_CREATURES));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private ElusiveOtter(final ElusiveOtter card) {

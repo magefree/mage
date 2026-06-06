@@ -2,8 +2,6 @@ package mage.cards;
 
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.Abilities;
-import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
@@ -17,6 +15,7 @@ import mage.util.CardUtil;
 import mage.util.SubTypes;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -41,14 +40,11 @@ public abstract class DoubleFacedCard<P extends DoubleFacedCardHalf<C>, C extend
 
     @Override
     protected void updatePartZones(Zone zone, Game game) {
-        switch (zone) {
-            case BATTLEFIELD:
-            case STACK:
-                throw new IllegalArgumentException("Wrong code usage: you must put to battlefield/stack only real side card (half), not main");
-            default:
-                game.setZone(leftHalfCard.getId(), zone);
-                game.setZone(rightHalfCard.getId(), zone);
-                break;
+        if (Objects.requireNonNull(zone) == Zone.BATTLEFIELD) {
+            throw new IllegalArgumentException("Wrong code usage: attempting to put main card directly to battlefield - " + this);
+        } else {
+            game.setZone(leftHalfCard.getId(), zone);
+            game.setZone(rightHalfCard.getId(), zone);
         }
         checkGoodZones(game);
     }
@@ -159,12 +155,6 @@ public abstract class DoubleFacedCard<P extends DoubleFacedCardHalf<C>, C extend
     }
 
     @Override
-    public Abilities<Ability> getSharedAbilities(Game game) {
-        // no shared abilities for mdf cards (e.g. must be left or right only)
-        return new AbilitiesImpl<>();
-    }
-
-    @Override
     public List<String> getRules() {
         // rules must show only main side (another side visible by toggle/transform button in GUI)
         // card hints from both sides
@@ -232,5 +222,10 @@ public abstract class DoubleFacedCard<P extends DoubleFacedCardHalf<C>, C extend
     @Override
     public MageInt getToughness() {
         return getLeftHalfCard().getToughness();
+    }
+
+    @Override
+    public UUID getIdForBattlefield(Game game, Ability source) {
+        return getDefaultCardSide().getId();
     }
 }

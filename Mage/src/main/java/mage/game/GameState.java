@@ -6,7 +6,10 @@ import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardWithParts;
+import mage.cards.CardWithPartsImpl;
+import mage.cards.SubCard;
 import mage.constants.PhaseStep;
 import mage.constants.TurnPhase;
 import mage.constants.Zone;
@@ -1634,14 +1637,6 @@ public class GameState implements Serializable, Copyable<GameState> {
             copiedParts.add(rightCopied);
             // sync parts
             ((CardWithPartsImpl<?, ?>) copiedCard).setParts(leftCopied, rightCopied);
-        } else if (copiedCard instanceof CardWithSpellOption) {
-            // right
-            SpellOptionCard rightOriginal = ((CardWithSpellOption) copiedCard).getSpellCard();
-            SpellOptionCard rightCopied = rightOriginal.copy();
-            prepareCardForCopy(rightOriginal, rightCopied, newController);
-            copiedParts.add(rightCopied);
-            // sync parts
-            ((CardWithSpellOption) copiedCard).setParts(rightCopied);
         }
 
         // main part prepare (must be called after other parts cause it change ids for all)

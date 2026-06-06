@@ -1,13 +1,11 @@
 package mage.cards.r;
 
-import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.cards.OmenCard;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.OmenCard;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
@@ -16,6 +14,8 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,23 +35,26 @@ public final class RunescaleStormbrood extends OmenCard {
     }
 
     public RunescaleStormbrood(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{3}{R}", "Chilling Screech", "{1}{U}");
-        
-        this.subtype.add(SubType.DRAGON);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(4);
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.DRAGON}, "{3}{R}",
+                "Chilling Screech",
+                new CardType[]{CardType.INSTANT}, "{1}{U}");
+
+        // Runescale Stormbrood
+        this.getLeftHalfCard().setPT(2, 4);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Whenever you cast a noncreature spell or a Dragon spell, this creature gets +2/+0 until end of turn.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), castFilter, false));
+        this.getLeftHalfCard().addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), castFilter, false));
 
         // Chilling Screech
         // Counter target spell with mana value 2 or less.
-        this.getSpellCard().getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetSpell(filter));
-        this.finalizeOmen();
+        this.getRightHalfCard().getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetSpell(filter));
+
+        finalizeCard();
     }
 
     private RunescaleStormbrood(final RunescaleStormbrood card) {

@@ -1,6 +1,5 @@
 package mage.cards.l;
 
-import mage.MageInt;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.AdventureCard;
@@ -17,20 +16,22 @@ import java.util.UUID;
 public final class LonesomeUnicorn extends AdventureCard {
 
     public LonesomeUnicorn(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{4}{W}", "Rider in Need", "{2}{W}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.UNICORN}, "{4}{W}",
+                "Rider in Need",
+                new CardType[]{CardType.SORCERY}, "{2}{W}");
 
-        this.subtype.add(SubType.UNICORN);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        // Lonesome Unicorn
+        this.getLeftHalfCard().setPT(3, 3);
 
         // Vigilance
-        this.addAbility(VigilanceAbility.getInstance());
+        this.getLeftHalfCard().addAbility(VigilanceAbility.getInstance());
 
         // Rider in Need
         // Create a 2/2 white Knight creature token with vigilance.
-        this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new KnightToken()));
+        this.getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new KnightToken()));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private LonesomeUnicorn(final LonesomeUnicorn card) {

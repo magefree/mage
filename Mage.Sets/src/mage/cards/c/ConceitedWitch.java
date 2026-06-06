@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import mage.MageInt;
 import mage.abilities.effects.common.CreateRoleAttachedTargetEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.AdventureCard;
@@ -18,22 +17,23 @@ import java.util.UUID;
 public final class ConceitedWitch extends AdventureCard {
 
     public ConceitedWitch(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{2}{B}", "Price of Beauty", "{B}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WARLOCK}, "{2}{B}",
+                "Price of Beauty",
+                new CardType[]{CardType.SORCERY}, "{B}");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WARLOCK);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+        // Conceited Witch
+        this.getLeftHalfCard().setPT(2, 3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.getLeftHalfCard().addAbility(new MenaceAbility());
 
         // Price of Beauty
         // Create a Wicked Role token attached to target creature you control.
-        this.getSpellCard().getSpellAbility().addEffect(new CreateRoleAttachedTargetEffect(RoleType.WICKED));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getRightHalfCard().getSpellAbility().addEffect(new CreateRoleAttachedTargetEffect(RoleType.WICKED));
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private ConceitedWitch(final ConceitedWitch card) {

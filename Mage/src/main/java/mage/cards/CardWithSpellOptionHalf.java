@@ -1,6 +1,5 @@
 package mage.cards;
 
-import mage.abilities.Ability;
 import mage.constants.*;
 import mage.game.Game;
 
@@ -8,12 +7,12 @@ import java.util.Arrays;
 import java.util.UUID;
 
 /**
- * @author JayDi85 - originally from ModalDoubleFaceCardHalf
+ * @author Jmlundeen
  * @param <C> the type of the parent card
  */
-public abstract class DoubleFacedCardHalf<C extends DoubleFacedCard<?, C>> extends CardPart<C> {
+public abstract class CardWithSpellOptionHalf<C extends CardWithSpellOption<?, C>> extends CardPart<C> {
 
-    public DoubleFacedCardHalf(
+    public CardWithSpellOptionHalf(
             UUID ownerId, CardSetInfo setInfo,
             SuperType[] cardSuperTypes, CardType[] cardTypes, SubType[] cardSubTypes,
             String costs, C parentCard, SpellAbilityType spellAbilityType
@@ -23,13 +22,8 @@ public abstract class DoubleFacedCardHalf<C extends DoubleFacedCard<?, C>> exten
         this.subtype.addAll(Arrays.asList(cardSubTypes));
     }
 
-    protected DoubleFacedCardHalf(final DoubleFacedCardHalf<C> card) {
+    protected CardWithSpellOptionHalf(final CardWithSpellOptionHalf<C> card) {
         super(card);
-    }
-
-    @Override
-    public boolean isTransformable() {
-        return getOtherSide().isPermanent();
     }
 
     @Override
@@ -54,21 +48,5 @@ public abstract class DoubleFacedCardHalf<C extends DoubleFacedCard<?, C>> exten
         getParentCard().checkGoodZones(game);
     }
 
-    public boolean isBackSide() {
-        if (getParentCard().getLeftHalfCard().getId().equals(this.getId())) {
-            return false;
-        } else if (getParentCard().getRightHalfCard().getId().equals(this.getId())) {
-            return true;
-        } else {
-            throw new IllegalStateException("Wrong code usage: MDF halves must use different ids");
-        }
-    }
-
-    @Override
-    public UUID getIdForBattlefield(Game game, Ability source) {
-        if (!source.getAbilityType().isPlayCardAbility()) {
-            return getParentCard().getDefaultCardSide().getId();
-        }
-        return this.getId();
-    }
+    public abstract String getSpellType();
 }

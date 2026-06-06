@@ -24,24 +24,26 @@ import java.util.UUID;
 public final class TwoHandedAxe extends AdventureCard {
 
     public TwoHandedAxe(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, new CardType[]{CardType.INSTANT}, "{2}{R}", "Sweeping Cleave", "{1}{R}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.EQUIPMENT}, "{2}{R}",
+                "Sweeping Cleave",
+                new CardType[]{CardType.INSTANT}, "{1}{R}");
 
-        this.subtype.add(SubType.EQUIPMENT);
-
+        // Two-Handed Axe
         // Whenever equipped creature attacks, double its power until end of turn.
-        this.addAbility(new AttacksAttachedTriggeredAbility(
+        this.getLeftHalfCard().addAbility(new AttacksAttachedTriggeredAbility(
                 new TwoHandedAxeEffect(), AttachmentType.EQUIPMENT, false, SetTargetPointer.PERMANENT
         ));
 
         // Equip {1}{R}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{1}{R}"), false));
+        this.getLeftHalfCard().addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{1}{R}"), false));
 
         // Sweeping Cleave
         // Target creature you control gains double strike until end of turn.
-        this.getSpellCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance()));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getRightHalfCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance()));
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private TwoHandedAxe(final TwoHandedAxe card) {

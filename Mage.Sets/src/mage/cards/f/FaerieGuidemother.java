@@ -1,6 +1,5 @@
 package mage.cards.f;
 
-import mage.MageInt;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -19,26 +18,28 @@ import java.util.UUID;
 public final class FaerieGuidemother extends AdventureCard {
 
     public FaerieGuidemother(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{W}", "Gift of the Fae", "{1}{W}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.FAERIE}, "{W}",
+                "Gift of the Fae",
+                new CardType[]{CardType.SORCERY}, "{1}{W}");
 
-        this.subtype.add(SubType.FAERIE);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        // Faerie Guidemother
+        this.getLeftHalfCard().setPT(1, 1);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Gift of the Fae
         // Target creature gets +2/+1 and gains flying until end of turn.
-        this.getSpellCard().getSpellAbility().addEffect(new BoostTargetEffect(
+        this.getRightHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(
                 2, 1, Duration.EndOfTurn
         ).setText("Target creature gets +2/+1"));
-        this.getSpellCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(
+        this.getRightHalfCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 FlyingAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains flying until end of turn"));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private FaerieGuidemother(final FaerieGuidemother card) {

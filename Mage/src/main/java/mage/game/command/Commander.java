@@ -56,7 +56,8 @@ public class Commander extends CommandObjectImpl {
                     case MODAL_LEFT:
                     case MODAL_RIGHT:
                     case TRANSFORMED_LEFT:
-                    case ADVENTURE_SPELL:
+                    case ADVENTURE_OMEN_LEFT:
+                    case ADVENTURE_OMEN_RIGHT:
                         // can be used from command zone
                         if (canUseAbilityFromCommandZone(spellAbility)) {
                             abilities.add(spellAbility.copyWithZone(Zone.COMMAND));

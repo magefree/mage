@@ -1,6 +1,5 @@
 package mage.cards.q;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
@@ -19,13 +18,13 @@ import java.util.UUID;
 public final class QueenOfIce extends AdventureCard {
 
     public QueenOfIce(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{2}{U}", "Rage of Winter", "{1}{U}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.NOBLE, SubType.WIZARD}, "{2}{U}",
+                "Rage of Winter",
+                new CardType[]{CardType.SORCERY}, "{1}{U}");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.NOBLE);
-        this.subtype.add(SubType.WIZARD);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+        // Queen of Ice
+        this.getLeftHalfCard().setPT(2, 3);
 
         // Whenever Queen of Ice deals combat damage to a creature, tap that creature. It doesn't untap during its controller's next untap step.
         Ability ability = new DealsDamageToACreatureTriggeredAbility(
@@ -35,16 +34,16 @@ public final class QueenOfIce extends AdventureCard {
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect()
                 .setText("It doesn't untap during its controller's next untap step")
         );
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
 
         // Rage of Winter
-        // Tap target creature. It doesn’t untap during its controller’s next untap step.
-        this.getSpellCard().getSpellAbility().addEffect(new TapTargetEffect());
-        this.getSpellCard().getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect()
+        // Tap target creature. It doesn't untap during its controller's next untap step.
+        this.getRightHalfCard().getSpellAbility().addEffect(new TapTargetEffect());
+        this.getRightHalfCard().getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect()
                 .setText("It doesn't untap during its controller's next untap step"));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private QueenOfIce(final QueenOfIce card) {

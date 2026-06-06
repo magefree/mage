@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import mage.MageInt;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -25,25 +24,26 @@ public final class ScaldingViper extends AdventureCard {
     }
 
     public ScaldingViper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{1}{R}", "Steam Clean", "{1}{U}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ELEMENTAL, SubType.SNAKE}, "{1}{R}",
+                "Steam Clean",
+                new CardType[]{CardType.SORCERY}, "{1}{U}");
 
-        this.subtype.add(SubType.ELEMENTAL);
-        this.subtype.add(SubType.SNAKE);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        // Scalding Viper
+        this.getLeftHalfCard().setPT(2, 1);
 
         // Whenever an opponent casts a spell with mana value 3 or less, Scalding Viper deals 1 damage to that player.
-        this.addAbility(new SpellCastOpponentTriggeredAbility(
+        this.getLeftHalfCard().addAbility(new SpellCastOpponentTriggeredAbility(
                 Zone.BATTLEFIELD, new DamageTargetEffect(1).withTargetDescription("that player"),
                 filter, false, SetTargetPointer.PLAYER
         ));
 
         // Steam Clean
         // Return target nonland permanent to its owner's hand.
-        this.getSpellCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetNonlandPermanent());
+        this.getRightHalfCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetNonlandPermanent());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private ScaldingViper(final ScaldingViper card) {

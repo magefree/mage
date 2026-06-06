@@ -1,6 +1,5 @@
 package mage.cards.y;
 
-import mage.MageInt;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -18,23 +17,25 @@ import java.util.UUID;
 public final class YoungRedDragon extends AdventureCard {
 
     public YoungRedDragon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{3}{R}", "Bathe in Gold", "{1}{R}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.DRAGON}, "{3}{R}",
+                "Bathe in Gold",
+                new CardType[]{CardType.INSTANT}, "{1}{R}");
 
-        this.subtype.add(SubType.DRAGON);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(2);
+        // Young Red Dragon
+        this.getLeftHalfCard().setPT(3, 2);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Young Red Dragon can't block.
-        this.addAbility(new CantBlockAbility());
+        this.getLeftHalfCard().addAbility(new CantBlockAbility());
 
         // Bathe in Gold
         // Create a Treasure token.
-        this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new TreasureToken()));
+        this.getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new TreasureToken()));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private YoungRedDragon(final YoungRedDragon card) {

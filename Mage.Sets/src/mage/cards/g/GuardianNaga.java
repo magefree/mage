@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalPreventionEffect;
@@ -23,27 +22,29 @@ import java.util.UUID;
 public final class GuardianNaga extends AdventureCard {
 
     public GuardianNaga(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{5}{W}{W}", "Banishing Coils", "{2}{W}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.SNAKE}, "{5}{W}{W}",
+                "Banishing Coils",
+                new CardType[]{CardType.INSTANT}, "{2}{W}");
 
-        this.subtype.add(SubType.SNAKE);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(6);
+        // Guardian Naga
+        this.getLeftHalfCard().setPT(5, 6);
 
         // Vigilance
-        this.addAbility(VigilanceAbility.getInstance());
+        this.getLeftHalfCard().addAbility(VigilanceAbility.getInstance());
 
         // As long as it's your turn, prevent all damage that would be dealt to Guardian Naga.
-        this.addAbility(new SimpleStaticAbility(new ConditionalPreventionEffect(
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new ConditionalPreventionEffect(
                 new PreventAllDamageToSourceEffect(Duration.WhileOnBattlefield), MyTurnCondition.instance,
                 "during your turn, prevent all damage that would be dealt to {this}"
         )));
 
         // Banishing Coils
         // Exile target artifact or enchantment.
-        this.getSpellCard().getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
+        this.getRightHalfCard().getSpellAbility().addEffect(new ExileTargetEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private GuardianNaga(final GuardianNaga card) {

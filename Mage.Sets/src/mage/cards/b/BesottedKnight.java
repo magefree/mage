@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import mage.MageInt;
 import mage.abilities.effects.common.CreateRoleAttachedTargetEffect;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
@@ -17,19 +16,20 @@ import java.util.UUID;
 public final class BesottedKnight extends AdventureCard {
 
     public BesottedKnight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{3}{W}", "Betroth the Beast", "{W}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.KNIGHT}, "{3}{W}",
+                "Betroth the Beast",
+                new CardType[]{CardType.SORCERY}, "{W}");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.KNIGHT);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        // Besotted Knight
+        this.getLeftHalfCard().setPT(3, 3);
 
         // Betroth the Beast
         // Create a Royal Role token attached to target creature you control.
-        this.getSpellCard().getSpellAbility().addEffect(new CreateRoleAttachedTargetEffect(RoleType.ROYAL));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getRightHalfCard().getSpellAbility().addEffect(new CreateRoleAttachedTargetEffect(RoleType.ROYAL));
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private BesottedKnight(final BesottedKnight card) {

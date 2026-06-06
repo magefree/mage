@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
 import mage.abilities.keyword.PlotAbility;
@@ -84,14 +85,10 @@ class FblthpLostOnTheRangePlotGivingEffect extends ContinuousEffectImpl {
     }
 }
 
-class FblthpLostOnTheRangePermissionEffect extends ContinuousEffectImpl {
+class FblthpLostOnTheRangePermissionEffect extends AsThoughEffectImpl {
 
-    FblthpLostOnTheRangePermissionEffect() {
-        this(Duration.WhileOnBattlefield);
-    }
-
-    public FblthpLostOnTheRangePermissionEffect(Duration duration) {
-        super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
+    public FblthpLostOnTheRangePermissionEffect() {
+        super(AsThoughEffectType.ACTIVATE_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may plot nonland cards from the top of your library";
     }
 
@@ -105,12 +102,26 @@ class FblthpLostOnTheRangePermissionEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID affectedControllerId) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.setPlotFromTopOfLibrary(true);
-            return true;
+        if (!source.isControlledBy(affectedControllerId) || !(affectedAbility instanceof PlotAbility) || controller == null) {
+            return false;
         }
-        return false;
+
+        Card card = controller.getLibrary().getFromTop(game);
+        if (card == null) {
+            return false;
+        }
+        return card.getId().equals(objectId) && !card.isLand(game);
+    }
+
+    @Override
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        throw new IllegalArgumentException("Wrong code usage: can't call applies method on empty affectedAbility");
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
     }
 }

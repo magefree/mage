@@ -37,7 +37,7 @@ public enum AsThoughEffectType {
     // TODO: search all PLAY_FROM_NOT_OWN_HAND_ZONE and CAST_AS_INSTANT effects and add support of mainCard and objectId
     PLAY_FROM_NOT_OWN_HAND_ZONE(true, true), // for play lands & cast spells
     CAST_FROM_NOT_OWN_HAND_ZONE(true, true), // for cast spells
-    CAST_ADVENTURE_FROM_NOT_OWN_HAND_ZONE(true, true),
+    ACTIVATE_FROM_NOT_OWN_HAND_ZONE(true, false), // for activate abilities
     CAST_AS_INSTANT(true, true),
     //
     ACTIVATE_AS_INSTANT(true, false),

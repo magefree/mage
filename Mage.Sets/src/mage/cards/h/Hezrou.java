@@ -1,6 +1,5 @@
 package mage.cards.h;
 
-import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -39,22 +38,23 @@ public final class Hezrou extends AdventureCard {
 
 
     public Hezrou(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{5}{B}{B}", "Demonic Stench", "{B}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.FROG, SubType.DEMON}, "{5}{B}{B}",
+                "Demonic Stench",
+                new CardType[]{CardType.INSTANT}, "{B}");
 
-        this.subtype.add(SubType.FROG);
-        this.subtype.add(SubType.DEMON);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
+        // Hezrou
+        this.getLeftHalfCard().setPT(6, 6);
 
         // Whenever one or more creatures you control become blocked, each blocking creature gets -1/-1 until end of turn.
-        this.addAbility(new HezrouTriggeredAbility(new BoostAllEffect(-1, -1, Duration.EndOfTurn, filterBlocking, false)));
+        this.getLeftHalfCard().addAbility(new HezrouTriggeredAbility(new BoostAllEffect(-1, -1, Duration.EndOfTurn, filterBlocking, false)));
 
         // Demonic Stench
         // Each creature that blocked this turn gets -1/-1 until end of turn.
-        this.getSpellCard().getSpellAbility().addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn, filterBlocked, false));
-        this.getSpellCard().getSpellAbility().addWatcher(new BlockedThisTurnWatcher());
+        this.getRightHalfCard().getSpellAbility().addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn, filterBlocked, false));
+        this.getRightHalfCard().getSpellAbility().addWatcher(new BlockedThisTurnWatcher());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private Hezrou(final Hezrou card) {

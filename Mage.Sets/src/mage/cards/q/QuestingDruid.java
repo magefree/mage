@@ -1,6 +1,5 @@
 package mage.cards.q;
 
-import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
@@ -34,25 +33,26 @@ public final class QuestingDruid extends AdventureCard {
     }
 
     public QuestingDruid(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{1}{G}", "Seek the Beast", "{1}{R}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.DRUID}, "{1}{G}",
+                "Seek the Beast",
+                new CardType[]{CardType.INSTANT}, "{1}{R}");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.DRUID);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        // Questing Druid
+        this.getLeftHalfCard().setPT(1, 1);
 
         // Whenever you cast a spell that's white, blue, black, or red, put a +1/+1 counter on Questing Druid.
-        this.addAbility(new SpellCastControllerTriggeredAbility(
+        this.getLeftHalfCard().addAbility(new SpellCastControllerTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, false
         ));
 
         // Seek the Beast
         // Exile the top two cards of your library. Until your next end step, you may play those cards.
-        this.getSpellCard().getSpellAbility().addEffect(
+        this.getRightHalfCard().getSpellAbility().addEffect(
                 new ExileTopXMayPlayUntilEffect(2, Duration.UntilYourNextEndStep)
         );
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private QuestingDruid(final QuestingDruid card) {

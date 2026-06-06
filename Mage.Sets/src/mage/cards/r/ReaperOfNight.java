@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.Condition;
@@ -24,23 +23,25 @@ import java.util.UUID;
 public final class ReaperOfNight extends AdventureCard {
 
     public ReaperOfNight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{5}{B}{B}", "Harvest Fear", "{3}{B}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.SPECTER}, "{5}{B}{B}",
+                "Harvest Fear",
+                new CardType[]{CardType.SORCERY}, "{3}{B}");
 
-        this.subtype.add(SubType.SPECTER);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(5);
+        // Reaper of Night
+        this.getLeftHalfCard().setPT(4, 5);
 
         // Whenever Reaper of Night attacks, if defending player has two or fewer cards in hand, it gains flying until end of turn.
-        this.addAbility(new AttacksTriggeredAbility(new GainAbilitySourceEffect(
+        this.getLeftHalfCard().addAbility(new AttacksTriggeredAbility(new GainAbilitySourceEffect(
                 FlyingAbility.getInstance(), Duration.EndOfTurn
         ).setText("it gains flying until end of turn")).withInterveningIf(ReaperOfNightCondition.instance));
 
         // Harvest Fear
         // Target opponent discards two cards.
-        this.getSpellCard().getSpellAbility().addEffect(new DiscardTargetEffect(2));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetOpponent());
+        this.getRightHalfCard().getSpellAbility().addEffect(new DiscardTargetEffect(2));
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetOpponent());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private ReaperOfNight(final ReaperOfNight card) {

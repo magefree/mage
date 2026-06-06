@@ -397,8 +397,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, 0);
 
         Permanent rimrock = getPermanent("Rimrock Knight");
-        Assert.assertTrue(rimrock.getRules(currentGame).get(0).startsWith("Adventure Instant")); // must have adventure spell info on battlefield
-        Assert.assertTrue(rimrock.getRules(currentGame).get(1).startsWith("{this} can't block."));
+        Assert.assertTrue(rimrock.getRules(currentGame).get(0).startsWith("{this} can't block."));
     }
 
     /*
@@ -734,7 +733,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         checkExileCount("after exile 3", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Curious Pair", 1);
         // play as adventure spell
         castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Treats to Share");
-        setChoice(playerA, "Hostage Taker"); // Not sure why there is an alternative there. No issue with using either. TODO: investigate?
         waitStackResolved(3, PhaseStep.POSTCOMBAT_MAIN);
         checkPermanentCount("after play 3", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Food Token", 1);
 

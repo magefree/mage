@@ -5,6 +5,7 @@ import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.ZoneChangeEvent;
 
 import java.util.List;
 import java.util.UUID;
@@ -47,6 +48,11 @@ public abstract class CardPart<C extends CardWithPartsImpl<?, C>> extends CardIm
     }
 
     @Override
+    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
+        getParentCard().updateZoneChangeCounter(game, event);
+    }
+
+    @Override
     public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         return getParentCard().moveToZone(toZone, source, game, flag, appliedEffects);
     }
@@ -64,6 +70,18 @@ public abstract class CardPart<C extends CardWithPartsImpl<?, C>> extends CardIm
     @Override
     public C getMainCard() {
         return parentCard;
+    }
+
+    public Card getOtherSide() {
+        Card otherSide;
+        if (!getParentCard().getLeftHalfCard().getId().equals(this.getId())) {
+            otherSide = getParentCard().getLeftHalfCard();
+        } else if (!getParentCard().getRightHalfCard().getId().equals(this.getId())) {
+            otherSide = getParentCard().getRightHalfCard();
+        } else {
+            throw new IllegalStateException("Wrong code usage: Card halves must use different ids");
+        }
+        return otherSide;
     }
 
     @Override

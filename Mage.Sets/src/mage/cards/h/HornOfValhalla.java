@@ -24,25 +24,26 @@ import java.util.UUID;
 public final class HornOfValhalla extends AdventureCard {
 
     public HornOfValhalla(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, new CardType[]{CardType.SORCERY}, "{1}{W}", "Ysgard's Call", "{X}{W}{W}");
-
-        this.subtype.add(SubType.EQUIPMENT);
+        super(ownerId, setInfo,
+                new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.EQUIPMENT}, "{1}{W}",
+                "Ysgard's Call",
+                new CardType[]{CardType.SORCERY}, "{X}{W}{W}");
 
         // Equipped creature gets +1/+1 for each creature you control.
-        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new BoostEquippedEffect(
                 CreaturesYouControlCount.PLURAL, CreaturesYouControlCount.PLURAL
         ).setText("equipped creature gets +1/+1 for each creature you control")).addHint(CreaturesYouControlHint.instance));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
+        this.getLeftHalfCard().addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
 
         // Ysgard's Call
         // Create X 1/1 white Soldier creature tokens.
-        this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(
+        this.getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(
                 new SoldierToken(), GetXValue.instance
         ));
-        
-        this.finalizeAdventure();
+
+        finalizeCard();
     }
 
     private HornOfValhalla(final HornOfValhalla card) {

@@ -6,7 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.cards.Card;
 import mage.cards.CardWithParts;
-import mage.cards.SpellOptionCard;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -20,7 +19,7 @@ public enum IsBeingCastFromHandCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source);
-        if (object instanceof CardWithParts || object instanceof SpellOptionCard) {
+        if (object instanceof CardWithParts) {
             UUID mainCardId = ((Card) object).getMainCard().getId();
             object = game.getObject(mainCardId);
         }

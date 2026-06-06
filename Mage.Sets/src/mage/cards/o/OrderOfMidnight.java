@@ -1,6 +1,5 @@
 package mage.cards.o;
 
-import mage.MageInt;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -19,25 +18,26 @@ import java.util.UUID;
 public final class OrderOfMidnight extends AdventureCard {
 
     public OrderOfMidnight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{1}{B}","Alter Fate", "{1}{B}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.KNIGHT}, "{1}{B}",
+                "Alter Fate",
+                new CardType[]{CardType.SORCERY}, "{1}{B}");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.KNIGHT);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        // Order of Midnight
+        this.getLeftHalfCard().setPT(2, 2);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Order of Midnight can't block.
-        this.addAbility(new CantBlockAbility());
+        this.getLeftHalfCard().addAbility(new CantBlockAbility());
 
         // Alter Fate
         // Return target creature card from your graveyard to your hand.
-        this.getSpellCard().getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        this.getRightHalfCard().getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private OrderOfMidnight(final OrderOfMidnight card) {

@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -27,27 +26,29 @@ public final class GumdropPoisoner extends AdventureCard {
     private static final DynamicValue xValue = new SignInversionDynamicValue(ControllerGainedLifeCount.instance);
 
     public GumdropPoisoner(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{2}{B}", "Tempt with Treats", "{B}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WARLOCK}, "{2}{B}",
+                "Tempt with Treats",
+                new CardType[]{CardType.INSTANT}, "{B}");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WARLOCK);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(2);
+        // Gumdrop Poisoner
+        this.getLeftHalfCard().setPT(3, 2);
 
         // Lifelink
-        this.addAbility(LifelinkAbility.getInstance());
+        this.getLeftHalfCard().addAbility(LifelinkAbility.getInstance());
 
         // When Gumdrop Poisoner enters the battlefield, up to one target creature gets -X/-X until end of turn, where X is the amount of life you gained this turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(xValue, xValue)
                 .setText("up to one target creature gets -X/-X until end of turn, where X is the amount of life you gained this turn"));
         ability.addTarget(new TargetCreaturePermanent(0, 1));
-        this.addAbility(ability.addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
+        ability.addWatcher(new PlayerGainedLifeWatcher());
+        this.getLeftHalfCard().addAbility(ability.addHint(ControllerGainedLifeCount.getHint()));
 
         // Tempt with Treats
         // Create a Food token.
-        this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new FoodToken()));
+        this.getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new FoodToken()));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private GumdropPoisoner(final GumdropPoisoner card) {

@@ -17,7 +17,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardWithParts;
-import mage.cards.CardWithSpellOption;
 import mage.constants.*;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
@@ -165,12 +164,6 @@ public class ForetellAbility extends SpecialAction {
             } else if (!leftHalfCost.isEmpty()) {
                 foretellAbility = new ForetellAbility(card, leftHalfCost, rightHalfCost);
             }
-        } else if (card instanceof CardWithSpellOption) {
-            String creatureCost = CardUtil.reduceCost(card.getMainCard().getManaCost(), amountToReduceCost).getText();
-            String spellCost = CardUtil.reduceCost(((CardWithSpellOption) card).getSpellCard().getManaCost(), amountToReduceCost).getText();
-            game.getState().setValue(card.getMainCard().getId().toString() + "Foretell Cost", creatureCost);
-            game.getState().setValue(card.getMainCard().getId().toString() + "Foretell Split Cost", spellCost);
-            foretellAbility = new ForetellAbility(card, creatureCost, spellCost);
         } else if (!card.isLand(game)) {
             // normal card
             String costText = CardUtil.reduceCost(card.getManaCost(), amountToReduceCost).getText();
@@ -324,25 +317,6 @@ class ForetellAddCostEffect extends ContinuousEffectImpl {
                         ability.setAbilityName(rightHalfCard.getName());
                         game.getState().addOtherAbility(rightHalfCard, ability);
                     }
-                } else if (card instanceof CardWithSpellOption) {
-                    if (foretellCost != null) {
-                        Card creatureCard = card.getMainCard();
-                        ForetellCostAbility ability = new ForetellCostAbility(foretellCost);
-                        ability.setSourceId(creatureCard.getId());
-                        ability.setControllerId(source.getControllerId());
-                        ability.setSpellAbilityType(creatureCard.getSpellAbility().getSpellAbilityType());
-                        ability.setAbilityName(creatureCard.getName());
-                        game.getState().addOtherAbility(creatureCard, ability);
-                    }
-                    if (foretellSplitCost != null) {
-                        Card spellCard = ((CardWithSpellOption) card).getSpellCard();
-                        ForetellCostAbility ability = new ForetellCostAbility(foretellSplitCost);
-                        ability.setSourceId(spellCard.getId());
-                        ability.setControllerId(source.getControllerId());
-                        ability.setSpellAbilityType(spellCard.getSpellAbility().getSpellAbilityType());
-                        ability.setAbilityName(spellCard.getName());
-                        game.getState().addOtherAbility(spellCard, ability);
-                    }
                 } else if (foretellCost != null) {
                     ForetellCostAbility ability = new ForetellCostAbility(foretellCost);
                     ability.setSourceId(card.getId());
@@ -421,12 +395,6 @@ class ForetellCostAbility extends SpellAbility {
                     } else if (((CardWithParts) card).getRightHalfCard().getName().equals(abilityName)) {
                         return ((CardWithParts) card).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
                     }
-                } else if (card instanceof CardWithSpellOption) {
-                    if (card.getMainCard().getName().equals(abilityName)) {
-                        return card.getMainCard().getSpellAbility().canActivate(playerId, game);
-                    } else if (((CardWithSpellOption) card).getSpellCard().getName().equals(abilityName)) {
-                        return ((CardWithSpellOption) card).getSpellCard().getSpellAbility().canActivate(playerId, game);
-                    }
                 }
                 return card.getSpellAbility().canActivate(playerId, game);
             }
@@ -445,12 +413,6 @@ class ForetellCostAbility extends SpellAbility {
                         spellAbilityCopy = ((CardWithParts) card).getLeftHalfCard().getSpellAbility().copy();
                     } else if (((CardWithParts) card).getRightHalfCard().getName().equals(abilityName)) {
                         spellAbilityCopy = ((CardWithParts) card).getRightHalfCard().getSpellAbility().copy();
-                    }
-                } else if (card instanceof CardWithSpellOption) {
-                    if (card.getMainCard().getName().equals(abilityName)) {
-                        spellAbilityCopy = card.getMainCard().getSpellAbility().copy();
-                    } else if (((CardWithSpellOption) card).getSpellCard().getName().equals(abilityName)) {
-                        spellAbilityCopy = ((CardWithSpellOption) card).getSpellCard().getSpellAbility().copy();
                     }
                 } else {
                     spellAbilityCopy = card.getSpellAbility().copy();

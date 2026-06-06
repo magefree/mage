@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import mage.MageInt;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -32,24 +31,26 @@ public final class CrystalDragon extends AdventureCard {
     }
 
     public CrystalDragon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{4}{W}{W}", "Rob the Hoard", "{1}{W}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.DRAGON}, "{4}{W}{W}",
+                "Rob the Hoard",
+                new CardType[]{CardType.SORCERY}, "{1}{W}");
 
-        this.subtype.add(SubType.DRAGON);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        // Crystal Dragon
+        this.getLeftHalfCard().setPT(4, 4);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Vigilance
-        this.addAbility(VigilanceAbility.getInstance());
+        this.getLeftHalfCard().addAbility(VigilanceAbility.getInstance());
 
         // Rob the Hoard
         // Return target artifact, enchantment, or legendary card from your graveyard to your hand.
-        this.getSpellCard().getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
+        this.getRightHalfCard().getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private CrystalDragon(final CrystalDragon card) {
