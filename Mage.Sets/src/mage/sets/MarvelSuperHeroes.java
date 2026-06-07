@@ -21,6 +21,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Abomination, Terrifying Titan", 198, Rarity.UNCOMMON, mage.cards.a.AbominationTerrifyingTitan.class));
+        cards.add(new SetCardInfo("Agent Maria Hill", 2, Rarity.UNCOMMON, mage.cards.a.AgentMariaHill.class));
         cards.add(new SetCardInfo("Agent Phil Coulson", 4, Rarity.RARE, mage.cards.a.AgentPhilCoulson.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Agent Phil Coulson", 402, Rarity.RARE, mage.cards.a.AgentPhilCoulson.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arc Reactor", 243, Rarity.RARE, mage.cards.a.ArcReactor.class, NON_FULL_USE_VARIOUS));
@@ -60,6 +61,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 286, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 295, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 296, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Go Nuts!", 168, Rarity.COMMON, mage.cards.g.GoNuts.class));
         cards.add(new SetCardInfo("Human Torch, Johnny Storm", 136, Rarity.UNCOMMON, mage.cards.h.HumanTorchJohnnyStorm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Human Torch, Johnny Storm", 321, Rarity.UNCOMMON, mage.cards.h.HumanTorchJohnnyStorm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Invisible Woman, Sue Storm", 17, Rarity.UNCOMMON, mage.cards.i.InvisibleWomanSueStorm.class, NON_FULL_USE_VARIOUS));
