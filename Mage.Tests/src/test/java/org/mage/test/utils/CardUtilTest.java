@@ -3,6 +3,9 @@ package org.mage.test.utils;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.util.CardUtil;
+
+import java.util.stream.IntStream;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -146,5 +149,33 @@ public class CardUtilTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         assertPermanentCount(playerA, tamiyo, 1);
+    }
+
+    @Test
+    public void parseCardNumberAsInt() {
+        // digit numbers
+        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("123"));
+        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("123a"));
+        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("123xxx"));
+        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("a123"));
+        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("xxx123"));
+        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("a123a"));
+        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("xxx123xxx"));
+        Assert.assertEquals(123456, CardUtil.parseCardNumberAsInt("xxx123xxx456xxx"));
+
+        // non-digit numbers and sorting
+        IntStream.range(0, 10).forEach(i -> {
+            Assert.assertEquals("non-digit must be stable fake number", CardUtil.parseCardNumberAsInt("abc"), CardUtil.parseCardNumberAsInt("abc"));
+            Assert.assertTrue("non-digit must be > of any digit number", CardUtil.parseCardNumberAsInt("abc") > CardUtil.parseCardNumberAsInt("123"));
+            Assert.assertTrue("non-digit must be > of any digit number", CardUtil.parseCardNumberAsInt("abc") > CardUtil.parseCardNumberAsInt("x456x"));
+        });
+
+        // restricted empty number
+        Assert.assertThrows(IllegalArgumentException.class, () -> CardUtil.parseCardNumberAsInt(""));
+
+        // restricted token's zero number
+        Assert.assertThrows(IllegalArgumentException.class, () -> CardUtil.parseCardNumberAsInt("0"));
+        Assert.assertThrows(IllegalArgumentException.class, () -> CardUtil.parseCardNumberAsInt("000"));
+        Assert.assertThrows(IllegalArgumentException.class, () -> CardUtil.parseCardNumberAsInt("x0x"));
     }
 }
