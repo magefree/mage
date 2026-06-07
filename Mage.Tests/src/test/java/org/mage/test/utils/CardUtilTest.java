@@ -162,6 +162,8 @@ public class CardUtilTest extends CardTestPlayerBase {
         Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("a123a"));
         Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("xxx123xxx"));
         Assert.assertEquals(123456, CardUtil.parseCardNumberAsInt("xxx123xxx456xxx"));
+        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("-123"));
+        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("xxx-123xxx"));
 
         // non-digit numbers and sorting
         IntStream.range(0, 10).forEach(i -> {
