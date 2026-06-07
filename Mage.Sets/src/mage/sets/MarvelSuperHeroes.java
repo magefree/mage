@@ -77,6 +77,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Kree Commandos", 19, Rarity.COMMON, mage.cards.k.KreeCommandos.class));
         cards.add(new SetCardInfo("Kree Sentinel", 141, Rarity.COMMON, mage.cards.k.KreeSentinel.class));
         cards.add(new SetCardInfo("Lightning Strike", 142, Rarity.COMMON, mage.cards.l.LightningStrike.class));
+        cards.add(new SetCardInfo("Los Diablos Missile Base", 270, Rarity.COMMON, mage.cards.l.LosDiablosMissileBase.class));
         cards.add(new SetCardInfo("Madame Hydra", 221, Rarity.UNCOMMON, mage.cards.m.MadameHydra.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Madame Hydra", 318, Rarity.UNCOMMON, mage.cards.m.MadameHydra.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Madame Hydra", 451, Rarity.UNCOMMON, mage.cards.m.MadameHydra.class, NON_FULL_USE_VARIOUS));
