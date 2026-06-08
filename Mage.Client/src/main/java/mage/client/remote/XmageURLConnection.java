@@ -320,12 +320,17 @@ public class XmageURLConnection {
         return "";
     }
 
+    /**
+     * Start downloading of binary data (real download will ba called in stream read/save)
+     *
+     * @return stream on OK 200 response or null on any other errors
+     */
     public static InputStream downloadBinary(String resourceUrl) {
         return downloadBinary(resourceUrl, false);
     }
 
     /**
-     * Fast download of binary data
+     * Start downloading of binary data  (real download will ba called in stream read/save)
      *
      * @return stream on OK 200 response or null on any other errors
      */
