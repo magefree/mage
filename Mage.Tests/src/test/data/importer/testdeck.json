@@ -1,0 +1,4410 @@
+{
+  "data": {
+    "code": "GRN",
+    "mainBoard": [
+      {
+        "artist": "Svetlin Velinov",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "R",
+          "U"
+        ],
+        "colors": [
+          "R",
+          "U"
+        ],
+        "manaValue": 2.0,
+        "count": 4,
+        "edhrecRank": 626,
+        "flavorText": "\"Result 752: Rapid mass redistribution.\n\"Result 753: Calamitous reverse synthesis.\n\"Result 754: Acute disarrayment.\"\n—Izzet research notes",
+        "foreignData": [
+          {
+            "flavorText": "„Resultat 752: Beschleunigte Masseumverteilung.\"\n„Resultat 753: Ungewollte umgekehrte Synthese.\"\n„Resultat 754: Akuter Formverlust.\"\n—Notizen von Izzet-Forschern",
+            "language": "German",
+            "multiverseId": 453183,
+            "name": "Goblin-Elektromagier",
+            "text": "Spontanzauber und Hexereien, die du wirkst, kosten beim Wirken {1} weniger.",
+            "type": "Kreatur — Goblin, Zauberer"
+          },
+          {
+            "flavorText": "\"Resultado 752: Rápida redistribución de masa.\n\"Resultado 753: Síntesis inversa calamitosa.\n\"Resultado 754: Desbarajuste agudo\".\n—Notas de investigación ízzet",
+            "language": "Spanish",
+            "multiverseId": 453442,
+            "name": "Electromante trasgo",
+            "text": "Te cuesta {1} menos lanzar hechizos de instantáneo o de conjuro.",
+            "type": "Criatura — Hechicero trasgo"
+          },
+          {
+            "flavorText": "« Résultat 752 : redistribution rapide de la masse. »\n« Résultat 753 : synthèse d'inversion désastreuse. »\n« Résultat 754 : désorganisation grave. »\n—Notes de recherche d'Izzet",
+            "language": "French",
+            "multiverseId": 453701,
+            "name": "Électromancien gobelin",
+            "text": "Les sorts d'éphémère et de rituel que vous lancez coûtent {1} de moins à lancer.",
+            "type": "Créature : gobelin et sorcier"
+          },
+          {
+            "flavorText": "\"Risultato 752: rapida redistribuzione di massa.\"\n\"Risultato 753: disastrosa sintesi inversa.\"\n\"Risultato 754: caos intenso.\"\n—Note di ricerca degli Izzet",
+            "language": "Italian",
+            "multiverseId": 453960,
+            "name": "Elettromante Goblin",
+            "text": "Le magie istantaneo e stregoneria che lanci costano {1} in meno per essere lanciate.",
+            "type": "Creatura — Mago Goblin"
+          },
+          {
+            "flavorText": "「結果752：急速な質量再分布。」\n「結果753：悲惨な逆合成。」\n「結果754：深刻な無秩序。」\n――イゼットの研究記録",
+            "language": "Japanese",
+            "multiverseId": 454219,
+            "name": "ゴブリンの電術師",
+            "text": "あなたがインスタントかソーサリーである呪文を唱えるためのコストは{1}少なくなる。",
+            "type": "クリーチャー — ゴブリン・ウィザード"
+          },
+          {
+            "flavorText": "\"결과 752: 빠른 질량 재배치.\n\"결과 753: 비참한 역합성.\n\"결과 754: 갑작스러운 혼란.\"\n—이젯 연구 기록",
+            "language": "Korean",
+            "multiverseId": 454478,
+            "name": "고블린 전기술사",
+            "text": "당신이 발동하는 순간마법 주문과 집중마법 주문은 발동하는 데 {1}이 덜 든다.",
+            "type": "생물 — 고블린 마법사"
+          },
+          {
+            "flavorText": "\"Resultado 752: Redistribuição de massa rápida.\nResultado 753: Síntese reversa calamitosa.\nResultado 754: Desarranjo agudo.\"\n— Anotações de pesquisa Izzet",
+            "language": "Portuguese (Brazil)",
+            "multiverseId": 454737,
+            "name": "Eletromante Goblin",
+            "text": "As mágicas instantâneas e os feitiços que você conjura custam {1} a menos para serem conjurados.",
+            "type": "Criatura — Goblin Mago"
+          },
+          {
+            "flavorText": "«Результат 752: быстрое перераспределение массы.\nРезультат 753: катастрофический обратный синтез.\nРезультат 754: хаотичное расщепление».\n— Исследовательские записки Иззетов",
+            "language": "Russian",
+            "multiverseId": 454996,
+            "name": "Гоблин-Электромант",
+            "text": "Разыгрываемые вами мгновенные заклинания и заклинания волшебства стоят на {1} меньше.",
+            "type": "Существо — Гоблин Чародей"
+          },
+          {
+            "flavorText": "「结果752：物质快速重新分配。\n「结果753：逆向合成造成灾难性后果。\n「结果754：严重紊乱。」\n～伊捷研究纪录",
+            "language": "Chinese Simplified",
+            "multiverseId": 455255,
+            "name": "鬼怪电流术士",
+            "text": "你施放的瞬间与法术咒语减少{1}来施放。",
+            "type": "生物 ～鬼怪／法术师"
+          },
+          {
+            "flavorText": "「結果752：物質快速重新分配。\n「結果753：逆向合成造成災難性後果。\n「結果754：嚴重紊亂。」\n～伊捷研究紀錄",
+            "language": "Chinese Traditional",
+            "multiverseId": 455514,
+            "name": "鬼怪電流術士",
+            "text": "你施放的瞬間與巫術咒語減少{1}來施放。",
+            "type": "生物 ～鬼怪／魔法師"
+          }
+        ],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "221740",
+          "cardKingdomId": "221465",
+          "mcmId": "363853",
+          "mcmMetaId": "206414",
+          "mtgArenaId": "68635",
+          "mtgjsonV4Id": "4132a870-1364-5bd4-a27c-85511dcbd26d",
+          "mtgoId": "69721",
+          "multiverseId": "452924",
+          "scryfallId": "0ae987da-e4b5-4b82-843c-6aaa87262fc8",
+          "scryfallIllustrationId": "725b112d-2637-45c1-aec8-e89981ba5fa3",
+          "scryfallOracleId": "81f06f84-1580-43c0-89d5-08d34541a519",
+          "tcgplayerProductId": "175583"
+        },
+        "isFoil": false,
+        "isReprint": true,
+        "layout": "normal",
+        "legalities": {
+          "brawl": "Legal",
+          "commander": "Legal",
+          "duel": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "pauper": "Legal",
+          "penny": "Legal",
+          "pioneer": "Legal",
+          "standard": "Legal",
+          "vintage": "Legal"
+        },
+        "manaCost": "{U}{R}",
+        "name": "Goblin Electromancer",
+        "number": "174",
+        "originalText": "Instant and sorcery spells you cast cost {1} less to cast.",
+        "originalType": "Creature — Goblin Wizard",
+        "power": "2",
+        "printings": [
+          "C15",
+          "DDJ",
+          "DDS",
+          "GRN",
+          "MM3",
+          "RTR"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/aa61101fa924f216",
+          "cardKingdomFoil": "https://mtgjson.com/links/f9f7a69ce1fa6ad8",
+          "cardmarket": "https://mtgjson.com/links/0274fd67129d83e4",
+          "tcgplayer": "https://mtgjson.com/links/f7a7e5fdc11678a3"
+        },
+        "rarity": "common",
+        "rulings": [
+          {
+            "date": "2017-03-14",
+            "text": "Two Goblin Electromancers will make instant and sorcery spells you cast cost {2} less to cast, and so on."
+          },
+          {
+            "date": "2018-10-05",
+            "text": "To determine the total cost of a spell, start with the mana cost or alternative cost you’re paying, add any cost increases, then apply any cost reductions. The mana value of the spell remains unchanged, no matter what the total cost to cast it was."
+          },
+          {
+            "date": "2018-10-05",
+            "text": "Goblin Electromancer’s effect reduces only generic mana in the spell’s total cost."
+          }
+        ],
+        "setCode": "GRN",
+        "subtypes": [
+          "Goblin",
+          "Wizard"
+        ],
+        "supertypes": [],
+        "text": "Instant and sorcery spells you cast cost {1} less to cast.",
+        "toughness": "2",
+        "type": "Creature — Goblin Wizard",
+        "types": [
+          "Creature"
+        ],
+        "uuid": "7130e8b8-b5d5-5a91-9c36-afd3c68bf048",
+        "watermark": "izzet"
+      },
+      {
+        "artist": "Victor Adame Minguez",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "R",
+          "U"
+        ],
+        "colors": [
+          "R",
+          "U"
+        ],
+        "manaValue": 4.0,
+        "count": 4,
+        "edhrecRank": 2662,
+        "foreignData": [
+          {
+            "language": "German",
+            "multiverseId": 453172,
+            "name": "Knisternder Sceada",
+            "text": "Fliegend\nDie Stärke des Knisternden Sceada ist gleich der Gesamtanzahl an Spontanzauber- und Hexerei-Karten, die du besitzt und die sich im Exil oder in deinem Friedhof befinden.\nWenn der Knisternde Sceada ins Spiel kommt, ziehe eine Karte.",
+            "type": "Kreatur — Sceada"
+          },
+          {
+            "language": "Spanish",
+            "multiverseId": 453431,
+            "name": "Draco chisporroteante",
+            "text": "Vuela.\nLa fuerza del Draco chisporroteante es igual a la cantidad total de cartas de instantáneo y de conjuro en tu cementerio y en el exilio de las cuales eres propietario.\nCuando el Draco chisporroteante entre al campo de batalla, roba una carta.",
+            "type": "Criatura — Draco"
+          },
+          {
+            "language": "French",
+            "multiverseId": 453690,
+            "name": "Drakôn crépitant",
+            "text": "Vol\nLa force du Drakôn crépitant est égale au nombre total de cartes d'éphémère et de rituel que vous possédez en exil et dans votre cimetière.\nQuand le Drakôn crépitant arrive sur le champ de bataille, piochez une carte.",
+            "type": "Créature : drakôn"
+          },
+          {
+            "language": "Italian",
+            "multiverseId": 453949,
+            "name": "Draghetto Crepitante",
+            "text": "Volare\nLa forza del Draghetto Crepitante è pari al numero totale di carte istantaneo e stregoneria che possiedi in esilio e nel tuo cimitero.\nQuando il Draghetto Crepitante entra nel campo di battaglia, pesca una carta.",
+            "type": "Creatura — Draghetto"
+          },
+          {
+            "language": "Japanese",
+            "multiverseId": 454208,
+            "name": "弾けるドレイク",
+            "text": "飛行\n弾けるドレイクのパワーは、追放領域かあなたの墓地にあり、あなたがオーナーであり、インスタントかソーサリーであるカードの枚数に等しい。\n弾けるドレイクが戦場に出たとき、カードを１枚引く。",
+            "type": "クリーチャー — ドレイク"
+          },
+          {
+            "language": "Korean",
+            "multiverseId": 454467,
+            "name": "파직거리는 드레이크",
+            "text": "비행\n파직거리는 드레이크의 공격력은 추방 영역과 당신의 무덤에 있는 당신이 소유한 순간마법과 집중마법 카드 수의 합과 같다.\n파직거리는 드레이크가 전장에 들어올 때, 카드 한 장을 뽑는다.",
+            "type": "생물 — 드레이크"
+          },
+          {
+            "language": "Portuguese (Brazil)",
+            "multiverseId": 454726,
+            "name": "Dragonete Fagulhante",
+            "text": "Voar\nO poder de Dragonete Fagulhante é igual ao número de cards de mágica instantânea e feitiço que você possui no exílio e em seu cemitério.\nQuando Dragonete Fagulhante entrar no campo de batalha, compre um card.",
+            "type": "Criatura — Dragonete"
+          },
+          {
+            "language": "Russian",
+            "multiverseId": 454985,
+            "name": "Трескучий Дрейк",
+            "text": "Полет\nСила Трескучего Дрейка равна суммарному количеству принадлежащих вам карт мгновенных заклинаний и волшебства в изгнании и на вашем кладбище.\nКогда Трескучий Дрейк выходит на поле битвы, возьмите карту.",
+            "type": "Существо — Дрейк"
+          },
+          {
+            "language": "Chinese Simplified",
+            "multiverseId": 455244,
+            "name": "爆响龙兽",
+            "text": "飞行\n爆响龙兽的力量等同于放逐区中由你拥有之瞬间与法术牌数量和你坟墓场中这两类牌数量的加总。\n当爆响龙兽进战场时，抓一张牌。",
+            "type": "生物 ～龙兽"
+          },
+          {
+            "language": "Chinese Traditional",
+            "multiverseId": 455503,
+            "name": "爆響龍獸",
+            "text": "飛行\n爆響龍獸的力量等同於放逐區中由你擁有之瞬間與巫術牌數量和你墳墓場中這兩類牌數量的加總。\n當爆響龍獸進戰場時，抽一張牌。",
+            "type": "生物 ～龍獸"
+          }
+        ],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "221828",
+          "cardKingdomId": "221555",
+          "mcmId": "364125",
+          "mcmMetaId": "265353",
+          "mtgArenaId": "68624",
+          "mtgjsonV4Id": "1fa4225b-a768-5c4a-a73e-4bc85073a3f0",
+          "mtgoId": "69699",
+          "multiverseId": "452913",
+          "scryfallId": "f00fa3a7-e3e2-4b23-a126-a076e75b5dbd",
+          "scryfallIllustrationId": "bb4d6109-3558-4c56-bd8a-f0d0d5e930ca",
+          "scryfallOracleId": "c8b4eba6-88ce-42d7-a235-5a4765a4a981",
+          "tcgplayerProductId": "176831"
+        },
+        "isFoil": false,
+        "keywords": [
+          "Flying"
+        ],
+        "layout": "normal",
+        "legalities": {
+          "brawl": "Legal",
+          "commander": "Legal",
+          "duel": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "penny": "Legal",
+          "pioneer": "Legal",
+          "standard": "Legal",
+          "vintage": "Legal"
+        },
+        "manaCost": "{U}{U}{R}{R}",
+        "name": "Crackling Drake",
+        "number": "163",
+        "originalText": "Flying\nCrackling Drake's power is equal to the total number of instant and sorcery cards you own in exile and in your graveyard.\nWhen Crackling Drake enters the battlefield, draw a card.",
+        "originalType": "Creature — Drake",
+        "power": "*",
+        "printings": [
+          "C19",
+          "C20",
+          "GRN"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/31d2d3f7099c74b2",
+          "cardKingdomFoil": "https://mtgjson.com/links/848e12610b4191c2",
+          "cardmarket": "https://mtgjson.com/links/a67f0f7b14a3cea6",
+          "tcgplayer": "https://mtgjson.com/links/e6ddf29ee7034537"
+        },
+        "rarity": "uncommon",
+        "rulings": [
+          {
+            "date": "2018-10-05",
+            "text": "If any exiled cards you own are face down, they have no characteristics. If they’re normally instants or sorceries, they won’t be counted."
+          },
+          {
+            "date": "2018-10-05",
+            "text": "The ability that defines Crackling Drake’s power works in all zones."
+          }
+        ],
+        "setCode": "GRN",
+        "subtypes": [
+          "Drake"
+        ],
+        "supertypes": [],
+        "text": "Flying\nCrackling Drake's power is equal to the total number of instant and sorcery cards you own in exile and in your graveyard.\nWhen Crackling Drake enters the battlefield, draw a card.",
+        "toughness": "4",
+        "type": "Creature — Drake",
+        "types": [
+          "Creature"
+        ],
+        "uuid": "085c5343-6060-5d4e-a967-3b40e64246f2",
+        "watermark": "izzet"
+      },
+      {
+        "artist": "Mark Winters",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "U"
+        ],
+        "colors": [
+          "U"
+        ],
+        "manaValue": 4.0,
+        "count": 2,
+        "edhrecRank": 1050,
+        "flavorText": "Rumors float through the city like crows, alighting on citizens seemingly at random.",
+        "foreignData": [
+          {
+            "flavorText": "Gerüchte flattern wie Krähen durch die Stadt und landen scheinbar zufällig auf den Bürgern.",
+            "language": "German",
+            "multiverseId": 453054,
+            "name": "Murmelnder Mystiker",
+            "text": "Immer wenn du einen Spontanzauber oder eine Hexerei wirkst, erzeuge einen 1/1 blauen Vogel-Illusion-Kreaturenspielstein mit Flugfähigkeit.",
+            "type": "Kreatur — Mensch, Zauberer"
+          },
+          {
+            "flavorText": "Los rumores revolotean por la ciudad como cuervos, posándose sobre algunos ciudadanos al azar... o eso parece.",
+            "language": "Spanish",
+            "multiverseId": 453313,
+            "name": "Místico murmurador",
+            "text": "Siempre que lances un hechizo de instantáneo o de conjuro, crea una ficha de criatura Ilusión Ave azul 1/1 con la habilidad de volar.",
+            "type": "Criatura — Hechicero humano"
+          },
+          {
+            "flavorText": "Les rumeurs circulent en ville telles des nuées de corbeaux, se posant apparemment au hasard sur les citoyens.",
+            "language": "French",
+            "multiverseId": 453572,
+            "name": "Mystique bruissant",
+            "text": "À chaque fois que vous lancez un sort d'éphémère ou de rituel, créez un jeton de créature 1/1 bleue Oiseau et Illusion avec le vol.",
+            "type": "Créature : humain et sorcier"
+          },
+          {
+            "flavorText": "Le dicerie fluttuano attraverso la città come corvi, posandosi sui cittadini in modo apparentemente casuale.",
+            "language": "Italian",
+            "multiverseId": 453831,
+            "name": "Mistico Mormorante",
+            "text": "Ogniqualvolta lanci una magia istantaneo o stregoneria, crea una pedina creatura Illusione Uccello 1/1 blu con volare.",
+            "type": "Creatura — Mago Umano"
+          },
+          {
+            "flavorText": "噂はカラスのように街中を舞い、見たところ無作為な市民の上に降りた。",
+            "language": "Japanese",
+            "multiverseId": 454090,
+            "name": "つぶやく神秘家",
+            "text": "あなたがインスタントかソーサリーである呪文を唱えるたび、飛行を持つ青の１/１の鳥・イリュージョン・クリーチャー・トークンを１体生成する。",
+            "type": "クリーチャー — 人間・ウィザード"
+          },
+          {
+            "flavorText": "소문은 까마귀처럼 도시를 떠다니며, 무작위로 고른 것처럼 시민들 위에 내려앉는다.",
+            "language": "Korean",
+            "multiverseId": 454349,
+            "name": "속삭이는 신비주의자",
+            "text": "당신이 순간마법 또는 집중마법 주문을 발동할 때마다, 비행을 가진 1/1 청색 조류 환영 생물 토큰 한 개를 만든다.",
+            "type": "생물 — 인간 마법사"
+          },
+          {
+            "flavorText": "Os rumores flutuam pela cidade como corvos, aludindo a cidadãos com aparente aleatoriedade.",
+            "language": "Portuguese (Brazil)",
+            "multiverseId": 454608,
+            "name": "Místico dos Murmúrios",
+            "text": "Toda vez que você conjurar uma mágica instantânea ou um feitiço, crie uma ficha de criatura azul 1/1 do tipo Ave Ilusão com voar.",
+            "type": "Criatura — Humano Mago"
+          },
+          {
+            "flavorText": "Слухи кружат над городом, словно вороны, и садятся на горожан как будто случайно.",
+            "language": "Russian",
+            "multiverseId": 454867,
+            "name": "Шепчущий Мистик",
+            "text": "Каждый раз, когда вы разыгрываете мгновенное заклинание или заклинание волшебства, создайте одну фишку существа 1/1 синяя Птица Иллюзия с Полетом.",
+            "type": "Существо — Человек Чародей"
+          },
+          {
+            "flavorText": "谣言如鸦群飞舞城中，看似不经意间就停在市民肩头。",
+            "language": "Chinese Simplified",
+            "multiverseId": 455126,
+            "name": "细语秘教徒",
+            "text": "每当你施放瞬间或法术咒语时，派出一个1/1蓝色，具飞行异能的鸟／虚影衍生生物。",
+            "type": "生物 ～人类／法术师"
+          },
+          {
+            "flavorText": "謠言如鴉群飛舞城中，看似不經意間就停在市民肩頭。",
+            "language": "Chinese Traditional",
+            "multiverseId": 455385,
+            "name": "細語秘教徒",
+            "text": "每當你施放瞬間或巫術咒語時，派出一個1/1藍色，具飛行異能的鳥／虛影衍生生物。",
+            "type": "生物 ～人類／魔法師"
+          }
+        ],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "221730",
+          "cardKingdomId": "221446",
+          "mcmId": "363622",
+          "mcmMetaId": "265104",
+          "mtgArenaId": "68506",
+          "mtgjsonV4Id": "3e4780a3-f606-5424-818b-fe3fd32ee490",
+          "mtgoId": "69463",
+          "multiverseId": "452795",
+          "scryfallId": "5fc6adff-dcb3-456d-a8c2-0e77b784ff89",
+          "scryfallIllustrationId": "c4773a04-1364-4dd6-a62b-07da23a61a35",
+          "scryfallOracleId": "dcd4da46-5438-4454-8b1b-43ca51bda1f9",
+          "tcgplayerProductId": "175547"
+        },
+        "isFoil": false,
+        "layout": "normal",
+        "legalities": {
+          "brawl": "Legal",
+          "commander": "Legal",
+          "duel": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "penny": "Legal",
+          "pioneer": "Legal",
+          "standard": "Legal",
+          "vintage": "Legal"
+        },
+        "manaCost": "{3}{U}",
+        "name": "Murmuring Mystic",
+        "number": "45",
+        "originalText": "Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.",
+        "originalType": "Creature — Human Wizard",
+        "power": "1",
+        "printings": [
+          "C20",
+          "GRN"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/0a40e5143200aa60",
+          "cardKingdomFoil": "https://mtgjson.com/links/5b1dc66d02cba8c6",
+          "cardmarket": "https://mtgjson.com/links/73eb2a413ae2988b",
+          "tcgplayer": "https://mtgjson.com/links/251a3b8e75347bd0"
+        },
+        "rarity": "uncommon",
+        "rulings": [
+          {
+            "date": "2018-10-05",
+            "text": "Murmuring Mystic’s triggered ability resolves before the spell that caused it to trigger. It resolves even if that spell is countered."
+          }
+        ],
+        "setCode": "GRN",
+        "subtypes": [
+          "Human",
+          "Wizard"
+        ],
+        "supertypes": [],
+        "text": "Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.",
+        "toughness": "5",
+        "type": "Creature — Human Wizard",
+        "types": [
+          "Creature"
+        ],
+        "uuid": "12584dbf-8696-59d0-b292-3f3ec1910c49"
+      },
+      {
+        "artist": "Slawomir Maniak",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "R"
+        ],
+        "colors": [
+          "R"
+        ],
+        "manaValue": 4.0,
+        "count": 1,
+        "edhrecRank": 10215,
+        "flavorText": "Some storms never blow over.",
+        "foreignData": [
+          {
+            "flavorText": "Einige Stürme ziehen nie vorüber.",
+            "language": "German",
+            "multiverseId": 453100,
+            "name": "Lichtbogen-Phoenix",
+            "text": "Fliegend, Eile\nZu Beginn des Kampfes in deinem Zug und falls du in diesem Zug drei oder mehr Spontanzauber und/oder Hexereien gewirkt hast, bringe den Lichtbogen-Phoenix aus deinem Friedhof ins Spiel zurück.",
+            "type": "Kreatur — Phoenix"
+          },
+          {
+            "flavorText": "Algunas tormentas nunca amainan.",
+            "language": "Spanish",
+            "multiverseId": 453359,
+            "name": "Fénix arcobrillante",
+            "text": "Vuela, prisa.\nAl comienzo del combate en tu turno, si lanzaste tres o más hechizos de instantáneo y/o de conjuro este turno, regresa el Fénix arcobrillante de tu cementerio al campo de batalla.",
+            "type": "Criatura — Fénix"
+          },
+          {
+            "flavorText": "Certains orages ne se dissipent jamais.",
+            "language": "French",
+            "multiverseId": 453618,
+            "name": "Phénix d'arc",
+            "text": "Vol, célérité\nAu début du combat pendant votre tour, si vous avez lancé au moins trois sorts d'éphémère et/ou de rituel ce tour-ci, renvoyez le Phénix d'arc sur le champ de bataille depuis votre cimetière.",
+            "type": "Créature : phénix"
+          },
+          {
+            "flavorText": "Alcune tempeste non si placano mai.",
+            "language": "Italian",
+            "multiverseId": 453877,
+            "name": "Fenice dell'Arcolampo",
+            "text": "Volare, rapidità\nAll'inizio del combattimento nel tuo turno, se hai lanciato tre o più magie istantaneo e/o stregoneria in questo turno, rimetti sul campo di battaglia la Fenice dell'Arcolampo dal tuo cimitero.",
+            "type": "Creatura — Fenice"
+          },
+          {
+            "flavorText": "吹き止まない嵐もある。",
+            "language": "Japanese",
+            "multiverseId": 454136,
+            "name": "弧光のフェニックス",
+            "text": "飛行、速攻\nあなたのターンの戦闘の開始時に、このターンにあなたがインスタントかソーサリーである呪文を３つ以上唱えていた場合、あなたの墓地から弧光のフェニックスを戦場に戻す。",
+            "type": "クリーチャー — フェニックス"
+          },
+          {
+            "flavorText": "어떤 폭풍은 절대 사그라들지 않는다.",
+            "language": "Korean",
+            "multiverseId": 454395,
+            "name": "아크불빛 불사조",
+            "text": "비행, 신속\n당신의 턴 전투시작에, 당신이 이번 턴에 순간마법 및/또는 집중마법 주문을 세 개 이상 발동했다면, 당신의 무덤에서 아크불빛 불사조를 전장으로 되돌린다.",
+            "type": "생물 — 불사조"
+          },
+          {
+            "flavorText": "Algumas tempestades jamais se acalmam.",
+            "language": "Portuguese (Brazil)",
+            "multiverseId": 454654,
+            "name": "Fênix Arco-lume",
+            "text": "Voar, ímpeto\nNo início do combate no seu turno, se você conjurou três ou mais mágicas instantâneas e/ou feitiços neste turno, devolva Fênix Arco-lume de seu cemitério para o campo de batalha.",
+            "type": "Criatura — Fênix"
+          },
+          {
+            "flavorText": "Некоторые бури никогда не утихают.",
+            "language": "Russian",
+            "multiverseId": 454913,
+            "name": "Феникс Дуги Света",
+            "text": "Полет, Ускорение\nВ начале боя во время вашего хода, если вы разыграли не менее трех мгновенных заклинаний и (или) заклинаний волшебства в этом ходу, верните Феникса Дуги Света из вашего кладбища на поле битвы.",
+            "type": "Существо — Феникс"
+          },
+          {
+            "flavorText": "某些风暴永不停歇。",
+            "language": "Chinese Simplified",
+            "multiverseId": 455172,
+            "name": "弧光凤凰",
+            "text": "飞行，敏捷\n在你回合的战斗开始时，若你本回合中施放过三个或更多瞬间与法术咒语，则将弧光凤凰从你的坟墓场移回战场。",
+            "type": "生物 ～凤凰"
+          },
+          {
+            "flavorText": "某些風暴永不停歇。",
+            "language": "Chinese Traditional",
+            "multiverseId": 455431,
+            "name": "弧光鳳凰",
+            "text": "飛行，敏捷\n在你回合的戰鬥開始時，若你本回合中施放過三個或更多瞬間與巫術咒語，則將弧光鳳凰從你的墳墓場移回戰場。",
+            "type": "生物 ～鳳凰"
+          }
+        ],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "221824",
+          "cardKingdomId": "221551",
+          "mcmId": "364116",
+          "mcmMetaId": "265344",
+          "mtgArenaId": "68552",
+          "mtgjsonV4Id": "08b27673-d7f7-521a-bec1-8cd6f2b4f88d",
+          "mtgoId": "69555",
+          "multiverseId": "452841",
+          "scryfallId": "787de9ce-02c5-4a17-a88b-d38e83dbeb0b",
+          "scryfallIllustrationId": "0aa75a78-f9fe-438a-b0a3-72c017e1d61d",
+          "scryfallOracleId": "a80ea391-54d1-4b61-95a3-f8deb4cbe842",
+          "tcgplayerProductId": "176685"
+        },
+        "isFoil": false,
+        "keywords": [
+          "Flying",
+          "Haste"
+        ],
+        "layout": "normal",
+        "legalities": {
+          "brawl": "Legal",
+          "commander": "Legal",
+          "duel": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "pioneer": "Legal",
+          "standard": "Legal",
+          "vintage": "Legal"
+        },
+        "manaCost": "{3}{R}",
+        "name": "Arclight Phoenix",
+        "number": "91",
+        "originalText": "Flying, haste\nAt the beginning of combat on your turn, if you've cast three or more instant and sorcery spells this turn, return Arclight Phoenix from your graveyard to the battlefield.",
+        "originalType": "Creature — Phoenix",
+        "power": "3",
+        "printings": [
+          "GRN",
+          "PGRN"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/54be559fe3eafee9",
+          "cardKingdomFoil": "https://mtgjson.com/links/3b9edcca6862b746",
+          "cardmarket": "https://mtgjson.com/links/5ed3d86e53c27205",
+          "tcgplayer": "https://mtgjson.com/links/57346bfebeb26a14"
+        },
+        "rarity": "mythic",
+        "rulings": [
+          {
+            "date": "2018-10-05",
+            "text": "Because the beginning of combat step is before attackers are declared, you can attack with Arclight Phoenix during the same combat it returns to the battlefield."
+          }
+        ],
+        "setCode": "GRN",
+        "subtypes": [
+          "Phoenix"
+        ],
+        "supertypes": [],
+        "text": "Flying, haste\nAt the beginning of combat on your turn, if you've cast three or more instant and sorcery spells this turn, return Arclight Phoenix from your graveyard to the battlefield.",
+        "toughness": "2",
+        "type": "Creature — Phoenix",
+        "types": [
+          "Creature"
+        ],
+        "uuid": "864c94a7-a6d7-5055-bb8f-8709f90cfabf"
+      },
+      {
+        "artist": "Svetlin Velinov",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "R",
+          "U"
+        ],
+        "colors": [
+          "R",
+          "U"
+        ],
+        "manaValue": 6.0,
+        "count": 2,
+        "edhrecRank": 536,
+        "foreignData": [
+          {
+            "language": "German",
+            "multiverseId": 453201,
+            "name": "Niv-Mizzet der Parun",
+            "text": "Dieser Zauberspruch kann nicht neutralisiert werden.\nFliegend\nImmer wenn du eine Karte ziehst, fügt Niv-Mizzet der Parun einem Ziel deiner Wahl 1 Schadenspunkt zu.\nImmer wenn ein Spieler einen Spontanzauber oder eine Hexerei wirkt, ziehst du eine Karte.",
+            "type": "Legendäre Kreatur — Drache, Zauberer"
+          },
+          {
+            "language": "Spanish",
+            "multiverseId": 453460,
+            "name": "Niv-Mízzet, parun",
+            "text": "Este hechizo no puede ser contrarrestado.\nVuela.\nSiempre que robes una carta, Niv-Mízzet, parun hace 1 punto de daño a cualquier objetivo.\nSiempre que un jugador lance un hechizo de instantáneo o de conjuro, tú robas una carta.",
+            "type": "Criatura legendaria — Hechicero dragón"
+          },
+          {
+            "language": "French",
+            "multiverseId": 453719,
+            "name": "Niv-Mizzet, Parun",
+            "text": "Ce sort ne peut pas être contrecarré.\nVol\nÀ chaque fois que vous piochez une carte, Niv-Mizzet, Parun inflige 1 blessure à n'importe quelle cible.\nÀ chaque fois qu'un joueur lance un sort d'éphémère ou de rituel, vous piochez une carte.",
+            "type": "Créature légendaire : dragon et sorcier"
+          },
+          {
+            "language": "Italian",
+            "multiverseId": 453978,
+            "name": "Niv-Mizzet, il Parun",
+            "text": "Questa magia non può essere neutralizzata.\nVolare\nOgniqualvolta peschi una carta, Niv-Mizzet, il Parun infligge 1 danno a un qualsiasi bersaglio.\nOgniqualvolta un giocatore lancia una magia istantaneo o stregoneria, tu peschi una carta.",
+            "type": "Creatura Leggendaria — Mago Drago"
+          },
+          {
+            "language": "Japanese",
+            "multiverseId": 454237,
+            "name": "パルン、ニヴ＝ミゼット",
+            "text": "この呪文は打ち消されない。\n飛行\nあなたがカードを１枚引くたび、クリーチャー１体かプレインズウォーカー１体かプレイヤー１人を対象とする。パルン、ニヴ＝ミゼットはそれに１点のダメージを与える。\nプレイヤーがインスタントかソーサリーである呪文を唱えるたび、あなたはカードを１枚引く。",
+            "type": "伝説のクリーチャー — ドラゴン・ウィザード"
+          },
+          {
+            "language": "Korean",
+            "multiverseId": 454496,
+            "name": "페이런, 니브-미젯",
+            "text": "이 주문은 무효화될 수 없다.\n비행\n당신이 카드를 뽑을 때마다, 원하는 목표를 정한다. 페이런, 니브-미젯은 그 목표에게 피해 1점을 입힌다.\n플레이어가 순간마법 또는 집중마법 주문을 발동할 때마다, 당신은 카드 한 장을 뽑는다.",
+            "type": "전설적 생물 — 용 마법사"
+          },
+          {
+            "language": "Portuguese (Brazil)",
+            "multiverseId": 454755,
+            "name": "Niv-Mizzet, Parun",
+            "text": "Esta mágica não pode ser anulada.\nVoar\nToda vez que você compra um card, Niv-Mizzet, Parun, causa 1 ponto de dano a qualquer alvo.\nToda vez que um jogador conjura uma mágica instantânea ou um feitiço, você compra um card.",
+            "type": "Criatura Lendária — Dragão Mago"
+          },
+          {
+            "language": "Russian",
+            "multiverseId": 455014,
+            "name": "Нив-Миззет, Отец",
+            "text": "Это заклинание не может быть отменено.\nПолет\nКаждый раз, когда вы берете карту, Нив-Миззет, Отец наносит 1 повреждение любой цели.\nКаждый раз, когда игрок разыгрывает мгновенное заклинание или заклинание волшебства, вы берете карту.",
+            "type": "Легендарное Существо — Дракон Чародей"
+          },
+          {
+            "language": "Chinese Simplified",
+            "multiverseId": 455273,
+            "name": "元祖尼米捷",
+            "text": "此咒语不能被反击。\n飞行\n每当你抓一张牌时，元祖尼米捷对任意一个目标造成1点伤害。\n每当任一牌手施放瞬间或法术咒语时，你抓一张牌。",
+            "type": "传奇生物 ～龙／法术师"
+          },
+          {
+            "language": "Chinese Traditional",
+            "multiverseId": 455532,
+            "name": "元祖尼米捷",
+            "text": "此咒語不能被反擊。\n飛行\n每當你抽一張牌時，元祖尼米捷對任意一個目標造成1點傷害。\n每當任一玩家施放瞬間或巫術咒語時，你抽一張牌。",
+            "type": "傳奇生物 ～龍／魔法師"
+          }
+        ],
+        "frameEffects": [
+          "legendary"
+        ],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "221742",
+          "cardKingdomId": "221467",
+          "mcmId": "363850",
+          "mcmMetaId": "265254",
+          "mtgArenaId": "68653",
+          "mtgjsonV4Id": "11c1c146-ba7f-50d9-9122-2dce74640e92",
+          "mtgoId": "69757",
+          "multiverseId": "452942",
+          "scryfallId": "6f3d2dc5-7b9d-4af6-9f3b-4de90fbf63c9",
+          "scryfallIllustrationId": "e0137c61-511d-4a18-91d4-cac4437f8692",
+          "scryfallOracleId": "33666a98-812f-4892-9f8d-33e0cbecc340",
+          "tcgplayerProductId": "175582"
+        },
+        "isFoil": false,
+        "keywords": [
+          "Flying"
+        ],
+        "layout": "normal",
+        "leadershipSkills": {
+          "brawl": true,
+          "commander": true,
+          "oathbreaker": false
+        },
+        "legalities": {
+          "brawl": "Legal",
+          "commander": "Legal",
+          "duel": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "pioneer": "Legal",
+          "standard": "Legal",
+          "vintage": "Legal"
+        },
+        "manaCost": "{U}{U}{U}{R}{R}{R}",
+        "name": "Niv-Mizzet, Parun",
+        "number": "192",
+        "originalText": "This spell can't be countered.\nFlying\nWhenever you draw a card, Niv-Mizzet, Parun deals 1 damage to any target.\nWhenever a player casts an instant or sorcery spell, you draw a card.",
+        "originalType": "Legendary Creature — Dragon Wizard",
+        "power": "5",
+        "printings": [
+          "GRN",
+          "PGRN"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/486795346c9b8262",
+          "cardKingdomFoil": "https://mtgjson.com/links/fad3914fe3b86e6c",
+          "cardmarket": "https://mtgjson.com/links/63f79df53eb503a5",
+          "tcgplayer": "https://mtgjson.com/links/43fadbae2f01ecd6"
+        },
+        "rarity": "rare",
+        "rulings": [
+          {
+            "date": "2018-10-05",
+            "text": "If an effect instructs you to draw multiple cards, Niv-Mizzet’s first triggered ability triggers that many times. You choose targets for those abilities after you’ve drawn all of the cards."
+          },
+          {
+            "date": "2018-10-05",
+            "text": "If a spell or ability causes you to put cards into your hand without specifically using the word “draw,” Niv-Mizzet’s first triggered ability won’t trigger."
+          },
+          {
+            "date": "2018-10-05",
+            "text": "Niv-Mizzet’s second triggered ability resolves before the spell that caused it to trigger. It resolves even if that spell is countered. This causes its first triggered ability to trigger, and that also resolves before the spell."
+          },
+          {
+            "date": "2018-10-05",
+            "text": "Players can cast spells and activate abilities after Niv-Mizzet’s second triggered ability resolves but before the spell that caused it to trigger does. Notably, the card you draw may be able to counter that spell."
+          }
+        ],
+        "setCode": "GRN",
+        "subtypes": [
+          "Dragon",
+          "Wizard"
+        ],
+        "supertypes": [
+          "Legendary"
+        ],
+        "text": "This spell can't be countered.\nFlying\nWhenever you draw a card, Niv-Mizzet, Parun deals 1 damage to any target.\nWhenever a player casts an instant or sorcery spell, you draw a card.",
+        "toughness": "5",
+        "type": "Legendary Creature — Dragon Wizard",
+        "types": [
+          "Creature"
+        ],
+        "uuid": "f72d5581-dd94-5ecb-8ad1-a86b1bdf6df1",
+        "watermark": "izzet"
+      },
+      {
+        "artist": "James Ryman",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "U"
+        ],
+        "colors": [
+          "U"
+        ],
+        "manaValue": 2.0,
+        "count": 4,
+        "edhrecRank": 1976,
+        "flavorText": "While other pirates prowl for treasure, Captain Parrish plunders secrets.",
+        "foreignData": [
+          {
+            "flavorText": "Während andere Piraten nach Schätzen suchen, verlangt es Kapitän Parrish nur nach Geheimnissen.",
+            "language": "German",
+            "multiverseId": 435499,
+            "name": "Den Kurs festlegen",
+            "text": "Ziehe zwei Karten. Wirf dann eine Karte ab, es sei denn, du hast in diesem Zug mit mindestens einer Kreatur angegriffen.",
+            "type": "Hexerei"
+          },
+          {
+            "flavorText": "Mientras que otros piratas van por ahí buscando tesoros, la capitana Parrish descubre secretos.",
+            "language": "Spanish",
+            "multiverseId": 437592,
+            "name": "Trazar la ruta",
+            "text": "Roba dos cartas. Luego descarta una carta a menos que hayas atacado con una criatura este turno.",
+            "type": "Conjuro"
+          },
+          {
+            "flavorText": "Tandis que les autres pirates cherchent des trésors, la capitaine Parrish s'empare de secrets.",
+            "language": "French",
+            "multiverseId": 435798,
+            "name": "Tracer un cap",
+            "text": "Piochez deux cartes. Ensuite, défaussez-vous d'une carte à moins que vous n'ayez attaqué avec une créature ce tour-ci.",
+            "type": "Rituel"
+          },
+          {
+            "flavorText": "Mentre altri pirati razziano tesori, la Capitana Parrish saccheggia segreti.",
+            "language": "Italian",
+            "multiverseId": 436097,
+            "name": "Tracciare la Rotta",
+            "text": "Pesca due carte. Poi scarta una carta a meno che tu non abbia attaccato con una creatura in questo turno.",
+            "type": "Stregoneria"
+          },
+          {
+            "flavorText": "他の海賊が宝物を探している間に、船長パリッシュは秘密を略奪する。",
+            "language": "Japanese",
+            "multiverseId": 436396,
+            "name": "航路の作成",
+            "text": "カードを２枚引く。その後、このターンにあなたがクリーチャーで攻撃していないかぎりカード１枚を捨てる。",
+            "type": "ソーサリー"
+          },
+          {
+            "flavorText": "다른 해적들이 보물을 찾아 돌아다니는 동안, 패리시 선장은 비밀을 약탈한다.",
+            "language": "Korean",
+            "multiverseId": 436695,
+            "name": "진로 계획",
+            "text": "카드 두 장을 뽑는다. 그 후 당신이 이 턴에 생물로 공격하지 않았다면 카드 한 장을 버린다.",
+            "type": "집중마법"
+          },
+          {
+            "flavorText": "Enquanto outros piratas espreitam tesouros, a Capitã Parrish saqueia segredos.",
+            "language": "Portuguese (Brazil)",
+            "multiverseId": 436994,
+            "name": "Traçar uma Rota",
+            "text": "Compre dois cards. Em seguida, descarte um card, a menos que tenha atacado com uma criatura neste turno.",
+            "type": "Feitiço"
+          },
+          {
+            "flavorText": "Остальные пираты охотятся за сокровищами, а капитан Пэрриш похищает секреты.",
+            "language": "Russian",
+            "multiverseId": 437293,
+            "name": "Проложить Курс",
+            "text": "Возьмите две карты. Затем сбросьте карту, если только вы не атаковали существом в этом ходу.",
+            "type": "Волшебство"
+          },
+          {
+            "flavorText": "其他海盗看上的是财宝，芭丽许船长盯上的是秘密。",
+            "language": "Chinese Simplified",
+            "multiverseId": 437891,
+            "name": "规划航路",
+            "text": "抓两张牌。然后除非你于本回合中曾以生物攻击，否则弃一张牌。",
+            "type": "法术"
+          },
+          {
+            "flavorText": "其他海盜看上的是財寶，芭麗許船長盯上的是秘密。",
+            "language": "Chinese Traditional",
+            "multiverseId": 438190,
+            "name": "規劃航路",
+            "text": "抽兩張牌。然後除非你於本回合中曾以生物攻擊，否則棄一張牌。",
+            "type": "巫術"
+          }
+        ],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "214344",
+          "cardKingdomId": "214043",
+          "mcmId": "301397",
+          "mcmMetaId": "226886",
+          "mtgArenaId": "66057",
+          "mtgjsonV4Id": "97f24294-bfb0-5776-9133-c96b7193ed1f",
+          "mtgoFoilId": "65109",
+          "mtgoId": "65108",
+          "multiverseId": "435200",
+          "scryfallId": "98291778-2ec2-47e2-ac99-5f8cfbb3cf24",
+          "scryfallIllustrationId": "66a9bdee-5088-4f19-94cf-1e436f5e5f6a",
+          "scryfallOracleId": "05878e49-93ad-4144-9c50-a0bb86126c2e",
+          "tcgplayerProductId": "145262"
+        },
+        "isFoil": false,
+        "layout": "normal",
+        "legalities": {
+          "commander": "Legal",
+          "duel": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "pioneer": "Legal",
+          "vintage": "Legal"
+        },
+        "manaCost": "{1}{U}",
+        "name": "Chart a Course",
+        "number": "48",
+        "originalText": "Draw two cards. Then discard a card unless you attacked this turn.",
+        "originalType": "Sorcery",
+        "printings": [
+          "JMP",
+          "MB1",
+          "XLN"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/726fcf4047094c30",
+          "cardKingdomFoil": "https://mtgjson.com/links/0710f582c939d64d",
+          "cardmarket": "https://mtgjson.com/links/f976d4bccecd8e1e",
+          "tcgplayer": "https://mtgjson.com/links/03819be48df7c896"
+        },
+        "rarity": "uncommon",
+        "rulings": [],
+        "setCode": "XLN",
+        "subtypes": [],
+        "supertypes": [],
+        "text": "Draw two cards. Then discard a card unless you attacked this turn.",
+        "type": "Sorcery",
+        "types": [
+          "Sorcery"
+        ],
+        "uuid": "cefd1be9-025f-524c-8950-7645d9cb3f57"
+      },
+      {
+        "artist": "Wesley Burt",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "R"
+        ],
+        "colors": [
+          "R"
+        ],
+        "manaValue": 2.0,
+        "count": 4,
+        "edhrecRank": 6242,
+        "flavorText": "\"Commander, we caught the Dimir spy and took her ashes into custody.\"\n—Kramm, Wojek security officer",
+        "foreignData": [
+          {
+            "flavorText": "„Kommandeur, wir haben die Dimir-Spionin gefasst und ihre Asche in Gewahrsam genommen.\"\n—Kramm, Wojek-Sicherheitsoffizier",
+            "language": "German",
+            "multiverseId": 453117,
+            "name": "Lavaschlinge",
+            "text": "Die Lavaschlinge fügt einer Kreatur deiner Wahl 4 Schadenspunkte zu. Falls die Kreatur in diesem Zug sterben würde, schicke sie stattdessen ins Exil.",
+            "type": "Hexerei"
+          },
+          {
+            "flavorText": "\"Comandante, descubrimos a la espía dimir y pusimos bajo custodia sus cenizas\".\n—Kramm, guarda de seguridad wojek",
+            "language": "Spanish",
+            "multiverseId": 453376,
+            "name": "Espiral de lava",
+            "text": "La Espiral de lava hace 4 puntos de daño a la criatura objetivo. Si esa criatura fuese a morir este turno, en vez de eso, exíliala.",
+            "type": "Conjuro"
+          },
+          {
+            "flavorText": "« Commandant, nous avons attrapé l'espionne de Dimir et avons mis ses cendres en état d'arrestation. »\n—Kramm, officier de sécurité wojek",
+            "language": "French",
+            "multiverseId": 453635,
+            "name": "Étreinte de lave",
+            "text": "L'Étreinte de lave inflige 4 blessures à une créature ciblée. Si cette créature devait mourir ce tour-ci, exilez-la à la place.",
+            "type": "Rituel"
+          },
+          {
+            "flavorText": "\"Comandante, abbiamo catturato la spia Dimir e messo in stato di fermo le sue ceneri.\"\n—Kramm, agente di sicurezza Wojek",
+            "language": "Italian",
+            "multiverseId": 453894,
+            "name": "Spira di Lava",
+            "text": "La Spira di Lava infligge 4 danni a una creatura bersaglio. Se quella creatura sta per morire in questo turno, invece esiliala.",
+            "type": "Stregoneria"
+          },
+          {
+            "flavorText": "「司令官、ディミーアのスパイを捕らえ、その遺灰を監禁しました。」\n――ウォジェクの警備兵、クラム",
+            "language": "Japanese",
+            "multiverseId": 454153,
+            "name": "溶岩コイル",
+            "text": "クリーチャー１体を対象とする。溶岩コイルはそれに４点のダメージを与える。このターン、そのクリーチャーが死亡するなら、代わりにそれを追放する。",
+            "type": "ソーサリー"
+          },
+          {
+            "flavorText": "\"사령관님, 디미르 스파이를 발견해 그녀의 잿더미를 구속했습니다.\"\n—워젝 보안 장교, 크람",
+            "language": "Korean",
+            "multiverseId": 454412,
+            "name": "용암 고리",
+            "text": "생물을 목표로 정한다. 용암 고리는 그 생물에게 피해 4점을 입힌다. 그 생물이 이 턴에 죽게 된다면, 대신 추방한다.",
+            "type": "집중마법"
+          },
+          {
+            "flavorText": "\"Comandante, capturamos uma espiã Dimir. Estamos com as cinzas dela sob custódia.\"\n— Kramm, oficial de segurança de Wojek",
+            "language": "Portuguese (Brazil)",
+            "multiverseId": 454671,
+            "name": "Hélice de Lava",
+            "text": "Hélice de Lava causa 4 pontos de dano à criatura alvo. Se aquela criatura for morrer neste turno, em vez disso, exile-a.",
+            "type": "Feitiço"
+          },
+          {
+            "flavorText": "«Командир, мы поймали димирскую шпионку и взяли ее пепел под стражу».\n— Крамм, специалист по безопасности Войеков",
+            "language": "Russian",
+            "multiverseId": 454930,
+            "name": "Спираль Лавы",
+            "text": "Спираль Лавы наносит 4 повреждения целевому существу. Если то существо должно умереть в этом ходу, изгоните его вместо этого.",
+            "type": "Волшебство"
+          },
+          {
+            "flavorText": "「指挥官，我们逮到了底密尔间谍，她的灰烬已经收监。」\n～沃耶克警卫克拉姆",
+            "language": "Chinese Simplified",
+            "multiverseId": 455189,
+            "name": "熔岩缠绕",
+            "text": "熔岩缠绕对目标生物造成4点伤害。如果本回合中该生物将死去，则改为将它放逐。",
+            "type": "法术"
+          },
+          {
+            "flavorText": "「指揮官，我們逮到了底密爾間諜，她的灰燼已經收監。」\n～沃耶克警衛克拉姆",
+            "language": "Chinese Traditional",
+            "multiverseId": 455448,
+            "name": "熔岩纏繞",
+            "text": "熔岩纏繞對目標生物造成4點傷害。如果本回合中該生物將死去，則改為將它放逐。",
+            "type": "巫術"
+          }
+        ],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "221800",
+          "cardKingdomId": "221526",
+          "mcmId": "364055",
+          "mcmMetaId": "265316",
+          "mtgArenaId": "68569",
+          "mtgjsonV4Id": "ebbc4b2b-df49-53fb-98cf-2a6b71af728d",
+          "mtgoId": "69589",
+          "multiverseId": "452858",
+          "scryfallId": "f6135cf4-50c2-4e44-b9b0-96e1187a2200",
+          "scryfallIllustrationId": "8ccebed1-8cd9-4468-80ac-37a35cf24933",
+          "scryfallOracleId": "fa71db44-5181-4c51-8b24-7fbedf36e3ca",
+          "tcgplayerProductId": "176562"
+        },
+        "isFoil": false,
+        "layout": "normal",
+        "legalities": {
+          "brawl": "Legal",
+          "commander": "Legal",
+          "duel": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "penny": "Legal",
+          "pioneer": "Legal",
+          "standard": "Legal",
+          "vintage": "Legal"
+        },
+        "manaCost": "{1}{R}",
+        "name": "Lava Coil",
+        "number": "108",
+        "originalText": "Lava Coil deals 4 damage to target creature. If that creature would die this turn, exile it instead.",
+        "originalType": "Sorcery",
+        "printings": [
+          "GRN",
+          "PMEI"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/0a97746020e2daa7",
+          "cardKingdomFoil": "https://mtgjson.com/links/c4f2d6be3673dc41",
+          "cardmarket": "https://mtgjson.com/links/396c3af50df64c6f",
+          "tcgplayer": "https://mtgjson.com/links/62c0707722f7f50a"
+        },
+        "rarity": "uncommon",
+        "rulings": [
+          {
+            "date": "2018-10-05",
+            "text": "Lava Coil’s replacement effect will exile the target creature if it would die this turn for any reason, not just due to lethal damage. It applies to the target creature even if Lava Coil deals no damage to it (due to a prevention effect)."
+          }
+        ],
+        "setCode": "GRN",
+        "subtypes": [],
+        "supertypes": [],
+        "text": "Lava Coil deals 4 damage to target creature. If that creature would die this turn, exile it instead.",
+        "type": "Sorcery",
+        "types": [
+          "Sorcery"
+        ],
+        "uuid": "5a1e6511-67ab-5f6d-b133-0e14b470d092"
+      },
+      {
+        "artist": "Titus Lunter",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "R",
+          "U"
+        ],
+        "colors": [
+          "R",
+          "U"
+        ],
+        "manaValue": 3.0,
+        "count": 1,
+        "edhrecRank": 4333,
+        "foreignData": [
+          {
+            "language": "German",
+            "multiverseId": 453163,
+            "name": "Signalturm-Blitz",
+            "text": "Der Signalturm-Blitz fügt einer Kreatur deiner Wahl Schaden in Höhe der Gesamtanzahl an Spontanzauber- und Hexerei-Karten zu, die du besitzt und die sich im Exil oder in deinem Friedhof befinden.\nKatalyse (Du kannst diese Karte aus deinem Friedhof wirken, indem du zusätzlich zu ihren anderen Kosten eine Karte abwirfst. Schicke sie danach ins Exil.)",
+            "type": "Hexerei"
+          },
+          {
+            "language": "Spanish",
+            "multiverseId": 453422,
+            "name": "Rayo de la atalaya",
+            "text": "El Rayo de la atalaya hace una cantidad de daño a la criatura objetivo igual a la cantidad total de cartas de instantáneo y de conjuro en tu cementerio y en el exilio de las cuales eres propietario.\nRecargar. (Puedes lanzar esta carta desde tu cementerio descartando una carta además de pagar sus otros costes. Luego, exilia esta carta.)",
+            "type": "Conjuro"
+          },
+          {
+            "language": "French",
+            "multiverseId": 453681,
+            "name": "Éclair du flambeau",
+            "text": "L'Éclair du flambeau inflige à une créature ciblée un nombre de blessures égal au nombre total de cartes d'éphémère et de rituel que vous possédez en exil et dans votre cimetière.\nRelancez (Vous pouvez lancer cette carte depuis votre cimetière en vous défaussant d'une carte en plus de payer ses autres coûts. Puis exilez cette carte.)",
+            "type": "Rituel"
+          },
+          {
+            "language": "Italian",
+            "multiverseId": 453940,
+            "name": "Saetta del Faro",
+            "text": "La Saetta del Faro infligge a una creatura bersaglio danno pari al numero totale di carte istantaneo e stregoneria che possiedi in esilio e nel tuo cimitero.\nCarica d'avvio (Puoi lanciare questa carta dal tuo cimitero scartando una carta oltre a pagare i suoi altri costi. Poi esilia questa carta.)",
+            "type": "Stregoneria"
+          },
+          {
+            "language": "Japanese",
+            "multiverseId": 454199,
+            "name": "標の稲妻",
+            "text": "クリーチャー１体を対象とする。標の稲妻はそれに、追放領域かあなたの墓地にあり、あなたがオーナーであり、インスタントかソーサリーであるカードの枚数に等しい点数のダメージを与える。\n再活（あなたはあなたの墓地から、このカードを、これの他のコストの支払いに加えてカード１枚を捨てることで唱えてもよい。その後、このカードを追放する。）",
+            "type": "ソーサリー"
+          },
+          {
+            "language": "Korean",
+            "multiverseId": 454458,
+            "name": "봉화의 번개",
+            "text": "생물을 목표로 정한다. 봉화의 번개는 그 생물에게 추방 영역과 당신의 무덤에 있는 당신이 소유한 순간마법과 집중마법 카드 수의 합만큼 피해를 입힌다.\n강제 시동 (당신은 이 카드의 다른 비용들을 지불하는 것에 추가로 카드를 한 장 버리는 것으로 이 카드를 당신의 무덤에서 발동할 수 있다. 그 후 이 카드를 추방한다.)",
+            "type": "집중마법"
+          },
+          {
+            "language": "Portuguese (Brazil)",
+            "multiverseId": 454717,
+            "name": "Raio do Farol",
+            "text": "Raio do Farol causa à criatura alvo dano igual ao número total de cards de mágica instantânea ou feitiço que você possui no exílio e em seu cemitério.\nRecarregar (Você pode conjurar este card de seu cemitério descartando um card além de pagar seus outros custos. Depois, exile este card.)",
+            "type": "Feitiço"
+          },
+          {
+            "language": "Russian",
+            "multiverseId": 454976,
+            "name": "Сигнальный Разряд",
+            "text": "Сигнальный Разряд наносит целевому существу повреждения, равные суммарному количеству принадлежащих вам карт мгновенных заклинаний и волшебства в изгнании и на вашем кладбище.\nИмпульс (Вы можете разыграть эту карту из вашего кладбища, сбросив карту в дополнение к оплате других ее стоимостей. Затем изгоните эту карту.)",
+            "type": "Волшебство"
+          },
+          {
+            "language": "Chinese Simplified",
+            "multiverseId": 455235,
+            "name": "信标电击",
+            "text": "信标电击对目标生物造成伤害，其数量等同于放逐区中由你拥有之瞬间与法术牌数量和你坟墓场中这两类牌数量的加总。\n再起（你可以从你的坟墓场施放此牌，但必须支付其所需费用并额外弃一张牌。然后放逐此牌。）",
+            "type": "法术"
+          },
+          {
+            "language": "Chinese Traditional",
+            "multiverseId": 455494,
+            "name": "信標電擊",
+            "text": "信標電擊對目標生物造成傷害，其數量等同於放逐區中由你擁有之瞬間與巫術牌數量和你墳墓場中這兩類牌數量的加總。\n再起（你可以從你的墳墓場施放此牌，但必須支付其所需費用並額外棄一張牌。然後放逐此牌。）",
+            "type": "巫術"
+          }
+        ],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "221862",
+          "cardKingdomId": "221589",
+          "mcmId": "364198",
+          "mcmMetaId": "265406",
+          "mtgArenaId": "68615",
+          "mtgjsonV4Id": "34b50961-dd25-54b3-b0e2-1c8071189342",
+          "mtgoId": "69681",
+          "multiverseId": "452904",
+          "scryfallId": "39c9e4b5-364b-4c0b-bb47-266563a6abf2",
+          "scryfallIllustrationId": "c2ce83a1-ddba-429c-9f7b-7e02585ea99d",
+          "scryfallOracleId": "884686dd-515c-4484-a324-e7d126903a42",
+          "tcgplayerProductId": "176857"
+        },
+        "isFoil": false,
+        "keywords": [
+          "Jump-start"
+        ],
+        "layout": "normal",
+        "legalities": {
+          "brawl": "Legal",
+          "commander": "Legal",
+          "duel": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "penny": "Legal",
+          "pioneer": "Legal",
+          "standard": "Legal",
+          "vintage": "Legal"
+        },
+        "manaCost": "{1}{U}{R}",
+        "name": "Beacon Bolt",
+        "number": "154",
+        "originalText": "Beacon Bolt deals damage to target creature equal to the total number of instant and sorcery cards you own in exile and in your graveyard.\nJump-start (You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card.)",
+        "originalType": "Sorcery",
+        "printings": [
+          "GRN"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/30488d7f95d54346",
+          "cardKingdomFoil": "https://mtgjson.com/links/e0fde43746cc1b21",
+          "cardmarket": "https://mtgjson.com/links/7017b3dc4746a10a",
+          "tcgplayer": "https://mtgjson.com/links/21dfc75e775dde47"
+        },
+        "rarity": "uncommon",
+        "rulings": [
+          {
+            "date": "2018-10-05",
+            "text": "Beacon Bolt is still on the stack while you count your instant and sorcery cards in your graveyard and in exile. It doesn’t count itself."
+          },
+          {
+            "date": "2018-10-05",
+            "text": "If any exiled cards you own are face down, they have no characteristics. If they’re normally instants or sorceries, they won’t be counted."
+          },
+          {
+            "date": "2018-10-05",
+            "text": "You must still follow any timing restrictions and permissions, including those based on the card’s type. For instance, you can cast a sorcery using jump-start only when you could normally cast a sorcery."
+          },
+          {
+            "date": "2018-10-05",
+            "text": "A spell cast using jump-start will always be exiled afterward, whether it resolves, it’s countered, or it leaves the stack in some other way."
+          },
+          {
+            "date": "2018-10-05",
+            "text": "If an effect allows you to pay an alternative cost rather than a spell’s mana cost, you may pay that alternative cost when you jump-start a spell. You’ll still discard a card as an additional cost to cast it."
+          },
+          {
+            "date": "2018-10-05",
+            "text": "If a card with jump-start is put into your graveyard during your turn, you’ll be able to cast it right away if it’s legal to do so, before an opponent can take any actions."
+          }
+        ],
+        "setCode": "GRN",
+        "subtypes": [],
+        "supertypes": [],
+        "text": "Beacon Bolt deals damage to target creature equal to the total number of instant and sorcery cards you own in exile and in your graveyard.\nJump-start (You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card.)",
+        "type": "Sorcery",
+        "types": [
+          "Sorcery"
+        ],
+        "uuid": "83db81aa-2e76-5609-bad2-a0adf5427274",
+        "watermark": "izzet"
+      },
+      {
+        "artist": "Tyler Jacobson",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "U"
+        ],
+        "colors": [
+          "U"
+        ],
+        "manaValue": 1.0,
+        "count": 4,
+        "edhrecRank": 280,
+        "flavorText": "The crystal pulsed with the power of Teferi's planeswalker spark. Had Jhoira given him a blessing or a curse?",
+        "foreignData": [
+          {
+            "flavorText": "Der Kristall pulsierte mit der Macht von Teferis Planeswalker-Funken. War Jhoiras Geschenk ein Segen oder ein Fluch?",
+            "language": "German",
+            "multiverseId": 443217,
+            "name": "Optionen",
+            "text": "Hellsicht 1. (Schaue dir die oberste Karte deiner Bibliothek an. Du kannst sie unter deine Bibliothek legen.)\nZiehe eine Karte.",
+            "type": "Spontanzauber"
+          },
+          {
+            "flavorText": "El cristal latía con el poder de la chispa de planeswalker de Teferi. ¿Lo que le había dado Jhoira era una bendición o una maldición?",
+            "language": "Spanish",
+            "multiverseId": 443486,
+            "name": "Optar",
+            "text": "Adivina 1. (Mira la primera carta de tu biblioteca. Puedes poner esa carta en el fondo de tu biblioteca.)\nRoba una carta.",
+            "type": "Instantáneo"
+          },
+          {
+            "flavorText": "Le cristal brillait sous l'effet de la puissance de l'étincelle de Planeswalker de Téfeiri. Djoïra l'avait-elle béni ou maudit ?",
+            "language": "French",
+            "multiverseId": 443755,
+            "name": "Option",
+            "text": "Regard 1. (Regardez la carte du dessus de votre bibliothèque. Vous pouvez la mettre au-dessous de votre bibliothèque.)\nPiochez une carte.",
+            "type": "Éphémère"
+          },
+          {
+            "flavorText": "Nel cristallo pulsava il potere della scintilla di Planeswalker di Teferi. Jhoira l'aveva benedetto o maledetto?",
+            "language": "Italian",
+            "multiverseId": 444024,
+            "name": "Opzione",
+            "text": "Profetizza 1. (Guarda la prima carta del tuo grimorio. Puoi mettere quella carta in fondo al tuo grimorio.)\nPesca una carta.",
+            "type": "Istantaneo"
+          },
+          {
+            "flavorText": "テフェリーのプレインズウォーカーの灯を受けて水晶が明滅していた。ジョイラが与えたのは恩恵なのか、それとも呪いなのだろうか？",
+            "language": "Japanese",
+            "multiverseId": 444293,
+            "name": "選択",
+            "text": "占術１を行う。（あなたのライブラリーの一番上のカードを見る。あなたはそのカードをあなたのライブラリーの一番下に置いてもよい。）\nカードを１枚引く。",
+            "type": "インスタント"
+          },
+          {
+            "flavorText": "수정은 테페리의 플레인즈워커 불꽃으로 고동치고 있다. 조이라는 그를 축복한 것인가, 저주한 것인가?",
+            "language": "Korean",
+            "multiverseId": 444562,
+            "name": "선택",
+            "text": "점술 1을 한다. (당신의 서고 맨 위 카드 한 장을 본다. 당신은 그 카드를 당신의 서고 맨 밑에 놓을 수 있다.)\n카드 한 장을 뽑는다.",
+            "type": "순간마법"
+          },
+          {
+            "flavorText": "O cristal pulsou com o poder da centelha de planeswalker de Teferi. O que Jhoira lhe dera era uma bênção ou uma maldição?",
+            "language": "Portuguese (Brazil)",
+            "multiverseId": 444831,
+            "name": "Optar",
+            "text": "Vidência 1. (Olhe o card do topo de seu grimório. Você pode colocar aquele card no fundo de seu grimório.)\nCompre um card.",
+            "type": "Mágica Instantânea"
+          },
+          {
+            "flavorText": "Кристалл пульсировал, до краев переполненный силой искры Тефери. Что дала ему Джойра — благословение или проклятье?",
+            "language": "Russian",
+            "multiverseId": 445100,
+            "name": "Выбор",
+            "text": "Предскажите 1. (Посмотрите верхнюю карту вашей библиотеки. Вы можете положить ту карту в низ вашей библиотеки.)\nВозьмите карту.",
+            "type": "Мгновенное заклинание"
+          },
+          {
+            "flavorText": "水晶球涌动着泰菲力鹏洛客火花的力量。尤依拉带给他的是祝福，还是诅咒？",
+            "language": "Chinese Simplified",
+            "multiverseId": 445369,
+            "name": "抉择",
+            "text": "占卜1。（检视你牌库顶的牌。你可以将该牌置于你的牌库底。）\n抓一张牌。",
+            "type": "瞬间"
+          },
+          {
+            "flavorText": "水晶球湧動著泰菲力鵬洛客火花的力量。尤依菈帶給他的是祝福，還是詛咒？",
+            "language": "Chinese Traditional",
+            "multiverseId": 445638,
+            "name": "抉擇",
+            "text": "占卜1。（檢視你牌庫頂的牌。你可以將該牌置於你的牌庫底。）\n抽一張牌。",
+            "type": "瞬間"
+          }
+        ],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "218087",
+          "cardKingdomId": "217700",
+          "mcmId": "320844",
+          "mcmMetaId": "3999",
+          "mtgArenaId": "67224",
+          "mtgjsonV4Id": "71b0445a-8dfa-5f43-97ec-bebe63523f86",
+          "mtgoId": "67585",
+          "multiverseId": "442948",
+          "scryfallId": "25f2e4d0-effd-4e83-b7aa-1a0d8f120951",
+          "scryfallIllustrationId": "8be8d8ae-97c1-4da1-bc21-0aeb6c7082e9",
+          "scryfallOracleId": "713332c1-5bd8-400f-bfff-c1ca0697a043",
+          "tcgplayerProductId": "162901"
+        },
+        "isFoil": false,
+        "isReprint": true,
+        "keywords": [
+          "Scry"
+        ],
+        "layout": "normal",
+        "legalities": {
+          "brawl": "Legal",
+          "commander": "Legal",
+          "duel": "Legal",
+          "future": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "pauper": "Legal",
+          "penny": "Legal",
+          "pioneer": "Legal",
+          "standard": "Legal",
+          "vintage": "Legal"
+        },
+        "manaCost": "{U}",
+        "name": "Opt",
+        "number": "60",
+        "originalText": "Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)\nDraw a card.",
+        "originalType": "Instant",
+        "printings": [
+          "DOM",
+          "ELD",
+          "INV",
+          "M21",
+          "MB1",
+          "PDOM",
+          "PRM",
+          "SLD",
+          "WC01",
+          "XLN"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/e8b8269b85ee1d67",
+          "cardKingdomFoil": "https://mtgjson.com/links/64dcc3cc4bd7a4ea",
+          "cardmarket": "https://mtgjson.com/links/ab0c0d48e0425998",
+          "tcgplayer": "https://mtgjson.com/links/900a2f93265879b8"
+        },
+        "rarity": "common",
+        "rulings": [],
+        "setCode": "DOM",
+        "subtypes": [],
+        "supertypes": [],
+        "text": "Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)\nDraw a card.",
+        "type": "Instant",
+        "types": [
+          "Instant"
+        ],
+        "uuid": "9b69bb58-b2f0-5bf8-8f93-4ddf009861bc"
+      },
+      {
+        "artist": "Izzy",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "U"
+        ],
+        "colors": [
+          "U"
+        ],
+        "manaValue": 2.0,
+        "count": 4,
+        "edhrecRank": 3422,
+        "flavorText": "Genius is finding the edge of what's possible, then jumping over it.",
+        "foreignData": [
+          {
+            "flavorText": "Genialität bedeutet, die Grenzen des Möglichen auszuloten und diese dann zu überwinden.",
+            "language": "German",
+            "multiverseId": 453061,
+            "name": "Radikale Idee",
+            "text": "Ziehe eine Karte.\nKatalyse (Du kannst diese Karte aus deinem Friedhof wirken, indem du zusätzlich zu ihren anderen Kosten eine Karte abwirfst. Schicke sie danach ins Exil.)",
+            "type": "Spontanzauber"
+          },
+          {
+            "flavorText": "La genialidad es hallar el límite de lo posible y después saltárselo.",
+            "language": "Spanish",
+            "multiverseId": 453320,
+            "name": "Idea radical",
+            "text": "Roba una carta.\nRecargar. (Puedes lanzar esta carta desde tu cementerio descartando una carta además de pagar sus otros costes. Luego, exilia esta carta.)",
+            "type": "Instantáneo"
+          },
+          {
+            "flavorText": "Le génie revient à aller aux frontières du possible et à les dépasser.",
+            "language": "French",
+            "multiverseId": 453579,
+            "name": "Idée radicale",
+            "text": "Piochez une carte.\nRelancez (Vous pouvez lancer cette carte depuis votre cimetière en vous défaussant d'une carte en plus de payer ses autres coûts. Puis exilez cette carte.)",
+            "type": "Éphémère"
+          },
+          {
+            "flavorText": "Il genio consiste nel cercare il limite di ciò che è possibile per poi oltrepassarlo.",
+            "language": "Italian",
+            "multiverseId": 453838,
+            "name": "Idea Rivoluzionaria",
+            "text": "Pesca una carta.\nCarica d'avvio (Puoi lanciare questa carta dal tuo cimitero scartando una carta oltre a pagare i suoi altri costi. Poi esilia questa carta.)",
+            "type": "Istantaneo"
+          },
+          {
+            "flavorText": "天才とは可能性の限界を見つけ、それを飛び越えることだ。",
+            "language": "Japanese",
+            "multiverseId": 454097,
+            "name": "急進思想",
+            "text": "カードを１枚引く。\n再活（あなたはあなたの墓地から、このカードを、これの他のコストの支払いに加えてカード１枚を捨てることで唱えてもよい。その後、このカードを追放する。）",
+            "type": "インスタント"
+          },
+          {
+            "flavorText": "천재는 가능한 것의 한계를 찾아낸 다음, 그것을 뛰어넘는 것이다.",
+            "language": "Korean",
+            "multiverseId": 454356,
+            "name": "과격한 생각",
+            "text": "카드 한 장을 뽑는다.\n강제 시동 (당신은 이 카드의 다른 비용들을 지불하는 것에 추가로 카드를 한 장 버리는 것으로 이 카드를 당신의 무덤에서 발동할 수 있다. 그 후 이 카드를 추방한다.)",
+            "type": "순간마법"
+          },
+          {
+            "flavorText": "Genialidade é achar o limite do possível e saltar para além dele.",
+            "language": "Portuguese (Brazil)",
+            "multiverseId": 454615,
+            "name": "Ideia Radical",
+            "text": "Compre um card.\nRecarregar (Você pode conjurar este card de seu cemitério descartando um card além de pagar seus outros custos. Depois, exile este card.)",
+            "type": "Mágica Instantânea"
+          },
+          {
+            "flavorText": "Гениальность — это способность найти предел возможного, а потом перескочить через него.",
+            "language": "Russian",
+            "multiverseId": 454874,
+            "name": "Радикальная Идея",
+            "text": "Возьмите карту.\nИмпульс (Вы можете разыграть эту карту из вашего кладбища, сбросив карту в дополнение к оплате других ее стоимостей. Затем изгоните эту карту.)",
+            "type": "Мгновенное заклинание"
+          },
+          {
+            "flavorText": "所谓天才之举，便是发现可能的边界，然后一跃而过。",
+            "language": "Chinese Simplified",
+            "multiverseId": 455133,
+            "name": "激进创想",
+            "text": "抓一张牌。\n再起（你可以从你的坟墓场施放此牌，但必须支付其所需费用并额外弃一张牌。然后放逐此牌。）",
+            "type": "瞬间"
+          },
+          {
+            "flavorText": "所謂天才之舉，便是發現可能的邊界，然後一躍而過。",
+            "language": "Chinese Traditional",
+            "multiverseId": 455392,
+            "name": "激進創想",
+            "text": "抽一張牌。\n再起（你可以從你的墳墓場施放此牌，但必須支付其所需費用並額外棄一張牌。）然後放逐此牌。）",
+            "type": "瞬間"
+          }
+        ],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "221734",
+          "cardKingdomId": "221450",
+          "mcmId": "363618",
+          "mcmMetaId": "265100",
+          "mtgArenaId": "68513",
+          "mtgjsonV4Id": "6abf8b05-1513-5c21-bb5b-0e46d765fd7d",
+          "mtgoId": "69477",
+          "multiverseId": "452802",
+          "scryfallId": "c9570734-5e9b-46ff-b606-9759b5195756",
+          "scryfallIllustrationId": "3e1c9cdc-581e-4660-ab73-29dbd92843e3",
+          "scryfallOracleId": "fd51dce2-8e8a-4686-910e-1bbc2825d190",
+          "tcgplayerProductId": "175198"
+        },
+        "isFoil": false,
+        "keywords": [
+          "Jump-start"
+        ],
+        "layout": "normal",
+        "legalities": {
+          "brawl": "Legal",
+          "commander": "Legal",
+          "duel": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "pauper": "Legal",
+          "penny": "Legal",
+          "pioneer": "Legal",
+          "standard": "Legal",
+          "vintage": "Legal"
+        },
+        "manaCost": "{1}{U}",
+        "name": "Radical Idea",
+        "number": "52",
+        "originalText": "Draw a card.\nJump-start (You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card.)",
+        "originalType": "Instant",
+        "printings": [
+          "GRN"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/72db1ea3c0eaa155",
+          "cardKingdomFoil": "https://mtgjson.com/links/94fb4804e721e455",
+          "cardmarket": "https://mtgjson.com/links/1bc3102a9919cd61",
+          "tcgplayer": "https://mtgjson.com/links/9c776f3de2e565ed"
+        },
+        "rarity": "common",
+        "rulings": [
+          {
+            "date": "2018-10-05",
+            "text": "You must still follow any timing restrictions and permissions, including those based on the card’s type. For instance, you can cast a sorcery using jump-start only when you could normally cast a sorcery."
+          },
+          {
+            "date": "2018-10-05",
+            "text": "A spell cast using jump-start will always be exiled afterward, whether it resolves, it’s countered, or it leaves the stack in some other way."
+          },
+          {
+            "date": "2018-10-05",
+            "text": "If an effect allows you to pay an alternative cost rather than a spell’s mana cost, you may pay that alternative cost when you jump-start a spell. You’ll still discard a card as an additional cost to cast it."
+          },
+          {
+            "date": "2018-10-05",
+            "text": "If a card with jump-start is put into your graveyard during your turn, you’ll be able to cast it right away if it’s legal to do so, before an opponent can take any actions."
+          }
+        ],
+        "setCode": "GRN",
+        "subtypes": [],
+        "supertypes": [],
+        "text": "Draw a card.\nJump-start (You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card.)",
+        "type": "Instant",
+        "types": [
+          "Instant"
+        ],
+        "uuid": "d5261330-e2af-50ba-a943-db5b2f77065c",
+        "watermark": "izzet"
+      },
+      {
+        "artist": "Jason Rainville",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "R"
+        ],
+        "colors": [
+          "R"
+        ],
+        "manaValue": 1.0,
+        "count": 4,
+        "edhrecRank": 3135,
+        "flavorText": "The tools of invention became the weapons of revolution.",
+        "foreignData": [
+          {
+            "flavorText": "Die Werkzeuge der Erfinder wurden zu Waffen der Revolution.",
+            "language": "German",
+            "multiverseId": 447573,
+            "name": "Schock",
+            "text": "Der Schock fügt einem Ziel deiner Wahl 2 Schadenspunkte zu.",
+            "type": "Spontanzauber"
+          },
+          {
+            "flavorText": "Las herramientas de invención se convirtieron en las armas de la revolución.",
+            "language": "Spanish",
+            "multiverseId": 447854,
+            "name": "Choque",
+            "text": "El Choque hace 2 puntos de daño a cualquier objetivo.",
+            "type": "Instantáneo"
+          },
+          {
+            "flavorText": "Les outils de l'invention devinrent les armes de la révolution.",
+            "language": "French",
+            "multiverseId": 448135,
+            "name": "Choc",
+            "text": "Le Choc inflige 2 blessures à n'importe quelle cible.",
+            "type": "Éphémère"
+          },
+          {
+            "flavorText": "Gli strumenti dell'invenzione divennero le armi della rivoluzione.",
+            "language": "Italian",
+            "multiverseId": 448416,
+            "name": "Shock",
+            "text": "Lo Shock infligge 2 danni a un qualsiasi bersaglio.",
+            "type": "Istantaneo"
+          },
+          {
+            "flavorText": "発明の賜物が革命の業物になった。",
+            "language": "Japanese",
+            "multiverseId": 448697,
+            "name": "ショック",
+            "text": "クリーチャー１体かプレインズウォーカー１体かプレイヤー１人を対象とする。ショックはそれに２点のダメージを与える。",
+            "type": "インスタント"
+          },
+          {
+            "flavorText": "발명의 도구가 혁명의 무기가 되었다.",
+            "language": "Korean",
+            "multiverseId": 448978,
+            "name": "충격",
+            "text": "원하는 목표를 정한다. 충격은 그 목표에게 피해 2점을 입힌다.",
+            "type": "순간마법"
+          },
+          {
+            "flavorText": "As ferramentas da invenção tornaram-se as armas da revolução.",
+            "language": "Portuguese (Brazil)",
+            "multiverseId": 449259,
+            "name": "Choque",
+            "text": "Choque causa 2 pontos de dano a qualquer alvo.",
+            "type": "Mágica Instantânea"
+          },
+          {
+            "flavorText": "Инструменты изобретателей стали оружием революции.",
+            "language": "Russian",
+            "multiverseId": 449540,
+            "name": "Шок",
+            "text": "Шок наносит 2 повреждения любой цели.",
+            "type": "Мгновенное заклинание"
+          },
+          {
+            "flavorText": "发明的工具成为了革命的武器。",
+            "language": "Chinese Simplified",
+            "multiverseId": 449821,
+            "name": "电震",
+            "text": "电震对任意一个目标造成2点伤害。",
+            "type": "瞬间"
+          },
+          {
+            "flavorText": "發明的工具成為了革命的武器。",
+            "language": "Chinese Traditional",
+            "multiverseId": 450102,
+            "name": "電震",
+            "text": "電震對任意一個目標造成2點傷害。",
+            "type": "瞬間"
+          }
+        ],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "220327",
+          "cardKingdomId": "219766",
+          "mtgArenaId": "67992",
+          "mtgjsonV4Id": "a2513497-ca4c-5732-a322-b9a8a391c468",
+          "mtgoId": "68473",
+          "multiverseId": "447292",
+          "scryfallId": "bf5a0e1e-5239-41f3-a63f-d9303b1b01fc",
+          "scryfallIllustrationId": "167dac35-21f6-4174-b496-4b66ffd980b1",
+          "scryfallOracleId": "a9d288b8-cdc1-4e55-a0c9-d6edfc95e65d",
+          "tcgplayerProductId": "168475"
+        },
+        "isFoil": false,
+        "isReprint": true,
+        "layout": "normal",
+        "legalities": {
+          "brawl": "Legal",
+          "commander": "Legal",
+          "duel": "Legal",
+          "future": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "pauper": "Legal",
+          "penny": "Legal",
+          "pioneer": "Legal",
+          "standard": "Legal",
+          "vintage": "Legal"
+        },
+        "manaCost": "{R}",
+        "name": "Shock",
+        "number": "156",
+        "originalText": "Shock deals 2 damage to any target.",
+        "originalType": "Instant",
+        "printings": [
+          "10E",
+          "6ED",
+          "7ED",
+          "8ED",
+          "9ED",
+          "AER",
+          "ANB",
+          "BBD",
+          "BTD",
+          "DDN",
+          "DPA",
+          "FNM",
+          "M12",
+          "M14",
+          "M19",
+          "M20",
+          "M21",
+          "MB1",
+          "ONS",
+          "PMEI",
+          "PRM",
+          "PS11",
+          "PSAL",
+          "STH",
+          "WC98",
+          "WC99"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/d05e92102d5262de",
+          "cardKingdomFoil": "https://mtgjson.com/links/4e9b21560052c86f",
+          "tcgplayer": "https://mtgjson.com/links/cce12db526389bbf"
+        },
+        "rarity": "common",
+        "rulings": [],
+        "setCode": "M19",
+        "subtypes": [],
+        "supertypes": [],
+        "text": "Shock deals 2 damage to any target.",
+        "type": "Instant",
+        "types": [
+          "Instant"
+        ],
+        "uuid": "21da9955-4e13-5ce1-9576-028242004305"
+      },
+      {
+        "artist": "Magali Villeneuve",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "U"
+        ],
+        "colors": [
+          "U"
+        ],
+        "manaValue": 1.0,
+        "count": 2,
+        "edhrecRank": 5887,
+        "flavorText": "\"Seeing the river is not the same as seeing the fish.\"",
+        "foreignData": [
+          {
+            "flavorText": "„Die Reflexion der Wasseroberfläche verbirgt alles, was sich darunter versteckt.\"",
+            "language": "German",
+            "multiverseId": 435504,
+            "name": "Abtauchen",
+            "text": "Eine Kreatur deiner Wahl, die du kontrollierst, erhält +0/+3 und Fluchsicherheit bis zum Ende des Zuges. (Sie kann nicht das Ziel von Zaubersprüchen oder Fähigkeiten sein, die deine Gegner kontrollieren.)",
+            "type": "Spontanzauber"
+          },
+          {
+            "flavorText": "\"Ver el río no es lo mismo que ver los peces\".",
+            "language": "Spanish",
+            "multiverseId": 437597,
+            "name": "Sumergirse",
+            "text": "La criatura objetivo que controlas obtiene +0/+3 y gana la habilidad de antimaleficio hasta el final del turno. (No puede ser objetivo de hechizos o habilidades que controlen tus oponentes.)",
+            "type": "Instantáneo"
+          },
+          {
+            "flavorText": "« Il y a une différence entre voir la rivière et voir le poisson. »",
+            "language": "French",
+            "multiverseId": 435803,
+            "name": "Plongée",
+            "text": "La créature ciblée que vous contrôlez gagne +0/+3 et acquiert la défense talismanique jusqu'à la fin du tour. (Elle ne peut pas être la cible de sorts ou de capacités que vos adversaires contrôlent.)",
+            "type": "Éphémère"
+          },
+          {
+            "flavorText": "\"Non sempre guardando il fiume si riescono a vedere i pesci.\"",
+            "language": "Italian",
+            "multiverseId": 436102,
+            "name": "Immergersi",
+            "text": "Una creatura bersaglio che controlli prende +0/+3 e ha anti-malocchio fino alla fine del turno. (Non può essere bersaglio di magie o abilità controllate dai tuoi avversari.)",
+            "type": "Istantaneo"
+          },
+          {
+            "flavorText": "「川を見ても魚を見たことにはならないわ。」",
+            "language": "Japanese",
+            "multiverseId": 436401,
+            "name": "潜水",
+            "text": "あなたがコントロールしているクリーチャー１体を対象とする。ターン終了時まで、それは＋０/＋３の修整を受けるとともに呪禁を得る。（それは対戦相手がコントロールしている呪文や能力の対象にならない。）",
+            "type": "インスタント"
+          },
+          {
+            "flavorText": "\"강을 보는 것과 물고기를 보는 것은 다르다.\"",
+            "language": "Korean",
+            "multiverseId": 436700,
+            "name": "잠수",
+            "text": "당신이 조종하는 생물을 목표로 정한다. 그 생물은 턴종료까지 +0/+3을 받고 방호를 얻는다. (해당 생물은 상대가 조종하는 주문이나 능력의 목표로 정해질 수 없다.)",
+            "type": "순간마법"
+          },
+          {
+            "flavorText": "\"Ver o rio não é o mesmo que ver os peixes.\"",
+            "language": "Portuguese (Brazil)",
+            "multiverseId": 436999,
+            "name": "Mergulhar",
+            "text": "A criatura alvo que você controla recebe +0/+3 e ganha resistência a magia até o final do turno. (Ela não pode ser alvo de mágicas nem de habilidades que seus oponentes controlam.)",
+            "type": "Mágica Instantânea"
+          },
+          {
+            "flavorText": "«Увидеть реку — совсем не то же самое, что увидеть рыб».",
+            "language": "Russian",
+            "multiverseId": 437298,
+            "name": "Погружение Вглубь",
+            "text": "Целевое существо под вашим контролем получает +0/+3 и Порчеустойчивость до конца хода. (Оно не может быть целью заклинаний или способностей под контролем ваших оппонентов.)",
+            "type": "Мгновенное заклинание"
+          },
+          {
+            "flavorText": "「看得到河不代表能看见鱼。」",
+            "language": "Chinese Simplified",
+            "multiverseId": 437896,
+            "name": "深潜",
+            "text": "直到回合结束，目标由你操控的生物得+0/+3且获得辟邪异能。（它不能成为由对手操控之咒语或异能的目标。）",
+            "type": "瞬间"
+          },
+          {
+            "flavorText": "「看得到河不代表能看見魚。」",
+            "language": "Chinese Traditional",
+            "multiverseId": 438195,
+            "name": "深潛",
+            "text": "直到回合結束，目標由你操控的生物得+0/+3且獲得辟邪異能。（它不能成為由對手操控之咒語或異能的目標。）",
+            "type": "瞬間"
+          }
+        ],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "214481",
+          "cardKingdomId": "214207",
+          "mcmId": "301756",
+          "mcmMetaId": "226987",
+          "mtgArenaId": "66067",
+          "mtgjsonV4Id": "08af01a2-a2ee-5ff3-a71a-bb878ef7ef43",
+          "mtgoFoilId": "65119",
+          "mtgoId": "65118",
+          "multiverseId": "435205",
+          "scryfallId": "b33e493e-1aef-43b3-9716-52158b002430",
+          "scryfallIllustrationId": "8c6e66cb-f420-4cc3-8c3a-67db605bee1f",
+          "scryfallOracleId": "2f990b54-fbf3-4949-85bb-9ba39710e72a",
+          "tcgplayerProductId": "145743"
+        },
+        "isFoil": false,
+        "layout": "normal",
+        "legalities": {
+          "commander": "Legal",
+          "duel": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "pauper": "Legal",
+          "penny": "Legal",
+          "pioneer": "Legal",
+          "vintage": "Legal"
+        },
+        "manaCost": "{U}",
+        "name": "Dive Down",
+        "number": "53",
+        "originalText": "Target creature you control gets +0/+3 and gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)",
+        "originalType": "Instant",
+        "printings": [
+          "XLN"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/4b2cba65480b5438",
+          "cardKingdomFoil": "https://mtgjson.com/links/d06a0e49a4efd811",
+          "cardmarket": "https://mtgjson.com/links/a517053b5dc2b372",
+          "tcgplayer": "https://mtgjson.com/links/2bafca17e0be4a10"
+        },
+        "rarity": "common",
+        "rulings": [],
+        "setCode": "XLN",
+        "subtypes": [],
+        "supertypes": [],
+        "text": "Target creature you control gets +0/+3 and gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)",
+        "type": "Instant",
+        "types": [
+          "Instant"
+        ],
+        "uuid": "6238baf3-cb3e-5ade-bfea-6698fea93ba4"
+      },
+      {
+        "artist": "Igor Kieryluk",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "U"
+        ],
+        "colors": [
+          "U"
+        ],
+        "manaValue": 2.0,
+        "count": 1,
+        "edhrecRank": 1693,
+        "foreignData": [
+          {
+            "language": "German",
+            "multiverseId": 443203,
+            "name": "Von Augenblick zu Augenblick",
+            "text": "Bonus {1}{U} (Du kannst zusätzlich {1}{U} bezahlen, sowie du diesen Zauberspruch wirkst.)\nBringe eine bleibende Karte deiner Wahl, die kein Land ist, auf die Hand ihres Besitzers zurück. Falls die Bonuskosten dieses Zauberspruchs bezahlt wurden, ziehe eine Karte.",
+            "type": "Spontanzauber"
+          },
+          {
+            "language": "Spanish",
+            "multiverseId": 443472,
+            "name": "Abrir y cerrar de ojos",
+            "text": "Estímulo {1}{U}. (Puedes pagar {1}{U} adicionales al lanzar este hechizo.)\nRegresa el permanente objetivo que no sea tierra a la mano de su propietario. Si este hechizo fue estimulado, roba una carta.",
+            "type": "Instantáneo"
+          },
+          {
+            "language": "French",
+            "multiverseId": 443741,
+            "name": "Clin d'œil",
+            "text": "Kick {1}{U} (Vous pouvez payer {1}{U} supplémentaires au moment où vous lancez ce sort.)\nRenvoyez le permanent non-terrain ciblé dans la main de son propriétaire. Si ce sort a été kické, piochez une carte.",
+            "type": "Éphémère"
+          },
+          {
+            "language": "Italian",
+            "multiverseId": 444010,
+            "name": "Batter d'Occhio",
+            "text": "Potenziamento {1}{U} (Puoi pagare {1}{U} addizionale mentre lanci questa magia.)\nFai tornare un permanente non terra bersaglio in mano al suo proprietario. Se questa magia è stata potenziata, pesca una carta.",
+            "type": "Istantaneo"
+          },
+          {
+            "language": "Japanese",
+            "multiverseId": 444279,
+            "name": "一瞬",
+            "text": "キッカー{1}{U}（あなたはこの呪文を唱えるに際し、追加で{1}{U}を支払ってもよい。）\n土地でないパーマネント１つを対象とし、それをオーナーの手札に戻す。この呪文がキッカーされていたなら、カードを１枚引く。",
+            "type": "インスタント"
+          },
+          {
+            "language": "Korean",
+            "multiverseId": 444548,
+            "name": "눈 깜빡이기",
+            "text": "키커 {1}{U} (당신은 이 주문을 발동하면서 추가로 {1}{U}를 지불할 수 있다.)\n대지가 아닌 지속물을 목표로 정한다. 그 지속물을 소유자의 손으로 되돌린다. 이 주문의 키커 비용이 지불되었다면, 카드 한 장을 뽑는다.",
+            "type": "순간마법"
+          },
+          {
+            "language": "Portuguese (Brazil)",
+            "multiverseId": 444817,
+            "name": "Piscar de Olhos",
+            "text": "Reforçar {1}{U} (Você pode pagar um custo adicional de {1}{U} ao conjurar esta mágica.)\nDevolva a permanente alvo que não seja um terreno para a mão de seu dono. Se esta mágica foi reforçada, compre um card.",
+            "type": "Mágica Instantânea"
+          },
+          {
+            "language": "Russian",
+            "multiverseId": 445086,
+            "name": "Мгновение Ока",
+            "text": "Усилитель {1}{U} (При разыгрывании этого заклинания вы можете дополнительно заплатить {1}{U}.)\nВерните целевой не являющийся землей перманент в руку его владельца. Если это заклинание получило Усилитель, возьмите карту.",
+            "type": "Мгновенное заклинание"
+          },
+          {
+            "language": "Chinese Simplified",
+            "multiverseId": 445355,
+            "name": "眨眼即逝",
+            "text": "增幅{1}{U}（你施放此咒语时可以额外支付{1}{U}。）\n将目标非地永久物移回其拥有者手上。如果此咒语已增幅，则抓一张牌。",
+            "type": "瞬间"
+          },
+          {
+            "language": "Chinese Traditional",
+            "multiverseId": 445624,
+            "name": "眨眼即逝",
+            "text": "增幅{1}{U}（你施放此咒語時可以額外支付{1}{U}。）\n將目標非地永久物移回其擁有者手上。如果此咒語已增幅，則抽一張牌。",
+            "type": "瞬間"
+          }
+        ],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "218253",
+          "cardKingdomId": "217980",
+          "mcmId": "319758",
+          "mcmMetaId": "239397",
+          "mtgArenaId": "67196",
+          "mtgjsonV4Id": "6252cc36-4723-5774-8709-82ababa5b0bb",
+          "mtgoId": "67557",
+          "multiverseId": "442934",
+          "scryfallId": "ab830392-4d7e-4b45-93cf-35ed1e935228",
+          "scryfallIllustrationId": "4f1c67e5-b02d-4b1c-b263-e23cb9315f8b",
+          "scryfallOracleId": "51acd176-e84d-42c2-acb2-cceeb28a9fec",
+          "tcgplayerProductId": "162214"
+        },
+        "isFoil": false,
+        "keywords": [
+          "Kicker"
+        ],
+        "layout": "normal",
+        "legalities": {
+          "commander": "Legal",
+          "duel": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "pauper": "Legal",
+          "pioneer": "Legal",
+          "vintage": "Legal"
+        },
+        "manaCost": "{1}{U}",
+        "name": "Blink of an Eye",
+        "number": "46",
+        "originalText": "Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)\nReturn target nonland permanent to its owner's hand. If this spell was kicked, draw a card.",
+        "originalType": "Instant",
+        "printings": [
+          "DOM"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/6a1f2e3d9ff4c049",
+          "cardKingdomFoil": "https://mtgjson.com/links/fc9719840c8d0796",
+          "cardmarket": "https://mtgjson.com/links/363a7e7cf51e48ee",
+          "tcgplayer": "https://mtgjson.com/links/53f491d7d793d5fe"
+        },
+        "rarity": "common",
+        "rulings": [
+          {
+            "date": "2018-04-27",
+            "text": "If the target nonland permanent is an illegal target by the time Blink of an Eye tries to resolve, the spell doesn’t resolve. You won’t draw a card if it was kicked."
+          }
+        ],
+        "setCode": "DOM",
+        "subtypes": [],
+        "supertypes": [],
+        "text": "Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)\nReturn target nonland permanent to its owner's hand. If this spell was kicked, draw a card.",
+        "type": "Instant",
+        "types": [
+          "Instant"
+        ],
+        "uuid": "16241138-6d2a-52a1-8e04-2e76738c6bf7"
+      },
+      {
+        "artist": "James Arnold",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "U"
+        ],
+        "colors": [
+          "U"
+        ],
+        "manaValue": 5.0,
+        "count": 1,
+        "edhrecRank": 1853,
+        "foreignData": [
+          {
+            "language": "German",
+            "multiverseId": 443214,
+            "name": "Die Mirari-Hypothese",
+            "text": "(Je eine Sagenmarke beim Ins-Spiel-Kommen und nach deinem Ziehsegment. Opfern nach III.)\nI — Bringe eine Spontanzauberkarte deiner Wahl aus deinem Friedhof auf deine Hand zurück.\nII — Bringe eine Hexereikarte deiner Wahl aus deinem Friedhof auf deine Hand zurück.\nIII — Immer wenn du bis zum Ende des Zuges einen Spontanzauber oder eine Hexerei wirkst, kopiere ihn bzw. sie. Du kannst neue Ziele für die Kopie bestimmen.",
+            "type": "Verzauberung — Sage"
+          },
+          {
+            "language": "Spanish",
+            "multiverseId": 443483,
+            "name": "La conjetura del Mirari",
+            "text": "(En cuanto esta Saga entre y después de tu paso de robar, agrega un contador de sabiduría. Sacrifícala después de III.)\nI — Regresa la carta de instantáneo objetivo de tu cementerio a tu mano.\nII — Regresa la carta de conjuro objetivo de tu cementerio a tu mano.\nIII — Hasta el final del turno, siempre que lances un hechizo de instantáneo o de conjuro, cópialo. Puedes elegir nuevos objetivos para la copia.",
+            "type": "Encantamiento — Saga"
+          },
+          {
+            "language": "French",
+            "multiverseId": 443752,
+            "name": "La conjecture du Mirari",
+            "text": "(Au moment où cette saga arrive sur le champ de bataille et après votre étape de pioche, ajoutez un marqueur « sapience ». Sacrifiez après III.)\nI — Renvoyez une carte d'éphémère ciblée depuis votre cimetière dans votre main.\nII — Renvoyez une carte de rituel ciblée depuis votre cimetière dans votre main.\nIII — Jusqu'à la fin du tour, à chaque fois que vous lancez un sort d'éphémère ou de rituel, copiez-le. Vous pouvez choisir de nouvelles cibles pour cette copie.",
+            "type": "Enchantement : saga"
+          },
+          {
+            "language": "Italian",
+            "multiverseId": 444021,
+            "name": "Congettura sul Mirari",
+            "text": "(Mentre questa Saga entra e dopo la tua sottofase di acquisizione, aggiungi un segnalino sapere. Sacrifica dopo III.)\nI — Riprendi in mano una carta istantaneo bersaglio dal tuo cimitero.\nII — Riprendi in mano una carta stregoneria bersaglio dal tuo cimitero.\nIII — Fino alla fine del turno, ogniqualvolta lanci una magia istantaneo o stregoneria, copiala. Puoi scegliere nuovi bersagli per la copia.",
+            "type": "Incantesimo — Saga"
+          },
+          {
+            "language": "Japanese",
+            "multiverseId": 444290,
+            "name": "ミラーリ予想",
+            "text": "（この英雄譚が出た際とあなたのドロー・ステップの後に、伝承カウンターを１個加える。IIIの後に、生け贄に捧げる。）\nI ― あなたの墓地からインスタント・カード１枚を対象とし、それをあなたの手札に戻す。\nII ― あなたの墓地からソーサリー・カード１枚を対象とし、それをあなたの手札に戻す。\nIII ― ターン終了時まで、あなたがインスタントかソーサリーである呪文を唱えるたび、それをコピーする。あなたはそのコピーの新しい対象を選んでもよい。",
+            "type": "エンチャント — 英雄譚"
+          },
+          {
+            "language": "Korean",
+            "multiverseId": 444559,
+            "name": "미라리의 예측",
+            "text": "(이 서사시가 들어오면서 그리고 당신의 뽑기단 후에, 전승 카운터 한 개를 추가한다. III 이후에 희생한다.)\nI — 당신의 무덤에 있는 순간마법 카드를 목표로 정한다. 그 카드를 당신의 손으로 되돌린다.\nII — 당신의 무덤에 있는 집중마법 카드를 목표로 정한다. 그 카드를 당신의 손으로 되돌린다.\nIII — 턴종료까지, 당신이 순간마법 또는 집중마법 주문을 발동할 때마다, 그 주문을 복사한다. 당신은 그 복사본의 목표를 새로 정할 수 있다.",
+            "type": "부여마법 — 서사시"
+          },
+          {
+            "language": "Portuguese (Brazil)",
+            "multiverseId": 444828,
+            "name": "A Conjectura do Mirari",
+            "text": "(Conforme esta Saga entra e após sua etapa de compra, adicione um marcador de conhecimento. Sacrifique-a após III.)\nI — Devolva o card de mágica instantânea alvo de seu cemitério para sua mão.\nII — Devolva o card de feitiço alvo de seu cemitério para sua mão.\nIII — Até o final do turno, toda vez que você conjurar uma mágica instantânea ou um feitiço, copie-o. Você pode escolher novos alvos para a cópia.",
+            "type": "Encantamento — Saga"
+          },
+          {
+            "language": "Russian",
+            "multiverseId": 445097,
+            "name": "Гипотеза о Мирари",
+            "text": "(При выходе этой Саги и после вашего шага взятия карты добавьте один жетон знаний. Пожертвуйте после III.)\nI — Верните целевую карту мгновенного заклинания из вашего кладбища в вашу руку.\nII — Верните целевую карту волшебства из вашего кладбища в вашу руку.\nIII — До конца хода, каждый раз, когда вы разыгрываете мгновенное заклинание или заклинание волшебства, скопируйте его. Вы можете выбрать новые цели для той копии.",
+            "type": "Чары — Сага"
+          },
+          {
+            "language": "Chinese Simplified",
+            "multiverseId": 445366,
+            "name": "映奇宝珠探究",
+            "text": "（于此传纪进战场时及于你抓牌步骤后，加一个学问指示物。到III后牺牲之。）\nI — 将目标瞬间牌从你的坟墓场移回你手上。\nII — 将目标法术牌从你的坟墓场移回你手上。\nIII — 直到回合结束，每当你施放瞬间或法术咒语时，将其复制。你可以为该复制品选择新的目标。",
+            "type": "结界 ～传纪"
+          },
+          {
+            "language": "Chinese Traditional",
+            "multiverseId": 445635,
+            "name": "映奇寶珠探究",
+            "text": "（於此傳紀進戰場時及於你抽牌步驟後，加一個學問指示物。到III後犧牲之。）\nI — 將目標瞬間牌從你的墳墓場移回你手上。\nII — 將目標巫術牌從你的墳墓場移回你手上。\nIII — 直到回合結束，每當你施放瞬間或巫術咒語時，將其複製。你可以為該複製品選擇新的目標。",
+            "type": "結界 ～傳紀"
+          }
+        ],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "218105",
+          "cardKingdomId": "217732",
+          "mcmId": "319825",
+          "mcmMetaId": "239456",
+          "mtgArenaId": "67218",
+          "mtgjsonV4Id": "3533640b-39e0-54e7-ae60-b194fc9dddb0",
+          "mtgoId": "67579",
+          "multiverseId": "442945",
+          "scryfallId": "1c68954c-4bab-4973-9819-ecd084438303",
+          "scryfallIllustrationId": "be099eea-cb0f-4223-89be-f10f683adaf9",
+          "scryfallOracleId": "56528234-46c0-4fba-972a-0c8011996f8d",
+          "tcgplayerProductId": "162241"
+        },
+        "isFoil": false,
+        "layout": "saga",
+        "legalities": {
+          "commander": "Legal",
+          "duel": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "penny": "Legal",
+          "pioneer": "Legal",
+          "vintage": "Legal"
+        },
+        "manaCost": "{4}{U}",
+        "name": "The Mirari Conjecture",
+        "number": "57",
+        "originalText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Return target instant card from your graveyard to your hand.\nII — Return target sorcery card from your graveyard to your hand.\nIII — Until end of turn, whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy.",
+        "originalType": "Enchantment — Saga",
+        "printings": [
+          "DOM",
+          "MB1",
+          "PDOM"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/d316d71be65687c4",
+          "cardKingdomFoil": "https://mtgjson.com/links/dd4ce6f5cf73c23a",
+          "cardmarket": "https://mtgjson.com/links/bf16627f3d2ee817",
+          "tcgplayer": "https://mtgjson.com/links/1c67639186a8b945"
+        },
+        "rarity": "rare",
+        "rulings": [
+          {
+            "date": "2018-04-27",
+            "text": "The Mirari Conjecture’s final chapter ability copies any instant or sorcery spell you cast, not just those with targets."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "The copy is created on the stack, so it’s not “cast.” Abilities that trigger when a player casts a spell won’t trigger."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "The copy will have the same targets as the spell it’s copying unless you choose new ones. You may change any number of the targets, including all of them or none of them. If, for one of the targets, you can’t choose a new legal target, then it remains unchanged (even if the current target is illegal)."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "If the spell that’s copied is modal (that is, it says “Choose one —” or the like), the copy will have the same mode. A different mode can’t be chosen."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "If the spell that’s copied has an X whose value was determined as it was cast (like Jaya’s Immolating Inferno does), the copy will have the same value of X."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "If the spell has damage divided as it was cast (like Fight with Fire does when kicked), the division can’t be changed (although the targets receiving that damage still can)."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "The controller of a copy can’t choose to pay any alternative or additional costs for the copy. However, effects based on any alternative or additional costs that were paid for the original spell are copied as though those same costs were paid for the copy."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "As a Saga enters the battlefield, its controller puts a lore counter on it. As your precombat main phase begins (immediately after your draw step), you put another lore counter on each Saga you control. Putting a lore counter on a Saga in either of these ways doesn’t use the stack."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "Each symbol on the left of a Saga’s text box represents a chapter ability. A chapter ability is a triggered ability that triggers when a lore counter that is put on the Saga causes the number of lore counters on the Saga to become equal to or greater than the ability’s chapter number. Chapter abilities are put onto the stack and may be responded to."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "A chapter ability doesn’t trigger if a lore counter is put on a Saga that already had a number of lore counters greater than or equal to that chapter’s number. For example, the third lore counter put on a Saga causes the III chapter ability to trigger, but I and II won’t trigger again."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "Once a chapter ability has triggered, the ability on the stack won’t be affected if the Saga gains or loses counters, or if it leaves the battlefield."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "If multiple chapter abilities trigger at the same time, their controller puts them on the stack in any order. If any of them require targets, those targets are chosen as you put the abilities on the stack, before any of those abilities resolve."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "If counters are removed from a Saga, the appropriate chapter abilities will trigger again when the Saga receives lore counters. Removing lore counters won’t cause a previous chapter ability to trigger."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "Once the number of lore counters on a Saga is greater than or equal to the greatest number among its chapter abilities—in the Dominaria set, this is always three—the Saga’s controller sacrifices it as soon as its chapter ability has left the stack, most likely by resolving or being countered. This state-based action doesn’t use the stack."
+          }
+        ],
+        "setCode": "DOM",
+        "subtypes": [
+          "Saga"
+        ],
+        "supertypes": [],
+        "text": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Return target instant card from your graveyard to your hand.\nII — Return target sorcery card from your graveyard to your hand.\nIII — Until end of turn, whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy.",
+        "type": "Enchantment — Saga",
+        "types": [
+          "Enchantment"
+        ],
+        "uuid": "88082e57-df1a-51bd-ab3e-0324c54c5d2f"
+      },
+      {
+        "artist": "Cliff Childs",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "R",
+          "U"
+        ],
+        "colors": [],
+        "manaValue": 0.0,
+        "count": 3,
+        "edhrecRank": 119,
+        "flavorText": "\"We have inherited the mysteries of the Thran, but few of the answers.\"\n—Jhoira",
+        "foreignData": [
+          {
+            "flavorText": "„Uns wurden viele der Mysterien von Thran überliefert, doch nur wenige Antworten.\" —Jhoira",
+            "language": "German",
+            "multiverseId": 443404,
+            "name": "Schwefelfälle",
+            "text": "Die Schwefelfälle kommen getappt ins Spiel, es sei denn, du kontrollierst eine Insel oder ein Gebirge.\n{T}: Erzeuge {U} oder {R}.",
+            "type": "Land"
+          },
+          {
+            "flavorText": "\"Hemos heredado los misterios de los thran, pero pocas de sus respuestas\". —Jhoira",
+            "language": "Spanish",
+            "multiverseId": 443673,
+            "name": "Cascada de azufre",
+            "text": "La Cascada de azufre entra al campo de batalla girada a menos que controles una Isla o una Montaña.\n{T}: Agrega {U} o {R}.",
+            "type": "Tierra"
+          },
+          {
+            "flavorText": "« Nous avons hérité de tous les mystères des Thrans, mais de peu de réponses. » —Djoïra",
+            "language": "French",
+            "multiverseId": 443942,
+            "name": "Chutes de soufre",
+            "text": "Les Chutes de soufre arrivent sur le champ de bataille engagées à moins que vous ne contrôliez une île ou une montagne.\n{T} : Ajoutez {U} ou {R}.",
+            "type": "Terrain"
+          },
+          {
+            "flavorText": "\"Abbiamo ereditato molti misteri dai Thran, ma ben poche risposte.\" —Jhoira",
+            "language": "Italian",
+            "multiverseId": 444211,
+            "name": "Cascata Sulfurea",
+            "text": "La Cascata Sulfurea entra nel campo di battaglia TAPpata a meno che tu non controlli un'Isola o una Montagna.\n{T}: Aggiungi {U} o {R}.",
+            "type": "Terra"
+          },
+          {
+            "flavorText": "「私たちはスランの謎を受け継いだけれど、答えはほとんど受け継いでいない。」 ――ジョイラ",
+            "language": "Japanese",
+            "multiverseId": 444480,
+            "name": "硫黄の滝",
+            "text": "硫黄の滝は、あなたが島か山をコントロールしていないかぎり、タップ状態で戦場に出る。\n{T}：{U}か{R}を加える。",
+            "type": "土地"
+          },
+          {
+            "flavorText": "\"우리는 트란의 신비들을 계승했지만, 그 대답은 거의 물려받지 못했지.\" —조이라",
+            "language": "Korean",
+            "multiverseId": 444749,
+            "name": "유황 폭포",
+            "text": "유황 폭포는 당신이 섬이나 산을 조종하지 않으면 탭된 채로 전장에 들어온다.\n{T}: {U} 또는 {R}를 추가한다.",
+            "type": "대지"
+          },
+          {
+            "flavorText": "\"Herdamos os mistérios dos Thran, mas poucas das respostas.\" — Jhoira",
+            "language": "Portuguese (Brazil)",
+            "multiverseId": 445018,
+            "name": "Cascata de Enxofre",
+            "text": "Cascata de Enxofre entra no campo de batalha virado, a menos que você controle uma Ilha ou uma Montanha.\n{T}: Adicione {U} ou {R}.",
+            "type": "Terreno"
+          },
+          {
+            "flavorText": "«Мы унаследовали множество загадок транов, но совсем немного ответов». — Джойра",
+            "language": "Russian",
+            "multiverseId": 445287,
+            "name": "Серный Водопад",
+            "text": "Серный Водопад выходит на поле битвы повернутым, если под вашим контролем нет Острова или Горы.\n{T}: добавьте {U} или {R}.",
+            "type": "Земля"
+          },
+          {
+            "flavorText": "「索蓝帝国给我们留下了诸多谜团，却未留下任何答案。」 ～尤依拉",
+            "language": "Chinese Simplified",
+            "multiverseId": 445556,
+            "name": "硫磺瀑布",
+            "text": "除非你操控海岛或山脉，否则硫磺瀑布须横置进战场。\n{T}：加{U}或{R}。",
+            "type": "地"
+          },
+          {
+            "flavorText": "「索藍帝國給我們留下了諸多謎團，卻未留下任何答案。」 ～尤依菈",
+            "language": "Chinese Traditional",
+            "multiverseId": 445825,
+            "name": "硫磺瀑布",
+            "text": "除非你操控海島或山脈，否則硫磺瀑布須橫置進戰場。\n{T}：加{U}或{R}。",
+            "type": "地"
+          }
+        ],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "218176",
+          "cardKingdomId": "217887",
+          "mcmId": "319894",
+          "mcmMetaId": "203988",
+          "mtgArenaId": "67598",
+          "mtgjsonV4Id": "71f9fdad-ba40-5771-81d9-6b4099a04a1c",
+          "mtgoId": "67959",
+          "multiverseId": "443135",
+          "scryfallId": "6bc412fc-e9d4-4283-bd4a-811384e79b5c",
+          "scryfallIllustrationId": "8106243d-d8b4-4fe1-ad6a-38f4d27a023f",
+          "scryfallOracleId": "6a6c5e17-6465-4a1f-9d63-8a3ce2edc522",
+          "tcgplayerProductId": "162122"
+        },
+        "isFoil": false,
+        "isReprint": true,
+        "layout": "normal",
+        "legalities": {
+          "commander": "Legal",
+          "duel": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "pioneer": "Legal",
+          "vintage": "Legal"
+        },
+        "name": "Sulfur Falls",
+        "number": "247",
+        "originalText": "Sulfur Falls enters the battlefield tapped unless you control an Island or a Mountain.\n{T}: Add {U} or {R}.",
+        "originalType": "Land",
+        "printings": [
+          "DOM",
+          "ISD",
+          "PDOM"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/62ff208c0f166708",
+          "cardKingdomFoil": "https://mtgjson.com/links/afd272148bddca63",
+          "cardmarket": "https://mtgjson.com/links/6f84ba50dfae3273",
+          "tcgplayer": "https://mtgjson.com/links/cf17dc804428bb08"
+        },
+        "rarity": "rare",
+        "rulings": [],
+        "setCode": "DOM",
+        "subtypes": [],
+        "supertypes": [],
+        "text": "Sulfur Falls enters the battlefield tapped unless you control an Island or a Mountain.\n{T}: Add {U} or {R}.",
+        "type": "Land",
+        "types": [
+          "Land"
+        ],
+        "uuid": "6cf241f2-fba0-56ba-8756-1300b258b3df"
+      },
+      {
+        "artist": "Kirsten Zirngibl",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "R",
+          "U"
+        ],
+        "colors": [],
+        "manaValue": 0.0,
+        "count": 4,
+        "edhrecRank": 312,
+        "flavorText": "Every laboratory buzzes with new experiments, each a piece of Ral's ambitious project.",
+        "foreignData": [],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "221760",
+          "cardKingdomId": "221485",
+          "mcmId": "363964",
+          "mcmMetaId": "206450",
+          "mtgArenaId": "68732",
+          "mtgjsonV4Id": "c6aa8c6f-537c-5bbc-841f-49c95133b0e0",
+          "mtgoId": "69915",
+          "multiverseId": "453001",
+          "scryfallId": "2055a83a-99c8-4808-90b9-1c2fdcda79b4",
+          "scryfallIllustrationId": "8be1c514-41b7-4188-9cb5-dfbb1d00b2e0",
+          "scryfallOracleId": "bf75a3d1-f184-4b48-a913-21caee1db084",
+          "tcgplayerProductId": "176409"
+        },
+        "isFoil": false,
+        "isReprint": true,
+        "layout": "normal",
+        "legalities": {
+          "brawl": "Legal",
+          "commander": "Legal",
+          "duel": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "pauper": "Legal",
+          "penny": "Legal",
+          "pioneer": "Legal",
+          "standard": "Legal",
+          "vintage": "Legal"
+        },
+        "name": "Izzet Guildgate",
+        "number": "251",
+        "originalText": "Izzet Guildgate enters the battlefield tapped.\n{T}: Add {U} or {R}.",
+        "originalType": "Land — Gate",
+        "printings": [
+          "C13",
+          "C15",
+          "C18",
+          "C19",
+          "DGM",
+          "GRN",
+          "MM3",
+          "RTR"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/7f1376f636910938",
+          "cardKingdomFoil": "https://mtgjson.com/links/206b4d029a0c78fc",
+          "cardmarket": "https://mtgjson.com/links/1d4a6f8e85bd6e40",
+          "tcgplayer": "https://mtgjson.com/links/569dae96d196747d"
+        },
+        "rarity": "common",
+        "rulings": [
+          {
+            "date": "2013-04-15",
+            "text": "The subtype Gate has no special rules significance, but other spells and abilities may refer to it."
+          },
+          {
+            "date": "2013-04-15",
+            "text": "Gate is not a basic land type."
+          }
+        ],
+        "setCode": "GRN",
+        "subtypes": [
+          "Gate"
+        ],
+        "supertypes": [],
+        "text": "Izzet Guildgate enters the battlefield tapped.\n{T}: Add {U} or {R}.",
+        "type": "Land — Gate",
+        "types": [
+          "Land"
+        ],
+        "uuid": "e5c3454f-6ad9-5b79-848a-0577f126a365",
+        "variations": [
+          "3c010556-ee1a-50fd-b488-ec4ae0832d0d"
+        ],
+        "watermark": "izzet"
+      },
+      {
+        "artist": "Richard Wright",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "U"
+        ],
+        "colors": [],
+        "manaValue": 0.0,
+        "count": 8,
+        "foreignData": [],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "222232",
+          "cardKingdomId": "221398",
+          "mtgArenaId": "68742",
+          "mtgjsonV4Id": "3be0ff7d-e3f2-5443-a1d1-707a27f8c4db",
+          "mtgoId": "69349",
+          "multiverseId": "455601",
+          "scryfallId": "29bfbf3e-3a6c-40d4-8e1b-255f429de6cc",
+          "scryfallIllustrationId": "145071b4-5241-4f52-ada0-7cbe1d19d11e",
+          "scryfallOracleId": "b2c6aa39-2d2a-459c-a555-fb48ba993373",
+          "tcgplayerProductId": "176616"
+        },
+        "isFoil": false,
+        "isReprint": true,
+        "isStarter": true,
+        "layout": "normal",
+        "legalities": {
+          "brawl": "Legal",
+          "commander": "Legal",
+          "duel": "Legal",
+          "future": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "pauper": "Legal",
+          "penny": "Legal",
+          "pioneer": "Legal",
+          "standard": "Legal",
+          "vintage": "Legal"
+        },
+        "name": "Island",
+        "number": "261",
+        "originalText": "U",
+        "originalType": "Basic Land — Island",
+        "printings": [
+          "10E",
+          "2ED",
+          "2XM",
+          "3ED",
+          "4BB",
+          "4ED",
+          "5ED",
+          "6ED",
+          "7ED",
+          "8ED",
+          "9ED",
+          "AKH",
+          "AKR",
+          "ALA",
+          "ANA",
+          "ANB",
+          "ARC",
+          "AVR",
+          "BBD",
+          "BFZ",
+          "BRB",
+          "BTD",
+          "C13",
+          "C14",
+          "C15",
+          "C16",
+          "C17",
+          "C18",
+          "C19",
+          "CED",
+          "CEI",
+          "CHK",
+          "CM2",
+          "CMA",
+          "CMD",
+          "CST",
+          "DD2",
+          "DDE",
+          "DDF",
+          "DDH",
+          "DDI",
+          "DDJ",
+          "DDM",
+          "DDN",
+          "DDO",
+          "DDQ",
+          "DDS",
+          "DDT",
+          "DDU",
+          "DOM",
+          "DPA",
+          "DTK",
+          "E01",
+          "ELD",
+          "FBB",
+          "FRF",
+          "G17",
+          "GK1",
+          "GK2",
+          "GN2",
+          "GNT",
+          "GRN",
+          "GS1",
+          "H09",
+          "HOP",
+          "HOU",
+          "ICE",
+          "IKO",
+          "INV",
+          "ISD",
+          "ITP",
+          "J14",
+          "JMP",
+          "JVC",
+          "KLD",
+          "KTK",
+          "LEA",
+          "LEB",
+          "LRW",
+          "M10",
+          "M11",
+          "M12",
+          "M13",
+          "M14",
+          "M15",
+          "M19",
+          "M20",
+          "M21",
+          "MBS",
+          "ME1",
+          "ME3",
+          "MIR",
+          "MMQ",
+          "MRD",
+          "NPH",
+          "ODY",
+          "ONS",
+          "ORI",
+          "P02",
+          "PAL00",
+          "PAL01",
+          "PAL02",
+          "PAL03",
+          "PAL04",
+          "PAL05",
+          "PAL06",
+          "PAL99",
+          "PALP",
+          "PANA",
+          "PARL",
+          "PC2",
+          "PCA",
+          "PELP",
+          "PF19",
+          "PF20",
+          "PGPX",
+          "PGRU",
+          "PMPS",
+          "PMPS06",
+          "PMPS07",
+          "PMPS08",
+          "PMPS09",
+          "PMPS10",
+          "PMPS11",
+          "POR",
+          "PPP1",
+          "PRM",
+          "PRW2",
+          "PRWK",
+          "PS11",
+          "PSAL",
+          "PSS2",
+          "PSS3",
+          "PTC",
+          "PTK",
+          "PZ2",
+          "RAV",
+          "RIX",
+          "RNA",
+          "ROE",
+          "RQS",
+          "RTR",
+          "S99",
+          "SHM",
+          "SLD",
+          "SOI",
+          "SOM",
+          "SUM",
+          "TD0",
+          "TD2",
+          "THB",
+          "THS",
+          "TMP",
+          "TPR",
+          "TSP",
+          "UGL",
+          "UND",
+          "UNH",
+          "USG",
+          "UST",
+          "WAR",
+          "WC00",
+          "WC01",
+          "WC02",
+          "WC03",
+          "WC04",
+          "WC97",
+          "WC98",
+          "XLN",
+          "ZEN",
+          "ZNR"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/39c6639e1a4f367a",
+          "cardKingdomFoil": "https://mtgjson.com/links/88865282388ebd73",
+          "tcgplayer": "https://mtgjson.com/links/14a5a62d8d085787"
+        },
+        "rarity": "common",
+        "rulings": [],
+        "setCode": "GRN",
+        "subtypes": [
+          "Island"
+        ],
+        "supertypes": [
+          "Basic"
+        ],
+        "text": "({T}: Add {U}.)",
+        "type": "Basic Land — Island",
+        "types": [
+          "Land"
+        ],
+        "uuid": "a865513e-d082-5b04-8009-1f8bb7e636c1"
+      },
+      {
+        "artist": "Richard Wright",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "R"
+        ],
+        "colors": [],
+        "manaValue": 0.0,
+        "count": 7,
+        "foreignData": [],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "222233",
+          "cardKingdomId": "221400",
+          "mtgArenaId": "68744",
+          "mtgjsonV4Id": "e061ca4d-4882-51e2-8400-96bf29c1c463",
+          "mtgoId": "69353",
+          "multiverseId": "455603",
+          "scryfallId": "7f918a49-a046-4115-80b8-13490ed5cd0a",
+          "scryfallIllustrationId": "3b6d5669-f95b-4aba-9f9b-8eaa93b5e9e7",
+          "scryfallOracleId": "a3fb7228-e76b-4e96-a40e-20b5fed75685",
+          "tcgplayerProductId": "176618"
+        },
+        "isFoil": false,
+        "isReprint": true,
+        "isStarter": true,
+        "layout": "normal",
+        "legalities": {
+          "brawl": "Legal",
+          "commander": "Legal",
+          "duel": "Legal",
+          "future": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "pauper": "Legal",
+          "penny": "Legal",
+          "pioneer": "Legal",
+          "standard": "Legal",
+          "vintage": "Legal"
+        },
+        "name": "Mountain",
+        "number": "263",
+        "originalText": "R",
+        "originalType": "Basic Land — Mountain",
+        "printings": [
+          "10E",
+          "2ED",
+          "2XM",
+          "3ED",
+          "4BB",
+          "4ED",
+          "5ED",
+          "6ED",
+          "7ED",
+          "8ED",
+          "9ED",
+          "AKH",
+          "AKR",
+          "ALA",
+          "ANA",
+          "ANB",
+          "ARC",
+          "ARN",
+          "ATH",
+          "AVR",
+          "BBD",
+          "BFZ",
+          "BRB",
+          "BTD",
+          "C13",
+          "C14",
+          "C15",
+          "C16",
+          "C17",
+          "C18",
+          "C19",
+          "CED",
+          "CEI",
+          "CHK",
+          "CM2",
+          "CMA",
+          "CMD",
+          "CST",
+          "DD1",
+          "DD2",
+          "DDE",
+          "DDG",
+          "DDH",
+          "DDI",
+          "DDJ",
+          "DDK",
+          "DDL",
+          "DDN",
+          "DDP",
+          "DDS",
+          "DDT",
+          "DDU",
+          "DKM",
+          "DOM",
+          "DPA",
+          "DTK",
+          "E01",
+          "ELD",
+          "EVG",
+          "FBB",
+          "FRF",
+          "G17",
+          "GK1",
+          "GK2",
+          "GN2",
+          "GNT",
+          "GRN",
+          "GS1",
+          "H09",
+          "HOP",
+          "HOU",
+          "ICE",
+          "IKO",
+          "INV",
+          "ISD",
+          "ITP",
+          "J14",
+          "JMP",
+          "JVC",
+          "KLD",
+          "KTK",
+          "LEA",
+          "LEB",
+          "LRW",
+          "M10",
+          "M11",
+          "M12",
+          "M13",
+          "M14",
+          "M15",
+          "M19",
+          "M20",
+          "M21",
+          "MBS",
+          "ME1",
+          "ME3",
+          "MIR",
+          "MMQ",
+          "MRD",
+          "NPH",
+          "ODY",
+          "ONS",
+          "ORI",
+          "P02",
+          "PAL00",
+          "PAL01",
+          "PAL03",
+          "PAL04",
+          "PAL05",
+          "PAL06",
+          "PAL99",
+          "PALP",
+          "PANA",
+          "PARL",
+          "PC2",
+          "PCA",
+          "PD2",
+          "PELP",
+          "PF19",
+          "PF20",
+          "PGPX",
+          "PGRU",
+          "PMPS",
+          "PMPS06",
+          "PMPS07",
+          "PMPS08",
+          "PMPS09",
+          "PMPS10",
+          "PMPS11",
+          "POR",
+          "PPP1",
+          "PRM",
+          "PRW2",
+          "PRWK",
+          "PS11",
+          "PSAL",
+          "PSS2",
+          "PSS3",
+          "PTC",
+          "PTK",
+          "PZ2",
+          "RAV",
+          "RIX",
+          "RNA",
+          "ROE",
+          "RQS",
+          "RTR",
+          "S99",
+          "SHM",
+          "SLD",
+          "SOI",
+          "SOM",
+          "SUM",
+          "TD0",
+          "THB",
+          "THS",
+          "TMP",
+          "TPR",
+          "TSP",
+          "UGL",
+          "UND",
+          "UNH",
+          "USG",
+          "UST",
+          "WAR",
+          "WC00",
+          "WC01",
+          "WC02",
+          "WC03",
+          "WC97",
+          "WC98",
+          "WC99",
+          "XLN",
+          "ZEN",
+          "ZNR"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/ffe930f35cbca1cc",
+          "cardKingdomFoil": "https://mtgjson.com/links/1984b822b4808ea1",
+          "tcgplayer": "https://mtgjson.com/links/a5abbf8aefa2ea67"
+        },
+        "rarity": "common",
+        "rulings": [],
+        "setCode": "GRN",
+        "subtypes": [
+          "Mountain"
+        ],
+        "supertypes": [
+          "Basic"
+        ],
+        "text": "({T}: Add {R}.)",
+        "type": "Basic Land — Mountain",
+        "types": [
+          "Land"
+        ],
+        "uuid": "f7e3deba-7d3e-5705-be88-957a77523c93"
+      }
+    ],
+    "name": "Arcane Tempo",
+    "releaseDate": "2019-04-12",
+    "sideBoard": [
+      {
+        "artist": "James Arnold",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "U"
+        ],
+        "colors": [
+          "U"
+        ],
+        "manaValue": 5.0,
+        "count": 1,
+        "edhrecRank": 1853,
+        "foreignData": [
+          {
+            "language": "German",
+            "multiverseId": 443214,
+            "name": "Die Mirari-Hypothese",
+            "text": "(Je eine Sagenmarke beim Ins-Spiel-Kommen und nach deinem Ziehsegment. Opfern nach III.)\nI — Bringe eine Spontanzauberkarte deiner Wahl aus deinem Friedhof auf deine Hand zurück.\nII — Bringe eine Hexereikarte deiner Wahl aus deinem Friedhof auf deine Hand zurück.\nIII — Immer wenn du bis zum Ende des Zuges einen Spontanzauber oder eine Hexerei wirkst, kopiere ihn bzw. sie. Du kannst neue Ziele für die Kopie bestimmen.",
+            "type": "Verzauberung — Sage"
+          },
+          {
+            "language": "Spanish",
+            "multiverseId": 443483,
+            "name": "La conjetura del Mirari",
+            "text": "(En cuanto esta Saga entre y después de tu paso de robar, agrega un contador de sabiduría. Sacrifícala después de III.)\nI — Regresa la carta de instantáneo objetivo de tu cementerio a tu mano.\nII — Regresa la carta de conjuro objetivo de tu cementerio a tu mano.\nIII — Hasta el final del turno, siempre que lances un hechizo de instantáneo o de conjuro, cópialo. Puedes elegir nuevos objetivos para la copia.",
+            "type": "Encantamiento — Saga"
+          },
+          {
+            "language": "French",
+            "multiverseId": 443752,
+            "name": "La conjecture du Mirari",
+            "text": "(Au moment où cette saga arrive sur le champ de bataille et après votre étape de pioche, ajoutez un marqueur « sapience ». Sacrifiez après III.)\nI — Renvoyez une carte d'éphémère ciblée depuis votre cimetière dans votre main.\nII — Renvoyez une carte de rituel ciblée depuis votre cimetière dans votre main.\nIII — Jusqu'à la fin du tour, à chaque fois que vous lancez un sort d'éphémère ou de rituel, copiez-le. Vous pouvez choisir de nouvelles cibles pour cette copie.",
+            "type": "Enchantement : saga"
+          },
+          {
+            "language": "Italian",
+            "multiverseId": 444021,
+            "name": "Congettura sul Mirari",
+            "text": "(Mentre questa Saga entra e dopo la tua sottofase di acquisizione, aggiungi un segnalino sapere. Sacrifica dopo III.)\nI — Riprendi in mano una carta istantaneo bersaglio dal tuo cimitero.\nII — Riprendi in mano una carta stregoneria bersaglio dal tuo cimitero.\nIII — Fino alla fine del turno, ogniqualvolta lanci una magia istantaneo o stregoneria, copiala. Puoi scegliere nuovi bersagli per la copia.",
+            "type": "Incantesimo — Saga"
+          },
+          {
+            "language": "Japanese",
+            "multiverseId": 444290,
+            "name": "ミラーリ予想",
+            "text": "（この英雄譚が出た際とあなたのドロー・ステップの後に、伝承カウンターを１個加える。IIIの後に、生け贄に捧げる。）\nI ― あなたの墓地からインスタント・カード１枚を対象とし、それをあなたの手札に戻す。\nII ― あなたの墓地からソーサリー・カード１枚を対象とし、それをあなたの手札に戻す。\nIII ― ターン終了時まで、あなたがインスタントかソーサリーである呪文を唱えるたび、それをコピーする。あなたはそのコピーの新しい対象を選んでもよい。",
+            "type": "エンチャント — 英雄譚"
+          },
+          {
+            "language": "Korean",
+            "multiverseId": 444559,
+            "name": "미라리의 예측",
+            "text": "(이 서사시가 들어오면서 그리고 당신의 뽑기단 후에, 전승 카운터 한 개를 추가한다. III 이후에 희생한다.)\nI — 당신의 무덤에 있는 순간마법 카드를 목표로 정한다. 그 카드를 당신의 손으로 되돌린다.\nII — 당신의 무덤에 있는 집중마법 카드를 목표로 정한다. 그 카드를 당신의 손으로 되돌린다.\nIII — 턴종료까지, 당신이 순간마법 또는 집중마법 주문을 발동할 때마다, 그 주문을 복사한다. 당신은 그 복사본의 목표를 새로 정할 수 있다.",
+            "type": "부여마법 — 서사시"
+          },
+          {
+            "language": "Portuguese (Brazil)",
+            "multiverseId": 444828,
+            "name": "A Conjectura do Mirari",
+            "text": "(Conforme esta Saga entra e após sua etapa de compra, adicione um marcador de conhecimento. Sacrifique-a após III.)\nI — Devolva o card de mágica instantânea alvo de seu cemitério para sua mão.\nII — Devolva o card de feitiço alvo de seu cemitério para sua mão.\nIII — Até o final do turno, toda vez que você conjurar uma mágica instantânea ou um feitiço, copie-o. Você pode escolher novos alvos para a cópia.",
+            "type": "Encantamento — Saga"
+          },
+          {
+            "language": "Russian",
+            "multiverseId": 445097,
+            "name": "Гипотеза о Мирари",
+            "text": "(При выходе этой Саги и после вашего шага взятия карты добавьте один жетон знаний. Пожертвуйте после III.)\nI — Верните целевую карту мгновенного заклинания из вашего кладбища в вашу руку.\nII — Верните целевую карту волшебства из вашего кладбища в вашу руку.\nIII — До конца хода, каждый раз, когда вы разыгрываете мгновенное заклинание или заклинание волшебства, скопируйте его. Вы можете выбрать новые цели для той копии.",
+            "type": "Чары — Сага"
+          },
+          {
+            "language": "Chinese Simplified",
+            "multiverseId": 445366,
+            "name": "映奇宝珠探究",
+            "text": "（于此传纪进战场时及于你抓牌步骤后，加一个学问指示物。到III后牺牲之。）\nI — 将目标瞬间牌从你的坟墓场移回你手上。\nII — 将目标法术牌从你的坟墓场移回你手上。\nIII — 直到回合结束，每当你施放瞬间或法术咒语时，将其复制。你可以为该复制品选择新的目标。",
+            "type": "结界 ～传纪"
+          },
+          {
+            "language": "Chinese Traditional",
+            "multiverseId": 445635,
+            "name": "映奇寶珠探究",
+            "text": "（於此傳紀進戰場時及於你抽牌步驟後，加一個學問指示物。到III後犧牲之。）\nI — 將目標瞬間牌從你的墳墓場移回你手上。\nII — 將目標巫術牌從你的墳墓場移回你手上。\nIII — 直到回合結束，每當你施放瞬間或巫術咒語時，將其複製。你可以為該複製品選擇新的目標。",
+            "type": "結界 ～傳紀"
+          }
+        ],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "218105",
+          "cardKingdomId": "217732",
+          "mcmId": "319825",
+          "mcmMetaId": "239456",
+          "mtgArenaId": "67218",
+          "mtgjsonV4Id": "3533640b-39e0-54e7-ae60-b194fc9dddb0",
+          "mtgoId": "67579",
+          "multiverseId": "442945",
+          "scryfallId": "1c68954c-4bab-4973-9819-ecd084438303",
+          "scryfallIllustrationId": "be099eea-cb0f-4223-89be-f10f683adaf9",
+          "scryfallOracleId": "56528234-46c0-4fba-972a-0c8011996f8d",
+          "tcgplayerProductId": "162241"
+        },
+        "isFoil": false,
+        "layout": "saga",
+        "legalities": {
+          "commander": "Legal",
+          "duel": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "penny": "Legal",
+          "pioneer": "Legal",
+          "vintage": "Legal"
+        },
+        "manaCost": "{4}{U}",
+        "name": "The Mirari Conjecture",
+        "number": "57",
+        "originalText": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Return target instant card from your graveyard to your hand.\nII — Return target sorcery card from your graveyard to your hand.\nIII — Until end of turn, whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy.",
+        "originalType": "Enchantment — Saga",
+        "printings": [
+          "DOM",
+          "MB1",
+          "PDOM"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/d316d71be65687c4",
+          "cardKingdomFoil": "https://mtgjson.com/links/dd4ce6f5cf73c23a",
+          "cardmarket": "https://mtgjson.com/links/bf16627f3d2ee817",
+          "tcgplayer": "https://mtgjson.com/links/1c67639186a8b945"
+        },
+        "rarity": "rare",
+        "rulings": [
+          {
+            "date": "2018-04-27",
+            "text": "The Mirari Conjecture’s final chapter ability copies any instant or sorcery spell you cast, not just those with targets."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "The copy is created on the stack, so it’s not “cast.” Abilities that trigger when a player casts a spell won’t trigger."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "The copy will have the same targets as the spell it’s copying unless you choose new ones. You may change any number of the targets, including all of them or none of them. If, for one of the targets, you can’t choose a new legal target, then it remains unchanged (even if the current target is illegal)."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "If the spell that’s copied is modal (that is, it says “Choose one —” or the like), the copy will have the same mode. A different mode can’t be chosen."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "If the spell that’s copied has an X whose value was determined as it was cast (like Jaya’s Immolating Inferno does), the copy will have the same value of X."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "If the spell has damage divided as it was cast (like Fight with Fire does when kicked), the division can’t be changed (although the targets receiving that damage still can)."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "The controller of a copy can’t choose to pay any alternative or additional costs for the copy. However, effects based on any alternative or additional costs that were paid for the original spell are copied as though those same costs were paid for the copy."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "As a Saga enters the battlefield, its controller puts a lore counter on it. As your precombat main phase begins (immediately after your draw step), you put another lore counter on each Saga you control. Putting a lore counter on a Saga in either of these ways doesn’t use the stack."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "Each symbol on the left of a Saga’s text box represents a chapter ability. A chapter ability is a triggered ability that triggers when a lore counter that is put on the Saga causes the number of lore counters on the Saga to become equal to or greater than the ability’s chapter number. Chapter abilities are put onto the stack and may be responded to."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "A chapter ability doesn’t trigger if a lore counter is put on a Saga that already had a number of lore counters greater than or equal to that chapter’s number. For example, the third lore counter put on a Saga causes the III chapter ability to trigger, but I and II won’t trigger again."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "Once a chapter ability has triggered, the ability on the stack won’t be affected if the Saga gains or loses counters, or if it leaves the battlefield."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "If multiple chapter abilities trigger at the same time, their controller puts them on the stack in any order. If any of them require targets, those targets are chosen as you put the abilities on the stack, before any of those abilities resolve."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "If counters are removed from a Saga, the appropriate chapter abilities will trigger again when the Saga receives lore counters. Removing lore counters won’t cause a previous chapter ability to trigger."
+          },
+          {
+            "date": "2018-04-27",
+            "text": "Once the number of lore counters on a Saga is greater than or equal to the greatest number among its chapter abilities—in the Dominaria set, this is always three—the Saga’s controller sacrifices it as soon as its chapter ability has left the stack, most likely by resolving or being countered. This state-based action doesn’t use the stack."
+          }
+        ],
+        "setCode": "DOM",
+        "subtypes": [
+          "Saga"
+        ],
+        "supertypes": [],
+        "text": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Return target instant card from your graveyard to your hand.\nII — Return target sorcery card from your graveyard to your hand.\nIII — Until end of turn, whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy.",
+        "type": "Enchantment — Saga",
+        "types": [
+          "Enchantment"
+        ],
+        "uuid": "88082e57-df1a-51bd-ab3e-0324c54c5d2f"
+      },
+      {
+        "artist": "Titus Lunter",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "R",
+          "U"
+        ],
+        "colors": [
+          "R",
+          "U"
+        ],
+        "manaValue": 3.0,
+        "count": 1,
+        "edhrecRank": 4333,
+        "foreignData": [
+          {
+            "language": "German",
+            "multiverseId": 453163,
+            "name": "Signalturm-Blitz",
+            "text": "Der Signalturm-Blitz fügt einer Kreatur deiner Wahl Schaden in Höhe der Gesamtanzahl an Spontanzauber- und Hexerei-Karten zu, die du besitzt und die sich im Exil oder in deinem Friedhof befinden.\nKatalyse (Du kannst diese Karte aus deinem Friedhof wirken, indem du zusätzlich zu ihren anderen Kosten eine Karte abwirfst. Schicke sie danach ins Exil.)",
+            "type": "Hexerei"
+          },
+          {
+            "language": "Spanish",
+            "multiverseId": 453422,
+            "name": "Rayo de la atalaya",
+            "text": "El Rayo de la atalaya hace una cantidad de daño a la criatura objetivo igual a la cantidad total de cartas de instantáneo y de conjuro en tu cementerio y en el exilio de las cuales eres propietario.\nRecargar. (Puedes lanzar esta carta desde tu cementerio descartando una carta además de pagar sus otros costes. Luego, exilia esta carta.)",
+            "type": "Conjuro"
+          },
+          {
+            "language": "French",
+            "multiverseId": 453681,
+            "name": "Éclair du flambeau",
+            "text": "L'Éclair du flambeau inflige à une créature ciblée un nombre de blessures égal au nombre total de cartes d'éphémère et de rituel que vous possédez en exil et dans votre cimetière.\nRelancez (Vous pouvez lancer cette carte depuis votre cimetière en vous défaussant d'une carte en plus de payer ses autres coûts. Puis exilez cette carte.)",
+            "type": "Rituel"
+          },
+          {
+            "language": "Italian",
+            "multiverseId": 453940,
+            "name": "Saetta del Faro",
+            "text": "La Saetta del Faro infligge a una creatura bersaglio danno pari al numero totale di carte istantaneo e stregoneria che possiedi in esilio e nel tuo cimitero.\nCarica d'avvio (Puoi lanciare questa carta dal tuo cimitero scartando una carta oltre a pagare i suoi altri costi. Poi esilia questa carta.)",
+            "type": "Stregoneria"
+          },
+          {
+            "language": "Japanese",
+            "multiverseId": 454199,
+            "name": "標の稲妻",
+            "text": "クリーチャー１体を対象とする。標の稲妻はそれに、追放領域かあなたの墓地にあり、あなたがオーナーであり、インスタントかソーサリーであるカードの枚数に等しい点数のダメージを与える。\n再活（あなたはあなたの墓地から、このカードを、これの他のコストの支払いに加えてカード１枚を捨てることで唱えてもよい。その後、このカードを追放する。）",
+            "type": "ソーサリー"
+          },
+          {
+            "language": "Korean",
+            "multiverseId": 454458,
+            "name": "봉화의 번개",
+            "text": "생물을 목표로 정한다. 봉화의 번개는 그 생물에게 추방 영역과 당신의 무덤에 있는 당신이 소유한 순간마법과 집중마법 카드 수의 합만큼 피해를 입힌다.\n강제 시동 (당신은 이 카드의 다른 비용들을 지불하는 것에 추가로 카드를 한 장 버리는 것으로 이 카드를 당신의 무덤에서 발동할 수 있다. 그 후 이 카드를 추방한다.)",
+            "type": "집중마법"
+          },
+          {
+            "language": "Portuguese (Brazil)",
+            "multiverseId": 454717,
+            "name": "Raio do Farol",
+            "text": "Raio do Farol causa à criatura alvo dano igual ao número total de cards de mágica instantânea ou feitiço que você possui no exílio e em seu cemitério.\nRecarregar (Você pode conjurar este card de seu cemitério descartando um card além de pagar seus outros custos. Depois, exile este card.)",
+            "type": "Feitiço"
+          },
+          {
+            "language": "Russian",
+            "multiverseId": 454976,
+            "name": "Сигнальный Разряд",
+            "text": "Сигнальный Разряд наносит целевому существу повреждения, равные суммарному количеству принадлежащих вам карт мгновенных заклинаний и волшебства в изгнании и на вашем кладбище.\nИмпульс (Вы можете разыграть эту карту из вашего кладбища, сбросив карту в дополнение к оплате других ее стоимостей. Затем изгоните эту карту.)",
+            "type": "Волшебство"
+          },
+          {
+            "language": "Chinese Simplified",
+            "multiverseId": 455235,
+            "name": "信标电击",
+            "text": "信标电击对目标生物造成伤害，其数量等同于放逐区中由你拥有之瞬间与法术牌数量和你坟墓场中这两类牌数量的加总。\n再起（你可以从你的坟墓场施放此牌，但必须支付其所需费用并额外弃一张牌。然后放逐此牌。）",
+            "type": "法术"
+          },
+          {
+            "language": "Chinese Traditional",
+            "multiverseId": 455494,
+            "name": "信標電擊",
+            "text": "信標電擊對目標生物造成傷害，其數量等同於放逐區中由你擁有之瞬間與巫術牌數量和你墳墓場中這兩類牌數量的加總。\n再起（你可以從你的墳墓場施放此牌，但必須支付其所需費用並額外棄一張牌。然後放逐此牌。）",
+            "type": "巫術"
+          }
+        ],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "221862",
+          "cardKingdomId": "221589",
+          "mcmId": "364198",
+          "mcmMetaId": "265406",
+          "mtgArenaId": "68615",
+          "mtgjsonV4Id": "34b50961-dd25-54b3-b0e2-1c8071189342",
+          "mtgoId": "69681",
+          "multiverseId": "452904",
+          "scryfallId": "39c9e4b5-364b-4c0b-bb47-266563a6abf2",
+          "scryfallIllustrationId": "c2ce83a1-ddba-429c-9f7b-7e02585ea99d",
+          "scryfallOracleId": "884686dd-515c-4484-a324-e7d126903a42",
+          "tcgplayerProductId": "176857"
+        },
+        "isFoil": false,
+        "keywords": [
+          "Jump-start"
+        ],
+        "layout": "normal",
+        "legalities": {
+          "brawl": "Legal",
+          "commander": "Legal",
+          "duel": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "penny": "Legal",
+          "pioneer": "Legal",
+          "standard": "Legal",
+          "vintage": "Legal"
+        },
+        "manaCost": "{1}{U}{R}",
+        "name": "Beacon Bolt",
+        "number": "154",
+        "originalText": "Beacon Bolt deals damage to target creature equal to the total number of instant and sorcery cards you own in exile and in your graveyard.\nJump-start (You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card.)",
+        "originalType": "Sorcery",
+        "printings": [
+          "GRN"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/30488d7f95d54346",
+          "cardKingdomFoil": "https://mtgjson.com/links/e0fde43746cc1b21",
+          "cardmarket": "https://mtgjson.com/links/7017b3dc4746a10a",
+          "tcgplayer": "https://mtgjson.com/links/21dfc75e775dde47"
+        },
+        "rarity": "uncommon",
+        "rulings": [
+          {
+            "date": "2018-10-05",
+            "text": "Beacon Bolt is still on the stack while you count your instant and sorcery cards in your graveyard and in exile. It doesn’t count itself."
+          },
+          {
+            "date": "2018-10-05",
+            "text": "If any exiled cards you own are face down, they have no characteristics. If they’re normally instants or sorceries, they won’t be counted."
+          },
+          {
+            "date": "2018-10-05",
+            "text": "You must still follow any timing restrictions and permissions, including those based on the card’s type. For instance, you can cast a sorcery using jump-start only when you could normally cast a sorcery."
+          },
+          {
+            "date": "2018-10-05",
+            "text": "A spell cast using jump-start will always be exiled afterward, whether it resolves, it’s countered, or it leaves the stack in some other way."
+          },
+          {
+            "date": "2018-10-05",
+            "text": "If an effect allows you to pay an alternative cost rather than a spell’s mana cost, you may pay that alternative cost when you jump-start a spell. You’ll still discard a card as an additional cost to cast it."
+          },
+          {
+            "date": "2018-10-05",
+            "text": "If a card with jump-start is put into your graveyard during your turn, you’ll be able to cast it right away if it’s legal to do so, before an opponent can take any actions."
+          }
+        ],
+        "setCode": "GRN",
+        "subtypes": [],
+        "supertypes": [],
+        "text": "Beacon Bolt deals damage to target creature equal to the total number of instant and sorcery cards you own in exile and in your graveyard.\nJump-start (You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card.)",
+        "type": "Sorcery",
+        "types": [
+          "Sorcery"
+        ],
+        "uuid": "83db81aa-2e76-5609-bad2-a0adf5427274",
+        "watermark": "izzet"
+      },
+      {
+        "artist": "Magali Villeneuve",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "U"
+        ],
+        "colors": [
+          "U"
+        ],
+        "manaValue": 2.0,
+        "count": 3,
+        "edhrecRank": 56,
+        "flavorText": "\"As one, nature lifts its voice to tell you this: 'No.'\"",
+        "foreignData": [
+          {
+            "flavorText": "„Mit vereinter Kraft erhebt die Natur ihre Stimme und sagt: ‚Nein'.\"",
+            "language": "German",
+            "multiverseId": 439904,
+            "name": "Negieren",
+            "text": "Neutralisiere einen Nichtkreatur-Zauberspruch deiner Wahl.",
+            "type": "Spontanzauber"
+          },
+          {
+            "flavorText": "\"La naturaleza entera alza la voz para decirte con sus muchas bocas: 'No'\".",
+            "language": "Spanish",
+            "multiverseId": 440107,
+            "name": "Negar",
+            "text": "Contrarresta el hechizo objetivo que no sea de criatura.",
+            "type": "Instantáneo"
+          },
+          {
+            "flavorText": "« Unie, la nature lève la voix pour vous dire ceci : \"Non\". »",
+            "language": "French",
+            "multiverseId": 440310,
+            "name": "Négation",
+            "text": "Contrecarrez le sort non-créature ciblé.",
+            "type": "Éphémère"
+          },
+          {
+            "flavorText": "\"Unita, la natura leva la sua voce per dirvi: 'No'.\"",
+            "language": "Italian",
+            "multiverseId": 440513,
+            "name": "Negare",
+            "text": "Neutralizza una magia non creatura bersaglio.",
+            "type": "Istantaneo"
+          },
+          {
+            "flavorText": "「自然がね、あなたに向かって口をそろえて言うのよ。『だめだ。』ってね。」",
+            "language": "Japanese",
+            "multiverseId": 440716,
+            "name": "否認",
+            "text": "クリーチャーでない呪文１つを対象とし、それを打ち消す。",
+            "type": "インスタント"
+          },
+          {
+            "flavorText": "\"자연이 한 마음으로 네게 이 말을 전한다: '안돼.'\"",
+            "language": "Korean",
+            "multiverseId": 440919,
+            "name": "부인",
+            "text": "생물 주문이 아닌 주문을 목표로 정한다. 그 주문을 무효화한다.",
+            "type": "순간마법"
+          },
+          {
+            "flavorText": "\"Em uníssono, a natureza ergue a voz para lhes dizer: 'Não'.\"",
+            "language": "Portuguese (Brazil)",
+            "multiverseId": 441122,
+            "name": "Negar",
+            "text": "Anule a mágica alvo que não seja de criatura.",
+            "type": "Mágica Instantânea"
+          },
+          {
+            "flavorText": "«Вся природа поднимается, чтобы в унисон сказать вам: \"Нет\"».",
+            "language": "Russian",
+            "multiverseId": 441325,
+            "name": "Отвергнуть",
+            "text": "Отмените целевое заклинание, не являющееся заклинанием существа.",
+            "type": "Мгновенное заклинание"
+          },
+          {
+            "flavorText": "「自然万物齐声喝止：『不许。』」",
+            "language": "Chinese Simplified",
+            "multiverseId": 441528,
+            "name": "失效",
+            "text": "反击目标非生物咒语。",
+            "type": "瞬间"
+          },
+          {
+            "flavorText": "「自然萬物齊聲喝止：『不許。』」",
+            "language": "Chinese Traditional",
+            "multiverseId": 441731,
+            "name": "失效",
+            "text": "反擊目標非生物咒語。",
+            "type": "瞬間"
+          }
+        ],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "216356",
+          "cardKingdomId": "216094",
+          "mcmId": "315384",
+          "mcmMetaId": "9460",
+          "mtgArenaId": "66705",
+          "mtgjsonV4Id": "79ac58c7-0a82-55c9-a586-f9ce03facbc0",
+          "mtgoId": "66541",
+          "multiverseId": "439701",
+          "scryfallId": "31534f45-43e6-4103-bf58-ad8fa688e4b0",
+          "scryfallIllustrationId": "5ebee670-4898-4816-a90a-3168fd54df0e",
+          "scryfallOracleId": "3407fe41-fdd3-4119-8f70-4bc4590a379f",
+          "tcgplayerProductId": "155801"
+        },
+        "isFoil": false,
+        "isReprint": true,
+        "layout": "normal",
+        "legalities": {
+          "brawl": "Legal",
+          "commander": "Legal",
+          "duel": "Legal",
+          "future": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "pauper": "Legal",
+          "penny": "Legal",
+          "pioneer": "Legal",
+          "standard": "Legal",
+          "vintage": "Legal"
+        },
+        "manaCost": "{1}{U}",
+        "name": "Negate",
+        "number": "44",
+        "originalText": "Counter target noncreature spell.",
+        "originalType": "Instant",
+        "printings": [
+          "AER",
+          "BBD",
+          "CN2",
+          "DPA",
+          "DTK",
+          "M10",
+          "M11",
+          "M12",
+          "M13",
+          "M14",
+          "M15",
+          "M20",
+          "MB1",
+          "MOR",
+          "OGW",
+          "ORI",
+          "P09",
+          "PLIST",
+          "PM20",
+          "PRM",
+          "PS11",
+          "RIX",
+          "SS1",
+          "ZNR"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/e98ad08239d97f00",
+          "cardKingdomFoil": "https://mtgjson.com/links/110309e7f2894984",
+          "cardmarket": "https://mtgjson.com/links/b60a073da9b9b63d",
+          "tcgplayer": "https://mtgjson.com/links/e1c1f782f55a72ce"
+        },
+        "rarity": "common",
+        "rulings": [
+          {
+            "date": "2009-10-01",
+            "text": "A “creature spell” is any spell with the type creature, even if it has other types such as artifact or enchantment. Older cards of type summon are also creature spells."
+          }
+        ],
+        "setCode": "RIX",
+        "subtypes": [],
+        "supertypes": [],
+        "text": "Counter target noncreature spell.",
+        "type": "Instant",
+        "types": [
+          "Instant"
+        ],
+        "uuid": "d6b934a2-b92d-5040-b79d-29fbaa5c3db7"
+      },
+      {
+        "artist": "Winona Nelson",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "U"
+        ],
+        "colors": [
+          "U"
+        ],
+        "manaValue": 2.0,
+        "count": 3,
+        "edhrecRank": 4848,
+        "flavorText": "The stronger the will, the more bewitching the song.",
+        "foreignData": [
+          {
+            "flavorText": "Je stärker der Wille, desto berauschender die Melodie.",
+            "language": "German",
+            "multiverseId": 435506,
+            "name": "Berauschende Melodie",
+            "text": "Übernimm die Kontrolle über eine Kreatur deiner Wahl mit umgewandelten Manakosten von X.",
+            "type": "Hexerei"
+          },
+          {
+            "flavorText": "Cuanto más fuerte es la voluntad, más cautivadora resulta la canción.",
+            "language": "Spanish",
+            "multiverseId": 437599,
+            "name": "Melodía de ensueño",
+            "text": "Gana el control de la criatura objetivo con coste de maná convertido de X.",
+            "type": "Conjuro"
+          },
+          {
+            "flavorText": "Plus la volonté est forte, plus le chant est envoûtant.",
+            "language": "French",
+            "multiverseId": 435805,
+            "name": "Mélodie enchanteresse",
+            "text": "Acquérez le contrôle d'une créature ciblée avec un coût converti de mana de X.",
+            "type": "Rituel"
+          },
+          {
+            "flavorText": "Più forte è la volontà con cui si scontra, più affascinante diventa la melodia.",
+            "language": "Italian",
+            "multiverseId": 436104,
+            "name": "Melodia Ammaliante",
+            "text": "Prendi il controllo di una creatura bersaglio con costo di mana convertito pari a X.",
+            "type": "Stregoneria"
+          },
+          {
+            "flavorText": "意志が強ければ、歌が一層魅力的になる。",
+            "language": "Japanese",
+            "multiverseId": 436403,
+            "name": "幻惑の旋律",
+            "text": "点数で見たマナ・コストがＸのクリーチャー１体を対象とし、それのコントロールを得る。",
+            "type": "ソーサリー"
+          },
+          {
+            "flavorText": "의지가 강할수록, 노래는 더 매혹적으로 들린다.",
+            "language": "Korean",
+            "multiverseId": 436702,
+            "name": "넋을 빼앗는 선율",
+            "text": "전환마나비용이 X인 생물을 목표로 정한다. 그 생물의 조종권을 얻는다.",
+            "type": "집중마법"
+          },
+          {
+            "flavorText": "Quanto maior a força de vontade, mais sedutora a canção.",
+            "language": "Portuguese (Brazil)",
+            "multiverseId": 437001,
+            "name": "Melodia Arrebatadora",
+            "text": "Ganhe o controle da criatura alvo com custo de mana convertido igual a X.",
+            "type": "Feitiço"
+          },
+          {
+            "flavorText": "Чем крепче воля, тем обворожительнее песня.",
+            "language": "Russian",
+            "multiverseId": 437300,
+            "name": "Чарующая Мелодия",
+            "text": "Получите контроль над целевым существом с конвертированной мана-стоимостью X.",
+            "type": "Волшебство"
+          },
+          {
+            "flavorText": "意志越坚定，旋律越诱人。",
+            "language": "Chinese Simplified",
+            "multiverseId": 437898,
+            "name": "摄魂旋律",
+            "text": "获得目标总法术力费用为X的生物之操控权。",
+            "type": "法术"
+          },
+          {
+            "flavorText": "意志越堅定，旋律越誘人。",
+            "language": "Chinese Traditional",
+            "multiverseId": 438197,
+            "name": "攝魂旋律",
+            "text": "獲得目標總魔法力費用為X的生物之操控權。",
+            "type": "巫術"
+          }
+        ],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "214254",
+          "cardKingdomId": "213947",
+          "mcmId": "301201",
+          "mcmMetaId": "226756",
+          "mtgArenaId": "66071",
+          "mtgjsonV4Id": "b733efaa-e718-5f55-9eef-cd82286154d0",
+          "mtgoFoilId": "65123",
+          "mtgoId": "65122",
+          "multiverseId": "435207",
+          "scryfallId": "15732049-7e56-432f-881f-215e45b7a70e",
+          "scryfallIllustrationId": "e7a10776-f604-4dc6-be90-f0527d9b73e1",
+          "scryfallOracleId": "f9f82958-a7c6-4161-b0d8-fdbf7a3dd911",
+          "tcgplayerProductId": "142004"
+        },
+        "isFoil": false,
+        "layout": "normal",
+        "legalities": {
+          "commander": "Legal",
+          "duel": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "penny": "Legal",
+          "pioneer": "Legal",
+          "vintage": "Legal"
+        },
+        "manaCost": "{X}{U}{U}",
+        "name": "Entrancing Melody",
+        "number": "55",
+        "originalText": "Gain control of target creature with mana value X.",
+        "originalType": "Sorcery",
+        "printings": [
+          "PXLN",
+          "XLN"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/0be0ee3c3dde22eb",
+          "cardKingdomFoil": "https://mtgjson.com/links/d66124ee499fa35c",
+          "cardmarket": "https://mtgjson.com/links/c0c622266a914ffc",
+          "tcgplayer": "https://mtgjson.com/links/2c1d4f689fa6048a"
+        },
+        "rarity": "rare",
+        "rulings": [
+          {
+            "date": "2017-09-29",
+            "text": "If a permanent has {X} in its mana cost, X is considered to be 0."
+          },
+          {
+            "date": "2017-09-29",
+            "text": "The control-change effect of Entrancing Melody lasts indefinitely. It doesn’t wear off during the cleanup step."
+          },
+          {
+            "date": "2017-09-29",
+            "text": "In a multiplayer game, if a player leaves the game, all cards that player owns leave as well, and any effects that give the player control of permanents immediately end."
+          }
+        ],
+        "setCode": "XLN",
+        "subtypes": [],
+        "supertypes": [],
+        "text": "Gain control of target creature with mana value X.",
+        "type": "Sorcery",
+        "types": [
+          "Sorcery"
+        ],
+        "uuid": "a20eff8c-6ced-515a-9e23-a766b7e738e8"
+      },
+      {
+        "artist": "Ben Wootten",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "R"
+        ],
+        "colors": [
+          "R"
+        ],
+        "manaValue": 3.0,
+        "count": 3,
+        "edhrecRank": 5816,
+        "flavorText": "Wary of the ferocious dinosaurs, the Legion of Dusk built up the walls of their fort—just in time for the pirates to burn them down.",
+        "foreignData": [
+          {
+            "flavorText": "Aus Angst vor den wilden Dinosauriern hat die Legion des Zwielichts ihr Fort verstärkt, was jedoch die Piraten nicht abschreckt.",
+            "language": "German",
+            "multiverseId": 435596,
+            "name": "Feurige Kanonade",
+            "text": "Die Feurige Kanonade fügt jeder Nicht-Pirat-Kreatur 2 Schadenspunkte zu.",
+            "type": "Spontanzauber"
+          },
+          {
+            "flavorText": "Por temor a los feroces dinosaurios, la Legión del Crepúsculo rodeó su fortaleza de murallas... que fueron inmediatamente calcinadas por los piratas.",
+            "language": "Spanish",
+            "multiverseId": 437689,
+            "name": "Cañonazo ardiente",
+            "text": "El Cañonazo ardiente hace 2 puntos de daño a cada criatura que no sea Pirata.",
+            "type": "Instantáneo"
+          },
+          {
+            "flavorText": "Connaissant la férocité des dinosaures, la Légion du crépuscule entoura son fort de palissades — qui furent aussitôt réduites en cendres par les pirates.",
+            "language": "French",
+            "multiverseId": 435895,
+            "name": "Canonnade ardente",
+            "text": "La Canonnade ardente inflige 2 blessures à chaque créature non-Pirate.",
+            "type": "Éphémère"
+          },
+          {
+            "flavorText": "Temendo i feroci dinosauri, la Legione del Vespro rialzò le difese del suo forte, giusto in tempo per vederle ridotte in cenere dai pirati.",
+            "language": "Italian",
+            "multiverseId": 436194,
+            "name": "Cannonata Fiammante",
+            "text": "La Cannonata Fiammante infligge 2 danni a ogni creatura non Pirata.",
+            "type": "Istantaneo"
+          },
+          {
+            "flavorText": "獰猛な恐竜の対策として、薄暮の軍団は城砦の周りに壁を築いた。ちょうどそのとき、海賊船が現れてそれを焼き払った。",
+            "language": "Japanese",
+            "multiverseId": 436493,
+            "name": "焦熱の連続砲撃",
+            "text": "焦熱の連続砲撃は、海賊でない各クリーチャーにそれぞれ２点のダメージを与える。",
+            "type": "インスタント"
+          },
+          {
+            "flavorText": "황혼의 군단은 사나운 공룡들을 경계하여 요새 방책을 세웠으나, 때마침 나타난 해적들이 이를 모두 불태워버렸다.",
+            "language": "Korean",
+            "multiverseId": 436792,
+            "name": "맹렬한 연속포격",
+            "text": "맹렬한 연속포격은 해적이 아닌 각 생물에게 피해 2점을 입힌다.",
+            "type": "순간마법"
+          },
+          {
+            "flavorText": "Receosa dos ferozes dinossauros, a Legião do Crepúsculo ergueu as muralhas de seu forte, que foram prontamente incendiadas pelos piratas.",
+            "language": "Portuguese (Brazil)",
+            "multiverseId": 437091,
+            "name": "Canhonada Ardente",
+            "text": "Canhonada Ardente causa 2 pontos de dano a cada criatura que não seja um Pirata.",
+            "type": "Mágica Instantânea"
+          },
+          {
+            "flavorText": "Опасаясь свирепых динозавров, Легион Заката окружил свой форт частоколом — как раз к прибытию обожающих устраивать пожары пиратов.",
+            "language": "Russian",
+            "multiverseId": 437390,
+            "name": "Огненная Канонада",
+            "text": "Огненная Канонада наносит 2 повреждения каждому не являющемуся Пиратом существу.",
+            "type": "Мгновенное заклинание"
+          },
+          {
+            "flavorText": "暮影军团为了抵御恐龙侵袭，架高了要塞的壁垒～但完工时正好赶上海盗炮火，全部付诸一炬。",
+            "language": "Chinese Simplified",
+            "multiverseId": 437988,
+            "name": "激烈炮击",
+            "text": "激烈炮击对每个非海盗的生物各造成2点伤害。",
+            "type": "瞬间"
+          },
+          {
+            "flavorText": "暮影軍團為了抵禦恐龍侵襲，架高了要塞的壁壘～但完工時正好趕上海盜炮火，全部付諸一炬。",
+            "language": "Chinese Traditional",
+            "multiverseId": 438287,
+            "name": "激烈炮擊",
+            "text": "激烈炮擊對每個非海盜的生物各造成2點傷害。",
+            "type": "瞬間"
+          }
+        ],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "214420",
+          "cardKingdomId": "214131",
+          "mcmId": "301792",
+          "mcmMetaId": "227020",
+          "mtgArenaId": "66251",
+          "mtgjsonV4Id": "f265087e-e26e-536d-ae9a-91a29bd587df",
+          "mtgoFoilId": "65303",
+          "mtgoId": "65302",
+          "multiverseId": "435297",
+          "scryfallId": "664d21c9-4b6c-4797-845f-7bca79c2b76b",
+          "scryfallIllustrationId": "bbef4f87-7598-43d4-ae85-3bedcac5c9d8",
+          "scryfallOracleId": "7e108b31-2ea3-4129-b324-a2d31c78bbe6",
+          "tcgplayerProductId": "145808"
+        },
+        "isFoil": false,
+        "layout": "normal",
+        "legalities": {
+          "commander": "Legal",
+          "duel": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "penny": "Legal",
+          "pioneer": "Legal",
+          "vintage": "Legal"
+        },
+        "manaCost": "{2}{R}",
+        "name": "Fiery Cannonade",
+        "number": "143",
+        "originalText": "Fiery Cannonade deals 2 damage to each non-Pirate creature.",
+        "originalType": "Instant",
+        "printings": [
+          "XLN"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/ab5c7a25a2f7368e",
+          "cardKingdomFoil": "https://mtgjson.com/links/c213d0a0f367ddf6",
+          "cardmarket": "https://mtgjson.com/links/0ab8b9302e3b1083",
+          "tcgplayer": "https://mtgjson.com/links/8af3aa43841191b3"
+        },
+        "rarity": "uncommon",
+        "rulings": [],
+        "setCode": "XLN",
+        "subtypes": [],
+        "supertypes": [],
+        "text": "Fiery Cannonade deals 2 damage to each non-Pirate creature.",
+        "type": "Instant",
+        "types": [
+          "Instant"
+        ],
+        "uuid": "39c19f81-70a0-5f08-84d9-b3ab1d45212d"
+      },
+      {
+        "artist": "Grzegorz Rutkowski",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "R"
+        ],
+        "colors": [
+          "R"
+        ],
+        "manaValue": 1.0,
+        "count": 2,
+        "edhrecRank": 8679,
+        "flavorText": "Sometimes Shivan dragons toy with their food. Other times they just cook it.",
+        "foreignData": [
+          {
+            "flavorText": "Manchmal spielen shivanische Drachen mit ihrem Essen. Aber manchmal soll es einfach nur gut durch sein.",
+            "language": "German",
+            "multiverseId": 443299,
+            "name": "Shivanisches Feuer",
+            "text": "Bonus {4} (Du kannst zusätzlich {4} bezahlen, sowie du diesen Zauberspruch wirkst.)\nDas Shivanische Feuer fügt einer Kreatur deiner Wahl 2 Schadenspunkte zu. Falls die Bonuskosten dieses Zauberspruchs bezahlt wurden, fügt er der Kreatur stattdessen 4 Schadenspunkte zu.",
+            "type": "Spontanzauber"
+          },
+          {
+            "flavorText": "Los dragones shivanos juegan de vez en cuando con la comida. Otras veces, la asan y ya está.",
+            "language": "Spanish",
+            "multiverseId": 443568,
+            "name": "Fuego shivano",
+            "text": "Estímulo {4}. (Puedes pagar {4} adicionales al lanzar este hechizo.)\nEl Fuego shivano hace 2 puntos de daño a la criatura objetivo. Si este hechizo fue estimulado, en vez de eso, hace 4 puntos de daño a esa criatura.",
+            "type": "Instantáneo"
+          },
+          {
+            "flavorText": "Parfois, les dragons shivâns jouent avec leur nourriture. Parfois, ils se contentent de la cuire.",
+            "language": "French",
+            "multiverseId": 443837,
+            "name": "Feu shivân",
+            "text": "Kick {4} (Vous pouvez payer {4} supplémentaires au moment où vous lancez ce sort.)\nLe Feu shivân inflige 2 blessures à la créature ciblée. Si ce sort a été kické, il inflige 4 blessures à cette créature à la place.",
+            "type": "Éphémère"
+          },
+          {
+            "flavorText": "A volte i draghi di Shiv si divertono con il loro cibo. Altre, invece, si limitano a cucinarlo.",
+            "language": "Italian",
+            "multiverseId": 444106,
+            "name": "Fuoco di Shiv",
+            "text": "Potenziamento {4} (Puoi pagare {4} addizionale mentre lanci questa magia.)\nIl Fuoco di Shiv infligge 2 danni a una creatura bersaglio. Se questa magia è stata potenziata, infligge invece 4 danni a quella creatura.",
+            "type": "Istantaneo"
+          },
+          {
+            "flavorText": "シヴのドラゴンは餌を弄ぶことがある。すぐに焼いて食べることもある。",
+            "language": "Japanese",
+            "multiverseId": 444375,
+            "name": "シヴの火",
+            "text": "キッカー{4}（あなたはこの呪文を唱えるに際し、追加で{4}を支払ってもよい。）\nクリーチャー１体を対象とする。シヴの火はそれに２点のダメージを与える。この呪文がキッカーされていたなら、代わりに、これはそのクリーチャーに４点のダメージを与える。",
+            "type": "インスタント"
+          },
+          {
+            "flavorText": "시브의 용들은 가끔 먹이를 장난감처럼 가지고 논다. 또 어떤 때는 그저 요리해버리기도 한다.",
+            "language": "Korean",
+            "multiverseId": 444644,
+            "name": "시브의 불",
+            "text": "키커 {4} (당신은 이 주문을 발동하면서 추가로 {4}를 지불할 수 있다.)\n생물을 목표로 정한다. 시브의 불은 그 생물에게 피해 2점을 입힌다. 이 주문의 키커 비용이 지불되었다면, 시브의 불은 대신 그 생물에게 피해 4점을 입힌다.",
+            "type": "순간마법"
+          },
+          {
+            "flavorText": "Às vezes, os dragões de Shiv brincam com a comida. Outras vezes eles só cozinham.",
+            "language": "Portuguese (Brazil)",
+            "multiverseId": 444913,
+            "name": "Fogo de Shiv",
+            "text": "Reforçar {4} (Você pode pagar um custo adicional de {4} ao conjurar esta mágica.)\nFogo de Shiv causa 2 pontos de dano à criatura alvo. Se esta mágica foi reforçada, ela causa, em vez disso, 4 pontos de dano àquela criatura.",
+            "type": "Mágica Instantânea"
+          },
+          {
+            "flavorText": "Иногда драконы Шива играют со своей едой. Обычно же они ее просто готовят.",
+            "language": "Russian",
+            "multiverseId": 445182,
+            "name": "Шиванский Огонь",
+            "text": "Усилитель {4} (При разыгрывании этого заклинания вы можете дополнительно заплатить {4}.)\nШиванский Огонь наносит 2 повреждения целевому существу. Если это заклинание получило Усилитель, вместо этого оно наносит 4 повреждения тому существу.",
+            "type": "Мгновенное заклинание"
+          },
+          {
+            "flavorText": "西瓦的巨龙偶尔会戏耍食物；大多时候是直接烧烤了事。",
+            "language": "Chinese Simplified",
+            "multiverseId": 445451,
+            "name": "西瓦烈焰",
+            "text": "增幅{4}（你施放此咒语时可以额外支付{4}。）\n西瓦烈焰对目标生物造成2点伤害。如果此咒语已增幅，则改为它对该生物造成4点伤害。",
+            "type": "瞬间"
+          },
+          {
+            "flavorText": "西瓦的巨龍偶爾會戲耍食物；大多時候是直接燒烤了事。",
+            "language": "Chinese Traditional",
+            "multiverseId": 445720,
+            "name": "西瓦烈焰",
+            "text": "增幅{4}（你施放此咒語時可以額外支付{4}）。\n西瓦烈焰對目標生物造成2點傷害。如果此咒語已增幅，則改為它對該生物造成4點傷害。",
+            "type": "瞬間"
+          }
+        ],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "218293",
+          "cardKingdomId": "218020",
+          "mcmId": "355425",
+          "mcmMetaId": "261133",
+          "mtgArenaId": "67388",
+          "mtgjsonV4Id": "198f534b-0dc1-543f-b5e3-35e7d40be1e5",
+          "mtgoId": "67749",
+          "multiverseId": "443030",
+          "scryfallId": "21b9d339-99ed-4923-8f56-be37f29a0bfa",
+          "scryfallIllustrationId": "419314d1-8bf2-4209-9bde-28a9a80772c2",
+          "scryfallOracleId": "854fd120-9a51-4d37-9922-7e4b0464e0f5",
+          "tcgplayerProductId": "164777"
+        },
+        "isFoil": false,
+        "keywords": [
+          "Kicker"
+        ],
+        "layout": "normal",
+        "legalities": {
+          "commander": "Legal",
+          "duel": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "pauper": "Legal",
+          "pioneer": "Legal",
+          "vintage": "Legal"
+        },
+        "manaCost": "{R}",
+        "name": "Shivan Fire",
+        "number": "142",
+        "originalText": "Kicker {4} (You may pay an additional {4} as you cast this spell.)\nShivan Fire deals 2 damage to target creature. If this spell was kicked, it deals 4 damage to that creature instead.",
+        "originalType": "Instant",
+        "printings": [
+          "DOM"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/9cf21b966603b4a8",
+          "cardKingdomFoil": "https://mtgjson.com/links/43e6caee722b48ef",
+          "cardmarket": "https://mtgjson.com/links/6fbc6a17e7afa995",
+          "tcgplayer": "https://mtgjson.com/links/db0b2d96357cb128"
+        },
+        "rarity": "common",
+        "rulings": [],
+        "setCode": "DOM",
+        "subtypes": [],
+        "supertypes": [],
+        "text": "Kicker {4} (You may pay an additional {4} as you cast this spell.)\nShivan Fire deals 2 damage to target creature. If this spell was kicked, it deals 4 damage instead.",
+        "type": "Instant",
+        "types": [
+          "Instant"
+        ],
+        "uuid": "cdbe0606-3ea5-53c9-8bcc-089306c673ad"
+      },
+      {
+        "artist": "Deruchenko Alexander",
+        "availability": [
+          "arena",
+          "mtgo",
+          "paper"
+        ],
+        "borderColor": "black",
+        "colorIdentity": [
+          "U"
+        ],
+        "colors": [
+          "U"
+        ],
+        "manaValue": 2.0,
+        "count": 2,
+        "edhrecRank": 893,
+        "flavorText": "\"Laws apply only to those who lack the vision to see past them.\"",
+        "foreignData": [
+          {
+            "flavorText": "„Gesetze gelten nur für jene, denen der Wagemut fehlt, über sie hinwegzugehen.\"",
+            "language": "German",
+            "multiverseId": 453046,
+            "name": "Verächtlicher Hieb",
+            "text": "Neutralisiere einen Zauberspruch deiner Wahl mit umgewandelten Manakosten von 4 oder mehr.",
+            "type": "Spontanzauber"
+          },
+          {
+            "flavorText": "\"Las leyes se aplican solo a los que son incapaces de ver más allá de ellas\".",
+            "language": "Spanish",
+            "multiverseId": 453305,
+            "name": "Golpe altanero",
+            "text": "Contrarresta el hechizo objetivo con coste de maná convertido de 4 o más.",
+            "type": "Instantáneo"
+          },
+          {
+            "flavorText": "« Les lois ne s'appliquent qu'à ceux qui manquent d'imagination pour les contourner. »",
+            "language": "French",
+            "multiverseId": 453564,
+            "name": "Botte dédaigneuse",
+            "text": "Contrecarrez le sort avec un coût converti de mana supérieur ou égal à 4 ciblé.",
+            "type": "Éphémère"
+          },
+          {
+            "flavorText": "\"Le leggi si applicano solo a chi non riesce a vedere oltre esse.\"",
+            "language": "Italian",
+            "multiverseId": 453823,
+            "name": "Fendente Sdegnoso",
+            "text": "Neutralizza una magia bersaglio con costo di mana convertito pari o superiore a 4.",
+            "type": "Istantaneo"
+          },
+          {
+            "flavorText": "「法が適用されるのは、その裏を見通す目を持たない者のみだ。」",
+            "language": "Japanese",
+            "multiverseId": 454082,
+            "name": "軽蔑的な一撃",
+            "text": "点数で見たマナ・コストが４以上の呪文１つを対象とし、それを打ち消す。",
+            "type": "インスタント"
+          },
+          {
+            "flavorText": "\"법은 그것들 너머를 보는 시각이 없는 자들에게만 적용되지.\"",
+            "language": "Korean",
+            "multiverseId": 454341,
+            "name": "경멸의 일격",
+            "text": "전환마나비용이 4 이상인 주문을 목표로 정한다. 그 주문을 무효화한다.",
+            "type": "순간마법"
+          },
+          {
+            "flavorText": "\"As leis só se aplicam aos que carecem da capacidade de ver além delas.\"",
+            "language": "Portuguese (Brazil)",
+            "multiverseId": 454600,
+            "name": "Golpe Desdenhoso",
+            "text": "Anule a mágica alvo com custo de mana convertido igual ou superior a 4.",
+            "type": "Mágica Instantânea"
+          },
+          {
+            "flavorText": "«Законы применяются только к тем, у кого не хватает воображения взглянуть сквозь них».",
+            "language": "Russian",
+            "multiverseId": 454859,
+            "name": "Презрительный Удар",
+            "text": "Отмените целевое заклинание с конвертированной мана-стоимостью 4 или больше.",
+            "type": "Мгновенное заклинание"
+          },
+          {
+            "flavorText": "「律法只能约束那些无法看穿它的人。」",
+            "language": "Chinese Simplified",
+            "multiverseId": 455118,
+            "name": "倨傲击",
+            "text": "反击目标总法术力费用等于或大于4的咒语。",
+            "type": "瞬间"
+          },
+          {
+            "flavorText": "「律法只能約束那些無法看穿它的人。」",
+            "language": "Chinese Traditional",
+            "multiverseId": 455377,
+            "name": "倨傲擊",
+            "text": "反擊目標總魔法力費用等於或大於4的咒語。",
+            "type": "瞬間"
+          }
+        ],
+        "frameVersion": "2015",
+        "hasFoil": true,
+        "hasNonFoil": true,
+        "identifiers": {
+          "cardKingdomFoilId": "221819",
+          "cardKingdomId": "221546",
+          "mcmId": "364114",
+          "mcmMetaId": "210285",
+          "mtgArenaId": "68498",
+          "mtgjsonV4Id": "0a1a353e-d368-59c0-9c26-e16460cf3784",
+          "mtgoId": "69447",
+          "multiverseId": "452787",
+          "scryfallId": "0193dfa3-8409-44be-b4be-6c3cad42d4a4",
+          "scryfallIllustrationId": "3201547b-1aaf-4c5c-a186-b52b91831971",
+          "scryfallOracleId": "11e02134-7b1a-46a4-a89e-7539dd1efada",
+          "tcgplayerProductId": "176441"
+        },
+        "isFoil": false,
+        "isReprint": true,
+        "layout": "normal",
+        "legalities": {
+          "brawl": "Legal",
+          "commander": "Legal",
+          "duel": "Legal",
+          "historic": "Legal",
+          "legacy": "Legal",
+          "modern": "Legal",
+          "pauper": "Legal",
+          "penny": "Legal",
+          "pioneer": "Legal",
+          "standard": "Legal",
+          "vintage": "Legal"
+        },
+        "manaCost": "{1}{U}",
+        "name": "Disdainful Stroke",
+        "number": "37",
+        "originalText": "Counter target spell with mana value 4 or greater.",
+        "originalType": "Instant",
+        "printings": [
+          "C16",
+          "CM2",
+          "F15",
+          "GRN",
+          "KTK",
+          "PRM"
+        ],
+        "purchaseUrls": {
+          "cardKingdom": "https://mtgjson.com/links/a3f90b07b2710086",
+          "cardKingdomFoil": "https://mtgjson.com/links/b9d125fe87cdb876",
+          "cardmarket": "https://mtgjson.com/links/87a783f2f5afc366",
+          "tcgplayer": "https://mtgjson.com/links/d6901dea0df319a7"
+        },
+        "rarity": "common",
+        "rulings": [
+          {
+            "date": "2014-09-20",
+            "text": "A face-down spell has mana value 0 and can’t be targeted by Disdainful Stroke."
+          },
+          {
+            "date": "2018-10-05",
+            "text": "If a spell has {X} in its mana cost, include the value chosen for that X when determining the mana value of that spell."
+          }
+        ],
+        "setCode": "GRN",
+        "subtypes": [],
+        "supertypes": [],
+        "text": "Counter target spell with mana value 4 or greater.",
+        "type": "Instant",
+        "types": [
+          "Instant"
+        ],
+        "uuid": "10a83c44-a436-55a1-87d7-a6379596559d"
+      }
+    ],
+    "type": "Challenger Deck"
+  },
+  "meta": {
+    "date": "2020-09-14",
+    "version": "5.0.1+20200914"
+  }
+}
