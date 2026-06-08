@@ -412,6 +412,33 @@ public class VerifyCardDataTest {
     }
 
     @Test
+    public void test_findNonDidgitCardNumbers() {
+        // info only
+        // find all cards with bad non-didgit numbers, see #11157
+        // see parseCardNumberAsInt for supported formats
+        for (Map.Entry<String, MtgJsonSet> refEntry : MtgJsonService.sets().entrySet()) {
+            MtgJsonSet refSet = refEntry.getValue();
+            for (MtgJsonCard refCard : refSet.cards) {
+                String cleanNumber = refCard.number.replaceAll("[\\D]", "");
+                if (cleanNumber.isEmpty()) {
+                    System.out.println("Found non-digit card number: " 
+                        + refSet.code + " - " 
+                        + refCard.getNameAsASCII() + " - " 
+                        + refCard.number
+                    );
+                }
+                if (cleanNumber.equals("0")) {
+                    System.out.println("Found zero card number: " 
+                        + refSet.code + " - " 
+                        + refCard.getNameAsASCII() + " - " 
+                        + refCard.number
+                    );
+                }
+            }
+        }
+    }
+
+    @Test
     @Ignore // TODO: enable it after THB set will be completed
     public void test_checkDoubleRareCardsInSets() {
         // all basic sets after THB must have double rare cards (one normal, one bonus)

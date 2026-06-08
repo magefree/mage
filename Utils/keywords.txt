@@ -141,6 +141,7 @@ Suspend|number, cost, card|
 Swampcycling|cost|
 Swampwalk|new|
 Umbra armor|new|
+Teamwork|number|
 Tiered|card|
 Toxic|number|
 Training|new|

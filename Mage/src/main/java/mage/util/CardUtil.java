@@ -555,7 +555,8 @@ public final class CardUtil {
 
     /**
      * Parse card number as int (support base [123] and alternative numbers
-     * [123b], [U123]). For inner purpose only like cards sorting.
+     * [123b], [U123]). For inner purpose only like cards sorting. 
+     * Do not support zero card number due tokens usage.
      * <p>
      * From scryfall: card numbers should be considered to be plaintext strings. they may contain multiple
      * non-digit components, may contain no digits at all, and may not correspond to anything
@@ -571,12 +572,22 @@ public final class CardUtil {
         }
 
         // example: 123, U123, 123b, 123*, 123+
-        String cardNumberNormalized = cardNumber.replaceAll("[\\D]", "");
-        if (cardNumberNormalized.isEmpty()) {
-            throw new IllegalArgumentException("Card number must contain at least one digit"); // require by xmage
+        String cleanCardNumber = cardNumber.replaceAll("[\\D]", "");
+
+        // token's zero number is restricted
+        if (!cleanCardNumber.isEmpty() && cleanCardNumber.replaceAll("0", "").isEmpty()) {
+            throw new IllegalArgumentException("Card number cannot be a zero number due tokens usage limit: " + cardNumber);
         }
 
-        return Integer.parseInt(cardNumberNormalized);
+        // non-digit numbers support 
+        // (replace by fake stable digit, sort it after normal numbers)
+        if (cleanCardNumber.isEmpty()) {
+            int hash = cardNumber.hashCode() & 0x7fffffff; // only positive
+            return 1000000 + (hash % (Integer.MAX_VALUE - 1000000));
+        }
+
+        // normal card numbers with digits
+        return Integer.parseInt(cleanCardNumber);
     }
 
     /**
