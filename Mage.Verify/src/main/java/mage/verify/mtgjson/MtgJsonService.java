@@ -67,8 +67,8 @@ public final class MtgJsonService {
         // mtgjson site require user-agent in headers (otherwise it return 403)
         stream = XmageURLConnection.downloadBinary(url);
         if (stream != null) {
-            logger.info("mtgjson: download DONE, saved to " + file.getAbsolutePath());
             Files.copy(stream, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            logger.info("mtgjson: download DONE, saved to " + file.getAbsolutePath());
             return readFromZip(Files.newInputStream(file.toPath()), clazz);
         }
 
