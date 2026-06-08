@@ -1794,22 +1794,31 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param noMana
      * @return
      */
-    public static Map<UUID, SpellAbility> getCastableSpellAbilities(Game game, UUID playerId, MageObject object, Zone zone, boolean noMana) {
+    public static Map<UUID, ActivatedAbility> getCastableSpellOrPlayLandAbilities(Game game, UUID playerId, MageObject object, Zone zone, boolean noMana, boolean playLand) {
         // it uses simple check from spellCanBeActivatedNow
         // reason: no approved info here (e.g. forced to choose spell ability from cast card)
-        LinkedHashMap<UUID, SpellAbility> useable = new LinkedHashMap<>();
+        LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
         Abilities<Ability> allAbilities;
-        if (object instanceof Card) {
+        if (object instanceof CardWithParts) {
+            allAbilities = ((CardWithParts) object).getAllAbilities(game);
+        }
+        else if (object instanceof Card) {
             allAbilities = ((Card) object).getAbilities(game);
         } else {
             allAbilities = object.getAbilities();
         }
-        for (SpellAbility spellAbility : allAbilities
-                .stream()
-                .filter(SpellAbility.class::isInstance)
-                .map(SpellAbility.class::cast)
-                .filter(sa -> sa.getSpellAbilityType().canCast())
-                .collect(Collectors.toList())) {
+        for (ActivatedAbility ability : allAbilities.stream()
+                .filter(a -> a instanceof ActivatedAbility)
+                .map(ActivatedAbility.class::cast)
+                .collect(Collectors.toList())){
+            if (playLand && ability instanceof PlayLandAbility && game.isActivePlayer(playerId)) {
+                useable.put(ability.getId(), ability);
+                continue;
+            }
+            if (!(ability instanceof SpellAbility)) {
+                continue;
+            }
+            SpellAbility spellAbility = (SpellAbility) ability;
             switch (spellAbility.getSpellAbilityType()) {
                 case BASE_ALTERNATE:
                     // rules:
@@ -1832,21 +1841,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (zone == Zone.HAND && spellAbility.canChooseTarget(game, playerId)) {
                         useable.put(spellAbility.getId(), spellAbility);
                     }
-                case SPLIT:
-                    assert object instanceof SplitCard;
-                    if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
-                        useable.put(
-                                ((SplitCard) object).getLeftHalfCard().getSpellAbility().getId(),
-                                ((SplitCard) object).getLeftHalfCard().getSpellAbility()
-                        );
-                    }
-                    if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
-                        useable.put(
-                                ((SplitCard) object).getRightHalfCard().getSpellAbility().getId(),
-                                ((SplitCard) object).getRightHalfCard().getSpellAbility()
-                        );
-                    }
-                    return useable;
+                    break;
                 case SPLIT_AFTERMATH:
                     assert object instanceof SplitCard;
                     if (zone == Zone.GRAVEYARD) {
@@ -4305,7 +4300,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         ManaOptions availableMana = getManaAvailable(game); // get available mana options (mana pool and conditional mana added (but conditional still lose condition))
         if (hidden && fromZone.match(Zone.HAND)) {
             for (Card card : hand.getCards(game)) {
-                for (Ability ability : card.getAbilities(game)) { // gets this activated ability from hand? (Morph?)
+                Abilities<Ability> cardAbilities = card instanceof CardWithParts
+                        ? ((CardWithParts) card).getAllAbilities(game)
+                        : card.getAbilities(game);
+                for (Ability ability : cardAbilities) { // gets this activated ability from hand? (Morph?)
                     if (ability.getZone().match(Zone.HAND)) {
                         boolean isPlaySpell = (ability instanceof SpellAbility);
                         boolean isPlayLand = (ability instanceof PlayLandAbility);

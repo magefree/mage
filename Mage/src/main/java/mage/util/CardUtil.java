@@ -1484,7 +1484,7 @@ public final class CardUtil {
         } else {
             cards.add(cardToCast);
         }
-        cards.removeIf(card -> Objects.isNull(card) || card.getSpellAbility() == null || !card.getSpellAbility().getSpellAbilityType().canCast());
+        cards.removeIf(card -> Objects.isNull(card) || card.getSpellAbility() != null && !card.getSpellAbility().getSpellAbilityType().canCast());
         if (!playLand || !player.canPlayLand() || !game.isActivePlayer(playerId)) {
             cards.removeIf(card -> card.isLand(game));
         }

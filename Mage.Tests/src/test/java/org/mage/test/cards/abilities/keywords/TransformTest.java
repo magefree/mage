@@ -1,12 +1,10 @@
 package org.mage.test.cards.abilities.keywords;
 
 import mage.ObjectColor;
+import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
-import mage.constants.CardType;
-import mage.constants.PhaseStep;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -951,5 +949,66 @@ public class TransformTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, likenessOfTheSeeker, 0);
         assertPermanentCount(playerA, "Clever Impersonator", 0);
         assertExileCount(playerA, "Clever Impersonator", 1);
+    }
+
+    /**
+     * Test that cascading into TDFC will not prompt a choice with the back side card
+     */
+    @Test
+    public void test_cascade() {
+        setStrictChooseMode(true);
+
+        removeAllCardsFromLibrary(playerA);
+        skipInitShuffling();
+
+        addCard(Zone.HAND, playerA, "Bloodbraid Elf"); // {2}{R}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+
+        addCard(Zone.LIBRARY, playerA, azusasManyJourneys);
+        addCard(Zone.LIBRARY, playerA, "Island", 5);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodbraid Elf");
+        setChoice(playerA, true); // Cascade trigger
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, azusasManyJourneys, 1);
+    }
+
+    @Test
+    public void test_necrotic_ooze() {
+        // Aclazotz, Deepest Betrayal {3}{B}{B}
+        // Legendary Creature — Bat God
+        // Flying, lifelink
+        // Whenever Aclazotz attacks, each opponent discards a card. For each opponent who can’t, you draw a card.
+        // Whenever an opponent discards a land card, create a 1/1 black Bat creature token with flying.
+        // When Aclazotz dies, return it to the battlefield tapped and transformed under its owner’s control.
+        // 4/4
+        // Temple of the Dead
+        //  Land
+        // {T}: Add {B}.
+        // {2}{B}, {T}: Transform this land. Activate only if a player has one or fewer cards in hand and only as a sorcery.
+        String aclazotz = "Aclazotz, Deepest Betrayal";
+        // Necrotic Ooze
+        // Creature — Ooze {2}{B}{B}
+        // As long as this creature is on the battlefield, it has all activated abilities of all creature cards in all graveyards.
+        String ooze = "Necrotic Ooze";
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, ooze);
+        addCard(Zone.GRAVEYARD, playerA, aclazotz);
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        Permanent oozePerm = getPermanent(ooze, playerA);
+        int abilityCount = 0;
+        for (Ability ability : oozePerm.getAbilities(currentGame)) {
+            if (ability.isActivatedAbility()) {
+                abilityCount++;
+            }
+        }
+        assertEquals(0, abilityCount, "Should have 0 activated abilities");
     }
 }

@@ -51,9 +51,6 @@ public abstract class TransformingDoubleFacedCard extends DoubleFacedCard<Transf
 
     @Override
     public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
-        if (ability.getSpellAbilityType() == SpellAbilityType.TRANSFORMED) {
-            return this.leftHalfCard.cast(game, fromZone, ability, controllerId);
-        }
-        return super.cast(game, fromZone, ability, controllerId);
+        return this.leftHalfCard.cast(game, fromZone, ability, controllerId);
     }
 }
