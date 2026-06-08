@@ -56,16 +56,6 @@ public abstract class RoomCard extends SplitCard {
     }
 
     @Override
-    public Abilities<Ability> getAbilities() {
-        return this.abilities;
-    }
-
-    @Override
-    public Abilities<Ability> getAbilities(Game game) {
-        return this.abilities;
-    }
-
-    @Override
     protected void updatePartZones(Zone zone, Game game) {
         if (zone == Zone.BATTLEFIELD) {
             game.setZone(getLeftHalfCard().getId(), Zone.OUTSIDE);
@@ -196,7 +186,6 @@ class RoomEnterUnlockEffect extends OneShotEffect {
         SpellAbilityType lastCastHalf = roomCard.getLastCastHalf();
 
         if (lastCastHalf == SpellAbilityType.SPLIT_LEFT || lastCastHalf == SpellAbilityType.SPLIT_RIGHT) {
-            roomCard.setLastCastHalf(null);
             return permanent.unlockDoor(game, source, lastCastHalf == SpellAbilityType.SPLIT_LEFT);
         }
 
