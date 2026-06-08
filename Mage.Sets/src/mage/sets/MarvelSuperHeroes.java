@@ -131,6 +131,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Project Deathlok Soldier", 109, Rarity.COMMON, mage.cards.p.ProjectDeathlokSoldier.class));
         cards.add(new SetCardInfo("Pym Technologies", 271, Rarity.COMMON, mage.cards.p.PymTechnologies.class));
         cards.add(new SetCardInfo("Quicksilver, Brash Blur", 148, Rarity.RARE, mage.cards.q.QuicksilverBrashBlur.class));
+        cards.add(new SetCardInfo("Red Room Recruit", 110, Rarity.COMMON, mage.cards.r.RedRoomRecruit.class));
         cards.add(new SetCardInfo("Ronin, Shadow Stalker", 112, Rarity.UNCOMMON, mage.cards.r.RoninShadowStalker.class));
         cards.add(new SetCardInfo("Roxxon Brutes", 113, Rarity.COMMON, mage.cards.r.RoxxonBrutes.class));
         cards.add(new SetCardInfo("S.H.I.E.L.D. Deployment Drone", 73, Rarity.COMMON, mage.cards.s.SHIELDDeploymentDrone.class));
