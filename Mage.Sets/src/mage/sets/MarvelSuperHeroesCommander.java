@@ -115,7 +115,6 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Wisecrack", 813, Rarity.UNCOMMON, mage.cards.w.Wisecrack.class));
 
         //TODO: Correct these collectors numbers and rarities once confirmed
-        cards.add(new SetCardInfo("A.I.M. Bot", 529, Rarity.COMMON, mage.cards.a.AIMBot.class));
         cards.add(new SetCardInfo("Abomination, Irradiated Brute", "XXX1", Rarity.RARE, mage.cards.a.AbominationIrradiatedBrute.class));
         cards.add(new SetCardInfo("Loki, God of Lies", "XXX2", Rarity.RARE, mage.cards.l.LokiGodOfLies.class));
         cards.add(new SetCardInfo("M.O.D.O.K., Evil Intellect", "XXX3", Rarity.RARE, mage.cards.m.MODOKEvilIntellect.class));
