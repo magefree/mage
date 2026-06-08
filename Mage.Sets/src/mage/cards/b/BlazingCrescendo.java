@@ -11,21 +11,17 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author muz
  */
 public final class BlazingCrescendo extends CardImpl {
 
     public BlazingCrescendo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
-        // Target creature gets +3/+1 until end of turn.
+        // Target creature gets +3/+1 until end of turn. Exile the top card of your library. Until the end of your next turn, you may play that card.
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 1));
+        this.getSpellAbility().addEffect(new ExileTopXMayPlayUntilEffect(1, Duration.UntilEndOfYourNextTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-
-        // Exile the top card of your library. Until the end of your next turn, you may play that card.
-        this.getSpellAbility().addEffect(new ExileTopXMayPlayUntilEffect(
-                1, Duration.UntilEndOfYourNextTurn
-        ).concatBy("<br>"));
     }
 
     private BlazingCrescendo(final BlazingCrescendo card) {
