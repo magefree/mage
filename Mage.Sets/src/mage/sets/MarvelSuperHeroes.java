@@ -48,6 +48,9 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Avengers Tower", 334, Rarity.UNCOMMON, mage.cards.a.AvengersTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avengers Tower", 452, Rarity.UNCOMMON, mage.cards.a.AvengersTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Baron Helmut Zemo", 87, Rarity.RARE, mage.cards.b.BaronHelmutZemo.class));
+        cards.add(new SetCardInfo("Baron Strucker, HYDRA Overlord", 315, Rarity.UNCOMMON, mage.cards.b.BaronStruckerHYDRAOverlord.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Baron Strucker, HYDRA Overlord", 446, Rarity.UNCOMMON, mage.cards.b.BaronStruckerHYDRAOverlord.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Baron Strucker, HYDRA Overlord", 88, Rarity.UNCOMMON, mage.cards.b.BaronStruckerHYDRAOverlord.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Baxter Building", 261, Rarity.UNCOMMON, mage.cards.b.BaxterBuilding.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Baxter Building", 453, Rarity.UNCOMMON, mage.cards.b.BaxterBuilding.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Birnin Zana Plaza", 262, Rarity.COMMON, mage.cards.b.BirninZanaPlaza.class));
