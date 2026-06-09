@@ -38,6 +38,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Arnim Zola, Bio-Fanatic", 86, Rarity.UNCOMMON, mage.cards.a.ArnimZolaBioFanatic.class));
         cards.add(new SetCardInfo("Asgardian Citadel", 258, Rarity.COMMON, mage.cards.a.AsgardianCitadel.class));
         cards.add(new SetCardInfo("Atlantean Cavalry", 45, Rarity.COMMON, mage.cards.a.AtlanteanCavalry.class));
+        cards.add(new SetCardInfo("Atlantis Attacks", 46, Rarity.COMMON, mage.cards.a.AtlantisAttacks.class));
         cards.add(new SetCardInfo("Attuma, Atlantean Warlord", 47, Rarity.UNCOMMON, mage.cards.a.AttumaAtlanteanWarlord.class));
         cards.add(new SetCardInfo("Avengers Assemble!", 297, Rarity.MYTHIC, mage.cards.a.AvengersAssemble.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avengers Assemble!", 341, Rarity.MYTHIC, mage.cards.a.AvengersAssemble.class, NON_FULL_USE_VARIOUS));
@@ -147,6 +148,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Namor the Sub-Mariner", 391, Rarity.MYTHIC, mage.cards.n.NamorTheSubMariner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Namor the Sub-Mariner", 69, Rarity.MYTHIC, mage.cards.n.NamorTheSubMariner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ninja of the Hand", 108, Rarity.COMMON, mage.cards.n.NinjaOfTheHand.class));
+        cards.add(new SetCardInfo("Panther Pounce", 29, Rarity.COMMON, mage.cards.p.PantherPounce.class));
         cards.add(new SetCardInfo("Pet Avengers", 178, Rarity.COMMON, mage.cards.p.PetAvengers.class));
         cards.add(new SetCardInfo("Plains", 434, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 433, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
