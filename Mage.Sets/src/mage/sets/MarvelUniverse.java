@@ -26,6 +26,7 @@ public class MarvelUniverse extends ExpansionSet {
         cards.add(new SetCardInfo("Anthem of Champions", 85, Rarity.MYTHIC, mage.cards.a.AnthemOfChampions.class));
         cards.add(new SetCardInfo("Arachnogenesis", 31, Rarity.MYTHIC, mage.cards.a.Arachnogenesis.class));
         cards.add(new SetCardInfo("Arasta of the Endless Web", 32, Rarity.MYTHIC, mage.cards.a.ArastaOfTheEndlessWeb.class));
+        cards.add(new SetCardInfo("Archangel of Thune", 41, Rarity.MYTHIC, mage.cards.a.ArchangelOfThune.class));
         cards.add(new SetCardInfo("Aurelia the Warleader", 86, Rarity.MYTHIC, mage.cards.a.AureliaTheWarleader.class));
         cards.add(new SetCardInfo("Beast Within", 33, Rarity.MYTHIC, mage.cards.b.BeastWithin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Beast Within", 75, Rarity.MYTHIC, mage.cards.b.BeastWithin.class, NON_FULL_USE_VARIOUS));
