@@ -21,7 +21,7 @@ import mage.filter.StaticFilters;
 public final class VisionOfLove extends CardImpl {
 
     public VisionOfLove(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
         // You may sacrifice an artifact or discard a card. If you do, draw two cards.
         this.getSpellAbility().addEffect(new DoIfCostPaid(
