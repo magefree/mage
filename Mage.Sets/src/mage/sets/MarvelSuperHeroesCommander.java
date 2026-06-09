@@ -82,6 +82,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Robotics Mastery", 786, Rarity.UNCOMMON, mage.cards.r.RoboticsMastery.class));
         cards.add(new SetCardInfo("Rocket-Powered Goblin Glider", 825, Rarity.RARE, mage.cards.r.RocketPoweredGoblinGlider.class));
         cards.add(new SetCardInfo("Romantic Rendezvous", 808, Rarity.COMMON, mage.cards.r.RomanticRendezvous.class));
+        cards.add(new SetCardInfo("Sadistic Slash", 666, Rarity.UNCOMMON, mage.cards.s.SadisticSlash.class));
         cards.add(new SetCardInfo("Savage Lands", 827, Rarity.UNCOMMON, mage.cards.s.SavageLands.class));
         cards.add(new SetCardInfo("Scout the City", 817, Rarity.COMMON, mage.cards.s.ScoutTheCity.class));
         cards.add(new SetCardInfo("Selfless Police Captain", 774, Rarity.COMMON, mage.cards.s.SelflessPoliceCaptain.class));
