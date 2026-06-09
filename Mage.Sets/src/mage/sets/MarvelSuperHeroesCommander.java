@@ -24,6 +24,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Alien Symbiosis", 791, Rarity.UNCOMMON, mage.cards.a.AlienSymbiosis.class));
         cards.add(new SetCardInfo("Aunt May", 768, Rarity.UNCOMMON, mage.cards.a.AuntMay.class));
         cards.add(new SetCardInfo("Big Score", 802, Rarity.COMMON, mage.cards.b.BigScore.class));
+        cards.add(new SetCardInfo("Black Widow, Natasha Romanoff", 846, Rarity.COMMON, mage.cards.b.BlackWidowNatashaRomanoff.class));
         cards.add(new SetCardInfo("Captain America, Team Leader", 5, Rarity.MYTHIC, mage.cards.c.CaptainAmericaTeamLeader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain America, Team Leader", 879, Rarity.MYTHIC, mage.cards.c.CaptainAmericaTeamLeader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain Marvel, Apex Avenger", 78, Rarity.RARE, mage.cards.c.CaptainMarvelApexAvenger.class));
@@ -48,6 +49,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Flying Octobot", 785, Rarity.UNCOMMON, mage.cards.f.FlyingOctobot.class));
         cards.add(new SetCardInfo("Gallant Citizen", 820, Rarity.COMMON, mage.cards.g.GallantCitizen.class));
         cards.add(new SetCardInfo("Grapeshot", 803, Rarity.COMMON, mage.cards.g.Grapeshot.class));
+        cards.add(new SetCardInfo("Hammerhead, Maggia Boss", 659, Rarity.UNCOMMON, mage.cards.h.HammerheadMaggiaBoss.class));
         cards.add(new SetCardInfo("Heroes' Hangout", 804, Rarity.UNCOMMON, mage.cards.h.HeroesHangout.class));
         cards.add(new SetCardInfo("Hit-Monkey", 723, Rarity.RARE, mage.cards.h.HitMonkey.class));
         cards.add(new SetCardInfo("Hobgoblin, Mantled Marauder", 805, Rarity.UNCOMMON, mage.cards.h.HobgoblinMantledMarauder.class));
@@ -111,8 +113,10 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Venomized Cat", 801, Rarity.COMMON, mage.cards.v.VenomizedCat.class));
         cards.add(new SetCardInfo("Vision, Synthezoid Avenger", 460, Rarity.RARE, mage.cards.v.VisionSynthezoidAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vision, Synthezoid Avenger", 119, Rarity.RARE, mage.cards.v.VisionSynthezoidAvenger.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Warriors of Wakanda", 565, Rarity.COMMON, mage.cards.w.WarriorsOfWakanda.class));
         cards.add(new SetCardInfo("Wild Pack Squad", 781, Rarity.COMMON, mage.cards.w.WildPackSquad.class));
         cards.add(new SetCardInfo("Wisecrack", 813, Rarity.UNCOMMON, mage.cards.w.Wisecrack.class));
+        cards.add(new SetCardInfo("Zarda, the Power Princess", 615, Rarity.UNCOMMON, mage.cards.z.ZardaThePowerPrincess.class));
 
         //TODO: Correct these collectors numbers and rarities once confirmed
         cards.add(new SetCardInfo("Abomination, Irradiated Brute", "XXX1", Rarity.RARE, mage.cards.a.AbominationIrradiatedBrute.class));
