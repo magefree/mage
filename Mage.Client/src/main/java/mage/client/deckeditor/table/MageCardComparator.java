@@ -3,6 +3,7 @@ package mage.client.deckeditor.table;
 import mage.cards.MageCard;
 import mage.client.util.comparators.CardViewComparator;
 import mage.cards.RateCard;
+import mage.util.CardUtil;
 import mage.view.CardView;
 import org.apache.log4j.Logger;
 
@@ -35,13 +36,17 @@ public class MageCardComparator implements CardViewComparator {
             // #skip
             case 0:
                 break;
-            // Name
+            // Name with additional set/number
             case 1:
                 aCom = a.getName();
                 bCom = b.getName();
-                if (aCom.equals(bCom) && a.getExpansionSetCode().equals(b.getExpansionSetCode())) {
-                    aCom = a.getCardNumber();
-                    bCom = b.getCardNumber();
+                if (aCom.equals(bCom)) {
+                    aCom = a.getExpansionSetCode();
+                    bCom = b.getExpansionSetCode();
+                }
+                if (aCom.equals(bCom)) {
+                    aCom = CardUtil.parseCardNumberAsInt(a.getCardNumber());
+                    bCom = CardUtil.parseCardNumberAsInt(b.getCardNumber());
                 }
                 break;
             // Cost
@@ -81,8 +86,8 @@ public class MageCardComparator implements CardViewComparator {
                 bCom = b.getExpansionSetCode();
                 break;
             case 8:
-                aCom = Integer.parseInt(a.getCardNumber().replaceAll("[\\D]", ""));
-                bCom = Integer.parseInt(b.getCardNumber().replaceAll("[\\D]", ""));
+                aCom = CardUtil.parseCardNumberAsInt(a.getCardNumber());
+                bCom = CardUtil.parseCardNumberAsInt(b.getCardNumber());
                 break;
             case 9:
                 aCom = RateCard.rateCard(a, Collections.emptyList());
