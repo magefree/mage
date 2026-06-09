@@ -107,6 +107,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 279, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 289, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 290, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ka-Zar of the Savage Land", 174, Rarity.UNCOMMON, mage.cards.k.KaZarOfTheSavageLand.class));
         cards.add(new SetCardInfo("Kang, Temporal Tyrant", 217, Rarity.UNCOMMON, mage.cards.k.KangTemporalTyrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kang, Temporal Tyrant", 450, Rarity.UNCOMMON, mage.cards.k.KangTemporalTyrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kree Commandos", 19, Rarity.COMMON, mage.cards.k.KreeCommandos.class));
