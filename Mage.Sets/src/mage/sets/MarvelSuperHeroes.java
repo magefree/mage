@@ -71,6 +71,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Crimson Operative", 126, Rarity.COMMON, mage.cards.c.CrimsonOperative.class));
         cards.add(new SetCardInfo("Crossbones, Malicious Mercenary", 91, Rarity.UNCOMMON, mage.cards.c.CrossbonesMaliciousMercenary.class));
         cards.add(new SetCardInfo("Dark Deed", 93, Rarity.UNCOMMON, mage.cards.d.DarkDeed.class));
+        cards.add(new SetCardInfo("Decoy Ploy", 94, Rarity.COMMON, mage.cards.d.DecoyPloy.class));
         cards.add(new SetCardInfo("Dependable Quinjet", 246, Rarity.COMMON, mage.cards.d.DependableQuinjet.class));
         cards.add(new SetCardInfo("Depower", 50, Rarity.COMMON, mage.cards.d.Depower.class));
         cards.add(new SetCardInfo("Doctor Doom", 394, Rarity.MYTHIC, mage.cards.d.DoctorDoom.class, NON_FULL_USE_VARIOUS));
