@@ -112,6 +112,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Venomized Cat", 801, Rarity.COMMON, mage.cards.v.VenomizedCat.class));
         cards.add(new SetCardInfo("Vision, Synthezoid Avenger", 460, Rarity.RARE, mage.cards.v.VisionSynthezoidAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vision, Synthezoid Avenger", 119, Rarity.RARE, mage.cards.v.VisionSynthezoidAvenger.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Warriors of Wakanda", 565, Rarity.COMMON, mage.cards.w.WarriorsOfWakanda.class));
         cards.add(new SetCardInfo("Wild Pack Squad", 781, Rarity.COMMON, mage.cards.w.WildPackSquad.class));
         cards.add(new SetCardInfo("Wisecrack", 813, Rarity.UNCOMMON, mage.cards.w.Wisecrack.class));
         cards.add(new SetCardInfo("Zarda, the Power Princess", 615, Rarity.UNCOMMON, mage.cards.z.ZardaThePowerPrincess.class));
