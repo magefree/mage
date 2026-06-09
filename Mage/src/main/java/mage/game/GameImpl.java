@@ -342,14 +342,6 @@ public abstract class GameImpl implements Game {
                 Card spellCard = ((CardWithSpellOption) card).getSpellCard();
                 spellCard.setOwnerId(ownerId);
                 addCardToState(spellCard);
-            } else if (card.isTransformable() && card.getSecondCardFace() != null) {
-                Card nightCard = card.getSecondCardFace();
-                nightCard.setOwnerId(ownerId);
-                addCardToState(nightCard);
-            } else if (card.getMeldsToClazz() != null) {
-                // meld card will be added and init on meld effect resolve, so ignore it here
-                // TODO: rework meld logic cause card with watchers must be added on game init
-                //  (possible bugs: miss watcher related data in meld cards/rules/hints)
             }
         }
     }

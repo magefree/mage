@@ -29,7 +29,6 @@ import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.match.Match;
 import mage.game.permanent.PermanentCard;
-import mage.game.permanent.PermanentMeld;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
@@ -117,9 +116,9 @@ public class TestCardRenderDialog extends MageDialog {
     }
 
     private PermanentView createPermanentCard(Game game, UUID controllerId, String code, String cardNumber, int powerBoosted, int toughnessBoosted, int damage, boolean tapped, boolean transform, List<Ability> extraAbilities) {
-        CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber, false);
+        CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber);
         ExpansionInfo setInfo = ExpansionRepository.instance.getSetByCode(code);
-        CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), setInfo.getCode(), cardNumber, cardInfo.getRarity(),
+        CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), setInfo.getCode(), cardNumber, cardInfo.getMeldCardNumber(), cardInfo.getRarity(),
                 new CardGraphicInfo(cardInfo.getFrameStyle(), cardInfo.usesVariousArt()));
         Card newCard = CardImpl.createCard(cardInfo.getClassName(), testSet);
 
@@ -127,20 +126,23 @@ public class TestCardRenderDialog extends MageDialog {
         cardsList.add(newCard);
         game.loadCards(cardsList, controllerId);
 
-        Card permCard = CardUtil.getDefaultCardSideForBattlefield(game, newCard);
+        boolean isMeldCard = newCard instanceof MeldCard;
+
+        Card permCard;
+        if (isMeldCard && transform) {
+            permCard = newCard.getSecondCardFace();
+            permCard.setMeldedWith(newCard.copy(), game); // just need to set a random card so permanent can be created
+        } else {
+            permCard = CardUtil.getDefaultCardSideForBattlefield(game, newCard);
+        }
         if (extraAbilities != null) {
             extraAbilities.forEach(ability -> permCard.addAbility(ability));
         }
 
         // meld card must be a special class, see CardUtils.putCardOntoBattlefieldWithEffects
-        PermanentCard permanent;
-        if (permCard instanceof MeldCard) {
-            permanent = new PermanentMeld(permCard, controllerId, game);
-        } else {
-            permanent = new PermanentCard(permCard, controllerId, game);
-        }
+        PermanentCard permanent = new PermanentCard(permCard, controllerId, game);
 
-        if (transform) {
+        if (transform && !isMeldCard) {
             permanent.setTransformed(true);
             permanent.reset(game);
         }
@@ -156,7 +158,7 @@ public class TestCardRenderDialog extends MageDialog {
     }
 
     private CardView createFaceDownCard(Game game, UUID controllerId, String code, String cardNumber, boolean isMorphed, boolean isManifested, boolean tapped) {
-        CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber, false);
+        CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber);
         ExpansionInfo setInfo = ExpansionRepository.instance.getSetByCode(code);
         CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), setInfo.getCode(), cardNumber, cardInfo.getRarity(),
                 new CardGraphicInfo(cardInfo.getFrameStyle(), cardInfo.usesVariousArt()));
@@ -195,9 +197,9 @@ public class TestCardRenderDialog extends MageDialog {
     }
 
     private CardView createHandCard(Game game, UUID controllerId, String code, String cardNumber) {
-        CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber, false);
+        CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber);
         ExpansionInfo setInfo = ExpansionRepository.instance.getSetByCode(code);
-        CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), setInfo.getCode(), cardNumber, cardInfo.getRarity(),
+        CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), setInfo.getCode(), cardNumber, cardInfo.getMeldCardNumber(), cardInfo.getRarity(),
                 new CardGraphicInfo(cardInfo.getFrameStyle(), cardInfo.usesVariousArt()));
         Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
 
@@ -474,11 +476,17 @@ public class TestCardRenderDialog extends MageDialog {
 
         /* test meld cards in hands and battlefield
         cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "204")); // Hanweir Battlements
-        cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "130a")); // Hanweir Garrison
-        cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "130b")); // Hanweir, the Writhing Township
+        cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "130")); // Hanweir Garrison
+        cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "204").getSecondCardFace()); // Hanweir, the Writhing Township
         cardViews.add(createPermanentCard(game, playerYou.getId(), "EMN", "204", 1, 1, 0, false, false, null)); // Hanweir Battlements
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "EMN", "130a", 1, 1, 0, false, false, null)); // Hanweir Garrison
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "EMN", "130b", 1, 1, 0, false, false, null)); // Hanweir, the Writhing Township
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "EMN", "130", 1, 1, 0, false, false, null)); // Hanweir Garrison
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "EMN", "204", 1, 1, 0, false, true, null)); // Hanweir, the Writhing Township
+        cardViews.add(createHandCard(game, playerYou.getId(), "FIN", "381")); // Fang, Fearless L'Cie
+        cardViews.add(createHandCard(game, playerYou.getId(), "FIN", "392")); // Vanille, Cheerful L'Cie
+        cardViews.add(createHandCard(game, playerYou.getId(), "FIN", "211").getSecondCardFace()); // Ragnarok, Divine Deliverence
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "FIN", "211", 0, 0, 0, false, false, null)); // Vanille, Cheerful L'Cie
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "FIN", "381", 0, 0, 0, false, false, null)); // Fang, Vengeful L'Cie
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "FIN", "211", 0, 0, 0, false, true, null)); // Ragnarok, Divine Deliverence
         //*/
 
         /* test variant double faced cards (main and second sides must be same pair)
@@ -487,7 +495,7 @@ public class TestCardRenderDialog extends MageDialog {
         cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "320"));
         cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "332"));
         cardViews.add(createPermanentCard(game, playerYou.getId(), "VOW", "65", 1, 1, 0, false, false, null));
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "VOW", "320", 1, 1, 0, false, false, null));
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "VOW", "320", 0, 0, 0, false, true, null));
         cardViews.add(createPermanentCard(game, playerYou.getId(), "VOW", "332", 1, 1, 0, false, false, null));
         //*/
 

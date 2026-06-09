@@ -1,13 +1,12 @@
 package mage.game;
 
+import mage.abilities.Ability;
+import mage.game.events.ZoneChangeEvent;
+import mage.game.stack.Spell;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import mage.abilities.Ability;
-import mage.cards.MeldCard;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.stack.Spell;
 
 /**
  * Created by Dilnu on 9/4/16.
@@ -143,30 +142,6 @@ public class ZoneChangeInfo {
         @Override
         public ZoneChangeInfo copy() {
             return new Stack(this);
-        }
-    }
-
-    public static class Unmelded extends ZoneChangeInfo {
-
-        public Unmelded(ZoneChangeInfo info, Game game) {
-            super(info.event);
-            MeldCard meld = game.getMeldCard(info.event.getTargetId());
-            if (meld != null) {
-                if (meld.hasTopHalf(game)) {
-                    ZoneChangeEvent topEvent = new ZoneChangeEvent(meld.getTopHalfCard().getId(), event.getSource(),
-                            event.getPlayerId(), event.getFromZone(), event.getToZone(), event.getAppliedEffects());
-                    ZoneChangeInfo topInfo = info.copy();
-                    topInfo.event = topEvent;
-                    additionalMoves.add(topInfo);
-                }
-                if (meld.hasBottomHalf(game)) {
-                    ZoneChangeEvent bottomEvent = new ZoneChangeEvent(meld.getBottomHalfCard().getId(), event.getSource(),
-                            event.getPlayerId(), event.getFromZone(), event.getToZone(), event.getAppliedEffects());
-                    ZoneChangeInfo bottomInfo = info.copy();
-                    bottomInfo.event = bottomEvent;
-                    additionalMoves.add(bottomInfo);
-                }
-            }
         }
     }
 }

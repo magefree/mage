@@ -1,19 +1,34 @@
 package mage.cards.v;
 
-import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.MeldCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.*;
+import mage.abilities.keyword.*;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.MeldEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.ReturnCardChosenFromGraveyardEffect;
 import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.MeldCard;
 import mage.constants.*;
+import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterPermanentCard;
+import mage.filter.predicate.Predicates;
+import mage.game.Game;
+import mage.players.Player;
+import mage.target.TargetCard;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.targetpointer.SecondTargetPointer;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
 
@@ -22,34 +37,66 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class VanilleCheerfulLCie extends CardImpl {
+public final class VanilleCheerfulLCie extends MeldCard {
 
     private static final Condition condition = new MeldCondition("Fang, Fearless l'Cie");
     private static final FilterCard filter = new FilterPermanentCard("permanent card from your graveyard");
 
-    public VanilleCheerfulLCie(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
+    private static final FilterCard ragnarokFilter = new FilterPermanentCard("nonlegendary permanent card from your graveyard");
 
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.CLERIC);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(2);
+    static {
+        filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
+    }
+
+    public VanilleCheerfulLCie(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.CLERIC}, "{3}{G}",
+                "Ragnarok, Divine Deliverance",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.BEAST, SubType.AVATAR}, "BG");
+
+        // Vanille, Cheerful l'Cie
+        this.getLeftHalfCard().setPT(3, 2);
         this.meldsWithClazz = mage.cards.f.FangFearlessLCie.class;
-        this.meldsToClazz = mage.cards.r.RagnarokDivineDeliverance.class;
 
         // When Vanille enters, mill two cards, then return a permanent card from your graveyard to your hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(2));
         ability.addEffect(new ReturnCardChosenFromGraveyardEffect(false, filter, PutCards.HAND)
                 .concatBy(", then"));
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
 
         // At the beginning of your first main phase, if you both own and control Vanille and a creature named Fang, Fearless l'Cie, you may pay {3}{B}{G}. If you do, exile them, then meld them into Ragnarok, Divine Deliverance.
-        this.addAbility(new BeginningOfFirstMainTriggeredAbility(new DoIfCostPaid(
+        this.getLeftHalfCard().addAbility(new BeginningOfFirstMainTriggeredAbility(new DoIfCostPaid(
                 new MeldEffect("Fang, Fearless l'Cie", "Ragnarok, Divine Deliverance")
                         .setText("exile them, then meld them into Ragnarok, Divine Deliverance"),
                 new ManaCostsImpl<>("{3}{B}{G}")
         )).withInterveningIf(condition));
+
+        // Ragnarok, Divine Deliverance
+        this.getRightHalfCard().setPT(7, 6);
+
+        // Vigilance
+        this.getRightHalfCard().addAbility(VigilanceAbility.getInstance());
+
+        // Menace
+        this.getRightHalfCard().addAbility(new MenaceAbility());
+
+        // Trample
+        this.getRightHalfCard().addAbility(TrampleAbility.getInstance());
+
+        // Reach
+        this.getRightHalfCard().addAbility(ReachAbility.getInstance());
+
+        // Haste
+        this.getRightHalfCard().addAbility(HasteAbility.getInstance());
+
+        // When Ragnarok dies, destroy target permanent and return target nonlegendary permanent card from your graveyard to the battlefield.
+        ability = new DiesSourceTriggeredAbility(new DestroyTargetEffect());
+        ability.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect()
+                .setText("and return target nonlegendary permanent card from your graveyard to the battlefield")
+                .setTargetPointer(new SecondTargetPointer()));
+        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetCardInYourGraveyard(ragnarokFilter));
+        this.getRightHalfCard().addAbility(ability);
     }
 
     private VanilleCheerfulLCie(final VanilleCheerfulLCie card) {

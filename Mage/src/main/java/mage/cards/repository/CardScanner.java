@@ -53,11 +53,11 @@ public final class CardScanner {
         // check cards (only add mode, without updates)
         for (ExpansionSet set : Sets.getInstance().values()) {
             for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
-                if (CardRepository.instance.findCard(set.getCode(), setInfo.getCardNumber(), false) == null) {
+                if (CardRepository.instance.findCard(set.getCode(), setInfo.getCardNumber()) == null) {
                     // found new card
                     Card card = CardImpl.createCard(
                             setInfo.getCardClass(),
-                            new CardSetInfo(setInfo.getName(), set.getCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()),
+                            new CardSetInfo(setInfo.getName(), set.getCode(), setInfo.getCardNumber(), setInfo.getMeldNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()),
                             errorsList);
                     if (card != null) {
                         // Adds only main card, except night cards.
@@ -95,7 +95,7 @@ public final class CardScanner {
             }
             for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
                 cards.add(CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
-                        setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo())));
+                        setInfo.getCardNumber(), setInfo.getMeldNumber(), setInfo.getRarity(), setInfo.getGraphicInfo())));
             }
         }
         return cards;

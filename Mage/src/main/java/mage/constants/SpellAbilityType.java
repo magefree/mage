@@ -19,7 +19,10 @@ public enum SpellAbilityType {
     MODAL_RIGHT("RightModal SpellAbility"),
     SPLICE("Spliced SpellAbility"),
     ADVENTURE_SPELL("Adventure SpellAbility"),
-    OMEN_SPELL("Omen SpellAbility");
+    OMEN_SPELL("Omen SpellAbility"),
+    MELD("Meld SpellAbility", false),
+    MELD_LEFT("MeldLeft SpellAbility"),
+    MELD_RIGHT("MeldRight SpellAbility");
 
     private final String text;
     private final boolean canCast;

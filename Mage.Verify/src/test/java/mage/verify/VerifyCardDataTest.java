@@ -370,13 +370,6 @@ public class VerifyCardDataTest {
             for (ExpansionSet.SetCardInfo checkCard : set.getSetCardInfo()) {
                 String cardNumber = checkCard.getCardNumber();
 
-                // ignore double faced
-                Card realCard = CardImpl.createCard(checkCard.getCardClass(), new CardSetInfo(checkCard.getName(), set.getCode(),
-                        checkCard.getCardNumber(), checkCard.getRarity(), checkCard.getGraphicInfo()));
-                if (realCard.isNightCard()) {
-                    continue;
-                }
-
                 if (cardsList.containsKey(cardNumber)) {
                     ExpansionSet.SetCardInfo prevCard = cardsList.get(cardNumber);
 
@@ -406,7 +399,7 @@ public class VerifyCardDataTest {
             System.out.println(error);
         }
 
-        if (doubleErrors.size() > 0) {
+        if (!doubleErrors.isEmpty()) {
             Assert.fail("DB has duplicated card numbers, found errors: " + doubleErrors.size());
         }
     }
@@ -1240,7 +1233,7 @@ public class VerifyCardDataTest {
             Map<String, String> cardNumbers = new HashMap<>();
             for (ExpansionSet.SetCardInfo cardInfo : set.getSetCardInfo()) {
                 Card card = CardImpl.createCard(cardInfo.getCardClass(), new CardSetInfo(cardInfo.getName(), set.getCode(),
-                        cardInfo.getCardNumber(), cardInfo.getRarity(), cardInfo.getGraphicInfo()));
+                        cardInfo.getCardNumber(), cardInfo.getMeldNumber(), cardInfo.getRarity(), cardInfo.getGraphicInfo()));
                 Assert.assertNotNull(card);
 
                 // CHECK: all planeswalkers must be legendary
@@ -1864,7 +1857,11 @@ public class VerifyCardDataTest {
     }
 
     private void check(Card card, int cardIndex) {
-        MtgJsonCard ref = MtgJsonService.cardFromSet(card.getExpansionSetCode(), card.getName(), card.getCardNumber());
+        String cardNumber = card.getCardNumber();
+        if (card instanceof MeldCardHalf && ((MeldCardHalf) card).isBackSide()) {
+            cardNumber = card.getMeldsToNumber();
+        }
+        MtgJsonCard ref = MtgJsonService.cardFromSet(card.getExpansionSetCode(), card.getName(), cardNumber);
         if (ref != null) {
             if ((card instanceof CardWithSpellOption || card instanceof SpellOptionCard) && ref.layout.equals("reversible_card")) {
                 // TODO: Remove when MtgJson updated
@@ -2031,7 +2028,6 @@ public class VerifyCardDataTest {
 
                     // Special fields for CardImpl.class
                     boolean hasSpellAbilityField = false;
-                    boolean hasMeldField = false;
                     boolean hasSecondSideCardField = false;
                     // Special fields for AbilityImpl.class
                     boolean hasWatchersField = false;
@@ -2053,10 +2049,6 @@ public class VerifyCardDataTest {
                                     compareClassRecursive(((CardImpl) obj1).getSpellAbility(), ((CardImpl) obj2).getSpellAbility(), originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
                                     doFieldRecurse = false;
                                     hasSpellAbilityField = true;
-                                } else if (field1.getName().equals("meldsToCard")) {
-                                    compareClassRecursive(((CardImpl) obj1).getMeldsToCard(), ((CardImpl) obj2).getMeldsToCard(), originalCard, msg + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
-                                    doFieldRecurse = false;
-                                    hasMeldField = true;
                                 } else if (field1.getName().equals("secondSideCard")) {
                                     compareClassRecursive(((CardImpl) obj1).getSecondCardFace(), ((CardImpl) obj2).getSecondCardFace(), originalCard, msg + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
                                     doFieldRecurse = false;
@@ -2090,9 +2082,6 @@ public class VerifyCardDataTest {
                     if (class1 == CardImpl.class) {
                         if (!hasSpellAbilityField) {
                             fail(originalCard, "copy", "was expecting a spellAbility field, but found none " + msg + "]");
-                        }
-                        if (!hasMeldField) {
-                            fail(originalCard, "copy", "was expecting a meldsToCard field, but found none " + msg + "]");
                         }
                         if (!hasSecondSideCardField) {
                             fail(originalCard, "copy", "was expecting a secondSideCard field, but found none " + msg + "]");
@@ -2379,7 +2368,7 @@ public class VerifyCardDataTest {
 
         // special check: DFC main card should not have abilities
         if (card instanceof DoubleFacedCardHalf && !card.getMainCard().getInitAbilities().isEmpty()) {
-            fail(card, "abilities", "transforming double-faced card should not have abilities on the main card");
+            fail(card, "abilities", "double-faced cards should not have abilities on the main card");
         }
 
         // special check: Werewolves front ability should only be on front and vice versa
@@ -2388,11 +2377,6 @@ public class VerifyCardDataTest {
         }
         if (card.getAbilities().containsClass(WerewolfBackTriggeredAbility.class) && (card instanceof DoubleFacedCardHalf && !((DoubleFacedCardHalf<?>) card).isBackSide())) {
             fail(card, "abilities", "card is a front face werewolf with a back face ability");
-        }
-
-        // special check: back side in TDFC must be only night card
-        if (card.getSecondCardFace() != null && !card.getSecondCardFace().isNightCard()) {
-            fail(card, "abilities", "the back face of a double-faced card should be nightCard = true");
         }
 
         // special check: siege ability must be used in double faced cards only
@@ -2626,7 +2610,7 @@ public class VerifyCardDataTest {
 
         // lands on back of NDFCs *may* have only one ability
         if (card instanceof TransformingDoubleFacedCardHalf
-            && ((DoubleFacedCardHalf)card).isBackSide()
+            && ((DoubleFacedCardHalf<?>)card).isBackSide()
             && card.isLand()) {
             return;
         }
@@ -3385,6 +3369,11 @@ public class VerifyCardDataTest {
             return;
         }
 
+        if (card instanceof MeldCardHalf && ((MeldCardHalf) card).isBackSide()) {
+            // skip rarity check for meld cards
+            return;
+        }
+
         // basic lands must have Rarity.LAND and SuperType.BASIC
         // other cards can't have that stats
         String name = card.getName();
@@ -3448,7 +3437,7 @@ public class VerifyCardDataTest {
             for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
                 try {
                     Card card = CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
-                            setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()));
+                            setInfo.getCardNumber(), setInfo.getMeldNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()));
                     if (card == null) {
                         errorsList.add("Error: can't create card - " + setInfo.getCardClass() + " - see logs for errors");
                         continue;

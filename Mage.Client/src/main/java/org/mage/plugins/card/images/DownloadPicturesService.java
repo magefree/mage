@@ -34,8 +34,8 @@ import java.io.*;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.nio.file.AccessDeniedException;
-import java.util.List;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -243,9 +243,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
         try {
             updateGlobalMessage("Loading cards list...");
-            this.cardsAll.addAll(CardRepository.instance.findCards(
-                    new CardCriteria().nightCard(null) // meld cards need to be in the target cards, so we allow for night cards
-            ));
+            this.cardsAll.addAll(CardRepository.instance.findCards(new CardCriteria()));
             if (isNeedCancel()) {
                 // fast stop on cancel
                 return;
@@ -481,47 +479,24 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         && !"0".equals(card.getCardNumber())
                         && !card.getSetCode().isEmpty()) {
 
-                    // main side for non-night cards.
-                    // At the exception of Meld Card, as they are not the back of an image for download
-                    if (!card.isNightCard() || card.isMeldCard()) {
-                        String cardName = card.getName();
-                        CardDownloadData url = new CardDownloadData(
-                                cardName,
-                                card.getSetCode(),
-                                card.getCardNumber(),
-                                card.usesVariousArt(),
-                                0);
+                    // main side for cards.
+                    String cardName = card.getName();
+                    CardDownloadData url = new CardDownloadData(
+                            cardName,
+                            card.getSetCode(),
+                            card.getCardNumber(),
+                            card.usesVariousArt(),
+                            0);
 
-                        // variations must have diff file names with additional postfix
-                        if (url.getUsesVariousArt()) {
-                            url.setDownloadName(createDownloadName(card));
-                        }
-
-                        url.setSplitCard(card.isSplitCard());
-                        allCardsUrls.add(url);
+                    // variations must have diff file names with additional postfix
+                    if (url.getUsesVariousArt()) {
+                        url.setDownloadName(createDownloadName(card));
                     }
+
+                    url.setSplitCard(card.isSplitCard());
+                    allCardsUrls.add(url);
+
                     // second side
-                    // xmage doesn't search night cards by default, so add it and other types manually
-                    if (card.isDoubleFaced()) {
-                        if (card.getSecondSideName() == null || card.getSecondSideName().trim().isEmpty()) {
-                            throw new IllegalStateException("Second side card can't have empty name.");
-                        }
-
-                        CardInfo secondSideCard = CardRepository.instance.findCardWithPreferredSetAndNumber(card.getSecondSideName(), card.getSetCode(), card.getCardNumber());
-                        if (secondSideCard == null) {
-                            throw new IllegalStateException("Can't find second side card in database: " + card.getSecondSideName());
-                        }
-
-                        CardDownloadData url = new CardDownloadData(
-                                card.getSecondSideName(),
-                                card.getSetCode(),
-                                secondSideCard.getCardNumber(),
-                                card.usesVariousArt(),
-                                0
-                        );
-                        url.setSecondSide(true);
-                        allCardsUrls.add(url);
-                    }
                     if (card.isFlipCard()) {
                         if (card.getFlipCardName() == null || card.getFlipCardName().trim().isEmpty()) {
                             throw new IllegalStateException("Flipped card can't have empty name.");
@@ -534,8 +509,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                                 0
                         );
                         cardDownloadData.setFlippedSide(true);
-                        // meld cards urls are on their own
-                        cardDownloadData.setSecondSide(card.isNightCard() && !card.isMeldCard());
                         allCardsUrls.add(cardDownloadData);
                     }
                     if (card.getMeldsToCardName() != null) {
@@ -549,7 +522,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         }
 
                         // meld cards are normal cards from the set, so no needs to set two faces/sides here
-                        CardDownloadData url = new CardDownloadData(
+                        url = new CardDownloadData(
                                 card.getMeldsToCardName(),
                                 card.getSetCode(),
                                 meldsToCard.getCardNumber(),
@@ -562,14 +535,16 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         if (card.getSecondSideName() == null || card.getSecondSideName().trim().isEmpty()) {
                             throw new IllegalStateException("MDF card can't have empty name.");
                         }
+                        String cardNumber = card.getMeldCardNumber().isEmpty() ? card.getCardNumber() : card.getMeldCardNumber();
+                        boolean secondSide = !card.getMeldCardNumber().isEmpty();
                         CardDownloadData cardDownloadData = new CardDownloadData(
                                 card.getSecondSideName(),
                                 card.getSetCode(),
-                                card.getCardNumber(),
+                                cardNumber,
                                 card.usesVariousArt(),
                                 0
                         );
-                        cardDownloadData.setSecondSide(true);
+                        cardDownloadData.setSecondSide(secondSide);
                         allCardsUrls.add(cardDownloadData);
                     }
                 } else if (card.getCardNumber().isEmpty() || "0".equals(card.getCardNumber())) {

@@ -2,9 +2,6 @@ package mage.sets;
 
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
-import mage.cards.repository.CardCriteria;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 import mage.collation.BoosterCollator;
 import mage.collation.BoosterStructure;
 import mage.collation.CardRun;
@@ -58,14 +55,12 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Borrowed Hostility", 121, Rarity.COMMON, mage.cards.b.BorrowedHostility.class));
         cards.add(new SetCardInfo("Borrowed Malevolence", 82, Rarity.COMMON, mage.cards.b.BorrowedMalevolence.class));
         cards.add(new SetCardInfo("Brazen Wolves", 122, Rarity.COMMON, mage.cards.b.BrazenWolves.class));
-        cards.add(new SetCardInfo("Brisela, Voice of Nightmares", "15b", Rarity.MYTHIC, mage.cards.b.BriselaVoiceOfNightmares.class));
-        cards.add(new SetCardInfo("Bruna, the Fading Light", "15a", Rarity.RARE, mage.cards.b.BrunaTheFadingLight.class));
+        cards.add(new SetCardInfo("Bruna, the Fading Light", "15", "15b", Rarity.RARE, mage.cards.b.BrunaTheFadingLight.class));
         cards.add(new SetCardInfo("Campaign of Vengeance", 182, Rarity.UNCOMMON, mage.cards.c.CampaignOfVengeance.class));
         cards.add(new SetCardInfo("Cathar's Shield", 192, Rarity.COMMON, mage.cards.c.CatharsShield.class));
         cards.add(new SetCardInfo("Cemetery Recruitment", 83, Rarity.COMMON, mage.cards.c.CemeteryRecruitment.class));
         cards.add(new SetCardInfo("Certain Death", 84, Rarity.COMMON, mage.cards.c.CertainDeath.class));
         cards.add(new SetCardInfo("Chilling Grasp", 50, Rarity.UNCOMMON, mage.cards.c.ChillingGrasp.class));
-        cards.add(new SetCardInfo("Chittering Host", "96b", Rarity.COMMON, mage.cards.c.ChitteringHost.class));
         cards.add(new SetCardInfo("Choking Restraints", 16, Rarity.COMMON, mage.cards.c.ChokingRestraints.class));
         cards.add(new SetCardInfo("Clear Shot", 152, Rarity.UNCOMMON, mage.cards.c.ClearShot.class));
         cards.add(new SetCardInfo("Coax from the Blind Eternities", 51, Rarity.RARE, mage.cards.c.CoaxFromTheBlindEternities.class));
@@ -121,19 +116,18 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Geist of the Lonely Vigil", 27, Rarity.UNCOMMON, mage.cards.g.GeistOfTheLonelyVigil.class));
         cards.add(new SetCardInfo("Geist-Fueled Scarecrow", 196, Rarity.UNCOMMON, mage.cards.g.GeistFueledScarecrow.class));
         cards.add(new SetCardInfo("Gisa and Geralf", 183, Rarity.MYTHIC, mage.cards.g.GisaAndGeralf.class));
-        cards.add(new SetCardInfo("Gisela, the Broken Blade", 28, Rarity.MYTHIC, mage.cards.g.GiselaTheBrokenBlade.class));
+        cards.add(new SetCardInfo("Gisela, the Broken Blade", "28", "15b", Rarity.MYTHIC, mage.cards.g.GiselaTheBrokenBlade.class));
         cards.add(new SetCardInfo("Give No Ground", 29, Rarity.UNCOMMON, mage.cards.g.GiveNoGround.class));
         cards.add(new SetCardInfo("Gnarlwood Dryad", 159, Rarity.UNCOMMON, mage.cards.g.GnarlwoodDryad.class));
         cards.add(new SetCardInfo("Graf Harvest", 90, Rarity.UNCOMMON, mage.cards.g.GrafHarvest.class));
-        cards.add(new SetCardInfo("Graf Rats", 91, Rarity.COMMON, mage.cards.g.GrafRats.class));
+        cards.add(new SetCardInfo("Graf Rats", "91", "96b", Rarity.COMMON, mage.cards.g.GrafRats.class));
         cards.add(new SetCardInfo("Grapple with the Past", 160, Rarity.COMMON, mage.cards.g.GrappleWithThePast.class));
         cards.add(new SetCardInfo("Grim Flayer", 184, Rarity.MYTHIC, mage.cards.g.GrimFlayer.class));
         cards.add(new SetCardInfo("Grizzled Angler", 63, Rarity.UNCOMMON, mage.cards.g.GrizzledAngler.class));
         cards.add(new SetCardInfo("Guardian of Pilgrims", 30, Rarity.COMMON, mage.cards.g.GuardianOfPilgrims.class));
         cards.add(new SetCardInfo("Hamlet Captain", 161, Rarity.UNCOMMON, mage.cards.h.HamletCaptain.class));
-        cards.add(new SetCardInfo("Hanweir Battlements", 204, Rarity.RARE, mage.cards.h.HanweirBattlements.class));
-        cards.add(new SetCardInfo("Hanweir Garrison", "130a", Rarity.RARE, mage.cards.h.HanweirGarrison.class));
-        cards.add(new SetCardInfo("Hanweir, the Writhing Township", "130b", Rarity.RARE, mage.cards.h.HanweirTheWrithingTownship.class));
+        cards.add(new SetCardInfo("Hanweir Battlements", "204", "130b", Rarity.RARE, mage.cards.h.HanweirBattlements.class));
+        cards.add(new SetCardInfo("Hanweir Garrison", "130", "130b", Rarity.RARE, mage.cards.h.HanweirGarrison.class));
         cards.add(new SetCardInfo("Harmless Offering", 131, Rarity.RARE, mage.cards.h.HarmlessOffering.class));
         cards.add(new SetCardInfo("Haunted Dead", 92, Rarity.UNCOMMON, mage.cards.h.HauntedDead.class));
         cards.add(new SetCardInfo("Heron's Grace Champion", 185, Rarity.RARE, mage.cards.h.HeronsGraceChampion.class));
@@ -161,7 +155,7 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Markov Crusader", 95, Rarity.UNCOMMON, mage.cards.m.MarkovCrusader.class));
         cards.add(new SetCardInfo("Mausoleum Wanderer", 69, Rarity.RARE, mage.cards.m.MausoleumWanderer.class));
         cards.add(new SetCardInfo("Mercurial Geists", 186, Rarity.UNCOMMON, mage.cards.m.MercurialGeists.class));
-        cards.add(new SetCardInfo("Midnight Scavengers", "96a", Rarity.COMMON, mage.cards.m.MidnightScavengers.class));
+        cards.add(new SetCardInfo("Midnight Scavengers", "96", "96b", Rarity.COMMON, mage.cards.m.MidnightScavengers.class));
         cards.add(new SetCardInfo("Mind's Dilation", 70, Rarity.MYTHIC, mage.cards.m.MindsDilation.class));
         cards.add(new SetCardInfo("Mirrorwing Dragon", 136, Rarity.MYTHIC, mage.cards.m.MirrorwingDragon.class));
         cards.add(new SetCardInfo("Mockery of Nature", 10, Rarity.UNCOMMON, mage.cards.m.MockeryOfNature.class));
@@ -278,30 +272,6 @@ public final class EldritchMoon extends ExpansionSet {
             rarity = Rarity.MYTHIC;
         }
         addToBooster(booster, getSpecialCardsByRarity(rarity));
-    }
-
-    // xmage doesn't recognize meldable cards as DFCs, so have to add them manually for now
-    private static final String[] commonMeldCards = {"Graf Rats", "Midnight Scavengers"};
-    private static final String[] rareMeldCards = {"Bruna, the Fading Light", "Hanweir Battlements", "Hanweir Garrison"};
-    private static final String[] mythicMeldCards = {"Gisela, the Broken Blade"};
-
-    @Override
-    protected List<CardInfo> findSpecialCardsByRarity(Rarity rarity) {
-        List<CardInfo> cardInfos = super.findSpecialCardsByRarity(rarity);
-        String[] meldCardNames = {};
-        if (rarity == Rarity.COMMON) {
-            meldCardNames = commonMeldCards;
-        } else if (rarity == Rarity.RARE) {
-            meldCardNames = rareMeldCards;
-        } else if (rarity == Rarity.MYTHIC) {
-            meldCardNames = mythicMeldCards;
-        }
-        for (String name : meldCardNames) {
-            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria()
-                    .setCodes(this.code)
-                    .name(name)));
-        }
-        return cardInfos;
     }
 
     @Override

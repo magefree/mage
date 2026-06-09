@@ -10,7 +10,6 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
-import mage.game.permanent.PermanentMeld;
 import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -64,17 +63,19 @@ public final class ZonesHandler {
             if (info.event.getToZone().equals(Zone.BATTLEFIELD)) {
                 continue;
             }
-            MeldCard card = game.getMeldCard(info.event.getTargetId());
+            Card card = game.getCard(info.event.getTargetId());
             // Copies should be handled as normal cards.
-            if (card != null && !card.isMelded(game) && !card.isCopy()) {
-                // TODO: WTF, never worked code here. Need research possible typo: !card.isMelded(game) -> card.isMelded(game)
-                ZoneChangeInfo.Unmelded unmelded = new ZoneChangeInfo.Unmelded(info, game);
-                if (unmelded.additionalMoves.isEmpty()) {
-                    // already moved halves somehow
-                    itr.remove();
-                } else {
-                    itr.set(unmelded);
-                }
+            if (card != null && card.getMeldedWith(game) != null && !card.isCopy()) {
+                MeldCardHalf meldHalf = (MeldCardHalf) card;
+                ZoneChangeEvent event = info.event;
+                // melded with card
+                ZoneChangeEvent meldedEvent = new ZoneChangeEvent(card.getMeldedWith(game).getId(), event.getSource(),
+                        event.getPlayerId(), event.getFromZone(), event.getToZone(), event.getAppliedEffects());
+                ZoneChangeInfo meldedInfo = info.copy();
+                meldedInfo.event = meldedEvent;
+                itr.add(meldedInfo);
+                // reset meld status
+                card.setMeldedWith(null, game);
             }
         }
 
@@ -88,6 +89,10 @@ public final class ZonesHandler {
             ZoneChangeInfo info = itr.next();
             if (info.event.getToZone().equals(Zone.BATTLEFIELD)) {
                 Card card = game.getCard(info.event.getTargetId());
+                if (card.getMeldedWith(game) != null) {
+                    // don't process melded cards here
+                    continue;
+                }
                 if (card instanceof DoubleFacedCard || card instanceof DoubleFacedCardHalf) {
                     boolean forceToMainSide = false;
                     Boolean enterTransformed = (Boolean) game.getState().getValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId() + card.getZoneChangeCounter(game));
@@ -133,21 +138,6 @@ public final class ZonesHandler {
     }
 
     private static void placeInDestinationZone(ZoneChangeInfo info, int createOrder, Ability source, Game game) {
-        // Handle unmelded cards
-        if (info instanceof ZoneChangeInfo.Unmelded) {
-            ZoneChangeInfo.Unmelded unmelded = (ZoneChangeInfo.Unmelded) info;
-            Zone toZone = null;
-            for (ZoneChangeInfo additionalMove : unmelded.additionalMoves) {
-                toZone = additionalMove.event.getToZone();
-                placeInDestinationZone(additionalMove, createOrder, source, game);
-            }
-            // We arbitrarily prefer the bottom half card. This should never be relevant.
-            if (toZone != null) {
-                game.setZone(unmelded.event.getTargetId(), toZone);
-            }
-            return;
-        }
-        // Handle normal cases
         ZoneChangeEvent event = info.event;
         Zone toZone = event.getToZone();
         Card targetCard = getTargetCard(game, event.getTargetId());
@@ -158,11 +148,7 @@ public final class ZonesHandler {
         cardsToUpdate.put(Zone.OUTSIDE, new CardsImpl());
         // if we're moving a token it shouldn't be put into any zone as an object.
         if (!(targetCard instanceof Permanent) && targetCard != null) {
-            if (targetCard instanceof MeldCard) {
-                // meld/group cards must be independent (use can choose order)
-                cardsToMove = ((MeldCard) targetCard).getHalves();
-                cardsToUpdate.get(toZone).addAll(cardsToMove);
-            } else if (targetCard instanceof DoubleFacedCard
+            if (targetCard instanceof DoubleFacedCard
                     || targetCard instanceof DoubleFacedCardHalf) {
                 // mdf cards must be moved as single object, but each half must be updated separately
                 DoubleFacedCard<?, ?> mdfCard = (DoubleFacedCard<?, ?>) targetCard.getMainCard();
@@ -184,6 +170,9 @@ public final class ZonesHandler {
                             // play right
                             cardsToUpdate.get(toZone).add(mdfCard.getRightHalfCard());
                             cardsToUpdate.get(Zone.OUTSIDE).add(mdfCard.getLeftHalfCard());
+                            if (targetCard.getMeldedWith(game) != null) {
+                                cardsToUpdate.get(Zone.OUTSIDE).add(targetCard.getMeldedWith(game));
+                            }
                         } else {
                             // cast mdf (only on stack)
                             if (!toZone.equals(Zone.STACK)) {
@@ -313,13 +302,6 @@ public final class ZonesHandler {
                 }
             }
         });
-
-        // reset meld status
-        if (targetCard instanceof MeldCard) {
-            if (event.getToZone() != Zone.BATTLEFIELD) {
-                ((MeldCard) targetCard).setMelded(false, game);
-            }
-        }
     }
 
     public static Card getTargetCard(Game game, UUID targetId) {
@@ -338,28 +320,6 @@ public final class ZonesHandler {
 
     private static boolean maybeRemoveFromSourceZone(ZoneChangeInfo info, Game game, Ability source) {
         ZoneChangeEvent event = info.event;
-
-        // Handle Unmelded Cards
-        if (info instanceof ZoneChangeInfo.Unmelded) {
-            ZoneChangeInfo.Unmelded unmelded = (ZoneChangeInfo.Unmelded) info;
-            MeldCard meld = game.getMeldCard(event.getTargetId());
-            for (Iterator<ZoneChangeInfo> itr = unmelded.additionalMoves.iterator(); itr.hasNext(); ) {
-                ZoneChangeInfo additionalMove = itr.next();
-                if (!maybeRemoveFromSourceZone(additionalMove, game, source)) {
-                    itr.remove();
-                } else if (Objects.equals(additionalMove.event.getTargetId(), meld.getTopHalfCard().getId())) {
-                    meld.setTopLastZoneChangeCounter(meld.getTopHalfCard().getZoneChangeCounter(game));
-                } else if (Objects.equals(additionalMove.event.getTargetId(), meld.getBottomHalfCard().getId())) {
-                    meld.setBottomLastZoneChangeCounter(meld.getBottomHalfCard().getZoneChangeCounter(game));
-                }
-            }
-            if (unmelded.additionalMoves.isEmpty()) {
-                return false;
-            }
-            // We arbitrarily prefer the bottom half card. This should never be relevant.
-            meld.updateZoneChangeCounter(game, unmelded.additionalMoves.get(unmelded.additionalMoves.size() - 1).event);
-            return true;
-        }
 
         // Handle all normal cases
         Card card = getTargetCard(game, event.getTargetId());
@@ -409,9 +369,7 @@ public final class ZonesHandler {
 
                 // controlling player can be replaced so use event player now
                 Permanent permanent;
-                if (card instanceof MeldCard) {
-                    permanent = new PermanentMeld(card, event.getPlayerId(), game);
-                } else if (card instanceof RoomCardHalf) {
+                if (card instanceof RoomCardHalf) {
                     // Only the main room card can etb
                     permanent = new PermanentCard(card.getMainCard(), event.getPlayerId(), game);
                 } else if (card instanceof DoubleFacedCard) {

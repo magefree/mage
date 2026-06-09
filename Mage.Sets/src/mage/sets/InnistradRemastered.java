@@ -88,8 +88,7 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Bound by Moonsilver", 335, Rarity.COMMON, mage.cards.b.BoundByMoonsilver.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Bramble Wurm", 187, Rarity.COMMON, mage.cards.b.BrambleWurm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bramble Wurm", 407, Rarity.COMMON, mage.cards.b.BrambleWurm.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Brisela, Voice of Nightmares", "14b", Rarity.MYTHIC, mage.cards.b.BriselaVoiceOfNightmares.class));
-        cards.add(new SetCardInfo("Bruna, the Fading Light", 14, Rarity.RARE, mage.cards.b.BrunaTheFadingLight.class));
+        cards.add(new SetCardInfo("Bruna, the Fading Light", "14", "14b", Rarity.RARE, mage.cards.b.BrunaTheFadingLight.class));
         cards.add(new SetCardInfo("Burning Vengeance", 147, Rarity.UNCOMMON, mage.cards.b.BurningVengeance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Burning Vengeance", 397, Rarity.UNCOMMON, mage.cards.b.BurningVengeance.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Butcher Ghoul", 373, Rarity.COMMON, mage.cards.b.ButcherGhoul.class, RETRO_ART_USE_VARIOUS));
@@ -110,7 +109,6 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Chalice of Life", 257, Rarity.UNCOMMON, mage.cards.c.ChaliceOfLife.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chalice of Life", 471, Rarity.UNCOMMON, mage.cards.c.ChaliceOfLife.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Chandra, Dressed to Kill", 148, Rarity.MYTHIC, mage.cards.c.ChandraDressedToKill.class));
-        cards.add(new SetCardInfo("Chittering Host", "123b", Rarity.COMMON, mage.cards.c.ChitteringHost.class));
         cards.add(new SetCardInfo("Clear Shot", 188, Rarity.UNCOMMON, mage.cards.c.ClearShot.class));
         cards.add(new SetCardInfo("Cobbled Lancer", 56, Rarity.UNCOMMON, mage.cards.c.CobbledLancer.class));
         cards.add(new SetCardInfo("Cobbled Wings", 258, Rarity.COMMON, mage.cards.c.CobbledWings.class));
@@ -218,9 +216,9 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Gisa and Geralf", 237, Rarity.RARE, mage.cards.g.GisaAndGeralf.class));
         cards.add(new SetCardInfo("Gisa's Bidding", 111, Rarity.COMMON, mage.cards.g.GisasBidding.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gisa's Bidding", 379, Rarity.COMMON, mage.cards.g.GisasBidding.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Gisela, the Broken Blade", 24, Rarity.MYTHIC, mage.cards.g.GiselaTheBrokenBlade.class));
+        cards.add(new SetCardInfo("Gisela, the Broken Blade", "24", "14b", Rarity.MYTHIC, mage.cards.g.GiselaTheBrokenBlade.class));
         cards.add(new SetCardInfo("Gluttonous Guest", 112, Rarity.COMMON, mage.cards.g.GluttonousGuest.class));
-        cards.add(new SetCardInfo("Graf Rats", 113, Rarity.UNCOMMON, mage.cards.g.GrafRats.class));
+        cards.add(new SetCardInfo("Graf Rats", "113", "123b", Rarity.UNCOMMON, mage.cards.g.GrafRats.class));
         cards.add(new SetCardInfo("Grapple with the Past", 199, Rarity.COMMON, mage.cards.g.GrappleWithThePast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grapple with the Past", 412, Rarity.COMMON, mage.cards.g.GrappleWithThePast.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Gravecrawler", 114, Rarity.RARE, mage.cards.g.Gravecrawler.class, NON_FULL_USE_VARIOUS));
@@ -238,10 +236,9 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Guardian of Pilgrims", 26, Rarity.COMMON, mage.cards.g.GuardianOfPilgrims.class));
         cards.add(new SetCardInfo("Hamlet Captain", 201, Rarity.UNCOMMON, mage.cards.h.HamletCaptain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hamlet Captain", 413, Rarity.UNCOMMON, mage.cards.h.HamletCaptain.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hanweir Battlements", 279, Rarity.RARE, mage.cards.h.HanweirBattlements.class));
-        cards.add(new SetCardInfo("Hanweir Garrison", 157, Rarity.RARE, mage.cards.h.HanweirGarrison.class));
+        cards.add(new SetCardInfo("Hanweir Battlements", "279", "157b", Rarity.RARE, mage.cards.h.HanweirBattlements.class));
+        cards.add(new SetCardInfo("Hanweir Garrison", "157", "157b", Rarity.RARE, mage.cards.h.HanweirGarrison.class));
         cards.add(new SetCardInfo("Hanweir Watchkeep", 158, Rarity.COMMON, mage.cards.h.HanweirWatchkeep.class));
-        cards.add(new SetCardInfo("Hanweir, the Writhing Township", "157b", Rarity.RARE, mage.cards.h.HanweirTheWrithingTownship.class));
         cards.add(new SetCardInfo("Harvest Hand", 265, Rarity.COMMON, mage.cards.h.HarvestHand.class));
         cards.add(new SetCardInfo("Haunted Dead", 116, Rarity.UNCOMMON, mage.cards.h.HauntedDead.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Haunted Dead", 382, Rarity.UNCOMMON, mage.cards.h.HauntedDead.class, RETRO_ART_USE_VARIOUS));
@@ -321,7 +318,7 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Mentor of the Meek", 345, Rarity.UNCOMMON, mage.cards.m.MentorOfTheMeek.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Metallic Mimic", 268, Rarity.RARE, mage.cards.m.MetallicMimic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Metallic Mimic", 445, Rarity.RARE, mage.cards.m.MetallicMimic.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Midnight Scavengers", 123, Rarity.COMMON, mage.cards.m.MidnightScavengers.class));
+        cards.add(new SetCardInfo("Midnight Scavengers", "123", "123b", Rarity.COMMON, mage.cards.m.MidnightScavengers.class));
         cards.add(new SetCardInfo("Mirrorwing Dragon", 165, Rarity.MYTHIC, mage.cards.m.MirrorwingDragon.class));
         cards.add(new SetCardInfo("Mist Raven", 362, Rarity.UNCOMMON, mage.cards.m.MistRaven.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Mist Raven", 76, Rarity.UNCOMMON, mage.cards.m.MistRaven.class, NON_FULL_USE_VARIOUS));

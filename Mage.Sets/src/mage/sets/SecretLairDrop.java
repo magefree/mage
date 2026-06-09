@@ -1257,9 +1257,8 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Unbound Flourishing", 1331, Rarity.MYTHIC, mage.cards.u.UnboundFlourishing.class, FULL_ART));
         cards.add(new SetCardInfo("Hydroid Krasis", 1332, Rarity.RARE, mage.cards.h.HydroidKrasis.class, FULL_ART));
         cards.add(new SetCardInfo("Zaxara, the Exemplary", 1333, Rarity.MYTHIC, mage.cards.z.ZaxaraTheExemplary.class, FULL_ART));
-        cards.add(new SetCardInfo("Gisela, the Broken Blade", 1335, Rarity.MYTHIC, mage.cards.g.GiselaTheBrokenBlade.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Brisela, Voice of Nightmares", "1336b", Rarity.MYTHIC, mage.cards.b.BriselaVoiceOfNightmares.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Bruna, the Fading Light", 1336, Rarity.RARE, mage.cards.b.BrunaTheFadingLight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gisela, the Broken Blade", "1335", "1336b", Rarity.MYTHIC, mage.cards.g.GiselaTheBrokenBlade.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bruna, the Fading Light", "1336", "1336b", Rarity.RARE, mage.cards.b.BrunaTheFadingLight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Archangel of Thune", 1337, Rarity.MYTHIC, mage.cards.a.ArchangelOfThune.class));
         cards.add(new SetCardInfo("Court of Grace", 1338, Rarity.RARE, mage.cards.c.CourtOfGrace.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Commander's Plate", 1339, Rarity.MYTHIC, mage.cards.c.CommandersPlate.class, NON_FULL_USE_VARIOUS));
@@ -1307,9 +1306,8 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 1384, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 1385, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 1386, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Gisela, the Broken Blade", 1387, Rarity.MYTHIC, mage.cards.g.GiselaTheBrokenBlade.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Brisela, Voice of Nightmares", "1388b", Rarity.MYTHIC, mage.cards.b.BriselaVoiceOfNightmares.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Bruna, the Fading Light", 1388, Rarity.RARE, mage.cards.b.BrunaTheFadingLight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gisela, the Broken Blade", "1387", "1388b", Rarity.MYTHIC, mage.cards.g.GiselaTheBrokenBlade.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bruna, the Fading Light", "1388", "1388b", Rarity.RARE, mage.cards.b.BrunaTheFadingLight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Etali, Primal Storm", 1389, Rarity.RARE, mage.cards.e.EtaliPrimalStorm.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Etali, Primal Storm", "1389*", Rarity.RARE, mage.cards.e.EtaliPrimalStorm.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Rampaging Ferocidon", 1390, Rarity.RARE, mage.cards.r.RampagingFerocidon.class, FULL_ART_USE_VARIOUS));

@@ -8,6 +8,9 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
+import mage.view.GameView;
+import mage.view.PermanentView;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -949,6 +952,33 @@ public class TransformTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, likenessOfTheSeeker, 0);
         assertPermanentCount(playerA, "Clever Impersonator", 0);
         assertExileCount(playerA, "Clever Impersonator", 1);
+    }
+
+    /**
+     * test that a token copy of a double faced card has correct art settings on both sides
+     */
+    @Test
+    public void testTransformTokenCopyView() {
+        addCard(Zone.BATTLEFIELD, playerA, "INR-Aberrant Researcher");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.HAND, playerA, "Cackling Counterpart");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cackling Counterpart", "Aberrant Researcher");
+
+        runCode("Check permanentView", 1, PhaseStep.BEGIN_COMBAT, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(playerA);
+            PermanentView perm = gameView.getMyPlayer().getBattlefield().values()
+                    .stream()
+                    .filter(PermanentView::isToken)
+                    .findFirst()
+                    .orElse(null);
+            Assert.assertNotNull("Token permanent view not found", perm);
+            Assert.assertTrue("Front and back use various art", perm.getUsesVariousArt() && perm.getOriginal().getUsesVariousArt());
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
     }
 
     /**

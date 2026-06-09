@@ -175,23 +175,6 @@ public class CardRepositoryTest {
         );
     }
 
-    /**
-     * Some set can contain both main and second side cards with same card numbers,
-     * so search result must return main side first
-     */
-    @Test
-    public void test_SearchSecondSides_FindCard() {
-        // XLN - Ixalan - Arguel's Blood Fast -> Temple of Aclazotz - 90
-        Assert.assertEquals("Arguel's Blood Fast", CardRepository.instance.findCard("XLN", "90").getName());
-        Assert.assertEquals("Arguel's Blood Fast", CardRepository.instance.findCard("XLN", "90", true).getName());
-        Assert.assertEquals("Arguel's Blood Fast", CardRepository.instance.findCard("XLN", "90", false).getName());
-
-        // VOW - Innistrad: Crimson Vow - Jacob Hauken, Inspector -> Hauken's Insight - 320
-        Assert.assertEquals("Jacob Hauken, Inspector", CardRepository.instance.findCard("VOW", "320").getName());
-        Assert.assertEquals("Jacob Hauken, Inspector", CardRepository.instance.findCard("VOW", "320", true).getName());
-        Assert.assertEquals("Jacob Hauken, Inspector", CardRepository.instance.findCard("VOW", "320", false).getName());
-    }
-
     @Test
     public void test_SearchSecondSides_FindCardWithPreferredSetAndNumber() {
         // VOW - Innistrad: Crimson Vow - Jacob Hauken, Inspector -> Hauken's Insight - 65

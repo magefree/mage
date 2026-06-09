@@ -1,15 +1,15 @@
 package mage.game;
 
-import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
-
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
+import mage.cards.Card;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.util.Copyable;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * @author BetaSteward
@@ -21,7 +21,7 @@ public class CardState implements Serializable, Copyable<CardState> {
     protected Counters counters;
     protected Abilities<Ability> abilities;
     protected boolean lostAllAbilities;
-    protected boolean melded;
+    protected Card meldedWith;
 
     private static final Map<String, String> emptyInfo = new HashMap<>();
     private static final Abilities<Ability> emptyAbilities = new AbilitiesImpl<>();
@@ -41,7 +41,7 @@ public class CardState implements Serializable, Copyable<CardState> {
             }
         }
         this.lostAllAbilities = state.lostAllAbilities;
-        this.melded = state.melded;
+        this.meldedWith = state.meldedWith;
     }
 
     @Override
@@ -119,12 +119,12 @@ public class CardState implements Serializable, Copyable<CardState> {
         this.lostAllAbilities = lostAllAbilities;
     }
 
-    public boolean isMelded() {
-        return melded;
+    public Card getMeldedWith() {
+        return meldedWith;
     }
 
-    public void setMelded(boolean melded) {
-        this.melded = melded;
+    public void setMeldedWith(Card meldedWith) {
+        this.meldedWith = meldedWith;
     }
 
     @Override
@@ -143,8 +143,8 @@ public class CardState implements Serializable, Copyable<CardState> {
         if (this.lostAllAbilities) {
             info.add("lost all");
         }
-        if (this.melded) {
-            info.add("melded");
+        if (this.meldedWith != null) {
+            info.add("melded with: " + this.meldedWith.getName());
         }
 
         if (info.isEmpty()) {
