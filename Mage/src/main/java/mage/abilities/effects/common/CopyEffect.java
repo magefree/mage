@@ -5,7 +5,6 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
-import mage.abilities.common.RoomAbility;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;

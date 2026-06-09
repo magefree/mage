@@ -163,6 +163,8 @@ public class PermanentCard extends PermanentImpl {
             for (Ability ability : card.getAbilities()) {
                 this.addAbility(ability, card.getId(), game, true);
             }
+        } else if (card instanceof RoomCard) {
+            this.abilities = card.getInitAbilities().copy();
         } else {
             // copy only own abilities; all dynamic added abilities must be added in the parent call
             this.abilities = card.getAbilities().copy();

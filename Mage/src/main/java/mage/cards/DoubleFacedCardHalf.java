@@ -2,7 +2,6 @@ package mage.cards;
 
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.ZoneChangeEvent;
 
 import java.util.Arrays;
 import java.util.UUID;
@@ -33,11 +32,6 @@ public abstract class DoubleFacedCardHalf<C extends DoubleFacedCard<?, C>> exten
     }
 
     @Override
-    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
-        getParentCard().updateZoneChangeCounter(game, event);
-    }
-
-    @Override
     public void setZone(Zone zone, Game game) {
         // see DoubleFacedCard.checkGoodZones for details
         game.setZone(getParentCard().getId(), zone);
@@ -57,18 +51,6 @@ public abstract class DoubleFacedCardHalf<C extends DoubleFacedCard<?, C>> exten
                 break;
         }
         getParentCard().checkGoodZones(game);
-    }
-
-    public Card getOtherSide() {
-        Card otherSide;
-        if (!getParentCard().getLeftHalfCard().getId().equals(this.getId())) {
-            otherSide = getParentCard().getLeftHalfCard();
-        } else if (!getParentCard().getRightHalfCard().getId().equals(this.getId())) {
-            otherSide = getParentCard().getRightHalfCard();
-        } else {
-            throw new IllegalStateException("Wrong code usage: MDF halves must use different ids");
-        }
-        return otherSide;
     }
 
     public boolean isBackSide() {
