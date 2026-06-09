@@ -22,6 +22,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
 
         cards.add(new SetCardInfo("A.I.M. Bot", 529, Rarity.COMMON, mage.cards.a.AIMBot.class));
         cards.add(new SetCardInfo("Alien Symbiosis", 791, Rarity.UNCOMMON, mage.cards.a.AlienSymbiosis.class));
+        cards.add(new SetCardInfo("Armed Assailant", 647, Rarity.COMMON, mage.cards.a.ArmedAssailant.class));
         cards.add(new SetCardInfo("Atlantean Skirmisher", 616, Rarity.UNCOMMON, mage.cards.a.AtlanteanSkirmisher.class));
         cards.add(new SetCardInfo("Aunt May", 768, Rarity.UNCOMMON, mage.cards.a.AuntMay.class));
         cards.add(new SetCardInfo("Big Bertha", 714, Rarity.UNCOMMON, mage.cards.b.BigBertha.class));
