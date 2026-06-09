@@ -215,6 +215,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Training Regimen", 192, Rarity.UNCOMMON, mage.cards.t.TrainingRegimen.class));
         cards.add(new SetCardInfo("Truck Toss", 157, Rarity.UNCOMMON, mage.cards.t.TruckToss.class));
         cards.add(new SetCardInfo("Ultron Drone", 253, Rarity.COMMON, mage.cards.u.UltronDrone.class));
+        cards.add(new SetCardInfo("Unliving Legionnaire", 119, Rarity.COMMON, mage.cards.u.UnlivingLegionnaire.class));
         cards.add(new SetCardInfo("Vibranium Energy Daggers", 254, Rarity.COMMON, mage.cards.v.VibraniumEnergyDaggers.class));
         cards.add(new SetCardInfo("Villainous Hideout", 276, Rarity.UNCOMMON, mage.cards.v.VillainousHideout.class));
         cards.add(new SetCardInfo("Vision of Love", 158, Rarity.COMMON, mage.cards.v.VisionOfLove.class));
