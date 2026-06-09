@@ -53,6 +53,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hammerhead, Maggia Boss", 659, Rarity.UNCOMMON, mage.cards.h.HammerheadMaggiaBoss.class));
         cards.add(new SetCardInfo("Happy Hogan, Dauntless Driver", 545, Rarity.COMMON, mage.cards.h.HappyHoganDauntlessDriver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Happy Hogan, Dauntless Driver", 849, Rarity.COMMON, mage.cards.h.HappyHoganDauntlessDriver.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hawkeye, Clint Barton", 518, Rarity.UNCOMMON, mage.cards.h.HawkeyeClintBarton.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hawkeye, Clint Barton", 838, Rarity.UNCOMMON, mage.cards.h.HawkeyeClintBarton.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Heroes' Hangout", 804, Rarity.UNCOMMON, mage.cards.h.HeroesHangout.class));
         cards.add(new SetCardInfo("Hit-Monkey", 723, Rarity.RARE, mage.cards.h.HitMonkey.class));
         cards.add(new SetCardInfo("Hobgoblin, Mantled Marauder", 805, Rarity.UNCOMMON, mage.cards.h.HobgoblinMantledMarauder.class));
