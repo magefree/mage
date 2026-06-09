@@ -2444,6 +2444,8 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 2542, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 2543, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 2544, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Hammerhead, Maggia Boss", 2622, Rarity.RARE, mage.cards.h.HammerheadMaggiaBoss.class));
+        cards.add(new SetCardInfo("Undead Hand Ninja", 2623, Rarity.RARE, mage.cards.u.UndeadHandNinja.class));
         cards.add(new SetCardInfo("Baxter Building", 2626, Rarity.RARE, mage.cards.b.BaxterBuilding.class));
         cards.add(new SetCardInfo("Secret Rendezvous", 2648, Rarity.RARE, mage.cards.s.SecretRendezvous.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rune-Scarred Demon", 2649, Rarity.RARE, mage.cards.r.RuneScarredDemon.class));
