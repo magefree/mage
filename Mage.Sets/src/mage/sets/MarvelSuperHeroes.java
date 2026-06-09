@@ -41,7 +41,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Avengers Assemble!", 297, Rarity.MYTHIC, mage.cards.a.AvengersAssemble.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avengers Assemble!", 341, Rarity.MYTHIC, mage.cards.a.AvengersAssemble.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avengers Assemble!", 6, Rarity.MYTHIC, mage.cards.a.AvengersAssemble.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Avengers Hangar", 259, Rarity.COMMON, mage.cards.a.AvengersHangar.class));  
+        cards.add(new SetCardInfo("Avengers Hangar", 259, Rarity.COMMON, mage.cards.a.AvengersHangar.class));
         cards.add(new SetCardInfo("Avengers Tower", 260, Rarity.UNCOMMON, mage.cards.a.AvengersTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avengers Tower", 334, Rarity.UNCOMMON, mage.cards.a.AvengersTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avengers Tower", 452, Rarity.UNCOMMON, mage.cards.a.AvengersTower.class, NON_FULL_USE_VARIOUS));
@@ -158,6 +158,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Stark Industries", 272, Rarity.COMMON, mage.cards.s.StarkIndustries.class));
         cards.add(new SetCardInfo("Stark Industries Executive", 153, Rarity.COMMON, mage.cards.s.StarkIndustriesExecutive.class));
         cards.add(new SetCardInfo("Super-Skrull", 115, Rarity.RARE, mage.cards.s.SuperSkrull.class));
+        cards.add(new SetCardInfo("Super Speed", 154, Rarity.COMMON, mage.cards.s.SuperSpeed.class));
         cards.add(new SetCardInfo("Surveillance Room", 274, Rarity.COMMON, mage.cards.s.SurveillanceRoom.class));
         cards.add(new SetCardInfo("Swamp", 438, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 437, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
