@@ -35,6 +35,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Arc Reactor", 310, Rarity.RARE, mage.cards.a.ArcReactor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Armor Wars", 203, Rarity.RARE, mage.cards.a.ArmorWars.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Armor Wars", 305, Rarity.RARE, mage.cards.a.ArmorWars.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Arnim Zola, Bio-Fanatic", 86, Rarity.UNCOMMON, mage.cards.a.ArnimZolaBioFanatic.class));
         cards.add(new SetCardInfo("Asgardian Citadel", 258, Rarity.COMMON, mage.cards.a.AsgardianCitadel.class));
         cards.add(new SetCardInfo("Atlantean Cavalry", 45, Rarity.COMMON, mage.cards.a.AtlanteanCavalry.class));
         cards.add(new SetCardInfo("Attuma, Atlantean Warlord", 47, Rarity.UNCOMMON, mage.cards.a.AttumaAtlanteanWarlord.class));
