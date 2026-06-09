@@ -457,21 +457,17 @@ public class CardView extends SimpleCardView {
                 if (((MockCard) card).getSpellOptionCard() != null) {
                     this.isSplitCard = true;
                     leftSplitName = card.getName();
-                    leftSplitCostsStr = String.join("", card.getManaCostSymbols());
+                    leftSplitCostsStr = String.join("", ((MockCard) card).getManaCostStr(CardInfo.ManaCostSide.LEFT));
                     leftSplitRules = card.getRules(game);
                     leftSplitTypeLine = getCardTypeLine(game, card);
                     Card spellOptionCard = ((MockCard) card).getSpellOptionCard();
                     rightSplitName = spellOptionCard.getName();
-                    rightSplitCostsStr = String.join("", spellOptionCard.getManaCostSymbols());
+                    rightSplitCostsStr = String.join("", ((MockCard) card).getManaCostStr(CardInfo.ManaCostSide.RIGHT));
                     rightSplitRules = spellOptionCard.getRules(game);
                     rightSplitTypeLine = getCardTypeLine(game, spellOptionCard);
-                    this.manaCostLeftStr = card.getManaCostSymbols();
-                    this.manaCostRightStr = spellOptionCard.getManaCostSymbols();
-                } else {
-                    // deck editor cards
-                    this.manaCostLeftStr = ((MockCard) card).getManaCostStr(CardInfo.ManaCostSide.LEFT);
-                    this.manaCostRightStr = ((MockCard) card).getManaCostStr(CardInfo.ManaCostSide.RIGHT);
                 }
+                this.manaCostLeftStr = ((MockCard) card).getManaCostStr(CardInfo.ManaCostSide.LEFT);
+                this.manaCostRightStr = ((MockCard) card).getManaCostStr(CardInfo.ManaCostSide.RIGHT);
             } else {
                 fullCardName = card.getName();
                 this.manaCostLeftStr = card.getManaCostSymbols();

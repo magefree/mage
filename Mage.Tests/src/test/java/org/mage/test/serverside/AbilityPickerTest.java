@@ -10,7 +10,6 @@ import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentImpl;
 import mage.view.AbilityPickerView;
 import mage.view.GameView;
-import mage.view.SimpleCardView;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -45,12 +44,12 @@ public class AbilityPickerTest extends CardTestPlayerBase {
 
     @Test
     public void test_PickerChoices_AdventureSpells() {
-        // must be 2 spells for choices and 1 static ability
+        // must be 1 spell ability and 1 static ability
         Abilities<Ability> abilities = getAbilitiesFromCard("Foulmire Knight");
-        Assert.assertEquals(3, abilities.size());
+        Assert.assertEquals(2, abilities.size());
 
         AbilityPickerView view = new AbilityPickerView(prepareGameView(), "test name", abilities, "test message");
-        Assert.assertEquals(3, view.getChoices().size());
+        Assert.assertEquals(2, view.getChoices().size());
         view.getChoices().values().forEach(c -> {
             if (c.contains("Deathtouch")) {
                 return;

@@ -2,6 +2,7 @@ package mage.cards;
 
 import mage.MageInt;
 import mage.ObjectColor;
+import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
@@ -90,6 +91,16 @@ public abstract class CardWithSpellOption<P extends CardWithSpellOptionHalf<C>, 
                     + "\r\n" + String.format("* left side: need %s, actual %s", needZoneLeft, zoneLeft)
                     + "\r\n" + String.format("* right side: need %s, actual %s", needZoneRight, zoneRight));
         }
+    }
+
+    @Override
+    public Abilities<Ability> getAbilities() {
+        return getInnerAbilities(true, false);
+    }
+
+    @Override
+    public Abilities<Ability> getAbilities(Game game) {
+        return getInnerAbilities(true, false);
     }
 
     @Override

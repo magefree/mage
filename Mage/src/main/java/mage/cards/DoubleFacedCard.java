@@ -2,6 +2,7 @@ package mage.cards;
 
 import mage.MageInt;
 import mage.ObjectColor;
+import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
