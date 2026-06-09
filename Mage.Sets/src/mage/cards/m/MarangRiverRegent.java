@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
@@ -29,24 +28,27 @@ public final class MarangRiverRegent extends OmenCard {
     }
 
     public MarangRiverRegent(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{4}{U}{U}", "Coil and Catch", "{3}{U}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.DRAGON}, "{4}{U}{U}",
+                "Coil and Catch",
+                new CardType[]{CardType.INSTANT}, "{3}{U}");
 
-        this.subtype.add(SubType.DRAGON);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(7);
+        // Marang River Regent
+        this.getLeftHalfCard().setPT(6, 7);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // When this creature enters, return up to two other target nonland permanents to their owners' hands.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
         ability.addTarget(new TargetPermanent(0, 2, filter));
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
 
         // Coil and Catch
         // Draw three cards, then discard a card.
-        this.getSpellCard().getSpellAbility().addEffect(new DrawDiscardControllerEffect(3, 1));
-        this.finalizeOmen();
+        this.getRightHalfCard().getSpellAbility().addEffect(new DrawDiscardControllerEffect(3, 1));
+
+        finalizeCard();
     }
 
     private MarangRiverRegent(final MarangRiverRegent card) {

@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardWithParts;
 import mage.cards.repository.CardInfo;
@@ -20,8 +21,7 @@ import java.util.List;
  */
 public class MockCard extends CardImpl implements MockableCard {
 
-    public static String CARD_WITH_SPELL_OPTION_NAME_SEPARATOR = " // ";
-    public static String MODAL_DOUBLE_FACES_NAME_SEPARATOR = " // ";
+    public static String CARD_WITH_PARTS_NAME_SEPARATOR = " // ";
 
     // Needs to be here, as it is normally calculated from the
     // PlaneswalkerEntersWithLoyaltyAbility of the card... but the MockCard
@@ -34,7 +34,7 @@ public class MockCard extends CardImpl implements MockableCard {
     protected List<String> manaCostLeftStr;
     protected List<String> manaCostRightStr;
     protected List<String> manaCostStr;
-    protected String spellOptionName; // adventure/omen spell name
+    protected Card spellOptionCard; // adventure/omen spell name
     protected int manaValue;
 
     public MockCard(CardInfo card) {
@@ -64,6 +64,7 @@ public class MockCard extends CardImpl implements MockableCard {
         this.frameStyle = card.getFrameStyle();
 
         this.flipCard = card.isFlipCard();
+        // for the regular card part of meld pair
         if (card.getMeldsToCardName() != null) {
             CardInfo meldInfo = CardRepository.instance.findCardWithPreferredSetAndNumber(card.getMeldsToCardName(), card.getSetCode(), card.getMeldCardNumber());
             if (meldInfo != null) {
@@ -73,7 +74,9 @@ public class MockCard extends CardImpl implements MockableCard {
         }
 
         if (card.isCardWithSpellOption()) {
-            this.spellOptionName = card.getSecondSideName();
+            CardWithParts spellOptionCard = (CardWithParts) card.createCard();
+            CardInfo spellOptionSecondSide = new CardInfo(spellOptionCard.getRightHalfCard());
+            this.spellOptionCard = new MockCard(spellOptionSecondSide);
         }
 
         if (card.isDoubleFacedCard()) {
@@ -101,7 +104,7 @@ public class MockCard extends CardImpl implements MockableCard {
         this.manaCostLeftStr = new ArrayList<>(card.manaCostLeftStr);
         this.manaCostRightStr = new ArrayList<>(card.manaCostRightStr);
         this.manaCostStr = new ArrayList<>(card.manaCostStr);
-        this.spellOptionName = card.spellOptionName;
+        this.spellOptionCard = card.spellOptionCard;
         this.manaValue = card.manaValue;
     }
 
@@ -153,11 +156,10 @@ public class MockCard extends CardImpl implements MockableCard {
         if (!showSecondName) {
             return getName();
         }
-
-        if (spellOptionName != null) {
-            return getName() + CARD_WITH_SPELL_OPTION_NAME_SEPARATOR + spellOptionName;
+        if (spellOptionCard != null) {
+            return getName() + CARD_WITH_PARTS_NAME_SEPARATOR + spellOptionCard.getName();
         } else if (getSecondCardFace() != null) {
-            return getName() + MODAL_DOUBLE_FACES_NAME_SEPARATOR + this.getSecondCardFace().getName();
+            return getName() + CARD_WITH_PARTS_NAME_SEPARATOR + this.getSecondCardFace().getName();
         } else {
             return getName();
         }
@@ -175,5 +177,9 @@ public class MockCard extends CardImpl implements MockableCard {
 
     private Ability textAbilityFromString(final String text) {
         return new MockAbility(text);
+    }
+
+    public Card getSpellOptionCard() {
+        return spellOptionCard;
     }
 }

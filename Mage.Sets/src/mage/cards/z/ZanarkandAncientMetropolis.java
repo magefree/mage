@@ -25,21 +25,24 @@ import java.util.UUID;
 public final class ZanarkandAncientMetropolis extends AdventureCard {
 
     public ZanarkandAncientMetropolis(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, new CardType[]{CardType.SORCERY}, "", "Lasting Fayth", "{4}{G}{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.LAND}, new SubType[]{SubType.TOWN}, "",
+                "Lasting Fayth",
+                new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
 
-        this.subtype.add(SubType.TOWN);
-
+        // Zanarkand, Ancient Metropolis
         // This land enters tapped.
-        this.addAbility(new EntersBattlefieldTappedAbility());
+        this.getLeftHalfCard().addAbility(new EntersBattlefieldTappedAbility());
 
         // {T}: Add {G}.
-        this.addAbility(new GreenManaAbility());
+        this.getLeftHalfCard().addAbility(new GreenManaAbility());
 
         // Lasting Fayth
         // Create a 1/1 colorless Hero creature token. Put a +1/+1 counter on it for each land you control.
-        this.getSpellCard().getSpellAbility().addEffect(new ZanarkandAncientMetropolisEffect());
-        this.getSpellCard().getSpellAbility().addHint(LandsYouControlHint.instance);
-        this.finalizeAdventure();
+        this.getRightHalfCard().getSpellAbility().addEffect(new ZanarkandAncientMetropolisEffect());
+        this.getRightHalfCard().getSpellAbility().addHint(LandsYouControlHint.instance);
+
+        finalizeCard();
     }
 
     private ZanarkandAncientMetropolis(final ZanarkandAncientMetropolis card) {

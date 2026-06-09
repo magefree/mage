@@ -25,17 +25,21 @@ public final class VirtueOfKnowledge extends AdventureCard {
     }
 
     public VirtueOfKnowledge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, new CardType[]{CardType.INSTANT}, "{4}{U}", "Vantress Visions", "{1}{U}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.ENCHANTMENT}, "{4}{U}",
+                "Vantress Visions",
+                new CardType[]{CardType.INSTANT}, "{1}{U}");
 
+        // Virtue of Knowledge
         // If a permanent entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
-        this.addAbility(new SimpleStaticAbility(new AdditionalTriggerControlledETBReplacementEffect()));
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new AdditionalTriggerControlledETBReplacementEffect()));
 
         // Vantress Visions
         // Copy target activated or triggered ability you control. You may choose new targets for the copy.
-        this.getSpellCard().getSpellAbility().addEffect(new CopyTargetStackObjectEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetActivatedOrTriggeredAbility(filter));
+        this.getRightHalfCard().getSpellAbility().addEffect(new CopyTargetStackObjectEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetActivatedOrTriggeredAbility(filter));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private VirtueOfKnowledge(final VirtueOfKnowledge card) {

@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
@@ -24,21 +23,23 @@ public final class CruelSomnophage extends AdventureCard {
     private static final DynamicValue xValue = new CardsInAllGraveyardsCount(StaticFilters.FILTER_CARD_CREATURES);
 
     public CruelSomnophage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{1}{B}", "Can't Wake Up", "{1}{U}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.NIGHTMARE}, "{1}{B}",
+                "Can't Wake Up",
+                new CardType[]{CardType.SORCERY}, "{1}{U}");
 
-        this.subtype.add(SubType.NIGHTMARE);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
+        // Cruel Somnophage
+        this.getLeftHalfCard().setPT(0, 0);
 
         // Cruel Somnophage's power and toughness are each equal to the number of creature cards in all graveyards.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue)));
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue)));
 
         // Can't Wake Up
         // Target player mills four cards.
-        this.getSpellCard().getSpellAbility().addEffect(new MillCardsTargetEffect(4));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetPlayer());
+        this.getRightHalfCard().getSpellAbility().addEffect(new MillCardsTargetEffect(4));
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private CruelSomnophage(final CruelSomnophage card) {

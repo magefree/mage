@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutOntoBattlefieldTappedRestInHandEffect;
@@ -24,17 +23,19 @@ public final class BloomvineRegent extends OmenCard {
     private static final FilterCard filter = new FilterBasicCard(SubType.FOREST, "basic Forest cards");
 
     public BloomvineRegent(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{3}{G}{G}", "Claim Territory", "{2}{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.DRAGON}, "{3}{G}{G}",
+                "Claim Territory",
+                new CardType[]{CardType.SORCERY}, "{2}{G}");
 
-        this.subtype.add(SubType.DRAGON);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(5);
+        // Bloomvine Regent
+        this.getLeftHalfCard().setPT(4, 5);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Whenever this creature or another Dragon you control enters, you gain 3 life.
-        this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
+        this.getLeftHalfCard().addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new GainLifeEffect(3),
                 new FilterCreaturePermanent(SubType.DRAGON, "Dragon"),
                 false,
@@ -44,8 +45,9 @@ public final class BloomvineRegent extends OmenCard {
         // Claim Territory
         // Search your library for up to two basic Forest cards, reveal them, put one onto the battlefield tapped and the other into your hand, then shuffle. (Also shuffle this card.)
         TargetCardInLibrary target = new TargetCardInLibrary(0, 2, filter);
-        this.getSpellCard().getSpellAbility().addEffect(new SearchLibraryPutOntoBattlefieldTappedRestInHandEffect(target, 1));
-        this.finalizeOmen();
+        this.getRightHalfCard().getSpellAbility().addEffect(new SearchLibraryPutOntoBattlefieldTappedRestInHandEffect(target, 1));
+
+        finalizeCard();
     }
 
     private BloomvineRegent(final BloomvineRegent card) {

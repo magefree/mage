@@ -1,6 +1,5 @@
 package mage.cards.i;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -23,12 +22,13 @@ import java.util.UUID;
 public final class ImodanesRecruiter extends AdventureCard {
 
     public ImodanesRecruiter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{2}{R}", "Train Troops", "{4}{W}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.KNIGHT}, "{2}{R}",
+                "Train Troops",
+                new CardType[]{CardType.SORCERY}, "{4}{W}");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.KNIGHT);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        // Imodane's Recruiter
+        this.getLeftHalfCard().setPT(2, 2);
 
         // When Imodane's Recruiter enters the battlefield, creatures you control get +1/+0 and gain haste until end of turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(
@@ -39,13 +39,13 @@ public final class ImodanesRecruiter extends AdventureCard {
                 HasteAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_CONTROLLED_CREATURES
         ).setText("and gain haste until end of turn"));
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
 
         // Train Troops
         // Create two 2/2 white Knight creature tokens with vigilance.
-        this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new KnightToken(), 2));
+        this.getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new KnightToken(), 2));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private ImodanesRecruiter(final ImodanesRecruiter card) {

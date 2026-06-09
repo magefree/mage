@@ -1,7 +1,6 @@
 package mage.cards.j;
 
 import mage.ConditionalMana;
-import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -27,16 +26,16 @@ import java.util.UUID;
 public final class JamesWanderingDad extends AdventureCard {
 
     public JamesWanderingDad(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{2}{U}", "Follow Him", "{X}{U}{U}");
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.SCIENTIST}, "{2}{U}",
+                "Follow Him",
+                new CardType[]{CardType.INSTANT}, "{X}{U}{U}");
 
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.SCIENTIST);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(4);
+        // James, Wandering Dad
+        this.getLeftHalfCard().setPT(2, 4);
 
         // {T}: Add {C}{C}. Spend this mana only to activate abilities.
-        this.addAbility(new ConditionalColorlessManaAbility(
+        this.getLeftHalfCard().addAbility(new ConditionalColorlessManaAbility(
                 new TapSourceCost(), 2, new JamesWanderingDadManaBuilder()
         ));
 
@@ -44,12 +43,12 @@ public final class JamesWanderingDad extends AdventureCard {
         // {X}{U}{U}
         // Instant — Adventure
         // Investigate X times.
-        this.getSpellCard().getSpellAbility().addEffect(
+        this.getRightHalfCard().getSpellAbility().addEffect(
                 new InvestigateEffect(GetXValue.instance)
                         .setText("Investigate X times")
         );
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private JamesWanderingDad(final JamesWanderingDad card) {

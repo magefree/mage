@@ -2,6 +2,7 @@ package mage.filter.predicate.mageobject;
 
 import mage.MageObject;
 import mage.cards.AdventureCard;
+import mage.cards.AdventureCardHalf;
 import mage.cards.Card;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
@@ -16,9 +17,9 @@ public enum AdventurePredicate implements Predicate<MageObject> {
     @Override
     public boolean apply(MageObject input, Game game) {
         if (input instanceof Spell) {
-            return ((Spell) input).getCard() instanceof AdventureCard;
+            return ((Spell) input).getCard() instanceof AdventureCardHalf;
         } else if (input instanceof Card) {
-            return input instanceof AdventureCard;
+            return input instanceof AdventureCard || input instanceof AdventureCardHalf;
         } else {
             return false;
         }

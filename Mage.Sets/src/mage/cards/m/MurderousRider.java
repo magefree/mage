@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
@@ -21,29 +20,30 @@ import java.util.UUID;
 public final class MurderousRider extends AdventureCard {
 
     public MurderousRider(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{1}{B}{B}", "Swift End", "{1}{B}{B}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ZOMBIE, SubType.KNIGHT}, "{1}{B}{B}",
+                "Swift End",
+                new CardType[]{CardType.INSTANT}, "{1}{B}{B}");
 
-        this.subtype.add(SubType.ZOMBIE);
-        this.subtype.add(SubType.KNIGHT);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+        // Murderous Rider
+        this.getLeftHalfCard().setPT(2, 3);
 
         // Lifelink
-        this.addAbility(LifelinkAbility.getInstance());
+        this.getLeftHalfCard().addAbility(LifelinkAbility.getInstance());
 
         // When Murderous Rider dies, put it on the bottom of its owner's library.
-        this.addAbility(new DiesSourceTriggeredAbility(new PutOnLibraryTargetEffect(false)
+        this.getLeftHalfCard().addAbility(new DiesSourceTriggeredAbility(new PutOnLibraryTargetEffect(false)
                 .setText("put it on the bottom of its owner's library"), false, SetTargetPointer.CARD));
 
         // Swift End
         // Destroy target creature or planeswalker. You lose 2 life.
-        this.getSpellCard().getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellCard().getSpellAbility().addEffect(
+        this.getRightHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getRightHalfCard().getSpellAbility().addEffect(
                 new LoseLifeSourceControllerEffect(2).setText("You lose 2 life.")
         );
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private MurderousRider(final MurderousRider card) {

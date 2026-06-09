@@ -72,6 +72,18 @@ public abstract class CardPart<C extends CardWithPartsImpl<?, C>> extends CardIm
         return parentCard;
     }
 
+    public Card getOtherSide() {
+        Card otherSide;
+        if (!getParentCard().getLeftHalfCard().getId().equals(this.getId())) {
+            otherSide = getParentCard().getLeftHalfCard();
+        } else if (!getParentCard().getRightHalfCard().getId().equals(this.getId())) {
+            otherSide = getParentCard().getRightHalfCard();
+        } else {
+            throw new IllegalStateException("Wrong code usage: Card halves must use different ids");
+        }
+        return otherSide;
+    }
+
     @Override
     public void setZone(Zone zone, Game game) {
         game.setZone(getParentCard().getId(), zone);

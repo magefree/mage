@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import mage.MageInt;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.AdventureCard;
@@ -28,20 +27,22 @@ public final class CheekyHouseMouse extends AdventureCard {
     }
 
     public CheekyHouseMouse(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{W}", "Squeak By", "{W}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.MOUSE}, "{W}",
+                "Squeak By",
+                new CardType[]{CardType.SORCERY}, "{W}");
 
-        this.subtype.add(SubType.MOUSE);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        // Cheeky House-Mouse
+        this.getLeftHalfCard().setPT(2, 1);
 
         // Squeak By
         // Target creature you control gets +1/+1 until end of turn. It can't be blocked by creatures with power 3 or greater this turn.
-        this.getSpellCard().getSpellAbility().addEffect(new BoostTargetEffect(1, 1));
-        this.getSpellCard().getSpellAbility().addEffect(new CantBeBlockedTargetEffect(filter, Duration.EndOfTurn)
+        this.getRightHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(1, 1));
+        this.getRightHalfCard().getSpellAbility().addEffect(new CantBeBlockedTargetEffect(filter, Duration.EndOfTurn)
                 .setText("it can't be blocked by creatures with power 3 or greater this turn"));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private CheekyHouseMouse(final CheekyHouseMouse card) {

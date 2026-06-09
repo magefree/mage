@@ -1,6 +1,5 @@
 package mage.cards.w;
 
-import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
@@ -34,26 +33,29 @@ public final class WhirlwingStormbrood extends OmenCard {
     }
 
     public WhirlwingStormbrood(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{4}{U}", "Dynamic Soar", "{2}{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.DRAGON}, "{4}{U}",
+                "Dynamic Soar",
+                new CardType[]{CardType.SORCERY}, "{2}{G}");
 
-        this.subtype.add(SubType.DRAGON);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(3);
+        // Whirlwing Stormbrood
+        this.getLeftHalfCard().setPT(4, 3);
 
         // Flash
-        this.addAbility(FlashAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlashAbility.getInstance());
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // You may cast sorcery spells and Dragon spells as though they had flash.
-        this.addAbility(new SimpleStaticAbility(new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
 
         // Dynamic Soar
         // Put three +1/+1 counters on target creature you control.
-        this.getSpellCard().getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(3), StaticValue.get(3)));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.finalizeOmen();
+        this.getRightHalfCard().getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(3), StaticValue.get(3)));
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+
+        finalizeCard();
     }
 
     private WhirlwingStormbrood(final WhirlwingStormbrood card) {

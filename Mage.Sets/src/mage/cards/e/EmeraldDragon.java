@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import mage.MageInt;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -30,24 +29,26 @@ public final class EmeraldDragon extends AdventureCard {
     }
 
     public EmeraldDragon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{4}{G}{G}", "Dissonant Wave", "{2}{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.DRAGON}, "{4}{G}{G}",
+                "Dissonant Wave",
+                new CardType[]{CardType.INSTANT}, "{2}{G}");
 
-        this.subtype.add(SubType.DRAGON);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        // Emerald Dragon
+        this.getLeftHalfCard().setPT(4, 4);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Trample
-        this.addAbility(TrampleAbility.getInstance());
+        this.getLeftHalfCard().addAbility(TrampleAbility.getInstance());
 
         // Dissonant Wave
         // Counter target activated or triggered ability from a noncreature source.
-        this.getSpellCard().getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetActivatedOrTriggeredAbility(filter));
+        this.getRightHalfCard().getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetActivatedOrTriggeredAbility(filter));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private EmeraldDragon(final EmeraldDragon card) {

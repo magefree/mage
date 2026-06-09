@@ -1,6 +1,5 @@
 package mage.cards.w;
 
-import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
@@ -22,22 +21,23 @@ public final class WoodlandAcolyte extends AdventureCard {
     private static final FilterCard filter = new FilterPermanentCard("permanent card from your graveyard");
 
     public WoodlandAcolyte(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{2}{W}", "Mend the Wilds", "{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.CLERIC}, "{2}{W}",
+                "Mend the Wilds",
+                new CardType[]{CardType.INSTANT}, "{G}");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.CLERIC);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        // Woodland Acolyte
+        this.getLeftHalfCard().setPT(2, 2);
 
         // When Woodland Acolyte enters the battlefield, draw a card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
+        this.getLeftHalfCard().addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
 
         // Mend the Wilds
         // Put target permanent card from your graveyard on top of your library.
-        this.getSpellCard().getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
+        this.getRightHalfCard().getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private WoodlandAcolyte(final WoodlandAcolyte card) {

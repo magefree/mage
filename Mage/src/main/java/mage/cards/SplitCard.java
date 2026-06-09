@@ -97,4 +97,9 @@ public abstract class SplitCard extends CardWithPartsImpl<SplitCardHalf, SplitCa
         // split card and it's halfes contains own mana costs, so no need to rewrite logic
         return super.getManaValue();
     }
+
+    @Override
+    public UUID getIdForBattlefield(Game game, Ability source) {
+        return null;
+    }
 }

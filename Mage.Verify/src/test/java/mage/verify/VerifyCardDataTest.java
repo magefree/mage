@@ -343,9 +343,6 @@ public class VerifyCardDataTest {
             if (card instanceof CardWithParts) {
                 check(((CardWithParts) card).getLeftHalfCard(), cardIndex);
                 check(((CardWithParts) card).getRightHalfCard(), cardIndex);
-            } else if (card instanceof CardWithSpellOption) {
-                check(card, cardIndex);
-                check(((CardWithSpellOption) card).getSpellCard(), cardIndex);
             } else {
                 check(card, cardIndex);
             }
@@ -1863,7 +1860,7 @@ public class VerifyCardDataTest {
         }
         MtgJsonCard ref = MtgJsonService.cardFromSet(card.getExpansionSetCode(), card.getName(), cardNumber);
         if (ref != null) {
-            if ((card instanceof CardWithSpellOption || card instanceof SpellOptionCard) && ref.layout.equals("reversible_card")) {
+            if ((card instanceof CardWithSpellOption || card instanceof CardWithSpellOptionHalf) && ref.layout.equals("reversible_card")) {
                 // TODO: Remove when MtgJson updated
                 // workaround for reversible omen cards e.g. Bloomvine Regent // Claim Territory // Bloomvine Regent
                 // both sides have main card info
@@ -1919,7 +1916,7 @@ public class VerifyCardDataTest {
         // TODO: temporary fix - scryfall/mtgjson wrongly add [colors, mana cost] from spell part to main part/card,
         //  example: Ishgard, the Holy See // Faith & Grief
         if (card instanceof CardWithSpellOption && card.isLand()
-                || card instanceof SpellOptionCard && ((SpellOptionCard) card).getParentCard().isLand()) {
+                || card instanceof CardWithSpellOptionHalf && ((CardWithSpellOptionHalf<?>) card).getParentCard().isLand()) {
             return;
         }
 
@@ -2389,6 +2386,11 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "legendary nonpermanent cards need to have LegendarySpellAbility");
         }
 
+        // special check: adventure and omen cards need to be finalized
+        if (card instanceof CardWithSpellOptionHalf && !((CardWithSpellOptionHalf<?>) card).getParentCard().isFinalized()) {
+            fail(card, "abilities", "adventure/omen card's parent card must be finalized");
+        }
+
         // special check: some new creature's ETB must use When this creature enters instead When {this} enters
         if (EntersBattlefieldTriggeredAbility.ENABLE_TRIGGER_PHRASE_AUTO_FIX) {
             if (etbTriggerPhrases.isEmpty()) {
@@ -2848,11 +2850,7 @@ public class VerifyCardDataTest {
 
             System.out.println();
             System.out.println(card.getName() + " " + card.getManaCost().getText());
-            if (card instanceof CardWithSpellOption) {
-                // format to print main card then spell card
-                card.getInitAbilities().getRules().forEach(this::printAbilityText);
-                ((CardWithSpellOption) card).getSpellCard().getAbilities().getRules().forEach(r -> printAbilityText(r.replace("&mdash; ", "\n")));
-            } else if (card instanceof CardWithParts) {
+            if (card instanceof CardWithParts) {
                 // format to print each side separately
                 System.out.println("=== " + ((CardWithParts) card).getLeftHalfCard().getName() + " ===");
                 ((CardWithParts) card).getLeftHalfCard().getAbilities().getRules().forEach(this::printAbilityText);
@@ -2868,10 +2866,7 @@ public class VerifyCardDataTest {
             Card cardMain = card;
             MtgJsonCard refTwo = null;
             Card cardTwo = null;
-            if (card instanceof CardWithSpellOption) {
-                refTwo = MtgJsonService.card(((CardWithSpellOption) card).getSpellCard().getName());
-                cardTwo = ((CardWithSpellOption) card).getSpellCard();
-            } else if (card instanceof CardWithParts) {
+            if (card instanceof CardWithParts) {
                 refMain = MtgJsonService.card(((CardWithParts) card).getLeftHalfCard().getName());
                 cardMain = ((CardWithParts) card).getLeftHalfCard();
                 refTwo = MtgJsonService.card(((CardWithParts) card).getRightHalfCard().getName());
@@ -3324,7 +3319,7 @@ public class VerifyCardDataTest {
         // TODO: temporary fix - scryfall/mtgjson wrongly add [colors, mana cost] from spell part to main part/card,
         //  example: Ishgard, the Holy See // Faith & Grief
         if (card instanceof CardWithSpellOption && card.isLand()
-                || card instanceof SpellOptionCard && ((SpellOptionCard) card).getParentCard().isLand()) {
+                || card instanceof CardWithSpellOptionHalf && ((CardWithSpellOptionHalf<?>) card).getParentCard().isLand()) {
             return;
         }
 

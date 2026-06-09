@@ -3777,16 +3777,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean canPlotFromTopOfLibrary() {
-        return computerPlayer.canPlotFromTopOfLibrary();
-    }
-
-    @Override
-    public void setPlotFromTopOfLibrary(boolean canPlotFromTopOfLibrary) {
-        computerPlayer.setPlotFromTopOfLibrary(canPlotFromTopOfLibrary);
-    }
-
-    @Override
     public void setDrawsFromBottom(boolean drawsFromBottom) {
         computerPlayer.setDrawsFromBottom(drawsFromBottom);
     }

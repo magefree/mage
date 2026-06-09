@@ -1,6 +1,5 @@
 package mage.cards.i;
 
-import mage.MageInt;
 import mage.abilities.common.AttacksAloneSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -20,20 +19,22 @@ import java.util.UUID;
 public final class IntrepidTrufflesnout extends AdventureCard {
 
     public IntrepidTrufflesnout(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{1}{G}", "Go Hog Wild", "{1}{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.BOAR}, "{1}{G}",
+                "Go Hog Wild",
+                new CardType[]{CardType.INSTANT}, "{1}{G}");
 
-        this.subtype.add(SubType.BOAR);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(1);
+        // Intrepid Trufflesnout
+        this.getLeftHalfCard().setPT(3, 1);
 
         // Whenever Intrepid Trufflesnout attacks alone, create a Food token.
-        this.addAbility(new AttacksAloneSourceTriggeredAbility(new CreateTokenEffect(new FoodToken())));
+        this.getLeftHalfCard().addAbility(new AttacksAloneSourceTriggeredAbility(new CreateTokenEffect(new FoodToken())));
 
         // Target creature gets +2/+2 until end of turn.
-        this.getSpellCard().getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getRightHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private IntrepidTrufflesnout(final IntrepidTrufflesnout card) {

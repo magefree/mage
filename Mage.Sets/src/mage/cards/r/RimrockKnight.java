@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import mage.MageInt;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.AdventureCard;
@@ -18,22 +17,23 @@ import java.util.UUID;
 public final class RimrockKnight extends AdventureCard {
 
     public RimrockKnight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{1}{R}", "Boulder Rush", "{R}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.DWARF, SubType.KNIGHT}, "{1}{R}",
+                "Boulder Rush",
+                new CardType[]{CardType.INSTANT}, "{R}");
 
-        this.subtype.add(SubType.DWARF);
-        this.subtype.add(SubType.KNIGHT);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(1);
+        // Rimrock Knight
+        this.getLeftHalfCard().setPT(3, 1);
 
         // Rimrock Knight can't block
-        this.addAbility(new CantBlockAbility());
+        this.getLeftHalfCard().addAbility(new CantBlockAbility());
 
         // Boulder Rush
         // Target creature gets +2/+0 until end of turn.
-        this.getSpellCard().getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getRightHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private RimrockKnight(final RimrockKnight card) {

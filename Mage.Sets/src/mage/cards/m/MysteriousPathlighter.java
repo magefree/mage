@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.AdventureCard;
+import mage.cards.AdventureCardHalf;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -71,7 +71,7 @@ class MysteriousPathlighterEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
         return permanent instanceof PermanentCard
-                && ((PermanentCard) permanent).getCard() instanceof AdventureCard
+                && ((PermanentCard) permanent).getCard() instanceof AdventureCardHalf
                 && permanent.isControlledBy(source.getControllerId())
                 && permanent.isCreature(game);
     }

@@ -443,7 +443,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         runCode("check commander tax 2x", 9, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             AdventureCard card = (AdventureCard) game.getCommanderCardsFromCommandZone(player, CommanderCardType.ANY).stream().findFirst().get();
             Assert.assertEquals(2, CommanderCastCountValue.instance.calculate(game, card.getSpellAbility(), null));
-            Assert.assertEquals(2, CommanderCastCountValue.instance.calculate(game, card.getSpellCard().getSpellAbility(), null));
+            Assert.assertEquals(2, CommanderCastCountValue.instance.calculate(game, card.getRightHalfCard().getSpellAbility(), null));
         });
         checkPlayableAbility("before last cast 1", 9, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
         checkPlayableAbility("before last cast 1", 9, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", false);
@@ -469,7 +469,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         runCode("check commander tax 3x", 13, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             AdventureCard card = (AdventureCard) game.getCard(game.getCommandersIds(player, CommanderCardType.ANY, false).stream().findFirst().get());
             Assert.assertEquals(3, CommanderCastCountValue.instance.calculate(game, card.getSpellAbility(), null));
-            Assert.assertEquals(3, CommanderCastCountValue.instance.calculate(game, card.getSpellCard().getSpellAbility(), null));
+            Assert.assertEquals(3, CommanderCastCountValue.instance.calculate(game, card.getRightHalfCard().getSpellAbility(), null));
         });
 
         setStrictChooseMode(true);

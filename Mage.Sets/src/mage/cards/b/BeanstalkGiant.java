@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -25,22 +24,24 @@ public final class BeanstalkGiant extends AdventureCard {
             = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS);
 
     public BeanstalkGiant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{6}{G}", "Fertile Footsteps", "{2}{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GIANT}, "{6}{G}",
+                "Fertile Footsteps",
+                new CardType[]{CardType.SORCERY}, "{2}{G}");
 
-        this.subtype.add(SubType.GIANT);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
+        // Beanstalk Giant
+        this.getLeftHalfCard().setPT(0, 0);
 
         // Beanstalk Giant's power and toughness are each equal to the number of lands you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue)));
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue)));
 
         // Fertile Footsteps
         // Search your library for a basic land card, put it onto the battlefield, then shuffle your library.
-        this.getSpellCard().getSpellAbility().addEffect(
+        this.getRightHalfCard().getSpellAbility().addEffect(
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND))
         );
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private BeanstalkGiant(final BeanstalkGiant card) {

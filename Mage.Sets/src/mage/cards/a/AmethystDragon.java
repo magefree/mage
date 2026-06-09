@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import mage.MageInt;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -18,24 +17,26 @@ import java.util.UUID;
 public final class AmethystDragon extends AdventureCard {
 
     public AmethystDragon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{4}{R}{R}", "Explosive Crystal", "{4}{R}");
+        super(ownerId, setInfo, 
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.DRAGON}, "{4}{R}{R}",
+                "Explosive Crystal",
+                new CardType[]{CardType.SORCERY}, "{4}{R}");
 
-        this.subtype.add(SubType.DRAGON);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        // Amethyst Dragon
+        this.getLeftHalfCard().setPT(4, 4);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Haste
-        this.addAbility(HasteAbility.getInstance());
+        this.getLeftHalfCard().addAbility(HasteAbility.getInstance());
 
         // Explosive Crystal
         // Explosive Crystal deals 4 damage divided as you choose among any number of targets.
-        this.getSpellCard().getSpellAbility().addEffect(new DamageMultiEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetAnyTargetAmount(4));
-        
-        this.finalizeAdventure();
+        this.getRightHalfCard().getSpellAbility().addEffect(new DamageMultiEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetAnyTargetAmount(4));
+
+        finalizeCard();
     }
 
     private AmethystDragon(final AmethystDragon card) {

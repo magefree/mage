@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -21,21 +20,22 @@ import java.util.UUID;
 public final class SmittenSwordmaster extends AdventureCard {
 
     public SmittenSwordmaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{1}{B}", "Curry Favor", "{B}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.KNIGHT}, "{1}{B}",
+                "Curry Favor",
+                new CardType[]{CardType.SORCERY}, "{B}");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.KNIGHT);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        // Smitten Swordmaster
+        this.getLeftHalfCard().setPT(2, 1);
 
         // Lifelink
-        this.addAbility(LifelinkAbility.getInstance());
+        this.getLeftHalfCard().addAbility(LifelinkAbility.getInstance());
 
         // Curry Favor
         // You gain X life and each opponent loses X life, where X is the number of Knights you control.
-        this.getSpellCard().getSpellAbility().addEffect(new CurryFavorEffect());
+        this.getRightHalfCard().getSpellAbility().addEffect(new CurryFavorEffect());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private SmittenSwordmaster(final SmittenSwordmaster card) {

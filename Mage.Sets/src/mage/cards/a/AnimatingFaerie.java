@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import mage.MageInt;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -31,29 +30,30 @@ public final class AnimatingFaerie extends AdventureCard {
     }
 
     public AnimatingFaerie(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{2}{U}", "Bring to Life", "{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.FAERIE}, "{2}{U}",
+                "Bring to Life",
+                new CardType[]{CardType.SORCERY}, "{2}{U}");
 
-        this.subtype.add(SubType.FAERIE);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        // Animating Faerie
+        this.getLeftHalfCard().setPT(2, 2);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Bring to Life
         // Target noncreature artifact you control becomes a 0/0 artifact creature. Put four +1/+1 counters on it.
-        this.getSpellCard().getSpellAbility().addEffect(new AddCardTypeTargetEffect(
+        this.getRightHalfCard().getSpellAbility().addEffect(new AddCardTypeTargetEffect(
                 Duration.EndOfGame, CardType.ARTIFACT, CardType.CREATURE
         ).setText("Target noncreature artifact you control becomes a 0/0 artifact creature"));
-        this.getSpellCard().getSpellAbility().addEffect(new SetBasePowerToughnessTargetEffect(
+        this.getRightHalfCard().getSpellAbility().addEffect(new SetBasePowerToughnessTargetEffect(
                 0, 0, Duration.EndOfGame
         ).setText("Put four +1/+1 counters on it."));
-        this.getSpellCard().getSpellAbility().addEffect(new AddCountersTargetEffect(
+        this.getRightHalfCard().getSpellAbility().addEffect(new AddCountersTargetEffect(
                 CounterType.P1P1.createInstance(4)
         ).setText(" "));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetPermanent(filter));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private AnimatingFaerie(final AnimatingFaerie card) {

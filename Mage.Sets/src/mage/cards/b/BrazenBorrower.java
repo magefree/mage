@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import mage.MageInt;
 import mage.abilities.common.CanBlockOnlyFlyingAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlashAbility;
@@ -29,28 +28,29 @@ public final class BrazenBorrower extends AdventureCard {
     }
 
     public BrazenBorrower(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{1}{U}{U}", "Petty Theft", "{1}{U}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.FAERIE, SubType.ROGUE}, "{1}{U}{U}",
+                "Petty Theft",
+                new CardType[]{CardType.INSTANT}, "{1}{U}");
 
-        this.subtype.add(SubType.FAERIE);
-        this.subtype.add(SubType.ROGUE);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(1);
+        // Brazen Borrower
+        this.getLeftHalfCard().setPT(3, 1);
 
         // Flash
-        this.addAbility(FlashAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlashAbility.getInstance());
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Bazen Borrower can block only creatures with flying.
-        this.addAbility(new CanBlockOnlyFlyingAbility());
+        this.getLeftHalfCard().addAbility(new CanBlockOnlyFlyingAbility());
 
         // Petty Theft
         // Return target nonland permanent an opponent controls to its owner's hand.
-        this.getSpellCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getRightHalfCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetPermanent(filter));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private BrazenBorrower(final BrazenBorrower card) {

@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.common.CreaturesYouControlDiedCount;
@@ -36,15 +35,16 @@ public final class CallousSellSword extends AdventureCard {
     );
 
     public CallousSellSword(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{1}{B}", "Burn Together", "{R}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.SOLDIER}, "{1}{B}",
+                "Burn Together",
+                new CardType[]{CardType.SORCERY}, "{R}");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.SOLDIER);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        // Callous Sell-Sword
+        this.getLeftHalfCard().setPT(2, 2);
 
         // Callous Sell-Sword enters the battlefield with a +1/+1 counter on it for each creature that died under your control this turn.
-        this.addAbility(new EntersBattlefieldAbility(
+        this.getLeftHalfCard().addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(
                         CounterType.P1P1.createInstance(0),
                         CreaturesYouControlDiedCount.instance, true
@@ -53,12 +53,12 @@ public final class CallousSellSword extends AdventureCard {
 
         // Burn Together
         // Target creature you control deals damage equal to its power to any other target. Then sacrifice it.
-        this.getSpellCard().getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent().setTargetTag(1));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetPermanentOrPlayer(filterSecondTarget).setTargetTag(2));
-        this.getSpellCard().getSpellAbility().addEffect(new CallousSellSwordSacrificeFirstTargetEffect().concatBy("Then"));
+        this.getRightHalfCard().getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent().setTargetTag(1));
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetPermanentOrPlayer(filterSecondTarget).setTargetTag(2));
+        this.getRightHalfCard().getSpellAbility().addEffect(new CallousSellSwordSacrificeFirstTargetEffect().concatBy("Then"));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private CallousSellSword(final CallousSellSword card) {

@@ -1260,8 +1260,6 @@ public final class CardUtil {
         Card permCard;
         if (card instanceof CardWithParts) {
             permCard = ((CardWithParts) card).getDefaultCardSide();
-        } else if (card instanceof CardWithSpellOption) {
-            permCard = card;
         } else {
             permCard = card;
         }
@@ -1472,9 +1470,6 @@ public final class CardUtil {
         if (cardToCast instanceof CardWithParts) {
             cards.add(((CardWithParts) cardToCast).getLeftHalfCard());
             cards.add(((CardWithParts) cardToCast).getRightHalfCard());
-        } else if (cardToCast instanceof CardWithSpellOption) {
-            cards.add(cardToCast);
-            cards.add(((CardWithSpellOption) cardToCast).getSpellCard());
         } else {
             cards.add(cardToCast);
         }
@@ -1672,23 +1667,6 @@ public final class CardUtil {
             }
         }
 
-        // handle adventure cards
-        if (card instanceof CardWithSpellOption) {
-            Card creatureCard = card.getMainCard();
-            Card spellCard = ((CardWithSpellOption) card).getSpellCard();
-            if (manaCost != null) {
-                // get additional cost if any
-                Costs<Cost> additionalCostsCreature = creatureCard.getSpellAbility().getCosts();
-                Costs<Cost> additionalCostsSpellCard = spellCard.getSpellAbility().getCosts();
-                // set alternative cost and any additional cost
-                player.setCastSourceIdWithAlternateMana(creatureCard.getId(), manaCost, additionalCostsCreature, MageIdentifier.Default);
-                player.setCastSourceIdWithAlternateMana(spellCard.getId(), manaCost, additionalCostsSpellCard, MageIdentifier.Default);
-            }
-            // allow the card to be cast
-            game.getState().setValue("PlayFromNotOwnHandZone" + creatureCard.getId(), Boolean.TRUE);
-            game.getState().setValue("PlayFromNotOwnHandZone" + spellCard.getId(), Boolean.TRUE);
-        }
-
         // normal card
         if (manaCost != null) {
             // get additional cost if any
@@ -1708,12 +1686,6 @@ public final class CardUtil {
             Card rightHalfCard = ((CardWithParts) card).getRightHalfCard();
             game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
             game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
-        }
-        if (card instanceof CardWithSpellOption) {
-            Card creatureCard = card.getMainCard();
-            Card spellCard = ((CardWithSpellOption) card).getSpellCard();
-            game.getState().setValue("PlayFromNotOwnHandZone" + creatureCard.getId(), null);
-            game.getState().setValue("PlayFromNotOwnHandZone" + spellCard.getId(), null);
         }
         // turn off effect on a normal card
         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
@@ -2097,10 +2069,6 @@ public final class CardUtil {
             res.add(mainCard);
             res.add(mainCard.getLeftHalfCard());
             res.add(mainCard.getRightHalfCard());
-        } else if (object instanceof CardWithSpellOption || object instanceof SpellOptionCard) {
-            CardWithSpellOption mainCard = (CardWithSpellOption) ((Card) object).getMainCard();
-            res.add(mainCard);
-            res.add(mainCard.getSpellCard());
         } else if (object instanceof Spell) {
             // example: activate Lightning Storm's ability from the spell on the stack
             res.add(object);

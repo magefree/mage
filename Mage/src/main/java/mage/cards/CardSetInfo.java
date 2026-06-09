@@ -26,6 +26,10 @@ public final class CardSetInfo implements Serializable, Copyable<CardSetInfo> {
         this(name, expansionSetCode, cardNumber, "", rarity, graphicInfo);
     }
 
+    public CardSetInfo(String name, String expansionSetCode, String cardNumber, String meldNumber, Rarity rarity) {
+        this(name, expansionSetCode, cardNumber, meldNumber, rarity, null);
+    }
+
     public CardSetInfo(String name, String expansionSetCode, String cardNumber, String meldNumber, Rarity rarity, CardGraphicInfo graphicInfo) {
         this.name = name;
         this.expansionSetCode = expansionSetCode;

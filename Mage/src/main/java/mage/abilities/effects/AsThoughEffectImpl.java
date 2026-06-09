@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.cards.Card;
 import mage.cards.CardWithParts;
-import mage.cards.CardWithSpellOption;
 import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
@@ -95,11 +94,6 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
                 if (rightCard.getSpellAbility() != null && rightCard.getSpellAbility().getSpellAbilityType().canCast()) {
                     player.setCastSourceIdWithAlternateMana(rightCard.getId(), null, rightCard.getSpellAbility().getCosts(), identifier);
                 }
-            } else if (card instanceof CardWithSpellOption) {
-                Card creatureCard = card.getMainCard();
-                Card spellCard = ((CardWithSpellOption) card).getSpellCard();
-                player.setCastSourceIdWithAlternateMana(creatureCard.getId(), null, creatureCard.getSpellAbility().getCosts(), identifier);
-                player.setCastSourceIdWithAlternateMana(spellCard.getId(), null, spellCard.getSpellAbility().getCosts(), identifier);
             }
             player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts(), identifier);
         }

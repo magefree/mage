@@ -13,7 +13,10 @@ import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardWithParts;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.CardState;
@@ -211,8 +214,6 @@ class TinybonesBaubleBurglarSpendAnyManaEffect extends AsThoughEffectImpl implem
             CardState cardState;
             if (card instanceof CardWithParts) {
                 cardState = game.getLastKnownInformationCard(((CardWithParts) card).getDefaultCardSide().getId(), Zone.EXILED);
-            } else if (card instanceof CardWithSpellOption) {
-                cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
             } else {
                 cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
             }

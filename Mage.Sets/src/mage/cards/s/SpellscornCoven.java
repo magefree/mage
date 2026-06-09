@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
@@ -20,25 +19,26 @@ import java.util.UUID;
 public final class SpellscornCoven extends AdventureCard {
 
     public SpellscornCoven(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{3}{B}", "Take It Back", "{2}{U}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.FAERIE, SubType.WARLOCK}, "{3}{B}",
+                "Take It Back",
+                new CardType[]{CardType.INSTANT}, "{2}{U}");
 
-        this.subtype.add(SubType.FAERIE);
-        this.subtype.add(SubType.WARLOCK);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+        // Spellscorn Coven
+        this.getLeftHalfCard().setPT(2, 3);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // When Spellscorn Coven enters the battlefield, each opponent discards a card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT)));
+        this.getLeftHalfCard().addAbility(new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT)));
 
         // Take it Back
         // Return target spell to its owner's hand.
-        this.getSpellCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetSpell());
+        this.getRightHalfCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetSpell());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private SpellscornCoven(final SpellscornCoven card) {

@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TapTargetEffect;
@@ -21,24 +20,27 @@ import java.util.UUID;
 public final class DirgurIslandDragon extends OmenCard {
 
     public DirgurIslandDragon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{5}{U}", "Skimming Strike", "{1}{U}");
-        
-        this.subtype.add(SubType.DRAGON);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.DRAGON}, "{5}{U}",
+                "Skimming Strike",
+                new CardType[]{CardType.INSTANT}, "{1}{U}");
+
+        // Dirgur, Island Dragon
+        this.getLeftHalfCard().setPT(4, 4);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.getLeftHalfCard().addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
 
         // Skimming Strike
         // Tap up to one target creature. Draw a card.
-        this.getSpellCard().getSpellAbility().addEffect(new TapTargetEffect());
-        this.getSpellCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
-        this.finalizeOmen();
+        this.getRightHalfCard().getSpellAbility().addEffect(new TapTargetEffect());
+        this.getRightHalfCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
+
+        finalizeCard();
     }
 
     private DirgurIslandDragon(final DirgurIslandDragon card) {

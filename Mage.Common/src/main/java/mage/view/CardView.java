@@ -430,30 +430,42 @@ public class CardView extends SimpleCardView {
                 fullCardName = card.getName(); // split card contains full name as normal
                 this.manaCostLeftStr = splitCard.getLeftHalfCard().getManaCostSymbols();
                 this.manaCostRightStr = splitCard.getRightHalfCard().getManaCostSymbols();
-            } else if (card instanceof CardWithParts) {
-                this.isDoubleFacedCard = true;
-                CardWithParts mainCard = ((CardWithParts) card);
-                fullCardName = mainCard.getLeftHalfCard().getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + mainCard.getRightHalfCard().getName();
-                this.manaCostLeftStr = mainCard.getLeftHalfCard().getManaCostSymbols();
-                this.manaCostRightStr = mainCard.getRightHalfCard().getManaCostSymbols();
             } else if (card instanceof CardWithSpellOption) {
                 this.isSplitCard = true;
-                CardWithSpellOption mainCard = ((CardWithSpellOption) card);
+                Card mainCard = ((CardWithParts) card).getLeftHalfCard();
                 leftSplitName = mainCard.getName();
                 leftSplitCostsStr = String.join("", mainCard.getManaCostSymbols());
-                leftSplitRules = mainCard.getSharedRules(game);
+                leftSplitRules = mainCard.getRules(game);
                 leftSplitTypeLine = getCardTypeLine(game, mainCard);
-                SpellOptionCard spellOptionCard = mainCard.getSpellCard();
+                Card spellOptionCard = ((CardWithParts) card).getRightHalfCard();
                 rightSplitName = spellOptionCard.getName();
                 rightSplitCostsStr = String.join("", spellOptionCard.getManaCostSymbols());
                 rightSplitRules = spellOptionCard.getRules(game);
                 rightSplitTypeLine = getCardTypeLine(game, spellOptionCard);
-                fullCardName = mainCard.getName() + MockCard.CARD_WITH_SPELL_OPTION_NAME_SEPARATOR + spellOptionCard.getName();
+                fullCardName = mainCard.getName() + MockCard.CARD_WITH_PARTS_NAME_SEPARATOR + spellOptionCard.getName();
                 this.manaCostLeftStr = mainCard.getManaCostSymbols();
                 this.manaCostRightStr = spellOptionCard.getManaCostSymbols();
+            } else if (card instanceof CardWithParts) {
+                this.isDoubleFacedCard = true;
+                CardWithParts mainCard = ((CardWithParts) card);
+                fullCardName = mainCard.getLeftHalfCard().getName() + MockCard.CARD_WITH_PARTS_NAME_SEPARATOR + mainCard.getRightHalfCard().getName();
+                this.manaCostLeftStr = mainCard.getLeftHalfCard().getManaCostSymbols();
+                this.manaCostRightStr = mainCard.getRightHalfCard().getManaCostSymbols();
             } else if (card instanceof MockCard) {
-                // deck editor cards
                 fullCardName = ((MockCard) card).getFullName(true);
+                // deck editor omen cards
+                if (((MockCard) card).getSpellOptionCard() != null) {
+                    this.isSplitCard = true;
+                    leftSplitName = card.getName();
+                    leftSplitCostsStr = String.join("", ((MockCard) card).getManaCostStr(CardInfo.ManaCostSide.LEFT));
+                    leftSplitRules = card.getRules(game);
+                    leftSplitTypeLine = getCardTypeLine(game, card);
+                    Card spellOptionCard = ((MockCard) card).getSpellOptionCard();
+                    rightSplitName = spellOptionCard.getName();
+                    rightSplitCostsStr = String.join("", ((MockCard) card).getManaCostStr(CardInfo.ManaCostSide.RIGHT));
+                    rightSplitRules = spellOptionCard.getRules(game);
+                    rightSplitTypeLine = getCardTypeLine(game, spellOptionCard);
+                }
                 this.manaCostLeftStr = ((MockCard) card).getManaCostStr(CardInfo.ManaCostSide.LEFT);
                 this.manaCostRightStr = ((MockCard) card).getManaCostStr(CardInfo.ManaCostSide.RIGHT);
             } else {

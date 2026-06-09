@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import mage.MageInt;
 import mage.abilities.effects.common.MillThenPutInHandEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -29,24 +28,25 @@ public final class PicklockPrankster extends AdventureCard {
     }
 
     public PicklockPrankster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{1}{U}", "Free the Fae", "{1}{U}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.FAERIE, SubType.ROGUE}, "{1}{U}",
+                "Free the Fae",
+                new CardType[]{CardType.INSTANT}, "{1}{U}");
 
-        this.subtype.add(SubType.FAERIE);
-        this.subtype.add(SubType.ROGUE);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+        // Picklock Prankster
+        this.getLeftHalfCard().setPT(1, 3);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Vigilance
-        this.addAbility(VigilanceAbility.getInstance());
+        this.getLeftHalfCard().addAbility(VigilanceAbility.getInstance());
 
         // Free the Fae
         // Mill four cards. Then put an instant, sorcery, or Faerie card from among the milled cards into your hand.
-        this.getSpellCard().getSpellAbility().addEffect(new MillThenPutInHandEffect(4, filter, false));
+        this.getRightHalfCard().getSpellAbility().addEffect(new MillThenPutInHandEffect(4, filter, false));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private PicklockPrankster(final PicklockPrankster card) {

@@ -7,7 +7,6 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.Card;
-import mage.cards.SpellOptionCard;
 import mage.cards.SplitCard;
 import mage.constants.*;
 import mage.game.Game;
@@ -81,7 +80,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
      *                      (i.e. Vizier of the Menagerie and issue #5816)
      */
 
-    private static final Set<MageIdentifier> activationSetAllowAll = new HashSet<>();
+    private static final Set<MageIdentifier> activationSetAllowAll = new HashSet();
 
     static {
         activationSetAllowAll.add(MageIdentifier.Default);
@@ -99,7 +98,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
         // forced to cast (can be part id or main id)
         Set<UUID> idsToCheck = new HashSet<>();
         idsToCheck.add(object.getId());
-        if (object instanceof Card && !(object instanceof SpellOptionCard)) {
+        if (object instanceof Card) {
             idsToCheck.add(((Card) object).getMainCard().getId());
         }
         for (UUID idToCheck : idsToCheck) {
@@ -155,10 +154,6 @@ public class SpellAbility extends ActivatedAbilityImpl {
             Set<ApprovingObject> approvingObjects = new HashSet<>();
             approvingObjects.addAll(game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this, playerId, game));
             approvingObjects.addAll(game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, this, playerId, game));
-            if (approvingObjects.isEmpty() && getSpellAbilityType().equals(SpellAbilityType.ADVENTURE_SPELL)) {
-                // allowed to cast adventures from non-hand?
-                approvingObjects = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.CAST_ADVENTURE_FROM_NOT_OWN_HAND_ZONE, this, playerId, game);
-            }
 
             if (approvingObjects.isEmpty()) {
                 Card card = game.getCard(sourceId);

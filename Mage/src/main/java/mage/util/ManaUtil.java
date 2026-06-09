@@ -15,7 +15,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.mana.*;
 import mage.cards.Card;
 import mage.cards.CardWithParts;
-import mage.cards.CardWithSpellOption;
 import mage.choices.Choice;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
@@ -643,8 +642,6 @@ public final class ManaUtil {
         Card secondSide = null;
         if (card instanceof CardWithParts) {
             secondSide = ((CardWithParts) card).getRightHalfCard();
-        } else if (card instanceof CardWithSpellOption) {
-            secondSide = ((CardWithSpellOption) card).getSpellCard();
         }
         return getColorIdentity(card.getColor(), String.join("", card.getManaCostSymbols()), card.getRules(), secondSide);
     }

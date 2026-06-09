@@ -1,6 +1,5 @@
 package mage.cards.o;
 
-import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -20,24 +19,24 @@ import java.util.UUID;
 public final class OakhameRanger extends AdventureCard {
 
     public OakhameRanger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{G/W}{G/W}{G/W}{G/W}", "Bring Back", "{G/W}{G/W}{G/W}{G/W}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ELF, SubType.KNIGHT, SubType.RANGER}, "{G/W}{G/W}{G/W}{G/W}",
+                "Bring Back",
+                new CardType[]{CardType.SORCERY}, "{G/W}{G/W}{G/W}{G/W}");
 
-        this.subtype.add(SubType.ELF);
-        this.subtype.add(SubType.KNIGHT);
-        this.subtype.add(SubType.RANGER);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        // Oakhame Ranger
+        this.getLeftHalfCard().setPT(2, 2);
 
         // {T}: Creatures you control get +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(
+        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(
                 new BoostControlledEffect(1, 1, Duration.EndOfTurn), new TapSourceCost()
         ));
 
         // Bring Back
         // Create two 1/1 white Human creature tokens.
-        this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new HumanToken(), 2));
+        this.getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new HumanToken(), 2));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private OakhameRanger(final OakhameRanger card) {

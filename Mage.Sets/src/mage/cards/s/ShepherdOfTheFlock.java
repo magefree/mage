@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import mage.MageInt;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
@@ -16,19 +15,20 @@ import java.util.UUID;
 public final class ShepherdOfTheFlock extends AdventureCard {
 
     public ShepherdOfTheFlock(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{1}{W}", "Usher to Safety", "{W}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.PEASANT}, "{1}{W}",
+                "Usher to Safety",
+                new CardType[]{CardType.INSTANT}, "{W}");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.PEASANT);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(1);
+        // Shepherd of the Flock
+        this.getLeftHalfCard().setPT(3, 1);
 
         // Usher to Safety
-        // Return target permanent you control to its owner’s hand.
-        this.getSpellCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetControlledPermanent());
+        // Return target permanent you control to its owner's hand.
+        this.getRightHalfCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetControlledPermanent());
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private ShepherdOfTheFlock(final ShepherdOfTheFlock card) {

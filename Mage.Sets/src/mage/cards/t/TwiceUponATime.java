@@ -35,8 +35,12 @@ public final class TwiceUponATime extends AdventureCard {
     }
 
     public TwiceUponATime(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, new CardType[]{CardType.SORCERY}, "{4}{U}{U}", "Unlikely Meeting", "{2}{U}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.SORCERY},"{4}{U}{U}",
+                "Unlikely Meeting",
+                new CardType[]{CardType.SORCERY}, "{2}{U}");
 
+        // Twice Upon a Time
         // Cast this spell only if you control two or more Doctors.
         this.addAbility(new CastOnlyIfConditionIsTrueAbility(condition).addHint(hint));
 
@@ -46,8 +50,9 @@ public final class TwiceUponATime extends AdventureCard {
 
         // Unlikely Meeting
         // Search your library for a Doctor card, reveal it, put it into your hand, then shuffle.
-        this.getSpellCard().getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter2), true));
-        this.finalizeAdventure();
+        this.getRightHalfCard().getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter2), true));
+
+        finalizeCard();
     }
 
     private TwiceUponATime(final TwiceUponATime card) {

@@ -1,6 +1,5 @@
 package mage.cards.f;
 
-import mage.MageInt;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.AdventureCard;
@@ -17,21 +16,23 @@ import java.util.UUID;
 public final class FangDragon extends AdventureCard {
 
     public FangDragon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{5}{R}{R}", "Forktail Sweep", "{1}{R}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.DRAGON}, "{5}{R}{R}",
+                "Forktail Sweep",
+                new CardType[]{CardType.SORCERY}, "{1}{R}");
 
-        this.subtype.add(SubType.DRAGON);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(3);
+        // Fang Dragon
+        this.getLeftHalfCard().setPT(6, 3);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Forktail Sweep deals 1 damage to each creature you don't control.
-        this.getSpellCard().getSpellAbility().addEffect(new DamageAllEffect(
+        this.getRightHalfCard().getSpellAbility().addEffect(new DamageAllEffect(
                 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL
         ));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private FangDragon(final FangDragon card) {

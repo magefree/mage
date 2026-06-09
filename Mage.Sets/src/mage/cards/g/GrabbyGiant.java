@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -33,27 +32,29 @@ public final class GrabbyGiant extends AdventureCard {
     }
 
     public GrabbyGiant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{3}{R}", "That's Mine", "{1}{R}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GIANT}, "{3}{R}",
+                "That's Mine",
+                new CardType[]{CardType.INSTANT}, "{1}{R}");
 
-        this.subtype.add(SubType.GIANT);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(3);
+        // Grabby Giant
+        this.getLeftHalfCard().setPT(4, 3);
 
         // Reach
-        this.addAbility(ReachAbility.getInstance());
+        this.getLeftHalfCard().addAbility(ReachAbility.getInstance());
 
         // {2}{R}, Sacrifice an artifact or land: Draw a card.
         Ability ability = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}{R}")
         );
         ability.addCost(new SacrificeTargetCost(filter));
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
 
         // That's Mine
         // Create a Treasure token.
-        this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new TreasureToken()));
+        this.getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new TreasureToken()));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private GrabbyGiant(final GrabbyGiant card) {

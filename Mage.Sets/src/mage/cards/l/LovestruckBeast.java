@@ -1,6 +1,5 @@
 package mage.cards.l;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
@@ -27,21 +26,22 @@ import java.util.UUID;
 public final class LovestruckBeast extends AdventureCard {
 
     public LovestruckBeast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{2}{G}", "Heart's Desire", "{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.BEAST, SubType.NOBLE}, "{2}{G}",
+                "Heart's Desire",
+                new CardType[]{CardType.SORCERY}, "{G}");
 
-        this.subtype.add(SubType.BEAST);
-        this.subtype.add(SubType.NOBLE);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
+        // Lovestruck Beast
+        this.getLeftHalfCard().setPT(5, 5);
 
         // Lovestruck Beast can't attack unless you control a 1/1 creature.
-        this.addAbility(new SimpleStaticAbility(new LovestruckBeastEffect()));
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new LovestruckBeastEffect()));
 
         // Heart's Desire
         // Create a 1/1 white Human creature token.
-        this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new HumanToken()));
+        this.getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new HumanToken()));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private LovestruckBeast(final LovestruckBeast card) {

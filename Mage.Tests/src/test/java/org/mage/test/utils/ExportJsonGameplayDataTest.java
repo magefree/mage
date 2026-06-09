@@ -40,7 +40,7 @@ public class ExportJsonGameplayDataTest {
                 // catch cards creation errors and report (e.g. on wrong card code)
                 try {
                     Card card = CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
-                            setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()));
+                            setInfo.getCardNumber(), setInfo.getMeldNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()));
                     if (card != null) {
                         cards.add(card);
                     }

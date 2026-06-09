@@ -1,23 +1,23 @@
 package mage.cards.f;
 
-import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.cards.OmenCard;
-import mage.constants.SubType;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.OmenCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInASingleGraveyard;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,29 +26,32 @@ import mage.target.common.TargetCreaturePermanent;
 public final class FeralDeathgorger extends OmenCard {
 
     public FeralDeathgorger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{5}{B}", "Dusk Sight", "{1}{B}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.DRAGON}, "{5}{B}",
+                "Dusk Sight",
+                new CardType[]{CardType.SORCERY}, "{1}{B}");
 
-        this.subtype.add(SubType.DRAGON);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(5);
+        // Feral Deathgorger
+        this.getLeftHalfCard().setPT(3, 5);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Deathtouch
-        this.addAbility(DeathtouchAbility.getInstance());
+        this.getLeftHalfCard().addAbility(DeathtouchAbility.getInstance());
 
         // When this creature enters, exile up to two target cards from a single graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect());
         ability.addTarget(new TargetCardInASingleGraveyard(0, 2, StaticFilters.FILTER_CARD_CARDS));
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
 
         // Dusk Sight
         // Put a +1/+1 counter on up to one target creature. Draw a card.
-        this.getSpellCard().getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(), StaticValue.get(1)));
-        this.getSpellCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
-        this.finalizeOmen();
+        this.getRightHalfCard().getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(), StaticValue.get(1)));
+        this.getRightHalfCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
+
+        finalizeCard();
     }
 
     private FeralDeathgorger(final FeralDeathgorger card) {

@@ -23,9 +23,10 @@ import java.util.UUID;
 public final class GhostLantern extends AdventureCard {
 
     public GhostLantern(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, new CardType[]{CardType.INSTANT}, "{B}", "Bind Spirit", "{1}{B}");
-
-        this.subtype.add(SubType.EQUIPMENT);
+        super(ownerId, setInfo,
+                new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.EQUIPMENT}, "{B}",
+                "Bind Spirit",
+                new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // Whenever a creature you control dies, put a +1/+1 counter on equipped creature.
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersAttachedEffect(
@@ -33,14 +34,14 @@ public final class GhostLantern extends AdventureCard {
         ), false, StaticFilters.FILTER_CONTROLLED_A_CREATURE));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));
+        this.getLeftHalfCard().addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));
 
         // Bind Spirit
         // Return target creature card from your graveyard to your hand.
-        this.getSpellCard().getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-        
-        this.finalizeAdventure();
+        this.getRightHalfCard().getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+
+        finalizeCard();
     }
 
     private GhostLantern(final GhostLantern card) {

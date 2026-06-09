@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -32,25 +31,26 @@ public final class GiantKiller extends AdventureCard {
     }
 
     public GiantKiller(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{W}", "Chop Down", "{2}{W}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.PEASANT}, "{W}",
+                "Chop Down",
+                new CardType[]{CardType.INSTANT}, "{2}{W}");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.PEASANT);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
+        // Giant Killer
+        this.getLeftHalfCard().setPT(1, 2);
 
         // {1}{W}, {T}: Tap target creature.
         Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
 
         // Chop Down
         // Destroy target creature with power 4 or greater.
-        this.getSpellCard().getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getRightHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getRightHalfCard().getSpellAbility().addTarget(new TargetPermanent(filter));
 
-        this.finalizeAdventure();
+        finalizeCard();
     }
 
     private GiantKiller(final GiantKiller card) {

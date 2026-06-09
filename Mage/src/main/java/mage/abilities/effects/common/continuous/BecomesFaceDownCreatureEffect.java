@@ -17,7 +17,6 @@ import mage.abilities.keyword.WardAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardWithParts;
-import mage.cards.DoubleFacedCard;
 import mage.cards.repository.TokenInfo;
 import mage.cards.repository.TokenRepository;
 import mage.constants.*;
@@ -376,9 +375,9 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
         // it can't transform. If the front face of the card is a creature card, you can turn it face up by paying
         // its mana cost. If you do, its front face will be up.
 
-        if (card instanceof DoubleFacedCard) {
+        if (card instanceof CardWithParts) {
             // only MDFC uses independent card sides on 2024
-            return ((CardWithParts) card).getLeftHalfCard();
+            return ((CardWithParts) card).getDefaultCardSide();
         } else {
             return card;
         }

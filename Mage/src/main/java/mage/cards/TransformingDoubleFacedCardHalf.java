@@ -45,6 +45,18 @@ public class TransformingDoubleFacedCardHalf extends DoubleFacedCardHalf<Transfo
     }
 
     @Override
+    public UUID getIdForBattlefield(Game game, Ability source) {
+        Boolean enterTransformed = (Boolean) game.getState().getValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + getId() + getZoneChangeCounter(game));
+        if (enterTransformed == null) {
+            enterTransformed = false;
+        }
+        if (enterTransformed) {
+            return getParentCard().getRightHalfCard().getId();
+        }
+        return getParentCard().getLeftHalfCard().getId();
+    }
+
+    @Override
     public Abilities<Ability> getAbilities() {
         final Abilities<Ability> all = super.getAbilities();
 

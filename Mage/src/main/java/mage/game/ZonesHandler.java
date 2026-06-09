@@ -85,40 +85,13 @@ public final class ZonesHandler {
         // If that front face can’t be put onto the battlefield, it doesn’t enter the battlefield.
         // For example, if an effect exiles Sejiri Glacier and returns it to the battlefield,
         // it remains in exile because an instant can’t be put onto the battlefield.
-        for (ListIterator<ZoneChangeInfo> itr = zoneChangeInfos.listIterator(); itr.hasNext(); ) {
-            ZoneChangeInfo info = itr.next();
+        for (ZoneChangeInfo info : zoneChangeInfos) {
             if (info.event.getToZone().equals(Zone.BATTLEFIELD)) {
                 Card card = game.getCard(info.event.getTargetId());
-                if (card.getMeldedWith(game) != null) {
-                    // don't process melded cards here
+                if (card.getIdForBattlefield(game, source) == null) {
                     continue;
                 }
-                if (card instanceof DoubleFacedCard || card instanceof DoubleFacedCardHalf) {
-                    boolean forceToMainSide = false;
-                    Boolean enterTransformed = (Boolean) game.getState().getValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId() + card.getZoneChangeCounter(game));
-                    if (enterTransformed == null) {
-                        enterTransformed = false;
-                    }
-
-                    // if effect put half mdf card to battlefield then it must be the main side only (example: return targeted half card to battle)
-                    if (card instanceof DoubleFacedCardHalf && !source.getAbilityType().isPlayCardAbility() && !enterTransformed) {
-                        forceToMainSide = true;
-                    }
-
-                    // if effect put mdf card to battlefield then it must be main side only
-                    if (card instanceof DoubleFacedCard) {
-                        forceToMainSide = true;
-                    }
-
-                    if (forceToMainSide) {
-                        info.event.setTargetId(((CardWithParts) card.getMainCard()).getLeftHalfCard().getId());
-                    }
-
-                    // if left half is being moved, but entering transformed, change to transformed side
-                    if (enterTransformed && card instanceof DoubleFacedCardHalf && !((DoubleFacedCardHalf<?>) card).isBackSide()) {
-                        info.event.setTargetId(((DoubleFacedCardHalf<?>) card).getOtherSide().getId());
-                    }
-                }
+                info.event.setTargetId(card.getIdForBattlefield(game, source));
             }
         }
 
@@ -141,167 +114,62 @@ public final class ZonesHandler {
         ZoneChangeEvent event = info.event;
         Zone toZone = event.getToZone();
         Card targetCard = getTargetCard(game, event.getTargetId());
-
-        Cards cardsToMove = null; // moving real cards
-        Map<Zone, Cards> cardsToUpdate = new LinkedHashMap<>(); // updating all card's parts (must be ordered LinkedHashMap)
-        cardsToUpdate.put(toZone, new CardsImpl());
-        cardsToUpdate.put(Zone.OUTSIDE, new CardsImpl());
-        // if we're moving a token it shouldn't be put into any zone as an object.
-        if (!(targetCard instanceof Permanent) && targetCard != null) {
-            if (targetCard instanceof DoubleFacedCard
-                    || targetCard instanceof DoubleFacedCardHalf) {
-                // mdf cards must be moved as single object, but each half must be updated separately
-                DoubleFacedCard<?, ?> mdfCard = (DoubleFacedCard<?, ?>) targetCard.getMainCard();
-                cardsToMove = new CardsImpl(mdfCard);
-                cardsToUpdate.get(toZone).add(mdfCard);
-                // example: cast left side
-                // result:
-                // * main to battlefield
-                // * left to battlefield
-                // * right to outside (it helps to ignore all triggers and other effects from that card)
-                switch (toZone) {
-                    case STACK:
-                    case BATTLEFIELD:
-                        if (targetCard.getId().equals(mdfCard.getLeftHalfCard().getId())) {
-                            // play left
-                            cardsToUpdate.get(toZone).add(mdfCard.getLeftHalfCard());
-                            cardsToUpdate.get(Zone.OUTSIDE).add(mdfCard.getRightHalfCard());
-                        } else if (targetCard.getId().equals(mdfCard.getRightHalfCard().getId())) {
-                            // play right
-                            cardsToUpdate.get(toZone).add(mdfCard.getRightHalfCard());
-                            cardsToUpdate.get(Zone.OUTSIDE).add(mdfCard.getLeftHalfCard());
-                            if (targetCard.getMeldedWith(game) != null) {
-                                cardsToUpdate.get(Zone.OUTSIDE).add(targetCard.getMeldedWith(game));
-                            }
-                        } else {
-                            // cast mdf (only on stack)
-                            if (!toZone.equals(Zone.STACK)) {
-                                throw new IllegalStateException("Wrong mdf card move to " + toZone + " in placeInDestinationZone");
-                            }
-                            cardsToUpdate.get(toZone).add(mdfCard.getLeftHalfCard());
-                            cardsToUpdate.get(toZone).add(mdfCard.getRightHalfCard());
-                        }
-                        break;
-                    default:
-                        // move all parts
-                        cardsToUpdate.get(toZone).add(mdfCard.getLeftHalfCard());
-                        cardsToUpdate.get(toZone).add(mdfCard.getRightHalfCard());
-                        break;
-                }
-            } else if (targetCard instanceof RoomCard || targetCard instanceof RoomCardHalf) {
-                // Room cards must be moved as single object
-                RoomCard roomCard = (RoomCard) targetCard.getMainCard();
-                cardsToMove = new CardsImpl(roomCard);
-                cardsToUpdate.get(toZone).add(roomCard);
-                switch (toZone) {
-                    case STACK:
-                    case BATTLEFIELD:
-                        // We don't want room halves to ever be on the battlefield
-                        cardsToUpdate.get(Zone.OUTSIDE).add(roomCard.getLeftHalfCard());
-                        cardsToUpdate.get(Zone.OUTSIDE).add(roomCard.getRightHalfCard());
-                        break;
-                    default:
-                        // move all parts
-                        cardsToUpdate.get(toZone).add(roomCard.getLeftHalfCard());
-                        cardsToUpdate.get(toZone).add(roomCard.getRightHalfCard());
-                        // If we aren't casting onto the stack or etb'ing, we need to clear this state
-                        // (countered, memory lapsed etc)
-                        // This prevents the state persisting for a put into play effect later
-                        roomCard.setLastCastHalf(null);
-                        break;
-                }
-            } else {
-                cardsToMove = new CardsImpl(targetCard);
-                cardsToUpdate.get(toZone).addAll(cardsToMove);
-            }
-
-            Player owner = game.getPlayer(targetCard.getOwnerId());
-            switch (toZone) {
-                case HAND:
-                    for (Card card : cardsToMove.getCards(game)) {
-                        game.getPlayer(card.getOwnerId()).getHand().add(card);
-                    }
-                    break;
-                case GRAVEYARD:
-                    for (Card card : chooseOrder(
-                            "order to put in graveyard (last chosen will be on top)",
-                            cardsToMove, owner, source, game)) {
-                        game.getPlayer(card.getOwnerId()).getGraveyard().add(card);
-                    }
-                    break;
-                case LIBRARY:
-                    if (info instanceof ZoneChangeInfo.Library && ((ZoneChangeInfo.Library) info).top) {
-                        // on top
-                        for (Card card : chooseOrder(
-                                "order to put on top of library (last chosen will be topmost)",
-                                cardsToMove, owner, source, game)) {
-                            game.getPlayer(card.getOwnerId()).getLibrary().putOnTop(card, game);
-                        }
-                    } else {
-                        // on bottom
-                        for (Card card : chooseOrder(
-                                "order to put on bottom of library (last chosen will be bottommost)",
-                                cardsToMove, owner, source, game)) {
-                            game.getPlayer(card.getOwnerId()).getLibrary().putOnBottom(card, game);
-                        }
-                    }
-                    break;
-                case EXILED:
-                    for (Card card : cardsToMove.getCards(game)) {
-                        if (info instanceof ZoneChangeInfo.Exile && ((ZoneChangeInfo.Exile) info).id != null) {
-                            ZoneChangeInfo.Exile exileInfo = (ZoneChangeInfo.Exile) info;
-                            game.getExile().createZone(exileInfo.id, exileInfo.name).add(card);
-                        } else {
-                            game.getExile().getPermanentExile().add(card);
-                        }
-                    }
-                    break;
-                case COMMAND:
-                    // There should never be more than one card here.
-                    for (Card card : cardsToMove.getCards(game)) {
-                        game.addCommander(new Commander(card));
-                    }
-                    break;
-                case STACK:
-                    // There should never be more than one card here.
-                    for (Card card : cardsToMove.getCards(game)) {
-                        Spell spell;
-                        if (info instanceof ZoneChangeInfo.Stack && ((ZoneChangeInfo.Stack) info).spell != null) {
-                            spell = ((ZoneChangeInfo.Stack) info).spell;
-                        } else {
-                            spell = new Spell(card, card.getSpellAbility().copy(), card.getOwnerId(), event.getFromZone(), game);
-                        }
-                        spell.syncZoneChangeCounterOnStack(card, game);
-                        game.getState().setZone(spell.getId(), Zone.STACK);
-                        game.getState().setZone(card.getId(), Zone.STACK);
-                        game.getStack().push(game, spell);
-                    }
-                    break;
-                case BATTLEFIELD:
-                    Permanent permanent = event.getTarget();
-                    game.addPermanent(permanent, createOrder);
-                    game.getPermanentsEntering().remove(permanent.getId());
-                    break;
-                default:
-                    throw new UnsupportedOperationException("to Zone " + toZone + " not supported yet");
-            }
+        if (targetCard == null) {
+            game.setZone(event.getTargetId(), toZone);
+            return;
         }
-
+        if (!(targetCard instanceof Permanent) && toZone != Zone.BATTLEFIELD && toZone != Zone.STACK) {
+            // use main card for zones other than battlefield/stack
+            targetCard = targetCard.getMainCard();
+        }
+        switch (toZone) {
+            case HAND:
+                game.getPlayer(targetCard.getOwnerId()).getHand().add(targetCard);
+                break;
+            case GRAVEYARD:
+                game.getPlayer(targetCard.getOwnerId()).getGraveyard().add(targetCard);
+                break;
+            case LIBRARY:
+                if (info instanceof ZoneChangeInfo.Library && ((ZoneChangeInfo.Library) info).top) {
+                    // on top
+                    game.getPlayer(targetCard.getOwnerId()).getLibrary().putOnTop(targetCard, game);
+                } else {
+                    // on bottom
+                    game.getPlayer(targetCard.getOwnerId()).getLibrary().putOnBottom(targetCard, game);
+                }
+                break;
+            case EXILED:
+                if (info instanceof ZoneChangeInfo.Exile && ((ZoneChangeInfo.Exile) info).id != null) {
+                    ZoneChangeInfo.Exile exileInfo = (ZoneChangeInfo.Exile) info;
+                    game.getExile().createZone(exileInfo.id, exileInfo.name).add(targetCard);
+                } else {
+                    game.getExile().getPermanentExile().add(targetCard);
+                }
+                break;
+            case COMMAND:
+                game.addCommander(new Commander(targetCard));
+                break;
+            case STACK:
+                Spell spell;
+                if (info instanceof ZoneChangeInfo.Stack && ((ZoneChangeInfo.Stack) info).spell != null) {
+                    spell = ((ZoneChangeInfo.Stack) info).spell;
+                } else {
+                    spell = new Spell(targetCard, targetCard.getSpellAbility().copy(), targetCard.getOwnerId(), event.getFromZone(), game);
+                }
+                spell.syncZoneChangeCounterOnStack(targetCard, game);
+                game.getStack().push(game, spell);
+                targetCard = spell;
+                break;
+            case BATTLEFIELD:
+                Permanent permanent = event.getTarget();
+                game.addPermanent(permanent, createOrder);
+                game.getPermanentsEntering().remove(permanent.getId());
+                break;
+            default:
+                throw new UnsupportedOperationException("to Zone " + toZone + " not supported yet");
+        }
         // update zone in main
-        if (targetCard instanceof RoomCardHalf && (toZone == Zone.BATTLEFIELD)) {
-            game.setZone(event.getTargetId(), Zone.OUTSIDE);
-        } else {
-            game.setZone(event.getTargetId(), event.getToZone());
-        }
-
-        // update zone in other parts (meld cards, mdf half cards)
-        cardsToUpdate.entrySet().forEach(entry -> {
-            for (Card card : entry.getValue().getCards(game)) {
-                if (!card.getId().equals(event.getTargetId())) {
-                    game.setZone(card.getId(), entry.getKey());
-                }
-            }
-        });
+        targetCard.setZone(toZone, game);
     }
 
     public static Card getTargetCard(Game game, UUID targetId) {

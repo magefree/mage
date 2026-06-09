@@ -19,23 +19,25 @@ import java.util.UUID;
 public final class MidgarCityOfMako extends AdventureCard {
 
     public MidgarCityOfMako(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, new CardType[]{CardType.SORCERY}, "", "Reactor Raid", "{2}{B}");
-
-        this.subtype.add(SubType.TOWN);
+        super(ownerId, setInfo,
+                new CardType[]{CardType.LAND}, new SubType[]{SubType.TOWN}, "",
+                "Reactor Raid",
+                new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // This land enters tapped.
-        this.addAbility(new EntersBattlefieldTappedAbility());
+        this.getLeftHalfCard().addAbility(new EntersBattlefieldTappedAbility());
 
         // {T}: Add {B}.
-        this.addAbility(new BlackManaAbility());
+        this.getLeftHalfCard().addAbility(new BlackManaAbility());
 
         // Reactor Raid
         // You may sacrifice an artifact or creature. If you do, draw two cards.
-        this.getSpellCard().getSpellAbility().addEffect(new DoIfCostPaid(
+        this.getRightHalfCard().getSpellAbility().addEffect(new DoIfCostPaid(
                 new DrawCardSourceControllerEffect(2),
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE)
         ));
-        this.finalizeAdventure();
+
+        finalizeCard();
     }
 
     private MidgarCityOfMako(final MidgarCityOfMako card) {
