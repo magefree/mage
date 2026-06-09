@@ -188,6 +188,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Thor Odinson", 234, Rarity.UNCOMMON, mage.cards.t.ThorOdinson.class));
         cards.add(new SetCardInfo("Thunderbolts Conspiracy", 117, Rarity.RARE, mage.cards.t.ThunderboltsConspiracy.class));
         cards.add(new SetCardInfo("Tigra, Feline Fury", 191, Rarity.UNCOMMON, mage.cards.t.TigraFelineFury.class));
+        cards.add(new SetCardInfo("Titania, Rugged Rumbler", 235, Rarity.UNCOMMON, mage.cards.t.TitaniaRuggedRumbler.class));
         cards.add(new SetCardInfo("Training Regimen", 192, Rarity.UNCOMMON, mage.cards.t.TrainingRegimen.class));
         cards.add(new SetCardInfo("Ultron Drone", 253, Rarity.COMMON, mage.cards.u.UltronDrone.class));
         cards.add(new SetCardInfo("Vibranium Energy Daggers", 254, Rarity.COMMON, mage.cards.v.VibraniumEnergyDaggers.class));
