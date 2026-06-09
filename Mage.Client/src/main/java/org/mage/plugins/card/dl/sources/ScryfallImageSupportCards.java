@@ -740,8 +740,6 @@ public class ScryfallImageSupportCards {
             put("SLD/Zndrsplt, Eye of Wisdom/379*b", "https://api.scryfall.com/cards/sld/379★/en?format=image&face=back");
             put("SLD/Zombie Master/1460b", "https://api.scryfall.com/cards/sld/1460/en?format=image&face=back");
             // normal cards
-            put("SLD/Counterspell/99999SCTLR", "https://api.scryfall.com/cards/sld/SCTLR/"); // see issue 11157
-            put("SLD/Viscera Seer/99999VS", "https://api.scryfall.com/cards/sld/VS/"); // see issue 11157
             put("SLD/Deadly Dispute/1IFIYW", "https://api.scryfall.com/cards/sld/IFIYW-1/"); // see issue 11157
             put("SLD/Lightning Bolt/2IFIYW", "https://api.scryfall.com/cards/sld/IFIYW-2/"); // see issue 11157
             put("SLD/Thrill of Possibility/3IFIYW", "https://api.scryfall.com/cards/sld/IFIYW-3/"); // see issue 11157

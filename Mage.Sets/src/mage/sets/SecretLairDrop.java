@@ -32,8 +32,8 @@ public class SecretLairDrop extends ExpansionSet {
     }
 
     private void addPart1() {
-        cards.add(new SetCardInfo("Counterspell", "99999SCTLR", Rarity.RARE, mage.cards.c.Counterspell.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Viscera Seer", "99999VS", Rarity.COMMON, mage.cards.v.VisceraSeer.class)); // workaround until "VS" supported as card number
+        cards.add(new SetCardInfo("Counterspell", "SCTLR", Rarity.RARE, mage.cards.c.Counterspell.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Viscera Seer", "VS", Rarity.COMMON, mage.cards.v.VisceraSeer.class));
         cards.add(new SetCardInfo("Deadly Dispute", "1IFIYW", Rarity.COMMON, mage.cards.d.DeadlyDispute.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Bolt", "2IFIYW", Rarity.COMMON, mage.cards.l.LightningBolt.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Thrill of Possibility", "3IFIYW", Rarity.COMMON, mage.cards.t.ThrillOfPossibility.class, FULL_ART_USE_VARIOUS));
