@@ -8,6 +8,7 @@ import mage.abilities.common.PlayLandAsCommanderAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.Card;
+import mage.cards.CardWithParts;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
 import mage.constants.SubType;
@@ -39,7 +40,13 @@ public class Commander extends CommandObjectImpl {
         // * sourceObject adds normal cast/play abilities and all other things
 
         // replace spell ability by commander cast spell (to cast from command zone)
-        for (Ability ability : card.getAbilities()) {
+        Abilities<Ability> sourceAbilities;
+        if (card instanceof CardWithParts) {
+            sourceAbilities = ((CardWithParts) card).getAllAbilities();
+        } else {
+            sourceAbilities = card.getAbilities();
+        }
+        for (Ability ability : sourceAbilities) {
             if (ability instanceof SpellAbility) {
                 SpellAbility spellAbility = (SpellAbility) ability;
                 if (!spellAbility.getSpellAbilityType().canCast()) {

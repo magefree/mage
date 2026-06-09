@@ -7,6 +7,7 @@ import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.keyword.PrototypeAbility;
 import mage.cards.Card;
 import mage.cards.DoubleFacedCardHalf;
+import mage.cards.RoomCard;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.game.Game;
@@ -188,7 +189,12 @@ public class CopyTokenFunction {
 
         target.getAbilities().clear();
 
-        for (Ability ability0 : sourceObj.getAbilities()) {
+        // if coming from a room card, only take the initial cards abilities.
+        // The door abilities will be given by effects later
+        Abilities<Ability> abilities = sourceObj instanceof RoomCard
+                ? sourceObj.getInitAbilities()
+                : sourceObj.getAbilities();
+        for (Ability ability0 : abilities) {
             Ability ability = ability0.copy();
 
             // The token is independant from the copy from object so it need a new original Id,

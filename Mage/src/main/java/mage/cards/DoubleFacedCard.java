@@ -98,6 +98,15 @@ public abstract class DoubleFacedCard<P extends DoubleFacedCardHalf<C>, C extend
         }
     }
 
+    @Override
+    public Abilities<Ability> getAbilities() {
+        return getInnerAbilities(true, false);
+    }
+
+    @Override
+    public Abilities<Ability> getAbilities(Game game) {
+        return getInnerAbilities(game, true, false);
+    }
 
     @Override
     public Counters getCounters(Game game) {

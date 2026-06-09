@@ -180,6 +180,16 @@ public abstract class CardWithPartsImpl<P extends SubCard<C>, C extends CardWith
     }
 
     @Override
+    public Abilities<Ability> getAllAbilities() {
+        return getInnerAbilities(true, true);
+    }
+
+    @Override
+    public Abilities<Ability> getAllAbilities(Game game) {
+        return getInnerAbilities(game, true, true);
+    }
+
+    @Override
     public Abilities<Ability> getAbilities(Game game) {
         return getInnerAbilities(game, true, true);
     }

@@ -53,13 +53,14 @@ import mage.util.RandomUtil;
 import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 import java.io.Serializable;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 /**
  * Basic implementation of testable player
@@ -4553,17 +4554,17 @@ public class TestPlayer implements Player {
     public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
         assertAliasSupportInChoices(false);
         MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
-        Map<UUID, SpellAbility> useable = PlayerImpl.getCastableSpellAbilities(game, this.getId(), object, game.getState().getZone(object.getId()), noMana);
+        Map<UUID, ActivatedAbility> useable = PlayerImpl.getCastableSpellOrPlayLandAbilities(game, this.getId(), object, game.getState().getZone(object.getId()), noMana, false);
         if (useable.size() == 1) {
-            return useable.values().iterator().next();
+            return (SpellAbility) useable.values().iterator().next();
         }
 
         if (!choices.isEmpty()) {
             String choice = choices.get(0);
-            for (SpellAbility ability : useable.values()) {
+            for (ActivatedAbility ability : useable.values()) {
                 if (ability.toString().startsWith(choice)) {
                     choicesRemoveCurrent(game, "on choose ability for cast - " + card.getName());
-                    return ability;
+                    return (SpellAbility) ability;
                 }
             }
 
@@ -4579,14 +4580,7 @@ public class TestPlayer implements Player {
     public ActivatedAbility chooseLandOrSpellAbility(Card card, Game game, boolean noMana) {
         assertAliasSupportInChoices(false);
         MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
-        Map<UUID, ActivatedAbility> useable = new LinkedHashMap<>(PlayerImpl.getCastableSpellAbilities(game, this.getId(), object, game.getState().getZone(object.getId()), noMana));
-        if (canPlayLand()) {
-            for (Ability ability : card.getAbilities(game)) {
-                if (ability instanceof PlayLandAbility) {
-                    useable.put(ability.getId(), (PlayLandAbility) ability);
-                }
-            }
-        }
+        Map<UUID, ActivatedAbility> useable = new LinkedHashMap<>(PlayerImpl.getCastableSpellOrPlayLandAbilities(game, this.getId(), object, game.getState().getZone(object.getId()), noMana, true));
         if (useable.size() == 1) {
             return useable.values().iterator().next();
         }

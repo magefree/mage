@@ -45,4 +45,19 @@ public interface CardWithParts extends Card {
      * @return shared abilities
      */
     Abilities<Ability> getSharedAbilities(Game game);
+
+    /**
+     * Gets all abilities from all card parts. This ignores rules for MTG rules of actual card abilities.
+     * Used to determine castable/playable abilities
+     * @return all abilities from all card parts
+     */
+    Abilities<Ability> getAllAbilities();
+
+    /**
+     * Gets all abilities from all card parts. This ignores rules for MTG rules of actual card abilities.
+     * Used to determine castable/playable abilities
+     * @param game the current game
+     * @return all abilities from all card parts
+     */
+    Abilities<Ability> getAllAbilities(Game game);
 }
