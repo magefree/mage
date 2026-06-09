@@ -17,11 +17,9 @@ public final class LightningStrike extends CardImpl {
     public LightningStrike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
-
         // Lightning Strike deals 3 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
-        
     }
 
     private LightningStrike(final LightningStrike card) {
