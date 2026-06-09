@@ -107,6 +107,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Thriving Moor", 582, Rarity.COMMON, mage.cards.t.ThrivingMoor.class));
         cards.add(new SetCardInfo("Time Warp", 788, Rarity.RARE, mage.cards.t.TimeWarp.class));
         cards.add(new SetCardInfo("Tombstone, Career Criminal", 577, Rarity.UNCOMMON, mage.cards.t.TombstoneCareerCriminal.class));
+        cards.add(new SetCardInfo("Undead Hand Ninja", 670, Rarity.UNCOMMON, mage.cards.u.UndeadHandNinja.class));
         cards.add(new SetCardInfo("Unlucky Witness", 812, Rarity.UNCOMMON, mage.cards.u.UnluckyWitness.class));
         cards.add(new SetCardInfo("Unstable Experiment", 789, Rarity.COMMON, mage.cards.u.UnstableExperiment.class));
         cards.add(new SetCardInfo("Venom, Evil Unleashed", 800, Rarity.COMMON, mage.cards.v.VenomEvilUnleashed.class));
