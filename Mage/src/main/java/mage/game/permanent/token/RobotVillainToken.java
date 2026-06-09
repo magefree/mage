@@ -10,7 +10,7 @@ import mage.constants.SubType;
 public final class RobotVillainToken extends TokenImpl {
 
     public RobotVillainToken() {
-        super("Robot Villain", "2/2 colorless Robot Villain artifact creature token");
+        super("Robot Villain Token", "2/2 colorless Robot Villain artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ROBOT);
