@@ -89,6 +89,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Go Nuts!", 168, Rarity.COMMON, mage.cards.g.GoNuts.class));
         cards.add(new SetCardInfo("Guerrilla Gorilla", 169, Rarity.COMMON, mage.cards.g.GuerrillaGorilla.class));
         cards.add(new SetCardInfo("HYDRA Assault Robot", 137, Rarity.COMMON, mage.cards.h.HYDRAAssaultRobot.class));
+        cards.add(new SetCardInfo("Hercules, Prince of Power", 171, Rarity.UNCOMMON, mage.cards.h.HerculesPrinceOfPower.class));
         cards.add(new SetCardInfo("Hell's Kitchen", 268, Rarity.COMMON, mage.cards.h.HellsKitchen.class));
         cards.add(new SetCardInfo("Hire a Crew", 134, Rarity.COMMON, mage.cards.h.HireACrew.class));
         cards.add(new SetCardInfo("Hour of Defeat", 99, Rarity.COMMON, mage.cards.h.HourOfDefeat.class));
