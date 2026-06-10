@@ -219,10 +219,12 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Vault Guardsman", 612, Rarity.UNCOMMON, mage.cards.v.VaultGuardsman.class));
         cards.add(new SetCardInfo("Venom, Evil Unleashed", 800, Rarity.COMMON, mage.cards.v.VenomEvilUnleashed.class));
         cards.add(new SetCardInfo("Venomized Cat", 801, Rarity.COMMON, mage.cards.v.VenomizedCat.class));
+        cards.add(new SetCardInfo("Virtuous Variant", 758, Rarity.COMMON, mage.cards.v.VirtuousVariant.class));
         cards.add(new SetCardInfo("Vision, Synthezoid Avenger", 119, Rarity.RARE, mage.cards.v.VisionSynthezoidAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vision, Synthezoid Avenger", 460, Rarity.RARE, mage.cards.v.VisionSynthezoidAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Void Helix", 674, Rarity.UNCOMMON, mage.cards.v.VoidHelix.class));
         cards.add(new SetCardInfo("Wakandan Shield Guard", 613, Rarity.COMMON, mage.cards.w.WakandanShieldGuard.class));
+        cards.add(new SetCardInfo("Wakandan Tusker", 748, Rarity.UNCOMMON, mage.cards.w.WakandanTusker.class));
         cards.add(new SetCardInfo("Warriors of Wakanda", 565, Rarity.COMMON, mage.cards.w.WarriorsOfWakanda.class));
         cards.add(new SetCardInfo("Whirlwind of Thought", 190, Rarity.RARE, mage.cards.w.WhirlwindOfThought.class));
         cards.add(new SetCardInfo("Wild Pack Squad", 781, Rarity.COMMON, mage.cards.w.WildPackSquad.class));
