@@ -82,6 +82,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Flash Thompson, Spider-Fan", 772, Rarity.UNCOMMON, mage.cards.f.FlashThompsonSpiderFan.class));
         cards.add(new SetCardInfo("Flora Colossus", 561, Rarity.RARE, mage.cards.f.FloraColossus.class));
         cards.add(new SetCardInfo("Flying Octobot", 785, Rarity.UNCOMMON, mage.cards.f.FlyingOctobot.class));
+        cards.add(new SetCardInfo("Fogwell's Gym", 754, Rarity.UNCOMMON, mage.cards.f.FogwellsGym.class));
         cards.add(new SetCardInfo("Folk Hero", 132, Rarity.MYTHIC, mage.cards.f.FolkHero.class));
         cards.add(new SetCardInfo("Frostboil Snarl", 246, Rarity.RARE, mage.cards.f.FrostboilSnarl.class));
         cards.add(new SetCardInfo("Furious Strength", 544, Rarity.COMMON, mage.cards.f.FuriousStrength.class));
