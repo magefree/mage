@@ -140,6 +140,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Path to Exile", 141, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
         cards.add(new SetCardInfo("Plaza of Heroes", 255, Rarity.RARE, mage.cards.p.PlazaOfHeroes.class));
         cards.add(new SetCardInfo("Port Town", 256, Rarity.RARE, mage.cards.p.PortTown.class));
+        cards.add(new SetCardInfo("Power Boost", 852, Rarity.UNCOMMON, mage.cards.p.PowerBoost.class));
         cards.add(new SetCardInfo("Prairie Stream", 257, Rarity.RARE, mage.cards.p.PrairieStream.class));
         cards.add(new SetCardInfo("Promise of Loyalty", 142, Rarity.RARE, mage.cards.p.PromiseOfLoyalty.class));
         cards.add(new SetCardInfo("Pumpkin Bombardment", 822, Rarity.COMMON, mage.cards.p.PumpkinBombardment.class));
