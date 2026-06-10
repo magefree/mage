@@ -188,6 +188,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("S.H.I.E.L.D. Flying Car", 404, Rarity.RARE, mage.cards.s.SHIELDFlyingCar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("S.H.I.E.L.D. Flying Car", 74, Rarity.RARE, mage.cards.s.SHIELDFlyingCar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("S.H.I.E.L.D. Helicarrier", 249, Rarity.UNCOMMON, mage.cards.s.SHIELDHelicarrier.class));
+        cards.add(new SetCardInfo("S.H.I.E.L.D. Spy Kit", 36, Rarity.COMMON, mage.cards.s.SHIELDSpyKit.class));
         cards.add(new SetCardInfo("Shuri, Wakandan Inventor", 75, Rarity.UNCOMMON, mage.cards.s.ShuriWakandanInventor.class));
         cards.add(new SetCardInfo("Savage Land Dinosaur", 185, Rarity.COMMON, mage.cards.s.SavageLandDinosaur.class));
         cards.add(new SetCardInfo("Scientist Supreme of A.I.M.", 225, Rarity.RARE, mage.cards.s.ScientistSupremeOfAIM.class, NON_FULL_USE_VARIOUS));
