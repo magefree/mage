@@ -124,6 +124,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("MJ, Rising Star", 773, Rarity.UNCOMMON, mage.cards.m.MJRisingStar.class));
         cards.add(new SetCardInfo("Make Your Move", 137, Rarity.COMMON, mage.cards.m.MakeYourMove.class));
         cards.add(new SetCardInfo("Mandroid Squadron", 841, Rarity.COMMON, mage.cards.m.MandroidSquadron.class));
+        cards.add(new SetCardInfo("Marvelous Melee", 549, Rarity.COMMON, mage.cards.m.MarvelousMelee.class));
         cards.add(new SetCardInfo("Masked Meower", 807, Rarity.COMMON, mage.cards.m.MaskedMeower.class));
         cards.add(new SetCardInfo("Metallic Mimic", 203, Rarity.RARE, mage.cards.m.MetallicMimic.class));
         cards.add(new SetCardInfo("Mind's Dilation", 277, Rarity.MYTHIC, mage.cards.m.MindsDilation.class));
