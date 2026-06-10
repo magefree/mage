@@ -220,6 +220,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Undead Hand Ninja", 670, Rarity.UNCOMMON, mage.cards.u.UndeadHandNinja.class));
         cards.add(new SetCardInfo("Unlucky Witness", 812, Rarity.UNCOMMON, mage.cards.u.UnluckyWitness.class));
         cards.add(new SetCardInfo("Unstable Experiment", 789, Rarity.COMMON, mage.cards.u.UnstableExperiment.class));
+        cards.add(new SetCardInfo("Valkyrior Skyrider", 525, Rarity.COMMON, mage.cards.v.ValkyriorSkyrider.class));
         cards.add(new SetCardInfo("Vault Guardsman", 612, Rarity.UNCOMMON, mage.cards.v.VaultGuardsman.class));
         cards.add(new SetCardInfo("Venom, Evil Unleashed", 800, Rarity.COMMON, mage.cards.v.VenomEvilUnleashed.class));
         cards.add(new SetCardInfo("Venomized Cat", 801, Rarity.COMMON, mage.cards.v.VenomizedCat.class));
