@@ -2549,6 +2549,9 @@
 |TOK:MH3|Zombie||ZombieToken|
 |TOK:MH3|Zombie Army||ZombieArmyToken|
 
+# MSC
+|TOK:MSC|Construct||FantasticarConstructToken|
+
 # M3C
 |TOK:M3C|Aetherborn||AetherbornToken|
 |TOK:M3C|Ape||ApeToken|

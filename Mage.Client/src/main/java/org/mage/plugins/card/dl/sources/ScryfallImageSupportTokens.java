@@ -2466,6 +2466,9 @@ public class ScryfallImageSupportTokens {
             put("MH3/Zombie", "https://api.scryfall.com/cards/tmh3/21/en?format=image");
             put("MH3/Zombie Army", "https://api.scryfall.com/cards/tmh3/22/en?format=image");
 
+            // MSC
+            put("MSC/Construct", "https://api.scryfall.com/cards/tmsc/14/en?format=image");
+
             // M3C
             put("M3C/Aetherborn", "https://api.scryfall.com/cards/tm3c/9/en?format=image");
             put("M3C/Ape", "https://api.scryfall.com/cards/tm3c/14/en?format=image");
