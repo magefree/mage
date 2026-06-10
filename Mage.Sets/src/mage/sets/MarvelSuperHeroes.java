@@ -227,6 +227,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Visions of Villainy", 120, Rarity.COMMON, mage.cards.v.VisionsOfVillainy.class));
         cards.add(new SetCardInfo("Volcanic Villain", 159, Rarity.COMMON, mage.cards.v.VolcanicVillain.class));
         cards.add(new SetCardInfo("Wakandan Drone Flock", 40, Rarity.COMMON, mage.cards.w.WakandanDroneFlock.class));
+        cards.add(new SetCardInfo("War Machine, Legacy of Iron", 238, Rarity.UNCOMMON, mage.cards.w.WarMachineLegacyOfIron.class));
         cards.add(new SetCardInfo("Web Up", 41, Rarity.COMMON, mage.cards.w.WebUp.class));
         cards.add(new SetCardInfo("Widow's Bite", 122, Rarity.COMMON, mage.cards.w.WidowsBite.class));
         cards.add(new SetCardInfo("White Tiger, Ava Ayala", 196, Rarity.UNCOMMON, mage.cards.w.WhiteTigerAvaAyala.class));
