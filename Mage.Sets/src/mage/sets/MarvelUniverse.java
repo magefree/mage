@@ -96,6 +96,7 @@ public class MarvelUniverse extends ExpansionSet {
         cards.add(new SetCardInfo("Return to the Ranks", 48, Rarity.MYTHIC, mage.cards.r.ReturnToTheRanks.class));
         cards.add(new SetCardInfo("Righteous Fury", 49, Rarity.MYTHIC, mage.cards.r.RighteousFury.class));
         cards.add(new SetCardInfo("Rite of Replication", 14, Rarity.MYTHIC, mage.cards.r.RiteOfReplication.class));
+        cards.add(new SetCardInfo("Roaming Throne", 99, Rarity.MYTHIC, mage.cards.r.RoamingThrone.class));
         cards.add(new SetCardInfo("Savage Beating", 26, Rarity.MYTHIC, mage.cards.s.SavageBeating.class));
         cards.add(new SetCardInfo("Saw in Half", 21, Rarity.MYTHIC, mage.cards.s.SawInHalf.class));
         cards.add(new SetCardInfo("Seize the Day", 73, Rarity.MYTHIC, mage.cards.s.SeizeTheDay.class));
