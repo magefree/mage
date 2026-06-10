@@ -82,6 +82,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Flash Thompson, Spider-Fan", 772, Rarity.UNCOMMON, mage.cards.f.FlashThompsonSpiderFan.class));
         cards.add(new SetCardInfo("Flora Colossus", 561, Rarity.RARE, mage.cards.f.FloraColossus.class));
         cards.add(new SetCardInfo("Flying Octobot", 785, Rarity.UNCOMMON, mage.cards.f.FlyingOctobot.class));
+        cards.add(new SetCardInfo("Fogwell's Gym", 754, Rarity.UNCOMMON, mage.cards.f.FogwellsGym.class));
         cards.add(new SetCardInfo("Folk Hero", 132, Rarity.MYTHIC, mage.cards.f.FolkHero.class));
         cards.add(new SetCardInfo("Frostboil Snarl", 246, Rarity.RARE, mage.cards.f.FrostboilSnarl.class));
         cards.add(new SetCardInfo("Furious Strength", 544, Rarity.COMMON, mage.cards.f.FuriousStrength.class));
@@ -209,6 +210,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Thriving Isle", 581, Rarity.COMMON, mage.cards.t.ThrivingIsle.class));
         cards.add(new SetCardInfo("Thriving Moor", 582, Rarity.COMMON, mage.cards.t.ThrivingMoor.class));
         cards.add(new SetCardInfo("Time Warp", 788, Rarity.RARE, mage.cards.t.TimeWarp.class));
+        cards.add(new SetCardInfo("Tippy-Toe, Terrific Partner", 734, Rarity.UNCOMMON, mage.cards.t.TippyToeTerrificPartner.class));
         cards.add(new SetCardInfo("Titanium Man", 667, Rarity.UNCOMMON, mage.cards.t.TitaniumMan.class));
         cards.add(new SetCardInfo("Tombstone, Career Criminal", 577, Rarity.UNCOMMON, mage.cards.t.TombstoneCareerCriminal.class));
         cards.add(new SetCardInfo("Tome of Legends", 223, Rarity.RARE, mage.cards.t.TomeOfLegends.class));
@@ -220,9 +222,12 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Vault Guardsman", 612, Rarity.UNCOMMON, mage.cards.v.VaultGuardsman.class));
         cards.add(new SetCardInfo("Venom, Evil Unleashed", 800, Rarity.COMMON, mage.cards.v.VenomEvilUnleashed.class));
         cards.add(new SetCardInfo("Venomized Cat", 801, Rarity.COMMON, mage.cards.v.VenomizedCat.class));
+        cards.add(new SetCardInfo("Virtuous Variant", 758, Rarity.COMMON, mage.cards.v.VirtuousVariant.class));
         cards.add(new SetCardInfo("Vision, Synthezoid Avenger", 119, Rarity.RARE, mage.cards.v.VisionSynthezoidAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vision, Synthezoid Avenger", 460, Rarity.RARE, mage.cards.v.VisionSynthezoidAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Void Helix", 674, Rarity.UNCOMMON, mage.cards.v.VoidHelix.class));
+        cards.add(new SetCardInfo("Wakandan Shield Guard", 613, Rarity.COMMON, mage.cards.w.WakandanShieldGuard.class));
+        cards.add(new SetCardInfo("Wakandan Tusker", 748, Rarity.UNCOMMON, mage.cards.w.WakandanTusker.class));
         cards.add(new SetCardInfo("Warriors of Wakanda", 565, Rarity.COMMON, mage.cards.w.WarriorsOfWakanda.class));
         cards.add(new SetCardInfo("Whirlwind of Thought", 190, Rarity.RARE, mage.cards.w.WhirlwindOfThought.class));
         cards.add(new SetCardInfo("Wild Pack Squad", 781, Rarity.COMMON, mage.cards.w.WildPackSquad.class));
