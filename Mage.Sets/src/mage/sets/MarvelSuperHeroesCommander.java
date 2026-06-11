@@ -68,6 +68,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Destroy Evil", 128, Rarity.COMMON, mage.cards.d.DestroyEvil.class));
         cards.add(new SetCardInfo("Director Nick Fury", 81, Rarity.MYTHIC, mage.cards.d.DirectorNickFury.class));
         cards.add(new SetCardInfo("Dismantling Wave", 129, Rarity.RARE, mage.cards.d.DismantlingWave.class));
+        cards.add(new SetCardInfo("Dismissive Denial", 619, Rarity.COMMON, mage.cards.d.DismissiveDenial.class));
         cards.add(new SetCardInfo("Doc Ock's Henchmen", 784, Rarity.COMMON, mage.cards.d.DocOcksHenchmen.class));
         cards.add(new SetCardInfo("Doc Ock, Sinister Scientist", 783, Rarity.COMMON, mage.cards.d.DocOckSinisterScientist.class));
         cards.add(new SetCardInfo("Doctor Doom, King of Latveria", 6, Rarity.MYTHIC, mage.cards.d.DoctorDoomKingOfLatveria.class, NON_FULL_USE_VARIOUS));
