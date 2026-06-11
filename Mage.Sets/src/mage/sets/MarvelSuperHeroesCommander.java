@@ -177,6 +177,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rootbound Crag", 261, Rarity.RARE, mage.cards.r.RootboundCrag.class));
         cards.add(new SetCardInfo("Sadistic Slash", 666, Rarity.UNCOMMON, mage.cards.s.SadisticSlash.class));
         cards.add(new SetCardInfo("Savage Lands", 827, Rarity.UNCOMMON, mage.cards.s.SavageLands.class));
+        cards.add(new SetCardInfo("Scarlet Witch, Wanda Maximoff", 855, Rarity.UNCOMMON, mage.cards.s.ScarletWitchWandaMaximoff.class));
         cards.add(new SetCardInfo("Scavenger Grounds", 263, Rarity.RARE, mage.cards.s.ScavengerGrounds.class));
         cards.add(new SetCardInfo("Scorched Geyser", 264, Rarity.RARE, mage.cards.s.ScorchedGeyser.class));
         cards.add(new SetCardInfo("Scout the City", 817, Rarity.COMMON, mage.cards.s.ScoutTheCity.class));
