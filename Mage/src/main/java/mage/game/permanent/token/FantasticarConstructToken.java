@@ -18,8 +18,8 @@ public final class FantasticarConstructToken extends TokenImpl {
         subtype.add(SubType.CONSTRUCT);
         power = new MageInt(4);
         toughness = new MageInt(4);
-        addAbility(HasteAbility.getInstance());
         addAbility(FlyingAbility.getInstance());
+        addAbility(HasteAbility.getInstance());
     }
 
     private FantasticarConstructToken(final FantasticarConstructToken token) {
@@ -30,4 +30,3 @@ public final class FantasticarConstructToken extends TokenImpl {
         return new FantasticarConstructToken(this);
     }
 }
-

@@ -45,6 +45,9 @@ public final class TheFantasticar extends CardImpl {
         ).setText("have {this} become an artifact creature until end of turn.");
         Ability becomeCreatureAbility = new SpellCastControllerTriggeredAbility(effect, StaticFilters.FILTER_SPELL_A_NON_CREATURE, true);
         this.addAbility(becomeCreatureAbility);
+
+        //Whenever you cast your fourth noncreature spell each turn, you may sacrifice
+        //The Fantasticar. If you do, create four 4/4 colorless Construct artifact creature tokens with flying and haste.
         this.addAbility(new TheFantasticarTriggeredAbility());
     }
 
