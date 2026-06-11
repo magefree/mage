@@ -2549,9 +2549,6 @@
 |TOK:MH3|Zombie||ZombieToken|
 |TOK:MH3|Zombie Army||ZombieArmyToken|
 
-# MSC
-|TOK:MSC|Construct||FantasticarConstructToken|
-
 # M3C
 |TOK:M3C|Aetherborn||AetherbornToken|
 |TOK:M3C|Ape||ApeToken|
@@ -3049,8 +3046,8 @@
 |TOK:MSC|Beast|2|BeastToken|
 |TOK:MSC|Bird|1|BirdToken|
 |TOK:MSC|Bird|2|BirdToken|
-#|TOK:MSC|Construct|1|FantasticarConstructToken|
-#|TOK:MSC|Construct|2|FantasticarConstructToken|
+|TOK:MSC|Construct|1|FantasticarConstructToken|
+|TOK:MSC|Construct|2|FantasticarConstructToken|
 #|TOK:MSC|Council of Reeds|1|CouncilofReedsToken|
 #|TOK:MSC|Council of Reeds|2|CouncilofReedsToken|
 |TOK:MSC|Elephant|1|ElephantToken|
