@@ -153,6 +153,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Mister Fantastic, Reed Richards", 66, Rarity.UNCOMMON, mage.cards.m.MisterFantasticReedRichards.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("M.O.D.O.K.", 106, Rarity.MYTHIC, mage.cards.m.MODOK.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("M.O.D.O.K.", 408, Rarity.MYTHIC, mage.cards.m.MODOK.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Misty Knight, Hero for Hire", 145, Rarity.UNCOMMON, mage.cards.m.MistyKnightHeroForHire.class));
         cards.add(new SetCardInfo("Mockingbird, Ace Agent", 22, Rarity.UNCOMMON, mage.cards.m.MockingbirdAceAgent.class));
         cards.add(new SetCardInfo("Monica Rambeau", 23, Rarity.MYTHIC, mage.cards.m.MonicaRambeau.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Monica Rambeau", 345, Rarity.MYTHIC, mage.cards.m.MonicaRambeau.class, NON_FULL_USE_VARIOUS));
