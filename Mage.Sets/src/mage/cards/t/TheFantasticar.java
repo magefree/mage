@@ -42,7 +42,7 @@ public final class TheFantasticar extends CardImpl {
         // Whenever you cast a noncreature spell, you may have The Fantasticar become an artifact creature until end of turn.
         Effect effect = new AddCardTypeSourceEffect(
                 Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE
-        ).setText("you may have {this} become an artifact creature until end of turn.");
+        ).setText("have {this} become an artifact creature until end of turn.");
         Ability becomeCreatureAbility = new SpellCastControllerTriggeredAbility(effect, StaticFilters.FILTER_SPELL_A_NON_CREATURE, true);
         this.addAbility(becomeCreatureAbility);
         this.addAbility(new TheFantasticarTriggeredAbility());
@@ -63,7 +63,7 @@ class TheFantasticarTriggeredAbility extends TriggeredAbilityImpl {
     public TheFantasticarTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(
                     new CreateTokenEffect(new FantasticarConstructToken(), 4), new SacrificeSourceCost())
-                .setText("you may sacrifice The Fantasticar. " +
+                .setText("you may sacrifice {this}. " +
                          "If you do, create four 4/4 colorless Construct " +
                          "artifact creature tokens with flying and haste."));
         setTriggerPhrase("Whenever you cast your fourth noncreature spell each turn, ");
