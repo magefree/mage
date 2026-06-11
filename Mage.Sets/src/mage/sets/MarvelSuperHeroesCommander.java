@@ -160,6 +160,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Promise of Loyalty", 142, Rarity.RARE, mage.cards.p.PromiseOfLoyalty.class));
         cards.add(new SetCardInfo("Pumpkin Bombardment", 822, Rarity.COMMON, mage.cards.p.PumpkinBombardment.class));
         cards.add(new SetCardInfo("Quantum Misalignment", 152, Rarity.RARE, mage.cards.q.QuantumMisalignment.class));
+        cards.add(new SetCardInfo("Quicksilver, Pietro Maximoff", 551, Rarity.COMMON, mage.cards.q.QuicksilverPietroMaximoff.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Quicksilver, Pietro Maximoff", 853, Rarity.COMMON, mage.cards.q.QuicksilverPietroMaximoff.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Radiant Summit", 258, Rarity.RARE, mage.cards.r.RadiantSummit.class));
         cards.add(new SetCardInfo("Raise the Palisade", 278, Rarity.RARE, mage.cards.r.RaiseThePalisade.class));
         cards.add(new SetCardInfo("Reconnaissance Mission", 153, Rarity.UNCOMMON, mage.cards.r.ReconnaissanceMission.class));
