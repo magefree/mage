@@ -21,6 +21,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         this.hasBasicLands = false; // temporary
 
         cards.add(new SetCardInfo("A.I.M. Bot", 529, Rarity.COMMON, mage.cards.a.AIMBot.class));
+        cards.add(new SetCardInfo("Abomination, World Ravager", 47, Rarity.RARE, mage.cards.a.AbominationWorldRavager.class));
         cards.add(new SetCardInfo("Alien Symbiosis", 791, Rarity.UNCOMMON, mage.cards.a.AlienSymbiosis.class));
         cards.add(new SetCardInfo("Annie Joins Up", 281, Rarity.RARE, mage.cards.a.AnnieJoinsUp.class));
         cards.add(new SetCardInfo("Ant-Man, Scott Lang", 834, Rarity.COMMON, mage.cards.a.AntManScottLang.class));
