@@ -54,6 +54,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Common Crook", 792, Rarity.COMMON, mage.cards.c.CommonCrook.class));
         cards.add(new SetCardInfo("Commune with Dinosaurs", 814, Rarity.COMMON, mage.cards.c.CommuneWithDinosaurs.class));
         cards.add(new SetCardInfo("Costume Closet", 770, Rarity.UNCOMMON, mage.cards.c.CostumeCloset.class));
+        cards.add(new SetCardInfo("Criminal Enterprise", 652, Rarity.UNCOMMON, mage.cards.c.CriminalEnterprise.class));
         cards.add(new SetCardInfo("Crimson Operative", 848, Rarity.COMMON, mage.cards.c.CrimsonOperative.class));
         cards.add(new SetCardInfo("Cultivate", 172, Rarity.COMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Cut a Deal", 127, Rarity.UNCOMMON, mage.cards.c.CutADeal.class));
