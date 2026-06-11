@@ -148,6 +148,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Monologue Tax", 139, Rarity.RARE, mage.cards.m.MonologueTax.class));
         cards.add(new SetCardInfo("Mystic Monastery", 253, Rarity.UNCOMMON, mage.cards.m.MysticMonastery.class));
         cards.add(new SetCardInfo("Pacifism", 575, Rarity.COMMON, mage.cards.p.Pacifism.class));
+        cards.add(new SetCardInfo("Panther Robot", 113, Rarity.RARE, mage.cards.p.PantherRobot.class));
         cards.add(new SetCardInfo("Path of Ancestry", 254, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Path of Discovery", 179, Rarity.RARE, mage.cards.p.PathOfDiscovery.class));
         cards.add(new SetCardInfo("Path to Exile", 141, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
