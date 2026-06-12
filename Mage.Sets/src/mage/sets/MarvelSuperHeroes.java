@@ -77,6 +77,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Castle Doom", 263, Rarity.RARE, mage.cards.c.CastleDoom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Castle Doom", 429, Rarity.RARE, mage.cards.c.CastleDoom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Colleen Wing, Street Samurai", 13, Rarity.UNCOMMON, mage.cards.c.ColleenWingStreetSamurai.class));
+        cards.add(new SetCardInfo("Claim the Kingdom", 163, Rarity.UNCOMMON, mage.cards.c.ClaimTheKingdom.class));
         cards.add(new SetCardInfo("Construct a Cosmic Cube", 406, Rarity.RARE, mage.cards.c.ConstructACosmicCube.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Construct a Cosmic Cube", 90, Rarity.RARE, mage.cards.c.ConstructACosmicCube.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crimson Operative", 126, Rarity.COMMON, mage.cards.c.CrimsonOperative.class));
