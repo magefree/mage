@@ -255,6 +255,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Winter Soldier, Bucky Barnes", 845, Rarity.COMMON, mage.cards.w.WinterSoldierBuckyBarnes.class));
         cards.add(new SetCardInfo("Wisecrack", 813, Rarity.UNCOMMON, mage.cards.w.Wisecrack.class));
         cards.add(new SetCardInfo("Zarda, the Power Princess", 615, Rarity.UNCOMMON, mage.cards.z.ZardaThePowerPrincess.class));
+        cards.add(new SetCardInfo("Zuri, Warrior of Wakanda", 72, Rarity.RARE, mage.cards.z.ZuriWarriorOfWakanda.class));
 
         //TODO: Correct these collectors numbers and rarities once confirmed
         cards.add(new SetCardInfo("Abomination, Irradiated Brute", "XXX1", Rarity.RARE, mage.cards.a.AbominationIrradiatedBrute.class));
