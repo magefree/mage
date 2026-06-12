@@ -43,7 +43,7 @@ public final class KaraiFutureOfTheFoot extends CardImpl {
                 new ConditionalOneShotEffect(
                         new ReturnFromGraveyardToBattlefieldTargetEffect(),
                         new ReturnFromGraveyardToHandTargetEffect(),
-                        new CompoundCondition(SneakCondition.instance, SourceEnteredThisTurnCondition.DID),
+                        new CompoundCondition(SneakCondition.instance, SourceEnteredThisTurnCondition.TRUE),
                         "return target creature card from your graveyard to your hand. "
                                 + "If her sneak cost was paid this turn, instead return that card to the battlefield"
                 ), false
