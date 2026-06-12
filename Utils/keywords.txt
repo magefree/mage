@@ -45,6 +45,7 @@ Enchant|type|
 Encore|cost|
 Enlist|new|
 Entwine|manaString|
+Equip|number|
 Eternalize|cost, card|
 Evoke|manaString|
 Evolve|new|
