@@ -3008,6 +3008,37 @@
 |TOK:SOC|Worm||BlackGreenWormToken|
 |TOK:SOC|Zombie||ZombieDecayedToken|
 
+# MSC
+|TOK:MSC|Shapeshifter|1|Shapeshifter32Token|
+|TOK:MSC|Wall|1|WallColorlessReachToken|
+|TOK:MSC|Angel|1|AngelVigilanceToken|
+|TOK:MSC|Bird|1|BirdToken|
+|TOK:MSC|Goat|1|GoatToken|
+|TOK:MSC|Ox|1|Ox22Token|
+#|TOK:MSC|Council of Reeds|1|CouncilofReedsToken|
+|TOK:MSC|Rogue|1|RogueToken|
+#|TOK:MSC|Ape Villain|1|ApeVillainToken|
+|TOK:MSC|Beast|1|BeastToken|
+|TOK:MSC|Elephant|1|ElephantToken|
+|TOK:MSC|Rhino|1|RhinoToken|
+#|TOK:MSC|Construct|1|FantasticarConstructToken|
+|TOK:MSC|Vibranium|1|VibraniumToken|
+|TOK:MSC|Shapeshifter|2|Shapeshifter32Token|
+|TOK:MSC|Wall|2|WallColorlessReachToken|
+|TOK:MSC|Angel|2|AngelVigilanceToken|
+|TOK:MSC|Bird|2|BirdToken|
+|TOK:MSC|Goat|2|GoatToken|
+|TOK:MSC|Ox|2|Ox22Token|
+#|TOK:MSC|Council of Reeds|2|CouncilofReedsToken|
+|TOK:MSC|Rogue|2|RogueToken|
+#|TOK:MSC|Ape Villain|2|ApeVillainToken|
+|TOK:MSC|Beast|2|BeastToken|
+|TOK:MSC|Elephant|2|ElephantToken|
+|TOK:MSC|Rhino|2|RhinoToken|
+#|TOK:MSC|Construct|2|FantasticarConstructToken|
+|TOK:MSC|Vibranium|2|VibraniumToken|
+#|TOK:MSC|Robot Hero||RobotHeroToken|
+
 # HOB
 |TOK:HOB|Dwarf||Dwarf22Token|
 |TOK:HOB|Treasure||TreasureToken|
