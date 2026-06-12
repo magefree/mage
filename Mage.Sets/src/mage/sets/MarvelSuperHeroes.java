@@ -32,6 +32,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Agent of Atlas", 3, Rarity.COMMON, mage.cards.a.AgentOfAtlas.class));
         cards.add(new SetCardInfo("Agents of HYDRA", 85, Rarity.COMMON, mage.cards.a.AgentsOfHYDRA.class));
         cards.add(new SetCardInfo("Agents of S.H.I.E.L.D.", 5, Rarity.COMMON, mage.cards.a.AgentsOfSHIELD.class));
+        cards.add(new SetCardInfo("Ant-Man, Colony Commander", 201, Rarity.UNCOMMON, mage.cards.a.AntManColonyCommander.class));
         cards.add(new SetCardInfo("Ant-Man's Army", 161, Rarity.COMMON, mage.cards.a.AntMansArmy.class));
         cards.add(new SetCardInfo("Arc Reactor", 243, Rarity.RARE, mage.cards.a.ArcReactor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arc Reactor", 310, Rarity.RARE, mage.cards.a.ArcReactor.class, NON_FULL_USE_VARIOUS));
