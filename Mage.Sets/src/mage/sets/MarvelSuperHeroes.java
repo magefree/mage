@@ -176,7 +176,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Okoye, Dora Milaje Leader", 27, Rarity.UNCOMMON, mage.cards.o.OkoyeDoraMilajeLeader.class));
         cards.add(new SetCardInfo("Panther Pounce", 29, Rarity.COMMON, mage.cards.p.PantherPounce.class));
         cards.add(new SetCardInfo("Patriot, Shield Wielder", 30, Rarity.UNCOMMON, mage.cards.p.PatriotShieldWielder.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Patriot, Shield Wielder", 444, Rarity.UNCOMMON, mage.cards.p.PatriotShieldWielder.class, NON_FULL_USE_VARIOUS))
+        cards.add(new SetCardInfo("Patriot, Shield Wielder", 444, Rarity.UNCOMMON, mage.cards.p.PatriotShieldWielder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pet Avengers", 178, Rarity.COMMON, mage.cards.p.PetAvengers.class));
         cards.add(new SetCardInfo("Plains", 434, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 433, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
