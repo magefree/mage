@@ -45,6 +45,7 @@ Enchant|type|
 Encore|cost|
 Enlist|new|
 Entwine|manaString|
+Equip|number|
 Eternalize|cost, card|
 Evoke|manaString|
 Evolve|new|
@@ -141,6 +142,7 @@ Suspend|number, cost, card|
 Swampcycling|cost|
 Swampwalk|new|
 Umbra armor|new|
+Teamwork|number|
 Tiered|card|
 Toxic|number|
 Training|new|
