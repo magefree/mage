@@ -2,8 +2,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
-
 import mage.abilities.costs.OrCost;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -14,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 
+import java.util.UUID;
+
 /**
  *
  * @author muz
@@ -21,7 +21,7 @@ import mage.filter.StaticFilters;
 public final class VisionOfLove extends CardImpl {
 
     public VisionOfLove(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
         // You may sacrifice an artifact or discard a card. If you do, draw two cards.
         this.getSpellAbility().addEffect(new DoIfCostPaid(
