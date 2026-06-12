@@ -3037,7 +3037,7 @@
 |TOK:MSC|Rhino|2|RhinoToken|
 #|TOK:MSC|Construct|2|FantasticarConstructToken|
 |TOK:MSC|Vibranium|2|VibraniumToken|
-#|TOK:MSC|Robot Hero||RobotHeroToken|
+|TOK:MSC|Robot Hero||RobotHeroToken|
 
 # HOB
 |TOK:HOB|Dwarf||Dwarf22Token|
