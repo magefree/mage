@@ -39,6 +39,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Big Wheel", 679, Rarity.COMMON, mage.cards.b.BigWheel.class));
         cards.add(new SetCardInfo("Black Widow, Natasha Romanoff", 846, Rarity.COMMON, mage.cards.b.BlackWidowNatashaRomanoff.class));
         cards.add(new SetCardInfo("Bovine Intervention", 123, Rarity.UNCOMMON, mage.cards.b.BovineIntervention.class));
+        cards.add(new SetCardInfo("Bushmaster, Coiled Henchman", 716, Rarity.COMMON, mage.cards.b.BushmasterCoiledHenchman.class));
         cards.add(new SetCardInfo("Canopy Vista", 227, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Captain America, Team Leader", 5, Rarity.MYTHIC, mage.cards.c.CaptainAmericaTeamLeader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain America, Team Leader", 879, Rarity.MYTHIC, mage.cards.c.CaptainAmericaTeamLeader.class, NON_FULL_USE_VARIOUS));
