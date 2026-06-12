@@ -12,19 +12,20 @@ import mage.util.CardUtil;
 public enum GiftWasPromisedCondition implements Condition {
     TRUE(true),
     FALSE(false);
-    private final boolean flag;
 
-    GiftWasPromisedCondition(boolean flag) {
-        this.flag = flag;
+    private final boolean wasPromised;
+
+    GiftWasPromisedCondition(boolean wasPromised) {
+        this.wasPromised = wasPromised;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return flag == CardUtil.checkSourceCostsTagExists(game, source, GiftAbility.GIFT_ACTIVATION_VALUE_KEY);
+        return wasPromised == CardUtil.checkSourceCostsTagExists(game, source, GiftAbility.GIFT_ACTIVATION_VALUE_KEY);
     }
 
     @Override
     public String toString() {
-        return "the gift was " + (flag ? "" : "not ") + "promised";
+        return "the gift was " + (wasPromised ? "" : "not ") + "promised";
     }
 }
