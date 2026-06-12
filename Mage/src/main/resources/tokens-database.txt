@@ -3017,7 +3017,7 @@
 |TOK:MSC|Ox|1|Ox22Token|
 #|TOK:MSC|Council of Reeds|1|CouncilofReedsToken|
 |TOK:MSC|Rogue|1|RogueToken|
-#|TOK:MSC|Ape Villain|1|ApeVillainToken|
+|TOK:MSC|Ape Villain|1|ApeVillainToken|
 |TOK:MSC|Beast|1|BeastToken|
 |TOK:MSC|Elephant|1|ElephantToken|
 |TOK:MSC|Rhino|1|RhinoToken|
@@ -3031,7 +3031,7 @@
 |TOK:MSC|Ox|2|Ox22Token|
 #|TOK:MSC|Council of Reeds|2|CouncilofReedsToken|
 |TOK:MSC|Rogue|2|RogueToken|
-#|TOK:MSC|Ape Villain|2|ApeVillainToken|
+|TOK:MSC|Ape Villain|2|ApeVillainToken|
 |TOK:MSC|Beast|2|BeastToken|
 |TOK:MSC|Elephant|2|ElephantToken|
 |TOK:MSC|Rhino|2|RhinoToken|
