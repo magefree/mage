@@ -83,6 +83,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Exotic Orchard", 241, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Expressive Iteration", 183, Rarity.UNCOMMON, mage.cards.e.ExpressiveIteration.class));
         cards.add(new SetCardInfo("Fabled Passage", 242, Rarity.RARE, mage.cards.f.FabledPassage.class));
+        cards.add(new SetCardInfo("Fall to Earth", 517, Rarity.COMMON, mage.cards.f.FallToEarth.class));
         cards.add(new SetCardInfo("Farseek", 173, Rarity.COMMON, mage.cards.f.Farseek.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Farseek", 815, Rarity.COMMON, mage.cards.f.Farseek.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fellwar Stone", 285, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
