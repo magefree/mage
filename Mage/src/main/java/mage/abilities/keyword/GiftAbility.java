@@ -57,7 +57,7 @@ public class GiftAbility extends StaticAbility implements OptionalAdditionalSour
                     .withInterveningIf(GiftWasPromisedCondition.TRUE)
                     .setRuleVisible(false));
         } else {
-            card.getSpellAbility().addEffect(new PromiseGiftEffect(giftType));
+            card.getSpellAbility().addEffect(new PromiseGiftEffect(giftType).setText(""));
         }
     }
 

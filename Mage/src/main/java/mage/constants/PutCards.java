@@ -82,6 +82,9 @@ public enum PutCards {
                 return player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
             case BATTLEFIELD_TAPPED_ATTACKING:
                 if (player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null)) {
+                    if (card == null) {
+                        return true;
+                    }
                     Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                     if (permanent != null) {
                         game.getCombat().addAttackingCreature(permanent.getId(), game);

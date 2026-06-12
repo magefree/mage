@@ -1,17 +1,19 @@
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.effects.common.DamagePlayersEffect;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,11 +41,11 @@ public final class HYDRAAssaultRobot extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever another Villain and/or artifact you control enters, this creature deals 1 damage to target opponent.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-            new DamagePlayersEffect(1, TargetController.OPPONENT),
-            filter
-        ));
-
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(
+                new DamageTargetEffect(1),
+                filter);
+        ability.addTarget(new TargetOpponent());
+        this.addAbility(ability);
     }
 
     private HYDRAAssaultRobot(final HYDRAAssaultRobot card) {
