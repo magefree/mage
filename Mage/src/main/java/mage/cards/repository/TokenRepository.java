@@ -282,6 +282,8 @@ public enum TokenRepository {
         res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 17, "https://api.scryfall.com/cards/tecc/1/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 18, "https://api.scryfall.com/cards/ttmt/1/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 19, "https://api.scryfall.com/cards/tsos/1/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 19, "https://api.scryfall.com/cards/tmsc/1/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 19, "https://api.scryfall.com/cards/tmsc/17/en?format=image"));
 
 
         // City's Blessing
@@ -337,6 +339,7 @@ public enum TokenRepository {
         res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 3, "https://api.scryfall.com/cards/tltc/15/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 4, "https://api.scryfall.com/cards/tfic/11/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 5, "https://api.scryfall.com/cards/tecc/12/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 5, "https://api.scryfall.com/cards/tmsc/16/en?format=image"));
 
         // Radiation (for trigger)
         // https://scryfall.com/search?q=oracleid%3A7926aa44-a2f1-416a-a4b7-1a6991c15879+include%3Aextras&unique=art&as=grid&order=released
