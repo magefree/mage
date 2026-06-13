@@ -205,6 +205,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hit-Monkey", 723, Rarity.RARE, mage.cards.h.HitMonkey.class));
         cards.add(new SetCardInfo("Hobgoblin, Mantled Marauder", 805, Rarity.UNCOMMON, mage.cards.h.HobgoblinMantledMarauder.class));
         cards.add(new SetCardInfo("Hulk, Bruce Banner", 850, Rarity.UNCOMMON, mage.cards.h.HulkBruceBanner.class));
+        cards.add(new SetCardInfo("Hulkbuster Armor", 107, Rarity.RARE, mage.cards.h.HulkbusterArmor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hulkbuster Armor", 438, Rarity.RARE, mage.cards.h.HulkbusterArmor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hull Breach", 185, Rarity.COMMON, mage.cards.h.HullBreach.class));
         cards.add(new SetCardInfo("Human Torch", 3, Rarity.MYTHIC, mage.cards.h.HumanTorch.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Human Torch", 877, Rarity.MYTHIC, mage.cards.h.HumanTorch.class, NON_FULL_USE_VARIOUS));
