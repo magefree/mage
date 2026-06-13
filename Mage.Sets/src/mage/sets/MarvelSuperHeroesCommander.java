@@ -234,6 +234,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Lethal Scheme", 353, Rarity.RARE, mage.cards.l.LethalScheme.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Bolt", 806, Rarity.UNCOMMON, mage.cards.l.LightningBolt.class));
         cards.add(new SetCardInfo("Lightning Greaves", 202, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
+        cards.add(new SetCardInfo("Living Lightning, Charged Up", 764, Rarity.UNCOMMON, mage.cards.l.LivingLightningChargedUp.class));
         cards.add(new SetCardInfo("Loki, God of Lies", 512, Rarity.RARE, mage.cards.l.LokiGodOfLies.class));
         cards.add(new SetCardInfo("Loyal Guardian", 176, Rarity.UNCOMMON, mage.cards.l.LoyalGuardian.class));
         cards.add(new SetCardInfo("Loyal Retainers", 136, Rarity.MYTHIC, mage.cards.l.LoyalRetainers.class, NON_FULL_USE_VARIOUS));
