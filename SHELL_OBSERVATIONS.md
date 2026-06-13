@@ -21,9 +21,9 @@ Legend: 🟢 directly observed · 🟡 candidate / needs verification
   gets the same area as each opponent. *Lever:* weight the active player / your own seat larger,
   especially in 4-player, to improve own-board clarity.
 
-- 🟢 **Chat split consumes horizontal play area.** The main split is
-  `[battlefield + hand + stack] <|> [chats]` (`GamePanel.java:2369`). *Lever:* a collapsible /
-  auto-hiding chat would widen the play area on demand — a high-value, low-risk early win.
+- ✅ **Chat split consumes horizontal play area.** The main split is
+  `[battlefield + hand + stack] <|> [chats]` (`GamePanel.java:2369`). *Addressed in Phase 2:*
+  `ShellChat` collapses the chat to a 24px strip (reclaiming play-area width) with an unread badge.
 
 - 🟡 **Small-mode avatar still tall.** `PANEL_HEIGHT_SMALL = 218` with a "TODO: no need in small
   mode after GUI scale added" (`PlayerPanelExt.java:64`). Opponent panels may be shrinkable further

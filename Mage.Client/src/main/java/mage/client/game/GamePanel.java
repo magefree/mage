@@ -2374,6 +2374,12 @@ public final class GamePanel extends javax.swing.JPanel {
         splitBattlefieldAndChats.setLeftComponent(pnlHelperHandButtonsStackArea);
         splitBattlefieldAndChats.setRightComponent(splitChatAndLogs);
 
+        // [modern-shell] opt-in seam: collapsible chat (reclaims play-area width) with an unread
+        // indicator driven off the player chat. Default off. See SHELL.md.
+        if (mage.client.shell.Shell.isEnabled()) {
+            mage.client.shell.ShellChat.install(splitBattlefieldAndChats, userChatPanel);
+        }
+
         // warning, it's important to store/restore splitters in same order as real life GUI
         // from outer to inner (otherwise panels will be hidden or weird)
         // also it must be restored by thread queue

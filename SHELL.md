@@ -10,7 +10,8 @@ at a tiny, documented set of "seams."
 - **Phase 0 — Foundation** ✅ feature flag, FlatLaf installer, seam, this manifest.
 - **Phase 1 — Theming** ✅ dark ("Arcane Dark") + light ("Arcane Parchment") variants, magic-flavored
   palette, rounded controls, slim scrollbars — all via additive `FlatLaf.properties` files.
-- **Phase 2 — Component restyling** ⏳ planned.
+- **Phase 2 — Component restyling** 🚧 in progress: collapsible in-game chat (reclaims play-area
+  width) with an unread badge. More component work to follow.
 - **Phase 3 — Structural / interaction** ⏳ planned (see `SHELL_OBSERVATIONS.md` for play-area leads).
 
 See `SHELL_OBSERVATIONS.md` for a passive catalog of memory and play-area/4-player observations
@@ -59,6 +60,7 @@ to find any seam that didn't apply, and re-insert it from this table.
 |---|------|------|------------------------------|
 | 1 | `Mage.Client/pom.xml` | Adds the `com.formdev:flatlaf` dependency at the top of `<dependencies>`. | Pure addition; dependency lists rarely conflict on the same line. |
 | 2 | `Mage.Client/src/main/java/mage/client/util/gui/GuiDisplayUtil.java` | In `refreshThemeSettings()`, wraps the single `UIManager.setLookAndFeel("...Nimbus...")` call in `if (Shell.isEnabled()) { Shell.installLookAndFeel(); } else { ...existing Nimbus... }`. | One spot, inside the existing `try`/`catch`; the `else` keeps the original call verbatim. |
+| 3 | `Mage.Client/src/main/java/mage/client/game/GamePanel.java` | After `splitBattlefieldAndChats` is assembled, `if (Shell.isEnabled()) { ShellChat.install(splitBattlefieldAndChats, userChatPanel); }`. | One guarded line right after the split is built; `ShellChat` wraps the chat side, touching no upstream chat code. |
 
 > Keep the seam count low. Prefer subclass-and-swap, `UIManager` overrides, and FlatLaf
 > `.properties` over editing more upstream files.
@@ -71,7 +73,9 @@ Mage.Client/
   pom.xml                                             <- seam #1 (FlatLaf dependency)
   src/main/java/mage/client/
     shell/Shell.java                                  <- flag + LAF installer (new)
+    shell/ShellChat.java                              <- collapsible chat + unread badge (new)
     util/gui/GuiDisplayUtil.java                      <- seam #2 (LAF install)
+    game/GamePanel.java                               <- seam #3 (collapsible chat install)
   src/main/resources/mage/client/shell/
     FlatLaf.properties                                <- shared theme tuning (new)
     FlatDarkLaf.properties                            <- dark variant palette (new)
