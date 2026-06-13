@@ -286,6 +286,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Path of Discovery", 179, Rarity.RARE, mage.cards.p.PathOfDiscovery.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Path of Discovery", 386, Rarity.RARE, mage.cards.p.PathOfDiscovery.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Path to Exile", 141, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
+        cards.add(new SetCardInfo("Peggy Carter, Secret Agent", 523, Rarity.UNCOMMON, mage.cards.p.PeggyCarterSecretAgent.class));
         cards.add(new SetCardInfo("Pharaoh Rama-Tut", 634, Rarity.UNCOMMON, mage.cards.p.PharaohRamaTut.class));
         cards.add(new SetCardInfo("Plaza of Heroes", 255, Rarity.RARE, mage.cards.p.PlazaOfHeroes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plaza of Heroes", 483, Rarity.RARE, mage.cards.p.PlazaOfHeroes.class, NON_FULL_USE_VARIOUS));
