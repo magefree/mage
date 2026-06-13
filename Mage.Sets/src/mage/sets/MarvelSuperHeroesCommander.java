@@ -68,6 +68,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Captain America, Team Leader", 879, Rarity.MYTHIC, mage.cards.c.CaptainAmericaTeamLeader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain Marvel, Apex Avenger", 396, Rarity.RARE, mage.cards.c.CaptainMarvelApexAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain Marvel, Apex Avenger", 78, Rarity.RARE, mage.cards.c.CaptainMarvelApexAvenger.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Captain's Defense", 836, Rarity.COMMON, mage.cards.c.CaptainsDefense.class));
         cards.add(new SetCardInfo("Chameleon, Master of Disguise", 148, Rarity.UNCOMMON, mage.cards.c.ChameleonMasterOfDisguise.class));
         cards.add(new SetCardInfo("Chaos Warp", 164, Rarity.RARE, mage.cards.c.ChaosWarp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chaos Warp", 359, Rarity.RARE, mage.cards.c.ChaosWarp.class, NON_FULL_USE_VARIOUS));
