@@ -392,6 +392,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Spectator Seating", 268, Rarity.RARE, mage.cards.s.SpectatorSeating.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spectator Seating", 495, Rarity.RARE, mage.cards.s.SpectatorSeating.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spider-Gwen, Free Spirit", 874, Rarity.COMMON, mage.cards.s.SpiderGwenFreeSpirit.class));
+        cards.add(new SetCardInfo("Spider-Man, Hometown Hero", 857, Rarity.COMMON, mage.cards.s.SpiderManHometownHero.class));
         cards.add(new SetCardInfo("Spider-Man, New Champion", 705, Rarity.RARE, mage.cards.s.SpiderManNewChampion.class));
         cards.add(new SetCardInfo("Spider-Man, Web-Slinger", 776, Rarity.COMMON, mage.cards.s.SpiderManWebSlinger.class));
         cards.add(new SetCardInfo("Spider-Man, Web-Spinner", 832, Rarity.MYTHIC, mage.cards.s.SpiderManWebSpinner.class));
