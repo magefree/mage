@@ -2,6 +2,7 @@ package mage.client.shell;
 
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -30,6 +31,12 @@ public final class Shell {
 
     /** Environment variable that enables the shell, e.g. {@code XMAGE_SHELL=1}. */
     public static final String ENV = "XMAGE_SHELL";
+
+    /** System property selecting the variant ({@code dark} or {@code light}); defaults to dark. */
+    public static final String THEME_PROPERTY = "xmage.shell.theme";
+
+    /** Environment variable selecting the variant ({@code dark} or {@code light}). */
+    public static final String THEME_ENV = "XMAGE_SHELL_THEME";
 
     /**
      * Package that holds the shell's FlatLaf customisation files
@@ -93,7 +100,19 @@ public final class Shell {
      */
     public static void installLookAndFeel() throws UnsupportedLookAndFeelException {
         // Must be registered before the LAF is created so the .properties overrides are picked up.
+        // FlatLaf loads FlatLaf.properties (shared) plus FlatDarkLaf/FlatLightLaf.properties (variant).
         FlatLaf.registerCustomDefaultsSource(DEFAULTS_PACKAGE);
-        UIManager.setLookAndFeel(new FlatDarkLaf());
+        UIManager.setLookAndFeel(isLightVariant() ? new FlatLightLaf() : new FlatDarkLaf());
+    }
+
+    /**
+     * @return true when the light ("Arcane Parchment") variant is requested; dark is the default.
+     */
+    public static boolean isLightVariant() {
+        String value = System.getProperty(THEME_PROPERTY);
+        if (value == null) {
+            value = System.getenv(THEME_ENV);
+        }
+        return value != null && "light".equalsIgnoreCase(value.trim());
     }
 }

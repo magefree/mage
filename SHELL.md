@@ -8,9 +8,13 @@ at a tiny, documented set of "seams."
 ## Status
 
 - **Phase 0 — Foundation** ✅ feature flag, FlatLaf installer, seam, this manifest.
-- **Phase 1 — Theming** ✅ (initial) modern FlatLaf dark theme via additive `FlatLaf.properties`.
+- **Phase 1 — Theming** ✅ dark ("Arcane Dark") + light ("Arcane Parchment") variants, magic-flavored
+  palette, rounded controls, slim scrollbars — all via additive `FlatLaf.properties` files.
 - **Phase 2 — Component restyling** ⏳ planned.
-- **Phase 3 — Structural / interaction** ⏳ planned.
+- **Phase 3 — Structural / interaction** ⏳ planned (see `SHELL_OBSERVATIONS.md` for play-area leads).
+
+See `SHELL_OBSERVATIONS.md` for a passive catalog of memory and play-area/4-player observations
+collected while building the shell.
 
 ## How to enable
 
@@ -25,6 +29,13 @@ java -Dxmage.shell=1 ... mage.client.MageFrame
 ```
 
 Accepted truthy values: `1`, `true`, `on`, `yes`, `enabled`.
+
+Pick the variant (defaults to dark) with `XMAGE_SHELL_THEME` / `-Dxmage.shell.theme`:
+
+```bash
+XMAGE_SHELL=1 XMAGE_SHELL_THEME=light   java ...   # Arcane Parchment (light)
+XMAGE_SHELL=1                           java ...   # Arcane Dark (default)
+```
 
 ## Architecture & survivability strategy
 
@@ -62,7 +73,10 @@ Mage.Client/
     shell/Shell.java                                  <- flag + LAF installer (new)
     util/gui/GuiDisplayUtil.java                      <- seam #2 (LAF install)
   src/main/resources/mage/client/shell/
-    FlatLaf.properties                                <- additive theme tuning (new)
+    FlatLaf.properties                                <- shared theme tuning (new)
+    FlatDarkLaf.properties                            <- dark variant palette (new)
+    FlatLightLaf.properties                           <- light variant palette (new)
+SHELL_OBSERVATIONS.md                                 <- passive memory/play-area catalog (new)
 ```
 
 ## Roadmap
