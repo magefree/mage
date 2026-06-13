@@ -14,10 +14,14 @@ import java.awt.event.ComponentEvent;
  * Phase 2: collapsible in-game chat that reclaims horizontal play-area width, with a small unread
  * indicator so messages aren't missed while the chat is hidden.
  * <p>
+ * Behaviour: the chat <b>starts collapsed</b> to a thin strip; when a new player message arrives
+ * while collapsed, the unread badge briefly <b>pulses</b>. Clicking the strip toggles the chat.
+ * <p>
  * Survivability: all behaviour lives here. The game panel calls {@link #install} from a single
  * guarded seam (see {@code SHELL.md}). We wrap the split pane's right (chat) side in a thin
- * container so the toggle strip stays visible even when the chat is collapsed; nothing in the
- * existing chat classes is modified.
+ * container so the toggle strip stays visible even when collapsed; nothing in the existing chat
+ * classes is modified. The collapsed divider position is <b>pinned</b> via a listener so it survives
+ * the game panel's later "restore saved divider locations" pass.
  * <p>
  * The unread indicator is driven off the <b>player chat</b> ({@code userChatPanel}) only — the game
  * log updates on every action and would make the badge meaningless.
@@ -28,19 +32,26 @@ public final class ShellChat {
 
     private static final int STRIP_WIDTH = 24;
     private static final double DEFAULT_EXPANDED_PROPORTION = 0.80;
+    private static final long PULSE_MS = 750;
 
     private final JSplitPane split;
     private final JComponent chatSide;       // the original right component (chat + logs)
     private final ChatToggleButton toggle;
+    private final Timer pulseTimer;
 
     private boolean collapsed;
+    private boolean pinning;                  // guards reentrancy while we re-pin the divider
     private double expandedProportion = DEFAULT_EXPANDED_PROPORTION;
     private int unread;
+    private long pulseStart;
+    private float pulse;                       // 0..1 during a pulse, else 0
 
     private ShellChat(JSplitPane split, JComponent chatSide) {
         this.split = split;
         this.chatSide = chatSide;
         this.toggle = new ChatToggleButton();
+        this.pulseTimer = new Timer(30, e -> advancePulse());
+        this.pulseTimer.setCoalesce(true);
     }
 
     /**
@@ -71,15 +82,27 @@ public final class ShellChat {
 
         toggle.addActionListener(e -> setCollapsed(!collapsed));
 
-        // keep the collapsed width pinned when the window is resized
+        // Re-pin the collapsed position whenever the divider moves (window resize, or the game
+        // panel's restore-saved-locations pass) so "start collapsed" sticks.
+        split.addPropertyChangeListener(JSplitPane.DIVIDER_LOCATION_PROPERTY, evt -> {
+            if (collapsed && !pinning) {
+                pinCollapsed();
+            }
+        });
         split.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 if (collapsed) {
-                    applyCollapsedDivider();
+                    pinCollapsed();
                 }
             }
         });
+
+        // start closed
+        collapsed = true;
+        chatSide.setVisible(false);
+        toggle.refresh();
+        SwingUtilities.invokeLater(this::pinCollapsed);
     }
 
     private void setCollapsed(boolean value) {
@@ -97,7 +120,7 @@ public final class ShellChat {
             }
             collapsed = true;
             chatSide.setVisible(false);
-            applyCollapsedDivider();
+            pinCollapsed();
         } else {
             collapsed = false;
             chatSide.setVisible(true);
@@ -107,13 +130,19 @@ public final class ShellChat {
         toggle.refresh();
     }
 
-    private void applyCollapsedDivider() {
-        SwingUtilities.invokeLater(() -> {
-            int loc = split.getWidth() - STRIP_WIDTH - split.getDividerSize();
-            if (loc > 0) {
+    private void pinCollapsed() {
+        if (!collapsed) {
+            return;
+        }
+        int loc = split.getWidth() - STRIP_WIDTH - split.getDividerSize();
+        if (loc > 0 && split.getDividerLocation() != loc) {
+            pinning = true;
+            try {
                 split.setDividerLocation(loc);
+            } finally {
+                pinning = false;
             }
-        });
+        }
     }
 
     private void watchForMessages(ChatPanelBasic userChatPanel) {
@@ -129,6 +158,7 @@ public final class ShellChat {
             public void insertUpdate(DocumentEvent e) {
                 if (collapsed && e.getLength() > 0) {
                     unread++;
+                    startPulse();
                     toggle.refresh();
                 }
             }
@@ -147,6 +177,26 @@ public final class ShellChat {
 
     private void clearUnread() {
         unread = 0;
+        pulse = 0f;
+        pulseTimer.stop();
+    }
+
+    private void startPulse() {
+        pulseStart = System.currentTimeMillis();
+        if (!pulseTimer.isRunning()) {
+            pulseTimer.start();
+        }
+    }
+
+    private void advancePulse() {
+        long elapsed = System.currentTimeMillis() - pulseStart;
+        if (elapsed >= PULSE_MS) {
+            pulse = 0f;
+            pulseTimer.stop();
+        } else {
+            pulse = elapsed / (float) PULSE_MS; // 0..1
+        }
+        toggle.repaint();
     }
 
     private static JTextComponent findTextComponent(Container root) {
@@ -165,8 +215,8 @@ public final class ShellChat {
     }
 
     /**
-     * Thin vertical strip that toggles the chat and paints an unread badge. Kept self-contained so
-     * it relies on no upstream rendering code.
+     * Thin vertical strip that toggles the chat and paints a (pulsing) unread badge. Kept
+     * self-contained so it relies on no upstream rendering code.
      */
     private final class ChatToggleButton extends JButton {
 
@@ -235,16 +285,33 @@ public final class ShellChat {
                     int dia = w - 6;
                     int bx = (w - dia) / 2;
                     int by = 6;
+
+                    // pulsing ripple ring (fades outward) + gentle "beat" on the badge itself
+                    float beat = 0f;
+                    if (pulse > 0f) {
+                        double s = Math.sin(pulse * Math.PI); // 0..1..0 over the pulse
+                        beat = (float) s;
+                        int ripple = (int) (pulse * 9);
+                        int alpha = Math.max(0, (int) ((1f - pulse) * 170));
+                        g2.setColor(new Color(accent.getRed(), accent.getGreen(), accent.getBlue(), alpha));
+                        g2.setStroke(new BasicStroke(1.5f));
+                        g2.drawOval(bx - ripple, by - ripple, dia + 2 * ripple, dia + 2 * ripple);
+                    }
+                    int grow = Math.round(beat * 3);
+                    int gx = bx - grow;
+                    int gy = by - grow;
+                    int gdia = dia + 2 * grow;
+
                     g2.setColor(accent);
-                    g2.fillOval(bx, by, dia, dia);
+                    g2.fillOval(gx, gy, gdia, gdia);
 
                     String label = unread > 9 ? "9+" : Integer.toString(unread);
                     g2.setColor(Color.WHITE);
                     Font f = getFont().deriveFont(Font.BOLD, 9f);
                     g2.setFont(f);
                     FontMetrics fm = g2.getFontMetrics();
-                    int tx = bx + (dia - fm.stringWidth(label)) / 2;
-                    int ty = by + (dia - fm.getHeight()) / 2 + fm.getAscent();
+                    int tx = gx + (gdia - fm.stringWidth(label)) / 2;
+                    int ty = gy + (gdia - fm.getHeight()) / 2 + fm.getAscent();
                     g2.drawString(label, tx, ty);
                 }
             } finally {

@@ -10,8 +10,12 @@ at a tiny, documented set of "seams."
 - **Phase 0 — Foundation** ✅ feature flag, FlatLaf installer, seam, this manifest.
 - **Phase 1 — Theming** ✅ dark ("Arcane Dark") + light ("Arcane Parchment") variants, magic-flavored
   palette, rounded controls, slim scrollbars — all via additive `FlatLaf.properties` files.
-- **Phase 2 — Component restyling** 🚧 in progress: collapsible in-game chat (reclaims play-area
-  width) with an unread badge. More component work to follow.
+- **Phase 2 — Component restyling & density** 🚧 in progress:
+  - Collapsible in-game chat — **starts closed**, reclaims play-area width, and **pulses** an unread
+    badge on new player messages.
+  - Global density pass for standard Swing controls (tighter button/menu/combo/list padding) — the
+    start of modernizing XMage's old low-res-era sizing. Code-level oversized controls are tracked
+    in `SHELL_OBSERVATIONS.md` (section C).
 - **Phase 3 — Structural / interaction** ⏳ planned (see `SHELL_OBSERVATIONS.md` for play-area leads).
 
 See `SHELL_OBSERVATIONS.md` for a passive catalog of memory and play-area/4-player observations

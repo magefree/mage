@@ -29,6 +29,25 @@ Legend: 🟢 directly observed · 🟡 candidate / needs verification
   mode after GUI scale added" (`PlayerPanelExt.java:64`). Opponent panels may be shrinkable further
   in multiplayer; needs verifying against current scaling.
 
+## C. Density backlog — code-level oversized controls (LAF can't reach these)
+
+The shared FlatLaf density tweaks tighten *standard* Swing controls, but these are sized in Java
+(fixed pixels / `GUISizeHelper`) and need per-area shell work to modernize:
+
+- 🟢 **In-game command buttons are double-height.** `Dimension(2 * gameCommandButtonHeight,
+  gameCommandButtonHeight)` and similar (`GamePanel.java:565`). Big boxy footprint from the
+  low-res era.
+- 🟢 **Phase buttons are fixed square icons.** `phaseButton.setPreferredSize(new Dimension(buttonSize,
+  buttonSize))` driven by `GUISizeHelper` (`GamePanel.java:587-590`).
+- 🟢 **Player panel is fixed and chunky.** `PANEL_WIDTH = 94`, `PANEL_HEIGHT = 270`
+  (`PlayerPanelExt.java:62-63`) — also the play-area tax noted in section A.
+- 🟡 **Hard-coded control borders bypass the theme.** Several status fields use
+  `new LineBorder(new Color(153,153,153), 1, true)` (`GamePanel.java:2389+`) instead of theme
+  colors; restyle when touching those panels.
+
+*Lever:* tackle these in a Phase 2/3 "density" sweep, area by area, each behind `Shell.isEnabled()`
+so stock sizing is preserved when the shell is off.
+
 ## B. Memory / performance
 
 - 🟡 **Card image cache.** `org/mage/plugins/card/images/ImageCache.java` and
