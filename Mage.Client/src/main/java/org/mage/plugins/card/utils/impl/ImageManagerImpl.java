@@ -115,6 +115,14 @@ public enum ImageManagerImpl implements ImageManager {
     }
 
     private static BufferedImage createThemeButtonImage(ImageManagerImpl.Key key) {
+        // [modern-shell] opt-in seam: use a modern vector icon when the shell provides one for this
+        // button; otherwise fall back to the original themed PNG. Default off. See SHELL.md.
+        if (mage.client.shell.Shell.isEnabled()) {
+            BufferedImage modern = mage.client.shell.ShellIcons.renderButton(key.resourceName, key.width, key.height);
+            if (modern != null) {
+                return modern;
+            }
+        }
         String resName = PreferencesDialog.getCurrentTheme().getButtonPath(key.resourceName);
         return getBufferedImageFromResource(resName, key.width, key.height);
     }
