@@ -2466,9 +2466,6 @@ public class ScryfallImageSupportTokens {
             put("MH3/Zombie", "https://api.scryfall.com/cards/tmh3/21/en?format=image");
             put("MH3/Zombie Army", "https://api.scryfall.com/cards/tmh3/22/en?format=image");
 
-            // MSC
-            put("MSC/Construct", "https://api.scryfall.com/cards/tmsc/14/en?format=image");
-
             // M3C
             put("M3C/Aetherborn", "https://api.scryfall.com/cards/tm3c/9/en?format=image");
             put("M3C/Ape", "https://api.scryfall.com/cards/tm3c/14/en?format=image");
@@ -3014,8 +3011,8 @@ public class ScryfallImageSupportTokens {
             put("MSC/Beast/2", "https://api.scryfall.com/cards/tsoc/27?format=image");
             put("MSC/Bird/1", "https://api.scryfall.com/cards/tsoc/5?format=image");
             put("MSC/Bird/2", "https://api.scryfall.com/cards/tsoc/21?format=image");
-            // put("MSC/Construct/1", "https://api.scryfall.com/cards/tsoc/14?format=image");
-            // put("MSC/Construct/2", "https://api.scryfall.com/cards/tsoc/30?format=image");
+            put("MSC/Construct/1", "https://api.scryfall.com/cards/tsoc/14?format=image");
+            put("MSC/Construct/2", "https://api.scryfall.com/cards/tsoc/30?format=image");
             // put("MSC/Council of Reeds/1", "https://api.scryfall.com/cards/tsoc/8?format=image");
             // put("MSC/Council of Reeds/2", "https://api.scryfall.com/cards/tsoc/24?format=image");
             put("MSC/Elephant/1", "https://api.scryfall.com/cards/tsoc/12?format=image");
