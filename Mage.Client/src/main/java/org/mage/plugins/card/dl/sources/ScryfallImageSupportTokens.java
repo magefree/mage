@@ -2973,6 +2973,35 @@ public class ScryfallImageSupportTokens {
             put("SOC/Worm", "https://api.scryfall.com/cards/tsoc/26?format=image");
             put("SOC/Zombie", "https://api.scryfall.com/cards/tsoc/12?format=image");
 
+            // MSH
+            put("MSH/Alien", "https://api.scryfall.com/cards/tmsh/11?format=image");
+            put("MSH/Clue", "https://api.scryfall.com/cards/tmsh/17?format=image");
+            put("MSH/Doombot", "https://api.scryfall.com/cards/tmsh/18?format=image");
+            put("MSH/Food", "https://api.scryfall.com/cards/tmsh/19?format=image");
+            put("MSH/Galactus", "https://api.scryfall.com/cards/tmsh/8?format=image");
+            put("MSH/Hero", "https://api.scryfall.com/cards/tmsh/2?format=image");
+            put("MSH/Insect", "https://api.scryfall.com/cards/tmsh/12?format=image");
+            put("MSH/Leviathan", "https://api.scryfall.com/cards/tmsh/5?format=image");
+            put("MSH/Merfolk/1", "https://api.scryfall.com/cards/tmsh/6?format=image");
+            put("MSH/Merfolk/2", "https://api.scryfall.com/cards/tmsh/24?format=image");
+            put("MSH/Moloid", "https://api.scryfall.com/cards/tmsh/13?format=image");
+            put("MSH/Redwing", "https://api.scryfall.com/cards/tmsh/7?format=image");
+            put("MSH/Robot Villain/1", "https://api.scryfall.com/cards/tmsh/20?format=image");
+            put("MSH/Robot Villain/2", "https://api.scryfall.com/cards/tmsh/26?format=image");
+            put("MSH/Soldier/1", "https://api.scryfall.com/cards/tmsh/3?format=image");
+            put("MSH/Soldier/2", "https://api.scryfall.com/cards/tmsh/4?format=image");
+            put("MSH/Soldier/3", "https://api.scryfall.com/cards/tmsh/23?format=image");
+            put("MSH/Squirrel", "https://api.scryfall.com/cards/tmsh/14?format=image");
+            put("MSH/Sturdy Shield", "https://api.scryfall.com/cards/tmsh/21?format=image");
+            put("MSH/The Tiger God", "https://api.scryfall.com/cards/tmsh/1?5format=image");
+            put("MSH/The Void", "https://api.scryfall.com/cards/tmsh/10?format=image");
+            put("MSH/Treasure/1", "https://api.scryfall.com/cards/tmsh/22?format=image");
+            put("MSH/Treasure/2", "https://api.scryfall.com/cards/tmsh/27?format=image");
+            put("MSH/Villain/1", "https://api.scryfall.com/cards/tmsh/9?format=image");
+            put("MSH/Villain/2", "https://api.scryfall.com/cards/tmsh/25?format=image");
+            put("MSH/Wall", "https://api.scryfall.com/cards/tmsh/1?format=image");
+            put("MSH/Zabu", "https://api.scryfall.com/cards/tmsh/16?format=image");
+
             // MSC
             put("MSC/Angel/1", "https://api.scryfall.com/cards/tsoc/4?format=image");
             put("MSC/Angel/2", "https://api.scryfall.com/cards/tsoc/20?format=image");
