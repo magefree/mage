@@ -130,6 +130,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Doctor Doom, King of Latveria", 6, Rarity.MYTHIC, mage.cards.d.DoctorDoomKingOfLatveria.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doctor Doom, King of Latveria", 880, Rarity.MYTHIC, mage.cards.d.DoctorDoomKingOfLatveria.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doom Blade", 576, Rarity.UNCOMMON, mage.cards.d.DoomBlade.class));
+        cards.add(new SetCardInfo("Doom's Servo-Guards", 535, Rarity.COMMON, mage.cards.d.DoomsServoGuards.class));
         cards.add(new SetCardInfo("Doomfall", 795, Rarity.UNCOMMON, mage.cards.d.Doomfall.class));
         cards.add(new SetCardInfo("Doomsday", 796, Rarity.RARE, mage.cards.d.Doomsday.class));
         cards.add(new SetCardInfo("Door of Destinies", 198, Rarity.RARE, mage.cards.d.DoorOfDestinies.class, NON_FULL_USE_VARIOUS));
