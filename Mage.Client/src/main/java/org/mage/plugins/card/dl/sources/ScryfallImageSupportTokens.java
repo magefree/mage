@@ -2973,6 +2973,41 @@ public class ScryfallImageSupportTokens {
             put("SOC/Worm", "https://api.scryfall.com/cards/tsoc/26?format=image");
             put("SOC/Zombie", "https://api.scryfall.com/cards/tsoc/12?format=image");
 
+            // MSC
+            put("MSC/Angel/1", "https://api.scryfall.com/cards/tsoc/4?format=image");
+            put("MSC/Angel/2", "https://api.scryfall.com/cards/tsoc/20?format=image");
+            put("MSC/Ape Villain/1", "https://api.scryfall.com/cards/tsoc/10?format=image");
+            put("MSC/Ape Villain/2", "https://api.scryfall.com/cards/tsoc/26?format=image");
+            put("MSC/Beast/1", "https://api.scryfall.com/cards/tsoc/11?format=image");
+            put("MSC/Beast/2", "https://api.scryfall.com/cards/tsoc/27?format=image");
+            put("MSC/Bird/1", "https://api.scryfall.com/cards/tsoc/5?format=image");
+            put("MSC/Bird/2", "https://api.scryfall.com/cards/tsoc/21?format=image");
+            // put("MSC/Construct/1", "https://api.scryfall.com/cards/tsoc/14?format=image");
+            // put("MSC/Construct/2", "https://api.scryfall.com/cards/tsoc/30?format=image");
+            // put("MSC/Council of Reeds/1", "https://api.scryfall.com/cards/tsoc/8?format=image");
+            // put("MSC/Council of Reeds/2", "https://api.scryfall.com/cards/tsoc/24?format=image");
+            put("MSC/Elephant/1", "https://api.scryfall.com/cards/tsoc/12?format=image");
+            put("MSC/Elephant/2", "https://api.scryfall.com/cards/tsoc/28?format=image");
+            put("MSC/Goat/1", "https://api.scryfall.com/cards/tsoc/6?format=image");
+            put("MSC/Goat/2", "https://api.scryfall.com/cards/tsoc/22?format=image");
+            put("MSC/Ox/1", "https://api.scryfall.com/cards/tsoc/7?format=image");
+            put("MSC/Ox/2", "https://api.scryfall.com/cards/tsoc/23?format=image");
+            put("MSC/Rhino/1", "https://api.scryfall.com/cards/tsoc/13?format=image");
+            put("MSC/Rhino/2", "https://api.scryfall.com/cards/tsoc/29?format=image");
+            put("MSC/Robot Hero", "https://api.scryfall.com/cards/tsoc/32?format=image");
+            put("MSC/Rogue/1", "https://api.scryfall.com/cards/tsoc/9?format=image");
+            put("MSC/Rogue/2", "https://api.scryfall.com/cards/tsoc/25?format=image");
+            put("MSC/Shapeshifter/1", "https://api.scryfall.com/cards/tsoc/2?format=image");
+            put("MSC/Shapeshifter/2", "https://api.scryfall.com/cards/tsoc/18?format=image");
+            put("MSC/Vibranium/1", "https://api.scryfall.com/cards/tsoc/15?format=image");
+            put("MSC/Vibranium/2", "https://api.scryfall.com/cards/tsoc/31?format=image");
+            put("MSC/Wall/1", "https://api.scryfall.com/cards/tsoc/3?format=image");
+            put("MSC/Wall/2", "https://api.scryfall.com/cards/tsoc/19?format=image");
+
+            // HOB
+            put("HOB/Dwarf", "https://api.scryfall.com/cards/thob/6?format=image");
+            put("HOB/Treasure", "https://api.scryfall.com/cards/thob/12?format=image");
+
             // UGL
             put("UGL/Goblin", "https://api.scryfall.com/cards/tugl/92?format=image");
             put("UGL/Pegasus", "https://api.scryfall.com/cards/tugl/89?format=image");
