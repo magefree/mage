@@ -5,9 +5,12 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Arc2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Path2D;
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -37,6 +40,7 @@ public final class ShellIcons {
     }
 
     private static final Map<String, Glyph> GLYPHS = new HashMap<>();
+    private static final Map<String, Glyph> PHASE_GLYPHS = new HashMap<>();
 
     static {
         GLYPHS.put("concede", ShellIcons::concede);
@@ -50,6 +54,19 @@ public final class ShellIcons {
         GLYPHS.put("skip_to_main", ShellIcons::skipToMain);
         GLYPHS.put("skip_stack", ShellIcons::skipStack);
         GLYPHS.put("skip_to_previous_end", ShellIcons::skipToPreviousEnd);
+
+        PHASE_GLYPHS.put("untap", ShellIcons::phaseUntap);
+        PHASE_GLYPHS.put("upkeep", ShellIcons::phaseUpkeep);
+        PHASE_GLYPHS.put("draw", ShellIcons::phaseDraw);
+        PHASE_GLYPHS.put("main1", ShellIcons::phaseMain1);
+        PHASE_GLYPHS.put("combat_start", ShellIcons::phaseCombatStart);
+        PHASE_GLYPHS.put("combat_attack", ShellIcons::phaseCombatAttack);
+        PHASE_GLYPHS.put("combat_block", ShellIcons::phaseCombatBlock);
+        PHASE_GLYPHS.put("combat_damage", ShellIcons::phaseCombatDamage);
+        PHASE_GLYPHS.put("combat_end", ShellIcons::phaseCombatEnd);
+        PHASE_GLYPHS.put("main2", ShellIcons::phaseMain2);
+        PHASE_GLYPHS.put("cleanup", ShellIcons::phaseCleanup);
+        PHASE_GLYPHS.put("next_turn", ShellIcons::phaseNextTurn);
     }
 
     private ShellIcons() {
@@ -80,6 +97,34 @@ public final class ShellIcons {
             g.scale(box, box);
             g.setStroke(new BasicStroke(0.11f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 
+            glyph.draw(g, foreground(), accent());
+        } finally {
+            g.dispose();
+        }
+        return img;
+    }
+
+    /**
+     * @return a modern square phase icon for the phase (e.g. {@code "Combat_Attack"}), or
+     * {@code null} if no modern glyph is defined (caller should fall back to the original image).
+     */
+    public static BufferedImage renderPhase(String phaseName, int size) {
+        Glyph glyph = phaseName == null ? null
+                : PHASE_GLYPHS.get(phaseName.toLowerCase(Locale.ENGLISH).trim());
+        if (glyph == null) {
+            return null;
+        }
+        int s = Math.max(1, size);
+        BufferedImage img = new BufferedImage(s, s, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = img.createGraphics();
+        try {
+            g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+            double box = s * 0.66;
+            double o = (s - box) / 2.0;
+            g.translate(o, o);
+            g.scale(box, box);
+            g.setStroke(new BasicStroke(0.10f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
             glyph.draw(g, foreground(), accent());
         } finally {
             g.dispose();
@@ -227,5 +272,152 @@ public final class ShellIcons {
         g.setColor(accent);
         endBar(g, 0.72);                                       // two close bars = step just before
         endBar(g, 0.82);
+    }
+
+    // --- phase glyphs ---------------------------------------------------------------------------
+
+    private static void phaseUntap(Graphics2D g, Color fg, Color accent) {
+        g.setColor(fg);
+        Arc2D.Double arc = new Arc2D.Double(0.20, 0.20, 0.60, 0.60, 75, 290, Arc2D.OPEN); // rotation
+        g.draw(arc);
+        arrowAtArcEnd(g, arc);
+    }
+
+    private static void phaseUpkeep(Graphics2D g, Color fg, Color accent) {
+        g.setColor(fg);                                        // hourglass = maintenance/time
+        line(g, 0.26, 0.14, 0.74, 0.14);
+        line(g, 0.26, 0.86, 0.74, 0.86);
+        Path2D.Double top = new Path2D.Double();
+        top.moveTo(0.28, 0.16); top.lineTo(0.72, 0.16); top.lineTo(0.5, 0.5); top.closePath();
+        Path2D.Double bot = new Path2D.Double();
+        bot.moveTo(0.28, 0.84); bot.lineTo(0.72, 0.84); bot.lineTo(0.5, 0.5); bot.closePath();
+        g.draw(top); g.draw(bot);
+    }
+
+    private static void phaseDraw(Graphics2D g, Color fg, Color accent) {
+        g.setColor(fg);                                        // card + up arrow = draw a card
+        g.draw(new Rectangle2D.Double(0.30, 0.34, 0.40, 0.52));
+        g.setColor(accent);
+        line(g, 0.50, 0.42, 0.50, 0.12);
+        line(g, 0.50, 0.12, 0.40, 0.24);
+        line(g, 0.50, 0.12, 0.60, 0.24);
+    }
+
+    private static void phaseMain1(Graphics2D g, Color fg, Color accent) {
+        romanBars(g, fg, accent, 1);                           // main phase I
+    }
+
+    private static void phaseMain2(Graphics2D g, Color fg, Color accent) {
+        romanBars(g, fg, accent, 2);                           // main phase II
+    }
+
+    private static void phaseCombatStart(Graphics2D g, Color fg, Color accent) {
+        g.setColor(fg);
+        sword(g);                                              // sword up = combat begins
+    }
+
+    private static void phaseCombatAttack(Graphics2D g, Color fg, Color accent) {
+        g.setColor(fg);                                        // crossed swords = attackers
+        AffineTransform save = g.getTransform();
+        g.rotate(Math.toRadians(28), 0.5, 0.5); sword(g); g.setTransform(save);
+        g.rotate(Math.toRadians(-28), 0.5, 0.5); sword(g); g.setTransform(save);
+    }
+
+    private static void phaseCombatBlock(Graphics2D g, Color fg, Color accent) {
+        g.setColor(fg);
+        shield(g);                                             // shield = blockers
+    }
+
+    private static void phaseCombatDamage(Graphics2D g, Color fg, Color accent) {
+        g.setColor(accent);                                    // burst = damage
+        for (int i = 0; i < 8; i++) {
+            double a = Math.toRadians(i * 45);
+            double r0 = (i % 2 == 0) ? 0.14 : 0.10;
+            double r1 = (i % 2 == 0) ? 0.40 : 0.30;
+            line(g, 0.5 + r0 * Math.cos(a), 0.5 + r0 * Math.sin(a),
+                    0.5 + r1 * Math.cos(a), 0.5 + r1 * Math.sin(a));
+        }
+    }
+
+    private static void phaseCombatEnd(Graphics2D g, Color fg, Color accent) {
+        g.setColor(fg);                                        // sword down = combat over
+        AffineTransform save = g.getTransform();
+        g.rotate(Math.toRadians(180), 0.5, 0.5);
+        sword(g);
+        g.setTransform(save);
+    }
+
+    private static void phaseCleanup(Graphics2D g, Color fg, Color accent) {
+        g.setColor(fg);                                        // broom = cleanup
+        line(g, 0.72, 0.16, 0.42, 0.62);                       // handle
+        Path2D.Double head = new Path2D.Double();
+        head.moveTo(0.30, 0.58); head.lineTo(0.54, 0.66);
+        head.lineTo(0.46, 0.86); head.lineTo(0.22, 0.78); head.closePath();
+        g.draw(head);
+        g.setColor(accent);                                    // bristles
+        line(g, 0.27, 0.74, 0.30, 0.86);
+        line(g, 0.34, 0.76, 0.37, 0.88);
+        line(g, 0.41, 0.78, 0.44, 0.90);
+    }
+
+    private static void phaseNextTurn(Graphics2D g, Color fg, Color accent) {
+        g.setColor(fg);                                        // chevrons to a bar = advance turn
+        chevronRight(g, 0.20);
+        chevronRight(g, 0.42);
+        g.setColor(accent);
+        line(g, 0.78, 0.18, 0.78, 0.82);
+    }
+
+    // --- shape helpers --------------------------------------------------------------------------
+
+    /** Vertical sword with the tip pointing up, centred on x=0.5. */
+    private static void sword(Graphics2D g) {
+        line(g, 0.5, 0.10, 0.5, 0.70);   // blade
+        line(g, 0.36, 0.62, 0.64, 0.62); // crossguard
+        line(g, 0.5, 0.70, 0.5, 0.84);   // grip
+    }
+
+    private static void shield(Graphics2D g) {
+        Path2D.Double s = new Path2D.Double();
+        s.moveTo(0.5, 0.12);
+        s.lineTo(0.82, 0.24);
+        s.lineTo(0.82, 0.52);
+        s.curveTo(0.82, 0.72, 0.66, 0.82, 0.5, 0.88);
+        s.curveTo(0.34, 0.82, 0.18, 0.72, 0.18, 0.52);
+        s.lineTo(0.18, 0.24);
+        s.closePath();
+        g.draw(s);
+    }
+
+    private static void chevronRight(Graphics2D g, double x) {
+        line(g, x, 0.24, x + 0.20, 0.5);
+        line(g, x + 0.20, 0.5, x, 0.76);
+    }
+
+    /** Roman-numeral phase markers: "I" or "II" with small serifs. */
+    private static void romanBars(Graphics2D g, Color fg, Color accent, int count) {
+        g.setColor(fg);
+        double[] xs = count == 1 ? new double[]{0.5} : new double[]{0.38, 0.62};
+        for (double x : xs) {
+            line(g, x, 0.20, x, 0.80);          // stem
+            line(g, x - 0.10, 0.20, x + 0.10, 0.20); // top serif
+            line(g, x - 0.10, 0.80, x + 0.10, 0.80); // bottom serif
+        }
+    }
+
+    /** Draw a small arrowhead at the terminal end of an arc (for the rotation glyph). */
+    private static void arrowAtArcEnd(Graphics2D g, Arc2D arc) {
+        Point2D e = arc.getEndPoint();
+        double rx = e.getX() - 0.5, ry = e.getY() - 0.5;       // radial direction
+        double len = Math.hypot(rx, ry);
+        if (len == 0) {
+            return;
+        }
+        double tx = -ry / len, ty = rx / len;                  // tangent
+        double s = 0.13;
+        double bx = e.getX() - tx * s, by = e.getY() - ty * s; // back along tangent
+        double nx = rx / len, ny = ry / len;                   // outward normal
+        g.draw(new Line2D.Double(e.getX(), e.getY(), bx + nx * s * 0.7, by + ny * s * 0.7));
+        g.draw(new Line2D.Double(e.getX(), e.getY(), bx - nx * s * 0.7, by - ny * s * 0.7));
     }
 }

@@ -128,6 +128,13 @@ public enum ImageManagerImpl implements ImageManager {
     }
 
     private static Image createPhaseThemeButtonImage(ImageManagerImpl.Key key) {
+        // [modern-shell] opt-in seam: modern vector phase icon when available, else original PNG.
+        if (mage.client.shell.Shell.isEnabled()) {
+            BufferedImage modern = mage.client.shell.ShellIcons.renderPhase(key.resourceName, key.height);
+            if (modern != null) {
+                return modern;
+            }
+        }
         String resName = PreferencesDialog.getCurrentTheme().getPhasePath("phase_" + key.resourceName.toLowerCase(Locale.ENGLISH) + ".png");
         return getImageFromResource(resName, key.width, key.height);
     }
