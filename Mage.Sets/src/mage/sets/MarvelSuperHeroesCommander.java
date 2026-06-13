@@ -55,6 +55,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Blasphemous Act", 163, Rarity.RARE, mage.cards.b.BlasphemousAct.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blasphemous Act", 358, Rarity.RARE, mage.cards.b.BlasphemousAct.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blue Marvel, Adam Brashear", 530, Rarity.UNCOMMON, mage.cards.b.BlueMarvelAdamBrashear.class));
+        cards.add(new SetCardInfo("Blur of Heroism", 585, Rarity.UNCOMMON, mage.cards.b.BlurOfHeroism.class));
         cards.add(new SetCardInfo("Bountiful Promenade", 226, Rarity.RARE, mage.cards.b.BountifulPromenade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bountiful Promenade", 461, Rarity.RARE, mage.cards.b.BountifulPromenade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bovine Intervention", 123, Rarity.UNCOMMON, mage.cards.b.BovineIntervention.class));
