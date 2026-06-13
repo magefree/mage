@@ -103,6 +103,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Coveted Jewel", 196, Rarity.RARE, mage.cards.c.CovetedJewel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Coveted Jewel", 429, Rarity.RARE, mage.cards.c.CovetedJewel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Criminal Enterprise", 652, Rarity.UNCOMMON, mage.cards.c.CriminalEnterprise.class));
+        cards.add(new SetCardInfo("Crimson Cowl, Master of Evil", 653, Rarity.RARE, mage.cards.c.CrimsonCowlMasterOfEvil.class));
         cards.add(new SetCardInfo("Crimson Operative", 848, Rarity.COMMON, mage.cards.c.CrimsonOperative.class));
         cards.add(new SetCardInfo("Crumbling Necropolis", 237, Rarity.UNCOMMON, mage.cards.c.CrumblingNecropolis.class));
         cards.add(new SetCardInfo("Cultivate", 172, Rarity.COMMON, mage.cards.c.Cultivate.class));
