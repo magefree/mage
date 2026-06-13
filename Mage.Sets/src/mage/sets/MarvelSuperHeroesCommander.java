@@ -142,6 +142,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Evolving Wilds", 240, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exotic Orchard", 241, Rarity.RARE, mage.cards.e.ExoticOrchard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Exotic Orchard", 470, Rarity.RARE, mage.cards.e.ExoticOrchard.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Experimental Armor", 543, Rarity.UNCOMMON, mage.cards.e.ExperimentalArmor.class));
         cards.add(new SetCardInfo("Expressive Iteration", 183, Rarity.UNCOMMON, mage.cards.e.ExpressiveIteration.class));
         cards.add(new SetCardInfo("Extremis Elite", 763, Rarity.COMMON, mage.cards.e.ExtremisElite.class));
         cards.add(new SetCardInfo("Fabled Passage", 242, Rarity.RARE, mage.cards.f.FabledPassage.class, NON_FULL_USE_VARIOUS));
