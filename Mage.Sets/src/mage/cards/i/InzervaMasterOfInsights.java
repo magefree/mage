@@ -15,6 +15,7 @@ import mage.players.Player;
 import mage.target.TargetCard;
 
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author PurpleCrowbar
@@ -68,33 +69,34 @@ class InzervaMasterOfInsightsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player opponent = game.getPlayer(playerId);
-                if (playerId.equals(controller.getId()) || opponent == null) {
-                    continue;
-                }
-                Cards cards = new CardsImpl();
-                int count = Math.min(2, opponent.getLibrary().size());
-                if (count == 0) {
-                    continue;
-                }
-                for (int i = 0; i < count; i++) {
-                    Card card = opponent.getLibrary().removeFromTop(game);
-                    cards.add(card);
-                }
-                TargetCard targets = new TargetCard(0, cards.size(), Zone.LIBRARY, new FilterCard("cards to PUT on the BOTTOM of " + opponent.getName() + "'s library"));
-                controller.chooseTarget(Outcome.Neutral, cards, targets, source, game);
-                if (!controller.canRespond() || !opponent.canRespond()) {
-                    continue;
-                }
-                controller.putCardsOnBottomOfLibrary(new CardsImpl(targets.getTargets()), game, source, true);
-                cards.removeIf(targets.getTargets()::contains);
+        if (controller == null) {
+            return false;
+        }
+        
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player opponent = game.getPlayer(playerId);
+            if (playerId.equals(controller.getId()) || opponent == null) {
+                continue;
+            }
+            Cards cards = new CardsImpl(opponent.getLibrary().getTopCards(game, 2));
+            if (cards.isEmpty()) {
+                continue;
+            }
 
+            // put to bottom
+            TargetCard targeBottom = new TargetCard(0, cards.size(), Zone.LIBRARY, new FilterCard("cards to PUT on the BOTTOM of " + opponent.getName() + "'s library"));
+            targeBottom.setRequired(false);
+            controller.choose(Outcome.Detriment, cards, targeBottom, source, game);
+            Cards cardsToBottom = new CardsImpl(targeBottom.getTargets().stream()
+                .filter(cards::contains)
+                .collect(Collectors.toList()
+            ));
+            if (controller.putCardsOnBottomOfLibrary(cardsToBottom, game, source, true)) {
+                // put to top
+                cards.removeAll(cardsToBottom);
                 controller.putCardsOnTopOfLibrary(cards, game, source, true);
             }
-            return true;
         }
-        return false;
+        return true;
     }
 }

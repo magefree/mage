@@ -1,6 +1,8 @@
 
 package mage.abilities.effects.keyword;
 
+import java.util.stream.Collectors;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -48,31 +50,31 @@ public class FatesealEffect extends OneShotEffect {
                 if (opponent == null) {
                     return false;
                 }
-                Cards cards = new CardsImpl();
+
+                // 701.29a 
+                // To “fateseal N” means to look at the top N cards of an opponent’s library, 
+                // then put any number of them on the bottom of that library in any order 
+                // and the rest on top of that library in any order.
+
                 int count = Math.min(fatesealNumber, opponent.getLibrary().size());
                 if (count == 0) {
                     return true;
                 }
-                for (int i = 0; i < count; i++) {
-                    Card card = opponent.getLibrary().removeFromTop(game);
-                    cards.add(card);
+                Cards cards = new CardsImpl(opponent.getLibrary().getTopCards(game, count));
+
+                // put to bottom
+                TargetCard targeBottom = new TargetCard(0, cards.size(), Zone.LIBRARY, filter1);
+                targeBottom.setRequired(false);
+                controller.choose(Outcome.Detriment, cards, targeBottom, source, game);
+                Cards cardsToBottom = new CardsImpl(targeBottom.getTargets().stream()
+                    .filter(cards::contains)
+                    .collect(Collectors.toList()
+                ));
+                if (controller.putCardsOnBottomOfLibrary(cardsToBottom, game, source, true)) {
+                    // put to top
+                    cards.removeAll(cardsToBottom);
+                    controller.putCardsOnTopOfLibrary(cards, game, source, true);
                 }
-                TargetCard target1 = new TargetCard(Zone.LIBRARY, filter1);
-                target1.setRequired(false);
-                // move cards to the bottom of the library
-                while (!cards.isEmpty() && controller.choose(Outcome.Detriment, cards, target1, source, game)) {
-                    if (!controller.canRespond() || !opponent.canRespond()) {
-                        return false;
-                    }
-                    Card card = cards.get(target1.getFirstTarget(), game);
-                    if (card != null) {
-                        cards.remove(card);
-                        controller.moveCardToLibraryWithInfo(card, source, game, Zone.LIBRARY, false, false);
-                    }
-                    target1.clearChosen();
-                }
-                // move cards to the top of the library
-                controller.putCardsOnTopOfLibrary(cards, game, source, true);
                 game.fireEvent(new GameEvent(GameEvent.EventType.FATESEALED, opponent.getId(), source, source.getControllerId()));
                 return true;
             }
