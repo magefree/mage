@@ -14,8 +14,10 @@ at a tiny, documented set of "seams."
   - Collapsible in-game chat — **starts closed**, reclaims play-area width, and **pulses** an unread
     badge on new player messages.
   - Global density pass for standard Swing controls (tighter button/menu/combo/list padding) — the
-    start of modernizing XMage's old low-res-era sizing. Code-level oversized controls are tracked
-    in `SHELL_OBSERVATIONS.md` (section C).
+    start of modernizing XMage's old low-res-era sizing.
+  - In-game play-control density (`ShellDensity`): trims phase icons, skip/command buttons, and the
+    player panel centrally via `GUISizeHelper`. Remaining code-level items tracked in
+    `SHELL_OBSERVATIONS.md` (section C).
 - **Phase 3 — Structural / interaction** ⏳ planned (see `SHELL_OBSERVATIONS.md` for play-area leads).
 
 See `SHELL_OBSERVATIONS.md` for a passive catalog of memory and play-area/4-player observations
@@ -65,6 +67,7 @@ to find any seam that didn't apply, and re-insert it from this table.
 | 1 | `Mage.Client/pom.xml` | Adds the `com.formdev:flatlaf` dependency at the top of `<dependencies>`. | Pure addition; dependency lists rarely conflict on the same line. |
 | 2 | `Mage.Client/src/main/java/mage/client/util/gui/GuiDisplayUtil.java` | In `refreshThemeSettings()`, wraps the single `UIManager.setLookAndFeel("...Nimbus...")` call in `if (Shell.isEnabled()) { Shell.installLookAndFeel(); } else { ...existing Nimbus... }`. | One spot, inside the existing `try`/`catch`; the `else` keeps the original call verbatim. |
 | 3 | `Mage.Client/src/main/java/mage/client/game/GamePanel.java` | After `splitBattlefieldAndChats` is assembled, `if (Shell.isEnabled()) { ShellChat.install(splitBattlefieldAndChats, userChatPanel); }`. | One guarded line right after the split is built; `ShellChat` wraps the chat side, touching no upstream chat code. |
+| 4 | `Mage.Client/src/main/java/mage/client/util/GUISizeHelper.java` | At the end of `calculateGUISizes()`, `if (Shell.isEnabled()) { ShellDensity.applyInGameControls(); }`. | One guarded line at the method's end; only scales already-public size fields, idempotent across recomputes. |
 
 > Keep the seam count low. Prefer subclass-and-swap, `UIManager` overrides, and FlatLaf
 > `.properties` over editing more upstream files.
@@ -78,7 +81,9 @@ Mage.Client/
   src/main/java/mage/client/
     shell/Shell.java                                  <- flag + LAF installer (new)
     shell/ShellChat.java                              <- collapsible chat + unread badge (new)
+    shell/ShellDensity.java                           <- in-game control density trim (new)
     util/gui/GuiDisplayUtil.java                      <- seam #2 (LAF install)
+    util/GUISizeHelper.java                           <- seam #4 (in-game density)
     game/GamePanel.java                               <- seam #3 (collapsible chat install)
   src/main/resources/mage/client/shell/
     FlatLaf.properties                                <- shared theme tuning (new)

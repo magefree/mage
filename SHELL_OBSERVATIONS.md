@@ -34,13 +34,15 @@ Legend: 🟢 directly observed · 🟡 candidate / needs verification
 The shared FlatLaf density tweaks tighten *standard* Swing controls, but these are sized in Java
 (fixed pixels / `GUISizeHelper`) and need per-area shell work to modernize:
 
-- 🟢 **In-game command buttons are double-height.** `Dimension(2 * gameCommandButtonHeight,
-  gameCommandButtonHeight)` and similar (`GamePanel.java:565`). Big boxy footprint from the
-  low-res era.
-- 🟢 **Phase buttons are fixed square icons.** `phaseButton.setPreferredSize(new Dimension(buttonSize,
-  buttonSize))` driven by `GUISizeHelper` (`GamePanel.java:587-590`).
-- 🟢 **Player panel is fixed and chunky.** `PANEL_WIDTH = 94`, `PANEL_HEIGHT = 270`
-  (`PlayerPanelExt.java:62-63`) — also the play-area tax noted in section A.
+- ✅ **In-game command buttons are double-height.** `Dimension(2 * gameCommandButtonHeight,
+  gameCommandButtonHeight)` and similar (`GamePanel.java:565`). *Addressed:* `ShellDensity` trims
+  `gameCommandButtonHeight` (×0.80) centrally via the `GUISizeHelper` seam.
+- ✅ **Phase buttons are fixed square icons.** `phaseButton.setPreferredSize(new Dimension(buttonSize,
+  buttonSize))` driven by `GUISizeHelper` (`GamePanel.java:587-590`). *Addressed:* `ShellDensity`
+  trims `gamePhaseButtonSize` (×0.80).
+- ✅ **Player panel is fixed and chunky.** `PANEL_WIDTH = 94`, `PANEL_HEIGHT = 270`
+  (`PlayerPanelExt.java:62-63`) — also the play-area tax noted in section A. *Addressed:*
+  `ShellDensity` trims `playerPanelGuiScale` (×0.88), which scales the whole panel down.
 - 🟡 **Hard-coded control borders bypass the theme.** Several status fields use
   `new LineBorder(new Color(153,153,153), 1, true)` (`GamePanel.java:2389+`) instead of theme
   colors; restyle when touching those panels.

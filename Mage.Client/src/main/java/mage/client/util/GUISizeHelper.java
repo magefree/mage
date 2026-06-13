@@ -191,6 +191,13 @@ public final class GUISizeHelper {
             // image render
             editorCardVertOffsetInStack = Math.round(1.3f * GUISizeHelper.getImageRendererTitleFontSize(editorCardDimension.height));
         }
+
+        // [modern-shell] opt-in seam: trim old low-res-era in-game control sizes (phase/command
+        // buttons, player panel). Default off; idempotent since base sizes are recomputed above.
+        // See SHELL.md.
+        if (mage.client.shell.Shell.isEnabled()) {
+            mage.client.shell.ShellDensity.applyInGameControls();
+        }
     }
 
     public static int getImageRendererMainFontSize(int cardHeight) {
