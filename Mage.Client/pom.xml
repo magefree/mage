@@ -14,6 +14,12 @@
     <name>Mage Client</name>
 
     <dependencies>
+        <!-- [modern-shell] FlatLaf: modern Swing look-and-feel for the opt-in UI shell (mage.client.shell). See SHELL.md. -->
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.4.1</version>
+        </dependency>
         <dependency>
             <groupId>org.mage</groupId>
             <artifactId>mage</artifactId>

@@ -478,7 +478,13 @@ public final class GuiDisplayUtil {
 
         // enable nimbus
         try {
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+            // [modern-shell] opt-in seam: swap Nimbus for the FlatLaf-based shell when enabled
+            // (default off; set XMAGE_SHELL=1 or -Dxmage.shell=1). See SHELL.md.
+            if (mage.client.shell.Shell.isEnabled()) {
+                mage.client.shell.Shell.installLookAndFeel();
+            } else {
+                UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+            }
         } catch (ClassNotFoundException
                  | InstantiationException
                  | IllegalAccessException
