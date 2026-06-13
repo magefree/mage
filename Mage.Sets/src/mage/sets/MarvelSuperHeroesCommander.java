@@ -363,6 +363,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Shock", 809, Rarity.COMMON, mage.cards.s.Shock.class));
         cards.add(new SetCardInfo("Skullclamp", 210, Rarity.RARE, mage.cards.s.Skullclamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skullclamp", 451, Rarity.RARE, mage.cards.s.Skullclamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Smashing Spree", 555, Rarity.COMMON, mage.cards.s.SmashingSpree.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Smashing Spree", 856, Rarity.COMMON, mage.cards.s.SmashingSpree.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Smoldering Marsh", 266, Rarity.RARE, mage.cards.s.SmolderingMarsh.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Smoldering Marsh", 493, Rarity.RARE, mage.cards.s.SmolderingMarsh.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sodden Verdure", 267, Rarity.RARE, mage.cards.s.SoddenVerdure.class, NON_FULL_USE_VARIOUS));
