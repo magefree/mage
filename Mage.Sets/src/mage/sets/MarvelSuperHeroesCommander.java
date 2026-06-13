@@ -77,6 +77,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Chromatic Lantern", 428, Rarity.RARE, mage.cards.c.ChromaticLantern.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cinder Glade", 230, Rarity.RARE, mage.cards.c.CinderGlade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cinder Glade", 465, Rarity.RARE, mage.cards.c.CinderGlade.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Citizen V, Helmut Zemo", 650, Rarity.RARE, mage.cards.c.CitizenVHelmutZemo.class));
         cards.add(new SetCardInfo("City Pigeon", 769, Rarity.COMMON, mage.cards.c.CityPigeon.class));
         cards.add(new SetCardInfo("Cleansing Nova", 124, Rarity.RARE, mage.cards.c.CleansingNova.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cleansing Nova", 297, Rarity.RARE, mage.cards.c.CleansingNova.class, NON_FULL_USE_VARIOUS));
