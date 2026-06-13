@@ -1,7 +1,6 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -62,7 +61,7 @@ enum TheOozeValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return Optional
-                .ofNullable((Permanent) effect.getValue("creatureDied"))
+                .ofNullable((Permanent) effect.getValue("permanentLeftBattlefield"))
                 .map(permanent -> permanent.getCounters(game).getCount(CounterType.P1P1))
                 .orElse(0);
     }

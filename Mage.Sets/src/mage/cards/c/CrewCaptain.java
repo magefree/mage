@@ -32,7 +32,7 @@ public final class CrewCaptain extends CardImpl {
 
         // Crew Captain has indestructible as long as it entered the battlefield this turn.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(IndestructibleAbility.getInstance()), SourceEnteredThisTurnCondition.DID,
+                new GainAbilitySourceEffect(IndestructibleAbility.getInstance()), SourceEnteredThisTurnCondition.TRUE,
                 "{this} has indestructible as long as it entered the battlefield this turn"
         )));
     }

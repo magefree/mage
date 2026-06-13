@@ -62,6 +62,9 @@ public enum PutCards {
     }
 
     public boolean moveCard(Player player, Card card, Ability source, Game game, String description) {
+        if (card == null) {
+            throw new IllegalArgumentException("Wrong code usage: card can't be null");
+        }
         switch (this) {
             case TOP_OR_BOTTOM:
                 if (player.chooseUse(Outcome.Neutral,
