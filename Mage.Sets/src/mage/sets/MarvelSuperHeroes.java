@@ -99,6 +99,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Decoy Ploy", 94, Rarity.COMMON, mage.cards.d.DecoyPloy.class));
         cards.add(new SetCardInfo("Dependable Quinjet", 246, Rarity.COMMON, mage.cards.d.DependableQuinjet.class));
         cards.add(new SetCardInfo("Depower", 50, Rarity.COMMON, mage.cards.d.Depower.class));
+        cards.add(new SetCardInfo("Doc Samson, Super Psychiatrist", 164, Rarity.UNCOMMON, mage.cards.d.DocSamsonSuperPsychiatrist.class));
         cards.add(new SetCardInfo("Doctor Doom", 336, Rarity.MYTHIC, mage.cards.d.DoctorDoom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doctor Doom", 365, Rarity.MYTHIC, mage.cards.d.DoctorDoom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doctor Doom", 394, Rarity.MYTHIC, mage.cards.d.DoctorDoom.class, NON_FULL_USE_VARIOUS));
