@@ -428,6 +428,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Tippy-Toe, Terrific Partner", 734, Rarity.UNCOMMON, mage.cards.t.TippyToeTerrificPartner.class));
         cards.add(new SetCardInfo("Titan of Littjara", 280, Rarity.RARE, mage.cards.t.TitanOfLittjara.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Titan of Littjara", 335, Rarity.RARE, mage.cards.t.TitanOfLittjara.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Titania, Proud Pummeler", 374, Rarity.RARE, mage.cards.t.TitaniaProudPummeler.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Titania, Proud Pummeler", 62, Rarity.RARE, mage.cards.t.TitaniaProudPummeler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Titanium Man", 667, Rarity.UNCOMMON, mage.cards.t.TitaniumMan.class));
         cards.add(new SetCardInfo("Tombstone, Career Criminal", 160, Rarity.UNCOMMON, mage.cards.t.TombstoneCareerCriminal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tombstone, Career Criminal", 577, Rarity.UNCOMMON, mage.cards.t.TombstoneCareerCriminal.class, NON_FULL_USE_VARIOUS));
