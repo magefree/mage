@@ -99,6 +99,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Conduit of Worlds", 171, Rarity.RARE, mage.cards.c.ConduitOfWorlds.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Conduit of Worlds", 378, Rarity.RARE, mage.cards.c.ConduitOfWorlds.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Containment Construct", 284, Rarity.UNCOMMON, mage.cards.c.ContainmentConstruct.class));
+        cards.add(new SetCardInfo("Contract Hero", 683, Rarity.COMMON, mage.cards.c.ContractHero.class));
         cards.add(new SetCardInfo("Costume Closet", 770, Rarity.UNCOMMON, mage.cards.c.CostumeCloset.class));
         cards.add(new SetCardInfo("Coveted Jewel", 196, Rarity.RARE, mage.cards.c.CovetedJewel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Coveted Jewel", 429, Rarity.RARE, mage.cards.c.CovetedJewel.class, NON_FULL_USE_VARIOUS));
