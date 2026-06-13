@@ -405,6 +405,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Taunt from the Rampart", 188, Rarity.RARE, mage.cards.t.TauntFromTheRampart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Taunt from the Rampart", 420, Rarity.RARE, mage.cards.t.TauntFromTheRampart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Taxi Driver", 811, Rarity.COMMON, mage.cards.t.TaxiDriver.class));
+        cards.add(new SetCardInfo("Team Transmitter", 573, Rarity.UNCOMMON, mage.cards.t.TeamTransmitter.class));
         cards.add(new SetCardInfo("Terminate", 189, Rarity.UNCOMMON, mage.cards.t.Terminate.class));
         cards.add(new SetCardInfo("Terramorph", 180, Rarity.UNCOMMON, mage.cards.t.Terramorph.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 273, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class, NON_FULL_USE_VARIOUS));
