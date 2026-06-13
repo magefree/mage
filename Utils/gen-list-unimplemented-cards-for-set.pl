@@ -116,13 +116,13 @@ foreach my $card (sort cardSort @setCards) {
     my $currentFileName = "../Mage.Sets/src/mage/cards/" . lc(substr($className, 0, 1)) . "/" . $className . ".java";
     my $cardNameForUrl = $cardName;
     $cardNameForUrl =~ s/ //g;
-    $cardNameForUrl =~ s/\&/%26/g; # URL encode ampersands
-    my $cardEntry = "- [ ] In progress -- [$cardName](https://scryfall.com/search?q=!\"$cardNameForUrl\"&nbsp;e:$setAbbr)";
+    $cardNameForUrl =~ s/[^a-zA-Z0-9]//g;
+    my $cardEntry = "- [ ] In progress -- [$cardName](https://scryfall.com/search?q=!$cardNameForUrl%20e:$setAbbr)";
 
     if(-e $currentFileName) {
         # Card is implemented
         $cardNames{$cardName} = 1;
-        my $implementedEntry = "- [x] Done -- [$cardName](https://scryfall.com/search?q=!\"$cardNameForUrl\"&nbsp;e:$setAbbr)";
+        my $implementedEntry = "- [$cardName](https://scryfall.com/search?q=!$cardNameForUrl%20e:$setAbbr)";
         push(@implementedCards, $implementedEntry);
     } else {
         # Card is not implemented
