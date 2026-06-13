@@ -28,7 +28,7 @@ public final class ForcePull extends CardImpl {
     public ForcePull(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
-        // Destroy targer creature with spaceflight.
+        // Destroy target creature with spaceflight.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
 

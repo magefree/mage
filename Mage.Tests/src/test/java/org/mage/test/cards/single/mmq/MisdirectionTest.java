@@ -80,7 +80,7 @@ public class MisdirectionTest extends CardTestPlayerBase {
 
         // cast Raksha and select B
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rakshasa's Secret", playerB);
-        // cast misdir, but it's not apply and taget will be same
+        // cast misdir, but it's not apply and target will be same
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Misdirection", "Rakshasa's Secret", "Rakshasa's Secret");
         addTarget(playerB, playerB); // new target for rakhas will be same B
         // B must select cards to discard (2 lions, not bears)

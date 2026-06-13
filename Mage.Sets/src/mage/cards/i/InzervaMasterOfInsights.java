@@ -84,10 +84,10 @@ class InzervaMasterOfInsightsEffect extends OneShotEffect {
             }
 
             // put to bottom
-            TargetCard targeBottom = new TargetCard(0, cards.size(), Zone.LIBRARY, new FilterCard("cards to PUT on the BOTTOM of " + opponent.getName() + "'s library"));
-            targeBottom.setRequired(false);
-            controller.choose(Outcome.Detriment, cards, targeBottom, source, game);
-            Cards cardsToBottom = new CardsImpl(targeBottom.getTargets().stream()
+            TargetCard targetBottom = new TargetCard(0, cards.size(), Zone.LIBRARY, new FilterCard("cards to PUT on the BOTTOM of " + opponent.getName() + "'s library"));
+            targetBottom.setRequired(false);
+            controller.choose(Outcome.Detriment, cards, targetBottom, source, game);
+            Cards cardsToBottom = new CardsImpl(targetBottom.getTargets().stream()
                 .filter(cards::contains)
                 .collect(Collectors.toList()
             ));
