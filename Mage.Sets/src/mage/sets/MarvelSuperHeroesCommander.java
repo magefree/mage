@@ -250,6 +250,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Metalwork Colossus", 204, Rarity.RARE, mage.cards.m.MetalworkColossus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Metalwork Colossus", 442, Rarity.RARE, mage.cards.m.MetalworkColossus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Meteor Golem", 205, Rarity.UNCOMMON, mage.cards.m.MeteorGolem.class));
+        cards.add(new SetCardInfo("Midnight Angel Armor", 22, Rarity.RARE, mage.cards.m.MidnightAngelArmor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Midnight Angel Armor", 316, Rarity.RARE, mage.cards.m.MidnightAngelArmor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mind's Dilation", 277, Rarity.MYTHIC, mage.cards.m.MindsDilation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mind's Dilation", 344, Rarity.MYTHIC, mage.cards.m.MindsDilation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mind's Eye", 288, Rarity.RARE, mage.cards.m.MindsEye.class, NON_FULL_USE_VARIOUS));
