@@ -172,11 +172,16 @@ if (-not $clientJar) { Fail "Client jar not found under $clientDir. Run once wit
 $serverRoot = $serverJar.Directory.Parent.FullName
 $clientRoot = $clientJar.Directory.Parent.FullName
 
+# On Java 9+ (you're on 17/21) XMage's serialization needs deep reflective access into java.base,
+# or connecting fails with: "Wrong java version - check your client running scripts and params".
+# This is the documented XMage fix (magefree issue #12768). Needed on BOTH client and server.
+$addOpens = @('--add-opens=java.base/java.io=ALL-UNNAMED')
+
 # --- launch server ---------------------------------------------------------
 
 Write-Step 'Starting server (new window)'
 Start-Process -FilePath 'java' `
-    -ArgumentList @('-Xmx1024m', '-jar', "`"$($serverJar.FullName)`"") `
+    -ArgumentList (@('-Xmx1024m') + $addOpens + @('-jar', "`"$($serverJar.FullName)`"")) `
     -WorkingDirectory $serverRoot
 
 Write-Host '    Waiting for server on port 17171...' -ForegroundColor Yellow
@@ -192,7 +197,7 @@ $clientArgs = @(
     '-Dfile.encoding=UTF-8',
     '-Dsun.jnu.encoding=UTF-8',
     '-Djava.net.preferIPv4Stack=true'
-)
+) + $addOpens
 if ($NoShell) {
     Write-Step 'Starting STOCK client (shell off - baseline)'
 } else {

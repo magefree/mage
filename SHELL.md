@@ -44,6 +44,11 @@ XMAGE_SHELL=1 XMAGE_SHELL_THEME=light   java ...   # Arcane Parchment (light)
 XMAGE_SHELL=1                           java ...   # Arcane Dark (default)
 ```
 
+> **Running on Java 17/21 directly?** XMage's networking needs deep reflective access into
+> `java.base`, or connecting fails with *"Wrong java version - check your client running scripts and
+> params"*. Add `--add-opens=java.base/java.io=ALL-UNNAMED` to **both** the client and server java
+> commands (magefree issue #12768). The Windows helper `run-shell.ps1` already includes it.
+
 ## Architecture & survivability strategy
 
 1. **Additive-first.** Nearly all shell code is new files under
