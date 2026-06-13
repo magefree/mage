@@ -114,6 +114,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Deadly Dispute", 794, Rarity.COMMON, mage.cards.d.DeadlyDispute.class));
         cards.add(new SetCardInfo("Deep Analysis", 149, Rarity.COMMON, mage.cards.d.DeepAnalysis.class));
         cards.add(new SetCardInfo("Destroy Evil", 128, Rarity.COMMON, mage.cards.d.DestroyEvil.class));
+        cards.add(new SetCardInfo("Devil Dinosaur", 719, Rarity.RARE, mage.cards.d.DevilDinosaur.class));
         cards.add(new SetCardInfo("Director Nick Fury", 399, Rarity.MYTHIC, mage.cards.d.DirectorNickFury.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Director Nick Fury", 81, Rarity.MYTHIC, mage.cards.d.DirectorNickFury.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dismantling Wave", 129, Rarity.RARE, mage.cards.d.DismantlingWave.class, NON_FULL_USE_VARIOUS));
