@@ -33,7 +33,7 @@ public final class HixusPrisonWarden extends CardImpl {
         // Whenever a creature deals combat damage to you, if Hixus, Prison Warden entered the battlefield this turn, exile that creature until Hixus leaves the battlefield.
         this.addAbility(new DealsDamageToYouAllTriggeredAbility(
                 StaticFilters.FILTER_PERMANENT_CREATURE, new ExileUntilSourceLeavesEffect(), true
-        ).withInterveningIf(SourceEnteredThisTurnCondition.DID));
+        ).withInterveningIf(SourceEnteredThisTurnCondition.TRUE));
     }
 
     private HixusPrisonWarden(final HixusPrisonWarden card) {

@@ -628,6 +628,7 @@ public class ScryfallImageSupportCards {
             add("YSOS"); // Alchemy: Secrets of Strixhaven
             add("MSH"); // Marvel Super Heroes
             add("MSC"); // Marvel Super Heroes Commander
+            add("HOB"); // The Hobbit
             add("HOC"); // The Hobbit Commander
             add("FRA"); // Reality Fracture
 
