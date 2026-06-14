@@ -62,6 +62,9 @@ public enum PutCards {
     }
 
     public boolean moveCard(Player player, Card card, Ability source, Game game, String description) {
+        if (card == null) {
+            throw new IllegalArgumentException("Wrong code usage: card can't be null");
+        }
         switch (this) {
             case TOP_OR_BOTTOM:
                 if (player.chooseUse(Outcome.Neutral,
@@ -82,9 +85,6 @@ public enum PutCards {
                 return player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
             case BATTLEFIELD_TAPPED_ATTACKING:
                 if (player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null)) {
-                    if (card == null) {
-                        return true;
-                    }
                     Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                     if (permanent != null) {
                         game.getCombat().addAttackingCreature(permanent.getId(), game);

@@ -3008,6 +3008,66 @@
 |TOK:SOC|Worm||BlackGreenWormToken|
 |TOK:SOC|Zombie||ZombieDecayedToken|
 
+# MSH
+|TOK:MSH|Alien||AlienHasteToken|
+|TOK:MSH|Clue||ClueArtifactToken|
+|TOK:MSH|Doombot||DoombotToken|
+|TOK:MSH|Food||FoodToken|
+|TOK:MSH|Galactus||GalactusToken|
+|TOK:MSH|Hero||Hero32Token|
+|TOK:MSH|Insect||InsectToken|
+|TOK:MSH|Leviathan||LeviathanToken|
+|TOK:MSH|Merfolk|1|MerfolkToken|
+|TOK:MSH|Merfolk|2|MerfolkToken|
+|TOK:MSH|Moloid||MoloidToken|
+|TOK:MSH|Redwing||RedwingToken|
+|TOK:MSH|Robot Villain|1|RobotVillainToken|
+|TOK:MSH|Robot Villain|2|RobotVillainToken|
+|TOK:MSH|Soldier|1|SoldierToken|
+|TOK:MSH|Soldier|2|SoldierToken|
+|TOK:MSH|Soldier|3|SoldierToken|
+|TOK:MSH|Squirrel||SquirrelToken|
+|TOK:MSH|Sturdy Shield||SturdyShieldToken|
+|TOK:MSH|The Tiger God||TigerGodToken|
+|TOK:MSH|The Void||TheVoidToken|
+|TOK:MSH|Treasure|1|TreasureToken|
+|TOK:MSH|Treasure|2|TreasureToken|
+|TOK:MSH|Villain|1|VillainToken|
+|TOK:MSH|Villain|2|VillainToken|
+|TOK:MSH|Wall||WallColorlessToken|
+|TOK:MSH|Zabu||ZabuToken|
+
+# MSC
+|TOK:MSC|Angel|1|AngelVigilanceToken|
+|TOK:MSC|Angel|2|AngelVigilanceToken|
+|TOK:MSC|Ape Villain|1|ApeVillainToken|
+|TOK:MSC|Ape Villain|2|ApeVillainToken|
+|TOK:MSC|Beast|1|BeastToken|
+|TOK:MSC|Beast|2|BeastToken|
+|TOK:MSC|Bird|1|BirdToken|
+|TOK:MSC|Bird|2|BirdToken|
+#|TOK:MSC|Construct|1|FantasticarConstructToken|
+#|TOK:MSC|Construct|2|FantasticarConstructToken|
+#|TOK:MSC|Council of Reeds|1|CouncilofReedsToken|
+#|TOK:MSC|Council of Reeds|2|CouncilofReedsToken|
+|TOK:MSC|Elephant|1|ElephantToken|
+|TOK:MSC|Elephant|2|ElephantToken|
+|TOK:MSC|Goat|1|GoatToken|
+|TOK:MSC|Goat|2|GoatToken|
+|TOK:MSC|Ox|1|Ox22Token|
+|TOK:MSC|Ox|2|Ox22Token|
+|TOK:MSC|Rhino|1|RhinoToken|
+|TOK:MSC|Rhino|2|RhinoToken|
+|TOK:MSC|Robot Hero||RobotHeroToken|
+|TOK:MSC|Rogue|1|RogueToken|
+|TOK:MSC|Rogue|2|RogueToken|
+|TOK:MSC|Shapeshifter|1|Shapeshifter32Token|
+|TOK:MSC|Shapeshifter|2|Shapeshifter32Token|
+|TOK:MSC|Vibranium|1|VibraniumToken|
+|TOK:MSC|Vibranium|2|VibraniumToken|
+|TOK:MSC|Wall|1|WallColorlessReachToken|
+|TOK:MSC|Wall|2|WallColorlessReachToken|
+
 # HOB
 |TOK:HOB|Dwarf||Dwarf22Token|
 |TOK:HOB|Treasure||TreasureToken|
