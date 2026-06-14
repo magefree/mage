@@ -55,6 +55,17 @@ public final class ShellIcons {
         GLYPHS.put("skip_stack", ShellIcons::skipStack);
         GLYPHS.put("skip_to_previous_end", ShellIcons::skipToPreviousEnd);
 
+        // deck-editor / lobby buttons (matched by /buttons/<name>.png via the component sweep)
+        GLYPHS.put("search", ShellIcons::search);
+        GLYPHS.put("copy", ShellIcons::copy);
+        GLYPHS.put("paste", ShellIcons::paste);
+        GLYPHS.put("deck_in", ShellIcons::deckIn);
+        GLYPHS.put("deck_out", ShellIcons::deckOut);
+        GLYPHS.put("left", ShellIcons::arrowLeft);
+        GLYPHS.put("right", ShellIcons::arrowRight);
+        GLYPHS.put("up", ShellIcons::arrowUp);
+        GLYPHS.put("down", ShellIcons::arrowDown);
+
         PHASE_GLYPHS.put("untap", ShellIcons::phaseUntap);
         PHASE_GLYPHS.put("upkeep", ShellIcons::phaseUpkeep);
         PHASE_GLYPHS.put("draw", ShellIcons::phaseDraw);
@@ -209,6 +220,11 @@ public final class ShellIcons {
         if (n.endsWith(".png")) {
             n = n.substring(0, n.length() - 4);
         }
+        // drop a trailing pixel-size suffix so copy_24 / search_32 map to copy / search
+        int us = n.lastIndexOf('_');
+        if (us > 0 && n.substring(us + 1).matches("\\d+")) {
+            n = n.substring(0, us);
+        }
         return n;
     }
 
@@ -348,6 +364,76 @@ public final class ShellIcons {
         g.setColor(accent);
         endBar(g, 0.72);                                       // two close bars = step just before
         endBar(g, 0.82);
+    }
+
+    // --- deck-editor / lobby glyphs -------------------------------------------------------------
+
+    private static void search(Graphics2D g, Color fg, Color accent) {
+        g.setColor(fg);
+        g.draw(new Ellipse2D.Double(0.16, 0.16, 0.44, 0.44)); // lens
+        line(g, 0.56, 0.56, 0.84, 0.84);                       // handle
+    }
+
+    private static void copy(Graphics2D g, Color fg, Color accent) {
+        g.setColor(fg);                                        // two overlapping sheets
+        g.draw(new java.awt.geom.RoundRectangle2D.Double(0.40, 0.16, 0.42, 0.52, 0.10, 0.10));
+        g.draw(new java.awt.geom.RoundRectangle2D.Double(0.18, 0.34, 0.42, 0.52, 0.10, 0.10));
+    }
+
+    private static void paste(Graphics2D g, Color fg, Color accent) {
+        g.setColor(fg);                                        // clipboard + clip
+        g.draw(new java.awt.geom.RoundRectangle2D.Double(0.24, 0.22, 0.52, 0.62, 0.10, 0.10));
+        g.setColor(accent);
+        g.fill(new java.awt.geom.RoundRectangle2D.Double(0.40, 0.14, 0.20, 0.14, 0.06, 0.06));
+    }
+
+    private static void deckIn(Graphics2D g, Color fg, Color accent) {
+        g.setColor(fg);
+        tray(g);
+        g.setColor(accent);                                    // arrow down into tray = import
+        line(g, 0.5, 0.18, 0.5, 0.54);
+        line(g, 0.5, 0.54, 0.40, 0.44);
+        line(g, 0.5, 0.54, 0.60, 0.44);
+    }
+
+    private static void deckOut(Graphics2D g, Color fg, Color accent) {
+        g.setColor(fg);
+        tray(g);
+        g.setColor(accent);                                    // arrow up out of tray = export
+        line(g, 0.5, 0.54, 0.5, 0.18);
+        line(g, 0.5, 0.18, 0.40, 0.28);
+        line(g, 0.5, 0.18, 0.60, 0.28);
+    }
+
+    private static void arrowLeft(Graphics2D g, Color fg, Color accent) {
+        g.setColor(fg);
+        line(g, 0.60, 0.24, 0.36, 0.50);
+        line(g, 0.36, 0.50, 0.60, 0.76);
+    }
+
+    private static void arrowRight(Graphics2D g, Color fg, Color accent) {
+        g.setColor(fg);
+        line(g, 0.40, 0.24, 0.64, 0.50);
+        line(g, 0.64, 0.50, 0.40, 0.76);
+    }
+
+    private static void arrowUp(Graphics2D g, Color fg, Color accent) {
+        g.setColor(fg);
+        line(g, 0.24, 0.60, 0.50, 0.36);
+        line(g, 0.50, 0.36, 0.76, 0.60);
+    }
+
+    private static void arrowDown(Graphics2D g, Color fg, Color accent) {
+        g.setColor(fg);
+        line(g, 0.24, 0.40, 0.50, 0.64);
+        line(g, 0.50, 0.64, 0.76, 0.40);
+    }
+
+    /** An open tray / inbox used by the import & export glyphs. */
+    private static void tray(Graphics2D g) {
+        line(g, 0.20, 0.62, 0.20, 0.80);
+        line(g, 0.20, 0.80, 0.80, 0.80);
+        line(g, 0.80, 0.80, 0.80, 0.62);
     }
 
     // --- phase glyphs ---------------------------------------------------------------------------

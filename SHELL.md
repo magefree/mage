@@ -22,7 +22,9 @@ at a tiny, documented set of "seams."
     dated PNGs for in-game command/skip buttons, the 12 phase icons, **and the round dialog
     Accept/Cancel/Next/Prev buttons**, intercepted in the image-cache loaders. Incremental —
     unmapped icons fall back to the original art. Icon colour is tunable via `Shell.iconColor`.
-    (Next: deck-editor / lobby button art — search, copy/paste, deck in/out, rarity/type icons.)
+  - Deck-editor / lobby icons (`ShellIconSweep`): search, copy, paste, import/export, nav arrows —
+    swapped app-wide by a component-tree sweep keyed on the `/buttons/` source path (no edits to the
+    generated dialog code). Mana-colour and card-type icons are intentionally left as-is.
 - **Phase 3 — Structural / interaction** ⏳ planned (see `SHELL_OBSERVATIONS.md` for play-area leads).
 
 See `SHELL_OBSERVATIONS.md` for a passive catalog of memory and play-area/4-player observations
@@ -85,6 +87,13 @@ to find any seam that didn't apply, and re-insert it from this table.
 Icon glyph colours are tunable per theme via the `Shell.iconColor` / `Shell.iconAccent` keys in the
 FlatLaf*.properties files — independent of body-text foreground.
 
+**No new seam for deck-editor / lobby icons.** Those `/buttons/*.png` images are loaded ad-hoc
+across ~15 mostly NetBeans-generated files (no funnel). Editing them would scatter fragile seams
+through generated code, so instead `ShellIconSweep` walks each window's component tree as it opens
+and swaps any icon whose source path (`ImageIcon.getDescription()`) matches a `/buttons/<name>.png`
+we render. `ShellIconSweep.install()` is invoked from `Shell.installLookAndFeel()` (seam #2's path),
+so it adds **zero** upstream edits. Icons without a glyph (mana colours, card types) are left as-is.
+
 > Keep the seam count low. Prefer subclass-and-swap, `UIManager` overrides, and FlatLaf
 > `.properties` over editing more upstream files.
 
@@ -99,6 +108,7 @@ Mage.Client/
     shell/ShellChat.java                              <- collapsible chat + unread badge (new)
     shell/ShellDensity.java                           <- in-game control density trim (new)
     shell/ShellIcons.java                             <- modern flat vector button icons (new)
+    shell/ShellIconSweep.java                         <- swaps ad-hoc /buttons/ icons app-wide (new)
     util/gui/GuiDisplayUtil.java                      <- seam #2 (LAF install)
     util/GUISizeHelper.java                           <- seam #4 (in-game density)
     game/GamePanel.java                               <- seam #3 (collapsible chat install)

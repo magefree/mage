@@ -103,6 +103,10 @@ public final class Shell {
         // FlatLaf loads FlatLaf.properties (shared) plus FlatDarkLaf/FlatLightLaf.properties (variant).
         FlatLaf.registerCustomDefaultsSource(DEFAULTS_PACKAGE);
         UIManager.setLookAndFeel(isLightVariant() ? new FlatLightLaf() : new FlatDarkLaf());
+
+        // Modernise ad-hoc /buttons/ icons across windows (deck editor, lobby, dialogs) without
+        // touching their many generated call sites. Idempotent; re-sweeps on theme change.
+        ShellIconSweep.install();
     }
 
     /**
