@@ -132,6 +132,71 @@ public final class ShellIcons {
         return img;
     }
 
+    /**
+     * Modern round dialog button (Accept/Cancel/Next/Prev, normal or {@code .hover}) for the custom
+     * rendered dialogs. Recognised by the {@code /dlg/} resource path; returns {@code null} for
+     * anything else so the caller falls back to the original PNG.
+     */
+    public static BufferedImage renderDialogButton(String resourcePath, int size) {
+        if (resourcePath == null) {
+            return null;
+        }
+        String n = resourcePath.toLowerCase(Locale.ENGLISH);
+        if (!n.contains("/dlg/")) {
+            return null;
+        }
+        int kind; // 0 ok, 1 cancel, 2 next, 3 prev
+        if (n.contains("dlg.ok")) {
+            kind = 0;
+        } else if (n.contains("dlg.cancel")) {
+            kind = 1;
+        } else if (n.contains("dlg.next")) {
+            kind = 2;
+        } else if (n.contains("dlg.prev")) {
+            kind = 3;
+        } else {
+            return null;
+        }
+        boolean hover = n.contains(".hover");
+        int s = size > 0 ? size : 60;
+        BufferedImage img = new BufferedImage(s, s, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = img.createGraphics();
+        try {
+            g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+            double box = s * 0.92;
+            double o = (s - box) / 2.0;
+            g.translate(o, o);
+            g.scale(box, box);
+            g.setStroke(new BasicStroke(0.085f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+
+            Color col;
+            switch (kind) {
+                case 0:  col = new Color(0x3F, 0xB3, 0x6B); break; // accept = green
+                case 1:  col = new Color(0xE0, 0x52, 0x60); break; // cancel = red
+                default: col = accent();                           // next/prev = theme accent
+            }
+            Ellipse2D.Double circle = new Ellipse2D.Double(0.10, 0.10, 0.80, 0.80);
+            if (hover) {
+                g.setColor(col);
+                g.fill(circle);
+                g.setColor(Color.WHITE);
+            } else {
+                g.setColor(col);
+                g.draw(circle);
+            }
+            switch (kind) {
+                case 0: line(g, 0.32, 0.52, 0.44, 0.66); line(g, 0.44, 0.66, 0.70, 0.34); break; // check
+                case 1: line(g, 0.37, 0.37, 0.63, 0.63); line(g, 0.63, 0.37, 0.37, 0.63); break; // X
+                case 2: line(g, 0.45, 0.32, 0.61, 0.50); line(g, 0.61, 0.50, 0.45, 0.68); break; // ›
+                default: line(g, 0.55, 0.32, 0.39, 0.50); line(g, 0.39, 0.50, 0.55, 0.68); break; // ‹
+            }
+        } finally {
+            g.dispose();
+        }
+        return img;
+    }
+
     private static String stripName(String resourceName) {
         if (resourceName == null) {
             return "";
@@ -147,13 +212,24 @@ public final class ShellIcons {
         return n;
     }
 
+    /**
+     * Icon glyph colour. Independently adjustable from body text via the {@code Shell.iconColor}
+     * theme key (see the FlatLaf*.properties files); falls back to the label foreground. Icons read
+     * better a little brighter than text, so the themes set this higher-contrast.
+     */
     private static Color foreground() {
-        Color c = UIManager.getColor("Label.foreground");
-        return c != null ? c : new Color(0xD6D9E0);
+        Color c = UIManager.getColor("Shell.iconColor");
+        if (c == null) {
+            c = UIManager.getColor("Label.foreground");
+        }
+        return c != null ? c : new Color(0xED, 0xEF, 0xF3);
     }
 
     private static Color accent() {
-        Color c = UIManager.getColor("Component.accentColor");
+        Color c = UIManager.getColor("Shell.iconAccent");
+        if (c == null) {
+            c = UIManager.getColor("Component.accentColor");
+        }
         return c != null ? c : new Color(0x7C9CE6);
     }
 

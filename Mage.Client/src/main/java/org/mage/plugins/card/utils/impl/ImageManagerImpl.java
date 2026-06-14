@@ -496,6 +496,14 @@ public enum ImageManagerImpl implements ImageManager {
     }
 
     private static BufferedImage getBufferedImageFromResource(String path) {
+        // [modern-shell] opt-in seam: modern round dialog buttons (Accept/Cancel/Next/Prev). Only
+        // /dlg/ paths are intercepted; everything else (app icon, etc.) is untouched. See SHELL.md.
+        if (mage.client.shell.Shell.isEnabled() && path != null && path.contains("/dlg/")) {
+            BufferedImage modern = mage.client.shell.ShellIcons.renderDialogButton(path, 0);
+            if (modern != null) {
+                return modern;
+            }
+        }
         return getBufferedImageFromResource(path, 0, 0);
     }
 

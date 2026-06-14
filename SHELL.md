@@ -19,9 +19,10 @@ at a tiny, documented set of "seams."
     player panel centrally via `GUISizeHelper`. Remaining code-level items tracked in
     `SHELL_OBSERVATIONS.md` (section C).
   - Modern flat button icons (`ShellIcons`): code-drawn, theme-coloured vector glyphs replace the
-    dated PNGs for in-game command/skip buttons **and the 12 phase icons**, intercepted in the
-    image-cache loaders. Incremental — unmapped icons fall back to the original art. (Next: dialog
-    Accept/Cancel/Next/Prev buttons, then deck-editor / lobby button art.)
+    dated PNGs for in-game command/skip buttons, the 12 phase icons, **and the round dialog
+    Accept/Cancel/Next/Prev buttons**, intercepted in the image-cache loaders. Incremental —
+    unmapped icons fall back to the original art. Icon colour is tunable via `Shell.iconColor`.
+    (Next: deck-editor / lobby button art — search, copy/paste, deck in/out, rarity/type icons.)
 - **Phase 3 — Structural / interaction** ⏳ planned (see `SHELL_OBSERVATIONS.md` for play-area leads).
 
 See `SHELL_OBSERVATIONS.md` for a passive catalog of memory and play-area/4-player observations
@@ -79,6 +80,10 @@ to find any seam that didn't apply, and re-insert it from this table.
 | 4 | `Mage.Client/src/main/java/mage/client/util/GUISizeHelper.java` | At the end of `calculateGUISizes()`, `if (Shell.isEnabled()) { ShellDensity.applyInGameControls(); }`. | One guarded line at the method's end; only scales already-public size fields, idempotent across recomputes. |
 | 5 | `Mage.Client/src/main/java/org/mage/plugins/card/utils/impl/ImageManagerImpl.java` | In `createThemeButtonImage(key)`, try `ShellIcons.renderButton(...)` first when `Shell.isEnabled()`, else fall back to the original PNG. | One guarded block in the image-cache loader; returns `null` for unmapped icons so old art is kept. Incremental and non-breaking. |
 | 6 | `Mage.Client/src/main/java/org/mage/plugins/card/utils/impl/ImageManagerImpl.java` | In `createPhaseThemeButtonImage(key)`, try `ShellIcons.renderPhase(...)` first when `Shell.isEnabled()`, else fall back to the original PNG. | Same pattern as #5 for phase icons; `null` keeps the old art. |
+| 7 | `Mage.Client/src/main/java/org/mage/plugins/card/utils/impl/ImageManagerImpl.java` | In `getBufferedImageFromResource(path)`, when `Shell.isEnabled()` and the path contains `/dlg/`, try `ShellIcons.renderDialogButton(...)`, else fall back. | Single guarded line, narrowed to `/dlg/` so non-dialog images are untouched; covers all 8 dialog button images. |
+
+Icon glyph colours are tunable per theme via the `Shell.iconColor` / `Shell.iconAccent` keys in the
+FlatLaf*.properties files — independent of body-text foreground.
 
 > Keep the seam count low. Prefer subclass-and-swap, `UIManager` overrides, and FlatLaf
 > `.properties` over editing more upstream files.
