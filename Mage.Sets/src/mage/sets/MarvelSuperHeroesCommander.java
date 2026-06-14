@@ -194,6 +194,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Generous Gift", 133, Rarity.UNCOMMON, mage.cards.g.GenerousGift.class));
         cards.add(new SetCardInfo("Genesis Ultimatum", 283, Rarity.RARE, mage.cards.g.GenesisUltimatum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Genesis Ultimatum", 402, Rarity.RARE, mage.cards.g.GenesisUltimatum.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gert and Old Lace, Runaways", 568, Rarity.UNCOMMON, mage.cards.g.GertAndOldLaceRunaways.class));
         cards.add(new SetCardInfo("Gift of Immortality", 134, Rarity.RARE, mage.cards.g.GiftOfImmortality.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gift of Immortality", 306, Rarity.RARE, mage.cards.g.GiftOfImmortality.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gilded Lotus", 199, Rarity.RARE, mage.cards.g.GildedLotus.class, NON_FULL_USE_VARIOUS));
