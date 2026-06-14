@@ -555,7 +555,12 @@ public final class CardUtil {
 
     /**
      * Parse card number as int (support base [123] and alternative numbers
-     * [123b], [U123]).
+     * [123b], [U123]). For inner purpose only like cards sorting. 
+     * Do not support zero card number due tokens usage.
+     * <p>
+     * From scryfall: card numbers should be considered to be plaintext strings. they may contain multiple
+     * non-digit components, may contain no digits at all, and may not correspond to anything
+     * at all seen on the card
      *
      * @param cardNumber origin card number
      * @return int
@@ -563,24 +568,26 @@ public final class CardUtil {
     public static int parseCardNumberAsInt(String cardNumber) {
 
         if (cardNumber == null || cardNumber.isEmpty()) {
-            throw new IllegalArgumentException("Card number is empty.");
+            throw new IllegalArgumentException("Card number cannot be null or empty");
         }
 
-        try {
-            if (!Character.isDigit(cardNumber.charAt(0))) {
-                // U123
-                return Integer.parseInt(cardNumber.substring(1));
-            } else if (!Character.isDigit(cardNumber.charAt(cardNumber.length() - 1))) {
-                // 123b
-                return Integer.parseInt(cardNumber.substring(0, cardNumber.length() - 1));
-            } else {
-                // 123
-                return Integer.parseInt(cardNumber);
-            }
-        } catch (NumberFormatException e) {
-            // wrong numbers like RA5 and etc
-            return -1;
+        // example: 123, U123, 123b, 123*, 123+
+        String cleanCardNumber = cardNumber.replaceAll("[\\D]", "");
+
+        // token's zero number is restricted
+        if (!cleanCardNumber.isEmpty() && cleanCardNumber.replaceAll("0", "").isEmpty()) {
+            throw new IllegalArgumentException("Card number cannot be a zero number due tokens usage limit: " + cardNumber);
         }
+
+        // non-digit numbers support 
+        // (replace by fake stable digit, sort it after normal numbers)
+        if (cleanCardNumber.isEmpty()) {
+            int hash = cardNumber.hashCode() & 0x7fffffff; // only positive
+            return 1000000 + (hash % (Integer.MAX_VALUE - 1000000));
+        }
+
+        // normal card numbers with digits
+        return Integer.parseInt(cleanCardNumber);
     }
 
     /**

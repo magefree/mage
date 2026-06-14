@@ -5,7 +5,6 @@ import mage.cards.repository.CardInfo;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
