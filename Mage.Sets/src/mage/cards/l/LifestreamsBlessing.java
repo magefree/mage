@@ -34,8 +34,8 @@ public final class LifestreamsBlessing extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{G}{G}");
 
         // Draw X cards, where X is the greatest power among creatures you controlled as you cast this spell. If this spell was cast from exile, you gain twice X life.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(LifestreamsBlessingValue.ONCE));
-        this.getSpellAbility().addEffect(new GainLifeEffect(LifestreamsBlessingValue.TWICE)
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(LifestreamsBlessingValue.POWER_VALUE));
+        this.getSpellAbility().addEffect(new GainLifeEffect(LifestreamsBlessingValue.EXILE_VALUE)
                 .setText("if this spell was cast from exile, you gain twice X life"));
         this.getSpellAbility().addWatcher(new LifestreamsBlessingWatcher());
 
@@ -54,17 +54,18 @@ public final class LifestreamsBlessing extends CardImpl {
 }
 
 enum LifestreamsBlessingValue implements DynamicValue {
-    ONCE(false),
-    TWICE(true);
-    private final boolean flag;
+    POWER_VALUE(false),
+    EXILE_VALUE(true);
 
-    LifestreamsBlessingValue(boolean flag) {
-        this.flag = flag;
+    private final boolean isNeedExile;
+
+    LifestreamsBlessingValue(boolean isNeedExile) {
+        this.isNeedExile = isNeedExile;
     }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        if (flag && !Optional
+        if (isNeedExile && !Optional
                 .ofNullable(sourceAbility)
                 .map(Ability::getSourceId)
                 .map(game::getSpell)
@@ -73,7 +74,7 @@ enum LifestreamsBlessingValue implements DynamicValue {
                 .orElse(false)) {
             return 0;
         }
-        return (flag ? 2 : 1) * LifestreamsBlessingWatcher.getValue(game, sourceAbility);
+        return (isNeedExile ? 2 : 1) * LifestreamsBlessingWatcher.getValue(game, sourceAbility);
     }
 
     @Override

@@ -70,6 +70,10 @@ public abstract class ExpansionSet implements Serializable {
             this.rarity = rarity;
             this.cardClass = cardClass;
             this.graphicInfo = graphicInfo;
+
+            // verify check: only valid card numbers allow
+            // how-to fix: replace zero by any fake number and add to scryfall's download direct links
+            CardUtil.parseCardNumberAsInt(cardNumber);
         }
 
         public String getName() {
