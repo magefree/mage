@@ -96,6 +96,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Dark Deed", 93, Rarity.UNCOMMON, mage.cards.d.DarkDeed.class));
         cards.add(new SetCardInfo("Dark Fortress", 264, Rarity.RARE, mage.cards.d.DarkFortress.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dark Fortress", 380, Rarity.RARE, mage.cards.d.DarkFortress.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Death to Our Enemies", 127, Rarity.UNCOMMON, mage.cards.d.DeathToOurEnemies.class));
         cards.add(new SetCardInfo("Decoy Ploy", 94, Rarity.COMMON, mage.cards.d.DecoyPloy.class));
         cards.add(new SetCardInfo("Dependable Quinjet", 246, Rarity.COMMON, mage.cards.d.DependableQuinjet.class));
         cards.add(new SetCardInfo("Depower", 50, Rarity.COMMON, mage.cards.d.Depower.class));
