@@ -163,6 +163,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fabled Passage", 471, Rarity.RARE, mage.cards.f.FabledPassage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Falcon and Redwing", 14, Rarity.RARE, mage.cards.f.FalconAndRedwing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Falcon and Redwing", 304, Rarity.RARE, mage.cards.f.FalconAndRedwing.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Falcon, Joaquin Torres", 593, Rarity.UNCOMMON, mage.cards.f.FalconJoaquinTorres.class));
         cards.add(new SetCardInfo("Fall to Earth", 517, Rarity.COMMON, mage.cards.f.FallToEarth.class));
         cards.add(new SetCardInfo("Farseek", 173, Rarity.COMMON, mage.cards.f.Farseek.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Farseek", 815, Rarity.COMMON, mage.cards.f.Farseek.class, NON_FULL_USE_VARIOUS));
