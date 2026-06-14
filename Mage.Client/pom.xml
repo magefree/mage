@@ -108,6 +108,7 @@
         </dependency>
 
         <!-- music player START -->
+        <!-- TODO: no needs anymore? There are music player by java standard lib -->
         <dependency>
             <groupId>com.googlecode.soundlibs</groupId>
             <artifactId>mp3spi</artifactId>
@@ -119,9 +120,9 @@
             <version>1.0.1</version>
         </dependency>
         <dependency>
-            <groupId>org.mobicents.external.tritonus</groupId>
-            <artifactId>tritonus_share</artifactId>
-            <version>0.3.6</version>
+            <groupId>com.googlecode.soundlibs</groupId>
+            <artifactId>tritonus-share</artifactId>
+            <version>0.3.7.4</version>
         </dependency>
         <!-- music player END -->
 

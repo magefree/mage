@@ -1888,7 +1888,11 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             for (Map<String, List<CardView>> tracked : trackedCards.values()) {
                 for (List<CardView> orphans : tracked.values()) {
                     for (CardView orphan : orphans) {
-                        logger.info("Orphan when setting with layout: ");
+                        logger.info("Orphan when setting with layout: "
+                                + orphan.getExpansionSetCode() + ":"
+                                + orphan.getName() + ":"
+                                + orphan.getCardNumber()
+                        );
                         sortIntoGrid(orphan, null);
                     }
                 }
