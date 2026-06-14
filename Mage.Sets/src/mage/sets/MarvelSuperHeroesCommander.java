@@ -148,6 +148,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Door of Destinies", 198, Rarity.RARE, mage.cards.d.DoorOfDestinies.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Door of Destinies", 432, Rarity.RARE, mage.cards.d.DoorOfDestinies.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doorman", 720, Rarity.UNCOMMON, mage.cards.d.Doorman.class));
+        cards.add(new SetCardInfo("Dora Milaje Elite", 12, Rarity.RARE, mage.cards.d.DoraMilajeElite.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dora Milaje Elite", 302, Rarity.RARE, mage.cards.d.DoraMilajeElite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dragonskull Summit", 238, Rarity.RARE, mage.cards.d.DragonskullSummit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dragonskull Summit", 468, Rarity.RARE, mage.cards.d.DragonskullSummit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Drowned Catacomb", 239, Rarity.RARE, mage.cards.d.DrownedCatacomb.class, NON_FULL_USE_VARIOUS));
