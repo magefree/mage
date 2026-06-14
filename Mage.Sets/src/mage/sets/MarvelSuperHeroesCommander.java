@@ -67,6 +67,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Canopy Vista", 462, Rarity.RARE, mage.cards.c.CanopyVista.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Canyon Slough", 228, Rarity.RARE, mage.cards.c.CanyonSlough.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Canyon Slough", 463, Rarity.RARE, mage.cards.c.CanyonSlough.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Captain America's Motorcycle", 681, Rarity.COMMON, mage.cards.c.CaptainAmericasMotorcycle.class));
         cards.add(new SetCardInfo("Captain America, Team Leader", 5, Rarity.MYTHIC, mage.cards.c.CaptainAmericaTeamLeader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain America, Team Leader", 879, Rarity.MYTHIC, mage.cards.c.CaptainAmericaTeamLeader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain America, Unbowed", 505, Rarity.RARE, mage.cards.c.CaptainAmericaUnbowed.class));
