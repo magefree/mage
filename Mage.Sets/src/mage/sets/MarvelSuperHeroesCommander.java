@@ -89,6 +89,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Collective Effort", 126, Rarity.RARE, mage.cards.c.CollectiveEffort.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Collective Effort", 299, Rarity.RARE, mage.cards.c.CollectiveEffort.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Collector's Case", 617, Rarity.COMMON, mage.cards.c.CollectorsCase.class));
+        cards.add(new SetCardInfo("Colossal Collision", 558, Rarity.COMMON, mage.cards.c.ColossalCollision.class));
         cards.add(new SetCardInfo("Command Tower", 233, Rarity.COMMON, mage.cards.c.CommandTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Command Tower", 234, Rarity.COMMON, mage.cards.c.CommandTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Command Tower", 235, Rarity.COMMON, mage.cards.c.CommandTower.class, NON_FULL_USE_VARIOUS));
