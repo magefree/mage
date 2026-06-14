@@ -21,7 +21,7 @@ public enum SourceEnteredOrControlsBasicLandCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return SourceEnteredThisTurnCondition.DID.apply(game, source)
+        return SourceEnteredThisTurnCondition.TRUE.apply(game, source)
             || YouControlABasicLandCondition.instance.apply(game, source);
     }
 
