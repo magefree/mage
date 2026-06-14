@@ -183,6 +183,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Foreboding Ruins", 473, Rarity.RARE, mage.cards.f.ForebodingRuins.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fortified Village", 245, Rarity.RARE, mage.cards.f.FortifiedVillage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fortified Village", 474, Rarity.RARE, mage.cards.f.FortifiedVillage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Franklin Richards, Ascendant", 362, Rarity.RARE, mage.cards.f.FranklinRichardsAscendant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Franklin Richards, Ascendant", 52, Rarity.RARE, mage.cards.f.FranklinRichardsAscendant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frostboil Snarl", 246, Rarity.RARE, mage.cards.f.FrostboilSnarl.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frostboil Snarl", 475, Rarity.RARE, mage.cards.f.FrostboilSnarl.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Furious Strength", 544, Rarity.COMMON, mage.cards.f.FuriousStrength.class));
