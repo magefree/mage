@@ -48,6 +48,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Big Bertha", 714, Rarity.UNCOMMON, mage.cards.b.BigBertha.class));
         cards.add(new SetCardInfo("Big Score", 802, Rarity.COMMON, mage.cards.b.BigScore.class));
         cards.add(new SetCardInfo("Big Wheel", 679, Rarity.COMMON, mage.cards.b.BigWheel.class));
+        cards.add(new SetCardInfo("Bionic Blow", 680, Rarity.UNCOMMON, mage.cards.b.BionicBlow.class));
         cards.add(new SetCardInfo("Birds of Paradise", 170, Rarity.RARE, mage.cards.b.BirdsOfParadise.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Birds of Paradise", 377, Rarity.RARE, mage.cards.b.BirdsOfParadise.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Black Market Connections", 155, Rarity.RARE, mage.cards.b.BlackMarketConnections.class, NON_FULL_USE_VARIOUS));
