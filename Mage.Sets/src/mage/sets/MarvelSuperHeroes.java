@@ -223,6 +223,9 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Scientist Supreme of A.I.M.", 225, Rarity.RARE, mage.cards.s.ScientistSupremeOfAIM.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scientist Supreme of A.I.M.", 423, Rarity.RARE, mage.cards.s.ScientistSupremeOfAIM.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Serpent Specialist", 186, Rarity.COMMON, mage.cards.s.SerpentSpecialist.class));
+        cards.add(new SetCardInfo("Shang-Chi, Master of Kung Fu", 187, Rarity.MYTHIC, mage.cards.s.ShangChiMasterOfKungFu.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shang-Chi, Master of Kung Fu", 370, Rarity.MYTHIC, mage.cards.s.ShangChiMasterOfKungFu.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shang-Chi, Master of Kung Fu", 396, Rarity.MYTHIC, mage.cards.s.ShangChiMasterOfKungFu.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("She-Hulk, Jade Defender", 188, Rarity.UNCOMMON, mage.cards.s.SheHulkJadeDefender.class));
         cards.add(new SetCardInfo("Shuri, Wakandan Inventor", 75, Rarity.UNCOMMON, mage.cards.s.ShuriWakandanInventor.class));
         cards.add(new SetCardInfo("Stark Industries", 272, Rarity.COMMON, mage.cards.s.StarkIndustries.class));
