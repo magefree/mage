@@ -51,6 +51,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Birds of Paradise", 377, Rarity.RARE, mage.cards.b.BirdsOfParadise.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Black Market Connections", 155, Rarity.RARE, mage.cards.b.BlackMarketConnections.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Black Market Connections", 346, Rarity.RARE, mage.cards.b.BlackMarketConnections.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Widow, Deadly Hunter", 648, Rarity.RARE, mage.cards.b.BlackWidowDeadlyHunter.class));
         cards.add(new SetCardInfo("Black Widow, Natasha Romanoff", 846, Rarity.COMMON, mage.cards.b.BlackWidowNatashaRomanoff.class));
         cards.add(new SetCardInfo("Blasphemous Act", 163, Rarity.RARE, mage.cards.b.BlasphemousAct.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blasphemous Act", 358, Rarity.RARE, mage.cards.b.BlasphemousAct.class, NON_FULL_USE_VARIOUS));
