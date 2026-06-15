@@ -241,6 +241,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Into the Time Vortex", 363, Rarity.RARE, mage.cards.i.IntoTheTimeVortex.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Invisible Woman", 1, Rarity.MYTHIC, mage.cards.i.InvisibleWoman.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Invisible Woman", 875, Rarity.MYTHIC, mage.cards.i.InvisibleWoman.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Iron Lad, Young Avenger", 569, Rarity.UNCOMMON, mage.cards.i.IronLadYoungAvenger.class));
         cards.add(new SetCardInfo("Iron Man, Armored Avenger", 33, Rarity.RARE, mage.cards.i.IronManArmoredAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iron Man, Armored Avenger", 332, Rarity.RARE, mage.cards.i.IronManArmoredAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iron Man, Bleeding Edge", 626, Rarity.RARE, mage.cards.i.IronManBleedingEdge.class));
