@@ -2,10 +2,8 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.LifelinkAbility;
@@ -20,39 +18,10 @@ import mage.players.Player;
 
 import java.util.UUID;
 
-public class DoctorDoomUnrivaled extends CardImpl {
-    public DoctorDoomUnrivaled(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.SORCERER);
-        this.subtype.add(SubType.VILLAIN);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        this.addAbility(LifelinkAbility.getInstance());
-
-        Ability tapAbility = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost());
-        tapAbility.addCost(new PayLifeCost(1));
-        tapAbility.addEffect(new DoctorDoomUnrivaledEffect());
-
-        this.addAbility(tapAbility);
-    }
-
-    private DoctorDoomUnrivaled(final DoctorDoomUnrivaled card) {
-        super(card);
-    }
-
-    @Override
-    public DoctorDoomUnrivaled copy() {
-        return new DoctorDoomUnrivaled(this);
-    }
-}
-
 class DoctorDoomUnrivaledEffect extends OneShotEffect {
     DoctorDoomUnrivaledEffect() {
         super(Outcome.Benefit);
-        staticText = "You draw a card and lose 1 life. Then if your library has no cards in it, you win the game. (You win even if you have 0 life or didn't draw a card.)";
+        staticText = "Then if your library has no cards in it, you win the game. (You win even if you have 0 life or didn't draw a card.)";
     }
 
     private DoctorDoomUnrivaledEffect(final DoctorDoomUnrivaledEffect effect) {
@@ -70,11 +39,41 @@ class DoctorDoomUnrivaledEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
+        player.loseLife(1, game, source, false);
         if (player.getLibrary().size() == 0) {
             player.won(game);
             return true;
         }
 
         return false;
+    }
+}
+
+
+public class DoctorDoomUnrivaled extends CardImpl {
+    public DoctorDoomUnrivaled(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        this.supertype.add(SuperType.LEGENDARY);
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.SORCERER);
+        this.subtype.add(SubType.VILLAIN);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+
+        this.addAbility(LifelinkAbility.getInstance());
+
+        Ability tapAbility = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost());
+        tapAbility.addEffect(new DoctorDoomUnrivaledEffect());
+
+        this.addAbility(tapAbility);
+    }
+
+    private DoctorDoomUnrivaled(final DoctorDoomUnrivaled card) {
+        super(card);
+    }
+
+    @Override
+    public DoctorDoomUnrivaled copy() {
+        return new DoctorDoomUnrivaled(this);
     }
 }
