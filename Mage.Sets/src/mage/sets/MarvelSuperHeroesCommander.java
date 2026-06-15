@@ -252,6 +252,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kindred Discovery", 334, Rarity.RARE, mage.cards.k.KindredDiscovery.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kindred Dominance", 156, Rarity.RARE, mage.cards.k.KindredDominance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kindred Dominance", 351, Rarity.RARE, mage.cards.k.KindredDominance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kingpin, Wilson Fisk", 661, Rarity.RARE, mage.cards.k.KingpinWilsonFisk.class));
         cards.add(new SetCardInfo("Lethal Scheme", 157, Rarity.RARE, mage.cards.l.LethalScheme.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lethal Scheme", 353, Rarity.RARE, mage.cards.l.LethalScheme.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Bolt", 806, Rarity.UNCOMMON, mage.cards.l.LightningBolt.class));
