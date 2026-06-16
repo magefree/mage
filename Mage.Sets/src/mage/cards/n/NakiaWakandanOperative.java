@@ -17,6 +17,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -51,7 +52,7 @@ public final class NakiaWakandanOperative extends CardImpl {
         // Whenever your commander enters, you become the monarch.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
             new BecomesMonarchSourceEffect(), filter
-        ));
+        ).addHint(MonarchHint.instance));
 
         // {2}, {T}: Put two +1/+1 counters on target creature or Vehicle. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
