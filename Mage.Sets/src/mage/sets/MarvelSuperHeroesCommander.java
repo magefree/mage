@@ -407,6 +407,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Power Boost", 852, Rarity.UNCOMMON, mage.cards.p.PowerBoost.class));
         cards.add(new SetCardInfo("Prairie Stream", 257, Rarity.RARE, mage.cards.p.PrairieStream.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prairie Stream", 485, Rarity.RARE, mage.cards.p.PrairieStream.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Professor Hulk", 37, Rarity.RARE, mage.cards.p.ProfessorHulk.class));
         cards.add(new SetCardInfo("Progenitor's Icon", 208, Rarity.RARE, mage.cards.p.ProgenitorsIcon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Progenitor's Icon", 449, Rarity.RARE, mage.cards.p.ProgenitorsIcon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Promise of Loyalty", 142, Rarity.RARE, mage.cards.p.PromiseOfLoyalty.class, NON_FULL_USE_VARIOUS));
