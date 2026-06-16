@@ -374,6 +374,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Mystic Monastery", 253, Rarity.UNCOMMON, mage.cards.m.MysticMonastery.class));
         cards.add(new SetCardInfo("Nakia, Wakandan Operative", 384, Rarity.RARE, mage.cards.n.NakiaWakandanOperative.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nakia, Wakandan Operative", 69, Rarity.RARE, mage.cards.n.NakiaWakandanOperative.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Namor, Scourge of the Seas", 631, Rarity.RARE, mage.cards.n.NamorScourgeOfTheSeas.class));
         cards.add(new SetCardInfo("Namora, the Sea Queen", 632, Rarity.UNCOMMON, mage.cards.n.NamoraTheSeaQueen.class));
         cards.add(new SetCardInfo("Nature's Lore", 177, Rarity.COMMON, mage.cards.n.NaturesLore.class));
         cards.add(new SetCardInfo("Night's Whisper", 158, Rarity.COMMON, mage.cards.n.NightsWhisper.class));
