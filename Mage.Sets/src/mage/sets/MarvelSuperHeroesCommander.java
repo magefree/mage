@@ -359,6 +359,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Molly Hayes, Runaway", 698, Rarity.COMMON, mage.cards.m.MollyHayesRunaway.class));
         cards.add(new SetCardInfo("Monologue Tax", 139, Rarity.RARE, mage.cards.m.MonologueTax.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Monologue Tax", 317, Rarity.RARE, mage.cards.m.MonologueTax.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Moon-Boy, Dino Rider", 563, Rarity.UNCOMMON, mage.cards.m.MoonBoyDinoRider.class));
         cards.add(new SetCardInfo("Mountain", 858, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 859, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 860, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
