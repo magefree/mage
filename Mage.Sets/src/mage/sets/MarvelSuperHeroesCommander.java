@@ -351,6 +351,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Mist-Cloaked Herald", 760, Rarity.COMMON, mage.cards.m.MistCloakedHerald.class));
         cards.add(new SetCardInfo("Mister Fantastic", 2, Rarity.MYTHIC, mage.cards.m.MisterFantastic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mister Fantastic", 876, Rarity.MYTHIC, mage.cards.m.MisterFantastic.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mjolnir's Might", 697, Rarity.COMMON, mage.cards.m.MjolnirsMight.class));
         cards.add(new SetCardInfo("Mob Lookout", 821, Rarity.COMMON, mage.cards.m.MobLookout.class));
         cards.add(new SetCardInfo("Mockingbird, Bobbi Morse", 522, Rarity.COMMON, mage.cards.m.MockingbirdBobbiMorse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mockingbird, Bobbi Morse", 842, Rarity.COMMON, mage.cards.m.MockingbirdBobbiMorse.class, NON_FULL_USE_VARIOUS));
