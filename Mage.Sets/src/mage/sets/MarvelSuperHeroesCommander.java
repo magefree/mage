@@ -409,6 +409,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Quantum Misalignment", 339, Rarity.RARE, mage.cards.q.QuantumMisalignment.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Quicksilver, Pietro Maximoff", 551, Rarity.COMMON, mage.cards.q.QuicksilverPietroMaximoff.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Quicksilver, Pietro Maximoff", 853, Rarity.COMMON, mage.cards.q.QuicksilverPietroMaximoff.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Quinjet Technician", 703, Rarity.COMMON, mage.cards.q.QuinjetTechnician.class));
         cards.add(new SetCardInfo("Radiant Summit", 258, Rarity.RARE, mage.cards.r.RadiantSummit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Radiant Summit", 486, Rarity.RARE, mage.cards.r.RadiantSummit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Radioactive Man", 665, Rarity.UNCOMMON, mage.cards.r.RadioactiveMan.class));
