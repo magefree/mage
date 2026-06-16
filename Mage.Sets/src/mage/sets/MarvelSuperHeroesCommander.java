@@ -419,6 +419,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Reconnaissance Mission", 153, Rarity.UNCOMMON, mage.cards.r.ReconnaissanceMission.class));
         cards.add(new SetCardInfo("Recurring Insight", 154, Rarity.RARE, mage.cards.r.RecurringInsight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Recurring Insight", 341, Rarity.RARE, mage.cards.r.RecurringInsight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Red Ghost, Intangible Genius", 413, Rarity.RARE, mage.cards.r.RedGhostIntangibleGenius.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Red Ghost, Intangible Genius", 92, Rarity.RARE, mage.cards.r.RedGhostIntangibleGenius.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rejuvenating Springs", 260, Rarity.RARE, mage.cards.r.RejuvenatingSprings.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rejuvenating Springs", 488, Rarity.RARE, mage.cards.r.RejuvenatingSprings.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Relic of Legends", 209, Rarity.UNCOMMON, mage.cards.r.RelicOfLegends.class));
