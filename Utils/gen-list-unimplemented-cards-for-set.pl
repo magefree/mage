@@ -122,7 +122,7 @@ foreach my $card (sort cardSort @setCards) {
     if(-e $currentFileName) {
         # Card is implemented
         $cardNames{$cardName} = 1;
-        my $implementedEntry = "- [$cardName](https://scryfall.com/search?q=!$cardNameForUrl%20e:$setAbbr)";
+        my $implementedEntry = "- [x] [$cardName](https://scryfall.com/search?q=!$cardNameForUrl%20e:$setAbbr)";
         push(@implementedCards, $implementedEntry);
     } else {
         # Card is not implemented
