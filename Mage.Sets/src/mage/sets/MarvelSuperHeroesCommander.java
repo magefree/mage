@@ -346,6 +346,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Mind's Dilation", 344, Rarity.MYTHIC, mage.cards.m.MindsDilation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mind's Eye", 288, Rarity.RARE, mage.cards.m.MindsEye.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mind's Eye", 447, Rarity.RARE, mage.cards.m.MindsEye.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Minion Missile", 663, Rarity.COMMON, mage.cards.m.MinionMissile.class));
         cards.add(new SetCardInfo("Mirage Mirror", 206, Rarity.RARE, mage.cards.m.MirageMirror.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mirage Mirror", 443, Rarity.RARE, mage.cards.m.MirageMirror.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mist-Cloaked Herald", 760, Rarity.COMMON, mage.cards.m.MistCloakedHerald.class));
