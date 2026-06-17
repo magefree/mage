@@ -482,6 +482,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Shi'ar Soldier", 637, Rarity.UNCOMMON, mage.cards.s.ShiarSoldier.class));
         cards.add(new SetCardInfo("Shipwreck Patrol", 638, Rarity.COMMON, mage.cards.s.ShipwreckPatrol.class));
         cards.add(new SetCardInfo("Shock", 809, Rarity.COMMON, mage.cards.s.Shock.class));
+        cards.add(new SetCardInfo("Sif's Spearmaster", 765, Rarity.COMMON, mage.cards.s.SifsSpearmaster.class));
         cards.add(new SetCardInfo("Skullclamp", 210, Rarity.RARE, mage.cards.s.Skullclamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skullclamp", 451, Rarity.RARE, mage.cards.s.Skullclamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Smashing Spree", 555, Rarity.COMMON, mage.cards.s.SmashingSpree.class, NON_FULL_USE_VARIOUS));
