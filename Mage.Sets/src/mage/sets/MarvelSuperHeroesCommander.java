@@ -494,6 +494,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sol Ring", 212, Rarity.UNCOMMON, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sol Ring", 213, Rarity.UNCOMMON, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sol Ring", 214, Rarity.UNCOMMON, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Soldier On", 843, Rarity.COMMON, mage.cards.s.SoldierOn.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 215, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Solemn Simulacrum", 453, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Songbird, Sonic Screamer", 762, Rarity.COMMON, mage.cards.s.SongbirdSonicScreamer.class));
