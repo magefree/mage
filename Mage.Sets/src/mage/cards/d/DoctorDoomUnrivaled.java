@@ -33,7 +33,7 @@ public class DoctorDoomUnrivaled extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // {T}: You draw a card and lose 1 life. Then if your library has no cards in it, you win the game. (You win even if you have 0 life or didn’t draw a card.)
-        Ability tapAbility = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost());
+        Ability tapAbility = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1, true), new TapSourceCost());
         tapAbility.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         tapAbility.addEffect(new DoctorDoomUnrivaledEffect());
 
