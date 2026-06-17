@@ -605,6 +605,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Unstable Molecule Suit", 116, Rarity.RARE, mage.cards.u.UnstableMoleculeSuit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Unstable Molecule Suit", 457, Rarity.RARE, mage.cards.u.UnstableMoleculeSuit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Valentina Allegra de Fontaine", 671, Rarity.UNCOMMON, mage.cards.v.ValentinaAllegraDeFontaine.class));
+        cards.add(new SetCardInfo("Valeria Richards, Precocious", 342, Rarity.RARE, mage.cards.v.ValeriaRichardsPrecocious.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Valeria Richards, Precocious", 38, Rarity.RARE, mage.cards.v.ValeriaRichardsPrecocious.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Valkyrior Skyrider", 525, Rarity.COMMON, mage.cards.v.ValkyriorSkyrider.class));
         cards.add(new SetCardInfo("Valorous Stance", 145, Rarity.UNCOMMON, mage.cards.v.ValorousStance.class));
         cards.add(new SetCardInfo("Vandalblast", 168, Rarity.UNCOMMON, mage.cards.v.Vandalblast.class));
