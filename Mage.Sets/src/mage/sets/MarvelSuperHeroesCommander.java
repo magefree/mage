@@ -451,6 +451,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Romantic Rendezvous", 808, Rarity.COMMON, mage.cards.r.RomanticRendezvous.class));
         cards.add(new SetCardInfo("Rootbound Crag", 261, Rarity.RARE, mage.cards.r.RootboundCrag.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rootbound Crag", 489, Rarity.RARE, mage.cards.r.RootboundCrag.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Royal Talon Fighter Jet", 24, Rarity.RARE, mage.cards.r.RoyalTalonFighterJet.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Royal Talon Fighter Jet", 321, Rarity.RARE, mage.cards.r.RoyalTalonFighterJet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sadistic Slash", 666, Rarity.UNCOMMON, mage.cards.s.SadisticSlash.class));
         cards.add(new SetCardInfo("Savage Lands", 827, Rarity.UNCOMMON, mage.cards.s.SavageLands.class));
         cards.add(new SetCardInfo("Scarlet Witch, Wanda Maximoff", 855, Rarity.UNCOMMON, mage.cards.s.ScarletWitchWandaMaximoff.class));
