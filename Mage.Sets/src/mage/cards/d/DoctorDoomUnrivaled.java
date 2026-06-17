@@ -29,6 +29,7 @@ public class DoctorDoomUnrivaled extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
+        // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
 
         Ability tapAbility = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost());
