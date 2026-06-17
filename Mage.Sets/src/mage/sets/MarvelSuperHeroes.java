@@ -133,12 +133,14 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Gathering Place", 381, Rarity.RARE, mage.cards.g.GatheringPlace.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ghost, Spectral Saboteur", 214, Rarity.UNCOMMON, mage.cards.g.GhostSpectralSaboteur.class));
         cards.add(new SetCardInfo("Giant Growth", 167, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
+        cards.add(new SetCardInfo("Giant-Sized Flying Ant", 56, Rarity.COMMON, mage.cards.g.GiantSizedFlyingAnt.class));
         cards.add(new SetCardInfo("Gleaming Bastion", 267, Rarity.RARE, mage.cards.g.GleamingBastion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gleaming Bastion", 382, Rarity.RARE, mage.cards.g.GleamingBastion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Go Nuts!", 168, Rarity.COMMON, mage.cards.g.GoNuts.class));
         cards.add(new SetCardInfo("Guerrilla Gorilla", 169, Rarity.COMMON, mage.cards.g.GuerrillaGorilla.class));
         cards.add(new SetCardInfo("H.E.R.B.I.E. Scout Unit", 247, Rarity.COMMON, mage.cards.h.HERBIEScoutUnit.class));
         cards.add(new SetCardInfo("HYDRA Assault Robot", 137, Rarity.COMMON, mage.cards.h.HYDRAAssaultRobot.class));
+        cards.add(new SetCardInfo("HYDRA Infiltration", 100, Rarity.COMMON, mage.cards.h.HYDRAInfiltration.class));
         cards.add(new SetCardInfo("Hell's Kitchen", 268, Rarity.COMMON, mage.cards.h.HellsKitchen.class));
         cards.add(new SetCardInfo("Hercules, Prince of Power", 171, Rarity.UNCOMMON, mage.cards.h.HerculesPrinceOfPower.class));
         cards.add(new SetCardInfo("Hero in Training", 16, Rarity.COMMON, mage.cards.h.HeroInTraining.class));
