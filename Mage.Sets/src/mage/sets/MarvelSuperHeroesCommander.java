@@ -444,6 +444,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Relic of Legends", 209, Rarity.UNCOMMON, mage.cards.r.RelicOfLegends.class));
         cards.add(new SetCardInfo("Repulsor Bots", 532, Rarity.RARE, mage.cards.r.RepulsorBots.class));
         cards.add(new SetCardInfo("Repulsor Rays", 854, Rarity.COMMON, mage.cards.r.RepulsorRays.class));
+        cards.add(new SetCardInfo("Return of the Mole Man", 729, Rarity.MYTHIC, mage.cards.r.ReturnOfTheMoleMan.class));
         cards.add(new SetCardInfo("Rhino's Rampage", 823, Rarity.UNCOMMON, mage.cards.r.RhinosRampage.class));
         cards.add(new SetCardInfo("Rip Apart", 187, Rarity.UNCOMMON, mage.cards.r.RipApart.class));
         cards.add(new SetCardInfo("Robotics Mastery", 786, Rarity.UNCOMMON, mage.cards.r.RoboticsMastery.class));
