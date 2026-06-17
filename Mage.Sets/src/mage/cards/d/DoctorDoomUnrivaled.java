@@ -19,7 +19,7 @@ import mage.players.Player;
 
 import java.util.UUID;
 
-public class DoctorDoomUnrivaled extends CardImpl {
+public final class DoctorDoomUnrivaled extends CardImpl {
     public DoctorDoomUnrivaled(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.supertype.add(SuperType.LEGENDARY);
