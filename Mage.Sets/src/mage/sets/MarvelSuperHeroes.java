@@ -133,6 +133,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Gathering Place", 381, Rarity.RARE, mage.cards.g.GatheringPlace.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ghost, Spectral Saboteur", 214, Rarity.UNCOMMON, mage.cards.g.GhostSpectralSaboteur.class));
         cards.add(new SetCardInfo("Giant Growth", 167, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
+        cards.add(new SetCardInfo("Giant-Sized Flying Ant", 56, Rarity.COMMON, mage.cards.g.GiantSizedFlyingAnt.class));
         cards.add(new SetCardInfo("Gleaming Bastion", 267, Rarity.RARE, mage.cards.g.GleamingBastion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gleaming Bastion", 382, Rarity.RARE, mage.cards.g.GleamingBastion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Go Nuts!", 168, Rarity.COMMON, mage.cards.g.GoNuts.class));
