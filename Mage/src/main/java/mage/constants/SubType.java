@@ -7,6 +7,8 @@ import mage.game.Game;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
+
 public enum SubType {
     //205.3k Instants and sorceries share their lists of subtypes; these subtypes are called spell types.
     ADVENTURE("Adventure", SubTypeSet.SpellType),
@@ -571,6 +573,8 @@ public enum SubType {
     YODA("Yoda", SubTypeSet.PlaneswalkerType, true),  // Star Wars,
     ZARIEL("Zariel", SubTypeSet.PlaneswalkerType);
 
+    private static final Logger LOGGER = Logger.getLogger(SubType.class);
+
     public static class SubTypePredicate implements Predicate<MageObject> {
 
         private final SubType subtype;
@@ -668,7 +672,7 @@ public enum SubType {
             }
         }
 
-        throw new IllegalArgumentException("Can''t find subtype enum value: " + value);
+        throw new IllegalArgumentException("Can''t find subtype enum value in fromString: " + value);
     }
 
     public static SubType byDescription(String subType) {
@@ -677,7 +681,9 @@ public enum SubType {
                 return s;
             }
         }
-        org.apache.log4j.Logger.getLogger(SubType.class).error("no subtype for " + subType + " exists");
+        
+        // TODO: return to exceptions if no more errors in logs, 2026-06-17
+        LOGGER.error("Can''t find subtype enum value in byDescription: " + subType, new Throwable());
         return null;
     }
 
