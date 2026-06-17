@@ -464,6 +464,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Scourglass", 318, Rarity.RARE, mage.cards.s.Scourglass.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scout the City", 817, Rarity.COMMON, mage.cards.s.ScoutTheCity.class));
         cards.add(new SetCardInfo("Secluded Courtyard", 265, Rarity.UNCOMMON, mage.cards.s.SecludedCourtyard.class));
+        cards.add(new SetCardInfo("Secure Detention", 608, Rarity.UNCOMMON, mage.cards.s.SecureDetention.class));
         cards.add(new SetCardInfo("Seize the Day", 166, Rarity.RARE, mage.cards.s.SeizeTheDay.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Seize the Day", 371, Rarity.RARE, mage.cards.s.SeizeTheDay.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Selfless Police Captain", 774, Rarity.COMMON, mage.cards.s.SelflessPoliceCaptain.class));
