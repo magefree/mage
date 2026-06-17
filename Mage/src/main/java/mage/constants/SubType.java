@@ -394,6 +394,7 @@ public enum SubType {
     SHAPESHIFTER("Shapeshifter", SubTypeSet.CreatureType),
     SHARK("Shark", SubTypeSet.CreatureType),
     SHEEP("Sheep", SubTypeSet.CreatureType),
+    SHIAR("Shi'ar", SubTypeSet.CreatureType),
     SIREN("Siren", SubTypeSet.CreatureType),
     SITH("Sith", SubTypeSet.CreatureType),
     SKELETON("Skeleton", SubTypeSet.CreatureType),

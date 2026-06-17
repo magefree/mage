@@ -479,6 +479,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Shang-Chi and the Ten Rings", 94, Rarity.RARE, mage.cards.s.ShangChiAndTheTenRings.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("She-Hulk, Attorney-at-Law", 745, Rarity.UNCOMMON, mage.cards.s.SheHulkAttorneyAtLaw.class));
         cards.add(new SetCardInfo("She-Hulk, Jennifer Walters", 554, Rarity.UNCOMMON, mage.cards.s.SheHulkJenniferWalters.class));
+        cards.add(new SetCardInfo("Shi'ar Soldier", 637, Rarity.UNCOMMON, mage.cards.s.ShiarSoldier.class));
         cards.add(new SetCardInfo("Shipwreck Patrol", 638, Rarity.COMMON, mage.cards.s.ShipwreckPatrol.class));
         cards.add(new SetCardInfo("Shock", 809, Rarity.COMMON, mage.cards.s.Shock.class));
         cards.add(new SetCardInfo("Skullclamp", 210, Rarity.RARE, mage.cards.s.Skullclamp.class, NON_FULL_USE_VARIOUS));
