@@ -51,7 +51,7 @@ public final class RaphaelMostAttitude extends CardImpl {
         this.addAbility(allianceAbility);
 
         // Whenever Raphael attacks, until end of turn, you may play a card exiled with Raphael.
-        this.addAbility(new AttacksTriggeredAbility(new RaphaelMostAttitudeEffect(), false));
+        this.addAbility(new AttacksTriggeredAbility(new RaphaelMostAttitudeEffect(), false), new RaphaelMostAttitudeWatcher());
     }
 
     private RaphaelMostAttitude(final RaphaelMostAttitude card) {
