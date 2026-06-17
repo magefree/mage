@@ -14,6 +14,7 @@ import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
+import mage.watchers.common.CardsExiledThisTurnWatcher;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -44,7 +45,7 @@ public final class EnnisDebateModerator extends CardImpl {
             new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
             false,
             WasCardExiledThisTurnCondition.instance
-        ).addHint(WasCardExiledThisTurnCondition.getHint()));
+        ).addHint(WasCardExiledThisTurnCondition.getHint()), new CardsExiledThisTurnWatcher());
     }
 
     private EnnisDebateModerator(final EnnisDebateModerator card) {
