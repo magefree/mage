@@ -27,6 +27,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Absorbing Man and Titania", 510, Rarity.RARE, mage.cards.a.AbsorbingManAndTitania.class));
         cards.add(new SetCardInfo("Alien Symbiosis", 791, Rarity.UNCOMMON, mage.cards.a.AlienSymbiosis.class));
         cards.add(new SetCardInfo("Amazing Spider-Girl", 583, Rarity.RARE, mage.cards.a.AmazingSpiderGirl.class));
+        cards.add(new SetCardInfo("Ancestral Communion", 376, Rarity.RARE, mage.cards.a.AncestralCommunion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ancestral Communion", 64, Rarity.RARE, mage.cards.a.AncestralCommunion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Annie Joins Up", 281, Rarity.RARE, mage.cards.a.AnnieJoinsUp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Annie Joins Up", 403, Rarity.RARE, mage.cards.a.AnnieJoinsUp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ant-Man's Air Force", 759, Rarity.UNCOMMON, mage.cards.a.AntMansAirForce.class));
