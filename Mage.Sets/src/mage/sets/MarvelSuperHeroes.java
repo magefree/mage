@@ -306,6 +306,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Viv Vision, Teen Synthezoid", 256, Rarity.UNCOMMON, mage.cards.v.VivVisionTeenSynthezoid.class));
         cards.add(new SetCardInfo("Volcanic Villain", 159, Rarity.COMMON, mage.cards.v.VolcanicVillain.class));
         cards.add(new SetCardInfo("Wakandan Drone Flock", 40, Rarity.COMMON, mage.cards.w.WakandanDroneFlock.class));
+        cards.add(new SetCardInfo("Wakandan Royal Guard", 195, Rarity.COMMON, mage.cards.w.WakandanRoyalGuard.class));
         cards.add(new SetCardInfo("War Machine, Legacy of Iron", 238, Rarity.UNCOMMON, mage.cards.w.WarMachineLegacyOfIron.class));
         cards.add(new SetCardInfo("We Say Thee Nay!", 82, Rarity.COMMON, mage.cards.w.WeSayTheeNay.class));
         cards.add(new SetCardInfo("Web Up", 41, Rarity.COMMON, mage.cards.w.WebUp.class));
