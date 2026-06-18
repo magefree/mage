@@ -330,12 +330,12 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     }
 
                     case DECK_REMOVE_SELECTION_MAIN: {
-                        DeckEditorPanel.this.deckArea.getDeckList().removeSelection();
+                        DeckEditorPanel.this.deckArea.getDeckList().removeSelectedCards();
                         break;
                     }
 
                     case DECK_REMOVE_SELECTION_SIDEBOARD: {
-                        DeckEditorPanel.this.deckArea.getSideboardList().removeSelection();
+                        DeckEditorPanel.this.deckArea.getSideboardList().removeSelectedCards();
                         break;
                     }
                 }

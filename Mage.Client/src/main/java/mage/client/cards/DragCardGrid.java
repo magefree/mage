@@ -401,19 +401,30 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         }
     }
 
-    public void removeSelection() {
-        for (List<List<CardView>> gridRow : cardGrid) {
-            for (List<CardView> stack : gridRow) {
-                for (int i = 0; i < stack.size(); ++i) {
-                    CardView card = stack.get(i);
-                    if (card.isSelected()) {
-                        eventSource.fireEvent(card, ClientEventType.DECK_REMOVE_SPECIFIC_CARD);
-                        stack.set(i, null);
-                        removeCardView(card);
+    public void removeSelectedCards() {
+        List<CardView> cardsToRemove = allCards.stream()
+            .filter(CardView::isSelected)
+            .collect(Collectors.toList());
+        removeCards(cardsToRemove);
+    }
+
+    private void removeCards(List<CardView> cardsToRemove) {
+        cardsToRemove.forEach(cardToRemove -> {
+            for (List<List<CardView>> gridRow : cardGrid) {
+                for (List<CardView> stack : gridRow) {
+                    for (int i = 0; i < stack.size(); ++i) {
+                        CardView card = stack.get(i);
+                        if (card != null && card.equals(cardToRemove)) {
+                            eventSource.fireEvent(card, ClientEventType.DECK_REMOVE_SPECIFIC_CARD);
+                            stack.set(i, null); // trimGrid must remove all empty spaces 
+                            removeCardView(card);
+                            break;
+                        }
                     }
                 }
             }
-        }
+        });
+        
         trimGrid();
         layoutGrid();
         repaintGrid();
@@ -1751,31 +1762,32 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             return;
         }
 
-        List<List<List<CardView>>> newCardGrid = new ArrayList<>();
+        deselectAll();
+        Map<CardView, CardView> cardsToReplace = new HashMap<>();
         for (List<List<CardView>> gridRow : cardGrid) {
-            List<List<CardView>> newGridRow = new ArrayList<>();
             for (List<CardView> stack : gridRow) {
-                List<CardView> newStack = new ArrayList<>();
                 for (CardView card : stack) {
                     CardInfo oldestCardInfo = CardRepository.instance.findOldestNonPromoVersionCard(card.getName());
                     if (oldestCardInfo != null) {
                         CardView oldestCardView = new CardView(oldestCardInfo.createMockCard());
-                        this.removeCardView(card);
-                        eventSource.fireEvent(card, ClientEventType.DECK_REMOVE_SPECIFIC_CARD);
-                        this.addCardView(oldestCardView, null);
-                        eventSource.fireEvent(oldestCardView, ClientEventType.DECK_ADD_SPECIFIC_CARD);
-                        newStack.add(oldestCardView);
-                    } else {
-                        newStack.add(card);
+                        if (!card.isSameCardVersion(oldestCardView)) {
+                            cardsToReplace.put(card, oldestCardView);
+                        }
                     }
                 }
-                newGridRow.add(newStack);
             }
-            newCardGrid.add(newGridRow);
         }
-        cardGrid = newCardGrid;
-        layoutGrid();
-        repaintGrid();
+
+        List<CardView> cardsToRemove = new ArrayList<>();
+        cardsToReplace.entrySet().forEach(entry -> {
+            CardView currentCard = entry.getKey();
+            CardView oldestCard = entry.getValue();
+            addCardView(oldestCard, currentCard);
+            cardsToRemove.add(currentCard);
+        });
+        removeCards(cardsToRemove);
+
+        JOptionPane.showMessageDialog(null, "Replaced cards: " + cardsToReplace.size());
     }
 
     // Update the contents of the card grid
