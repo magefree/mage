@@ -3,11 +3,15 @@ package mage.client.cards;
 import mage.abilities.icon.CardIconRenderSettings;
 import mage.cards.Card;
 import mage.cards.MageCard;
+import mage.cards.decks.importer.DeckImporter;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLayout;
+import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.DeckFileFilter;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.client.MageFrame;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
@@ -20,6 +24,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.game.GameException;
 import mage.util.DebugUtil;
 import mage.util.RandomUtil;
 import mage.view.CardView;
@@ -31,6 +36,8 @@ import org.mage.card.arcane.ManaSymbols;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -48,6 +55,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     private Constants.DeckEditorMode mode;
     Listener<Event> cardListener;
     MouseListener countLabelListener; // clicks on the count label
+    
+    private final JFileChooser fcSelectFavoritesList;
 
     @Override
     public Collection<CardView> dragCardList() {
@@ -606,6 +615,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     JButton analyseButton;
     JButton blingButton;
     JButton oldVersionButton;
+    JButton favoritesButton;
     JLabel mouseDoubleClickMode;
 
     // Popup for toolbar
@@ -846,6 +856,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         analyseButton = new JButton("M"); // "Mana" button
         blingButton = new JButton("B"); // "Bling" button
         oldVersionButton = new JButton("O"); // "Old version" button
+        favoritesButton = new JButton("F"); // "Favorite version" button
         mouseDoubleClickMode = new JLabel(DOUBLE_CLICK_MODE_INFO);
         mouseDoubleClickMode.setToolTipText("<html>Mouse modes for double clicks:"
                 + "<br> * &lt;Double Click&gt;: <b>DELETE</b> card from mainboard/sideboard (it works as <b>MOVE</b> in games);"
@@ -853,6 +864,11 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 + "<br> * Deck editor: use &lt;ALT + Double Click&gt; on cards list to add card to the sideboard instead mainboard."
         );
         updateMouseDoubleClicksInfo(false);
+
+        this.fcSelectFavoritesList = new JFileChooser();
+        this.fcSelectFavoritesList.setAcceptAllFileFilterUsed(false);
+        this.fcSelectFavoritesList.addChoosableFileFilter(new DeckFileFilter("dck", "XMage's deck files (*.dck)"));
+        this.fcSelectFavoritesList.addChoosableFileFilter(new DeckFileFilter("dck_info", "XMage's deck files with info (*.dck_info)"));
 
         // Name and count label
         deckNameAndCountLabel = new JLabel();
@@ -878,6 +894,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         toolbarInner.add(analyseButton);
         toolbarInner.add(blingButton);
         toolbarInner.add(oldVersionButton);
+        toolbarInner.add(favoritesButton);
         toolbarInner.add(mouseDoubleClickMode);
         toolbar.add(toolbarInner, BorderLayout.WEST);
         JPanel sliderPanel = new JPanel(new GridBagLayout());
@@ -1085,6 +1102,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         // Old version button - Switch cards to the oldest non-promo printing. In case of multiples in a set, take the lowest card number.
         oldVersionButton.setToolTipText("Switch cards to the oldest non-promo printing");
         oldVersionButton.addActionListener(evt -> oldVersionDeck());
+        
+        // Favorites button - Switch cards to the prints from selected decklist. In case of multiples, take a random one.
+        favoritesButton.setToolTipText("Switch cards to the prints from selected decklist");
+        favoritesButton.addActionListener(evt -> favoritesDeck());
 
         // Filter popup
         filterPopup = new JPopupMenu();
@@ -1785,6 +1806,130 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         removeCards(cardsToRemove);
 
         JOptionPane.showMessageDialog(null, "Replaced cards: " + cardsToReplace.size());
+    }
+
+    private void favoritesDeck() {
+        if (this.mode != Constants.DeckEditorMode.FREE_BUILDING) {
+            return;
+        }
+
+        final String LAST_DECK_FOLDER = "lastFavDeckFolder";
+        List<DeckCardInfo> favoriteCardsInfos = new ArrayList<DeckCardInfo>();
+        DeckCardLists favoriteCardsLists = new DeckCardLists();
+
+        // This is copypasted from Mage.Client/src/main/java/mage/client/deckeditor/DeckEditorPanel.java
+        String lastFolder = MageFrame.getPreferences().get(LAST_DECK_FOLDER, "");
+        if (!lastFolder.isEmpty()) {
+            this.fcSelectFavoritesList.setCurrentDirectory(new File(lastFolder));
+        }
+        int ret = this.fcSelectFavoritesList.showOpenDialog(this);
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            File file = this.fcSelectFavoritesList.getSelectedFile();
+            {
+                /**
+                 * Work around a JFileChooser bug on Windows 7-10 with JRT 7+ In
+                 * the case where the user selects the exact same file as was
+                 * previously selected without touching anything else in the
+                 * dialog, getSelectedFile() will erroneously return null due to
+                 * some combination of our settings.
+                 *
+                 * We manually sub in the last selected file in this case.
+                 */
+                if (file == null) {
+                    if (!lastFolder.isEmpty()) {
+                        file = new File(lastFolder);
+                    }
+                }
+            }
+
+            logger.info("[FAVORITES] Attempting to load file " + file.getPath());
+
+            MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            try {
+                StringBuilder errorMessages = new StringBuilder();
+
+                favoriteCardsLists = DeckImporter.importDeckFromFile(file.getPath(), errorMessages, true);
+                if (favoriteCardsLists != null) {
+                    favoriteCardsInfos = favoriteCardsLists.getCards();
+                    favoriteCardsInfos.addAll(favoriteCardsLists.getSideboard());
+                }
+
+                //processAndShowImportErrors(errorMessages);
+                if (errorMessages.length() > 0) {
+                    String mes = "Found problems with deck: \n\n" + errorMessages.toString();
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), mes.substring(0, Math.min(1000, mes.length())), "Errors while loading deck", JOptionPane.WARNING_MESSAGE);
+                }
+
+                // save last deck history
+                try {
+                    MageFrame.getPreferences().put(LAST_DECK_FOLDER, file.getCanonicalPath());
+                } catch (IOException ex) {
+                    logger.error("Error on save last load deck folder: " + ex.getMessage());
+                }
+
+            //} catch (GameException ex) {
+            //    JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            }
+        }
+        this.fcSelectFavoritesList.setSelectedFile(null);
+
+        logger.info("[FAVORITES] favoriteCardsInfos = " + favoriteCardsInfos.toString());
+        logger.info("[FAVORITES] favoriteCardsInfos names = " + favoriteCardsInfos.stream()
+                                                                .map(c -> c.getCardName())
+                                                                .collect(Collectors.toList())
+                                                                .toString());
+        
+        List<List<List<CardView>>> newCardGrid = new ArrayList<>();
+        for (List<List<CardView>> gridRow : cardGrid) {
+            List<List<CardView>> newGridRow = new ArrayList<>();
+            for (List<CardView> stack : gridRow) {
+                List<CardView> newStack = new ArrayList<>();
+                for (CardView card : stack) {
+                    String name = card.getName();
+                    List<DeckCardInfo> cardPool = favoriteCardsInfos.stream()
+                                              .filter(c -> c.getCardName().equals(name))
+                                              .collect(Collectors.toList());
+                    logger.info("[FAVORITES] cardPool for " + name + " = " + cardPool.toString());
+                    
+                    boolean replaced = false;
+                    if (!cardPool.isEmpty()) {
+                        DeckCardInfo randomDeckCardInfo = cardPool.get(RandomUtil.nextInt(cardPool.size()));
+
+                        CardInfo randomCardInfo = CardRepository.instance.findCard(randomDeckCardInfo.getSetCode(),
+                                                                                 randomDeckCardInfo.getCardNumber());
+                        if (randomCardInfo != null) {
+                            Card randomCard = randomCardInfo.createMockCard();
+                            logger.info("[FAVORITES] name " + name + " ; " + randomCard.getName());
+                            if (randomCard.getName().equals(name)) {
+                                CardView favoriteCard = new CardView(randomCard);
+                                this.removeCardView(card);
+                                // Removing the event triggers seems to fix the problem reported in
+                                // issue #8104. I don't know if there are unforseen consequences of this
+                                //eventSource.fireEvent(card, ClientEventType.DECK_REMOVE_SPECIFIC_CARD);
+                                this.addCardView(favoriteCard, null);
+                                //eventSource.fireEvent(favoriteCard, ClientEventType.DECK_ADD_SPECIFIC_CARD);
+                                replaced = true;
+                                newStack.add(favoriteCard);
+                                logger.info("[FAVORITES] adding in replacement card for " + favoriteCard.getName() +
+                                        " with card number " + favoriteCard.getCardNumber());
+                            }
+                        }
+                    }
+                    if (!replaced) {
+                        logger.info("[FAVORITES] Card " + card.getName() + "unchanged");
+                        newStack.add(card);
+                    }
+                }
+                newGridRow.add(newStack);
+            }
+            newCardGrid.add(newGridRow);
+        }
+        logger.info("[FAVORITES] newCardGrid: " + newCardGrid.toString());
+        cardGrid = newCardGrid;
+        layoutGrid();
+        repaintGrid();
     }
 
     // Update the contents of the card grid
