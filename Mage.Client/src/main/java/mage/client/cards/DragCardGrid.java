@@ -24,7 +24,6 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.game.GameException;
 import mage.util.DebugUtil;
 import mage.util.RandomUtil;
 import mage.view.CardView;
@@ -1842,7 +1841,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 }
             }
 
-            logger.info("[FAVORITES] Attempting to load file " + file.getPath());
+            logger.debug("[FAVORITES] Attempting to load file " + file.getPath());
 
             MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
             try {
@@ -1854,7 +1853,6 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     favoriteCardsInfos.addAll(favoriteCardsLists.getSideboard());
                 }
 
-                //processAndShowImportErrors(errorMessages);
                 if (errorMessages.length() > 0) {
                     String mes = "Found problems with deck: \n\n" + errorMessages.toString();
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), mes.substring(0, Math.min(1000, mes.length())), "Errors while loading deck", JOptionPane.WARNING_MESSAGE);
@@ -1875,61 +1873,56 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         }
         this.fcSelectFavoritesList.setSelectedFile(null);
 
-        logger.info("[FAVORITES] favoriteCardsInfos = " + favoriteCardsInfos.toString());
-        logger.info("[FAVORITES] favoriteCardsInfos names = " + favoriteCardsInfos.stream()
+        logger.debug("[FAVORITES] favoriteCardsInfos = " + favoriteCardsInfos.toString());
+        logger.debug("[FAVORITES] favoriteCardsInfos names = " + favoriteCardsInfos.stream()
                                                                 .map(c -> c.getCardName())
                                                                 .collect(Collectors.toList())
                                                                 .toString());
-        
-        List<List<List<CardView>>> newCardGrid = new ArrayList<>();
+
+        deselectAll();
+        Map<CardView, CardView> cardsToReplace = new HashMap<>();
+
         for (List<List<CardView>> gridRow : cardGrid) {
-            List<List<CardView>> newGridRow = new ArrayList<>();
             for (List<CardView> stack : gridRow) {
-                List<CardView> newStack = new ArrayList<>();
                 for (CardView card : stack) {
                     String name = card.getName();
                     List<DeckCardInfo> cardPool = favoriteCardsInfos.stream()
                                               .filter(c -> c.getCardName().equals(name))
                                               .collect(Collectors.toList());
-                    logger.info("[FAVORITES] cardPool for " + name + " = " + cardPool.toString());
-                    
+                    logger.debug("[FAVORITES] cardPool for " + name + " = " + cardPool.toString());
+
                     boolean replaced = false;
                     if (!cardPool.isEmpty()) {
-                        DeckCardInfo randomDeckCardInfo = cardPool.get(RandomUtil.nextInt(cardPool.size()));
+                        DeckCardInfo favoriteDeckCardInfo = cardPool.get(RandomUtil.nextInt(cardPool.size()));
 
-                        CardInfo randomCardInfo = CardRepository.instance.findCard(randomDeckCardInfo.getSetCode(),
-                                                                                 randomDeckCardInfo.getCardNumber());
-                        if (randomCardInfo != null) {
-                            Card randomCard = randomCardInfo.createMockCard();
-                            logger.info("[FAVORITES] name " + name + " ; " + randomCard.getName());
-                            if (randomCard.getName().equals(name)) {
-                                CardView favoriteCard = new CardView(randomCard);
-                                this.removeCardView(card);
-                                // Removing the event triggers seems to fix the problem reported in
-                                // issue #8104. I don't know if there are unforseen consequences of this
-                                //eventSource.fireEvent(card, ClientEventType.DECK_REMOVE_SPECIFIC_CARD);
-                                this.addCardView(favoriteCard, null);
-                                //eventSource.fireEvent(favoriteCard, ClientEventType.DECK_ADD_SPECIFIC_CARD);
+                        CardInfo favoriteCardInfo = CardRepository.instance.findCard(favoriteDeckCardInfo.getSetCode(),
+                                                                                 favoriteDeckCardInfo.getCardNumber());
+                        if (favoriteCardInfo != null) {
+                            CardView favoriteCardView = new CardView(favoriteCardInfo.createMockCard());
+                            if (!card.isSameCardVersion(favoriteCardView)) {
                                 replaced = true;
-                                newStack.add(favoriteCard);
-                                logger.info("[FAVORITES] adding in replacement card for " + favoriteCard.getName() +
-                                        " with card number " + favoriteCard.getCardNumber());
+                                logger.debug("[FAVORITES] adding in replacement card for " + favoriteCardView.getName() +
+                                        " with card number " + favoriteCardView.getCardNumber());
+                                cardsToReplace.put(card, favoriteCardView);
                             }
                         }
                     }
                     if (!replaced) {
-                        logger.info("[FAVORITES] Card " + card.getName() + "unchanged");
-                        newStack.add(card);
+                        logger.debug("[FAVORITES] Card " + card.getName() + "unchanged");
                     }
                 }
-                newGridRow.add(newStack);
             }
-            newCardGrid.add(newGridRow);
         }
-        logger.info("[FAVORITES] newCardGrid: " + newCardGrid.toString());
-        cardGrid = newCardGrid;
-        layoutGrid();
-        repaintGrid();
+        List<CardView> cardsToRemove = new ArrayList<>();
+        cardsToReplace.entrySet().forEach(entry -> {
+            CardView currentCard = entry.getKey();
+            CardView favoriteCard = entry.getValue();
+            addCardView(favoriteCard, currentCard);
+            cardsToRemove.add(currentCard);
+        });
+        removeCards(cardsToRemove);
+
+        JOptionPane.showMessageDialog(null, "Replaced cards: " + cardsToReplace.size());
     }
 
     // Update the contents of the card grid
