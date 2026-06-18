@@ -242,6 +242,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Greater Good", 174, Rarity.RARE, mage.cards.g.GreaterGood.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Greater Good", 380, Rarity.RARE, mage.cards.g.GreaterGood.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Green Goblin, Back for More", 657, Rarity.RARE, mage.cards.g.GreenGoblinBackForMore.class));
+        cards.add(new SetCardInfo("Grim Reaper's Scythe", 658, Rarity.RARE, mage.cards.g.GrimReapersScythe.class));
         cards.add(new SetCardInfo("HYDRA Disintegrator", 660, Rarity.UNCOMMON, mage.cards.h.HYDRADisintegrator.class));
         cards.add(new SetCardInfo("Hammer of Nazahn", 286, Rarity.RARE, mage.cards.h.HammerOfNazahn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hammer of Nazahn", 427, Rarity.RARE, mage.cards.h.HammerOfNazahn.class, NON_FULL_USE_VARIOUS));
