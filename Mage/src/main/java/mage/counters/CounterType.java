@@ -128,6 +128,7 @@ public enum CounterType {
     INGREDIENT("ingredient"),
     INTEL("intel"),
     INTERVENTION("intervention"),
+    INVASION("invasion"),
     INVITATION("invitation"),
     ISOLATION("isolation"),
     JAVELIN("javelin"),
