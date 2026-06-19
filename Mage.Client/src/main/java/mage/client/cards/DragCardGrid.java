@@ -1880,7 +1880,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                                                                 .toString());
 
         deselectAll();
-        Map<CardView, CardView> cardsToReplace = new HashMap<>();
+        Map<CardView, NewCardInfo> cardsToReplace = new HashMap<>();
 
         for (List<List<CardView>> gridRow : cardGrid) {
             for (List<CardView> stack : gridRow) {
@@ -1898,12 +1898,13 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                         CardInfo favoriteCardInfo = CardRepository.instance.findCard(favoriteDeckCardInfo.getSetCode(),
                                                                                  favoriteDeckCardInfo.getCardNumber());
                         if (favoriteCardInfo != null) {
-                            CardView favoriteCardView = new CardView(favoriteCardInfo.createMockCard());
+                            Card favoriteCard = favoriteCardInfo.createMockCard();
+                            CardView favoriteCardView = new CardView(favoriteCard);
                             if (!card.isSameCardVersion(favoriteCardView)) {
                                 replaced = true;
                                 logger.debug("[FAVORITES] adding in replacement card for " + favoriteCardView.getName() +
                                         " with card number " + favoriteCardView.getCardNumber());
-                                cardsToReplace.put(card, favoriteCardView);
+                                cardsToReplace.put(card, new NewCardInfo(favoriteCard, favoriteCardView));
                             }
                         }
                     }
@@ -1914,10 +1915,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             }
         }
         List<CardView> cardsToRemove = new ArrayList<>();
-        cardsToReplace.entrySet().forEach(entry -> {
-            CardView currentCard = entry.getKey();
-            CardView favoriteCard = entry.getValue();
-            addCardView(favoriteCard, currentCard);
+        cardsToReplace.forEach((currentCard, favoriteNewCardInfo) -> {
+            addCardView(favoriteNewCardInfo.newView, favoriteNewCardInfo.newCard, currentCard);
             cardsToRemove.add(currentCard);
         });
         removeCards(cardsToRemove);
