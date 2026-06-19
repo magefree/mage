@@ -65,7 +65,7 @@ public final class TergridGodOfFright extends ModalDoubleFacedCard {
                                 new DiscardCardCost()
                         ),
                         "Sacrifice a nonland permanent or discard a card to prevent losing 3 life?"
-                ), new TapSourceCost()
+                ).withTheyText(), new TapSourceCost()
         );
         tergridsLaternActivatedAbility.addTarget(new TargetPlayer());
         this.getRightHalfCard().addAbility(tergridsLaternActivatedAbility);

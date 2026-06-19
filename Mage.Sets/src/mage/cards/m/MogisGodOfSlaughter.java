@@ -2,20 +2,20 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.DevotionCount;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DoUnlessTargetPlayerOrTargetsControllerPaysEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetSacrifice;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -40,8 +40,8 @@ public final class MogisGodOfSlaughter extends CardImpl {
                 .addHint(DevotionCount.BR.getHint()));
 
         // At the beginning of each opponent's upkeep, Mogis deals 2 damage to that player unless they sacrifice a creature.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                TargetController.OPPONENT, new MogisGodOfSlaughterEffect(),
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(
+                new DamageTargetEffect(2).withTargetDescription("that player"),new ManaCostsImpl<>("{2}")).withTheyText(),
                 false
         );
         this.addAbility(ability);
@@ -54,43 +54,5 @@ public final class MogisGodOfSlaughter extends CardImpl {
     @Override
     public MogisGodOfSlaughter copy() {
         return new MogisGodOfSlaughter(this);
-    }
-}
-
-class MogisGodOfSlaughterEffect extends OneShotEffect {
-
-    MogisGodOfSlaughterEffect() {
-        super(Outcome.Damage);
-        staticText = "{this} deals 2 damage to that player unless they sacrifice a creature of their choice";
-    }
-
-    private MogisGodOfSlaughterEffect(final MogisGodOfSlaughterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MogisGodOfSlaughterEffect copy() {
-        return new MogisGodOfSlaughterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(game.getActivePlayerId());
-        if (player == null) {
-            return false;
-        }
-        if (game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, game.getActivePlayerId(), game) == 0) {
-            return player.damage(2, source.getSourceId(), source, game) > 0;
-        }
-        TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
-        if (target.canChoose(player.getId(), source, game)
-                && player.chooseUse(Outcome.Detriment, "Sacrifice a creature to prevent 2 damage?", source, game)
-                && player.choose(Outcome.Sacrifice, target, source, game)) {
-            Permanent permanent = game.getPermanent(target.getFirstTarget());
-            if (permanent != null && permanent.sacrifice(source, game)) {
-                return true;
-            }
-        }
-        return player.damage(2, source.getSourceId(), source, game) > 0;
     }
 }
