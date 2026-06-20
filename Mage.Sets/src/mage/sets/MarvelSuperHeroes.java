@@ -20,7 +20,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         this.blockName = "Marvel Super Heroes"; // for sorting in GUI
         this.hasBasicLands = true;
 
-        this.enablePlayBooster(442);
+        this.enablePlayBooster(276);
 
         cards.add(new SetCardInfo("A.I.M. Labs", 257, Rarity.COMMON, mage.cards.a.AIMLabs.class));
         cards.add(new SetCardInfo("A.I.M. Scientists", 44, Rarity.COMMON, mage.cards.a.AIMScientists.class));
