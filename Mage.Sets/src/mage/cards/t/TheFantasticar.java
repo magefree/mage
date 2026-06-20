@@ -16,13 +16,17 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.FantasticarConstructToken;
-import mage.watchers.common.SpellsCastWatcher;
+import mage.game.stack.Spell;
+import mage.watchers.Watcher;
 
+import java.util.Map;
+import java.util.HashMap;
 import java.util.UUID;
 
 /**
@@ -48,7 +52,7 @@ public final class TheFantasticar extends CardImpl {
 
         //Whenever you cast your fourth noncreature spell each turn, you may sacrifice
         //The Fantasticar. If you do, create four 4/4 colorless Construct artifact creature tokens with flying and haste.
-        this.addAbility(new TheFantasticarTriggeredAbility());
+        this.addAbility(new TheFantasticarTriggeredAbility(), new FantasticarWatcher());
     }
 
     private TheFantasticar(final TheFantasticar card) {
@@ -60,6 +64,37 @@ public final class TheFantasticar extends CardImpl {
         return new TheFantasticar(this);
     }
 }
+// Based on ShadowInTheWarp.ShadowInTheWarpWatcher
+// TODO: Have this replaced for a more general solution
+class FantasticarWatcher extends Watcher {
+
+    private final Map<UUID, Integer> nonCreatureSpellsCastThisTurn = new HashMap<>();
+
+    public FantasticarWatcher() {
+        super(WatcherScope.GAME);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
+            Spell spell = (Spell) game.getObject(event.getTargetId());
+            if (spell != null && !spell.isCreature(game)) {
+                nonCreatureSpellsCastThisTurn.merge(event.getPlayerId(), 1, Integer::sum);
+            }
+        }
+    }
+
+    public int getNoncreatureCount(UUID player){
+        return nonCreatureSpellsCastThisTurn.get(player);
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        nonCreatureSpellsCastThisTurn.clear();
+    }
+}
+
 
 class TheFantasticarTriggeredAbility extends TriggeredAbilityImpl {
 
@@ -89,14 +124,10 @@ class TheFantasticarTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
-            SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
+            FantasticarWatcher watcher = game.getState().getWatcher(FantasticarWatcher.class);
             return watcher != null && 
                 StaticFilters.FILTER_SPELL_NON_CREATURE.match(game.getSpell(event.getTargetId()), game) &&
-                watcher.getSpellsCastThisTurn(this.getControllerId())
-                .stream()
-                .filter(spell -> !spell.isCreature(null))
-                .toList()
-                .size() == 4;
+                watcher.getNoncreatureCount(this.getControllerId()) == 4;
         }
         return false;
     }
