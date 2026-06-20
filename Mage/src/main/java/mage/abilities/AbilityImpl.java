@@ -166,9 +166,16 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public void newOriginalId() {
-        this.id = UUID.randomUUID();
-        this.originalId = id;
-        getEffects().newId();
+        setOriginalId(UUID.randomUUID());
+    }
+
+    @Override
+    public void setOriginalId(UUID newOriginalId) {
+        boolean hasChanged = !newOriginalId.equals(originalId);
+        this.originalId = newOriginalId;
+        if (hasChanged) {
+            getEffects().newId();
+        }
     }
 
     @Override
