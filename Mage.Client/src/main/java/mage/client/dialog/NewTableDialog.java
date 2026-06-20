@@ -835,7 +835,8 @@ public class NewTableDialog extends MageDialog {
         this.roomId = roomId;
         if (!lastSessionId.equals(SessionHandler.getSessionId())) {
             lastSessionId = SessionHandler.getSessionId();
-            this.player1Panel.setPlayerName(SessionHandler.getUserName());
+            player1Panel.setPlayerName(SessionHandler.getUserName());
+            player1Panel.loadRecentDeckFiles();
             cbGameType.setModel(new DefaultComboBoxModel(SessionHandler.getGameTypes().toArray()));
             cbDeckType.setModel(new DefaultComboBoxModel(SessionHandler.getDeckTypes()));
             selectLimitedByDefault();

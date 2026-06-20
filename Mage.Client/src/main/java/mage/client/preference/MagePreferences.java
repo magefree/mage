@@ -4,10 +4,11 @@ import com.google.common.collect.Sets;
 import mage.client.MageFrame;
 import mage.client.util.ClientDefaultSettings;
 
-import java.util.Date;
-import java.util.Set;
+import java.io.File;
+import java.util.*;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
+import java.util.stream.Collectors;
 
 // TODO: Move all preference related logic from MageFrame and PreferencesDialog to this class.
 public final class MagePreferences {

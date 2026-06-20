@@ -330,6 +330,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CONNECT_AUTO_CONNECT = "autoConnect";
     public static final String KEY_CONNECT_FLAG = "connectFlag";
 
+    // Settings for the New/Join Table Dialog
+    public static final String KEY_RECENT_DECKLIST_FILES = "recentDecklistFiles"; // Semicolon separated list of filenames
+    public static final String KEY_MAX_RECENT_DECKLIST_FLIES = "numRecentDecklistFiles"; // Maximum number of recent decks to remember
+
     // auto-update settings on first run
     public static final String KEY_SETTINGS_VERSION = "settingsVersion";
 
