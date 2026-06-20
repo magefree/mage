@@ -620,10 +620,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Quantum Misalignment", 52, Rarity.RARE, mage.cards.q.QuantumMisalignment.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Quantum Misalignment", 657, Rarity.RARE, mage.cards.q.QuantumMisalignment.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Quantum Misalignment", 959, Rarity.RARE, mage.cards.q.QuantumMisalignment.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Rassilon, the War President", 1025, Rarity.RARE, mage.cards.r.RassilonTheWarPresident.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Rassilon, the War President", 150, Rarity.RARE, mage.cards.r.RassilonTheWarPresident.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Rassilon, the War President", 434, Rarity.RARE, mage.cards.r.RassilonTheWarPresident.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Rassilon, the War President", 755, Rarity.RARE, mage.cards.r.RassilonTheWarPresident.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rassilon, the War President", 1025, Rarity.RARE, mage.cards.r.RassilonTheWarPresident.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rassilon, the War President", 150, Rarity.RARE, mage.cards.r.RassilonTheWarPresident.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rassilon, the War President", 434, Rarity.RARE, mage.cards.r.RassilonTheWarPresident.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rassilon, the War President", 755, Rarity.RARE, mage.cards.r.RassilonTheWarPresident.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Regenerations Restored", 1026, Rarity.RARE, mage.cards.r.RegenerationsRestored.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Regenerations Restored", 151, Rarity.RARE, mage.cards.r.RegenerationsRestored.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Regenerations Restored", 435, Rarity.RARE, mage.cards.r.RegenerationsRestored.class, NON_FULL_USE_VARIOUS));
