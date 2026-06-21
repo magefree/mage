@@ -175,4 +175,31 @@ public class RoleTest extends CardTestPlayerBase {
         assertLife(playerA, 20 + 2 + 2);
     }
 
+    // https://github.com/magefree/mage/issues/15360
+    @Test
+    public void testDuplicates() {
+        addCard(Zone.BATTLEFIELD, playerA, "Gylwain, Casting Director");
+        addCard(Zone.HAND, playerA, "Balduvian Bears");
+        addCard(Zone.BATTLEFIELD, playerA, "Anointed Procession");
+        addCard(Zone.HAND, playerB, "Monstrous Rage", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears");
+        setModeChoice(playerA, "3");
+        setChoice(playerA, "Monster");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Monstrous Rage");
+        addTarget(playerB, "Balduvian Bears");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Monstrous Rage");
+        addTarget(playerB, "Balduvian Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Monster", 1);
+        assertPermanentCount(playerB, "Monster", 1);
+        assertPowerToughness(playerA, "Balduvian Bears", 6, 4);
+    }
 }
