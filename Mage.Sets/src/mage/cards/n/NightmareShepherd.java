@@ -9,6 +9,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -18,9 +19,10 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -82,18 +84,17 @@ class NightmareShepherdEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (player == null || card == null) {
+        Permanent permanent = (Permanent) getValue("creatureDied");
+        Set<Card> cards = new CardsImpl(getTargetPointer().getTargets(game, source)).getCards(game);
+        if (player == null || permanent == null || cards.isEmpty()) {
             return false;
         }
-        CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(
-                source.getControllerId(), null, false, 1, false,
-                false, null, 1, 1, false
-        );
-        effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game) + 1));
-        effect.withAdditionalSubType(SubType.NIGHTMARE);
-        player.moveCards(card, Zone.EXILED, source, game);
-        effect.apply(game, source);
+        if (player.moveCards(cards, Zone.EXILED, source, game)) {
+            new CreateTokenCopyTargetEffect(
+                    source.getControllerId(), null, false, 1, false,
+                    false, null, 1, 1, false
+            ).setSavedPermanent(permanent).withAdditionalSubType(SubType.NIGHTMARE).apply(game, source);
+        }
         return true;
     }
 }

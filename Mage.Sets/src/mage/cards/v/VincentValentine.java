@@ -8,7 +8,7 @@ import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.LifelinkAbility;
@@ -16,6 +16,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
@@ -61,8 +62,10 @@ public final class VincentValentine extends TransformingDoubleFacedCard {
         this.getRightHalfCard().addAbility(LifelinkAbility.getInstance());
 
         // When Galian Beast dies, return it to the battlefield tapped.
-        this.getRightHalfCard().addAbility(new DiesSourceTriggeredAbility(new ReturnSourceFromGraveyardToBattlefieldEffect(true)
-                .setText("return it to the battlefield tapped")));
+        this.getRightHalfCard().addAbility(new DiesSourceTriggeredAbility(
+                new ReturnToBattlefieldUnderYourControlTargetEffect(false, true)
+                        .setText("return it to the battlefield tapped"),
+                false, SetTargetPointer.CARD));
     }
 
     private VincentValentine(final VincentValentine card) {

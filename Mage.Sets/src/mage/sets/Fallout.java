@@ -175,10 +175,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Captain of the Watch", 448, Rarity.RARE, mage.cards.c.CaptainOfTheWatch.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain of the Watch", 685, Rarity.RARE, mage.cards.c.CaptainOfTheWatch.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain of the Watch", 976, Rarity.RARE, mage.cards.c.CaptainOfTheWatch.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Cass, Hand of Vengeance", 410, Rarity.RARE, mage.cards.c.CassHandOfVengeance.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Cass, Hand of Vengeance", 625, Rarity.RARE, mage.cards.c.CassHandOfVengeance.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Cass, Hand of Vengeance", 938, Rarity.RARE, mage.cards.c.CassHandOfVengeance.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Cass, Hand of Vengeance", 97, Rarity.RARE, mage.cards.c.CassHandOfVengeance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cass, Hand of Vengeance", 410, Rarity.RARE, mage.cards.c.CassHandOfVengeance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cass, Hand of Vengeance", 625, Rarity.RARE, mage.cards.c.CassHandOfVengeance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cass, Hand of Vengeance", 938, Rarity.RARE, mage.cards.c.CassHandOfVengeance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cass, Hand of Vengeance", 97, Rarity.RARE, mage.cards.c.CassHandOfVengeance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Casualties of War", 1004, Rarity.RARE, mage.cards.c.CasualtiesOfWar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Casualties of War", 213, Rarity.RARE, mage.cards.c.CasualtiesOfWar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Casualties of War", 476, Rarity.RARE, mage.cards.c.CasualtiesOfWar.class, NON_FULL_USE_VARIOUS));
@@ -831,10 +831,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Strength Bobblehead", 1057, Rarity.UNCOMMON, mage.cards.s.StrengthBobblehead.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Strength Bobblehead", 143, Rarity.UNCOMMON, mage.cards.s.StrengthBobblehead.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Strength Bobblehead", 671, Rarity.UNCOMMON, mage.cards.s.StrengthBobblehead.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Strong Back", 402, Rarity.RARE, mage.cards.s.StrongBack.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Strong Back", 611, Rarity.RARE, mage.cards.s.StrongBack.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Strong Back", 83, Rarity.RARE, mage.cards.s.StrongBack.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Strong Back", 930, Rarity.RARE, mage.cards.s.StrongBack.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strong Back", 402, Rarity.RARE, mage.cards.s.StrongBack.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strong Back", 611, Rarity.RARE, mage.cards.s.StrongBack.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strong Back", 83, Rarity.RARE, mage.cards.s.StrongBack.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strong Back", 930, Rarity.RARE, mage.cards.s.StrongBack.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Strong, the Brutish Thespian", 403, Rarity.RARE, mage.cards.s.StrongTheBrutishThespian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Strong, the Brutish Thespian", 612, Rarity.RARE, mage.cards.s.StrongTheBrutishThespian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Strong, the Brutish Thespian", 84, Rarity.RARE, mage.cards.s.StrongTheBrutishThespian.class, NON_FULL_USE_VARIOUS));
@@ -1090,6 +1090,5 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Young Deathclaws", 125, Rarity.UNCOMMON, mage.cards.y.YoungDeathclaws.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Young Deathclaws", 653, Rarity.UNCOMMON, mage.cards.y.YoungDeathclaws.class, NON_FULL_USE_VARIOUS));
 
-        cards.removeIf(card -> HIDE_MUTATE_CARDS && MUTATE_CARD_NAMES.contains(card.getName()));
     }
 }

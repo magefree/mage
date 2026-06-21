@@ -12,6 +12,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
@@ -104,9 +106,9 @@ class TasterOfWaresEffect extends OneShotEffect {
                 card = cards.getRandom(game);
                 break;
             default:
-                TargetCard targetCard = new TargetCardInHand(1, StaticFilters.FILTER_CARD);
+                TargetCard targetCard = new TargetCard(Zone.HAND, new FilterCard());
                 targetCard.withChooseHint("to exile");
-                controller.choose(outcome, cards, target, source, game);
+                controller.choose(outcome, cards, targetCard, source, game);
                 card = game.getCard(targetCard.getFirstTarget());
         }
         if (card == null) {

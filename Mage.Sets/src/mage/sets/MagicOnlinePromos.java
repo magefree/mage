@@ -24,7 +24,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         addPart1(); // A-L
         addPart2(); // M-Z
 
-        cards.removeIf(card -> HIDE_MUTATE_CARDS && MUTATE_CARD_NAMES.contains(card.getName()));
     }
 
     private void addPart1() {

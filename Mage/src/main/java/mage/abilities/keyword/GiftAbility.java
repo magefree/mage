@@ -57,7 +57,7 @@ public class GiftAbility extends StaticAbility implements OptionalAdditionalSour
                     .withInterveningIf(GiftWasPromisedCondition.TRUE)
                     .setRuleVisible(false));
         } else {
-            card.getSpellAbility().addEffect(new PromiseGiftEffect(giftType));
+            card.getSpellAbility().addEffect(new PromiseGiftEffect(giftType).setText(""));
         }
     }
 
@@ -88,9 +88,7 @@ public class GiftAbility extends StaticAbility implements OptionalAdditionalSour
             return;
         }
         additionalCost.activate();
-        for (Cost cost : ((Costs<Cost>) additionalCost)) {
-            ability.getCosts().add(cost.copy());
-        }
+        ability.addCost(additionalCost.copy());
         ability.setCostsTag(GIFT_ACTIVATION_VALUE_KEY, null);
     }
 

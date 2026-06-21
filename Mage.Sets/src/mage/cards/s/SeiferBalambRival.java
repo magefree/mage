@@ -39,7 +39,7 @@ public final class SeiferBalambRival extends CardImpl {
 
         // Whenever you attack a player, goad target creature that player controls.
         Ability ability = new AttacksPlayerWithCreaturesTriggeredAbility(
-                new GoadTargetEffect().setText("goad target creature that player controls"), SetTargetPointer.NONE
+                new GoadTargetEffect().setText("goad target creature that player controls"), SetTargetPointer.PLAYER
         );
         ability.addTarget(new TargetCreaturePermanent());
         ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());

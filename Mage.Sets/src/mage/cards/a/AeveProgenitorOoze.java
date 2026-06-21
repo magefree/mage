@@ -16,7 +16,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 
 import java.util.UUID;
 
@@ -81,7 +80,7 @@ class AeveProgenitorOozeNonLegendaryEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent instanceof PermanentToken) {
+        if (permanent.isToken()) {
             permanent.removeSuperType(game, SuperType.LEGENDARY);
             return true;
         }

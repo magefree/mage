@@ -412,6 +412,33 @@ public class VerifyCardDataTest {
     }
 
     @Test
+    public void test_findNonDidgitCardNumbers() {
+        // info only
+        // find all cards with bad non-didgit numbers, see #11157
+        // see parseCardNumberAsInt for supported formats
+        for (Map.Entry<String, MtgJsonSet> refEntry : MtgJsonService.sets().entrySet()) {
+            MtgJsonSet refSet = refEntry.getValue();
+            for (MtgJsonCard refCard : refSet.cards) {
+                String cleanNumber = refCard.number.replaceAll("[\\D]", "");
+                if (cleanNumber.isEmpty()) {
+                    System.out.println("Found non-digit card number: " 
+                        + refSet.code + " - " 
+                        + refCard.getNameAsASCII() + " - " 
+                        + refCard.number
+                    );
+                }
+                if (cleanNumber.equals("0")) {
+                    System.out.println("Found zero card number: " 
+                        + refSet.code + " - " 
+                        + refCard.getNameAsASCII() + " - " 
+                        + refCard.number
+                    );
+                }
+            }
+        }
+    }
+
+    @Test
     @Ignore // TODO: enable it after THB set will be completed
     public void test_checkDoubleRareCardsInSets() {
         // all basic sets after THB must have double rare cards (one normal, one bonus)
@@ -1945,7 +1972,7 @@ public class VerifyCardDataTest {
 
     // "copy" fails means that the copy constructor are not correct inside a card.
     // To fix those, try to find the class that did trigger the copy failure, and check
-    // that copy() exists, a copy constructor exists, and the copy constructor is right.
+    // that copy() exists, a copy constructor exists, and the copy constructor is right. 
     private void checkCardCanBeCopied(Card card1) {
         Card card2;
         try {
@@ -2403,13 +2430,6 @@ public class VerifyCardDataTest {
         // special check: legendary spells need to have legendary spell ability
         if (card.isLegendary() && !card.isPermanent() && !card.getAbilities().containsClass(LegendarySpellAbility.class)) {
             fail(card, "abilities", "legendary nonpermanent cards need to have LegendarySpellAbility");
-        }
-
-        // special check: mutate is not supported yet, so must be removed from sets
-        if (card.getAbilities().containsClass(MutateAbility.class)) {
-            // how-to fix: add that code at the end of the set
-            // cards.removeIf(card -> HIDE_MUTATE_CARDS && MUTATE_CARD_NAMES.contains(card.getName()));
-            fail(card, "abilities", "mutate cards aren't implemented and shouldn't be available");
         }
 
         // special check: some new creature's ETB must use When this creature enters instead When {this} enters

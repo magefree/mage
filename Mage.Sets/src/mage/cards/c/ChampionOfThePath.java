@@ -6,12 +6,13 @@ import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.BeholdAndExileCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnExiledCardToHandEffect;
+import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -47,7 +48,7 @@ public final class ChampionOfThePath extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(new ChampionOfThePathEffect(), filter));
 
         // When this creature leaves the battlefield, return the exiled card to its owner's hand.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnExiledCardToHandEffect()));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.HAND)));
     }
 
     private ChampionOfThePath(final ChampionOfThePath card) {

@@ -10,6 +10,7 @@ Eighth Edition|8ED|EighthEdition|
 Ninth Edition|9ED|NinthEdition|
 Alchemy: Dominaria|YDMU|AlchemyDominaria|
 Alchemy: Innistrad|Y22|AlchemyInnistrad|
+Alchemy: Secrets of Strixhaven|YSOS|AlchemySecretsOfStrixhaven|
 Adventures in the Forgotten Realms|AFR|AdventuresInTheForgottenRealms|
 Forgotten Realms Commander|AFC|ForgottenRealmsCommander|
 Aetherdrift|DFT|Aetherdrift|
@@ -268,6 +269,7 @@ Theros|THS|Theros|
 Theros Beyond Death|THB|TherosBeyondDeath|
 The Brothers' War|BRO|TheBrothersWar|
 The Brothers' War Commander|BRC|TheBrothersWarCommander|
+The Hobbit|HOB|TheHobbit|
 The Hobbit Commander|HOC|TheHobbitCommander|
 Tempest|TMP|Tempest|
 Throne of Eldraine|ELD|ThroneOfEldraine|

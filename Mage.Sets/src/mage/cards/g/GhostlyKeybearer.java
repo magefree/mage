@@ -72,7 +72,7 @@ class GhostlyKeybearerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (player == null || permanent == null || !permanent.isLeftDoorUnlocked() && !permanent.isRightDoorUnlocked()) {
+        if (player == null || permanent == null || permanent.isLeftDoorUnlocked() && permanent.isRightDoorUnlocked()) {
             return false;
         }
         boolean unlockLeft;

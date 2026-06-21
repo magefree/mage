@@ -10,7 +10,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.PowerstoneToken;
 
 import java.util.UUID;
@@ -64,11 +63,11 @@ class SlagstoneRefineryTriggeredAbility extends TriggeredAbilityImpl {
 
         // Filters ZC events for only battlefield => graveyard or battlefield => exile.
         if (zEvent.getFromZone() == Zone.BATTLEFIELD && (zEvent.getToZone() == Zone.GRAVEYARD || zEvent.getToZone() == Zone.EXILED)) {
-            if(zEvent.getTargetId().equals(getSourceId())) {                             // {this}
+            if (zEvent.getTargetId().equals(getSourceId())) {                            // {this}
                 return true;
             } else {                                                                     // another
                 return zEvent.getTarget().isArtifact(game)                               // artifact
-                    && !(zEvent.getTarget() instanceof PermanentToken)                   // nontoken
+                    && !zEvent.getTarget().isToken()                                     // nontoken
                     && (zEvent.getTarget().getControllerId().equals(getControllerId())); // you control
             }
         }

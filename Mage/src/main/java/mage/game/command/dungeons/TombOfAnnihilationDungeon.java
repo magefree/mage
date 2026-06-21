@@ -201,7 +201,7 @@ class OublietteTarget extends TargetSacrifice {
             }
             Cards newTargets = existingTargets.copy();
             newTargets.add(permanent);
-            return cardTypeAssigner.getRoleCount(newTargets, game) < newTargets.size();
+            return cardTypeAssigner.hasSharedRoles(newTargets, game);
         });
 
         return possibleTargets;

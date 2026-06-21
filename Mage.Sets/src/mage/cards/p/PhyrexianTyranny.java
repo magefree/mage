@@ -1,21 +1,17 @@
 package mage.cards.p;
 
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DoUnlessTargetPlayerOrTargetsControllerPaysEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.ManaUtil;
 
 import java.util.UUID;
 
@@ -44,7 +40,7 @@ public final class PhyrexianTyranny extends CardImpl {
 class PhyrexianTyrannyTriggeredAbility extends TriggeredAbilityImpl {
 
     PhyrexianTyrannyTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new PhyrexianTyrannyEffect(), false);
+        super(Zone.BATTLEFIELD, new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new LoseLifeTargetEffect(2), new ManaCostsImpl<>("{2}")).withTheyText(), false);
     }
 
     private PhyrexianTyrannyTriggeredAbility(final PhyrexianTyrannyTriggeredAbility ability) {
@@ -64,9 +60,7 @@ class PhyrexianTyrannyTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         for (Effect effect : this.getEffects()) {
-            if (effect instanceof PhyrexianTyrannyEffect) {
-                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-            }
+            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
         }
         return true;
     }
@@ -74,35 +68,5 @@ class PhyrexianTyrannyTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a player draws a card, that player loses 2 life unless they pay {2}.";
-    }
-}
-
-class PhyrexianTyrannyEffect extends OneShotEffect {
-
-    PhyrexianTyrannyEffect() {
-        super(Outcome.Neutral);
-        this.staticText = "that player loses 2 life unless they pay {2}";
-    }
-
-    private PhyrexianTyrannyEffect(final PhyrexianTyrannyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PhyrexianTyrannyEffect copy() {
-        return new PhyrexianTyrannyEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player != null) {
-            Cost cost = ManaUtil.createManaCost(2, false);
-            if (!cost.pay(source, game, source, player.getId(), false, null)) {
-                player.loseLife(2, game, source, false);
-            }
-            return true;
-        }
-        return false;
     }
 }

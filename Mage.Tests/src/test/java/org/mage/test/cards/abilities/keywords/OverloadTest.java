@@ -169,4 +169,20 @@ public class OverloadTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Ornithopter", 4);
         assertPermanentCount(playerA, "Food Token", 2);
     }
+
+    @Test
+    public void test_CyclonicRift_CantUseAlternativeSpellOnAlternateCast() {
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.LIBRARY, playerA, "Cyclonic Rift");
+        addCard(Zone.BATTLEFIELD, playerA, "Bolas's Citadel");
+        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears");
+
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Cyclonic Rift", true);
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Cyclonic Rift with overload", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+    }
+
 }

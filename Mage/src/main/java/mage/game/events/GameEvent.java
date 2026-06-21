@@ -228,6 +228,18 @@ public class GameEvent implements Serializable {
          sourceId    sourceId of the mount
          playerId    the id of the controlling player
          */
+        PAY_TEAMWORK_COST,
+        /* PAY_TEAMWORK_COST
+         targetId    the id of the creature that will be tapped to pay a teamwork cost
+         sourceId    sourceId of the spell with teamwork
+         playerId    the id of the controlling player
+         */
+        PAID_TEAMWORK_COST,
+        /* PAID_TEAMWORK_COST
+         targetId    the id of the creature that was tapped to pay a teamwork cost
+         sourceId    sourceId of the spell with teamwork
+         playerId    the id of the controlling player
+         */
         STATION_PERMANENT,
         /* STATION_PERMANENT
          targetId    the id of the creature stationing
@@ -627,6 +639,12 @@ public class GameEvent implements Serializable {
         VENTURE, VENTURED,
         DUNGEON_COMPLETED,
         TEMPTED_BY_RING, RING_BEARER_CHOSEN,
+        /* mutate
+        targetId    id of permanent mutating
+        sourceId    of the mutate spell ability
+        playerId    id of player casting mutate spell
+         */
+        CREATURE_MUTATED,
         REMOVED_FROM_COMBAT, // targetId    id of permanent removed from combat
         /* card foretold
         targetId    id of card foretold

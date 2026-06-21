@@ -5,11 +5,12 @@ import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.BeholdAndExileCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.ReturnExiledCardToHandEffect;
+import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -37,7 +38,7 @@ public final class ChampionsOfThePerfect extends CardImpl {
         ));
 
         // When this creature leaves the battlefield, return the exiled card to its owner's hand.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnExiledCardToHandEffect()));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.HAND)));
     }
 
     private ChampionsOfThePerfect(final ChampionsOfThePerfect card) {

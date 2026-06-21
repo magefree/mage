@@ -47,6 +47,5 @@ public final class HistoricAnthology4 extends ExpansionSet {
         cards.add(new SetCardInfo("Torment of Scarabs", 11, Rarity.UNCOMMON, mage.cards.t.TormentOfScarabs.class));
         cards.add(new SetCardInfo("Triumphant Reckoning", 4, Rarity.MYTHIC, mage.cards.t.TriumphantReckoning.class));
 
-        cards.removeIf(card -> HIDE_MUTATE_CARDS && MUTATE_CARD_NAMES.contains(card.getName()));
     }
 }

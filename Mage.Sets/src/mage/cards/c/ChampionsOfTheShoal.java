@@ -6,7 +6,7 @@ import mage.abilities.common.BecomesTappedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.BeholdAndExileCost;
-import mage.abilities.effects.common.ReturnExiledCardToHandEffect;
+import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.meta.OrTriggeredAbility;
@@ -49,7 +49,7 @@ public final class ChampionsOfTheShoal extends CardImpl {
         this.addAbility(ability);
 
         // When this creature leaves the battlefield, return the exiled card to its owner's hand.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnExiledCardToHandEffect()));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.HAND)));
     }
 
     private ChampionsOfTheShoal(final ChampionsOfTheShoal card) {

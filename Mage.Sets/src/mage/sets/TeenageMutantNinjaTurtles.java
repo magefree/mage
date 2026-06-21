@@ -42,6 +42,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Bebop, Warthog Warrior", 59, Rarity.COMMON, mage.cards.b.BebopWarthogWarrior.class));
         cards.add(new SetCardInfo("Bespoke Bo", 31, Rarity.UNCOMMON, mage.cards.b.BespokeBo.class));
         cards.add(new SetCardInfo("Bot Bashing Time", 85, Rarity.COMMON, mage.cards.b.BotBashingTime.class));
+        cards.add(new SetCardInfo("Brilliance Unleashed", 141, Rarity.UNCOMMON, mage.cards.b.BrillianceUnleashed.class));
         cards.add(new SetCardInfo("Broadcast Takeover", 234, Rarity.MYTHIC, mage.cards.b.BroadcastTakeover.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Broadcast Takeover", 86, Rarity.MYTHIC, mage.cards.b.BroadcastTakeover.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Buzz Bots", 32, Rarity.COMMON, mage.cards.b.BuzzBots.class));
@@ -210,6 +211,7 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("North Wind Avatar", 248, Rarity.MYTHIC, mage.cards.n.NorthWindAvatar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Northampton Farm", 188, Rarity.RARE, mage.cards.n.NorthamptonFarm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Northampton Farm", 280, Rarity.RARE, mage.cards.n.NorthamptonFarm.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Novel Nunchaku", 127, Rarity.UNCOMMON, mage.cards.n.NovelNunchaku.class));
         cards.add(new SetCardInfo("Null Group Biological Assets", 98, Rarity.COMMON, mage.cards.n.NullGroupBiologicalAssets.class));
         cards.add(new SetCardInfo("Old Hob, Alleycat Blues", 99, Rarity.UNCOMMON, mage.cards.o.OldHobAlleycatBlues.class));
         cards.add(new SetCardInfo("Omni-Cheese Pizza", 176, Rarity.COMMON, mage.cards.o.OmniCheesePizza.class));
@@ -325,6 +327,8 @@ public final class TeenageMutantNinjaTurtles extends ExpansionSet {
         cards.add(new SetCardInfo("Turtle Power!", 275, Rarity.RARE, mage.cards.t.TurtlePower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turtle Van", 181, Rarity.RARE, mage.cards.t.TurtleVan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turtle Van", 278, Rarity.RARE, mage.cards.t.TurtleVan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Turtles Forever", 261, Rarity.RARE, mage.cards.t.TurtlesForever.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Turtles Forever", 27, Rarity.RARE, mage.cards.t.TurtlesForever.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turtles in Time", 263, Rarity.MYTHIC, mage.cards.t.TurtlesInTime.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turtles in Time", 284, Rarity.MYTHIC, mage.cards.t.TurtlesInTime.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turtles in Time", 294, Rarity.MYTHIC, mage.cards.t.TurtlesInTime.class, NON_FULL_USE_VARIOUS));

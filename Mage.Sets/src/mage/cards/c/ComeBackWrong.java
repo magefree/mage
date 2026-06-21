@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -15,10 +16,12 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
-import mage.game.permanent.PermanentToken;
 import mage.util.CardUtil;
+
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -67,28 +70,29 @@ class ComeBackWrongEffect extends OneShotEffect {
             return false;
         }
         permanent.destroy(source, game);
-        // tokens are not creature cards
-        if (permanent instanceof PermanentToken) {
-            return true;
-        }
-        Card card = permanent.getMainCard();
-        if (card == null 
-                || !card.isCreature(game) 
-                || !Zone.GRAVEYARD.match(game.getState().getZone(card.getId()))) {
-            return true;
-        }
+        game.processAction();
+        Set<Card> cards = CardUtil.getAllCardsFromPermanentLeftBattlefield(permanent, game)
+                .stream()
+                .map(MageItem::getId)
+                .filter(id -> Zone.GRAVEYARD.match(game.getState().getZone(id)))
+                .map(game::getCard)
+                .filter(Objects::nonNull)
+                .filter(c -> c.isCreature(game))
+                .collect(Collectors.toSet());
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return true;
         }
-        player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent creature = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
-        if (creature != null) {
-            game.addDelayedTriggeredAbility(new AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility(
-                    new SacrificeTargetEffect("sacrifice it")
-                            .setTargetPointer(new FixedTarget(creature, game)),
-                    player.getId()
-            ).setTriggerPhrase("At the beginning of your next end step, "), source);
+        player.moveCards(cards, Zone.BATTLEFIELD, source, game);
+        for (Card card : cards) {
+            Permanent creature = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+            if (creature != null) {
+                game.addDelayedTriggeredAbility(new AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility(
+                        new SacrificeTargetEffect("sacrifice it")
+                                .setTargetPointer(new FixedTarget(creature, game)),
+                        player.getId()
+                ).setTriggerPhrase("At the beginning of your next end step, "), source);
+            }
         }
         return true;
     }

@@ -13,13 +13,12 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.EldraziScionToken;
 import mage.players.Player;
 import mage.watchers.Watcher;
@@ -107,7 +106,7 @@ class VileRedeemerNonTokenCreaturesDiedWatcher extends Watcher {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.isDiesEvent() && zEvent.getTarget() != null
                     && zEvent.getTarget().isCreature(game)
-                    && !(zEvent.getTarget() instanceof PermanentToken)) {
+                    && !zEvent.getTarget().isToken()) {
                 int count = getAmountOfNontokenCreatureDiedThisTurn(zEvent.getTargetId());
                 amountOfCreaturesThatDied.put(zEvent.getTarget().getControllerId(), ++count);
             }

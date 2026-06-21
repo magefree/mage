@@ -62,6 +62,9 @@ public enum PutCards {
     }
 
     public boolean moveCard(Player player, Card card, Ability source, Game game, String description) {
+        if (card == null) {
+            throw new IllegalArgumentException("Wrong code usage: card can't be null");
+        }
         switch (this) {
             case TOP_OR_BOTTOM:
                 if (player.chooseUse(Outcome.Neutral,
@@ -95,7 +98,7 @@ public enum PutCards {
                 if (card instanceof TransformingDoubleFacedCard) {
                     card = ((TransformingDoubleFacedCard) card).getRightHalfCard();
                 }
-                game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId(), Boolean.TRUE);
+                game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId() + card.getZoneChangeCounter(game), Boolean.TRUE);
             case BATTLEFIELD:
             case EXILED:
             case HAND:
@@ -133,7 +136,7 @@ public enum PutCards {
             case SHUFFLE:
                 return player.shuffleCardsToLibrary(cards, game, source);
             case BATTLEFIELD_TRANSFORMED:
-                cards.stream().forEach(uuid -> game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + uuid, Boolean.TRUE));
+                cards.stream().forEach(uuid -> game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + uuid + cards.get(uuid, game).getZoneChangeCounter(game), Boolean.TRUE));
             case BATTLEFIELD:
             case EXILED:
             case HAND:

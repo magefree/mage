@@ -121,6 +121,7 @@ public class PermanentCard extends PermanentImpl {
         } else {
             copyFromCard(card, game, true);
         }
+        applyMutate(game);
         power.resetToBaseValue();
         toughness.resetToBaseValue();
         super.reset(game);

@@ -7,10 +7,7 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.ExileSourceEffect;
-import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.*;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -79,7 +76,7 @@ class LuciusTheEternalEffect extends OneShotEffect {
 
         new CreateDelayedTriggeredAbilityEffect(
                 new LuciusTheEternalDelayedTriggeredAbility(
-                        new ReturnFromExileEffect(Zone.BATTLEFIELD)
+                        new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD)
                 )
         ).setTargetPointer(getTargetPointer().copy()).apply(game, source);
 

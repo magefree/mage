@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
@@ -12,12 +10,15 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.MorphAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class AshcloudPhoenix extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Ashcloud Phoenix dies, return it to the battlefield face down under your control.
-        this.addAbility(new DiesSourceTriggeredAbility(new AshcloudPhoenixEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new AshcloudPhoenixEffect(), false, SetTargetPointer.CARD));
 
         // Morph {4}{R}{R}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{4}{R}{R}")));
@@ -76,16 +77,11 @@ class AshcloudPhoenixEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card card = game.getCard(source.getSourceId());
-            if (card != null) {
-                Player owner = game.getPlayer(card.getOwnerId());
-                if (owner != null && owner.getGraveyard().contains(card.getId())) {
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, true, false, null);
-                }
-            }
-            return true;
+        Cards cards = new CardsImpl(getTargetPointer().getTargets(game, source));
+        if (controller == null || cards.isEmpty()) {
+            return false;
         }
-        return false;
+        controller.moveCards(cards.getCards(game), Zone.BATTLEFIELD, source, game, false, true, false, null);
+        return true;
     }
 }

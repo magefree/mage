@@ -9,7 +9,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlAttachedEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -36,10 +36,10 @@ public final class OathkeeperTakenosDaisho extends CardImpl {
 
         // Whenever equipped creature dies, return that card to the battlefield under your control if it's a Samurai card.
         this.addAbility(new DiesAttachedTriggeredAbility(new ConditionalOneShotEffect(
-                new ReturnToBattlefieldUnderYourControlAttachedEffect(),
+                new ReturnToBattlefieldUnderYourControlTargetEffect(),
                 OathkeeperEquippedSamuraiCondition.instance,
                 "return that card to the battlefield under your control if it's a Samurai card"
-        ), "equipped creature"));
+        ), "equipped creature", false, true, SetTargetPointer.CARD));
 
         // When Oathkeeper, Takeno's Daisho is put into a graveyard from the battlefield, exile equipped creature.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new OathkeeperExileEquippedEffect()));

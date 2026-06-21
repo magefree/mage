@@ -3,19 +3,37 @@ package mage.abilities.common;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class DiesSourceTriggeredAbility extends ZoneChangeTriggeredAbility {
 
-    public DiesSourceTriggeredAbility(Effect effect, boolean optional) {
+    private final SetTargetPointer setTargetPointer;
+    // for returning the source card, must set target pointer to include mutated cards
+
+    public DiesSourceTriggeredAbility(Effect effect, boolean optional, SetTargetPointer setTargetPointer) {
         super(Zone.BATTLEFIELD, Zone.GRAVEYARD, effect, "When {this} dies, ", optional);
+        switch (setTargetPointer) {
+            case NONE:
+            case CARD:
+                break; // supported cases
+            default:
+                throw new IllegalArgumentException("Unsupported SetTargetPointer in DiesSourceTriggeredAbility: " + setTargetPointer);
+        }
+        this.setTargetPointer = setTargetPointer;
         this.withRuleTextReplacement(true); // default true to replace "{this}" with "it"
+    }
+
+    public DiesSourceTriggeredAbility(Effect effect, boolean optional) {
+        this(effect, optional, SetTargetPointer.NONE);
     }
 
     public DiesSourceTriggeredAbility(Effect effect) {
@@ -24,6 +42,7 @@ public class DiesSourceTriggeredAbility extends ZoneChangeTriggeredAbility {
 
     protected DiesSourceTriggeredAbility(final DiesSourceTriggeredAbility ability) {
         super(ability);
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
@@ -38,6 +57,10 @@ public class DiesSourceTriggeredAbility extends ZoneChangeTriggeredAbility {
             return false;
         }
         getEffects().setValue("permanentLeftBattlefield", zEvent.getTarget());
+        if (setTargetPointer == SetTargetPointer.CARD) {
+            getEffects().setTargetPointer(new FixedTargets(
+                    CardUtil.getAllCardsFromPermanentLeftBattlefield(zEvent.getTarget(), game), game));
+        }
         return true;
     }
 

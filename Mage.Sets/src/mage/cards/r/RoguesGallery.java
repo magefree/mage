@@ -64,27 +64,21 @@ class RoguesGalleryTarget extends TargetCardInYourGraveyard {
     }
 
     @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability ability, Game game) {
-        if (!super.canTarget(playerId, id, ability, game)) {
-            return false;
-        }
-        Card card = game.getCard(id);
-        if (card == null) {
-            return false;
-        }
-        if (this.getTargets().isEmpty()) {
-            return true;
-        }
-        Cards cards = new CardsImpl(this.getTargets());
-        cards.add(card);
-        return colorAssigner.getRoleCount(cards, game) >= cards.size();
-    }
-
-
-    @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
-        possibleTargets.removeIf(uuid -> !this.canTarget(sourceControllerId, uuid, source, game));
+
+        // only valid roles
+        Cards existingTargets = new CardsImpl(this.getTargets());
+        possibleTargets.removeIf(id -> {
+            Card card = game.getCard(id);
+            if (card == null) {
+                return true;
+            }
+            Cards newTargets = existingTargets.copy();
+            newTargets.add(card);
+            return colorAssigner.hasSharedRoles(newTargets, game);
+        });
+
         return possibleTargets;
     }
 }

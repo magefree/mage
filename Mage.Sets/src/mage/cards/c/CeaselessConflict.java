@@ -1,7 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -11,8 +9,9 @@ import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Spirit32Token;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +38,7 @@ public final class CeaselessConflict extends CardImpl {
 
 class CeaselessConflictEffect extends OneShotEffect {
 
-    public CeaselessConflictEffect() {
+    CeaselessConflictEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "destroy all creatures. Then create a 3/2 red and white Spirit creature token for each nontoken creature you controlled that was destroyed this way";
     }
@@ -62,7 +61,7 @@ class CeaselessConflictEffect extends OneShotEffect {
         )) {
             if (permanent.destroy(source, game) &&
                 permanent.isControlledBy(source.getControllerId()) &&
-                !(permanent instanceof PermanentToken)
+                !permanent.isToken()
             ) {
                 count++;
             }

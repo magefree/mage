@@ -6,7 +6,7 @@ import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutOnLibrarySourceEffect;
+import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -52,9 +52,8 @@ public final class GarlandKnightOfCornelia extends TransformingDoubleFacedCard {
         this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
 
         // When Chaos dies, put it on the bottom of its owner's library.
-        this.getRightHalfCard().addAbility(new DiesSourceTriggeredAbility(new PutOnLibrarySourceEffect(
-                false, "put it on the bottom of its owner's library"
-        ), false));
+        this.getRightHalfCard().addAbility(new DiesSourceTriggeredAbility(new PutOnLibraryTargetEffect(false)
+                .setText("put it on the bottom of its owner's library"), false, SetTargetPointer.CARD));
     }
 
     private GarlandKnightOfCornelia(final GarlandKnightOfCornelia card) {
@@ -94,7 +93,7 @@ class GarlandKnightOfCorneliaEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
-        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId(), Boolean.TRUE);
+        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId() + card.getZoneChangeCounter(game), Boolean.TRUE);
         return player.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
 }

@@ -2,13 +2,14 @@ package mage.cards.i;
 
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SetTargetPointer;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -27,8 +28,10 @@ public final class InfuseWithVitality extends CardImpl {
         ).setText("Until end of turn, target creature gains deathtouch"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 new DiesSourceTriggeredAbility(
-                        new ReturnSourceFromGraveyardToBattlefieldEffect(true, true), false
-                ), Duration.EndOfTurn, "and \"When this creature dies, " +
+                        new ReturnToBattlefieldUnderOwnerControlTargetEffect(true, false)
+                                .setText("return it to the battlefield tapped under its owner's control"),
+                        false, SetTargetPointer.CARD),
+                Duration.EndOfTurn, "and \"When this creature dies, " +
                 "return it to the battlefield tapped under its owner's control.\""
         ));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

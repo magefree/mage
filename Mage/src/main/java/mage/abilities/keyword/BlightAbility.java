@@ -78,9 +78,7 @@ public class BlightAbility extends StaticAbility implements OptionalAdditionalSo
         }
 
         additionalCost.activate();
-        for (Cost cost : ((Costs<Cost>) additionalCost)) {
-            ability.getCosts().add(cost.copy());
-        }
+        ability.addCost(additionalCost.copy());
         ability.setCostsTag(BLIGHT_ACTIVATION_VALUE_KEY, null);
     }
 

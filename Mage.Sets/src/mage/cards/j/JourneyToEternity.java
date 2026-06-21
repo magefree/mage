@@ -8,7 +8,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlAttachedEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.Card;
@@ -41,7 +41,9 @@ public final class JourneyToEternity extends TransformingDoubleFacedCard {
         this.getLeftHalfCard().addAbility(new EnchantAbility(auraTarget));
 
         // When enchanted creature dies, return it to the battlefield under your control, then return Journey to Eternity to the battlefield transformed under your control.
-        Ability ability = new DiesAttachedTriggeredAbility(new ReturnToBattlefieldUnderYourControlAttachedEffect("it"), "enchanted creature");
+        Ability ability = new DiesAttachedTriggeredAbility(new ReturnToBattlefieldUnderYourControlTargetEffect(
+                false, false, "it"
+        ), "enchanted creature", false, true, SetTargetPointer.CARD);
         ability.addEffect(new JourneyToEternityReturnTransformedSourceEffect());
         this.getLeftHalfCard().addAbility(ability);
 
@@ -93,7 +95,7 @@ class JourneyToEternityReturnTransformedSourceEffect extends OneShotEffect {
             if (zone == Zone.BATTLEFIELD || !zone.isPublicZone()) {
                 return true;
             }
-            game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
+            game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId() + card.getZoneChangeCounter(game), Boolean.TRUE);
             controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, false, null);
         }
         return true;

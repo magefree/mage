@@ -7,7 +7,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- * @author TheElk801
+ * @author TheElk801, NinthWorld
  */
 public class MutatesSourceTriggeredAbility extends TriggeredAbilityImpl {
 
@@ -31,13 +31,11 @@ public class MutatesSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        // TODO: implement this
-        return false;
+        return event.getType() == GameEvent.EventType.CREATURE_MUTATED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        // TODO: implement this
-        return false;
+        return event.getTargetId().equals(sourceId);
     }
 }

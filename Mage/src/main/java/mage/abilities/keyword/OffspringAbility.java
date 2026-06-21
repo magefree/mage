@@ -72,9 +72,7 @@ public class OffspringAbility extends StaticAbility implements OptionalAdditiona
             return;
         }
         additionalCost.activate();
-        for (Cost cost : ((Costs<Cost>) additionalCost)) {
-            ability.getCosts().add(cost.copy());
-        }
+        ability.addCost(additionalCost.copy());
         ability.setCostsTag(OFFSPRING_ACTIVATION_VALUE_KEY, null);
     }
 

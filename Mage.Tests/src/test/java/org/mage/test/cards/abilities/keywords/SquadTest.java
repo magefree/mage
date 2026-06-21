@@ -330,31 +330,26 @@ public class SquadTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, flagellant, 3); // The original + the first token of squad + the copy token
     }
-
+    
     @Test
     public void test_Squad_FreeCast() {
         skipInitShuffling();
-
         addCard(Zone.LIBRARY, playerA, flagellant, 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
-        //
         // Whenever Etali, Primal Storm attacks, exile the top card of each player's library,
         // then you may cast any number of nonland cards exiled this way without paying their mana costs.
         addCard(Zone.BATTLEFIELD, playerA, "Etali, Primal Storm", 1);
-
         checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Arco-Flagellant", false);
-
-        // attack and prepare free cast, pay squad
+        // Attack and prepare free cast, then pay Squad twice.
         attack(1, playerA, "Etali, Primal Storm", playerB);
         setChoice(playerA, true); // cast for free
-        setChoice(playerA, true); // pay squad once.
-        setChoice(playerA, true); // pay squad twice.
-        setChoice(playerA, false);
-
+        setChoice(playerA, true); // pay Squad once
+        setChoice(playerA, true); // pay Squad twice
+        setChoice(playerA, false); // stop paying Squad
         setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-
         assertPermanentCount(playerA, flagellant, 3); // card + 2 buddies
+        assertTappedCount("Swamp", true, 4); // two Squad payments of {2}
     }
 }

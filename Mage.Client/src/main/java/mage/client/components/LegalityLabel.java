@@ -101,8 +101,8 @@ public class LegalityLabel extends JLabel {
         return HtmlEscape.escapeHtml(string, HtmlEscapeType.HTML4_NAMED_REFERENCES_DEFAULT_TO_HEXA, HtmlEscapeLevel.LEVEL_0_ONLY_MARKUP_SIGNIFICANT_EXCEPT_APOS);
     }
 
-    protected String formatTooltipText(String string) {
-        return ManaSymbols.replaceSymbolsWithHTML(escapeHtml(string), ManaSymbols.Type.TOOLTIP);
+    protected String formatTooltipText(String text) {
+        return ManaSymbols.replaceSymbolsWithHTML(text, ManaSymbols.Type.TOOLTIP);
     }
 
     protected String formatInvalidTooltip(java.util.List<DeckValidatorError> sortedErrorsList) {
@@ -145,9 +145,9 @@ public class LegalityLabel extends JLabel {
     public void showState(Color color, String tooltip, boolean useErrors) {
         setBackground(color);
         if (useErrors) {
-            setToolTipText(appendErrorMessage(tooltip));
+            setToolTipText(formatTooltipText(appendErrorMessage(tooltip)));
         } else {
-            setToolTipText(tooltip);
+            setToolTipText(formatTooltipText(tooltip));
         }
     }
 

@@ -30,7 +30,7 @@ public final class FlowState extends CardImpl {
 
     private static final Condition condition1 = new CardsInControllerGraveyardCondition(1, filter1);
     private static final Condition condition2 = new CardsInControllerGraveyardCondition(1, filter2);
-    private static final Condition condition = new CompoundCondition(condition1, condition1);
+    private static final Condition condition = new CompoundCondition(condition1, condition2);
     private static final Hint hint1 = new ConditionHint(condition1, "There's an instant card in your graveyard");
     private static final Hint hint2 = new ConditionHint(condition2, "There's a sorcery card in your graveyard");
 

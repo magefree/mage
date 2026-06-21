@@ -1,21 +1,23 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfPlayersNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
+import mage.constants.SubType;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +34,7 @@ public final class Phytotitan extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Phytotitan dies, return it to the battlefield tapped under its owner's control at the beginning of their next upkeep.
-        this.addAbility(new DiesSourceTriggeredAbility(new PhytotitanEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new PhytotitanEffect(), false, SetTargetPointer.CARD));
     }
 
     private Phytotitan(final Phytotitan card) {
@@ -60,10 +62,15 @@ class PhytotitanEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        //create delayed triggered ability
-        Effect effect = new ReturnSourceFromGraveyardToBattlefieldEffect(true, true);
+        Card card = game.getCard(source.getSourceId());
+        if (card == null) {
+            return false;
+        }
+        Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(true, false);
         effect.setText(staticText);
-        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(effect);
+        effect.setTargetPointer(getTargetPointer());
+        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfPlayersNextUpkeepDelayedTriggeredAbility(
+                effect, card.getOwnerId()).setTriggerPhrase("");
         game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;
     }

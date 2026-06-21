@@ -173,7 +173,7 @@ class CraftEffect extends OneShotEffect {
         if (player == null || card == null || card.getZoneChangeCounter(game) != source.getStackMomentSourceZCC() + 1) {
             return false;
         }
-        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
+        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId() + card.getZoneChangeCounter(game), Boolean.TRUE);
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
         return true;
     }

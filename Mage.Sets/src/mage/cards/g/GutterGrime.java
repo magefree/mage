@@ -1,24 +1,19 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.GutterGrimeToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +25,10 @@ public final class GutterGrime extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
 
         // Whenever a nontoken creature you control dies, put a slime counter on Gutter Grime, then create a green Ooze creature token with "This creature's power and toughness are each equal to the number of slime counters on Gutter Grime."
-        this.addAbility(new GutterGrimeTriggeredAbility());
+        Ability ability = new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.SLIME.createInstance()),
+                false, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN);
+        ability.addEffect(new GutterGrimeEffect());
+        this.addAbility(ability);
     }
 
     private GutterGrime(final GutterGrime card) {
@@ -43,58 +41,12 @@ public final class GutterGrime extends CardImpl {
     }
 }
 
-class GutterGrimeTriggeredAbility extends TriggeredAbilityImpl {
-
-    public GutterGrimeTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.SLIME.createInstance()), false);
-        this.addEffect(new GutterGrimeEffect());
-        setLeavesTheBattlefieldTrigger(true);
-    }
-
-    private GutterGrimeTriggeredAbility(final GutterGrimeTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GutterGrimeTriggeredAbility copy() {
-        return new GutterGrimeTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        UUID targetId = event.getTargetId();
-        MageObject card = game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
-        if (card instanceof Permanent && !(card instanceof PermanentToken)) {
-            Permanent permanent = (Permanent) card;
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            return zEvent.isDiesEvent()
-                    && permanent.isControlledBy(this.controllerId)
-                    && (targetId.equals(this.getSourceId())
-                    || (permanent.isCreature(game)));
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a nontoken creature you control dies, put a slime counter on {this}, then create a green Ooze creature token with \"This creature's power and toughness are each equal to the number of slime counters on {this}.\"";
-    }
-
-    @Override
-    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
-        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
-    }
-}
-
 class GutterGrimeEffect extends OneShotEffect {
 
     GutterGrimeEffect() {
         super(Outcome.PutCreatureInPlay);
+        this.staticText = ", then create a green Ooze creature token with " +
+                "\"This creature's power and toughness are each equal to the number of slime counters on {this}.\"";
     }
 
     private GutterGrimeEffect(final GutterGrimeEffect effect) {

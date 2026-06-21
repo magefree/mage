@@ -9,8 +9,10 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.*;
 import mage.constants.*;
 import mage.abilities.keyword.FlyingAbility;
@@ -33,7 +35,9 @@ import mage.watchers.common.OnceEachTurnCastWatcher;
  * @author Callumvl
  */
 public final class MaralenFaeAscendant extends CardImpl {
+
     public static final FilterPermanent filter = new FilterControlledPermanent("Elf or Faerie");
+
     static {
         filter.add(Predicates.or(
                 SubType.ELF.getPredicate(),
@@ -65,6 +69,7 @@ public final class MaralenFaeAscendant extends CardImpl {
                 .setIdentifier(MageIdentifier.OnceEachTurnCastWatcher)
                 .addHint(OnceEachTurnCastWatcher.getHint());
         castAbility.addWatcher(new MaralenFaeAscendantWatcher());
+        castAbility.addHint(new ValueHint("Elves and Faeries you control", new PermanentsOnBattlefieldCount(filter)));
         this.addAbility(castAbility, new OnceEachTurnCastWatcher());
     }
 
@@ -101,21 +106,23 @@ class MaralenFaeAscendantEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        UUID exileZone = CardUtil.getExileZoneId(
-                game,
-                source.getSourceId(),
-                source.getSourceObject(game).getZoneChangeCounter(game)
-        );
-        for (Card card : player.getLibrary().getTopCards(game, 2)) {
-            player.moveCardsToExile(
-                    card,
-                    source,
-                    game,
-                    true,
-                    exileZone,
-                    CardUtil.getSourceName(game, source)
-            );
+
+        Set<Card> topCards = player.getLibrary().getTopCards(game, 2);
+        if (topCards.isEmpty()) {
+            return true;
         }
+
+        game.getExile().createZone(source.getSourceId(), CardUtil.createObjectRelatedWindowTitle(
+                source, game, null
+        )).setCleanupOnEndTurn(true);
+        player.moveCardsToExile(
+                topCards,
+                source,
+                game,
+                true,
+                source.getSourceId(),
+                CardUtil.createObjectRelatedWindowTitle(source, game, null)
+        );
         return true;
     }
 }

@@ -17,12 +17,12 @@ public class ReturnToBattlefieldUnderOwnerControlWithCounterTargetEffect extends
     private final Counters counters;
     private final String counterText;
 
-    public ReturnToBattlefieldUnderOwnerControlWithCounterTargetEffect(Counter counter, boolean returnFromExileZoneOnly) {
-        this(counter, false, returnFromExileZoneOnly);
+    public ReturnToBattlefieldUnderOwnerControlWithCounterTargetEffect(Counter counter) {
+        this(counter, false, false, false);
     }
 
-    public ReturnToBattlefieldUnderOwnerControlWithCounterTargetEffect(Counter counter, boolean additional, boolean returnFromExileZoneOnly) {
-        super(false, returnFromExileZoneOnly);
+    public ReturnToBattlefieldUnderOwnerControlWithCounterTargetEffect(Counter counter, boolean additional, boolean tapped, boolean returnFromExileZoneOnly) {
+        super(tapped, returnFromExileZoneOnly);
         this.counters = new Counters();
         this.counters.addCounter(counter);
         this.counterText = makeText(counter, additional);

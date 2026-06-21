@@ -190,7 +190,7 @@ class AclazotzDeepestBetrayalTransformEffect extends OneShotEffect {
         if (controller == null || card == null) {
             return false;
         }
-        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
+        game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId() + card.getZoneChangeCounter(game), Boolean.TRUE);
         controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null);
         return true;
     }

@@ -34,7 +34,7 @@ public final class FungusElemental extends CardImpl {
         // {G}, Sacrifice a Forest: Put a +2/+2 counter on Fungus Elemental. Activate this ability only if Fungus Elemental entered the battlefield this turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
                 new AddCountersSourceEffect(CounterType.P2P2.createInstance()),
-                new ManaCostsImpl<>("{G}"), SourceEnteredThisTurnCondition.DID
+                new ManaCostsImpl<>("{G}"), SourceEnteredThisTurnCondition.TRUE
         );
         ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);

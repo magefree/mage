@@ -30,6 +30,8 @@ Mage.Verify/*.zip
 Mage.Verify/*.json
 
 # Utils
+__pycache__
+Utils/*-scryfall.json
 # TODO: remove outdated files and scripts
 releases
 Utils/author.txt

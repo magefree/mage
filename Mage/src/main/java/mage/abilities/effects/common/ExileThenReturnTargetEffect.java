@@ -8,6 +8,7 @@ import mage.constants.Outcome;
 import mage.constants.PutCards;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
@@ -62,7 +63,7 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Set<Card> toFlicker = getTargetPointer().getTargets(game, source)
+        Set<Permanent> toFlicker = getTargetPointer().getTargets(game, source)
                 .stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
@@ -72,7 +73,7 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
         }
         controller.moveCards(toFlicker, Zone.EXILED, source, game);
         game.processAction();
-        for (Card card : toFlicker) {
+        for (Card card : CardUtil.getAllCardsFromPermanentsLeftBattlefield(toFlicker, game)) {
             putCards.moveCard(
                     yourControl ? controller : game.getPlayer(card.getOwnerId()),
                     card.getMainCard(), source, game, "card");

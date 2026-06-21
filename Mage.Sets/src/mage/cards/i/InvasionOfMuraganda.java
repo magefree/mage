@@ -42,7 +42,7 @@ public final class InvasionOfMuraganda extends TransformingDoubleFacedCard {
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         ability.addEffect(new FightTargetsEffect().setText("Then that creature fights up to one target creature you don't control"));
         ability.addTarget(new TargetControlledCreaturePermanent());
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.getLeftHalfCard().addAbility(ability);
 
         // Primordial Plasm

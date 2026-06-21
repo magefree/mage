@@ -1,5 +1,7 @@
 package org.mage.test.cards.abilities.activated;
 
+import mage.ObjectColor;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
@@ -66,6 +68,39 @@ public class EquipAbilityTest extends CardTestPlayerBase {
         Permanent elves = getPermanent("Llanowar Elves", playerB);
         Assert.assertNotNull(elves);
         Assert.assertEquals(0, elves.getAttachments().size());
+    }
+
+    @Test
+    public void testAsAttachesToCreatureAbility() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3 + 5);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerA, "Sanctuary Blade");
+
+        addCard(Zone.BATTLEFIELD, playerA, "Falkenrath Noble");
+        addCard(Zone.BATTLEFIELD, playerA, "Elvish Mystic");
+        addCard(Zone.BATTLEFIELD, playerA, "Paleontologist's Pick-Axe");
+
+        // As Sanctuary Blade becomes attached to a creature, choose a color.
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Llanowar Elves");
+        setChoice(playerA, "White");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // When Dinosaur Headdress enters the battlefield, attach it to target creature you control.
+        // As Dinosaur Headdress becomes attached to a creature, choose an exiled creature card used to craft Dinosaur Headdress.
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Craft");
+        addTarget(playerA, "Falkenrath Noble"); // Craft target
+        addTarget(playerA, "Elvish Mystic"); // ETB target
+        setChoice(playerA, "Falkenrath Noble"); // Becomes attached choice
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAbility(playerA, "Llanowar Elves", ProtectionAbility.from(ObjectColor.WHITE), true);
+        assertPermanentCount(playerA, "Dinosaur Headdress", 1);
+        assertPermanentCount(playerA, "Falkenrath Noble", 1);
+        assertPermanentCount(playerA, "Elvish Mystic", 0);
     }
 
 }
