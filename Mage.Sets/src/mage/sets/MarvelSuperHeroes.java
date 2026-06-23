@@ -122,6 +122,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Epic Fight", 351, Rarity.RARE, mage.cards.e.EpicFight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Falcon's Wing Harness", 53, Rarity.UNCOMMON, mage.cards.f.FalconsWingHarness.class));
         cards.add(new SetCardInfo("Falcon, Winged Wonder", 52, Rarity.UNCOMMON, mage.cards.f.FalconWingedWonder.class));
+        cards.add(new SetCardInfo("Fin Fang Foom", 129, Rarity.RARE, mage.cards.f.FinFangFoom.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fin Fang Foom", 411, Rarity.RARE, mage.cards.f.FinFangFoom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fisk Tower", 265, Rarity.COMMON, mage.cards.f.FiskTower.class));
         cards.add(new SetCardInfo("Forest", 442, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 441, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
