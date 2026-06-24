@@ -274,6 +274,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("The Mind Stone", 21, Rarity.MYTHIC, mage.cards.t.TheMindStone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Mind Stone", 385, Rarity.MYTHIC, mage.cards.t.TheMindStone.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("The Mind Stone", 386, Rarity.MYTHIC, mage.cards.t.TheMindStone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Ruinous Wrecking Crew", 224, Rarity.RARE, mage.cards.t.TheRuinousWreckingCrew.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Ruinous Wrecking Crew", 422, Rarity.RARE, mage.cards.t.TheRuinousWreckingCrew.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Scarlet Witch", 151, Rarity.RARE, mage.cards.t.TheScarletWitch.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Scarlet Witch", 368, Rarity.RARE, mage.cards.t.TheScarletWitch.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Scarlet Witch", 431, Rarity.RARE, mage.cards.t.TheScarletWitch.class, NON_FULL_USE_VARIOUS));
