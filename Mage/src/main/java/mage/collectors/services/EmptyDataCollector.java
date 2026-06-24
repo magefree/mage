@@ -45,6 +45,11 @@ public abstract class EmptyDataCollector implements DataCollector {
     }
 
     @Override
+    public void onGameError(Game game, Exception e) {
+        // nothing
+    }
+
+    @Override
     public void onGameEnd(Game game) {
         // nothing
     }

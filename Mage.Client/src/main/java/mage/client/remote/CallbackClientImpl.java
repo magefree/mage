@@ -23,6 +23,7 @@ import mage.util.DebugUtil;
 import mage.view.*;
 import mage.view.ChatMessage.MessageType;
 import org.apache.log4j.Logger;
+import org.jsoup.Jsoup;
 import org.mage.card.arcane.ManaSymbols;
 
 import javax.swing.*;
@@ -265,7 +266,41 @@ public class CallbackClientImpl implements CallbackClient {
                     }
 
                     case GAME_ERROR: {
-                        frame.showErrorDialog("SERVER", "game error", (String) callback.getData());
+                        // add last game logs
+                        int maxLogs = 20;
+                        String lastGameLogs = "";
+                        GamePanel game = MageFrame.getInstance().getGame(callback.getObjectId());
+                        if (game != null) {
+                            String htmlLogs = game.getGameLog();
+
+                            // workaround to add fixed line breaks before each game log
+                            htmlLogs = htmlLogs.replace(
+                                "<font color=\"" + ChatPanelBasic.TIMESTAMP_COLOR + "\">", 
+                                "<br><font color=\"" + ChatPanelBasic.TIMESTAMP_COLOR + "\">"
+                            );
+
+                            // workaround to keep good line breaks
+                            org.jsoup.nodes.Document doc = Jsoup.parse(htmlLogs);
+                            doc.outputSettings(new org.jsoup.nodes.Document.OutputSettings().prettyPrint(true));
+                            doc.select("br").append("\\n");
+                            doc.select("p").prepend("\\n");
+                            String strLogs = doc.text().replaceAll("\\\\n", "\n").trim(); 
+    
+                            // convert to text
+                            String[] logLines = strLogs.split("\n");
+                            lastGameLogs = java.util.Arrays.stream(logLines)
+                                .map(String::trim)
+                                .filter(line -> !line.isEmpty())
+                                .skip(Math.max(0, logLines.length - maxLogs)) 
+                                .collect(java.util.stream.Collectors.joining("\n"));
+                        }
+
+                        String errorMessage = callback.getData() == null ? "null" : (String) callback.getData();
+                        if (!lastGameLogs.isEmpty()) {
+                            errorMessage += "\n" + "Last game logs:" + "\n" + lastGameLogs;
+                        }
+
+                        frame.showErrorDialog("SERVER", "game error", errorMessage);
                         break;
                     }
 

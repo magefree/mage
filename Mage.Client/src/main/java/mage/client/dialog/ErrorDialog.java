@@ -34,6 +34,7 @@ public class ErrorDialog extends MageDialog {
                 + "Client version: " + MageFrame.getInstance().getVersion().toString() + "\n"
                 + "Java version: " + System.getProperty("java.version") + "\n"
                 + "Default charset: " + Charset.defaultCharset() + "\n"
+                + "Time: " + new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(new java.util.Date()) + "\n"
                 + "\n"
                 + errorText;
         this.textError.setText(fullError);
