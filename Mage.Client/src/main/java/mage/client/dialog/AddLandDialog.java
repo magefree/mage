@@ -27,7 +27,7 @@ import java.util.TreeSet;
  */
 public class AddLandDialog extends MageDialog {
 
-    private static final Logger logger = Logger.getLogger(MageDialog.class);
+    private static final Logger logger = Logger.getLogger(AddLandDialog.class);
 
     private Deck deck;
     private DeckEditorMode mode;

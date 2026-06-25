@@ -25,7 +25,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class DraftController {
 
-    private static final Logger logger = Logger.getLogger(GameController.class);
+    private static final Logger logger = Logger.getLogger(DraftController.class);
 
     private final ManagerFactory managerFactory;
     private final ConcurrentMap<UUID, DraftSession> draftSessions = new ConcurrentHashMap<>();

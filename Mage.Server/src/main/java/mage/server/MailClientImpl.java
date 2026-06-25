@@ -14,7 +14,7 @@ import java.util.Properties;
 
 public class MailClientImpl implements MailClient {
 
-    private static final Logger logger = Logger.getLogger(Main.class);
+    private static final Logger logger = Logger.getLogger(MailClientImpl.class);
 
     private final ConfigSettings config;
 

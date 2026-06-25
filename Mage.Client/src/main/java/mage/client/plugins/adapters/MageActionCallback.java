@@ -56,7 +56,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class MageActionCallback implements ActionCallback {
 
-    private static final Logger logger = Logger.getLogger(ActionCallback.class);
+    private static final Logger logger = Logger.getLogger(MageActionCallback.class);
 
     // hand and stack panel sizes (without scrolls)
     public static final int HAND_CARDS_BETWEEN_GAP_X = 5; // space between cards in hand // TODO: make it gui's sizeable
