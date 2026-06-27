@@ -45,7 +45,7 @@ public final class RaggedRecluse extends TransformingDoubleFacedCard {
         this.getRightHalfCard().setPT(3, 3);
 
         // Whenever Odious Witch attacks, defending player loses 1 life and you gain 1 life.
-        Ability ability = new AttacksTriggeredAbility(
+        ability = new AttacksTriggeredAbility(
                 new LoseLifeTargetEffect(1)
                         .setText("defending player loses 1 life"),
                 false, null, SetTargetPointer.PLAYER
