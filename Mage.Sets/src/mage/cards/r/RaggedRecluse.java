@@ -14,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.TargetController;
+import mage.watchers.common.DiscardedCardWatcher;
 
 import java.util.UUID;
 
@@ -36,7 +37,7 @@ public final class RaggedRecluse extends TransformingDoubleFacedCard {
         this.getLeftHalfCard().addAbility(new BeginningOfEndStepTriggeredAbility(
                 TargetController.YOU, new TransformSourceEffect(),
                 false, ControllerDiscardedThisTurnCondition.instance
-        ).addHint(ControllerDiscardedHint.instance));
+        ).addHint(ControllerDiscardedHint.instance), new DiscardedCardWatcher());
 
         // Odious Witch
         this.getRightHalfCard().setPT(3, 3);
