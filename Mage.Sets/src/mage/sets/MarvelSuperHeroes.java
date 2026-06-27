@@ -333,6 +333,10 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Thunderbolts Conspiracy", 410, Rarity.RARE, mage.cards.t.ThunderboltsConspiracy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tigra, Feline Fury", 191, Rarity.UNCOMMON, mage.cards.t.TigraFelineFury.class));
         cards.add(new SetCardInfo("Titania, Rugged Rumbler", 235, Rarity.UNCOMMON, mage.cards.t.TitaniaRuggedRumbler.class));
+        cards.add(new SetCardInfo("Tony Stark", 80, Rarity.MYTHIC, mage.cards.t.TonyStark.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tony Stark", 350, Rarity.MYTHIC, mage.cards.t.TonyStark.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tony Stark", 363, Rarity.MYTHIC, mage.cards.t.TonyStark.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tony Stark", 392, Rarity.MYTHIC, mage.cards.t.TonyStark.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Training Compound", 275, Rarity.RARE, mage.cards.t.TrainingCompound.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Training Compound", 384, Rarity.RARE, mage.cards.t.TrainingCompound.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Training Regimen", 192, Rarity.UNCOMMON, mage.cards.t.TrainingRegimen.class));
