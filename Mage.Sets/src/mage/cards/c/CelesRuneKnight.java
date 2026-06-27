@@ -77,8 +77,7 @@ class CelesRuneKnightTriggeredAbility extends EntersBattlefieldOneOrMoreTriggere
                 return true;
             }
             if (fromZone == Zone.STACK) {
-                Permanent permanent = event.getTarget();
-                Spell spell = game.getSpellOrLKIStack(permanent.getId());
+                Spell spell = game.getSpellOrLKIStack(event.getTargetId());
                 if (spell != null && spell.getFromZone() == Zone.GRAVEYARD) {
                     return true;
                 }

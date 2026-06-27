@@ -1307,7 +1307,7 @@ public final class CardUtil {
 
     public static Set<Card> getAllCardsFromPermanentsLeftBattlefield(Collection<Permanent> targets, Game game) {
         Set<Card> toReturn = new LinkedHashSet<>();
-        targets.forEach(card -> {
+        targets.stream().filter(Objects::nonNull).forEach(card -> {
             toReturn.add(card.getMainCard());
             card.getMutateObjects().stream()
                     .map(game::getCard)

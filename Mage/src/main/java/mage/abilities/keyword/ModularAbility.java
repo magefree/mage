@@ -75,7 +75,7 @@ public class ModularAbility extends DiesSourceTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getTarget().getCounters(game).getCount(CounterType.P1P1) > 0) {
+            if (zEvent.isPermanentMoved() && zEvent.getTarget().getCounters(game).getCount(CounterType.P1P1) > 0) {
                 return true;
             }
         }

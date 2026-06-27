@@ -72,6 +72,7 @@ class DiesWhileInGraveyardTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         return zEvent.isDiesEvent()
                 && game.checkShortLivingLKI(sourceId, Zone.GRAVEYARD)
+                && zEvent.isPermanentMoved()
                 && zEvent.getTarget().hasSubtype(SubType.DRAGON, game)
                 && zEvent.getTarget().isControlledBy(getControllerId());
     }

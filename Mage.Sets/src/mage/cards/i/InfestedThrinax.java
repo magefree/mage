@@ -77,6 +77,7 @@ class InfestedThrinaxTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (!zEvent.isDiesEvent()
+                || !zEvent.isPermanentMoved()
                 || zEvent.getTarget().isToken()
                 || !zEvent.getTarget().isCreature(game)
                 || !zEvent.getTarget().isControlledBy(getControllerId())) {

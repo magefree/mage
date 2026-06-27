@@ -97,7 +97,7 @@ class KayaTheInexorableTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getTargetId().equals(this.getSourceId())) {
+        if (zEvent.isPermanentMoved() && zEvent.getTargetId().equals(this.getSourceId())) {
             this.getEffects().clear();
             this.addEffect(new KayaTheInexorableEffect(new MageObjectReference(zEvent.getTarget(), game)));
             this.addEffect(new CreateTokenEffect(new SpiritWhiteToken()));

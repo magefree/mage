@@ -62,7 +62,8 @@ class GnawingCrescendoTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.isDiesEvent() && zEvent.getTarget() != null
+        return zEvent.isDiesEvent() 
+                && zEvent.isPermanentMoved()
                 && zEvent.getTarget().isControlledBy(getControllerId())
                 && zEvent.getTarget().isCreature(game)
                 && !zEvent.getTarget().isToken();

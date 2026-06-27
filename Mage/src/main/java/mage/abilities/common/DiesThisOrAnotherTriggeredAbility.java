@@ -57,7 +57,7 @@ public class DiesThisOrAnotherTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (!zEvent.isDiesEvent() || zEvent.getTarget() == null) {
+        if (!zEvent.isDiesEvent() || !zEvent.isPermanentMoved()) {
             return false;
         }
         // TODO: remove applyFilterOnSource workaround for Basri's Lieutenant

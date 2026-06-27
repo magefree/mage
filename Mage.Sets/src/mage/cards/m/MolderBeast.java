@@ -1,7 +1,7 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
@@ -24,7 +24,7 @@ import mage.game.events.ZoneChangeEvent;
 public final class MolderBeast extends CardImpl {
 
     public MolderBeast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(5);
@@ -64,6 +64,7 @@ class MolderBeastTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         return zEvent.isDiesEvent()
+                && zEvent.isPermanentMoved()
                 && zEvent.getTarget().isArtifact(game);
     }
 

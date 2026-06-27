@@ -79,9 +79,12 @@ class AnaxHardenedInTheForgeTriggeredAbility extends DiesThisOrAnotherTriggeredA
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
-            int tokenCount = ((ZoneChangeEvent) event).getTarget().getPower().getValue() > 3 ? 2 : 1;
-            this.getEffects().clear();
-            this.addEffect(new CreateTokenEffect(new SatyrCantBlockToken(), tokenCount));
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            if (zEvent.isPermanentMoved()) {
+                int tokenCount = zEvent.getTarget().getPower().getValue() > 3 ? 2 : 1;
+                this.getEffects().clear();
+                this.addEffect(new CreateTokenEffect(new SatyrCantBlockToken(), tokenCount));
+            }
             return true;
         }
         return false;

@@ -93,7 +93,7 @@ class TeysaKarlovEffect extends ReplacementEffectImpl {
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) numberOfTriggersEvent.getSourceEvent();
                 return zEvent != null
                         && zEvent.isDiesEvent()
-                        && zEvent.getTarget() != null
+                        && zEvent.isPermanentMoved()
                         && zEvent.getTarget().isCreature(game);
             }
         }

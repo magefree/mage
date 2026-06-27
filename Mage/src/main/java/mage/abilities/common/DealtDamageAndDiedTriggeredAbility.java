@@ -62,7 +62,7 @@ public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
         // (2009-10-01)
         if (((ZoneChangeEvent) event).isDiesEvent()) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (filter.match(zEvent.getTarget(), game)) {
+            if (zEvent.isPermanentMoved() && filter.match(zEvent.getTarget(), game)) {
                 boolean damageDealt = false;
                 for (MageObjectReference mor : zEvent.getTarget().getDealtDamageByThisTurn()) {
                     if (mor.refersTo(game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD), game)

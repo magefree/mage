@@ -71,7 +71,7 @@ class WarhostsFrenzyDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         return zEvent.isDiesEvent()
-                && zEvent.getTarget() != null
+                && zEvent.isPermanentMoved()
                 && zEvent.getTarget().isCreature(game)
                 && zEvent.getTarget().isControlledBy(getControllerId());
     }

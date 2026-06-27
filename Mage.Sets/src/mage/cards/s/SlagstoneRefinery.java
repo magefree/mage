@@ -66,7 +66,8 @@ class SlagstoneRefineryTriggeredAbility extends TriggeredAbilityImpl {
             if (zEvent.getTargetId().equals(getSourceId())) {                            // {this}
                 return true;
             } else {                                                                     // another
-                return zEvent.getTarget().isArtifact(game)                               // artifact
+                return zEvent.isPermanentMoved()
+                    && zEvent.getTarget().isArtifact(game)                               // artifact
                     && !zEvent.getTarget().isToken()                                     // nontoken
                     && (zEvent.getTarget().getControllerId().equals(getControllerId())); // you control
             }

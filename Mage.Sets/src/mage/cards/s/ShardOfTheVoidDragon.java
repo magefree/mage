@@ -79,7 +79,7 @@ class ShardOfTheVoidDragonTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getTarget() != null
+        return zEvent.isPermanentMoved()
                 && zEvent.getTarget().isArtifact(game)
                 && zEvent.getFromZone() == Zone.BATTLEFIELD
                 && (zEvent.getToZone() == Zone.GRAVEYARD || zEvent.getToZone() == Zone.EXILED);
