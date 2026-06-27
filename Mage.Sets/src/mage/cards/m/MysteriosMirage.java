@@ -11,6 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.game.permanent.token.IllusionVillainToken;
+import mage.watchers.common.DiscardedCardWatcher;
 
 /**
  *
@@ -25,7 +26,7 @@ public final class MysteriosMirage extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
             TargetController.YOU, new CreateTokenEffect(new IllusionVillainToken()),
             false, ControllerDiscardedThisTurnCondition.instance
-        ).addHint(ControllerDiscardedHint.instance));
+        ).addHint(ControllerDiscardedHint.instance), new DiscardedCardWatcher());
     }
 
     private MysteriosMirage(final MysteriosMirage card) {
