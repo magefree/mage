@@ -13,7 +13,7 @@ import mage.constants.SubType;
 public final class AlienHasteToken extends TokenImpl {
 
     public AlienHasteToken() {
-        super("Alien Token", "1/1 red Alien creature token with haste and \"This creature attacks each combat if able.\"");
+        super("Alien Token", "1/1 red Alien creature token with haste and \"This token attacks each combat if able.\"");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.ALIEN);
