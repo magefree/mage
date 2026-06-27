@@ -275,6 +275,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Super Villain Lockup", 37, Rarity.UNCOMMON, mage.cards.s.SuperVillainLockup.class));
         cards.add(new SetCardInfo("Super-Skrull", 115, Rarity.RARE, mage.cards.s.SuperSkrull.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Super-Skrull", 409, Rarity.RARE, mage.cards.s.SuperSkrull.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Super-Soldier Serum", 38, Rarity.RARE, mage.cards.s.SuperSoldierSerum.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Super-Soldier Serum", 299, Rarity.RARE, mage.cards.s.SuperSoldierSerum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Surveillance Room", 274, Rarity.COMMON, mage.cards.s.SurveillanceRoom.class));
         cards.add(new SetCardInfo("Swamp", 438, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 437, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
