@@ -46,7 +46,7 @@ public final class KeldonStrikeTeam extends CardImpl {
                 new GainAbilityControlledEffect(
                         HasteAbility.getInstance(), Duration.WhileOnBattlefield,
                         StaticFilters.FILTER_CONTROLLED_CREATURE
-                ), SourceEnteredThisTurnCondition.DID, "as long as {this} " +
+                ), SourceEnteredThisTurnCondition.TRUE, "as long as {this} " +
                 "entered this turn, creatures you control have haste"
         )));
     }

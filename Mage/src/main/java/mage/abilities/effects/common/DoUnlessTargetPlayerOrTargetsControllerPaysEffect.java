@@ -4,6 +4,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -26,6 +27,7 @@ public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEf
     private Cost cost;
     private DynamicValue genericMana;
     private String chooseUseText;
+    private boolean nameController;
 
     public DoUnlessTargetPlayerOrTargetsControllerPaysEffect(Effect effect, Cost cost) {
         this(effect, cost, null);
@@ -41,12 +43,14 @@ public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEf
         this.otherwiseEffect = otherwiseEffect;
         this.cost = cost;
         this.chooseUseText = chooseUseText;
+        this.nameController = true;
     }
 
     public DoUnlessTargetPlayerOrTargetsControllerPaysEffect(Effect effect, DynamicValue genericMana) {
         super(Outcome.Detriment);
         this.executingEffects.add(effect);
         this.genericMana = genericMana;
+        this.nameController = true;
     }
 
     protected DoUnlessTargetPlayerOrTargetsControllerPaysEffect(final DoUnlessTargetPlayerOrTargetsControllerPaysEffect effect) {
@@ -60,6 +64,12 @@ public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEf
             this.genericMana = effect.genericMana.copy();
         }
         this.chooseUseText = effect.chooseUseText;
+        this.nameController = effect.nameController;
+    }
+
+    public DoUnlessTargetPlayerOrTargetsControllerPaysEffect withTheyText() {
+        this.nameController = false;
+        return this;
     }
 
     public void addEffect(Effect effect) {
@@ -137,7 +147,10 @@ public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEf
             return staticText;
         }
         String effectsText = executingEffects.getText(mode);
-        return effectsText.substring(0, effectsText.length() - 1) + " unless its controller pays " + (cost != null ? cost.getText() : "{X}");
+        boolean payText = (cost == null || cost instanceof ManaCost);
+        String playerText = nameController ? "its controller " + (payText ? "pays" : "") : "they " + (payText ? "pay" : "");
+
+        return effectsText.substring(0, effectsText.length() - 1) + " unless " + playerText + (cost != null ? cost.getText() : "{X}");
     }
 
     @Override

@@ -34,7 +34,7 @@ public final class CaptainAmericaTeamLeader extends CardImpl {
     }
 
     public CaptainAmericaTeamLeader(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{R}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}{U}");
 
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);

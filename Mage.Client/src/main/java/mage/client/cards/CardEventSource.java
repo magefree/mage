@@ -1,5 +1,6 @@
 package mage.client.cards;
 
+import mage.cards.Card;
 import mage.client.util.Event;
 import mage.client.util.*;
 import mage.view.SimpleCardView;
@@ -7,6 +8,7 @@ import mage.view.SimpleCardView;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85
@@ -32,6 +34,14 @@ public class CardEventSource implements EventSource<Event>, Serializable {
 
     public void fireEvent(ClientEventType eventType) {
         fireEvent(new Event(null, eventType));
+    }
+
+    public void fireEventDeckCardAdded(SimpleCardView addedView, Card addedCard) {
+        fireEvent(new Event(Arrays.asList(addedView, addedCard), ClientEventType.DECK_ADD_SPECIFIC_CARD));
+    }
+
+    public void fireEventDeckCardRemoved(SimpleCardView removedView) {
+        fireEvent(new Event(removedView, ClientEventType.DECK_REMOVE_SPECIFIC_CARD));
     }
 
     public void fireEvent(SimpleCardView card, ClientEventType eventType) {

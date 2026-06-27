@@ -186,6 +186,18 @@ public class SaveGameHistoryDataCollector extends EmptyDataCollector {
     }
 
     @Override
+    public void onGameError(Game game, Exception e) {
+        if (!this.enabled) return;
+        writeToGameLogsFile(game, new Date() + " [ERROR] " + game.getId() + ", " + game);
+        if (e != null) {
+            writeToGameLogsFile(game, e.toString());
+            for (StackTraceElement st : e.getStackTrace()) {
+                writeToGameLogsFile(game, st.toString());
+            }
+        }
+    }
+
+    @Override
     public void onGameEnd(Game game) {
         if (!this.enabled) return;
         writeToGameLogsFile(game, new Date() + " [END] " + game.getId() + ", " + game);

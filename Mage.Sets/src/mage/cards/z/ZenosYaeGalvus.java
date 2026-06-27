@@ -40,8 +40,8 @@ public final class ZenosYaeGalvus extends TransformingDoubleFacedCard {
     private static final FilterPermanent filter2 = new FilterPermanent();
 
     static {
-        filter.add(ZenosYaeGalvusPredicate.FALSE);
-        filter2.add(ZenosYaeGalvusPredicate.TRUE);
+        filter.add(ZenosYaeGalvusChosenCreaturePredicate.FALSE);
+        filter2.add(ZenosYaeGalvusChosenCreaturePredicate.TRUE);
     }
 
     public ZenosYaeGalvus(UUID ownerId, CardSetInfo setInfo) {
@@ -91,19 +91,20 @@ public final class ZenosYaeGalvus extends TransformingDoubleFacedCard {
     }
 }
 
-enum ZenosYaeGalvusPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+enum ZenosYaeGalvusChosenCreaturePredicate implements ObjectSourcePlayerPredicate<Permanent> {
     TRUE(true),
     FALSE(false);
-    private final boolean flag;
 
-    ZenosYaeGalvusPredicate(boolean flag) {
-        this.flag = flag;
+    private final boolean isChosen;
+
+    ZenosYaeGalvusChosenCreaturePredicate(boolean isChosen) {
+        this.isChosen = isChosen;
     }
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         int zcc = game.getState().getZoneChangeCounter(input.getSource().getSourceId());
-        return flag == Optional
+        return isChosen == Optional
                 .of(CardUtil.getObjectZoneString(
                         "chosenCreature", input.getSource().getSourceId(), game,
                         zcc, false

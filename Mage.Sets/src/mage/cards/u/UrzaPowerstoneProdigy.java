@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DiscardCardControllerTriggeredAbility;
+import mage.abilities.effects.common.DiscardOneOrMoreCardsTriggeredAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -14,8 +14,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterArtifactCard;
+import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.PowerstoneToken;
 
 import java.util.UUID;
@@ -24,8 +24,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class UrzaPowerstoneProdigy extends CardImpl {
-
-    private static final FilterCard filter = new FilterArtifactCard("one or more artifact cards");
 
     public UrzaPowerstoneProdigy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -47,8 +45,11 @@ public final class UrzaPowerstoneProdigy extends CardImpl {
         this.addAbility(ability);
 
         // Whenever you discard one or more artifact cards, create a tapped Powerstone token. This ability triggers only once each turn.
-        this.addAbility(new DiscardCardControllerTriggeredAbility(
-                new CreateTokenEffect(new PowerstoneToken(), 1, true), false, filter
+        this.addAbility(new DiscardOneOrMoreCardsTriggeredAbility(
+                Zone.BATTLEFIELD,
+                new CreateTokenEffect(new PowerstoneToken(), 1, true),
+                false,
+                StaticFilters.FILTER_CARD_ARTIFACTS
         ).setTriggersLimitEachTurn(1));
     }
 

@@ -1,7 +1,8 @@
  package mage.client.dialog;
 
  import mage.client.MageFrame;
- import mage.client.game.GamePanel;
+import mage.client.chat.ChatPanelBasic;
+import mage.client.game.GamePanel;
  import mage.client.util.Format;
  import mage.client.util.ImageHelper;
  import mage.client.util.audio.AudioManager;
@@ -107,8 +108,8 @@
                              .append(".html").toString();
                      PrintWriter out = new PrintWriter(fileName);
                      String log = gamePanel.getGameLog();
-                     log = log.replace("<body>", "<body style=\"background-color:black\">");
-                     log = log.replace("<font color=\"#CCCC33\">", "<br><font color=\"#CCCC33\">"); //The color is TIMESTAMP_COLOR and we can utilize it to add line breaks to new lines
+                     log = log.replace("<body>", "<body style=\"background-color:black\">"); // workaround to make more readable colors
+                     log = log.replace("<font color=\"" + ChatPanelBasic.TIMESTAMP_COLOR + "\">", "<br><font color=\"" + ChatPanelBasic.TIMESTAMP_COLOR + "\">"); // workaround to add fixed line breaks before each log
                      out.print(log);
                      out.close();
                  }

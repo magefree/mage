@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class MoonCircuitHacker extends CardImpl {
 
-    private static final Condition condition = new InvertCondition(SourceEnteredThisTurnCondition.DID);
+    private static final Condition condition = new InvertCondition(SourceEnteredThisTurnCondition.TRUE);
 
     public MoonCircuitHacker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{U}");

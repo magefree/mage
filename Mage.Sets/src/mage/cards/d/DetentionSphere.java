@@ -119,7 +119,7 @@ class DetentionSphereLeavesEffect extends OneShotEffect {
         if (sourceObject != null && controller != null) {
             Permanent permanentLeftBattlefield = (Permanent) getValue("permanentLeftBattlefield");
             if (permanentLeftBattlefield == null) {
-                Logger.getLogger(ReturnFromExileForSourceEffect.class).error("Permanent not found: " + sourceObject.getName());
+                Logger.getLogger(DetentionSphereLeavesEffect.class).error("Permanent not found: " + sourceObject.getName());
                 return false;
             }
             ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), permanentLeftBattlefield.getZoneChangeCounter(game)));
