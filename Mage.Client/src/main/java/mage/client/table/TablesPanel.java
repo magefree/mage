@@ -1938,7 +1938,7 @@ class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
     private final UUID roomId;
     private final TablesPanel panel;
 
-    private static final Logger logger = Logger.getLogger(UpdateTablesTask.class);
+    private static final Logger logger = Logger.getLogger(UpdateMatchesTask.class);
 
     UpdateMatchesTask(UUID roomId, TablesPanel panel) {
         this.roomId = roomId;

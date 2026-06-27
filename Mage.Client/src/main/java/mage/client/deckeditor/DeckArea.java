@@ -3,11 +3,11 @@ package mage.client.deckeditor;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLayout;
+import mage.cards.repository.CardRepository;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardEventSource;
 import mage.client.cards.DragCardGrid;
 import mage.client.constants.Constants.DeckEditorMode;
-import mage.client.util.ClientEventType;
 import mage.client.util.Event;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.Listener;
@@ -93,8 +93,8 @@ public class DeckArea extends javax.swing.JPanel {
                 // Add to hidden and move to sideboard
                 for (CardView card : cards) {
                     hiddenCards.add(card.getId());
-                    maindeckVirtualEvent.fireEvent(card, ClientEventType.DECK_REMOVE_SPECIFIC_CARD);
-                    sideboardVirtualEvent.fireEvent(card, ClientEventType.DECK_ADD_SPECIFIC_CARD);
+                    maindeckVirtualEvent.fireEventDeckCardRemoved(card);
+                    sideboardVirtualEvent.fireEventDeckCardAdded(card, null);
                 }
                 loadDeck(lastDeck, lastBigCard);
             }
@@ -108,9 +108,10 @@ public class DeckArea extends javax.swing.JPanel {
             @Override
             public void duplicateCards(Collection<CardView> cards) {
                 sideboardList.deselectAll();
-                for (CardView card : cards) {
-                    CardView newCard = new CardView(card);
-                    deckList.addCardView(newCard, card);
+                for (CardView blueprint : cards) {
+                    Card newCard = CardRepository.instance.findCard(blueprint.getExpansionSetCode(), blueprint.getCardNumber()).createMockCard();
+                    CardView newView = new CardView(newCard);
+                    deckList.addCardView(newView, newCard, blueprint);
                 }
             }
 
@@ -148,9 +149,10 @@ public class DeckArea extends javax.swing.JPanel {
             @Override
             public void duplicateCards(Collection<CardView> cards) {
                 deckList.deselectAll();
-                for (CardView card : cards) {
-                    CardView newCard = new CardView(card);
-                    sideboardList.addCardView(newCard, card);
+                for (CardView blueprint : cards) {
+                    Card newCard = CardRepository.instance.findCard(blueprint.getExpansionSetCode(), blueprint.getCardNumber()).createMockCard();
+                    CardView newView = new CardView(newCard);
+                    sideboardList.addCardView(newView, newCard, blueprint);
                 }
             }
 

@@ -20,6 +20,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         this.blockName = "Marvel Super Heroes"; // for sorting in GUI
         this.hasBasicLands = true;
 
+        this.enablePlayBooster(276);
+
         cards.add(new SetCardInfo("A.I.M. Labs", 257, Rarity.COMMON, mage.cards.a.AIMLabs.class));
         cards.add(new SetCardInfo("A.I.M. Scientists", 44, Rarity.COMMON, mage.cards.a.AIMScientists.class));
         cards.add(new SetCardInfo("A.I.M. Synthoids", 242, Rarity.COMMON, mage.cards.a.AIMSynthoids.class));
@@ -112,6 +114,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Doctor Doom", 95, Rarity.MYTHIC, mage.cards.d.DoctorDoom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doom Reigns Supreme", 407, Rarity.RARE, mage.cards.d.DoomReignsSupreme.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doom Reigns Supreme", 96, Rarity.RARE, mage.cards.d.DoomReignsSupreme.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Echo, Perceptive Prodigy", 51, Rarity.UNCOMMON, mage.cards.e.EchoPerceptiveProdigy.class));
         cards.add(new SetCardInfo("Elektra, Daughter of the Hand", 326, Rarity.RARE, mage.cards.e.ElektraDaughterOfTheHand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elektra, Daughter of the Hand", 366, Rarity.RARE, mage.cards.e.ElektraDaughterOfTheHand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elektra, Daughter of the Hand", 395, Rarity.RARE, mage.cards.e.ElektraDaughterOfTheHand.class, NON_FULL_USE_VARIOUS));
@@ -137,6 +140,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Gleaming Bastion", 267, Rarity.RARE, mage.cards.g.GleamingBastion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gleaming Bastion", 382, Rarity.RARE, mage.cards.g.GleamingBastion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Go Nuts!", 168, Rarity.COMMON, mage.cards.g.GoNuts.class));
+        cards.add(new SetCardInfo("Grim Reaper, Lethal Legionnaire", 98, Rarity.UNCOMMON, mage.cards.g.GrimReaperLethalLegionnaire.class));
         cards.add(new SetCardInfo("Guerrilla Gorilla", 169, Rarity.COMMON, mage.cards.g.GuerrillaGorilla.class));
         cards.add(new SetCardInfo("H.E.R.B.I.E. Scout Unit", 247, Rarity.COMMON, mage.cards.h.HERBIEScoutUnit.class));
         cards.add(new SetCardInfo("HYDRA Assault Robot", 137, Rarity.COMMON, mage.cards.h.HYDRAAssaultRobot.class));
@@ -276,6 +280,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("The Scarlet Witch", 431, Rarity.RARE, mage.cards.t.TheScarletWitch.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Sentry, Golden Guardian", 35, Rarity.RARE, mage.cards.t.TheSentryGoldenGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Sentry, Golden Guardian", 358, Rarity.RARE, mage.cards.t.TheSentryGoldenGuardian.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Serpent Society", 226, Rarity.RARE, mage.cards.t.TheSerpentSociety.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Serpent Society", 424, Rarity.RARE, mage.cards.t.TheSerpentSociety.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Ten Rings", 251, Rarity.MYTHIC, mage.cards.t.TheTenRings.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Ten Rings", 313, Rarity.MYTHIC, mage.cards.t.TheTenRings.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Thing, Ben Grimm", 190, Rarity.UNCOMMON, mage.cards.t.TheThingBenGrimm.class, NON_FULL_USE_VARIOUS));

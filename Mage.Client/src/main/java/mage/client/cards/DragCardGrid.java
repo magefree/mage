@@ -67,21 +67,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             // Don't remove the cards, no target
         } else {
             // Remove dragged cards
-            for (List<List<CardView>> gridRow : cardGrid) {
-                for (List<CardView> stack : gridRow) {
-                    for (int i = 0; i < stack.size(); ++i) {
-                        CardView card = stack.get(i);
-                        if (card.isSelected()) {
-                            stack.set(i, null);
-                            removeCardView(card);
-                            eventSource.fireEvent(card, ClientEventType.DECK_REMOVE_SPECIFIC_CARD);
-                        }
-                    }
-                }
-            }
-            trimGrid();
-            layoutGrid();
-            repaintGrid();
+            removeSelectedCards();
         }
     }
 
@@ -334,8 +320,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             // Add new cards to grid
             for (CardView card : cards) {
                 card.setSelected(true);
-                addCardView(card, null);
-                eventSource.fireEvent(card, ClientEventType.DECK_ADD_SPECIFIC_CARD);
+                addCardView(card);
+                eventSource.fireEventDeckCardAdded(card, null); // TODO: move event inside addCardView
             }
             layoutGrid();
             repaintGrid();
@@ -401,19 +387,30 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         }
     }
 
-    public void removeSelection() {
-        for (List<List<CardView>> gridRow : cardGrid) {
-            for (List<CardView> stack : gridRow) {
-                for (int i = 0; i < stack.size(); ++i) {
-                    CardView card = stack.get(i);
-                    if (card.isSelected()) {
-                        eventSource.fireEvent(card, ClientEventType.DECK_REMOVE_SPECIFIC_CARD);
-                        stack.set(i, null);
-                        removeCardView(card);
+    public void removeSelectedCards() {
+        List<CardView> cardsToRemove = allCards.stream()
+            .filter(CardView::isSelected)
+            .collect(Collectors.toList());
+        removeCards(cardsToRemove);
+    }
+
+    private void removeCards(List<CardView> cardsToRemove) {
+        cardsToRemove.forEach(cardToRemove -> {
+            for (List<List<CardView>> gridRow : cardGrid) {
+                for (List<CardView> stack : gridRow) {
+                    for (int i = 0; i < stack.size(); ++i) {
+                        CardView card = stack.get(i);
+                        if (card != null && card.equals(cardToRemove)) {
+                            eventSource.fireEventDeckCardRemoved(card);
+                            stack.set(i, null); // trimGrid must remove all empty spaces 
+                            removeCardView(card);
+                            break;
+                        }
                     }
                 }
             }
-        }
+        });
+        
         trimGrid();
         layoutGrid();
         repaintGrid();
@@ -465,6 +462,17 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         private final CardViewComparator comparator;
         private final String text;
+    }
+
+    private class NewCardInfo {
+
+        private final Card newCard;
+        private final CardView newView;
+
+        public NewCardInfo(Card newCard, CardView newView) {
+            this.newCard = newCard;
+            this.newView = newView;
+        }
     }
 
     private abstract class CardTypeCounter {
@@ -1592,6 +1600,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     }
 
     public void blingDeck() {
+        // TODO: outdated, remove whole bling feature
         if (this.mode != Constants.DeckEditorMode.FREE_BUILDING) {
             return;
         }
@@ -1717,8 +1726,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
                             if (acard.getName().equals(card.getName())) {
                                 CardView pimpedCard = new CardView(acard);
-                                addCardView(pimpedCard, null);
-                                eventSource.fireEvent(pimpedCard, ClientEventType.DECK_ADD_SPECIFIC_CARD);
+                                addCardView(pimpedCard); // TODO: can be buggy, must use full params
+                                eventSource.fireEventDeckCardAdded(pimpedCard, null);
                                 pimpedCards.put(pimpedCard, 1);
                                 didModify = true;
                             }
@@ -1751,31 +1760,31 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             return;
         }
 
-        List<List<List<CardView>>> newCardGrid = new ArrayList<>();
+        deselectAll();
+        Map<CardView, NewCardInfo> cardsToReplace = new HashMap<>();
         for (List<List<CardView>> gridRow : cardGrid) {
-            List<List<CardView>> newGridRow = new ArrayList<>();
             for (List<CardView> stack : gridRow) {
-                List<CardView> newStack = new ArrayList<>();
                 for (CardView card : stack) {
                     CardInfo oldestCardInfo = CardRepository.instance.findOldestNonPromoVersionCard(card.getName());
                     if (oldestCardInfo != null) {
-                        CardView oldestCardView = new CardView(oldestCardInfo.createMockCard());
-                        this.removeCardView(card);
-                        eventSource.fireEvent(card, ClientEventType.DECK_REMOVE_SPECIFIC_CARD);
-                        this.addCardView(oldestCardView, null);
-                        eventSource.fireEvent(oldestCardView, ClientEventType.DECK_ADD_SPECIFIC_CARD);
-                        newStack.add(oldestCardView);
-                    } else {
-                        newStack.add(card);
+                        Card oldestCard = oldestCardInfo.createMockCard();
+                        CardView oldestView = new CardView(oldestCard);
+                        if (!card.isSameCardVersion(oldestView)) {
+                            cardsToReplace.put(card, new NewCardInfo(oldestCard, oldestView));
+                        }
                     }
                 }
-                newGridRow.add(newStack);
             }
-            newCardGrid.add(newGridRow);
         }
-        cardGrid = newCardGrid;
-        layoutGrid();
-        repaintGrid();
+
+        List<CardView> cardsToRemove = new ArrayList<>();
+        cardsToReplace.forEach((currentCard, oldestInfo) -> {
+            addCardView(oldestInfo.newView, oldestInfo.newCard, currentCard);
+            cardsToRemove.add(currentCard);
+        });
+        removeCards(cardsToRemove);
+
+        JOptionPane.showMessageDialog(null, "Replaced cards: " + cardsToReplace.size());
     }
 
     // Update the contents of the card grid
@@ -1814,7 +1823,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             for (CardView newCard : cardsView.values()) {
                 if (!cardViews.containsKey(newCard.getId())) {
                     // Is a new card
-                    addCardView(newCard, null);
+                    addCardView(newCard);
 
                     // Put it into the appropirate place in the grid given the current sort
                     sortIntoGrid(newCard, null);
@@ -1837,7 +1846,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             for (CardView newCard : cardsView.values()) {
                 if (!cardViews.containsKey(newCard.getId())) {
                     // Add the new card
-                    addCardView(newCard, null);
+                    addCardView(newCard);
 
                     // Add the new card to tracking
                     Map<String, List<CardView>> forSetCode;
@@ -1988,19 +1997,40 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         menu.show(e.getComponent(), e.getX(), e.getY());
     }
 
-    public void addCardView(final CardView card, final CardView duplicatedFromCard) {
-        allCards.add(card);
+    /**
+     * Add existing card view, e.g. after dragging between zones
+     *
+     * @param newView
+     */
+    public void addCardView(final CardView newView) {
+        addCardView(newView, null, null);
+    }
 
-        // Update counts
+    /**
+     * Add new card view, e.g. on duplicate or oldest replace
+     *
+     * @param newView
+     * @param newCard
+     * @param duplicatedFromView
+     */
+    public void addCardView(final CardView newView, final Card newCard, final CardView duplicatedFromView) {
+        if ((newCard == null) != (duplicatedFromView == null)) {
+            throw new IllegalArgumentException("Wrong code usage: if you duplicate card then must ref real card too");
+        }
+
+        allCards.add(newView);
+
+        // update count stats
+        // TODO: rework to full recalc without cards storage
         for (CardTypeCounter counter : allCounters) {
-            counter.add(card);
+            counter.add(newView);
         }
         updateCounts();
 
         // Create the card view
-        final MageCard cardPanel = Plugins.instance.getMageCard(card, lastBigCard, new CardIconRenderSettings(), new Dimension(getCardWidth(), getCardHeight()), null, true, true, PreferencesDialog.getRenderMode(), true);
+        final MageCard cardPanel = Plugins.instance.getMageCard(newView, lastBigCard, new CardIconRenderSettings(), new Dimension(getCardWidth(), getCardHeight()), null, true, true, PreferencesDialog.getRenderMode(), true);
         cardPanel.setCardContainerRef(this);
-        cardPanel.update(card);
+        cardPanel.update(newView);
         // cards bounds set in layoutGrid()
         cardPanel.setCardCaptionTopOffset(0);
 
@@ -2011,8 +2041,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             public void mouseDragged(MouseEvent e) {
                 if (!dragger.isDragging()) {
                     // If the card isn't already selected, make sure it is
-                    if (!card.isSelected()) {
-                        selectCard(card);
+                    if (!newView.isSelected()) {
+                        selectCard(newView);
                     }
                     dragger.handleDragStart(cardPanel, e);
                 }
@@ -2021,11 +2051,11 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         // And add it
         cardContent.add(cardPanel);
-        cardViews.put(card.getId(), cardPanel);
+        cardViews.put(newView.getId(), cardPanel);
 
-        if (duplicatedFromCard != null) {
-            sortIntoGrid(card, duplicatedFromCard);
-            eventSource.fireEvent(card, ClientEventType.DECK_ADD_SPECIFIC_CARD);
+        if (newCard != null || duplicatedFromView != null) {
+            sortIntoGrid(newView, duplicatedFromView);
+            eventSource.fireEventDeckCardAdded(newView, newCard);
 
             // clear grid from empty rows
             trimGrid();
@@ -2080,7 +2110,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     private void removeCardView(CardView card) {
         allCards.remove(card);
 
-        // Remove fromcounts
+        // update count stats
+        // TODO: rework to full recalc without cards storage
         for (CardTypeCounter counter : allCounters) {
             counter.remove(card);
         }

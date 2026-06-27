@@ -16,7 +16,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
     }
 
     private TeenageMutantNinjaTurtlesEternal() {
-        super("Teenage Mutant Ninja Turtles Eternal", "TMC", ExpansionSet.buildDate(2026, 3, 6), SetType.EXPANSION);
+        super("Teenage Mutant Ninja Turtles Eternal", "TMC", ExpansionSet.buildDate(2026, 3, 6), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Acidic Slime", 48, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
