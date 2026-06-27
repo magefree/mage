@@ -84,6 +84,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Bruce Banner", 49, Rarity.MYTHIC, mage.cards.b.BruceBanner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bullseye, Death Dealer", 209, Rarity.UNCOMMON, mage.cards.b.BullseyeDeathDealer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bullseye, Death Dealer", 325, Rarity.UNCOMMON, mage.cards.b.BullseyeDeathDealer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Call Damage Control", 162, Rarity.COMMON, mage.cards.c.CallDamageControl.class));
         cards.add(new SetCardInfo("Captain America's Shield", 244, Rarity.RARE, mage.cards.c.CaptainAmericasShield.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain America's Shield", 311, Rarity.RARE, mage.cards.c.CaptainAmericasShield.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain America's Shield", 317, Rarity.RARE, mage.cards.c.CaptainAmericasShield.class, NON_FULL_USE_VARIOUS));
