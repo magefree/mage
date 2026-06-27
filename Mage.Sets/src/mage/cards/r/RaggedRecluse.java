@@ -34,10 +34,12 @@ public final class RaggedRecluse extends TransformingDoubleFacedCard {
         this.getLeftHalfCard().setPT(2, 1);
 
         // At the beginning of your end step, if you discarded a card this turn, transform Ragged Recluse.
-        this.getLeftHalfCard().addAbility(new BeginningOfEndStepTriggeredAbility(
+        Ability ability = new BeginningOfEndStepTriggeredAbility(
                 TargetController.YOU, new TransformSourceEffect(),
                 false, ControllerDiscardedThisTurnCondition.instance
-        ).addHint(ControllerDiscardedHint.instance), new DiscardedCardWatcher());
+        ).addHint(ControllerDiscardedHint.instance);
+        ability.addWatcher(new DiscardedCardWatcher());
+        this.getLeftHalfCard().addAbility(ability);
 
         // Odious Witch
         this.getRightHalfCard().setPT(3, 3);
