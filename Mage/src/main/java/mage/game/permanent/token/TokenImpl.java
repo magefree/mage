@@ -22,7 +22,6 @@ import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
 import mage.target.Target;
-import org.apache.log4j.Logger;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
@@ -31,8 +30,6 @@ import java.util.*;
  * Each token must have default constructor without params (GUI require for card viewer)
  */
 public abstract class TokenImpl extends MageObjectImpl implements Token {
-
-    private static final Logger logger = Logger.getLogger(MageObjectImpl.class);
 
     protected String description;
     private final ArrayList<UUID> lastAddedTokenIds = new ArrayList<>();

@@ -25,7 +25,9 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Abomination, World Ravager", 355, Rarity.RARE, mage.cards.a.AbominationWorldRavager.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Abomination, World Ravager", 47, Rarity.RARE, mage.cards.a.AbominationWorldRavager.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Absorbing Man and Titania", 510, Rarity.RARE, mage.cards.a.AbsorbingManAndTitania.class));
+        cards.add(new SetCardInfo("Accelerated Evolution", 711, Rarity.COMMON, mage.cards.a.AcceleratedEvolution.class));
         cards.add(new SetCardInfo("Advancing the Spirit", 712, Rarity.UNCOMMON, mage.cards.a.AdvancingTheSpirit.class));
+        cards.add(new SetCardInfo("Age of Ultron", 41, Rarity.RARE, mage.cards.a.AgeOfUltron.class));
         cards.add(new SetCardInfo("Alien Symbiosis", 791, Rarity.UNCOMMON, mage.cards.a.AlienSymbiosis.class));
         cards.add(new SetCardInfo("Amazing Spider-Girl", 583, Rarity.RARE, mage.cards.a.AmazingSpiderGirl.class));
         cards.add(new SetCardInfo("Annie Joins Up", 281, Rarity.RARE, mage.cards.a.AnnieJoinsUp.class, NON_FULL_USE_VARIOUS));
@@ -242,6 +244,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Greater Good", 174, Rarity.RARE, mage.cards.g.GreaterGood.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Greater Good", 380, Rarity.RARE, mage.cards.g.GreaterGood.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Green Goblin, Back for More", 657, Rarity.RARE, mage.cards.g.GreenGoblinBackForMore.class));
+        cards.add(new SetCardInfo("Grim Reaper's Scythe", 658, Rarity.RARE, mage.cards.g.GrimReapersScythe.class));
         cards.add(new SetCardInfo("HYDRA Disintegrator", 660, Rarity.UNCOMMON, mage.cards.h.HYDRADisintegrator.class));
         cards.add(new SetCardInfo("Hammer of Nazahn", 286, Rarity.RARE, mage.cards.h.HammerOfNazahn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hammer of Nazahn", 427, Rarity.RARE, mage.cards.h.HammerOfNazahn.class, NON_FULL_USE_VARIOUS));
