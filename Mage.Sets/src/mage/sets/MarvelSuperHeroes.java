@@ -326,6 +326,9 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("The Wondrous Wasp", 84, Rarity.RARE, mage.cards.t.TheWondrousWasp.class));
         cards.add(new SetCardInfo("Thirst for Knowledge", 79, Rarity.UNCOMMON, mage.cards.t.ThirstForKnowledge.class));
         cards.add(new SetCardInfo("Thor Odinson", 234, Rarity.UNCOMMON, mage.cards.t.ThorOdinson.class));
+        cards.add(new SetCardInfo("Thor, God of Thunder", 156, Rarity.MYTHIC, mage.cards.t.ThorGodOfThunder.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thor, God of Thunder", 338, Rarity.MYTHIC, mage.cards.t.ThorGodOfThunder.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thor, God of Thunder", 369, Rarity.MYTHIC, mage.cards.t.ThorGodOfThunder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thunderbolts Conspiracy", 117, Rarity.RARE, mage.cards.t.ThunderboltsConspiracy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thunderbolts Conspiracy", 410, Rarity.RARE, mage.cards.t.ThunderboltsConspiracy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tigra, Feline Fury", 191, Rarity.UNCOMMON, mage.cards.t.TigraFelineFury.class));
