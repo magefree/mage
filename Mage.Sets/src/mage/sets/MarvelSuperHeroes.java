@@ -329,6 +329,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("War Machine, Legacy of Iron", 238, Rarity.UNCOMMON, mage.cards.w.WarMachineLegacyOfIron.class));
         cards.add(new SetCardInfo("We Say Thee Nay!", 82, Rarity.COMMON, mage.cards.w.WeSayTheeNay.class));
         cards.add(new SetCardInfo("Web Up", 41, Rarity.COMMON, mage.cards.w.WebUp.class));
+        cards.add(new SetCardInfo("Whiplash, Vengeful Engineer", 121, Rarity.UNCOMMON, mage.cards.w.WhiplashVengefulEngineer.class));
         cards.add(new SetCardInfo("White Tiger, Ava Ayala", 196, Rarity.UNCOMMON, mage.cards.w.WhiteTigerAvaAyala.class));
         cards.add(new SetCardInfo("White Widow, Free Agent", 42, Rarity.UNCOMMON, mage.cards.w.WhiteWidowFreeAgent.class));
         cards.add(new SetCardInfo("Wiccan, Rising Magician", 83, Rarity.UNCOMMON, mage.cards.w.WiccanRisingMagician.class));
