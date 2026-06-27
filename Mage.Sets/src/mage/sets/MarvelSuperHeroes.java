@@ -291,6 +291,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 281, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 292, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 291, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swordsman, Sharp Scoundrel", 116, Rarity.UNCOMMON, mage.cards.s.SwordsmanSharpScoundrel.class));
         cards.add(new SetCardInfo("Take Up the Shield", 348, Rarity.COMMON, mage.cards.t.TakeUpTheShield.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Take Up the Shield", 39, Rarity.COMMON, mage.cards.t.TakeUpTheShield.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Team Tactics", 155, Rarity.UNCOMMON, mage.cards.t.TeamTactics.class));
