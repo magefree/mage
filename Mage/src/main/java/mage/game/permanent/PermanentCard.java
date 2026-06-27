@@ -41,7 +41,7 @@ public class PermanentCard extends PermanentImpl {
 
         // runtime check: must use real card only inside
         if (card instanceof PermanentCard) {
-            throw new IllegalArgumentException("Wrong code usage: can't use PermanentCard inside another PermanentCard");
+            throw new IllegalArgumentException("Wrong code usage: can't use PermanentCard inside another PermanentCard, use CardUtil.getDefaultCardSideForBattlefield");
         }
 
         // usage check: you must put to play only real card's part

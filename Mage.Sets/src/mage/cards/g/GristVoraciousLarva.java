@@ -27,6 +27,7 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 import java.util.List;
 import java.util.Objects;
@@ -209,7 +210,7 @@ class GristThePlagueSwarmMinus6Effect extends OneShotEffect {
                     null, null, false, 1, false,
                     false, null, 1, 1, false
             );
-            effect.setSavedPermanent(new PermanentCard(card, controller.getId(), game));
+            effect.setSavedPermanent(new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, card), controller.getId(), game));
             effect.setOnlyColor(new ObjectColor("BG"));
             effect.setOnlySubType(SubType.INSECT);
             effect.apply(game, source);

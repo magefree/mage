@@ -228,7 +228,7 @@ public class MageServerImpl implements MageServer {
                     int notStartedTables = user.getNumberOfNotStartedTables();
                     if (notStartedTables > 1) {
                         user.showUserMessage("Create table", "You have already " + notStartedTables + " not started tables. You can't create another.");
-                        throw new MageException("No message");
+                        throw new MageException("Error, user already has not started table");
                     }
 
                     // limit number of workable AI opponents (draft bots are unlimited)
