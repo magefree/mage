@@ -247,6 +247,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Red Room Recruit", 110, Rarity.COMMON, mage.cards.r.RedRoomRecruit.class));
         cards.add(new SetCardInfo("Reptil, Dinomorpher", 182, Rarity.UNCOMMON, mage.cards.r.ReptilDinomorpher.class));
         cards.add(new SetCardInfo("Repulsor Blast", 150, Rarity.COMMON, mage.cards.r.RepulsorBlast.class));
+        cards.add(new SetCardInfo("Restorative Technique", 183, Rarity.COMMON, mage.cards.r.RestorativeTechnique.class));
         cards.add(new SetCardInfo("Rick Jones, Destined Sidekick", 184, Rarity.UNCOMMON, mage.cards.r.RickJonesDestinedSidekick.class));
         cards.add(new SetCardInfo("Ronin, Shadow Stalker", 112, Rarity.UNCOMMON, mage.cards.r.RoninShadowStalker.class));
         cards.add(new SetCardInfo("Roxxon Brutes", 113, Rarity.COMMON, mage.cards.r.RoxxonBrutes.class));
