@@ -153,6 +153,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Grim Reaper, Lethal Legionnaire", 98, Rarity.UNCOMMON, mage.cards.g.GrimReaperLethalLegionnaire.class));
         cards.add(new SetCardInfo("Guerrilla Gorilla", 169, Rarity.COMMON, mage.cards.g.GuerrillaGorilla.class));
         cards.add(new SetCardInfo("H.E.R.B.I.E. Scout Unit", 247, Rarity.COMMON, mage.cards.h.HERBIEScoutUnit.class));
+        cards.add(new SetCardInfo("HULK SMASH!", 135, Rarity.COMMON, mage.cards.h.HULKSMASH.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("HULK SMASH!", 332, Rarity.COMMON, mage.cards.h.HULKSMASH.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("HYDRA Assault Robot", 137, Rarity.COMMON, mage.cards.h.HYDRAAssaultRobot.class));
         cards.add(new SetCardInfo("HYDRA Infiltration", 100, Rarity.COMMON, mage.cards.h.HYDRAInfiltration.class));
         cards.add(new SetCardInfo("Hawkeye's Bow", 132, Rarity.COMMON, mage.cards.h.HawkeyesBow.class));
