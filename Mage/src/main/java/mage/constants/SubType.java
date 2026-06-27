@@ -677,15 +677,17 @@ public enum SubType {
     }
 
     public static SubType byDescription(String subType) {
+        if (subType == null) {
+            return null;
+        }
+
         for (SubType s : values()) {
             if (s.getDescription().equals(subType)) {
                 return s;
             }
         }
-        
-        // TODO: return to exceptions if no more errors in logs, 2026-06-17
-        LOGGER.error("Can''t find subtype enum value in byDescription: " + subType, new Throwable());
-        return null;
+
+        throw new IllegalArgumentException("Can't find subtype enum value in byDescription: " + subType);
     }
 
     public SubTypeSet getSubTypeSet() {
