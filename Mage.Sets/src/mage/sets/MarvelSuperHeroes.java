@@ -271,6 +271,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Speed, Young Avenger", 152, Rarity.UNCOMMON, mage.cards.s.SpeedYoungAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Speed, Young Avenger", 448, Rarity.UNCOMMON, mage.cards.s.SpeedYoungAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spider-Woman, Secret Agent", 229, Rarity.UNCOMMON, mage.cards.s.SpiderWomanSecretAgent.class));
+        cards.add(new SetCardInfo("Stature, Size Shifter", 76, Rarity.UNCOMMON, mage.cards.s.StatureSizeShifter.class));
         cards.add(new SetCardInfo("Stark Industries", 272, Rarity.COMMON, mage.cards.s.StarkIndustries.class));
         cards.add(new SetCardInfo("Stark Industries Executive", 153, Rarity.COMMON, mage.cards.s.StarkIndustriesExecutive.class));
         cards.add(new SetCardInfo("Stolen Stark Tech", 114, Rarity.COMMON, mage.cards.s.StolenStarkTech.class));
