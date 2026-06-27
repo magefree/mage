@@ -42,7 +42,7 @@ public class RevealCardsFromLibraryUntilEffect extends OneShotEffect {
         return new RevealCardsFromLibraryUntilEffect(this);
     }
 
-    private Card getCard(Player controller, Cards cards, Ability source, Game game) {
+    private Card findPickCard(Player controller, Cards cards, Ability source, Game game) {
         for (Card card : controller.getLibrary().getCards(game)) {
             cards.add(card);
             if (filter.match(card, source.getControllerId(), source, game)) {
@@ -59,9 +59,11 @@ public class RevealCardsFromLibraryUntilEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl();
-        Card card = getCard(controller, cards, source, game);
+        Card card = findPickCard(controller, cards, source, game);
         controller.revealCards(source, cards, game);
-        putPickedCard.moveCard(controller, card, source, game, "card");
+        if (card != null) {
+            putPickedCard.moveCard(controller, card, source, game, "card");
+        }
         if (putPickedCard.getZone() == Zone.LIBRARY) {
             cards.remove(card);
         } else {

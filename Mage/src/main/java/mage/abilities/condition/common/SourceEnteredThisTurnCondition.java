@@ -9,22 +9,23 @@ import mage.game.permanent.Permanent;
  * @author xenohedron
  */
 public enum SourceEnteredThisTurnCondition implements Condition {
-    DID(true),
-    DIDNT(false);
-    private final boolean flag;
+    TRUE(true),
+    FALSE(false);
 
-    SourceEnteredThisTurnCondition(boolean flag) {
-        this.flag = flag;
+    private final boolean hasEntered;
+
+    SourceEnteredThisTurnCondition(boolean hasEntered) {
+        this.hasEntered = hasEntered;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentOrLKI(game);
-        return permanent != null && (permanent.getTurnsOnBattlefield() == 0) == flag;
+        return permanent != null && (permanent.getTurnsOnBattlefield() == 0) == hasEntered;
     }
 
     @Override
     public String toString() {
-        return "{this} " + (flag ? "entered" : "didn't enter the battlefield") + " this turn";
+        return "{this} " + (hasEntered ? "entered" : "didn't enter the battlefield") + " this turn";
     }
 }
