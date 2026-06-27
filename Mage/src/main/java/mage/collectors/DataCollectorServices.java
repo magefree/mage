@@ -117,6 +117,12 @@ final public class DataCollectorServices implements DataCollector {
     }
 
     @Override
+    public void onGameError(Game game, Exception e) {
+        if (game.isSimulation()) return;
+        activeServices.forEach(c -> c.onGameError(game, e));
+    }
+
+    @Override
     public void onGameEnd(Game game) {
         if (game.isSimulation()) return;
         activeServices.forEach(c -> c.onGameEnd(game));
