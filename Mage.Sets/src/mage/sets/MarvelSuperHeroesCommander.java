@@ -564,6 +564,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("The Fabulous Frog-Man", 559, Rarity.COMMON, mage.cards.t.TheFabulousFrogMan.class));
         cards.add(new SetCardInfo("The Falcon, Sam Wilson", 837, Rarity.UNCOMMON, mage.cards.t.TheFalconSamWilson.class));
         cards.add(new SetCardInfo("The Fantastic Four", 741, Rarity.MYTHIC, mage.cards.t.TheFantasticFour.class));
+        cards.add(new SetCardInfo("The Fantasticar", 104, Rarity.RARE, mage.cards.t.TheFantasticar.class));
         cards.add(new SetCardInfo("The Great Mound", 120, Rarity.RARE, mage.cards.t.TheGreatMound.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Great Mound", 479, Rarity.RARE, mage.cards.t.TheGreatMound.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Howling Commandos", 598, Rarity.COMMON, mage.cards.t.TheHowlingCommandos.class));

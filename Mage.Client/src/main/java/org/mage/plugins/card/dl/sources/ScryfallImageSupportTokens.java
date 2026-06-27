@@ -3011,8 +3011,8 @@ public class ScryfallImageSupportTokens {
             put("MSC/Beast/2", "https://api.scryfall.com/cards/tmsc/27?format=image");
             put("MSC/Bird/1", "https://api.scryfall.com/cards/tmsc/5?format=image");
             put("MSC/Bird/2", "https://api.scryfall.com/cards/tmsc/21?format=image");
-            // put("MSC/Construct/1", "https://api.scryfall.com/cards/tmsc/14?format=image");
-            // put("MSC/Construct/2", "https://api.scryfall.com/cards/tmsc/30?format=image");
+            put("MSC/Construct/1", "https://api.scryfall.com/cards/tmsc/14?format=image");
+            put("MSC/Construct/2", "https://api.scryfall.com/cards/tmsc/30?format=image");
             // put("MSC/Council of Reeds/1", "https://api.scryfall.com/cards/tmsc/8?format=image");
             // put("MSC/Council of Reeds/2", "https://api.scryfall.com/cards/tmsc/24?format=image");
             put("MSC/Elephant/1", "https://api.scryfall.com/cards/tmsc/12?format=image");
