@@ -321,6 +321,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Vibranium Energy Daggers", 254, Rarity.COMMON, mage.cards.v.VibraniumEnergyDaggers.class));
         cards.add(new SetCardInfo("Villainous Hideout", 276, Rarity.UNCOMMON, mage.cards.v.VillainousHideout.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Villainous Hideout", 454, Rarity.UNCOMMON, mage.cards.v.VillainousHideout.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vision Quest", 237, Rarity.RARE, mage.cards.v.VisionQuest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vision Quest", 309, Rarity.RARE, mage.cards.v.VisionQuest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vision of Love", 158, Rarity.COMMON, mage.cards.v.VisionOfLove.class));
         cards.add(new SetCardInfo("Visions of Villainy", 120, Rarity.COMMON, mage.cards.v.VisionsOfVillainy.class));
         cards.add(new SetCardInfo("Viv Vision, Teen Synthezoid", 256, Rarity.UNCOMMON, mage.cards.v.VivVisionTeenSynthezoid.class));
