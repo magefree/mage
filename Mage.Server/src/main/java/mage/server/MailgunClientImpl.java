@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 
 public class MailgunClientImpl implements MailClient {
 
-    private static final Logger logger = Logger.getLogger(Main.class);
+    private static final Logger logger = Logger.getLogger(MailgunClientImpl.class);
 
     private final ConfigSettings config;
 

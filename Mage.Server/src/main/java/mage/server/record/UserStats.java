@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 @DatabaseTable(tableName = "user_stats")
 public class UserStats {
 
-    private static final Logger logger = Logger.getLogger(TableRecord.class);
+    private static final Logger logger = Logger.getLogger(UserStats.class);
 
     @DatabaseField(indexName = "user_name_index", unique = true, id = true)
     protected String userName;

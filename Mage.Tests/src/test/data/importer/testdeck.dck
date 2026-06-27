@@ -1,0 +1,8 @@
+1 [WAR:2*] Ugin, the Ineffable
+1 [ODY:72+] Cephalid Looter
+1 [ZNR:177] Adventure Awaits
+1 [ZNR:89] Acquisitions Expert
+SB: 3 [ZNR:315] Archon of Emeria
+SB: 1 [ZNR:133] Akoum Hellhound
+LAYOUT MAIN:(1,2)(CARD_TYPE,false,68)|([ZNR:177],[ODY:72+],[WAR:2*])([ZNR:89])
+LAYOUT SIDEBOARD:(1,2)(NONE,false,50)|([ZNR:315],[ZNR:315],[ZNR:315])([ZNR:133])

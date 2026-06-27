@@ -1,8 +1,7 @@
 package org.mage.plugins.card.dl.sources;
 
-import org.tritonus.share.ArraySet;
-
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -18,7 +17,7 @@ public class ScryfallImageSupportCards {
     static final Pattern REGEXP_DIRECT_KEY_SET_CODE_PATTERN = Pattern.compile("(\\w+)\\/", Pattern.MULTILINE);
     static final Pattern REGEXP_DIRECT_KEY_CARD_NAME_PATTERN = Pattern.compile("\\/(.+?)\\/", Pattern.MULTILINE);
 
-    private static final Set<String> supportedSets = new ArraySet<String>() {
+    private static final Set<String> supportedSets = new LinkedHashSet<String>() {
         {
             // Sorted by release date, as listed on Scryfall
             // Commented sets are not available on XMage, most likely because they are non-English sets.
@@ -629,6 +628,7 @@ public class ScryfallImageSupportCards {
             add("YSOS"); // Alchemy: Secrets of Strixhaven
             add("MSH"); // Marvel Super Heroes
             add("MSC"); // Marvel Super Heroes Commander
+            add("HOB"); // The Hobbit
             add("HOC"); // The Hobbit Commander
             add("FRA"); // Reality Fracture
 
@@ -741,8 +741,6 @@ public class ScryfallImageSupportCards {
             put("SLD/Zndrsplt, Eye of Wisdom/379*b", "https://api.scryfall.com/cards/sld/379★/en?format=image&face=back");
             put("SLD/Zombie Master/1460b", "https://api.scryfall.com/cards/sld/1460/en?format=image&face=back");
             // normal cards
-            put("SLD/Counterspell/99999SCTLR", "https://api.scryfall.com/cards/sld/SCTLR/"); // see issue 11157
-            put("SLD/Viscera Seer/99999VS", "https://api.scryfall.com/cards/sld/VS/"); // see issue 11157
             put("SLD/Deadly Dispute/1IFIYW", "https://api.scryfall.com/cards/sld/IFIYW-1/"); // see issue 11157
             put("SLD/Lightning Bolt/2IFIYW", "https://api.scryfall.com/cards/sld/IFIYW-2/"); // see issue 11157
             put("SLD/Thrill of Possibility/3IFIYW", "https://api.scryfall.com/cards/sld/IFIYW-3/"); // see issue 11157

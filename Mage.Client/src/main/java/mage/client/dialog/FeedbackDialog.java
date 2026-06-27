@@ -4,7 +4,6 @@ package mage.client.dialog;
 import java.util.Locale;
 import javax.swing.*;
 import mage.client.SessionHandler;
-import org.apache.log4j.Logger;
 
 /**
  * Feedback dialog.
@@ -12,8 +11,6 @@ import org.apache.log4j.Logger;
  * @author noxx
  */
 public class FeedbackDialog extends javax.swing.JDialog {
-
-    private static final Logger log = Logger.getLogger(PreferencesDialog.class);
 
     private final String[] feedbackTypes = {"", "Bug or \"something doesn't work\"",
         "Feature or \"I need that function\"",
