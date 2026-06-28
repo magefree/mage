@@ -144,7 +144,8 @@ public final class MtgJsonService {
         // so your set generation tools must use same replaces
         return number
                 .replace("★", "*")
-                .replace("†", "+");
+                .replace("†", "+")
+                .replace("Φ", "Ph");
     }
 
     private static <T> void addAliases(Map<String, T> reference) {
