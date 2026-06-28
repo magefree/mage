@@ -364,6 +364,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Mob Lookout", 821, Rarity.COMMON, mage.cards.m.MobLookout.class));
         cards.add(new SetCardInfo("Mockingbird, Bobbi Morse", 522, Rarity.COMMON, mage.cards.m.MockingbirdBobbiMorse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mockingbird, Bobbi Morse", 842, Rarity.COMMON, mage.cards.m.MockingbirdBobbiMorse.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Molecule Man", 9, Rarity.RARE, mage.cards.m.MoleculeMan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Molecule Man", 292, Rarity.RARE, mage.cards.m.MoleculeMan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Molly Hayes, Runaway", 698, Rarity.COMMON, mage.cards.m.MollyHayesRunaway.class));
         cards.add(new SetCardInfo("Monologue Tax", 139, Rarity.RARE, mage.cards.m.MonologueTax.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Monologue Tax", 317, Rarity.RARE, mage.cards.m.MonologueTax.class, NON_FULL_USE_VARIOUS));

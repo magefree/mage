@@ -87,4 +87,172 @@ public class MiracleTest extends CardTestPlayerBase {
         assertLife(playerB, 15);
 
     }
+
+    @Test
+    public void testGrantedMiracle() {
+        skipInitShuffling();
+        addCard(Zone.BATTLEFIELD, playerB, "Molecule Man");
+        addCard(Zone.LIBRARY, playerA, "Balduvian Bears");
+        addCard(Zone.LIBRARY, playerB, "Balduvian Bears");
+
+        // can successfully cast the bears when we draw our first card
+        setChoice(playerB, true);
+        setChoice(playerB, true);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertHandCount(playerB, "Balduvian Bears", 0);
+        assertPermanentCount(playerB, "Balduvian Bears", 1);
+
+        // opponent did not get to cast their bears
+        assertHandCount(playerA, "Balduvian Bears", 1);
+        assertPermanentCount(playerA, "Balduvian Bears", 0);
+    }
+
+    @Test
+    public void testDoubleGrantedMiracle() {
+        skipInitShuffling();
+        addCard(Zone.BATTLEFIELD, playerB, "Molecule Man");
+        addCard(Zone.BATTLEFIELD, playerA, "Molecule Man");
+        addCard(Zone.LIBRARY, playerA, "Balduvian Bears");
+        addCard(Zone.LIBRARY, playerB, "Balduvian Bears");
+
+        // can successfully cast the bears when we draw our first card
+        setChoice(playerB, true);
+        setChoice(playerB, true);
+
+        // opponent also gets miracle
+        setChoice(playerA, true);
+        setChoice(playerA, true);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertHandCount(playerB, "Balduvian Bears", 0);
+        assertPermanentCount(playerB, "Balduvian Bears", 1);
+
+        assertHandCount(playerA, "Balduvian Bears", 0);
+        assertPermanentCount(playerA, "Balduvian Bears", 1);
+    }
+
+    @Test
+    public void testGrantedWithRegularMiracle() {
+        skipInitShuffling();
+        addCard(Zone.BATTLEFIELD, playerB, "Molecule Man");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.LIBRARY, playerA, "Thunderous Wrath");
+        addCard(Zone.LIBRARY, playerB, "Balduvian Bears");
+
+        setChoice(playerB, true);
+        setChoice(playerB, true);
+
+        setChoice(playerA, true);
+        setChoice(playerA, true);
+        addTarget(playerA, playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertHandCount(playerB, "Balduvian Bears", 0);
+        assertPermanentCount(playerB, "Balduvian Bears", 1);
+        assertLife(playerB, 15);
+        assertTapped("Mountain", true);
+    }
+
+    @Test
+    public void testRemoved() {
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerB, "Grizzly Bears");
+        addCard(Zone.LIBRARY, playerB, "Balduvian Bears");
+        addCard(Zone.BATTLEFIELD, playerB, "Molecule Man");
+        addCard(Zone.HAND, playerB, "Fell");
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+
+        setChoice(playerB, true);
+        setChoice(playerB, true);
+
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Fell");
+        addTarget(playerB, "Molecule Man");
+
+        setStrictChooseMode(true);
+        setStopAt(4, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerB, "Balduvian Bears", 1);
+        assertHandCount(playerB, "Grizzly Bears", 1);
+    }
+
+    @Test
+    public void testControlChange() {
+        skipInitShuffling();
+        addCard(Zone.BATTLEFIELD, playerB, "Molecule Man");
+        addCard(Zone.LIBRARY, playerB, "Bear Cub");
+        addCard(Zone.LIBRARY, playerB, "Grizzly Bears");
+        addCard(Zone.LIBRARY, playerB, "Balduvian Bears");
+        addCard(Zone.LIBRARY, playerA, "Bear Cub");
+        addCard(Zone.LIBRARY, playerA, "Grizzly Bears");
+        addCard(Zone.LIBRARY, playerA, "Balduvian Bears");
+        addCard(Zone.HAND, playerA, "Entrancing Melody");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
+        addCard(Zone.HAND, playerA, "Ephemerate");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+
+        // can successfully cast the bears when we draw our first card, turn 2
+        setChoice(playerB, true);
+        setChoice(playerB, true);
+
+        // turn 3, take control
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Entrancing Melody");
+        setChoice(playerA, "X=6");
+        addTarget(playerA, "Molecule Man");
+
+        // turn 4, playerB does not get miracle
+        // turn 5, playerA does get miracle
+        setChoice(playerA, true);
+        setChoice(playerA, true);
+
+        // flicker, then turn 6 playerB should get miracle again
+        castSpell(5, PhaseStep.POSTCOMBAT_MAIN, playerA, "Ephemerate");
+        addTarget(playerA, "Molecule Man");
+
+        setChoice(playerB, true);
+        setChoice(playerB, true);
+
+        setStrictChooseMode(true);
+        setStopAt(6, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerB, "Balduvian Bears", 1);
+        assertPermanentCount(playerA, "Grizzly Bears", 1);
+        assertPermanentCount(playerB, "Bear Cub", 1);
+        assertHandCount(playerB, "Grizzly Bears", 1);
+        assertHandCount(playerA, "Balduvian Bears", 1);
+    }
+
+    @Test
+    public void testNoGrantedMiracleSecondCard() {
+        skipInitShuffling();
+        addCard(Zone.HAND, playerB, "Molecule Man");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 7);
+        addCard(Zone.HAND, playerB, "Reach Through Mists");
+        addCard(Zone.LIBRARY, playerB, "Grizzly Bears");
+        addCard(Zone.LIBRARY, playerB, "Balduvian Bears");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Molecule Man");
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Reach Through Mists");
+        waitStackResolved(2, PhaseStep.POSTCOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        checkPlayableAbility("can't cast bears", 2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Cast Balduvian Bears", false);
+        checkPlayableAbility("can't cast grizzlies", 2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Cast Grizzly Bears", false);
+        assertHandCount(playerB, "Balduvian Bears", 1);
+        assertHandCount(playerB, "Grizzly Bears", 1);
+    }
 }
