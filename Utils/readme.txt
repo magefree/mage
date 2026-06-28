@@ -9,6 +9,7 @@ update-list-implemented-cards.pl
 gen-list-cards-for-set.pl - generates the file for cards for a set
 gen-list-unimplemented-cards-for-set.pl - generates the file for unimplemented cards for a set
 mtg-cards-data-scryfall.py - generates mtg-cards-data.txt based on Scryfall
+sync-sld-printings.py - Used to resync the SLD set printings with Scryfall
 
 Files used:
  - author.txt - one line file that contains the author name you want to appear in the generated java files
