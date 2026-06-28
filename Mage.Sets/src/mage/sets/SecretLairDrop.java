@@ -2048,7 +2048,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Knuckles the Echidna", 2082, Rarity.MYTHIC, mage.cards.k.KnucklesTheEchidna.class, FULL_ART));
         cards.add(new SetCardInfo("Amy Rose", 2083, Rarity.MYTHIC, mage.cards.a.AmyRose.class, FULL_ART));
         cards.add(new SetCardInfo("Dr. Eggman", 2084, Rarity.MYTHIC, mage.cards.d.DrEggman.class, FULL_ART));
-        cards.add(new SetCardInfo("Miles "Tails" Prower", 2085, Rarity.MYTHIC, mage.cards.m.MilestailsPrower.class, FULL_ART));
+        cards.add(new SetCardInfo("Miles \"Tails\" Prower", 2085, Rarity.MYTHIC, mage.cards.m.MilestailsPrower.class, FULL_ART));
         cards.add(new SetCardInfo("Shadow the Hedgehog", 2086, Rarity.MYTHIC, mage.cards.s.ShadowTheHedgehog.class, FULL_ART));
         cards.add(new SetCardInfo("Sonic the Hedgehog", 2087, Rarity.MYTHIC, mage.cards.s.SonicTheHedgehog.class, FULL_ART));
         cards.add(new SetCardInfo("Generous Gift", 2088, Rarity.RARE, mage.cards.g.GenerousGift.class, FULL_ART_USE_VARIOUS));

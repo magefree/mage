@@ -134,7 +134,8 @@ def gen_entry(card):
     if not card['implemented']:
         entry += '// '
 
-    entry += f'cards.add(new SetCardInfo("{card["name"]}", '
+    entry += 'cards.add(new SetCardInfo("'
+    entry += card["name"].replace('"', '\\"') + '", '
 
     # Wrap non integer collector numbers in quotes
     if re.match(r'^\d+$', card['collector_number']):
