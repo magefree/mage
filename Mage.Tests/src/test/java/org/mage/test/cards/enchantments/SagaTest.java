@@ -250,4 +250,25 @@ public class SagaTest extends CardTestPlayerBase {
 
     }
 
+    // https://github.com/magefree/mage/issues/14409
+    @Test
+    public void testSagaToken() {
+       addCard(Zone.GRAVEYARD, playerA, "Michiko's Reign of Truth");
+       addCard(Zone.HAND, playerA, "Anikthea, Hand of Erebos");
+       addCard(Zone.BATTLEFIELD, playerA, "Plains");
+       addCard(Zone.BATTLEFIELD, playerA, "Swamp");
+       addCard(Zone.BATTLEFIELD, playerA, "Forest");
+       addCard(Zone.BATTLEFIELD, playerA, "Wastes", 2);
+
+       castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Anikthea, Hand of Erebos");
+       addTarget(playerA, "Michiko's Reign of Truth");
+       addTarget(playerA, "Anikthea, Hand of Erebos");
+       addTarget(playerA, "Anikthea, Hand of Erebos");
+
+       setStrictChooseMode(true);
+       setStopAt(5, PhaseStep.PRECOMBAT_MAIN);
+       execute();
+
+       assertPermanentCount(playerA, "Portrait of Michiko", 0);
+    }
 }
