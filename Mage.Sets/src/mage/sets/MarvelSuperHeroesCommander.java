@@ -281,6 +281,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hyperion, Supreme Hero", 599, Rarity.MYTHIC, mage.cards.h.HyperionSupremeHero.class));
         cards.add(new SetCardInfo("Iceman and Firestar", 742, Rarity.UNCOMMON, mage.cards.i.IcemanAndFirestar.class));
         cards.add(new SetCardInfo("Iconic Shield", 520, Rarity.UNCOMMON, mage.cards.i.IconicShield.class));
+        cards.add(new SetCardInfo("Immortus, Master of Eternity", 623, Rarity.MYTHIC, mage.cards.i.ImmortusMasterOfEternity.class));
         cards.add(new SetCardInfo("Imperial Cosmographer", 624, Rarity.UNCOMMON, mage.cards.i.ImperialCosmographer.class));
         cards.add(new SetCardInfo("Infernal Rebirth", 537, Rarity.COMMON, mage.cards.i.InfernalRebirth.class));
         cards.add(new SetCardInfo("Infinity Formula", 601, Rarity.COMMON, mage.cards.i.InfinityFormula.class));
