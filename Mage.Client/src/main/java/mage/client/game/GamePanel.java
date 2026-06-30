@@ -30,12 +30,11 @@ import mage.constants.*;
 import mage.game.events.PlayerQueryEvent;
 import mage.players.PlayableObjectStats;
 import mage.players.PlayableObjectsList;
-import mage.util.CardUtil;
 import mage.util.DebugUtil;
 import mage.util.MultiAmountMessage;
-import mage.util.StreamUtils;
 import mage.view.*;
 import org.apache.log4j.Logger;
+import org.mage.card.arcane.Animation;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 import javax.swing.Timer;
@@ -392,6 +391,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     public void cleanUp() {
+        Animation.cancelRunningAnimations(gameId);
         MageFrame.removeGame(gameId);
 
         this.gameChatPanel.cleanUp();
