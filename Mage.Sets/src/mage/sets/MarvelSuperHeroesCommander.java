@@ -541,6 +541,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sword of the Animist", 289, Rarity.RARE, mage.cards.s.SwordOfTheAnimist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sword of the Animist", 452, Rarity.RARE, mage.cards.s.SwordOfTheAnimist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swords to Plowshares", 143, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
+        cards.add(new SetCardInfo("Swordsman's Steel", 752, Rarity.RARE, mage.cards.s.SwordsmansSteel.class));
         cards.add(new SetCardInfo("Syphon Mind", 159, Rarity.COMMON, mage.cards.s.SyphonMind.class));
         cards.add(new SetCardInfo("T'Challa, the Black Panther", 7, Rarity.MYTHIC, mage.cards.t.TChallaTheBlackPanther.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("T'Challa, the Black Panther", 881, Rarity.MYTHIC, mage.cards.t.TChallaTheBlackPanther.class, NON_FULL_USE_VARIOUS));
