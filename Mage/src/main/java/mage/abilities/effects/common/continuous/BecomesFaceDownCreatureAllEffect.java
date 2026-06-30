@@ -121,8 +121,9 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl {
                         break;
                     case PTChangingEffects_7:
                         if (sublayer == SubLayer.SetPT_7b) {
-                            permanent.getPower().setModifiedBaseValue(2);
-                            permanent.getToughness().setModifiedBaseValue(2);
+                            final BecomesFaceDownCreatureEffect.FaceDownType type = BecomesFaceDownCreatureEffect.findFaceDownType(game, permanent);
+                            permanent.getPower().setModifiedBaseValue(type.getPower());
+                            permanent.getToughness().setModifiedBaseValue(type.getToughness());
                         }
                 }
             }
