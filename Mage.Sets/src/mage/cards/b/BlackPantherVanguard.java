@@ -17,6 +17,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.TargetController;
 
 /**
  *
@@ -24,11 +25,12 @@ import mage.constants.Duration;
  */
 public final class BlackPantherVanguard extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.HERO, "another nontoken Hero");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.HERO, "another nontoken Hero you control");
 
     static {
         filter.add(AnotherPredicate.instance);
         filter.add(TokenPredicate.FALSE);
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public BlackPantherVanguard(UUID ownerId, CardSetInfo setInfo) {
