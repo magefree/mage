@@ -248,6 +248,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Quake, Agent of S.H.I.E.L.D.", 32, Rarity.UNCOMMON, mage.cards.q.QuakeAgentOfSHIELD.class));
         cards.add(new SetCardInfo("Quicksilver, Brash Blur", 148, Rarity.RARE, mage.cards.q.QuicksilverBrashBlur.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Quicksilver, Brash Blur", 412, Rarity.RARE, mage.cards.q.QuicksilverBrashBlur.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Raft Security Officer", 33, Rarity.COMMON, mage.cards.r.RaftSecurityOfficer.class));
         cards.add(new SetCardInfo("Rapid Rescue", 181, Rarity.COMMON, mage.cards.r.RapidRescue.class));
         cards.add(new SetCardInfo("Red Room Recruit", 110, Rarity.COMMON, mage.cards.r.RedRoomRecruit.class));
         cards.add(new SetCardInfo("Reptil, Dinomorpher", 182, Rarity.UNCOMMON, mage.cards.r.ReptilDinomorpher.class));
