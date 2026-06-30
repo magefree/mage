@@ -17,6 +17,7 @@ import java.util.UUID;
 public abstract class EffectImpl implements Effect {
 
     protected UUID id;
+    protected UUID originalId;
     protected Outcome outcome;
     protected EffectType effectType;
 
@@ -30,6 +31,7 @@ public abstract class EffectImpl implements Effect {
 
     public EffectImpl(Outcome outcome) {
         this.id = UUID.randomUUID();
+        this.originalId = this.id;
         this.outcome = outcome;
 
         initNewTargetPointer();
@@ -37,6 +39,7 @@ public abstract class EffectImpl implements Effect {
 
     protected EffectImpl(final EffectImpl effect) {
         this.id = effect.id;
+        this.originalId = effect.id;
         this.outcome = effect.outcome;
         this.staticText = effect.staticText;
         this.effectType = effect.effectType;
@@ -59,6 +62,11 @@ public abstract class EffectImpl implements Effect {
     @Override
     public UUID getId() {
         return id;
+    }
+
+    @Override
+    public UUID getOriginalId() {
+        return originalId;
     }
 
     @Override
