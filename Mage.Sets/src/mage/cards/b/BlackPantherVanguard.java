@@ -9,7 +9,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SoldierToken;
@@ -24,7 +24,8 @@ import mage.constants.Duration;
  */
 public final class BlackPantherVanguard extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.HERO, "another nontoken Hero");
+    private static final FilterControlledCreaturePermanent filter
+        = new FilterControlledCreaturePermanent(SubType.HERO, "another nontoken Hero");
 
     static {
         filter.add(AnotherPredicate.instance);
