@@ -7,6 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.target.TargetPermanent;
@@ -42,25 +43,27 @@ public final class MjolnirHammerOfThor extends CardImpl {
         equipWorthyFilter.add(SuperType.LEGENDARY.getPredicate());
         equipWorthyFilter.add(Predicates.not(SubType.VILLAIN.getPredicate()));
         equipWorthyFilter.add(Predicates.or(new ColorPredicate(ObjectColor.RED), new ColorPredicate(ObjectColor.WHITE)));
-    }   
+    }
 
     public MjolnirHammerOfThor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}{R}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // When Mjolnir enters, it deals 4 damage to up to one target creature.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(4, "it"));
-        ability.setTriggerPhrase("When Mjolnir enters, ");
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
+
         // Double all damage equipped creature would deal.
         this.addAbility(new SimpleStaticAbility(new MjolnirHammerOfThorEffect()));
+
         // Equip worthy {1}
         EquipAbility equipAbility = new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), new TargetPermanent(equipWorthyFilter), true);
         equipAbility.setReminderText("A creature is worthy if it's a legendary non-Villain that's red and/or white.");
         this.addAbility(equipAbility);
+
         // {2}{R}, Discard this card: It deals 2 damage to each creature.
         Ability channelAbility = new ChannelAbility("{2}{R}", new DamageAllEffect(2, "It", new FilterCreaturePermanent()));
         this.addAbility(channelAbility);
@@ -76,7 +79,7 @@ public final class MjolnirHammerOfThor extends CardImpl {
     }
 }
 
-class MjolnirHammerOfThorEffect extends mage.abilities.effects.ReplacementEffectImpl {
+class MjolnirHammerOfThorEffect extends ReplacementEffectImpl {
 
     MjolnirHammerOfThorEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
@@ -100,13 +103,8 @@ class MjolnirHammerOfThorEffect extends mage.abilities.effects.ReplacementEffect
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        switch (event.getType()) {
-            case DAMAGE_PLAYER:
-            case DAMAGE_PERMANENT:
-                return true;
-            default:
-                return false;
-        }
+        return event.getType() == GameEvent.EventType.DAMAGE_PERMANENT
+                || event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
     }
 
     @Override
