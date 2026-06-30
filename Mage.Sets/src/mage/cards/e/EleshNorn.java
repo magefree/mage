@@ -59,7 +59,8 @@ public final class EleshNorn extends TransformingDoubleFacedCard {
 
         // Whenever a source an opponent controls deals damage to you or a permanent you control, that source's controller loses 2 life unless they pay {1}.
         this.getLeftHalfCard().addAbility(new SourceDealsDamageToYouTriggeredAbility(
-                new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new LoseLifeTargetEffect(2).withTargetDescription("that source's controller"), new ManaCostsImpl<>("{1}")),
+                new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new LoseLifeTargetEffect(2)
+                        .withTargetDescription("that source's controller"), new ManaCostsImpl<>("{1}")).withTheyText(),
                 StaticFilters.FILTER_PERMANENT, false));
 
         // {2}{W}, Sacrifice three other creatures: Exile Elesh Norn, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery.
