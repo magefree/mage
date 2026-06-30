@@ -33,6 +33,7 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -154,7 +155,12 @@ class OrvarTheAllFormEffect extends OneShotEffect {
         filter.add(Predicates.not(new MageObjectReferencePredicate(new MageObjectReference(source))));
         TargetPermanent target = new TargetPermanent(filter);
         target.withNotTarget(true);
-        player.choose(outcome, target, source, game);
+        Set<UUID> possible = target.possibleTargets(source.getControllerId(), source, game);
+        if (possible.size() > 1) {
+            player.choose(outcome, target, source, game);
+        } else if (possible.size() == 1) {
+            target.addTarget(possible.iterator().next(), source, game);
+        }
         return new CreateTokenCopyTargetEffect()
                 .setTargetPointer(new FixedTarget(target.getFirstTarget(), game))
                 .apply(game, source);
