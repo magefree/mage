@@ -650,6 +650,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Wisecrack", 813, Rarity.UNCOMMON, mage.cards.w.Wisecrack.class));
         cards.add(new SetCardInfo("Withering Torment", 162, Rarity.UNCOMMON, mage.cards.w.WitheringTorment.class));
         cards.add(new SetCardInfo("Wolfsbane, Highland Hero", 767, Rarity.COMMON, mage.cards.w.WolfsbaneHighlandHero.class));
+        cards.add(new SetCardInfo("Wolverine, Claws Out", 737, Rarity.RARE, mage.cards.w.WolverineClawsOut.class));
         cards.add(new SetCardInfo("Wondrous Revival", 528, Rarity.RARE, mage.cards.w.WondrousRevival.class));
         cards.add(new SetCardInfo("X-23, Deadly Weapon", 738, Rarity.UNCOMMON, mage.cards.x.X23DeadlyWeapon.class));
         cards.add(new SetCardInfo("Zarda, the Power Princess", 615, Rarity.UNCOMMON, mage.cards.z.ZardaThePowerPrincess.class));
