@@ -418,7 +418,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Power Boost", 852, Rarity.UNCOMMON, mage.cards.p.PowerBoost.class));
         cards.add(new SetCardInfo("Prairie Stream", 257, Rarity.RARE, mage.cards.p.PrairieStream.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prairie Stream", 485, Rarity.RARE, mage.cards.p.PrairieStream.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Professor Hulk", 37, Rarity.RARE, mage.cards.p.ProfessorHulk.class));
+        cards.add(new SetCardInfo("Professor Hulk", 338, Rarity.RARE, mage.cards.p.ProfessorHulk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Professor Hulk", 37, Rarity.RARE, mage.cards.p.ProfessorHulk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Progenitor's Icon", 208, Rarity.RARE, mage.cards.p.ProgenitorsIcon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Progenitor's Icon", 449, Rarity.RARE, mage.cards.p.ProgenitorsIcon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Promise of Loyalty", 142, Rarity.RARE, mage.cards.p.PromiseOfLoyalty.class, NON_FULL_USE_VARIOUS));
@@ -603,7 +604,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Tombstone, Career Criminal", 577, Rarity.UNCOMMON, mage.cards.t.TombstoneCareerCriminal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tome of Legends", 223, Rarity.RARE, mage.cards.t.TomeOfLegends.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tome of Legends", 454, Rarity.RARE, mage.cards.t.TomeOfLegends.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Toxic Deluge", 161, Rarity.RARE, mage.cards.t.ToxicDeluge.class));
+        cards.add(new SetCardInfo("Toxic Deluge", 161, Rarity.RARE, mage.cards.t.ToxicDeluge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Toxic Deluge", 354, Rarity.RARE, mage.cards.t.ToxicDeluge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Trading Post", 224, Rarity.RARE, mage.cards.t.TradingPost.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Trading Post", 455, Rarity.RARE, mage.cards.t.TradingPost.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tragic Arrogance", 144, Rarity.RARE, mage.cards.t.TragicArrogance.class, NON_FULL_USE_VARIOUS));
