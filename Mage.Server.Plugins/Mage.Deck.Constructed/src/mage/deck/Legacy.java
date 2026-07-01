@@ -25,6 +25,7 @@ public class Legacy extends Constructed {
         banned.add("Balance");
         banned.add("Bazaar of Baghdad");
         banned.add("Black Lotus");
+        banned.add("Candelabra of Tawnos");
         banned.add("Channel");
         banned.add("Deathrite Shaman");
         banned.add("Demonic Consultation");

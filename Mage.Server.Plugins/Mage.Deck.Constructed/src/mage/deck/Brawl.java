@@ -36,7 +36,13 @@ public class Brawl extends Constructed {
         // banned.add("Omnath, Locus of Creation");
         // banned.add("Winota, Joiner of Forces");
 
+        banned.add("Force of Will");
         banned.add("Pithing Needle");
+        banned.add("Subtlety");
+        banned.add("Temporal Manipulation");
+        banned.add("Time Warp");
+        banned.add("Ugin's Labyrinth");
+        banned.add("Wash Away");
     }
 
     @Override
