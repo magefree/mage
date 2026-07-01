@@ -13,7 +13,7 @@ public final class VibraniumToken extends TokenImpl {
     public VibraniumToken() {
         super("Vibranium Token", "Vibranium token");
         cardType.add(CardType.ARTIFACT);
-        subType.add(SubType.VIBRANIUM);
+        subtype.add(SubType.VIBRANIUM);
 
         // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());
