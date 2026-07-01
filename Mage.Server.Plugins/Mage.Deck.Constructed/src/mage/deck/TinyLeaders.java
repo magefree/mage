@@ -1,6 +1,9 @@
 package mage.deck;
 
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardWithParts;
+import mage.cards.ExpansionSet;
+import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidatorErrorType;
@@ -203,12 +206,9 @@ public class TinyLeaders extends Constructed {
         // Each card must have a converted mana cost of three or less. Cards with {x} in their mana cost count X
         // as zero for this purpose. Split cards are legal only if both of their halves would be legal independently.
         List<Integer> costs = new ArrayList<>();
-        if (card instanceof SplitCard) {
-            costs.add(((SplitCard) card).getLeftHalfCard().getManaValue());
-            costs.add(((SplitCard) card).getRightHalfCard().getManaValue());
-        } else if (card instanceof DoubleFacedCard) {
-            costs.add(((DoubleFacedCard) card).getLeftHalfCard().getManaValue());
-            costs.add(((DoubleFacedCard) card).getRightHalfCard().getManaValue());
+        if (card instanceof CardWithParts) {
+            costs.add(((CardWithParts) card).getLeftHalfCard().getManaValue());
+            costs.add(((CardWithParts) card).getRightHalfCard().getManaValue());
         } else {
             costs.add(card.getManaValue());
         }

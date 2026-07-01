@@ -65,6 +65,11 @@ public abstract class Plane extends CommandObjectImpl {
         return frameStyle;
     }
 
+    @Override
+    public void setFrameStyle(FrameStyle frameStyle) {
+        this.frameStyle = frameStyle;
+    }
+
     public void setSourceObjectAndInitImage() {
         this.sourceObject = null;
 

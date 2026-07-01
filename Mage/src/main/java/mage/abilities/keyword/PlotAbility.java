@@ -10,7 +10,9 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardWithParts;
+import mage.cards.CardWithSpellOption;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -262,11 +264,11 @@ class PlotSpellAbility extends SpellAbility {
                 }
                 // Check that the proper face can be cast.
                 // TODO: As with Foretell, this does not look very clean. Is the face card sometimes incorrect on calling canActivate?
-                if (mainCard instanceof CardWithHalves) {
-                    if (((CardWithHalves) mainCard).getLeftHalfCard().getName().equals(faceCardName)) {
-                        return ((CardWithHalves) mainCard).getLeftHalfCard().getSpellAbility().canActivate(playerId, game);
-                    } else if (((CardWithHalves) mainCard).getRightHalfCard().getName().equals(faceCardName)) {
-                        return ((CardWithHalves) mainCard).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
+                if (mainCard instanceof CardWithParts) {
+                    if (((CardWithParts) mainCard).getLeftHalfCard().getName().equals(faceCardName)) {
+                        return ((CardWithParts) mainCard).getLeftHalfCard().getSpellAbility().canActivate(playerId, game);
+                    } else if (((CardWithParts) mainCard).getRightHalfCard().getName().equals(faceCardName)) {
+                        return ((CardWithParts) mainCard).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
                     }
                 } else if (card instanceof CardWithSpellOption) {
                     if (card.getMainCard().getName().equals(faceCardName)) {
@@ -288,11 +290,11 @@ class PlotSpellAbility extends SpellAbility {
             if (spellAbilityToResolve == null) {
                 SpellAbility spellAbilityCopy = null;
                 // TODO: As with Foretell, this does not look very clean. Is the face card sometimes incorrect on calling getSpellAbilityToResolve?
-                if (card instanceof CardWithHalves) {
-                    if (((CardWithHalves) card).getLeftHalfCard().getName().equals(faceCardName)) {
-                        spellAbilityCopy = ((CardWithHalves) card).getLeftHalfCard().getSpellAbility().copy();
-                    } else if (((CardWithHalves) card).getRightHalfCard().getName().equals(faceCardName)) {
-                        spellAbilityCopy = ((CardWithHalves) card).getRightHalfCard().getSpellAbility().copy();
+                if (card instanceof CardWithParts) {
+                    if (((CardWithParts) card).getLeftHalfCard().getName().equals(faceCardName)) {
+                        spellAbilityCopy = ((CardWithParts) card).getLeftHalfCard().getSpellAbility().copy();
+                    } else if (((CardWithParts) card).getRightHalfCard().getName().equals(faceCardName)) {
+                        spellAbilityCopy = ((CardWithParts) card).getRightHalfCard().getSpellAbility().copy();
                     }
                 } else if (card instanceof CardWithSpellOption) {
                     if (card.getMainCard().getName().equals(faceCardName)) {

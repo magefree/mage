@@ -49,8 +49,8 @@ import org.apache.log4j.Logger;
 
 import java.awt.*;
 import java.io.Serializable;
-import java.util.List;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
 
@@ -2349,9 +2349,7 @@ public class HumanPlayer extends PlayerImpl {
         // force to show ability picker for double faces cards in hand/commander/exile and other zones
         Card mainCard = game.getCard(CardUtil.getMainCardId(game, ability.getSourceId()));
         if (mainCard != null && !Zone.BATTLEFIELD.equals(game.getState().getZone(mainCard.getId()))) {
-            if (mainCard instanceof SplitCard
-                    || mainCard instanceof CardWithSpellOption
-                    || mainCard instanceof ModalDoubleFacedCard) {
+            if (mainCard instanceof CardWithParts || mainCard instanceof CardWithSpellOption) {
                 return false;
             }
         }
@@ -2385,10 +2383,10 @@ public class HumanPlayer extends PlayerImpl {
         MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
         if (object != null) {
             String message = "Choose ability to cast" + (noMana ? " for FREE" : "") + "<br>" + object.getLogName();
-            Map<UUID, SpellAbility> useableAbilities = PlayerImpl.getCastableSpellAbilities(game, playerId, object, game.getState().getZone(object.getId()), noMana);
+            Map<UUID, ActivatedAbility> useableAbilities = PlayerImpl.getCastableSpellOrPlayLandAbilities(game, playerId, object, game.getState().getZone(object.getId()), noMana, false);
             if (useableAbilities != null
                     && useableAbilities.size() == 1) {
-                return useableAbilities.values().iterator().next();
+                return (SpellAbility) useableAbilities.values().iterator().next();
             } else if (useableAbilities != null
                     && !useableAbilities.isEmpty()) {
 
@@ -2401,7 +2399,7 @@ public class HumanPlayer extends PlayerImpl {
                 UUID responseId = getFixedResponseUUID(game);
                 if (responseId != null) {
                     if (useableAbilities.containsKey(responseId)) {
-                        return useableAbilities.get(responseId);
+                        return (SpellAbility) useableAbilities.get(responseId);
                     }
                 }
             }
@@ -2424,15 +2422,7 @@ public class HumanPlayer extends PlayerImpl {
 
         MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
         if (object != null) {
-            LinkedHashMap<UUID, ActivatedAbility> useableAbilities = new LinkedHashMap<>(PlayerImpl.getCastableSpellAbilities(game, playerId, object, game.getState().getZone(object.getId()), noMana));
-
-            if (canPlayLand() && isActivePlayer(game)) {
-                for (Ability ability : card.getAbilities(game)) {
-                    if (ability instanceof PlayLandAbility) {
-                        useableAbilities.put(ability.getId(), (PlayLandAbility) ability);
-                    }
-                }
-            }
+            LinkedHashMap<UUID, ActivatedAbility> useableAbilities = new LinkedHashMap<>(PlayerImpl.getCastableSpellOrPlayLandAbilities(game, playerId, object, game.getState().getZone(object.getId()), noMana, true));
 
             switch (useableAbilities.size()) {
                 case 0:

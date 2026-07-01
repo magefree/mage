@@ -251,6 +251,11 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
+    public void setFrameStyle(FrameStyle frameStyle) {
+        this.frameStyle = frameStyle;
+    }
+
+    @Override
     public String getExpansionSetCode() {
         return expansionSetCode;
     }

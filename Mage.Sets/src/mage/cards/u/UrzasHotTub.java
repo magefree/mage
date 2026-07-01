@@ -1,6 +1,5 @@
 package mage.cards.u;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -8,15 +7,14 @@ import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.SpellAbilityType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 
@@ -79,7 +77,7 @@ class UrzasHotTubEffect extends OneShotEffect {
     }
 }
 
-class UrzasHotTubPredicate implements Predicate<MageObject> {
+class UrzasHotTubPredicate implements Predicate<Card> {
 
     private final String referenceName;
 
@@ -88,33 +86,24 @@ class UrzasHotTubPredicate implements Predicate<MageObject> {
     }
 
     @Override
-    public boolean apply(MageObject input, Game game) {
+    public boolean apply(Card input, Game game) {
         String name = input.getName();
-        if (input instanceof SplitCard) {
-            return sharesWordWithName(((SplitCard) input).getLeftHalfCard().getName()) || sharesWordWithName(((SplitCard) input).getRightHalfCard().getName());
-        } else if (input instanceof ModalDoubleFacedCard) {
-            return sharesWordWithName(((ModalDoubleFacedCard) input).getLeftHalfCard().getName()) || sharesWordWithName(((ModalDoubleFacedCard) input).getRightHalfCard().getName());
-        } else if (input instanceof Spell && ((Spell) input).getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
-            SplitCard card = (SplitCard) ((Spell) input).getCard();
-            return sharesWordWithName(card.getLeftHalfCard().getName()) || sharesWordWithName(card.getRightHalfCard().getName());
+        if (name.contains(" // ")) {
+            String leftName = name.substring(0, name.indexOf(" // "));
+            String rightName = name.substring(name.indexOf(" // ") + 4);
+            return sharesWordWithName(leftName) || sharesWordWithName(rightName);
         } else {
-            if (name.contains(" // ")) {
-                String leftName = name.substring(0, name.indexOf(" // "));
-                String rightName = name.substring(name.indexOf(" // ") + 4);
-                return sharesWordWithName(leftName) || sharesWordWithName(rightName);
-            } else {
-                return sharesWordWithName(name);
-            }
+            return sharesWordWithName(name);
         }
     }
 
     private boolean sharesWordWithName(String str) {
-        if (referenceName == null || referenceName == "") {
+        if (referenceName == null || referenceName.isEmpty()) {
             return false;
         }
         String[] arr = referenceName.split("\\s+");
-        for (int i = 0; i < arr.length; i++) {
-            if (str.contains(arr[i].replaceAll(",", ""))) {
+        for (String s : arr) {
+            if (str.contains(s.replaceAll(",", ""))) {
                 return true;
             }
         }

@@ -108,11 +108,7 @@ public class CardInfo {
     @DatabaseField
     protected boolean cardWithSpellOption;
     @DatabaseField
-    protected String spellOptionCardName;
-    @DatabaseField
     protected boolean doubleFacedCard;
-    @DatabaseField
-    protected String doubleFacedSecondSideName;
     @DatabaseField
     protected String meldsToCardName;
     @DatabaseField
@@ -159,12 +155,12 @@ public class CardInfo {
 
         if (card instanceof CardWithSpellOption) {
             this.cardWithSpellOption = true;
-            this.spellOptionCardName = ((CardWithSpellOption) card).getSpellCard().getName();
+            this.secondSideName = ((CardWithSpellOption) card).getSpellCard().getName();
         }
 
-        if (card instanceof DoubleFacedCard) {
-            this.doubleFacedCard = true;
-            this.doubleFacedSecondSideName = ((DoubleFacedCard) card).getRightHalfCard().getName();
+        if (card instanceof CardWithParts) {
+            this.doubleFacedCard = card instanceof DoubleFacedCard;
+            this.secondSideName = ((CardWithParts) card).getRightHalfCard().getName();
         }
 
         if (card.getFrameStyle() != null) {
@@ -183,13 +179,9 @@ public class CardInfo {
         this.setSuperTypes(card.getSuperType());
 
         // mana cost can contains multiple cards (split left/right, modal double faces, card/adventure)
-        if (card instanceof SplitCard) {
-            List<String> manaCostLeft = ((SplitCard) card).getLeftHalfCard().getManaCostSymbols();
-            List<String> manaCostRight = ((SplitCard) card).getRightHalfCard().getManaCostSymbols();
-            this.setManaCosts(CardUtil.concatManaSymbols(SPLIT_MANA_SEPARATOR_FULL, manaCostLeft, manaCostRight));
-        } else if (card instanceof ModalDoubleFacedCard) {
-            List<String> manaCostLeft = ((ModalDoubleFacedCard) card).getLeftHalfCard().getManaCostSymbols();
-            List<String> manaCostRight = ((ModalDoubleFacedCard) card).getRightHalfCard().getManaCostSymbols();
+        if (card instanceof CardWithParts) {
+            List<String> manaCostLeft = ((CardWithParts) card).getLeftHalfCard().getManaCostSymbols();
+            List<String> manaCostRight = ((CardWithParts) card).getRightHalfCard().getManaCostSymbols();
             this.setManaCosts(CardUtil.concatManaSymbols(SPLIT_MANA_SEPARATOR_FULL, manaCostLeft, manaCostRight));
         } else if (card instanceof CardWithSpellOption) {
             List<String> manaCostLeft = ((CardWithSpellOption) card).getSpellCard().getManaCostSymbols();
@@ -475,26 +467,14 @@ public class CardInfo {
         return cardWithSpellOption;
     }
 
-    /**
-     * used for spell card portion of adventure/omen cards
-     * @return name of the spell
-     */
-    public String getSpellOptionCardName() {
-        return spellOptionCardName;
-    }
-
     public boolean isDoubleFacedCard() {
         return doubleFacedCard;
-    }
-
-    public String getDoubleFacedSecondSideName() {
-        return doubleFacedSecondSideName;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || !(o instanceof CardInfo)) return false;
+        if (!(o instanceof CardInfo)) return false;
         CardInfo other = (CardInfo) o;
         return (this.name.equals(other.name)
                 && this.setCode.equals(other.setCode)

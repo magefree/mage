@@ -1311,8 +1311,9 @@ public class ComputerPlayer extends PlayerImpl {
 
     @Override
     public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
-        Map<UUID, SpellAbility> usable = PlayerImpl.getCastableSpellAbilities(game, this.getId(), card, game.getState().getZone(card.getId()), noMana);
+        Map<UUID, ActivatedAbility> usable = PlayerImpl.getCastableSpellOrPlayLandAbilities(game, this.getId(), card, game.getState().getZone(card.getId()), noMana, false);
         return usable.values().stream()
+                .map(SpellAbility.class::cast)
                 .filter(a -> a.getTargets().canChoose(getId(), a, game))
                 .findFirst()
                 .orElse(null);

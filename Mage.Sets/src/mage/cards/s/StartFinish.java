@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -15,8 +14,8 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.WarriorVigilantToken;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

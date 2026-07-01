@@ -8,7 +8,10 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.hint.StaticHint;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardWithParts;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -134,18 +137,10 @@ class EverythingIsColorlessEffect extends ContinuousEffectImpl {
             affectedCards.forEach(card -> {
                 game.getState().getCreateMageObjectAttribute(card, game).getColor().setColor(colorless);
 
-                // df cards
-                if (card instanceof DoubleFacedCard) {
-                    DoubleFacedCardHalf leftHalfCard = ((DoubleFacedCard) card).getLeftHalfCard();
-                    DoubleFacedCardHalf rightHalfCard = ((DoubleFacedCard) card).getRightHalfCard();
-                    game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().setColor(colorless);
-                    game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().setColor(colorless);
-                }
-
-                // split cards
-                if (card instanceof SplitCard) {
-                    SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
-                    SplitCardHalf rightHalfCard = ((SplitCard) card).getRightHalfCard();
+                // card with parts
+                if (card instanceof CardWithParts) {
+                    Card leftHalfCard = ((CardWithParts) card).getLeftHalfCard();
+                    Card rightHalfCard = ((CardWithParts) card).getRightHalfCard();
                     game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().setColor(colorless);
                     game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().setColor(colorless);
                 }

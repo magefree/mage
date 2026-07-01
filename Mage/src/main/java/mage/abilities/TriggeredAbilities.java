@@ -317,6 +317,15 @@ public class TriggeredAbilities extends LinkedHashMap<String, TriggeredAbility> 
         return key;
     }
 
+    public void removeAbility(TriggeredAbility ability, UUID sourceId) {
+        makeSureNotProcessing(null);
+        String key = ability.getId() + "_" + sourceId;
+        List<UUID> entry =  sources.remove(key);
+        if (entry != null) {
+            this.remove(key);
+        }
+    }
+
     public void removeAbilitiesOfSource(UUID sourceId) {
         keySet().removeIf(key -> key.endsWith(sourceId.toString()));
     }

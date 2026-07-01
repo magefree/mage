@@ -17,7 +17,7 @@ import mage.abilities.keyword.WardAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.CardWithHalves;
+import mage.cards.CardWithParts;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.ExileZone;
@@ -145,8 +145,8 @@ class ValgavothTerrorEaterReplacementEffect extends GraveyardFromAnywhereExileRe
             if (spell == null) {
                 // there is no direct link between moving a split/mdfc card and the stack part that was cast.
                 // so we try them both and see if we find anything.
-                if (card instanceof CardWithHalves) {
-                    CardWithHalves cwh = (CardWithHalves) card;
+                if (card instanceof CardWithParts) {
+                    CardWithParts cwh = (CardWithParts) card;
                     spell = game.getSpellOrLKIStack(cwh.getLeftHalfCard().getId());
                     if (spell == null) {
                         spell = game.getSpellOrLKIStack(cwh.getRightHalfCard().getId());

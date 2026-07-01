@@ -238,6 +238,49 @@ public class CascadeTest extends CardTestPlayerBase {
         assertLibraryCount(playerA, "Breaking // Entering", 1);
     }
 
+    /**
+     * Cascade work with split cards, mana cost = total of halfs.
+     *
+     * For example: Ardent Plea + Breaking/Entering
+     */
+    @Test
+    public void testWithSplitSpellCast() {
+        playerA.getLibrary().clear();
+        // Breaking - Target player puts the top eight cards of their library into their graveyard.
+        // Entering - Put a creature card from a graveyard onto the battlefield under your control.
+        //            It gains haste until end of turn.
+        // Fuse (You may cast one or both halves of this card from your hand.)
+        addCard(Zone.LIBRARY, playerA, "Breaking // Entering", 1); // Sorcery {U}{B} // {4}{U}{B}
+
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 12);
+        addCard(Zone.BATTLEFIELD, playerA, "Maelstrom nexus");
+
+//        Blightsteel Colossus {12}
+//        Artifact Creature — Phyrexian Golem
+//        Trample, infect, indestructible
+//        If Blightsteel Colossus would be put into a graveyard from anywhere, reveal Blightsteel Colossus and shuffle it into its owner’s library instead.
+        addCard(Zone.HAND, playerA, "Blightsteel Colossus");
+
+        setStrictChooseMode(true);
+
+        // When the spell is cast, you cascade, but the only spell you could find is "Breaking // Entering",
+        // but it can't be cast since the mana cost for a spliot it's mana cost of the card is the sum of both halves (8 here)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blightsteel Colossus");
+
+        setChoice(playerA, true);
+        setChoice(playerA, "Cast Breaking");
+        addTarget(playerA, playerB);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Blightsteel Colossus", 1);
+        assertGraveyardCount(playerA, "Breaking // Entering", 1);
+        assertLibraryCount(playerA, "Breaking // Entering", 0);
+        assertGraveyardCount(playerB, 8);
+    }
+
+
     // https://github.com/magefree/mage/issues/14687
     @Test
     public void testWithXCost() {

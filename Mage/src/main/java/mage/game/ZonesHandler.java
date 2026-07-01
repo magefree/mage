@@ -106,12 +106,12 @@ public final class ZonesHandler {
                     }
 
                     if (forceToMainSide) {
-                        info.event.setTargetId(((DoubleFacedCard) card.getMainCard()).getLeftHalfCard().getId());
+                        info.event.setTargetId(((CardWithParts) card.getMainCard()).getLeftHalfCard().getId());
                     }
 
                     // if left half is being moved, but entering transformed, change to transformed side
-                    if (enterTransformed && card instanceof DoubleFacedCardHalf && !((DoubleFacedCardHalf) card).isBackSide()) {
-                        info.event.setTargetId(((DoubleFacedCardHalf) card).getOtherSide().getId());
+                    if (enterTransformed && card instanceof DoubleFacedCardHalf && !((DoubleFacedCardHalf<?>) card).isBackSide()) {
+                        info.event.setTargetId(((DoubleFacedCardHalf<?>) card).getOtherSide().getId());
                     }
                 }
             }
@@ -165,7 +165,7 @@ public final class ZonesHandler {
             } else if (targetCard instanceof DoubleFacedCard
                     || targetCard instanceof DoubleFacedCardHalf) {
                 // mdf cards must be moved as single object, but each half must be updated separately
-                DoubleFacedCard mdfCard = (DoubleFacedCard) targetCard.getMainCard();
+                DoubleFacedCard<?, ?> mdfCard = (DoubleFacedCard<?, ?>) targetCard.getMainCard();
                 cardsToMove = new CardsImpl(mdfCard);
                 cardsToUpdate.get(toZone).add(mdfCard);
                 // example: cast left side

@@ -1,9 +1,11 @@
 package mage.view;
 
 import mage.cards.Card;
+import mage.cards.RoomCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
+import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -56,34 +58,35 @@ public class PermanentView extends CardView {
         this.attachedTo = permanent.getAttachedTo();
 
         // store original card, e.g. for sides switch in GUI
-        if (isToken()) {
-            original = new CardView(((PermanentToken) permanent).getToken().copy(), (Game) null);
-            original.expansionSetCode = permanent.getExpansionSetCode(); // TODO: miss card number and other?
-            expansionSetCode = permanent.getExpansionSetCode();
-        } else {
-            // face down card must be hidden from opponent, but shown on game end for all
-            boolean showFaceDownInfo = controlled || (game != null && game.hasEnded());
-            if (card != null && showFaceDownInfo) {
-                original = new CardView(card.copy(), (Game) null);
-            } else {
-                original = null;
-            }
-        }
-        //this.transformed = permanent.isTransformed();
+        boolean showFaceDownInfo = controlled || (game != null && game.hasEnded());
         this.copy = permanent.isCopy();
         this.mutateView = new MutateView(permanent, game);
         this.mutated = permanent.getMutateCount() > 0;
-
-        // for fipped, transformed or copied cards, switch the names
-        if (original != null && !original.getName().equals(this.getName())) {
-            // TODO: wtf, why copy check here?! Need research
-            if (permanent.isCopy() && permanent.isFlipCard()) {
-                this.alternateName = permanent.getFlipCardName();
-            } else {
-                this.alternateName = original.getName();
-            }
+        if (copy) {
+            // Handle the case where the permanent is a copy
+            original = isToken
+                ? new CardView(((PermanentToken) permanent).getToken().copy(), null)
+                : new CardView(card.copy(), (Game) null);
+            this.setAlternateName(original.getName());
+            this.transformable = false;
+        } else if (permanent.getOtherFace() != null) {
+            // Handle the case where the permanent has another face
+            original = isToken
+                ? new CardView((Token) permanent.getOtherFace().copy(), null)
+                : new CardView((Card) permanent.getOtherFace().copy(), (Game) null);
+        } else if (isFaceDown() && showFaceDownInfo) {
+            // face down card must be hidden from opponent, but shown on game end for all
+            original = isToken
+                ? new CardView(((PermanentToken) permanent).getToken().copy(), null)
+                : new CardView(card.copy(), (Game) null);
+        } else {
+            // Default case where no original card is available
+            original = null;
         }
 
+        if (!copy && card instanceof RoomCard || card != null && card.isFlipCard()) {
+            this.imageFileName = card.getName();
+        }
         if (permanent.getOwnerId() != null && !permanent.getOwnerId().equals(permanent.getControllerId())) {
             Player owner = game.getPlayer(permanent.getOwnerId());
             if (owner != null) {

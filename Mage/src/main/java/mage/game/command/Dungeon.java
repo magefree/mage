@@ -202,6 +202,11 @@ public class Dungeon extends CommandObjectImpl {
     }
 
     @Override
+    public void setFrameStyle(FrameStyle frameStyle) {
+        this.frameStyle = frameStyle;
+    }
+
+    @Override
     public MageObject getSourceObject() {
         return null;
     }

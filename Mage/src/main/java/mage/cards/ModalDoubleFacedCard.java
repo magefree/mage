@@ -1,6 +1,6 @@
 package mage.cards;
 
-import mage.abilities.*;
+import mage.abilities.SpellAbility;
 import mage.constants.*;
 import mage.game.Game;
 
@@ -9,7 +9,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public abstract class ModalDoubleFacedCard extends DoubleFacedCard {
+public abstract class ModalDoubleFacedCard extends DoubleFacedCard<ModalDoubleFacedCardHalf, ModalDoubleFacedCard> {
 
     public ModalDoubleFacedCard(
             UUID ownerId, CardSetInfo setInfo,
@@ -65,15 +65,5 @@ public abstract class ModalDoubleFacedCard extends DoubleFacedCard {
     @Override
     public boolean isTransformable() {
         return this.getLeftHalfCard().isPermanent() && this.getRightHalfCard().isPermanent();
-    }
-
-    @Override
-    public ModalDoubleFacedCardHalf getLeftHalfCard() {
-        return (ModalDoubleFacedCardHalf) leftHalfCard;
-    }
-
-    @Override
-    public ModalDoubleFacedCardHalf getRightHalfCard() {
-        return (ModalDoubleFacedCardHalf) rightHalfCard;
     }
 }

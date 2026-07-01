@@ -11,7 +11,10 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.ExileZone;
@@ -162,15 +165,7 @@ class JestersScepterCost extends CostImpl {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     if (controller.moveCardToGraveyardWithInfo(card, source, game, Zone.EXILED)) {
-                        if (card instanceof SplitCard) {
-                            game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment", ((SplitCard) card).getLeftHalfCard().getName());
-                            game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment2", ((SplitCard) card).getRightHalfCard().getName());
-                        } else if (card instanceof DoubleFacedCard) {
-                            game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment", ((DoubleFacedCard) card).getLeftHalfCard().getName());
-                            game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment2", ((DoubleFacedCard) card).getRightHalfCard().getName());
-                        } else {
-                            game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment", card.getName());
-                        }
+                        game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment", card.getName());
                         paid = true;
                     }
                 }
@@ -207,9 +202,7 @@ class JestersScepterCounterEffect extends OneShotEffect {
         Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell != null) {
             String nameOfExiledCardPayment = (String) game.getState().getValue(source.getSourceId() + "_nameOfExiledCardPayment");
-            String nameOfExiledCardPayment2 = (String) game.getState().getValue(source.getSourceId() + "_nameOfExiledCardPayment2");
-            if (CardUtil.haveSameNames(spell.getCard(), nameOfExiledCardPayment, game)
-                    || CardUtil.haveSameNames(spell.getCard(), nameOfExiledCardPayment2, game)) {
+            if (CardUtil.haveSameNames(spell.getCard(), nameOfExiledCardPayment, game)) {
                 return game.getStack().counter(getTargetPointer().getFirst(game, source), source, game);
             }
         }

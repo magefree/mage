@@ -10,7 +10,7 @@ import mage.game.Game;
 
 import java.util.UUID;
 
-public class TransformingDoubleFacedCardHalf extends DoubleFacedCardHalf {
+public class TransformingDoubleFacedCardHalf extends DoubleFacedCardHalf<TransformingDoubleFacedCard> {
 
     public TransformingDoubleFacedCardHalf(
             UUID ownerId, CardSetInfo setInfo,
@@ -22,7 +22,6 @@ public class TransformingDoubleFacedCardHalf extends DoubleFacedCardHalf {
 
     protected TransformingDoubleFacedCardHalf(final TransformingDoubleFacedCardHalf card) {
         super(card);
-        this.parentCard = card.parentCard;
     }
 
     public TransformingDoubleFacedCardHalf(
@@ -43,11 +42,6 @@ public class TransformingDoubleFacedCardHalf extends DoubleFacedCardHalf {
     @Override
     public TransformingDoubleFacedCardHalf copy() {
         return new TransformingDoubleFacedCardHalf(this);
-    }
-
-    @Override
-    public TransformingDoubleFacedCard getParentCard() {
-        return (TransformingDoubleFacedCard) parentCard;
     }
 
     @Override

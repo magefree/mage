@@ -1,11 +1,13 @@
 package mage.cards.e;
 
-import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -106,7 +108,7 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
         Permanent eyeOfTheStorm = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (spell != null && eyeOfTheStorm != null) {
             Player spellController = game.getPlayer(spell.getControllerId());
-            Card card = spell.getCard();
+            Card card = spell.getCard().getMainCard();
             if (spellController == null
                     || card == null
                     || !StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY.match(spell, game)) {
@@ -126,15 +128,7 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
                     // Check if owner of card is still in game
                     card = game.getCard(uuid);
                     if (card != null && game.getPlayer(card.getOwnerId()) != null) {
-                        if (card instanceof SplitCard) {
-                            copiedCards.add(((SplitCard) card).getLeftHalfCard());
-                            copiedCards.add(((SplitCard) card).getRightHalfCard());
-                        } else if (card instanceof ModalDoubleFacedCard) {
-                            copiedCards.add(((ModalDoubleFacedCard) card).getLeftHalfCard());
-                            copiedCards.add(((ModalDoubleFacedCard) card).getRightHalfCard());
-                        } else {
-                            copiedCards.add(card);
-                        }
+                        copiedCards.add(card);
                     }
                 }
 
@@ -154,9 +148,7 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
                     if (cardToCopy != null) {
                         Card copy = game.copyCard(cardToCopy, source, source.getControllerId());
                         if (spellController.chooseUse(outcome, "Cast " + copy.getIdName() + " without paying mana cost?", source, game)) {
-                            game.getState().setValue("PlayFromNotOwnHandZone" + copy.getId(), Boolean.TRUE);
-                            spellController.cast(spellController.chooseAbilityForCast(copy, game, true), game, true, new ApprovingObject(source, game));
-                            game.getState().setValue("PlayFromNotOwnHandZone" + copy.getId(), null);
+                            CardUtil.castSpellWithAttributesForFree(spellController, source, game, copy);
                         }
                     }
                 }

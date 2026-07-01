@@ -53,15 +53,7 @@ public class NamePredicate implements Predicate<MageObject> {
 
         String[] searchNames = extractNames(name);
 
-        if (input instanceof SplitCard) {
-            SplitCard splitCard = (SplitCard) input;
-            // Check against left half, right half, and full card name
-            return matchesAnyName(searchNames, new String[] {
-                    splitCard.getLeftHalfCard().getName(),
-                    splitCard.getRightHalfCard().getName(),
-                    splitCard.getName()
-            });
-        } else if (input instanceof Spell
+        if (input instanceof Spell
                 && ((Spell) input).getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
             SplitCard card = (SplitCard) ((Spell) input).getCard();
             // Check against left half, right half, and full card name

@@ -5,7 +5,9 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.keyword.PrototypeAbility;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.DoubleFacedCardHalf;
+import mage.cards.RoomCard;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.game.Game;
@@ -103,8 +105,8 @@ public class CopyTokenFunction {
                 CardUtil.copySetAndCardNumber(target.getBackFace(), sourceObj.getSecondCardFace());
             } else if (sourceObj.isTransformable() && sourceObj instanceof DoubleFacedCardHalf) {
                 // double faced card
-                copyToToken(target.getBackFace(), ((DoubleFacedCardHalf) sourceObj).getOtherSide(), game);
-                CardUtil.copySetAndCardNumber(target.getBackFace(), ((DoubleFacedCardHalf) sourceObj).getOtherSide());
+                copyToToken(target.getBackFace(), ((DoubleFacedCardHalf<?>) sourceObj).getOtherSide(), game);
+                CardUtil.copySetAndCardNumber(target.getBackFace(), ((DoubleFacedCardHalf<?>) sourceObj).getOtherSide());
             }
 
             // apply prototyped status
@@ -121,7 +123,7 @@ public class CopyTokenFunction {
 
         // from double faced card spell
         if (source instanceof DoubleFacedCardHalf) {
-            DoubleFacedCardHalf sourceCard = (DoubleFacedCardHalf) source;
+            DoubleFacedCardHalf<?> sourceCard = (DoubleFacedCardHalf<?>) source;
             Card frontSide;
             Card backSide = null;
             if (sourceCard.isTransformable()) {
@@ -161,12 +163,7 @@ public class CopyTokenFunction {
                 // must create back face??
                 throw new IllegalStateException("Wrong code usage: back face must be non null: " + target.getName() + " - " + target.getClass().getSimpleName());
             }
-            Card secondFace;
-            if (source instanceof DoubleFacedCard) {
-                secondFace = ((DoubleFacedCard) source).getRightHalfCard();
-            } else {
-                secondFace = source.getSecondCardFace();
-            }
+            Card secondFace = source.getSecondCardFace();
             copyToToken(target.getBackFace(), secondFace, game);
             CardUtil.copySetAndCardNumber(target.getBackFace(), secondFace);
         }
@@ -192,7 +189,12 @@ public class CopyTokenFunction {
 
         target.getAbilities().clear();
 
-        for (Ability ability0 : sourceObj.getAbilities()) {
+        // if coming from a room card, only take the initial cards abilities.
+        // The door abilities will be given by effects later
+        Abilities<Ability> abilities = sourceObj instanceof RoomCard
+                ? sourceObj.getInitAbilities()
+                : sourceObj.getAbilities();
+        for (Ability ability0 : abilities) {
             Ability ability = ability0.copy();
 
             // The token is independant from the copy from object so it need a new original Id,

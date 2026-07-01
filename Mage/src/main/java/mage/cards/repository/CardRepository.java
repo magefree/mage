@@ -141,17 +141,11 @@ public enum CardRepository {
         if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty()) {
             namesList.add(card.getSecondSideName());
         }
-        if (card.getDoubleFacedSecondSideName() != null && !card.getDoubleFacedSecondSideName().isEmpty()) {
-            namesList.add(card.getDoubleFacedSecondSideName());
-        }
         if (card.getFlipCardName() != null && !card.getFlipCardName().isEmpty()) {
             namesList.add(card.getFlipCardName());
         }
         if (card.getMeldsToCardName() != null && !card.getMeldsToCardName().isEmpty()) {
             namesList.add(card.getMeldsToCardName());
-        }
-        if (card.getSpellOptionCardName() != null && !card.getSpellOptionCardName().isEmpty()) {
-            namesList.add(card.getSpellOptionCardName());
         }
     }
 
@@ -166,7 +160,7 @@ public enum CardRepository {
         }
         try {
             QueryBuilder<CardInfo, Object> qb = cardsDao.queryBuilder();
-            qb.distinct().selectColumns("name", "doubleFacedSecondSideName", "secondSideName", "flipCardName", "spellOptionCardName");
+            qb.distinct().selectColumns("name", "secondSideName", "flipCardName");
             List<CardInfo> results = cardsDao.query(qb.prepare());
             for (CardInfo card : results) {
                 addNewNames(card, names);
@@ -205,7 +199,7 @@ public enum CardRepository {
         }
         try {
             QueryBuilder<CardInfo, Object> qb = cardsDao.queryBuilder();
-            qb.distinct().selectColumns("name", "doubleFacedSecondSideName", "secondSideName", "flipCardName", "spellOptionCardName");
+            qb.distinct().selectColumns("name", "secondSideName", "flipCardName");
             qb.where().not().like("types", new SelectArg('%' + CardType.LAND.name() + '%'));
             List<CardInfo> results = cardsDao.query(qb.prepare());
             for (CardInfo card : results) {
@@ -225,7 +219,7 @@ public enum CardRepository {
         }
         try {
             QueryBuilder<CardInfo, Object> qb = cardsDao.queryBuilder();
-            qb.distinct().selectColumns("name", "doubleFacedSecondSideName", "secondSideName", "flipCardName", "spellOptionCardName");
+            qb.distinct().selectColumns("name", "secondSideName", "flipCardName");
             Where<CardInfo, Object> where = qb.where();
             where.and(
                     where.not().like("supertypes", '%' + SuperType.BASIC.name() + '%'),
@@ -249,7 +243,7 @@ public enum CardRepository {
         }
         try {
             QueryBuilder<CardInfo, Object> qb = cardsDao.queryBuilder();
-            qb.distinct().selectColumns("name", "doubleFacedSecondSideName", "secondSideName", "flipCardName", "spellOptionCardName");
+            qb.distinct().selectColumns("name", "secondSideName", "flipCardName");
             qb.where().not().like("supertypes", new SelectArg('%' + SuperType.BASIC.name() + '%'));
             List<CardInfo> results = cardsDao.query(qb.prepare());
             for (CardInfo card : results) {
@@ -269,7 +263,7 @@ public enum CardRepository {
         }
         try {
             QueryBuilder<CardInfo, Object> qb = cardsDao.queryBuilder();
-            qb.distinct().selectColumns("name", "doubleFacedSecondSideName", "secondSideName", "flipCardName", "spellOptionCardName");
+            qb.distinct().selectColumns("name", "secondSideName", "flipCardName");
             qb.where().like("types", new SelectArg('%' + CardType.CREATURE.name() + '%'));
             List<CardInfo> results = cardsDao.query(qb.prepare());
             for (CardInfo card : results) {
@@ -289,7 +283,7 @@ public enum CardRepository {
         }
         try {
             QueryBuilder<CardInfo, Object> qb = cardsDao.queryBuilder();
-            qb.distinct().selectColumns("name", "doubleFacedSecondSideName", "secondSideName", "flipCardName", "spellOptionCardName");
+            qb.distinct().selectColumns("name", "secondSideName", "flipCardName");
             qb.where().like("types", new SelectArg('%' + CardType.ARTIFACT.name() + '%'));
             List<CardInfo> results = cardsDao.query(qb.prepare());
             for (CardInfo card : results) {
@@ -309,7 +303,7 @@ public enum CardRepository {
         }
         try {
             QueryBuilder<CardInfo, Object> qb = cardsDao.queryBuilder();
-            qb.distinct().selectColumns("name", "doubleFacedSecondSideName", "secondSideName", "flipCardName", "spellOptionCardName");
+            qb.distinct().selectColumns("name", "secondSideName", "flipCardName");
             Where<CardInfo, Object> where = qb.where();
             where.and(
                     where.not().like("types", '%' + CardType.CREATURE.name() + '%'),
@@ -333,7 +327,7 @@ public enum CardRepository {
         }
         try {
             QueryBuilder<CardInfo, Object> qb = cardsDao.queryBuilder();
-            qb.distinct().selectColumns("name", "doubleFacedSecondSideName", "secondSideName", "flipCardName", "spellOptionCardName");
+            qb.distinct().selectColumns("name", "secondSideName", "flipCardName");
             Where<CardInfo, Object> where = qb.where();
             where.and(
                     where.not().like("types", '%' + CardType.ARTIFACT.name() + '%'),
@@ -557,9 +551,7 @@ public enum CardRepository {
                     // Nothing found when looking for main name, try looking under the other names
                     queryBuilder.where()
                             .eq("flipCardName", new SelectArg(name)).or()
-                            .eq("secondSideName", new SelectArg(name)).or()
-                            .eq("spellOptionCardName", new SelectArg(name)).or()
-                            .eq("doubleFacedSecondSideName", new SelectArg(name));
+                            .eq("secondSideName", new SelectArg(name));
                     results = cardsDao.query(queryBuilder.prepare());
                 } else {
                     // Check that a full card was found and not a SplitCardHalf

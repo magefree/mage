@@ -6,15 +6,18 @@ import mage.abilities.Ability;
 import mage.abilities.common.GodEternalDiesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.watchers.common.CardsAmountDrawnThisTurnWatcher;
 
 import java.awt.*;
@@ -93,14 +96,8 @@ class GodEternalKefnetDrawCardReplacementEffect extends ReplacementEffectImpl {
         if (topCard.isInstantOrSorcery(game)
                 && you.chooseUse(outcome, "Copy " + topCard.getName() + " and cast it for {2} less?", source, game)) {
             Card blueprint = topCard.copy();
-            if (blueprint instanceof SplitCard) {
-                ((SplitCard) blueprint).getLeftHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
-                ((SplitCard) blueprint).getRightHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
-            } else if (blueprint instanceof ModalDoubleFacedCard) {
-                ((ModalDoubleFacedCard) blueprint).getLeftHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
-                ((ModalDoubleFacedCard) blueprint).getRightHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
-            } else {
-                blueprint.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
+            for (Card component : CardUtil.getCastableComponents(blueprint, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY, source, you, game,  null, false)) {
+                CardUtil.reduceCost(component.getSpellAbility(), 2);
             }
             Card copiedCard = game.copyCard(blueprint, source, source.getControllerId());
             game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);

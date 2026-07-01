@@ -209,12 +209,10 @@ class TinybonesBaubleBurglarSpendAnyManaEffect extends AsThoughEffectImpl implem
             // stack zone
             // you must look at exile zone (use LKI to see ice counters from the past)
             CardState cardState;
-            if (card instanceof SplitCard) {
-                cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
+            if (card instanceof CardWithParts) {
+                cardState = game.getLastKnownInformationCard(((CardWithParts) card).getDefaultCardSide().getId(), Zone.EXILED);
             } else if (card instanceof CardWithSpellOption) {
                 cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
-            } else if (card instanceof DoubleFacedCard) {
-                cardState = game.getLastKnownInformationCard(((DoubleFacedCard) card).getLeftHalfCard().getId(), Zone.EXILED);
             } else {
                 cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
             }

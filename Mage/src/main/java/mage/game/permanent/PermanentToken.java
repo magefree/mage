@@ -5,7 +5,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.keyword.ChangelingAbility;
-import mage.cards.Card;
 import mage.cards.RoomCard;
 import mage.constants.EmptyNames;
 import mage.game.Game;
@@ -146,15 +145,13 @@ public class PermanentToken extends PermanentImpl {
     }
 
     @Override
-    public Card getMainCard() {
-        // Check if we have a copy source card (for tokens created from copied spells)
-        Card copySourceCard = token.getCopySourceCard();
-        if (copySourceCard != null) {
-            return copySourceCard;
-        }
+    public boolean isCopy() {
+        return token.getCopySourceCard() != null;
+    }
 
-        // Fallback to current behavior
-        return this;
+    @Override
+    public MageObject getCopyFrom() {
+        return token.getCopySourceCard();
     }
 
     @Override
