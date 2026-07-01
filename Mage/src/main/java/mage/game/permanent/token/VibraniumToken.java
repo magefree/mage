@@ -3,6 +3,7 @@ package mage.game.permanent.token;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  * @author muz
