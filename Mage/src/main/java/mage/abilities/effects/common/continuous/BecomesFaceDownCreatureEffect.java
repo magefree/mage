@@ -301,7 +301,8 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
             if (additionalAbilities != null) {
                 additionalAbilities.forEach(blueprintAbility -> {
                     Ability newAbility = blueprintAbility.copy();
-                    newAbility.setRuleVisible(CardUtil.isInformationAbility(newAbility));
+                    newAbility.setRuleVisible(CardUtil.isInformationAbility(newAbility) || (newAbility instanceof WardAbility &&
+                            (faceDownType == FaceDownType.DISGUISED || faceDownType == FaceDownType.CLOAKED)));
                     permanentObject.addAbility(newAbility, sourceId, game);
                 });
             }
@@ -312,7 +313,8 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
             if (additionalAbilities != null) {
                 additionalAbilities.forEach(blueprintAbility -> {
                     Ability newAbility = blueprintAbility.copy();
-                    newAbility.setRuleVisible(CardUtil.isInformationAbility(newAbility));
+                    newAbility.setRuleVisible(CardUtil.isInformationAbility(newAbility) || (newAbility instanceof WardAbility &&
+                            (faceDownType == FaceDownType.DISGUISED || faceDownType == FaceDownType.CLOAKED)));
                     cardObject.addAbility(newAbility);
                 });
             }
