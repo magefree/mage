@@ -166,6 +166,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Hire a Crew", 134, Rarity.COMMON, mage.cards.h.HireACrew.class));
         cards.add(new SetCardInfo("Hour of Defeat", 99, Rarity.COMMON, mage.cards.h.HourOfDefeat.class));
         cards.add(new SetCardInfo("Hulk, Gamma Goliath", 215, Rarity.UNCOMMON, mage.cards.h.HulkGammaGoliath.class));
+        cards.add(new SetCardInfo("Hulkling, Burgeoning Bruiser", 173, Rarity.UNCOMMON, mage.cards.h.HulklingBurgeoningBruiser.class));
         cards.add(new SetCardInfo("Human Torch, Johnny Storm", 136, Rarity.UNCOMMON, mage.cards.h.HumanTorchJohnnyStorm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Human Torch, Johnny Storm", 321, Rarity.UNCOMMON, mage.cards.h.HumanTorchJohnnyStorm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("I Am Iron Man", 58, Rarity.COMMON, mage.cards.i.IAmIronMan.class));
