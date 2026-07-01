@@ -187,6 +187,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Jennifer Walters", 355, Rarity.MYTHIC, mage.cards.j.JenniferWalters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jennifer Walters", 388, Rarity.MYTHIC, mage.cards.j.JenniferWalters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jessica Jones, Private Eye", 139, Rarity.UNCOMMON, mage.cards.j.JessicaJonesPrivateEye.class));
+        cards.add(new SetCardInfo("Justice, Vance Astrovik", 61, Rarity.UNCOMMON, mage.cards.j.JusticeVanceAstrovik.class));
         cards.add(new SetCardInfo("K'un-Lun Warrior", 140, Rarity.COMMON, mage.cards.k.KunLunWarrior.class));
         cards.add(new SetCardInfo("Ka-Zar of the Savage Land", 174, Rarity.UNCOMMON, mage.cards.k.KaZarOfTheSavageLand.class));
         cards.add(new SetCardInfo("Kang, Temporal Tyrant", 217, Rarity.UNCOMMON, mage.cards.k.KangTemporalTyrant.class, NON_FULL_USE_VARIOUS));
