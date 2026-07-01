@@ -1,6 +1,7 @@
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
 import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
 import mage.abilities.common.SpellTransformedAbility;
 import mage.abilities.effects.common.ExileSourceEffect;
@@ -64,7 +65,18 @@ public class DisturbAbility extends SpellTransformedAbility {
                 + " <i>(You may cast this card transformed from your graveyard for its disturb cost.)</i>";
     }
 
+    private static final Condition disturbBackFaceZoneCondition = (game, source) -> {
+        Zone zone = game.getState().getZone(source.getSourceId());
+        return zone == Zone.BATTLEFIELD || zone == Zone.STACK || zone == Zone.EXILED;
+    };
+
     public static Ability makeBackAbility() {
-        return new PutIntoGraveFromAnywhereSourceAbility(new ExileSourceEffect().setText("exile it instead"));
+        return new PutIntoGraveFromAnywhereSourceAbility(
+                new ExileSourceEffect().setText("exile it instead"),
+                disturbBackFaceZoneCondition,
+                "",
+                true,
+                false
+        );
     }
 }
