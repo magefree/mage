@@ -84,6 +84,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CARD_IMAGES_PATH = "cardImagesPath";
     public static final String KEY_CARD_IMAGES_SAVE_TO_ZIP = "cardImagesSaveToZip";
     public static final String KEY_CARD_IMAGES_PREF_LANGUAGE = "cardImagesPreferredImageLaguage";
+    public static final String KEY_CARD_IMAGES_AUTO_DOWNLOAD = "cardImagesAutoDownload";
 
     public static final String KEY_CARD_RENDERING_IMAGE_MODE = "cardRenderingMode";
     public static final String KEY_CARD_RENDERING_ICONS_FOR_ABILITIES = "cardRenderingIconsForAbilities";
@@ -957,6 +958,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         txtImageFolderPath = new javax.swing.JTextField();
         btnBrowseImageLocation = new javax.swing.JButton();
         cbSaveToZipFiles = new javax.swing.JCheckBox();
+        cbAutoDownloadImages = new javax.swing.JCheckBox();
         cbPreferredImageLanguage = new javax.swing.JComboBox<>();
         labelPreferredImageLanguage = new javax.swing.JLabel();
         panelCardStyles = new javax.swing.JPanel();
@@ -2277,6 +2279,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
+        cbAutoDownloadImages.setText("Download missing images automatically");
+        cbAutoDownloadImages.setToolTipText("Automatically download card images from Scryfall when they are first displayed");
+
         cbPreferredImageLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         labelPreferredImageLanguage.setText("Default images language:");
@@ -2297,6 +2302,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .add(panelCardImagesLayout.createSequentialGroup()
                         .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(cbSaveToZipFiles)
+                            .add(cbAutoDownloadImages)
                             .add(panelCardImagesLayout.createSequentialGroup()
                                 .add(6, 6, 6)
                                 .add(labelPreferredImageLanguage)
@@ -2314,6 +2320,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .add(btnBrowseImageLocation))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(cbSaveToZipFiles)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(cbAutoDownloadImages)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(labelPreferredImageLanguage)
@@ -3058,6 +3066,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbUseDefaultImageFolder, KEY_CARD_IMAGES_USE_DEFAULT, "true", "false");
         saveImagesPath(prefs);
         save(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true", "false");
+        save(prefs, dialog.cbAutoDownloadImages, KEY_CARD_IMAGES_AUTO_DOWNLOAD, "true", "false");
         save(prefs, dialog.cbPreferredImageLanguage, KEY_CARD_IMAGES_PREF_LANGUAGE);
 
         save(prefs, dialog.cbUseDefaultBackground, KEY_BACKGROUND_IMAGE_DEFAULT, "true", "false");
@@ -3513,6 +3522,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             updateCache(KEY_CARD_IMAGES_PATH, path);
         }
         load(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true", "false");
+        load(prefs, dialog.cbAutoDownloadImages, KEY_CARD_IMAGES_AUTO_DOWNLOAD, "true", "false");
         dialog.cbPreferredImageLanguage.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_PREF_LANGUAGE, CardLanguage.ENGLISH.getCode()));
 
         // rendering settings
@@ -3703,6 +3713,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     public static boolean isSaveImagesToZip() {
         return PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_SAVE_TO_ZIP, "false").equals("true");
+    }
+
+    public static boolean isAutoDownloadEnabled() {
+        return PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_AUTO_DOWNLOAD, "false").equals("true");
     }
 
     private static void load(Preferences prefs, JCheckBox checkBox, String propName, String yesValue) {
@@ -4066,6 +4080,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JButton buttonSizeDefault6;
     private javax.swing.JCheckBox cbAllowRequestToShowHandCards;
     private javax.swing.JCheckBox cbAskMoveToGraveOrder;
+    private javax.swing.JCheckBox cbAutoDownloadImages;
     private javax.swing.JCheckBox cbAutoOrderTrigger;
     private javax.swing.JCheckBox cbCardRenderHideSetSymbol;
     private javax.swing.JCheckBox cbCardRenderIconsForAbilities;
