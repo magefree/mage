@@ -221,6 +221,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Monica Rambeau", 356, Rarity.MYTHIC, mage.cards.m.MonicaRambeau.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Moon Girl and Devil Dinosaur", 223, Rarity.RARE, mage.cards.m.MoonGirlAndDevilDinosaur.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Moon Girl and Devil Dinosaur", 421, Rarity.RARE, mage.cards.m.MoonGirlAndDevilDinosaur.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Moonstone, Harsh Mistress", 107, Rarity.UNCOMMON, mage.cards.m.MoonstoneHarshMistress.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Moonstone, Harsh Mistress", 447, Rarity.UNCOMMON, mage.cards.m.MoonstoneHarshMistress.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 440, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 439, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 284, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
