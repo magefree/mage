@@ -87,8 +87,7 @@ public class KidLokiTest extends CardTestPlayerBase {
 
     @Test
     public void testEntersWithP1P1CounterGainsHexproof() {
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.HAND, playerA, "Kid Loki", 1);
         addCard(Zone.HAND, playerA, "Stonecoil Serpent", 1);
 
