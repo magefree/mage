@@ -270,17 +270,25 @@ public class PermanentCard extends PermanentImpl {
     @Override
     public int getManaValue() {
         if (isTransformed()) {
-            // 711.4b While a double-faced permanent's back face is up, it has only the characteristics of its back face.
-            // However, its converted mana cost is calculated using the mana cost of its front face. This is a change from previous rules.
-            // If a permanent is copying the back face of a double-faced card (even if the card representing that copy
-            // is itself a double-faced card), the converted mana cost of that permanent is 0.
+            // Note: this.card is ALWAYS the front/left side; secondSideCard is the back/right side when transformed.
+            // 712.8f While a modal double-faced spell is on the stack or a modal double-faced permanent is on
+            // the battlefield, it has only the characteristics of the face that's up.
+            // So for MDFC: return the back face's mana value.
+            if (getCard() instanceof ModalDoubleFacedCardHalf) {
+                return secondSideCard.getManaValue();
+            }
+
+            // 712.8e While a nonmodal double-faced permanent has its back face up, it has only the characteristics
+            // of its back face. However, its mana value is calculated using the mana cost of its front face.
+            // If a permanent is copying the back face of a nonmodal double-faced permanent (even if the object
+            // representing that copy is itself a double-faced permanent), the mana value of that permanent is 0.
+            // See rule 202.3b.
             return getCard().getManaValue();
         }
         if (faceDown) { // game not neccessary
             return getManaCost().manaValue();
         }
         return super.getManaValue();
-
     }
 
     @Override
