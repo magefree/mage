@@ -265,6 +265,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Savage Land Dinosaur", 185, Rarity.COMMON, mage.cards.s.SavageLandDinosaur.class));
         cards.add(new SetCardInfo("Scientist Supreme of A.I.M.", 225, Rarity.RARE, mage.cards.s.ScientistSupremeOfAIM.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scientist Supreme of A.I.M.", 423, Rarity.RARE, mage.cards.s.ScientistSupremeOfAIM.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Secret Invasion", 72, Rarity.RARE, mage.cards.s.SecretInvasion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Secret Invasion", 301, Rarity.RARE, mage.cards.s.SecretInvasion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Serpent Specialist", 186, Rarity.COMMON, mage.cards.s.SerpentSpecialist.class));
         cards.add(new SetCardInfo("Shang-Chi, Master of Kung Fu", 187, Rarity.MYTHIC, mage.cards.s.ShangChiMasterOfKungFu.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shang-Chi, Master of Kung Fu", 370, Rarity.MYTHIC, mage.cards.s.ShangChiMasterOfKungFu.class, NON_FULL_USE_VARIOUS));
