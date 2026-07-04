@@ -176,6 +176,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Drowned Catacomb", 239, Rarity.RARE, mage.cards.d.DrownedCatacomb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Drowned Catacomb", 469, Rarity.RARE, mage.cards.d.DrownedCatacomb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eerie Gravestone", 824, Rarity.COMMON, mage.cards.e.EerieGravestone.class));
+        cards.add(new SetCardInfo("Elektra, Femme Fatale", 687, Rarity.UNCOMMON, mage.cards.e.ElektraFemmeFatale.class));
         cards.add(new SetCardInfo("Everett K. Ross, Hapless Attache", 13, Rarity.RARE, mage.cards.e.EverettKRossHaplessAttache.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Everett K. Ross, Hapless Attache", 303, Rarity.RARE, mage.cards.e.EverettKRossHaplessAttache.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Evolving Wilds", 240, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
