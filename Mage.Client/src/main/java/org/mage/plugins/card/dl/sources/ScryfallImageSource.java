@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
 import mage.MageException;
 import mage.client.remote.XmageURLConnection;
 import mage.client.util.CardLanguage;
@@ -341,8 +340,8 @@ public class ScryfallImageSource implements CardImageSource {
         }
         ScryfallApiBulkData bulkData = new Gson().fromJson(s, ScryfallApiBulkData.class);
         if (bulkData == null
-                || bulkData.download_uri == null
-                || bulkData.download_uri.isEmpty()
+                || bulkData.jsonl_download_uri == null
+                || bulkData.jsonl_download_uri.isEmpty()
                 || bulkData.size == 0) {
             logger.error("Unknown bulk info format from scryfall api " + SCRYFALL_BULK_FILES_DATABASE_SOURCE_API);
             return false;
@@ -351,7 +350,7 @@ public class ScryfallImageSource implements CardImageSource {
         // download
         if (!SCRYFALL_BULK_FILES_DEBUG_READ_ONLY_MODE) {
             logger.info("Scryfall: downloading additional data files, size " + bulkData.size / (1024 * 1024) + " MB");
-            String url = bulkData.download_uri;
+            String url = bulkData.jsonl_download_uri;
             InputStream inputStream = XmageURLConnection.downloadBinary(url, true);
             OutputStream outputStream = null;
             try {
@@ -458,22 +457,27 @@ public class ScryfallImageSource implements CardImageSource {
 
         // bulk files are too big, so must read and parse it in stream mode only
         // 500k reprints in diff languages
+        // jsonl format: one json object per line, no root array wrapping
         Set<String> usedCards = new HashSet<>();
         Gson gson = new Gson();
         try (TFileInputStream inputStream = new TFileInputStream(textBulkPath.toFile());
              InputStreamReader inputReader = new InputStreamReader(inputStream);
-             JsonReader jsonReader = new JsonReader(inputReader)) {
+             BufferedReader bufferedReader = new BufferedReader(inputReader, 1024 * 1024)) {
 
             bulkCardsDatabaseAll.clear();
             bulkCardsDatabaseDefault.clear();
 
-            jsonReader.beginArray();
-            while (jsonReader.hasNext()) {
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
                 if (downloadServiceInfo.isNeedCancel()) {
                     return false;
                 }
 
-                ScryfallApiCard card = gson.fromJson(jsonReader, ScryfallApiCard.class);
+                if (line.isBlank()) {
+                    continue;
+                }
+
+                ScryfallApiCard card = gson.fromJson(line, ScryfallApiCard.class);
 
                 // prepare data
                 // memory optimization: fewer data, from 1145 MB to 470 MB
@@ -501,7 +505,6 @@ public class ScryfallImageSource implements CardImageSource {
                 bulkCardsDatabaseDefault.put(key, card);
                 bulkCardsDatabaseAll.add(card);
             }
-            jsonReader.close();
             return bulkCardsDatabaseAll.size() > 0;
         } catch (Exception e) {
             logger.error("Can't read bulk file (possible reason: broken scryfall format), details: " + e, e);
@@ -678,11 +681,11 @@ public class ScryfallImageSource implements CardImageSource {
     }
 
     private String getBulkTempFileName() {
-        return getImagesDir() + File.separator + "downloading" + File.separator + "scryfall_bulk_cards.json.gz";
+        return getImagesDir() + File.separator + "downloading" + File.separator + "scryfall_bulk_cards.jsonl.gz";
     }
 
     private String getBulkStaticFileName() {
-        return getImagesDir() + File.separator + "downloading" + File.separator + "scryfall_bulk_cards.json";
+        return getImagesDir() + File.separator + "downloading" + File.separator + "scryfall_bulk_cards.jsonl";
     }
 
     private TFile prepareTempFileForBulkData() {
