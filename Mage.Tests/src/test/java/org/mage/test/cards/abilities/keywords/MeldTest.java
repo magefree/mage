@@ -244,7 +244,7 @@ public class MeldTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, brisela, 1);
         int manaValue = getPermanent(brisela, playerA).getManaValue();
-        Assert.assertEquals("Melded Brisela's mana value", manaValue, 7 + 4);
+        Assert.assertEquals("Melded Brisela's mana value", 7 + 4, manaValue);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clone");
         setChoice(playerB, true); // Yes to clone.
@@ -255,7 +255,7 @@ public class MeldTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, brisela, 1);
         manaValue = getPermanent(brisela, playerB).getManaValue();
-        Assert.assertEquals("Clone of Brisela should have mana value 0", manaValue, 0);
+        Assert.assertEquals("Clone of Brisela should have mana value 0", 0, manaValue);
     }
 
     /**
@@ -309,7 +309,7 @@ public class MeldTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, urzaPlaneswalker, 1);
         int manaValue = getPermanent(urzaPlaneswalker, playerA).getManaValue();
-        Assert.assertEquals("Melded Urza, Planeswalker's mana value", manaValue, 3 + 5);
+        Assert.assertEquals("Melded Urza, Planeswalker's mana value", 3 + 5, manaValue);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Mythos of Illuna", urzaPlaneswalker);
 
@@ -318,7 +318,7 @@ public class MeldTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, urzaPlaneswalker, 1);
         manaValue = getPermanent(urzaPlaneswalker, playerB).getManaValue();
-        Assert.assertEquals("Clone of Urza, Planeswalker should have mana value 0", manaValue, 0);
+        Assert.assertEquals("Clone of Urza, Planeswalker should have mana value 0", 0, manaValue);
     }
 
     // Eliminate can not kill Urza's Planeswalker.
@@ -380,6 +380,6 @@ public class MeldTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, urzaPlaneswalker, 1);
         int manaValue = getPermanent(urzaPlaneswalker, playerA).getManaValue();
-        Assert.assertEquals("Melded Urza, Planeswalker's mana value", manaValue, 3 + 5);
+        Assert.assertEquals("Melded Urza, Planeswalker's mana value", 3 + 5, manaValue);
     }
 }
