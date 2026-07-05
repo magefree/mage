@@ -427,6 +427,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Propaganda", 151, Rarity.UNCOMMON, mage.cards.p.Propaganda.class));
         cards.add(new SetCardInfo("Prowler, Clawed Thief", 186, Rarity.UNCOMMON, mage.cards.p.ProwlerClawedThief.class));
         cards.add(new SetCardInfo("Pumpkin Bombardment", 822, Rarity.COMMON, mage.cards.p.PumpkinBombardment.class));
+        cards.add(new SetCardInfo("Puppet Master, String Puller", 370, Rarity.RARE, mage.cards.p.PuppetMasterStringPuller.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Puppet Master, String Puller", 59, Rarity.RARE, mage.cards.p.PuppetMasterStringPuller.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Quantum Entanglement", 607, Rarity.RARE, mage.cards.q.QuantumEntanglement.class));
         cards.add(new SetCardInfo("Quantum Misalignment", 152, Rarity.RARE, mage.cards.q.QuantumMisalignment.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Quantum Misalignment", 339, Rarity.RARE, mage.cards.q.QuantumMisalignment.class, NON_FULL_USE_VARIOUS));
