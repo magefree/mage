@@ -68,3 +68,6 @@ mage-bundle.zip
 # build targets
 /deploy
 /temp
+
+# dev tools
+.devcontainer/**/*lock.json

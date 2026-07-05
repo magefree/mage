@@ -1,0 +1,94 @@
+{
+	// Pre-configured dev container image with all java, script, build, and debug tools
+	// It's also use xmage's code formating (intellij idea style)
+	//
+	// You can use dev containers from local machine or any cloud service like GitHub Codespaces
+	//
+	// If you need your own tools like AI then copy to new folder and modify locally
+	//
+	// Warning: if build or run fails then search all <groupId>org.openjfx</groupId> 
+	// and update version to 17.0.19 for compatibility with Java 25
+	//
+	// How-to use:
+	// 1. Install Docker, VS Code and extension Dev Containers (ms-vscode-remote.remote-containers)
+	// 2. Open project's root folder and confirm VS Code to open it by container
+	// 3. Run mvn install -DskipTests on first open to generate all files
+	// 4. Run tests, debug, or run client and server as usual, 
+	//    see wiki page: https://github.com/magefree/mage/wiki/Setting-up-your-Development-Environment#visual-studio-code-vsc
+	// 5. GUI client available by web-browser at http://localhost:6080
+	"name": "XMage Dev Tools (Java 25)",
+	"image": "mcr.microsoft.com/devcontainers/java:3-25-trixie",
+
+	"features": {
+
+		// java build tools and vsc extentions
+		"ghcr.io/devcontainers/features/java:1": {
+			"installMaven": "true"
+		},
+
+		// virtual desktop to run GUI app and view it by web-browser
+		"ghcr.io/devcontainers/features/desktop-lite:1": {
+			"version": "latest",
+			"webPort": "6080",
+        	"vncPort": "5901"
+		},
+
+		// python tools to run extra utils and scripts
+		"ghcr.io/devcontainers/features/python:1": {
+			"version": "latest",
+			"installTools": true
+		}
+	},
+
+	// run under custom user, not root
+	"remoteUser": "vscode",
+
+	// .m2 to keep maven download cache betweeb rebuilds
+	"postCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.m2",
+
+	"mounts": [
+		"source=maven-repo-cache,target=/home/vscode/.m2,type=volume"
+	],
+
+	// gui client: 6080 to view GUI app by web-browser
+	"forwardPorts": [6080],
+	"portsAttributes": {
+		"6080": {
+			"label": "desktop-lite",
+			"onAutoForward": "notify",
+			"protocol": "http"
+		}
+    },
+
+	// gui client: virtual desktop resultion (use left toolbar settings to auto-size it to window)
+	"containerEnv": {
+        "VNC_RESOLUTION": "1920x1080x24",
+        "VNC_DPI": "96"
+    },
+	
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"java.autobuild.enabled": false,
+				"[java]": {
+					"editor.defaultFormatter": "OleksandrHavrysh.intellij-formatter"
+				},
+				"java.sources.organizeImports.starThreshold": 5, // intelij idea settings
+				"java.sources.organizeImports.staticStarThreshold": 3 // intelij idea settings
+			},
+			"extensions": [
+				// dev tools
+				"ms-azuretools.vscode-containers",
+				"OleksandrHavrysh.intellij-formatter", // intellij idea code formatter
+				"lkqm.gitblame-annotations", // git blame like intellij idea (right click on line number)
+				"donjayamanne.githistory", // git file or line history
+				"emilast.LogFileHighlighter", // logs highlighter until migrate to log4j2
+				
+				// script and config editors
+				"DotJoshJohnson.xml",
+				"ms-python.python",
+                "ms-python.vscode-pylance"
+			]
+		}
+	}
+}
