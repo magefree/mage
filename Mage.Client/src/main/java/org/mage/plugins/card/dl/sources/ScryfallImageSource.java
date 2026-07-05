@@ -389,7 +389,7 @@ public class ScryfallImageSource implements CardImageSource {
                     logger.info("Scryfall: unpacking files...");
                     Path zippedBulkPath = Paths.get(getBulkTempFileName());
                     Path textBulkPath = Paths.get(getBulkStaticFileName());
-                    Files.deleteIfExists(textBulkPath);
+                    deleteBulkFilesWithLegacyCleanup(textBulkPath);
                     try (GZIPInputStream in = new GZIPInputStream(Files.newInputStream(zippedBulkPath));
                          FileOutputStream out = new FileOutputStream(textBulkPath.toString())) {
                         byte[] buffer = new byte[5 * 1024 * 1024];
@@ -399,7 +399,7 @@ public class ScryfallImageSource implements CardImageSource {
                             // fast cancel
                             if (downloadServiceInfo.isNeedCancel()) {
                                 out.flush();
-                                Files.deleteIfExists(textBulkPath);
+                                deleteBulkFilesWithLegacyCleanup(textBulkPath);
                                 return false;
                             }
 
@@ -505,13 +505,15 @@ public class ScryfallImageSource implements CardImageSource {
                 bulkCardsDatabaseDefault.put(key, card);
                 bulkCardsDatabaseAll.add(card);
             }
+            bufferedReader.close();
+
             return bulkCardsDatabaseAll.size() > 0;
         } catch (Exception e) {
             logger.error("Can't read bulk file (possible reason: broken scryfall format), details: " + e, e);
             try {
                 // clean up
                 if (!SCRYFALL_BULK_FILES_DEBUG_READ_ONLY_MODE) {
-                    Files.deleteIfExists(textBulkPath);
+                    deleteBulkFilesWithLegacyCleanup(textBulkPath);
                 }
             } catch (IOException ignore) {
             }
@@ -686,6 +688,21 @@ public class ScryfallImageSource implements CardImageSource {
 
     private String getBulkStaticFileName() {
         return getImagesDir() + File.separator + "downloading" + File.separator + "scryfall_bulk_cards.jsonl";
+    }
+
+    private String getLegacyBulkTempFileName() {
+        return getImagesDir() + File.separator + "downloading" + File.separator + "scryfall_bulk_cards.json.gz";
+    }
+
+    private String getLegacyBulkStaticFileName() {
+        return getImagesDir() + File.separator + "downloading" + File.separator + "scryfall_bulk_cards.json";
+    }
+
+    private void deleteBulkFilesWithLegacyCleanup(Path textBulkPath) throws IOException {
+        Files.deleteIfExists(textBulkPath);
+        // TODO: cleaning outdated file format, remove after few releases, 2026-07-05
+        Files.deleteIfExists(Paths.get(getLegacyBulkTempFileName()));
+        Files.deleteIfExists(Paths.get(getLegacyBulkStaticFileName()));
     }
 
     private TFile prepareTempFileForBulkData() {
