@@ -329,6 +329,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Lurking Lizards", 816, Rarity.COMMON, mage.cards.l.LurkingLizards.class));
         cards.add(new SetCardInfo("Luxury Suite", 252, Rarity.RARE, mage.cards.l.LuxurySuite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Luxury Suite", 482, Rarity.RARE, mage.cards.l.LuxurySuite.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("MACH-1, Swooping Scoundrel", 662, Rarity.COMMON, mage.cards.m.MACH1SwoopingScoundrel.class));
         cards.add(new SetCardInfo("MJ, Rising Star", 773, Rarity.UNCOMMON, mage.cards.m.MJRisingStar.class));
         cards.add(new SetCardInfo("Machine Man, Model X-51", 751, Rarity.UNCOMMON, mage.cards.m.MachineManModelX51.class));
         cards.add(new SetCardInfo("Madame Hydra, Reanimated", 538, Rarity.RARE, mage.cards.m.MadameHydraReanimated.class));
