@@ -611,6 +611,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Tragic Arrogance", 144, Rarity.RARE, mage.cards.t.TragicArrogance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tragic Arrogance", 323, Rarity.RARE, mage.cards.t.TragicArrogance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimate Alliance", 611, Rarity.COMMON, mage.cards.u.UltimateAlliance.class));
+        cards.add(new SetCardInfo("Ultimate Nullification", 26, Rarity.RARE, mage.cards.u.UltimateNullification.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ultimate Nullification", 324, Rarity.RARE, mage.cards.u.UltimateNullification.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimo, Civilization's End", 540, Rarity.UNCOMMON, mage.cards.u.UltimoCivilizationsEnd.class));
         cards.add(new SetCardInfo("Ultron, Machine Overlord", 507, Rarity.RARE, mage.cards.u.UltronMachineOverlord.class));
         cards.add(new SetCardInfo("Unclaimed Territory", 275, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));
