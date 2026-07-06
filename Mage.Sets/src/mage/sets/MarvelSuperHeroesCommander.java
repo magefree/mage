@@ -526,6 +526,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Starling, Aerial Ally", 778, Rarity.COMMON, mage.cards.s.StarlingAerialAlly.class));
         cards.add(new SetCardInfo("Stature, Young Avenger", 571, Rarity.UNCOMMON, mage.cards.s.StatureYoungAvenger.class));
         cards.add(new SetCardInfo("Stegron the Dinosaur Man", 810, Rarity.COMMON, mage.cards.s.StegronTheDinosaurMan.class));
+        cards.add(new SetCardInfo("Stilt-Man, Towering Terror", 373, Rarity.RARE, mage.cards.s.StiltManToweringTerror.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Stilt-Man, Towering Terror", 61, Rarity.RARE, mage.cards.s.StiltManToweringTerror.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Storm, Shaker of Skies", 733, Rarity.UNCOMMON, mage.cards.s.StormShakerOfSkies.class));
         cards.add(new SetCardInfo("Sudden Strike", 779, Rarity.UNCOMMON, mage.cards.s.SuddenStrike.class));
         cards.add(new SetCardInfo("Sulfur Falls", 269, Rarity.RARE, mage.cards.s.SulfurFalls.class, NON_FULL_USE_VARIOUS));
