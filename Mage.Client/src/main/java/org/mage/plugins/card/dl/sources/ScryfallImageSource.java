@@ -473,7 +473,7 @@ public class ScryfallImageSource implements CardImageSource {
                     return false;
                 }
 
-                if (line.isBlank()) {
+                if (line.trim().isEmpty()) {
                     continue;
                 }
 
