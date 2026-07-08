@@ -38,8 +38,11 @@ import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.permanent.AttachedToPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.LegendRuleAppliesPredicate;
 import mage.game.combat.Combat;
@@ -81,6 +84,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -2368,7 +2372,7 @@ public abstract class GameImpl implements Game {
      * trigger. Then the player who would have received priority does so.
      */
     protected boolean checkStateBasedActions() {
-        boolean somethingHappened = false;
+        AtomicBoolean somethingHappened = new AtomicBoolean(false);
 
         //20091005 - 704.5a/704.5b/704.5c
         for (Player player : state.getPlayers().values()) {
@@ -2405,7 +2409,7 @@ public abstract class GameImpl implements Game {
         }
         for (Dungeon dungeon : dungeonsToRemove) {
             this.removeDungeon(dungeon);
-            somethingHappened = true;
+            somethingHappened.set(true);
         }
 
         // If a commander is in a graveyard or in exile and that card was put into that zone
@@ -2445,7 +2449,7 @@ public abstract class GameImpl implements Game {
                 continue;
             }
             player.moveCards(toMove, Zone.COMMAND, null, this);
-            somethingHappened = true;
+            somethingHappened.set(true);
         }
 
         // 704.5e
@@ -2556,7 +2560,7 @@ public abstract class GameImpl implements Game {
                 //20091005 - 704.5f
                 if (perm.getToughness().getValue() <= 0) {
                     if (movePermanentToGraveyardWithInfo(perm)) {
-                        somethingHappened = true;
+                        somethingHappened.set(true);
                         continue;
                     }
                 } //20091005 - 704.5g/704.5h
@@ -2572,7 +2576,7 @@ public abstract class GameImpl implements Game {
                             Math.max(perm.getPower().getValue(), 1) : perm.getToughness().getValue();
                     if (lethalDamageThreshold <= perm.getDamage() || perm.isDeathtouched()) {
                         if (perm.destroy(null, this, false)) {
-                            somethingHappened = true;
+                            somethingHappened.set(true);
                             continue;
                         }
                     }
@@ -2586,7 +2590,7 @@ public abstract class GameImpl implements Game {
                         if (paired != null && paired.getPairedMOR() != null) {
                             paired.setUnpaired();
                         }
-                        somethingHappened = true;
+                        somethingHappened.set(true);
                     }
                 }
                 if (perm.getBandedCards() != null && !perm.getBandedCards().isEmpty()) {
@@ -2597,7 +2601,7 @@ public abstract class GameImpl implements Game {
                             if (banded != null && banded.getBandedCards().contains(perm.getId())) {
                                 banded.removeBandedCard(perm.getId());
                             }
-                            somethingHappened = true;
+                            somethingHappened.set(true);
                         }
                     }
                 }
@@ -2608,7 +2612,7 @@ public abstract class GameImpl implements Game {
                 if (paired != null) {
                     paired.setUnpaired();
                 }
-                somethingHappened = true;
+                somethingHappened.set(true);
             } else if (perm.getBandedCards() != null && !perm.getBandedCards().isEmpty()) {
                 perm.clearBandedCards();
                 for (UUID bandedId : perm.getBandedCards()) {
@@ -2616,14 +2620,14 @@ public abstract class GameImpl implements Game {
                     if (banded != null) {
                         banded.removeBandedCard(perm.getId());
                     }
-                    somethingHappened = true;
+                    somethingHappened.set(true);
                 }
             }
             if (perm.isPlaneswalker(this)) {
                 //20091005 - 704.5i
                 if (perm.getCounters(this).getCount(CounterType.LOYALTY) == 0) {
                     if (movePermanentToGraveyardWithInfo(perm)) {
-                        somethingHappened = true;
+                        somethingHappened.set(true);
                         continue;
                     }
                 }
@@ -2636,7 +2640,7 @@ public abstract class GameImpl implements Game {
                 if (perm.getAttachedTo() == null) {
                     if (!perm.isCreature(this) && !perm.getAbilities(this).containsClass(BestowAbility.class)) {
                         if (movePermanentToGraveyardWithInfo(perm)) {
-                            somethingHappened = true;
+                            somethingHappened.set(true);
                         }
                     }
                 } else {
@@ -2670,7 +2674,7 @@ public abstract class GameImpl implements Game {
                                     perm.unattach(this);
                                     fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
                                 } else if (movePermanentToGraveyardWithInfo(perm)) {
-                                    somethingHappened = true;
+                                    somethingHappened.set(true);
                                 }
                             } else {
                                 Filter auraFilter = spellAbility.getTargets().get(0).getFilter();
@@ -2682,7 +2686,7 @@ public abstract class GameImpl implements Game {
                                             perm.unattach(this);
                                             fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
                                         } else if (movePermanentToGraveyardWithInfo(perm)) {
-                                            somethingHappened = true;
+                                            somethingHappened.set(true);
                                         }
                                     }
                                 } else if (!auraFilter.match(attachedTo, this) || attachedTo.cantBeAttachedBy(perm, null, this, true)) {
@@ -2692,7 +2696,7 @@ public abstract class GameImpl implements Game {
                                         perm.unattach(this);
                                         fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
                                     } else if (movePermanentToGraveyardWithInfo(perm)) {
-                                        somethingHappened = true;
+                                        somethingHappened.set(true);
                                     }
                                 }
                             }
@@ -2700,13 +2704,13 @@ public abstract class GameImpl implements Game {
                             Player attachedToPlayer = getPlayer(perm.getAttachedTo());
                             if (attachedToPlayer == null || attachedToPlayer.hasLost()) {
                                 if (movePermanentToGraveyardWithInfo(perm)) {
-                                    somethingHappened = true;
+                                    somethingHappened.set(true);
                                 }
                             } else {
                                 Filter auraFilter = spellAbility.getTargets().get(0).getFilter();
                                 if (!auraFilter.match(attachedToPlayer, this) || attachedToPlayer.hasProtectionFrom(perm, this)) {
                                     if (movePermanentToGraveyardWithInfo(perm)) {
-                                        somethingHappened = true;
+                                        somethingHappened.set(true);
                                     }
                                 }
                             }
@@ -2718,7 +2722,7 @@ public abstract class GameImpl implements Game {
                                     if (attachedTo != null) {
                                         attachedTo.removeAttachment(perm.getId(), null, this);
                                     }
-                                    somethingHappened = true;
+                                    somethingHappened.set(true);
                                 }
                             }
                         }
@@ -2760,7 +2764,7 @@ public abstract class GameImpl implements Game {
                 if (sacSaga) {
                     // After the last chapter ability has left the stack, you'll sacrifice the Saga
                     perm.sacrifice(null, this);
-                    somethingHappened = true;
+                    somethingHappened.set(true);
                 }
             }
 
@@ -2781,7 +2785,7 @@ public abstract class GameImpl implements Game {
                         .map(Ability::getSourceId)
                         .noneMatch(perm.getId()::equals)) {
                     if (movePermanentToGraveyardWithInfo(perm)) {
-                        somethingHappened = true;
+                        somethingHappened.set(true);
                     }
                 } else if (this
                         .getCombat()
@@ -2796,7 +2800,7 @@ public abstract class GameImpl implements Game {
                     if (this.getPlayer(perm.getProtectorId()) == null) {
                         movePermanentToGraveyardWithInfo(perm);
                     }
-                    somethingHappened = true;
+                    somethingHappened.set(true);
                 }
             }
 
@@ -2823,7 +2827,7 @@ public abstract class GameImpl implements Game {
                         fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
                     } else if (!attachedTo.isCreature(this) || attachedTo.hasProtectionFrom(perm, this)) {
                         if (attachedTo.removeAttachment(perm.getId(), null, this)) {
-                            somethingHappened = true;
+                            somethingHappened.set(true);
                         }
                     }
                 }
@@ -2835,7 +2839,7 @@ public abstract class GameImpl implements Game {
                         perm.attachTo(null, null, this);
                     } else if (!land.isLand(this) || land.hasProtectionFrom(perm, this)) {
                         if (land.removeAttachment(perm.getId(), null, this)) {
-                            somethingHappened = true;
+                            somethingHappened.set(true);
                         }
                     }
                 }
@@ -2856,7 +2860,7 @@ public abstract class GameImpl implements Game {
                         continue;
                     }
                     if (perm.removeAttachment(attachment.getId(), null, this)) {
-                        somethingHappened = true;
+                        somethingHappened.set(true);
                         break;
                     }
                 }
@@ -2880,7 +2884,7 @@ public abstract class GameImpl implements Game {
                     int count = perm.getCounters(this).getCount(counterAbility.getCounterType());
                     if (count > counterAbility.getAmount()) {
                         perm.removeCounters(counterAbility.getCounterType().getName(), count - counterAbility.getAmount(), counterAbility, this);
-                        somethingHappened = true;
+                        somethingHappened.set(true);
                     }
                 }
             }
@@ -2953,34 +2957,62 @@ public abstract class GameImpl implements Game {
                     if (newestPermanentControllerRange.contains(permanent.getControllerId())
                             && !Objects.equals(newestPermanent, permanent)) {
                         movePermanentToGraveyardWithInfo(permanent);
-                        somethingHappened = true;
+                        somethingHappened.set(true);
                     }
                 }
             }
         }
 
-        if (!roleMap.isEmpty()) {
-            List<Set<Permanent>> rolesToHandle = roleMap.values()
-                    .stream()
-                    .map(Map::values)
-                    .flatMap(Collection::stream)
-                    .filter(s -> s.size() > 1)
-                    .collect(Collectors.toList());
-            if (!rolesToHandle.isEmpty()) {
-                for (Set<Permanent> roleSet : rolesToHandle) {
-                    int newest = roleSet
-                            .stream()
-                            .mapToInt(Permanent::getCreateOrder)
-                            .max()
-                            .orElse(-1);
-                    roleSet.removeIf(permanent -> permanent.getCreateOrder() == newest);
-                    for (Permanent permanent : roleSet) {
-                        movePermanentToGraveyardWithInfo(permanent);
-                        somethingHappened = true;
+
+        // creatures may have more than one Role attached to them if each Role is controlled by a different player
+        for (final Map.Entry<UUID, Map<UUID, Set<Permanent>>> controllerRoles : roleMap.entrySet()) {
+            for (final Map.Entry<UUID, Set<Permanent>> permanentRoles : controllerRoles.getValue().entrySet()) {
+                if (!permanentRoles.getValue().isEmpty()) {
+                    // remove all roles older than the newest one
+                    final int newest = permanentRoles.getValue().stream().mapToInt(Permanent::getCreateOrder).max().orElse(-1);
+                    permanentRoles.getValue().stream()
+                        .filter(permanent -> permanent.getCreateOrder() < newest)
+                        .forEach(permanent -> {
+                            this.movePermanentToGraveyardWithInfo(permanent);
+                            somethingHappened.set(true);
+                        });
+                    permanentRoles.getValue()
+                        .removeIf(permanent -> permanent.getCreateOrder() < newest);
+
+                    // any remaining roles must have been created at the same time
+                    // Ruling (2023-09-01): If two or more Roles controlled by the same player become attached to a permanent at the
+                    // same time (perhaps due to an effect such as that of Doubling Season), that player chooses which one to keep
+                    // and which are put into their owners' graveyards.
+                    if (permanentRoles.getValue().size() > 1) {
+                        final Player controller = this.getPlayer(controllerRoles.getKey());
+                        if (controller == null) {
+                            continue;
+                        }
+                        final Permanent attachedTo = this.getPermanent(permanentRoles.getKey());
+                        if (attachedTo == null) {
+                            continue;
+                        }
+                        final FilterPermanent filter = new FilterControlledPermanent("Role attached to " + attachedTo.getName());
+                        final FilterPermanent subfilter = new FilterPermanent();
+                        subfilter.add(new MageObjectReferencePredicate(attachedTo, this));
+                        filter.add(new AttachedToPredicate(subfilter));
+                        filter.add(SubType.ROLE.getPredicate());
+                        final Target targetRoleToKeep = new TargetPermanent(filter)
+                            .withNotTarget(true).withTargetName("Role to keep attached to " + attachedTo.getName() + "?");
+                        controller.choose(Outcome.Benefit, targetRoleToKeep, null, this);
+                        permanentRoles.getValue().stream()
+                            .filter(permanent -> !targetRoleToKeep.getTargets().contains(permanent.getId()))
+                            .forEach(permanent -> {
+                                this.movePermanentToGraveyardWithInfo(permanent);
+                                somethingHappened.set(true);
+                            });
+                        permanentRoles.getValue()
+                            .removeIf(permanent -> !targetRoleToKeep.getTargets().contains(permanent.getId()));
                     }
                 }
             }
         }
+
 
         // Daybound/Nightbound permanents should be transformed according to day/night
         // This is not a state-based action but it's unclear where else to put it
@@ -2988,13 +3020,15 @@ public abstract class GameImpl implements Game {
             for (Permanent permanent : getBattlefield().getAllActivePermanents()) {
                 if ((permanent.getAbilities(this).containsClass(DayboundAbility.class) && !state.isDaytime())
                         || (permanent.getAbilities(this).containsClass(NightboundAbility.class) && state.isDaytime())) {
-                    somethingHappened = permanent.transform(null, this, true) || somethingHappened;
+                    if (permanent.transform(null, this, true)) {
+                        somethingHappened.set(true);
+                    }
                 }
             }
         }
 
         //TODO: implement the rest
-        return somethingHappened;
+        return somethingHappened.get();
     }
 
     private boolean movePermanentToGraveyardWithInfo(Permanent permanent) {
