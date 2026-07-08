@@ -1,6 +1,7 @@
 package mage.cards.c;
 
 import java.util.UUID;
+
 import mage.abilities.keyword.TeamworkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -8,17 +9,13 @@ import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.ConditionalTargetAdjuster;
-import mage.abilities.condition.common.GiftWasPromisedCondition;
 import mage.abilities.condition.common.TeamworkCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.constants.ComparisonType;
-import mage.abilities.SpellAbility;
 
 /**
  *
@@ -34,7 +31,6 @@ public final class CruelAlliance extends CardImpl {
 
     public CruelAlliance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        
 
         // Teamwork 2
         this.addAbility(new TeamworkAbility(2));
@@ -44,7 +40,7 @@ public final class CruelAlliance extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(
                 TeamworkCondition.instance, new TargetCreaturePermanent()
         ));
-    
+
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new GainLifeEffect(3),
