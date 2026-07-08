@@ -2150,6 +2150,31 @@ public final class GamePanel extends javax.swing.JPanel {
             priorityPlayerText = " / priority " + gameView.getPriorityPlayerName();
         }
         String additionalMessage = activePlayerText + " / " + gameView.getStep().toString() + priorityPlayerText;
+
+        String customSelectMessage = null;
+
+        if (this.stackObjects.getNumberOfCards() == 0) {
+            // Empty stack, passing priority means going to the next phase
+            PhaseStep curStep = gameView.getStep();
+
+            int idx = PhaseStep.userFacingSteps.indexOf(curStep);
+            if (idx != -1) {
+                int nextStep = idx+1;
+                if (nextStep >= PhaseStep.userFacingSteps.size()) {
+                    nextStep = 0;
+                }
+
+                customSelectMessage = PhaseStep.userFacingSteps.get(nextStep).toString();
+            }
+        }
+        else {
+            customSelectMessage = "No response";
+        }
+
+        if (customSelectMessage != null) {
+            panelOptions.put(Constants.Option.CUSTOM_SELECT_MESSAGE, customSelectMessage);
+        }
+
         this.feedbackPanel.prepareFeedback(FeedbackMode.SELECT, message, additionalMessage, gameView.getSpecial(), panelOptions, true, gameView.getPhase());
     }
 
