@@ -702,7 +702,7 @@ public class HumanPlayer extends PlayerImpl {
 
         while (canRespond()) {
 
-            boolean required = target.isRequired(source != null ? source.getSourceId() : null, game);
+            boolean required = target.isRequiredExplicitlySet() ? target.isRequired() : target.isRequired(source != null ? source.getSourceId() : null, game);
 
             // enable done button after min targets selected
             if (target.getTargets().size() >= target.getMinNumberOfTargets()) {
@@ -787,7 +787,7 @@ public class HumanPlayer extends PlayerImpl {
 
         while (canRespond()) {
             Set<UUID> possibleTargets = target.possibleTargets(abilityControllerId, source, game);
-            boolean required = target.isRequired(source != null ? source.getSourceId() : null, game);
+            boolean required = target.isRequiredExplicitlySet() ? target.isRequired() : target.isRequired(source != null ? source.getSourceId() : null, game);
             if (possibleTargets.isEmpty()
                     || target.getTargets().size() >= target.getMinNumberOfTargets()) {
                 required = false;
@@ -827,11 +827,11 @@ public class HumanPlayer extends PlayerImpl {
                 // done or cancel button pressed
                 if (target.isChosen(game)) {
                     // try to finish
-                    return false;
+                    break;
                 } else {
                     if (!required) {
                         // can stop at any moment
-                        return false;
+                        break;
                     }
                 }
             }
@@ -873,7 +873,7 @@ public class HumanPlayer extends PlayerImpl {
         while (canRespond()) {
             Set<UUID> possibleTargets = target.possibleTargets(abilityControllerId, source, game, cards);
 
-            boolean required = target.isRequired(source != null ? source.getSourceId() : null, game);
+            boolean required = target.isRequiredExplicitlySet() ? target.isRequired() : target.isRequired(source != null ? source.getSourceId() : null, game);
             int count = cards.count(target.getFilter(), abilityControllerId, source, game);
             if (count == 0
                     || target.getTargets().size() >= target.getMinNumberOfTargets()) {
@@ -928,17 +928,17 @@ public class HumanPlayer extends PlayerImpl {
                 // done or cancel button pressed
                 if (target.isChosen(game)) {
                     // try to finish
-                    return false;
+                    break;
                 } else {
                     if (!required) {
                         // can stop at any moment
-                        return false;
+                        break;
                     }
                 }
             }
         }
 
-        return false;
+        return target.isChosen(game) && target.getTargets().size() > 0;
     }
 
     // choose one or multiple target cards
@@ -960,16 +960,22 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         while (canRespond()) {
-            boolean required = target.isRequiredExplicitlySet() ? target.isRequired() : target.isRequired(source);
-            int count = cards.count(target.getFilter(), abilityControllerId, source, game);
-            if (count == 0
-                    || target.getTargets().size() >= target.getMinNumberOfTargets()) {
+
+            boolean required = target.isRequiredExplicitlySet() ? target.isRequired() : target.isRequired(source != null ? source.getSourceId() : null, game);
+
+            // enable done button after min targets selected
+            if (target.getTargets().size() >= target.getMinNumberOfTargets()) {
                 required = false;
             }
 
-            Set<UUID> possibleTargets = target.possibleTargets(abilityControllerId, source, game, cards);
+            // stop on impossible selection
+            if (required && !target.canChoose(abilityControllerId, source, game)) {
+                break;
+            }
 
             // if nothing to choose then show dialog (user must see non-selectable items and click on any of them)
+            // TODO: or maybe not - need research and use same logic in all dialogs (call break here)
+            Set<UUID> possibleTargets = target.possibleTargets(abilityControllerId, source, game, cards);
             if (possibleTargets.isEmpty()) {
                 required = false;
             }
@@ -1004,15 +1010,15 @@ public class HumanPlayer extends PlayerImpl {
                 }
             } else {
                 if (target.getTargets().size() >= target.getMinNumberOfTargets()) {
-                    return true;
+                    break;
                 }
                 if (!required) {
-                    return false;
+                    break;
                 }
             }
         }
 
-        return false;
+        return target.isChosen(game) && target.getTargets().size() > 0;
     }
 
     @Override
@@ -1056,7 +1062,7 @@ public class HumanPlayer extends PlayerImpl {
         // TODO: rework to use existing chooseTarget instead custom select?
         while (canRespond()) {
             Set<UUID> possibleTargets = target.possibleTargets(abilityControllerId, source, game);
-            boolean required = target.isRequired(source.getSourceId(), game);
+            boolean required = target.isRequiredExplicitlySet() ? target.isRequired() : target.isRequired(source != null ? source.getSourceId() : null, game);
             if (possibleTargets.isEmpty()
                     || target.getSize() >= target.getMinNumberOfTargets()) {
                 required = false;
