@@ -76,7 +76,12 @@ public abstract class CastFromGraveyardAbility extends SpellAbility {
                 return ((ModalDoubleFacedCard) card).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
             }
         }
-        return card.getSpellAbility().canActivate(playerId, game);
+        SpellAbility spellAbility = card.getSpellAbility();
+        if (this.timing == TimingRule.INSTANT && spellAbility.getTiming() == TimingRule.SORCERY) {
+            spellAbility = spellAbility.copy();
+            spellAbility.setTiming(TimingRule.INSTANT);
+        }
+        return spellAbility.canActivate(playerId, game);
     }
 
     @Override
