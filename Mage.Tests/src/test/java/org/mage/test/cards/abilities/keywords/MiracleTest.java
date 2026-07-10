@@ -3,6 +3,7 @@ package org.mage.test.cards.abilities.keywords;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -254,5 +255,45 @@ public class MiracleTest extends CardTestPlayerBase {
         checkPlayableAbility("can't cast grizzlies", 2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Cast Grizzly Bears", false);
         assertHandCount(playerB, "Balduvian Bears", 1);
         assertHandCount(playerB, "Grizzly Bears", 1);
+    }
+
+    @Test
+    public void testDynamicMiracleCost() {
+        skipInitShuffling();
+        addCard(Zone.BATTLEFIELD, playerB, "Aminatou, Veil Piercer");
+        addCard(Zone.BATTLEFIELD, playerB, "Wastes");
+        addCard(Zone.LIBRARY, playerB, "Faceless One", 2);
+
+        addTarget(playerB, "Faceless One");
+        setChoice(playerB, true);
+        setChoice(playerB, true);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerB, "Faceless One", 1);
+        assertTapped("Wastes", true);
+    }
+
+    @Test
+    public void testDynamicMiracleWithX() {
+        skipInitShuffling();
+        addCard(Zone.BATTLEFIELD, playerB, "Aminatou, Veil Piercer");
+        addCard(Zone.BATTLEFIELD, playerB, "Plains");
+        addCard(Zone.LIBRARY, playerB, "Defenders of Humanity", 2);
+
+        addTarget(playerB, "Defenders of Humanity");
+        setChoice(playerB, true);
+        setChoice(playerB, true);
+        setChoice(playerB, "X=2");
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerB, "Defenders of Humanity", 1);
+        assertPermanentCount(playerB, "Astartes Warrior Token", 2);
+        assertTapped("Plains", true);
     }
 }
