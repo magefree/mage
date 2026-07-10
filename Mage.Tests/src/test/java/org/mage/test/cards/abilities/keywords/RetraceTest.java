@@ -3,6 +3,7 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.command.emblems.WrennAndSixEmblem;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -212,5 +213,27 @@ public class RetraceTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Plains", 1);
         assertHandCount(playerA, "Silvercoat Lion", 1);
         assertHandCount(playerA, "Grizzly Bears", 1);
+    }
+
+    @Test
+    public void test_Retrace_WithFiresOfInvention() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Fires of Invention");
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addEmblem(playerA, new WrennAndSixEmblem());
+        addCard(Zone.GRAVEYARD, playerA, "Shock");
+        addCard(Zone.HAND, playerA, "Forest");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock with retrace", playerB);
+        setChoice(playerA, "Cast without paying its mana cost");
+        setChoice(playerA, "Forest"); // discard for retrace
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerB, 18);
+        assertGraveyardCount(playerA, "Shock", 1);
+        assertGraveyardCount(playerA, "Forest", 1);
     }
 }
