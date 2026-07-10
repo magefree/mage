@@ -93,6 +93,9 @@ class RetraceSpellAbility extends SpellAbility implements OptionalAdditionalSour
 
     @Override
     public void addOptionalAdditionalCosts(Ability ability, Game game) {
+        if (!ability.getId().equals(this.getId())) {
+            return;
+        }
         additionalCost = new OptionalAdditionalCostImpl(
                 "Retrace",
                 "Retrace <i>(You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)</i>",
