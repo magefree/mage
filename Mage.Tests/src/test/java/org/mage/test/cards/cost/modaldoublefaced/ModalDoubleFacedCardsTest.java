@@ -1524,7 +1524,7 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
