@@ -4,6 +4,7 @@ package org.mage.test.cards.abilities.keywords;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -119,5 +120,97 @@ public class RetraceTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Mountain", 1);
 
+    }
+    
+    @Test
+    public void test_Retrace_WithEvokeAlternativeCost() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Six");
+        addCard(Zone.GRAVEYARD, playerA, "Solitude");
+        addCard(Zone.HAND, playerA, "Plains");
+        addCard(Zone.HAND, playerA, "Silvercoat Lion");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Solitude with retrace");
+        setChoice(playerA, "Cast with Evoke alternative cost");
+        setChoice(playerA, "Silvercoat Lion"); // exile for evoke
+        setChoice(playerA, "Plains"); // discard for retrace
+        setChoice(playerA, "When this permanent enters, if its evoke cost was paid, its controller sacrifices it");
+        addTarget(playerA, TestPlayer.TARGET_SKIP); // no target for Solitude's enters ability
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertExileCount(playerA, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerA, "Plains", 1);
+        assertGraveyardCount(playerA, "Solitude", 1); // sacrificed after being evoked
+    }
+
+    @Test
+    public void test_Retrace_DoesNotUseOtherGraveyardPermission() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Six");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.GRAVEYARD, playerA, "Demilich");
+        addCard(Zone.GRAVEYARD, playerA, "Opt", 4);
+        addCard(Zone.HAND, playerA, "Plains");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Demilich with retrace");
+        setChoice(playerA, "Plains"); // discard for retrace
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Demilich", 1);
+        assertGraveyardCount(playerA, "Plains", 1);
+        assertGraveyardCount(playerA, "Opt", 4);
+    }
+
+    @Test
+    public void test_Retrace_DemonicEmbraceDoesNotUseOwnGraveyardPermission() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Six");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        addCard(Zone.GRAVEYARD, playerA, "Demonic Embrace");
+        addCard(Zone.HAND, playerA, "Plains");
+        addCard(Zone.HAND, playerA, "Silvercoat Lion");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Demonic Embrace with retrace", "Grizzly Bears");
+        setChoice(playerA, "Plains"); // discard for retrace
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Demonic Embrace", 1);
+        assertGraveyardCount(playerA, "Plains", 1);
+        assertHandCount(playerA, "Silvercoat Lion", 1);
+        assertLife(playerA, 20);
+    }
+
+    @Test
+    public void test_Retrace_RonaDoesNotUseOwnGraveyardPermission() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Six");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.GRAVEYARD, playerA, "Rona, Sheoldred's Faithful");
+        addCard(Zone.HAND, playerA, "Plains");
+        addCard(Zone.HAND, playerA, "Silvercoat Lion");
+        addCard(Zone.HAND, playerA, "Grizzly Bears");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rona, Sheoldred's Faithful with retrace");
+        setChoice(playerA, "Plains"); // discard for retrace
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Rona, Sheoldred's Faithful", 1);
+        assertGraveyardCount(playerA, "Plains", 1);
+        assertHandCount(playerA, "Silvercoat Lion", 1);
+        assertHandCount(playerA, "Grizzly Bears", 1);
     }
 }

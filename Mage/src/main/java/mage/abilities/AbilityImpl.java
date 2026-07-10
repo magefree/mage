@@ -623,6 +623,9 @@ public abstract class AbilityImpl implements Ability {
             alternativeChosen.activateAlternativeCosts(this, game);
         }
         // 2. ADDITIONAL COST
+        if (this instanceof MandatoryAdditionalSourceCosts) {
+            ((MandatoryAdditionalSourceCosts) this).addMandatoryAdditionalCosts(this, game);
+        }
         for (Ability ability : abilities) {
             if (canUseAdditionalCost && ability instanceof OptionalAdditionalSourceCosts) {
                 ((OptionalAdditionalSourceCosts) ability).addOptionalAdditionalCosts(this, game);
