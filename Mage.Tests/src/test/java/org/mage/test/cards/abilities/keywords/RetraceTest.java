@@ -236,4 +236,25 @@ public class RetraceTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Shock", 1);
         assertGraveyardCount(playerA, "Forest", 1);
     }
+
+    @Test
+    public void RetraceAddsDiscardCostOnlyOnce() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
+        addCard(Zone.GRAVEYARD, playerA, "Raven's Crime");
+        addCard(Zone.HAND, playerA, "Forest");
+        addCard(Zone.HAND, playerA, "Mountain");
+        addCard(Zone.HAND, playerB, "Silvercoat Lion");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raven's Crime with retrace", playerB);
+        setChoice(playerA, "Forest");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Forest", 1);
+        assertHandCount(playerA, "Mountain", 1);
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+    }
 }
