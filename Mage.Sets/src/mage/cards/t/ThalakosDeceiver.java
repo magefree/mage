@@ -31,7 +31,7 @@ public final class ThalakosDeceiver extends CardImpl {
 
         // Shadow
         this.addAbility(ShadowAbility.getInstance());
-        // Whenever Thalakos Deceiver attacks and isn't blocked, you may sacrifice it. If you do, gain control of target creature.
+        // Whenever Thalakos Deceiver attacks and isn't blocked, you may sacrifice it. If you do, gain control of target creature. <i>This effect lasts indefinitely</i>
         Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(new DoIfCostPaid(new GainControlTargetEffect(Duration.Custom), new SacrificeSourceCost()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
