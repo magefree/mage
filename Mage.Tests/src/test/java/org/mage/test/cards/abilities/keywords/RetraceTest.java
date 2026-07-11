@@ -257,4 +257,30 @@ public class RetraceTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Mountain", 1);
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
     }
+
+    @Test
+    public void RetraceMutateSpells() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.HAND, playerA, "Island");
+        addCard(Zone.LIBRARY, playerA, "Mountain");
+        addCard(Zone.GRAVEYARD, playerA, "Dreamtail Heron");
+        addCard(Zone.BATTLEFIELD, playerA, "Six");
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        // Mutate {3}{U}
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dreamtail Heron with retrace using Mutate", "Silvercoat Lion");
+        setChoice(playerA, "Island"); // discard for retrace
+        setChoice(playerA, false); // mutate over, putting Dreamtail Heron on top
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertHandCount(playerA, "Dreamtail Heron", 0);
+        assertPermanentCount(playerA, "Silvercoat Lion", 0);
+        assertPermanentCount(playerA, "Dreamtail Heron", 1);
+        assertGraveyardCount(playerA, "Island", 1);
+        assertHandCount(playerA, "Mountain", 1); 
+    }
 }

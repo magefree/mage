@@ -32,6 +32,11 @@ public class RetraceAbility extends StaticAbility {
     public RetraceAbility(Card card) {
         super(Zone.GRAVEYARD, null);
         this.addSubAbility(new RetraceSpellAbility(card));
+        card.getAbilities().stream()
+                .filter(MutateAbility.class::isInstance)
+                .map(MutateAbility.class::cast)
+                .map(ability -> new RetraceSpellAbility(card, ability))
+                .forEach(this::addSubAbility);
         this.setRuleAtTheTop(true);
     }
 
@@ -62,7 +67,11 @@ class RetraceSpellAbility extends SpellAbility implements OptionalAdditionalSour
     protected OptionalAdditionalCost additionalCost;
 
     RetraceSpellAbility(Card card) {
-        super(card.getSpellAbility());
+        this(card, card.getSpellAbility());
+    }
+
+    RetraceSpellAbility(Card card, SpellAbility spellAbility) {
+        super(spellAbility);
         this.newId();
         this.setCardName(card.getName() + " with retrace");
         this.zone = Zone.GRAVEYARD;
