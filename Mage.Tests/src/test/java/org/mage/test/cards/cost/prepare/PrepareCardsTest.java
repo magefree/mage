@@ -9,7 +9,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * Tests for the "prepare" mechanic: while a permanent is prepared, its controller may cast a copy of
  * its prepare spell (following that spell's timing), and doing so unprepares the permanent.
  *
- * @author TheElk801
+ * @author wakame1367
  */
 public class PrepareCardsTest extends CardTestPlayerBase {
 

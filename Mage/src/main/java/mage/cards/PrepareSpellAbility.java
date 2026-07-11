@@ -19,7 +19,7 @@ import java.util.UUID;
  * prepare spell can only be cast at sorcery speed. Casting it creates and casts a copy of the prepare
  * spell (see {@link PrepareSpellCard#cast}).
  *
- * @author TheElk801
+ * @author wakame1367
  */
 public class PrepareSpellAbility extends SpellAbility {
 
