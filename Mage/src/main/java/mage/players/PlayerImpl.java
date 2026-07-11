@@ -4170,6 +4170,12 @@ public abstract class PlayerImpl implements Player, Serializable {
             CardWithSpellOption cardWithSpellOption = (CardWithSpellOption) object;
             getPlayableFromObjectSingle(game, fromZone, cardWithSpellOption.getSpellCard(), cardWithSpellOption.getSpellCard().getAbilities(game), availableMana, output);
             getPlayableFromObjectSingle(game, fromZone, cardWithSpellOption, cardWithSpellOption.getSharedAbilities(game), availableMana, output);
+        } else if (object instanceof Permanent && game.getCard(object.getId()) instanceof PrepareCard) {
+            // a prepared permanent may cast a copy of its prepare spell, offered from the battlefield
+            // (the prepare spell's characteristics come from the prepare spell card, not the permanent)
+            PrepareCard prepareCard = (PrepareCard) game.getCard(object.getId());
+            getPlayableFromObjectSingle(game, fromZone, prepareCard.getSpellCard(), prepareCard.getSpellCard().getAbilities(game), availableMana, output);
+            getPlayableFromObjectSingle(game, fromZone, object, ((Card) object).getAbilities(game), availableMana, output);
         } else if (object instanceof Card) {
             getPlayableFromObjectSingle(game, fromZone, object, ((Card) object).getAbilities(game), availableMana, output);
         } else if (object instanceof StackObject) {

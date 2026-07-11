@@ -351,6 +351,12 @@ public abstract class GameImpl implements Game {
                 Card spellCard = ((CardWithSpellOption) card).getSpellCard();
                 spellCard.setOwnerId(ownerId);
                 addCardToState(spellCard);
+            } else if (card instanceof PrepareCard) {
+                // the prepare spell is never in a normal zone; it is a blueprint used to create the
+                // copy that gets cast while the permanent is prepared (see PrepareCard#cast)
+                Card spellCard = ((PrepareCard) card).getSpellCard();
+                spellCard.setOwnerId(ownerId);
+                addCardToState(spellCard);
             } else if (card.isTransformable() && card.getSecondCardFace() != null) {
                 Card nightCard = card.getSecondCardFace();
                 nightCard.setOwnerId(ownerId);

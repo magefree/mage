@@ -5,12 +5,19 @@ import mage.constants.CardType;
 import java.util.UUID;
 
 /**
+ * A prepare card: a permanent that has an associated "prepare spell" (its alternative
+ * characteristics, a {@link PrepareSpellCard}). While the permanent is prepared, its controller may
+ * cast a copy of the prepare spell (CR 722). Casting the copy does not move the permanent; it only
+ * becomes unprepared.
+ * <p>
+ * Card implementations add the prepare spell's effects and targets to
+ * {@code getSpellCard().getSpellAbility()}.
+ *
  * @author TheElk801
- * TODO: Implement properly
  */
 public abstract class PrepareCard extends CardImpl {
 
-    protected Card spellCard;
+    protected PrepareSpellCard spellCard;
 
     protected PrepareCard(UUID ownerId, CardSetInfo setInfo, CardType[] types, String costs, String preparationName, CardType typeSpell, String costsSpell) {
         this(ownerId, setInfo, types, costs, preparationName, new CardType[]{typeSpell}, costsSpell);
@@ -23,9 +30,10 @@ public abstract class PrepareCard extends CardImpl {
 
     protected PrepareCard(final PrepareCard card) {
         super(card);
+        this.spellCard = card.spellCard.copy();
     }
 
-    public Card getSpellCard() {
+    public PrepareSpellCard getSpellCard() {
         return spellCard;
     }
 }
