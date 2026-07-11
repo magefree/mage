@@ -102,7 +102,7 @@ public class BaronHelmutZemoTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Abomination", 10); // for 1 turn, {3}{B}{B}
         addCard(Zone.GRAVEYARD, playerA, "Alpharael, Stonechosen", 10); // for 3 turn {3}{B}{B}
 
-        // turn 1 - boast but don't use free case
+        // turn 1 - boast but don't use free cards
         attack(1, playerA, "Baron Helmut Zemo");
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Boast");
         setChoice(playerA, "Abomination", 10);
@@ -110,14 +110,14 @@ public class BaronHelmutZemoTest extends CardTestPlayerBase {
         setChoice(playerA, TestPlayer.CHOICE_SKIP); // do not use free cast
         setChoice(playerA, false); // stop to free cast
 
-        // turn 3 - make you have only new free cast
+        // turn 3 - make sure you have only new free cards
         attack(3, playerA, "Baron Helmut Zemo");
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Boast");
         setChoice(playerA, "Alpharael, Stonechosen", 10);
         // cast free 1
         setChoice(playerA, "Alpharael, Stonechosen"); // cast free - choose card
         setChoice(playerA, true); // cast free - confirm
-        // cast free 3
+        // cast free 2
         setChoice(playerA, "Abomination"); // cast free - choose card
 
         // TODO: implement possible targets check/assert
