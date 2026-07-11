@@ -636,6 +636,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Vision, Synthezoid Avenger", 119, Rarity.RARE, mage.cards.v.VisionSynthezoidAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vision, Synthezoid Avenger", 460, Rarity.RARE, mage.cards.v.VisionSynthezoidAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Void Helix", 674, Rarity.UNCOMMON, mage.cards.v.VoidHelix.class));
+        cards.add(new SetCardInfo("Voltaic Whip", 675, Rarity.COMMON, mage.cards.v.VoltaicWhip.class));
         cards.add(new SetCardInfo("Wakandan Shield Guard", 613, Rarity.COMMON, mage.cards.w.WakandanShieldGuard.class));
         cards.add(new SetCardInfo("Wakandan Tusker", 748, Rarity.UNCOMMON, mage.cards.w.WakandanTusker.class));
         cards.add(new SetCardInfo("Wall Off", 614, Rarity.COMMON, mage.cards.w.WallOff.class));
