@@ -6,9 +6,6 @@
 	//
 	// If you need your own tools like AI then copy to new folder and modify locally
 	//
-	// Warning: if build or run fails then search all <groupId>org.openjfx</groupId> 
-	// and update version to 17.0.19 for compatibility with Java 25
-	//
 	// How-to use:
 	// 1. Install Docker, VS Code and extension Dev Containers (ms-vscode-remote.remote-containers)
 	// 2. Open project's root folder and confirm VS Code to open it by container
@@ -16,6 +13,18 @@
 	// 4. Run tests, debug, or run client and server as usual, 
 	//    see wiki page: https://github.com/magefree/mage/wiki/Setting-up-your-Development-Environment#visual-studio-code-vsc
 	// 5. GUI client available by web-browser at http://localhost:6080
+	//
+	// Possible problems:
+	// 1. If build or run fails then search all <groupId>org.openjfx</groupId> 
+	//    and update version to 17.0.19 for compatibility with Java 25
+	//
+	// Offline work mode:
+	// - install and run container once with internet connection to download all dependencies;
+	//   run "mvn install -DskipTests"
+	// - disable VS Code auto-update on host system: > Settings -> update.mode = none
+	// - disable VS Code's extensions auto-update on host system: > Settings -> extensions.autoUpdate = false
+	// - do not change devcontainer.json file to avoid image update and re-download
+	// 
 	"name": "XMage Dev Tools (Java 25)",
 	"image": "mcr.microsoft.com/devcontainers/java:3-25-trixie",
 
@@ -70,6 +79,7 @@
 		"vscode": {
 			"settings": {
 				"java.autobuild.enabled": false,
+				"editor.formatOnSave": false,
 				"[java]": {
 					"editor.defaultFormatter": "OleksandrHavrysh.intellij-formatter"
 				},
