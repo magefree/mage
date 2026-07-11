@@ -17,6 +17,8 @@ import mage.abilities.keyword.*;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.PrepareCard;
+import mage.abilities.effects.common.PrepareCastFromExileEffect;
+import mage.target.targetpointer.FixedTarget;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -1953,8 +1955,36 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.prepared = prepared;
         if (this.prepared) {
             addInfo(preparedInfoKey, CardUtil.addToolTipMarkTags("Prepared"), game);
+            PrepareCard sourceCard = (PrepareCard) getMainCard();
+            Card copy = game.copyCard(sourceCard, null, getControllerId());
+            ((PrepareCard) copy).setPrepareSpellCopy(true);
+            Card registeredCopy = game.getCard(copy.getId());
+            if (registeredCopy instanceof PrepareCard) {
+                // copyCard can register a distinct recovered instance. Mark that instance too,
+                // because UI/playability lookups obtain the copy through Game#getCard.
+                ((PrepareCard) registeredCopy).setPrepareSpellCopy(true);
+            }
+            copy.setZone(Zone.EXILED, game);
+            game.getExile().add(copy);
+            game.getState().setValue("PreparePermanent" + copy.getId(), getId());
+            game.getState().setValue("KeepPrepareCopy" + copy.getId(), Boolean.TRUE);
+            PrepareCastFromExileEffect effect = new PrepareCastFromExileEffect();
+            effect.setTargetPointer(new FixedTarget(copy, game));
+            game.addEffect(effect, getSpellAbility());
         } else {
             addInfo(preparedInfoKey, null, game);
+            game.getState().getValues("PreparePermanent").entrySet().stream()
+                    .filter(e -> getId().equals(e.getValue()))
+                    .map(e -> e.getKey().substring("PreparePermanent".length()))
+                    .map(UUID::fromString)
+                    .map(game::getCard)
+                    .filter(java.util.Objects::nonNull)
+                    .forEach(card -> {
+                        game.getExile().removeCard(card);
+                        card.setZone(Zone.OUTSIDE, game);
+                        game.getState().setValue("KeepPrepareCopy" + card.getId(), null);
+                        game.getState().setValue("PreparePermanent" + card.getId(), null);
+                    });
         }
     }
 

@@ -2384,9 +2384,16 @@ public class HumanPlayer extends PlayerImpl {
 
         // force to show ability picker for double faces cards in hand/commander/exile and other zones
         Card mainCard = game.getCard(CardUtil.getMainCardId(game, ability.getSourceId()));
+        if (mainCard instanceof PrepareCard
+                && (((PrepareCard) mainCard).getSpellCard().getId().equals(ability.getSourceId())
+                || game.getState().getValue("PreparePermanent" + mainCard.getId()) != null)) {
+            // The linked copy has only its prepare spell available, so there is
+            // no spell face or ability for the player to choose between.
+            return true;
+        }
         if (mainCard != null && !Zone.BATTLEFIELD.equals(game.getState().getZone(mainCard.getId()))) {
             if (mainCard instanceof SplitCard
-                    || mainCard instanceof CardWithSpellOption
+                    || (mainCard instanceof CardWithSpellOption && !(mainCard instanceof PrepareCard))
                     || mainCard instanceof ModalDoubleFacedCard) {
                 return false;
             }
