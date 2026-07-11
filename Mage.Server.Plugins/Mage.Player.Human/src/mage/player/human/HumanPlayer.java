@@ -721,13 +721,12 @@ public class HumanPlayer extends PlayerImpl {
             }
 
             // MAKE A CHOICE
-            UUID autoChosenId = target.tryToAutoChoose(abilityControllerId, source, game);
-            if (autoChosenId != null && !target.contains(autoChosenId)) {
-                // auto-choose
-                target.add(autoChosenId, game);
-                // continue to next target (example: auto-choose must fill min/max = 2 from 2 possible cards)
-            } else {
-                // manual choose
+
+            // auto-choice
+            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game);
+
+            // manual choice
+            if (responseId == null) {
                 options.put("chosenTargets", new HashSet<>(target.getTargets()));
 
                 prepareForResponse(game);
@@ -735,36 +734,37 @@ public class HumanPlayer extends PlayerImpl {
                     game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(game), getRelatedObjectName(source, game)), possibleTargets, required, getOptions(target, options));
                 }
                 waitForResponse(game);
-                UUID responseId = getFixedResponseUUID(game);
+                responseId = getFixedResponseUUID(game);
+            }
 
-                if (responseId != null) {
-                    // selected something
+            if (responseId != null) {
+                // selected something
 
-                    // remove selected
-                    if (target.contains(responseId)) {
-                        target.remove(responseId);
-                        continue;
-                    }
+                // remove old target
+                if (target.contains(responseId)) {
+                    target.remove(responseId);
+                    continue;
+                }
 
-                    if (possibleTargets.contains(responseId)) {
-                        target.add(responseId, game);
-                        if (target.isChoiceCompleted(abilityControllerId, source, game, null)) {
-                            break;
-                        }
-                    }
-                } else {
-                    // stop on done/cancel button press
-                    if (target.isChosen(game)) {
-                        break;
-                    } else {
-                        if (!required) {
-                            // can stop at any moment
-                            break;
-                        }
+                // add new target
+                if (possibleTargets.contains(responseId)) {
+                    target.add(responseId, game);
+                    if (target.isChoiceCompleted(abilityControllerId, source, game, null)) {
+                        return true;
                     }
                 }
-                // continue to next target
+            } else {
+                // done or cancel button pressed
+                if (target.isChosen(game)) {
+                    break;
+                } else {
+                    if (!required) {
+                        // can stop at any moment
+                        break;
+                    }
+                }
             }
+            // continue to next target
         }
 
         return target.isChosen(game) && target.getTargets().size() > 0;
@@ -980,8 +980,10 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
+            // auto-choice
             UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game, possibleTargets);
 
+            // manual choice
             if (responseId == null) {
                 Map<String, Serializable> options = getOptions(target, null);
                 options.put("chosenTargets", new HashSet<>(target.getTargets()));
@@ -1000,22 +1002,33 @@ public class HumanPlayer extends PlayerImpl {
             }
 
             if (responseId != null) {
-                if (target.contains(responseId)) { // if already included remove it
+                // remove old target
+                if (target.contains(responseId)) {
                     target.remove(responseId);
-                } else if (possibleTargets.contains(responseId)) {
+                    continue;
+                }
+
+                // add new target
+                if (possibleTargets.contains(responseId)) {
                     target.addTarget(responseId, source, game);
                     if (target.isChoiceCompleted(abilityControllerId, source, game, cards)) {
                         return true;
                     }
                 }
             } else {
-                if (target.getTargets().size() >= target.getMinNumberOfTargets()) {
+                // done or cancel button pressed
+                if (target.isChosen(game)) {
+                    // try to finish
                     break;
-                }
-                if (!required) {
-                    break;
+                } else {
+                    if (!required) {
+                        // can stop at any moment
+                        break;
+                    }
                 }
             }
+
+            // continue to next target
         }
 
         return target.isChosen(game) && target.getTargets().size() > 0;
@@ -1097,16 +1110,33 @@ public class HumanPlayer extends PlayerImpl {
             }
 
             if (responseId != null) {
+                // selected something
+
+                // remove old target
                 if (target.contains(responseId)) {
-                    // unselect
                     target.remove(responseId);
-                } else if (possibleTargets.contains(responseId) && target.getSize() < amountTotal) {
-                    // select
-                    target.addTarget(responseId, source, game);
+                    continue;
                 }
-            } else if (!required) {
-                break;
+
+                // add new target
+                if (possibleTargets.contains(responseId) && target.getSize() < amountTotal) {
+                    target.addTarget(responseId, source, game);
+                    if (target.isChoiceCompleted(abilityControllerId, source, game, null)) {
+                        break;
+                    }
+                }
+            } else {
+                // done or cancel button pressed
+                if (target.isChosen(game)) {
+                    break;
+                } else {
+                    if (!required) {
+                        // can stop at any moment
+                        break;
+                    }
+                }
             }
+            // continue to next target
         }
 
         // no targets to choose or disconnected
