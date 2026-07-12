@@ -26,7 +26,7 @@ public final class CruelAlliance extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 3 or less");
 
     static {
-        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new PowerPredicate(ComparisonType.OR_LESS, 3));
     }
 
     public CruelAlliance(UUID ownerId, CardSetInfo setInfo) {
