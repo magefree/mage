@@ -46,6 +46,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Armed Assailant", 647, Rarity.COMMON, mage.cards.a.ArmedAssailant.class));
         cards.add(new SetCardInfo("Astonishing Spider-Man", 740, Rarity.RARE, mage.cards.a.AstonishingSpiderMan.class));
         cards.add(new SetCardInfo("Atlantean Skirmisher", 616, Rarity.UNCOMMON, mage.cards.a.AtlanteanSkirmisher.class));
+        cards.add(new SetCardInfo("Atlas, Sizable Stooge", 566, Rarity.UNCOMMON, mage.cards.a.AtlasSizableStooge.class));
         cards.add(new SetCardInfo("Aunt May", 768, Rarity.UNCOMMON, mage.cards.a.AuntMay.class));
         cards.add(new SetCardInfo("Austere Command", 121, Rarity.RARE, mage.cards.a.AustereCommand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Austere Command", 294, Rarity.RARE, mage.cards.a.AustereCommand.class, NON_FULL_USE_VARIOUS));
