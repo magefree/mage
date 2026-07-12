@@ -67,6 +67,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Black Tom Cassidy", 715, Rarity.COMMON, mage.cards.b.BlackTomCassidy.class));
         cards.add(new SetCardInfo("Black Widow, Agile Avenger", 395, Rarity.RARE, mage.cards.b.BlackWidowAgileAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Black Widow, Agile Avenger", 77, Rarity.RARE, mage.cards.b.BlackWidowAgileAvenger.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Widow, Daring Operative", 831, Rarity.MYTHIC, mage.cards.b.BlackWidowDaringOperative.class));
         cards.add(new SetCardInfo("Black Widow, Deadly Hunter", 648, Rarity.RARE, mage.cards.b.BlackWidowDeadlyHunter.class));
         cards.add(new SetCardInfo("Black Widow, Intel Expert", 504, Rarity.RARE, mage.cards.b.BlackWidowIntelExpert.class));
         cards.add(new SetCardInfo("Black Widow, Natasha Romanoff", 846, Rarity.COMMON, mage.cards.b.BlackWidowNatashaRomanoff.class));
