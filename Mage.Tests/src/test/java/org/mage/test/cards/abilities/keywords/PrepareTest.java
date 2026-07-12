@@ -2,6 +2,7 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
@@ -249,6 +250,216 @@ public class PrepareTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, "Treasure Token", 1);
         assertExileCount(playerA, 0);
+    }
+
+    @Test
+    public void prepareSpellIsIndependentOfPermanentOnceCast() {
+        addCard(Zone.HAND, playerA, CREATURE);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.HAND, playerB, "Murder");
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, CREATURE);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, PREPARE_SPELL);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Murder", CREATURE);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, CREATURE, 0);
+        assertPermanentCount(playerA, "Treasure Token", 1);
+    }
+
+    @Test
+    public void preparedCopyDoesNotTriggerEffectsThatRequireCastingACard() {
+        addCard(Zone.HAND, playerA, CREATURE);
+        addCard(Zone.BATTLEFIELD, playerA, "Eye of the Storm");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, CREATURE);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, PREPARE_SPELL);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Treasure Token", 1);
+        assertExileCount(playerA, 0);
+    }
+
+    @Test
+    public void preparedCopyCountsAsCastFromExile() {
+        addCard(Zone.HAND, playerA, CREATURE);
+        addCard(Zone.BATTLEFIELD, playerA, "The Thirteenth Doctor");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, CREATURE);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, PREPARE_SPELL);
+        addTarget(playerA, "The Thirteenth Doctor");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertCounterCount("The Thirteenth Doctor", CounterType.P1P1, 1);
+    }
+
+    @Test
+    public void alreadyPreparedPermanentCanStillPayPrepareAbilityCost() {
+        addCard(Zone.HAND, playerA, "Lluwen, Exchange Student");
+        addCard(Zone.GRAVEYARD, playerA, "Grizzly Bears", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Bayou", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lluwen, Exchange Student");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA,
+                "Exile a creature card from your graveyard");
+        setChoice(playerA, "Grizzly Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA,
+                "Exile a creature card from your graveyard");
+        setChoice(playerA, "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Grizzly Bears", 0);
+        assertExileCount(playerA, "Grizzly Bears", 2);
+        assertExileCount(playerA, "Lluwen, Exchange Student", 1);
+    }
+
+    @Test
+    public void losingAbilitiesDoesNotRemovePreparedOrItsExiledCopy() {
+        addCard(Zone.HAND, playerA, CREATURE);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Skycoach Waypoint");
+        addCard(Zone.HAND, playerB, "Darksteel Mutation");
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, CREATURE);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Darksteel Mutation", CREATURE);
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("ability loss leaves prepared copy castable", 3, PhaseStep.PRECOMBAT_MAIN,
+                playerA, "Cast " + PREPARE_SPELL, true);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, PREPARE_SPELL);
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA,
+                "{3}, {T}: Target creature becomes prepared", CREATURE);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Treasure Token", 1);
+        assertExileCount(playerA, CREATURE, 1);
+        Permanent permanent = getPermanent(CREATURE, playerA);
+        Assert.assertNotNull(permanent);
+        Assert.assertTrue(permanent.isPrepared());
+    }
+
+    @Test
+    public void creatingPreparedCopyDoesNotTriggerMagecraftOrTwinningStaff() {
+        addCard(Zone.HAND, playerA, CREATURE);
+        addCard(Zone.BATTLEFIELD, playerA, "Storm-Kiln Artist");
+        addCard(Zone.BATTLEFIELD, playerA, "Twinning Staff");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, CREATURE);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("creating exile copy did not trigger magecraft", 1, PhaseStep.PRECOMBAT_MAIN,
+                playerA, "Treasure Token", 0);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, PREPARE_SPELL);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        // One from Craft with Pride and one from casting it with Storm-Kiln Artist.
+        // Twinning Staff did not create an additional prepared copy or spell copy.
+        assertPermanentCount(playerA, "Treasure Token", 2);
+        assertExileCount(playerA, 0);
+    }
+
+    @Test
+    public void gainingPrepareCharacteristicsLaterDoesNotRetroactivelyPrepareCreature() {
+        addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerA, "Emeritus of Woe");
+        addCard(Zone.BATTLEFIELD, playerA, "Skycoach Waypoint");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
+        addCard(Zone.HAND, playerA, "Nanogene Conversion");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA,
+                "{3}, {T}: Target creature becomes prepared", "Llanowar Elves");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nanogene Conversion", "Emeritus of Woe");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Emeritus of Woe", 2);
+        // Only the original Emeritus supplied a prepared copy. The Llanowar
+        // Elves did not become prepared retroactively after copying it.
+        assertExileCount(playerA, "Emeritus of Woe", 1);
+    }
+
+    @Test
+    public void changingPreparedPermanentCopyDoesNotChangePreparedSpellCopy() {
+        addCard(Zone.HAND, playerA, CREATURE);
+        addCard(Zone.HAND, playerA, "Mirrorform");
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 8);
+        addCard(Zone.BATTLEFIELD, playerB, "Emeritus of Woe");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, CREATURE);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mirrorform", "Emeritus of Woe");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertExileCount(playerA, CREATURE, 1);
+        assertExileCount(playerA, "Emeritus of Woe", 0);
+    }
+
+    @Test
+    public void phasingPreparedCopyRecreatesSpellFromCurrentCharacteristics() {
+        addCard(Zone.HAND, playerA, CREATURE);
+        addCard(Zone.HAND, playerA, "Infinite Reflection");
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 8);
+        addCard(Zone.BATTLEFIELD, playerB, "Dirgur Focusmage");
+        addCard(Zone.BATTLEFIELD, playerB, "Teferi, Master of Time");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, CREATURE);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA,
+                "Infinite Reflection", "Dirgur Focusmage");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkExileCount("copying does not replace the associated spell", 1,
+                PhaseStep.PRECOMBAT_MAIN, playerA, CREATURE, 1);
+        checkExileCount("copying does not create the new associated spell", 1,
+                PhaseStep.PRECOMBAT_MAIN, playerA, "Dirgur Focusmage", 0);
+
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB,
+                "-3: Target creature you don't control phases out.", "Dirgur Focusmage");
+        checkExileCount("phasing out removes the original associated spell", 2,
+                PhaseStep.POSTCOMBAT_MAIN, playerA, CREATURE, 0);
+        checkExileCount("phasing out does not create the copied associated spell", 2,
+                PhaseStep.POSTCOMBAT_MAIN, playerA, "Dirgur Focusmage", 0);
+        checkExileCount("phasing in uses the copied Preparation characteristics", 3,
+                PhaseStep.PRECOMBAT_MAIN, playerA, "Dirgur Focusmage", 1);
+        checkExileCount("the original associated spell is not recreated", 3,
+                PhaseStep.PRECOMBAT_MAIN, playerA, CREATURE, 0);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
     }
 
     @Test
