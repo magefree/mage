@@ -1604,6 +1604,15 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @return
      */
     public Card copyCard(Card mainCardToCopy, UUID newController, Game game) {
+        return copyCard(mainCardToCopy, newController, game, null);
+    }
+
+    /**
+     * Copies a card into an explicitly supplied zone. This is used when an
+     * effect copies the characteristics of a battlefield object into another
+     * zone, rather than creating a copy in the source object's current zone.
+     */
+    public Card copyCard(Card mainCardToCopy, UUID newController, Game game, Zone destinationZone) {
         // runtime check
         if (!mainCardToCopy.getId().equals(mainCardToCopy.getMainCard().getId())) {
             // copyCard allows for main card only, if you catch it then check your targeting code
@@ -1661,10 +1670,11 @@ public class GameState implements Serializable, Copyable<GameState> {
         prepareCardForCopy(mainCardToCopy, copiedCard, newController);
 
         // 707.12. An effect that instructs a player to cast a copy of an object (and not just copy a spell) follows the rules for casting spells, except that the copy is created in the same zone the object is in and then cast while another spell or ability is resolving.
-        Zone copyToZone = game.getState().getZone(mainCardToCopy.getId());
-        if (copyToZone == Zone.BATTLEFIELD) {
+        Zone sourceZone = game.getState().getZone(mainCardToCopy.getId());
+        if (sourceZone == Zone.BATTLEFIELD && destinationZone == null) {
             throw new UnsupportedOperationException("Cards cannot be copied while on the Battlefield");
         }
+        Zone copyToZone = destinationZone == null ? sourceZone : destinationZone;
 
         // add all parts to the game
         copiedParts.forEach(card -> {

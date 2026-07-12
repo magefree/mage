@@ -24,6 +24,13 @@ public class PrepareTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Craft with Pride");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        runCode("prepare spell consumed prepared designation", 1, PhaseStep.PRECOMBAT_MAIN,
+                playerA, (info, player, game) -> {
+                    Permanent permanent = game.getPermanent(getPermanent(CREATURE, playerA).getId());
+                    Assert.assertNotNull(permanent);
+                    Assert.assertFalse(permanent.isPrepared());
+                    Assert.assertEquals(0, game.getExile().getAllCards(game).size());
+                });
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, TOMEKEEPER);
         setModeChoice(playerA, "1"); // Target creature becomes prepared.
         addTarget(playerA, CREATURE);
@@ -36,6 +43,7 @@ public class PrepareTest extends CardTestPlayerBase {
         execute();
 
         assertExileCount(playerA, 1);
+        assertPermanentCount(playerA, "Treasure Token", 1);
         Permanent permanent = getPermanent(CREATURE, playerA);
         Assert.assertNotNull(permanent);
         Assert.assertTrue(permanent.isPrepared());
@@ -73,6 +81,59 @@ public class PrepareTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Goblin Glasswright", 1);
         assertPermanentCount(playerA, "Treasure Token", 1);
         assertExileCount(playerA, 0);
+    }
+
+    @Test
+    public void sorceryPrepareSpellCannotBeCastAtInstantSpeed() {
+        addCard(Zone.HAND, playerA, CREATURE);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, CREATURE);
+        checkPlayableAbility("sorcery prepare spell is not castable on an opponent's turn", 2,
+                PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + PREPARE_SPELL, false);
+        checkPlayableAbility("sorcery prepare spell remains castable during its controller's main phase", 3,
+                PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + PREPARE_SPELL, true);
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+    }
+
+    @Test
+    public void costIncreaseAppliesToPrepareSpell() {
+        addCard(Zone.HAND, playerA, CREATURE);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Thalia, Guardian of Thraben");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, CREATURE);
+        checkPlayableAbility("Thalia increases the noncreature prepare spell by one", 3,
+                PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + PREPARE_SPELL, true);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, PREPARE_SPELL);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Treasure Token", 1);
+        assertTappedCount("Mountain", true, 2);
+    }
+
+    @Test
+    public void costReductionAppliesToPrepareSpell() {
+        addCard(Zone.HAND, playerA, "Quill-Blade Laureate");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCustomEffect_SpellCostModification(playerA, -1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Quill-Blade Laureate");
+        checkPlayableAbility("reducer removes the generic mana from the prepare spell", 3,
+                PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Twofold Intent", true);
+        addTarget(playerA, "Quill-Blade Laureate");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Twofold Intent");
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertTappedCount("Plains", true, 1);
     }
 
     @Test

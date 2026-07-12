@@ -1956,7 +1956,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (this.prepared) {
             addInfo(preparedInfoKey, CardUtil.addToolTipMarkTags("Prepared"), game);
             PrepareCard sourceCard = (PrepareCard) getMainCard();
-            Card copy = game.copyCard(sourceCard, null, getControllerId());
+            // The permanent's backing card is tracked on the battlefield, so
+            // create the copy outside the game before putting it into exile.
+            Card copy = game.getState().copyCard(sourceCard, getControllerId(), game, Zone.OUTSIDE);
             ((PrepareCard) copy).setPrepareSpellCopy(true);
             Card registeredCopy = game.getCard(copy.getId());
             if (registeredCopy instanceof PrepareCard) {

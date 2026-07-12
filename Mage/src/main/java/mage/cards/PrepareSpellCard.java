@@ -1,9 +1,11 @@
 package mage.cards;
 
 import mage.abilities.SpellAbility;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
+import mage.constants.TimingRule;
 import mage.abilities.Ability;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -27,9 +29,13 @@ public class PrepareSpellCard extends CardImpl implements SpellOptionCard {
     public PrepareSpellCard(UUID ownerId, CardSetInfo setInfo, String preparationName, CardType[] cardTypes, String costs, PrepareCard prepareCardParent) {
         super(ownerId, setInfo, cardTypes, costs, SpellAbilityType.BASE_ALTERNATE);
 
-        SpellAbility newSpellAbility = new SpellAbility(
-                new ManaCostsImpl<>(costs), preparationName, Zone.HAND, SpellAbilityType.BASE_ALTERNATE
+        SpellAbility newSpellAbility = new PrepareCardSpellAbility(
+                new ManaCostsImpl<>(costs), preparationName, Zone.HAND,
+                SpellAbilityType.BASE_ALTERNATE, prepareCardParent.getId()
         );
+        if (this.isSorcery()) {
+            newSpellAbility.setTiming(TimingRule.SORCERY);
+        }
         // CardImpl created a default spell using the preparation card's main name.
         // replaceSpellAbility does not find BASE_ALTERNATE abilities, so using it here
         // left that default "Cast <permanent>" spell alongside the prepare spell.
@@ -110,5 +116,34 @@ public class PrepareSpellCard extends CardImpl implements SpellOptionCard {
     @Override
     public String getSpellType() {
         return "Prepare";
+    }
+}
+
+class PrepareCardSpellAbility extends SpellAbility {
+
+    private final UUID parentCardId;
+
+    PrepareCardSpellAbility(ManaCostsImpl<ManaCost> costs, String name, Zone zone,
+                            SpellAbilityType spellAbilityType, UUID parentCardId) {
+        super(costs, name, zone, spellAbilityType);
+        this.parentCardId = parentCardId;
+    }
+
+    private PrepareCardSpellAbility(final PrepareCardSpellAbility ability) {
+        super(ability);
+        this.parentCardId = ability.parentCardId;
+    }
+
+    @Override
+    public PrepareCardSpellAbility copy() {
+        return new PrepareCardSpellAbility(this);
+    }
+
+    @Override
+    public Card getCharacteristics(Game game) {
+        Card parent = game.getCard(parentCardId);
+        return parent instanceof PrepareCard
+                ? ((PrepareCard) parent).getSpellCard().copy()
+                : null;
     }
 }
