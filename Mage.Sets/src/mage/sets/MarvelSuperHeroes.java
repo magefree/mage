@@ -352,6 +352,9 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Trickster's Stratagem", 81, Rarity.COMMON, mage.cards.t.TrickstersStratagem.class));
         cards.add(new SetCardInfo("Truck Toss", 157, Rarity.UNCOMMON, mage.cards.t.TruckToss.class));
         cards.add(new SetCardInfo("U.S.Agent, John Walker", 236, Rarity.UNCOMMON, mage.cards.u.USAgentJohnWalker.class));
+        cards.add(new SetCardInfo("Ultron, Artificial Malevolence", 252, Rarity.MYTHIC, mage.cards.u.UltronArtificialMalevolence.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ultron, Artificial Malevolence", 344, Rarity.MYTHIC, mage.cards.u.UltronArtificialMalevolence.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ultron, Artificial Malevolence", 401, Rarity.MYTHIC, mage.cards.u.UltronArtificialMalevolence.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultron Drone", 253, Rarity.COMMON, mage.cards.u.UltronDrone.class));
         cards.add(new SetCardInfo("Undercover Skrull", 194, Rarity.COMMON, mage.cards.u.UndercoverSkrull.class));
         cards.add(new SetCardInfo("Unliving Legionnaire", 119, Rarity.COMMON, mage.cards.u.UnlivingLegionnaire.class));
