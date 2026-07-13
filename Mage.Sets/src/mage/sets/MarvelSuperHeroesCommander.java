@@ -313,6 +313,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Jack of Hearts, Volatile Hero", 693, Rarity.RARE, mage.cards.j.JackOfHeartsVolatileHero.class));
         cards.add(new SetCardInfo("Jarvis, Earth's Mightiest Butler", 333, Rarity.RARE, mage.cards.j.JarvisEarthsMightiestButler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jarvis, Earth's Mightiest Butler", 34, Rarity.RARE, mage.cards.j.JarvisEarthsMightiestButler.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kang Prime", 406, Rarity.RARE, mage.cards.k.KangPrime.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kang Prime", 85, Rarity.RARE, mage.cards.k.KangPrime.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kindred Discovery", 150, Rarity.RARE, mage.cards.k.KindredDiscovery.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kindred Discovery", 334, Rarity.RARE, mage.cards.k.KindredDiscovery.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kindred Dominance", 156, Rarity.RARE, mage.cards.k.KindredDominance.class, NON_FULL_USE_VARIOUS));
