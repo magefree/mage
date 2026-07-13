@@ -159,7 +159,7 @@ class WarpExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent == null) {
+        if (permanent == null || !permanent.isPhasedIn()) {
             return false;
         }
         Player player = game.getPlayer(permanent.getOwnerId());
