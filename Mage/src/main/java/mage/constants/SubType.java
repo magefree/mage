@@ -325,6 +325,7 @@ public enum SubType {
     NYMPH("Nymph", SubTypeSet.CreatureType),
     // O
     OCTOPUS("Octopus", SubTypeSet.CreatureType),
+    OFFICER("Officer", SubTypeSet.CreatureType),
     OGRE("Ogre", SubTypeSet.CreatureType),
     OOZE("Ooze", SubTypeSet.CreatureType),
     ORB("Orb", SubTypeSet.CreatureType),
