@@ -281,6 +281,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Stark Industries Executive", 153, Rarity.COMMON, mage.cards.s.StarkIndustriesExecutive.class));
         cards.add(new SetCardInfo("Stolen Stark Tech", 114, Rarity.COMMON, mage.cards.s.StolenStarkTech.class));
         cards.add(new SetCardInfo("Subterranean Cavern", 273, Rarity.COMMON, mage.cards.s.SubterraneanCavern.class));
+        cards.add(new SetCardInfo("Super Intelligence", 77, Rarity.UNCOMMON, mage.cards.s.SuperIntelligence.class));
         cards.add(new SetCardInfo("Super Speed", 154, Rarity.COMMON, mage.cards.s.SuperSpeed.class));
         cards.add(new SetCardInfo("Super Strength", 189, Rarity.COMMON, mage.cards.s.SuperStrength.class));
         cards.add(new SetCardInfo("Super Suit", 78, Rarity.COMMON, mage.cards.s.SuperSuit.class));
