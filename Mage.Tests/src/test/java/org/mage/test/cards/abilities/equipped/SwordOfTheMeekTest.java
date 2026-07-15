@@ -57,4 +57,28 @@ public class SwordOfTheMeekTest extends CardTestPlayerBase {
         Assert.assertTrue("Myr may not have any attachments", myr.getAttachments().isEmpty());
     }
 
+    @Test
+    public void testThopterFoundryWithEleshNorn() {
+        addCard(Zone.BATTLEFIELD, playerB, "Elesh Norn, Mother of Machines");
+        addCard(Zone.BATTLEFIELD, playerA, "Thopter Foundry");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Chromatic Star");
+        addCard(Zone.GRAVEYARD, playerA, "Sword of the Meek");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}");
+        setChoice(playerA, "Chromatic Star");
+        setChoice(playerA, true);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
+        execute();
+
+        assertPermanentCount(playerA, "Thopter Token", 1);
+        assertPermanentCount(playerA, "Sword of the Meek", 1);
+
+        Permanent thopter = getPermanent("Thopter Token", playerA.getId());
+        Assert.assertNotNull("Thopter token must exist", thopter);
+        Assert.assertEquals("Sword must be attached to the created Thopter", 1, thopter.getAttachments().size());
+    }
+
 }

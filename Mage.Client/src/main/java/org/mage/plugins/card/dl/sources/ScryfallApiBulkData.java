@@ -15,5 +15,5 @@ public class ScryfallApiBulkData {
     public String type;
     public Date updated_at;
     public long size;
-    public String download_uri;
+    public String jsonl_download_uri;
 }

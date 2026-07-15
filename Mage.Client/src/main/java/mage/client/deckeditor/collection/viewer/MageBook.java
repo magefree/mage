@@ -554,6 +554,9 @@ public class MageBook extends JComponent {
 
     public void next() {
         synchronized (this) {
+            if (tabs.isEmpty()) {
+                return;
+            }
             selectedTab++;
             if (selectedTab >= tabs.size()) {
                 selectedTab = 0;

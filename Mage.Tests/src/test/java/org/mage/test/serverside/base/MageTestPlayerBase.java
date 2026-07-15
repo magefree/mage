@@ -380,6 +380,26 @@ public abstract class MageTestPlayerBase {
     }
 
     /**
+     * Add target exile ability that can be called by text "target exile"
+     */
+    protected void addCustomEffect_TargetExile(TestPlayer controller) {
+        addCustomEffect_TargetExile(controller, 1);
+    }
+
+    /**
+     * Add target exile ability that can be called by text "target exile"
+     */
+    protected void addCustomEffect_TargetExile(TestPlayer controller, int numberOfTargets) {
+        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect().setText("target exile"), new ManaCostsImpl<>(""));
+        ability.addTarget(new TargetPermanent(numberOfTargets, StaticFilters.FILTER_PERMANENT));
+        addCustomCardWithAbility(
+                "target exile for " + controller.getName(),
+                controller,
+                ability
+        );
+    }
+
+    /**
      * Add target transform ability that can be called by text "target transform"
      */
     protected void addCustomEffect_TargetTransform(TestPlayer controller) {

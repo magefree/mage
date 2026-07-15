@@ -29,10 +29,10 @@ public final class ThranTurbine extends CardImpl {
     public ThranTurbine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
-        // At the beginning of your upkeep, you may add {C} or {C}{C}. 
-        // You can't spend this mana to cast spells.
+        // At the beginning of your upkeep, you may add {C}{C}. This mana can’t be spent to cast spells.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ThranTurbineEffect(), true));
+            new ThranTurbineEffect(), true
+        ));
     }
 
     private ThranTurbine(final ThranTurbine card) {
@@ -49,7 +49,7 @@ class ThranTurbineEffect extends OneShotEffect {
 
     ThranTurbineEffect() {
         super(Outcome.Benefit);
-        staticText = "add {C}{C}. You can't spend this mana to cast spells";
+        staticText = "add {C}{C}. This mana can't be spent to cast spells";
     }
 
     private ThranTurbineEffect(final ThranTurbineEffect effect) {
@@ -82,7 +82,7 @@ class ThranTurbineManaBuilder extends ConditionalManaBuilder {
 
     @Override
     public String getRule() {
-        return "You can't spend this mana to cast spells";
+        return "This mana can't be spent to cast spells";
     }
 }
 
@@ -90,7 +90,7 @@ class ThranTurbineConditionalMana extends ConditionalMana {
 
     public ThranTurbineConditionalMana(Mana mana) {
         super(mana);
-        staticText = "You can't spend this mana to cast spells";
+        staticText = "This mana can't be spent to cast spells";
         addCondition(new ThranTurbineManaCondition());
     }
 }

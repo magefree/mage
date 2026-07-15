@@ -52,6 +52,7 @@ public class Pauper extends Constructed {
         banned.add("Monastery Swiftspear");
         banned.add("Mystic Sanctuary");
         banned.add("Peregrine Drake");
+        banned.add("Seeker of Skybreak");
         banned.add("Sinkhole");
         banned.add("Stirring Bard");
         banned.add("Sojourner's Companion");

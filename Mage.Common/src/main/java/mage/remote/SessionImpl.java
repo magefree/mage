@@ -283,7 +283,7 @@ public class SessionImpl implements Session {
                     }
 
                     if (!connection.getUsername().equals(ADMIN_NAME)) {
-                        server.connectSetUserData(connection.getUsername(), sessionId, connection.getUserData(), client.getVersion().toString(), connection.getUserIdStr());
+                        server.connectSetUserData(sessionId, connection.getUserData(), client.getVersion().toString(), connection.getUserIdStr());
                     }
 
                     logger.info("Logging: DONE");
@@ -1719,7 +1719,7 @@ public class SessionImpl implements Session {
     public boolean updatePreferencesForServer(UserData userData) {
         try {
             if (isConnected()) {
-                server.connectSetUserData(connection.getUsername(), sessionId, userData, null, null);
+                server.connectSetUserData(sessionId, userData, null, null);
             }
             return true;
         } catch (MageException ex) {
