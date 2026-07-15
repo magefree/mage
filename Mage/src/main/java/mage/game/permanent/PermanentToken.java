@@ -1,5 +1,7 @@
 package mage.game.permanent;
 
+import java.util.UUID;
+
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -12,8 +14,6 @@ import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.Token;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -68,7 +68,17 @@ public class PermanentToken extends PermanentImpl {
     @Override
     public int getManaValue() {
         if (this.isTransformed()) {
-            return token.getManaValue();
+            // transformable permanents contains characteristics in token/token.getBackFace()
+
+            // 712.8e
+            // While a nonmodal double-faced permanent has its back face up, it has only the characteristics of its back face. 
+            // However, its mana value is calculated using the mana cost of its front face. 
+            // If a permanent is copying the back face of a nonmodal double-faced permanent (even if the object representing 
+            // that copy is itself a double-faced permanent), the mana value of that permanent is 0. See rule 202.3b.
+            return token.getBackFace().getManaValue();
+        }
+        if (faceDown) {
+            return 0;
         }
         return super.getManaValue();
     }
@@ -118,9 +128,7 @@ public class PermanentToken extends PermanentImpl {
         this.power = new MageInt(token.getPower().getModifiedBaseValue());
         this.toughness = new MageInt(token.getToughness().getModifiedBaseValue());
         CardUtil.copySetAndCardNumber(this, token);
-        if (token.getCopySourceCard() instanceof RoomCard) {
-            RoomCard.setRoomCharacteristics(this, game);
-        }
+        // no needs to add rooms characteristics here, because they already applied to source token
     }
 
     @Override
@@ -147,14 +155,8 @@ public class PermanentToken extends PermanentImpl {
 
     @Override
     public Card getMainCard() {
-        // Check if we have a copy source card (for tokens created from copied spells)
-        Card copySourceCard = token.getCopySourceCard();
-        if (copySourceCard != null) {
-            return copySourceCard;
-        }
-
-        // Fallback to current behavior
-        return this;
+        // if you need original card of token then use getCopySourceCard() instead of getMainCard()
+        return super.getMainCard();
     }
 
     @Override
@@ -180,4 +182,13 @@ public class PermanentToken extends PermanentImpl {
         }
     }
 
+    @Override
+    public boolean isCopy() {
+        return token.isCopy();
+    }
+
+    @Override
+    public MageObject getCopyFrom() {
+        return token.getCopyFrom();
+    }
 }

@@ -21,6 +21,7 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -131,7 +132,7 @@ class AltairIbnLaAhadTokenEffect extends OneShotEffect {
                     source.getControllerId(), null,
                     false, 1, true, true
             );
-            effect.setSavedPermanent(new PermanentCard(card, source.getControllerId(), game));
+            effect.setSavedPermanent(new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, card), source.getControllerId(), game));
             effect.apply(game, source);
             permanents.addAll(effect.getAddedPermanents());
         }

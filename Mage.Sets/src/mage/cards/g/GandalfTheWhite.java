@@ -105,7 +105,9 @@ class GandalfTheWhiteDoublingEffect extends ReplacementEffectImpl {
                     && sourceEvent instanceof ZoneChangeEvent) {
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) sourceEvent;
                 // Only for leaving artifacts or legendaries
-                if ((zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() != Zone.BATTLEFIELD)
+                if ((zEvent.getFromZone() == Zone.BATTLEFIELD 
+                        && zEvent.getToZone() != Zone.BATTLEFIELD)
+                        && zEvent.isPermanentMoved()
                         && (zEvent.getTarget().isLegendary(game) || zEvent.getTarget().isArtifact(game))) {
                     // Only for triggers of permanents
                     return game.getPermanentOrLKIBattlefield(numberOfTriggersEvent.getSourceId()) != null;

@@ -133,7 +133,7 @@ class AcidicDaggerSacrificeSourceAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getTarget() != null && zEvent.getTargetId().equals(getTargets().getFirstTarget())) {
+        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.isPermanentMoved() && zEvent.getTargetId().equals(getTargets().getFirstTarget())) {
             this.getTargets().clear(); // else ability fizzles because target creature died
             return true;
         }

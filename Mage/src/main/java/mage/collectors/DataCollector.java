@@ -12,6 +12,7 @@ import java.util.UUID;
  * Supported features:
  * - [x] collect and print game logs in server output, including unit tests
  * - [x] collect and save full games history and decks
+ * - [x] TODO: collect and save errors with game state, history and shared link
  * - [ ] TODO: collect and print performance metrics like ApplyEffects calc time or inform players time (pings)
  * - [ ] TODO: collect and send metrics to third party tools like prometheus + grafana
  * - [x] tests: print used selections (choices, targets, modes, skips) TODO: add yes/no, replacement effect, coins, other choices
@@ -52,6 +53,8 @@ public interface DataCollector {
     void onGameStart(Game game);
 
     void onGameLog(Game game, String message);
+
+    void onGameError(Game game, Exception e);
 
     void onGameEnd(Game game);
 

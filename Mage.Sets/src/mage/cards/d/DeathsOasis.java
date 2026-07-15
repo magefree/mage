@@ -81,7 +81,7 @@ class DeathsOasisTriggeredAbility extends DiesCreatureTriggeredAbility {
             return false;
         }
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getTarget() == null) {
+        if (!zEvent.isPermanentMoved()) {
             return false;
         }
         this.getEffects().clear();

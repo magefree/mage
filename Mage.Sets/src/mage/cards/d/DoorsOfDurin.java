@@ -31,7 +31,7 @@ public final class DoorsOfDurin extends CardImpl {
 
         this.supertype.add(SuperType.LEGENDARY);
 
-        // Whenever you attack, scry 2, then you may reveal the top card of your library. If it's a creature card, put it onto the battlefield tapped and attacking. Until your next turn, it gains trample if you control a Dwarf and hexproof if you control an Elf.
+        // Whenever you attack, scry 2, then you may reveal the top card of your library. If a creature card is revealed this way, put it onto the battlefield tapped and attacking. Until your next turn, it gains trample if you control a Dwarf and hexproof if you control an Elf.
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(new DoorsOfDurinEffect(), 1));
     }
 
@@ -52,7 +52,7 @@ class DoorsOfDurinEffect extends OneShotEffect {
 
     DoorsOfDurinEffect() {
         super(Outcome.Benefit);
-        staticText = "scry 2, then you may reveal the top card of your library. If it's a creature card, " +
+        staticText = "scry 2, then you may reveal the top card of your library. If a creature card is revealed this way, " +
                 "put it onto the battlefield tapped and attacking. Until your next turn, " +
                 "it gains trample if you control a Dwarf and hexproof if you control an Elf";
     }

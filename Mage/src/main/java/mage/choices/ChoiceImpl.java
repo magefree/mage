@@ -16,7 +16,7 @@ import java.util.*;
  */
 public class ChoiceImpl implements Choice {
 
-    private static final Logger logger = Logger.getLogger(Choice.class);
+    private static final Logger logger = Logger.getLogger(ChoiceImpl.class);
 
     protected boolean chosenNormal;
     protected boolean chosenSpecial;

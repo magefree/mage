@@ -93,7 +93,8 @@ class BarrinTolarianArchmageWatcher extends Watcher {
         }
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getFromZone() == Zone.BATTLEFIELD
-                && zEvent.getToZone() == Zone.HAND) {
+                && zEvent.getToZone() == Zone.HAND
+                && zEvent.isPermanentMoved()) {
             playerSet.add(zEvent.getTarget().getOwnerId());
         }
     }

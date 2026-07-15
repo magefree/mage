@@ -28,6 +28,7 @@ public class CardNameUtil {
                 .replace("ú", "u")
                 .replace("†", "+")
                 .replace("★", "*")
+                .replace("Φ", "Ph")
                 .replace("ó", "o")
                 .replace("ō", "o")
                 .replace("ä", "a")

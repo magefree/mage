@@ -67,17 +67,28 @@ public class DontCauseTriggerEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        GameEvent sourceEvent = ((NumberOfTriggersEvent) event).getSourceEvent();
         if (filterTriggering != null) {
             Ability ability = (Ability) getValue("targetAbility");
             if (ability == null) {
                 return false;
             }
-            Permanent triggeringPermanent = ability.getSourcePermanentOrLKI(game);
+            Permanent triggeringPermanent = game.getPermanent(ability.getSourceId());
+            // https://github.com/magefree/mage/issues/15220
+            // Only treat off-battlefield abilities as abilities of a permanent when
+            // the trigger comes from that object entering or dying. Graveyard
+            // abilities like Sword of the Meek are not in battlefield and cards
+            // like Elesh Norn does not prevent that. 
+            if (triggeringPermanent == null
+                    && sourceEvent != null
+                    && (ability.getSourceId().equals(sourceEvent.getSourceId())
+                    || ability.getSourceId().equals(sourceEvent.getTargetId()))) {
+                triggeringPermanent = ability.getSourcePermanentOrLKI(game);
+            }
             if (triggeringPermanent == null || !filterTriggering.match(triggeringPermanent, source.getControllerId(), source, game)) {
                 return false;
             }
         }
-        GameEvent sourceEvent = ((NumberOfTriggersEvent) event).getSourceEvent();
         if (sourceEvent == null) {
             return false;
         }

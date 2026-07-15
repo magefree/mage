@@ -16,7 +16,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
     }
 
     private RavnicaClueEdition() {
-        super("Ravnica: Clue Edition", "CLU", ExpansionSet.buildDate(2024, 2, 9), SetType.EXPANSION);
+        super("Ravnica: Clue Edition", "CLU", ExpansionSet.buildDate(2024, 2, 9), SetType.SUPPLEMENTAL);
         this.hasBasicLands = true;
         this.hasBoosters = false; // TODO: share code with JumpstartPoolGenerator and add single booster, see #13264
 

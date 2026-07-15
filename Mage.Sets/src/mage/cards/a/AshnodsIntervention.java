@@ -68,7 +68,7 @@ class AshnodsInterventionAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getTargetId().equals(sourceId) && zEvent.getFromZone() == Zone.BATTLEFIELD
+        if (zEvent.getTargetId().equals(sourceId) && zEvent.isPermanentMoved() && zEvent.getFromZone() == Zone.BATTLEFIELD
                 && (zEvent.getToZone() == Zone.GRAVEYARD || zEvent.getToZone() == Zone.EXILED)) {
             getEffects().setTargetPointer(new FixedTargets(
                     CardUtil.getAllCardsFromPermanentLeftBattlefield(zEvent.getTarget(), game), game));

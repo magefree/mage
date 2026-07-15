@@ -77,6 +77,7 @@ public enum SubType {
     STONE("Stone", SubTypeSet.ArtifactType),
     TREASURE("Treasure", SubTypeSet.ArtifactType),
     VEHICLE("Vehicle", SubTypeSet.ArtifactType),
+    VIBRANIUM("Vibranium", SubTypeSet.ArtifactType),
 
     // 205.3m : Creatures and kindreds share their lists of subtypes; these subtypes are called creature types.
     // A
@@ -124,6 +125,7 @@ public enum SubType {
     BITH("Bith", SubTypeSet.CreatureType, true), // Star Wars
     BLINKMOTH("Blinkmoth", SubTypeSet.CreatureType),
     BOAR("Boar", SubTypeSet.CreatureType),
+    BORG("Borg", SubTypeSet.CreatureType),
     BRAINIAC("Brainiac", SubTypeSet.CreatureType, true), // Unstable
     BRINGER("Bringer", SubTypeSet.CreatureType),
     BRUSHWAGG("Brushwagg", SubTypeSet.CreatureType),
@@ -268,6 +270,7 @@ public enum SubType {
     KILLBOT("Killbot", SubTypeSet.CreatureType, true), // Unstable
     KIRIN("Kirin", SubTypeSet.CreatureType),
     KITHKIN("Kithkin", SubTypeSet.CreatureType),
+    KLINGON("Klingon", SubTypeSet.CreatureType),
     KNIGHT("Knight", SubTypeSet.CreatureType),
     KOBOLD("Kobold", SubTypeSet.CreatureType),
     KOORIVAR("Koorivar", SubTypeSet.CreatureType, true),
@@ -324,6 +327,7 @@ public enum SubType {
     NYMPH("Nymph", SubTypeSet.CreatureType),
     // O
     OCTOPUS("Octopus", SubTypeSet.CreatureType),
+    OFFICER("Officer", SubTypeSet.CreatureType),
     OGRE("Ogre", SubTypeSet.CreatureType),
     OOZE("Ooze", SubTypeSet.CreatureType),
     ORB("Orb", SubTypeSet.CreatureType),
@@ -357,6 +361,7 @@ public enum SubType {
     PROCESSOR("Processor", SubTypeSet.CreatureType),
     PUREBLOOD("Pureblood", SubTypeSet.CreatureType, true),
     // Q
+    Q("Q", SubTypeSet.CreatureType),
     QU("Qu", SubTypeSet.CreatureType),
     QUARREN("Quarren", SubTypeSet.CreatureType, true), // Star Wars
     // R
@@ -437,6 +442,7 @@ public enum SubType {
     THRULL("Thrull", SubTypeSet.CreatureType),
     TIEFLING("Tiefling", SubTypeSet.CreatureType),
     TIME_LORD("Time Lord", SubTypeSet.CreatureType),
+    TOSK("Tosk", SubTypeSet.CreatureType),
     TOY("Toy", SubTypeSet.CreatureType),
     TRANDOSHAN("Trandoshan", SubTypeSet.CreatureType, true), // Star Wars
     TREEFOLK("Treefolk", SubTypeSet.CreatureType),
@@ -458,6 +464,7 @@ public enum SubType {
     VEDALKEN("Vedalken", SubTypeSet.CreatureType),
     VILLAIN("Villain", SubTypeSet.CreatureType),
     VOLVER("Volver", SubTypeSet.CreatureType),
+    VULCAN("Vulcan", SubTypeSet.CreatureType),
     // W
     WALL("Wall", SubTypeSet.CreatureType),
     WALRUS("Walrus", SubTypeSet.CreatureType),
@@ -677,15 +684,17 @@ public enum SubType {
     }
 
     public static SubType byDescription(String subType) {
+        if (subType == null) {
+            return null;
+        }
+
         for (SubType s : values()) {
             if (s.getDescription().equals(subType)) {
                 return s;
             }
         }
-        
-        // TODO: return to exceptions if no more errors in logs, 2026-06-17
-        LOGGER.error("Can''t find subtype enum value in byDescription: " + subType, new Throwable());
-        return null;
+
+        throw new IllegalArgumentException("Can't find subtype enum value in byDescription: " + subType);
     }
 
     public SubTypeSet getSubTypeSet() {

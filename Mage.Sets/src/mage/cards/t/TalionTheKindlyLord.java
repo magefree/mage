@@ -75,7 +75,7 @@ enum TalionTheKindlyLordPredicate implements ObjectSourcePlayerPredicate<StackOb
     public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
         Object obj = game.getState().getValue(
                 "chosenNumber_" + input.getSource().getSourceId()
-                        + '_' + input.getObject().getZoneChangeCounter(game)
+                        + '_' + input.getSource().getStackMomentSourceZCC()
         );
         if (obj == null) {
             return false;

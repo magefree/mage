@@ -139,7 +139,7 @@ class SidequestHuntTheMarkWatcher extends Watcher {
             return;
         }
         ZoneChangeEvent zEvent = ((ZoneChangeEvent) event);
-        if (zEvent.isDiesEvent() && zEvent.getTarget().isCreature(game)) {
+        if (zEvent.isDiesEvent() && zEvent.isPermanentMoved() && zEvent.getTarget().isCreature(game)) {
             set.addAll(game.getOpponents(zEvent.getTarget().getControllerId()));
         }
     }

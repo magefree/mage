@@ -14,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.TargetController;
+import mage.watchers.common.DiscardedCardWatcher;
 
 import java.util.UUID;
 
@@ -33,16 +34,18 @@ public final class RaggedRecluse extends TransformingDoubleFacedCard {
         this.getLeftHalfCard().setPT(2, 1);
 
         // At the beginning of your end step, if you discarded a card this turn, transform Ragged Recluse.
-        this.getLeftHalfCard().addAbility(new BeginningOfEndStepTriggeredAbility(
+        Ability ability = new BeginningOfEndStepTriggeredAbility(
                 TargetController.YOU, new TransformSourceEffect(),
                 false, ControllerDiscardedThisTurnCondition.instance
-        ).addHint(ControllerDiscardedHint.instance));
+        ).addHint(ControllerDiscardedHint.instance);
+        ability.addWatcher(new DiscardedCardWatcher());
+        this.getLeftHalfCard().addAbility(ability);
 
         // Odious Witch
         this.getRightHalfCard().setPT(3, 3);
 
         // Whenever Odious Witch attacks, defending player loses 1 life and you gain 1 life.
-        Ability ability = new AttacksTriggeredAbility(
+        ability = new AttacksTriggeredAbility(
                 new LoseLifeTargetEffect(1)
                         .setText("defending player loses 1 life"),
                 false, null, SetTargetPointer.PLAYER

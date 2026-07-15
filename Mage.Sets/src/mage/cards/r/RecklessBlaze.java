@@ -107,7 +107,7 @@ class RecklessBlazeTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         return zEvent.isDiesEvent()
-                && zEvent.getTarget() != null
+                && zEvent.isPermanentMoved()
                 && morSet.stream().anyMatch(mor -> mor.refersTo(zEvent.getTarget(), game))
                 && zEvent.getTarget().isControlledBy(getControllerId())
                 && zEvent.getTarget().isCreature(game);

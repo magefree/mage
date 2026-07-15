@@ -1719,6 +1719,7 @@ public class TablesPanel extends javax.swing.JPanel {
             options.setMinimumRating(0);
             String serverAddress = SessionHandler.getSession().getServerHost();
             options.setBannedUsers(IgnoreList.getIgnoredUsers(serverAddress));
+            options.setSpectatorsAllowed(true);
             table = SessionHandler.createTable(roomId, options);
 
             SessionHandler.joinTable(roomId, table.getTableId(), "Human", PlayerType.HUMAN, 1, testDeck, "");
@@ -1938,7 +1939,7 @@ class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
     private final UUID roomId;
     private final TablesPanel panel;
 
-    private static final Logger logger = Logger.getLogger(UpdateTablesTask.class);
+    private static final Logger logger = Logger.getLogger(UpdateMatchesTask.class);
 
     UpdateMatchesTask(UUID roomId, TablesPanel panel) {
         this.roomId = roomId;

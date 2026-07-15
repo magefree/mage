@@ -128,7 +128,7 @@ class JerrenCorruptedBishopTriggeredAbility extends TriggeredAbilityImpl {
             case ZONE_CHANGE:
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
                 return zEvent.isDiesEvent()
-                        && zEvent.getTarget() != null
+                        && zEvent.isPermanentMoved()
                         && !zEvent.getTarget().getId().equals(getSourceId())
                         && zEvent.getTarget().isControlledBy(getControllerId())
                         && !zEvent.getTarget().isToken()

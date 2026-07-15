@@ -85,7 +85,7 @@ class DrivnodCarnageDominusEffect extends ReplacementEffectImpl {
                     && numberOfTriggersEvent.getSourceEvent() instanceof ZoneChangeEvent) {
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) numberOfTriggersEvent.getSourceEvent();
                 return zEvent.isDiesEvent()
-                        && zEvent.getTarget() != null
+                        && zEvent.isPermanentMoved()
                         && zEvent.getTarget().isCreature(game);
             }
         }

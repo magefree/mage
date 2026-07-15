@@ -95,6 +95,7 @@ class RiseOfTheDreadMarnWatcher extends Watcher {
         }
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()
+                && zEvent.isPermanentMoved()
                 && zEvent.getTarget().isCreature(game)
                 && !zEvent.getTarget().isToken()) {
             creaturesDied += 1;

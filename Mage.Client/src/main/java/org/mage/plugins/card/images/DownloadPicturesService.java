@@ -476,7 +476,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         // prepare checking list
         List<CardDownloadData> allCardsUrls = Collections.synchronizedList(new ArrayList<>());
         try {
-            allCards.parallelStream().forEach(card -> {
+            // do not use parallel search due db usage inside
+            allCards.forEach(card -> {
                 if (!card.getCardNumber().isEmpty()
                         && !"0".equals(card.getCardNumber())
                         && !card.getSetCode().isEmpty()) {

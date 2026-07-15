@@ -10,6 +10,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
+import mage.watchers.common.CreatureLeftBattlefieldWatcher;
 
 import java.util.UUID;
 
@@ -32,6 +33,7 @@ public final class ThatsRoughBuddy extends CardImpl {
         ));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addHint(CreatureLeftThisTurnCondition.getHint());
+        this.getSpellAbility().addWatcher(new CreatureLeftBattlefieldWatcher());
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));

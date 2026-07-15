@@ -489,11 +489,11 @@ public class MageBook extends JComponent {
         }
 
         // cards stats
-        List<Integer> haveNumbers = set
+        Set<Integer> haveNumbers = set
                 .getSetCardInfo()
                 .stream()
                 .map(ExpansionSet.SetCardInfo::getCardNumberAsInt)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
 
         int startNumber = haveNumbers
                 .stream()
@@ -554,6 +554,9 @@ public class MageBook extends JComponent {
 
     public void next() {
         synchronized (this) {
+            if (tabs.isEmpty()) {
+                return;
+            }
             selectedTab++;
             if (selectedTab >= tabs.size()) {
                 selectedTab = 0;

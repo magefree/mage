@@ -139,6 +139,7 @@ class TheDarknessCrystalExileEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         return zEvent.isDiesEvent()
+                && zEvent.isPermanentMoved()
                 && zEvent.getTarget().isCreature(game)
                 && !(zEvent.getTarget() instanceof PermanentToken)
                 && game.getOpponents(source.getControllerId()).contains(zEvent.getTarget().getControllerId());
