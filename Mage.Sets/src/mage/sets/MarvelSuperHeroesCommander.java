@@ -26,6 +26,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Abomination, World Ravager", 47, Rarity.RARE, mage.cards.a.AbominationWorldRavager.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Absorbing Man and Titania", 510, Rarity.RARE, mage.cards.a.AbsorbingManAndTitania.class));
         cards.add(new SetCardInfo("Accelerated Evolution", 711, Rarity.COMMON, mage.cards.a.AcceleratedEvolution.class));
+        cards.add(new SetCardInfo("Advancing the Spirit", 712, Rarity.UNCOMMON, mage.cards.a.AdvancingTheSpirit.class));
         cards.add(new SetCardInfo("Age of Ultron", 41, Rarity.RARE, mage.cards.a.AgeOfUltron.class));
         cards.add(new SetCardInfo("Alien Symbiosis", 791, Rarity.UNCOMMON, mage.cards.a.AlienSymbiosis.class));
         cards.add(new SetCardInfo("Amazing Spider-Girl", 583, Rarity.RARE, mage.cards.a.AmazingSpiderGirl.class));
