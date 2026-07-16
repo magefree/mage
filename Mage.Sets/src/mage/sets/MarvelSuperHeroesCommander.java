@@ -174,6 +174,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Doctor Doom, Unrivaled", 654, Rarity.MYTHIC, mage.cards.d.DoctorDoomUnrivaled.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doctor Spectrum", 590, Rarity.UNCOMMON, mage.cards.d.DoctorSpectrum.class));
         cards.add(new SetCardInfo("Doctor Strange, Surgeon", 591, Rarity.RARE, mage.cards.d.DoctorStrangeSurgeon.class));
+        cards.add(new SetCardInfo("Donald Blake, Guise of Thor", 592, Rarity.UNCOMMON, mage.cards.d.DonaldBlakeGuiseOfThor.class));
         cards.add(new SetCardInfo("Doom Blade", 576, Rarity.UNCOMMON, mage.cards.d.DoomBlade.class));
         cards.add(new SetCardInfo("Doom's Servo-Guards", 535, Rarity.COMMON, mage.cards.d.DoomsServoGuards.class));
         cards.add(new SetCardInfo("Doombot Harbinger", 655, Rarity.UNCOMMON, mage.cards.d.DoombotHarbinger.class));
