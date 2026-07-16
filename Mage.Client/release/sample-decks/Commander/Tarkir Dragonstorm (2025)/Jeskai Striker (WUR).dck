@@ -1,0 +1,91 @@
+1 [TDC:203] Abrade
+1 [TDC:18] Adaptive Training Post
+1 [TDC:338] Adarkar Wastes
+1 [TDC:12] Aligned Heart
+1 [TDC:144] Ancestral Vision
+1 [TDC:105] Arcane Signet
+1 [TDC:145] Archmage Emeritus
+1 [TDC:339] Ash Barrens
+1 [TDC:312] Azorius Signet
+1 [TDC:282] Baral and Kari Zev
+1 [TDC:146] Baral's Expertise
+1 [TDC:340] Battlefield Forge
+1 [TDC:206] Big Score
+1 [TDC:314] Boros Signet
+1 [TDC:33] Caldera Pyremaw
+1 [TDC:345] Cascade Bluffs
+1 [TDC:351] Clifftop Retreat
+1 [TDC:107] Command Tower
+1 [TDC:147] Compulsive Research
+1 [TDC:148] Consider
+1 [TDC:209] Curse of Opulence
+1 [TDC:149] Curse of the Swine
+1 [TDC:150] Deep Analysis
+1 [TDC:112] Dismantling Wave
+1 [TDC:212] Electrodominance
+1 [TDC:2] Elsha, Threefold Master
+1 [TDM:255] Evolving Wilds
+1 [TDC:360] Exotic Orchard
+1 [TDC:287] Expansion // Explosion
+1 [TDC:288] Expressive Iteration
+1 [TDC:213] Faithless Looting
+1 [TDC:318] Fellwar Stone
+1 [TDC:361] Ferrous Lake
+1 [TDC:153] Frantic Search
+1 [TDC:116] Ghostly Prison
+1 [TDC:367] Glacial Fortress
+1 [TDC:99] Goblin Electromancer
+1 [TDC:217] Guttersnipe
+1 [TDC:154] Haughty Djinn
+1 [TDC:372] Irrigated Farmland
+5 [TDM:280] Island
+1 [TDC:320] Izzet Signet
+1 [TDC:157] Lier, Disciple of the Drowned
+1 [TDC:296] Magma Opus
+1 [TDC:223] Mana Geyser
+1 [TDC:224] Manaform Hellkite
+1 [TDC:124] Mangara, the Diplomat
+1 [TDC:125] Monastery Mentor
+5 [TDM:283] Mountain
+1 [TDM:262] Mystic Monastery
+1 [TDC:92] Narset's Reversal
+1 [TDC:158] Opt
+1 [TDC:382] Path of Ancestry
+1 [TDC:383] Perilous Landscape
+4 [TDM:277] Plains
+1 [TDC:159] Ponder
+1 [TDC:160] Pongify
+1 [TDC:384] Prairie Stream
+1 [TDC:161] Preordain
+1 [TDC:299] Prismari Command
+1 [TDC:386] Reliquary Tower
+1 [TDC:165] Rite of Replication
+1 [TDC:389] Rugged Prairie
+1 [TDC:231] Shiny Impetus
+1 [TDC:393] Shivan Reef
+1 [TDC:394] Skycloud Expanse
+1 [TDC:106] Sol Ring
+1 [TDC:235] Storm-Kiln Artist
+1 [TDC:167] Sublime Epiphany
+1 [TDC:396] Sulfur Falls
+1 [TDC:134] Swords to Plowshares
+1 [TDC:333] Talisman of Progress
+1 [TDC:16] Tempest Technique
+1 [TDC:401] Temple of Enlightenment
+1 [TDC:402] Temple of Epiphany
+1 [TDC:407] Temple of Triumph
+1 [TDC:168] Think Twice
+1 [TDC:307] Third Path Iconoclast
+1 [TDC:308] Time Wipe
+1 [TDC:22] Transcendent Dragon
+1 [TDC:39] Transforming Flourish
+1 [TDC:91] Vanquish the Horde
+1 [TDC:309] Velomachus Lorehold
+1 [TDC:310] Veyran, Voice of Duality
+1 [TDC:23] Voracious Bibliophile
+1 [TDC:311] Whirlwind of Thought
+1 [TDC:40] Will of the Jeskai
+1 [TDC:95] Young Pyromancer
+SB: 1 [TDC:7] Shiko and Narset, Unified
+LAYOUT MAIN:(1,9)(CMC,false,50)|([TDC:338],[TDC:144],[TDC:339],[TDC:340],[TDC:345],[TDC:351],[TDC:107],[TDM:255],[TDC:360],[TDC:361],[TDC:367],[TDC:372],[TDM:280],[TDM:280],[TDM:280],[TDM:280],[TDM:280],[TDM:283],[TDM:283],[TDM:283],[TDM:283],[TDM:283],[TDM:262],[TDC:382],[TDC:383],[TDM:277],[TDM:277],[TDM:277],[TDM:277],[TDC:384],[TDC:386],[TDC:389],[TDC:393],[TDC:394],[TDC:396],[TDC:401],[TDC:402],[TDC:407])([TDC:148],[TDC:209],[TDC:213],[TDC:158],[TDC:159],[TDC:160],[TDC:161],[TDC:106],[TDC:134])([TDC:203],[TDC:105],[TDC:312],[TDC:314],[TDC:149],[TDC:212],[TDC:288],[TDC:318],[TDC:99],[TDC:320],[TDC:92],[TDC:333],[TDC:168],[TDC:307],[TDC:95])([TDC:18],[TDC:12],[TDC:282],[TDC:147],[TDC:112],[TDC:2],[TDC:153],[TDC:116],[TDC:217],[TDC:154],[TDC:125],[TDC:299],[TDC:231],[TDC:39],[TDC:310])([TDC:145],[TDC:206],[TDC:150],[TDC:224],[TDC:124],[TDC:165],[TDC:235],[TDC:16],[TDC:23],[TDC:311],[TDC:40])([TDC:146],[TDC:33],[TDC:157],[TDC:223],[TDC:308])([TDC:287],[TDC:167],[TDC:22])([TDC:309])([TDC:296],[TDC:91])
+LAYOUT SIDEBOARD:(1,1)(RARITY,true,24)|([TDC:7])
