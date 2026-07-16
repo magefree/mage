@@ -20,6 +20,7 @@ public final class TheHobbitCommander extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Arcane Signet", 95, Rarity.MYTHIC, mage.cards.a.ArcaneSignet.class));
+        cards.add(new SetCardInfo("Gandalf, Party Guest", 2, Rarity.RARE, mage.cards.g.GandalfPartyGuest.class));
         cards.add(new SetCardInfo("Sauron, the Dark Lord", 36, Rarity.MYTHIC, mage.cards.s.SauronTheDarkLord.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sauron, the Dark Lord", 76, Rarity.MYTHIC, mage.cards.s.SauronTheDarkLord.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The One Ring", 44, Rarity.MYTHIC, mage.cards.t.TheOneRing.class, NON_FULL_USE_VARIOUS));
