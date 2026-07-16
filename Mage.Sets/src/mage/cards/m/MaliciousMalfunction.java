@@ -77,7 +77,7 @@ class MaliciousMalfunctionReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getTarget() != null
+        return zEvent.isPermanentMoved()
                 && zEvent.getTarget().isCreature(game)
                 && zEvent.isDiesEvent();
     }

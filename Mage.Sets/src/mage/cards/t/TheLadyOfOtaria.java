@@ -106,7 +106,7 @@ class TheLadyOfOtariaWatcher extends Watcher {
         }
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()
-                && zEvent.getTarget() != null
+                && zEvent.isPermanentMoved()
                 && zEvent.getTarget().isLand(game)
                 && zEvent.getTarget().isOwnedBy(zEvent.getTarget().getControllerId())) {
             playerSet.add(zEvent.getTarget().getControllerId());

@@ -76,7 +76,7 @@ class FuneralMarchTriggeredAbility extends ZoneChangeTriggeredAbility {
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
                 if ((fromZone == null || zEvent.getFromZone() == fromZone) && (toZone == null || zEvent.getToZone() == toZone)) {
                     for (Effect effect : getEffects()) {
-                        if (zEvent.getTarget() != null) {
+                        if (zEvent.isPermanentMoved()) {
                             Permanent attachedTo = (Permanent) game.getLastKnownInformation(enchantment.getAttachedTo(), Zone.BATTLEFIELD, enchantment.getAttachedToZoneChangeCounter());
                             if (attachedTo != null) {
                                 effect.setTargetPointer(new FixedTarget(attachedTo.getControllerId()));

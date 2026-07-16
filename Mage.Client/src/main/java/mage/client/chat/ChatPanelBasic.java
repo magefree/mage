@@ -42,7 +42,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
     /**
      * Chat message color for timestamps.
      */
-    protected static final String TIMESTAMP_COLOR = "#CCCC33";
+    public static final String TIMESTAMP_COLOR = "#CCCC33";
     /**
      * Chat message color for messages.
      */

@@ -104,6 +104,7 @@ class TouchOfMoongloveDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()
+                && zEvent.isPermanentMoved()
                 && zEvent.getTarget().isCreature(game)) {
             boolean damageDealt = false;
             for (MageObjectReference mor : zEvent.getTarget().getDealtDamageByThisTurn()) {

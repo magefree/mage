@@ -628,8 +628,12 @@ public class ScryfallImageSupportCards {
             add("YSOS"); // Alchemy: Secrets of Strixhaven
             add("MSH"); // Marvel Super Heroes
             add("MSC"); // Marvel Super Heroes Commander
+            add("HOB"); // The Hobbit
             add("HOC"); // The Hobbit Commander
             add("FRA"); // Reality Fracture
+            add("TRK"); // Star Trek
+            add("TRC"); // Star Trek Commander
+            add("SDS"); // Stardates
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards
@@ -740,8 +744,6 @@ public class ScryfallImageSupportCards {
             put("SLD/Zndrsplt, Eye of Wisdom/379*b", "https://api.scryfall.com/cards/sld/379★/en?format=image&face=back");
             put("SLD/Zombie Master/1460b", "https://api.scryfall.com/cards/sld/1460/en?format=image&face=back");
             // normal cards
-            put("SLD/Counterspell/99999SCTLR", "https://api.scryfall.com/cards/sld/SCTLR/"); // see issue 11157
-            put("SLD/Viscera Seer/99999VS", "https://api.scryfall.com/cards/sld/VS/"); // see issue 11157
             put("SLD/Deadly Dispute/1IFIYW", "https://api.scryfall.com/cards/sld/IFIYW-1/"); // see issue 11157
             put("SLD/Lightning Bolt/2IFIYW", "https://api.scryfall.com/cards/sld/IFIYW-2/"); // see issue 11157
             put("SLD/Thrill of Possibility/3IFIYW", "https://api.scryfall.com/cards/sld/IFIYW-3/"); // see issue 11157

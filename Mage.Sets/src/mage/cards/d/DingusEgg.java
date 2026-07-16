@@ -55,6 +55,7 @@ class DingusEggTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()
+                && zEvent.isPermanentMoved()
                 && zEvent.getTarget().isLand(game)) {
             if (getTargets().isEmpty()) {
                 UUID targetControllerId = zEvent.getTarget().getControllerId();

@@ -174,7 +174,7 @@ class KrovikanVampireCreaturesDiedWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.isDiesEvent()
-                    && zEvent.getTarget() != null
+                    && zEvent.isPermanentMoved()
                     && zEvent.getTarget().isCreature(game)) {
                 diedThisTurn.add(zEvent.getTargetId());
             }

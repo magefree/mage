@@ -3,6 +3,7 @@ package mage.cards.i;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.constants.SubType;
 import mage.filter.predicate.permanent.ModifiedPredicate;
 import mage.constants.TargetController;
@@ -61,9 +62,9 @@ public final class IntermediateChirography extends CardImpl {
 
         // At the beginning of each end step, if a modified creature died under your control this turn, create a 2/1 white and black Inkling creature token with flying.
         ability = new BeginningOfEndStepTriggeredAbility(
-            TargetController.ANY,
-            new CreateTokenEffect(new InklingToken()),
-            false
+                TargetController.ANY,
+                new CreateTokenEffect(new InklingToken()),
+                false
         ).withInterveningIf(IntermediateChirographyCondition.instance).addHint(IntermediateChirographyCondition.hint);
         this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(ability, 3)), new IntermediateChirographyWatcher());
     }
@@ -108,7 +109,9 @@ class IntermediateChirographyWatcher extends Watcher {
             return;
         }
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent() && ModifiedPredicate.instance.apply(zEvent.getTarget(), game)) {
+        if (zEvent.isDiesEvent()
+                && zEvent.isPermanentMoved()
+                && ModifiedPredicate.instance.apply(zEvent.getTarget(), game)) {
             players.add(zEvent.getTarget().getControllerId());
         }
     }
@@ -121,10 +124,10 @@ class IntermediateChirographyWatcher extends Watcher {
 
     static boolean checkPlayer(Game game, Ability source) {
         return game
-            .getState()
-            .getWatcher(IntermediateChirographyWatcher.class)
-            .players
-            .contains(source.getControllerId());
+                .getState()
+                .getWatcher(IntermediateChirographyWatcher.class)
+                .players
+                .contains(source.getControllerId());
     }
 
 }

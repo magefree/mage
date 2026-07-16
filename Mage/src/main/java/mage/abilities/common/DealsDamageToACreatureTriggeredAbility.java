@@ -60,9 +60,9 @@ public class DealsDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl
                 return false;
             }
             this.getEffects().setValue("damagedCreature", game.getPermanent(event.getTargetId()));
+            this.getEffects().setValue("damage", event.getAmount());
             if (setTargetPointer) {
                 this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
-                this.getEffects().setValue("damage", event.getAmount());
             }
             return true;
         }

@@ -1,5 +1,6 @@
 package mage.client.deckeditor;
 
+import mage.MageObject;
 import mage.cards.Card;
 import mage.cards.decks.*;
 import static mage.cards.decks.DeckFormats.XMAGE;
@@ -287,11 +288,12 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         this.deckArea.setDeckEditorMode(mode);
     }
 
-    private Card retrieveTemporaryCard(SimpleCardView cardView) {
+    private Card retrieveTemporaryCard(SimpleCardView cardView, Card newCard) {
+        // TODO: rework to store refs instead bad temporary logic (CardView -> Card), see #8104
         Card card = temporaryCards.get(cardView.getId());
         if (card == null) {
-            // need to make a new card (example: on duplicate, on show hidden cards)
-            card = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber()).createCard();
+            // create new card (example: on duplicate, on show hidden cards, on oldest cards, etc)
+            card = newCard;
         } else {
             // restore temp card (example: after drag to new zone)
             temporaryCards.remove(cardView.getId());
@@ -330,12 +332,12 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     }
 
                     case DECK_REMOVE_SELECTION_MAIN: {
-                        DeckEditorPanel.this.deckArea.getDeckList().removeSelection();
+                        DeckEditorPanel.this.deckArea.getDeckList().removeSelectedCards();
                         break;
                     }
 
                     case DECK_REMOVE_SELECTION_SIDEBOARD: {
-                        DeckEditorPanel.this.deckArea.getSideboardList().removeSelection();
+                        DeckEditorPanel.this.deckArea.getSideboardList().removeSelectedCards();
                         break;
                     }
                 }
@@ -383,17 +385,19 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                 SimpleCardView cardView = (SimpleCardView) event.getSource();
                                 Card card = deck.findCard(cardView.getId());
                                 if (card == null) {
+                                    logger.warn("something wrong, can't find card to remove from deck: " + cardView);
                                     return;
                                 }
-
                                 deck.getCards().remove(card);
                                 storeTemporaryCard(card);
                                 break;
                             }
 
                             case DECK_ADD_SPECIFIC_CARD: {
-                                SimpleCardView cardView = (CardView) event.getSource();
-                                deck.getCards().add(retrieveTemporaryCard(cardView));
+                                List<MageObject> info = (List<MageObject>) event.getSource();
+                                SimpleCardView newView = (SimpleCardView) info.get(0);
+                                Card newCard = (Card) info.get(1);
+                                deck.getCards().add(retrieveTemporaryCard(newView, newCard));
                                 break;
                             }
                         }
@@ -421,6 +425,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                 SimpleCardView cardView = (SimpleCardView) event.getSource();
                                 Card card = deck.findCard(cardView.getId());
                                 if (card == null) {
+                                    logger.warn("something wrong, can't find card to remove from deck: " + cardView);
                                     return;
                                 }
 
@@ -430,8 +435,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                             }
 
                             case DECK_ADD_SPECIFIC_CARD: {
-                                SimpleCardView cardView = (CardView) event.getSource();
-                                deck.getCards().add(retrieveTemporaryCard(cardView));
+                                List<MageObject> info = (List<MageObject>) event.getSource();
+                                SimpleCardView newView = (SimpleCardView) info.get(0);
+                                Card newCard = (Card) info.get(1);
+                                deck.getCards().add(retrieveTemporaryCard(newView, newCard));
                                 break;
                             }
                         }
@@ -477,6 +484,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                 SimpleCardView cardView = (SimpleCardView) event.getSource();
                                 Card card = deck.findSideboardCard(cardView.getId());
                                 if (card == null) {
+                                    logger.warn("something wrong, can't find card to remove from deck: " + cardView);
                                     return;
                                 }
 
@@ -486,8 +494,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                             }
 
                             case DECK_ADD_SPECIFIC_CARD: {
-                                SimpleCardView cardView = (CardView) event.getSource();
-                                deck.getSideboard().add(retrieveTemporaryCard(cardView));
+                                List<MageObject> info = (List<MageObject>) event.getSource();
+                                SimpleCardView newView = (SimpleCardView) info.get(0);
+                                Card newCard = (Card) info.get(1);
+                                deck.getSideboard().add(retrieveTemporaryCard(newView, newCard));
                                 break;
                             }
                         }
@@ -500,6 +510,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                 SimpleCardView cardView = (SimpleCardView) event.getSource();
                                 Card card = deck.findSideboardCard(cardView.getId());
                                 if (card == null) {
+                                    logger.warn("something wrong, can't find card to remove from deck: " + cardView);
                                     return;
                                 }
 
@@ -509,8 +520,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                             }
 
                             case DECK_ADD_SPECIFIC_CARD: {
-                                SimpleCardView cardView = (CardView) event.getSource();
-                                deck.getSideboard().add(retrieveTemporaryCard(cardView));
+                                List<MageObject> info = (List<MageObject>) event.getSource();
+                                SimpleCardView newView = (SimpleCardView) info.get(0);
+                                Card newCard = (Card) info.get(1);
+                                deck.getSideboard().add(retrieveTemporaryCard(newView, newCard));
                                 break;
                             }
 
@@ -805,14 +818,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         } else {
             // on non-modal - it's do nothing yet
         }
-    }
-
-    private void onImportReady(String deckPath) {
-        SwingUtilities.invokeLater(() -> {
-            if (deckPath.isEmpty()) {
-                loadDeck(deckPath, false);
-            }
-        });
     }
 
     private void importFromClipboardWithAppend(ActionEvent evt) {

@@ -174,11 +174,11 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public boolean connectSetUserData(final String userName, final String sessionId, final UserData userData, final String clientVersion, final String userIdStr) throws MageException {
+    public boolean connectSetUserData(final String sessionId, final UserData userData, final String clientVersion, final String userIdStr) throws MageException {
         return executeWithResult("setUserData", sessionId, new ActionWithBooleanResult() {
             @Override
             public Boolean execute() throws MageException {
-                return managerFactory.sessionManager().setUserData(userName, sessionId, userData, clientVersion, userIdStr);
+                return managerFactory.sessionManager().setUserData(sessionId, userData, clientVersion, userIdStr);
             }
         });
     }
@@ -228,7 +228,7 @@ public class MageServerImpl implements MageServer {
                     int notStartedTables = user.getNumberOfNotStartedTables();
                     if (notStartedTables > 1) {
                         user.showUserMessage("Create table", "You have already " + notStartedTables + " not started tables. You can't create another.");
-                        throw new MageException("No message");
+                        throw new MageException("Error, user already has not started table");
                     }
 
                     // limit number of workable AI opponents (draft bots are unlimited)

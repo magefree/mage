@@ -61,7 +61,7 @@ class StructuralAssaultWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.isDiesEvent() && zEvent.getTarget().isArtifact(game)) {
+            if (zEvent.isDiesEvent() && zEvent.isPermanentMoved() && zEvent.getTarget().isArtifact(game)) {
                 artifactsDied++;
             }
         }

@@ -72,7 +72,7 @@ class RuinousWaterbendingAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.isDiesEvent() && zEvent.getTarget().isCreature(game);
+        return zEvent.isDiesEvent() && zEvent.isPermanentMoved() && zEvent.getTarget().isCreature(game);
     }
 
     @Override

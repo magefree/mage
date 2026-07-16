@@ -103,7 +103,9 @@ class ChurningReservoirWatcher extends Watcher {
         switch (event.getType()) {
             case ZONE_CHANGE:
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-                if (zEvent.isDiesEvent() && zEvent.getTarget().getCounters(game).containsKey(CounterType.OIL)) {
+                if (zEvent.isDiesEvent()
+                        && zEvent.isPermanentMoved()
+                        && zEvent.getTarget().getCounters(game).containsKey(CounterType.OIL)) {
                     set.add(zEvent.getTarget().getControllerId());
                 }
                 return;

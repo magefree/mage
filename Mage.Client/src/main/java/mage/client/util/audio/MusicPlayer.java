@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
  */
 public class MusicPlayer {
 
-    private static final Logger log = Logger.getLogger(AudioManager.class);
+    private static final Logger LOGGER = Logger.getLogger(MusicPlayer.class);
     String filepath;
     String filename;
     final List filelist = new List();
@@ -87,7 +87,7 @@ public class MusicPlayer {
             try {
                 TimeUnit.MILLISECONDS.sleep(100);
             } catch (Exception e) {
-                log.error("Thread error: " + e);
+                LOGGER.error("Thread error: " + e);
             }
         }
     }
@@ -122,7 +122,7 @@ public class MusicPlayer {
                 volume = (FloatControl) sourceDataLine.getControl(FloatControl.Type.MASTER_GAIN);
                 sourceDataLine.start();
             } catch (Exception e) {
-                log.error("Couldn't load file: " + file + ' ' + e);
+                LOGGER.error("Couldn't load file: " + file + ' ' + e);
             }
 
         }
@@ -144,7 +144,7 @@ public class MusicPlayer {
                     try {
                         TimeUnit.MILLISECONDS.sleep(10);
                     } catch (Exception e) {
-                        log.error("Thread error: " + e);
+                        LOGGER.error("Thread error: " + e);
                     }
                 }
                 breaked = false;
@@ -176,7 +176,7 @@ public class MusicPlayer {
                 sourceDataLine.close();
                 breaked = true;
             } catch (Exception e) {
-                log.error("Thread error: " + e);
+                LOGGER.error("Thread error: " + e);
             }
         }
     }

@@ -121,7 +121,7 @@ class BrimazBlightOfOreskosWatcher extends Watcher {
             return;
         }
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent() && zEvent.getTarget().hasSubtype(SubType.PHYREXIAN, game)) {
+        if (zEvent.isDiesEvent() && zEvent.isPermanentMoved() && zEvent.getTarget().hasSubtype(SubType.PHYREXIAN, game)) {
             players.add(zEvent.getTarget().getControllerId());
         }
     }

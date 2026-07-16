@@ -87,7 +87,8 @@ class EnigmaSphinxTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         Permanent permanent = zEvent.getTarget();
-        if (permanent != null && zEvent.isDiesEvent()
+        if (permanent != null 
+                && zEvent.isDiesEvent()
                 && permanent.getId().equals(this.getSourceId())
                 && // 5/1/2009 If you control an Enigma Sphinx that's owned by another player, it's put into that player's
                 //          graveyard from the battlefield, so Enigma Sphinx's middle ability won't trigger.

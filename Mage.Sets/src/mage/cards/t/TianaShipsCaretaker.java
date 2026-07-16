@@ -86,7 +86,7 @@ class TianaShipsCaretakerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getTarget() == null) {
+        if (!zEvent.isPermanentMoved()) {
             return false;
         }
         Permanent permanent = game.getPermanentOrLKIBattlefield(zEvent.getTarget().getId());

@@ -138,7 +138,7 @@ class StoryweaveWatcher extends Watcher {
             return;
         }
         EntersTheBattlefieldEvent zEvent = ((EntersTheBattlefieldEvent) event);
-        if (zEvent.getTarget().isEnchantment(game) && zEvent.getTarget().isCreature(game)) {
+        if (zEvent.getTarget() != null && zEvent.getTarget().isEnchantment(game) && zEvent.getTarget().isCreature(game)) {
             playerMap.compute(zEvent.getPlayerId(), CardUtil::setOrIncrementValue);
         }
     }

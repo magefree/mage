@@ -555,7 +555,8 @@ public final class CardUtil {
 
     /**
      * Parse card number as int (support base [123] and alternative numbers
-     * [123b], [U123]). For inner purpose only like cards sorting.
+     * [123b], [U123]). For inner purpose only like cards sorting. 
+     * Do not support zero card number due tokens usage.
      * <p>
      * From scryfall: card numbers should be considered to be plaintext strings. they may contain multiple
      * non-digit components, may contain no digits at all, and may not correspond to anything
@@ -571,12 +572,22 @@ public final class CardUtil {
         }
 
         // example: 123, U123, 123b, 123*, 123+
-        String cardNumberNormalized = cardNumber.replaceAll("[\\D]", "");
-        if (cardNumberNormalized.isEmpty()) {
-            throw new IllegalArgumentException("Card number must contain at least one digit"); // require by xmage
+        String cleanCardNumber = cardNumber.replaceAll("[\\D]", "");
+
+        // token's zero number is restricted
+        if (!cleanCardNumber.isEmpty() && cleanCardNumber.replaceAll("0", "").isEmpty()) {
+            throw new IllegalArgumentException("Card number cannot be a zero number due tokens usage limit: " + cardNumber);
         }
 
-        return Integer.parseInt(cardNumberNormalized);
+        // non-digit numbers support 
+        // (replace by fake stable digit, sort it after normal numbers)
+        if (cleanCardNumber.isEmpty()) {
+            int hash = cardNumber.hashCode() & 0x7fffffff; // only positive
+            return 1000000 + (hash % (Integer.MAX_VALUE - 1000000));
+        }
+
+        // normal card numbers with digits
+        return Integer.parseInt(cleanCardNumber);
     }
 
     /**
@@ -1296,7 +1307,7 @@ public final class CardUtil {
 
     public static Set<Card> getAllCardsFromPermanentsLeftBattlefield(Collection<Permanent> targets, Game game) {
         Set<Card> toReturn = new LinkedHashSet<>();
-        targets.forEach(card -> {
+        targets.stream().filter(Objects::nonNull).forEach(card -> {
             toReturn.add(card.getMainCard());
             card.getMutateObjects().stream()
                     .map(game::getCard)
@@ -1637,7 +1648,8 @@ public final class CardUtil {
                     break;
                 } else {
                     // Human can choose wrong spell part, so allow to continue
-                    if (!player.chooseUse(Outcome.PlayForFree, "Continue casting spells?", source, game)) {
+                    String message = String.format("You can cast %d more spells for free. Continue casting?", maxCastCount - castCount);
+                    if (!player.chooseUse(Outcome.PlayForFree, message, source, game)) {
                         break;
                     }
                 }

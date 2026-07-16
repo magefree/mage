@@ -30,7 +30,9 @@ public class CreatureLeftBattlefieldWatcher extends Watcher {
             return;
         }
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (Zone.BATTLEFIELD.match(zEvent.getFromZone()) && zEvent.getTarget().isCreature(game)) {
+        if (Zone.BATTLEFIELD.match(zEvent.getFromZone())
+                && zEvent.isPermanentMoved()
+                && zEvent.getTarget().isCreature(game)) {
             mapCreaturesLeft.compute(zEvent.getTarget().getControllerId(), CardUtil::setOrIncrementValue);
         }
     }

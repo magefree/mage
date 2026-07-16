@@ -148,7 +148,9 @@ class GenesisOfTheDaleksWatcher extends Watcher {
             return;
         }
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent() && zEvent.getTarget().hasSubtype(SubType.DALEK, game)) {
+        if (zEvent.isDiesEvent()
+                && zEvent.isPermanentMoved()
+                && zEvent.getTarget().hasSubtype(SubType.DALEK, game)) {
             power += zEvent.getTarget().getPower().getValue();
         }
     }

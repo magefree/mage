@@ -83,7 +83,7 @@ class VindictiveVampireTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (!zEvent.isDiesEvent()
-                || zEvent.getTarget() == null
+                || !zEvent.isPermanentMoved()
                 || game.getPermanentOrLKIBattlefield(getSourceId()) == null) {
             return false;
         }

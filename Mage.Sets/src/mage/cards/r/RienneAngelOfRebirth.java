@@ -91,7 +91,7 @@ class RienneAngelOfRebirthTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getTarget() == null || zEvent.getTarget().getId().equals(this.getSourceId())) {
+        if (!zEvent.isPermanentMoved() || zEvent.getTarget().getId().equals(this.getSourceId())) {
             return false;
         }
         Permanent permanent = game.getPermanentOrLKIBattlefield(zEvent.getTarget().getId());

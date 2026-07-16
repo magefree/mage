@@ -76,7 +76,7 @@ class SyrKonradTheGrimTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         // Whenever another creature dies
         if (zEvent.isDiesEvent()
-                && zEvent.getTarget() != null
+                && zEvent.isPermanentMoved()
                 && !zEvent.getTargetId().equals(this.getSourceId())
                 && zEvent.getTarget().isCreature(game)) {
             return true;

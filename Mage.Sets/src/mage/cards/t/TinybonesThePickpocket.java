@@ -45,7 +45,8 @@ public final class TinybonesThePickpocket extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Whenever Tinybones, the Pickpocket deals combat damage to a player, you may cast target nonland permanent card from that player's graveyard, and mana of any type can be spent to cast that spell.
-        OneShotEffect effect = new MayCastTargetCardEffect(CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE, false);
+        OneShotEffect effect = new MayCastTargetCardEffect(CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE, false)
+                .setText("you may cast target nonland permanent card from that player's graveyard");
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect, false, true);
         ability.addTarget(new TargetCardInGraveyard(filter));
         ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster(true));
