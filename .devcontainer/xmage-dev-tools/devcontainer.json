@@ -80,6 +80,7 @@
 			"settings": {
 				"java.autobuild.enabled": false,
 				"editor.formatOnSave": false,
+				"debug.console.collapseIdenticalLines": false, // do not collapse same game logs, e.g. for tests
 				"[java]": {
 					"editor.defaultFormatter": "OleksandrHavrysh.intellij-formatter"
 				},
@@ -93,7 +94,7 @@
 				"lkqm.gitblame-annotations", // git blame like intellij idea (right click on line number)
 				"donjayamanne.githistory", // git file or line history
 				"emilast.LogFileHighlighter", // logs highlighter until migrate to log4j2
-				
+
 				// script and config editors
 				"DotJoshJohnson.xml",
 				"ms-python.python",

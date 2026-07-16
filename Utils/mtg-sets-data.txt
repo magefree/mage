@@ -321,3 +321,6 @@ Happy Holidays|HHO|HappyHolidays|
 Warhammer 40,000 Commander|40K|Warhammer40000Commander|
 Champs and States|PCMP|ChampsAndStates|
 Champs|PCMP|ChampsAndStates|
+Star Trek|TRK|StarTrek|
+Star Trek Commander|TRC|StarTrekCommander|
+Stardates|SDS|Stardates|
