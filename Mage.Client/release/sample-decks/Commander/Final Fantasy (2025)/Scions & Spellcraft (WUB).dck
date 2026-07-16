@@ -1,0 +1,94 @@
+1 [FIC:9] Alisaie Leveilleur
+1 [FIC:33] Alphinaud Leveilleur
+1 [FIC:373] Arcane Sanctum
+1 [FIC:335] Arcane Signet
+1 [FIC:230] Archaeomancer's Map
+1 [FIC:261] Archmage Emeritus
+1 [FIC:77] Ardbert, Warrior of Darkness
+1 [FIC:374] Ash Barrens
+1 [FIN:46] Astrologian's Planisphere
+1 [FIC:232] Authority of the Consuls
+1 [FIC:318] Baleful Strix
+1 [FIC:274] Bastion of Remembrance
+1 [FIC:35] Blue Mage's Cane
+1 [FIC:11] Champions from Beyond
+1 [FIC:379] Choked Estuary
+1 [FIN:92] Circle of Power
+1 [FIC:235] Cleansing Nova
+1 [FIC:382] Command Tower
+1 [FIC:383] Contaminated Aquifer
+1 [FIC:341] Coveted Jewel
+1 [FIC:275] Crux of Fate
+1 [FIC:238] Cut a Deal
+1 [FIC:17] Dancer's Chakrams
+1 [FIC:384] Darkwater Catacombs
+1 [FIC:385] Demolition Field
+1 [FIC:386] Desolate Mire
+1 [FIC:263] Dig Through Time
+1 [FIC:388] Drowned Catacomb
+1 [FIC:81] Emet-Selch of the Third Seat
+1 [FIC:82] Estinien Varlineau
+1 [FIC:389] Evolving Wilds
+1 [FIC:390] Exotic Orchard
+1 [FIC:276] Exsanguinate
+1 [FIC:44] Eye of Nidhogg
+1 [FIC:46] Fandaniel, Telophoroi Ascian
+1 [FIC:391] Fetid Heath
+1 [FIC:243] Final Judgment
+1 [FIC:3] G'raha Tia, Scion Reborn
+1 [FIC:400] Glacial Fortress
+1 [FIC:36] Hermes, Overseer of Elpis
+1 [FIC:173] Hildibrand Manderville
+1 [FIC:37] Hraesvelgr of the First Brood
+1 [FIC:264] Hypnotic Sprite
+1 [FIC:404] Idyllic Beachfront
+1 [FIC:266] Into the Story
+3 [FIN:297] Island
+1 [FIC:405] Isolated Chapel
+1 [FIC:86] Krile Baldesion
+1 [FIC:277] Lethal Scheme
+1 [FIC:245] Lingering Souls
+1 [FIC:88] Lyse Hext
+1 [FIC:279] Murderous Rider
+1 [FIC:40] Observed Stasis
+1 [FIC:90] Papalymo Totolymo
+1 [FIC:411] Path of Ancestry
+4 [FIN:296] Plains
+1 [FIC:412] Port Town
+1 [FIC:413] Prairie Stream
+1 [FIC:268] Propaganda
+1 [FIC:48] Reaper's Scythe
+1 [FIC:354] Relic of Legends
+1 [FIC:270] Rite of Replication
+1 [FIN:70] Sage's Nouliths
+1 [FIC:419] Scavenger Grounds
+1 [FIC:422] Shineshadow Snarl
+1 [FIC:423] Skycloud Expanse
+1 [FIC:285] Snuff Out
+1 [FIC:359] Sol Ring
+1 [FIC:271] Sublime Epiphany
+1 [FIC:26] Summon: Good King Mog XII
+1 [FIC:429] Sunken Hollow
+1 [FIC:430] Sunken Ruins
+1 [FIC:431] Sunlit Marsh
+4 [FIN:300] Swamp
+1 [FIC:256] Swords to Plowshares
+1 [FIC:288] Syphon Mind
+1 [FIC:364] Talisman of Dominance
+1 [FIC:365] Talisman of Hierarchy
+1 [FIC:367] Talisman of Progress
+1 [FIC:30] Tataru Taru
+1 [FIC:438] Temple of the False God
+1 [FIC:31] Thancred Waters
+1 [FIC:368] Thought Vessel
+1 [FIC:369] Tome of Legends
+1 [FIC:272] Torrential Gearhulk
+1 [FIC:52] Transpose
+1 [FIC:439] Underground River
+1 [FIC:96] Urianger Augurelt
+1 [FIC:330] Vindicate
+1 [FIC:331] Void Rend
+1 [FIN:41] White Auracite
+SB: 1 [FIC:7] Y'shtola, Night's Blessed
+LAYOUT MAIN:(1,1)(NONE,false,50)|([FIC:9],[FIC:33],[FIC:373],[FIC:335],[FIC:230],[FIC:261],[FIC:77],[FIC:374],[FIN:46],[FIC:232],[FIC:318],[FIC:274],[FIC:35],[FIC:11],[FIC:379],[FIN:92],[FIC:235],[FIC:382],[FIC:383],[FIC:341],[FIC:275],[FIC:238],[FIC:17],[FIC:384],[FIC:385],[FIC:386],[FIC:263],[FIC:388],[FIC:81],[FIC:82],[FIC:389],[FIC:390],[FIC:276],[FIC:44],[FIC:46],[FIC:391],[FIC:243],[FIC:3],[FIC:400],[FIC:36],[FIC:173],[FIC:37],[FIC:264],[FIC:404],[FIC:266],[FIN:297],[FIN:297],[FIN:297],[FIC:405],[FIC:86],[FIC:277],[FIC:245],[FIC:88],[FIC:279],[FIC:40],[FIC:90],[FIC:411],[FIN:296],[FIN:296],[FIN:296],[FIN:296],[FIC:412],[FIC:413],[FIC:268],[FIC:48],[FIC:354],[FIC:270],[FIN:70],[FIC:419],[FIC:422],[FIC:423],[FIC:285],[FIC:359],[FIC:271],[FIC:26],[FIC:429],[FIC:430],[FIC:431],[FIN:300],[FIN:300],[FIN:300],[FIN:300],[FIC:256],[FIC:288],[FIC:364],[FIC:365],[FIC:367],[FIC:30],[FIC:438],[FIC:31],[FIC:368],[FIC:369],[FIC:272],[FIC:52],[FIC:439],[FIC:96],[FIC:330],[FIC:331],[FIN:41])
+LAYOUT SIDEBOARD:(1,1)(RARITY,true,24)|([FIC:7])
