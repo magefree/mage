@@ -7,7 +7,7 @@ import mage.players.Player;
 /**
  * @author Grath
  * <p>
- * Support 601.2b rules for ealry target choice before X announce and other actions
+ * Supporting rule 601.5 for early target choice before choosing how to divide or distribute something.
  */
 public interface EarlyTargetCost {
 

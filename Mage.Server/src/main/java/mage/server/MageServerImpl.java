@@ -174,11 +174,11 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public boolean connectSetUserData(final String userName, final String sessionId, final UserData userData, final String clientVersion, final String userIdStr) throws MageException {
+    public boolean connectSetUserData(final String sessionId, final UserData userData, final String clientVersion, final String userIdStr) throws MageException {
         return executeWithResult("setUserData", sessionId, new ActionWithBooleanResult() {
             @Override
             public Boolean execute() throws MageException {
-                return managerFactory.sessionManager().setUserData(userName, sessionId, userData, clientVersion, userIdStr);
+                return managerFactory.sessionManager().setUserData(sessionId, userData, clientVersion, userIdStr);
             }
         });
     }

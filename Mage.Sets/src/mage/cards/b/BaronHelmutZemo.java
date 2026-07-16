@@ -24,7 +24,6 @@ import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -82,6 +81,8 @@ class BaronHelmutZemoBoastCost extends CostImpl {
         blackCardFilter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
+    Cards exiledCards = new CardsImpl();
+
     BaronHelmutZemoBoastCost() {
         this.text = "exile any number of black cards from your graveyard with fifteen or more"
                 + " black mana symbols among their mana costs";
@@ -89,6 +90,7 @@ class BaronHelmutZemoBoastCost extends CostImpl {
 
     private BaronHelmutZemoBoastCost(final BaronHelmutZemoBoastCost cost) {
         super(cost);
+        this.exiledCards = cost.exiledCards.copy();
     }
 
     @Override
@@ -106,6 +108,7 @@ class BaronHelmutZemoBoastCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        this.exiledCards.clear();
         Player player = game.getPlayer(controllerId);
         if (player == null) {
             return false;
@@ -135,6 +138,9 @@ class BaronHelmutZemoBoastCost extends CostImpl {
                 CardUtil.getExileZoneId(game, source),
                 CardUtil.getSourceName(game, source)
         );
+        if (paid) {
+            this.exiledCards.addAll(chosen);
+        }
         return paid;
     }
 
@@ -148,6 +154,10 @@ class BaronHelmutZemoBoastCost extends CostImpl {
                 .stream()
                 .filter(mc -> mc.containsColor(ColoredManaSymbol.B))
                 .count();
+    }
+
+    public Cards getExiledCards() {
+        return this.exiledCards;
     }
 }
 
@@ -171,15 +181,18 @@ class BaronHelmutZemoBoastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
-        if (player == null || exileZone == null || exileZone.isEmpty()) {
+        if (player == null) {
             return false;
         }
         Cards copies = new CardsImpl();
-        for (UUID cardId : exileZone) {
-            Card card = game.getCard(cardId);
-            if (card != null) {
-                copies.add(game.copyCard(card, source, source.getControllerId()));
+        for (Cost cost : source.getCosts()) {
+            if (cost instanceof BaronHelmutZemoBoastCost) {
+                BaronHelmutZemoBoastCost exileCost = (BaronHelmutZemoBoastCost) cost;
+                Cards exileCards = exileCost.getExiledCards().copy();
+                exileCards.retainZone(Zone.EXILED, game);
+                exileCards.getCards(game).forEach(card -> {
+                    copies.add(game.copyCard(card, source, source.getControllerId()));
+                });
             }
         }
         if (copies.isEmpty()) {
