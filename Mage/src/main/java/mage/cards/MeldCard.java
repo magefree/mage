@@ -100,6 +100,11 @@ public abstract class MeldCard extends CardImpl {
 
     @Override
     public int getManaValue() {
+        // 202.3c
+        // The mana value of a melded permanent is calculated as though it had the combined mana cost 
+        // of the front faces of each card that represents it. If a permanent is a copy of a melded 
+        // permanent (even if that copy is represented by two other meld cards), the mana value of 
+        // the copy is 0.
         if (this.isCopy()) {
             return 0;
         } else {

@@ -36,7 +36,7 @@ public interface MageServer {
 
     boolean connectAdmin(String password, String sessionId, MageVersion version) throws MageException;
 
-    boolean connectSetUserData(String userName, String sessionId, UserData userData, String clientVersion, String userIdStr) throws MageException;
+    boolean connectSetUserData(String sessionId, UserData userData, String clientVersion, String userIdStr) throws MageException;
 
     boolean ping(String sessionId, String pingInfo) throws MageException;
     

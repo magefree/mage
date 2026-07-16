@@ -167,11 +167,26 @@ public class TargetCard extends TargetObject {
      */
     protected static Set<UUID> getAllPossibleTargetInAnyZone(Game game, Player player, UUID sourceControllerId, Ability source, FilterCard filter, boolean isNotTarget) {
         Set<UUID> possibleTargets = new HashSet<>();
+
+        // see game.getCard for all source of the cards
+
+        // normal cards
         for (Card card : game.getCards()) {
             if (filter.match(card, sourceControllerId, source, game)) {
                 possibleTargets.add(card.getId());
             }
         }
+
+        // copied cards (example: copied in exile and cast from it - see Baron Helmut Zemo)
+        for (Card card : game.getState().getCopiedCards()) {
+            if (filter.match(card, sourceControllerId, source, game)) {
+                possibleTargets.add(card.getId());
+            }
+        }
+
+        // meld cards
+        // TODO: are meld cards already in game.getCards()?
+
         return possibleTargets;
     }
 

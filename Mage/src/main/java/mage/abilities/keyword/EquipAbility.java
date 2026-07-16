@@ -22,6 +22,7 @@ import java.util.List;
 public class EquipAbility extends ActivatedAbilityImpl {
 
     private String costReduceText = null;
+    private String reminderText = null;
     private final boolean showAbilityHint;
 
     public EquipAbility(int cost) {
@@ -71,11 +72,16 @@ public class EquipAbility extends ActivatedAbilityImpl {
     protected EquipAbility(final EquipAbility ability) {
         super(ability);
         this.costReduceText = ability.costReduceText;
+        this.reminderText = ability.reminderText;
         this.showAbilityHint = ability.showAbilityHint;
     }
 
     public void setCostReduceText(String text) {
         this.costReduceText = text;
+    }
+
+    public void setReminderText(String text) {
+        this.reminderText = text;
     }
 
     @Override
@@ -86,7 +92,7 @@ public class EquipAbility extends ActivatedAbilityImpl {
     @Override
     public String getRule() {
         String targetText = getTargets().get(0) != null ? getTargets().get(0).getFilter().getMessage() : "creature";
-        String reminderText = " <i>(" + getManaCosts().getText() + ": Attach to target " + targetText + ". Equip only as a sorcery.)</i>";
+        String reminderText = " <i>(" + (this.reminderText != null ? this.reminderText : ( getManaCosts().getText() + ": Attach to target " + targetText + ". Equip only as a sorcery.)")) + "</i>";
 
         StringBuilder sb = new StringBuilder(addRulePrefix("Equip"));
         if (!targetText.equals("creature you control")) {

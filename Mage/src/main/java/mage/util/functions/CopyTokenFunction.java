@@ -58,7 +58,7 @@ public class CopyTokenFunction {
 
         // handle mutate characteristics first
         if (source instanceof Permanent && ((Permanent) source).getMutateCount() > 0) {
-            ((Permanent) source).reset(game);
+            ((Permanent) source).reset(game); // TODO: pissible buggy, need research and replace by source.copy()? see #14981
             copyToToken(target, source, game);
             return;
         }
