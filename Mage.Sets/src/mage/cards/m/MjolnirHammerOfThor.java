@@ -10,12 +10,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -28,7 +25,6 @@ import mage.abilities.keyword.ChannelAbility;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
 import mage.util.CardUtil;
 
 /**
@@ -65,7 +61,9 @@ public final class MjolnirHammerOfThor extends CardImpl {
         this.addAbility(equipAbility);
 
         // {2}{R}, Discard this card: It deals 2 damage to each creature.
-        Ability channelAbility = new ChannelAbility("{2}{R}", new DamageAllEffect(2, "It", new FilterCreaturePermanent()));
+        Ability channelAbility = new ChannelAbility(
+                "{2}{R}", new DamageAllEffect(2, "It", new FilterCreaturePermanent()), TimingRule.INSTANT, false
+        );
         this.addAbility(channelAbility);
     }
 

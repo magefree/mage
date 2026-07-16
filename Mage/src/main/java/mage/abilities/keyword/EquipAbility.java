@@ -92,7 +92,7 @@ public class EquipAbility extends ActivatedAbilityImpl {
     @Override
     public String getRule() {
         String targetText = getTargets().get(0) != null ? getTargets().get(0).getFilter().getMessage() : "creature";
-        String reminderText = " <i>(" + (this.reminderText != null ? this.reminderText : ( getManaCosts().getText() + ": Attach to target " + targetText + ". Equip only as a sorcery.)")) + "</i>";
+        String reminderText = " <i>(" + (this.reminderText != null ? this.reminderText : ( getManaCosts().getText() + ": Attach to target " + targetText + ". Equip only as a sorcery.")) + ")</i>";
 
         StringBuilder sb = new StringBuilder(addRulePrefix("Equip"));
         if (!targetText.equals("creature you control")) {
