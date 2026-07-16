@@ -22,9 +22,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="panelLeft" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="panelRight" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -52,7 +50,7 @@
                       <Component id="panelCommands" alignment="0" max="32767" attributes="0"/>
                       <Component id="panelInfo" alignment="0" max="32767" attributes="0"/>
                       <Component id="panelPacks" alignment="0" max="32767" attributes="0"/>
-                      <Component id="panelBigCard" pref="0" max="32767" attributes="0"/>
+                      <Component id="panelBigCard" pref="-2" max="32767" attributes="0"/>
                       <Component id="panelPlayers" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -70,7 +68,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="panelPlayers" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="112" max="32767" attributes="0"/>
-                  <Component id="panelBigCard" min="-2" pref="285" max="-2" attributes="0"/>
+                  <Component id="panelBigCard" min="-2" pref="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
