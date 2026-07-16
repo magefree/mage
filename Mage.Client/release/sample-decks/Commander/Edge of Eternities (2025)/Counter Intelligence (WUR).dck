@@ -1,0 +1,96 @@
+1 [EOC:147] Adarkar Wastes
+1 [EOC:113] Alibou, Ancient Witness
+1 [EOC:148] Ancient Den
+1 [EOC:63] Angel of the Ruins
+1 [EOC:53] Arcane Signet
+1 [EOC:131] Astral Cornucopia
+1 [EOC:58] Battlefield Forge
+1 [EOC:150] Buried Ruin
+1 [EOC:153] Cascade Bluffs
+1 [EOC:87] Chain Reaction
+1 [EOC:49] Chaos Warp
+1 [EOC:68] Chrome Host Seedshark
+1 [EOC:155] Clifftop Retreat
+1 [EOC:54] Cloud Key
+1 [EOC:59] Command Tower
+1 [EOC:132] Coretapper
+1 [EOC:133] Crystalline Crawler
+1 [EOC:69] Cyberdrive Awakener
+1 [EOC:134] Darksteel Reactor
+1 [EOC:70] Deepglow Skate
+1 [EOC:9] Depthshaker Titan
+1 [EOC:64] Dispatch
+1 [EOC:135] Empowered Autogenerator
+1 [EOC:71] Emry, Lurker of the Loch
+1 [EOC:114] Enthusiastic Mechanaut
+1 [EOC:136] Etched Oracle
+1 [EOC:72] Etherium Sculptor
+1 [EOC:137] Everflowing Chalice
+1 [EOC:158] Evolving Wilds
+1 [EOC:159] Exotic Orchard
+1 [EOC:73] Experimental Augury
+1 [EOC:65] Fumigate
+1 [EOC:55] Gavel of the Righteous
+1 [EOC:160] Glacial Fortress
+1 [EOC:22] Glittering Massif
+1 [EOC:138] Golem Foundry
+1 [EOC:161] Great Furnace
+1 [EOC:139] Hangarback Walker
+1 [EOC:6] Insight Engine
+1 [EOC:162] Irrigated Farmland
+3 [EOE:269] Island
+1 [EOC:118] Jhoira, Weatherlight Captain
+1 [EOC:74] Kappa Cannoneer
+1 [EOC:163] Karn's Bastion
+1 [EOC:3] Kilo, Apogee Mind
+1 [EOC:166] Lonely Sandbar
+1 [EOC:11] Long-Range Sensor
+1 [EOC:140] Lux Artillery
+1 [EOC:141] Lux Cannon
+1 [EOC:142] Mindless Automaton
+3 [EOE:274] Mountain
+1 [EOC:17] Moxite Refinery
+1 [EOC:170] Mystic Monastery
+1 [EOC:66] Organic Extinction
+1 [EOC:5] Patrolling Peacemaker
+1 [EOC:56] Pentad Prism
+1 [EOC:75] Phyrexian Metamorph
+3 [EOE:268] Plains
+1 [EOC:76] Pull from Tomorrow
+1 [EOC:23] Radiant Summit
+1 [EOC:171] Razortide Bridge
+1 [EOC:67] Resourceful Defense
+1 [EOC:77] Ripples of Potential
+1 [EOC:174] Rugged Prairie
+1 [EOC:175] Rustvale Bridge
+1 [EOC:176] Seat of the Synod
+1 [EOC:177] Secluded Steppe
+1 [EOC:179] Shivan Reef
+1 [EOC:180] Silverbluff Bridge
+1 [EOC:181] Skycloud Expanse
+1 [EOC:57] Sol Ring
+1 [EOC:18] Solar Array
+1 [EOC:143] Soul-Guide Lantern
+1 [EOC:183] Spire of Industry
+1 [EOC:144] Steel Overseer
+1 [EOC:184] Sulfur Falls
+1 [EOC:19] Surge Conductor
+1 [EOC:46] Swan Song
+1 [EOC:45] Swords to Plowshares
+1 [EOC:78] Tekuthal, Inquiry Dominus
+1 [EOC:186] Temple of Enlightenment
+1 [EOC:187] Temple of Epiphany
+1 [EOC:188] Temple of Triumph
+1 [EOC:47] Tezzeret's Gambit
+1 [EOC:168] The Mycosynth Gardens
+1 [EOC:48] Thirst for Knowledge
+1 [EOC:79] Thought Monitor
+1 [EOC:145] Threefold Thunderhulk
+1 [EOC:80] Thrummingbird
+1 [EOC:146] Titan Forge
+1 [EOC:81] Universal Surveillance
+1 [EOC:7] Uthros Research Craft
+1 [EOC:128] Wake the Past
+SB: 1 [EOC:2] Inspirit, Flagship Vessel
+LAYOUT MAIN:(1,9)(CMC,false,50)|([EOC:147],[EOC:148],[EOC:131],[EOC:58],[EOC:150],[EOC:153],[EOC:155],[EOC:59],[EOC:137],[EOC:158],[EOC:159],[EOC:160],[EOC:22],[EOC:161],[EOC:139],[EOC:162],[EOE:269],[EOE:269],[EOE:269],[EOC:163],[EOC:166],[EOE:274],[EOE:274],[EOE:274],[EOC:170],[EOE:268],[EOE:268],[EOE:268],[EOC:23],[EOC:171],[EOC:174],[EOC:175],[EOC:176],[EOC:177],[EOC:179],[EOC:180],[EOC:181],[EOC:183],[EOC:184],[EOC:186],[EOC:187],[EOC:188],[EOC:168])([EOC:64],[EOC:57],[EOC:143],[EOC:46],[EOC:45])([EOC:53],[EOC:132],[EOC:114],[EOC:72],[EOC:73],[EOC:55],[EOC:17],[EOC:56],[EOC:76],[EOC:77],[EOC:144],[EOC:80])([EOC:49],[EOC:68],[EOC:54],[EOC:71],[EOC:138],[EOC:6],[EOC:3],[EOC:11],[EOC:5],[EOC:67],[EOC:18],[EOC:19],[EOC:48],[EOC:146],[EOC:81],[EOC:7])([EOC:87],[EOC:133],[EOC:134],[EOC:135],[EOC:136],[EOC:118],[EOC:140],[EOC:141],[EOC:142],[EOC:75],[EOC:78],[EOC:47])([EOC:113],[EOC:70],[EOC:65])([EOC:69],[EOC:74])([EOC:63],[EOC:9],[EOC:79],[EOC:145],[EOC:128])([EOC:66])
+LAYOUT SIDEBOARD:(1,1)(RARITY,true,24)|([EOC:2])
