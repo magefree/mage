@@ -104,9 +104,8 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
         this.objectReference = objectReference;
         this.zoneChangeCounter = Integer.MIN_VALUE;
 
-        // add additional face up and information abilities
         if (turnFaceUpCosts != null) {
-            // face up for all
+            // add real face up ability for activate (hidden from rules)
             this.additionalAbilities.add(
                     new TurnFaceUpAbility(turnFaceUpCosts, faceDownType == FaceDownType.MEGAMORPHED)
                             .setCostAdjuster(costAdjuster)
@@ -116,24 +115,26 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
         switch (faceDownType) {
             case MORPHED:
             case MEGAMORPHED:
-                if (turnFaceUpCosts != null) {
-                    // face up rules replace for cost hide
-                    this.additionalAbilities.add(new SimpleStaticAbility(Zone.ALL, new InfoEffect(
-                            "Turn it face up any time for its morph cost."
-                    )));
-                }
+                // add fake face up ability for rules and opponents
+                this.additionalAbilities.add(new SimpleStaticAbility(Zone.ALL, new InfoEffect(
+                        "Turn it face up any time for its morph cost."
+                )));
                 break;
             case DISGUISED:
             case CLOAKED:
-                // Ward {2} -- should not be dependent on turnFaceUpCosts.
-                this.additionalAbilities.add(new WardAbility(new ManaCostsImpl<>("{2}")));
+                // add fake face up ability for rules and opponents
+                this.additionalAbilities.add(new SimpleStaticAbility(Zone.ALL, new InfoEffect(
+                        "Turn it face up any time for its disguise/cloaked cost."
+                )));
 
-                if (turnFaceUpCosts != null) {
-                    // face up rules replace for cost hide
-                    this.additionalAbilities.add(new SimpleStaticAbility(Zone.ALL, new InfoEffect(
-                            "Turn it face up any time for its disguise/cloaked cost."
-                    )));
-                }
+                // add real and fake ward ability
+                // Ward {2} -- should not be dependent on turnFaceUpCosts.
+                this.additionalAbilities.add(new WardAbility(new ManaCostsImpl<>("{2}")).withFaceDownUsage());
+                this.additionalAbilities.add(new SimpleStaticAbility(Zone.ALL, new InfoEffect(
+                        "A face-down creature that was cloaked or cast with disguise has ward {2}. " 
+                        + "<i>(Whenever that creature becomes the target of a spell or ability an opponent " 
+                        + "controls, counter it unless that player pays {2}.)</i>"
+                )));
                 break;
             case MANUAL:
             case MANIFESTED:
