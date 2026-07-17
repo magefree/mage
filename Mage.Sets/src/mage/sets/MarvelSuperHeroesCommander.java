@@ -299,6 +299,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hull Breach", 185, Rarity.COMMON, mage.cards.h.HullBreach.class));
         cards.add(new SetCardInfo("Human Torch", 3, Rarity.MYTHIC, mage.cards.h.HumanTorch.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Human Torch", 877, Rarity.MYTHIC, mage.cards.h.HumanTorch.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hyperion's Atomic Vision", 600, Rarity.UNCOMMON, mage.cards.h.HyperionsAtomicVision.class));
         cards.add(new SetCardInfo("Hyperion, Supreme Hero", 599, Rarity.MYTHIC, mage.cards.h.HyperionSupremeHero.class));
         cards.add(new SetCardInfo("Iceman and Firestar", 742, Rarity.UNCOMMON, mage.cards.i.IcemanAndFirestar.class));
         cards.add(new SetCardInfo("Iconic Shield", 520, Rarity.UNCOMMON, mage.cards.i.IconicShield.class));
