@@ -39,7 +39,7 @@ public class WizardsPlayNetwork2026 extends ExpansionSet {
         cards.add(new SetCardInfo("Bilbo, Luckwearer", 15, Rarity.RARE, mage.cards.b.BilboLuckwearer.class));
         cards.add(new SetCardInfo("Wood Elves", 16, Rarity.RARE, mage.cards.w.WoodElves.class));
         cards.add(new SetCardInfo("Highly Illogical", 17, Rarity.RARE, mage.cards.h.HighlyIllogical.class));
-        // cards.add(new SetCardInfo("Munitions Enthusiast", 18, Rarity.RARE, mage.cards.m.MunitionsEnthusiast.class));
+        cards.add(new SetCardInfo("Munitions Enthusiast", 18, Rarity.RARE, mage.cards.m.MunitionsEnthusiast.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 19, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Burst Lightning", 20, Rarity.RARE, mage.cards.b.BurstLightning.class));
     }
