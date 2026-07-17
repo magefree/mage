@@ -242,6 +242,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Namor the Sub-Mariner", 69, Rarity.MYTHIC, mage.cards.n.NamorTheSubMariner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ninja of the Hand", 108, Rarity.COMMON, mage.cards.n.NinjaOfTheHand.class));
         cards.add(new SetCardInfo("Okoye, Dora Milaje Leader", 27, Rarity.UNCOMMON, mage.cards.o.OkoyeDoraMilajeLeader.class));
+        cards.add(new SetCardInfo("Origin of the Avengers", 28, Rarity.RARE, mage.cards.o.OriginOfTheAvengers.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Origin of the Avengers", 298, Rarity.RARE, mage.cards.o.OriginOfTheAvengers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Panther Pounce", 29, Rarity.COMMON, mage.cards.p.PantherPounce.class));
         cards.add(new SetCardInfo("Patriot, Shield Wielder", 30, Rarity.UNCOMMON, mage.cards.p.PatriotShieldWielder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Patriot, Shield Wielder", 444, Rarity.UNCOMMON, mage.cards.p.PatriotShieldWielder.class, NON_FULL_USE_VARIOUS));
