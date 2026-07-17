@@ -102,8 +102,8 @@ class KarnLiberatedEffect extends OneShotEffect {
         for (Card card : game.getCards()) {
             game.getState().addCard(card);
         }
-        // TODO: miss meld cards?
-        // TODO: miss copied cards?
+        // TODO: miss meld cards (no needs?)
+        // TODO: miss copied cards (no needs?)
 
         for (Player player : game.getPlayers().values()) {
             // TODO: why it keep old players with old data (need reset and lose call for it???)

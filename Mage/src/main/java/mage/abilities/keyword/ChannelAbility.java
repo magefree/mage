@@ -16,10 +16,14 @@ public class ChannelAbility extends ActivatedAbilityImpl {
     }
 
     public ChannelAbility(String manaString, Effect effect, TimingRule timing) {
+        this(manaString, effect, timing, true);
+    }
+
+    public ChannelAbility(String manaString, Effect effect, TimingRule timing, boolean withAbilityWord) {
         super(Zone.HAND, effect, new ManaCostsImpl<>(manaString));
         this.addCost(new DiscardSourceCost());
         this.timing = timing;
-        this.setAbilityWord(AbilityWord.CHANNEL);
+        if (withAbilityWord) this.setAbilityWord(AbilityWord.CHANNEL);
     }
 
     protected ChannelAbility(final ChannelAbility ability) {
