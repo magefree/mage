@@ -16,7 +16,7 @@ public final class StarTrek extends ExpansionSet {
     }
 
     private StarTrek() {
-        super("Star Trek", "TRK", ExpansionSet.buildDate(2026, 11, 20), SetType.EXPANSION);
+        super("Star Trek", "TRK", ExpansionSet.buildDate(2026, 11, 13), SetType.EXPANSION);
         this.blockName = "Star Trek"; // for sorting in GUI
         this.hasBasicLands = false; // TODO: Temporary until spoilers conclude
 

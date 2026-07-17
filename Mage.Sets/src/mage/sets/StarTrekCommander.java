@@ -16,7 +16,7 @@ public final class StarTrekCommander extends ExpansionSet {
     }
 
     private StarTrekCommander() {
-        super("Star Trek Commander", "TRC", ExpansionSet.buildDate(2026, 11, 20), SetType.SUPPLEMENTAL);
+        super("Star Trek Commander", "TRC", ExpansionSet.buildDate(2026, 11, 13), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Benjamin Sisko, Besieged", 200, Rarity.MYTHIC, mage.cards.b.BenjaminSiskoBesieged.class));
