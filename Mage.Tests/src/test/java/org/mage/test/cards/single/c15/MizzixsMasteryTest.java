@@ -33,6 +33,7 @@ public class MizzixsMasteryTest extends CardTestPlayerBase {
 
         assertLife(playerB, 20 - 2 * 5);
         assertExileCount(playerA, fireball, 2);
+        assertExileCount(playerA, 3);
     }
 
 }

@@ -66,6 +66,13 @@ public class WardAbility extends TriggeredAbilityImpl {
         this.showAbilityHint = ability.showAbilityHint;
         this.whereXIs = ability.whereXIs;
     }
+    
+    public WardAbility withFaceDownUsage() {
+        // same logic as TurnFaceUpAbility
+        this.setWorksFaceDown(true);
+        this.setRuleVisible(false); // hide in face up, but show in face down view (it will be enabled as default ability)
+        return this;
+    }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
