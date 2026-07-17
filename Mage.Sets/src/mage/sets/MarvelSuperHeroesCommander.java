@@ -417,6 +417,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Nova Flame", 368, Rarity.RARE, mage.cards.n.NovaFlame.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nova Flame", 57, Rarity.RARE, mage.cards.n.NovaFlame.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Origin of Black Widow", 664, Rarity.UNCOMMON, mage.cards.o.OriginOfBlackWidow.class));
+        cards.add(new SetCardInfo("Origin of Captain America", 605, Rarity.UNCOMMON, mage.cards.o.OriginOfCaptainAmerica.class));
         cards.add(new SetCardInfo("Origin of the Hulk", 728, Rarity.UNCOMMON, mage.cards.o.OriginOfTheHulk.class));
         cards.add(new SetCardInfo("Origin of Thor", 701, Rarity.UNCOMMON, mage.cards.o.OriginOfThor.class));
         cards.add(new SetCardInfo("Overwhelming Stampede", 178, Rarity.RARE, mage.cards.o.OverwhelmingStampede.class, NON_FULL_USE_VARIOUS));
