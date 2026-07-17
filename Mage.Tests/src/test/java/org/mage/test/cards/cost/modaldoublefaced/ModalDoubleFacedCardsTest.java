@@ -10,6 +10,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
+import mage.game.stack.Spell;
 import mage.util.CardUtil;
 import mage.util.ManaUtil;
 import mage.view.GameView;
@@ -262,6 +263,7 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         Assert.assertTrue("must be minotaur", card.hasSubtype(SubType.MINOTAUR, currentGame));
         Assert.assertEquals("power", 4, card.getPower().getValue());
         Assert.assertEquals("toughness", 5, card.getToughness().getValue());
+        Assert.assertEquals("mana value", 6, card.getManaValue());
 
         // stats in hand - mdf
         card = getHandCards(playerA).stream().filter(c -> CardUtil.haveSameNames(c, "Halvar, God of Battle", currentGame)).findFirst().get();
@@ -1041,6 +1043,7 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
             Assert.assertEquals(info + " - color", "R", permanent.getColor(game).toString());
             Assert.assertEquals(info + " - power", 4, permanent.getPower().getValue());
             Assert.assertEquals(info + " - toughness", 5, permanent.getToughness().getValue());
+            Assert.assertEquals(info + " - mana value", 6, permanent.getManaValue());
             Assert.assertEquals(info + " - card type", "[Creature]", permanent.getCardType(game).toString());
             Assert.assertEquals(info + " - card subtype", "[Minotaur, Warrior]", permanent.getSubtype(game).toString());
         });
@@ -1080,6 +1083,7 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
             Assert.assertEquals(info + " - color", "", permanent.getColor(game).toString());
             Assert.assertEquals(info + " - power", 0, permanent.getPower().getValue());
             Assert.assertEquals(info + " - toughness", 0, permanent.getToughness().getValue());
+            Assert.assertEquals(info + " - mana value", 0, permanent.getManaValue());
             Assert.assertEquals(info + " - card type", "[Land]", permanent.getCardType(game).toString());
             Assert.assertEquals(info + " - card subtype", "[]", permanent.getSubtype(game).toString());
         });
@@ -1197,6 +1201,7 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         Assert.assertTrue("client must use side 1 - subtype", permanentView.getSubTypes().contains(SubType.GOD));
         Assert.assertEquals("client must use side 1 - P", "4", permanentView.getPower());
         Assert.assertEquals("client must use side 1 - T", "5", permanentView.getToughness());
+        Assert.assertEquals("client must use side 1 - MV", 5, permanentView.getManaValue());
         Assert.assertTrue("client must use side 1 - menace ability", rules.stream().anyMatch(r -> r.contains("Menace")));
         // from copy effect
         Assert.assertTrue("client must use effect - artifact", permanentView.getTypeText().contains("Artifact"));
@@ -1285,5 +1290,267 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Akoum Warrior", 1);
         assertType("Akoum Warrior", CardType.ARTIFACT, true);
+    }
+
+    /**
+     * Rule 712.8f: While a modal double-faced permanent is on the battlefield,
+     * it has only the characteristics of the face that's up.
+     * So mana value must reflect the face currently on the battlefield.
+     *
+     * Esika, God of the Tree  {1}{G}{G} - MV 3 (front face)
+     * The Prismatic Bridge    {W}{U}{B}{R}{G} - MV 5 (back face)
+     */
+    @Test
+    public void test_ManaValue_MDFC_FrontFace() {
+        // Cast front face (Esika, God of the Tree) - MV must be 3
+        addCard(Zone.HAND, playerA, "Esika, God of the Tree");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Esika, God of the Tree");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Esika, God of the Tree", 1);
+        Assert.assertEquals("MDFC front face on battlefield must have its own mana value",
+                3, getPermanent("Esika, God of the Tree", playerA).getManaValue());
+    }
+
+    @Test
+    public void test_ManaValue_MDFC_BackFace() {
+        // Cast back face (The Prismatic Bridge) - MV must be 5, not Esika's 3
+        addCard(Zone.HAND, playerA, "Esika, God of the Tree");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "The Prismatic Bridge", 1);
+        Assert.assertEquals("MDFC back face on battlefield must have back face mana value (712.8f)",
+                5, getPermanent("The Prismatic Bridge", playerA).getManaValue());
+    }
+
+    /**
+     * Verify that spells filtering by mana value correctly target MDFC permanents
+     * based on whichever face is currently up (712.8f).
+     *
+     * Eliminate: Destroy target creature or planeswalker with mana value 3 or less.
+     * - Esika (MV 3) should be targetable
+     * - The Prismatic Bridge (MV 5) should NOT be targetable
+     */
+    @Test
+    public void test_ManaValue_MDFC_TargetingWithManaValueFilter_FrontSide() {
+        // Esika MV 3 - Eliminate can target it (MV <= 3)
+        addCard(Zone.HAND, playerA, "Esika, God of the Tree");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.HAND, playerB, "Eliminate"); // {1}{B} - destroy creature/planeswalker with MV <= 3
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Esika, God of the Tree");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Eliminate", "Esika, God of the Tree");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Esika, God of the Tree", 0);
+        assertGraveyardCount(playerA, "Esika, God of the Tree", 1);
+    }
+
+
+    @Test
+    public void test_ManaValue_MDFC_TargetingWithManaValueFilter_BackSide() {
+        // The Prismatic Bridge MV 5 - Eliminate cannot target it (MV > 3)
+        addCard(Zone.HAND, playerA, "Esika, God of the Tree");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        addCard(Zone.HAND, playerB, "Eliminate"); // {1}{B} - destroy creature/planeswalker with MV <= 3
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        checkPlayableAbility("Eliminate must not be castable (no valid target)", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Eliminate", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "The Prismatic Bridge", 1);
+    }
+
+    /**
+     * Rule 712.8f: While a modal double-faced spell is on the stack, it has only the
+     * characteristics of the face that's up. So mana value on the stack must match
+     * whichever face was chosen to cast.
+     *
+     * Esika, God of the Tree  {1}{G}{G} - MV 3 (front face)
+     * The Prismatic Bridge    {W}{U}{B}{R}{G} - MV 5 (back face)
+     */
+    @Test
+    public void test_ManaValue_MDFC_OnStack_FrontSide() {
+        addCard(Zone.HAND, playerA, "Esika, God of the Tree");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Esika, God of the Tree");
+        checkStackObject("on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Esika, God of the Tree", 1);
+        runCode("check mana value on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Spell spell = (Spell) game.getStack().getFirstOrNull();
+            Assert.assertNotNull(spell);
+            Assert.assertEquals("Esika, God of the Tree", spell.getName());
+            Assert.assertEquals("MDFC front face on stack must have its own mana value (712.8f)",
+                    3, spell.getManaValue());
+        });
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Esika, God of the Tree", 1);
+    }
+
+    @Test
+    public void test_ManaValue_MDFC_OnStack_BackSide() {
+        addCard(Zone.HAND, playerA, "Esika, God of the Tree");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge");
+        checkStackObject("on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast The Prismatic Bridge", 1);
+        runCode("check mana value on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Spell spell = (Spell) game.getStack().getFirstOrNull();
+            Assert.assertNotNull(spell);
+            Assert.assertEquals("The Prismatic Bridge", spell.getName());
+            Assert.assertEquals("MDFC back face on stack must have back face mana value (712.8f)",
+                    5, spell.getManaValue());
+        });
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "The Prismatic Bridge", 1);
+    }
+
+    /**
+     * In all zones other than stack and battlefield, an MDFC uses only the characteristics
+     * of its front face (712.8g). Mana value must always be the front face's MV,
+     * regardless of which face was on the battlefield before it moved to that zone.
+     *
+     * Esika, God of the Tree  {1}{G}{G} - MV 3 (front face)
+     * The Prismatic Bridge    {W}{U}{B}{R}{G} - MV 5 (back face)
+     */
+    @Test
+    public void test_ManaValue_MDFC_OtherZones() {
+        // In hand (never cast): must be front face MV 3
+        addCard(Zone.HAND, playerA, "Esika, God of the Tree");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        // Naturalize {1}{G}: destroy target artifact or enchantment
+        addCard(Zone.HAND, playerB, "Naturalize");
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 2);
+
+        // Cast as back face (The Prismatic Bridge, MV 5 on battlefield)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("back face on battlefield", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge", 1);
+
+        // Destroy it — card goes to graveyard
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Naturalize", "The Prismatic Bridge");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        // Graveyard: must use front face MV 3, not back face MV 5
+        assertGraveyardCount(playerA, "Esika, God of the Tree", 1);
+        Card graveyardCard = playerA.getGraveyard().getCards(currentGame)
+                .stream()
+                .filter(c -> CardUtil.haveSameNames(c, "Esika, God of the Tree", currentGame))
+                .findFirst().orElse(null);
+        Assert.assertNotNull("Card must be in graveyard", graveyardCard);
+        Assert.assertEquals("MDFC in graveyard must use front face mana value (712.8g)",
+                3, graveyardCard.getManaValue());
+    }
+
+    @Test
+    public void test_ManaValue_MDFC_InHand() {
+        // In hand, MDFC must use front face MV 3 (never the back face MV 5)
+        addCard(Zone.HAND, playerA, "Esika, God of the Tree");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        Card handCard = getHandCards(playerA).stream()
+                .filter(c -> CardUtil.haveSameNames(c, "Esika, God of the Tree", currentGame))
+                .findFirst().orElse(null);
+        Assert.assertNotNull("Card must be in hand", handCard);
+        Assert.assertEquals("MDFC in hand must use front face mana value (712.8g)",
+                3, handCard.getManaValue());
+    }
+
+    @Test
+    public void test_Single_Moonmist_MustTransformAllDFC() {
+        // With Opalescence + Arcane Adaptation, The Prismatic Bridge becomes a Human creature, so Moonmist will transform it
+
+        addCard(Zone.HAND, playerA, "Esika, God of the Tree");
+        addCard(Zone.HAND, playerA, "Moonmist");
+        addCard(Zone.HAND, playerA, "Arcane Adaptation");
+        addCard(Zone.BATTLEFIELD, playerA, "Opalescence");
+        addCard(Zone.BATTLEFIELD, playerA, "Reckless Waif");
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Arcane Adaptation");
+        setChoice(playerA, "Human");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        checkPermanentCount("must resolve as back side", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge", 1);
+        checkType("bridge must be creature from Opalescence", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge", CardType.CREATURE, true);
+        checkSubType("bridge must be Human from Arcane Adaptation", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge", SubType.HUMAN, true);
+        checkPT("bridge must be 5/5 from Opalescence", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge", 5, 5);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Moonmist");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // transform
+        checkPermanentCount("moonmist must transform TDFC", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Merciless Predator", 1);
+        checkPermanentCount("front side must be gone", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reckless Waif", 0);
+
+        checkPermanentCount("moonmist must transform MDFC since spiderman", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Esika, God of the Tree", 1);
+        checkPermanentCount("mmoonmist must transform MDFC since spiderman", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge", 0);
+
+        checkPT("Now Esika must be 1/4 again", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Esika, God of the Tree", 1, 4);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
     }
 }

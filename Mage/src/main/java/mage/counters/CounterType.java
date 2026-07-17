@@ -188,6 +188,7 @@ public enum CounterType {
     POISON("poison"),
     POSSESSION("possession"),
     PRESSURE("pressure"),
+    PROMOTION("promotion"),
     PREY("prey"),
     PUPA("pupa"),
     RAD("rad"),
