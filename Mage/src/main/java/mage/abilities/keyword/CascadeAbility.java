@@ -17,6 +17,7 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
@@ -79,6 +80,7 @@ public class CascadeAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
+        this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
         return spell != null
                 && spell.getSourceId().equals(this.getSourceId());
     }
@@ -111,14 +113,14 @@ class CascadeEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Card sourceCard = game.getCard(source.getSourceId());
-        if (sourceCard == null) {
+        Spell sourceSpell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
+        if (sourceSpell == null) {
             return false;
         }
 
         // exile cards from the top of your library until you exile a nonland card whose converted mana cost is less than this spell's converted mana cost
         Cards cardsToExile = new CardsImpl();
-        int sourceCost = sourceCard.getManaValue();
+        int sourceCost = sourceSpell.getManaValue();
         Card cardToCast = null;
         for (Card card : controller.getLibrary().getCards(game)) {
             cardsToExile.add(card);

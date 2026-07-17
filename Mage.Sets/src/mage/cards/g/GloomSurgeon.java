@@ -3,12 +3,15 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.*;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -39,10 +42,10 @@ public final class GloomSurgeon extends CardImpl {
     }
 }
 
-class GloomSurgeonEffect extends ReplacementEffectImpl {
+class GloomSurgeonEffect extends PreventionEffectImpl {
 
     GloomSurgeonEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Exile);
+        super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, true, false);
         staticText = "If combat damage would be dealt to {this}, prevent that damage and exile that many cards from the top of your library";
     }
 
@@ -53,7 +56,7 @@ class GloomSurgeonEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         int damage = event.getAmount();
-        game.preventDamage(event, source, game, Integer.MAX_VALUE);
+        preventDamageAction(event, source, game);
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             player.moveCards(player.getLibrary().getTopCards(game, damage), Zone.EXILED, source, game);
@@ -62,17 +65,11 @@ class GloomSurgeonEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGE_PERMANENT;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getSourceId())) {
-            DamageEvent damageEvent = (DamageEvent) event;
-            return damageEvent.isCombatDamage();
+        if (source.getSourcePermanentIfItStillExists(game) == null) {
+            return false;
         }
-        return false;
+        return super.applies(event, source, game) && event.getTargetId().equals(source.getSourceId());
     }
 
     @Override

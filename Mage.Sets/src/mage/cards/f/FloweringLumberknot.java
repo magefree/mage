@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -56,8 +55,8 @@ class FloweringLumberknotEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
-            if (permanent.getPairedCard() != null) {
-                Permanent paired = permanent.getPairedCard().getPermanent(game);
+            if (permanent.getPairedMOR() != null) {
+                Permanent paired = permanent.getPairedMOR().getPermanent(game);
                 if (paired != null) {
                     boolean found = false;
                     for (Ability ability : paired.getAbilities(game)) {

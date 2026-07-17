@@ -25,6 +25,7 @@ public class Legacy extends Constructed {
         banned.add("Balance");
         banned.add("Bazaar of Baghdad");
         banned.add("Black Lotus");
+        banned.add("Candelabra of Tawnos");
         banned.add("Channel");
         banned.add("Deathrite Shaman");
         banned.add("Demonic Consultation");
@@ -32,6 +33,7 @@ public class Legacy extends Constructed {
         banned.add("Dig Through Time");
         banned.add("Dreadhorde Arcanist");
         banned.add("Earthcraft");
+        banned.add("Entomb");
         banned.add("Fastbond");
         banned.add("Flash");
         banned.add("Frantic Search");
@@ -56,6 +58,7 @@ public class Legacy extends Constructed {
         banned.add("Mox Ruby");
         banned.add("Mox Sapphire");
         banned.add("Mystical Tutor");
+        banned.add("Nadu, Winged Wisdom");
         banned.add("Necropotence");
         banned.add("Oath of Druids");
         banned.add("Oko, Thief of Crowns");
@@ -74,6 +77,7 @@ public class Legacy extends Constructed {
         banned.add("Tolarian Academy");
         banned.add("Treasure Cruise");
         banned.add("Troll of Khazad-dum");
+        banned.add("Undercity Informer");
         banned.add("Underworld Breach");
         banned.add("Vampiric Tutor");
         banned.add("Vexing Bauble");

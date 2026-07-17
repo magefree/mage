@@ -89,7 +89,7 @@ class MillicentRestlessRevenantTriggeredAbility extends TriggeredAbilityImpl {
         switch (event.getType()) {
             case ZONE_CHANGE:
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-                if (!zEvent.isDiesEvent()) {
+                if (!zEvent.isDiesEvent() || !zEvent.isPermanentMoved()) {
                     return false;
                 }
                 permanent = zEvent.getTarget();

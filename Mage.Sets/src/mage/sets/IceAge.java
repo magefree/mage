@@ -35,6 +35,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Anarchy", 170, Rarity.UNCOMMON, mage.cards.a.Anarchy.class, RETRO_ART));
         cards.add(new SetCardInfo("Arctic Foxes", 2, Rarity.COMMON, mage.cards.a.ArcticFoxes.class, RETRO_ART));
         cards.add(new SetCardInfo("Arcum's Sleigh", 309, Rarity.UNCOMMON, mage.cards.a.ArcumsSleigh.class, RETRO_ART));
+        cards.add(new SetCardInfo("Arcum's Weathervane", 310, Rarity.UNCOMMON, mage.cards.a.ArcumsWeathervane.class));
         cards.add(new SetCardInfo("Arenson's Aura", 3, Rarity.COMMON, mage.cards.a.ArensonsAura.class, RETRO_ART));
         cards.add(new SetCardInfo("Armor of Faith", 4, Rarity.COMMON, mage.cards.a.ArmorOfFaith.class, RETRO_ART));
         cards.add(new SetCardInfo("Arnjlot's Ascent", 57, Rarity.COMMON, mage.cards.a.ArnjlotsAscent.class, RETRO_ART));
@@ -55,6 +56,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Blinking Spirit", 8, Rarity.RARE, mage.cards.b.BlinkingSpirit.class, RETRO_ART));
         cards.add(new SetCardInfo("Blizzard", 227, Rarity.RARE, mage.cards.b.Blizzard.class, RETRO_ART));
         cards.add(new SetCardInfo("Blue Scarab", 9, Rarity.UNCOMMON, mage.cards.b.BlueScarab.class, RETRO_ART));
+        cards.add(new SetCardInfo("Bone Shaman", 176, Rarity.COMMON, mage.cards.b.BoneShaman.class));
         cards.add(new SetCardInfo("Brainstorm", 61, Rarity.COMMON, mage.cards.b.Brainstorm.class, RETRO_ART));
         cards.add(new SetCardInfo("Brand of Ill Omen", 177, Rarity.RARE, mage.cards.b.BrandOfIllOmen.class, RETRO_ART));
         cards.add(new SetCardInfo("Breath of Dreams", 62, Rarity.UNCOMMON, mage.cards.b.BreathOfDreams.class, RETRO_ART));
@@ -219,6 +221,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Krovikan Vampire", 141, Rarity.UNCOMMON, mage.cards.k.KrovikanVampire.class, RETRO_ART));
         cards.add(new SetCardInfo("Land Cap", 357, Rarity.RARE, mage.cards.l.LandCap.class, RETRO_ART));
         cards.add(new SetCardInfo("Lapis Lazuli Talisman", 327, Rarity.UNCOMMON, mage.cards.l.LapisLazuliTalisman.class, RETRO_ART));
+        cards.add(new SetCardInfo("Lava Burst", 198, Rarity.COMMON, mage.cards.l.LavaBurst.class, RETRO_ART));
         cards.add(new SetCardInfo("Lava Tubes", 358, Rarity.RARE, mage.cards.l.LavaTubes.class, RETRO_ART));
         cards.add(new SetCardInfo("Legions of Lim-Dul", 142, Rarity.COMMON, mage.cards.l.LegionsOfLimDul.class, RETRO_ART));
         cards.add(new SetCardInfo("Leshrac's Rite", 143, Rarity.UNCOMMON, mage.cards.l.LeshracsRite.class, RETRO_ART));
@@ -235,6 +238,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Marton Stromgald", 199, Rarity.RARE, mage.cards.m.MartonStromgald.class, RETRO_ART));
         cards.add(new SetCardInfo("Melee", 200, Rarity.UNCOMMON, mage.cards.m.Melee.class, RETRO_ART));
         cards.add(new SetCardInfo("Melting", 201, Rarity.UNCOMMON, mage.cards.m.Melting.class, RETRO_ART));
+        cards.add(new SetCardInfo("Mercenaries", 44, Rarity.RARE, mage.cards.m.Mercenaries.class, RETRO_ART));
         cards.add(new SetCardInfo("Merieke Ri Berit", 297, Rarity.RARE, mage.cards.m.MeriekeRiBerit.class, RETRO_ART));
         cards.add(new SetCardInfo("Mesmeric Trance", 83, Rarity.RARE, mage.cards.m.MesmericTrance.class, RETRO_ART));
         cards.add(new SetCardInfo("Meteor Shower", 202, Rarity.COMMON, mage.cards.m.MeteorShower.class, RETRO_ART));
@@ -264,6 +268,8 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Oath of Lim-Dul", 156, Rarity.RARE, mage.cards.o.OathOfLimDul.class, RETRO_ART));
         cards.add(new SetCardInfo("Onyx Talisman", 331, Rarity.UNCOMMON, mage.cards.o.OnyxTalisman.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Cannoneers", 205, Rarity.UNCOMMON, mage.cards.o.OrcishCannoneers.class, RETRO_ART));
+        cards.add(new SetCardInfo("Orcish Conscripts", 206, Rarity.COMMON, mage.cards.o.OrcishConscripts.class, RETRO_ART));
+        cards.add(new SetCardInfo("Orcish Farmer", 207, Rarity.COMMON, mage.cards.o.OrcishFarmer.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Healer", 208, Rarity.UNCOMMON, mage.cards.o.OrcishHealer.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Librarian", 209, Rarity.RARE, mage.cards.o.OrcishLibrarian.class, RETRO_ART));
         cards.add(new SetCardInfo("Orcish Lumberjack", 210, Rarity.COMMON, mage.cards.o.OrcishLumberjack.class, RETRO_ART));
@@ -300,6 +306,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("River Delta", 359, Rarity.RARE, mage.cards.r.RiverDelta.class, RETRO_ART));
         cards.add(new SetCardInfo("Runed Arch", 334, Rarity.RARE, mage.cards.r.RunedArch.class, RETRO_ART));
         cards.add(new SetCardInfo("Sabretooth Tiger", 215, Rarity.COMMON, mage.cards.s.SabretoothTiger.class, RETRO_ART));
+        cards.add(new SetCardInfo("Sacred Boon", 50, Rarity.UNCOMMON, mage.cards.s.SacredBoon.class, RETRO_ART));
         cards.add(new SetCardInfo("Scaled Wurm", 262, Rarity.COMMON, mage.cards.s.ScaledWurm.class, RETRO_ART));
         cards.add(new SetCardInfo("Sea Spirit", 95, Rarity.UNCOMMON, mage.cards.s.SeaSpirit.class, RETRO_ART));
         cards.add(new SetCardInfo("Seizures", 159, Rarity.COMMON, mage.cards.s.Seizures.class, RETRO_ART));

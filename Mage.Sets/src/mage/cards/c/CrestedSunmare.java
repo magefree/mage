@@ -32,7 +32,7 @@ public final class CrestedSunmare extends CardImpl {
         filter.add(SubType.HORSE.getPredicate());
     }
 
-    private static final Condition condition = new YouGainedLifeCondition();
+    private static final Condition condition = YouGainedLifeCondition.getZero();
 
     public CrestedSunmare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

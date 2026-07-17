@@ -7,8 +7,10 @@ import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
 import mage.abilities.hint.common.CreaturesYouControlHint;
+import mage.abilities.keyword.AffinityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AffinityType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -27,10 +29,8 @@ public final class SaltRoadPackbeast extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
-        // This spell costs {1} less to cast for each creature you control.
-        this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionForEachSourceEffect(1, CreaturesYouControlCount.SINGULAR)
-        ).addHint(CreaturesYouControlHint.instance));
+        // Affinity for creatures
+        this.addAbility(new AffinityAbility(AffinityType.CREATURES));
 
         // When this creature enters, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));

@@ -1,17 +1,17 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepSourceEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +27,7 @@ public final class HuttCrimeLord extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Hutt Crime Lord enters the battlefield with a bounty counter on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.BOUNTY.createInstance()), "with a bounty counter on it"));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.BOUNTY.createInstance()));
 
         // Whenever Hutt Crime Lord attacks, it does not untap during its controller's next untap step
         this.addAbility(new AttacksTriggeredAbility(new DontUntapInControllersNextUntapStepSourceEffect(), false));

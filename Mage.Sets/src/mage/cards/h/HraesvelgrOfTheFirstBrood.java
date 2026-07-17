@@ -43,7 +43,7 @@ public final class HraesvelgrOfTheFirstBrood extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Shiva's Aid -- When Hraesvelgr enters and whenever you cast a noncreature spell, target creature gets +1/+0 until end of turn and can't be blocked this turn.
         Ability ability = new OrTriggeredAbility(

@@ -1,17 +1,14 @@
 package mage.cards.w;
 
-import mage.ApprovingObject;
-import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effects;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -24,7 +21,7 @@ public final class WellOfKnowledge extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {2}: Draw a card. Any player may activate this ability but only during their draw step.
-        this.addAbility(new WellOfKnowledgeConditionalActivatedAbility());
+        this.addAbility(new WellOfKnowledgeActivatedAbility());
 
     }
 
@@ -38,74 +35,34 @@ public final class WellOfKnowledge extends CardImpl {
     }
 }
 
-class WellOfKnowledgeConditionalActivatedAbility extends ActivatedAbilityImpl {
+class WellOfKnowledgeActivatedAbility extends ActivatedAbilityImpl {
 
-    public WellOfKnowledgeConditionalActivatedAbility() {
-        super(Zone.BATTLEFIELD, new WellOfKnowledgeEffect(), new GenericManaCost(2));
-        condition = new IsStepCondition(PhaseStep.DRAW, false);
+    WellOfKnowledgeActivatedAbility() {
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
     }
 
-    private WellOfKnowledgeConditionalActivatedAbility(final WellOfKnowledgeConditionalActivatedAbility ability) {
+    private WellOfKnowledgeActivatedAbility(final WellOfKnowledgeActivatedAbility ability) {
         super(ability);
-        this.condition = ability.condition;
-    }
-
-    @Override
-    public Effects getEffects(Game game, EffectType effectType) {
-        if (!condition.apply(game, this)) {
-            return new Effects();
-        }
-        return super.getEffects(game, effectType);
     }
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
-        if (condition.apply(game, this)
-                && getCosts().canPay(this, this, playerId, game)
-                && game.isActivePlayer(playerId)) {
-            this.activatorId = playerId;
-            return new ActivationStatus(new ApprovingObject(this, game));
+        // note: does not call the super, because needs to be both more and less permissive
+        if (game.getTurnStepType() == PhaseStep.DRAW
+                && game.isActivePlayer(playerId)
+                && getCosts().canPay(this, this, playerId, game)) {
+            return ActivationStatus.withoutApprovingObject(true);
         }
         return ActivationStatus.getFalse();
-
     }
 
     @Override
-    public WellOfKnowledgeConditionalActivatedAbility copy() {
-        return new WellOfKnowledgeConditionalActivatedAbility(this);
+    public WellOfKnowledgeActivatedAbility copy() {
+        return new WellOfKnowledgeActivatedAbility(this);
     }
 
     @Override
     public String getRule() {
         return "{2}: Draw a card. Any player may activate this ability but only during their draw step.";
-    }
-}
-
-class WellOfKnowledgeEffect extends OneShotEffect {
-
-    WellOfKnowledgeEffect() {
-        super(Outcome.DrawCard);
-    }
-
-    private WellOfKnowledgeEffect(final WellOfKnowledgeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WellOfKnowledgeEffect copy() {
-        return new WellOfKnowledgeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (source instanceof ActivatedAbilityImpl) {
-            Player activator = game.getPlayer(((ActivatedAbilityImpl) source).getActivatorId());
-            if (activator != null) {
-                activator.drawCards(1, source, game);
-                return true;
-            }
-
-        }
-        return false;
     }
 }

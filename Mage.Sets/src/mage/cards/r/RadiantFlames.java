@@ -20,7 +20,7 @@ public final class RadiantFlames extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
         // Converge — Radiant Flames deals X damage to each creature, where X is the number of colors of mana spent to cast Radiant Flames.
-        getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
+        getSpellAbility().setAbilityWord(AbilityWord.CONVERGE).addHint(ColorsOfManaSpentToCastCount.getHint());
         getSpellAbility().addEffect(new DamageAllEffect(ColorsOfManaSpentToCastCount.getInstance(), new FilterCreaturePermanent()));
     }
 

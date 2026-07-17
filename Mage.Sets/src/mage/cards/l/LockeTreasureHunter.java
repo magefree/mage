@@ -148,7 +148,7 @@ class LockeTreasureHunterWatcher extends Watcher {
     private final Map<MageObjectReference, UUID> morMap = new HashMap<>();
 
     // Maps permissions to the players who can use them
-    private static final Map<UUID, UUID> playerPermissionMap = new HashMap<>();
+    private final Map<UUID, UUID> playerPermissionMap = new HashMap<>();
 
     // Tracks permissions which have already been used
     private final Set<UUID> usedSet = new HashSet<>();

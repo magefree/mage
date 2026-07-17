@@ -36,6 +36,7 @@ import org.apache.log4j.Logger;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Consumer;
 
 /**
  * AI: basic server side bot with simple actions support (game, draft, construction/sideboarding).
@@ -159,9 +160,13 @@ public class ComputerPlayer extends PlayerImpl {
             return false;
         }
 
+        final Consumer<MageItem> targetAdder = target.isNotTarget() ?
+            (MageItem item) -> { target.add(item.getId(), game); } :
+            (MageItem item) -> { target.addTarget(item.getId(), source, game); };
+
         // good targets -- choose as much as possible
         for (MageItem item : possibleTargetsSelector.getGoodTargets()) {
-            target.add(item.getId(), game);
+            targetAdder.accept(item);
             if (target.isChoiceCompleted(abilityControllerId, source, game, fromCards)) {
                 return true;
             }
@@ -171,7 +176,7 @@ public class ComputerPlayer extends PlayerImpl {
             if (target.isChosen(game)) {
                 break;
             }
-            target.add(item.getId(), game);
+            targetAdder.accept(item);
         }
 
         return target.isChosen(game) && !target.getTargets().isEmpty();

@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.constants.AttachmentType;
 import mage.constants.Duration;
@@ -23,6 +24,12 @@ public class PreventDamageToAttachedEffect extends PreventionEffectImpl {
 
     public PreventDamageToAttachedEffect(Duration duration, AttachmentType attachmentType, int amountToPrevent, boolean combatOnly) {
         super(duration, amountToPrevent, combatOnly, false);
+        this.attachmentType = attachmentType;
+        staticText = setText();
+    }
+
+    public PreventDamageToAttachedEffect(Duration duration, AttachmentType attachmentType, boolean combatOnly, DynamicValue amountToPreventDynamic) {
+        super(duration, -1, combatOnly, false, amountToPreventDynamic);
         this.attachmentType = attachmentType;
         staticText = setText();
     }

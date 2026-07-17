@@ -1,20 +1,23 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.constants.SubType;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.abilities.Ability;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -65,14 +68,16 @@ class EssenceSymbioteTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        // TODO: Implement this
-        //return event.getType() == GameEvent.EventType.CREATURE_MUTATED;
-        return false;
+        return event.getType() == GameEvent.EventType.CREATURE_MUTATED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        // TODO: Implement this
-        return false;
+        Permanent targetPermanent = game.getPermanent(event.getTargetId());
+        if (targetPermanent == null || !isControlledBy(targetPermanent.getControllerId())) {
+            return false;
+        }
+        this.getEffects().setTargetPointer(new FixedTarget(targetPermanent.getId(), game));
+        return true;
     }
 }

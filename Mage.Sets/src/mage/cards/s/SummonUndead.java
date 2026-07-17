@@ -63,6 +63,7 @@ class SummonUndeadEffect extends OneShotEffect {
         if (player.chooseUse(outcome, "Mill three cards?", source, game)) {
             player.millCards(3, source, game);
         }
+        game.processAction();
         if (player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game) < 1) {
             return true;
         }

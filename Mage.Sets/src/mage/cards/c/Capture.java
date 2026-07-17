@@ -31,10 +31,10 @@ public final class Capture extends CardImpl {
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
 
         // Untap that creature.
-        this.getSpellAbility().addEffect(new UntapTargetEffect());
+        this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap that creature"));
 
         // It gains haste until end of turn.
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gains haste until end of turn."));
 
         // If it has a bounty counter on it, add {R}{R}{R}
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new BasicManaEffect(Mana.RedMana(3)), new TargetHasCounterCondition(CounterType.BOUNTY)));

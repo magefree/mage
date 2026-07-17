@@ -80,7 +80,7 @@ class MaliciousEclipseReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getTarget() != null &&
+        return zEvent.isPermanentMoved() &&
                 StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE.match(
                         zEvent.getTarget(), source.getControllerId(),
                         source, game)

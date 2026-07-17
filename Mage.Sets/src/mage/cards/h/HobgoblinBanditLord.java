@@ -1,7 +1,5 @@
 package mage.cards.h;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,24 +11,26 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.hint.ValueHint;
-import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
 import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class HobgoblinBanditLord extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.GOBLIN, "Goblins");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.GOBLIN, "Goblins");
 
     public HobgoblinBanditLord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
@@ -48,7 +48,7 @@ public final class HobgoblinBanditLord extends CardImpl {
         // {R}, {T}: Hobgoblin Bandit Lord deals damage equal to the number of Goblins that entered the battlefield under your control this turn to any target.
         Ability ability = new SimpleActivatedAbility(
                 new DamageTargetEffect(GoblinsEnteredThisTurnDynamicValue.instance)
-                    .setText("{this} deals damage equal to the number of Goblins that entered the battlefield under your control this turn to any target"),
+                        .setText("{this} deals damage equal to the number of Goblins that entered the battlefield under your control this turn to any target"),
                 new ManaCostsImpl<>("{R}")
         );
         ability.addCost(new TapSourceCost());

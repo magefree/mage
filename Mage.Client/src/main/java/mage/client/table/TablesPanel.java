@@ -264,8 +264,11 @@ public class TablesPanel extends javax.swing.JPanel {
     };
 
     private int[] parseSeatsInfo(String info) {
-        String[] valsList = info.split("/");
         int[] res = {0, 0};
+        if (info == null) {
+            return res;
+        }
+        String[] valsList = info.split("/");
         if (valsList.length == 2) {
             res[0] = Integer.parseInt(valsList[0]);
             res[1] = Integer.parseInt(valsList[1]);
@@ -1700,7 +1703,7 @@ public class TablesPanel extends javax.swing.JPanel {
             MatchOptions options = new MatchOptions(gameName, gameType, multiPlayer);
             options.getPlayerTypes().add(PlayerType.HUMAN);
             options.getPlayerTypes().add(aiType);
-            for (int i=2 ; i < numPlayers ; i++) {
+            for (int i = 2; i < numPlayers; i++) {
                 options.getPlayerTypes().add(aiType);
             }
             options.setDeckType("Variant Magic - Freeform Commander");
@@ -1716,12 +1719,13 @@ public class TablesPanel extends javax.swing.JPanel {
             options.setMinimumRating(0);
             String serverAddress = SessionHandler.getSession().getServerHost();
             options.setBannedUsers(IgnoreList.getIgnoredUsers(serverAddress));
+            options.setSpectatorsAllowed(true);
             table = SessionHandler.createTable(roomId, options);
 
             SessionHandler.joinTable(roomId, table.getTableId(), "Human", PlayerType.HUMAN, 1, testDeck, "");
-            SessionHandler.joinTable(roomId, table.getTableId(), "Computer", aiType, 1, testDeck, "");
-            for (int i=2 ; i < numPlayers ; i++) {
-                SessionHandler.joinTable(roomId, table.getTableId(), "Computer" + i, aiType, 1, testDeck, "");
+            SessionHandler.joinTable(roomId, table.getTableId(), "Computer" + (multiPlayer ? " 2" : ""), aiType, 1, testDeck, "");
+            for (int i = 2; i < numPlayers; i++) {
+                SessionHandler.joinTable(roomId, table.getTableId(), "Computer " + (i + 1), aiType, 1, testDeck, "");
             }
             SessionHandler.startMatch(roomId, table.getTableId());
         } catch (HeadlessException ex) {
@@ -1935,7 +1939,7 @@ class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
     private final UUID roomId;
     private final TablesPanel panel;
 
-    private static final Logger logger = Logger.getLogger(UpdateTablesTask.class);
+    private static final Logger logger = Logger.getLogger(UpdateMatchesTask.class);
 
     UpdateMatchesTask(UUID roomId, TablesPanel panel) {
         this.roomId = roomId;

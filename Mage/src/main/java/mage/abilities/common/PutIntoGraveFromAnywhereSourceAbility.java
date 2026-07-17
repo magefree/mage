@@ -17,6 +17,9 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -99,11 +102,10 @@ class PutIntoGraveFromAnywhereEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        UUID cardId = CardUtil.getMainCardId(game, source.getSourceId()); // for split cards
         if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
-                && event.getTargetId().equals(source.getSourceId())) {
-            if (condition == null || condition.apply(game, source)) {
-                return true;
-            }
+                && (event.getTargetId().equals(cardId) || event.getTargetId().equals(source.getSourceId()))) {
+            return condition == null || condition.apply(game, source);
         }
         return false;
     }

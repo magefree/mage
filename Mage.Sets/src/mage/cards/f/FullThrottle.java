@@ -1,22 +1,25 @@
 package mage.cards.f;
 
-import java.util.UUID;
-
+import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.condition.common.IsMainPhaseCondition;
+import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.*;
+import mage.abilities.effects.common.AdditionalCombatPhaseEffect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.UntapAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackedThisTurnPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.turn.Turn;
+
+import java.util.UUID;
 
 /**
- *
  * @author Jmlundeen
  */
 public final class FullThrottle extends CardImpl {
@@ -24,16 +27,15 @@ public final class FullThrottle extends CardImpl {
     public FullThrottle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
 
-
         // After this main phase, there are two additional combat phases.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new AdditionalCombatPhaseEffect(2),
-                IsMainPhaseCondition.ANY,
+                new AdditionalCombatPhaseEffect(2), FullThrottleCondition.instance,
                 "After this main phase, there are two additional combat phases."
         ));
+
         // At the beginning of each combat this turn, untap all creatures that attacked this turn.
-        DelayedTriggeredAbility ability = new FullThrottleTriggeredAbility();
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(ability).concatBy("<br>"));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new FullThrottleTriggeredAbility())
+                .concatBy("<br>"));
     }
 
     private FullThrottle(final FullThrottle card) {
@@ -46,14 +48,25 @@ public final class FullThrottle extends CardImpl {
     }
 }
 
+enum FullThrottleCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return game.getTurnPhaseType().isMain();
+    }
+}
+
 class FullThrottleTriggeredAbility extends DelayedTriggeredAbility {
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures that attacked this turn");
+
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creatures that attacked this turn");
 
     static {
         filter.add(AttackedThisTurnPredicate.instance);
     }
+
     public FullThrottleTriggeredAbility() {
-        super(new UntapAllEffect(filter), Duration.EndOfTurn, false);
+        super(new UntapAllEffect(filter), Duration.EndOfTurn, false, false);
         setTriggerPhrase("At the beginning of each combat this turn, ");
     }
 
@@ -73,7 +86,6 @@ class FullThrottleTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Turn turn = game.getState().getTurn();
-        return turn.getPhase().getType() == TurnPhase.COMBAT;
+        return true;
     }
 }

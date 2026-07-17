@@ -28,7 +28,7 @@ public final class LilianasContract extends CardImpl {
 
         // When Liliana's Contract enters the battlefield, you draw four cards and you lose 4 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(4, true));
-        ability.addEffect(new LoseLifeSourceControllerEffect(4).setText("and you lose 4 life"));
+        ability.addEffect(new LoseLifeSourceControllerEffect(4).concatBy("and"));
         this.addAbility(ability);
 
         // At the beginning of your upkeep, if you control four or more Demons with different names, you win the game.

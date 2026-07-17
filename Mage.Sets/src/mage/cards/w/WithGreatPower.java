@@ -24,7 +24,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -73,6 +72,7 @@ public final class WithGreatPower extends CardImpl {
 }
 
 class WithGreatPowerEffect extends ReplacementEffectImpl {
+
     WithGreatPowerEffect() {
         super(Duration.WhileOnBattlefield, Outcome.RedirectDamage);
         staticText = "all damage that would be dealt to you is dealt to enchanted creature instead";
@@ -84,16 +84,12 @@ class WithGreatPowerEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
         DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
-        Optional.ofNullable(event)
-                .map(GameEvent::getSourceId)
-                .map(game::getPermanent)
-                .map(Permanent::getAttachedTo)
-                .map(game::getPermanent)
-                .ifPresent(permanent -> permanent.damage(
-                        damageEvent.getAmount(), event.getSourceId(), source,
-                        game, damageEvent.isCombatDamage(), damageEvent.isPreventable()
-                ));
+        if (permanent != null) {
+            permanent.damage(event.getAmount(), event.getSourceId(),
+                    source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
+        }
         return true;
     }
 

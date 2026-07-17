@@ -28,7 +28,7 @@ public final class DroidCommando extends CardImpl {
 
         // When Droid Commando dies, target player loses 2 life and you gain 2 life.
         Ability ability = new DiesSourceTriggeredAbility(new LoseLifeTargetEffect(2));
-        ability.addEffect(new GainLifeEffect(2));
+        ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 

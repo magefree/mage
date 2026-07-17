@@ -25,7 +25,7 @@ import java.util.UUID;
 public final class PrincessLeia extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter1 = new FilterControlledCreaturePermanent("other Rebel creature you control");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Rebel creature you control");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Rebel creatures you control");
 
     static {
         filter1.add(AnotherPredicate.instance);

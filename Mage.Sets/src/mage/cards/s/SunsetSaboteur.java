@@ -30,10 +30,10 @@ public final class SunsetSaboteur extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Ward--Discard a card.
-        this.addAbility(new WardAbility(new DiscardCardCost()));
+        this.addAbility(new WardAbility(new DiscardCardCost(), false));
 
         // Whenever this creature attacks, put a +1/+1 counter on target creature an opponent controls.
         Ability ability = new AttacksTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));

@@ -42,7 +42,8 @@ public final class SeiferAlmasy extends CardImpl {
         // Whenever a creature you control attacks alone, it gains double strike until end of turn.
         this.addAbility(new AttacksAloneControlledTriggeredAbility(
                 new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance())
-                        .setText("it gains double strike until end of turn")
+                        .setText("it gains double strike until end of turn"),
+                true, false
         ));
 
         // Fire Cross -- Whenever Seifer Almasy deals combat damage to a player, you may cast target instant or sorcery card with mana value 3 or less from your graveyard without paying its mana cost. If that spell would be put into your graveyard, exile it instead.

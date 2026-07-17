@@ -1,0 +1,99 @@
+package mage.cards.d;
+
+import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.PlanCounterThresholdTriggeredAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.LoseLifeOpponentsEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
+import mage.game.Game;
+import mage.players.Player;
+import mage.target.common.TargetOpponent;
+import mage.util.CardUtil;
+
+/**
+ *
+ * @author muz
+ */
+public final class DoomReignsSupreme extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.VILLAIN, "a Villain you control");
+
+    public DoomReignsSupreme(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
+        this.subtype.add(SubType.PLAN);
+
+        // Whenever a Villain you control enters, each opponent loses 1 life and you gain 1 life. Put a plan counter on this enchantment.
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(new LoseLifeOpponentsEffect(1), filter);
+        ability.addEffect(new GainLifeEffect(1).concatBy("and"));
+        ability.addEffect(new AddCountersSourceEffect(CounterType.PLAN.createInstance()));
+        this.addAbility(ability);
+
+        // When the fifth plan counter is put on this enchantment, sacrifice it. When you do, target opponent exiles the top five cards of
+        // their library. You may cast up to two spells from among the exiled cards without paying their mana costs.
+        ReflexiveTriggeredAbility reflexive = new ReflexiveTriggeredAbility(
+                new DoomReignsSupremeExileEffect(), false,
+                "target opponent exiles the top five cards of their library. "
+                + "You may cast up to two spells from among the exiled cards without paying their mana costs"
+        );
+        reflexive.addTarget(new TargetOpponent());
+        this.addAbility(new PlanCounterThresholdTriggeredAbility(5, reflexive));
+    }
+
+    private DoomReignsSupreme(final DoomReignsSupreme card) {
+        super(card);
+    }
+
+    @Override
+    public DoomReignsSupreme copy() {
+        return new DoomReignsSupreme(this);
+    }
+}
+
+class DoomReignsSupremeExileEffect extends OneShotEffect {
+
+    DoomReignsSupremeExileEffect() {
+        super(Outcome.Benefit);
+        staticText = "target opponent exiles the top five cards of their library. "
+            + "You may cast up to two spells from among the exiled cards without paying their mana costs";
+    }
+
+    private DoomReignsSupremeExileEffect(final DoomReignsSupremeExileEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public DoomReignsSupremeExileEffect copy() {
+        return new DoomReignsSupremeExileEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (controller == null || opponent == null) {
+            return false;
+        }
+        Cards cards = new CardsImpl(opponent.getLibrary().getTopCards(game, 5));
+        opponent.moveCards(cards, Zone.EXILED, source, game);
+        game.processAction();
+        cards.retainZone(Zone.EXILED, game);
+        CardUtil.castMultipleWithAttributeForFree(controller, source, game, cards, StaticFilters.FILTER_CARD_NON_LAND, 2);
+        return true;
+    }
+}

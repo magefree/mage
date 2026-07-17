@@ -84,7 +84,7 @@ public final class CardUtil {
     public static final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
 
     private static final List<String> costWords = Arrays.asList(
-            "put", "return", "exile", "discard", "mill", "sacrifice", "remove", "tap", "reveal", "pay", "have", "collect", "forage"
+            "put", "return", "exile", "discard", "mill", "sacrifice", "remove", "tap", "reveal", "pay", "have", "collect", "forage", "transform", "blight"
     );
 
     // search set code in commands like "set_code-card_name"
@@ -555,7 +555,12 @@ public final class CardUtil {
 
     /**
      * Parse card number as int (support base [123] and alternative numbers
-     * [123b], [U123]).
+     * [123b], [U123]). For inner purpose only like cards sorting. 
+     * Do not support zero card number due tokens usage.
+     * <p>
+     * From scryfall: card numbers should be considered to be plaintext strings. they may contain multiple
+     * non-digit components, may contain no digits at all, and may not correspond to anything
+     * at all seen on the card
      *
      * @param cardNumber origin card number
      * @return int
@@ -563,24 +568,26 @@ public final class CardUtil {
     public static int parseCardNumberAsInt(String cardNumber) {
 
         if (cardNumber == null || cardNumber.isEmpty()) {
-            throw new IllegalArgumentException("Card number is empty.");
+            throw new IllegalArgumentException("Card number cannot be null or empty");
         }
 
-        try {
-            if (!Character.isDigit(cardNumber.charAt(0))) {
-                // U123
-                return Integer.parseInt(cardNumber.substring(1));
-            } else if (!Character.isDigit(cardNumber.charAt(cardNumber.length() - 1))) {
-                // 123b
-                return Integer.parseInt(cardNumber.substring(0, cardNumber.length() - 1));
-            } else {
-                // 123
-                return Integer.parseInt(cardNumber);
-            }
-        } catch (NumberFormatException e) {
-            // wrong numbers like RA5 and etc
-            return -1;
+        // example: 123, U123, 123b, 123*, 123+
+        String cleanCardNumber = cardNumber.replaceAll("[\\D]", "");
+
+        // token's zero number is restricted
+        if (!cleanCardNumber.isEmpty() && cleanCardNumber.replaceAll("0", "").isEmpty()) {
+            throw new IllegalArgumentException("Card number cannot be a zero number due tokens usage limit: " + cardNumber);
         }
+
+        // non-digit numbers support 
+        // (replace by fake stable digit, sort it after normal numbers)
+        if (cleanCardNumber.isEmpty()) {
+            int hash = cardNumber.hashCode() & 0x7fffffff; // only positive
+            return 1000000 + (hash % (Integer.MAX_VALUE - 1000000));
+        }
+
+        // normal card numbers with digits
+        return Integer.parseInt(cleanCardNumber);
     }
 
     /**
@@ -716,6 +723,17 @@ public final class CardUtil {
      */
     public static int overflowMultiply(int base, int multiply) {
         return overflowResult((long) base * multiply);
+    }
+
+    /**
+     * Integer operation with overflow protection
+     *
+     * @param base
+     * @param power
+     * @return
+     */
+    public static int overflowExp(int base, int power) {
+        return overflowResult((long) Math.pow(base, power));
     }
 
     private static int overflowResult(long value) {
@@ -979,7 +997,7 @@ public final class CardUtil {
         }
         if (!targetPlayerGets) {
             sb.append(add ? " on " : " from ");
-            if (description.contains("up to") && !description.contains("up to one")) {
+            if (description.contains("any number") || description.contains("up to") && !description.contains("up to one")) {
                 sb.append("each of ");
             }
             sb.append(description);
@@ -1261,16 +1279,15 @@ public final class CardUtil {
             permCard = card;
         } else if (card instanceof CardWithSpellOption) {
             permCard = card;
-        } else if (card instanceof ModalDoubleFacedCard) {
-            permCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
+        } else if (card instanceof DoubleFacedCard) {
+            permCard = ((DoubleFacedCard) card).getLeftHalfCard();
         } else {
             permCard = card;
         }
 
-        // must be creature/planeswalker (if you catch this error then check targeting/copying code)
-        if (permCard.isInstantOrSorcery(game)) {
-            throw new IllegalArgumentException("Card side can't be put to battlefield: " + permCard.getName());
-        }
+        // original code checked to ensure card not instant or sorcery
+        // but that's not correct, e.g. manifest with Fierce Invocation
+        // must not throw error in that case, just continue
 
         return permCard;
     }
@@ -1284,6 +1301,23 @@ public final class CardUtil {
         return game.getPermanent(CardUtil.getDefaultCardSideForBattlefield(game, card).getId());
     }
 
+    public static Set<Card> getAllCardsFromPermanentLeftBattlefield(Permanent target, Game game) {
+        return getAllCardsFromPermanentsLeftBattlefield(Collections.singletonList(target), game);
+    }
+
+    public static Set<Card> getAllCardsFromPermanentsLeftBattlefield(Collection<Permanent> targets, Game game) {
+        Set<Card> toReturn = new LinkedHashSet<>();
+        targets.stream().filter(Objects::nonNull).forEach(card -> {
+            toReturn.add(card.getMainCard());
+            card.getMutateObjects().stream()
+                    .map(game::getCard)
+                    .filter(Objects::nonNull)
+                    .map(Card::getMainCard)
+                    .forEach(toReturn::add);
+        });
+        return toReturn;
+    }
+
     /**
      * Return card name for same name searching
      *
@@ -1294,8 +1328,8 @@ public final class CardUtil {
         // it's ok to return one name only cause NamePredicate can find same card by first name
         if (card instanceof SplitCard) {
             return ((SplitCard) card).getLeftHalfCard().getName();
-        } else if (card instanceof ModalDoubleFacedCard) {
-            return ((ModalDoubleFacedCard) card).getLeftHalfCard().getName();
+        } else if (card instanceof DoubleFacedCard) {
+            return ((DoubleFacedCard) card).getLeftHalfCard().getName();
         } else {
             return card.getName();
         }
@@ -1453,6 +1487,9 @@ public final class CardUtil {
     public static List<Card> getCastableComponents(Card cardToCast, FilterCard filter, Ability source, Player player, Game game, SpellCastTracker spellCastTracker, boolean playLand) {
         UUID playerId = player.getId();
         List<Card> cards = new ArrayList<>();
+        if (cardToCast == null) {
+            return cards;
+        }
         if (cardToCast instanceof CardWithHalves) {
             cards.add(((CardWithHalves) cardToCast).getLeftHalfCard());
             cards.add(((CardWithHalves) cardToCast).getRightHalfCard());
@@ -1536,7 +1573,7 @@ public final class CardUtil {
         } else {
             chosenAbility = player.chooseAbilityForCast(cardToCast, game, true);
         }
-        boolean result = false;
+        boolean result;
         if (chosenAbility instanceof SpellAbility) {
             result = player.cast(
                     (SpellAbility) chosenAbility,
@@ -1545,6 +1582,8 @@ public final class CardUtil {
         } else if (playLand && chosenAbility instanceof PlayLandAbility) {
             Card land = game.getCard(chosenAbility.getSourceId());
             result = player.playLand(land, game, true);
+        } else {
+            result = false;
         }
         partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null));
         if (result && spellCastTracker != null) {
@@ -1609,7 +1648,8 @@ public final class CardUtil {
                     break;
                 } else {
                     // Human can choose wrong spell part, so allow to continue
-                    if (!player.chooseUse(Outcome.PlayForFree, "Continue casting spells?", source, game)) {
+                    String message = String.format("You can cast %d more spells for free. Continue casting?", maxCastCount - castCount);
+                    if (!player.chooseUse(Outcome.PlayForFree, message, source, game)) {
                         break;
                     }
                 }
@@ -1667,6 +1707,22 @@ public final class CardUtil {
             game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), Boolean.TRUE);
         }
 
+        // handle TDFC
+        if (card instanceof TransformingDoubleFacedCard) {
+            TransformingDoubleFacedCardHalf frontFace = ((TransformingDoubleFacedCard) card).getLeftHalfCard();
+            TransformingDoubleFacedCardHalf backFace = ((TransformingDoubleFacedCard) card).getRightHalfCard();
+
+            if (manaCost != null) {
+                // get additional cost if any
+                Costs<Cost> additionalCostsMDFCLeft = frontFace.getSpellAbility().getCosts();
+                // set alternative cost and any additional cost
+                player.setCastSourceIdWithAlternateMana(frontFace.getId(), manaCost, additionalCostsMDFCLeft, MageIdentifier.Default);
+            }
+
+            // allow just the front face
+            game.getState().setValue("PlayFromNotOwnHandZone" + frontFace.getId(), Boolean.TRUE);
+        }
+
         // handle adventure cards
         if (card instanceof CardWithSpellOption) {
             Card creatureCard = card.getMainCard();
@@ -1704,9 +1760,9 @@ public final class CardUtil {
             game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
             game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
         }
-        if (card instanceof ModalDoubleFacedCard) {
-            ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
-            ModalDoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
+        if (card instanceof DoubleFacedCard) {
+            DoubleFacedCardHalf leftHalfCard = ((DoubleFacedCard) card).getLeftHalfCard();
+            DoubleFacedCardHalf rightHalfCard = ((DoubleFacedCard) card).getRightHalfCard();
             game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
             game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
         }
@@ -2098,8 +2154,8 @@ public final class CardUtil {
             res.add(mainCard);
             res.add(mainCard.getLeftHalfCard());
             res.add(mainCard.getRightHalfCard());
-        } else if (object instanceof ModalDoubleFacedCard || object instanceof ModalDoubleFacedCardHalf) {
-            ModalDoubleFacedCard mainCard = (ModalDoubleFacedCard) ((Card) object).getMainCard();
+        } else if (object instanceof DoubleFacedCard || object instanceof DoubleFacedCardHalf) {
+            DoubleFacedCard mainCard = (DoubleFacedCard) ((Card) object).getMainCard();
             res.add(mainCard);
             res.add(mainCard.getLeftHalfCard());
             res.add(mainCard.getRightHalfCard());
@@ -2178,20 +2234,20 @@ public final class CardUtil {
         return "T" + gameState.getTurnNum() + "." + gameState.getTurn().getStep().getType().getStepShortText();
     }
 
-    public static String concatWithOr(List<String> strings) {
+    public static String concatWithOr(List<?> strings) {
         return concatWith(strings, "or");
     }
 
-    public static String concatWithAnd(List<String> strings) {
+    public static String concatWithAnd(List<?> strings) {
         return concatWith(strings, "and");
     }
 
-    private static String concatWith(List<String> strings, String last) {
+    private static String concatWith(List<?> strings, String last) {
         switch (strings.size()) {
             case 0:
                 return "";
             case 1:
-                return strings.get(0);
+                return strings.get(0).toString();
             case 2:
                 return strings.get(0) + " " + last + " " + strings.get(1);
         }

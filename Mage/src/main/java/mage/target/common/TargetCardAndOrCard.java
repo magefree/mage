@@ -84,7 +84,7 @@ public class TargetCardAndOrCard extends TargetCard {
             }
             Cards newTargets = existingTargets.copy();
             newTargets.add(card);
-            return assignment.getRoleCount(newTargets, game) < newTargets.size();
+            return assignment.hasSharedRoles(newTargets, game);
         });
 
         return possibleTargets;

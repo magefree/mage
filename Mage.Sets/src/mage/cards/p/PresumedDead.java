@@ -5,13 +5,8 @@ import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -32,7 +27,7 @@ public final class PresumedDead extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn)
                 .setText("Until end of turn, target creature gets +2/+0"));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new DiesSourceTriggeredAbility(new PresumedDeadEffect()))
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new DiesSourceTriggeredAbility(new PresumedDeadEffect(), false, SetTargetPointer.CARD))
                 .setText("and gains \"When this creature dies, return it to the battlefield under its owner's control and suspect it.\""));
 
     }
@@ -66,15 +61,17 @@ class PresumedDeadEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(source.getSourceId());
-        if (controller == null || card == null) {
+        Cards cards = new CardsImpl(getTargetPointer().getTargets(game, source));
+        if (controller == null || cards.isEmpty()) {
             return false;
         }
-        controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
+        controller.moveCards(cards.getCards(game), Zone.BATTLEFIELD, source, game, false, false, true, null);
         game.processAction();
-        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
-        if (permanent != null) {
-            permanent.setSuspected(true, game, source);
+        for (Card card : cards.getCards(game)) {
+            Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+            if (permanent != null) {
+                permanent.setSuspected(true, game, source);
+            }
         }
         return true;
     }

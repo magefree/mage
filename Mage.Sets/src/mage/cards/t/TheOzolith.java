@@ -11,11 +11,10 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.counters.Counter;
-import mage.counters.Counters;
-import mage.filter.StaticFilters;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -26,13 +25,19 @@ import java.util.UUID;
  */
 public final class TheOzolith extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
+
+    static {
+        filter.add(CounterAnyPredicate.instance);
+    }
+
     public TheOzolith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         this.supertype.add(SuperType.LEGENDARY);
 
         // Whenever a creature you control leaves the battlefield, if it had counters on it, put those counters on The Ozolith.
-        this.addAbility(new TheOzolithTriggeredAbility());
+        this.addAbility(new LeavesBattlefieldAllTriggeredAbility(new TheOzolithLeaveEffect(), filter));
 
         // At the beginning of combat on your turn, if The Ozolith has counters on it, you may move all counters from The Ozolith onto target creature.
         Ability ability = new BeginningOfCombatTriggeredAbility(
@@ -52,53 +57,15 @@ public final class TheOzolith extends CardImpl {
     }
 }
 
-class TheOzolithTriggeredAbility extends LeavesBattlefieldAllTriggeredAbility {
-
-    TheOzolithTriggeredAbility() {
-        super(null, StaticFilters.FILTER_CONTROLLED_CREATURE);
-    }
-
-    private TheOzolithTriggeredAbility(final TheOzolithTriggeredAbility ability) {
-        super(ability);
-    }
-
-    public TheOzolithTriggeredAbility copy() {
-        return new TheOzolithTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!super.checkTrigger(event, game)) {
-            return false;
-        }
-        Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-        Counters counters = permanent.getCounters(game);
-        if (counters.values().stream().mapToInt(Counter::getCount).noneMatch(x -> x > 0)) {
-            return false;
-        }
-        this.getEffects().clear();
-        this.addEffect(new TheOzolithLeaveEffect(counters));
-        return true;
-    }
-
-    public String getRule() {
-        return "Whenever a creature you control leaves the battlefield, " +
-                "if it had counters on it, put those counters on {this}.";
-    }
-}
-
 class TheOzolithLeaveEffect extends OneShotEffect {
 
-    private final Counters counters;
-
-    TheOzolithLeaveEffect(Counters counters) {
+    TheOzolithLeaveEffect() {
         super(Outcome.Benefit);
-        this.counters = counters.copy();
+        staticText = "if it had counters on it, put those counters on {this}";
     }
 
     private TheOzolithLeaveEffect(final TheOzolithLeaveEffect effect) {
         super(effect);
-        this.counters = effect.counters.copy();
     }
 
     @Override
@@ -108,12 +75,14 @@ class TheOzolithLeaveEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
+        Permanent creature = (Permanent) getValue("permanentLeftBattlefield");
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (creature == null || permanent == null) {
             return false;
         }
-        counters.values()
-                .forEach(counter -> permanent.addCounters(counter, source.getControllerId(), source, game));
+        for (Counter counter : creature.getCounters(game).copy().values()) {
+            permanent.addCounters(counter, source, game);
+        }
         return true;
     }
 }

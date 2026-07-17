@@ -31,18 +31,18 @@ public final class WreckingBallArm extends CardImpl {
                 7, 7, AttachmentType.EQUIPMENT
         ));
         ability.addEffect(new CantBeBlockedByCreaturesAttachedEffect(
-                Duration.WhileControlled, DauntAbility.getFilter(), AttachmentType.EQUIPMENT
+                Duration.WhileOnBattlefield, DauntAbility.getFilter(), AttachmentType.EQUIPMENT
         ).setText("and can't be blocked by creatures with power 2 or less"));
         this.addAbility(ability);
 
         // Equip legendary creature {3}
         this.addAbility(new EquipAbility(
                 Outcome.BoostCreature, new GenericManaCost(3),
-                new TargetPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_LEGENDARY)
+                new TargetPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_LEGENDARY), false
         ));
 
         // Equip {7}
-        this.addAbility(new EquipAbility(7));
+        this.addAbility(new EquipAbility(7, false));
     }
 
     private WreckingBallArm(final WreckingBallArm card) {

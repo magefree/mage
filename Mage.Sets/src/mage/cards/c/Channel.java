@@ -20,7 +20,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -46,26 +45,26 @@ public final class Channel extends CardImpl {
 }
 
 class ChannelEffect extends OneShotEffect {
-    
+
     ChannelEffect() {
         super(Outcome.PutManaInPool);
         this.staticText = "Until end of turn, any time you could activate a mana ability, you may pay 1 life. If you do, add {C}";
     }
-    
+
     private ChannelEffect(final ChannelEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ChannelEffect copy() {
         return new ChannelEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         SpecialAction specialAction = new ChannelSpecialAction();
         new CreateSpecialActionEffect(specialAction).apply(game, source);
-        
+
         // Create a hidden delayed triggered ability to remove the special action at end of turn.
         new CreateDelayedTriggeredAbilityEffect(new ChannelDelayedTriggeredAbility(specialAction.getId()), false).apply(game, source);
         return true;

@@ -1,21 +1,20 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DamageTargetAndYouEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,9 +36,8 @@ public final class ShadowGuildmage extends CardImpl {
         this.addAbility(ability);
         
         // {R}, {tap}: Shadow Guildmage deals 1 damage to any target and 1 damage to you.
-        ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new ManaCostsImpl<>("{R}"));
+        ability = new SimpleActivatedAbility(new DamageTargetAndYouEffect(1, 1), new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new DamageControllerEffect(1).setText("and 1 damage to you"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

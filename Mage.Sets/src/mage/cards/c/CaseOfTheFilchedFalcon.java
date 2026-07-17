@@ -2,7 +2,6 @@ package mage.cards.c;
 
 import java.util.UUID;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CaseAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -28,7 +27,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
 /**
@@ -53,9 +52,10 @@ public final class CaseOfTheFilchedFalcon extends CardImpl {
         Ability solvedAbility = new ActivateIfConditionActivatedAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance(4)),
                 new ManaCostsImpl<>("{2}{U}"), SolvedSourceCondition.SOLVED);
-        solvedAbility.addEffect(new BecomesCreatureTargetEffect(new CaseOfTheFilchedFalconToken(),
-                false, false, Duration.WhileOnBattlefield)
-                .setText("It becomes a 0/0 Bird creature with flying in addition to its other types"));
+        solvedAbility.addEffect(new BecomesCreatureTargetEffect(
+            new CreatureToken(0, 0, "0/0 Bird creature with flying", SubType.BIRD).withAbility(FlyingAbility.getInstance()),
+            false, false, Duration.WhileOnBattlefield
+        ).setText("It becomes a 0/0 Bird creature with flying in addition to its other types"));
         solvedAbility.addCost(new SacrificeSourceCost().setText("sacrifice this Case"));
         solvedAbility.addTarget(new TargetPermanent(StaticFilters.FILTER_ARTIFACT_NON_CREATURE));
 
@@ -94,27 +94,5 @@ class CaseOfTheFilchedFalconHint extends CaseSolvedHint {
                 .count(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, ability.getControllerId(),
                         ability, game);
         return "Artifacts: " + artifacts + " (need 3).";
-    }
-}
-
-class CaseOfTheFilchedFalconToken extends TokenImpl {
-
-    public CaseOfTheFilchedFalconToken() {
-        super("", "0/0 Bird creature with flying");
-        this.cardType.add(CardType.CREATURE);
-
-        this.subtype.add(SubType.BIRD);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
-        this.addAbility(FlyingAbility.getInstance());
-    }
-
-    private CaseOfTheFilchedFalconToken(final CaseOfTheFilchedFalconToken token) {
-        super(token);
-    }
-
-    @Override
-    public CaseOfTheFilchedFalconToken copy() {
-        return new CaseOfTheFilchedFalconToken(this);
     }
 }

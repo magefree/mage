@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.BlackWizardToken;
 
 import java.util.UUID;
@@ -22,8 +21,7 @@ import java.util.UUID;
  */
 public final class CircleOfPower extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.WIZARD, "");
-    private static final FilterPermanent filter2 = new FilterPermanent(SubType.WIZARD, "");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.WIZARD, "");
 
     public CircleOfPower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
@@ -35,10 +33,10 @@ public final class CircleOfPower extends CardImpl {
 
         // Wizards you control get +1/+0 and gain lifelink until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(
-                1, 0, Duration.EndOfTurn
+                1, 0, Duration.EndOfTurn, filter
         ).setText("Wizards you control get +1/+0").concatBy("<br>"));
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
-                LifelinkAbility.getInstance(), Duration.EndOfTurn, filter2
+                LifelinkAbility.getInstance(), Duration.EndOfTurn, filter
         ).setText("and gain lifelink until end of turn"));
     }
 

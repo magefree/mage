@@ -15,12 +15,8 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.PreventDamageEvent;
-import mage.game.events.PreventedDamageEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -74,20 +70,11 @@ class NineLivesPreventionEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
-        if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
-            Player player = game.getPlayer(source.getControllerId());
-            if (player != null) {
-                Permanent nineLives = source.getSourcePermanentIfItStillExists(game);
-                if (nineLives != null) {
-                    nineLives.addCounters(CounterType.INCARNATION.createInstance(1), source.getControllerId(), source, game);
-                }
-            }
-            event.setAmount(0);
-            game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), damage));
+        Permanent nineLives = source.getSourcePermanentIfItStillExists(game);
+        if (nineLives != null) {
+            nineLives.addCounters(CounterType.INCARNATION.createInstance(1), source.getControllerId(), source, game);
         }
-        return false;
+        return super.replaceEvent(event, source, game);
     }
 
     @Override

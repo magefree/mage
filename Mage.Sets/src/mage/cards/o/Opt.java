@@ -18,8 +18,8 @@ public final class Opt extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Scry 1.
-        this.getSpellAbility().addEffect(new ScryEffect(1, false));
-        
+        this.getSpellAbility().addEffect(new ScryEffect(1));
+
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }

@@ -11,8 +11,6 @@ import mage.game.permanent.Permanent;
  */
 public class BecomesCreatureIfVehicleEffect extends ContinuousEffectImpl {
 
-    private CardType addedType = CardType.CREATURE;
-
     public BecomesCreatureIfVehicleEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.staticText = "As long as enchanted permanent is a Vehicle, it's a creature in addition to its other types";
@@ -25,15 +23,12 @@ public class BecomesCreatureIfVehicleEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent aura = game.getPermanent(source.getSourceId());
-        if (aura != null && aura.getAttachedTo() != null) {
-            Permanent enchanted = game.getPermanent(aura.getAttachedTo());
-            if (enchanted != null && enchanted.hasSubtype(SubType.VEHICLE, game)) {
-                enchanted.addCardType(game, addedType);
-            }
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
+        if (permanent != null && permanent.hasSubtype(SubType.VEHICLE, game)) {
+            permanent.addCardType(game, CardType.CREATURE);
+            return true;
         }
-
-        return true;
+        return false;
     }
 
     @Override

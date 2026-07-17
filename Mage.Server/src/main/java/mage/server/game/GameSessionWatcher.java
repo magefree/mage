@@ -90,6 +90,7 @@ public class GameSessionWatcher {
 
     public void gameError(final String message) {
         if (!killed) {
+            // TODO: implement shared link here (store game state, full battlefield info, history/logs, etc with shared link to web page)
             userManager.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_ERROR, game.getId(), message)));
         }
     }

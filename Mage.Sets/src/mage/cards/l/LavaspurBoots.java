@@ -28,13 +28,14 @@ public final class LavaspurBoots extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+0 and has haste and ward {1}.
+        Ability wardAbility = new WardAbility(new GenericManaCost(1));
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(1, 0));
         ability.addEffect(new GainAbilityAttachedEffect(
                 HasteAbility.getInstance(), AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield
         ).setText("and has haste"));
         ability.addEffect(new GainAbilityAttachedEffect(
-                new WardAbility(new GenericManaCost(1)), AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield
-        ).setText("and ward {1}"));
+            wardAbility, AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield
+        ).setText("and " + wardAbility.getRule()));
         this.addAbility(ability);
 
         // Equip {1}

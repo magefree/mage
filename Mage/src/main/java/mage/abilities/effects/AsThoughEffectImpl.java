@@ -3,10 +3,7 @@ package mage.abilities.effects;
 import mage.MageIdentifier;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
-import mage.cards.Card;
-import mage.cards.ModalDoubleFacedCard;
-import mage.cards.SplitCard;
-import mage.cards.CardWithSpellOption;
+import mage.cards.*;
 import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
@@ -92,9 +89,9 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
                 player.setCastSourceIdWithAlternateMana(leftCard.getId(), null, leftCard.getSpellAbility().getCosts(), identifier);
                 Card rightCard = ((SplitCard) card).getRightHalfCard();
                 player.setCastSourceIdWithAlternateMana(rightCard.getId(), null, rightCard.getSpellAbility().getCosts(), identifier);
-            } else if (card instanceof ModalDoubleFacedCard) {
-                Card leftCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
-                Card rightCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
+            } else if (card instanceof DoubleFacedCard) {
+                Card leftCard = ((DoubleFacedCard) card).getLeftHalfCard();
+                Card rightCard = ((DoubleFacedCard) card).getRightHalfCard();
                 // some MDFC's are land.  IE: sea gate restoration
                 if (!leftCard.isLand(game)) {
                     player.setCastSourceIdWithAlternateMana(leftCard.getId(), null, leftCard.getSpellAbility().getCosts(), identifier);

@@ -21,6 +21,7 @@ public final class SweepTheSkies extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(
                 new ThopterColorlessToken(), ColorsOfManaSpentToCastCount.getInstance()
         ).setText("<i>Converge</i> &mdash; Create a 1/1 colorless Thopter artifact creature token with flying for each color of mana spent to cast this spell"));
+        this.getSpellAbility().addHint(ColorsOfManaSpentToCastCount.getHint());
     }
 
     private SweepTheSkies(final SweepTheSkies card) {

@@ -6,11 +6,16 @@ import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
+import java.util.List;
 
 /**
  * @author LevelX2
@@ -82,6 +87,7 @@ public class BestowTest extends CardTestPlayerBase {
         assertSubtype("Hopeful Eidolon", SubType.AURA);
         assertType("Hopeful Eidolon", CardType.ENCHANTMENT, true);
         assertType("Hopeful Eidolon", CardType.CREATURE, false);
+        assertNotSubtype("Hopeful Eidolon", SubType.SPIRIT);
     }
 
     /**
@@ -122,59 +128,63 @@ public class BestowTest extends CardTestPlayerBase {
     @Test
     public void bestowEnchantmentBecomesCreature() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
-        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerA, "Safehold Elite"); // 2/2 creature + Persist to return as a 1/1
         addCard(Zone.HAND, playerA, "Hopeful Eidolon");
 
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
         addCard(Zone.HAND, playerB, "Lightning Bolt");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hopeful Eidolon using bestow", "Silvercoat Lion");
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hopeful Eidolon using bestow", "Safehold Elite");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Safehold Elite");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        // because Boon Satyr is no creature on the battlefield, evolve may not trigger
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
-        assertPermanentCount(playerA, "Silvercoat Lion", 0);
+        assertPermanentCount(playerA, "Safehold Elite", 1);
+        assertPowerToughness(playerA, "Safehold Elite", 1, 1);
         assertPermanentCount(playerA, "Hopeful Eidolon", 1);
         assertPowerToughness(playerA, "Hopeful Eidolon", 1, 1);
-
-        Permanent hopefulEidolon = getPermanent("Hopeful Eidolon", playerA);
-        Assert.assertTrue("Hopeful Eidolon has to be a creature but is not", hopefulEidolon.isCreature(currentGame));
-        Assert.assertTrue("Hopeful Eidolon has to be an enchantment but is not", hopefulEidolon.isEnchantment(currentGame));
-
+        assertType("Hopeful Eidolon", CardType.CREATURE, true);
+        assertSubtype("Hopeful Eidolon", SubType.SPIRIT);
+        assertType("Hopeful Eidolon", CardType.ENCHANTMENT, true);
+        assertNotSubtype("Hopeful Eidolon", SubType.AURA);
     }
 
     /**
      * Test that card cast with bestow will not be tapped, if creatures come
-     * into play tapped
+     * into play tapped. If it is cast with bestow but the target removed, it should be tapped.
      */
     @Test
     public void bestowEnchantmentWillNotBeTapped() {
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+        addCustomEffect_TargetDestroy(playerA);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 10);
         addCard(Zone.BATTLEFIELD, playerA, "Silent Artisan");
 
         addCard(Zone.HAND, playerA, "Boon Satyr");
+        addCard(Zone.HAND, playerA, "Leafcrown Dryad");
+
 
         // Enchantment {1}{W}
         // Creatures your opponents control enter the battlefield tapped.
         addCard(Zone.BATTLEFIELD, playerB, "Imposing Sovereign");
 
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Boon Satyr using bestow", "Silent Artisan");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Boon Satyr using bestow", "Silent Artisan");
+        checkPT("Boon Satyr attached", 1, PhaseStep.BEGIN_COMBAT, playerA, "Silent Artisan", 7, 7);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Leafcrown Dryad using bestow", "Silent Artisan");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "target destroy", "Silent Artisan");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        // because Boon Satyr is no creature on the battlefield, evolve may not trigger
-        assertPermanentCount(playerA, "Silent Artisan", 1);
-        assertPowerToughness(playerA, "Silent Artisan", 7, 7);
-        // because cast with bestow, Boon Satyr may not be tapped
+        // Boon Satyr should not be tapped since it resolved as an aura, Leafcrown Dryad resolved as a creature
         assertTapped("Boon Satyr", false);
+        assertTapped("Leafcrown Dryad", true);
 
     }
 
@@ -271,7 +281,6 @@ public class BestowTest extends CardTestPlayerBase {
         assertHandCount(playerB, "Disdainful Stroke", 1);
         assertPermanentCount(playerA, "Hypnotic Siren", 1);
 
-        // because cast with bestow, Boon Satyr may not be tapped
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 3, 3);
 
@@ -551,4 +560,127 @@ public class BestowTest extends CardTestPlayerBase {
         assertType("Nylea's Emissary", CardType.CREATURE, false);
         assertType("Nylea's Emissary", CardType.ENCHANTMENT, SubType.AURA);
     }
+
+    @Test
+    public void testCastBestowFlashRootwaterShaman() {
+        addCard(Zone.HAND, playerA, "Nylea's Emissary"); // +3/+3, only an aura if cast with bestow
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Rootwater Shaman"); //aura spells with enchant creature have flash
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 1); // 1/1
+
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Nylea's Emissary using bestow", "Memnite");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Nylea's Emissary", 1);
+        assertPowerToughness(playerA, "Memnite", 4, 4);
+        assertType("Nylea's Emissary", CardType.CREATURE, false);
+        assertType("Nylea's Emissary", CardType.ENCHANTMENT, SubType.AURA);
+    }
+
+    /**
+     * Tests that copied bestow works correctly both on the stack and battlefield, including with the creature removed
+     */
+    @Test
+    public void bestowCopiesTest() {
+        addCard(Zone.BATTLEFIELD, playerA, "Tundra", 18);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerA, "Overloaded Mage-Ring", 2);
+        addCard(Zone.HAND, playerA, "Hopeful Eidolon", 2);
+        addCard(Zone.HAND, playerA, "Copy Enchantment");
+        addCard(Zone.HAND, playerA, "Mythos of Illuna");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 4);
+        addCard(Zone.HAND, playerB, "Lightning Blast");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hopeful Eidolon using bestow", "Silvercoat Lion");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, {T}, Sacrifice", "Hopeful Eidolon");
+        setChoice(playerA, false);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mythos of Illuna", "Hopeful Eidolon"); // Making a token copy of a resolved Bestow aura makes a token creature
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Copy Enchantment"); // Copying a resolved Bestow aura makes a creature
+        setChoice(playerA, true);
+        setChoice(playerA, "Hopeful Eidolon");
+        checkPT("Lion with 2x Hopeful Eidolon attached", 1, PhaseStep.BEGIN_COMBAT, playerA, "Silvercoat Lion", 4, 4);
+        checkPermanentCount("Four Hopeful Eidolons resolved", 1, PhaseStep.BEGIN_COMBAT, playerA, "Hopeful Eidolon", 4);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Hopeful Eidolon using bestow", "Silvercoat Lion");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{1}, {T}, Sacrifice", "Hopeful Eidolon");
+        setChoice(playerA, false);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Blast", "Silvercoat Lion");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Silvercoat Lion", 0);
+        assertPermanentCount(playerA, "Hopeful Eidolon", 6);
+        assertTokenCount(playerA, "Hopeful Eidolon", 2);
+
+        FilterPermanent filter = new FilterPermanent();
+        filter.add(new NamePredicate("Hopeful Eidolon"));
+        List<Permanent> eidolons = currentGame.getBattlefield().getAllActivePermanents(filter, currentGame);
+        Assert.assertEquals("Six Eidolons found with filter", 6, eidolons.size());
+        for (Permanent p : eidolons){
+            Assert.assertTrue("Is Enchantment", p.getCardType(currentGame).contains(CardType.ENCHANTMENT));
+            Assert.assertFalse("Is not Aura", p.getSubtype(currentGame).contains(SubType.AURA));
+            Assert.assertTrue("Is Creature", p.getCardType(currentGame).contains(CardType.CREATURE));
+            Assert.assertTrue("Is Spirit", p.getSubtype(currentGame).contains(SubType.SPIRIT));
+            Assert.assertEquals("Is 1 power", 1, p.getPower().getValue());
+            Assert.assertEquals("Is 1 toughness", 1, p.getToughness().getValue());
+        }
+    }
+
+    @Test
+    public void testBestowSubtype() {
+        addCard(Zone.HAND, playerA, "Hopeful Eidolon", 2); // Spirit when cast as creature, not when cast as aura
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Waxmane Baku"); // May add a counter on casting a spirit spell
+        addCard(Zone.BATTLEFIELD, playerA, "Drogskol Cavalry"); // +2 life whenever another spirit enters
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hopeful Eidolon using bestow", "Waxmane Baku");
+        checkPermanentCounters("Not a Spirit, no KI counters", 1, PhaseStep.BEGIN_COMBAT, playerA, "Waxmane Baku", CounterType.KI, 0);
+        checkLife("Not a Spirit, no lifegain", 1, PhaseStep.BEGIN_COMBAT, playerA, 20);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Hopeful Eidolon");
+        setChoice(playerA, true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Hopeful Eidolon", 2);
+        assertPowerToughness(playerA, "Waxmane Baku", 3, 3);
+        assertCounterCount(playerA, "Waxmane Baku", CounterType.KI, 1);
+        assertLife(playerA, 22);
+    }
+
+    @Test
+    public void testBestowSBATiming() {
+        addCard(Zone.HAND, playerA, "Hopeful Eidolon", 2); // +1/+1
+        addCard(Zone.HAND, playerA, "Pyroclasm", 2); // 2 damage
+        addCard(Zone.BATTLEFIELD, playerA, "Plateau", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Crusader of Odric");
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite");
+        addCard(Zone.BATTLEFIELD, playerA, "Eager Cadet");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hopeful Eidolon using bestow", "Memnite", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hopeful Eidolon using bestow", "Eager Cadet");
+        checkPT("Memnite P/T", 1, PhaseStep.BEGIN_COMBAT, playerA, "Memnite", 2, 2);
+        checkPT("Eager Cadet P/T", 1, PhaseStep.BEGIN_COMBAT, playerA, "Eager Cadet", 2, 2);
+        checkPT("Crusader P/T", 1, PhaseStep.BEGIN_COMBAT, playerA, "Crusader of Odric", 3, 3);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Pyroclasm");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Hopeful Eidolon", 2);
+        assertPermanentCount(playerA, "Crusader of Odric", 1);
+        assertDamageReceived(playerA, "Crusader of Odric", 2);
+        assertGraveyardCount(playerA, 3);
+    }
+
 }

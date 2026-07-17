@@ -141,6 +141,7 @@ public abstract class TargetImpl implements Target {
                 addTargetWord = false;
             } else if (targetName.endsWith("any target")
                     || targetName.endsWith("any other target")
+                    || targetName.endsWith("another target")
                     || targetName.endsWith("targets")) {
                 addTargetWord = false;
             }
@@ -524,6 +525,7 @@ public abstract class TargetImpl implements Target {
             }
 
             // stop by nothing to choose (actual for human and done button?)
+            // TODO: research and rework whole logic, remove prevTargetsCount workaround
             if (prevTargetsCount == this.getTargets().size()) {
                 break;
             }

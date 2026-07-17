@@ -99,7 +99,7 @@ class CemeteryGatekeeperEffect extends OneShotEffect {
 class CemeteryGatekeeperTriggeredAbility extends TriggeredAbilityImpl {
 
     public CemeteryGatekeeperTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(2, true, "that player"));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(2).withTargetDescription("that player"));
         setTriggerPhrase("Whenever a player plays a land or casts a spell, if it shares a card type with the exiled card, ");
     }
 

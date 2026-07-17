@@ -29,7 +29,7 @@ import java.util.UUID;
  */
 public final class MirrorOfLifeTrapping extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     static {
         filter.add(MirrorOfLifeTrappingCastPredicate.instance);
     }
@@ -39,7 +39,7 @@ public final class MirrorOfLifeTrapping extends CardImpl {
 
         // Whenever a creature enters, if it was cast, exile it, then return all other permanent cards exiled with Mirror of Life Trapping to the battlefield under their owners' control.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new MirrorOfLifeTrappingEffect(),
-                filter, false, SetTargetPointer.PERMANENT));
+                filter, false, SetTargetPointer.PERMANENT).setTriggerPhrase("Whenever a creature enters, if it was cast, "));
     }
 
     private MirrorOfLifeTrapping(final MirrorOfLifeTrapping card) {

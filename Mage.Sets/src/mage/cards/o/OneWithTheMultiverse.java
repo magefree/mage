@@ -109,13 +109,14 @@ class OneWithTheMultiverseEffect extends AsThoughEffectImpl {
                 || card == null
                 || watcher == null
                 || sourceObject == null
-                || controller.getLibrary().getFromTop(game) == null
                 || watcher.isAbilityUsed(new MageObjectReference(sourceObject, game))) {
             return false;
         }
         Zone zone = game.getState().getZone(card.getId());
         if (!Zone.HAND.match(zone) &&
-                (!Zone.LIBRARY.match(zone) || !controller.getLibrary().getFromTop(game).getId().equals(card.getId()))) {
+                (!Zone.LIBRARY.match(zone)
+                        || controller.getLibrary().getFromTop(game) == null
+                        || !controller.getLibrary().getFromTop(game).getId().equals(card.getId()))) {
             return false;
         }
 

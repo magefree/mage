@@ -7,14 +7,13 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
-import mage.abilities.keyword.FriendsForeverAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PartnerVariantType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -40,7 +39,7 @@ public final class BjornaNightfallAlchemist extends CardImpl {
         this.addAbility(ability);
 
         // Friends forever
-        this.addAbility(FriendsForeverAbility.getInstance());
+        this.addAbility(PartnerVariantType.FRIENDS_FOREVER.makeAbility());
     }
 
     private BjornaNightfallAlchemist(final BjornaNightfallAlchemist card) {

@@ -42,6 +42,7 @@ public class AlienSymbiosisTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, bearCub);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, alienSymbiosis, bearCub);
+        setChoice(playerA, "Island");
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
@@ -49,5 +50,6 @@ public class AlienSymbiosisTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, bearCub, 3, 3);
         assertAbilityCount(playerA, bearCub, MenaceAbility.class, 1);
         assertSubtype(bearCub, SubType.SYMBIOTE);
+        assertGraveyardCount(playerA, "Island", 1);
     }
 }

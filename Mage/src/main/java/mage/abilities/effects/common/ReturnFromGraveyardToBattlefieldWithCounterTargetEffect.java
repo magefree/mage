@@ -24,7 +24,11 @@ public class ReturnFromGraveyardToBattlefieldWithCounterTargetEffect extends Ret
     }
 
     public ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(boolean additional, Counter... counters) {
-        super(false);
+        this(additional, false, false, counters);
+    }
+
+    public ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(boolean additional, boolean tapped, boolean attacking, Counter... counters) {
+        super(tapped, attacking);
         this.counters = new Counters();
         for (Counter counter : counters) {
             this.counters.addCounter(counter);

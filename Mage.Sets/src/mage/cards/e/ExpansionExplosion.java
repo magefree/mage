@@ -1,7 +1,6 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyTargetStackObjectEffect;
@@ -82,7 +81,7 @@ class ExplosionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
-        Effect effect = new DamageTargetEffect(StaticValue.get(xValue), true, "", true);
+        Effect effect = new DamageTargetEffect(xValue);
         effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
         effect.apply(game, source);
         Player player = game.getPlayer(source.getTargets().get(1).getFirstTarget());

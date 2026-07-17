@@ -52,7 +52,7 @@ public final class KianneDeanOfSubstance extends ModalDoubleFacedCard {
 
         // {4}{G}: Create a 0/0 green and blue Fractal creature token. Put a +1/+1 counter on it for each different mana value among nonland cards you own in exile with study counters on them.
         this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(FractalToken.getEffect(
-                KianneDeanOfSubstanceValue.instance, "Put a +1/+1 counter on it for each different mana value " +
+                KianneDeanOfSubstanceValue.instance, ". Put a +1/+1 counter on it for each different mana value " +
                         "among nonland cards you own in exile with study counters on them"
         ), new ManaCostsImpl<>("{4}{G}")).addHint(KianneDeanOfSubstanceHint.instance));
 

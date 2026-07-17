@@ -35,7 +35,7 @@ public final class UltimaWeapon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(7, 7)));
 
         // Equip {7}
-        this.addAbility(new EquipAbility(7));
+        this.addAbility(new EquipAbility(7, false));
     }
 
     private UltimaWeapon(final UltimaWeapon card) {

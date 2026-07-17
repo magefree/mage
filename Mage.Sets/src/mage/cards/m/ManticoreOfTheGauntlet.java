@@ -1,11 +1,9 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -37,7 +35,7 @@ public final class ManticoreOfTheGauntlet extends CardImpl {
         counters.setText("put a -1/-1 counter on target creature you control");
         counters.setTargetPointer(new FirstTargetPointer());
 
-        Effect damage = new DamageTargetEffect(StaticValue.get(3), true, "", true);
+        Effect damage = new DamageTargetEffect(3);
         damage.setText("{this} deals 3 damage to target opponent or planeswalker.");
         damage.setTargetPointer(new SecondTargetPointer());
 

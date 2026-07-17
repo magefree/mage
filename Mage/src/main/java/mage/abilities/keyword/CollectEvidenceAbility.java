@@ -85,9 +85,7 @@ public class CollectEvidenceAbility extends StaticAbility implements OptionalAdd
         }
 
         additionalCost.activate();
-        for (Cost cost : ((Costs<Cost>) additionalCost)) {
-            ability.getCosts().add(cost.copy());
-        }
+        ability.addCost(additionalCost.copy());
         ability.setCostsTag(COLLECT_EVIDENCE_ACTIVATION_VALUE_KEY, null);
     }
 

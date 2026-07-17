@@ -37,7 +37,7 @@ public class VoidWatcher extends Watcher {
             case ZONE_CHANGE:
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
                 if (Zone.BATTLEFIELD.match(zEvent.getFromZone())
-                        && zEvent.getTarget() != null
+                        && zEvent.isPermanentMoved()
                         && !zEvent.getTarget().isLand(game)) {
                     players.addAll(game.getState().getPlayersInRange(zEvent.getTarget().getControllerId(), game));
                 }

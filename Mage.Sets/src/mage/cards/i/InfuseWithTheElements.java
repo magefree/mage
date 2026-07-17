@@ -25,7 +25,7 @@ public final class InfuseWithTheElements extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
         // <i>Converge</i> &mdash; Put X +1/+1 counters on target creature, where X is the number of colors of mana spent to cast Infuse with the Elements.
-        this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
+        this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE).addHint(ColorsOfManaSpentToCastCount.getHint());
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(0), ColorsOfManaSpentToCastCount.getInstance());
         effect.setText("Put X +1/+1 counters on target creature, where X is the number of colors of mana spent to cast this spell");
         this.getSpellAbility().addEffect(effect);

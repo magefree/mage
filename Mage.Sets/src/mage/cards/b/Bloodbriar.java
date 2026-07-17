@@ -9,32 +9,24 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class Bloodbriar extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("another permanent");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public Bloodbriar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add(SubType.PLANT, SubType.ELEMENTAL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
         // Whenever you sacrifice another permanent, put a +1/+1 counter on Bloodbriar.
         this.addAbility(new SacrificePermanentTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_ANOTHER_PERMANENT
         ));
     }
 

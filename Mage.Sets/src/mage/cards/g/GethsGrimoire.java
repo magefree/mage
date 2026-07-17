@@ -1,22 +1,25 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.common.DiscardsACardOpponentTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
- *
  * @author Mitchel Sein
  */
 public final class GethsGrimoire extends CardImpl {
 
     public GethsGrimoire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
+
+        this.subtype.add(SubType.BOOK);
 
         Effect drawTrigger = new DrawCardSourceControllerEffect(1);
         drawTrigger.setText("you may draw a card.");

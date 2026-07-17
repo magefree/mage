@@ -11,10 +11,8 @@ use Scalar::Util qw(looks_like_number);
 
 my $dataFile = "mtg-cards-data.txt";
 my $setsFile = "mtg-sets-data.txt";
-my $knownSetsFile = "known-sets.txt";
 
 my %sets;
-my %knownSets;
 
 my @setCards;
 my %nameSetNumber;
@@ -125,7 +123,7 @@ while (<DIR_LISTING>)
     while (<JAVA_FILE>)
     {
         chomp;
-        
+
         #cards.add(new SetCardInfo("Bonds of Quicksilver", 102, Rarity.COMMON, mage.cards.b.BondsOfQuicksilver.class));
         my $line = $_;
         if ($line =~ m/SetCardInfo\("([^"]+)",([^,]+),/img)

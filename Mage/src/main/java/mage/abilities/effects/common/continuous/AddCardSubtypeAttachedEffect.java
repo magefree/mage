@@ -11,6 +11,7 @@ import mage.util.CardUtil;
  * @author nantuko
  */
 public class AddCardSubtypeAttachedEffect extends ContinuousEffectImpl {
+
     private final SubType addedSubtype;
 
     public AddCardSubtypeAttachedEffect(SubType addedSubtype, AttachmentType attachmentType) {
@@ -27,12 +28,11 @@ public class AddCardSubtypeAttachedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            Permanent target = game.getPermanent(equipment.getAttachedTo());
-            if (target != null)
-                target.addSubType(game, addedSubtype);
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
+        if (permanent == null) {
+            return false;
         }
+        permanent.addSubType(game, addedSubtype);
         return true;
     }
 

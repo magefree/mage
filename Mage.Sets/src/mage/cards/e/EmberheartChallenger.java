@@ -33,7 +33,8 @@ public final class EmberheartChallenger extends CardImpl {
         this.addAbility(new ProwessAbility());
 
         // Valiant -- Whenever Emberheart Challenger becomes the target of a spell or ability you control for the first time each turn, exile the top card of your library. Until end of turn, you may play that card.
-        this.addAbility(new ValiantTriggeredAbility(new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn)));
+        this.addAbility(new ValiantTriggeredAbility(new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn)
+                .withTextOptions("that card", false)));
     }
 
     private EmberheartChallenger(final EmberheartChallenger card) {

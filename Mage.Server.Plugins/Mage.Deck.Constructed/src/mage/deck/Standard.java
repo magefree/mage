@@ -24,8 +24,11 @@ public class Standard extends Constructed {
         banned.add("Heartfire Hero");
         banned.add("Hopeless Nightmare");
         banned.add("Monstrous Rage");
+        banned.add("Proft's Eidetic Memory");
+        banned.add("Screaming Nemesis");
         banned.add("This Town Ain't Big Enough");
         banned.add("Up the Beanstalk");
+        banned.add("Vivi Ornitier");
     }
 
     static List<String> makeLegalSets() {

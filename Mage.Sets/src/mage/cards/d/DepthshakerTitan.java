@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -17,8 +17,16 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTargets;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.Predicates;
@@ -51,11 +59,7 @@ public final class DepthshakerTitan extends CardImpl {
         ability.addEffect(new SetBasePowerToughnessTargetEffect(
                 3, 3, Duration.Custom
         ).setText(" become 3/3 artifact creatures"));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                        new SacrificeTargetEffect().setText("sacrifice those artifacts")
-                ), true
-        ).withCopyToPointer(true).setText("Sacrifice them at the beginning of the next end step"));
+        ability.addEffect(new DepthshakerTitanEffect());
         ability.addTarget(new TargetPermanent(0, Integer.MAX_VALUE, filter));
         this.addAbility(ability);
 
@@ -82,5 +86,38 @@ public final class DepthshakerTitan extends CardImpl {
     @Override
     public DepthshakerTitan copy() {
         return new DepthshakerTitan(this);
+    }
+}
+
+class DepthshakerTitanEffect extends OneShotEffect {
+
+    DepthshakerTitanEffect() {
+        super(Outcome.Sacrifice);
+        staticText = "Sacrifice them at the beginning of the next end step";
+    }
+
+    private DepthshakerTitanEffect(final DepthshakerTitanEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public DepthshakerTitanEffect copy() {
+        return new DepthshakerTitanEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        List<Permanent> permanents = source.getTargets().get(0).getTargets()
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        if (permanents.isEmpty()) {
+            return false;
+        }
+        SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice those artifacts");
+        sacrificeEffect.setTargetPointer(new FixedTargets(permanents, game));
+        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect), source);
+        return true;
     }
 }

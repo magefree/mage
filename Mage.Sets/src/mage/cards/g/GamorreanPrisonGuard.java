@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
@@ -13,7 +11,8 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +35,8 @@ public final class GamorreanPrisonGuard extends CardImpl {
 
         // Whenever a creature enters the battlefield under an opponent's control, Gamorrean Prison Guard fights that creature.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new GamorreanPrisonGuardEffect(), filter, false, SetTargetPointer.PERMANENT));
+                Zone.BATTLEFIELD, new GamorreanPrisonGuardEffect(), filter, false, SetTargetPointer.PERMANENT)
+                .setTriggerPhrase("Whenever a creature enters under an opponent's control, "));
 
     }
 
@@ -54,6 +54,7 @@ class GamorreanPrisonGuardEffect extends OneShotEffect {
 
     GamorreanPrisonGuardEffect() {
         super(Outcome.Detriment);
+        setText("{this} fights that creature");
     }
 
     private GamorreanPrisonGuardEffect(final GamorreanPrisonGuardEffect effect) {
@@ -62,10 +63,9 @@ class GamorreanPrisonGuardEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        Permanent thisCreature = game.getPermanent(source.getSourceId());
+        Permanent thisCreature = source.getSourcePermanentIfItStillExists(game);
         Permanent opponentCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (you != null && thisCreature != null && opponentCreature != null) {
+        if (thisCreature != null && opponentCreature != null) {
             return thisCreature.fight(opponentCreature, source, game);
         }
         return false;

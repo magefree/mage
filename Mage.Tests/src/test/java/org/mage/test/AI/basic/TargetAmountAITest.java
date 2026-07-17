@@ -50,4 +50,21 @@ public class TargetAmountAITest extends CardTestPlayerBaseWithAIHelps {
         assertPowerToughness(playerA, "Balduvian Bears", 2 + 1, 2 + 1); // boost each possible creatures
         assertPowerToughness(playerB, "Balduvian Bears", 2, 2); // no boost for enemy
     }
+
+    @Test
+    public void test_AI_TriggersTargets() {
+        addCard(Zone.BATTLEFIELD, playerB, "Roaming Throne");
+        addCard(Zone.HAND, playerA, "Acidic Slime");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+
+        setChoice(playerB, "Bear");
+        aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerB, "Roaming Throne", 1);
+        assertPermanentCount(playerA, "Acidic Slime", 1);
+    }
 }

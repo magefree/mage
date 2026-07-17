@@ -30,6 +30,7 @@ Demonstrate|new|
 Delve|new|
 Dethrone|new|
 Devoid|color|
+Devour|number|
 Defender|instance|
 Disguise|card, cost|
 Disturb|cost|
@@ -44,6 +45,7 @@ Enchant|type|
 Encore|cost|
 Enlist|new|
 Entwine|manaString|
+Equip|number|
 Eternalize|cost, card|
 Evoke|manaString|
 Evolve|new|
@@ -71,6 +73,7 @@ Hexproof|instance|
 Hideaway|number|
 Impending|manaString|
 Improvise|new|
+Increment|new|
 Indestructible|instance|
 Infect|instance|
 Intimidate|instance|
@@ -102,6 +105,7 @@ Nightbound|new|
 Ninjutsu|manaString|
 Offspring|manaString|
 Outlast|cost|
+Paradigm|new|
 Partner|instance|
 Persist|new|
 Phasing|instance|
@@ -126,6 +130,7 @@ Shroud|instance|
 Soulbond|new|
 Soulshift|number|
 Skulk|new|
+Sneak|card, manaString|
 Spectacle|card, cost|
 Spree|card|
 Squad|cost|
@@ -137,6 +142,7 @@ Suspend|number, cost, card|
 Swampcycling|cost|
 Swampwalk|new|
 Umbra armor|new|
+Teamwork|number|
 Tiered|card|
 Toxic|number|
 Training|new|

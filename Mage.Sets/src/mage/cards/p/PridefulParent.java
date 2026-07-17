@@ -8,7 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.CatToken3;
+import mage.game.permanent.token.Cat11Token;
 
 import java.util.UUID;
 
@@ -28,7 +28,7 @@ public final class PridefulParent extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // When this creature enters, create a 1/1 white Cat creature token.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new CatToken3())));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new Cat11Token())));
     }
 
     private PridefulParent(final PridefulParent card) {

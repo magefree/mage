@@ -1,6 +1,8 @@
 package org.mage.plugins.card.dl.sources;
 
 import mage.client.remote.XmageURLConnection;
+
+import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.mage.plugins.card.dl.DownloadJob;
 
@@ -37,7 +39,7 @@ public class ScryfallSymbolsSource implements Iterable<DownloadJob> {
     static final String REGEXP_MANA_PATTERN = "card-symbol-(.{1,10})\\{background-image.+base64,(.+)(\"\\)\\})";
 
 
-    protected static final org.apache.log4j.Logger LOGGER = org.apache.log4j.Logger.getLogger(ScryfallSymbolsSource.class);
+    protected static final Logger LOGGER = Logger.getLogger(ScryfallSymbolsSource.class);
 
     private static final int SYMBOLS_NUMBER_START = 0;
     private static final int SYMBOLS_NUMBER_END = 20;
@@ -48,7 +50,7 @@ public class ScryfallSymbolsSource implements Iterable<DownloadJob> {
             "2/W", "2/U", "2/B", "2/R", "2/G",
             "C/W", "C/U", "C/B", "C/R", "C/G",
             "WP", "UP", "BP", "RP", "GP",
-            "X", "S", "T", "Q", "C", "E", "H", "P"};
+            "X", "S", "T", "Q", "C", "E", "H", "P", "TK"};
 
     @Override
     public Iterator<DownloadJob> iterator() {

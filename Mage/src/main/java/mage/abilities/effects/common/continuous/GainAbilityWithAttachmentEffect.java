@@ -122,7 +122,7 @@ public class GainAbilityWithAttachmentEffect extends ContinuousEffectImpl {
             }
             ability.addCost(cost.copy());
         }
-        if (source != null && game != null) {
+        if (source != null && game != null && useAttachedCost != null) {
             ability.addCost(useAttachedCost.copy().setMageObjectReference(source, game));
         }
         if (consumer != null) {

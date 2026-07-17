@@ -1,20 +1,14 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageEachOtherOpponentThatMuchEffect;
 import mage.abilities.keyword.MeleeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.game.Game;
-import mage.players.Player;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -33,7 +27,9 @@ public final class GrenzosRuffians extends CardImpl {
         this.addAbility(new MeleeAbility());
 
         // Whenever Grenzo's Ruffians deals combat damage to a opponent, it deals that much damage to each other opponent.
-        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new GrenzosRuffiansEffect(), false, true, true));
+        this.addAbility(new DealsDamageToOpponentTriggeredAbility(
+                new DamageEachOtherOpponentThatMuchEffect(), false, true, true
+        ));
     }
 
     private GrenzosRuffians(final GrenzosRuffians card) {
@@ -43,42 +39,5 @@ public final class GrenzosRuffians extends CardImpl {
     @Override
     public GrenzosRuffians copy() {
         return new GrenzosRuffians(this);
-    }
-}
-
-class GrenzosRuffiansEffect extends OneShotEffect {
-
-    GrenzosRuffiansEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "it deals that much damage to each other opponent";
-    }
-
-    private GrenzosRuffiansEffect(final GrenzosRuffiansEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GrenzosRuffiansEffect copy() {
-        return new GrenzosRuffiansEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        UUID damagedOpponent = this.getTargetPointer().getFirst(game, source);
-        int amount = (Integer) getValue("damage");
-        MageObject object = game.getObject(source);
-        if (object != null && amount > 0 && damagedOpponent != null) {
-            for (UUID playerId : game.getOpponents(source.getControllerId())) {
-                if (!Objects.equals(playerId, damagedOpponent)) {
-                    Player opponent = game.getPlayer(playerId);
-                    if (opponent != null) {
-                        int dealtDamage = opponent.damage(amount, source.getSourceId(), source, game);
-                        game.informPlayers(object.getLogName() + " deals " + dealtDamage + " damage to " + opponent.getLogName());
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }

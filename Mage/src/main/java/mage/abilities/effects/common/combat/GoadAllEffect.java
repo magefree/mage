@@ -33,7 +33,7 @@ public class GoadAllEffect extends ContinuousEffectImpl {
         this.setAffectedObjectsSet(affectedObjectsSet);
     }
 
-    private GoadAllEffect(final GoadAllEffect effect) {
+    protected GoadAllEffect(final GoadAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

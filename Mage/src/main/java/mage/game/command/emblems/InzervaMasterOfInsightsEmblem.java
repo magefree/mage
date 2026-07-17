@@ -23,7 +23,7 @@ public final class InzervaMasterOfInsightsEmblem extends Emblem {
         ));
         // Whenever an opponent draws a card, this emblem deals 1 damage to them
         this.getAbilities().add(new DrawCardOpponentTriggeredAbility(
-                Zone.COMMAND, new DamageTargetEffect(1, true, "them")
+                Zone.COMMAND, new DamageTargetEffect(1)
                         .setText("this emblem deals 1 damage to them"), false, true
         ));
     }

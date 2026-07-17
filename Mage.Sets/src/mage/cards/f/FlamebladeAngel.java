@@ -28,7 +28,7 @@ public final class FlamebladeAngel extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever a source an opponent controls deals damage to you or a permanent you control, you may have Flameblade Angel deal 1 damage to that source's controller.
-        Effect effect = new DamageTargetEffect(1, true, "that source's controller");
+        Effect effect = new DamageTargetEffect(1).withTargetDescription("that source's controller");
         this.addAbility(new SourceDealsDamageToYouTriggeredAbility(effect, StaticFilters.FILTER_PERMANENT, true));
 
     }

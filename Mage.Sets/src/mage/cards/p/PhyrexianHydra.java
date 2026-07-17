@@ -3,20 +3,17 @@ package mage.cards.p;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.PreventionEffectData;
+import mage.abilities.effects.common.PreventDamageToSourceEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.PreventDamageEvent;
-import mage.game.events.PreventedDamageEvent;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
@@ -49,10 +46,10 @@ public final class PhyrexianHydra extends CardImpl {
 
 }
 
-class PhyrexianHydraEffect extends PreventionEffectImpl {
+class PhyrexianHydraEffect extends PreventDamageToSourceEffect {
 
     PhyrexianHydraEffect() {
-        super(Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield, Integer.MAX_VALUE);
         staticText = "If damage would be dealt to {this}, prevent that damage. Put a -1/-1 counter on {this} for each 1 damage prevented this way";
     }
 
@@ -67,25 +64,13 @@ class PhyrexianHydraEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        boolean retValue = false;
-        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
-        int damage = event.getAmount();
-        if (!game.replaceEvent(preventEvent)) {
-            event.setAmount(0);
-            game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), damage));
-            retValue = true;
-        }
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            permanent.addCounters(CounterType.M1M1.createInstance(damage), source.getControllerId(), source, game);
-        }
-        return retValue;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            return event.getTargetId().equals(source.getSourceId());
+        PreventionEffectData preventionEffectData = preventDamageAction(event, source, game);
+        if (preventionEffectData.getPreventedDamage() > 0) {
+            Permanent permanent = game.getPermanent(source.getSourceId());
+            if (permanent != null) {
+                permanent.addCounters(CounterType.M1M1.createInstance(preventionEffectData.getPreventedDamage()), source.getControllerId(), source, game);
+            }
+            return false;
         }
         return false;
     }

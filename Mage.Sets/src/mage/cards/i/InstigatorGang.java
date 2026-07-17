@@ -1,12 +1,12 @@
 package mage.cards.i;
 
-import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -17,27 +17,41 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public final class InstigatorGang extends CardImpl {
+public final class InstigatorGang extends TransformingDoubleFacedCard {
 
     public InstigatorGang(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WEREWOLF);
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WEREWOLF}, "{3}{R}",
+                "Wildblood Pack",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "R"
+        );
 
-        this.secondSideCardClazz = mage.cards.w.WildbloodPack.class;
-
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+        // Instigator Gang
+        this.getLeftHalfCard().setPT(2, 3);
 
         // Attacking creatures you control get +1/+0.
-        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new BoostControlledEffect(
                 1, 0, Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_ATTACKING_CREATURES
         )));
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Instigator Gang.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new WerewolfFrontTriggeredAbility());
+        this.getLeftHalfCard().addAbility(new WerewolfFrontTriggeredAbility());
+
+        // Wildblood Pack
+        this.getRightHalfCard().setPT(5, 5);
+
+        // Trample
+        this.getRightHalfCard().addAbility(TrampleAbility.getInstance());
+
+        // Attacking creatures you control get +3/+0.
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new BoostControlledEffect(
+                3, 0, Duration.WhileOnBattlefield,
+                StaticFilters.FILTER_ATTACKING_CREATURES, false
+        )));
+
+        // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Wildblood Pack.
+        this.getRightHalfCard().addAbility(new WerewolfBackTriggeredAbility());
     }
 
     private InstigatorGang(final InstigatorGang card) {

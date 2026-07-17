@@ -37,7 +37,7 @@ public final class ScabClanBerserker extends CardImpl {
         // Whenever an opponent casts a noncreature spell, if Scab-Clan Berserker is renowned, Scab-Clan Berserker deals 2 damage to that player.
         this.addAbility(new SpellCastOpponentTriggeredAbility(
                 Zone.BATTLEFIELD,
-                new DamageTargetEffect(2, true, "that player"),
+                new DamageTargetEffect(2).withTargetDescription("that player"),
                 StaticFilters.FILTER_SPELL_A_NON_CREATURE, false, SetTargetPointer.PLAYER
         ).withInterveningIf(RenownedSourceCondition.THIS));
     }

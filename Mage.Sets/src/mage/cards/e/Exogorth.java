@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.keyword.CanBlockSpaceflightAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.SpaceflightAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -34,6 +35,9 @@ public final class Exogorth extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
+
+        // Exogorth can block creatures with spaceflight.
+        this.addAbility(CanBlockSpaceflightAbility.getInstance());
 
         // Exogorth can block only creatures with spaceflight.
         this.addAbility(new CanBlockOnlySpaceflightAbility());

@@ -1,8 +1,8 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldOrAttacksAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -12,6 +12,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
@@ -34,10 +35,10 @@ public final class TomeOfLegends extends CardImpl {
     public TomeOfLegends(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
+        this.subtype.add(SubType.BOOK);
+
         // Tome of Legends enters the battlefield with a page counter on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.PAGE.createInstance()
-        ), "with a page counter on it"));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.PAGE.createInstance()));
 
         // Whenever your commander enters the battlefield or attacks, put a page counter on Tome of Legends.
         this.addAbility(new EntersBattlefieldOrAttacksAllTriggeredAbility(

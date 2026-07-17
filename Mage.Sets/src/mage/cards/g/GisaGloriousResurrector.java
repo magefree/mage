@@ -102,7 +102,7 @@ class GisaGloriousResurrectorExileEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         return zEvent.isDiesEvent()
-                && zEvent.getTarget() != null
+                && zEvent.isPermanentMoved()
                 && zEvent.getTarget().isCreature(game)
                 && game.getOpponents(zEvent.getTarget().getControllerId()).contains(source.getControllerId());
     }

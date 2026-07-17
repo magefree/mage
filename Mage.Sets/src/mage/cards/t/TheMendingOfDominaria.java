@@ -1,19 +1,15 @@
 package mage.cards.t;
 
-import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.MillCardsControllerEffect;
+import mage.abilities.effects.common.ReturnCardChosenFromGraveyardEffect;
 import mage.abilities.effects.common.ReturnFromYourGraveyardToBattlefieldAllEffect;
 import mage.abilities.effects.common.ShuffleYourGraveyardIntoLibraryEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
 
@@ -32,7 +28,11 @@ public final class TheMendingOfDominaria extends CardImpl {
         SagaAbility sagaAbility = new SagaAbility(this);
 
         // I, II — Put the top two cards of your library into your graveyard, then you may return a creature card from your graveyard to your hand.
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II, new TheMendingOfDominariaFirstEffect());
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II, new Effects(
+                new MillCardsControllerEffect(2),
+                new ReturnCardChosenFromGraveyardEffect(true,
+                        StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD, PutCards.HAND).concatBy(", then")
+        ));
 
         // III — Return all land cards from your graveyard to the battlefield, then shuffle your graveyard into your library.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III,
@@ -49,42 +49,5 @@ public final class TheMendingOfDominaria extends CardImpl {
     @Override
     public TheMendingOfDominaria copy() {
         return new TheMendingOfDominaria(this);
-    }
-}
-
-class TheMendingOfDominariaFirstEffect extends OneShotEffect {
-
-    TheMendingOfDominariaFirstEffect() {
-        super(Outcome.ReturnToHand);
-        this.staticText = "Mill two cards, then you may return a creature card from your graveyard to your hand";
-    }
-
-    private TheMendingOfDominariaFirstEffect(final TheMendingOfDominariaFirstEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TheMendingOfDominariaFirstEffect copy() {
-        return new TheMendingOfDominariaFirstEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        new MillCardsControllerEffect(2).apply(game, source);
-        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
-        target.withNotTarget(true);
-        if (target.canChoose(source.getControllerId(), source, game)
-                && controller.chooseUse(outcome, "Return a creature card from your graveyard to hand?", source, game)
-                && controller.choose(Outcome.ReturnToHand, target, source, game)) {
-            Card card = game.getCard(target.getFirstTarget());
-            if (card != null) {
-                controller.moveCards(card, Zone.HAND, source, game);
-            }
-        }
-        return true;
     }
 }

@@ -1,6 +1,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
+import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -10,13 +11,9 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.PreventDamageEvent;
-import mage.game.events.PreventedDamageEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -67,26 +64,15 @@ class BraceForImpactPreventDamageTargetEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
-        if (game.replaceEvent(preventEvent)) {
-            return false;
-        }
-        int prevented;
-        int damage = event.getAmount();
-        event.setAmount(0);
-        game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), damage));
-        prevented = damage;
-
-        // add counters now
-        if (prevented > 0) {
+        PreventionEffectData preventionEffectData = preventDamageAction(event, source, game);
+        if (preventionEffectData.getPreventedDamage() > 0) {
             Permanent targetPermanent = game.getPermanent(source.getTargets().getFirstTarget());
             if (targetPermanent != null) {
-                targetPermanent.addCounters(CounterType.P1P1.createInstance(prevented), source.getControllerId(), source, game);
-                game.informPlayers("Brace for Impact: Prevented " + prevented + " damage ");
-                game.informPlayers("Brace for Impact: Adding " + prevented + " +1/+1 counters to " + targetPermanent.getName());
+                targetPermanent.addCounters(CounterType.P1P1.createInstance(preventionEffectData.getPreventedDamage()), source.getControllerId(), source, game);
             }
+            return false;
         }
-        return true;
+        return false;
     }
 
     @Override

@@ -1,37 +1,56 @@
 package mage.cards.b;
 
-import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.SubType;
+import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
+import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
 
 /**
  * @author TheElk801
  */
-public final class BereavedSurvivor extends CardImpl {
+public final class BereavedSurvivor extends TransformingDoubleFacedCard {
 
+    private static final FilterCard filter
+            = new FilterCreatureCard("creature card with mana value 2 or less from your graveyard");
+
+    static {
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
+    }
     public BereavedSurvivor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.PEASANT}, "{2}{W}",
+                "Dauntless Avenger",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.SOLDIER}, "W");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.PEASANT);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-        this.secondSideCardClazz = mage.cards.d.DauntlessAvenger.class;
+        // Bereaved Survivor
+        this.getLeftHalfCard().setPT(2, 1);
 
         // When another creature you control dies, transform Bereaved Survivor.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new DiesCreatureTriggeredAbility(
+        this.getLeftHalfCard().addAbility(new DiesCreatureTriggeredAbility(
                 new TransformSourceEffect(), false,
                 StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
         ).setTriggerPhrase("When another creature you control dies, "));
+
+        // Dauntless Avenger
+        this.getRightHalfCard().setPT(3, 2);
+
+        // Whenever Dauntless Avenger attacks, return target creature card with mana value 2 or less from your graveyard to the battlefield tapped and attacking.
+        Ability ability = new AttacksTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(true, true));
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        this.getRightHalfCard().addAbility(ability);
     }
 
     private BereavedSurvivor(final BereavedSurvivor card) {

@@ -3,10 +3,10 @@ package mage.cards.o;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksWhileSaddledTriggeredAbility;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.common.DoubleCountersTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.SaddleAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -37,10 +37,7 @@ public final class OrneryTumblewagg extends CardImpl {
         this.addAbility(ability);
 
         // Whenever Ornery Tumblewagg attacks while saddled, double the number of +1/+1 counters on target creature.
-        ability = new AttacksWhileSaddledTriggeredAbility(
-                new DoubleCountersTargetEffect(CounterType.P1P1)
-                        .setText("double the number of +1/+1 counters on target creature")
-        );
+        ability = new AttacksWhileSaddledTriggeredAbility(new DoubleCountersTargetEffect(CounterType.P1P1));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

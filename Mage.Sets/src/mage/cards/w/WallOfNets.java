@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.EndOfCombatTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ExileAllEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,10 +43,8 @@ public final class WallOfNets extends CardImpl {
         ));
 
         // When Wall of Nets leaves the battlefield, return all cards exiled with Wall of Nets to the battlefield under their owners' control.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileEffect(
-                Zone.BATTLEFIELD, "return all cards exiled with {this} " +
-                "to the battlefield under their owners' control"
-        ), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD)
+                .setText("return all cards exiled with {this} to the battlefield under their owners' control"), false));
     }
 
     private WallOfNets(final WallOfNets card) {

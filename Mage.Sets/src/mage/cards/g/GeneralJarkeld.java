@@ -153,7 +153,7 @@ class GeneralJarkeldSwitchBlockersEffect extends OneShotEffect {
     private void handleSingleBlockers(Set<Permanent> blockers, CombatGroup chosenGroup, CombatGroup otherGroup, Player controller, Game game) {
         for (Permanent blocker : blockers) {
             chosenGroup.remove(blocker.getId());
-            blocker.setBlocking(0);
+            blocker.clearBlocking();
             // 10/4/2004 	The new blocker does not trigger any abilities which trigger on creatures becoming blockers, because the creatures were already blockers and the simple change of who is blocking does not trigger such abilities.
             otherGroup.addBlockerToGroup(blocker.getId(), controller.getId(), game);
         }

@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class MortalitySpear extends CardImpl {
 
-    private static final Condition condition = new YouGainedLifeCondition();
+    private static final Condition condition = YouGainedLifeCondition.getZero();
 
     public MortalitySpear(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}{G}");

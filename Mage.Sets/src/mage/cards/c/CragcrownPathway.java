@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardSetInfo;
@@ -27,7 +26,6 @@ public final class CragcrownPathway extends ModalDoubleFacedCard {
 
         // {T}: Add {R}.
         this.getLeftHalfCard().addAbility(new RedManaAbility());
-        this.getLeftHalfCard().addAbility(new TransformAbility());
 
         // 2.
         // Timbercrown Pathway

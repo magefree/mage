@@ -6,20 +6,16 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.MeldCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.MeldEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
+import mage.abilities.effects.common.ReturnCardChosenFromGraveyardEffect;
 import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterPermanentCard;
 
 import java.util.UUID;
 
@@ -29,6 +25,7 @@ import java.util.UUID;
 public final class VanilleCheerfulLCie extends CardImpl {
 
     private static final Condition condition = new MeldCondition("Fang, Fearless l'Cie");
+    private static final FilterCard filter = new FilterPermanentCard("permanent card from your graveyard");
 
     public VanilleCheerfulLCie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
@@ -43,7 +40,8 @@ public final class VanilleCheerfulLCie extends CardImpl {
 
         // When Vanille enters, mill two cards, then return a permanent card from your graveyard to your hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(2));
-        ability.addEffect(new VanilleCheerfulLCieEffect());
+        ability.addEffect(new ReturnCardChosenFromGraveyardEffect(false, filter, PutCards.HAND)
+                .concatBy(", then"));
         this.addAbility(ability);
 
         // At the beginning of your first main phase, if you both own and control Vanille and a creature named Fang, Fearless l'Cie, you may pay {3}{B}{G}. If you do, exile them, then meld them into Ragnarok, Divine Deliverance.
@@ -61,35 +59,5 @@ public final class VanilleCheerfulLCie extends CardImpl {
     @Override
     public VanilleCheerfulLCie copy() {
         return new VanilleCheerfulLCie(this);
-    }
-}
-
-class VanilleCheerfulLCieEffect extends OneShotEffect {
-
-    VanilleCheerfulLCieEffect() {
-        super(Outcome.Benefit);
-        staticText = ", then return a permanent card from your graveyard to your hand";
-    }
-
-    private VanilleCheerfulLCieEffect(final VanilleCheerfulLCieEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public VanilleCheerfulLCieEffect copy() {
-        return new VanilleCheerfulLCieEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null || player.getGraveyard().count(StaticFilters.FILTER_CARD_PERMANENT, game) < 1) {
-            return false;
-        }
-        TargetCard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_PERMANENT);
-        target.withNotTarget(true);
-        player.choose(outcome, player.getGraveyard(), target, source, game);
-        Card card = game.getCard(target.getFirstTarget());
-        return card != null && player.moveCards(card, Zone.HAND, source, game);
     }
 }

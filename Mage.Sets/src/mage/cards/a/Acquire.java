@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -41,12 +41,6 @@ public final class Acquire extends CardImpl {
 
 class AcquireEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("an artifact card");
-
-    static {
-        filter.add(CardType.ARTIFACT.getPredicate());
-    }
-
     public AcquireEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "Search target opponent's library for an artifact card and put that card onto the battlefield under your control. Then that player shuffles";
@@ -61,7 +55,7 @@ class AcquireEffect extends OneShotEffect {
         Player opponent = game.getPlayer(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
         if (opponent != null && controller != null) {
-            TargetCardInLibrary target = new TargetCardInLibrary(filter);
+            TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_ARTIFACT_AN);
             controller.searchLibrary(target, source, game, opponent.getId());
             Card targetCard = game.getCard(target.getFirstTarget());
             if (targetCard != null) {

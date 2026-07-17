@@ -30,6 +30,7 @@ public final class TajuruStalwart extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(), ColorsOfManaSpentToCastCount.getInstance(), true),
                 null, "<i>Converge</i> &mdash; {this} enters with a +1/+1 counter on it for each color of mana spent to cast it.", null));
+        this.getSpellAbility().addHint(ColorsOfManaSpentToCastCount.getHint());
 
     }
 

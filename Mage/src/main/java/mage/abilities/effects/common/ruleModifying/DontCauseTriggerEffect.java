@@ -5,14 +5,15 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
-import mage.game.events.GameEvent;
-import mage.game.events.NumberOfTriggersEvent;
-import mage.game.events.ZoneChangeEvent;
+import mage.game.events.*;
 import mage.game.permanent.Permanent;
+
+import java.util.Iterator;
+import java.util.Optional;
 
 /**
  * @author xenohedron
@@ -66,17 +67,28 @@ public class DontCauseTriggerEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        GameEvent sourceEvent = ((NumberOfTriggersEvent) event).getSourceEvent();
         if (filterTriggering != null) {
             Ability ability = (Ability) getValue("targetAbility");
             if (ability == null) {
                 return false;
             }
-            Permanent triggeringPermanent = ability.getSourcePermanentOrLKI(game);
+            Permanent triggeringPermanent = game.getPermanent(ability.getSourceId());
+            // https://github.com/magefree/mage/issues/15220
+            // Only treat off-battlefield abilities as abilities of a permanent when
+            // the trigger comes from that object entering or dying. Graveyard
+            // abilities like Sword of the Meek are not in battlefield and cards
+            // like Elesh Norn does not prevent that. 
+            if (triggeringPermanent == null
+                    && sourceEvent != null
+                    && (ability.getSourceId().equals(sourceEvent.getSourceId())
+                    || ability.getSourceId().equals(sourceEvent.getTargetId()))) {
+                triggeringPermanent = ability.getSourcePermanentOrLKI(game);
+            }
             if (triggeringPermanent == null || !filterTriggering.match(triggeringPermanent, source.getControllerId(), source, game)) {
                 return false;
             }
         }
-        GameEvent sourceEvent = ((NumberOfTriggersEvent) event).getSourceEvent();
         if (sourceEvent == null) {
             return false;
         }
@@ -95,6 +107,21 @@ public class DontCauseTriggerEffect extends ContinuousRuleModifyingEffectImpl {
                     }
                 }
                 return false;
+            case ZONE_CHANGE_BATCH:
+                ZoneChangeBatchEvent zoneChangeBatch = ((ZoneChangeBatchEvent) sourceEvent);
+                boolean all_match = true;
+                for (ZoneChangeEvent zoneChangeEvent : zoneChangeBatch.getEvents()) {
+                    if (zoneChangeEvent.getToZone() == Zone.BATTLEFIELD ||
+                            (orDying && zoneChangeEvent.isDiesEvent())) {
+                        Permanent permanent = zoneChangeEvent.getTarget();
+                        // This is technically undefined behavior under CR, but I'm assuming "Can't beats can" principle.
+                        if (permanent != null && !filterEntering.match(permanent, source.getControllerId(), source, game)) {
+                            all_match = false;
+                            break;
+                        }
+                    }
+                }
+                return all_match;
             default:
                 return false;
         }

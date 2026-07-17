@@ -20,7 +20,6 @@ public class EldritchMoonPromos extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Abolisher of Bloodlines", "111s", Rarity.RARE, mage.cards.a.AbolisherOfBloodlines.class));
         cards.add(new SetCardInfo("Assembled Alphas", 117, Rarity.RARE, mage.cards.a.AssembledAlphas.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Assembled Alphas", "117s", Rarity.RARE, mage.cards.a.AssembledAlphas.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bedlam Reveler", "118s", Rarity.RARE, mage.cards.b.BedlamReveler.class));
@@ -42,7 +41,6 @@ public class EldritchMoonPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Emrakul's Evangel", "156s", Rarity.RARE, mage.cards.e.EmrakulsEvangel.class));
         cards.add(new SetCardInfo("Emrakul, the Promised End", "6s", Rarity.MYTHIC, mage.cards.e.EmrakulThePromisedEnd.class));
         cards.add(new SetCardInfo("Eternal Scourge", "7s", Rarity.RARE, mage.cards.e.EternalScourge.class));
-        cards.add(new SetCardInfo("Final Iteration", "56s", Rarity.RARE, mage.cards.f.FinalIteration.class));
         cards.add(new SetCardInfo("Geier Reach Sanitarium", "203s", Rarity.RARE, mage.cards.g.GeierReachSanitarium.class));
         cards.add(new SetCardInfo("Gisa and Geralf", "183s", Rarity.MYTHIC, mage.cards.g.GisaAndGeralf.class));
         cards.add(new SetCardInfo("Gisela, the Broken Blade", "28s", Rarity.MYTHIC, mage.cards.g.GiselaTheBrokenBlade.class));
@@ -88,7 +86,6 @@ public class EldritchMoonPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Thalia, Heretic Cathar", 46, Rarity.RARE, mage.cards.t.ThaliaHereticCathar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thalia, Heretic Cathar", "46s", Rarity.RARE, mage.cards.t.ThaliaHereticCathar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tree of Perdition", "109s", Rarity.MYTHIC, mage.cards.t.TreeOfPerdition.class));
-        cards.add(new SetCardInfo("Ulrich, Uncontested Alpha", "191s", Rarity.MYTHIC, mage.cards.u.UlrichUncontestedAlpha.class));
         cards.add(new SetCardInfo("Ulrich of the Krallenhorde", "191s", Rarity.MYTHIC, mage.cards.u.UlrichOfTheKrallenhorde.class));
         cards.add(new SetCardInfo("Ulvenwald Observer", 176, Rarity.RARE, mage.cards.u.UlvenwaldObserver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ulvenwald Observer", "176s", Rarity.RARE, mage.cards.u.UlvenwaldObserver.class, NON_FULL_USE_VARIOUS));

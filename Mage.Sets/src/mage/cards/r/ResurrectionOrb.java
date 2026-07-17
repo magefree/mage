@@ -4,16 +4,13 @@ import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlAttachedEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.TargetController;
+import mage.constants.*;
 
 import java.util.UUID;
 
@@ -35,9 +32,10 @@ public final class ResurrectionOrb extends CardImpl {
         // Whenever equipped creature dies, return that card to the battlefield under its owner's control at the beginning of the next end step.
         this.addAbility(new DiesAttachedTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                        new ReturnToBattlefieldUnderOwnerControlAttachedEffect(), TargetController.ANY
-                ), true
-        ).setText("return that card to the battlefield under its owner's control at the beginning of the next end step"), "equipped creature"));
+                        new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false),
+                        TargetController.ANY
+                )).setText("return that card to the battlefield under its owner's control at the beginning of the next end step"),
+                "equipped creature", false, true, SetTargetPointer.CARD));
 
         // Equip {4}
         this.addAbility(new EquipAbility(4));

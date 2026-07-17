@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -21,7 +20,7 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
@@ -42,15 +41,25 @@ public final class GideonChampionOfJustice extends CardImpl {
 
         // +1: Put a loyalty counter on Gideon, Champion of Justice for each creature target opponent controls.
         LoyaltyAbility ability1 = new LoyaltyAbility(
-                new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(0), new PermanentsTargetOpponentControlsCount(new FilterCreaturePermanent()), true), 1);
+            new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(0), new PermanentsTargetOpponentControlsCount(new FilterCreaturePermanent()), true), 1);
         ability1.addTarget(new TargetOpponent());
         this.addAbility(ability1);
 
         // 0: Until end of turn, Gideon becomes an indestructible Human Soldier creature with power and toughness each equal to the number of loyalty counters on him. He's still a planeswalker. Prevent all damage that would be dealt to him this turn.
         LockedInDynamicValue loyaltyCount = new LockedInDynamicValue(new CountersSourceCount(CounterType.LOYALTY));
-        LoyaltyAbility ability2 = new LoyaltyAbility(new BecomesCreatureSourceEffect(
-                new GideonChampionOfJusticeToken(), CardType.PLANESWALKER, Duration.EndOfTurn).withDynamicPT(loyaltyCount, loyaltyCount)
-                .setText("Until end of turn, {this} becomes a Human Soldier creature with power and toughness each equal to the number of loyalty counters on him and gains indestructible. He's still a planeswalker."), 0);
+        LoyaltyAbility ability2 = new LoyaltyAbility(
+            new BecomesCreatureSourceEffect(
+                new CreatureToken(
+                    0, 0,
+                    "indestructible Human Soldier creature with power and toughness each equal to the number of loyalty counters on him",
+                    SubType.HUMAN, SubType.SOLDIER
+                ).withAbility(IndestructibleAbility.getInstance()),
+                CardType.PLANESWALKER,
+                Duration.EndOfTurn
+            ).withDynamicPT(loyaltyCount, loyaltyCount)
+                .setText("Until end of turn, {this} becomes a Human Soldier creature with power and toughness each equal to the number of loyalty counters on him and gains indestructible. He's still a planeswalker."),
+            0
+        );
         ability2.addEffect(new PreventAllDamageToSourceEffect(Duration.EndOfTurn).setText("prevent all damage that would be dealt to him this turn"));
         this.addAbility(ability2);
 
@@ -93,36 +102,13 @@ class GideonExileAllOtherPermanentsEffect extends OneShotEffect {
         MageObjectReference mor = new MageObjectReference(source.getSourceObject(game), game);
         Cards cards = new CardsImpl();
         game.getBattlefield()
-                .getActivePermanents(
-                        StaticFilters.FILTER_PERMANENT,
-                        source.getControllerId(), game
-                ).stream()
-                .filter(Objects::nonNull)
-                .filter(permanent -> !mor.refersTo(permanent, game))
-                .forEach(cards::add);
+            .getActivePermanents(
+                StaticFilters.FILTER_PERMANENT,
+                source.getControllerId(), game
+            ).stream()
+            .filter(Objects::nonNull)
+            .filter(permanent -> !mor.refersTo(permanent, game))
+            .forEach(cards::add);
         return player.moveCards(cards, Zone.EXILED, source, game);
-    }
-}
-
-class GideonChampionOfJusticeToken extends TokenImpl {
-
-    GideonChampionOfJusticeToken() {
-        super("", "indestructible Human Soldier creature with power and toughness each equal to the number of loyalty counters on him");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.HUMAN);
-        subtype.add(SubType.SOLDIER);
-        power = new MageInt(0);
-        toughness = new MageInt(0);
-
-        this.addAbility(IndestructibleAbility.getInstance());
-
-    }
-
-    private GideonChampionOfJusticeToken(final GideonChampionOfJusticeToken token) {
-        super(token);
-    }
-
-    public GideonChampionOfJusticeToken copy() {
-        return new GideonChampionOfJusticeToken(this);
     }
 }

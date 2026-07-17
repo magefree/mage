@@ -2,12 +2,11 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.condition.common.SourceAttackingCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.SpaceflightAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,9 +34,7 @@ public final class ResistanceBomber extends CardImpl {
         this.addAbility(SpaceflightAbility.getInstance());
 
         // Resistance Bomber enters the battlefield with a charge counter on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), "with a charge counter on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.CHARGE.createInstance()));
 
         // Remove a charge counter from Resistance Bomber: Resistance Bomber deals 5 damage to target creature. Activate this ability only if Resistance Bomber is attacking.
         Ability ability = new ActivateIfConditionActivatedAbility(

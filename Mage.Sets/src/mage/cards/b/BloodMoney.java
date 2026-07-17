@@ -9,7 +9,6 @@ import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.TreasureToken;
 
 import java.util.UUID;
@@ -59,11 +58,12 @@ class BloodMoneyEffect extends OneShotEffect {
                 StaticFilters.FILTER_PERMANENT_CREATURE,
                 source.getControllerId(), source, game
         )) {
-            if (permanent.destroy(source, game) && !(permanent instanceof PermanentToken)) {
+            if (permanent.destroy(source, game) && !permanent.isToken()) {
                 count++;
             }
         }
         if (count > 0) {
+            game.processAction();
             new TreasureToken().putOntoBattlefield(count, game, source, source.getControllerId(), true, false);
         }
         return true;

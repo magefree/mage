@@ -1,7 +1,6 @@
 package mage.cards.g;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
@@ -18,7 +17,7 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
  *
@@ -43,7 +42,12 @@ public final class GideonMartialParagon extends CardImpl {
 
         // 0: Until end of turn, Gideon, Martial Paragon, becomes a 5/5 Human Soldier creature with indestructible that's still a planeswalker.
         // Prevent all damage that would be dealt to him this turn.
-        ability = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonMartialParagonToken(), CardType.PLANESWALKER, Duration.EndOfTurn), 0);
+        ability = new LoyaltyAbility(new BecomesCreatureSourceEffect(
+            new CreatureToken(5, 5, "5/5 Human Soldier creature with indestructible", SubType.HUMAN, SubType.SOLDIER)
+                .withAbility(IndestructibleAbility.getInstance()),
+            CardType.PLANESWALKER,
+            Duration.EndOfTurn
+        ), 0);
         effect = new PreventAllDamageToSourceEffect(Duration.EndOfTurn);
         effect.setText("Prevent all damage that would be dealt to him this turn");
         ability.addEffect(effect);
@@ -64,26 +68,5 @@ public final class GideonMartialParagon extends CardImpl {
     @Override
     public GideonMartialParagon copy() {
         return new GideonMartialParagon(this);
-    }
-}
-
-class GideonMartialParagonToken extends TokenImpl {
-
-    public GideonMartialParagonToken() {
-        super("", "5/5 Human Soldier creature with indestructible");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.HUMAN);
-        subtype.add(SubType.SOLDIER);
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-
-        addAbility(IndestructibleAbility.getInstance());
-    }
-    private GideonMartialParagonToken(final GideonMartialParagonToken token) {
-        super(token);
-    }
-
-    public GideonMartialParagonToken copy() {
-        return new GideonMartialParagonToken(this);
     }
 }

@@ -48,7 +48,7 @@ public final class UrbanRetreat extends CardImpl {
 
         // {2}, Return a tapped creature you control to its owner's hand: Put this card from your hand onto the battlefield. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.HAND, new UrbanRetreatEffect(), new GenericManaCost(2));
-        ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent()));
+        ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
     }
 

@@ -35,7 +35,7 @@ public final class FishingPole extends CardImpl {
 
     public FishingPole(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
-        
+
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has "{1}, {T}, Tap Fishing Pole: Put a bait counter on Fishing Pole."
@@ -49,7 +49,7 @@ public final class FishingPole extends CardImpl {
         ), false));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
     private FishingPole(final FishingPole card) {
@@ -116,7 +116,7 @@ class FishingPoleEffect extends ContinuousEffectImpl {
         if (fishingPole == null) {
             return false;
         }
-        Permanent creature = game.getPermanent(fishingPole.getAttachedTo());
+        Permanent creature = source.getPermanentSourceAttachedToIfItStillExists(game);
         if (creature == null) {
             return false;
         }

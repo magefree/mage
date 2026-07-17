@@ -10,9 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
 import java.util.UUID;
@@ -31,7 +29,7 @@ public final class SithAssassin extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // <i>Hate</i> &mdash; When Sith Assassin enters the battlefield, if opponent lost life from source other than combat damage this turn, you may destroy target nonblack creature.
+        // <i>Hate</i> &mdash; When Sith Assassin enters the battlefield, if opponent lost life from a source other than combat damage this turn, you may destroy target nonblack creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true).withInterveningIf(HateCondition.instance);
         ability.addTarget(new TargetPermanent(FILTER_PERMANENT_CREATURE_NON_BLACK));
         this.addAbility(ability.setAbilityWord(AbilityWord.HATE), new LifeLossOtherFromCombatWatcher());

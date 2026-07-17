@@ -1,15 +1,11 @@
 package mage.cards.m;
 
-import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -17,12 +13,10 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.permanent.token.BallisticBoulder;
-import mage.game.permanent.token.PhyrexianHorrorRedToken;
+import mage.game.permanent.token.BallisticBoulderToken;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTargets;
 
@@ -44,7 +38,7 @@ public final class MordorTrebuchet extends CardImpl {
 
     public MordorTrebuchet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{B}");
-        
+
         this.subtype.add(SubType.WALL);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
@@ -91,7 +85,7 @@ class MordorTrebuchetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Token token = new BallisticBoulder();
+        Token token = new BallisticBoulderToken();
         token.putOntoBattlefield(1, game, source, source.getControllerId(), true, true);
         game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(
             new SacrificeTargetEffect().setText("sacrifice it")

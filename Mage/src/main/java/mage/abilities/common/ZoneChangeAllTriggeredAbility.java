@@ -53,13 +53,11 @@ public class ZoneChangeAllTriggeredAbility extends TriggeredAbilityImpl {
         if ((fromZone == null || fromZone.match(zEvent.getFromZone()))
                 && (toZone == null || toZone.match(zEvent.getToZone()))) {
             Permanent perm;
-            if (zEvent.getTarget() != null) {
+            if (zEvent.isPermanentMoved()) {
                 perm = zEvent.getTarget();
-            } else {
-                perm = game.getPermanent(event.getTargetId()); // LevelX2: maybe this part is not neccessary
-            }
-            if (filter.match(perm, controllerId, this, game)) {
-                return true;
+                if (filter.match(perm, controllerId, this, game)) {
+                    return true;
+                }
             }
         }
         return false;

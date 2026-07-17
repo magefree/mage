@@ -52,7 +52,6 @@ public final class NivMizzetGuildpact extends CardImpl {
         // Whenever Niv-Mizzet, Guildpact deals combat damage to a player, it deals X damage to any target, target player draws X cards, and you gain X life, where X is the number of different color pairs among permanents you control that are exactly two colors.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
                 new DamageTargetEffect(NivMizzetGuildpactCount.instance)
-                        .setUseOnlyTargetPointer(true)
                         .setText("it deals X damage to any target"), false);
         ability.addTarget(new TargetAnyTarget());
         ability.addEffect(new DrawCardTargetEffect(NivMizzetGuildpactCount.instance)

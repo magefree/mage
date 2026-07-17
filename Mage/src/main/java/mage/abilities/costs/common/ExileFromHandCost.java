@@ -75,6 +75,11 @@ public class ExileFromHandCost extends CostImpl {
                 vmc.setAmount(cmc, cmc, false);
                 vmc.setPaid();
                 ability.addManaCostsToPay(vmc);
+
+                // If a spell has {X} in its mana cost, include the value chosen for that X when determining the mana value
+                // of that spell, even if it was cast for an alternative cost and no mana was spent on X.
+                // (2018-12-07)
+                ability.setCostsTag("X", cmc); // example: Nourishing Shoal
             }
         }
         return paid;

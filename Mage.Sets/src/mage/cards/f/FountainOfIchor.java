@@ -1,6 +1,5 @@
 package mage.cards.f;
 
-import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
@@ -10,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 import java.util.UUID;
 
@@ -26,9 +25,15 @@ public final class FountainOfIchor extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
 
         // {3}: Fountain of Ichor becomes a 3/3 Dinosaur artifact creature until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
-                new FountainOfIchorToken(), CardType.ARTIFACT, Duration.EndOfTurn
-        ), new GenericManaCost(3)));
+        this.addAbility(new SimpleActivatedAbility(
+            new BecomesCreatureSourceEffect(
+                new CreatureToken(3, 3, "3/3 Dinosaur artifact creature", SubType.DINOSAUR)
+                    .withType(CardType.ARTIFACT),
+                CardType.ARTIFACT,
+                Duration.EndOfTurn
+            ),
+            new GenericManaCost(3)
+        ));
     }
 
     private FountainOfIchor(final FountainOfIchor card) {
@@ -38,25 +43,5 @@ public final class FountainOfIchor extends CardImpl {
     @Override
     public FountainOfIchor copy() {
         return new FountainOfIchor(this);
-    }
-}
-
-class FountainOfIchorToken extends TokenImpl {
-
-    FountainOfIchorToken() {
-        super("", "3/3 Dinosaur artifact creature");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.DINOSAUR);
-        power = new MageInt(3);
-        toughness = new MageInt(3);
-    }
-
-    private FountainOfIchorToken(final FountainOfIchorToken token) {
-        super(token);
-    }
-
-    public FountainOfIchorToken copy() {
-        return new FountainOfIchorToken(this);
     }
 }

@@ -13,7 +13,7 @@ import mage.constants.ComparisonType;
 import mage.constants.SpellAbilityType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.permanent.token.HippoToken2;
+import mage.game.permanent.token.Hippo33Token;
 
 /**
  * @author Stravant
@@ -32,7 +32,7 @@ public final class MouthFeed extends SplitCard {
 
         // Mouth
         // Create a 3/3 green Hippo creature token
-        getLeftHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new HippoToken2()));
+        getLeftHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new Hippo33Token()));
 
         // to
         // Feed

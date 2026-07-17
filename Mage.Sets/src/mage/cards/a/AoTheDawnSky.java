@@ -115,7 +115,8 @@ class AoTheDawnSkyEffect extends OneShotEffect {
 
 class AoTheDawnSkyTarget extends TargetCardInLibrary {
 
-    private static final FilterCard filterStatic = new FilterPermanentCard("nonland permanent cards with total mana value 4 or less from your graveyard");
+    private static final FilterCard filterStatic = new FilterPermanentCard("nonland permanent cards with total mana value 4 or less");
+
     static {
         filterStatic.add(Predicates.not(CardType.LAND.getPredicate()));
     }

@@ -43,7 +43,7 @@ public final class KappaCannoneer extends CardImpl {
                 StaticFilters.FILTER_PERMANENT_ARTIFACT, false, true
         );
         ability.addEffect(new CantBeBlockedSourceEffect(Duration.EndOfTurn)
-                .setText("and it can't be blocked this turn"));
+                .setText("It can't be blocked this turn"));
         this.addAbility(ability);
     }
 

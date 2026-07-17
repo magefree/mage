@@ -291,6 +291,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         setTextForLabel("energy", energyLabel, energy, counterOfName(player, "energy"), false, PreferencesDialog.getCurrentTheme().getTextColor());
         setTextForLabel("experience", experienceLabel, experience, counterOfName(player, "experience"), false, PreferencesDialog.getCurrentTheme().getTextColor());
         setTextForLabel("rad", radLabel, rad, counterOfName(player, "rad"), false, PreferencesDialog.getCurrentTheme().getTextColor());
+        setTextForLabel("ticket", ticketLabel, ticket, counterOfName(player, "ticket"), false, PreferencesDialog.getCurrentTheme().getTextColor());
         setTextForLabel("hand zone", handLabel, hand, player.getHandCount(), false, PreferencesDialog.getCurrentTheme().getTextColor());
         int libraryCards = player.getLibraryCount();
         if (libraryCards > 99) {
@@ -553,6 +554,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         energyLabel = new JLabel();
         experienceLabel = new JLabel();
         radLabel = new JLabel();
+        ticketLabel = new JLabel();
         graveLabel = new JLabel();
         commandLabel = new JLabel();
         libraryLabel = new JLabel();
@@ -662,6 +664,16 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         rad.setOpaque(false);
         setTextForLabel("rad", radLabel, rad, 0, false);
         radLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        // ticket
+        r = new Rectangle(sizeMod(16), sizeMod(16));
+        Image imageTicket = ImageHelper.getImageFromResources("/info/ticket.png");
+        BufferedImage resizedTicket = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imageTicket, BufferedImage.TYPE_INT_ARGB), r);
+        ticket = new ImagePanel(resizedTicket, ImagePanelStyle.ACTUAL);
+        ticket.setToolTipText("Ticket");
+        ticket.setOpaque(false);
+        setTextForLabel("ticket", ticketLabel, ticket, 0, false);
+        ticketLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         // graveyard
         r = new Rectangle(sizeMod(21), sizeMod(21));
@@ -877,6 +889,9 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                                 .addComponent(experience, GroupLayout.PREFERRED_SIZE, sizeMod(18), GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(experienceLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
                                         .addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addComponent(ticket, GroupLayout.PREFERRED_SIZE, sizeMod(18), GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(ticketLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGap(sizeMod(2))
                                                 .addComponent(btnRedMana, GroupLayout.PREFERRED_SIZE, sizeMod(15), GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(manaCountLabelR, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
@@ -935,12 +950,16 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                                 .addGap(sizeMod(1))
                                                 .addComponent(experience, GroupLayout.PREFERRED_SIZE, sizeMod(18), GroupLayout.PREFERRED_SIZE))
                                         .addComponent(experienceLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
-                                // Rad & <empty>
+                                // Rad & Ticket
                                 .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGap(sizeMod(1))
                                                 .addComponent(rad, GroupLayout.PREFERRED_SIZE, sizeMod(18), GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(radLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(radLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addGap(sizeMod(1))
+                                                .addComponent(ticket, GroupLayout.PREFERRED_SIZE, sizeMod(18), GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(ticketLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
                                 // W & R
                                 .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
                                         .addGroup(gl_panelBackground.createSequentialGroup()
@@ -1072,6 +1091,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private ImagePanel energy;
     private ImagePanel experience;
     private ImagePanel rad;
+    private ImagePanel ticket;
     private ImagePanel hand;
     private HoverButton grave;
     private HoverButton library;
@@ -1087,6 +1107,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private JLabel energyLabel;
     private JLabel experienceLabel;
     private JLabel radLabel;
+    private JLabel ticketLabel;
     private JLabel graveLabel;
     private JLabel commandLabel;
     private JLabel exileLabel;

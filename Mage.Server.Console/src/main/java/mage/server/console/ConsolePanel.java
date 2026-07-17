@@ -26,8 +26,6 @@
   */
  public class ConsolePanel extends javax.swing.JPanel {
 
-     private static final Logger logger = Logger.getLogger(ConsolePanel.class);
-
      private final TableUserModel tableUserModel;
      private final TableTableModel tableTableModel;
      private UpdateUsersTask updateUsersTask;

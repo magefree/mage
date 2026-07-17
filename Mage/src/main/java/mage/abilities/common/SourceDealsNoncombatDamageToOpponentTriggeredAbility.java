@@ -59,7 +59,7 @@ public class SourceDealsNoncombatDamageToOpponentTriggeredAbility extends Trigge
         }
         this.getEffects().setValue("damage", damageAmount);
         if (setTargetPointer == SetTargetPointer.PLAYER) {
-            getEffects().setTargetPointer(new FixedTarget(event.getSourceId()));
+            getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
         }
         return true;
     }

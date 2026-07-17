@@ -30,11 +30,7 @@ public class GainAllCreatureTypesAttachedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment == null) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(equipment.getAttachedTo());
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
         if (permanent == null) {
             return false;
         }

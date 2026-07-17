@@ -1,13 +1,12 @@
 package mage.cards.u;
 
-import java.util.UUID;
-
-import mage.abilities.effects.common.DamageTargetControllerEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DamageTargetAndTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreatureOrPlaneswalker;
+
+import java.util.UUID;
 
 /**
  *
@@ -19,9 +18,8 @@ public final class UnleashShell extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
 
         // Unleash Shell deals 5 damage to target creature or planeswalker and 2 damage to that permanent's controller.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(5));
-        this.getSpellAbility().addEffect(new DamageTargetControllerEffect(2).setText("and 2 damage to that permanent's controller"));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
+        this.getSpellAbility().addEffect(new DamageTargetAndTargetControllerEffect(5, 2));
     }
 
     private UnleashShell(final UnleashShell card) {

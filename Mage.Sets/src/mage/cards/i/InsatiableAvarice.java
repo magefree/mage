@@ -32,7 +32,7 @@ public final class InsatiableAvarice extends CardImpl {
 
         // + {B}{B} -- Target player draws three cards and loses 3 life.
         this.getSpellAbility().addMode(new Mode(new DrawCardTargetEffect(3))
-                .addEffect(new LoseLifeTargetEffect(3).setText("and loses 3 life"))
+                .addEffect(new LoseLifeTargetEffect(3).withTargetDescription("and"))
                 .addTarget(new TargetPlayer())
                 .withCost(new ManaCostsImpl<>("{B}{B}")));
     }

@@ -5,14 +5,18 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
@@ -26,27 +30,42 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class VincentValentine extends CardImpl {
+public final class VincentValentine extends TransformingDoubleFacedCard {
 
     public VincentValentine(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ASSASSIN}, "{2}{B}{B}",
+                "Galian Beast",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF, SubType.BEAST}, "B"
+        );
 
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.ASSASSIN);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-        this.secondSideCardClazz = mage.cards.g.GalianBeast.class;
+        // Vincent Valentine
+        this.getLeftHalfCard().setPT(2, 2);
 
         // Whenever a creature an opponent controls dies, put a number of +1/+1 counters on Vincent Valentine equal to that creature's power.
-        this.addAbility(new DiesCreatureTriggeredAbility(
+        this.getLeftHalfCard().addAbility(new DiesCreatureTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(), VincentValentineValue.instance)
                         .setText("put a number of +1/+1 counters on {this} equal to that creature's power"),
                 false, StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE
         ));
 
         // Whenever Vincent Valentine attacks, you may transform it.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new AttacksTriggeredAbility(new TransformSourceEffect(), true));
+        this.getLeftHalfCard().addAbility(new AttacksTriggeredAbility(new TransformSourceEffect(), true));
+
+        // Galian Beast
+        this.getRightHalfCard().setPT(3, 2);
+
+        // Trample
+        this.getRightHalfCard().addAbility(TrampleAbility.getInstance());
+
+        // Lifelink
+        this.getRightHalfCard().addAbility(LifelinkAbility.getInstance());
+
+        // When Galian Beast dies, return it to the battlefield tapped.
+        this.getRightHalfCard().addAbility(new DiesSourceTriggeredAbility(
+                new ReturnToBattlefieldUnderYourControlTargetEffect(false, true)
+                        .setText("return it to the battlefield tapped"),
+                false, SetTargetPointer.CARD));
     }
 
     private VincentValentine(final VincentValentine card) {

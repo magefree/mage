@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 import mage.util.CardUtil;
@@ -40,7 +39,7 @@ public final class TobiasBeckett extends CardImpl {
         this.addAbility(ability);
 
         // Bounty - Whenever a creature an opponent controls with a bounty counter on it dies, exile the top card of that player's library. You may cast cards exiled this way and spend mana as though it were mana of any type to cast that spell.
-        this.addAbility(new BountyAbility(new TobiasBeckettEffect(), false, true));
+        this.addAbility(new BountyAbility(new TobiasBeckettEffect(), false, SetTargetPointer.PLAYER));
     }
 
     private TobiasBeckett(final TobiasBeckett card) {
@@ -68,29 +67,24 @@ class TobiasBeckettEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent bountyTriggered = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-            if (bountyTriggered != null) {
-                Player opponent = game.getPlayer(bountyTriggered.getControllerId());
-                if (opponent != null) {
-                    MageObject sourceObject = game.getObject(source);
-                    UUID exileId = CardUtil.getCardExileZoneId(game, source);
-                    Card card = opponent.getLibrary().getFromTop(game);
-                    if (card != null && sourceObject != null) {
-                        // move card to exile
-                        controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(), source, game, Zone.LIBRARY, true);
-                        // Add effects only if the card has a spellAbility (e.g. not for lands).
-                        if (card.getSpellAbility() != null) {
-                            // allow to cast the card
-                            // and you may spend mana as though it were mana of any color to cast it
-                            CardUtil.makeCardPlayable(game, source, card, true, Duration.Custom, true);
-                        }
-                    }
-                    return true;
-                }
+        Player thatPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (controller == null || thatPlayer == null) {
+            return false;
+        }
+        MageObject sourceObject = game.getObject(source);
+        UUID exileId = CardUtil.getCardExileZoneId(game, source);
+        Card card = thatPlayer.getLibrary().getFromTop(game);
+        if (card != null && sourceObject != null) {
+            // move card to exile
+            controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(), source, game, Zone.LIBRARY, true);
+            // Add effects only if the card has a spellAbility (e.g. not for lands).
+            if (card.getSpellAbility() != null) {
+                // allow to cast the card
+                // and you may spend mana as though it were mana of any color to cast it
+                CardUtil.makeCardPlayable(game, source, card, true, Duration.Custom, true);
             }
         }
-        return false;
+        return true;
     }
 
     @Override

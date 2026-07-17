@@ -2,9 +2,8 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.PartnerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,10 +37,7 @@ public final class SlurrkAllIngesting extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Slurrk, All-Ingesting enters the battlefield with five +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)),
-                "with five +1/+1 counters on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.P1P1.createInstance(5)));
 
         // Whenever Slurrk or another creature you control dies, if it had a +1/+1 counter on it, put a +1/+1 counter on each creature you control that has a +1/+1 counter on it.
         this.addAbility(new DiesThisOrAnotherTriggeredAbility(new AddCountersAllEffect(

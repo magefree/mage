@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import mage.abilities.Ability;
@@ -6,14 +5,18 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.ReturnCardChosenFromGraveyardEffect;
+import mage.abilities.effects.common.SacrificeOpponentsEffect;
+import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
@@ -21,13 +24,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetSacrifice;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -36,17 +34,27 @@ import java.util.UUID;
 public final class DarkIntimations extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a Bolas planeswalker spell");
+    private static final FilterCard filterCard = new FilterCard("a creature or planeswalker card from your graveyard");
 
     static {
         filter.add(CardType.PLANESWALKER.getPredicate());
         filter.add(SubType.BOLAS.getPredicate());
+        filterCard.add(Predicates.or(
+                CardType.CREATURE.getPredicate(),
+                CardType.PLANESWALKER.getPredicate()));
     }
 
     public DarkIntimations(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{B}{R}");
 
         // Each opponent sacrifices a creature or planeswalker, then discards a card. You return a creature or planeswalker card from your graveyard to your hand, then draw a card.
-        this.getSpellAbility().addEffect(new DarkIntimationsEffect());
+        this.getSpellAbility().addEffect(new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_CREATURE_OR_PLANESWALKER_A));
+        this.getSpellAbility().addEffect(new DiscardEachPlayerEffect(TargetController.OPPONENT)
+                .setText(", then discards a card"));
+        this.getSpellAbility().addEffect(new ReturnCardChosenFromGraveyardEffect(false, filterCard, PutCards.HAND)
+                .concatBy("You"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1)
+                .concatBy(", then"));
 
         // When you cast a Bolas planeswalker spell, exile Dark Intimations from your graveyard. That planeswalker enters the battlefield with an additional loyalty counter on it.
         this.addAbility(new SpellCastControllerTriggeredAbility(
@@ -65,82 +73,11 @@ public final class DarkIntimations extends CardImpl {
     }
 }
 
-class DarkIntimationsEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterPermanent("a creature or planeswalker");
-    private static final FilterCard filterCard = new FilterCard("a creature or planeswalker card");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                CardType.PLANESWALKER.getPredicate()));
-        filterCard.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                CardType.PLANESWALKER.getPredicate()));
-    }
-
-    public DarkIntimationsEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Each opponent sacrifices a creature or planeswalker, then discards a card. You return a creature or planeswalker card from your graveyard to your hand, then draw a card";
-    }
-
-    private DarkIntimationsEffect(final DarkIntimationsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DarkIntimationsEffect copy() {
-        return new DarkIntimationsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        List<UUID> perms = new ArrayList<>();
-        for (UUID playerId : game.getOpponents(source.getControllerId())) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                TargetSacrifice target = new TargetSacrifice(filter);
-                if (target.canChoose(player.getId(), source, game)) {
-                    player.choose(Outcome.Sacrifice, target, source, game);
-                    perms.addAll(target.getTargets());
-                }
-            }
-        }
-        for (UUID permID : perms) {
-            Permanent permanent = game.getPermanent(permID);
-            if (permanent != null) {
-                permanent.sacrifice(source, game);
-            }
-        }
-        for (UUID playerId : game.getOpponents(source.getControllerId())) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.discardOne(false, false, source, game);
-            }
-        }
-        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filterCard);
-        if (target.canChoose(source.getControllerId(), source, game)
-                && controller.choose(Outcome.ReturnToHand, target, source, game)) {
-            Card card = game.getCard(target.getFirstTarget());
-            if (card == null) {
-                return false;
-            }
-            controller.moveCards(card, Zone.HAND, source, game);
-        }
-        controller.drawCards(1, source, game);
-        return true;
-    }
-}
-
 class DarkIntimationsGraveyardEffect extends OneShotEffect {
 
     DarkIntimationsGraveyardEffect() {
         super(Outcome.Benefit);
-        this.staticText = "exile {this} from your graveyard. That planeswalker enters the battlefield with an additional loyalty counter on it";
+        this.staticText = "exile this card from your graveyard. That planeswalker enters with an additional loyalty counter on it";
     }
 
     private DarkIntimationsGraveyardEffect(final DarkIntimationsGraveyardEffect effect) {
@@ -176,7 +113,7 @@ class DarkIntimationsReplacementEffect extends ReplacementEffectImpl {
 
     DarkIntimationsReplacementEffect() {
         super(Duration.OneUse, Outcome.Benefit);
-        staticText = "That planeswalker enters the battlefield with an additional loyalty counter on it";
+        staticText = "That planeswalker enters with an additional loyalty counter on it";
     }
 
     private DarkIntimationsReplacementEffect(final DarkIntimationsReplacementEffect effect) {

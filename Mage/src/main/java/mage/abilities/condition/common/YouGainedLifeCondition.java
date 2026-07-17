@@ -16,7 +16,13 @@ public class YouGainedLifeCondition extends IntCompareCondition {
     /**
      * "if you gained life this turn"
      */
-    public YouGainedLifeCondition() {
+    private static final YouGainedLifeCondition zero = new YouGainedLifeCondition();
+
+    public static YouGainedLifeCondition getZero() {
+        return zero;
+    }
+
+    private YouGainedLifeCondition() {
         super(ComparisonType.MORE_THAN, 0);
     }
 

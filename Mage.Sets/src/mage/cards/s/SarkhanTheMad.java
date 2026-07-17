@@ -19,7 +19,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.DragonToken2;
+import mage.game.permanent.token.Dragon55Token;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.Target;
@@ -120,7 +120,7 @@ class SarkhanTheMadSacEffect extends OneShotEffect {
 
             Player player = game.getPlayer(permanent.getControllerId());
             if(player != null) {
-                Token dragonToken = new DragonToken2();
+                Token dragonToken = new Dragon55Token();
                 dragonToken.putOntoBattlefield(1, game, source, player.getId());
             }
         }

@@ -1,10 +1,10 @@
 package mage.cards.f;
 
-import mage.MageInt;
 import mage.abilities.keyword.DayboundAbility;
 import mage.abilities.keyword.MenaceAbility;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.NightboundAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -13,22 +13,32 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class FearfulVillager extends CardImpl {
+public final class FearfulVillager extends TransformingDoubleFacedCard {
 
     public FearfulVillager(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WEREWOLF}, "{2}{R}",
+                "Fearsome Werewolf",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "R"
+        );
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WEREWOLF);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
-        this.secondSideCardClazz = mage.cards.f.FearsomeWerewolf.class;
+        // Fearful Villager
+        this.getLeftHalfCard().setPT(2, 3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.getLeftHalfCard().addAbility(new MenaceAbility());
 
         // Daybound
-        this.addAbility(new DayboundAbility());
+        this.getLeftHalfCard().addAbility(new DayboundAbility());
+
+        // Fearsome Werewolf
+        this.getRightHalfCard().setPT(4, 3);
+
+        // Menace
+        this.getRightHalfCard().addAbility(new MenaceAbility());
+
+        // Nightbound
+        this.getRightHalfCard().addAbility(new NightboundAbility());
     }
 
     private FearfulVillager(final FearfulVillager card) {

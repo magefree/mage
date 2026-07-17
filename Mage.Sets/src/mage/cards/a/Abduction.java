@@ -1,12 +1,10 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlAttachedEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.effects.common.UntapAttachedEffect;
 import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -14,10 +12,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +43,9 @@ public final class Abduction extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
         
         // When enchanted creature dies, return that card to the battlefield under its owner's control.
-        this.addAbility(new DiesAttachedTriggeredAbility(new ReturnToBattlefieldUnderOwnerControlAttachedEffect(), "enchanted creature", false));
+        this.addAbility(new DiesAttachedTriggeredAbility(
+                new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false),
+                "enchanted creature", false, true, SetTargetPointer.CARD));
     }
 
     private Abduction(final Abduction card) {

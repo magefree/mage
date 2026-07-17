@@ -25,7 +25,7 @@ public final class VengefulTracker extends CardImpl {
 
         // Whenever an opponent sacrifices an artifact, Vengeful Tracker deals 2 damage to them.
         this.addAbility(new SacrificePermanentTriggeredAbility(
-                Zone.BATTLEFIELD, new DamageTargetEffect(2, true, "them"),
+                Zone.BATTLEFIELD, new DamageTargetEffect(2).withTargetDescription("them"),
                 StaticFilters.FILTER_PERMANENT_ARTIFACT, TargetController.OPPONENT, SetTargetPointer.PLAYER, false
         ));
     }

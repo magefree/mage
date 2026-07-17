@@ -4,14 +4,13 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
+import mage.abilities.effects.common.ReturnCardChosenFromGraveyardEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
 import mage.abilities.keyword.AfflictAbility;
 import mage.abilities.triggers.BeginningOfSecondMainTriggeredAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -22,9 +21,6 @@ import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.players.Player;
-import mage.target.TargetCard;
-import mage.target.common.TargetCardInYourGraveyard;
 import mage.watchers.Watcher;
 
 import java.util.Optional;
@@ -58,7 +54,8 @@ public final class LostMonarchOfIfnir extends CardImpl {
         Ability ability = new BeginningOfSecondMainTriggeredAbility(
                 new MillCardsControllerEffect(3), false
         ).withInterveningIf(LostMonarchOfIfnirCondition.instance);
-        ability.addEffect(new LostMonarchOfIfnirEffect());
+        ability.addEffect(new ReturnCardChosenFromGraveyardEffect(true,
+                StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD, PutCards.HAND).concatBy(", then"));
         this.addAbility(ability.addHint(hint), new LostMonarchOfIfnirWatcher());
     }
 
@@ -69,37 +66,6 @@ public final class LostMonarchOfIfnir extends CardImpl {
     @Override
     public LostMonarchOfIfnir copy() {
         return new LostMonarchOfIfnir(this);
-    }
-}
-
-class LostMonarchOfIfnirEffect extends OneShotEffect {
-
-    LostMonarchOfIfnirEffect() {
-        super(Outcome.Benefit);
-        staticText = ", then you may return a creature card from your graveyard to your hand";
-    }
-
-    private LostMonarchOfIfnirEffect(LostMonarchOfIfnirEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        TargetCard target = new TargetCardInYourGraveyard(
-                0, 1, StaticFilters.FILTER_CARD_CREATURE, true
-        );
-        player.choose(Outcome.ReturnToHand, target, source, game);
-        Card card = game.getCard(target.getFirstTarget());
-        return card != null && player.moveCards(card, Zone.HAND, source, game);
-    }
-
-    @Override
-    public LostMonarchOfIfnirEffect copy() {
-        return new LostMonarchOfIfnirEffect(this);
     }
 }
 

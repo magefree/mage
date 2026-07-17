@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
@@ -9,18 +7,14 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.LoseAbilitySourceEffect;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.HexproofAbility;
-import mage.abilities.keyword.MonstrosityAbility;
+import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +40,8 @@ public final class SarlaccPit extends CardImpl {
         this.addAbility(ability);
 
         // When Sarlacc Pit becomes monstrous, it loses hexproof and gains first strike and deathtouch.
-        ability = new BecomesMonstrousSourceTriggeredAbility(new LoseAbilitySourceEffect(HexproofAbility.getInstance()));
+        ability = new BecomesMonstrousSourceTriggeredAbility(new LoseAbilitySourceEffect(HexproofAbility.getInstance())
+                .setText("it loses hexproof"));
         Effect effect = new GainAbilitySourceEffect(FirstStrikeAbility.getInstance());
         effect.setText("and gains first strike");
         ability.addEffect(effect);

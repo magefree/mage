@@ -1,10 +1,9 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DoubleCountersSourceEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -37,10 +36,7 @@ public final class SisterhoodOfKarn extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Sisterhood of Karn enters the battlefield with a +1/+1 counter on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                "with a +1/+1 counter on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.P1P1.createInstance()));
 
         // Paradox -- Whenever you cast a spell from anywhere other than your hand, double the number of +1/+1 counters on Sisterhood of Karn.
         this.addAbility(new SpellCastControllerTriggeredAbility(

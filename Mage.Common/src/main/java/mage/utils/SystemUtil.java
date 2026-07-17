@@ -40,6 +40,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
+
 /**
  * @author JayDi85
  */
@@ -51,7 +53,7 @@ public final class SystemUtil {
     public static final DateFormat dateFormat = new SimpleDateFormat("yy-M-dd HH:mm:ss");
 
     private static final String INIT_FILE_PATH = "config" + File.separator + "init.txt";
-    private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(SystemUtil.class);
+    private static final Logger logger = Logger.getLogger(SystemUtil.class);
 
     // replace ref group command like @group by real commands from that group
     // example:
@@ -601,14 +603,13 @@ public final class SystemUtil {
                     continue;
                 }
 
-                Optional<Player> playerOptional = findPlayer(game, command.player);
-                if (!playerOptional.isPresent()) {
+                Player player = findPlayer(game, command.player, feedbackPlayer);
+                if (player == null) {
                     String mes = String.format("Unknown player: %s", line);
                     errorsList.add(mes);
                     logger.warn(mes);
                     continue;
                 }
-                Player player = playerOptional.get();
 
                 // SPECIAL token/emblem call (without SET name)
                 if ("token".equalsIgnoreCase(command.zone)) {
@@ -860,17 +861,54 @@ public final class SystemUtil {
         return false;
     }
 
-    /**
-     * Find player by name.
-     *
-     * @param game
-     * @param name
-     * @return
-     */
-    private static Optional<Player> findPlayer(Game game, String name) {
-        return game.getPlayers().values().stream()
-                .filter(player -> player.getName().equals(name)).findFirst();
+    private static Player findPlayer(Game game, String needName, Player feedbackPlayer) {
+        // real names
+        Player res = game.getPlayerList().stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .filter(player -> player.getName().equals(needName))
+                .findFirst()
+                .orElse(null);
 
+        // test names - cheat commands will be compatible in both modes (quick test and normal)
+        if (res == null) {
+            switch (needName.toLowerCase(Locale.ENGLISH)) {
+                case "me":
+                case "human":
+                case "human 1":
+                    res = feedbackPlayer;
+                    break;
+                case "opponent":
+                case "opponent 1":
+                case "computer":
+                case "computer 1": // multiplayer game uses Computer 2+ naming
+                case "ai":
+                case "ai 1":
+                    // try AI
+                    res = game.getPlayerList().stream()
+                            .map(game::getPlayer)
+                            .filter(Objects::nonNull)
+                            .filter(Player::isInGame)
+                            .filter(Player::isComputer)
+                            .findFirst()
+                            .orElse(null);
+                    if (res == null) {
+                        // try opponent (human only games)
+                        res = game.getOpponents(feedbackPlayer.getId(), true).stream()
+                                .map(game::getPlayer)
+                                .filter(Objects::nonNull)
+                                .filter(Player::isInGame)
+                                .findFirst()
+                                .orElse(null);
+                    }
+                    break;
+                default:
+                    // raise error message due unknown player name
+                    break;
+            }
+        }
+
+        return res;
     }
 
     public static String sanitize(String input) {

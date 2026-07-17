@@ -34,7 +34,7 @@ public final class CrueltyOfTheSith extends CardImpl {
 
         // Cruelty of the Sith deals 3 damage to target player. That player discards a card.
         mode = new Mode(new DamageTargetEffect(3));
-        mode.addEffect(new DiscardTargetEffect(1));
+        mode.addEffect(new DiscardTargetEffect(1).withTargetDescription("That player"));
         mode.addTarget(new TargetPlayer());
         this.getSpellAbility().addMode(mode);
 

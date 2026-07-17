@@ -1,11 +1,12 @@
 package mage.cards.u;
 
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldWithCounterEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlWithCounterTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -23,9 +24,10 @@ public final class UndyingMalice extends CardImpl {
         // Until end of turn, target creature gains "When this creature dies, return it to the battlefield tapped under its owner's control with a +1/+1 counter on it."
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new DiesSourceTriggeredAbility(
-                new ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(
-                        CounterType.P1P1.createInstance(), true, true, false, false)
-        )).setText("Until end of turn, target creature gains \"When this creature dies, return it to the battlefield tapped under its owner's control with a +1/+1 counter on it.\""));
+                new ReturnToBattlefieldUnderOwnerControlWithCounterTargetEffect(CounterType.P1P1.createInstance(), false, true, false)
+                        .setText("return it to the battlefield tapped under its owner's control with a +1/+1 counter on it"),
+                false, SetTargetPointer.CARD)
+        ).setText("Until end of turn, target creature gains \"When this creature dies, return it to the battlefield tapped under its owner's control with a +1/+1 counter on it.\""));
     }
 
     private UndyingMalice(final UndyingMalice card) {

@@ -1,19 +1,19 @@
 package mage.game.permanent;
 
+import java.util.UUID;
+
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.keyword.ChangelingAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
+import mage.cards.RoomCard;
 import mage.constants.EmptyNames;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.Token;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -30,13 +30,13 @@ public class PermanentToken extends PermanentImpl {
         this.token = token.copy();
         this.token.getAbilities().newOriginalId(); // neccessary if token has ability like DevourAbility()
         this.token.getAbilities().setSourceId(objectId);
-        this.power = new MageInt(token.getPower().getModifiedBaseValue());
-        this.toughness = new MageInt(token.getToughness().getModifiedBaseValue());
-        this.copyFromToken(this.token, game, false); // needed to have at this time (e.g. for subtypes for entersTheBattlefield replacement effects)
 
         // if transformed on ETB
         if (this.token.isEntersTransformed()) {
-            TransformAbility.transformPermanent(this, game, null);
+            this.setTransformed(true);
+            this.copyFromToken(this.token.getBackFace(), game, false);
+        } else {
+            this.copyFromToken(this.token, game, false); // needed to have at this time (e.g. for subtypes for entersTheBattlefield replacement effects)
         }
 
         // token's ZCC must be synced with original token to keep abilities settings
@@ -53,7 +53,12 @@ public class PermanentToken extends PermanentImpl {
 
     @Override
     public void reset(Game game) {
-        copyFromToken(token, game, true);
+        if (this.isTransformed()) {
+            copyFromToken(token.getBackFace(), game, true);
+        } else {
+            copyFromToken(token, game, true);
+        }
+        applyMutate(game);
         super.reset(game);
         // Because the P/T objects have there own base value for reset we have to take it from there instead of from the basic token object
         this.power.resetToBaseValue();
@@ -63,7 +68,17 @@ public class PermanentToken extends PermanentImpl {
     @Override
     public int getManaValue() {
         if (this.isTransformed()) {
-            return token.getManaValue();
+            // transformable permanents contains characteristics in token/token.getBackFace()
+
+            // 712.8e
+            // While a nonmodal double-faced permanent has its back face up, it has only the characteristics of its back face. 
+            // However, its mana value is calculated using the mana cost of its front face. 
+            // If a permanent is copying the back face of a nonmodal double-faced permanent (even if the object representing 
+            // that copy is itself a double-faced permanent), the mana value of that permanent is 0. See rule 202.3b.
+            return token.getBackFace().getManaValue();
+        }
+        if (faceDown) {
+            return 0;
         }
         return super.getManaValue();
     }
@@ -110,8 +125,10 @@ public class PermanentToken extends PermanentImpl {
         if (this.abilities.containsClass(ChangelingAbility.class)) {
             this.subtype.setIsAllCreatureTypes(true);
         }
-
+        this.power = new MageInt(token.getPower().getModifiedBaseValue());
+        this.toughness = new MageInt(token.getToughness().getModifiedBaseValue());
         CardUtil.copySetAndCardNumber(this, token);
+        // no needs to add rooms characteristics here, because they already applied to source token
     }
 
     @Override
@@ -138,8 +155,8 @@ public class PermanentToken extends PermanentImpl {
 
     @Override
     public Card getMainCard() {
-        // token don't have game card, so return itself
-        return this;
+        // if you need original card of token then use getCopySourceCard() instead of getMainCard()
+        return super.getMainCard();
     }
 
     @Override
@@ -154,5 +171,24 @@ public class PermanentToken extends PermanentImpl {
     @Override
     public MageObject getOtherFace() {
         return this.transformed ? token : this.token.getBackFace();
+    }
+
+    @Override
+    protected void initOtherFace(Game game) {
+        if (transformed) {
+            copyFromToken(token.getBackFace(), game, false);
+        } else {
+            copyFromToken(token, game, false);
+        }
+    }
+
+    @Override
+    public boolean isCopy() {
+        return token.isCopy();
+    }
+
+    @Override
+    public MageObject getCopyFrom() {
+        return token.getCopyFrom();
     }
 }

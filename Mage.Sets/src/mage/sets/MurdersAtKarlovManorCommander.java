@@ -191,6 +191,9 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Necromancy", 131, Rarity.UNCOMMON, mage.cards.n.Necromancy.class));
         cards.add(new SetCardInfo("Needle Spires", 278, Rarity.RARE, mage.cards.n.NeedleSpires.class));
         cards.add(new SetCardInfo("Neheb, the Eternal", 158, Rarity.MYTHIC, mage.cards.n.NehebTheEternal.class));
+        cards.add(new SetCardInfo("Nelly Borca, Impulsive Accuser", 4, Rarity.MYTHIC, mage.cards.n.NellyBorcaImpulsiveAccuser.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nelly Borca, Impulsive Accuser", 52, Rarity.MYTHIC, mage.cards.n.NellyBorcaImpulsiveAccuser.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nelly Borca, Impulsive Accuser", 318, Rarity.MYTHIC, mage.cards.n.NellyBorcaImpulsiveAccuser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nettlecyst", 233, Rarity.RARE, mage.cards.n.Nettlecyst.class));
         cards.add(new SetCardInfo("Nightveil Sprite", 113, Rarity.UNCOMMON, mage.cards.n.NightveilSprite.class));
         cards.add(new SetCardInfo("Notion Rain", 217, Rarity.COMMON, mage.cards.n.NotionRain.class));
@@ -277,6 +280,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Swords to Plowshares", 88, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Syr Konrad, the Grim", 141, Rarity.UNCOMMON, mage.cards.s.SyrKonradTheGrim.class));
         cards.add(new SetCardInfo("Tainted Isle", 300, Rarity.UNCOMMON, mage.cards.t.TaintedIsle.class));
+        cards.add(new SetCardInfo("Take the Bait", 43, Rarity.RARE, mage.cards.t.TakeTheBait.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Take the Bait", 353, Rarity.RARE, mage.cards.t.TakeTheBait.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Talisman of Conviction", 240, Rarity.UNCOMMON, mage.cards.t.TalismanOfConviction.class));
         cards.add(new SetCardInfo("Talisman of Curiosity", 241, Rarity.UNCOMMON, mage.cards.t.TalismanOfCuriosity.class));
         cards.add(new SetCardInfo("Talisman of Dominance", 242, Rarity.UNCOMMON, mage.cards.t.TalismanOfDominance.class));
@@ -310,12 +315,16 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Tranquil Thicket", 309, Rarity.COMMON, mage.cards.t.TranquilThicket.class));
         cards.add(new SetCardInfo("Trouble in Pairs", 15, Rarity.RARE, mage.cards.t.TroubleInPairs.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Trouble in Pairs", 326, Rarity.RARE, mage.cards.t.TroubleInPairs.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("True Identity", 16, Rarity.RARE, mage.cards.t.TrueIdentity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("True Identity", 327, Rarity.RARE, mage.cards.t.TrueIdentity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Twilight Prophet", 143, Rarity.MYTHIC, mage.cards.t.TwilightProphet.class));
         cards.add(new SetCardInfo("Ugin's Mastery", 53, Rarity.RARE, mage.cards.u.UginsMastery.class));
         cards.add(new SetCardInfo("Ulvenwald Mysteries", 193, Rarity.UNCOMMON, mage.cards.u.UlvenwaldMysteries.class));
         cards.add(new SetCardInfo("Unexplained Absence", 17, Rarity.RARE, mage.cards.u.UnexplainedAbsence.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Unexplained Absence", 328, Rarity.RARE, mage.cards.u.UnexplainedAbsence.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Unshakable Tail", 29, Rarity.RARE, mage.cards.u.UnshakableTail.class));
+        cards.add(new SetCardInfo("Veiled Ascension", 18, Rarity.RARE, mage.cards.v.VeiledAscension.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Veiled Ascension", 329, Rarity.RARE, mage.cards.v.VeiledAscension.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vengeful Ancestor", 163, Rarity.RARE, mage.cards.v.VengefulAncestor.class));
         cards.add(new SetCardInfo("Vizier of Many Faces", 123, Rarity.RARE, mage.cards.v.VizierOfManyFaces.class));
         cards.add(new SetCardInfo("Vow of Duty", 89, Rarity.UNCOMMON, mage.cards.v.VowOfDuty.class));

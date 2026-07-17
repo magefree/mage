@@ -36,6 +36,15 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
         rightHalfCard = new SplitCardHalfImpl(this.getOwnerId(), new CardSetInfo(names[1], setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()), typesRight, costsRight, this, SpellAbilityType.SPLIT_RIGHT);
     }
 
+    // Params reordered as we need the same arguments as the parent constructor, with slightly different behaviour.
+    // Currently only used for rooms, because they are the only current split card with a shared type line.
+    protected SplitCard(UUID ownerId, CardSetInfo setInfo, String costsLeft, String costsRight, SpellAbilityType spellAbilityType, CardType[] singleTypeLine) {
+        super(ownerId, setInfo, singleTypeLine, costsLeft + costsRight, spellAbilityType);
+        String[] names = setInfo.getName().split(" // ");
+        leftHalfCard = new SplitCardHalfImpl(this.getOwnerId(), new CardSetInfo(names[0], setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()), singleTypeLine, costsLeft, this, SpellAbilityType.SPLIT_LEFT);
+        rightHalfCard = new SplitCardHalfImpl(this.getOwnerId(), new CardSetInfo(names[1], setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()), singleTypeLine, costsRight, this, SpellAbilityType.SPLIT_RIGHT);
+    }
+
     protected SplitCard(SplitCard card) {
         super(card);
         // make sure all parts created and parent ref added
@@ -71,7 +80,7 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
     @Override
     public void setCopy(boolean isCopy, MageObject copiedFrom) {
         super.setCopy(isCopy, copiedFrom);
-        leftHalfCard.setCopy(isCopy, copiedFrom);
+        leftHalfCard.setCopy(isCopy, copiedFrom); // TODO: wrong ref, must be left-right card?!
         rightHalfCard.setCopy(isCopy, copiedFrom);
     }
 
@@ -227,10 +236,11 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
 
     @Override
     public int getManaValue() {
-        // 202.3d The converted mana cost of a split card not on the stack or of a fused split spell on the
-        // stack is determined from the combined mana costs of its halves. Otherwise, while a split card is
-        // on the stack, the converted mana cost of the spell is determined by the mana cost of the half
-        // that was chosen to be cast. See rule 708, “Split Cards.”
+        // 202.3d
+        // The mana value of a split card not on the stack or of a fused split spell on the stack 
+        // is determined from the combined mana costs of its halves. Otherwise, while a split card 
+        // is on the stack, the mana value of the spell is determined by the mana cost of the half 
+        // that was chosen to be cast. See rule 709, “Split Cards.”
 
         // split card and it's halfes contains own mana costs, so no need to rewrite logic
         return super.getManaValue();

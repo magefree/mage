@@ -45,7 +45,7 @@ public final class NukaNukeLauncher extends CardImpl {
         ));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private NukaNukeLauncher(final NukaNukeLauncher card) {

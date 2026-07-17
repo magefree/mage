@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -67,7 +66,7 @@ public final class ImmolationShaman extends CardImpl {
 class ImmolationShamanTriggeredAbility extends TriggeredAbilityImpl {
 
     ImmolationShamanTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(StaticValue.get(1), true, "that player", true));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(1).withTargetDescription("that player"));
         setTriggerPhrase("Whenever an opponent activates an ability of an artifact, creature, or land that isn't a mana ability, ");
     }
 

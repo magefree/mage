@@ -49,7 +49,7 @@ public final class EshkiDragonclaw extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Ward {1}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}"), false));
 
         // At the beginning of combat on your turn, if you've cast both a creature spell and a noncreature spell this turn, draw a card and put two +1/+1 counters on Eshki Dragonclaw.
         Ability ability = new BeginningOfCombatTriggeredAbility(new DrawCardSourceControllerEffect(1))

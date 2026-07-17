@@ -30,12 +30,12 @@ public final class SpiderSense extends CardImpl {
     public SpiderSense(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
-        // Web-slinging {U}
-        this.addAbility(new WebSlingingAbility(this, "{U}"));
-
         // Counter target instant spell, sorcery spell, or triggered ability.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetStackObject(filter));
+
+        // Web-slinging {U}
+        this.addAbility(new WebSlingingAbility(this, "{U}"));
     }
 
     private SpiderSense(final SpiderSense card) {

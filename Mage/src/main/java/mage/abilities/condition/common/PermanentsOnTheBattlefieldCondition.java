@@ -41,7 +41,8 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
      * Applies a filter, a {@link ComparisonType}, and count to permanents on
      * the battlefield when checking the condition during the
      * {@link #apply(mage.game.Game, mage.abilities.Ability) apply} method
-     * invocation.
+     * invocation. By default, only controlled permanents are counted.
+     * If you want to check the whole battlefield, use a constructor with the boolean.
      *
      * @param filter
      * @param type

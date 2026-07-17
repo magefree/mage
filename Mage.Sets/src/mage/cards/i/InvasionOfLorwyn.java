@@ -3,12 +3,16 @@ package mage.cards.i;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SiegeAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.LandsYouControlCount;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.hint.common.LandsYouControlHint;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
@@ -24,7 +28,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class InvasionOfLorwyn extends CardImpl {
+public final class InvasionOfLorwyn extends TransformingDoubleFacedCard {
 
     private static final FilterPermanent filter = new FilterOpponentsCreaturePermanent(
             "non-Elf creature an opponent controls with power X or less, where X is the number of lands you control"
@@ -36,19 +40,30 @@ public final class InvasionOfLorwyn extends CardImpl {
     }
 
     public InvasionOfLorwyn(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.BATTLE}, "{4}{B}{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.BATTLE}, new SubType[]{SubType.SIEGE}, "{4}{B}{G}",
+                "Winnowing Forces",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ELF, SubType.WARRIOR}, "BG"
+        );
 
-        this.subtype.add(SubType.SIEGE);
-        this.setStartingDefense(5);
-        this.secondSideCardClazz = mage.cards.w.WinnowingForces.class;
+        // Invasion of Lorwyn
+        this.getLeftHalfCard().setStartingDefense(5);
 
         // (As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)
-        this.addAbility(new SiegeAbility());
+        this.getLeftHalfCard().addAbility(new SiegeAbility());
 
         // When Invasion of Lorwyn enters the battlefield, destroy target non-Elf creature an opponent controls with power X or less, where X is the number of lands you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
         ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability.addHint(LandsYouControlHint.instance));
+        this.getLeftHalfCard().addAbility(ability.addHint(LandsYouControlHint.instance));
+
+        // Winnowing Forces
+        this.getRightHalfCard().setPT(0, 0);
+
+        // Winnowing Forces's power and toughness are each equal to the number of lands you control.
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(LandsYouControlCount.instance)
+        ));
     }
 
     private InvasionOfLorwyn(final InvasionOfLorwyn card) {

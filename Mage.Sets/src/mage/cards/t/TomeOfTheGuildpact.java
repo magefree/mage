@@ -6,6 +6,7 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -17,6 +18,8 @@ public final class TomeOfTheGuildpact extends CardImpl {
 
     public TomeOfTheGuildpact(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
+
+        this.subtype.add(SubType.BOOK);
 
         // Whenever you cast a multicolored spell, draw a card.
         this.addAbility(new SpellCastControllerTriggeredAbility(

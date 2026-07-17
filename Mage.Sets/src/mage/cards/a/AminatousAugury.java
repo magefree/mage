@@ -78,6 +78,7 @@ class AminatousAuguryEffect extends OneShotEffect {
         }
 
         // move cards from library to exile
+        game.getExile().createZone(source.getSourceId(), CardUtil.createObjectRelatedWindowTitle(source, game, null)).setCleanupOnEndTurn(true);
         controller.moveCardsToExile(controller.getLibrary().getTopCards(game, 8), source, game, true, source.getSourceId(), CardUtil.createObjectRelatedWindowTitle(source, game, null));
         ExileZone auguryExileZone = game.getExile().getExileZone(source.getSourceId());
         if (auguryExileZone == null) {

@@ -12,6 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.HistoricPredicate;
 import mage.game.Game;
@@ -26,12 +27,15 @@ import java.util.UUID;
 public final class UrzasTome extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("historic card");
+
     static {
         filter.add(HistoricPredicate.instance);
     }
 
     public UrzasTome(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
+
+        this.subtype.add(SubType.BOOK);
 
         // {3}, {T}: Draw a card. Then discard a card unless you exile a historic card from your graveyard.
         Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(3));
@@ -53,6 +57,7 @@ public final class UrzasTome extends CardImpl {
 class UrzasTomeEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("a historic card");
+
     static {
         filter.add(HistoricPredicate.instance);
     }

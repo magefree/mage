@@ -7,10 +7,13 @@ import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterPermanentCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
+
+import java.util.Optional;
 
 /**
  * @author magenoxx_at_gmail.com
@@ -20,9 +23,10 @@ public class PutCardFromHandOntoBattlefieldEffect extends OneShotEffect {
     private final FilterCard filter;
     private final boolean useTargetController;
     private final boolean tapped;
+    private final boolean attacking;
 
     public PutCardFromHandOntoBattlefieldEffect() {
-        this(new FilterPermanentCard("a permanent card"), false);
+        this(StaticFilters.FILTER_CARD_A_PERMANENT, false);
     }
 
     public PutCardFromHandOntoBattlefieldEffect(FilterCard filter) {
@@ -34,10 +38,15 @@ public class PutCardFromHandOntoBattlefieldEffect extends OneShotEffect {
     }
 
     public PutCardFromHandOntoBattlefieldEffect(FilterCard filter, boolean useTargetController, boolean tapped) {
+        this(filter, useTargetController, tapped, false);
+    }
+
+    public PutCardFromHandOntoBattlefieldEffect(FilterCard filter, boolean useTargetController, boolean tapped, boolean attacking) {
         super(Outcome.PutCardInPlay);
         this.filter = filter;
         this.useTargetController = useTargetController;
         this.tapped = tapped;
+        this.attacking = attacking;
     }
 
     protected PutCardFromHandOntoBattlefieldEffect(final PutCardFromHandOntoBattlefieldEffect effect) {
@@ -45,6 +54,7 @@ public class PutCardFromHandOntoBattlefieldEffect extends OneShotEffect {
         this.filter = effect.filter.copy();
         this.useTargetController = effect.useTargetController;
         this.tapped = effect.tapped;
+        this.attacking = effect.attacking;
     }
 
     @Override
@@ -63,16 +73,20 @@ public class PutCardFromHandOntoBattlefieldEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        if (player.chooseUse(Outcome.PutCardInPlay, "Put " + filter.getMessage() + " from your hand onto the battlefield?", source, game)) {
-            TargetCardInHand target = new TargetCardInHand(filter);
-            if (player.choose(Outcome.PutCardInPlay, target, source, game)) {
-                Card card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    return player.moveCards(card, Zone.BATTLEFIELD, source, game, tapped, false, false, null);
-                }
-            }
+        if (!player.chooseUse(Outcome.PutCardInPlay, "Put " + filter.getMessage() + " from your hand onto the battlefield?", source, game)) {
+            return false;
         }
-        return false;
+        TargetCardInHand target = new TargetCardInHand(filter);
+        player.choose(Outcome.PutCardInPlay, target, source, game);
+        Card card = game.getCard(target.getFirstTarget());
+        if (card == null || !player.moveCards(card, Zone.BATTLEFIELD, source, game, tapped, false, false, null)) {
+            return false;
+        }
+        if (attacking) {
+            Optional.ofNullable(CardUtil.getPermanentFromCardPutToBattlefield(card, game))
+                    .ifPresent(permanent -> game.getCombat().addAttackingCreature(permanent.getId(), game));
+        }
+        return true;
     }
 
     @Override
@@ -80,11 +94,27 @@ public class PutCardFromHandOntoBattlefieldEffect extends OneShotEffect {
         if (this.staticText != null && !this.staticText.isEmpty()) {
             return staticText;
         }
-
+        StringBuilder sb = new StringBuilder();
         if (useTargetController) {
-            return "that player may put " + filter.getMessage() + " from their hand onto the battlefield" + (this.tapped ? " tapped" : "");
+            sb.append("that player");
         } else {
-            return "you may put " + filter.getMessage() + " from your hand onto the battlefield" + (this.tapped ? " tapped" : "");
+            sb.append("you");
         }
+        sb.append(" may put ");
+        sb.append(CardUtil.addArticle(filter.getMessage()));
+        sb.append(" from ");
+        if (useTargetController) {
+            sb.append("their");
+        } else {
+            sb.append("your");
+        }
+        sb.append(" hand onto the battlefield");
+        if (tapped) {
+            sb.append(" tapped");
+        }
+        if (attacking) {
+            sb.append(" and attacking");
+        }
+        return sb.toString();
     }
 }

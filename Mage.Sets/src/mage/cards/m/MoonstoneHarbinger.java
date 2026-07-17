@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 
 import java.util.UUID;
 
@@ -22,8 +21,7 @@ import java.util.UUID;
  */
 public final class MoonstoneHarbinger extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.BAT, "");
-    private static final FilterPermanent filter2 = new FilterPermanent(SubType.BAT, "");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.BAT);
 
     public MoonstoneHarbinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
@@ -44,7 +42,7 @@ public final class MoonstoneHarbinger extends CardImpl {
                 1, 0, Duration.EndOfTurn, filter
         ).setText("Bats you control get +1/+0")).setTriggersLimitEachTurn(1);
         ability.addEffect(new GainAbilityControlledEffect(
-                DeathtouchAbility.getInstance(), Duration.EndOfTurn, filter2
+                DeathtouchAbility.getInstance(), Duration.EndOfTurn, filter
         ).setText("and gain deathtouch until end of turn"));
         this.addAbility(ability);
     }

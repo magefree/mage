@@ -2,7 +2,9 @@ package mage.abilities.keyword;
 
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.Effect;
+import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -23,11 +25,11 @@ public class BountyAbility extends DiesCreatureTriggeredAbility {
     }
 
     public BountyAbility(Effect effect, boolean optional) {
-        this(effect, optional, false);
+        this(effect, optional, SetTargetPointer.NONE);
     }
 
-    public BountyAbility(Effect effect, boolean optional, boolean setTargetPointer) {
-        super(effect, optional, bountyCounterFilter, setTargetPointer);
+    public BountyAbility(Effect effect, boolean optional, SetTargetPointer setTargetPointer) {
+        super(Zone.BATTLEFIELD, effect, optional, bountyCounterFilter, setTargetPointer);
         setTriggerPhrase("<i>Bounty</i> &mdash; Whenever a creature an opponent controls with a bounty counter on it dies, ");
     }
 

@@ -5,10 +5,12 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.constants.Outcome;
 import mage.counters.Counter;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.permanent.CanHaveCounterAddedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -20,12 +22,19 @@ public class PutCountersTargetCost extends CostImpl {
 
     private final Counter counter;
 
-    public PutCountersTargetCost(Counter counter){
-        this(counter, new TargetControlledCreaturePermanent());
+    private static FilterControlledPermanent makeFilter(FilterControlledPermanent filter, Counter counter) {
+        FilterControlledPermanent newFilter = filter.copy();
+        newFilter.add(new CanHaveCounterAddedPredicate(counter));
+        return newFilter;
     }
 
-    public PutCountersTargetCost(Counter counter, TargetControlledPermanent target) {
+    public PutCountersTargetCost(Counter counter) {
+        this(counter, StaticFilters.FILTER_CONTROLLED_CREATURE);
+    }
+
+    public PutCountersTargetCost(Counter counter, FilterControlledPermanent filter) {
         this.counter = counter.copy();
+        TargetControlledPermanent target = new TargetControlledPermanent(makeFilter(filter, counter));
         target.withNotTarget(true);
         this.addTarget(target);
         this.text = "put " + counter.getDescription() + " on " + target.getDescription();
@@ -41,6 +50,11 @@ public class PutCountersTargetCost extends CostImpl {
     }
 
     @Override
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        return canChooseOrAlreadyChosen(ability, source, controllerId, game);
+    }
+
+    @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player player = game.getPlayer(ability.getControllerId());
         if (player == null || !this.getTargets().choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
@@ -49,15 +63,12 @@ public class PutCountersTargetCost extends CostImpl {
         for (UUID targetId : this.getTargets().get(0).getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent == null) {
-                return false;
+                paid = false;
+                return paid;
             }
-            paid |= permanent.addCounters(counter, controllerId, ability, game);
+            permanent.addCounters(counter, controllerId, ability, game);
+            paid = true;
         }
         return paid;
-    }
-
-    @Override
-    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return canChooseOrAlreadyChosen(ability, source, controllerId, game);
     }
 }

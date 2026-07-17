@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import mage.MageInt;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -9,7 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -24,10 +23,11 @@ public final class PhantasmalForm extends CardImpl {
 
         // Until end of turn, up to two target creatures each have base power and toughness 3/3, gain flying, and become blue Illusions in addition to their other colors and types.
         this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(
-                        new PhantasmalFormToken(), false, false, Duration.EndOfTurn
-                ).withDurationRuleAtStart(true).setText("Until end of turn, up to two target creatures each have base power and toughness 3/3, " +
-                        "gain flying, and become blue Illusions in addition to their other colors and types.")
-        );
+            new CreatureToken(3, 3, "", SubType.ILLUSION).withColor("U").withAbility(FlyingAbility.getInstance()),
+            false, false, Duration.EndOfTurn
+            ).withDurationRuleAtStart(true).setText("Until end of turn, up to two target creatures each have base power and toughness 3/3, " +
+                "gain flying, and become blue Illusions in addition to their other colors and types."
+        ));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
 
         // Draw a card.
@@ -41,27 +41,5 @@ public final class PhantasmalForm extends CardImpl {
     @Override
     public PhantasmalForm copy() {
         return new PhantasmalForm(this);
-    }
-}
-
-class PhantasmalFormToken extends TokenImpl {
-
-    PhantasmalFormToken() {
-        super("", "");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.ILLUSION);
-        color.setBlue(true);
-        power = new MageInt(3);
-        toughness = new MageInt(3);
-
-        addAbility(FlyingAbility.getInstance());
-    }
-
-    private PhantasmalFormToken(final PhantasmalFormToken token) {
-        super(token);
-    }
-
-    public PhantasmalFormToken copy() {
-        return new PhantasmalFormToken(this);
     }
 }

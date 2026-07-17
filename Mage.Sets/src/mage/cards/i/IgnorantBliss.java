@@ -5,7 +5,7 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -72,7 +72,7 @@ class IgnorantBlissEffect extends OneShotEffect {
                 .filter(Objects::nonNull)
                 .filter(card -> game.getState().getZone(card.getId()) == Zone.EXILED)
                 .forEach(card -> card.setFaceDown(true, game));
-        DelayedTriggeredAbility ability = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(Zone.HAND));
+        DelayedTriggeredAbility ability = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.HAND));
         ability.addEffect(new DrawCardSourceControllerEffect(1));
         game.addDelayedTriggeredAbility(ability, source);
         return true;

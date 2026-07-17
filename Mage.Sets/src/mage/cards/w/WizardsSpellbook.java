@@ -13,6 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.ExileZone;
@@ -32,6 +33,8 @@ public final class WizardsSpellbook extends CardImpl {
 
     public WizardsSpellbook(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}{U}{U}");
+
+        this.subtype.add(SubType.BOOK);
 
         // {T}: Exile target instant or sorcery card from a graveyard. Roll a d20. Activate only as a sorcery.
         RollDieWithResultTableEffect effect = new RollDieWithResultTableEffect(

@@ -62,12 +62,9 @@ enum GoblinBlastRunnerCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID player = source.getControllerId();
         PermanentsSacrificedWatcher watcher = game.getState().getWatcher(PermanentsSacrificedWatcher.class);
-        if (watcher == null) {
-            return false;
-        }
-        return watcher.getThisTurnSacrificedPermanents(player) != null;
+        return watcher != null
+                && !watcher.getThisTurnSacrificedPermanents(source.getControllerId()).isEmpty();
     }
 
     public static Hint getHint() {

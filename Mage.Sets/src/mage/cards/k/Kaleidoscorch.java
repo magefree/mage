@@ -25,7 +25,7 @@ public final class Kaleidoscorch extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(ColorsOfManaSpentToCastCount.getInstance())
                 .setText("{this} deals X damage to any target, where X is the number of colors of mana spent to cast this spell"));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
-        this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
+        this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE).addHint(ColorsOfManaSpentToCastCount.getHint());
 
         // Flashback {4}{R}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{4}{R}")));

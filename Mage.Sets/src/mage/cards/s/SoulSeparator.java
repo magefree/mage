@@ -18,7 +18,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.token.ZombieToken2;
+import mage.game.permanent.token.ZombieStarToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -85,7 +85,7 @@ class SoulSeparatorEffect extends OneShotEffect {
             boolean result = false;
             if (game.getState().getZone(creatureCard.getId()) == Zone.GRAVEYARD) {
                 result = controller.moveCardToExileWithInfo(creatureCard, null, "", source, game, Zone.GRAVEYARD, true);
-                ZombieToken2 token = new ZombieToken2(creatureCard.getPower().getValue(), creatureCard.getToughness().getValue());
+                ZombieStarToken token = new ZombieStarToken(creatureCard.getPower().getValue(), creatureCard.getToughness().getValue());
                 token.putOntoBattlefield(1, game, source, source.getControllerId());
             }
             return result;

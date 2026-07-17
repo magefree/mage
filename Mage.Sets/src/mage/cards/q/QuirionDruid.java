@@ -1,7 +1,6 @@
 package mage.cards.q;
 
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -12,8 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetLandPermanent;
 
 import java.util.UUID;
@@ -35,7 +33,13 @@ public final class QuirionDruid extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {G}, {T}: Target land becomes a 2/2 green creature that’s still a land. <i>(This effect lasts indefinitely.)</i>
-        Ability ability = new SimpleActivatedAbility(new BecomesCreatureTargetEffect(new QuirionDruidToken(), false, true, Duration.Custom), new ManaCostsImpl<>("{G}"));
+        Ability ability = new SimpleActivatedAbility(
+            new BecomesCreatureTargetEffect(
+                new CreatureToken(2, 2, "2/2 green creature").withColor("G"),
+                false, true, Duration.Custom
+            ),
+            new ManaCostsImpl<>("{G}")
+        );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
@@ -48,24 +52,5 @@ public final class QuirionDruid extends CardImpl {
     @Override
     public QuirionDruid copy() {
         return new QuirionDruid(this);
-    }
-}
-
-class QuirionDruidToken extends TokenImpl {
-
-    public QuirionDruidToken() {
-        super("", "2/2 green creature");
-        this.color.addColor(ObjectColor.GREEN);
-        this.cardType.add(CardType.CREATURE);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-    }
-
-    private QuirionDruidToken(final QuirionDruidToken token) {
-        super(token);
-    }
-
-    public QuirionDruidToken copy() {
-        return new QuirionDruidToken(this);
     }
 }

@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class NestingGrounds extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("another target permanent");
+    private static final FilterPermanent filter = new FilterPermanent("a second target permanent");
 
     static {
         filter.add(new AnotherTargetPredicate(2));

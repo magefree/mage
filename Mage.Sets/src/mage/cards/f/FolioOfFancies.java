@@ -11,10 +11,7 @@ import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -27,6 +24,8 @@ public final class FolioOfFancies extends CardImpl {
 
     public FolioOfFancies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{U}");
+
+        this.subtype.add(SubType.BOOK);
 
         // Players have no maximum hand size.
         this.addAbility(new SimpleStaticAbility(new MaximumHandSizeControllerEffect(

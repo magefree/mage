@@ -7,7 +7,6 @@ use Scalar::Util qw(looks_like_number);
 
 my $dataFile = "mtg-cards-data.txt";
 my $setsFile = "mtg-sets-data.txt";
-my $knownSetsFile = "known-sets.txt";
 my $templateFile = "issue_tracker.tmpl";
 
 my %sets;
@@ -15,11 +14,11 @@ my %knownSets;
 
 my @setCards;
 
-open (DATA, $knownSetsFile) || die "can't open $knownSetsFile";
+open (DATA, $setsFile) || die "can't open $setsFile";
 while(my $line = <DATA>) {
     chomp $line;
     my @data = split('\\|', $line);
-    $knownSets{$data[0]} = $data[1];
+    $knownSets{$data[0]} = $data[2];
 }
 close(DATA);
 
@@ -82,7 +81,8 @@ sub cardSort {
 sub toCamelCase {
     my $string = $_[0];
     $string =~ s/\b([\w']+)\b/ucfirst($1)/ge;
-    $string =~ s/[-,\s\'\.!@#*\(\)]//g;
+    $string =~ s/[-,\s\'\.!@#*:\(\)]//g;
+    $string =~ s/\&/And/g;
     $string;
 }
 
@@ -116,12 +116,13 @@ foreach my $card (sort cardSort @setCards) {
     my $currentFileName = "../Mage.Sets/src/mage/cards/" . lc(substr($className, 0, 1)) . "/" . $className . ".java";
     my $cardNameForUrl = $cardName;
     $cardNameForUrl =~ s/ //g;
-    my $cardEntry = "- [ ] In progress -- [$cardName](https://scryfall.com/search?q=!\"$cardNameForUrl\"&nbsp;e:$setAbbr)";
+    $cardNameForUrl =~ s/[^a-zA-Z0-9]//g;
+    my $cardEntry = "- [ ] In progress -- [$cardName](https://scryfall.com/search?q=!$cardNameForUrl%20e:$setAbbr)";
 
     if(-e $currentFileName) {
         # Card is implemented
         $cardNames{$cardName} = 1;
-        my $implementedEntry = "- [x] Done -- [$cardName](https://scryfall.com/search?q=!\"$cardNameForUrl\"&nbsp;e:$setAbbr)";
+        my $implementedEntry = "- [x] [$cardName](https://scryfall.com/search?q=!$cardNameForUrl%20e:$setAbbr)";
         push(@implementedCards, $implementedEntry);
     } else {
         # Card is not implemented
@@ -138,6 +139,7 @@ foreach my $cardName (sort keys %cardNames) {
         my $urlCardName = $cardName;
         $urlCardName =~ s/ //g;
         $urlCardName =~ s/"/\\"/g;  # Escape quotes
+        $urlCardName =~ s/\&/%26/g; # URL encode ampersands
         push(@unimplementedNames, "!\"$urlCardName\"");
     }
 }
@@ -145,8 +147,11 @@ $unimplementedUrl .= join("or", @unimplementedNames) . "&unique=cards";
 
 # Read template file
 my $template = Text::Template->new(TYPE => 'FILE', SOURCE => $templateFile, DELIMITERS => [ '[=', '=]' ]);
-$vars{'unimplemented'} = join("\n", @unimplementedCards);
-$vars{'implemented'} = join("\n", @implementedCards);
+$vars{'unimplementedCount'} = scalar(@unimplementedCards);
+$vars{'implementedCount'} = scalar(@implementedCards);
+$vars{'totalCount'} = scalar(@unimplementedCards) + scalar(@implementedCards);
+$vars{'unimplemented'} = join("\n", sort @unimplementedCards);
+$vars{'implemented'} = join("\n", sort @implementedCards);
 $vars{'setName'} = $setName;
 $vars{'unimplementedUrl'} = $unimplementedUrl;
 my $result = $template->fill_in(HASH => \%vars);

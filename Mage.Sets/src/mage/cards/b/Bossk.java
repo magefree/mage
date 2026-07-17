@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import mage.MageInt;
@@ -62,6 +61,7 @@ class BosskTriggeredAbility extends TriggeredAbilityImpl {
     BosskTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()));
         this.addTarget(new TargetOpponentsCreaturePermanent());
+        setTriggerPhrase("Whenever a land you control enters, if you control five or more lands, ");
     }
 
     private BosskTriggeredAbility(final BosskTriggeredAbility ability) {
@@ -81,10 +81,7 @@ class BosskTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.isLand(game) && permanent.isControlledBy(this.getControllerId())) {
-            return true;
-        }
-        return false;
+        return permanent != null && permanent.isLand(game) && permanent.isControlledBy(getControllerId());
     }
 
     @Override
@@ -92,8 +89,4 @@ class BosskTriggeredAbility extends TriggeredAbilityImpl {
         return new BosskTriggeredAbility(this);
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever a land enter the battlefield under your control, if you control five or more lands, put a bounty counter on target creature an opponet controls";
-    }
 }

@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
@@ -29,14 +28,10 @@ public final class Teleportal extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{R}");
 
         // Target creature you control gets +1/+0 until end of turn and can't be blocked this turn.
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(1, 0, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new CantBeBlockedTargetEffect().setText("and can't be blocked this turn"));
-
         // Overload {3}{U}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        OverloadAbility ability = new OverloadAbility(this, new BoostAllEffect(1, 0, Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES, false), new ManaCostsImpl<>("{3}{U}{R}"));
-        ability.addEffect(new TeleportalEffect());
-        this.addAbility(ability);
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{3}{U}{R}"), new TargetControlledCreaturePermanent(),
+                new BoostTargetEffect(1, 0, Duration.EndOfTurn),
+                new CantBeBlockedTargetEffect().setText("and can't be blocked this turn"));
     }
 
     private Teleportal(final Teleportal card) {

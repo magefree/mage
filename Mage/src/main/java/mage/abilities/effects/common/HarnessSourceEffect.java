@@ -13,7 +13,7 @@ public class HarnessSourceEffect extends OneShotEffect {
 
     public HarnessSourceEffect() {
         super(Outcome.AIDontUseIt);
-        staticText = "Harness {this}. <i>(Once harnessed, its ∞ ability is active.)<i>";
+        staticText = "Harness {this}. <i>(Once harnessed, its ∞ ability is active.)</i>";
     }
 
     protected HarnessSourceEffect(final HarnessSourceEffect effect) {

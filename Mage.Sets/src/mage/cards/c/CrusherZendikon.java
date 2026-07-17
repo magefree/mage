@@ -2,7 +2,6 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -17,8 +16,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -41,7 +39,12 @@ public final class CrusherZendikon extends CardImpl {
         this.addAbility(ability);
         // Enchanted land is a 4/2 red Beast creature with trample. It's still a land.
         Ability ability2 = new SimpleStaticAbility(new BecomesCreatureAttachedEffect(
-                new CrusherZendikonToken(), "Enchanted land is a 4/2 red Beast creature with trample. It's still a land.", Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.COLOR));
+            new CreatureToken(4, 2, "4/2 red Beast creature with trample", SubType.BEAST)
+                .withColor("R").withAbility(TrampleAbility.getInstance()),
+            "Enchanted land is a 4/2 red Beast creature with trample. It's still a land.",
+            Duration.WhileOnBattlefield,
+            BecomesCreatureAttachedEffect.LoseType.COLOR
+        ));
         this.addAbility(ability2);
         // When enchanted land dies, return that card to its owner's hand.
         Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandAttachedEffect(), "enchanted land", false);
@@ -55,25 +58,5 @@ public final class CrusherZendikon extends CardImpl {
     @Override
     public CrusherZendikon copy() {
         return new CrusherZendikon(this);
-    }
-}
-
-class CrusherZendikonToken extends TokenImpl {
-
-    CrusherZendikonToken() {
-        super("", "4/2 red Beast creature with trample");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add(SubType.BEAST);
-        power = new MageInt(4);
-        toughness = new MageInt(2);
-        this.addAbility(TrampleAbility.getInstance());
-    }
-    private CrusherZendikonToken(final CrusherZendikonToken token) {
-        super(token);
-    }
-
-    public CrusherZendikonToken copy() {
-        return new CrusherZendikonToken(this);
     }
 }

@@ -1,29 +1,17 @@
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.abilities.effects.common.ReturnCardChosenFromGraveyardEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.abilities.effects.keyword.SurveilEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SpellAbilityType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +40,10 @@ public final class ConniveConcoct extends SplitCard {
 
         // Concoct
         // Surveil 3, then return a creature card from your graveyard to the battlefield.
-        this.getRightHalfCard().getSpellAbility().addEffect(new ConcoctEffect());
+        this.getRightHalfCard().getSpellAbility().addEffect(new SurveilEffect(3, false));
+        this.getRightHalfCard().getSpellAbility().addEffect(new ReturnCardChosenFromGraveyardEffect(
+                false, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD, PutCards.BATTLEFIELD).concatBy(", then")
+        );
     }
 
     private ConniveConcoct(final ConniveConcoct card) {
@@ -62,43 +53,5 @@ public final class ConniveConcoct extends SplitCard {
     @Override
     public ConniveConcoct copy() {
         return new ConniveConcoct(this);
-    }
-}
-
-class ConcoctEffect extends OneShotEffect {
-
-    private static final FilterCard filter
-            = new FilterCreatureCard("creature card in your graveyard");
-
-    public ConcoctEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Surveil 3, then return a creature card "
-                + "from your graveyard to the battlefield.";
-    }
-
-    private ConcoctEffect(final ConcoctEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ConcoctEffect copy() {
-        return new ConcoctEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        player.surveil(3, source, game);
-        Target target = new TargetCardInYourGraveyard(filter);
-        target.withNotTarget(true);
-        if (player.choose(outcome, target, source, game)) {
-            Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
-            effect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));
-            effect.apply(game, source);
-        }
-        return true;
     }
 }

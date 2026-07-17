@@ -10,7 +10,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.NumberOfTriggersEvent;
 import mage.game.events.ZoneChangeEvent;
 
@@ -44,7 +43,7 @@ class PrecipiceOfMortisEffect extends ReplacementEffectImpl {
 
     PrecipiceOfMortisEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If a Jedi entering or leaving the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers additional time";
+        staticText = "If a Jedi entering or leaving the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time";
     }
 
     private PrecipiceOfMortisEffect(final PrecipiceOfMortisEffect effect) {

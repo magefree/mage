@@ -19,7 +19,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public final class VernalBloom extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("a Forest");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("a Forest is tapped");
 
     static {
         filter.add(SubType.FOREST.getPredicate());

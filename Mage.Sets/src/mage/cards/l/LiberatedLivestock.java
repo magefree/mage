@@ -26,7 +26,7 @@ public final class LiberatedLivestock extends CardImpl {
 
     public LiberatedLivestock(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");
-        
+
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.OX);
@@ -63,7 +63,7 @@ class LiberatedLivestockEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Token firstToken = new CatToken2();
+        Token firstToken = new Cat11LifelinkToken();
         firstToken.putOntoBattlefield(1, game, source, source.getControllerId(),
                 false, false, null, null, true,
                 Arrays.asList(firstToken, new BirdToken(), new OxToken()));

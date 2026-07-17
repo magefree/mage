@@ -10,12 +10,11 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -70,14 +69,14 @@ class FallersFaithfulEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        boolean flag = permanent.getDealtDamageByThisTurn().isEmpty();
+        boolean notDamagedThisTurn = permanent.getDealtDamageByThisTurn().isEmpty();
         permanent.destroy(source, game);
-        game.processAction();
-        if (!flag) {
-            Optional.ofNullable(permanent)
-                    .map(Controllable::getControllerId)
-                    .map(game::getPlayer)
-                    .ifPresent(player -> player.drawCards(2, source, game));
+        if (notDamagedThisTurn) {
+            game.processAction();
+            Player player = game.getPlayer(permanent.getControllerId());
+            if (player != null) {
+                player.drawCards(2, source, game);
+            }
         }
         return true;
     }

@@ -28,8 +28,8 @@ public final class SeismicWave extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // Seismic Wave deals 2 damage to any target and 1 damage to each nonartifact creature target opponent controls.
-        this.getSpellAbility().addTarget(new TargetAnyTarget().withChooseHint("2 damage"));
-        this.getSpellAbility().addTarget(new TargetOpponent().withChooseHint("1 damage to each nonartifact creature target opponent controls"));
+        this.getSpellAbility().addTarget(new TargetAnyTarget().withChooseHint("to deal 2 damage"));
+        this.getSpellAbility().addTarget(new TargetOpponent().withChooseHint("1 damage to each nonartifact creature they control"));
         this.getSpellAbility().addEffect(new SeismicWaveEffect());
     }
 
@@ -51,7 +51,7 @@ class SeismicWaveEffect extends OneShotEffect {
         filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
     }
 
-    public SeismicWaveEffect() {
+    SeismicWaveEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 2 damage to any target and 1 damage to each nonartifact creature target opponent controls";
     }

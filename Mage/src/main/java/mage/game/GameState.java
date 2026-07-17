@@ -670,9 +670,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (Player player : players.values()) {
             player.reset();
         }
+        this.reset();
         battlefield.reset(game);
         combat.reset(game);
-        this.reset();
         effects.apply(game);
         combat.checkForRemoveFromCombat(game);
     }
@@ -1157,6 +1157,13 @@ public class GameState implements Serializable, Copyable<GameState> {
     private void addCard(Card card, Zone zone) {
         setZone(card.getId(), zone);
 
+        // Actually put the card in the exile zone if it's exiled;
+        // see https://github.com/magefree/mage/issues/14005 for why this is necessary.
+        // This is only called from addCard(card) which uses Zone.OUTSIDE, and in the copy spell code.
+        if (zone != null && zone.match(Zone.EXILED)) {
+            getExile().add(card);
+        }
+
         // add card specific abilities to game
         for (Ability ability : card.getInitAbilities()) {
             addAbility(ability, null, card);
@@ -1627,19 +1634,19 @@ public class GameState implements Serializable, Copyable<GameState> {
             copiedParts.add(rightCopied);
             // sync parts
             ((SplitCard) copiedCard).setParts(leftCopied, rightCopied);
-        } else if (copiedCard instanceof ModalDoubleFacedCard) {
+        } else if (copiedCard instanceof DoubleFacedCard) {
             // left
-            ModalDoubleFacedCardHalf leftOriginal = ((ModalDoubleFacedCard) copiedCard).getLeftHalfCard();
-            ModalDoubleFacedCardHalf leftCopied = leftOriginal.copy();
+            DoubleFacedCardHalf leftOriginal = ((DoubleFacedCard) copiedCard).getLeftHalfCard();
+            DoubleFacedCardHalf leftCopied = (DoubleFacedCardHalf) leftOriginal.copy();
             prepareCardForCopy(leftOriginal, leftCopied, newController);
             copiedParts.add(leftCopied);
             // right
-            ModalDoubleFacedCardHalf rightOriginal = ((ModalDoubleFacedCard) copiedCard).getRightHalfCard();
-            ModalDoubleFacedCardHalf rightCopied = rightOriginal.copy();
+            DoubleFacedCardHalf rightOriginal = ((DoubleFacedCard) copiedCard).getRightHalfCard();
+            DoubleFacedCardHalf rightCopied = (DoubleFacedCardHalf) rightOriginal.copy();
             prepareCardForCopy(rightOriginal, rightCopied, newController);
             copiedParts.add(rightCopied);
             // sync parts
-            ((ModalDoubleFacedCard) copiedCard).setParts(leftCopied, rightCopied);
+            ((DoubleFacedCard) copiedCard).setParts(leftCopied, rightCopied);
         } else if (copiedCard instanceof CardWithSpellOption) {
             // right
             SpellOptionCard rightOriginal = ((CardWithSpellOption) copiedCard).getSpellCard();

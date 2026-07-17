@@ -1,7 +1,7 @@
 package mage.cards.n;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -38,10 +38,7 @@ public final class Necrosquito extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Necrosquito enters the battlefield with two oil counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.OIL.createInstance(2)),
-                "with two oil counters on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.OIL.createInstance(2)));
 
         // Necrosquito gets +1/+1 for each oil counter on it.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(

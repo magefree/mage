@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -15,7 +14,6 @@ import mage.filter.FilterSource;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -65,22 +63,10 @@ class DarkSpherePreventionEffect extends PreventNextDamageFromChosenSourceEffect
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source);
         DamageEvent damageEvent = (DamageEvent) event;
-        int damage = damageEvent.getAmount();
-        if (controller == null || damage <= 0) {
-            return false;
-        }
-        controller.damage(
-                (int) Math.ceil(damage / 2.0), damageEvent.getSourceId(), source, game,
-                damageEvent.isCombatDamage(), damageEvent.isPreventable(), damageEvent.getAppliedEffects()
-        );
-        StringBuilder sb = new StringBuilder(sourceObject != null ? sourceObject.getLogName() : "");
-        sb.append(": ").append(damage / 2).append(" damage prevented");
-        sb.append(" from ").append(controller.getLogName());
-        game.informPlayers(sb.toString());
+        amountToPrevent = (int) Math.floor(damageEvent.getAmount() / 2.0);
+        preventDamageAction(event, source, game);
         discard(); // only one use
-        return true;
+        return false;
     }
 }

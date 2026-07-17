@@ -39,7 +39,7 @@ public final class RelicAxe extends CardImpl {
         )));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent()));
     }
 
     private RelicAxe(final RelicAxe card) {

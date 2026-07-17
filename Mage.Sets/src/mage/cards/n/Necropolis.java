@@ -16,9 +16,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -40,7 +39,7 @@ public final class Necropolis extends CardImpl {
         // Exile a creature card from your graveyard: Put X +0/+1 counters on Necropolis, where X is the exiled card's converted mana cost.
         this.addAbility(new SimpleActivatedAbility(
                 new AddCountersSourceEffect(CounterType.P0P1.createInstance(0), new NecropolisValue(), true).setText("Put X +0/+1 counters on {this}, where X is the exiled card's mana value"),
-                new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("a creature card")))));
+                new ExileFromGraveCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_A))));
     }
 
     private Necropolis(final Necropolis card) {

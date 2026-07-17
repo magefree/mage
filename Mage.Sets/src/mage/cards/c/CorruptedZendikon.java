@@ -2,7 +2,6 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -16,8 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -39,9 +37,12 @@ public final class CorruptedZendikon extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted land is a 3/3 black Ooze creature. It's still a land.
-        Ability ability2 = new SimpleStaticAbility(
-                new BecomesCreatureAttachedEffect(new CorruptedZendikonOozeToken(),
-                        "Enchanted land is a 3/3 black Ooze creature. It's still a land.", Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.COLOR));
+        Ability ability2 = new SimpleStaticAbility(new BecomesCreatureAttachedEffect(
+            new CreatureToken(3, 3, "3/3 black Ooze creature", SubType.OOZE).withColor("B"),
+            "Enchanted land is a 3/3 black Ooze creature. It's still a land.",
+            Duration.WhileOnBattlefield,
+            BecomesCreatureAttachedEffect.LoseType.COLOR
+        ));
         this.addAbility(ability2);
 
         // When enchanted land dies, return that card to its owner's hand.
@@ -57,24 +58,4 @@ public final class CorruptedZendikon extends CardImpl {
     public CorruptedZendikon copy() {
         return new CorruptedZendikon(this);
     }
-}
-
-class CorruptedZendikonOozeToken extends TokenImpl {
-
-    public CorruptedZendikonOozeToken() {
-        super("Ooze", "3/3 black Ooze creature");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add(SubType.OOZE);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-    }
-    private CorruptedZendikonOozeToken(final CorruptedZendikonOozeToken token) {
-        super(token);
-    }
-
-    public CorruptedZendikonOozeToken copy() {
-        return new CorruptedZendikonOozeToken(this);
-    }
-
 }

@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.DealsDamageToThisAllTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -57,7 +55,8 @@ public final class Tephraderm extends CardImpl {
 class TephradermSpellDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     TephradermSpellDamageTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(0));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(SavedDamageValue.MUCH).withTargetDescription("that spell's controller"));
+        setTriggerPhrase("Whenever a spell deals damage to {this}, ");
     }
 
     private TephradermSpellDamageTriggeredAbility(final TephradermSpellDamageTriggeredAbility ability) {
@@ -74,18 +73,12 @@ class TephradermSpellDamageTriggeredAbility extends TriggeredAbilityImpl {
         if (!event.getTargetId().equals(this.getSourceId())) {
             return false;
         }
-
         StackObject sourceSpell = game.getStack().getStackObject(event.getSourceId());
         if (sourceSpell != null && StaticFilters.FILTER_SPELL.match(sourceSpell, getControllerId(), this, game)) {
-            for (Effect effect : getEffects()) {
-                if (effect instanceof DamageTargetEffect) {
-                    effect.setTargetPointer(new FixedTarget(sourceSpell.getControllerId()));
-                    ((DamageTargetEffect) effect).setAmount(StaticValue.get(event.getAmount()));
-                }
-            }
+            this.getEffects().setTargetPointer(new FixedTarget(sourceSpell.getControllerId()));
+            this.getEffects().setValue("damage", event.getAmount());
             return true;
         }
-
         return false;
     }
 
@@ -94,8 +87,4 @@ class TephradermSpellDamageTriggeredAbility extends TriggeredAbilityImpl {
         return new TephradermSpellDamageTriggeredAbility(this);
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever a spell deals damage to {this}, {this} deals that much damage to that spell's controller.";
-    }
 }

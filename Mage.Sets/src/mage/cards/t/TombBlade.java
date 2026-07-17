@@ -1,23 +1,19 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.PermanentsTargetOpponentControlsCount;
+import mage.abilities.effects.common.DoUnlessTargetPlayerOrTargetsControllerPaysEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -38,7 +34,10 @@ public final class TombBlade extends CardImpl {
 
         // Whenever Tomb Blade deals combat damage to a player, that player loses life equal to the number of creatures they control unless they sacrifice a creature.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new TombBladeEffect(), false, true
+                new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new LoseLifeTargetEffect(new PermanentsTargetOpponentControlsCount(StaticFilters.FILTER_PERMANENT_CREATURE))
+                        .setText("that player loses life equal to the number of creatures they control"),
+                        new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)).withTheyText(),
+                false, true
         ));
 
         // Unearth {6}{B}{B}
@@ -52,44 +51,5 @@ public final class TombBlade extends CardImpl {
     @Override
     public TombBlade copy() {
         return new TombBlade(this);
-    }
-}
-
-class TombBladeEffect extends OneShotEffect {
-
-    TombBladeEffect() {
-        super(Outcome.Benefit);
-        staticText = "that player loses life equal to the number of " +
-                "creatures they control unless they sacrifice a creature";
-    }
-
-    private TombBladeEffect(final TombBladeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TombBladeEffect copy() {
-        return new TombBladeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player == null) {
-            return false;
-        }
-        int creatureCount = game.getBattlefield().count(
-                StaticFilters.FILTER_CONTROLLED_CREATURE,
-                player.getId(), source, game
-        );
-        Cost cost = new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE);
-        if (cost.canPay(source, source, player.getId(), game)
-                && player.chooseUse(outcome, "Sacrifice a creature?",
-                "If you don't you lose " + creatureCount + " life",
-                "Yes", "No", source, game)
-                && cost.pay(source, game, source, player.getId(), true)) {
-            return true;
-        }
-        return player.loseLife(creatureCount, game, source, false) > 0;
     }
 }

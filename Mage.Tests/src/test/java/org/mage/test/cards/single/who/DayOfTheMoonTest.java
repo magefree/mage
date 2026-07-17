@@ -2,7 +2,6 @@ package org.mage.test.cards.single.who;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -18,7 +17,6 @@ public class DayOfTheMoonTest extends CardTestPlayerBase {
      */
     private static final String day = "Day of the Moon";
 
-    @Ignore // TODO: goal of #11619 is to fix this nicely
     @Test
     public void test_SimplePlay() {
         addCard(Zone.HAND, playerA, day, 1);

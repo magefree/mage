@@ -15,6 +15,7 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -82,7 +83,7 @@ class NexusOfBecomingEffect extends OneShotEffect {
                 false, null, 3, 3, false
         ).setBecomesArtifact(true)
                 .withAdditionalSubType(SubType.GOLEM)
-                .setSavedPermanent(new PermanentCard(card, source.getControllerId(), game))
+                .setSavedPermanent(new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, card), source.getControllerId(), game))
                 .apply(game, source);
     }
 }

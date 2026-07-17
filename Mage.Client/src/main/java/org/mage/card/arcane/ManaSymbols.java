@@ -81,7 +81,7 @@ public final class ManaSymbols {
             "S", "T", "Q",
             "U", "UB", "UR", "UP", "2U", "CU",
             "W", "WB", "WU", "WP", "2W", "CW",
-            "X", "C", "E", "P", "H",
+            "X", "C", "E", "P", "H", "TK",
             "BGP", "BRP", "GUP", "GWP", "RGP", "RWP", "UBP", "URP", "WBP", "WUP"};
 
     private static final JLabel labelRender = new JLabel(); // render mana text

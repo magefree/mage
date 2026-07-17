@@ -12,8 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -29,9 +28,9 @@ public final class OrganGrinder extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
-        // {tap}, Exile three cards from your graveyard: Target player loses 3 life.
+        // {T}, Exile three cards from your graveyard: Target player loses 3 life.
         Ability ability = new SimpleActivatedAbility(new LoseLifeTargetEffect(3), new TapSourceCost());
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(3, 3, new FilterCard("cards from your graveyard"))));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(3, 3, StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

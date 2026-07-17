@@ -1,27 +1,49 @@
 package mage.cards.a;
 
-import mage.MageInt;
-import mage.constants.Pronoun;
+import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.DiesOneOrMoreTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ExileAndReturnSourceEffect;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
+import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.CatWarrior21Token;
+import mage.players.Player;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetAnyTarget;
+import mage.util.CardUtil;
 
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Susucr
  */
-public final class AjaniNacatlPariah extends CardImpl {
+public final class AjaniNacatlPariah extends TransformingDoubleFacedCard {
 
     public static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.CAT, "other Cats you control");
+    private static final FilterControlledCreaturePermanent nacatlAvengerFilter = new FilterControlledCreaturePermanent(SubType.CAT, "Cat you control");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -29,25 +51,34 @@ public final class AjaniNacatlPariah extends CardImpl {
     }
 
     public AjaniNacatlPariah(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.CAT, SubType.WARRIOR}, "{1}{W}",
+                "Ajani, Nacatl Avenger",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.PLANESWALKER}, new SubType[]{SubType.AJANI}, "RW");
 
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.CAT);
-        this.subtype.add(SubType.WARRIOR);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
-
-        this.secondSideCardClazz = mage.cards.a.AjaniNacatlAvenger.class;
+        this.getLeftHalfCard().setPT(1, 2);
+        this.getRightHalfCard().setStartingLoyalty(3);
 
         // When Ajani, Nacatl Pariah enters the battlefield, create a 2/1 white Cat Warrior creature token.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new CatWarrior21Token())));
+        this.getLeftHalfCard().addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new CatWarrior21Token())));
 
         // Whenever one or more other Cats you control die, you may exile Ajani, then return him to the battlefield transformed under his owner's control.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new DiesOneOrMoreTriggeredAbility(
+        this.getLeftHalfCard().addAbility(new DiesOneOrMoreTriggeredAbility(
                 new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED, Pronoun.HE),
                 filter,
                 true));
+
+        // Ajani, Nacatl Avenger
+        // +2: Put a +1/+1 counter on each Cat you control.
+        this.getRightHalfCard().addAbility(new LoyaltyAbility(
+                new AddCountersAllEffect(CounterType.P1P1.createInstance(), nacatlAvengerFilter), 2
+        ));
+
+        // 0: Create a 2/1 white Car Warrior creature token. When you do, if you control a red permanent other than Ajani, Nacatl Avenger, he deals damage equal to the number of creatures you control to any target.
+        this.getRightHalfCard().addAbility(new LoyaltyAbility(new AjaniNacatlAvengerZeroEffect(), 0));
+
+        // -4: Each opponent chooses an artifact, a creature, an enchantment and a planeswalker from among the nonland permanents they control, then sacrifices the rest.
+        this.getRightHalfCard().addAbility(new LoyaltyAbility(new AjaniNacatlAvengerMinusFourEffect(), -4));
     }
 
     private AjaniNacatlPariah(final AjaniNacatlPariah card) {
@@ -58,4 +89,117 @@ public final class AjaniNacatlPariah extends CardImpl {
     public AjaniNacatlPariah copy() {
         return new AjaniNacatlPariah(this);
     }
+}
+
+class AjaniNacatlAvengerZeroEffect extends OneShotEffect {
+
+    private static final FilterPermanent filter = new FilterPermanent("red permanent other than {this}");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.RED));
+        filter.add(AnotherPredicate.instance);
+    }
+
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, true);
+
+    AjaniNacatlAvengerZeroEffect() {
+        super(Outcome.PutCreatureInPlay);
+        staticText = "Create a 2/1 white Cat Warrior creature token. "
+                + "When you do, if you control a red permanent other than {this}, "
+                + "he deals damage equal to the number of creatures you control to any target.";
+    }
+
+    private AjaniNacatlAvengerZeroEffect(final AjaniNacatlAvengerZeroEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public AjaniNacatlAvengerZeroEffect copy() {
+        return new AjaniNacatlAvengerZeroEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (!new CreateTokenEffect(new CatWarrior21Token()).apply(game, source)) {
+            return false;
+        }
+
+        ReflexiveTriggeredAbility reflexive = new ReflexiveTriggeredAbility(
+                new DamageTargetEffect(CreaturesYouControlCount.PLURAL),
+                false,
+                "When you do, if you control a red permanent other than {this}, "
+                        + "he deals damage equal to the number of creatures you control to any target.",
+                condition
+        );
+        reflexive.addTarget(new TargetAnyTarget());
+        game.fireReflexiveTriggeredAbility(reflexive, source);
+        return true;
+    }
+}
+
+// Inspired by Mythos of Snapdax
+class AjaniNacatlAvengerMinusFourEffect extends OneShotEffect {
+
+    private static final List<CardType> cardTypes = Arrays.asList(
+            CardType.ARTIFACT,
+            CardType.CREATURE,
+            CardType.ENCHANTMENT,
+            CardType.PLANESWALKER
+    );
+
+    AjaniNacatlAvengerMinusFourEffect() {
+        super(Outcome.Benefit);
+        staticText = "Each opponent chooses an artifact, a creature, an enchantment and a planeswalker "
+                + "from among the nonland permanents they control, then sacrifices the rest.";
+    }
+
+    private AjaniNacatlAvengerMinusFourEffect(final AjaniNacatlAvengerMinusFourEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public AjaniNacatlAvengerMinusFourEffect copy() {
+        return new AjaniNacatlAvengerMinusFourEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+
+        List<Player> playerList = game
+                .getOpponents(controller.getId())
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+
+        Set<UUID> toKeep = new HashSet<>();
+        for (Player player : playerList) {
+            for (CardType cardType : cardTypes) {
+                String message = CardUtil.addArticle(cardType.toString());
+                FilterPermanent filter = new FilterNonlandPermanent(message);
+                filter.add(cardType.getPredicate());
+                filter.add(new ControllerIdPredicate(player.getId()));
+                if (game.getBattlefield().count(filter, source.getControllerId(), source, game) == 0) {
+                    continue;
+                }
+                TargetPermanent target = new TargetPermanent(filter);
+                target.withNotTarget(true);
+                player.choose(outcome, target, source, game);
+                toKeep.add(target.getFirstTarget());
+            }
+        }
+
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_NON_LAND, source.getControllerId(), game)) {
+            if (permanent == null || toKeep.contains(permanent.getId()) || !controller.hasOpponent(permanent.getControllerId(), game)) {
+                continue;
+            }
+            permanent.sacrifice(source, game);
+        }
+        return true;
+    }
+
 }

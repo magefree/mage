@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.Effect;
@@ -11,23 +10,18 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
-import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetSacrifice;
+
+import java.util.UUID;
 
 /**
  *
@@ -72,7 +66,7 @@ class DarthTyranusEffect extends OneShotEffect {
 
     DarthTyranusEffect() {
         super(Outcome.Benefit);
-        staticText = "Target player's life total becomes 5. Another target players's life total becomes 30";
+        staticText = "Target player's life total becomes 5. Another target player's life total becomes 30";
     }
 
     private DarthTyranusEffect(final DarthTyranusEffect effect) {

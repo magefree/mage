@@ -5,9 +5,7 @@ import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateRoleAttachedTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.cards.*;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -29,7 +27,7 @@ public final class NotDeadAfterAll extends CardImpl {
         // Until end of turn, target creature you control gains "When this creature dies, return it to the battlefield tapped under its owner's control, then create a Wicked Role token attached to it."
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 new DiesSourceTriggeredAbility(
-                        new NotDeadAfterAllEffect()
+                        new NotDeadAfterAllEffect(), false, SetTargetPointer.CARD
                 ).setTriggerPhrase("When this creature dies, "),
                 Duration.EndOfTurn
         ).setText("until end of turn, target creature you control gains \"When this creature dies, "
@@ -68,23 +66,21 @@ class NotDeadAfterAllEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(source.getSourceId());
-        if (player == null || card == null) {
+        Cards cards = new CardsImpl(getTargetPointer().getTargets(game, source));
+        if (player == null || cards.isEmpty()) {
             return false;
         }
-        if (game.getState().getZone(source.getSourceId()) != Zone.GRAVEYARD) {
-            return false;
+        player.moveCards(cards.getCards(game), Zone.BATTLEFIELD, source, game, true, false, true, null);
+        game.processAction();
+        for (Card card : cards.getCards(game)) {
+            Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+            if (permanent != null) {
+                new CreateRoleAttachedTargetEffect(RoleType.WICKED)
+                        .setTargetPointer(new FixedTarget(permanent, game))
+                        .apply(game, source);
+            }
         }
-
-        player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null);
-        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
-        if (permanent == null) {
-            return false;
-        }
-
-        return new CreateRoleAttachedTargetEffect(RoleType.WICKED)
-                .setTargetPointer(new FixedTarget(permanent, game))
-                .apply(game, source);
+        return true;
     }
 
 }

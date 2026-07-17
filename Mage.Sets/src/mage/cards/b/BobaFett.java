@@ -34,7 +34,7 @@ public final class BobaFett extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());

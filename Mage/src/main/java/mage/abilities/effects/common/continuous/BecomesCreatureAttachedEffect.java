@@ -13,7 +13,7 @@ import mage.game.permanent.token.Token;
 public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
 
     public enum LoseType {
-        NONE, ALL, ALL_BUT_COLOR, ABILITIES, ABILITIES_SUBTYPE, COLOR
+        NONE, ALL, ALL_BUT_COLOR, ABILITIES, ABILITIES_SUBTYPE, COLOR, SUBTYPE
     }
 
     protected Token token;
@@ -53,13 +53,9 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment == null) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
         if (permanent == null) {
-            return true;
+            return false;
         }
         switch (layer) {
             case TypeChangingEffects_4:
@@ -81,6 +77,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                 switch (loseType) {
                     case ALL:
                     case ALL_BUT_COLOR:
+                    case SUBTYPE:
                         permanent.removeAllSubTypes(game);
                         break;
                     case ABILITIES_SUBTYPE:

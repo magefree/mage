@@ -3,6 +3,9 @@ package org.mage.test.utils;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.util.CardUtil;
+
+import java.util.stream.IntStream;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -21,7 +24,7 @@ public class CardUtilTest extends CardTestPlayerBase {
     // MDFC where both sides should be playable
     private static final String birgi = "Birgi, God of Storytelling"; // {2}{R}, frontside of Harnfel
     private static final String harnfel = "Harnfel, Horn of Bounty"; // {4}{R}, backside of Birgi
-
+    private static final String tamiyo = "Tamiyo, Inquisitive Student"; // {U}, TDFC
     /**
      * Test that it will for trigger for discarding a MDFC but will only let you cast the nonland side.
      */
@@ -121,5 +124,60 @@ public class CardUtilTest extends CardTestPlayerBase {
         Assert.assertEquals("12345", CardUtil.substring(str, 7, ending));
         Assert.assertEquals("12345", CardUtil.substring(str, 8, ending));
         Assert.assertEquals("12345", CardUtil.substring(str, 9, ending));
+    }
+
+    /**
+     * Test that it will for trigger for discarding a TDFC but will only let you cast the front side.
+     */
+    @Test
+    public void cantPlayTDFCBackSide() {
+        addCard(Zone.HAND, playerA, changeOfFortune);
+        addCard(Zone.HAND, playerA, tamiyo);
+
+        addCard(Zone.BATTLEFIELD, playerA, oskar);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+
+        skipInitShuffling();
+        setStrictChooseMode(true);
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 4);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, changeOfFortune);
+        setChoice(playerA, "Yes");
+        // only option is to cast front side, so auto chosen
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertPermanentCount(playerA, tamiyo, 1);
+    }
+
+    @Test
+    public void parseCardNumberAsInt() {
+        // digit numbers
+        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("123"));
+        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("123a"));
+        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("123xxx"));
+        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("a123"));
+        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("xxx123"));
+        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("a123a"));
+        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("xxx123xxx"));
+        Assert.assertEquals(123456, CardUtil.parseCardNumberAsInt("xxx123xxx456xxx"));
+        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("-123"));
+        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("xxx-123xxx"));
+
+        // non-digit numbers and sorting
+        IntStream.range(0, 10).forEach(i -> {
+            Assert.assertEquals("non-digit must be stable fake number", CardUtil.parseCardNumberAsInt("abc"), CardUtil.parseCardNumberAsInt("abc"));
+            Assert.assertTrue("non-digit must be > of any digit number", CardUtil.parseCardNumberAsInt("abc") > CardUtil.parseCardNumberAsInt("123"));
+            Assert.assertTrue("non-digit must be > of any digit number", CardUtil.parseCardNumberAsInt("abc") > CardUtil.parseCardNumberAsInt("x456x"));
+        });
+
+        // restricted empty number
+        Assert.assertThrows(IllegalArgumentException.class, () -> CardUtil.parseCardNumberAsInt(""));
+
+        // restricted token's zero number
+        Assert.assertThrows(IllegalArgumentException.class, () -> CardUtil.parseCardNumberAsInt("0"));
+        Assert.assertThrows(IllegalArgumentException.class, () -> CardUtil.parseCardNumberAsInt("000"));
+        Assert.assertThrows(IllegalArgumentException.class, () -> CardUtil.parseCardNumberAsInt("x0x"));
     }
 }

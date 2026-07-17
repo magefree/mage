@@ -2,7 +2,6 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -46,7 +45,8 @@ public final class BurningTreeShaman extends CardImpl {
 class BurningTreeShamanTriggeredAbility extends TriggeredAbilityImpl {
 
     BurningTreeShamanTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(StaticValue.get(1), true, "that player", true));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(1).withTargetDescription("that player"));
+        setTriggerPhrase("Whenever a player activates an ability that isn't a mana ability, ");
     }
 
     private BurningTreeShamanTriggeredAbility(final BurningTreeShamanTriggeredAbility ability) {
@@ -75,8 +75,4 @@ class BurningTreeShamanTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever a player activates an ability that isn't a mana ability, {this} deals 1 damage to that player.";
-    }
 }

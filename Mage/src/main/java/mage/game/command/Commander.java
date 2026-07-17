@@ -52,6 +52,7 @@ public class Commander extends CommandObjectImpl {
                     case MODAL:
                     case MODAL_LEFT:
                     case MODAL_RIGHT:
+                    case TRANSFORMED_LEFT:
                     case ADVENTURE_SPELL:
                         // can be used from command zone
                         if (canUseAbilityFromCommandZone(spellAbility)) {

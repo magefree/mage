@@ -23,7 +23,7 @@ public class EnchantingGraveyardCardsTest extends CardTestPlayerBase {
      * Test that a card in the graveyard can be enchanted
      */
     @Test
-    public void testSpellwaeverVoluteNormal() {
+    public void testSpellweaverVoluteNormal() {
         // Enchant instant card in a graveyard
         // Whenever you cast a sorcery spell, copy the enchanted instant card. You may cast the copy without paying its mana cost.
         // If you do, exile the enchanted card and attach Spellweaver Volute to another instant card in a graveyard.
@@ -58,7 +58,7 @@ public class EnchantingGraveyardCardsTest extends CardTestPlayerBase {
      * switches to a new one
      */
     @Test
-    public void testSpellwaeverVoluteAndSorcery() {
+    public void testSpellweaverVoluteAndSorcery() {
 
         // Enchant instant card in a graveyard
         // Whenever you cast a sorcery spell, copy the enchanted instant card. You may cast the copy without paying its mana cost.
@@ -105,7 +105,7 @@ public class EnchantingGraveyardCardsTest extends CardTestPlayerBase {
      * switches to a new one
      */
     @Test
-    public void testSpellwaeverVoluteAndSorceryWithoutNewTarget() {
+    public void testSpellweaverVoluteAndSorceryWithoutNewTarget() {
 
         // Enchant instant card in a graveyard
         // Whenever you cast a sorcery spell, copy the enchanted instant card. You may cast the copy without paying its mana cost.
@@ -153,7 +153,7 @@ public class EnchantingGraveyardCardsTest extends CardTestPlayerBase {
      * returns to hand, the enchanting ends
      */
     @Test
-    public void testSpellwaeverVoluteAndReturnToHand() {
+    public void testSpellweaverVoluteAndReturnToHand() {
 
         // Enchant instant card in a graveyard
         // Whenever you cast a sorcery spell, copy the enchanted instant card. You may cast the copy without paying its mana cost.

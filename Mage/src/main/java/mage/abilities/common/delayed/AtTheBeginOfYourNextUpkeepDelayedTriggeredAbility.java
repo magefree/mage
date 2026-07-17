@@ -14,6 +14,7 @@ public class AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility extends DelayedTr
 
     public AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(Effect effect) {
         this(effect, Duration.Custom, true);
+        this.setTriggerPhrase("At the beginning of your next upkeep, ");
     }
 
     public AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(Effect effect, Duration duration, boolean triggerOnlyOnce) {

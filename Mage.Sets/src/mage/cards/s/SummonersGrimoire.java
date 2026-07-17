@@ -28,6 +28,7 @@ public final class SummonersGrimoire extends CardImpl {
     public SummonersGrimoire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}{G}");
 
+        this.subtype.add(SubType.BOOK);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Job select
@@ -44,7 +45,7 @@ public final class SummonersGrimoire extends CardImpl {
         this.addAbility(ability);
 
         // Abraxas -- Equip {3}
-        this.addAbility(new EquipAbility(3).withFlavorWord("Abraxas"));
+        this.addAbility(new EquipAbility(3, false).withFlavorWord("Abraxas"));
     }
 
     private SummonersGrimoire(final SummonersGrimoire card) {

@@ -1,20 +1,19 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -22,7 +21,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class LandoCalrissian extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Starship you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Starship creature you control");
 
     static {
         filter.add(SubType.STARSHIP.getPredicate());
@@ -40,9 +39,9 @@ public final class LandoCalrissian extends CardImpl {
         // First Strike
         this.addAbility(FirstStrikeAbility.getInstance());
 
-        // At the beggining of each combat, target Starship you control gets +2/+2 and gains vigilance until end of turn.
+        // At the beggining of each combat, target Starship creature you control gets +2/+2 and gains vigilance until end of turn.
         Effect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
-        effect.setText("target Starship you control gets +2/+2");
+        effect.setText("target Starship creature you control gets +2/+2");
         BeginningOfCombatTriggeredAbility ability = new BeginningOfCombatTriggeredAbility(TargetController.ANY, effect, false);
         effect = new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains vigilance until end of turn");

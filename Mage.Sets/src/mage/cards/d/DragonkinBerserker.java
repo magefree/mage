@@ -13,7 +13,7 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.game.permanent.token.DragonToken2;
+import mage.game.permanent.token.Dragon55Token;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -38,7 +38,7 @@ public final class DragonkinBerserker extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new DragonkinBerserkerEffect()));
 
         // Boast — {4}{R}: Create a 5/5 red Dragon creature token with flying.
-        this.addAbility(new BoastAbility(new CreateTokenEffect(new DragonToken2()), "{4}{R}"));
+        this.addAbility(new BoastAbility(new CreateTokenEffect(new Dragon55Token()), "{4}{R}"));
     }
 
     private DragonkinBerserker(final DragonkinBerserker card) {

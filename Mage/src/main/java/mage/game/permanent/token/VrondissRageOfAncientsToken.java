@@ -1,13 +1,10 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealsCombatDamageTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 public final class VrondissRageOfAncientsToken extends TokenImpl {
 
@@ -21,7 +18,7 @@ public final class VrondissRageOfAncientsToken extends TokenImpl {
         power = new MageInt(5);
         toughness = new MageInt(4);
 
-        this.addAbility(new VrondissRageOfAncientsTokenTriggeredAbility());
+        this.addAbility(new DealsCombatDamageTriggeredAbility(new SacrificeSourceEffect(), false));
     }
 
     private VrondissRageOfAncientsToken(final VrondissRageOfAncientsToken token) {
@@ -30,37 +27,5 @@ public final class VrondissRageOfAncientsToken extends TokenImpl {
 
     public VrondissRageOfAncientsToken copy() {
         return new VrondissRageOfAncientsToken(this);
-    }
-}
-
-class VrondissRageOfAncientsTokenTriggeredAbility extends TriggeredAbilityImpl {
-
-    public VrondissRageOfAncientsTokenTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeSourceEffect(), false);
-    }
-
-    protected VrondissRageOfAncientsTokenTriggeredAbility(final VrondissRageOfAncientsTokenTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public VrondissRageOfAncientsTokenTriggeredAbility copy() {
-        return new VrondissRageOfAncientsTokenTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                || event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getSourceId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "When this creature deals damage, sacrifice it.";
     }
 }

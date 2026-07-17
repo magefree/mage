@@ -44,7 +44,6 @@ public class DuelCommander extends Commander {
         banned.add("Library of Alexandria");
         banned.add("Lion's Eye Diamond");
         banned.add("Lotus Petal");
-        banned.add("Loyal Retainers");
         banned.add("Lutri, the Spellchaser");
         banned.add("Maddening Hex");
         banned.add("Mana Crypt");
@@ -93,8 +92,6 @@ public class DuelCommander extends Commander {
 
         bannedCommander.add("Ajani, Nacatl Pariah");
         bannedCommander.add("Arahbo, Roar of the World");
-        bannedCommander.add("Asmoranomardicadaistinaculdacar");
-        bannedCommander.add("Baral, Chief of Compliance");
         bannedCommander.add("Breya, Etherium Shaper");
         bannedCommander.add("Derevi, Empyrial Tactician");
         bannedCommander.add("Dihada, Binder of Wills");
@@ -102,7 +99,6 @@ public class DuelCommander extends Commander {
         bannedCommander.add("Edric, Spymaster of Trest");
         bannedCommander.add("Emry, Lurker of the Loch");
         bannedCommander.add("Eris, Roar of the Storm");
-        bannedCommander.add("Esior, Wardwing Familiar");
         bannedCommander.add("Ezio Auditore da Firenze");
         bannedCommander.add("Geist of Saint Traft");
         bannedCommander.add("Inalla, Archmage Ritualist");
@@ -116,7 +112,6 @@ public class DuelCommander extends Commander {
         bannedCommander.add("Omnath, Locus of Creation");
         bannedCommander.add("Prime Speaker Vannifar");
         bannedCommander.add("Raffine, Scheming Seer");
-        bannedCommander.add("Rofellos, Llanowar Emissary");
         bannedCommander.add("Shorikai, Genesis Engine");
         bannedCommander.add("Tamiyo, Inquisitive Student");
         bannedCommander.add("Tasigur, the Golden Fang");

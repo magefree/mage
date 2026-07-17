@@ -65,6 +65,7 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
                 objectsToMove.addAll(this.getTargetPointer().getTargets(game, source));
             } else {
                 // issue with Madness keyword  #6889
+                // TODO: fix this bad hack and solve the problem in a better way
                 UUID fixedTargetId = null;
                 for (Effect effect : source.getEffects()) {
                     TargetPointer targetPointerId = effect.getTargetPointer();

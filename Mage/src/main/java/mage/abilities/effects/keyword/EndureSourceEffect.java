@@ -9,6 +9,9 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SpiritXXToken;
+import mage.game.permanent.token.NoFlyingSpiritWhite11Token;
+import mage.game.permanent.token.NoFlyingSpiritWhite22Token;
+import mage.game.permanent.token.NoFlyingSpiritWhite33Token;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -69,6 +72,16 @@ public class EndureSourceEffect extends OneShotEffect {
         )) {
             return permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
         }
-        return new SpiritXXToken(amount).putOntoBattlefield(1, game, source);
+
+        switch (amount) {
+            case 1:
+                return new NoFlyingSpiritWhite11Token().putOntoBattlefield(1, game, source);
+            case 2:
+                return new NoFlyingSpiritWhite22Token().putOntoBattlefield(1, game, source);
+            case 3:
+                return new NoFlyingSpiritWhite33Token().putOntoBattlefield(1, game, source);
+            default:
+                return new SpiritXXToken(amount).putOntoBattlefield(1, game, source);
+        }
     }
 }

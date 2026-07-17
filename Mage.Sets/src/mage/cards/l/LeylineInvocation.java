@@ -19,7 +19,7 @@ public final class LeylineInvocation extends CardImpl {
 
         // Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it, where X is the number of lands you control.
         this.getSpellAbility().addEffect(FractalToken.getEffect(
-                LandsYouControlCount.instance, "Put X +1/+1 counters on it, " +
+                LandsYouControlCount.instance, ". Put X +1/+1 counters on it, " +
                         "where X is the number of lands you control"
         ));
         this.getSpellAbility().addHint(LandsYouControlHint.instance);

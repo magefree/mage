@@ -1,11 +1,13 @@
 package mage.cards.h;
 
-import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneSourceEffect;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 
 import java.util.UUID;
@@ -13,21 +15,29 @@ import java.util.UUID;
 /**
  * @author BetaSteward
  */
-public final class HinterlandHermit extends CardImpl {
+public final class HinterlandHermit extends TransformingDoubleFacedCard {
 
     public HinterlandHermit(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WEREWOLF);
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WEREWOLF}, "{1}{R}",
+                "Hinterland Scourge",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "R"
+        );
 
-        this.secondSideCardClazz = mage.cards.h.HinterlandScourge.class;
-
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        // Hinterland Hermit
+        this.getLeftHalfCard().setPT(2, 1);
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Hinterland Hermit.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new WerewolfFrontTriggeredAbility());
+        this.getLeftHalfCard().addAbility(new WerewolfFrontTriggeredAbility());
+
+        // Hinterland Scourge
+        this.getRightHalfCard().setPT(3, 2);
+
+        // Hinterland Scourge must be blocked if able.
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
+
+        // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Hinterland Scourge.
+        this.getRightHalfCard().addAbility(new WerewolfBackTriggeredAbility());
     }
 
     private HinterlandHermit(final HinterlandHermit card) {

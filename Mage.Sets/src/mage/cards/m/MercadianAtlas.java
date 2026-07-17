@@ -1,26 +1,29 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.watchers.common.PlayLandWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class MercadianAtlas extends CardImpl {
 
     public MercadianAtlas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
+
+        this.subtype.add(SubType.BOOK);
 
         // At the beginning of your end step, if you didn't play a land this turn, you may draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(

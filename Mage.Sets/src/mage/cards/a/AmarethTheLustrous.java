@@ -10,8 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -22,12 +21,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class AmarethTheLustrous extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("another permanent");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public AmarethTheLustrous(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{W}{U}");
@@ -41,7 +34,9 @@ public final class AmarethTheLustrous extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever another permanent you control enters, look at the top card of your library. If it shares a card type with that permanent, you may reveal that card and put it into your hand.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new AmarethTheLustrousEffect(), filter));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+                new AmarethTheLustrousEffect(), StaticFilters.FILTER_ANOTHER_PERMANENT
+        ));
     }
 
     private AmarethTheLustrous(final AmarethTheLustrous card) {

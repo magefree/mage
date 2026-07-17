@@ -6,7 +6,10 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -23,19 +26,25 @@ public class ChoiceCreatureType extends ChoiceImpl {
     }
 
     public ChoiceCreatureType(Game game, Ability source, boolean required, String chooseMessage) {
+        this(game, source, required, chooseMessage, null);
+    }
+
+    public ChoiceCreatureType(Game game, Ability source, boolean required, String chooseMessage, Collection<SubType> subTypes) {
         super(required);
         this.setMessage(chooseMessage);
         MageObject sourceObject = source == null ? null : game.getObject(source);
         if (sourceObject != null) {
             this.setSubMessage(sourceObject.getLogName());
         }
-        this.setSearchEnabled(true);        
+        this.setSearchEnabled(true);
 
         // collect basic info
         // additional info will be added onChooseStart
-        SubType.getCreatureTypes().stream().map(SubType::toString).forEach(value -> {
-            this.withItem(value, value, null, null, null);
-        });
+        ((subTypes == null || subTypes.isEmpty())
+                ? SubType.getCreatureTypes() : subTypes)
+                .stream()
+                .map(SubType::toString)
+                .forEach(value -> this.withItem(value, value, null, null, null));
     }
 
     protected ChoiceCreatureType(final ChoiceCreatureType choice) {

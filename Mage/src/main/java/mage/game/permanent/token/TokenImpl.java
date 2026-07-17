@@ -22,7 +22,6 @@ import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
 import mage.target.Target;
-import org.apache.log4j.Logger;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
@@ -31,8 +30,6 @@ import java.util.*;
  * Each token must have default constructor without params (GUI require for card viewer)
  */
 public abstract class TokenImpl extends MageObjectImpl implements Token {
-
-    private static final Logger logger = Logger.getLogger(MageObjectImpl.class);
 
     protected String description;
     private final ArrayList<UUID> lastAddedTokenIds = new ArrayList<>();
@@ -327,7 +324,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 game.getPermanentsEntering().put(newPermanent.getId(), newPermanent);
                 newPermanent.setTapped(tapped);
 
-                ZoneChangeEvent emptyEvent = new ZoneChangeEvent(newPermanent, newPermanent.getControllerId(), Zone.OUTSIDE, Zone.BATTLEFIELD);
+                ZoneChangeEvent emptyEvent = new ZoneChangeEvent(newPermanent, source, newPermanent.getControllerId(), Zone.OUTSIDE, Zone.BATTLEFIELD);
                 // tokens zcc must simulate card's zcc to keep copied card/spell settings
                 // (example: etb's kicker ability of copied creature spell, see tests with Deathforge Shaman)
                 newPermanent.updateZoneChangeCounter(game, emptyEvent);
@@ -362,7 +359,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 }
 
                 // created token events
-                ZoneChangeEvent zccEvent = new ZoneChangeEvent(permanent, permanent.getControllerId(), Zone.OUTSIDE, Zone.BATTLEFIELD);
+                ZoneChangeEvent zccEvent = new ZoneChangeEvent(permanent, source, permanent.getControllerId(), Zone.OUTSIDE, Zone.BATTLEFIELD);
                 game.addSimultaneousEvent(zccEvent);
                 if (permanent instanceof PermanentToken && created) {
                     game.addSimultaneousEvent(new CreatedTokenEvent(source, (PermanentToken) permanent));
@@ -488,6 +485,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         if (copySourceCard != null) {
             this.copySourceCard = copySourceCard.copy();
         }
+        this.setCopy(copySourceCard != null, copySourceCard);
     }
 
     @Override

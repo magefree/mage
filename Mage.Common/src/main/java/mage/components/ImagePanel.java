@@ -78,6 +78,9 @@ public class ImagePanel extends JPanel {
             case ACTUAL:
                 drawActual(g);
                 break;
+            case COVER:
+                drawCover(g);
+                break;
         }
     }
 
@@ -98,5 +101,26 @@ public class ImagePanel extends JPanel {
         float x = (d.width - image.getWidth(null)) * alignmentX;
         float y = (d.height - image.getHeight(null)) * alignmentY;
         g.drawImage(image, (int) x, (int) y, this);
+    }
+
+    private void drawCover(Graphics g) {
+        Dimension d = getSize();
+        int imageWidth = image.getWidth(null);
+        int imageHeight = image.getHeight(null);
+
+        // Calculate scale to cover the entire panel while maintaining aspect ratio
+        double scaleX = (double) d.width / imageWidth;
+        double scaleY = (double) d.height / imageHeight;
+        double scale = Math.max(scaleX, scaleY);
+
+        // Calculate the scaled dimensions
+        int scaledWidth = (int) (imageWidth * scale);
+        int scaledHeight = (int) (imageHeight * scale);
+
+        // Center the image
+        int x = (d.width - scaledWidth) / 2;
+        int y = (d.height - scaledHeight) / 2;
+
+        g.drawImage(image, x, y, scaledWidth, scaledHeight, null);
     }
 }

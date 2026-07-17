@@ -31,7 +31,7 @@ public class SpaceflightAbility extends EvasionAbility implements MageSingleton 
 
     @Override
     public String getRule() {
-        return "Spaceflight <i>(This creature can only block or be blocked by creatures with spaceflight)</i>";
+        return "spaceflight <i>(This creature can only block or be blocked by creatures with spaceflight.)</i>";
     }
 
     @Override

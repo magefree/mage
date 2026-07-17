@@ -19,7 +19,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.game.permanent.token.HippoToken;
 import mage.target.common.TargetOpponent;
 

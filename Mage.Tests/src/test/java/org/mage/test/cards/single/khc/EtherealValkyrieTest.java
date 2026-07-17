@@ -36,6 +36,8 @@ public class EtherealValkyrieTest extends CardTestPlayerBase {
     private static final String alloyMyr = "Alloy Myr";
     // Land
     private static final String exoticOrchard = "Exotic Orchard";
+    // {U} Creature-Planeswalker TDFC
+    private static final String tamiyo = "Tamiyo, Inquisitive Student";
 
     /**
      * Test that a regular card is playable.
@@ -201,5 +203,28 @@ public class EtherealValkyrieTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
+    }
+
+    /**
+     * Test a TDFC, which should be castable.
+     */
+    @Test
+    public void testTransformingDoubleFacedCard() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.HAND, playerA, etherealValkyrie);
+        addCard(Zone.HAND, playerA, tamiyo);
+
+        setStrictChooseMode(true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, etherealValkyrie);
+        addTarget(playerA, tamiyo);
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {U}");
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+
+        execute();
+        assertPermanentCount(playerA, tamiyo, 1);
     }
 }

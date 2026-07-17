@@ -1,11 +1,13 @@
 package mage.cards.b;
 
-import mage.MageInt;
 import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.DayboundAbility;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.NightboundAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -17,31 +19,47 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class BanebladeScoundrel extends CardImpl {
+public final class BanebladeScoundrel extends TransformingDoubleFacedCard {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature blocking {this}");
 
     static {
         filter.add(BlockingOrBlockedBySourcePredicate.BLOCKING);
     }
 
     public BanebladeScoundrel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.ROGUE, SubType.WEREWOLF}, "{3}{B}",
+                "Baneclaw Marauder",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "B");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.ROGUE);
-        this.subtype.add(SubType.WEREWOLF);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(3);
-        this.secondSideCardClazz = mage.cards.b.BaneclawMarauder.class;
+        // Baneblade Scoundrel
+        this.getLeftHalfCard().setPT(4, 3);
 
         // Whenever Baneblade Scoundrel becomes blocked, each creature blocking it gets -1/-1 until end of turn.
-        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new BoostAllEffect(
+        this.getLeftHalfCard().addAbility(new BecomesBlockedSourceTriggeredAbility(new BoostAllEffect(
                 -1, -1, Duration.EndOfTurn, filter, false
         ).setText("each creature blocking it gets -1/-1 until end of turn"), false));
 
         // Daybound
-        this.addAbility(new DayboundAbility());
+        this.getLeftHalfCard().addAbility(new DayboundAbility());
+
+        // Baneclaw Marauder
+        this.getRightHalfCard().setPT(5, 4);
+
+        // Whenever Baneclaw Marauder becomes blocked, each creature blocking it gets -1/-1 until end of turn.
+        this.getRightHalfCard().addAbility(new BecomesBlockedSourceTriggeredAbility(new BoostAllEffect(
+                -1, -1, Duration.EndOfTurn, filter, false
+        ).setText("each creature blocking it gets -1/-1 until end of turn"), false));
+
+        // Whenever a creature blocking Baneclaw Marauder dies, its controller loses 1 life.
+        this.getRightHalfCard().addAbility(new DiesCreatureTriggeredAbility(
+                new LoseLifeTargetControllerEffect(1)
+                        .setText("that creature's controller loses 1 life"),
+                false, filter, true
+        ));
+
+        // Nightbound
+        this.getRightHalfCard().addAbility(new NightboundAbility());
     }
 
     private BanebladeScoundrel(final BanebladeScoundrel card) {

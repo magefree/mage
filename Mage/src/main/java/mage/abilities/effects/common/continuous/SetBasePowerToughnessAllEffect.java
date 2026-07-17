@@ -34,6 +34,10 @@ public class SetBasePowerToughnessAllEffect extends ContinuousEffectImpl {
         this(StaticValue.get(power), StaticValue.get(toughness), duration, filter);
     }
 
+    public SetBasePowerToughnessAllEffect(DynamicValue stats, Duration duration, FilterPermanent filter) {
+        this(stats, stats, duration, filter);
+    }
+
     public SetBasePowerToughnessAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterPermanent filter) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         this.power = power;

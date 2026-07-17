@@ -11,7 +11,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -62,7 +61,7 @@ class AetherSnapEffect extends OneShotEffect {
         }
         Cards tokens = new CardsImpl();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            if (permanent instanceof PermanentToken) {
+            if (permanent.isToken()) {
                 tokens.add(permanent);
             }
             permanent.removeAllCounters(source, game);

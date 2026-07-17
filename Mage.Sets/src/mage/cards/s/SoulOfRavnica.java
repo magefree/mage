@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import mage.MageInt;
@@ -6,7 +5,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DrawCardForEachColorAmongControlledPermanentsEffect;
+import mage.abilities.dynamicvalue.common.ColorsAmongControlledPermanentsCount;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,13 +17,12 @@ import mage.constants.Zone;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class SoulOfRavnica extends CardImpl {
 
     public SoulOfRavnica(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(6);
@@ -33,10 +32,11 @@ public final class SoulOfRavnica extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {5}{U}{U}: Draw a card for each color among permanents you control.
-        this.addAbility(new SimpleActivatedAbility(new DrawCardForEachColorAmongControlledPermanentsEffect(), new ManaCostsImpl<>("{5}{U}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new DrawCardSourceControllerEffect(ColorsAmongControlledPermanentsCount.ALL_PERMANENTS), new ManaCostsImpl<>("{5}{U}{U}"))
+                .addHint(ColorsAmongControlledPermanentsCount.ALL_PERMANENTS.getHint()));
 
         // {5}{U}{U}, Exile Soul of Ravnica from your graveyard: Draw a card for each color among permanents you control.
-        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new DrawCardForEachColorAmongControlledPermanentsEffect(), new ManaCostsImpl<>("{5}{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new DrawCardSourceControllerEffect(ColorsAmongControlledPermanentsCount.ALL_PERMANENTS), new ManaCostsImpl<>("{5}{U}{U}"));
         ability.addCost(new ExileSourceFromGraveCost());
         this.addAbility(ability);
     }

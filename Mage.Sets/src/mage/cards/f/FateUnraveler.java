@@ -24,7 +24,7 @@ public final class FateUnraveler extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever an opponent draws a card, Fate Unraveler deals 1 damage to that player.
-        this.addAbility(new DrawCardOpponentTriggeredAbility(new DamageTargetEffect(1, true, "that player"), false, true));
+        this.addAbility(new DrawCardOpponentTriggeredAbility(new DamageTargetEffect(1).withTargetDescription("that player"), false, true));
     }
 
     private FateUnraveler(final FateUnraveler card) {

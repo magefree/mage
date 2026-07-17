@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.command.emblems.GarrukCallerOfBeastsEmblem;
@@ -37,7 +38,7 @@ public final class GarrukCallerOfBeasts extends CardImpl {
         this.setStartingLoyalty(4);
 
         // +1: Reveal the top 5 cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.
-        this.addAbility(new LoyaltyAbility(new RevealLibraryPutIntoHandEffect(5, new FilterCreatureCard("creature cards"), Zone.LIBRARY), 1));
+        this.addAbility(new LoyaltyAbility(new RevealLibraryPutIntoHandEffect(5, StaticFilters.FILTER_CARD_CREATURES, Zone.LIBRARY), 1));
 
         // -3: You may put a green creature card from your hand onto the battlefield.
         this.addAbility(new LoyaltyAbility(new PutCardFromHandOntoBattlefieldEffect(filterGreenCreature), -3));

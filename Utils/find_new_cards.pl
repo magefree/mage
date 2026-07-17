@@ -4,9 +4,11 @@
 
 use strict;
 use Data::Dumper;
+use File::Find qw(find);
+use File::Spec;
 
 my $addedCards;
-my $GIT_CMD = "git.exe";
+my $GIT_CMD = $ENV{GIT_CMD} || ($^O eq 'MSWin32' ? 'git.exe' : 'git');
 
 my $text = `\"$GIT_CMD\" tag`;
 print "Assuming the tag command is on: \"$GIT_CMD\" tag\n";
@@ -56,17 +58,26 @@ chomp $cmd;
 my %cn_classes;
 sub read_all_card_names
 {
-    print ("find \"add\" ..\\Mage.Sets\\src\\mage\\sets\\*.java\n");
-    my $all_cards = `find \"add\" ..\\Mage.Sets\\src\\mage\\sets\\*.java`;
-    my @cards = split /\n/, $all_cards;
-    my $card;
-    foreach $card (sort @cards)
-    {
-        if ($card =~ m/.*SetCardInfo."([^"]+)".*\.([^\.]+).class/)
+    my $sets_path = File::Spec->catdir('..', 'Mage.Sets', 'src', 'mage', 'sets');
+    print ("Scanning $sets_path for SetCardInfo entries\n");
+
+    find(
         {
-            $cn_classes {$2} = $1;
-        }
-    }
+            no_chdir => 1,
+            wanted => sub {
+                return unless -f $_ && /\.java\z/;
+
+                open my $card_fh, '<', $_ or return;
+                while (my $card = <$card_fh>) {
+                    if ($card =~ m/.*SetCardInfo\("([^"]+)".*\.([^\.]+)\.class/) {
+                        $cn_classes {$2} = $1;
+                    }
+                }
+                close $card_fh;
+            }
+        },
+        $sets_path
+    );
 }
 read_all_card_names();
 
@@ -76,19 +87,12 @@ sub get_name_of_card_from_class
     if ($line =~ m/Mage.Sets.*[\/\\]([^\/\\]+)\.java/img)
     {
         my $class_name = $1;
-        my $card_name = $class_name;
-        if (exists ($cn_classes {$card_name}))
+        if (exists ($cn_classes {$class_name}))
         {
-            return ($cn_classes {$card_name});
+            return ($cn_classes {$class_name});
         }
-        $card_name =~ s/(.)([A-Z])/$1 $2/g;
-        $card_name =~ s/\d//g;
-        $card_name =~ s/ The / the /g;
-        $card_name =~ s/ Of / of /g;
-        $card_name =~ s/ To / to /g;
-        $card_name =~ s/ And / and /g;
-        $card_name =~ s/ For / for /g;
-        return $card_name;
+        # card class not found in SetCardInfo
+        return "UNKNOWN_CARD_OR_WITHOUT_SET_$class_name";
     }
     return "";
 }
@@ -178,13 +182,13 @@ if (exists ($new_order{$cmd}))
 				$set = $setname;
                 #print ($line, " in ", $setname, "\n");
             }
-			
+
 			my $cards = $cards_by_sets{$set};
 			if(!$cards){$cards=();$cards_by_sets{$set} = \@{$cards};}
 			push @{$cards}, $card;
         }
     }
-	
+
 	# print in markdown format for release notes
 	print ("\n\n\n");
 	my $set;

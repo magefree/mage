@@ -106,60 +106,55 @@ class EaterOfVirtueGainAbilityAttachedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent eaterOfVirtue = game.getPermanent(source.getSourceId());
-        if (eaterOfVirtue != null
-                && eaterOfVirtue.getAttachedTo() != null) {
-            Permanent permanent = game.getPermanent(eaterOfVirtue.getAttachedTo());
-            if (permanent != null) {
-                ExileZone exileZone = game.getState().getExile().getExileZone(CardUtil.getExileZoneId(source.getSourceId().toString() + "cards exiled by Eater of Virtue", game));
-                if (exileZone != null && !exileZone.isEmpty()) {
-                    Set<Card> cardsInExile = exileZone.getCards(game);
-                    for (Card card : cardsInExile) {
-                        for (Ability a : card.getAbilities()) {
-                            if (a instanceof FlyingAbility) {
-                                permanent.addAbility(a, source.getSourceId(), game);
-                            }
-                            if (a instanceof FirstStrikeAbility) {
-                                permanent.addAbility(a, source.getSourceId(), game);
-                            }
-                            if (a instanceof DoubleStrikeAbility) {
-                                permanent.addAbility(a, source.getSourceId(), game);
-                            }
-                            if (a instanceof DeathtouchAbility) {
-                                permanent.addAbility(a, source.getSourceId(), game);
-                            }
-                            if (a instanceof HasteAbility) {
-                                permanent.addAbility(a, source.getSourceId(), game);
-                            }
-                            if (a instanceof HexproofAbility) {
-                                permanent.addAbility(a, source.getSourceId(), game);
-                            }
-                            if (a instanceof IndestructibleAbility) {
-                                permanent.addAbility(a, source.getSourceId(), game);
-                            }
-                            if (a instanceof LifelinkAbility) {
-                                permanent.addAbility(a, source.getSourceId(), game);
-                            }
-                            if (a instanceof MenaceAbility) {
-                                permanent.addAbility(a, source.getSourceId(), game);
-                            }
-                            if (a instanceof ProtectionAbility) {
-                                permanent.addAbility(a, source.getSourceId(), game);
-                            }
-                            if (a instanceof IndestructibleAbility) {
-                                permanent.addAbility(a, source.getSourceId(), game);
-                            }
-                            if (a instanceof ReachAbility) {
-                                permanent.addAbility(a, source.getSourceId(), game);
-                            }
-                            if (a instanceof TrampleAbility) {
-                                permanent.addAbility(a, source.getSourceId(), game);
-                            }
-                            if (a instanceof VigilanceAbility) {
-                                permanent.addAbility(a, source.getSourceId(), game);
-                            }
-                        }
-                    }
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
+        ExileZone exileZone = game.getState().getExile().getExileZone(CardUtil.getExileZoneId(source.getSourceId().toString() + "cards exiled by Eater of Virtue", game));
+        if (permanent == null || exileZone == null || exileZone.isEmpty()) {
+            return false;
+        }
+        Set<Card> cardsInExile = exileZone.getCards(game);
+        for (Card card : cardsInExile) {
+            for (Ability a : card.getAbilities()) {
+                if (a instanceof FlyingAbility) {
+                    permanent.addAbility(a, source.getSourceId(), game);
+                }
+                if (a instanceof FirstStrikeAbility) {
+                    permanent.addAbility(a, source.getSourceId(), game);
+                }
+                if (a instanceof DoubleStrikeAbility) {
+                    permanent.addAbility(a, source.getSourceId(), game);
+                }
+                if (a instanceof DeathtouchAbility) {
+                    permanent.addAbility(a, source.getSourceId(), game);
+                }
+                if (a instanceof HasteAbility) {
+                    permanent.addAbility(a, source.getSourceId(), game);
+                }
+                if (a instanceof HexproofAbility) {
+                    permanent.addAbility(a, source.getSourceId(), game);
+                }
+                if (a instanceof IndestructibleAbility) {
+                    permanent.addAbility(a, source.getSourceId(), game);
+                }
+                if (a instanceof LifelinkAbility) {
+                    permanent.addAbility(a, source.getSourceId(), game);
+                }
+                if (a instanceof MenaceAbility) {
+                    permanent.addAbility(a, source.getSourceId(), game);
+                }
+                if (a instanceof ProtectionAbility) {
+                    permanent.addAbility(a, source.getSourceId(), game);
+                }
+                if (a instanceof IndestructibleAbility) {
+                    permanent.addAbility(a, source.getSourceId(), game);
+                }
+                if (a instanceof ReachAbility) {
+                    permanent.addAbility(a, source.getSourceId(), game);
+                }
+                if (a instanceof TrampleAbility) {
+                    permanent.addAbility(a, source.getSourceId(), game);
+                }
+                if (a instanceof VigilanceAbility) {
+                    permanent.addAbility(a, source.getSourceId(), game);
                 }
             }
         }

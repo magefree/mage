@@ -35,7 +35,8 @@ public final class TIEBomber extends CardImpl {
 
         // {1}: TIE Bomber loses Spaceflight until end od turn. Activate this ability only during combat.
         this.addAbility(new ActivateIfConditionActivatedAbility(
-                new LoseAbilitySourceEffect(SpaceflightAbility.getInstance(), Duration.EndOfTurn),
+                new LoseAbilitySourceEffect(SpaceflightAbility.getInstance(), Duration.EndOfTurn)
+                        .setText("{this} loses spaceflight until end of turn"),
                 new GenericManaCost(1), condition
         ));
     }

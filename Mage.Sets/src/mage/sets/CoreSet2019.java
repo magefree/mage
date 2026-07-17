@@ -220,7 +220,6 @@ public final class CoreSet2019 extends ExpansionSet {
         cards.add(new SetCardInfo("Mystic Archaeologist", 63, Rarity.RARE, mage.cards.m.MysticArchaeologist.class));
         cards.add(new SetCardInfo("Naturalize", 190, Rarity.COMMON, mage.cards.n.Naturalize.class));
         cards.add(new SetCardInfo("Nexus of Fate", 306, Rarity.MYTHIC, mage.cards.n.NexusOfFate.class));
-        cards.add(new SetCardInfo("Nicol Bolas, the Arisen", 218, Rarity.MYTHIC, mage.cards.n.NicolBolasTheArisen.class));
         cards.add(new SetCardInfo("Nicol Bolas, the Ravager", 218, Rarity.MYTHIC, mage.cards.n.NicolBolasTheRavager.class));
         cards.add(new SetCardInfo("Nightmare's Thirst", 111, Rarity.UNCOMMON, mage.cards.n.NightmaresThirst.class));
         cards.add(new SetCardInfo("Novice Knight", 30, Rarity.UNCOMMON, mage.cards.n.NoviceKnight.class));

@@ -19,7 +19,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.TreasureToken;
 import mage.watchers.Watcher;
 
@@ -107,9 +106,9 @@ class GadrakTheCrownScourgeWatcher extends Watcher {
         }
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()
-                && zEvent.getTarget() != null
+                && zEvent.isPermanentMoved()
                 && zEvent.getTarget().isCreature(game)
-                && !(zEvent.getTarget() instanceof PermanentToken)) {
+                && !zEvent.getTarget().isToken()) {
             diedThisTurn++;
         }
     }

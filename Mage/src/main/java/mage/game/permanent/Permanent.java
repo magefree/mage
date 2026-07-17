@@ -5,9 +5,12 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Zone;
+import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.GameState;
+import mage.game.stack.Spell;
 import mage.util.CardUtil;
 
 import java.util.List;
@@ -55,6 +58,16 @@ public interface Permanent extends Card, Controllable {
 
     int getTransformCount();
 
+    boolean mutate(Card mutation, Spell source, Game game);
+
+    int getMutateCount();
+
+    List<UUID> getMutateObjects();
+
+    List<UUID> getMutateForView();
+
+    boolean isMutatedOver();
+
     boolean isPhasedIn();
 
     boolean isPhasedOutIndirectly();
@@ -66,6 +79,8 @@ public interface Permanent extends Card, Controllable {
     boolean phaseOut(Game game);
 
     boolean phaseOut(Game game, boolean indirectPhase);
+
+    boolean isToken();
 
     boolean isMonstrous();
 
@@ -82,6 +97,10 @@ public interface Permanent extends Card, Controllable {
     boolean isPrototyped();
 
     void setPrototyped(boolean value);
+
+    boolean isPrepared();
+
+    void setPrepared(boolean prepared, Game game);
 
     int getClassLevel();
 
@@ -108,6 +127,12 @@ public interface Permanent extends Card, Controllable {
     void setCanBeSacrificed(boolean canBeSacrificed);
 
     boolean canBeSacrificed();
+
+    boolean canHaveAnyCounterAdded(Game game, Ability source);
+
+    boolean canHaveCounterAdded(Counter counter, Game game, Ability source);
+
+    boolean canHaveCounterAdded(CounterType counterType, Game game, Ability source);
 
     void setCardNumber(String cid);
 
@@ -223,7 +248,10 @@ public interface Permanent extends Card, Controllable {
 
     boolean fight(Permanent fightTarget, Ability source, Game game);
 
-    boolean fight(Permanent fightTarget, Ability source, Game game, boolean batchTrigger);
+    /**
+     * Resolves a fight and returns the amount of excess damage dealt to fightTarget
+     */
+    int fightWithExcess(Permanent fightTarget, Ability source, Game game, boolean batchTrigger);
 
     boolean entersBattlefield(Ability source, Game game, Zone fromZone, boolean fireEvent);
 
@@ -283,9 +311,19 @@ public interface Permanent extends Card, Controllable {
 
     int getBlocking();
 
-    void setAttacking(boolean attacking);
+    void setAttacking(MageObjectReference defender);
+
+    MageObjectReference getAttacking();
 
     void setBlocking(int blocking);
+
+    void addBlocking(UUID attackerId, Game game);
+
+    void removeBlocking(UUID attackerId, Game game);
+
+    void clearBlocking();
+
+    Set<MageObjectReference> getBlockingRefs();
 
     int getMaxBlocks();
 
@@ -346,6 +384,8 @@ public interface Permanent extends Card, Controllable {
      */
     boolean canUseActivatedAbilities(Game game);
 
+    boolean removeFromCombat(Game game);
+
     /**
      * Removes this permanent from combat
      *
@@ -354,8 +394,6 @@ public interface Permanent extends Card, Controllable {
      *                  false if removed because it left the battlefield
      * @return true if permanent was attacking or blocking
      */
-    boolean removeFromCombat(Game game);
-
     boolean removeFromCombat(Game game, boolean withEvent);
 
     boolean isDeathtouched();
@@ -420,23 +458,24 @@ public interface Permanent extends Card, Controllable {
     void clearConnectedCards(String key);
 
     /**
-     * Sets paired card.
-     *
-     * @param pairedCard
+     * For soulbond ability, sets this permanent paired with another.
+     * Always call it twice for both permanents to pair with each other.
      */
-    void setPairedCard(MageObjectReference pairedCard);
+    void setPairedWith(Permanent permanent, Game game);
 
     /**
-     * Gets paired card. Can return null.
-     *
-     * @return
+     * Returns a MageObjectReference referring to the permanent this permanent is paired with,
+     * or null if unpaired
      */
-    MageObjectReference getPairedCard();
+    MageObjectReference getPairedMOR();
 
     /**
-     * Makes permanent paired with no other permanent.
+     * 702.95e. A paired creature becomes unpaired if any of the following occur:
+     * another player gains control of it or the creature it's paired with;
+     * it or the creature it's paired with stops being a creature;
+     * or it or the creature it's paired with leaves the battlefield.
      */
-    void clearPairedCard();
+    void setUnpaired();
 
     void addBandedCard(UUID bandedCard);
 
@@ -473,6 +512,25 @@ public interface Permanent extends Card, Controllable {
     boolean isHarnessed();
 
     void setHarnessed(boolean value);
+
+    boolean wasRoomUnlockedOnCast();
+
+    /**
+     * used to reset the locked status of a room. Only used when copying a room
+     * or creating a token copy of a room permanent. Could most likely be removed
+     * after a designation class added.
+     */
+    void resetLockedStatus();
+
+    boolean isLeftDoorUnlocked();
+
+    boolean isRightDoorUnlocked();
+
+    boolean unlockRoomOnCast(Game game);
+
+    boolean unlockDoor(Game game, Ability source, boolean isLeftDoor);
+
+    boolean lockDoor(Game game, Ability source, boolean isLeftDoor);
 
     @Override
     Permanent copy();

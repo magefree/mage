@@ -1,13 +1,12 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CopyTargetStackObjectEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -34,10 +33,7 @@ public final class PeterParkersCamera extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // This artifact enters with three film counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.FILM.createInstance(3)),
-                "with three film counters on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.FILM.createInstance(3)));
 
         // {2}, {T}, Remove a film counter from this artifact: Copy target activated or triggered ability you control. You may choose new targets for the copy.
         Ability ability = new SimpleActivatedAbility(new CopyTargetStackObjectEffect(), new GenericManaCost(2));

@@ -1,11 +1,11 @@
 package mage.cards.l;
 
-import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.keyword.DayboundAbility;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.NightboundAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
@@ -16,25 +16,38 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class LambholtRaconteur extends CardImpl {
+public final class LambholtRaconteur extends TransformingDoubleFacedCard {
 
     public LambholtRaconteur(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WEREWOLF}, "{3}{R}",
+                "Lambholt Ravager",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "R"
+        );
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WEREWOLF);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(4);
-        this.secondSideCardClazz = mage.cards.l.LambholtRavager.class;
+        // Lambholt Raconteur
+        this.getLeftHalfCard().setPT(2, 4);
 
         // Whenever you cast a noncreature spell, Lambholt Raconteur deals 1 damage to each opponent.
-        this.addAbility(new SpellCastControllerTriggeredAbility(
+        this.getLeftHalfCard().addAbility(new SpellCastControllerTriggeredAbility(
                 new DamagePlayersEffect(1, TargetController.OPPONENT),
                 StaticFilters.FILTER_SPELL_A_NON_CREATURE, false
         ));
 
         // Daybound
-        this.addAbility(new DayboundAbility());
+        this.getLeftHalfCard().addAbility(new DayboundAbility());
+
+        // Lambholt Ravager
+        this.getRightHalfCard().setPT(4, 4);
+
+        // Whenever you cast a noncreature spell, Lambholt Ravager deals 2 damage to each opponent.
+        this.getRightHalfCard().addAbility(new SpellCastControllerTriggeredAbility(
+                new DamagePlayersEffect(2, TargetController.OPPONENT),
+                StaticFilters.FILTER_SPELL_A_NON_CREATURE, false
+        ));
+
+        // Nightbound
+        this.getRightHalfCard().addAbility(new NightboundAbility());
     }
 
     private LambholtRaconteur(final LambholtRaconteur card) {

@@ -2,9 +2,7 @@ package mage.cards.p;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.keyword.EntwineAbility;
@@ -31,16 +29,11 @@ public final class PromiseOfPower extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(1);
 
         // - You draw five cards and you lose 5 life.
-        Effect effect = new DrawCardSourceControllerEffect(5);
-        effect.setText("You draw five cards");
-        this.getSpellAbility().addEffect(effect);
-        effect = new LoseLifeSourceControllerEffect(5);
-        effect.setText("and you lose 5 life");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(5, true));
+        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(5).concatBy("and"));
 
         // - Create an X/X black Demon creature token with flying, where X is the number of cards in your hand.
-        Mode mode = new Mode(new PromiseOfPowerEffect());
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().getModes().addMode(new Mode(new PromiseOfPowerEffect()));
 
         // Entwine {4}
         this.addAbility(new EntwineAbility("{4}"));
@@ -70,10 +63,7 @@ class PromiseOfPowerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            return new CreateTokenEffect(new DemonFlyingToken(controller.getHand().size())).apply(game, source);
-        }
-        return false;
+        return controller != null && new DemonFlyingToken(controller.getHand().size()).putOntoBattlefield(1, game, source);
     }
 
     @Override

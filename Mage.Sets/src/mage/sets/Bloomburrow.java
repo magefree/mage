@@ -20,7 +20,7 @@ public final class Bloomburrow extends ExpansionSet {
         this.blockName = "Bloomburrow"; // for sorting in GUI
         this.rotationSet = true;
 
-        this.enablePlayBooster(Integer.MAX_VALUE);
+        this.enablePlayBooster(336);
 
         //cards.add(new SetCardInfo("A-Heartfire Hero", "A-138", Rarity.UNCOMMON, mage.cards.a.AHeartfireHero.class));
         cards.add(new SetCardInfo("Agate Assault", 122, Rarity.COMMON, mage.cards.a.AgateAssault.class));

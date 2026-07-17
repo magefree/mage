@@ -251,4 +251,53 @@ public class DemonOfFatesDesignTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Absolute Law", 1);
         assertLife(playerA, 20 - 3 - 2);
     }
+
+    // https://github.com/magefree/mage/issues/14571
+    @Test
+    public void testNoCastFromGraveyard() {
+        addCard(Zone.BATTLEFIELD, playerA, demon);
+        addCard(Zone.GRAVEYARD, playerA, "Glorious Anthem");
+
+        checkPlayableAbility("playable", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Glorious Anthem", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+    }
+
+    @Test
+    public void testYesCastFromGraveyard() {
+        addCard(Zone.BATTLEFIELD, playerA, demon);
+        addCard(Zone.GRAVEYARD, playerA, "Glorious Anthem");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.HAND, playerA, "Yawgmoth's Will");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Yawgmoth's Will", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glorious Anthem");
+        setChoice(playerA, "Cast with alternative cost: Pay 3 life");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Glorious Anthem", 1);
+        assertLife(playerA, 17);
+    }
+
+    // https://github.com/magefree/mage/issues/14572
+    @Test
+    public void testCanCastTransforming() {
+        addCard(Zone.BATTLEFIELD, playerA, demon);
+        addCard(Zone.HAND, playerA, "The Legend of Kyoshi");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Legend of Kyoshi");
+        setChoice(playerA, "Cast with alternative cost: Pay 6 life");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "The Legend of Kyoshi", 1);
+        assertLife(playerA, 14);
+    }
 }

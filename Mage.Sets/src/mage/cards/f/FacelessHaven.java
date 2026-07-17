@@ -1,6 +1,5 @@
 package mage.cards.f;
 
-import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
@@ -11,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 import java.util.UUID;
 
@@ -30,7 +29,9 @@ public final class FacelessHaven extends CardImpl {
 
         // {S}{S}{S}: Faceless Haven becomes a 4/3 creature with vigilance and all creature types until end of turn. It's still a land.
         this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
-                new FacelessHavenToken(), CardType.LAND, Duration.EndOfTurn
+            new CreatureToken(4, 3, "4/3 creature with vigilance and all creature types")
+                .withAbility(VigilanceAbility.getInstance()).withAllCreatureTypes(true),
+            CardType.LAND, Duration.EndOfTurn
         ).setText("{this} becomes a 4/3 creature with vigilance and all creature types until end of turn. It's still a land"), new ManaCostsImpl<>("{S}{S}{S}")));
     }
 
@@ -41,25 +42,5 @@ public final class FacelessHaven extends CardImpl {
     @Override
     public FacelessHaven copy() {
         return new FacelessHaven(this);
-    }
-}
-
-class FacelessHavenToken extends TokenImpl {
-
-    FacelessHavenToken() {
-        super("", "4/3 creature with vigilance and all creature types");
-        cardType.add(CardType.CREATURE);
-        subtype.setIsAllCreatureTypes(true);
-        power = new MageInt(4);
-        toughness = new MageInt(3);
-        addAbility(VigilanceAbility.getInstance());
-    }
-
-    private FacelessHavenToken(final FacelessHavenToken token) {
-        super(token);
-    }
-
-    public FacelessHavenToken copy() {
-        return new FacelessHavenToken(this);
     }
 }

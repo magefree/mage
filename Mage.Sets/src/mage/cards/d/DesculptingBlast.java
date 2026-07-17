@@ -9,7 +9,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.DroneToken2;
+import mage.game.permanent.token.DroneFlyingToken;
 import mage.players.Player;
 import mage.target.common.TargetNonlandPermanent;
 
@@ -66,7 +66,7 @@ class DesculptingBlastEffect extends OneShotEffect {
         boolean flag = permanent.isAttacking();
         player.moveCards(permanent, Zone.HAND, source, game);
         if (flag) {
-            new DroneToken2().putOntoBattlefield(1, game, source);
+            new DroneFlyingToken().putOntoBattlefield(1, game, source);
         }
         return true;
     }

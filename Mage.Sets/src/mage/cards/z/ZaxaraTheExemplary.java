@@ -113,8 +113,7 @@ class ZaxaraTheExemplaryHydraTokenEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Player controller = game.getPlayer(source.getControllerId());
-        if (player != null && controller != null) {
+        if (player != null) {
             Object needObject = game.getState().getValue(source.getSourceId() + ZaxaraTheExemplary.needPrefix);
 
             // create token

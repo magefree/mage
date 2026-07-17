@@ -20,12 +20,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
-
-import static mage.constants.Duration.WhileControlled;
-import static mage.constants.SagaChapter.CHAPTER_I;
 
 /**
  * @author Cguy7777
@@ -58,8 +54,8 @@ public final class Vault87ForcedEvolution extends CardImpl {
         // I -- Gain control of target non-Mutant creature for as long as you control Vault 87.
         sagaAbility.addChapterEffect(
                 this,
-                CHAPTER_I,
-                new GainControlTargetEffect(WhileControlled),
+                SagaChapter.CHAPTER_I,
+                new GainControlTargetEffect(Duration.WhileControlled),
                 new TargetPermanent(filterNonMutant));
 
         // II -- Put a +1/+1 counter on target creature you control. It becomes a Mutant in addition to its other types.

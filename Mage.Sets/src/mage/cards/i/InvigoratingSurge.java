@@ -21,8 +21,8 @@ public final class InvigoratingSurge extends CardImpl {
         // Put a +1/+1 counter on target creature you control, then double the number of +1/+1 counters on that creature.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         this.getSpellAbility().addEffect(new DoubleCountersTargetEffect(CounterType.P1P1)
-                .setText(", then double the number of +1/+1 counters on that creature")
-        );
+                .withTargetDescription("that creature")
+                .concatBy(", then"));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 

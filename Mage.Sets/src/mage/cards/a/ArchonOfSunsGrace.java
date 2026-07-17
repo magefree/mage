@@ -14,7 +14,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.permanent.token.PegasusToken2;
+import mage.game.permanent.token.Pegasus22Token;
 
 import java.util.UUID;
 
@@ -46,7 +46,7 @@ public final class ArchonOfSunsGrace extends CardImpl {
 
         // Constellation—Whenever an enchantment you control enters, create a 2/2 white Pegasus creature token with flying.
         this.addAbility(new ConstellationAbility(
-                new CreateTokenEffect(new PegasusToken2()), false, false
+                new CreateTokenEffect(new Pegasus22Token()), false, false
         ));
     }
 

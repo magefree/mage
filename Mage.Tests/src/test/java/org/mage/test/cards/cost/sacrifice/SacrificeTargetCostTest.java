@@ -1,13 +1,7 @@
 package org.mage.test.cards.cost.sacrifice;
 
-import mage.abilities.common.LicidAbility;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.keyword.HasteAbility;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -124,7 +118,7 @@ public class SacrificeTargetCostTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Volrath's Curse");
         addTarget(playerA, "Memnarch");
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Sacrifice a ", "Volrath's Curse");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Sacrifice a ");
         setChoice(playerB, "Memnite");
 
         setStrictChooseMode(true);

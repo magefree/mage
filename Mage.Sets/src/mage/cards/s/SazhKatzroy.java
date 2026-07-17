@@ -54,7 +54,8 @@ public final class SazhKatzroy extends CardImpl {
         // Whenever Sazh Katzroy attacks, put counter on target creature, then double the number of +1/+1 counters on that creature.
         Ability ability = new AttacksTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         ability.addEffect(new DoubleCountersTargetEffect(CounterType.P1P1)
-                .setText(", then double the number of +1/+1 counters on that creature"));
+                .withTargetDescription("that creature")
+                .concatBy(", then"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

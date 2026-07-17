@@ -1,14 +1,14 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -32,11 +32,10 @@ public final class SafeHaven extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, you may sacrifice Safe Haven. If you do, return each card exiled with Safe Haven to the battlefield under its owner's control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DoIfCostPaid(new ReturnFromExileEffect(
-                        Zone.BATTLEFIELD, "return each card exiled with " +
-                        "{this} to the battlefield under its owner's control"
-                ), new SacrificeSourceCost())
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(
+                new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD)
+                        .setText("return each card exiled with {this} to the battlefield under its owner's control"),
+                new SacrificeSourceCost())
         ));
     }
 

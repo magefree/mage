@@ -46,7 +46,7 @@ public final class RagnarokDivineDeliverance extends MeldCard {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());

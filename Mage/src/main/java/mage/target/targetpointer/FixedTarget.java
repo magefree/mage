@@ -165,10 +165,12 @@ public class FixedTarget extends TargetPointerImpl {
         return new FixedTarget(this);
     }
 
+    // TODO: direct access without zcc check is probably the wrong way to accomplish whatever these are used for
+    @Deprecated
     public UUID getTarget() {
         return targetId;
     }
-
+    @Deprecated
     public int getZoneChangeCounter() {
         return zoneChangeCounter;
     }

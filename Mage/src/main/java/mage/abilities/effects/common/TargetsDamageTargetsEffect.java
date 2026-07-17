@@ -6,7 +6,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,37 +41,26 @@ public class TargetsDamageTargetsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source.getTargets().size() < 2) {
-            return false;
-        }
-
-        Target damageTarget = source.getTargets().getByTag(1);
-        Target additionalDamageTarget = source.getTargets().getByTag(2);
-        Target destTarget = source.getTargets().getByTag(3);
-
         List<Permanent> damagingPermanents = new ArrayList<>();
         List<Permanent> receivingPermanents = new ArrayList<>();
-        for (UUID id : damageTarget.getTargets()) {
+        for (UUID id : source.getTargets().getTargetsByTag(1)) { // dealing damage
             Permanent permanent = game.getPermanent(id);
             if (permanent != null) {
                 damagingPermanents.add(permanent);
             }
         }
-        if (additionalDamageTarget != null) {
-            for (UUID id : additionalDamageTarget.getTargets()) {
-                Permanent permanent = game.getPermanent(id);
-                if (permanent != null) {
-                    damagingPermanents.add(permanent);
-                }
+        for (UUID id : source.getTargets().getTargetsByTag(2)) { // additional dealing damage, if applicable
+            Permanent permanent = game.getPermanent(id);
+            if (permanent != null) {
+                damagingPermanents.add(permanent);
             }
         }
-        for (UUID id : destTarget.getTargets()) {
+        for (UUID id : source.getTargets().getTargetsByTag(3)) { // receiving damage
             Permanent permanent = game.getPermanent(id);
             if (permanent != null) {
                 receivingPermanents.add(permanent);
             }
         }
-
         if (receivingPermanents.isEmpty() || damagingPermanents.isEmpty()) {
             return false;
         }
@@ -86,6 +74,10 @@ public class TargetsDamageTargetsEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
+        // verify check that target tags are properly setup
+        if (mode.getTargets().getByTag(1) == null || mode.getTargets().getByTag(3) == null) {
+            throw new IllegalArgumentException("Wrong code usage: need to add tags to targets");
+        }
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }

@@ -1,12 +1,10 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
@@ -16,6 +14,8 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -31,7 +31,7 @@ public final class VoraciousHatchling extends CardImpl {
     }
 
     public VoraciousHatchling(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W/B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W/B}");
         this.subtype.add(SubType.ELEMENTAL);
 
 
@@ -41,7 +41,7 @@ public final class VoraciousHatchling extends CardImpl {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
         // Voracious Hatchling enters the battlefield with four -1/-1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(4)),"with four -1/-1 counters on it"));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.M1M1.createInstance(4)));
         // Whenever you cast a white spell, remove a -1/-1 counter from Voracious Hatchling.
         this.addAbility(new SpellCastControllerTriggeredAbility(new RemoveCounterSourceEffect(CounterType.M1M1.createInstance(1)), filterWhiteSpell, false));
         // Whenever you cast a black spell, remove a -1/-1 counter from Voracious Hatchling.

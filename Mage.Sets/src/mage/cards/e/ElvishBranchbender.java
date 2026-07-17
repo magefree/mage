@@ -17,7 +17,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -26,7 +26,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author emerald000
  */
 public final class ElvishBranchbender extends CardImpl {
-    
+
     private static final FilterPermanent filter = new FilterPermanent("Forest");
     static {
         filter.add(SubType.FOREST.getPredicate());
@@ -57,26 +57,26 @@ public final class ElvishBranchbender extends CardImpl {
 }
 
 class ElvishBranchbenderEffect extends OneShotEffect {
-    
+
     static final FilterControlledPermanent filter = new FilterControlledPermanent("Elves you control");
     static {
         filter.add(SubType.ELF.getPredicate());
     }
-    
+
     ElvishBranchbenderEffect() {
         super(Outcome.Benefit);
         this.staticText = "Until end of turn, target Forest becomes an X/X Treefolk creature in addition to its other types, where X is the number of Elves you control";
     }
-    
+
     private ElvishBranchbenderEffect(final ElvishBranchbenderEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ElvishBranchbenderEffect copy() {
         return new ElvishBranchbenderEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         int xValue = new PermanentsOnBattlefieldCount(filter).calculate(game, source, this);
@@ -85,31 +85,16 @@ class ElvishBranchbenderEffect extends OneShotEffect {
             return false;
         }
         ContinuousEffect effect = new BecomesCreatureTargetEffect(
-                new ElvishBranchbenderToken(xValue),
+                new CreatureToken(
+                    xValue, xValue,
+                    "X/X Treefolk creature in addition to its other types, where X is the number of Elves you control",
+                    SubType.TREEFOLK
+                ),
                 false, false, Duration.EndOfTurn)
                 .withDurationRuleAtStart(true);
         // works well with blinked effects
         effect.setTargetPointer(new FixedTarget(targetForest, game));
         game.addEffect(effect, source);
         return true;
-    }
-}
-
-class ElvishBranchbenderToken extends TokenImpl {
-
-    ElvishBranchbenderToken(int xValue) {
-        super("Treefolk", "X/X Treefolk creature in addition to its other types, where X is the number of Elves you control");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.TREEFOLK);
-        power = new MageInt(xValue);
-        toughness = new MageInt(xValue);
-    }
-    private ElvishBranchbenderToken(final ElvishBranchbenderToken token) {
-        super(token);
-    }
-
-    @Override
-    public ElvishBranchbenderToken copy() {
-        return new ElvishBranchbenderToken(this);
     }
 }

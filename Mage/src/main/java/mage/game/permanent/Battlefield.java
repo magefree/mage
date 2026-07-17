@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class Battlefield implements Serializable {
 
     private final Map<UUID, Permanent> field = new LinkedHashMap<>();
+    private final Map<UUID, Permanent> permanentsEntering = new LinkedHashMap<>();
 
     public Battlefield() {
     }
@@ -25,6 +26,9 @@ public class Battlefield implements Serializable {
     protected Battlefield(final Battlefield battlefield) {
         for (Entry<UUID, Permanent> entry : battlefield.field.entrySet()) {
             field.put(entry.getKey(), entry.getValue().copy());
+        }
+        for (Entry<UUID, Permanent> entry : battlefield.permanentsEntering.entrySet()) {
+            permanentsEntering.put(entry.getKey(), entry.getValue().copy());
         }
     }
 
@@ -36,10 +40,14 @@ public class Battlefield implements Serializable {
         for (Permanent perm : field.values()) {
             perm.reset(game);
         }
+        for (Permanent perm : permanentsEntering.values()) {
+            perm.reset(game);
+        }
     }
 
     public void clear() {
         field.clear();
+        permanentsEntering.clear();
     }
 
     /**
@@ -155,6 +163,11 @@ public class Battlefield implements Serializable {
     public boolean containsPermanent(UUID key) {
         return field.containsKey(key);
     }
+
+    public Map<UUID, Permanent> getPermanentsEntering() {
+        return permanentsEntering;
+    }
+
 
     public void beginningOfTurn(Game game) {
         for (Permanent perm : field.values()) {

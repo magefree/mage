@@ -40,7 +40,7 @@ public final class AinokStrikeLeader extends CardImpl {
 
     public AinokStrikeLeader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        
+
         this.subtype.add(SubType.DOG);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
@@ -103,7 +103,7 @@ class AinokStrikeLeaderEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
-            new GoblinToken(false).putOntoBattlefield(1, game, source, source.getControllerId(), true, true, playerId);
+            new GoblinToken().putOntoBattlefield(1, game, source, source.getControllerId(), true, true, playerId);
         }
         return true;
     }

@@ -50,7 +50,6 @@ public final class TirelessAngler extends CardImpl {
                 "Voracious Greatshark",
                 "Wormhole Serpent"
         ));
-        spellbook.removeIf(card -> ExpansionSet.HIDE_MUTATE_CARDS && ExpansionSet.MUTATE_CARD_NAMES.contains(card));
     }
 
     public TirelessAngler(UUID ownerId, CardSetInfo setInfo) {

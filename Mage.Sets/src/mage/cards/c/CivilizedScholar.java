@@ -1,15 +1,20 @@
 package mage.cards.c;
 
-import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.AttackedThisTurnSourceCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.effects.common.TapSourceEffect;
+import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -22,23 +27,33 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public final class CivilizedScholar extends CardImpl {
+public final class CivilizedScholar extends TransformingDoubleFacedCard {
+
+    private static final Condition condition = new InvertCondition(
+            AttackedThisTurnSourceCondition.instance, "{this} didn't attack this turn"
+    );
 
     public CivilizedScholar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.ADVISOR);
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.ADVISOR}, "{2}{U}",
+                "Homicidal Brute",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.MUTANT}, "R");
 
-        this.secondSideCardClazz = mage.cards.h.HomicidalBrute.class;
+        // Civilized Scholar
+        this.getLeftHalfCard().setPT(0, 1);
 
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(1);
-
-        // {tap}: Draw a card, then discard a card. If a creature card is discarded this way, untap Civilized Scholar, then transform it.
+        // {T}: Draw a card, then discard a card. If a creature card is discarded this way, untap Civilized Scholar, then transform it.
         Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost());
         ability.addEffect(new CivilizedScholarEffect());
-        this.addAbility(new TransformAbility());
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
+
+        // Homicidal Brute
+        this.getRightHalfCard().setPT(5, 1);
+
+        // At the beginning of your end step, if Homicidal Brute didn't attack this turn, tap Homicidal Brute, then transform it.
+        TriggeredAbility bruteAbility = new BeginningOfEndStepTriggeredAbility(new TapSourceEffect());
+        bruteAbility.addEffect(new TransformSourceEffect().setText(", then transform it"));
+        this.getRightHalfCard().addAbility(bruteAbility.withInterveningIf(condition));
     }
 
     private CivilizedScholar(final CivilizedScholar card) {
@@ -50,7 +65,6 @@ public final class CivilizedScholar extends CardImpl {
         return new CivilizedScholar(this);
     }
 }
-
 
 class CivilizedScholarEffect extends OneShotEffect {
 

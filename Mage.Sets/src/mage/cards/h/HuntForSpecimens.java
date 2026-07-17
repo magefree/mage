@@ -6,7 +6,7 @@ import mage.abilities.hint.common.OpenSideboardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Pest11GainLifeToken;
+import mage.game.permanent.token.PestBlackGreenDiesToken;
 
 import java.util.UUID;
 
@@ -19,7 +19,7 @@ public final class HuntForSpecimens extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new Pest11GainLifeToken()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new PestBlackGreenDiesToken()));
 
         // Learn.
         this.getSpellAbility().addEffect(new LearnEffect().concatBy("<br>"));

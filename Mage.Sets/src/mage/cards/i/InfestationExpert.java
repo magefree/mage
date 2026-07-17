@@ -1,11 +1,11 @@
 package mage.cards.i;
 
-import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DayboundAbility;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.NightboundAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.permanent.token.InsectToken;
@@ -15,24 +15,36 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class InfestationExpert extends CardImpl {
+public final class InfestationExpert extends TransformingDoubleFacedCard {
 
     public InfestationExpert(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WEREWOLF}, "{4}{G}",
+                "Infested Werewolf",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "G"
+        );
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WEREWOLF);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
-        this.secondSideCardClazz = mage.cards.i.InfestedWerewolf.class;
+        // Infestation Expert
+        this.getLeftHalfCard().setPT(3, 4);
 
         // Whenever Infestation Expert enters the battlefield or attacks, create a 1/1 green Insect creature token.
-        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(
+        this.getLeftHalfCard().addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(
                 new CreateTokenEffect(new InsectToken())
         ));
 
         // Daybound
-        this.addAbility(new DayboundAbility());
+        this.getLeftHalfCard().addAbility(new DayboundAbility());
+
+        // Infested Werewolf
+        this.getRightHalfCard().setPT(4, 5);
+
+        // Whenever Infested Werewolf enters the battlefield or attacks, create two 1/1 green Insect creature token.
+        this.getRightHalfCard().addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(
+                new CreateTokenEffect(new InsectToken(), 2)
+        ));
+
+        // Nightbound
+        this.getRightHalfCard().addAbility(new NightboundAbility());
     }
 
     private InfestationExpert(final InfestationExpert card) {

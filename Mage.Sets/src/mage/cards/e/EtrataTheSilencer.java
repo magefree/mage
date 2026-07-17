@@ -2,7 +2,6 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
@@ -19,6 +18,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -67,8 +67,13 @@ class EtrataTheSilencerEffect extends OneShotEffect {
         filter.add(CounterType.HIT.getPredicate());
     }
 
-    public EtrataTheSilencerEffect() {
+    EtrataTheSilencerEffect() {
         super(Outcome.Benefit);
+        this.staticText = "exile target creature that player controls "
+                + "and put a hit counter on that card. "
+                + "That player loses the game if they own three or more "
+                + "exiled cards with hit counters on them. "
+                + "{this}'s owner shuffles {this} into their library";
     }
 
     private EtrataTheSilencerEffect(final EtrataTheSilencerEffect effect) {
@@ -92,8 +97,8 @@ class EtrataTheSilencerEffect extends OneShotEffect {
             return false;
         }
         controller.moveCards(creature, Zone.EXILED, source, game);
-        Card card = game.getCard(source.getFirstTarget());
-        if (card != null) {
+        game.processAction();
+        for (Card card : CardUtil.getAllCardsFromPermanentLeftBattlefield(creature, game)) {
             card.addCounters(CounterType.HIT.createInstance(), source.getControllerId(), source, game);
         }
         int cardsFound = game.getExile().getCardsOwned(game, player.getId())
@@ -102,9 +107,11 @@ class EtrataTheSilencerEffect extends OneShotEffect {
                 .mapToInt(x -> 1)
                 .sum();
         if (cardsFound >= 3) {
+            game.processAction();
             player.lost(game);
         }
-        Permanent etrataTheSilencer = game.getPermanent(source.getSourceId());
+        game.processAction();
+        Permanent etrataTheSilencer = source.getSourcePermanentIfItStillExists(game);
         if (etrataTheSilencer != null) {
             if (etrataTheSilencer.isPhasedIn()) {
                 return new ShuffleIntoLibrarySourceEffect().apply(game, source);
@@ -114,12 +121,4 @@ class EtrataTheSilencerEffect extends OneShotEffect {
         return true;
     }
 
-    @Override
-    public String getText(Mode mode) {
-        return "exile target creature that player controls "
-                + "and put a hit counter on that card. "
-                + "That player loses the game if they own three or more "
-                + "exiled cards with hit counters on them. "
-                + "{this}'s owner shuffles {this} into their library";
-    }
 }

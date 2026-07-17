@@ -2,9 +2,8 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.CardLeftYourGraveyardThisTurnCondition;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -13,7 +12,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.game.Game;
 import mage.watchers.common.CardsLeftGraveyardWatcher;
 
 /**
@@ -23,7 +21,7 @@ public final class GauFeralYouth extends CardImpl {
 
     public GauFeralYouth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.BERSERKER);
@@ -40,7 +38,7 @@ public final class GauFeralYouth extends CardImpl {
                         new DamagePlayersEffect(SourcePermanentPowerValue.NOT_NEGATIVE, TargetController.OPPONENT)
                                 .setText("{this} deals damage equal to its power to each opponent"),
                         false,
-                        GauFeralYouthCondition.instance
+                        CardLeftYourGraveyardThisTurnCondition.instance
                 ),
                 new CardsLeftGraveyardWatcher()
         );
@@ -53,23 +51,5 @@ public final class GauFeralYouth extends CardImpl {
     @Override
     public GauFeralYouth copy() {
         return new GauFeralYouth(this);
-    }
-}
-
-enum GauFeralYouthCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return !game
-                .getState()
-                .getWatcher(CardsLeftGraveyardWatcher.class)
-                .getCardsThatLeftGraveyard(source.getControllerId(), game)
-                .isEmpty();
-    }
-
-    @Override
-    public String toString() {
-        return "if a card left your graveyard this turn";
     }
 }

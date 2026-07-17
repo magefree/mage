@@ -4,6 +4,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -235,5 +236,57 @@ public class CascadeTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Ardent Plea", 1);
         assertGraveyardCount(playerA, "Breaking // Entering", 0);
         assertLibraryCount(playerA, "Breaking // Entering", 1);
+    }
+
+    // https://github.com/magefree/mage/issues/14687
+    @Test
+    public void testWithXCost() {
+        skipInitShuffling();
+        playerA.getLibrary().clear();
+        addCard(Zone.LIBRARY, playerA, "Lotus Petal");
+        addCard(Zone.LIBRARY, playerA, "Dwarven Trader");
+        addCard(Zone.HAND, playerA, "Fireball");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Maelstrom Nexus");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fireball");
+        setChoice(playerA, "X=4");
+        addTarget(playerA, playerB);
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
+        setChoice(playerA, true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Dwarven Trader", 1);
+        assertPermanentCount(playerA, "Lotus Petal", 0);
+        assertGraveyardCount(playerA, "Fireball", 1);
+        assertLife(playerB, 16);
+    }
+
+    @Test
+    public void testRemovedFromStack() {
+        skipInitShuffling();
+        playerA.getLibrary().clear();
+        addCard(Zone.LIBRARY, playerA, "Dwarven Trader");
+        addCard(Zone.HAND, playerA, "Balduvian Bears");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.HAND, playerB, "Unsubstantiate");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Maelstrom Nexus");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears");
+        setChoice(playerA, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Unsubstantiate");
+        addTarget(playerB, "Balduvian Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Dwarven Trader", 1);
+        assertPermanentCount(playerA, "Balduvian Bears", 0);
+        assertHandCount(playerA, "Balduvian Bears", 1);
     }
 }

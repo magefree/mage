@@ -23,7 +23,6 @@ public class JudgeGiftCards2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Animate Dead", 7, Rarity.RARE, mage.cards.a.AnimateDead.class, RETRO_ART));
         cards.add(new SetCardInfo("Greater Auramancy", 1, Rarity.RARE, mage.cards.g.GreaterAuramancy.class));
         cards.add(new SetCardInfo("Growing Rites of Itlimoc", 10, Rarity.RARE, mage.cards.g.GrowingRitesOfItlimoc.class));
-        cards.add(new SetCardInfo("Itlimoc, Cradle of the Sun", 10, Rarity.RARE, mage.cards.i.ItlimocCradleOfTheSun.class));
         cards.add(new SetCardInfo("No Mercy", 9, Rarity.RARE, mage.cards.n.NoMercy.class));
         cards.add(new SetCardInfo("Omniscience", 2, Rarity.RARE, mage.cards.o.Omniscience.class));
         cards.add(new SetCardInfo("Parallel Lives", 3, Rarity.RARE, mage.cards.p.ParallelLives.class));

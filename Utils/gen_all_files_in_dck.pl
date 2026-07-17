@@ -11,10 +11,8 @@ use Scalar::Util qw(looks_like_number);
 
 my $dataFile = "mtg-cards-data.txt";
 my $setsFile = "mtg-sets-data.txt";
-my $knownSetsFile = "known-sets.txt";
 
 my %sets;
-my %knownSets;
 
 my @setCards;
 my %nameSetNumber;

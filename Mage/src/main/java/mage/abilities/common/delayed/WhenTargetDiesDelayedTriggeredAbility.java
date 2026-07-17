@@ -87,6 +87,7 @@ public class WhenTargetDiesDelayedTriggeredAbility extends DelayedTriggeredAbili
                 getEffects().setTargetPointer(new FixedTarget(permanent.getControllerId()));
                 break;
         }
+        getEffects().setValue("creatureDied", zEvent.getTarget());
         return true;
     }
 }

@@ -1505,7 +1505,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
         CombatGroup newGroup = new CombatGroup(defenderId, defender != null, defendingPlayerId);
         newGroup.attackers.add(attackerId);
-        attacker.setAttacking(true);
+        attacker.setAttacking(new MageObjectReference(defenderId, game));
         groups.add(newGroup);
         return true;
     }
@@ -1623,8 +1623,12 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
         boolean result = false;
         if (withEvent) {
-            creature.setAttacking(false);
-            creature.setBlocking(0);
+            creature.setAttacking(null);
+            creature.clearBlocking();
+            getBlockers().stream()
+                    .map(game::getPermanent)
+                    .filter(Objects::nonNull)
+                    .forEach(p -> p.removeBlocking(creatureId, game));
         }
         for (CombatGroup group : groups) {
             for (UUID attackerId : group.attackers) {
@@ -1653,16 +1657,16 @@ public class Combat implements Serializable, Copyable<Combat> {
             for (UUID attacker : group.attackers) {
                 creature = game.getPermanent(attacker);
                 if (creature != null) {
-                    creature.setAttacking(false);
-                    creature.setBlocking(0);
+                    creature.setAttacking(null);
+                    creature.clearBlocking();
                     creature.clearBandedCards();
                 }
             }
             for (UUID blocker : group.blockers) {
                 creature = game.getPermanent(blocker);
                 if (creature != null) {
-                    creature.setAttacking(false);
-                    creature.setBlocking(0);
+                    creature.setAttacking(null);
+                    creature.clearBlocking();
                     creature.clearBandedCards();
                 }
             }
@@ -1810,7 +1814,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
                 Permanent creature = game.getPermanent(attackerId);
                 if (creature != null) {
-                    creature.setAttacking(false);
+                    creature.setAttacking(null);
                     if (attackersTappedByAttack.contains(creature.getId())) {
                         creature.setTapped(false);
                         attackersTappedByAttack.remove(creature.getId());
@@ -1918,7 +1922,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
         Permanent creature = game.getPermanent(blockerId);
         if (creature != null) {
-            creature.setBlocking(0);
+            creature.clearBlocking();
         }
     }
 

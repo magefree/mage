@@ -11,6 +11,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.FoodToken;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -24,6 +25,8 @@ public final class TheUnderworldCookbook extends CardImpl {
 
     public TheUnderworldCookbook(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
+
+        this.subtype.add(SubType.BOOK);
 
         // {T}, Discard a card: Create a Food token.
         Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new FoodToken()), new TapSourceCost());

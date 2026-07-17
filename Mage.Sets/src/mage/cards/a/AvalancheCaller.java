@@ -15,7 +15,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -41,9 +41,15 @@ public final class AvalancheCaller extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}: Target snow land you control becomes a 4/4 Elemental creature with haste and hexproof until end of turn. It's still a land.
-        Ability ability = new SimpleActivatedAbility(new BecomesCreatureTargetEffect(
-                new AvalancheCallerToken(), false, true, Duration.EndOfTurn
-        ), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(
+            new BecomesCreatureTargetEffect(
+                new CreatureToken(4, 4, "4/4 Elemental creature with hexproof and haste", SubType.ELEMENTAL)
+                    .withAbility(HasteAbility.getInstance())
+                    .withAbility(HexproofAbility.getInstance()),
+                false, true, Duration.EndOfTurn
+            ),
+            new GenericManaCost(2)
+        );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
@@ -55,28 +61,5 @@ public final class AvalancheCaller extends CardImpl {
     @Override
     public AvalancheCaller copy() {
         return new AvalancheCaller(this);
-    }
-}
-
-class AvalancheCallerToken extends TokenImpl {
-
-    AvalancheCallerToken() {
-        super("", "4/4 Elemental creature with hexproof and haste");
-        this.cardType.add(CardType.CREATURE);
-        this.subtype.add(SubType.ELEMENTAL);
-
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        this.addAbility(HexproofAbility.getInstance());
-        this.addAbility(HasteAbility.getInstance());
-    }
-
-    private AvalancheCallerToken(final AvalancheCallerToken token) {
-        super(token);
-    }
-
-    public AvalancheCallerToken copy() {
-        return new AvalancheCallerToken(this);
     }
 }

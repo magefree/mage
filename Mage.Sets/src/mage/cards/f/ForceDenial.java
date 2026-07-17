@@ -39,7 +39,7 @@ public final class ForceDenial extends CardImpl {
         this.getSpellAbility().addWatcher(new LifeLossOtherFromCombatWatcher());
 
         // Scry 1
-        this.getSpellAbility().addEffect(new ScryEffect(1));
+        this.getSpellAbility().addEffect(new ScryEffect(1).concatBy("<br>"));
     }
 
     private ForceDenial(final ForceDenial card) {

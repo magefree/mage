@@ -4,11 +4,12 @@ import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.abilities.effects.common.PutOnLibrarySourceEffect;
+import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
@@ -31,9 +32,8 @@ public final class MurderousRider extends AdventureCard {
         this.addAbility(LifelinkAbility.getInstance());
 
         // When Murderous Rider dies, put it on the bottom of its owner's library.
-        this.addAbility(new DiesSourceTriggeredAbility(new PutOnLibrarySourceEffect(
-                false, "put it on the bottom of its owner's library"
-        ), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new PutOnLibraryTargetEffect(false)
+                .setText("put it on the bottom of its owner's library"), false, SetTargetPointer.CARD));
 
         // Swift End
         // Destroy target creature or planeswalker. You lose 2 life.

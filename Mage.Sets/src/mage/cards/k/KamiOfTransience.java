@@ -94,7 +94,7 @@ class KamiOfTransienceWatcher extends Watcher {
             return;
         }
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (!zEvent.isDiesEvent() || !zEvent.getTarget().isEnchantment(game)) {
+        if (!zEvent.isDiesEvent() || !zEvent.isPermanentMoved() || !zEvent.getTarget().isEnchantment(game)) {
             return;
         }
         playerSet.add(zEvent.getTarget().getOwnerId());

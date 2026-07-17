@@ -10,6 +10,7 @@ import mage.abilities.common.*;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.ColorsOfManaSpentToCastCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.effects.common.FightTargetsEffect;
@@ -86,7 +87,10 @@ public class VerifyCardDataTest {
 
     private static String FULL_ABILITIES_CHECK_SET_CODES = ""; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
     private static boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
-    private static final boolean CHECK_COPYABLE_FIELDS = true; // disable for better verify test performance
+
+    // disable for better performance on verify checks
+    private static final boolean CHECK_COPYABLE_FIELDS = true;
+    private static final boolean CHECK_FILTER_FIELDS = true;
 
     // for automated local testing support
     static {
@@ -170,14 +174,13 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
-        skipListAddName(SKIP_LIST_TYPE, "SPM", "Superior Foes of Spider-Man"); // temporary
 
         // subtype
         // skipListAddName(SKIP_LIST_SUBTYPE, set, cardName);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
-        skipListAddName(SKIP_LIST_SUBTYPE, "SPM", "Superior Foes of Spider-Man"); // temporary
+        subtypesToIgnore.add("Book"); // temporary
 
         // number
         // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
@@ -185,7 +188,6 @@ public class VerifyCardDataTest {
         // rarity
         // skipListAddName(SKIP_LIST_RARITY, set, cardName);
         skipListAddName(SKIP_LIST_RARITY, "CMR", "The Prismatic Piper"); // Collation is not yet set up for CMR https://www.lethe.xyz/mtg/collation/cmr.html
-        skipListAddName(SKIP_LIST_RARITY, "SPM", "Gwenom, Remorseless"); // temporary
 
         // missing abilities
         // skipListAddName(SKIP_LIST_MISSING_ABILITIES, set, cardName);
@@ -306,7 +308,8 @@ public class VerifyCardDataTest {
      */
     private static boolean evergreenCheck(String s) {
         return evergreenKeywords.contains(s) || s.startsWith("protection from") || s.startsWith("hexproof from")
-                || s.startsWith("ward ") || s.startsWith("rampage ") || s.startsWith("annihilator");
+                || s.startsWith("ward ") || s.startsWith("rampage ") || s.startsWith("annihilator")
+                || s.matches("^firebending \\d");
     }
 
     private static <T> boolean eqSet(Collection<T> a, Collection<T> b) {
@@ -330,7 +333,12 @@ public class VerifyCardDataTest {
         checkWrongAbilitiesTextStart();
 
         int cardIndex = 0;
-        for (Card card : CardScanner.getAllCards()) {
+        System.out.printf("verify cards loading...%n");
+        List<Card> allCards = CardScanner.getAllCards();
+        for (Card card : allCards) {
+            if (cardIndex % 10000 == 0) {
+                System.out.printf("verify cards checking: %d of %d%n", cardIndex, allCards.size());
+            }
             cardIndex++;
             if (card instanceof CardWithHalves) {
                 check(((CardWithHalves) card).getLeftHalfCard(), cardIndex);
@@ -342,12 +350,13 @@ public class VerifyCardDataTest {
                 check(card, cardIndex);
             }
         }
+        System.out.printf("verify cards done%n");
 
         checkWrongAbilitiesTextEnd();
 
         printMessages(outputMessages);
         if (failed > 0) {
-            Assert.fail(String.format("found %d errors in %d cards verify (see errors list above)", failed, CardScanner.getAllCards().size()));
+            Assert.fail(String.format("found %d errors in %d cards verify (see errors list above)", failed, allCards.size()));
         }
     }
 
@@ -399,6 +408,33 @@ public class VerifyCardDataTest {
 
         if (doubleErrors.size() > 0) {
             Assert.fail("DB has duplicated card numbers, found errors: " + doubleErrors.size());
+        }
+    }
+
+    @Test
+    public void test_findNonDidgitCardNumbers() {
+        // info only
+        // find all cards with bad non-didgit numbers, see #11157
+        // see parseCardNumberAsInt for supported formats
+        for (Map.Entry<String, MtgJsonSet> refEntry : MtgJsonService.sets().entrySet()) {
+            MtgJsonSet refSet = refEntry.getValue();
+            for (MtgJsonCard refCard : refSet.cards) {
+                String cleanNumber = refCard.number.replaceAll("[\\D]", "");
+                if (cleanNumber.isEmpty()) {
+                    System.out.println("Found non-digit card number: " 
+                        + refSet.code + " - " 
+                        + refCard.getNameAsASCII() + " - " 
+                        + refCard.number
+                    );
+                }
+                if (cleanNumber.equals("0")) {
+                    System.out.println("Found zero card number: " 
+                        + refSet.code + " - " 
+                        + refCard.getNameAsASCII() + " - " 
+                        + refCard.number
+                    );
+                }
+            }
         }
     }
 
@@ -651,6 +687,9 @@ public class VerifyCardDataTest {
                 CardInfo cardInfo = CardRepository.instance.findCardsByClass(info.getCardClass().getCanonicalName()).stream().findFirst().orElse(null);
                 Assert.assertNotNull(cardInfo);
 
+                if (cardInfo.isDoubleFacedCard()) {
+                    break;
+                }
                 Card card = cardInfo.createCard();
                 Card secondCard = card.getSecondCardFace();
                 if (secondCard != null) {
@@ -761,22 +800,26 @@ public class VerifyCardDataTest {
                     continue;
                 }
 
-                // CHECK: poster promoType and/or textless must use full art setting
-                if (((jsonCard.promoTypes != null && jsonCard.promoTypes.contains("poster")) || jsonCard.isTextless) && !card.isFullArt()) {
-                    errorsList.add("Error: card must use full art setting: "
-                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
-                }
-
                 // CHECK: full art lands must use full art setting
+                // CHECK: non-full art lands must not use full art setting
+                // CHECK: if full art land is using full art setting, don't perform retro or poster tests
                 boolean isLand = card.getRarity().equals(Rarity.LAND);
                 if (isLand && jsonCard.isFullArt && !card.isFullArt()) {
                     errorsList.add("Error: card must use full art lands setting: "
                             + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                    continue;
+                } else if (isLand && !jsonCard.isFullArt && card.isFullArt()) {
+                    errorsList.add("Error: card must NOT use full art lands setting: "
+                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                    continue;
+                } else if (isLand && jsonCard.isFullArt && card.isFullArt()) {
+                    // Land full art is correct, skip other tests
+                    continue;
                 }
 
-                // CHECK: non-full art lands must not use full art setting
-                if (isLand && !jsonCard.isFullArt && card.isFullArt()) {
-                    errorsList.add("Error: card must NOT use full art lands setting: "
+                // CHECK: poster promoType and/or textless must use full art setting
+                if (((jsonCard.promoTypes != null && jsonCard.promoTypes.contains("poster")) || jsonCard.isTextless) && !card.isFullArt()) {
+                    errorsList.add("Error: card must use full art setting: "
                             + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
 
@@ -957,22 +1000,27 @@ public class VerifyCardDataTest {
     private static final Set<String> ignoreBoosterSets = new HashSet<>();
 
     static {
-        // temporary, TODO: remove after set release and mtgjson get info
-        ignoreBoosterSets.add("Edge of Eternities");
-        // jumpstart, TODO: must implement from JumpstartPoolGenerator, see #13264
+        // jumpstart, TODO: implement from JumpstartPoolGenerator, see #13264
         ignoreBoosterSets.add("Jumpstart");
         ignoreBoosterSets.add("Jumpstart 2022");
         ignoreBoosterSets.add("Foundations Jumpstart");
         ignoreBoosterSets.add("Ravnica: Clue Edition");
+        ignoreBoosterSets.add("Avatar: The Last Airbender Eternal");
         // joke or un-sets, low implemented cards
         ignoreBoosterSets.add("Unglued");
         ignoreBoosterSets.add("Unhinged");
         ignoreBoosterSets.add("Unstable");
         ignoreBoosterSets.add("Unfinity");
+        // spellbook boosters, not for draft
+        ignoreBoosterSets.add("Signature Spellbook: Jace");
+        ignoreBoosterSets.add("Signature Spellbook: Gideon");
+        ignoreBoosterSets.add("Signature Spellbook: Chandra");
         // other
         ignoreBoosterSets.add("Secret Lair Drop"); // cards shop
+        ignoreBoosterSets.add("Ugin's Fate"); // promo, not draftable
         ignoreBoosterSets.add("Zendikar Rising Expeditions"); // box toppers
         ignoreBoosterSets.add("March of the Machine: The Aftermath"); // epilogue boosters aren't for draft
+        ignoreBoosterSets.add("Mystery Booster"); // temporary
     }
 
     @Test
@@ -1141,10 +1189,10 @@ public class VerifyCardDataTest {
                 if (ignoreBoosterSets.contains(set.getName())) {
                     continue;
                 }
-                // error example: wrong booster settings (set MUST HAVE booster, but haven't) - 2020 - J22 - Jumpstart 2022 - boosters: [jumpstart]
-                errorsList.add(String.format("Error: wrong booster settings (set %s booster, but %s) - %s%s",
-                        (needBooster ? "MUST HAVE" : "MUST HAVEN'T"),
-                        (set.hasBoosters() ? "have" : "haven't"),
+                // error example: wrong booster settings (set must have boosters, but it does not) - 2020 - J22 - Jumpstart 2022 - boosters: [jumpstart]
+                errorsList.add(String.format("Error: wrong booster settings (set %s have boosters, but it %s) - %s%s",
+                    (needBooster ? "must" : "must not"),
+                    (set.hasBoosters() ? "does" : "does not"),
                         set.getReleaseYear() + " - " + set.getCode() + " - " + set.getName(),
                         (jsonSet.booster == null ? "" : " - boosters: " + jsonSet.booster.keySet())
                 ));
@@ -1221,10 +1269,6 @@ public class VerifyCardDataTest {
                 Card card = CardImpl.createCard(cardInfo.getCardClass(), new CardSetInfo(cardInfo.getName(), set.getCode(),
                         cardInfo.getCardNumber(), cardInfo.getRarity(), cardInfo.getGraphicInfo()));
                 Assert.assertNotNull(card);
-
-                if (card.getSecondCardFace() != null) {
-                    containsDoubleSideCards = true;
-                }
 
                 // CHECK: all planeswalkers must be legendary
                 if (card.isPlaneswalker() && !card.isLegendary()) {
@@ -1887,6 +1931,9 @@ public class VerifyCardDataTest {
             checkRarityAndBasicLands(card, ref);
             checkMissingAbilities(card, ref);
             checkWrongSymbolsInRules(card);
+            if (CHECK_FILTER_FIELDS) {
+                //checkWrongCreatureFilter(card); // TODO: enable after all creature filter fixes, see #14302, #7008
+            }
             if (CHECK_COPYABLE_FIELDS) {
                 checkCardCanBeCopied(card);
             }
@@ -2192,7 +2239,8 @@ public class VerifyCardDataTest {
     // Note that the check includes reminder text, so any keyword ability with reminder text always included in the card text doesn't need to be added
     // FIN added equip abilities with flavor words, allow for those. There are also cards that affect equip costs or equip abilities, exclude those
     // Technically Enchant should be in this list, but that's added to the SpellAbility in XMage
-    Pattern targetKeywordRegexPattern = Pattern.compile("^((.*— )?equip(?! cost| abilit)|bestow|partner with|modular|backup)\\b", Pattern.MULTILINE);
+    // Earthbend is an action word and thus can be anywhere, the rest are keywords that are always first in the line
+    Pattern targetKeywordRegexPattern = Pattern.compile("earthbend |^((<i>[a-z ]+<\\/i> &mdash; )?equip(?! cost| abilit)|bestow|partner with|modular|backup)\\b", Pattern.MULTILINE);
 
     // Checks for targeted reflexive or delayed triggered abilities, ones that only can trigger as a result of another ability
     // and thus have their "when" located after a previous statement (detected by a period or comma followed by a space) instead of the start.
@@ -2251,6 +2299,78 @@ public class VerifyCardDataTest {
                 || modes.stream().flatMap(mode -> mode.getEffects().stream()).anyMatch(effect -> recursiveTargetEffectCheck(effect, depth - 1));
     }
 
+    boolean recursiveCreatureFilterCheck(Card card, Object obj, int depth) {
+        if (depth < 0 || obj == null) {
+            return false;
+        }
+
+        if (obj instanceof Collection) {
+            return ((Collection) obj).stream().anyMatch(x -> recursiveCreatureFilterCheck(card, x, depth - 1));
+        }
+
+        if (obj instanceof Map) {
+            return ((Map) obj).values().stream().anyMatch(x -> recursiveCreatureFilterCheck(card, x, depth - 1));
+        }
+
+        // check filters only
+        if (obj instanceof Filter) {
+            boolean isCreatureInRules = card.getRules().stream()
+                    .map(s -> s.toLowerCase(Locale.ENGLISH))
+                    .anyMatch(s -> s.contains("creature"));
+
+            List<Predicate> list = new ArrayList<>();
+            Predicates.collectAllComponents(((Filter) obj).getPredicates(), ((Filter) obj).getExtraPredicates(), list);
+            boolean isCreatureInFilter = list.stream().anyMatch(p -> p.equals(CardType.CREATURE.getPredicate()));
+
+            return isCreatureInFilter && !isCreatureInRules;
+        }
+
+        List<Class<?>> fullClasses = new ArrayList<>();
+        Class<?> current = obj.getClass();
+        while (current != null && current != Object.class) {
+            fullClasses.add(current);
+            current = current.getSuperclass();
+        }
+
+        return fullClasses.stream()
+                .flatMap(clazz -> Arrays.stream(clazz.getDeclaredFields()))
+                .filter(f -> isCheckableField(f, true))
+                .anyMatch(f -> {
+                    f.setAccessible(true);
+                    try {
+                        return recursiveCreatureFilterCheck(card, f.get(obj), depth - 1);
+                    } catch (IllegalAccessException ex) {
+                        throw new RuntimeException(ex); // Should never happen due to setAccessible
+                    }
+                });
+    }
+
+    private boolean isCheckableField(Field field, boolean ignoreStaticFields) {
+        // ignore static fields for better performance
+        // it's used anyway and will go to check (example: static filter added into effect)
+        if (ignoreStaticFields && Modifier.isStatic(field.getModifiers())) {
+            return false;
+        }
+
+        // keep collections
+        if (Collection.class.isAssignableFrom(field.getType()) || Map.class.isAssignableFrom(field.getType())) {
+            return true;
+        }
+
+        // ignore simple data
+        if (field.getType().isPrimitive()) {
+            return false;
+        }
+
+        // ignore default java types
+        if (field.getType().getPackage() != null && field.getType().getPackage().getName().startsWith("java.")) {
+            return false;
+        }
+
+        // all other fields can be checked by verify
+        return true;
+    }
+
     private void checkMissingAbilities(Card card, MtgJsonCard ref) {
         if (skipListHaveName(SKIP_LIST_MISSING_ABILITIES, card.getExpansionSetCode(), card.getName())) {
             return;
@@ -2284,20 +2404,17 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "card has backup but is missing this.addAbility(backupAbility)");
         }
 
-        // special check: Werewolves front ability should only be on front and vice versa
-        if (card.getAbilities().containsClass(WerewolfFrontTriggeredAbility.class) && card.isNightCard()) {
-            fail(card, "abilities", "card is a back face werewolf with a front face ability");
-        }
-        if (card.getAbilities().containsClass(WerewolfBackTriggeredAbility.class) && !card.isNightCard()) {
-            fail(card, "abilities", "card is a front face werewolf with a back face ability");
+        // special check: DFC main card should not have abilities
+        if (card instanceof DoubleFacedCardHalf && !card.getMainCard().getInitAbilities().isEmpty()) {
+            fail(card, "abilities", "transforming double-faced card should not have abilities on the main card");
         }
 
-        // special check: transform ability in TDFC should only be on front and vice versa
-        if (card.getSecondCardFace() != null && !card.isNightCard() && !card.getAbilities().containsClass(TransformAbility.class)) {
-            fail(card, "abilities", "double-faced cards should have transform ability on the front");
+        // special check: Werewolves front ability should only be on front and vice versa
+        if (card.getAbilities().containsClass(WerewolfFrontTriggeredAbility.class) && (card instanceof DoubleFacedCardHalf && ((DoubleFacedCardHalf) card).isBackSide())) {
+            fail(card, "abilities", "card is a back face werewolf with a front face ability");
         }
-        if (card.getSecondCardFace() != null && card.isNightCard() && card.getAbilities().containsClass(TransformAbility.class)) {
-            fail(card, "abilities", "double-faced cards should not have transform ability on the back");
+        if (card.getAbilities().containsClass(WerewolfBackTriggeredAbility.class) && (card instanceof DoubleFacedCardHalf && !((DoubleFacedCardHalf) card).isBackSide())) {
+            fail(card, "abilities", "card is a front face werewolf with a back face ability");
         }
 
         // special check: back side in TDFC must be only night card
@@ -2306,20 +2423,13 @@ public class VerifyCardDataTest {
         }
 
         // special check: siege ability must be used in double faced cards only
-        if (card.getAbilities().containsClass(SiegeAbility.class) && card.getSecondCardFace() == null) {
+        if (card.getAbilities().containsClass(SiegeAbility.class) && (card.getSecondCardFace() == null && (card instanceof DoubleFacedCardHalf && ((DoubleFacedCardHalf) card).getOtherSide() == null))) {
             fail(card, "abilities", "miss second side settings in card with siege ability");
         }
 
         // special check: legendary spells need to have legendary spell ability
         if (card.isLegendary() && !card.isPermanent() && !card.getAbilities().containsClass(LegendarySpellAbility.class)) {
             fail(card, "abilities", "legendary nonpermanent cards need to have LegendarySpellAbility");
-        }
-
-        // special check: mutate is not supported yet, so must be removed from sets
-        if (card.getAbilities().containsClass(MutateAbility.class)) {
-            // how-to fix: add that code at the end of the set
-            // cards.removeIf(card -> HIDE_MUTATE_CARDS && MUTATE_CARD_NAMES.contains(card.getName()));
-            fail(card, "abilities", "mutate cards aren't implemented and shouldn't be available");
         }
 
         // special check: some new creature's ETB must use When this creature enters instead When {this} enters
@@ -2489,6 +2599,7 @@ public class VerifyCardDataTest {
         cardHints.put(MonarchHint.class, "the monarch");
         cardHints.put(InitiativeHint.class, "the initiative");
         cardHints.put(CurrentDungeonHint.class, "venture into");
+        cardHints.put(ColorsOfManaSpentToCastCount.getHint().getClass(), "Converge —");
         for (Class hintClass : cardHints.keySet()) {
             String lookupText = cardHints.get(hintClass);
             boolean needHint = ref.text.contains(lookupText);
@@ -2540,6 +2651,13 @@ public class VerifyCardDataTest {
             return;
         }
 
+        // lands on back of NDFCs *may* have only one ability
+        if (card instanceof TransformingDoubleFacedCardHalf
+            && ((DoubleFacedCardHalf)card).isBackSide()
+            && card.isLand()) {
+            return;
+        }
+
         // additional cost go to 1 ability
         if (refLowerText.startsWith("as an additional cost to cast")) {
             return;
@@ -2569,6 +2687,17 @@ public class VerifyCardDataTest {
             if (rule.contains("&mdash ")) {
                 fail(card, "rules", "card's rules contains restricted test [&mdash ] instead [&mdash;]");
             }
+        }
+    }
+
+    /**
+     * Checking wrong usage of creature filter, see #14302, #7008
+     */
+    private void checkWrongCreatureFilter(Card card) {
+        // start with abilities, no need other card fields
+        // bigger depth - better results, but slower (~10 is good)
+        if (card.getAbilities().stream().anyMatch(ability -> recursiveCreatureFilterCheck(card, ability, 10))) {
+            fail(card, "filters", "wrong creature filter (must be permanent, not creature)");
         }
     }
 
@@ -2635,13 +2764,13 @@ public class VerifyCardDataTest {
         if (mageObject.isCreature(game)) {
             return "this creature";
         }
-        if (mageObject.isLand(game)) {
-            return "this land";
-        }
         for (SubType subType : selfRefNamedSubtypes) {
             if (mageObject.hasSubtype(subType, game)) {
                 return "this " + subType.getDescription();
             }
+        }
+        if (mageObject.isLand(game)) {
+            return "this land";
         }
         if (mageObject.isBattle(game)) {
             return "this battle";
@@ -2766,8 +2895,12 @@ public class VerifyCardDataTest {
                 // format to print main card then spell card
                 card.getInitAbilities().getRules().forEach(this::printAbilityText);
                 ((CardWithSpellOption) card).getSpellCard().getAbilities().getRules().forEach(r -> printAbilityText(r.replace("&mdash; ", "\n")));
-            } else if (card instanceof SplitCard || card instanceof ModalDoubleFacedCard) {
-                card.getAbilities().getRules().forEach(this::printAbilityText);
+            } else if (card instanceof SplitCard || card instanceof DoubleFacedCard) {
+                // format to print each side separately
+                System.out.println("=== " + ((CardWithHalves) card).getLeftHalfCard().getName() + " ===");
+                ((CardWithHalves) card).getLeftHalfCard().getAbilities().getRules().forEach(this::printAbilityText);
+                System.out.println("=== " + ((CardWithHalves) card).getRightHalfCard().getName() + " ===");
+                ((CardWithHalves) card).getRightHalfCard().getAbilities().getRules().forEach(this::printAbilityText);
             } else {
                 card.getRules().forEach(this::printAbilityText);
             }
@@ -2775,9 +2908,17 @@ public class VerifyCardDataTest {
             // ref card
             System.out.println();
             MtgJsonCard refMain = MtgJsonService.card(card.getName());
-            MtgJsonCard refSpell = null;
+            Card cardMain = card;
+            MtgJsonCard refTwo = null;
+            Card cardTwo = null;
             if (card instanceof CardWithSpellOption) {
-                refSpell = MtgJsonService.card(((CardWithSpellOption) card).getSpellCard().getName());
+                refTwo = MtgJsonService.card(((CardWithSpellOption) card).getSpellCard().getName());
+                cardTwo = ((CardWithSpellOption) card).getSpellCard();
+            } else if (card instanceof CardWithHalves) {
+                refMain = MtgJsonService.card(((CardWithHalves) card).getLeftHalfCard().getName());
+                cardMain = ((CardWithHalves) card).getLeftHalfCard();
+                refTwo = MtgJsonService.card(((CardWithHalves) card).getRightHalfCard().getName());
+                cardTwo = ((CardWithHalves) card).getRightHalfCard();
             }
             if (refMain == null) {
                 refMain = MtgJsonService.cardByClassName(foundClassName);
@@ -2785,9 +2926,9 @@ public class VerifyCardDataTest {
             if (refMain != null) {
                 System.out.println("ref: " + refMain.getNameAsFace() + " " + refMain.manaCost);
                 System.out.println(refMain.text);
-                if (refSpell != null) {
-                    System.out.println(refSpell.getNameAsFace() + " " + refSpell.manaCost);
-                    System.out.println(refSpell.text);
+                if (refTwo != null) {
+                    System.out.println("ref: " + refTwo.getNameAsFace() + " " + refTwo.manaCost);
+                    System.out.println(refTwo.text);
                 }
             } else {
                 System.out.println("WARNING, can't find mtgjson ref for " + card.getName());
@@ -2795,9 +2936,10 @@ public class VerifyCardDataTest {
 
             // additional check to simulate diff in rules
             if (refMain != null) {
-                checkWrongAbilitiesText(card, refMain, 0, true);
-            } else if (refSpell != null) {
-                checkWrongAbilitiesText(((CardWithSpellOption) card).getSpellCard(), refSpell, 0, true);
+                checkWrongAbilitiesText(cardMain, refMain, 0, true);
+            }
+            if (refTwo != null) {
+                checkWrongAbilitiesText(cardTwo, refTwo, 0, true);
             }
         });
     }

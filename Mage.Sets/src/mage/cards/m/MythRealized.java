@@ -1,7 +1,6 @@
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -17,7 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
  *
@@ -26,7 +25,7 @@ import mage.game.permanent.token.TokenImpl;
 public final class MythRealized extends CardImpl {
 
     private static final DynamicValue loreCounterCount = new CountersSourceCount(CounterType.LORE);
-    
+
     public MythRealized(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
 
@@ -38,11 +37,16 @@ public final class MythRealized extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.LORE.createInstance()), new ManaCostsImpl<>("{2}{W}")));
 
         // {W}: Until end of turn, Myth Realized becomes a Monk Avatar creature in addition to its other types and gains "This creature's power and toughness are each equal to the number of lore counters on it."
-        Effect effect = new BecomesCreatureSourceEffect(new MythRealizedToken(), CardType.ENCHANTMENT, Duration.EndOfTurn).withDurationRuleAtStart(true);
+        Effect effect = new BecomesCreatureSourceEffect(
+            new CreatureToken(
+                0, 0, "Monk Avatar creature", SubType.MONK, SubType.AVATAR
+            ),
+            CardType.ENCHANTMENT,
+            Duration.EndOfTurn
+        ).withDurationRuleAtStart(true);
         Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{W}"));
         ability.addEffect(new SetBasePowerToughnessSourceEffect(loreCounterCount, Duration.EndOfTurn)
                 .setText("and gains \"This creature's power and toughness are each equal to the number of lore counters on it.\""));
-
         this.addAbility(ability);
     }
 
@@ -53,25 +57,5 @@ public final class MythRealized extends CardImpl {
     @Override
     public MythRealized copy() {
         return new MythRealized(this);
-    }
-}
-
-class MythRealizedToken extends TokenImpl {
-
-    public MythRealizedToken() {
-        super("", "Monk Avatar creature");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.MONK);
-        subtype.add(SubType.AVATAR);
-        power = new MageInt(0);
-        toughness = new MageInt(0);
-    }
-    private MythRealizedToken(final MythRealizedToken token) {
-        super(token);
-    }
-
-    @Override
-    public MythRealizedToken copy() {
-        return new MythRealizedToken(this);
     }
 }

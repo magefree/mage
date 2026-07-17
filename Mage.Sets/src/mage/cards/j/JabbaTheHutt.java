@@ -80,7 +80,7 @@ class JabbaTheHuttEffect extends OneShotEffect {
 
     JabbaTheHuttEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Create a tapped 4/4 red Hunter creature token. It fights another target creature an opponent control with a bounty counter on it";
+        this.staticText = "Create a tapped 4/4 red Hunter creature token. It fights target creature an opponent controls with a bounty counter on it";
     }
 
     private JabbaTheHuttEffect(final JabbaTheHuttEffect effect) {

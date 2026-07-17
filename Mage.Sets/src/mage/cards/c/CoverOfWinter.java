@@ -1,25 +1,24 @@
 package mage.cards.c;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.PreventionEffectData;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,28 +54,12 @@ public final class CoverOfWinter extends CardImpl {
 class CoverOfWinterEffect extends PreventionEffectImpl {
 
     CoverOfWinterEffect() {
-        super(Duration.WhileOnBattlefield, -1, true);
+        super(Duration.WhileOnBattlefield, -1, true, false, new CountersSourceCount(CounterType.AGE));
         this.staticText = "If a creature would deal combat damage to you and/or one or more creatures you control, prevent X of that damage, where X is the number of age counters on {this}";
     }
 
     private CoverOfWinterEffect(final CoverOfWinterEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER || event.getType() == GameEvent.EventType.DAMAGE_PERMANENT;
-    }
-
-    @Override
-    protected PreventionEffectData preventDamageAction(GameEvent event, Ability source, Game game) {
-        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
-        if (sourcePermanent != null) {
-            return game.preventDamage(event, source, game, sourcePermanent.getCounters(game).getCount(CounterType.AGE));
-        } else {
-            this.discard();
-            return game.preventDamage(event, source, game, 0);
-        }
     }
 
     @Override

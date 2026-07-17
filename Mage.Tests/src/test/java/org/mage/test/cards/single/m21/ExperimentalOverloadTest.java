@@ -24,6 +24,8 @@ public class ExperimentalOverloadTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         execute();
         assertHandCount(playerA, "Shock",1);
+        assertExileCount(playerA, 1);
+        assertPowerToughness(playerA, "Weird Token", 1, 1);
 
     }
 }

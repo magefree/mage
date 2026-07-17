@@ -32,7 +32,7 @@ public final class FlexibleWaterbender extends CardImpl {
 
         // Waterbend {3}: This creature has base power and toughness 5/2 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                new SetBasePowerToughnessSourceEffect(3, 2, Duration.EndOfTurn), new WaterbendCost(3)
+                new SetBasePowerToughnessSourceEffect(5, 2, Duration.EndOfTurn), new WaterbendCost(3)
         ));
     }
 

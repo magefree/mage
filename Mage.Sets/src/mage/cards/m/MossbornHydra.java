@@ -1,10 +1,9 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.DoubleCountersSourceEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,7 +30,7 @@ public final class MossbornHydra extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // This creature enters with a +1/+1 counter on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), "with a +1/+1 counter on it"));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.P1P1.createInstance(1)));
 
         // Landfall -- Whenever a land you control enters, double the number of +1/+1 counters on this creature.
         this.addAbility(new LandfallAbility(new DoubleCountersSourceEffect(CounterType.P1P1)));

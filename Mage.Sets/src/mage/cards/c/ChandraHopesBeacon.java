@@ -51,9 +51,8 @@ public class ChandraHopesBeacon extends CardImpl {
         this.addAbility(new LoyaltyAbility(new ChandraHopesBeaconEffect(), 1), new ChandraHopesBeaconWatcher());
 
         //−X: Chandra, Hope’s Beacon deals X damage to each of up to two targets.
-        LoyaltyAbility loyaltyAbility = new LoyaltyAbility(new DamageTargetEffect(
-                GetXValue.instance, true, "each of up to two targets"
-        ));
+        LoyaltyAbility loyaltyAbility = new LoyaltyAbility(new DamageTargetEffect(GetXValue.instance)
+                .withTargetDescription("each of up to two targets"));
         loyaltyAbility.addTarget(new TargetAnyTarget(0, 2));
         this.addAbility(loyaltyAbility);
     }

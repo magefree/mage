@@ -53,8 +53,8 @@ public final class LongListOfTheEnts extends CardImpl {
         return new LongListOfTheEnts(this);
     }
 
-    static String getKey(Game game, Ability source, int offset) {
-        return "EntList_" + source.getSourceId() + "_" + (offset + CardUtil.getActualSourceObjectZoneChangeCounter(game, source));
+    static String getKey(Game game, Ability source) {
+        return "EntList_" + source.getSourceId() + "_" + CardUtil.getActualSourceObjectZoneChangeCounter(game, source);
     }
 
 }
@@ -67,7 +67,7 @@ enum LongListOfTheEntsHint implements Hint {
         if (ability.getSourcePermanentIfItStillExists(game) == null) {
             return null;
         }
-        Set<SubType> subTypes = (Set<SubType>) game.getState().getValue(LongListOfTheEnts.getKey(game, ability, 0));
+        Set<SubType> subTypes = (Set<SubType>) game.getState().getValue(LongListOfTheEnts.getKey(game, ability));
         if (subTypes == null || subTypes.isEmpty()) {
             return "No creature types have been noted yet.";
         }
@@ -109,14 +109,11 @@ class LongListOfTheEntsEffect extends OneShotEffect {
             return false;
         }
 
-        Object existingEntList = game.getState().getValue(LongListOfTheEnts.getKey(game, source, 0));
-        int offset;
+        Object existingEntList = game.getState().getValue(LongListOfTheEnts.getKey(game, source));
         Set<SubType> newEntList;
         if (existingEntList == null) {
-            offset = 1; // zcc is off-by-one due to still entering battlefield
             newEntList = new LinkedHashSet<>();
         } else {
-            offset = 0;
             newEntList = new LinkedHashSet<>((Set<SubType>) existingEntList);
         }
         Set<String> chosenTypes = newEntList
@@ -132,7 +129,7 @@ class LongListOfTheEntsEffect extends OneShotEffect {
         SubType subType = SubType.byDescription(choice.getChoiceKey());
         game.informPlayers(player.getLogName() + " notes the creature type " + subType);
         newEntList.add(subType);
-        game.getState().setValue(LongListOfTheEnts.getKey(game, source, offset), newEntList);
+        game.getState().setValue(LongListOfTheEnts.getKey(game, source), newEntList);
         FilterSpell filter = new FilterCreatureSpell("a creature spell of that type");
         filter.add(subType.getPredicate());
         game.addDelayedTriggeredAbility(new AddCounterNextSpellDelayedTriggeredAbility(filter), source);

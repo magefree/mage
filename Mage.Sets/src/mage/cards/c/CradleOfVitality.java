@@ -27,7 +27,7 @@ public final class CradleOfVitality extends CardImpl {
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance(), SavedGainedLifeValue.MANY)
                         .setText("put a +1/+1 counter on target creature for each 1 life you gained"),
                 new ManaCostsImpl<>("{1}{W}")
-        ), false, true);
+        ), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

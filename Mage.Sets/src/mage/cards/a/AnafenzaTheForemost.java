@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import mage.MageInt;
@@ -19,7 +18,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
@@ -87,7 +85,7 @@ class AnafenzaTheForemostEffect extends ReplacementEffectImpl {
         if (controller != null) {
             if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
                 Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-                if (permanent != null && !(permanent instanceof PermanentToken)) {
+                if (permanent != null && !permanent.isToken()) {
                     return controller.moveCards(permanent, Zone.EXILED, source, game);
                 }
             } else {
@@ -111,7 +109,7 @@ class AnafenzaTheForemostEffect extends ReplacementEffectImpl {
         if (zEvent.getToZone() == Zone.GRAVEYARD) {
             Card card = game.getCard(event.getTargetId());
             if (card != null && game.getOpponents(source.getControllerId()).contains(card.getOwnerId())) { // Anafenza only cares about cards
-                if (zEvent.getTarget() != null) { // if it comes from permanent, check if it was a creature on the battlefield
+                if (zEvent.isPermanentMoved()) {
                     if (zEvent.getTarget().isCreature(game)) {
                         return true;
                     }

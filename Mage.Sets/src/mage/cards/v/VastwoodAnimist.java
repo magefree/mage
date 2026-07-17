@@ -12,11 +12,14 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -34,7 +37,7 @@ public final class VastwoodAnimist extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}: Target land you control becomes an X/X Elemental creature until end of turn, where X is the number of Allies you control. It's still a land.
+        // {T}: Target land you control becomes an X/X Elemental creature until end of turn, where X is the number of Allies you control. It's still a land.
         Ability ability = new SimpleActivatedAbility(new VastwoodAnimistEffect(), new TapSourceCost());
         ability.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent()));
         this.addAbility(ability);
@@ -52,14 +55,10 @@ public final class VastwoodAnimist extends CardImpl {
 
 class VastwoodAnimistEffect extends OneShotEffect {
 
-    static final FilterControlledPermanent filterAllies = new FilterControlledPermanent("allies you control");
-
-    static {
-        filterAllies.add(SubType.ALLY.getPredicate());
-    }
+    static final FilterControlledPermanent filterAllies = new FilterControlledPermanent(SubType.ALLY);
 
     public VastwoodAnimistEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.BecomeCreature);
         this.staticText = "Target land you control becomes an X/X Elemental creature until end of turn, where X is the number of Allies you control. It's still a land.";
     }
 
@@ -75,27 +74,14 @@ class VastwoodAnimistEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int amount = new PermanentsOnBattlefieldCount(filterAllies).calculate(game, source, this);
-        ContinuousEffect effect = new BecomesCreatureTargetEffect(new VastwoodAnimistElementalToken(amount), false, true, Duration.EndOfTurn);
+        ContinuousEffect effect = new BecomesCreatureTargetEffect(
+            new CreatureToken(amount, amount, "X/X Elemental creature, where X is the number of Allies you control", SubType.ELEMENTAL),
+            false,
+            true,
+            Duration.EndOfTurn
+        );
         effect.setTargetPointer(this.getTargetPointer().copy());
         game.addEffect(effect, source);
         return false;
-    }
-}
-
-class VastwoodAnimistElementalToken extends TokenImpl {
-
-    VastwoodAnimistElementalToken(int amount) {
-        super("", "X/X Elemental creature, where X is the number of Allies you control");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.ELEMENTAL);
-        power = new MageInt(amount);
-        toughness = new MageInt(amount);
-    }
-    private VastwoodAnimistElementalToken(final VastwoodAnimistElementalToken token) {
-        super(token);
-    }
-
-    public VastwoodAnimistElementalToken copy() {
-        return new VastwoodAnimistElementalToken(this);
     }
 }

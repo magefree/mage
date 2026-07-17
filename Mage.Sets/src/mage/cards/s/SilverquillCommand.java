@@ -59,7 +59,7 @@ public final class SilverquillCommand extends CardImpl {
 
         // • Target player draws a card and loses 1 life.
         mode = new Mode(new DrawCardTargetEffect(1));
-        mode.addEffect(new LoseLifeTargetEffect(1).setText("and loses 1 life"));
+        mode.addEffect(new LoseLifeTargetEffect(1).withTargetDescription("and"));
         mode.addTarget(new TargetPlayer());
         this.getSpellAbility().addMode(mode);
 

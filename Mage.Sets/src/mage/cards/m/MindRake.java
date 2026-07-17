@@ -1,7 +1,6 @@
 package mage.cards.m;
 
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
@@ -20,13 +19,9 @@ public final class MindRake extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // Target player discards two cards.
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
-        this.getSpellAbility().addTarget(new TargetPlayer());
-
         // Overload {1}{B}
-        this.addAbility(new OverloadAbility(this, new DiscardEachPlayerEffect(
-                2, false
-        ), new ManaCostsImpl<>("{1}{B}")));
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{1}{B}"),
+                new TargetPlayer(), new DiscardTargetEffect(2));
     }
 
     private MindRake(final MindRake card) {

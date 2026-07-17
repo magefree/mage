@@ -28,7 +28,7 @@ public final class UrzasRage extends CardImpl {
 
         // Urza's Rage deals 3 damage to any target. If Urza's Rage was kicked, instead it deals 10 damage to that creature or player and the damage can't be prevented.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DamageTargetEffect(10, false), new DamageTargetEffect(3),
+                new DamageTargetEffect(10).withCantBePrevented(), new DamageTargetEffect(3),
                 KickedCondition.ONCE, "{this} deals 3 damage to any target. If this spell was kicked, " +
                 "instead it deals 10 damage to that permanent or player and the damage can't be prevented."
         ));

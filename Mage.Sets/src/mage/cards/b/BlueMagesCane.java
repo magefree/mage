@@ -58,7 +58,7 @@ public final class BlueMagesCane extends CardImpl {
         this.addAbility(ability);
 
         // Spirit of the Whalaqee -- Equip {2}
-        this.addAbility(new EquipAbility(2).withFlavorWord("Spirit of the Whalaqee"));
+        this.addAbility(new EquipAbility(2, false).withFlavorWord("Spirit of the Whalaqee"));
     }
 
     private BlueMagesCane(final BlueMagesCane card) {

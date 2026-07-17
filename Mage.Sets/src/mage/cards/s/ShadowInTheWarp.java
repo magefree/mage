@@ -14,7 +14,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -22,6 +21,7 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 import mage.watchers.common.SpellsCastWatcher;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -108,8 +108,8 @@ class FirstCastCreatureSpellPredicate implements ObjectSourcePlayerPredicate<Car
 
 class ShadowInTheWarpTriggeredAbility extends TriggeredAbilityImpl {
 
-    public ShadowInTheWarpTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(2, false));
+    ShadowInTheWarpTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
     }
 
     private ShadowInTheWarpTriggeredAbility(final ShadowInTheWarpTriggeredAbility ability) {

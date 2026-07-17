@@ -13,7 +13,7 @@ import mage.game.stack.StackObject;
 public class DiscardedByOpponentTriggeredAbility extends TriggeredAbilityImpl {
 
     public DiscardedByOpponentTriggeredAbility(Effect effect) {
-        super(Zone.GRAVEYARD, effect, false);
+        super(Zone.ALL, effect, false); // support zone replacement effects like Rest in Peace
         setTriggerPhrase("When a spell or ability an opponent controls causes you to discard this card, ");
     }
 

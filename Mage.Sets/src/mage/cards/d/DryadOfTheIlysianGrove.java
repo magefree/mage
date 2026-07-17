@@ -31,7 +31,7 @@ public final class DryadOfTheIlysianGrove extends CardImpl {
         ));
 
         // Lands you control are every basic land type in addition to their other types.
-        this.addAbility(new SimpleStaticAbility(new BecomesAllBasicsControlledEffect()));
+        this.addAbility(new SimpleStaticAbility(new BecomesAllBasicsControlledEffect(Duration.WhileOnBattlefield)));
     }
 
     private DryadOfTheIlysianGrove(final DryadOfTheIlysianGrove card) {

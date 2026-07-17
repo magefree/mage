@@ -1,21 +1,16 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +29,8 @@ public final class DarkRevenant extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Dark Revenant dies, put it on top of its owner's library.
-        this.addAbility(new DiesSourceTriggeredAbility(new DarkRevenantEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new PutOnLibraryTargetEffect(true)
+                .setText("put it on top of its owner's library"), false, SetTargetPointer.CARD));
     }
 
     private DarkRevenant(final DarkRevenant card) {
@@ -44,34 +40,5 @@ public final class DarkRevenant extends CardImpl {
     @Override
     public DarkRevenant copy() {
         return new DarkRevenant(this);
-    }
-}
-
-class DarkRevenantEffect extends OneShotEffect {
-
-    DarkRevenantEffect() {
-        super(Outcome.ReturnToHand);
-        staticText = "put it on top of its owner's library";
-    }
-
-    private DarkRevenantEffect(final DarkRevenantEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DarkRevenantEffect copy() {
-        return new DarkRevenantEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
-        if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if(controller != null) {
-                return controller.putCardsOnTopOfLibrary(card, game, source, true);
-            }
-        }
-        return true;
     }
 }

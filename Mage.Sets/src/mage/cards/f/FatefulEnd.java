@@ -18,7 +18,7 @@ public final class FatefulEnd extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // Fateful End deals 3 damage to any target. Scry 1.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(3, true, "any target"));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new ScryEffect(1, false));
     }

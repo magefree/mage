@@ -45,7 +45,7 @@ public final class DragoonsLance extends CardImpl {
         )));
 
         // Gae Bolg -- Equip {4}
-        this.addAbility(new EquipAbility(4).withFlavorWord("Gae Bolg"));
+        this.addAbility(new EquipAbility(4, false).withFlavorWord("Gae Bolg"));
     }
 
     private DragoonsLance(final DragoonsLance card) {

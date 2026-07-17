@@ -38,7 +38,7 @@ public final class MuYanlingCelestialWind extends CardImpl {
         Ability ability = new LoyaltyAbility(new BoostTargetEffect(
                 -5, 0, Duration.UntilYourNextTurn
         ).setText("Until your next turn, up to one target creature gets -5/-0."), 1);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
 
         // −3: Return up to two target creatures to their owners' hands.

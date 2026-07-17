@@ -2,14 +2,13 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
@@ -37,10 +36,7 @@ public final class RocHatchling extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Roc Hatchling enters the battlefield with four shell counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.SHELL.createInstance(4)),
-                "with four shell counters on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.SHELL.createInstance(4)));
 
         // At the beginning of your upkeep, remove a shell counter from Roc Hatchling.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(

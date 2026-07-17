@@ -1,10 +1,9 @@
 package mage.cards.h;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,10 +28,7 @@ public final class HagraConstrictor extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Hagra Constrictor enters the battlefield with two +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
-                "with two +1/+1 counters on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.P1P1.createInstance(2)));
 
         // Each creature you control with a +1/+1 counter on it has menace.
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(

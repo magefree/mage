@@ -27,7 +27,7 @@ public final class ForceDrain extends CardImpl {
         this.getSpellAbility().addEffect(new ForceDrainEffect());
 
         // Scry 1
-        this.getSpellAbility().addEffect(new ScryEffect(1));
+        this.getSpellAbility().addEffect(new ScryEffect(1).concatBy("<br>"));
     }
 
     private ForceDrain(final ForceDrain card) {
@@ -44,7 +44,7 @@ class ForceDrainEffect extends OneShotEffect {
 
     ForceDrainEffect() {
         super(Outcome.Damage);
-        this.staticText = "ForceDrain deals 2 damage to any target. If player was dealt damage this way, you gain 2 life";
+        this.staticText = "{this} deals 2 damage to any target. If a player was dealt damage this way, you gain 2 life";
     }
 
     private ForceDrainEffect(final ForceDrainEffect effect) {

@@ -14,6 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
@@ -39,7 +40,7 @@ public final class EntropicBattlecruiser extends CardImpl {
         // STATION 1+
         // Whenever an opponent discards a card, they lose 3 life.
         this.addAbility(new StationLevelAbility(1).withLevelAbility(new DiscardsACardOpponentTriggeredAbility(
-                new LoseLifeTargetEffect(3).setText("they lose 3 life"), false
+                new LoseLifeTargetEffect(3).setText("they lose 3 life"), false, SetTargetPointer.PLAYER
         )));
 
         // STATION 8+

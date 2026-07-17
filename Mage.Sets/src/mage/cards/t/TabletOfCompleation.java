@@ -15,6 +15,7 @@ import mage.abilities.mana.ActivateIfConditionManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.ManaType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -26,8 +27,8 @@ import java.util.UUID;
  */
 public final class TabletOfCompleation extends CardImpl {
 
-    private static final Condition condition1 = new SourceHasCounterCondition(CounterType.OIL, 2);
-    private static final Condition condition2 = new SourceHasCounterCondition(CounterType.OIL, 5);
+    private static final Condition condition1 = new SourceHasCounterCondition(CounterType.OIL, ComparisonType.MORE_THAN, 1);
+    private static final Condition condition2 = new SourceHasCounterCondition(CounterType.OIL, ComparisonType.MORE_THAN, 4);
 
     public TabletOfCompleation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

@@ -28,10 +28,13 @@ public class SpellCostReductionForEachSourceEffect extends CostModificationEffec
         this.reduceGenericMana = reduceGenericMana;
 
         StringBuilder sb = new StringBuilder();
-        sb.append("this spell costs {")
-                .append(this.reduceGenericMana)
-                .append("} less to cast for each ")
-                .append(this.eachAmount.getMessage());
+        sb.append("this spell costs {");
+        sb.append(this.reduceGenericMana);
+        sb.append("} less to cast ");
+        if (!eachAmount.getMessage().startsWith("for each ")) {
+            sb.append("for each ");
+        }
+        sb.append(this.eachAmount.getMessage());
         this.staticText = sb.toString();
     }
 

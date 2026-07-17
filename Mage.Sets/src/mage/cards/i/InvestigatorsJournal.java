@@ -1,7 +1,5 @@
 package mage.cards.i;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,17 +11,18 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.token.ClueAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class InvestigatorsJournal extends CardImpl {
@@ -31,6 +30,7 @@ public final class InvestigatorsJournal extends CardImpl {
     public InvestigatorsJournal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
+        this.subtype.add(SubType.BOOK);
         this.subtype.add(SubType.CLUE);
 
         // Investigator's Journal enters the battlefield with a number of suspect counters on it equal to the greatest number of creatures a player controls.

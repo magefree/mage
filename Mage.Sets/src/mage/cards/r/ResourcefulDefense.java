@@ -5,6 +5,7 @@ import mage.abilities.common.LeavesBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutSavedPermanentCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -12,13 +13,12 @@ import mage.constants.MultiAmountType;
 import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.counters.CounterType;
-import mage.counters.Counters;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
@@ -37,9 +37,11 @@ import java.util.stream.Collectors;
  */
 public class ResourcefulDefense extends CardImpl {
 
-    public static final FilterControlledPermanent filter2 = new FilterControlledPermanent("another permanent");
+    private static final FilterPermanent filter = new FilterControlledPermanent();
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("another permanent");
 
     static {
+        filter.add(CounterAnyPredicate.instance);
         filter2.add(AnotherPredicate.instance);
     }
 
@@ -47,12 +49,12 @@ public class ResourcefulDefense extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // Whenever a permanent you control leaves the battlefield, if it had counters on it, put those counters on target permanent you control.
-        Ability ltbAbility = new ResourcefulDefenseTriggeredAbility();
-        ltbAbility.addTarget(new TargetControlledPermanent(filter2));
-        this.addAbility(ltbAbility);
+        Ability ability = new LeavesBattlefieldAllTriggeredAbility(new PutSavedPermanentCountersTargetEffect("permanentLeftBattlefield"), filter);
+        ability.addTarget(new TargetControlledPermanent());
+        this.addAbility(ability);
 
         // {4}{W}: Move any number of counters from target permanent you control to another target permanent you control.
-        Ability ability = new SimpleActivatedAbility(new ResourcefulDefenseMoveCounterEffect(), new ManaCostsImpl<>("{4}{W}"));
+        ability = new SimpleActivatedAbility(new ResourcefulDefenseMoveCounterEffect(), new ManaCostsImpl<>("{4}{W}"));
 
         Target fromTarget = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT);
         fromTarget.setTargetTag(1);
@@ -136,72 +138,5 @@ class ResourcefulDefenseMoveCounterEffect extends OneShotEffect {
     @Override
     public ResourcefulDefenseMoveCounterEffect copy() {
         return new ResourcefulDefenseMoveCounterEffect(this);
-    }
-}
-
-class ResourcefulDefenseTriggeredAbility extends LeavesBattlefieldAllTriggeredAbility {
-
-    ResourcefulDefenseTriggeredAbility() {
-        super(new ResourcefulDefenseLeaveEffect(), StaticFilters.FILTER_CONTROLLED_PERMANENT);
-        setTriggerPhrase("Whenever a permanent you control leaves the battlefield, if it had counters on it, ");
-    }
-
-    private ResourcefulDefenseTriggeredAbility(final ResourcefulDefenseTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ResourcefulDefenseTriggeredAbility copy() {
-        return new ResourcefulDefenseTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!super.checkTrigger(event, game)) {
-            return false;
-        }
-
-        Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-        Player controller = game.getPlayer(permanent.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-
-        Counters counters = permanent.getCounters(game);
-        if (counters.values().stream().mapToInt(Counter::getCount).noneMatch(x -> x > 0)) {
-            return false;
-        }
-        this.getEffects().setValue("counters", counters);
-        return true;
-    }
-}
-
-class ResourcefulDefenseLeaveEffect extends OneShotEffect {
-
-    ResourcefulDefenseLeaveEffect() {
-        super(Outcome.Benefit);
-        staticText = "put those counters on target permanent you control";
-    }
-
-    private ResourcefulDefenseLeaveEffect(final ResourcefulDefenseLeaveEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ResourcefulDefenseLeaveEffect copy() {
-        return new ResourcefulDefenseLeaveEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent == null) {
-            return false;
-        }
-        Counters counters = (Counters) this.getValue("counters");
-        counters.values()
-                .stream().filter(counter -> counter.getCount() > 0)
-                .forEach(counter -> permanent.addCounters(counter, source.getControllerId(), source, game));
-        return true;
     }
 }

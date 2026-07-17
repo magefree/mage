@@ -2,8 +2,7 @@ package mage.cards.t;
 
 import mage.MageItem;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.DamageAllControlledTargetEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DamageTargetAndAllControlledEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,12 +31,9 @@ public final class TheFallOfKroog extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect()
                 .setText("choose target opponent. Destroy target land that player controls")
                 .setTargetPointer(new SecondTargetPointer()));
-        this.getSpellAbility().addEffect(new DamageTargetEffect(
-                3, true, "that player"
-        ));
-        this.getSpellAbility().addEffect(new DamageAllControlledTargetEffect(
-                1, StaticFilters.FILTER_PERMANENT_CREATURE
-        ).setText("and 1 damage to each creature they control"));
+        this.getSpellAbility().addEffect(new DamageTargetAndAllControlledEffect(
+                3, 1, StaticFilters.FILTER_PERMANENT_CREATURE
+        ).setText("{this} deals 3 damage to that player and 1 damage to each creature they control"));
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addTarget(new TheFallOfKroogTarget());
     }

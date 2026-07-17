@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -36,10 +36,7 @@ public final class ArwenMortalQueen extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Arwen, Mortal Queen enters the battlefield with an indestructible counter on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.INDESTRUCTIBLE.createInstance(1)),
-                "with an indestructible counter on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.INDESTRUCTIBLE.createInstance(1)));
 
         // {1}, Remove an indestructible counter from Arwen: Another target creature gains indestructible until end of turn. Put a +1/+1 counter and a lifelink counter on that creature and a +1/+1 counter and a lifelink counter on Arwen.
         Ability ability = new SimpleActivatedAbility(

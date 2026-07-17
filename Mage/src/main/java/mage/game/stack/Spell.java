@@ -2,12 +2,12 @@ package mage.game.stack;
 
 import mage.*;
 import mage.abilities.*;
+import mage.abilities.common.SpellTransformedAbility;
 import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.PrototypeAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.counters.Counter;
@@ -20,7 +20,6 @@ import mage.game.MageObjectAttribute;
 import mage.game.events.CopiedStackObjectEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -81,11 +80,6 @@ public class Spell extends StackObjectImpl implements Card {
 
         Card affectedCard = card;
 
-        // TODO: must be removed after transform cards (one side) migrated to MDF engine (multiple sides)
-        if (ability.getSpellAbilityCastMode().isTransformed() && affectedCard.getSecondCardFace() != null) {
-            // simulate another side as new card (another code part in continues effect from disturb ability)
-            affectedCard = TransformAbility.transformCardSpellStatic(card, card.getSecondCardFace(), game);
-        }
         if (ability instanceof PrototypeAbility) {
             affectedCard = ((PrototypeAbility) ability).prototypeCardSpell(card);
             this.prototyped = true;
@@ -103,6 +97,11 @@ public class Spell extends StackObjectImpl implements Card {
         this.ability = ability;
         this.ability.setControllerId(controllerId);
 
+        // 712.8c TDFC spell "Its mana value is calculated using the mana cost of its front face"
+        if(ability instanceof SpellTransformedAbility && manaCost.isEmpty()) {
+            this.manaCost = card.getMainCard().getManaCost().copy();
+            this.ability.setSourceId(affectedCard.getId()); // Maybe wrong? Permanent has incorrect id otherwise
+        }
         if (ability.getSpellAbilityCastMode().isFaceDown()) {
             // TODO: need research:
             //  - why it use game param for color and subtype (possible bug?)
@@ -335,45 +334,39 @@ public class Spell extends StackObjectImpl implements Card {
             counter(null, /*this.getSpellAbility()*/ game);
             return false;
         } else if (this.isEnchantment(game) && this.hasSubtype(SubType.AURA, game)) {
+            boolean bestow = SpellAbilityCastMode.BESTOW.equals(ability.getSpellAbilityCastMode());
             if (ability.getTargets().stillLegal(ability, game)) {
-                boolean bestow = SpellAbilityCastMode.BESTOW.equals(ability.getSpellAbilityCastMode());
                 if (bestow) {
                     // before put to play:
                     // Must be removed first time, after that will be removed by continous effect
                     // Otherwise effects like evolve trigger from creature comes into play event
-                    card.removeCardType(CardType.CREATURE);
-                    card.addSubType(game, SubType.AURA);
+                    BestowAbility.becomeAura(game, card);
                 }
                 UUID permId;
-                boolean flag;
+                boolean permanentCreated;
                 if (isCopy()) {
                     Token token = CopyTokenFunction.createTokenCopy(card, game, this);
                     // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
                     if (token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, null, false)) {
                         permId = token.getLastAddedTokenIds().stream().findFirst().orElse(null);
-                        flag = true;
+                        permanentCreated = true;
                     } else {
                         permId = null;
-                        flag = false;
+                        permanentCreated = false;
                     }
                 } else {
                     permId = card.getId();
                     MageObjectReference mor = new MageObjectReference(getSpellAbility());
                     game.storePermanentCostsTags(mor, getSpellAbility());
-                    flag = controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
+                    permanentCreated = controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
                 }
-                if (flag) {
+                if (permanentCreated) {
                     if (bestow) {
-                        // card will be copied during putOntoBattlefield, so the card of CardPermanent has to be changed
-                        // TODO: Find a better way to prevent bestow creatures from being effected by creature affecting abilities
                         Permanent permanent = game.getPermanent(permId);
-                        if (permanent instanceof PermanentCard) {
-                            // after put to play:
-                            // restore removed stats (see "before put to play" above)
-                            permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
-                            card.addCardType(CardType.CREATURE);
-                            card.getSubtype().remove(SubType.AURA);
-                        }
+                        permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
+                        // The continuous effect that makes the permanent an aura doesn't apply until after the permanent has already entered,
+                        // so it must be modified manually here first. Same root cause as the Blood Moon problem https://github.com/magefree/mage/issues/4202
+                        BestowAbility.becomeAura(game, permanent);
                     }
                     if (isCopy()) {
                         Permanent token = game.getPermanent(permId);
@@ -381,7 +374,8 @@ public class Spell extends StackObjectImpl implements Card {
                             return false;
                         }
                         for (Ability ability2 : token.getAbilities()) {
-                            if (!bestow || ability2 instanceof BestowAbility) {
+                            if (ability2 instanceof SpellAbility && ability2.getTargets().size() == 1) {
+                                // Copy aura SpellAbility's targets into the new token's SpellAbility
                                 ability2.getTargets().get(0).add(ability.getFirstTarget(), game);
                                 ability2.getEffects().get(0).apply(game, ability2);
                                 return ability2.resolve(game);
@@ -391,24 +385,13 @@ public class Spell extends StackObjectImpl implements Card {
                     }
                     return ability.resolve(game);
                 }
-                if (bestow) {
-                    card.addCardType(game, CardType.CREATURE);
-                }
                 return false;
             }
             // Aura has no legal target and its a bestow enchantment -> Add it to battlefield as creature
-            if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) {
+            if (bestow) {
                 MageObjectReference mor = new MageObjectReference(getSpellAbility());
                 game.storePermanentCostsTags(mor, getSpellAbility());
-                if (controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null)) {
-                    Permanent permanent = game.getPermanent(card.getId());
-                    if (permanent instanceof PermanentCard) {
-                        ((PermanentCard) permanent).getCard().addCardType(game, CardType.CREATURE);
-                        ((PermanentCard) permanent).getCard().removeSubType(game, SubType.AURA);
-                        return true;
-                    }
-                }
-                return false;
+                return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
             } else {
                 //20091005 - 608.2b
                 if (!game.isSimulation()) {
@@ -417,15 +400,25 @@ public class Spell extends StackObjectImpl implements Card {
                 counter(null, /*this.getSpellAbility()*/ game);
                 return false;
             }
-        } else if (isCopy()) {
-            Token token = CopyTokenFunction.createTokenCopy(card, game, this);
-            // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
-            token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, null, false);
-            return true;
         } else {
-            MageObjectReference mor = new MageObjectReference(getSpellAbility());
-            game.storePermanentCostsTags(mor, getSpellAbility());
-            return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
+            // Check if spell cast with mutate
+            if (SpellAbilityCastMode.MUTATE.equals(ability.getSpellAbilityCastMode())
+                    && ability.getTargets().stillLegal(ability, game)) {
+                Permanent permanentToMutate = game.getPermanent(ability.getFirstTarget());
+                if (permanentToMutate != null) {
+                    return permanentToMutate.mutate(card, this, game);
+                }
+            }
+            if (isCopy()) {
+                Token token = CopyTokenFunction.createTokenCopy(card, game, this);
+                // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
+                token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, null, false);
+                return true;
+            } else {
+                MageObjectReference mor = new MageObjectReference(getSpellAbility());
+                game.storePermanentCostsTags(mor, getSpellAbility());
+                return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
+            }
         }
     }
 
@@ -585,10 +578,8 @@ public class Spell extends StackObjectImpl implements Card {
             return cardTypes;
         }
         if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) {
-            List<CardType> cardTypes = new ArrayList<>();
-            cardTypes.addAll(card.getCardType(game));
-            cardTypes.remove(CardType.CREATURE);
-            return cardTypes;
+            Card modifiedCard = this.getSpellAbility().getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(card, this.getSpellAbility(), game);
+            return modifiedCard.getCardType(game);
         }
         return card.getCardType(game);
     }
@@ -600,26 +591,19 @@ public class Spell extends StackObjectImpl implements Card {
 
     @Override
     public SubTypes getSubtype(Game game) {
+        // Bestow's changes are non-copiable, and must be reapplied
         if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) {
-            SubTypes subtypes = card.getSubtype(game);
-            if (!subtypes.contains(SubType.AURA)) { // do it only once
-                subtypes.add(SubType.AURA);
-            }
-            return subtypes;
+            Card modifiedCard = this.getSpellAbility().getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(card, this.getSpellAbility(), game);
+            return modifiedCard.getSubtype();
         }
         return card.getSubtype(game);
     }
 
     @Override
     public boolean hasSubtype(SubType subtype, Game game) {
-        if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) { // workaround for Bestow (don't like it)
-            SubTypes subtypes = card.getSubtype(game);
-            if (!subtypes.contains(SubType.AURA)) { // do it only once
-                subtypes.add(SubType.AURA);
-            }
-            if (subtypes.contains(subtype)) {
-                return true;
-            }
+        if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) {
+            Card modifiedCard = this.getSpellAbility().getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(card, this.getSpellAbility(), game);
+            return modifiedCard.hasSubtype(subtype, game);
         }
         return card.hasSubtype(subtype, game);
     }
@@ -689,24 +673,23 @@ public class Spell extends StackObjectImpl implements Card {
         this.manaCost = costs.copy();
     }
 
-    /**
-     * 202.3b When calculating the converted mana cost of an object with an {X}
-     * in its mana cost, X is treated as 0 while the object is not on the stack,
-     * and X is treated as the number chosen for it while the object is on the
-     * stack.
-     *
-     * @return
-     */
     @Override
     public int getManaValue() {
         int cmc = 0;
+
         if (faceDown) {
             return 0;
         }
+
+        // 202.3e
+        // When calculating the mana value of an object with an {X} in its mana cost, X is 
+        // treated as 0 while the object is not on the stack, and X is treated as the number 
+        // chosen for it while the object is on the stack.
         for (SpellAbility spellAbility : spellAbilities) {
             cmc += spellAbility.getConvertedXManaCost(getCard());
         }
         cmc += this.manaCost.manaValue();
+
         return cmc;
     }
 
@@ -874,7 +857,7 @@ public class Spell extends StackObjectImpl implements Card {
         Card copiedPart = (Card) mapOldToNew.get(this.card.getId());
 
         // copy spell
-        Spell spellCopy = new Spell(copiedPart, this.ability.copySpell(this.card, copiedPart), this.controllerId, this.fromZone, game, true);
+        Spell spellCopy = new Spell(copiedPart, this.ability.copySpell(this.card, copiedPart), this.controllerId, Zone.STACK, game, true);
         UUID copiedSourceId = spellCopy.ability.getSourceId();
 
         // non-fused spell:
@@ -1032,6 +1015,15 @@ public class Spell extends StackObjectImpl implements Card {
 
     public Zone getFromZone() {
         return this.fromZone;
+    }
+
+    // If fromZone is STACK, then spell was a copy created on stack, not cast
+    public boolean wasCast() {
+        return !this.fromZone.match(Zone.STACK);
+    }
+
+    public boolean wasCastFrom(Zone zone) {
+        return this.wasCast() && this.fromZone.match(zone);
     }
 
     @Override
@@ -1214,6 +1206,16 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
+    public void setPT(int power, int toughness) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public void setPT(MageInt power, MageInt toughness) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
     public boolean cantBeAttachedBy(MageObject attachment, Ability source, Game game, boolean silentMode) {
         throw new UnsupportedOperationException("Not supported.");
     }
@@ -1249,8 +1251,8 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public void looseAllAbilities(Game game) {
-        throw new UnsupportedOperationException("Spells should not loose all abilities. Check if this operation is correct.");
+    public void loseAllAbilities(Game game) {
+        throw new UnsupportedOperationException("Spells should not lose all abilities. Check if this operation is correct.");
     }
 
     @Override

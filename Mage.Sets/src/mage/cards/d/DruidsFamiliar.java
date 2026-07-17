@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 /**
  *
@@ -18,8 +17,6 @@ import mage.constants.Zone;
 
  */
 public final class DruidsFamiliar extends CardImpl {
-
-    private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures gets +2/+2";
 
     public DruidsFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
@@ -32,7 +29,7 @@ public final class DruidsFamiliar extends CardImpl {
         this.addAbility(new SoulbondAbility());
 
         // As long as Druid's Familiar is paired with another creature, each of those creatures gets +2/+2.
-        this.addAbility(new SimpleStaticAbility(new BoostPairedEffect(2, 2, ruleText)));
+        this.addAbility(new SimpleStaticAbility(new BoostPairedEffect(2, 2)));
     }
 
     private DruidsFamiliar(final DruidsFamiliar card) {

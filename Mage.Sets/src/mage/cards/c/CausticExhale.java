@@ -1,12 +1,13 @@
 package mage.cards.c;
 
 import mage.abilities.costs.OrCost;
-import mage.abilities.costs.common.BeholdDragonCost;
+import mage.abilities.costs.common.BeholdCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -22,7 +23,7 @@ public final class CausticExhale extends CardImpl {
         // As an additional cost to cast this spell, behold a Dragon or pay {1}.
         this.getSpellAbility().addCost(new OrCost(
                 "behold a Dragon or pay {1}",
-                new BeholdDragonCost(), new GenericManaCost(1)
+                new BeholdCost(SubType.DRAGON), new GenericManaCost(1)
         ));
 
         // Target creature gets -3/-3 until end of turn.

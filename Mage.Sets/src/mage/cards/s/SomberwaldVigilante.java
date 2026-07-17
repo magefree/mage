@@ -25,7 +25,7 @@ public final class SomberwaldVigilante extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Somberwald Vigilante becomes blocked by a creature, Somberwald Vigilante deals 1 damage to that creature.
-        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new DamageTargetEffect(1, true, "that creature"), false));
+        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new DamageTargetEffect(1).withTargetDescription("that creature"), false));
     }
 
     private SomberwaldVigilante(final SomberwaldVigilante card) {

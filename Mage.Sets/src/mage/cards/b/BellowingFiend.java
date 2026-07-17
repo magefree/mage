@@ -3,9 +3,7 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,12 +29,10 @@ public final class BellowingFiend extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Whenever Bellowing Fiend deals damage to a creature, Bellowing Fiend deals 3 damage to that creature's controller and 3 damage to you.
-        Ability ability = new DealsDamageToACreatureTriggeredAbility(new BellowingFiendEffect(), false, false, true);
-        Effect effect = new DamageControllerEffect(3);
-        effect.setText("and 3 damage to you");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        this.addAbility(new DealsDamageToACreatureTriggeredAbility(
+                new BellowingFiendEffect(), false, false, true));
     }
 
     private BellowingFiend(final BellowingFiend card) {
@@ -53,7 +49,7 @@ class BellowingFiendEffect extends OneShotEffect {
 
     BellowingFiendEffect() {
         super(Outcome.Detriment);
-        this.staticText = "{this} deals 3 damage to that creature's controller";
+        this.staticText = "{this} deals 3 damage to that creature's controller and 3 damage to you";
     }
 
     private BellowingFiendEffect(final BellowingFiendEffect effect) {
@@ -67,15 +63,17 @@ class BellowingFiendEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean applied = false;
         Permanent damagedCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (damagedCreature != null) {
             Player controller = game.getPlayer(damagedCreature.getControllerId());
             if (controller != null) {
                 controller.damage(3, source.getSourceId(), source, game);
-                applied = true;
             }
         }
-        return applied;
+        Player you = game.getPlayer(source.getControllerId());
+        if (you != null) {
+            you.damage(3, source.getSourceId(), source, game);
+        }
+        return true;
     }
 }

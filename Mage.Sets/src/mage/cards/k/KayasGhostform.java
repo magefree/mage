@@ -3,7 +3,7 @@ package mage.cards.k;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlAttachedEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -15,6 +15,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -59,7 +61,7 @@ public final class KayasGhostform extends CardImpl {
 class KayasGhostformTriggeredAbility extends TriggeredAbilityImpl {
 
     KayasGhostformTriggeredAbility() {
-        super(Zone.ALL, new ReturnToBattlefieldUnderYourControlAttachedEffect(), false);
+        super(Zone.ALL, new ReturnToBattlefieldUnderYourControlTargetEffect(), false);
         setLeavesTheBattlefieldTrigger(true);
     }
 
@@ -84,26 +86,33 @@ class KayasGhostformTriggeredAbility extends TriggeredAbilityImpl {
                 || !(zEvent.getToZone() == Zone.GRAVEYARD || zEvent.getToZone() == Zone.EXILED)) {
             return false;
         }
-        if (zEvent.getTarget() != null && zEvent.getTarget().getAttachments() != null
-                && zEvent.getTarget().getAttachments().contains(this.getSourceId())) {
-            getEffects().get(0).setValue("attachedTo", zEvent.getTarget());
-            return true;
+        Permanent creatureDied = zEvent.getTarget();
+        if (creatureDied == null) {
+            return false;
+        }
+        boolean triggered = false;
+        if (creatureDied.getAttachments().contains(this.getSourceId())) {
+            triggered = true;
         } else {
             // If both (attachment and attached went to graveyard at the same time, the attachemnets can be already removed from the attached object.)
             // So check here with the LKI of the enchantment
-            Permanent attachment = game.getPermanentOrLKIBattlefield(getSourceId());
+            Permanent attachment = getSourcePermanentOrLKI(game);
             if (attachment != null
                     && zEvent.getTargetId() != null && attachment.getAttachedTo() != null
                     && zEvent.getTargetId().equals(attachment.getAttachedTo())) {
                 Permanent attachedTo = game.getPermanentOrLKIBattlefield(attachment.getAttachedTo());
                 if (attachedTo != null
                         && attachment.getAttachedToZoneChangeCounter() == attachedTo.getZoneChangeCounter(game)) {  // zoneChangeCounter is stored in Permanent
-                    getEffects().get(0).setValue("attachedTo", attachedTo);
-                    return true;
+                    triggered = true;
                 }
             }
         }
-        return false;
+        if (!triggered) {
+            return false;
+        }
+        getEffects().setTargetPointer(new FixedTargets(
+                CardUtil.getAllCardsFromPermanentLeftBattlefield(creatureDied, game), game));
+        return true;
     }
 
     @Override

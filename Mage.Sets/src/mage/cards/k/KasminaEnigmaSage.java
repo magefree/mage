@@ -46,7 +46,7 @@ public final class KasminaEnigmaSage extends CardImpl {
 
         // −X: Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it.
         this.addAbility(new LoyaltyAbility(FractalToken.getEffect(
-                GetXValue.instance, "Put X +1/+1 counters on it"
+                GetXValue.instance, ". Put X +1/+1 counters on it"
         )));
 
         // −8: Search your library for an instant or sorcery card that shares a color with this planeswalker, exile that card, then shuffle. You may cast that card without paying its mana cost.

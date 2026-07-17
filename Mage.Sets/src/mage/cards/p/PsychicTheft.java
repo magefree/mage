@@ -6,7 +6,7 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -95,7 +95,7 @@ class PsychicTheftEffect extends OneShotEffect {
 
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
                 new ConditionalOneShotEffect(
-                        new ReturnFromExileEffect(Zone.HAND),
+                        new ReturnFromExileForSourceEffect(Zone.HAND),
                         new PsychicTheftCondition(chosenCard, game),
                         "if you haven't cast it, return it to its owner's hand."
                 )

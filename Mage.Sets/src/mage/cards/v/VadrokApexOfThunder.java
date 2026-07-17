@@ -11,6 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -22,7 +23,7 @@ import java.util.UUID;
  */
 public final class VadrokApexOfThunder extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard(
+    private static final FilterCard filter = new FilterNonlandCard(
             "noncreature card with mana value 3 or less from your graveyard"
     );
 

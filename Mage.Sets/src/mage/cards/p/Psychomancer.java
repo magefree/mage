@@ -13,7 +13,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.PermanentToken;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -79,9 +78,9 @@ class PsychomancerTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         return zEvent.getFromZone() == Zone.BATTLEFIELD
                 && (zEvent.getToZone() == Zone.GRAVEYARD || zEvent.getToZone() == Zone.EXILED)
-                && zEvent.getTarget() != null
+                && zEvent.isPermanentMoved()
                 && (zEvent.getTargetId().equals(getSourceId())
-                || zEvent.getTarget().isArtifact(game) && !(zEvent.getTarget() instanceof PermanentToken)
+                || zEvent.getTarget().isArtifact(game) && !zEvent.getTarget().isToken()
                 && zEvent.getTarget().getControllerId().equals(getControllerId()));
     }
 }

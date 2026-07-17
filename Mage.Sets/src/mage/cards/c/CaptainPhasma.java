@@ -16,7 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.permanent.token.TrooperToken;
+import mage.game.permanent.token.TrooperWhiteToken;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -36,7 +36,7 @@ public final class CaptainPhasma extends CardImpl {
 
     public CaptainPhasma(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.TROOPER);
@@ -44,7 +44,7 @@ public final class CaptainPhasma extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Nontoken Trooper creatures you control have "When this creature enters the battlefield, create 1/1/ white Trooper creature token."
-        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TrooperToken()), false)
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TrooperWhiteToken()), false)
                 .setTriggerPhrase("When this creature enters, ");
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, filter, false)));
 

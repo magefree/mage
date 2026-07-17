@@ -16,7 +16,7 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterControlledPlaneswalkerPermanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -40,15 +40,22 @@ public final class SparkshaperVisionary extends CardImpl {
         // At the beginning of combat on your turn, choose any number of target planeswalkers you control. Until end of turn, they become 3/3 blue Bird creatures with flying, hexproof, and "Whenever this creature deals combat damage to a player, scry 1."
         TriggeredAbility triggeredAbility =
             new BeginningOfCombatTriggeredAbility(
-                    TargetController.YOU, new BecomesCreatureTargetEffect(
-                    new SparkshaperVisionaryToken(),
-                    false, false, Duration.EndOfTurn,
-                    false, true, true
+                TargetController.YOU, new BecomesCreatureTargetEffect(
+                new CreatureToken(
+                    3, 3,
+                    "3/3 blue Bird creatures with flying, hexproof, and \"Whenever this creature deals combat damage to a player, scry 1.\"",
+                    SubType.BIRD
+                ).withColor("U")
+                .withAbility(FlyingAbility.getInstance())
+                .withAbility(HexproofAbility.getInstance())
+                .withAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ScryEffect(1, false), false)),
+                false, false, Duration.EndOfTurn,
+                false, true, true
                 ).setText("choose any number of target planeswalkers you control. Until end of turn, "
-                    + "they become 3/3 blue Bird creatures with flying, hexproof, and "
-                    + "\"Whenever this creature deals combat damage to a player, scry 1.\""
-                    + " <i>(They're no longer planeswalkers. Loyalty abilities can still be activated.)</i>"),
-                    false
+                + "they become 3/3 blue Bird creatures with flying, hexproof, and "
+                + "\"Whenever this creature deals combat damage to a player, scry 1.\""
+                + " <i>(They're no longer planeswalkers. Loyalty abilities can still be activated.)</i>"),
+                false
             );
 
         triggeredAbility.addTarget(
@@ -67,33 +74,5 @@ public final class SparkshaperVisionary extends CardImpl {
     @Override
     public SparkshaperVisionary copy() {
         return new SparkshaperVisionary(this);
-    }
-}
-
-class SparkshaperVisionaryToken extends TokenImpl {
-
-    SparkshaperVisionaryToken() {
-        super("", "3/3 blue Bird creatures with flying, hexproof, and "
-            + "\"Whenever this creature deals combat damage to a player, scry 1.\"");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.BIRD);
-        color.setBlue(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(HexproofAbility.getInstance());
-
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-            new ScryEffect(1, false),
-            false
-        ));
-    }
-
-    private SparkshaperVisionaryToken(final SparkshaperVisionaryToken token) {
-        super(token);
-    }
-
-    public SparkshaperVisionaryToken copy() {
-        return new SparkshaperVisionaryToken(this);
     }
 }

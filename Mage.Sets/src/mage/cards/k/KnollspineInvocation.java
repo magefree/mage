@@ -30,13 +30,11 @@ import java.util.UUID;
  */
 public final class KnollspineInvocation extends CardImpl {
 
-    protected static final FilterCard filter = new FilterCard("a card with mana value X");
-
     public KnollspineInvocation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
 
         // {X}, Discard a card with mana value X: This enchantment deals X damage to any target.
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(GetXValue.instance, true), new ManaCostsImpl<>("{X}"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(GetXValue.instance), new ManaCostsImpl<>("{X}"));
         ability.addCost(new KnollspineInvocationDiscardCost());
         ability.addTarget(new TargetAnyTarget());
         ability.setCostAdjuster(KnollspineInvocationAdjuster.instance);

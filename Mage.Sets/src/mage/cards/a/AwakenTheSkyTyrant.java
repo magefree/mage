@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.DragonToken2;
+import mage.game.permanent.token.Dragon55Token;
 
 /**
  *
@@ -40,7 +40,7 @@ public final class AwakenTheSkyTyrant extends CardImpl {
 class AwakenTheSkyTyrantTriggeredAbility extends TriggeredAbilityImpl {
 
     public AwakenTheSkyTyrantTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new DragonToken2(), 1), new SacrificeSourceCost(), null, false), false);
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new Dragon55Token(), 1), new SacrificeSourceCost(), null, false), false);
         setTriggerPhrase("When a source an opponent controls deals damage to you, ");
     }
 

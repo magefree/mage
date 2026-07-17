@@ -97,7 +97,7 @@ class ObservedStasisEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        game.getCombat().removeAttacker(permanent.getId(), game);
+        permanent.removeFromCombat(game);
         int count = game.getBattlefield().count(filter, permanent.getControllerId(), source, game);
         if (count > 0) {
             Optional.ofNullable(source.getControllerId())

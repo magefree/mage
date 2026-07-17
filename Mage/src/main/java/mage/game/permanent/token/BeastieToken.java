@@ -1,8 +1,7 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.abilities.keyword.CantAttackAloneAbility;
-import mage.abilities.keyword.CantBlockAloneAbility;
+import mage.abilities.keyword.CantAttackOrBlockAloneAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -19,8 +18,7 @@ public final class BeastieToken extends TokenImpl {
         power = new MageInt(4);
         toughness = new MageInt(4);
 
-        this.addAbility(new CantAttackAloneAbility());
-        this.addAbility(CantBlockAloneAbility.getInstance());
+        this.addAbility(new CantAttackOrBlockAloneAbility());
     }
 
     private BeastieToken(final BeastieToken token) {

@@ -293,7 +293,7 @@ public enum GrabbagImageSource implements CardImageSource {
         singleLinks.put("SWS/Riding Ronto", "xECBi7G.jpeg");
         singleLinks.put("SWS/Rocket Trooper", "94wUTH5.jpeg");
         singleLinks.put("SWS/Rogue's Passage", "UunpJPZ.jpeg");
-        singleLinks.put("SWS/Rule of two", "wNqZWLJ.jpeg");
+        singleLinks.put("SWS/Rule of Two", "wNqZWLJ.jpeg");
         singleLinks.put("SWS/Rumination", "nSD3UHQ.jpeg");
         singleLinks.put("SWS/Rumor Monger", "wSN6H6v.jpeg");
         singleLinks.put("SWS/Sabacc Game", "qIcFb3U.jpeg");

@@ -40,7 +40,7 @@ public final class GeometricNexus extends CardImpl {
 
         // {6}, {T}, Remove all charge counters from Geometric Nexus: Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it, where X is the number of charge counters removed this way.
         Ability ability = new SimpleActivatedAbility(FractalToken.getEffect(
-                GeometricNexusRemovedCounterValue.instance, "Put X +1/+1 counters on it, " +
+                GeometricNexusRemovedCounterValue.instance, ". Put X +1/+1 counters on it, " +
                         "where X is the number of charge counters removed this way"
         ), new GenericManaCost(6));
         ability.addCost(new TapSourceCost());

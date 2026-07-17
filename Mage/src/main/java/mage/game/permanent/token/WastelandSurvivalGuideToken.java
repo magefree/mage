@@ -22,9 +22,10 @@ public final class WastelandSurvivalGuideToken extends TokenImpl {
     private static final Hint hint = new ValueHint("Total quest counter among permanents you control", xValue);
 
     public WastelandSurvivalGuideToken() {
-        super("Wasteland Survival Guide", "colorless Equipment artifact token named Wasteland Survival Guide "
+        super("Wasteland Survival Guide", "colorless Book Equipment artifact token named Wasteland Survival Guide "
                 + "with \"Equipped creature gets +1/+1 for each quest counter among permanents you control\" and equip {1}");
         this.cardType.add(CardType.ARTIFACT);
+        this.subtype.add(SubType.BOOK);
         this.subtype.add(SubType.EQUIPMENT);
 
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(xValue, xValue)).addHint(hint));

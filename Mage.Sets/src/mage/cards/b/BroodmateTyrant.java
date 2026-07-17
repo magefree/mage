@@ -10,7 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.DragonToken2;
+import mage.game.permanent.token.Dragon55Token;
 
 import java.util.UUID;
 
@@ -30,7 +30,7 @@ public final class BroodmateTyrant extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Broodmate Tyrant enters the battlefield, create a 5/5 red Dragon creature token with flying.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new DragonToken2())));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new Dragon55Token())));
 
         // Encore {5}{B}{R}{G}
         this.addAbility(new EncoreAbility(new ManaCostsImpl<>("{5}{B}{R}{G}")));

@@ -1,9 +1,8 @@
 package mage.cards.d;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -19,21 +18,25 @@ import java.util.UUID;
 /**
  * @author Alvin
  */
-public final class DelverOfSecrets extends CardImpl {
+public final class DelverOfSecrets extends TransformingDoubleFacedCard {
 
     public DelverOfSecrets(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WIZARD);
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WIZARD}, "{U}",
+                "Insectile Aberration",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.INSECT}, "U");
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        this.secondSideCardClazz = mage.cards.i.InsectileAberration.class;
+        // Delver of Secrets
+        this.getLeftHalfCard().setPT(1, 1);
 
         // At the beginning of your upkeep, look at the top card of your library. You may reveal that card. If an instant or sorcery card is revealed this way, transform Delver of Secrets.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DelverOfSecretsEffect()));
+        this.getLeftHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(new DelverOfSecretsEffect()));
+
+        // Insectile Aberration
+        this.getRightHalfCard().setPT(3, 2);
+
+        // Flying
+        this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
     }
 
     private DelverOfSecrets(final DelverOfSecrets card) {
@@ -47,10 +50,9 @@ public final class DelverOfSecrets extends CardImpl {
 }
 
 class DelverOfSecretsEffect extends OneShotEffect {
-
-    public DelverOfSecretsEffect() {
+    DelverOfSecretsEffect() {
         super(Outcome.Benefit);
-        this.staticText = "look at the top card of your library. You may reveal that card. " +
+        staticText = "look at the top card of your library. You may reveal that card. " +
                 "If an instant or sorcery card is revealed this way, transform {this}";
     }
 

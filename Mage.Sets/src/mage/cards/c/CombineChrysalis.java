@@ -16,9 +16,7 @@ import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.permanent.token.BeastToken2;
-import mage.target.common.TargetControlledPermanent;
-
+import mage.game.permanent.token.Beast44Token;
 import java.util.UUID;
 
 /**
@@ -42,7 +40,7 @@ public final class CombineChrysalis extends CardImpl {
 
         // {2}{G}{U}, {T}, Sacrifice a token: Create a 4/4 green Beast creature token. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
-                new CreateTokenEffect(new BeastToken2()), new ManaCostsImpl<>("{2}{G}{U}")
+                new CreateTokenEffect(new Beast44Token()), new ManaCostsImpl<>("{2}{G}{U}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(filter));

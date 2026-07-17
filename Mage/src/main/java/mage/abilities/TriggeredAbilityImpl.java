@@ -210,6 +210,12 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     @Override
+    public TriggeredAbility setOptional(boolean optional) {
+        this.optional = optional;
+        return this;
+    }
+
+    @Override
     public TriggeredAbility withRuleTextReplacement(boolean replaceRuleText) {
         this.replaceRuleText = replaceRuleText;
         return this;

@@ -59,7 +59,7 @@ public final class SwordOfTheSqueak extends CardImpl {
         ));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private SwordOfTheSqueak(final SwordOfTheSqueak card) {

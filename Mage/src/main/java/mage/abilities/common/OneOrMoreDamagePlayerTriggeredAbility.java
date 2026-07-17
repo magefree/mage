@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.MageObjectReference;
 import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -13,13 +14,17 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author Xanderhall, xenohedron
  */
-public class OneOrMoreDamagePlayerTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent>  {
+public class OneOrMoreDamagePlayerTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
     private final SetTargetPointer setTargetPointer;
     private final FilterPermanent filter;
@@ -84,6 +89,16 @@ public class OneOrMoreDamagePlayerTriggeredAbility extends TriggeredAbilityImpl 
         switch (setTargetPointer) {
             case PLAYER:
                 this.getAllEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
+                break;
+            case PERMANENT:
+                Set<MageObjectReference> attackerSet = events
+                        .stream()
+                        .map(GameEvent::getSourceId)
+                        .map(game::getPermanent)
+                        .filter(Objects::nonNull)
+                        .map(permanent -> new MageObjectReference(permanent, game))
+                        .collect(Collectors.toSet());
+                this.getAllEffects().setTargetPointer(new FixedTargets(attackerSet));
                 break;
             case NONE:
                 break;

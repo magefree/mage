@@ -4,7 +4,6 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -23,7 +22,6 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author Styxo
  */
 public final class BlackMarketDealer extends CardImpl {
@@ -48,9 +46,7 @@ public final class BlackMarketDealer extends CardImpl {
 
         // <i>Bounty</i> &mdash; Whenever a creature an opponent controls with a bounty counter on it dies, target player loses 1 life and draws a card.
         ability = new BountyAbility(new LoseLifeTargetEffect(1));
-        Effect effect = new DrawCardTargetEffect(1);
-        effect.setText("and draws a card");
-        ability.addEffect(effect);
+        ability.addEffect(new DrawCardTargetEffect(1).withTargetDescription("and"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

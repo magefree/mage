@@ -200,23 +200,8 @@ public class IncubateTest extends CardTestPlayerBase {
         setChoice(playerA, true); // use copy
         setChoice(playerA, "Phyrexian Token");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Token", 2);
-
-        // kill original token
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "target destroy");
-        addTarget(playerA, "Phyrexian Token[no copy]");
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after kill", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Token", 1);
-        showBattlefield("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
-
-        // try to transform back side (nothing happen)
-        // 701.28c
-        // If a spell or ability instructs a player to transform a permanent that isn’t represented by a
-        // transforming token or a transforming double-faced card, nothing happens.
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "target transform", "Phyrexian Token");
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after transform", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Incubator Token", 0);
-        checkPermanentCount("after transform", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Token", 1);
+        checkPermanentCount("after copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Token", 1);
+        // copy dies to state based actions
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

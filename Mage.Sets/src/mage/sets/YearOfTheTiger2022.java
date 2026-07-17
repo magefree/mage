@@ -24,6 +24,6 @@ public class YearOfTheTiger2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Jedit Ojanen", 2, Rarity.RARE, mage.cards.j.JeditOjanen.class, FULL_ART));
 //        cards.add(new SetCardInfo("Snapdax, Apex of the Hunt", 3, Rarity.RARE, mage.cards.s.SnapdaxApexOfTheHunt.class));
         cards.add(new SetCardInfo("Temur Sabertooth", 1, Rarity.RARE, mage.cards.t.TemurSabertooth.class));
-        cards.add(new SetCardInfo("Yuriko, the Tiger's Shadow", 4, Rarity.RARE, mage.cards.y.YurikoTheTigersShadow.class));
+        cards.add(new SetCardInfo("Yuriko, the Tiger's Shadow", 4, Rarity.MYTHIC, mage.cards.y.YurikoTheTigersShadow.class));
     }
 }

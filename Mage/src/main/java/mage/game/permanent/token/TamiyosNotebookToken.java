@@ -6,6 +6,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 
@@ -17,9 +18,10 @@ public final class TamiyosNotebookToken extends TokenImpl {
     private static final FilterCard filter = new FilterCard("spells");
 
     public TamiyosNotebookToken() {
-        super("Tamiyo's Notebook", "Tamiyo's Notebook, a legendary colorless artifact token with \"Spells you cast cost {2} less to cast\" and \"{T}: Draw a card.\"");
+        super("Tamiyo's Notebook", "Tamiyo's Notebook, a legendary colorless Book artifact token with \"Spells you cast cost {2} less to cast\" and \"{T}: Draw a card.\"");
         this.supertype.add(SuperType.LEGENDARY);
         this.cardType.add(CardType.ARTIFACT);
+        this.subtype.add(SubType.BOOK);
         this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 2)));
         this.addAbility(new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost()));
     }

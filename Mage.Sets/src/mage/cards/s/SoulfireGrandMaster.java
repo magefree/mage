@@ -98,7 +98,7 @@ class SoulfireGrandMasterCastFromHandReplacementEffect extends ReplacementEffect
         StackObject stackObject = game.getStack().getFirstOrNull();
         if (stackObject instanceof Spell) {
             Spell spell = (Spell) stackObject;
-            if (!spell.isCopy() && !spell.isCountered()) {
+            if (spell.wasCast() && !spell.isCountered()) {
                 Card sourceCard = game.getCard(spellId);
                 if (sourceCard != null && Zone.STACK.equals(game.getState().getZone(spellId))) {
                     Player player = game.getPlayer(sourceCard.getOwnerId());

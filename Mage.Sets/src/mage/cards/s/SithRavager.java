@@ -31,7 +31,7 @@ public final class SithRavager extends CardImpl {
         this.toughness = new MageInt(1);
 
         // <i>Hate</i> &mdash; Whenever an opponent loses life from a source other than combat damage, Sith Ravager gets +1/+0 and gains haste and trample until end of turn.
-        this.addAbility(new LostNonCombatLifeTriggeredAbility());
+        this.addAbility(new SithRavagerTriggeredAbility());
     }
 
     private SithRavager(final SithRavager card) {
@@ -43,38 +43,39 @@ public final class SithRavager extends CardImpl {
         return new SithRavager(this);
     }
 
-    public static class LostNonCombatLifeTriggeredAbility extends TriggeredAbilityImpl {
+}
 
-        public LostNonCombatLifeTriggeredAbility() {
-            super(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), false);
-            addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
-            addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
-        }
+class SithRavagerTriggeredAbility extends TriggeredAbilityImpl {
 
-        private LostNonCombatLifeTriggeredAbility(final LostNonCombatLifeTriggeredAbility ability) {
-            super(ability);
-        }
-
-        @Override
-        public LostNonCombatLifeTriggeredAbility copy() {
-            return new LostNonCombatLifeTriggeredAbility(this);
-        }
-
-        @Override
-        public boolean checkEventType(GameEvent event, Game game) {
-            return event.getType() == GameEvent.EventType.LOST_LIFE;
-        }
-
-        @Override
-        public boolean checkTrigger(GameEvent event, Game game) {
-            // non combat lose life
-            return !event.getFlag() && game.getOpponents(game.getControllerId(getSourceId())).contains(event.getPlayerId());
-        }
-
-        @Override
-        public String getRule() {
-            return "<i>Hate</i> &mdash; Whenever an opponent loses life from a source other than combat damage, {this} gains haste and trample until end of turn.";
-        }
-
+    SithRavagerTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), false);
+        addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
     }
+
+    private SithRavagerTriggeredAbility(final SithRavagerTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public SithRavagerTriggeredAbility copy() {
+        return new SithRavagerTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.LOST_LIFE;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        // non combat lose life
+        return !event.getFlag() && game.getOpponents(game.getControllerId(getSourceId())).contains(event.getPlayerId());
+    }
+
+    @Override
+    public String getRule() {
+        return "<i>Hate</i> &mdash; Whenever an opponent loses life from a source other than combat damage, {this} gets +1/+0 and gains haste and trample until end of turn.";
+    }
+
 }

@@ -1,20 +1,20 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,10 +47,10 @@ public final class AngelOfSuffering extends CardImpl {
     }
 }
 
-class AngelOfSufferingEffect extends ReplacementEffectImpl {
+class AngelOfSufferingEffect extends PreventionEffectImpl {
 
     AngelOfSufferingEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.PreventDamage);
+        super(Duration.WhileOnBattlefield);
         this.staticText = "If damage would be dealt to you, prevent that damage and mill twice that many cards";
     }
 
@@ -66,17 +66,12 @@ class AngelOfSufferingEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         int cardsToMill = event.getAmount() * 2;
-        game.preventDamage(event, source, game, Integer.MAX_VALUE);
+        preventDamageAction(event, source, game);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             controller.millCards(cardsToMill, source, game);
         }
         return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
     }
 
     @Override

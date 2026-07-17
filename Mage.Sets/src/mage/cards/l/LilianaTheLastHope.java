@@ -1,29 +1,20 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
+import mage.abilities.effects.common.ReturnCardChosenFromGraveyardEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.game.Game;
 import mage.game.command.emblems.LilianaTheLastHopeEmblem;
-import mage.players.Player;
-import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +38,9 @@ public final class LilianaTheLastHope extends CardImpl {
 
         // -2: Put the top two cards of your library into your graveyard, then you may return a creature card from your graveyard to your hand.
         ability = new LoyaltyAbility(new MillCardsControllerEffect(2), -2);
-        ability.addEffect(new LilianaTheLastHopeEffect());
+        ability.addEffect(new ReturnCardChosenFromGraveyardEffect(
+                true, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD, PutCards.HAND
+        ).concatBy(", then"));
         this.addAbility(ability);
 
         // -7: You get an emblem with "At the beginning of your end step, create X 2/2 black Zombie creature tokens,
@@ -62,41 +55,5 @@ public final class LilianaTheLastHope extends CardImpl {
     @Override
     public LilianaTheLastHope copy() {
         return new LilianaTheLastHope(this);
-    }
-}
-
-class LilianaTheLastHopeEffect extends OneShotEffect {
-
-    LilianaTheLastHopeEffect() {
-        super(Outcome.ReturnToHand);
-        this.staticText = ", then you may return a creature card from your graveyard to your hand";
-    }
-
-    private LilianaTheLastHopeEffect(final LilianaTheLastHopeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LilianaTheLastHopeEffect copy() {
-        return new LilianaTheLastHopeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
-        target.withNotTarget(true);
-        if (target.canChoose(source.getControllerId(), source, game)
-                && controller.chooseUse(outcome, "Return a creature card from your graveyard to hand?", source, game)
-                && controller.choose(Outcome.ReturnToHand, target, source, game)) {
-            Card card = game.getCard(target.getFirstTarget());
-            if (card != null) {
-                controller.moveCards(card, Zone.HAND, source, game);
-            }
-        }
-        return true;
     }
 }

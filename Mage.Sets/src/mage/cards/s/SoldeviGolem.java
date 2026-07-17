@@ -17,7 +17,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -45,7 +45,7 @@ public final class SoldeviGolem extends CardImpl {
         // At the beginning of your upkeep, you may untap target tapped creature an opponent controls. If you do, untap Soldevi Golem.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new UntapTargetEffect().setText("untap target tapped creature an opponent controls"), true);
         ability.addEffect(new UntapSourceEffect().setText("If you do, untap {this}"));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

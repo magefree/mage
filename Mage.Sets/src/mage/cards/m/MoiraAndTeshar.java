@@ -18,6 +18,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -31,6 +32,10 @@ public final class MoiraAndTeshar extends CardImpl {
 
     private static final FilterPermanentCard targetFilter = new FilterPermanentCard(
             "nonland permanent card from your graveyard");
+
+    static {
+        targetFilter.add(Predicates.not(CardType.LAND.getPredicate()));
+    }
 
     public MoiraAndTeshar(UUID ownerId, CardSetInfo setInfo) {
 

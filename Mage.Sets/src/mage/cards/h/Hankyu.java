@@ -75,7 +75,7 @@ class HankyuEffect extends ContinuousEffectImpl {
         if (permanent == null) {
             return false;
         }
-        Permanent creature = game.getPermanent(permanent.getAttachedTo());
+        Permanent creature = source.getPermanentSourceAttachedToIfItStillExists(game);
         if (creature == null) {
             return false;
         }

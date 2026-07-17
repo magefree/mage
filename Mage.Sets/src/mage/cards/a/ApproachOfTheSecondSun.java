@@ -72,8 +72,7 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
         }
         //If this spell was cast from your hand and you've cast another spell named {this} this game
         //A copy of a spell isn’t cast, so it won’t count as the first nor as the second Approach of the Second Sun. (2017-04-18)
-        if (!spell.isCopy() //TODO: copied spells should not be "from" hand
-                && spell.getFromZone() == Zone.HAND
+        if (spell.wasCastFrom(Zone.HAND)
                 && watcher.getApproachesCast(controller.getId()) > 1) {
             // Win the game
             controller.won(game);

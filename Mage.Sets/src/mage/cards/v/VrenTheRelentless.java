@@ -109,6 +109,7 @@ class VrenTheRelentlessWatcher extends Watcher {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getToZone() == Zone.EXILED
                 && zEvent.getFromZone() == Zone.BATTLEFIELD
+                && zEvent.isPermanentMoved()
                 && zEvent.getTarget().isCreature(game)) {
             playerMap.compute(zEvent.getTarget().getControllerId(), CardUtil::setOrIncrementValue);
         }

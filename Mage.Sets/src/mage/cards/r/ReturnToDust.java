@@ -128,6 +128,6 @@ enum ReturnToDustCondition implements Condition {
         return (game.isActivePlayer(source.getControllerId())
                 && game.getTurnPhaseType().isMain())
                 && spell != null
-                && !spell.isCopy();
+                && spell.wasCast();
     }
 }

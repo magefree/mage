@@ -6,11 +6,13 @@ import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyPermanentEffect;
+import mage.abilities.effects.common.ExileAndReturnSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.PutCards;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
@@ -58,38 +60,8 @@ class EstridsInvocationCopyApplier extends CopyApplier {
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         // At the beginning of your upkeep, you may exile this enchantment. If you do, return it to the battlefield under its owner's control.
         blueprint.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(
-                new EstridsInvocationEffect(), true
+                new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD), true
         ));
-        return true;
-    }
-}
-
-class EstridsInvocationEffect extends OneShotEffect {
-
-    EstridsInvocationEffect() {
-        super(Outcome.Neutral);
-        this.staticText = "exile this enchantment. If you do, return it to the battlefield under its owner's control";
-    }
-
-    private EstridsInvocationEffect(final EstridsInvocationEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public EstridsInvocationEffect copy() {
-        return new EstridsInvocationEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent == null || player == null) {
-            return false;
-        }
-        Card card = permanent.getMainCard();
-        player.moveCards(permanent, Zone.EXILED, source, game);
-        player.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
         return true;
     }
 }

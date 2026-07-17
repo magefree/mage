@@ -5,17 +5,14 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.SacrificeControllerEffect;
-import mage.abilities.keyword.FlashbackAbility;
-import mage.cards.Card;
+import mage.abilities.effects.common.continuous.GainFlashbackTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
@@ -27,15 +24,6 @@ import java.util.UUID;
  * @author emerald000
  */
 public final class DralnuLichLord extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("instant or sorcery card in your graveyard");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.INSTANT.getPredicate(),
-                CardType.SORCERY.getPredicate()
-        ));
-    }
 
     public DralnuLichLord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
@@ -50,8 +38,8 @@ public final class DralnuLichLord extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new DralnuLichLordReplacementEffect()));
 
         // {tap}: Target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
-        Ability ability = new SimpleActivatedAbility(new DralnuLichLordFlashbackEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        Ability ability = new SimpleActivatedAbility(new GainFlashbackTargetEffect(), new TapSourceCost());
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY));
         this.addAbility(ability);
     }
 
@@ -95,35 +83,5 @@ class DralnuLichLordReplacementEffect extends ReplacementEffectImpl {
     @Override
     public DralnuLichLordReplacementEffect copy() {
         return new DralnuLichLordReplacementEffect(this);
-    }
-}
-
-class DralnuLichLordFlashbackEffect extends ContinuousEffectImpl {
-
-    DralnuLichLordFlashbackEffect() {
-        super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.staticText = "target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost";
-    }
-
-    private DralnuLichLordFlashbackEffect(final DralnuLichLordFlashbackEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DralnuLichLordFlashbackEffect copy() {
-        return new DralnuLichLordFlashbackEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (card != null) {
-            FlashbackAbility ability = new FlashbackAbility(card, card.getManaCost());
-            ability.setSourceId(card.getId());
-            ability.setControllerId(card.getOwnerId());
-            game.getState().addOtherAbility(card, ability);
-            return true;
-        }
-        return false;
     }
 }

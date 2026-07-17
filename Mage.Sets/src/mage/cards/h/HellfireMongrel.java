@@ -33,7 +33,7 @@ public final class HellfireMongrel extends CardImpl {
         // At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, Hellfire Mongrel deals 2 damage to that player.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 TargetController.OPPONENT,
-                new DamageTargetEffect(2, true, "that player"),
+                new DamageTargetEffect(2).withTargetDescription("that player"),
                 false
         ).withInterveningIf(condition));
     }

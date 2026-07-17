@@ -21,7 +21,6 @@ public final class HasCon2017 extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new ExpansionSet.SetCardInfo("Grimlock, Dinobot Leader", 1, Rarity.MYTHIC, mage.cards.g.GrimlockDinobotLeader.class));
-        cards.add(new ExpansionSet.SetCardInfo("Grimlock, Ferocious King", 1, Rarity.MYTHIC, mage.cards.g.GrimlockFerociousKing.class));
         cards.add(new ExpansionSet.SetCardInfo("Sword of Dungeons & Dragons", 3, Rarity.MYTHIC, mage.cards.s.SwordOfDungeonsAndDragons.class));
     }
 }

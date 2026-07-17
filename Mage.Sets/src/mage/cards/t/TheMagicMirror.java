@@ -11,6 +11,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,17 +24,19 @@ import mage.filter.StaticFilters;
  */
 public final class TheMagicMirror extends CardImpl {
 
+    private static final DynamicValue xValue
+            = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_INSTANT_AND_SORCERY);
+    private static final Hint hint = new ValueHint("Instant and sorcery cards in your graveyard", xValue);
+
     public TheMagicMirror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}{U}{U}{U}");
 
         this.supertype.add(SuperType.LEGENDARY);
 
         // This spell costs {1} less to cast for each instant and sorcery card in your graveyard.
-        DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_INSTANT_AND_SORCERY);
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new SpellCostReductionForEachSourceEffect(1, xValue));
-        ability.setRuleAtTheTop(true);
-        ability.addHint(new ValueHint("Instant and sorcery card in your graveyard", xValue));
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(
+                Zone.ALL, new SpellCostReductionForEachSourceEffect(1, xValue)
+        ).setRuleAtTheTop(true).addHint(hint));
 
         // You have no maximum hand size.
         this.addAbility(new SimpleStaticAbility(new MaximumHandSizeControllerEffect(
@@ -42,7 +45,7 @@ public final class TheMagicMirror extends CardImpl {
         )));
 
         // At the beginning of your upkeep, put a knowledge counter on The Magic Mirror, then draw a card for each knowledge counter on The Magic Mirror.
-        ability = new BeginningOfUpkeepTriggeredAbility(
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.KNOWLEDGE.createInstance())
                         .setText("put a knowledge counter on {this},")
         );

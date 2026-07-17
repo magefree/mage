@@ -18,6 +18,7 @@ import mage.constants.TargetController;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.target.TargetSpell;
 
@@ -75,6 +76,6 @@ enum ErrantStreetArtistPredicate implements Predicate<StackObject> {
 
     @Override
     public boolean apply(StackObject input, Game game) {
-        return input.isCopy();
+        return input instanceof Spell && !((Spell)input).wasCast();
     }
 }

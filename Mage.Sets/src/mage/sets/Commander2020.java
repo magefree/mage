@@ -346,6 +346,5 @@ public final class Commander2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Zetalpa, Primal Dawn", 107, Rarity.RARE, mage.cards.z.ZetalpaPrimalDawn.class));
         cards.add(new SetCardInfo("Zulaport Cutthroat", 142, Rarity.UNCOMMON, mage.cards.z.ZulaportCutthroat.class));
 
-        cards.removeIf(card -> HIDE_MUTATE_CARDS && MUTATE_CARD_NAMES.contains(card.getName()));
     }
 }

@@ -116,7 +116,7 @@ class SalvationSwanTargetEffect extends OneShotEffect {
         Cards cardsToReturn = new CardsImpl(tempExileZone.getCards(game));
         cardsToReturn.retainZone(Zone.EXILED, game);
         Effect effect = new ReturnToBattlefieldUnderOwnerControlWithCounterTargetEffect(
-                CounterType.FLYING.createInstance(), true
+                CounterType.FLYING.createInstance()
         );
         effect.setTargetPointer(new FixedTargets(cardsToReturn.getCards(game), game));
         // create delayed triggered ability, of note the trigger is created even if no card would be returned.

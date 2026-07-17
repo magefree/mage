@@ -13,7 +13,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class LymphSliverTest extends CardTestPlayerBase {
 
     @Test
-    public void testMarkOfAsylumEffect() {
+    public void testLymphSliverEffect() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         // Tremor deals 1 damage to each creature without flying.
         addCard(Zone.HAND, playerA, "Tremor"); // Sorcery {R}

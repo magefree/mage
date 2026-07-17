@@ -2,17 +2,15 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.OneShotNonTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -26,7 +24,9 @@ public final class AnotherChance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");
 
         // You may mill two cards. Then return up to two creature cards from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new AnotherChanceEffect());
+        this.getSpellAbility().addEffect(new AnotherChanceMillEffect());
+        this.getSpellAbility().addEffect(new OneShotNonTargetEffect(new ReturnFromGraveyardToHandTargetEffect().setText("Then return up to two creature cards from your graveyard to your hand."),
+                new TargetCardInYourGraveyard(0, 2, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD, true)).withTargetDescription("up to two creature cards"));
     }
 
     private AnotherChance(final AnotherChance card) {
@@ -39,23 +39,20 @@ public final class AnotherChance extends CardImpl {
     }
 }
 
-/**
- * Inspired by {@link mage.cards.u.UnsealTheNecropolis}
- */
-class AnotherChanceEffect extends OneShotEffect {
+class AnotherChanceMillEffect extends OneShotEffect {
 
-    AnotherChanceEffect() {
+    AnotherChanceMillEffect() {
         super(Outcome.Benefit);
-        staticText = "You may mill two cards. Then return up to two creature cards from your graveyard to your hand";
+        staticText = "You may mill two cards.";
     }
 
-    private AnotherChanceEffect(final AnotherChanceEffect effect) {
+    private AnotherChanceMillEffect(final AnotherChanceMillEffect effect) {
         super(effect);
     }
 
     @Override
-    public AnotherChanceEffect copy() {
-        return new AnotherChanceEffect(this);
+    public AnotherChanceMillEffect copy() {
+        return new AnotherChanceMillEffect(this);
     }
 
     @Override
@@ -67,18 +64,6 @@ class AnotherChanceEffect extends OneShotEffect {
 
         if (player.chooseUse(outcome, "Mill two cards?", source, game)) {
             player.millCards(2, source, game);
-        }
-
-        // Make sure the mill has been processed.
-        game.processAction();
-
-        TargetCard target = new TargetCardInYourGraveyard(
-                0, 2, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD, true
-        );
-        player.choose(outcome, target, source, game);
-        Cards cards = new CardsImpl(target.getTargets());
-        if (!cards.isEmpty()) {
-            player.moveCards(cards, Zone.HAND, source, game);
         }
         return true;
     }

@@ -100,8 +100,6 @@ class RavenousSlimeEffect extends ReplacementEffectImpl {
                 || !game.getOpponents(source.getControllerId()).contains(permanent.getControllerId())) {
             return false;
         }
-        if (zEvent.getTarget() != null) { // if it comes from permanent, check if it was a creature on the battlefield
-            return zEvent.getTarget().isCreature(game);
-        } else return permanent.isCreature(game);
+        return permanent.isCreature(game);
     }
 }

@@ -6,18 +6,21 @@ import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.players.PlayerList;
-import mage.target.TargetCard;
+import mage.target.TargetPermanent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -85,6 +88,11 @@ class AetherspoutsEffect extends OneShotEffect {
             List<Permanent> permanentsToBottom = new ArrayList<>();
             for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterAttackingCreature(), player.getId(), source, game)) {
                 if (permanent.isOwnedBy(player.getId())) {
+                    // it doesn't matter if tokens go to top or bottom of library, so don't bother asking the player
+                    if (permanent instanceof PermanentToken) {
+                        permanentsToTop.add(permanent);
+                        continue;
+                    }
                     if (player.chooseUse(outcome, "Put " + permanent.getLogName() + " to the top? (else it goes to bottom)", source, game)) {
                         permanentsToTop.add(permanent);
                         game.informPlayers(permanent.getLogName() + " goes to the top of " + player.getLogName() + "'s library");
@@ -95,82 +103,50 @@ class AetherspoutsEffect extends OneShotEffect {
                 }
             }
             // cards to top
-            Cards cards = new CardsImpl();
-            List<Permanent> toLibrary = new ArrayList<>();
-            for (Permanent permanent : permanentsToTop) {
-                if (permanent instanceof PermanentToken) {
-                    toLibrary.add(permanent);
-                } else {
-                    Card card = game.getCard(permanent.getId());
-                    if (card != null) {
-                        cards.add(card);
-                    }
-                }
-            }
-            TargetCard target = new TargetCard(Zone.BATTLEFIELD, new FilterCard("order to put on the top of library (last chosen will be the top most)"));
-            while (cards.size() > 1) {
+            final Map<Boolean, List<Permanent>> orderedToTop = permanentsToTop.stream().collect(
+                Collectors.partitioningBy(permanent -> permanent instanceof PermanentToken));
+            while (orderedToTop.get(false).size() > 1) {
                 if (!player.canRespond()) {
                     return false;
                 }
-                player.choose(Outcome.Neutral, cards, target, source, game);
-                Card card = cards.get(target.getFirstTarget(), game);
-                if (card != null) {
-                    cards.remove(card);
-                    Permanent permanent = game.getPermanent(card.getId());
-                    if (permanent != null) {
-                        toLibrary.add(permanent);
-                    }
-                }
-                target.clearChosen();
-            }
-            if (cards.size() == 1) {
-                Card card = cards.get(cards.iterator().next(), game);
-                Permanent permanent = game.getPermanent(card.getId());
+                final FilterPermanent filter = new FilterPermanent("order to put on the top of library (last chosen will be the top most)");
+                filter.add(new PermanentReferenceInCollectionPredicate(orderedToTop.get(false), game));
+                final TargetPermanent target = new TargetPermanent(1, 1, filter, true);
+                player.chooseTarget(Outcome.Neutral, target, source, game);
+                final Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
-                    toLibrary.add(permanent);
+                    orderedToTop.get(false).remove(permanent);
+                    orderedToTop.get(true).add(permanent);
                 }
+            }
+            if (orderedToTop.get(false).size() == 1) {
+                orderedToTop.get(true).add(orderedToTop.get(false).get(0));
             }
             // move all permanents to lib at the same time
-            for (Permanent permanent : toLibrary) {
+            for (Permanent permanent : orderedToTop.get(true)) {
                 player.moveCardToLibraryWithInfo(permanent, source, game, Zone.BATTLEFIELD, true, false);
             }
             // cards to bottom
-            cards.clear();
-            toLibrary.clear();
-            for (Permanent permanent : permanentsToBottom) {
-                if (permanent instanceof PermanentToken) {
-                    toLibrary.add(permanent);
-                } else {
-                    Card card = game.getCard(permanent.getId());
-                    if (card != null) {
-                        cards.add(card);
-                    }
-                }
-            }
-            target = new TargetCard(Zone.BATTLEFIELD, new FilterCard("order to put on bottom of library (last chosen will be bottommost card)"));
-            while (player.canRespond() && cards.size() > 1) {
-                player.choose(Outcome.Neutral, cards, target, source, game);
-                Card card = cards.get(target.getFirstTarget(), game);
-                if (card != null) {
-                    cards.remove(card);
-                    Permanent permanent = game.getPermanent(card.getId());
-                    if (permanent != null) {
-                        toLibrary.add(permanent);
-                    }
-                    target.clearChosen();
+            final Map<Boolean, List<Permanent>> orderedToBottom = permanentsToBottom.stream().collect(
+                Collectors.partitioningBy(permanent -> permanent instanceof PermanentToken));
+            while (player.canRespond() && orderedToBottom.get(false).size() > 1) {
+                final FilterPermanent filter = new FilterPermanent("order to put on bottom of library (last chosen will be bottommost card)");
+                filter.add(new PermanentReferenceInCollectionPredicate(orderedToBottom.get(false), game));
+                final TargetPermanent target = new TargetPermanent(1, 1, filter, true);
+                player.chooseTarget(Outcome.Neutral, target, source, game);
+                final Permanent permanent = game.getPermanent(target.getFirstTarget());
+                if (permanent != null) {
+                    orderedToBottom.get(false).remove(permanent);
+                    orderedToBottom.get(true).add(permanent);
                 } else {
                     break;
                 }
             }
-            if (cards.size() == 1) {
-                Card card = cards.get(cards.iterator().next(), game);
-                Permanent permanent = game.getPermanent(card.getId());
-                if (permanent != null) {
-                    toLibrary.add(permanent);
-                }
+            if (orderedToBottom.get(false).size() == 1) {
+                orderedToBottom.get(true).add(orderedToBottom.get(false).get(0));
             }
             // move all permanents to lib at the same time
-            for (Permanent permanent : toLibrary) {
+            for (Permanent permanent : orderedToBottom.get(true)) {
                 player.moveCardToLibraryWithInfo(permanent, source, game, Zone.BATTLEFIELD, false, false);
             }
             player = playerList.getNext(game, false);

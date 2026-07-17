@@ -54,7 +54,7 @@ class FeastOfTheVictoriousDeadEffect extends OneShotEffect {
 
     FeastOfTheVictoriousDeadEffect() {
         super(Outcome.BoostCreature);
-        staticText = "and distribute that many +1/+1 counters among creatures you control";
+        staticText = "and distribute that many +1/+1 counters among any number of creatures you control";
     }
 
     private FeastOfTheVictoriousDeadEffect(final FeastOfTheVictoriousDeadEffect effect) {

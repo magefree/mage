@@ -121,6 +121,8 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
+    // In most situation, you should provide source and playerId when filterings CardsImpl. Else complex filters will not work.
+    @Deprecated
     @Override
     public Set<Card> getCards(FilterCard filter, Game game) {
         return stream()

@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -14,6 +13,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetSource;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -68,12 +69,6 @@ class HealingGraceEffect extends PreventionEffectImpl {
         if (targetSource.getFirstTarget() != null) {
             this.targetSource.updateTarget(targetSource.getFirstTarget(), game);
         }
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        preventDamageAction(event, source, game);
-        return false;
     }
 
     @Override

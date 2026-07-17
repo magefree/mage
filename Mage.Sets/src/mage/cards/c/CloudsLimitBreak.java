@@ -68,11 +68,14 @@ public final class CloudsLimitBreak extends CardImpl {
 
 class CloudsLimitBreakTarget extends TargetPermanent {
 
-    private static final FilterPermanent filter
+    private static final FilterPermanent filter1
             = new FilterCreaturePermanent("tapped creatures with different controllers");
+    static {
+        filter1.add(TappedPredicate.TAPPED);
+    }
 
     CloudsLimitBreakTarget() {
-        super(0, Integer.MAX_VALUE, filter, false);
+        super(0, Integer.MAX_VALUE, filter1, false);
     }
 
     private CloudsLimitBreakTarget(final CloudsLimitBreakTarget target) {

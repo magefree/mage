@@ -1,19 +1,26 @@
 package mage.game.permanent;
 
+import java.util.UUID;
+
 import mage.MageObject;
+import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
+import mage.abilities.common.RoomAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.keyword.NightboundAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardsImpl;
+import mage.cards.DoubleFacedCard;
+import mage.cards.DoubleFacedCardHalf;
+import mage.cards.LevelerCard;
+import mage.cards.ModalDoubleFacedCardHalf;
+import mage.cards.RoomCard;
+import mage.cards.SplitCard;
 import mage.constants.SpellAbilityType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  * Static permanent on the battlefield. There are possible multiple permanents per one card,
@@ -30,6 +37,8 @@ public class PermanentCard extends PermanentImpl {
 
     protected int maxLevelCounters;
     protected int zoneChangeCounter;
+    protected ObjectColor originalColor;
+    protected ObjectColor originalFrameColor;
 
     public PermanentCard(Card card, UUID controllerId, Game game) {
         super(card.getId(), card.getOwnerId(), controllerId, card.getName()); // card id
@@ -39,18 +48,19 @@ public class PermanentCard extends PermanentImpl {
 
         // runtime check: must use real card only inside
         if (card instanceof PermanentCard) {
-            throw new IllegalArgumentException("Wrong code usage: can't use PermanentCard inside another PermanentCard");
+            throw new IllegalArgumentException("Wrong code usage: can't use PermanentCard inside another PermanentCard, use CardUtil.getDefaultCardSideForBattlefield");
         }
 
         // usage check: you must put to play only real card's part
         // if you use it in test code or for permanent's copy effects then call CardUtil.getDefaultCardSideForBattlefield for default side
         // it's a basic check and still allows to create permanent from instant or sorcery
         boolean goodForBattlefield = true;
-        if (card instanceof ModalDoubleFacedCard) {
+        if (card instanceof DoubleFacedCard) {
             goodForBattlefield = false;
         } else if (card instanceof SplitCard) {
             // fused spells allowed (it uses main card)
-            if (card.getSpellAbility() != null && !card.getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
+            // room spells allowed (it uses main card)
+            if (card.getSpellAbility() != null && !card.getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED) && !(card instanceof RoomCard)) {
                 goodForBattlefield = false;
             }
         }
@@ -64,9 +74,24 @@ public class PermanentCard extends PermanentImpl {
             throw new IllegalArgumentException("Wrong code usage: can't create permanent card from split or mdf: " + card.getName());
         }
 
-        this.card = card;
+        // if two permanent sides, set front and second side
+        if (card instanceof DoubleFacedCardHalf && card.isPermanent() && ((DoubleFacedCardHalf) card).getOtherSide().isPermanent()) {
+            if (((DoubleFacedCardHalf) card).isBackSide()) {
+                secondSideCard = card;
+                this.card = ((DoubleFacedCardHalf) card).getOtherSide().copy();
+                this.transformed = true;
+                init(secondSideCard, game);
+            } else {
+                secondSideCard = ((DoubleFacedCardHalf) card).getOtherSide().copy();
+                this.card = card;
+                init(card, game);
+            }
+        } else {
+            this.card = card;
+            init(card, game);
+        }
+
         this.zoneChangeCounter = card.getZoneChangeCounter(game); // local value already set to the raised number
-        init(card, game);
     }
 
     private void init(Card card, Game game) {
@@ -74,7 +99,7 @@ public class PermanentCard extends PermanentImpl {
         toughness = card.getToughness().copy();
         startingLoyalty = card.getStartingLoyalty();
         startingDefense = card.getStartingDefense();
-        copyFromCard(card, game);
+        copyFromCard(card, game, false);
         // if temporary added abilities to the spell/card exist, you need to add it to the permanent derived from that card
         Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(card.getId());
         if (otherAbilities != null) {
@@ -83,15 +108,6 @@ public class PermanentCard extends PermanentImpl {
         if (card instanceof LevelerCard) {
             maxLevelCounters = ((LevelerCard) card).getMaxLevelCounters();
         }
-
-        // if transformed on ETB
-        if (card.isTransformable()) {
-            if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId()) != null
-                    || NightboundAbility.checkCard(this, game)) {
-                game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId(), null);
-                TransformAbility.transformPermanent(this, game, null);
-            }
-        }
     }
 
     protected PermanentCard(final PermanentCard permanent) {
@@ -99,19 +115,38 @@ public class PermanentCard extends PermanentImpl {
         this.card = permanent.card.copy();
         this.maxLevelCounters = permanent.maxLevelCounters;
         this.zoneChangeCounter = permanent.zoneChangeCounter;
+        this.originalColor = permanent.originalColor.copy();
+        this.originalFrameColor = permanent.originalFrameColor.copy();
     }
 
     @Override
     public void reset(Game game) {
         // when the permanent is reset, copy all original values from the card
         // must copy card each reset so that the original values don't get modified
-        copyFromCard(card, game);
+        if (transformed && secondSideCard != null && getCard() instanceof DoubleFacedCardHalf) {
+            copyFromCard(secondSideCard, game, true);
+        } else {
+            copyFromCard(card, game, true);
+        }
+        applyMutate(game);
         power.resetToBaseValue();
         toughness.resetToBaseValue();
         super.reset(game);
     }
 
-    protected void copyFromCard(final Card card, final Game game) {
+    @Override
+    protected void initOtherFace(Game game) {
+        if (!(secondSideCard instanceof DoubleFacedCardHalf)) {
+            return;
+        }
+        if (transformed) {
+            copyFromCard(secondSideCard, game, false);
+        } else {
+            copyFromCard(card, game, false);
+        }
+    }
+
+    protected void copyFromCard(final Card card, final Game game, boolean isReset) {
         // TODO: must research - is it copy all fields or something miss
         this.name = card.getName();
         this.abilities.clear();
@@ -120,6 +155,11 @@ public class PermanentCard extends PermanentImpl {
                 if (ability.getWorksFaceDown()) {
                     this.abilities.add(ability.copy());
                 }
+            }
+        } else if (card.getId() != this.getId()) {
+            // if different id, abilities need to be added to game state for continuous/triggers
+            for (Ability ability : card.getAbilities()) {
+                this.addAbility(ability, card.getId(), game, true);
             }
         } else {
             // copy only own abilities; all dynamic added abilities must be added in the parent call
@@ -130,13 +170,23 @@ public class PermanentCard extends PermanentImpl {
         this.abilities.setSourceId(objectId);
         this.cardType.clear();
         this.cardType.addAll(card.getCardType());
-        this.color = card.getColor(game).copy();
-        this.frameColor = card.getFrameColor(game).copy();
+        if (!isReset) {
+            // save color from game state on first creation
+            this.color = card.getColor(game).copy();
+            this.frameColor = card.getFrameColor(game).copy();
+            this.originalColor = card.getColor(game).copy();
+            this.originalFrameColor = card.getFrameColor(game).copy();
+        } else {
+            this.color = originalColor.copy();
+            this.frameColor = originalFrameColor.copy();
+        }
         this.frameStyle = card.getFrameStyle();
         this.manaCost = card.getManaCost().copy();
         if (card instanceof PermanentCard) {
             this.maxLevelCounters = ((PermanentCard) card).maxLevelCounters;
         }
+        this.power = card.getPower().copy();
+        this.toughness = card.getToughness().copy();
         this.subtype.copyFrom(card.getSubtype());
         this.supertype.clear();
         this.supertype.addAll(card.getSuperType());
@@ -148,15 +198,31 @@ public class PermanentCard extends PermanentImpl {
         this.setImageFileName(card.getImageFileName());
         this.setImageNumber(card.getImageNumber());
 
-        if (card.getSecondCardFace() != null) {
-            this.secondSideCardClazz = card.getSecondCardFace().getClass();
-        }
         if (card.getMeldsToCard() != null) {
             this.meldsToClazz = card.getMeldsToCard().getClass();
         }
         this.nightCard = card.isNightCard();
         this.flipCard = card.isFlipCard();
         this.flipCardName = card.getFlipCardName();
+
+        if (card instanceof RoomCard) {
+            RoomCard.addRoomCharacteristics(this, (RoomCard) card, game);
+            if (!isReset) {
+                // new copy - apply characteriscits before put to game, e.g. workaround to keep only unlocked abilities
+                RoomAbility roomAbility = null;
+                for (Ability ability : this.abilities) {
+                    if (ability instanceof RoomAbility) {
+                        roomAbility = (RoomAbility) ability;
+                        break;
+                    }
+                }
+                if (roomAbility != null) {
+                    roomAbility.applyCharacteristics(game, this);
+                } else {
+                    throw new IllegalStateException("Wrong code usage: something wrong, room card lost their's RoomAbility: " + card);
+                }
+            }
+        }
     }
 
     @Override
@@ -179,7 +245,7 @@ public class PermanentCard extends PermanentImpl {
 
     @Override
     public boolean turnFaceUp(Ability source, Game game, UUID playerId) {
-        if (!this.getBasicMageObject().isPermanent()){
+        if (!this.getBasicMageObject().isPermanent()) {
             // 701.34g. If a manifested permanent that's represented by an instant or sorcery card would turn face up,
             //   its controller reveals it and leaves it face down. Abilities that trigger whenever a permanent
             //   is turned face up won't trigger.
@@ -205,6 +271,7 @@ public class PermanentCard extends PermanentImpl {
     @Override
     public ManaCosts<ManaCost> getManaCost() {
         if (faceDown) { // face down permanent has always {0} mana costs
+             // TODO: wtf, it's clear on get method - must be reworked (looks like a dirty hack)
             manaCost.clear();
             return manaCost;
         }
@@ -214,17 +281,40 @@ public class PermanentCard extends PermanentImpl {
     @Override
     public int getManaValue() {
         if (isTransformed()) {
-            // 711.4b While a double-faced permanent's back face is up, it has only the characteristics of its back face.
-            // However, its converted mana cost is calculated using the mana cost of its front face. This is a change from previous rules.
-            // If a permanent is copying the back face of a double-faced card (even if the card representing that copy
-            // is itself a double-faced card), the converted mana cost of that permanent is 0.
-            return getCard().getManaValue();
+            // transformable permanents contains characteristics in card/secondCardSide
+
+            // 712.8d
+            // While a double-faced permanent has its front face up, it has only the characteristics of its front face.
+            //
+            // 712.8e
+            // While a nonmodal double-faced permanent has its back face up, it has only the characteristics of its back face. 
+            // However, its mana value is calculated using the mana cost of its front face. 
+            // If a permanent is copying the back face of a nonmodal double-faced permanent (even if the object representing 
+            // that copy is itself a double-faced permanent), the mana value of that permanent is 0. See rule 202.3b.
+            //
+            // 712.8f
+            // While a modal double-faced spell is on the stack or a modal double-faced permanent is on the battlefield, 
+            // it has only the characteristics of the face that’s up.
+            //
+            // 202.3b
+            // The mana value of the back face of a nonmodal double-faced permanent or spell’s back face is calculated 
+            // as though it had the mana cost of its front face. If a permanent or spell is a copy of the back face of 
+            // a nonmodal double-faced object (even if the card representing that copy is itself a double-faced card), 
+            // the mana value of the copy is 0.
+            if (getCard() instanceof ModalDoubleFacedCardHalf) {
+                return secondSideCard.getManaValue(); // back side
+            } else if (getCard() instanceof DoubleFacedCardHalf) {
+                return getCard().getManaValue(); // front side all the time
+            } else {
+                throw new IllegalArgumentException("Wrong code usage: unknown transformable card type in getManaValue: " + getCard().getClass().getCanonicalName());
+            }
         }
-        if (faceDown) { // game not neccessary
-            return getManaCost().manaValue();
+
+        // same as all other permanents
+        if (faceDown) {
+            return 0;
         }
         return super.getManaValue();
-
     }
 
     @Override

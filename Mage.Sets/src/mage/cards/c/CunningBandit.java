@@ -16,7 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -38,12 +38,23 @@ public final class CunningBandit extends CardImpl {
         this.flipCard = true;
         this.flipCardName = "Azamuki, Treachery Incarnate";
 
+        Ability ability = new SimpleActivatedAbility(
+            new GainControlTargetEffect(Duration.EndOfTurn),
+            new RemoveCountersSourceCost(CounterType.KI.createInstance()));
+        ability.addTarget(new TargetCreaturePermanent());
+
+        CreatureToken flipToken = new CreatureToken(5, 2, "", SubType.SPIRIT)
+            .withName("Azamuki, Treachery Incarnate")
+            .withSuperType(SuperType.LEGENDARY)
+            .withColor("R")
+            .withAbility(ability);
+
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Cunning Bandit.
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.FILTER_SPELL_SPIRIT_OR_ARCANE, true));
 
         // At the beginning of the end step, if there are two or more ki counters on Cunning Bandit, you may flip it.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                TargetController.NEXT, new FlipSourceEffect(new AzamukiTreacheryIncarnate()).setText("flip it"), true, condition
+                TargetController.NEXT, new FlipSourceEffect(flipToken).setText("flip it"), true, condition
         ));
     }
 
@@ -54,33 +65,5 @@ public final class CunningBandit extends CardImpl {
     @Override
     public CunningBandit copy() {
         return new CunningBandit(this);
-    }
-}
-
-class AzamukiTreacheryIncarnate extends TokenImpl {
-
-    AzamukiTreacheryIncarnate() {
-        super("Azamuki, Treachery Incarnate", "");
-        this.supertype.add(SuperType.LEGENDARY);
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add(SubType.SPIRIT);
-        power = new MageInt(5);
-        toughness = new MageInt(2);
-
-        // Remove a ki counter from Azamuki, Treachery Incarnate: Gain control of target creature until end of turn.
-        Ability ability = new SimpleActivatedAbility(
-                new GainControlTargetEffect(Duration.EndOfTurn),
-                new RemoveCountersSourceCost(CounterType.KI.createInstance()));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
-    }
-
-    private AzamukiTreacheryIncarnate(final AzamukiTreacheryIncarnate token) {
-        super(token);
-    }
-
-    public AzamukiTreacheryIncarnate copy() {
-        return new AzamukiTreacheryIncarnate(this);
     }
 }

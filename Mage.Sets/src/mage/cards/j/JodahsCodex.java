@@ -12,6 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -22,6 +23,8 @@ public final class JodahsCodex extends CardImpl {
 
     public JodahsCodex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
+
+        this.subtype.add(SubType.BOOK);
 
         // Domain - {5}, {T}: Draw a card. This ability costs {1} less to activate for each basic land type among lands you control.
         Ability ability = new SimpleActivatedAbility(

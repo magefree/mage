@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.common.ColorsOfManaSpentToCastCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
@@ -32,7 +33,7 @@ public final class RadiantEpicure extends CardImpl {
         // Converge — When Radiant Epicure enters the battlefield, each opponent loses X life and you gain X life, where X is the number of colors of mana spent to cast this spell.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new RadiantEpicureEffect(), false)
-                .setAbilityWord(AbilityWord.CONVERGE)
+                .setAbilityWord(AbilityWord.CONVERGE).addHint(ColorsOfManaSpentToCastCount.getHint())
         );
     }
 

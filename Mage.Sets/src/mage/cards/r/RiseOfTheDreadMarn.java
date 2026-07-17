@@ -14,7 +14,6 @@ import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.ZombieBerserkerToken;
 import mage.watchers.Watcher;
 
@@ -96,8 +95,9 @@ class RiseOfTheDreadMarnWatcher extends Watcher {
         }
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()
+                && zEvent.isPermanentMoved()
                 && zEvent.getTarget().isCreature(game)
-                && !(zEvent.getTarget() instanceof PermanentToken)) {
+                && !zEvent.getTarget().isToken()) {
             creaturesDied += 1;
         }
     }

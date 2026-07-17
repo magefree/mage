@@ -19,6 +19,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 
 import java.util.UUID;
@@ -32,6 +33,7 @@ public final class MarinaVendrellsGrimoire extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}{U}");
 
         this.supertype.add(SuperType.LEGENDARY);
+        this.subtype.add(SubType.BOOK);
 
         // When Marina Vendrell's Grimoire enters, if you cast it, draw five cards.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(5))

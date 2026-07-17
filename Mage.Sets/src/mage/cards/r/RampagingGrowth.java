@@ -67,7 +67,7 @@ class RampagingGrowthEffect extends OneShotEffect {
         }
         TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND_A);
         player.searchLibrary(target, source, game);
-        Card card = player.getLibrary().getCard(target.getTargetController(), game);
+        Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
         if (card == null) {
             player.shuffleLibrary(source, game);
             return true;

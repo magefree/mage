@@ -49,7 +49,7 @@ public final class NinjasBlades extends CardImpl {
         this.addAbility(ability);
 
         // Mutsunokami -- Equip {2}
-        this.addAbility(new EquipAbility(2).withFlavorWord("Mutsunokami"));
+        this.addAbility(new EquipAbility(2, false).withFlavorWord("Mutsunokami"));
     }
 
     private NinjasBlades(final NinjasBlades card) {

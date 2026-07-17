@@ -20,7 +20,7 @@ public class ColdsnapThemeDecks extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = true;
 
-        //cards.add(new SetCardInfo("Arcum's Weathervane", 310, Rarity.UNCOMMON, mage.cards.a.ArcumsWeathervane.class));
+        cards.add(new SetCardInfo("Arcum's Weathervane", 310, Rarity.UNCOMMON, mage.cards.a.ArcumsWeathervane.class));
         cards.add(new SetCardInfo("Ashen Ghoul", 114, Rarity.UNCOMMON, mage.cards.a.AshenGhoul.class));
         cards.add(new SetCardInfo("Aurochs", 225, Rarity.COMMON, mage.cards.a.Aurochs.class));
         cards.add(new SetCardInfo("Balduvian Dead", 43, Rarity.UNCOMMON, mage.cards.b.BalduvianDead.class));

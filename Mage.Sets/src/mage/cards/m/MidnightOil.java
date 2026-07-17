@@ -1,8 +1,7 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.DiscardCardControllerTriggeredAbility;
@@ -10,8 +9,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect.HandSizeModification;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -30,16 +29,12 @@ public final class MidnightOil extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
 
         // Midnight Oil enters the battlefield with seven hour counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(
-                        CounterType.HOUR.createInstance(7)
-                ), "with seven hour counters on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.HOUR.createInstance(7)));
 
         // At the beginning of your draw step, draw an additional card and remove two hour counters from Midnight Oil.
         Ability ability = new BeginningOfDrawTriggeredAbility(
                 TargetController.YOU, new DrawCardSourceControllerEffect(1)
-                        .setText("draw an additional card"),
+                .setText("draw an additional card"),
                 false
         );
         ability.addEffect(new RemoveCounterSourceEffect(

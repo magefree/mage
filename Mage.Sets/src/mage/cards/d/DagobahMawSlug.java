@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MonstrousCondition;
@@ -13,7 +11,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +33,7 @@ public final class DagobahMawSlug extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new SwampwalkAbility()),
                 MonstrousCondition.instance,
-                "As long as Dagobah Maw Slug is monstrous it has swampwalk")
+                "As long as {this} is monstrous, it has swampwalk")
         ));
     }
 

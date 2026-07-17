@@ -60,7 +60,7 @@ public class WorldChampionshipDecks2004 extends ExpansionSet {
         cards.add(new SetCardInfo("Island", "gn335", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", "gn336", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", "gn337", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Krark-Clan Ironworks", "mb134", Rarity.RARE, mage.cards.k.KrarkClanIronworks.class));
+        cards.add(new SetCardInfo("Krark-Clan Ironworks", "mb134", Rarity.UNCOMMON, mage.cards.k.KrarkClanIronworks.class));
         cards.add(new SetCardInfo("Mana Leak", "gn89", Rarity.COMMON, mage.cards.m.ManaLeak.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mana Leak", "mb89sb", Rarity.COMMON, mage.cards.m.ManaLeak.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Myr Incubator", "mb212", Rarity.RARE, mage.cards.m.MyrIncubator.class));

@@ -36,7 +36,7 @@ public final class RaubahnBullOfAlaMhigo extends CardImpl {
         // Ward--Pay life equal to Raubahn's power.
         this.addAbility(new WardAbility(new PayLifeCost(
                 SourcePermanentPowerValue.NOT_NEGATIVE, "life equal to {this}'s power"
-        )));
+        ), false));
 
         // Whenever Raubahn attacks, attach up to one target Equipment you control to target attacking creature.
         Ability ability = new AttacksTriggeredAbility(new AttachTargetToTargetEffect());

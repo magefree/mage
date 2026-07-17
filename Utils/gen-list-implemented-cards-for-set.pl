@@ -7,7 +7,6 @@ use Scalar::Util qw(looks_like_number);
 
 my $dataFile = "mtg-cards-data.txt";
 my $setsFile = "mtg-sets-data.txt";
-my $knownSetsFile = "known-sets.txt";
 
 my %sets;
 my %knownSets;
@@ -32,10 +31,10 @@ while(my $line = <DATA>) {
 }
 close(DATA);
 
-open (DATA, $knownSetsFile) || die "can't open $knownSetsFile";
+open (DATA, $setsFile) || die "can't open $setsFile";
 while(my $line = <DATA>) {
     my @data = split('\\|', $line);
-    $knownSets{$data[0]}= $data[1];
+    $knownSets{$data[0]}= $data[2];
 }
 close(DATA);
 
@@ -71,8 +70,8 @@ foreach my $card (sort cardSort @setCards) {
 	if (-e $currentFileName) {
 		if ($toPrint) {
 			$toPrint .= "\n";
-		}   
-		$toPrint .= "@{$card}[2]|@{$card}[0]"; 
+		}
+		$toPrint .= "@{$card}[2]|@{$card}[0]";
                 $cardsImplemented++;
 	}
     $cardsFound++;
@@ -84,4 +83,3 @@ print "Number of implemented cards:  " . $cardsImplemented . "\n";
 open CARD, "> " . lc($sets{$setName}) . "_implemented.txt";
 print CARD $toPrint;
 close CARD;
-

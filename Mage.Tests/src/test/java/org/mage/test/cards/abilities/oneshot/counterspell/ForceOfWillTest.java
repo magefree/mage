@@ -83,4 +83,56 @@ public class ForceOfWillTest extends CardTestPlayerBase {
             }
         }
     }
+
+    // https://github.com/magefree/mage/issues/14397
+    @Test
+    public void testWithLavinia() {
+        addCard(Zone.BATTLEFIELD, playerA, "Lavinia, Azorius Renegade");
+        addCard(Zone.HAND, playerA, "Balduvian Bears");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.HAND, playerB, "Force of Will");
+        addCard(Zone.HAND, playerB, "Remand");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Force of Will");
+        addTarget(playerB, "Balduvian Bears");
+        setChoice(playerB, "Cast with alternative cost: Pay 1 life, Exile a blue card from your hand (source: Force of Will");
+        setChoice(playerB, "Remand");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Balduvian Bears", 1);
+        assertGraveyardCount(playerB, "Force of Will", 1);
+        assertExileCount(playerB, "Remand", 1);
+        assertLife(playerB, 19);
+    }
+
+    @Test
+    public void testWithBoromir() {
+        addCard(Zone.BATTLEFIELD, playerA, "Boromir, Warden of the Tower");
+        addCard(Zone.HAND, playerA, "Balduvian Bears");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.HAND, playerB, "Force of Will");
+        addCard(Zone.HAND, playerB, "Remand");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Force of Will");
+        addTarget(playerB, "Balduvian Bears");
+        setChoice(playerB, "Cast with alternative cost: Pay 1 life, Exile a blue card from your hand (source: Force of Will");
+        setChoice(playerB, "Remand");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Balduvian Bears", 1);
+        assertGraveyardCount(playerB, "Force of Will", 1);
+        assertExileCount(playerB, "Remand", 1);
+        assertLife(playerB, 19);
+    }
+
 }

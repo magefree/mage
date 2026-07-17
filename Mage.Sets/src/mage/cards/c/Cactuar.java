@@ -31,7 +31,7 @@ public final class Cactuar extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new ReturnToHandSourceEffect(true)
                         .setText("return it to its owner's hand")
-        ).withInterveningIf(SourceEnteredThisTurnCondition.DIDNT));
+        ).withInterveningIf(SourceEnteredThisTurnCondition.FALSE));
     }
 
     private Cactuar(final Cactuar card) {

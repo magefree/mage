@@ -52,7 +52,7 @@ public final class SummoningMateria extends CardImpl {
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private SummoningMateria(final SummoningMateria card) {

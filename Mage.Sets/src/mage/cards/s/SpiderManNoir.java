@@ -35,12 +35,12 @@ public final class SpiderManNoir extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever a creature you control attacks alone, put a +1/+1 counter on it. Then surveil X, where X is the number of counters on it.
         Ability ability = new AttacksAloneControlledTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance())
-                        .setText("put a +1/+1 counter on it")
+                        .setText("put a +1/+1 counter on it"), true, false
         );
         ability.addEffect(new SpiderManNoirEffect());
         this.addAbility(ability);

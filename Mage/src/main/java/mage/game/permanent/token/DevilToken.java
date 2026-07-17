@@ -15,7 +15,7 @@ import mage.target.common.TargetAnyTarget;
 public final class DevilToken extends TokenImpl {
 
     public DevilToken() {
-        super("Devil Token", "1/1 red Devil creature token with \"When this creature dies, it deals 1 damage to any target.\"");
+        super("Devil Token", "1/1 red Devil creature token with \"When this token dies, it deals 1 damage to any target.\"");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.DEVIL);
         color.setRed(true);

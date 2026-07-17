@@ -1,20 +1,15 @@
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +24,8 @@ public final class UndyingBeast extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Undying Beast dies, put it on top of its owner's library.
-        this.addAbility(new DiesSourceTriggeredAbility(new UndyingBeastEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new PutOnLibraryTargetEffect(true)
+                .setText("put it on top of its owner's library"), false, SetTargetPointer.CARD));
     }
 
     private UndyingBeast(final UndyingBeast card) {
@@ -39,41 +35,5 @@ public final class UndyingBeast extends CardImpl {
     @Override
     public UndyingBeast copy() {
         return new UndyingBeast(this);
-    }
-}
-
-class UndyingBeastEffect extends OneShotEffect {
-
-    UndyingBeastEffect() {
-        super(Outcome.ReturnToHand);
-        staticText = "put it on top of its owner's library";
-    }
-
-    private UndyingBeastEffect(final UndyingBeastEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public UndyingBeastEffect copy() {
-        return new UndyingBeastEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
-        if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-            Object object = this.getValue("permanentLeftBattlefield");
-            if (object instanceof Permanent) {
-                Permanent permanent = (Permanent) object;
-                if (permanent.getZoneChangeCounter(game) + 1 == card.getZoneChangeCounter(game)) {
-                    Player owner = game.getPlayer(card.getOwnerId());
-                    if (owner != null) {
-                        return owner.putCardsOnTopOfLibrary(card, game, source, true);
-                    }
-                }
-            }
-
-        }
-        return true;
     }
 }

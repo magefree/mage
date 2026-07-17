@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.MageObject;
@@ -9,7 +8,7 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
 /**
@@ -56,7 +55,9 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
         }
         this.getEffects().setValue("permanentDied", zEvent.getTarget());
         if (setTargetPointer) {
-            this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game.getObject(event.getTargetId()).getZoneChangeCounter(game)));
+            this.getEffects().setTargetPointer(new FixedTargets(
+                    CardUtil.getAllCardsFromPermanentLeftBattlefield(zEvent.getTarget(), game), game
+            ));
         }
         return true;
     }

@@ -1,28 +1,24 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.DamageSelfEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DamageTargetAndSelfEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
- * @author anonymous
- * @see mage.sets.seventhedition.RecklessEmbermage
+ * @author xenohedron
  */
 public final class PsionicSliver extends CardImpl {
 
@@ -35,11 +31,7 @@ public final class PsionicSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // All Sliver creatures have "{T}: This creature deals 2 damage to any target and 3 damage to itself."
-        Ability ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(2).setText("This creature deals 2 damage to any target"),
-                new TapSourceCost()
-        );
-        ability.addEffect(new DamageSelfEffect(3).setText("3 damage to itself."));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetAndSelfEffect(2, 3), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(
                 new SimpleStaticAbility(new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, filter,

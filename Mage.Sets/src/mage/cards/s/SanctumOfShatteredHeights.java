@@ -3,18 +3,15 @@ package mage.cards.s;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.common.ShrinesYouControlCount;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreatureOrPlaneswalker;
@@ -28,12 +25,12 @@ import java.util.UUID;
 public final class SanctumOfShatteredHeights extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a land card or Shrine card");
-    private static final FilterPermanent filterShrinesOnly = new FilterControlledPermanent("Shrine you control");
-    private static final PermanentsOnBattlefieldCount xValue = new PermanentsOnBattlefieldCount(filterShrinesOnly);
 
     static {
-        filter.add(Predicates.or(CardType.LAND.getPredicate(), SubType.SHRINE.getPredicate()));
-        filterShrinesOnly.add(SubType.SHRINE.getPredicate());
+        filter.add(Predicates.or(
+                CardType.LAND.getPredicate(),
+                SubType.SHRINE.getPredicate()
+        ));
     }
 
     public SanctumOfShatteredHeights(UUID ownerId, CardSetInfo setInfo) {
@@ -43,10 +40,11 @@ public final class SanctumOfShatteredHeights extends CardImpl {
         this.subtype.add(SubType.SHRINE);
 
         // {1}, Discard a land card or Shrine card: Sanctum of Shattered Heights deals X damage to target creature or planeswalker, where X is the number of Shrines you control.
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(xValue)
-                .setText("{this} deals X damage to target creature or planeswalker, where X is the number of Shrines you control"),
-                new ManaCostsImpl<>("{1}"))
-                .addHint(new ValueHint("Shrines you control", xValue));
+        Ability ability = new SimpleActivatedAbility(
+                new DamageTargetEffect(ShrinesYouControlCount.WHERE_X)
+                        .setText("{this} deals X damage to target creature or planeswalker, where X is the number of Shrines you control"),
+                new GenericManaCost(1)
+        ).addHint(ShrinesYouControlCount.getHint());
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(filter)));
         ability.addTarget(new TargetCreatureOrPlaneswalker());
         this.addAbility(ability);

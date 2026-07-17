@@ -33,7 +33,7 @@ public final class NekusarTheMindrazer extends CardImpl {
                 false));
 
         // Whenever an opponent draws a card, Nekusar, the Mindrazer deals 1 damage to that player.
-        this.addAbility(new DrawCardOpponentTriggeredAbility(new DamageTargetEffect(1, true, "that player"), false, true));
+        this.addAbility(new DrawCardOpponentTriggeredAbility(new DamageTargetEffect(1).withTargetDescription("that player"), false, true));
     }
 
     private NekusarTheMindrazer(final NekusarTheMindrazer card) {

@@ -71,7 +71,7 @@ class DawnEvangelAbility extends DiesCreatureTriggeredAbility {
             return false;
         }
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent
+        return zEvent.isPermanentMoved() && zEvent
                 .getTarget()
                 .getAttachments()
                 .stream()

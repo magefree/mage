@@ -25,7 +25,7 @@ import java.util.UUID;
  */
 public final class BloodchiefAscension extends CardImpl {
 
-    private static final Condition condition = new SourceHasCounterCondition(CounterType.QUEST, 3);
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.QUEST, ComparisonType.MORE_THAN, 2);
 
     public BloodchiefAscension(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");

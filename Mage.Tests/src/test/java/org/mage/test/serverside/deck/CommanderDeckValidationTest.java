@@ -143,6 +143,28 @@ public class CommanderDeckValidationTest extends MageTestPlayerBase {
         );
     }
 
+    @Test
+    public void testPartnerVariants() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Swamp", 98);
+
+        deckTester.addSideboard("Ellie, Vengeful Hunter", 1);
+        deckTester.addSideboard("Joel, Resolute Survivor", 1);
+
+        deckTester.validate("You can have two commanders if they both have the same Partner variant");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testPartnerVariants2() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Mountain", 98);
+
+        deckTester.addSideboard("Ellie, Vengeful Hunter", 1);
+        deckTester.addSideboard("Atreus, Impulsive Son", 1);
+
+        deckTester.validate("You can't have two commanders if they don't have the same Partner variant");
+    }
+
     @Test()
     public void testVehicles1() {
         DeckTester deckTester = new DeckTester(new Commander());
@@ -181,5 +203,49 @@ public class CommanderDeckValidationTest extends MageTestPlayerBase {
         deckTester.addSideboard("The Eternity Elevator", 1);
 
         deckTester.validate("Legendary Spacecraft should not be able to be a commander if they can't become a creature");
+    }
+
+    @Test
+    public void testLutriCommander() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Island", 99);
+
+        deckTester.addSideboard("Lutri, the Spellchaser", 1);
+
+        deckTester.validate("Lutri can be your commander");
+    }
+
+    @Test
+    public void testLutriMaindeck() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Island", 98);
+        deckTester.addMaindeck("Lutri, the Spellchaser", 1);
+
+        deckTester.addSideboard("Niv-Mizzet, the Firemind", 1);
+
+        deckTester.validate("Lutri can be in your main deck in commander");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testLutriCompanion() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Island", 99);
+
+        deckTester.addSideboard("Niv-Mizzet, the Firemind", 1);
+        deckTester.addSideboard("Lutri, the Spellchaser", 1);
+
+        deckTester.validate("Lutri can't be your companion in commander");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testLutriCompanionPartner() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Island", 98);
+
+        deckTester.addSideboard("Ludevic, Necro-Alchemist", 1);
+        deckTester.addSideboard("Kraum, Ludevic's Opus", 1);
+        deckTester.addSideboard("Lutri, the Spellchaser", 1);
+
+        deckTester.validate("Lutri can't be your companion in commander");
     }
 }

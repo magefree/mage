@@ -22,11 +22,7 @@ public final class CutIn extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");
 
         // Cut In deals 4 damage to target creature.
-        this.getSpellAbility().addEffect(
-                new DamageTargetEffect(4)
-                        .setUseOnlyTargetPointer(true)
-                        .setTargetPointer(new FirstTargetPointer())
-        );
+        this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Create a Young Hero Role token attached to up to one target creature you control.

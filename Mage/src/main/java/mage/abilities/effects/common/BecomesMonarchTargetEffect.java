@@ -13,7 +13,7 @@ public class BecomesMonarchTargetEffect extends OneShotEffect {
 
     public BecomesMonarchTargetEffect() {
         super(Outcome.Benefit);
-        staticText = "target player becomes the monarch";
+        staticText = "target opponent becomes the monarch";
     }
 
     protected BecomesMonarchTargetEffect(final BecomesMonarchTargetEffect effect) {
@@ -34,5 +34,4 @@ public class BecomesMonarchTargetEffect extends OneShotEffect {
         }
         return false;
     }
-
 }

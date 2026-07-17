@@ -8,6 +8,8 @@ import mage.constants.SetType;
 
 /**
  * https://scryfall.com/sets/sum
+ *
+ * https://mtg.wiki/page/Revised_Edition#%22Summer_Magic%22/%22Edgar%22
  */
 public class SummerMagicEdgar extends ExpansionSet {
 
@@ -19,8 +21,14 @@ public class SummerMagicEdgar extends ExpansionSet {
 
     private SummerMagicEdgar() {
         super("Summer Magic / Edgar", "SUM", ExpansionSet.buildDate(1994, 6, 21), SetType.CORE);
-        this.hasBoosters = false;
+        this.hasBoosters = true;
         this.hasBasicLands = true;
+
+        this.numBoosterLands = 1;
+        this.numBoosterCommon = 10;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 0;
 
         cards.add(new SetCardInfo("Air Elemental", 47, Rarity.UNCOMMON, mage.cards.a.AirElemental.class, RETRO_ART));
         cards.add(new SetCardInfo("Aladdin's Lamp", 231, Rarity.RARE, mage.cards.a.AladdinsLamp.class, RETRO_ART));

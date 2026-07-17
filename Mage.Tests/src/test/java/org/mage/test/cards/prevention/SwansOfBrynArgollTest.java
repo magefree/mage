@@ -17,7 +17,7 @@ public class SwansOfBrynArgollTest extends CardTestPlayerBase{
      * Since you can't prevent damage that Combust deals, it should be able to kill Swans of Bryn Argoll. 
      */
     @Test
-    public void testMarkOfAsylumEffect() {
+    public void testSwansOfBrynArgollEffect() {
         // 4/3 Flying
         // If a source would deal damage to Swans of Bryn Argoll, prevent that damage. The source's controller draws cards equal to the damage prevented this way.
         addCard(Zone.BATTLEFIELD, playerA, "Swans of Bryn Argoll");
@@ -42,7 +42,7 @@ public class SwansOfBrynArgollTest extends CardTestPlayerBase{
      * Since you can't prevent damage that Combust deals, it should be able to kill Swans of Bryn Argoll. 
      */
     @Test
-    public void testAgainstBanefire() {
+    public void testSwansAgainstBanefire() {
         // 4/3 Flying
         // If a source would deal damage to Swans of Bryn Argoll, prevent that damage. The source's controller draws cards equal to the damage prevented this way.
         addCard(Zone.BATTLEFIELD, playerA, "Swans of Bryn Argoll");

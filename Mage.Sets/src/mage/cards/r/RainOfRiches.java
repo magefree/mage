@@ -114,8 +114,7 @@ class RainOfRichesWatcher extends Watcher {
     }
 
     boolean checkSpell(StackObject stackObject, Game game) {
-        if (stackObject.isCopy()
-                || !(stackObject instanceof Spell)) {
+        if (!(stackObject instanceof Spell) || !((Spell)stackObject).wasCast()) {
             return false;
         }
         if (playerMap.containsKey(stackObject.getControllerId())) {

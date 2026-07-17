@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -76,7 +76,7 @@ class SuppressEffect extends OneShotEffect {
                 .filter(card -> game.getState().getZone(card.getId()) == Zone.EXILED)
                 .forEach(card -> card.setFaceDown(true, game));
         DelayedTriggeredAbility ability = new AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility(
-                new ReturnFromExileEffect(Zone.HAND).setText("that player returns those cards to their hand"), player.getId()
+                new ReturnFromExileForSourceEffect(Zone.HAND).setText("that player returns those cards to their hand"), player.getId()
         ).setTriggerPhrase("At the beginning of the end step of that player's next turn, ");
         game.addDelayedTriggeredAbility(ability, source);
         return true;

@@ -1,13 +1,13 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.SplitSecondAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -18,11 +18,11 @@ public final class SuddenShock extends CardImpl {
     public SuddenShock(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
-
         // Split second
         this.addAbility(new SplitSecondAbility());
+
         // Sudden Shock deals 2 damage to any target.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(2, true));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 

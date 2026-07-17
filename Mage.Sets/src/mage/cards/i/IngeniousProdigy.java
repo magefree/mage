@@ -13,6 +13,7 @@ import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 
@@ -23,7 +24,7 @@ import java.util.UUID;
  */
 public final class IngeniousProdigy extends CardImpl {
 
-    private static final Condition condition = new SourceHasCounterCondition(CounterType.P1P1);
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.P1P1, ComparisonType.MORE_THAN, 0);
 
     public IngeniousProdigy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{U}");

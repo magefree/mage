@@ -42,7 +42,7 @@ public final class RocketPoweredGoblinGlider extends CardImpl {
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
 
         // Mayhem {2}
         this.addAbility(new MayhemAbility(this, "{2}"));

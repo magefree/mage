@@ -12,8 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -21,12 +20,6 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author jeffwadsworth
  */
 public final class VolrathsStronghold extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("creature card from your graveyard");
-
-    static {
-        filter.add(CardType.CREATURE.getPredicate());
-    }
 
     public VolrathsStronghold(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
@@ -38,7 +31,7 @@ public final class VolrathsStronghold extends CardImpl {
         // {1}{B}, {tap}: Put target creature card from your graveyard on top of your library.
         Ability ability = new SimpleActivatedAbility(new PutOnLibraryTargetEffect(true), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }
 

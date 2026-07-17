@@ -2,10 +2,9 @@ package mage.cards.o;
 
 import mage.MageInt;
 import mage.abilities.common.AttacksEachCombatStaticAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.PreventDamageAndRemoveCountersEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -28,9 +27,7 @@ public final class OathswornKnight extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Oathsworn Knight enters the battlefield with four +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(4)
-        ), "with four +1/+1 counters on it"));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.P1P1.createInstance(4)));
 
         // Oathsworn Knight attacks each combat if able.
         this.addAbility(new AttacksEachCombatStaticAbility());

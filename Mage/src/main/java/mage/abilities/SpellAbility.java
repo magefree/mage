@@ -81,7 +81,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
      *                      (i.e. Vizier of the Menagerie and issue #5816)
      */
 
-    private static final Set<MageIdentifier> activationSetAllowAll = new HashSet();
+    private static final Set<MageIdentifier> activationSetAllowAll = new HashSet<>();
 
     static {
         activationSetAllowAll.add(MageIdentifier.Default);
@@ -195,9 +195,9 @@ public class SpellAbility extends ActivatedAbilityImpl {
             if (getSpellAbilityType() == SpellAbilityType.BASE_ALTERNATE) {
                 Player player = game.getPlayer(playerId);
                 if (player != null
-                        && player.getCastSourceIdWithAlternateMana()
+                        && !player.getCastSourceIdWithAlternateMana()
                         .getOrDefault(getSourceId(), Collections.emptySet())
-                        .contains(MageIdentifier.Default)
+                        .isEmpty()
                 ) {
                     return ActivationStatus.getFalse();
                 }

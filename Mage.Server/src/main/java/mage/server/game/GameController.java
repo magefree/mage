@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
+import mage.collectors.DataCollectorServices;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
 import mage.game.Game;
@@ -131,7 +132,7 @@ public class GameController implements GameCallback {
                                 logger.trace(game.getId() + " " + event.getMessage());
                                 break;
                             case ERROR:
-                                error(event.getMessage(), event.getException());
+                                error(event.getMessage(), event.getException(), event.getGame());
                                 break;
                             case END_GAME_INFO:
                                 endGameInfo();
@@ -947,19 +948,34 @@ public class GameController implements GameCallback {
         perform(playerId, playerId1 -> getGameSession(playerId1).informPersonal(message), false);
     }
 
-    private void error(String message, Exception ex) {
+    private void error(String message, Exception ex, Game game) {
         StringBuilder sb = new StringBuilder();
         sb.append(message);
         sb.append("\n");
         sb.append("\n");
         sb.append(ex);
         sb.append("\nServer version: ").append(Main.getVersion().toString());
+        if (game != null) {
+            sb.append("\n");
+            try {
+                sb.append("\nGame state:\n").append(game.toString());
+            } catch (Exception e) {
+                sb.append("\nGame state: can't get it due error");
+            }
+        }
+        sb.append("\n");
         sb.append("\nStack trace:");
+        sb.append("\n```");
         sb.append("\n");
         for (StackTraceElement e : ex.getStackTrace()) {
             sb.append(e.toString()).append("\n");
         }
+        sb.append("```");
+        sb.append("\n");
         String mes = sb.toString();
+
+        // send to data collectors
+        DataCollectorServices.getInstance().onGameError(game, ex);
 
         // send error for each player
         for (final Entry<UUID, GameSessionPlayer> entry : getGameSessionsMap().entrySet()) {

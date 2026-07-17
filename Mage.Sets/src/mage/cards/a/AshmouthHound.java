@@ -23,7 +23,7 @@ public final class AshmouthHound extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Ashmouth Hound blocks or becomes blocked by a creature, Ashmouth Hound deals 1 damage to that creature.
-        this.addAbility(new BlocksOrBlockedByCreatureSourceTriggeredAbility(new DamageTargetEffect(1, true, "that creature")));
+        this.addAbility(new BlocksOrBlockedByCreatureSourceTriggeredAbility(new DamageTargetEffect(1).withTargetDescription("that creature")));
     }
 
     private AshmouthHound(final AshmouthHound card) {

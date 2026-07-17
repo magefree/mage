@@ -21,6 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
+import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
@@ -81,11 +82,11 @@ class GlamerSpinnersEffect extends OneShotEffect {
         Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetPermanent == null
                 || targetPermanent
-                .getAttachments()
-                .stream()
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .noneMatch(p -> p.hasSubtype(SubType.AURA, game))) {
+                        .getAttachments()
+                        .stream()
+                        .map(game::getPermanent)
+                        .filter(Objects::nonNull)
+                        .noneMatch(p -> p.hasSubtype(SubType.AURA, game))) {
             return false;
         }
         FilterPermanent filter = new FilterPermanent(
@@ -94,7 +95,7 @@ class GlamerSpinnersEffect extends OneShotEffect {
                         .map(Controllable::getControllerId)
                         .map(game::getPlayer)
                         .map(Player::getName)
-                        .map(s -> " controlled by" + s)
+                        .map(s -> " controlled by " + s)
                         .orElse("")
         );
         filter.add(new ControllerIdPredicate(targetPermanent.getControllerId()));
@@ -102,18 +103,23 @@ class GlamerSpinnersEffect extends OneShotEffect {
         if (!game.getBattlefield().contains(filter, source.getControllerId(), source, game, 1)) {
             return false;
         }
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
+        }
         TargetPermanent target = new TargetPermanent(filter);
         target.withNotTarget(true);
-        Optional.ofNullable(source)
-                .map(Controllable::getControllerId)
-                .map(game::getPlayer)
-                .ifPresent(player -> player.choose(outcome, target, source, game));
+        player.choose(Outcome.AIDontUseIt, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
             return false;
         }
-        for (UUID attachmentId : targetPermanent.getAttachments()) {
-            permanent.addAttachment(attachmentId, source, game);
+        // new list to avoid concurrent modification
+        for (UUID attachmentId : new LinkedList<>(targetPermanent.getAttachments())) {
+            Permanent attachment = game.getPermanent(attachmentId);
+            if (attachment != null && attachment.hasSubtype(SubType.AURA, game)) {
+                permanent.addAttachment(attachmentId, source, game);
+            }
         }
         return true;
     }

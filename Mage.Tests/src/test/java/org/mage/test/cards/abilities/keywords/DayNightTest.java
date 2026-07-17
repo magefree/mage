@@ -1,6 +1,7 @@
 package org.mage.test.cards.abilities.keywords;
 
 import mage.cards.Card;
+import mage.cards.DoubleFacedCard;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
@@ -67,7 +68,7 @@ public class DayNightTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, ruffian);
 
         runCode("copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
-            Card card = currentGame.getCards().stream().filter(c -> c.getName().equals(ruffian)).findFirst().orElse(null);
+            Card card = currentGame.getCards().stream().filter(c -> c.getName().equals(ruffian) && c instanceof DoubleFacedCard).findFirst().orElse(null);
             Assert.assertNotNull(card);
             Assert.assertNotNull(card.getSecondCardFace());
 

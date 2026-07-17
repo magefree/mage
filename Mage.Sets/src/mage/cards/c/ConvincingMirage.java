@@ -97,13 +97,9 @@ class ConvincingMirageContinousEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
         SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + ChooseBasicLandTypeEffect.VALUE_KEY));
-        if (enchantment == null || enchantment.getAttachedTo() == null || choice == null) {
-            return false;
-        }
-        Permanent land = game.getPermanent(enchantment.getAttachedTo());
-        if (land == null) {
+        Permanent land = source.getPermanentSourceAttachedToIfItStillExists(game);
+        if (land == null || choice == null) {
             return false;
         }
         land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);

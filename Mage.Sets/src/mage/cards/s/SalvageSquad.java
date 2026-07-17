@@ -29,7 +29,7 @@ public final class SalvageSquad extends CardImpl {
 
         // When Salvage Squad enters the battlefied, you may sacrifice an artifact. If you do, you gain 2 life and draw two cards.
         DoIfCostPaid effect = new DoIfCostPaid(new GainLifeEffect(2), new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT));
-        effect.addEffect(new DrawCardSourceControllerEffect(2));
+        effect.addEffect(new DrawCardSourceControllerEffect(2).concatBy("and"));
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
     }
 

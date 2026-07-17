@@ -1,8 +1,6 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.SpecialAction;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
@@ -20,6 +18,8 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -173,7 +173,7 @@ class LostInThoughtIgnoreEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        String key = source.getSourceId().toString() + source.getStackMomentSourceZCC() + LostInThought.keyString + game.getTurnNum() + ((ActivatedAbilityImpl) source).getActivatorId();
+        String key = source.getSourceId().toString() + source.getStackMomentSourceZCC() + LostInThought.keyString + game.getTurnNum() + source.getControllerId();
         game.getState().setValue(key, true);
         return true;
     }

@@ -33,7 +33,7 @@ public final class BasiliskCollar extends CardImpl {
         ).setText("and lifelink"));
         this.addAbility(ability);
 
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
     private BasiliskCollar(final BasiliskCollar card) {

@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.OpponentControlsMoreCondition;
+import mage.abilities.condition.common.OpponentHasMoreCardsInHandCondition;
 import mage.abilities.condition.common.OpponentHasMoreLifeCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -18,14 +19,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
-import mage.game.Controllable;
-import mage.game.Game;
 import mage.game.permanent.token.FishNoAbilityToken;
 import mage.game.permanent.token.TreasureToken;
-import mage.players.Player;
 
-import java.util.Optional;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -38,7 +34,6 @@ public final class BezaTheBoundingSpring extends CardImpl {
     private static final Hint hint = new ConditionHint(condition);
     private static final Hint hint2 = new ConditionHint(condition2);
     private static final Hint hint3 = new ConditionHint(OpponentHasMoreLifeCondition.instance);
-    private static final Hint hint4 = new ConditionHint(BezaOpponentHasMoreCardsInHandThanYouCondition.instance);
 
     public BezaTheBoundingSpring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
@@ -64,10 +59,10 @@ public final class BezaTheBoundingSpring extends CardImpl {
         ));
         ability.addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1),
-                BezaOpponentHasMoreCardsInHandThanYouCondition.instance,
+                OpponentHasMoreCardsInHandCondition.instance,
                 "draw a card if an opponent has more cards in hand than you"
         ));
-        this.addAbility(ability.addHint(hint).addHint(hint2).addHint(hint3).addHint(hint4));
+        this.addAbility(ability.addHint(hint).addHint(hint2).addHint(hint3).addHint(OpponentHasMoreCardsInHandCondition.getHint()));
     }
 
     private BezaTheBoundingSpring(final BezaTheBoundingSpring card) {
@@ -78,32 +73,4 @@ public final class BezaTheBoundingSpring extends CardImpl {
     public BezaTheBoundingSpring copy() {
         return new BezaTheBoundingSpring(this);
     }
-}
-
-//Based on MoreCardsInHandThanOpponentsCondition
-enum BezaOpponentHasMoreCardsInHandThanYouCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int cardsInHand = Optional
-                .ofNullable(source)
-                .map(Controllable::getControllerId)
-                .map(game::getPlayer)
-                .map(Player::getHand)
-                .map(Set::size)
-                .orElse(0);
-        return game.getOpponents(source.getControllerId())
-                .stream()
-                .map(game::getPlayer)
-                .map(Player::getHand)
-                .mapToInt(Set::size)
-                .anyMatch(x -> x > cardsInHand);
-    }
-
-    @Override
-    public String toString() {
-        return "an opponent has more cards in hand than you";
-    }
-
 }

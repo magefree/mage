@@ -28,22 +28,11 @@ public class AddCardColorAttachedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            Permanent target = game.getPermanent(equipment.getAttachedTo());
-            if (target != null) {
-                if (addedColor.isBlack())
-                    target.getColor(game).setBlack(true);
-                if (addedColor.isBlue())
-                    target.getColor(game).setBlue(true);
-                if (addedColor.isWhite())
-                    target.getColor(game).setWhite(true);
-                if (addedColor.isGreen())
-                    target.getColor(game).setGreen(true);
-                if (addedColor.isRed())
-                    target.getColor(game).setRed(true);
-            }
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
+        if (permanent == null) {
+            return false;
         }
+        permanent.getColor(game).addColor(addedColor);
         return true;
     }
 

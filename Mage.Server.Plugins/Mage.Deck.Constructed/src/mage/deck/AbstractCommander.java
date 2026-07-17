@@ -27,7 +27,7 @@ public abstract class AbstractCommander extends Constructed {
 
     private static List<CommanderValidator> validators = Arrays.asList(
             PartnerValidator.instance,
-            FriendsForeverValidator.instance,
+            PartnerVariantValidator.instance,
             PartnerWithValidator.instance,
             ChooseABackgroundValidator.instance,
             DoctorsCompanionValidator.instance
@@ -35,6 +35,7 @@ public abstract class AbstractCommander extends Constructed {
     protected final List<String> bannedCommander = new ArrayList<>();
     protected final List<String> bannedPartner = new ArrayList<>();
     protected boolean partnerAllowed = true;
+    protected final List<String> bannedCompanion = new ArrayList<>();
 
     public AbstractCommander(String name) {
         super(name);
@@ -100,13 +101,17 @@ public abstract class AbstractCommander extends Constructed {
             boolean valid = true;
             for (Card card : deck.getCards()) {
                 if (!ManaUtil.isColorIdentityCompatible(colorIdentity, card.getColorIdentity())) {
-                    addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (need " + colorIdentity + ", but get " + card.getColorIdentity() + ")", true);
+                    FilterMana restrictedColor = card.getColorIdentity().copy();
+                    restrictedColor.removeAll(colorIdentity);
+                    addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color identity (includes " + restrictedColor + ", but your commander(s) allow only " + colorIdentity + ")", true);
                     valid = false;
                 }
             }
             for (Card card : deck.getSideboard()) {
                 if (!ManaUtil.isColorIdentityCompatible(colorIdentity, card.getColorIdentity())) {
-                    addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (need " + colorIdentity + ", but get " + card.getColorIdentity() + ")", true);
+                    FilterMana restrictedColor = card.getColorIdentity().copy();
+                    restrictedColor.removeAll(colorIdentity);
+                    addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color identity (includes " + restrictedColor + ", but your commander(s) allow only " + colorIdentity + ")", true);
                     valid = false;
                 }
             }
@@ -227,6 +232,11 @@ public abstract class AbstractCommander extends Constructed {
                 valid = false;
             }
             ManaUtil.collectColorIdentity(colorIdentity, commander.getColorIdentity());
+        }
+
+        if (companion != null && bannedCompanion.contains(companion.getName())) {
+            addError(DeckValidatorErrorType.PRIMARY, companion.getName(), "Companion banned (" + companion.getName() + ')', true);
+            valid = false;
         }
 
         // no needs in cards check on wrong commanders

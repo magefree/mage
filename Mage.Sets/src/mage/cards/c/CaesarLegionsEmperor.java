@@ -20,7 +20,7 @@ import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.permanent.token.SoldierTokenWithHaste;
+import mage.game.permanent.token.SoldierHasteToken;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -49,7 +49,7 @@ public final class CaesarLegionsEmperor extends CardImpl {
         // Whenever you attack, you may sacrifice another creature. When you do, choose two --
         // * Create two 1/1 red and white Soldier creature tokens with haste that are tapped and attacking.
         ReflexiveTriggeredAbility triggeredAbility = new ReflexiveTriggeredAbility(
-                new CreateTokenEffect(new SoldierTokenWithHaste(), 2, true, true), false);
+                new CreateTokenEffect(new SoldierHasteToken(), 2, true, true), false);
         triggeredAbility.getModes().setMinModes(2);
         triggeredAbility.getModes().setMaxModes(2);
 

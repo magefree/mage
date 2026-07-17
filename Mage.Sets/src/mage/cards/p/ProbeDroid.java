@@ -1,17 +1,20 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.RepairAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.game.Game;
+import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +30,7 @@ public final class ProbeDroid extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Probe Droid enters the battlefield, target player reveals their hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new LookAtTargetPlayerHandEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ProbeDroidEffect());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
@@ -42,5 +45,32 @@ public final class ProbeDroid extends CardImpl {
     @Override
     public ProbeDroid copy() {
         return new ProbeDroid(this);
+    }
+}
+
+class ProbeDroidEffect extends OneShotEffect {
+
+    ProbeDroidEffect() {
+        super(Outcome.Discard);
+        this.staticText = "target player reveals their hand";
+    }
+
+    private ProbeDroidEffect(final ProbeDroidEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ProbeDroidEffect copy() {
+        return new ProbeDroidEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (player == null) {
+            return false;
+        }
+        player.revealCards(source, player.getHand(), game);
+        return true;
     }
 }

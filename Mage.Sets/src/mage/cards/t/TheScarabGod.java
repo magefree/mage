@@ -3,7 +3,7 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
@@ -13,7 +13,6 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -62,7 +61,9 @@ public final class TheScarabGod extends CardImpl {
         this.addAbility(ability);
 
         // When The Scarab God dies, return it to its owner's hand at the beginning of the next end step.
-        this.addAbility(new DiesSourceTriggeredAbility(new TheScarabGodEffectDieEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
+                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnToHandTargetEffect())
+        ).setText("return it to its owner's hand at the beginning of the next end step"), false, SetTargetPointer.CARD));
     }
 
     private TheScarabGod(final TheScarabGod card) {
@@ -106,35 +107,5 @@ class TheScarabGodExileEffect extends OneShotEffect {
         }
 
         return false;
-    }
-}
-
-class TheScarabGodEffectDieEffect extends OneShotEffect {
-
-    private static final String effectText = "return it to its owner's hand at the beginning of the next end step";
-
-    TheScarabGodEffectDieEffect() {
-        super(Outcome.Benefit);
-        staticText = effectText;
-    }
-
-    private TheScarabGodEffectDieEffect(final TheScarabGodEffectDieEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        // Create delayed triggered ability
-        Effect effect = new ReturnToHandTargetEffect();
-        effect.setText("return {this} to its owner's hand");
-        effect.setTargetPointer(new FixedTarget(source.getSourceId(), source.getStackMomentSourceZCC()));
-        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-        game.addDelayedTriggeredAbility(delayedAbility, source);
-        return true;
-    }
-
-    @Override
-    public TheScarabGodEffectDieEffect copy() {
-        return new TheScarabGodEffectDieEffect(this);
     }
 }

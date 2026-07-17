@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -39,39 +38,39 @@ public final class Wirecat extends CardImpl {
     public Wirecat copy() {
         return new Wirecat(this);
     }
+}
 
-    static class WirecatEffect extends RestrictionEffect {
+class WirecatEffect extends RestrictionEffect {
 
-        public WirecatEffect() {
-            super(Duration.WhileOnBattlefield);
-            staticText = "{this} can't attack or block if an enchantment is on the battlefield";
+    WirecatEffect() {
+        super(Duration.WhileOnBattlefield);
+        staticText = "{this} can't attack or block if an enchantment is on the battlefield";
+    }
+
+    private WirecatEffect(final WirecatEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public WirecatEffect copy() {
+        return new WirecatEffect(this);
+    }
+
+    @Override
+    public boolean canAttackCheckAfter(int numberOfAttackers, Ability source, Game game, boolean canUseChooseDialogs) {
+        return false;
+    }
+
+    @Override
+    public boolean canBlockCheckAfter(Ability source, Game game, boolean canUseChooseDialogs) {
+        return false;
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent.getId().equals(source.getSourceId())) {
+            return game.getBattlefield().contains(StaticFilters.FILTER_PERMANENT_ENCHANTMENT, source, game, 1);
         }
-
-        private WirecatEffect(final WirecatEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public WirecatEffect copy() {
-            return new WirecatEffect(this);
-        }
-
-        @Override
-        public boolean canAttackCheckAfter(int numberOfAttackers, Ability source, Game game, boolean canUseChooseDialogs) {
-            return false;
-        }
-
-        @Override
-        public boolean canBlockCheckAfter(Ability source, Game game, boolean canUseChooseDialogs) {
-            return false;
-        }
-
-        @Override
-        public boolean applies(Permanent permanent, Ability source, Game game) {
-            if (permanent.getId().equals(source.getSourceId())) {
-                return game.getBattlefield().contains(StaticFilters.FILTER_PERMANENT_ENCHANTMENT, source, game, 1);
-            }
-            return false;
-        }
+        return false;
     }
 }

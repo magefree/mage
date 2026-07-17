@@ -20,7 +20,7 @@ public class AddCardSuperTypeAttachedEffect extends ContinuousEffectImpl {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.addedSuperType = addedSuperType;
         this.attachmentType = attachmentType;
-        setText();
+        this.staticText = attachmentType.verb() + " permanent is " + addedSuperType.toString().toLowerCase(Locale.ENGLISH);
     }
 
     protected AddCardSuperTypeAttachedEffect(final AddCardSuperTypeAttachedEffect effect) {
@@ -31,13 +31,11 @@ public class AddCardSuperTypeAttachedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            Permanent target = game.getPermanent(equipment.getAttachedTo());
-            if (target != null) {
-                target.addSuperType(game, addedSuperType);
-            }
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
+        if (permanent == null) {
+            return false;
         }
+        permanent.addSuperType(game, addedSuperType);
         return true;
     }
 
@@ -46,10 +44,4 @@ public class AddCardSuperTypeAttachedEffect extends ContinuousEffectImpl {
         return new AddCardSuperTypeAttachedEffect(this);
     }
 
-    private void setText() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(attachmentType.verb());
-        sb.append(" permanent is ").append(addedSuperType.toString().toLowerCase(Locale.ENGLISH)); //TODO add attacked card type detection
-        staticText = sb.toString();
-    }
 }

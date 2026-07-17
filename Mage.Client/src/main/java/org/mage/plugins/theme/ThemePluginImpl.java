@@ -82,7 +82,7 @@ public class ThemePluginImpl implements ThemePlugin {
             }
 
             if (ui.containsKey("gamePanel") && ui.containsKey("jLayeredPane")) {
-                ImagePanel bgPanel = new ImagePanel(backgroundImage, ImagePanelStyle.TILED);
+                ImagePanel bgPanel = new ImagePanel(backgroundImage, ImagePanelStyle.COVER);
 
                 // TODO: research - is all components used? And why it make transparent?
                 unsetOpaque(ui.get("splitChatAndLogs"));

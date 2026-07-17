@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -19,10 +18,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Mutant33DeathtouchToken;
 import mage.game.permanent.token.Token;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
@@ -34,7 +32,7 @@ import static mage.constants.Duration.EndOfGame;
 import static mage.constants.SagaChapter.CHAPTER_II;
 
 /**
- * @author padfoothelix 
+ * @author padfoothelix
  */
 public final class TheCurseOfFenric extends CardImpl {
 
@@ -50,7 +48,7 @@ public final class TheCurseOfFenric extends CardImpl {
 
     public TheCurseOfFenric(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{W}");
-        
+
         this.subtype.add(SubType.SAGA);
 
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
@@ -58,41 +56,42 @@ public final class TheCurseOfFenric extends CardImpl {
 
         // I -- For each player, destroy up to one target creature that player controls. For each creature destroyed this way, its controller creates a 3/3 green Mutant creature token with deathtouch.
         sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_I,
-                ability -> {
-                    ability.addEffect(new TheCurseOfFenricDestroyEffect()
-                            .setText("for each player, destroy up to one target creature " +
-                                    "that player controls. For each creature destroyed " +
-                                    "this way, its controller creates a 3/3 green Mutant " +
-                                    "creature with deathtouch")
-                            .setTargetPointer(new EachTargetPointer())
-                    );
-                    ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE));
-                    ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, false));
-                }
+            this, SagaChapter.CHAPTER_I,
+            ability -> {
+                ability.addEffect(new TheCurseOfFenricDestroyEffect()
+                    .setText("for each player, destroy up to one target creature " +
+                            "that player controls. For each creature destroyed " +
+                            "this way, its controller creates a 3/3 green Mutant " +
+                            "creature with deathtouch")
+                    .setTargetPointer(new EachTargetPointer())
+                );
+                ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE));
+                ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, false));
+            }
         );
 
 
         // II -- Target nontoken creature becomes a 6/6 legendary Horror creature named Fenric and loses all abilities.
         sagaAbility.addChapterEffect(
-                this, CHAPTER_II,
-                new BecomesCreatureTargetEffect(
-                        new TheCurseOfFenricHorrorToken(),
-                        true, false, EndOfGame, true
-                ),
-                new TargetPermanent(nontokenFilter)
+            this, CHAPTER_II,
+            new BecomesCreatureTargetEffect(
+                new CreatureToken(6, 6, "6/6 legendary Horror creature named Fenric", SubType.HORROR)
+                    .withSuperType(SuperType.LEGENDARY).withName("Fenric"),
+                true, false, EndOfGame, true
+            ),
+            new TargetPermanent(nontokenFilter)
         );
 
         // III -- Target Mutant fights another target creature named Fenric.
         sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_III,
-                ability -> {
-                    ability.addEffect(new FightTargetsEffect().setText(
-                            "Target Mutant fights another target creature named Fenric"
-                    ));
-                    ability.addTarget(new TargetPermanent(mutantFilter).setTargetTag(1));
-                    ability.addTarget(new TargetPermanent(fenricFilter).setTargetTag(2));
-                }
+            this, SagaChapter.CHAPTER_III,
+            ability -> {
+                ability.addEffect(new FightTargetsEffect().setText(
+                        "Target Mutant fights another target creature named Fenric"
+                ));
+                ability.addTarget(new TargetPermanent(mutantFilter).setTargetTag(1));
+                ability.addTarget(new TargetPermanent(fenricFilter).setTargetTag(2));
+            }
         );
 
         this.addAbility(sagaAbility);
@@ -141,25 +140,5 @@ class TheCurseOfFenricDestroyEffect extends OneShotEffect {
             mutantToken.putOntoBattlefield(1, game, source, controllerId);
         }
         return true;
-    }
-}
-
-class TheCurseOfFenricHorrorToken extends TokenImpl {
-
-    TheCurseOfFenricHorrorToken() {
-        super("Fenric", "6/6 legendary Horror creature named Fenric");
-        this.supertype.add(SuperType.LEGENDARY);
-        this.cardType.add(CardType.CREATURE);
-        this.subtype.add(SubType.HORROR);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
-    }
-
-    private TheCurseOfFenricHorrorToken(final TheCurseOfFenricHorrorToken token) {
-        super(token);
-    }
-
-    public TheCurseOfFenricHorrorToken copy() {
-        return new TheCurseOfFenricHorrorToken(this);
     }
 }

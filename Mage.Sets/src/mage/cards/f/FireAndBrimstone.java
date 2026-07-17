@@ -1,7 +1,6 @@
 package mage.cards.f;
 
-import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DamageTargetAndYouEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -30,8 +29,7 @@ public final class FireAndBrimstone extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}{W}");
 
         // Fire and Brimstone deals 4 damage to target player who attacked this turn and 4 damage to you.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addEffect(new DamageControllerEffect(4).setText("and 4 damage to you"));
+        this.getSpellAbility().addEffect(new DamageTargetAndYouEffect(4));
         this.getSpellAbility().addTarget(new TargetPlayer(1, 1, false, filter));
     }
 

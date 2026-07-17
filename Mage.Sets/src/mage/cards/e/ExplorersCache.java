@@ -3,7 +3,7 @@ package mage.cards.e;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldWithCountersAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.MoveCountersFromSourceToTargetEffect;
@@ -25,10 +25,7 @@ public final class ExplorersCache extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{G}");
 
         // Explorer's Cache enters the battlefield with two +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
-                "with two +1/+1 counters on it"
-        ));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.P1P1.createInstance(2)));
 
         // Whenever a creature you control with a +1/+1 counter on it dies, put a +1/+1 counter on Explorer's Cache.
         this.addAbility(new DiesCreatureTriggeredAbility(

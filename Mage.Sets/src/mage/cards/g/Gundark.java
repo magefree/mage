@@ -32,7 +32,8 @@ public final class Gundark extends CardImpl {
         this.addAbility(new MonstrosityAbility("{3}{R}{R}", 3));
 
         //  When Gundark becomes monstrous, it gets +2/+2 until end of turn.
-        this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn)));
+        this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn)
+                .withTargetDescription("it")));
     }
 
     private Gundark(final Gundark card) {

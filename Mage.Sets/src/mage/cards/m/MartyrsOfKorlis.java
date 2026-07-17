@@ -1,10 +1,8 @@
-
 package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.decorator.ConditionalReplacementEffect;
 import mage.abilities.effects.Effect;
@@ -14,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetPermanent;
@@ -34,10 +31,10 @@ public final class MartyrsOfKorlis extends CardImpl {
 
         // As long as Martyrs of Korlis is untapped, all damage that would be dealt to you by artifacts is dealt to Martyrs of Korlis instead.
         Effect effect = new ConditionalReplacementEffect(
-                new RedirectArtifactDamageFromPlayerToSourceEffect(Duration.WhileOnBattlefield),
-                SourceTappedCondition.UNTAPPED,
-                null);
-        effect.setText("{this} redirects artifact damage from controller as long as it's untapped");
+                new MartyrsOfKorlisRedirectionEffect(),
+                SourceTappedCondition.UNTAPPED
+        );
+        effect.setText("As long as {this} is untapped, all damage that would be dealt to you by artifacts is dealt to {this} instead");
         this.addAbility(new SimpleStaticAbility(effect));
     }
 
@@ -51,19 +48,19 @@ public final class MartyrsOfKorlis extends CardImpl {
     }
 }
 
-class RedirectArtifactDamageFromPlayerToSourceEffect extends RedirectionEffect {
+class MartyrsOfKorlisRedirectionEffect extends RedirectionEffect {
 
-    RedirectArtifactDamageFromPlayerToSourceEffect(Duration duration) {
-        super(duration);
+    MartyrsOfKorlisRedirectionEffect() {
+        super(Duration.WhileOnBattlefield);
     }
 
-    private RedirectArtifactDamageFromPlayerToSourceEffect(final RedirectArtifactDamageFromPlayerToSourceEffect effect) {
+    private MartyrsOfKorlisRedirectionEffect(final MartyrsOfKorlisRedirectionEffect effect) {
         super(effect);
     }
 
     @Override
-    public RedirectArtifactDamageFromPlayerToSourceEffect copy() {
-        return new RedirectArtifactDamageFromPlayerToSourceEffect(this);
+    public MartyrsOfKorlisRedirectionEffect copy() {
+        return new MartyrsOfKorlisRedirectionEffect(this);
     }
 
     @Override

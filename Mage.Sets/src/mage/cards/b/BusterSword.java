@@ -43,7 +43,7 @@ public final class BusterSword extends CardImpl {
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private BusterSword(final BusterSword card) {

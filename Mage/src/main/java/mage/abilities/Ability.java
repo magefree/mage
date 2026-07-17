@@ -545,6 +545,11 @@ public interface Ability extends Controllable, Serializable {
      */
     Permanent getSourcePermanentOrLKI(Game game);
 
+    /**
+     * Finds the Permanent the source permanent is attached to as long as zcc matches
+     */
+    Permanent getPermanentSourceAttachedToIfItStillExists(Game game);
+
     void setSourcePermanentTransformCount(Game game);
 
     boolean checkTransformCount(Permanent permanent, Game game);

@@ -1,28 +1,31 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardHandCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ExileCardsFromTopOfLibraryControllerEffect;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class KyrenArchive extends CardImpl {
 
     public KyrenArchive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
+
+        this.subtype.add(SubType.BOOK);
 
         // At the beginning of your upkeep, you may exile the top card of your library face down.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(

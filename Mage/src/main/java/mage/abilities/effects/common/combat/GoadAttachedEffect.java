@@ -25,15 +25,11 @@ public class GoadAttachedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        Permanent permanent = source.getPermanentSourceAttachedToIfItStillExists(game);
         if (permanent == null) {
             return false;
         }
-        Permanent attached = game.getPermanent(permanent.getAttachedTo());
-        if (attached == null) {
-            return false;
-        }
-        attached.addGoadingPlayer(source.getControllerId());
+        permanent.addGoadingPlayer(source.getControllerId());
         return true;
     }
 

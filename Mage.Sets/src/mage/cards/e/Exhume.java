@@ -11,11 +11,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.card.OwnerIdPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
@@ -64,9 +63,7 @@ class ExhumeEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    FilterCreatureCard filterCreatureCard = new FilterCreatureCard("creature card from your graveyard");
-                    filterCreatureCard.add(new OwnerIdPredicate(playerId));
-                    TargetCardInGraveyard target = new TargetCardInGraveyard(filterCreatureCard);
+                    TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
                     target.withNotTarget(true);
                     if (target.canChoose(playerId, source, game)
                             && player.chooseTarget(outcome, target, source, game)) {

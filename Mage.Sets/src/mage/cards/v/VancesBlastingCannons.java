@@ -1,19 +1,23 @@
-
 package mage.cards.v;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.mana.RedManaAbility;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.target.common.TargetAnyTarget;
 import mage.util.CardUtil;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
@@ -22,20 +26,31 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class VancesBlastingCannons extends CardImpl {
+public final class VancesBlastingCannons extends TransformingDoubleFacedCard {
 
     public VancesBlastingCannons(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
+        super(ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ENCHANTMENT}, new SubType[]{}, "{3}{R}",
+                "Spitfire Bastion",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.LAND}, new SubType[]{}, ""
+        );
 
-        this.supertype.add(SuperType.LEGENDARY);
-        this.secondSideCardClazz = mage.cards.s.SpitfireBastion.class;
-
+        // Vance's Blasting Cannons
         // At the beginning of your upkeep, exile the top card of your library.  If it's a nonland card, you may cast that card this turn.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new VancesBlastingCannonsExileEffect()));
+        this.getLeftHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(new VancesBlastingCannonsExileEffect()));
 
         // Whenever you cast your third spell in a turn, transform Vance's Blasting Cannons.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new VancesBlastingCannonsTriggeredAbility());
+        this.getLeftHalfCard().addAbility(new VancesBlastingCannonsTriggeredAbility());
+
+        // Spitfire Bastion
+        // {T}: Add {R}.
+        this.getRightHalfCard().addAbility(new RedManaAbility());
+
+        // {2}{R}, {T}: Spitfire Bastion deals 3 damage to any target.
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(3), new TapSourceCost());
+        ability.addCost(new ManaCostsImpl<>("{2}{R}"));
+        ability.addTarget(new TargetAnyTarget());
+        this.getRightHalfCard().addAbility(ability);
     }
 
     private VancesBlastingCannons(final VancesBlastingCannons card) {

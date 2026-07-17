@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class RegalBloodlord extends CardImpl {
 
-    private static final Condition condition = new YouGainedLifeCondition();
+    private static final Condition condition = YouGainedLifeCondition.getZero();
 
     public RegalBloodlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{B}");

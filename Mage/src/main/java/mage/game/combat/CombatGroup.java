@@ -1,5 +1,6 @@
 package mage.game.combat;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.ControllerAssignCombatDamageToBlockersAbility;
 import mage.abilities.common.ControllerDivideCombatDamageAbility;
@@ -584,6 +585,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         Permanent blocker = game.getPermanent(blockerId);
         if (blockerId != null && blocker != null) {
             blocker.setBlocking(blocker.getBlocking() + 1);
+            for (UUID attackerId : attackers) {
+                blocker.addBlocking(attackerId, game);
+            }
             blockers.add(blockerId);
             this.blocked = true;
             this.players.put(blockerId, playerId);
@@ -677,29 +681,6 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 }
             }
             possibleBlockers.put(attacker.getId(), goodBlockers);
-        }
-
-        // effects: can't block alone
-        // too much blockers
-        if (blockersCount == 1) {
-            List<UUID> toBeRemoved = new ArrayList<>();
-            for (UUID blockerId : getBlockers()) {
-                Permanent blocker = game.getPermanent(blockerId);
-                if (blocker != null && blocker.getAbilities().containsKey(CantBlockAloneAbility.getInstance().getId())) {
-                    blockWasLegal = false;
-                    if (!game.isSimulation()) {
-                        game.informPlayers(blocker.getLogName() + " can't block alone. Removing it from combat.");
-                    }
-                    toBeRemoved.add(blockerId);
-                }
-            }
-
-            for (UUID blockerId : toBeRemoved) {
-                game.getCombat().removeBlocker(blockerId, game);
-            }
-            if (blockers.isEmpty()) {
-                this.blocked = false;
-            }
         }
 
         for (UUID uuid : attackers) {
@@ -805,6 +786,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 }
             }
             attacker.clearBandedCards();
+            attacker.setAttacking(new MageObjectReference(newDefenderId, game));
         }
         Permanent permanent = game.getPermanent(newDefenderId);
         if (permanent != null) {
