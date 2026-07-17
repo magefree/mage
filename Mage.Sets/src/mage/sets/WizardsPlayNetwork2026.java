@@ -35,5 +35,6 @@ public class WizardsPlayNetwork2026 extends ExpansionSet {
         cards.add(new SetCardInfo("The Eternal Wanderer", 4, Rarity.RARE, mage.cards.t.TheEternalWanderer.class));
         cards.add(new SetCardInfo("Tom, Bert, and William", 14, Rarity.RARE, mage.cards.t.TomBertAndWilliam.class));
         cards.add(new SetCardInfo("Wood Elves", 13, Rarity.RARE, mage.cards.w.WoodElves.class));
+        cards.add(new SetCardInfo("Munitions Enthusiast", 18, Rarity.RARE, mage.cards.m.MunitionsEnthusiast.class));
     }
 }
