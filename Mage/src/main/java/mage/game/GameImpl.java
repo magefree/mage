@@ -2372,11 +2372,21 @@ public abstract class GameImpl implements Game {
 
         //20091005 - 704.5a/704.5b/704.5c
         for (Player player : state.getPlayers().values()) {
-            if (!player.hasLost()
-                    && ((player.getLife() <= 0 && player.canLoseByZeroOrLessLife())
-                    || player.getLibrary().isEmptyDraw()
-                    || player.getCountersCount(CounterType.POISON) >= 10)) {
-                player.lost(this);
+            if (!player.hasLost()) {
+                String lostReason = "";
+                if (player.getLife() <= 0 && player.canLoseByZeroOrLessLife()) {
+                    lostReason = "life is 0 or less";
+                }
+                if (player.getLibrary().isEmptyDraw()) {
+                    lostReason = "draw from empty library";
+                }
+                if (player.getCountersCount(CounterType.POISON) >= 10) {
+                    lostReason = "poison counter >= 10";
+                }
+                if (!lostReason.isEmpty()) {
+                    this.informPlayers(player.getLogName() + " lost the game due " + lostReason);
+                    player.lost(this);
+                }
             }
         }
 
@@ -2555,7 +2565,7 @@ public abstract class GameImpl implements Game {
             if (perm.isCreature(this)) {
                 //20091005 - 704.5f
                 if (perm.getToughness().getValue() <= 0) {
-                    if (movePermanentToGraveyardWithInfo(perm)) {
+                    if (movePermanentToGraveyardWithInfo(perm, "SBA: creature has toughness 0 or less")) {
                         somethingHappened = true;
                         continue;
                     }
@@ -2622,7 +2632,7 @@ public abstract class GameImpl implements Game {
             if (perm.isPlaneswalker(this)) {
                 //20091005 - 704.5i
                 if (perm.getCounters(this).getCount(CounterType.LOYALTY) == 0) {
-                    if (movePermanentToGraveyardWithInfo(perm)) {
+                    if (movePermanentToGraveyardWithInfo(perm, "SBA: planeswalker has loyalty 0")) {
                         somethingHappened = true;
                         continue;
                     }
@@ -2635,7 +2645,7 @@ public abstract class GameImpl implements Game {
                 //20091005 - 704.5n, 702.14c
                 if (perm.getAttachedTo() == null) {
                     if (!perm.isCreature(this) && !perm.getAbilities(this).containsClass(BestowAbility.class)) {
-                        if (movePermanentToGraveyardWithInfo(perm)) {
+                        if (movePermanentToGraveyardWithInfo(perm, "SBA: aura can be attached to creature only")) {
                             somethingHappened = true;
                         }
                     }
@@ -2667,9 +2677,9 @@ public abstract class GameImpl implements Game {
                                 // handle bestow unattachment
                                 if (perm.getAbilities().stream().anyMatch(x -> x instanceof BestowAbility)) {
                                     UUID wasAttachedTo = perm.getAttachedTo();
-                                    perm.unattach(this);
+                                    perm.unattach(this); // TODO: add reason to the log?
                                     fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
-                                } else if (movePermanentToGraveyardWithInfo(perm)) {
+                                } else if (movePermanentToGraveyardWithInfo(perm, "SBA: aura doesn't attached")) {
                                     somethingHappened = true;
                                 }
                             } else {
@@ -2681,7 +2691,7 @@ public abstract class GameImpl implements Game {
                                             UUID wasAttachedTo = perm.getAttachedTo();
                                             perm.unattach(this);
                                             fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
-                                        } else if (movePermanentToGraveyardWithInfo(perm)) {
+                                        } else if (movePermanentToGraveyardWithInfo(perm, "SBA: aura can't be attached to that permanent")) {
                                             somethingHappened = true;
                                         }
                                     }
@@ -2691,7 +2701,7 @@ public abstract class GameImpl implements Game {
                                         UUID wasAttachedTo = perm.getAttachedTo();
                                         perm.unattach(this);
                                         fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
-                                    } else if (movePermanentToGraveyardWithInfo(perm)) {
+                                    } else if (movePermanentToGraveyardWithInfo(perm, "SBA: aura can't be attached to that permanent")) {
                                         somethingHappened = true;
                                     }
                                 }
@@ -2699,13 +2709,13 @@ public abstract class GameImpl implements Game {
                         } else if (target instanceof TargetPlayer) {
                             Player attachedToPlayer = getPlayer(perm.getAttachedTo());
                             if (attachedToPlayer == null || attachedToPlayer.hasLost()) {
-                                if (movePermanentToGraveyardWithInfo(perm)) {
+                                if (movePermanentToGraveyardWithInfo(perm, "SBA: aura doesn't attached to that player")) {
                                     somethingHappened = true;
                                 }
                             } else {
                                 Filter auraFilter = spellAbility.getTargets().get(0).getFilter();
                                 if (!auraFilter.match(attachedToPlayer, this) || attachedToPlayer.hasProtectionFrom(perm, this)) {
-                                    if (movePermanentToGraveyardWithInfo(perm)) {
+                                    if (movePermanentToGraveyardWithInfo(perm, "SBA: aura can't be attached to player")) {
                                         somethingHappened = true;
                                     }
                                 }
@@ -2714,7 +2724,7 @@ public abstract class GameImpl implements Game {
                             Card attachedTo = getCard(perm.getAttachedTo());
                             if (attachedTo == null
                                     || !(spellAbility.getTargets().get(0)).canTarget(perm.getControllerId(), perm.getAttachedTo(), spellAbility, this)) {
-                                if (movePermanentToGraveyardWithInfo(perm)) {
+                                if (movePermanentToGraveyardWithInfo(perm, "SBA: aura can't be attached to that card")) {
                                     if (attachedTo != null) {
                                         attachedTo.removeAttachment(perm.getId(), null, this);
                                     }
@@ -2759,7 +2769,7 @@ public abstract class GameImpl implements Game {
                         .noneMatch(perm.getId()::equals);
                 if (sacSaga) {
                     // After the last chapter ability has left the stack, you'll sacrifice the Saga
-                    perm.sacrifice(null, this);
+                    perm.sacrifice(null, this); // TODO: add reason to the logs?
                     somethingHappened = true;
                 }
             }
@@ -2780,7 +2790,7 @@ public abstract class GameImpl implements Game {
                         .filter(TriggeredAbility.class::isInstance)
                         .map(Ability::getSourceId)
                         .noneMatch(perm.getId()::equals)) {
-                    if (movePermanentToGraveyardWithInfo(perm)) {
+                    if (movePermanentToGraveyardWithInfo(perm, "SBA: battle with 0 defense")) {
                         somethingHappened = true;
                     }
                 } else if (this
@@ -2794,7 +2804,8 @@ public abstract class GameImpl implements Game {
                         || perm.isControlledBy(perm.getProtectorId())) {
                     perm.chooseProtector(this, null);
                     if (this.getPlayer(perm.getProtectorId()) == null) {
-                        movePermanentToGraveyardWithInfo(perm);
+                        logger.error("Something wrong, battle without protector: " + perm + ", " + this);
+                        movePermanentToGraveyardWithInfo(perm, "SBA: something wrong, battle wthout protector");
                     }
                     somethingHappened = true;
                 }
@@ -2819,7 +2830,7 @@ public abstract class GameImpl implements Game {
                     }
                     if (attachedTo == null || !attachedTo.getAttachments().contains(perm.getId())) {
                         UUID wasAttachedTo = perm.getAttachedTo();
-                        perm.attachTo(null, null, this);
+                        perm.attachTo(null, null, this); // TODO: add reason of the unattach?
                         fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
                     } else if (!attachedTo.isCreature(this) || attachedTo.hasProtectionFrom(perm, this)) {
                         if (attachedTo.removeAttachment(perm.getId(), null, this)) {
@@ -2917,7 +2928,7 @@ public abstract class GameImpl implements Game {
                 controller.choose(Outcome.Benefit, targetLegendaryToKeep, null, this);
                 for (Permanent dupLegend : getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
                     if (!targetLegendaryToKeep.getTargets().contains(dupLegend.getId())) {
-                        movePermanentToGraveyardWithInfo(dupLegend);
+                        movePermanentToGraveyardWithInfo(dupLegend, "SBA: legendary rule to keep only one");
                     }
                 }
                 return true;
@@ -2952,7 +2963,7 @@ public abstract class GameImpl implements Game {
                 for (Permanent permanent : worldEnchantment) {
                     if (newestPermanentControllerRange.contains(permanent.getControllerId())
                             && !Objects.equals(newestPermanent, permanent)) {
-                        movePermanentToGraveyardWithInfo(permanent);
+                        movePermanentToGraveyardWithInfo(permanent, "SBA: world rule to keep only one");
                         somethingHappened = true;
                     }
                 }
@@ -2975,7 +2986,7 @@ public abstract class GameImpl implements Game {
                             .orElse(-1);
                     roleSet.removeIf(permanent -> permanent.getCreateOrder() == newest);
                     for (Permanent permanent : roleSet) {
-                        movePermanentToGraveyardWithInfo(permanent);
+                        movePermanentToGraveyardWithInfo(permanent, "SBA: role rule to keep only one");
                         somethingHappened = true;
                     }
                 }
@@ -2988,6 +2999,7 @@ public abstract class GameImpl implements Game {
             for (Permanent permanent : getBattlefield().getAllActivePermanents()) {
                 if ((permanent.getAbilities(this).containsClass(DayboundAbility.class) && !state.isDaytime())
                         || (permanent.getAbilities(this).containsClass(NightboundAbility.class) && state.isDaytime())) {
+                    // TODO: add transform reason?
                     somethingHappened = permanent.transform(null, this, true) || somethingHappened;
                 }
             }
@@ -2997,11 +3009,11 @@ public abstract class GameImpl implements Game {
         return somethingHappened;
     }
 
-    private boolean movePermanentToGraveyardWithInfo(Permanent permanent) {
+    private boolean movePermanentToGraveyardWithInfo(Permanent permanent, String reason) {
         boolean result = false;
         if (permanent.moveToZone(Zone.GRAVEYARD, null, this, false)) {
             if (!this.isSimulation()) {
-                this.informPlayers(permanent.getLogName() + " is put into graveyard from battlefield");
+                this.informPlayers(permanent.getLogName() + " is put into graveyard from battlefield" + (reason.isEmpty() ? "" : " (" + reason + ")"));
             }
             result = true;
         }

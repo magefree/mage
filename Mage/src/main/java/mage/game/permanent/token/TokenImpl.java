@@ -485,6 +485,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         if (copySourceCard != null) {
             this.copySourceCard = copySourceCard.copy();
         }
+        this.setCopy(copySourceCard != null, copySourceCard);
     }
 
     @Override

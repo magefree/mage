@@ -764,7 +764,7 @@ public abstract class AbilityImpl implements Ability {
     }
 
     /**
-     * 601.2b Choose targets for costs that have to be chosen early.
+     * 601.5 Choose targets for costs that have to be chosen early.
      */
     private void handleChooseCostTargets(Game game, Player controller) {
         for (Cost cost : getCosts()) {
