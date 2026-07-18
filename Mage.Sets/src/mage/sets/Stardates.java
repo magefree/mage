@@ -16,7 +16,7 @@ public class Stardates extends ExpansionSet {
     }
 
     private Stardates() {
-        super("Stardates", "SDS", ExpansionSet.buildDate(2026, 11, 20), SetType.CUSTOM_SET); // TODO: Change to SUPPLEMENTAL once MtgJson data syncs
+        super("Stardates", "SDS", ExpansionSet.buildDate(2026, 11, 13), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

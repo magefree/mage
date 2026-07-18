@@ -159,11 +159,13 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("HULK SMASH!", 332, Rarity.COMMON, mage.cards.h.HULKSMASH.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("HYDRA Assault Robot", 137, Rarity.COMMON, mage.cards.h.HYDRAAssaultRobot.class));
         cards.add(new SetCardInfo("HYDRA Infiltration", 100, Rarity.COMMON, mage.cards.h.HYDRAInfiltration.class));
+        cards.add(new SetCardInfo("HYDRA Troopers", 101, Rarity.COMMON, mage.cards.h.HYDRATroopers.class));
         cards.add(new SetCardInfo("Hawkeye, Young Avenger", 131, Rarity.UNCOMMON, mage.cards.h.HawkeyeYoungAvenger.class));
         cards.add(new SetCardInfo("Hawkeye's Bow", 132, Rarity.COMMON, mage.cards.h.HawkeyesBow.class));
         cards.add(new SetCardInfo("Hell's Kitchen", 268, Rarity.COMMON, mage.cards.h.HellsKitchen.class));
         cards.add(new SetCardInfo("Hercules, Prince of Power", 171, Rarity.UNCOMMON, mage.cards.h.HerculesPrinceOfPower.class));
         cards.add(new SetCardInfo("Hero in Training", 16, Rarity.COMMON, mage.cards.h.HeroInTraining.class));
+        cards.add(new SetCardInfo("Hex Magic", 133, Rarity.UNCOMMON, mage.cards.h.HexMagic.class));
         cards.add(new SetCardInfo("Hidden Lair", 269, Rarity.RARE, mage.cards.h.HiddenLair.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hidden Lair", 383, Rarity.RARE, mage.cards.h.HiddenLair.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hire a Crew", 134, Rarity.COMMON, mage.cards.h.HireACrew.class));
@@ -240,10 +242,13 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Namor the Sub-Mariner", 69, Rarity.MYTHIC, mage.cards.n.NamorTheSubMariner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ninja of the Hand", 108, Rarity.COMMON, mage.cards.n.NinjaOfTheHand.class));
         cards.add(new SetCardInfo("Okoye, Dora Milaje Leader", 27, Rarity.UNCOMMON, mage.cards.o.OkoyeDoraMilajeLeader.class));
+        cards.add(new SetCardInfo("Origin of the Avengers", 28, Rarity.RARE, mage.cards.o.OriginOfTheAvengers.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Origin of the Avengers", 298, Rarity.RARE, mage.cards.o.OriginOfTheAvengers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Panther Pounce", 29, Rarity.COMMON, mage.cards.p.PantherPounce.class));
         cards.add(new SetCardInfo("Patriot, Shield Wielder", 30, Rarity.UNCOMMON, mage.cards.p.PatriotShieldWielder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Patriot, Shield Wielder", 444, Rarity.UNCOMMON, mage.cards.p.PatriotShieldWielder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pet Avengers", 178, Rarity.COMMON, mage.cards.p.PetAvengers.class));
+        cards.add(new SetCardInfo("Photon Blast Barrage", 147, Rarity.UNCOMMON, mage.cards.p.PhotonBlastBarrage.class));
         cards.add(new SetCardInfo("Plains", 434, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 433, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 278, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
@@ -256,7 +261,9 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Quake, Agent of S.H.I.E.L.D.", 32, Rarity.UNCOMMON, mage.cards.q.QuakeAgentOfSHIELD.class));
         cards.add(new SetCardInfo("Quicksilver, Brash Blur", 148, Rarity.RARE, mage.cards.q.QuicksilverBrashBlur.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Quicksilver, Brash Blur", 412, Rarity.RARE, mage.cards.q.QuicksilverBrashBlur.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Raft Security Officer", 33, Rarity.COMMON, mage.cards.r.RaftSecurityOfficer.class));
         cards.add(new SetCardInfo("Rapid Rescue", 181, Rarity.COMMON, mage.cards.r.RapidRescue.class));
+        cards.add(new SetCardInfo("Red Guardian, Super-Soldier", 34, Rarity.UNCOMMON, mage.cards.r.RedGuardianSuperSoldier.class));
         cards.add(new SetCardInfo("Red Room Recruit", 110, Rarity.COMMON, mage.cards.r.RedRoomRecruit.class));
         cards.add(new SetCardInfo("Reptil, Dinomorpher", 182, Rarity.UNCOMMON, mage.cards.r.ReptilDinomorpher.class));
         cards.add(new SetCardInfo("Repulsor Blast", 150, Rarity.COMMON, mage.cards.r.RepulsorBlast.class));

@@ -377,6 +377,7 @@ public enum SubType {
     ROBOT("Robot", SubTypeSet.CreatureType),
     RODIAN("Rodian", SubTypeSet.CreatureType, true), // Star Wars
     ROGUE("Rogue", SubTypeSet.CreatureType),
+    ROMULAN("Romulan", SubTypeSet.CreatureType),
     // S
     SABLE("Sable", SubTypeSet.CreatureType),
     SALAMANDER("Salamander", SubTypeSet.CreatureType),
