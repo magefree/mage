@@ -12,7 +12,7 @@ import mage.constants.SetType;
  */
 public final class RealityFracture extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Bloodline Recollector");
+    private static final List<String> unfinished = Arrays.asList("Bloodline Recollector", "Paradox Shaper", "Prudent Fateseer", "Stingerquill Voxmancer", "Vigorbloom Vanguard", "Woodwork Prodigy");
     private static final RealityFracture instance = new RealityFracture();
 
     public static RealityFracture getInstance() {
