@@ -14,6 +14,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.AllyToken;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -37,7 +38,7 @@ public final class SokkaAndSuki extends CardImpl {
 
         // Whenever Sokka and Suki or another Ally you control enters, attach up to one target Equipment you control to that creature.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
-                new SokkaAndSukiEffect(), filter, false, true
+            new SokkaAndSukiEffect(), filter, false, SetTargetPointer.PERMANENT, true
         );
         ability.addTarget(new TargetPermanent(
                 0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_EQUIPMENT
@@ -78,8 +79,12 @@ class SokkaAndSukiEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = (Permanent) getValue("permanentEnteringBattlefield");
-        Permanent equipment = game.getPermanent(getTargetPointer().getFirst(game, source));
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null || source.getTargets().isEmpty()) {
+            return false;
+        }
+        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        Permanent equipment = game.getPermanent(source.getTargets().getFirstTarget());
         return creature != null && equipment != null && creature.addAttachment(equipment.getId(), source, game);
     }
 }
