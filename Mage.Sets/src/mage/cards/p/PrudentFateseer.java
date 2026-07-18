@@ -2,15 +2,12 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersPreparedAbility;
+import mage.abilities.common.ScryOrSurveilTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.token.CadetToken;
 import mage.cards.CardSetInfo;
 import mage.cards.PrepareCard;
@@ -35,7 +32,8 @@ public final class PrudentFateseer extends PrepareCard {
         this.addAbility(new EntersPreparedAbility());
 
         // Whenever you scry or surveil, creatures you control get +1/+0 until end of turn. This ability triggers only once each turn.
-        this.addAbility(new PrudentFateseerTriggeredAbility().setTriggersLimitEachTurn(1));
+        this.addAbility(new ScryOrSurveilTriggeredAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn))
+            .setTriggersLimitEachTurn(1));
 
         // Peer Review
         // Sorcery {2}{W/U}
@@ -51,38 +49,5 @@ public final class PrudentFateseer extends PrepareCard {
     @Override
     public PrudentFateseer copy() {
         return new PrudentFateseer(this);
-    }
-}
-
-class PrudentFateseerTriggeredAbility extends TriggeredAbilityImpl {
-
-    PrudentFateseerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.EndOfTurn));
-        setTriggerPhrase("Whenever you scry or surveil, ");
-    }
-
-    private PrudentFateseerTriggeredAbility(final PrudentFateseerTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public PrudentFateseerTriggeredAbility copy() {
-        return new PrudentFateseerTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        switch (event.getType()) {
-            case SCRIED:
-            case SURVEILED:
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return isControlledBy(event.getPlayerId());
     }
 }
