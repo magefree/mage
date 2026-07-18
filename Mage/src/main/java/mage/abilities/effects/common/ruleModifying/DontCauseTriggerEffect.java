@@ -109,19 +109,20 @@ public class DontCauseTriggerEffect extends ContinuousRuleModifyingEffectImpl {
                 return false;
             case ZONE_CHANGE_BATCH:
                 ZoneChangeBatchEvent zoneChangeBatch = ((ZoneChangeBatchEvent) sourceEvent);
-                boolean all_match = true;
                 for (ZoneChangeEvent zoneChangeEvent : zoneChangeBatch.getEvents()) {
                     if (zoneChangeEvent.getToZone() == Zone.BATTLEFIELD ||
                             (orDying && zoneChangeEvent.isDiesEvent())) {
                         Permanent permanent = zoneChangeEvent.getTarget();
                         // This is technically undefined behavior under CR, but I'm assuming "Can't beats can" principle.
                         if (permanent != null && !filterEntering.match(permanent, source.getControllerId(), source, game)) {
-                            all_match = false;
-                            break;
+                            return false;
                         }
                     }
+                    else {
+                        return false;
+                    }
                 }
-                return all_match;
+                return true;
             default:
                 return false;
         }
