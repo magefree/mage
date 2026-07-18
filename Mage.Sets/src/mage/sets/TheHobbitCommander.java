@@ -20,6 +20,7 @@ public final class TheHobbitCommander extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Arcane Signet", 95, Rarity.MYTHIC, mage.cards.a.ArcaneSignet.class));
+        cards.add(new SetCardInfo("Bag End Banquet", 5, Rarity.RARE, mage.cards.b.BagEndBanquet.class));
         cards.add(new SetCardInfo("Call Forth the Tempest", 22, Rarity.MYTHIC, mage.cards.c.CallForthTheTempest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Call Forth the Tempest", 62, Rarity.MYTHIC, mage.cards.c.CallForthTheTempest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dwarven Warriors", 93, Rarity.MYTHIC, mage.cards.d.DwarvenWarriors.class));
