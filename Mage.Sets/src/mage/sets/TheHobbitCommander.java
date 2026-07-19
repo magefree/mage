@@ -31,6 +31,7 @@ public final class TheHobbitCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Galadriel's Dismissal", 16, Rarity.MYTHIC, mage.cards.g.GaladrielsDismissal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Galadriel's Dismissal", 56, Rarity.MYTHIC, mage.cards.g.GaladrielsDismissal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mox Amber", 96, Rarity.MYTHIC, mage.cards.m.MoxAmber.class));
+        cards.add(new SetCardInfo("Necklace of Girion", 12, Rarity.RARE, mage.cards.n.NecklaceOfGirion.class));
         cards.add(new SetCardInfo("Orcish Bowmasters", 19, Rarity.MYTHIC, mage.cards.o.OrcishBowmasters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Orcish Bowmasters", 59, Rarity.MYTHIC, mage.cards.o.OrcishBowmasters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reprieve", 17, Rarity.MYTHIC, mage.cards.r.Reprieve.class, NON_FULL_USE_VARIOUS));
