@@ -15,7 +15,7 @@ use Text::Template;
 use strict;
 use File::Path qw(make_path);
 
-my $authorFile = 'author.txt';
+my $authorFile = 'tmp/author.txt';
 my $dataFile = 'mtg-cards-data.txt';
 my $setsFile = 'mtg-sets-data.txt';
 my $keywordsFile = 'keywords.txt';

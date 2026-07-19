@@ -25,7 +25,7 @@ sub toCamelCase
 
 
 open (DATA, $dataFile) || die "can't open $dataFile";
-open (FILES_TO_CHECK, ">files_to_check.bat");
+open (FILES_TO_CHECK, ">tmp/files_to_check.bat");
 print FILES_TO_CHECK "\@echo  off\n";
 print FILES_TO_CHECK "find \"super(ownerId\" ";
 print ("Looking at data in $dataFile\n");

@@ -72,6 +72,6 @@ foreach my $card (sort cardSort @setCards) {
 print "Number of cards found for set " . $setName . ": " . $cardsFound . "\n";
 print "Number of implemented cards:  " . $cardsImplemented . "\n";
 
-open CARD, "> " . lc($sets{$setName}) . "_implemented.txt";
+open CARD, "> tmp/" . lc($sets{$setName}) . "_implemented.txt";
 print CARD $toPrint;
 close CARD;

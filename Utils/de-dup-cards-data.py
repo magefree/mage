@@ -38,6 +38,6 @@ with open(orig_txt_filename) as orig_txt_file:
 			new_contents += line
 
 # generate new file with the de-duped contents
-new_txt_filename = 'unduped-cards-data.txt'
+new_txt_filename = 'tmp/unduped-cards-data.txt'
 with open(new_txt_filename, "w") as new_txt_file:
 	new_txt_file.write(new_contents)
