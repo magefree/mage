@@ -1133,6 +1133,8 @@ public class ContinuousEffects implements Serializable {
             }
         }
 
+        applyStatus.apply(Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, null, game);
+
         applyStatus.apply(Layer.PTChangingEffects_7, SubLayer.Counters_7d, null, game);
 
         for (ContinuousEffect effect : layer) {
