@@ -44,6 +44,7 @@ public final class TheHobbitCommander extends ExpansionSet {
         cards.add(new SetCardInfo("The Reaver Cleaver", 94, Rarity.MYTHIC, mage.cards.t.TheReaverCleaver.class));
         cards.add(new SetCardInfo("The Shire", 52, Rarity.MYTHIC, mage.cards.t.TheShire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Shire", 92, Rarity.MYTHIC, mage.cards.t.TheShire.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thorin, King of Durin's Folk", 3, Rarity.RARE, mage.cards.t.ThorinKingOfDurinsFolk.class));
         cards.add(new SetCardInfo("Tom Bombadil", 38, Rarity.MYTHIC, mage.cards.t.TomBombadil.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tom Bombadil", 78, Rarity.MYTHIC, mage.cards.t.TomBombadil.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Treasure Vault", 97, Rarity.MYTHIC, mage.cards.t.TreasureVault.class));
