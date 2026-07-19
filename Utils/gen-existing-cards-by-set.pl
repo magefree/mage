@@ -157,12 +157,6 @@ sub getRarity
 
 # Generate the cards
 
-my $landForest = 0;
-my $landMountain = 0;
-my $landSwamp = 0;
-my $landPlains = 0;
-my $landIsland = 0;
-
 print ("Reading in existing cards in set\n");
 open (SET_FILE, "../../mage/Mage.Sets/src/mage/sets/$knownSets{$setName}.java") || die "can't open $dataFile";
 my %alreadyIn;
@@ -192,22 +186,6 @@ foreach $name_collectorid (sort @setCards)
     $cardNr = $2;
     {
         if($cardName eq "Forest" || $cardName eq "Island" || $cardName eq "Plains" || $cardName eq "Swamp" || $cardName eq "Mountain") {
-            my $found = 0;
-            if ($cardName eq "Forest") {
-                $landForest++;
-            }
-            if ($cardName eq "Mountain") {
-                $landMountain++;
-            }
-            if ($cardName eq "Swamp") {
-                $landSwamp++;
-            }
-            if ($cardName eq "Plains") {
-                $landPlains++;
-            }
-            if ($cardName eq "Island") {
-                $landIsland++;
-            }
             if (!exists ($alreadyIn{$cardNr})) {
                 print ("        cards.add(new SetCardInfo(\"$cardName\", $cardNr, Rarity.LAND, mage.cards.basiclands.$cardName.class, USE_RANDOM_ART));\n");
             }
