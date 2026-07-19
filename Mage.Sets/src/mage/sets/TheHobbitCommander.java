@@ -24,6 +24,7 @@ public final class TheHobbitCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bilbo, Fellow Conspirator", 4, Rarity.RARE, mage.cards.b.BilboFellowConspirator.class));
         cards.add(new SetCardInfo("Call Forth the Tempest", 22, Rarity.MYTHIC, mage.cards.c.CallForthTheTempest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Call Forth the Tempest", 62, Rarity.MYTHIC, mage.cards.c.CallForthTheTempest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dragon-Cursed Halls", 8, Rarity.RARE, mage.cards.d.DragonCursedHalls.class));
         cards.add(new SetCardInfo("Dwarven Warriors", 93, Rarity.MYTHIC, mage.cards.d.DwarvenWarriors.class));
         cards.add(new SetCardInfo("Fili and Kili, Joyous", 1, Rarity.RARE, mage.cards.f.FiliAndKiliJoyous.class));
         cards.add(new SetCardInfo("Flame of Anor", 31, Rarity.MYTHIC, mage.cards.f.FlameOfAnor.class, NON_FULL_USE_VARIOUS));
