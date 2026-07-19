@@ -3,8 +3,8 @@ package org.mage.test.cards.single.fic;
 import mage.cards.l.LockeTreasureHunter;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import java.util.HashSet;
@@ -38,13 +38,13 @@ public class LockeTreasureHunterTest extends CardTestPlayerBase {
                 failures.add(option);
             }
         }
-        Assert.assertEquals(
-                "The following cards should be available to cast but aren't: " +
-                        failures.stream().collect(Collectors.joining(", ")), 0, failures.size()
+        Assertions.assertEquals(
+                0, failures.size(), "The following cards should be available to cast but aren't: " +
+                        failures.stream().collect(Collectors.joining(", "))
         );
-        Assert.assertEquals(
-                "There should be " + (2 + optionsToExpect.length) + " available actions",
-                2 + optionsToExpect.length, options.size()
+        Assertions.assertEquals(
+                2 + optionsToExpect.length, options.size(),
+                "There should be " + (2 + optionsToExpect.length) + " available actions"
         );
     }
 

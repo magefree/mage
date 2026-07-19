@@ -2,8 +2,8 @@ package org.mage.test.cards.single.snc;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -23,7 +23,7 @@ public class UnlicensedHearseTest extends CardTestPlayerBase {
      * Give Player A one Unlicensed Hearse on the battlefield and give
      * Player B two cards in their graveyard.
      */
-    @Before
+    @BeforeEach
     public void createHearseAndFillGraveyard() {
         addCard(Zone.BATTLEFIELD, playerA, "Unlicensed Hearse");
         addCard(Zone.GRAVEYARD, playerB, "Grizzly Bears");

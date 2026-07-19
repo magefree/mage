@@ -5,8 +5,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -20,7 +20,7 @@ public class SuspectTest extends CardTestPlayerBase {
 
     private final void assertSuspected(String name, boolean suspected) {
         Permanent permanent = getPermanent(name);
-        Assert.assertEquals("Permanent should " + (suspected ? "" : "not ") + "be suspected", suspected, permanent.isSuspected());
+        Assertions.assertEquals(suspected, permanent.isSuspected(), "Permanent should " + (suspected ? "" : "not ") + "be suspected");
         if (suspected) {
             permanent.getAbilities().containsClass(MenaceAbility.class);
         }

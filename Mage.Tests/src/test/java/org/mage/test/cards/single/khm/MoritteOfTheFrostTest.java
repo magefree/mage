@@ -3,8 +3,8 @@ package org.mage.test.cards.single.khm;
 import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -102,8 +102,8 @@ public class MoritteOfTheFrostTest extends CardTestPlayerBase {
 
         // boosted by copy and balthor
         Card card = currentGame.getBattlefield().getAllActivePermanents().stream().filter(p -> p.isCopy()).findFirst().orElse(null);
-        Assert.assertNotNull("Can't find copy", card);
-        Assert.assertEquals("Copy power", 2 + 2 + 1, card.getPower().getValue());
-        Assert.assertEquals("Copy Toughness", 2 + 2 + 1, card.getToughness().getValue());
+        Assertions.assertNotNull(card, "Can't find copy");
+        Assertions.assertEquals(2 + 2 + 1, card.getPower().getValue(), "Copy power");
+        Assertions.assertEquals(2 + 2 + 1, card.getToughness().getValue(), "Copy Toughness");
     }
 }

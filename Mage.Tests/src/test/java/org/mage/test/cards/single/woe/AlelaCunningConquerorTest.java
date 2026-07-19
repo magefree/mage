@@ -3,8 +3,8 @@ package org.mage.test.cards.single.woe;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.multiplayer.MultiplayerTriggerTest;
 import org.mage.test.player.TestPlayer;
 
@@ -105,9 +105,9 @@ public class AlelaCunningConquerorTest extends MultiplayerTriggerTest {
 
     private void assertGoadedByPlayer(String attacker, TestPlayer player) {
         Permanent permanent = getPermanent(attacker);
-        Assert.assertTrue(
-                "Creature should be goaded by " + player.getName(),
-                permanent.getGoadingPlayers().contains(player.getId())
+        Assertions.assertTrue(
+                permanent.getGoadingPlayers().contains(player.getId()),
+                "Creature should be goaded by " + player.getName()
         );
     }
 }

@@ -3,8 +3,8 @@ package org.mage.test.cards.mana;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -26,8 +26,8 @@ public class SylvokExplorerTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player should be able to create 1 red and 1 white mana", "{R}{W}", options.getAtIndex(0).toString());
-        Assert.assertEquals("Player should be able to create 1 blue and 1 white mana", "{W}{U}", options.getAtIndex(1).toString());
+        Assertions.assertEquals("{R}{W}", options.getAtIndex(0).toString(), "Player should be able to create 1 red and 1 white mana");
+        Assertions.assertEquals("{W}{U}", options.getAtIndex(1).toString(), "Player should be able to create 1 blue and 1 white mana");
     }
 
     @Test
@@ -45,6 +45,6 @@ public class SylvokExplorerTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player should be able to create 3 white mana", "{W}{W}{W}", options.getAtIndex(0).toString());
+        Assertions.assertEquals("{W}{W}{W}", options.getAtIndex(0).toString(), "Player should be able to create 3 white mana");
     }
 }

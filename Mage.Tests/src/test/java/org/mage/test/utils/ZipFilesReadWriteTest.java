@@ -4,14 +4,14 @@ import net.java.truevfs.access.TFile;
 import net.java.truevfs.access.TFileReader;
 import net.java.truevfs.access.TFileWriter;
 import net.java.truevfs.access.TVFS;
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
@@ -20,57 +20,57 @@ import java.util.Arrays;
  */
 public class ZipFilesReadWriteTest {
 
-    @Rule
-    public TemporaryFolder tempFolder = new TemporaryFolder();
+    @TempDir
+    public Path tempFolder;
 
     @Test
     public void test_Read() {
         // exists
         TFile fileZip = new TFile(Paths.get("src", "test", "data", "images.zip").toString());
-        Assert.assertTrue(fileZip.exists());
+        Assertions.assertTrue(fileZip.exists());
         TFile fileZipDir = new TFile(Paths.get("src", "test", "data", "images.zip", "SET").toString());
-        Assert.assertTrue(fileZipDir.exists());
+        Assertions.assertTrue(fileZipDir.exists());
         TFile fileZipFile = new TFile(Paths.get("src", "test", "data", "images.zip", "SET", "image1.png").toString());
-        Assert.assertTrue(fileZipFile.exists());
+        Assertions.assertTrue(fileZipFile.exists());
 
         // not exists
         TFile fileNotZip = new TFile(Paths.get("src", "test", "data", "images-FAIL.zip").toString());
-        Assert.assertFalse(fileNotZip.exists());
+        Assertions.assertFalse(fileNotZip.exists());
         TFile fileNotZipDir = new TFile(Paths.get("src", "test", "data", "images.zip", "SET-FAIL").toString());
-        Assert.assertFalse(fileNotZipDir.exists());
+        Assertions.assertFalse(fileNotZipDir.exists());
         TFile fileNotZipFile = new TFile(Paths.get("src", "test", "data", "images.zip", "SET", "image1-FAIL.png").toString());
-        Assert.assertFalse(fileNotZipFile.exists());
+        Assertions.assertFalse(fileNotZipFile.exists());
 
         // reading
-        Assert.assertEquals(3, fileZipDir.list().length);
-        Assert.assertTrue(Arrays.asList(fileZipDir.list()).contains("image1.png"));
-        Assert.assertTrue(Arrays.asList(fileZipDir.list()).contains("image2.png"));
-        Assert.assertTrue(Arrays.asList(fileZipDir.list()).contains("image3.png"));
+        Assertions.assertEquals(3, fileZipDir.list().length);
+        Assertions.assertTrue(Arrays.asList(fileZipDir.list()).contains("image1.png"));
+        Assertions.assertTrue(Arrays.asList(fileZipDir.list()).contains("image2.png"));
+        Assertions.assertTrue(Arrays.asList(fileZipDir.list()).contains("image3.png"));
     }
 
     @Test
     public void test_write() {
         try {
-            String zipPath = tempFolder.newFolder().getAbsolutePath();
+            String zipPath = tempFolder.toFile().getAbsolutePath();
             TFile fileWriteZip = new TFile(Paths.get(zipPath, "temp-images.zip", "DIR", "test.txt").toString());
-            Assert.assertFalse(fileWriteZip.exists());
+            Assertions.assertFalse(fileWriteZip.exists());
 
             Writer writer = new TFileWriter(fileWriteZip);
             try {
                 writer.write("test text");
                 writer.close();
-                Assert.assertTrue(fileWriteZip.exists());
+                Assertions.assertTrue(fileWriteZip.exists());
 
                 TFileReader reader = new TFileReader(fileWriteZip);
                 BufferedReader br = new BufferedReader(reader);
-                Assert.assertEquals(br.readLine(), "test text");
+                Assertions.assertEquals(br.readLine(), "test text");
                 reader.close();
             } finally {
                 TVFS.umount();
             }
         } catch (IOException e) {
             e.printStackTrace();
-            Assert.fail(e.getMessage());
+            Assertions.fail(e.getMessage());
         }
     }
 }

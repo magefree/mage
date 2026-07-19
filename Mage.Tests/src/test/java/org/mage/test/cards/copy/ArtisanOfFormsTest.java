@@ -4,8 +4,8 @@ package org.mage.test.cards.copy;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -47,7 +47,7 @@ public class ArtisanOfFormsTest extends CardTestPlayerBase {
 
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(playerA.getId())) {
             if (permanent.getName().equals("Silvercoat Lion")) {
-                Assert.assertEquals("Creature has to have Cast + Heroic ability", 2, permanent.getAbilities().size());
+                Assertions.assertEquals(2, permanent.getAbilities().size(), "Creature has to have Cast + Heroic ability");
             }
         }
     }
@@ -91,7 +91,7 @@ public class ArtisanOfFormsTest extends CardTestPlayerBase {
 
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(playerA.getId())) {
             if (permanent.getName().equals("Silvercoat Lion")) {
-                Assert.assertEquals("Creature has to have Cast + Heroic ability", 2, permanent.getAbilities().size());
+                Assertions.assertEquals(2, permanent.getAbilities().size(), "Creature has to have Cast + Heroic ability");
             }
         }
     }

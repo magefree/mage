@@ -4,8 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import mage.util.JsonUtil;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -28,18 +28,18 @@ public class JsonGsonTest {
             JsonObject json = JsonParser.parseReader(new FileReader(sampleFileName)).getAsJsonObject();
 
             // data types
-            Assert.assertEquals("string", "card", JsonUtil.getAsString(json, "object"));
+            Assertions.assertEquals("card", JsonUtil.getAsString(json, "object"), "string");
             JsonArray jsonFaces = JsonUtil.getAsArray(json, "card_faces");
-            Assert.assertEquals("int", 60370, JsonUtil.getAsInt(json, "mtgo_id"));
-            Assert.assertTrue("boolean", JsonUtil.getAsBoolean(json, "highres_image"));
-            Assert.assertEquals("double", 4.0, JsonUtil.getAsDouble(json, "cmc"), 0.0);
-            Assert.assertNotNull("array", jsonFaces);
+            Assertions.assertEquals(60370, JsonUtil.getAsInt(json, "mtgo_id"), "int");
+            Assertions.assertTrue(JsonUtil.getAsBoolean(json, "highres_image"), "boolean");
+            Assertions.assertEquals(4.0, JsonUtil.getAsDouble(json, "cmc"), 0.0, "double");
+            Assertions.assertNotNull(jsonFaces, "array");
 
-            Assert.assertEquals("Card must have 2 faces", 2, jsonFaces.size());
-            Assert.assertEquals("Unknown second side", "Infectious Curse", JsonUtil.getAsString(jsonFaces.get(1).getAsJsonObject(), "name"));
+            Assertions.assertEquals(2, jsonFaces.size(), "Card must have 2 faces");
+            Assertions.assertEquals("Infectious Curse", JsonUtil.getAsString(jsonFaces.get(1).getAsJsonObject(), "name"), "Unknown second side");
         } catch (IOException e) {
             e.printStackTrace();
-            Assert.fail("Can't load sample json file: " + sampleFileName);
+            Assertions.fail("Can't load sample json file: " + sampleFileName);
         }
     }
 }

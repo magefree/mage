@@ -6,8 +6,8 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
 import java.util.List;
@@ -37,7 +37,7 @@ public class SimpleGameTest extends CardTestMultiPlayerBase {
         FilterPermanent filterPermanent = new FilterLandPermanent();
         filterPermanent.add(SubType.FOREST.getPredicate());
         List<Permanent> forestCards = currentGame.getBattlefield().getAllActivePermanents(filterPermanent, currentGame);
-        Assert.assertEquals(4, forestCards.size());
+        Assertions.assertEquals(4, forestCards.size());
     }
 
 }

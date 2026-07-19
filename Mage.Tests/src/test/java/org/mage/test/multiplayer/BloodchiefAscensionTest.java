@@ -3,8 +3,8 @@ package org.mage.test.multiplayer;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
 /**
@@ -31,10 +31,10 @@ public class BloodchiefAscensionTest extends CardTestMultiPlayerBase {
         // Player order: A -> D -> C -> B
         runCode("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             // make sure range used
-            Assert.assertTrue(playerA.hasPlayerInRange(playerA.getId()));
-            Assert.assertTrue(playerA.hasPlayerInRange(playerD.getId()));
-            Assert.assertFalse(playerA.hasPlayerInRange(playerC.getId()));
-            Assert.assertTrue(playerA.hasPlayerInRange(playerB.getId()));
+            Assertions.assertTrue(playerA.hasPlayerInRange(playerA.getId()));
+            Assertions.assertTrue(playerA.hasPlayerInRange(playerD.getId()));
+            Assertions.assertFalse(playerA.hasPlayerInRange(playerC.getId()));
+            Assertions.assertTrue(playerA.hasPlayerInRange(playerB.getId()));
         });
 
         // turn 1
@@ -110,10 +110,10 @@ public class BloodchiefAscensionTest extends CardTestMultiPlayerBase {
         // Player order: A -> D -> C -> B
         runCode("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             // make sure range used
-            Assert.assertTrue(playerA.hasPlayerInRange(playerA.getId()));
-            Assert.assertTrue(playerA.hasPlayerInRange(playerD.getId()));
-            Assert.assertFalse(playerA.hasPlayerInRange(playerC.getId()));
-            Assert.assertTrue(playerA.hasPlayerInRange(playerB.getId()));
+            Assertions.assertTrue(playerA.hasPlayerInRange(playerA.getId()));
+            Assertions.assertTrue(playerA.hasPlayerInRange(playerD.getId()));
+            Assertions.assertFalse(playerA.hasPlayerInRange(playerC.getId()));
+            Assertions.assertTrue(playerA.hasPlayerInRange(playerB.getId()));
 
         });
 
@@ -151,7 +151,7 @@ public class BloodchiefAscensionTest extends CardTestMultiPlayerBase {
         assertLife(playerC, 18);
         assertLife(playerD, 18);
 
-        Assert.assertTrue("playerB has lost", playerB.hasLost());
+        Assertions.assertTrue(playerB.hasLost(), "playerB has lost");
 
         assertGraveyardCount(playerA, "Fireball", 1);
         assertGraveyardCount(playerC, "Fireball", 1);

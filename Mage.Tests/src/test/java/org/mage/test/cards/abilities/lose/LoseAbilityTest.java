@@ -4,8 +4,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -32,13 +32,13 @@ public class LoseAbilityTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
         Permanent eliteVanguard = getPermanent("Elite Vanguard", playerA.getId());
-        Assert.assertNotNull(eliteVanguard);
-        Assert.assertFalse(eliteVanguard.getAbilities().contains(FlyingAbility.getInstance()));
+        Assertions.assertNotNull(eliteVanguard);
+        Assertions.assertFalse(eliteVanguard.getAbilities().contains(FlyingAbility.getInstance()));
 
         Permanent airElemental = getPermanent("Air Elemental", playerA.getId());
-        Assert.assertNotNull(airElemental);
+        Assertions.assertNotNull(airElemental);
         // should NOT have flying
-        Assert.assertFalse(airElemental.getAbilities().contains(FlyingAbility.getInstance()));
+        Assertions.assertFalse(airElemental.getAbilities().contains(FlyingAbility.getInstance()));
     }
 
     /**
@@ -62,11 +62,11 @@ public class LoseAbilityTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
         Permanent airElemental = getPermanent("Air Elemental", playerA.getId());
-        Assert.assertNotNull(airElemental);
+        Assertions.assertNotNull(airElemental);
 
-        Assert.assertTrue(airElemental.getAttachments().size() == 2);
+        Assertions.assertTrue(airElemental.getAttachments().size() == 2);
         // should have flying
-        Assert.assertTrue(airElemental.getAbilities().contains(FlyingAbility.getInstance()));
+        Assertions.assertTrue(airElemental.getAbilities().contains(FlyingAbility.getInstance()));
     }
 
     /**
@@ -93,11 +93,11 @@ public class LoseAbilityTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
         Permanent airElemental = getPermanent("Air Elemental", playerA.getId());
-        Assert.assertNotNull(airElemental);
+        Assertions.assertNotNull(airElemental);
 
-        Assert.assertEquals(3, airElemental.getAttachments().size());
+        Assertions.assertEquals(3, airElemental.getAttachments().size());
         // should NOT have flying
-        Assert.assertFalse(airElemental.getAbilities().contains(FlyingAbility.getInstance()));
+        Assertions.assertFalse(airElemental.getAbilities().contains(FlyingAbility.getInstance()));
     }
     
     /**

@@ -2,8 +2,8 @@ package org.mage.test.cards.single.arb;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -71,10 +71,10 @@ public class SenTripletsTest extends CardTestPlayerBase {
         try {
             execute();
 
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Can't find ability to activate command: {T}")) {
-                Assert.fail("must throw error about bad targets, but got:\n" + e.getMessage());
+                Assertions.fail("must throw error about bad targets, but got:\n" + e.getMessage());
             }
         }
     }
@@ -93,10 +93,10 @@ public class SenTripletsTest extends CardTestPlayerBase {
         try {
             execute();
 
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Cast Lightning Bolt$targetPlayer=PlayerA")) {
-                Assert.fail("must throw error about bad targets, but got:\n" + e.getMessage());
+                Assertions.fail("must throw error about bad targets, but got:\n" + e.getMessage());
             }
         }
     }

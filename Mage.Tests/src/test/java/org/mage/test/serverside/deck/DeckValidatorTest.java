@@ -1,13 +1,12 @@
 package org.mage.test.serverside.deck;
 
 import mage.cards.decks.DeckValidator;
-import mage.deck.Commander;
 import mage.deck.Limited;
 import mage.deck.Modern;
 import mage.deck.Legacy;
 import mage.deck.Standard;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.MageTestPlayerBase;
 
 import java.util.ArrayList;
@@ -44,8 +43,8 @@ public class DeckValidatorTest extends MageTestPlayerBase {
 
         DeckValidator validator = new Standard();
         testDeckValid(validator, deck, sideboard);
-        Assert.assertEquals("invalid message not correct",
-                "Deck=Must contain at least 60 cards: has only 59 cards, Sideboard=Must contain no more than 15 cards : has 16 cards", validator.getErrorsListInfo());
+        Assertions.assertEquals("Deck=Must contain at least 60 cards: has only 59 cards, Sideboard=Must contain no more than 15 cards : has 16 cards",
+                validator.getErrorsListInfo(), "invalid message not correct");
     }
 
     @Test
@@ -81,7 +80,7 @@ public class DeckValidatorTest extends MageTestPlayerBase {
         final boolean needValid = true; // card valid after Modern Horizons 2
         boolean valid = testDeckValid(new Modern(), deckList);
         if (valid != needValid) {
-            Assert.fail("Counterspell " + (needValid ? "must be" : "not") + " allowed in modern");
+            Assertions.fail("Counterspell " + (needValid ? "must be" : "not") + " allowed in modern");
         }
     }
 
@@ -201,7 +200,7 @@ public class DeckValidatorTest extends MageTestPlayerBase {
         final boolean needValid = false;
         boolean valid = testDeckValid(new Modern(), deckList);
         if (valid != needValid) {
-            Assert.fail("Psychatog " + (needValid ? "must be" : "not") + " allowed in modern");
+            Assertions.fail("Psychatog " + (needValid ? "must be" : "not") + " allowed in modern");
         }
     }
 
@@ -227,118 +226,118 @@ public class DeckValidatorTest extends MageTestPlayerBase {
         deckList.add(new DeckValidationUtil.CardNameAmount("Ancestral Vision", 4));
         deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         boolean validationSuccessful = testDeckValid(validator, deckList);
-        Assert.assertTrue(validator.getErrorsListInfo(), validationSuccessful);
+        Assertions.assertTrue(validationSuccessful, validator.getErrorsListInfo());
         validator.getErrorsList().clear();
 
         deckList.clear();
         deckList.add(new DeckValidationUtil.CardNameAmount("Ancient Den", 4));
         deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
-        Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
+        Assertions.assertFalse(validationSuccessful, validator.getErrorsListInfo());
         validator.getErrorsList().clear();
 
         deckList.add(new DeckValidationUtil.CardNameAmount("Birthing Pod", 4));
         deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
-        Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
+        Assertions.assertFalse(validationSuccessful, validator.getErrorsListInfo());
         validator.getErrorsList().clear();
 
         deckList.clear();
         deckList.add(new DeckValidationUtil.CardNameAmount("Blazing Shoal", 4));
         deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
-        Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
+        Assertions.assertFalse(validationSuccessful, validator.getErrorsListInfo());
         validator.getErrorsList().clear();
 
         deckList.clear();
         deckList.add(new DeckValidationUtil.CardNameAmount("Bloodbraid Elf", 4));
         deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
-        Assert.assertTrue(validator.getErrorsListInfo(), validationSuccessful);
+        Assertions.assertTrue(validationSuccessful, validator.getErrorsListInfo());
         validator.getErrorsList().clear();
 
         deckList.clear();
         deckList.add(new DeckValidationUtil.CardNameAmount("Chrome Mox", 4));
         deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
-        Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
+        Assertions.assertFalse(validationSuccessful, validator.getErrorsListInfo());
         validator.getErrorsList().clear();
 
         deckList.clear();
         deckList.add(new DeckValidationUtil.CardNameAmount("Cloudpost", 4));
         deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
-        Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
+        Assertions.assertFalse(validationSuccessful, validator.getErrorsListInfo());
         validator.getErrorsList().clear();
 
         deckList.clear();
         deckList.add(new DeckValidationUtil.CardNameAmount("Dark Depths", 4));
         deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
-        Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
+        Assertions.assertFalse(validationSuccessful, validator.getErrorsListInfo());
         validator.getErrorsList().clear();
 
         deckList.clear();
         deckList.add(new DeckValidationUtil.CardNameAmount("Deathrite Shaman", 4));
         deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
-        Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
+        Assertions.assertFalse(validationSuccessful, validator.getErrorsListInfo());
         validator.getErrorsList().clear();
 
         deckList.clear();
         deckList.add(new DeckValidationUtil.CardNameAmount("Dig Through Time", 4));
         deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
-        Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
+        Assertions.assertFalse(validationSuccessful, validator.getErrorsListInfo());
         validator.getErrorsList().clear();
 
         deckList.clear();
         deckList.add(new DeckValidationUtil.CardNameAmount("Dread Return", 4));
         deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
-        Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
+        Assertions.assertFalse(validationSuccessful, validator.getErrorsListInfo());
         validator.getErrorsList().clear();
 
         deckList.clear();
         deckList.add(new DeckValidationUtil.CardNameAmount("Glimpse of Nature", 4));
         deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
-        Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
+        Assertions.assertFalse(validationSuccessful, validator.getErrorsListInfo());
         validator.getErrorsList().clear();
 
         deckList.clear();
         deckList.add(new DeckValidationUtil.CardNameAmount("Great Furnace", 4));
         deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
-        Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
+        Assertions.assertFalse(validationSuccessful, validator.getErrorsListInfo());
         validator.getErrorsList().clear();
 
         deckList.clear();
         deckList.add(new DeckValidationUtil.CardNameAmount("Grief", 4));
         deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
-        Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
+        Assertions.assertFalse(validationSuccessful, validator.getErrorsListInfo());
         validator.getErrorsList().clear();
 
         deckList.clear();
         deckList.add(new DeckValidationUtil.CardNameAmount("Hypergenesis", 4));
         deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
-        Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
+        Assertions.assertFalse(validationSuccessful, validator.getErrorsListInfo());
         validator.getErrorsList().clear();
 
         deckList.clear();
         deckList.add(new DeckValidationUtil.CardNameAmount("Jace, the Mind Sculptor", 4));
         deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
-        Assert.assertTrue(validator.getErrorsListInfo(), validationSuccessful);
+        Assertions.assertTrue(validationSuccessful, validator.getErrorsListInfo());
         validator.getErrorsList().clear();
 
         deckList.clear();
         deckList.add(new DeckValidationUtil.CardNameAmount("Mental Misstep", 4));
         deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
-        Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
+        Assertions.assertFalse(validationSuccessful, validator.getErrorsListInfo());
         validator.getErrorsList().clear();
     }
 }

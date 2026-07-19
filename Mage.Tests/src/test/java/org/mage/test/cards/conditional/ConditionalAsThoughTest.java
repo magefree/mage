@@ -13,7 +13,8 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInOpponentsGraveyard;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -67,14 +68,17 @@ public class ConditionalAsThoughTest extends CardTestPlayerBase {
         execute();
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void test_TargetCardInLibrary_CantUseAsAbilityTarget() {
-        Ability ability = new SimpleActivatedAbility(
-                Zone.ALL,
-                new InfoEffect("test"),
-                new ManaCostsImpl<>("{R}")
-        );
-        ability.addTarget(new TargetCardInLibrary());
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+
+            Ability ability = new SimpleActivatedAbility(
+                    Zone.ALL,
+                    new InfoEffect("test"),
+                    new ManaCostsImpl<>("{R}")
+            );
+            ability.addTarget(new TargetCardInLibrary());
+        });
     }
 
     @Test

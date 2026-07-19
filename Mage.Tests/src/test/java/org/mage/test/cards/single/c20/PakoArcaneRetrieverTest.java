@@ -5,8 +5,8 @@ import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -47,7 +47,7 @@ public class PakoArcaneRetrieverTest extends CardTestPlayerBase {
         assertExileCount(playerB, "Pillarfield Ox", 1);
 
         for(Card card :currentGame.getExile().getAllCards(currentGame)) {
-            Assert.assertTrue(card.getName() + " has a fetch counter",card.getCounters(currentGame).getCount(CounterType.FETCH) == 1);
+            Assertions.assertTrue(card.getCounters(currentGame).getCount(CounterType.FETCH) == 1,card.getName() + " has a fetch counter");
         }        
 
     }

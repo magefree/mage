@@ -6,8 +6,8 @@ import mage.counters.CounterType;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -126,9 +126,9 @@ public class BaronHelmutZemoTest extends CardTestPlayerBase {
             setStopAt(3, PhaseStep.END_TURN);
             execute();
         } catch (AssertionError e) {
-            Assert.assertTrue(
-                    "catch wrong exception: " + e.getMessage(),
-                    e.getMessage().contains("Found wrong choice command") && e.getMessage().contains("Abomination")
+            Assertions.assertTrue(
+                    e.getMessage().contains("Found wrong choice command") && e.getMessage().contains("Abomination"),
+                    "catch wrong exception: " + e.getMessage()
             );
             return;
         }

@@ -3,8 +3,8 @@ package org.mage.test.cards.abilities.oneshot.library;
 import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -44,9 +44,9 @@ public class SurveilTest extends CardTestPlayerBase {
      */
     private void assertLibrary(TestPlayer player, String... cards) {
         List<Card> library = player.getLibrary().getCards(currentGame);
-        Assert.assertEquals("Library of " + player.getName() + " is not of the expected size", cards.length, library.size());
+        Assertions.assertEquals(cards.length, library.size(), "Library of " + player.getName() + " is not of the expected size");
         for (int i = 0; i < cards.length; i++) {
-            Assert.assertEquals("Library of " + player.getName() + " has different card #" + i, cards[i], library.get(i).getName());
+            Assertions.assertEquals(cards[i], library.get(i).getName(), "Library of " + player.getName() + " has different card #" + i);
         }
     }
 

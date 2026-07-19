@@ -7,8 +7,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import java.util.Objects;
@@ -99,18 +99,18 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
                 .filter(p -> p.getName().equals(cardName))
                 .findFirst();
         if (!optPermanent.isPresent()) {
-            Assert.fail(info + " — no permanent named \"" + cardName + "\" found on battlefield");
+            Assertions.fail(info + " — no permanent named \"" + cardName + "\" found on battlefield");
         }
         Permanent permanent = optPermanent.get();
-        Assert.assertEquals(info + " — permanent zcc for \"" + cardName + "\"", permanentZCC, permanent.getZoneChangeCounter(game));
+        Assertions.assertEquals(permanentZCC, permanent.getZoneChangeCounter(game), info + " — permanent zcc for \"" + cardName + "\"");
         Card card = game.getCard(permanent.getId()).getMainCard();
         if (card == null) {
-            Assert.fail(info + " — missing card for permanent \"" + cardName + "\"");
+            Assertions.fail(info + " — missing card for permanent \"" + cardName + "\"");
         }
-        Assert.assertEquals(info + " — card zcc for \"" + cardName + "\"", cardZCC, card.getZoneChangeCounter(game));
+        Assertions.assertEquals(cardZCC, card.getZoneChangeCounter(game), info + " — card zcc for \"" + cardName + "\"");
         if (checkMDFC) {
-            Assert.assertEquals(info + " — left card zcc for \"" + cardName + "\"", leftZCC, ((ModalDoubleFacedCard) card).getLeftHalfCard().getZoneChangeCounter(game));
-            Assert.assertEquals(info + " — right card zcc for \"" + cardName + "\"", rightZCC, ((ModalDoubleFacedCard) card).getRightHalfCard().getZoneChangeCounter(game));
+            Assertions.assertEquals(leftZCC, ((ModalDoubleFacedCard) card).getLeftHalfCard().getZoneChangeCounter(game), info + " — left card zcc for \"" + cardName + "\"");
+            Assertions.assertEquals(rightZCC, ((ModalDoubleFacedCard) card).getRightHalfCard().getZoneChangeCounter(game), info + " — right card zcc for \"" + cardName + "\"");
         }
     }
 
@@ -135,10 +135,10 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
                 .filter(p -> p.getName().equals(cardName))
                 .findFirst();
         if (!optCard.isPresent()) {
-            Assert.fail(info + " — no card named \"" + cardName + "\" found in graveyard");
+            Assertions.fail(info + " — no card named \"" + cardName + "\" found in graveyard");
         }
         Card card = optCard.get();
-        Assert.assertEquals(info + " — card zcc for \"" + cardName + "\"", cardZCC, card.getZoneChangeCounter(game));
+        Assertions.assertEquals(card.getZoneChangeCounter(game), cardZCC, info + " — card zcc for \"" + cardName + "\"");
     }
 
     /**
@@ -154,13 +154,13 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
                 .filter(p -> p.getName().equals(cardName))
                 .findFirst();
         if (!optCard.isPresent()) {
-            Assert.fail(info + " — no card named \"" + cardName + "\" found in hand");
+            Assertions.fail(info + " — no card named \"" + cardName + "\" found in hand");
         }
         Card card = optCard.get();
-        Assert.assertEquals(info + " — card zcc for \"" + cardName + "\"", cardZCC, card.getZoneChangeCounter(game));
+        Assertions.assertEquals(cardZCC, card.getZoneChangeCounter(game), info + " — card zcc for \"" + cardName + "\"");
         if (checkMDFC) {
-            Assert.assertEquals(info + " — left card zcc for \"" + cardName + "\"", leftZCC, ((ModalDoubleFacedCard) card).getLeftHalfCard().getZoneChangeCounter(game));
-            Assert.assertEquals(info + " — right card zcc for \"" + cardName + "\"", rightZCC, ((ModalDoubleFacedCard) card).getRightHalfCard().getZoneChangeCounter(game));
+            Assertions.assertEquals(leftZCC, ((ModalDoubleFacedCard) card).getLeftHalfCard().getZoneChangeCounter(game), info + " — left card zcc for \"" + cardName + "\"");
+            Assertions.assertEquals(rightZCC, ((ModalDoubleFacedCard) card).getRightHalfCard().getZoneChangeCounter(game), info + " — right card zcc for \"" + cardName + "\"");
         }
     }
 
@@ -506,7 +506,7 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
                     .filter(stackObject -> stackObject.getName().equals("Lightning Bolt"))
                     .filter(stackObject -> stackObject.isCopy())
                     .count();
-            Assert.assertEquals(info + " — must have x1 bolt (copy only)", 1, count);
+            Assertions.assertEquals(1, count, info + " — must have x1 bolt (copy only)");
         });
 
         // remove copied spell

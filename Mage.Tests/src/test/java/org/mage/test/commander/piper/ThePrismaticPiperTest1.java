@@ -2,7 +2,7 @@ package org.mage.test.commander.piper;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author TheElk801

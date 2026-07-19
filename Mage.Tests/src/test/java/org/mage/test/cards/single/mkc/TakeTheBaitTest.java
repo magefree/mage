@@ -6,8 +6,8 @@ import java.util.stream.Stream;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -50,9 +50,9 @@ public class TakeTheBaitTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
         assertCounterCount(playerB, "Jace, Arcane Strategist", CounterType.LOYALTY, 4);
 
-        Assert.assertEquals(Stream.of(playerB.getId()).collect(Collectors.toSet()), getPermanent("Balduvian Bears").getGoadingPlayers());
-        Assert.assertEquals(Stream.of(playerB.getId()).collect(Collectors.toSet()), getPermanent("Grizzly Bears").getGoadingPlayers());
-        Assert.assertEquals(Collections.emptySet(), getPermanent("Forest Bear").getGoadingPlayers());
+        Assertions.assertEquals(Stream.of(playerB.getId()).collect(Collectors.toSet()), getPermanent("Balduvian Bears").getGoadingPlayers());
+        Assertions.assertEquals(Stream.of(playerB.getId()).collect(Collectors.toSet()), getPermanent("Grizzly Bears").getGoadingPlayers());
+        Assertions.assertEquals(Collections.emptySet(), getPermanent("Forest Bear").getGoadingPlayers());
     }
 
     @Test
@@ -83,8 +83,8 @@ public class TakeTheBaitTest extends CardTestPlayerBase {
         assertCounterCount(playerB, "Jace, Arcane Strategist", CounterType.LOYALTY, 4);
 
         // still goaded
-        Assert.assertEquals(Stream.of(playerB.getId()).collect(Collectors.toSet()), getPermanent("Balduvian Bears").getGoadingPlayers());
-        Assert.assertEquals(Stream.of(playerB.getId()).collect(Collectors.toSet()), getPermanent("Grizzly Bears").getGoadingPlayers());
-        Assert.assertEquals(Collections.emptySet(), getPermanent("Forest Bear").getGoadingPlayers());
+        Assertions.assertEquals(Stream.of(playerB.getId()).collect(Collectors.toSet()), getPermanent("Balduvian Bears").getGoadingPlayers());
+        Assertions.assertEquals(Stream.of(playerB.getId()).collect(Collectors.toSet()), getPermanent("Grizzly Bears").getGoadingPlayers());
+        Assertions.assertEquals(Collections.emptySet(), getPermanent("Forest Bear").getGoadingPlayers());
     }
 }

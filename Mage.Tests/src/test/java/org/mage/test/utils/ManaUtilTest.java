@@ -14,8 +14,8 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.Card;
 import mage.cards.repository.CardRepository;
 import mage.util.ManaUtil;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -77,19 +77,19 @@ public class ManaUtilTest extends CardTestPlayerBase {
      */
     @Test
     public void testManaCondensing() {
-        Assert.assertEquals("{5}{W}",               ManaUtil.condenseManaCostString("{1}{1}{1}{2}{W}"));
-        Assert.assertEquals("{4}{B}{B}",            ManaUtil.condenseManaCostString("{2}{B}{2}{B}"));
-        Assert.assertEquals("{6}{R}{R}{R}{U}",      ManaUtil.condenseManaCostString("{R}{1}{R}{2}{R}{3}{U}"));
-        Assert.assertEquals("{5}{B}{U}{W}",         ManaUtil.condenseManaCostString("{1}{B}{W}{4}{U}"));
-        Assert.assertEquals("{8}{B}{G}{G}{U}",      ManaUtil.condenseManaCostString("{1}{G}{1}{2}{3}{G}{B}{U}{1}"));
-        Assert.assertEquals("{3}{R}{U}",            ManaUtil.condenseManaCostString("{3}{R}{U}"));
-        Assert.assertEquals("{10}",                 ManaUtil.condenseManaCostString("{1}{2}{3}{4}"));
-        Assert.assertEquals("{B}{G}{R}{U}{W}",      ManaUtil.condenseManaCostString("{B}{G}{R}{U}{W}"));
-        Assert.assertEquals("{R}{R}",               ManaUtil.condenseManaCostString("{R}{R}"));
-        Assert.assertEquals("{U}",                  ManaUtil.condenseManaCostString("{U}"));
-        Assert.assertEquals("{2}",                  ManaUtil.condenseManaCostString("{2}"));
-        Assert.assertEquals("",                     ManaUtil.condenseManaCostString("{}"));
-        Assert.assertEquals("{5}{C}{R}{R}{R}{U}",   ManaUtil.condenseManaCostString("{R}{C}{R}{2}{R}{3}{U}"));
+        Assertions.assertEquals("{5}{W}",               ManaUtil.condenseManaCostString("{1}{1}{1}{2}{W}"));
+        Assertions.assertEquals("{4}{B}{B}",            ManaUtil.condenseManaCostString("{2}{B}{2}{B}"));
+        Assertions.assertEquals("{6}{R}{R}{R}{U}",      ManaUtil.condenseManaCostString("{R}{1}{R}{2}{R}{3}{U}"));
+        Assertions.assertEquals("{5}{B}{U}{W}",         ManaUtil.condenseManaCostString("{1}{B}{W}{4}{U}"));
+        Assertions.assertEquals("{8}{B}{G}{G}{U}",      ManaUtil.condenseManaCostString("{1}{G}{1}{2}{3}{G}{B}{U}{1}"));
+        Assertions.assertEquals("{3}{R}{U}",            ManaUtil.condenseManaCostString("{3}{R}{U}"));
+        Assertions.assertEquals("{10}",                 ManaUtil.condenseManaCostString("{1}{2}{3}{4}"));
+        Assertions.assertEquals("{B}{G}{R}{U}{W}",      ManaUtil.condenseManaCostString("{B}{G}{R}{U}{W}"));
+        Assertions.assertEquals("{R}{R}",               ManaUtil.condenseManaCostString("{R}{R}"));
+        Assertions.assertEquals("{U}",                  ManaUtil.condenseManaCostString("{U}"));
+        Assertions.assertEquals("{2}",                  ManaUtil.condenseManaCostString("{2}"));
+        Assertions.assertEquals("",                     ManaUtil.condenseManaCostString("{}"));
+        Assertions.assertEquals("{5}{C}{R}{R}{R}{U}",   ManaUtil.condenseManaCostString("{R}{C}{R}{2}{R}{3}{U}"));
     }
 
     /**
@@ -107,13 +107,13 @@ public class ManaUtilTest extends CardTestPlayerBase {
     private void testManaToPayVsLand(String manaToPay, String landName, int expected1, int expected2) {
         ManaCost unpaid = new ManaCostsImpl<>(manaToPay);
         Card card = CardRepository.instance.findCard(landName).createCard();
-        Assert.assertNotNull(card);
+        Assertions.assertNotNull(card);
 
         Map<UUID, ActivatedManaAbilityImpl> useableAbilities = getManaAbilities(card);
-        Assert.assertEquals(expected1, useableAbilities.size());
+        Assertions.assertEquals(expected1, useableAbilities.size());
 
         useableAbilities = ManaUtil.tryToAutoPay(unpaid, (LinkedHashMap<UUID, ActivatedManaAbilityImpl>) useableAbilities);
-        Assert.assertEquals(expected2, useableAbilities.size());
+        Assertions.assertEquals(expected2, useableAbilities.size());
     }
 
     /**
@@ -121,7 +121,7 @@ public class ManaUtilTest extends CardTestPlayerBase {
      * was auto chosen
      *
      * N.B. This method can be used ONLY if we have one ability left that auto
-     * choose mode! That's why we assert the following: Assert.assertEquals(1,
+     * choose mode! That's why we assert the following: Assertions.assertEquals(1,
      * useableAbilities.size());
      *
      * We get all mana abilities, then try to auto pay and compare to expected1
@@ -135,15 +135,15 @@ public class ManaUtilTest extends CardTestPlayerBase {
     private void testManaToPayVsLand(String manaToPay, String landName, int expected1, Class<? extends BasicManaAbility> expectedChosen) {
         ManaCost unpaid = new ManaCostsImpl<>(manaToPay);
         Card card = CardRepository.instance.findCard(landName).createCard();
-        Assert.assertNotNull(card);
+        Assertions.assertNotNull(card);
 
         Map<UUID, ActivatedManaAbilityImpl> useableAbilities = getManaAbilities(card);
-        Assert.assertEquals(expected1, useableAbilities.size());
+        Assertions.assertEquals(expected1, useableAbilities.size());
 
         useableAbilities = ManaUtil.tryToAutoPay(unpaid, (LinkedHashMap<UUID, ActivatedManaAbilityImpl>) useableAbilities);
-        Assert.assertEquals(1, useableAbilities.size());
+        Assertions.assertEquals(1, useableAbilities.size());
         ActivatedManaAbilityImpl ability = useableAbilities.values().iterator().next();
-        Assert.assertTrue("Wrong mana ability has been chosen", expectedChosen.isInstance(ability));
+        Assertions.assertTrue(expectedChosen.isInstance(ability), "Wrong mana ability has been chosen");
     }
 
     /**

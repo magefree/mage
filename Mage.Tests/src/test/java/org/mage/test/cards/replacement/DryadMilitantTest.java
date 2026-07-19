@@ -5,8 +5,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.watchers.common.CardsExiledThisTurnWatcher;
 import mage.watchers.common.CardsPutIntoGraveyardWatcher;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import java.util.Arrays;
@@ -109,7 +109,7 @@ public class DryadMilitantTest extends CardTestPlayerBase {
     private void assertCardsList(String info, Collection<Card> currentList, Collection<String> needList) {
         String current = currentList.stream().map(Card::getName).sorted().collect(Collectors.joining("; "));
         String need = needList.stream().sorted().collect(Collectors.joining("; "));
-        Assert.assertEquals(info, need, current);
+        Assertions.assertEquals(need, current, info);
     }
 
     private void assertReachesGraveyard(Collection<String> needList) {

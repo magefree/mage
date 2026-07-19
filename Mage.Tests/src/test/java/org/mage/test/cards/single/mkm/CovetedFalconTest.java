@@ -3,8 +3,8 @@ package org.mage.test.cards.single.mkm;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -175,13 +175,13 @@ public class CovetedFalconTest extends CardTestPlayerBase {
     // Test is duplicated to catch glitches that only occur when the targets are ordered a certain way.
     // TODO Doesn't work properly
     @Test
-    @Ignore
+    @Disabled
     public void test_GiveGuardianBeastAndArtifactsA() {
         setupGiveGuardianBeastAndArtifactsTest(true);
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void test_GiveGuardianBeastAndArtifactsB() {
         setupGiveGuardianBeastAndArtifactsTest(false);
     }

@@ -4,8 +4,8 @@ package org.mage.test.cards.abilities.keywords;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -32,7 +32,7 @@ public class MegamorphTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Aerie Bowmasters", 4, 5); // 3/4  and the +1/+1 counter from Megamorph
 
         Permanent aerie = getPermanent("Aerie Bowmasters", playerA);
-        Assert.assertTrue("Aerie Bowmasters has to be green", aerie != null && aerie.getColor(currentGame).isGreen());
+        Assertions.assertTrue(aerie != null && aerie.getColor(currentGame).isGreen(), "Aerie Bowmasters has to be green");
 
     }
 

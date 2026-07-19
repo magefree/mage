@@ -4,8 +4,8 @@ package org.mage.test.cards.control;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -39,10 +39,10 @@ public class DebtOfLoyaltyTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Metallic Sliver", 1);
         
         Permanent sliver = getPermanent("Metallic Sliver", playerA.getId());
-        Assert.assertNotNull(sliver);
+        Assertions.assertNotNull(sliver);
 
         // regenerate causes to tap
-        Assert.assertTrue(sliver.isTapped());
+        Assertions.assertTrue(sliver.isTapped());
     }
 
     @Test
@@ -64,9 +64,9 @@ public class DebtOfLoyaltyTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Metallic Sliver", 1);
         
         Permanent sliver = getPermanent("Metallic Sliver", playerB.getId());
-        Assert.assertNotNull(sliver);
+        Assertions.assertNotNull(sliver);
 
         // No regeneration occured.
-        Assert.assertFalse(sliver.isTapped());
+        Assertions.assertFalse(sliver.isTapped());
     }
 }

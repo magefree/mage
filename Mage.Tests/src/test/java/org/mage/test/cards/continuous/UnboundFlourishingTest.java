@@ -5,8 +5,8 @@ import mage.abilities.costs.mana.VariableManaCost;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -209,8 +209,8 @@ public class UnboundFlourishingTest extends CardTestPlayerBase {
         VariableManaCost cost = new VariableManaCost(VariableCostType.NORMAL, xInstancesCount);
         cost.setAmount(xAnnouncedValue * xMultiplier, xAnnouncedValue * xInstancesCount, false);
 
-        Assert.assertEquals("instances count", xInstancesCount, cost.getXInstancesCount());
-        Assert.assertEquals("boosted X value", xAnnouncedValue * xMultiplier, cost.getAmount());
+        Assertions.assertEquals(xInstancesCount, cost.getXInstancesCount(), "instances count");
+        Assertions.assertEquals(xAnnouncedValue * xMultiplier, cost.getAmount(), "boosted X value");
     }
 
 

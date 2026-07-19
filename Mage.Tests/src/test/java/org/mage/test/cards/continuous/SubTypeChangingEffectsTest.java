@@ -6,8 +6,8 @@ import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -39,45 +39,45 @@ public class SubTypeChangingEffectsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Conspiracy", 1);
 
         Permanent silvercoatLion = getPermanent("Silvercoat Lion", playerA);
-        Assert.assertFalse(silvercoatLion.hasSubtype(SubType.CAT, currentGame));
-        Assert.assertTrue(silvercoatLion.hasSubtype(SubType.ORC, currentGame));
+        Assertions.assertFalse(silvercoatLion.hasSubtype(SubType.CAT, currentGame));
+        Assertions.assertTrue(silvercoatLion.hasSubtype(SubType.ORC, currentGame));
 
         silvercoatLion = getPermanent("Silvercoat Lion", playerB);
-        Assert.assertTrue(silvercoatLion.hasSubtype(SubType.CAT, currentGame));
-        Assert.assertFalse(silvercoatLion.hasSubtype(SubType.ORC, currentGame));
+        Assertions.assertTrue(silvercoatLion.hasSubtype(SubType.CAT, currentGame));
+        Assertions.assertFalse(silvercoatLion.hasSubtype(SubType.ORC, currentGame));
 
         for (Card card : playerA.getLibrary().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertTrue(card.getName() + " should have ORC type", card.hasSubtype(SubType.ORC, currentGame));
-                Assert.assertFalse(card.getName() + " should not have CAT type", card.hasSubtype(SubType.CAT, currentGame));
+                Assertions.assertTrue(card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should have ORC type");
+                Assertions.assertFalse(card.hasSubtype(SubType.CAT, currentGame), card.getName() + " should not have CAT type");
             }
         }
         for (Card card : playerB.getLibrary().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertFalse(card.getName() + " should not have ORC type", card.hasSubtype(SubType.ORC, currentGame));
-                Assert.assertTrue(card.getName() + " should have CAT type", card.hasSubtype(SubType.CAT, currentGame));
+                Assertions.assertFalse(card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should not have ORC type");
+                Assertions.assertTrue(card.hasSubtype(SubType.CAT, currentGame), card.getName() + " should have CAT type");
             }
         }
 
         for (Card card : playerA.getHand().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertTrue(card.getName() + " should have ORC type", card.hasSubtype(SubType.ORC, currentGame));
+                Assertions.assertTrue(card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should have ORC type");
             }
         }
         for (Card card : playerB.getHand().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertFalse(card.getName() + " should not have ORC type", card.hasSubtype(SubType.ORC, currentGame));
+                Assertions.assertFalse(card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should not have ORC type");
             }
         }
         for (Card card : playerA.getGraveyard().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertTrue(card.getName() + " should have ORC type", card.hasSubtype(SubType.ORC, currentGame));
+                Assertions.assertTrue(card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should have ORC type");
             }
 
         }
         for (Card card : playerB.getGraveyard().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertFalse(card.getName() + " should not have ORC type", card.hasSubtype(SubType.ORC, currentGame));
+                Assertions.assertFalse(card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should not have ORC type");
 
             }
         }
@@ -118,27 +118,27 @@ public class SubTypeChangingEffectsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Disenchant", 1);
 
         Permanent silvercoatLion = getPermanent("Silvercoat Lion", playerA);
-        Assert.assertTrue(silvercoatLion.hasSubtype(SubType.CAT, currentGame));
-        Assert.assertFalse(silvercoatLion.hasSubtype(SubType.ORC, currentGame));
+        Assertions.assertTrue(silvercoatLion.hasSubtype(SubType.CAT, currentGame));
+        Assertions.assertFalse(silvercoatLion.hasSubtype(SubType.ORC, currentGame));
 
         for (Card card : playerA.getLibrary().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertFalse(card.getName() + " should not have ORC type", card.hasSubtype(SubType.ORC, currentGame));
-                Assert.assertTrue(card.getName() + " should have CAT type", card.hasSubtype(SubType.CAT, currentGame));
+                Assertions.assertFalse(card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should not have ORC type");
+                Assertions.assertTrue(card.hasSubtype(SubType.CAT, currentGame), card.getName() + " should have CAT type");
             }
         }
 
         for (Card card : playerA.getHand().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertFalse(card.getName() + " should not have ORC type", card.hasSubtype(SubType.ORC, currentGame));
-                Assert.assertTrue(card.getName() + " should have CAT type", card.hasSubtype(SubType.CAT, currentGame));
+                Assertions.assertFalse(card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should not have ORC type");
+                Assertions.assertTrue(card.hasSubtype(SubType.CAT, currentGame), card.getName() + " should have CAT type");
             }
         }
 
         for (Card card : playerA.getGraveyard().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertFalse(card.getName() + " should not have ORC type", card.hasSubtype(SubType.ORC, currentGame));
-                Assert.assertTrue(card.getName() + " should have CAT type", card.hasSubtype(SubType.CAT, currentGame));
+                Assertions.assertFalse(card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should not have ORC type");
+                Assertions.assertTrue(card.hasSubtype(SubType.CAT, currentGame), card.getName() + " should have CAT type");
             }
 
         }
@@ -169,49 +169,49 @@ public class SubTypeChangingEffectsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Arcane Adaptation", 1);
 
         Permanent silvercoatLion = getPermanent("Silvercoat Lion", playerA);
-        Assert.assertTrue(silvercoatLion.hasSubtype(SubType.CAT, currentGame));
-        Assert.assertTrue(silvercoatLion.hasSubtype(SubType.ORC, currentGame));
+        Assertions.assertTrue(silvercoatLion.hasSubtype(SubType.CAT, currentGame));
+        Assertions.assertTrue(silvercoatLion.hasSubtype(SubType.ORC, currentGame));
 
         silvercoatLion = getPermanent("Silvercoat Lion", playerB);
-        Assert.assertTrue(silvercoatLion.hasSubtype(SubType.CAT, currentGame));
-        Assert.assertFalse(silvercoatLion.hasSubtype(SubType.ORC, currentGame));
+        Assertions.assertTrue(silvercoatLion.hasSubtype(SubType.CAT, currentGame));
+        Assertions.assertFalse(silvercoatLion.hasSubtype(SubType.ORC, currentGame));
 
         for (Card card : playerA.getLibrary().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertEquals(card.getName() + " should have ORC type", true, card.hasSubtype(SubType.ORC, currentGame));
-                Assert.assertEquals(card.getName() + " should have CAT type", true, card.hasSubtype(SubType.CAT, currentGame));
+                Assertions.assertEquals(true, card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should have ORC type");
+                Assertions.assertEquals(true, card.hasSubtype(SubType.CAT, currentGame), card.getName() + " should have CAT type");
             }
         }
         for (Card card : playerB.getLibrary().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertEquals(card.getName() + " should not have ORC type", false, card.hasSubtype(SubType.ORC, currentGame));
-                Assert.assertEquals(card.getName() + " should have CAT type", true, card.hasSubtype(SubType.CAT, currentGame));
+                Assertions.assertEquals(false, card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should not have ORC type");
+                Assertions.assertEquals(true, card.hasSubtype(SubType.CAT, currentGame), card.getName() + " should have CAT type");
             }
         }
 
         for (Card card : playerA.getHand().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertEquals(card.getName() + " should have ORC type", true, card.hasSubtype(SubType.ORC, currentGame));
-                Assert.assertEquals(card.getName() + " should have CAT type", true, card.hasSubtype(SubType.CAT, currentGame));
+                Assertions.assertEquals(true, card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should have ORC type");
+                Assertions.assertEquals(true, card.hasSubtype(SubType.CAT, currentGame), card.getName() + " should have CAT type");
             }
         }
         for (Card card : playerB.getHand().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertEquals(card.getName() + " should not have ORC type", false, card.hasSubtype(SubType.ORC, currentGame));
-                Assert.assertEquals(card.getName() + " should have CAT type", true, card.hasSubtype(SubType.CAT, currentGame));
+                Assertions.assertEquals(false, card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should not have ORC type");
+                Assertions.assertEquals(true, card.hasSubtype(SubType.CAT, currentGame), card.getName() + " should have CAT type");
             }
         }
         for (Card card : playerA.getGraveyard().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertEquals(card.getName() + " should have ORC type", true, card.hasSubtype(SubType.ORC, currentGame));
-                Assert.assertEquals(card.getName() + " should have CAT type", true, card.hasSubtype(SubType.CAT, currentGame));
+                Assertions.assertEquals(true, card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should have ORC type");
+                Assertions.assertEquals(true, card.hasSubtype(SubType.CAT, currentGame), card.getName() + " should have CAT type");
             }
 
         }
         for (Card card : playerB.getGraveyard().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertEquals(card.getName() + " should not have ORC type", false, card.hasSubtype(SubType.ORC, currentGame));
-                Assert.assertEquals(card.getName() + " should have CAT type", true, card.hasSubtype(SubType.CAT, currentGame));
+                Assertions.assertEquals(false, card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should not have ORC type");
+                Assertions.assertEquals(true, card.hasSubtype(SubType.CAT, currentGame), card.getName() + " should have CAT type");
             }
         }
 
@@ -265,35 +265,35 @@ public class SubTypeChangingEffectsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Disenchant", 1);
 
         Permanent silvercoatLion = getPermanent("Silvercoat Lion", playerA);
-        Assert.assertTrue(silvercoatLion.hasSubtype(SubType.CAT, currentGame));
-        Assert.assertFalse(silvercoatLion.hasSubtype(SubType.ORC, currentGame));
+        Assertions.assertTrue(silvercoatLion.hasSubtype(SubType.CAT, currentGame));
+        Assertions.assertFalse(silvercoatLion.hasSubtype(SubType.ORC, currentGame));
 
         Permanent beast = getPermanent("Beast Token", playerA);
-        Assert.assertTrue(beast.hasSubtype(SubType.BEAST, currentGame));
-        Assert.assertFalse(beast.hasSubtype(SubType.ORC, currentGame));
+        Assertions.assertTrue(beast.hasSubtype(SubType.BEAST, currentGame));
+        Assertions.assertFalse(beast.hasSubtype(SubType.ORC, currentGame));
 
         Permanent wurm = getPermanent("Wurm Token", playerA);
-        Assert.assertTrue(wurm.hasSubtype(SubType.WURM, currentGame));
-        Assert.assertFalse(wurm.hasSubtype(SubType.ORC, currentGame));
+        Assertions.assertTrue(wurm.hasSubtype(SubType.WURM, currentGame));
+        Assertions.assertFalse(wurm.hasSubtype(SubType.ORC, currentGame));
 
         for (Card card : playerA.getLibrary().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertEquals(card.getName() + " should not have ORC type", false, card.hasSubtype(SubType.ORC, currentGame));
-                Assert.assertEquals(card.getName() + " should have CAT type", true, card.hasSubtype(SubType.CAT, currentGame));
+                Assertions.assertEquals(false, card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should not have ORC type");
+                Assertions.assertEquals(true, card.hasSubtype(SubType.CAT, currentGame), card.getName() + " should have CAT type");
             }
         }
 
         for (Card card : playerA.getHand().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertEquals(card.getName() + " should not have ORC type", false, card.hasSubtype(SubType.ORC, currentGame));
-                Assert.assertEquals(card.getName() + " should have CAT type", true, card.hasSubtype(SubType.CAT, currentGame));
+                Assertions.assertEquals(false, card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should not have ORC type");
+                Assertions.assertEquals(true, card.hasSubtype(SubType.CAT, currentGame), card.getName() + " should have CAT type");
             }
         }
 
         for (Card card : playerA.getGraveyard().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertEquals(card.getName() + " should not have ORC type", false, card.hasSubtype(SubType.ORC, currentGame));
-                Assert.assertEquals(card.getName() + " should have CAT type", true, card.hasSubtype(SubType.CAT, currentGame));
+                Assertions.assertEquals(false, card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should not have ORC type");
+                Assertions.assertEquals(true, card.hasSubtype(SubType.CAT, currentGame), card.getName() + " should have CAT type");
             }
 
         }
@@ -364,45 +364,45 @@ public class SubTypeChangingEffectsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Maskwood Nexus", 1);
 
         Permanent silvercoatLion = getPermanent("Silvercoat Lion", playerA);
-        Assert.assertTrue(silvercoatLion.hasSubtype(SubType.CAT, currentGame));
-        Assert.assertTrue(silvercoatLion.hasSubtype(SubType.ORC, currentGame));
+        Assertions.assertTrue(silvercoatLion.hasSubtype(SubType.CAT, currentGame));
+        Assertions.assertTrue(silvercoatLion.hasSubtype(SubType.ORC, currentGame));
 
         silvercoatLion = getPermanent("Silvercoat Lion", playerB);
-        Assert.assertTrue(silvercoatLion.hasSubtype(SubType.CAT, currentGame));
-        Assert.assertFalse(silvercoatLion.hasSubtype(SubType.ORC, currentGame));
+        Assertions.assertTrue(silvercoatLion.hasSubtype(SubType.CAT, currentGame));
+        Assertions.assertFalse(silvercoatLion.hasSubtype(SubType.ORC, currentGame));
 
         for (Card card : playerA.getLibrary().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertTrue(card.getName() + " should have ORC type", card.hasSubtype(SubType.ORC, currentGame));
-                Assert.assertTrue(card.getName() + " should have CAT type", card.hasSubtype(SubType.CAT, currentGame));
+                Assertions.assertTrue(card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should have ORC type");
+                Assertions.assertTrue(card.hasSubtype(SubType.CAT, currentGame), card.getName() + " should have CAT type");
             }
         }
         for (Card card : playerB.getLibrary().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertFalse(card.getName() + " should not have ORC type", card.hasSubtype(SubType.ORC, currentGame));
-                Assert.assertTrue(card.getName() + " should have CAT type", card.hasSubtype(SubType.CAT, currentGame));
+                Assertions.assertFalse(card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should not have ORC type");
+                Assertions.assertTrue(card.hasSubtype(SubType.CAT, currentGame), card.getName() + " should have CAT type");
             }
         }
 
         for (Card card : playerA.getHand().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertTrue(card.getName() + " should have ORC type", card.hasSubtype(SubType.ORC, currentGame));
+                Assertions.assertTrue(card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should have ORC type");
             }
         }
         for (Card card : playerB.getHand().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertFalse(card.getName() + " should not have ORC type", card.hasSubtype(SubType.ORC, currentGame));
+                Assertions.assertFalse(card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should not have ORC type");
             }
         }
         for (Card card : playerA.getGraveyard().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertTrue(card.getName() + " should have ORC type", card.hasSubtype(SubType.ORC, currentGame));
+                Assertions.assertTrue(card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should have ORC type");
             }
 
         }
         for (Card card : playerB.getGraveyard().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertFalse(card.getName() + " should not have ORC type", card.hasSubtype(SubType.ORC, currentGame));
+                Assertions.assertFalse(card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should not have ORC type");
             }
         }
     }
@@ -430,45 +430,45 @@ public class SubTypeChangingEffectsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Maskwood Nexus", 1);
 
         Permanent silvercoatLion = getPermanent("Silvercoat Lion", playerA);
-        Assert.assertTrue(silvercoatLion.hasSubtype(SubType.CAT, currentGame));
-        Assert.assertFalse(silvercoatLion.hasSubtype(SubType.ORC, currentGame));
+        Assertions.assertTrue(silvercoatLion.hasSubtype(SubType.CAT, currentGame));
+        Assertions.assertFalse(silvercoatLion.hasSubtype(SubType.ORC, currentGame));
 
         silvercoatLion = getPermanent("Silvercoat Lion", playerB);
-        Assert.assertTrue(silvercoatLion.hasSubtype(SubType.CAT, currentGame));
-        Assert.assertFalse(silvercoatLion.hasSubtype(SubType.ORC, currentGame));
+        Assertions.assertTrue(silvercoatLion.hasSubtype(SubType.CAT, currentGame));
+        Assertions.assertFalse(silvercoatLion.hasSubtype(SubType.ORC, currentGame));
 
         for (Card card : playerA.getLibrary().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertFalse(card.getName() + " should not have ORC type", card.hasSubtype(SubType.ORC, currentGame));
-                Assert.assertTrue(card.getName() + " should have CAT type", card.hasSubtype(SubType.CAT, currentGame));
+                Assertions.assertFalse(card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should not have ORC type");
+                Assertions.assertTrue(card.hasSubtype(SubType.CAT, currentGame), card.getName() + " should have CAT type");
             }
         }
         for (Card card : playerB.getLibrary().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertFalse(card.getName() + " should not have ORC type", card.hasSubtype(SubType.ORC, currentGame));
-                Assert.assertTrue(card.getName() + " should have CAT type", card.hasSubtype(SubType.CAT, currentGame));
+                Assertions.assertFalse(card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should not have ORC type");
+                Assertions.assertTrue(card.hasSubtype(SubType.CAT, currentGame), card.getName() + " should have CAT type");
             }
         }
 
         for (Card card : playerA.getHand().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertFalse(card.getName() + " should not have ORC type", card.hasSubtype(SubType.ORC, currentGame));
+                Assertions.assertFalse(card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should not have ORC type");
             }
         }
         for (Card card : playerB.getHand().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertFalse(card.getName() + " should not have ORC type", card.hasSubtype(SubType.ORC, currentGame));
+                Assertions.assertFalse(card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should not have ORC type");
             }
         }
         for (Card card : playerA.getGraveyard().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertFalse(card.getName() + " should not have ORC type", card.hasSubtype(SubType.ORC, currentGame));
+                Assertions.assertFalse(card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should not have ORC type");
             }
 
         }
         for (Card card : playerB.getGraveyard().getCards(currentGame)) {
             if (card.isCreature(currentGame)) {
-                Assert.assertFalse(card.getName() + " should not have ORC type", card.hasSubtype(SubType.ORC, currentGame));
+                Assertions.assertFalse(card.hasSubtype(SubType.ORC, currentGame), card.getName() + " should not have ORC type");
             }
         }
     }

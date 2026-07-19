@@ -4,8 +4,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -29,25 +29,25 @@ public class OffspringTest extends CardTestPlayerBase {
         assertTokenCount(playerA, name, paid ? 1 : 0);
 
         Permanent original = getCreature(name, false);
-        Assert.assertEquals(
-                "Original creature should have power " + power,
-                power, original.getPower().getValue()
+        Assertions.assertEquals(
+                power,
+                original.getPower().getValue(), "Original creature should have power " + power
         );
-        Assert.assertEquals(
-                "Original creature should have toughness " + toughness,
-                toughness, original.getToughness().getValue()
+        Assertions.assertEquals(
+                toughness,
+                original.getToughness().getValue(), "Original creature should have toughness " + toughness
         );
         if (!paid) {
             return;
         }
         Permanent token = getCreature(name, true);
-        Assert.assertEquals(
-                "Token creature should have power 1",
-                1, token.getPower().getValue()
+        Assertions.assertEquals(
+                1,
+                token.getPower().getValue(), "Token creature should have power 1"
         );
-        Assert.assertEquals(
-                "Token creature should have toughness 1",
-                1, token.getToughness().getValue()
+        Assertions.assertEquals(
+                1,
+                token.getToughness().getValue(), "Token creature should have toughness 1"
         );
     }
 

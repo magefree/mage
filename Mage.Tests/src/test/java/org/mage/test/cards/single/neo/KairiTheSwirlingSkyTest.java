@@ -2,8 +2,8 @@ package org.mage.test.cards.single.neo;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -83,6 +83,6 @@ public class KairiTheSwirlingSkyTest extends CardTestPlayerBase {
         } catch (AssertionError e) {
             foundError = e.getMessage();
         }
-        Assert.assertEquals("PlayerA - Targets list was setup by addTarget with [Axebane Stag], but not used", foundError.split("\n")[0]);
+        Assertions.assertEquals("PlayerA - Targets list was setup by addTarget with [Axebane Stag], but not used", foundError.split("\n")[0]);
     }
 }

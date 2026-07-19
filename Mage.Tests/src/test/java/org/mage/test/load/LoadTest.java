@@ -18,10 +18,10 @@ import mage.util.ThreadUtils;
 import mage.util.XmageThreadFactory;
 import mage.view.*;
 import org.apache.log4j.Logger;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.utils.DeckTestUtils;
 
 import java.time.Instant;
@@ -58,7 +58,7 @@ public class LoadTest {
     private static String TEST_AI_CUSTOM_DECK_PATH_1 = ""; // custom deck file instead random for player 1 (empty for random)
     private static String TEST_AI_CUSTOM_DECK_PATH_2 = ""; // custom deck file instead random for player 2 (empty for random)
 
-    @BeforeClass
+    @BeforeAll
     public static void initDatabase() {
         // recreate missing cards db
         CardScanner.scan();
@@ -73,87 +73,87 @@ public class LoadTest {
         Deck deck;
 
         deck = DeckTestUtils.buildRandomDeck("G", false);
-        Assert.assertNotNull(deck);
+        Assertions.assertNotNull(deck);
         for (Card card : deck.getCards()) {
-            Assert.assertNotNull(card);
-            Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in G",
-                    card.getColorIdentity().isGreen());
+            Assertions.assertNotNull(card);
+            Assertions.assertTrue(card.getColorIdentity().isGreen(),
+                    "card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in G");
         }
 
         deck = DeckTestUtils.buildRandomDeck("U", false);
-        Assert.assertNotNull(deck);
+        Assertions.assertNotNull(deck);
         for (Card card : deck.getCards()) {
-            Assert.assertNotNull(card);
-            Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in U",
-                    card.getColorIdentity().isBlue());
+            Assertions.assertNotNull(card);
+            Assertions.assertTrue(card.getColorIdentity().isBlue(),
+                    "card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in U");
         }
 
         deck = DeckTestUtils.buildRandomDeck("BR", false);
-        Assert.assertNotNull(deck);
+        Assertions.assertNotNull(deck);
         for (Card card : deck.getCards()) {
-            Assert.assertNotNull(card);
-            Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in BR",
-                    card.getColorIdentity().isBlack() || card.getColorIdentity().isRed());
+            Assertions.assertNotNull(card);
+            Assertions.assertTrue(card.getColorIdentity().isBlack() || card.getColorIdentity().isRed(),
+                    "card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in BR");
         }
 
         deck = DeckTestUtils.buildRandomDeck("BUG", false);
-        Assert.assertNotNull(deck);
+        Assertions.assertNotNull(deck);
         for (Card card : deck.getCards()) {
-            Assert.assertNotNull(card);
-            Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in BUG",
-                    card.getColorIdentity().isBlack() || card.getColorIdentity().isBlue() || card.getColorIdentity().isGreen());
+            Assertions.assertNotNull(card);
+            Assertions.assertTrue(card.getColorIdentity().isBlack() || card.getColorIdentity().isBlue() || card.getColorIdentity().isGreen(),
+                    "card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in BUG");
         }
 
         // lands
         deck = DeckTestUtils.buildRandomDeck("UR", true);
-        Assert.assertNotNull(deck);
+        Assertions.assertNotNull(deck);
         for (Card card : deck.getCards()) {
-            Assert.assertNotNull(card);
-            Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in UR",
-                    card.getColorIdentity().isBlue() || card.getColorIdentity().isRed());
-            Assert.assertEquals("card " + card.getName() + " must be basic land ", Rarity.LAND, card.getRarity());
+            Assertions.assertNotNull(card);
+            Assertions.assertTrue(card.getColorIdentity().isBlue() || card.getColorIdentity().isRed(),
+                    "card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in UR");
+            Assertions.assertEquals(Rarity.LAND, card.getRarity(), "card " + card.getName() + " must be basic land ");
         }
 
         deck = DeckTestUtils.buildRandomDeck("B", true);
-        Assert.assertNotNull(deck);
+        Assertions.assertNotNull(deck);
         for (Card card : deck.getCards()) {
-            Assert.assertNotNull(card);
-            Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in B", card.getColorIdentity().isBlack());
-            Assert.assertEquals("card " + card.getName() + " must be basic land ", Rarity.LAND, card.getRarity());
+            Assertions.assertNotNull(card);
+            Assertions.assertTrue(card.getColorIdentity().isBlack(), "card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in B");
+            Assertions.assertEquals(Rarity.LAND, card.getRarity(), "card " + card.getName() + " must be basic land ");
         }
 
         // allowed sets
         deck = DeckTestUtils.buildRandomDeck("B", true, "GRN");
-        Assert.assertNotNull(deck);
+        Assertions.assertNotNull(deck);
         for (Card card : deck.getCards()) {
-            Assert.assertNotNull(card);
-            Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in B", card.getColorIdentity().isBlack());
-            Assert.assertEquals("card " + card.getName() + " have wrong set code " + card.getExpansionSetCode(), "GRN", card.getExpansionSetCode());
+            Assertions.assertNotNull(card);
+            Assertions.assertTrue(card.getColorIdentity().isBlack(), "card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in B");
+            Assertions.assertEquals("GRN", card.getExpansionSetCode(), "card " + card.getName() + " have wrong set code " + card.getExpansionSetCode());
         }
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void test_UsersConnectToServer() throws Exception {
 
         // simple connection to server
         // monitor other players
         LoadPlayer monitor = new LoadPlayer("mon", "mon");
-        Assert.assertTrue(monitor.session.isConnected());
+        Assertions.assertTrue(monitor.session.isConnected());
         int startUsersCount = monitor.getAllRoomUsers().size();
         int minimumSleepTime = 2000;
 
         // user 1
         LoadPlayer player1 = new LoadPlayer("1", "p1 ");
         Thread.sleep(minimumSleepTime);
-        Assert.assertEquals("Can't see users count change 1", startUsersCount + 1, monitor.getAllRoomUsers().size());
-        Assert.assertNotNull("Can't find user 1", monitor.findUser(player1.userName));
+        Assertions.assertEquals(startUsersCount + 1, monitor.getAllRoomUsers().size(), "Can't see users count change 1");
+        Assertions.assertNotNull(monitor.findUser(player1.userName), "Can't find user 1");
 
         // user 2
         LoadPlayer player2 = new LoadPlayer("2", "p2 ");
         Thread.sleep(minimumSleepTime);
-        Assert.assertEquals("Can't see users count change 2", startUsersCount + 2, monitor.getAllRoomUsers().size());
-        Assert.assertNotNull("Can't find user 2", monitor.findUser(player2.userName));
+        Assertions.assertEquals(startUsersCount + 2, monitor.getAllRoomUsers().size(), "Can't see users count change 2");
+        Assertions.assertNotNull(monitor.findUser(player2.userName), "Can't find user 2");
 
         player1.disconnect();
         player2.disconnect();
@@ -161,7 +161,7 @@ public class LoadTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void test_TwoUsersPlayGameUntilEnd() {
 
         // monitor other players
@@ -176,7 +176,7 @@ public class LoadTest {
         MatchOptions gameOptions = createSimpleGameOptionsForBots(gameType, player1.session);
         TableView game = player1.session.createTable(player1.roomID, gameOptions);
         UUID tableId = game.getTableId();
-        Assert.assertEquals(player1.userName, game.getControllerName());
+        Assertions.assertEquals(player1.userName, game.getControllerName());
 
         DeckCardLists deckList = loadGameDeck(1, TEST_AI_RANDOM_DECK_COLORS_FOR_EMPTY_GAME, true, TEST_AI_RANDOM_DECK_SETS);
         Optional<TableView> checkGame;
@@ -187,29 +187,29 @@ public class LoadTest {
         }*/
         // before connect
         checkGame = monitor.getTable(tableId);
-        Assert.assertTrue(checkGame.isPresent());
-        Assert.assertEquals(2, checkGame.get().getSeats().size());
-        Assert.assertEquals("", checkGame.get().getSeats().get(0).getPlayerName());
-        Assert.assertEquals("", checkGame.get().getSeats().get(1).getPlayerName());
+        Assertions.assertTrue(checkGame.isPresent());
+        Assertions.assertEquals(2, checkGame.get().getSeats().size());
+        Assertions.assertEquals("", checkGame.get().getSeats().get(0).getPlayerName());
+        Assertions.assertEquals("", checkGame.get().getSeats().get(1).getPlayerName());
 
         // connect user 1
-        Assert.assertTrue(player1.session.joinTable(player1.roomID, tableId, player1.userName, PlayerType.HUMAN, 1, deckList, ""));
+        Assertions.assertTrue(player1.session.joinTable(player1.roomID, tableId, player1.userName, PlayerType.HUMAN, 1, deckList, ""));
         checkGame = monitor.getTable(tableId);
-        Assert.assertTrue(checkGame.isPresent());
-        Assert.assertEquals(2, checkGame.get().getSeats().size());
-        Assert.assertEquals(player1.userName, checkGame.get().getSeats().get(0).getPlayerName());
-        Assert.assertEquals("", checkGame.get().getSeats().get(1).getPlayerName());
+        Assertions.assertTrue(checkGame.isPresent());
+        Assertions.assertEquals(2, checkGame.get().getSeats().size());
+        Assertions.assertEquals(player1.userName, checkGame.get().getSeats().get(0).getPlayerName());
+        Assertions.assertEquals("", checkGame.get().getSeats().get(1).getPlayerName());
 
         // connect user 2
-        Assert.assertTrue(player2.session.joinTable(player2.roomID, tableId, player2.userName, PlayerType.HUMAN, 1, deckList, ""));
+        Assertions.assertTrue(player2.session.joinTable(player2.roomID, tableId, player2.userName, PlayerType.HUMAN, 1, deckList, ""));
         checkGame = monitor.getTable(tableId);
-        Assert.assertTrue(checkGame.isPresent());
-        Assert.assertEquals(2, checkGame.get().getSeats().size());
-        Assert.assertEquals(player1.userName, checkGame.get().getSeats().get(0).getPlayerName());
-        Assert.assertEquals(player2.userName, checkGame.get().getSeats().get(1).getPlayerName());
+        Assertions.assertTrue(checkGame.isPresent());
+        Assertions.assertEquals(2, checkGame.get().getSeats().size());
+        Assertions.assertEquals(player1.userName, checkGame.get().getSeats().get(0).getPlayerName());
+        Assertions.assertEquals(player2.userName, checkGame.get().getSeats().get(1).getPlayerName());
 
         // match start
-        Assert.assertTrue(player1.session.startMatch(player1.roomID, tableId));
+        Assertions.assertTrue(player1.session.startMatch(player1.roomID, tableId));
 
         // playing until game over
         while (!player1.client.isGameOver() && !player2.client.isGameOver()) {
@@ -228,7 +228,7 @@ public class LoadTest {
     }
 
     public void playTwoAIGame(String gameName, Integer taskNumber, TasksProgress tasksProgress, long randomSeed, String deckColors, String deckAllowedSets, LoadTestGameResult gameResult) {
-        Assert.assertFalse("need deck colors", deckColors.isEmpty());
+        Assertions.assertFalse(deckColors.isEmpty(), "need deck colors");
 
         // monitor and game source
         LoadPlayer monitor = new LoadPlayer("mon", true, gameName + ", mon");
@@ -245,11 +245,11 @@ public class LoadTest {
         DeckCardLists deckList2 = loadGameDeck(2, deckColors, deckAllowedSets.equals("PELP"), deckAllowedSets);
 
         // join AI
-        Assert.assertTrue(monitor.session.joinTable(monitor.roomID, tableId, "ai_1", PlayerType.COMPUTER_MAD, 5, deckList1, ""));
-        Assert.assertTrue(monitor.session.joinTable(monitor.roomID, tableId, "ai_2", PlayerType.COMPUTER_MAD, 5, deckList2, ""));
+        Assertions.assertTrue(monitor.session.joinTable(monitor.roomID, tableId, "ai_1", PlayerType.COMPUTER_MAD, 5, deckList1, ""));
+        Assertions.assertTrue(monitor.session.joinTable(monitor.roomID, tableId, "ai_2", PlayerType.COMPUTER_MAD, 5, deckList2, ""));
 
         // match start
-        Assert.assertTrue(monitor.session.startMatch(monitor.roomID, tableId));
+        Assertions.assertTrue(monitor.session.startMatch(monitor.roomID, tableId));
 
         // playing until game over
         gameResult.start();
@@ -295,7 +295,7 @@ public class LoadTest {
             }
 
             if (!startToWatching && state == TableState.DUELING) {
-                Assert.assertTrue(monitor.session.watchGame(checkGame.getGames().iterator().next()));
+                Assertions.assertTrue(monitor.session.watchGame(checkGame.getGames().iterator().next()));
                 startToWatching = true;
             }
 
@@ -339,7 +339,7 @@ public class LoadTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void test_TwoAIPlayGame_One() {
         LoadTestGameResultsList gameResults = new LoadTestGameResultsList();
         long randomSeed = RandomUtil.nextInt();
@@ -352,7 +352,7 @@ public class LoadTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void test_TwoAIPlayGame_Debug() {
         // usage:
         // - run test_TwoAIPlayGame_Multiple
@@ -377,7 +377,7 @@ public class LoadTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void test_TwoAIPlayGame_Multiple() {
         // play multiple AI games with CLIENT side code (catch every GameView changes from the server)
 
@@ -429,7 +429,7 @@ public class LoadTest {
             if (runMaxParallelGames > 1) {
                 // run parallel
                 executerService.shutdown();
-                Assert.assertTrue("running too long", executerService.awaitTermination(1, TimeUnit.HOURS));
+                Assertions.assertTrue(executerService.awaitTermination(1, TimeUnit.HOURS), "running too long");
             }
 
             // check errors
@@ -443,18 +443,18 @@ public class LoadTest {
                 }
             }
             if (errorsCount > 0) {
-                Assert.fail(String.format("Found %d critical errors in running games, see logs above", errorsCount));
+                Assertions.fail(String.format("Found %d critical errors in running games, see logs above", errorsCount));
             }
         } catch (InterruptedException | ExecutionException e) {
             logger.error(e, e);
-            Assert.fail("Game stops too early: " + e);
+            Assertions.fail("Game stops too early: " + e);
         }
 
         printGameResults(gameResults);
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void test_GameThread() {
         // simple game thread to the end
 
@@ -474,11 +474,11 @@ public class LoadTest {
             }
         }
 
-        Assert.assertEquals("finished", game.gameResult);
+        Assertions.assertEquals("finished", game.gameResult);
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void test_GameThreadWithAbort() {
         // simple game thread to abort
 
@@ -490,11 +490,11 @@ public class LoadTest {
         );
         game.gameStart();
         game.gameEnd(true); // abort -- close client thread
-        Assert.assertEquals("aborted", game.gameResult);
+        Assertions.assertEquals("aborted", game.gameResult);
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void test_GameThreadWithRealCards() {
         // simple game thread to the end with creatures cards
 
@@ -507,11 +507,11 @@ public class LoadTest {
 
         game.gameStart();
         game.gameWaitToStop();
-        Assert.assertEquals("finished", game.gameResult);
+        Assertions.assertEquals("finished", game.gameResult);
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void test_GameThreadWithConcede() {
         // simple game thread with concede
 
@@ -530,13 +530,13 @@ public class LoadTest {
         }
         game.gameConcede(1);
         game.gameWaitToStop();
-        Assert.assertEquals("finished", game.gameResult);
-        Assert.assertEquals("lose", game.player1.lastGameResult);
-        Assert.assertEquals("win", game.player2.lastGameResult);
+        Assertions.assertEquals("finished", game.gameResult);
+        Assertions.assertEquals("lose", game.player1.lastGameResult);
+        Assertions.assertEquals("win", game.player2.lastGameResult);
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void test_MultipleGames() {
         // for load testing only (example: memory usage, max games limit, network usage)
         // play multiple EMPTY games with SERVER side only (without AI),
@@ -609,7 +609,7 @@ public class LoadTest {
             for (String s : errors) {
                 System.out.println(s);
             }
-            Assert.fail("Not all games finished");
+            Assertions.fail("Not all games finished");
         }
     }
 
@@ -629,8 +629,8 @@ public class LoadTest {
         options.getPlayerTypes().add(playersType);
         options.getPlayerTypes().add(playersType);
 
-        Assert.assertTrue("Can't find game type on the server: " + TEST_AI_DECK_TYPE,
-                Arrays.asList(session.getDeckTypes()).contains(TEST_AI_DECK_TYPE));
+        Assertions.assertTrue(Arrays.asList(session.getDeckTypes()).contains(TEST_AI_DECK_TYPE),
+                "Can't find game type on the server: " + TEST_AI_DECK_TYPE);
         options.setDeckType(TEST_AI_DECK_TYPE);
         options.setLimited(false);
         options.setAttackOption(MultiplayerAttackOption.MULTIPLE);
@@ -719,8 +719,8 @@ public class LoadTest {
             this.client.setSession(this.session);
             this.roomID = this.session.getMainRoomId();
 
-            Assert.assertTrue("client must be connected to server", this.session.isConnected());
-            Assert.assertTrue("client must get server data", this.session.isServerReady());
+            Assertions.assertTrue(this.session.isConnected(), "client must be connected to server");
+            Assertions.assertTrue(this.session.isServerReady(), "client must get server data");
         }
 
         public ArrayList<UsersView> getAllRoomUsers() {
@@ -753,7 +753,7 @@ public class LoadTest {
             MatchOptions gameOptions = createSimpleGameOptionsForBots(gameType, this.session);
             TableView game = this.session.createTable(this.roomID, gameOptions);
             this.createdTableID = game.getTableId();
-            Assert.assertEquals(this.userName, game.getControllerName());
+            Assertions.assertEquals(this.userName, game.getControllerName());
 
             connectToTable(this.createdTableID);
 
@@ -761,13 +761,13 @@ public class LoadTest {
         }
 
         public void connectToTable(UUID tableID) {
-            Assert.assertTrue(this.session.joinTable(this.roomID, tableID, this.userName, PlayerType.HUMAN, 1, this.deckList, ""));
+            Assertions.assertTrue(this.session.joinTable(this.roomID, tableID, this.userName, PlayerType.HUMAN, 1, this.deckList, ""));
             this.connectedTableID = tableID;
         }
 
         public void startMatch() {
-            Assert.assertNotNull(this.createdTableID);
-            Assert.assertTrue(this.session.startMatch(this.roomID, this.createdTableID));
+            Assertions.assertNotNull(this.createdTableID);
+            Assertions.assertTrue(this.session.startMatch(this.roomID, this.createdTableID));
         }
 
         public void setDeckList(DeckCardLists deckList) {
@@ -817,7 +817,7 @@ public class LoadTest {
             runningThread = new Thread(() -> {
                 try {
                     this.tableID = this.player1.createNewTable();
-                    Assert.assertNotNull(this.tableID);
+                    Assertions.assertNotNull(this.tableID);
                     this.player2.connectToTable(this.tableID);
                     this.gameResult = "prepared";
 
@@ -1099,7 +1099,7 @@ public class LoadTest {
                 .filter(m -> m.getName().equals(TEST_AI_GAME_MODE))
                 .findFirst()
                 .orElse(null);
-        Assert.assertNotNull("Can't find game type on the server: " + TEST_AI_GAME_MODE, gameType);
+        Assertions.assertNotNull(gameType, "Can't find game type on the server: " + TEST_AI_GAME_MODE);
         return gameType;
     }
 
@@ -1110,13 +1110,13 @@ public class LoadTest {
             case 1:
                 if (!TEST_AI_CUSTOM_DECK_PATH_1.isEmpty()) {
                     deckList = DeckImporter.importDeckFromFile(TEST_AI_CUSTOM_DECK_PATH_1, false);
-                    Assert.assertFalse("Can't load custom deck 1 from " + TEST_AI_CUSTOM_DECK_PATH_1, deckList.getCards().isEmpty());
+                    Assertions.assertFalse(deckList.getCards().isEmpty(), "Can't load custom deck 1 from " + TEST_AI_CUSTOM_DECK_PATH_1);
                 }
                 break;
             case 2:
                 if (!TEST_AI_CUSTOM_DECK_PATH_2.isEmpty()) {
                     deckList = DeckImporter.importDeckFromFile(TEST_AI_CUSTOM_DECK_PATH_2, false);
-                    Assert.assertFalse("Can't load custom deck 2 from " + TEST_AI_CUSTOM_DECK_PATH_2, deckList.getCards().isEmpty());
+                    Assertions.assertFalse(deckList.getCards().isEmpty(), "Can't load custom deck 2 from " + TEST_AI_CUSTOM_DECK_PATH_2);
                 }
                 break;
             default:
@@ -1137,7 +1137,7 @@ public class LoadTest {
         gameResults.printResultTotal();
 
         if (gameResults.getAvgTurn() == 0) {
-            Assert.fail("Games can't start, make sure you are run a localhost server before running current load test");
+            Assertions.fail("Games can't start, make sure you are run a localhost server before running current load test");
         }
     }
 }

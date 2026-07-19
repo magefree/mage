@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -34,10 +34,10 @@ public class PutToLibraryTest extends CardTestPlayerBase {
         assertLife(playerB, 23);
 
         ArrayList<Card> cardArray = new ArrayList<>(playerB.getLibrary().getCards(currentGame));
-        Assert.assertTrue("Library has no cards but should have", cardArray.size() > 1);
+        Assertions.assertTrue(cardArray.size() > 1, "Library has no cards but should have");
         Card secondCard = cardArray.get(1);
-        Assert.assertTrue("Second card from top should be Dread Wanderer, but it isn't",
-                secondCard != null && secondCard.getName().equals("Dread Wanderer"));
+        Assertions.assertTrue(secondCard != null && secondCard.getName().equals("Dread Wanderer"),
+                "Second card from top should be Dread Wanderer, but it isn't");
 
     }
 
@@ -63,10 +63,10 @@ public class PutToLibraryTest extends CardTestPlayerBase {
         assertLibraryCount(playerA, "Skyrider Patrol", 1);
 
         ArrayList<Card> cardArray = new ArrayList<>(playerA.getLibrary().getCards(currentGame));
-        Assert.assertTrue("Library has no cards but should have", cardArray.size() > 3);
+        Assertions.assertTrue(cardArray.size() > 3, "Library has no cards but should have");
         Card fourthCard = cardArray.get(3);// get the 4th element
-        Assert.assertTrue("Fourth card from top should be Skyrider Patrol, but it isn't",
-                fourthCard != null && fourthCard.getName().equals("Skyrider Patrol"));
+        Assertions.assertTrue(fourthCard != null && fourthCard.getName().equals("Skyrider Patrol"),
+                "Fourth card from top should be Skyrider Patrol, but it isn't");
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);

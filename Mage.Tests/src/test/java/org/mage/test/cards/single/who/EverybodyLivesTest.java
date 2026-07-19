@@ -7,7 +7,7 @@ import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestCommander4Players;
 
 public class EverybodyLivesTest extends CardTestCommander4Players {

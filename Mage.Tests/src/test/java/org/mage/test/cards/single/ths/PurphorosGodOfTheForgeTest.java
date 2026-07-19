@@ -4,8 +4,8 @@ import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -50,7 +50,7 @@ public class PurphorosGodOfTheForgeTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
 
         Permanent purphorosGodOfTheForge = getPermanent("Purphoros, God of the Forge", playerA);
-        Assert.assertFalse("Purphoros may not be a creature but it is", purphorosGodOfTheForge.isCreature(currentGame));
+        Assertions.assertFalse(purphorosGodOfTheForge.isCreature(currentGame), "Purphoros may not be a creature but it is");
     }
 
     @Test
@@ -84,7 +84,7 @@ public class PurphorosGodOfTheForgeTest extends CardTestPlayerBase {
         assertLife(playerB, 18); // 2 damage from Purphoros for the morphed Phoenix
 
         Permanent purphorosGodOfTheForge = getPermanent("Purphoros, God of the Forge", playerA);
-        Assert.assertFalse("Purphoros may not be a creature but it is", purphorosGodOfTheForge.isCreature(currentGame));
+        Assertions.assertFalse(purphorosGodOfTheForge.isCreature(currentGame), "Purphoros may not be a creature but it is");
     }
 
     @Test
@@ -105,6 +105,6 @@ public class PurphorosGodOfTheForgeTest extends CardTestPlayerBase {
 
         assertLife(playerB, 18);
         Permanent purphorosGodOfTheForge = getPermanent("Purphoros, God of the Forge", playerA);
-        Assert.assertTrue("Purphoros should be a creature now but is not", purphorosGodOfTheForge.isCreature(currentGame));
+        Assertions.assertTrue(purphorosGodOfTheForge.isCreature(currentGame), "Purphoros should be a creature now but is not");
     }
 }

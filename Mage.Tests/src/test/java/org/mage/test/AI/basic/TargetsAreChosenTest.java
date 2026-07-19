@@ -3,8 +3,8 @@ package org.mage.test.AI.basic;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.Filter;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseAI;
 
 /**
@@ -172,7 +172,7 @@ public class TargetsAreChosenTest extends CardTestPlayerBaseAI {
      * Test that AI counters creature spell
      */
     @Test
-    @Ignore  // counter spells don't seem to be cast by AI
+    @Disabled  // counter spells don't seem to be cast by AI
     public void testRewind() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         // Counter target spell. Untap up to four lands.

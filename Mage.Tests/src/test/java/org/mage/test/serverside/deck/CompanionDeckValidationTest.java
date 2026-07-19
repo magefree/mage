@@ -1,7 +1,7 @@
 package org.mage.test.serverside.deck;
 
 import mage.deck.Commander;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.MageTestPlayerBase;
 
 /**

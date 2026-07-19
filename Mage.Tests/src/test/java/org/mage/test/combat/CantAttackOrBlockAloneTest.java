@@ -3,8 +3,8 @@ package org.mage.test.combat;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -28,7 +28,7 @@ public class CantAttackOrBlockAloneTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
 
         Permanent moggFlunkies = getPermanent("Mogg Flunkies", playerB.getId());
-        Assert.assertFalse("Shouldn't be tapped because it can't attack alone", moggFlunkies.isTapped());
+        Assertions.assertFalse(moggFlunkies.isTapped(), "Shouldn't be tapped because it can't attack alone");
     }
 
     /**

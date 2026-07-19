@@ -2,8 +2,8 @@ package org.mage.test.cards.single.woe;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -94,10 +94,10 @@ public class GracefulTakedownTest extends CardTestPlayerBase {
 
         try {
             execute();
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("PlayerA - Targets list was setup by addTarget")) {
-                Assert.fail("must throw error about target setup not right, but got:\n" + e.getMessage());
+                Assertions.fail("must throw error about target setup not right, but got:\n" + e.getMessage());
             }
         }
     }

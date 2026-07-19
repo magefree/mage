@@ -11,8 +11,8 @@ import mage.game.permanent.PermanentImpl;
 import mage.view.AbilityPickerView;
 import mage.view.GameView;
 import mage.view.SimpleCardView;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import java.util.ArrayList;
@@ -34,12 +34,12 @@ public class AbilityPickerTest extends CardTestPlayerBase {
     public void test_PickerChoices_FusedSpells() {
         // must be 3 spells for choices
         Abilities<Ability> abilities = getAbilitiesFromCard("Armed // Dangerous");
-        Assert.assertEquals(3, abilities.size());
+        Assertions.assertEquals(3, abilities.size());
 
         AbilityPickerView view = new AbilityPickerView(prepareGameView(), "test name", abilities, "test message");
-        Assert.assertEquals(3, view.getChoices().size());
+        Assertions.assertEquals(3, view.getChoices().size());
         view.getChoices().values().forEach(c -> {
-            Assert.assertTrue("Must start with Cast text, but found: " + c, c.contains("Cast "));
+            Assertions.assertTrue(c.contains("Cast "), "Must start with Cast text, but found: " + c);
         });
     }
 
@@ -47,15 +47,15 @@ public class AbilityPickerTest extends CardTestPlayerBase {
     public void test_PickerChoices_AdventureSpells() {
         // must be 2 spells for choices and 1 static ability
         Abilities<Ability> abilities = getAbilitiesFromCard("Foulmire Knight");
-        Assert.assertEquals(3, abilities.size());
+        Assertions.assertEquals(3, abilities.size());
 
         AbilityPickerView view = new AbilityPickerView(prepareGameView(), "test name", abilities, "test message");
-        Assert.assertEquals(3, view.getChoices().size());
+        Assertions.assertEquals(3, view.getChoices().size());
         view.getChoices().values().forEach(c -> {
             if (c.contains("Deathtouch")) {
                 return;
             }
-            Assert.assertTrue("Must start with Cast text, but found: " + c, c.contains("Cast "));
+            Assertions.assertTrue(c.contains("Cast "), "Must start with Cast text, but found: " + c);
         });
     }
 
@@ -63,10 +63,10 @@ public class AbilityPickerTest extends CardTestPlayerBase {
     public void test_PickerChoices_ActivatedAbilities() {
         // must be 1 cast + 3 abilities
         Abilities<Ability> abilities = getAbilitiesFromCard("Dimir Cluestone");
-        Assert.assertEquals(4, abilities.size());
+        Assertions.assertEquals(4, abilities.size());
 
         AbilityPickerView view = new AbilityPickerView(prepareGameView(), "test name", abilities, "test message");
-        Assert.assertEquals(4, view.getChoices().size());
+        Assertions.assertEquals(4, view.getChoices().size());
         int castCount = 0;
         int abilsCount = 0;
         for (String c : view.getChoices().values()) {
@@ -76,20 +76,20 @@ public class AbilityPickerTest extends CardTestPlayerBase {
                 abilsCount++;
             }
         }
-        Assert.assertEquals(1, castCount);
-        Assert.assertEquals(3, abilsCount);
+        Assertions.assertEquals(1, castCount);
+        Assertions.assertEquals(3, abilsCount);
     }
 
     @Test
     public void test_PickerChoices_AdditionalSpells() {
         // must be 2 cast
         Abilities<Ability> abilities = getAbilitiesFromCard("Cling to Dust");
-        Assert.assertEquals(2, abilities.size());
+        Assertions.assertEquals(2, abilities.size());
 
         AbilityPickerView view = new AbilityPickerView(prepareGameView(), "test name", abilities, "test message");
-        Assert.assertEquals(2, view.getChoices().size());
+        Assertions.assertEquals(2, view.getChoices().size());
         view.getChoices().values().forEach(c -> {
-            Assert.assertTrue("Must start with Cast text, but found: " + c, c.contains("Cast "));
+            Assertions.assertTrue(c.contains("Cast "), "Must start with Cast text, but found: " + c);
         });
     }
 
@@ -154,7 +154,7 @@ public class AbilityPickerTest extends CardTestPlayerBase {
                 .map(Ability::getRule)
                 .sorted()
                 .collect(Collectors.toList());
-        Assert.assertEquals("wrong server side playable list", need.toString(), realList.toString());
+        Assertions.assertEquals(need.toString(), realList.toString(), "wrong server side playable list");
 
         // client side as game data
         GameView gameView = getGameView(playerA);
@@ -166,6 +166,6 @@ public class AbilityPickerTest extends CardTestPlayerBase {
             });
         });
         Collections.sort(realList);
-        Assert.assertEquals("wrong client side playable list", need.toString(), realList.toString());
+        Assertions.assertEquals(need.toString(), realList.toString(), "wrong client side playable list");
     }
 }

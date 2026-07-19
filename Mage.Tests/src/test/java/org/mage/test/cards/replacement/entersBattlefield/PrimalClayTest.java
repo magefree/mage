@@ -7,8 +7,8 @@ import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -68,7 +68,7 @@ public class PrimalClayTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore("current workaround implementation doesn't account for this")
+    @Disabled("current workaround implementation doesn't account for this")
     public void testClaySubtypeGained() {
         addCard(Zone.HAND, playerA, clay);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
@@ -114,7 +114,7 @@ public class PrimalClayTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, cryptoplasm, 1);
     }
 
-    @Ignore("Chosen characteristics of Primal Clay should be copiable values")
+    @Disabled("Chosen characteristics of Primal Clay should be copiable values")
     @Test
     public void testClayCopySubtypeOnBattlefield() {
         addCard(Zone.HAND, playerA, clay);

@@ -2,8 +2,8 @@ package org.mage.test.cards.cost.alternate;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -195,7 +195,7 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore // TODO: make test to check combo of alternative cost and cost reduction effects
+    @Disabled // TODO: make test to check combo of alternative cost and cost reduction effects
     public void test_Playable_WithCostReduction() {
         addCard(Zone.HAND, playerA, "xxx");
 

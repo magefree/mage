@@ -3,8 +3,8 @@ package org.mage.test.cards.rules;
 import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -28,7 +28,7 @@ public class AdditionalCostRuleTest extends CardTestPlayerBase {
                 break;
             }
         }
-        Assert.assertTrue("Couldn't find rule text for additional cost on a card: " + firewildBorderpost.getName(), found);
+        Assertions.assertTrue(found, "Couldn't find rule text for additional cost on a card: " + firewildBorderpost.getName());
     }
 
 

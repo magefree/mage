@@ -3,9 +3,9 @@ package org.mage.test.utils;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class CardRepositoryTest {
 
-    @Before
+    @BeforeEach
     public void setUp() {
         CardScanner.scan();
     }
@@ -147,18 +147,18 @@ public class CardRepositoryTest {
         // Consecrate   // Consume
         // {1}{W/B}     // {2}{W}{B}
         List<CardInfo> fullCard1 = CardRepository.instance.findCards("Consecrate", 1, false, true);
-        Assert.assertTrue(fullCard1.get(0).isSplitCard());
-        Assert.assertEquals("Consecrate // Consume", fullCard1.get(0).getName());
+        Assertions.assertTrue(fullCard1.get(0).isSplitCard());
+        Assertions.assertEquals("Consecrate // Consume", fullCard1.get(0).getName());
         List<CardInfo> fullCard2 = CardRepository.instance.findCards("Consume", 1, false, true);
-        Assert.assertTrue(fullCard2.get(0).isSplitCard());
-        Assert.assertEquals("Consecrate // Consume", fullCard2.get(0).getName());
+        Assertions.assertTrue(fullCard2.get(0).isSplitCard());
+        Assertions.assertEquals("Consecrate // Consume", fullCard2.get(0).getName());
 
         List<CardInfo> splitHalfCardLeft = CardRepository.instance.findCards("Consecrate", 1, true, true);
-        Assert.assertTrue(splitHalfCardLeft.get(0).isSplitCardHalf());
-        Assert.assertEquals("Consecrate", splitHalfCardLeft.get(0).getName());
+        Assertions.assertTrue(splitHalfCardLeft.get(0).isSplitCardHalf());
+        Assertions.assertEquals("Consecrate", splitHalfCardLeft.get(0).getName());
         List<CardInfo> splitHalfCardRight = CardRepository.instance.findCards("Consume", 1, true, true);
-        Assert.assertTrue(splitHalfCardRight.get(0).isSplitCardHalf());
-        Assert.assertEquals("Consume", splitHalfCardRight.get(0).getName());
+        Assertions.assertTrue(splitHalfCardRight.get(0).isSplitCardHalf());
+        Assertions.assertEquals("Consume", splitHalfCardRight.get(0).getName());
     }
 
     /**
@@ -169,9 +169,9 @@ public class CardRepositoryTest {
      */
     private void assertFindCard(String cardName) {
         List<CardInfo> foundCards = CardRepository.instance.findCards(cardName);
-        Assert.assertFalse(
-                "Could not find " + "\"" + cardName + "\".",
-                foundCards.isEmpty()
+        Assertions.assertFalse(
+                foundCards.isEmpty(),
+                "Could not find " + "\"" + cardName + "\"."
         );
     }
 
@@ -182,14 +182,14 @@ public class CardRepositoryTest {
     @Test
     public void test_SearchSecondSides_FindCard() {
         // XLN - Ixalan - Arguel's Blood Fast -> Temple of Aclazotz - 90
-        Assert.assertEquals("Arguel's Blood Fast", CardRepository.instance.findCard("XLN", "90").getName());
-        Assert.assertEquals("Arguel's Blood Fast", CardRepository.instance.findCard("XLN", "90", true).getName());
-        Assert.assertEquals("Arguel's Blood Fast", CardRepository.instance.findCard("XLN", "90", false).getName());
+        Assertions.assertEquals("Arguel's Blood Fast", CardRepository.instance.findCard("XLN", "90").getName());
+        Assertions.assertEquals("Arguel's Blood Fast", CardRepository.instance.findCard("XLN", "90", true).getName());
+        Assertions.assertEquals("Arguel's Blood Fast", CardRepository.instance.findCard("XLN", "90", false).getName());
 
         // VOW - Innistrad: Crimson Vow - Jacob Hauken, Inspector -> Hauken's Insight - 320
-        Assert.assertEquals("Jacob Hauken, Inspector", CardRepository.instance.findCard("VOW", "320").getName());
-        Assert.assertEquals("Jacob Hauken, Inspector", CardRepository.instance.findCard("VOW", "320", true).getName());
-        Assert.assertEquals("Jacob Hauken, Inspector", CardRepository.instance.findCard("VOW", "320", false).getName());
+        Assertions.assertEquals("Jacob Hauken, Inspector", CardRepository.instance.findCard("VOW", "320").getName());
+        Assertions.assertEquals("Jacob Hauken, Inspector", CardRepository.instance.findCard("VOW", "320", true).getName());
+        Assertions.assertEquals("Jacob Hauken, Inspector", CardRepository.instance.findCard("VOW", "320", false).getName());
     }
 
     @Test
@@ -197,12 +197,12 @@ public class CardRepositoryTest {
         // VOW - Innistrad: Crimson Vow - Jacob Hauken, Inspector -> Hauken's Insight - 65
         // VOW - Innistrad: Crimson Vow - Jacob Hauken, Inspector -> Hauken's Insight - 320
         // VOW - Innistrad: Crimson Vow - Jacob Hauken, Inspector -> Hauken's Insight - 332
-        Assert.assertEquals("65", CardRepository.instance.findCardWithPreferredSetAndNumber("Jacob Hauken, Inspector", "VOW", "65").getCardNumber());
-        Assert.assertEquals("320", CardRepository.instance.findCardWithPreferredSetAndNumber("Jacob Hauken, Inspector", "VOW", "320").getCardNumber());
-        Assert.assertEquals("332", CardRepository.instance.findCardWithPreferredSetAndNumber("Jacob Hauken, Inspector", "VOW", "332").getCardNumber());
+        Assertions.assertEquals("65", CardRepository.instance.findCardWithPreferredSetAndNumber("Jacob Hauken, Inspector", "VOW", "65").getCardNumber());
+        Assertions.assertEquals("320", CardRepository.instance.findCardWithPreferredSetAndNumber("Jacob Hauken, Inspector", "VOW", "320").getCardNumber());
+        Assertions.assertEquals("332", CardRepository.instance.findCardWithPreferredSetAndNumber("Jacob Hauken, Inspector", "VOW", "332").getCardNumber());
 
-        Assert.assertEquals("65", CardRepository.instance.findCardWithPreferredSetAndNumber("Hauken's Insight", "VOW", "65").getCardNumber());
-        Assert.assertEquals("320", CardRepository.instance.findCardWithPreferredSetAndNumber("Hauken's Insight", "VOW", "320").getCardNumber());
-        Assert.assertEquals("332", CardRepository.instance.findCardWithPreferredSetAndNumber("Hauken's Insight", "VOW", "332").getCardNumber());
+        Assertions.assertEquals("65", CardRepository.instance.findCardWithPreferredSetAndNumber("Hauken's Insight", "VOW", "65").getCardNumber());
+        Assertions.assertEquals("320", CardRepository.instance.findCardWithPreferredSetAndNumber("Hauken's Insight", "VOW", "320").getCardNumber());
+        Assertions.assertEquals("332", CardRepository.instance.findCardWithPreferredSetAndNumber("Hauken's Insight", "VOW", "332").getCardNumber());
     }
 }

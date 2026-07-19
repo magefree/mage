@@ -3,7 +3,7 @@ package org.mage.test.cards.abilities.keywords;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class EternalizeTest extends CardTestPlayerBase {

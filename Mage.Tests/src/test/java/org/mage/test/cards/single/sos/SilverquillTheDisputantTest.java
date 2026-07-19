@@ -2,8 +2,8 @@ package org.mage.test.cards.single.sos;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -39,7 +39,7 @@ public class SilverquillTheDisputantTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Squire", 1);
     }
 
-    @Ignore // TODO: Casualty is currently incorrectly implemented. It should be 2 separate linked abilities.
+    @Disabled // TODO: Casualty is currently incorrectly implemented. It should be 2 separate linked abilities.
     @Test
     public void test_SacSilverquill() {
         // Since the trigger and the payment are separate, sacrificing Silverquill

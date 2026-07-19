@@ -5,8 +5,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -71,7 +71,7 @@ public class VesuvaTest extends CardTestPlayerBase {
 
         Permanent darkDepth = getPermanent("Dark Depths", playerA);
         if (darkDepth != null) {
-            Assert.assertEquals(10, darkDepth.getCounters(currentGame).getCount(CounterType.ICE));
+            Assertions.assertEquals(10, darkDepth.getCounters(currentGame).getCount(CounterType.ICE));
         }
         assertTappedCount("Dark Depths", true, 1);
     }

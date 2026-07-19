@@ -16,8 +16,8 @@ import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.*;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -50,15 +50,15 @@ public class PrototypeTest extends CardTestPlayerBase {
             if (!permanent.getName().equals(automaton)) {
                 continue;
             }
-            Assert.assertTrue("Needs haste", permanent.getAbilities(currentGame).contains(HasteAbility.getInstance()));
-            Assert.assertEquals("Power is wrong", prototyped ? 3 : 6, permanent.getPower().getValue());
-            Assert.assertEquals("Toughness is wrong", prototyped ? 2 : 4, permanent.getToughness().getValue());
-            Assert.assertTrue("Color is wrong", prototyped
+            Assertions.assertTrue(permanent.getAbilities(currentGame).contains(HasteAbility.getInstance()), "Needs haste");
+            Assertions.assertEquals(prototyped ? 3 : 6, permanent.getPower().getValue(), "Power is wrong");
+            Assertions.assertEquals(prototyped ? 2 : 4, permanent.getToughness().getValue(), "Toughness is wrong");
+            Assertions.assertTrue(prototyped
                     ? permanent.getColor(currentGame).isRed()
-                    : permanent.getColor(currentGame).isColorless()
+                    : permanent.getColor(currentGame).isColorless(), "Color is wrong"
             );
-            Assert.assertEquals("Mana cost is wrong", prototyped ? "{2}{R}" : "{7}", permanent.getManaCost().getText());
-            Assert.assertEquals("Mana value is wrong", prototyped ? 3 : 7, permanent.getManaValue());
+            Assertions.assertEquals(prototyped ? "{2}{R}" : "{7}", permanent.getManaCost().getText(), "Mana cost is wrong");
+            Assertions.assertEquals(prototyped ? 3 : 7, permanent.getManaValue(), "Mana value is wrong");
         }
     }
 
@@ -134,9 +134,9 @@ public class PrototypeTest extends CardTestPlayerBase {
                 .filter(c -> c.getName().equals(automaton))
                 .findFirst()
                 .orElse(null);
-        Assert.assertTrue("Card should be colorless", card.getColor(currentGame).isColorless());
-        Assert.assertEquals("Card should have 6 power", 6, card.getPower().getValue());
-        Assert.assertEquals("Card should have 4 toughness", 4, card.getToughness().getValue());
+        Assertions.assertTrue(card.getColor(currentGame).isColorless(), "Card should be colorless");
+        Assertions.assertEquals(6, card.getPower().getValue(), "Card should have 6 power");
+        Assertions.assertEquals(4, card.getToughness().getValue(), "Card should have 4 toughness");
     }
 
     @Test

@@ -3,8 +3,8 @@ package org.mage.test.cards.abilities.keywords;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -87,7 +87,7 @@ public class CraftTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, effigy, 3, 3);
     }
 
-    @Ignore // test fails due to issue with test player target handling
+    @Disabled // test fails due to issue with test player target handling
     @Test
     public void testEffigyMultiple() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
@@ -203,7 +203,7 @@ public class CraftTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore // TODO: enable and search code by "int takeMaxTargetsPerChoose"
+    @Disabled // TODO: enable and search code by "int takeMaxTargetsPerChoose"
     public void test_JadeSeedstonesAndMultiTargets() {
         // testing multiple addTarget support (possible bug: one ability can take target definition from other ability)
 

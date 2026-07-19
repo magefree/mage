@@ -4,8 +4,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.players.Player;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -23,7 +23,7 @@ public class PrimalPrayersTest extends CardTestPlayerBase {
     private static final String prayers = "Primal Prayers";
 
     private static void checkEnergyCount(String message, Player player, int expected) {
-        Assert.assertEquals(message, expected, player.getCountersCount(CounterType.ENERGY));
+        Assertions.assertEquals(expected, player.getCountersCount(CounterType.ENERGY), message);
     }
 
     @Test
@@ -136,7 +136,7 @@ public class PrimalPrayersTest extends CardTestPlayerBase {
             throw new IllegalStateException("Execute went without error");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Choose an alternative cost")) {
-                Assert.fail("Should have thrown error about missing the choice for the alternative cost, but got:\n" + e.getMessage());
+                Assertions.fail("Should have thrown error about missing the choice for the alternative cost, but got:\n" + e.getMessage());
             }
         }
     }
@@ -162,7 +162,7 @@ public class PrimalPrayersTest extends CardTestPlayerBase {
             throw new IllegalStateException("Execute went without error");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Choose an alternative cost")) {
-                Assert.fail("Should have thrown error about missing the choice for the alternative cost, but got:\n" + e.getMessage());
+                Assertions.fail("Should have thrown error about missing the choice for the alternative cost, but got:\n" + e.getMessage());
             }
         }
     }

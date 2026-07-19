@@ -4,8 +4,8 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -81,10 +81,10 @@ public class WarpTest extends CardTestPlayerBase {
         try {
             execute();
         } catch (Throwable e) {
-            Assert.assertEquals(
-                    "Should fail to be able to cast " + colossus + " with warp",
+            Assertions.assertEquals(
                     "Can't find ability to activate command: Cast " + colossus + " with Warp",
-                    e.getMessage()
+                    e.getMessage(),
+                    "Should fail to be able to cast " + colossus + " with warp"
             );
         }
     }

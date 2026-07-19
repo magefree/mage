@@ -13,11 +13,11 @@ import mage.constants.SubType;
 import mage.game.draft.ReshuffledSet;
 import mage.sets.*;
 import mage.util.CardUtil;
-import org.junit.Assert;
-import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.MageTestPlayerBase;
 
 import java.util.*;
@@ -55,7 +55,7 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
         );
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         CardScanner.scan();
     }
@@ -69,7 +69,7 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
             for (Ability ability : card.getAbilities()) {
                 if (ability instanceof PartnerWithAbility) {
                     if (foundPartner) {
-                        Assert.assertEquals(Partner, card.getName());
+                        Assertions.assertEquals(Partner, card.getName());
                     } else {
                         foundPartner = true;
                         Partner = ((PartnerWithAbility) ability).getPartnerName();
@@ -95,9 +95,9 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
                 "Bloodstained Mire", "Flooded Strand", "Polluted Delta", "Windswept Heath", "Wooded Foothills"));
 
         List<Card> booster = FateReforged.getInstance().createBooster();
-        assertTrue(str(booster), contains(booster, tapland, "FRF")
+        assertTrue(contains(booster, tapland, "FRF")
                 || contains(booster, fetchland, "KTK")
-                || contains(booster, basics, null)
+                || contains(booster, basics, null), str(booster)
         );
     }
 
@@ -105,26 +105,26 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
     public void testMysteryBooster1() {
         // https://magic.wizards.com/en/articles/archive/feature/unraveling-mystery-booster-2019-11-14
         List<Card> booster = MysteryBooster.getInstance().createBooster();
-        Assert.assertNotNull(booster);
-        Assert.assertEquals("Pack contains 15 cards", 15, booster.size());
+        Assertions.assertNotNull(booster);
+        Assertions.assertEquals(15, booster.size(), "Pack contains 15 cards");
 
-        Assert.assertTrue("Slot 1 is white (" + booster.get(0).getName() + ')', booster.get(0).getColorIdentity().isWhite());
-        Assert.assertTrue("Slot 2 is white (" + booster.get(1).getName() + ')', booster.get(1).getColorIdentity().isWhite());
+        Assertions.assertTrue(booster.get(0).getColorIdentity().isWhite(), "Slot 1 is white (" + booster.get(0).getName() + ')');
+        Assertions.assertTrue(booster.get(1).getColorIdentity().isWhite(), "Slot 2 is white (" + booster.get(1).getName() + ')');
 
-        Assert.assertTrue("Slot 3 is blue (" + booster.get(2).getName() + ')', booster.get(2).getColorIdentity().isBlue());
-        Assert.assertTrue("Slot 4 is blue (" + booster.get(3).getName() + ')', booster.get(3).getColorIdentity().isBlue());
+        Assertions.assertTrue(booster.get(2).getColorIdentity().isBlue(), "Slot 3 is blue (" + booster.get(2).getName() + ')');
+        Assertions.assertTrue(booster.get(3).getColorIdentity().isBlue(), "Slot 4 is blue (" + booster.get(3).getName() + ')');
 
-        Assert.assertTrue("Slot 5 is black (" + booster.get(4).getName() + ')', booster.get(4).getColorIdentity().isBlack());
-        Assert.assertTrue("Slot 6 is black (" + booster.get(5).getName() + ')', booster.get(5).getColorIdentity().isBlack());
+        Assertions.assertTrue(booster.get(4).getColorIdentity().isBlack(), "Slot 5 is black (" + booster.get(4).getName() + ')');
+        Assertions.assertTrue(booster.get(5).getColorIdentity().isBlack(), "Slot 6 is black (" + booster.get(5).getName() + ')');
 
-        Assert.assertTrue("Slot 7 is red (" + booster.get(6).getName() + ')', booster.get(6).getColorIdentity().isRed());
-        Assert.assertTrue("Slot 8 is red (" + booster.get(7).getName() + ')', booster.get(7).getColorIdentity().isRed());
+        Assertions.assertTrue(booster.get(6).getColorIdentity().isRed(), "Slot 7 is red (" + booster.get(6).getName() + ')');
+        Assertions.assertTrue(booster.get(7).getColorIdentity().isRed(), "Slot 8 is red (" + booster.get(7).getName() + ')');
 
-        Assert.assertTrue("Slot 9 is green (" + booster.get(8).getName() + ')', booster.get(8).getColorIdentity().isGreen());
-        Assert.assertTrue("Slot 10 is green (" + booster.get(9).getName() + ')', booster.get(9).getColorIdentity().isGreen());
+        Assertions.assertTrue(booster.get(8).getColorIdentity().isGreen(), "Slot 9 is green (" + booster.get(8).getName() + ')');
+        Assertions.assertTrue(booster.get(9).getColorIdentity().isGreen(), "Slot 10 is green (" + booster.get(9).getName() + ')');
 
-        Assert.assertTrue("Slot 11 is multicolored (" + booster.get(10).getName() + ')', booster.get(10).getColorIdentity().isMulticolored());
-        Assert.assertTrue("Slot 12 is colorless (" + booster.get(11).getName() + ')', booster.get(11).getColor().isColorless());
+        Assertions.assertTrue(booster.get(10).getColorIdentity().isMulticolored(), "Slot 11 is multicolored (" + booster.get(10).getName() + ')');
+        Assertions.assertTrue(booster.get(11).getColor().isColorless(), "Slot 12 is colorless (" + booster.get(11).getName() + ')');
     }
 
     @Test
@@ -137,8 +137,8 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
                 "Snow-Covered Forest"
         ));
         List<Card> booster = MastersEditionII.getInstance().createBooster();
-        assertTrue(str(booster), contains(booster, snowCoveredLand, "ME2"));
-        assertFalse(str(booster), contains(booster, basics, null));
+        assertTrue(contains(booster, snowCoveredLand, "ME2"), str(booster));
+        assertFalse(contains(booster, basics, null), str(booster));
     }
 
     @Test
@@ -153,8 +153,8 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
 
         for (int i = 1; i <= 5; i++) {
             List<Card> booster = MastersEditionIV.getInstance().createBooster();
-            assertTrue(str(booster), contains(booster, urzaLand, "ME4"));
-            assertFalse(str(booster), contains(booster, basics, null));
+            assertTrue(contains(booster, urzaLand, "ME4"), str(booster));
+            assertFalse(contains(booster, basics, null), str(booster));
         }
     }
 
@@ -193,7 +193,7 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
     public void testModernHorizons_BoosterMustHaveOneSnowLand() {
         for (int i = 0; i < 10; i++) {
             List<Card> booster = ModernHorizons.getInstance().createBooster();
-            assertTrue("Modern Horizon's booster must contain 1 snow covered land", booster.stream().anyMatch(card -> card.isBasic() && card.getName().startsWith("Snow-Covered ")));
+            assertTrue(booster.stream().anyMatch(card -> card.isBasic() && card.getName().startsWith("Snow-Covered ")), "Modern Horizon's booster must contain 1 snow covered land");
         }
     }
 
@@ -201,7 +201,7 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
     public void testMastersEditionII_BoosterMustHaveOneSnowLand() {
         for (int i = 0; i < 10; i++) {
             List<Card> booster = MastersEditionII.getInstance().createBooster();
-            assertTrue("Master Editions II's booster must contain 1 snow covered land", booster.stream().anyMatch(card -> card.isBasic() && card.getName().startsWith("Snow-Covered ")));
+            assertTrue(booster.stream().anyMatch(card -> card.isBasic() && card.getName().startsWith("Snow-Covered ")), "Master Editions II's booster must contain 1 snow covered land");
         }
     }
 
@@ -209,7 +209,7 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
     public void testBattlebond_BoosterMustHaveOneLand() {
         for (int i = 0; i < 10; i++) {
             List<Card> booster = Battlebond.getInstance().createBooster();
-            assertTrue("battlebond's booster must contain 1 land", booster.stream().anyMatch(card -> card.isBasic() && card.isLand()));
+            assertTrue(booster.stream().anyMatch(card -> card.isBasic() && card.isLand()), "battlebond's booster must contain 1 land");
         }
     }
 
@@ -230,7 +230,7 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
                     .filter(data -> data.getValue() > 1)
                     .map(Map.Entry::getKey)
                     .collect(Collectors.joining(", "));
-            assertTrue("booster generation must use cards with various arts as one card: " + multipleCopies, multipleCopies.isEmpty());
+            assertTrue(multipleCopies.isEmpty(), "booster generation must use cards with various arts as one card: " + multipleCopies);
 
             // must have all reprints
             booster.forEach(card -> {
@@ -241,11 +241,11 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
                 }
             });
         }
-        assertTrue("booster must use cards with various arts",
-                cardNumberPostfixes.contains("a")
+        assertTrue(cardNumberPostfixes.contains("a")
                         && cardNumberPostfixes.contains("b")
                         && cardNumberPostfixes.contains("c")
-                        && cardNumberPostfixes.contains("d")
+                        && cardNumberPostfixes.contains("d"),
+                "booster must use cards with various arts"
         );
     }
 
@@ -254,30 +254,30 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
         for (int i = 0; i < 20; i++) {
             List<Card> booster = ZendikarRising.getInstance().createBooster();
 
-            assertEquals("Booster does not have 15 cards", 15, booster.size());
+            assertEquals(15, booster.size(), "Booster does not have 15 cards");
             assertTrue(
-                    "Booster contains cards from another set",
-                    booster.stream().map(Card::getExpansionSetCode).allMatch("ZNR"::equals)
+                    booster.stream().map(Card::getExpansionSetCode).allMatch("ZNR"::equals),
+                    "Booster contains cards from another set"
             );
             assertEquals(
-                    "Booster must contain exactly 1 basic land", 1,
-                    booster.stream().filter(MageObject::isBasic).count()
+                    1, booster.stream().filter(MageObject::isBasic).count(),
+                    "Booster must contain exactly 1 basic land"
             );
             assertEquals(
-                    "Booster must contain exactly 1 rare or mythic", 1,
-                    booster.stream().map(Card::getRarity).filter(rarity -> rarity == Rarity.RARE || rarity == Rarity.MYTHIC).count()
+                    1, booster.stream().map(Card::getRarity).filter(rarity -> rarity == Rarity.RARE || rarity == Rarity.MYTHIC).count(),
+                    "Booster must contain exactly 1 rare or mythic"
             );
             assertEquals(
-                    "Booster must contain exactly 3 uncommons", 3,
-                    booster.stream().map(Card::getRarity).filter(Rarity.UNCOMMON::equals).count()
+                    3, booster.stream().map(Card::getRarity).filter(Rarity.UNCOMMON::equals).count(),
+                    "Booster must contain exactly 3 uncommons"
             );
             assertEquals(
-                    "Booster must contain exactly 10 uncommons", 10,
-                    booster.stream().map(Card::getRarity).filter(Rarity.COMMON::equals).count()
+                    10, booster.stream().map(Card::getRarity).filter(Rarity.COMMON::equals).count(),
+                    "Booster must contain exactly 10 uncommons"
             );
             assertEquals(
-                    "Booster must contain exactly 1 MDFC", 1,
-                    booster.stream().filter(ModalDoubleFacedCard.class::isInstance).count()
+                    1, booster.stream().filter(ModalDoubleFacedCard.class::isInstance).count(),
+                    "Booster must contain exactly 1 MDFC"
             );
         }
     }
@@ -291,22 +291,22 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
         for (int i = 1; i <= 100; i++) {
             List<Card> booster = Kaldheim.getInstance().createBooster();
 
-            assertEquals("Booster does not have 15 cards", 15, booster.size());
+            assertEquals(15, booster.size(), "Booster does not have 15 cards");
             assertTrue(
-                    "Booster contains cards from another set",
-                    booster.stream().map(Card::getExpansionSetCode).allMatch("KHM"::equals)
+                    booster.stream().map(Card::getExpansionSetCode).allMatch("KHM"::equals),
+                    "Booster contains cards from another set"
             );
             assertFalse(
-                    "Booster cannot contain non-snow basic lands",
-                    booster.stream().anyMatch(card -> card.isBasic() && !card.isSnow())
+                    booster.stream().anyMatch(card -> card.isBasic() && !card.isSnow()),
+                    "Booster cannot contain non-snow basic lands"
             );
             assertEquals(
-                    "Booster must contain exactly 1 rare or mythic", 1,
-                    booster.stream().map(Card::getRarity).filter(rarity -> rarity == Rarity.RARE || rarity == Rarity.MYTHIC).count()
+                    1, booster.stream().map(Card::getRarity).filter(rarity -> rarity == Rarity.RARE || rarity == Rarity.MYTHIC).count(),
+                    "Booster must contain exactly 1 rare or mythic"
             );
             assertEquals(
-                    "Booster must contain exactly 3 uncommons", 3,
-                    booster.stream().map(Card::getRarity).filter(Rarity.UNCOMMON::equals).count()
+                    3, booster.stream().map(Card::getRarity).filter(Rarity.UNCOMMON::equals).count(),
+                    "Booster must contain exactly 3 uncommons"
             );
 
             List<Card> snowLands = booster.stream().filter(card -> card.isSnow() && card.isLand()).collect(Collectors.toList());
@@ -316,8 +316,8 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
                 case 1:
                     Card snowLand = snowLands.get(0);
                     assertTrue(
-                            "Only one snow land, must be basic or common",
-                            snowLand.isBasic() || snowLand.getRarity() == Rarity.COMMON
+                            snowLand.isBasic() || snowLand.getRarity() == Rarity.COMMON,
+                            "Only one snow land, must be basic or common"
                     );
                     assertNotEquals(
                             "Only one snow land, can't be Shimmerdrift Vale",
@@ -330,23 +330,23 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
                     break;
                 case 2:
                     assertEquals(
-                            "Booster can't have two snow lands unless one is Shimmerdrift Vale or Faceless Haven", 1,
-                            snowLands.stream().filter(card -> card.getName().equals("Shimmerdrift Vale") || card.getName().equals("Faceless Haven")).count()
+                            1, snowLands.stream().filter(card -> card.getName().equals("Shimmerdrift Vale") || card.getName().equals("Faceless Haven")).count(),
+                            "Booster can't have two snow lands unless one is Shimmerdrift Vale or Faceless Haven"
                     );
                     assertEquals(
-                            "Booster can't have two snow lands unless one is not Shimmerdrift Vale or Faceless Haven", 1,
-                            snowLands.stream().filter(card -> !card.getName().equals("Shimmerdrift Vale") && !card.getName().equals("Faceless Haven")).count()
+                            1, snowLands.stream().filter(card -> !card.getName().equals("Shimmerdrift Vale") && !card.getName().equals("Faceless Haven")).count(),
+                            "Booster can't have two snow lands unless one is not Shimmerdrift Vale or Faceless Haven"
                     );
                     break;
                 case 3:
-                    assertEquals("Booster can't have three snow lands unless one is Shimmerdrift Vale", 1,
-                            snowLands.stream().filter(card -> card.getName().equals("Shimmerdrift Vale")).count()
+                    assertEquals(1, snowLands.stream().filter(card -> card.getName().equals("Shimmerdrift Vale")).count(),
+                            "Booster can't have three snow lands unless one is Shimmerdrift Vale"
                     );
-                    assertEquals("Booster can't have three snow lands unless one is Faceless Haven", 1,
-                            snowLands.stream().filter(card -> card.getName().equals("Faceless Haven")).count()
+                    assertEquals(1, snowLands.stream().filter(card -> card.getName().equals("Faceless Haven")).count(),
+                            "Booster can't have three snow lands unless one is Faceless Haven"
                     );
-                    assertEquals("Booster can't have three snow lands unless one is not Shimmerdrift Vale or Faceless Haven", 1,
-                            snowLands.stream().filter(card -> !card.getName().equals("Shimmerdrift Vale") && !card.getName().equals("Faceless Haven")).count()
+                    assertEquals(1, snowLands.stream().filter(card -> !card.getName().equals("Shimmerdrift Vale") && !card.getName().equals("Faceless Haven")).count(),
+                            "Booster can't have three snow lands unless one is not Shimmerdrift Vale or Faceless Haven"
                     );
                     break;
                 default:
@@ -354,7 +354,7 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
             }
 
             long mdfcCount = booster.stream().filter(ModalDoubleFacedCard.class::isInstance).count();
-            assertTrue("Booster can't have more than one MDFC", mdfcCount < 2);
+            assertTrue(mdfcCount < 2, "Booster can't have more than one MDFC");
 
             foundMDFC |= mdfcCount > 0;
             foundNoMDFC |= mdfcCount == 0;
@@ -363,9 +363,9 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
                 break;
             }
         }
-        assertTrue("No booster contained Shimmerdrift Vale", foundVale);
-        assertTrue("No booster contained an MDFC", foundMDFC);
-        assertTrue("Every booster contained an MDFC", foundNoMDFC);
+        assertTrue(foundVale, "No booster contained Shimmerdrift Vale");
+        assertTrue(foundMDFC, "No booster contained an MDFC");
+        assertTrue(foundNoMDFC, "Every booster contained an MDFC");
     }
 
     @Test
@@ -374,25 +374,25 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
             List<Card> booster = TimeSpiralRemastered.getInstance().createBooster();
 
             assertFalse(
-                    "Booster should have no basic lands:" + str(booster),
-                    contains(booster, basics, null)
+                    contains(booster, basics, null),
+                    "Booster should have no basic lands:" + str(booster)
             );
 
             assertEquals(
-                    "Booster should have 10 commons", 10,
-                    booster.stream().map(Card::getRarity).filter(Rarity.COMMON::equals).count()
+                    10, booster.stream().map(Card::getRarity).filter(Rarity.COMMON::equals).count(),
+                    "Booster should have 10 commons"
             );
             assertEquals(
-                    "Booster should have 3 uncommons", 3,
-                    booster.stream().map(Card::getRarity).filter(Rarity.UNCOMMON::equals).count()
+                    3, booster.stream().map(Card::getRarity).filter(Rarity.UNCOMMON::equals).count(),
+                    "Booster should have 3 uncommons"
             );
             assertEquals(
-                    "Booster should have 1 rare/mythic", 1,
-                    booster.stream().map(Card::getRarity).filter(r -> r == Rarity.RARE || r == Rarity.MYTHIC).count()
+                    1, booster.stream().map(Card::getRarity).filter(r -> r == Rarity.RARE || r == Rarity.MYTHIC).count(),
+                    "Booster should have 1 rare/mythic"
             );
             assertEquals(
-                    "Booster should have 1 bonus card", 1,
-                    booster.stream().map(Card::getRarity).filter(Rarity.SPECIAL::equals).count()
+                    1, booster.stream().map(Card::getRarity).filter(Rarity.SPECIAL::equals).count(),
+                    "Booster should have 1 bonus card"
             );
         }
     }
@@ -415,38 +415,38 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
                     .filter(c -> c.hasSubtype(SubType.LESSON, null))
                     .collect(Collectors.toList());
 
-            assertEquals("Booster should have 15 cards", 15, booster.size());
+            assertEquals(15, booster.size(), "Booster should have 15 cards");
 
             assertFalse(
-                    "Booster should have no basic lands:" + str(booster),
-                    contains(booster, basics, null)
+                    contains(booster, basics, null),
+                    "Booster should have no basic lands:" + str(booster)
             );
 
             assertEquals(
-                    "Booster should have 9 non-Lesson commons", 9,
-                    nonLessons.stream().map(Card::getRarity).filter(Rarity.COMMON::equals).count()
+                    9, nonLessons.stream().map(Card::getRarity).filter(Rarity.COMMON::equals).count(),
+                    "Booster should have 9 non-Lesson commons"
             );
             assertEquals(
-                    "Booster should have 3 uncommons", 3,
-                    booster.stream().filter(c -> "STX".equals(c.getExpansionSetCode())).map(Card::getRarity).filter(Rarity.UNCOMMON::equals).count()
+                    3, booster.stream().filter(c -> "STX".equals(c.getExpansionSetCode())).map(Card::getRarity).filter(Rarity.UNCOMMON::equals).count(),
+                    "Booster should have 3 uncommons"
             );
             assertEquals(
-                    "Booster should have 1 non-Lesson rare/mythic", 1,
-                    nonLessons.stream().map(Card::getRarity).filter(r -> r == Rarity.RARE || r == Rarity.MYTHIC).count()
-            );
-
-            assertEquals(
-                    "Booster should have 1 Mystical Archive card", 1,
-                    booster.stream().map(Card::getExpansionSetCode).filter("STA"::equals).count()
+                    1, nonLessons.stream().map(Card::getRarity).filter(r -> r == Rarity.RARE || r == Rarity.MYTHIC).count(),
+                    "Booster should have 1 non-Lesson rare/mythic"
             );
 
-            assertTrue("Booster should have no more than 2 total Lessons", lessons.size() <= 2);
             assertEquals(
-                    "Booster should have 1 non-uncommon Lesson", 1,
-                    lessons.stream().filter(c -> c.getRarity() != Rarity.UNCOMMON).count()
+                    1, booster.stream().map(Card::getExpansionSetCode).filter("STA"::equals).count(),
+                    "Booster should have 1 Mystical Archive card"
+            );
+
+            assertTrue(lessons.size() <= 2, "Booster should have no more than 2 total Lessons");
+            assertEquals(
+                    1, lessons.stream().filter(c -> c.getRarity() != Rarity.UNCOMMON).count(),
+                    "Booster should have 1 non-uncommon Lesson"
             );
             long uncommonLessonCount = lessons.stream().filter(c -> c.getRarity() == Rarity.UNCOMMON).count();
-            assertTrue("Booster should have no more than 1 uncommon Lesson", uncommonLessonCount <= 1);
+            assertTrue(uncommonLessonCount <= 1, "Booster should have no more than 1 uncommon Lesson");
 
             foundUncommonLesson |= uncommonLessonCount > 0;
             foundNoUncommonLesson |= uncommonLessonCount == 0;
@@ -454,8 +454,8 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
                 break;
             }
         }
-        assertTrue("No booster contained an uncommon Lesson", foundUncommonLesson);
-        assertTrue("Every booster contained an uncommon Lesson", foundNoUncommonLesson);
+        assertTrue(foundUncommonLesson, "No booster contained an uncommon Lesson");
+        assertTrue(foundNoUncommonLesson, "Every booster contained an uncommon Lesson");
     }
 
     private static final List<String> mh2Reprints = Collections.unmodifiableList(Arrays.asList(
@@ -479,34 +479,34 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
                     .collect(Collectors.toList());
 
             assertEquals(
-                    "Booster must contain exactly one reprint (other than fetches)", 1, reprint.size()
+                    1, reprint.size(), "Booster must contain exactly one reprint (other than fetches)"
             );
             assertEquals(
-                    "Booster must contain exactly 14 other cards", 14, notReprint.size()
+                    14, notReprint.size(), "Booster must contain exactly 14 other cards"
             );
             assertEquals(
-                    "Booster must contain one non-reprint rare/mythic", 1,
-                    notReprint
+                    1, notReprint
                             .stream()
                             .map(Card::getRarity)
                             .filter(rarity -> rarity == Rarity.RARE || rarity == Rarity.MYTHIC)
-                            .count()
+                            .count(),
+                    "Booster must contain one non-reprint rare/mythic"
             );
             assertEquals(
-                    "Booster must contain three non-reprint uncommons", 3,
-                    notReprint
+                    3, notReprint
                             .stream()
                             .map(Card::getRarity)
                             .filter(Rarity.UNCOMMON::equals)
-                            .count()
+                            .count(),
+                    "Booster must contain three non-reprint uncommons"
             );
             assertEquals(
-                    "Booster must contain ten non-reprint uncommons", 10,
-                    notReprint
+                    10, notReprint
                             .stream()
                             .map(Card::getRarity)
                             .filter(Rarity.COMMON::equals)
-                            .count()
+                            .count(),
+                    "Booster must contain ten non-reprint uncommons"
             );
         }
     }
@@ -520,7 +520,7 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
         return result;
     }
 
-    @Ignore // debug only: collect info about cards in boosters, see https://github.com/magefree/mage/issues/8081
+    @Disabled // debug only: collect info about cards in boosters, see https://github.com/magefree/mage/issues/8081
     @Test
     public void test_CollectBoosterStats() {
         ExpansionSet setToAnalyse = NewPhyrexia.getInstance();
@@ -565,7 +565,7 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
         System.out.println("\n" + String.join("\n", info));
     }
 
-    @Ignore // debug only
+    @Disabled // debug only
     @Test
     public void test_ReshuffledBoosterStats() {
         List<ExpansionSet> sets = new ArrayList<>();

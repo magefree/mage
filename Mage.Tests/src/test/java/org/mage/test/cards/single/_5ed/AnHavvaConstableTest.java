@@ -2,8 +2,8 @@ package org.mage.test.cards.single._5ed;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class AnHavvaConstableTest extends CardTestPlayerBase {
@@ -45,7 +45,7 @@ public class AnHavvaConstableTest extends CardTestPlayerBase {
         playerA.getHand().getCards(currentGame).stream()
                 .filter(card -> card.getName().equals(constable))
                 .findFirst().
-                ifPresent(card -> Assert.assertEquals(6, card.getToughness().getValue()));
+                ifPresent(card -> Assertions.assertEquals(6, card.getToughness().getValue()));
 
     }
 }

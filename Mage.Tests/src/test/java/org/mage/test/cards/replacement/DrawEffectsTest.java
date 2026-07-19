@@ -2,8 +2,8 @@ package org.mage.test.cards.replacement;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -357,7 +357,7 @@ public class DrawEffectsTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        Assert.assertEquals("Player B has to have 8 cards in hand", 8, playerB.getHand().size());
+        Assertions.assertEquals(8, playerB.getHand().size(), "Player B has to have 8 cards in hand");
 
     }
 

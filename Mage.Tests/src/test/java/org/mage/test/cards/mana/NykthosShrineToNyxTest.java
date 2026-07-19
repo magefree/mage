@@ -3,8 +3,8 @@ package org.mage.test.cards.mana;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -32,7 +32,7 @@ public class NykthosShrineToNyxTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        Assert.assertEquals("message", 6, playerA.getManaPool().getGreen()); // 6 green mana
+        Assertions.assertEquals(6, playerA.getManaPool().getGreen()); // 6 green mana
         assertPowerToughness(playerA, "Omnath, Locus of Mana", 7, 7);
     }
 
@@ -60,7 +60,7 @@ public class NykthosShrineToNyxTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        Assert.assertEquals("amount of green mana", 10, playerA.getManaPool().getGreen()); // 6G - 2G = 4G + 6G = 10G
+        Assertions.assertEquals(10, playerA.getManaPool().getGreen(), "amount of green mana"); // 6G - 2G = 4G + 6G = 10G
         assertPowerToughness(playerA, "Omnath, Locus of Mana", 11, 11);
     }
 
@@ -91,7 +91,7 @@ public class NykthosShrineToNyxTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        Assert.assertEquals("amount of colorless mana", 10, playerA.getManaPool().getColorless()); // 6 - 2 (2.Activation) = 4 + 6  = 10 colorless mana
+        Assertions.assertEquals(10, playerA.getManaPool().getColorless(), "amount of colorless mana"); // 6 - 2 (2.Activation) = 4 + 6  = 10 colorless mana
         assertPowerToughness(playerA, "Kruphix, God of Horizons", 4, 7);
     }
 
@@ -126,7 +126,7 @@ public class NykthosShrineToNyxTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Simic Guildmage", 2);
-        Assert.assertEquals("amount of green mana", 5, playerA.getManaPool().getGreen()); // 5 green mana
+        Assertions.assertEquals(5, playerA.getManaPool().getGreen(), "amount of green mana"); // 5 green mana
         assertPowerToughness(playerA, "Omnath, Locus of Mana", 6, 6);
     }
 
@@ -191,7 +191,7 @@ public class NykthosShrineToNyxTest extends CardTestPlayerBase {
 
         assertTappedCount("Wastes", true, 2);
         assertTapped(nykthos, true);
-        // Assert.assertEquals("amount of black mana", 4, playerA.getManaPool().getBlack()); // should be 4 black mana
+        // Assertions.assertEquals("amount of black mana", 4, playerA.getManaPool().getBlack()); // should be 4 black mana
         assertHandCount(playerA, pObliterator, 0);
         assertPermanentCount(playerA, pObliterator, 1);
     }

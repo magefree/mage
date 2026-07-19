@@ -3,8 +3,8 @@ package org.mage.test.cards.asthough;
 import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -34,9 +34,9 @@ public class IntetTheDreamerTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.COMBAT_DAMAGE);
         checkExileCount("after exile", 1, PhaseStep.COMBAT_DAMAGE, playerA, "Wax // Wane", 1); // face down for owner looks like a normal card
         runCode("after exile", 1, PhaseStep.COMBAT_DAMAGE, playerA, (info, player, game) -> {
-            Assert.assertEquals("must have 1 card in exile", 1, game.getExile().getAllCards(game).size());
+            Assertions.assertEquals(1, game.getExile().getAllCards(game).size(), "must have 1 card in exile");
             Card card = game.getExile().getAllCards(game).get(0);
-            Assert.assertTrue("must be face down in exile", card.isFaceDown(game));
+            Assertions.assertTrue(card.isFaceDown(game), "must be face down in exile");
         });
 
         // free cast and boost intet

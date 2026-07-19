@@ -4,13 +4,13 @@ import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  *
@@ -113,7 +113,7 @@ public class TheSoulStoneTest extends CardTestPlayerBase {
 
         cards.forEach(card -> {
             if (card.getName().equals(theSoulStone)) {
-                assertTrue("Should not have Infinity ability", !card.getAbilities(currentGame).containsClass(BeginningOfUpkeepTriggeredAbility.class));
+                assertTrue(!card.getAbilities(currentGame).containsClass(BeginningOfUpkeepTriggeredAbility.class), "Should not have Infinity ability");
             }
         });
     }

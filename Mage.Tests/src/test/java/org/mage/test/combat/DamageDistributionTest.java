@@ -4,8 +4,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -25,8 +25,8 @@ public class DamageDistributionTest extends CardTestPlayerBase {
         execute();
 
         Permanent instigator = getPermanent("Warren Instigator", playerA.getId());
-        Assert.assertNotEquals(null, instigator);
-        Assert.assertEquals("Computer didn't attacked with Warren Instigator", true, instigator.isTapped());
+        Assertions.assertNotEquals(null, instigator);
+        Assertions.assertEquals(true, instigator.isTapped(), "Computer didn't attacked with Warren Instigator");
 
         // should block and die
         assertPermanentCount(playerB, "Merfolk Looter", 0);

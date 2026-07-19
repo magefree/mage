@@ -3,8 +3,8 @@ package org.mage.test.cards.single.tmp;
 import mage.abilities.keyword.LandwalkAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class ExcavatorTest extends CardTestPlayerBase {
@@ -33,7 +33,7 @@ public class ExcavatorTest extends CardTestPlayerBase {
     public static final String leylineOfTheGuildpact = "Leyline of the Guildpact";
 
     @Test
-    @Ignore("Failing because permanent LKI does not save MageObjectAttribute values")
+    @Disabled("Failing because permanent LKI does not save MageObjectAttribute values")
     public void testExcavator() {
         setStrictChooseMode(true);
 

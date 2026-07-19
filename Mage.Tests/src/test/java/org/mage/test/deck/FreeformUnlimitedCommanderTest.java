@@ -2,8 +2,8 @@ package org.mage.test.deck;
 
 import mage.cards.decks.Deck;
 import mage.deck.FreeformUnlimitedCommander;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.MageTestPlayerBase;
 
 public class FreeformUnlimitedCommanderTest extends MageTestPlayerBase {
@@ -14,7 +14,7 @@ public class FreeformUnlimitedCommanderTest extends MageTestPlayerBase {
         FreeformUnlimitedCommander deck = new FreeformUnlimitedCommander();
 
         // Assert
-        Assert.assertEquals(FreeformUnlimitedCommander.class, deck.getClass());
+        Assertions.assertEquals(FreeformUnlimitedCommander.class, deck.getClass());
     }
 
     @Test
@@ -26,7 +26,7 @@ public class FreeformUnlimitedCommanderTest extends MageTestPlayerBase {
         int actual = deck.getDeckMinSize();
 
         // Assert
-        Assert.assertEquals(0, actual);
+        Assertions.assertEquals(0, actual);
     }
 
     @Test
@@ -38,7 +38,7 @@ public class FreeformUnlimitedCommanderTest extends MageTestPlayerBase {
         int actual = deck.getSideboardMinSize();
 
         // Assert
-        Assert.assertEquals(0, actual);
+        Assertions.assertEquals(0, actual);
     }
 
     @Test
@@ -51,6 +51,6 @@ public class FreeformUnlimitedCommanderTest extends MageTestPlayerBase {
         boolean actual = deck.validate(example);
 
         // Assert
-        Assert.assertTrue(actual);
+        Assertions.assertTrue(actual);
     }
 }

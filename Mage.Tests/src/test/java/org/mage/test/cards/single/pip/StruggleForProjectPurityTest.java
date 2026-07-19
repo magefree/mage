@@ -3,8 +3,8 @@ package org.mage.test.cards.single.pip;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestCommander4Players;
 
 /**
@@ -23,10 +23,10 @@ public class StruggleForProjectPurityTest extends CardTestCommander4Players {
     private static final String struggle = "Struggle for Project Purity";
 
     private void checkRadCounters(String info, int needA, int needB, int needC, int needD) {
-        Assert.assertEquals(info + ", rad counter on playerA", needA, playerA.getCountersCount(CounterType.RAD));
-        Assert.assertEquals(info + ", rad counter on playerB", needB, playerB.getCountersCount(CounterType.RAD));
-        Assert.assertEquals(info + ", rad counter on playerC", needC, playerC.getCountersCount(CounterType.RAD));
-        Assert.assertEquals(info + ", rad counter on playerD", needD, playerD.getCountersCount(CounterType.RAD));
+        Assertions.assertEquals(needA, playerA.getCountersCount(CounterType.RAD), info + ", rad counter on playerA");
+        Assertions.assertEquals(needB, playerB.getCountersCount(CounterType.RAD), info + ", rad counter on playerB");
+        Assertions.assertEquals(needC, playerC.getCountersCount(CounterType.RAD), info + ", rad counter on playerC");
+        Assertions.assertEquals(needD, playerD.getCountersCount(CounterType.RAD), info + ", rad counter on playerD");
     }
 
     @Test

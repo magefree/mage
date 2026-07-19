@@ -12,9 +12,9 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -28,7 +28,7 @@ public class SparkDoubleTest extends CardTestPlayerBase {
                 return perm;
             }
         }
-        Assert.fail("spark must exist");
+        Assertions.fail("spark must exist");
         return null;
     }
 
@@ -50,11 +50,11 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Abbey Griffin", 2);
 
         Permanent spark = findDoubleSparkPermanent(currentGame);
-        Assert.assertEquals("must add 1 counter", 1, spark.getCounters(currentGame).getCount(CounterType.P1P1));
+        Assertions.assertEquals(1, spark.getCounters(currentGame).getCount(CounterType.P1P1), "must add 1 counter");
         //
-        Assert.assertEquals("must copy p/t", 3, spark.getPower().getValue());
-        Assert.assertEquals("must copy p/t", 3, spark.getToughness().getValue());
-        Assert.assertTrue("must copy ability", spark.getAbilities().contains(VigilanceAbility.getInstance()));
+        Assertions.assertEquals(3, spark.getPower().getValue(), "must copy p/t");
+        Assertions.assertEquals(3, spark.getToughness().getValue(), "must copy p/t");
+        Assertions.assertTrue(spark.getAbilities().contains(VigilanceAbility.getInstance()), "must copy ability");
     }
 
     @Test
@@ -75,7 +75,7 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Ajani, the Greathearted", 2);
 
         Permanent spark = findDoubleSparkPermanent(currentGame);
-        Assert.assertEquals("must add 1 loyalty", 5 + 1, spark.getCounters(currentGame).getCount(CounterType.LOYALTY));
+        Assertions.assertEquals(5 + 1, spark.getCounters(currentGame).getCount(CounterType.LOYALTY), "must add 1 loyalty");
     }
 
     @Test
@@ -97,7 +97,7 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Abbey Griffin", 2);
 
         Permanent spark = findDoubleSparkPermanent(currentGame);
-        Assert.assertEquals("must add 2 counter", 2, spark.getCounters(currentGame).getCount(CounterType.P1P1));
+        Assertions.assertEquals(2, spark.getCounters(currentGame).getCount(CounterType.P1P1), "must add 2 counter");
     }
 
     @Test
@@ -124,12 +124,12 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Gideon, Ally of Zendikar", 2);
 
         Permanent spark = findDoubleSparkPermanent(currentGame);
-        Assert.assertEquals("must add 1 loyalty", 4 + 1, spark.getCounters(currentGame).getCount(CounterType.LOYALTY));
-        Assert.assertEquals("must not add creature counter", 0, spark.getCounters(currentGame).getCount(CounterType.P1P1));
+        Assertions.assertEquals(4 + 1, spark.getCounters(currentGame).getCount(CounterType.LOYALTY), "must add 1 loyalty");
+        Assertions.assertEquals(0, spark.getCounters(currentGame).getCount(CounterType.P1P1), "must not add creature counter");
     }
 
     @Test
-    @Ignore // TODO: enabled after Blood Moon type changing effect will be fixed
+    @Disabled // TODO: enabled after Blood Moon type changing effect will be fixed
     public void test_CopyPlaneswalkerWithCreatureTypeChangedEffect() {
         addCard(Zone.BATTLEFIELD, playerA, "Gideon Blackblade", 1);
         //
@@ -151,8 +151,8 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Gideon Blackblade", 2);
 
         Permanent spark = findDoubleSparkPermanent(currentGame);
-        Assert.assertEquals("must add 1 loyalty", 4 + 1, spark.getCounters(currentGame).getCount(CounterType.LOYALTY));
-        Assert.assertEquals("must add 1 creature counter", 1, spark.getCounters(currentGame).getCount(CounterType.P1P1));
+        Assertions.assertEquals(4 + 1, spark.getCounters(currentGame).getCount(CounterType.LOYALTY), "must add 1 loyalty");
+        Assertions.assertEquals(1, spark.getCounters(currentGame).getCount(CounterType.P1P1), "must add 1 creature counter");
     }
 
     @Test

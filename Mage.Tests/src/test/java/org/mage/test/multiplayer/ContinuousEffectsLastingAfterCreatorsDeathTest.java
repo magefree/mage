@@ -2,8 +2,8 @@ package org.mage.test.multiplayer;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
 /**
@@ -31,7 +31,7 @@ public class ContinuousEffectsLastingAfterCreatorsDeathTest extends CardTestMult
         assertPermanentCount(playerA, "Vorinclex, Voice of Hunger", 1);
         assertPermanentCount(playerD, "Silvercoat Lion", 1);
 
-        Assert.assertTrue("Active player is player D", currentGame.getActivePlayerId().equals(playerD.getId()));
+        Assertions.assertTrue(currentGame.getActivePlayerId().equals(playerD.getId()), "Active player is player D");
         assertTappedCount("Plains", true, 2);
     }
 
@@ -71,7 +71,7 @@ public class ContinuousEffectsLastingAfterCreatorsDeathTest extends CardTestMult
         assertPermanentCount(playerA, "Vorinclex, Voice of Hunger", 0);
         assertPermanentCount(playerD, "Silvercoat Lion", 1);
 
-        Assert.assertTrue("Active player is player D", currentGame.getActivePlayerId().equals(playerD.getId()));
+        Assertions.assertTrue(currentGame.getActivePlayerId().equals(playerD.getId()), "Active player is player D");
         assertTappedCount("Plains", true, 2);
     }
 

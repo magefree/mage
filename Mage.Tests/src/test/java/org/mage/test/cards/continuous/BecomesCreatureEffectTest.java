@@ -5,8 +5,8 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import java.util.Collections;
@@ -51,13 +51,13 @@ public class BecomesCreatureEffectTest extends CardTestPlayerBase {
 
         runCode("Check forests are not 1/1 Elves", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             int numElves = game.getBattlefield().getActivePermanents(filter, player.getId(), game).size();
-            Assert.assertEquals("No 1/1 elves should be present", 0, numElves);
+            Assertions.assertEquals(0, numElves, "No 1/1 elves should be present");
         });
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ambushCommander);
         runCode("Check forests are 1/1 Elves", 1, PhaseStep.BEGIN_COMBAT, playerA, (info, player, game) -> {
             int numElves = game.getBattlefield().getActivePermanents(filter, player.getId(), game).size();
             // 5 forests + dryad arbor
-            Assert.assertEquals("There should be 6 1/1 elves present", 6, numElves);
+            Assertions.assertEquals(6, numElves, "There should be 6 1/1 elves present");
         });
 
         setStopAt(1, PhaseStep.END_TURN);

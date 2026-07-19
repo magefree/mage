@@ -2,8 +2,8 @@ package org.mage.test.cards.single.tsp;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -40,7 +40,7 @@ public class ChromaticStarTest extends CardTestPlayerBase {
         assertHandCount(playerA, 1);
     }
 
-    @Ignore // not sure if that's possible to chain mana activation in tests?
+    @Disabled // not sure if that's possible to chain mana activation in tests?
     @Test
     public void test_Star_ChainMana() {
         setStrictChooseMode(true);

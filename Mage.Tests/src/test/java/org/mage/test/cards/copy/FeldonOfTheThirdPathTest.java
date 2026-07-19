@@ -2,8 +2,8 @@ package org.mage.test.cards.copy;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -54,7 +54,7 @@ public class FeldonOfTheThirdPathTest extends CardTestPlayerBase {
 
         // possible bug: triggers from destroyed permanents keeps in game state (e.g. 2 triggers in game state)
         // (Since the introduction of Rad Counters, there is one inherent trigger per player in the state, hence the "+ 2")
-        Assert.assertEquals("game state must have only 1 trigger from original card", 1 + 2, currentGame.getState().getTriggers().size());
+        Assertions.assertEquals(1 + 2, currentGame.getState().getTriggers().size(), "game state must have only 1 trigger from original card");
     }
 
     @Test

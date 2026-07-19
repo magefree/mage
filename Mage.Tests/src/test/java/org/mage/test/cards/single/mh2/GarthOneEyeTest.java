@@ -4,8 +4,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -101,8 +101,8 @@ public class GarthOneEyeTest extends CardTestPlayerBase {
         assertTapped(garth, true);
         assertTapped("Mountain", true);
         Permanent permanent = getPermanent(dragon);
-        Assert.assertNotNull(dragon + " should be on the battlefield", permanent);
-        Assert.assertTrue(dragon + " should be a token", permanent instanceof PermanentToken);
+        Assertions.assertNotNull(permanent, dragon + " should be on the battlefield");
+        Assertions.assertTrue(permanent instanceof PermanentToken, dragon + " should be a token");
     }
 
     @Test
@@ -139,7 +139,7 @@ public class GarthOneEyeTest extends CardTestPlayerBase {
 
         assertTapped(garth, true);
         Permanent permanent = getPermanent(lotus);
-        Assert.assertNotNull(lotus + " should be on the battlefield", permanent);
-        Assert.assertTrue(lotus + " should be a token", permanent instanceof PermanentToken);
+        Assertions.assertNotNull(permanent, lotus + " should be on the battlefield");
+        Assertions.assertTrue(permanent instanceof PermanentToken, lotus + " should be a token");
     }
 }

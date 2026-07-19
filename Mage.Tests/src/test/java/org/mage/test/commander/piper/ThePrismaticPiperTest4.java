@@ -1,8 +1,7 @@
 package org.mage.test.commander.piper;
 
-import mage.constants.PhaseStep;
-import mage.constants.Zone;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author TheElk801
@@ -18,8 +17,8 @@ public class ThePrismaticPiperTest4 extends ThePrismaticPiperBaseTest {
         super(4);
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void testColor() {
-        execute();
+        Assertions.assertThrows(UnsupportedOperationException.class, this::execute);
     }
 }

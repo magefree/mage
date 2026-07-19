@@ -13,10 +13,10 @@ import mage.game.Game;
 import mage.player.ai.ComputerPlayer;
 import mage.player.ai.ComputerPlayer7;
 import mage.util.ThreadUtils;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 /**
@@ -26,12 +26,12 @@ import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
  */
 public class SimulationStabilityAITest extends CardTestPlayerBaseWithAIHelps {
 
-    @Before
+    @BeforeEach
     public void prepare() {
         // WARNING, for some reason java 8 sometime can't compile and run test with updated AI settings, so it's ok to freeze on it
 
         // comment it to enable AI code debug
-        Assert.assertFalse("AI stability tests must be run under release config", ComputerPlayer.COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS);
+        Assertions.assertFalse(ComputerPlayer.COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS, "AI stability tests must be run under release config");
     }
 
     @Test
@@ -73,7 +73,7 @@ public class SimulationStabilityAITest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    @Ignore
+    @Disabled
     // TODO: AI actions simulation do not support multithreading, so whole next action search
     //   will fail on any problem (enable after new simulation implement)
     public void test_GameFreeze_GoodAndFreezeAbilities() {
@@ -137,7 +137,7 @@ public class SimulationStabilityAITest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    @Ignore
+    @Disabled
     // TODO: AI actions simulation do not support multithreading, so whole next action search
     //   will fail on any problem (enable after new simulation implement)
     public void test_GameError_GoodAndFreezeAbilities() {

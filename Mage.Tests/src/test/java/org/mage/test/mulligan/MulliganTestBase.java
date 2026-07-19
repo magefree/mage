@@ -20,7 +20,7 @@ import mage.game.mulligan.Mulligan;
 import mage.game.mulligan.MulliganType;
 import mage.players.StubPlayer;
 import org.apache.log4j.Logger;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,8 +132,8 @@ public class MulliganTestBase {
         }
 
         public void assertSizes(int handSize, int librarySize) {
-            assertEquals("hand size", handSize, getHand().size());
-            assertEquals("library size", librarySize, getLibrary().size());
+            assertEquals(handSize, getHand().size(), "hand size");
+            assertEquals(librarySize, getLibrary().size(), "library size");
         }
 
     }
@@ -182,8 +182,8 @@ public class MulliganTestBase {
                 fail("Tried to mulligan without a test step.");
             }
             Step step = steps.get(current++);
-            assertTrue("Expected mulligan step.",
-                    MulliganStep.class.isAssignableFrom(step.getClass()));
+            assertTrue(MulliganStep.class.isAssignableFrom(step.getClass()),
+                    "Expected mulligan step.");
             return ((MulliganStep) step).mulligan();
         }
 
@@ -196,8 +196,8 @@ public class MulliganTestBase {
                 fail("Tried to scry without a test step.");
             }
             Step step = steps.get(current++);
-            assertTrue("Expected scry step.",
-                    ScryStep.class.isAssignableFrom(step.getClass()));
+            assertTrue(ScryStep.class.isAssignableFrom(step.getClass()),
+                    "Expected scry step.");
             return ((ScryStep) step).scry();
         }
 
@@ -210,8 +210,8 @@ public class MulliganTestBase {
                 fail("Tried to discard without a test step.");
             }
             Step step = steps.get(current++);
-            assertTrue("Expected discard bottom step.",
-                    DiscardBottomStep.class.isAssignableFrom(step.getClass()));
+            assertTrue(DiscardBottomStep.class.isAssignableFrom(step.getClass()),
+                    "Expected discard bottom step.");
             return ((DiscardBottomStep) step).discardBottom(count);
         }
 

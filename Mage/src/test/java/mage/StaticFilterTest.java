@@ -2,8 +2,8 @@ package mage;
 
 import mage.filter.Filter;
 import mage.filter.StaticFilters;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -45,6 +45,6 @@ public class StaticFilterTest {
         if (errors.size() > 0) {
             errors.stream().forEach(System.out::println);
         }
-        Assert.assertFalse("There were errors found in Static Filters", errors.size() > 0);
+        Assertions.assertFalse(!errors.isEmpty(), "There were errors found in Static Filters");
     }
 }

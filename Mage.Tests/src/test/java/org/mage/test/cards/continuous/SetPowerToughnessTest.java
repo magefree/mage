@@ -4,7 +4,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.h.HalimarTidecaller;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**

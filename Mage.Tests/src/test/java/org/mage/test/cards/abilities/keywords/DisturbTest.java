@@ -5,9 +5,9 @@ import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.stack.Spell;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -41,18 +41,18 @@ public class DisturbTest extends CardTestPlayerBase {
         runCode("check stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             // Stack must contain another card side, so spell/card characteristics must be diff from main side (only mana value is same)
             Spell spell = (Spell) game.getStack().getFirstOrNull();
-            Assert.assertEquals("Hook-Haunt Drifter", spell.getName());
-            Assert.assertEquals(1, spell.getCardType(game).size());
-            Assert.assertEquals(CardType.CREATURE, spell.getCardType(game).get(0));
-            Assert.assertEquals(1, spell.getSubtype(game).size());
-            Assert.assertEquals(SubType.SPIRIT, spell.getSubtype(game).get(0));
-            Assert.assertEquals(1, spell.getPower().getValue());
-            Assert.assertEquals(2, spell.getToughness().getValue());
-            Assert.assertEquals("U", spell.getColor(game).toString());
+            Assertions.assertEquals("Hook-Haunt Drifter", spell.getName());
+            Assertions.assertEquals(1, spell.getCardType(game).size());
+            Assertions.assertEquals(CardType.CREATURE, spell.getCardType(game).get(0));
+            Assertions.assertEquals(1, spell.getSubtype(game).size());
+            Assertions.assertEquals(SubType.SPIRIT, spell.getSubtype(game).get(0));
+            Assertions.assertEquals(1, spell.getPower().getValue());
+            Assertions.assertEquals(2, spell.getToughness().getValue());
+            Assertions.assertEquals("U", spell.getColor(game).toString());
 
-            Assert.assertEquals(2, spell.getManaValue()); // {1}{U}
+            Assertions.assertEquals(2, spell.getManaValue()); // {1}{U}
 
-            Assert.assertEquals("{1}{U}", spell.getSpellAbility().getManaCosts().getText());
+            Assertions.assertEquals("{1}{U}", spell.getSpellAbility().getManaCosts().getText());
         });
 
         // must be transformed
@@ -92,19 +92,19 @@ public class DisturbTest extends CardTestPlayerBase {
         runCode("check stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             // Stack must contain another card side, so spell/card characteristics must be diff from main side (only mana value is same)
             Spell spell = (Spell) game.getStack().getFirstOrNull();
-            Assert.assertEquals("Waildrifter", spell.getName());
-            Assert.assertEquals(1, spell.getCardType(game).size());
-            Assert.assertEquals(CardType.CREATURE, spell.getCardType(game).get(0));
-            Assert.assertEquals(2, spell.getSubtype(game).size());
-            Assert.assertEquals(SubType.HIPPOGRIFF, spell.getSubtype(game).get(0));
-            Assert.assertEquals(SubType.SPIRIT, spell.getSubtype(game).get(1));
-            Assert.assertEquals(2, spell.getPower().getValue());
-            Assert.assertEquals(2, spell.getToughness().getValue());
-            Assert.assertEquals("U", spell.getColor(game).toString());
+            Assertions.assertEquals("Waildrifter", spell.getName());
+            Assertions.assertEquals(1, spell.getCardType(game).size());
+            Assertions.assertEquals(CardType.CREATURE, spell.getCardType(game).get(0));
+            Assertions.assertEquals(2, spell.getSubtype(game).size());
+            Assertions.assertEquals(SubType.HIPPOGRIFF, spell.getSubtype(game).get(0));
+            Assertions.assertEquals(SubType.SPIRIT, spell.getSubtype(game).get(1));
+            Assertions.assertEquals(2, spell.getPower().getValue());
+            Assertions.assertEquals(2, spell.getToughness().getValue());
+            Assertions.assertEquals("U", spell.getColor(game).toString());
 
-            Assert.assertEquals(4, spell.getManaValue()); // {3}{U}
+            Assertions.assertEquals(4, spell.getManaValue()); // {3}{U}
 
-            Assert.assertEquals("{4}{U}", spell.getSpellAbility().getManaCosts().getText());
+            Assertions.assertEquals("{4}{U}", spell.getSpellAbility().getManaCosts().getText());
         });
 
         // must be transformed
@@ -188,8 +188,8 @@ public class DisturbTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter using Disturb");
         runCode("check stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             Spell spell = (Spell) game.getStack().getFirstOrNull();
-            Assert.assertEquals("mana value must be from main side", 2, spell.getManaValue());
-            Assert.assertEquals("mana cost to pay must be modified", "{U}", spell.getSpellAbility().getManaCostsToPay().getText());
+            Assertions.assertEquals(2, spell.getManaValue(), "mana value must be from main side");
+            Assertions.assertEquals("{U}", spell.getSpellAbility().getManaCostsToPay().getText(), "mana cost to pay must be modified");
         });
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hook-Haunt Drifter", 1);
@@ -240,7 +240,7 @@ public class DisturbTest extends CardTestPlayerBase {
     }
 
     //Currently failing: Transform SpellAbilityCastMode.getTypeModifiedCardObjectCopy destroys existing modifications
-    @Ignore
+    @Disabled
     @Test
     public void test_SpellAttributesIndirectCostModifications() {
         // Disturb {1}{U}

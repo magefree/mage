@@ -2,8 +2,8 @@ package org.mage.test.cards.continuous;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -26,10 +26,10 @@ public class SplitSecondTest extends CardTestPlayerBase {
         try {
             execute();
 
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Cast Counterspell$target=Sudden Shock")) {
-                Assert.fail("Should have thrown error about trying to use Counterspell, but got:\n" + e.getMessage());
+                Assertions.fail("Should have thrown error about trying to use Counterspell, but got:\n" + e.getMessage());
             }
         }
 
@@ -119,7 +119,7 @@ public class SplitSecondTest extends CardTestPlayerBase {
             execute();
             throw new AssertionError("expected failure to cast Shock");
         } catch (AssertionError e) {
-            Assert.assertTrue(e.getMessage().contains("Can't find ability to activate command: Cast Shock$target=Fortress Crab"));
+            Assertions.assertTrue(e.getMessage().contains("Can't find ability to activate command: Cast Shock$target=Fortress Crab"));
         }
 
 
@@ -140,7 +140,7 @@ public class SplitSecondTest extends CardTestPlayerBase {
             execute();
             throw new AssertionError("expected failure to activate sacrifice ability");
         } catch (AssertionError e) {
-            Assert.assertTrue(e.getMessage().contains("Can't find ability to activate command: Sacrifice"));
+            Assertions.assertTrue(e.getMessage().contains("Can't find ability to activate command: Sacrifice"));
         }
 
     }

@@ -13,8 +13,8 @@ import mage.view.CardView;
 import mage.view.GameView;
 import mage.view.PermanentView;
 import mage.view.PlayerView;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import java.util.List;
@@ -55,11 +55,11 @@ public class DisguiseTest extends CardTestPlayerBase {
         // prepare face down
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dog Walker using Disguise");
         runCode("face up on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
-            Assert.assertEquals("stack, server - can't find spell", 1, currentGame.getStack().size());
+            Assertions.assertEquals(1, currentGame.getStack().size(), "stack, server - can't find spell");
             SpellAbility spellAbility = (SpellAbility) currentGame.getStack().getFirstOrNull().getStackAbility();
-            Assert.assertEquals("stack, server - can't find spell", "Cast Dog Walker using Disguise", spellAbility.getName());
+            Assertions.assertEquals("Cast Dog Walker using Disguise", spellAbility.getName(), "stack, server - can't find spell");
             CardView spellView = getGameView(playerA).getStack().values().stream().findFirst().orElse(null);
-            Assert.assertNotNull("stack, client: can't find spell", spellView);
+            Assertions.assertNotNull(spellView, "stack, client: can't find spell");
 
             // make sure rules visible
             assertRuleExist("client side, stack: face down spell - show", spellView.getRules(), FACE_DOWN_SPELL, true);
@@ -77,24 +77,24 @@ public class DisguiseTest extends CardTestPlayerBase {
                     .filter(Permanent::isDisguised)
                     .findFirst()
                     .orElse(null);
-            Assert.assertNotNull("server side: can't find disguised permanent", permanent);
-            Assert.assertEquals("server side: wrong name", EmptyNames.FACE_DOWN_CREATURE.getObjectName(), permanent.getName());
-            Assert.assertEquals("server side: wrong color", "", permanent.getColor(currentGame).toString());
-            Assert.assertEquals("server side: wrong power", "2", permanent.getPower().toString());
-            Assert.assertEquals("server side: wrong toughness", "2", permanent.getToughness().toString());
+            Assertions.assertNotNull(permanent, "server side: can't find disguised permanent");
+            Assertions.assertEquals(EmptyNames.FACE_DOWN_CREATURE.getObjectName(), permanent.getName(), "server side: wrong name");
+            Assertions.assertEquals("", permanent.getColor(currentGame).toString(), "server side: wrong color");
+            Assertions.assertEquals("2", permanent.getPower().toString(), "server side: wrong power");
+            Assertions.assertEquals("2", permanent.getToughness().toString(), "server side: wrong toughness");
 
             // make sure real abilities exists
             // trigger
             Ability ability = permanent.getAbilities(currentGame).stream().filter(a -> a instanceof TurnedFaceUpSourceTriggeredAbility).findFirst().orElse(null);
-            Assert.assertNotNull("server side: must have face up triggered ability", ability);
-            Assert.assertFalse("server side: face up triggered ability must be hidden", ability.getRuleVisible());
+            Assertions.assertNotNull(ability, "server side: must have face up triggered ability");
+            Assertions.assertFalse(ability.getRuleVisible(), "server side: face up triggered ability must be hidden");
             // face up
             ability = permanent.getAbilities(currentGame).stream().filter(a -> a instanceof TurnFaceUpAbility).findFirst().orElse(null);
-            Assert.assertNotNull("server side: must have turn face up ability", ability);
+            Assertions.assertNotNull(ability, "server side: must have turn face up ability");
             String foundRule = permanent.getRules(currentGame).stream().filter(r -> r.contains("{R/W}")).findFirst().orElse(null);
             // ward
             ability = permanent.getAbilities(currentGame).stream().filter(a -> a instanceof WardAbility).findFirst().orElse(null);
-            Assert.assertNotNull("server side: must have ward ability", ability);
+            Assertions.assertNotNull(ability, "server side: must have ward ability");
 
             // client side - controller
             GameView gameView = getGameView(playerA);
@@ -103,11 +103,11 @@ public class DisguiseTest extends CardTestPlayerBase {
                     .filter(PermanentView::isDisguised)
                     .findFirst()
                     .orElse(null);
-            Assert.assertNotNull("client side - controller: can't find disguised permanent", permanentView);
-            Assert.assertEquals("client side - controller: wrong name", "Disguise: Dog Walker", permanentView.getName());
-            Assert.assertEquals("client side - controller: wrong color", "", permanentView.getColor().toString());
-            Assert.assertEquals("client side - controller: wrong power", "2", permanentView.getPower());
-            Assert.assertEquals("client side - controller: wrong toughness", "2", permanentView.getToughness());
+            Assertions.assertNotNull(permanentView, "client side - controller: can't find disguised permanent");
+            Assertions.assertEquals("Disguise: Dog Walker", permanentView.getName(), "client side - controller: wrong name");
+            Assertions.assertEquals("", permanentView.getColor().toString(), "client side - controller: wrong color");
+            Assertions.assertEquals("2", permanentView.getPower(), "client side - controller: wrong power");
+            Assertions.assertEquals("2", permanentView.getToughness(), "client side - controller: wrong toughness");
             // make sure rules visible
             assertRuleExist("client side, controller: face down spell - show", permanentView.getRules(), FACE_DOWN_SPELL, true);
             assertRuleExist("client side, controller: face up - show", permanentView.getRules(), FACE_DOWN_FACE_UP, true);
@@ -122,17 +122,17 @@ public class DisguiseTest extends CardTestPlayerBase {
                     .filter(p -> p.getName().equals(playerA.getName()))
                     .findFirst()
                     .orElse(null);
-            Assert.assertNotNull(playerView);
+            Assertions.assertNotNull(playerView);
             permanentView = playerView.getBattlefield().values()
                     .stream()
                     .filter(PermanentView::isDisguised)
                     .findFirst()
                     .orElse(null);
-            Assert.assertNotNull("client side - opponent: can't find disguised permanent", permanentView);
-            Assert.assertEquals("client side - opponent: wrong name", "Disguise", permanentView.getName());
-            Assert.assertEquals("client side - opponent: wrong color", "", permanentView.getColor().toString());
-            Assert.assertEquals("client side - opponent: wrong power", "2", permanentView.getPower());
-            Assert.assertEquals("client side - opponent: wrong toughness", "2", permanentView.getToughness());
+            Assertions.assertNotNull(permanentView, "client side - opponent: can't find disguised permanent");
+            Assertions.assertEquals("Disguise", permanentView.getName(), "client side - opponent: wrong name");
+            Assertions.assertEquals("", permanentView.getColor().toString(), "client side - opponent: wrong color");
+            Assertions.assertEquals("2", permanentView.getPower(), "client side - opponent: wrong power");
+            Assertions.assertEquals("2", permanentView.getToughness(), "client side - opponent: wrong toughness");
             // make sure rules visible
             assertRuleExist("client side, opponent: face down spell - show", permanentView.getRules(), FACE_DOWN_SPELL, true);
             assertRuleExist("client side, opponent: face up - show", permanentView.getRules(), FACE_DOWN_FACE_UP, true);
@@ -158,11 +158,11 @@ public class DisguiseTest extends CardTestPlayerBase {
                     .filter(p -> p.getName().equals("Dog Walker"))
                     .findFirst()
                     .orElse(null);
-            Assert.assertNotNull("server side: can't find normal permanent", permanent);
-            Assert.assertEquals("server side: wrong name", "Dog Walker", permanent.getName());
-            Assert.assertEquals("server side: wrong color", "WR", permanent.getColor(currentGame).toString());
-            Assert.assertEquals("server side: wrong power", "3", permanent.getPower().toString());
-            Assert.assertEquals("server side: wrong toughness", "1", permanent.getToughness().toString());
+            Assertions.assertNotNull(permanent, "server side: can't find normal permanent");
+            Assertions.assertEquals("Dog Walker", permanent.getName(), "server side: wrong name");
+            Assertions.assertEquals("WR", permanent.getColor(currentGame).toString(), "server side: wrong color");
+            Assertions.assertEquals("3", permanent.getPower().toString(), "server side: wrong power");
+            Assertions.assertEquals("1", permanent.getToughness().toString(), "server side: wrong toughness");
         });
 
         setStrictChooseMode(true);
@@ -173,9 +173,9 @@ public class DisguiseTest extends CardTestPlayerBase {
     private void assertRuleExist(String info, List<String> rules, String searchPart, boolean mustExists) {
         String foundAbility = rules.stream().filter(r -> r.contains(searchPart)).findFirst().orElse(null);
         if (mustExists) {
-            Assert.assertTrue(info, foundAbility != null);
+            Assertions.assertTrue(foundAbility != null, info);
         } else {
-            Assert.assertFalse(info, foundAbility != null);
+            Assertions.assertFalse(foundAbility != null, info);
         }
     }
 

@@ -3,8 +3,8 @@ package org.mage.test.game.FreeformUnlimitedCommander;
 import mage.game.FreeformUnlimitedCommanderMatch;
 import mage.game.match.Match;
 import mage.game.match.MatchOptions;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.MageTestPlayerBase;
 
 public class FreeformUnlimitedCommanderMatchTest extends MageTestPlayerBase {
@@ -22,7 +22,7 @@ public class FreeformUnlimitedCommanderMatchTest extends MageTestPlayerBase {
         Match match = new FreeformUnlimitedCommanderMatch(options);
 
         // Assert
-        Assert.assertEquals(FreeformUnlimitedCommanderMatch.class, match.getClass());
+        Assertions.assertEquals(FreeformUnlimitedCommanderMatch.class, match.getClass());
     }
 
     @Test
@@ -39,7 +39,7 @@ public class FreeformUnlimitedCommanderMatchTest extends MageTestPlayerBase {
         String actual = match.getName();
 
         // Assert
-        Assert.assertEquals("test name", actual);
+        Assertions.assertEquals("test name", actual);
     }
 
     @Test
@@ -56,6 +56,6 @@ public class FreeformUnlimitedCommanderMatchTest extends MageTestPlayerBase {
         MatchOptions actual = match.getOptions();
 
         // Assert
-        Assert.assertEquals(options, actual);
+        Assertions.assertEquals(options, actual);
     }
 }

@@ -6,8 +6,8 @@ import mage.abilities.mana.RedManaAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -184,7 +184,7 @@ public class SagaTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, moon, 1);
     }
 
-    @Ignore // TODO: fix this, related to blood moon etb issues
+    @Disabled // TODO: fix this, related to blood moon etb issues
     @Test
     public void testBloodMoonThenUrzasSagaThenBounce() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);

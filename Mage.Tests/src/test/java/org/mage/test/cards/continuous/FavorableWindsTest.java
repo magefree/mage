@@ -3,8 +3,8 @@ package org.mage.test.cards.continuous;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -36,17 +36,17 @@ public class FavorableWindsTest extends CardTestPlayerBase {
             if (permanent.getName().equals("Sky Spirit")) {
                 countSkySpirit++;
                 // should get +1/+1, original is 2/2
-                Assert.assertEquals("Power is not the same", 3, permanent.getPower().getValue());
-                Assert.assertEquals("Toughness is not the same", 3, permanent.getToughness().getValue());
+                Assertions.assertEquals(3, permanent.getPower().getValue(), "Power is not the same");
+                Assertions.assertEquals(3, permanent.getToughness().getValue(), "Toughness is not the same");
             } else if (permanent.getName().equals("Merfolk Looter")) {
                 countMerfolkLooter++;
                 // should NOT get +1/+1, original is 1/1
-                Assert.assertEquals("Power is not the same", 1, permanent.getPower().getValue());
-                Assert.assertEquals("Toughness is not the same", 1, permanent.getToughness().getValue());
+                Assertions.assertEquals(1, permanent.getPower().getValue(), "Power is not the same");
+                Assertions.assertEquals(1, permanent.getToughness().getValue(), "Toughness is not the same");
             }
         }
-        Assert.assertEquals(2, countSkySpirit);
-        Assert.assertEquals(2, countMerfolkLooter);
+        Assertions.assertEquals(2, countSkySpirit);
+        Assertions.assertEquals(2, countMerfolkLooter);
 
         countSkySpirit = 0;
         countMerfolkLooter = 0;
@@ -54,17 +54,17 @@ public class FavorableWindsTest extends CardTestPlayerBase {
             if (permanent.getName().equals("Sky Spirit")) {
                 countSkySpirit++;
                 // should NOT +1/+1, original is 2/2
-                Assert.assertEquals("Power is not the same", 2, permanent.getPower().getValue());
-                Assert.assertEquals("Toughness is not the same", 2, permanent.getToughness().getValue());
+                Assertions.assertEquals(2, permanent.getPower().getValue(), "Power is not the same");
+                Assertions.assertEquals(2, permanent.getToughness().getValue(), "Toughness is not the same");
             } else if (permanent.getName().equals("Merfolk Looter")) {
                 countMerfolkLooter++;
                 // should NOT get +1/+1, original is 1/1
-                Assert.assertEquals("Power is not the same", 1, permanent.getPower().getValue());
-                Assert.assertEquals("Toughness is not the same", 1, permanent.getToughness().getValue());
+                Assertions.assertEquals(1, permanent.getPower().getValue(), "Power is not the same");
+                Assertions.assertEquals(1, permanent.getToughness().getValue(), "Toughness is not the same");
             }
         }
-        Assert.assertEquals(2, countSkySpirit);
-        Assert.assertEquals(2, countMerfolkLooter);
+        Assertions.assertEquals(2, countSkySpirit);
+        Assertions.assertEquals(2, countMerfolkLooter);
     }
 
     /**
@@ -91,17 +91,17 @@ public class FavorableWindsTest extends CardTestPlayerBase {
             if (permanent.getName().equals("Sky Spirit")) {
                 countSkySpirit++;
                 // should get +1/+1, original is 2/2
-                Assert.assertEquals("Power is not the same", 5, permanent.getPower().getValue());
-                Assert.assertEquals("Toughness is not the same", 5, permanent.getToughness().getValue());
+                Assertions.assertEquals(5, permanent.getPower().getValue(), "Power is not the same");
+                Assertions.assertEquals(5, permanent.getToughness().getValue(), "Toughness is not the same");
             } else if (permanent.getName().equals("Merfolk Looter")) {
                 countMerfolkLooter++;
                 // should NOT get +1/+1, original is 1/1
-                Assert.assertEquals("Power is not the same", 1, permanent.getPower().getValue());
-                Assert.assertEquals("Toughness is not the same", 1, permanent.getToughness().getValue());
+                Assertions.assertEquals(1, permanent.getPower().getValue(), "Power is not the same");
+                Assertions.assertEquals(1, permanent.getToughness().getValue(), "Toughness is not the same");
             }
         }
-        Assert.assertEquals(2, countSkySpirit);
-        Assert.assertEquals(2, countMerfolkLooter);
+        Assertions.assertEquals(2, countSkySpirit);
+        Assertions.assertEquals(2, countMerfolkLooter);
 
         countSkySpirit = 0;
         countMerfolkLooter = 0;
@@ -109,16 +109,16 @@ public class FavorableWindsTest extends CardTestPlayerBase {
             if (permanent.getName().equals("Sky Spirit")) {
                 countSkySpirit++;
                 // should NOT +1/+1, original is 2/2
-                Assert.assertEquals("Power is not the same", 2, permanent.getPower().getValue());
-                Assert.assertEquals("Toughness is not the same", 2, permanent.getToughness().getValue());
+                Assertions.assertEquals(2, permanent.getPower().getValue(), "Power is not the same");
+                Assertions.assertEquals(2, permanent.getToughness().getValue(), "Toughness is not the same");
             } else if (permanent.getName().equals("Merfolk Looter")) {
                 countMerfolkLooter++;
                 // should NOT get +1/+1, original is 1/1
-                Assert.assertEquals("Power is not the same", 1, permanent.getPower().getValue());
-                Assert.assertEquals("Toughness is not the same", 1, permanent.getToughness().getValue());
+                Assertions.assertEquals(1, permanent.getPower().getValue(), "Power is not the same");
+                Assertions.assertEquals(1, permanent.getToughness().getValue(), "Toughness is not the same");
             }
         }
-        Assert.assertEquals(2, countSkySpirit);
-        Assert.assertEquals(2, countMerfolkLooter);
+        Assertions.assertEquals(2, countSkySpirit);
+        Assertions.assertEquals(2, countMerfolkLooter);
     }
 }

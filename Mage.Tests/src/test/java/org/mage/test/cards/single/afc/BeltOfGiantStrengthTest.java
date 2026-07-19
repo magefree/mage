@@ -4,8 +4,8 @@ import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -33,14 +33,14 @@ public class BeltOfGiantStrengthTest extends CardTestPlayerBase {
         execute();
 
         assertAttachedTo(playerA, belt, gigantosauras, true);
-        Assert.assertTrue(
-                "All Forests should be untapped",
+        Assertions.assertTrue(
                 currentGame
                         .getBattlefield()
                         .getAllActivePermanents()
                         .stream()
                         .filter(permanent -> permanent.hasSubtype(SubType.FOREST, currentGame))
-                        .noneMatch(Permanent::isTapped)
+                        .noneMatch(Permanent::isTapped),
+                "All Forests should be untapped"
         );
     }
 

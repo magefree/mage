@@ -8,8 +8,8 @@ import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.StaticFilters;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -179,7 +179,7 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Nimbus Naiad", 2);
     }
 
-    @Ignore // currently fails
+    @Disabled // currently fails
     @Test
     public void testBestowFallOff() {
         makeTester();
@@ -203,7 +203,7 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Nimbus Naiad", 2);
     }
 
-    @Ignore // currently fails
+    @Disabled // currently fails
     @Test
     public void testBestowRedirectFallOff() {
         makeTester();
@@ -230,7 +230,7 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Nimbus Naiad", 2);
     }
 
-    @Ignore // currently fails
+    @Disabled // currently fails
     @Test
     public void testBestowIllegalTarget() {
         makeTester();

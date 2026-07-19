@@ -4,8 +4,8 @@ package org.mage.test.cards.abilities.activated;
 import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -32,6 +32,6 @@ public class TokenImplActivatedAbilityTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Elf Druid Token", 2);
         assertPermanentCount(playerA, "Freyalise, Llanowar's Fury", 1);
-        Assert.assertEquals("one green mana has to be in the mana pool", 1, playerA.getManaPool().get(ManaType.GREEN));
+        Assertions.assertEquals(1, playerA.getManaPool().get(ManaType.GREEN), "one green mana has to be in the mana pool");
     }
 }

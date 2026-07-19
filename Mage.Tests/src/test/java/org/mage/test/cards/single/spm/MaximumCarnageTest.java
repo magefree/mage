@@ -2,10 +2,10 @@ package org.mage.test.cards.single.spm;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestCommander4Players;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  *
@@ -62,8 +62,8 @@ public class MaximumCarnageTest extends CardTestCommander4Players {
         try {
             execute();
         } catch (AssertionError e) {
-            assertTrue("Shouldn't be able to attack playerA",
-                    e.getMessage().contains("[targetPlayer=PlayerA], but not used"));
+            assertTrue(e.getMessage().contains("[targetPlayer=PlayerA], but not used"),
+                    "Shouldn't be able to attack playerA");
         }
     }
 }

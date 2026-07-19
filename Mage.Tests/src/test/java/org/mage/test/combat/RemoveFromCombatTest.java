@@ -3,8 +3,8 @@ package org.mage.test.combat;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -45,7 +45,7 @@ public class RemoveFromCombatTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, "Stomping Ground", 0, 0);
 
         Permanent stompingGround = getPermanent("Stomping Ground", playerB);
-        Assert.assertEquals("Stomping Ground has to be removed from combat", false, stompingGround.isAttacking());
+        Assertions.assertEquals(false, stompingGround.isAttacking(), "Stomping Ground has to be removed from combat");
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);

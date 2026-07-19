@@ -5,8 +5,8 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -22,9 +22,9 @@ public class SejiriMerfolkTest extends CardTestPlayerBase {
         execute();
 
         Permanent merfolk = getPermanent("Sejiri Merfolk", playerA.getId());
-        Assert.assertNotNull(merfolk);
-        Assert.assertFalse(merfolk.getAbilities().contains(FirstStrikeAbility.getInstance()));
-        Assert.assertFalse(merfolk.getAbilities().contains(LifelinkAbility.getInstance()));
+        Assertions.assertNotNull(merfolk);
+        Assertions.assertFalse(merfolk.getAbilities().contains(FirstStrikeAbility.getInstance()));
+        Assertions.assertFalse(merfolk.getAbilities().contains(LifelinkAbility.getInstance()));
     }
 
     @Test
@@ -36,8 +36,8 @@ public class SejiriMerfolkTest extends CardTestPlayerBase {
         execute();
 
         Permanent merfolk = getPermanent("Sejiri Merfolk", playerA.getId());
-        Assert.assertNotNull(merfolk);
-        Assert.assertTrue(merfolk.getAbilities().contains(FirstStrikeAbility.getInstance()));
-        Assert.assertTrue(merfolk.getAbilities().contains(LifelinkAbility.getInstance()));
+        Assertions.assertNotNull(merfolk);
+        Assertions.assertTrue(merfolk.getAbilities().contains(FirstStrikeAbility.getInstance()));
+        Assertions.assertTrue(merfolk.getAbilities().contains(LifelinkAbility.getInstance()));
     }
 }

@@ -4,8 +4,8 @@ package org.mage.test.game.ends;
 import mage.constants.PhaseStep;
 import mage.constants.TurnPhase;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -46,8 +46,8 @@ public class PhageTheUntouchableTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Hero's Downfall", 1);
         assertPermanentCount(playerB, "Phage the Untouchable", 1);
 
-        Assert.assertTrue("Game has ended.", currentGame.hasEnded());
+        Assertions.assertTrue(currentGame.hasEnded(), "Game has ended.");
         assertWonTheGame(playerA);
-        Assert.assertTrue("Game ist At end phase", currentGame.getTurnPhaseType() == TurnPhase.END);
+        Assertions.assertTrue(currentGame.getTurnPhaseType() == TurnPhase.END, "Game ist At end phase");
     }
 }

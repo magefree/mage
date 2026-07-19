@@ -12,9 +12,9 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.util.CardUtil;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
@@ -56,40 +56,40 @@ public class AdjusterCostTest extends CardTestPlayerBaseWithAIHelps {
     public void test_DistributeValues() {
         // make sure it can distribute values between min and max and skip useless values (example: mana optimization)
 
-        Assert.assertEquals(Arrays.asList(), CardUtil.distributeValues(0, 0, 0));
-        Assert.assertEquals(Arrays.asList(), CardUtil.distributeValues(0, -10, 10));
-        Assert.assertEquals(Arrays.asList(), CardUtil.distributeValues(0, Integer.MIN_VALUE, Integer.MAX_VALUE));
+        Assertions.assertEquals(Arrays.asList(), CardUtil.distributeValues(0, 0, 0));
+        Assertions.assertEquals(Arrays.asList(), CardUtil.distributeValues(0, -10, 10));
+        Assertions.assertEquals(Arrays.asList(), CardUtil.distributeValues(0, Integer.MIN_VALUE, Integer.MAX_VALUE));
 
-        Assert.assertEquals(Arrays.asList(0), CardUtil.distributeValues(1, 0, 0));
-        Assert.assertEquals(Arrays.asList(0), CardUtil.distributeValues(1, 0, 1));
-        Assert.assertEquals(Arrays.asList(0), CardUtil.distributeValues(1, 0, 2));
-        Assert.assertEquals(Arrays.asList(0), CardUtil.distributeValues(1, 0, 3));
-        Assert.assertEquals(Arrays.asList(0), CardUtil.distributeValues(1, 0, 9));
+        Assertions.assertEquals(Arrays.asList(0), CardUtil.distributeValues(1, 0, 0));
+        Assertions.assertEquals(Arrays.asList(0), CardUtil.distributeValues(1, 0, 1));
+        Assertions.assertEquals(Arrays.asList(0), CardUtil.distributeValues(1, 0, 2));
+        Assertions.assertEquals(Arrays.asList(0), CardUtil.distributeValues(1, 0, 3));
+        Assertions.assertEquals(Arrays.asList(0), CardUtil.distributeValues(1, 0, 9));
 
-        Assert.assertEquals(Arrays.asList(0), CardUtil.distributeValues(2, 0, 0));
-        Assert.assertEquals(Arrays.asList(0, 1), CardUtil.distributeValues(2, 0, 1));
-        Assert.assertEquals(Arrays.asList(0, 2), CardUtil.distributeValues(2, 0, 2));
-        Assert.assertEquals(Arrays.asList(0, 3), CardUtil.distributeValues(2, 0, 3));
-        Assert.assertEquals(Arrays.asList(0, 9), CardUtil.distributeValues(2, 0, 9));
+        Assertions.assertEquals(Arrays.asList(0), CardUtil.distributeValues(2, 0, 0));
+        Assertions.assertEquals(Arrays.asList(0, 1), CardUtil.distributeValues(2, 0, 1));
+        Assertions.assertEquals(Arrays.asList(0, 2), CardUtil.distributeValues(2, 0, 2));
+        Assertions.assertEquals(Arrays.asList(0, 3), CardUtil.distributeValues(2, 0, 3));
+        Assertions.assertEquals(Arrays.asList(0, 9), CardUtil.distributeValues(2, 0, 9));
 
-        Assert.assertEquals(Arrays.asList(0), CardUtil.distributeValues(3, 0, 0));
-        Assert.assertEquals(Arrays.asList(0, 1), CardUtil.distributeValues(3, 0, 1));
-        Assert.assertEquals(Arrays.asList(0, 1, 2), CardUtil.distributeValues(3, 0, 2));
-        Assert.assertEquals(Arrays.asList(0, 2, 3), CardUtil.distributeValues(3, 0, 3));
-        Assert.assertEquals(Arrays.asList(0, 5, 9), CardUtil.distributeValues(3, 0, 9));
+        Assertions.assertEquals(Arrays.asList(0), CardUtil.distributeValues(3, 0, 0));
+        Assertions.assertEquals(Arrays.asList(0, 1), CardUtil.distributeValues(3, 0, 1));
+        Assertions.assertEquals(Arrays.asList(0, 1, 2), CardUtil.distributeValues(3, 0, 2));
+        Assertions.assertEquals(Arrays.asList(0, 2, 3), CardUtil.distributeValues(3, 0, 3));
+        Assertions.assertEquals(Arrays.asList(0, 5, 9), CardUtil.distributeValues(3, 0, 9));
 
-        Assert.assertEquals(Arrays.asList(10, 15, 20), CardUtil.distributeValues(3, 10, 20));
-        Assert.assertEquals(Arrays.asList(10, 16, 21), CardUtil.distributeValues(3, 10, 21));
-        Assert.assertEquals(Arrays.asList(10, 16, 22), CardUtil.distributeValues(3, 10, 22));
-        Assert.assertEquals(Arrays.asList(10, 17, 23), CardUtil.distributeValues(3, 10, 23));
-        Assert.assertEquals(Arrays.asList(10, 20, 29), CardUtil.distributeValues(3, 10, 29));
+        Assertions.assertEquals(Arrays.asList(10, 15, 20), CardUtil.distributeValues(3, 10, 20));
+        Assertions.assertEquals(Arrays.asList(10, 16, 21), CardUtil.distributeValues(3, 10, 21));
+        Assertions.assertEquals(Arrays.asList(10, 16, 22), CardUtil.distributeValues(3, 10, 22));
+        Assertions.assertEquals(Arrays.asList(10, 17, 23), CardUtil.distributeValues(3, 10, 23));
+        Assertions.assertEquals(Arrays.asList(10, 20, 29), CardUtil.distributeValues(3, 10, 29));
 
-        Assert.assertEquals(Arrays.asList(10), CardUtil.distributeValues(5, 10, 10));
-        Assert.assertEquals(Arrays.asList(10, 11), CardUtil.distributeValues(5, 10, 11));
-        Assert.assertEquals(Arrays.asList(10, 11, 12), CardUtil.distributeValues(5, 10, 12));
-        Assert.assertEquals(Arrays.asList(10, 11, 12, 13), CardUtil.distributeValues(5, 10, 13));
-        Assert.assertEquals(Arrays.asList(10, 11, 13, 14, 15), CardUtil.distributeValues(5, 10, 15));
-        Assert.assertEquals(Arrays.asList(10, 13, 15, 18, 20), CardUtil.distributeValues(5, 10, 20));
+        Assertions.assertEquals(Arrays.asList(10), CardUtil.distributeValues(5, 10, 10));
+        Assertions.assertEquals(Arrays.asList(10, 11), CardUtil.distributeValues(5, 10, 11));
+        Assertions.assertEquals(Arrays.asList(10, 11, 12), CardUtil.distributeValues(5, 10, 12));
+        Assertions.assertEquals(Arrays.asList(10, 11, 12, 13), CardUtil.distributeValues(5, 10, 13));
+        Assertions.assertEquals(Arrays.asList(10, 11, 13, 14, 15), CardUtil.distributeValues(5, 10, 15));
+        Assertions.assertEquals(Arrays.asList(10, 13, 15, 18, 20), CardUtil.distributeValues(5, 10, 20));
     }
 
     @Test
@@ -140,15 +140,15 @@ public class AdjusterCostTest extends CardTestPlayerBaseWithAIHelps {
         try {
             execute();
         } catch (AssertionError e) {
-            Assert.assertTrue("X must have limits: " + e.getMessage(), e.getMessage().contains("Found wrong X value = 2"));
-            Assert.assertTrue("X must have limits: " + e.getMessage(), e.getMessage().contains("from 0 to 1"));
+            Assertions.assertTrue(e.getMessage().contains("Found wrong X value = 2"), "X must have limits: " + e.getMessage());
+            Assertions.assertTrue(e.getMessage().contains("from 0 to 1"), "X must have limits: " + e.getMessage());
             return;
         }
-        Assert.fail("test must fail");
+        Assertions.fail("test must fail");
     }
 
     @Test
-    @Ignore // TODO: AI must support game simulations for X choice, see announceXMana
+    @Disabled // TODO: AI must support game simulations for X choice, see announceXMana
     public void test_prepareX_SpellAbility_AI() {
         prepareCustomCardInHand("test card", "{X}{1}", new CostAdjuster() {
             @Override
@@ -188,15 +188,15 @@ public class AdjusterCostTest extends CardTestPlayerBaseWithAIHelps {
         try {
             execute();
         } catch (AssertionError e) {
-            Assert.assertTrue("X must have limits: " + e.getMessage(), e.getMessage().contains("Found wrong X value = 2"));
-            Assert.assertTrue("X must have limits: " + e.getMessage(), e.getMessage().contains("from 0 to 1"));
+            Assertions.assertTrue(e.getMessage().contains("Found wrong X value = 2"), "X must have limits: " + e.getMessage());
+            Assertions.assertTrue(e.getMessage().contains("from 0 to 1"), "X must have limits: " + e.getMessage());
             return;
         }
-        Assert.fail("test must fail");
+        Assertions.fail("test must fail");
     }
 
     @Test
-    @Ignore // TODO: AI must support game simulations for X choice, see announceXMana
+    @Disabled // TODO: AI must support game simulations for X choice, see announceXMana
     // TODO: implement AI and add tests for non-mana X values (announceXCost)
     public void test_prepareX_ActivatedAbility_AI() {
         prepareCustomPermanent("test card", "test ability", "{X}{1}", new CostAdjuster() {
