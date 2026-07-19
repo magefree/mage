@@ -29,6 +29,9 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Bilbo, Thief in the Night", 255, Rarity.MYTHIC, mage.cards.b.BilboThiefInTheNight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bilbo, Thief in the Night", 33, Rarity.MYTHIC, mage.cards.b.BilboThiefInTheNight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Burn, Burn, Tree and Fern", 90, Rarity.UNCOMMON, mage.cards.b.BurnBurnTreeAndFern.class));
+        cards.add(new SetCardInfo("Desolation of Smaug", 226, Rarity.RARE, mage.cards.d.DesolationOfSmaug.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Desolation of Smaug", 262, Rarity.RARE, mage.cards.d.DesolationOfSmaug.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Desolation of Smaug", 93, Rarity.RARE, mage.cards.d.DesolationOfSmaug.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 198, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART));
         cards.add(new SetCardInfo("Island", 195, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART));
         cards.add(new SetCardInfo("Mountain", 197, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART));
