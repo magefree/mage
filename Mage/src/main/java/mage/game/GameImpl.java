@@ -3439,6 +3439,7 @@ public abstract class GameImpl implements Game {
         }
         // Then, if that player controlled any objects on the stack not represented by cards, those objects cease to exist.
         this.getState().getContinuousEffects().removeInactiveEffects(this);
+        // TODO: need copy tests, see #12911
         getStack().removeIf(object -> object.isControlledBy(playerId));
         // Then, if there are any objects still controlled by that player, those objects are exiled.
         applyEffects(); // to remove control from effects removed meanwhile

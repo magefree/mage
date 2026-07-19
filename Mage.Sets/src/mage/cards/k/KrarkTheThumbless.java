@@ -79,6 +79,7 @@ class KrarkTheThumblessEffect extends OneShotEffect {
             return true;
         }
         if (spell.isCopy()) {
+            // TODO: need copy tests, see #12911
             game.getStack().remove(spell, game);
             return true;
         }

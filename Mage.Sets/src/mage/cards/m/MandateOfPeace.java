@@ -114,6 +114,7 @@ class MandateOfPeaceEndCombatEffect extends OneShotEffect {
                     .filter(Spell.class::isInstance)
                     .forEach(stackObject -> ((Spell) stackObject).moveToExile(null, "", null, game));
 
+            // TODO: need copy tests, see #12911
             game.getStack().stream()
                     .filter(Ability.class::isInstance)
                     .forEach(stackObject -> game.getStack().remove(stackObject, game));
