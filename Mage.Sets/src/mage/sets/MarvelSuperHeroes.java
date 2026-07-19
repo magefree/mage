@@ -264,6 +264,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Raft Security Officer", 33, Rarity.COMMON, mage.cards.r.RaftSecurityOfficer.class));
         cards.add(new SetCardInfo("Rapid Rescue", 181, Rarity.COMMON, mage.cards.r.RapidRescue.class));
         cards.add(new SetCardInfo("Red Guardian, Super-Soldier", 34, Rarity.UNCOMMON, mage.cards.r.RedGuardianSuperSoldier.class));
+        cards.add(new SetCardInfo("Red Hulk", 149, Rarity.UNCOMMON, mage.cards.r.RedHulk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Red Hulk", 329, Rarity.UNCOMMON, mage.cards.r.RedHulk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Red Room Recruit", 110, Rarity.COMMON, mage.cards.r.RedRoomRecruit.class));
         cards.add(new SetCardInfo("Reptil, Dinomorpher", 182, Rarity.UNCOMMON, mage.cards.r.ReptilDinomorpher.class));
         cards.add(new SetCardInfo("Repulsor Blast", 150, Rarity.COMMON, mage.cards.r.RepulsorBlast.class));
