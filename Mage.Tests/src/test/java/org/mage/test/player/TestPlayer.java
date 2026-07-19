@@ -1,5 +1,16 @@
 package org.mage.test.player;
 
+import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+import org.apache.log4j.Logger;
+import org.junit.Assert;
+
 import mage.*;
 import mage.abilities.*;
 import mage.abilities.common.SimpleStaticAbility;
@@ -51,15 +62,6 @@ import mage.util.CardUtil;
 import mage.util.MultiAmountMessage;
 import mage.util.RandomUtil;
 import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
-import org.apache.log4j.Logger;
-import org.junit.Assert;
-import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * Basic implementation of testable player
@@ -2566,16 +2568,30 @@ public class TestPlayer implements Player {
                     || target.getOriginalTarget() instanceof TargetSpellOrPermanent
                     || target.getOriginalTarget() instanceof TargetStackObject) {
                 for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
-                    checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
+                    checkTargetDefinitionMarksSupport(target, targetDefinition, "^[]");
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
                     for (String targetName : targetList) {
+                        boolean originOnly = false;
+                        boolean copyOnly = false;
+                        if (targetName.endsWith("]")) {
+                            if (targetName.endsWith("[no copy]")) {
+                                originOnly = true;
+                                targetName = targetName.substring(0, targetName.length() - 9);
+                            }
+                            if (targetName.endsWith("[only copy]")) {
+                                copyOnly = true;
+                                targetName = targetName.substring(0, targetName.length() - 11);
+                            }
+                        }
                         for (StackObject stackObject : game.getStack()) {
                             if (hasObjectTargetNameOrAlias(stackObject, targetName)) {
-                                if (target.possibleTargets(abilityControllerId, source, game).contains(stackObject.getId())) {
-                                    target.addTarget(stackObject.getId(), source, game);
-                                    targetFound = true;
-                                    break; // return to next targetName
+                                if ((stackObject.isCopy() && !originOnly) || (!stackObject.isCopy() && !copyOnly)) {
+                                    if (target.possibleTargets(abilityControllerId, source, game).contains(stackObject.getId())) {
+                                        target.addTarget(stackObject.getId(), source, game);
+                                        targetFound = true;
+                                        break; // return to next targetName
+                                    }
                                 }
                             }
                         }
