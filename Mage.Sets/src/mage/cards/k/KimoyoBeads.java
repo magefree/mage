@@ -4,23 +4,17 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.ExileAndReturnSourceEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.hint.common.ModesAlreadyUsedHint;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
+import mage.constants.PutCards;
 import mage.game.permanent.token.SoldierToken;
-import mage.players.Player;
 
 /**
  *
@@ -48,7 +42,8 @@ public final class KimoyoBeads extends CardImpl {
 
         // * Prime Bead -- You gain 3 life. Exile this artifact, then return it to the battlefield under its owner's control.
         ability.addMode(new Mode(new GainLifeEffect(3))
-            .addEffect(new KimoyoBeadsEffect())
+            .addEffect(new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD)
+                .setText("exile this artifact, then return it to the battlefield under its owner's control"))
             .withFlavorWord("Prime Bead")
             .setModeTag("gain life, and exile then return"));
 
@@ -63,38 +58,5 @@ public final class KimoyoBeads extends CardImpl {
     @Override
     public KimoyoBeads copy() {
         return new KimoyoBeads(this);
-    }
-}
-
-class KimoyoBeadsEffect extends OneShotEffect {
-
-    KimoyoBeadsEffect() {
-        super(Outcome.Benefit);
-        staticText = "exile {this}, then return it to the battlefield under its owner's control";
-    }
-
-    private KimoyoBeadsEffect(final KimoyoBeadsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public KimoyoBeadsEffect copy() {
-        return new KimoyoBeadsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        Player player = game.getPlayer(source.getControllerId());
-        if (permanent == null || player == null) {
-            return false;
-        }
-        Card card = permanent.getMainCard();
-        player.moveCards(permanent, Zone.EXILED, source, game);
-        if (card instanceof PermanentToken) {
-            return true;
-        }
-        Player owner = game.getPlayer(card.getOwnerId());
-        return owner == null || owner.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
 }
