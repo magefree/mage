@@ -560,6 +560,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Spider-Mobile", 826, Rarity.UNCOMMON, mage.cards.s.SpiderMobile.class));
         cards.add(new SetCardInfo("Spider-Rex, Daring Dino", 818, Rarity.COMMON, mage.cards.s.SpiderRexDaringDino.class));
         cards.add(new SetCardInfo("Spider-UK", 777, Rarity.UNCOMMON, mage.cards.s.SpiderUK.class));
+        cards.add(new SetCardInfo("Stark's Ingenuity", 533, Rarity.RARE, mage.cards.s.StarksIngenuity.class));
         cards.add(new SetCardInfo("Starling, Aerial Ally", 778, Rarity.COMMON, mage.cards.s.StarlingAerialAlly.class));
         cards.add(new SetCardInfo("Stature, Young Avenger", 571, Rarity.UNCOMMON, mage.cards.s.StatureYoungAvenger.class));
         cards.add(new SetCardInfo("Stegron the Dinosaur Man", 810, Rarity.COMMON, mage.cards.s.StegronTheDinosaurMan.class));
