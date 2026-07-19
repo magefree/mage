@@ -70,8 +70,7 @@ enum TheSibsigCeremonyPredicate implements Predicate<Permanent> {
     @Override
     public boolean apply(Permanent input, Game game) {
         int zcc = input.getZoneChangeCounter(game);
-        Spell spell = game.getStack().getSpell(input.getId());
-        return (spell != null && spell.getZoneChangeCounter(game) == zcc - 1)
-                || game.getLastKnownInformation(input.getId(), Zone.STACK, zcc - 1) != null;
+        Spell spell = game.getSpellOrLKIStack(input);
+        return (spell != null && spell.getZoneChangeCounter(game) == zcc - 1);
     }
 }
