@@ -3387,6 +3387,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        // TODO: single form run is outdated, need to remove
         int param = 0;
         if (args.length > 0) {
             String param1 = args[0];

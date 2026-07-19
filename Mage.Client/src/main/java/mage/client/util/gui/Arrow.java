@@ -124,6 +124,7 @@ public class Arrow extends JPanel {
     }
 
     public static void main(String[] args) {
+        // TODO: single form run is outdated, need to remove
         final JFrame frame = new JFrame();
         frame.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

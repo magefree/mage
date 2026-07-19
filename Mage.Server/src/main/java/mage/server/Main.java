@@ -25,6 +25,7 @@ import mage.server.util.PluginClassLoader;
 import mage.server.util.ServerMessagesUtil;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
+import mage.util.JavaUtil;
 import mage.utils.MageVersion;
 import mage.utils.SystemUtil;
 import org.apache.log4j.Logger;
@@ -96,7 +97,8 @@ public final class Main {
     private static boolean detailsMode;
 
     public static void main(String[] args) {
-        System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
+        JavaUtil.applyDefaultServerSettings();
+
         logger.info("Starting MAGE SERVER version: " + version);
         logger.info("Java version: " + System.getProperty("java.version"));
         logger.info("Logging level: " + logger.getEffectiveLevel());

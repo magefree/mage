@@ -28,6 +28,7 @@ public class StartMultiGamesTest {
     private MageUI ui;
 
     public static void main(String[] argv) throws Exception {
+        // TODO: outdated, can be replaced by LoadTest features?
         new StartMultiGamesTest().startMultiGames();
     }
 

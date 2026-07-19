@@ -256,6 +256,7 @@ public class FeedbackDialog extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        // TODO: single form run is outdated, need to remove
         java.awt.EventQueue.invokeLater(() -> {
             if (!dialog.isVisible()) {
                 dialog.setLocation(300, 200);
