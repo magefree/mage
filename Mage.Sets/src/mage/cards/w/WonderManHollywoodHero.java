@@ -15,7 +15,7 @@ import mage.counters.CounterType;
 
 /**
  *
- * @author anonymous
+ * @author Grath
  */
 public final class WonderManHollywoodHero extends CardImpl {
 
