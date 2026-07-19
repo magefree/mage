@@ -401,6 +401,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Winter Soldier, Icy Assassin", 377, Rarity.RARE, mage.cards.w.WinterSoldierIcyAssassin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wolverine, Fierce Fighter", 240, Rarity.RARE, mage.cards.w.WolverineFierceFighter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wolverine, Fierce Fighter", 378, Rarity.RARE, mage.cards.w.WolverineFierceFighter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wonder Man, Hollywood Hero", 160, Rarity.UNCOMMON, mage.cards.w.WonderManHollywoodHero.class));
         cards.add(new SetCardInfo("World War Hulk", 197, Rarity.RARE, mage.cards.w.WorldWarHulk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("World War Hulk", 304, Rarity.RARE, mage.cards.w.WorldWarHulk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yellowjacket, Heartless Marauder", 123, Rarity.UNCOMMON, mage.cards.y.YellowjacketHeartlessMarauder.class));
