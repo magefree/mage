@@ -2,8 +2,8 @@ package org.mage.test.cards.abilities.oneshot.counterspell;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -76,10 +76,10 @@ public class ForceOfWillTest extends CardTestPlayerBase {
         // TODO: Needed since the alternative cost is not being properly check for playability.
         try {
             execute();
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Cast Force of Will$target=Thoughtseize")) {
-                Assert.fail("must throw error about not being able to cast Force of Will, but got:\n" + e.getMessage());
+                Assertions.fail("must throw error about not being able to cast Force of Will, but got:\n" + e.getMessage());
             }
         }
     }

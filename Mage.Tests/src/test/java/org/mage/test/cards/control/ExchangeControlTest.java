@@ -4,9 +4,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -177,10 +177,10 @@ public class ExchangeControlTest extends CardTestPlayerBase {
 
         try {
             execute();
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Player PlayerB must have 0 actions but found 1")) {
-                Assert.fail("Needed error about PlayerB having too many actions, but got:\n" + e.getMessage());
+                Assertions.fail("Needed error about PlayerB having too many actions, but got:\n" + e.getMessage());
             }
         }
 
@@ -242,7 +242,7 @@ public class ExchangeControlTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Manta Riders", 1);
 
         Permanent controlledMantas = getPermanent("Manta Riders", playerA.getId());
-        Assert.assertTrue("Manta Riders should have flying ability", controlledMantas.getAbilities().contains(FlyingAbility.getInstance()));
+        Assertions.assertTrue(controlledMantas.getAbilities().contains(FlyingAbility.getInstance()), "Manta Riders should have flying ability");
 
     }
 
@@ -287,7 +287,7 @@ public class ExchangeControlTest extends CardTestPlayerBase {
      * <p>
      * See https://github.com/magefree/mage/issues/8742
      */
-    @Ignore
+    @Disabled
     @Test
     public void testGildedDrakeCopyExchange() {
         addCard(Zone.BATTLEFIELD, playerA, "Kiki-Jiki, Mirror Breaker");

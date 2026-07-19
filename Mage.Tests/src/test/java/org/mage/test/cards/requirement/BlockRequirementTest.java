@@ -2,11 +2,12 @@ package org.mage.test.cards.requirement;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
-import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 
 /**
  * @author LevelX2, icetc

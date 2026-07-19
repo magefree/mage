@@ -6,8 +6,8 @@ import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
 import mage.util.DeckBuildUtils;
 import mage.util.TournamentUtil;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.MageTestPlayerBase;
 
 import java.util.ArrayList;
@@ -81,7 +81,7 @@ public class DeckAutoLandsTest extends MageTestPlayerBase {
         try {
             deck = Deck.load(source, true);
         } catch (GameException e) {
-            Assert.fail("Can't prepare deck: " + cards);
+            Assertions.fail("Can't prepare deck: " + cards);
         }
         return deck;
     }
@@ -98,8 +98,8 @@ public class DeckAutoLandsTest extends MageTestPlayerBase {
         int[] lands = DeckBuildUtils.landCountSuggestion(needTotal, deck.getMaindeckCards());
         List<Integer> current = new ArrayList<>(Arrays.asList(lands[0], lands[1], lands[2], lands[3], lands[4]));
         List<Integer> need = new ArrayList<>(Arrays.asList(needPlains, needIslands, needSwamps, needMountains, needForests));
-        Assert.assertTrue(info + " - wrong deck size", deck.getMaindeckCards().size() + current.stream().mapToInt(x -> x).sum() >= needTotal);
-        Assert.assertEquals(info + " - wrong lands count (WUBRG)", need, current);
+        Assertions.assertTrue(deck.getMaindeckCards().size() + current.stream().mapToInt(x -> x).sum() >= needTotal, info + " - wrong deck size");
+        Assertions.assertEquals(need, current, info + " - wrong lands count (WUBRG)");
     }
 
     @Test
@@ -155,8 +155,8 @@ public class DeckAutoLandsTest extends MageTestPlayerBase {
         for (int i = 0; i < tries; ++i) {
             possibleSets.addAll(TournamentUtil.getLandSetCodeForDeckSets(deck.getExpansionSetCodes()).stream().sorted().collect(Collectors.toList()));
         }
-        Assert.assertEquals("must find 1 set per request, but get " + possibleSets, tries, possibleSets.size());
-        Assert.assertNotEquals("must find different random sets, but get " + possibleSets, 1, possibleSets.stream().distinct().count());
+        Assertions.assertEquals(tries, possibleSets.size(), "must find 1 set per request, but get " + possibleSets);
+        Assertions.assertNotEquals(1, possibleSets.stream().distinct().count(), "must find different random sets, but get " + possibleSets);
     }
 
     private void assertPossibleSets(
@@ -164,6 +164,6 @@ public class DeckAutoLandsTest extends MageTestPlayerBase {
             Deck deck,
             List<String> needSets) {
         List<String> possibleSets = TournamentUtil.getLandSetCodeForDeckSets(deck.getExpansionSetCodes()).stream().sorted().collect(Collectors.toList());
-        Assert.assertEquals(info + " - wrong possible sets", needSets, possibleSets);
+        Assertions.assertEquals(needSets, possibleSets, info + " - wrong possible sets");
     }
 }

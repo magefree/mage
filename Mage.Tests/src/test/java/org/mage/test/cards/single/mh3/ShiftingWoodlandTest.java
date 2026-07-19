@@ -5,8 +5,8 @@ import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import java.util.ArrayList;
@@ -93,7 +93,7 @@ public class ShiftingWoodlandTest extends CardTestPlayerBase {
         runCode("check that the copy effect ended", 1, PhaseStep.END_COMBAT, playerA, (info, player, game) -> {
             Card card = player.getGraveyard().getCards(game).stream().filter(c -> c.getName().equals(woodland)).findFirst().orElse(null);
             if (card == null) {
-                Assert.fail("Shifting Woodland is not in the graveyard");
+                Assertions.fail("Shifting Woodland is not in the graveyard");
             }
             List<String> failReasons = new ArrayList<>();
             if (!card.isLand(game) || card.getCardType(game).size() != 1) {
@@ -109,7 +109,7 @@ public class ShiftingWoodlandTest extends CardTestPlayerBase {
             }
             if (!failReasons.isEmpty()) {
                 String failText = "Shifting Woodland's copy effect did not end properly:\n\t&mdash; " + String.join("\n\t&mdash; ", failReasons);
-                Assert.fail(failText);
+                Assertions.fail(failText);
             }
         });
 

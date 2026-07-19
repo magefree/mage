@@ -4,8 +4,8 @@ import mage.abilities.Ability;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.Card;
 import mage.constants.*;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import java.util.Arrays;
@@ -123,12 +123,12 @@ public class UnableToScreamTest extends CardTestPlayerBase {
         runCode("The creature is an artifact creature, toy elf druid with base stats 0/2", 1, PhaseStep.BEGIN_COMBAT, playerB,
                 (info, player, game) -> {
                     Card elves = game.getBattlefield().getAllActivePermanents().stream().filter(p -> p.getName().equals(llanowarElves)).findAny().orElse(null);
-                    Assert.assertNotNull("The creature must be on the battlefield", elves);
-                    Assert.assertEquals("The creature must have base power 0", 0, elves.getPower().getValue());
-                    Assert.assertEquals("The creature must have base toughness 2", 2, elves.getToughness().getValue());
-                    Assert.assertTrue("The creature must have lost its abilities", elves.getAbilities(game).isEmpty());
-                    Assert.assertEquals("The creature must be an artifact creature", new HashSet<>(Arrays.asList(CardType.ARTIFACT, CardType.CREATURE)), new HashSet<>(elves.getCardType(game)));
-                    Assert.assertEquals("The creature must be a Toy Elf Druid", new HashSet<>(Arrays.asList(SubType.TOY, SubType.ELF, SubType.DRUID)), new HashSet<>(elves.getSubtype(game)));
+                    Assertions.assertNotNull(elves, "The creature must be on the battlefield");
+                    Assertions.assertEquals(0, elves.getPower().getValue(), "The creature must have base power 0");
+                    Assertions.assertEquals(2, elves.getToughness().getValue(), "The creature must have base toughness 2");
+                    Assertions.assertTrue(elves.getAbilities(game).isEmpty(), "The creature must have lost its abilities");
+                    Assertions.assertEquals(new HashSet<>(Arrays.asList(CardType.ARTIFACT, CardType.CREATURE)), new HashSet<>(elves.getCardType(game)), "The creature must be an artifact creature");
+                    Assertions.assertEquals(new HashSet<>(Arrays.asList(SubType.TOY, SubType.ELF, SubType.DRUID)), new HashSet<>(elves.getSubtype(game)), "The creature must be a Toy Elf Druid");
                 }
         );
 
@@ -139,12 +139,12 @@ public class UnableToScreamTest extends CardTestPlayerBase {
         runCode("The creature is creature, toy elf druid with base stats 1/1", 2, PhaseStep.BEGIN_COMBAT, playerB,
                 (info, player, game) -> {
                     Card elves = game.getBattlefield().getAllActivePermanents().stream().filter(p -> p.getName().equals(llanowarElves)).findAny().orElse(null);
-                    Assert.assertNotNull("The creature must be on the battlefield", elves);
-                    Assert.assertEquals("The creature must have base power 1", 1, elves.getPower().getValue());
-                    Assert.assertEquals("The creature must have base toughness 1", 1, elves.getToughness().getValue());
-                    Assert.assertTrue("The creature must have restored its abilities", elves.getAbilities(game).stream().map(Ability::getClass).collect(Collectors.toList()).contains(GreenManaAbility.class));
-                    Assert.assertEquals("The creature must be just a creature", Collections.singleton(CardType.CREATURE), new HashSet<>(elves.getCardType(game)));
-                    Assert.assertEquals("The creature must be an Elf Druid", new HashSet<>(Arrays.asList(SubType.ELF, SubType.DRUID)), new HashSet<>(elves.getSubtype(game)));
+                    Assertions.assertNotNull(elves, "The creature must be on the battlefield");
+                    Assertions.assertEquals(1, elves.getPower().getValue(), "The creature must have base power 1");
+                    Assertions.assertEquals(1, elves.getToughness().getValue(), "The creature must have base toughness 1");
+                    Assertions.assertTrue(elves.getAbilities(game).stream().map(Ability::getClass).collect(Collectors.toList()).contains(GreenManaAbility.class), "The creature must have restored its abilities");
+                    Assertions.assertEquals(Collections.singleton(CardType.CREATURE), new HashSet<>(elves.getCardType(game)), "The creature must be just a creature");
+                    Assertions.assertEquals(new HashSet<>(Arrays.asList(SubType.ELF, SubType.DRUID)), new HashSet<>(elves.getSubtype(game)), "The creature must be an Elf Druid");
                 }
         );
 

@@ -4,8 +4,8 @@ package org.mage.test.cards.continuous;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -38,7 +38,7 @@ public class ErsatzGnomesTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertTapped("Ersatz Gnomes", true);
         Permanent lion = getPermanent("Silvercoat Lion", playerA);
-        Assert.assertTrue("Silvercoat lion has to be colorless", lion.getColor(currentGame).isColorless());
+        Assertions.assertTrue(lion.getColor(currentGame).isColorless(), "Silvercoat lion has to be colorless");
     }
 
     @Test
@@ -68,7 +68,7 @@ public class ErsatzGnomesTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertTapped("Ersatz Gnomes", true);
         Permanent lion = getPermanent("Silvercoat Lion", playerA);
-        Assert.assertTrue("Silvercoat lion has to be white", lion.getColor(currentGame).isWhite());
+        Assertions.assertTrue(lion.getColor(currentGame).isWhite(), "Silvercoat lion has to be white");
     }
 
     @Test
@@ -98,7 +98,7 @@ public class ErsatzGnomesTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Silvercoat Lion", 3, 3);
         assertTapped("Ersatz Gnomes", true);
         Permanent eidolon = getPermanent("Hopeful Eidolon", playerA);
-        Assert.assertTrue("Hopeful Eidolon Enchantment has to be colorless", eidolon.getColor(currentGame).isColorless());
+        Assertions.assertTrue(eidolon.getColor(currentGame).isColorless(), "Hopeful Eidolon Enchantment has to be colorless");
     }
 
     @Test
@@ -131,6 +131,6 @@ public class ErsatzGnomesTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Hopeful Eidolon", 1);
         assertTapped("Ersatz Gnomes", true);
         Permanent lion = getPermanent("Hopeful Eidolon", playerA);
-        Assert.assertTrue("Hopeful Eidolon has to be white", lion.getColor(currentGame).isWhite());
+        Assertions.assertTrue(lion.getColor(currentGame).isWhite(), "Hopeful Eidolon has to be white");
     }
 }

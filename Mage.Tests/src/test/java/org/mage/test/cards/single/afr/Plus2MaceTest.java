@@ -4,8 +4,8 @@ import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.util.GameLog;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -18,9 +18,9 @@ public class Plus2MaceTest extends CardTestPlayerBase {
         // + character can't processing by regexp, so it must be quoted replaced in code by Pattern.quote(mageObject.getName())
         String cardName = "+2 Mace";
         CardInfo cardinfo = CardRepository.instance.findCard(cardName);
-        Assert.assertNotNull(cardName + " must exists", cardinfo);
+        Assertions.assertNotNull(cardinfo, cardName + " must exists");
         Card card = cardinfo.createCard();
         String cardText = GameLog.replaceNameByColoredName(card, card.getSpellAbility().toString(), null);
-        Assert.assertTrue("card text must contain card name", cardText.contains(cardName));
+        Assertions.assertTrue(cardText.contains(cardName), "card text must contain card name");
     }
 }

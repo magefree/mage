@@ -8,9 +8,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseAI;
 
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class PreventRepeatedActionsTest extends CardTestPlayerBaseAI {
                 tappedLands++;
             }
         }
-        Assert.assertEquals("AI should only used Equipment once", 2, tappedLands);
+        Assertions.assertEquals(2, tappedLands, "AI should only used Equipment once");
     }
 
     /**
@@ -69,7 +69,7 @@ public class PreventRepeatedActionsTest extends CardTestPlayerBaseAI {
     }
 
     @Test
-    @Ignore // TODO: enable after repeated actions fix, see #10197
+    @Disabled // TODO: enable after repeated actions fix, see #10197
     public void test_BasaltMonolith_2() {
         // workaround to collect all activated/cast abilities
         // AI logs also help to find a problem: SELECTED ACTION for PlayerA: {3}: Untap {this}.
@@ -89,7 +89,7 @@ public class PreventRepeatedActionsTest extends CardTestPlayerBaseAI {
         execute();
 
         assertPermanentCount(playerA, "Aesthir Glider", 1);
-        Assert.assertEquals("AI must use only cast ability", "[Cast Aesthir Glider]", usedStats.toString());
+        Assertions.assertEquals("AI must use only cast ability", "[Cast Aesthir Glider]", usedStats.toString());
     }
 
     /**

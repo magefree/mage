@@ -3,8 +3,8 @@ package org.mage.test.cards.replacement;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -33,7 +33,7 @@ public class WinLoseEffectsTest extends CardTestPlayerBase {
         setStopAt(40, PhaseStep.END_TURN);
         execute();
 
-        Assert.assertEquals("Player A library is empty", 0 , playerA.getLibrary().size());
+        Assertions.assertEquals(0, playerA.getLibrary().size() , "Player A library is empty");
         assertWonTheGame(playerA);
         assertLife(playerA, 20);
         assertLife(playerB, 20);
@@ -95,7 +95,7 @@ public class WinLoseEffectsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        Assert.assertEquals("Player A library is empty", 0 , playerA.getLibrary().size());
+        Assertions.assertEquals(0, playerA.getLibrary().size() , "Player A library is empty");
         assertWonTheGame(playerA);
         assertLife(playerA, 20);
         assertLife(playerB, 20);
@@ -144,7 +144,7 @@ public class WinLoseEffectsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Ad Nauseam", 1);
         assertGraveyardCount(playerA, "Serum Visions", 1);
         
-        Assert.assertEquals("Player A library is empty", 0 , playerA.getLibrary().size());
+        Assertions.assertEquals(0, playerA.getLibrary().size() , "Player A library is empty");
 
         assertLife(playerA, -5);
         assertLife(playerB, 20);

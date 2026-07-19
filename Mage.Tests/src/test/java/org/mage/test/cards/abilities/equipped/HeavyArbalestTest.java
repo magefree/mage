@@ -3,8 +3,8 @@ package org.mage.test.cards.abilities.equipped;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -34,8 +34,8 @@ public class HeavyArbalestTest extends CardTestPlayerBase {
         assertLife(playerB, 18);
 
         Permanent eliteVanguard = getPermanent("Elite Vanguard", playerA.getId());
-        Assert.assertTrue(!eliteVanguard.getAttachments().isEmpty());
-        Assert.assertTrue(eliteVanguard.isTapped());
+        Assertions.assertTrue(!eliteVanguard.getAttachments().isEmpty());
+        Assertions.assertTrue(eliteVanguard.isTapped());
     }
 
     /**
@@ -61,8 +61,8 @@ public class HeavyArbalestTest extends CardTestPlayerBase {
         assertLife(playerB, 18);
 
         Permanent eliteVanguard = getPermanent("Elite Vanguard", playerA.getId());
-        Assert.assertTrue(eliteVanguard.getAttachments().isEmpty());
-        Assert.assertFalse(eliteVanguard.isTapped());
+        Assertions.assertTrue(eliteVanguard.getAttachments().isEmpty());
+        Assertions.assertFalse(eliteVanguard.isTapped());
     }
 
 }

@@ -11,8 +11,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanentAmount;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseAI;
 
 /**
@@ -99,7 +99,7 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void test_target_PriorityKillByExtraPoints() {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
@@ -123,7 +123,7 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
     }
 
     @Test
-    @Ignore // TODO: enable it after chooseTarget will be rewrites like choseTargetAmount
+    @Disabled // TODO: enable it after chooseTarget will be rewrites like choseTargetAmount
     public void test_target_KillCreatureNotDamage() {
         // https://github.com/magefree/mage/issues/4497
         // choose target for damage selects wrong target
@@ -153,7 +153,7 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
     }
 
     @Test
-    @Ignore // do not enable it in production, only for devs
+    @Disabled // do not enable it in production, only for devs
     public void test_target_Performance() {
         int cardsMultiplier = 10;
 
@@ -306,7 +306,7 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
     }
 
     @Test
-    @Ignore // do not enable it in production, only for devs
+    @Disabled // do not enable it in production, only for devs
     public void test_TargetAmount_Performance() {
         int cardsMultiplier = 3;
 

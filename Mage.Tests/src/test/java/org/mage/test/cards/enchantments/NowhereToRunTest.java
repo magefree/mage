@@ -2,8 +2,8 @@ package org.mage.test.cards.enchantments;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -96,11 +96,11 @@ public class NowhereToRunTest extends CardTestPlayerBase {
             execute();
         } catch (Throwable e) {
             if (!e.getMessage().contains("Targets list was setup by addTarget with [Valgavoth's Lair], but not used")) {
-                Assert.fail("must throw error about bad targets, but got:\n" + e.getMessage());
+                Assertions.fail("must throw error about bad targets, but got:\n" + e.getMessage());
             }
             return;
         }
-        Assert.fail("must throw exception on execute");
+        Assertions.fail("must throw exception on execute");
     }
 
 }

@@ -7,7 +7,7 @@ import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 

@@ -1,7 +1,8 @@
 package org.mage.test.serverside.deck;
 
 import mage.deck.Commander;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.MageTestPlayerBase;
 
 /**
@@ -23,15 +24,18 @@ public class CommanderDeckValidationTest extends MageTestPlayerBase {
         deckTester.validate("Grist should be legal as a commander");
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testTwoInvalidCommanders() {
-        DeckTester deckTester = new DeckTester(new Commander());
-        deckTester.addMaindeck("Wastes", 99);
+        Assertions.assertThrows(AssertionError.class, () -> {
+            DeckTester deckTester = new DeckTester(new Commander());
+            deckTester.addMaindeck("Wastes", 99);
 
-        deckTester.addSideboard("Tiana, Ship's Caretaker", 1);
-        deckTester.addSideboard("Mazzy, Truesword Paladin", 1);
+            deckTester.addSideboard("Tiana, Ship's Caretaker", 1);
+            deckTester.addSideboard("Mazzy, Truesword Paladin", 1);
 
-        deckTester.validate("These commanders don't have partner");
+            deckTester.validate("These commanders don't have partner");
+        });
+
     }
 
     @Test
@@ -69,30 +73,34 @@ public class CommanderDeckValidationTest extends MageTestPlayerBase {
         deckTester.validate();
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testPrismaticPiper4() {
-        DeckTester deckTester = new DeckTester(new Commander());
-        deckTester.addMaindeck("Forest", 48);
-        deckTester.addMaindeck("Island", 48);
-        deckTester.addMaindeck("Mountain", 1);
-        deckTester.addMaindeck("Plains", 1);
+        Assertions.assertThrows(AssertionError.class, () -> {
+            DeckTester deckTester = new DeckTester(new Commander());
+            deckTester.addMaindeck("Forest", 48);
+            deckTester.addMaindeck("Island", 48);
+            deckTester.addMaindeck("Mountain", 1);
+            deckTester.addMaindeck("Plains", 1);
 
-        deckTester.addSideboard(piper, 1);
-        deckTester.addSideboard("Thrasios, Triton Hero", 1);
+            deckTester.addSideboard(piper, 1);
+            deckTester.addSideboard("Thrasios, Triton Hero", 1);
 
-        deckTester.validate();
+            deckTester.validate();
+        });
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testBackgrounds() {
-        DeckTester deckTester = new DeckTester(new Commander());
-        deckTester.addMaindeck("Forest", 98);
+        Assertions.assertThrows(AssertionError.class, () -> {
+            DeckTester deckTester = new DeckTester(new Commander());
+            deckTester.addMaindeck("Forest", 98);
 
-        deckTester.addSideboard("Thrasios, Triton Hero", 1);
-        deckTester.addSideboard("Haunted One", 1);
+            deckTester.addSideboard("Thrasios, Triton Hero", 1);
+            deckTester.addSideboard("Haunted One", 1);
 
-        deckTester.validate(
-                "Commanders without the 'Choose a Background' ability should not be able to have a background as an additional commander");
+            deckTester.validate(
+                    "Commanders without the 'Choose a Background' ability should not be able to have a background as an additional commander");
+        });
     }
 
     @Test()
@@ -118,8 +126,9 @@ public class CommanderDeckValidationTest extends MageTestPlayerBase {
         deckTester.validate("You can have two commanders if one is a Time Lord Doctor and the other has 'Doctor's companion'");
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testDoctorsCompanion2() {
+        Assertions.assertThrows(AssertionError.class, () -> {
         DeckTester deckTester = new DeckTester(new Commander());
         deckTester.addMaindeck("Plains", 98);
 
@@ -127,10 +136,13 @@ public class CommanderDeckValidationTest extends MageTestPlayerBase {
         deckTester.addSideboard("Isamaru, Hound of Konda", 1);
 
         deckTester.validate("You can't have two commanders if one is a Time Lord Doctor and the other doesn't have 'Doctor's companion'");
+        });
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testDoctorsCompanion3() {
+            Assertions.assertThrows(AssertionError.class, () -> {
+
         DeckTester deckTester = new DeckTester(new Commander());
         deckTester.addMaindeck("Plains", 98);
 
@@ -141,6 +153,7 @@ public class CommanderDeckValidationTest extends MageTestPlayerBase {
                 "You can't have two commanders if one has 'Doctor's companion' " +
                         "but the other has additional creature types in addition to being a Time Lord Doctor"
         );
+            });
     }
 
     @Test
@@ -154,8 +167,10 @@ public class CommanderDeckValidationTest extends MageTestPlayerBase {
         deckTester.validate("You can have two commanders if they both have the same Partner variant");
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testPartnerVariants2() {
+                Assertions.assertThrows(AssertionError.class, () -> {
+
         DeckTester deckTester = new DeckTester(new Commander());
         deckTester.addMaindeck("Mountain", 98);
 
@@ -163,6 +178,7 @@ public class CommanderDeckValidationTest extends MageTestPlayerBase {
         deckTester.addSideboard("Atreus, Impulsive Son", 1);
 
         deckTester.validate("You can't have two commanders if they don't have the same Partner variant");
+                });
     }
 
     @Test()
@@ -175,14 +191,16 @@ public class CommanderDeckValidationTest extends MageTestPlayerBase {
         deckTester.validate("Legendary Vehicles should be able to be a commander");
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testVehicles2() {
-        DeckTester deckTester = new DeckTester(new Commander());
-        deckTester.addMaindeck("Plains", 99);
+        Assertions.assertThrows(AssertionError.class, () -> {
+            DeckTester deckTester = new DeckTester(new Commander());
+            deckTester.addMaindeck("Plains", 99);
 
-        deckTester.addSideboard("Dragonfly Suit", 1);
+            deckTester.addSideboard("Dragonfly Suit", 1);
 
-        deckTester.validate("Nonlegendary Vehicles should not be able to be a commander");
+            deckTester.validate("Nonlegendary Vehicles should not be able to be a commander");
+        });
     }
 
     @Test()
@@ -195,14 +213,16 @@ public class CommanderDeckValidationTest extends MageTestPlayerBase {
         deckTester.validate("Legendary Spacecraft should be able to be a commander if they can become a creature");
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testSpacecraft2() {
-        DeckTester deckTester = new DeckTester(new Commander());
-        deckTester.addMaindeck("Wastes", 99);
+        Assertions.assertThrows(AssertionError.class, () -> {
+            DeckTester deckTester = new DeckTester(new Commander());
+            deckTester.addMaindeck("Wastes", 99);
 
-        deckTester.addSideboard("The Eternity Elevator", 1);
+            deckTester.addSideboard("The Eternity Elevator", 1);
 
-        deckTester.validate("Legendary Spacecraft should not be able to be a commander if they can't become a creature");
+            deckTester.validate("Legendary Spacecraft should not be able to be a commander if they can't become a creature");
+        });
     }
 
     @Test
@@ -226,26 +246,30 @@ public class CommanderDeckValidationTest extends MageTestPlayerBase {
         deckTester.validate("Lutri can be in your main deck in commander");
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testLutriCompanion() {
-        DeckTester deckTester = new DeckTester(new Commander());
-        deckTester.addMaindeck("Island", 99);
+        Assertions.assertThrows(AssertionError.class, () -> {
+            DeckTester deckTester = new DeckTester(new Commander());
+            deckTester.addMaindeck("Island", 99);
 
-        deckTester.addSideboard("Niv-Mizzet, the Firemind", 1);
-        deckTester.addSideboard("Lutri, the Spellchaser", 1);
+            deckTester.addSideboard("Niv-Mizzet, the Firemind", 1);
+            deckTester.addSideboard("Lutri, the Spellchaser", 1);
 
-        deckTester.validate("Lutri can't be your companion in commander");
+            deckTester.validate("Lutri can't be your companion in commander");
+        });
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testLutriCompanionPartner() {
-        DeckTester deckTester = new DeckTester(new Commander());
-        deckTester.addMaindeck("Island", 98);
+        Assertions.assertThrows(AssertionError.class, () -> {
+            DeckTester deckTester = new DeckTester(new Commander());
+            deckTester.addMaindeck("Island", 98);
 
-        deckTester.addSideboard("Ludevic, Necro-Alchemist", 1);
-        deckTester.addSideboard("Kraum, Ludevic's Opus", 1);
-        deckTester.addSideboard("Lutri, the Spellchaser", 1);
+            deckTester.addSideboard("Ludevic, Necro-Alchemist", 1);
+            deckTester.addSideboard("Kraum, Ludevic's Opus", 1);
+            deckTester.addSideboard("Lutri, the Spellchaser", 1);
 
-        deckTester.validate("Lutri can't be your companion in commander");
+            deckTester.validate("Lutri can't be your companion in commander");
+        });
     }
 }

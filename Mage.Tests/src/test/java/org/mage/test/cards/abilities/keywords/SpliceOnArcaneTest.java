@@ -3,9 +3,9 @@ package org.mage.test.cards.abilities.keywords;
 import mage.abilities.keyword.HasteAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -46,7 +46,7 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Through the Breach", 1);
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertAbility(playerA, "Silvercoat Lion", HasteAbility.getInstance(), true);
-        Assert.assertEquals("All available mana has to be used", "[]", playerA.getManaAvailable(currentGame).toString());
+        Assertions.assertEquals("[]", playerA.getManaAvailable(currentGame).toString(), "All available mana has to be used");
     }
 
     @Test
@@ -81,7 +81,7 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Torrent of Stone", 1);
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
         assertPermanentCount(playerA, "Mountain", 0);
-        Assert.assertEquals("No more mana available", "[]", playerA.getManaAvailable(currentGame).toString());
+        Assertions.assertEquals("[]", playerA.getManaAvailable(currentGame).toString(), "No more mana available");
     }
 
     /**
@@ -126,7 +126,7 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertAbility(playerA, "Silvercoat Lion", HasteAbility.getInstance(), true);
 
-        Assert.assertEquals("All available mana has to be used", "[]", playerA.getManaAvailable(currentGame).toString());
+        Assertions.assertEquals("[]", playerA.getManaAvailable(currentGame).toString(), "All available mana has to be used");
     }
 
     /**
@@ -160,7 +160,7 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
      * the error against a bot and update this report.
      */
     @Test
-    @Ignore
+    @Disabled
     public void testCounteredBecauseOfNoLegalTarget() {
         setStrictChooseMode(true);
         // TODO: rewrite test, it's wrong and misleading-- user report about Griselbrand was destroyed by Terminate after splice announce, but tests don't use it at all (Griselbrand legal target all the time)

@@ -6,8 +6,8 @@ import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -50,7 +50,7 @@ public class EnchantingGraveyardCardsTest extends CardTestPlayerBase {
         if (spellweaver != null) {
             attachedToCard = playerB.getGraveyard().get(spellweaver.getAttachedTo(), currentGame);
         }
-        Assert.assertTrue(SPELLWEAVER_VOLUTE + " has to be attached to Lightning Bolt in graveyard", attachedToCard != null && attachedToCard.getName().equals(LIGHTNING_BOLT));
+        Assertions.assertTrue(attachedToCard != null && attachedToCard.getName().equals(LIGHTNING_BOLT), SPELLWEAVER_VOLUTE + " has to be attached to Lightning Bolt in graveyard");
     }
 
     /**
@@ -94,7 +94,7 @@ public class EnchantingGraveyardCardsTest extends CardTestPlayerBase {
         if (spellweaver != null) {
             attachedToCard = playerA.getGraveyard().get(spellweaver.getAttachedTo(), currentGame);
         }
-        Assert.assertTrue(SPELLWEAVER_VOLUTE + " has to be attached to Aerial Volley in graveyard", attachedToCard != null && attachedToCard.getName().equals("Aerial Volley"));
+        Assertions.assertTrue(attachedToCard != null && attachedToCard.getName().equals("Aerial Volley"), SPELLWEAVER_VOLUTE + " has to be attached to Aerial Volley in graveyard");
 
         assertHandCount(playerA, 1);
 
@@ -140,7 +140,7 @@ public class EnchantingGraveyardCardsTest extends CardTestPlayerBase {
 
         for (Card card : currentGame.getExile().getAllCards(currentGame)) {
             if (card.getName().equals(LIGHTNING_BOLT)) {
-                Assert.assertTrue(LIGHTNING_BOLT + " may not have any attachments", card.getAttachments().isEmpty());
+                Assertions.assertTrue(card.getAttachments().isEmpty(), LIGHTNING_BOLT + " may not have any attachments");
 
             }
         }
@@ -184,7 +184,7 @@ public class EnchantingGraveyardCardsTest extends CardTestPlayerBase {
 
         for (Card card : playerB.getGraveyard().getCards(currentGame)) {
             if (card.getName().equals(LIGHTNING_BOLT)) {
-                Assert.assertTrue(LIGHTNING_BOLT + " may not have any attachments", card.getAttachments().isEmpty());
+                Assertions.assertTrue(card.getAttachments().isEmpty(), LIGHTNING_BOLT + " may not have any attachments");
 
             }
         }

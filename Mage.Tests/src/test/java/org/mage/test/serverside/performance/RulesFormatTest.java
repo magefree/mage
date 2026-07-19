@@ -3,8 +3,8 @@ package org.mage.test.serverside.performance;
 import mage.MageObject;
 import mage.cards.repository.CardScanner;
 import mage.util.CardUtil;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
 public class RulesFormatTest {
 
     @Test
-    @Ignore // debug only, can be slow (10+ secs)
+    @Disabled // debug only, can be slow (10+ secs)
     public void test_InfiniteFreezeOnStringReplace_Fast() {
         // use case: in some point of time java's string replace code from GainAbilityAttachedEffect can freeze forever
         // details: https://github.com/magefree/mage/issues/11285#issuecomment-2011326865

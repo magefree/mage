@@ -4,8 +4,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -20,18 +20,18 @@ public class RootpathPurifierTest extends CardTestPlayerBase {
     private static final String murder = "Murder";
 
     private void checkSupertypes() {
-        Assert.assertTrue(
-                "All lands in library should be basic",
+        Assertions.assertTrue(
                 playerA.getLibrary()
                         .getCards(currentGame)
                         .stream()
                         .filter(card -> card.isLand(currentGame))
-                        .allMatch(card -> card.isBasic(currentGame))
+                        .allMatch(card -> card.isBasic(currentGame)),
+                "All lands in library should be basic"
         );
         for (Permanent permanent : currentGame.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, playerA.getId(), currentGame
         )) {
-            Assert.assertTrue(permanent.getName() + " should be basic", permanent.isBasic(currentGame));
+            Assertions.assertTrue(permanent.isBasic(currentGame), permanent.getName() + " should be basic");
         }
     }
 
@@ -85,13 +85,13 @@ public class RootpathPurifierTest extends CardTestPlayerBase {
         assertHandCount(playerA, tree, 1);
         assertPermanentCount(playerA, purifier, 1);
         checkSupertypes();
-        Assert.assertTrue(
-                tree + " should not be basic in hand",
+        Assertions.assertTrue(
                 playerA.getHand()
                         .getCards(currentGame)
                         .stream()
                         .filter(card -> tree.equals(card.getName()))
-                        .noneMatch(card -> card.isBasic(currentGame))
+                        .noneMatch(card -> card.isBasic(currentGame)),
+                tree + " should not be basic in hand"
         );
     }
 
@@ -111,13 +111,13 @@ public class RootpathPurifierTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, purifier, 0);
         assertGraveyardCount(playerA, purifier, 1);
         assertGraveyardCount(playerA, murder, 1);
-        Assert.assertTrue(
-                tree + " should not be basic",
+        Assertions.assertTrue(
                 playerA.getLibrary()
                         .getCards(currentGame)
                         .stream()
                         .filter(card -> tree.equals(card.getName()))
-                        .noneMatch(card -> card.isBasic(currentGame))
+                        .noneMatch(card -> card.isBasic(currentGame)),
+                tree + " should not be basic"
         );
     }
 }

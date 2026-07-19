@@ -3,8 +3,8 @@ package org.mage.test.cards.single.fin;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -27,6 +27,6 @@ public class AncientAdamantoiseTest extends CardTestPlayerBase {
         execute();
 
         Permanent permanent = getPermanent(adamantoise);
-        Assert.assertEquals(adamantoise + " should have 3 damage on it on the next turn", 3, permanent.getDamage());
+        Assertions.assertEquals(3, permanent.getDamage(), adamantoise + " should have 3 damage on it on the next turn");
     }
 }

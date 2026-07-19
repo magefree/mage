@@ -5,8 +5,8 @@ package org.mage.test.combat;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -33,7 +33,7 @@ public class FlyersCantBeBlockedTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
         Permanent pilgrimsEye = getPermanent("Pilgrim's Eye", playerB.getId());
-        Assert.assertTrue("Should be tapped because of attacking", pilgrimsEye.isTapped());
+        Assertions.assertTrue(pilgrimsEye.isTapped(), "Should be tapped because of attacking");
     }    
     
     @Test
@@ -54,7 +54,7 @@ public class FlyersCantBeBlockedTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
         Permanent pilgrimsEye = getPermanent("Pilgrim's Eye", playerB.getId());
-        Assert.assertTrue("Should be tapped because of attacking", pilgrimsEye.isTapped());
+        Assertions.assertTrue(pilgrimsEye.isTapped(), "Should be tapped because of attacking");
     }    
         
     

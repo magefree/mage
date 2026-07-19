@@ -3,8 +3,8 @@ package org.mage.test.cards.planeswalker;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -44,10 +44,10 @@ public class LilianaDefiantNecromancerTest extends CardTestPlayerBase {
         try {
             execute();
 
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("-X:$target=Hill Giant")) {
-                Assert.fail("Should have thrown error about cannot attack, but got:\n" + e.getMessage());
+                Assertions.fail("Should have thrown error about cannot attack, but got:\n" + e.getMessage());
             }
         }
 

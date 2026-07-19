@@ -2,8 +2,8 @@ package org.mage.test.rollback;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -116,8 +116,8 @@ public class DemonicPactTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
         assertGraveyardCount(playerB, "Pact of Negation", 1);
 
-        Assert.assertTrue("Player A is still in game", playerA.isInGame());
-        Assert.assertTrue("Player B is still in game", playerB.isInGame());
+        Assertions.assertTrue(playerA.isInGame(), "Player A is still in game");
+        Assertions.assertTrue(playerB.isInGame(), "Player B is still in game");
 
         assertTappedCount("Island", true, 5);
 

@@ -1,14 +1,14 @@
 package mage.counters;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CountersTest {
     private Counters counters;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         counters = new Counters();
     }

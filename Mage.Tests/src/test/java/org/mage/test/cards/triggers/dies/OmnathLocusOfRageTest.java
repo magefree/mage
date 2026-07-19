@@ -4,8 +4,8 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -98,7 +98,7 @@ public class OmnathLocusOfRageTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Omnath, Locus of Rage", 1);
 
         Permanent lion = getPermanent("Silvercoat Lion");
-        Assert.assertTrue("Lion has protection from green", lion.getAbilities(currentGame).containsClass(ProtectionAbility.class));
+        Assertions.assertTrue(lion.getAbilities(currentGame).containsClass(ProtectionAbility.class), "Lion has protection from green");
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);

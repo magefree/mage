@@ -2,8 +2,8 @@ package org.mage.test.cards.single.sos;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -71,10 +71,10 @@ public class MoseoVeinsNewDeanTest extends CardTestPlayerBase {
 
         try {
             execute();
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Targets list was setup by addTarget with [Craw Wurm], but not used")) {
-                Assert.fail("must have thrown error about unused target, but got:\n" + e.getMessage());
+                Assertions.fail("must have thrown error about unused target, but got:\n" + e.getMessage());
             }
         }
         assertPermanentCount(playerA, "Craw Wurm", 0);

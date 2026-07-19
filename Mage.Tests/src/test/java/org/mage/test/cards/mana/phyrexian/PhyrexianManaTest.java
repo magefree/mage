@@ -2,8 +2,8 @@ package org.mage.test.cards.mana.phyrexian;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -26,7 +26,7 @@ public class PhyrexianManaTest extends CardTestPlayerBase {
         int life = playerA.getLife();
         int hand = playerA.getHand().size();
         // can be played only through life pay
-        Assert.assertTrue(life == 20 && hand == 1 || life == 18 && hand == 0);
+        Assertions.assertTrue(life == 20 && hand == 1 || life == 18 && hand == 0);
     }
 
     @Test

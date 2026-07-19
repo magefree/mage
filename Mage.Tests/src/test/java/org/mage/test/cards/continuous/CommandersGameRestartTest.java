@@ -7,8 +7,8 @@ import mage.counters.CounterType;
 import mage.players.Player;
 import mage.view.GameView;
 import mage.watchers.common.CommanderPlaysCountWatcher;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestCommander4PlayersWithAIHelps;
 
 import java.util.UUID;
@@ -22,11 +22,11 @@ public class CommandersGameRestartTest extends CardTestCommander4PlayersWithAIHe
         // miss CommanderInfoWatcher check, see https://github.com/magefree/mage/issues/11081
         // original watcher code don't raise game error on miss watcher, but test must fail - so it uses direct key search here
         GameView gameView = getGameView(playerA);
-        Assert.assertNotNull(gameView);
+        Assertions.assertNotNull(gameView);
         for (Player player : currentGame.getPlayers().values()) {
             for (UUID commanderId : currentGame.getCommandersIds(player, CommanderCardType.ANY, false)) {
                 String needWatcherKey = commanderId + "CommanderInfoWatcher";
-                Assert.assertNotNull("Watchers must be init with game card all the time, miss " + needWatcherKey, currentGame.getState().getWatcher(needWatcherKey));
+                Assertions.assertNotNull(currentGame.getState().getWatcher(needWatcherKey), "Watchers must be init with game card all the time, miss " + needWatcherKey);
             }
         }
     }
@@ -57,7 +57,7 @@ public class CommandersGameRestartTest extends CardTestCommander4PlayersWithAIHe
         runCode("before restart", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             UUID commanderId = game.getCommandersIds(player, CommanderCardType.ANY, false).stream().findFirst().orElse(null);
             CommanderPlaysCountWatcher watcher = game.getState().getWatcher(CommanderPlaysCountWatcher.class);
-            Assert.assertEquals("commander tax must be x1", 1, watcher.getPlaysCount(commanderId));
+            Assertions.assertEquals(1, watcher.getPlaysCount(commanderId), "commander tax must be x1");
         });
 
         // game restart
@@ -72,7 +72,7 @@ public class CommandersGameRestartTest extends CardTestCommander4PlayersWithAIHe
         // check watcher after restart
         UUID commanderId = currentGame.getCommandersIds(playerA, CommanderCardType.ANY, false).stream().findFirst().orElse(null);
         CommanderPlaysCountWatcher watcher = currentGame.getState().getWatcher(CommanderPlaysCountWatcher.class);
-        Assert.assertEquals("commander tax must be x0", 0, watcher.getPlaysCount(commanderId));
+        Assertions.assertEquals(0, watcher.getPlaysCount(commanderId), "commander tax must be x0");
         //
         checkGameView();
 
@@ -106,7 +106,7 @@ public class CommandersGameRestartTest extends CardTestCommander4PlayersWithAIHe
         runCode("before restart", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             UUID commanderId = game.getCommandersIds(player, CommanderCardType.ANY, false).stream().findFirst().orElse(null);
             CommanderPlaysCountWatcher watcher = game.getState().getWatcher(CommanderPlaysCountWatcher.class);
-            Assert.assertEquals("commander tax must be x1", 1, watcher.getPlaysCount(commanderId));
+            Assertions.assertEquals(1, watcher.getPlaysCount(commanderId), "commander tax must be x1");
         });
 
         // possible bug: ai can use restart in one of the simulations, so it can freeze the game (if bugged)

@@ -4,8 +4,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -52,7 +52,7 @@ public class OneOrMoreTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Silvercoat Lion", 2, 2);
 
         Permanent perm = getPermanent("Silvercoat Lion");
-        Assert.assertTrue("Silvercoat Lion has to be a Token", perm instanceof PermanentToken);
+        Assertions.assertTrue(perm instanceof PermanentToken, "Silvercoat Lion has to be a Token");
     }
 
     @Test
@@ -89,6 +89,6 @@ public class OneOrMoreTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Silvercoat Lion", 2, 2);
 
         Permanent perm = getPermanent("Silvercoat Lion");
-        Assert.assertTrue("Silvercoat Lion has to be a Token", perm instanceof PermanentToken);
+        Assertions.assertTrue(perm instanceof PermanentToken, "Silvercoat Lion has to be a Token");
     }
 }

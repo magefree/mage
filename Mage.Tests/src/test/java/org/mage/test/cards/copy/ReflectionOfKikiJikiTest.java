@@ -7,8 +7,8 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class ReflectionOfKikiJikiTest extends CardTestPlayerBase {

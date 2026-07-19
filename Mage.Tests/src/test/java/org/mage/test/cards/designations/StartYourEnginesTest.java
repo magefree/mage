@@ -3,8 +3,8 @@ package org.mage.test.cards.designations;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.players.Player;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -15,7 +15,7 @@ public class StartYourEnginesTest extends CardTestPlayerBase {
     private static final String sarcophagus = "Walking Sarcophagus";
 
     private void assertSpeed(Player player, int speed) {
-        Assert.assertEquals(player.getName() + " speed should be " + speed, speed, player.getSpeed());
+        Assertions.assertEquals(speed, player.getSpeed(), player.getName() + " speed should be " + speed);
     }
 
     @Test

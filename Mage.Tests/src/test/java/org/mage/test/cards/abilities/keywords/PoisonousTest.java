@@ -8,8 +8,8 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 
@@ -29,11 +29,11 @@ public class PoisonousTest extends CardTestPlayerBase {
             }
         }
 
-        Assert.assertNotNull("There is no such permanent under player's control, player=" + player.getName() +
-                ", cardName=" + cardName, found);
+        Assertions.assertNotNull(found, "There is no such permanent under player's control, player=" + player.getName() +
+                ", cardName=" + cardName);
 
-        Assert.assertTrue("There is more than one such permanent under player's control, player=" + player.getName() +
-                ", cardName=" + cardName, permanentCount == 1);
+        Assertions.assertTrue(permanentCount == 1, "There is more than one such permanent under player's control, player=" + player.getName() +
+                ", cardName=" + cardName);
 
         int abilityCount = 0;
         for (Ability existingAbility : found.getAbilities()) {
@@ -42,7 +42,7 @@ public class PoisonousTest extends CardTestPlayerBase {
             }
         }
 
-        Assert.assertEquals("Ability count mismatch (" + ability.getRule() + "). Expected " + count + ", got " + abilityCount, count, abilityCount);
+        Assertions.assertEquals(count, abilityCount, "Ability count mismatch (" + ability.getRule() + "). Expected " + count + ", got " + abilityCount);
     }
 
 

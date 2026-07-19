@@ -3,8 +3,8 @@ package org.mage.test.cards.single.roe;
 import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -76,7 +76,7 @@ public class CastThroughTimeTest extends CardTestPlayerBase {
             }
         }
 
-        Assert.assertTrue("Couldn't find Rebound rule text displayed for the card", found);
+        Assertions.assertTrue(found, "Couldn't find Rebound rule text displayed for the card");
     }
 
     /**

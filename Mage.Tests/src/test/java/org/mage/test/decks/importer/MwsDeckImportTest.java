@@ -3,12 +3,12 @@ package org.mage.test.decks.importer;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.CardLookup;
 import mage.cards.decks.importer.MWSDeckImporter;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.nio.file.Paths;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MwsDeckImportTest {
 
@@ -29,7 +29,7 @@ public class MwsDeckImportTest {
                 false
         );
 
-        Assert.assertEquals("", errors.toString());
+        Assertions.assertEquals("", errors.toString());
         TestDeckChecker.checker()
                 .addMain("Mutavault", 4)
                 .addMain("Plains", 18)

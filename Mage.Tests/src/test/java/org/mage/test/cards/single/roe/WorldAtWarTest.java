@@ -3,8 +3,8 @@ package org.mage.test.cards.single.roe;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -36,7 +36,7 @@ public class WorldAtWarTest extends CardTestPlayerBase {
 
         assertLife(playerB, 14);
         Permanent eliteVanguard = getPermanent("Elite Vanguard", playerA);
-        Assert.assertTrue(eliteVanguard.isTapped());
+        Assertions.assertTrue(eliteVanguard.isTapped());
     }
 
     /**
@@ -74,7 +74,7 @@ public class WorldAtWarTest extends CardTestPlayerBase {
 
         assertLife(playerB, 8);
         Permanent eliteVanguard = getPermanent("Elite Vanguard", playerA);
-        Assert.assertTrue(eliteVanguard.isTapped());
+        Assertions.assertTrue(eliteVanguard.isTapped());
     }
 
     /**
@@ -103,6 +103,6 @@ public class WorldAtWarTest extends CardTestPlayerBase {
 
         assertLife(playerB, 11);
         Permanent eliteVanguard = getPermanent("Elite Vanguard", playerA);
-        Assert.assertTrue(eliteVanguard.isTapped());
+        Assertions.assertTrue(eliteVanguard.isTapped());
     }
 }

@@ -2,8 +2,8 @@ package org.mage.test.cards.abilities.curses;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -402,7 +402,7 @@ public class CursesTest extends CardTestPlayerBase {
             execute();
         } catch (Throwable e) {
             if (!e.getMessage().contains("Missing CHOICE def for turn 2, step UPKEEP, PlayerB")) {
-                Assert.fail("Should have had error about needing a target, but got:\n" + e.getMessage());
+                Assertions.fail("Should have had error about needing a target, but got:\n" + e.getMessage());
             }
         }
     }

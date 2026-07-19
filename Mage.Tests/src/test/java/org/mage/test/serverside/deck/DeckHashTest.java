@@ -6,9 +6,9 @@ import mage.cards.decks.DeckCardLayout;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardScanner;
 import mage.game.GameException;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.MageTestPlayerBase;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class DeckHashTest extends MageTestPlayerBase {
     private static final DeckCardInfo GOOD_CARD_6_BASIC_LAND_SNOW = new DeckCardInfo("Snow-Covered Forest", "383", "ICE");
     private static final DeckCardInfo GOOD_CARD_7_WASTES = new DeckCardInfo("Wastes", "408", "M3C");
 
-    @Before
+    @BeforeEach
     public void setUp() {
         CardScanner.scan();
     }
@@ -41,10 +41,10 @@ public class DeckHashTest extends MageTestPlayerBase {
     }
 
     private void assertDecks(String check, boolean mustBeSame, Deck deck1, Deck deck2, boolean ignoreBasicLands) {
-        Assert.assertEquals(
-                check + " - " + (mustBeSame ? "hash code must be same" : "hash code must be different"),
+        Assertions.assertEquals(
                 mustBeSame,
-                deck1.getDeckHash(ignoreBasicLands) == deck2.getDeckHash(ignoreBasicLands)
+                deck1.getDeckHash(ignoreBasicLands) == deck2.getDeckHash(ignoreBasicLands),
+                check + " - " + (mustBeSame ? "hash code must be same" : "hash code must be different")
         );
     }
 
@@ -57,7 +57,7 @@ public class DeckHashTest extends MageTestPlayerBase {
         } catch (GameException e) {
             throw new IllegalArgumentException("Must not catch exception, but found " + e, e);
         } catch (Throwable e) {
-            Assert.fail("wtf");
+            Assertions.fail("wtf");
         }
         return null;
     }
@@ -240,7 +240,7 @@ public class DeckHashTest extends MageTestPlayerBase {
     @Test
     public void test_MustRaiseErrorOnTooManyCards() {
         // good amount
-        Assert.assertEquals(90, new DeckCardInfo(GOOD_CARD_1.getCardName(), GOOD_CARD_1.getCardNumber(), GOOD_CARD_1.getSetCode(), 90).getAmount());
+        Assertions.assertEquals(90, new DeckCardInfo(GOOD_CARD_1.getCardName(), GOOD_CARD_1.getCardNumber(), GOOD_CARD_1.getSetCode(), 90).getAmount());
 
         // bad amount
         try {
@@ -251,7 +251,7 @@ public class DeckHashTest extends MageTestPlayerBase {
                 return;
             }
         }
-        Assert.fail("must raise exception on too big amount");
+        Assertions.fail("must raise exception on too big amount");
     }
 
     @Test

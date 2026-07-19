@@ -8,8 +8,8 @@ import mage.game.FreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.mulligan.MulliganType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
 import java.io.FileNotFoundException;
@@ -54,10 +54,10 @@ public class PlayerWinsTest extends CardTestMultiPlayerBase {
 
         assertLife(playerA, 47);
         assertLife(playerC, 40);
-        Assert.assertTrue("Player D still alive but should have lost the game", !playerD.isInGame());
-        Assert.assertTrue("Player B still alive but should have lost the game", !playerB.isInGame());
-        Assert.assertTrue("Player C is in the game", playerC.isInGame());
-        Assert.assertTrue("Player A is in the game", playerA.isInGame());
+        Assertions.assertTrue(!playerD.isInGame(), "Player D still alive but should have lost the game");
+        Assertions.assertTrue(!playerB.isInGame(), "Player B still alive but should have lost the game");
+        Assertions.assertTrue(playerC.isInGame(), "Player C is in the game");
+        Assertions.assertTrue(playerA.isInGame(), "Player A is in the game");
 
     }
 
@@ -80,10 +80,10 @@ public class PlayerWinsTest extends CardTestMultiPlayerBase {
         assertPermanentCount(playerA, "Laboratory Maniac", 1);
         assertHandCount(playerA, "Mountain", 1);
         assertLibraryCount(playerA, 0);
-        Assert.assertTrue("Player D still alive but should have lost the game", !playerD.isInGame());
-        Assert.assertTrue("Player B still alive but should have lost the game", !playerB.isInGame());
-        Assert.assertTrue("Player C should be in the game but has lost", playerC.isInGame());
-        Assert.assertTrue("Player A should be in the game but has lost", playerA.isInGame());
+        Assertions.assertTrue(!playerD.isInGame(), "Player D still alive but should have lost the game");
+        Assertions.assertTrue(!playerB.isInGame(), "Player B still alive but should have lost the game");
+        Assertions.assertTrue(playerC.isInGame(), "Player C should be in the game but has lost");
+        Assertions.assertTrue(playerA.isInGame(), "Player A should be in the game but has lost");
     }
 
     /**
@@ -114,10 +114,10 @@ public class PlayerWinsTest extends CardTestMultiPlayerBase {
 
         assertPermanentCount(playerD, "Platinum Angel", 1);
 
-        Assert.assertTrue("Player D should be in the game but has lost", playerD.isInGame());
-        Assert.assertTrue("Player B should be in the game but has lost", playerB.isInGame());
-        Assert.assertTrue("Player C should be in the game but has lost", playerC.isInGame());
-        Assert.assertTrue("Player A should be in the game but has lost", playerA.isInGame());
+        Assertions.assertTrue(playerD.isInGame(), "Player D should be in the game but has lost");
+        Assertions.assertTrue(playerB.isInGame(), "Player B should be in the game but has lost");
+        Assertions.assertTrue(playerC.isInGame(), "Player C should be in the game but has lost");
+        Assertions.assertTrue(playerA.isInGame(), "Player A should be in the game but has lost");
     }
 
     /**
@@ -148,9 +148,9 @@ public class PlayerWinsTest extends CardTestMultiPlayerBase {
 
         assertPermanentCount(playerC, "Platinum Angel", 1);
 
-        Assert.assertTrue("Player D still alive but should have lost the gamet", !playerD.isInGame());
-        Assert.assertTrue("Player B still alive but should have lost the game", !playerB.isInGame());
-        Assert.assertTrue("Player C should be in the game but has lost", playerC.isInGame());
-        Assert.assertTrue("Player A should be in the game but has lost", playerA.isInGame());
+        Assertions.assertTrue(!playerD.isInGame(), "Player D still alive but should have lost the gamet");
+        Assertions.assertTrue(!playerB.isInGame(), "Player B still alive but should have lost the game");
+        Assertions.assertTrue(playerC.isInGame(), "Player C should be in the game but has lost");
+        Assertions.assertTrue(playerA.isInGame(), "Player A should be in the game but has lost");
     }
 }

@@ -6,7 +6,7 @@ import mage.constants.Zone;
 import mage.game.command.Emblem;
 import mage.game.command.emblems.ChandraTorchOfDefianceEmblem;
 import mage.game.command.emblems.ElspethSunsChampionEmblem;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**

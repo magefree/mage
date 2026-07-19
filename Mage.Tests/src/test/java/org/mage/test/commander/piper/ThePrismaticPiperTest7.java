@@ -6,8 +6,8 @@ import mage.cards.Card;
 import mage.constants.CommanderCardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.utils.ManaOptionsTestUtils;
 
 import java.util.ArrayList;
@@ -41,8 +41,8 @@ public class ThePrismaticPiperTest7 extends ThePrismaticPiperBaseTest {
             piper1 = commanders.get(1);
             piper2 = commanders.get(0);
         }
-        Assert.assertEquals("One Piper must be red", piper1.getColor(currentGame), ObjectColor.RED);
-        Assert.assertEquals("One Piper must be green", piper2.getColor(currentGame), ObjectColor.GREEN);
+        Assertions.assertEquals(piper1.getColor(currentGame), ObjectColor.RED, "One Piper must be red");
+        Assertions.assertEquals(piper2.getColor(currentGame), ObjectColor.GREEN, "One Piper must be green");
     }
 
     @Test
@@ -53,7 +53,7 @@ public class ThePrismaticPiperTest7 extends ThePrismaticPiperBaseTest {
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
 
-        Assert.assertEquals("mana variations don't fit", 2, manaOptions.size());
+        Assertions.assertEquals(2, manaOptions.size(), "mana variations don't fit");
         ManaOptionsTestUtils.assertManaOptions("{R}", manaOptions);
         ManaOptionsTestUtils.assertManaOptions("{G}", manaOptions);
     }

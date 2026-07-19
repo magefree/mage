@@ -5,9 +5,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseAI;
 
 import java.util.Arrays;
@@ -73,7 +73,7 @@ public class SimulationPerformanceAITest extends CardTestPlayerBaseAI {
         setStopAt(maxTurn, PhaseStep.END_TURN);
         execute();
 
-        Assert.assertTrue("One of player must won a game before turn " + maxTurn + ", but it ends on " + currentGame, currentGame.hasEnded());
+        Assertions.assertTrue(currentGame.hasEnded(), "One of player must won a game before turn " + maxTurn + ", but it ends on " + currentGame);
     }
 
     private void runManyTargetOptionsInTrigger(String info, int totalCreatures, int needDiedCreatures, boolean isDamageRandomCreature, int needPlayerLife) {
@@ -89,7 +89,7 @@ public class SimulationPerformanceAITest extends CardTestPlayerBaseAI {
                         .filter(p -> p.getName().equals("Balduvian Bears"))
                         .findAny()
                         .orElse(null);
-                Assert.assertNotNull(creature);
+                Assertions.assertNotNull(creature);
                 Ability fakeAbility = new SimpleStaticAbility(null);
                 fakeAbility.setControllerId(player.getId());
                 fakeAbility.setSourceId(creature.getId());
@@ -107,28 +107,28 @@ public class SimulationPerformanceAITest extends CardTestPlayerBaseAI {
     }
 
     @Test
-    @Ignore // enable after triggered supported or need performance test
+    @Disabled // enable after triggered supported or need performance test
     public void test_ManyTargetOptions_Triggered_Single() {
         // 2 damage to bear and 3 damage to player B
         runManyTargetOptionsInTrigger("1 target creature", 1, 1, false, 20 - 3);
     }
 
     @Test
-    @Ignore // enable after triggered supported or need performance test
+    @Disabled // enable after triggered supported or need performance test
     public void test_ManyTargetOptions_Triggered_Few() {
         // 4 damage to x2 bears and 1 damage to player B
         runManyTargetOptionsInTrigger("2 target creatures", 2, 2, false, 20 - 1);
     }
 
     @Test
-    @Ignore // enable after triggered supported or need performance test
+    @Disabled // enable after triggered supported or need performance test
     public void test_ManyTargetOptions_Triggered_Many() {
         // 4 damage to x2 bears and 1 damage to player B
         runManyTargetOptionsInTrigger("5 target creatures", 5, 2, false, 20 - 1);
     }
 
     @Test
-    @Ignore // enable after triggered supported or need performance test
+    @Disabled // enable after triggered supported or need performance test
     public void test_ManyTargetOptions_Triggered_TooMuch() {
         // warning, can be slow
 
@@ -140,7 +140,7 @@ public class SimulationPerformanceAITest extends CardTestPlayerBaseAI {
     }
 
     @Test
-    @Ignore // enable after triggered supported or need performance test
+    @Disabled // enable after triggered supported or need performance test
     public void test_ManyTargetOptions_Triggered_TargetGroups() {
         // make sure targets optimization can find unique creatures, e.g. damaged
 
@@ -161,7 +161,7 @@ public class SimulationPerformanceAITest extends CardTestPlayerBaseAI {
                         .filter(p -> p.getName().equals("Balduvian Bears"))
                         .findAny()
                         .orElse(null);
-                Assert.assertNotNull(creature);
+                Assertions.assertNotNull(creature);
                 Ability fakeAbility = new SimpleStaticAbility(null);
                 fakeAbility.setControllerId(player.getId());
                 fakeAbility.setSourceId(creature.getId());
@@ -197,7 +197,7 @@ public class SimulationPerformanceAITest extends CardTestPlayerBaseAI {
     }
 
     @Test
-    @Ignore("too many failures on CI")
+    @Disabled("too many failures on CI")
     public void test_ManyTargetOptions_Activated_TooMuch() {
         // warning, can be slow
 
@@ -217,7 +217,7 @@ public class SimulationPerformanceAITest extends CardTestPlayerBaseAI {
     }
 
     @Test
-    @Ignore // TODO: enable and fix random error with too many sim nodes (depends on machine performance?)
+    @Disabled // TODO: enable and fix random error with too many sim nodes (depends on machine performance?)
     public void test_ElderDeepFiend_TooManyUpToChoices() {
         // bug: game freeze with 100% CPU usage
         // https://github.com/magefree/mage/issues/9518

@@ -3,8 +3,8 @@ package org.mage.test.cards.restriction;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -39,10 +39,10 @@ public class CantAttackTest extends CardTestPlayerBase {
         try {
             execute();
 
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Player PlayerB must have 0 actions but found 1")) {
-                Assert.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
+                Assertions.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
             }
         }
 
@@ -75,10 +75,10 @@ public class CantAttackTest extends CardTestPlayerBase {
         try {
             execute();
 
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Player PlayerB must have 0 actions but found 1")) {
-                Assert.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
+                Assertions.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
             }
         }
 
@@ -105,10 +105,10 @@ public class CantAttackTest extends CardTestPlayerBase {
         try {
             execute();
 
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Player PlayerB must have 0 actions but found 1")) {
-                Assert.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
+                Assertions.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
             }
         }
 
@@ -165,10 +165,10 @@ public class CantAttackTest extends CardTestPlayerBase {
         try {
             execute();
 
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Player PlayerB must have 0 actions but found 1")) {
-                Assert.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
+                Assertions.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
             }
         }
 
@@ -228,10 +228,10 @@ public class CantAttackTest extends CardTestPlayerBase {
         try {
             execute();
 
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
-                Assert.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
+                Assertions.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
             }
         }
 
@@ -274,10 +274,10 @@ public class CantAttackTest extends CardTestPlayerBase {
         try {
             execute();
 
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
-                Assert.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
+                Assertions.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
             }
         }
 
@@ -460,10 +460,10 @@ public class CantAttackTest extends CardTestPlayerBase {
         try {
             execute();
 
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
-                Assert.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
+                Assertions.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
             }
         }
 
@@ -505,10 +505,10 @@ public class CantAttackTest extends CardTestPlayerBase {
         try {
             execute();
 
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
-                Assert.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
+                Assertions.fail("Should have thrown error about not being able to attack, but got:\n" + e.getMessage());
             }
         }
 

@@ -12,8 +12,8 @@ import mage.game.command.Emblem;
 import mage.game.command.emblems.MomirEmblem;
 import mage.target.TargetPlayer;
 import mage.view.GameView;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestCommander4Players;
 
 import java.util.UUID;
@@ -57,8 +57,8 @@ public class PlayableEmblemsTest extends CardTestCommander4Players {
                     .filter(id -> game.getObject(id).getName().equals("Balduvian Bears"))
                     .findFirst()
                     .orElse(null);
-            Assert.assertNotNull(needObjectId);
-            Assert.assertTrue("commander must be playable in GUI", gameView.getCanPlayObjects().containsObject(needObjectId));
+            Assertions.assertNotNull(needObjectId);
+            Assertions.assertTrue(gameView.getCanPlayObjects().containsObject(needObjectId), "commander must be playable in GUI");
 
             // non playable commander
             needObjectId = game.getCommandersIds(playerA, CommanderCardType.COMMANDER_OR_OATHBREAKER, false)
@@ -66,8 +66,8 @@ public class PlayableEmblemsTest extends CardTestCommander4Players {
                     .filter(id -> game.getObject(id).getName().equals("Goblin Arsonist"))
                     .findFirst()
                     .orElse(null);
-            Assert.assertNotNull(needObjectId);
-            Assert.assertFalse("commander must not be playable in GUI", gameView.getCanPlayObjects().containsObject(needObjectId));
+            Assertions.assertNotNull(needObjectId);
+            Assertions.assertFalse(gameView.getCanPlayObjects().containsObject(needObjectId), "commander must not be playable in GUI");
 
             // playable emblem
             needObjectId = game.getState().getCommand()
@@ -78,16 +78,16 @@ public class PlayableEmblemsTest extends CardTestCommander4Players {
                     .map(MageItem::getId)
                     .findFirst()
                     .orElse(null);
-            Assert.assertNotNull(needObjectId);
+            Assertions.assertNotNull(needObjectId);
             Ability currentAbility = playerA.getPlayable(game, true)
                     .stream()
                     .filter(a -> a.toString().startsWith("{X}, Discard"))
                     .findFirst()
                     .orElse(null);
-            Assert.assertNotNull(currentAbility);
-            Assert.assertEquals("source id must be same", currentAbility.getSourceId(), needObjectId);
-            Assert.assertEquals("source object must be same", currentAbility.getSourceObject(game), game.getObject(needObjectId));
-            Assert.assertTrue("emblem must be playable in GUI", gameView.getCanPlayObjects().containsObject(needObjectId));
+            Assertions.assertNotNull(currentAbility);
+            Assertions.assertEquals(currentAbility.getSourceId(), needObjectId, "source id must be same");
+            Assertions.assertEquals(currentAbility.getSourceObject(game), game.getObject(needObjectId), "source object must be same");
+            Assertions.assertTrue(gameView.getCanPlayObjects().containsObject(needObjectId), "emblem must be playable in GUI");
         });
 
         setStrictChooseMode(true);

@@ -5,8 +5,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.watchers.common.SpellsCastWatcher;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -58,8 +58,8 @@ public class ShowOfConfidenceTest extends CardTestPlayerBase {
         runCode("test watcher's copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
             SpellsCastWatcher copiedWatcher = watcher.copy();
-            Assert.assertEquals("original watcher must see 4 spells", 4, watcher.getSpellsCastThisTurn(player.getId()).size());
-            Assert.assertEquals("copied watcher must see 4 spells", 4, copiedWatcher.getSpellsCastThisTurn(player.getId()).size());
+            Assertions.assertEquals(4, watcher.getSpellsCastThisTurn(player.getId()).size(), "original watcher must see 4 spells");
+            Assertions.assertEquals(4, copiedWatcher.getSpellsCastThisTurn(player.getId()).size(), "copied watcher must see 4 spells");
         });
 
         setStrictChooseMode(true);

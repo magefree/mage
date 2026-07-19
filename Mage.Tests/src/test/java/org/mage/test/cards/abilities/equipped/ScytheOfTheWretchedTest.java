@@ -4,8 +4,8 @@ package org.mage.test.cards.abilities.equipped;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -48,7 +48,7 @@ public class ScytheOfTheWretchedTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, "Silvercoat Lion", 2, 2);
 
         Permanent silvercoatLion = getPermanent("Silvercoat Lion", playerB.getId());
-        Assert.assertTrue("Silvercoat Lion may not have any attachments", silvercoatLion.getAttachments().isEmpty());
+        Assertions.assertTrue(silvercoatLion.getAttachments().isEmpty(), "Silvercoat Lion may not have any attachments");
     }
 
     /**

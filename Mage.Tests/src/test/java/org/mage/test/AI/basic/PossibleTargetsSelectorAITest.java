@@ -13,8 +13,8 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetDiscard;
 import mage.target.common.TargetPermanentOrPlayer;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import java.util.Arrays;
@@ -141,7 +141,7 @@ public class PossibleTargetsSelectorAITest extends CardTestPlayerBase {
         String current = String.join("\n", currentTargets);
         String need = String.join("\n", needTargets);
         if (!current.equals(need)) {
-            Assert.fail(info + "\n\n"
+            Assertions.fail(info + "\n\n"
                     + "NEED targets:\n" + need + "\n\n"
                     + "FOUND targets:\n" + current + "\n");
         }

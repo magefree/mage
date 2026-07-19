@@ -6,8 +6,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -71,10 +71,10 @@ public class CostModificationTest extends CardTestPlayerBase {
         try {
             execute();
 
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Cast Gitaxian Probe$targetPlayer=PlayerA")) {
-                Assert.fail("must throw error about having 0 actions, but got:\n" + e.getMessage());
+                Assertions.fail("must throw error about having 0 actions, but got:\n" + e.getMessage());
             }
         }
     }
@@ -119,10 +119,10 @@ public class CostModificationTest extends CardTestPlayerBase {
         try {
             execute();
 
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Cast Myr Superion")) {
-                Assert.fail("must throw error about having 0 actions, but got:\n" + e.getMessage());
+                Assertions.fail("must throw error about having 0 actions, but got:\n" + e.getMessage());
             }
         }
     }
@@ -428,14 +428,14 @@ public class CostModificationTest extends CardTestPlayerBase {
         // Huatli: check x cost changes
         runCode("check x cost", 3, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             Permanent huatli = game.getBattlefield().getAllActivePermanents().stream().filter(p -> p.getName().equals("Huatli, Warrior Poet")).findFirst().orElse(null);
-            Assert.assertNotNull("must have huatli on battlefield", huatli);
+            Assertions.assertNotNull(huatli, "must have huatli on battlefield");
             LoyaltyAbility ability = (LoyaltyAbility) huatli.getAbilities(game).stream().filter(a -> a.getRule().startsWith("-X: ")).findFirst().orElse(null);
-            Assert.assertNotNull("must have loyalty ability", ability);
+            Assertions.assertNotNull(ability, "must have loyalty ability");
             // counters: 3
             // cost modification: +1
             // max possible X to pay: 3 + 1 = 4
             PayVariableLoyaltyCost cost = (PayVariableLoyaltyCost) ability.getCosts().get(0);
-            Assert.assertEquals("must have max possible X as 4", 4, cost.getMaxValue(ability, game));
+            Assertions.assertEquals(cost.getMaxValue(ability, game), 4, "must have max possible X as 4");
         });
 
         waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);

@@ -6,8 +6,8 @@ import mage.util.CardUtil;
 
 import java.util.stream.IntStream;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class CardUtilTest extends CardTestPlayerBase {
@@ -103,27 +103,27 @@ public class CardUtilTest extends CardTestPlayerBase {
         String str = "12345";
         String ending = "...";
 
-        Assert.assertEquals("", CardUtil.substring(str, 0));
-        Assert.assertEquals("1", CardUtil.substring(str, 1));
-        Assert.assertEquals("12", CardUtil.substring(str, 2));
-        Assert.assertEquals("123", CardUtil.substring(str, 3));
-        Assert.assertEquals("1234", CardUtil.substring(str, 4));
-        Assert.assertEquals("12345", CardUtil.substring(str, 5));
-        Assert.assertEquals("12345", CardUtil.substring(str, 6));
-        Assert.assertEquals("12345", CardUtil.substring(str, 7));
-        Assert.assertEquals("12345", CardUtil.substring(str, 8));
-        Assert.assertEquals("12345", CardUtil.substring(str, 9));
+        Assertions.assertEquals("", CardUtil.substring(str, 0));
+        Assertions.assertEquals("1", CardUtil.substring(str, 1));
+        Assertions.assertEquals("12", CardUtil.substring(str, 2));
+        Assertions.assertEquals("123", CardUtil.substring(str, 3));
+        Assertions.assertEquals("1234", CardUtil.substring(str, 4));
+        Assertions.assertEquals("12345", CardUtil.substring(str, 5));
+        Assertions.assertEquals("12345", CardUtil.substring(str, 6));
+        Assertions.assertEquals("12345", CardUtil.substring(str, 7));
+        Assertions.assertEquals("12345", CardUtil.substring(str, 8));
+        Assertions.assertEquals("12345", CardUtil.substring(str, 9));
 
-        Assert.assertEquals("", CardUtil.substring(str, 0, ending));
-        Assert.assertEquals(".", CardUtil.substring(str, 1, ending));
-        Assert.assertEquals("..", CardUtil.substring(str, 2, ending));
-        Assert.assertEquals("...", CardUtil.substring(str, 3, ending));
-        Assert.assertEquals("1...", CardUtil.substring(str, 4, ending));
-        Assert.assertEquals("12345", CardUtil.substring(str, 5, ending));
-        Assert.assertEquals("12345", CardUtil.substring(str, 6, ending));
-        Assert.assertEquals("12345", CardUtil.substring(str, 7, ending));
-        Assert.assertEquals("12345", CardUtil.substring(str, 8, ending));
-        Assert.assertEquals("12345", CardUtil.substring(str, 9, ending));
+        Assertions.assertEquals("", CardUtil.substring(str, 0, ending));
+        Assertions.assertEquals(".", CardUtil.substring(str, 1, ending));
+        Assertions.assertEquals("..", CardUtil.substring(str, 2, ending));
+        Assertions.assertEquals("...", CardUtil.substring(str, 3, ending));
+        Assertions.assertEquals("1...", CardUtil.substring(str, 4, ending));
+        Assertions.assertEquals("12345", CardUtil.substring(str, 5, ending));
+        Assertions.assertEquals("12345", CardUtil.substring(str, 6, ending));
+        Assertions.assertEquals("12345", CardUtil.substring(str, 7, ending));
+        Assertions.assertEquals("12345", CardUtil.substring(str, 8, ending));
+        Assertions.assertEquals("12345", CardUtil.substring(str, 9, ending));
     }
 
     /**
@@ -154,30 +154,30 @@ public class CardUtilTest extends CardTestPlayerBase {
     @Test
     public void parseCardNumberAsInt() {
         // digit numbers
-        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("123"));
-        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("123a"));
-        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("123xxx"));
-        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("a123"));
-        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("xxx123"));
-        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("a123a"));
-        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("xxx123xxx"));
-        Assert.assertEquals(123456, CardUtil.parseCardNumberAsInt("xxx123xxx456xxx"));
-        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("-123"));
-        Assert.assertEquals(123, CardUtil.parseCardNumberAsInt("xxx-123xxx"));
+        Assertions.assertEquals(123, CardUtil.parseCardNumberAsInt("123"));
+        Assertions.assertEquals(123, CardUtil.parseCardNumberAsInt("123a"));
+        Assertions.assertEquals(123, CardUtil.parseCardNumberAsInt("123xxx"));
+        Assertions.assertEquals(123, CardUtil.parseCardNumberAsInt("a123"));
+        Assertions.assertEquals(123, CardUtil.parseCardNumberAsInt("xxx123"));
+        Assertions.assertEquals(123, CardUtil.parseCardNumberAsInt("a123a"));
+        Assertions.assertEquals(123, CardUtil.parseCardNumberAsInt("xxx123xxx"));
+        Assertions.assertEquals(123456, CardUtil.parseCardNumberAsInt("xxx123xxx456xxx"));
+        Assertions.assertEquals(123, CardUtil.parseCardNumberAsInt("-123"));
+        Assertions.assertEquals(123, CardUtil.parseCardNumberAsInt("xxx-123xxx"));
 
         // non-digit numbers and sorting
         IntStream.range(0, 10).forEach(i -> {
-            Assert.assertEquals("non-digit must be stable fake number", CardUtil.parseCardNumberAsInt("abc"), CardUtil.parseCardNumberAsInt("abc"));
-            Assert.assertTrue("non-digit must be > of any digit number", CardUtil.parseCardNumberAsInt("abc") > CardUtil.parseCardNumberAsInt("123"));
-            Assert.assertTrue("non-digit must be > of any digit number", CardUtil.parseCardNumberAsInt("abc") > CardUtil.parseCardNumberAsInt("x456x"));
+            Assertions.assertEquals(CardUtil.parseCardNumberAsInt("abc"), CardUtil.parseCardNumberAsInt("abc"), "non-digit must be stable fake number");
+            Assertions.assertTrue(CardUtil.parseCardNumberAsInt("abc") > CardUtil.parseCardNumberAsInt("123"), "non-digit must be > of any digit number");
+            Assertions.assertTrue(CardUtil.parseCardNumberAsInt("abc") > CardUtil.parseCardNumberAsInt("x456x"), "non-digit must be > of any digit number");
         });
 
         // restricted empty number
-        Assert.assertThrows(IllegalArgumentException.class, () -> CardUtil.parseCardNumberAsInt(""));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> CardUtil.parseCardNumberAsInt(""));
 
         // restricted token's zero number
-        Assert.assertThrows(IllegalArgumentException.class, () -> CardUtil.parseCardNumberAsInt("0"));
-        Assert.assertThrows(IllegalArgumentException.class, () -> CardUtil.parseCardNumberAsInt("000"));
-        Assert.assertThrows(IllegalArgumentException.class, () -> CardUtil.parseCardNumberAsInt("x0x"));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> CardUtil.parseCardNumberAsInt("0"));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> CardUtil.parseCardNumberAsInt("000"));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> CardUtil.parseCardNumberAsInt("x0x"));
     }
 }

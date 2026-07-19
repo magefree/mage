@@ -7,7 +7,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.CoinFlippedEvent;
 import mage.game.events.GameEvent;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**

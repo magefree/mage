@@ -2,8 +2,8 @@ package org.mage.test.performance;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -16,7 +16,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class StateCopying extends CardTestPlayerBase {
 
     @Test
-    @Ignore
+    @Disabled
     public void copyingBattlefield() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 10);
         addCard(Zone.BATTLEFIELD, playerA, "Sol Ring", 10);

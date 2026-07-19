@@ -3,8 +3,8 @@ package org.mage.test.cards.facedown;
 import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -42,7 +42,7 @@ public class BaneAlleyBrokerTest extends CardTestPlayerBase {
 
         for (Card card : currentGame.getExile().getAllCards(currentGame)) {
             if (card.getName().equals("Goblin Roughrider")) {
-                Assert.assertTrue("Exiled card is not face down", card.isFaceDown(currentGame));
+                Assertions.assertTrue(card.isFaceDown(currentGame), "Exiled card is not face down");
             }
         }
     }

@@ -7,8 +7,8 @@ import mage.game.command.emblems.TheRingEmblem;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.common.TemptedByTheRingWatcher;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import java.util.List;
@@ -28,15 +28,15 @@ public class TheRingEmblemTest extends CardTestPlayerBase {
                 .filter(com -> com instanceof TheRingEmblem)
                 .map(com -> (TheRingEmblem) com)
                 .collect(Collectors.toList());
-        Assert.assertEquals(info + " - total game emblems", totalGameEmblems, ringEmblems.size());
+        Assertions.assertEquals(totalGameEmblems, ringEmblems.size(), info + " - total game emblems");
 
-        Assert.assertEquals(info + " - tempts for " + player.getName(), needTemptsYou, TemptedByTheRingWatcher.getCount(player.getId(), currentGame));
+        Assertions.assertEquals(needTemptsYou, TemptedByTheRingWatcher.getCount(player.getId(), currentGame), info + " - tempts for " + player.getName());
 
         boolean hasEmblem = ringEmblems.stream().anyMatch(e -> e.isControlledBy(player.getId()));
-        Assert.assertEquals(info + " - ring emblem for " + player.getName(), needEmblem, hasEmblem);
+        Assertions.assertEquals(needEmblem, hasEmblem, info + " - ring emblem for " + player.getName());
 
         String hasBearer = Optional.ofNullable(player.getRingBearer(currentGame)).map(MageObject::getName).orElse(null);
-        Assert.assertEquals(info + " - ring bearer for " + player.getName(), needBearer, hasBearer);
+        Assertions.assertEquals(needBearer, hasBearer, info + " - ring bearer for " + player.getName());
     }
 
     private void assertPermanent(String info, Player player, String needName, boolean needLegendary) {
@@ -46,8 +46,8 @@ public class TheRingEmblemTest extends CardTestPlayerBase {
                 .filter(p -> p.getName().equals(needName))
                 .findFirst()
                 .orElse(null);
-        Assert.assertNotNull(info + " - permanent " + needName + " for player " + player.getName() + " must exist", permanent);
-        Assert.assertEquals(info + " - permanent " + needName + " for player " + player.getName() + " has wrong legendary", needLegendary, permanent.isLegendary(currentGame));
+        Assertions.assertNotNull(permanent, info + " - permanent " + needName + " for player " + player.getName() + " must exist");
+        Assertions.assertEquals(needLegendary, permanent.isLegendary(currentGame), info + " - permanent " + needName + " for player " + player.getName() + " has wrong legendary");
     }
 
     @Test

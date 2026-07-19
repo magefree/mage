@@ -4,8 +4,8 @@ import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -61,7 +61,7 @@ public class FathomMageTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Fathom Mage", 3, 3);
 
         Permanent fathomMage = getPermanent("Fathom Mage", playerA);
-        Assert.assertEquals("Fathom Mage has to be a Mutant", true, fathomMage.hasSubtype(SubType.MUTANT, currentGame));
+        Assertions.assertEquals(true, fathomMage.hasSubtype(SubType.MUTANT, currentGame), "Fathom Mage has to be a Mutant");
 
         assertHandCount(playerA, 2);
     }

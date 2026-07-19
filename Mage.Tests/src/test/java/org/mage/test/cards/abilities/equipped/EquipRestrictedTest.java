@@ -3,8 +3,8 @@ package org.mage.test.cards.abilities.equipped;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -25,7 +25,7 @@ public class EquipRestrictedTest extends CardTestPlayerBase {
         execute();
 
         Permanent equipment = getPermanent("Leonin Scimitar", playerB);
-        Assert.assertTrue("Leonin Scimitar has to be attached", equipment.getAttachedTo() != null);
+        Assertions.assertTrue(equipment.getAttachedTo() != null, "Leonin Scimitar has to be attached");
     }
 
     /**
@@ -47,7 +47,7 @@ public class EquipRestrictedTest extends CardTestPlayerBase {
         execute();
 
         Permanent equipment = getPermanent("Konda's Banner", playerB);
-        Assert.assertTrue("Konda's Banner may not be attached", equipment.getAttachedTo() == null);
+        Assertions.assertTrue(equipment.getAttachedTo() == null, "Konda's Banner may not be attached");
     }
 
     @Test
@@ -68,7 +68,7 @@ public class EquipRestrictedTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerA, "Kranioceros", 8, 5);
         Permanent equipment = getPermanent("Gate Smasher", playerA);
-        Assert.assertTrue("Gate Smasher may no longer be attached", equipment.getAttachedTo() != null);
+        Assertions.assertTrue(equipment.getAttachedTo() != null, "Gate Smasher may no longer be attached");
     }
 
     @Test
@@ -89,6 +89,6 @@ public class EquipRestrictedTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerA, "Kranioceros", 5, 2);
         Permanent equipment = getPermanent("Gate Smasher", playerA);
-        Assert.assertTrue("Gate Smasher may no longer be attached", equipment.getAttachedTo() == null);
+        Assertions.assertTrue(equipment.getAttachedTo() == null, "Gate Smasher may no longer be attached");
     }
 }

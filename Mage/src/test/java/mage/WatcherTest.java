@@ -9,14 +9,14 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.PlayerList;
 import mage.watchers.Watcher;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static mage.constants.WatcherScope.GAME;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class WatcherTest {
 

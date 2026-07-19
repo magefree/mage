@@ -4,8 +4,8 @@ package org.mage.test.game.ends;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -40,9 +40,9 @@ public class GameIsADrawTest extends CardTestPlayerBase {
         assertHasNotWonTheGame(playerA);
         assertHasNotWonTheGame(playerB);
 
-        Assert.assertTrue("Game has ended.", currentGame.hasEnded());
+        Assertions.assertTrue(currentGame.hasEnded(), "Game has ended.");
 
-        Assert.assertTrue("Both players had 0 life, game has be de a draw.", currentGame.isADraw());
+        Assertions.assertTrue(currentGame.isADraw(), "Both players had 0 life, game has be de a draw.");
 
     }
 
@@ -68,9 +68,9 @@ public class GameIsADrawTest extends CardTestPlayerBase {
         assertHasNotWonTheGame(playerA);
         assertHasNotWonTheGame(playerB);
 
-        Assert.assertTrue("Game has ended.", currentGame.hasEnded());
+        Assertions.assertTrue(currentGame.hasEnded(), "Game has ended.");
 
-        Assert.assertTrue("Both players had 0 life, game has be de a draw.", currentGame.isADraw());
+        Assertions.assertTrue(currentGame.isADraw(), "Both players had 0 life, game has be de a draw.");
 
     }
 
@@ -105,14 +105,14 @@ public class GameIsADrawTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Stuffy Doll", 1);
         Permanent shield = getPermanent("Pariah's Shield");
-        Assert.assertTrue("Pariah's Shield is attached", shield.getAttachedTo() != null);
+        Assertions.assertTrue(shield.getAttachedTo() != null, "Pariah's Shield is attached");
 
         assertHasNotWonTheGame(playerA);
         assertHasNotWonTheGame(playerB);
 
-        Assert.assertTrue("Game has ended.", currentGame.hasEnded());
+        Assertions.assertTrue(currentGame.hasEnded(), "Game has ended.");
 
-        Assert.assertTrue("Infinite loop detected, game has be de a draw.", currentGame.isADraw());
+        Assertions.assertTrue(currentGame.isADraw(), "Infinite loop detected, game has be de a draw.");
     }
 
     /**
@@ -138,10 +138,10 @@ public class GameIsADrawTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Angel Token", 20);
-        Assert.assertFalse("Game should not have ended.", currentGame.hasEnded());
+        Assertions.assertFalse(currentGame.hasEnded(), "Game should not have ended.");
         assertLife(playerA, 100);
 
-        Assert.assertFalse("No infinite loop detected, game has be no draw.", currentGame.isADraw());
+        Assertions.assertFalse(currentGame.isADraw(), "No infinite loop detected, game has be no draw.");
 
     }
 

@@ -5,8 +5,8 @@ import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -59,7 +59,7 @@ public class BecomesCreatureTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Chimeric Mass", 0, 0);
         assertType("Chimeric Mass", CardType.CREATURE, false);
 
-        Assert.assertTrue("All layered effect have to be removed", currentGame.getContinuousEffects().getLayeredEffects(currentGame).isEmpty());
+        Assertions.assertTrue(currentGame.getContinuousEffects().getLayeredEffects(currentGame).isEmpty(), "All layered effect have to be removed");
 
     }
 }

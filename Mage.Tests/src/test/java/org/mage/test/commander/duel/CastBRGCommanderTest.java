@@ -6,8 +6,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.watchers.common.CommanderInfoWatcher;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestCommanderDuelBase;
 
 import java.io.FileNotFoundException;
@@ -138,11 +138,11 @@ public class CastBRGCommanderTest extends CardTestCommanderDuelBase {
         assertCommandZoneCount(playerB, "Daxos of Meletis", 0);
         assertPermanentCount(playerA, "Daxos of Meletis", 1); // Karn brings back the cards under the control of Karn's controller
 
-        Assert.assertEquals("B commander must be on battlefield", 0, currentGame.getCommanderCardsFromCommandZone(playerB, CommanderCardType.COMMANDER_OR_OATHBREAKER).size());
-        Assert.assertEquals("B commander must be on battlefield", 1, currentGame.getCommanderCardsFromAnyZones(playerB, CommanderCardType.COMMANDER_OR_OATHBREAKER, Zone.BATTLEFIELD).size());
+        Assertions.assertEquals(0, currentGame.getCommanderCardsFromCommandZone(playerB, CommanderCardType.COMMANDER_OR_OATHBREAKER).size(), "B commander must be on battlefield");
+        Assertions.assertEquals(1, currentGame.getCommanderCardsFromAnyZones(playerB, CommanderCardType.COMMANDER_OR_OATHBREAKER, Zone.BATTLEFIELD).size(), "B commander must be on battlefield");
 
         CommanderInfoWatcher watcher = currentGame.getState().getWatcher(CommanderInfoWatcher.class, playerB.getCommandersIds().iterator().next());
-        Assert.assertEquals("Watcher is reset to 0 commander damage", 0, watcher.getDamageToPlayer().size());
+        Assertions.assertEquals(0, watcher.getDamageToPlayer().size(), "Watcher is reset to 0 commander damage");
     }
 
     /**

@@ -3,8 +3,8 @@ package org.mage.test.cards.watchers;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.view.GameView;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -17,8 +17,8 @@ public class TempleOfPowerTest extends CardTestPlayerBase {
         // original watcher code don't raise game error on miss watcher, but test must fail - so it uses direct key search here
         String needWatcherKey = "TempleOfPowerWatcher";
         GameView gameView = getGameView(playerA);
-        Assert.assertNotNull(gameView);
-        Assert.assertNotNull("Watchers must be init with game card all the time, miss " + needWatcherKey, currentGame.getState().getWatcher(needWatcherKey));
+        Assertions.assertNotNull(gameView);
+        Assertions.assertNotNull(currentGame.getState().getWatcher(needWatcherKey), "Watchers must be init with game card all the time, miss " + needWatcherKey);
     }
 
     @Test

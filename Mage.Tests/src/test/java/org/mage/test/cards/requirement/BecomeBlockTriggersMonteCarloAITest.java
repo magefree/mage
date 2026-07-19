@@ -2,14 +2,14 @@ package org.mage.test.cards.requirement;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithMonteCarloAIHelps;
 
 /**
  * @author JayDi85
  */
-@Ignore // TODO: research and fix attack/block simulations
+@Disabled // TODO: research and fix attack/block simulations
 public class BecomeBlockTriggersMonteCarloAITest extends CardTestPlayerBaseWithMonteCarloAIHelps {
 
     @Test

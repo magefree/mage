@@ -7,8 +7,8 @@ import mage.constants.CommanderCardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.GameState;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestCommander4PlayersWithAIHelps;
 
 /**
@@ -442,8 +442,8 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         // can't cast creature spell for {G}{G} + {2} + {2}
         runCode("check commander tax 2x", 9, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             AdventureCard card = (AdventureCard) game.getCommanderCardsFromCommandZone(player, CommanderCardType.ANY).stream().findFirst().get();
-            Assert.assertEquals(2, CommanderCastCountValue.instance.calculate(game, card.getSpellAbility(), null));
-            Assert.assertEquals(2, CommanderCastCountValue.instance.calculate(game, card.getSpellCard().getSpellAbility(), null));
+            Assertions.assertEquals(2, CommanderCastCountValue.instance.calculate(game, card.getSpellAbility(), null));
+            Assertions.assertEquals(2, CommanderCastCountValue.instance.calculate(game, card.getSpellCard().getSpellAbility(), null));
         });
         checkPlayableAbility("before last cast 1", 9, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
         checkPlayableAbility("before last cast 1", 9, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", false);
@@ -468,8 +468,8 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         checkPermanentTapped("after last cast", 13, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest", true, 2 + 2 + 2);
         runCode("check commander tax 3x", 13, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             AdventureCard card = (AdventureCard) game.getCard(game.getCommandersIds(player, CommanderCardType.ANY, false).stream().findFirst().get());
-            Assert.assertEquals(3, CommanderCastCountValue.instance.calculate(game, card.getSpellAbility(), null));
-            Assert.assertEquals(3, CommanderCastCountValue.instance.calculate(game, card.getSpellCard().getSpellAbility(), null));
+            Assertions.assertEquals(3, CommanderCastCountValue.instance.calculate(game, card.getSpellAbility(), null));
+            Assertions.assertEquals(3, CommanderCastCountValue.instance.calculate(game, card.getSpellCard().getSpellAbility(), null));
         });
 
         setStrictChooseMode(true);
@@ -610,8 +610,8 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         // possible bug: wrong copy of commander objects
         runCode("test", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             GameState copied = game.getState().copy();
-            Assert.assertEquals("original commander must have 1 ability", 1, game.getState().getCommand().get(0).getAbilities().size());
-            Assert.assertEquals("copied commander must have 1 ability", 1, copied.getCommand().get(0).getAbilities().size());
+            Assertions.assertEquals(1, game.getState().getCommand().get(0).getAbilities().size(), "original commander must have 1 ability");
+            Assertions.assertEquals(1, copied.getCommand().get(0).getAbilities().size(), "copied commander must have 1 ability");
         });
 
         // ai must play commander

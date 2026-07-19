@@ -8,8 +8,8 @@ import mage.abilities.mana.ManaOptions;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 
@@ -331,7 +331,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assertions.assertEquals(1, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{R}{R}", manaOptions);
     }
 
@@ -382,7 +382,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Titans' Nest", 1);
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 4, manaOptions.size());
+        Assertions.assertEquals(4, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{R}", manaOptions);
         assertManaOptions("{C}{C}{C}{R}[{TitansNestManaCondition}]", manaOptions);
         assertManaOptions("{C}{C}{C}{C}{R}[{XCostManaCondition}]", manaOptions);
@@ -455,7 +455,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         manaOptions.add(mana4);
         manaOptions.add(mana4Copy); // Adding it to make sure it gets removed
 
-        Assert.assertEquals("Incorrect number of mana", 5, manaOptions.size());
+        Assertions.assertEquals(5, manaOptions.size(), "Incorrect number of mana");
     }
 
     // https://github.com/magefree/mage/issues/9796

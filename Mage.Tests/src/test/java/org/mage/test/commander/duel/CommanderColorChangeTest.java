@@ -6,8 +6,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestCommanderDuelBase;
 
 /**
@@ -51,11 +51,11 @@ public class CommanderColorChangeTest extends CardTestCommanderDuelBase {
         assertPermanentCount(playerA, "Norin the Wary", 1);
         
         Permanent norin = getPermanent("Norin the Wary", playerA);
-        Assert.assertTrue(norin.getColor(currentGame).isBlue());
-        Assert.assertTrue(norin.getColor(currentGame).isRed());
+        Assertions.assertTrue(norin.getColor(currentGame).isBlue());
+        Assertions.assertTrue(norin.getColor(currentGame).isRed());
         
         Permanent kraken = getPermanent("Kraken's Eye", playerA);
-        Assert.assertTrue(kraken.getColor(currentGame).isBlue());
+        Assertions.assertTrue(kraken.getColor(currentGame).isBlue());
         
         assertLife(playerA, 41);
         assertLife(playerB, 40);
@@ -107,11 +107,11 @@ public class CommanderColorChangeTest extends CardTestCommanderDuelBase {
         assertPermanentCount(playerA, "Norin the Wary", 1);
 
         Permanent norin = getPermanent("Norin the Wary", playerA);
-        Assert.assertEquals(false, norin.getColor(currentGame).isBlue());
-        Assert.assertEquals(true, norin.getColor(currentGame).isRed());
+        Assertions.assertEquals(false, norin.getColor(currentGame).isBlue());
+        Assertions.assertEquals(true, norin.getColor(currentGame).isRed());
 
         Permanent kraken = getPermanent("Kraken's Eye", playerA);
-        Assert.assertEquals(false, kraken.getColor(currentGame).isBlue());
+        Assertions.assertEquals(false, kraken.getColor(currentGame).isBlue());
         
         assertLife(playerA, 42);
         assertLife(playerB, 40);

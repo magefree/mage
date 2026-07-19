@@ -3,8 +3,8 @@ package org.mage.test.cards.control;
 import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -66,8 +66,8 @@ public class ExileAndReturnUnderYourControlTest extends CardTestPlayerBase {
         assertExileCount(playerB, 2);
         assertExileCount("Courser of Kruphix", 0);
         assertPermanentCount(playerA, "Courser of Kruphix", 1);
-        Assert.assertTrue("player A should play with top card revealed", playerA.isTopCardRevealed());
-        Assert.assertFalse("player B should play NOT with top card revealed", playerB.isTopCardRevealed());
+        Assertions.assertTrue(playerA.isTopCardRevealed(), "player A should play with top card revealed");
+        Assertions.assertFalse(playerB.isTopCardRevealed(), "player B should play NOT with top card revealed");
     }
 
     @Test

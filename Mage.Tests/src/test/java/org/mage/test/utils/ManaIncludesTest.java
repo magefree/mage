@@ -2,8 +2,8 @@ package org.mage.test.utils;
 
 import mage.Mana;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -22,7 +22,7 @@ public class ManaIncludesTest extends CardTestPlayerBase {
         manaPool.add(new Mana(0, 0, 0, 0, 0, 0, (pool.length() - strictPool.length()) / 5, 0));
         manaCost.add(new Mana(0, 0, 0, 0, 0, 0, (cost.length() - stringCost.length()) / 5, 0));
 
-        Assert.assertEquals(canPay, manaPool.includesMana(manaCost));
+        Assertions.assertEquals(canPay, manaPool.includesMana(manaCost));
     }
 
     @Test

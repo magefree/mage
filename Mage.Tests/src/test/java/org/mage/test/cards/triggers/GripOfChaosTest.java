@@ -2,8 +2,8 @@ package org.mage.test.cards.triggers;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -65,7 +65,7 @@ public class GripOfChaosTest extends CardTestPlayerBase {
         zcc += getPermanent("Panharmonicon").getZoneChangeCounter(currentGame);
         // If both select the same permanent to exile, one spell fizzles so zcc == 7 otherwise 9
         if (zcc != 7) {
-            Assert.assertEquals("Sum of zone change counter should be 9", 9, zcc);
+            Assertions.assertEquals(9, zcc, "Sum of zone change counter should be 9");
             // creates error if the random targets do select the same target twice zcc is 7 then the second trigger has an invalid target
         }
     }

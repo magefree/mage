@@ -2,7 +2,7 @@ package org.mage.test.cards.triggers.damage;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestCommander4Players;
 
 import static org.mage.test.player.TestPlayer.CHOICE_SKIP;

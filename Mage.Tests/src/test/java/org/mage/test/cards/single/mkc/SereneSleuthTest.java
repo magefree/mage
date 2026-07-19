@@ -2,10 +2,10 @@ package org.mage.test.cards.single.mkc;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  *
@@ -66,7 +66,7 @@ public class SereneSleuthTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Clue Token", 1 + 1);
-        assertTrue("fugitive wizard is not goaded", getPermanent(fugitiveWizard).getGoadingPlayers().isEmpty());
+        assertTrue(getPermanent(fugitiveWizard).getGoadingPlayers().isEmpty(), "fugitive wizard is not goaded");
     }
 
     @Test
@@ -88,6 +88,6 @@ public class SereneSleuthTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Clue Token", 1 + 1 + 1);
-        assertTrue("fugitive wizard is goaded", getPermanent(fugitiveWizard).getGoadingPlayers().isEmpty());
+        assertTrue(getPermanent(fugitiveWizard).getGoadingPlayers().isEmpty(), "fugitive wizard is goaded");
     }
 }

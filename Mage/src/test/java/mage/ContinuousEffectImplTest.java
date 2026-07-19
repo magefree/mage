@@ -3,8 +3,8 @@ package mage;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.constants.DependencyType;
 import mage.constants.Duration;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -20,6 +20,6 @@ public class ContinuousEffectImplTest {
         BoostTargetEffect ghe = new BoostTargetEffect(0,0, Duration.Custom);
         ghe.setDependedToType(DependencyType.AuraAddingRemoving);
         Set<UUID> x = ghe.isDependentTo(new ArrayList<>());
-        Assert.assertEquals(0, x.size());
+        Assertions.assertEquals(0, x.size());
     }
 }

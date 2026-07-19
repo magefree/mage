@@ -4,8 +4,8 @@ import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -36,10 +36,10 @@ public class CantCastTest extends CardTestPlayerBase {
         try {
             execute();
 
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Cast Jayemdae Tome")) {
-                Assert.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
+                Assertions.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
             }
         }
     }
@@ -68,10 +68,10 @@ public class CantCastTest extends CardTestPlayerBase {
         try {
             execute();
 
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Cast Blaze$targetPlayer=PlayerA")) {
-                Assert.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
+                Assertions.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
             }
         }
 
@@ -132,7 +132,7 @@ public class CantCastTest extends CardTestPlayerBase {
             execute();
         } catch (Throwable e) {
             if (!e.getMessage().contains("Cast Pine Walker")) {
-                Assert.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
+                Assertions.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
             }
         }
 
@@ -160,7 +160,7 @@ public class CantCastTest extends CardTestPlayerBase {
             execute();
         } catch (Throwable e) {
             if (!e.getMessage().contains("Cast Mox Opal")) {
-                Assert.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
+                Assertions.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
             }
         }
 
@@ -235,10 +235,10 @@ public class CantCastTest extends CardTestPlayerBase {
         try {
             execute();
 
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Cast Abrupt Decay$target=Ethersworn Canonist")) {
-                Assert.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
+                Assertions.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
             }
         }
 

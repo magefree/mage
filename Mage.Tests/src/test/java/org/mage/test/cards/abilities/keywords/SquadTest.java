@@ -2,8 +2,8 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -59,7 +59,7 @@ public class SquadTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore
+    @Disabled
     // TODO: enable test after squad/replicate ability will be supported by AI
     public void test_Squad_NotUsed_AI() {
         addCard(Zone.BATTLEFIELD, playerA, swamp, 5 - 1); // haven't all mana

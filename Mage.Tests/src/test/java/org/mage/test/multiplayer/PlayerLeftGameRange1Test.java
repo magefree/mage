@@ -9,8 +9,8 @@ import mage.game.FreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.mulligan.MulliganType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
 import java.io.FileNotFoundException;
@@ -239,7 +239,7 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
         assertGraveyardCount(playerC, "Lightning Bolt", 1);
 
         assertLife(playerD, -1);
-        Assert.assertFalse("Player D is no longer in the game", playerD.isInGame());
+        Assertions.assertFalse(playerD.isInGame(), "Player D is no longer in the game");
 
         assertCounterCount(playerA, "Luminarch Ascension", CounterType.QUEST, 1); // 1 from turn 2
     }
@@ -266,7 +266,7 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
         assertPermanentCount(playerA, "Luminarch Ascension", 1);
 
         assertLife(playerD, 2);
-        Assert.assertFalse("Player D is no longer in the game", playerD.isInGame());
+        Assertions.assertFalse(playerD.isInGame(), "Player D is no longer in the game");
 
         assertCounterCount(playerA, "Luminarch Ascension", CounterType.QUEST, 1); // 1 from turn 2
     }
@@ -321,7 +321,7 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
         execute();
 
         assertLife(playerA, 2);
-        Assert.assertFalse("Player A is no longer in the game", playerA.isInGame());
+        Assertions.assertFalse(playerA.isInGame(), "Player A is no longer in the game");
 
         assertPermanentCount(playerA, 0);
 
@@ -366,7 +366,7 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
 
         assertLife(playerA, 2);
 
-        Assert.assertFalse("Player D is no longer in the game", playerD.isInGame());
+        Assertions.assertFalse(playerD.isInGame(), "Player D is no longer in the game");
 
         assertPermanentCount(playerD, 0);
 

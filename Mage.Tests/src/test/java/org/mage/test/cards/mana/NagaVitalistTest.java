@@ -4,8 +4,8 @@ import mage.abilities.mana.ManaOptions;
 import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
@@ -49,7 +49,7 @@ public class NagaVitalistTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assertions.assertEquals(1, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{Any}{Any}", manaOptions);
     }
 
@@ -89,7 +89,7 @@ public class NagaVitalistTest extends CardTestPlayerBase {
         assertTapped(giftParadise, false);
         assertTapped("Swamp", false);
         assertTapped(nagaVitalist, true);
-        Assert.assertEquals(1, playerA.getManaPool().get(ManaType.RED));
+        Assertions.assertEquals(1, playerA.getManaPool().get(ManaType.RED));
     }
 
     @Test
@@ -100,7 +100,7 @@ public class NagaVitalistTest extends CardTestPlayerBase {
         assertTapped(giftParadise, false);
         assertTapped("Swamp", false);
         assertTapped(nagaVitalist, true);
-        Assert.assertEquals(1, playerA.getManaPool().get(ManaType.RED));
+        Assertions.assertEquals(1, playerA.getManaPool().get(ManaType.RED));
     }
 
     @Test
@@ -111,7 +111,7 @@ public class NagaVitalistTest extends CardTestPlayerBase {
         assertTapped(giftParadise, false);
         assertTapped("Swamp", false);
         assertTapped(nagaVitalist, true);
-        Assert.assertEquals(1, playerA.getManaPool().get(ManaType.RED));
+        Assertions.assertEquals(1, playerA.getManaPool().get(ManaType.RED));
     }
 
     @Test
@@ -122,7 +122,7 @@ public class NagaVitalistTest extends CardTestPlayerBase {
         assertTapped(giftParadise, false);
         assertTapped("Swamp", false);
         assertTapped(nagaVitalist, true);
-        Assert.assertEquals(1, playerA.getManaPool().get(ManaType.RED));
+        Assertions.assertEquals(1, playerA.getManaPool().get(ManaType.RED));
     }
 
     /*
@@ -148,6 +148,6 @@ public class NagaVitalistTest extends CardTestPlayerBase {
         assertTapped(nagaVitalist, true);
         assertTapped(giftParadise, false);
         assertTapped("Forest", false);
-        Assert.assertEquals("one red mana has to be in the mana pool", 1, playerA.getManaPool().get(ManaType.RED));
+        Assertions.assertEquals(1, playerA.getManaPool().get(ManaType.RED), "one red mana has to be in the mana pool");
     }
 }

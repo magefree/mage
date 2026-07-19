@@ -2,25 +2,29 @@ package org.mage.test.cards.single.m13;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class OmniscienceTest extends CardTestPlayerBase {
 
     // Omniscience should only provide an alternative cost when casting from
     // your hand, not when casting from other players' hands
-    @Test(expected = AssertionError.class)
+    @Test
     public void testNoCastFromOpponentHand() {
-        addCard(Zone.BATTLEFIELD, playerB, "Omniscience");
-        addCard(Zone.BATTLEFIELD, playerB, "Sen Triplets");
-        addCard(Zone.HAND, playerA, "Balduvian Bears");
+        Assertions.assertThrows(AssertionError.class, () -> {
 
-        addTarget(playerB, playerA);
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Balduvian Bears");
+            addCard(Zone.BATTLEFIELD, playerB, "Omniscience");
+            addCard(Zone.BATTLEFIELD, playerB, "Sen Triplets");
+            addCard(Zone.HAND, playerA, "Balduvian Bears");
 
-        setStrictChooseMode(true);
-        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
-        execute();
+            addTarget(playerB, playerA);
+            castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Balduvian Bears");
+
+            setStrictChooseMode(true);
+            setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+            execute();
+        });
     }
 
     @Test

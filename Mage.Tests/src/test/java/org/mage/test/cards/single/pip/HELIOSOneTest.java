@@ -3,8 +3,8 @@ package org.mage.test.cards.single.pip;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -64,11 +64,11 @@ public class HELIOSOneTest extends CardTestPlayerBase {
 
         try {
             execute();
-            Assert.fail("Should not be possible to activate the {3} ability without energy and without a 0 mana target");
+            Assertions.fail("Should not be possible to activate the {3} ability without energy and without a 0 mana target");
         } catch (AssertionError e) {
-            Assert.assertTrue(
-                    "X=0 is not a valid choice. Error message:\n" + e.getMessage(),
-                    e.getMessage().contains("Can't find ability to activate command: {3}")
+            Assertions.assertTrue(
+                    e.getMessage().contains("Can't find ability to activate command: {3}"),
+                    "X=0 is not a valid choice. Error message:\n" + e.getMessage()
             );
         }
     }

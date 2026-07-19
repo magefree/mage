@@ -6,9 +6,9 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -28,9 +28,9 @@ public class DayNightTest extends CardTestPlayerBase {
     private static final String vandal = "Brimstone Vandal";
 
     private void assertDayNight(boolean daytime) {
-        Assert.assertTrue("It should not be neither day nor night", currentGame.hasDayNight());
-        Assert.assertTrue("It should be " + (daytime ? "day" : "night"), currentGame.checkDayNight(daytime));
-        Assert.assertFalse("It should not be " + (daytime ? "night" : "day"), currentGame.checkDayNight(!daytime));
+        Assertions.assertTrue(currentGame.hasDayNight(), "It should not be neither day nor night");
+        Assertions.assertTrue(currentGame.checkDayNight(daytime), "It should be " + (daytime ? "day" : "night"));
+        Assertions.assertFalse(currentGame.checkDayNight(!daytime), "It should not be " + (daytime ? "night" : "day"));
     }
 
     private void assertRuffianSmasher(boolean daytime) {
@@ -69,27 +69,27 @@ public class DayNightTest extends CardTestPlayerBase {
 
         runCode("copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             Card card = currentGame.getCards().stream().filter(c -> c.getName().equals(ruffian) && c instanceof DoubleFacedCard).findFirst().orElse(null);
-            Assert.assertNotNull(card);
-            Assert.assertNotNull(card.getSecondCardFace());
+            Assertions.assertNotNull(card);
+            Assertions.assertNotNull(card.getSecondCardFace());
 
             // original
-            Assert.assertNotNull(card.getSecondCardFace());
+            Assertions.assertNotNull(card.getSecondCardFace());
             // copy
             Card copy = card.copy();
-            Assert.assertNotNull(copy.getSecondCardFace());
+            Assertions.assertNotNull(copy.getSecondCardFace());
             // deep copy
             copy = CardUtil.deepCopyObject(card);
-            Assert.assertNotNull(copy.getSecondCardFace());
+            Assertions.assertNotNull(copy.getSecondCardFace());
 
             // copied
             Card copied = game.copyCard(card, null, playerA.getId());
-            Assert.assertNotNull(copied.getSecondCardFace());
+            Assertions.assertNotNull(copied.getSecondCardFace());
             // copy
             copy = copied.copy();
-            Assert.assertNotNull(copy.getSecondCardFace());
+            Assertions.assertNotNull(copy.getSecondCardFace());
             // deep copy
             copy = CardUtil.deepCopyObject(copied);
-            Assert.assertNotNull(copy.getSecondCardFace());
+            Assertions.assertNotNull(copy.getSecondCardFace());
         });
 
         setStrictChooseMode(true);
@@ -273,7 +273,7 @@ public class DayNightTest extends CardTestPlayerBase {
 
         assertDayNight(true);
         Permanent permanent = getPermanent(curse);
-        Assert.assertTrue("Curse is attached to playerB", permanent.isAttachedTo(playerB.getId()));
+        Assertions.assertTrue(permanent.isAttachedTo(playerB.getId()), "Curse is attached to playerB");
         assertPermanentCount(playerA, lurker, 0);
     }
 
@@ -327,7 +327,7 @@ public class DayNightTest extends CardTestPlayerBase {
 
         assertDayNight(true);
         Permanent permanent = getPermanent(curse);
-        Assert.assertTrue("Curse is attached to playerB", permanent.isAttachedTo(playerB.getId()));
+        Assertions.assertTrue(permanent.isAttachedTo(playerB.getId()), "Curse is attached to playerB");
         assertPermanentCount(playerA, lurker, 0);
     }
 
@@ -372,7 +372,7 @@ public class DayNightTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore // debug only, use it to performance profiling only, can be slow
+    @Disabled // debug only, use it to performance profiling only, can be slow
     public void test_TransformDayboundPerformance() {
         // day/night transform can take too much CPU usage, see https://github.com/magefree/mage/issues/11081
         final int TEST_MAX_TURN = 300;
@@ -412,6 +412,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStopAt(TEST_MAX_TURN, PhaseStep.END_TURN);
         execute();
 
-        Assert.assertEquals(TEST_MAX_TURN, currentGame.getTurnNum());
+        Assertions.assertEquals(TEST_MAX_TURN, currentGame.getTurnNum());
     }
 }

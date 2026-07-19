@@ -10,8 +10,8 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -113,7 +113,7 @@ public class BestowTest extends CardTestPlayerBase {
         // because Boon Satyr is no creature on the battlefield, evolve may not trigger
         assertPermanentCount(playerA, "Boon Satyr", 1);
         Permanent boonSatyr = getPermanent("Boon Satyr", playerA);
-        Assert.assertTrue("Boon Satyr may not be a creature", !boonSatyr.isCreature(currentGame));
+        Assertions.assertTrue(!boonSatyr.isCreature(currentGame), "Boon Satyr may not be a creature");
         assertPermanentCount(playerA, "Silent Artisan", 1);
         assertPermanentCount(playerA, "Experiment One", 1);
         assertPowerToughness(playerA, "Experiment One", 1, 1);
@@ -378,7 +378,7 @@ public class BestowTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, "Nighthowler", 2, 2);
         Permanent nighthowler = getPermanent("Nighthowler", playerB);
 
-        Assert.assertEquals("Nighthowler has to be a creature", true, nighthowler.isCreature(currentGame));
+        Assertions.assertEquals(true, nighthowler.isCreature(currentGame), "Nighthowler has to be a creature");
     }
 
     @Test
@@ -507,7 +507,7 @@ public class BestowTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Song of the Dryads", 1);
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player should be able to create 1 green mana", "{G}", options.getAtIndex(0).toString());
+        Assertions.assertEquals("{G}", options.getAtIndex(0).toString(), "Player should be able to create 1 green mana");
 
         assertPermanentCount(playerA, "Nighthowler", 1);
         assertPowerToughness(playerA, "Nighthowler", 2, 2);
@@ -515,7 +515,7 @@ public class BestowTest extends CardTestPlayerBase {
         assertType("Nighthowler", CardType.ENCHANTMENT, true);
 
         Permanent nighthowler = getPermanent("Nighthowler");
-        Assert.assertFalse("The unattached Nighthowler may not have the aura subtype.", nighthowler.hasSubtype(SubType.AURA, currentGame));
+        Assertions.assertFalse(nighthowler.hasSubtype(SubType.AURA, currentGame), "The unattached Nighthowler may not have the aura subtype.");
     }
 
     @Test
@@ -623,14 +623,14 @@ public class BestowTest extends CardTestPlayerBase {
         FilterPermanent filter = new FilterPermanent();
         filter.add(new NamePredicate("Hopeful Eidolon"));
         List<Permanent> eidolons = currentGame.getBattlefield().getAllActivePermanents(filter, currentGame);
-        Assert.assertEquals("Six Eidolons found with filter", 6, eidolons.size());
+        Assertions.assertEquals(6, eidolons.size(), "Six Eidolons found with filter");
         for (Permanent p : eidolons){
-            Assert.assertTrue("Is Enchantment", p.getCardType(currentGame).contains(CardType.ENCHANTMENT));
-            Assert.assertFalse("Is not Aura", p.getSubtype(currentGame).contains(SubType.AURA));
-            Assert.assertTrue("Is Creature", p.getCardType(currentGame).contains(CardType.CREATURE));
-            Assert.assertTrue("Is Spirit", p.getSubtype(currentGame).contains(SubType.SPIRIT));
-            Assert.assertEquals("Is 1 power", 1, p.getPower().getValue());
-            Assert.assertEquals("Is 1 toughness", 1, p.getToughness().getValue());
+            Assertions.assertTrue(p.getCardType(currentGame).contains(CardType.ENCHANTMENT), "Is Enchantment");
+            Assertions.assertFalse(p.getSubtype(currentGame).contains(SubType.AURA), "Is not Aura");
+            Assertions.assertTrue(p.getCardType(currentGame).contains(CardType.CREATURE), "Is Creature");
+            Assertions.assertTrue(p.getSubtype(currentGame).contains(SubType.SPIRIT), "Is Spirit");
+            Assertions.assertEquals(1, p.getPower().getValue(), "Is 1 power");
+            Assertions.assertEquals(1, p.getToughness().getValue(), "Is 1 toughness");
         }
     }
 

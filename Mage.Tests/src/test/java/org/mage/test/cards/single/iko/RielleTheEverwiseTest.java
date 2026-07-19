@@ -4,8 +4,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -23,9 +23,9 @@ public class RielleTheEverwiseTest extends CardTestPlayerBase {
     private static final String rielle = "Rielle, the Everwise";
 
     private static void checkMidExecute(String info, Player player, Game game, int stack, int hand, int life) {
-        Assert.assertEquals(info + " - stack size", stack, game.getStack().size());
-        Assert.assertEquals(info + " - hand size", hand, player.getHand().size());
-        Assert.assertEquals(info + " - life", life, player.getLife());
+        Assertions.assertEquals(stack, game.getStack().size(), info + " - stack size");
+        Assertions.assertEquals(hand, player.getHand().size(), info + " - hand size");
+        Assertions.assertEquals(life, player.getLife(), info + " - life");
     }
 
     // Bug: you had no play priority to respond to Rielle's trigger at end step.

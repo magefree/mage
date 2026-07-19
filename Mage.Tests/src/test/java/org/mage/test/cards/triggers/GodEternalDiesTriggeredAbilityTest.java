@@ -3,8 +3,8 @@ package org.mage.test.cards.triggers;
 import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -33,7 +33,7 @@ public class GodEternalDiesTriggeredAbilityTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, godEternalBontu, 0);
         assertGraveyardCount(playerA, godEternalBontu, 0);
         Card card = currentGame.getCard(playerA.getLibrary().getCardList().get(2));
-        Assert.assertEquals(card.getName(), godEternalBontu);
+        Assertions.assertEquals(card.getName(), godEternalBontu);
     }
 
     /**
@@ -54,7 +54,7 @@ public class GodEternalDiesTriggeredAbilityTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, godEternalBontu, 0);
         assertExileCount(playerA, godEternalBontu, 0);
         Card card = currentGame.getCard(playerA.getLibrary().getCardList().get(2));
-        Assert.assertEquals(card.getName(), godEternalBontu);
+        Assertions.assertEquals(card.getName(), godEternalBontu);
     }
 
     /**

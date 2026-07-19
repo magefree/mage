@@ -5,8 +5,8 @@ import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
@@ -39,7 +39,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         assertCounterCount(playerA, "Druids' Repository", CounterType.CHARGE, 2);
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assertions.assertEquals(1, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{Any}{Any}", manaOptions);
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Alaborn Grenadier");
@@ -65,7 +65,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assertions.assertEquals(1, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{C}{C}{C}{C}", manaOptions);
     }
 
@@ -81,7 +81,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assertions.assertEquals(1, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{B}{B}{Any}{Any}{Any}{Any}", manaOptions);
     }
 
@@ -96,7 +96,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 5, manaOptions.size());
+        Assertions.assertEquals(5, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{W}{W}{W}{W}", manaOptions);
         assertManaOptions("{W}{W}{W}{B}", manaOptions);
         assertManaOptions("{W}{W}{B}{B}", manaOptions);
@@ -117,7 +117,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assertions.assertEquals(1, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{Any}{Any}", manaOptions);
     }
 
@@ -136,7 +136,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 3, manaOptions.size());
+        Assertions.assertEquals(3, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{G}", manaOptions);
         assertManaOptions("{W}{U}{B}", manaOptions);
         assertManaOptions("{R}{R}{R}", manaOptions);
@@ -162,7 +162,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 3, manaOptions.size());
+        Assertions.assertEquals(3, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{G}", manaOptions);
         assertManaOptions("{W}{U}{B}", manaOptions);
         assertManaOptions("{R}{R}{R}", manaOptions);
@@ -186,7 +186,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Wood", 3);
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assertions.assertEquals(1, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{R}{R}{R}", manaOptions);
     }
 
@@ -209,7 +209,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 9, manaOptions.size());
+        Assertions.assertEquals(9, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{C}{G}{G}{U}{U}{U}{R}{R}", manaOptions);
         assertManaOptions("{C}{G}{G}{G}{G}{U}{U}{U}", manaOptions);
         assertManaOptions("{C}{G}{G}{G}{U}{U}{U}{R}", manaOptions);
@@ -235,7 +235,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assertions.assertEquals(1, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{G}{G}{Any}{Any}", manaOptions);
     }
 
@@ -250,7 +250,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assertions.assertEquals(1, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{R}{R}{R}{R}{R}{R}", manaOptions);
     }
 
@@ -266,7 +266,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assertions.assertEquals(1, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{B}{B}{B}{B}", manaOptions);
     }
     
@@ -286,7 +286,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
        assertCounterCount("Mana Cache", CounterType.CHARGE, 2);
         
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assertions.assertEquals(1, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{C}{C}{B}{B}", manaOptions);
     }    
 
@@ -306,7 +306,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         assertCounterCount("Mana Cache", CounterType.CHARGE, 2);
         
         ManaOptions manaOptions = playerB.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assertions.assertEquals(1, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{C}{C}", manaOptions);
     }    
 
@@ -340,7 +340,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assertions.assertEquals(1, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{R}{G}", manaOptions);        
     }
     

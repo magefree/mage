@@ -5,8 +5,8 @@ import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -52,8 +52,8 @@ public class ProgenitorMimicTest extends CardTestPlayerBase {
             }
         }
 
-        Assert.assertEquals("Only one non token permanent ", 1, nonTokens);
-        Assert.assertEquals("Only one token permanent ", 1, tokens);
+        Assertions.assertEquals(1, nonTokens, "Only one non token permanent ");
+        Assertions.assertEquals(1, tokens, "Only one token permanent ");
     }
 
     /**
@@ -132,8 +132,8 @@ public class ProgenitorMimicTest extends CardTestPlayerBase {
             }
         }
 
-        Assert.assertEquals("Two non token permanents ", 2, nonTokens);
-        Assert.assertEquals("Four token permanents", 4, tokens);
+        Assertions.assertEquals(2, nonTokens, "Two non token permanents ");
+        Assertions.assertEquals(4, tokens, "Four token permanents");
     }
 
     /**

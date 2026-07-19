@@ -8,10 +8,10 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.TargetPlayer;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  *
@@ -81,6 +81,6 @@ public class PriceOfBetrayalTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertEquals("Player should have no counters", 0, playerA.getCountersCount(CounterType.ENERGY));
+        assertEquals(0, playerA.getCountersCount(CounterType.ENERGY), "Player should have no counters");
     }
 }

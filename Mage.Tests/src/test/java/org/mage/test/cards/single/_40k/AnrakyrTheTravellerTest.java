@@ -3,7 +3,7 @@ package org.mage.test.cards.single._40k;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class AnrakyrTheTravellerTest extends CardTestPlayerBase {

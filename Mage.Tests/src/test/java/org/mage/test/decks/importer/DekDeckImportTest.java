@@ -3,8 +3,8 @@ package org.mage.test.decks.importer;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.CardLookup;
 import mage.cards.decks.importer.DekDeckImporter;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.nio.file.Paths;
 
@@ -33,7 +33,7 @@ public class DekDeckImportTest {
                 false
         );
 
-        Assert.assertEquals("", errors.toString());
+        Assertions.assertEquals("", errors.toString());
         TestDeckChecker.checker()
                 .addMain("Nezumi Shortfang", 2)
                 .addMain("Kessig Prowler", 1)

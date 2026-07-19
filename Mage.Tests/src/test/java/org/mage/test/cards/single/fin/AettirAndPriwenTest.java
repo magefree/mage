@@ -3,8 +3,8 @@ package org.mage.test.cards.single.fin;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class AettirAndPriwenTest extends CardTestPlayerBase {
@@ -59,8 +59,8 @@ public class AettirAndPriwenTest extends CardTestPlayerBase {
     void checkPowerToughness(int xValue, String name, int turnNum, PhaseStep phaseStep) {
         runCode("Checking P/T is " + xValue, turnNum, phaseStep, playerA, (info, player, game) -> {
             Permanent permanent = getPermanent(name, player);
-            Assert.assertEquals(xValue, permanent.getPower().getModifiedBaseValue());
-            Assert.assertEquals(xValue, permanent.getToughness().getModifiedBaseValue());
+            Assertions.assertEquals(xValue, permanent.getPower().getModifiedBaseValue());
+            Assertions.assertEquals(xValue, permanent.getToughness().getModifiedBaseValue());
         });
     }
 }

@@ -3,7 +3,7 @@ package org.mage.test.cards.triggers.damage;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestCommander4Players;
 
 public class ObNixilisCaptiveKingpinTest extends CardTestCommander4Players {

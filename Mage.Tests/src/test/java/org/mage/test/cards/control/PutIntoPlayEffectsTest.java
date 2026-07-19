@@ -3,8 +3,8 @@ package org.mage.test.cards.control;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -41,8 +41,8 @@ public class PutIntoPlayEffectsTest extends CardTestPlayerBase {
         assertLife(playerA, 13);
         assertPermanentCount(playerB, "Oracle of Mul Daya", 1);
 
-        Assert.assertFalse("Top card of the library of player A should not be reveled.", playerA.isTopCardRevealed());
-        Assert.assertTrue("Top card of the library of player B should be reveled.", playerB.isTopCardRevealed());
+        Assertions.assertFalse(playerA.isTopCardRevealed(), "Top card of the library of player A should not be reveled.");
+        Assertions.assertTrue(playerB.isTopCardRevealed(), "Top card of the library of player B should be reveled.");
         
     }
     
@@ -73,8 +73,8 @@ public class PutIntoPlayEffectsTest extends CardTestPlayerBase {
         assertLife(playerA, 13);
         assertPermanentCount(playerB, "Oracle of Mul Daya", 1);
 
-        Assert.assertTrue("Top card of the library of player B should be revealed.", playerB.isTopCardRevealed());
-        Assert.assertFalse("Top card of the library of player A should not be revealed.", playerA.isTopCardRevealed());
+        Assertions.assertTrue(playerB.isTopCardRevealed(), "Top card of the library of player B should be revealed.");
+        Assertions.assertFalse(playerA.isTopCardRevealed(), "Top card of the library of player A should not be revealed.");
     }
     
     /**

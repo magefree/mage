@@ -2,8 +2,8 @@ package org.mage.test.cards.single.akh;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -30,10 +30,10 @@ public class BontuTheGlorifiedTest extends CardTestPlayerBase {
         try {
             execute();
 
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
-                Assert.fail("must throw error about having 0 actions, but got:\n" + e.getMessage());
+                Assertions.fail("must throw error about having 0 actions, but got:\n" + e.getMessage());
             }
         }
 

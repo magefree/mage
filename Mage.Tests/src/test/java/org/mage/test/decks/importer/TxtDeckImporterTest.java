@@ -6,13 +6,13 @@ import mage.cards.decks.importer.TxtDeckImporter;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TxtDeckImporterTest {
 
-    @Before
+    @BeforeEach
     public void setUp() {
         CardScanner.scan();
     }
@@ -29,22 +29,22 @@ public class TxtDeckImporterTest {
 
         for (String c : cards) {
             card = CardRepository.instance.findPreferredCoreExpansionCard(c);
-            Assert.assertNotNull(String.format("Card %s was null", c), card);
+            Assertions.assertNotNull(card, String.format("Card %s was null", c));
             deck.getCards().add(new DeckCardInfo(card.getName(), card.getCardNumber(), card.getSetCode()));
         }
 
         for (String s : sideboard) {
             card = CardRepository.instance.findPreferredCoreExpansionCard(s);
-            Assert.assertNotNull(String.format("Card %s was null", s), card);
+            Assertions.assertNotNull(card, String.format("Card %s was null", s));
             deck.getSideboard().add(new DeckCardInfo(card.getName(), card.getCardNumber(), card.getSetCode()));
         }
 
-        Assert.assertEquals("Deck does not contain 3 cards, found " + deck.getCards().size(), 3, deck.getCards().size());
-        Assert.assertEquals("Sideboard does not contain 2 cards, found " + deck.getSideboard().size(), 2, deck.getSideboard().size());
+        Assertions.assertEquals(3, deck.getCards().size(), "Deck does not contain 3 cards, found " + deck.getCards().size());
+        Assertions.assertEquals(2, deck.getSideboard().size(), "Sideboard does not contain 2 cards, found " + deck.getSideboard().size());
 
         DeckCardLists imported = importer.importDeck("JustLands.txt", false);
 
-        Assert.assertEquals("Imported deck does not contain 3 cards, found " + imported.getCards().size(), 3, imported.getCards().size());
-        Assert.assertEquals("Imported sideboard does not contain 2 cards, found " + imported.getSideboard().size(), 2, imported.getSideboard().size());
+        Assertions.assertEquals(3, imported.getCards().size(), "Imported deck does not contain 3 cards, found " + imported.getCards().size());
+        Assertions.assertEquals(2, imported.getSideboard().size(), "Imported sideboard does not contain 2 cards, found " + imported.getSideboard().size());
     }
 }

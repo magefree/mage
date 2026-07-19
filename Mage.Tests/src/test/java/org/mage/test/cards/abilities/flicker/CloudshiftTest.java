@@ -7,9 +7,9 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -71,10 +71,10 @@ public class CloudshiftTest extends CardTestPlayerBase {
         execute();
 
         Permanent clone = getPermanent("Heirs of Stromkirk", playerA.getId());
-        Assert.assertNotNull(clone);
-        Assert.assertTrue(clone.getAbilities().contains(IntimidateAbility.getInstance()));
-        Assert.assertFalse(clone.getAbilities().contains(LifelinkAbility.getInstance()));
-        Assert.assertFalse(clone.getAbilities().contains(FirstStrikeAbility.getInstance()));
+        Assertions.assertNotNull(clone);
+        Assertions.assertTrue(clone.getAbilities().contains(IntimidateAbility.getInstance()));
+        Assertions.assertFalse(clone.getAbilities().contains(LifelinkAbility.getInstance()));
+        Assertions.assertFalse(clone.getAbilities().contains(FirstStrikeAbility.getInstance()));
     }
 
     @Test
@@ -96,10 +96,10 @@ public class CloudshiftTest extends CardTestPlayerBase {
         Permanent silvercoatLion = getPermanent("Silvercoat Lion", playerA.getId());
 
         assertLife(playerA, 20);
-        Assert.assertTrue(silvercoatLion.getAttachments().isEmpty());
-        Assert.assertNull("Bonesplitter must not be connected to Silvercoat Lion", bonesplitter.getAttachedTo());
-        Assert.assertEquals("Silvercoat Lion's power without equipment has to be 2", 2, silvercoatLion.getPower().getValue());
-        Assert.assertEquals("Silvercoat Lion's toughness has to be 2", 2, silvercoatLion.getToughness().getValue());
+        Assertions.assertTrue(silvercoatLion.getAttachments().isEmpty());
+        Assertions.assertNull(bonesplitter.getAttachedTo(), "Bonesplitter must not be connected to Silvercoat Lion");
+        Assertions.assertEquals(2, silvercoatLion.getPower().getValue(), "Silvercoat Lion's power without equipment has to be 2");
+        Assertions.assertEquals(2, silvercoatLion.getToughness().getValue(), "Silvercoat Lion's toughness has to be 2");
     }
 
     /**
@@ -193,8 +193,8 @@ public class CloudshiftTest extends CardTestPlayerBase {
         assertCounterCount("Umezawa's Jitte", CounterType.CHARGE, 1);
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertGraveyardCount(playerA, "Cloudshift", 1);
-        Assert.assertTrue(silvercoatLion.getAttachments().isEmpty());
-        Assert.assertNull("Umezawa must not be connected to Silvercoat Lion", Umezawa.getAttachedTo());
+        Assertions.assertTrue(silvercoatLion.getAttachments().isEmpty());
+        Assertions.assertNull(Umezawa.getAttachedTo(), "Umezawa must not be connected to Silvercoat Lion");
         assertPowerToughness(playerA, "Silvercoat Lion", 2, 2);
 
     }
@@ -231,8 +231,8 @@ public class CloudshiftTest extends CardTestPlayerBase {
         assertCounterCount("Umezawa's Jitte", CounterType.CHARGE, 1);
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPermanentCount(playerB, "Flickerwisp", 1);
-        Assert.assertTrue(silvercoatLion.getAttachments().isEmpty());
-        Assert.assertNull("Umezawa must not be connected to Silvercoat Lion", Umezawa.getAttachedTo());
+        Assertions.assertTrue(silvercoatLion.getAttachments().isEmpty());
+        Assertions.assertNull(Umezawa.getAttachedTo(), "Umezawa must not be connected to Silvercoat Lion");
         assertPowerToughness(playerA, "Silvercoat Lion", 2, 2);
 
     }

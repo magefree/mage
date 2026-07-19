@@ -10,8 +10,8 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.Rarity;
 import mage.interfaces.rate.RateCallback;
 import mage.utils.DeckBuilder;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,7 +39,7 @@ public class DeckBuilderTest {
 
             @Override
             public Card getBestBasicLand(ColoredManaSymbol color, List<String> setsToUse) {
-                Assert.assertNotNull(color);
+                Assertions.assertNotNull(color);
                 return new Island(owner, new CardSetInfo("Island", "MRD", "999", Rarity.LAND));
             }
         };

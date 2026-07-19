@@ -2,8 +2,8 @@ package org.mage.test.serverside.cheats;
 
 import mage.constants.*;
 import mage.utils.SystemUtil;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import java.io.File;
@@ -23,7 +23,7 @@ public class LoadCheatsTest extends CardTestPlayerBase {
             w.close();
             return commandFile.getAbsolutePath();
         }catch (IOException e) {
-            Assert.fail("Can't create commands file: " + e.getMessage());
+            Assertions.fail("Can't create commands file: " + e.getMessage());
             return null;
         }
     }

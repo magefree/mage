@@ -3,8 +3,8 @@ package org.mage.test.testapi;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -58,7 +58,7 @@ public class CastApiTest extends CardTestPlayerBase {
             execute();
         } catch (Throwable e) {
             if (!e.getMessage().contains("Can't find ability to activate command: Cast Shock$target=Grizzly Bears$!spellOnStack=Last Breath")) {
-                Assert.fail("Should have had error about playerA having too many actions, but got:\n" + e.getMessage());
+                Assertions.fail("Should have had error about playerA having too many actions, but got:\n" + e.getMessage());
             }
         }
 

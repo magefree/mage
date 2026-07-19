@@ -4,8 +4,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -40,7 +40,7 @@ public class WonderTest extends CardTestPlayerBase {
         // check no flying in graveyard
         for (Card card : playerA.getGraveyard().getCards(currentGame)) {
             if (card.getName().equals("Runeclaw Bear")) {
-                Assert.assertFalse(card.hasAbility(FlyingAbility.getInstance(), currentGame));
+                Assertions.assertFalse(card.hasAbility(FlyingAbility.getInstance(), currentGame));
             }
         }
     }

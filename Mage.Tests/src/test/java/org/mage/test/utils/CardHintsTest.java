@@ -10,9 +10,9 @@ import mage.util.GameLog;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestCommanderDuelBase;
 
 import java.util.ArrayList;
@@ -46,32 +46,32 @@ public class CardHintsTest extends CardTestCommanderDuelBase {
         String mesPostfix = " in " + originalLog;
 
         // simple check
-        Assert.assertTrue(mesPrefix + "can't find color part" + mesPostfix, originalLog.contains(needVisibleColorPart));
-        Assert.assertTrue(mesPrefix + "can't find normal part" + mesPostfix, originalLog.contains(needVisibleNormalPart));
-        Assert.assertTrue(mesPrefix + "can't find id" + mesPostfix, originalLog.contains(needId));
+        Assertions.assertTrue(originalLog.contains(needVisibleColorPart), mesPrefix + "can't find color part" + mesPostfix);
+        Assertions.assertTrue(originalLog.contains(needVisibleNormalPart), mesPrefix + "can't find normal part" + mesPostfix);
+        Assertions.assertTrue(originalLog.contains(needId), mesPrefix + "can't find id" + mesPostfix);
 
         // html check
         Element html = parseHtmlLog(originalLog);
-        Assert.assertEquals(mesPrefix + "can't find full text" + mesPostfix, needVisibleFull, html.text());
+        Assertions.assertEquals(needVisibleFull, html.text(), mesPrefix + "can't find full text" + mesPostfix);
         Element htmlFont = html.getElementsByTag("font").stream().findFirst().orElse(null);
-        Assert.assertNotNull(mesPrefix + "can't find tag [font]" + mesPostfix, htmlFont);
-        Assert.assertNotEquals(mesPrefix + "can't find attribute [color]" + mesPostfix, "", htmlFont.attr("color"));
-        Assert.assertEquals(mesPrefix + "can't find attribute [object_id]" + mesPostfix, needId, htmlFont.attr("object_id"));
+        Assertions.assertNotNull(htmlFont, mesPrefix + "can't find tag [font]" + mesPostfix);
+        Assertions.assertNotEquals("", htmlFont.attr("color"), mesPrefix + "can't find attribute [color]" + mesPostfix);
+        Assertions.assertEquals(needId, htmlFont.attr("object_id"), mesPrefix + "can't find attribute [object_id]" + mesPostfix);
 
         // improved log from client (with href and popup support)
         String popupLog = GameLog.injectPopupSupport(originalLog);
         html = parseHtmlLog(popupLog);
-        Assert.assertEquals(mesPrefix + "injected, can't find full text" + mesPostfix, needVisibleFull, html.text());
+        Assertions.assertEquals(needVisibleFull, html.text(), mesPrefix + "injected, can't find full text" + mesPostfix);
         // href
         Element htmlA = html.getElementsByTag("a").stream().findFirst().orElse(null);
-        Assert.assertNotNull(mesPrefix + "injected, can't find tag [a]" + mesPostfix, htmlA);
-        Assert.assertTrue(mesPrefix + "injected, can't find attribute [href]" + mesPostfix, htmlA.attr("href").startsWith("#"));
-        Assert.assertEquals(mesPrefix + "injected, popup tag [a] must contains colored part only" + mesPostfix, needVisibleColorPart, htmlA.text());
+        Assertions.assertNotNull(htmlA, mesPrefix + "injected, can't find tag [a]" + mesPostfix);
+        Assertions.assertTrue(htmlA.attr("href").startsWith("#"), mesPrefix + "injected, can't find attribute [href]" + mesPostfix);
+        Assertions.assertEquals(needVisibleColorPart, htmlA.text(), mesPrefix + "injected, popup tag [a] must contains colored part only" + mesPostfix);
         // object
         htmlFont = html.getElementsByTag("font").stream().findFirst().orElse(null);
-        Assert.assertNotNull(mesPrefix + "injected, can't find tag [font]" + mesPostfix, htmlFont);
-        Assert.assertNotEquals(mesPrefix + "can't find attribute [color]" + mesPostfix, "", htmlFont.attr("color"));
-        Assert.assertEquals(mesPrefix + "can't find attribute [object_id]" + mesPostfix, needId, htmlFont.attr("object_id"));
+        Assertions.assertNotNull(htmlFont, mesPrefix + "injected, can't find tag [font]" + mesPostfix);
+        Assertions.assertNotEquals("", htmlFont.attr("color"), mesPrefix + "can't find attribute [color]" + mesPostfix);
+        Assertions.assertEquals(needId, htmlFont.attr("object_id"), mesPrefix + "can't find attribute [object_id]" + mesPostfix);
     }
 
     private void assertObjectSupport(MageObject object) {
@@ -133,7 +133,7 @@ public class CardHintsTest extends CardTestCommanderDuelBase {
                 .stream()
                 .map(c -> currentGame.getObject(c))
                 .collect(Collectors.toList()));
-        Assert.assertEquals(3 + 7 + 1, sampleObjects.size()); // default commander game already contains +1 commander
+        Assertions.assertEquals(3 + 7 + 1, sampleObjects.size()); // default commander game already contains +1 commander
 
         sampleObjects.forEach(this::assertObjectSupport);
     }

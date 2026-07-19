@@ -2,8 +2,8 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -170,7 +170,7 @@ public class ReplicateTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore // TODO: enable test after replicate ability will be supported by AI
+    @Disabled // TODO: enable test after replicate ability will be supported by AI
     public void testReplicate_AI() {
         // Replicate {1}{R} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)
         // Pyromatics deals 1 damage to any target.

@@ -7,8 +7,8 @@ import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -43,7 +43,7 @@ public class LicidAbilityTest extends CardTestPlayerBase {
      * Use special action to remove the continuous effect
      */
     @Test
-    @Ignore("Test player can't activate special actions yet")
+    @Disabled("Test player can't activate special actions yet")
     public void SpecialActionTest() {
         addCard(Zone.BATTLEFIELD, playerA, "Pillarfield Ox");
         // {R}, {T}: Enraging Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {R} to end this effect.

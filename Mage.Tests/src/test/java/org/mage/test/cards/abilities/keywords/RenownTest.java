@@ -6,8 +6,8 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -148,7 +148,7 @@ public class RenownTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerA, "Rhox Maulers", 6, 6); // renown again in turn 7 after the attack
         Permanent rhoxMaulers = getPermanent("Rhox Maulers", playerA);
-        Assert.assertEquals("may not be renown", true, rhoxMaulers.isRenowned());
+        Assertions.assertTrue(rhoxMaulers.isRenowned(), "may not be renown");
 
     }
 
@@ -176,7 +176,7 @@ public class RenownTest extends CardTestPlayerBase {
         execute();
 
         Permanent goblin = getPermanent("Goblin Glory Chaser", playerA);
-        Assert.assertEquals("has has renown", true, goblin.isRenowned());
+        Assertions.assertTrue(goblin.isRenowned(), "has has renown");
         assertAbility(playerA, "Goblin Glory Chaser", new MenaceAbility(), true);
         assertPowerToughness(playerA, "Goblin Glory Chaser", 2, 2);
 
@@ -205,7 +205,7 @@ public class RenownTest extends CardTestPlayerBase {
         execute();
 
         Permanent berserker = getPermanent("Scab-Clan Berserker", playerA);
-        Assert.assertEquals("has has renown", true, berserker.isRenowned());
+        Assertions.assertTrue(berserker.isRenowned(), "has has renown");
         assertPowerToughness(playerA, "Scab-Clan Berserker", 3, 3);
 
         assertLife(playerA, 17); // Lightning Bolt
@@ -233,7 +233,7 @@ public class RenownTest extends CardTestPlayerBase {
         execute();
 
         Permanent berserker = getPermanent("Scab-Clan Berserker", playerB);
-        Assert.assertEquals("has has renown", true, berserker.isRenowned());
+        Assertions.assertTrue(berserker.isRenowned(), "has has renown");
         assertPowerToughness(playerB, "Scab-Clan Berserker", 4, 4); // +1 from renowned + 1 from Enshrouding Mist
         assertTapped("Scab-Clan Berserker", false);
 

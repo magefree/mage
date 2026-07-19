@@ -3,8 +3,8 @@ package org.mage.test.cards.abilities.equipped;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -40,8 +40,8 @@ public class KusariGamaTest extends CardTestPlayerBase {
 
         Permanent wallPerm = getPermanent("Wall of Omens", playerB);
         Permanent giantPerm = getPermanent("Hill Giant", playerB);
-        Assert.assertEquals("Wall of Omens should have 2 damage dealt to it", 2, wallPerm.getDamage());
-        Assert.assertEquals("Hill Giant should have 2 damage dealt to it", 2, giantPerm.getDamage());
+        Assertions.assertEquals(2, wallPerm.getDamage(), "Wall of Omens should have 2 damage dealt to it");
+        Assertions.assertEquals(2, giantPerm.getDamage(), "Hill Giant should have 2 damage dealt to it");
 
         assertGraveyardCount(playerB, "Silvercoat Lion", 2);
     }

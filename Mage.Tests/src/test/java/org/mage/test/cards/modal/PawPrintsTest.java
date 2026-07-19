@@ -3,8 +3,8 @@ package org.mage.test.cards.modal;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -72,7 +72,7 @@ public class PawPrintsTest extends CardTestPlayerBase {
         try {
             execute();
         } catch (AssertionError e) {
-            Assert.assertTrue("mode 3 must not be able to choose due total paws cost", e.getMessage().contains("Can't use mode: 3"));
+            Assertions.assertTrue(e.getMessage().contains("Can't use mode: 3"), "mode 3 must not be able to choose due total paws cost");
         }
     }
 

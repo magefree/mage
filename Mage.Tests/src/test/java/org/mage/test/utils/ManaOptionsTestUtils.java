@@ -6,7 +6,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.mana.ManaOptions;
 import mage.util.ManaUtil;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -40,7 +40,7 @@ public class ManaOptionsTestUtils {
 
     public static void assertManaOptions(String searchMana, ManaOptions manaOptions) {
         if (!manaOptionsContain(searchMana, manaOptions)) {
-            Assert.fail("Can't find " + searchMana + " in " + manaOptions.toString());
+            Assertions.fail("Can't find " + searchMana + " in " + manaOptions.toString());
         }
     }
 }

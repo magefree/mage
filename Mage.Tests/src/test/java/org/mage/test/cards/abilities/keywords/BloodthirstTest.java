@@ -6,8 +6,8 @@ import mage.abilities.keyword.BloodthirstAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -64,7 +64,7 @@ public class BloodthirstTest extends CardTestPlayerBase {
                 break;
             }
         }
-        Assert.assertTrue("Baron Vampire is missing the bloodthirst ability", bloodthirstFound);
+        Assertions.assertTrue(bloodthirstFound, "Baron Vampire is missing the bloodthirst ability");
         assertPermanentCount(playerA, "Bloodlord of Vaasgoth", 1);
         assertPowerToughness(playerA, "Bloodlord of Vaasgoth", 6, 6);
         assertPermanentCount(playerA, "Barony Vampire", 1);

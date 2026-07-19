@@ -1,6 +1,6 @@
 package org.mage.test.cards.abilities.oneshot;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import mage.abilities.keyword.DeathtouchAbility;

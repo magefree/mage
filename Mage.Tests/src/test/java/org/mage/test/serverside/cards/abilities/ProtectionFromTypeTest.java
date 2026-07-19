@@ -2,8 +2,8 @@ package org.mage.test.serverside.cards.abilities;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -11,7 +11,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class ProtectionFromTypeTest extends CardTestPlayerBase {
 
-    @Before
+    @BeforeEach
     public void setUp() {
         // *** ComputerA ***
         // battlefield:ComputerA:Mountain:5

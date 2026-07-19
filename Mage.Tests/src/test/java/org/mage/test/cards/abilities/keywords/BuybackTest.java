@@ -2,8 +2,8 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -34,7 +34,7 @@ public class BuybackTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore // TODO: enable test after buyback ability will be supported by AI
+    @Disabled // TODO: enable test after buyback ability will be supported by AI
     public void testNormal_AI() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);

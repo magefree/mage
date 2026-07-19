@@ -4,7 +4,7 @@ import mage.constants.*;
 import mage.view.CardView;
 import mage.view.GameView;
 import mage.view.PlayerView;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 

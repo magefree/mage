@@ -6,8 +6,8 @@ import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -40,7 +40,7 @@ public class FelhideSpiritbinderTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
         Permanent lion = getPermanent("Silvercoat Lion", playerB);
         assertAbility(playerB, "Silvercoat Lion", HasteAbility.getInstance(), true);
-        Assert.assertEquals("token has to have card type enchantment", true, lion.getCardType(currentGame).contains(CardType.ENCHANTMENT));
+        Assertions.assertEquals(true, lion.getCardType(currentGame).contains(CardType.ENCHANTMENT), "token has to have card type enchantment");
 
         assertLife(playerA, 17);
         assertLife(playerB, 20);
@@ -93,7 +93,7 @@ public class FelhideSpiritbinderTest extends CardTestPlayerBase {
         assertAbility(playerB, "Elephant Token", HasteAbility.getInstance(), true);
 
         Permanent copiedTokenElephant = getPermanent("Elephant Token", playerB);
-        Assert.assertEquals("Elephant has Enchantment card type", true, copiedTokenElephant.getCardType(currentGame).contains(CardType.ENCHANTMENT));
+        Assertions.assertEquals(true, copiedTokenElephant.getCardType(currentGame).contains(CardType.ENCHANTMENT), "Elephant has Enchantment card type");
 
         assertLife(playerA, 17);
         assertLife(playerB, 20);

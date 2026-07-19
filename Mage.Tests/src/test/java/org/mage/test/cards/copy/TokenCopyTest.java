@@ -1,7 +1,7 @@
 package org.mage.test.cards.copy;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import mage.ObjectColor;
@@ -28,24 +28,24 @@ public class TokenCopyTest extends CardTestPlayerBase {
             int needManaValue;
             switch (permanent.getName()) {
                 case prowler:
-                    Assert.assertEquals("Power of " + copyPrefix + prowler + " should be 2", 2, permanent.getPower().getValue());
-                    Assert.assertEquals("Toughness of " + copyPrefix + prowler + " should be 1", 1, permanent.getToughness().getValue());
-                    Assert.assertEquals(copyPrefix + prowler + " should be green", ObjectColor.GREEN, permanent.getColor(currentGame));
-                    Assert.assertTrue(copyPrefix + prowler + " should be a Werewolf", permanent.hasSubtype(SubType.WEREWOLF, currentGame));
-                    Assert.assertTrue(copyPrefix + prowler + " should be a Horror", permanent.hasSubtype(SubType.HORROR, currentGame));
-                    Assert.assertFalse(copyPrefix + prowler + " should not be an Eldrazi", permanent.hasSubtype(SubType.ELDRAZI, currentGame));
+                    Assertions.assertEquals(2, permanent.getPower().getValue(), "Power of " + copyPrefix + prowler + " should be 2");
+                    Assertions.assertEquals(1, permanent.getToughness().getValue(), "Toughness of " + copyPrefix + prowler + " should be 1");
+                    Assertions.assertEquals(ObjectColor.GREEN, permanent.getColor(currentGame), copyPrefix + prowler + " should be green");
+                    Assertions.assertTrue(permanent.hasSubtype(SubType.WEREWOLF, currentGame), copyPrefix + prowler + " should be a Werewolf");
+                    Assertions.assertTrue(permanent.hasSubtype(SubType.HORROR, currentGame), copyPrefix + prowler + " should be a Horror");
+                    Assertions.assertFalse(permanent.hasSubtype(SubType.ELDRAZI, currentGame), copyPrefix + prowler + " should not be an Eldrazi");
                     // front side of non-modal transforming dfc - mana value from front side
                     needManaValue = 1;
-                    Assert.assertEquals(copyPrefix + prowler + " should have mana value", needManaValue, permanent.getManaValue());
-                    Assert.assertFalse(copyPrefix + prowler + " should not be transformed", permanent.isTransformed());
+                    Assertions.assertEquals(needManaValue, permanent.getManaValue(), copyPrefix + prowler + " should have mana value");
+                    Assertions.assertFalse(permanent.isTransformed(), copyPrefix + prowler + " should not be transformed");
                     break;
                 case predator:
-                    Assert.assertEquals("Power of " + copyPrefix + predator + " should be 4", 4, permanent.getPower().getValue());
-                    Assert.assertEquals("Toughness of " + copyPrefix + predator + " should be 4", 4, permanent.getToughness().getValue());
-                    Assert.assertTrue(copyPrefix + predator + " should be colorless", permanent.getColor(currentGame).isColorless());
-                    Assert.assertTrue(copyPrefix + predator + " should be an Eldrazi", permanent.hasSubtype(SubType.ELDRAZI, currentGame));
-                    Assert.assertTrue(copyPrefix + predator + " should be a Werewolf", permanent.hasSubtype(SubType.WEREWOLF, currentGame));
-                    Assert.assertFalse(copyPrefix + predator + " should not be a Horror", permanent.hasSubtype(SubType.HORROR, currentGame));
+                    Assertions.assertEquals(4, permanent.getPower().getValue(), "Power of " + copyPrefix + predator + " should be 4");
+                    Assertions.assertEquals(4, permanent.getToughness().getValue(), "Toughness of " + copyPrefix + predator + " should be 4");
+                    Assertions.assertTrue(permanent.getColor(currentGame).isColorless(), copyPrefix + predator + " should be colorless");
+                    Assertions.assertTrue(permanent.hasSubtype(SubType.ELDRAZI, currentGame), copyPrefix + predator + " should be an Eldrazi");
+                    Assertions.assertTrue(permanent.hasSubtype(SubType.WEREWOLF, currentGame), copyPrefix + predator + " should be a Werewolf");
+                    Assertions.assertFalse(permanent.hasSubtype(SubType.HORROR, currentGame), copyPrefix + predator + " should not be a Horror");
                     // back side of non-modal transforming dfc - mana value:
                     // - for original: from front side
                     // - for copy: 0
@@ -55,8 +55,8 @@ public class TokenCopyTest extends CardTestPlayerBase {
                     // If a permanent is copying the back face of a nonmodal double-faced permanent (even if the object representing 
                     // that copy is itself a double-faced permanent), the mana value of that permanent is 0. See rule 202.3b.
                     needManaValue = permanent.isCopy() ? 0 : 1;
-                    Assert.assertEquals(copyPrefix + predator + " should have mana value", needManaValue, permanent.getManaValue());
-                    Assert.assertTrue(copyPrefix + prowler + " should be transformed", permanent.isTransformed());
+                    Assertions.assertEquals(needManaValue, permanent.getManaValue(), copyPrefix + predator + " should have mana value");
+                    Assertions.assertTrue(permanent.isTransformed(), copyPrefix + prowler + " should be transformed");
                     break;
             }
         }

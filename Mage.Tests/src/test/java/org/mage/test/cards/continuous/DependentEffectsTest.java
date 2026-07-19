@@ -5,8 +5,8 @@ import mage.abilities.Ability;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -114,7 +114,7 @@ public class DependentEffectsTest extends CardTestPlayerBase {
                 numberOfActivatedAbilities++;
             }
         }
-        Assert.assertEquals("Two abilities for Necrotic Ooze", 2, numberOfActivatedAbilities);
+        Assertions.assertEquals(2, numberOfActivatedAbilities, "Two abilities for Necrotic Ooze");
     }
 
     @Test
@@ -145,7 +145,7 @@ public class DependentEffectsTest extends CardTestPlayerBase {
                 numberOfActivatedAbilities++;
             }
         }
-        Assert.assertEquals("All abilities from cards in graveyard are removed - so no abilities for Necrotic Ooze", 0, numberOfActivatedAbilities);
+        Assertions.assertEquals(0, numberOfActivatedAbilities, "All abilities from cards in graveyard are removed - so no abilities for Necrotic Ooze");
     }
 
 }

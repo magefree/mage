@@ -2,11 +2,11 @@ package org.mage.test.cards.single.ltr;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class GlamdringTest extends CardTestPlayerBase {
     void setUp() {
@@ -37,9 +37,9 @@ public class GlamdringTest extends CardTestPlayerBase {
             execute();
         }
         catch (AssertionError e) {
-            Assert.assertTrue(
-                    "catch wrong exception: " + e.getMessage(),
-                    e.getMessage().contains("Found wrong choice command") && e.getMessage().contains("In Garruk's Wake")
+            Assertions.assertTrue(
+                    e.getMessage().contains("Found wrong choice command") && e.getMessage().contains("In Garruk's Wake"),
+                    "catch wrong exception: " + e.getMessage()
             );
             return;
         }

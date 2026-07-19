@@ -4,8 +4,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class AdventureCardsTest extends CardTestPlayerBase {
@@ -397,8 +397,8 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, 0);
 
         Permanent rimrock = getPermanent("Rimrock Knight");
-        Assert.assertTrue(rimrock.getRules(currentGame).get(0).startsWith("Adventure Instant")); // must have adventure spell info on battlefield
-        Assert.assertTrue(rimrock.getRules(currentGame).get(1).startsWith("{this} can't block."));
+        Assertions.assertTrue(rimrock.getRules(currentGame).get(0).startsWith("Adventure Instant")); // must have adventure spell info on battlefield
+        Assertions.assertTrue(rimrock.getRules(currentGame).get(1).startsWith("{this} can't block."));
     }
 
     /*

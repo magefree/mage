@@ -3,8 +3,8 @@ package org.mage.test.cards.abilities.other;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestCommander4Players;
 
 /**
@@ -47,6 +47,6 @@ public class MycosynthGolemTest extends CardTestCommander4Players {
         if (forest.isTapped()) {
             tappedLands++;
         }
-        Assert.assertEquals("only one land may be tapped because the cost reduction", 1, tappedLands);
+        Assertions.assertEquals(1, tappedLands, "only one land may be tapped because the cost reduction");
     }
 }

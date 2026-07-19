@@ -8,8 +8,8 @@ import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -75,7 +75,7 @@ public class ChangelingTest extends CardTestPlayerBase {
                 abilityFound = true;
             }
         }
-        Assert.assertTrue("Prophet of Kruphix has to have the 'Pay 2 life: Return this permanent to its owner's hand.' ability, but has not.", abilityFound);
+        Assertions.assertTrue(abilityFound, "Prophet of Kruphix has to have the 'Pay 2 life: Return this permanent to its owner's hand.' ability, but has not.");
 
     }
 

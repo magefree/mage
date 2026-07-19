@@ -4,8 +4,8 @@ import mage.client.MageFrame;
 import mage.client.components.MageComponents;
 import mage.client.components.MageUI;
 import org.apache.log4j.Logger;
-import org.junit.Assert;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 
 import javax.swing.*;
 import java.util.concurrent.TimeUnit;
@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author ayratn
  */
-@Ignore
+@Disabled
 public class StartMultiGamesTest {
 
     private static final Logger logger = Logger.getLogger(StartMultiGamesTest.class);
@@ -52,7 +52,7 @@ public class StartMultiGamesTest {
                 try {
                     frame = new MageFrame();
                 } catch (Throwable e) {
-                    Assert.fail("Can't start client app");
+                    Assertions.fail("Can't start client app");
                 }
                 frame.setVisible(true);
                 sync.notifyAll();

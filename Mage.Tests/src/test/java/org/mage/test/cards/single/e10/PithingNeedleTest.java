@@ -2,8 +2,8 @@ package org.mage.test.cards.single.e10;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
 /**
@@ -55,10 +55,10 @@ public class PithingNeedleTest extends CardTestMultiPlayerBase {
         setStopAt(4, PhaseStep.END_TURN);
         try {
             execute();
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Can't find ability to activate command: {2}{U}$target=Wall of Air")) {
-                Assert.fail("Should have thrown an error about PlayerB not being able to use the staff to target Wall of Air, but got:\n" + e.getMessage());
+                Assertions.fail("Should have thrown an error about PlayerB not being able to use the staff to target Wall of Air, but got:\n" + e.getMessage());
             }
         }
 

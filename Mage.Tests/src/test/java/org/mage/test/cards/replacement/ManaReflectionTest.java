@@ -5,8 +5,8 @@ import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
@@ -72,7 +72,7 @@ public class ManaReflectionTest extends CardTestPlayerBase {
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
 
-        Assert.assertEquals("mana variations don't fit", 4, manaOptions.size());
+        Assertions.assertEquals(4, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{R}{R}{R}{R}{R}{R}{G}{G}", manaOptions);
         assertManaOptions("{R}{R}{R}{R}{G}{G}{G}{G}", manaOptions);
         assertManaOptions("{R}{R}{G}{G}{G}{G}{G}{G}", manaOptions);

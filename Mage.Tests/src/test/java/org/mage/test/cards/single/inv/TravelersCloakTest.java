@@ -4,8 +4,8 @@ import mage.abilities.keyword.LandwalkAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -42,8 +42,8 @@ public class TravelersCloakTest extends CardTestPlayerBase {
                     .filter(p -> p.getName().equals("Kitesail Corsair"))
                     .findFirst()
                     .get();
-            Assert.assertFalse("Grizzly Bears must be protected from blocking by Kitesail Corsair",
-                    game.getCombat().getGroups().get(0).canBlock(blocker, game));
+            Assertions.assertFalse(game.getCombat().getGroups().get(0).canBlock(blocker, game),
+                    "Grizzly Bears must be protected from blocking by Kitesail Corsair");
         });
 
         setStrictChooseMode(true);

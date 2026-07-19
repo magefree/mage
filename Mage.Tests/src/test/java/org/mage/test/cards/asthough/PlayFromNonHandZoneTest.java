@@ -3,8 +3,8 @@ package org.mage.test.cards.asthough;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 /**
@@ -49,7 +49,7 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
             execute();
         } catch (Throwable e) {
             if (!e.getMessage().contains("Cast Worldheart Phoenix")) {
-                Assert.fail("Must have thrown error about not being able to cast Worldheart Phoenix, but got:\n" + e.getMessage());
+                Assertions.fail("Must have thrown error about not being able to cast Worldheart Phoenix, but got:\n" + e.getMessage());
             }
         }
 

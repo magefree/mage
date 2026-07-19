@@ -4,8 +4,8 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -120,7 +120,7 @@ public class BattlefieldThaumaturgeTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Soldier Token", 5);
         // Battlefield Thaumaturge will have hexproof from heroic trigger
         Permanent battlefieldThaumaturge = getPermanent("Battlefield Thaumaturge", playerA.getId());
-        Assert.assertTrue("Battlefield Thaumaturge must have hexproof", battlefieldThaumaturge.getAbilities().contains(HexproofAbility.getInstance()));
+        Assertions.assertTrue(battlefieldThaumaturge.getAbilities().contains(HexproofAbility.getInstance()), "Battlefield Thaumaturge must have hexproof");
 
         assertLife(playerA, 20);
         // 5 initial creatures + 5 soldier tokens => 16 damage
@@ -279,7 +279,7 @@ public class BattlefieldThaumaturgeTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Spectra Ward", 1);
         // Battlefield Thaumaturge will have hexproof from heroic trigger
         Permanent battlefieldThaumaturge = getPermanent("Battlefield Thaumaturge", playerA.getId());
-        Assert.assertTrue("Battlefield Thaumaturge must have hexproof", battlefieldThaumaturge.getAbilities().contains(HexproofAbility.getInstance()));
+        Assertions.assertTrue(battlefieldThaumaturge.getAbilities().contains(HexproofAbility.getInstance()), "Battlefield Thaumaturge must have hexproof");
 
         // No cost reduction from Battlefield Thaumaturge, full amount paid
         assertTappedCount("Plains", true, 5);

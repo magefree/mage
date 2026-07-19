@@ -5,9 +5,9 @@ import mage.abilities.keyword.HasteAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestCommander4Players;
 
 /**
@@ -35,17 +35,17 @@ public class HenzieToolboxTorreTest extends CardTestCommander4Players {
     private void assertBlitzed(String cardName, boolean isBlitzed) {
         assertPermanentCount(playerA, cardName, 1);
         Permanent permanent = getPermanent(cardName);
-        Assert.assertEquals(
-                "Permanent should " + (isBlitzed ? "" : "not ") + "have haste", isBlitzed,
-                permanent.hasAbility(HasteAbility.getInstance(), currentGame)
+        Assertions.assertEquals(
+                isBlitzed,
+                permanent.hasAbility(HasteAbility.getInstance(), currentGame), "Permanent should " + (isBlitzed ? "" : "not ") + "have haste"
         );
-        Assert.assertEquals(
-                "Permanent should " + (isBlitzed ? "" : "not ") + "have card draw trigger", isBlitzed,
-                permanent
+        Assertions.assertEquals(
+                isBlitzed, permanent
                         .getAbilities(currentGame)
                         .stream()
                         .map(Ability::getRule)
-                        .anyMatch("When this creature dies, draw a card."::equals)
+                        .anyMatch("When this creature dies, draw a card."::equals),
+                "Permanent should " + (isBlitzed ? "" : "not ") + "have card draw trigger"
         );
     }
 
@@ -90,7 +90,7 @@ public class HenzieToolboxTorreTest extends CardTestCommander4Players {
      * Test that you can cast your commander with the blitz cost
      */
     @Test
-    @Ignore // TODO: see #12188
+    @Disabled // TODO: see #12188
     public void commanderCastBlitz() {
         addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);

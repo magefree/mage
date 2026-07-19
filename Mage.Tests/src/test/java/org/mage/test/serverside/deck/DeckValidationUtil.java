@@ -4,7 +4,7 @@ import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,6 +119,6 @@ class DeckTester {
 
     void validate(String message, boolean expected) {
         boolean valid = DeckValidationUtil.testDeckValid(deckValidator, maindeck, sideboard);
-        Assert.assertEquals(message != null ? message : deckValidator.getErrorsListInfo(), expected, valid);
+        Assertions.assertEquals(expected, valid, message != null ? message : deckValidator.getErrorsListInfo());
     }
 }

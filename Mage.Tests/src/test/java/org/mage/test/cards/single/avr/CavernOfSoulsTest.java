@@ -2,8 +2,8 @@ package org.mage.test.cards.single.avr;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -52,7 +52,7 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
             execute();
         } catch (Throwable e) {
             if (!e.getMessage().contains("Cast Abuna Acolyte")) {
-                Assert.fail("Should have had error playerA having too many actions, but got:\n" + e.getMessage());
+                Assertions.fail("Should have had error playerA having too many actions, but got:\n" + e.getMessage());
             }
         }
     }

@@ -3,8 +3,8 @@ package org.mage.test.cards.triggers.damage;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -49,7 +49,7 @@ public class DamageMultiLifelinkTriggerTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void testCreatureDamageTargetAndYou() {
         setupBattlefield();
         addCard(Zone.HAND, playerA, devil);
@@ -68,7 +68,7 @@ public class DamageMultiLifelinkTriggerTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void testCreatureDamageTargetAndSelf() {
         setupBattlefield();
         addCard(Zone.BATTLEFIELD, playerA, embermage);
@@ -88,7 +88,7 @@ public class DamageMultiLifelinkTriggerTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void testSpellDamageTargetAndTarget() {
         setupBattlefield();
         addCard(Zone.HAND, playerA, arc);
@@ -109,7 +109,7 @@ public class DamageMultiLifelinkTriggerTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void testSpellDamageThreeTargets() {
         setupBattlefield();
         addCard(Zone.HAND, playerA, cone);
@@ -132,7 +132,7 @@ public class DamageMultiLifelinkTriggerTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void testSpellDamageTargetAndYou() {
         setupBattlefield();
         addCard(Zone.HAND, playerA, chaar);
@@ -151,7 +151,7 @@ public class DamageMultiLifelinkTriggerTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void testSpellDamageTargetAndController() {
         setupBattlefield();
         addCard(Zone.HAND, playerA, outrage);
@@ -170,7 +170,7 @@ public class DamageMultiLifelinkTriggerTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void testSpellDamagePlayerAndControlled() {
         setupBattlefield();
         addCard(Zone.HAND, playerA, fury);

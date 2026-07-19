@@ -4,8 +4,8 @@ package org.mage.test.commander.duel;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestCommanderDuelBase;
 
@@ -57,8 +57,8 @@ public class CastCommanderTest extends CardTestCommanderDuelBase {
         assertPermanentCount(playerA, "Kestia, the Cultivator", 1);
         
         Permanent kestia = getPermanent("Kestia, the Cultivator", playerA);
-        Assert.assertNotEquals("Kestia may not be an creature", true, kestia.isCreature(currentGame));
-        Assert.assertEquals("Kestia has to be an enchantment", true, kestia.isEnchantment(currentGame));
+        Assertions.assertNotEquals(true, kestia.isCreature(currentGame), "Kestia may not be an creature");
+        Assertions.assertEquals(true, kestia.isEnchantment(currentGame), "Kestia has to be an enchantment");
         
         assertPowerToughness(playerA, "Silvercoat Lion", 6, 6);
     }     

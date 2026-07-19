@@ -11,8 +11,8 @@ import mage.counters.Counters;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -57,19 +57,19 @@ public class ChronozoaTest extends CardTestPlayerBase {
     assertGraveyardCount(playerA, 1);
 
     final List<Permanent> creatures = currentGame.getBattlefield().getAllActivePermanents(CardType.CREATURE, currentGame);
-    Assert.assertEquals(2, creatures.size());
+    Assertions.assertEquals(2, creatures.size());
 
     for (final Permanent creature : creatures) {
       // Make sure the creatures are Chronozoa tokens
-      Assert.assertEquals("Chronozoa", creature.getName());
-      Assert.assertEquals("Chronozoa has to be a token", true, creature instanceof PermanentToken);
+      Assertions.assertEquals("Chronozoa", creature.getName());
+      Assertions.assertEquals(true, creature instanceof PermanentToken, "Chronozoa has to be a token");
 
       // Make sure each token has 2 time counters
       final Counters counters = creature.getCounters(currentGame);
-      Assert.assertEquals(1, counters.size());
+      Assertions.assertEquals(1, counters.size());
       for(final Counter counter : counters.values()) {
-        Assert.assertEquals(CounterType.TIME.getName(), counter.getName());
-        Assert.assertEquals(2, counter.getCount());
+        Assertions.assertEquals(CounterType.TIME.getName(), counter.getName());
+        Assertions.assertEquals(2, counter.getCount());
       }
     }
   }
@@ -95,7 +95,7 @@ public class ChronozoaTest extends CardTestPlayerBase {
 
     // Chronozoa shouldn't duplicate
     final List<Permanent> creatures = currentGame.getBattlefield().getAllActivePermanents(CardType.CREATURE, currentGame);
-    Assert.assertTrue(creatures.isEmpty());
+    Assertions.assertTrue(creatures.isEmpty());
 
   }
 }

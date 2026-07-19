@@ -2,7 +2,8 @@ package org.mage.test.cards.flipcoin;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -24,18 +25,20 @@ public class FlipCoinTest extends CardTestPlayerBase {
         execute();
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void test_StrictMode_MustFailWithoutResultSetup() {
         // {3}, {T}: Flip a coin. If you win the flip, create a 2/2 colorless Insect artifact creature token with flying named Wirefly.
         // If you lose the flip, destroy all permanents named Wirefly.
-        addCard(Zone.BATTLEFIELD, playerA, "Wirefly Hive");
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        Assertions.assertThrows(AssertionError.class, () -> {
+            addCard(Zone.BATTLEFIELD, playerA, "Wirefly Hive");
+            addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}");
+            activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}");
 
-        setStrictChooseMode(true); // no coinresult in choices, so it must fail
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
+            setStrictChooseMode(true); // no coinresult in choices, so it must fail
+            setStopAt(1, PhaseStep.BEGIN_COMBAT);
+            execute();
+        });
     }
 
     @Test

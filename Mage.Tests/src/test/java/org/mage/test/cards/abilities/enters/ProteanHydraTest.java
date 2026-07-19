@@ -3,8 +3,8 @@ package org.mage.test.cards.abilities.enters;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -33,14 +33,14 @@ public class ProteanHydraTest extends CardTestPlayerBase {
         for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
             if (permanent.getName().equals("Forest")) {
                 // check all mana was spent
-                Assert.assertTrue(permanent.isTapped());
+                Assertions.assertTrue(permanent.isTapped());
             }
         }
 
         assertPermanentCount(playerA, "Protean Hydra", 1);
 
         Permanent proteanHydra = getPermanent("Protean Hydra", playerA.getId());
-        Assert.assertEquals(4, proteanHydra.getPower().getValue());
-        Assert.assertEquals(4, proteanHydra.getToughness().getValue());
+        Assertions.assertEquals(4, proteanHydra.getPower().getValue());
+        Assertions.assertEquals(4, proteanHydra.getToughness().getValue());
     }
 }

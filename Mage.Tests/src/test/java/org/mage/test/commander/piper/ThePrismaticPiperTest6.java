@@ -1,6 +1,7 @@
 package org.mage.test.commander.piper;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author TheElk801
@@ -19,8 +20,10 @@ public class ThePrismaticPiperTest6 extends ThePrismaticPiperBaseTest {
         super(6);
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void testColor() {
-        execute();
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> {
+            execute();
+        });
     }
 }

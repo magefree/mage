@@ -2,8 +2,8 @@ package org.mage.test.cards.single.clb;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -25,7 +25,7 @@ public class MyrkulsEdictTest extends CardTestPlayerBase {
      * Reported bug: https://github.com/magefree/mage/issues/9381
      *      AI doesn't sacrifice a creature on a roll of 1-9
      */
-    @Ignore
+    @Disabled
     @Test
     public void opponentSacrificesLevel1() {
         addCard(Zone.HAND, playerA, myrkulsEdict);

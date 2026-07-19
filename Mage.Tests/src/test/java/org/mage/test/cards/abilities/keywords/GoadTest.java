@@ -10,8 +10,8 @@ import mage.game.GameException;
 import mage.game.mulligan.MulliganType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
@@ -44,21 +44,21 @@ public class GoadTest extends CardTestMultiPlayerBase {
     }
 
     private void assertAttacking(String attacker, TestPlayer... players) {
-        Assert.assertTrue("At least one player should be provided", players.length > 0);
+        Assertions.assertTrue(players.length > 0, "At least one player should be provided");
         Permanent permanent = getPermanent(attacker);
-        Assert.assertTrue("Creature should be tapped", permanent.isTapped());
-        Assert.assertTrue("Creature should be attacking", permanent.isAttacking());
+        Assertions.assertTrue(permanent.isTapped(), "Creature should be tapped");
+        Assertions.assertTrue(permanent.isAttacking(), "Creature should be attacking");
         UUID defenderId = currentGame.getCombat().getDefenderId(permanent.getId());
-        Assert.assertTrue(
+        Assertions.assertTrue(
+                Arrays.stream(players)
+                        .map(TestPlayer::getId)
+                        .anyMatch(defenderId::equals),
                 "Creature should be attacking one the following players: "
                         + Arrays
                         .stream(players)
                         .map(Player::getName)
                         .reduce((a, b) -> a + ", " + b)
-                        .orElse(""),
-                Arrays.stream(players)
-                        .map(TestPlayer::getId)
-                        .anyMatch(defenderId::equals)
+                        .orElse("")
         );
     }
 
@@ -69,18 +69,18 @@ public class GoadTest extends CardTestMultiPlayerBase {
      * @param players  the player(s) that the attacker is supposed to be goaded by.
      */
     private void assertNotGoaded(String attacker, TestPlayer... players) {
-        Assert.assertTrue("At least one player should be provided", players.length > 0);
+        Assertions.assertTrue(players.length > 0, "At least one player should be provided");
         Permanent permanent = getPermanent(attacker);
-        Assert.assertNotEquals(
+        Assertions.assertNotEquals(
+                permanent.getGoadingPlayers(),
+                Arrays.stream(players)
+                        .map(TestPlayer::getId)
+                        .collect(Collectors.toSet()),
                 "Creature should be goaded by "
                         + Arrays
                         .stream(players)
                         .map(Player::getName)
-                        .reduce((a, b) -> a + ", " + b).orElse(""),
-                permanent.getGoadingPlayers(),
-                Arrays.stream(players)
-                        .map(TestPlayer::getId)
-                        .collect(Collectors.toSet())
+                        .reduce((a, b) -> a + ", " + b).orElse("")
         );
     }
 
@@ -91,18 +91,18 @@ public class GoadTest extends CardTestMultiPlayerBase {
      * @param players  the player(s) that the attacker is supposed to be goaded by.
      */
     private void assertGoaded(String attacker, TestPlayer... players) {
-        Assert.assertTrue("At least one player should be provided", players.length > 0);
+        Assertions.assertTrue(players.length > 0, "At least one player should be provided");
         Permanent permanent = getPermanent(attacker);
-        Assert.assertEquals(
+        Assertions.assertEquals(
+                permanent.getGoadingPlayers(),
+                Arrays.stream(players)
+                        .map(TestPlayer::getId)
+                        .collect(Collectors.toSet()),
                 "Creature should be goaded by "
                         + Arrays
                         .stream(players)
                         .map(Player::getName)
-                        .reduce((a, b) -> a + ", " + b).orElse(""),
-                permanent.getGoadingPlayers(),
-                Arrays.stream(players)
-                        .map(TestPlayer::getId)
-                        .collect(Collectors.toSet())
+                        .reduce((a, b) -> a + ", " + b).orElse("")
         );
     }
 

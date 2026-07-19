@@ -5,8 +5,8 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.ManaPaidSourceWatcher;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestCommanderDuelBase;
 
 /**
@@ -42,22 +42,22 @@ public class MarathWillOfTheWildTest extends CardTestCommanderDuelBase {
                     .filter(p -> p.getName().equals("Marath, Will of the Wild"))
                     .findFirst()
                     .orElse(null);
-            Assert.assertNotNull(perm);
+            Assertions.assertNotNull(perm);
 
             // check correct copy
             int before = watcher.testsReturnTotal(perm);
-            Assert.assertEquals("original must have 3x", 3, before);
+            Assertions.assertEquals(3, before, "original must have 3x");
             ManaPaidSourceWatcher copiedWatcher = watcher.copy();
             int after = copiedWatcher.testsReturnTotal(perm);
-            Assert.assertEquals("copied must have 3x", before, after);
+            Assertions.assertEquals(before, after, "copied must have 3x");
 
             // check correct refs and changes
             // simulate ai games (changes in copied watcher must not touch original watcher)
             copiedWatcher.testsIncrementManaAmount(game, perm);
             int afterChangeCopied = copiedWatcher.testsReturnTotal(perm);
             int afterChangeOriginal = watcher.testsReturnTotal(perm);
-            Assert.assertEquals("after change, copied", 4, afterChangeCopied);
-            Assert.assertEquals("after change, original", 3, afterChangeOriginal);
+            Assertions.assertEquals(4, afterChangeCopied, "after change, copied");
+            Assertions.assertEquals(3, afterChangeOriginal, "after change, original");
         });
 
         // kill

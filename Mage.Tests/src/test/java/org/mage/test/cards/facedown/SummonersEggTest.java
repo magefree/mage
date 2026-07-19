@@ -4,8 +4,8 @@ import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -45,7 +45,7 @@ public class SummonersEggTest extends CardTestPlayerBase {
         assertExileCount("Goblin Roughrider", 1);
         for (Card card : currentGame.getExile().getAllCards(currentGame)) {
             if (card.getName().equals("Goblin Roughrider")) {
-                Assert.assertTrue("Exiled card is not face down", card.isFaceDown(currentGame));
+                Assertions.assertTrue(card.isFaceDown(currentGame), "Exiled card is not face down");
             }
         }
 
@@ -81,7 +81,7 @@ public class SummonersEggTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Goblin Roughrider", 1);
         for (Permanent p : currentGame.getBattlefield().getAllActivePermanents()) {
             if (p.getName().equals("Goblin Roughrider")) {
-                Assert.assertTrue("Permanent is not face up", !p.isFaceDown(currentGame));
+                Assertions.assertTrue(!p.isFaceDown(currentGame), "Permanent is not face up");
             }
         }
 
@@ -114,7 +114,7 @@ public class SummonersEggTest extends CardTestPlayerBase {
         assertExileCount("Forest", 1);
         for (Card card : currentGame.getExile().getAllCards(currentGame)) {
             if (card.getName().equals("Forest")) {
-                Assert.assertTrue("Exiled card is not face up", !card.isFaceDown(currentGame));
+                Assertions.assertTrue(!card.isFaceDown(currentGame), "Exiled card is not face up");
             }
         }
 

@@ -1,20 +1,21 @@
 package mage.client.util;
 
 import mage.client.preference.MagePreferences;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static junit.framework.TestCase.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class IgnoreListTest {
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         MagePreferences.clearIgnoreList("test.com.xx");
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         MagePreferences.clearIgnoreList("test.com.xx");
     }

@@ -4,7 +4,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Planes;
 import mage.constants.Zone;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 import java.util.Arrays;
@@ -20,16 +21,19 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
     private static final String gallery = "Mirror Gallery";
     private static final String farideh = "Farideh, Devil's Chosen";
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void test_StrictFailWithoutSetup() {
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
-        addCard(Zone.HAND, playerA, goblins);
+        Assertions.assertThrows(AssertionError.class, () -> {
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, goblins);
+            addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+            addCard(Zone.HAND, playerA, goblins);
 
-        setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.END_TURN);
-        execute();
+            castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, goblins);
+
+            setStrictChooseMode(true);
+            setStopAt(1, PhaseStep.END_TURN);
+            execute();
+        });
     }
 
     private void runGoblinTest(int roll, int goblinCount) {
@@ -139,9 +143,11 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         assertPermanentCount(playerA, "Goblin Token", goblinCount);
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void test_KrarksOtherThumb_1copy_MustFailOnWrongChoiceSetup() {
-        runKrarksOtherThumbTest(8, 1, 1, 9, 10);
+        Assertions.assertThrows(AssertionError.class, () -> {
+            runKrarksOtherThumbTest(8, 1, 1, 9, 10);
+        });
     }
 
     @Test
@@ -441,7 +447,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
     @Test
     public void test_PlanarDice_AdditionalRoll_WithBigIdea_MustIgnore() {
         // see consts comments about planar die size
-        //Assert.assertEquals("Planar dice must be six sided", 6, GameOptions.PLANECHASE_PLANAR_DIE_TOTAL_SIDES);
+        //Assertions.assertEquals("Planar dice must be six sided", 6, GameOptions.PLANECHASE_PLANAR_DIE_TOTAL_SIDES);
 
         // {2}{B/R}{B/R}, {T}: Roll a six-sided dice. Create a number of 1/1 red Brainiac creature tokens equal to the result.
         // Tap three untapped Brainiacs you control: The next time you would roll a six-sided die,

@@ -5,8 +5,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -33,12 +33,12 @@ public class DuneChanterTest extends CardTestPlayerBase {
                 .filter(p -> p.getSubtype(game).contains(SubType.DESERT))
                 .mapToInt(k -> 1)
                 .sum();
-        Assert.assertEquals(info, count, amount);
+        Assertions.assertEquals(count, amount, info);
     }
 
     private static void checkTopLibrary(String info, Player player, Game game, boolean check) {
         boolean hasDesert = player.getLibrary().getFromTop(game).getSubtype(game).contains(SubType.DESERT);
-        Assert.assertEquals(info, check, hasDesert);
+        Assertions.assertEquals(check, hasDesert, info);
     }
 
     private static void checkHand(String info, Player player, Game game, int count) {
@@ -49,7 +49,7 @@ public class DuneChanterTest extends CardTestPlayerBase {
                 .filter(c -> c.getSubtype(game).contains(SubType.DESERT))
                 .mapToInt(k -> 1)
                 .sum();
-        Assert.assertEquals(info, count, amount);
+        Assertions.assertEquals(count, amount, info);
     }
 
     private static void checkGraveyard(String info, Player player, Game game, int count) {
@@ -60,7 +60,7 @@ public class DuneChanterTest extends CardTestPlayerBase {
                 .filter(c -> c.getSubtype(game).contains(SubType.DESERT))
                 .mapToInt(k -> 1)
                 .sum();
-        Assert.assertEquals(info, count, amount);
+        Assertions.assertEquals(count, amount, info);
     }
 
     private static void checkExile(String info, Player player, Game game, int count) {
@@ -71,7 +71,7 @@ public class DuneChanterTest extends CardTestPlayerBase {
                 .filter(c -> c.getSubtype(game).contains(SubType.DESERT))
                 .mapToInt(k -> 1)
                 .sum();
-        Assert.assertEquals(info, count, amount);
+        Assertions.assertEquals(count, amount, info);
     }
 
     @Test

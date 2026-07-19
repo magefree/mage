@@ -8,8 +8,8 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -46,11 +46,11 @@ public class GainAbilityDependenciesTest extends CardTestPlayerBase {
         ContinuousEffectImpl effectTree = new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.EndOfTurn, filterTree);
         ContinuousEffectImpl effectNotTree = new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.EndOfTurn, filterNotTree);
 
-        Assert.assertFalse("must haven't depends with empty filter", effectEmpty.getDependedToTypes().contains(DependencyType.AddingCreatureType));
-        Assert.assertTrue("must have depend from subtype predicate", effectSubtype.getDependedToTypes().contains(DependencyType.AddingCreatureType));
-        Assert.assertTrue("must have depend from or predicate", effectOr.getDependedToTypes().contains(DependencyType.AddingCreatureType));
-        Assert.assertTrue("must have depend from tree predicate", effectTree.getDependedToTypes().contains(DependencyType.AddingCreatureType));
-        Assert.assertTrue("must have depend from not-tree predicate", effectNotTree.getDependedToTypes().contains(DependencyType.AddingCreatureType));
+        Assertions.assertFalse(effectEmpty.getDependedToTypes().contains(DependencyType.AddingCreatureType), "must haven't depends with empty filter");
+        Assertions.assertTrue(effectSubtype.getDependedToTypes().contains(DependencyType.AddingCreatureType), "must have depend from subtype predicate");
+        Assertions.assertTrue(effectOr.getDependedToTypes().contains(DependencyType.AddingCreatureType), "must have depend from or predicate");
+        Assertions.assertTrue(effectTree.getDependedToTypes().contains(DependencyType.AddingCreatureType), "must have depend from tree predicate");
+        Assertions.assertTrue(effectNotTree.getDependedToTypes().contains(DependencyType.AddingCreatureType), "must have depend from not-tree predicate");
     }
 
     /**

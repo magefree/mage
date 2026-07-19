@@ -5,9 +5,9 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -37,8 +37,8 @@ public class GainAbilitiesTest extends CardTestPlayerBase {
         execute();
 
         Permanent permanent = getPermanent("Balduvian Bears");
-        Assert.assertEquals("must have only 1 singleton ability instance from two attachments",
-                1, permanent.getAbilities(currentGame).stream().filter(VigilanceAbility.class::isInstance).count());
+        Assertions.assertEquals(1,
+                permanent.getAbilities(currentGame).stream().filter(VigilanceAbility.class::isInstance).count(), "must have only 1 singleton ability instance from two attachments");
     }
 
     @Test
@@ -60,10 +60,10 @@ public class GainAbilitiesTest extends CardTestPlayerBase {
         execute();
 
         Permanent permanent = getPermanent("Balduvian Bears");
-        Assert.assertEquals("must have 2 dynamic ability instances from two attachments",
-                2, permanent.getAbilities(currentGame).stream().filter(
+        Assertions.assertEquals(2,
+                permanent.getAbilities(currentGame).stream().filter(
                         a -> a.getEffects().stream().anyMatch(DrawCardSourceControllerEffect.class::isInstance)
-                ).count());
+                ).count(), "must have 2 dynamic ability instances from two attachments");
     }
 
     @Test
@@ -104,7 +104,7 @@ public class GainAbilitiesTest extends CardTestPlayerBase {
 
     }
 
-    @Ignore
+    @Disabled
     // TODO: GainAbilityControlledSpellsEffect needs improvement to properly apply only to playable cards in non-hand zones
     // TODO: Figure out how to make the ability apply to the reflexive trigger
     @Test
@@ -183,7 +183,7 @@ public class GainAbilitiesTest extends CardTestPlayerBase {
      *  1. Cast all three of Frondland Felidar, Jubilant Skybonder, and Proud Wildbonder.
      *  2. When the third one is cast (order doesn't matter), the other two will lose their abilities
      */
-    @Ignore
+    @Disabled
     @Test
     public void gainAbilitiesDontRemoveEachOther() {
         // {2}{W}{G}
@@ -217,8 +217,8 @@ public class GainAbilitiesTest extends CardTestPlayerBase {
         Permanent jubilantSkybonderPerm = getPermanent(jubilantSkybonder);
         Permanent proudWildbonderPerm = getPermanent(proudWildbonder);
 
-        Assert.assertEquals(4, frondlandFelidarPerm.getAbilities(currentGame).size());  // Cast + Vigilence/Flying/Trample + "creature you control gain..." + Ability Gained from own effect.
-        Assert.assertEquals(4, jubilantSkybonderPerm.getAbilities(currentGame).size());  // Cast + Vigilence/Flying/Trample + "creature you control gain..." + Ability Gained from own effect.
-        Assert.assertEquals(4, proudWildbonderPerm.getAbilities(currentGame).size());  // Cast + Vigilence/Flying/Trample + "creature you control gain..." + Ability Gained from own effect.
+        Assertions.assertEquals(4, frondlandFelidarPerm.getAbilities(currentGame).size());  // Cast + Vigilence/Flying/Trample + "creature you control gain..." + Ability Gained from own effect.
+        Assertions.assertEquals(4, jubilantSkybonderPerm.getAbilities(currentGame).size());  // Cast + Vigilence/Flying/Trample + "creature you control gain..." + Ability Gained from own effect.
+        Assertions.assertEquals(4, proudWildbonderPerm.getAbilities(currentGame).size());  // Cast + Vigilence/Flying/Trample + "creature you control gain..." + Ability Gained from own effect.
     }
 }

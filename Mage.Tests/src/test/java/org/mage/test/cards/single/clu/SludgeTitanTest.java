@@ -2,9 +2,9 @@ package org.mage.test.cards.single.clu;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -83,7 +83,7 @@ public class SludgeTitanTest extends CardTestPlayerBase {
         assertHandCount(playerA, piker, 1);
     }
 
-    @Ignore
+    @Disabled
     // The test suite does not fully validate the choice, and accept it. Work properly live preventing such choice.
     @Test
     public void testCreatureOnly_ChooseTwoInvalid() {
@@ -101,10 +101,10 @@ public class SludgeTitanTest extends CardTestPlayerBase {
 
         try {
             execute();
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().startsWith("Missing CHOICE def")) {
-                Assert.fail("Unexpected exception " + e.getMessage());
+                Assertions.fail("Unexpected exception " + e.getMessage());
             }
         }
     }
@@ -150,7 +150,7 @@ public class SludgeTitanTest extends CardTestPlayerBase {
         assertHandCount(playerA, dryad, 2);
     }
 
-    @Ignore
+    @Disabled
     // The test suite does not fully validate the choice, and accept it. Work properly live preventing selecting 3 dryads.
     @Test
     public void testBoth_ChooseThree_DryadArbor_Invalid() {
@@ -167,10 +167,10 @@ public class SludgeTitanTest extends CardTestPlayerBase {
 
         try {
             execute();
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().startsWith("Missing CHOICE def")) {
-                Assert.fail("Unexpected exception " + e.getMessage());
+                Assertions.fail("Unexpected exception " + e.getMessage());
             }
         }
     }

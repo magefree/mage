@@ -3,8 +3,8 @@ package org.mage.test.cards.single.blc;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -25,10 +25,10 @@ public class FortuneTellersTalentTest extends CardTestPlayerBase {
 
     private void assertClassLevel(String cardName, int level) {
         Permanent permanent = getPermanent(cardName);
-        Assert.assertEquals(
+        Assertions.assertEquals(
+                level, permanent.getClassLevel(),
                 cardName + " should be level " + level +
-                        " but was level " + permanent.getClassLevel(),
-                level, permanent.getClassLevel()
+                        " but was level " + permanent.getClassLevel()
         );
     }
 

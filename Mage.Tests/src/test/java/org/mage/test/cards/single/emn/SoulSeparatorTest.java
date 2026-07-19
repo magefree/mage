@@ -7,8 +7,8 @@ import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -42,9 +42,9 @@ public class SoulSeparatorTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Zombie Token", 2, 3);
 
         Permanent saToken = getPermanent("Sylvan Advocate", playerA);
-        Assert.assertTrue(saToken.getAbilities().contains(FlyingAbility.getInstance()));
-        Assert.assertTrue(saToken.hasSubtype(SubType.SPIRIT, currentGame));
-        Assert.assertTrue(saToken.getAbilities().contains(VigilanceAbility.getInstance()));
+        Assertions.assertTrue(saToken.getAbilities().contains(FlyingAbility.getInstance()));
+        Assertions.assertTrue(saToken.hasSubtype(SubType.SPIRIT, currentGame));
+        Assertions.assertTrue(saToken.getAbilities().contains(VigilanceAbility.getInstance()));
         assertPowerToughness(playerA, "Sylvan Advocate", 1, 1);
     }
 
@@ -81,9 +81,9 @@ public class SoulSeparatorTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Zombie Token", 0, 13);
 
         Permanent treeToken = getPermanent("Tree of Perdition", playerA);
-        Assert.assertTrue(treeToken.getAbilities().contains(FlyingAbility.getInstance()));
-        Assert.assertTrue(treeToken.hasSubtype(SubType.SPIRIT, currentGame));
-        Assert.assertTrue(treeToken.getAbilities().contains(DefenderAbility.getInstance()));
+        Assertions.assertTrue(treeToken.getAbilities().contains(FlyingAbility.getInstance()));
+        Assertions.assertTrue(treeToken.hasSubtype(SubType.SPIRIT, currentGame));
+        Assertions.assertTrue(treeToken.getAbilities().contains(DefenderAbility.getInstance()));
 
         assertLife(playerA, 20);
         assertLife(playerB, 1);

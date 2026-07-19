@@ -2,7 +2,7 @@ package org.mage.test.AI.basic;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestCommander4PlayersWithAIHelps;
 
 public class ModeChoiceAITest extends CardTestCommander4PlayersWithAIHelps {

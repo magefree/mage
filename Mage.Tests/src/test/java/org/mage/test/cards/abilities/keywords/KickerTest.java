@@ -3,9 +3,9 @@ package org.mage.test.cards.abilities.keywords;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -67,7 +67,7 @@ public class KickerTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore
+    @Disabled
     // TODO: enable test after replicate ability will be supported by AI (don't forget about multikicker support too)
     public void test_Use_AI() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
@@ -103,7 +103,7 @@ public class KickerTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore
+    @Disabled
     // TODO: enable test after replicate ability will be supported by AI (don't forget about multikicker support too)
     public void test_DontUse_AI() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5 - 1); // haven't all mana
@@ -568,10 +568,10 @@ public class KickerTest extends CardTestPlayerBase {
         try {
             execute();
 
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
-                Assert.fail("Should have thrown error about not being able to attack with Raging Golin, but got:\n" + e.getMessage());
+                Assertions.fail("Should have thrown error about not being able to attack with Raging Golin, but got:\n" + e.getMessage());
             }
         }
 
@@ -583,10 +583,10 @@ public class KickerTest extends CardTestPlayerBase {
         try {
             execute();
 
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Cast Lightning Bolt$targetPlayer=PlayerA")) {
-                Assert.fail("Should have thrown error about not being able to attack with Raging Golin, but got:\n" + e.getMessage());
+                Assertions.fail("Should have thrown error about not being able to attack with Raging Golin, but got:\n" + e.getMessage());
             }
         }
 
@@ -624,7 +624,7 @@ public class KickerTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        Assert.assertEquals("All mana has to be used", "[]", playerA.getManaAvailable(currentGame).toString());
+        Assertions.assertEquals("[]", playerA.getManaAvailable(currentGame).toString(), "All mana has to be used");
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertGraveyardCount(playerA, "Bloodhusk Ritualist", 1);
         assertGraveyardCount(playerB, "Fireball", 2);

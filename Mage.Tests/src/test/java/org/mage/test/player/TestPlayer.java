@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 
 import mage.*;
 import mage.abilities.*;
@@ -166,7 +166,7 @@ public class TestPlayer implements Player {
         // how-to fix:
         // * for face down choices: use EmptyNames.XXX.getTestCommand instead toString
         // * for replacement/triggers choices: comment choice command, look at logs for triggers list and use starting text in the choice instead empty
-        Assert.assertNotEquals("Choice can't be empty", "", choice);
+        Assertions.assertNotEquals("Choice can't be empty", "", choice);
         choice = EmptyNames.replaceTestCommandByObjectName(choice);
 
         if (this.isSkipAllNextChooseCommands) {
@@ -206,7 +206,7 @@ public class TestPlayer implements Player {
     public void addTarget(String target) {
         // prepare face down
         // how-to fix: if it's a face down object then use getTestCommand instead toString
-        Assert.assertNotEquals("Target can't be empty", "", target);
+        Assertions.assertNotEquals("Target can't be empty", "", target);
 
         target = EmptyNames.replaceTestCommandByObjectName(target);
 
@@ -421,7 +421,7 @@ public class TestPlayer implements Player {
             if (searchObject.contains(" with ")
                     || searchObject.contains(" using ")
                     || searchObject.contains("fused ")) {
-                Assert.assertFalse("alternative spell don't support alias", searchObject.startsWith(ALIAS_PREFIX));
+                Assertions.assertFalse(searchObject.startsWith(ALIAS_PREFIX), "alternative spell don't support alias");
                 foundObject = true;
                 foundAbility = ability.toString().equals(nameOrAlias);
             } else {
@@ -431,7 +431,7 @@ public class TestPlayer implements Player {
         } else if (nameOrAlias.startsWith(ALIAS_PREFIX)) {
             // object alias with ability text:
             // @ref ability text from ref object
-            Assert.assertTrue("ability alias must contains space", nameOrAlias.contains(" "));
+            Assertions.assertTrue(nameOrAlias.contains(" "), "ability alias must contains space");
             String searchObject = nameOrAlias.substring(0, nameOrAlias.indexOf(" "));
             String searchAbility = nameOrAlias.substring(nameOrAlias.indexOf(" ") + 1);
             foundObject = hasObjectTargetNameOrAlias(game.getObject(ability.getSourceId()), searchObject);
@@ -671,7 +671,7 @@ public class TestPlayer implements Player {
                     printStart(game, "Available for " + this.getName());
                     printAbilities(game, this.getPlayable(game, true));
                     printEnd();
-                    Assert.fail("Can't find ability to activate command: " + command);
+                    Assertions.fail("Can't find ability to activate command: " + command);
                 } else if (action.getAction().startsWith(ACTIVATE_MANA)) {
                     String command = action.getAction();
                     command = command.substring(command.indexOf(ACTIVATE_MANA) + ACTIVATE_MANA.length());
@@ -726,7 +726,7 @@ public class TestPlayer implements Player {
                     // TODO: enable assert and rewrite failed activateManaAbility tests
                     //  (must use checkAbility instead multiple mana calls)
                     LOGGER.warn("WARNING, test must be rewritten to use checkAbility instead multiple mana calls");
-                    //Assert.fail("Can't find mana ability to activate command: " + command);
+                    //Assertions.fail("Can't find mana ability to activate command: " + command);
                 } else if (action.getAction().startsWith("addCounters:")) {
                     String command = action.getAction();
                     command = command.substring(command.indexOf("addCounters:") + 12);
@@ -734,7 +734,7 @@ public class TestPlayer implements Player {
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
                         if (hasObjectTargetNameOrAlias(permanent, groups[0])) {
                             CounterType counterType = CounterType.findByName(groups[1]);
-                            Assert.assertNotNull("Invalid counter type " + groups[1], counterType);
+                            Assertions.assertNotNull(counterType, "Invalid counter type " + groups[1]);
                             Counter counter = counterType.createInstance(Integer.parseInt(groups[2]));
                             permanent.addCounters(counter, source.getControllerId(), source, game);
                             actions.remove(action);
@@ -770,7 +770,7 @@ public class TestPlayer implements Player {
                                 addActionsAfterRollback(game, rollbackBlockNumber);
                                 return true;
                             } else {
-                                Assert.fail("Rollback command misses parameter: " + command);
+                                Assertions.fail("Rollback command misses parameter: " + command);
                             }
                         }
                         if (groups[0].equals("Concede")) {
@@ -817,7 +817,7 @@ public class TestPlayer implements Player {
                         return true;
                     }
 
-                    Assert.fail("Unknown ai command: " + command);
+                    Assertions.fail("Unknown ai command: " + command);
                 } else if (action.getAction().startsWith(RUN_PREFIX)) {
                     String command = action.getAction();
                     command = command.substring(command.indexOf(RUN_PREFIX) + RUN_PREFIX.length());
@@ -829,7 +829,7 @@ public class TestPlayer implements Player {
                         return true;
                     }
 
-                    Assert.fail("Unknown run command: " + command);
+                    Assertions.fail("Unknown run command: " + command);
                 } else if (action.getAction().startsWith(CHECK_PREFIX)) {
                     String command = action.getAction();
                     command = command.substring(command.indexOf(CHECK_PREFIX) + CHECK_PREFIX.length());
@@ -1037,7 +1037,7 @@ public class TestPlayer implements Player {
                     if (wasProccessed) {
                         return true;
                     } else {
-                        Assert.fail("Unknown check command or params: " + command);
+                        Assertions.fail("Unknown check command or params: " + command);
                     }
                 } else if (action.getAction().startsWith(SHOW_PREFIX)) {
                     String command = action.getAction();
@@ -1144,7 +1144,7 @@ public class TestPlayer implements Player {
                     if (wasProccessed) {
                         return true;
                     } else {
-                        Assert.fail("Unknown show command or params: " + command);
+                        Assertions.fail("Unknown show command or params: " + command);
                     }
                 }
 
@@ -1228,7 +1228,7 @@ public class TestPlayer implements Player {
         printStart(game, "Permanents of " + player.getName());
         printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()), this);
         printEnd();
-        Assert.fail(action.getActionName() + " - can't find permanent to check: " + cardName);
+        Assertions.fail(action.getActionName() + " - can't find permanent to check: " + cardName);
         return null;
     }
 
@@ -1391,32 +1391,32 @@ public class TestPlayer implements Player {
     private void assertPT(PlayerAction action, Game game, Player player, String permanentName, int Power, int Toughness) {
         Permanent perm = findPermanentWithAssert(action, game, player, permanentName);
 
-        Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " have wrong power: " + perm.getPower().getValue() + " <> " + Power,
-                Power, perm.getPower().getValue());
-        Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " have wrong toughness: " + perm.getToughness().getValue() + " <> " + Toughness,
-                Toughness, perm.getToughness().getValue());
+        Assertions.assertEquals(Power, perm.getPower().getValue(),
+                action.getActionName() + " - permanent " + permanentName + " have wrong power: " + perm.getPower().getValue() + " <> " + Power);
+        Assertions.assertEquals(Toughness, perm.getToughness().getValue(),
+                action.getActionName() + " - permanent " + permanentName + " have wrong toughness: " + perm.getToughness().getValue() + " <> " + Toughness);
     }
 
     private void assertDamage(PlayerAction action, Game game, Player player, String permanentName, int damage) {
         Permanent perm = findPermanentWithAssert(action, game, player, permanentName);
 
-        Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " have wrong damage: " + perm.getDamage() + " <> " + damage, damage, perm.getDamage());
+        Assertions.assertEquals(damage, perm.getDamage(), action.getActionName() + " - permanent " + permanentName + " have wrong damage: " + perm.getDamage() + " <> " + damage);
     }
 
     private void assertLife(PlayerAction action, Game game, Player player, int Life) {
-        Assert.assertEquals(action.getActionName() + " - " + player.getName() + " have wrong life: " + player.getLife() + " <> " + Life,
-                Life, player.getLife());
+        Assertions.assertEquals(Life, player.getLife(),
+                action.getActionName() + " - " + player.getName() + " have wrong life: " + player.getLife() + " <> " + Life);
     }
 
     private void assertPlayerInGame(PlayerAction action, Game game, Player targetPlayer, boolean mustBeInGame) {
-        Assert.assertNotNull("Can't find target player", targetPlayer);
+        Assertions.assertNotNull(targetPlayer, "Can't find target player");
 
         if (targetPlayer.isInGame() && !mustBeInGame) {
-            Assert.fail(action.getActionName() + " - player " + targetPlayer.getName() + " must NOT be in game");
+            Assertions.fail(action.getActionName() + " - player " + targetPlayer.getName() + " must NOT be in game");
         }
 
         if (!targetPlayer.isInGame() && mustBeInGame) {
-            Assert.fail(action.getActionName() + " - player " + targetPlayer.getName() + " must be in game");
+            Assertions.fail(action.getActionName() + " - player " + targetPlayer.getName() + " must be in game");
         }
     }
 
@@ -1432,9 +1432,9 @@ public class TestPlayer implements Player {
         }
 
         if (mustHave) {
-            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have the ability " + abilityClass, true, found);
+            Assertions.assertEquals(true, found, action.getActionName() + " - permanent " + permanentName + " must have the ability " + abilityClass);
         } else {
-            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must not have the ability " + abilityClass, false, found);
+            Assertions.assertEquals(false, found, action.getActionName() + " - permanent " + permanentName + " must not have the ability " + abilityClass);
         }
     }
 
@@ -1453,7 +1453,7 @@ public class TestPlayer implements Player {
             printStart(game, action.getActionName());
             printAbilities(game, computerPlayer.getPlayable(game, true));
             printEnd();
-            Assert.fail("Must have playable ability, but not found: " + abilityStartText);
+            Assertions.fail("Must have playable ability, but not found: " + abilityStartText);
         }
 
         if (!mustHave && found) {
@@ -1462,13 +1462,13 @@ public class TestPlayer implements Player {
             printStart(game, action.getActionName());
             printAbilities(game, computerPlayer.getPlayable(game, true));
             printEnd();
-            Assert.fail("Must not have playable ability, but found: " + abilityStartText);
+            Assertions.fail("Must not have playable ability, but found: " + abilityStartText);
         }
     }
 
     private void assertAttackers(PlayerAction action, Game game, Player player, String attackers) {
         AttackedOrBlockedThisCombatWatcher watcher = game.getState().getWatcher(AttackedOrBlockedThisCombatWatcher.class);
-        Assert.assertNotNull(watcher);
+        Assertions.assertNotNull(watcher);
 
         List<String> actualAttackers = watcher.getAttackedThisTurnCreatures().stream()
                 .map(mor -> game.getObject(mor.getSourceId()))// no needs in zcc/lki
@@ -1491,13 +1491,13 @@ public class TestPlayer implements Player {
             System.out.println(String.format("Actual attackers: %d", actualAttackers.size()));
             actualAttackers.forEach(s -> System.out.println(" - " + s));
             printEnd();
-            Assert.fail("Found wrong attackers");
+            Assertions.fail("Found wrong attackers");
         }
     }
 
     private void assertBlockers(PlayerAction action, Game game, Player player, String blockers) {
         AttackedOrBlockedThisCombatWatcher watcher = game.getState().getWatcher(AttackedOrBlockedThisCombatWatcher.class);
-        Assert.assertNotNull(watcher);
+        Assertions.assertNotNull(watcher);
 
         List<String> actualBlockers = watcher.getBlockedThisTurnCreatures().stream()
                 .map(mor -> game.getObject(mor.getSourceId()))// no needs in zcc/lki
@@ -1520,7 +1520,7 @@ public class TestPlayer implements Player {
             System.out.println(String.format("Actual blockers: %d", actualBlockers.size()));
             actualBlockers.forEach(s -> System.out.println(" - " + s));
             printEnd();
-            Assert.fail("Found wrong blockers");
+            Assertions.fail("Found wrong blockers");
         }
     }
 
@@ -1537,13 +1537,13 @@ public class TestPlayer implements Player {
         if (expectedMayAttack && !mayAttack) {
             printStart(game, action.getActionName());
             printEnd();
-            Assert.fail(permanentName + " was expected to be able to attack " + defender.getName() + " but is not able to.");
+            Assertions.fail(permanentName + " was expected to be able to attack " + defender.getName() + " but is not able to.");
         }
 
         if (!expectedMayAttack && mayAttack) {
             printStart(game, action.getActionName());
             printEnd();
-            Assert.fail(permanentName + " was not expected to be able to attack " + defender.getName() + " but is able to.");
+            Assertions.fail(permanentName + " was not expected to be able to attack " + defender.getName() + " but is able to.");
         }
     }
 
@@ -1559,7 +1559,7 @@ public class TestPlayer implements Player {
             printStart(game, "Permanents of " + player.getName());
             printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()), this);
             printEnd();
-            Assert.fail(action.getActionName() + " - permanent " + permanentName + " must exists in " + count + " instances, but found " + foundCount);
+            Assertions.fail(action.getActionName() + " - permanent " + permanentName + " must exists in " + count + " instances, but found " + foundCount);
         }
     }
 
@@ -1577,7 +1577,7 @@ public class TestPlayer implements Player {
             printStart(game, "Permanents of " + player.getName());
             printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()), this);
             printEnd();
-            Assert.fail(action.getActionName() + " - must have " + count + (tapped ? " tapped " : " untapped ")
+            Assertions.fail(action.getActionName() + " - must have " + count + (tapped ? " tapped " : " untapped ")
                     + "permanents with name " + permanentName + ", but found " + foundCount);
         }
     }
@@ -1590,7 +1590,7 @@ public class TestPlayer implements Player {
             }
         }
 
-        Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have " + count + " " + counterType.toString(), count, foundCount);
+        Assertions.assertEquals(count, foundCount, action.getActionName() + " - permanent " + permanentName + " must have " + count + " " + counterType.toString());
     }
 
     private void assertCardCounters(PlayerAction action, Game game, Player player, String cardName, CounterType counterType, int count) {
@@ -1609,7 +1609,7 @@ public class TestPlayer implements Player {
             }
         }
 
-        Assert.assertEquals(action.getActionName() + " - card " + cardName + " must have " + count + " " + counterType.toString(), count, foundCount);
+        Assertions.assertEquals(count, foundCount, action.getActionName() + " - card " + cardName + " must have " + count + " " + counterType.toString());
     }
 
     private void assertExileCount(PlayerAction action, Game game, String permanentName, int count) {
@@ -1624,7 +1624,7 @@ public class TestPlayer implements Player {
             printStart(game, "Exile cards");
             printCards(game.getExile().getAllCards(game), true);
             printEnd();
-            Assert.fail(action.getActionName() + " - exile zone must have " + count + " cards with name " + permanentName + ", but found " + foundCount);
+            Assertions.fail(action.getActionName() + " - exile zone must have " + count + " cards with name " + permanentName + ", but found " + foundCount);
         }
     }
 
@@ -1640,7 +1640,7 @@ public class TestPlayer implements Player {
             printStart(game, "Graveyard of " + player.getName());
             printCards(player.getGraveyard().getCards(game));
             printEnd();
-            Assert.fail(action.getActionName() + " - graveyard zone must have " + count + " cards with name " + permanentName + ", but found " + foundCount);
+            Assertions.fail(action.getActionName() + " - graveyard zone must have " + count + " cards with name " + permanentName + ", but found " + foundCount);
         }
     }
 
@@ -1652,7 +1652,7 @@ public class TestPlayer implements Player {
             }
         }
 
-        Assert.assertEquals(action.getActionName() + " - card " + permanentName + " must exists in library with " + count + " instances", count, foundCount);
+        Assertions.assertEquals(count, foundCount, action.getActionName() + " - card " + permanentName + " must exists in library with " + count + " instances");
     }
 
     private void assertHandCount(PlayerAction action, Game game, Player player, int count) {
@@ -1660,7 +1660,7 @@ public class TestPlayer implements Player {
             printStart(game, "Hand of " + player.getName());
             printCards(player.getHand().getCards(game));
             printEnd();
-            Assert.fail(action.getActionName() + " - hand must contain " + count + ", but found " + player.getHand().size());
+            Assertions.fail(action.getActionName() + " - hand must contain " + count + ", but found " + player.getHand().size());
         }
     }
 
@@ -1673,7 +1673,7 @@ public class TestPlayer implements Player {
             }
         }
 
-        Assert.assertEquals(action.getActionName() + " - hand must contain " + count + " cards of " + cardName, count, realCount);
+        Assertions.assertEquals(count, realCount, action.getActionName() + " - hand must contain " + count + " cards of " + cardName);
     }
 
     private void assertCommandCardCount(PlayerAction action, Game game, Player player, String cardName, int count) {
@@ -1689,7 +1689,7 @@ public class TestPlayer implements Player {
             printStart(game, "Cards in command zone from " + player.getName());
             printCards(game.getCommanderCardsFromCommandZone(player, CommanderCardType.COMMANDER_OR_OATHBREAKER));
             printEnd();
-            Assert.fail(action.getActionName() + " - must have " + count + " cards with name " + cardName + ", but found " + realCount);
+            Assertions.fail(action.getActionName() + " - must have " + count + " cards with name " + cardName + ", but found " + realCount);
         }
     }
 
@@ -1709,12 +1709,12 @@ public class TestPlayer implements Player {
             printStart(game, "Emblems of " + player.getName());
             printObjects(realList);
             printEnd();
-            Assert.fail(action.getActionName() + " - must have " + count + " emblems with name " + emblemName + ", but found " + realCount);
+            Assertions.fail(action.getActionName() + " - must have " + count + " emblems with name " + emblemName + ", but found " + realCount);
         }
     }
 
     private void assertColor(PlayerAction action, Game game, Player player, String permanentName, String colors, boolean mustHave) {
-        Assert.assertNotEquals(action.getActionName() + " - must setup colors", "", colors);
+        Assertions.assertNotEquals(action.getActionName() + " - must setup colors", "", colors);
 
         Permanent card = findPermanentWithAssert(action, game, player, permanentName);
         ObjectColor cardColor = card.getColor(game);
@@ -1732,9 +1732,9 @@ public class TestPlayer implements Player {
         }
 
         if (mustHave) {
-            Assert.assertEquals(action.getActionName() + " - must contain colors [" + searchColors + "] but found only [" + cardColor.toString() + "]", 0, colorsDontHave.size());
+            Assertions.assertEquals(0, colorsDontHave.size(), action.getActionName() + " - must contain colors [" + searchColors + "] but found only [" + cardColor.toString() + "]");
         } else {
-            Assert.assertEquals(action.getActionName() + " - must not contain colors [" + searchColors + "] but found [" + cardColor.toString() + "]", 0, colorsHave.size());
+            Assertions.assertEquals(0, colorsHave.size(), action.getActionName() + " - must not contain colors [" + searchColors + "] but found [" + cardColor.toString() + "]");
         }
     }
 
@@ -1751,9 +1751,9 @@ public class TestPlayer implements Player {
         }
 
         if (mustHave) {
-            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have type " + type, true, found);
+            Assertions.assertEquals(true, found, action.getActionName() + " - permanent " + permanentName + " must have type " + type);
         } else {
-            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have not type " + type, false, found);
+            Assertions.assertEquals(false, found, action.getActionName() + " - permanent " + permanentName + " must have not type " + type);
         }
     }
 
@@ -1770,9 +1770,9 @@ public class TestPlayer implements Player {
         }
 
         if (mustHave) {
-            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have subtype " + subType, true, found);
+            Assertions.assertEquals(true, found, action.getActionName() + " - permanent " + permanentName + " must have subtype " + subType);
         } else {
-            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have not subtype " + subType, false, found);
+            Assertions.assertEquals(false, found, action.getActionName() + " - permanent " + permanentName + " must have not subtype " + subType);
         }
     }
 
@@ -1797,9 +1797,9 @@ public class TestPlayer implements Player {
         Zone currentZone = (item == null ? null : game.getState().getZone(item.getId()));
 
         if (mustHave) {
-            Assert.assertEquals(action.getActionName() + " - alias " + aliasName + " must have zone " + needZone.toString(), needZone, currentZone);
+            Assertions.assertEquals(needZone, currentZone, action.getActionName() + " - alias " + aliasName + " must have zone " + needZone.toString());
         } else {
-            Assert.assertNotEquals(action.getActionName() + " - alias " + aliasName + " must have not zone " + needZone.toString(), needZone, currentZone);
+            Assertions.assertNotEquals(needZone, currentZone, action.getActionName() + " - alias " + aliasName + " must have not zone " + needZone.toString());
         }
     }
 
@@ -1807,7 +1807,7 @@ public class TestPlayer implements Player {
         if (game.getStack().size() != needStackSize) {
             printAbilities("Current stack", game, game.getStack().stream().map(StackObject::getStackAbility).collect(Collectors.toList()));
         }
-        Assert.assertEquals(action.getActionName() + " - stack size must be " + needStackSize + " but is " + game.getStack().size(), needStackSize, game.getStack().size());
+        Assertions.assertEquals(needStackSize, game.getStack().size(), action.getActionName() + " - stack size must be " + needStackSize + " but is " + game.getStack().size());
     }
 
     private void assertStackObject(PlayerAction action, Game game, String stackAbilityName, int needAmount) {
@@ -1817,7 +1817,7 @@ public class TestPlayer implements Player {
                 .count();
         if (needAmount != foundAmount) {
             printStack(game);
-            Assert.fail(action.getActionName() + " - stack must have " + needAmount + " objects with ability [" + stackAbilityName + "] but have " + foundAmount);
+            Assertions.fail(action.getActionName() + " - stack must have " + needAmount + " objects with ability [" + stackAbilityName + "] but have " + foundAmount);
         }
     }
 
@@ -1825,12 +1825,12 @@ public class TestPlayer implements Player {
         if (player != null) {
             // must be
             if (game.getMonarchId() != player.getId()) {
-                Assert.fail(action.getActionName() + " - game must have " + player.getName() + " as monarch, but found " + game.getPlayer(game.getMonarchId()));
+                Assertions.fail(action.getActionName() + " - game must have " + player.getName() + " as monarch, but found " + game.getPlayer(game.getMonarchId()));
             }
         } else {
             // must not be
             if (game.getMonarchId() != null) {
-                Assert.fail(action.getActionName() + " - game must be without monarch, but found " + game.getPlayer(game.getMonarchId()));
+                Assertions.fail(action.getActionName() + " - game must be without monarch, but found " + game.getPlayer(game.getMonarchId()));
             }
         }
     }
@@ -1839,11 +1839,11 @@ public class TestPlayer implements Player {
         Integer normal = player.getManaPool().getMana().get(manaType);
         Integer conditional = player.getManaPool().getConditionalMana().stream().mapToInt(a -> a.get(manaType)).sum(); // calcs FULL conditional mana, not real conditions
         Integer current = normal + conditional;
-        Assert.assertEquals(action.getActionName() + " - mana pool must contain [" + amount.toString() + " " + manaType + "], but found [" + current + "]", amount, current);
+        Assertions.assertEquals(amount, current, action.getActionName() + " - mana pool must contain [" + amount.toString() + " " + manaType + "], but found [" + current + "]");
     }
 
     private void assertManaPool(PlayerAction action, Game game, Player player, String colors, Integer amount) {
-        Assert.assertNotEquals(action.getActionName() + " - must setup color", "", colors);
+        Assertions.assertNotEquals(action.getActionName() + " - must setup color", "", colors);
 
         // Can't use ObjectColor -- it's doesn't contain colorless -- need to use custom parse
         for (int i = 0; i < colors.length(); i++) {
@@ -1873,7 +1873,7 @@ public class TestPlayer implements Player {
                     break;
 
                 default:
-                    Assert.fail(action.getActionName() + " - unknown color char [" + colors.charAt(i) + "]");
+                    Assertions.fail(action.getActionName() + " - unknown color char [" + colors.charAt(i) + "]");
                     break;
             }
         }
@@ -2150,7 +2150,7 @@ public class TestPlayer implements Player {
         // TODO: add alias support for all false methods (replace name compare by isObjectHaveTargetNameOrAlias)
         if (!methodSupportAliases && !choices.isEmpty()) {
             if (choices.get(0).contains(ALIAS_PREFIX)) {
-                Assert.fail("That choice method do not support aliases, but found " + choices.get(0));
+                Assertions.fail("That choice method do not support aliases, but found " + choices.get(0));
             }
         }
     }
@@ -2197,7 +2197,7 @@ public class TestPlayer implements Player {
                 }
                 printEnd();
             }
-            Assert.fail("Missing " + choiceType.toUpperCase(Locale.ENGLISH) + " def for"
+            Assertions.fail("Missing " + choiceType.toUpperCase(Locale.ENGLISH) + " def for"
                     + " turn " + game.getTurnNum()
                     + ", step " + (game.getStep() != null ? game.getTurnStepType().name() : "not started")
                     + ", " + this.getName()
@@ -2241,7 +2241,7 @@ public class TestPlayer implements Player {
                 i++;
             }
 
-            Assert.fail("Can't use mode: " + needModeNumber + "\n" + getInfo(source, game) + modesInfo);
+            Assertions.fail("Can't use mode: " + needModeNumber + "\n" + getInfo(source, game) + modesInfo);
         }
 
         this.chooseStrictModeFailed("mode", game, getInfo(source, game) + modesInfo);
@@ -2325,7 +2325,7 @@ public class TestPlayer implements Player {
 
         // how to fix: change target definition for addTarget in test's code or update choose from targets implementation in TestPlayer
         if ((foundMulti && !canMulti) || (foundSpecialStart && !canSpecialStart) || (foundSpecialClose && !canSpecialClose) || (foundEquals && !canEquals)) {
-            Assert.fail(this.getName() + " - Targets list was setup by addTarget with " + targets + ", but target definition [" + targetDefinition + "]"
+            Assertions.fail(this.getName() + " - Targets list was setup by addTarget with " + targets + ", but target definition [" + targetDefinition + "]"
                     + " is not supported by [" + canSupportChars + "] for target class " + getSimpleClassName(needTarget.getClass()));
         }
     }
@@ -2338,9 +2338,9 @@ public class TestPlayer implements Player {
 
             // skip targets
             if (tryToSkipSelection(game, target, targets, TARGET_SKIP)) {
-                Assert.assertTrue("found skip target, but it require more targets, needs "
-                                + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
-                        target.getTargets().size() >= target.getMinNumberOfTargets());
+                Assertions.assertTrue(target.getTargets().size() >= target.getMinNumberOfTargets(),
+                        "found skip target, but it require more targets, needs "
+                                + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more");
                 return target.getSize() > 0 && target.isChosen(game);
             }
 
@@ -2457,7 +2457,7 @@ public class TestPlayer implements Player {
                     filter = ((FilterPermanentOrSuspendedCard) target.getOriginalTarget().getFilter()).getCardFilter();
                 }
                 if (filter == null) {
-                    Assert.fail("Unsupported exile target filter in TestPlayer: "
+                    Assertions.fail("Unsupported exile target filter in TestPlayer: "
                             + getSimpleClassName(target.getOriginalTarget().getClass()));
                 }
 
@@ -2521,17 +2521,17 @@ public class TestPlayer implements Player {
                 // fix for opponent graveyard
                 if (target.getOriginalTarget() instanceof TargetCardInOpponentsGraveyard) {
                     // current player remove
-                    Assert.assertTrue(needPlayers.contains(this.getId()));
+                    Assertions.assertTrue(needPlayers.contains(this.getId()));
                     needPlayers.remove(this.getId());
-                    Assert.assertFalse(needPlayers.contains(this.getId()));
+                    Assertions.assertFalse(needPlayers.contains(this.getId()));
                 }
                 // fix for your graveyard
                 if (target.getOriginalTarget() instanceof TargetCardInYourGraveyard) {
                     // only current player
-                    Assert.assertTrue(needPlayers.contains(this.getId()));
+                    Assertions.assertTrue(needPlayers.contains(this.getId()));
                     needPlayers.clear();
                     needPlayers.add(this.getId());
-                    Assert.assertEquals(1, needPlayers.size());
+                    Assertions.assertEquals(1, needPlayers.size());
                 }
 
                 for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
@@ -2607,12 +2607,12 @@ public class TestPlayer implements Player {
             if (target.getOriginalTarget() instanceof TargetCardInLibrary
                     || (target.getOriginalTarget() instanceof TargetCard && target.getOriginalTarget().getZone() == Zone.LIBRARY)) {
                 // user don't have access to library, so it must be targeted through list/revealed cards
-                Assert.fail("Library zone is private, you must target through cards list, e.g. revealed: " + getSimpleClassName(target.getOriginalTarget().getClass()));
+                Assertions.fail("Library zone is private, you must target through cards list, e.g. revealed: " + getSimpleClassName(target.getOriginalTarget().getClass()));
             }
 
             // uninplemented TargetCard's zone
             if (target.getOriginalTarget() instanceof TargetCard && !targetCardZonesChecked.contains(target.getOriginalTarget().getZone())) {
-                Assert.fail("Found unimplemented TargetCard's zone or TargetCard's extented class: "
+                Assertions.fail("Found unimplemented TargetCard's zone or TargetCard's extented class: "
                         + getSimpleClassName(target.getOriginalTarget().getClass())
                         + ", zone " + target.getOriginalTarget().getZone()
                         + ", from " + (source == null ? "unknown source" : source.getSourceObject(game)));
@@ -2638,7 +2638,7 @@ public class TestPlayer implements Player {
                         + "\nTarget: selected " + target.getSize() + ", more possible " + possibleTargets.size() + ", " + getSimpleClassName(target.getClass()) + " (" + target.getMessage(game) + ")"
                         + "\nYou must implement target class support in TestPlayer, \"filter instanceof\", or setup good targets";
             }
-            Assert.fail(message);
+            Assertions.fail(message);
         }
 
         this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target, source, game, null));
@@ -2653,9 +2653,9 @@ public class TestPlayer implements Player {
 
             // skip targets
             if (tryToSkipSelection(game, target, targets, TARGET_SKIP)) {
-                Assert.assertTrue("found skip target, but it require more targets, needs "
-                                + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
-                        target.getTargets().size() >= target.getMinNumberOfTargets());
+                Assertions.assertTrue(target.getTargets().size() >= target.getMinNumberOfTargets(),
+                        "found skip target, but it require more targets, needs "
+                                + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more");
                 return target.getSize() > 0 && target.isChosen(game);
             }
             for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
@@ -2678,7 +2678,7 @@ public class TestPlayer implements Player {
             }
 
             // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong target");
+            //Assertions.fail("Wrong target");
             LOGGER.warn("Wrong target");
         }
 
@@ -2777,7 +2777,7 @@ public class TestPlayer implements Player {
 
     private void assertXMinMaxValue(Game game, Ability source, int xValue, int min, int max) {
         if (xValue < min || xValue > max) {
-            Assert.fail("Found wrong X value = " + xValue + ", for " + CardUtil.getSourceName(game, source) + ", must" + prepareXMaxInfo(min, max));
+            Assertions.fail("Found wrong X value = " + xValue + ", for " + CardUtil.getSourceName(game, source) + ", must" + prepareXMaxInfo(min, max));
         }
     }
 
@@ -2831,12 +2831,12 @@ public class TestPlayer implements Player {
                         continue;
                     }
                 }
-                Assert.fail(String.format("Missing choice in multi amount: %s (pos %d - %s)", type.getHeader(), i, messages));
+                Assertions.fail(String.format("Missing choice in multi amount: %s (pos %d - %s)", type.getHeader(), i, messages));
             }
 
             // extra check
             if (!MultiAmountType.isGoodValues(answer, messages, totalMin, totalMax)) {
-                Assert.fail("Wrong choices in multi amount: " + answer
+                Assertions.fail("Wrong choices in multi amount: " + answer
                         .stream()
                         .map(String::valueOf)
                         .collect(Collectors.joining(",")));
@@ -4110,7 +4110,7 @@ public class TestPlayer implements Player {
                 if (target.getMaxNumberOfTargets() > target.getMinNumberOfTargets()) {
                     target.setSkipChoice(true);
                 } else {
-                    Assert.fail("Wrong skip command found - it can be used with up to targets, but used in " + target);
+                    Assertions.fail("Wrong skip command found - it can be used with up to targets, but used in " + target);
                 }
             }
 
@@ -4150,9 +4150,9 @@ public class TestPlayer implements Player {
         while (!choices.isEmpty()) {
             // skip choices
             if (tryToSkipSelection(game, target, choices, CHOICE_SKIP)) {
-                Assert.assertTrue("found skip choice, but it require more choices, needs "
-                                + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
-                        target.getTargets().size() >= target.getMinNumberOfTargets());
+                Assertions.assertTrue(target.getTargets().size() >= target.getMinNumberOfTargets(),
+                        "found skip choice, but it require more choices, needs "
+                                + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more");
                 return target.getSize() > 0 && target.isChosen(game);
             }
 
@@ -4255,9 +4255,9 @@ public class TestPlayer implements Player {
 
             // skip targets
             if (tryToSkipSelection(game, target, targets, TARGET_SKIP)) {
-                Assert.assertTrue("found skip target, but it require more targets, needs "
-                                + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
-                        target.getTargets().size() >= target.getMinNumberOfTargets());
+                Assertions.assertTrue(target.getTargets().size() >= target.getMinNumberOfTargets(),
+                        "found skip target, but it require more targets, needs "
+                                + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more");
                 return target.getSize() > 0 && target.isChosen(game);
             }
 
@@ -4265,7 +4265,7 @@ public class TestPlayer implements Player {
             String[] choiceSettings = targets.get(0).split("\\^");
             if (choiceSettings.length != 2
                     || !choiceSettings[1].startsWith("X=")) {
-                Assert.fail("Must be target amount, but found unknown target: " + targets.get(0));
+                Assertions.fail("Must be target amount, but found unknown target: " + targets.get(0));
             }
             String targetName = choiceSettings[0];
             int targetAmount = Integer.parseInt(choiceSettings[1].substring("X=".length()));
@@ -4278,8 +4278,8 @@ public class TestPlayer implements Player {
             }
 
             String targetInfo = "(" + targetName + " - " + targetAmount + ")";
-            Assert.assertTrue("target amount must be non zero " + targetInfo, targetAmount > 0);
-            Assert.assertTrue("target amount must be <= remaining = " + target.getAmountRemaining() + " " + targetInfo, targetAmount <= target.getAmountRemaining());
+            Assertions.assertTrue(targetAmount > 0, "target amount must be non zero " + targetInfo);
+            Assertions.assertTrue(targetAmount <= target.getAmountRemaining(), "target amount must be <= remaining = " + target.getAmountRemaining() + " " + targetInfo);
 
             if (target.getAmountRemaining() > 0) {
                 for (UUID possibleTarget : target.possibleTargets(abilityControllerId, source, game)) {
@@ -4352,38 +4352,38 @@ public class TestPlayer implements Player {
                 boolean choiceRemoved = false;
                 switch (choice) {
                     case "White":
-                        Assert.assertTrue("pool must have white mana", computerPlayer.getManaPool().getWhite() > 0);
+                        Assertions.assertTrue(computerPlayer.getManaPool().getWhite() > 0, "pool must have white mana");
                         computerPlayer.getManaPool().unlockManaType(ManaType.WHITE);
                         choiceUsed = true;
                         break;
                     case "Blue":
-                        Assert.assertTrue("pool must have blue mana", computerPlayer.getManaPool().getBlue() > 0);
+                        Assertions.assertTrue(computerPlayer.getManaPool().getBlue() > 0, "pool must have blue mana");
                         computerPlayer.getManaPool().unlockManaType(ManaType.BLUE);
                         choiceUsed = true;
                         break;
                     case "Black":
-                        Assert.assertTrue("pool must have black mana", computerPlayer.getManaPool().getBlack() > 0);
+                        Assertions.assertTrue(computerPlayer.getManaPool().getBlack() > 0, "pool must have black mana");
                         computerPlayer.getManaPool().unlockManaType(ManaType.BLACK);
                         choiceUsed = true;
                         break;
                     case "Red":
-                        Assert.assertTrue("pool must have red mana", computerPlayer.getManaPool().getRed() > 0);
+                        Assertions.assertTrue(computerPlayer.getManaPool().getRed() > 0, "pool must have red mana");
                         computerPlayer.getManaPool().unlockManaType(ManaType.RED);
                         choiceUsed = true;
                         break;
                     case "Green":
-                        Assert.assertTrue("pool must have green mana", computerPlayer.getManaPool().getGreen() > 0);
+                        Assertions.assertTrue(computerPlayer.getManaPool().getGreen() > 0, "pool must have green mana");
                         computerPlayer.getManaPool().unlockManaType(ManaType.GREEN);
                         choiceUsed = true;
                         break;
                     case "Colorless":
-                        Assert.assertTrue("pool must have colorless mana", computerPlayer.getManaPool().getColorless() > 0);
+                        Assertions.assertTrue(computerPlayer.getManaPool().getColorless() > 0, "pool must have colorless mana");
                         computerPlayer.getManaPool().unlockManaType(ManaType.COLORLESS);
                         choiceUsed = true;
                         break;
                     default:
                         // go to special block
-                        //Assert.fail("Unknown choice command for mana unlock: " + needColor);
+                        //Assertions.fail("Unknown choice command for mana unlock: " + needColor);
                         break;
                 }
 
@@ -4399,7 +4399,7 @@ public class TestPlayer implements Player {
                                     choiceUsed = true;
                                 }
                             } else {
-                                Assert.fail("Found non active special mana action, but must generates only active: " + specialAction.getRule(true));
+                                Assertions.fail("Found non active special mana action, but must generates only active: " + specialAction.getRule(true));
                             }
                         }
                     }
@@ -4411,11 +4411,11 @@ public class TestPlayer implements Player {
                     }
                     return true;
                 } else {
-                    Assert.fail("Can't use choice in play mana: " + choice);
+                    Assertions.fail("Can't use choice in play mana: " + choice);
                 }
             }
 
-            Assert.fail(this.getName() + " disabled mana auto-payment, but no choices found for color unlock in pool or special action for unpaid cost: " + unpaid.getText());
+            Assertions.fail(this.getName() + " disabled mana auto-payment, but no choices found for color unlock in pool or special action for unpaid cost: " + unpaid.getText());
         }
 
         return computerPlayer.playMana(ability, unpaid, promptText, game);
@@ -4626,7 +4626,7 @@ public class TestPlayer implements Player {
             }
 
             // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong choice");
+            //Assertions.fail("Wrong choice");
             LOGGER.warn("Wrong choice");
         }
 
@@ -4659,7 +4659,7 @@ public class TestPlayer implements Player {
     }
 
     private void failOnLastBadChoice(Game game, Ability source, Target target, String lastChoice, String reason) {
-        Assert.fail(String.format("Found wrong choice command (%s):\n%s\n%s\n%s",
+        Assertions.fail(String.format("Found wrong choice command (%s):\n%s\n%s\n%s",
                 reason,
                 lastChoice,
                 getInfo(target, source, game, null),
@@ -4674,7 +4674,7 @@ public class TestPlayer implements Player {
 
     private void assertWrongChoiceUsage(String choice, boolean isRaiseError) {
         if (isRaiseError) {
-            Assert.fail("Wrong choice command: " + choice);
+            Assertions.fail("Wrong choice command: " + choice);
         } else {
             LOGGER.warn("Wrong choice command: " + choice);
         }

@@ -7,8 +7,8 @@ import mage.game.permanent.Permanent;
 import mage.view.GameView;
 import mage.view.PermanentView;
 import mage.view.PlayerView;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -423,7 +423,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         for (Card card : currentGame.getExile().getAllCards(currentGame)) {
             if (card.getName().equals("Birchlore Rangers")) {
-                Assert.assertFalse("Birchlore Rangers has to be face up in exile", card.isFaceDown(currentGame));
+                Assertions.assertFalse(card.isFaceDown(currentGame), "Birchlore Rangers has to be face up in exile");
                 break;
             }
         }
@@ -462,7 +462,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         for (Card card : playerA.getGraveyard().getCards(currentGame)) {
             if (card.getName().equals("Ashcloud Phoenix")) {
-                Assert.assertFalse("Ashcloud Phoenix has to be face up in graveyard", card.isFaceDown(currentGame));
+                Assertions.assertFalse(card.isFaceDown(currentGame), "Ashcloud Phoenix has to be face up in graveyard");
                 break;
             }
         }
@@ -498,7 +498,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         for (Card card : playerA.getGraveyard().getCards(currentGame)) {
             if (card.getName().equals("Ashcloud Phoenix")) {
-                Assert.assertFalse("Ashcloud Phoenix has to be face up in graveyard", card.isFaceDown(currentGame));
+                Assertions.assertFalse(card.isFaceDown(currentGame), "Ashcloud Phoenix has to be face up in graveyard");
                 break;
             }
         }
@@ -645,7 +645,7 @@ public class MorphTest extends CardTestPlayerBase {
             execute();
         } catch (Throwable e) {
             if (!e.getMessage().contains("Cast Rattleclaw Mystic")) {
-                Assert.fail("Should have gotten an error about not being able to cast Rattleclaw, but got:\n" + e.getMessage());
+                Assertions.fail("Should have gotten an error about not being able to cast Rattleclaw, but got:\n" + e.getMessage());
             }
         }
 
@@ -773,7 +773,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Brine Elemental", 1);
         assertPermanentCount(playerB, "Brine Elemental", 1);
-        Assert.assertEquals("Skip next turn has to be added to TurnMods", 1, currentGame.getState().getTurnMods().size());
+        Assertions.assertEquals(1, currentGame.getState().getTurnMods().size(), "Skip next turn has to be added to TurnMods");
     }
 
     /**
@@ -925,7 +925,7 @@ public class MorphTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Akroma, Angel of Fury", 1);
         assertType("Akroma, Angel of Fury", CardType.CREATURE, SubType.ANGEL);
         Permanent akroma = getPermanent("Akroma, Angel of Fury");
-        Assert.assertTrue("Akroma has to be red", akroma.getColor(currentGame).isRed());
+        Assertions.assertTrue(akroma.getColor(currentGame).isRed(), "Akroma has to be red");
     }
 
     @Test
@@ -1235,9 +1235,9 @@ public class MorphTest extends CardTestPlayerBase {
                 .filter(Permanent::isMorphed)
                 .findFirst()
                 .orElse(null);
-        Assert.assertNotNull(info + ", server side: can't find morphed permanent", permanent);
-        Assert.assertEquals(info + ", server side: wrong name", EmptyNames.FACE_DOWN_CREATURE.getObjectName(), permanent.getName());
-        Assert.assertEquals(info + ", server side: wrong color", needColor, permanent.getColor(currentGame).toString());
+        Assertions.assertNotNull(permanent, info + ", server side: can't find morphed permanent");
+        Assertions.assertEquals(EmptyNames.FACE_DOWN_CREATURE.getObjectName(), permanent.getName(), info + ", server side: wrong name");
+        Assertions.assertEquals(needColor, permanent.getColor(currentGame).toString(), info + ", server side: wrong color");
 
         // client side - controller
         GameView gameView = getGameView(playerA);
@@ -1246,22 +1246,22 @@ public class MorphTest extends CardTestPlayerBase {
                 .filter(PermanentView::isMorphed)
                 .findFirst()
                 .orElse(null);
-        Assert.assertNotNull(info + ", client side - controller: can't find morphed permanent", permanentView);
-        Assert.assertEquals(info + ", client side - controller: wrong name", "Morph: Zoetic Cavern", permanentView.getName());
-        Assert.assertEquals(info + ", client side - controller: wrong color", needColor, permanentView.getColor().toString());
+        Assertions.assertNotNull(permanentView, info + ", client side - controller: can't find morphed permanent");
+        Assertions.assertEquals("Morph: Zoetic Cavern", permanentView.getName(), info + ", client side - controller: wrong name");
+        Assertions.assertEquals(needColor, permanentView.getColor().toString(), info + ", client side - controller: wrong color");
 
         // client side - opponent
         gameView = getGameView(playerB);
         PlayerView playerView = gameView.getPlayers().stream().filter(p -> p.getName().equals(playerA.getName())).findFirst().orElse(null);
-        Assert.assertNotNull(playerView);
+        Assertions.assertNotNull(playerView);
         permanentView = playerView.getBattlefield().values()
                 .stream()
                 .filter(PermanentView::isMorphed)
                 .findFirst()
                 .orElse(null);
-        Assert.assertNotNull(info + ", client side - opponent: can't find morphed permanent", permanentView);
-        Assert.assertEquals(info + ", client side - opponent: wrong name", "Morph", permanentView.getName());
-        Assert.assertEquals(info + ", client side - opponent: wrong color", needColor, permanentView.getColor().toString());
+        Assertions.assertNotNull(permanentView, info + ", client side - opponent: can't find morphed permanent");
+        Assertions.assertEquals("Morph", permanentView.getName(), info + ", client side - opponent: wrong name");
+        Assertions.assertEquals(needColor, permanentView.getColor().toString(), info + ", client side - opponent: wrong color");
     }
 
     @Test

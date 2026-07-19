@@ -9,8 +9,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.PlayersAttackedThisTurnWatcher;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestCommander4Players;
 
 /**
@@ -46,8 +46,8 @@ public class MilitantAngelTest extends CardTestCommander4Players {
         runCode("watcher must be copyable", 5, PhaseStep.POSTCOMBAT_MAIN, playerA, (info, player, game) -> {
             PlayersAttackedThisTurnWatcher watcher = game.getState().getWatcher(PlayersAttackedThisTurnWatcher.class);
             PlayersAttackedThisTurnWatcher newWatcher = watcher.copy();
-            Assert.assertEquals("old watcher", 2, watcher.getAttackedOpponentsCount(player.getId()));
-            Assert.assertEquals("new watcher", 2, newWatcher.getAttackedOpponentsCount(player.getId()));
+            Assertions.assertEquals(2, watcher.getAttackedOpponentsCount(player.getId()), "old watcher");
+            Assertions.assertEquals(2, newWatcher.getAttackedOpponentsCount(player.getId()), "new watcher");
         });
 
         // between attacks - no value
@@ -67,6 +67,6 @@ public class MilitantAngelTest extends CardTestCommander4Players {
     private void assertCounterValue(String checkName, Player player, Game game, int needValue) {
         Ability fakeAbility = new SimpleStaticAbility((Effect) null); // dynamic value need ability's controllerId
         fakeAbility.setControllerId(player.getId());
-        Assert.assertEquals(checkName, needValue, AttackedThisTurnOpponentsCount.instance.calculate(game, fakeAbility, null));
+        Assertions.assertEquals(needValue, AttackedThisTurnOpponentsCount.instance.calculate(game, fakeAbility, null), checkName);
     }
 }

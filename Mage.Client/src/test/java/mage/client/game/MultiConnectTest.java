@@ -8,7 +8,7 @@ import mage.remote.Session;
 import mage.remote.SessionImpl;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 
 import javax.swing.*;
 import java.util.concurrent.CountDownLatch;
@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author ayratn
  */
-@Ignore
+@Disabled
 public class MultiConnectTest {
 
     private static final Logger logger = Logger.getLogger(MultiConnectTest.class);

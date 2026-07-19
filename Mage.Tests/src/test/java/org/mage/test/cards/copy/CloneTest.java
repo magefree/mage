@@ -13,8 +13,8 @@ import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.permanent.Permanent;
 import org.apache.log4j.Logger;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -137,7 +137,7 @@ public class CloneTest extends CardTestPlayerBase {
         filter.add(new NamePredicate("Clone"));
         Card card = playerA.getHand().getCards(filter, currentGame).iterator().next();
         if (card != null) {
-            Assert.assertEquals("Power has to be 0 because copy from nightmare P/T ability may no longer be applied", 0, card.getPower().getValue());
+            Assertions.assertEquals(0, card.getPower().getValue(), "Power has to be 0 because copy from nightmare P/T ability may no longer be applied");
         }
 
         Logger.getLogger(CloneTest.class).debug("EXISTING CONTINUOUS EFFECTS:");
@@ -199,7 +199,7 @@ public class CloneTest extends CardTestPlayerBase {
             }
         }
 
-        Assert.assertTrue("There should be a white and a blue Silvercoat Lion be on the battlefield", blueLion && whiteLion);
+        Assertions.assertTrue(blueLion && whiteLion, "There should be a white and a blue Silvercoat Lion be on the battlefield");
     }
 
     @Test
@@ -224,12 +224,12 @@ public class CloneTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Adaptive Automaton", 1);
         Permanent original = getPermanent("Adaptive Automaton", playerA);
-        Assert.assertTrue("The original Adaptive Automaton should be an Elf", original.hasSubtype(SubType.ELF, currentGame));
+        Assertions.assertTrue(original.hasSubtype(SubType.ELF, currentGame), "The original Adaptive Automaton should be an Elf");
 
         assertPermanentCount(playerB, "Adaptive Automaton", 1);
         Permanent clone = getPermanent("Adaptive Automaton", playerB);
-        Assert.assertFalse("The cloned Adaptive Automaton should not be as Elf", clone.hasSubtype(SubType.ELF, currentGame));
-        Assert.assertTrue("The cloned Adaptive Automaton should be a Goblin", clone.hasSubtype(SubType.GOBLIN, currentGame));
+        Assertions.assertFalse(clone.hasSubtype(SubType.ELF, currentGame), "The cloned Adaptive Automaton should not be as Elf");
+        Assertions.assertTrue(clone.hasSubtype(SubType.GOBLIN, currentGame), "The cloned Adaptive Automaton should be a Goblin");
     }
 
     /**

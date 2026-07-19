@@ -5,8 +5,8 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -566,10 +566,10 @@ public class FlashbackTest extends CardTestPlayerBase {
         try {
             execute();
 
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Flashback$spellOnStack=Lightning Bolt")) {
-                Assert.fail("Should have thrown error about not being able to play Force of Will, but got:\n" + e.getMessage());
+                Assertions.fail("Should have thrown error about not being able to play Force of Will, but got:\n" + e.getMessage());
             }
         }
 
@@ -650,7 +650,7 @@ public class FlashbackTest extends CardTestPlayerBase {
             long flashbackCount = player.getPlayable(game, true).stream()
                     .filter(FlashbackAbility.class::isInstance)
                     .count();
-            Assert.assertEquals("must have only two playable abilities without duplicates", 2, flashbackCount);
+            Assertions.assertEquals(2, flashbackCount, "must have only two playable abilities without duplicates");
         });
 
         setStrictChooseMode(true);

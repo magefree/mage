@@ -4,8 +4,8 @@ package org.mage.test.cards.abilities.keywords;
 import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -52,7 +52,7 @@ public class HauntTest extends CardTestPlayerBase {
                 }
             }
         }
-        Assert.assertTrue("Couldn't find Haunting rule text displayed for the card", found);
+        Assertions.assertTrue(found, "Couldn't find Haunting rule text displayed for the card");
 
         found = false;
         for (Card card : currentGame.getBattlefield().getAllActivePermanents()) {
@@ -65,7 +65,7 @@ public class HauntTest extends CardTestPlayerBase {
                 }
             }
         }
-        Assert.assertTrue("Couldn't find Haunted by rule text displayed for the card", found);
+        Assertions.assertTrue(found, "Couldn't find Haunted by rule text displayed for the card");
         
     }
 
@@ -100,7 +100,7 @@ public class HauntTest extends CardTestPlayerBase {
                 }
             }
         }
-        Assert.assertFalse("Found Haunted by rule text displayed for the card", found);
+        Assertions.assertFalse(found, "Found Haunted by rule text displayed for the card");
         
     }
 

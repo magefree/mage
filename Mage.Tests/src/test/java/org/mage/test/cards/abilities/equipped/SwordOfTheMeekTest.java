@@ -4,8 +4,8 @@ package org.mage.test.cards.abilities.equipped;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -54,7 +54,7 @@ public class SwordOfTheMeekTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Master of Etherium", 3, 3);
 
         Permanent myr = getPermanent("Myr Token", playerA.getId());
-        Assert.assertTrue("Myr may not have any attachments", myr.getAttachments().isEmpty());
+        Assertions.assertTrue(myr.getAttachments().isEmpty(), "Myr may not have any attachments");
     }
 
     @Test
@@ -77,8 +77,8 @@ public class SwordOfTheMeekTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Sword of the Meek", 1);
 
         Permanent thopter = getPermanent("Thopter Token", playerA.getId());
-        Assert.assertNotNull("Thopter token must exist", thopter);
-        Assert.assertEquals("Sword must be attached to the created Thopter", 1, thopter.getAttachments().size());
+        Assertions.assertNotNull(thopter, "Thopter token must exist");
+        Assertions.assertEquals(1, thopter.getAttachments().size(), "Sword must be attached to the created Thopter");
     }
 
 }

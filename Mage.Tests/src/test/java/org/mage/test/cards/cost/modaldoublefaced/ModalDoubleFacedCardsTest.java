@@ -15,8 +15,8 @@ import mage.util.CardUtil;
 import mage.util.ManaUtil;
 import mage.view.GameView;
 import mage.view.PermanentView;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import java.util.HashMap;
@@ -254,26 +254,26 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        Assert.assertEquals(3, getHandCards(playerA).size());
+        Assertions.assertEquals(3, getHandCards(playerA).size());
 
         // stats in hand - normal
         Card card = getHandCards(playerA).stream().filter(c -> CardUtil.haveSameNames(c, "Akoum Warrior", currentGame)).findFirst().get();
-        Assert.assertFalse("must be non land", card.isLand(currentGame));
-        Assert.assertTrue("must be creature", card.isCreature(currentGame));
-        Assert.assertTrue("must be minotaur", card.hasSubtype(SubType.MINOTAUR, currentGame));
-        Assert.assertEquals("power", 4, card.getPower().getValue());
-        Assert.assertEquals("toughness", 5, card.getToughness().getValue());
-        Assert.assertEquals("mana value", 6, card.getManaValue());
+        Assertions.assertFalse(card.isLand(currentGame), "must be non land");
+        Assertions.assertTrue(card.isCreature(currentGame), "must be creature");
+        Assertions.assertTrue(card.hasSubtype(SubType.MINOTAUR, currentGame), "must be minotaur");
+        Assertions.assertEquals(4, card.getPower().getValue(), "power");
+        Assertions.assertEquals(5, card.getToughness().getValue(), "toughness");
+        Assertions.assertEquals(6, card.getManaValue(), "mana value");
 
         // stats in hand - mdf
         card = getHandCards(playerA).stream().filter(c -> CardUtil.haveSameNames(c, "Halvar, God of Battle", currentGame)).findFirst().get();
-        Assert.assertTrue("must be legendary", card.isLegendary(currentGame));
-        Assert.assertTrue("must be creature", card.isCreature(currentGame));
-        Assert.assertTrue("must be god", card.hasSubtype(SubType.GOD, currentGame));
+        Assertions.assertTrue(card.isLegendary(currentGame), "must be legendary");
+        Assertions.assertTrue(card.isCreature(currentGame), "must be creature");
+        Assertions.assertTrue(card.hasSubtype(SubType.GOD, currentGame), "must be god");
 
         // stats in hand - mdf - color identity must be from both sides
         card = getHandCards(playerA).stream().filter(c -> CardUtil.haveSameNames(c, "Esika, God of the Tree", currentGame)).findFirst().get();
-        Assert.assertEquals("color identity of mdf card must be from both sides", "{W}{U}{B}{R}{G}", ManaUtil.getColorIdentity(card).toString());
+        Assertions.assertEquals("{W}{U}{B}{R}{G}", ManaUtil.getColorIdentity(card).toString(), "color identity of mdf card must be from both sides");
     }
 
     @Test
@@ -289,7 +289,7 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         execute();
 
         // possible bug: duplicated abilities list in main card
-        Assert.assertEquals("must have only 2 play abilities", 2, playerA.getPlayable(currentGame, true).size());
+        Assertions.assertEquals(2, playerA.getPlayable(currentGame, true).size(), "must have only 2 play abilities");
     }
 
     @Test
@@ -354,11 +354,11 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
                 .filter(p -> CardUtil.haveSameNames(p, "Akoum Warrior", currentGame))
                 .findFirst()
                 .orElse(null);
-        Assert.assertNotNull(card);
-        Assert.assertEquals("permanent card must be on battlefield", Zone.BATTLEFIELD, currentGame.getState().getZone(card.getId()));
-        Assert.assertEquals("main permanent card must be on battlefield", Zone.BATTLEFIELD, currentGame.getState().getZone(card.getMainCard().getId()));
-        Assert.assertEquals("half card must be on battlefield", Zone.BATTLEFIELD, currentGame.getState().getZone(((PermanentCard) card).getCard().getId()));
-        Assert.assertEquals("main card must be on battlefield", Zone.BATTLEFIELD, currentGame.getState().getZone(((PermanentCard) card).getCard().getMainCard().getId()));
+        Assertions.assertNotNull(card);
+        Assertions.assertEquals(Zone.BATTLEFIELD, currentGame.getState().getZone(card.getId()), "permanent card must be on battlefield");
+        Assertions.assertEquals(Zone.BATTLEFIELD, currentGame.getState().getZone(card.getMainCard().getId()), "main permanent card must be on battlefield");
+        Assertions.assertEquals(Zone.BATTLEFIELD, currentGame.getState().getZone(((PermanentCard) card).getCard().getId()), "half card must be on battlefield");
+        Assertions.assertEquals(Zone.BATTLEFIELD, currentGame.getState().getZone(((PermanentCard) card).getCard().getMainCard().getId()), "main card must be on battlefield");
     }
 
     @Test
@@ -387,11 +387,11 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
                 .filter(p -> CardUtil.haveSameNames(p, "Ondu Skyruins", currentGame))
                 .findFirst()
                 .orElse(null);
-        Assert.assertNotNull(card);
-        Assert.assertEquals("permanent card must be on battlefield", Zone.BATTLEFIELD, currentGame.getState().getZone(card.getId()));
-        Assert.assertEquals("main permanent card must be on battlefield", Zone.BATTLEFIELD, currentGame.getState().getZone(card.getMainCard().getId()));
-        Assert.assertEquals("half card must be on battlefield", Zone.BATTLEFIELD, currentGame.getState().getZone(((PermanentCard) card).getCard().getId()));
-        Assert.assertEquals("main card must be on battlefield", Zone.BATTLEFIELD, currentGame.getState().getZone(((PermanentCard) card).getCard().getMainCard().getId()));
+        Assertions.assertNotNull(card);
+        Assertions.assertEquals(Zone.BATTLEFIELD, currentGame.getState().getZone(card.getId()), "permanent card must be on battlefield");
+        Assertions.assertEquals(Zone.BATTLEFIELD, currentGame.getState().getZone(card.getMainCard().getId()), "main permanent card must be on battlefield");
+        Assertions.assertEquals(Zone.BATTLEFIELD, currentGame.getState().getZone(((PermanentCard) card).getCard().getId()), "half card must be on battlefield");
+        Assertions.assertEquals(Zone.BATTLEFIELD, currentGame.getState().getZone(((PermanentCard) card).getCard().getMainCard().getId()), "main card must be on battlefield");
     }
 
     @Test
@@ -425,12 +425,12 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
                 .filter(p -> CardUtil.haveSameNames(p, "Akoum Warrior", currentGame))
                 .findFirst()
                 .orElse(null);
-        Assert.assertNotNull(card);
-        Assert.assertTrue("must be mdf card", card instanceof ModalDoubleFacedCard);
+        Assertions.assertNotNull(card);
+        Assertions.assertTrue(card instanceof ModalDoubleFacedCard, "must be mdf card");
         ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) card;
-        Assert.assertEquals("card must be on exile", Zone.EXILED, currentGame.getState().getZone(mdfCard.getId()));
-        Assert.assertEquals("left part must be on exile", Zone.EXILED, currentGame.getState().getZone(mdfCard.getLeftHalfCard().getId()));
-        Assert.assertEquals("right part must be on exile", Zone.EXILED, currentGame.getState().getZone(mdfCard.getRightHalfCard().getId()));
+        Assertions.assertEquals(Zone.EXILED, currentGame.getState().getZone(mdfCard.getId()), "card must be on exile");
+        Assertions.assertEquals(Zone.EXILED, currentGame.getState().getZone(mdfCard.getLeftHalfCard().getId()), "left part must be on exile");
+        Assertions.assertEquals(Zone.EXILED, currentGame.getState().getZone(mdfCard.getRightHalfCard().getId()), "right part must be on exile");
     }
 
     @Test
@@ -1038,14 +1038,14 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
                     .filter(p -> p instanceof PermanentToken)
                     .findFirst()
                     .orElse(null);
-            Assert.assertNotNull(permanent);
-            Assert.assertEquals(info + " - name", "Akoum Warrior", permanent.getName());
-            Assert.assertEquals(info + " - color", "R", permanent.getColor(game).toString());
-            Assert.assertEquals(info + " - power", 4, permanent.getPower().getValue());
-            Assert.assertEquals(info + " - toughness", 5, permanent.getToughness().getValue());
-            Assert.assertEquals(info + " - mana value", 6, permanent.getManaValue());
-            Assert.assertEquals(info + " - card type", "[Creature]", permanent.getCardType(game).toString());
-            Assert.assertEquals(info + " - card subtype", "[Minotaur, Warrior]", permanent.getSubtype(game).toString());
+            Assertions.assertNotNull(permanent);
+            Assertions.assertEquals("Akoum Warrior", permanent.getName(), info + " - name");
+            Assertions.assertEquals("R", permanent.getColor(game).toString(), info + " - color");
+            Assertions.assertEquals(4, permanent.getPower().getValue(), info + " - power");
+            Assertions.assertEquals(5, permanent.getToughness().getValue(), info + " - toughness");
+            Assertions.assertEquals(6, permanent.getManaValue(), info + " - mana value");
+            Assertions.assertEquals("[Creature]", permanent.getCardType(game).toString(), info + " - card type");
+            Assertions.assertEquals("[Minotaur, Warrior]", permanent.getSubtype(game).toString(), info + " - card subtype");
         });
 
         setStrictChooseMode(true);
@@ -1078,14 +1078,14 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
                     .filter(p -> p instanceof PermanentToken)
                     .findFirst()
                     .orElse(null);
-            Assert.assertNotNull(permanent);
-            Assert.assertEquals(info + " - name", "Akoum Teeth", permanent.getName());
-            Assert.assertEquals(info + " - color", "", permanent.getColor(game).toString());
-            Assert.assertEquals(info + " - power", 0, permanent.getPower().getValue());
-            Assert.assertEquals(info + " - toughness", 0, permanent.getToughness().getValue());
-            Assert.assertEquals(info + " - mana value", 0, permanent.getManaValue());
-            Assert.assertEquals(info + " - card type", "[Land]", permanent.getCardType(game).toString());
-            Assert.assertEquals(info + " - card subtype", "[]", permanent.getSubtype(game).toString());
+            Assertions.assertNotNull(permanent);
+            Assertions.assertEquals("Akoum Teeth", permanent.getName(), info + " - name");
+            Assertions.assertEquals("", permanent.getColor(game).toString(), info + " - color");
+            Assertions.assertEquals(0, permanent.getPower().getValue(), info + " - power");
+            Assertions.assertEquals(0, permanent.getToughness().getValue(), info + " - toughness");
+            Assertions.assertEquals(0, permanent.getManaValue(), info + " - mana value");
+            Assertions.assertEquals("[Land]", permanent.getCardType(game).toString(), info + " - card type");
+            Assertions.assertEquals("[]", permanent.getSubtype(game).toString(), info + " - card subtype");
         });
 
         setStrictChooseMode(true);
@@ -1135,9 +1135,9 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         imageData.put("image number", "");
         imageData.put("use var art", "");
         runCode("collect", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
-            Assert.assertEquals(1, playerA.getGraveyard().size());
+            Assertions.assertEquals(1, playerA.getGraveyard().size());
             Card card = playerA.getGraveyard().getCards(game).stream().findFirst().orElse(null);
-            Assert.assertNotNull(card);
+            Assertions.assertNotNull(card);
             imageData.put("set code", card.getExpansionSetCode());
             imageData.put("card number", card.getCardNumber());
             imageData.put("image number", String.valueOf(card.getImageNumber()));
@@ -1165,20 +1165,20 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
                     .filter(p -> p.getName().equals("Tergrid, God of Fright"))
                     .findFirst()
                     .orElse(null);
-            Assert.assertNotNull(permanent);
+            Assertions.assertNotNull(permanent);
 
             // MDFC on battlefield has only one side (not transformable)
-//            Assert.assertFalse("server must not be transformable", permanent.isTransformable());
-//            Assert.assertNull("server must have not other side", permanent.getOtherFace());
+//            Assertions.assertFalse("server must not be transformable", permanent.isTransformable());
+//            Assertions.assertNull("server must have not other side", permanent.getOtherFace());
 
             List<String> rules = permanent.getRules(game);
-            Assert.assertTrue("server must ignore side 2 - untap ability", rules.stream().noneMatch(r -> r.contains("Untap")));
-            Assert.assertTrue("server must ignore side 2 - target player ability", rules.stream().noneMatch(r -> r.contains("Target player loses")));
+            Assertions.assertTrue(rules.stream().noneMatch(r -> r.contains("Untap")), "server must ignore side 2 - untap ability");
+            Assertions.assertTrue(rules.stream().noneMatch(r -> r.contains("Target player loses")), "server must ignore side 2 - target player ability");
 
-            Assert.assertEquals("server image data - set code", imageData.get("set code"), permanent.getExpansionSetCode());
-            Assert.assertEquals("server image data - card number", imageData.get("card number"), permanent.getCardNumber());
-            Assert.assertEquals("server image data - image number", imageData.get("image number"), String.valueOf(permanent.getImageNumber()));
-            Assert.assertEquals("server image data - use var art", imageData.get("use var art"), String.valueOf(permanent.getUsesVariousArt()));
+            Assertions.assertEquals(imageData.get("set code"), permanent.getExpansionSetCode(), "server image data - set code");
+            Assertions.assertEquals(imageData.get("card number"), permanent.getCardNumber(), "server image data - card number");
+            Assertions.assertEquals(imageData.get("image number"), String.valueOf(permanent.getImageNumber()), "server image data - image number");
+            Assertions.assertEquals(imageData.get("use var art"), String.valueOf(permanent.getUsesVariousArt()), "server image data - use var art");
         });
 
         setStrictChooseMode(true);
@@ -1194,26 +1194,26 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
                 .filter(p -> p.getName().equals("Tergrid, God of Fright"))
                 .findFirst()
                 .orElse(null);
-        Assert.assertNotNull(permanentView);
+        Assertions.assertNotNull(permanentView);
         List<String> rules = permanentView.getRules();
         // from side 1
-        Assert.assertTrue("client must use side 1 - type", permanentView.getTypeText().contains("Creature"));
-        Assert.assertTrue("client must use side 1 - subtype", permanentView.getSubTypes().contains(SubType.GOD));
-        Assert.assertEquals("client must use side 1 - P", "4", permanentView.getPower());
-        Assert.assertEquals("client must use side 1 - T", "5", permanentView.getToughness());
-        Assert.assertEquals("client must use side 1 - MV", 5, permanentView.getManaValue());
-        Assert.assertTrue("client must use side 1 - menace ability", rules.stream().anyMatch(r -> r.contains("Menace")));
+        Assertions.assertTrue(permanentView.getTypeText().contains("Creature"), "client must use side 1 - type");
+        Assertions.assertTrue(permanentView.getSubTypes().contains(SubType.GOD), "client must use side 1 - subtype");
+        Assertions.assertEquals("4", permanentView.getPower(), "client must use side 1 - P");
+        Assertions.assertEquals("5", permanentView.getToughness(), "client must use side 1 - T");
+        Assertions.assertEquals(5, permanentView.getManaValue(), "client must use side 1 - MV");
+        Assertions.assertTrue(rules.stream().anyMatch(r -> r.contains("Menace")), "client must use side 1 - menace ability");
         // from copy effect
-        Assert.assertTrue("client must use effect - artifact", permanentView.getTypeText().contains("Artifact"));
-        Assert.assertTrue("client must use effect - haste ability", rules.stream().anyMatch(r -> r.contains("Haste")));
+        Assertions.assertTrue(permanentView.getTypeText().contains("Artifact"), "client must use effect - artifact");
+        Assertions.assertTrue(rules.stream().anyMatch(r -> r.contains("Haste")), "client must use effect - haste ability");
         // from side 2
-        Assert.assertTrue("client must ignore side 2 - untap ability", rules.stream().noneMatch(r -> r.contains("Untap")));
-        Assert.assertTrue("client must ignore side 2 - target player ability", rules.stream().noneMatch(r -> r.contains("Target player loses")));
+        Assertions.assertTrue(rules.stream().noneMatch(r -> r.contains("Untap")), "client must ignore side 2 - untap ability");
+        Assertions.assertTrue(rules.stream().noneMatch(r -> r.contains("Target player loses")), "client must ignore side 2 - target player ability");
         // image data
-        Assert.assertEquals("client image data - set code", imageData.get("set code"), permanentView.getExpansionSetCode());
-        Assert.assertEquals("client image data - card number", imageData.get("card number"), permanentView.getCardNumber());
-        Assert.assertEquals("client image data - image number", imageData.get("image number"), String.valueOf(permanentView.getImageNumber()));
-        Assert.assertEquals("client image data - use var art", imageData.get("use var art"), String.valueOf(permanentView.getUsesVariousArt()));
+        Assertions.assertEquals(imageData.get("set code"), permanentView.getExpansionSetCode(), "client image data - set code");
+        Assertions.assertEquals(imageData.get("card number"), permanentView.getCardNumber(), "client image data - card number");
+        Assertions.assertEquals(imageData.get("image number"), String.valueOf(permanentView.getImageNumber()), "client image data - image number");
+        Assertions.assertEquals(imageData.get("use var art"), String.valueOf(permanentView.getUsesVariousArt()), "client image data - use var art");
     }
 
 
@@ -1313,8 +1313,8 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Esika, God of the Tree", 1);
-        Assert.assertEquals("MDFC front face on battlefield must have its own mana value",
-                3, getPermanent("Esika, God of the Tree", playerA).getManaValue());
+        Assertions.assertEquals(3, getPermanent("Esika, God of the Tree", playerA).getManaValue(),
+                "MDFC front face on battlefield must have its own mana value");
     }
 
     @Test
@@ -1334,8 +1334,8 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "The Prismatic Bridge", 1);
-        Assert.assertEquals("MDFC back face on battlefield must have back face mana value (712.8f)",
-                5, getPermanent("The Prismatic Bridge", playerA).getManaValue());
+        Assertions.assertEquals(5, getPermanent("The Prismatic Bridge", playerA).getManaValue(),
+                "MDFC back face on battlefield must have back face mana value (712.8f)");
     }
 
     /**
@@ -1408,10 +1408,10 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         checkStackObject("on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Esika, God of the Tree", 1);
         runCode("check mana value on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             Spell spell = (Spell) game.getStack().getFirstOrNull();
-            Assert.assertNotNull(spell);
-            Assert.assertEquals("Esika, God of the Tree", spell.getName());
-            Assert.assertEquals("MDFC front face on stack must have its own mana value (712.8f)",
-                    3, spell.getManaValue());
+            Assertions.assertNotNull(spell);
+            Assertions.assertEquals("Esika, God of the Tree", spell.getName());
+            Assertions.assertEquals(3, spell.getManaValue(),
+                    "MDFC front face on stack must have its own mana value (712.8f)");
         });
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
@@ -1435,10 +1435,10 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         checkStackObject("on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast The Prismatic Bridge", 1);
         runCode("check mana value on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             Spell spell = (Spell) game.getStack().getFirstOrNull();
-            Assert.assertNotNull(spell);
-            Assert.assertEquals("The Prismatic Bridge", spell.getName());
-            Assert.assertEquals("MDFC back face on stack must have back face mana value (712.8f)",
-                    5, spell.getManaValue());
+            Assertions.assertNotNull(spell);
+            Assertions.assertEquals("The Prismatic Bridge", spell.getName());
+            Assertions.assertEquals(5, spell.getManaValue(),
+                    "MDFC back face on stack must have back face mana value (712.8f)");
         });
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
@@ -1488,9 +1488,9 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
                 .stream()
                 .filter(c -> CardUtil.haveSameNames(c, "Esika, God of the Tree", currentGame))
                 .findFirst().orElse(null);
-        Assert.assertNotNull("Card must be in graveyard", graveyardCard);
-        Assert.assertEquals("MDFC in graveyard must use front face mana value (712.8g)",
-                3, graveyardCard.getManaValue());
+        Assertions.assertNotNull(graveyardCard, "Card must be in graveyard");
+        Assertions.assertEquals(3, graveyardCard.getManaValue(),
+                "MDFC in graveyard must use front face mana value (712.8g)");
     }
 
     @Test
@@ -1505,9 +1505,9 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         Card handCard = getHandCards(playerA).stream()
                 .filter(c -> CardUtil.haveSameNames(c, "Esika, God of the Tree", currentGame))
                 .findFirst().orElse(null);
-        Assert.assertNotNull("Card must be in hand", handCard);
-        Assert.assertEquals("MDFC in hand must use front face mana value (712.8g)",
-                3, handCard.getManaValue());
+        Assertions.assertNotNull(handCard, "Card must be in hand");
+        Assertions.assertEquals(3, handCard.getManaValue(),
+                "MDFC in hand must use front face mana value (712.8g)");
     }
 
     @Test

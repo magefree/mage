@@ -4,8 +4,8 @@ package org.mage.test.cards.abilities.other;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -23,7 +23,7 @@ public class ChiefEngineerTest extends CardTestPlayerBase {
      *
      */
 
-    @Ignore // at this time player.getPlayable() does not take into account convoke payments
+    @Disabled // at this time player.getPlayable() does not take into account convoke payments
     @Test
     public void testGainsConvoke() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);

@@ -4,12 +4,12 @@ import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestCommanderDuelBase;
 
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class EncroachingMycosynthTest extends CardTestCommanderDuelBase {

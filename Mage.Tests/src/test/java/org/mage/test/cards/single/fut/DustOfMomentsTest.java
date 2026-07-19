@@ -8,8 +8,8 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -26,11 +26,11 @@ public class DustOfMomentsTest extends CardTestPlayerBase {
 
     // Chronozoa should have duplicated
     final List<Permanent> activeCreatures = currentGame.getBattlefield().getAllActivePermanents(CardType.CREATURE, currentGame);
-    Assert.assertEquals(2, activeCreatures.size());
+    Assertions.assertEquals(2, activeCreatures.size());
 
     for (final Permanent creature : activeCreatures) {
-      Assert.assertEquals("Chronozoa", creature.getName());
-      Assert.assertEquals(3, creature.getCounters(currentGame).getCount(CounterType.TIME));
+      Assertions.assertEquals("Chronozoa", creature.getName());
+      Assertions.assertEquals(3, creature.getCounters(currentGame).getCount(CounterType.TIME));
     }
     // Check time counters on kraken
     assertCounterOnExiledCardCount("Deep-Sea Kraken", CounterType.TIME, 6);

@@ -3,8 +3,8 @@ package org.mage.test.decks.importer;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.CardLookup;
 import mage.cards.decks.importer.DckDeckImporter;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.nio.file.Paths;
 
@@ -27,7 +27,7 @@ public class DckDeckImportTest {
                 false
         );
 
-        Assert.assertEquals("", errors.toString());
+        Assertions.assertEquals("", errors.toString());
         TestDeckChecker.checker()
                 .addMain("Ugin, the Ineffable", 1)
                 .addMain("Cephalid Looter", 1)

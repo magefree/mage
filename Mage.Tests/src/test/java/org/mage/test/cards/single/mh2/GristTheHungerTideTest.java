@@ -4,8 +4,8 @@ import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -35,9 +35,9 @@ public class GristTheHungerTideTest extends CardTestPlayerBase {
             }
             Zone zone = currentGame.getState().getZone(card.getId());
             if (zone == Zone.BATTLEFIELD) {
-                Assert.assertFalse("Not a creature on the battlefield", card.isCreature(currentGame));
+                Assertions.assertFalse(card.isCreature(currentGame), "Not a creature on the battlefield");
             } else {
-                Assert.assertTrue("Should be a creature when zone is " + zone, card.isCreature(currentGame));
+                Assertions.assertTrue(card.isCreature(currentGame), "Should be a creature when zone is " + zone);
             }
         }
     }
@@ -59,8 +59,8 @@ public class GristTheHungerTideTest extends CardTestPlayerBase {
             if (!card.getName().equals(grist)) {
                 continue;
             }
-            Assert.assertEquals("", Zone.EXILED, currentGame.getState().getZone(card.getId()));
-            Assert.assertTrue("Should be a creature in exile", card.isCreature(currentGame));
+            Assertions.assertEquals(Zone.EXILED, currentGame.getState().getZone(card.getId()));
+            Assertions.assertTrue(card.isCreature(currentGame), "Should be a creature in exile");
         }
     }
 

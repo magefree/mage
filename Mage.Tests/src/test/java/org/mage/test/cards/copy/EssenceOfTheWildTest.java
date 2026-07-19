@@ -4,9 +4,9 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -27,7 +27,7 @@ public class EssenceOfTheWildTest extends CardTestPlayerBase {
                 currentCopyNumber++;
             }
         }
-        Assert.fail("copy " + num + " must exist");
+        Assertions.fail("copy " + num + " must exist");
         return null;
     }
 
@@ -37,7 +37,7 @@ public class EssenceOfTheWildTest extends CardTestPlayerBase {
                 return perm;
             }
         }
-        Assert.fail("can't find origin");
+        Assertions.fail("can't find origin");
         return null;
     }
 
@@ -59,12 +59,12 @@ public class EssenceOfTheWildTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Essence of the Wild", 2);
 
         Permanent copy = findCopyPermanent(currentGame, 1);
-        Assert.assertEquals("must have 6 p/t", 6, copy.getPower().getValue());
-        Assert.assertEquals("must have 6 p/t", 6, copy.getToughness().getValue());
+        Assertions.assertEquals(6, copy.getPower().getValue(), "must have 6 p/t");
+        Assertions.assertEquals(6, copy.getToughness().getValue(), "must have 6 p/t");
     }
 
     @Test
-    @Ignore // TODO: enable for copy effect tests and random replacement effects fix
+    @Disabled // TODO: enable for copy effect tests and random replacement effects fix
     public void test_CopyCreatureByCopied() {
         // essence copy to creature 1 -> creature 1 copy to creature
         addCard(Zone.BATTLEFIELD, playerA, "Essence of the Wild", 1);
@@ -84,11 +84,11 @@ public class EssenceOfTheWildTest extends CardTestPlayerBase {
 
         Permanent copy1 = findCopyPermanent(currentGame, 1);
         Permanent copy2 = findCopyPermanent(currentGame, 2);
-        Assert.assertFalse("copy must be diffent", copy1.equals(copy2));
-        Assert.assertEquals("copy 1 must have 6 p/t", 6, copy1.getPower().getValue());
-        Assert.assertEquals("copy 1 must have 6 p/t", 6, copy1.getToughness().getValue());
-        Assert.assertEquals("copy 2 must have 6 p/t", 6, copy2.getPower().getValue());
-        Assert.assertEquals("copy 2 must have 6 p/t", 6, copy2.getToughness().getValue());
+        Assertions.assertFalse(copy1.equals(copy2), "copy must be diffent");
+        Assertions.assertEquals(6, copy1.getPower().getValue(), "copy 1 must have 6 p/t");
+        Assertions.assertEquals(6, copy1.getToughness().getValue(), "copy 1 must have 6 p/t");
+        Assertions.assertEquals(6, copy2.getPower().getValue(), "copy 2 must have 6 p/t");
+        Assertions.assertEquals(6, copy2.getToughness().getValue(), "copy 2 must have 6 p/t");
     }
 
     @Test
@@ -116,9 +116,9 @@ public class EssenceOfTheWildTest extends CardTestPlayerBase {
 
         Permanent origin = findOriginPermanent(currentGame, "Essence of the Wild");
         Permanent copy = findCopyPermanent(currentGame, 1);
-        Assert.assertEquals("origin must have 5 p/t", 6 - 1, origin.getPower().getValue());
-        Assert.assertEquals("origin must have 5 p/t", 6 - 1, origin.getToughness().getValue());
-        Assert.assertEquals("copy must have 6 p/t", 6, copy.getPower().getValue());
-        Assert.assertEquals("copy must have 6 p/t", 6, copy.getToughness().getValue());
+        Assertions.assertEquals(6 - 1, origin.getPower().getValue(), "origin must have 5 p/t");
+        Assertions.assertEquals(6 - 1, origin.getToughness().getValue(), "origin must have 5 p/t");
+        Assertions.assertEquals(6, copy.getPower().getValue(), "copy must have 6 p/t");
+        Assertions.assertEquals(6, copy.getToughness().getValue(), "copy must have 6 p/t");
     }
 }

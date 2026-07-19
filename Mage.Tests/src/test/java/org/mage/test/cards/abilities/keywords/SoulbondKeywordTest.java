@@ -10,8 +10,8 @@ import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -541,8 +541,8 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
 
         Permanent trustedForcemage = getPermanent(forcemage, playerA.getId());
         Permanent eliteVanguard = getPermanent(vanguard, playerA.getId());
-        Assert.assertNull(trustedForcemage.getPairedMOR());
-        Assert.assertNull(eliteVanguard.getPairedMOR());
+        Assertions.assertNull(trustedForcemage.getPairedMOR());
+        Assertions.assertNull(eliteVanguard.getPairedMOR());
     }
 
     /**
@@ -574,7 +574,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         execute();
 
         Permanent palinchron = getPermanent("Palinchron", playerA);
-        Assert.assertNull(palinchron.getPairedMOR()); // should not be paired
+        Assertions.assertNull(palinchron.getPairedMOR()); // should not be paired
         assertGraveyardCount(playerA, "Deadeye Navigator", 1);
         assertGraveyardCount(playerB, "Doom Blade", 1);
         assertPermanentCount(playerA, "Palinchron", 1);
@@ -614,7 +614,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         assertAbility(playerA, nearheath, ReachAbility.getInstance(), true);
         assertAbility(playerA, trappers, ReachAbility.getInstance(), true);
         Permanent forcemage1 = getPermanent(forcemage, playerA);
-        Assert.assertNull(forcemage1.getPairedMOR()); // should not be paired
+        Assertions.assertNull(forcemage1.getPairedMOR()); // should not be paired
         assertType("Hidden Predators", CardType.CREATURE, false);
 
     }

@@ -2,8 +2,8 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -100,8 +100,8 @@ public class CascadeTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Ardent Plea", 1);
         // the 10 lands go back to library
-        Assert.assertEquals("The 10 lands went back to library", 10, playerA.getLibrary().size());
-        Assert.assertTrue("Player A is still in game", playerA.isInGame());
+        Assertions.assertEquals(10, playerA.getLibrary().size(), "The 10 lands went back to library");
+        Assertions.assertTrue(playerA.isInGame(), "Player A is still in game");
     }
 
     @Test
@@ -120,12 +120,12 @@ public class CascadeTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Maelstrom Nexus", 1);
-        Assert.assertTrue("Player A is still in game", playerA.isInGame());
+        Assertions.assertTrue(playerA.isInGame(), "Player A is still in game");
         assertHandCount(playerA, "Aven Skirmisher", 0);
         assertPermanentCount(playerA, "Aven Skirmisher", 1);
         // the 2 lands go back to library
-        Assert.assertEquals("The 2 lands went back to library", 2, playerA.getLibrary().size());
-        Assert.assertTrue("Player A is still in game", playerA.isInGame());
+        Assertions.assertEquals(2, playerA.getLibrary().size(), "The 2 lands went back to library");
+        Assertions.assertTrue(playerA.isInGame(), "Player A is still in game");
 
     }
 

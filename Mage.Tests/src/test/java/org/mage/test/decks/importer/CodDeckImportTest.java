@@ -3,8 +3,8 @@ package org.mage.test.decks.importer;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.CardLookup;
 import mage.cards.decks.importer.CodDeckImporter;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.nio.file.Paths;
 
@@ -30,9 +30,9 @@ public class CodDeckImportTest {
                 errors,
                 false
         );
-        Assert.assertEquals("Could not find card: '@#$NOT A REAL CARD NAME@#$'\n", errors.toString());
+        Assertions.assertEquals("Could not find card: '@#$NOT A REAL CARD NAME@#$'\n", errors.toString());
 
-        Assert.assertEquals("Deck Name", deck.getName());
+        Assertions.assertEquals("Deck Name", deck.getName());
         TestDeckChecker.checker()
                 .addMain("Forest", 12)
                 .addMain("Razorverge Thicket", 5)

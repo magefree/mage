@@ -59,9 +59,9 @@ import mage.verify.mtgjson.SpellBookCardsPage;
 import mage.watchers.Watcher;
 import net.java.truevfs.access.TFile;
 import org.apache.log4j.Logger;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.plugins.card.dl.sources.ScryfallImageSupportCards;
 import org.reflections.Reflections;
 
@@ -356,7 +356,7 @@ public class VerifyCardDataTest {
 
         printMessages(outputMessages);
         if (failed > 0) {
-            Assert.fail(String.format("found %d errors in %d cards verify (see errors list above)", failed, allCards.size()));
+            Assertions.fail(String.format("found %d errors in %d cards verify (see errors list above)", failed, allCards.size()));
         }
     }
 
@@ -407,7 +407,7 @@ public class VerifyCardDataTest {
         }
 
         if (doubleErrors.size() > 0) {
-            Assert.fail("DB has duplicated card numbers, found errors: " + doubleErrors.size());
+            Assertions.fail("DB has duplicated card numbers, found errors: " + doubleErrors.size());
         }
     }
 
@@ -439,7 +439,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    @Ignore // TODO: enable it after THB set will be completed
+    @Disabled // TODO: enable it after THB set will be completed
     public void test_checkDoubleRareCardsInSets() {
         // all basic sets after THB must have double rare cards (one normal, one bonus)
         // ELD can have same rules, but xmage stores it as different sets (ELD and CELD)
@@ -494,7 +494,7 @@ public class VerifyCardDataTest {
         }
 
         if (doubleErrors.size() > 0) {
-            Assert.fail("DB has non duplicated rare cards, found errors: " + doubleErrors.size());
+            Assertions.fail("DB has non duplicated rare cards, found errors: " + doubleErrors.size());
         }
     }
 
@@ -533,7 +533,7 @@ public class VerifyCardDataTest {
         System.out.println("Total unique cards: " + classesIndex.size() + ", total non unique cards (reprints): " + totalCards);
 
         if (errorsList.size() > 0) {
-            Assert.fail("DB has wrong card classes, found errors: " + errorsList.size());
+            Assertions.fail("DB has wrong card classes, found errors: " + errorsList.size());
         }
     }
 
@@ -553,8 +553,8 @@ public class VerifyCardDataTest {
         int xmageUnofficialCards = 0;
         Collection<ExpansionSet> sets = Sets.getInstance().values();
 
-        Assert.assertFalse("XMage data must contains sets list", sets.isEmpty());
-        Assert.assertFalse("MtgJson data must contains sets list", MtgJsonService.sets().isEmpty());
+        Assertions.assertFalse(sets.isEmpty(), "XMage data must contains sets list");
+        Assertions.assertFalse(MtgJsonService.sets().isEmpty(), "MtgJson data must contains sets list");
 
         // official sets
         for (Map.Entry<String, MtgJsonSet> refEntry : MtgJsonService.sets().entrySet()) {
@@ -625,7 +625,7 @@ public class VerifyCardDataTest {
             rootPath = Paths.get("..", "Mage.Client", "release", "sample-decks");
         }
         if (!Files.exists(rootPath)) {
-            Assert.fail("Sample decks: unknown root folder " + rootPath.toAbsolutePath());
+            Assertions.fail("Sample decks: unknown root folder " + rootPath.toAbsolutePath());
         }
 
         // collect all files in all root's folders
@@ -642,7 +642,7 @@ public class VerifyCardDataTest {
             e.printStackTrace();
             errorsList.add("Error: sample deck - can't get folder content - " + e.getMessage());
         }
-        Assert.assertTrue("Sample decks: can't find any deck files in " + rootPath.toAbsolutePath(), filesList.size() > 0);
+        Assertions.assertTrue(filesList.size() > 0, "Sample decks: can't find any deck files in " + rootPath.toAbsolutePath());
 
         // try to open deck files
         int totalErrorFiles = 0;
@@ -673,7 +673,7 @@ public class VerifyCardDataTest {
 
         printMessages(errorsList);
         if (errorsList.size() > 0) {
-            Assert.fail("Found sample decks: " + filesList.size() + "; with errors: " + totalErrorFiles);
+            Assertions.fail("Found sample decks: " + filesList.size() + "; with errors: " + totalErrorFiles);
         }
     }
 
@@ -685,7 +685,7 @@ public class VerifyCardDataTest {
         for (ExpansionSet set : Sets.getInstance().values()) {
             for (ExpansionSet.SetCardInfo info : set.getSetCardInfo()) {
                 CardInfo cardInfo = CardRepository.instance.findCardsByClass(info.getCardClass().getCanonicalName()).stream().findFirst().orElse(null);
-                Assert.assertNotNull(cardInfo);
+                Assertions.assertNotNull(cardInfo);
 
                 if (cardInfo.isDoubleFacedCard()) {
                     break;
@@ -702,12 +702,12 @@ public class VerifyCardDataTest {
 
         printMessages(errorsList);
         if (errorsList.size() > 0) {
-            Assert.fail("Found missing second side cards in sets, errors: " + errorsList.size());
+            Assertions.fail("Found missing second side cards in sets, errors: " + errorsList.size());
         }
     }
 
     @Test
-    @Ignore // TODO: enable after all missing cards and settings fixes
+    @Disabled // TODO: enable after all missing cards and settings fixes
     public void test_checkWrongCardsDataInSets() {
         Collection<String> errorsList = new ArrayList<>();
         Collection<String> warningsList = new ArrayList<>();
@@ -778,12 +778,12 @@ public class VerifyCardDataTest {
         printMessages(warningsList);
         printMessages(errorsList);
         if (errorsList.size() > 0) {
-            Assert.fail("Found wrong cards data in sets, errors: " + errorsList.size());
+            Assertions.fail("Found wrong cards data in sets, errors: " + errorsList.size());
         }
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void test_checkWrongFullArtAndRetro() {
         Collection<String> errorsList = new ArrayList<>();
         Collection<ExpansionSet> xmageSets = Sets.getInstance().values();
@@ -839,12 +839,12 @@ public class VerifyCardDataTest {
 
         printMessages(errorsList);
         if (errorsList.size() > 0) {
-            Assert.fail("Found wrong cards data in sets, errors: " + errorsList.size());
+            Assertions.fail("Found wrong cards data in sets, errors: " + errorsList.size());
         }
     }
 
     @Test
-    @Ignore // TODO: enable after all missing cards and settings fixes
+    @Disabled // TODO: enable after all missing cards and settings fixes
     public void test_checkMissingScryfallSettingsAndCardNumbers() {
         Collection<String> errorsList = new ArrayList<>();
 
@@ -940,7 +940,7 @@ public class VerifyCardDataTest {
 
         printMessages(errorsList);
         if (errorsList.size() > 0) {
-            Assert.fail("Found scryfall download errors: " + errorsList.size());
+            Assertions.fail("Found scryfall download errors: " + errorsList.size());
         }
     }
 
@@ -1216,7 +1216,7 @@ public class VerifyCardDataTest {
         printMessages(warningsList);
         printMessages(errorsList);
         if (errorsList.size() > 0) {
-            Assert.fail("Found set errors: " + errorsList.size());
+            Assertions.fail("Found set errors: " + errorsList.size());
         }
     }
 
@@ -1268,7 +1268,7 @@ public class VerifyCardDataTest {
             for (ExpansionSet.SetCardInfo cardInfo : set.getSetCardInfo()) {
                 Card card = CardImpl.createCard(cardInfo.getCardClass(), new CardSetInfo(cardInfo.getName(), set.getCode(),
                         cardInfo.getCardNumber(), cardInfo.getRarity(), cardInfo.getGraphicInfo()));
-                Assert.assertNotNull(card);
+                Assertions.assertNotNull(card);
 
                 // CHECK: all planeswalkers must be legendary
                 if (card.isPlaneswalker() && !card.isLegendary()) {
@@ -1336,7 +1336,7 @@ public class VerifyCardDataTest {
         printMessages(warningsList);
         printMessages(errorsList);
         if (errorsList.size() > 0) {
-            Assert.fail("Found card errors: " + errorsList.size());
+            Assertions.fail("Found card errors: " + errorsList.size());
         }
     }
 
@@ -1412,12 +1412,12 @@ public class VerifyCardDataTest {
         printMessages(warningsList);
         printMessages(errorsList);
         if (errorsList.size() > 0) {
-            Assert.fail("Found watcher errors: " + errorsList.size());
+            Assertions.fail("Found watcher errors: " + errorsList.size());
         }
     }
 
     @Test
-    @Ignore  // TODO: enable test after massive token fixes
+    @Disabled  // TODO: enable test after massive token fixes
     public void test_checkMissingTokenData() {
 
         Collection<String> errorsList = new ArrayList<>();
@@ -1686,7 +1686,7 @@ public class VerifyCardDataTest {
         printMessages(warningsList);
         printMessages(errorsList);
         if (errorsList.size() > 0) {
-            Assert.fail("Found token errors: " + errorsList.size());
+            Assertions.fail("Found token errors: " + errorsList.size());
         }
     }
 
@@ -1732,7 +1732,7 @@ public class VerifyCardDataTest {
 
         printMessages(errorsList);
         if (errorsList.size() > 0) {
-            Assert.fail("Found plane errors: " + errorsList.size());
+            Assertions.fail("Found plane errors: " + errorsList.size());
         }
     }
 
@@ -1773,7 +1773,7 @@ public class VerifyCardDataTest {
 
         printMessages(errorsList);
         if (errorsList.size() > 0) {
-            Assert.fail("Found dungeon errors: " + errorsList.size());
+            Assertions.fail("Found dungeon errors: " + errorsList.size());
         }
     }
 
@@ -1831,12 +1831,12 @@ public class VerifyCardDataTest {
 
         printMessages(errorsList);
         if (errorsList.size() > 0) {
-            Assert.fail("Found emblem errors: " + errorsList.size());
+            Assertions.fail("Found emblem errors: " + errorsList.size());
         }
     }
 
     @Test
-    @Ignore
+    @Disabled
     // experimental test to find potentially fail conditions with NPE see https://github.com/magefree/mage/issues/13752
     public void test_checkBadConditions() {
         // all conditions in AsThoughEffect must be compatible with empty source param (e.g. must be able to use inside ConditionalAsThoughEffect)
@@ -1886,7 +1886,7 @@ public class VerifyCardDataTest {
 
         printMessages(errorsList);
         if (!errorsList.isEmpty()) {
-            Assert.fail("Found conditions errors: " + errorsList.size());
+            Assertions.fail("Found conditions errors: " + errorsList.size());
         }
     }
 
@@ -2436,7 +2436,7 @@ public class VerifyCardDataTest {
         if (EntersBattlefieldTriggeredAbility.ENABLE_TRIGGER_PHRASE_AUTO_FIX) {
             if (etbTriggerPhrases.isEmpty()) {
                 etbTriggerPhrases.addAll(EntersBattlefieldTriggeredAbility.getPossibleTriggerPhrases());
-                Assert.assertTrue(etbTriggerPhrases.get(0).startsWith("when"));
+                Assertions.assertTrue(etbTriggerPhrases.get(0).startsWith("when"));
             }
             if (refLowerText.contains("when")) {
                 for (String needTriggerPhrase : etbTriggerPhrases) {
@@ -2882,12 +2882,12 @@ public class VerifyCardDataTest {
             }
 
             if (foundClassName.isEmpty()) {
-                Assert.fail("Can't find card by name or class: " + searchName);
+                Assertions.fail("Can't find card by name or class: " + searchName);
             }
 
             CardSetInfo testSet = new CardSetInfo(foundCardName, "test", "123", Rarity.COMMON);
             Card card = CardImpl.createCard(foundClassName, testSet);
-            Assert.assertNotNull("Card can't be loaded: " + foundClassName, card);
+            Assertions.assertNotNull(card, "Card can't be loaded: " + foundClassName);
 
             System.out.println();
             System.out.println(card.getName() + " " + card.getManaCost().getText());
@@ -3182,7 +3182,7 @@ public class VerifyCardDataTest {
     public void checkSplitCyclingAbilities() {
         // Test the function splitting cycling abilities is correct.
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 "Swampcycling {2}\nMountaincycling {2}",
                 splitCyclingAbilities("Swampcycling {2}, mountaincycling {2}")
         );
@@ -3238,46 +3238,46 @@ public class VerifyCardDataTest {
     public void checkSplitManaAbilities() {
         // Test the function splitting mana abilities is correct.
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 "{T}: Add {G}.\n{T}: Add {W}.",
                 splitManaAbilities("{T}: Add {G} or {W}.")
         );
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 "{T}: Add {G}.\n{T}: Add {W}.\n{T}: Add {R}.",
                 splitManaAbilities("{T}: Add {G}, {W}, or {R}.")
         );
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 "{G/W}, {T}: Add {G}{G}.\n{G/W}, {T}: Add {G}{W}.\n{G/W}, {T}: Add {W}{W}.",
                 splitManaAbilities("{G/W}, {T}: Add {G}{G}, {G}{W}, or {W}{W}.")
         );
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 "{T}: Add {R}.\n{T}: Add one mana of the chosen color.",
                 splitManaAbilities("{T}: Add {R} or one mana of the chosen color.")
         );
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 "{T}: Add {B}. Activate only if you control a swamp.\n{T}: Add {U}. Activate only if you control a swamp.",
                 splitManaAbilities("{T}: Add {B} or {U}. Activate only if you control a swamp.")
         );
 
 
         // Not splitting those:
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 "{T}: Each player creates a colorless artifact token named Banana with \"{T}, Sacrifice this artifact: Add {R} or {G}. You gain 2 life.\"",
                 splitManaAbilities("{T}: Each player creates a colorless artifact token named Banana with \"{T}, Sacrifice this artifact: Add {R} or {G}. You gain 2 life.\"")
         );
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 "+1: Add {R} or {G}. Creature spells you cast this turn can't be countered.",
                 splitManaAbilities("+1: Add {R} or {G}. Creature spells you cast this turn can't be countered.")
         );
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 "0: Add {R} or {G}. Creature spells you cast this turn can't be countered.",
                 splitManaAbilities("0: Add {R} or {G}. Creature spells you cast this turn can't be countered.")
         );
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 "-1: Add {R} or {G}. Creature spells you cast this turn can't be countered.",
                 splitManaAbilities("-1: Add {R} or {G}. Creature spells you cast this turn can't be countered.")
         );
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 "{T}: Add {G} for each creature with power 4 or greater you control.",
                 splitManaAbilities("{T}: Add {G} for each creature with power 4 or greater you control.")
         );
@@ -3456,7 +3456,7 @@ public class VerifyCardDataTest {
                 cardRates.putIfAbsent(card.getName(), curRate);
             } else {
                 if (curRate != prevRate) {
-                    Assert.fail("Card with same name have different ratings: " + card.getName());
+                    Assertions.fail("Card with same name have different ratings: " + card.getName());
                 }
             }
         }
@@ -3492,7 +3492,7 @@ public class VerifyCardDataTest {
 
         if (!errorsList.isEmpty()) {
             printMessages(errorsList);
-            Assert.fail("Found " + errorsList.size() + " broken cards, look at logs above for more details");
+            Assertions.fail("Found " + errorsList.size() + " broken cards, look at logs above for more details");
         }
     }
 
@@ -3500,7 +3500,7 @@ public class VerifyCardDataTest {
     public void test_checkCardsInCubes() throws Exception {
         Reflections reflections = new Reflections("mage.tournament.cubes.");
         Set<Class<? extends DraftCube>> cubesList = reflections.getSubTypesOf(DraftCube.class);
-        Assert.assertFalse("Can't find any cubes", cubesList.isEmpty());
+        Assertions.assertFalse(cubesList.isEmpty(), "Can't find any cubes");
 
         CardScanner.scan();
         Collection<String> errorsList = new ArrayList<>();
@@ -3522,9 +3522,9 @@ public class VerifyCardDataTest {
                 Deck deck = Deck.load(deckCardLists, true);
                 Constructor<?> con = cubeClass.getConstructor(Deck.class);
                 cube = (DraftCube) con.newInstance(deck);
-                Assert.assertFalse(deckCardLists.getCards().isEmpty());
-                Assert.assertEquals("deck must be loaded to cube", cube.getCubeCards().size(), deckCardLists.getCards().size());
-                Assert.assertTrue("cube's name must contains cards count", cube.getName().contains(deckCardLists.getCards().size() + " cards"));
+                Assertions.assertFalse(deckCardLists.getCards().isEmpty());
+                Assertions.assertEquals(cube.getCubeCards().size(), deckCardLists.getCards().size(), "deck must be loaded to cube");
+                Assertions.assertTrue(cube.getName().contains(deckCardLists.getCards().size() + " cards"), "cube's name must contains cards count");
             } else {
                 cube = (DraftCube) createNewObject(cubeClass);
             }
@@ -3548,7 +3548,7 @@ public class VerifyCardDataTest {
 
         if (!errorsList.isEmpty()) {
             printMessages(errorsList);
-            Assert.fail("Found " + errorsList.size() + " errors in the cubes, look at logs above for more details");
+            Assertions.fail("Found " + errorsList.size() + " errors in the cubes, look at logs above for more details");
         }
     }
 
@@ -3558,15 +3558,15 @@ public class VerifyCardDataTest {
 
         // check unicode card
         MtgJsonCard card = MtgJsonService.cardFromSet("LTR", "Arwen Undomiel", "194");
-        Assert.assertNotNull("test card must exists", card);
-        Assert.assertTrue(card.isUseUnicodeName());
-        Assert.assertEquals("Arwen Undomiel", card.getNameAsASCII());
-        Assert.assertEquals("Arwen Undómiel", card.getNameAsUnicode());
-        Assert.assertEquals("Arwen Undomiel", card.getNameAsFull());
+        Assertions.assertNotNull(card, "test card must exists");
+        Assertions.assertTrue(card.isUseUnicodeName());
+        Assertions.assertEquals("Arwen Undomiel", card.getNameAsASCII());
+        Assertions.assertEquals("Arwen Undómiel", card.getNameAsUnicode());
+        Assertions.assertEquals("Arwen Undomiel", card.getNameAsFull());
 
         // mtga format can contain /// in the names, so check it too
         // see https://github.com/magefree/mage/pull/9855
-        Assert.assertEquals("Dusk // Dawn", CardNameUtil.normalizeCardName("Dusk /// Dawn"));
+        Assertions.assertEquals("Dusk // Dawn", CardNameUtil.normalizeCardName("Dusk /// Dawn"));
 
         // check all converters
         Collection<String> errorsList = new ArrayList<>();
@@ -3585,7 +3585,7 @@ public class VerifyCardDataTest {
         });
         printMessages(errorsList);
         if (errorsList.size() > 0) {
-            Assert.fail(String.format("Card name converters contains unsupported unicode symbols in %d cards, see logs above", errorsList.size()));
+            Assertions.fail(String.format("Card name converters contains unsupported unicode symbols in %d cards, see logs above", errorsList.size()));
         }
     }
 
@@ -3593,7 +3593,7 @@ public class VerifyCardDataTest {
      * Not really a test. Used to make the changelog diff list
      * for sets that are heavily worked on.
      */
-    @Ignore
+    @Disabled
     @Test
     public void list_ChangelogHelper() {
 
@@ -3651,7 +3651,7 @@ public class VerifyCardDataTest {
      * <p>
      * How-to use: run it before each main release and upload updated files to github
      */
-    @Ignore
+    @Disabled
     @Test
     public void downloadAndPrepareCommanderBracketsData() {
         // download data

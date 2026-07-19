@@ -4,8 +4,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.players.Player;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -49,10 +49,10 @@ public class SerraParagonTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         try {
             execute();
-            Assert.fail("Two lands were played");
+            Assertions.fail("Two lands were played");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Can't find ability to activate command: Play Swamp")) {
-                Assert.fail("Should have had error about not being able to play land, but got:\n" + e.getMessage());
+                Assertions.fail("Should have had error about not being able to play land, but got:\n" + e.getMessage());
             }
         }
     }
@@ -88,10 +88,10 @@ public class SerraParagonTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         try {
             execute();
-            Assert.fail("Two spells were cast from graveyard");
+            Assertions.fail("Two spells were cast from graveyard");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Can't find ability to activate command: Cast Mox Pearl")) {
-                Assert.fail("Should have had error about not being able to cast spell, but got:\n" + e.getMessage());
+                Assertions.fail("Should have had error about not being able to cast spell, but got:\n" + e.getMessage());
             }
         }
     }
@@ -123,7 +123,7 @@ public class SerraParagonTest extends CardTestPlayerBase {
     }
 
     private static void checkEnergyCount(String message, Player player, int expected) {
-        Assert.assertEquals(message, expected, player.getCountersCount(CounterType.ENERGY));
+        Assertions.assertEquals(expected, player.getCountersCount(CounterType.ENERGY), message);
     }
 
     @Test

@@ -4,8 +4,8 @@ package org.mage.test.cards.continuous;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -34,10 +34,10 @@ public class EightAndAHalfTailsTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Nekusar, the Mindrazer", 1);
         Permanent nekusar = getPermanent("Nekusar, the Mindrazer");
 
-        Assert.assertTrue("Nekusar should be white", nekusar.getColor(currentGame).isWhite());
-        Assert.assertFalse("Nekusar should not be blue", nekusar.getColor(currentGame).isBlue());
-        Assert.assertFalse("Nekusar should not be black", nekusar.getColor(currentGame).isBlack());
-        Assert.assertFalse("Nekusar should not be red", nekusar.getColor(currentGame).isRed());
+        Assertions.assertTrue(nekusar.getColor(currentGame).isWhite(), "Nekusar should be white");
+        Assertions.assertFalse(nekusar.getColor(currentGame).isBlue(), "Nekusar should not be blue");
+        Assertions.assertFalse(nekusar.getColor(currentGame).isBlack(), "Nekusar should not be black");
+        Assertions.assertFalse(nekusar.getColor(currentGame).isRed(), "Nekusar should not be red");
 
     }
 
@@ -72,10 +72,10 @@ public class EightAndAHalfTailsTest extends CardTestPlayerBase {
         Permanent nekusar = getPermanent("Nekusar, the Mindrazer");
 
         assertGraveyardCount(playerB, "Momentary Blink", 1);
-        Assert.assertFalse("Nekusar should not be white", nekusar.getColor(currentGame).isWhite());
-        Assert.assertTrue("Nekusar should be blue", nekusar.getColor(currentGame).isBlue());
-        Assert.assertTrue("Nekusar should be black", nekusar.getColor(currentGame).isBlack());
-        Assert.assertTrue("Nekusar should be red", nekusar.getColor(currentGame).isRed());
+        Assertions.assertFalse(nekusar.getColor(currentGame).isWhite(), "Nekusar should not be white");
+        Assertions.assertTrue(nekusar.getColor(currentGame).isBlue(), "Nekusar should be blue");
+        Assertions.assertTrue(nekusar.getColor(currentGame).isBlack(), "Nekusar should be black");
+        Assertions.assertTrue(nekusar.getColor(currentGame).isRed(), "Nekusar should be red");
 
     }
 

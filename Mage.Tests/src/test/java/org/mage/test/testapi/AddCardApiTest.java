@@ -3,9 +3,10 @@ package org.mage.test.testapi;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.utils.SystemUtil;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+import org.opentest4j.AssertionFailedError;
 
 import java.util.List;
 
@@ -19,47 +20,47 @@ public class AddCardApiTest extends CardTestPlayerBase {
         List<String> info;
 
         info = SystemUtil.parseSetAndCardNameCommand("");
-        Assert.assertEquals(info.toString(), 2, info.size());
-        Assert.assertEquals(info.toString(), "", info.get(0));
-        Assert.assertEquals(info.toString(), "", info.get(1));
+        Assertions.assertEquals(2, info.size(), info.toString());
+        Assertions.assertEquals("", info.get(0), info.toString());
+        Assertions.assertEquals("", info.get(1), info.toString());
 
         info = SystemUtil.parseSetAndCardNameCommand("single name");
-        Assert.assertEquals(info.toString(), 2, info.size());
-        Assert.assertEquals(info.toString(), "", info.get(0));
-        Assert.assertEquals(info.toString(), "single name", info.get(1));
+        Assertions.assertEquals(2, info.size(), info.toString());
+        Assertions.assertEquals("", info.get(0), info.toString());
+        Assertions.assertEquals("single name", info.get(1), info.toString());
 
         info = SystemUtil.parseSetAndCardNameCommand("SET-name");
-        Assert.assertEquals(info.toString(), 2, info.size());
-        Assert.assertEquals(info.toString(), "SET", info.get(0));
-        Assert.assertEquals(info.toString(), "name", info.get(1));
+        Assertions.assertEquals(2, info.size(), info.toString());
+        Assertions.assertEquals("SET", info.get(0), info.toString());
+        Assertions.assertEquals("name", info.get(1), info.toString());
 
         // only upper case set codes can be used
         info = SystemUtil.parseSetAndCardNameCommand("non-set-code-name");
-        Assert.assertEquals(info.toString(), 2, info.size());
-        Assert.assertEquals(info.toString(), "", info.get(0));
-        Assert.assertEquals(info.toString(), "non-set-code-name", info.get(1));
+        Assertions.assertEquals(2, info.size(), info.toString());
+        Assertions.assertEquals("", info.get(0), info.toString());
+        Assertions.assertEquals("non-set-code-name", info.get(1), info.toString());
 
         info = SystemUtil.parseSetAndCardNameCommand("SET-card-name");
-        Assert.assertEquals(info.toString(), 2, info.size());
-        Assert.assertEquals(info.toString(), "SET", info.get(0));
-        Assert.assertEquals(info.toString(), "card-name", info.get(1));
+        Assertions.assertEquals(2, info.size(), info.toString());
+        Assertions.assertEquals("SET", info.get(0), info.toString());
+        Assertions.assertEquals("card-name", info.get(1), info.toString());
 
         // must find first symbols before delimeter, e.g. TOO
         info = SystemUtil.parseSetAndCardNameCommand("TOO-LONG-SET-card-name");
-        Assert.assertEquals(info.toString(), 2, info.size());
-        Assert.assertEquals(info.toString(), "TOO", info.get(0));
-        Assert.assertEquals(info.toString(), "LONG-SET-card-name", info.get(1));
+        Assertions.assertEquals(2, info.size(), info.toString());
+        Assertions.assertEquals("TOO", info.get(0), info.toString());
+        Assertions.assertEquals("LONG-SET-card-name", info.get(1), info.toString());
 
         // short cards names like ED-E, Lonesome Eyebot (set code must be x3 length)
         info = SystemUtil.parseSetAndCardNameCommand("ED-E, Lonesome Eyebot");
-        Assert.assertEquals(info.toString(), 2, info.size());
-        Assert.assertEquals(info.toString(), "", info.get(0));
-        Assert.assertEquals(info.toString(), "ED-E, Lonesome Eyebot", info.get(1));
+        Assertions.assertEquals(2, info.size(), info.toString());
+        Assertions.assertEquals("", info.get(0), info.toString());
+        Assertions.assertEquals("ED-E, Lonesome Eyebot", info.get(1), info.toString());
         //
         info = SystemUtil.parseSetAndCardNameCommand("XLN-ED-E, Lonesome Eyebot");
-        Assert.assertEquals(info.toString(), 2, info.size());
-        Assert.assertEquals(info.toString(), "XLN", info.get(0));
-        Assert.assertEquals(info.toString(), "ED-E, Lonesome Eyebot", info.get(1));
+        Assertions.assertEquals(2, info.size(), info.toString());
+        Assertions.assertEquals("XLN", info.get(0), info.toString());
+        Assertions.assertEquals("ED-E, Lonesome Eyebot", info.get(1), info.toString());
     }
 
     @Test
@@ -74,9 +75,11 @@ public class AddCardApiTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Memorial to Glory", 1);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void test_CardName_RaiseErrorOnUnknownCard() {
-        addCard(Zone.BATTLEFIELD, playerA, "xxx", 1);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            addCard(Zone.BATTLEFIELD, playerA, "xxx", 1);
+        });
     }
 
     @Test
@@ -92,18 +95,20 @@ public class AddCardApiTest extends CardTestPlayerBase {
         getBattlefieldCards(playerA)
                 .stream()
                 .filter(info -> info.getCard().getName().equals("Memorial to Glory"))
-                .forEach(info -> Assert.assertEquals("40K", info.getCard().getExpansionSetCode()));
+                .forEach(info -> Assertions.assertEquals("40K", info.getCard().getExpansionSetCode()));
 
         assertPermanentCount(playerA, "Plains", 2);
         getBattlefieldCards(playerA)
                 .stream()
                 .filter(info -> info.getCard().getName().equals("Plains"))
-                .forEach(info -> Assert.assertEquals("PANA", info.getCard().getExpansionSetCode()));
+                .forEach(info -> Assertions.assertEquals("PANA", info.getCard().getExpansionSetCode()));
     }
 
-    @Test(expected = org.junit.ComparisonFailure.class)
+    @Test
     public void test_CardNameWithSetCode_RaiseErrorOnUnknownSet() {
-        addCard(Zone.BATTLEFIELD, playerA, "SS4-Plains", 1);
+        Assertions.assertThrows(AssertionFailedError.class, () -> {
+            addCard(Zone.BATTLEFIELD, playerA, "SS4-Plains", 1);
+        });
     }
 
     // Add card to exile added for #11738

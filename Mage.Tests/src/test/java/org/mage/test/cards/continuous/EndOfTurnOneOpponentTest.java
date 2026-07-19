@@ -5,7 +5,7 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.constants.Duration;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 import org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl;

@@ -4,8 +4,8 @@ package org.mage.test.cards.triggers.damage;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -62,7 +62,7 @@ public class HixusPrisonWardenTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
 
         Permanent lion = getPermanent("Silvercoat Lion", playerB);
-        Assert.assertEquals("The lion did come into play this turn", true, lion.hasSummoningSickness());
+        Assertions.assertEquals(true, lion.hasSummoningSickness(), "The lion did come into play this turn");
     }
 
 }

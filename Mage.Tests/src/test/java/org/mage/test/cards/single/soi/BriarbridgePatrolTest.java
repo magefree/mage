@@ -3,8 +3,8 @@ package org.mage.test.cards.single.soi;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -64,6 +64,6 @@ public class BriarbridgePatrolTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Wall of Roots", 1);
 
         Permanent wall = getPermanent("Wall of Roots", playerB);
-        Assert.assertEquals("Wall of Roots should have 3 damage to it", 3, wall.getDamage());
+        Assertions.assertEquals(3, wall.getDamage(), "Wall of Roots should have 3 damage to it");
     }
 }

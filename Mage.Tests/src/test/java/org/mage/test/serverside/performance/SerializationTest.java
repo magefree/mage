@@ -23,9 +23,9 @@ import mage.view.GameView;
 import org.jboss.remoting.serialization.impl.java.ClearableObjectOutputStream;
 import org.jboss.serial.io.JBossObjectInputStream;
 import org.jboss.serial.io.JBossObjectOutputStream;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import java.io.*;
@@ -47,9 +47,9 @@ public class SerializationTest extends CardTestPlayerBase {
         currentGame.addPermanent(permanent, 0);
 
         Object compressed = CompressUtil.compress(permanent);
-        Assert.assertTrue("Must be zip", compressed instanceof ZippedObjectImpl);
+        Assertions.assertTrue(compressed instanceof ZippedObjectImpl, "Must be zip");
         PermanentImpl uncompressed = (PermanentImpl) CompressUtil.decompress(compressed);
-        Assert.assertEquals("Must be same", permanent.getName(), uncompressed.getName());
+        Assertions.assertEquals(permanent.getName(), uncompressed.getName(), "Must be same");
     }
 
     @Test
@@ -66,13 +66,13 @@ public class SerializationTest extends CardTestPlayerBase {
 
         // test compress (it uses default java serialization)
         Object compressed = CompressUtil.compress(permanent);
-        Assert.assertTrue("Must be zip", compressed instanceof ZippedObjectImpl);
+        Assertions.assertTrue(compressed instanceof ZippedObjectImpl, "Must be zip");
         PermanentImpl uncompressed = (PermanentImpl) CompressUtil.decompress(compressed);
-        Assert.assertEquals("Must be same", permanent.getName(), uncompressed.getName());
+        Assertions.assertEquals(permanent.getName(), uncompressed.getName(), "Must be same");
 
         // ensure that it was marked damage
         permanent.applyDamage(currentGame);
-        Assert.assertEquals("Must get infected counter", 1, permanent.getCounters(currentGame).getCount(CounterType.M1M1));
+        Assertions.assertEquals(permanent.getCounters(currentGame).getCount(CounterType.M1M1), 1, "Must get infected counter");
     }
 
     private void processSingleCard(CardInfo cardInfo) {
@@ -90,17 +90,17 @@ public class SerializationTest extends CardTestPlayerBase {
                     // card
                     {
                         Object compressed = CompressUtil.compress(card);
-                        Assert.assertTrue("Must be zip", compressed instanceof ZippedObjectImpl);
+                        Assertions.assertTrue(compressed instanceof ZippedObjectImpl, "Must be zip");
                         Card uncompressed = (Card) CompressUtil.decompress(compressed);
-                        Assert.assertEquals("Must be same", card.getName(), uncompressed.getName());
+                        Assertions.assertEquals(card.getName(), uncompressed.getName(), "Must be same");
                     }
 
                     // permanent
                     if (testPermanent != null) {
                         Object compressed = CompressUtil.compress(testPermanent);
-                        Assert.assertTrue("Must be zip", compressed instanceof ZippedObjectImpl);
+                        Assertions.assertTrue(compressed instanceof ZippedObjectImpl, "Must be zip");
                         Card uncompressed = (Card) CompressUtil.decompress(compressed);
-                        Assert.assertEquals("Must be same", testPermanent.getName(), uncompressed.getName());
+                        Assertions.assertEquals(testPermanent.getName(), uncompressed.getName(), "Must be same");
                     }
                 });
     }
@@ -110,7 +110,7 @@ public class SerializationTest extends CardTestPlayerBase {
         processSingleCard(cardInfo);
     }
 
-    @Ignore // WARNING, debug only, needs few minutes to execute, so run it manually
+    @Disabled // WARNING, debug only, needs few minutes to execute, so run it manually
     @Test
     public void test_Single_AllCards() {
         // checking FULL cards list for serialization errors
@@ -142,7 +142,7 @@ public class SerializationTest extends CardTestPlayerBase {
         }
 
         if (!errorsList.isEmpty()) {
-            Assert.fail("Found broken cards: " + errorsList.size() + "\n"
+            Assertions.fail("Found broken cards: " + errorsList.size() + "\n"
                     + errorsList.stream().sorted().collect(Collectors.joining("\n")));
         }
     }
@@ -156,9 +156,9 @@ public class SerializationTest extends CardTestPlayerBase {
     public void test_LondonMulligan() {
         LondonMulligan mulligan = new LondonMulligan(15);
         Object compressed = CompressUtil.compress(mulligan);
-        Assert.assertTrue("Must be zip", compressed instanceof ZippedObjectImpl);
+        Assertions.assertTrue(compressed instanceof ZippedObjectImpl, "Must be zip");
         LondonMulligan uncompressed = (LondonMulligan) CompressUtil.decompress(compressed);
-        Assert.assertEquals("Must be same", mulligan.getFreeMulligans(), uncompressed.getFreeMulligans());
+        Assertions.assertEquals(mulligan.getFreeMulligans(), uncompressed.getFreeMulligans(), "Must be same");
     }
 
     @Test
@@ -170,20 +170,23 @@ public class SerializationTest extends CardTestPlayerBase {
 
         GameView gameView = getGameView(playerA);
         Object compressed = CompressUtil.compress(gameView);
-        Assert.assertTrue("Must be zip", compressed instanceof ZippedObjectImpl);
+        Assertions.assertTrue(compressed instanceof ZippedObjectImpl, "Must be zip");
         GameView uncompressed = (GameView) CompressUtil.decompress(compressed);
-        Assert.assertEquals("Must be same", 1, uncompressed.getPlayers().get(0).getBattlefield().size());
+        Assertions.assertEquals(1, uncompressed.getPlayers().get(0).getBattlefield().size(), "Must be same");
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void test_Choices_MustHaveProtectionFromKeySetUsage() {
-        Map<String, Ability> abilityMap = new HashMap<>();
-        abilityMap.put("Flying", FlyingAbility.getInstance());
-        Choice choice = new ChoiceImpl(true);
-        choice.setMessage("Choose an ability");
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
 
-        choice.setChoices(abilityMap.keySet());
-        Assert.fail("Can't be here");
+            Map<String, Ability> abilityMap = new HashMap<>();
+            abilityMap.put("Flying", FlyingAbility.getInstance());
+            Choice choice = new ChoiceImpl(true);
+            choice.setMessage("Choose an ability");
+
+            choice.setChoices(abilityMap.keySet());
+            Assertions.fail("Can't be here");
+        });
     }
 
     @Test
@@ -201,9 +204,9 @@ public class SerializationTest extends CardTestPlayerBase {
         choice.setChoices(new LinkedHashSet<>(abilityMap.keySet()));
 
         Object compressed = CompressUtil.compress(choice);
-        Assert.assertTrue("Must be zip", compressed instanceof ZippedObjectImpl);
+        Assertions.assertTrue(compressed instanceof ZippedObjectImpl, "Must be zip");
         Choice uncompressed = (Choice) CompressUtil.decompress(compressed);
-        Assert.assertEquals("Must be same", choice.getChoices().size(), uncompressed.getChoices().size());
+        Assertions.assertEquals(choice.getChoices().size(), uncompressed.getChoices().size(), "Must be same");
     }
 
     static class SerializationTestData {
@@ -242,8 +245,8 @@ public class SerializationTest extends CardTestPlayerBase {
             ObjectOutputStream writerStream = (ObjectOutputStream) writerCon.newInstance(outStream);
             writerStream.writeObject(gameView);
             compressedGameView = outStream.toByteArray();
-            Assert.assertNotNull(compressedGameView);
-            Assert.assertNotEquals(0, compressedGameView.length);
+            Assertions.assertNotNull(compressedGameView);
+            Assertions.assertNotEquals(0, compressedGameView.length);
         } catch (Throwable t) {
             ThreadUtils.findRootException(t).printStackTrace(); // write full stack
             throw new IllegalStateException("Can't use [" + name + "] serialization on write: " + t.getMessage(), t);
@@ -255,9 +258,9 @@ public class SerializationTest extends CardTestPlayerBase {
             Constructor<?> readCon = readerClass.getConstructor(InputStream.class);
             ObjectInputStream readerStream = (ObjectInputStream) readCon.newInstance(inputStream);
             uncompressedGameView = (GameView) readerStream.readObject();
-            Assert.assertNotNull(uncompressedGameView);
-            Assert.assertEquals(1, uncompressedGameView.getMyHand().size());
-            Assert.assertEquals("Grizzly Bears", uncompressedGameView.getMyHand().values().stream().findFirst().get().getName());
+            Assertions.assertNotNull(uncompressedGameView);
+            Assertions.assertEquals(1, uncompressedGameView.getMyHand().size());
+            Assertions.assertEquals("Grizzly Bears", uncompressedGameView.getMyHand().values().stream().findFirst().get().getName());
         } catch (Throwable t) {
             ThreadUtils.findRootException(t).printStackTrace(); // write full stack
             throw new IllegalStateException("Can't use [" + name + "] serialization on read: " + t.getMessage(), t);
@@ -265,7 +268,7 @@ public class SerializationTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore // TODO: enable to test migration to new java
+    @Disabled // TODO: enable to test migration to new java
     public void test_SerializationEngines_Java17Support() {
         // compatibility testing with new java version, see details at https://github.com/magefree/mage/issues/5862
         // original problem: jboss's inner stream classes (static code) used outdated access to private fields
@@ -280,8 +283,8 @@ public class SerializationTest extends CardTestPlayerBase {
         execute();
 
         GameView gameView = getGameView(playerA);
-        Assert.assertEquals(1, gameView.getMyHand().size());
-        Assert.assertEquals("Grizzly Bears", gameView.getMyHand().values().stream().findFirst().get().getName());
+        Assertions.assertEquals(1, gameView.getMyHand().size());
+        Assertions.assertEquals("Grizzly Bears", gameView.getMyHand().values().stream().findFirst().get().getName());
 
         // test diff serialization engines
 

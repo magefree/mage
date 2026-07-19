@@ -4,8 +4,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -47,7 +47,7 @@ public class PersistTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Safehold Elite", 1);
 
         // one poison counter from Virulent Wound
-        Assert.assertEquals(1, playerA.getCountersCount(CounterType.POISON));
+        Assertions.assertEquals(1, playerA.getCountersCount(CounterType.POISON));
     }
 
     /**

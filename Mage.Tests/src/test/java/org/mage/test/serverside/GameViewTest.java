@@ -4,8 +4,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.view.GameView;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import java.util.Arrays;
@@ -30,52 +30,52 @@ public class GameViewTest extends CardTestPlayerBase {
         UUID userWatcher = UUID.randomUUID();
 
         // game copy test
-        Assert.assertEquals(0, currentGame.getOptions().bannedUsers.size());
+        Assertions.assertEquals(0, currentGame.getOptions().bannedUsers.size());
         Game copiedGame = currentGame.copy();
-        Assert.assertEquals(0, copiedGame.getOptions().bannedUsers.size());
+        Assertions.assertEquals(0, copiedGame.getOptions().bannedUsers.size());
         //
         currentGame.getOptions().bannedUsers.add("123");
-        Assert.assertEquals(1, currentGame.getOptions().bannedUsers.size());
+        Assertions.assertEquals(1, currentGame.getOptions().bannedUsers.size());
         copiedGame = currentGame.copy();
-        Assert.assertEquals(1, copiedGame.getOptions().bannedUsers.size());
+        Assertions.assertEquals(1, copiedGame.getOptions().bannedUsers.size());
 
         // normal hand
         GameView gameView = getGameView(playerA, userA);
-        Assert.assertNotNull(gameView);
-        Assert.assertNotNull(gameView.getMyHand());
-        Assert.assertEquals(1, gameView.getMyHand().size());
-        Assert.assertEquals("Forest", gameView.getMyHand().values().stream().findFirst().get().getName());
-        Assert.assertEquals(0, gameView.getLookedAt().size());
-        Assert.assertEquals(0, gameView.getRevealed().size());
-        Assert.assertEquals(0, gameView.getWatchedHands().size());
+        Assertions.assertNotNull(gameView);
+        Assertions.assertNotNull(gameView.getMyHand());
+        Assertions.assertEquals(1, gameView.getMyHand().size());
+        Assertions.assertEquals("Forest", gameView.getMyHand().values().stream().findFirst().get().getName());
+        Assertions.assertEquals(0, gameView.getLookedAt().size());
+        Assertions.assertEquals(0, gameView.getRevealed().size());
+        Assertions.assertEquals(0, gameView.getWatchedHands().size());
 
         // empty hand
         gameView = getGameView(playerB, userB);
-        Assert.assertNotNull(gameView);
-        Assert.assertNotNull(gameView.getMyHand());
-        Assert.assertEquals(0, gameView.getMyHand().size());
-        Assert.assertEquals(0, gameView.getLookedAt().size());
-        Assert.assertEquals(0, gameView.getRevealed().size());
-        Assert.assertEquals(0, gameView.getWatchedHands().size());
+        Assertions.assertNotNull(gameView);
+        Assertions.assertNotNull(gameView.getMyHand());
+        Assertions.assertEquals(0, gameView.getMyHand().size());
+        Assertions.assertEquals(0, gameView.getLookedAt().size());
+        Assertions.assertEquals(0, gameView.getRevealed().size());
+        Assertions.assertEquals(0, gameView.getWatchedHands().size());
 
         // watcher hand
         gameView = getGameView(null, userWatcher);
-        Assert.assertNotNull(gameView);
-        Assert.assertNotNull(gameView.getMyHand());
-        Assert.assertEquals(0, gameView.getMyHand().size());
-        Assert.assertEquals(0, gameView.getLookedAt().size());
-        Assert.assertEquals(0, gameView.getRevealed().size());
-        Assert.assertEquals(0, gameView.getWatchedHands().size());
+        Assertions.assertNotNull(gameView);
+        Assertions.assertNotNull(gameView.getMyHand());
+        Assertions.assertEquals(0, gameView.getMyHand().size());
+        Assertions.assertEquals(0, gameView.getLookedAt().size());
+        Assertions.assertEquals(0, gameView.getRevealed().size());
+        Assertions.assertEquals(0, gameView.getWatchedHands().size());
 
         // A gives access to hand for B and watcher
         playerA.addPermissionToShowHandCards(userB);
         playerA.addPermissionToShowHandCards(userWatcher);
 
         gameView = getGameView(playerA, userA);
-        Assert.assertEquals(0, gameView.getWatchedHands().size());
+        Assertions.assertEquals(0, gameView.getWatchedHands().size());
         gameView = getGameView(playerB, userB);
-        Assert.assertEquals(1, gameView.getWatchedHands().size());
+        Assertions.assertEquals(1, gameView.getWatchedHands().size());
         gameView = getGameView(null, userWatcher);
-        Assert.assertEquals(1, gameView.getWatchedHands().size());
+        Assertions.assertEquals(1, gameView.getWatchedHands().size());
     }
 }

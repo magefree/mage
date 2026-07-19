@@ -3,8 +3,8 @@ package org.mage.test.cards.triggers;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -36,7 +36,7 @@ public class MephidrossVampireTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, "Mephidross Vampire", 4, 5);
 
         // (Since the introduction of Rad Counters, there is one inherent trigger per player in the state, hence the "+ 2")
-        Assert.assertEquals("There should only be one triggered ability in the list of triggers of the State", 1 + 2, currentGame.getState().getTriggers().size());
+        Assertions.assertEquals(1 + 2, currentGame.getState().getTriggers().size(), "There should only be one triggered ability in the list of triggers of the State");
 
     }
 }

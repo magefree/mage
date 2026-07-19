@@ -2,8 +2,8 @@ package org.mage.test.cards.single.zen;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 /**
@@ -52,7 +52,7 @@ public class ChandraAblazeTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    @Ignore // TODO: current choose logic uses first target, enable after new logic implemented (by simulations or improved choice)
+    @Disabled // TODO: current choose logic uses first target, enable after new logic implemented (by simulations or improved choice)
     public void test_PlusOneAbility_AI_ChooseBetterDiscardCard() {
         // +1: Discard a card. If a red card is discarded this way, Chandra Ablaze deals 4 damage to any target.
         addCard(Zone.BATTLEFIELD, playerA, "Chandra Ablaze", 1);

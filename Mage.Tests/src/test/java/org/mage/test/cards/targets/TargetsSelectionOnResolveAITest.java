@@ -1,7 +1,7 @@
 package org.mage.test.cards.targets;
 
 import mage.constants.Outcome;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Testing targets selection on resolve (player.choose) for AI

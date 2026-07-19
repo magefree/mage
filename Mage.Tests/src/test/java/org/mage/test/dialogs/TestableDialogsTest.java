@@ -9,9 +9,9 @@ import mage.constants.Zone;
 import mage.util.ConsoleUtil;
 import mage.utils.testers.TestableDialog;
 import mage.utils.testers.TestableDialogsRunner;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
@@ -106,7 +106,7 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    @Ignore // debug only - run single dialog by reg number
+    @Disabled // debug only - run single dialog by reg number
     public void test_RunSingle_Debugging() {
         int needRegNumber = 5;
 
@@ -147,7 +147,7 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
                 .filter(dialog -> dialog.getGroup().equals(byGroup))
                 .filter(dialog -> dialog.getName().equals(byName))
                 .collect(Collectors.toList());
-        Assert.assertEquals("must found only 1 dialog", 1, res.size());
+        Assertions.assertEquals(1, res.size(), "must found only 1 dialog");
         return res.get(0);
     }
 
@@ -155,7 +155,7 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
         List<TestableDialog> res = runner.getDialogs().stream()
                 .filter(dialog -> dialog.getRegNumber().equals(byRegNumber))
                 .collect(Collectors.toList());
-        Assert.assertEquals("must found only 1 dialog", 1, res.size());
+        Assertions.assertEquals(1, res.size(), "must found only 1 dialog");
         return res.get(0);
     }
 
@@ -303,7 +303,7 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
         usedHorizontalBorder = true;
 
         if (failOnBadResults && totalBad > 0) {
-            Assert.fail(String.format("Testable dialogs has %d bad results, try to fix it", totalBad));
+            Assertions.fail(String.format("Testable dialogs has %d bad results, try to fix it", totalBad));
         }
     }
 

@@ -6,8 +6,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.util.MultiAmountMessage;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
@@ -62,9 +62,9 @@ public class TargetMultiAmountTest extends CardTestPlayerBaseWithAIHelps {
                 .stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(" "));
-        Assert.assertEquals("default values", need, current);
-        Assert.assertTrue("default values must be good",
-                MultiAmountType.isGoodValues(defaultValues, constraints, min, max));
+        Assertions.assertEquals(need, current, "default values");
+        Assertions.assertTrue(MultiAmountType.isGoodValues(defaultValues, constraints, min, max),
+                "default values must be good");
     }
 
     @Test
@@ -108,8 +108,8 @@ public class TargetMultiAmountTest extends CardTestPlayerBaseWithAIHelps {
                 .stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(" "));
-        Assert.assertEquals("max values", need, current);
-        Assert.assertTrue("max values must be good", MultiAmountType.isGoodValues(maxValues, constraints, min, max));
+        Assertions.assertEquals(need, current, "max values");
+        Assertions.assertTrue(MultiAmountType.isGoodValues(maxValues, constraints, min, max), "max values must be good");
     }
 
     @Test
@@ -125,31 +125,31 @@ public class TargetMultiAmountTest extends CardTestPlayerBaseWithAIHelps {
         List<Integer> list = MultiAmountType.prepareDefaultValues(constraints.get(3), 0, 0);
 
         // count (0, 0, 0)
-        Assert.assertFalse("count", MultiAmountType.isGoodValues(list, constraints.get(0), 0, 0));
-        Assert.assertFalse("count", MultiAmountType.isGoodValues(list, constraints.get(1), 0, 0));
-        Assert.assertFalse("count", MultiAmountType.isGoodValues(list, constraints.get(2), 0, 0));
-        Assert.assertTrue("count", MultiAmountType.isGoodValues(list, constraints.get(3), 0, 0));
-        Assert.assertFalse("count", MultiAmountType.isGoodValues(list, constraints.get(4), 0, 0));
+        Assertions.assertFalse(MultiAmountType.isGoodValues(list, constraints.get(0), 0, 0), "count");
+        Assertions.assertFalse(MultiAmountType.isGoodValues(list, constraints.get(1), 0, 0), "count");
+        Assertions.assertFalse(MultiAmountType.isGoodValues(list, constraints.get(2), 0, 0), "count");
+        Assertions.assertTrue(MultiAmountType.isGoodValues(list, constraints.get(3), 0, 0), "count");
+        Assertions.assertFalse(MultiAmountType.isGoodValues(list, constraints.get(4), 0, 0), "count");
 
         // min (0, 1, 1)
         list.set(0, 0);
         list.set(1, 1);
         list.set(2, 1);
-        Assert.assertTrue("min", MultiAmountType.isGoodValues(list, constraints.get(3), 0, 100));
-        Assert.assertTrue("min", MultiAmountType.isGoodValues(list, constraints.get(3), 1, 100));
-        Assert.assertTrue("min", MultiAmountType.isGoodValues(list, constraints.get(3), 2, 100));
-        Assert.assertFalse("min", MultiAmountType.isGoodValues(list, constraints.get(3), 3, 100));
-        Assert.assertFalse("min", MultiAmountType.isGoodValues(list, constraints.get(3), 4, 100));
+        Assertions.assertTrue(MultiAmountType.isGoodValues(list, constraints.get(3), 0, 100), "min");
+        Assertions.assertTrue(MultiAmountType.isGoodValues(list, constraints.get(3), 1, 100), "min");
+        Assertions.assertTrue(MultiAmountType.isGoodValues(list, constraints.get(3), 2, 100), "min");
+        Assertions.assertFalse(MultiAmountType.isGoodValues(list, constraints.get(3), 3, 100), "min");
+        Assertions.assertFalse(MultiAmountType.isGoodValues(list, constraints.get(3), 4, 100), "min");
 
         // max (0, 1, 1)
         list.set(0, 0);
         list.set(1, 1);
         list.set(2, 1);
-        Assert.assertFalse("max", MultiAmountType.isGoodValues(list, constraints.get(3), 0, 0));
-        Assert.assertFalse("max", MultiAmountType.isGoodValues(list, constraints.get(3), 0, 1));
-        Assert.assertTrue("max", MultiAmountType.isGoodValues(list, constraints.get(3), 0, 2));
-        Assert.assertTrue("max", MultiAmountType.isGoodValues(list, constraints.get(3), 0, 3));
-        Assert.assertTrue("max", MultiAmountType.isGoodValues(list, constraints.get(3), 0, 4));
+        Assertions.assertFalse(MultiAmountType.isGoodValues(list, constraints.get(3), 0, 0), "max");
+        Assertions.assertFalse(MultiAmountType.isGoodValues(list, constraints.get(3), 0, 1), "max");
+        Assertions.assertTrue(MultiAmountType.isGoodValues(list, constraints.get(3), 0, 2), "max");
+        Assertions.assertTrue(MultiAmountType.isGoodValues(list, constraints.get(3), 0, 3), "max");
+        Assertions.assertTrue(MultiAmountType.isGoodValues(list, constraints.get(3), 0, 4), "max");
     }
 
     @Test
@@ -183,10 +183,10 @@ public class TargetMultiAmountTest extends CardTestPlayerBaseWithAIHelps {
                 .stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(" "));
-        Assert.assertEquals("parsed values", need, current);
+        Assertions.assertEquals(need, current, "parsed values");
         if (returnDefaultOnError) {
-            Assert.assertTrue("parsed values must be good",
-                    MultiAmountType.isGoodValues(parsedValues, constraints, min, max));
+            Assertions.assertTrue(MultiAmountType.isGoodValues(parsedValues, constraints, min, max),
+                    "parsed values must be good");
         }
     }
 

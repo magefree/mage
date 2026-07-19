@@ -4,8 +4,8 @@ import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -49,7 +49,7 @@ public class HideawayTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Shelldock Isle", 1);
         assertExileCount(playerA, "Silvercoat Lion", 1);
         for (Card card : currentGame.getExile().getAllCards(currentGame)) {
-            Assert.assertTrue("Exiled card is not face down", card.isFaceDown(currentGame));
+            Assertions.assertTrue(card.isFaceDown(currentGame), "Exiled card is not face down");
         }
     }
 
@@ -98,7 +98,7 @@ public class HideawayTest extends CardTestPlayerBase {
 
         Permanent permanent = getPermanent("Ulamog, the Ceaseless Hunger", playerA);
         Card card = currentGame.getCard(permanent.getId());
-        Assert.assertFalse("Previous exiled card may be no longer face down", card.isFaceDown(currentGame));
+        Assertions.assertFalse(card.isFaceDown(currentGame), "Previous exiled card may be no longer face down");
     }
 
     @Test
@@ -191,7 +191,7 @@ public class HideawayTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Ghost Quarter", 1);
         assertTapped("Windbrisk Heights", true);
-        Assert.assertEquals(1, playerA.getLandsPlayed());
+        Assertions.assertEquals(1, playerA.getLandsPlayed());
     }
 
     @Test
@@ -224,7 +224,7 @@ public class HideawayTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Ghost Quarter", 1);
         assertTapped("Windbrisk Heights", true);
-        Assert.assertEquals(2, playerA.getLandsPlayed());
+        Assertions.assertEquals(2, playerA.getLandsPlayed());
     }
 
     /**
@@ -383,7 +383,7 @@ public class HideawayTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Ghost Quarter", 1);
         assertTapped("Windbrisk Heights", true);
         assertExileCount(playerA, 1);
-        Assert.assertEquals(1, playerA.getLandsPlayed());
+        Assertions.assertEquals(1, playerA.getLandsPlayed());
     }
 
     @Test
@@ -415,7 +415,7 @@ public class HideawayTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Ghost Quarter", 2);
         assertTapped("Windbrisk Heights", true);
-        Assert.assertEquals(2, playerA.getLandsPlayed());
+        Assertions.assertEquals(2, playerA.getLandsPlayed());
     }
 
     /**

@@ -2,8 +2,8 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -58,7 +58,7 @@ public class CelebrationTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, 1);
     }
     @Test
-    @Ignore //Currently failing due to PermanentsEnteredBattlefieldWatcher not storing permanents' current state
+    @Disabled //Currently failing due to PermanentsEnteredBattlefieldWatcher not storing permanents' current state
     public void testContinuousModifier2() {
         addCard(Zone.BATTLEFIELD, playerA, "Ashaya, Soul of the Wild");
         addCard(Zone.HAND, playerA, "Armory Mice");

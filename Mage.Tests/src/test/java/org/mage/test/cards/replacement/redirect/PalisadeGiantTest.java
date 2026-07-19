@@ -3,8 +3,8 @@ package org.mage.test.cards.replacement.redirect;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -47,7 +47,7 @@ public class PalisadeGiantTest extends CardTestPlayerBase {
                 damage += permanent.getDamage();
             }
         }
-        Assert.assertEquals("Only 3 damage in sum should be dealt to the Palisade Giants", 3, damage);
+        Assertions.assertEquals(3, damage, "Only 3 damage in sum should be dealt to the Palisade Giants");
 
     }
 

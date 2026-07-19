@@ -5,9 +5,9 @@ import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -50,7 +50,7 @@ public class BloodMoonTest extends CardTestPlayerBase {
 
         // Check that the land is tapped
         Permanent grassland = getPermanent("Grasslands", playerA.getId());
-        Assert.assertEquals("Grasslands is not tapped but is has to be from ETB replacement effect", true, grassland.isTapped());
+        Assertions.assertEquals(true, grassland.isTapped(), "Grasslands is not tapped but is has to be from ETB replacement effect");
 
     }
 
@@ -75,7 +75,7 @@ public class BloodMoonTest extends CardTestPlayerBase {
 
         // Check that the land is tapped
         Permanent grassland = getPermanent("Kabira Crossroads", playerA.getId());
-        Assert.assertEquals("Kabira Crossroads is not tapped but is has to be from ETB replacement effect", true, grassland.isTapped());
+        Assertions.assertEquals(true, grassland.isTapped(), "Kabira Crossroads is not tapped but is has to be from ETB replacement effect");
 
         assertLife(playerA, 20); // Trigger may not trigger because of Blood Moon so the 2 life were not added
         assertLife(playerB, 20);
@@ -125,7 +125,7 @@ public class BloodMoonTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Blood Moon", 1);
         assertHandCount(playerA, 1);
         // Check that the Steam Vents produces only {R}
-        Assert.assertTrue("The mana the land can produce should be [{R}] but it's " + playerB.getManaAvailable(currentGame).toString(), playerB.getManaAvailable(currentGame).toString().equals("[{R}]"));
+        Assertions.assertTrue(playerB.getManaAvailable(currentGame).toString().equals("[{R}]"), "The mana the land can produce should be [{R}] but it's " + playerB.getManaAvailable(currentGame).toString());
 
     }
 
@@ -156,7 +156,7 @@ public class BloodMoonTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Blood Moon", 1);
         assertHandCount(playerA, 1);
         // Check that the Steam Vents produces only {R}
-        Assert.assertTrue("The mana the land can produce should be [{U}] but it's " + playerB.getManaAvailable(currentGame).toString(), playerB.getManaAvailable(currentGame).toString().equals("[{U}]"));
+        Assertions.assertTrue(playerB.getManaAvailable(currentGame).toString().equals("[{U}]"), "The mana the land can produce should be [{U}] but it's " + playerB.getManaAvailable(currentGame).toString());
     }
 
     /**
@@ -196,7 +196,7 @@ public class BloodMoonTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Pithing Needle", 1);
         assertPermanentCount(playerB, "Ghost Quarter", 2);
 
-        Assert.assertTrue("The mana Ghost Quarter can produce should be [{R}] but it's " + playerB.getManaAvailable(currentGame).toString(), playerB.getManaAvailable(currentGame).toString().equals("[{R}]"));
+        Assertions.assertTrue(playerB.getManaAvailable(currentGame).toString().equals("[{R}]"), "The mana Ghost Quarter can produce should be [{R}] but it's " + playerB.getManaAvailable(currentGame).toString());
     }
 
     /**
@@ -234,7 +234,7 @@ public class BloodMoonTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Pithing Needle", 1);
         assertPermanentCount(playerA, "Ghost Quarter", 1);
 
-        Assert.assertTrue("The mana the land can produce should be [{R}] but it's " + playerA.getManaAvailable(currentGame).toString(), playerA.getManaAvailable(currentGame).toString().equals("[{R}]"));
+        Assertions.assertTrue(playerA.getManaAvailable(currentGame).toString().equals("[{R}]"), "The mana the land can produce should be [{R}] but it's " + playerA.getManaAvailable(currentGame).toString());
     }
 
     /**
@@ -272,7 +272,7 @@ public class BloodMoonTest extends CardTestPlayerBase {
         assertType("Mutavault", CardType.LAND, SubType.MOUNTAIN);
         assertType("Swamp", CardType.LAND, SubType.SWAMP);
 
-        Assert.assertTrue("The mana the land can produce should be [{R}] but it's " + playerA.getManaAvailable(currentGame).toString(), playerA.getManaAvailable(currentGame).toString().equals("[{R}]"));
+        Assertions.assertTrue(playerA.getManaAvailable(currentGame).toString().equals("[{R}]"), "The mana the land can produce should be [{R}] but it's " + playerA.getManaAvailable(currentGame).toString());
     }
 
     @Test
@@ -303,7 +303,7 @@ public class BloodMoonTest extends CardTestPlayerBase {
         assertType("Mutavault", CardType.LAND, SubType.MOUNTAIN);
         assertType("Swamp", CardType.LAND, SubType.SWAMP);
 
-        Assert.assertTrue("The mana the lands can produce should be [{B}{R}] but it's " + playerA.getManaAvailable(currentGame).toString(), playerA.getManaAvailable(currentGame).toString().equals("[{B}{R}]"));
+        Assertions.assertTrue(playerA.getManaAvailable(currentGame).toString().equals("[{B}{R}]"), "The mana the lands can produce should be [{B}{R}] but it's " + playerA.getManaAvailable(currentGame).toString());
     }
 
     /**
@@ -375,7 +375,7 @@ public class BloodMoonTest extends CardTestPlayerBase {
      * with single mana ability and no other.
      */
     @Test
-    @Ignore
+    @Disabled
     public void testBloodMoonMadblindMountain() {
         // {T}: Add {R}.
         // Madblind Mountain enters the battlefield tapped.

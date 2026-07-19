@@ -2,8 +2,8 @@ package org.mage.test.cards.continuous;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 public class ConcurrentModificationExceptionTest extends CardTestPlayerBaseWithAIHelps {
@@ -11,7 +11,7 @@ public class ConcurrentModificationExceptionTest extends CardTestPlayerBaseWithA
 
     // see details here: https://github.com/magefree/mage/commit/d202278ccd6876f8113d26951e6bd018f6e9b792
 
-    @Ignore // debug only: too slow, only for manual run (use multi run to ensure)
+    @Disabled // debug only: too slow, only for manual run (use multi run to ensure)
     @Test
     public void massWarpWorld() {
         removeAllCardsFromLibrary(playerA);

@@ -4,8 +4,8 @@ import mage.abilities.mana.ManaOptions;
 import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
@@ -77,7 +77,7 @@ public class SasayaOrochiAscendantTest extends CardTestPlayerBase {
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
 
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assertions.assertEquals(1, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{G}{G}{G}{G}{G}", manaOptions);
 
     }
@@ -112,7 +112,7 @@ public class SasayaOrochiAscendantTest extends CardTestPlayerBase {
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
 
-        Assert.assertEquals("mana variations don't fit", 3, manaOptions.size());
+        Assertions.assertEquals(3, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{C}{C}{C}{G}{G}", manaOptions);
         assertManaOptions("{G}{G}{G}{G}{G}", manaOptions);
         assertManaOptions("{G}{G}{W}{W}{W}", manaOptions);
@@ -151,7 +151,7 @@ public class SasayaOrochiAscendantTest extends CardTestPlayerBase {
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
 
-        Assert.assertEquals("mana variations don't fit", 4, manaOptions.size());
+        Assertions.assertEquals(4, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{R}{R}{R}{R}{G}{G}{G}{G}{G}", manaOptions);
         assertManaOptions("{R}{R}{R}{G}{G}{G}{G}{G}{G}", manaOptions);
         assertManaOptions("{R}{R}{G}{G}{G}{G}{G}{G}{G}", manaOptions);

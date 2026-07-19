@@ -3,8 +3,8 @@ package org.mage.test.cards.single.soi;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -37,7 +37,7 @@ public class FlamebladeAngelTest extends CardTestPlayerBase {
         execute();
 
         Permanent roots = getPermanent("Wall of Roots", playerA);
-        Assert.assertEquals("Wall of Roots should have 2 damage dealt to it", 2, roots.getDamage());
+        Assertions.assertEquals(2, roots.getDamage(), "Wall of Roots should have 2 damage dealt to it");
         assertGraveyardCount(playerB, "Shock", 1);
         assertLife(playerA, 20);
         assertLife(playerB, 19); // Angel should deal 1 damage to Shock's controller
@@ -64,7 +64,7 @@ public class FlamebladeAngelTest extends CardTestPlayerBase {
         execute();
 
         Permanent roots = getPermanent("Wall of Roots", playerA);
-        Assert.assertEquals("Wall of Roots should have 2 damage dealt to it", 2, roots.getDamage());
+        Assertions.assertEquals(2, roots.getDamage(), "Wall of Roots should have 2 damage dealt to it");
         assertGraveyardCount(playerB, "Shock", 2);
         assertGraveyardCount(playerA, "Grizzly Bears", 1);
         assertLife(playerA, 20);
@@ -92,7 +92,7 @@ public class FlamebladeAngelTest extends CardTestPlayerBase {
         execute();
 
         Permanent roots = getPermanent("Wall of Roots", playerA);
-        Assert.assertEquals("Wall of Roots should have 3 damage dealt to it", 3, roots.getDamage());
+        Assertions.assertEquals(3, roots.getDamage(), "Wall of Roots should have 3 damage dealt to it");
         assertGraveyardCount(playerA, "Grizzly Bears", 1);
         assertGraveyardCount(playerB, "Elite Vanguard", 1);
         assertLife(playerA, 20);
