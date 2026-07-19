@@ -60,6 +60,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Tinybones, Pocket Nuisance", 237, Rarity.UNCOMMON, mage.cards.t.TinybonesPocketNuisance.class));
         cards.add(new SetCardInfo("Titanbones, Towering Heart", 266, Rarity.UNCOMMON, mage.cards.t.TitanbonesToweringHeart.class));
         cards.add(new SetCardInfo("Vigorbloom Vanguard", 161, Rarity.UNCOMMON, mage.cards.v.VigorbloomVanguard.class));
+        cards.add(new SetCardInfo("Woodwork Prodigy", 165, Rarity.UNCOMMON, mage.cards.w.WoodworkProdigy.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
     }
