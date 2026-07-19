@@ -631,6 +631,7 @@ public class ScryfallImageSupportCards {
             add("HOB"); // The Hobbit
             add("HOC"); // The Hobbit Commander
             add("FRA"); // Reality Fracture
+            add("FRC"); // Reality Fracture Commander
             add("TRK"); // Star Trek
             add("TRC"); // Star Trek Commander
             add("SDS"); // Stardates

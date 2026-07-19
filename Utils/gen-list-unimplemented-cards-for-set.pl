@@ -167,7 +167,9 @@ my $template = Text::Template->new(TYPE => 'FILE', SOURCE => $templateFile, DELI
 $vars{'unimplementedCount'} = scalar(@unimplementedCards);
 $vars{'implementedCount'} = scalar(@implementedCards);
 $vars{'totalCount'} = scalar(@unimplementedCards) + scalar(@implementedCards);
-$vars{'unimplemented'} = join("\n", sort @unimplementedCards);
+$vars{'unimplemented'} = @unimplementedCards
+    ? join("\n", sort @unimplementedCards)
+    : "All cards currently implemented";
 $vars{'implemented'} = join("\n", sort @implementedCards);
 $vars{'setName'} = $setName;
 $vars{'unimplementedUrl'} = $unimplementedUrl;
