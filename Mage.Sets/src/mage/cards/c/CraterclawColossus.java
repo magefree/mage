@@ -25,7 +25,7 @@ import java.util.UUID;
 public final class CraterclawColossus extends CardImpl {
 
     public CraterclawColossus(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{R}{R}{R}");
         this.subtype.add(SubType.BEAST);
         this.subtype.add(SubType.CONSTRUCT);
 

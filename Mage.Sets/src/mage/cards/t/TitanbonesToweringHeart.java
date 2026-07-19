@@ -20,12 +20,12 @@ import java.util.UUID;
 public final class TitanbonesToweringHeart extends CardImpl {
 
     public TitanbonesToweringHeart(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
 
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SKELETON);
-        this.subtype.add(SubType.ROGUE);
-        this.power = new MageInt(1);
+        this.subtype.add(SubType.DRUID);
+        this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
         // Reach
