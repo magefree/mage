@@ -64,6 +64,10 @@ public class SpellStack extends ArrayDeque<StackObject> {
     public boolean remove(StackObject object, Game game) {
         for (StackObject spell : this) {
             if (spell.getId().equals(object.getId())) {
+                // remember lki of the spell and ability, see example with Unbound Flourishing 
+                // in test_OnActivatedAbility_MustCopy2Counter
+                game.rememberLKI(Zone.STACK, object);
+                
                 game.getState().setZone(spell.getId(), null);
                 return super.remove(spell);
             }
@@ -96,7 +100,6 @@ public class SpellStack extends ArrayDeque<StackObject> {
                 if (!(stackObject instanceof Spell) 
                         || stackObject.isCopy()) { // !ensure that copies of stackobjects have their history recorded ie: Swan Song
                     this.remove(stackObject, game);
-                    game.rememberLKI(Zone.STACK, stackObject);
                 }
                 stackObject.counter(source, game, putCard);
                 if (!game.isSimulation()) {
