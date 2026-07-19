@@ -27,11 +27,9 @@ public enum CastFromHandSourcePermanentCondition implements Condition {
         }
         if (permanent != null) {
             // check that the spell is still in the LKI
-            Spell spell = game.getStack().getSpell(source.getSourceId());
+            Spell spell = game.getSpellOrLKIStack(permanent);
             if (spell == null || spell.getZoneChangeCounter(game) != permanent.getZoneChangeCounter(game) + zccDiff) {
-                if (game.getLastKnownInformation(source.getSourceId(), Zone.STACK, permanent.getZoneChangeCounter(game) + zccDiff) == null) {
-                    return false;
-                }
+                return false;
             }
             CastFromHandWatcher watcher = game.getState().getWatcher(CastFromHandWatcher.class);
             if (watcher != null && watcher.spellWasCastFromHand(source.getSourceId())) {
