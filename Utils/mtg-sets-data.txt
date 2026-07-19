@@ -238,6 +238,7 @@ Portal Three Kingdoms|PTK|PortalThreeKingdoms|
 Ravnica Allegiance|RNA|RavnicaAllegiance|
 Ravnica: City of Guilds|RAV|RavnicaCityOfGuilds|
 Reality Fracture|FRA|RealityFracture|
+Reality Fracture Commander|FRC|RealityFractureCommander|
 Jurassic World Collection|REX|JurassicWorldCollection|
 Rivals of Ixalan|RIX|RivalsOfIxalan|
 Rise of the Eldrazi|ROE|RiseOfTheEldrazi|
