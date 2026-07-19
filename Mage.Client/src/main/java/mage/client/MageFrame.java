@@ -46,6 +46,7 @@ import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
 import mage.util.DebugUtil;
+import mage.util.JavaUtil;
 import mage.util.ThreadUtils;
 import mage.util.XmageThreadFactory;
 import mage.utils.MageVersion;
@@ -1521,8 +1522,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
      * @param args the command line arguments
      */
     public static void main(final String[] args) {
-        // Workaround for #451
-        System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
+        JavaUtil.applyDefaultClientSettings();
+
         LOGGER.info("Starting MAGE CLIENT version: " + VERSION);
         LOGGER.info("Java version: " + System.getProperty("java.version"));
         LOGGER.info("Logging level: " + LOGGER.getEffectiveLevel());

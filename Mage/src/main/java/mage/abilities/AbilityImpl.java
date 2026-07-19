@@ -764,7 +764,7 @@ public abstract class AbilityImpl implements Ability {
     }
 
     /**
-     * 601.2b Choose targets for costs that have to be chosen early.
+     * 601.5 Choose targets for costs that have to be chosen early.
      */
     private void handleChooseCostTargets(Game game, Player controller) {
         for (Cost cost : getCosts()) {
@@ -995,10 +995,11 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public void addWatcher(Watcher watcher) {
+    public Ability addWatcher(Watcher watcher) {
         watcher.setSourceId(this.sourceId);
         watcher.setControllerId(this.controllerId);
         getWatchers().add(watcher);
+        return this;
     }
 
     @Override

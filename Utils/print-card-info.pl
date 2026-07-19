@@ -8,11 +8,10 @@ use utf8;
 use open ':std', ':encoding(UTF-8)';
 
 my $dataFile = 'mtg-cards-data.txt';
-my $setsFile = 'mtg-sets-data.txt';
 my $cardInfoTemplate = 'cardInfo.tmpl';
 
 my %cards;
-my %sets;
+
 
 sub toCamelCase {
     my $string = $_[0];
@@ -44,15 +43,12 @@ sub printCardInfo {
 
     # Combine power and toughness if they exist
     my $powerToughness = "";
-    if ($card[6] && $card[7] && $card[6] ne "" && $card[7] ne "") {
+    if (defined $card[6] && defined $card[7] && $card[6] ne "" && $card[7] ne "") {
         $powerToughness = "$card[6]/$card[7]";
     }
     $vars{'powerToughness'} = $powerToughness;
 
-    my $cardAbilities = $card[8];
-    my @abilities = split(/\$/, $cardAbilities);
-    my $abilitiesFormatted = join("\n    ", @abilities);
-    $vars{'abilities'} = $abilitiesFormatted;
+    $vars{'abilities'} = join("\n    ", split(/\$/, $card[8]));
 
     my $result = $infoTemplate->fill_in(HASH => \%vars);
     print "$result\n\n";
@@ -66,12 +62,6 @@ while (my $line = <DATA>) {
 }
 close(DATA);
 
-open(DATA, $setsFile) || die "can't open $setsFile : $!";
-while (my $line = <DATA>) {
-    my @data = split('\\|', $line);
-    $sets{$data[0]} = $data[1];
-}
-close(DATA);
 
 # Get card names from arguments
 my @cardNames = @ARGV;

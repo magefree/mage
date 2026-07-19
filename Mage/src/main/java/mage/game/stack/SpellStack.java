@@ -44,8 +44,9 @@ public class SpellStack extends ArrayDeque<StackObject> {
         } finally {
             if (top != null) {
                 if (contains(top)) {
-                    logger.warn("StackObject was still on the stack after resolving" + top.getName());
-                    this.remove(top, game);
+                    // no server logs... impossible use case?
+                    throw new IllegalStateException("Something wrong: StackObject was still on the stack after resolving - " + top.getName());
+                    //this.remove(top, game);
                 }
             }
         }
@@ -64,6 +65,10 @@ public class SpellStack extends ArrayDeque<StackObject> {
     public boolean remove(StackObject object, Game game) {
         for (StackObject spell : this) {
             if (spell.getId().equals(object.getId())) {
+                // remember lki of the spell and ability, see example with Unbound Flourishing 
+                // in test_OnActivatedAbility_MustCopy2Counter
+                game.rememberLKI(Zone.STACK, object);
+                
                 game.getState().setZone(spell.getId(), null);
                 return super.remove(spell);
             }
@@ -95,8 +100,8 @@ public class SpellStack extends ArrayDeque<StackObject> {
                 // spells are removed from stack by the card movement
                 if (!(stackObject instanceof Spell) 
                         || stackObject.isCopy()) { // !ensure that copies of stackobjects have their history recorded ie: Swan Song
-                    this.remove(stackObject, game);
-                    game.rememberLKI(Zone.STACK, stackObject);
+                    // TODO: need copy tests, see #12911
+                    this.remove(stackObject, game); // ?
                 }
                 stackObject.counter(source, game, putCard);
                 if (!game.isSimulation()) {

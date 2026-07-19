@@ -74,6 +74,10 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
     @Override
     public int manaValue() {
+        // 202.3.
+        // The mana value of an object is a number equal to the total amount of mana in its mana cost, 
+        // regardless of color.
+        // Example: A mana cost of {3}{U}{U} translates to a mana value of 5.
         int total = 0;
         for (ManaCost cost : this) {
             total += cost.manaValue();

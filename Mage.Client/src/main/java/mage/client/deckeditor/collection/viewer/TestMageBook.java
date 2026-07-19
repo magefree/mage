@@ -12,6 +12,7 @@ import javax.swing.*;
  */
 public class TestMageBook extends JFrame {
     public static void main(String[] args) {
+        // TODO: single form run is outdated, need to remove
         Plugins.instance.loadPlugins();
         SvgUtils.checkSvgSupport();
         ManaSymbols.loadImages();

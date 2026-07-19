@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -62,7 +63,7 @@ public final class RatchetFieldMedic extends TransformingDoubleFacedCard {
                 new RatchetFieldMedicEffect(), true
         );
         ability.addWatcher(new PlayerGainedLifeWatcher());
-        this.getLeftHalfCard().addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability.addHint(ControllerGainedLifeCount.getHint()));
 
         // Ratchet, Rescue Racer
         this.getRightHalfCard().setPT(1, 4);

@@ -104,7 +104,9 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     Spell getSpell(UUID spellId);
 
-    Spell getSpellOrLKIStack(UUID spellId);
+    Spell getSpellOrLKIStack(UUID spellOrSourceId);
+
+    Spell getSpellOrLKIStack(MageObject sourceObject);
 
     /**
      * Find permanent on the battlefield by id. If you works with cards and want to check it on battlefield then

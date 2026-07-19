@@ -10,22 +10,9 @@ use strict;
 use Scalar::Util qw(looks_like_number);
 
 my $dataFile = "mtg-cards-data.txt";
-my $setsFile = "mtg-sets-data.txt";
 
-my %sets;
-
-my @setCards;
 my %nameSetNumber;
 my %setNumber;
-
-open (DATA, $setsFile) || die "can't open $setsFile";
-
-while(my $line = <DATA>)
-{
-    my @data = split('\\|', $line);
-    $sets{$data[0]}= $data[1];
-}
-close(DATA);
 
 
 sub toCamelCase

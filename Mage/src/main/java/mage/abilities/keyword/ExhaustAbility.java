@@ -4,6 +4,7 @@ import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
 import mage.constants.AsThoughEffectType;
+import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
 
@@ -19,8 +20,13 @@ public class ExhaustAbility extends ActivatedAbilityImpl {
     }
 
     public ExhaustAbility(Effect effect, Cost cost, boolean withReminderText) {
+        this(effect, cost, withReminderText, false);
+    }
+
+    public ExhaustAbility(Effect effect, Cost cost, boolean withReminderText, boolean activateAsSorcery) {
         super(Zone.BATTLEFIELD, effect, cost);
         this.withReminderText = withReminderText;
+        timing = activateAsSorcery ? TimingRule.SORCERY : TimingRule.INSTANT;
     }
 
     private ExhaustAbility(final ExhaustAbility ability) {
@@ -51,6 +57,7 @@ public class ExhaustAbility extends ActivatedAbilityImpl {
     @Override
     public String getRule() {
         return "Exhaust &mdash; " + super.getRule() +
+                (timing == TimingRule.SORCERY ? " Activate only as a sorcery." : "") +
                 (withReminderText ? " <i>(Activate each exhaust ability only once.)</i>" : "");
     }
 }

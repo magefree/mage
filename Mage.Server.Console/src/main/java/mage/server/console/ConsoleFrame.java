@@ -5,6 +5,7 @@ import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
+import mage.util.JavaUtil;
 import mage.util.ThreadUtils;
 import mage.util.XmageThreadFactory;
 import mage.utils.MageVersion;
@@ -216,6 +217,8 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        JavaUtil.applyDefaultClientSettings();
+
         logger.info("Starting MAGE ADMIN version " + version);
         logger.info("Java version: " + System.getProperty("java.version"));
         logger.info("Logging level: " + logger.getEffectiveLevel());

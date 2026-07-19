@@ -84,4 +84,23 @@ public class TorporOrbTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Highland Game", 1);
     }
 
+    @Test
+    public void testMoonshadow() {
+        addCard(Zone.HAND, playerA, "Torpor Orb");
+        addCard(Zone.HAND, playerA, "Moonshadow");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
+        addCard(Zone.BATTLEFIELD, playerA, "Mogg Fanatic");
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Moonshadow");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Torpor Orb");
+        activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sacrifice");
+        addTarget(playerA, playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPowerToughness(playerA, "Moonshadow", 2, 2);
+    }
 }

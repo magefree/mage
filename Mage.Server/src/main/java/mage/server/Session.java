@@ -378,8 +378,8 @@ public class Session {
         this.userId = user.getId();
     }
 
-    public boolean setUserData(String userName, UserData userData, String clientVersion, String userIdStr) {
-        Optional<User> _user = managerFactory.userManager().getUserByName(userName);
+    public boolean setUserData(UserData userData, String clientVersion, String userIdStr) {
+        Optional<User> _user = managerFactory.userManager().getUser(userId);
         _user.ifPresent(user -> {
             if (clientVersion != null) {
                 user.setClientVersion(clientVersion);

@@ -54,7 +54,7 @@ public final class TormentOfScarabs extends CardImpl {
                                 new DiscardCardCost()
                         ),
                         "Sacrifice a nonland permanent or discard a card to prevent losing 3 life?"
-                ), false
+                ).withTheyText(), false
         ));
     }
 
