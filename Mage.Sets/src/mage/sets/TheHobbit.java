@@ -28,6 +28,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Bilbo, Thief in the Night", 219, Rarity.MYTHIC, mage.cards.b.BilboThiefInTheNight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bilbo, Thief in the Night", 255, Rarity.MYTHIC, mage.cards.b.BilboThiefInTheNight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bilbo, Thief in the Night", 33, Rarity.MYTHIC, mage.cards.b.BilboThiefInTheNight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Burn, Burn, Tree and Fern", 90, Rarity.UNCOMMON, mage.cards.b.BurnBurnTreeAndFern.class));
         cards.add(new SetCardInfo("Forest", 198, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART));
         cards.add(new SetCardInfo("Island", 195, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART));
         cards.add(new SetCardInfo("Mountain", 197, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART));
@@ -55,6 +56,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("The Arkenstone", 247, Rarity.MYTHIC, mage.cards.t.TheArkenstone.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("The Arkenstone", 270, Rarity.MYTHIC, mage.cards.t.TheArkenstone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Arkenstone", 283, Rarity.MYTHIC, mage.cards.t.TheArkenstone.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Chief Warg", 150, Rarity.UNCOMMON, mage.cards.t.TheChiefWarg.class));
         cards.add(new SetCardInfo("The Lonely Mountain", 187, Rarity.RARE, mage.cards.t.TheLonelyMountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Lonely Mountain", 207, Rarity.RARE, mage.cards.t.TheLonelyMountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Lonely Mountain", 248, Rarity.RARE, mage.cards.t.TheLonelyMountain.class, NON_FULL_USE_VARIOUS));
