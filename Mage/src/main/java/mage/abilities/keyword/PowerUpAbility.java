@@ -61,7 +61,7 @@ public class PowerUpAbility extends ActivatedAbilityImpl {
                 .map(p -> p.getAbilities(game))
                 .flatMap(Collection::stream)
                 .filter(PowerUpAbility.PowerUpMoreAbility.class::isInstance)
-                .count() + 1;
+                .count() + maxActivationsPerGame;
     }
 
     @Override
