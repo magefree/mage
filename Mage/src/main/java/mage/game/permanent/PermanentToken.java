@@ -155,7 +155,7 @@ public class PermanentToken extends PermanentImpl {
 
     @Override
     public Card getMainCard() {
-        // if you need original card of token then use getCopySourceCard() instead of getMainCard()
+        // if you need original card of token then use getCopyFrom() instead of getMainCard()
         return super.getMainCard();
     }
 

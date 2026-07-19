@@ -12,7 +12,7 @@ import mage.constants.SetType;
  */
 public final class RealityFracture extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Bloodline Recollector");
+    private static final List<String> unfinished = Arrays.asList("Bloodline Recollector", "Paradox Shaper", "Prudent Fateseer", "Stingerquill Voxmancer", "Vigorbloom Vanguard", "Woodwork Prodigy");
     private static final RealityFracture instance = new RealityFracture();
 
     public static RealityFracture getInstance() {
@@ -37,6 +37,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Stingcaster Mage", 447, Rarity.MYTHIC, mage.cards.s.StingcasterMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stingcaster Mage", 457, Rarity.MYTHIC, mage.cards.s.StingcasterMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stingcaster Mage", 93, Rarity.MYTHIC, mage.cards.s.StingcasterMage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Titanbones, Towering Heart", 266, Rarity.UNCOMMON, mage.cards.t.TitanbonesToweringHeart.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
     }
