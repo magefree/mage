@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.triggers;
 
 import mage.cards.Card;
@@ -463,6 +462,64 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Carrion Feeder", 0);
         assertPermanentCount(playerA, "Carrion Feeder", 0);
         assertHandCount(playerA, "Carrion Feeder", 1);
+    }
+
+    @Test
+    public void test_ReturnToHandTargetEffect_CanWorkWithCopies() {
+        // possible bugs:
+        // - remove original spell lead to also remove copied spell
+        // - can't remove copied spell from stack
+
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1); // {R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        //
+        // Choose one - Destroy target nonland permanent with converted mana cost 3 or less.
+        // Copy target instant or sorcery spell. You may choose new targets for the copy.
+        // Return target card from your graveyard to your hand.
+        addCard(Zone.HAND, playerA, "Ferocity of the Underworld", 3); // {B}{R}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        //
+        // Return target spell to its owner's hand.
+        // Draw a card.
+        addCard(Zone.HAND, playerA, "Reprieve", 3); // {1}{W}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3 * 2);
+
+        // cast bolt and copy it
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ferocity of the Underworld");
+        setModeChoice(playerA, "2"); // copy target instant or sorcery spell
+        addTarget(playerA, "Cast Lightning Bolt");
+        setChoice(playerA, false); // do not choose new targets for the copy
+        checkStackSize("original and copier", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2);
+        //
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
+        checkStackObject("must have x2 bolts", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lightning Bolt", 2);
+
+        // remove original spell
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reprieve", "Cast Lightning Bolt[no copy]");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
+        checkStackObject("must have x1 bolt (original only)", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lightning Bolt", 1);
+        runCode("check copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            int count = (int) game.getStack().stream()
+                    .filter(stackObject -> stackObject.getName().equals("Lightning Bolt"))
+                    .filter(stackObject -> stackObject.isCopy())
+                    .count();
+            Assert.assertEquals(info + " — must have x1 bolt (copy only)", 1, count);
+        });
+
+        // remove copied spell
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reprieve", "Cast Lightning Bolt");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
+        checkStackSize("must have x0 bolts", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 0);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
     }
 
 }

@@ -134,4 +134,39 @@ public class BaronHelmutZemoTest extends CardTestPlayerBase {
         }
         fail("Was able to pick [[Abomination]] but it must be unavailable on second boast");
     }
+
+    @Test
+    public void test_Boast_CastWithEtb() {
+        // possible bug: miss etb trigger on cast, see #15240
+        skipInitShuffling();
+
+        // Whenever you cast a black spell from your hand, Baron Helmut Zemo connives.
+        //
+        // Boast — Exile any number of black cards from your graveyard with fifteen or more black mana symbols 
+        // among their mana costs: Copy those exiled cards. You may cast up to three of the copies without paying 
+        // their mana costs. (Activate only if this creature attacked this turn and only once each turn.)
+        addCard(Zone.BATTLEFIELD, playerA, "Baron Helmut Zemo");
+        //
+        // When this creature enters, if it was cast, each player exiles all but the bottom six 
+        // cards of their library face down. At the beginning of your upkeep, draw a card.
+        addCard(Zone.GRAVEYARD, playerA, "Doomsday Excruciator", 5); // {B}{B}{B}{B}{B}{B}
+
+        attack(1, playerA, "Baron Helmut Zemo");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Boast");
+        setChoice(playerA, "Doomsday Excruciator", 3);
+        setChoice(playerA, TestPlayer.CHOICE_SKIP); // stop to cards choose
+        // cast free 1
+        setChoice(playerA, "Doomsday Excruciator"); // cast free - choose card
+        setChoice(playerA, true); // cast free - confirm
+        //
+        setChoice(playerA, TestPlayer.CHOICE_SKIP); // stop to cards choose
+        setChoice(playerA, false); // stop to free cast
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLibraryCount(playerA, 6);
+        assertLibraryCount(playerB, 6);
+    }
 }
