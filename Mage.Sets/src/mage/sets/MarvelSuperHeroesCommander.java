@@ -698,6 +698,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Wiccan, Young Avenger", 557, Rarity.UNCOMMON, mage.cards.w.WiccanYoungAvenger.class));
         cards.add(new SetCardInfo("Wild Pack Squad", 781, Rarity.COMMON, mage.cards.w.WildPackSquad.class));
         cards.add(new SetCardInfo("Winter Soldier, Bucky Barnes", 845, Rarity.COMMON, mage.cards.w.WinterSoldierBuckyBarnes.class));
+        cards.add(new SetCardInfo("Winter Soldier, Reborn Avenger", 27, Rarity.RARE, mage.cards.w.WinterSoldierRebornAvenger.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Winter Soldier, Reborn Avenger", 326, Rarity.RARE, mage.cards.w.WinterSoldierRebornAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wisecrack", 813, Rarity.UNCOMMON, mage.cards.w.Wisecrack.class));
         cards.add(new SetCardInfo("Withering Torment", 162, Rarity.UNCOMMON, mage.cards.w.WitheringTorment.class));
         cards.add(new SetCardInfo("Wolfsbane, Highland Hero", 767, Rarity.COMMON, mage.cards.w.WolfsbaneHighlandHero.class));
