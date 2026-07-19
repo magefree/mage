@@ -619,6 +619,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("The Wasp, Winsome Avenger", 343, Rarity.RARE, mage.cards.t.TheWaspWinsomeAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Wasp, Winsome Avenger", 39, Rarity.RARE, mage.cards.t.TheWaspWinsomeAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Whizzer, Classic Speedster", 710, Rarity.UNCOMMON, mage.cards.t.TheWhizzerClassicSpeedster.class));
+        cards.add(new SetCardInfo("Thing Swing", 564, Rarity.COMMON, mage.cards.t.ThingSwing.class));
         cards.add(new SetCardInfo("Think Twice", 787, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
         cards.add(new SetCardInfo("Thor, Guardian of Midgard", 503, Rarity.RARE, mage.cards.t.ThorGuardianOfMidgard.class));
         cards.add(new SetCardInfo("Thought Vessel", 222, Rarity.UNCOMMON, mage.cards.t.ThoughtVessel.class));
