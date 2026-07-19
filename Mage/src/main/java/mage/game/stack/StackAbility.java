@@ -634,7 +634,7 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public void addWatcher(Watcher watcher) {
+    public Ability addWatcher(Watcher watcher) {
         throw new UnsupportedOperationException("Not supported.");
     }
 

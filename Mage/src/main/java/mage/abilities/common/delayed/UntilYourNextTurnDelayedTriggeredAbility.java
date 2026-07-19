@@ -2,10 +2,7 @@
 package mage.abilities.common.delayed;
 
 import mage.MageObject;
-import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.Modes;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.*;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.hint.Hint;
@@ -84,8 +81,9 @@ public class UntilYourNextTurnDelayedTriggeredAbility extends DelayedTriggeredAb
     }
 
     @Override
-    public void addWatcher(Watcher watcher) {
+    public Ability addWatcher(Watcher watcher) {
         ability.addWatcher(watcher);
+        return this;
     }
 
     @Override

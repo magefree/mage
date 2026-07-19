@@ -137,11 +137,12 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public void addWatcher(Watcher watcher) {
+    public Ability addWatcher(Watcher watcher) {
         super.addWatcher(watcher);
         for (TriggeredAbility ability : triggeredAbilities) {
             ability.addWatcher(watcher);
         }
+        return this;
     }
 
     @Override
