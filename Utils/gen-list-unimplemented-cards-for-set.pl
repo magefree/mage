@@ -175,7 +175,7 @@ $vars{'setName'} = $setName;
 $vars{'unimplementedUrl'} = $unimplementedUrl;
 my $result = $template->fill_in(HASH => \%vars);
 # Write the final issue tracker file
-my $outputFile = lc($sets{$setName}) . "_issue_tracker.txt";
+my $outputFile = "tmp/" . lc($sets{$setName}) . "_issue_tracker.txt";
 open(OUTPUT, "> $outputFile") || die "can't open $outputFile for writing";
 print OUTPUT $result;
 close(OUTPUT);

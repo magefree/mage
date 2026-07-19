@@ -52,6 +52,6 @@ foreach my $card (sort cardSort @setCards) {
     }   
     $toPrint .= "@{$card}[2]|@{$card}[0]"; 
 }
-open CARD, "> " . lc($sets{$setName}) . ".txt";
+open CARD, "> tmp/" . lc($sets{$setName}) . ".txt";
 print CARD $toPrint;
 close CARD;

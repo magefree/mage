@@ -41,7 +41,7 @@ while(my $line = <DATA>) {
 close(DATA);
 
 
-open CARDS, "< added_cards.txt" or die;
+open CARDS, "< tmp/added_cards.txt" or die;
 while (<CARDS>) {
     my $line = $_;
     if ( $line =~/(\w.*)\/(\w.*)\.java/ ) {
@@ -58,7 +58,7 @@ while (<CARDS>) {
     }
 }
 
-open REPORT, "> added_cards_in_wiki_format.txt";
+open REPORT, "> tmp/added_cards_in_wiki_format.txt";
 print REPORT "* Added cards ($cards_count):\n";
 foreach my $set (keys(%cards)) {
     if ($set ne "tokens") {

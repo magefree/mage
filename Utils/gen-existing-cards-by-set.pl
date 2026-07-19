@@ -2,11 +2,10 @@
 
 #author: North
 
-use Text::Template;
 use strict;
 
 
-my $authorFile = 'author.txt';
+my $authorFile = 'tmp/author.txt';
 my $dataFile = "mtg-cards-data.txt";
 my $setsFile = "mtg-sets-data.txt";
 
@@ -25,23 +24,11 @@ if(!$setName) {
     chomp $setName;
 }
 
-my $template = Text::Template->new(TYPE => 'FILE', SOURCE => 'cardExtendedClass.tmpl', DELIMITERS => [ '[=', '=]' ]);
-my $templateBasicLand = Text::Template->new(TYPE => 'FILE', SOURCE => 'cardExtendedLandClass.tmpl', DELIMITERS => [ '[=', '=]' ]);
-
 sub toCamelCase {
     my $string = $_[0];
     $string =~ s/\b([\w']+)\b/ucfirst($1)/ge;
     $string =~ s/[-,\s\'\/]//g;
     $string;
-}
-
-my $author;
-if (-e $authorFile) {
-    open (DATA, $authorFile);
-    $author = <DATA>;
-    close(DATA);
-} else {
-    $author = 'anonymous';
 }
 
 my $cardsFound = 0;
@@ -169,11 +156,6 @@ sub getRarity
 }
 
 # Generate the cards
-
-my %vars;
-$vars{'author'} = $author;
-$vars{'set'} = $knownSets{$setName};
-$vars{'expansionSetCode'} = $sets{$setName};
 
 my $landForest = 0;
 my $landMountain = 0;

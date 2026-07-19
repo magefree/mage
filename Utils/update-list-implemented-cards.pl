@@ -6,8 +6,8 @@ use strict;
 
 my $dataFile = "mtg-cards-data.txt";
 my $setsFile = "mtg-sets-data.txt";
-my $oldListFile = "oldList.txt";
-my $newListFile = "newList.txt";
+my $oldListFile = "tmp/oldList.txt";
+my $newListFile = "tmp/newList.txt";
 
 
 my %cardsBySet;
@@ -60,7 +60,7 @@ foreach my $setName (keys %knownSets) {
 }
 
 open (OLD, "> $oldListFile");
-open (NEW, "> newList.txt");
+open (NEW, "> $newListFile");
 foreach my $cardName (sort (keys %implementedCards)) {
     print OLD $cardName . "\n";
     if (!exists $oldList{$cardName}) {

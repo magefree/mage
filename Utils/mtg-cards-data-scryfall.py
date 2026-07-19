@@ -121,9 +121,10 @@ def parse_set_codes(argv):
     return set_codes
 
 # Loop through each set
+tmp_dir = os.path.join(os.path.dirname(__file__), "tmp")
 sets_data = parse_set_codes(sys.argv)
 for set_code in sets_data:
-    file_path = set_code.upper() + "-scryfall.json"
+    file_path = os.path.join(tmp_dir, set_code.upper() + "-scryfall.json")
 
     # Check if file doesn't exist or is stale (older than 24 hours)
     if is_file_stale(file_path, 24):
