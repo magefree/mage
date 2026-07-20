@@ -224,6 +224,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         // apply current theme
         GUISizeHelper.calculateGUISizes();
         GuiDisplayUtil.refreshThemeSettings();
+        ChineseUi.install();
 
         // workaround to stop JSplitPane from eating F6 and F8 or any other function keys
         Object value = UIManager.get("SplitPane.ancestorInputMap");
@@ -265,6 +266,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
 
         initComponents();
+        ChineseUi.translateTree(this);
 
         // auto-update switch panels button with actual stats
         desktopPane.addContainerListener(new ContainerAdapter() {

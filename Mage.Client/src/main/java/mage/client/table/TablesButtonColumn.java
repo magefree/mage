@@ -1,6 +1,7 @@
 package mage.client.table;
 
 import mage.client.util.GUISizeHelper;
+import mage.client.util.ChineseUi;
 
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;
@@ -68,14 +69,14 @@ public class TablesButtonColumn extends AbstractCellEditor implements TableCellR
             renderButton.setBackground(UIManager.getColor("Button.background"));
         }
 
-        renderButton.setText((value == null) ? "" : value.toString());
+        renderButton.setText(ChineseUi.tr((value == null) ? "" : value.toString()));
         return renderButton;
     }
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
         text = (value == null) ? "" : value.toString();
-        editButton.setText(text);
+        editButton.setText(ChineseUi.tr(text));
         return editButton;
     }
 
