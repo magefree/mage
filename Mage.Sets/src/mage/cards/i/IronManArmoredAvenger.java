@@ -1,25 +1,24 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.counters.CounterType;
-import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.filter.predicate.permanent.ModifiedPredicate;
-import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.counters.CounterType;
+import mage.filter.common.FilterAttackingCreature;
+import mage.filter.predicate.permanent.ModifiedPredicate;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,12 +27,10 @@ import mage.constants.Duration;
 public final class IronManArmoredAvenger extends CardImpl {
 
     private static final FilterAttackingCreature filter =
-        new FilterAttackingCreature("other attacking modified creatures you control");
+            new FilterAttackingCreature("attacking modified creatures");
 
     static {
-        filter.add(AnotherPredicate.instance);
         filter.add(ModifiedPredicate.instance);
-        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public IronManArmoredAvenger(UUID ownerId, CardSetInfo setInfo) {
@@ -55,7 +52,7 @@ public final class IronManArmoredAvenger extends CardImpl {
 
         // Whenever Iron Man attacks, other attacking modified creatures gain flying until end of turn.
         this.addAbility(new AttacksTriggeredAbility(
-            new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, filter, true)
+                new GainAbilityAllEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, filter, true)
         ));
     }
 
