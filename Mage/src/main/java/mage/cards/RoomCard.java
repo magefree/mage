@@ -78,13 +78,13 @@ public abstract class RoomCard extends SplitCard {
 
     public static void addRoomCharacteristics(Permanent permanent, RoomCard roomCard, Game game) {
         // 709.5.
-        // Some split cards are permanent cards with a single shared type line. A shared type line 
-        // on such an object represents two static abilities that function on the battlefield. These 
-        // are “As long as this permanent doesn’t have the ‘left half unlocked’ designation, it 
-        // doesn’t have the name, mana cost, or rules text of this object’s left half” and “As long 
-        // as this permanent doesn’t have the ‘right half unlocked’ designation, it doesn’t have the 
-        // name, mana cost, or rules text of this object’s right half.” These abilities, as well as 
-        // which half of that permanent a characteristic is in, are part of that object’s copiable 
+        // Some split cards are permanent cards with a single shared type line. A shared type line
+        // on such an object represents two static abilities that function on the battlefield. These
+        // are "As long as this permanent doesn't have the 'left half unlocked' designation, it
+        // doesn't have the name, mana cost, or rules text of this object's left half" and "As long
+        // as this permanent doesn't have the 'right half unlocked' designation, it doesn't have the
+        // name, mana cost, or rules text of this object's right half." These abilities, as well as
+        // which half of that permanent a characteristic is in, are part of that object's copiable
         // values.
 
         // add all rooms data, real rule apply by RoomCharacteristicsEffect
@@ -92,6 +92,9 @@ public abstract class RoomCard extends SplitCard {
 
         permanent.setName(roomCard.getName());
         permanent.setManaCost(roomCard.getManaCost());
+
+        // Clear stale triggers before re-adding (prevents duplicates on reset cycles)
+        game.getState().getTriggers().removeAbilitiesOfSource(permanent.getId());
 
         Abilities<Ability> leftAbilities = roomCard.getLeftHalfCard().getAbilities();
         for (Ability ability : leftAbilities) {

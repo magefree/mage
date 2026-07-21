@@ -201,10 +201,11 @@ public class RoomCharacteristicsEffect extends ContinuousEffectImpl {
             }
         }
         // restore removed abilities
-        // copies need abilities to be added back to game state for triggers
         SplitCard roomCard = (SplitCard) findRoomCard(permanent);
         UUID sourceId = permanent.isCopy() ? permanent.getId() : null;
-        Game gameParam = permanent.isCopy() ? game : null;
+        Game gameParam = game;
+        // Remove stale triggers from locked-half cleanup to prevent duplicates
+        game.getState().getTriggers().removeAbilitiesOfSource(permanent.getId());
         if (permanent.isLeftDoorUnlocked()) {
             for (Ability ability : roomCard.getLeftHalfCard().getAbilities()) {
                 permanent.addAbility(ability, sourceId, gameParam, true);
