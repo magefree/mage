@@ -1,12 +1,6 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.watchers.common.PermanentsSacrificedWatcher;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -17,6 +11,13 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.watchers.common.PermanentsSacrificedWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -65,5 +66,9 @@ enum CountNefariaCondition implements Condition {
 
     public static Hint getHint() {
         return hint;
+    }
+
+    public String toString() {
+        return "you've sacrificed a permanent this turn";
     }
 }

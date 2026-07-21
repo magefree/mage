@@ -1,7 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -13,6 +11,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.permanent.token.VibraniumToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +28,7 @@ public final class TheGreatMound extends CardImpl {
 
         // {3}, {T}: Create a tapped Vibranium token.
         Ability ability = new SimpleActivatedAbility(
-            new CreateTokenEffect(new VibraniumToken()),
+                new CreateTokenEffect(new VibraniumToken(), 1, true),
             new ManaCostsImpl<>("{3}")
         );
         ability.addCost(new TapSourceCost());

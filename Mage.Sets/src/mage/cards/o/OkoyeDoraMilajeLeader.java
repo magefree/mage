@@ -1,22 +1,23 @@
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SoldierToken;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,9 +44,8 @@ public final class OkoyeDoraMilajeLeader extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Okoye enters, create two 1/1 white Soldier creature tokens.
-        this.addAbility(new EntersBattlefieldAbility(
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
             new CreateTokenEffect(new SoldierToken(), 2)
-
         ));
 
         // Attacking creature tokens you control have first strike.

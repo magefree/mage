@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -13,13 +12,15 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DoWhenCostPaid;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetAnyTarget;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +44,7 @@ public final class BullseyeDeathDealer extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoWhenCostPaid(
             reflexive,
             new OrCost(
-                "Sacrifice an artifact or discard a nonland card?",
+                    "sacrifice an artifact or discard a nonland card",
                 new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN),
                 new DiscardCardCost(StaticFilters.FILTER_CARD_NON_LAND)
             ),
@@ -54,7 +55,7 @@ public final class BullseyeDeathDealer extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new ManaCostsImpl<>("{3}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new OrCost(
-            "Sacrifice an artifact or discard a nonland card?",
+                "sacrifice an artifact or discard a nonland card",
             new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN),
             new DiscardCardCost(StaticFilters.FILTER_CARD_NON_LAND)
         ));

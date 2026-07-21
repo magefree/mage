@@ -4,11 +4,7 @@ import mage.MageInt;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.effects.common.SacrificeAllEffect;
+import mage.abilities.effects.common.*;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -69,7 +65,7 @@ class TheRuinousWreckingCrewTriggeredAbility extends EntersBattlefieldTriggeredA
         super(new DiscardControllerEffect(1));
         this.addEffect(new DrawCardSourceControllerEffect(1).concatBy(", then"));
 
-        this.getModes().setChooseText("choose up to X");
+        this.getModes().setChooseText("choose up to X &mdash;");
         this.getModes().setMinModes(0);
 
         this.addMode(new Mode(new LoseLifeTargetEffect(2)).addTarget(new TargetOpponent()));

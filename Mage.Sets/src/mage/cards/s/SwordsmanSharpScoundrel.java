@@ -8,14 +8,9 @@ import mage.abilities.effects.common.AttachTargetToTargetEffect;
 import mage.abilities.effects.keyword.ConniveTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SetTargetPointer;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.EquippedPredicate;
@@ -30,15 +25,14 @@ import java.util.UUID;
  */
 public final class SwordsmanSharpScoundrel extends CardImpl {
 
-    private static final FilterControlledPermanent filter
-        = new FilterControlledPermanent(SubType.VILLAIN, "another Villain you control");
+    private static final FilterPermanent filter
+            = new FilterPermanent(SubType.VILLAIN, "another Villain");
     private static final FilterCreaturePermanent filter2
         = new FilterCreaturePermanent("equipped creature you control");
 
     static {
         filter.add(AnotherPredicate.instance);
         filter2.add(EquippedPredicate.instance);
-        filter2.add(TargetController.YOU.getControllerPredicate());
     }
 
     public SwordsmanSharpScoundrel(UUID ownerId, CardSetInfo setInfo) {

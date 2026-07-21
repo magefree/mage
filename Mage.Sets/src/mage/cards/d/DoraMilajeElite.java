@@ -1,12 +1,6 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.VibraniumToken;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
@@ -20,6 +14,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
+import mage.game.permanent.token.VibraniumToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +49,7 @@ public final class DoraMilajeElite extends CardImpl {
 
         // When this creature enters, if an opponent controls more lands than you, create a tapped Vibranium token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-            new CreateTokenEffect(new VibraniumToken(), 1, true), true
+                new CreateTokenEffect(new VibraniumToken(), 1, true), false
         ).withInterveningIf(condition));
 
         // Sacrifice this creature: Legendary permanents you control gain indestructible until end of turn.

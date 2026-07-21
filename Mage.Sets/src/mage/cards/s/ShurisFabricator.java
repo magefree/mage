@@ -1,7 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -16,6 +14,8 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.VibraniumToken;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +35,7 @@ public final class ShurisFabricator extends CardImpl {
             new ManaCostsImpl<>("{6}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }
 

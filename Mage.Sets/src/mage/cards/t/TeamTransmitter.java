@@ -1,7 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
-
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.mana.AnyColorManaAbility;
@@ -9,7 +7,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.FilterPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -17,7 +17,7 @@ import mage.filter.common.FilterControlledPermanent;
  */
 public final class TeamTransmitter extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.HERO);
+    private static final FilterPermanent filter = new FilterPermanent(SubType.HERO);
 
     public TeamTransmitter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

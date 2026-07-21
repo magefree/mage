@@ -1,10 +1,6 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.game.permanent.token.RobotHeroToken;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -14,6 +10,11 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.game.permanent.token.Robot11HeroToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class ShuriVibraniumTechnologist extends CardImpl {
 
         // When Shuri enters, choose one --
         // * Create a 1/1 colorless Robot Hero artifact creature token with flying.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new RobotHeroToken()));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new Robot11HeroToken()));
 
         // * Draw a card.
         ability.addMode(new Mode(new DrawCardSourceControllerEffect(1)));

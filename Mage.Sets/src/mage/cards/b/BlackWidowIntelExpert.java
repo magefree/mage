@@ -1,17 +1,18 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,8 +34,8 @@ public final class BlackWidowIntelExpert extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Whenever Black Widow deals combat damage to an opponent, you and that player each draw two cards.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
-            new DrawCardSourceControllerEffect(2).setText("you"), false, true
+        Ability ability = new DealsDamageToOpponentTriggeredAbility(
+                new DrawCardSourceControllerEffect(2).setText("you"), false, true, true
         );
         ability.addEffect(new DrawCardTargetEffect(2).setText("and that player each draw two cards"));
         this.addAbility(ability);

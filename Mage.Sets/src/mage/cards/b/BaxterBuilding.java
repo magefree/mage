@@ -1,7 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.Condition;
@@ -22,6 +20,8 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,12 +51,11 @@ public final class BaxterBuilding extends CardImpl {
         this.addAbility(ability);
 
         // {4}, {T}: Draw a card. Activate only if you control a creature with toughness 4 or greater.
-        this.addAbility(new ActivateIfConditionActivatedAbility(
-            Zone.BATTLEFIELD,
-            new DrawCardSourceControllerEffect(1),
-            new TapSourceCost(),
-            condition
-        ).addHint(hint));
+        Ability drawAbility = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
+                new DrawCardSourceControllerEffect(1), new GenericManaCost(4), condition);
+        drawAbility.addCost(new TapSourceCost());
+        drawAbility.addHint(hint);
+        this.addAbility(drawAbility);
     }
 
     private BaxterBuilding(final BaxterBuilding card) {

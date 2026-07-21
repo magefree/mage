@@ -32,7 +32,7 @@ public final class AuntMay extends CardImpl {
         // Whenever another creature you control enters, you gain 1 life. If it's a Spider, put a +1/+1 counter on it.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new GainLifeEffect(1),
-                StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL,
+                StaticFilters.FILTER_ANOTHER_CREATURE,
                 false, SetTargetPointer.PERMANENT
         );
         ability.addEffect(new AuntMayEffect());

@@ -1,22 +1,23 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SoldierToken;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +26,7 @@ import mage.constants.Duration;
 public final class BlackPantherVanguard extends CardImpl {
 
     private static final FilterControlledPermanent filter
-        = new FilterControlledPermanent(SubType.HERO, "another nontoken Hero");
+            = new FilterControlledPermanent(SubType.HERO, "another nontoken Hero you control");
 
     static {
         filter.add(AnotherPredicate.instance);

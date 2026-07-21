@@ -1,18 +1,10 @@
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetAnyTarget;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.ReachAbility;
@@ -20,6 +12,16 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,8 +29,8 @@ import mage.constants.Outcome;
  */
 public final class HawkeyeTrickShot extends CardImpl {
 
-    private static final FilterControlledPermanent filter =
-        new FilterControlledPermanent(SubType.HERO);
+    private static final FilterPermanent filter =
+            new FilterPermanent(SubType.HERO);
 
     public HawkeyeTrickShot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

@@ -1,8 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
-import mage.constants.SubType;
-import mage.filter.StaticFilters;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -16,6 +13,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,6 +25,7 @@ import mage.constants.Duration;
 public final class SwordsmansSteel extends CardImpl {
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_EQUIPMENT);
+    private static final DynamicValue x2Value = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_EQUIPMENT, 2);
     private static final Hint hint = new ValueHint("Equipment you control", xValue);
 
     public SwordsmansSteel(UUID ownerId, CardSetInfo setInfo) {
@@ -36,7 +38,7 @@ public final class SwordsmansSteel extends CardImpl {
 
         // Equipped creature gets +2/+2 for each Equipment you control.
         this.addAbility(new SimpleStaticAbility(
-            new BoostEquippedEffect(xValue, xValue, Duration.WhileOnBattlefield)
+            new BoostEquippedEffect(x2Value, x2Value, Duration.WhileOnBattlefield)
         ).addHint(hint));
 
         // Equip {3}
