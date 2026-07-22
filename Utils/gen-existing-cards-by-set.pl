@@ -2,11 +2,10 @@
 
 #author: North
 
-use Text::Template;
 use strict;
 
 
-my $authorFile = 'author.txt';
+my $authorFile = 'tmp/author.txt';
 my $dataFile = "mtg-cards-data.txt";
 my $setsFile = "mtg-sets-data.txt";
 
@@ -25,23 +24,11 @@ if(!$setName) {
     chomp $setName;
 }
 
-my $template = Text::Template->new(TYPE => 'FILE', SOURCE => 'cardExtendedClass.tmpl', DELIMITERS => [ '[=', '=]' ]);
-my $templateBasicLand = Text::Template->new(TYPE => 'FILE', SOURCE => 'cardExtendedLandClass.tmpl', DELIMITERS => [ '[=', '=]' ]);
-
 sub toCamelCase {
     my $string = $_[0];
     $string =~ s/\b([\w']+)\b/ucfirst($1)/ge;
     $string =~ s/[-,\s\'\/]//g;
     $string;
-}
-
-my $author;
-if (-e $authorFile) {
-    open (DATA, $authorFile);
-    $author = <DATA>;
-    close(DATA);
-} else {
-    $author = 'anonymous';
 }
 
 my $cardsFound = 0;
@@ -170,17 +157,6 @@ sub getRarity
 
 # Generate the cards
 
-my %vars;
-$vars{'author'} = $author;
-$vars{'set'} = $knownSets{$setName};
-$vars{'expansionSetCode'} = $sets{$setName};
-
-my $landForest = 0;
-my $landMountain = 0;
-my $landSwamp = 0;
-my $landPlains = 0;
-my $landIsland = 0;
-
 print ("Reading in existing cards in set\n");
 open (SET_FILE, "../../mage/Mage.Sets/src/mage/sets/$knownSets{$setName}.java") || die "can't open $dataFile";
 my %alreadyIn;
@@ -210,22 +186,6 @@ foreach $name_collectorid (sort @setCards)
     $cardNr = $2;
     {
         if($cardName eq "Forest" || $cardName eq "Island" || $cardName eq "Plains" || $cardName eq "Swamp" || $cardName eq "Mountain") {
-            my $found = 0;
-            if ($cardName eq "Forest") {
-                $landForest++;
-            }
-            if ($cardName eq "Mountain") {
-                $landMountain++;
-            }
-            if ($cardName eq "Swamp") {
-                $landSwamp++;
-            }
-            if ($cardName eq "Plains") {
-                $landPlains++;
-            }
-            if ($cardName eq "Island") {
-                $landIsland++;
-            }
             if (!exists ($alreadyIn{$cardNr})) {
                 print ("        cards.add(new SetCardInfo(\"$cardName\", $cardNr, Rarity.LAND, mage.cards.basiclands.$cardName.class, USE_RANDOM_ART));\n");
             }

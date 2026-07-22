@@ -31,12 +31,6 @@ Mage.Verify/*.json
 
 # Utils
 __pycache__
-Utils/*-scryfall.json
-Utils/author.txt
-
-# TODO: remove with outdated perl scripts
-Utils/*_tracker.txt
-Utils/*implemented.txt
 
 # dev environments, IDE and OS
 # IntelliJ IDEA
