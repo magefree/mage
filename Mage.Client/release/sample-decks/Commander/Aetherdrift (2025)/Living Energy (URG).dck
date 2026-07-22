@@ -1,0 +1,89 @@
+1 [DRC:58] Academy Ruins
+1 [DRC:16] Adaptive Omnitool
+1 [DRC:145] Aether Hub
+1 [DRC:17] Aetherflux Conduit
+1 [DRC:18] Aetheric Amplifier
+1 [DRC:68] Aethersquall Ancient
+1 [DRC:69] Aethertide Whale
+1 [DRC:107] Aetherwind Basker
+1 [DRC:123] Aetherworks Marvel
+1 [DRC:70] Arcane Denial
+1 [DRC:52] Arcane Signet
+1 [DRC:108] Architect of the Untamed
+1 [DRC:109] Attune with Aether
+1 [DRC:71] Bespoke Battlewagon
+1 [DRC:101] Blasphemous Act
+1 [DRC:110] Bootleggers' Stash
+1 [DRC:47] Chain Reaction
+1 [DRC:48] Chaos Warp
+1 [DRC:53] Chromatic Lantern
+1 [DRC:102] Combustible Gearhulk
+1 [DRC:60] Command Tower
+1 [DRC:125] Commander's Sphere
+1 [DRC:73] Confiscation Coup
+1 [DRC:126] Conjurer's Closet
+1 [DRC:127] Cultivator's Caravan
+1 [DRC:128] Decoction Module
+1 [DRC:74] Disallow
+1 [DRC:49] Druid of Purification
+1 [DRC:54] Duplicant
+1 [DRC:111] Elder Gargaroth
+1 [DRC:75] Era of Innovation
+1 [DRC:154] Evolving Wilds
+1 [DRC:155] Exotic Orchard
+1 [DRC:112] Explosive Vegetation
+6 [DFT:289] Forest
+1 [DRC:157] Frontier Bivouac
+1 [DRC:158] Frostboil Snarl
+1 [DRC:78] Glimmer of Genius
+1 [DRC:160] Hinterland Harbor
+5 [DFT:280] Island
+1 [DRC:163] Karplusan Forest
+1 [DRC:55] Lightning Greaves
+1 [DRC:103] Lightning Runner
+1 [DRC:104] Loyal Apprentice
+1 [DRC:79] Midnight Clock
+5 [DFT:288] Mountain
+1 [DRC:13] Nissa, Worldsoul Speaker
+1 [DRC:80] One with the Machine
+1 [DRC:133] Ornithopter of Paradise
+1 [DRC:165] Overflowing Basin
+1 [DRC:135] Panharmonicon
+1 [DRC:166] Path of Ancestry
+1 [DRC:113] Peema Aether-Seer
+1 [DRC:14] Peema Trailblazer
+1 [DRC:105] Pia and Kiran Nalaar
+1 [DRC:2] Pia Nalaar, Chief Mechanic
+1 [DRC:15] Rampaging Aetherhood
+1 [DRC:39] Reality Shift
+1 [DRC:106] Reckless Fireweaver
+1 [DRC:136] Retrofitter Foundry
+1 [DRC:118] Rogue Refiner
+1 [DRC:168] Rootbound Crag
+1 [DRC:119] Saheeli, Sublime Artificer
+1 [DRC:82] Sai, Master Thopterist
+1 [DRC:114] Servant of the Conduit
+1 [DRC:169] Sheltered Thicket
+1 [DRC:170] Shivan Reef
+1 [DRC:171] Slagwoods Bridge
+1 [DRC:57] Sol Ring
+1 [DRC:137] Solar Transformer
+1 [DRC:138] Solemn Simulacrum
+1 [DRC:139] Soul-Guide Lantern
+1 [DRC:172] Spire of Industry
+1 [DRC:19] Stridehangar Automaton
+1 [DRC:173] Sulfur Falls
+1 [DRC:140] Talisman of Curiosity
+1 [DRC:175] Tanglepool Bridge
+1 [DRC:177] Temple of Epiphany
+1 [DRC:12] Territorial Aetherkite
+1 [DRC:83] Thopter Spy Network
+1 [DRC:180] Treasure Vault
+1 [DRC:143] Triplicate Titan
+1 [DRC:183] Vineglimmer Snarl
+1 [DRC:85] Whirler Rogue
+1 [DRC:122] Whirler Virtuoso
+1 [DRC:184] Yavimaya Coast
+SB: 1 [DRC:3] Saheeli, Radiant Creator
+LAYOUT MAIN:(1,9)(CMC,false,50)|([DRC:58],[DRC:145],[DRC:60],[DRC:154],[DRC:155],[DFT:289],[DFT:289],[DFT:289],[DFT:289],[DFT:289],[DFT:289],[DRC:157],[DRC:158],[DRC:160],[DFT:280],[DFT:280],[DFT:280],[DFT:280],[DFT:280],[DRC:163],[DFT:288],[DFT:288],[DFT:288],[DFT:288],[DFT:288],[DRC:165],[DRC:166],[DRC:168],[DRC:169],[DRC:170],[DRC:171],[DRC:172],[DRC:173],[DRC:175],[DRC:177],[DRC:180],[DRC:183],[DRC:184])([DRC:109],[DRC:136],[DRC:57],[DRC:139])([DRC:16],[DRC:70],[DRC:52],[DRC:128],[DRC:75],[DRC:55],[DRC:104],[DRC:133],[DRC:39],[DRC:106],[DRC:114],[DRC:137],[DRC:140])([DRC:18],[DRC:108],[DRC:48],[DRC:53],[DRC:125],[DRC:127],[DRC:74],[DRC:79],[DRC:14],[DRC:2],[DRC:118],[DRC:119],[DRC:82],[DRC:19],[DRC:122])([DRC:123],[DRC:71],[DRC:47],[DRC:49],[DRC:112],[DRC:78],[DRC:13],[DRC:80],[DRC:135],[DRC:113],[DRC:105],[DRC:138],[DRC:83],[DRC:85])([DRC:73],[DRC:126],[DRC:111],[DRC:103],[DRC:15])([DRC:17],[DRC:69],[DRC:110],[DRC:102],[DRC:54],[DRC:12])([DRC:68],[DRC:107])([DRC:101],[DRC:143])
+LAYOUT SIDEBOARD:(1,1)(RARITY,true,24)|([DRC:3])

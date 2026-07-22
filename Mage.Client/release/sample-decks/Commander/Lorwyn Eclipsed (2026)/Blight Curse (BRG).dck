@@ -1,0 +1,87 @@
+1 [ECC:7] Aberrant Return
+1 [ECC:55] Arcane Signet
+1 [ECC:70] Archfiend of Ifnir
+1 [ECC:119] Assassin's Trophy
+1 [ECC:120] Binding the Old Gods
+1 [ECC:71] Black Sun's Zenith
+1 [ECC:46] Blowfly Infestation
+1 [ECL:129] Burning Curiosity
+1 [ECC:145] Canyon Slough
+1 [ECC:72] Carnifex Demon
+1 [ECC:90] Cathartic Pyre
+1 [ECC:91] Cathartic Reunion
+1 [ECC:92] Chain Reaction
+1 [ECC:101] Channeler Initiate
+1 [ECC:137] Chimil, the Inner Sun
+1 [ECC:146] Cinder Glade
+1 [ECC:60] Command Tower
+1 [ECC:139] Commander's Sphere
+1 [ECC:140] Contagion Clasp
+1 [ECC:104] Devoted Druid
+1 [ECC:147] Dragonskull Summit
+1 [ECC:20] Dread Tiller
+1 [ECC:73] Dusk Urchins
+1 [ECC:8] Eventide's Shadow
+1 [ECC:121] Everlasting Torment
+1 [ECC:105] Evolution Sage
+1 [ECL:264] Evolving Wilds
+1 [ECC:148] Exotic Orchard
+1 [ECC:16] Ferrafor, Young Yew
+1 [ECC:61] Festering Thicket
+1 [ECC:54] Fire Covenant
+1 [ECC:107] Flourishing Defenses
+6 [ECL:273] Forest
+1 [ECC:122] Glissa Sunslayer
+1 [ECC:151] Golgari Rot Farm
+1 [ECC:74] Grave Titan
+1 [ECC:9] Grave Venerations
+1 [ECC:142] Grim Poppet
+1 [ECC:152] Gruul Turf
+1 [ECC:123] Hapatra, Vizier of Poisons
+1 [ECC:111] Harmonize
+1 [ECC:47] Hoarder's Greed
+1 [ECC:153] Ifnir Deadlands
+1 [ECC:52] Ignoble Hierarch
+1 [ECC:76] Incremental Blight
+1 [ECC:77] Infernal Grasp
+1 [ECC:126] Kulrath Knight
+1 [ECL:149] Lasting Tarfire
+1 [ECC:78] Liliana, Death Wielder
+1 [ECC:79] Massacre Girl, Known Killer
+1 [ECC:80] Midnight Banshee
+4 [ECL:272] Mountain
+1 [ECC:48] Necroskitter
+1 [ECC:155] Nesting Grounds
+1 [ECC:81] Night's Whisper
+1 [ECC:11] Oft-Nabbed Goat
+1 [ECC:82] Painful Truths
+1 [ECC:158] Path of Ancestry
+1 [ECC:83] Persist
+1 [ECC:18] Puca's Covenant
+1 [ECC:84] Puppeteer Clique
+1 [ECC:131] Putrefy
+1 [ECC:161] Rakdos Carnarium
+1 [ECC:162] Riveteers Overlook
+1 [ECC:163] Rootbound Crag
+1 [ECC:165] Savage Lands
+1 [ECC:167] Sheltered Thicket
+1 [ECC:12] Sinister Gnarlbark
+1 [ECC:86] Skinrender
+1 [ECC:168] Smoldering Marsh
+1 [ECC:58] Sol Ring
+1 [ECC:87] Soul Snuffers
+8 [ECL:271] Swamp
+1 [ECC:134] Terminate
+1 [ECC:169] Terramorphic Expanse
+1 [ECC:4] The Reaper, King No More
+1 [ECC:133] The Scorpion God
+1 [ECC:49] Tree of Perdition
+1 [ECC:63] Vernal Fen
+1 [ECC:14] Village Pillagers
+1 [ECC:88] Vraska, Betrayal's Sting
+1 [ECC:118] Wickerbough Elder
+1 [ECC:21] Wickersmith's Tools
+1 [ECC:176] Woodland Cemetery
+SB: 1 [ECC:2] Auntie Ool, Cursewretch
+LAYOUT MAIN:(1,8)(CMC,false,50)|([ECC:145],[ECC:146],[ECC:60],[ECC:147],[ECL:264],[ECC:148],[ECC:61],[ECL:273],[ECL:273],[ECL:273],[ECL:273],[ECL:273],[ECL:273],[ECC:151],[ECC:152],[ECC:153],[ECL:272],[ECL:272],[ECL:272],[ECL:272],[ECC:155],[ECC:158],[ECC:161],[ECC:162],[ECC:163],[ECC:165],[ECC:167],[ECC:168],[ECL:271],[ECL:271],[ECL:271],[ECL:271],[ECL:271],[ECL:271],[ECL:271],[ECL:271],[ECC:169],[ECC:63],[ECC:176])([ECC:52],[ECC:58])([ECC:55],[ECC:119],[ECC:71],[ECC:90],[ECC:91],[ECC:101],[ECC:140],[ECC:104],[ECC:123],[ECC:77],[ECL:149],[ECC:81],[ECC:11],[ECC:83],[ECC:134])([ECC:46],[ECL:129],[ECC:139],[ECC:20],[ECC:73],[ECC:121],[ECC:105],[ECC:54],[ECC:122],[ECC:48],[ECC:82],[ECC:18],[ECC:131],[ECC:12],[ECC:21])([ECC:120],[ECC:92],[ECC:9],[ECC:111],[ECC:47],[ECC:79],[ECC:86],[ECC:87],[ECC:49],[ECC:118])([ECC:70],[ECC:8],[ECC:107],[ECC:76],[ECC:126],[ECC:84],[ECC:133],[ECC:14])([ECC:7],[ECC:72],[ECC:137],[ECC:74],[ECC:80],[ECC:4],[ECC:88])([ECC:16],[ECC:142],[ECC:78])
+LAYOUT SIDEBOARD:(1,1)(RARITY,true,24)|([ECC:2])

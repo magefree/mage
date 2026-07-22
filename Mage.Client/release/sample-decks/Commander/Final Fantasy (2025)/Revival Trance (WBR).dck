@@ -1,0 +1,95 @@
+1 [FIC:229] Angel of the Ruins
+1 [FIC:289] Anger
+1 [FIC:332] Arcane Signet
+1 [FIC:273] Archfiend of Depravity
+1 [FIC:374] Ash Barrens
+1 [FIC:78] Banon, the Returners' Leader
+1 [FIC:375] Battlefield Forge
+1 [FIC:319] Bedevil
+1 [FIC:290] Big Score
+1 [FIC:1] Celes, Rune Knight
+1 [FIC:381] Clifftop Retreat
+1 [FIC:15] Coin of Fate
+1 [FIC:292] Combustible Gearhulk
+1 [FIC:484] Command Tower
+1 [FIC:339] Commander's Sphere
+1 [FIC:322] Crackling Doom
+1 [FIC:16] Cyan, Vengeful Samurai
+1 [FIC:385] Demolition Field
+1 [FIC:386] Desolate Mire
+1 [FIC:387] Dragonskull Summit
+1 [FIC:80] Edgar, Master Machinist
+1 [FIC:43] Espers to Magicite
+1 [FIC:389] Evolving Wilds
+1 [FIC:390] Exotic Orchard
+1 [FIC:391] Fetid Heath
+1 [FIC:293] Flayer of the Hatebound
+1 [FIC:394] Foreboding Ruins
+1 [FIC:397] Furycalm Snarl
+1 [FIC:55] Gau, Feral Youth
+1 [FIC:20] General Leo Cristophe
+1 [FIC:399] Geothermal Bog
+1 [FIC:56] Gogo, Mysterious Mime
+1 [FIC:401] Graven Cairns
+1 [FIC:402] High Market
+1 [FIC:47] Interceptor, Shadow's Hound
+1 [FIC:405] Isolated Chapel
+1 [FIC:84] Kefka, Dancing Mad
+1 [FIC:348] Key to the City
+1 [FIN:143] Laughing Mad
+1 [FIC:326] Legions to Ashes
+1 [FIC:87] Locke, Treasure Hunter
+1 [FIC:351] Meteor Golem
+1 [FIC:352] Millikin
+1 [FIC:353] Mind Stone
+1 [FIC:89] Mog, Moogle Warrior
+1 [FIC:278] Morbid Opportunist
+1 [FIC:327] Mortify
+3 [FIN:304] Mountain
+1 [FIC:280] Night's Whisper
+1 [FIC:409] Nomad Outpost
+1 [FIC:247] Palace Jailer
+1 [FIC:411] Path of Ancestry
+1 [FIN:29] Phoenix Down
+1 [FIC:281] Pitiless Plunderer
+4 [FIN:294] Plains
+1 [FIC:328] Priest of Fell Rites
+1 [FIC:282] Reanimate
+1 [FIC:49] Rejoin the Fight
+1 [FIC:283] Rise of the Dark Realms
+1 [FIC:415] Rogue's Passage
+1 [FIC:417] Rugged Prairie
+1 [FIC:297] Ruin Grinder
+1 [FIC:329] Ruinous Ultimatum
+1 [FIC:57] Sabin, Master Monk
+1 [FIC:418] Sacred Peaks
+1 [FIC:284] Sepulchral Primordial
+1 [FIC:93] Setzer, Wandering Gambler
+1 [FIC:50] Shadow, Mysterious Assassin
+1 [FIC:421] Shadowblood Ridge
+1 [FIC:422] Shineshadow Snarl
+1 [FIC:51] Siegfried, Famed Swordsman
+1 [FIC:425] Smoldering Marsh
+1 [FIC:58] Snort
+1 [FIC:356] Sol Ring
+1 [FIC:360] Solemn Simulacrum
+1 [FIC:286] Stitch Together
+1 [FIC:287] Stitcher's Supplier
+1 [FIC:59] Strago and Relm
+1 [FIC:427] Sulfurous Springs
+1 [FIC:60] Summon: Esper Valigarmanda
+1 [FIC:254] Sun Titan
+1 [FIC:431] Sunlit Marsh
+1 [FIC:433] Sunscorched Divide
+3 [FIN:301] Swamp
+1 [FIC:361] Swiftfoot Boots
+1 [FIC:363] Talisman of Conviction
+1 [FIC:366] Talisman of Indulgence
+1 [FIC:45] The Falcon, Airship Restored
+1 [FIC:99] The Warring Triad
+1 [FIC:258] Tragic Arrogance
+1 [FIC:63] Umaro, Raging Yeti
+1 [FIC:372] Wayfarer's Bauble
+SB: 1 [FIC:4] Terra, Herald of Hope
+LAYOUT MAIN:(1,9)(CMC,false,50)|([FIC:374],[FIC:375],[FIC:381],[FIC:484],[FIC:385],[FIC:386],[FIC:387],[FIC:389],[FIC:390],[FIC:391],[FIC:394],[FIC:397],[FIC:399],[FIC:401],[FIC:402],[FIC:405],[FIN:304],[FIN:304],[FIN:304],[FIC:409],[FIC:411],[FIN:294],[FIN:294],[FIN:294],[FIN:294],[FIC:415],[FIC:417],[FIC:418],[FIC:421],[FIC:422],[FIC:425],[FIC:427],[FIC:431],[FIC:433],[FIN:301],[FIN:301],[FIN:301])([FIN:29],[FIC:282],[FIC:356],[FIC:287],[FIC:372])([FIC:332],[FIC:78],[FIC:15],[FIC:55],[FIC:348],[FIC:352],[FIC:353],[FIC:280],[FIC:328],[FIC:286],[FIC:361],[FIC:363],[FIC:366])([FIC:319],[FIC:339],[FIC:322],[FIN:143],[FIC:326],[FIC:87],[FIC:89],[FIC:278],[FIC:327],[FIC:93],[FIC:50],[FIC:59],[FIC:45],[FIC:99])([FIC:289],[FIC:290],[FIC:1],[FIC:80],[FIC:43],[FIC:56],[FIC:47],[FIC:247],[FIC:281],[FIC:51],[FIC:58],[FIC:360],[FIC:60])([FIC:273],[FIC:20],[FIC:57],[FIC:258])([FIC:292],[FIC:293],[FIC:49],[FIC:297],[FIC:254],[FIC:63])([FIC:229],[FIC:16],[FIC:84],[FIC:351],[FIC:329],[FIC:284])([FIC:283])
+LAYOUT SIDEBOARD:(1,1)(RARITY,true,24)|([FIC:4])

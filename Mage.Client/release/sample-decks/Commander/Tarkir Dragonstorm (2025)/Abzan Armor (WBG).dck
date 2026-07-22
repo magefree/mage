@@ -1,0 +1,87 @@
+1 [TDC:337] Access Tunnel
+1 [TDC:279] Anguished Unmaking
+1 [TDC:244] Arasta of the Endless Web
+1 [TDC:42] Arbor Adherent
+1 [TDC:245] Arboreal Grazer
+1 [TDC:105] Arcane Signet
+1 [TDC:246] Assault Formation
+1 [TDC:248] Axebane Guardian
+1 [TDC:110] Baldin, Century Herdmaster
+1 [TDC:172] Behind the Scenes
+1 [TDC:1] Betor, Ancestor's Voice
+1 [TDC:174] Blight Pile
+1 [TDC:341] Bojuka Bog
+1 [TDC:45] Canopy Gargantuan
+1 [TDC:343] Canopy Vista
+1 [TDC:250] Carven Caryatid
+1 [TDC:315] Colfenor's Urn
+1 [TDC:107] Command Tower
+1 [TDC:316] Crashing Drawbridge
+1 [TDC:356] Deceptive Landscape
+1 [TDC:284] Despark
+1 [TDC:286] Dragonlord Dromoka
+1 [TDM:255] Evolving Wilds
+1 [TDC:360] Exotic Orchard
+1 [TDC:115] Expel the Interlopers
+1 [TDC:289] Faeburrow Elder
+1 [TDC:180] Feed the Swarm
+7 [TDM:285] Forest
+1 [TDC:366] Fortified Village
+1 [TDC:259] Hornet Nest
+1 [TDC:100] Ikra Shidiqi, the Usurper
+1 [TDC:121] Indomitable Ancients
+1 [TDC:292] Indulging Patrician
+1 [TDC:182] Infernal Grasp
+1 [TDC:373] Isolated Chapel
+1 [TDC:260] Jaddi Offshoot
+1 [TDC:27] Jaws of Defeat
+1 [TDC:126] Nyx-Fleece Ram
+1 [TDC:323] Orzhov Signet
+1 [TDC:264] Overgrown Battlement
+1 [TDC:381] Overgrown Farmland
+1 [TDC:382] Path of Ancestry
+6 [TDM:278] Plains
+1 [TDC:54] Protector of the Wastes
+1 [TDC:385] Radiant Grove
+1 [TDC:47] Rampart Architect
+1 [TDC:15] Reunion of the House
+1 [TDC:128] Rhox Faithmender
+1 [TDM:266] Sandsteppe Citadel
+1 [TDC:268] Seedborn Muse
+1 [TDC:324] Selesnya Signet
+1 [TDC:302] Shadrix Silverquill
+1 [TDC:130] Shalai, Voice of Plenty
+1 [TDC:303] Sidar Kondo of Jamuraa
+1 [TDC:131] Slaughter the Strong
+1 [TDC:106] Sol Ring
+1 [TDC:326] Staff of Compleation
+1 [TDC:397] Sungrass Prairie
+1 [TDC:399] Sunpetal Grove
+5 [TDM:281] Swamp
+1 [TDC:328] Swiftfoot Boots
+1 [TDC:134] Swords to Plowshares
+1 [TDC:272] Sylvan Caryatid
+1 [TDC:403] Temple of Malady
+1 [TDC:405] Temple of Plenty
+1 [TDC:406] Temple of Silence
+1 [TDC:29] Tip the Scales
+1 [TDC:275] Tower Defense
+1 [TDC:276] Towering Titan
+1 [TDC:97] Tree of Redemption
+1 [TDC:409] Twilight Mire
+1 [TDC:137] Wakestone Gargoyle
+1 [TDC:334] Walking Bulwark
+1 [TDC:277] Wall of Blossoms
+1 [TDC:200] Wall of Limbs
+1 [TDC:138] Wall of Omens
+1 [TDC:139] Wall of Reverence
+1 [TDC:278] Wall of Roots
+1 [TDC:336] Weathered Sentinels
+1 [TDC:140] Welcoming Vampire
+1 [TDC:31] Will of the Abzan
+1 [TDC:141] Wingmantle Chaplain
+1 [TDC:412] Woodland Cemetery
+1 [TDC:142] Zetalpa, Primal Dawn
+SB: 1 [TDC:4] Felothar the Steadfast
+LAYOUT MAIN:(1,9)(CMC,false,50)|([TDC:337],[TDC:341],[TDC:343],[TDC:107],[TDC:356],[TDM:255],[TDC:360],[TDM:285],[TDM:285],[TDM:285],[TDM:285],[TDM:285],[TDM:285],[TDM:285],[TDC:366],[TDC:373],[TDC:381],[TDC:382],[TDM:278],[TDM:278],[TDM:278],[TDM:278],[TDM:278],[TDM:278],[TDC:385],[TDM:266],[TDC:397],[TDC:399],[TDM:281],[TDM:281],[TDM:281],[TDM:281],[TDM:281],[TDC:403],[TDC:405],[TDC:406],[TDC:409],[TDC:412])([TDC:245],[TDC:260],[TDC:106],[TDC:134],[TDC:334])([TDC:105],[TDC:246],[TDC:174],[TDC:316],[TDC:284],[TDC:180],[TDC:182],[TDC:126],[TDC:323],[TDC:264],[TDC:324],[TDC:328],[TDC:272],[TDC:275],[TDC:277],[TDC:138],[TDC:278])([TDC:279],[TDC:248],[TDC:172],[TDC:250],[TDC:315],[TDC:289],[TDC:259],[TDC:292],[TDC:131],[TDC:326],[TDC:29],[TDC:200],[TDC:336],[TDC:140])([TDC:244],[TDC:42],[TDC:121],[TDC:27],[TDC:47],[TDC:128],[TDC:130],[TDC:303],[TDC:97],[TDC:137],[TDC:139],[TDC:31],[TDC:141])([TDC:1],[TDC:115],[TDC:100],[TDC:268],[TDC:302])([TDC:110],[TDC:286],[TDC:54],[TDC:276])([TDC:45],[TDC:15])([TDC:142])
+LAYOUT SIDEBOARD:(1,1)(RARITY,true,24)|([TDC:4])
