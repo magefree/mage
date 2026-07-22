@@ -189,18 +189,16 @@ public class PrepareTest extends CardTestPlayerBase {
     @Test
     public void cannotBecomePreparedTwiceAtTheSameTime() {
         addCard(Zone.HAND, playerA, CREATURE);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.HAND, playerA, TOMEKEEPER);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, CREATURE);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        runCode("try to prepare again", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
-            Permanent permanent = game.getBattlefield().getAllActivePermanents(playerA.getId()).stream()
-                    .filter(p -> p.getName().equals(CREATURE)).findFirst().orElse(null);
-            Assert.assertNotNull(permanent);
-            Assert.assertTrue(permanent.isPrepared());
-            permanent.setPrepared(true, game);
-        });
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, TOMEKEEPER);
+        setModeChoice(playerA, "1"); // Target creature becomes prepared.
+        addTarget(playerA, CREATURE);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -210,20 +208,18 @@ public class PrepareTest extends CardTestPlayerBase {
     @Test
     public void becomingUnpreparedRemovesAssociatedCopy() {
         addCard(Zone.HAND, playerA, CREATURE);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.HAND, playerA, TOMEKEEPER);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, CREATURE);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        runCode("make unprepared", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
-            Permanent permanent = game.getBattlefield().getAllActivePermanents(playerA.getId()).stream()
-                    .filter(p -> p.getName().equals(CREATURE)).findFirst().orElse(null);
-            Assert.assertNotNull(permanent);
-            permanent.setPrepared(false, game);
-            Assert.assertFalse(permanent.isPrepared());
-        });
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, TOMEKEEPER);
+        setModeChoice(playerA, "2"); // Target creature becomes unprepared.
+        addTarget(playerA, CREATURE);
         checkPlayableAbility("removed copy cannot be cast", 1, PhaseStep.PRECOMBAT_MAIN,
                 playerA, "Cast " + PREPARE_SPELL, false);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
