@@ -17,11 +17,17 @@ public class ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility extends Triggere
     private final SubType planeswalkerSubType;
     protected final SetTargetPointer setTargetPointer;
 
+    public ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility(Effect effect, SetTargetPointer setTargetPointer) {
+        this(effect, null, setTargetPointer);
+    }
+
     public ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility(Effect effect, SubType planeswalkerSubType, SetTargetPointer setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, false);
         this.planeswalkerSubType = planeswalkerSubType;
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase("Whenever you activate a loyalty ability of a " + planeswalkerSubType.getDescription() + " planeswalker, ");
+        setTriggerPhrase(planeswalkerSubType == null
+                ? "Whenever you activate a loyalty ability, "
+                : "Whenever you activate a loyalty ability of a " + planeswalkerSubType.getDescription() + " planeswalker, ");
     }
 
     private ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility(final ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility ability) {
@@ -51,7 +57,7 @@ public class ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility extends Triggere
         }
         Permanent permanent = stackAbility.getSourcePermanentOrLKI(game);
         if (permanent == null || !permanent.isPlaneswalker(game)
-                || !permanent.hasSubtype(planeswalkerSubType, game)) {
+                || (planeswalkerSubType != null && !permanent.hasSubtype(planeswalkerSubType, game))) {
             return false;
         }
 
