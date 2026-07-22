@@ -146,8 +146,7 @@ class RoomEnterUnlockEffect extends OneShotEffect {
         // TODO: possible buggy with AI -- find spell mode by spell ability and do not store it in card's data due game states isolation?!
         SpellAbilityType lastCastHalf = roomCardBlueprint.getLastCastHalf();
         if (lastCastHalf == SpellAbilityType.SPLIT_LEFT || lastCastHalf == SpellAbilityType.SPLIT_RIGHT) {
-            roomCardBlueprint.setLastCastHalf(null);
-            return permanent.unlockDoor(game, source, lastCastHalf == SpellAbilityType.SPLIT_LEFT);
+            permanent.unlockDoor(game, source, lastCastHalf == SpellAbilityType.SPLIT_LEFT);
         }
 
         return true;
