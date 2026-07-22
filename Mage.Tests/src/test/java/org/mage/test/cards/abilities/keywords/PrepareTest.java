@@ -14,6 +14,23 @@ public class PrepareTest extends CardTestPlayerBase {
     private static final String CREATURE = "Goblin Glasswright";
     private static final String PREPARE_SPELL = "Craft with Pride";
     private static final String TOMEKEEPER = "Biblioplex Tomekeeper";
+    private static final String PEST_FRIEND = "Pest Friend";
+    private static final String DEMONIC_TUTOR = "Demonic Tutor";
+    private static final String BRAINGEYSER = "Braingeyser";
+
+    @Test
+    public void prepareCardAndPrepareSpellReturnTheirOwnNames() {
+        addCard(Zone.HAND, playerA, CREATURE);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, CREATURE);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, CREATURE, 1);
+        assertExileCount(playerA, PREPARE_SPELL, 1);
+    }
 
     @Test
     public void tomekeeperCanRePrepareCreatureWithPrepareSpell() {
@@ -25,13 +42,10 @@ public class PrepareTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Craft with Pride");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        runCode("prepare spell consumed prepared designation", 1, PhaseStep.PRECOMBAT_MAIN,
-                playerA, (info, player, game) -> {
-                    Permanent permanent = game.getPermanent(getPermanent(CREATURE, playerA).getId());
-                    Assert.assertNotNull(permanent);
-                    Assert.assertFalse(permanent.isPrepared());
-                    Assert.assertEquals(0, game.getExile().getAllCards(game).size());
-                });
+        checkPlayableAbility("prepare spell consumed prepared designation", 1, PhaseStep.PRECOMBAT_MAIN,
+                playerA, "Cast " + PREPARE_SPELL, false);
+        checkExileCount("prepare spell copy was consumed", 1, PhaseStep.PRECOMBAT_MAIN,
+                playerA, PREPARE_SPELL, 0);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, TOMEKEEPER);
         setModeChoice(playerA, "1"); // Target creature becomes prepared.
         addTarget(playerA, CREATURE);
@@ -163,7 +177,7 @@ public class PrepareTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertExileCount(playerA, CREATURE, 1);
+        assertExileCount(playerA, PREPARE_SPELL, 1);
     }
 
     @Test
@@ -202,7 +216,7 @@ public class PrepareTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertExileCount(playerA, CREATURE, 1);
+        assertExileCount(playerA, PREPARE_SPELL, 1);
     }
 
     @Test
@@ -326,7 +340,7 @@ public class PrepareTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Grizzly Bears", 0);
         assertExileCount(playerA, "Grizzly Bears", 2);
-        assertExileCount(playerA, "Lluwen, Exchange Student", 1);
+        assertExileCount(playerA, PEST_FRIEND, 1);
     }
 
     @Test
@@ -353,7 +367,7 @@ public class PrepareTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Treasure Token", 1);
-        assertExileCount(playerA, CREATURE, 1);
+        assertExileCount(playerA, PREPARE_SPELL, 1);
         Permanent permanent = getPermanent(CREATURE, playerA);
         Assert.assertNotNull(permanent);
         Assert.assertTrue(permanent.isPrepared());
@@ -402,7 +416,7 @@ public class PrepareTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Emeritus of Woe", 2);
         // Only the original Emeritus supplied a prepared copy. The Llanowar
         // Elves did not become prepared retroactively after copying it.
-        assertExileCount(playerA, "Emeritus of Woe", 1);
+        assertExileCount(playerA, DEMONIC_TUTOR, 1);
     }
 
     @Test
@@ -420,8 +434,8 @@ public class PrepareTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertExileCount(playerA, CREATURE, 1);
-        assertExileCount(playerA, "Emeritus of Woe", 0);
+        assertExileCount(playerA, PREPARE_SPELL, 1);
+        assertExileCount(playerA, DEMONIC_TUTOR, 0);
     }
 
     @Test
@@ -438,20 +452,20 @@ public class PrepareTest extends CardTestPlayerBase {
                 "Infinite Reflection", "Dirgur Focusmage");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkExileCount("copying does not replace the associated spell", 1,
-                PhaseStep.PRECOMBAT_MAIN, playerA, CREATURE, 1);
+                PhaseStep.PRECOMBAT_MAIN, playerA, PREPARE_SPELL, 1);
         checkExileCount("copying does not create the new associated spell", 1,
-                PhaseStep.PRECOMBAT_MAIN, playerA, "Dirgur Focusmage", 0);
+                PhaseStep.PRECOMBAT_MAIN, playerA, BRAINGEYSER, 0);
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB,
                 "-3: Target creature you don't control phases out.", "Dirgur Focusmage");
         checkExileCount("phasing out removes the original associated spell", 2,
-                PhaseStep.POSTCOMBAT_MAIN, playerA, CREATURE, 0);
+                PhaseStep.POSTCOMBAT_MAIN, playerA, PREPARE_SPELL, 0);
         checkExileCount("phasing out does not create the copied associated spell", 2,
-                PhaseStep.POSTCOMBAT_MAIN, playerA, "Dirgur Focusmage", 0);
-        checkExileCount("phasing in uses the copied Preparation characteristics", 3,
-                PhaseStep.PRECOMBAT_MAIN, playerA, "Dirgur Focusmage", 1);
+                PhaseStep.POSTCOMBAT_MAIN, playerA, BRAINGEYSER, 0);
+        checkExileCount("phasing in uses the copied prepare spell characteristics", 3,
+                PhaseStep.PRECOMBAT_MAIN, playerA, BRAINGEYSER, 1);
         checkExileCount("the original associated spell is not recreated", 3,
-                PhaseStep.PRECOMBAT_MAIN, playerA, CREATURE, 0);
+                PhaseStep.PRECOMBAT_MAIN, playerA, PREPARE_SPELL, 0);
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
@@ -468,13 +482,6 @@ public class PrepareTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, CREATURE);
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, PREPARE_SPELL);
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerB, "Counterspell", PREPARE_SPELL);
-        runCode("prepared designation was consumed on cast", 3, PhaseStep.PRECOMBAT_MAIN,
-                playerA, (info, player, game) -> {
-                    Permanent permanent = game.getBattlefield().getAllActivePermanents(playerA.getId()).stream()
-                            .filter(p -> p.getName().equals(CREATURE)).findFirst().orElse(null);
-                    Assert.assertNotNull(permanent);
-                    Assert.assertFalse(permanent.isPrepared());
-                });
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
@@ -482,6 +489,9 @@ public class PrepareTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Treasure Token", 0);
         assertExileCount(playerA, 0);
+        Permanent permanent = getPermanent(CREATURE, playerA);
+        Assert.assertNotNull(permanent);
+        Assert.assertFalse(permanent.isPrepared());
     }
 
     @Test
@@ -548,6 +558,6 @@ public class PrepareTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Meddling Mage", 1);
         assertPermanentCount(playerA, CREATURE, 1);
-        assertExileCount(playerA, CREATURE, 1);
+        assertExileCount(playerA, PREPARE_SPELL, 1);
     }
 }

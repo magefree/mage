@@ -92,6 +92,14 @@ public abstract class PrepareCard extends CardWithSpellOption {
     }
 
     @Override
+    public String getName() {
+        if (prepareSpellCopy && getSpellCard() != null) {
+            return getSpellCard().getName();
+        }
+        return super.getName();
+    }
+
+    @Override
     public Abilities<Ability> getAbilities() {
         if (prepareSpellCopy) {
             return getSpellCard().getAbilities();
