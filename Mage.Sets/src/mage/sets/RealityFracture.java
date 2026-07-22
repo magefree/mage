@@ -43,11 +43,13 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Liliana the Faultless", 293, Rarity.RARE, mage.cards.l.LilianaTheFaultless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liliana the Repentant", 231, Rarity.RARE, mage.cards.l.LilianaTheRepentant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liliana the Repentant", 305, Rarity.RARE, mage.cards.l.LilianaTheRepentant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Paradox Shaper", 143, Rarity.UNCOMMON, mage.cards.p.ParadoxShaper.class));
         cards.add(new SetCardInfo("Prudent Fateseer", 146, Rarity.UNCOMMON, mage.cards.p.PrudentFateseer.class));
         cards.add(new SetCardInfo("Stingcaster Mage", 329, Rarity.MYTHIC, mage.cards.s.StingcasterMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stingcaster Mage", 447, Rarity.MYTHIC, mage.cards.s.StingcasterMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stingcaster Mage", 457, Rarity.MYTHIC, mage.cards.s.StingcasterMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stingcaster Mage", 93, Rarity.MYTHIC, mage.cards.s.StingcasterMage.class, NON_FULL_USE_VARIOUS));  
+        cards.add(new SetCardInfo("Stingerquill Voxmancer", 151, Rarity.UNCOMMON, mage.cards.s.StingerquillVoxmancer.class));
         cards.add(new SetCardInfo("The Theorist, Jace Beleren", 363, Rarity.MYTHIC, mage.cards.t.TheTheoristJaceBeleren.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Theorist, Jace Beleren", 405, Rarity.MYTHIC, mage.cards.t.TheTheoristJaceBeleren.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Theorist, Jace Beleren", 415, Rarity.MYTHIC, mage.cards.t.TheTheoristJaceBeleren.class, NON_FULL_USE_VARIOUS));
@@ -55,6 +57,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("The Theorist, Jace Beleren", 443, Rarity.MYTHIC, mage.cards.t.TheTheoristJaceBeleren.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tinybones, Pocket Nuisance", 237, Rarity.UNCOMMON, mage.cards.t.TinybonesPocketNuisance.class));
         cards.add(new SetCardInfo("Titanbones, Towering Heart", 266, Rarity.UNCOMMON, mage.cards.t.TitanbonesToweringHeart.class));
+        cards.add(new SetCardInfo("Woodwork Prodigy", 165, Rarity.UNCOMMON, mage.cards.w.WoodworkProdigy.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
     }
