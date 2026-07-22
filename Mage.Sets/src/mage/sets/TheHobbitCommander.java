@@ -39,6 +39,7 @@ public final class TheHobbitCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rivendell", 91, Rarity.MYTHIC, mage.cards.r.Rivendell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sauron, the Dark Lord", 36, Rarity.MYTHIC, mage.cards.s.SauronTheDarkLord.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sauron, the Dark Lord", 76, Rarity.MYTHIC, mage.cards.s.SauronTheDarkLord.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Smaug the Impenetrable", 9, Rarity.RARE, mage.cards.s.SmaugTheImpenetrable.class));
         cards.add(new SetCardInfo("The One Ring", 44, Rarity.MYTHIC, mage.cards.t.TheOneRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The One Ring", 84, Rarity.MYTHIC, mage.cards.t.TheOneRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Reaver Cleaver", 94, Rarity.MYTHIC, mage.cards.t.TheReaverCleaver.class));
