@@ -304,6 +304,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Super Speed", 154, Rarity.COMMON, mage.cards.s.SuperSpeed.class));
         cards.add(new SetCardInfo("Super Strength", 189, Rarity.COMMON, mage.cards.s.SuperStrength.class));
         cards.add(new SetCardInfo("Super Suit", 78, Rarity.COMMON, mage.cards.s.SuperSuit.class));
+        cards.add(new SetCardInfo("Super-Adaptoid", 250, Rarity.RARE, mage.cards.s.SuperAdaptoid.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Super-Adaptoid", 428, Rarity.RARE, mage.cards.s.SuperAdaptoid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Super Villain Lockup", 37, Rarity.UNCOMMON, mage.cards.s.SuperVillainLockup.class));
         cards.add(new SetCardInfo("Super-Skrull", 115, Rarity.RARE, mage.cards.s.SuperSkrull.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Super-Skrull", 409, Rarity.RARE, mage.cards.s.SuperSkrull.class, NON_FULL_USE_VARIOUS));
