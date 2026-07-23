@@ -403,6 +403,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Wolverine, Fierce Fighter", 378, Rarity.RARE, mage.cards.w.WolverineFierceFighter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("World War Hulk", 197, Rarity.RARE, mage.cards.w.WorldWarHulk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("World War Hulk", 304, Rarity.RARE, mage.cards.w.WorldWarHulk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Worlds Within Worlds", 241, Rarity.RARE, mage.cards.w.WorldsWithinWorlds.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Worlds Within Worlds", 426, Rarity.RARE, mage.cards.w.WorldsWithinWorlds.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yellowjacket, Heartless Marauder", 123, Rarity.UNCOMMON, mage.cards.y.YellowjacketHeartlessMarauder.class));
     }
 }
