@@ -206,6 +206,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Kingpin's Enforcers", 102, Rarity.COMMON, mage.cards.k.KingpinsEnforcers.class));
         cards.add(new SetCardInfo("Kree Commandos", 19, Rarity.COMMON, mage.cards.k.KreeCommandos.class));
         cards.add(new SetCardInfo("Kree Sentinel", 141, Rarity.COMMON, mage.cards.k.KreeSentinel.class));
+        cards.add(new SetCardInfo("Leader, Super-Genius", 64, Rarity.RARE, mage.cards.l.LeaderSuperGenius.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Leader, Super-Genius", 330, Rarity.RARE, mage.cards.l.LeaderSuperGenius.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Strike", 142, Rarity.COMMON, mage.cards.l.LightningStrike.class));
         cards.add(new SetCardInfo("Los Diablos Missile Base", 270, Rarity.COMMON, mage.cards.l.LosDiablosMissileBase.class));
         cards.add(new SetCardInfo("Luke Cage, Power Man", 20, Rarity.UNCOMMON, mage.cards.l.LukeCagePowerMan.class));
