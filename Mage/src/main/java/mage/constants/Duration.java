@@ -5,7 +5,7 @@ package mage.constants;
  */
 public enum Duration {
     OneUse("", true, true),
-    EndOfGame("for the rest of the game", false, false),
+    EndOfGame("for the rest of the game", false, true),
     WhileOnBattlefield("", false, false),
     WhileControlled("for as long as you control {this}", true, false),
     WhileOnStack("", false, true),
