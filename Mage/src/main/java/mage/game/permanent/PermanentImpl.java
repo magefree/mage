@@ -17,6 +17,8 @@ import mage.abilities.keyword.*;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.PrepareCard;
+import mage.abilities.effects.common.PrepareCastFromExileEffect;
+import mage.target.targetpointer.FixedTarget;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -850,6 +852,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     attachedPerm.phaseIn(game, false);
                 }
             }
+            if (prepared) {
+                createPreparedCopy(game);
+            }
             game.addSimultaneousEvent(GameEvent.getEvent(EventType.PHASED_IN, this.objectId, null, this.controllerId));
             return true;
         }
@@ -873,6 +878,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             this.removeFromCombat(game);
             this.phasedIn = false;
             this.indirectPhase = indirectPhase;
+            if (prepared) {
+                removePreparedCopy(game);
+            }
             game.informPlayers(getLogName() + " phased out");
             fireEvent(EventType.PHASED_OUT, game);
             return true;
@@ -1953,9 +1961,59 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.prepared = prepared;
         if (this.prepared) {
             addInfo(preparedInfoKey, CardUtil.addToolTipMarkTags("Prepared"), game);
+            createPreparedCopy(game);
         } else {
             addInfo(preparedInfoKey, null, game);
+            removePreparedCopy(game);
         }
+    }
+
+    private void createPreparedCopy(Game game) {
+        Card sourceCard = getMainCard();
+        MageObject copyFrom = getCopyFrom();
+        if (copyFrom instanceof Permanent) {
+            sourceCard = ((Permanent) copyFrom).getMainCard();
+        } else if (copyFrom instanceof Card) {
+            sourceCard = (Card) copyFrom;
+        }
+        if (!(sourceCard instanceof PrepareCard)) {
+            return;
+        }
+        // The permanent's backing card is tracked on the battlefield, so
+        // create the copy outside the game before putting it into exile.
+        Card copy = game.getState().copyCard(sourceCard, getControllerId(), game, Zone.OUTSIDE);
+        ((PrepareCard) copy).setPrepareSpellCopy(true);
+        Card registeredCopy = game.getCard(copy.getId());
+        if (registeredCopy instanceof PrepareCard) {
+            // copyCard can register a distinct recovered instance. Mark that instance too,
+            // because UI/playability lookups obtain the copy through Game#getCard.
+            ((PrepareCard) registeredCopy).setPrepareSpellCopy(true);
+        }
+        copy.setZone(Zone.EXILED, game);
+        game.getExile().add(copy);
+        game.getState().setValue("PreparePermanent" + copy.getId(), getId());
+        game.getState().setValue("KeepPrepareCopy" + copy.getId(), Boolean.TRUE);
+        PrepareCastFromExileEffect effect = new PrepareCastFromExileEffect();
+        effect.setTargetPointer(new FixedTarget(copy, game));
+        // The permanent can have lost all abilities (for example to Darksteel Mutation).
+        // The permission is linked by IDs above, so use the persistent copy's spell
+        // ability as the continuous-effect source instead of an ability on the permanent.
+        game.addEffect(effect, copy.getSpellAbility());
+    }
+
+    private void removePreparedCopy(Game game) {
+        game.getState().getValues("PreparePermanent").entrySet().stream()
+                .filter(e -> getId().equals(e.getValue()))
+                .map(e -> e.getKey().substring("PreparePermanent".length()))
+                .map(UUID::fromString)
+                .map(game::getCard)
+                .filter(java.util.Objects::nonNull)
+                .forEach(card -> {
+                    game.getExile().removeCard(card);
+                    card.setZone(Zone.OUTSIDE, game);
+                    game.getState().setValue("KeepPrepareCopy" + card.getId(), null);
+                    game.getState().setValue("PreparePermanent" + card.getId(), null);
+                });
     }
 
     @Override

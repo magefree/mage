@@ -116,6 +116,7 @@ public class CardView extends SimpleCardView {
     protected String rightSplitCostsStr;
     protected List<String> rightSplitRules;
     protected String rightSplitTypeLine;
+    protected String rightSplitSpellType;
 
     protected boolean isDoubleFacedCard;
 
@@ -238,6 +239,7 @@ public class CardView extends SimpleCardView {
         this.rightSplitCostsStr = cardView.rightSplitCostsStr;
         this.rightSplitRules = cardView.rightSplitRules == null ? null : new ArrayList<>(cardView.rightSplitRules);
         this.rightSplitTypeLine = cardView.rightSplitTypeLine;
+        this.rightSplitSpellType = cardView.rightSplitSpellType;
 
         this.isDoubleFacedCard = cardView.isDoubleFacedCard;
 
@@ -321,6 +323,14 @@ public class CardView extends SimpleCardView {
         Card card = sourceCard.copy();
         if (game != null && card instanceof Spell) {
             card = ((Spell) card).getSpellAbility().getCharacteristics(game);
+        }
+        if (game != null
+                && card instanceof PrepareCard
+                && game.getState().getZone(sourceCard.getId()) == Zone.EXILED
+                && game.getState().getValue("PreparePermanent" + sourceCard.getId()) != null) {
+            // the persistent copy in exile has only the prepare
+            // spell's characteristics, and those are its normal characteristics.
+            card = (Card) ((PrepareCard) card).getSpellCard().copy();
         }
 
         // use isFaceDown(game) only here to find real status, all other code must use this.faceDown
@@ -452,6 +462,7 @@ public class CardView extends SimpleCardView {
                 rightSplitCostsStr = String.join("", spellOptionCard.getManaCostSymbols());
                 rightSplitRules = spellOptionCard.getRules(game);
                 rightSplitTypeLine = getCardTypeLine(game, spellOptionCard);
+                rightSplitSpellType = spellOptionCard.getSpellType();
                 fullCardName = mainCard.getName() + MockCard.CARD_WITH_SPELL_OPTION_NAME_SEPARATOR + spellOptionCard.getName();
                 this.manaCostLeftStr = mainCard.getManaCostSymbols();
                 this.manaCostRightStr = spellOptionCard.getManaCostSymbols();
@@ -1433,6 +1444,10 @@ public class CardView extends SimpleCardView {
 
     public String getRightSplitTypeLine() {
         return rightSplitTypeLine;
+    }
+
+    public String getRightSplitSpellType() {
+        return rightSplitSpellType;
     }
 
     public ArtRect getArtRect() {

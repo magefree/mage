@@ -1881,12 +1881,37 @@ public abstract class PlayerImpl implements Player, Serializable {
         // collect and filter playable activated abilities
         // GUI: user clicks on card, but it must activate ability from ANY card's parts (main, left, right)
         Set<UUID> needIds = CardUtil.getObjectParts(object);
+        Card objectCard = object instanceof Card ? (Card) object : null;
+        Card mainCard = objectCard == null ? null : objectCard.getMainCard();
+        if (mainCard instanceof PrepareCard
+                && (((PrepareCard) mainCard).isPrepareSpellCopy()
+                || game.getState().getValue("PreparePermanent" + mainCard.getId()) != null)) {
+            // Rule 722.3c: the object in exile has only the prepare spell's
+            // characteristics. Never offer the preparation permanent's spell.
+            needIds = Collections.singleton(((PrepareCard) mainCard).getSpellCard().getId());
+        }
 
         // workaround to find all abilities first and filter it for one object
         List<ActivatedAbility> allPlayable = getPlayable(game, true, zone, false);
         for (ActivatedAbility ability : allPlayable) {
             if (needIds.contains(ability.getSourceId())) {
                 useable.putIfAbsent(ability.getId(), ability);
+            }
+        }
+
+        if (mainCard instanceof PrepareCard) {
+            UUID prepareSpellId = ((PrepareCard) mainCard).getSpellCard().getId();
+            boolean prepareSpellIsPlayable = useable.values().stream()
+                    .anyMatch(ability -> prepareSpellId.equals(ability.getSourceId())
+                    && ability instanceof SpellAbility
+                    && ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.BASE_ALTERNATE);
+            if (prepareSpellIsPlayable) {
+                // A prepare copy has only the prepare spell's characteristics. Enforce that
+                // on the final click-result map as well, independently of how the copied
+                // card was recovered from game state.
+                useable.values().removeIf(ability -> !prepareSpellId.equals(ability.getSourceId())
+                        || !(ability instanceof SpellAbility)
+                        || ((SpellAbility) ability).getSpellAbilityType() != SpellAbilityType.BASE_ALTERNATE);
             }
         }
 
@@ -4168,8 +4193,18 @@ public abstract class PlayerImpl implements Player, Serializable {
         } else if (object instanceof CardWithSpellOption) {
             // adventure must use different card characteristics for different spells (main or adventure)
             CardWithSpellOption cardWithSpellOption = (CardWithSpellOption) object;
-            getPlayableFromObjectSingle(game, fromZone, cardWithSpellOption.getSpellCard(), cardWithSpellOption.getSpellCard().getAbilities(game), availableMana, output);
-            getPlayableFromObjectSingle(game, fromZone, cardWithSpellOption, cardWithSpellOption.getSharedAbilities(game), availableMana, output);
+            boolean preparedCopy = cardWithSpellOption instanceof PrepareCard
+                    && (((PrepareCard) cardWithSpellOption).isPrepareSpellCopy()
+                    || game.getState().getValue("PreparePermanent" + cardWithSpellOption.getId()) != null);
+            // A prepare spell is not an alternative way to cast the preparation card. It exists
+            // solely on the persistent copy created in exile
+            if (!(cardWithSpellOption instanceof PrepareCard)
+                    || preparedCopy) {
+                getPlayableFromObjectSingle(game, fromZone, cardWithSpellOption.getSpellCard(), cardWithSpellOption.getSpellCard().getAbilities(game), availableMana, output);
+            }
+            if (!preparedCopy) {
+                getPlayableFromObjectSingle(game, fromZone, cardWithSpellOption, cardWithSpellOption.getSharedAbilities(game), availableMana, output);
+            }
         } else if (object instanceof Card) {
             getPlayableFromObjectSingle(game, fromZone, object, ((Card) object).getAbilities(game), availableMana, output);
         } else if (object instanceof StackObject) {
