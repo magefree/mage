@@ -1,10 +1,32 @@
 package mage.client.deckeditor;
 
+import static mage.cards.decks.DeckFormats.XMAGE;
+import static mage.cards.decks.DeckFormats.XMAGE_INFO;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.dnd.DropTarget;
+import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import javax.swing.*;
+import javax.swing.Timer;
+import javax.swing.border.Border;
+import javax.swing.filechooser.FileFilter;
+
+import org.apache.log4j.Logger;
+
 import mage.MageObject;
 import mage.cards.Card;
 import mage.cards.decks.*;
-import static mage.cards.decks.DeckFormats.XMAGE;
-import static mage.cards.decks.DeckFormats.XMAGE_INFO;
 import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -29,20 +51,6 @@ import mage.util.ThreadUtils;
 import mage.util.XmageThreadFactory;
 import mage.view.CardView;
 import mage.view.SimpleCardView;
-import org.apache.log4j.Logger;
-
-import javax.swing.*;
-import javax.swing.Timer;
-import javax.swing.border.Border;
-import javax.swing.filechooser.FileFilter;
-import java.awt.*;
-import java.awt.dnd.DropTarget;
-import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.*;
-import java.util.concurrent.*;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85, Elandril
@@ -70,7 +78,24 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     public DeckEditorPanel() {
         initComponents();
 
-        fcSelectDeck = new JFileChooser();
+        fcSelectDeck = new JFileChooser() {
+            @Override
+            public void approveSelection() {
+                // confirm overwrite
+                File selectedFile = getSelectedFile();
+                if (selectedFile.exists() && getDialogType() == SAVE_DIALOG) {
+                    int result = JOptionPane.showConfirmDialog(this,
+                        "File \"" + selectedFile.getName() + "\" already exists.\nReplace it?",
+                        "Confirm overwrite",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE);
+                    if (result != JOptionPane.YES_OPTION) {
+                        return;
+                    }
+                }
+                super.approveSelection();
+            }
+        };
         fcSelectDeck.setAcceptAllFileFilterUsed(false);
         fcSelectDeck.addChoosableFileFilter(new DeckFileFilter("dck", "XMage's deck files (*.dck)"));
         fcSelectDeck.addChoosableFileFilter(new DeckFileFilter("dck_info", "XMage's deck files with info (*.dck_info)"));
@@ -1386,6 +1411,24 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             fcSelectDeck.setCurrentDirectory(new File(lastFolder));
         }
         deck.setName(this.txtDeckName.getText());
+
+        // auto-fill deck file name on new save
+        if (deck.getName() != null && !deck.getName().isEmpty()) {
+            if (fcSelectDeck.getSelectedFile() == null) {
+                // new editor
+                fcSelectDeck.setSelectedFile(Paths.get(
+                    fcSelectDeck.getCurrentDirectory().getAbsolutePath(), 
+                    deck.getName()
+                ).toFile());
+            } else {
+                // existing editor (already open load/save dialog)
+                fcSelectDeck.setSelectedFile(Paths.get(
+                    fcSelectDeck.getSelectedFile().getParent(), 
+                    deck.getName()
+                ).toFile());
+            }
+        }
+
         int ret = fcSelectDeck.showSaveDialog(this);
         if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fcSelectDeck.getSelectedFile();
@@ -1437,7 +1480,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
-        //fcSelectDeck.setCurrentDirectory(new File());
         String lastFolder = MageFrame.getPreferences().get(LAST_DECK_FOLDER, "");
         if (!lastFolder.isEmpty()) {
             fcSelectDeck.setCurrentDirectory(new File(lastFolder));
