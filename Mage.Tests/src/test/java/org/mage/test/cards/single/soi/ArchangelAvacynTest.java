@@ -3,8 +3,8 @@ package org.mage.test.cards.single.soi;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -56,7 +56,7 @@ public class ArchangelAvacynTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Wall of Roots", 1);
 
         Permanent avacyn = getPermanent("Avacyn, the Purifier", playerA);
-        Assert.assertEquals("Damage to Avacyn, the Purifier should be 0 not 3", 0, avacyn.getDamage());
+        Assertions.assertEquals(0, avacyn.getDamage(), "Damage to Avacyn, the Purifier should be 0 not 3");
 
         assertGraveyardCount(playerB, "Hill Giant", 1);
 

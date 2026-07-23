@@ -2,8 +2,8 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -54,10 +54,10 @@ public class MeldTest extends CardTestPlayerBase {
 
         try {
             execute();
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Cast Silvercoat Lion")) {
-                Assert.fail("Should have thrown error about casting Silvercoat Lion, but got:\n" + e.getMessage());
+                Assertions.fail("Should have thrown error about casting Silvercoat Lion, but got:\n" + e.getMessage());
             }
         }
 
@@ -244,7 +244,7 @@ public class MeldTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, brisela, 1);
         int manaValue = getPermanent(brisela, playerA).getManaValue();
-        Assert.assertEquals("Melded Brisela's mana value", 7 + 4, manaValue);
+        Assertions.assertEquals(7 + 4, manaValue, "Melded Brisela's mana value");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clone");
         setChoice(playerB, true); // Yes to clone.
@@ -255,7 +255,7 @@ public class MeldTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, brisela, 1);
         manaValue = getPermanent(brisela, playerB).getManaValue();
-        Assert.assertEquals("Clone of Brisela should have mana value 0", 0, manaValue);
+        Assertions.assertEquals(0, manaValue, "Clone of Brisela should have mana value 0");
     }
 
     /**
@@ -309,7 +309,7 @@ public class MeldTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, urzaPlaneswalker, 1);
         int manaValue = getPermanent(urzaPlaneswalker, playerA).getManaValue();
-        Assert.assertEquals("Melded Urza, Planeswalker's mana value", 3 + 5, manaValue);
+        Assertions.assertEquals(3 + 5, manaValue, "Melded Urza, Planeswalker's mana value");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Mythos of Illuna", urzaPlaneswalker);
 
@@ -318,7 +318,7 @@ public class MeldTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, urzaPlaneswalker, 1);
         manaValue = getPermanent(urzaPlaneswalker, playerB).getManaValue();
-        Assert.assertEquals("Clone of Urza, Planeswalker should have mana value 0", 0, manaValue);
+        Assertions.assertEquals(0, manaValue, "Clone of Urza, Planeswalker should have mana value 0");
     }
 
     // Eliminate can not kill Urza's Planeswalker.
@@ -348,9 +348,9 @@ public class MeldTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         try {
             execute();
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
-            Assert.assertEquals("Player PlayerB must have 0 actions but found 1", e.getMessage());
+            Assertions.assertEquals("Player PlayerB must have 0 actions but found 1", e.getMessage());
         }
     }
 
@@ -380,6 +380,6 @@ public class MeldTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, urzaPlaneswalker, 1);
         int manaValue = getPermanent(urzaPlaneswalker, playerA).getManaValue();
-        Assert.assertEquals("Melded Urza, Planeswalker's mana value", 3 + 5, manaValue);
+        Assertions.assertEquals(3 + 5, manaValue, "Melded Urza, Planeswalker's mana value");
     }
 }

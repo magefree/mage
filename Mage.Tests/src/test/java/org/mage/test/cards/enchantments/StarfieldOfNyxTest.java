@@ -8,8 +8,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -98,9 +98,9 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
         Permanent enchantment = getPermanent("Singing Bell Strike", playerA);
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent enchanted = currentGame.getPermanent(enchantment.getAttachedTo());
-            Assert.assertEquals("Silumgar was enchanted", "Silumgar, the Drifting Death", enchanted.getName());
+            Assertions.assertEquals(enchanted.getName(), "Silumgar, the Drifting Death", "Silumgar was enchanted");
         } else {
-            Assert.fail("Singing Bell Strike not on the battlefield");
+            Assertions.fail("Singing Bell Strike not on the battlefield");
         }
     }
 
@@ -121,8 +121,8 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
         // Humility loses its ability in layer 6.  Layer 7 never gets Humility's effect
         assertPowerToughness(playerA, "Emrakul, the Aeons Torn", 15, 15, Filter.ComparisonScope.All); // PT not affected
         Permanent emrakul = getPermanent("Emrakul, the Aeons Torn", playerA.getId());
-        Assert.assertNotNull(emrakul);
-        Assert.assertFalse(emrakul.getAbilities().contains(FlyingAbility.getInstance())); // loses flying though
+        Assertions.assertNotNull(emrakul);
+        Assertions.assertFalse(emrakul.getAbilities().contains(FlyingAbility.getInstance())); // loses flying though
 
     }
 

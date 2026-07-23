@@ -1,6 +1,7 @@
 package org.mage.test.cards.single.ltr;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import mage.constants.PhaseStep;
@@ -77,30 +78,32 @@ public class GoldberryRiverDaughterTest extends CardTestPlayerBase {
         assertCounterCount(goldberry, counter, 1);
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     // Author: alexander-novo
     // Unhappy path - Try to not move a counter from Goldberry even though she has a counter on her.
     // Should fail since we are attempting to move 0 counters, even though we must move at least one if possible.
     public void testNotMovingCounter() {
-        CounterType counter = CounterType.ACORN;
-        String island = "Island";
+        Assertions.assertThrows(AssertionError.class, () -> {
+            CounterType counter = CounterType.ACORN;
+            String island = "Island";
 
-        addCard(Zone.BATTLEFIELD, playerA, goldberry, 1);
-        addCard(Zone.BATTLEFIELD, playerA, island, 1);
+            addCard(Zone.BATTLEFIELD, playerA, goldberry, 1);
+            addCard(Zone.BATTLEFIELD, playerA, island, 1);
 
-        addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerA, goldberry, counter, 1);
+            addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerA, goldberry, counter, 1);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, ability2, island);
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
-        setChoiceAmount(playerA, 0); // Try to remove 0 counters from goldberry
+            activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, ability2, island);
+            waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
+            setChoiceAmount(playerA, 0); // Try to remove 0 counters from goldberry
 
-        setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
-        execute();
+            setStrictChooseMode(true);
+            setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+            execute();
 
-        assertCounterCount(goldberry, counter, 0);
-        assertCounterCount(island, counter, 1);
-        assertHandCount(playerA, 1);
+            assertCounterCount(goldberry, counter, 0);
+            assertCounterCount(island, counter, 1);
+            assertHandCount(playerA, 1);
+        });
     }
 
     @Test

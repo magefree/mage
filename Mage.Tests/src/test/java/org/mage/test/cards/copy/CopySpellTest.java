@@ -16,8 +16,8 @@ import mage.counters.CounterType;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 import mage.util.CardUtil;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -198,7 +198,7 @@ public class CopySpellTest extends CardTestPlayerBase {
 
     // Perhaps someone knows the correct implementation for this test.
     // Just target the Silverfur Partisan and hit done
-    // This test works fine in game.  The @Ignore would not work for me either.
+    // This test works fine in game.  The @Disabled would not work for me either.
     @Test
     public void ZadaHedronSilverfurPartisan() {
 
@@ -646,8 +646,8 @@ public class CopySpellTest extends CardTestPlayerBase {
                 .filter(p -> p instanceof PermanentToken)
                 .mapToInt(p -> p.getCounters(currentGame).getCount(CounterType.P1P1))
                 .sum();
-        Assert.assertEquals("original grenzo must have 2x counters", 2, originalCounters);
-        Assert.assertEquals("copied grenzo must have 2x counters", 2, copyCounters);
+        Assertions.assertEquals(2, originalCounters, "original grenzo must have 2x counters");
+        Assertions.assertEquals(2, copyCounters, "copied grenzo must have 2x counters");
     }
 
     @Test
@@ -657,8 +657,8 @@ public class CopySpellTest extends CardTestPlayerBase {
         prepareZoneAndZCC(originalCard);
         Card copiedCard = currentGame.copyCard(originalCard, null, playerA.getId());
         // main
-        Assert.assertNotEquals("main - id must be different", originalCard.getId(), copiedCard.getId());
-        Assert.assertEquals("main - rules must be same", originalCard.getRules(), copiedCard.getRules());
+        Assertions.assertNotEquals(originalCard.getId(), copiedCard.getId(), "main - id must be different");
+        Assertions.assertEquals(originalCard.getRules(), copiedCard.getRules(), "main - rules must be same");
         abilitySourceMustBeSame(sourceCard, "main source");
         abilitySourceMustBeSame(originalCard, "main original"); // original card can be broken after copyCard call
         abilitySourceMustBeSame(copiedCard, "main copied");
@@ -672,23 +672,23 @@ public class CopySpellTest extends CardTestPlayerBase {
         prepareZoneAndZCC(originalCard);
         SplitCard copiedCard = (SplitCard) currentGame.copyCard(originalCard, null, playerA.getId());
         // main
-        Assert.assertNotEquals("main - id must be different", originalCard.getId(), copiedCard.getId());
-        Assert.assertEquals("main - rules must be same", originalCard.getRules(), copiedCard.getRules());
+        Assertions.assertNotEquals(originalCard.getId(), copiedCard.getId(), "main - id must be different");
+        Assertions.assertEquals(originalCard.getRules(), copiedCard.getRules(), "main - rules must be same");
         abilitySourceMustBeSame(sourceCard, "main source");
         abilitySourceMustBeSame(originalCard, "main original");
         abilitySourceMustBeSame(copiedCard, "main copied");
         //cardsMustHaveSameZoneAndZCC(originalCard, copiedCard, "main");
         // left
-        Assert.assertNotEquals("left - id must be different", originalCard.getLeftHalfCard().getId(), copiedCard.getLeftHalfCard().getId());
-        Assert.assertEquals("left - rules must be same", originalCard.getLeftHalfCard().getRules(), copiedCard.getLeftHalfCard().getRules());
-        Assert.assertEquals("left - parent ref", copiedCard.getLeftHalfCard().getParentCard().getId(), copiedCard.getId());
+        Assertions.assertNotEquals(originalCard.getLeftHalfCard().getId(), copiedCard.getLeftHalfCard().getId(), "left - id must be different");
+        Assertions.assertEquals(originalCard.getLeftHalfCard().getRules(), copiedCard.getLeftHalfCard().getRules(), "left - rules must be same");
+        Assertions.assertEquals(copiedCard.getLeftHalfCard().getParentCard().getId(), copiedCard.getId(), "left - parent ref");
         abilitySourceMustBeSame(originalCard.getLeftHalfCard(), "left original");
         abilitySourceMustBeSame(copiedCard.getLeftHalfCard(), "left copied");
         //cardsMustHaveSameZoneAndZCC(originalCard.getLeftHalfCard(), copiedCard.getLeftHalfCard(), "left");
         // right
-        Assert.assertNotEquals("right - id must be different", originalCard.getRightHalfCard().getId(), copiedCard.getRightHalfCard().getId());
-        Assert.assertEquals("right - rules must be same", originalCard.getRightHalfCard().getRules(), copiedCard.getRightHalfCard().getRules());
-        Assert.assertEquals("right - parent ref", copiedCard.getRightHalfCard().getParentCard().getId(), copiedCard.getId());
+        Assertions.assertNotEquals(originalCard.getRightHalfCard().getId(), copiedCard.getRightHalfCard().getId(), "right - id must be different");
+        Assertions.assertEquals(originalCard.getRightHalfCard().getRules(), copiedCard.getRightHalfCard().getRules(), "right - rules must be same");
+        Assertions.assertEquals(copiedCard.getRightHalfCard().getParentCard().getId(), copiedCard.getId(), "right - parent ref");
         abilitySourceMustBeSame(originalCard.getRightHalfCard(), "right original");
         abilitySourceMustBeSame(copiedCard.getRightHalfCard(), "right copied");
         //cardsMustHaveSameZoneAndZCC(originalCard.getRightHalfCard(), copiedCard.getRightHalfCard(), "right");
@@ -701,16 +701,16 @@ public class CopySpellTest extends CardTestPlayerBase {
         prepareZoneAndZCC(originalCard);
         AdventureCard copiedCard = (AdventureCard) currentGame.copyCard(originalCard, null, playerA.getId());
         // main
-        Assert.assertNotEquals("main - id must be different", originalCard.getId(), copiedCard.getId());
-        Assert.assertEquals("main - rules must be same", originalCard.getRules(), copiedCard.getRules());
+        Assertions.assertNotEquals(originalCard.getId(), copiedCard.getId(), "main - id must be different");
+        Assertions.assertEquals(originalCard.getRules(), copiedCard.getRules(), "main - rules must be same");
         abilitySourceMustBeSame(sourceCard, "main source");
         abilitySourceMustBeSame(originalCard, "main original");
         abilitySourceMustBeSame(copiedCard, "main copied");
         //cardsMustHaveSameZoneAndZCC(originalCard, copiedCard, "main");
         // right (spell)
-        Assert.assertNotEquals("right - id must be different", originalCard.getSpellCard().getId(), copiedCard.getSpellCard().getId());
-        Assert.assertEquals("right - rules must be same", originalCard.getSpellCard().getRules(), copiedCard.getSpellCard().getRules());
-        Assert.assertEquals("right - parent ref", copiedCard.getSpellCard().getParentCard().getId(), copiedCard.getId());
+        Assertions.assertNotEquals(originalCard.getSpellCard().getId(), copiedCard.getSpellCard().getId(), "right - id must be different");
+        Assertions.assertEquals(originalCard.getSpellCard().getRules(), copiedCard.getSpellCard().getRules(), "right - rules must be same");
+        Assertions.assertEquals(copiedCard.getSpellCard().getParentCard().getId(), copiedCard.getId(), "right - parent ref");
         abilitySourceMustBeSame(originalCard.getSpellCard(), "right original");
         abilitySourceMustBeSame(copiedCard.getSpellCard(), "right copied");
         //cardsMustHaveSameZoneAndZCC(originalCard.getSpellCard(), copiedCard.getSpellCard(), "right");
@@ -723,23 +723,23 @@ public class CopySpellTest extends CardTestPlayerBase {
         prepareZoneAndZCC(originalCard);
         ModalDoubleFacedCard copiedCard = (ModalDoubleFacedCard) currentGame.copyCard(originalCard, null, playerA.getId());
         // main
-        Assert.assertNotEquals("main - id must be different", originalCard.getId(), copiedCard.getId());
-        Assert.assertEquals("main - rules must be same", originalCard.getRules(), copiedCard.getRules());
+        Assertions.assertNotEquals(originalCard.getId(), copiedCard.getId(), "main - id must be different");
+        Assertions.assertEquals(originalCard.getRules(), copiedCard.getRules(), "main - rules must be same");
         abilitySourceMustBeSame(sourceCard, "main source");
         abilitySourceMustBeSame(originalCard, "main original");
         abilitySourceMustBeSame(copiedCard, "main copied");
         //cardsMustHaveSameZoneAndZCC(originalCard, copiedCard, "main");
         // left
-        Assert.assertNotEquals("left - id must be different", originalCard.getLeftHalfCard().getId(), copiedCard.getLeftHalfCard().getId());
-        Assert.assertEquals("left - rules must be same", originalCard.getLeftHalfCard().getRules(), copiedCard.getLeftHalfCard().getRules());
-        Assert.assertEquals("left - parent ref", copiedCard.getLeftHalfCard().getParentCard().getId(), copiedCard.getId());
+        Assertions.assertNotEquals(originalCard.getLeftHalfCard().getId(), copiedCard.getLeftHalfCard().getId(), "left - id must be different");
+        Assertions.assertEquals(originalCard.getLeftHalfCard().getRules(), copiedCard.getLeftHalfCard().getRules(), "left - rules must be same");
+        Assertions.assertEquals(copiedCard.getLeftHalfCard().getParentCard().getId(), copiedCard.getId(), "left - parent ref");
         abilitySourceMustBeSame(originalCard.getLeftHalfCard(), "left original");
         abilitySourceMustBeSame(copiedCard.getLeftHalfCard(), "left copied");
         //cardsMustHaveSameZoneAndZCC(originalCard.getLeftHalfCard(), copiedCard.getLeftHalfCard(), "left");
         // right
-        Assert.assertNotEquals("right - id must be different", originalCard.getRightHalfCard().getId(), copiedCard.getRightHalfCard().getId());
-        Assert.assertEquals("right - rules must be same", originalCard.getRightHalfCard().getRules(), copiedCard.getRightHalfCard().getRules());
-        Assert.assertEquals("right - parent ref", copiedCard.getRightHalfCard().getParentCard().getId(), copiedCard.getId());
+        Assertions.assertNotEquals(originalCard.getRightHalfCard().getId(), copiedCard.getRightHalfCard().getId(), "right - id must be different");
+        Assertions.assertEquals(originalCard.getRightHalfCard().getRules(), copiedCard.getRightHalfCard().getRules(), "right - rules must be same");
+        Assertions.assertEquals(copiedCard.getRightHalfCard().getParentCard().getId(), copiedCard.getId(), "right - parent ref");
         abilitySourceMustBeSame(originalCard.getRightHalfCard(), "right original");
         abilitySourceMustBeSame(copiedCard.getRightHalfCard(), "right copied");
         //cardsMustHaveSameZoneAndZCC(originalCard.getRightHalfCard(), copiedCard.getRightHalfCard(), "right");
@@ -886,7 +886,7 @@ public class CopySpellTest extends CardTestPlayerBase {
                     return;
                 }
 
-                Assert.fail(infoPrefix + " - " + "ability source must be same: " + ability);
+                Assertions.fail(infoPrefix + " - " + "ability source must be same: " + ability);
             }
         });
     }
@@ -905,7 +905,7 @@ public class CopySpellTest extends CardTestPlayerBase {
         int zcc1 = currentGame.getState().getZoneChangeCounter(originalCard.getId());
         int zcc2 = currentGame.getState().getZoneChangeCounter(copiedCard.getId());
         if (zone1 != zone2 || zcc1 != zcc2) {
-            Assert.fail(infoPrefix + " - " + "cards must have same zone and zcc: " + zcc1 + " - " + zone1 + " != " + zcc2 + " - " + zone2);
+            Assertions.fail(infoPrefix + " - " + "cards must have same zone and zcc: " + zcc1 + " - " + zone1 + " != " + zcc2 + " - " + zone2);
         }
     }
 

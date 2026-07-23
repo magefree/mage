@@ -10,8 +10,8 @@ import mage.abilities.effects.Effect;
 import mage.cards.*;
 import mage.target.Target;
 import org.apache.log4j.Logger;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -28,7 +28,7 @@ public class ExportJsonGameplayDataTest {
     private static final boolean MTGJSON_WRITE_TO_FILES = false;
 
     @Test
-    @Ignore
+    @Disabled
     /**
      * It's export code example for https://github.com/mtgjson/mtgjson4
      */

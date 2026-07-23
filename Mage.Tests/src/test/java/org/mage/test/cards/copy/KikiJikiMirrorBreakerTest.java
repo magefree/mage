@@ -7,8 +7,8 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -154,9 +154,9 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
             }
         }
         if (kikiCopy != null) {
-            Assert.assertEquals("Has to have haste", kikiCopy.getAbilities(currentGame).containsClass(HasteAbility.class), true);
+            Assertions.assertEquals(kikiCopy.getAbilities(currentGame).containsClass(HasteAbility.class), true, "Has to have haste");
         } else {
-            Assert.assertEquals("Silvercoat Lion copied by Kiki is missing", kikiCopy != null, true);
+            Assertions.assertEquals(kikiCopy != null, true, "Silvercoat Lion copied by Kiki is missing");
         }
 
         assertLife(playerA, 18);

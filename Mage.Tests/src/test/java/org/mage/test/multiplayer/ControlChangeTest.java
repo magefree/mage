@@ -3,8 +3,8 @@ package org.mage.test.multiplayer;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
 /**
@@ -47,10 +47,10 @@ public class ControlChangeTest extends CardTestMultiPlayerBase {
         assertPermanentCount(playerB, "Jin-Gitaxias, Core Augur", 1);
         assertPermanentCount(playerB, "Sower of Temptation", 1);
         
-        Assert.assertEquals(0, playerA.getMaxHandSize());
-        Assert.assertEquals(7, playerB.getMaxHandSize());
-        Assert.assertEquals(0, playerC.getMaxHandSize());
-        Assert.assertEquals(7, playerD.getMaxHandSize());
+        Assertions.assertEquals(0, playerA.getMaxHandSize());
+        Assertions.assertEquals(7, playerB.getMaxHandSize());
+        Assertions.assertEquals(0, playerC.getMaxHandSize());
+        Assertions.assertEquals(7, playerD.getMaxHandSize());
     }
 
 }

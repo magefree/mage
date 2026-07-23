@@ -5,8 +5,8 @@ import mage.constants.RangeOfInfluence;
 import mage.game.FreeformUnlimitedCommander;
 import mage.game.mulligan.LondonMulligan;
 import mage.game.mulligan.Mulligan;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.MageTestPlayerBase;
 
 public class FreeformUnlimitedCommanderTest extends MageTestPlayerBase {
@@ -28,6 +28,6 @@ public class FreeformUnlimitedCommanderTest extends MageTestPlayerBase {
         );
 
         // Assert
-        Assert.assertEquals(FreeformUnlimitedCommander.class, game.getClass());
+        Assertions.assertEquals(FreeformUnlimitedCommander.class, game.getClass());
     }
 }

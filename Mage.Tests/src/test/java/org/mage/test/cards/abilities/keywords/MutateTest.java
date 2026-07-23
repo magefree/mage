@@ -8,8 +8,8 @@ import mage.abilities.keyword.*;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.constants.*;
 import mage.counters.CounterType;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -1695,12 +1695,12 @@ public class MutateTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, creature, mutateUnder ? 2 : 3, mutateUnder ? 2 : 4);
     }
     @Test
-    @Ignore
+    @Disabled
     public void testMutateCardUnderCardFlip() {
         setupTestMutateFlip(true);
     }
     @Test
-    @Ignore
+    @Disabled
     public void testMutateCardOverCardFlip() {
         setupTestMutateFlip(false);
     }

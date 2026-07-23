@@ -8,7 +8,7 @@ import mage.game.Game;
 import mage.game.GameException;
 import mage.game.TwoPlayerDuel;
 import mage.game.mulligan.MulliganType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl;
 
 import java.io.FileNotFoundException;

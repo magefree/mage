@@ -3,8 +3,8 @@ package org.mage.test.cards.mana;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
@@ -37,7 +37,7 @@ public class HarvestMageTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Harvest Mage", 1);
         
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assertions.assertEquals(1, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{Any}", manaOptions);        
     }
     
@@ -65,7 +65,7 @@ public class HarvestMageTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Harvest Mage", 1);
         
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assertions.assertEquals(1, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{Any}{Any}", manaOptions);        
     }    
 }

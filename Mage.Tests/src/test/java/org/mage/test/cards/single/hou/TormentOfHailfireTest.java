@@ -8,8 +8,8 @@ import mage.game.FreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.mulligan.MulliganType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
 import java.io.FileNotFoundException;
@@ -79,7 +79,7 @@ public class TormentOfHailfireTest extends CardTestMultiPlayerBase {
         assertLife(playerC, 20);
         assertLife(playerD, 2);
         assertLife(playerB, -1);
-        Assert.assertFalse("Player B is dead", playerB.isInGame());
+        Assertions.assertFalse(playerB.isInGame(), "Player B is dead");
 
     }
 }

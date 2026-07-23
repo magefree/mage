@@ -2,8 +2,8 @@ package org.mage.test.cards.single.mh3;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -116,10 +116,10 @@ public class DetectivesPhoenixTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         try {
             execute();
-            Assert.fail("should have failed");
+            Assertions.fail("should have failed");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Cast " + phoenix)) {
-                Assert.fail("Should have thrown error about not being able to cast the Phoenix, but got:\n" + e.getMessage());
+                Assertions.fail("Should have thrown error about not being able to cast the Phoenix, but got:\n" + e.getMessage());
             }
         }
     }

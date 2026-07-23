@@ -2,8 +2,8 @@ package org.mage.test.cards.abilities.mana;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -55,7 +55,7 @@ public class SpendOnlyManaProducedByTest extends CardTestPlayerBase {
         } catch (AssertionError e) {
             foundError = e.getMessage();
         }
-        Assert.assertEquals(expectedError, foundError);
+        Assertions.assertEquals(expectedError, foundError);
     }
 
     @Test
@@ -75,7 +75,7 @@ public class SpendOnlyManaProducedByTest extends CardTestPlayerBase {
         } catch (AssertionError e) {
             foundError = e.getMessage();
         }
-        Assert.assertEquals(expectedError, foundError);
+        Assertions.assertEquals(expectedError, foundError);
     }
 
     @Test
@@ -100,7 +100,7 @@ public class SpendOnlyManaProducedByTest extends CardTestPlayerBase {
         } catch (AssertionError e) {
             foundError = e.getMessage();
         }
-        Assert.assertEquals(expectedError, foundError);
+        Assertions.assertEquals(expectedError, foundError);
     }
 
     @Test
@@ -119,7 +119,7 @@ public class SpendOnlyManaProducedByTest extends CardTestPlayerBase {
         } catch (AssertionError e) {
             foundError = e.getMessage();
         }
-        Assert.assertEquals(expectedError, foundError);
+        Assertions.assertEquals(expectedError, foundError);
     }
 
     @Test
@@ -170,7 +170,7 @@ public class SpendOnlyManaProducedByTest extends CardTestPlayerBase {
         } catch (AssertionError e) {
             foundError = e.getMessage();
         }
-        Assert.assertEquals(expectedError, foundError);
+        Assertions.assertEquals(expectedError, foundError);
     }
 
     @Test
@@ -210,7 +210,7 @@ public class SpendOnlyManaProducedByTest extends CardTestPlayerBase {
         } catch (AssertionError e) {
             foundError = e.getMessage();
         }
-        Assert.assertEquals(expectedError, foundError);
+        Assertions.assertEquals(expectedError, foundError);
     }
 
 }

@@ -3,8 +3,8 @@ package org.mage.test.cards.abilities.equipped;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -47,10 +47,10 @@ public class LeoninShikariTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Silvercoat Lion", 2, 2);
 
         Permanent silvercoatLion = getPermanent("Silvercoat Lion", playerA.getId());
-        Assert.assertTrue("Silvercoat Lion may not have any attachments", silvercoatLion.getAttachments().isEmpty());
+        Assertions.assertTrue(silvercoatLion.getAttachments().isEmpty(), "Silvercoat Lion may not have any attachments");
         
         Permanent leoninScimitar = getPermanent("Leonin Scimitar", playerA.getId());
-        Assert.assertTrue(leoninScimitar.getAttachedTo() == null);
+        Assertions.assertTrue(leoninScimitar.getAttachedTo() == null);
     }
 
 }

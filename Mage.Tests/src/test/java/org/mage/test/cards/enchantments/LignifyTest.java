@@ -6,8 +6,8 @@ import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -45,7 +45,7 @@ public class LignifyTest extends CardTestPlayerBase {
 
         Permanent hivelord = getPermanent("Sliver Hivelord", playerB);
 
-        Assert.assertFalse("Sliver Hivelord may not be of subtype Sliver", hivelord.hasSubtype(SubType.SLIVER, currentGame));
+        Assertions.assertFalse(hivelord.hasSubtype(SubType.SLIVER, currentGame), "Sliver Hivelord may not be of subtype Sliver");
 
     }
 

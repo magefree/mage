@@ -1,6 +1,6 @@
 package org.mage.test.cards.single.vis;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import static mage.constants.PhaseStep.*;

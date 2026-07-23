@@ -3,8 +3,8 @@ package org.mage.test.serverside;
 import mage.cards.repository.CardRepository;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 /**
@@ -18,12 +18,12 @@ public class DatabaseBigQueryPerformanceTest extends CardTestPlayerBaseWithAIHel
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        Assert.assertTrue("must load getNames", CardRepository.instance.getNames().size() > 1000);
-        Assert.assertTrue("must load getNonLandNames", CardRepository.instance.getNonLandNames().size() > 1000);
-        Assert.assertTrue("must load getArtifactNames", CardRepository.instance.getArtifactNames().size() > 1000);
-        Assert.assertTrue("must load getCreatureNames", CardRepository.instance.getCreatureNames().size() > 1000);
-        Assert.assertTrue("must load getNonArtifactAndNonLandNames", CardRepository.instance.getNonArtifactAndNonLandNames().size() > 1000);
-        Assert.assertTrue("must load getNonLandAndNonCreatureNames", CardRepository.instance.getNonLandAndNonCreatureNames().size() > 1000);
+        Assertions.assertTrue(CardRepository.instance.getNames().size() > 1000, "must load getNames");
+        Assertions.assertTrue(CardRepository.instance.getNonLandNames().size() > 1000, "must load getNonLandNames");
+        Assertions.assertTrue(CardRepository.instance.getArtifactNames().size() > 1000, "must load getArtifactNames");
+        Assertions.assertTrue(CardRepository.instance.getCreatureNames().size() > 1000, "must load getCreatureNames");
+        Assertions.assertTrue(CardRepository.instance.getNonArtifactAndNonLandNames().size() > 1000, "must load getNonArtifactAndNonLandNames");
+        Assertions.assertTrue(CardRepository.instance.getNonLandAndNonCreatureNames().size() > 1000, "must load getNonLandAndNonCreatureNames");
     }
 
     @Test

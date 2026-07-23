@@ -2,8 +2,8 @@ package org.mage.test.cards.asthough;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -238,7 +238,7 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        Assert.assertTrue("Mana pool of conditional mana has to be empty", playerA.getManaPool().getConditionalMana().isEmpty());
+        Assertions.assertTrue(playerA.getManaPool().getConditionalMana().isEmpty(), "Mana pool of conditional mana has to be empty");
         assertExileCount("Pillarfield Ox", 1);
         assertPermanentCount(playerA, "Adriana, Captain of the Guard", 1);
     }

@@ -10,8 +10,8 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.token.FoodToken;
 import mage.game.permanent.token.TreasureToken;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -71,10 +71,10 @@ public class YasharnImplacableEarthTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         try {
             execute();
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Can't find ability to activate command: {T}")) {
-                Assert.fail("must throw error about having 0 actions, but got:\n" + e.getMessage());
+                Assertions.fail("must throw error about having 0 actions, but got:\n" + e.getMessage());
             }
         }
     }
@@ -113,10 +113,10 @@ public class YasharnImplacableEarthTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         try {
             execute();
-            Assert.fail("must throw exception on execute");
+            Assertions.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Can't find ability to activate command: {2}")) {
-                Assert.fail("must throw error about having 0 actions, but got:\n" + e.getMessage());
+                Assertions.fail("must throw error about having 0 actions, but got:\n" + e.getMessage());
             }
         }
         assertHandCount(playerA, 0);

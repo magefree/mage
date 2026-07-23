@@ -56,7 +56,6 @@ import net.java.truevfs.access.TArchiveDetector;
 import net.java.truevfs.access.TConfig;
 import net.java.truevfs.kernel.spec.FsAccessOption;
 import org.apache.log4j.Logger;
-import org.junit.Assert;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.SvgUtils;
 import org.mage.plugins.card.images.DownloadPicturesService;

@@ -6,8 +6,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -135,7 +135,7 @@ public class GideonTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
         assertLife(playerA, 7);
         Permanent equipment = getPermanent("Stitcher's Graft", playerB);
-        Assert.assertTrue("Stitcher's Graft may no longer be equipped", equipment.getAttachedTo() == null);
+        Assertions.assertTrue(equipment.getAttachedTo() == null, "Stitcher's Graft may no longer be equipped");
         assertPermanentCount(playerB, "Gideon, Battle-Forged", 0);
         assertGraveyardCount(playerB, "Kytheon, Hero of Akros", 1);
     }

@@ -2,8 +2,8 @@ package org.mage.test.cards.single.lci;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -34,8 +34,8 @@ public class ShipwreckSentryTest extends CardTestPlayerBase {
         try {
             execute();
         } catch (AssertionError e) {
-            Assert.assertTrue("No artifact entered",
-                    e.getMessage().contains("Can't find available command - attack:Shipwreck Sentry$defendingPlayer=PlayerB"));
+            Assertions.assertTrue(e.getMessage().contains("Can't find available command - attack:Shipwreck Sentry$defendingPlayer=PlayerB"),
+                    "No artifact entered");
         }
 
     }

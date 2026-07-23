@@ -3,8 +3,8 @@ package org.mage.test.cards.abilities.oneshot.regenerate;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -36,9 +36,9 @@ public class NecrobiteRegenerateTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Craw Wurm", 1);
 
         Permanent eliteVanguard = getPermanent("Elite Vanguard", playerB.getId());
-        Assert.assertNotNull(eliteVanguard);
+        Assertions.assertNotNull(eliteVanguard);
 
         // regenerate causes to tap
-        Assert.assertTrue(eliteVanguard.isTapped());
+        Assertions.assertTrue(eliteVanguard.isTapped());
     }
 }

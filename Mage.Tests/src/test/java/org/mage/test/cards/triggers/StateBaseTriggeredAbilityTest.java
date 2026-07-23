@@ -7,8 +7,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.SoldierToken;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -103,7 +103,7 @@ public class StateBaseTriggeredAbilityTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore // TODO: enable after non-stack delayed triggers reworked, search: state.addTriggeredAbility
+    @Disabled // TODO: enable after non-stack delayed triggers reworked, search: state.addTriggeredAbility
     public void test_GraspOfFate_DelayedTriggerMustResolveImmediately() {
         // checking rule:
         // The exiled cards return to the battlefield immediately after Grasp of Fate leaves the battlefield.

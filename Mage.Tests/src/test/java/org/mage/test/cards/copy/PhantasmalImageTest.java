@@ -7,12 +7,12 @@ import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author noxx, JayDi85
@@ -100,14 +100,14 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         Permanent masterCopied = getPermanent("Transcendent Master", playerB.getId());
 
         // Original master should be upgraded to 3rd level
-        assertEquals("Power different", 9, master.getPower().getValue());
-        assertEquals("Toughness different", 9, master.getToughness().getValue());
+        assertEquals(9, master.getPower().getValue(), "Power different");
+        assertEquals(9, master.getToughness().getValue(), "Toughness different");
         assertTrue(master.getAbilities().contains(LifelinkAbility.getInstance()));
         assertTrue(master.getAbilities().containsRule(IndestructibleAbility.getInstance()));
 
         // But copied one should not
-        assertEquals("Power different", 3, masterCopied.getPower().getValue());
-        assertEquals("Toughness different", 3, masterCopied.getToughness().getValue());
+        assertEquals(3, masterCopied.getPower().getValue(), "Power different");
+        assertEquals(3, masterCopied.getToughness().getValue(), "Toughness different");
         assertFalse(masterCopied.getAbilities().contains(LifelinkAbility.getInstance()));
         assertFalse(masterCopied.getAbilities().containsRule(IndestructibleAbility.getInstance()));
     }
@@ -218,8 +218,8 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         execute();
 
         Permanent copy = getPermanent("Geralf's Messenger", playerA.getId());
-        Assert.assertNotNull(copy);
-        Assert.assertTrue("Should be tapped", copy.isTapped());
+        Assertions.assertNotNull(copy);
+        Assertions.assertTrue(copy.isTapped(), "Should be tapped");
 
         // Tests: When Geralf's Messenger enters the battlefield, target opponent loses 2 life.
         assertLife(playerB, 18);
@@ -709,16 +709,16 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         execute();
 
         Permanent staffA = getPermanent("Chimeric Staff", playerA);
-        assertTrue("Phantasmal Image should be an artifact", staffA.isArtifact(currentGame));
-        assertTrue("Phantasmal Image should not be a creature", !staffA.isCreature(currentGame));
-        assertTrue("Phantasmal Image should not be an Illusion", !staffA.hasSubtype(SubType.ILLUSION, currentGame));
-        assertTrue("Phantasmal Image should not be a Construct", !staffA.hasSubtype(SubType.CONSTRUCT, currentGame));
-        assertTrue("Phantasmal Image should have the sacrifice trigger", staffA.getAbilities(currentGame).containsClass(BecomesTargetSourceTriggeredAbility.class));
+        assertTrue(staffA.isArtifact(currentGame), "Phantasmal Image should be an artifact");
+        assertTrue(!staffA.isCreature(currentGame), "Phantasmal Image should not be a creature");
+        assertTrue(!staffA.hasSubtype(SubType.ILLUSION, currentGame), "Phantasmal Image should not be an Illusion");
+        assertTrue(!staffA.hasSubtype(SubType.CONSTRUCT, currentGame), "Phantasmal Image should not be a Construct");
+        assertTrue(staffA.getAbilities(currentGame).containsClass(BecomesTargetSourceTriggeredAbility.class), "Phantasmal Image should have the sacrifice trigger");
 
         Permanent staffB = getPermanent("Chimeric Staff", playerB);
-        assertTrue("Chimeric Staff should be an artifact", staffB.isArtifact(currentGame));
-        assertTrue("Chimeric Staff should be a creature", staffB.isCreature(currentGame));
-        assertTrue("Chimeric Staff should be a Construct", staffB.hasSubtype(SubType.CONSTRUCT, currentGame));
+        assertTrue(staffB.isArtifact(currentGame), "Chimeric Staff should be an artifact");
+        assertTrue(staffB.isCreature(currentGame), "Chimeric Staff should be a creature");
+        assertTrue(staffB.hasSubtype(SubType.CONSTRUCT, currentGame), "Chimeric Staff should be a Construct");
     }
 
     @Test
@@ -739,20 +739,20 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         execute();
 
         Permanent cloakA = getPermanent("Cloak and Dagger", playerA);
-        assertTrue("Phantasmal Image should be an artifact", cloakA.isArtifact(currentGame));
-        assertTrue("Phantasmal Image should be kindred", cloakA.isKindred(currentGame));
-        assertTrue("Phantasmal Image should not be a creature", !cloakA.isCreature(currentGame));
-        assertTrue("Phantasmal Image should be a Rogue", cloakA.hasSubtype(SubType.ROGUE, currentGame));
-        assertTrue("Phantasmal Image should be an Illusion", cloakA.hasSubtype(SubType.ILLUSION, currentGame));
-        assertTrue("Phantasmal Image should be an Equipment", cloakA.hasSubtype(SubType.EQUIPMENT, currentGame));
-        assertTrue("Phantasmal Image should have the sacrifice trigger", cloakA.getAbilities(currentGame).containsClass(BecomesTargetSourceTriggeredAbility.class));
+        assertTrue(cloakA.isArtifact(currentGame), "Phantasmal Image should be an artifact");
+        assertTrue(cloakA.isKindred(currentGame), "Phantasmal Image should be kindred");
+        assertTrue(!cloakA.isCreature(currentGame), "Phantasmal Image should not be a creature");
+        assertTrue(cloakA.hasSubtype(SubType.ROGUE, currentGame), "Phantasmal Image should be a Rogue");
+        assertTrue(cloakA.hasSubtype(SubType.ILLUSION, currentGame), "Phantasmal Image should be an Illusion");
+        assertTrue(cloakA.hasSubtype(SubType.EQUIPMENT, currentGame), "Phantasmal Image should be an Equipment");
+        assertTrue(cloakA.getAbilities(currentGame).containsClass(BecomesTargetSourceTriggeredAbility.class), "Phantasmal Image should have the sacrifice trigger");
 
         Permanent cloakB = getPermanent("Cloak and Dagger", playerB);
-        assertTrue("Cloak and Dagger should be an artifact", cloakB.isArtifact(currentGame));
-        assertTrue("Cloak and Dagger should be a creature", cloakB.isCreature(currentGame));
-        assertTrue("Cloak and Dagger should be kindred", cloakB.isKindred(currentGame));
-        assertTrue("Cloak and Dagger should be a Rogue", cloakB.hasSubtype(SubType.ROGUE, currentGame));
-        assertTrue("Cloak and Dagger should be an Equipment", cloakB.hasSubtype(SubType.EQUIPMENT, currentGame));
+        assertTrue(cloakB.isArtifact(currentGame), "Cloak and Dagger should be an artifact");
+        assertTrue(cloakB.isCreature(currentGame), "Cloak and Dagger should be a creature");
+        assertTrue(cloakB.isKindred(currentGame), "Cloak and Dagger should be kindred");
+        assertTrue(cloakB.hasSubtype(SubType.ROGUE, currentGame), "Cloak and Dagger should be a Rogue");
+        assertTrue(cloakB.hasSubtype(SubType.EQUIPMENT, currentGame), "Cloak and Dagger should be an Equipment");
     }
 
     @Test

@@ -6,8 +6,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.SaddledMountWatcher;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -26,9 +26,9 @@ public class SaddleTest extends CardTestPlayerBase {
 
     private void assertSaddled(String name, boolean saddled) {
         Permanent permanent = getPermanent(name);
-        Assert.assertEquals(
-                name + " should " + (saddled ? "" : "not ") + "be saddled",
-                saddled, SaddledMountWatcher.hasBeenSaddledThisTurn(new MageObjectReference(permanent.getId(), currentGame), currentGame)
+        Assertions.assertEquals(
+                saddled,
+                SaddledMountWatcher.hasBeenSaddledThisTurn(new MageObjectReference(permanent.getId(), currentGame), currentGame), name + " should " + (saddled ? "" : "not ") + "be saddled"
         );
     }
 
@@ -130,7 +130,7 @@ public class SaddleTest extends CardTestPlayerBase {
             execute();
         } catch (AssertionError e) {
             if (!e.getMessage().contains("Select creatures that saddled it this turn (selected 0)")) {
-                Assert.fail("Lion can't be targeted, but catch another error:\n" + e.getMessage());
+                Assertions.fail("Lion can't be targeted, but catch another error:\n" + e.getMessage());
             }
         }
 

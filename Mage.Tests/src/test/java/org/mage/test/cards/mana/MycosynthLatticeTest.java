@@ -3,10 +3,10 @@ package org.mage.test.cards.mana;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MycosynthLatticeTest extends CardTestPlayerBase {
 
@@ -82,7 +82,7 @@ public class MycosynthLatticeTest extends CardTestPlayerBase {
                     || card.getName().equals("Alrund's Epiphany")
                     || card.getName().equals("Carnival")
                     || card.getName().equals("Carnage")) {
-                assertTrue("Card " + card.getName() + " should be colorless", card.getColor(currentGame).isColorless());
+                assertTrue(card.getColor(currentGame).isColorless(), "Card " + card.getName() + " should be colorless");
             }
         });
 

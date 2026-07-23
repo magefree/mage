@@ -3,7 +3,7 @@ package org.mage.test.cards.single.tsp;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import static org.mage.test.player.TestPlayer.CHOICE_SKIP;

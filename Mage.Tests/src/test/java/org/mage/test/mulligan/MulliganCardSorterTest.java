@@ -5,8 +5,8 @@ import mage.cards.CardsImpl;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.mulligan.MulliganDefaultHandSorter;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class MulliganCardSorterTest extends CardTestPlayerBase {
     private void assertList(List<Card> need, List<Card> sorted) {
         String needStr = need.stream().map(Card::getName).collect(Collectors.joining("; "));
         String sortedStr = sorted.stream().map(Card::getName).collect(Collectors.joining("; "));
-        Assert.assertEquals("bad sorting", needStr, sortedStr);
+        Assertions.assertEquals(needStr, sortedStr, "bad sorting");
     }
 
     @Test

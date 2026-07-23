@@ -2,9 +2,9 @@ package org.mage.test.cards.single.mh3;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -108,7 +108,7 @@ public class BirthingRitualTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Centaur Courser", 1);
     }
 
-    @Ignore // TODO: something weird with unit test, will be fixed separately.
+    @Disabled // TODO: something weird with unit test, will be fixed separately.
     @Test
     public void test_Trigger_Sacrifice_MVRestriction() {
         setStrictChooseMode(true);
@@ -125,10 +125,10 @@ public class BirthingRitualTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.UPKEEP);
         try {
             execute();
-            Assert.fail("should have failed to execute, as Baneslayer Angel is too high mv");
+            Assertions.fail("should have failed to execute, as Baneslayer Angel is too high mv");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Select up to one creature card with mana value 2 or less")) {
-                Assert.fail("must throw error about missing choice:\n" + e.getMessage());
+                Assertions.fail("must throw error about missing choice:\n" + e.getMessage());
             }
         }
     }

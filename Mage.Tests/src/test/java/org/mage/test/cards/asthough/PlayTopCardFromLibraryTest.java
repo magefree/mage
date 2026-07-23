@@ -3,8 +3,8 @@ package org.mage.test.cards.asthough;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.player.ai.ComputerPlayer7;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 /**

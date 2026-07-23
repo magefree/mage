@@ -2,8 +2,8 @@ package org.mage.test.cards.requirement;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 /**
@@ -56,9 +56,9 @@ public class BecomeBlockTriggersAITest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         try {
             execute();
-            Assert.fail("Expected exception, but not raise");
+            Assertions.fail("Expected exception, but not raise");
         } catch (UnsupportedOperationException ue) {
-            Assert.assertEquals("Balduvian Bears cannot block Nessian Boar it is already blocking the maximum amount of creatures.", ue.getMessage());
+            Assertions.assertEquals("Balduvian Bears cannot block Nessian Boar it is already blocking the maximum amount of creatures.", ue.getMessage());
         }
     }
 

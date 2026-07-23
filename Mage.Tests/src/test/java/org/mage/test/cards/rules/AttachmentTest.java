@@ -3,8 +3,8 @@ package org.mage.test.cards.rules;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -346,7 +346,7 @@ public class AttachmentTest extends CardTestPlayerBase {
     /**
      * Tests that Dream Leash can correctly attach to untapped permanents when it enters through non-casting means (e.g., via Show and Tell)
      */
-    @Ignore
+    @Disabled
     @Test
     public void testDreamLeashNoUntappedPermanents() {
         setStrictChooseMode(true);

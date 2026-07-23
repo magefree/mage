@@ -4,8 +4,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -39,8 +39,8 @@ public class TwoFacedCardEffectsTest extends CardTestPlayerBase {
 
         // check old effect doesn't work
         Permanent eliteInquisitor = getPermanent("Elite Inquisitor", playerA.getId());
-        Assert.assertEquals(2, eliteInquisitor.getPower().getValue());
-        Assert.assertEquals(2, eliteInquisitor.getToughness().getValue());
+        Assertions.assertEquals(2, eliteInquisitor.getPower().getValue());
+        Assertions.assertEquals(2, eliteInquisitor.getToughness().getValue());
     }
 
     /**

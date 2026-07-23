@@ -4,8 +4,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.replacement.YouControlYourOpponentsWhileSearchingReplacementEffect;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -133,7 +133,7 @@ public class TakeControlWhileSearchingLibraryTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore // unsupported by unit tests, see test_UnderControlMustUseTestCommandsCorrectrly
+    @Disabled // unsupported by unit tests, see test_UnderControlMustUseTestCommandsCorrectrly
     public void test_CastCardWhileSearchingLibrary_TakeControl() {
         /*
         [test control manually]
@@ -188,7 +188,7 @@ public class TakeControlWhileSearchingLibraryTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore
+    @Disabled
     // TODO: current "take player under control" implemented in GameController and HumanPlayer,
     //  not "game part" - so tests and AI ignore it and must be tested manually
     //  see another problems with control in HumanPlayer.priority(Game game) and https://github.com/magefree/mage/issues/2088

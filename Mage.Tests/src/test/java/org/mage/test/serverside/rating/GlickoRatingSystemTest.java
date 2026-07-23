@@ -3,8 +3,8 @@ package org.mage.test.serverside.rating;
 import mage.server.rating.GlickoRating;
 import mage.server.rating.GlickoRatingSystem;
 import mage.util.RandomUtil;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Quercitron
@@ -26,8 +26,8 @@ public class GlickoRatingSystemTest {
 
             for (int j = 0; j < gamesCount; j++) {
                 glickoRatingSystem.updateRating(player1, player2, 0.5, j + 2);
-                Assert.assertEquals(player1.getRating(), player2.getRating(), 1e-5);
-                Assert.assertEquals(player1.getRatingDeviation(), player2.getRatingDeviation(), 1e-5);
+                Assertions.assertEquals(player1.getRating(), player2.getRating(), 1e-5);
+                Assertions.assertEquals(player1.getRatingDeviation(), player2.getRatingDeviation(), 1e-5);
             }
         }
     }
@@ -45,8 +45,8 @@ public class GlickoRatingSystemTest {
             GlickoRating player2 = new GlickoRating(startRating2, startRatingDeviation, 1);
 
             glickoRatingSystem.updateRating(player1, player2, RandomUtil.nextDouble(), 1);
-            Assert.assertEquals(player1.getRating() - startRating1, startRating2 - player2.getRating(), 1e-5);
-            Assert.assertEquals(player1.getRatingDeviation(), player2.getRatingDeviation(), 1e-5);
+            Assertions.assertEquals(player1.getRating() - startRating1, startRating2 - player2.getRating(), 1e-5);
+            Assertions.assertEquals(player1.getRatingDeviation(), player2.getRatingDeviation(), 1e-5);
         }
     }
 
@@ -59,11 +59,11 @@ public class GlickoRatingSystemTest {
 
         glickoRatingSystem.updateRating(player1, player2, 1, 1);
 
-        Assert.assertEquals(1662, player1.getRating(), 1);
-        Assert.assertEquals(290.2, player1.getRatingDeviation(), 0.1);
+        Assertions.assertEquals(1662, player1.getRating(), 1);
+        Assertions.assertEquals(290.2, player1.getRatingDeviation(), 0.1);
 
-        Assert.assertEquals(1338, player2.getRating(), 1);
-        Assert.assertEquals(290.2, player2.getRatingDeviation(), 0.1);
+        Assertions.assertEquals(1338, player2.getRating(), 1);
+        Assertions.assertEquals(290.2, player2.getRatingDeviation(), 0.1);
     }
 
     @Test
@@ -75,11 +75,11 @@ public class GlickoRatingSystemTest {
 
         glickoRatingSystem.updateRating(player1, player2, 1, 1);
 
-        Assert.assertEquals(1571, player1.getRating(), 1);
-        Assert.assertEquals(284.3, player1.getRatingDeviation(), 0.1);
+        Assertions.assertEquals(1571, player1.getRating(), 1);
+        Assertions.assertEquals(284.3, player1.getRatingDeviation(), 0.1);
 
-        Assert.assertEquals(1198, player2.getRating(), 1);
-        Assert.assertEquals(49.8, player2.getRatingDeviation(), 0.1);
+        Assertions.assertEquals(1198, player2.getRating(), 1);
+        Assertions.assertEquals(49.8, player2.getRatingDeviation(), 0.1);
     }
 
     @Test
@@ -91,11 +91,11 @@ public class GlickoRatingSystemTest {
 
         glickoRatingSystem.updateRating(player1, player2, 0, 1);
 
-        Assert.assertEquals(1111, player1.getRating(), 1);
-        Assert.assertEquals(284.3, player1.getRatingDeviation(), 0.1);
+        Assertions.assertEquals(1111, player1.getRating(), 1);
+        Assertions.assertEquals(284.3, player1.getRatingDeviation(), 0.1);
 
-        Assert.assertEquals(1207, player2.getRating(), 1);
-        Assert.assertEquals(49.8, player2.getRatingDeviation(), 0.1);
+        Assertions.assertEquals(1207, player2.getRating(), 1);
+        Assertions.assertEquals(49.8, player2.getRatingDeviation(), 0.1);
     }
 
     @Test
@@ -107,11 +107,11 @@ public class GlickoRatingSystemTest {
 
         glickoRatingSystem.updateRating(player1, player2, 0.5, 1);
 
-        Assert.assertEquals(1636, player1.getRating(), 1);
-        Assert.assertEquals(237.6, player1.getRatingDeviation(), 0.1);
+        Assertions.assertEquals(1636, player1.getRating(), 1);
+        Assertions.assertEquals(237.6, player1.getRatingDeviation(), 0.1);
 
-        Assert.assertEquals(1982, player2.getRating(), 1);
-        Assert.assertEquals(99.1, player2.getRatingDeviation(), 0.1);
+        Assertions.assertEquals(1982, player2.getRating(), 1);
+        Assertions.assertEquals(99.1, player2.getRatingDeviation(), 0.1);
     }
 
     @Test
@@ -123,11 +123,11 @@ public class GlickoRatingSystemTest {
 
         glickoRatingSystem.updateRating(player1, player2, 1, 1);
 
-        Assert.assertEquals(1551, player1.getRating(), 1);
-        Assert.assertEquals(99.2, player1.getRatingDeviation(), 0.1);
+        Assertions.assertEquals(1551, player1.getRating(), 1);
+        Assertions.assertEquals(99.2, player1.getRatingDeviation(), 0.1);
 
-        Assert.assertEquals(1949, player2.getRating(), 1);
-        Assert.assertEquals(99.2, player2.getRatingDeviation(), 0.1);
+        Assertions.assertEquals(1949, player2.getRating(), 1);
+        Assertions.assertEquals(99.2, player2.getRatingDeviation(), 0.1);
     }
 
 }

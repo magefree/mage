@@ -2,8 +2,8 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -58,9 +58,9 @@ public class MayhemTest extends CardTestPlayerBase {
         try {
             execute();
         } catch (Throwable e) {
-            Assert.assertEquals(
-                    "Should fail to be able to cast " + islanders + " with mayhem as it wasn't discarded this turn",
-                    "Can't find ability to activate command: Cast " + islanders + " with Mayhem", e.getMessage()
+            Assertions.assertEquals(
+                    "Can't find ability to activate command: Cast " + islanders + " with Mayhem",
+                    e.getMessage(), "Should fail to be able to cast " + islanders + " with mayhem as it wasn't discarded this turn"
             );
         }
     }
@@ -80,9 +80,9 @@ public class MayhemTest extends CardTestPlayerBase {
         try {
             execute();
         } catch (Throwable e) {
-            Assert.assertEquals(
-                    "Should fail to be able to cast " + islanders + " with mayhem as it wasn't discarded this turn",
-                    "Can't find ability to activate command: Cast " + islanders + " with Mayhem", e.getMessage()
+            Assertions.assertEquals(
+                    "Can't find ability to activate command: Cast " + islanders + " with Mayhem",
+                    e.getMessage(), "Should fail to be able to cast " + islanders + " with mayhem as it wasn't discarded this turn"
             );
         }
     }

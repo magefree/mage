@@ -1,6 +1,6 @@
 package org.mage.test.cards.targets.attacking;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestCommander4Players;
 
 import mage.constants.PhaseStep;

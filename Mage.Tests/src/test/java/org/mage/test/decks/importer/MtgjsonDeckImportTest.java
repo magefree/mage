@@ -3,8 +3,8 @@ package org.mage.test.decks.importer;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.CardLookup;
 import mage.cards.decks.importer.MtgjsonDeckImporter;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.nio.file.Paths;
 
@@ -28,8 +28,8 @@ public class MtgjsonDeckImportTest {
                 errors,
                 false
         );
-        Assert.assertEquals("Arcane Tempo", deck.getName());
-        Assert.assertEquals("", errors.toString());
+        Assertions.assertEquals("Arcane Tempo", deck.getName());
+        Assertions.assertEquals("", errors.toString());
         TestDeckChecker.checker()
                 .addMain("Goblin Electromancer", 4)
                 .addMain("Crackling Drake", 4)
@@ -77,8 +77,8 @@ public class MtgjsonDeckImportTest {
                 errors,
                 false
         );
-        Assert.assertEquals("Desert Bloom", deck.getName());
-        Assert.assertEquals("", errors.toString());
+        Assertions.assertEquals("Desert Bloom", deck.getName());
+        Assertions.assertEquals("", errors.toString());
         TestDeckChecker.checker()
                 .addSide("Yuma, Proud Protector", 1) // commander
                 //

@@ -4,13 +4,13 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mage.test.player.TestPlayer.CHOICE_SKIP;
 
 /**
@@ -35,7 +35,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBaseWithAIHelps {
         assertLife(playerB, 20);
 
         Permanent mistRaven = getPermanent("Mist Raven", playerB.getId());
-        Assert.assertTrue("Should be tapped because of attacking", mistRaven.isTapped());
+        Assertions.assertTrue(mistRaven.isTapped(), "Should be tapped because of attacking");
     }
 
     /**
@@ -58,7 +58,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBaseWithAIHelps {
         assertLife(playerB, 20);
 
         Permanent crawWurm = getPermanent("Craw Wurm", playerB.getId());
-        Assert.assertEquals("Should be tapped because of being blocked by Wall of Frost", true, crawWurm.isTapped());
+        Assertions.assertEquals(true, crawWurm.isTapped(), "Should be tapped because of being blocked by Wall of Frost");
     }
 
     /**
@@ -859,7 +859,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    @Ignore
+    @Disabled
     // TODO: need exception fix - java.lang.UnsupportedOperationException: Sonorous Howlbonder is blocked by 1 creature(s). It has to be blocked by 3 or more.
     //   It's auto-fix in block configuration, so exception must be fixed cause AI works with it
     public void test_MustBlocking_low_blockers() {
@@ -916,7 +916,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    @Ignore // TODO: need improve of block configuration auto-fix (block by x2 instead x1)
+    @Disabled // TODO: need improve of block configuration auto-fix (block by x2 instead x1)
     //           looks like it's impossible for auto-fix (it's can remove blocker, but not add)
     public void test_MustBeBlockedWithMenace_all_blockers() {
         // At the beginning of combat on your turn, you may pay {2}{R/G}. If you do, double target creature’s
@@ -947,7 +947,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    @Ignore // TODO: need improve of block configuration auto-fix (block by x2 instead x1)
+    @Disabled // TODO: need improve of block configuration auto-fix (block by x2 instead x1)
     //           looks like it's impossible for auto-fix (it's can remove blocker, but not add)
     public void test_MustBeBlockedWithMenace_many_low_blockers_human() {
         // At the beginning of combat on your turn, you may pay {2}{R/G}. If you do, double target creature’s
@@ -978,7 +978,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    @Ignore // TODO: blockWithGoodTrade2 must support additional restrictions
+    @Disabled // TODO: blockWithGoodTrade2 must support additional restrictions
     public void test_MustBeBlockedWithMenace_many_low_blockers_AI() {
         // At the beginning of combat on your turn, you may pay {2}{R/G}. If you do, double target creature’s
         // power until end of turn. That creature must be blocked this combat if able.
@@ -1048,7 +1048,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    @Ignore
+    @Disabled
     // TODO: need exception fix java.lang.UnsupportedOperationException: Alley Strangler is blocked by 1 creature(s). It has to be blocked by 2 or more.
     //   It's ok to have such exception in unit tests from manual setup
     //   If it's impossible to auto-fix, then keep that error and ignore the test

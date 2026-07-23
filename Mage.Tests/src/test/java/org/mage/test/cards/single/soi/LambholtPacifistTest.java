@@ -2,8 +2,8 @@ package org.mage.test.cards.single.soi;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -54,7 +54,7 @@ public class LambholtPacifistTest extends CardTestPlayerBase {
             execute();
         } catch (Throwable e) {
             if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
-                Assert.fail("Should have had error about not being able to attack, but got:\n" + e.getMessage());
+                Assertions.fail("Should have had error about not being able to attack, but got:\n" + e.getMessage());
             }
         }
         

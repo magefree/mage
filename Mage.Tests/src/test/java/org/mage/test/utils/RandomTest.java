@@ -12,9 +12,9 @@ import mage.game.mulligan.MulliganType;
 import mage.player.human.HumanPlayer;
 import mage.players.Player;
 import mage.util.RandomUtil;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -51,8 +51,8 @@ public class RandomTest {
             listSameB.add(RandomUtil.nextInt());
         }
 
-        Assert.assertEquals("same seed must have same random values", listSameA.stream().mapToInt(Integer::intValue).sum(), listSameB.stream().mapToInt(Integer::intValue).sum());
-        Assert.assertNotEquals("different seed must have different random values", listSameA.stream().mapToInt(Integer::intValue).sum(), listDifferent.stream().mapToInt(Integer::intValue).sum());
+        Assertions.assertEquals(listSameA.stream().mapToInt(Integer::intValue).sum(), listSameB.stream().mapToInt(Integer::intValue).sum(), "same seed must have same random values");
+        Assertions.assertNotEquals(listSameA.stream().mapToInt(Integer::intValue).sum(), listDifferent.stream().mapToInt(Integer::intValue).sum(), "different seed must have different random values");
     }
 
     @Test
@@ -69,12 +69,12 @@ public class RandomTest {
         DeckCardLists listSameB = DeckTestUtils.buildRandomDeckAndInitCards("WGUBR", false, "GRN");
         String infoSameB = listSameB.getCards().stream().map(c -> (c.getSetCode() + "-" + c.getCardName())).collect(Collectors.joining(","));
 
-        Assert.assertEquals("same seed must have same deck", infoSameA, infoSameB);
-        Assert.assertNotEquals("different seed must have different deck", infoSameA, infoDifferent);
+        Assertions.assertEquals(infoSameA, infoSameB, "same seed must have same deck");
+        Assertions.assertNotEquals(infoSameA, infoDifferent, "different seed must have different deck");
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void test_GenerateRandomPng() throws IOException {
         String dest = "f:/test/xmage/";
         int height = 512;
@@ -89,7 +89,7 @@ public class RandomTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void test_GenerateRandomDicePng() throws IOException {
         String dest = "f:/test/xmage/";
         //RandomUtil.setSeed(123);
@@ -112,7 +112,7 @@ public class RandomTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void test_GenerateRandomPlanarDicePng() throws IOException {
         String dest = "f:/test/xmage/";
         //RandomUtil.setSeed(123);
@@ -137,7 +137,7 @@ public class RandomTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void test_GenerateRandomLibraryShufflePng() throws IOException {
         String dest = "f:/test/xmage/";
         //RandomUtil.setSeed(123);

@@ -4,9 +4,9 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -15,7 +15,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class GainMenaceAbilityAsSingletonTest extends CardTestPlayerBase {
 
     @Test
-    @Ignore // enable it after MenaceAbility will be singleton, see https://github.com/magefree/mage/issues/6720
+    @Disabled // enable it after MenaceAbility will be singleton, see https://github.com/magefree/mage/issues/6720
     public void test_SingletonNonMultiInstances() {
         // bug: permanent shows multiple instances of one ability in card's text
         // https://github.com/magefree/mage/issues/6720
@@ -51,8 +51,8 @@ public class GainMenaceAbilityAsSingletonTest extends CardTestPlayerBase {
         execute();
 
         Permanent permanent = getPermanent("Minotaur", playerA);
-        Assert.assertEquals("must have only 1 Menace instance", 1, permanent.getAbilities(currentGame).stream()
-                .filter(MenaceAbility.class::isInstance).count());
+        Assertions.assertEquals(1, permanent.getAbilities(currentGame).stream()
+                .filter(MenaceAbility.class::isInstance).count(), "must have only 1 Menace instance");
 
     }
 }

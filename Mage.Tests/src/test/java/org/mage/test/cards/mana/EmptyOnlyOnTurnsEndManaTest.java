@@ -3,8 +3,8 @@ package org.mage.test.cards.mana;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -30,7 +30,7 @@ public class EmptyOnlyOnTurnsEndManaTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Birds of Paradise", 1);
         assertPermanentCount(playerB, "Birds of Paradise", 1);
 
-        Assert.assertEquals("2 {G} have to be still im Mana Pool", "{G}{G}", playerB.getManaPool().getMana().toString());
+        Assertions.assertEquals("{G}{G}", playerB.getManaPool().getMana().toString(), "2 {G} have to be still im Mana Pool");
 
     }
 

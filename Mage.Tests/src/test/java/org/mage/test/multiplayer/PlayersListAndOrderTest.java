@@ -9,8 +9,8 @@ import mage.game.GameException;
 import mage.game.mulligan.MulliganType;
 import mage.players.Player;
 import mage.players.PlayerList;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
 import java.io.FileNotFoundException;
@@ -90,7 +90,7 @@ public class PlayersListAndOrderTest extends CardTestMultiPlayerBase {
             if (!need.equals(current)) {
                 List<Player> needPlayers = need.stream().map(id -> currentGame.getPlayer(id)).collect(Collectors.toList());
                 List<Player> currentPlayers = current.stream().map(id -> currentGame.getPlayer(id)).collect(Collectors.toList());
-                Assert.fail(info + "\n" + "need: " + needPlayers + "\n" + "find: " + currentPlayers);
+                Assertions.fail(info + "\n" + "need: " + needPlayers + "\n" + "find: " + currentPlayers);
             }
         });
     }
@@ -125,24 +125,24 @@ public class PlayersListAndOrderTest extends CardTestMultiPlayerBase {
         players.add(playerC.getId());
         players.add(playerD.getId());
         List<UUID> staticList = new ArrayList<>(players);
-        Assert.assertEquals("last added player must be current", staticList.get(0), playerD.getId());
+        Assertions.assertEquals(staticList.get(0), playerD.getId(), "last added player must be current");
 
         // normal
-        Assert.assertEquals(players.get(0), staticList.get(0));
-        Assert.assertEquals(players.get(1), staticList.get(1));
-        Assert.assertEquals(players.get(2), staticList.get(2));
-        Assert.assertEquals(players.get(3), staticList.get(3));
-        Assert.assertEquals(players.get(2), staticList.get(2)); // make sure no depends on calls order
+        Assertions.assertEquals(players.get(0), staticList.get(0));
+        Assertions.assertEquals(players.get(1), staticList.get(1));
+        Assertions.assertEquals(players.get(2), staticList.get(2));
+        Assertions.assertEquals(players.get(3), staticList.get(3));
+        Assertions.assertEquals(players.get(2), staticList.get(2)); // make sure no depends on calls order
 
         // make sure CircularList keeps inner structure
         players.setCurrent(playerC.getId());
-        Assert.assertEquals(players.get(0), staticList.get(0));
-        Assert.assertEquals(players.get(1), staticList.get(1));
-        Assert.assertEquals(players.get(2), staticList.get(2));
-        Assert.assertEquals(players.get(3), staticList.get(3));
-        Assert.assertEquals(players.get(2), staticList.get(2)); // make sure no depends on calls order
+        Assertions.assertEquals(players.get(0), staticList.get(0));
+        Assertions.assertEquals(players.get(1), staticList.get(1));
+        Assertions.assertEquals(players.get(2), staticList.get(2));
+        Assertions.assertEquals(players.get(3), staticList.get(3));
+        Assertions.assertEquals(players.get(2), staticList.get(2)); // make sure no depends on calls order
 
-        Assert.assertNull("must return null on non existing item", players.get(999));
+        Assertions.assertNull(players.get(999), "must return null on non existing item");
     }
 
     @Test

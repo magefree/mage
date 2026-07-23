@@ -8,8 +8,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.stack.StackObject;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -337,10 +337,10 @@ public class CollectEvidenceTest extends CardTestPlayerBase {
         // before
         runCode("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             Card card = playerA.getHand().getCards(game).stream().filter(c -> c.getName().equals(bite)).findFirst().orElse(null);
-            Assert.assertNotNull(card);
+            Assertions.assertNotNull(card);
             Ability ability = card.getAbilities(game).stream().filter(a -> a instanceof CollectEvidenceAbility).findFirst().orElse(null);
-            Assert.assertNotNull(ability);
-            Assert.assertFalse("Evidence must not be collected before usage", CollectedEvidenceCondition.instance.apply(game, ability));
+            Assertions.assertNotNull(ability);
+            Assertions.assertFalse(CollectedEvidenceCondition.instance.apply(game, ability), "Evidence must not be collected before usage");
         });
 
         // on cast
@@ -351,10 +351,10 @@ public class CollectEvidenceTest extends CardTestPlayerBase {
         setChoice(playerA, ogre, 2); // pay for collect evidence
         runCode("on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             StackObject object = game.getStack().peekFirst();
-            Assert.assertNotNull(object);
+            Assertions.assertNotNull(object);
             Ability ability = object.getAbilities().stream().filter(a -> a instanceof CollectEvidenceAbility).findFirst().orElse(null);
-            Assert.assertNotNull(ability);
-            Assert.assertTrue("Evidence must be collected on stack", CollectedEvidenceCondition.instance.apply(game, ability));
+            Assertions.assertNotNull(ability);
+            Assertions.assertTrue(CollectedEvidenceCondition.instance.apply(game, ability), "Evidence must be collected on stack");
         });
 
         setStrictChooseMode(true);

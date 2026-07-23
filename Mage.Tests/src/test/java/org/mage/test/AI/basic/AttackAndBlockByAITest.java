@@ -2,8 +2,8 @@ package org.mage.test.AI.basic;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseAI;
 
 import java.util.stream.Collectors;
@@ -147,7 +147,7 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
     }
 
     @Test
-    @Ignore // TODO: add massive attack vs small amount of blockers
+    @Disabled // TODO: add massive attack vs small amount of blockers
     public void test_Attack_10_small_vs_1_big_massive_strike() {
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 10); // 2/2
         addCard(Zone.BATTLEFIELD, playerB, "Ancient Brontodon", 1); // 9/9
@@ -202,7 +202,7 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
     }
 
     @Test
-    @Ignore // TODO: need to fix Trove of Temptation effect (player must be attacked by one creature)
+    @Disabled // TODO: need to fix Trove of Temptation effect (player must be attacked by one creature)
     public void test_ForceAttack_1_small_vs_1_big_b() {
         addCard(Zone.BATTLEFIELD, playerA, "Arbor Elf", 1); // 1/1
         addCard(Zone.BATTLEFIELD, playerB, "Ancient Brontodon", 1); // 9/9
@@ -223,7 +223,7 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
     }
 
     @Test
-    @Ignore // TODO: need to fix Seeker of Slaanesh effect (players must attack by one creature)
+    @Disabled // TODO: need to fix Seeker of Slaanesh effect (players must attack by one creature)
     public void test_ForceAttack_any() {
         addCard(Zone.BATTLEFIELD, playerA, "Arbor Elf", 1); // 1/1
         // Each opponent must attack with at least one creature each combat if able.

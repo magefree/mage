@@ -3,8 +3,8 @@ package org.mage.test.AI.basic;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 /**
@@ -15,7 +15,7 @@ import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 public class SimulationTriggersAITest extends CardTestPlayerBaseWithAIHelps {
 
     @Test
-    @Ignore
+    @Disabled
     // TODO: trigger's target options supported on priority sim, but do not used for some reason
     //   see addTargetOptions, node.children, ComputerPlayer6->targets, etc
     public void test_DeepglowSkate_MustBeSimulated() {

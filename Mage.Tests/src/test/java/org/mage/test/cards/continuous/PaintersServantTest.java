@@ -4,8 +4,8 @@ import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -41,35 +41,35 @@ public class PaintersServantTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Painter's Servant", 1);
 
         Permanent silvercoatLion = getPermanent("Silvercoat Lion", playerA);
-        Assert.assertEquals(true, silvercoatLion.getColor(currentGame).isWhite());
-        Assert.assertEquals(true, silvercoatLion.getColor(currentGame).isBlue());
+        Assertions.assertEquals(true, silvercoatLion.getColor(currentGame).isWhite());
+        Assertions.assertEquals(true, silvercoatLion.getColor(currentGame).isBlue());
 
         silvercoatLion = getPermanent("Silvercoat Lion", playerB);
-        Assert.assertEquals(true, silvercoatLion.getColor(currentGame).isWhite());
-        Assert.assertEquals(true, silvercoatLion.getColor(currentGame).isBlue());
+        Assertions.assertEquals(true, silvercoatLion.getColor(currentGame).isWhite());
+        Assertions.assertEquals(true, silvercoatLion.getColor(currentGame).isBlue());
 
         for (Card card : playerA.getLibrary().getCards(currentGame)) {
-            Assert.assertEquals(card.getName() + " should be blue", true, card.getColor(currentGame).isBlue());
+            Assertions.assertEquals(true, card.getColor(currentGame).isBlue(), card.getName() + " should be blue");
         }
         for (Card card : playerB.getLibrary().getCards(currentGame)) {
-            Assert.assertEquals(card.getName() + " should be blue", true, card.getColor(currentGame).isBlue());
+            Assertions.assertEquals(true, card.getColor(currentGame).isBlue(), card.getName() + " should be blue");
         }
 
         for (Card card : playerA.getHand().getCards(currentGame)) {
-            Assert.assertEquals(true, card.getColor(currentGame).isRed());
-            Assert.assertEquals(true, card.getColor(currentGame).isBlue());
+            Assertions.assertEquals(true, card.getColor(currentGame).isRed());
+            Assertions.assertEquals(true, card.getColor(currentGame).isBlue());
         }
         for (Card card : playerB.getHand().getCards(currentGame)) {
-            Assert.assertEquals(true, card.getColor(currentGame).isRed());
-            Assert.assertEquals(true, card.getColor(currentGame).isBlue());
+            Assertions.assertEquals(true, card.getColor(currentGame).isRed());
+            Assertions.assertEquals(true, card.getColor(currentGame).isBlue());
         }
         for (Card card : playerA.getGraveyard().getCards(currentGame)) {
-            Assert.assertEquals(true, card.getColor(currentGame).isWhite());
-            Assert.assertEquals(true, card.getColor(currentGame).isBlue());
+            Assertions.assertEquals(true, card.getColor(currentGame).isWhite());
+            Assertions.assertEquals(true, card.getColor(currentGame).isBlue());
         }
         for (Card card : playerB.getGraveyard().getCards(currentGame)) {
-            Assert.assertEquals(true, card.getColor(currentGame).isWhite());
-            Assert.assertEquals(true, card.getColor(currentGame).isBlue());
+            Assertions.assertEquals(true, card.getColor(currentGame).isWhite());
+            Assertions.assertEquals(true, card.getColor(currentGame).isBlue());
         }
 
     }
@@ -104,38 +104,38 @@ public class PaintersServantTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Painter's Servant", 1);
 
         Permanent silvercoatLion = getPermanent("Silvercoat Lion", playerA);
-        Assert.assertEquals(true, silvercoatLion.getColor(currentGame).isWhite());
-        Assert.assertEquals(false, silvercoatLion.getColor(currentGame).isBlue());
+        Assertions.assertEquals(true, silvercoatLion.getColor(currentGame).isWhite());
+        Assertions.assertEquals(false, silvercoatLion.getColor(currentGame).isBlue());
 
         silvercoatLion = getPermanent("Silvercoat Lion", playerB);
-        Assert.assertEquals(true, silvercoatLion.getColor(currentGame).isWhite());
-        Assert.assertEquals(false, silvercoatLion.getColor(currentGame).isBlue());
+        Assertions.assertEquals(true, silvercoatLion.getColor(currentGame).isWhite());
+        Assertions.assertEquals(false, silvercoatLion.getColor(currentGame).isBlue());
 
         for (Card card : playerA.getLibrary().getCards(currentGame)) {
-            Assert.assertEquals(card.getName() + " should not be blue", false, card.getColor(currentGame).isBlue());
+            Assertions.assertEquals(false, card.getColor(currentGame).isBlue(), card.getName() + " should not be blue");
         }
         for (Card card : playerB.getLibrary().getCards(currentGame)) {
-            Assert.assertEquals(card.getName() + " should not be blue", false, card.getColor(currentGame).isBlue());
+            Assertions.assertEquals(false, card.getColor(currentGame).isBlue(), card.getName() + " should not be blue");
         }
 
         for (Card card : playerA.getHand().getCards(currentGame)) {
-            Assert.assertEquals(true, card.getColor(currentGame).isRed());
-            Assert.assertEquals(false, card.getColor(currentGame).isBlue());
+            Assertions.assertEquals(true, card.getColor(currentGame).isRed());
+            Assertions.assertEquals(false, card.getColor(currentGame).isBlue());
         }
         for (Card card : playerB.getHand().getCards(currentGame)) {
-            Assert.assertEquals(true, card.getColor(currentGame).isRed());
-            Assert.assertEquals(false, card.getColor(currentGame).isBlue());
+            Assertions.assertEquals(true, card.getColor(currentGame).isRed());
+            Assertions.assertEquals(false, card.getColor(currentGame).isBlue());
         }
         for (Card card : playerA.getGraveyard().getCards(currentGame)) {
             if (card.getName().equals("Silvercoat Lion")) {
-                Assert.assertEquals(true, card.getColor(currentGame).isWhite());
-                Assert.assertEquals(false, card.getColor(currentGame).isBlue());
+                Assertions.assertEquals(true, card.getColor(currentGame).isWhite());
+                Assertions.assertEquals(false, card.getColor(currentGame).isBlue());
             }
         }
         for (Card card : playerB.getGraveyard().getCards(currentGame)) {
             if (card.getName().equals("Silvercoat Lion")) {
-                Assert.assertEquals(true, card.getColor(currentGame).isWhite());
-                Assert.assertEquals(false, card.getColor(currentGame).isBlue());
+                Assertions.assertEquals(true, card.getColor(currentGame).isWhite());
+                Assertions.assertEquals(false, card.getColor(currentGame).isBlue());
             }
         }
 
@@ -171,9 +171,9 @@ public class PaintersServantTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Painter's Servant", 1);
 
         Permanent silvercoatLion = getPermanent("Silvercoat Lion", playerA);
-        Assert.assertEquals(false, silvercoatLion.getColor(currentGame).isWhite());
-        Assert.assertEquals(false, silvercoatLion.getColor(currentGame).isRed());
-        Assert.assertEquals(true, silvercoatLion.getColor(currentGame).isBlue());
+        Assertions.assertEquals(false, silvercoatLion.getColor(currentGame).isWhite());
+        Assertions.assertEquals(false, silvercoatLion.getColor(currentGame).isRed());
+        Assertions.assertEquals(true, silvercoatLion.getColor(currentGame).isBlue());
     }
 
     /**
@@ -212,9 +212,9 @@ public class PaintersServantTest extends CardTestPlayerBase {
         assertLife(playerA, 22); // + 1 from Cerulean Wisps + 1 from Divination
 
         Permanent silvercoatLion = getPermanent("Silvercoat Lion", playerA);
-        Assert.assertEquals(false, silvercoatLion.getColor(currentGame).isWhite());
-        Assert.assertEquals(false, silvercoatLion.getColor(currentGame).isRed());
-        Assert.assertEquals(true, silvercoatLion.getColor(currentGame).isBlue());
+        Assertions.assertEquals(false, silvercoatLion.getColor(currentGame).isWhite());
+        Assertions.assertEquals(false, silvercoatLion.getColor(currentGame).isRed());
+        Assertions.assertEquals(true, silvercoatLion.getColor(currentGame).isBlue());
 
 
     }

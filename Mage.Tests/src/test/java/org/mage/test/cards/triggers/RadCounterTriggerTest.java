@@ -4,8 +4,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.players.Player;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -29,11 +29,11 @@ public class RadCounterTriggerTest extends CardTestPlayerBase {
     private static final String fallout = "Nuclear Fallout";
 
     private static void checkRadCounterCount(String message, Player player, int expected) {
-        Assert.assertEquals(message, expected, player.getCountersCount(CounterType.RAD));
+        Assertions.assertEquals(expected, player.getCountersCount(CounterType.RAD), message);
     }
 
     private static void checkGraveyardSize(String message, Player player, int expected) {
-        Assert.assertEquals(message, expected, player.getGraveyard().size());
+        Assertions.assertEquals(expected, player.getGraveyard().size(), message);
     }
 
     @Test

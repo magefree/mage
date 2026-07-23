@@ -1,13 +1,12 @@
 package org.mage.test.testapi;
 
-import junit.framework.TestCase;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Tests the expected errors for illegal attacks/blocks or other moves when writing tests for players
@@ -32,7 +31,7 @@ public class PlayerExpectedErrorsApiTest extends CardTestPlayerBase {
             fail("Expected exception not thrown");
         } catch (AssertionError e) {
             // Error - blocking with permanents you don't control
-            TestCase.assertEquals("No permanents found called Sedge Scorpion that match the filter criteria \"permanent you control\"", e.getMessage());
+            assertEquals("No permanents found called Sedge Scorpion that match the filter criteria \"permanent you control\"", e.getMessage());
         }
     }
 
@@ -54,7 +53,7 @@ public class PlayerExpectedErrorsApiTest extends CardTestPlayerBase {
             fail("Expected exception not thrown");
         } catch (AssertionError e) {
             // Error - attacking with a permanent you don't control
-            TestCase.assertEquals("Cannot find Polis Crusher:2 that match the filter criteria \"permanent you control\".\n" +
+            assertEquals("Cannot find Polis Crusher:2 that match the filter criteria \"permanent you control\".\n" +
                     "Only 2 called Polis Crusher found for this controller(zero indexed).", e.getMessage());
         }
     }
@@ -74,7 +73,7 @@ public class PlayerExpectedErrorsApiTest extends CardTestPlayerBase {
             fail("Expected exception not thrown");
         } catch (AssertionError e) {
             // Error - attacking with a permanent you don't control
-            TestCase.assertEquals("No permanents found called Fleshmad Steed that match the filter criteria \"permanent you control\"", e.getMessage());
+            assertEquals("No permanents found called Fleshmad Steed that match the filter criteria \"permanent you control\"", e.getMessage());
         }
     }
 
@@ -95,7 +94,7 @@ public class PlayerExpectedErrorsApiTest extends CardTestPlayerBase {
             fail("Expected exception not thrown");
         } catch (AssertionError e) {
             // Error - attacking with a permanent you don't control
-            TestCase.assertEquals("Cannot find Yoked Ox:3 that match the filter criteria \"permanent you control\".\n" +
+            assertEquals("Cannot find Yoked Ox:3 that match the filter criteria \"permanent you control\".\n" +
                     "Only 3 called Yoked Ox found for this controller(zero indexed).", e.getMessage());
         }
     }
@@ -115,7 +114,7 @@ public class PlayerExpectedErrorsApiTest extends CardTestPlayerBase {
             execute();
             fail("Expected exception not thrown");
         } catch (UnsupportedOperationException ue) {
-            TestCase.assertEquals("PlayerA can't block on turn 1 as it is their turn", ue.getMessage());
+            assertEquals("PlayerA can't block on turn 1 as it is their turn", ue.getMessage());
         }
     }
 
@@ -134,7 +133,7 @@ public class PlayerExpectedErrorsApiTest extends CardTestPlayerBase {
         try {
             execute();
         } catch (UnsupportedOperationException ue) {
-            TestCase.assertEquals("PlayerB can't block on turn 6 as it is their turn", ue.getMessage());
+            assertEquals("PlayerB can't block on turn 6 as it is their turn", ue.getMessage());
         }
     }
 
@@ -149,7 +148,7 @@ public class PlayerExpectedErrorsApiTest extends CardTestPlayerBase {
         try {
             execute();
         } catch (UnsupportedOperationException ue) {
-            TestCase.assertEquals("PlayerA can't attack on turn 2 as it is not their turn", ue.getMessage());
+            assertEquals("PlayerA can't attack on turn 2 as it is not their turn", ue.getMessage());
         }
 
     }
@@ -165,7 +164,7 @@ public class PlayerExpectedErrorsApiTest extends CardTestPlayerBase {
         try {
             execute();
         } catch (UnsupportedOperationException ue) {
-            TestCase.assertEquals("PlayerB can't attack on turn 1 as it is not their turn", ue.getMessage());
+            assertEquals("PlayerB can't attack on turn 1 as it is not their turn", ue.getMessage());
         }
 
     }
@@ -190,7 +189,7 @@ public class PlayerExpectedErrorsApiTest extends CardTestPlayerBase {
             execute();
             fail("Expected exception not thrown");
         } catch (UnsupportedOperationException ue) {
-            TestCase.assertEquals("Nemesis of Mortals cannot block Leafcrown Dryad it is already blocking the maximum amount of creatures.", ue.getMessage());
+            assertEquals("Nemesis of Mortals cannot block Leafcrown Dryad it is already blocking the maximum amount of creatures.", ue.getMessage());
         }
     }
 
@@ -210,7 +209,7 @@ public class PlayerExpectedErrorsApiTest extends CardTestPlayerBase {
             execute();
             fail("Expected exception not thrown");
         } catch (UnsupportedOperationException e) {
-            TestCase.assertEquals("Boggart Brute is blocked by 1 creature(s). It has to be blocked by 2 or more.", e.getMessage());
+            assertEquals("Boggart Brute is blocked by 1 creature(s). It has to be blocked by 2 or more.", e.getMessage());
         }
     }
 

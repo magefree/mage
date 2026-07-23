@@ -2,8 +2,8 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 /**
@@ -249,7 +249,7 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    @Ignore
+    @Disabled
     // I don't know how to test it by framework - manual test works fine for HumanPlayer
     // (he get warning message and can't activate mana abilities after convoke)
     public void test_Other_CantUseConvokeBeforeManaAbilities() {

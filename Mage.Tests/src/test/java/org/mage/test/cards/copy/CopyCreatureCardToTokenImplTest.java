@@ -4,8 +4,8 @@ import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -23,7 +23,7 @@ public class CopyCreatureCardToTokenImplTest extends CardTestPlayerBase {
      * either.
      */
     @Test
-    @Ignore
+    @Disabled
     public void testTokenTriggeresETBEffect() {
         // Flying
         // Sphinx spells you cast cost {2} less to cast.

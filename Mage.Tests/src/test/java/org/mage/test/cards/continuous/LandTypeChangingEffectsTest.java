@@ -9,8 +9,8 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -141,7 +141,7 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         assertNotSubtype(canopyvista, SubType.SWAMP);
         assertType(urborgtoy, CardType.LAND, SubType.MOUNTAIN);
         assertNotSubtype(urborgtoy, SubType.SWAMP);
-        Assert.assertTrue("The mana the land can produce should be [{R}] but it's " + playerB.getManaAvailable(currentGame).toString(), playerB.getManaAvailable(currentGame).toString().equals("[{R}]"));
+        Assertions.assertTrue(playerB.getManaAvailable(currentGame).toString().equals("[{R}]"), "The mana the land can produce should be [{R}] but it's " + playerB.getManaAvailable(currentGame).toString());
     }
 
     @Test
@@ -171,7 +171,7 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         assertNotSubtype(canopyvista, SubType.SWAMP);
         assertType(urborgtoy, CardType.LAND, SubType.MOUNTAIN);
         assertNotSubtype(urborgtoy, SubType.SWAMP);
-        Assert.assertTrue("The mana the land can produce should be [{R}] but it's " + playerB.getManaAvailable(currentGame).toString(), playerB.getManaAvailable(currentGame).toString().equals("[{R}]"));
+        Assertions.assertTrue(playerB.getManaAvailable(currentGame).toString().equals("[{R}]"), "The mana the land can produce should be [{R}] but it's " + playerB.getManaAvailable(currentGame).toString());
     }
 
     /*
@@ -233,10 +233,10 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
                 creatures++;
             }
         }
-        Assert.assertTrue("1 land has to be of island type", islandTypes == 1);
-        Assert.assertTrue("3 lands have to be of mountain type", mountainTypes == 3);
-        Assert.assertTrue("4 lands have to be of swamp type", swampTypes == 4);
-        Assert.assertTrue("4 lands have to be creatures but there are " + creatures, creatures == 4);
+        Assertions.assertTrue(islandTypes == 1, "1 land has to be of island type");
+        Assertions.assertTrue(mountainTypes == 3, "3 lands have to be of mountain type");
+        Assertions.assertTrue(swampTypes == 4, "4 lands have to be of swamp type");
+        Assertions.assertTrue(creatures == 4, "4 lands have to be creatures but there are " + creatures);
     }
 
     @Test
@@ -253,8 +253,8 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         execute();
 
         Permanent darksteel = getPermanent("Darksteel Citadel", playerA.getId());
-        Assert.assertNotNull(darksteel);
-        Assert.assertFalse(darksteel.getAbilities().contains(IndestructibleAbility.getInstance()));  // The ability is removed
+        Assertions.assertNotNull(darksteel);
+        Assertions.assertFalse(darksteel.getAbilities().contains(IndestructibleAbility.getInstance()));  // The ability is removed
 
         /*
         If a continuous effect has started applying in an earlier layer, it will continue to apply in 

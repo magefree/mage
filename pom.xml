@@ -290,13 +290,6 @@
         </dependency>
 
         <dependency>
-            <!-- junit 4 tests -->
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
-            <version>5.8.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <!-- junit 5 tests -->
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>

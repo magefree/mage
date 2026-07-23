@@ -9,8 +9,8 @@ import mage.game.FreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.mulligan.MulliganType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
 import java.io.FileNotFoundException;
@@ -234,7 +234,7 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
         assertGraveyardCount(playerC, "Lightning Bolt", 1);
 
         assertLife(playerD, -1);
-        Assert.assertFalse("Player D is no longer in the game", playerD.isInGame());
+        Assertions.assertFalse(playerD.isInGame(), "Player D is no longer in the game");
 
         assertCounterCount(playerA, "Luminarch Ascension", CounterType.QUEST, 1); // 1 from turn 2
 
@@ -275,7 +275,7 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
         assertGraveyardCount(playerA, "Curse of Vengeance", 1);
 
         assertLife(playerD, -1);
-        Assert.assertFalse("Player D is no longer in the game", playerD.isInGame());
+        Assertions.assertFalse(playerD.isInGame(), "Player D is no longer in the game");
 
         assertHandCount(playerA, 3);
         assertLife(playerA, 4);
@@ -317,7 +317,7 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
         assertGraveyardCount(playerC, "Lightning Bolt", 1);
 
         assertLife(playerA, -1);
-        Assert.assertFalse("Player D is no longer in the game", playerA.isInGame());
+        Assertions.assertFalse(playerA.isInGame(), "Player D is no longer in the game");
 
         assertPermanentCount(playerB, "Pillarfield Ox", 1);
         assertPermanentCount(playerC, "Juggernaut", 1);
@@ -361,7 +361,7 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
         assertGraveyardCount(playerD, "Lightning Bolt", 1);
 
         assertLife(playerA, -1);
-        Assert.assertFalse("Player D is no longer in the game", playerA.isInGame());
+        Assertions.assertFalse(playerA.isInGame(), "Player D is no longer in the game");
 
         assertPermanentCount(playerC, "Pillarfield Ox", 1);
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
@@ -405,7 +405,7 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
         setStopAt(4, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        Assert.assertFalse("Player A is no longer in the game", playerA.isInGame());
+        Assertions.assertFalse(playerA.isInGame(), "Player A is no longer in the game");
         assertLife(playerA, 2);
 
         assertPermanentCount(playerD, "Juggernaut", 1);
@@ -464,9 +464,9 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
 
         assertGraveyardCount(playerC, "Lightning Bolt", 1);
 
-        Assert.assertFalse("Player A is no longer in the game", playerA.isInGame());
+        Assertions.assertFalse(playerA.isInGame(), "Player A is no longer in the game");
 
-        Assert.assertTrue("Player D is the active player", currentGame.getActivePlayerId().equals(playerD.getId()));
+        Assertions.assertTrue(currentGame.getActivePlayerId().equals(playerD.getId()), "Player D is the active player");
 
         assertTappedCount("Plains", true, 2); // Do not untap because of Vorinclex do not untap effect
 

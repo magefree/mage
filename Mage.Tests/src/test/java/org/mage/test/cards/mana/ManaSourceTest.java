@@ -2,8 +2,8 @@ package org.mage.test.cards.mana;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -34,7 +34,7 @@ public class ManaSourceTest extends CardTestPlayerBase {
             execute();
         } catch (Throwable e) {
             if (!e.getMessage().contains("Cast Myr Superion")) {
-                Assert.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
+                Assertions.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
             }
         }
 

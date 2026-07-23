@@ -3,8 +3,8 @@ package org.mage.test.cards.triggers;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -32,7 +32,7 @@ public class DefiantVanguardTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore // this test fails but it works fine in game.
+    @Disabled // this test fails but it works fine in game.
     public void testSaveCreatureWithCloudshift() {
         // When Defiant Vanguard blocks, at end of combat, destroy it and all creatures it blocked this turn.
         // {5}, {tap}: Search your library for a Rebel permanent card with converted mana cost 4 or less and put it onto the battlefield. Then shuffle your library.

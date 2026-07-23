@@ -7,8 +7,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -20,9 +20,9 @@ public class ImpendingTest extends CardTestPlayerBase {
 
     public void assertHasImpending(String name, boolean hasAbility) {
         Permanent permanent = getPermanent(name);
-        Assert.assertEquals(
-                "Should" + (hasAbility ? "" : "n't") + " have Impending ability",
-                hasAbility, permanent.getAbilities(currentGame).containsClass(ImpendingAbility.class)
+        Assertions.assertEquals(
+                hasAbility,
+                permanent.getAbilities(currentGame).containsClass(ImpendingAbility.class), "Should" + (hasAbility ? "" : "n't") + " have Impending ability"
         );
     }
 

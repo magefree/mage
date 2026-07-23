@@ -2,8 +2,8 @@ package org.mage.test.cards.single.mh3;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -67,10 +67,10 @@ public class PartyThrasherTest extends CardTestPlayerBase {
 
         try {
             execute();
-            Assert.fail("Should have failed to execute, as Accorder's Shield should not be castable");
+            Assertions.fail("Should have failed to execute, as Accorder's Shield should not be castable");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Can't find ability to activate command: Cast Accorder's Shield")) {
-                Assert.fail("must throw error about missing ability:\n" + e.getMessage());
+                Assertions.fail("must throw error about missing ability:\n" + e.getMessage());
             }
         }
 
@@ -98,10 +98,10 @@ public class PartyThrasherTest extends CardTestPlayerBase {
 
         try {
             execute();
-            Assert.fail("Should have failed to execute, as Memnite should not be castable the turn after Party Thrasher Exiled it.");
+            Assertions.fail("Should have failed to execute, as Memnite should not be castable the turn after Party Thrasher Exiled it.");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Can't find ability to activate command: Cast Memnite")) {
-                Assert.fail("must throw error about missing ability:\n" + e.getMessage());
+                Assertions.fail("must throw error about missing ability:\n" + e.getMessage());
             }
         }
 

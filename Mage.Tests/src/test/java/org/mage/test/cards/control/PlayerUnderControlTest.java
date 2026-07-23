@@ -3,8 +3,8 @@ package org.mage.test.cards.control;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.view.GameView;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -45,38 +45,38 @@ public class PlayerUnderControlTest extends CardTestPlayerBase {
             GameView viewA = getGameView(playerA);
             GameView viewB = getGameView(playerB);
             if (mustHaveControl) {
-                Assert.assertTrue(info, playerA.isGameUnderControl());
-                Assert.assertFalse(info, playerB.isGameUnderControl());
+                Assertions.assertTrue(playerA.isGameUnderControl(), info);
+                Assertions.assertFalse(playerB.isGameUnderControl(), info);
 
-                Assert.assertTrue(info, playerA.getPlayersUnderYourControl().contains(playerB.getId()));
-                Assert.assertTrue(info, playerB.getPlayersUnderYourControl().isEmpty());
+                Assertions.assertTrue(playerA.getPlayersUnderYourControl().contains(playerB.getId()), info);
+                Assertions.assertTrue(playerB.getPlayersUnderYourControl().isEmpty(), info);
 
-                Assert.assertTrue(info, playerA.getTurnControllers().isEmpty());
-                Assert.assertTrue(info, playerB.getTurnControllers().contains(playerA.getId()));
+                Assertions.assertTrue(playerA.getTurnControllers().isEmpty(), info);
+                Assertions.assertTrue(playerB.getTurnControllers().contains(playerA.getId()), info);
 
-                Assert.assertEquals(info, playerA.getTurnControlledBy(), playerA.getId());
-                Assert.assertEquals(info, playerB.getTurnControlledBy(), playerA.getId());
+                Assertions.assertEquals(playerA.getTurnControlledBy(), playerA.getId(), info);
+                Assertions.assertEquals(playerB.getTurnControlledBy(), playerA.getId(), info);
 
                 // client side
-                Assert.assertFalse(info, viewA.getOpponentHands().isEmpty());
-                Assert.assertTrue(info, viewB.getOpponentHands().isEmpty());
+                Assertions.assertFalse(viewA.getOpponentHands().isEmpty(), info);
+                Assertions.assertTrue(viewB.getOpponentHands().isEmpty(), info);
             } else {
                 // A,B normal
-                Assert.assertTrue(info, playerA.isGameUnderControl());
-                Assert.assertTrue(info, playerB.isGameUnderControl());
+                Assertions.assertTrue(playerA.isGameUnderControl(), info);
+                Assertions.assertTrue(playerB.isGameUnderControl(), info);
 
-                Assert.assertTrue(info, playerA.getPlayersUnderYourControl().isEmpty());
-                Assert.assertTrue(info, playerB.getPlayersUnderYourControl().isEmpty());
+                Assertions.assertTrue(playerA.getPlayersUnderYourControl().isEmpty(), info);
+                Assertions.assertTrue(playerB.getPlayersUnderYourControl().isEmpty(), info);
 
-                Assert.assertTrue(info, playerA.getTurnControllers().isEmpty());
-                Assert.assertTrue(info, playerB.getTurnControllers().isEmpty());
+                Assertions.assertTrue(playerA.getTurnControllers().isEmpty(), info);
+                Assertions.assertTrue(playerB.getTurnControllers().isEmpty(), info);
 
-                Assert.assertEquals(info, playerA.getTurnControlledBy(), playerA.getId());
-                Assert.assertEquals(info, playerB.getTurnControlledBy(), playerB.getId());
+                Assertions.assertEquals(playerA.getTurnControlledBy(), playerA.getId(), info);
+                Assertions.assertEquals(playerB.getTurnControlledBy(), playerB.getId(), info);
 
                 // client side
-                Assert.assertTrue(info, viewA.getOpponentHands().isEmpty());
-                Assert.assertTrue(info, viewB.getOpponentHands().isEmpty());
+                Assertions.assertTrue(viewA.getOpponentHands().isEmpty(), info);
+                Assertions.assertTrue(viewB.getOpponentHands().isEmpty(), info);
             }
         });
     }

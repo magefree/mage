@@ -2,8 +2,8 @@ package org.mage.test.game.FreeformUnlimitedCommander;
 
 import mage.game.FreeformUnlimitedCommanderType;
 import mage.game.match.MatchType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.MageTestPlayerBase;
 
 public class FreeformUnlimitedCommanderTypeTest extends MageTestPlayerBase {
@@ -14,7 +14,7 @@ public class FreeformUnlimitedCommanderTypeTest extends MageTestPlayerBase {
         MatchType gameType = new FreeformUnlimitedCommanderType();
 
         // Assert
-        Assert.assertEquals(FreeformUnlimitedCommanderType.class, gameType.getClass());
+        Assertions.assertEquals(FreeformUnlimitedCommanderType.class, gameType.getClass());
     }
 
     @Test
@@ -23,7 +23,7 @@ public class FreeformUnlimitedCommanderTypeTest extends MageTestPlayerBase {
         MatchType gametype = new FreeformUnlimitedCommanderType();
 
         // Assert
-        Assert.assertEquals("Freeform Unlimited Commander", gametype.toString());
+        Assertions.assertEquals("Freeform Unlimited Commander", gametype.toString());
     }
 
     @Test
@@ -32,7 +32,7 @@ public class FreeformUnlimitedCommanderTypeTest extends MageTestPlayerBase {
         MatchType gametype = new FreeformUnlimitedCommanderType();
 
         // Assert
-        Assert.assertEquals("Freeform Unlimited Commander", gametype.getName());
+        Assertions.assertEquals("Freeform Unlimited Commander", gametype.getName());
     }
 
     @Test
@@ -41,7 +41,7 @@ public class FreeformUnlimitedCommanderTypeTest extends MageTestPlayerBase {
         MatchType gametype = new FreeformUnlimitedCommanderType();
 
         // Assert
-        Assert.assertEquals(2, gametype.getMinPlayers());
+        Assertions.assertEquals(2, gametype.getMinPlayers());
     }
 
     @Test
@@ -50,7 +50,7 @@ public class FreeformUnlimitedCommanderTypeTest extends MageTestPlayerBase {
         MatchType gametype = new FreeformUnlimitedCommanderType();
 
         // Assert
-        Assert.assertEquals(10, gametype.getMaxPlayers());
+        Assertions.assertEquals(10, gametype.getMaxPlayers());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class FreeformUnlimitedCommanderTypeTest extends MageTestPlayerBase {
         MatchType gametype = new FreeformUnlimitedCommanderType();
 
         // Assert
-        Assert.assertEquals(0, gametype.getNumTeams());
+        Assertions.assertEquals(0, gametype.getNumTeams());
     }
 
     @Test
@@ -68,7 +68,7 @@ public class FreeformUnlimitedCommanderTypeTest extends MageTestPlayerBase {
         MatchType gametype = new FreeformUnlimitedCommanderType();
 
         // Assert
-        Assert.assertEquals(0, gametype.getPlayersPerTeam());
+        Assertions.assertEquals(0, gametype.getPlayersPerTeam());
     }
 
     @Test
@@ -77,7 +77,7 @@ public class FreeformUnlimitedCommanderTypeTest extends MageTestPlayerBase {
         MatchType gametype = new FreeformUnlimitedCommanderType();
 
         // Assert
-        Assert.assertTrue(gametype.isUseRange());
+        Assertions.assertTrue(gametype.isUseRange());
     }
 
     @Test
@@ -86,7 +86,7 @@ public class FreeformUnlimitedCommanderTypeTest extends MageTestPlayerBase {
         MatchType gametype = new FreeformUnlimitedCommanderType();
 
         // Assert
-        Assert.assertTrue(gametype.isUseAttackOption());
+        Assertions.assertTrue(gametype.isUseAttackOption());
     }
 
     @Test
@@ -95,6 +95,6 @@ public class FreeformUnlimitedCommanderTypeTest extends MageTestPlayerBase {
         MatchType gametype = new FreeformUnlimitedCommanderType();
 
         // Assert
-        Assert.assertTrue(gametype.isSideboardingAllowed());
+        Assertions.assertTrue(gametype.isSideboardingAllowed());
     }
 }

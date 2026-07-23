@@ -42,14 +42,15 @@ import mage.util.Copier;
 import mage.utils.SystemUtil;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.mage.test.player.TestComputerPlayer;
 import org.mage.test.player.TestPlayer;
 
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.*;
+
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Base class for all tests.
@@ -97,7 +98,7 @@ public abstract class MageTestPlayerBase {
 
     protected PhaseStep stopAtStep = PhaseStep.UNTAP;
 
-    @BeforeClass
+    @BeforeAll
     public static void init() {
         Logger.getRootLogger().setLevel(Level.DEBUG);
         logger.debug("Starting MAGE tests");
@@ -312,7 +313,7 @@ public abstract class MageTestPlayerBase {
                 getExiledCards(controllerPlayer).add(newCard);
                 break;
             default:
-                Assert.fail("Unsupported zone: " + putAtZone);
+                fail("Unsupported zone: " + putAtZone);
         }
     }
 

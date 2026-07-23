@@ -2,8 +2,8 @@ package org.mage.test.AI.basic;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseAI;
 
 /**
@@ -29,7 +29,7 @@ public class CastCreaturesTest extends CardTestPlayerBaseAI {
      * This test fails sometimes, probably because two plains are tapped for the
      * first creature
      */
-    @Ignore
+    @Disabled
     @Test
     // TODO: Find out why sometimes this produces an error - probably because of wrong mana usage of the AI - Not solved yet
     public void testSimpleCast2() {

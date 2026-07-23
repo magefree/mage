@@ -4,9 +4,9 @@ import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 /**
@@ -128,19 +128,19 @@ public class TestFrameworkCanPlayAITest extends CardTestPlayerBaseWithAIHelps {
         // make sure runtime check commands can be called under AI control
 
         runCode("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
-            Assert.assertFalse("must be non AI before", player.isComputer());
+            Assertions.assertFalse(player.isComputer(), "must be non AI before");
         });
 
         aiPlayStep(1, PhaseStep.PRECOMBAT_MAIN, PhaseStep.END_TURN, playerA);
 
         checkLife("on same start", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 20);
         runCode("on inner step", 1, PhaseStep.BEGIN_COMBAT, playerA, (info, player, game) -> {
-            Assert.assertTrue("must be AI", player.isComputer());
+            Assertions.assertTrue(player.isComputer(), "must be AI");
         });
         //
         checkLife("on inner step", 1, PhaseStep.DECLARE_ATTACKERS, playerA, 20);
         runCode("on inner step", 1, PhaseStep.BEGIN_COMBAT, playerA, (info, player, game) -> {
-            Assert.assertTrue("must be AI", player.isComputer());
+            Assertions.assertTrue(player.isComputer(), "must be AI");
         });
         //
         checkLife("on same end", 1, PhaseStep.END_TURN, playerA, 20);
@@ -155,14 +155,14 @@ public class TestFrameworkCanPlayAITest extends CardTestPlayerBaseWithAIHelps {
         // make sure runtime check commands can be called under AI control
 
         runCode("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
-            Assert.assertFalse("must be non AI before", player.isComputer());
+            Assertions.assertFalse(player.isComputer(), "must be non AI before");
         });
 
         aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         checkLife("on same start", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 20);
         runCode("on same start", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
-            Assert.assertFalse("must be non AI after", player.isComputer());
+            Assertions.assertFalse(player.isComputer(), "must be non AI after");
         });
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -226,7 +226,7 @@ public class TestFrameworkCanPlayAITest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    @Ignore // AI can't play blade cause score system give priority for boost instead restriction effects like goad
+    @Disabled // AI can't play blade cause score system give priority for boost instead restriction effects like goad
     public void test_AI_GoadedByBloodthirstyBlade_Normal() {
         // Equipped creature gets +2/+0 and is goaded
         // {1}: Attach Bloodthirsty Blade to target creature an opponent controls. Activate this ability only any time you could cast a sorcery.
@@ -242,8 +242,8 @@ public class TestFrameworkCanPlayAITest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         execute();
 
-        Assert.assertEquals(1, currentGame.getBattlefield().getAllActivePermanents(CardType.CREATURE, currentGame).size());
+        Assertions.assertEquals(1, currentGame.getBattlefield().getAllActivePermanents(CardType.CREATURE, currentGame).size());
         Permanent permanent = currentGame.getBattlefield().getAllActivePermanents(CardType.CREATURE, currentGame).get(0);
-        Assert.assertEquals(1, permanent.getAttachments().size());
+        Assertions.assertEquals(1, permanent.getAttachments().size());
     }
 }

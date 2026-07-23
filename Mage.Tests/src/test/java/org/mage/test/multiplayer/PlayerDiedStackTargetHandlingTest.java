@@ -8,8 +8,8 @@ import mage.game.FreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.mulligan.MulliganType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
 import java.io.FileNotFoundException;
@@ -54,7 +54,7 @@ public class PlayerDiedStackTargetHandlingTest extends CardTestMultiPlayerBase {
         execute();
 
         assertGraveyardCount(playerA, "Lightning Helix", 2);
-        Assert.assertTrue("Active player has to be player C", currentGame.getActivePlayerId().equals(playerC.getId()));
+        Assertions.assertTrue(currentGame.getActivePlayerId().equals(playerC.getId()), "Active player has to be player C");
 
         assertLife(playerA, 6);
 
@@ -89,7 +89,7 @@ public class PlayerDiedStackTargetHandlingTest extends CardTestMultiPlayerBase {
 
         assertPermanentCount(playerA, "Silvercoat Lion", 2);
         assertGraveyardCount(playerA, "Tendrils of Agony", 1);
-        Assert.assertTrue("Active player has to be player C", currentGame.getActivePlayerId().equals(playerC.getId()));
+        Assertions.assertTrue(currentGame.getActivePlayerId().equals(playerC.getId()), "Active player has to be player C");
 
         assertLife(playerA, 7);
     }

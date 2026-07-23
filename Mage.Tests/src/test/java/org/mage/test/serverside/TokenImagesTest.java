@@ -27,8 +27,8 @@ import mage.view.CardView;
 import mage.view.GameView;
 import mage.view.PermanentView;
 import mage.view.PlayerView;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import java.util.*;
@@ -154,10 +154,10 @@ public class TokenImagesTest extends CardTestPlayerBase {
                 .filter(card -> card instanceof PermanentToken)
                 .sorted(Comparator.comparing(Card::getExpansionSetCode))
                 .forEach(card -> {
-                    Assert.assertNotNull("must have set code", card.getExpansionSetCode());
-                    Assert.assertEquals("must have same set codes in all fields",
-                            card.getExpansionSetCode(),
-                            ((PermanentToken) card).getToken().getExpansionSetCode()
+                    Assertions.assertNotNull(card.getExpansionSetCode(), "must have set code");
+                    Assertions.assertEquals(card.getExpansionSetCode(),
+                            ((PermanentToken) card).getToken().getExpansionSetCode(),
+                            "must have same set codes in all fields"
                     );
                     String realCode = card.getExpansionSetCode();
                     realServerStats.computeIfAbsent(realCode, code -> new ArrayList<>());
@@ -179,8 +179,8 @@ public class TokenImagesTest extends CardTestPlayerBase {
                 });
 
         // check client data (GameView's objects must get same data as Game's objects)
-        Assert.assertEquals(realServerStats.size(), realClientStats.size());
-        Assert.assertEquals(
+        Assertions.assertEquals(realServerStats.size(), realClientStats.size());
+        Assertions.assertEquals(
                 realServerStats.values().stream().mapToInt(List::size).sum(),
                 realClientStats.values().stream().mapToInt(List::size).sum()
         );
@@ -192,7 +192,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
                 .stream()
                 .map(entry -> String.format("%s-%d", entry.getKey(), entry.getValue().size()))
                 .collect(Collectors.joining(", "));
-        Assert.assertEquals(serverDataInfo, clientDataInfo);
+        Assertions.assertEquals(serverDataInfo, clientDataInfo);
 
         // check stats
         List<String> checkResults = new ArrayList<>();
@@ -201,7 +201,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
             if (!checkMatcher.find()) {
                 throw new IllegalArgumentException("Unknown check operation format: " + check);
             }
-            Assert.assertEquals(3, checkMatcher.groupCount());
+            Assertions.assertEquals(3, checkMatcher.groupCount());
             String checkCode = checkMatcher.group(1);
             String checkOper = checkMatcher.group(2);
             String checkVal = checkMatcher.group(3);
@@ -260,7 +260,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
             System.out.println();
             System.out.println("Check stats:");
             checkResults.forEach(s -> System.out.println(" - " + s));
-            Assert.fail("Found wrong real stats, see logs above");
+            Assertions.fail("Found wrong real stats, see logs above");
         }
     }
 
@@ -286,38 +286,38 @@ public class TokenImagesTest extends CardTestPlayerBase {
         String imagesNeed = needUniqueImages.stream().sorted().map(Object::toString).collect(Collectors.joining(", "));
         String imagesServer = serverStats.stream().sorted().map(Object::toString).collect(Collectors.joining(", "));
         String imagesClient = clientStats.stream().sorted().map(Object::toString).collect(Collectors.joining(", "));
-        Assert.assertEquals("server side", imagesNeed, imagesServer);
-        Assert.assertEquals("client side", imagesNeed, imagesClient);
+        Assertions.assertEquals(imagesNeed, imagesServer, "server side");
+        Assertions.assertEquals(imagesNeed, imagesClient, "client side");
     }
 
     private void assertFaceDownCharacteristics(String info, MageObject object, String faceDownTypeName) {
         String prefix = info + " - " + object;
 
         // image info
-        Assert.assertEquals(prefix + " - wrong set code", TokenRepository.XMAGE_TOKENS_SET_CODE, object.getExpansionSetCode());
-        Assert.assertEquals(prefix + " - wrong card number", "0", object.getCardNumber());
-        Assert.assertEquals(prefix + " - wrong image file name", faceDownTypeName, object.getImageFileName());
-        Assert.assertNotEquals(prefix + " - wrong image number", Integer.valueOf(0), object.getImageNumber());
+        Assertions.assertEquals(TokenRepository.XMAGE_TOKENS_SET_CODE, object.getExpansionSetCode(), prefix + " - wrong set code");
+        Assertions.assertEquals("0", object.getCardNumber(), prefix + " - wrong card number");
+        Assertions.assertEquals(faceDownTypeName, object.getImageFileName(), prefix + " - wrong image file name");
+        Assertions.assertNotEquals(Integer.valueOf(0), object.getImageNumber(), prefix + " - wrong image number");
 
         // characteristic checks instead new test
-        Assert.assertEquals(prefix + " - wrong name", EmptyNames.FACE_DOWN_CREATURE.getObjectName(), object.getName());
-        Assert.assertEquals(prefix + " - wrong power", 2, object.getPower().getValue());
-        Assert.assertEquals(prefix + " - wrong toughness", 2, object.getToughness().getValue());
-        Assert.assertEquals(prefix + " - wrong color", "", object.getColor(currentGame).toString());
-        Assert.assertEquals(prefix + " - wrong supertypes", "[]", object.getSuperType(currentGame).toString());
-        Assert.assertEquals(prefix + " - wrong types", "[Creature]", object.getCardType(currentGame).toString());
-        Assert.assertEquals(prefix + " - wrong subtypes", "[]", object.getSubtype(currentGame).toString());
-        Assert.assertTrue(prefix + " - wrong abilities", object.getAbilities().stream().anyMatch(a -> !CardUtil.isInformationAbility(a))); // become face down + face up abilities only
+        Assertions.assertEquals(EmptyNames.FACE_DOWN_CREATURE.getObjectName(), object.getName(), prefix + " - wrong name");
+        Assertions.assertEquals(2, object.getPower().getValue(), prefix + " - wrong power");
+        Assertions.assertEquals(2, object.getToughness().getValue(), prefix + " - wrong toughness");
+        Assertions.assertEquals("", object.getColor(currentGame).toString(), prefix + " - wrong color");
+        Assertions.assertEquals("[]", object.getSuperType(currentGame).toString(), prefix + " - wrong supertypes");
+        Assertions.assertEquals("[Creature]", object.getCardType(currentGame).toString(), prefix + " - wrong types");
+        Assertions.assertEquals("[]", object.getSubtype(currentGame).toString(), prefix + " - wrong subtypes");
+        Assertions.assertTrue(object.getAbilities().stream().anyMatch(a -> !CardUtil.isInformationAbility(a)), prefix + " - wrong abilities"); // become face down + face up abilities only
     }
 
     private void assertOriginalData(String info, CardView cardView, int needPower, int needToughness, String needColor) {
         String prefix = info + " - " + cardView;
         int currentPower = cardView.getOriginalPower() == null ? 0 : cardView.getOriginalPower().getValue();
         int currentToughness = cardView.getOriginalToughness() == null ? 0 : cardView.getOriginalToughness().getValue();
-        Assert.assertEquals(prefix + " - wrong power", needPower, currentPower);
-        Assert.assertEquals(prefix + " - wrong toughness", needToughness, currentToughness);
+        Assertions.assertEquals(needPower, currentPower, prefix + " - wrong power");
+        Assertions.assertEquals(needToughness, currentToughness, prefix + " - wrong toughness");
         if (needColor != null) {
-            Assert.assertEquals(prefix + " - wrong color", needColor, cardView.getOriginalColorIdentity());
+            Assertions.assertEquals(needColor, cardView.getOriginalColorIdentity(), prefix + " - wrong color");
         }
     }
 
@@ -326,7 +326,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
                 .stream()
                 .filter(card -> card.isFaceDown(currentGame))
                 .filter(card -> {
-                    Assert.assertEquals("server side - wrong set code - " + card, TokenRepository.XMAGE_TOKENS_SET_CODE, card.getExpansionSetCode());
+                    Assertions.assertEquals(TokenRepository.XMAGE_TOKENS_SET_CODE, card.getExpansionSetCode(), "server side - wrong set code - " + card);
                     return true;
                 })
                 .sorted(Comparator.comparing(Card::getExpansionSetCode))
@@ -341,12 +341,12 @@ public class TokenImagesTest extends CardTestPlayerBase {
                 .filter(p -> p.getName().equals(playerA.getName()))
                 .findFirst()
                 .orElse(null);
-        Assert.assertNotNull(playerView);
+        Assertions.assertNotNull(playerView);
         Set<Integer> clientStats = playerView.getBattlefield().values()
                 .stream()
                 .filter(CardView::isFaceDown)
                 .filter(card -> {
-                    Assert.assertEquals("client side - wrong set code - " + card, TokenRepository.XMAGE_TOKENS_SET_CODE, card.getExpansionSetCode());
+                    Assertions.assertEquals(TokenRepository.XMAGE_TOKENS_SET_CODE, card.getExpansionSetCode(), "client side - wrong set code - " + card);
                     return true;
                 })
                 .sorted(Comparator.comparing(CardView::getExpansionSetCode))
@@ -357,8 +357,8 @@ public class TokenImagesTest extends CardTestPlayerBase {
         String imagesNeed = needUniqueImages.stream().sorted().map(Object::toString).collect(Collectors.joining(", "));
         String imagesServer = serverStats.stream().sorted().map(Object::toString).collect(Collectors.joining(", "));
         String imagesClient = clientStats.stream().sorted().map(Object::toString).collect(Collectors.joining(", "));
-        Assert.assertEquals("server side", imagesNeed, imagesServer);
-        Assert.assertEquals("client side", imagesNeed, imagesClient);
+        Assertions.assertEquals(imagesNeed, imagesServer, "server side");
+        Assertions.assertEquals(imagesNeed, imagesClient, "client side");
     }
 
     @Test
@@ -439,8 +439,8 @@ public class TokenImagesTest extends CardTestPlayerBase {
                     .map(p -> (PermanentToken) p)
                     .findFirst()
                     .orElse(null);
-            Assert.assertNotNull(token);
-            Assert.assertTrue(token.getImageNumber() >= 1 && token.getImageNumber() <= 3);
+            Assertions.assertNotNull(token);
+            Assertions.assertTrue(token.getImageNumber() >= 1 && token.getImageNumber() <= 3);
             realImageNumber.set(token.getImageNumber());
         });
 
@@ -602,8 +602,8 @@ public class TokenImagesTest extends CardTestPlayerBase {
                     .filter(MageObject::isCopy)
                     .map(Card::getExpansionSetCode)
                     .collect(Collectors.toSet());
-            Assert.assertEquals(1, usedSetCodes.size());
-            Assert.assertEquals("ICE", usedSetCodes.stream().findFirst().orElse(null));
+            Assertions.assertEquals(1, usedSetCodes.size());
+            Assertions.assertEquals("ICE", usedSetCodes.stream().findFirst().orElse(null));
         });
 
         setStrictChooseMode(true);
@@ -776,7 +776,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Zoetic Cavern using Morph");
         runCode("stack check", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
-            Assert.assertEquals("stack must be active", 1, game.getState().getStack().size());
+            Assertions.assertEquals(1, game.getState().getStack().size(), "stack must be active");
 
             // server side spell before resolve contains full info, not empty
             // so real data will be full, but view data will be hidden by face down status
@@ -785,16 +785,16 @@ public class TokenImagesTest extends CardTestPlayerBase {
             String needClientOpponentName = CardUtil.getCardNameForGUI("", TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MORPH);
 
             Spell spell = (Spell) game.getState().getStack().stream().findFirst().orElse(null);
-            Assert.assertNotNull("server - spell must exists", spell);
+            Assertions.assertNotNull(spell, "server - spell must exists");
 
             // make sure image from object's id works fine
             IntStream.of(5).forEach(i -> {
                 UUID objectId = UUID.randomUUID();
                 int objectImageNumber = TokenRepository.instance.findPreferredTokenInfoForXmage(TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, objectId).getImageNumber();
-                Assert.assertNotEquals("wrong image number", 0, objectImageNumber);
+                Assertions.assertNotEquals(0, objectImageNumber, "wrong image number");
                 IntStream.of(5).forEach(j -> {
                     int newImageNumber = TokenRepository.instance.findPreferredTokenInfoForXmage(TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, objectId).getImageNumber();
-                    Assert.assertEquals("generated image numbers must be same for same id", objectImageNumber, newImageNumber);
+                    Assertions.assertEquals(objectImageNumber, newImageNumber, "generated image numbers must be same for same id");
                 });
             });
 
@@ -803,40 +803,40 @@ public class TokenImagesTest extends CardTestPlayerBase {
             //CardView debugViewController = new CardView(spell, currentGame, true, false);
 
             // server side (full data)
-            Assert.assertTrue("server - wrong face down status", spell.isFaceDown(game));
-            Assert.assertEquals("server - wrong color", spell.getColor(game), new ObjectColor());
-            Assert.assertEquals("server - wrong name", cardName, spell.getName());
+            Assertions.assertTrue(spell.isFaceDown(game), "server - wrong face down status");
+            Assertions.assertEquals(spell.getColor(game), new ObjectColor(), "server - wrong color");
+            Assertions.assertEquals(cardName, spell.getName(), "server - wrong name");
             //
             // workaround to find image number (from id) - it must be same on each generate
             int serverImageNumber = spell.getSpellAbility().getCharacteristics(game).getImageNumber();
-            Assert.assertNotEquals("server - wrong set code", TokenRepository.XMAGE_TOKENS_SET_CODE, spell.getExpansionSetCode());
-            Assert.assertNotEquals("server - wrong image number", 0, serverImageNumber);
+            Assertions.assertNotEquals("server - wrong set code", TokenRepository.XMAGE_TOKENS_SET_CODE, spell.getExpansionSetCode());
+            Assertions.assertNotEquals(0, serverImageNumber, "server - wrong image number");
 
             // client side - controller (hidden + card name)
             GameView gameView = getGameView(playerA);
             CardView spellView = gameView.getStack().values().stream().findFirst().orElse(null);
-            Assert.assertNotNull("client, controller - spell must exists", spellView);
-            Assert.assertTrue("client, controller - wrong face down status", spellView.isFaceDown());
-            Assert.assertEquals("client, controller - wrong color", spellView.getColor(), new ObjectColor());
-            Assert.assertEquals("client, controller - wrong spell name", needClientControllerName, spellView.getName());
+            Assertions.assertNotNull(spellView, "client, controller - spell must exists");
+            Assertions.assertTrue(spellView.isFaceDown(), "client, controller - wrong face down status");
+            Assertions.assertEquals(spellView.getColor(), new ObjectColor(), "client, controller - wrong color");
+            Assertions.assertEquals(needClientControllerName, spellView.getName(), "client, controller - wrong spell name");
             //
-            Assert.assertEquals("client, controller - wrong set code", TokenRepository.XMAGE_TOKENS_SET_CODE, spellView.getExpansionSetCode());
-            Assert.assertEquals("client, controller - wrong card number", "0", spellView.getCardNumber());
-            Assert.assertEquals("client, controller - wrong image file", TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, spellView.getImageFileName());
-            Assert.assertEquals("client, controller - wrong image number", serverImageNumber, spellView.getImageNumber());
+            Assertions.assertEquals(TokenRepository.XMAGE_TOKENS_SET_CODE, spellView.getExpansionSetCode(), "client, controller - wrong set code");
+            Assertions.assertEquals("0", spellView.getCardNumber(), "client, controller - wrong card number");
+            Assertions.assertEquals(TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, spellView.getImageFileName(), "client, controller - wrong image file");
+            Assertions.assertEquals(serverImageNumber, spellView.getImageNumber(), "client, controller - wrong image number");
 
             // client side - opponent (hidden)
             gameView = getGameView(playerB);
             spellView = gameView.getStack().values().stream().findFirst().orElse(null);
-            Assert.assertNotNull("client, opponent - spell must exists", spellView);
-            Assert.assertTrue("client, opponent - wrong face down status", spellView.isFaceDown());
-            Assert.assertEquals("client, opponent - wrong color", spellView.getColor(), new ObjectColor());
-            Assert.assertEquals("client, opponent - wrong spell name", needClientOpponentName, spellView.getName());
+            Assertions.assertNotNull(spellView, "client, opponent - spell must exists");
+            Assertions.assertTrue(spellView.isFaceDown(), "client, opponent - wrong face down status");
+            Assertions.assertEquals(spellView.getColor(), new ObjectColor(), "client, opponent - wrong color");
+            Assertions.assertEquals(needClientOpponentName, spellView.getName(), "client, opponent - wrong spell name");
             //
-            Assert.assertEquals("client, opponent - wrong set code", TokenRepository.XMAGE_TOKENS_SET_CODE, spellView.getExpansionSetCode());
-            Assert.assertEquals("client, opponent - wrong card number", "0", spellView.getCardNumber());
-            Assert.assertEquals("client, opponent - wrong image file", TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, spellView.getImageFileName());
-            Assert.assertEquals("client, opponent - wrong image number", serverImageNumber, spellView.getImageNumber());
+            Assertions.assertEquals(TokenRepository.XMAGE_TOKENS_SET_CODE, spellView.getExpansionSetCode(), "client, opponent - wrong set code");
+            Assertions.assertEquals("0", spellView.getCardNumber(), "client, opponent - wrong card number");
+            Assertions.assertEquals(TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, spellView.getImageFileName(), "client, opponent - wrong image file");
+            Assertions.assertEquals(serverImageNumber, spellView.getImageNumber(), "client, opponent - wrong image number");
         });
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
@@ -905,22 +905,22 @@ public class TokenImagesTest extends CardTestPlayerBase {
             // server side (full data)
             // TODO: possible bugged?! Other abilities must not see faced-down card as real on server side!
             String needName = "Forest";
-            Assert.assertTrue("server side - must be face down", card.isFaceDown(currentGame));
-            Assert.assertEquals("server side - wrong name", needName, card.getName());
-            Assert.assertTrue("server side - wrong abilities", card.getAbilities(currentGame).stream().anyMatch(a -> !CardUtil.isInformationAbility(a))); // play + add mana
+            Assertions.assertTrue(card.isFaceDown(currentGame), "server side - must be face down");
+            Assertions.assertEquals(needName, card.getName(), "server side - wrong name");
+            Assertions.assertTrue(card.getAbilities(currentGame).stream().anyMatch(a -> !CardUtil.isInformationAbility(a)), "server side - wrong abilities"); // play + add mana
 
             // client side - controller (hidden data + original name)
             needName = "Face Down: Forest";
-            Assert.assertEquals("controller - wrong name", needName, controllerCardView.getName());
-            Assert.assertTrue("controller - must be face down", controllerCardView.isFaceDown());
-            Assert.assertEquals("controller - must not have abilities", 0, controllerCardView.getRules().size());
+            Assertions.assertEquals(needName, controllerCardView.getName(), "controller - wrong name");
+            Assertions.assertTrue(controllerCardView.isFaceDown(), "controller - must be face down");
+            Assertions.assertEquals(0, controllerCardView.getRules().size(), "controller - must not have abilities");
             assertOriginalData("controller, original data", controllerCardView, 0, 0, "");
 
             // client side - opponent (hidden data)
             needName = "Face Down";
-            Assert.assertTrue("opponent - must be face down", opponentCardView.isFaceDown());
-            Assert.assertEquals("opponent - wrong name", needName, opponentCardView.getName());
-            Assert.assertEquals("opponent - must not have abilities", 0, opponentCardView.getRules().size());
+            Assertions.assertTrue(opponentCardView.isFaceDown(), "opponent - must be face down");
+            Assertions.assertEquals(needName, opponentCardView.getName(), "opponent - wrong name");
+            Assertions.assertEquals(0, opponentCardView.getRules().size(), "opponent - must not have abilities");
             assertOriginalData("opponent, original data", opponentCardView, 0, 0, "");
         });
 
@@ -958,22 +958,22 @@ public class TokenImagesTest extends CardTestPlayerBase {
             // server side (full data)
             // TODO: possible bugged?! Other abilities must not see faced-down card as real on server side!
             String needName = "Behold the Multiverse";
-            Assert.assertTrue("server side - must be face down", card.isFaceDown(currentGame));
-            Assert.assertEquals("server side - wrong name", needName, card.getName());
-            Assert.assertTrue("server side - wrong abilities", card.getAbilities(currentGame).stream().anyMatch(a -> !CardUtil.isInformationAbility(a)));
+            Assertions.assertTrue(card.isFaceDown(currentGame), "server side - must be face down");
+            Assertions.assertEquals(needName, card.getName(), "server side - wrong name");
+            Assertions.assertTrue(card.getAbilities(currentGame).stream().anyMatch(a -> !CardUtil.isInformationAbility(a)), "server side - wrong abilities");
 
             // client side - controller (hidden data + original name)
             needName = "Foretell: Behold the Multiverse";
-            Assert.assertEquals("controller - wrong name", needName, controllerCardView.getName());
-            Assert.assertTrue("controller - must be face down", controllerCardView.isFaceDown());
-            Assert.assertEquals("controller - must not have abilities", 0, controllerCardView.getRules().size());
+            Assertions.assertEquals(needName, controllerCardView.getName(), "controller - wrong name");
+            Assertions.assertTrue(controllerCardView.isFaceDown(), "controller - must be face down");
+            Assertions.assertEquals(0, controllerCardView.getRules().size(), "controller - must not have abilities");
             assertOriginalData("controller, original data", controllerCardView, 0, 0, "");
 
             // client side - opponent (hidden data)
             needName = "Foretell";
-            Assert.assertTrue("opponent - must be face down", opponentCardView.isFaceDown());
-            Assert.assertEquals("opponent - wrong name", needName, opponentCardView.getName());
-            Assert.assertEquals("opponent - must not have abilities", 0, opponentCardView.getRules().size());
+            Assertions.assertTrue(opponentCardView.isFaceDown(), "opponent - must be face down");
+            Assertions.assertEquals(needName, opponentCardView.getName(), "opponent - wrong name");
+            Assertions.assertEquals(0, opponentCardView.getRules().size(), "opponent - must not have abilities");
             assertOriginalData("opponent, original data", opponentCardView, 0, 0, "");
         });
 

@@ -4,8 +4,8 @@ import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -120,7 +120,7 @@ public class EmblemsTest extends CardTestPlayerBase {
                 found = true;
             }
         }
-        Assert.assertTrue("Couldn't find a card in hand: Elite Vanguard", found);
+        Assertions.assertTrue(found, "Couldn't find a card in hand: Elite Vanguard");
     }
 
     /**

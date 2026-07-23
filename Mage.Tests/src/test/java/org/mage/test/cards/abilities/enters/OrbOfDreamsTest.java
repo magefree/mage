@@ -3,8 +3,8 @@
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -48,9 +48,9 @@ public class OrbOfDreamsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Razortip Whip", 1);
 
         Permanent orbOfDreams = getPermanent("Orb of Dreams", playerA.getId());
-        Assert.assertFalse("Orb has tapped itself, but may not", orbOfDreams.isTapped());
+        Assertions.assertFalse(orbOfDreams.isTapped(), "Orb has tapped itself, but may not");
         Permanent razortipWhip = getPermanent("Razortip Whip", playerA.getId());
-        Assert.assertTrue("Razortip Whip must be tapped from Orb of Dreams but isn't", razortipWhip.isTapped());
+        Assertions.assertTrue(razortipWhip.isTapped(), "Razortip Whip must be tapped from Orb of Dreams but isn't");
     }
 
 }

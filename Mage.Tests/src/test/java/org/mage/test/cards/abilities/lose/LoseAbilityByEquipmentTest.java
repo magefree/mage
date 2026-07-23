@@ -4,8 +4,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -36,13 +36,13 @@ public class LoseAbilityByEquipmentTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         Permanent silvercoatLion = getPermanent("Silvercoat Lion", playerA.getId());
-        Assert.assertNotNull(silvercoatLion);
-        Assert.assertEquals("Silvercoat Lion equipments", 2, silvercoatLion.getAttachments().size());
-        Assert.assertEquals("Silvercoat Lion power",4, silvercoatLion.getPower().getValue());
-        Assert.assertEquals("Silvercoat Lion toughness",6, silvercoatLion.getToughness().getValue());
+        Assertions.assertNotNull(silvercoatLion);
+        Assertions.assertEquals(2, silvercoatLion.getAttachments().size(), "Silvercoat Lion equipments");
+        Assertions.assertEquals(4,silvercoatLion.getPower().getValue(), "Silvercoat Lion power");
+        Assertions.assertEquals(6,silvercoatLion.getToughness().getValue(), "Silvercoat Lion toughness");
 
         // should NOT have flying
-        Assert.assertFalse("Silvercoat Lion has flying but shouldn't have",silvercoatLion.getAbilities().contains(FlyingAbility.getInstance()));
+        Assertions.assertFalse(silvercoatLion.getAbilities().contains(FlyingAbility.getInstance()),"Silvercoat Lion has flying but shouldn't have");
     }
 
 }

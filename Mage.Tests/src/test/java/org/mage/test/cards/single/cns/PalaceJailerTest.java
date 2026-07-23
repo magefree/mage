@@ -2,8 +2,8 @@ package org.mage.test.cards.single.cns;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -33,7 +33,7 @@ public class PalaceJailerTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Palace Jailer", 1);
         assertExileCount(playerB, "Silvercoat Lion", 1);
 
-        Assert.assertTrue("Player A has to be the monarch", currentGame.getMonarchId().equals(playerA.getId()));
+        Assertions.assertTrue(currentGame.getMonarchId().equals(playerA.getId()), "Player A has to be the monarch");
     }
 
     /**
@@ -86,7 +86,7 @@ public class PalaceJailerTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
         assertPermanentCount(playerB, "Pillarfield Ox", 1);
 
-        Assert.assertTrue("Player B has to be the monarch", currentGame.getMonarchId().equals(playerB.getId()));
+        Assertions.assertTrue(currentGame.getMonarchId().equals(playerB.getId()), "Player B has to be the monarch");
     }
 
 }

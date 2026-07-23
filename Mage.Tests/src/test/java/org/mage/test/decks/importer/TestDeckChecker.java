@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests only: helper class to test decks
@@ -38,16 +38,16 @@ public class TestDeckChecker {
     }
 
     public void verify(DeckCardLists deck, int nMain, int nSide) {
-        assertEquals("main deck size", nMain, main.size());
-        assertEquals("main deck loaded size", nMain, deck.getCards().size());
-        assertEquals("sideboard size", nSide, side.size());
-        assertEquals("sideboard loaded size", nSide, deck.getSideboard().size());
+        assertEquals(nMain, main.size(), "main deck size");
+        assertEquals(nMain, deck.getCards().size(), "main deck loaded size");
+        assertEquals(nSide, side.size(), "sideboard size");
+        assertEquals(nSide, deck.getSideboard().size(), "sideboard loaded size");
 
         for (int i = 0; i < main.size(); i++) {
             String expected = main.get(i);
             String actual = deck.getCards().get(i).getCardName();
-            assertEquals(String.format("Expected: '%s' Actual: '%s' at index: %s",
-                    expected, actual, i), expected, actual);
+            assertEquals(expected, actual, String.format("Expected: '%s' Actual: '%s' at index: %s",
+                    expected, actual, i));
         }
     }
 

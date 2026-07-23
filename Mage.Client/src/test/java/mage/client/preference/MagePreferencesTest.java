@@ -1,20 +1,20 @@
 package mage.client.preference;
 
 import mage.client.dialog.PreferencesDialog;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MagePreferencesTest {
-    @Before
+    
+    @BeforeEach
     public void setUp() {
         MagePreferences.ignoreList("test.com.xx").clear();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         MagePreferences.ignoreList("test.com.xx").clear();
     }
@@ -56,26 +56,26 @@ public class MagePreferencesTest {
         PreferencesDialog.DefaultSizeSettings defaultSizeSettings = PreferencesDialog.getDefaultSizeSettings();
 
         String needPreset = "1366 x 768";
-        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 0));
-        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 100));
-        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 767));
-        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 768));
-        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 769));
-        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 1079));
+        assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 0));
+        assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 100));
+        assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 767));
+        assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 768));
+        assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 769));
+        assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 1079));
 
         needPreset = "1920 x 1080";
-        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 1080));
-        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 1081));
-        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 1439));
+        assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 1080));
+        assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 1081));
+        assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 1439));
 
         needPreset = "2560 x 1440";
-        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 1440));
-        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 1441));
-        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 2159));
+        assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 1440));
+        assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 1441));
+        assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 2159));
 
         needPreset = "3840 x 2160";
-        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 2160));
-        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 5000));
-        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 5000));
+        assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 2160));
+        assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 5000));
+        assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 5000));
     }
 }

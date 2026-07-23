@@ -6,8 +6,8 @@ import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.Filter;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -104,7 +104,7 @@ public class LayerTests extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore //Works fine in the game.  Test fails, though.
+    @Disabled //Works fine in the game.  Test fails, though.
     public void complexExampleFromLayersArticle() {
         /*In play there is a Grizzly Bears which has already been Giant Growthed, 
         a Bog Wraith enchanted by a Lignify, and Figure of Destiny with its 3rd ability activated. 
@@ -161,7 +161,7 @@ public class LayerTests extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore //This works fine in the game.  Test fails.
+    @Disabled //This works fine in the game.  Test fails.
     public void testFromAnArticle() {
         /*
         Aiden has a Battlegate Mimic on the battlefield. Nick controls two Wilderness Hypnotists. 

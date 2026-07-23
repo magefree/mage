@@ -2,12 +2,12 @@ package org.mage.test.mulligan;
 
 import com.google.common.collect.Sets;
 import mage.game.mulligan.MulliganType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LondonMulliganTest extends MulliganTestBase {
     protected MulliganType getMullType() {

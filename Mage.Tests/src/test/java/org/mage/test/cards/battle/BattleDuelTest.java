@@ -3,7 +3,7 @@ package org.mage.test.cards.battle;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author TheElk801, JayDi85

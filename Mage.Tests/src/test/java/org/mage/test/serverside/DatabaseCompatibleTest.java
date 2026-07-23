@@ -2,14 +2,14 @@ package org.mage.test.serverside;
 
 import mage.server.AuthorizedUser;
 import mage.server.AuthorizedUserRepository;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
-
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
@@ -19,14 +19,15 @@ import java.nio.file.Paths;
  */
 public class DatabaseCompatibleTest {
 
-    @Rule
-    public TemporaryFolder tempFolder = new TemporaryFolder();
+    @TempDir
+    Path tempFolder;
+
 
     @Test
     public void test_AuthUsers() {
         try {
             // prepare test db
-            String dbDir = tempFolder.newFolder().getAbsolutePath();
+            String dbDir = tempFolder.toFile().getAbsolutePath();
             String dbName = "users-db-sample.h2";
             String dbFullName = Paths.get(dbDir, dbName).toAbsolutePath().toString();
             String dbFullFileName = dbFullName + ".mv.db";
@@ -34,30 +35,30 @@ public class DatabaseCompatibleTest {
                     Paths.get("src", "test", "data", dbName + ".mv.db"),
                     Paths.get(dbFullFileName)
             );
-            Assert.assertTrue(Files.exists(Paths.get(dbFullFileName)));
+            Assertions.assertTrue(Files.exists(Paths.get(dbFullFileName)));
 
             String connectionString = String.format("jdbc:h2:file:%s;AUTO_SERVER=TRUE", dbFullName);
             AuthorizedUserRepository dbUsers = new AuthorizedUserRepository(connectionString);
 
             // search
-            Assert.assertNotNull(dbUsers.getByName("user1"));
-            Assert.assertNotNull(dbUsers.getByEmail("user2@example.com"));
-            Assert.assertNull(dbUsers.getByName("userFAIL"));
+            Assertions.assertNotNull(dbUsers.getByName("user1"));
+            Assertions.assertNotNull(dbUsers.getByEmail("user2@example.com"));
+            Assertions.assertNull(dbUsers.getByName("userFAIL"));
 
             // login
             AuthorizedUser user = dbUsers.getByName("user3");
-            Assert.assertEquals("user name", user.getName(), "user3");
-            Assert.assertTrue("user pas", user.doCredentialsMatch("user3", "pas3"));
-            Assert.assertFalse("user wrong pas", user.doCredentialsMatch("user3", "123"));
-            Assert.assertFalse("user empty pas", user.doCredentialsMatch("user3", ""));
+            Assertions.assertEquals(user.getName(), "user3", "user name");
+            Assertions.assertTrue(user.doCredentialsMatch("user3", "pas3"), "user pas");
+            Assertions.assertFalse(user.doCredentialsMatch("user3", "123"), "user wrong pas");
+            Assertions.assertFalse(user.doCredentialsMatch("user3", ""), "user empty pas");
         } catch (IOException e) {
             e.printStackTrace();
-            Assert.fail(e.getMessage());
+            Assertions.fail(e.getMessage());
         }
     }
 
     @Test
-    @Ignore // TODO: add records/stats db compatible test
+    @Disabled // TODO: add records/stats db compatible test
     public void test_Records() {
     }
 }

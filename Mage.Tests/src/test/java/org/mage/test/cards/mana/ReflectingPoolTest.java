@@ -4,8 +4,8 @@ import mage.abilities.mana.ManaOptions;
 import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import static org.mage.test.utils.ManaOptionsTestUtils.*;
@@ -63,7 +63,7 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player should be able to create 2 red mana", "{R}{R}", options.getAtIndex(0).toString());
+        Assertions.assertEquals("{R}{R}", options.getAtIndex(0).toString(), "Player should be able to create 2 red mana");
 
     }
 
@@ -83,7 +83,7 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player should be able to create 3 red mana", "{R}{R}{R}", options.getAtIndex(0).toString());
+        Assertions.assertEquals("{R}{R}{R}", options.getAtIndex(0).toString(), "Player should be able to create 3 red mana");
 
     }
 
@@ -103,7 +103,7 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player should be able to create 3 red mana", "{R}{R}{R}", options.getAtIndex(0).toString());
+        Assertions.assertEquals("{R}{R}{R}", options.getAtIndex(0).toString(), "Player should be able to create 3 red mana");
 
     }
 
@@ -124,7 +124,7 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player should be able to create 2 green mana", "{G}{G}", options.getAtIndex(0).toString());
+        Assertions.assertEquals("{G}{G}", options.getAtIndex(0).toString(), "Player should be able to create 2 green mana");
 
     }
 
@@ -150,13 +150,13 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player A should be able to create only 3 different mana options", 3, options.size());
+        Assertions.assertEquals(3, options.size(), "Player A should be able to create only 3 different mana options");
         assertManaOptions("{G}{G}{G}", options);
         assertManaOptions("{G}{G}{W}", options);
         assertManaOptions("{G}{W}{W}", options);
 
         options = playerB.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player B should be able to create only 2 different mana options", 2, options.size());
+        Assertions.assertEquals(2, options.size(), "Player B should be able to create only 2 different mana options");
         assertManaOptions("{G}{W}", options);
         assertManaOptions("{W}{W}", options);
     }
@@ -171,7 +171,7 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        Assert.assertEquals(0, playerA.getManaPool().getMana().count());
+        Assertions.assertEquals(0, playerA.getManaPool().getMana().count());
     }
 
     @Test
@@ -262,7 +262,7 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         assertTapped("City of Brass", true);
         assertTapped("Plains", true);
         assertTapped("Reflecting Pool", false);
-        Assert.assertEquals(1, playerA.getManaPool().get(ManaType.BLACK));
+        Assertions.assertEquals(1, playerA.getManaPool().get(ManaType.BLACK));
     }
 
     /**
@@ -286,7 +286,7 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player A should be able to create only 2 different mana options", 2, options.size());
+        Assertions.assertEquals(2, options.size(), "Player A should be able to create only 2 different mana options");
         assertManaOptions("{C}{C}{Any}", options);
         assertManaOptions("{C}{Any}{Any}", options);
     }
@@ -304,7 +304,7 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player A should be able to create only 3 different mana options", 3, options.size());
+        Assertions.assertEquals(3, options.size(), "Player A should be able to create only 3 different mana options");
         assertManaOptions("{C}{C}", options);
         assertManaOptions("{C}{W}", options);
         assertManaOptions("{C}{U}", options);

@@ -6,8 +6,8 @@ import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /*
@@ -45,8 +45,8 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Lazav, Dimir Mastermind", 3, 2);
 
         Permanent lazav = getPermanent("Lazav, Dimir Mastermind", playerA.getId());
-        Assert.assertTrue(lazav.hasSubtype(SubType.GRIFFIN, currentGame));
-        Assert.assertTrue("Lazav, Dimir Mastermind must have flying", lazav.getAbilities().contains(FlyingAbility.getInstance()));
+        Assertions.assertTrue(lazav.hasSubtype(SubType.GRIFFIN, currentGame));
+        Assertions.assertTrue(lazav.getAbilities().contains(FlyingAbility.getInstance()), "Lazav, Dimir Mastermind must have flying");
     }
 
     /**
@@ -71,11 +71,11 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Lazav, Dimir Mastermind", 1);
         assertPowerToughness(playerA, "Lazav, Dimir Mastermind", 3, 3);
         Permanent lazav = getPermanent("Lazav, Dimir Mastermind", playerA.getId());
-        Assert.assertTrue(lazav.hasSubtype(SubType.OGRE, currentGame));
-        Assert.assertTrue(lazav.hasSubtype(SubType.ROGUE, currentGame));
+        Assertions.assertTrue(lazav.hasSubtype(SubType.OGRE, currentGame));
+        Assertions.assertTrue(lazav.hasSubtype(SubType.ROGUE, currentGame));
 
         Permanent gutterSkulk = getPermanent("Gutter Skulk", playerA.getId());
-        Assert.assertTrue("Gutter Skulk should have deathtouch but hasn't", gutterSkulk.getAbilities().contains(DeathtouchAbility.getInstance()));
+        Assertions.assertTrue(gutterSkulk.getAbilities().contains(DeathtouchAbility.getInstance()), "Gutter Skulk should have deathtouch but hasn't");
 
     }
 
@@ -110,9 +110,9 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Lazav, Dimir Mastermind", 2, 3);
 
         Permanent lazav = getPermanent("Lazav, Dimir Mastermind", playerA.getId());
-        Assert.assertTrue(lazav.getAbilities().contains(FlyingAbility.getInstance()));
-        Assert.assertTrue(lazav.hasSubtype(SubType.SPECTER, currentGame));
-        Assert.assertTrue(lazav.isLegendary(currentGame));
+        Assertions.assertTrue(lazav.getAbilities().contains(FlyingAbility.getInstance()));
+        Assertions.assertTrue(lazav.hasSubtype(SubType.SPECTER, currentGame));
+        Assertions.assertTrue(lazav.isLegendary(currentGame));
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 2, 2);
@@ -141,8 +141,8 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Lazav, Dimir Mastermind", 2, 2);
 
         Permanent lazav = getPermanent("Lazav, Dimir Mastermind", playerA.getId());
-        Assert.assertTrue(lazav.hasSubtype(SubType.CAT, currentGame));
-        Assert.assertTrue(lazav.isLegendary(currentGame));
+        Assertions.assertTrue(lazav.hasSubtype(SubType.CAT, currentGame));
+        Assertions.assertTrue(lazav.isLegendary(currentGame));
 
     }
 
@@ -187,8 +187,8 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Lazav, Dimir Mastermind", 1);
         assertPowerToughness(playerA, "Lazav, Dimir Mastermind", 3, 3);
         Permanent lazav = getPermanent("Lazav, Dimir Mastermind", playerA.getId());
-        Assert.assertFalse(lazav.hasSubtype(SubType.GRIFFIN, currentGame)); // no Griffin type
-        Assert.assertFalse("Lazav, Dimir Mastermind must have flying", lazav.getAbilities().contains(FlyingAbility.getInstance()));
+        Assertions.assertFalse(lazav.hasSubtype(SubType.GRIFFIN, currentGame)); // no Griffin type
+        Assertions.assertFalse(lazav.getAbilities().contains(FlyingAbility.getInstance()), "Lazav, Dimir Mastermind must have flying");
 
 
     }
@@ -223,7 +223,7 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Lazav, Dimir Mastermind", 3, 2);
 
         Permanent lazav = getPermanent("Lazav, Dimir Mastermind", playerA.getId());
-        Assert.assertTrue(lazav.hasSubtype(SubType.GRIFFIN, currentGame));
-        Assert.assertTrue("Lazav, Dimir Mastermind must have flying", lazav.getAbilities().contains(FlyingAbility.getInstance()));
+        Assertions.assertTrue(lazav.hasSubtype(SubType.GRIFFIN, currentGame));
+        Assertions.assertTrue(lazav.getAbilities().contains(FlyingAbility.getInstance()), "Lazav, Dimir Mastermind must have flying");
     }
 }

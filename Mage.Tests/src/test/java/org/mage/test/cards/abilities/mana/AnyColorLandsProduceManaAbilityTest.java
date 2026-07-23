@@ -3,8 +3,8 @@ package org.mage.test.cards.abilities.mana;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
@@ -39,7 +39,7 @@ public class AnyColorLandsProduceManaAbilityTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assertions.assertEquals(1, manaOptions.size(), "mana variations don't fit");
         assertManaOptions("{R}", manaOptions);
     }
 }

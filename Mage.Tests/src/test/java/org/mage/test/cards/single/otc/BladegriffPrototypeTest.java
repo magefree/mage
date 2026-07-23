@@ -2,7 +2,8 @@ package org.mage.test.cards.single.otc;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class BladegriffPrototypeTest extends CardTestPlayerBase {
@@ -24,18 +25,20 @@ public class BladegriffPrototypeTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Squire", 1);
     }
 
-    @Test(expected=AssertionError.class)
+    @Test
     public void test_CantTargetYours() {
-        setStrictChooseMode(true);
+        Assertions.assertThrows(AssertionError.class, () -> {
+            setStrictChooseMode(true);
 
-        addCard(Zone.BATTLEFIELD, playerB, "Squire");
-        addCard(Zone.BATTLEFIELD, playerA, griff);
+            addCard(Zone.BATTLEFIELD, playerB, "Squire");
+            addCard(Zone.BATTLEFIELD, playerA, griff);
 
-        attack(1, playerA, griff);
-        addTarget(playerB, griff);
+            attack(1, playerA, griff);
+            addTarget(playerB, griff);
 
-        setStopAt(1, PhaseStep.END_COMBAT);
-        execute();
+            setStopAt(1, PhaseStep.END_COMBAT);
+            execute();
+        });
     }
 
 }

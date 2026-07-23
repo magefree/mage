@@ -2,8 +2,8 @@ package org.mage.test.cards.targets.attacking;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -39,6 +39,6 @@ public class CondemnTest extends CardTestPlayerBase {
         assertLife(playerA, 21);
 
         // check was put on top
-        Assert.assertEquals(72, currentGame.getPlayer(playerA.getId()).getLibrary().size());
+        Assertions.assertEquals(72, currentGame.getPlayer(playerA.getId()).getLibrary().size());
     }
 }

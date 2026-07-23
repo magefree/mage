@@ -6,8 +6,8 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class AeveProgenitorOozeTest extends CardTestPlayerBase {
@@ -50,9 +50,9 @@ public class AeveProgenitorOozeTest extends CardTestPlayerBase {
         for (Permanent permanent : currentGame.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, playerA.getId(), currentGame)) {
             if (permanent.getName().equals(aeve)) {
                 if (permanent instanceof PermanentToken) {
-                    Assert.assertEquals(0, permanent.getCounters(currentGame).getCount(CounterType.P1P1));
+                    Assertions.assertEquals(0, permanent.getCounters(currentGame).getCount(CounterType.P1P1));
                 } else {
-                    Assert.assertEquals(1, permanent.getCounters(currentGame).getCount(CounterType.P1P1));
+                    Assertions.assertEquals(1, permanent.getCounters(currentGame).getCount(CounterType.P1P1));
                 }
             }
         }

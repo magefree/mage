@@ -5,8 +5,8 @@ import mage.abilities.keyword.HasteAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -22,17 +22,17 @@ public class BlitzTest extends CardTestPlayerBase {
     private void assertBlitzed(String cardName, boolean isBlitzed) {
         assertPermanentCount(playerA, cardName, 1);
         Permanent permanent = getPermanent(cardName);
-        Assert.assertEquals(
-                "Permanent should " + (isBlitzed ? "" : "not ") + "have haste", isBlitzed,
-                permanent.hasAbility(HasteAbility.getInstance(), currentGame)
+        Assertions.assertEquals(
+                isBlitzed, permanent.hasAbility(HasteAbility.getInstance(), currentGame),
+                "Permanent should " + (isBlitzed ? "" : "not ") + "have haste"
         );
-        Assert.assertEquals(
-                "Permanent should " + (isBlitzed ? "" : "not ") + "have card draw trigger", isBlitzed,
-                permanent
+        Assertions.assertEquals(
+                isBlitzed, permanent
                         .getAbilities(currentGame)
                         .stream()
                         .map(Ability::getRule)
-                        .anyMatch("When this creature dies, draw a card."::equals)
+                        .anyMatch("When this creature dies, draw a card."::equals),
+                "Permanent should " + (isBlitzed ? "" : "not ") + "have card draw trigger"
         );
     }
 
@@ -136,9 +136,9 @@ public class BlitzTest extends CardTestPlayerBase {
         try {
             execute();
         } catch (AssertionError e) {
-            Assert.assertEquals(
-                    "Shouldn't be able to cast normally from graveyard",
-                    "Can't find ability to activate command: Cast Tenacious Underdog", e.getMessage()
+            Assertions.assertEquals(
+                    e.getMessage(),
+                    "Can't find ability to activate command: Cast Tenacious Underdog", "Shouldn't be able to cast normally from graveyard"
             );
         }
 

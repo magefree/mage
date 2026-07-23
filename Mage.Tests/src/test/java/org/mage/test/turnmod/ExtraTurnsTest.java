@@ -3,8 +3,8 @@ package org.mage.test.turnmod;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.players.Player;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -17,10 +17,10 @@ public class ExtraTurnsTest extends CardTestPlayerBase {
         runCode("checking turn " + turn, turn, PhaseStep.POSTCOMBAT_MAIN, playerA, (info, player, game) -> {
             Player defaultTurnController = game.getPlayer(game.getActivePlayerId());
             Player realTurnController = game.getPlayer(defaultTurnController.getTurnControlledBy());
-            Assert.assertEquals(String.format("turn %d must be controlled by %s", turn, needTurnController.getName()),
-                    needTurnController.getName(), realTurnController.getName());
-            Assert.assertEquals(String.format("turn %d must be %s", turn, (isExtraTurn ? "extra turn" : "normal turn")),
-                    isExtraTurn, game.getState().isExtraTurn());
+            Assertions.assertEquals(needTurnController.getName(),
+                    realTurnController.getName(), String.format("turn %d must be controlled by %s", turn, needTurnController.getName()));
+            Assertions.assertEquals(isExtraTurn,
+                    game.getState().isExtraTurn(), String.format("turn %d must be %s", turn, (isExtraTurn ? "extra turn" : "normal turn")));
         });
     }
 

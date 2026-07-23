@@ -6,8 +6,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -27,12 +27,12 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
         execute();
 
         Permanent master = getPermanent("Transcendent Master", playerA.getId());
-        Assert.assertTrue(master.getCounters(currentGame).isEmpty());
+        Assertions.assertTrue(master.getCounters(currentGame).isEmpty());
 
-        Assert.assertEquals(3, master.getPower().getValue());
-        Assert.assertEquals(3, master.getToughness().getValue());
-        Assert.assertFalse(master.getAbilities().contains(LifelinkAbility.getInstance()));
-        Assert.assertFalse(master.getAbilities().contains(IndestructibleAbility.getInstance()));
+        Assertions.assertEquals(3, master.getPower().getValue());
+        Assertions.assertEquals(3, master.getToughness().getValue());
+        Assertions.assertFalse(master.getAbilities().contains(LifelinkAbility.getInstance()));
+        Assertions.assertFalse(master.getAbilities().contains(IndestructibleAbility.getInstance()));
     }
 
     /**
@@ -49,12 +49,12 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
         execute();
 
         Permanent master = getPermanent("Transcendent Master", playerA.getId());
-        Assert.assertEquals(1, master.getCounters(currentGame).getCount(CounterType.LEVEL));
+        Assertions.assertEquals(1, master.getCounters(currentGame).getCount(CounterType.LEVEL));
 
-        Assert.assertEquals(3, master.getPower().getValue());
-        Assert.assertEquals(3, master.getToughness().getValue());
-        Assert.assertFalse(master.getAbilities().contains(LifelinkAbility.getInstance()));
-        Assert.assertFalse(master.getAbilities().contains(IndestructibleAbility.getInstance()));
+        Assertions.assertEquals(3, master.getPower().getValue());
+        Assertions.assertEquals(3, master.getToughness().getValue());
+        Assertions.assertFalse(master.getAbilities().contains(LifelinkAbility.getInstance()));
+        Assertions.assertFalse(master.getAbilities().contains(IndestructibleAbility.getInstance()));
     }
 
     /**
@@ -74,14 +74,14 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
         execute();
 
         Permanent master = getPermanent("Transcendent Master", playerA.getId());
-        Assert.assertEquals(6, master.getCounters(currentGame).getCount(CounterType.LEVEL));
+        Assertions.assertEquals(6, master.getCounters(currentGame).getCount(CounterType.LEVEL));
 
-        Assert.assertEquals(6, master.getPower().getValue());
-        Assert.assertEquals(6, master.getToughness().getValue());
+        Assertions.assertEquals(6, master.getPower().getValue());
+        Assertions.assertEquals(6, master.getToughness().getValue());
         // since now Lifelink will appear
-        Assert.assertTrue(master.getAbilities().contains(LifelinkAbility.getInstance()));
+        Assertions.assertTrue(master.getAbilities().contains(LifelinkAbility.getInstance()));
         // but still no Indestructible
-        Assert.assertFalse(master.getAbilities().contains(IndestructibleAbility.getInstance()));
+        Assertions.assertFalse(master.getAbilities().contains(IndestructibleAbility.getInstance()));
     }
 
     /**
@@ -101,12 +101,12 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
         execute();
 
         Permanent master = getPermanent("Transcendent Master", playerA.getId());
-        Assert.assertEquals(12, master.getCounters(currentGame).getCount(CounterType.LEVEL));
+        Assertions.assertEquals(12, master.getCounters(currentGame).getCount(CounterType.LEVEL));
 
-        Assert.assertEquals("Power different", 9, master.getPower().getValue());
-        Assert.assertEquals("Toughness different", 9, master.getToughness().getValue());
-        Assert.assertTrue(master.getAbilities().contains(LifelinkAbility.getInstance()));
-        Assert.assertTrue(master.getAbilities().containsRule(IndestructibleAbility.getInstance()));
+        Assertions.assertEquals(9, master.getPower().getValue(), "Power different");
+        Assertions.assertEquals(9, master.getToughness().getValue(), "Toughness different");
+        Assertions.assertTrue(master.getAbilities().contains(LifelinkAbility.getInstance()));
+        Assertions.assertTrue(master.getAbilities().containsRule(IndestructibleAbility.getInstance()));
     }
 
     /**
@@ -126,12 +126,12 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
         execute();
 
         Permanent master = getPermanent("Transcendent Master", playerA.getId());
-        Assert.assertEquals(15, master.getCounters(currentGame).getCount(CounterType.LEVEL));
+        Assertions.assertEquals(15, master.getCounters(currentGame).getCount(CounterType.LEVEL));
 
-        Assert.assertEquals("Power different", 9, master.getPower().getValue());
-        Assert.assertEquals("Toughness different", 9, master.getToughness().getValue());
-        Assert.assertTrue(master.getAbilities().contains(LifelinkAbility.getInstance()));
-        Assert.assertTrue(master.getAbilities().containsRule(IndestructibleAbility.getInstance()));
+        Assertions.assertEquals(9, master.getPower().getValue(), "Power different");
+        Assertions.assertEquals(9, master.getToughness().getValue(), "Toughness different");
+        Assertions.assertTrue(master.getAbilities().contains(LifelinkAbility.getInstance()));
+        Assertions.assertTrue(master.getAbilities().containsRule(IndestructibleAbility.getInstance()));
     }
 
 }

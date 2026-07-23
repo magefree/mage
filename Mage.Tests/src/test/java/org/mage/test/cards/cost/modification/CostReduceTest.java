@@ -4,8 +4,8 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.util.CardUtil;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -22,7 +22,7 @@ public class CostReduceTest extends CardTestPlayerBase {
         ManaCosts<ManaCost> reduced = CardUtil.reduceCost(source, reduceAmount);
 
         if (!reduced.getText().equals(need.getText())) {
-            Assert.fail(sourceCost + " after reduction by " + reduceAmount + " must be " + need.getText() + ", but get " + reduced.getText());
+            Assertions.fail(sourceCost + " after reduction by " + reduceAmount + " must be " + need.getText() + ", but get " + reduced.getText());
         }
     }
 
@@ -31,10 +31,10 @@ public class CostReduceTest extends CardTestPlayerBase {
         // extra test to ensure about mono hybrid test code
         ManaCosts<ManaCost> testCost = new ManaCostsImpl<>();
         testCost.load("{1/R}");
-        Assert.assertEquals("normal mono hybrid always 2 generics", "{2/R}", testCost.getText());
+        Assertions.assertEquals("{2/R}", testCost.getText(), "normal mono hybrid always 2 generics");
         testCost = new ManaCostsImpl<>();
         testCost.load("{1/R}", true);
-        Assert.assertEquals("test mono hybrid have variant generic", "{1/R}", testCost.getText());
+        Assertions.assertEquals("{1/R}", testCost.getText(), "test mono hybrid have variant generic");
         testReduce("{5/R}", 0, "{5/R}"); // ensure that mono hybrid in test mode
 
         // mana order must be same (e.g. cost {R}{2}{G} must be reduced to {R}{1}{G})

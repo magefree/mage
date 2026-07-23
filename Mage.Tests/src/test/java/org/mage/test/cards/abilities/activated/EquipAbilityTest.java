@@ -5,8 +5,8 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -29,8 +29,8 @@ public class EquipAbilityTest extends CardTestPlayerBase {
         execute();
 
         Permanent merfolk = getPermanent("Merfolk Spy", playerA);
-        Assert.assertNotNull(merfolk);
-        Assert.assertEquals(1, merfolk.getAttachments().size());
+        Assertions.assertNotNull(merfolk);
+        Assertions.assertEquals(1, merfolk.getAttachments().size());
     }
 
     /**
@@ -47,8 +47,8 @@ public class EquipAbilityTest extends CardTestPlayerBase {
         execute();
 
         Permanent sky = getPermanent("Simic Sky Swallower", playerA);
-        Assert.assertNotNull(sky);
-        Assert.assertEquals(0, sky.getAttachments().size());
+        Assertions.assertNotNull(sky);
+        Assertions.assertEquals(0, sky.getAttachments().size());
     }
 
     /**
@@ -66,8 +66,8 @@ public class EquipAbilityTest extends CardTestPlayerBase {
         execute();
 
         Permanent elves = getPermanent("Llanowar Elves", playerB);
-        Assert.assertNotNull(elves);
-        Assert.assertEquals(0, elves.getAttachments().size());
+        Assertions.assertNotNull(elves);
+        Assertions.assertEquals(0, elves.getAttachments().size());
     }
 
     @Test

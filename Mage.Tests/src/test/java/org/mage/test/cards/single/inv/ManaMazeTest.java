@@ -3,8 +3,8 @@ package org.mage.test.cards.single.inv;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.util.CardUtil;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import java.util.ArrayList;
@@ -16,23 +16,26 @@ import java.util.List;
  */
 public class ManaMazeTest extends CardTestPlayerBase {
 
-    @Test(expected = StackOverflowError.class)
+    @Test
     public void test_DeepCopy_WithSelfReference() {
         // stack overflow bug: https://github.com/magefree/mage/issues/11572
         // proof of self ref reason for stack overflow
 
         // list
-        List<String> sourceList = new ArrayList<>(Arrays.asList("val1", "val2", "val3"));
-        List<String> copyList = CardUtil.deepCopyObject(sourceList);
-        Assert.assertNotSame(sourceList, copyList);
-        Assert.assertEquals(sourceList.size(), copyList.size());
-        Assert.assertEquals(sourceList.toString(), copyList.toString());
 
-        // list with self ref
-        List<List<Object>> sourceObjectList = new ArrayList<>();
-        sourceObjectList.add(new ArrayList<>(Arrays.asList("val1", "val2", "val3")));
-        sourceObjectList.add(new ArrayList<>(Arrays.asList(sourceObjectList)));
-        CardUtil.deepCopyObject(sourceObjectList);
+        Assertions.assertThrows(StackOverflowError.class, () -> {
+            List<String> sourceList = new ArrayList<>(Arrays.asList("val1", "val2", "val3"));
+            List<String> copyList = CardUtil.deepCopyObject(sourceList);
+            Assertions.assertNotSame(sourceList, copyList);
+            Assertions.assertEquals(sourceList.size(), copyList.size());
+            Assertions.assertEquals(sourceList.toString(), copyList.toString());
+
+            // list with self ref
+            List<List<Object>> sourceObjectList = new ArrayList<>();
+            sourceObjectList.add(new ArrayList<>(Arrays.asList("val1", "val2", "val3")));
+            sourceObjectList.add(new ArrayList<>(Arrays.asList(sourceObjectList)));
+            CardUtil.deepCopyObject(sourceObjectList);
+        });
     }
 
     @Test

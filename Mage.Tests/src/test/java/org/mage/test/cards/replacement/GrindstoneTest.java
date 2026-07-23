@@ -3,8 +3,8 @@ package org.mage.test.cards.replacement;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -39,7 +39,7 @@ public class GrindstoneTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        Assert.assertEquals("Progenitus has to be in the libarary", 1, playerB.getLibrary().size());
+        Assertions.assertEquals(1, playerB.getLibrary().size(), "Progenitus has to be in the libarary");
         assertPermanentCount(playerA, "Painter's Servant", 1);
     }
 
@@ -70,7 +70,7 @@ public class GrindstoneTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        Assert.assertTrue("Has to be a draw because of endless iteration", currentGame.isADraw());
+        Assertions.assertTrue(currentGame.isADraw(), "Has to be a draw because of endless iteration");
         assertPermanentCount(playerA, "Painter's Servant", 1);
     }
 

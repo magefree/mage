@@ -14,8 +14,8 @@ import mage.view.CardView;
 import mage.view.GameView;
 import mage.view.PermanentView;
 import mage.view.PlayerView;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -86,7 +86,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         // no drew on first turn, so use 5 turns to check same libs size at the end
         runCode("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
-            Assert.assertEquals("libraries must be same on start", playerA.getLibrary().size(), playerB.getLibrary().size());
+            Assertions.assertEquals(playerA.getLibrary().size(), playerB.getLibrary().size(), "libraries must be same on start");
         });
 
         // turn 1
@@ -116,7 +116,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2);
         assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
-        Assert.assertEquals("manifested cards must be taken from opponent's library", 2, playerA.getLibrary().size() - playerB.getLibrary().size());
+        Assertions.assertEquals(2, playerA.getLibrary().size() - playerB.getLibrary().size(), "manifested cards must be taken from opponent's library");
     }
 
     private void runManifestThenBlink(String cardToManifest, String cardAfterBlink) {
@@ -146,8 +146,8 @@ public class ManifestTest extends CardTestPlayerBase {
 
         runCode("after blink", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             if (cardAfterBlink == null) {
-                Assert.assertEquals("after blink card must keep in exile",
-                        1, currentGame.getExile().getCardsInRange(currentGame, playerA.getId()).size());
+                Assertions.assertEquals(1,
+                        currentGame.getExile().getCardsInRange(currentGame, playerA.getId()).size(), "after blink card must keep in exile");
             } else {
                 String realPermanentName = currentGame.getBattlefield().getAllPermanents()
                         .stream()
@@ -155,8 +155,8 @@ public class ManifestTest extends CardTestPlayerBase {
                         .filter(name -> name.equals(cardAfterBlink))
                         .findFirst()
                         .orElse(null);
-                Assert.assertEquals("after blink card must go to battlefield",
-                        cardAfterBlink, realPermanentName);
+                Assertions.assertEquals(cardAfterBlink,
+                        realPermanentName, "after blink card must go to battlefield");
             }
         });
 
@@ -429,7 +429,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         for (Card card : currentGame.getExile().getAllCards(currentGame)) {
             if (card.getName().equals("Gore Swine")) {
-                Assert.assertTrue("Gore Swine may not be face down in exile", !card.isFaceDown(currentGame));
+                Assertions.assertTrue(!card.isFaceDown(currentGame), "Gore Swine may not be face down in exile");
             }
         }
 
@@ -508,7 +508,7 @@ public class ManifestTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Aerie Bowmasters", 1);
         assertPowerToughness(playerB, "Aerie Bowmasters", 4, 5); // 3/4  and the +1/+1 counter from Megamorph
         Permanent aerie = getPermanent("Aerie Bowmasters", playerB);
-        Assert.assertTrue("Aerie Bowmasters has to be green", aerie != null && aerie.getColor(currentGame).isGreen());
+        Assertions.assertTrue(aerie != null && aerie.getColor(currentGame).isGreen(), "Aerie Bowmasters has to be green");
     }
 
     @Test
@@ -546,7 +546,7 @@ public class ManifestTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Aerie Bowmasters", 1);
         assertPowerToughness(playerB, "Aerie Bowmasters", 3, 4); // 3/4 without counter (megamorph not used)
         Permanent aerie = getPermanent("Aerie Bowmasters", playerB);
-        Assert.assertTrue("Aerie Bowmasters has to be green", aerie != null && aerie.getColor(currentGame).isGreen());
+        Assertions.assertTrue(aerie != null && aerie.getColor(currentGame).isGreen(), "Aerie Bowmasters has to be green");
     }
 
     /**
@@ -751,35 +751,35 @@ public class ManifestTest extends CardTestPlayerBase {
                 .stream()
                 .filter(permanent -> permanent.isFaceDown(game))
                 .filter(permanent -> {
-                    Assert.assertEquals("face down permanent must have not name", "", permanent.getName());
+                    Assertions.assertEquals("", permanent.getName(), "face down permanent must have not name");
                     // TODO: buggy, manifested card must have some rules
-                    //Assert.assertTrue("face down permanent must have abilities", permanent.getAbilities().size() > 0);
+                    //Assertions.assertTrue("face down permanent must have abilities", permanent.getAbilities().size() > 0);
                     return true;
                 })
                 .findFirst()
                 .orElse(null);
-        Assert.assertNotNull(perm);
-        Assert.assertEquals("server side face down permanent must have empty name", EmptyNames.FACE_DOWN_CREATURE.getObjectName(), perm.getName());
+        Assertions.assertNotNull(perm);
+        Assertions.assertEquals(EmptyNames.FACE_DOWN_CREATURE.getObjectName(), perm.getName(), "server side face down permanent must have empty name");
         GameView gameView = new GameView(game.getState(), game, viewFromPlayer.getId(), null);
         PlayerView playerView = gameView.getPlayers()
                 .stream()
                 .filter(view -> view.getPlayerId().equals(searchInPlayer.getId()))
                 .findFirst()
                 .orElse(null);
-        Assert.assertNotNull(playerView);
+        Assertions.assertNotNull(playerView);
         PermanentView permanentView = playerView.getBattlefield().values()
                 .stream()
                 .filter(CardView::isFaceDown)
                 .filter(p -> {
                     CardView debugView = new CardView((PermanentCard) currentGame.getPermanent(p.getId()), currentGame, false, false);
-                    Assert.assertNotEquals("face down view must have name", "", p.getName());
+                    Assertions.assertNotEquals("face down view must have name", "", p.getName());
                     // TODO: buggy, manifested card must have some rules
-                    //Assert.assertTrue("face down view must have abilities", p.getRules().size() > 0);
+                    //Assertions.assertTrue("face down view must have abilities", p.getRules().size() > 0);
                     return true;
                 })
                 .findFirst()
                 .orElse(null);
-        Assert.assertNotNull(permanentView);
+        Assertions.assertNotNull(permanentView);
         return permanentView;
     }
 
@@ -788,17 +788,17 @@ public class ManifestTest extends CardTestPlayerBase {
         String needName = CardUtil.getCardNameForGUI(needShowRealInfo ? needRealName : "", TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST);
 
         // check view
-        Assert.assertTrue(info + " - wrong face down status", faceDownPermanentView.isFaceDown());
-        Assert.assertEquals(info + " - wrong name", needName, faceDownPermanentView.getName()); // show real name
-        Assert.assertEquals(info + " - wrong power", "2", faceDownPermanentView.getPower());
-        Assert.assertEquals(info + " - wrong toughness", "2", faceDownPermanentView.getToughness());
+        Assertions.assertTrue(faceDownPermanentView.isFaceDown(), info + " - wrong face down status");
+        Assertions.assertEquals(needName, faceDownPermanentView.getName(), info + " - wrong name"); // show real name
+        Assertions.assertEquals("2", faceDownPermanentView.getPower(), info + " - wrong power");
+        Assertions.assertEquals("2", faceDownPermanentView.getToughness(), info + " - wrong toughness");
 
         // check original info
         if (needShowRealInfo) {
-            Assert.assertNotNull(info + " - miss original card data", faceDownPermanentView.getOriginal());
-            Assert.assertEquals(info + " - wrong original card name", needRealName, faceDownPermanentView.getOriginal().getName());
+            Assertions.assertNotNull(faceDownPermanentView.getOriginal(), info + " - miss original card data");
+            Assertions.assertEquals(needRealName, faceDownPermanentView.getOriginal().getName(), info + " - wrong original card name");
         } else {
-            Assert.assertNull(info + " - original data must be hidden", faceDownPermanentView.getOriginal());
+            Assertions.assertNull(faceDownPermanentView.getOriginal(), info + " - original data must be hidden");
         }
     }
 
@@ -829,7 +829,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         // workaround to force end game (can't use other test commands after that)
         playerA.won(currentGame);
-        Assert.assertTrue(currentGame.hasEnded());
+        Assertions.assertTrue(currentGame.hasEnded());
 
         // show all after game end
         PermanentView permanent = findFaceDownPermanent(currentGame, playerA, playerB);

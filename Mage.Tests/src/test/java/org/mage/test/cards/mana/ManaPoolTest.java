@@ -15,7 +15,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.target.TargetSpell;
 import mage.target.common.TargetAnyTarget;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**

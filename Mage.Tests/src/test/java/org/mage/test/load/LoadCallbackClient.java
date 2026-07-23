@@ -7,7 +7,7 @@ import mage.remote.Session;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 
 import java.util.List;
 import java.util.UUID;
@@ -77,7 +77,7 @@ public class LoadCallbackClient implements CallbackClient {
 
             case GAME_UPDATE:
                 GameView newGameView = (GameView) callback.getData();
-                Assert.assertNotNull("game update event must return game view object", newGameView);
+                Assertions.assertNotNull(newGameView, "game update event must return game view object");
                 this.gameView = newGameView;
                 break;
 

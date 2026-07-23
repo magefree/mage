@@ -3,8 +3,8 @@ package org.mage.test.cards.planeswalker;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -107,7 +107,7 @@ public class JaceTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Jace, Telepath Unbound", 0);
         assertPermanentCount(playerA, "Jace, Vryn's Prodigy", 1);
 
-        Assert.assertFalse("Jace, Vryn's Prodigy may not be flipped", getPermanent("Jace, Vryn's Prodigy").isFlipped());
+        Assertions.assertFalse(getPermanent("Jace, Vryn's Prodigy").isFlipped(), "Jace, Vryn's Prodigy may not be flipped");
     }
 
     @Test

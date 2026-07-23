@@ -3,8 +3,8 @@ package org.mage.test.cards.single.slx;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TadeasJuniperAscendantTest extends CardTestPlayerBase {
 
-    @Before
+    @BeforeEach
     public void setUp() {
         addCard(Zone.BATTLEFIELD, playerA, "Tadeas, Juniper Ascendant"); // 1/3
         addCard(Zone.BATTLEFIELD, playerA, "Sweet-Gum Recluse");         // 0/3 //Reach

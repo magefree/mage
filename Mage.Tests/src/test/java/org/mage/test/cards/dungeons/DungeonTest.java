@@ -8,8 +8,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.command.Dungeon;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -51,9 +51,9 @@ public class DungeonTest extends CardTestPlayerBase {
     }
 
     private Dungeon getCurrentDungeon(TestPlayer player) {
-        Assert.assertTrue(
-                "Players should not control more than one dungeon",
-                makeStream(player).count() < 2
+        Assertions.assertTrue(
+                makeStream(player).count() < 2,
+                "Players should not control more than one dungeon"
         );
         return makeStream(player).findFirst().orElse(null);
     }
@@ -65,14 +65,14 @@ public class DungeonTest extends CardTestPlayerBase {
     private void assertDungeonRoom(TestPlayer player, String dungeonName, String roomName) {
         Dungeon dungeon = getCurrentDungeon(player);
         if (dungeonName == null) {
-            Assert.assertNull("There should be no dungeon", dungeon);
+            Assertions.assertNull(dungeon, "There should be no dungeon");
             return;
         }
-        Assert.assertNotNull("Dungeon should not be null", dungeon);
-        Assert.assertEquals("Dungeon should be " + dungeonName, dungeonName, dungeon.getName());
-        Assert.assertEquals(
-                "Current room is " + roomName,
-                roomName, dungeon.getCurrentRoom().getName()
+        Assertions.assertNotNull(dungeon, "Dungeon should not be null");
+        Assertions.assertEquals(dungeonName, dungeon.getName(), "Dungeon should be " + dungeonName);
+        Assertions.assertEquals(
+                roomName,
+                dungeon.getCurrentRoom().getName(), "Current room is " + roomName
         );
     }
 

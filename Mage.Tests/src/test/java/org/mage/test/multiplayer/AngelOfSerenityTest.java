@@ -8,8 +8,8 @@ import mage.game.FreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.mulligan.MulliganType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
 import java.io.FileNotFoundException;
@@ -60,7 +60,7 @@ public class AngelOfSerenityTest extends CardTestMultiPlayerBase {
         setStopAt(6, PhaseStep.UPKEEP);
         execute();
 
-        Assert.assertFalse("Player of Angel of Serenity did not leave the game", playerC.isInGame());
+        Assertions.assertFalse(playerC.isInGame(), "Player of Angel of Serenity did not leave the game");
         assertPermanentCount(playerA, 8);
         assertPermanentCount(playerB, 3);
         assertHandCount(playerB, 4);

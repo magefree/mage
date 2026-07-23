@@ -5,8 +5,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -15,12 +15,12 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class NamePredicateTest extends CardTestPlayerBase {
 
     private void assertNamePredicate(String checkName, int needAmount, String needName, boolean ignoreMtgRules) {
-        //Assert.assertNotEquals("", needName); empty strings also testing here, so no need to assert it
+        //Assertions.assertNotEquals("", needName); empty strings also testing here, so no need to assert it
         needName = EmptyNames.replaceTestCommandByObjectName(needName);
 
         FilterPermanent filter = new FilterPermanent();
         filter.add(new NamePredicate(needName, ignoreMtgRules));
-        Assert.assertEquals(checkName, needAmount, currentGame.getBattlefield().countAll(filter, playerA.getId(), currentGame));
+        Assertions.assertEquals(needAmount, currentGame.getBattlefield().countAll(filter, playerA.getId(), currentGame), checkName);
     }
 
     @Test

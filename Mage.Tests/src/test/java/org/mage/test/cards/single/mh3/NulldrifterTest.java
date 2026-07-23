@@ -2,8 +2,8 @@ package org.mage.test.cards.single.mh3;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 /**
@@ -54,7 +54,7 @@ public class NulldrifterTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    @Ignore // TODO: implement alternative cost choose by AI instead random
+    @Disabled // TODO: implement alternative cost choose by AI instead random
     public void test_AllMana_UseEvokeCost_AI() {
         // When you cast this spell, draw two cards.
         // Evoke {2}{U} (You may cast this spell for its evoke cost. If you do, it’s sacrificed when it enters.)
@@ -96,7 +96,7 @@ public class NulldrifterTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    @Ignore // TODO: implement alternative cost choose by AI instead random
+    @Disabled // TODO: implement alternative cost choose by AI instead random
     public void test_OnlyEvoke_UseEvokeCost_AI() {
         // When you cast this spell, draw two cards.
         // Evoke {2}{U} (You may cast this spell for its evoke cost. If you do, it’s sacrificed when it enters.)
@@ -138,7 +138,7 @@ public class NulldrifterTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    @Ignore // TODO: implement alternative cost choose by AI instead random
+    @Disabled // TODO: implement alternative cost choose by AI instead random
     public void test_OnlyNormalCost_UseNormalCost_AI() {
         // When you cast this spell, draw two cards.
         // Evoke {2}{U} (You may cast this spell for its evoke cost. If you do, it’s sacrificed when it enters.)

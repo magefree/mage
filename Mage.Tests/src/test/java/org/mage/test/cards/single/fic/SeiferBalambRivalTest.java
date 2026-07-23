@@ -4,8 +4,8 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class SeiferBalambRivalTest extends CardTestPlayerBase {
@@ -22,7 +22,7 @@ public class SeiferBalambRivalTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        Assert.assertEquals(Stream.of(playerA.getId()).collect(Collectors.toSet()), getPermanent("Balduvian Bears").getGoadingPlayers());
+        Assertions.assertEquals(Stream.of(playerA.getId()).collect(Collectors.toSet()), getPermanent("Balduvian Bears").getGoadingPlayers());
     }
 
 }
