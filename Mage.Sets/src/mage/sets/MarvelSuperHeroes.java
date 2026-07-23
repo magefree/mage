@@ -196,6 +196,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Justice, Vance Astrovik", 61, Rarity.UNCOMMON, mage.cards.j.JusticeVanceAstrovik.class));
         cards.add(new SetCardInfo("K'un-Lun Warrior", 140, Rarity.COMMON, mage.cards.k.KunLunWarrior.class));
         cards.add(new SetCardInfo("Ka-Zar of the Savage Land", 174, Rarity.UNCOMMON, mage.cards.k.KaZarOfTheSavageLand.class));
+        cards.add(new SetCardInfo("Kang the Conqueror", 62, Rarity.MYTHIC, mage.cards.k.KangTheConqueror.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kang the Conqueror", 403, Rarity.MYTHIC, mage.cards.k.KangTheConqueror.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kang, Temporal Tyrant", 217, Rarity.UNCOMMON, mage.cards.k.KangTemporalTyrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kang, Temporal Tyrant", 450, Rarity.UNCOMMON, mage.cards.k.KangTemporalTyrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Killmonger, Scourge of Wakanda", 218, Rarity.UNCOMMON, mage.cards.k.KillmongerScourgeOfWakanda.class));
