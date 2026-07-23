@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class LokisScepter extends CardImpl {
 
     public LokisScepter(UUID ownerID, CardSetInfo setInfo) {
-        super(ownerID, setInfo, new CardType[]{CardType.ARTIFACT}, "{2R}");
+        super(ownerID, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{R}");
         this.supertype.add(SuperType.LEGENDARY);
         this.addAbility(new AnyColorManaAbility());
 
