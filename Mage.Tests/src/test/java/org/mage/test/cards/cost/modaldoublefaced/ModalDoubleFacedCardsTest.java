@@ -1515,19 +1515,30 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         // With Opalescence + Arcane Adaptation, The Prismatic Bridge becomes a Human creature, so Moonmist will transform it
 
         addCard(Zone.HAND, playerA, "Esika, God of the Tree");
-        addCard(Zone.HAND, playerA, "Moonmist");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        //
         addCard(Zone.HAND, playerA, "Arcane Adaptation");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        //
+        addCard(Zone.HAND, playerA, "Moonmist");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        //
         addCard(Zone.BATTLEFIELD, playerA, "Opalescence");
         addCard(Zone.BATTLEFIELD, playerA, "Reckless Waif");
 
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
-
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}", 1);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 1);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}", 1);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 1);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 1);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 3);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Arcane Adaptation");
         setChoice(playerA, "Human");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -1537,6 +1548,7 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         checkSubType("bridge must be Human from Arcane Adaptation", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge", SubType.HUMAN, true);
         checkPT("bridge must be 5/5 from Opalescence", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge", 5, 5);
 
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 2);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Moonmist");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
