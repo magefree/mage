@@ -43,7 +43,7 @@ public class ExhaustAbility extends ActivatedAbilityImpl {
     @Override
     public boolean hasMoreActivationsThisTurn(Game game) {
         ActivationInfo info = getActivationInfo(game);
-        if (info != null && info.totalActivations >= maxActivationsPerGame) {
+        if (info != null && info.totalActivations >= getMaxActivationsPerGame(game)) {
             boolean canActivate = !game.getContinuousEffects()
                     .asThough(sourceId, AsThoughEffectType.ALLOW_EXHAUST_PER_TURN, this, controllerId, game)
                     .isEmpty();
