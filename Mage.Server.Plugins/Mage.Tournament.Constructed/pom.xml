@@ -23,7 +23,6 @@
 
     <build>
         <sourceDirectory>src</sourceDirectory>
-        <finalName>mage-tournament-constructed</finalName>
     </build>
 
     <properties>

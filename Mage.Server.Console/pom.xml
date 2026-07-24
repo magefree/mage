@@ -57,8 +57,6 @@
                 <artifactId>markdown-page-generator-plugin</artifactId>
             </plugin>
         </plugins>
-
-        <finalName>mage-serverconsole</finalName>
     </build>
 
     <properties>

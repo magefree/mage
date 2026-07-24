@@ -84,8 +84,6 @@
                 </executions>
             </plugin>
         </plugins>
-
-        <finalName>mage</finalName>
     </build>
 
     <!-- The properties below are added by following http://vlkan.com/blog/post/2015/11/27/maven-protobuf/ -->

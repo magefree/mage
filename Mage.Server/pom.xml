@@ -239,7 +239,7 @@
             <!-- database support - sqlite db engine (additional db for game records and stats) -->
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
-            <version>3.32.3.2</version>
+            <version>3.53.2.0</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -322,8 +322,6 @@
                 <artifactId>markdown-page-generator-plugin</artifactId>
             </plugin>
         </plugins>
-
-        <finalName>mage-server</finalName>
     </build>
 
     <properties>

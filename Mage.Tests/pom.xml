@@ -122,8 +122,6 @@
                 </configuration>
             </plugin>
         </plugins>
-
-        <finalName>mage-tests</finalName>
     </build>
 
     <properties>

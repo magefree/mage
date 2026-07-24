@@ -25,7 +25,6 @@
 
     <build>
         <sourceDirectory>src</sourceDirectory>
-        <finalName>mage-sets</finalName>
     </build>
 
     <properties>

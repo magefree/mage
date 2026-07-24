@@ -29,7 +29,6 @@
     
     <build>
         <sourceDirectory>src</sourceDirectory>
-        <finalName>mage-game-momir</finalName>
     </build>
 
     <properties>

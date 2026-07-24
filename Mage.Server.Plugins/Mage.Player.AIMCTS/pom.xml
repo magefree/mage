@@ -34,7 +34,6 @@
 
     <build>
         <sourceDirectory>src</sourceDirectory>
-        <finalName>mage-player-ai-mcts</finalName>
     </build>
 
     <properties>

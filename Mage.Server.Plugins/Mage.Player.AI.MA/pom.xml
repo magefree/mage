@@ -29,7 +29,6 @@
 
     <build>
         <sourceDirectory>src</sourceDirectory>
-        <finalName>mage-player-ai-ma</finalName>
     </build>
 
     <properties>

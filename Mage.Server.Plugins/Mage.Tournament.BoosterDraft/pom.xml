@@ -24,7 +24,6 @@
 
     <build>
         <sourceDirectory>src</sourceDirectory>
-        <finalName>mage-tournament-booster-draft</finalName>
     </build>
 
     <properties>

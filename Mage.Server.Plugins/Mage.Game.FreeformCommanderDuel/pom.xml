@@ -24,7 +24,6 @@
 
     <build>
         <sourceDirectory>src</sourceDirectory>
-        <finalName>mage-game-freeformcommanderduel</finalName>
     </build>
 
     <properties>

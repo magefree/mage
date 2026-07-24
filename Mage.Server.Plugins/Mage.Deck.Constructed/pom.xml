@@ -29,7 +29,6 @@
 
     <build>
         <sourceDirectory>src</sourceDirectory>
-        <finalName>mage-deck-constructed</finalName>
     </build>
 
     <properties>

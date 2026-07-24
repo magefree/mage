@@ -23,7 +23,6 @@
 
     <build>
         <sourceDirectory>src</sourceDirectory>
-        <finalName>mage-game-brawlfreeforall</finalName>
     </build>
 
     <properties>

@@ -74,7 +74,6 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-        <finalName>mage-verify</finalName>
     </build>
 
     <properties>
