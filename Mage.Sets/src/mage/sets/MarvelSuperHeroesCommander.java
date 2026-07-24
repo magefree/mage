@@ -366,6 +366,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Martial Coup", 314, Rarity.RARE, mage.cards.m.MartialCoup.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Marvelous Melee", 549, Rarity.COMMON, mage.cards.m.MarvelousMelee.class));
         cards.add(new SetCardInfo("Masked Meower", 807, Rarity.COMMON, mage.cards.m.MaskedMeower.class));
+        cards.add(new SetCardInfo("Matt Murdock, Justice Seeker", 602, Rarity.RARE, mage.cards.m.MattMurdockJusticeSeeker.class));
         cards.add(new SetCardInfo("Medusa, Inhuman Queen", 383, Rarity.RARE, mage.cards.m.MedusaInhumanQueen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Medusa, Inhuman Queen", 68, Rarity.RARE, mage.cards.m.MedusaInhumanQueen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Metallic Mimic", 203, Rarity.RARE, mage.cards.m.MetallicMimic.class, NON_FULL_USE_VARIOUS));
