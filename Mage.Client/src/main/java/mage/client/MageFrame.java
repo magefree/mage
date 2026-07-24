@@ -26,7 +26,6 @@ import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
 import mage.client.preference.MagePreferences;
 import mage.client.remote.CallbackClientImpl;
-import mage.client.remote.XmageURLConnection;
 import mage.client.table.TablesPane;
 import mage.client.table.TablesPanel;
 import mage.client.tournament.TournamentPane;
@@ -56,7 +55,6 @@ import net.java.truevfs.access.TArchiveDetector;
 import net.java.truevfs.access.TConfig;
 import net.java.truevfs.kernel.spec.FsAccessOption;
 import org.apache.log4j.Logger;
-import org.junit.Assert;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.SvgUtils;
 import org.mage.plugins.card.images.DownloadPicturesService;
@@ -1526,7 +1524,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         LOGGER.info("Starting MAGE CLIENT version: " + VERSION);
         LOGGER.info("Java version: " + System.getProperty("java.version"));
-        LOGGER.info("Logging level: " + LOGGER.getEffectiveLevel());
+        DebugUtil.printLogsInfo(LOGGER);
         LOGGER.info("Default charset: " + Charset.defaultCharset());
         if (!Charset.defaultCharset().toString().equals("UTF-8")) {
             LOGGER.warn("WARNING, bad charset. Some images will not be downloaded. You must:");

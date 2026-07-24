@@ -25,6 +25,7 @@ import mage.server.util.PluginClassLoader;
 import mage.server.util.ServerMessagesUtil;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
+import mage.util.DebugUtil;
 import mage.util.JavaUtil;
 import mage.utils.MageVersion;
 import mage.utils.SystemUtil;
@@ -101,7 +102,7 @@ public final class Main {
 
         logger.info("Starting MAGE SERVER version: " + version);
         logger.info("Java version: " + System.getProperty("java.version"));
-        logger.info("Logging level: " + logger.getEffectiveLevel());
+        DebugUtil.printLogsInfo(logger);
         logger.info("Default charset: " + Charset.defaultCharset());
         String adminPassword = "";
 

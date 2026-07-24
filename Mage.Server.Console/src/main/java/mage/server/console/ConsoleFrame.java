@@ -5,6 +5,7 @@ import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
+import mage.util.DebugUtil;
 import mage.util.JavaUtil;
 import mage.util.ThreadUtils;
 import mage.util.XmageThreadFactory;
@@ -14,6 +15,7 @@ import org.apache.log4j.Logger;
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.nio.charset.Charset;
 import java.util.Locale;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -221,7 +223,8 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
 
         logger.info("Starting MAGE ADMIN version " + version);
         logger.info("Java version: " + System.getProperty("java.version"));
-        logger.info("Logging level: " + logger.getEffectiveLevel());
+        DebugUtil.printLogsInfo(logger);
+        logger.debug("Default charset: " + Charset.defaultCharset());
 
         java.awt.EventQueue.invokeLater(() -> {
             new ConsoleFrame().setVisible(true);

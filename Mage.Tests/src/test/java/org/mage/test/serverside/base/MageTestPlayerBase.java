@@ -39,6 +39,7 @@ import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.Copier;
+import mage.util.DebugUtil;
 import mage.utils.SystemUtil;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -101,7 +102,7 @@ public abstract class MageTestPlayerBase {
     public static void init() {
         Logger.getRootLogger().setLevel(Level.DEBUG);
         logger.debug("Starting MAGE tests");
-        logger.debug("Logging level: " + logger.getLevel());
+        DebugUtil.printLogsInfo(logger);
         logger.debug("Default charset: " + Charset.defaultCharset());
 
         // one time init for all tests
