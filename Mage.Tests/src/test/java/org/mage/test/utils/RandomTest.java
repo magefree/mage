@@ -2,6 +2,7 @@ package org.mage.test.utils;
 
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.CardScanner;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.Outcome;
 import mage.constants.PlanarDieRollResult;
@@ -13,6 +14,7 @@ import mage.player.human.HumanPlayer;
 import mage.players.Player;
 import mage.util.RandomUtil;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -30,6 +32,11 @@ import java.util.stream.Collectors;
  * @author JayDi85
  */
 public class RandomTest {
+
+    @BeforeClass
+    public static void setup() {
+        CardScanner.scan();
+    }
 
     @Test
     public void test_SeedAndSameResults() {
