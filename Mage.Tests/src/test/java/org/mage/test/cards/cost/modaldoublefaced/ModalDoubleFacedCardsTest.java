@@ -1522,12 +1522,19 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
 
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 2);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Arcane Adaptation");
         setChoice(playerA, "Human");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -1537,6 +1544,8 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         checkSubType("bridge must be Human from Arcane Adaptation", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge", SubType.HUMAN, true);
         checkPT("bridge must be 5/5 from Opalescence", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge", 5, 5);
 
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Moonmist");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
