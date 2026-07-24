@@ -3,6 +3,7 @@ package mage.abilities.keyword;
 import mage.abilities.costs.Cost;
 import mage.cards.Card;
 import mage.constants.SpellAbilityCastMode;
+import mage.constants.TimingRule;
 
 /**
  * 702.32. Flashback
@@ -22,6 +23,12 @@ public class FlashbackAbility extends CastFromGraveyardAbility {
 
     public FlashbackAbility(Card card, Cost cost) {
         super(card, cost, SpellAbilityCastMode.FLASHBACK);
+    }
+
+    public FlashbackAbility(Card card, Cost cost, Cost additionalCost) {
+        this(card, cost);
+        this.addCost(additionalCost.copy());
+        this.timing = TimingRule.INSTANT;
     }
 
     protected FlashbackAbility(final FlashbackAbility ability) {

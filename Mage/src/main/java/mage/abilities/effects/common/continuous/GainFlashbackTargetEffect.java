@@ -2,6 +2,7 @@ package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.common.PayMoreToCastAsThoughtItHadFlashAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
@@ -43,6 +44,17 @@ public class GainFlashbackTargetEffect extends ContinuousEffectImpl {
         ability.setSourceId(card.getId());
         ability.setControllerId(card.getOwnerId());
         game.getState().addOtherAbility(card, ability);
+        card.getAbilities(game).stream()
+                .filter(PayMoreToCastAsThoughtItHadFlashAbility.class::isInstance)
+                .map(PayMoreToCastAsThoughtItHadFlashAbility.class::cast)
+                .forEach(payMoreAbility -> {
+                    FlashbackAbility flashbackAsInstant = new FlashbackAbility(
+                            card, card.getManaCost(), payMoreAbility.getCostsToAdd()
+                    );
+                    flashbackAsInstant.setSourceId(card.getId());
+                    flashbackAsInstant.setControllerId(card.getOwnerId());
+                    game.getState().addOtherAbility(card, flashbackAsInstant);
+                });
         return true;
     }
 

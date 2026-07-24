@@ -133,6 +133,30 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertExileCount("Blaze", 1);
     }
 
+    @Test
+    public void testSnapcasterMageWithGhituFireAsThoughItHadFlash() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.HAND, playerA, "Snapcaster Mage");
+        addCard(Zone.GRAVEYARD, playerA, "Ghitu Fire");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain");
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
+
+        castSpell(2, PhaseStep.UPKEEP, playerA, "Snapcaster Mage");
+
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Snapcaster Mage");
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback");
+        setChoice(playerA, "X=1");
+        addTarget(playerA, playerB);
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 19);
+        assertExileCount("Ghitu Fire", 1);
+    }
+
     /**
      * My opponent put Iona on the battlefield using Unburial Rites,
      * but my game log didn't show me the color they chose.

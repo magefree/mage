@@ -48,6 +48,10 @@ public class PayMoreToCastAsThoughtItHadFlashAbility extends SpellAbility {
         return new PayMoreToCastAsThoughtItHadFlashAbility(this);
     }
 
+    public Cost getCostsToAdd() {
+        return costsToAdd;
+    }
+
     @Override
     public String getRule(boolean all) {
         return getRule();
