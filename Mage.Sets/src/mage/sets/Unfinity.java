@@ -45,6 +45,10 @@ public final class Unfinity extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 236, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_UST_VARIOUS));
         cards.add(new SetCardInfo("Island", 241, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_UST_VARIOUS));
         cards.add(new SetCardInfo("Lila, Hospitality Hostess", 170, Rarity.MYTHIC, mage.cards.l.LilaHospitalityHostess.class));
+        cards.add(new SetCardInfo("Magar of the Magic Strings", 171, Rarity.MYTHIC, mage.cards.m.MagarOfTheMagicStrings.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Magar of the Magic Strings", 263, Rarity.MYTHIC, mage.cards.m.MagarOfTheMagicStrings.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Magar of the Magic Strings", 457, Rarity.MYTHIC, mage.cards.m.MagarOfTheMagicStrings.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Magar of the Magic Strings", 514, Rarity.MYTHIC, mage.cards.m.MagarOfTheMagicStrings.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Monoxa, Midway Manager", 173, Rarity.UNCOMMON, mage.cards.m.MonoxaMidwayManager.class));
         cards.add(new SetCardInfo("Mountain", 238, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_UST_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 243, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_UST_VARIOUS));
