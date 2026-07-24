@@ -163,6 +163,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Hawkeye, Young Avenger", 131, Rarity.UNCOMMON, mage.cards.h.HawkeyeYoungAvenger.class));
         cards.add(new SetCardInfo("Hawkeye's Bow", 132, Rarity.COMMON, mage.cards.h.HawkeyesBow.class));
         cards.add(new SetCardInfo("Hell's Kitchen", 268, Rarity.COMMON, mage.cards.h.HellsKitchen.class));
+        cards.add(new SetCardInfo("Hellcat, Undying Vigilante", 170, Rarity.UNCOMMON, mage.cards.h.HellcatUndyingVigilante.class));
         cards.add(new SetCardInfo("Hercules, Prince of Power", 171, Rarity.UNCOMMON, mage.cards.h.HerculesPrinceOfPower.class));
         cards.add(new SetCardInfo("Hero in Training", 16, Rarity.COMMON, mage.cards.h.HeroInTraining.class));
         cards.add(new SetCardInfo("Hex Magic", 133, Rarity.UNCOMMON, mage.cards.h.HexMagic.class));
