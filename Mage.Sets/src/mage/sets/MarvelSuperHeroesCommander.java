@@ -364,6 +364,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Mandroid Squadron", 841, Rarity.COMMON, mage.cards.m.MandroidSquadron.class));
         cards.add(new SetCardInfo("Martial Coup", 138, Rarity.RARE, mage.cards.m.MartialCoup.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Martial Coup", 314, Rarity.RARE, mage.cards.m.MartialCoup.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Marvel Boy, Noh-Varr", 743, Rarity.UNCOMMON, mage.cards.m.MarvelBoyNohVarr.class));
         cards.add(new SetCardInfo("Marvelous Melee", 549, Rarity.COMMON, mage.cards.m.MarvelousMelee.class));
         cards.add(new SetCardInfo("Masked Meower", 807, Rarity.COMMON, mage.cards.m.MaskedMeower.class));
         cards.add(new SetCardInfo("Medusa, Inhuman Queen", 383, Rarity.RARE, mage.cards.m.MedusaInhumanQueen.class, NON_FULL_USE_VARIOUS));
