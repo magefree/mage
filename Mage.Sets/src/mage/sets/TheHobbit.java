@@ -64,6 +64,8 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("The Lonely Mountain", 207, Rarity.RARE, mage.cards.t.TheLonelyMountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Lonely Mountain", 248, Rarity.RARE, mage.cards.t.TheLonelyMountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Lonely Mountain", 284, Rarity.RARE, mage.cards.t.TheLonelyMountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thorin Oakenshield", 165, Rarity.UNCOMMON, mage.cards.t.ThorinOakenshield.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thorin Oakenshield", 202, Rarity.UNCOMMON, mage.cards.t.ThorinOakenshield.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thorin, Mountain-king", 114, Rarity.MYTHIC, mage.cards.t.ThorinMountainKing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thorin, Mountain-king", 243, Rarity.MYTHIC, mage.cards.t.ThorinMountainKing.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Thorin, Mountain-king", 279, Rarity.MYTHIC, mage.cards.t.ThorinMountainKing.class, FULL_ART_USE_VARIOUS));
