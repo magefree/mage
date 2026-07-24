@@ -237,13 +237,19 @@ public class ContinuousEffects implements Serializable {
      * @param layerEffects
      */
     private synchronized void updateTimestamps(String timestampGroupName, List<ContinuousEffect> layerEffects) {
-        if (!lastEffectsListOnLayer.containsKey(timestampGroupName)) {
-            lastEffectsListOnLayer.put(timestampGroupName, new ContinuousEffectsList<>());
-        }
         ContinuousEffectsList<ContinuousEffect> prevs = lastEffectsListOnLayer.get(timestampGroupName);
+        if (prevs == null) {
+            prevs = new ContinuousEffectsList<>();
+            lastEffectsListOnLayer.put(timestampGroupName, prevs);
+        }
+        // build a HashSet of previous effect IDs for O(1) lookups instead of O(n) linear scans
+        Set<UUID> prevIds = new HashSet<>(prevs.size());
+        for (ContinuousEffect prev : prevs) {
+            prevIds.add(prev.getId());
+        }
         for (ContinuousEffect continuousEffect : layerEffects) {
             // check if it's new, then set order
-            if (!prevs.contains(continuousEffect)) {
+            if (!prevIds.contains(continuousEffect.getId())) {
                 setOrder(continuousEffect);
             }
         }
@@ -256,9 +262,13 @@ public class ContinuousEffects implements Serializable {
     }
 
     private List<ContinuousEffect> filterLayeredEffects(List<ContinuousEffect> effects, Layer layer) {
-        return effects.stream()
-                .filter(effect -> effect.hasLayer(layer))
-                .collect(Collectors.toList());
+        List<ContinuousEffect> filtered = new ArrayList<>();
+        for (ContinuousEffect effect : effects) {
+            if (effect.hasLayer(layer)) {
+                filtered.add(effect);
+            }
+        }
+        return filtered;
     }
 
     public Map<RequirementEffect, Set<Ability>> getApplicableRequirementEffects(Permanent permanent, boolean playerRelated, Game game) {
@@ -1112,23 +1122,25 @@ public class ContinuousEffects implements Serializable {
         }
 
         layer = filterLayeredEffects(activeLayerEffects, Layer.PTChangingEffects_7);
+        // pre-compute ability lookups for PT layer since we iterate 5 sublayers over the same effects
+        Map<UUID, Set<Ability>> ptAbilitiesCache = new HashMap<>(layer.size());
         for (ContinuousEffect effect : layer) {
-            Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
-            for (Ability ability : abilities) {
+            ptAbilitiesCache.put(effect.getId(), layeredEffects.getAbility(effect.getId()));
+        }
+        for (ContinuousEffect effect : layer) {
+            for (Ability ability : ptAbilitiesCache.get(effect.getId())) {
                 if (abilityActive(ability, game)) {
                     effect.apply(Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, ability, game);
                 }
             }
         }
         for (ContinuousEffect effect : layer) {
-            Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
-            for (Ability ability : abilities) {
+            for (Ability ability : ptAbilitiesCache.get(effect.getId())) {
                 effect.apply(Layer.PTChangingEffects_7, SubLayer.SetPT_7b, ability, game);
             }
         }
         for (ContinuousEffect effect : layer) {
-            Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
-            for (Ability ability : abilities) {
+            for (Ability ability : ptAbilitiesCache.get(effect.getId())) {
                 effect.apply(Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, ability, game);
             }
         }
@@ -1136,8 +1148,7 @@ public class ContinuousEffects implements Serializable {
         applyStatus.apply(Layer.PTChangingEffects_7, SubLayer.Counters_7d, null, game);
 
         for (ContinuousEffect effect : layer) {
-            Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
-            for (Ability ability : abilities) {
+            for (Ability ability : ptAbilitiesCache.get(effect.getId())) {
                 effect.apply(Layer.PTChangingEffects_7, SubLayer.SwitchPT_e, ability, game);
             }
         }
