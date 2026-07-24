@@ -19,17 +19,6 @@ public final class ClassScanner {
 
     private static final Logger logger = Logger.getLogger(ClassScanner.class);
 
-    private static void checkClassForInclusion(List<Class> cards, Class type, String name, ClassLoader cl) {
-        try {
-            Class clazz = Class.forName(name, true, cl);
-            if (clazz.getEnclosingClass() == null && type.isAssignableFrom(clazz)) {
-                cards.add(clazz);
-            }
-        } catch (ClassNotFoundException ex) {
-            // ignored
-        }
-    }
-
     public static List<Class> findClasses(ClassLoader classLoader, List<String> packages, Class<?> type) {
         List<Class> cards = new ArrayList<>();
         try {
@@ -103,7 +92,8 @@ public final class ClassScanner {
             if (clazz.getEnclosingClass() == null && type.isAssignableFrom(clazz)) {
                 return clazz;
             }
-        } catch (ClassNotFoundException ignore) {
+        } catch (Throwable e) {
+            logger.error("Error reading class: " + name, e);
         }
         return null;
     }
@@ -140,8 +130,8 @@ public final class ClassScanner {
                     })
                     .filter(Objects::nonNull)
                     .collect(Collectors.toList());
-        } catch (IOException ex) {
-            logger.error("Error reading JAR file: " + file.getPath(), ex);
+        } catch (Throwable e) {
+            logger.error("Error reading JAR file: " + file.getPath(), e);
         }
 
         // load set classes only, card classes are loaded indirectly by static import in the set
