@@ -218,6 +218,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fetid Pools", 472, Rarity.RARE, mage.cards.f.FetidPools.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Firebird, Blazing Ranger", 360, Rarity.RARE, mage.cards.f.FirebirdBlazingRanger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Firebird, Blazing Ranger", 50, Rarity.RARE, mage.cards.f.FirebirdBlazingRanger.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fixer, Techno Terror", 656, Rarity.UNCOMMON, mage.cards.f.FixerTechnoTerror.class));
         cards.add(new SetCardInfo("Flash Thompson, Spider-Fan", 772, Rarity.UNCOMMON, mage.cards.f.FlashThompsonSpiderFan.class));
         cards.add(new SetCardInfo("Flatman", 721, Rarity.UNCOMMON, mage.cards.f.Flatman.class));
         cards.add(new SetCardInfo("Fleecemane Lion", 282, Rarity.RARE, mage.cards.f.FleecemaneLion.class, NON_FULL_USE_VARIOUS));
