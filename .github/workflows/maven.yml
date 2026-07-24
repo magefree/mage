@@ -11,10 +11,10 @@ on:
   # allow manual run
   workflow_dispatch: {}
 
-  # allow fast cancel on new commit to the same branch
-  concurrency:
-    group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
-    cancel-in-progress: true
+# allow fast cancel on new commit to the same branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
