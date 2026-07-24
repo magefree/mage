@@ -187,4 +187,26 @@ public class WarpTest extends CardTestPlayerBase {
         assertAbility(playerA, colossus, TrampleAbility.getInstance(), true);
         assertAbility(playerA, colossus, HasteAbility.getInstance(), true);
     }
+
+
+    @Test
+    public void testWarpExileWhilePhasedOut() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3 + 4);
+        addCard(Zone.HAND, playerA, colossus);
+        addCard(Zone.HAND, playerA, "Talon Gates of Madara");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, colossus + " with Warp");
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA,
+                "{4}: Put {this} from your hand onto the battlefield");
+        addTarget(playerA, colossus);
+
+        waitStackResolved(1, PhaseStep.END_TURN, playerA);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertExileCount(playerA, colossus, 0);
+    }
 }
