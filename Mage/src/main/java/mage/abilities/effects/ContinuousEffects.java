@@ -855,8 +855,8 @@ public class ContinuousEffects implements Serializable {
             // Remove all consumed effects (ability dependant)
             for (Iterator<ReplacementEffect> it1 = rEffects.keySet().iterator(); it1.hasNext(); ) {
                 ReplacementEffect entry = it1.next();
-                if (consumed.containsKey(entry.getId()) /*&& !(entry instanceof CommanderReplacementEffect) */) { // 903.9.
-                    Set<UUID> consumedAbilitiesIds = consumed.get(entry.getId());
+                if (consumed.containsKey(entry.getOriginalId()) /*&& !(entry instanceof CommanderReplacementEffect) */) { // 903.9.
+                    Set<UUID> consumedAbilitiesIds = consumed.get(entry.getOriginalId());
                     if (rEffects.get(entry) == null || consumedAbilitiesIds.size() == rEffects.get(entry).size()) {
                         it1.remove();
                     } else {
@@ -944,8 +944,8 @@ public class ContinuousEffects implements Serializable {
 
             // add the applied effect to the consumed effects
             if (rEffect != null) {
-                if (consumed.containsKey(rEffect.getId())) {
-                    Set<UUID> set = consumed.get(rEffect.getId());
+                if (consumed.containsKey(rEffect.getOriginalId())) {
+                    Set<UUID> set = consumed.get(rEffect.getOriginalId());
                     if (rAbility != null) {
                         set.add(rAbility.getId());
 
@@ -955,7 +955,7 @@ public class ContinuousEffects implements Serializable {
                     if (rAbility != null) { // in case of AuraReplacementEffect or PlaneswalkerReplacementEffect there is no Ability
                         set.add(rAbility.getId());
                     }
-                    consumed.put(rEffect.getId(), set);
+                    consumed.put(rEffect.getOriginalId(), set);
                 }
             }
             // Must be called here for some effects to be able to work correctly
