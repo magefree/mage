@@ -39,7 +39,7 @@ public final class CrystalInhumanPrincess extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Flying
+        //Flying
         this.addAbility(FlyingAbility.getInstance());
 
         // {T}: Add {R}, {G}, {W}, or {U}
