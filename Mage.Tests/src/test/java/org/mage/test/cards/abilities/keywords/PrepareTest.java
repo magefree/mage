@@ -6,6 +6,7 @@ import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 
@@ -136,19 +137,20 @@ public class PrepareTest extends CardTestPlayerBase {
     public void costReductionAppliesToPrepareSpell() {
         addCard(Zone.HAND, playerA, "Quill-Blade Laureate");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
-        addCustomEffect_SpellCostModification(playerA, -1);
+        addCard(Zone.BATTLEFIELD, playerA, "Pearl Medallion", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Quill-Blade Laureate");
-        checkPlayableAbility("reducer removes the generic mana from the prepare spell", 3,
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("reducer removes the generic mana from the prepare spell", 1,
                 PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Twofold Intent", true);
         addTarget(playerA, "Quill-Blade Laureate");
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Twofold Intent");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twofold Intent");
 
         setStrictChooseMode(true);
-        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertTappedCount("Plains", true, 1);
+        assertTappedCount("Plains", true, 2);
     }
 
     @Test
@@ -188,12 +190,13 @@ public class PrepareTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 3);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, CREATURE);
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Murder", CREATURE);
-        checkPlayableAbility("prepare copy is removed with its permanent", 2, PhaseStep.POSTCOMBAT_MAIN,
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Murder", CREATURE);
+        checkPlayableAbility("prepare copy is removed with its permanent", 1, PhaseStep.POSTCOMBAT_MAIN,
                 playerA, "Cast " + PREPARE_SPELL, false);
 
         setStrictChooseMode(true);
-        setStopAt(2, PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, CREATURE, 0);
@@ -475,7 +478,7 @@ public class PrepareTest extends CardTestPlayerBase {
     @Test
     public void counteredPrepareSpellStillConsumesPreparedDesignation() {
         addCard(Zone.HAND, playerA, CREATURE);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         addCard(Zone.HAND, playerB, "Counterspell");
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
 
@@ -498,17 +501,18 @@ public class PrepareTest extends CardTestPlayerBase {
     public void tomekeeperCanUnprepareCreatureWithPrepareSpell() {
         addCard(Zone.HAND, playerA, CREATURE);
         addCard(Zone.HAND, playerA, TOMEKEEPER);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, CREATURE);
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, TOMEKEEPER);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, TOMEKEEPER);
         setModeChoice(playerA, "2"); // Target creature becomes unprepared.
         addTarget(playerA, CREATURE);
-        checkPlayableAbility("unprepared creature has no prepare copy", 3, PhaseStep.POSTCOMBAT_MAIN,
+        checkPlayableAbility("unprepared creature has no prepare copy", 1, PhaseStep.POSTCOMBAT_MAIN,
                 playerA, "Cast " + PREPARE_SPELL, false);
 
         setStrictChooseMode(true);
-        setStopAt(3, PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertExileCount(playerA, 0);
@@ -559,5 +563,36 @@ public class PrepareTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Meddling Mage", 1);
         assertPermanentCount(playerA, CREATURE, 1);
         assertExileCount(playerA, PREPARE_SPELL, 1);
+    }
+    
+    @Test
+    public void cancelPreparedCastStillAvailable(){
+        disableManaAutoPayment(playerA); //manual mode so can be canceled
+
+        addCard(Zone.HAND, playerA, CREATURE);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 2);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, CREATURE);
+        setChoice(playerA, "Red");
+        setChoice(playerA, "Red");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, PREPARE_SPELL);
+        setChoice(playerA, TestPlayer.MANA_CANCEL); //cancel cast
+        setChoice(playerA, TestPlayer.SKIP_FAILED_COMMAND);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        Permanent permanent = getPermanent(CREATURE, playerA);
+        Assert.assertNotNull(permanent);
+        Assert.assertTrue(permanent.isPrepared());
+
+        assertExileCount(playerA, PREPARE_SPELL, 1);
+        assertGraveyardCount(playerA, PREPARE_SPELL, 0);
+        assertHandCount(playerA, PREPARE_SPELL, 0);
     }
 }
