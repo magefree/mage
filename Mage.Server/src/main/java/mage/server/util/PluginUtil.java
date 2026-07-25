@@ -48,7 +48,8 @@ public class PluginUtil {
                 logger.error(String.format(
                         "Can't load plugin '%s':\n"
                         + "- jar file not found: %s (expected at %s)\n"
-                        + "- check jar name in config.xml against the actual plugin jar name in pom's <artifactId>",
+                        + "- admin: make sure config's jar name from config.xml is same as pom's <artifactId>"
+                        + "- dev: make sure Mage.Server's distribution.xml contains artifactId to put it into plugins folder",
                         plugin.getName(), plugin.getJar(), jarFile.getAbsolutePath()
                 ));
                 return null;
