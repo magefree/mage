@@ -14,6 +14,9 @@ clean:
 build:
 	mvn install package -DskipTests
 
+test:
+	mvn test -B -Dxmage.dataCollectors.printGameLogs=false
+
 .PHONY: package
 package:
 	# Packaging Mage.Client to zip
