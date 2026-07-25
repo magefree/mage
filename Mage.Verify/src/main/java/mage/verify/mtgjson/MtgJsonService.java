@@ -14,6 +14,7 @@ import java.text.Normalizer;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.zip.ZipInputStream;
+import java.util.concurrent.TimeUnit;
 
 /**
  * MTGJSON v5: basic service to work with mtgjson data
@@ -46,6 +47,9 @@ public final class MtgJsonService {
     }
 
     private static <T> T readFromZip(String filename, Class<T> clazz) throws IOException {
+        long maxFileAgeMillis = TimeUnit.HOURS.toMillis(24);
+        File file = new File(filename);
+        boolean hasExistingFile = file.exists();
 
         // build-in file
         InputStream stream = MtgJsonService.class.getResourceAsStream(filename);
@@ -55,20 +59,35 @@ public final class MtgJsonService {
         }
 
         // already downloaded file
-        File file = new File(filename);
-        if (file.exists()) {
+        if (hasExistingFile && System.currentTimeMillis() - file.lastModified() < maxFileAgeMillis) {
             logger.info("mtgjson: use existing file " + filename + " from " + file.getAbsolutePath());
             return readFromZip(Files.newInputStream(file.toPath()), clazz);
+        }
+
+        if (hasExistingFile) {
+            logger.info("mtgjson: existing file " + filename + " is older than 24 hours, downloading fresh copy");
         }
 
         // new download
         String url = "https://mtgjson.com/api/v5/" + filename;
         logger.info("mtgjson: downloading new file " + url);
         // mtgjson site require user-agent in headers (otherwise it return 403)
-        stream = XmageURLConnection.downloadBinary(url);
-        if (stream != null) {
-            Files.copy(stream, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            logger.info("mtgjson: download DONE, saved to " + file.getAbsolutePath());
+        try {
+            stream = XmageURLConnection.downloadBinary(url);
+            if (stream != null) {
+                Files.copy(stream, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                logger.info("mtgjson: download DONE, saved to " + file.getAbsolutePath());
+                return readFromZip(Files.newInputStream(file.toPath()), clazz);
+            }
+        } catch (IOException e) {
+            logger.warn("mtgjson: download failed for " + filename + ", will " + (hasExistingFile ? "fall back to existing file" : "not be able to continue"), e);
+            if (!hasExistingFile) {
+                throw e;
+            }
+        }
+
+        if (hasExistingFile) {
+            logger.info("mtgjson: using existing file " + filename + " after refresh failure");
             return readFromZip(Files.newInputStream(file.toPath()), clazz);
         }
 
