@@ -143,9 +143,17 @@ class RoomEnterUnlockEffect extends OneShotEffect {
             return true;
         }
 
-        // TODO: possible buggy with AI -- find spell mode by spell ability and do not store it in card's data due game states isolation?!
+        // Find which half was cast from the shared blueprint. After reading,
+        // we MUST clear it: the blueprint is a server-singleton and stale
+        // lastCastHalf would leak into copy permanents (Clever Impersonator,
+        // Sakashima) that use the same RoomCard blueprint. Zone transitions
+        // through non-battlefield/stack zones (hand, graveyard, exile, library)
+        // also clear it via ZonesHandler.moveCard(), so the only window where
+        // it can leak is during this ETB. Game-state copies of already-unlocked
+        // permanents are guarded by wasRoomUnlockedOnCast() above.
         SpellAbilityType lastCastHalf = roomCardBlueprint.getLastCastHalf();
         if (lastCastHalf == SpellAbilityType.SPLIT_LEFT || lastCastHalf == SpellAbilityType.SPLIT_RIGHT) {
+            roomCardBlueprint.setLastCastHalf(null);
             permanent.unlockDoor(game, source, lastCastHalf == SpellAbilityType.SPLIT_LEFT);
         }
 
