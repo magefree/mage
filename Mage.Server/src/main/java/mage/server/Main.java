@@ -201,13 +201,13 @@ public final class Main {
         int gameTypes = 0;
         for (GamePlugin plugin : config.getGameTypes()) {
             gameTypes++;
-            GameFactory.instance.addGameType(plugin.getName(), PluginUtil.loadGameType(plugin), PluginUtil.loadPlugin(plugin, plugin.getTypeName()));
+            GameFactory.instance.addGameType(plugin.getName(), PluginUtil.loadGameType(plugin), PluginUtil.loadPlugin(plugin, plugin.getClassName()));
         }
 
         int tourneyTypes = 0;
         for (GamePlugin plugin : config.getTournamentTypes()) {
             tourneyTypes++;
-            TournamentFactory.instance.addTournamentType(plugin.getName(), PluginUtil.loadTournamentType(plugin), PluginUtil.loadPlugin(plugin, plugin.getTypeName()));
+            TournamentFactory.instance.addTournamentType(plugin.getName(), PluginUtil.loadTournamentType(plugin), PluginUtil.loadPlugin(plugin, plugin.getClassName()));
         }
 
         int playerTypes = 0;

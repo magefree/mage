@@ -103,7 +103,7 @@ public abstract class MageTestPlayerBase {
             deleteSavedGames();
             ConfigSettings config = new ConfigWrapper(ConfigFactory.loadFromFile("config/config.xml"));
             for (GamePlugin plugin : config.getGameTypes()) {
-                GameFactory.instance.addGameType(plugin.getName(), PluginUtil.loadGameType(plugin), PluginUtil.loadPlugin(plugin, plugin.getTypeName()));
+                GameFactory.instance.addGameType(plugin.getName(), PluginUtil.loadGameType(plugin), PluginUtil.loadPlugin(plugin, plugin.getClassName()));
             }
             Copier.setLoader(PluginUtil.classLoader);
         }
