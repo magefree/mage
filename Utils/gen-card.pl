@@ -5,7 +5,7 @@
 use Text::Template;
 use strict;
 
-my $authorFile = 'tmp/author.txt';
+my $authorFile = 'data/author.txt';
 my $dataFile = 'mtg-cards-data.txt';
 my $setsFile = 'mtg-sets-data.txt';
 my $keywordsFile = 'keywords.txt';

@@ -5,7 +5,6 @@
 use strict;
 
 
-my $authorFile = 'tmp/author.txt';
 my $dataFile = "mtg-cards-data.txt";
 my $setsFile = "mtg-sets-data.txt";
 

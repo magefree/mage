@@ -6,8 +6,8 @@ use strict;
 
 my $dataFile = "mtg-cards-data.txt";
 my $setsFile = "mtg-sets-data.txt";
-my $oldListFile = "tmp/oldList.txt";
-my $newListFile = "tmp/newList.txt";
+my $oldListFile = "data/oldList.txt";
+my $newListFile = "data/newList.txt";
 
 
 my %cardsBySet;
