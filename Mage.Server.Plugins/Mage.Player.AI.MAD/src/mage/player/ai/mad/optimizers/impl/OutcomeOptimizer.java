@@ -1,4 +1,4 @@
-package mage.player.ai.ma.optimizers.impl;
+package mage.player.ai.mad.optimizers.impl;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;

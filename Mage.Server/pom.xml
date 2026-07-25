@@ -91,7 +91,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>mage-player-ai-ma</artifactId>
+            <artifactId>mage-player-ai-mad</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>

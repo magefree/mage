@@ -1,4 +1,4 @@
-package mage.player.ai.ma.optimizers;
+package mage.player.ai.mad.optimizers;
 
 import java.util.List;
 import mage.abilities.Ability;

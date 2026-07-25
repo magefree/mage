@@ -10,7 +10,7 @@
         <version>1.4.60</version>
     </parent>
 
-    <artifactId>mage-player-ai-ma</artifactId>
+    <artifactId>mage-player-ai-mad</artifactId>
     <packaging>jar</packaging>
     <name>Mage Player AI (mad bot)</name>
 

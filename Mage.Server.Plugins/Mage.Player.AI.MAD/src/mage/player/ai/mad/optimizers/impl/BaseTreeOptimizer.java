@@ -1,8 +1,8 @@
-package mage.player.ai.ma.optimizers.impl;
+package mage.player.ai.mad.optimizers.impl;
 
 import mage.abilities.Ability;
 import mage.game.Game;
-import mage.player.ai.ma.optimizers.TreeOptimizer;
+import mage.player.ai.mad.optimizers.TreeOptimizer;
 
 import java.util.ArrayList;
 import java.util.List;
