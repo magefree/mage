@@ -36,7 +36,7 @@ public final class GarrukVeiledButcher extends CardImpl {
 
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GARRUK);
-        this.setStartingLoyalty(0);
+        this.setStartingLoyalty(5);
 
         // If a creature an opponent controls would die, exile it instead.
         this.addAbility(new SimpleStaticAbility(
