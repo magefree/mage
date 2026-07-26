@@ -30,7 +30,7 @@ import mage.constants.Duration;
 public final class LilianaTheFaultless extends CardImpl {
 
     private static final FilterPermanent filter
-        = new FilterCreatureOrPlaneswalkerPermanent("another creature or planeswalker you control");
+        = new FilterCreatureOrPlaneswalkerPermanent("another creature or planeswalker");
 
     static {
         filter.add(AnotherPredicate.instance);
