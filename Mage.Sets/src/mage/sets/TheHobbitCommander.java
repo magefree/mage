@@ -47,10 +47,12 @@ public final class TheHobbitCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Flame of Anor", 71, Rarity.MYTHIC, mage.cards.f.FlameOfAnor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Galadriel's Dismissal", 16, Rarity.MYTHIC, mage.cards.g.GaladrielsDismissal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Galadriel's Dismissal", 56, Rarity.MYTHIC, mage.cards.g.GaladrielsDismissal.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Last March of the Ents", 27, Rarity.MYTHIC, mage.cards.l.LastMarchOfTheEnts.class));
         cards.add(new SetCardInfo("Minas Morgul, Dark Fortress", 48, Rarity.MYTHIC, mage.cards.m.MinasMorgulDarkFortress.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Minas Morgul, Dark Fortress", 88, Rarity.MYTHIC, mage.cards.m.MinasMorgulDarkFortress.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Minas Tirith", 49, Rarity.MYTHIC, mage.cards.m.MinasTirith.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Minas Tirith", 89, Rarity.MYTHIC, mage.cards.m.MinasTirith.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mithril Coat", 43, Rarity.MYTHIC, mage.cards.m.MithrilCoat.class));
         cards.add(new SetCardInfo("Mount Doom", 50, Rarity.MYTHIC, mage.cards.m.MountDoom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mount Doom", 90, Rarity.MYTHIC, mage.cards.m.MountDoom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mox Amber", 96, Rarity.MYTHIC, mage.cards.m.MoxAmber.class));
