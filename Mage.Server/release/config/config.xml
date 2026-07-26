@@ -83,6 +83,7 @@
         <gameType name="Brawl Free For All" jar="mage-game-brawlfreeforall-${project.version}.jar" className="mage.game.BrawlFreeForAllMatch" typeName="mage.game.BrawlFreeForAllType"/>
         <gameType name="Momir Basic Two Player Duel" jar="mage-game-momirduel-${project.version}.jar" className="mage.game.MomirDuelMatch" typeName="mage.game.MomirDuelType"/>
         <gameType name="Momir Basic Free For All" jar="mage-game-momirfreeforall-${project.version}.jar" className="mage.game.MomirFreeForAllMatch" typeName="mage.game.MomirFreeForAllType"/>
+        <gameType name="Custom Pillar of the Paruns Two Player Duel" jar="mage-game-custompillaroftheparunsduel-${project.version}.jar" className="mage.game.CustomPillarOfTheParunsDuelMatch" typeName="mage.game.CustomPillarOfTheParunsDuelType"/>
     </gameTypes>
     <tournamentTypes>
         <tournamentType name="Constructed Elimination" jar="mage-tournament-constructed-${project.version}.jar" className="mage.tournament.ConstructedEliminationTournament" typeName="mage.tournament.ConstructedEliminationTournamentType"/>
