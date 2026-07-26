@@ -5,7 +5,7 @@ import mage.MageInt;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
@@ -33,8 +33,8 @@ public final class TheChiefWarg extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // Ferocious -- Whenever you attack while you control a creature with power 4 or greater, you draw a card and lose 1 life.
-        Ability ability = new AttacksTriggeredAbility(new DrawCardSourceControllerEffect(1, true))
-            .withInterveningIf(FerociousCondition.instance)
+        Ability ability = new AttacksWithCreaturesTriggeredAbility(new DrawCardSourceControllerEffect(1, true), 1)
+            .withTriggerCondition(FerociousCondition.instance)
             .addHint(FerociousHint.instance)
             .setAbilityWord(AbilityWord.FEROCIOUS);
         ability.addEffect(new LoseLifeSourceControllerEffect(1, false).concatBy("and"));
