@@ -42,7 +42,7 @@ public final class SwordsmansSteel extends CardImpl {
         ).addHint(hint));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private SwordsmansSteel(final SwordsmansSteel card) {
