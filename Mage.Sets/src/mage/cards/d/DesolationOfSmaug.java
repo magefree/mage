@@ -42,7 +42,7 @@ public final class DesolationOfSmaug extends CardImpl {
                 StaticValue.get(4),
                 new ConditionalSpellManaBuilder(filter2),
                 false
-            )
+            ).concatBy("<br>")
         );
     }
 
