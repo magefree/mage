@@ -21,7 +21,7 @@ public final class HeroesHangout extends CardImpl {
 
     public HeroesHangout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
-        
+
 
         // Choose one --
         // * Date Night -- Exile the top two cards of your library. Choose one of them. Until the end of your next turn, you may play that card.
@@ -29,7 +29,7 @@ public final class HeroesHangout extends CardImpl {
         this.getSpellAbility().withFirstModeFlavorWord("Date Night");
 
         // * Patrol Night -- One or two target creatures each get +1/+0 and gain first strike until end of turn.
-        Mode mode = new Mode(new BoostTargetEffect(1, 0));
+        Mode mode = new Mode(new BoostTargetEffect(1, 0).setText("one or two target creatures each get +1/+0"));
         mode.addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance()).setText("and gain first strike until end of turn"));
         mode.addTarget(new TargetCreaturePermanent(1, 2));
         mode.withFlavorWord("Patrol Night");
