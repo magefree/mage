@@ -35,7 +35,8 @@ public final class DarwinAdaptiveMutant extends CardImpl {
 
         // Remove two +1/+1 counters from Darwin: He gains indestructible until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-            new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
+            new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn)
+                .setText("he gains indestructible until end of turn"),
             new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))
         ));
     }

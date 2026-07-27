@@ -41,8 +41,10 @@ public final class DoctorStrangeSurgeon extends CardImpl {
 
         // At the beginning of each combat, if you have at least 10 life more than your starting life total, creatures you control get +2/+2 and gain vigilance until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(TargetController.ANY,
-                new BoostControlledEffect(2, 2, Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES), false)
-            .withInterveningIf(MoreThanStartingLifeTotalCondition.TEN);
+            new BoostControlledEffect(2, 2, Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES)
+                .setText("creatures you control get +2/+2"),
+            false
+        ).withInterveningIf(MoreThanStartingLifeTotalCondition.TEN);
         ability.addEffect(new GainAbilityControlledEffect(
             VigilanceAbility.getInstance(),
             Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES)

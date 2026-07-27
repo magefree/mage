@@ -22,7 +22,8 @@ public final class ScoutTheCity extends CardImpl {
 
         // Choose one --
         // * Look Around -- Mill three cards. You may put a permanent card from among them into your hand. You gain 3 life.
-        this.getSpellAbility().addEffect(new MillThenPutInHandEffect(3, StaticFilters.FILTER_CARD_PERMANENT));
+        this.getSpellAbility().addEffect(new MillThenPutInHandEffect(3, StaticFilters.FILTER_CARD_PERMANENT)
+            .withTextOptions("them"));
         this.getSpellAbility().addEffect(new GainLifeEffect(3));
         this.getSpellAbility().withFirstModeFlavorWord("Look Around");
 
