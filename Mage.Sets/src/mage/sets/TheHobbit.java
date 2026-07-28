@@ -70,6 +70,9 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("The Lonely Mountain", 207, Rarity.RARE, mage.cards.t.TheLonelyMountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Lonely Mountain", 248, Rarity.RARE, mage.cards.t.TheLonelyMountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Lonely Mountain", 284, Rarity.RARE, mage.cards.t.TheLonelyMountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Queen of Dale", 217, Rarity.MYTHIC, mage.cards.t.TheQueenOfDale.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Queen of Dale", 24, Rarity.MYTHIC, mage.cards.t.TheQueenOfDale.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Queen of Dale", 253, Rarity.MYTHIC, mage.cards.t.TheQueenOfDale.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thorin, Mountain-king", 114, Rarity.MYTHIC, mage.cards.t.ThorinMountainKing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thorin, Mountain-king", 243, Rarity.MYTHIC, mage.cards.t.ThorinMountainKing.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Thorin, Mountain-king", 279, Rarity.MYTHIC, mage.cards.t.ThorinMountainKing.class, FULL_ART_USE_VARIOUS));
