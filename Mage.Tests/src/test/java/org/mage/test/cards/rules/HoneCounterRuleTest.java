@@ -8,7 +8,16 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class HoneCounterRuleTest extends CardTestPlayerBase {
 
+    /**
+    * Silvercoat Lion
+    * 2/2
+    */
     private static final String LION = "Silvercoat Lion";
+
+    /**
+    * Accorder's Shield
+    * Equipped creature gets +0/+3 and has vigilance.
+    */
     private static final String SHIELD = "Accorder's Shield";
 
     @Test
@@ -21,6 +30,7 @@ public class HoneCounterRuleTest extends CardTestPlayerBase {
         addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerA, SHIELD, CounterType.HONE, 2);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
         execute();
 
         // 2/2 plus +0/+3 from Accorder's Shield plus +2/+0 from two hone counters.
@@ -35,6 +45,7 @@ public class HoneCounterRuleTest extends CardTestPlayerBase {
         addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerA, SHIELD, CounterType.HONE, 3);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
         execute();
 
         assertPowerToughness(playerA, LION, 2, 2);
