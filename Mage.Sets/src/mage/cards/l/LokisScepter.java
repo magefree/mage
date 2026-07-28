@@ -11,6 +11,7 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -24,6 +25,8 @@ public final class LokisScepter extends CardImpl {
     public LokisScepter(UUID ownerID, CardSetInfo setInfo) {
         super(ownerID, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{R}");
         this.supertype.add(SuperType.LEGENDARY);
+
+        // {T} : Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
 
         // When Loki’s Scepter enters, gain control of target creature until end of turn. Untap that creature.
@@ -38,6 +41,7 @@ public final class LokisScepter extends CardImpl {
         ability.addEffect(new AddCardSubTypeTargetEffect(
                 SubType.VILLAIN, Duration.EndOfTurn
         ).setText("it becomes a Villain in addition to its other types"));
+        ability.addTarget(new TargetCreaturePermanent());
     }
     private LokisScepter(final LokisScepter card) {
         super(card);
