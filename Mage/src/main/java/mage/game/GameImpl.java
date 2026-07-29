@@ -56,6 +56,7 @@ import mage.game.mulligan.Mulligan;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
 import mage.game.stack.SpellStack;
 import mage.game.stack.StackAbility;
@@ -710,20 +711,36 @@ public abstract class GameImpl implements Game {
         return state.getStack().getSpell(spellId);
     }
 
+    @Override
+    public Spell getSpellOrLKIStack(MageObject object) {
+        if (object instanceof PermanentToken && object.getCopyFrom() != null) {
+            // copied card generate tokens on battlefield so lookup to 
+            // original spell ability, not token's (see Baron Helmut Zemo and test_Boast_CastWithEtb)
+            // main logic: copied card -> spell on stack -> resolve to token -> lookup
+            return getSpellOrLKIStack(object.getCopyFrom().getId());
+        } else {
+            return getSpellOrLKIStack(object.getId());
+        }
+    }
+
     /**
      * Given the UUID of a spell, this method returns the spell object. If the current game
      * state does not contain a spell with the given UUID, this method checks the last known
-     * information on the stack to look for the spell.
+     * information on the stack to look for the spell (it's search it by direct uuid or by 
+     * source object)
      *
-     * @param spellId - The UUID of a spell to retrieve from the current game state
-     * @return - The spell object with the given UUID, or null if no spell with the given UUID
+     * @param spellOrSourceId - The UUID of the actual spell or object id like permanent
+     * @return - The spell that was used to cast source object or null on non-cast
      * is found
      */
     @Override
-    public Spell getSpellOrLKIStack(UUID spellId) {
-        Spell spell = state.getStack().getSpell(spellId);
+    public Spell getSpellOrLKIStack(UUID spellOrSourceId) {
+        // by spell
+        Spell spell = getSpell(spellOrSourceId);
+
         if (spell == null) {
-            MageObject obj = this.getLastKnownInformation(spellId, Zone.STACK);
+            // by source id
+            MageObject obj = this.getLastKnownInformation(spellOrSourceId, Zone.STACK);
             // Copied activated abilities may also be retrieved from the stack here.
             // This check that obj is instanceof Spell is necessary to avoid throwing
             // a ClassCastException, as a StackAbility cannot be cast to Spell. See
@@ -2372,11 +2389,21 @@ public abstract class GameImpl implements Game {
 
         //20091005 - 704.5a/704.5b/704.5c
         for (Player player : state.getPlayers().values()) {
-            if (!player.hasLost()
-                    && ((player.getLife() <= 0 && player.canLoseByZeroOrLessLife())
-                    || player.getLibrary().isEmptyDraw()
-                    || player.getCountersCount(CounterType.POISON) >= 10)) {
-                player.lost(this);
+            if (!player.hasLost()) {
+                String lostReason = "";
+                if (player.getLife() <= 0 && player.canLoseByZeroOrLessLife()) {
+                    lostReason = "life is 0 or less";
+                }
+                if (player.getLibrary().isEmptyDraw()) {
+                    lostReason = "draw from empty library";
+                }
+                if (player.getCountersCount(CounterType.POISON) >= 10) {
+                    lostReason = "poison counter >= 10";
+                }
+                if (!lostReason.isEmpty()) {
+                    this.informPlayers(player.getLogName() + " lost the game due " + lostReason);
+                    player.lost(this);
+                }
             }
         }
 
@@ -2555,7 +2582,7 @@ public abstract class GameImpl implements Game {
             if (perm.isCreature(this)) {
                 //20091005 - 704.5f
                 if (perm.getToughness().getValue() <= 0) {
-                    if (movePermanentToGraveyardWithInfo(perm)) {
+                    if (movePermanentToGraveyardWithInfo(perm, "SBA: creature has toughness 0 or less")) {
                         somethingHappened = true;
                         continue;
                     }
@@ -2622,7 +2649,7 @@ public abstract class GameImpl implements Game {
             if (perm.isPlaneswalker(this)) {
                 //20091005 - 704.5i
                 if (perm.getCounters(this).getCount(CounterType.LOYALTY) == 0) {
-                    if (movePermanentToGraveyardWithInfo(perm)) {
+                    if (movePermanentToGraveyardWithInfo(perm, "SBA: planeswalker has loyalty 0")) {
                         somethingHappened = true;
                         continue;
                     }
@@ -2635,7 +2662,7 @@ public abstract class GameImpl implements Game {
                 //20091005 - 704.5n, 702.14c
                 if (perm.getAttachedTo() == null) {
                     if (!perm.isCreature(this) && !perm.getAbilities(this).containsClass(BestowAbility.class)) {
-                        if (movePermanentToGraveyardWithInfo(perm)) {
+                        if (movePermanentToGraveyardWithInfo(perm, "SBA: aura can be attached to creature only")) {
                             somethingHappened = true;
                         }
                     }
@@ -2667,9 +2694,9 @@ public abstract class GameImpl implements Game {
                                 // handle bestow unattachment
                                 if (perm.getAbilities().stream().anyMatch(x -> x instanceof BestowAbility)) {
                                     UUID wasAttachedTo = perm.getAttachedTo();
-                                    perm.unattach(this);
+                                    perm.unattach(this); // TODO: add reason to the log?
                                     fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
-                                } else if (movePermanentToGraveyardWithInfo(perm)) {
+                                } else if (movePermanentToGraveyardWithInfo(perm, "SBA: aura doesn't attached")) {
                                     somethingHappened = true;
                                 }
                             } else {
@@ -2681,7 +2708,7 @@ public abstract class GameImpl implements Game {
                                             UUID wasAttachedTo = perm.getAttachedTo();
                                             perm.unattach(this);
                                             fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
-                                        } else if (movePermanentToGraveyardWithInfo(perm)) {
+                                        } else if (movePermanentToGraveyardWithInfo(perm, "SBA: aura can't be attached to that permanent")) {
                                             somethingHappened = true;
                                         }
                                     }
@@ -2691,7 +2718,7 @@ public abstract class GameImpl implements Game {
                                         UUID wasAttachedTo = perm.getAttachedTo();
                                         perm.unattach(this);
                                         fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
-                                    } else if (movePermanentToGraveyardWithInfo(perm)) {
+                                    } else if (movePermanentToGraveyardWithInfo(perm, "SBA: aura can't be attached to that permanent")) {
                                         somethingHappened = true;
                                     }
                                 }
@@ -2699,13 +2726,13 @@ public abstract class GameImpl implements Game {
                         } else if (target instanceof TargetPlayer) {
                             Player attachedToPlayer = getPlayer(perm.getAttachedTo());
                             if (attachedToPlayer == null || attachedToPlayer.hasLost()) {
-                                if (movePermanentToGraveyardWithInfo(perm)) {
+                                if (movePermanentToGraveyardWithInfo(perm, "SBA: aura doesn't attached to that player")) {
                                     somethingHappened = true;
                                 }
                             } else {
                                 Filter auraFilter = spellAbility.getTargets().get(0).getFilter();
                                 if (!auraFilter.match(attachedToPlayer, this) || attachedToPlayer.hasProtectionFrom(perm, this)) {
-                                    if (movePermanentToGraveyardWithInfo(perm)) {
+                                    if (movePermanentToGraveyardWithInfo(perm, "SBA: aura can't be attached to player")) {
                                         somethingHappened = true;
                                     }
                                 }
@@ -2714,7 +2741,7 @@ public abstract class GameImpl implements Game {
                             Card attachedTo = getCard(perm.getAttachedTo());
                             if (attachedTo == null
                                     || !(spellAbility.getTargets().get(0)).canTarget(perm.getControllerId(), perm.getAttachedTo(), spellAbility, this)) {
-                                if (movePermanentToGraveyardWithInfo(perm)) {
+                                if (movePermanentToGraveyardWithInfo(perm, "SBA: aura can't be attached to that card")) {
                                     if (attachedTo != null) {
                                         attachedTo.removeAttachment(perm.getId(), null, this);
                                     }
@@ -2759,7 +2786,7 @@ public abstract class GameImpl implements Game {
                         .noneMatch(perm.getId()::equals);
                 if (sacSaga) {
                     // After the last chapter ability has left the stack, you'll sacrifice the Saga
-                    perm.sacrifice(null, this);
+                    perm.sacrifice(null, this); // TODO: add reason to the logs?
                     somethingHappened = true;
                 }
             }
@@ -2780,7 +2807,7 @@ public abstract class GameImpl implements Game {
                         .filter(TriggeredAbility.class::isInstance)
                         .map(Ability::getSourceId)
                         .noneMatch(perm.getId()::equals)) {
-                    if (movePermanentToGraveyardWithInfo(perm)) {
+                    if (movePermanentToGraveyardWithInfo(perm, "SBA: battle with 0 defense")) {
                         somethingHappened = true;
                     }
                 } else if (this
@@ -2794,7 +2821,8 @@ public abstract class GameImpl implements Game {
                         || perm.isControlledBy(perm.getProtectorId())) {
                     perm.chooseProtector(this, null);
                     if (this.getPlayer(perm.getProtectorId()) == null) {
-                        movePermanentToGraveyardWithInfo(perm);
+                        logger.error("Something wrong, battle without protector: " + perm + ", " + this);
+                        movePermanentToGraveyardWithInfo(perm, "SBA: something wrong, battle wthout protector");
                     }
                     somethingHappened = true;
                 }
@@ -2819,7 +2847,7 @@ public abstract class GameImpl implements Game {
                     }
                     if (attachedTo == null || !attachedTo.getAttachments().contains(perm.getId())) {
                         UUID wasAttachedTo = perm.getAttachedTo();
-                        perm.attachTo(null, null, this);
+                        perm.attachTo(null, null, this); // TODO: add reason of the unattach?
                         fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
                     } else if (!attachedTo.isCreature(this) || attachedTo.hasProtectionFrom(perm, this)) {
                         if (attachedTo.removeAttachment(perm.getId(), null, this)) {
@@ -2917,7 +2945,7 @@ public abstract class GameImpl implements Game {
                 controller.choose(Outcome.Benefit, targetLegendaryToKeep, null, this);
                 for (Permanent dupLegend : getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
                     if (!targetLegendaryToKeep.getTargets().contains(dupLegend.getId())) {
-                        movePermanentToGraveyardWithInfo(dupLegend);
+                        movePermanentToGraveyardWithInfo(dupLegend, "SBA: legendary rule to keep only one");
                     }
                 }
                 return true;
@@ -2952,7 +2980,7 @@ public abstract class GameImpl implements Game {
                 for (Permanent permanent : worldEnchantment) {
                     if (newestPermanentControllerRange.contains(permanent.getControllerId())
                             && !Objects.equals(newestPermanent, permanent)) {
-                        movePermanentToGraveyardWithInfo(permanent);
+                        movePermanentToGraveyardWithInfo(permanent, "SBA: world rule to keep only one");
                         somethingHappened = true;
                     }
                 }
@@ -2975,7 +3003,7 @@ public abstract class GameImpl implements Game {
                             .orElse(-1);
                     roleSet.removeIf(permanent -> permanent.getCreateOrder() == newest);
                     for (Permanent permanent : roleSet) {
-                        movePermanentToGraveyardWithInfo(permanent);
+                        movePermanentToGraveyardWithInfo(permanent, "SBA: role rule to keep only one");
                         somethingHappened = true;
                     }
                 }
@@ -2988,6 +3016,7 @@ public abstract class GameImpl implements Game {
             for (Permanent permanent : getBattlefield().getAllActivePermanents()) {
                 if ((permanent.getAbilities(this).containsClass(DayboundAbility.class) && !state.isDaytime())
                         || (permanent.getAbilities(this).containsClass(NightboundAbility.class) && state.isDaytime())) {
+                    // TODO: add transform reason?
                     somethingHappened = permanent.transform(null, this, true) || somethingHappened;
                 }
             }
@@ -2997,11 +3026,11 @@ public abstract class GameImpl implements Game {
         return somethingHappened;
     }
 
-    private boolean movePermanentToGraveyardWithInfo(Permanent permanent) {
+    private boolean movePermanentToGraveyardWithInfo(Permanent permanent, String reason) {
         boolean result = false;
         if (permanent.moveToZone(Zone.GRAVEYARD, null, this, false)) {
             if (!this.isSimulation()) {
-                this.informPlayers(permanent.getLogName() + " is put into graveyard from battlefield");
+                this.informPlayers(permanent.getLogName() + " is put into graveyard from battlefield" + (reason.isEmpty() ? "" : " (" + reason + ")"));
             }
             result = true;
         }
@@ -3410,6 +3439,7 @@ public abstract class GameImpl implements Game {
         }
         // Then, if that player controlled any objects on the stack not represented by cards, those objects cease to exist.
         this.getState().getContinuousEffects().removeInactiveEffects(this);
+        // TODO: need copy tests, see #12911
         getStack().removeIf(object -> object.isControlledBy(playerId));
         // Then, if there are any objects still controlled by that player, those objects are exiled.
         applyEffects(); // to remove control from effects removed meanwhile

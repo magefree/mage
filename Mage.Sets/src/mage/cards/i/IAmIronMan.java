@@ -1,7 +1,5 @@
 package mage.cards.i;
 
-import java.util.UUID;
-
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -13,6 +11,8 @@ import mage.filter.StaticFilters;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author muz
@@ -23,9 +23,9 @@ public final class IAmIronMan extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
         // Until end of turn, target artifact or creature becomes an artifact creature with base power and toughness 4/4 and gains flying.
-        this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(
-            new CreatureToken(4, 4).withType(CardType.ARTIFACT).withAbility(FlyingAbility.getInstance()),
-            false, false, Duration.EndOfTurn
+        this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new CreatureToken(4, 4,
+                "artifact creature with base power and toughness 4/4 and gains flying").withType(CardType.ARTIFACT)
+                .withAbility(FlyingAbility.getInstance()), false, false, Duration.EndOfTurn
         ).withDurationRuleAtStart(true));
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
 

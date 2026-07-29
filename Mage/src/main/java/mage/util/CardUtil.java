@@ -1648,7 +1648,8 @@ public final class CardUtil {
                     break;
                 } else {
                     // Human can choose wrong spell part, so allow to continue
-                    if (!player.chooseUse(Outcome.PlayForFree, "Continue casting spells?", source, game)) {
+                    String message = String.format("You can cast %d more spells for free. Continue casting?", maxCastCount - castCount);
+                    if (!player.chooseUse(Outcome.PlayForFree, message, source, game)) {
                         break;
                     }
                 }

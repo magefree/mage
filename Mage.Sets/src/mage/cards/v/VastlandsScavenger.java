@@ -2,6 +2,7 @@ package mage.cards.v;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.EntersPreparedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.Card;
@@ -38,6 +39,8 @@ public final class VastlandsScavenger extends PrepareCard {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // This creature enters prepared.
+        this.addAbility(new EntersPreparedAbility());
+
         // Bind to Life
         // Instant {4}{G}
         // Mill seven cards. Then put a creature card from among them onto the battlefield.

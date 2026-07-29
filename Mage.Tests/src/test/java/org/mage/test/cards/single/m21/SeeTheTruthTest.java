@@ -134,7 +134,7 @@ public class SeeTheTruthTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mizzix's Mastery", seeTheTruth);
-        setChoice(playerA, true); // answering 'yes' to: you MAY cast the copy.
+        addTarget(playerA, "See the Truth");
         // No card choice, the copy is cast so all 3 cards go to hand.
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -145,5 +145,6 @@ public class SeeTheTruthTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Alpine Grizzly", 1);
         assertHandCount(playerA, "Bear Cub", 1);
         assertHandCount(playerA, "Centaur Courser", 1);
+        assertExileCount(playerA, 2);
     }
 }

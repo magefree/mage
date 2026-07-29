@@ -21,7 +21,7 @@ import mage.constants.CardType;
  */
 public final class RepulsorBots extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("other artifacts and/or creatures");
+    private static final FilterPermanent filter = new FilterPermanent("other target artifacts and/or creatures");
 
     static {
         filter.add(AnotherPredicate.instance);

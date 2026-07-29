@@ -9,9 +9,7 @@ use strict;
 my $dataFile = "mtg-cards-data.txt";
 my $setsFile = "mtg-sets-data.txt";
 
-
 my %cards;
-my %sets;
 my %knownSets;
 
 my @setCards;
@@ -117,14 +115,6 @@ if ($cardsFound == 0) {
     $setName = <STDIN>;
     exit;
 }
-
-open (DATA, $setsFile) || die "can't open $setsFile";
-
-while(my $line = <DATA>) {
-    my @data = split('\\|', $line);
-    $sets{$data[0]}= $data[1];
-}
-close(DATA);
 
 open (DATA, $setsFile) || die "can't open $setsFile";
 while(my $line = <DATA>) {

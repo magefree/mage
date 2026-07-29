@@ -1,10 +1,10 @@
 package mage.cards.m;
 
+import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
-import mage.abilities.effects.common.ExileTargetCardCopyAndCastEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -19,7 +19,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.Set;
 import java.util.UUID;
-import mage.ApprovingObject;
+import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -32,17 +32,11 @@ public final class MizzixsMastery extends CardImpl {
         // Exile target card that's an instant or sorcery from your graveyard. 
         // For each card exiled this way, copy it, and you may cast the copy 
         // without paying its mana cost. Exile Mizzix's Mastery.
-        this.getSpellAbility().addEffect(new ExileTargetCardCopyAndCastEffect(true).setText(
-                "Exile target card that's an instant or sorcery from your graveyard. For each card exiled this way, copy it, and you may cast the copy without paying its mana cost"));
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(
-                new FilterInstantOrSorceryCard("card that's an instant or sorcery from your graveyard")));
-        this.getSpellAbility().addEffect(new ExileSpellEffect());
-
         // Overload {5}{R}{R}{R}
-        Ability ability = new OverloadAbility(this, new MizzixsMasteryOverloadEffect(),
-                new ManaCostsImpl<>("{5}{R}{R}{R}"));
-        ability.addEffect(new ExileSpellEffect());
-        this.addAbility(ability);
+        OverloadAbility.implementOverloadAbility(this, new ManaCostsImpl<>("{5}{R}{R}{R}"),
+                new TargetCardInYourGraveyard(new FilterInstantOrSorceryCard("card that's an instant or sorcery from your graveyard")),
+                new MizzixsMasteryOverloadEffect(), new ExileSpellEffect());
+
     }
 
     private MizzixsMastery(final MizzixsMastery card) {
@@ -59,7 +53,7 @@ class MizzixsMasteryOverloadEffect extends OneShotEffect {
 
     MizzixsMasteryOverloadEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "Exile each card that's an instant or sorcery from "
+        this.staticText = "Exile target card that's an instant or sorcery from "
                 + "your graveyard. For each card exiled this way, copy it, "
                 + "and you may cast the copy without paying its mana cost";
     }
@@ -77,8 +71,8 @@ class MizzixsMasteryOverloadEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Set<Card> cardsToExile = controller.getGraveyard().getCards(
-                    new FilterInstantOrSorceryCard(), source.getControllerId(), source, game);
+            Set<Card> cardsToExile = getTargetPointer().getTargets(game, source)
+                    .stream().map(game::getCard).collect(Collectors.toSet());
             if (!cardsToExile.isEmpty()) {
                 if (controller.moveCards(cardsToExile, Zone.EXILED, source, game)) {
                     Cards copiedCards = new CardsImpl();

@@ -11,6 +11,8 @@ my $templateFile = "issue_tracker.tmpl";
 
 my %sets;
 my %knownSets;
+my %setNamesByCode;
+my %setCodesByName;
 
 my @setCards;
 
@@ -19,37 +21,52 @@ while(my $line = <DATA>) {
     chomp $line;
     my @data = split('\\|', $line);
     $knownSets{$data[0]} = $data[2];
+    $setNamesByCode{uc($data[1])} = $data[0];
+    $setCodesByName{$data[0]} = $data[1];
 }
 close(DATA);
 
 my @basicLands = ("Plains", "Island", "Swamp", "Mountain", "Forest");
 
-# gets the set name
-my $setName = $ARGV[0];
-if(!$setName) {
-    print 'Enter a set name: ';
-    $setName = <STDIN>;
-    chomp $setName;
+sub resolveSetName {
+    my ($input) = @_;
+
+    return $input if exists $setCodesByName{$input};
+
+    my $setCode = uc($input);
+    return $setNamesByCode{$setCode} if exists $setNamesByCode{$setCode};
+
+    return undef;
 }
 
-while (!defined ($knownSets{$setName}))
+# gets the set name
+my $setInput = join(' ', @ARGV);
+if(!$setInput) {
+    print 'Enter a set name or code: ';
+    $setInput = <STDIN>;
+    chomp $setInput;
+}
+
+my $setName = resolveSetName($setInput);
+while (!defined $setName)
 {
-    print ("Invalid set - '$setName'\n");
+    print ("Invalid set - '$setInput'\n");
     print ("  Possible sets you meant:\n");
-    my $origSetName = $setName;
-    $setName =~ s/^(.).*/$1/;
-    my $key;
-    foreach $key (sort keys (%knownSets))
+    my $searchPrefix = $setInput;
+    $searchPrefix =~ s/^(.).*/$1/;
+    foreach my $name (sort keys (%knownSets))
     {
-        if ($key =~ m/^$setName/img)
+        my $code = $setCodesByName{$name};
+        if ($name =~ m/^$searchPrefix/img || $code =~ m/^$searchPrefix/img)
         {
-            print ("   '$key'\n");
+            print ("   '$name' ($code)\n");
         }
     }
 
-    print 'Enter a set name: ';
-    $setName = <STDIN>;
-    chomp $setName;
+    print 'Enter a set name or code: ';
+    $setInput = <STDIN>;
+    chomp $setInput;
+    $setName = resolveSetName($setInput);
 }
 
 open (DATA, $dataFile) || die "can't open $dataFile";
@@ -150,7 +167,9 @@ my $template = Text::Template->new(TYPE => 'FILE', SOURCE => $templateFile, DELI
 $vars{'unimplementedCount'} = scalar(@unimplementedCards);
 $vars{'implementedCount'} = scalar(@implementedCards);
 $vars{'totalCount'} = scalar(@unimplementedCards) + scalar(@implementedCards);
-$vars{'unimplemented'} = join("\n", sort @unimplementedCards);
+$vars{'unimplemented'} = @unimplementedCards
+    ? join("\n", sort @unimplementedCards)
+    : "All cards currently implemented";
 $vars{'implemented'} = join("\n", sort @implementedCards);
 $vars{'setName'} = $setName;
 $vars{'unimplementedUrl'} = $unimplementedUrl;

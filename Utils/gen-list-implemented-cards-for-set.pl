@@ -9,7 +9,6 @@ my $dataFile = "mtg-cards-data.txt";
 my $setsFile = "mtg-sets-data.txt";
 
 my %sets;
-my %knownSets;
 
 my @setCards;
 
@@ -28,13 +27,6 @@ while(my $line = <DATA>) {
     if ($data[1] eq $setName) {
         push(@setCards, \@data);
     }
-}
-close(DATA);
-
-open (DATA, $setsFile) || die "can't open $setsFile";
-while(my $line = <DATA>) {
-    my @data = split('\\|', $line);
-    $knownSets{$data[0]}= $data[2];
 }
 close(DATA);
 
