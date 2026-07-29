@@ -581,7 +581,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             }
         }
         if (removed) {
-            if (fromZone != Zone.OUTSIDE) {
+            if (fromZone != Zone.OUTSIDE && fromZone != Zone.STACK) {
+                // warning, stack's lki remember by stack().remove()
+                // TODO: remove any stack().remove() usage and enable stack here again
                 game.rememberLKI(fromZone, lkiObject != null ? lkiObject : this);
             }
         } else {

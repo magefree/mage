@@ -39,7 +39,7 @@ public final class GertAndOldLaceRunaways extends CardImpl {
         new DoIfCostPaid(new SearchLibraryPutInHandEffect(
                 new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true
         ), new DiscardCardCost())
-        ));
+        ).setTriggerPhrase("When {this} enter, "));
     }
 
     private GertAndOldLaceRunaways(final GertAndOldLaceRunaways card) {

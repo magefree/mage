@@ -58,7 +58,9 @@ public final class NamorTheSubMariner extends CardImpl {
 
         // Whenever you cast a noncreature spell with one or more blue mana symbols in its mana cost, create that many 1/1 blue Merfolk creature tokens.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CreateTokenEffect(new MerfolkToken(), NamorTheSubMarinerValue.instance), filter, false
+            new CreateTokenEffect(new MerfolkToken(), NamorTheSubMarinerValue.instance)
+                .setText("create that many 1/1 blue Merfolk creature tokens"),
+            filter, false
         ));
     }
 

@@ -5,6 +5,7 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.constants.*;
 import mage.counters.AbilityCounter;
 import mage.counters.BoostCounter;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -37,6 +38,23 @@ public class ApplyStatusEffect extends ContinuousEffectImpl {
                 }
                 if (permanent.isSuspected()) {
                     permanent.addAbility(new MenaceAbility(false), source == null ? permanent.getId() : source.getSourceId(), game);
+                }
+            }
+        }
+        if (layer == Layer.PTChangingEffects_7 && sublayer == SubLayer.ModifyPT_7c) {
+            for (Permanent equipment : game.getBattlefield().getAllActivePermanents()) {
+                if (!equipment.hasSubtype(SubType.EQUIPMENT, game)) {
+                    continue;
+                }
+
+                int honeCounters = equipment.getCounters(game).getCount(CounterType.HONE);
+                if (honeCounters <= 0) {
+                    continue;
+                }
+
+                Permanent equippedCreature = game.getPermanent(equipment.getAttachedTo());
+                if (equippedCreature != null && equippedCreature.isCreature(game)) {
+                    equippedCreature.addPower(honeCounters);
                 }
             }
         }

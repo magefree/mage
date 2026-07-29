@@ -32,7 +32,8 @@ public final class TVABureaucrat extends CardImpl {
             new BoostSourceEffect(1, 0, Duration.EndOfTurn),
             StaticFilters.FILTER_SPELL_A_NON_CREATURE, false
         );
-        ability.addEffect(new CantBeBlockedSourceEffect(Duration.EndOfTurn).concatBy("and"));
+        ability.addEffect(new CantBeBlockedSourceEffect(Duration.EndOfTurn)
+            .setText("and can't be blocked this turn"));
         this.addAbility(ability);
     }
 

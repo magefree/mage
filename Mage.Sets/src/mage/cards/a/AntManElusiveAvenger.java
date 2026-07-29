@@ -1,14 +1,16 @@
 package mage.cards.a;
 
-import java.util.Optional;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
-import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -17,10 +19,9 @@ import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
+
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +49,7 @@ public final class AntManElusiveAvenger extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
 
         // Whenever Ant-Man deals combat damage to a player, create that many Treasure tokens.
-        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
             new CreateTokenEffect(new TreasureToken(), SavedDamageValue.MANY), false
         ));
     }

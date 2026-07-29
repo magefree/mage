@@ -3035,6 +3035,7 @@ public class ScryfallImageSupportTokens {
 
             // HOB
             put("HOB/Dwarf", "https://api.scryfall.com/cards/thob/6?format=image");
+            put("HOB/Goblin Army", "https://api.scryfall.com/cards/thob/4/en?format=image");
             put("HOB/Treasure", "https://api.scryfall.com/cards/thob/12?format=image");
 
             // UGL

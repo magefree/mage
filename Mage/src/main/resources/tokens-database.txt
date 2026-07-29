@@ -161,6 +161,7 @@
 |EMBLEM:EOE|Emblem Tezzeret||TezzeretCruelCaptainEmblem|
 |EMBLEM:ECL|Emblem Oko||OkoShadowmoorScionEmblem|
 |EMBLEM:SOS|Emblem Dellian||ProfessorDellianFelEmblem|
+|EMBLEM:FRA|Emblem Ajani||AjaniResoluteEmblem|
 |EMBLEM:FRA|Emblem Chandra||ChandraChillOfComplianceEmblem|
 
 
@@ -3070,6 +3071,7 @@
 
 # HOB
 |TOK:HOB|Dwarf||Dwarf22Token|
+|TOK:HOB|Goblin Army||GoblinArmyToken|
 |TOK:HOB|Treasure||TreasureToken|
 
 # JVC
