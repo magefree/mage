@@ -7,10 +7,9 @@ import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
 import mage.abilities.mana.ManaOptions;
-import mage.cards.Card;
 import mage.constants.*;
+import mage.game.ControllableOrOwnerable;
 import mage.game.Game;
-import mage.game.command.CommandObject;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -19,10 +18,16 @@ import mage.util.CardUtil;
 import java.util.Set;
 import java.util.UUID;
 
+import org.apache.log4j.Logger;
+
+import com.google.common.base.Objects;
+
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class ActivatedAbilityImpl extends AbilityImpl implements ActivatedAbility {
+
+    private static final Logger logger = Logger.getLogger(ActivatedAbilityImpl.class);
 
     protected static class ActivationInfo {
 
@@ -73,7 +78,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
             case ACTIVE:
                 return game.getActivePlayerId() == playerId;
             case NOT_YOU:
-                return !controlsAbility(playerId, game);
+                return !isControlledByPlayer(playerId, game);
             case TEAM:
                 return !game.getPlayer(controllerId).hasOpponent(playerId, game);
             case OPPONENT:
@@ -82,7 +87,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
                 Permanent permanent = game.getPermanent(getSourceId());
                 return permanent != null && permanent.isOwnedBy(playerId);
             case YOU:
-                return controlsAbility(playerId, game);
+                return isControlledByPlayer(playerId, game);
             case CONTROLLER_ATTACHED_TO:
                 Permanent enchantment = game.getPermanent(getSourceId());
                 if (enchantment == null || enchantment.getAttachedTo() == null) {
@@ -161,16 +166,19 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         return getManaCostsToPay().getOptions(player.canPayLifeCost(this));
     }
 
-    protected boolean controlsAbility(UUID playerId, Game game) {
+    protected boolean isControlledByPlayer(UUID playerId, Game game) {
+        // normal abilities
         if (this.controllerId != null && this.controllerId.equals(playerId)) {
             return true;
         }
+
+        // global abilities like emblems or commanders
         MageObject mageObject = game.getObject(this.sourceId);
-        if (mageObject instanceof CommandObject) {
-            return ((CommandObject) mageObject).isControlledBy(playerId);
-        } else if (game.getState().getZone(this.sourceId) != Zone.BATTLEFIELD) {
-            return ((Card) mageObject).isOwnedBy(playerId);
+        if (mageObject instanceof ControllableOrOwnerable) {
+            return Objects.equal(((ControllableOrOwnerable) mageObject).getControllerOrOwnerId(), playerId);
         }
+
+        // something else (it's not normal like ability without sourceId fallback here?)
         return false;
     }
 

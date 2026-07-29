@@ -50,7 +50,7 @@ public final class AntManColonyCommander extends CardImpl {
         // Whenever you put a +1/+1 counter on a creature, create a 1/1 green Insect creature token. This ability triggers only once each turn.
         Ability ability2 = new PutCounterOnPermanentTriggeredAbility(
             new CreateTokenEffect(new InsectToken()), CounterType.P1P1, StaticFilters.FILTER_PERMANENT_A_CREATURE
-        ).setTriggersLimitEachTurn(1);
+        ).setTriggersLimitEachTurn(1).setTriggerPhrase("Whenever you put a +1/+1 counter on a creature, ");
         this.addAbility(ability2);
     }
 

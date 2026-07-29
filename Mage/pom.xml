@@ -36,17 +36,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-
-            <plugin>
                 <groupId>com.github.os72</groupId>
                 <artifactId>protoc-jar-maven-plugin</artifactId>
                 <version>3.11.4</version>
@@ -95,8 +84,6 @@
                 </executions>
             </plugin>
         </plugins>
-
-        <finalName>mage</finalName>
     </build>
 
     <!-- The properties below are added by following http://vlkan.com/blog/post/2015/11/27/maven-protobuf/ -->

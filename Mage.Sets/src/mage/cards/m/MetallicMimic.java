@@ -39,7 +39,7 @@ public final class MetallicMimic extends CardImpl {
         this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(new AddChosenSubtypeEffect()));
 
-        // Each other creature you control of the chosen type enters the battlefield with an additional +1/+1 counter on it.
+        // Each other creature you control of the chosen type enters with an additional +1/+1 counter on it.
         this.addAbility(new SimpleStaticAbility(new MetallicMimicReplacementEffect()));
 
     }
@@ -59,7 +59,7 @@ class MetallicMimicReplacementEffect extends ReplacementEffectImpl {
 
     MetallicMimicReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-        staticText = "Each other creature you control of the chosen type enters the battlefield with an additional +1/+1 counter on it";
+        staticText = "Each other creature you control of the chosen type enters with an additional +1/+1 counter on it";
         setCharacterDefining(true);
     }
 

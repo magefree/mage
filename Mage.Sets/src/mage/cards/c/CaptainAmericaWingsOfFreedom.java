@@ -42,7 +42,7 @@ public final class CaptainAmericaWingsOfFreedom extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Ward {1}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}"), false));
 
         // Whenever Captain America attacks, each other Hero you control gets +X/+X until end of turn, where X is Captain America's toughness.
         this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(

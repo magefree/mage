@@ -1,18 +1,19 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.VillainToken;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +42,7 @@ public final class CrimsonCowlMasterOfEvil extends CardImpl {
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(
             new CreateTokenEffect(new VillainToken()),
             1, filter
-        ).setTriggerPhrase("Whenever one more nontoken Villains you control attack a player, "));
+        ).setTriggerPhrase("Whenever one or more nontoken Villains you control attack a player, "));
     }
 
     private CrimsonCowlMasterOfEvil(final CrimsonCowlMasterOfEvil card) {

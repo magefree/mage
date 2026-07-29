@@ -37,7 +37,7 @@ public final class SecureDetention extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SoldierToken())));
 
         // Enchanted permanent can't attack or block, and its activated abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(new CantBlockAttackActivateAttachedEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBlockAttackActivateAttachedEffect("permanent")));
     }
 
     private SecureDetention(final SecureDetention card) {

@@ -28,7 +28,7 @@ public final class RestorativeTechnique extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(2));
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayTargetPlayerEffect(
             new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true
-        ).setText("then searches their library for a basic land card, puts it onto the battlefield tapped, then shuffles"));
+        ).setText(", then searches their library for a basic land card, puts it onto the battlefield tapped, then shuffles"));
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance())
             .setTargetPointer(new SecondTargetPointer()));
