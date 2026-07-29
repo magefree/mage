@@ -995,10 +995,11 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public void addWatcher(Watcher watcher) {
+    public Ability addWatcher(Watcher watcher) {
         watcher.setSourceId(this.sourceId);
         watcher.setControllerId(this.controllerId);
         getWatchers().add(watcher);
+        return this;
     }
 
     @Override

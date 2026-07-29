@@ -28,7 +28,7 @@ import mage.game.Game;
  */
 public final class AvengersTower extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard(SubType.HERO, "Hero");
+    private static final FilterCard filter = new FilterCard(SubType.HERO, "Hero card");
 
     public AvengersTower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
@@ -42,7 +42,7 @@ public final class AvengersTower extends CardImpl {
         ));
 
         // {4}, {T}: Look at the top three cards of your library. You may reveal a Hero card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
-        Ability ability =new SimpleActivatedAbility(new LookLibraryAndPickControllerEffect(
+        Ability ability = new SimpleActivatedAbility(new LookLibraryAndPickControllerEffect(
             3, 1, filter, PutCards.HAND, PutCards.BOTTOM_ANY
         ), new ManaCostsImpl<>("{4}"));
         ability.addCost(new TapSourceCost());
@@ -68,7 +68,7 @@ class AvengersTowerManaBuilder extends ConditionalManaBuilder {
 
     @Override
     public String getRule() {
-        return "Spend this mana only to cast a Hero spell or activate an ability of a Hero source";
+        return "Spend this mana only to cast a Hero spell or to activate an ability of a Hero source";
     }
 }
 

@@ -36,7 +36,8 @@ public final class MachineManModelX51 extends CardImpl {
             new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
             StaticFilters.FILTER_SPELL_A_NON_CREATURE, false
         );
-        ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn).concatBy("and"));
+        ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn)
+            .setText("and he gains flying until end of turn"));
         this.addAbility(ability);
     }
 

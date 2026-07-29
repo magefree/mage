@@ -3071,6 +3071,7 @@
 
 # HOB
 |TOK:HOB|Dwarf||Dwarf22Token|
+|TOK:HOB|Goblin Army||GoblinArmyToken|
 |TOK:HOB|Treasure||TreasureToken|
 
 # JVC

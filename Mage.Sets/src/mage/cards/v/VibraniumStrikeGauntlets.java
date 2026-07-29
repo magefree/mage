@@ -47,7 +47,7 @@ public final class VibraniumStrikeGauntlets extends CardImpl {
         this.addAbility(ability);
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private VibraniumStrikeGauntlets(final VibraniumStrikeGauntlets card) {

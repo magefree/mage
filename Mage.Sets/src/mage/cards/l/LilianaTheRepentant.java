@@ -30,7 +30,7 @@ import mage.constants.CardType;
 public final class LilianaTheRepentant extends CardImpl {
 
     private static final FilterPermanent filter
-        = new FilterCreatureOrPlaneswalkerPermanent("another creature or planeswalker you control");
+        = new FilterCreatureOrPlaneswalkerPermanent("another creature or planeswalker");
     private static final FilterCard filterCard
         = new FilterCard("creature or planeswalker card from your graveyard");
 

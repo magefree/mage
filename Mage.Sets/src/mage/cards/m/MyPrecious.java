@@ -40,7 +40,7 @@ public final class MyPrecious extends AdventureCard {
         this.addAbility(ability);
 
         // Equip - {2}, Pay 2 life.
-        ability = new EquipAbility(2);
+        ability = new EquipAbility(2, false);
         ability.addCost(new PayLifeCost(2));
         this.addAbility(ability);
 

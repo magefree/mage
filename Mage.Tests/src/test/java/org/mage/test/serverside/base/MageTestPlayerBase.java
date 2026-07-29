@@ -23,22 +23,20 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.PutToBattlefieldInfo;
 import mage.game.match.Match;
-import mage.game.match.MatchType;
-import mage.game.tournament.TournamentType;
 import mage.players.Player;
 import mage.server.game.GameFactory;
 import mage.server.managers.ConfigSettings;
 import mage.server.util.ConfigFactory;
 import mage.server.util.ConfigWrapper;
-import mage.server.util.PluginClassLoader;
+import mage.server.util.PluginUtil;
 import mage.server.util.config.GamePlugin;
-import mage.server.util.config.Plugin;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.Copier;
+import mage.util.DebugUtil;
 import mage.utils.SystemUtil;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -59,10 +57,6 @@ import java.util.*;
 public abstract class MageTestPlayerBase {
 
     protected static Logger logger = Logger.getLogger(MageTestPlayerBase.class);
-
-    public static PluginClassLoader classLoader = new PluginClassLoader();
-
-    private static final String pluginFolder = "plugins";
 
     protected Map<TestPlayer, List<Card>> handCards = new HashMap<>();
     protected Map<TestPlayer, List<PutToBattlefieldInfo>> battlefieldCards = new HashMap<>(); // cards + additional status like tapped
@@ -101,7 +95,7 @@ public abstract class MageTestPlayerBase {
     public static void init() {
         Logger.getRootLogger().setLevel(Level.DEBUG);
         logger.debug("Starting MAGE tests");
-        logger.debug("Logging level: " + logger.getLevel());
+        DebugUtil.printLogsInfo(logger);
         logger.debug("Default charset: " + Charset.defaultCharset());
 
         // one time init for all tests
@@ -109,48 +103,10 @@ public abstract class MageTestPlayerBase {
             deleteSavedGames();
             ConfigSettings config = new ConfigWrapper(ConfigFactory.loadFromFile("config/config.xml"));
             for (GamePlugin plugin : config.getGameTypes()) {
-                GameFactory.instance.addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
+                GameFactory.instance.addGameType(plugin.getName(), PluginUtil.loadGameType(plugin), PluginUtil.loadPlugin(plugin, plugin.getClassName()));
             }
-            Copier.setLoader(classLoader);
+            Copier.setLoader(PluginUtil.classLoader);
         }
-    }
-
-    private static Class<?> loadPlugin(Plugin plugin) {
-        try {
-            classLoader.addURL(new File(pluginFolder + '/' + plugin.getJar()).toURI().toURL());
-            logger.debug("Loading plugin: " + plugin.getClassName());
-            return Class.forName(plugin.getClassName(), true, classLoader);
-        } catch (ClassNotFoundException ex) {
-            logger.warn("Plugin not Found:" + plugin.getJar() + " - check plugin folder");
-        } catch (Exception ex) {
-            logger.fatal("Error loading plugin " + plugin.getJar(), ex);
-        }
-        return null;
-    }
-
-    private static MatchType loadGameType(GamePlugin plugin) {
-        try {
-            classLoader.addURL(new File(pluginFolder + '/' + plugin.getJar()).toURI().toURL());
-            logger.debug("Loading game type: " + plugin.getClassName());
-            return (MatchType) Class.forName(plugin.getTypeName(), true, classLoader).getConstructor().newInstance();
-        } catch (ClassNotFoundException ex) {
-            logger.warn("Game type not found:" + plugin.getJar() + " - check plugin folder");
-        } catch (Exception ex) {
-            logger.fatal("Error loading game type " + plugin.getJar(), ex);
-        }
-        return null;
-    }
-
-    private static TournamentType loadTournamentType(GamePlugin plugin) {
-        try {
-            classLoader.addURL(new File(pluginFolder + '/' + plugin.getJar()).toURI().toURL());
-            return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).getConstructor().newInstance();
-        } catch (ClassNotFoundException ex) {
-            logger.warn("Tournament type not found:" + plugin.getJar() + " - check plugin folder");
-        } catch (Exception ex) {
-            logger.fatal("Error loading game type " + plugin.getJar(), ex);
-        }
-        return null;
     }
 
     private static void deleteSavedGames() {
