@@ -81,6 +81,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Thorin, Mountain-king", 279, Rarity.MYTHIC, mage.cards.t.ThorinMountainKing.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Tom, Bert, and William", 169, Rarity.RARE, mage.cards.t.TomBertAndWilliam.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tom, Bert, and William", 312, Rarity.RARE, mage.cards.t.TomBertAndWilliam.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wilderland Scrounger", 141, Rarity.UNCOMMON, mage.cards.w.WilderlandScrounger.class));
         cards.add(new SetCardInfo("Wood Elves", 142, Rarity.COMMON, mage.cards.w.WoodElves.class));
     }
 }
