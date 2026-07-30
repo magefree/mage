@@ -48,6 +48,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("My Precious", 176, Rarity.RARE, mage.cards.m.MyPrecious.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("My Precious", 235, Rarity.RARE, mage.cards.m.MyPrecious.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("My Precious", 271, Rarity.RARE, mage.cards.m.MyPrecious.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ordinary Bear", 133, Rarity.COMMON, mage.cards.o.OrdinaryBear.class));
         cards.add(new SetCardInfo("Plains", 194, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 313, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 314, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_USE_VARIOUS));
