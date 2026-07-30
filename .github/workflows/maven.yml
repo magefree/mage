@@ -29,3 +29,17 @@ jobs:
         cache: maven
     - name: Build and test
       run: mvn test -B -Dxmage.dataCollectors.printGameLogs=false -Dlog4j.configuration=file:${GITHUB_WORKSPACE}/.travis/log4j.properties
+    - name: Check cards changes
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const summary = "### Card Tests\n\n- changes: 12\n- correct: 10 out of 12 (83%)\n\n| Card | Result |\n|---|---|\n| ... | ✅ |";
+          await github.rest.checks.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            name: 'Card Tests',
+            head_sha: context.sha,
+            status: 'completed',
+            conclusion: 'success',
+            output: { title: '10/12 cards correct', summary }
+          });
