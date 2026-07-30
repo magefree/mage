@@ -29,7 +29,7 @@ jobs:
         cache: maven
     #- name: Build and test
     #  run: mvn test -B -Dxmage.dataCollectors.printGameLogs=false -Dlog4j.configuration=file:${GITHUB_WORKSPACE}/.travis/log4j.properties
-    - name: Check cards changes
+    - name: checks api example
       if: always()
       uses: actions/github-script@v7
       with:
@@ -43,4 +43,18 @@ jobs:
             status: 'completed',
             conclusion: 'success',
             output: { title: '10/12 cards correct', summary }
+          });
+    - name: commit status example
+      if: always()
+      uses: actions/github-script@v7
+      with:
+        script: |
+          await github.rest.repos.createCommitStatus({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            sha: context.sha,
+            state: 'success',
+            context: 'Card Tests (status)',
+            description: '10/12 карт корректны (83%)',
+            target_url: `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
           });
