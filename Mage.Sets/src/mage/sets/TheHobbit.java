@@ -26,6 +26,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("An Unexpected Party", 289, Rarity.RARE, mage.cards.a.AnUnexpectedParty.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bard's Company", 146, Rarity.RARE, mage.cards.b.BardsCompany.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bard's Company", 210, Rarity.RARE, mage.cards.b.BardsCompany.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bilbo Baggins, Burglar", 34, Rarity.COMMON, mage.cards.b.BilboBagginsBurglar.class));
         cards.add(new SetCardInfo("Bilbo, Luckwearer", 32, Rarity.UNCOMMON, mage.cards.b.BilboLuckwearer.class));
         cards.add(new SetCardInfo("Bilbo, Thief in the Night", 219, Rarity.MYTHIC, mage.cards.b.BilboThiefInTheNight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bilbo, Thief in the Night", 255, Rarity.MYTHIC, mage.cards.b.BilboThiefInTheNight.class, NON_FULL_USE_VARIOUS));
