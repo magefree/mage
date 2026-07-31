@@ -45,6 +45,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Great Gilded Boat", 42, Rarity.RARE, mage.cards.g.GreatGildedBoat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 195, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART));
         cards.add(new SetCardInfo("Large Bear", 159, Rarity.UNCOMMON, mage.cards.l.LargeBear.class));
+        cards.add(new SetCardInfo("Mirkwood", 188, Rarity.COMMON, mage.cards.m.Mirkwood.class));
         cards.add(new SetCardInfo("Mirkwood Pathmaker", 129, Rarity.UNCOMMON, mage.cards.m.MirkwoodPathmaker.class));
         cards.add(new SetCardInfo("Misty Mountains Raider", 105, Rarity.UNCOMMON, mage.cards.m.MistyMountainsRaider.class));
         cards.add(new SetCardInfo("Mountain", 197, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART));
