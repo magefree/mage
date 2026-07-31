@@ -44,6 +44,9 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Gigantic Big Bear", 307, Rarity.RARE, mage.cards.g.GiganticBigBear.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Great Gilded Boat", 291, Rarity.RARE, mage.cards.g.GreatGildedBoat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Great Gilded Boat", 42, Rarity.RARE, mage.cards.g.GreatGildedBoat.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Iron Hills Blacksmith", 16, Rarity.UNCOMMON, mage.cards.i.IronHillsBlacksmith.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Iron Hills Blacksmith", 216, Rarity.UNCOMMON, mage.cards.i.IronHillsBlacksmith.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Iron Hills Blacksmith", 252, Rarity.UNCOMMON, mage.cards.i.IronHillsBlacksmith.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 190, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 195, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Large Bear", 159, Rarity.UNCOMMON, mage.cards.l.LargeBear.class));
