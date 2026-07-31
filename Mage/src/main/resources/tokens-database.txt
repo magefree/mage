@@ -3070,9 +3070,20 @@
 |TOK:MSC|Wall|2|WallColorlessReachToken|
 
 # HOB
+|TOK:HOB|Axe||AxeToken|
+|TOK:HOB|Bear||BearToken|
+|TOK:HOB|Bird Soldier||BirdSoldierToken|
+|TOK:HOB|Human Soldier||HumanSoldierToken|
+|TOK:HOB|Dragon||UtvaraHellkiteDragonToken|
 |TOK:HOB|Dwarf||Dwarf22Token|
-|TOK:HOB|Goblin Army||GoblinArmyToken|
-|TOK:HOB|Treasure||TreasureToken|
+|TOK:HOB|Elf||GreenElfToken|
+|TOK:HOB|Goblin Army|1|GoblinArmyToken|
+|TOK:HOB|Goblin Army|2|GoblinArmyToken|
+|TOK:HOB|Stone Boulder|1|StoneBoulderToken|
+|TOK:HOB|Treasure|1|TreasureToken|
+|TOK:HOB|Treasure|2|TreasureToken|
+|TOK:HOB|Wolf||WolfToken|
+
 
 # JVC
 |TOK:JVC|Elemental Shaman||ElementalShamanToken|
