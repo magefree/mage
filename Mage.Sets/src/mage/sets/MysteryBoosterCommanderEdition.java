@@ -20,6 +20,7 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
         super("Mystery Booster: Commander Edition", "MBC", ExpansionSet.buildDate(2027, 10, 1), SetType.SUPPLEMENTAL);
         this.blockName = "Mystery Booster Commander Edition";
 
+        this.hasBasicLands = false; // TODO: Confirm once more information is released about the set
         // this.enableSetBooster(Integer.MAX_VALUE);
 
         cards.add(new SetCardInfo("Joven and Chandler", 24, Rarity.RARE, mage.cards.j.JovenAndChandler.class));
