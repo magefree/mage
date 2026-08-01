@@ -22,6 +22,8 @@ public final class TheHobbit extends ExpansionSet {
 
         this.enablePlayBooster(198);
 
+        cards.add(new SetCardInfo("Along the Crooked Way", 295, Rarity.RARE, mage.cards.a.AlongTheCrookedWay.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Along the Crooked Way", 60, Rarity.RARE, mage.cards.a.AlongTheCrookedWay.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("An Unexpected Party", 29, Rarity.RARE, mage.cards.a.AnUnexpectedParty.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("An Unexpected Party", 289, Rarity.RARE, mage.cards.a.AnUnexpectedParty.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Attercop", 116, Rarity.COMMON, mage.cards.a.Attercop.class));
