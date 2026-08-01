@@ -29,7 +29,8 @@ public final class DragonCursedHalls extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {1}, {T}: Until end of turn, target creature gains "Whenever this creature deals combat damage to a player, create a Treasure token."
-        Ability gainedAbility = new DealsCombatDamageToAPlayerTriggeredAbility(new CreateTokenEffect(new TreasureToken()));
+        Ability gainedAbility = new DealsCombatDamageToAPlayerTriggeredAbility(new CreateTokenEffect(new TreasureToken()))
+            .setTriggerPhrase("Whenever this creature deals combat damage to a player, ");
         Ability ability = new SimpleActivatedAbility(
             new GainAbilityTargetEffect(gainedAbility)
                 .setText("Until end of turn, target creature gains \"" + gainedAbility.getRule() + "\""),
