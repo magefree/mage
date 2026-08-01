@@ -50,6 +50,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Fateful Discovery", 256, Rarity.MYTHIC, mage.cards.f.FatefulDiscovery.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fateful Discovery", 40, Rarity.MYTHIC, mage.cards.f.FatefulDiscovery.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fearsome Goblin Pair", 156, Rarity.UNCOMMON, mage.cards.f.FearsomeGoblinPair.class));
+        cards.add(new SetCardInfo("Fili the Pathfinder", 14, Rarity.RARE, mage.cards.f.FiliThePathfinder.class));
         cards.add(new SetCardInfo("Forest", 193, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 198, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Gathering of Darkness", 68, Rarity.UNCOMMON, mage.cards.g.GatheringOfDarkness.class));
