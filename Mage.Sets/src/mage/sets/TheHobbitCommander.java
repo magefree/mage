@@ -35,6 +35,7 @@ public final class TheHobbitCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bag End Banquet", 5, Rarity.RARE, mage.cards.b.BagEndBanquet.class));
         cards.add(new SetCardInfo("Banishing Light", 161, Rarity.UNCOMMON, mage.cards.b.BanishingLight.class));
         cards.add(new SetCardInfo("Battle-Scarred Goblin", 192, Rarity.COMMON, mage.cards.b.BattleScarredGoblin.class));
+        cards.add(new SetCardInfo("Bilbo's Burglaring", 10, Rarity.RARE, mage.cards.b.BilbosBurglaring.class));
         cards.add(new SetCardInfo("Bilbo's Ring", 41, Rarity.MYTHIC, mage.cards.b.BilbosRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bilbo's Ring", 81, Rarity.MYTHIC, mage.cards.b.BilbosRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bilbo, Fellow Conspirator", 4, Rarity.RARE, mage.cards.b.BilboFellowConspirator.class));
@@ -51,6 +52,8 @@ public final class TheHobbitCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dawn of a New Age", 53, Rarity.MYTHIC, mage.cards.d.DawnOfANewAge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Delighted Halfling", 25, Rarity.MYTHIC, mage.cards.d.DelightedHalfling.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Delighted Halfling", 65, Rarity.MYTHIC, mage.cards.d.DelightedHalfling.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dragon-Cursed Halls", 8, Rarity.RARE, mage.cards.d.DragonCursedHalls.class));
+        cards.add(new SetCardInfo("Dragon's Desire", 11, Rarity.RARE, mage.cards.d.DragonsDesire.class));
         cards.add(new SetCardInfo("Dunedain Blade", 163, Rarity.COMMON, mage.cards.d.DunedainBlade.class));
         cards.add(new SetCardInfo("Dwarven Warriors", 93, Rarity.MYTHIC, mage.cards.d.DwarvenWarriors.class));
         cards.add(new SetCardInfo("Eagles of the North", 164, Rarity.COMMON, mage.cards.e.EaglesOfTheNorth.class));
@@ -74,6 +77,7 @@ public final class TheHobbitCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Galadriel's Dismissal", 56, Rarity.MYTHIC, mage.cards.g.GaladrielsDismissal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Galadriel, Light of Valinor", 32, Rarity.MYTHIC, mage.cards.g.GaladrielLightOfValinor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Galadriel, Light of Valinor", 72, Rarity.MYTHIC, mage.cards.g.GaladrielLightOfValinor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gandalf, Party Guest", 2, Rarity.RARE, mage.cards.g.GandalfPartyGuest.class));
         cards.add(new SetCardInfo("Gift of Strands", 208, Rarity.UNCOMMON, mage.cards.g.GiftOfStrands.class));
         cards.add(new SetCardInfo("Glamdring", 42, Rarity.MYTHIC, mage.cards.g.Glamdring.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glamdring", 82, Rarity.MYTHIC, mage.cards.g.Glamdring.class, NON_FULL_USE_VARIOUS));
@@ -93,6 +97,7 @@ public final class TheHobbitCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Languish", 187, Rarity.RARE, mage.cards.l.Languish.class));
         cards.add(new SetCardInfo("Last March of the Ents", 27, Rarity.MYTHIC, mage.cards.l.LastMarchOfTheEnts.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Last March of the Ents", 67, Rarity.MYTHIC, mage.cards.l.LastMarchOfTheEnts.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Long-Lost Lances", 7, Rarity.RARE, mage.cards.l.LongLostLances.class));
         cards.add(new SetCardInfo("Lorien Revealed", 179, Rarity.COMMON, mage.cards.l.LorienRevealed.class));
         cards.add(new SetCardInfo("Lothlorien Lookout", 209, Rarity.COMMON, mage.cards.l.LothlorienLookout.class));
         cards.add(new SetCardInfo("Lotho, Corrupt Shirriff", 34, Rarity.MYTHIC, mage.cards.l.LothoCorruptShirriff.class, NON_FULL_USE_VARIOUS));
@@ -118,6 +123,7 @@ public final class TheHobbitCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Orcish Bowmasters", 19, Rarity.MYTHIC, mage.cards.o.OrcishBowmasters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Orcish Bowmasters", 59, Rarity.MYTHIC, mage.cards.o.OrcishBowmasters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Orcish Siegemaster", 201, Rarity.RARE, mage.cards.o.OrcishSiegemaster.class));
+        cards.add(new SetCardInfo("Ori, Plate Stacker", 6, Rarity.RARE, mage.cards.o.OriPlateStacker.class));
         cards.add(new SetCardInfo("Palantir of Orthanc", 45, Rarity.MYTHIC, mage.cards.p.PalantirOfOrthanc.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Palantir of Orthanc", 85, Rarity.MYTHIC, mage.cards.p.PalantirOfOrthanc.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pelargir Survivor", 182, Rarity.COMMON, mage.cards.p.PelargirSurvivor.class));
@@ -137,6 +143,7 @@ public final class TheHobbitCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sauron, the Lidless Eye", 37, Rarity.MYTHIC, mage.cards.s.SauronTheLidlessEye.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sauron, the Lidless Eye", 77, Rarity.MYTHIC, mage.cards.s.SauronTheLidlessEye.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shadow of the Enemy", 190, Rarity.MYTHIC, mage.cards.s.ShadowOfTheEnemy.class));
+        cards.add(new SetCardInfo("Smaug the Impenetrable", 9, Rarity.RARE, mage.cards.s.SmaugTheImpenetrable.class));
         cards.add(new SetCardInfo("Smite the Deathless", 202, Rarity.COMMON, mage.cards.s.SmiteTheDeathless.class));
         cards.add(new SetCardInfo("Soldier of the Grey Host", 171, Rarity.COMMON, mage.cards.s.SoldierOfTheGreyHost.class));
         cards.add(new SetCardInfo("Stern Scolding", 183, Rarity.UNCOMMON, mage.cards.s.SternScolding.class));
@@ -149,6 +156,7 @@ public final class TheHobbitCommander extends ExpansionSet {
         cards.add(new SetCardInfo("The Reaver Cleaver", 94, Rarity.MYTHIC, mage.cards.t.TheReaverCleaver.class));
         cards.add(new SetCardInfo("The Shire", 52, Rarity.MYTHIC, mage.cards.t.TheShire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Shire", 92, Rarity.MYTHIC, mage.cards.t.TheShire.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thorin, King of Durin's Folk", 3, Rarity.RARE, mage.cards.t.ThorinKingOfDurinsFolk.class));
         cards.add(new SetCardInfo("Tom Bombadil", 38, Rarity.MYTHIC, mage.cards.t.TomBombadil.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tom Bombadil", 78, Rarity.MYTHIC, mage.cards.t.TomBombadil.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Treasure Vault", 97, Rarity.MYTHIC, mage.cards.t.TreasureVault.class));
