@@ -122,6 +122,7 @@ public final class TheHobbitCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Orcish Bowmasters", 19, Rarity.MYTHIC, mage.cards.o.OrcishBowmasters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Orcish Bowmasters", 59, Rarity.MYTHIC, mage.cards.o.OrcishBowmasters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Orcish Siegemaster", 201, Rarity.RARE, mage.cards.o.OrcishSiegemaster.class));
+        cards.add(new SetCardInfo("Ori, Plate Stacker", 6, Rarity.RARE, mage.cards.o.OriPlateStacker.class));
         cards.add(new SetCardInfo("Palantir of Orthanc", 45, Rarity.MYTHIC, mage.cards.p.PalantirOfOrthanc.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Palantir of Orthanc", 85, Rarity.MYTHIC, mage.cards.p.PalantirOfOrthanc.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pelargir Survivor", 182, Rarity.COMMON, mage.cards.p.PelargirSurvivor.class));
