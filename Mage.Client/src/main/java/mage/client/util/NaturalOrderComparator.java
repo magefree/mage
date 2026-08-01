@@ -167,6 +167,7 @@ public class NaturalOrderComparator implements Comparator
 
     public static void main(String[] args)
     {
+        // TODO: single form run is outdated, need to remove
         String[] strings = new String[] { "1-2", "1-02", "1-20", "10-20", "fred", "jane", "pic01",
             "pic2", "pic02", "pic02a", "pic3", "pic4", "pic 4 else", "pic 5", "pic05", "pic 5",
             "pic 5 something", "pic 6", "pic   7", "pic100", "pic100a", "pic120", "pic121",

@@ -9,7 +9,11 @@ import mage.counters.Counter;
 public class EntersBattlefieldWithCountersAbility extends EntersBattlefieldAbility {
 
     public EntersBattlefieldWithCountersAbility(Counter counter) {
-        super(new AddCountersSourceEffect(counter), "with " + counter.getDescription() + " on it");
+        this(counter, "it");
+    }
+
+    public EntersBattlefieldWithCountersAbility(Counter counter, String noun) {
+        super(new AddCountersSourceEffect(counter), "with " + counter.getDescription() + " on " + noun);
     }
 
     private EntersBattlefieldWithCountersAbility(final EntersBattlefieldWithCountersAbility ability) {

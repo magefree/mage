@@ -89,10 +89,13 @@ class NashiMoonSagesScionEffect extends OneShotEffect {
             }
         }
         Set<Card> cardSet = cards.getCards(game);
+        game.getExile().createZone(source.getSourceId(), CardUtil.createObjectRelatedWindowTitle(
+                source, game, null
+        )).setCleanupOnEndTurn(true);
         controller.moveCardsToExile(
                 cardSet, source, game, true,
-                CardUtil.getExileZoneId(game, source),
-                CardUtil.getSourceName(game, source)
+                source.getSourceId(),
+                CardUtil.createObjectRelatedWindowTitle(source, game, null)
         );
         NashiMoonSagesScionWatcher.addCards(source, cardSet, game);
         for (Card card : cardSet) {

@@ -32,7 +32,7 @@ public final class RedGhostIntangibleGenius extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Red Ghost can't be blocked.
         this.addAbility(new SimpleStaticAbility(new CantBeBlockedSourceEffect()));

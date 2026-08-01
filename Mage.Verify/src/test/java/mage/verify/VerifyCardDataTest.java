@@ -421,16 +421,16 @@ public class VerifyCardDataTest {
             for (MtgJsonCard refCard : refSet.cards) {
                 String cleanNumber = refCard.number.replaceAll("[\\D]", "");
                 if (cleanNumber.isEmpty()) {
-                    System.out.println("Found non-digit card number: " 
-                        + refSet.code + " - " 
-                        + refCard.getNameAsASCII() + " - " 
+                    System.out.println("Found non-digit card number: "
+                        + refSet.code + " - "
+                        + refCard.getNameAsASCII() + " - "
                         + refCard.number
                     );
                 }
                 if (cleanNumber.equals("0")) {
-                    System.out.println("Found zero card number: " 
-                        + refSet.code + " - " 
-                        + refCard.getNameAsASCII() + " - " 
+                    System.out.println("Found zero card number: "
+                        + refSet.code + " - "
+                        + refCard.getNameAsASCII() + " - "
                         + refCard.number
                     );
                 }
@@ -1021,6 +1021,8 @@ public class VerifyCardDataTest {
         ignoreBoosterSets.add("Zendikar Rising Expeditions"); // box toppers
         ignoreBoosterSets.add("March of the Machine: The Aftermath"); // epilogue boosters aren't for draft
         ignoreBoosterSets.add("Mystery Booster"); // temporary
+        // TEMPORARY: Pending MTGJson updates
+        ignoreBoosterSets.add("The Hobbit");
     }
 
     @Test
@@ -1972,7 +1974,7 @@ public class VerifyCardDataTest {
 
     // "copy" fails means that the copy constructor are not correct inside a card.
     // To fix those, try to find the class that did trigger the copy failure, and check
-    // that copy() exists, a copy constructor exists, and the copy constructor is right. 
+    // that copy() exists, a copy constructor exists, and the copy constructor is right.
     private void checkCardCanBeCopied(Card card1) {
         Card card2;
         try {
@@ -3575,7 +3577,7 @@ public class VerifyCardDataTest {
                 if (jsonCard.isUseUnicodeName()) {
                     String inName = jsonCard.getNameAsUnicode();
                     String outName = CardNameUtil.normalizeCardName(inName);
-                    String needOutName = jsonCard.getNameAsFace();
+                    String needOutName = jsonCard.getNameAsASCII();
                     if (!outName.equals(needOutName)) {
                         // how-to fix: add new unicode symbol in CardNameUtil.normalizeCardName
                         errorsList.add(String.format("error, found unsupported unicode symbol in %s - %s", inName, jsonSet.code));
