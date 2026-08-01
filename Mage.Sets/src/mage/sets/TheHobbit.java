@@ -43,6 +43,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Desolation of Smaug", 93, Rarity.RARE, mage.cards.d.DesolationOfSmaug.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dori, Bearer of Friends", 94, Rarity.COMMON, mage.cards.d.DoriBearerOfFriends.class));
         cards.add(new SetCardInfo("Duskwatch Hunter", 153, Rarity.COMMON, mage.cards.d.DuskwatchHunter.class));
+        cards.add(new SetCardInfo("Dwalin, Weaponmaster", 154, Rarity.RARE, mage.cards.d.DwalinWeaponmaster.class));
         cards.add(new SetCardInfo("Dwarven Mauler", 95, Rarity.UNCOMMON, mage.cards.d.DwarvenMauler.class));
         cards.add(new SetCardInfo("Dwarven Mattock", 172, Rarity.UNCOMMON, mage.cards.d.DwarvenMattock.class));
         cards.add(new SetCardInfo("Elvenking's Halls", 182, Rarity.COMMON, mage.cards.e.ElvenkingsHalls.class));
