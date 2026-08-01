@@ -17,13 +17,13 @@ public enum CitysBlessingHint implements Hint {
 
     @Override
     public String getText(Game game, Ability ability) {
-        Player controller = game.getPlayer(ability.getControllerId());
         boolean hasCitysBlessing = CitysBlessingCondition.instance.apply(game, ability);
         if (hasCitysBlessing) {
             return HintUtils.prepareText("You have the city's blessing", null, HintUtils.HINT_ICON_GOOD);
         }
 
-        int count = controller == null ? 0 : game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT, controller.getId(), game);
+        Player controller = game.getPlayer(ability.getControllerId());
+        int count = controller == null ? 0 : game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT, ability.getControllerId(), game);
         return HintUtils.prepareText(
                 "You don't have the city's blessing (controlled permanents: " + count + " of 10)",
                 null, HintUtils.HINT_ICON_BAD
