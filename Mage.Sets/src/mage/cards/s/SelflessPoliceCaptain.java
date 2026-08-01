@@ -2,8 +2,8 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldWithCountersAbility;
+import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.PutSourceCountersOnTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,7 +31,7 @@ public final class SelflessPoliceCaptain extends CardImpl {
         this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.P1P1.createInstance()));
 
         // When this creature leaves the battlefield, put its +1/+1 counters on target creature you control.
-        Ability ability = new DiesSourceTriggeredAbility(new PutSourceCountersOnTargetEffect(CounterType.P1P1));
+        Ability ability = new LeavesBattlefieldTriggeredAbility(new PutSourceCountersOnTargetEffect(CounterType.P1P1));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

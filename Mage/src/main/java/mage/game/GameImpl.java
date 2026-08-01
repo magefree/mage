@@ -56,6 +56,7 @@ import mage.game.mulligan.Mulligan;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
 import mage.game.stack.SpellStack;
 import mage.game.stack.StackAbility;
@@ -710,20 +711,36 @@ public abstract class GameImpl implements Game {
         return state.getStack().getSpell(spellId);
     }
 
+    @Override
+    public Spell getSpellOrLKIStack(MageObject object) {
+        if (object instanceof PermanentToken && object.getCopyFrom() != null) {
+            // copied card generate tokens on battlefield so lookup to 
+            // original spell ability, not token's (see Baron Helmut Zemo and test_Boast_CastWithEtb)
+            // main logic: copied card -> spell on stack -> resolve to token -> lookup
+            return getSpellOrLKIStack(object.getCopyFrom().getId());
+        } else {
+            return getSpellOrLKIStack(object.getId());
+        }
+    }
+
     /**
      * Given the UUID of a spell, this method returns the spell object. If the current game
      * state does not contain a spell with the given UUID, this method checks the last known
-     * information on the stack to look for the spell.
+     * information on the stack to look for the spell (it's search it by direct uuid or by 
+     * source object)
      *
-     * @param spellId - The UUID of a spell to retrieve from the current game state
-     * @return - The spell object with the given UUID, or null if no spell with the given UUID
+     * @param spellOrSourceId - The UUID of the actual spell or object id like permanent
+     * @return - The spell that was used to cast source object or null on non-cast
      * is found
      */
     @Override
-    public Spell getSpellOrLKIStack(UUID spellId) {
-        Spell spell = state.getStack().getSpell(spellId);
+    public Spell getSpellOrLKIStack(UUID spellOrSourceId) {
+        // by spell
+        Spell spell = getSpell(spellOrSourceId);
+
         if (spell == null) {
-            MageObject obj = this.getLastKnownInformation(spellId, Zone.STACK);
+            // by source id
+            MageObject obj = this.getLastKnownInformation(spellOrSourceId, Zone.STACK);
             // Copied activated abilities may also be retrieved from the stack here.
             // This check that obj is instanceof Spell is necessary to avoid throwing
             // a ClassCastException, as a StackAbility cannot be cast to Spell. See
@@ -3422,6 +3439,7 @@ public abstract class GameImpl implements Game {
         }
         // Then, if that player controlled any objects on the stack not represented by cards, those objects cease to exist.
         this.getState().getContinuousEffects().removeInactiveEffects(this);
+        // TODO: need copy tests, see #12911
         getStack().removeIf(object -> object.isControlledBy(playerId));
         // Then, if there are any objects still controlled by that player, those objects are exiled.
         applyEffects(); // to remove control from effects removed meanwhile

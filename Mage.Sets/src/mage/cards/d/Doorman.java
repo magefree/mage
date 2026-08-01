@@ -45,7 +45,7 @@ public final class Doorman extends CardImpl {
         // {T}: Until end of turn, target creature can't be blocked by creatures with power 2 or less and/or Walls.
         Ability ability = new SimpleActivatedAbility(
             new CantBeBlockedByAllTargetEffect(filter, Duration.EndOfTurn)
-                .setText("Until end of turn, target creature can't be blocked by creatures with power 2 or less and/or Walls this turn"),
+                .setText("Until end of turn, target creature can't be blocked by creatures with power 2 or less and/or Walls"),
             new TapSourceCost()
         );
         ability.addTarget(new TargetCreaturePermanent());

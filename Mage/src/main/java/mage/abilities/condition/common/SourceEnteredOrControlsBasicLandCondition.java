@@ -27,6 +27,6 @@ public enum SourceEnteredOrControlsBasicLandCondition implements Condition {
 
     @Override
     public String toString() {
-        return "{this} entered the battlefield this turn or you control a basic land";
+        return "{this} entered this turn or if you control a basic land";
     }
 }
