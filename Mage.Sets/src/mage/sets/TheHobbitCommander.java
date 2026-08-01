@@ -35,6 +35,7 @@ public final class TheHobbitCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bag End Banquet", 5, Rarity.RARE, mage.cards.b.BagEndBanquet.class));
         cards.add(new SetCardInfo("Banishing Light", 161, Rarity.UNCOMMON, mage.cards.b.BanishingLight.class));
         cards.add(new SetCardInfo("Battle-Scarred Goblin", 192, Rarity.COMMON, mage.cards.b.BattleScarredGoblin.class));
+        cards.add(new SetCardInfo("Bilbo's Burglaring", 10, Rarity.RARE, mage.cards.b.BilbosBurglaring.class));
         cards.add(new SetCardInfo("Bilbo's Ring", 41, Rarity.MYTHIC, mage.cards.b.BilbosRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bilbo's Ring", 81, Rarity.MYTHIC, mage.cards.b.BilbosRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bilbo, Fellow Conspirator", 4, Rarity.RARE, mage.cards.b.BilboFellowConspirator.class));
