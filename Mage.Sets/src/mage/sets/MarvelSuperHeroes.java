@@ -240,6 +240,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 283, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 293, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 294, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ms. Marvel, Kamala Khan", 67, Rarity.RARE, mage.cards.m.MsMarvelKamalaKhan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ms. Marvel, Kamala Khan", 361, Rarity.RARE, mage.cards.m.MsMarvelKamalaKhan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Namor the Sub-Mariner", 362, Rarity.MYTHIC, mage.cards.n.NamorTheSubMariner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Namor the Sub-Mariner", 391, Rarity.MYTHIC, mage.cards.n.NamorTheSubMariner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Namor the Sub-Mariner", 69, Rarity.MYTHIC, mage.cards.n.NamorTheSubMariner.class, NON_FULL_USE_VARIOUS));
