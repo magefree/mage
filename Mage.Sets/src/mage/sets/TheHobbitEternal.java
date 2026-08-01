@@ -83,6 +83,7 @@ public final class TheHobbitEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Glamdring", 82, Rarity.MYTHIC, mage.cards.g.Glamdring.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Goblin Cratermaker", 194, Rarity.UNCOMMON, mage.cards.g.GoblinCratermaker.class));
         cards.add(new SetCardInfo("Goblin Fireleaper", 195, Rarity.UNCOMMON, mage.cards.g.GoblinFireleaper.class));
+        cards.add(new SetCardInfo("Great Goblin, Foul-Hearted", 105, Rarity.MYTHIC, mage.cards.g.GreatGoblinFoulHearted.class));
         cards.add(new SetCardInfo("Grey Havens Navigator", 175, Rarity.COMMON, mage.cards.g.GreyHavensNavigator.class));
         cards.add(new SetCardInfo("Grima, Saruman's Footman", 33, Rarity.MYTHIC, mage.cards.g.GrimaSarumansFootman.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grima, Saruman's Footman", 73, Rarity.MYTHIC, mage.cards.g.GrimaSarumansFootman.class, NON_FULL_USE_VARIOUS));
