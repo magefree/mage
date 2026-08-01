@@ -630,6 +630,7 @@ public class ScryfallImageSupportCards {
             add("MSC"); // Marvel Super Heroes Commander
             add("HOB"); // The Hobbit
             add("HOC"); // The Hobbit Eternal
+            add("MBC"); // Mystery Booster: Commander Edition
             add("FRA"); // Reality Fracture
             add("FRC"); // Reality Fracture Commander
             add("TRK"); // Star Trek

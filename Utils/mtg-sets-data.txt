@@ -211,6 +211,7 @@ Mirrodin|MRD|Mirrodin|
 Murders at Karlov Manor|MKM|MurdersAtKarlovManor|
 Murders at Karlov Manor Commander|MKC|MurdersAtKarlovManorCommander|
 Mystery Booster 2|MB2|MysteryBooster2|
+Mystery Booster: Commander Edition|MBC|MysteryBoosterCommanderEdition|
 Ravnica: Clue Edition|CLU|RavnicaClueEdition|
 Nemesis|NEM|Nemesis|
 New Phyrexia|NPH|NewPhyrexia|
