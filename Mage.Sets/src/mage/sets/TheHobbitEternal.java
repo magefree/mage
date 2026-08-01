@@ -7,16 +7,16 @@ import mage.constants.SetType;
 /**
  * @author muz
  */
-public final class TheHobbitCommander extends ExpansionSet {
+public final class TheHobbitEternal extends ExpansionSet {
 
-    private static final TheHobbitCommander instance = new TheHobbitCommander();
+    private static final TheHobbitEternal instance = new TheHobbitEternal();
 
-    public static TheHobbitCommander getInstance() {
+    public static TheHobbitEternal getInstance() {
         return instance;
     }
 
-    private TheHobbitCommander() {
-        super("The Hobbit Commander", "HOC", ExpansionSet.buildDate(2026, 8, 14), SetType.SUPPLEMENTAL);
+    private TheHobbitEternal() {
+        super("The Hobbit Eternal", "HOC", ExpansionSet.buildDate(2026, 8, 14), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Anduril, Flame of the West", 39, Rarity.MYTHIC, mage.cards.a.AndurilFlameOfTheWest.class, NON_FULL_USE_VARIOUS));
