@@ -39,11 +39,11 @@ public final class FalconsWingHarness extends CardImpl {
         ).setText("and has flying"));
         ability.addEffect(new GainAbilityAttachedEffect(
             new WardAbility(new GenericManaCost(1)), AttachmentType.EQUIPMENT
-        ).setText("and has ward {1}"));
+        ).setText("and ward {1}"));
         this.addAbility(ability);
 
         // Equip {2}{U}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{2}{U}"), false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{2}{U}")));
     }
 
     private FalconsWingHarness(final FalconsWingHarness card) {

@@ -46,7 +46,7 @@ public final class CrossbonesMaliciousMercenary extends CardImpl {
         Ability ability = new EntersBattlefieldAllTriggeredAbility(
             new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter
         ).setTriggersLimitEachTurn(1);
-        ability.addEffect(new DamagePlayersEffect(2, TargetController.OPPONENT));
+        ability.addEffect(new DamagePlayersEffect(2, TargetController.OPPONENT, "he"));
         this.addAbility(ability);
     }
 

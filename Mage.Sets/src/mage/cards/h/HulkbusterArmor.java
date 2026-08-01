@@ -48,11 +48,12 @@ public final class HulkbusterArmor extends CardImpl {
         this.addAbility(new EquipAbility(
             Outcome.AddAbility,
             new GenericManaCost(3),
-            new TargetPermanent(filter)
+            new TargetPermanent(filter),
+            false
         ));
 
         // Equip {6}
-        this.addAbility(new EquipAbility(6));
+        this.addAbility(new EquipAbility(6, false));
     }
 
     private HulkbusterArmor(final HulkbusterArmor card) {

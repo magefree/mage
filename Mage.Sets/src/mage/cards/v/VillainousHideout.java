@@ -70,7 +70,7 @@ class VillainousHideoutManaBuilder extends ConditionalManaBuilder {
 
     @Override
     public String getRule() {
-        return "Spend this mana only to cast a Villain spell or activate an ability of a Villain source";
+        return "Spend this mana only to cast a Villain spell or to activate an ability of a Villain source";
     }
 }
 
