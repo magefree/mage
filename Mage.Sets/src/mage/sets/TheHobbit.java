@@ -38,6 +38,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Desolation of Smaug", 226, Rarity.RARE, mage.cards.d.DesolationOfSmaug.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Desolation of Smaug", 262, Rarity.RARE, mage.cards.d.DesolationOfSmaug.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Desolation of Smaug", 93, Rarity.RARE, mage.cards.d.DesolationOfSmaug.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dwarven Mauler", 95, Rarity.UNCOMMON, mage.cards.d.DwarvenMauler.class));
         cards.add(new SetCardInfo("Elvenking's Halls", 182, Rarity.COMMON, mage.cards.e.ElvenkingsHalls.class));
         cards.add(new SetCardInfo("Fateful Discovery", 220, Rarity.MYTHIC, mage.cards.f.FatefulDiscovery.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fateful Discovery", 256, Rarity.MYTHIC, mage.cards.f.FatefulDiscovery.class, NON_FULL_USE_VARIOUS));
