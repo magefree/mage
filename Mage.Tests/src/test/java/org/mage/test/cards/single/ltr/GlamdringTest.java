@@ -31,6 +31,7 @@ public class GlamdringTest extends CardTestPlayerBase {
         attack(1, playerA, "Blur Sliver");
         setChoice(playerA, "In Garruk's Wake"); // 9 mana, so we shouldn't be able to choose it
 
+        // TODO: implement possible targets check/assert
         try {
             setStopAt(1, PhaseStep.FIRST_COMBAT_DAMAGE);
             execute();

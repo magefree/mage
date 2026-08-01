@@ -49,7 +49,9 @@ public final class WolverineFierceFighter extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // When Wolverine enters, he fights up to one other target creature.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new FightTargetSourceEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+            new FightTargetSourceEffect().setText("he fights up to one other target creature")
+        );
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
 

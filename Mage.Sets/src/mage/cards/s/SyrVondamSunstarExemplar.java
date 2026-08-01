@@ -138,9 +138,4 @@ class SyrVondamSunstarExemplarSecondTriggeredAbility extends TriggeredAbilityImp
                 .filter(getSourceId()::equals)
                 .isPresent();
     }
-
-    @Override
-    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
-        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
-    }
 }
