@@ -138,29 +138,27 @@ foreach my $card (sort cardSort @setCards) {
 
     if(-e $currentFileName) {
         # Card is implemented
-        $cardNames{$cardName} = 1;
+        $cardNames{$cardName} = 0;
         my $implementedEntry = "- [x] [$cardName](https://scryfall.com/search?q=!$cardNameForUrl%20e:$setAbbr)";
         push(@implementedCards, $implementedEntry);
     } else {
         # Card is not implemented
-        $cardNames{$cardName} = 0;
+        $cardNames{$cardName} = $collectorNumber;
         push(@unimplementedCards, $cardEntry);
     }
 }
 
 # Build the unimplemented URL for Scryfall
-my $unimplementedUrl = "https://scryfall.com/search?q=";
-my @unimplementedNames;
+my $unimplementedUrl = "https://scryfall.com/search?q=s:$setAbbr%20%28";
+my @unimplementedNumbers;
 foreach my $cardName (sort keys %cardNames) {
-    if ($cardNames{$cardName} == 0) {
-        my $urlCardName = $cardName;
-        $urlCardName =~ s/ //g;
-        $urlCardName =~ s/"/\\"/g;  # Escape quotes
-        $urlCardName =~ s/\&/%26/g; # URL encode ampersands
-        push(@unimplementedNames, "!\"$urlCardName\"");
+    if ($cardNames{$cardName} != 0) {
+        push(@unimplementedNumbers, "cn:$cardNames{$cardName}");
     }
 }
-$unimplementedUrl .= join("or", @unimplementedNames) . "&unique=cards";
+# Scryfall's UI has a 1024 chracter limit for search queries, which realistically limits us to 100 card numbers for the search query
+$unimplementedUrl .= join("%20or%20", @unimplementedNumbers[0 .. List::Util::min(99, $#unimplementedNumbers)] );
+$unimplementedUrl .= "%29";
 
 # Read template file
 my $template = Text::Template->new(TYPE => 'FILE', SOURCE => $templateFile, DELIMITERS => [ '[=', '=]' ]);
