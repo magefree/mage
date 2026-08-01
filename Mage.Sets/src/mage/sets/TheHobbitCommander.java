@@ -93,6 +93,7 @@ public final class TheHobbitCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Languish", 187, Rarity.RARE, mage.cards.l.Languish.class));
         cards.add(new SetCardInfo("Last March of the Ents", 27, Rarity.MYTHIC, mage.cards.l.LastMarchOfTheEnts.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Last March of the Ents", 67, Rarity.MYTHIC, mage.cards.l.LastMarchOfTheEnts.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Long-Lost Lances", 7, Rarity.RARE, mage.cards.l.LongLostLances.class));
         cards.add(new SetCardInfo("Lorien Revealed", 179, Rarity.COMMON, mage.cards.l.LorienRevealed.class));
         cards.add(new SetCardInfo("Lothlorien Lookout", 209, Rarity.COMMON, mage.cards.l.LothlorienLookout.class));
         cards.add(new SetCardInfo("Lotho, Corrupt Shirriff", 34, Rarity.MYTHIC, mage.cards.l.LothoCorruptShirriff.class, NON_FULL_USE_VARIOUS));
