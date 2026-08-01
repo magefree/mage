@@ -84,6 +84,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Great Gilded Boat", 291, Rarity.RARE, mage.cards.g.GreatGildedBoat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Great Gilded Boat", 42, Rarity.RARE, mage.cards.g.GreatGildedBoat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Guardian of the Halls", 127, Rarity.COMMON, mage.cards.g.GuardianOfTheHalls.class));
+        cards.add(new SetCardInfo("Gundabad Opportunist", 101, Rarity.COMMON, mage.cards.g.GundabadOpportunist.class));
         cards.add(new SetCardInfo("Hobbit Hole", 184, Rarity.COMMON, mage.cards.h.HobbitHole.class));
         cards.add(new SetCardInfo("Iron Hills", 185, Rarity.COMMON, mage.cards.i.IronHills.class));
         cards.add(new SetCardInfo("Iron Hills Blacksmith", 16, Rarity.UNCOMMON, mage.cards.i.IronHillsBlacksmith.class, NON_FULL_USE_VARIOUS));
