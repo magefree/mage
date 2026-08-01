@@ -18,18 +18,18 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 public class RoomCardTest extends CardTestPlayerBase {
 
-    /*
-    Bottomless Pool // Locker Room
-    {U}
-    Enchantment - Room
-    When you unlock this door, return up to one target creature to its owner's hand.
-    (You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)
-    <strong>Locker Room</strong>
-    {4}{U}
-    <strong>Enchantment -- Room</strong>
-    Whenever one or more creatures you control deal combat damage to a player, draw a card.
-    (You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)
-    */
+    /**
+     * Bottomless Pool // Locker Room
+     * {U}
+     * Enchantment - Room
+     * When you unlock this door, return up to one target creature to its owner's hand.
+     * (You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)
+     * <strong>Locker Room</strong>
+     * {4}{U}
+     * <strong>Enchantment -- Room</strong>
+     * Whenever one or more creatures you control deal combat damage to a player, draw a card.
+     * (You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)
+     */
     private static final String bottomlessPoolLockerRoom = "Bottomless Pool // Locker Room";
     private static final String bottomlessPool = "Bottomless Pool";
     public static final String lockerRoom = "Locker Room";
@@ -456,13 +456,14 @@ public class RoomCardTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Ornithopter", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bottomlessPool);
-        // Copy spell on the stack
+
+        // copy spell on the stack
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "See Double");
         setModeChoice(playerA, "1");
         addTarget(playerA, bottomlessPool);
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 3);
+
+        // resolve both rooms (original and copy)
         addTarget(playerA, "Memnite");
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         addTarget(playerA, "Ornithopter");
 
         setStopAt(1, PhaseStep.END_TURN);

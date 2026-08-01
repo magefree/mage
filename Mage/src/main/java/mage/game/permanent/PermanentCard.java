@@ -1,5 +1,7 @@
 package mage.game.permanent;
 
+import java.util.UUID;
+
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
@@ -7,13 +9,18 @@ import mage.abilities.Ability;
 import mage.abilities.common.RoomAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardsImpl;
+import mage.cards.DoubleFacedCard;
+import mage.cards.DoubleFacedCardHalf;
+import mage.cards.LevelerCard;
+import mage.cards.ModalDoubleFacedCardHalf;
+import mage.cards.RoomCard;
+import mage.cards.SplitCard;
 import mage.constants.SpellAbilityType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  * Static permanent on the battlefield. There are possible multiple permanents per one card,
@@ -197,10 +204,11 @@ public class PermanentCard extends PermanentImpl {
         this.nightCard = card.isNightCard();
         this.flipCard = card.isFlipCard();
         this.flipCardName = card.getFlipCardName();
-        // Rooms set characteristics at the end so nothing gets overwritten
+
         if (card instanceof RoomCard) {
-            RoomCard.setRoomCharacteristics(this, game);
+            RoomCard.addRoomCharacteristics(this, (RoomCard) card, game);
             if (!isReset) {
+                // new copy - apply characteriscits before put to game, e.g. workaround to keep only unlocked abilities
                 RoomAbility roomAbility = null;
                 for (Ability ability : this.abilities) {
                     if (ability instanceof RoomAbility) {
@@ -210,6 +218,8 @@ public class PermanentCard extends PermanentImpl {
                 }
                 if (roomAbility != null) {
                     roomAbility.applyCharacteristics(game, this);
+                } else {
+                    throw new IllegalStateException("Wrong code usage: something wrong, room card lost their's RoomAbility: " + card);
                 }
             }
         }
@@ -261,6 +271,7 @@ public class PermanentCard extends PermanentImpl {
     @Override
     public ManaCosts<ManaCost> getManaCost() {
         if (faceDown) { // face down permanent has always {0} mana costs
+             // TODO: wtf, it's clear on get method - must be reworked (looks like a dirty hack)
             manaCost.clear();
             return manaCost;
         }
@@ -270,17 +281,40 @@ public class PermanentCard extends PermanentImpl {
     @Override
     public int getManaValue() {
         if (isTransformed()) {
-            // 711.4b While a double-faced permanent's back face is up, it has only the characteristics of its back face.
-            // However, its converted mana cost is calculated using the mana cost of its front face. This is a change from previous rules.
-            // If a permanent is copying the back face of a double-faced card (even if the card representing that copy
-            // is itself a double-faced card), the converted mana cost of that permanent is 0.
-            return getCard().getManaValue();
+            // transformable permanents contains characteristics in card/secondCardSide
+
+            // 712.8d
+            // While a double-faced permanent has its front face up, it has only the characteristics of its front face.
+            //
+            // 712.8e
+            // While a nonmodal double-faced permanent has its back face up, it has only the characteristics of its back face. 
+            // However, its mana value is calculated using the mana cost of its front face. 
+            // If a permanent is copying the back face of a nonmodal double-faced permanent (even if the object representing 
+            // that copy is itself a double-faced permanent), the mana value of that permanent is 0. See rule 202.3b.
+            //
+            // 712.8f
+            // While a modal double-faced spell is on the stack or a modal double-faced permanent is on the battlefield, 
+            // it has only the characteristics of the face that’s up.
+            //
+            // 202.3b
+            // The mana value of the back face of a nonmodal double-faced permanent or spell’s back face is calculated 
+            // as though it had the mana cost of its front face. If a permanent or spell is a copy of the back face of 
+            // a nonmodal double-faced object (even if the card representing that copy is itself a double-faced card), 
+            // the mana value of the copy is 0.
+            if (getCard() instanceof ModalDoubleFacedCardHalf) {
+                return secondSideCard.getManaValue(); // back side
+            } else if (getCard() instanceof DoubleFacedCardHalf) {
+                return getCard().getManaValue(); // front side all the time
+            } else {
+                throw new IllegalArgumentException("Wrong code usage: unknown transformable card type in getManaValue: " + getCard().getClass().getCanonicalName());
+            }
         }
-        if (faceDown) { // game not neccessary
-            return getManaCost().manaValue();
+
+        // same as all other permanents
+        if (faceDown) {
+            return 0;
         }
         return super.getManaValue();
-
     }
 
     @Override

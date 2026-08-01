@@ -998,7 +998,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Hero's Downfall", 312, Rarity.RARE, mage.cards.h.HerosDownfall.class));
         cards.add(new SetCardInfo("Heroic Intervention", 1750, Rarity.RARE, mage.cards.h.HeroicIntervention.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Heroic Intervention", 1872, Rarity.RARE, mage.cards.h.HeroicIntervention.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Hex Magic", 2624, Rarity.RARE, mage.cards.h.HexMagic.class));
+        cards.add(new SetCardInfo("Hex Magic", 2624, Rarity.RARE, mage.cards.h.HexMagic.class));
         cards.add(new SetCardInfo("Hexdrinker", 1222, Rarity.MYTHIC, mage.cards.h.Hexdrinker.class));
         cards.add(new SetCardInfo("Hibernation Sliver", 664, Rarity.RARE, mage.cards.h.HibernationSliver.class));
         cards.add(new SetCardInfo("Higure, the Still Wind", 1267, Rarity.RARE, mage.cards.h.HigureTheStillWind.class, NON_FULL_USE_VARIOUS));

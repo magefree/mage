@@ -45,10 +45,10 @@ public final class BlackWidowDeadlyHunter extends CardImpl {
 
         // Whenever a creature you control with deathtouch deals combat damage to a player, you draw a card and lose 1 life.
         Ability ability = new DealsDamageToAPlayerAllTriggeredAbility(
-            new DrawCardSourceControllerEffect(1),
+            new DrawCardSourceControllerEffect(1, true),
             filter, false, SetTargetPointer.NONE, true, false
         );
-        ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
+        ability.addEffect(new LoseLifeSourceControllerEffect(1, false).concatBy("and"));
         this.addAbility(ability);
     }
 

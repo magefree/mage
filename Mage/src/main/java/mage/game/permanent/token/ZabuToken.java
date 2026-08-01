@@ -14,8 +14,8 @@ import mage.counters.CounterType;
 public final class ZabuToken extends TokenImpl {
 
     public ZabuToken() {
-        super("Zabu", "Zabu, a legendary green Cat creature token with "
-            + "\"Landfall -- Whenever a land you control enters the battlefield, put a +1/+1 counter on Zabu.\"");
+        super("Zabu", "Zabu, a legendary 2/2 green Cat creature token with "
+                + "\"Landfall &mdash; Whenever a land you control enters, put a +1/+1 counter on Zabu.\"");
         this.cardType.add(CardType.CREATURE);
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);

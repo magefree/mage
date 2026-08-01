@@ -2,8 +2,6 @@ package mage.interfaces;
 
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.ExpansionInfo;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
 import mage.game.GameException;
@@ -36,7 +34,7 @@ public interface MageServer {
 
     boolean connectAdmin(String password, String sessionId, MageVersion version) throws MageException;
 
-    boolean connectSetUserData(String userName, String sessionId, UserData userData, String clientVersion, String userIdStr) throws MageException;
+    boolean connectSetUserData(String sessionId, UserData userData, String clientVersion, String userIdStr) throws MageException;
 
     boolean ping(String sessionId, String pingInfo) throws MageException;
     
@@ -109,9 +107,6 @@ public interface MageServer {
     void matchQuit(UUID gameId, String sessionId) throws MageException;
 
     void gameJoin(UUID gameId, String sessionId) throws MageException;
-
-    @Deprecated // TODO: implement GameView request on miss client side data, e.g. on reconnect (empty player panels bug)?
-    GameView gameGetView(UUID gameId, String sessionId, UUID playerId) throws MageException;
 
     boolean gameWatchStart(UUID gameId, String sessionId) throws MageException;
 

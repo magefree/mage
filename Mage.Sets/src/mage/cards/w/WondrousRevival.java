@@ -1,7 +1,5 @@
 package mage.cards.w;
 
-import java.util.UUID;
-
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -11,13 +9,15 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
  *
  * @author muz
  */
 public final class WondrousRevival extends CardImpl {
 
-    private static final FilterCard filter = new FilterCreatureCard("Hero creature cards");
+    private static final FilterCard filter = new FilterCreatureCard("Hero creature cards from your graveyard");
 
     static {
         filter.add(SubType.HERO.getPredicate());

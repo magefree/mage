@@ -211,6 +211,7 @@ Mirrodin|MRD|Mirrodin|
 Murders at Karlov Manor|MKM|MurdersAtKarlovManor|
 Murders at Karlov Manor Commander|MKC|MurdersAtKarlovManorCommander|
 Mystery Booster 2|MB2|MysteryBooster2|
+Mystery Booster: Commander Edition|MBC|MysteryBoosterCommanderEdition|
 Ravnica: Clue Edition|CLU|RavnicaClueEdition|
 Nemesis|NEM|Nemesis|
 New Phyrexia|NPH|NewPhyrexia|
@@ -238,6 +239,7 @@ Portal Three Kingdoms|PTK|PortalThreeKingdoms|
 Ravnica Allegiance|RNA|RavnicaAllegiance|
 Ravnica: City of Guilds|RAV|RavnicaCityOfGuilds|
 Reality Fracture|FRA|RealityFracture|
+Reality Fracture Commander|FRC|RealityFractureCommander|
 Jurassic World Collection|REX|JurassicWorldCollection|
 Rivals of Ixalan|RIX|RivalsOfIxalan|
 Rise of the Eldrazi|ROE|RiseOfTheEldrazi|
@@ -270,7 +272,7 @@ Theros Beyond Death|THB|TherosBeyondDeath|
 The Brothers' War|BRO|TheBrothersWar|
 The Brothers' War Commander|BRC|TheBrothersWarCommander|
 The Hobbit|HOB|TheHobbit|
-The Hobbit Commander|HOC|TheHobbitCommander|
+The Hobbit Eternal|HOC|TheHobbitEternal|
 Tempest|TMP|Tempest|
 Throne of Eldraine|ELD|ThroneOfEldraine|
 Torment|TOR|Torment|
@@ -321,3 +323,6 @@ Happy Holidays|HHO|HappyHolidays|
 Warhammer 40,000 Commander|40K|Warhammer40000Commander|
 Champs and States|PCMP|ChampsAndStates|
 Champs|PCMP|ChampsAndStates|
+Star Trek|TRK|StarTrek|
+Star Trek Commander|TRC|StarTrekCommander|
+Stardates|SDS|Stardates|

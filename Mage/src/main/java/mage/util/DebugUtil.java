@@ -1,5 +1,11 @@
 package mage.util;
 
+import java.util.Enumeration;
+
+import org.apache.log4j.AppenderSkeleton;
+import org.apache.log4j.FileAppender;
+import org.apache.log4j.Logger;
+
 /**
  * Devs only: enable or disable debug features
  * <p>
@@ -91,6 +97,23 @@ public class DebugUtil {
                 return TraceHelper.getMethodNameWithSource(3 + skipMethodsAmount);
             default:
                 throw new IllegalArgumentException("Unknown info type: " + infoType);
+        }
+    }
+
+    /**
+     * Print all log appenders and their levels, including logs file name
+     */
+    public static void printLogsInfo(Logger logger) {
+        logger.info("Logging:");
+        Enumeration<?> appenders = Logger.getRootLogger().getAllAppenders();
+        while (appenders.hasMoreElements()) {
+            AppenderSkeleton appender = (AppenderSkeleton) appenders.nextElement();
+            String info = " - log appender: " + appender.getName();
+            info += " | Level: " + (appender.getThreshold() != null ? appender.getThreshold() : logger.getEffectiveLevel());
+            if (appender instanceof FileAppender) {
+                info += " | File: " + ((FileAppender) appender).getFile();
+            }
+            logger.info(info);
         }
     }
 

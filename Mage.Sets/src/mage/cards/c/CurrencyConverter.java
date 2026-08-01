@@ -44,7 +44,7 @@ public final class CurrencyConverter extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        // {T}: Put a card exiled with Currency Converter into your graveyard. If it's a land card, create a Treasure token. If it's a nonland card, create a 2/2 black Rogue creature token.
+        // {T}: Put a card exiled with Currency Converter into its owner's graveyard. If it's a land card, create a Treasure token. If it's a nonland card, create a 2/2 black Rogue creature token.
         this.addAbility(new SimpleActivatedAbility(new CurrencyConverterTokenEffect(), new TapSourceCost()));
     }
 
@@ -94,7 +94,7 @@ class CurrencyConverterTokenEffect extends OneShotEffect {
 
     CurrencyConverterTokenEffect() {
         super(Outcome.Benefit);
-        staticText = "put a card exiled with {this} into your graveyard. If it's a land card, " +
+        staticText = "put a card exiled with {this} into its owner's graveyard. If it's a land card, " +
                 "create a Treasure token. If it's a nonland card, create a 2/2 black Rogue creature token";
     }
 
