@@ -26,6 +26,7 @@ public class CopyGameStatePerformanceTest extends CardTestPlayerBase {
     }
 
     public static void main(String[] args) {
+        // TODO: outdated, can be replaced by LoadTest or other performance tests?
         CopyGameStatePerformanceTest test = new CopyGameStatePerformanceTest();
         try {
             test.run();

@@ -36,6 +36,7 @@ public final class MACH1SwoopingScoundrel extends CardImpl {
         this.addAbility(new OrTriggeredAbility(
             Zone.BATTLEFIELD,
             new SurveilEffect(1),
+            false, "When {this} enters and whenever you gain life, ",
             new EntersBattlefieldTriggeredAbility(null),
             new GainLifeControllerTriggeredAbility(null)
         ).setTriggersLimitEachTurn(1));

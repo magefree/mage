@@ -2,6 +2,7 @@ package mage.game;
 
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ConjureCardEffect;
 import mage.constants.*;
@@ -58,9 +59,12 @@ public class CustomPillarOfTheParunsDuel extends GameImpl {
         super.init(choosingPlayerId);
 
         getPlayers().forEach((playerId, p) -> {
+            Ability fakeAbility = new SimpleStaticAbility(null);
+            fakeAbility.setControllerId(playerId);
+            fakeAbility.setSourceId(playerId);
             addDelayedTriggeredAbility(
                     new AtTheBeginOfPlayerFirstMainPhase(playerId, "C-Pillar of the Paruns"),
-                    null // TODO: Not sure how to mock something to be displayed instead.
+                    fakeAbility
             );
         });
 

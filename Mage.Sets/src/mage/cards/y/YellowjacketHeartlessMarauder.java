@@ -48,7 +48,7 @@ public final class YellowjacketHeartlessMarauder extends CardImpl {
             new BoostSourceEffect(1, 0, Duration.EndOfTurn).setText("{this} gets +1/+0"), filter
         );
         ability.addEffect(new GainAbilitySourceEffect(
-            LifelinkAbility.getInstance(), Duration.EndOfTurn).concatBy("and")
+            LifelinkAbility.getInstance(), Duration.EndOfTurn).setText("and gains lifelink until end of turn")
         );
         this.addAbility(ability);
     }

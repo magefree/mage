@@ -34,6 +34,7 @@ public class MageDesktopManager extends DefaultDesktopManager {
     }
 
     public static void main(String[] args) {
+        // TODO: single form run is outdated, need to remove
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame();
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

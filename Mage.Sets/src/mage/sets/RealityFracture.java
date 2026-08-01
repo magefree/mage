@@ -39,6 +39,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Craterclaw Colossus", 446, Rarity.MYTHIC, mage.cards.c.CraterclawColossus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Craterclaw Colossus", 455, Rarity.MYTHIC, mage.cards.c.CraterclawColossus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Craterclaw Colossus", 78, Rarity.MYTHIC, mage.cards.c.CraterclawColossus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Garruk, Veiled Butcher", 229, Rarity.MYTHIC, mage.cards.g.GarrukVeiledButcher.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Garruk, Veiled Butcher", 303, Rarity.MYTHIC, mage.cards.g.GarrukVeiledButcher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liliana the Faultless", 200, Rarity.RARE, mage.cards.l.LilianaTheFaultless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liliana the Faultless", 293, Rarity.RARE, mage.cards.l.LilianaTheFaultless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liliana the Repentant", 231, Rarity.RARE, mage.cards.l.LilianaTheRepentant.class, NON_FULL_USE_VARIOUS));

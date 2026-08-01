@@ -49,7 +49,7 @@ public final class UnstableMoleculeSuit extends CardImpl {
         ));
 
         // Equip {4}
-        this.addAbility(new EquipAbility(4));
+        this.addAbility(new EquipAbility(4, false));
     }
 
     private UnstableMoleculeSuit(final UnstableMoleculeSuit card) {
