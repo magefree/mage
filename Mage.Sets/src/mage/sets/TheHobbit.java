@@ -20,7 +20,7 @@ public final class TheHobbit extends ExpansionSet {
         this.blockName = "The Hobbit"; // for sorting in GUI
         this.hasBasicLands = true;
 
-        // this.enablePlayBooster(198); TODO: Enable later
+        this.enablePlayBooster(198);
 
         cards.add(new SetCardInfo("An Unexpected Party", 29, Rarity.RARE, mage.cards.a.AnUnexpectedParty.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("An Unexpected Party", 289, Rarity.RARE, mage.cards.a.AnUnexpectedParty.class, NON_FULL_USE_VARIOUS));
