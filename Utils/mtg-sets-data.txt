@@ -271,7 +271,7 @@ Theros Beyond Death|THB|TherosBeyondDeath|
 The Brothers' War|BRO|TheBrothersWar|
 The Brothers' War Commander|BRC|TheBrothersWarCommander|
 The Hobbit|HOB|TheHobbit|
-The Hobbit Commander|HOC|TheHobbitCommander|
+The Hobbit Eternal|HOC|TheHobbitEternal|
 Tempest|TMP|Tempest|
 Throne of Eldraine|ELD|ThroneOfEldraine|
 Torment|TOR|Torment|

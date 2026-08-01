@@ -3034,9 +3034,19 @@ public class ScryfallImageSupportTokens {
             put("MSC/Wall/2", "https://api.scryfall.com/cards/tmsc/19?format=image");
 
             // HOB
+            put("HOB/Axe", "https://api.scryfall.com/cards/thob/10?format=image");
+            put("HOB/Bear", "https://api.scryfall.com/cards/thob/7?format=image");
+            put("HOB/Bird Soldier", "https://api.scryfall.com/cards/thob/1?format=image");
+            put("HOB/Human Soldier", "https://api.scryfall.com/cards/thob/2?format=image");
+            put("HOB/Dragon", "https://api.scryfall.com/cards/thob/5?format=image");
             put("HOB/Dwarf", "https://api.scryfall.com/cards/thob/6?format=image");
-            put("HOB/Goblin Army", "https://api.scryfall.com/cards/thob/4/en?format=image");
-            put("HOB/Treasure", "https://api.scryfall.com/cards/thob/12?format=image");
+            put("HOB/Elf", "https://api.scryfall.com/cards/thob/8?format=image");
+            put("HOB/Goblin Army/1", "https://api.scryfall.com/cards/thob/3/en?format=image");
+            put("HOB/Goblin Army/2", "https://api.scryfall.com/cards/thob/4/en?format=image");
+            put("HOB/Stone Boulder", "https://api.scryfall.com/cards/thob/11?format=image");
+            put("HOB/Treasure/1", "https://api.scryfall.com/cards/thob/12?format=image");
+            put("HOB/Treasure/2", "https://api.scryfall.com/cards/thob/13?format=image");
+            put("HOB/Wolf", "https://api.scryfall.com/cards/thob/9?format=image");
 
             // UGL
             put("UGL/Goblin", "https://api.scryfall.com/cards/tugl/92?format=image");
