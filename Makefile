@@ -14,6 +14,20 @@ clean:
 build:
 	mvn install package -DskipTests
 
+.PHONY: test
+test:
+	mvn test -B -Dxmage.dataCollectors.printGameLogs=false
+
+.PHONY: test-verify-cards
+test-verify-cards:
+	# Optional vars:
+	# VERIFY_CHECK_SET_CODES=MSH or VERIFY_CHECK_SET_CODES='MSH;MSC' to limit sets
+	mvn -B -pl Mage.Verify \
+		-Dxmage.dataCollectors.printGameLogs=false \
+		-Dtest=VerifyCardDataTest \
+		-Dxmage.tests.verifyCheckSetCodes="$(VERIFY_CHECK_SET_CODES)" \
+		test
+
 .PHONY: package
 package:
 	# Packaging Mage.Client to zip
@@ -30,4 +44,3 @@ package:
 # The perl script bundles the artifacts into a single zip
 .PHONY: install
 install: clean build package
-

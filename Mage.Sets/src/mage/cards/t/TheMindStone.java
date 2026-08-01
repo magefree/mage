@@ -1,6 +1,8 @@
 package mage.cards.t;
 
 import java.util.UUID;
+
+import mage.abilities.hint.common.HarnessedHint;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.abilities.Ability;
@@ -51,7 +53,7 @@ public final class TheMindStone extends CardImpl {
         // {5}{W}, {T}: Harness The Mind Stone.
         Ability ability = new SimpleActivatedAbility(new HarnessSourceEffect(), new ManaCostsImpl<>("{5}{W}"));
         ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(HarnessedHint.instance));
 
         // ∞ -- At the beginning of your end step, exile up to one other target nonland permanent you control, then return that card to the battlefield under its owner's control.
         Ability soulStoneAbility = new BeginningOfEndStepTriggeredAbility(new ExileThenReturnTargetEffect(false, true));

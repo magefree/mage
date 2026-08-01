@@ -38,7 +38,7 @@ public final class VenomEvilUnleashed extends CardImpl {
 
         // {2}{B}, Exile this card from your graveyard: Put two +1/+1 counters on target creature. It gains deathtouch until end of turn. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
-                Zone.GRAVEYARD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{2}{B}")
+                Zone.GRAVEYARD, new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)), new ManaCostsImpl<>("{2}{B}")
         );
         ability.addCost(new ExileSourceFromGraveCost());
         ability.addTarget(new TargetCreaturePermanent());

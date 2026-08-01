@@ -1020,11 +1020,6 @@ public class MageServerImpl implements MageServer {
 
     }
 
-    @Override
-    public GameView gameGetView(final UUID gameId, final String sessionId, final UUID playerId) throws MageException {
-        return executeWithResult("getGameView", sessionId, new GetGameViewAction(sessionId, gameId, playerId));
-    }
-
     /**
      * Get user data for admin console
      *
@@ -1215,31 +1210,6 @@ public class MageServerImpl implements MageServer {
         @Override
         public List<UserView> execute() throws MageException {
             return managerFactory.userManager().getUserInfoList();
-        }
-    }
-
-    private class GetGameViewAction extends ActionWithNullNegativeResult<GameView> {
-
-        private final String sessionId;
-        private final UUID gameId;
-        private final UUID playerId;
-
-        public GetGameViewAction(String sessionId, UUID gameId, UUID playerId) {
-            this.sessionId = sessionId;
-            this.gameId = gameId;
-            this.playerId = playerId;
-        }
-
-        @Override
-        public GameView execute() throws MageException {
-            Optional<Session> session = managerFactory.sessionManager().getSession(sessionId);
-            if (!session.isPresent()) {
-                logger.error("Session not found : " + sessionId);
-                return null;
-            } else {
-                //UUID userId = session.get().getUserId();
-                return managerFactory.gameManager().getGameView(gameId, playerId);
-            }
         }
     }
 

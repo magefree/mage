@@ -98,13 +98,13 @@ with open(idk, "w") as f:
 
 print("\n---------------- ADD THE FOLLOWING TO EACH FILE RESPECTIVELY ----------------")
 print("[+] Mage.Server\src\\test\data\config_error.xml")
-print(f"    --> <draftCube name=\"{owner}'s {cubeName}\" jar=\"mage-tournament-booster-draft.jar\" className=\"mage.tournament.cubes.{cleanOwner}s{cleanCubeName}\"/>")
+print(f"    --> <draftCube name=\"{owner}'s {cubeName}\" jar=\"mage-tournament-boosterdraft.jar\" className=\"mage.tournament.cubes.{cleanOwner}s{cleanCubeName}\"/>")
 
 print("\n[+] Mage.Server\\release\config\config.xml")
-print(f"    --> <draftCube name=\"{owner}'s {cubeName}\" jar=\"mage-tournament-booster-draft-${{project.version}}.jar\" className=\"mage.tournament.cubes.{cleanOwner}s{cleanCubeName}\"/>")
+print(f"    --> <draftCube name=\"{owner}'s {cubeName}\" jar=\"mage-tournament-boosterdraft-${{project.version}}.jar\" className=\"mage.tournament.cubes.{cleanOwner}s{cleanCubeName}\"/>")
 
 print("\n[+] Mage.Server\config\config.xml")
-print(f"    --> <draftCube name=\"{owner}'s {cubeName}\" jar=\"mage-tournament-booster-draft.jar\" className=\"mage.tournament.cubes.{cleanOwner}s{cleanCubeName}\"/>")
+print(f"    --> <draftCube name=\"{owner}'s {cubeName}\" jar=\"mage-tournament-boosterdraft.jar\" className=\"mage.tournament.cubes.{cleanOwner}s{cleanCubeName}\"/>")
 print("-----------------------------------------------------------------------------")
 
 print("Cube written to ->", idk)
