@@ -44,7 +44,7 @@ public final class CaptainAmericaSuperSoldier extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Captain America enters with a shield counter on him.
-        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.SHIELD.createInstance()));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.SHIELD.createInstance(), "him"));
 
         // As long as Captain America has a shield counter on him, you and other Heroes you control have hexproof.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
