@@ -72,6 +72,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 198, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Front Porch Sentries", 67, Rarity.COMMON, mage.cards.f.FrontPorchSentries.class));
         cards.add(new SetCardInfo("Gathering of Darkness", 68, Rarity.UNCOMMON, mage.cards.g.GatheringOfDarkness.class));
+        cards.add(new SetCardInfo("Giant's Boulder", 173, Rarity.COMMON, mage.cards.g.GiantsBoulder.class));
         cards.add(new SetCardInfo("Gleaming Splendor", 275, Rarity.MYTHIC, mage.cards.g.GleamingSplendor.class));
         cards.add(new SetCardInfo("Gigantic Big Bear", 126, Rarity.RARE, mage.cards.g.GiganticBigBear.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gigantic Big Bear", 307, Rarity.RARE, mage.cards.g.GiganticBigBear.class, NON_FULL_USE_VARIOUS));
