@@ -28,7 +28,7 @@ import mage.constants.Duration;
  */
 public final class ThorinKingOfDurinsFolk extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.DWARF, "Dwarves");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.DWARF);
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("artifact tokens you control");
 
     static {

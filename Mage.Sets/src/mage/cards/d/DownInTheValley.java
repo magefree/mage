@@ -50,7 +50,8 @@ public final class DownInTheValley extends CardImpl {
         Ability gainedAbility = new LandfallAbility(new CreateTokenEffect(new GreenElfToken()));
         sagaAbility.addChapterEffect(
             this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_II,
-            new GainAbilitySourceEffect(gainedAbility)
+            new GainAbilitySourceEffect(gainedAbility, Duration.Custom)
+                .setText("this Saga gains \"" + gainedAbility.getRule() + "\"")
         );
 
         // III, IV -- Elves you control get +1/+0 and gain vigilance until end of turn.
