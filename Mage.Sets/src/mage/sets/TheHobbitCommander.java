@@ -142,6 +142,7 @@ public final class TheHobbitCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sauron, the Lidless Eye", 37, Rarity.MYTHIC, mage.cards.s.SauronTheLidlessEye.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sauron, the Lidless Eye", 77, Rarity.MYTHIC, mage.cards.s.SauronTheLidlessEye.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shadow of the Enemy", 190, Rarity.MYTHIC, mage.cards.s.ShadowOfTheEnemy.class));
+        cards.add(new SetCardInfo("Smaug the Impenetrable", 9, Rarity.RARE, mage.cards.s.SmaugTheImpenetrable.class));
         cards.add(new SetCardInfo("Smite the Deathless", 202, Rarity.COMMON, mage.cards.s.SmiteTheDeathless.class));
         cards.add(new SetCardInfo("Soldier of the Grey Host", 171, Rarity.COMMON, mage.cards.s.SoldierOfTheGreyHost.class));
         cards.add(new SetCardInfo("Stern Scolding", 183, Rarity.UNCOMMON, mage.cards.s.SternScolding.class));
