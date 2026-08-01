@@ -51,7 +51,9 @@ public final class IronFistLivingWeapon extends CardImpl {
         );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(new SpellCastControllerTriggeredAbility(
-            new GainAbilitySourceEffect(ability, Duration.EndOfTurn), filter, false
+            new GainAbilitySourceEffect(ability, Duration.EndOfTurn)
+                .setText("{this} gains \"" + ability.getRule() + "\" until end of turn"),
+            filter, false
         ));
     }
 
