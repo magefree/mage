@@ -3085,6 +3085,9 @@
 |TOK:HOB|Wolf||WolfToken|
 
 
+# TRK
+|TOK:TRK|Human||Human01Token|
+
 # JVC
 |TOK:JVC|Elemental Shaman||ElementalShamanToken|
 

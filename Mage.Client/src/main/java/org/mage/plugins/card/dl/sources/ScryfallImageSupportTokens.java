@@ -3048,6 +3048,9 @@ public class ScryfallImageSupportTokens {
             put("HOB/Treasure/2", "https://api.scryfall.com/cards/thob/13?format=image");
             put("HOB/Wolf", "https://api.scryfall.com/cards/thob/9?format=image");
 
+            // TRK
+            put("TRK/Human", "https://api.scryfall.com/cards/ttrk/1?format=image");
+
             // UGL
             put("UGL/Goblin", "https://api.scryfall.com/cards/tugl/92?format=image");
             put("UGL/Pegasus", "https://api.scryfall.com/cards/tugl/89?format=image");
