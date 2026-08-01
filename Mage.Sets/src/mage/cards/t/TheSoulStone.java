@@ -9,6 +9,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.HarnessSourceEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.continuous.GainHarnessedAbilitySourceEffect;
+import mage.abilities.hint.common.HarnessedHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
@@ -48,7 +49,7 @@ public final class TheSoulStone extends CardImpl {
         ability.addCost(new ExileTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_A_CREATURE))
                 .withSourceExileZone(false)
         );
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(HarnessedHint.instance));
 
         // ∞ -- At the beginning of your upkeep, return target creature card from your graveyard to the battlefield.
         Ability soulStoneAbility = new BeginningOfUpkeepTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());

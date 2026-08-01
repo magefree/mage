@@ -1,10 +1,32 @@
 package mage.client.deckeditor;
 
+import static mage.cards.decks.DeckFormats.XMAGE;
+import static mage.cards.decks.DeckFormats.XMAGE_INFO;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.dnd.DropTarget;
+import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import javax.swing.*;
+import javax.swing.Timer;
+import javax.swing.border.Border;
+import javax.swing.filechooser.FileFilter;
+
+import org.apache.log4j.Logger;
+
 import mage.MageObject;
 import mage.cards.Card;
 import mage.cards.decks.*;
-import static mage.cards.decks.DeckFormats.XMAGE;
-import static mage.cards.decks.DeckFormats.XMAGE_INFO;
 import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -24,25 +46,11 @@ import mage.client.util.Listener;
 import mage.client.util.audio.AudioManager;
 import mage.components.CardInfoPane;
 import mage.game.GameException;
-import mage.remote.Session;
 import mage.util.DeckUtil;
 import mage.util.ThreadUtils;
 import mage.util.XmageThreadFactory;
 import mage.view.CardView;
 import mage.view.SimpleCardView;
-import org.apache.log4j.Logger;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.filechooser.FileFilter;
-import java.awt.*;
-import java.awt.dnd.DropTarget;
-import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.*;
-import java.util.concurrent.*;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85, Elandril
@@ -64,13 +72,30 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private DeckEditorMode mode;
     private int timeout;
     private javax.swing.Timer countdown;
-    private UpdateDeckTask updateDeckTask;
+    private javax.swing.Timer updateDeckTimer;
     private int timeToSubmit = -1;
 
     public DeckEditorPanel() {
         initComponents();
 
-        fcSelectDeck = new JFileChooser();
+        fcSelectDeck = new JFileChooser() {
+            @Override
+            public void approveSelection() {
+                // confirm overwrite
+                File selectedFile = getSelectedFile();
+                if (selectedFile.exists() && getDialogType() == SAVE_DIALOG) {
+                    int result = JOptionPane.showConfirmDialog(this,
+                        "File \"" + selectedFile.getName() + "\" already exists.\nReplace it?",
+                        "Confirm overwrite",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE);
+                    if (result != JOptionPane.YES_OPTION) {
+                        return;
+                    }
+                }
+                super.approveSelection();
+            }
+        };
         fcSelectDeck.setAcceptAllFileFilterUsed(false);
         fcSelectDeck.addChoosableFileFilter(new DeckFileFilter("dck", "XMage's deck files (*.dck)"));
         fcSelectDeck.addChoosableFileFilter(new DeckFileFilter("dck_info", "XMage's deck files with info (*.dck_info)"));
@@ -88,8 +113,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     if (--timeout > 0) {
                         setTimeout(timeout);
                     } else {
-                        if (updateDeckTask != null) {
-                            updateDeckTask.cancel(true);
+                        if (updateDeckTimer != null && updateDeckTimer.isRunning()) {
+                            updateDeckTimer.stop();
                         }
                         setTimeout(0);
                         countdown.stop();
@@ -148,9 +173,17 @@ public class DeckEditorPanel extends javax.swing.JPanel {
      */
     public void cleanUp() {
         saveDividerLocationsAndDeckAreaSettings();
-        if (updateDeckTask != null) {
-            updateDeckTask.cancel(true);
+
+        if (updateDeckTimer != null) {
+            if (updateDeckTimer.isRunning()) {
+                updateDeckTimer.stop();
+            }
+            for (ActionListener al : updateDeckTimer.getActionListeners()) {
+                updateDeckTimer.removeActionListener(al);
+            }
+            updateDeckTimer = null;
         }
+
         if (countdown != null) {
             if (countdown.isRunning()) {
                 countdown.stop();
@@ -158,7 +191,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             for (ActionListener al : countdown.getActionListeners()) {
                 countdown.removeActionListener(al);
             }
+            countdown = null;
         }
+
         this.cardSelector.cleanUp();
         this.deckArea.cleanUp();
 
@@ -241,10 +276,19 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 setTimeout(timeout);
                 if (timeout != 0) {
                     countdown.start();
-                    if (updateDeckTask == null || updateDeckTask.isDone()) {
-                        updateDeckTask = new UpdateDeckTask(SessionHandler.getSession(), currentTableId, deck);
-                        updateDeckTask.execute();
+                    if (updateDeckTimer != null && updateDeckTimer.isRunning()) {
+                        updateDeckTimer.stop();
                     }
+                    updateDeckTimer = new Timer(1000, action -> {
+                        try {
+                            // must run in gui thread only
+                            SessionHandler.updateDeck(currentTableId, deck.prepareCardsOnlyDeck());
+                        } catch (Throwable e) {
+                            logger.error("Can't send current deck to server: " + e);
+                        }
+                    });
+                    updateDeckTimer.setRepeats(true);
+                    updateDeckTimer.start();
                 }
                 break;
             case FREE_BUILDING:
@@ -1367,6 +1411,24 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             fcSelectDeck.setCurrentDirectory(new File(lastFolder));
         }
         deck.setName(this.txtDeckName.getText());
+
+        // auto-fill deck file name on new save
+        if (deck.getName() != null && !deck.getName().isEmpty()) {
+            if (fcSelectDeck.getSelectedFile() == null) {
+                // new editor
+                fcSelectDeck.setSelectedFile(Paths.get(
+                    fcSelectDeck.getCurrentDirectory().getAbsolutePath(), 
+                    deck.getName()
+                ).toFile());
+            } else {
+                // existing editor (already open load/save dialog)
+                fcSelectDeck.setSelectedFile(Paths.get(
+                    fcSelectDeck.getSelectedFile().getParent(), 
+                    deck.getName()
+                ).toFile());
+            }
+        }
+
         int ret = fcSelectDeck.showSaveDialog(this);
         if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fcSelectDeck.getSelectedFile();
@@ -1418,7 +1480,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
-        //fcSelectDeck.setCurrentDirectory(new File());
         String lastFolder = MageFrame.getPreferences().get(LAST_DECK_FOLDER, "");
         if (!lastFolder.isEmpty()) {
             fcSelectDeck.setCurrentDirectory(new File(lastFolder));
@@ -1519,8 +1580,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnGenDeckActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        if (updateDeckTask != null) {
-            updateDeckTask.cancel(true);
+        if (updateDeckTimer != null && updateDeckTimer.isRunning()) {
+            updateDeckTimer.stop();
         }
 
         if (SessionHandler.submitDeck(mode, currentTableId, deck.prepareCardsOnlyDeck())) {
@@ -1538,8 +1599,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         // TODO: need code and feature review. It sends deck every minute -- is it useless? There is another feature with auto-save
         executorService.schedule(() -> {
-            if (updateDeckTask != null) {
-                updateDeckTask.cancel(true);
+            if (updateDeckTimer != null && updateDeckTimer.isRunning()) {
+                updateDeckTimer.stop();
             }
 
             if (SessionHandler.submitDeck(mode, currentTableId, deck.prepareCardsOnlyDeck())) {
@@ -1635,38 +1696,5 @@ class ImportFilter extends FileFilter {
     @Override
     public String getDescription() {
         return "All formats (*.dec; *.mwDeck; *.txt; *.dek; *.cod; *.o8d; *.json; *.draft; *.mtga;)";
-    }
-}
-
-class UpdateDeckTask extends SwingWorker<Void, Void> {
-
-    private static final Logger logger = Logger.getLogger(UpdateDeckTask.class);
-    private final Session session;
-    private final UUID tableId;
-    private final Deck deck;
-
-    UpdateDeckTask(Session session, UUID tableId, Deck deck) {
-        this.session = session;
-        this.tableId = tableId;
-        this.deck = deck;
-    }
-
-    @Override
-    protected Void doInBackground() throws Exception {
-        while (!isCancelled()) {
-            SessionHandler.updateDeck(tableId, deck.prepareCardsOnlyDeck());
-            TimeUnit.SECONDS.sleep(5);
-        }
-        return null;
-    }
-
-    @Override
-    protected void done() {
-        try {
-            get();
-        } catch (InterruptedException | ExecutionException ex) {
-            logger.fatal("Update Matches Task error", ex);
-        } catch (CancellationException ex) {
-        }
     }
 }

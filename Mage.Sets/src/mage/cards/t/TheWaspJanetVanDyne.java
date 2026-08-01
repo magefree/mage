@@ -42,7 +42,7 @@ public final class TheWaspJanetVanDyne extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When The Wasp enters, she deals 4 damage to target tapped creature an opponent controls.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(4));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(4, "she"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

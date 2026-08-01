@@ -38,7 +38,7 @@ public final class VisionsOfVillainy extends CardImpl {
 
         // You draw two cards and lose 2 life.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2, true));
-        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2).concatBy("and"));
+        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2, false).concatBy("and"));
     }
 
     private VisionsOfVillainy(final VisionsOfVillainy card) {

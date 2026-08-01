@@ -136,6 +136,7 @@ Spree|card|
 Squad|cost|
 Start your engines!|new|
 Station|new|
+Storied|new|
 Storm|new|
 Sunburst|new|
 Suspend|number, cost, card|

@@ -39,7 +39,7 @@ public class PlayLandAbility extends ActivatedAbilityImpl {
         // no super.canActivate() call
 
         Set<ApprovingObject> approvingObjects = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this, playerId, game);
-        if (!controlsAbility(playerId, game) && approvingObjects.isEmpty()) {
+        if (!isControlledByPlayer(playerId, game) && approvingObjects.isEmpty()) {
             return ActivationStatus.getFalse();
         }
 

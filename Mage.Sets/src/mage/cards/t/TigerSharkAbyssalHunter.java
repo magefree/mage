@@ -31,7 +31,7 @@ public final class TigerSharkAbyssalHunter extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Tiger Shark enters or attacks, he connives.
-        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new ConniveSourceEffect()));
+        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new ConniveSourceEffect("he")));
 
         // {4}{U/B}: Tiger Shark can't be blocked this turn.
         this.addAbility(new SimpleActivatedAbility(

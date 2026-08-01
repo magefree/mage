@@ -342,14 +342,14 @@ public class ScryfallImageSource implements CardImageSource {
         if (bulkData == null
                 || bulkData.jsonl_download_uri == null
                 || bulkData.jsonl_download_uri.isEmpty()
-                || bulkData.size == 0) {
+                || bulkData.compressed_size == 0) {
             logger.error("Unknown bulk info format from scryfall api " + SCRYFALL_BULK_FILES_DATABASE_SOURCE_API);
             return false;
         }
 
         // download
         if (!SCRYFALL_BULK_FILES_DEBUG_READ_ONLY_MODE) {
-            logger.info("Scryfall: downloading additional data files, size " + bulkData.size / (1024 * 1024) + " MB");
+            logger.info("Scryfall: downloading additional data files, size " + bulkData.compressed_size / (1024 * 1024) + " MB");
             String url = bulkData.jsonl_download_uri;
             InputStream inputStream = XmageURLConnection.downloadBinary(url, true);
             OutputStream outputStream = null;
@@ -363,7 +363,7 @@ public class ScryfallImageSource implements CardImageSource {
 
                     byte[] buf = new byte[5 * 1024 * 1024]; // 5 MB buffer
                     int len;
-                    long needDownload = bulkData.size / 7; // text -> zip size multiplier
+                    long needDownload = bulkData.compressed_size / 1; // 1 for compressed size, 7 for text -> zip size multiplier
                     long doneDownload = 0;
                     while ((len = inputStream.read(buf)) != -1) {
                         // fast cancel
@@ -393,7 +393,7 @@ public class ScryfallImageSource implements CardImageSource {
                     try (GZIPInputStream in = new GZIPInputStream(Files.newInputStream(zippedBulkPath));
                          FileOutputStream out = new FileOutputStream(textBulkPath.toString())) {
                         byte[] buffer = new byte[5 * 1024 * 1024];
-                        long needUnpack = bulkData.size; // zip -> text
+                        long needUnpack = bulkData.compressed_size * 7; // 7 for compressed size zip -> text, 1 for text size
                         long doneUnpack = 0;
                         while ((len = in.read(buffer)) > 0) {
                             // fast cancel
