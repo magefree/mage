@@ -1021,6 +1021,8 @@ public class VerifyCardDataTest {
         ignoreBoosterSets.add("Zendikar Rising Expeditions"); // box toppers
         ignoreBoosterSets.add("March of the Machine: The Aftermath"); // epilogue boosters aren't for draft
         ignoreBoosterSets.add("Mystery Booster"); // temporary
+        // TEMPORARY: Pending MTGJson updates
+        ignoreBoosterSets.add("The Hobbit");
     }
 
     @Test
