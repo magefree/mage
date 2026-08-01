@@ -52,6 +52,7 @@ public final class TheHobbitCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dawn of a New Age", 53, Rarity.MYTHIC, mage.cards.d.DawnOfANewAge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Delighted Halfling", 25, Rarity.MYTHIC, mage.cards.d.DelightedHalfling.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Delighted Halfling", 65, Rarity.MYTHIC, mage.cards.d.DelightedHalfling.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dragon-Cursed Halls", 8, Rarity.RARE, mage.cards.d.DragonCursedHalls.class));
         cards.add(new SetCardInfo("Dragon's Desire", 11, Rarity.RARE, mage.cards.d.DragonsDesire.class));
         cards.add(new SetCardInfo("Dunedain Blade", 163, Rarity.COMMON, mage.cards.d.DunedainBlade.class));
         cards.add(new SetCardInfo("Dwarven Warriors", 93, Rarity.MYTHIC, mage.cards.d.DwarvenWarriors.class));
