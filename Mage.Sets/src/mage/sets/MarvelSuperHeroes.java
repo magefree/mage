@@ -98,6 +98,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Captain America, Super-Soldier", 9, Rarity.MYTHIC, mage.cards.c.CaptainAmericaSuperSoldier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain America, Wings of Freedom", 10, Rarity.RARE, mage.cards.c.CaptainAmericaWingsOfFreedom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain America, Wings of Freedom", 353, Rarity.RARE, mage.cards.c.CaptainAmericaWingsOfFreedom.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Captain Mar-Vell, Space-Born", 12, Rarity.UNCOMMON, mage.cards.c.CaptainMarVellSpaceBorn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Captain Mar-Vell, Space-Born", 443, Rarity.UNCOMMON, mage.cards.c.CaptainMarVellSpaceBorn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain Marvel, Earth's Protector", 11, Rarity.MYTHIC, mage.cards.c.CaptainMarvelEarthsProtector.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain Marvel, Earth's Protector", 342, Rarity.MYTHIC, mage.cards.c.CaptainMarvelEarthsProtector.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain Marvel, Earth's Protector", 354, Rarity.MYTHIC, mage.cards.c.CaptainMarvelEarthsProtector.class, NON_FULL_USE_VARIOUS));
