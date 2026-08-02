@@ -69,7 +69,7 @@ class TheBlackArrowEffect extends OneShotEffect {
 
     TheBlackArrowEffect() {
         super(Outcome.Benefit);
-        staticText = "it deals 1 damage to any target. If a dragon is dealt damage this way, destroy it";
+        staticText = "it deals 1 damage to any target. If a Dragon is dealt damage this way, destroy it";
     }
 
     private TheBlackArrowEffect(final TheBlackArrowEffect effect) {
