@@ -154,6 +154,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Rage into the Valley", 79, Rarity.COMMON, mage.cards.r.RageIntoTheValley.class));
         cards.add(new SetCardInfo("Ragged Short Spear", 108, Rarity.COMMON, mage.cards.r.RaggedShortSpear.class));
         cards.add(new SetCardInfo("Ravenhill Flock", 52, Rarity.UNCOMMON, mage.cards.r.RavenhillFlock.class));
+        cards.add(new SetCardInfo("Ravening Warg", 80, Rarity.COMMON, mage.cards.r.RaveningWarg.class));
         cards.add(new SetCardInfo("Riddles in the Dark", 292, Rarity.RARE, mage.cards.r.RiddlesInTheDark.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Riddles in the Dark", 53, Rarity.RARE, mage.cards.r.RiddlesInTheDark.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Smaug's Fury", 111, Rarity.COMMON, mage.cards.s.SmaugsFury.class));
