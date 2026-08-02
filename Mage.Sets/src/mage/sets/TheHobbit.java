@@ -53,6 +53,8 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Bombur, Gentle Dreamer", 88, Rarity.UNCOMMON, mage.cards.b.BomburGentleDreamer.class));
         cards.add(new SetCardInfo("Bothersome Noisemaker", 89, Rarity.UNCOMMON, mage.cards.b.BothersomeNoisemaker.class));
         cards.add(new SetCardInfo("Burn, Burn, Tree and Fern", 90, Rarity.UNCOMMON, mage.cards.b.BurnBurnTreeAndFern.class));
+        cards.add(new SetCardInfo("Cantankerous Keepers", 122, Rarity.RARE, mage.cards.c.CantankerousKeepers.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cantankerous Keepers", 306, Rarity.RARE, mage.cards.c.CantankerousKeepers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chief Warg's Company", 151, Rarity.RARE, mage.cards.c.ChiefWargsCompany.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chief Warg's Company", 208, Rarity.RARE, mage.cards.c.ChiefWargsCompany.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Confusticate and Bebother", 35, Rarity.COMMON, mage.cards.c.ConfusticateAndBebother.class));
