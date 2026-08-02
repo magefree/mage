@@ -4,14 +4,18 @@ gen-existing-cards-by-set.pl - generates the java clases for the cards from the 
 gen-simple-cards-by-set.pl - generates the java clases for the cards from the set of your choice that can be completly generated
 update-list-implemented-cards.pl
  - generates
-  - oldList.txt: list of cards implemented at the time the script is ran
-  - newList.txt: list of cards implemented since the last time the script was ran
-gen-list-cards-for-set.pl - generates the file for cards for a set
-gen-list-unimplemented-cards-for-set.pl - generates the file for unimplemented cards for a set
+  - data/oldList.txt: list of cards implemented at the time the script is ran
+  - data/newList.txt: list of cards implemented since the last time the script was ran
+gen-list-cards-for-set.pl - generates the file for cards for a set in data/
+gen-list-unimplemented-cards-for-set.pl - generates the file for unimplemented cards for a set in data/
 mtg-cards-data-scryfall.py - generates mtg-cards-data.txt based on Scryfall
 
 Files used:
- - author.txt - one line file that contains the author name you want to appear in the generated java files
  - keywords.txt - list of keywords that have an implementation and are automatically added to the card implementation
  - mtg-cards-data.txt - MTG cards data, used for card implementation trackers and generating release notes
  - mtg-sets-data.txt - list of sets in MTG, the 3 letters code, and mage class name if available
+ - data/author.txt - one line file that contains the author name you want to appear in the generated java files
+
+Some scripts fetch or generate files needed after the script finishes. Store those files in Utils/data, which is ignored by Git.
+
+If files are only needed during a single run, keep them in memory or write them to the OS temporary directory so they are cleaned up and do not pollute the repository.
