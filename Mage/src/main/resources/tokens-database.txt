@@ -370,7 +370,7 @@
 |TOK:C17|Cat Dragon||WasitoraCatDragonToken|
 |TOK:C17|Cat Warrior||CatWarriorToken|
 |TOK:C17|Dragon|1|DragonToken|
-|TOK:C17|Dragon|2|UtvaraHellkiteDragonToken|
+|TOK:C17|Dragon|2|Dragon66Token|
 |TOK:C17|Eldrazi Spawn||EldraziSpawnToken|
 |TOK:C17|Gold||GoldToken|
 |TOK:C17|Rat||DeathtouchRatToken|
@@ -917,7 +917,7 @@
 |TOK:RTR|Assassin||AssassinToken|
 |TOK:RTR|Bird||BirdToken|
 |TOK:RTR|Centaur||CentaurToken|
-|TOK:RTR|Dragon||UtvaraHellkiteDragonToken|
+|TOK:RTR|Dragon||Dragon66Token|
 |TOK:RTR|Elemental||GreenAndWhiteElementalToken|
 |TOK:RTR|Goblin||GoblinToken|
 |TOK:RTR|Knight||KnightToken|
@@ -1799,7 +1799,7 @@
 |TOK:GK2|Bat||BatToken|
 |TOK:GK2|Bird||WhiteBlueBirdToken|
 |TOK:GK2|Cleric||DeathpactAngelToken|
-|TOK:GK2|Dragon||UtvaraHellkiteDragonToken|
+|TOK:GK2|Dragon||Dragon66Token|
 |TOK:GK2|Goblin||RakdosGuildmageGoblinToken|
 |TOK:GK2|Ooze||OozeToken|
 |TOK:GK2|Saproling||SaprolingToken|
@@ -2362,7 +2362,7 @@
 |TOK:RVR|Bird||BirdToken|
 |TOK:RVR|Bird Illusion||BirdIllusionToken|
 |TOK:RVR|Centaur||CentaurToken|
-|TOK:RVR|Dragon||UtvaraHellkiteDragonToken|
+|TOK:RVR|Dragon||Dragon66Token|
 |TOK:RVR|Elf Knight||ElfKnightToken|
 |TOK:RVR|Goblin|1|GoblinToken|
 |TOK:RVR|Goblin|2|RakdosGuildmageGoblinToken|
@@ -3074,7 +3074,7 @@
 |TOK:HOB|Bear||BearToken|
 |TOK:HOB|Bird Soldier||BirdSoldierToken|
 |TOK:HOB|Human Soldier||HumanSoldierToken|
-|TOK:HOB|Dragon||UtvaraHellkiteDragonToken|
+|TOK:HOB|Dragon||Dragon66Token|
 |TOK:HOB|Dwarf||Dwarf22Token|
 |TOK:HOB|Elf||GreenElfToken|
 |TOK:HOB|Goblin Army|1|GoblinArmyToken|
@@ -3084,6 +3084,9 @@
 |TOK:HOB|Treasure|2|TreasureToken|
 |TOK:HOB|Wolf||WolfToken|
 
+
+# TRK
+|TOK:TRK|Human||Human01Token|
 
 # JVC
 |TOK:JVC|Elemental Shaman||ElementalShamanToken|
