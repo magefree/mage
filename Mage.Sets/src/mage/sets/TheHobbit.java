@@ -42,6 +42,9 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Bilbo, Thief in the Night", 219, Rarity.MYTHIC, mage.cards.b.BilboThiefInTheNight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bilbo, Thief in the Night", 255, Rarity.MYTHIC, mage.cards.b.BilboThiefInTheNight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bilbo, Thief in the Night", 33, Rarity.MYTHIC, mage.cards.b.BilboThiefInTheNight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bofur, Reliable Guardian", 215, Rarity.UNCOMMON, mage.cards.b.BofurReliableGuardian.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bofur, Reliable Guardian", 251, Rarity.UNCOMMON, mage.cards.b.BofurReliableGuardian.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bofur, Reliable Guardian", 6, Rarity.UNCOMMON, mage.cards.b.BofurReliableGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bolg's Company", 149, Rarity.RARE, mage.cards.b.BolgsCompany.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bolg's Company", 211, Rarity.RARE, mage.cards.b.BolgsCompany.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bothersome Noisemaker", 89, Rarity.UNCOMMON, mage.cards.b.BothersomeNoisemaker.class));
