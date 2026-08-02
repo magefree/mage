@@ -183,6 +183,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Thranduil, Sindarin Liege", 166, Rarity.UNCOMMON, mage.cards.t.ThranduilSindarinLiege.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thranduil, Sindarin Liege", 233, Rarity.UNCOMMON, mage.cards.t.ThranduilSindarinLiege.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thranduil, Sindarin Liege", 269, Rarity.UNCOMMON, mage.cards.t.ThranduilSindarinLiege.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thror's Map", 179, Rarity.UNCOMMON, mage.cards.t.ThrorsMap.class));
         cards.add(new SetCardInfo("Tidings of War", 115, Rarity.COMMON, mage.cards.t.TidingsOfWar.class));
         cards.add(new SetCardInfo("Tom, Bert, and William", 169, Rarity.RARE, mage.cards.t.TomBertAndWilliam.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tom, Bert, and William", 312, Rarity.RARE, mage.cards.t.TomBertAndWilliam.class, NON_FULL_USE_VARIOUS));
