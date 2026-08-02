@@ -9,7 +9,7 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.UtvaraHellkiteDragonToken;
+import mage.game.permanent.token.Dragon66Token;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
@@ -29,7 +29,7 @@ public final class MegaFlare extends CardImpl {
 
         // If this spell was kicked, create a 6/6 red Dragon creature token with flying.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new CreateTokenEffect(new UtvaraHellkiteDragonToken()), KickedCondition.ONCE,
+                new CreateTokenEffect(new Dragon66Token()), KickedCondition.ONCE,
                 "if this spell was kicked, create a 6/6 red Dragon creature token with flying"
         ));
 
