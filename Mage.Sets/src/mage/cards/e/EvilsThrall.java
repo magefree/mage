@@ -1,8 +1,8 @@
 package mage.cards.e;
 
 import java.util.UUID;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.LockedInCondition;
+import mage.abilities.condition.common.YouControlPermanentCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -14,7 +14,10 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -25,14 +28,11 @@ import mage.target.common.TargetCreaturePermanent;
 public final class EvilsThrall extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent(SubType.VILLAIN, "a Villain you control");
-    private static final Condition condition = (game, source) -> {
-        Permanent creature = game.getPermanent(source.getFirstTarget());
-        return creature != null && game.getBattlefield()
-                .getAllActivePermanents(filter, source.getControllerId(), game)
-                .stream()
-                .anyMatch(villain -> villain.getManaValue() > creature.getManaValue());
-    };
+            = new FilterCreaturePermanent(SubType.VILLAIN, "Villain");
+
+    static {
+        filter.add(EvilsThrallPredicate.instance);
+    }
 
     public EvilsThrall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
@@ -42,7 +42,7 @@ public final class EvilsThrall extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.UntilEndOfYourNextTurn),
                 new GainControlTargetEffect(Duration.EndOfTurn),
-                new LockedInCondition(condition),
+                new LockedInCondition(new YouControlPermanentCondition(filter)),
                 "gain control of target creature until end of turn. If you control a Villain with "
                         + "greater mana value than that creature, gain control of that creature until "
                         + "the end of your next turn instead"
@@ -60,5 +60,16 @@ public final class EvilsThrall extends CardImpl {
     @Override
     public EvilsThrall copy() {
         return new EvilsThrall(this);
+    }
+}
+
+enum EvilsThrallPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+    instance;
+
+    @Override
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        Permanent creature = game.getPermanent(input.getSource().getFirstTarget());
+        return creature != null
+                && input.getObject().getManaValue() > creature.getManaValue();
     }
 }
