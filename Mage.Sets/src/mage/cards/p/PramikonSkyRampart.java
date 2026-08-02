@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.PlayerCanOnlyAttackInDirectionRestrictionEffect;
+import mage.abilities.hint.common.PlayersLeftRightHint;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -43,7 +44,7 @@ public final class PramikonSkyRampart extends CardImpl {
                         Duration.WhileOnBattlefield,
                         "the chosen direction"
                 )
-        ));
+        ).addHint(PlayersLeftRightHint.instance));
     }
 
     private PramikonSkyRampart(final PramikonSkyRampart card) {
