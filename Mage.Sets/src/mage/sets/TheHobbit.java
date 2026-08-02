@@ -57,6 +57,9 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Chief Warg's Company", 208, Rarity.RARE, mage.cards.c.ChiefWargsCompany.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Confusticate and Bebother", 35, Rarity.COMMON, mage.cards.c.ConfusticateAndBebother.class));
         cards.add(new SetCardInfo("Crude Bent Blade", 63, Rarity.COMMON, mage.cards.c.CrudeBentBlade.class));
+        cards.add(new SetCardInfo("Dancing from Dark to Dawn", 123, Rarity.MYTHIC, mage.cards.d.DancingFromDarkToDawn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dancing from Dark to Dawn", 231, Rarity.MYTHIC, mage.cards.d.DancingFromDarkToDawn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dancing from Dark to Dawn", 267, Rarity.MYTHIC, mage.cards.d.DancingFromDarkToDawn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dain Ironfoot", 302, Rarity.RARE, mage.cards.d.DainIronfoot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dain Ironfoot", 91, Rarity.RARE, mage.cards.d.DainIronfoot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Desolation Prowler", 64, Rarity.UNCOMMON, mage.cards.d.DesolationProwler.class));
