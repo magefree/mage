@@ -26,8 +26,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.TargetStackObject;
-import mage.target.common.TargetCreaturePermanent;
-
 import java.util.UUID;
 
 /**
@@ -47,7 +45,7 @@ public final class VeryCrypticCommandD extends CardImpl {
     public VeryCrypticCommandD(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}{U}{U}");
 
-        // Choose two - 
+        // Choose two -
         this.getSpellAbility().getModes().setMinModes(2);
         this.getSpellAbility().getModes().setMaxModes(2);
 
@@ -60,17 +58,17 @@ public final class VeryCrypticCommandD extends CardImpl {
         Effect effect = new DiscardControllerEffect(1);
         effect.setText(", then discard a card");
         mode.addEffect(effect);
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
 
         // Change the target of target spell with a single target.
         mode = new Mode(new ChooseNewTargetsTargetEffect(true, true));
         mode.addTarget(new TargetStackObject(filter));
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
 
         // Turn over target nontoken creature.
         mode = new Mode(new TurnOverEffect());
         mode.addTarget(new TargetPermanent(filter2));
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
     }
 
     private VeryCrypticCommandD(final VeryCrypticCommandD card) {
