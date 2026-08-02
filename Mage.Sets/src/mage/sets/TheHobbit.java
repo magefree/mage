@@ -128,6 +128,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("My Precious", 176, Rarity.RARE, mage.cards.m.MyPrecious.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("My Precious", 235, Rarity.RARE, mage.cards.m.MyPrecious.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("My Precious", 271, Rarity.RARE, mage.cards.m.MyPrecious.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nasty Little Rabbit", 130, Rarity.UNCOMMON, mage.cards.n.NastyLittleRabbit.class));
         cards.add(new SetCardInfo("Nighthowl Pursuer", 78, Rarity.UNCOMMON, mage.cards.n.NighthowlPursuer.class));
         cards.add(new SetCardInfo("Nori, Teller of Tales", 161, Rarity.COMMON, mage.cards.n.NoriTellerOfTales.class));
         cards.add(new SetCardInfo("Oin the Brave", 106, Rarity.COMMON, mage.cards.o.OinTheBrave.class));
