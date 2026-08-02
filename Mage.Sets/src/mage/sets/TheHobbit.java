@@ -155,6 +155,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Sting, Bilbo's Sword", 178, Rarity.RARE, mage.cards.s.StingBilbosSword.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sting, Bilbo's Sword", 237, Rarity.RARE, mage.cards.s.StingBilbosSword.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sting, Bilbo's Sword", 273, Rarity.RARE, mage.cards.s.StingBilbosSword.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Stir Up Trouble", 84, Rarity.COMMON, mage.cards.s.StirUpTrouble.class));
         cards.add(new SetCardInfo("Stone-Giant of High Pass", 113, Rarity.RARE, mage.cards.s.StoneGiantOfHighPass.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stone-Giant of High Pass", 304, Rarity.RARE, mage.cards.s.StoneGiantOfHighPass.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stony-Voiced Goblins", 85, Rarity.COMMON, mage.cards.s.StonyVoicedGoblins.class));
