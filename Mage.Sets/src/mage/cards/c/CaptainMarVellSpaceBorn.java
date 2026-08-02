@@ -8,6 +8,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.abilities.keyword.FlyingAbility;
@@ -50,7 +51,8 @@ public final class CaptainMarVellSpaceBorn extends CardImpl {
                 OpponentCastSpellThisTurnCondition.instance
         ).setText("as long as an opponent has cast a spell this turn, "
                 + "you may cast spells as though they had flash"))
-                .withFlavorWord("Cosmic Awareness"));
+                .withFlavorWord("Cosmic Awareness")
+                .addHint(new ConditionHint(OpponentCastSpellThisTurnCondition.instance, "An opponent has cast a spell this turn")));
     }
 
     private CaptainMarVellSpaceBorn(final CaptainMarVellSpaceBorn card) {
