@@ -165,6 +165,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("The Arkenstone", 247, Rarity.MYTHIC, mage.cards.t.TheArkenstone.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("The Arkenstone", 270, Rarity.MYTHIC, mage.cards.t.TheArkenstone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Arkenstone", 283, Rarity.MYTHIC, mage.cards.t.TheArkenstone.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Black Arrow", 171, Rarity.UNCOMMON, mage.cards.t.TheBlackArrow.class));
         cards.add(new SetCardInfo("The Chief Warg", 150, Rarity.UNCOMMON, mage.cards.t.TheChiefWarg.class));
         cards.add(new SetCardInfo("The Lonely Mountain", 187, Rarity.RARE, mage.cards.t.TheLonelyMountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Lonely Mountain", 207, Rarity.RARE, mage.cards.t.TheLonelyMountain.class, NON_FULL_USE_VARIOUS));
