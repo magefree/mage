@@ -57,6 +57,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Burn, Burn, Tree and Fern", 90, Rarity.UNCOMMON, mage.cards.b.BurnBurnTreeAndFern.class));
         cards.add(new SetCardInfo("Cantankerous Keepers", 122, Rarity.RARE, mage.cards.c.CantankerousKeepers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cantankerous Keepers", 306, Rarity.RARE, mage.cards.c.CantankerousKeepers.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Celebrate the Mountain-king", 7, Rarity.UNCOMMON, mage.cards.c.CelebrateTheMountainKing.class));
         cards.add(new SetCardInfo("Chief Warg's Company", 151, Rarity.RARE, mage.cards.c.ChiefWargsCompany.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chief Warg's Company", 208, Rarity.RARE, mage.cards.c.ChiefWargsCompany.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Confusticate and Bebother", 35, Rarity.COMMON, mage.cards.c.ConfusticateAndBebother.class));
@@ -72,6 +73,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Desolation of Smaug", 93, Rarity.RARE, mage.cards.d.DesolationOfSmaug.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dori, Bearer of Friends", 94, Rarity.COMMON, mage.cards.d.DoriBearerOfFriends.class));
         cards.add(new SetCardInfo("Down in the Valley", 124, Rarity.RARE, mage.cards.d.DownInTheValley.class));
+        cards.add(new SetCardInfo("Down, Down to Goblin-town", 65, Rarity.UNCOMMON, mage.cards.d.DownDownToGoblinTown.class));
         cards.add(new SetCardInfo("Dreaded Bat-Cloud", 206, Rarity.UNCOMMON, mage.cards.d.DreadedBatCloud.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dreaded Bat-Cloud", 66, Rarity.UNCOMMON, mage.cards.d.DreadedBatCloud.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Duskwatch Hunter", 153, Rarity.COMMON, mage.cards.d.DuskwatchHunter.class));
@@ -129,12 +131,16 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Lake-town Lookout", 18, Rarity.COMMON, mage.cards.l.LakeTownLookout.class));
         cards.add(new SetCardInfo("Lakeshore Apothecary", 43, Rarity.COMMON, mage.cards.l.LakeshoreApothecary.class));
         cards.add(new SetCardInfo("Large Bear", 159, Rarity.UNCOMMON, mage.cards.l.LargeBear.class));
+        cards.add(new SetCardInfo("Little Bear", 128, Rarity.COMMON, mage.cards.l.LittleBear.class));
         cards.add(new SetCardInfo("Long Lake Nuisance", 45, Rarity.COMMON, mage.cards.l.LongLakeNuisance.class));
         cards.add(new SetCardInfo("Long-Bodied Grey Dog", 1, Rarity.COMMON, mage.cards.l.LongBodiedGreyDog.class));
         cards.add(new SetCardInfo("Magnificent End", 20, Rarity.COMMON, mage.cards.m.MagnificentEnd.class));
         cards.add(new SetCardInfo("Mirkwood", 188, Rarity.COMMON, mage.cards.m.Mirkwood.class));
         cards.add(new SetCardInfo("Mirkwood Pathmaker", 129, Rarity.UNCOMMON, mage.cards.m.MirkwoodPathmaker.class));
         cards.add(new SetCardInfo("Misty Mountains Raider", 105, Rarity.UNCOMMON, mage.cards.m.MistyMountainsRaider.class));
+        cards.add(new SetCardInfo("Most Decrepit Old Bird", 221, Rarity.RARE, mage.cards.m.MostDecrepitOldBird.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Most Decrepit Old Bird", 257, Rarity.RARE, mage.cards.m.MostDecrepitOldBird.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Most Decrepit Old Bird", 49, Rarity.RARE, mage.cards.m.MostDecrepitOldBird.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 192, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 197, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("My Precious", 176, Rarity.RARE, mage.cards.m.MyPrecious.class, NON_FULL_USE_VARIOUS));
@@ -149,6 +155,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Ordinary Bear", 133, Rarity.COMMON, mage.cards.o.OrdinaryBear.class));
         cards.add(new SetCardInfo("Ori, Keeper of Songs", 23, Rarity.COMMON, mage.cards.o.OriKeeperOfSongs.class));
         cards.add(new SetCardInfo("Patient Instructor", 162, Rarity.COMMON, mage.cards.p.PatientInstructor.class));
+        cards.add(new SetCardInfo("Pinecone Strike", 107, Rarity.COMMON, mage.cards.p.PineconeStrike.class));
         cards.add(new SetCardInfo("Plains", 189, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 194, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 313, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_USE_VARIOUS));
@@ -179,10 +186,13 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Smaug the Magnificent", 265, Rarity.MYTHIC, mage.cards.s.SmaugTheMagnificent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Smaug, Wicked Worm", 164, Rarity.RARE, mage.cards.s.SmaugWickedWorm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Smaug, Wicked Worm", 245, Rarity.RARE, mage.cards.s.SmaugWickedWorm.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Snowslope Hunter", 112, Rarity.UNCOMMON, mage.cards.s.SnowslopeHunter.class));
+        cards.add(new SetCardInfo("Sound the Trumpets", 55, Rarity.UNCOMMON, mage.cards.s.SoundTheTrumpets.class));
         cards.add(new SetCardInfo("Sting, Bilbo's Sword", 178, Rarity.RARE, mage.cards.s.StingBilbosSword.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sting, Bilbo's Sword", 237, Rarity.RARE, mage.cards.s.StingBilbosSword.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sting, Bilbo's Sword", 273, Rarity.RARE, mage.cards.s.StingBilbosSword.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stir Up Trouble", 84, Rarity.COMMON, mage.cards.s.StirUpTrouble.class));
+        cards.add(new SetCardInfo("Stone by Sunlight", 27, Rarity.UNCOMMON, mage.cards.s.StoneBySunlight.class));
         cards.add(new SetCardInfo("Stone-Giant of High Pass", 113, Rarity.RARE, mage.cards.s.StoneGiantOfHighPass.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stone-Giant of High Pass", 304, Rarity.RARE, mage.cards.s.StoneGiantOfHighPass.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stony-Voiced Goblins", 85, Rarity.COMMON, mage.cards.s.StonyVoicedGoblins.class));
@@ -208,6 +218,8 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("The Queen of Dale", 217, Rarity.MYTHIC, mage.cards.t.TheQueenOfDale.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Queen of Dale", 24, Rarity.MYTHIC, mage.cards.t.TheQueenOfDale.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Queen of Dale", 253, Rarity.MYTHIC, mage.cards.t.TheQueenOfDale.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Sackville-Bagginses", 299, Rarity.RARE, mage.cards.t.TheSackvilleBagginses.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Sackville-Bagginses", 83, Rarity.RARE, mage.cards.t.TheSackvilleBagginses.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thorin Oakenshield", 165, Rarity.UNCOMMON, mage.cards.t.ThorinOakenshield.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thorin Oakenshield", 202, Rarity.UNCOMMON, mage.cards.t.ThorinOakenshield.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thorin's Last Stand", 209, Rarity.COMMON, mage.cards.t.ThorinsLastStand.class, NON_FULL_USE_VARIOUS));
@@ -215,10 +227,14 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Thorin, Mountain-king", 114, Rarity.MYTHIC, mage.cards.t.ThorinMountainKing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thorin, Mountain-king", 243, Rarity.MYTHIC, mage.cards.t.ThorinMountainKing.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Thorin, Mountain-king", 279, Rarity.MYTHIC, mage.cards.t.ThorinMountainKing.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thranduil's Company", 168, Rarity.RARE, mage.cards.t.ThranduilsCompany.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thranduil's Company", 213, Rarity.RARE, mage.cards.t.ThranduilsCompany.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thranduil, Sindarin Liege", 166, Rarity.UNCOMMON, mage.cards.t.ThranduilSindarinLiege.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thranduil, Sindarin Liege", 233, Rarity.UNCOMMON, mage.cards.t.ThranduilSindarinLiege.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thranduil, Sindarin Liege", 269, Rarity.UNCOMMON, mage.cards.t.ThranduilSindarinLiege.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thror's Map", 179, Rarity.UNCOMMON, mage.cards.t.ThrorsMap.class));
+        cards.add(new SetCardInfo("Through the Forest Gate", 137, Rarity.RARE, mage.cards.t.ThroughTheForestGate.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Through the Forest Gate", 310, Rarity.RARE, mage.cards.t.ThroughTheForestGate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tidings of War", 115, Rarity.COMMON, mage.cards.t.TidingsOfWar.class));
         cards.add(new SetCardInfo("Tom, Bert, and William", 169, Rarity.RARE, mage.cards.t.TomBertAndWilliam.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tom, Bert, and William", 312, Rarity.RARE, mage.cards.t.TomBertAndWilliam.class, NON_FULL_USE_VARIOUS));
@@ -226,7 +242,9 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Troop of Ponies", 3, Rarity.UNCOMMON, mage.cards.t.TroopOfPonies.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Uneasy Partings", 58, Rarity.COMMON, mage.cards.u.UneasyPartings.class));
         cards.add(new SetCardInfo("Velvetwing Butterflies", 30, Rarity.COMMON, mage.cards.v.VelvetwingButterflies.class));
+        cards.add(new SetCardInfo("Vow to Erebor", 31, Rarity.COMMON, mage.cards.v.VowToErebor.class));
         cards.add(new SetCardInfo("Warg Tactics", 139, Rarity.COMMON, mage.cards.w.WargTactics.class));
+        cards.add(new SetCardInfo("Wargling", 140, Rarity.COMMON, mage.cards.w.Wargling.class));
         cards.add(new SetCardInfo("Well-Worn Spatula", 180, Rarity.COMMON, mage.cards.w.WellWornSpatula.class));
         cards.add(new SetCardInfo("Wilderland Scrounger", 141, Rarity.UNCOMMON, mage.cards.w.WilderlandScrounger.class));
         cards.add(new SetCardInfo("Wood Elves", 142, Rarity.COMMON, mage.cards.w.WoodElves.class));
