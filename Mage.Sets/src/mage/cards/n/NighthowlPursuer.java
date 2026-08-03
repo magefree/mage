@@ -31,9 +31,10 @@ public final class NighthowlPursuer extends CardImpl {
 
         // Ferocious -- Whenever this creature attacks while you control a creature with power 4 or greater, this creature gets +2/+2 until end of turn.
         this.addAbility(new AttacksTriggeredAbility(
-            new BoostSourceEffect(2, 2, Duration.EndOfTurn)).withTriggerCondition(FerociousCondition.instance)
-            .setAbilityWord(AbilityWord.FEROCIOUS)
-            .addHint(FerociousHint.instance)
+            new BoostSourceEffect(2, 2, Duration.EndOfTurn).setText("this creature gets +2/+2 until end of turn"))
+                .withTriggerCondition(FerociousCondition.instance)
+                .setAbilityWord(AbilityWord.FEROCIOUS)
+                .addHint(FerociousHint.instance)
         );
     }
 
