@@ -218,6 +218,8 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("The Queen of Dale", 217, Rarity.MYTHIC, mage.cards.t.TheQueenOfDale.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Queen of Dale", 24, Rarity.MYTHIC, mage.cards.t.TheQueenOfDale.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Queen of Dale", 253, Rarity.MYTHIC, mage.cards.t.TheQueenOfDale.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Sackville-Bagginses", 299, Rarity.RARE, mage.cards.t.TheSackvilleBagginses.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Sackville-Bagginses", 83, Rarity.RARE, mage.cards.t.TheSackvilleBagginses.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thorin Oakenshield", 165, Rarity.UNCOMMON, mage.cards.t.ThorinOakenshield.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thorin Oakenshield", 202, Rarity.UNCOMMON, mage.cards.t.ThorinOakenshield.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thorin's Last Stand", 209, Rarity.COMMON, mage.cards.t.ThorinsLastStand.class, NON_FULL_USE_VARIOUS));
