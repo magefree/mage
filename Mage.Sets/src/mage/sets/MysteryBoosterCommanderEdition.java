@@ -23,6 +23,7 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
         this.hasBasicLands = false; // TODO: Confirm once more information is released about the set
         // this.enableSetBooster(Integer.MAX_VALUE);
 
+        cards.add(new SetCardInfo("Autumn Willow, Harmony", 27, Rarity.RARE, mage.cards.a.AutumnWillowHarmony.class));
         cards.add(new SetCardInfo("Blor the Impervious", 28, Rarity.RARE, mage.cards.b.BlorTheImpervious.class));
         cards.add(new SetCardInfo("Chaos Warp", 72, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 73, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
