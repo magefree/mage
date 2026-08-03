@@ -17,7 +17,7 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
     }
 
     private MysteryBoosterCommanderEdition() {
-        super("Mystery Booster: Commander Edition", "MBC", ExpansionSet.buildDate(2027, 10, 1), SetType.SUPPLEMENTAL);
+        super("Mystery Booster Commander Edition", "MBC", ExpansionSet.buildDate(2027, 10, 1), SetType.SUPPLEMENTAL);
         this.blockName = "Mystery Booster Commander Edition";
 
         this.hasBasicLands = false; // TODO: Confirm once more information is released about the set
