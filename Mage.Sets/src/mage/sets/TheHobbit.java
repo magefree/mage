@@ -232,6 +232,9 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Thranduil, Sindarin Liege", 166, Rarity.UNCOMMON, mage.cards.t.ThranduilSindarinLiege.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thranduil, Sindarin Liege", 233, Rarity.UNCOMMON, mage.cards.t.ThranduilSindarinLiege.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thranduil, Sindarin Liege", 269, Rarity.UNCOMMON, mage.cards.t.ThranduilSindarinLiege.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thranduil, the Elvenking", 167, Rarity.RARE, mage.cards.t.ThranduilTheElvenking.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thranduil, the Elvenking", 246, Rarity.RARE, mage.cards.t.ThranduilTheElvenking.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thranduil, the Elvenking", 282, Rarity.RARE, mage.cards.t.ThranduilTheElvenking.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thror's Map", 179, Rarity.UNCOMMON, mage.cards.t.ThrorsMap.class));
         cards.add(new SetCardInfo("Through the Forest Gate", 137, Rarity.RARE, mage.cards.t.ThroughTheForestGate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Through the Forest Gate", 310, Rarity.RARE, mage.cards.t.ThroughTheForestGate.class, NON_FULL_USE_VARIOUS));
