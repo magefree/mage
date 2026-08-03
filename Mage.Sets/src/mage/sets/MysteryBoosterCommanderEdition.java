@@ -23,6 +23,7 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
         this.hasBasicLands = false; // TODO: Confirm once more information is released about the set
         // this.enableSetBooster(Integer.MAX_VALUE);
 
+        cards.add(new SetCardInfo("Blor the Impervious", 28, Rarity.RARE, mage.cards.b.BlorTheImpervious.class));
         cards.add(new SetCardInfo("Joven and Chandler", 24, Rarity.RARE, mage.cards.j.JovenAndChandler.class));
         // cards.add(new SetCardInfo("Tolabow, Loch Rascal", 12, Rarity.RARE, mage.cards.t.TolabowLochRascal.class));
     }
