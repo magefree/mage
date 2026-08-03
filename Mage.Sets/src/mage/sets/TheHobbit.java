@@ -179,6 +179,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Smaug the Magnificent", 265, Rarity.MYTHIC, mage.cards.s.SmaugTheMagnificent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Smaug, Wicked Worm", 164, Rarity.RARE, mage.cards.s.SmaugWickedWorm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Smaug, Wicked Worm", 245, Rarity.RARE, mage.cards.s.SmaugWickedWorm.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Snowslope Hunter", 112, Rarity.UNCOMMON, mage.cards.s.SnowslopeHunter.class));
         cards.add(new SetCardInfo("Sting, Bilbo's Sword", 178, Rarity.RARE, mage.cards.s.StingBilbosSword.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sting, Bilbo's Sword", 237, Rarity.RARE, mage.cards.s.StingBilbosSword.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sting, Bilbo's Sword", 273, Rarity.RARE, mage.cards.s.StingBilbosSword.class, NON_FULL_USE_VARIOUS));
