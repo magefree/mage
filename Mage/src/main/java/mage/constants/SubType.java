@@ -565,6 +565,7 @@ public enum SubType {
     TEFERI("Teferi", SubTypeSet.PlaneswalkerType),
     TEYO("Teyo", SubTypeSet.PlaneswalkerType),
     TEZZERET("Tezzeret", SubTypeSet.PlaneswalkerType),
+    THOMIL("Thomil", SubTypeSet.PlaneswalkerType),
     TIBALT("Tibalt", SubTypeSet.PlaneswalkerType),
     TYVAR("Tyvar", SubTypeSet.PlaneswalkerType),
     UGIN("Ugin", SubTypeSet.PlaneswalkerType),
