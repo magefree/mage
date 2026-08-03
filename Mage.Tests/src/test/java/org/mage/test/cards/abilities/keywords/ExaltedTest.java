@@ -28,4 +28,27 @@ public class ExaltedTest extends CardTestPlayerBase {
         assertLife(playerA, 15);
     }
 
+    @Test
+    public void testAbilityCounters() {
+        addCard(Zone.HAND, playerA, "Emissary of Soulfire", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Snare Thopter"); // 3/2 natively
+        addCard(Zone.BATTLEFIELD, playerA, "Tundra", 6);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Emissary of Soulfire", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Emissary of Soulfire", true);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pay {E}{E}: ", "Snare Thopter");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pay {E}{E}: ", "Snare Thopter");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pay {E}{E}: ", "Snare Thopter");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        attack(1, playerA, "Snare Thopter");
+
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+
+        // 3/2 and +3/+3
+        assertPowerToughness(playerA, "Snare Thopter", 6, 5);
+        assertLife(playerB, 14);
+    }
 }
