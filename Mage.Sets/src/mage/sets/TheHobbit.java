@@ -227,6 +227,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Uneasy Partings", 58, Rarity.COMMON, mage.cards.u.UneasyPartings.class));
         cards.add(new SetCardInfo("Velvetwing Butterflies", 30, Rarity.COMMON, mage.cards.v.VelvetwingButterflies.class));
         cards.add(new SetCardInfo("Warg Tactics", 139, Rarity.COMMON, mage.cards.w.WargTactics.class));
+        cards.add(new SetCardInfo("Wargling", 140, Rarity.COMMON, mage.cards.w.Wargling.class));
         cards.add(new SetCardInfo("Well-Worn Spatula", 180, Rarity.COMMON, mage.cards.w.WellWornSpatula.class));
         cards.add(new SetCardInfo("Wilderland Scrounger", 141, Rarity.UNCOMMON, mage.cards.w.WilderlandScrounger.class));
         cards.add(new SetCardInfo("Wood Elves", 142, Rarity.COMMON, mage.cards.w.WoodElves.class));
