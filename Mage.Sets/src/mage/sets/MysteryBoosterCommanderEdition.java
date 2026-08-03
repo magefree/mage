@@ -24,6 +24,7 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
         // this.enableSetBooster(Integer.MAX_VALUE);
 
         cards.add(new SetCardInfo("Blor the Impervious", 28, Rarity.RARE, mage.cards.b.BlorTheImpervious.class));
+        cards.add(new SetCardInfo("Boss Uramon, Shadow's Reach", 13, Rarity.RARE, mage.cards.b.BossUramonShadowsReach.class));
         cards.add(new SetCardInfo("Chaos Warp", 72, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 73, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
         cards.add(new SetCardInfo("Dust to Dust", 71, Rarity.UNCOMMON, mage.cards.d.DustToDust.class));
