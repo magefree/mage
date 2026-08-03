@@ -21,6 +21,9 @@ public enum SourcePermanentPowerValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        if (game == null || sourceAbility == null) {
+            return 0;
+        }
         Permanent sourcePermanent = sourceAbility.getSourcePermanentOrLKI(game);
         if (sourcePermanent == null) {
             return 0;
