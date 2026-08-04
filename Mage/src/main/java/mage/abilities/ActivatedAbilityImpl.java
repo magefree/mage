@@ -258,7 +258,11 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
     @Override
     public int getMaxActivationsPerTurn(Game game) {
-        return maxActivationsPerTurn;
+        GameEvent maxActivationsEvent = new GameEvent(
+                GameEvent.EventType.MAX_ACTIVATIONS,
+                this.getOriginalId(), this, controllerId, maxActivationsPerTurn, false);
+        game.replaceEvent(maxActivationsEvent);
+        return maxActivationsEvent.getAmount();
     }
 
     @Override
