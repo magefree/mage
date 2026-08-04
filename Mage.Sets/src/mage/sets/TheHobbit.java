@@ -136,6 +136,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Long-Bodied Grey Dog", 1, Rarity.COMMON, mage.cards.l.LongBodiedGreyDog.class));
         cards.add(new SetCardInfo("Magnificent End", 20, Rarity.COMMON, mage.cards.m.MagnificentEnd.class));
         cards.add(new SetCardInfo("Mirkwood", 188, Rarity.COMMON, mage.cards.m.Mirkwood.class));
+        cards.add(new SetCardInfo("Mirkwood Meditator", 48, Rarity.COMMON, mage.cards.m.MirkwoodMeditator.class));
         cards.add(new SetCardInfo("Mirkwood Pathmaker", 129, Rarity.UNCOMMON, mage.cards.m.MirkwoodPathmaker.class));
         cards.add(new SetCardInfo("Misty Mountains Raider", 105, Rarity.UNCOMMON, mage.cards.m.MistyMountainsRaider.class));
         cards.add(new SetCardInfo("Most Decrepit Old Bird", 221, Rarity.RARE, mage.cards.m.MostDecrepitOldBird.class, NON_FULL_USE_VARIOUS));
