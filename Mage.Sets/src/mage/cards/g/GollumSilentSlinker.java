@@ -35,12 +35,12 @@ public final class GollumSilentSlinker extends AdventureCard {
 
         // Meager Meal
         // Put a +1/+1 on up to one target creature. Target player gains 2 life.
-        this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
-        this.getSpellAbility().addEffect(new GainLifeTargetEffect(2)
+        this.getSpellCard().getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
+        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
+        this.getSpellCard().getSpellAbility().addEffect(new GainLifeTargetEffect(2)
             .setTargetPointer(new SecondTargetPointer())
         );
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellCard().getSpellAbility().addTarget(new TargetPlayer());
 
         this.finalizeAdventure();
     }
