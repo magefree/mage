@@ -519,6 +519,7 @@ public class ScryfallImageSupportCards {
             add("PLG22"); // Love Your LGS 2022
             add("2X2"); // Double Masters 2022
             add("SCH"); // Store Championships
+            add("PH21"); // 2021 Heroes of the Realm
             add("DMU"); // Dominaria United
             add("DMC"); // Dominaria United Commander
             add("YDMU"); // Alchemy: Dominaria
