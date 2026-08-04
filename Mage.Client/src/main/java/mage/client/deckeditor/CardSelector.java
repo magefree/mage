@@ -320,7 +320,10 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             String expansionSelection = this.cbExpansionSet.getSelectedItem().toString();
             if (!expansionSelection.equals(ConstructedFormats.ALL_SETS)
                     && !expansionSelection.startsWith(MULTI_SETS_SELECTION_TEXT)) {
-                res.addAll(ConstructedFormats.getSetsByFormat(expansionSelection));
+                List<String> setsToUse = ConstructedFormats.getSetsByFormat(expansionSelection);
+                if (setsToUse != null) {
+                    res.addAll(setsToUse);
+                }
             }
         } else {
             // multiple sets selected
@@ -329,9 +332,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
             for (int itemIndex : choiseValue) {
                 java.util.List<String> listReceived = ConstructedFormats.getSetsByFormat(x.getElementAt(itemIndex).toString());
-                listReceived.stream()
+                if (listReceived != null) {
+                    listReceived.stream()
                         .filter(item -> !res.contains(item))
                         .forEachOrdered(res::add);
+                }
             }
         }
 
