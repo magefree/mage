@@ -41,6 +41,7 @@ public final class TheHobbitEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Bilbo's Ring", 81, Rarity.MYTHIC, mage.cards.b.BilbosRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bilbo, Fellow Conspirator", 4, Rarity.RARE, mage.cards.b.BilboFellowConspirator.class));
         cards.add(new SetCardInfo("Bitter Downfall", 185, Rarity.UNCOMMON, mage.cards.b.BitterDownfall.class));
+        cards.add(new SetCardInfo("Bolg, Erebor's Reckoning", 102, Rarity.MYTHIC, mage.cards.b.BolgEreborsReckoning.class));
         cards.add(new SetCardInfo("Call Forth the Tempest", 22, Rarity.MYTHIC, mage.cards.c.CallForthTheTempest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Call Forth the Tempest", 62, Rarity.MYTHIC, mage.cards.c.CallForthTheTempest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain of Umbar", 173, Rarity.COMMON, mage.cards.c.CaptainOfUmbar.class));
