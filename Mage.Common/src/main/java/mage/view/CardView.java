@@ -464,6 +464,17 @@ public class CardView extends SimpleCardView {
                 fullCardName = card.getName();
                 this.manaCostLeftStr = card.getManaCostSymbols();
                 this.manaCostRightStr = new ArrayList<>();
+
+                // Room cards on battlefield: permanent's name is modified
+                // to show only unlocked halves, but card image and display
+                // name must use the full split card name.
+                Card mainCard = sourceCard.getMainCard();
+                if (mainCard instanceof SplitCard) {
+                    fullCardName = mainCard.getName();
+                    if (this.imageFileName.isEmpty()) {
+                        this.imageFileName = fullCardName;
+                    }
+                }
             }
 
             this.name = card.getName();
