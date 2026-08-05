@@ -36,5 +36,6 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Path of Ancestry", 80, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 77, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("Thought Vessel", 78, Rarity.UNCOMMON, mage.cards.t.ThoughtVessel.class));
+        cards.add(new SetCardInfo("Tsagan, Raider Warlord", 53, Rarity.RARE, mage.cards.t.TsaganRaiderWarlord.class));
     }
 }
