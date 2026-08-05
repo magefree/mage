@@ -47,6 +47,7 @@ public final class TheHobbitEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Cavern-Hoard Dragon", 23, Rarity.MYTHIC, mage.cards.c.CavernHoardDragon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cavern-Hoard Dragon", 63, Rarity.MYTHIC, mage.cards.c.CavernHoardDragon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Celeborn the Wise", 203, Rarity.UNCOMMON, mage.cards.c.CelebornTheWise.class));
+        cards.add(new SetCardInfo("Chief of the Wilds", 103, Rarity.MYTHIC, mage.cards.c.ChiefOfTheWilds.class));
         cards.add(new SetCardInfo("Colossal Whale", 174, Rarity.RARE, mage.cards.c.ColossalWhale.class));
         cards.add(new SetCardInfo("Dawn of a New Age", 13, Rarity.MYTHIC, mage.cards.d.DawnOfANewAge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dawn of a New Age", 162, Rarity.MYTHIC, mage.cards.d.DawnOfANewAge.class, NON_FULL_USE_VARIOUS));
