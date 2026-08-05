@@ -79,6 +79,7 @@ public final class TheHobbitEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Galadriel, Light of Valinor", 32, Rarity.MYTHIC, mage.cards.g.GaladrielLightOfValinor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Galadriel, Light of Valinor", 72, Rarity.MYTHIC, mage.cards.g.GaladrielLightOfValinor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gandalf, Party Guest", 2, Rarity.RARE, mage.cards.g.GandalfPartyGuest.class));
+        cards.add(new SetCardInfo("Gandalf, Shadow's Foe", 99, Rarity.MYTHIC, mage.cards.g.GandalfShadowsFoe.class));
         cards.add(new SetCardInfo("Gift of Strands", 208, Rarity.UNCOMMON, mage.cards.g.GiftOfStrands.class));
         cards.add(new SetCardInfo("Glamdring", 42, Rarity.MYTHIC, mage.cards.g.Glamdring.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glamdring", 82, Rarity.MYTHIC, mage.cards.g.Glamdring.class, NON_FULL_USE_VARIOUS));
