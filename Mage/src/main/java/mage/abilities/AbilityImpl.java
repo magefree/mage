@@ -623,8 +623,14 @@ public abstract class AbilityImpl implements Ability {
             alternativeChosen.activateAlternativeCosts(this, game);
         }
         // 2. ADDITIONAL COST
+        // Dynamically granted casting abilities are not necessarily included in the source's abilities.
+        if (canUseAdditionalCost && this instanceof OptionalAdditionalSourceCosts) {
+            ((OptionalAdditionalSourceCosts) this).addOptionalAdditionalCosts(this, game);
+        }
         for (Ability ability : abilities) {
-            if (canUseAdditionalCost && ability instanceof OptionalAdditionalSourceCosts) {
+            if (canUseAdditionalCost
+                    && !ability.getId().equals(this.getId())
+                    && ability instanceof OptionalAdditionalSourceCosts) {
                 ((OptionalAdditionalSourceCosts) ability).addOptionalAdditionalCosts(this, game);
             }
         }
