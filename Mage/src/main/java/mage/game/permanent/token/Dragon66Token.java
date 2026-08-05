@@ -8,9 +8,9 @@ import mage.constants.SubType;
 /**
  * @author spjspj
  */
-public final class UtvaraHellkiteDragonToken extends TokenImpl {
+public final class Dragon66Token extends TokenImpl {
 
-    public UtvaraHellkiteDragonToken() {
+    public Dragon66Token() {
         super("Dragon Token", "6/6 red Dragon creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
@@ -20,11 +20,11 @@ public final class UtvaraHellkiteDragonToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    private UtvaraHellkiteDragonToken(final UtvaraHellkiteDragonToken token) {
+    private Dragon66Token(final Dragon66Token token) {
         super(token);
     }
 
-    public UtvaraHellkiteDragonToken copy() {
-        return new UtvaraHellkiteDragonToken(this);
+    public Dragon66Token copy() {
+        return new Dragon66Token(this);
     }
 }

@@ -51,7 +51,7 @@ public final class CaptainAmericaWingsOfFreedom extends CardImpl {
             Duration.EndOfTurn,
             filter,
             true
-        )));
+        ).setText("each other Hero you control gets +X/+X until end of turn, where X is Captain America's toughness")));
     }
 
     private CaptainAmericaWingsOfFreedom(final CaptainAmericaWingsOfFreedom card) {

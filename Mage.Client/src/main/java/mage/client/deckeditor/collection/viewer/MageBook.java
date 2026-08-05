@@ -62,6 +62,10 @@ public class MageBook extends JComponent {
         super();
         this.bigCard = bigCard;
         this.setsToDisplay = ConstructedFormats.getSetsByFormat(ConstructedFormats.getDefault());
+        if (this.setsToDisplay == null || this.setsToDisplay.isEmpty()) {
+            // display all
+            this.setsToDisplay = ExpansionRepository.instance.getSetCodes();
+        }
         boolean selected3x3 = MageFrame.getPreferences().get(CollectionViewerPanel.LAYOYT_CONFIG_KEY, MageBook.LAYOUT_3X3).equals(MageBook.LAYOUT_3X3);
         this.conf = selected3x3 ? new _3x3Configuration() : new _4x4Configuration();
         initComponents();
@@ -544,7 +548,7 @@ public class MageBook extends JComponent {
 
     public void updateDispayedSets(String format) {
         this.setsToDisplay = ConstructedFormats.getSetsByFormat(format);
-        if (this.setsToDisplay.isEmpty()) {
+        if (this.setsToDisplay == null || this.setsToDisplay.isEmpty()) {
             // display all
             this.setsToDisplay = ExpansionRepository.instance.getSetCodes();
         }

@@ -34,6 +34,7 @@ public final class TheHobbitEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Arwen, Weaver of Hope", 64, Rarity.MYTHIC, mage.cards.a.ArwenWeaverOfHope.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bag End Banquet", 5, Rarity.RARE, mage.cards.b.BagEndBanquet.class));
         cards.add(new SetCardInfo("Banishing Light", 161, Rarity.UNCOMMON, mage.cards.b.BanishingLight.class));
+        cards.add(new SetCardInfo("Bard, Heir of Girion", 101, Rarity.MYTHIC, mage.cards.b.BardHeirOfGirion.class));
         cards.add(new SetCardInfo("Battle-Scarred Goblin", 192, Rarity.COMMON, mage.cards.b.BattleScarredGoblin.class));
         cards.add(new SetCardInfo("Bilbo's Burglaring", 10, Rarity.RARE, mage.cards.b.BilbosBurglaring.class));
         cards.add(new SetCardInfo("Bilbo's Ring", 41, Rarity.MYTHIC, mage.cards.b.BilbosRing.class, NON_FULL_USE_VARIOUS));
@@ -83,6 +84,7 @@ public final class TheHobbitEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Glamdring", 82, Rarity.MYTHIC, mage.cards.g.Glamdring.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Goblin Cratermaker", 194, Rarity.UNCOMMON, mage.cards.g.GoblinCratermaker.class));
         cards.add(new SetCardInfo("Goblin Fireleaper", 195, Rarity.UNCOMMON, mage.cards.g.GoblinFireleaper.class));
+        cards.add(new SetCardInfo("Great Goblin, Foul-Hearted", 105, Rarity.MYTHIC, mage.cards.g.GreatGoblinFoulHearted.class));
         cards.add(new SetCardInfo("Grey Havens Navigator", 175, Rarity.COMMON, mage.cards.g.GreyHavensNavigator.class));
         cards.add(new SetCardInfo("Grima, Saruman's Footman", 33, Rarity.MYTHIC, mage.cards.g.GrimaSarumansFootman.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grima, Saruman's Footman", 73, Rarity.MYTHIC, mage.cards.g.GrimaSarumansFootman.class, NON_FULL_USE_VARIOUS));
@@ -157,6 +159,7 @@ public final class TheHobbitEternal extends ExpansionSet {
         cards.add(new SetCardInfo("The Shire", 52, Rarity.MYTHIC, mage.cards.t.TheShire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Shire", 92, Rarity.MYTHIC, mage.cards.t.TheShire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thorin, King of Durin's Folk", 3, Rarity.RARE, mage.cards.t.ThorinKingOfDurinsFolk.class));
+        cards.add(new SetCardInfo("Thranduil the Strategist", 106, Rarity.MYTHIC, mage.cards.t.ThranduilTheStrategist.class));
         cards.add(new SetCardInfo("Tom Bombadil", 38, Rarity.MYTHIC, mage.cards.t.TomBombadil.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tom Bombadil", 78, Rarity.MYTHIC, mage.cards.t.TomBombadil.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Treasure Vault", 97, Rarity.MYTHIC, mage.cards.t.TreasureVault.class));

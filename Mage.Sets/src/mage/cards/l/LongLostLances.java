@@ -58,8 +58,7 @@ public final class LongLostLances extends CardImpl {
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
-
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private LongLostLances(final LongLostLances card) {

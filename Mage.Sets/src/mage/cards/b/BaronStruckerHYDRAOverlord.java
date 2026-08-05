@@ -47,7 +47,7 @@ public final class BaronStruckerHYDRAOverlord extends CardImpl {
 
         // Whenever another Villain you control enters, you may have it connive. Do this only once each turn.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
-            Zone.BATTLEFIELD, new ConniveTargetEffect(), filter2, true, SetTargetPointer.PERMANENT
+            Zone.BATTLEFIELD, new ConniveTargetEffect().setText("have it connive"), filter2, true, SetTargetPointer.PERMANENT
         ).setDoOnlyOnceEachTurn(true);
         this.addAbility(ability);
     }

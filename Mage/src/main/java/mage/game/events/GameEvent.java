@@ -273,6 +273,7 @@ public class GameEvent implements Serializable {
          sourceId    sourceId of the object with that ability
          playerId    player that tries to use this ability
          */
+        MAX_ACTIVATIONS, // true = max activations per game
         TAKE_SPECIAL_ACTION, TAKEN_SPECIAL_ACTION,
         /* TAKE_SPECIAL_ACTION, TAKEN_SPECIAL_ACTION,
          targetId    id of the ability to activate / use

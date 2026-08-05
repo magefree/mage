@@ -26,7 +26,8 @@ public final class GleamingSplendor extends CardImpl {
 
         // Whenever an opponent draws their second card each turn, you create a Treasure token.
         this.addAbility(new DrawNthCardTriggeredAbility(
-            new CreateTokenEffect(new TreasureToken()),
+            new CreateTokenEffect(new TreasureToken())
+                .setText("you create a Treasure token"),
             false, TargetController.OPPONENT, 2
         ));
 

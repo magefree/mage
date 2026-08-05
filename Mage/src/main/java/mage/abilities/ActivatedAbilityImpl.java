@@ -199,14 +199,15 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     protected boolean hasMoreActivationsThisTurn(Game game) {
-        if (getMaxActivationsPerTurn(game) == Integer.MAX_VALUE && maxActivationsPerGame == Integer.MAX_VALUE) {
+        int currentMaxActivationsPerGame = getMaxActivationsPerGame(game);
+        if (getMaxActivationsPerTurn(game) == Integer.MAX_VALUE && currentMaxActivationsPerGame == Integer.MAX_VALUE) {
             return true;
         }
         ActivationInfo activationInfo = getActivationInfo(game);
         if (activationInfo == null) {
             return true;
         }
-        if (activationInfo.totalActivations >= maxActivationsPerGame) {
+        if (activationInfo.totalActivations >= currentMaxActivationsPerGame) {
             return false;
         }
         return activationInfo.turnNum != game.getTurnNum()
@@ -214,14 +215,15 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     public int getMaxMoreActivationsThisTurn(Game game) {
-        if (getMaxActivationsPerTurn(game) == Integer.MAX_VALUE && maxActivationsPerGame == Integer.MAX_VALUE) {
+        int currentMaxActivationsPerGame = getMaxActivationsPerGame(game);
+        if (getMaxActivationsPerTurn(game) == Integer.MAX_VALUE && currentMaxActivationsPerGame == Integer.MAX_VALUE) {
             return Integer.MAX_VALUE;
         }
         ActivationInfo activationInfo = getActivationInfo(game);
         if (activationInfo == null) {
-            return Math.min(maxActivationsPerGame, getMaxActivationsPerTurn(game));
+            return Math.min(currentMaxActivationsPerGame, getMaxActivationsPerTurn(game));
         }
-        if (activationInfo.totalActivations >= maxActivationsPerGame) {
+        if (activationInfo.totalActivations >= currentMaxActivationsPerGame) {
             return 0;
         }
         if (activationInfo.turnNum != game.getTurnNum()) {
@@ -256,7 +258,20 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
     @Override
     public int getMaxActivationsPerTurn(Game game) {
-        return maxActivationsPerTurn;
+        GameEvent maxActivationsEvent = new GameEvent(
+                GameEvent.EventType.MAX_ACTIVATIONS,
+                this.getOriginalId(), this, controllerId, maxActivationsPerTurn, false);
+        game.replaceEvent(maxActivationsEvent);
+        return maxActivationsEvent.getAmount();
+    }
+
+    @Override
+    public int getMaxActivationsPerGame(Game game) {
+        GameEvent maxActivationsEvent = new GameEvent(
+                GameEvent.EventType.MAX_ACTIVATIONS,
+                this.getOriginalId(), this, controllerId, maxActivationsPerGame, true);
+        game.replaceEvent(maxActivationsEvent);
+        return maxActivationsEvent.getAmount();
     }
 
     protected ActivationInfo getActivationInfo(Game game) {

@@ -34,7 +34,9 @@ public class ApplyStatusEffect extends ContinuousEffectImpl {
         if (layer == Layer.AbilityAddingRemovingEffects_6) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
                 for (AbilityCounter counter : permanent.getCounters(game).getAbilityCounters()) {
-                    permanent.addAbility(counter.getAbility(), source == null ? permanent.getId() : source.getSourceId(), game);
+                    for (int i = 0; i < counter.getCount(); i++) {
+                        permanent.addAbility(counter.getAbility(), source == null ? permanent.getId() : source.getSourceId(), game);
+                    }
                 }
                 if (permanent.isSuspected()) {
                     permanent.addAbility(new MenaceAbility(false), source == null ? permanent.getId() : source.getSourceId(), game);
