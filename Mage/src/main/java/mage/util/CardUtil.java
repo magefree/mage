@@ -52,6 +52,14 @@ import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -2042,6 +2050,20 @@ public final class CardUtil {
         } else if (value instanceof AbstractMap.SimpleImmutableEntry) { //Used by Leonin Arbiter, Vessel Of The All Consuming Wanderer as a generic Pair class
             AbstractMap.SimpleImmutableEntry entryValue = (AbstractMap.SimpleImmutableEntry) value;
             return (T) new AbstractMap.SimpleImmutableEntry(deepCopyObject(entryValue.getKey()), deepCopyObject(entryValue.getValue()));
+        } else if (value instanceof Serializable) {
+            try {
+                final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                try (final ObjectOutput out = new ObjectOutputStream(bos)) {
+                    out.writeObject(value);
+                    out.flush();
+                }
+                try (final ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray().clone()))) {
+                    return (T)in.readObject();
+                }
+            }
+            catch (ClassNotFoundException|IOException ex) {
+                throw new IllegalStateException("Failed copying serializable object " + value.getClass().getSimpleName() + " during deep copy", ex);
+            }
         } else {
             // warning, do not add unnecessarily new data types and structures to game engine, try to use only standard types (see above)
             throw new IllegalStateException("Unhandled object " + value.getClass().getSimpleName() + " during deep copy, must add explicit handling of all Object types");
