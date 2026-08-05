@@ -344,6 +344,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("The Sentry, Golden Guardian", 358, Rarity.RARE, mage.cards.t.TheSentryGoldenGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Serpent Society", 226, Rarity.RARE, mage.cards.t.TheSerpentSociety.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Serpent Society", 424, Rarity.RARE, mage.cards.t.TheSerpentSociety.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Super Hero Civil War", 231, Rarity.RARE, mage.cards.t.TheSuperHeroCivilWar.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Super Hero Civil War", 308, Rarity.RARE, mage.cards.t.TheSuperHeroCivilWar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Ten Rings", 251, Rarity.MYTHIC, mage.cards.t.TheTenRings.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Ten Rings", 313, Rarity.MYTHIC, mage.cards.t.TheTenRings.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Thing, Ben Grimm", 190, Rarity.UNCOMMON, mage.cards.t.TheThingBenGrimm.class, NON_FULL_USE_VARIOUS));
