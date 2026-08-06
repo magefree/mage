@@ -25,6 +25,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cryogenic Stasis", 142, Rarity.COMMON, mage.cards.c.CryogenicStasis.class));
         cards.add(new SetCardInfo("Defense Force Aggressor", 161, Rarity.COMMON, mage.cards.d.DefenseForceAggressor.class));
         cards.add(new SetCardInfo("Direct Hit", 162, Rarity.COMMON, mage.cards.d.DirectHit.class));
+        cards.add(new SetCardInfo("Disruptor Pistol", 177, Rarity.COMMON, mage.cards.d.DisruptorPistol.class));
         cards.add(new SetCardInfo("Evasive Maneuvers", 132, Rarity.COMMON, mage.cards.e.EvasiveManeuvers.class));
         cards.add(new SetCardInfo("Exocomp", 145, Rarity.COMMON, mage.cards.e.Exocomp.class));
         cards.add(new SetCardInfo("Gin'tak Charge", 163, Rarity.COMMON, mage.cards.g.GintakCharge.class));
