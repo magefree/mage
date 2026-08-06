@@ -9,7 +9,6 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 
 /**
@@ -17,7 +16,7 @@ import mage.filter.predicate.Predicates;
  */
 public final class BaneslayerAngelToken extends TokenImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("Demons and from Dragons");
+    private static final FilterPermanent filter = new FilterPermanent("Demons and from Dragons");
 
     static {
         filter.add(Predicates.or(

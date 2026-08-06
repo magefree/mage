@@ -5,7 +5,6 @@ import mage.MageInt;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.token.BaneslayerAngelToken;
@@ -34,7 +33,7 @@ import mage.constants.Outcome;
  */
 public final class BalefangTheUnslayable extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("Angels and from Archons");
+    private static final FilterPermanent filter = new FilterPermanent("Angels and from Archons");
 
     static {
         filter.add(Predicates.or(
