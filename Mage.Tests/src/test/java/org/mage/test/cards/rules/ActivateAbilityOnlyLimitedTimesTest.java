@@ -91,4 +91,37 @@ public class ActivateAbilityOnlyLimitedTimesTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
     }
+
+    @Test
+    public void test_MaxActivationsIncrease() {
+        // Each power-up ability of permanents you control can be activated an additional time.
+        // Power-up -- {5}{R}{R}: Put two +1/+1 counters on Wonder Man.
+        addCard(Zone.HAND, playerA, "Wonder Man, Hollywood Hero",1); // {3}{R}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5 + 7);
+        //
+        // Power-up -- {5}{U}: Put three +1/+1 counters on this creature.
+        addCard(Zone.BATTLEFIELD, playerA, "Aerial Doombot",1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6 * 3);
+
+        // once per game
+        checkPlayableAbility("t1 - can activate due first usage", 1,  PhaseStep.PRECOMBAT_MAIN, playerA, "Power-up &mdash; {5}{U}", true);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Power-up &mdash; {5}{U}");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        checkPlayableAbility("t1 - can't activate due x1 usage", 1,  PhaseStep.PRECOMBAT_MAIN, playerA, "Power-up &mdash; {5}{U}", false);
+
+        // increase to x2 per game
+        checkPlayableAbility("t3 - can't activate due x1 usage", 3,  PhaseStep.PRECOMBAT_MAIN, playerA, "Power-up &mdash; {5}{U}", false);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Wonder Man, Hollywood Hero");
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN, playerA);
+        checkPlayableAbility("t3 - can activate due limit icrease", 3,  PhaseStep.PRECOMBAT_MAIN, playerA, "Power-up &mdash; {5}{U}", true);
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Power-up &mdash; {5}{U}");
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN, playerA);
+        checkPlayableAbility("t3 - can't activate due x2 usage", 3,  PhaseStep.PRECOMBAT_MAIN, playerA, "Power-up &mdash; {5}{U}", false);
+
+        checkPlayableAbility("t5 - can't activate due x2 usage", 5,  PhaseStep.PRECOMBAT_MAIN, playerA, "Power-up &mdash; {5}{U}", false);
+        
+        setStrictChooseMode(true);
+        setStopAt(5, PhaseStep.END_TURN);
+        execute();
+    }
 }

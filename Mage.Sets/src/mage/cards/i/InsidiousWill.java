@@ -37,7 +37,7 @@ public final class InsidiousWill extends CardImpl {
         // Copy target instant or sorcery spell. You may choose new targets for the copy.
         mode = new Mode(new CopyTargetStackObjectEffect());
         mode.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
     }
 
     private InsidiousWill(final InsidiousWill card) {

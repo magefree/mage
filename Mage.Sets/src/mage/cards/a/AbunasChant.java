@@ -22,15 +22,15 @@ public final class AbunasChant extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
 
 
-        // Choose one - 
+        // Choose one -
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(1);
-        //You gain 5 life; 
+        //You gain 5 life;
         this.getSpellAbility().addEffect(new GainLifeEffect(5));
         //or prevent the next 5 damage that would be dealt to target creature this turn.
         Mode mode = new Mode(new PreventDamageToTargetEffect(Duration.EndOfTurn, 5));
         mode.addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
         // Entwine {2}
         this.addAbility(new EntwineAbility("{2}"));
     }

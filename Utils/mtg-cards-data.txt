@@ -64581,21 +64581,79 @@ Interdisciplinary Studies|Alchemy: Secrets of Strixhaven|4|U|{2}{U}|Instant|||Se
 Corpseweaver Prodigy|Alchemy: Secrets of Strixhaven|5|M|{2}{B}|Creature — Treefolk Warlock|2|4|Deathtouch$If a creature an opponent controls would die, exile it instead.$Infusion -— At the beginning of your second main phase, if you gained life this turn, conjure a card named Bridge from Below into your graveyard.|
 Glorifying Verse|Alchemy: Secrets of Strixhaven|19|R|{W/B}|Enchantment|||Exalted$Repartee —- Whenever you cast an instant or sorcery spell that targets a creature, conjure a card named Glorifying Verse into your hand.|
 Grave Studies|Alchemy: Secrets of Strixhaven|20|U|{B}{G}|Instant|||Conjure a card named Teacher’s Pest onto the battlefield, then each player sacrifices a creature.|
+70,000 Light-Years from Home|Star Trek|1|U|{1}{W}|Sorcery|||Exile target creature or Spacecraft. Its controller may search their library for a basic land card, reveal it, put it into their hand, then shuffle.|
 Brad Boimler, Eager Ensign|Star Trek|5|U|{1}{W}|Legendary Creature - Human Officer|2|2|Lifelink$Whenever Brad Boimler becomes tapped, until end of turn, if one or more counters would be put on a permanent you control, that many plus one of each of those kinds of counters are put on that permanent instead.|
+Command Decision|Star Trek|8|C|{1}{W}|Sorcery|||Choose one --$* Destroy target creature with power 4 or greater.$* Draw a card.|
+DOT-7 Repair Squad|Star Trek|12|C|{3}{W}|Artifact Creature - Robot|3|3|Flying${1}{W}: Untap target creature. Activate only as a sorcery and only once each turn.|
 Dr. Beverly Crusher|Star Trek|13|M|{2}{W}|Legendary Creature - Human Doctor|2|2|If you gaining life causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.$Whenever you gain life, put a +1/+1 counter on Dr. Crusher.|
+Emergency Medical Hologram|Star Trek|15|C|{W}|Artifact Creature - Illusion Doctor|0|1|When this creature enters, put a +1/+1 counter on target creature. You gain 1 life.|
+Federation Field Medic|Star Trek|17|C|{3}{W}|Creature - Human Doctor|3|2|Vigilance$When this creature enters, choose one --$* Put a +1/+1 counter on target creature. It gains vigilance until end of turn.$* Draw a card if you control a permanent with a counter on it.|
+Free Borg Revolutionaries|Star Trek|19|C|{3}{W}{W}|Artifact Creature - Borg Rebel|4|5|When this creature enters, creatures you control get +1/+1 until end of turn.$Basic landcycling {2}|
+Malfunctioning Holodeck|Star Trek|22|C|{2}{W}|Artifact|||Ward {2}$When this artifact enters, exile target nonland permanent an opponent controls until this artifact leaves the battlefield.|
+Picard, Leading by Example|Star Trek|29|U|{1}{W}|Legendary Creature - Human Officer|2|2|{1}, {T}: Another target creature gets +X/+X until end of turn, where X is Picard's power. Activate only as a sorcery.|
+Saavik, Stoic Student|Star Trek|33|U|{4}{W}|Legendary Creature - Vulcan Advisor|2|2|Flash$Federation -- When Saavik enters, she deals X damage to target attacking or blocking creature an opponent controls, where X is the number of creature types among non-Borg creatures you control.|
 Set Phasers to . . .|Star Trek|34|C|{W}|Instant|||Choose one --$* Stun -- Tap target creature and put a stun counter on it.$* Kill -- This spell deals 3 damage to target attacking creature.|
+Shields Up!|Star Trek|35|C|{1}{W}|Instant|||Target artifact or creature you control gains hexproof and indestructible until end of turn. If it's a creature, put a +1/+1 counter on it.|
+Shuttle Ace|Star Trek|36|C|{4}{W}|Creature - Kelpien Pilot|4|4|During your turn, this creature has flying.$Whenever this creature becomes tapped, you gain 2 life.|
+Tactical Officer|Star Trek|38|C|{1}{W}|Creature - Human Officer|2|1|Whenever you attack while creatures you control have total power 8 or greater, put a +1/+1 counter on this creature. Untap it.|
+Cloistered Telepath|Star Trek|50|C|{1}{U}|Creature - Talosian Advisor|2|1|Flash$When this creature enters, draw a card, then discard a card.|
 Consider the Prime Directive|Star Trek|51|C|{2}{U}|Instant|||Choose one --$* Interfere -- Counter target spell unless its controller pays {3}.$* Observe -- Tap up to one target creature and put a stun counter on it. Draw a card.|
+Dominion Saboteur|Star Trek|54|U|{4}{U}|Creature - Shapeshifter|3|3|You may have this creature enter as a copy of any artifact or creature on the battlefield, except it isn't legendary. If you do, it enters with additional counters on it equal to the same number and kinds of counters the copied permanent has on it.|
+Federation Probe|Star Trek|59|C|{U}|Artifact Creature - Construct|1|1|Flying$When this creature enters, choose one --$* Target creature gets +1/+1 until end of turn.$* Surveil 1.|
+Guidance Failure|Star Trek|60|C|{3}{U}|Instant|||This spell costs {1} less to cast if it targets an attacking creature.$Target creature or Spacecraft's owner puts it on their choice of the top or bottom of their library.|
 Highly Illogical|Star Trek|62|U|{1}{U}|Instant|||Kicker {1}{U}$Counter target spell with mana value 2 or less. If this spell was kicked, instead counter target spell.|
 Hoshi Sato, Exolinguist|Star Trek|64|U|{4}{U}|Legendary Creature - Human Scientist|3|3|Federation -- When Hoshi Sato enters, look at the top X cards of your library, where X is the number of creature types among non-Borg creatures you control. Put one of them into your hand and the rest on the bottom of your library in a random order.|
+Humpback Whales|Star Trek|65|C|{4}{U}{U}|Creature - Whale|5|6|Vigilance, ward {2}$Basic landcycling {2}|
+Marooned|Star Trek|72|C|{U}|Enchantment - Aura|||Enchant artifact or creature$When this Aura enters, you may pay {3}. If you do, tap enchanted permanent.$Enchanted permanent doesn't untap during its controller's untap step and can't be beamed up.|
+V'Ger, the Intruder|Star Trek|87|U|{6}{U}|Legendary Artifact Creature - Construct|5|7|Flying$Whenever V'Ger enters or attacks, choose one --$* Look at target opponent's hand, then draw a card.$* Creatures your opponents control get -1/-0 until your next turn.|
+Assault Drone|Star Trek|92|C|{3}{B}|Artifact Creature - Borg|2|4|Artifact creatures you control get +1/+0.|
+Automated Warfare System|Star Trek|93|C|{2}{B}|Artifact Creature - Construct|2|2|Flying$Whenever this creature attacks, you may sacrifice another creature or artifact. If you do, draw a card.|
+Bat'leth|Star Trek|94|U|{2}{B}|Artifact - Equipment|||When this Equipment enters, target creature an opponent controls gets -2/-2 until end of turn.$Equipped creature gets +2/+0.$Equip {2}|
+Battle-Scarred Survivalist|Star Trek|95|C|{1}{B}|Creature - Klingon Scout|1|1|Menace$Whenever another creature dies, put a +1/+1 counter on this creature. This ability triggers only once each turn.|
+Cha'DIch Investigator|Star Trek|97|C|{4}{B}|Creature - Klingon Warrior|4|4|When this creature enters, create a 2/1 red Klingon Warrior creature token with haste.|
+Collective Drone|Star Trek|99|U|{1}{B}|Artifact Creature - Borg|*|2|Collective Drone's power is equal to the number of artifact creatures you control.|
+Eject the Warp Core|Star Trek|105|C|{1}{B}|Instant|||Kicker--Sacrifice an artifact or creature.$Target creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets -6/-6 until end of turn instead.|
+A Good Day to Die|Star Trek|111|C|{B}|Instant|||Target creature gets +2/+0 until end of turn. When that creature dies this turn, you draw a card.|
+He's Dead, Jim|Star Trek|114|C|{3}{B}|Instant|||Destroy target creature. Surveil 1.|
+Hive Mind Coprocessor|Star Trek|115|U|{4}{B}|Artifact Creature - Borg|4|4|Artifact creatures you control have "Whenever this creature deals combat damage to a player, you may pay 1 life. If you do, draw a card."|
 In the Pale Moonlight|Star Trek|117|U|{3}{B}{B}|Enchantment - Saga|||(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)$I -- Each opponent sacrifices a nontoken creature of their choice.$II -- Investigate.$III -- You may sacrifice an artifact or creature. If you do, create two 2/2 black Romulan creature tokens.|
+Organic Avulsion Unit|Star Trek|121|U|{2}{B}|Artifact Creature - Borg|2|3|{2}: Artifact creatures you control gain menace until end of turn.|
+Relentless Drednok|Star Trek|124|C|{B}|Artifact Creature - Robot|1|1|Lifelink${2}{B}, Exile this card from your graveyard: You draw a card and lose 1 life.|
+Resistance Is Futile|Star Trek|125|U|{1}{B}|Sorcery|||Choose one --$* Destroy target nonartifact creature.$* Return target artifact creature card with mana value 3 or less from your graveyard to the battlefield.|
+Rogue Artificial Intelligence|Star Trek|126|C|{4}{B}{B}|Artifact Creature - Construct|6|5|When this creature enters, choose one --$* You gain 3 life.$* Surveil 2.$Basic landcycling {2}|
 Salt Vampire|Star Trek|127|R|{1}{B}|Creature - Vampire Shapeshifter|2|2|Lifelink$When this creature enters, look at target opponent's hand. You may choose a nonland card from it. If you do, that player exiles that card, then draws a card.|
 Beckett Mariner, Impetuous Ensign|Star Trek|138|U|{1}{R}|Legendary Creature - Human Officer|2|1|First strike$Reckless Behavior -- Whenever Beckett Mariner becomes tapped, put a promotion counter on her. Then if there are three or more promotion counters on her, remove those counters and she deals 2 damage to each opponent.|
+Cantankerous Captain|Star Trek|141|C|{2}{R}|Creature - Tellarite Officer|2|3|At the beginning of combat on your turn, target creature you control gets +1/+0 until end of turn. Then that creature gains menace until end of turn if creatures you control have total power 8 or greater.|
 Captain James T. Kirk|Star Trek|142|M|{2}{R}|Legendary Creature - Human Officer|2|2|Whenever Captain Kirk enters or attacks, choose one. If you have no cards in hand, choose one or more instead.$* Discard a card, then draw a card.$* Create a 1/1 red Officer creature token.$* Creatures you control get +1/+0 until end of turn.|
+Captain's Tutelage|Star Trek|144|C|{1}{R}|Enchantment - Aura|||Flash$Enchant creature$When this Aura enters, enchanted creature gains first strike until end of turn.$Enchanted creature gets +2/+0.|
+Horta|Star Trek|152|C|{4}{R}{R}|Creature - Elemental|7|6|Trample$Basic landcycling {2}|
+Khaaaaaaaaaaaannn!|Star Trek|154|U|{X}{R}|Instant|||Khaaaaaaaaaaaannn! deals twice X damage to target creature. If that creature would die this turn, exile it instead.|
+La'An Noonien-Singh, Security|Star Trek|156|U|{2}{R}{R}|Legendary Creature - Human Soldier|4|3|Whenever you attack while creatures you control have total power 8 or greater, target creature can't block this turn.|
+Munitions Enthusiast|Star Trek|158|U|{1}{R}|Creature - Klingon Warrior|3|2|Trample$When this creature dies, it deals 1 damage to any target.|
+Perils of the Past|Star Trek|161|C|{1}{R}|Instant|||Choose one --$* Use the Relic -- Target creature gets +3/+2 until end of turn.$* Destroy the Relic -- Destroy target artifact.|
+Planetary Patrol|Star Trek|163|C|{1}{R}|Creature - Scout|2|2|Landfall -- Whenever a land you control enters, this creature gets +1/+1 until end of turn.|
+Plasma Cascade|Star Trek|164|C|{2}{R}|Instant|||Plasma Cascade deals 3 damage to any target. You may discard a card. If you do, draw a card.|
+Reckless Impulse|Star Trek|168|C|{1}{R}|Sorcery|||Exile the top two cards of your library. Until the end of your next turn, you may play those cards.|
+Silicate Surveyor|Star Trek|172|C|{4}{R}|Creature - Tholian Scout|4|4|Reach$When this creature enters, exile the top card of your library. Until the end of your next turn, you may play that card.|
 Amok Time|Star Trek|183|U|{2}{G}|Enchantment - Saga|||(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)$I -- Target creature you control fights up to one target creature an opponent controls.$II -- You gain 3 life.$III -- Return target creature card from your graveyard to your hand.|
 Captain Kathryn Janeway|Star Trek|187|M|{3}{G}|Legendary Creature - Human Officer|2|3|You may play an additional land on each of your turns.$Whenever Captain Janeway or another creature you control enters, that creature explores.|
+Cold-Blooded Crew|Star Trek|189|C|{4}{G}{G}|Creature - Gorn Warrior|4|4|When this creature enters, put two +1/+1 counters on target creature.$This creature can't be blocked by creatures with power 2 or less.$Basic landcycling {2}|
+Common Goal|Star Trek|190|C|{1}{G}|Sorcery|||One or two target creatures you control each deal damage equal to their power to target creature an opponent controls.|
+Dathon and Picard at El-Adrel|Star Trek|192|C|{2}{G}|Instant|||Choose one --$* Temba, His Arms Wide -- Target creature gets +3/+3 and gains trample until end of turn.$* Shaka, When the Walls Fell -- Each opponent sacrifices a nontoken artifact or enchantment of their choice.|
+Dominion Supervisor|Star Trek|195|C|{2}{G}|Creature - Vorta Doctor|3|1|When this creature enters, put a +1/+1 counter on target creature.$Creatures you control with counters on them have trample.|
+First Contact|Star Trek|199|C|{1}{G}|Instant|||Mill four cards. You may put a permanent card from among them into your hand. If this spell is the first spell you've cast this game, you gain 2 life.|
+I'm a Doctor, Not a . . .|Star Trek|203|C|{G}|Instant|||Put a +1/+1 counter on target creature you control. Untap it. Until end of turn, it gets +1/+1 and becomes a Doctor.|
+Moopsy|Star Trek|207|C|{G}|Creature - Beast|1|1|Deathtouch${2}: This creature gains reach until end of turn.|
+Mugato|Star Trek|208|U|{3}{G}{G}|Creature - Ape Beast|6|6|Reach, vigilance, deathtouch|
+Saurian Explorer|Star Trek|213|C|{3}{G}|Creature - Dinosaur Scout|4|3|Landfall -- Whenever a land you control enters, this creature gets +2/+2 until end of turn.${6}: Create a tapped Planet land token named New Planet with "{T}: Add one mana of any color." Activate only as a sorcery.|
+Support Mission|Star Trek|216|U|{2}{G}|Enchantment|||Whenever a creature you control enters, put a quest counter on this enchantment. Put a +1/+1 counter on that creature. If this enchantment has five or more quest counters on it, instead put two +1/+1 counters on that creature.|
+Syndicate Liquidators|Star Trek|218|U|{4}{G}|Creature - Orion Pirate|4|4|Trample$Landfall -- Whenever a land you control enters, put two +1/+1 counters on target creature you control.|
+Xenobotanist|Star Trek|224|C|{1}{G}|Creature - Vulcan Scientist|1|3|{T}: Add one mana of any color.|
+Xindi Surveyors|Star Trek|225|C|{2}{G}|Creature - Xindi Scientist|3|2|Landfall -- Whenever a land you control enters, put a +1/+1 counter on this creature.|
 The City on the Edge of Forever|Star Trek|228|R|{3}{W}{B}|Enchantment - Saga|||(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)$I -- All artifacts and creatures phase out. Create a 0/1 white Human creature token with "Permanents can't phase in."$II -- You draw two cards and each player loses 2 life.$III -- Sacrifice a creature token. If you do, you gain 5 life.|
 Seven of Nine|Star Trek|252|U|{2}{U}{B}|Legendary Artifact Creature - Human Scientist|2|4|Whenever you face a dilemma, draw a card.|
 Crystalline Entity|Star Trek|261|M|{8}|Artifact Creature - Elemental|7|7|Flying$When this creature enters, if you cast it, destroy all nonartifact creatures.|
+Cybernetic Specialist|Star Trek|262|C|{2}|Artifact Creature - Human Scientist|2|1|When this creature enters, surveil 1.${1}, {T}: Put target card from your graveyard on the bottom of your library.|
 U.S.S. Enterprise-D, Galaxy-Class|Star Trek|273|R|{3}|Legendary Artifact - Spacecraft|||Whenever one or more charge counters are put on U.S.S. Enterprise-D for the first time each turn, exile the top card of your library. You may play that card this turn.$Station$STATION 7+$Flying, vigilance$4/5|
 Blood Crypt|Star Trek|278|R||Land - Swamp Mountain|||({T}: Add {B} or {R}.)$As this land enters, you may pay 2 life. If you don't, it enters tapped.|
 Breeding Pool|Star Trek|279|R||Land - Forest Island|||({T}: Add {G} or {U}.)$As this land enters, you may pay 2 life. If you don't, it enters tapped.|
@@ -64607,6 +64665,16 @@ Steam Vents|Star Trek|298|R||Land - Island Mountain|||({T}: Add {U} or {R}.)$As 
 Stomping Ground|Star Trek|299|R||Land - Mountain Forest|||({T}: Add {R} or {G}.)$As this land enters, you may pay 2 life. If you don't, it enters tapped.|
 Temple Garden|Star Trek|301|R||Land - Forest Plains|||({T}: Add {G} or {W}.)$As this land enters, you may pay 2 life. If you don't, it enters tapped.|
 Watery Grave|Star Trek|306|R||Land - Island Swamp|||({T}: Add {U} or {B}.)$As this land enters, you may pay 2 life. If you don't, it enters tapped.|
+Plains|Star Trek|317|C||Basic Land - Plains|||({T}: Add {W}.)|
+Plains|Star Trek|318|C||Basic Land - Plains|||({T}: Add {W}.)|
+Island|Star Trek|319|C||Basic Land - Island|||({T}: Add {U}.)|
+Island|Star Trek|320|C||Basic Land - Island|||({T}: Add {U}.)|
+Swamp|Star Trek|321|C||Basic Land - Swamp|||({T}: Add {B}.)|
+Swamp|Star Trek|322|C||Basic Land - Swamp|||({T}: Add {B}.)|
+Mountain|Star Trek|323|C||Basic Land - Mountain|||({T}: Add {R}.)|
+Mountain|Star Trek|324|C||Basic Land - Mountain|||({T}: Add {R}.)|
+Forest|Star Trek|325|C||Basic Land - Forest|||({T}: Add {G}.)|
+Forest|Star Trek|326|C||Basic Land - Forest|||({T}: Add {G}.)|
 Captain Kathryn Janeway|Star Trek|340|M|{3}{G}|Legendary Creature - Human Officer|2|3|You may play an additional land on each of your turns.$Whenever Captain Janeway or another creature you control enters, that creature explores.|
 Seven of Nine|Star Trek|343|U|{2}{U}{B}|Legendary Artifact Creature - Human Scientist|2|4|Whenever you face a dilemma, draw a card.|
 Dr. Beverly Crusher|Star Trek|366|M|{2}{W}|Legendary Creature - Human Doctor|2|2|If you gaining life causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.$Whenever you gain life, put a +1/+1 counter on Dr. Crusher.|
@@ -64643,6 +64711,31 @@ U.S.S. Enterprise-D, Galaxy-Class|Star Trek|557|R|{3}|Legendary Artifact - Space
 Captain James T. Kirk|Star Trek|1701|M|{2}{R}|Legendary Creature - Human Officer|2|2|Whenever Captain Kirk enters or attacks, choose one. If you have no cards in hand, choose one or more instead.$* Discard a card, then draw a card.$* Create a 1/1 red Officer creature token.$* Creatures you control get +1/+0 until end of turn.|
 Captain Kathryn Janeway|Star Trek|1704|M|{3}{G}|Legendary Creature - Human Officer|2|3|You may play an additional land on each of your turns.$Whenever Captain Janeway or another creature you control enters, that creature explores.|
 Captain Kirk, Boldly Going|Star Trek Commander|85|M|{1}{G}{W}{U}|Legendary Creature - Human Officer|3|4|Vigilance$Spacecraft creatures you control get +3/+3.$Whenever Captain Kirk enters or attacks, search your library and/or graveyard for a basic land card or a card named Starship Enterprise, reveal it, and put it into your hand. If you search your library this way, shuffle.|
+Evasive Maneuvers|Star Trek Commander|132|C|{W}|Instant|||Target blocking creature you control gets +2/+2 until end of turn.$Draw a card.|
+Head of Security|Star Trek Commander|133|C|{1}{W}|Creature - Andorian Soldier|2|2|First strike|
+Shuttle Crew|Star Trek Commander|137|U|{2}{W}|Creature - Human Officer|1|1|Flying$When this creature enters, it deals 4 damage to target tapped creature an opponent controls.|
+Sickbay Orderly|Star Trek Commander|138|C|{2}{W}|Creature - Caitian Doctor|3|2|Lifelink|
+Starfleet Crew|Star Trek Commander|139|C|{1}{W}|Creature - Officer|2|3||
+Will Riker, Assuming Command|Star Trek Commander|140|U|{4}{W}|Legendary Creature - Human Officer|4|5|When Will Riker enters, put a +1/+1 counter on another target creature you control.|
+Worf, Chief Tactical Officer|Star Trek Commander|141|U|{2}{W}|Legendary Creature - Klingon Warrior Officer|2|3|Vigilance|
+Cryogenic Stasis|Star Trek Commander|142|C|{1}{U}|Instant|||Tap target creature and put a stun counter on it.$Draw a card.|
+Exocomp|Star Trek Commander|145|C|{2}{U}|Artifact Creature - Construct|3|1|Flying|
+Kolinahr Priest|Star Trek Commander|146|C|{2}{U}|Creature - Vulcan Monk|3|2|Flash|
+La Forge, Perceptive Engineer|Star Trek Commander|147|U|{1}{U}|Legendary Creature - Human Artificer|1|4|Vigilance${T}: Add {U}. Spend this mana only to cast an artifact spell.|
+Pelia, Immortal Innovator|Star Trek Commander|148|U|{3}{U}|Legendary Creature - Lanthanite Artificer|3|3|When Pelia enters, return target creature an opponent controls to its owner's hand.|
+T'Pol, Vulcan Representative|Star Trek Commander|151|U|{4}{U}|Legendary Creature - Vulcan Scientist|4|3|When T'Pol enters, tap target creature an opponent controls and put two stun counters on it.|
+Badgey, Malicious Glitch|Star Trek Commander|152|U|{3}{B}|Legendary Artifact Creature - Illusion Horror|4|3|Whenever Badgey becomes tapped, each opponent loses 1 life and you gain 1 life.|
+Ceti Eel|Star Trek Commander|153|C|{3}{B}|Creature - Worm|2|2|When this creature enters, mill two cards, then put a +1/+1 counter on this creature for each artifact and/or creature card in your graveyard.|
+Defense Force Aggressor|Star Trek Commander|161|C|{R}|Creature - Klingon Warrior|2|1||
+Direct Hit|Star Trek Commander|162|C|{2}{R}|Sorcery|||Direct Hit deals 5 damage to target creature.|
+Gin'tak Charge|Star Trek Commander|163|C|{R}|Sorcery|||Gin'tak Charge deals 2 damage to any target.|
+Kruge, Genesis Seeker|Star Trek Commander|165|U|{2}{R}|Legendary Creature - Klingon Officer|2|2|Whenever Kruge attacks, attacking Klingons you control get +1/+1 until end of turn.|
+Mek'leth Berserker|Star Trek Commander|166|C|{3}{R}|Creature - Klingon Berserker|4|3|Menace|
+Warship Flight Crew|Star Trek Commander|168|C|{1}{R}|Creature - Klingon Pilot|2|2||
+Gorn Captain|Star Trek Commander|172|C|{3}{G}|Creature - Gorn Soldier|4|3|Trample|
+Gumato|Star Trek Commander|173|U|{4}{G}|Creature - Ape Beast|4|5|Vigilance${T}: Add {G}{G}{G}.|
+Talarian Hook Spider|Star Trek Commander|175|C|{1}{G}|Creature - Spider|2|2|Reach|
+Disruptor Pistol|Star Trek Commander|177|C|{2}|Artifact|||{4}, {T}, Sacrifice this artifact: It deals 5 damage to target creature.|
 Operations Officer|Star Trek Commander|192|R|{3}{W}|Creature - Human Officer|2|2|Lifelink$When this creature enters, draw a card.$Whenever this creature attacks, put a +1/+1 counter on it.|
 Picard, Steadfast Captain|Star Trek Commander|193|M|{4}{W}{W}|Legendary Creature - Human Officer|4|4|Whenever Picard enters or attacks, put two +1/+1 counters on another target creature you control.|
 Spock, Logical Choice|Star Trek Commander|194|M|{3}{U}{U}|Legendary Creature - Vulcan Human Scientist|3|5|Vigilance${T}: Draw a card.|
@@ -64653,6 +64746,9 @@ Kirk, Enterprising Captain|Star Trek Commander|198|M|{3}{R}|Legendary Creature -
 Klingon Strike Force|Star Trek Commander|199|R|{3}{R}{R}|Creature - Klingon Warrior|5|5|Trample$Haste$When this creature dies, it deals 2 damage to each opponent.|
 Benjamin Sisko, Besieged|Star Trek Commander|200|M|{4}{G}{G}|Legendary Creature - Human Officer|5|5|Play with the top card of your library revealed.$You may play lands and cast creature spells from the top of your library.|
 Tenacious Tosk|Star Trek Commander|201|R|{3}{G}|Creature - Tosk Rogue|4|4|This creature can't be blocked by more than one creature.$Whenever this creature deals combat damage to a player, put a +1/+1 counter on it.|
+Refute|Star Trek Commander|579|C|{1}{U}{U}|Instant|||Counter target spell. Draw a card, then discard a card.|
+Last Gasp|Star Trek Commander|580|C|{1}{B}|Instant|||Target creature gets -3/-3 until end of turn.|
+Run Amok|Star Trek Commander|582|C|{1}{R}|Instant|||Target attacking creature gets +3/+3 and gains trample until end of turn.|
 Sheoldred, the Apocalypse|Stardates|11|M|{2}{B}{B}|Legendary Creature - Phyrexian Praetor|4|5|Deathtouch$Whenever you draw a card, you gain 2 life.$Whenever an opponent draws a card, they lose 2 life.|
 Darksteel Angel|Reality Fracture Commander|13|R|{9}|Artifact Creature - Angel|4|4|Flying, indestructible$You can't lose the game and your opponents can't win the game.$Creatures you control can't have -1/-1 counters put on them.|
 Darksteel Angel|Reality Fracture Commander|98|R|{9}|Artifact Creature - Angel|4|4|Flying, indestructible$You can't lose the game and your opponents can't win the game.$Creatures you control can't have -1/-1 counters put on them.|
