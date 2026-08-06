@@ -25,10 +25,9 @@ import mage.constants.Duration;
  */
 public final class BolgEreborsReckoning extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("other Goblins and Orcs you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Goblins and Orcs you control");
 
     static {
-        filter.add(AnotherPredicate.instance);
         filter.add(Predicates.or(
             SubType.GOBLIN.getPredicate(),
             SubType.ORC.getPredicate()
