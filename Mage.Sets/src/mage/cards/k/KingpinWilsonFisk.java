@@ -36,7 +36,7 @@ public final class KingpinWilsonFisk extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever you sacrifice Kingpin or another creature, create two Treasure tokens. This ability triggers only once each turn.
         this.addAbility(new SacrificePermanentTriggeredAbility(
