@@ -22,6 +22,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Benjamin Sisko, Besieged", 200, Rarity.MYTHIC, mage.cards.b.BenjaminSiskoBesieged.class));
         cards.add(new SetCardInfo("Bio-Asset Allocator", 196, Rarity.RARE, mage.cards.b.BioAssetAllocator.class));
         cards.add(new SetCardInfo("Defense Force Aggressor", 161, Rarity.COMMON, mage.cards.d.DefenseForceAggressor.class));
+        cards.add(new SetCardInfo("Gorn Captain", 172, Rarity.COMMON, mage.cards.g.GornCaptain.class));
         cards.add(new SetCardInfo("Head of Security", 133, Rarity.COMMON, mage.cards.h.HeadOfSecurity.class));
         cards.add(new SetCardInfo("Kirk, Enterprising Captain", 198, Rarity.MYTHIC, mage.cards.k.KirkEnterprisingCaptain.class));
         cards.add(new SetCardInfo("Klingon Strike Force", 199, Rarity.RARE, mage.cards.k.KlingonStrikeForce.class));
