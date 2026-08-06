@@ -45,7 +45,7 @@ public final class ChiefOfTheWilds extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever another Wolf you control enters, put two +1/+1 counters on Chief of the Wilds.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
