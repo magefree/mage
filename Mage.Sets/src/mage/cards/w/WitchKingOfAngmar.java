@@ -26,7 +26,7 @@ import java.util.UUID;
 public final class WitchKingOfAngmar extends CardImpl {
 
     private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("creature that dealt combat damage to that opponent this turn");
+            = new FilterCreaturePermanent("creature of their choice that dealt combat damage to you this turn");
 
     static {
         filter.add(new DamagedPlayerThisTurnPredicate(TargetController.SOURCE_CONTROLLER, true));
@@ -34,7 +34,7 @@ public final class WitchKingOfAngmar extends CardImpl {
 
     public WitchKingOfAngmar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.WRAITH);
         this.subtype.add(SubType.NOBLE);
@@ -44,10 +44,10 @@ public final class WitchKingOfAngmar extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever one or more creatures deal combat damage to you, each opponent sacrifices a creature that dealt combat damage to you this turn. The Ring tempts you.
+        // Whenever one or more creatures deal combat damage to you, each opponent sacrifices a creature of their choice that dealt combat damage to you this turn. The Ring tempts you.
         {
             Ability ability = new CombatDamageDealtToYouTriggeredAbility(new SacrificeOpponentsEffect(filter)
-                    .setText("each opponent sacrifices a creature that dealt combat damage to you this turn"));
+                .setText("each opponent sacrifices a creature of their choice that dealt combat damage to you this turn"));
             ability.addEffect(new TheRingTemptsYouEffect());
             this.addAbility(ability);
         }
