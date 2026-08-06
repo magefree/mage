@@ -28,7 +28,7 @@ public final class AbominationWorldRavager extends CardImpl {
         this.toughness = new MageInt(10);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
