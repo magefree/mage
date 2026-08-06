@@ -48,11 +48,11 @@ public final class RallyTheMonastery extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new MonasteryMentorToken(), 2));
 
         // • Up to two target creatures you control each get +2/+2 until end of turn.
-        this.getSpellAbility().getModes().addMode(new Mode(new BoostTargetEffect(2, 2))
+        this.getSpellAbility().addMode(new Mode(new BoostTargetEffect(2, 2))
                 .addTarget(new TargetControlledCreaturePermanent(0, 2)));
 
         // • Destroy target creature with power 4 or greater.
-        this.getSpellAbility().getModes().addMode(new Mode(new DestroyTargetEffect()).addTarget(new TargetPermanent(filter)));
+        this.getSpellAbility().addMode(new Mode(new DestroyTargetEffect()).addTarget(new TargetPermanent(filter)));
     }
 
     private RallyTheMonastery(final RallyTheMonastery card) {

@@ -50,7 +50,7 @@ public final class GrabTheReins extends CardImpl {
         TargetAnyTarget target2 = new TargetAnyTarget();
         target2.withTargetName("a creature or player to damage");
         mode.addTarget(target2);
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
 
         // Entwine {2}{R}
         this.addAbility(new EntwineAbility("{2}{R}"));

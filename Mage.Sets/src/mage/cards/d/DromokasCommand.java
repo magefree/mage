@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.counters.CounterType;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.common.FilterInstantOrSorcerySpell;
@@ -19,8 +18,6 @@ import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
-
 import java.util.UUID;
 
 import static mage.filter.StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL;
@@ -50,14 +47,14 @@ public final class DromokasCommand extends CardImpl {
         effect.setText("Target player sacrifices an enchantment");
         Mode mode = new Mode(effect);
         mode.addTarget(new TargetPlayer());
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
 
         // Put a +1/+1 counter on target creature;
         effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
         effect.setText("Put a +1/+1 counter on target creature");
         mode = new Mode(effect);
         mode.addTarget(new TargetPermanent(filterCreature));
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
 
         // or Target creature you control fights target creature you don't control.
         effect = new FightTargetsEffect();
@@ -65,7 +62,7 @@ public final class DromokasCommand extends CardImpl {
         mode = new Mode(effect);
         mode.addTarget(new TargetControlledCreaturePermanent());
         mode.addTarget(new TargetPermanent(FILTER_CREATURE_YOU_DONT_CONTROL));
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
 
     }
 
