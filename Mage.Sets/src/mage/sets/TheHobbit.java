@@ -241,6 +241,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Tidings of War", 115, Rarity.COMMON, mage.cards.t.TidingsOfWar.class));
         cards.add(new SetCardInfo("Tom, Bert, and William", 169, Rarity.RARE, mage.cards.t.TomBertAndWilliam.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tom, Bert, and William", 312, Rarity.RARE, mage.cards.t.TomBertAndWilliam.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Troll Negotiations", 138, Rarity.UNCOMMON, mage.cards.t.TrollNegotiations.class));
         cards.add(new SetCardInfo("Troop of Ponies", 199, Rarity.UNCOMMON, mage.cards.t.TroopOfPonies.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Troop of Ponies", 3, Rarity.UNCOMMON, mage.cards.t.TroopOfPonies.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Uneasy Partings", 58, Rarity.COMMON, mage.cards.u.UneasyPartings.class));
