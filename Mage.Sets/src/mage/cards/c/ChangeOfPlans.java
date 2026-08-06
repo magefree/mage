@@ -2,6 +2,7 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PhaseOutAllEffect;
 import mage.abilities.effects.keyword.ConniveTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -16,6 +17,8 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetadjustment.XTargetsCountAdjuster;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -82,12 +85,14 @@ class ChangeOfPlansEffect extends OneShotEffect {
         filter.add(new PermanentReferenceInCollectionPredicate(permanents, game));
         TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
         player.choose(outcome, target.withChooseHint("to phase out"), source, game);
+        List<UUID> idsToPhaseOut = new ArrayList<>();
         for (UUID targetId : target.getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
-                permanent.phaseOut(game);
+                idsToPhaseOut.add(permanent.getId());
             }
         }
+        new PhaseOutAllEffect(idsToPhaseOut).apply(game, source);
         return true;
     }
 }
