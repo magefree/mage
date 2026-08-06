@@ -261,7 +261,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         // each activate generate new instance with new id, so all activation code must use originalId, not id
         GameEvent maxActivationsEvent = new GameEvent(
                 GameEvent.EventType.MAX_ACTIVATIONS,
-                this.getId(), this, controllerId, maxActivationsPerTurn, false);
+                this.getOriginalId(), this, controllerId, maxActivationsPerTurn, false);
         game.replaceEvent(maxActivationsEvent);
         return maxActivationsEvent.getAmount();
     }
