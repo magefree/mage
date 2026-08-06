@@ -22,7 +22,7 @@ public final class Spaceshift extends CardImpl {
         // Exile target artifact or creature, then return that card to the battlefield under its owner's control with a +1/+1 counter on it.
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
         this.getSpellAbility().addEffect(
-            new ExileThenReturnTargetEffect(false, false).withEnterWithCounters(CounterType.P1P1.createInstance())
+            new ExileThenReturnTargetEffect(false, true).withEnterWithCounters(CounterType.P1P1.createInstance())
         );
     }
 
