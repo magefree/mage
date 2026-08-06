@@ -62,7 +62,7 @@ public final class ChoreographedSparks extends CardImpl {
                     + "the end step, sacrifice this token.\"")
         );
         mode.addTarget(new TargetSpell(filter2));
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
     }
 
     private ChoreographedSparks(final ChoreographedSparks card) {

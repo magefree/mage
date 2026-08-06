@@ -42,7 +42,7 @@ public final class HulkStrongestThereIs extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Hulk enters with a +1/+1 counter on him.
-        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.P1P1.createInstance()));
+        this.addAbility(new EntersBattlefieldWithCountersAbility(CounterType.P1P1.createInstance(), "him"));
 
         // At the beginning of your upkeep, double the number of +1/+1 counters on each Gamma creature you control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(

@@ -258,6 +258,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
     @Override
     public int getMaxActivationsPerTurn(Game game) {
+        // each activate generate new instance with new id, so all activation code must use originalId, not id
         GameEvent maxActivationsEvent = new GameEvent(
                 GameEvent.EventType.MAX_ACTIVATIONS,
                 this.getOriginalId(), this, controllerId, maxActivationsPerTurn, false);
@@ -267,6 +268,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
     @Override
     public int getMaxActivationsPerGame(Game game) {
+        // each activate generate new instance with new id, so all activation code must use originalId, not id
         GameEvent maxActivationsEvent = new GameEvent(
                 GameEvent.EventType.MAX_ACTIVATIONS,
                 this.getOriginalId(), this, controllerId, maxActivationsPerGame, true);
@@ -275,6 +277,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     protected ActivationInfo getActivationInfo(Game game) {
+        // each activate generate new instance with new id, so all activation code must use originalId, not id
         Integer turnNum = (Integer) game.getState()
                 .getValue(CardUtil.getCardZoneString("activationsTurn" + getOriginalId(), sourceId, game));
         Integer activationCount = (Integer) game.getState()
@@ -288,6 +291,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     protected void setActivationInfo(ActivationInfo activationInfo, Game game) {
+        // each activate generate new instance with new id, so all activation code must use originalId, not id
         game.getState().setValue(CardUtil
                 .getCardZoneString("activationsTurn" + getOriginalId(), sourceId, game), activationInfo.turnNum);
         game.getState().setValue(CardUtil

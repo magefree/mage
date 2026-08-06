@@ -61,7 +61,7 @@ class GiftOfImmortalityEffect extends OneShotEffect {
 
     GiftOfImmortalityEffect() {
         super(Outcome.Benefit);
-        this.staticText = "return that card to the battlefield under its owner's control. Return {this} to the battlefield attached to that creature at the beginning of the next end step";
+        this.staticText = "return that card to the battlefield under its owner's control. Return this card to the battlefield attached to that creature at the beginning of the next end step";
     }
 
     private GiftOfImmortalityEffect(final GiftOfImmortalityEffect effect) {

@@ -3079,7 +3079,7 @@
 |TOK:HOB|Elf||GreenElfToken|
 |TOK:HOB|Goblin Army|1|GoblinArmyToken|
 |TOK:HOB|Goblin Army|2|GoblinArmyToken|
-|TOK:HOB|Stone Boulder|1|StoneBoulderToken|
+|TOK:HOB|Stone Boulder||StoneBoulderToken|
 |TOK:HOB|Treasure|1|TreasureToken|
 |TOK:HOB|Treasure|2|TreasureToken|
 |TOK:HOB|Wolf||WolfToken|

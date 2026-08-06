@@ -813,6 +813,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         int ret = fcImportDeck.showOpenDialog(this);
         if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fcImportDeck.getSelectedFile();
+            if (file == null || !file.exists()) {
+                return;
+            }
             MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
             try {
                 DeckImporter importer = DeckImporter.getDeckImporter(file.getPath());
@@ -930,6 +933,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         int ret = fcExportDeck.showSaveDialog(this);
         if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fcExportDeck.getSelectedFile();
+            if (file == null) {
+                return;
+            }
 
             // default ext for file
             String needFileName = file.getAbsolutePath();
