@@ -25,6 +25,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Defense Force Aggressor", 161, Rarity.COMMON, mage.cards.d.DefenseForceAggressor.class));
         cards.add(new SetCardInfo("Exocomp", 145, Rarity.COMMON, mage.cards.e.Exocomp.class));
         cards.add(new SetCardInfo("Gorn Captain", 172, Rarity.COMMON, mage.cards.g.GornCaptain.class));
+        cards.add(new SetCardInfo("Gumato", 173, Rarity.UNCOMMON, mage.cards.g.Gumato.class));
         cards.add(new SetCardInfo("Head of Security", 133, Rarity.COMMON, mage.cards.h.HeadOfSecurity.class));
         cards.add(new SetCardInfo("Kirk, Enterprising Captain", 198, Rarity.MYTHIC, mage.cards.k.KirkEnterprisingCaptain.class));
         cards.add(new SetCardInfo("Klingon Strike Force", 199, Rarity.RARE, mage.cards.k.KlingonStrikeForce.class));
