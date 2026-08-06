@@ -59,6 +59,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 320, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 323, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 324, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mugato", 208, Rarity.UNCOMMON, mage.cards.m.Mugato.class));
         cards.add(new SetCardInfo("Munitions Enthusiast", 158, Rarity.UNCOMMON, mage.cards.m.MunitionsEnthusiast.class));
         cards.add(new SetCardInfo("Overgrown Tomb", 289, Rarity.RARE, mage.cards.o.OvergrownTomb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overgrown Tomb", 399, Rarity.RARE, mage.cards.o.OvergrownTomb.class, NON_FULL_USE_VARIOUS));
