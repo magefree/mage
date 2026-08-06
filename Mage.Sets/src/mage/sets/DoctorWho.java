@@ -984,10 +984,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("The Master, Multiplied", 545, Rarity.RARE, mage.cards.t.TheMasterMultiplied.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Master, Multiplied", 751, Rarity.RARE, mage.cards.t.TheMasterMultiplied.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Matrix of Time", 589, Rarity.COMMON, mage.cards.t.TheMatrixOfTime.class));
-        //cards.add(new SetCardInfo("The Moment", 1050, Rarity.RARE, mage.cards.t.TheMoment.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Moment", 180, Rarity.RARE, mage.cards.t.TheMoment.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Moment", 459, Rarity.RARE, mage.cards.t.TheMoment.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Moment", 785, Rarity.RARE, mage.cards.t.TheMoment.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Moment", 1050, Rarity.RARE, mage.cards.t.TheMoment.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Moment", 180, Rarity.RARE, mage.cards.t.TheMoment.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Moment", 459, Rarity.RARE, mage.cards.t.TheMoment.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Moment", 785, Rarity.RARE, mage.cards.t.TheMoment.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Moonbase", 591, Rarity.COMMON, mage.cards.t.TheMoonbase.class));
         cards.add(new SetCardInfo("The Night of the Doctor", 24, Rarity.RARE, mage.cards.t.TheNightOfTheDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Night of the Doctor", 629, Rarity.RARE, mage.cards.t.TheNightOfTheDoctor.class, NON_FULL_USE_VARIOUS));
