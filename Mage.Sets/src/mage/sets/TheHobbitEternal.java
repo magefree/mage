@@ -162,6 +162,7 @@ public final class TheHobbitEternal extends ExpansionSet {
         cards.add(new SetCardInfo("The Reaver Cleaver", 94, Rarity.MYTHIC, mage.cards.t.TheReaverCleaver.class));
         cards.add(new SetCardInfo("The Shire", 52, Rarity.MYTHIC, mage.cards.t.TheShire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Shire", 92, Rarity.MYTHIC, mage.cards.t.TheShire.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thorin, Company's Leader", 100, Rarity.MYTHIC, mage.cards.t.ThorinCompanysLeader.class));
         cards.add(new SetCardInfo("Thorin, King of Durin's Folk", 3, Rarity.RARE, mage.cards.t.ThorinKingOfDurinsFolk.class));
         cards.add(new SetCardInfo("Thranduil the Strategist", 106, Rarity.MYTHIC, mage.cards.t.ThranduilTheStrategist.class));
         cards.add(new SetCardInfo("Tom Bombadil", 38, Rarity.MYTHIC, mage.cards.t.TomBombadil.class, NON_FULL_USE_VARIOUS));
