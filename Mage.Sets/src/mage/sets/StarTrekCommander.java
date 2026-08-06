@@ -33,6 +33,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kirk, Enterprising Captain", 198, Rarity.MYTHIC, mage.cards.k.KirkEnterprisingCaptain.class));
         cards.add(new SetCardInfo("Klingon Strike Force", 199, Rarity.RARE, mage.cards.k.KlingonStrikeForce.class));
         cards.add(new SetCardInfo("Kolinahr Priest", 146, Rarity.COMMON, mage.cards.k.KolinahrPriest.class));
+        cards.add(new SetCardInfo("La Forge, Perceptive Engineer", 147, Rarity.UNCOMMON, mage.cards.l.LaForgePerceptiveEngineer.class));
         cards.add(new SetCardInfo("Last Gasp", 580, Rarity.COMMON, mage.cards.l.LastGasp.class));
         cards.add(new SetCardInfo("Mek'leth Berserker", 166, Rarity.COMMON, mage.cards.m.MeklethBerserker.class));
         cards.add(new SetCardInfo("Operations Officer", 192, Rarity.RARE, mage.cards.o.OperationsOfficer.class));
