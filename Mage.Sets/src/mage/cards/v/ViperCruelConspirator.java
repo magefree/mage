@@ -55,7 +55,7 @@ public final class ViperCruelConspirator extends CardImpl {
         // {B}: Target creature that's attacking alone gains your choice of deathtouch or lifelink until end of turn.
         Ability gainAbility = new SimpleActivatedAbility(
             new GainsChoiceOfAbilitiesEffect(
-                GainsChoiceOfAbilitiesEffect.TargetType.Target, "", true,
+                GainsChoiceOfAbilitiesEffect.TargetType.Target, "Target creature that's attacking alone", true,
                 DeathtouchAbility.getInstance(), LifelinkAbility.getInstance()
             ),
             new ManaCostsImpl<>("{B}")
