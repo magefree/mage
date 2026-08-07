@@ -7,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.ConditionalTargetAdjuster;
@@ -23,10 +23,10 @@ import mage.constants.ComparisonType;
  */
 public final class CruelAlliance extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 3 or less");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with mana value 3 or less");
 
     static {
-        filter.add(new PowerPredicate(ComparisonType.OR_LESS, 3));
+        filter.add(new ManaValuePredicate(ComparisonType.OR_LESS, 3));
     }
 
     public CruelAlliance(UUID ownerId, CardSetInfo setInfo) {
