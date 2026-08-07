@@ -38,6 +38,7 @@ public final class BigBertha extends CardImpl {
         // Big Bertha enters with X +1/+1 counters on her.
         this.addAbility(new EntersBattlefieldAbility(
             new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())
+                .setText("{this} enters with X +1/+1 counters on her")
         ));
 
         // {1}{G}, {T}: Put a +1/+1 counter on Big Bertha.

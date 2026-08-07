@@ -40,7 +40,7 @@ public final class CrimsonCowlMasterOfEvil extends CardImpl {
 
         // Whenever one or more nontoken Villains you control attack a player, you create a 2/1 black Villain creature token with menace.
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(
-            new CreateTokenEffect(new VillainToken()),
+            new CreateTokenEffect(new VillainToken()).setText("you create a 2/1 black Villain creature token with menace"),
             1, filter
         ).setTriggerPhrase("Whenever one or more nontoken Villains you control attack a player, "));
     }

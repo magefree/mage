@@ -18,7 +18,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.target.TargetPermanent;
@@ -28,7 +27,7 @@ import mage.target.TargetPermanent;
  * @author LevelX2
  */
 public final class DisplayOfDominance extends CardImpl {
-    
+
     private static final FilterPermanent filter = new FilterPermanent("blue or black noncreature permanent");
 
     static {
@@ -51,7 +50,7 @@ public final class DisplayOfDominance extends CardImpl {
 
         // or Permanents you control can't be the targets of blue or black spells your opponents control this turn
         Mode mode = new Mode(new DisplayOfDominanceEffect());
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
     }
 
     private DisplayOfDominance(final DisplayOfDominance card) {

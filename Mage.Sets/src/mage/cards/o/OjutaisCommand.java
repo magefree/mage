@@ -41,15 +41,15 @@ public final class OjutaisCommand extends CardImpl {
         this.getSpellAbility().getTargets().add(new TargetCardInYourGraveyard(filter));
 
         // or You gain 4 life;
-        this.getSpellAbility().getModes().addMode(new Mode(new GainLifeEffect(4)));
+        this.getSpellAbility().addMode(new Mode(new GainLifeEffect(4)));
 
         // or Counter target creature spell;
         Mode mode = new Mode(new CounterTargetEffect());
         mode.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_CREATURE));
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
 
         // or Draw a card
-        this.getSpellAbility().getModes().addMode(new Mode(new DrawCardSourceControllerEffect(1)));
+        this.getSpellAbility().addMode(new Mode(new DrawCardSourceControllerEffect(1)));
     }
 
     private OjutaisCommand(final OjutaisCommand card) {

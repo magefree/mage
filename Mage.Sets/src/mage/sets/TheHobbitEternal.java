@@ -40,14 +40,18 @@ public final class TheHobbitEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Bilbo's Ring", 41, Rarity.MYTHIC, mage.cards.b.BilbosRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bilbo's Ring", 81, Rarity.MYTHIC, mage.cards.b.BilbosRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bilbo, Fellow Conspirator", 4, Rarity.RARE, mage.cards.b.BilboFellowConspirator.class));
+        cards.add(new SetCardInfo("Bilbo, Unexpected Adventurer", 98, Rarity.MYTHIC, mage.cards.b.BilboUnexpectedAdventurer.class));
         cards.add(new SetCardInfo("Bitter Downfall", 185, Rarity.UNCOMMON, mage.cards.b.BitterDownfall.class));
+        cards.add(new SetCardInfo("Bolg, Erebor's Reckoning", 102, Rarity.MYTHIC, mage.cards.b.BolgEreborsReckoning.class));
         cards.add(new SetCardInfo("Call Forth the Tempest", 22, Rarity.MYTHIC, mage.cards.c.CallForthTheTempest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Call Forth the Tempest", 62, Rarity.MYTHIC, mage.cards.c.CallForthTheTempest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain of Umbar", 173, Rarity.COMMON, mage.cards.c.CaptainOfUmbar.class));
         cards.add(new SetCardInfo("Cavern-Hoard Dragon", 23, Rarity.MYTHIC, mage.cards.c.CavernHoardDragon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cavern-Hoard Dragon", 63, Rarity.MYTHIC, mage.cards.c.CavernHoardDragon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Celeborn the Wise", 203, Rarity.UNCOMMON, mage.cards.c.CelebornTheWise.class));
+        cards.add(new SetCardInfo("Chief of the Wilds", 103, Rarity.MYTHIC, mage.cards.c.ChiefOfTheWilds.class));
         cards.add(new SetCardInfo("Colossal Whale", 174, Rarity.RARE, mage.cards.c.ColossalWhale.class));
+        cards.add(new SetCardInfo("Dain of the Ancient Halls", 104, Rarity.MYTHIC, mage.cards.d.DainOfTheAncientHalls.class));
         cards.add(new SetCardInfo("Dawn of a New Age", 13, Rarity.MYTHIC, mage.cards.d.DawnOfANewAge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dawn of a New Age", 162, Rarity.MYTHIC, mage.cards.d.DawnOfANewAge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dawn of a New Age", 53, Rarity.MYTHIC, mage.cards.d.DawnOfANewAge.class, NON_FULL_USE_VARIOUS));
@@ -79,6 +83,7 @@ public final class TheHobbitEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Galadriel, Light of Valinor", 32, Rarity.MYTHIC, mage.cards.g.GaladrielLightOfValinor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Galadriel, Light of Valinor", 72, Rarity.MYTHIC, mage.cards.g.GaladrielLightOfValinor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gandalf, Party Guest", 2, Rarity.RARE, mage.cards.g.GandalfPartyGuest.class));
+        cards.add(new SetCardInfo("Gandalf, Shadow's Foe", 99, Rarity.MYTHIC, mage.cards.g.GandalfShadowsFoe.class));
         cards.add(new SetCardInfo("Gift of Strands", 208, Rarity.UNCOMMON, mage.cards.g.GiftOfStrands.class));
         cards.add(new SetCardInfo("Glamdring", 42, Rarity.MYTHIC, mage.cards.g.Glamdring.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glamdring", 82, Rarity.MYTHIC, mage.cards.g.Glamdring.class, NON_FULL_USE_VARIOUS));
@@ -158,6 +163,7 @@ public final class TheHobbitEternal extends ExpansionSet {
         cards.add(new SetCardInfo("The Reaver Cleaver", 94, Rarity.MYTHIC, mage.cards.t.TheReaverCleaver.class));
         cards.add(new SetCardInfo("The Shire", 52, Rarity.MYTHIC, mage.cards.t.TheShire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Shire", 92, Rarity.MYTHIC, mage.cards.t.TheShire.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thorin, Company's Leader", 100, Rarity.MYTHIC, mage.cards.t.ThorinCompanysLeader.class));
         cards.add(new SetCardInfo("Thorin, King of Durin's Folk", 3, Rarity.RARE, mage.cards.t.ThorinKingOfDurinsFolk.class));
         cards.add(new SetCardInfo("Thranduil the Strategist", 106, Rarity.MYTHIC, mage.cards.t.ThranduilTheStrategist.class));
         cards.add(new SetCardInfo("Tom Bombadil", 38, Rarity.MYTHIC, mage.cards.t.TomBombadil.class, NON_FULL_USE_VARIOUS));

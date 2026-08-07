@@ -30,7 +30,7 @@ public final class SheHulkWallbreaker extends CardImpl {
 
     public SheHulkWallbreaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GAMMA);
         this.subtype.add(SubType.HERO);
@@ -48,7 +48,8 @@ public final class SheHulkWallbreaker extends CardImpl {
 
         // Whenever a Hero you control becomes blocked, put a +1/+1 counter on that Hero for each creature blocking it.
         this.addAbility(new BecomesBlockedAllTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance(), BlockingCreatureCount.TARGET),
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance(), BlockingCreatureCount.TARGET)
+                    .setText("put a +1/+1 counter on that Hero for each creature blocking it"),
                 false, filter2, true
         ));
     }

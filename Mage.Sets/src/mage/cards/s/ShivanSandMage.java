@@ -49,7 +49,6 @@ public final class ShivanSandMage extends CardImpl {
         Mode mode = new Mode(new ShivanSandMageEffect(true));
         mode.addTarget(new TargetPermanentOrSuspendedCard(filter, false));
         ability.addMode(mode);
-        ability.getModes().addMode(mode);
         this.addAbility(ability);
 
         // Suspend 4-{R}

@@ -26,18 +26,18 @@ public final class FieryConfluence extends CardImpl {
         this.getSpellAbility().getModes().setMinModes(3);
         this.getSpellAbility().getModes().setMaxModes(3);
         this.getSpellAbility().getModes().setMayChooseSameModeMoreThanOnce(true);
-        
+
         // - Fiery Confluence deals 1 damage to each creature;
         this.getSpellAbility().addEffect(new DamageAllEffect(1, new FilterCreaturePermanent()));
-        
+
         // Fiery Confluence deals 2 damage to each opponent;
         Mode mode = new Mode(new DamagePlayersEffect(2, TargetController.OPPONENT));
-        this.getSpellAbility().getModes().addMode(mode);
-        
+        this.getSpellAbility().addMode(mode);
+
         // Destroy target artifact.
         mode = new Mode(new DestroyTargetEffect());
         mode.addTarget(new TargetArtifactPermanent());
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
     }
 
     private FieryConfluence(final FieryConfluence card) {
