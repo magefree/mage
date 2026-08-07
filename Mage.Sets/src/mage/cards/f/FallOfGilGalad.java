@@ -53,7 +53,7 @@ public final class FallOfGilGalad extends CardImpl {
             ).setText("until end of turn, target creature you control gains \"When this creature dies, draw two cards.\""));
             ability.addEffect(new FightTargetsEffect().setText("Then that creature fights up to one other target creature"));
             ability.addTarget(new TargetControlledCreaturePermanent().setTargetTag(1));
-            ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2).setTargetTag(2));
+            ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2).setTargetTag(2));
         });
 
         this.addAbility(sagaAbility);

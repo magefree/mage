@@ -38,6 +38,7 @@ public class WebSlingingAbility extends SpellAbility {
         this.clearManaCostsToPay();
         this.addCost(new ManaCostsImpl<>(manaString));
         this.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)));
+        this.setAdditionalCostsRuleVisible(false);
 
         this.setRuleAtTheTop(true);
     }
