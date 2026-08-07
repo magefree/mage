@@ -53,6 +53,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Hallowed Fountain", 286, Rarity.RARE, mage.cards.h.HallowedFountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hallowed Fountain", 392, Rarity.RARE, mage.cards.h.HallowedFountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hallowed Fountain", 487, Rarity.RARE, mage.cards.h.HallowedFountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("He's Dead, Jim", 114, Rarity.COMMON, mage.cards.h.HesDeadJim.class));
         cards.add(new SetCardInfo("Highly Illogical", 62, Rarity.UNCOMMON, mage.cards.h.HighlyIllogical.class));
         cards.add(new SetCardInfo("Horta", 152, Rarity.COMMON, mage.cards.h.Horta.class));
         cards.add(new SetCardInfo("Humpback Whales", 65, Rarity.COMMON, mage.cards.h.HumpbackWhales.class));
