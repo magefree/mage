@@ -113,5 +113,18 @@ public class Historic extends Constructed {
         banned.add("Fa'adiyah Seer");
         banned.add("Scrounging Bandar");
         banned.add("Time to Feed");
+
+        // These cards are banned by default in Constructed due to MBC acorn reprints.
+        // Historic explicitly exempts them.
+        banned.remove("Case of the Lost Witness");
+        banned.remove("Emerald Collector");
+        banned.remove("Euru, Acorn Scrounger");
+        banned.remove("Jet Collector");
+        banned.remove("Oracle of the Alpha");
+        banned.remove("Overcooked");
+        banned.remove("Pearl Collector");
+        banned.remove("Perforator Crocodile");
+        banned.remove("Ruby Collector");
+        banned.remove("Sapphire Collector");
     }
 }

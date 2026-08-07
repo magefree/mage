@@ -102,6 +102,7 @@ public class Constructed extends DeckValidator {
         banned.add("Blufferfish");
         banned.add("Busted!");
         banned.add("Carnival Barker");
+        banned.add("Case of the Lost Witness");
         banned.add("Centrifuge");
         banned.add("Claire D'Loon, Joy Sculptor");
         banned.add("Cover the Spot");
@@ -111,6 +112,8 @@ public class Constructed extends DeckValidator {
         banned.add("Devil K. Nevil");
         banned.add("Disemvowel");
         banned.add("Don't Try This at Home");
+        banned.add("Emerald Collector");
+        banned.add("Euru, Acorn Scrounger");
         banned.add("Exit Through the Grift Shop");
         banned.add("Far Out");
         banned.add("Fluros of Myra's Marvels");
@@ -137,6 +140,7 @@ public class Constructed extends DeckValidator {
         banned.add("It Came from Planet Glurg");
         banned.add("Jermane, Pride of the Circus");
         banned.add("Jetpack Janitor");
+        banned.add("Jet Collector");
         banned.add("Juggletron");
         banned.add("Katerina of Myra's Marvels");
         banned.add("Killer Cosplay");
@@ -155,9 +159,13 @@ public class Constructed extends DeckValidator {
         banned.add("Now You See Me . . .");
         banned.add("Octo Opus");
         banned.add("Omniclown Colossus");
+        banned.add("Oracle of the Alpha");
         banned.add("Opening Ceremony");
+        banned.add("Overcooked");
         banned.add("Park Map");
         banned.add("Park Re-Entry");
+        banned.add("Pearl Collector");
+        banned.add("Perforator Crocodile");
         banned.add("Phone a Friend");
         banned.add("Photo Op");
         banned.add("Pie-Eating Contest");
@@ -168,8 +176,10 @@ public class Constructed extends DeckValidator {
         banned.add("Questionable Cuisine");
         banned.add("Rat in the Hat");
         banned.add("Rock Star");
+        banned.add("Ruby Collector");
         banned.add("Scavenger Hunt");
         banned.add("Scooch");
+        banned.add("Sapphire Collector");
         banned.add("Solaflora, Intergalactic Icon");
         banned.add("Sole Performer");
         banned.add("Souvenir T-Shirt");

@@ -47,7 +47,7 @@ class ArwenWeaverOfHopeEffect extends ReplacementEffectImpl {
 
     ArwenWeaverOfHopeEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-        staticText = "Each other creature you control enters the battlefield with a number of additional +1/+1 counters on it equal to {this}'s toughness";
+        staticText = "Each other creature you control enters with a number of additional +1/+1 counters on it equal to {this}'s toughness";
     }
 
     private ArwenWeaverOfHopeEffect(ArwenWeaverOfHopeEffect effect) {

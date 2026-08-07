@@ -32,11 +32,11 @@ public final class RighteousConfluence extends CardImpl {
         //  - Exile target enchantment;
         Mode mode = new Mode(new ExileTargetEffect());
         mode.addTarget(new TargetEnchantmentPermanent());
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
 
         // You gain 5 life;
         mode = new Mode(new GainLifeEffect(5));
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
     }
 
     private RighteousConfluence(final RighteousConfluence card) {

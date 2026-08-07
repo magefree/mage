@@ -21,6 +21,7 @@ import mage.abilities.hint.common.CitysBlessingHint;
 import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.hint.common.InitiativeHint;
 import mage.abilities.hint.common.MonarchHint;
+import mage.abilities.hint.common.PlayersLeftRightHint;
 import mage.abilities.keyword.*;
 import mage.cards.*;
 import mage.cards.decks.CardNameUtil;
@@ -58,6 +59,7 @@ import mage.verify.mtgjson.MtgJsonSet;
 import mage.verify.mtgjson.SpellBookCardsPage;
 import mage.watchers.Watcher;
 import net.java.truevfs.access.TFile;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -1102,6 +1104,11 @@ public class VerifyCardDataTest {
 
         // CHECK: unknown set or wrong name
         for (ExpansionSet set : sets) {
+            if ("MBC".equals(set.getCode())) {
+                // TODO: skip name check until MBC metadata is updated in MtgJSON
+                continue;
+            }
+
             if (set.getSetType().equals(SetType.CUSTOM_SET)) {
                 // skip unofficial sets like Star Wars
                 continue;
@@ -2602,9 +2609,10 @@ public class VerifyCardDataTest {
         cardHints.put(InitiativeHint.class, "the initiative");
         cardHints.put(CurrentDungeonHint.class, "venture into");
         cardHints.put(ColorsOfManaSpentToCastCount.getHint().getClass(), "Converge —");
+        cardHints.put(PlayersLeftRightHint.class, "choose left or right");
         for (Class hintClass : cardHints.keySet()) {
             String lookupText = cardHints.get(hintClass);
-            boolean needHint = ref.text.contains(lookupText);
+            boolean needHint = StringUtils.containsIgnoreCase(ref.text, lookupText);
             if (needHint) {
                 boolean haveHint = card.getAbilities()
                         .stream()

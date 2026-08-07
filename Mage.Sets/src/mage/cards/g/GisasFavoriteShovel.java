@@ -89,6 +89,9 @@ class LucilleEffect extends OneShotEffect {
         }
         player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
+        if (permanent == null) {
+            return false;
+        }
         return permanent.sacrifice(source, game)
                 && new WalkerToken().putOntoBattlefield(1, game, source, source.getControllerId()
         );
