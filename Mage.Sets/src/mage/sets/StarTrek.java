@@ -77,6 +77,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Reckless Impulse", 168, Rarity.COMMON, mage.cards.r.RecklessImpulse.class));
         cards.add(new SetCardInfo("Relentless Drednok", 124, Rarity.COMMON, mage.cards.r.RelentlessDrednok.class));
         cards.add(new SetCardInfo("Resistance Is Futile", 125, Rarity.UNCOMMON, mage.cards.r.ResistanceIsFutile.class));
+        cards.add(new SetCardInfo("Rogue Artificial Intelligence", 126, Rarity.COMMON, mage.cards.r.RogueArtificialIntelligence.class));
         cards.add(new SetCardInfo("Sacred Foundry", 295, Rarity.RARE, mage.cards.s.SacredFoundry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sacred Foundry", 400, Rarity.RARE, mage.cards.s.SacredFoundry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sacred Foundry", 495, Rarity.RARE, mage.cards.s.SacredFoundry.class, NON_FULL_USE_VARIOUS));
