@@ -1,0 +1,89 @@
+1 [EOC:91] Aftermath Analyst
+1 [EOC:53] Arcane Signet
+1 [EOC:92] Augur of Autumn
+1 [EOC:13] Baloth Prime
+1 [EOC:93] Beast Within
+1 [EOC:52] Binding the Old Gods
+1 [EOC:86] Blasphemous Act
+1 [EOC:149] Bojuka Bog
+1 [EOC:82] Braids, Arisen Nightmare
+1 [EOC:151] Cabaretti Courtyard
+1 [EOC:152] Canyon Slough
+1 [EOC:94] Centaur Vinecrasher
+1 [EOC:154] Cinder Glade
+1 [EOC:59] Command Tower
+1 [EOC:95] Cultivate
+1 [EOC:156] Dakmor Salvage
+1 [EOC:115] Escape to the Wilds
+1 [EOC:157] Escape Tunnel
+1 [EOC:20] Eumidian Hatchery
+1 [EOC:8] Eumidian Wastewaker
+1 [EOC:10] Evendo Brushrazer
+1 [EOC:158] Evolving Wilds
+1 [EOC:14] Exploration Broodship
+1 [EOC:60] Fabled Passage
+1 [EOC:50] Farseek
+1 [EOC:21] Festering Thicket
+8 [EOE:276] Forest
+1 [EOC:96] Formless Genesis
+1 [EOC:116] Gaze of Granite
+1 [EOC:83] God-Eternal Bontu
+1 [EOC:97] Groundskeeper
+1 [EOC:88] Hammer of Purphoros
+1 [EOC:98] Harrow
+1 [EOC:15] Horizon Explorer
+1 [EOC:84] Infernal Grasp
+1 [EOC:119] Juri, Master of the Revue
+1 [EOC:164] Karplusan Forest
+1 [EOC:120] Korvold, Fae-Cursed King
+1 [EOC:165] Llanowar Wastes
+1 [EOC:99] Loamcrafter Faun
+1 [EOC:167] Maestros Theater
+1 [EOC:121] Mayhem Devil
+1 [EOC:122] Mazirek, Kraul Death Priest
+1 [EOC:89] Moraug, Fury of Akoum
+3 [EOE:273] Mountain
+1 [EOC:61] Mountain Valley
+1 [EOC:100] Multani, Yavimaya's Avatar
+1 [EOC:169] Myriad Landscape
+1 [EOC:101] Nature's Lore
+1 [EOC:85] Night's Whisper
+1 [EOC:123] Omnath, Locus of Rage
+1 [EOC:102] Oracle of Mul Daya
+1 [EOC:103] Pest Infestation
+1 [EOC:12] Planetary Annihilation
+1 [EOC:124] Putrefy
+1 [EOC:125] Rakdos Charm
+1 [EOC:104] Rampaging Baloths
+1 [EOC:172] Riveteers Overlook
+1 [EOC:173] Rocky Tar Pit
+1 [EOC:105] Roiling Regrowth
+1 [EOC:106] Satyr Wayfinder
+1 [EOC:16] Scouring Swarm
+1 [EOC:178] Sheltered Thicket
+1 [EOC:107] Skyshroud Claim
+1 [EOC:182] Smoldering Marsh
+1 [EOC:57] Sol Ring
+1 [EOC:126] Soul of Windgrace
+1 [EOC:108] Splendid Reclamation
+1 [EOC:51] Springbloom Druid
+1 [EOC:90] Sprouting Goblin
+1 [EOC:185] Sulfurous Springs
+5 [EOE:271] Swamp
+1 [EOC:4] Szarel, Genesis Shepherd
+1 [EOC:109] Tear Asunder
+1 [EOC:62] Terramorphic Expanse
+1 [EOC:117] The Gitrog Monster
+1 [EOC:110] Tireless Tracker
+1 [EOC:111] Titania, Protector of Argoth
+1 [EOC:189] Twilight Mire
+1 [EOC:127] Uurg, Spawn of Turg
+1 [EOC:24] Vernal Fen
+1 [EOC:190] Viridescent Bog
+1 [OGW:184a] Wastes
+1 [EOC:129] Windgrace's Judgment
+1 [EOC:112] World Breaker
+1 [EOC:130] Worldsoul's Rage
+SB: 1 [EOC:1] Hearthhull, the Worldseed
+LAYOUT MAIN:(1,9)(CMC,false,50)|([EOC:149],[EOC:151],[EOC:152],[EOC:154],[EOC:59],[EOC:156],[EOC:157],[EOC:20],[EOC:158],[EOC:60],[EOC:21],[EOE:276],[EOE:276],[EOE:276],[EOE:276],[EOE:276],[EOE:276],[EOE:276],[EOE:276],[EOC:164],[EOC:165],[EOC:167],[EOE:273],[EOE:273],[EOE:273],[EOC:61],[EOC:169],[EOC:172],[EOC:173],[EOC:178],[EOC:182],[EOC:185],[EOE:271],[EOE:271],[EOE:271],[EOE:271],[EOE:271],[EOC:62],[EOC:189],[EOC:24],[EOC:190],[OGW:184a])([EOC:14],[EOC:97],[EOC:103],[EOC:57])([EOC:91],[EOC:53],[EOC:50],[EOC:84],[EOC:119],[EOC:101],[EOC:85],[EOC:125],[EOC:106],[EOC:90],[EOC:109],[EOC:130])([EOC:92],[EOC:93],[EOC:82],[EOC:95],[EOC:10],[EOC:96],[EOC:116],[EOC:88],[EOC:98],[EOC:15],[EOC:99],[EOC:121],[EOC:124],[EOC:105],[EOC:16],[EOC:51],[EOC:110],[EOC:127])([EOC:13],[EOC:52],[EOC:94],[EOC:8],[EOC:102],[EOC:107],[EOC:126],[EOC:108])([EOC:115],[EOC:83],[EOC:120],[EOC:122],[EOC:12],[EOC:4],[EOC:117],[EOC:111],[EOC:129])([EOC:89],[EOC:100],[EOC:104])([EOC:123],[EOC:112])([EOC:86])
+LAYOUT SIDEBOARD:(1,1)(RARITY,true,24)|([EOC:1])

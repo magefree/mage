@@ -8,15 +8,8 @@
 
 use strict;
 use Scalar::Util qw(looks_like_number);
-
-my $dataFile = "mtg-cards-data.txt";
-my $setsFile = "mtg-sets-data.txt";
-
-my %sets;
-
-my @setCards;
-my %nameSetNumber;
-my %setNumber;
+use File::Find;
+use File::Spec;
 
 sub toCamelCase
 {
@@ -27,25 +20,30 @@ sub toCamelCase
 }
 
 my $option = $ARGV[0];
-
-open (DATA, $setsFile) || die "can't open $setsFile";
-while(my $line = <DATA>)
+if (!defined $option || $option eq "")
 {
-    my @data = split('\\|', $line);
-    $sets{$data[0]} = $data[1];
-    $sets{toCamelCase($data[0])} = $data[1];
+    die "Usage: $0 <pattern>\n";
 }
-close(DATA);
 
-my $dir_listing = "dir \/a \/b \/s ..\\Mage.Sets\\src\\mage\\sets | find \".java\" |";
-open (DIR_LISTING, "$dir_listing");
+my $sets_dir = File::Spec->catdir('..', 'Mage.Sets', 'src', 'mage', 'sets');
+my @java_files;
+find(
+    {
+        no_chdir => 1,
+        wanted   => sub {
+            return unless -f $_;
+            return unless /\.java\z/;
+            push @java_files, $File::Find::name;
+        },
+    },
+    $sets_dir
+);
+
 my %setsForJavafile;
 my $totalCards = 0;
 
-while (<DIR_LISTING>)
+foreach my $file (@java_files)
 {
-    chomp;
-    my $file = $_;
     my $name = "";
     my $cardNum = "";
 

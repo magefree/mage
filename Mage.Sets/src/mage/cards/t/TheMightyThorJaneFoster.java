@@ -6,7 +6,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.target.TargetPermanent;
@@ -27,7 +26,7 @@ import mage.constants.PutCards;
  */
 public final class TheMightyThorJaneFoster extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("nontoken artifact or creature");
+    private static final FilterPermanent filter = new FilterPermanent("nontoken artifact or creature");
     private static final FilterPermanent filter2
             = new FilterControlledPermanent(SubType.EQUIPMENT, "an Equipment");
 

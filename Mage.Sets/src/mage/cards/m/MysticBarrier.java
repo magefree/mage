@@ -4,6 +4,7 @@ import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.PlayerCanOnlyAttackInDirectionRestrictionEffect;
+import mage.abilities.hint.common.PlayersLeftRightHint;
 import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,7 +33,7 @@ public final class MysticBarrier extends CardImpl {
                         Duration.WhileOnBattlefield,
                         "the last chosen direction"
                 )
-        ));
+        ).addHint(PlayersLeftRightHint.instance));
     }
 
     private MysticBarrier(final MysticBarrier card) {

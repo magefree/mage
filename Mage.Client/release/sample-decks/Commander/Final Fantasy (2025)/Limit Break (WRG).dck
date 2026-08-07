@@ -1,0 +1,96 @@
+1 [FIC:76] Aerith, Last Ancient
+1 [FIC:333] Arcane Signet
+1 [FIC:336] Armory Automaton
+1 [FIC:374] Ash Barrens
+1 [FIC:231] Austere Command
+1 [FIC:53] Avalanche of Sector 7
+1 [FIN:129] Barret Wallace
+1 [FIC:79] Barret, Avalanche Leader
+1 [FIC:233] Bastion Protector
+1 [FIC:375] Battlefield Forge
+1 [FIC:320] Behemoth Sledge
+1 [FIC:376] Bonders' Enclave
+1 [FIC:234] Bronze Guardian
+1 [FIC:377] Brushland
+1 [FIC:66] Bugenhagen, Wise Elder
+1 [FIC:54] Cait Sith, Fortune Teller
+1 [FIC:378] Canopy Vista
+1 [FIC:337] Champion's Helm
+1 [FIC:291] Chaos Warp
+1 [FIC:13] Cid, Freeflier Pilot
+1 [FIC:380] Cinder Glade
+1 [FIC:236] Clever Concealment
+1 [FIC:381] Clifftop Retreat
+1 [FIC:14] Cloud's Limit Break
+1 [FIC:338] Colossus Hammer
+1 [FIC:485] Command Tower
+1 [FIC:98] Conformer Shuriken
+1 [FIC:340] Conqueror's Flail
+1 [FIC:300] Cultivate
+1 [FIC:342] Darksteel Plate
+1 [FIC:323] Decimate
+1 [FIC:241] Dispatch
+1 [FIC:18] Elena, Turk Recruit
+1 [FIC:389] Evolving Wilds
+1 [FIC:390] Exotic Orchard
+1 [FIC:344] Explorer's Scope
+1 [FIC:392] Fire-Lit Thicket
+3 [FIN:306] Forest
+1 [FIC:396] Fortified Village
+1 [FIC:294] Furious Rise
+1 [FIC:397] Furycalm Snarl
+1 [FIC:398] Game Trail
+1 [FIC:308] Harmonize
+1 [FIC:21] Heidegger, Shinra Executive
+1 [FIC:22] Helitrooper
+1 [FIC:295] Hellkite Tyrant
+1 [FIC:345] Hero's Blade
+1 [FIC:346] Hero's Heirloom
+1 [FIC:347] Inspiring Statuary
+1 [FIC:406] Jungle Shrine
+1 [FIC:67] Lifestream's Blessing
+1 [FIC:349] Lightning Greaves
+1 [FIC:350] Mask of Memory
+1 [FIC:407] Mossfire Valley
+3 [FIN:303] Mountain
+1 [FIC:311] Nature's Lore
+1 [FIC:411] Path of Ancestry
+3 [FIN:295] Plains
+1 [FIC:296] Professional Face-Breaker
+1 [FIC:69] Professor Hojo
+1 [FIC:250] Puresteel Paladin
+1 [FIC:414] Radiant Grove
+1 [FIC:313] Rampant Growth
+1 [FIC:91] Red XIII, Proud Warrior
+1 [FIC:416] Rootbound Crag
+1 [FIC:417] Rugged Prairie
+1 [FIC:418] Sacred Peaks
+1 [FIC:419] Scavenger Grounds
+1 [FIC:217] Secret Rendezvous
+1 [FIC:92] Sephiroth, Fallen Hero
+1 [FIC:355] Skullclamp
+1 [FIC:424] Slayers' Stronghold
+1 [FIC:357] Sol Ring
+1 [FIC:25] SOLDIER Military Program
+1 [FIC:426] Spire of Industry
+1 [FIC:61] Summon: Kujata
+1 [FIC:72] Summoning Materia
+1 [FIC:428] Sungrass Prairie
+1 [FIC:432] Sunpetal Grove
+1 [FIC:433] Sunscorched Divide
+1 [FIC:362] Sword of the Animist
+1 [FIC:6] Tifa, Martial Artist
+1 [FIC:370] Trailblazer's Boots
+1 [FIC:32] Ultimate Magic: Holy
+1 [FIC:62] Ultimate Magic: Meteor
+1 [FIC:259] Unfinished Business
+1 [FIC:298] Vandalblast
+1 [FIC:260] Vanquish the Horde
+1 [FIC:64] Vincent, Vengeful Atoner
+1 [FIC:441] Wooded Ridgeline
+1 [FIC:100] Wrecking Ball Arm
+1 [FIC:65] Yuffie, Materia Hunter
+1 [FIN:45] Zack Fair
+SB: 1 [FIC:2] Cloud, Ex-SOLDIER
+LAYOUT MAIN:(1,8)(CMC,false,50)|([FIC:374],[FIC:375],[FIC:376],[FIC:377],[FIC:378],[FIC:380],[FIC:381],[FIC:485],[FIC:389],[FIC:390],[FIC:392],[FIN:306],[FIN:306],[FIN:306],[FIC:396],[FIC:397],[FIC:398],[FIC:406],[FIC:407],[FIN:303],[FIN:303],[FIN:303],[FIC:411],[FIN:295],[FIN:295],[FIN:295],[FIC:414],[FIC:416],[FIC:417],[FIC:418],[FIC:419],[FIC:424],[FIC:426],[FIC:428],[FIC:432],[FIC:433],[FIC:441])([FIC:338],[FIC:241],[FIC:344],[FIC:355],[FIC:357],[FIC:298],[FIN:45])([FIC:333],[FIC:66],[FIC:13],[FIC:14],[FIC:98],[FIC:340],[FIC:22],[FIC:345],[FIC:346],[FIC:349],[FIC:350],[FIC:311],[FIC:69],[FIC:250],[FIC:313],[FIC:362],[FIC:370],[FIC:100])([FIC:336],[FIC:53],[FIC:233],[FIC:320],[FIC:337],[FIC:291],[FIC:300],[FIC:342],[FIC:18],[FIC:294],[FIC:347],[FIC:296],[FIC:91],[FIC:217],[FIC:25],[FIC:72],[FIC:32],[FIC:64],[FIC:65])([FIC:76],[FIN:129],[FIC:79],[FIC:54],[FIC:236],[FIC:323],[FIC:308],[FIC:21],[FIC:6])([FIC:234],[FIC:92],[FIC:259])([FIC:231],[FIC:295],[FIC:67],[FIC:61],[FIC:62])([FIC:260])
+LAYOUT SIDEBOARD:(1,1)(RARITY,true,24)|([FIC:2])

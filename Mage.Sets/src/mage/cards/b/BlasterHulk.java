@@ -20,6 +20,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetAnyTargetAmount;
+import mage.watchers.common.EnergySpentOrLostWatcher;
 
 import java.util.UUID;
 
@@ -39,7 +40,8 @@ public final class BlasterHulk extends CardImpl {
         // This spell costs {1} less to cast for each {E} you've paid or lost this turn.
         DynamicValue xValue = EnergySpentOrLostThisTurnCount.instance;
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionForEachSourceEffect(1, xValue))
-                .addHint(new ValueHint("{E} you've paid or lost this turn", xValue))
+                .addHint(new ValueHint("{E} you've paid or lost this turn", xValue)),
+                new EnergySpentOrLostWatcher()
         );
         // Haste
         this.addAbility(HasteAbility.getInstance());

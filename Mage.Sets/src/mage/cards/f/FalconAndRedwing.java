@@ -38,7 +38,7 @@ public final class FalconAndRedwing extends CardImpl {
         // Whenever Falcon and Redwing deal combat damage to a player, create that many 1/1 white Bird creature tokens with flying, then put a +1/+1 counter on Falcon and Redwing.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
             new CreateTokenEffect(new BirdToken(), SavedDamageValue.MANY), false, false
-        );
+        ).setTriggerPhrase("Whenever {this} deal combat damage to a player, ");
         ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()).concatBy(", then"));
         this.addAbility(ability);
     }
