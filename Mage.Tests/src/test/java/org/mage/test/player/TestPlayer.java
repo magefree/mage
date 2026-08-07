@@ -669,6 +669,7 @@ public class TestPlayer implements Player {
                         }
                     }
                     printStart(game, "Available for " + this.getName());
+                    printMana(game, this.getManaAvailable(game));
                     printAbilities(game, this.getPlayable(game, true));
                     printEnd();
                     Assert.fail("Can't find ability to activate command: " + command);

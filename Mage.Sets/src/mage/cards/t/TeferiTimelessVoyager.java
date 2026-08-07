@@ -6,6 +6,7 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.PhaseOutAllEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,6 +18,8 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -74,15 +77,17 @@ class TeferiTimelessVoyagerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        List<UUID> idsToPhaseOut = new ArrayList<>();
         for (Permanent permanent : game
                 .getBattlefield()
                 .getAllActivePermanents(
                         StaticFilters.FILTER_PERMANENT_CREATURE, source.getFirstTarget(), game
                 )) {
             MageObjectReference mor = new MageObjectReference(permanent, game);
-            permanent.phaseOut(game);
+            idsToPhaseOut.add(permanent.getId());
             game.addEffect(new TeferiTimelessVoyagerPhaseEffect(mor), source);
         }
+        new PhaseOutAllEffect(idsToPhaseOut).apply(game, source);
         return true;
     }
 }

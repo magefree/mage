@@ -24,7 +24,7 @@ public final class StirThePride extends CardImpl {
     public StirThePride(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{W}");
 
-        // Choose one - 
+        // Choose one -
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(1);
         // Creatures you control get +2/+2 until end of turn;
@@ -33,7 +33,7 @@ public final class StirThePride extends CardImpl {
         Effect effect = new GainAbilityControlledEffect(new DealsDamageSourceTriggeredAbility(new GainLifeEffect(SavedDamageValue.MUCH)), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES);
         effect.setText("until end of turn, creatures you control gain \"Whenever this creature deals damage, you gain that much life.\"");
         Mode mode = new Mode(effect);
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
 
         // Entwine {1}{W}
         this.addAbility(new EntwineAbility("{1}{W}"));

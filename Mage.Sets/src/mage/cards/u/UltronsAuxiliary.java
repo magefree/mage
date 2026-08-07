@@ -32,7 +32,7 @@ public final class UltronsAuxiliary extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever another artifact is put into your graveyard from the battlefield or an artifact card is put into your graveyard from anywhere other than the battlefield, put a +1/+1 counter on this creature.
         this.addAbility(new UltronsAuxiliaryTriggeredAbility());

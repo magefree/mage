@@ -684,6 +684,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Vibranium Mining Mech", 458, Rarity.RARE, mage.cards.v.VibraniumMiningMech.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vibranium Strike Gauntlets", 118, Rarity.RARE, mage.cards.v.VibraniumStrikeGauntlets.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vibranium Strike Gauntlets", 459, Rarity.RARE, mage.cards.v.VibraniumStrikeGauntlets.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Victor Timely, Wily Tycoon", 642, Rarity.UNCOMMON, mage.cards.v.VictorTimelyWilyTycoon.class));
         cards.add(new SetCardInfo("Villainous Syndication", 672, Rarity.UNCOMMON, mage.cards.v.VillainousSyndication.class));
         cards.add(new SetCardInfo("Virtuous Variant", 758, Rarity.COMMON, mage.cards.v.VirtuousVariant.class));
         cards.add(new SetCardInfo("Vision, Synthezoid Avenger", 119, Rarity.RARE, mage.cards.v.VisionSynthezoidAvenger.class, NON_FULL_USE_VARIOUS));

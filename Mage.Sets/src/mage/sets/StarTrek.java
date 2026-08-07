@@ -18,11 +18,12 @@ public final class StarTrek extends ExpansionSet {
     private StarTrek() {
         super("Star Trek", "TRK", ExpansionSet.buildDate(2026, 11, 13), SetType.EXPANSION);
         this.blockName = "Star Trek"; // for sorting in GUI
-        this.hasBasicLands = false; // TODO: Temporary until spoilers conclude
+        this.hasBasicLands = true;
 
         // this.enablePlayBooster(276); // TODO: Temporary until spoilers conclude
 
         cards.add(new SetCardInfo("Amok Time", 183, Rarity.UNCOMMON, mage.cards.a.AmokTime.class));
+        cards.add(new SetCardInfo("Assault Drone", 92, Rarity.COMMON, mage.cards.a.AssaultDrone.class));
         cards.add(new SetCardInfo("Beckett Mariner, Impetuous Ensign", 138, Rarity.UNCOMMON, mage.cards.b.BeckettMarinerImpetuousEnsign.class));
         cards.add(new SetCardInfo("Blood Crypt", 278, Rarity.RARE, mage.cards.b.BloodCrypt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blood Crypt", 394, Rarity.RARE, mage.cards.b.BloodCrypt.class, NON_FULL_USE_VARIOUS));
@@ -39,23 +40,52 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Captain Kathryn Janeway", 340, Rarity.MYTHIC, mage.cards.c.CaptainKathrynJaneway.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain Kathryn Janeway", 386, Rarity.MYTHIC, mage.cards.c.CaptainKathrynJaneway.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain Kathryn Janeway", 520, Rarity.MYTHIC, mage.cards.c.CaptainKathrynJaneway.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cloistered Telepath", 50, Rarity.COMMON, mage.cards.c.CloisteredTelepath.class));
+        cards.add(new SetCardInfo("Cold-Blooded Crew", 189, Rarity.COMMON, mage.cards.c.ColdBloodedCrew.class));
+        cards.add(new SetCardInfo("Collective Drone", 99, Rarity.UNCOMMON, mage.cards.c.CollectiveDrone.class));
         cards.add(new SetCardInfo("Consider the Prime Directive", 51, Rarity.COMMON, mage.cards.c.ConsiderThePrimeDirective.class));
         cards.add(new SetCardInfo("Crystalline Entity", 261, Rarity.MYTHIC, mage.cards.c.CrystallineEntity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crystalline Entity", 478, Rarity.MYTHIC, mage.cards.c.CrystallineEntity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cybernetic Specialist", 262, Rarity.COMMON, mage.cards.c.CyberneticSpecialist.class));
+        cards.add(new SetCardInfo("Dominion Supervisor", 195, Rarity.COMMON, mage.cards.d.DominionSupervisor.class));
         cards.add(new SetCardInfo("Dr. Beverly Crusher", 13, Rarity.MYTHIC, mage.cards.d.DrBeverlyCrusher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dr. Beverly Crusher", 366, Rarity.MYTHIC, mage.cards.d.DrBeverlyCrusher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dr. Beverly Crusher", 500, Rarity.MYTHIC, mage.cards.d.DrBeverlyCrusher.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Emergency Medical Hologram", 15, Rarity.COMMON, mage.cards.e.EmergencyMedicalHologram.class));
+        cards.add(new SetCardInfo("Forest", 325, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 326, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Free Borg Revolutionaries", 19, Rarity.COMMON, mage.cards.f.FreeBorgRevolutionaries.class));
         cards.add(new SetCardInfo("Godless Shrine", 285, Rarity.RARE, mage.cards.g.GodlessShrine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Godless Shrine", 397, Rarity.RARE, mage.cards.g.GodlessShrine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Godless Shrine", 492, Rarity.RARE, mage.cards.g.GodlessShrine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hallowed Fountain", 286, Rarity.RARE, mage.cards.h.HallowedFountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hallowed Fountain", 392, Rarity.RARE, mage.cards.h.HallowedFountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hallowed Fountain", 487, Rarity.RARE, mage.cards.h.HallowedFountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("He's Dead, Jim", 114, Rarity.COMMON, mage.cards.h.HesDeadJim.class));
         cards.add(new SetCardInfo("Highly Illogical", 62, Rarity.UNCOMMON, mage.cards.h.HighlyIllogical.class));
+        cards.add(new SetCardInfo("Horta", 152, Rarity.COMMON, mage.cards.h.Horta.class));
+        cards.add(new SetCardInfo("Humpback Whales", 65, Rarity.COMMON, mage.cards.h.HumpbackWhales.class));
         cards.add(new SetCardInfo("In the Pale Moonlight", 117, Rarity.UNCOMMON, mage.cards.i.InThePaleMoonlight.class));
+        cards.add(new SetCardInfo("Island", 319, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 320, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Khaaaaaaaaaaaannn!", 154, Rarity.UNCOMMON, mage.cards.k.Khaaaaaaaaaaaannn.class));
+        cards.add(new SetCardInfo("Moopsy", 207, Rarity.COMMON, mage.cards.m.Moopsy.class));
+        cards.add(new SetCardInfo("Mountain", 323, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 324, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mugato", 208, Rarity.UNCOMMON, mage.cards.m.Mugato.class));
+        cards.add(new SetCardInfo("Munitions Enthusiast", 158, Rarity.UNCOMMON, mage.cards.m.MunitionsEnthusiast.class));
+        cards.add(new SetCardInfo("Organic Avulsion Unit", 121, Rarity.UNCOMMON, mage.cards.o.OrganicAvulsionUnit.class));
         cards.add(new SetCardInfo("Overgrown Tomb", 289, Rarity.RARE, mage.cards.o.OvergrownTomb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overgrown Tomb", 399, Rarity.RARE, mage.cards.o.OvergrownTomb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overgrown Tomb", 494, Rarity.RARE, mage.cards.o.OvergrownTomb.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 317, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 318, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Planetary Patrol", 163, Rarity.COMMON, mage.cards.p.PlanetaryPatrol.class));
+        cards.add(new SetCardInfo("Plasma Cascade", 164, Rarity.COMMON, mage.cards.p.PlasmaCascade.class));
+        cards.add(new SetCardInfo("Reckless Impulse", 168, Rarity.COMMON, mage.cards.r.RecklessImpulse.class));
+        cards.add(new SetCardInfo("Relentless Drednok", 124, Rarity.COMMON, mage.cards.r.RelentlessDrednok.class));
+        cards.add(new SetCardInfo("Resistance Is Futile", 125, Rarity.UNCOMMON, mage.cards.r.ResistanceIsFutile.class));
+        cards.add(new SetCardInfo("Rogue Artificial Intelligence", 126, Rarity.COMMON, mage.cards.r.RogueArtificialIntelligence.class));
         cards.add(new SetCardInfo("Sacred Foundry", 295, Rarity.RARE, mage.cards.s.SacredFoundry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sacred Foundry", 400, Rarity.RARE, mage.cards.s.SacredFoundry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sacred Foundry", 495, Rarity.RARE, mage.cards.s.SacredFoundry.class, NON_FULL_USE_VARIOUS));
@@ -66,14 +96,20 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Stomping Ground", 299, Rarity.RARE, mage.cards.s.StompingGround.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stomping Ground", 395, Rarity.RARE, mage.cards.s.StompingGround.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stomping Ground", 490, Rarity.RARE, mage.cards.s.StompingGround.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 321, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 322, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Syndicate Liquidators", 218, Rarity.UNCOMMON, mage.cards.s.SyndicateLiquidators.class));
         cards.add(new SetCardInfo("Temple Garden", 301, Rarity.RARE, mage.cards.t.TempleGarden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temple Garden", 396, Rarity.RARE, mage.cards.t.TempleGarden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temple Garden", 491, Rarity.RARE, mage.cards.t.TempleGarden.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The City on the Edge of Forever", 228, Rarity.RARE, mage.cards.t.TheCityOnTheEdgeOfForever.class));
         cards.add(new SetCardInfo("U.S.S. Enterprise-D, Galaxy-Class", 273, Rarity.RARE, mage.cards.u.USSEnterpriseDGalaxyClass.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("U.S.S. Enterprise-D, Galaxy-Class", 481, Rarity.RARE, mage.cards.u.USSEnterpriseDGalaxyClass.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("U.S.S. Enterprise-D, Galaxy-Class", 557, Rarity.RARE, mage.cards.u.USSEnterpriseDGalaxyClass.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Watery Grave", 306, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Watery Grave", 393, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Watery Grave", 488, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Xenobotanist", 224, Rarity.COMMON, mage.cards.x.Xenobotanist.class));
+        cards.add(new SetCardInfo("Xindi Surveyors", 225, Rarity.COMMON, mage.cards.x.XindiSurveyors.class));
     }
 }

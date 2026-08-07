@@ -16,9 +16,7 @@ public final class RealityFractureCommander extends ExpansionSet {
     }
 
     private RealityFractureCommander() {
-        // TODO: Pending MtgJSON updating
-        super("Reality Fracture Commander", "FRC", ExpansionSet.buildDate(2026, 10, 2), SetType.CUSTOM_SET);
-        // super("Reality Fracture Commander", "FRC", ExpansionSet.buildDate(2026, 10, 2), SetType.SUPPLEMENTAL);
+        super("Reality Fracture Commander", "FRC", ExpansionSet.buildDate(2026, 10, 2), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Darksteel Angel", 98, Rarity.RARE, mage.cards.d.DarksteelAngel.class, NON_FULL_USE_VARIOUS));
