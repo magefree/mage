@@ -91,5 +91,6 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Watery Grave", 393, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Watery Grave", 488, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Xenobotanist", 224, Rarity.COMMON, mage.cards.x.Xenobotanist.class));
+        cards.add(new SetCardInfo("Xindi Surveyors", 225, Rarity.COMMON, mage.cards.x.XindiSurveyors.class));
     }
 }
