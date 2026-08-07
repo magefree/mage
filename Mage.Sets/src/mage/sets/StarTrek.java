@@ -72,6 +72,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 317, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 318, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Planetary Patrol", 163, Rarity.COMMON, mage.cards.p.PlanetaryPatrol.class));
+        cards.add(new SetCardInfo("Plasma Cascade", 164, Rarity.COMMON, mage.cards.p.PlasmaCascade.class));
         cards.add(new SetCardInfo("Reckless Impulse", 168, Rarity.COMMON, mage.cards.r.RecklessImpulse.class));
         cards.add(new SetCardInfo("Relentless Drednok", 124, Rarity.COMMON, mage.cards.r.RelentlessDrednok.class));
         cards.add(new SetCardInfo("Resistance Is Futile", 125, Rarity.UNCOMMON, mage.cards.r.ResistanceIsFutile.class));
