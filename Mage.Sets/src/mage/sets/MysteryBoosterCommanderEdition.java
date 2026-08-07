@@ -25,6 +25,7 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
 
         cards.add(new SetCardInfo("Arzakon", 33, Rarity.RARE, mage.cards.a.Arzakon.class));
         cards.add(new SetCardInfo("Autumn Willow, Harmony", 27, Rarity.RARE, mage.cards.a.AutumnWillowHarmony.class));
+        cards.add(new SetCardInfo("Balefang the Unslayable", 20, Rarity.RARE, mage.cards.b.BalefangTheUnslayable.class));
         cards.add(new SetCardInfo("Blor the Impervious", 28, Rarity.RARE, mage.cards.b.BlorTheImpervious.class));
         cards.add(new SetCardInfo("Boss Uramon, Shadow's Reach", 13, Rarity.RARE, mage.cards.b.BossUramonShadowsReach.class));
         cards.add(new SetCardInfo("Chaos Warp", 72, Rarity.RARE, mage.cards.c.ChaosWarp.class));

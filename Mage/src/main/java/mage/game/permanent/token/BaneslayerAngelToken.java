@@ -1,38 +1,38 @@
+package mage.game.permanent.token;
 
-
-package mage.cards.b;
-
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.ProtectionAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 
 /**
- *
- * @author BetaSteward_at_googlemail.com
+ * @author muz
  */
-public final class BaneslayerAngel extends CardImpl {
+public final class BaneslayerAngelToken extends TokenImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Demons and from Dragons");
 
     static {
-        filter.add(Predicates.or(SubType.DEMON.getPredicate(), SubType.DRAGON.getPredicate()));
+        filter.add(Predicates.or(
+            SubType.DEMON.getPredicate(),
+            SubType.DRAGON.getPredicate()
+        ));
     }
 
-    public BaneslayerAngel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        this.subtype.add(SubType.ANGEL);
-
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
+    public BaneslayerAngelToken() {
+        super("Baneslayer Angel", "Baneslayer Angel token");
+        manaCost = new ManaCostsImpl<>("{3}{W}{W}");
+        cardType.add(CardType.CREATURE);
+        color.setWhite(true);
+        subtype.add(SubType.ANGEL);
+        power = new MageInt(5);
+        toughness = new MageInt(5);
 
         // Flying, first strike, lifelink, protection from Demons and from Dragons
         this.addAbility(FlyingAbility.getInstance());
@@ -41,13 +41,12 @@ public final class BaneslayerAngel extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
     }
 
-    private BaneslayerAngel(final BaneslayerAngel card) {
-        super(card);
+    private BaneslayerAngelToken(final BaneslayerAngelToken token) {
+        super(token);
     }
 
     @Override
-    public BaneslayerAngel copy() {
-        return new BaneslayerAngel(this);
+    public BaneslayerAngelToken copy() {
+        return new BaneslayerAngelToken(this);
     }
-
 }
