@@ -58,7 +58,7 @@ Commander Anthology|CMA|CommanderAnthology|
 Commander Anthology 2018|CM2|CommanderAnthology2018|
 Commander's Arsenal|CM1|CommandersArsenal|
 Commander Masters|CMM|CommanderMasters|
-Magic: The Gathering-Commander|CMD|Commander|
+Commander 2011|CMD|Commander|
 Conspiracy|CNS|Conspiracy|
 Conspiracy: Take the Crown|CN2|ConspiracyTakeTheCrown|
 Conflux|CON|Conflux|
