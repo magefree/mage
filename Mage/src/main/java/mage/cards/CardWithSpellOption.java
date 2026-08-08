@@ -35,6 +35,16 @@ public abstract class CardWithSpellOption extends CardImpl {
         return spellCard;
     }
 
+    /** Whether the main card is one of this object's current casting options. */
+    public boolean isMainCardCastOptionAvailable(Game game) {
+        return true;
+    }
+
+    /** Whether the inset spell is one of this object's current casting options. */
+    public boolean isSpellCardCastOptionAvailable(Game game) {
+        return true;
+    }
+
     public void setParts(SpellOptionCard cardSpell) {
         // for card copy only - set new parts
         this.spellCard = cardSpell;

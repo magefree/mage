@@ -9,12 +9,9 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.util.CardUtil;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author phulin
@@ -109,15 +106,13 @@ public class AdventureSpellCard extends CardImpl implements SpellOptionCard {
     }
 }
 
-class AdventureCardSpellAbility extends SpellAbility {
+class AdventureCardSpellAbility extends SpellOptionCardSpellAbility {
 
-    private String nameFull;
     private boolean finalized = false;
 
     public AdventureCardSpellAbility(final SpellAbility baseSpellAbility, String adventureName, CardType[] cardTypes, String costs) {
-        super(baseSpellAbility);
-        this.setName(cardTypes, adventureName, costs);
-        this.setCardName(adventureName);
+        super(baseSpellAbility, "Adventure", adventureName, cardTypes, costs,
+                " <i>(Then exile this card. You may cast the creature later from exile.)</i>");
     }
 
     // The exile effect needs to be added last.
@@ -133,7 +128,6 @@ class AdventureCardSpellAbility extends SpellAbility {
 
     protected AdventureCardSpellAbility(final AdventureCardSpellAbility ability) {
         super(ability);
-        this.nameFull = ability.nameFull;
         if (!ability.finalized) {
             throw new IllegalStateException("Wrong code usage. "
                     + "Adventure (" + cardName + ") "
@@ -153,22 +147,6 @@ class AdventureCardSpellAbility extends SpellAbility {
             }
         }
         return super.canActivate(playerId, game);
-    }
-
-    public void setName(CardType[] cardTypes, String name, String costs) {
-        this.nameFull = "Adventure " + Arrays.stream(cardTypes).map(CardType::toString).collect(Collectors.joining(" ")) + " &mdash; " + name;
-        this.name = this.nameFull + " " + costs;
-    }
-
-    @Override
-    public String getRule(boolean all) {
-        // TODO: must hide rules in permanent like SpellAbility, but can't due effects text
-        return this.nameFull
-                + " "
-                + getManaCosts().getText()
-                + " &mdash; "
-                + CardUtil.getTextWithFirstCharUpperCase(super.getRule(false)) // without cost
-                + " <i>(Then exile this card. You may cast the creature later from exile.)</i>";
     }
 
     @Override
