@@ -3,7 +3,7 @@ package mage.abilities.effects.common;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
-import mage.cards.PrepareCard;
+import mage.cards.PreparedSpellCopy;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -13,16 +13,27 @@ import mage.game.permanent.Permanent;
 
 import java.util.UUID;
 
-/** Cast permission for the prepare-spell part of a linked copy in exile. */
+/**
+ * Cast permission for the prepare-spell part of a linked copy in exile.
+ *
+ * @author nandmp
+ */
 public class PrepareCastFromExileEffect extends AsThoughEffectImpl {
 
-    public PrepareCastFromExileEffect() {
+    private final UUID copyId;
+    private final UUID permanentId;
+
+    public PrepareCastFromExileEffect(UUID copyId, UUID permanentId) {
         super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        this.copyId = copyId;
+        this.permanentId = permanentId;
         staticText = "its controller may cast the prepared copy from exile because this permanent is prepared";
     }
 
     protected PrepareCastFromExileEffect(PrepareCastFromExileEffect effect) {
         super(effect);
+        this.copyId = effect.copyId;
+        this.permanentId = effect.permanentId;
     }
 
     @Override
@@ -37,18 +48,15 @@ public class PrepareCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        UUID copyId = getTargetPointer().getFirst(game, source);
         Card copy = game.getCard(copyId);
-        UUID permanentId = copyId == null ? null
-                : (UUID) game.getState().getValue("PreparePermanent" + copyId);
         Permanent permanent = game.getPermanent(permanentId);
         if (copy == null || permanent == null || !permanent.isPrepared()
                 || game.getState().getZone(copyId) != Zone.EXILED) {
             discard();
             return false;
         }
-        return copy instanceof PrepareCard
-                && objectId.equals(((PrepareCard) copy).getSpellCard().getId())
+        return copy instanceof PreparedSpellCopy
+                && objectId.equals(copyId)
                 && affectedControllerId.equals(permanent.getControllerId());
     }
 }

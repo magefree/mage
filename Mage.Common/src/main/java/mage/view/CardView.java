@@ -324,15 +324,6 @@ public class CardView extends SimpleCardView {
         if (game != null && card instanceof Spell) {
             card = ((Spell) card).getSpellAbility().getCharacteristics(game);
         }
-        if (game != null
-                && card instanceof PrepareCard
-                && game.getState().getZone(sourceCard.getId()) == Zone.EXILED
-                && game.getState().getValue("PreparePermanent" + sourceCard.getId()) != null) {
-            // the persistent copy in exile has only the prepare
-            // spell's characteristics, and those are its normal characteristics.
-            card = (Card) ((PrepareCard) card).getSpellCard().copy();
-        }
-
         // use isFaceDown(game) only here to find real status, all other code must use this.faceDown
         this.faceDown = game != null && sourceCard.isFaceDown(game);
         boolean showFaceUp = !this.faceDown;
@@ -460,7 +451,7 @@ public class CardView extends SimpleCardView {
                 SpellOptionCard spellOptionCard = mainCard.getSpellCard();
                 rightSplitName = spellOptionCard.getName();
                 rightSplitCostsStr = String.join("", spellOptionCard.getManaCostSymbols());
-                rightSplitRules = spellOptionCard.getRules(game);
+                rightSplitRules = spellOptionCard.getInsetRules(game);
                 rightSplitTypeLine = getCardTypeLine(game, spellOptionCard);
                 rightSplitSpellType = spellOptionCard.getSpellType();
                 fullCardName = mainCard.getName() + MockCard.CARD_WITH_SPELL_OPTION_NAME_SEPARATOR + spellOptionCard.getName();
@@ -480,7 +471,11 @@ public class CardView extends SimpleCardView {
             this.name = card.getName();
             this.displayName = card.getName();
             this.displayFullName = fullCardName;
-            this.rules = new ArrayList<>(card.getRules(game));
+            // Spell-option cards render both parts above. Keep the combined
+            // spell rule for permanent views, where there is no inset frame.
+            this.rules = card instanceof CardWithSpellOption
+                    ? new ArrayList<>(((CardWithSpellOption) card).getSharedRules(game))
+                    : new ArrayList<>(card.getRules(game));
             this.manaValue = card.getManaValue();
         }
 

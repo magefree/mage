@@ -1,12 +1,7 @@
 package mage.cards;
 
 import mage.constants.CardType;
-import mage.abilities.SpellAbility;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.abilities.Abilities;
-import mage.abilities.Ability;
 import mage.abilities.keyword.PrepareReminderAbility;
 
 import java.util.UUID;
@@ -31,7 +26,7 @@ frames. Rather, these characteristics are used to define characteristics of copi
 that a permanent enters prepared. If that permanent has the alternative characteristics of a
 prepare spell, this gives the permanent the “prepared” designation. Prepared is a designation that
 acts as a marker which rules and effects can identify. A permanent can’t gain this designation
-unless it has a prepare spell, Additionally, a permanent can’t gain this designation if the
+unless it has a prepare spell. Additionally, a permanent can’t gain this designation if the
 permanent already has it.
 722.3b A rule or effect may cause a permanent to become “unprepared.” This removes the prepared
 designation from that permanent.
@@ -63,10 +58,9 @@ card’s alternative name, the player may do so.
 
 /**
  * @author TheElk801
+ * @author nandmp
  */
 public abstract class PrepareCard extends CardWithSpellOption {
-
-    private boolean prepareSpellCopy;
 
     protected PrepareCard(UUID ownerId, CardSetInfo setInfo, CardType[] types, String costs, String preparationName, CardType typeSpell, String costsSpell) {
         this(ownerId, setInfo, types, costs, preparationName, new CardType[]{typeSpell}, costsSpell);
@@ -80,58 +74,25 @@ public abstract class PrepareCard extends CardWithSpellOption {
 
     protected PrepareCard(final PrepareCard card) {
         super(card);
-        this.prepareSpellCopy = card.prepareSpellCopy;
-    }
-
-    public boolean isPrepareSpellCopy() {
-        return prepareSpellCopy;
-    }
-
-    public void setPrepareSpellCopy(boolean prepareSpellCopy) {
-        this.prepareSpellCopy = prepareSpellCopy;
     }
 
     @Override
-    public String getName() {
-        if (prepareSpellCopy && getSpellCard() != null) {
-            return getSpellCard().getName();
-        }
-        return super.getName();
+    public PrepareSpellCard getSpellCard() {
+        return (PrepareSpellCard) super.getSpellCard();
+    }
+
+    public PreparedSpellCopy createPreparedSpellCopy(UUID permanentId) {
+        return new PreparedSpellCopy(getSpellCard(), permanentId);
     }
 
     @Override
-    public Abilities<Ability> getAbilities() {
-        if (prepareSpellCopy) {
-            return getSpellCard().getAbilities();
-        }
-        return getSharedAbilities(null);
+    public boolean isMainCardCastOptionAvailable(Game game) {
+        return true;
     }
 
     @Override
-    public Abilities<Ability> getAbilities(Game game) {
-        // The alternative characteristics define the exile copy, never an ability of the
-        // preparation card itself (including while that card is in a player's hand).
-        if (prepareSpellCopy
-                || game != null && game.getState().getValue("PreparePermanent" + getId()) != null) {
-            return getSpellCard().getAbilities(game);
-        }
-        return getSharedAbilities(game);
+    public boolean isSpellCardCastOptionAvailable(Game game) {
+        return false;
     }
 
-    @Override
-    public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
-        if (prepareSpellCopy && !ability.getSourceId().equals(getSpellCard().getId())) {
-            return false;
-        }
-        if (ability.getSourceId().equals(getSpellCard().getId())) {
-            UUID permanentId = (UUID) game.getState().getValue("PreparePermanent" + getId());
-            Permanent permanent = game.getPermanent(permanentId);
-            if (permanent != null) {
-                // Rule 722.3c: this happens as casting completes, irrespective of resolution.
-                permanent.setPrepared(false, game);
-            }
-            return getSpellCard().cast(game, fromZone, ability, controllerId);
-        }
-        return super.cast(game, fromZone, ability, controllerId);
-    }
 }

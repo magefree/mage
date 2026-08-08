@@ -18,7 +18,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.PrepareCard;
 import mage.abilities.effects.common.PrepareCastFromExileEffect;
-import mage.target.targetpointer.FixedTarget;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -76,6 +75,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean renowned;
     protected boolean suspected;
     protected boolean prepared;
+    protected UUID preparedSpellCopyId;
     protected boolean harnessed = false;
     protected boolean manifested = false;
     protected boolean cloaked = false;
@@ -191,6 +191,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.renowned = permanent.renowned;
         this.suspected = permanent.suspected;
         this.prepared = permanent.prepared;
+        this.preparedSpellCopyId = permanent.preparedSpellCopyId;
         this.harnessed = permanent.harnessed;
         this.ringBearerFlag = permanent.ringBearerFlag;
         this.classLevel = permanent.classLevel;
@@ -1947,12 +1948,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void setPrepared(boolean prepared, Game game) {
-        // 722.3a Some spells and abilities cause a permanent with a prepare spell to become prepared or state that a permanent enters prepared.
-        // If that permanent has the alternative characteristics of a prepare spell, this gives the permanent the “prepared” designation.
-        // Prepared is a designation that acts as a marker which rules and effects can identify.
-        // A permanent can’t gain this designation unless it has a prepare spell,
-        // Additionally, a permanent can’t gain this designation if the permanent already has it.
-        if (prepared && !(getMainCard() instanceof PrepareCard)) {
+        // Rule 722.3a requires the permanent's current copiable values to include a prepare spell.
+        if (prepared && getPrepareCharacteristicsSource() == null) {
             return;
         }
         if (this.prepared == prepared) {
@@ -1969,51 +1966,51 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     private void createPreparedCopy(Game game) {
-        Card sourceCard = getMainCard();
-        MageObject copyFrom = getCopyFrom();
-        if (copyFrom instanceof Permanent) {
-            sourceCard = ((Permanent) copyFrom).getMainCard();
-        } else if (copyFrom instanceof Card) {
-            sourceCard = (Card) copyFrom;
-        }
-        if (!(sourceCard instanceof PrepareCard)) {
+        if (preparedSpellCopyId != null) {
             return;
         }
-        // The permanent's backing card is tracked on the battlefield, so
-        // create the copy outside the game before putting it into exile.
-        Card copy = game.getState().copyCard(sourceCard, getControllerId(), game, Zone.OUTSIDE);
-        ((PrepareCard) copy).setPrepareSpellCopy(true);
-        Card registeredCopy = game.getCard(copy.getId());
-        if (registeredCopy instanceof PrepareCard) {
-            // copyCard can register a distinct recovered instance. Mark that instance too,
-            // because UI/playability lookups obtain the copy through Game#getCard.
-            ((PrepareCard) registeredCopy).setPrepareSpellCopy(true);
+        PrepareCard prepareCard = getPrepareCharacteristicsSource();
+        if (prepareCard == null) {
+            return;
         }
-        copy.setZone(Zone.EXILED, game);
-        game.getExile().add(copy);
-        game.getState().setValue("PreparePermanent" + copy.getId(), getId());
-        game.getState().setValue("KeepPrepareCopy" + copy.getId(), Boolean.TRUE);
-        PrepareCastFromExileEffect effect = new PrepareCastFromExileEffect();
-        effect.setTargetPointer(new FixedTarget(copy, game));
+        Card copy = prepareCard.createPreparedSpellCopy(getId());
+        game.getState().addCardPartCopyToZone(
+                prepareCard.getSpellCard(), copy, getControllerId(), Zone.EXILED
+        );
+        preparedSpellCopyId = copy.getId();
+        game.getState().keepCardCopyWhileSourceExists(copy.getId(), getId());
+        PrepareCastFromExileEffect effect = new PrepareCastFromExileEffect(copy.getId(), getId());
         // The permanent can have lost all abilities (for example to Darksteel Mutation).
         // The permission is linked by IDs above, so use the persistent copy's spell
         // ability as the continuous-effect source instead of an ability on the permanent.
         game.addEffect(effect, copy.getSpellAbility());
     }
 
+    private PrepareCard getPrepareCharacteristicsSource() {
+        MageObject copyFrom = getCopyFrom();
+        // Rule 722.3c ignores "except" modifications such as Croaking Counterpart's Frog characteristics.
+        Card sourceCard = getMainCard();
+        if (copyFrom instanceof Permanent) {
+            sourceCard = ((Permanent) copyFrom).getMainCard();
+        } else if (copyFrom instanceof Card) {
+            sourceCard = ((Card) copyFrom).getMainCard();
+        }
+        return sourceCard instanceof PrepareCard ? (PrepareCard) sourceCard : null;
+    }
+
     private void removePreparedCopy(Game game) {
-        game.getState().getValues("PreparePermanent").entrySet().stream()
-                .filter(e -> getId().equals(e.getValue()))
-                .map(e -> e.getKey().substring("PreparePermanent".length()))
-                .map(UUID::fromString)
-                .map(game::getCard)
-                .filter(java.util.Objects::nonNull)
-                .forEach(card -> {
-                    game.getExile().removeCard(card);
-                    card.setZone(Zone.OUTSIDE, game);
-                    game.getState().setValue("KeepPrepareCopy" + card.getId(), null);
-                    game.getState().setValue("PreparePermanent" + card.getId(), null);
-                });
+        UUID copyId = preparedSpellCopyId;
+        preparedSpellCopyId = null;
+        if (copyId == null) {
+            return;
+        }
+        game.getState().stopKeepingCardCopy(copyId);
+        Card card = game.getCard(copyId);
+        // Once cast, the copy is already on the stack and normal copied-spell cleanup owns it.
+        if (card != null && game.getState().getZone(copyId) == Zone.EXILED) {
+            game.getExile().removeCard(card);
+            card.setZone(Zone.OUTSIDE, game);
+        }
     }
 
     @Override

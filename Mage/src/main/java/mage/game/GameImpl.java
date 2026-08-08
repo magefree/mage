@@ -2495,14 +2495,13 @@ public abstract class GameImpl implements Game {
         Set<Card> copiedCardsToRemove = new HashSet<>();
         for (Card copiedCard : allCopiedCards) {
             UUID copiedCardId = copiedCard.getMainCard().getId();
-            if (Boolean.TRUE.equals(state.getValue("KeepPrepareCopy" + copiedCardId))) {
-                UUID permanentId = (UUID) state.getValue("PreparePermanent" + copiedCardId);
-                Permanent permanent = getPermanent(permanentId);
-                if (permanent != null && permanent.isPrepared()) {
+            UUID persistentCopySource = state.getPersistentCardCopySource(copiedCardId);
+            if (persistentCopySource != null) {
+                // Persistent copies opt out of 704.5e only while their registered source remains.
+                if (getPermanent(persistentCopySource) != null) {
                     continue;
                 }
-                state.setValue("KeepPrepareCopy" + copiedCardId, null);
-                state.setValue("PreparePermanent" + copiedCardId, null);
+                state.stopKeepingCardCopy(copiedCardId);
             }
             // 1. Zone must be checked from main card only cause mdf parts can have different zones
             //    (one side on battlefield, another side on outside)

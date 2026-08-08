@@ -106,6 +106,9 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, MageObjectAttribute> mageObjectAttribute = new HashMap<>();
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
     private Map<UUID, Card> copiedCards = new HashMap<>();
+    // Card copies that remain in a nonstandard zone while a source permanent exists.
+    // The normal state-based action removes all other card copies outside the stack/battlefield.
+    private Map<UUID, UUID> persistentCardCopySources = new HashMap<>();
     private int permanentOrderNumber;
     private final Map<UUID, FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = new HashMap<>();
     private Set<MageObjectReference> commandersToStay = new HashSet<>(); // commanders that do not go back to command zone
@@ -180,6 +183,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.mageObjectAttribute = CardUtil.deepCopyObject(state.mageObjectAttribute);
         this.zoneChangeCounter.putAll(state.zoneChangeCounter);
         this.copiedCards.putAll(state.copiedCards);
+        this.persistentCardCopySources.putAll(state.persistentCardCopySources);
         this.permanentOrderNumber = state.permanentOrderNumber;
         this.applyEffectsCounter = state.applyEffectsCounter;
         state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach((uuid, filter)
@@ -226,6 +230,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         zones.clear();
         simultaneousEvents.clear();
         copiedCards.clear();
+        persistentCardCopySources.clear();
         usePowerInsteadOfToughnessForDamageLethalityFilters.clear();
         permanentOrderNumber = 0;
     }
@@ -274,6 +279,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.mageObjectAttribute = state.mageObjectAttribute;
         this.zoneChangeCounter = state.zoneChangeCounter;
         this.copiedCards = state.copiedCards;
+        this.persistentCardCopySources = state.persistentCardCopySources;
         this.permanentOrderNumber = state.permanentOrderNumber;
         this.applyEffectsCounter = state.applyEffectsCounter;
         state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach((uuid, filter)
@@ -1157,10 +1163,10 @@ public class GameState implements Serializable, Copyable<GameState> {
     private void addCard(Card card, Zone zone) {
         setZone(card.getId(), zone);
 
-        // Actually put the card in the exile zone if it's exiled;
-        // see https://github.com/magefree/mage/issues/14005 for why this is necessary.
-        // This is only called from addCard(card) which uses Zone.OUTSIDE, and in the copy spell code.
-        if (zone != null && zone.match(Zone.EXILED)) {
+        // Multipart copies register every part in state, but zone collections contain only the main card.
+        // See https://github.com/magefree/mage/issues/14005 for why exiled copies must be added here.
+        if (zone != null && zone.match(Zone.EXILED)
+                && card.getId().equals(card.getMainCard().getId())) {
             getExile().add(card);
         }
 
@@ -1594,6 +1600,19 @@ public class GameState implements Serializable, Copyable<GameState> {
         return copiedCards.values();
     }
 
+    public void keepCardCopyWhileSourceExists(UUID cardId, UUID sourcePermanentId) {
+        // Some rules create persistent card copies that are exempt from the normal copy cleanup SBA.
+        persistentCardCopySources.put(cardId, sourcePermanentId);
+    }
+
+    public void stopKeepingCardCopy(UUID cardId) {
+        persistentCardCopySources.remove(cardId);
+    }
+
+    public UUID getPersistentCardCopySource(UUID cardId) {
+        return persistentCardCopySources.get(cardId);
+    }
+
     /**
      * Make full copy of the card and all of the card's parts and put to the
      * game.
@@ -1604,15 +1623,33 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @return
      */
     public Card copyCard(Card mainCardToCopy, UUID newController, Game game) {
-        return copyCard(mainCardToCopy, newController, game, null);
+        Zone sourceZone = game.getState().getZone(mainCardToCopy.getId());
+        if (sourceZone == Zone.BATTLEFIELD) {
+            throw new UnsupportedOperationException("Cards cannot be copied while on the Battlefield");
+        }
+        return copyCard(mainCardToCopy, newController, game, sourceZone);
     }
 
     /**
-     * Copies a card into an explicitly supplied zone. This is used when an
-     * effect copies the characteristics of a battlefield object into another
-     * zone, rather than creating a copy in the source object's current zone.
+     * Registers a standalone copy built from one part of a multipart card.
+     * The supplied copy already contains the characteristics that become normal.
      */
-    public Card copyCard(Card mainCardToCopy, UUID newController, Game game, Zone destinationZone) {
+    public Card addCardPartCopyToZone(Card partToCopy, Card copiedCard, UUID newController,
+                                      Zone destinationZone) {
+        if (destinationZone == null) {
+            throw new IllegalArgumentException("Destination zone cannot be null");
+        }
+        if (!copiedCard.getId().equals(copiedCard.getMainCard().getId())) {
+            throw new IllegalArgumentException("The promoted copy must be a standalone card");
+        }
+        prepareCardForCopy(partToCopy, copiedCard, newController);
+        copiedCards.put(copiedCard.getId(), copiedCard);
+        addCard(copiedCard, destinationZone);
+        this.setValue(COPIED_CARD_KEY + copiedCard.getId(), copiedCard.copy());
+        return copiedCard;
+    }
+
+    private Card copyCard(Card mainCardToCopy, UUID newController, Game game, Zone copyToZone) {
         // runtime check
         if (!mainCardToCopy.getId().equals(mainCardToCopy.getMainCard().getId())) {
             // copyCard allows for main card only, if you catch it then check your targeting code
@@ -1670,12 +1707,6 @@ public class GameState implements Serializable, Copyable<GameState> {
         prepareCardForCopy(mainCardToCopy, copiedCard, newController);
 
         // 707.12. An effect that instructs a player to cast a copy of an object (and not just copy a spell) follows the rules for casting spells, except that the copy is created in the same zone the object is in and then cast while another spell or ability is resolving.
-        Zone sourceZone = game.getState().getZone(mainCardToCopy.getId());
-        if (sourceZone == Zone.BATTLEFIELD && destinationZone == null) {
-            throw new UnsupportedOperationException("Cards cannot be copied while on the Battlefield");
-        }
-        Zone copyToZone = destinationZone == null ? sourceZone : destinationZone;
-
         // add all parts to the game
         copiedParts.forEach(card -> {
             copiedCards.put(card.getId(), card);

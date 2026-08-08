@@ -1883,12 +1883,16 @@ public abstract class PlayerImpl implements Player, Serializable {
         Set<UUID> needIds = CardUtil.getObjectParts(object);
         Card objectCard = object instanceof Card ? (Card) object : null;
         Card mainCard = objectCard == null ? null : objectCard.getMainCard();
-        if (mainCard instanceof PrepareCard
-                && (((PrepareCard) mainCard).isPrepareSpellCopy()
-                || game.getState().getValue("PreparePermanent" + mainCard.getId()) != null)) {
-            // Rule 722.3c: the object in exile has only the prepare spell's
-            // characteristics. Never offer the preparation permanent's spell.
-            needIds = Collections.singleton(((PrepareCard) mainCard).getSpellCard().getId());
+        if (mainCard instanceof CardWithSpellOption) {
+            // Multipart cards decide which of their parts are casting options in their current state.
+            CardWithSpellOption card = (CardWithSpellOption) mainCard;
+            needIds = new HashSet<>(needIds);
+            if (!card.isMainCardCastOptionAvailable(game)) {
+                needIds.remove(card.getId());
+            }
+            if (!card.isSpellCardCastOptionAvailable(game)) {
+                needIds.remove(card.getSpellCard().getId());
+            }
         }
 
         // workaround to find all abilities first and filter it for one object
@@ -1896,22 +1900,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (ActivatedAbility ability : allPlayable) {
             if (needIds.contains(ability.getSourceId())) {
                 useable.putIfAbsent(ability.getId(), ability);
-            }
-        }
-
-        if (mainCard instanceof PrepareCard) {
-            UUID prepareSpellId = ((PrepareCard) mainCard).getSpellCard().getId();
-            boolean prepareSpellIsPlayable = useable.values().stream()
-                    .anyMatch(ability -> prepareSpellId.equals(ability.getSourceId())
-                    && ability instanceof SpellAbility
-                    && ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.BASE_ALTERNATE);
-            if (prepareSpellIsPlayable) {
-                // A prepare copy has only the prepare spell's characteristics. Enforce that
-                // on the final click-result map as well, independently of how the copied
-                // card was recovered from game state.
-                useable.values().removeIf(ability -> !prepareSpellId.equals(ability.getSourceId())
-                        || !(ability instanceof SpellAbility)
-                        || ((SpellAbility) ability).getSpellAbilityType() != SpellAbilityType.BASE_ALTERNATE);
             }
         }
 
@@ -4193,16 +4181,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         } else if (object instanceof CardWithSpellOption) {
             // adventure must use different card characteristics for different spells (main or adventure)
             CardWithSpellOption cardWithSpellOption = (CardWithSpellOption) object;
-            boolean preparedCopy = cardWithSpellOption instanceof PrepareCard
-                    && (((PrepareCard) cardWithSpellOption).isPrepareSpellCopy()
-                    || game.getState().getValue("PreparePermanent" + cardWithSpellOption.getId()) != null);
-            // A prepare spell is not an alternative way to cast the preparation card. It exists
-            // solely on the persistent copy created in exile
-            if (!(cardWithSpellOption instanceof PrepareCard)
-                    || preparedCopy) {
+            if (cardWithSpellOption.isSpellCardCastOptionAvailable(game)) {
                 getPlayableFromObjectSingle(game, fromZone, cardWithSpellOption.getSpellCard(), cardWithSpellOption.getSpellCard().getAbilities(game), availableMana, output);
             }
-            if (!preparedCopy) {
+            if (cardWithSpellOption.isMainCardCastOptionAvailable(game)) {
                 getPlayableFromObjectSingle(game, fromZone, cardWithSpellOption, cardWithSpellOption.getSharedAbilities(game), availableMana, output);
             }
         } else if (object instanceof Card) {
@@ -4350,6 +4332,16 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (ability.getZone().match(Zone.HAND)) {
                         boolean isPlaySpell = (ability instanceof SpellAbility);
                         boolean isPlayLand = (ability instanceof PlayLandAbility);
+
+                        if (isPlaySpell && card instanceof CardWithSpellOption) {
+                            CardWithSpellOption optionCard = (CardWithSpellOption) card;
+                            if ((ability.getSourceId().equals(optionCard.getId())
+                                    && !optionCard.isMainCardCastOptionAvailable(game))
+                                    || (ability.getSourceId().equals(optionCard.getSpellCard().getId())
+                                    && !optionCard.isSpellCardCastOptionAvailable(game))) {
+                                continue;
+                            }
+                        }
 
                         // ignore backside of TDFC
                         // TODO: maybe better way to ignore

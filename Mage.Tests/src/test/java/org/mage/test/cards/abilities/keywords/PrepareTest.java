@@ -1,9 +1,15 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.cards.Card;
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
+import mage.constants.SpellAbilityType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
+import mage.view.CardView;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
@@ -594,5 +600,94 @@ public class PrepareTest extends CardTestPlayerBase {
         assertExileCount(playerA, PREPARE_SPELL, 1);
         assertGraveyardCount(playerA, PREPARE_SPELL, 0);
         assertHandCount(playerA, PREPARE_SPELL, 0);
+    }
+
+    @Test
+    public void preparedCopyHasPrepareSpellAsNormalCharacteristics() {
+        addCard(Zone.HAND, playerA, CREATURE);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, CREATURE);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        Card copy = currentGame.getExile().getCardsOwned(currentGame, playerA.getId())
+                .stream()
+                .filter(card -> PREPARE_SPELL.equals(card.getName()))
+                .findFirst()
+                .orElse(null);
+        Assert.assertNotNull(copy);
+        Assert.assertEquals(1, copy.getManaValue());
+        Assert.assertTrue(copy.getCardType(currentGame).contains(CardType.SORCERY));
+        Assert.assertFalse(copy.getCardType(currentGame).contains(CardType.CREATURE));
+        Assert.assertEquals(SpellAbilityType.PREPARE_SPELL,
+                copy.getSpellAbility().getSpellAbilityType());
+
+        CardView copyView = new CardView(copy, currentGame, true, false);
+        Assert.assertFalse(copyView.isSplitCard());
+        Assert.assertTrue(copyView.getRules().stream().anyMatch(rule ->
+                rule.contains("Create a Treasure token")
+        ));
+        Assert.assertFalse(copyView.getRules().stream().anyMatch(rule ->
+                rule.contains("Sorcery &mdash;") || rule.contains(PREPARE_SPELL)
+        ));
+    }
+
+    //722.3c Comprehensive Rules Example
+    @Test
+    public void croakingCounterpartExceptionDoesNotAffectPreparedCopy() {
+        addCard(Zone.BATTLEFIELD, playerB, "Encouraging Aviator");
+        addCard(Zone.HAND, playerA, "Croaking Counterpart");
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA,
+                "Croaking Counterpart", "Encouraging Aviator");
+        attack(3, playerA, "Encouraging Aviator", playerB);
+
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        Card copy = currentGame.getExile().getCardsOwned(currentGame, playerA.getId())
+                .stream()
+                .filter(card -> "Jump".equals(card.getName()))
+                .findFirst()
+                .orElse(null);
+        Assert.assertNotNull(copy);
+        Assert.assertTrue(copy.getColor(currentGame).isBlue());
+        Assert.assertFalse(copy.getColor(currentGame).isGreen());
+        Assert.assertTrue(copy.getCardType(currentGame).contains(CardType.INSTANT));
+        Assert.assertFalse(copy.getCardType(currentGame).contains(CardType.CREATURE));
+        Assert.assertFalse(copy.getSubtype(currentGame).contains(SubType.FROG));
+    }
+
+    @Test
+    public void copiedPrepareSpellRemainsPrepareSpell() {
+        addCard(Zone.HAND, playerA, CREATURE);
+        addCard(Zone.BATTLEFIELD, playerA, "Double Vision");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, CREATURE);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, PREPARE_SPELL);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
+        runCode("original and copied spell retain prepare identity", 1,
+                PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+                    long prepareSpells = game.getStack().stream()
+                            .filter(Spell.class::isInstance)
+                            .map(Spell.class::cast)
+                            .filter(spell -> PREPARE_SPELL.equals(spell.getName()))
+                            .peek(spell -> Assert.assertEquals(
+                                    SpellAbilityType.PREPARE_SPELL,
+                                    spell.getSpellAbility().getSpellAbilityType()
+                            ))
+                            .count();
+                    Assert.assertEquals(2, prepareSpells);
+                });
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Treasure Token", 2);
     }
 }

@@ -9,12 +9,9 @@ import mage.constants.SpellAbilityType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.util.CardUtil;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 public class OmenSpellCard extends CardImpl implements SpellOptionCard {
 
@@ -106,15 +103,13 @@ public class OmenSpellCard extends CardImpl implements SpellOptionCard {
     }
 }
 
-class OmenCardSpellAbility extends SpellAbility {
+class OmenCardSpellAbility extends SpellOptionCardSpellAbility {
 
-    private String nameFull;
     private boolean finalized = false;
 
     public OmenCardSpellAbility(final SpellAbility baseSpellAbility, String omenName, CardType[] cardTypes, String costs) {
-        super(baseSpellAbility);
-        this.setName(cardTypes, omenName, costs);
-        this.setCardName(omenName);
+        super(baseSpellAbility, "Omen", omenName, cardTypes, costs,
+                " <i>(Then shuffle this card into its owner's library.)</i>");
     }
 
     public void finalizeOmen() {
@@ -131,29 +126,12 @@ class OmenCardSpellAbility extends SpellAbility {
 
     protected OmenCardSpellAbility(final OmenCardSpellAbility ability) {
         super(ability);
-        this.nameFull = ability.nameFull;
         if (!ability.finalized) {
             throw new IllegalStateException("Wrong code usage. "
                     + "Omen (" + cardName + ") "
                     + "need to call finalizeOmen() at the very end of the card's constructor.");
         }
         this.finalized = true;
-    }
-
-    public void setName(CardType[] cardTypes, String omenName, String costs) {
-        this.nameFull = "Omen " + Arrays.stream(cardTypes).map(CardType::toString).collect(Collectors.joining(" ")) + " &mdash; " + omenName;
-        this.name = this.nameFull + " " + costs;
-    }
-
-    @Override
-    public String getRule(boolean all) {
-        // TODO: must hide rules in permanent like SpellAbility, but can't due effects text
-        return this.nameFull
-                + " "
-                + getManaCosts().getText()
-                + " &mdash; "
-                + CardUtil.getTextWithFirstCharUpperCase(super.getRule(false)) // without cost
-                + " <i>(Then shuffle this card into its owner's library.)</i>";
     }
 
     @Override
