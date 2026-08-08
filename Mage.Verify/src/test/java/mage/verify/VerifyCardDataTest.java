@@ -2371,6 +2371,14 @@ public class VerifyCardDataTest {
         return true;
     }
 
+    private static List<String> getRulesForReferenceFace(Card card) {
+        // Multipart spell options are verified separately. Compare only the
+        // main face here, regardless of how its combined rules are displayed.
+        return card instanceof CardWithSpellOption
+                ? ((CardWithSpellOption) card).getSharedRules(null)
+                : card.getRules();
+    }
+
     private void checkMissingAbilities(Card card, MtgJsonCard ref) {
         if (skipListHaveName(SKIP_LIST_MISSING_ABILITIES, card.getExpansionSetCode(), card.getName())) {
             return;
@@ -2382,7 +2390,7 @@ public class VerifyCardDataTest {
         }
 
         String refLowerText = ref.text.toLowerCase(Locale.ENGLISH);
-        String cardLowerText = String.join("\n", card.getRules()).toLowerCase(Locale.ENGLISH);
+        String cardLowerText = String.join("\n", getRulesForReferenceFace(card)).toLowerCase(Locale.ENGLISH);
 
         // special check: kicker ability must be in rules
         if (card.getAbilities().containsClass(MultikickerAbility.class) && card.getRules().stream().noneMatch(rule -> rule.contains("Multikicker"))) {
@@ -2566,9 +2574,6 @@ public class VerifyCardDataTest {
             String preparedRefText = refLowerText.replaceAll("\\([^)]+\\)", ""); // Remove reminder text
             int refTargetCount = (preparedRefText.length() - preparedRefText.replace("target", "").length());
             String preparedRuleText = cardLowerText.replaceAll("\\([^)]+\\)", "");
-            if (!ref.subtypes.contains("Adventure") && !ref.subtypes.contains("Omen")) {
-                preparedRuleText = preparedRuleText.replaceAll("^(adventure|omen).*", "");
-            }
             int cardTargetCount = (preparedRuleText.length() - preparedRuleText.replace("target", "").length());
             if (refTargetCount != cardTargetCount) {
                 fail(card, "abilities", "target count text discrepancy: " + (refTargetCount / 6) + " in reference but " + (cardTargetCount / 6) + " in card.");
@@ -3080,10 +3085,8 @@ public class VerifyCardDataTest {
             }
         }
 
-        String[] cardRules = card
-                .getRules()
+        String[] cardRules = getRulesForReferenceFace(card)
                 .stream()
-                .filter(s -> !(card instanceof CardWithSpellOption) || !(s.startsWith("Adventure ") || s.startsWith("Omen ")))
                 .collect(Collectors.joining("\n"))
                 .replace("<br>", "\n")
                 .replace("<br/>", "\n")
