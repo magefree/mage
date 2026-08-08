@@ -307,7 +307,6 @@ Weatherlight|WTH|Weatherlight|
 Wilds of Eldraine|WOE|WildsOfEldraine|
 Wilds of Eldraine Commander|WOC|WildsOfEldraineCommander|
 World Magic Cup Qualifiers|WMC|WorldMagicCupQualifiers|
-World Magic Cup Qualifier|WMC|WorldMagicCupQualifiers|
 Worldwake|WWK|Worldwake|
 Ixalan|XLN|Ixalan|
 Zendikar|ZEN|Zendikar|
@@ -317,7 +316,6 @@ Star Wars|SWS|StarWars|
 Happy Holidays|HHO|HappyHolidays|
 Warhammer 40,000 Commander|40K|Warhammer40000Commander|
 Champs and States|PCMP|ChampsAndStates|
-Champs|PCMP|ChampsAndStates|
 Star Trek|TRK|StarTrek|
 Star Trek Commander|TRC|StarTrekCommander|
 Stardates|SDS|Stardates|
