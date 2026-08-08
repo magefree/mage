@@ -1,17 +1,14 @@
 package mage.cards.e;
 
-import java.util.Optional;
 import java.util.UUID;
 import mage.constants.SubType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
+import mage.abilities.effects.common.RemoveAllCountersEnchantedEffect;
 import mage.abilities.effects.common.TapEnchantedEffect;
 import mage.abilities.effects.common.continuous.LoseAllAbilitiesAttachedEffect;
 import mage.constants.Outcome;
@@ -41,7 +38,7 @@ public final class EnchantedRiversGrasp extends CardImpl {
 
         // When this Aura enters, tap enchanted creature and remove all counters from it.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect());
-        ability.addEffect(new EnchantedRiversGraspEffect());
+        ability.addEffect(new RemoveAllCountersEnchantedEffect().setText("and remove all counters from it"));
         this.addAbility(ability);
 
         // Enchanted creature loses all abilities and doesn't untap during its controller's untap step.
@@ -57,32 +54,5 @@ public final class EnchantedRiversGrasp extends CardImpl {
     @Override
     public EnchantedRiversGrasp copy() {
         return new EnchantedRiversGrasp(this);
-    }
-}
-
-class EnchantedRiversGraspEffect extends OneShotEffect {
-
-    EnchantedRiversGraspEffect() {
-        super(Outcome.Benefit);
-        staticText = "and remove all counters from it";
-    }
-
-    private EnchantedRiversGraspEffect(final EnchantedRiversGraspEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public EnchantedRiversGraspEffect copy() {
-        return new EnchantedRiversGraspEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return Optional
-                .ofNullable((Permanent) getValue("permanentEnteredBattlefield"))
-                .map(Permanent::getAttachedTo)
-                .map(game::getPermanent)
-                .filter(permanent -> permanent.removeAllCounters(source, game) > 0)
-                .isPresent();
     }
 }
