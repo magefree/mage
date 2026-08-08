@@ -40,15 +40,16 @@ Battle Royale Box Set|BRB|BattleRoyaleBoxSet|
 Beatdown Box Set|BTD|BeatdownBoxSet|
 Bloomburrow|BLB|Bloomburrow|
 Bloomburrow Commander|BLC|BloomburrowCommander|
-Commander 2013|C13|Commander2013Edition|
-Commander 2014|C14|Commander2014Edition|
-Commander 2015|C15|Commander2015Edition|
-Commander 2016|C16|Commander2016Edition|
-Commander 2017|C17|Commander2017Edition|
-Commander 2018|C18|Commander2018Edition|
-Commander 2019|C19|Commander2019Edition|
-Commander 2020|C20|Commander2020Edition|
-Commander 2021|C21|Commander2021Edition|
+Commander 2011|CMD|Commander2011|
+Commander 2013|C13|Commander2013|
+Commander 2014|C14|Commander2014|
+Commander 2015|C15|Commander2015|
+Commander 2016|C16|Commander2016|
+Commander 2017|C17|Commander2017|
+Commander 2018|C18|Commander2018|
+Commander 2019|C19|Commander2019|
+Commander 2020|C20|Commander2020|
+Commander 2021|C21|Commander2021|
 Commander Legends|CMR|CommanderLegends|
 Commander Legends: Battle for Baldur's Gate|CLB|CommanderLegendsBattleForBaldursGate|
 Champions of Kamigawa|CHK|ChampionsOfKamigawa|
@@ -58,7 +59,6 @@ Commander Anthology|CMA|CommanderAnthology|
 Commander Anthology 2018|CM2|CommanderAnthology2018|
 Commander's Arsenal|CM1|CommandersArsenal|
 Commander Masters|CMM|CommanderMasters|
-Commander 2011|CMD|Commander|
 Conspiracy|CNS|Conspiracy|
 Conspiracy: Take the Crown|CN2|ConspiracyTakeTheCrown|
 Conflux|CON|Conflux|
@@ -125,7 +125,7 @@ Future Sight|FUT|FutureSight|
 Global Series Jiang Yanggu & Mu Yanling|GS1|GlobalSeriesJiangYangguAndMuYanling|
 Guildpact|GPT|Guildpact|
 Guilds of Ravnica|GRN|GuildsOfRavnica|
-Grand Prix|PGPX|GrandPrixPromos|
+Grand Prix Promos|PGPX|GrandPrixPromos|
 WPN Gateway|GRC|WPNAndGatewayPromos|
 Gatecrash|GTC|Gatecrash|
 Guru|PGRU|Guru|
@@ -225,7 +225,7 @@ Magic Origins|ORI|MagicOrigins|
 Phyrexia: All Will Be One|ONE|PhyrexiaAllWillBeOne|
 Phyrexia: All Will Be One Commander|ONC|PhyrexiaAllWillBeOneCommander|
 Portal Second Age|P02|PortalSecondAge|
-Planechase 2012|PC2|Planechase2012Edition|
+Planechase 2012|PC2|Planechase2012|
 Planechase Anthology|PCA|PlanechaseAnthology|
 Prophecy|PCY|Prophecy|
 Premium Deck Series: Fire and Lightning|PD2|PremiumDeckSeriesFireAndLightning|
@@ -288,7 +288,7 @@ Unhinged|UNH|Unhinged|
 Unfinity|UNF|Unfinity|
 Urza's Saga|USG|UrzasSaga|
 Unstable|UST|Unstable|
-HasCon 2017|H17|HASCONPromo2017|
+HasCon 2017|H17|HasCon2017|
 From the Vault: Exiled|V09|FromTheVaultExiled|
 From the Vault: Relics|V10|FromTheVaultRelics|
 From the Vault: Legends|V11|FromTheVaultLegends|
