@@ -298,11 +298,6 @@ From the Vault: Annihilation|V14|FromTheVaultAnnihilation|
 From the Vault: Angels|V15|FromTheVaultAngels|
 From the Vault: Lore|V16|FromTheVaultLore|
 From the Vault: Transform|V17|FromTheVaultTransform|
-MTGO Vanguard|VGO||
-Vanguard Set 1|VG1||
-Vanguard Set 2|VG2||
-Vanguard Set 3|VG3||
-Vanguard Set 4|VG4||
 Visions|VIS|Visions|
 Vintage Masters|VMA|VintageMasters|
 War of the Spark|WAR|WarOfTheSpark|
