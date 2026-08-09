@@ -229,8 +229,8 @@ if (!exists $cards{$mainCardName}) {
     die "Card name doesn't exist: $mainCardName\n";
 }
 
-my $cardTemplate = 'cardTest.tmpl';
-my $cardInfoTemplate = 'cardInfo.tmpl';
+my $cardTemplate = 'templates/cardTest.tmpl';
+my $cardInfoTemplate = 'templates/cardInfo.tmpl';
 my $originalName = $mainCardName;
 my $setCode;
 

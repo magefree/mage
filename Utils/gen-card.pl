@@ -131,7 +131,7 @@ if (!exists $cards{$cardName}) {
     die "Card name doesn't exist: $cardName\n";
 }
 
-my $cardTemplate = 'cardClass.tmpl';
+my $cardTemplate = 'templates/cardClass.tmpl';
 my $splitDelimiter = '//';
 my $empty = '';
 my $splitSpell = 'false';
@@ -140,7 +140,7 @@ my $originalName = $cardName;
 # Remove the // from name of split cards
 if (index($cardName, $splitDelimiter) != -1) {
     $cardName =~ s/$splitDelimiter/$empty/g;
-    $cardTemplate = 'cardSplitClass.tmpl';
+    $cardTemplate = 'templates/cardSplitClass.tmpl';
     $splitSpell = 'true';
 }
 

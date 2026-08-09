@@ -10,6 +10,7 @@ Files used:
  - mtg-cards-data.txt - MTG cards data, used for card implementation trackers and generating release notes
  - mtg-sets-data.txt - list of sets in MTG and their internal set code
  - data/author.txt - one line file that contains the author name you want to appear in the generated java files
+ - templates/ - templates used by scripts in this folder
 
 Some scripts fetch or generate files needed after the script finishes. Store those files in Utils/data, which is ignored by Git.
 

@@ -7,7 +7,7 @@ use Scalar::Util qw(looks_like_number);
 
 my $dataFile = "mtg-cards-data.txt";
 my $setsFile = "mtg-sets-data.txt";
-my $templateFile = "issue_tracker.tmpl";
+my $templateFile = "templates/issue_tracker.tmpl";
 
 my %sets;
 my %knownSets;
