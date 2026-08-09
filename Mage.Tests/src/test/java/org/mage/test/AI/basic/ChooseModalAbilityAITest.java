@@ -3,7 +3,6 @@ package org.mage.test.AI.basic;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
@@ -93,7 +92,6 @@ public class ChooseModalAbilityAITest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    @Ignore // TODO: add support of You may choose the same mode more than once, see addModeOptions
     public void test_MultiModal_AI() {
         setupMultiMode();
 

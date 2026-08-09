@@ -4570,6 +4570,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public List<Ability> getPlayableOptions(Ability ability, Game game) {
         List<Ability> options = new ArrayList<>();
         if (ability.isModal()) {
+            ability.getModes().clearSelectedModes(); // clear default first mode too
             addModeOptions(options, ability, game);
         } else if (ability.getTargets().getNextUnchosen(game) != null) {
             // TODO: Handle other variable costs than mana costs
@@ -4588,23 +4589,52 @@ public abstract class PlayerImpl implements Player, Serializable {
      * AI related code
      */
     private void addModeOptions(List<Ability> options, Ability option, Game game) {
-        // TODO: support modal spells with more than one selectable mode (also must use max modes filter)
-        for (Mode mode : option.getModes().values()) {
+        // there are possible ifinite modes to select due isMayChooseSameModeMoreThanOnce
+        // so used protection logic:
+        // - fill modes one by one until reach required conditionals or game engine limit
+
+        List<Mode> availableModes = option.getModes().getAvailableModes(option, game);
+
+        // no more modes to add - finish it on good valid
+        if (availableModes.isEmpty()) {
+            if (option.getModes().getSelectedModes().isEmpty()) {
+                throw new IllegalStateException("AI, addModeOptions catch ability without modes, report to github (possible reason - require to select too much modes?): " + option);
+            }
+            if (option.getModes().getSelectedModes().size() >= option.getModes().getMinModes()) {
+                options.add(option);
+            }
+            return;
+        }
+
+        // continue to adding more modes
+        for (Mode mode : availableModes) {
             Ability newOption = option.copy();
-            // TODO: bugged? Research option.getModes().isMayChooseSameModeMoreThanOnce() - is it affected here
-            newOption.getModes().clearSelectedModes();
             newOption.getModes().addSelectedMode(mode.getId());
             newOption.getModes().setActiveMode(mode);
+
+            // fill each mode with completed targets
+            List<Ability> withTargetsFilled = new ArrayList<>();
             if (newOption.getTargets().getNextUnchosen(game) != null) {
+                // 1
                 if (!newOption.getManaCosts().getVariableCosts().isEmpty()) {
-                    addVariableXOptions(options, newOption, 0, game);
+                    // 1.1
+                    addVariableXOptions(withTargetsFilled, newOption, 0, game);
                 } else {
-                    addTargetOptions(options, newOption, 0, game);
+                    // 1.2
+                    addTargetOptions(withTargetsFilled, newOption, 0, game);
                 }
             } else if (newOption.getCosts().getTargets().getNextUnchosen(game) != null) {
-                addCostTargetOptions(options, newOption, 0, game);
+                // 2
+                addCostTargetOptions(withTargetsFilled, newOption, 0, game);
             } else {
-                options.add(newOption);
+                // 3
+                withTargetsFilled.add(newOption);
+            }
+
+            // now we have added mode with combination of filled targets
+            // add it recursively with additional modes
+            for (Ability filled : withTargetsFilled) {
+                addModeOptions(options, filled, game);
             }
         }
     }

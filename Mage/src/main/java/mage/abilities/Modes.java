@@ -27,6 +27,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
 
     private static final Logger logger = Logger.getLogger(Modes.class);
 
+    // TODO: add performance tests for infinite modes and make sure limit works fine, see ChooseModalAbilityAITest
+    private static final int MAX_MODES_TO_SELECT = 10; // limit human and AI choices, cause some modes allow to select infinite amount of times
+
     // choose ID for options in ability/mode picker dialogs
     public static final UUID CHOOSE_OPTION_DONE_ID = UUID.fromString("33e72ad6-17ae-4bfb-a097-6e7aa06b49e9");
     public static final UUID CHOOSE_OPTION_CANCEL_ID = UUID.fromString("0125bd0c-5610-4eba-bc80-fc6d0a7b9de6");
@@ -347,9 +350,10 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
         int selectedTargetsCount = this.values().stream().mapToInt(
                 m -> m.getTargets().stream().mapToInt(t -> t.getTargets().size()).sum()
         ).sum();
-        if (selectedTargetsCount > 0) {
+        int selectedModesCount = this.selectedModes.size();
+        if (selectedTargetsCount > 0 || selectedModesCount > 1) {
             // keep
-            logger.debug("modes choose, keep predefined modes and targets " + selectedTargetsCount);
+            logger.debug("modes choose, keep predefined modes " + selectedModesCount + " and targets " + selectedTargetsCount);
         } else {
             // clear
             if (isAlreadySelectedModesOutdated(game, source)) {
@@ -587,6 +591,18 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
      */
     public List<Mode> getAvailableModes(Ability source, Game game) {
         List<Mode> availableModes = new ArrayList<>();
+
+        // limit by max selected
+        if (this.getSelectedModes().size() >= this.getMaxModes(game, source)) {
+            return availableModes;
+        }
+
+        // limit by max allowed by game engine
+        if (this.getSelectedModes().size() >= MAX_MODES_TO_SELECT) {
+            logger.warn("reach max modes limit for " + source + " in " + game);
+            return availableModes;
+        }
+
         Set<UUID> nonAvailableModes;
         if (isMayChooseSameModeMoreThanOnce()) {
             nonAvailableModes = new HashSet<>();
