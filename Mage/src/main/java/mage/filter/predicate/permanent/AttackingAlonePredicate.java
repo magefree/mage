@@ -1,4 +1,3 @@
-
 package mage.filter.predicate.permanent;
 
 import mage.filter.predicate.Predicate;
