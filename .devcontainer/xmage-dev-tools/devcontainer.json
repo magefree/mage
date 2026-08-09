@@ -24,6 +24,7 @@
 	// - disable VS Code auto-update on host system: > Settings -> update.mode = none
 	// - disable VS Code's extensions auto-update on host system: > Settings -> extensions.autoUpdate = false
 	// - do not change devcontainer.json file to avoid image update and re-download
+	// - run any mvn commands with -o flag (offline mode)
 	// 
 	"name": "XMage Dev Tools (Java 25)",
 	"image": "mcr.microsoft.com/devcontainers/java:3-25-trixie",
@@ -73,6 +74,8 @@
 				"java.autobuild.enabled": false,
 				"editor.formatOnSave": false,
 				"debug.console.collapseIdenticalLines": false, // do not collapse same game logs, e.g. for tests
+				"debug.console.wordWrap": false, // better format for ai and load test logs
+				"debug.console.maximumLines": 10000,
 				"[java]": {
 					"editor.defaultFormatter": "OleksandrHavrysh.intellij-formatter"
 				},
