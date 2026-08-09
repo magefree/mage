@@ -36,6 +36,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
 
     private Mode currentMode; // current active mode for resolving
 
+    private boolean isPreselected = false; // true after filled by AI auto-select, e.g. hide choose call on good options
     private final List<UUID> selectedModes = new ArrayList<>(); // all selected modes (this + duplicate), use getSelectedModes all the time to keep modes order
     private final Map<UUID, Mode> selectedDuplicateModes = new LinkedHashMap<>(); // for 2x selects: additional selected modes
     private final Map<UUID, UUID> selectedDuplicateToOriginalModeRefs = new LinkedHashMap<>(); // for 2x selects: stores ref from duplicate to original mode
@@ -71,6 +72,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
         for (Map.Entry<UUID, Mode> entry : modes.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }
+        this.isPreselected = modes.isPreselected;
         for (Map.Entry<UUID, Mode> entry : modes.selectedDuplicateModes.entrySet()) {
             selectedDuplicateModes.put(entry.getKey(), entry.getValue().copy());
         }
@@ -156,6 +158,17 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
     }
 
     /**
+     * Returns true if the mode was preselected by AI auto-select.
+     */
+    public boolean isPreselected() {
+        return isPreselected;
+    }
+
+    public void setPreselected(boolean isPreselected) {
+        this.isPreselected = isPreselected;
+    }
+
+    /**
      * Return full list of selected modes in default/rules order (without multi selects)
      */
     public List<UUID> getSelectedModes() {
@@ -175,25 +188,10 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
     }
 
     public void clearSelectedModes() {
+        this.setPreselected(false);
         this.selectedModes.clear();
         this.selectedDuplicateModes.clear();
         this.selectedDuplicateToOriginalModeRefs.clear();
-
-        // clean predefined targets lists too to make sure it's really new selection 
-        // (it helps to find bad AI code, e.g. in addModeOptions)
-        int selectedTargetsCount = this.values().stream()
-                .mapToInt(m -> m.getTargets().stream()
-                        .mapToInt(t -> t.getTargets().size())
-                        .sum()
-                )
-                .sum();
-        if (selectedTargetsCount > 0) {
-            logger.debug("found predefined targets to clean: " + selectedTargetsCount);
-            this.values().forEach(
-                mode -> logger.debug(" - targets count " + mode.getTargets().stream().mapToInt(t -> t.getTargets().size()).sum() + ", " + mode)
-            );
-        }
-        this.values().forEach(mode -> mode.getTargets().clearChosen());
     }
 
     public int getSelectedStats(UUID modeId) {
@@ -347,20 +345,25 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
     public boolean choose(Game game, Ability source) {
         // in multi-modal abilities it must keep already selected modes and targets
         // to make sure AI simulations will keep predefined setup (modes + targets)
-        int selectedTargetsCount = this.values().stream().mapToInt(
-                m -> m.getTargets().stream().mapToInt(t -> t.getTargets().size()).sum()
-        ).sum();
-        int selectedModesCount = this.selectedModes.size();
-        if (selectedTargetsCount > 0 || selectedModesCount > 1) {
-            // keep
-            logger.debug("modes choose, keep predefined modes " + selectedModesCount + " and targets " + selectedTargetsCount);
-        } else {
-            // clear
-            if (isAlreadySelectedModesOutdated(game, source)) {
-                this.clearAlreadySelectedModes(source, game);
+        if (this.isPreselected()) {
+            int selectedTargetsCount = this.values().stream()
+                    .mapToInt(m -> m.getTargets().stream()
+                            .mapToInt(t -> t.getTargets().size())
+                            .sum()
+                    )
+                    .sum();
+            logger.debug("modes choose, keep predefined modes " + this.selectedModes.size() + " and targets " + selectedTargetsCount);
+            if (isSelectedValid(source, game)) {
+                return true;
             }
-            this.clearSelectedModes();
+            logger.warn("modes choose, not valid - need fallback to manual select (something wrong with AI targets generation?)");
         }
+
+        // fallback to manual select, full cleanup from prev selections or wrong preselections
+        if (isAlreadySelectedModesOutdated(game, source)) {
+            this.clearAlreadySelectedModes(source, game);
+        }
+        this.clearSelectedModes();
 
         // runtime check
         if (this.isRandom && limitUsageByOnce) {
@@ -436,6 +439,22 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
             logger.debug("modes choose, before clear, currentMode = " + currentMode + " " + game);
             this.currentMode = null;
             int currentMaxModes = this.getMaxModes(game, source);
+
+            // clean predefined targets lists too to make sure it's really new selection 
+            // (it helps to find bad AI code, e.g. in addModeOptions)
+            int selectedTargetsCount = this.values().stream()
+                    .mapToInt(m -> m.getTargets().stream()
+                            .mapToInt(t -> t.getTargets().size())
+                            .sum()
+                    )
+                    .sum();
+            if (selectedTargetsCount > 0) {
+                logger.debug("found predefined targets to clean: " + selectedTargetsCount);
+                this.values().forEach(
+                    mode -> logger.debug(" - targets count " + mode.getTargets().stream().mapToInt(t -> t.getTargets().size()).sum() + ", " + mode)
+                );
+            }
+            this.values().forEach(mode -> mode.getTargets().clearChosen());
 
             logger.debug("modes choose, start " + game);
             while ((this.selectedModes.size() < currentMaxModes && maxPawPrints == 0) ||

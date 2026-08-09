@@ -1,5 +1,11 @@
 package org.mage.test.AI.basic;
 
+import mage.abilities.Ability;
+import mage.abilities.Mode;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.LoseLifeOpponentsEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 
@@ -151,5 +157,64 @@ public class ChooseModalAbilityAITest extends CardTestPlayerBaseWithAIHelps {
         execute();
 
         assertGraveyardCount(playerA, "Kolaghan's Command", 1);
+    }
+
+    @Test
+    public void test_LimitedUsageModes_AndNoModes_AI() {
+        addCustomCardWithAbility(ACTIVATE_ABILITY, playerA, null);
+        // make sure no errors on addModeOptions
+
+        // Galadriel, Light of Valinor - Alliance 
+        // Whenever another creature you control enters, choose
+        // one that hasn't been chosen this turn -"
+        // * Add {G}{G}{G}.
+        // * Put a +1/+1 counter on each creature you control.
+        // * Scry 2, then draw a card.
+        addCard(Zone.BATTLEFIELD, playerA, "Galadriel, Light of Valinor", 1);
+
+        // x3 triggers to exec all x3 modes
+        // x1 trigger to exec 0 modes due limited usage of modes (all x3 modes already used)
+        addCard(Zone.HAND, playerA, "Ornithopter", 4); // {0} artifact creature
+
+        aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertPermanentCount(playerA, "Galadriel, Light of Valinor", 1);
+    }
+
+
+    @Test
+    public void test_PartialPawPrintSelection_AI() {
+        // make sure paw prints allow to select only part of the budget and AI will use it for better score
+
+        // there aren't any real cards (like Season of the Bold) so use custom ability
+        // with 2 modes and {P} cost budget = 5, minModes = 0
+        // * {P} -- You lose 3 life.                     (always legal, no target, always bad)
+        // * {P}{P}{P}{P} -- Each opponent loses 4 life.  (always legal, no target, always good)
+        Ability ability = new SimpleActivatedAbility(new LoseLifeSourceControllerEffect(3), new TapSourceCost());
+        ability.getModes().setMinModes(0);
+        ability.getModes().setMaxModes(5);
+        ability.getModes().setMaxPawPrints(5);
+        ability.getModes().setMayChooseSameModeMoreThanOnce(true);
+        ability.getModes().getMode().withPawPrintValue(1);
+ 
+        Mode mode2 = new Mode(new LoseLifeOpponentsEffect(4));
+        mode2.withPawPrintValue(4);
+        ability.addMode(mode2);
+ 
+        addCustomCardWithAbility("War Totem", playerA, ability);
+ 
+        // AI must use non-full budget and ignore damage to self (mode 1)
+        aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+ 
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+ 
+        assertLife(playerA, 20);
+        assertLife(playerB, 20 - 4);
     }
 }

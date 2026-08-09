@@ -213,9 +213,20 @@ public abstract class AbilityImpl implements Ability {
             if (this instanceof TriggeredAbility) {
                 for (UUID modeId : this.getModes().getSelectedModes()) {
                     this.getModes().setActiveMode(modeId);
+                    logger.debug("AbilityImpl.resolve as triggered ability: " + this.getModes().getMode());
+                    result = resolveMode(game);
+                }
+            } else if (this instanceof ActivatedAbility && !(this instanceof SpellAbility)) {
+                // 2026-08-09
+                // there aren't any cards with multiple modes in activated ability (except spells)
+                // but support added for future releases, see ChooseModalAbilityAITest
+                for (UUID modeId : this.getModes().getSelectedModes()) {
+                    this.getModes().setActiveMode(modeId);
+                    logger.debug("AbilityImpl.resolve as activated and non-spell ability: " + this.getModes().getMode());
                     result = resolveMode(game);
                 }
             } else {
+                logger.debug("AbilityImpl.resolve as other ability: " + this.getModes().getMode());
                 result = resolveMode(game);
             }
         }

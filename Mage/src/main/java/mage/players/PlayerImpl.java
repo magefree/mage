@@ -1,6 +1,14 @@
 package mage.players;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
+
+import org.apache.log4j.Logger;
+
 import com.google.common.collect.ImmutableMap;
+
 import mage.*;
 import mage.abilities.*;
 import mage.abilities.ActivatedAbility.ActivationStatus;
@@ -60,12 +68,6 @@ import mage.target.common.TargetDiscard;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.RandomUtil;
-import org.apache.log4j.Logger;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 /**
  * Server: basic player implementation, shared for human and AI
@@ -4592,20 +4594,28 @@ public abstract class PlayerImpl implements Player, Serializable {
         // there are possible ifinite modes to select due isMayChooseSameModeMoreThanOnce
         // so used protection logic:
         // - fill modes one by one until reach required conditionals or game engine limit
+        // - also must put any valid up to options
 
-        List<Mode> availableModes = option.getModes().getAvailableModes(option, game).stream()
+        Modes modes = option.getModes();
+        boolean isValidSelection =
+            (modes.getMaxPawPrints() == 0 && modes.getSelectedModes().size() >= modes.getMinModes())
+            || (modes.getMaxPawPrints() > 0 && modes.getSelectedPawPrints() <= modes.getMaxPawPrints())
+            || (modes.isMayChooseNone() && modes.getSelectedModes().isEmpty());
+        if (isValidSelection) {
+            // add valid option and continue to generate new ones (it already prepared targets in parent call)
+            // see tests paw prints like Galadriel, Light of Valinor, etc.
+            // it can be 0 of 5, 3 of 5, etc
+            Ability finalizedOption = option.copy();
+            finalizedOption.getModes().setPreselected(true);
+            options.add(finalizedOption);
+        }
+
+        List<Mode> availableModes = modes.getAvailableModes(option, game).stream()
                 .filter(mode -> !option.getModes().getSelectedModes().contains(mode.getId()) || option.getModes().isMayChooseSameModeMoreThanOnce())
                 .filter(mode -> mode.getTargets().canChoose(option.getControllerId(), option, game))
                 .collect(Collectors.toList());
-
-        // no more modes to add - finish it on good valid
         if (availableModes.isEmpty()) {
-            if (option.getModes().getSelectedModes().isEmpty() && !option.getModes().isMayChooseNone()) {
-                throw new IllegalStateException("AI, addModeOptions catch ability without modes, report to github (possible reason - require to select too much modes?): " + option);
-            }
-            if (option.getModes().getSelectedModes().size() >= option.getModes().getMinModes()) {
-                options.add(option);
-            }
+            // all modes selected, nothing to do here
             return;
         }
 
@@ -4689,6 +4699,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 addCostTargetOptions(options, newOption, 0, game);
             } else {
                 // all filled, ability ready with all targets and costs
+                newOption.getModes().setPreselected(true);
                 options.add(newOption);
             }
         }
@@ -4704,6 +4715,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (targetNum < option.getCosts().getTargets().size() - 1) {
                 addCostTargetOptions(options, newOption, targetNum + 1, game);
             } else {
+                newOption.getModes().setPreselected(true);
                 options.add(newOption);
             }
         }

@@ -2564,9 +2564,11 @@ public class HumanPlayer extends PlayerImpl {
             }
 
             // done button for "for up" choices only
-            boolean canEndChoice = (modes.getSelectedModes().size() >= modes.getMinModes() && modes.getMaxPawPrints() == 0) ||
-                    (modes.getSelectedPawPrints() >= modes.getMaxPawPrints() && modes.getMaxPawPrints() > 0) ||
-                    modes.isMayChooseNone();
+            boolean isValidSelection = 
+                (modes.getMaxPawPrints() == 0 && modes.getSelectedModes().size() >= modes.getMinModes())
+                || (modes.getMaxPawPrints() > 0 && modes.getSelectedPawPrints() <= modes.getMaxPawPrints())
+                || (modes.isMayChooseNone() && modes.getSelectedModes().isEmpty());
+            boolean canEndChoice = isValidSelection;
             if (canEndChoice) {
                 modeMap.put(Modes.CHOOSE_OPTION_DONE_ID, "Done");
             }
