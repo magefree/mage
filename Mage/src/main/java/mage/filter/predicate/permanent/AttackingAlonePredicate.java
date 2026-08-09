@@ -6,7 +6,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- * @author muz
+ * @author anishtilekar
  */
 public enum AttackingAlonePredicate implements Predicate<Permanent> {
     instance;
