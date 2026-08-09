@@ -1023,8 +1023,6 @@ public class VerifyCardDataTest {
         ignoreBoosterSets.add("Zendikar Rising Expeditions"); // box toppers
         ignoreBoosterSets.add("March of the Machine: The Aftermath"); // epilogue boosters aren't for draft
         ignoreBoosterSets.add("Mystery Booster"); // temporary
-        // TEMPORARY: Pending MTGJson updates
-        ignoreBoosterSets.add("The Hobbit");
     }
 
     @Test
@@ -1214,6 +1212,11 @@ public class VerifyCardDataTest {
             if (jsonSet.booster != null && !jsonSet.booster.isEmpty() && !implementedSets.contains(jsonSet.code)) {
                 if (jsonSet.code.equals("HBG")) {
                     // TODO: remove after implement dozens A-cards, see HBG - Alchemy Horizons: Baldur's Gate
+                    return;
+                }
+                if (jsonSet.code.equals("OM1")) {
+                    // TODO: Determine how to model this set, if at all.
+                    // Wizards released this in lieu of SPM due to licensing issues. Almost mechannically identical, but with unique card names/art.
                     return;
                 }
                 // how-to fix: it's miss promo sets with boosters, so just add/generate it in most use cases
