@@ -117,7 +117,7 @@ class VisionSpectralSynthezoidEffect extends AsThoughEffectImpl {
         VisionSpectralSynthezoidWatcher watcher = game.getState().getWatcher(VisionSpectralSynthezoidWatcher.class);
         if (controller == null
                 || card == null
-                || (card.isCreature(game) || !card.hasSubtype(SubType.ROBOT, game))
+                || (card.isCreature(game) && !card.hasSubtype(SubType.ROBOT, game))
                 || watcher == null
                 || sourceObject == null
                 || watcher.isAbilityUsed(new MageObjectReference(sourceObject, game))) {
