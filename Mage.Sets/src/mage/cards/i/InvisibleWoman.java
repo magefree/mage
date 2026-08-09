@@ -11,6 +11,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -49,7 +50,7 @@ public final class InvisibleWoman extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(new DoWhenCostPaid(
                 ability, new ManaCostsImpl<>("{R}{G}{W}{U}"), "Pay {R}{G}{W}{U}?"
-        ), 1));
+        ), 1).addHint(CreaturesYouControlHint.instance));
     }
 
     private InvisibleWoman(final InvisibleWoman card) {

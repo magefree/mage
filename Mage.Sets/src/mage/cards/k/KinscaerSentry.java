@@ -13,9 +13,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
@@ -28,7 +28,7 @@ import java.util.UUID;
  */
 public final class KinscaerSentry extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard(
+    private static final FilterCreatureCard filter = new FilterCreatureCard(
             "creature card with mana value less than or equal to the number of attacking creatures you control"
     );
 

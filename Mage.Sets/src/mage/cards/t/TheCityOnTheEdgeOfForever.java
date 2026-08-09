@@ -15,7 +15,10 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.abilities.effects.common.PhaseOutAllEffect;
 import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Human01Token;
@@ -30,6 +33,12 @@ import mage.constants.SagaChapter;
  * @author muz
  */
 public final class TheCityOnTheEdgeOfForever extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterCreaturePermanent("a creature token");
+
+    static {
+        filter.add(TokenPredicate.TRUE);
+    }
 
     public TheCityOnTheEdgeOfForever(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{B}");
@@ -60,7 +69,7 @@ public final class TheCityOnTheEdgeOfForever extends CardImpl {
             this, SagaChapter.CHAPTER_III, SagaChapter.CHAPTER_III,
             new DoIfCostPaid(
                 new GainLifeEffect(5), null,
-                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE), false
+                new SacrificeTargetCost(filter), false
             )
         );
 
