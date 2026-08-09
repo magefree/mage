@@ -85,6 +85,7 @@ public enum SubType {
     AETHERBORN("Aetherborn", SubTypeSet.CreatureType),
     ALIEN("Alien", SubTypeSet.CreatureType),
     ALLY("Ally", SubTypeSet.CreatureType),
+    ANDORIAN("Andorian", SubTypeSet.CreatureType),
     ANGEL("Angel", SubTypeSet.CreatureType),
     ANTELOPE("Antelope", SubTypeSet.CreatureType),
     ANZELLAN("Anzellan", SubTypeSet.CreatureType, true), // Star Wars
@@ -125,11 +126,13 @@ public enum SubType {
     BITH("Bith", SubTypeSet.CreatureType, true), // Star Wars
     BLINKMOTH("Blinkmoth", SubTypeSet.CreatureType),
     BOAR("Boar", SubTypeSet.CreatureType),
+    BORG("Borg", SubTypeSet.CreatureType),
     BRAINIAC("Brainiac", SubTypeSet.CreatureType, true), // Unstable
     BRINGER("Bringer", SubTypeSet.CreatureType),
     BRUSHWAGG("Brushwagg", SubTypeSet.CreatureType),
     // C
     CTAN("C'tan", SubTypeSet.CreatureType),
+    CAITIAN("Caitian", SubTypeSet.CreatureType),
     CALAMARI("Calamari", SubTypeSet.CreatureType, true), // Star Wars
     CAMARID("Camarid", SubTypeSet.CreatureType),
     CAMEL("Camel", SubTypeSet.CreatureType),
@@ -222,6 +225,7 @@ public enum SubType {
     GOD("God", SubTypeSet.CreatureType),
     GOLEM("Golem", SubTypeSet.CreatureType),
     GORGON("Gorgon", SubTypeSet.CreatureType),
+    GORN("Gorn", SubTypeSet.CreatureType),
     GRAVEBORN("Graveborn", SubTypeSet.CreatureType),
     GREMLIN("Gremlin", SubTypeSet.CreatureType),
     GRIFFIN("Griffin", SubTypeSet.CreatureType),
@@ -266,9 +270,11 @@ public enum SubType {
     KANGAROO("Kangaroo", SubTypeSet.CreatureType),
     KAVU("Kavu", SubTypeSet.CreatureType),
     KELDOR("KelDor", SubTypeSet.CreatureType, true),
+    KELPIEN("Kelpien", SubTypeSet.CreatureType),
     KILLBOT("Killbot", SubTypeSet.CreatureType, true), // Unstable
     KIRIN("Kirin", SubTypeSet.CreatureType),
     KITHKIN("Kithkin", SubTypeSet.CreatureType),
+    KLINGON("Klingon", SubTypeSet.CreatureType),
     KNIGHT("Knight", SubTypeSet.CreatureType),
     KOBOLD("Kobold", SubTypeSet.CreatureType),
     KOORIVAR("Koorivar", SubTypeSet.CreatureType, true),
@@ -279,6 +285,7 @@ public enum SubType {
     LADYOFPROPERETIQUETTE("Lady of Proper Etiquette", SubTypeSet.CreatureType, true), // Unglued
     LAMIA("Lamia", SubTypeSet.CreatureType),
     LAMMASU("Lammasu", SubTypeSet.CreatureType),
+    LANTHANITE("Lanthanite", SubTypeSet.CreatureType),
     LEECH("Leech", SubTypeSet.CreatureType),
     LEMUR("Lemur", SubTypeSet.CreatureType),
     LEVIATHAN("Leviathan", SubTypeSet.CreatureType),
@@ -325,11 +332,13 @@ public enum SubType {
     NYMPH("Nymph", SubTypeSet.CreatureType),
     // O
     OCTOPUS("Octopus", SubTypeSet.CreatureType),
+    OFFICER("Officer", SubTypeSet.CreatureType),
     OGRE("Ogre", SubTypeSet.CreatureType),
     OOZE("Ooze", SubTypeSet.CreatureType),
     ORB("Orb", SubTypeSet.CreatureType),
     ORC("Orc", SubTypeSet.CreatureType),
     ORGG("Orgg", SubTypeSet.CreatureType),
+    ORION("Orion", SubTypeSet.CreatureType),
     ORTOLAN("Ortolan", SubTypeSet.CreatureType, true),
     OTTER("Otter", SubTypeSet.CreatureType),
     OUPHE("Ouphe", SubTypeSet.CreatureType),
@@ -358,6 +367,7 @@ public enum SubType {
     PROCESSOR("Processor", SubTypeSet.CreatureType),
     PUREBLOOD("Pureblood", SubTypeSet.CreatureType, true),
     // Q
+    Q("Q", SubTypeSet.CreatureType),
     QU("Qu", SubTypeSet.CreatureType),
     QUARREN("Quarren", SubTypeSet.CreatureType, true), // Star Wars
     // R
@@ -373,6 +383,7 @@ public enum SubType {
     ROBOT("Robot", SubTypeSet.CreatureType),
     RODIAN("Rodian", SubTypeSet.CreatureType, true), // Star Wars
     ROGUE("Rogue", SubTypeSet.CreatureType),
+    ROMULAN("Romulan", SubTypeSet.CreatureType),
     // S
     SABLE("Sable", SubTypeSet.CreatureType),
     SALAMANDER("Salamander", SubTypeSet.CreatureType),
@@ -431,13 +442,17 @@ public enum SubType {
     SYMBIOTE("Symbiote", SubTypeSet.CreatureType),
     SYNTH("Synth", SubTypeSet.CreatureType),
     // T
+    TALOSIAN("Talosian", SubTypeSet.CreatureType),
+    TELLARITE("Tellarite", SubTypeSet.CreatureType),
     TENTACLE("Tentacle", SubTypeSet.CreatureType),
     TETRAVITE("Tetravite", SubTypeSet.CreatureType),
     THALAKOS("Thalakos", SubTypeSet.CreatureType),
+    THOLIAN("Tholian", SubTypeSet.CreatureType),
     THOPTER("Thopter", SubTypeSet.CreatureType),
     THRULL("Thrull", SubTypeSet.CreatureType),
     TIEFLING("Tiefling", SubTypeSet.CreatureType),
     TIME_LORD("Time Lord", SubTypeSet.CreatureType),
+    TOSK("Tosk", SubTypeSet.CreatureType),
     TOY("Toy", SubTypeSet.CreatureType),
     TRANDOSHAN("Trandoshan", SubTypeSet.CreatureType, true), // Star Wars
     TREEFOLK("Treefolk", SubTypeSet.CreatureType),
@@ -459,6 +474,8 @@ public enum SubType {
     VEDALKEN("Vedalken", SubTypeSet.CreatureType),
     VILLAIN("Villain", SubTypeSet.CreatureType),
     VOLVER("Volver", SubTypeSet.CreatureType),
+    VORTA("Vorta", SubTypeSet.CreatureType),
+    VULCAN("Vulcan", SubTypeSet.CreatureType),
     // W
     WALL("Wall", SubTypeSet.CreatureType),
     WALRUS("Walrus", SubTypeSet.CreatureType),
@@ -477,6 +494,8 @@ public enum SubType {
     WORM("Worm", SubTypeSet.CreatureType),
     WRAITH("Wraith", SubTypeSet.CreatureType),
     WURM("Wurm", SubTypeSet.CreatureType),
+    // X
+    XINDI("Xindi", SubTypeSet.CreatureType),
     // Y
     YETI("Yeti", SubTypeSet.CreatureType),
     // Z
@@ -489,6 +508,7 @@ public enum SubType {
     AMINATOU("Aminatou", SubTypeSet.PlaneswalkerType),
     ANGRATH("Angrath", SubTypeSet.PlaneswalkerType),
     ARLINN("Arlinn", SubTypeSet.PlaneswalkerType),
+    ARZAKON("Arzakon", SubTypeSet.PlaneswalkerType),
     ASHIOK("Ashiok", SubTypeSet.PlaneswalkerType),
     AURRA("Aurra", SubTypeSet.PlaneswalkerType, true), // Star Wars
     BAHAMUT("Bahamut", SubTypeSet.PlaneswalkerType),
@@ -506,6 +526,7 @@ public enum SubType {
     DOMRI("Domri", SubTypeSet.PlaneswalkerType),
     DOOKU("Dooku", SubTypeSet.PlaneswalkerType, true), // Star Wars
     DOVIN("Dovin", SubTypeSet.PlaneswalkerType),
+    DYFED("Dyfed", SubTypeSet.PlaneswalkerType),
     ELLYWICK("Ellywick", SubTypeSet.PlaneswalkerType),
     ELMINSTER("Elminster", SubTypeSet.PlaneswalkerType),
     ELSPETH("Elspeth", SubTypeSet.PlaneswalkerType),

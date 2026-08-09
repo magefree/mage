@@ -11,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.permanent.token.UtvaraHellkiteDragonToken;
+import mage.game.permanent.token.Dragon66Token;
 
 /**
  *
@@ -36,7 +36,7 @@ public final class UtvaraHellkite extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever a Dragon you control attacks, create a 6/6 red Dragon creature token with flying.
-        this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new CreateTokenEffect(new UtvaraHellkiteDragonToken()), false, filter));
+        this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new CreateTokenEffect(new Dragon66Token()), false, filter));
     }
 
     private UtvaraHellkite(final UtvaraHellkite card) {

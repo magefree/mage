@@ -43,7 +43,8 @@ public class TokenCopyFlickerTest extends CardTestPlayerBase {
 
     /**
      * Creates a token copy of a permanent and flickers the copy. Expected behavior: token is removed from game, nothing else happens.
-     * Current, bugged behavior: token is removed from game, then the original, copied creature is returned to the battlefield from wherever (GY in this case)
+     * Previous, bugged behavior: token was removed from game, then the original, copied creature was returned to the battlefield
+     * from its current zone (GY in this case, but could even flicker from battlefield to battlefield). See #14409
      */
     @Test
     public void testCopyTokenFlicker() {

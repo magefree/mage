@@ -6,7 +6,6 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -110,7 +109,7 @@ class ShangChiMasterOfKungFuConditionalMana extends ConditionalMana {
     }
 }
 
-class ShangChiMasterOfKungFuManaCondition extends ManaCondition implements Condition {
+class ShangChiMasterOfKungFuManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {

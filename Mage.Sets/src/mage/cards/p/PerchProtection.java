@@ -5,6 +5,7 @@ import mage.abilities.condition.common.GiftWasPromisedCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
+import mage.abilities.effects.common.PhaseOutAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
 import mage.abilities.effects.common.continuous.LifeTotalCantChangeControllerEffect;
 import mage.abilities.keyword.GiftAbility;
@@ -20,6 +21,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SwanSongBirdToken;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -73,11 +76,13 @@ class PerchProtectionEffect extends OneShotEffect {
         if (GiftWasPromisedCondition.FALSE.apply(game, source)) {
             return false;
         }
+        List<UUID> idsToPhaseOut = new ArrayList<>();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT, source.getControllerId(), source, game
         )) {
-            permanent.phaseOut(game);
+            idsToPhaseOut.add(permanent.getId());
         }
+        new PhaseOutAllEffect(idsToPhaseOut).apply(game, source);
         game.addEffect(new LifeTotalCantChangeControllerEffect(Duration.UntilYourNextTurn), source);
         game.addEffect(new GainAbilityControllerEffect(
                 new ProtectionFromEverythingAbility(), Duration.UntilYourNextTurn

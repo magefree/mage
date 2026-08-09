@@ -97,6 +97,7 @@ public class MultiConnectTest {
     }
 
     public static void main(String[] argv) throws Exception {
+        // TODO: outdated, can be replaced by LoadTest features?
         new MultiConnectTest().startMultiGames();
     }
 

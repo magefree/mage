@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.TurnFaceUpAbility;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
+import mage.abilities.keyword.WardAbility;
 import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -34,8 +35,8 @@ public class DisguiseTest extends CardTestPlayerBase {
 
         String FACE_DOWN_SPELL = "with no text, no name, no subtypes";
         String FACE_DOWN_TRIGGER = "When ";
-        String FACE_DOWN_FACE_UP = "down permanent face up";
-
+        String FACE_DOWN_FACE_UP = "Turn it face up any time";
+        String FACE_DOWN_WARD = "counter it unless";
 
         // {R}{W}
         // Disguise {R/W}{R/W} (You may cast this card face down for {3} as a 2/2 creature with ward {2}.
@@ -63,6 +64,7 @@ public class DisguiseTest extends CardTestPlayerBase {
             // make sure rules visible
             assertRuleExist("client side, stack: face down spell - show", spellView.getRules(), FACE_DOWN_SPELL, true);
             assertRuleExist("client side, stack: face up - hide", spellView.getRules(), FACE_DOWN_FACE_UP, false);
+            assertRuleExist("client side, stack: ward - hide", spellView.getRules(), FACE_DOWN_WARD, false);
             assertRuleExist("client side, stack: triggered ability - hide", spellView.getRules(), FACE_DOWN_TRIGGER, false);
         });
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -90,8 +92,9 @@ public class DisguiseTest extends CardTestPlayerBase {
             ability = permanent.getAbilities(currentGame).stream().filter(a -> a instanceof TurnFaceUpAbility).findFirst().orElse(null);
             Assert.assertNotNull("server side: must have turn face up ability", ability);
             String foundRule = permanent.getRules(currentGame).stream().filter(r -> r.contains("{R/W}")).findFirst().orElse(null);
-            // failed here? search BecomesFaceDownCreatureEffect and additionalAbilities
-            Assert.assertNull("server side: turn face up ability with {R/W} cost must be replaced by text only without cost", foundRule);
+            // ward
+            ability = permanent.getAbilities(currentGame).stream().filter(a -> a instanceof WardAbility).findFirst().orElse(null);
+            Assert.assertNotNull("server side: must have ward ability", ability);
 
             // client side - controller
             GameView gameView = getGameView(playerA);
@@ -107,7 +110,8 @@ public class DisguiseTest extends CardTestPlayerBase {
             Assert.assertEquals("client side - controller: wrong toughness", "2", permanentView.getToughness());
             // make sure rules visible
             assertRuleExist("client side, controller: face down spell - show", permanentView.getRules(), FACE_DOWN_SPELL, true);
-            assertRuleExist("client side, controller: face up - hide", permanentView.getRules(), FACE_DOWN_FACE_UP, false);
+            assertRuleExist("client side, controller: face up - show", permanentView.getRules(), FACE_DOWN_FACE_UP, true);
+            assertRuleExist("client side, controller: ward - show", permanentView.getRules(), FACE_DOWN_WARD, true);
             assertRuleExist("client side, controller: triggered ability - hide", permanentView.getRules(), FACE_DOWN_TRIGGER, false);
             assertRuleExist("client side, controller: {R/W} cost hide", permanentView.getRules(), "{R/W}", false);
 
@@ -131,7 +135,8 @@ public class DisguiseTest extends CardTestPlayerBase {
             Assert.assertEquals("client side - opponent: wrong toughness", "2", permanentView.getToughness());
             // make sure rules visible
             assertRuleExist("client side, opponent: face down spell - show", permanentView.getRules(), FACE_DOWN_SPELL, true);
-            assertRuleExist("client side, opponent: face up - hide", permanentView.getRules(), FACE_DOWN_FACE_UP, false);
+            assertRuleExist("client side, opponent: face up - show", permanentView.getRules(), FACE_DOWN_FACE_UP, true);
+            assertRuleExist("client side, opponent: ward - show", permanentView.getRules(), FACE_DOWN_WARD, true);
             assertRuleExist("client side, opponent: triggered ability - hide", permanentView.getRules(), FACE_DOWN_TRIGGER, false);
             assertRuleExist("client side, opponent: {R/W} cost hide", permanentView.getRules(), "{R/W}", false);
         });

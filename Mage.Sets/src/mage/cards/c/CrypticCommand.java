@@ -33,15 +33,15 @@ public final class CrypticCommand extends CardImpl {
         // or return target permanent to its owner's hand;
         Mode mode = new Mode(new ReturnToHandTargetEffect());
         mode.addTarget(new TargetPermanent());
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
 
         // or tap all creatures your opponents control;
         mode = new Mode(new TapAllEffect(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES));
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
 
         // or draw a card.
         mode = new Mode(new DrawCardSourceControllerEffect(1));
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
     }
 
     private CrypticCommand(final CrypticCommand card) {

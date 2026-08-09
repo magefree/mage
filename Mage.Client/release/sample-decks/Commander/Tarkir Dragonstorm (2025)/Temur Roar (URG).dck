@@ -1,0 +1,91 @@
+1 [TDC:105] Arcane Signet
+1 [TDC:281] Atarka, World Render
+1 [TDC:204] Atsushi, the Blazing Sky
+1 [TDC:249] Beast Within
+1 [TDC:43] Become the Avalanche
+1 [TDC:207] Blasphemous Act
+1 [TDC:342] Bountiful Landscape
+1 [TDM:101] Breaching Dragonstorm
+1 [TDC:44] Broodcaller Scourge
+1 [TDC:208] Chaos Warp
+1 [TDC:350] Cinder Glade
+1 [TDC:107] Command Tower
+1 [TDC:19] Deceptive Frostkite
+1 [TDC:151] Draconic Lore
+1 [TDC:94] Dragon Tempest
+1 [TDC:317] Dragon's Hoard
+1 [TDC:285] Dragonlord Atarka
+1 [TDC:210] Dragonlord's Servant
+1 [TDC:211] Dragonmaster Outcast
+1 [TDC:254] Elemental Bond
+1 [TDM:305] Encroaching Dragonstorm
+1 [TDM:255] Evolving Wilds
+1 [TDC:360] Exotic Orchard
+1 [TDC:255] Farseek
+1 [TDC:318] Fellwar Stone
+1 [TDC:364] Flooded Grove
+5 [TDM:285] Forest
+1 [TDM:256] Frontier Bivouac
+1 [TDC:256] Frontier Siege
+1 [TDC:214] Gadrak, the Crown-Scourge
+1 [TDC:215] Glorybringer
+1 [TDC:21] Hammerhead Tyrant
+1 [TDC:291] Harbinger of the Hunt
+1 [TDC:370] Haven of the Spirit Dragon
+1 [TDC:218] Hellkite Courser
+1 [TDC:371] Hinterland Harbor
+3 [TDM:280] Island
+1 [TDC:374] Karplusan Forest
+1 [TDC:156] Keiga, the Tide Star
+1 [TDC:375] Kessig Wolf Run
+1 [TDC:261] Kodama's Reach
+1 [TDC:219] Lathliss, Dragon Queen
+1 [TDC:221] Leyline Tyrant
+1 [TDC:262] Migration Path
+1 [TDC:378] Mossfire Valley
+1 [TDC:379] Mosswort Bridge
+6 [TDM:283] Mountain
+1 [TDC:225] Nesting Dragon
+1 [TDC:226] Nogi, Draco-Zealot
+1 [TDC:228] Opportunistic Dragon
+1 [TDC:36] Parapet Thrasher
+1 [TDC:382] Path of Ancestry
+1 [TDC:229] Rapacious Dragon
+1 [TDC:162] Rapid Hybridization
+1 [TDC:163] Reality Shift
+1 [TDC:164] Reflections of Littjara
+1 [TDC:387] Rockfall Vale
+1 [TDC:388] Rootbound Crag
+1 [TDC:301] Sarkhan, Soul Aflame
+1 [TDC:230] Scourge of the Throne
+1 [TDC:269] Selvala's Stampede
+1 [TDC:392] Sheltered Thicket
+1 [TDC:393] Shivan Reef
+1 [TDC:233] Skarrgan Hellkite
+1 [TDC:106] Sol Ring
+1 [TDC:234] Spit Flame
+1 [TDC:327] Steel Hellkite
+1 [TDC:236] Storm's Wrath
+1 [TDC:237] Stormbreath Dragon
+1 [TDM:124] Stormshriek Feral
+1 [TDC:396] Sulfur Falls
+1 [TDC:330] Talisman of Creativity
+1 [TDC:332] Talisman of Impulse
+1 [TDC:238] Taurean Mauler
+1 [TDC:400] Temple of Abandon
+1 [TDC:404] Temple of Mystery
+1 [TDC:104] Temple of the Dragon Queen
+1 [TDC:305] Temur Ascendancy
+1 [TDC:240] Territorial Hellkite
+1 [TDC:241] Thunderbreak Regent
+1 [TDC:38] Thundermane Dragon
+1 [TDC:9] Ureni of the Unwritten
+1 [TDC:242] Vengeful Ancestor
+1 [TDC:243] Verix Bladewing
+1 [TDM:234] Whirlwing Stormbrood
+1 [TDC:24] Will of the Temur
+1 [TDC:413] Yavimaya Coast
+1 [TDC:41] Zenith Festival
+SB: 1 [TDC:3] Eshki, Temur's Roar
+LAYOUT MAIN:(1,9)(CMC,false,50)|([TDC:342],[TDC:350],[TDC:107],[TDM:255],[TDC:360],[TDC:364],[TDM:285],[TDM:285],[TDM:285],[TDM:285],[TDM:285],[TDM:256],[TDC:370],[TDC:371],[TDM:280],[TDM:280],[TDM:280],[TDC:374],[TDC:375],[TDC:378],[TDC:379],[TDM:283],[TDM:283],[TDM:283],[TDM:283],[TDM:283],[TDM:283],[TDC:382],[TDC:387],[TDC:388],[TDC:392],[TDC:393],[TDC:396],[TDC:400],[TDC:404],[TDC:104],[TDC:413])([TDC:211],[TDC:162],[TDC:106])([TDC:105],[TDC:19],[TDC:94],[TDC:210],[TDC:255],[TDC:318],[TDC:163],[TDC:330],[TDC:332],[TDC:41])([TDC:249],[TDC:208],[TDC:317],[TDC:254],[TDC:214],[TDC:261],[TDC:226],[TDC:301],[TDC:234],[TDC:238],[TDC:305])([TDC:204],[TDM:305],[TDC:256],[TDC:221],[TDC:262],[TDC:228],[TDC:36],[TDC:236],[TDC:240],[TDC:241],[TDC:38],[TDC:242],[TDC:243])([TDM:101],[TDC:215],[TDC:291],[TDC:225],[TDC:229],[TDC:164],[TDC:233],[TDC:237],[TDM:124],[TDM:234])([TDC:43],[TDC:151],[TDC:21],[TDC:218],[TDC:156],[TDC:219],[TDC:230],[TDC:269],[TDC:327],[TDC:24])([TDC:281],[TDC:44],[TDC:285],[TDC:9])([TDC:207])
+LAYOUT SIDEBOARD:(1,1)(RARITY,true,24)|([TDC:3])

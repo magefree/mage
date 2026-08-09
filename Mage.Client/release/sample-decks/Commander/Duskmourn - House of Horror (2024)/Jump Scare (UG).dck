@@ -1,0 +1,86 @@
+1 [DSC:210] Aesi, Tyrant of Gyre Strait
+1 [DSC:109] Aether Gale
+1 [DSC:92] Arcane Signet
+1 [DSC:211] Arixmethes, Slumbering Isle
+1 [DSC:260] Ash Barrens
+1 [DSC:170] Ashaya, Soul of the Wild
+1 [DSC:171] Augur of Autumn
+1 [DSC:172] Beanstalk Giant
+1 [DSC:80] Beast Within
+1 [DSC:214] Biomass Mutation
+1 [DSC:112] Body of Knowledge
+1 [DSC:72] Cackling Counterpart
+1 [DSC:267] Castle Vantress
+1 [DSC:81] Citanul Hierophants
+1 [DSC:96] Command Tower
+1 [DSC:114] Counterspell
+1 [DSC:174] Cultivate
+1 [DSC:30] Curator Beastie
+1 [DSC:176] Deathmist Raptor
+1 [DSC:115] Dig Through Time
+1 [DSC:32] Disorienting Choice
+1 [DSC:272] Drownyard Temple
+1 [DSC:216] Eureka Moment
+1 [DSC:274] Evolving Wilds
+1 [DSC:33] Experimental Lab // Staff Room
+1 [DSC:177] Explosive Vegetation
+1 [DSC:178] Ezuri's Predation
+1 [DSC:276] Flooded Grove
+9 [DSK:276] Forest
+1 [DSC:39] Giggling Skitterspike
+1 [DSC:13] Glitch Interpreter
+1 [DSC:181] Greater Tanuki
+1 [DSK:216] Growing Dread
+1 [DSC:88] Growth Spiral
+1 [DSC:284] Hinterland Harbor
+1 [DSC:185] Hydra Omnivore
+9 [DSK:280] Island
+1 [DSC:118] Kefnet the Mindful
+1 [DSC:119] Kheru Spellsnatcher
+1 [DSC:2] Kianne, Corrupted Memory
+1 [DSC:288] Mosswort Bridge
+1 [DSC:190] Multani, Yavimaya's Avatar
+1 [DSC:289] Myriad Landscape
+1 [DSC:293] Overflowing Basin
+1 [DSK:193] Overgrown Zealot
+1 [DSC:228] Oversimplify
+1 [DSC:192] Overwhelming Stampede
+1 [DSC:123] Primordial Mist
+1 [DSC:294] Quandrix Campus
+1 [DSC:193] Rampant Growth
+1 [DSC:231] Rashmi, Eternities Crafter
+1 [WOC:104] Reality Shift
+1 [DSC:295] Reliquary Tower
+1 [DSC:126] Retreat to Coralhelm
+1 [DSC:194] Sakura-Tribe Elder
+1 [DSC:195] Sandwurm Convergence
+1 [DSC:251] Scroll of Fate
+1 [DSC:197] Scute Swarm
+1 [DSC:198] Shigeki, Jukai Visionary
+1 [DSC:35] Shriekwood Devourer
+1 [DSC:298] Simic Growth Chamber
+1 [DSC:252] Simic Signet
+1 [DSC:128] Skaab Ruinator
+1 [DSC:94] Sol Ring
+1 [DSC:306] Tangled Islet
+1 [DSC:235] Tatyova, Benthic Druid
+1 [DSC:311] Temple of Mystery
+1 [DSC:313] Temple of the False God
+1 [DSC:200] Temur War Shaman
+1 [DSK:269] Terramorphic Expanse
+1 [DSC:14] They Came from the Pipes
+1 [DSC:314] Thornwood Falls
+1 [DSC:201] Thunderfoot Baloth
+1 [DSC:203] Trail of Mystery
+1 [DSC:238] Trygon Predator
+1 [DSC:323] Vineglimmer Snarl
+1 [DSC:204] Whisperwood Elemental
+1 [DSC:205] Wilderness Reclamation
+1 [DSC:206] Worldspine Wurm
+1 [DSC:327] Yavimaya Coast
+1 [DSC:208] Yavimaya Elder
+1 [MKC:197] Yedora, Grave Gardener
+1 [DSC:15] Zimone's Hypothesis
+SB: 1 [DSC:8] Zimone, Mystery Unraveler
+LAYOUT MAIN:(1,1)(NONE,false,50)|([DSC:210],[DSC:109],[DSC:92],[DSC:211],[DSC:260],[DSC:170],[DSC:171],[DSC:172],[DSC:80],[DSC:214],[DSC:112],[DSC:72],[DSC:267],[DSC:81],[DSC:96],[DSC:114],[DSC:174],[DSC:30],[DSC:176],[DSC:115],[DSC:32],[DSC:272],[DSC:216],[DSC:274],[DSC:33],[DSC:177],[DSC:178],[DSC:276],[DSK:276],[DSK:276],[DSK:276],[DSK:276],[DSK:276],[DSK:276],[DSK:276],[DSK:276],[DSK:276],[DSC:39],[DSC:13],[DSC:181],[DSK:216],[DSC:88],[DSC:284],[DSC:185],[DSK:280],[DSK:280],[DSK:280],[DSK:280],[DSK:280],[DSK:280],[DSK:280],[DSK:280],[DSK:280],[DSC:118],[DSC:119],[DSC:2],[DSC:288],[DSC:190],[DSC:289],[DSC:293],[DSK:193],[DSC:228],[DSC:192],[DSC:123],[DSC:294],[DSC:193],[DSC:231],[WOC:104],[DSC:295],[DSC:126],[DSC:194],[DSC:195],[DSC:251],[DSC:197],[DSC:198],[DSC:35],[DSC:298],[DSC:252],[DSC:128],[DSC:94],[DSC:306],[DSC:235],[DSC:311],[DSC:313],[DSC:200],[DSK:269],[DSC:14],[DSC:314],[DSC:201],[DSC:203],[DSC:238],[DSC:323],[DSC:204],[DSC:205],[DSC:206],[DSC:327],[DSC:208],[MKC:197],[DSC:15])
+LAYOUT SIDEBOARD:(1,1)(RARITY,true,24)|([DSC:8])

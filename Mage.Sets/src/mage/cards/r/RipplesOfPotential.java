@@ -1,6 +1,8 @@
 package mage.cards.r;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -9,6 +11,7 @@ import java.util.stream.Collectors;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PhaseOutAllEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -98,12 +101,14 @@ class RipplesOfPotentialEffect extends OneShotEffect {
         ));
         TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
         controller.choose(outcome, target.withChooseHint("to phase out"), source, game);
+        List<UUID> idsToPhaseOut = new ArrayList<>();
         for (UUID targetId : target.getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
-                permanent.phaseOut(game);
+                idsToPhaseOut.add(permanent.getId());
             }
         }
+        new PhaseOutAllEffect(idsToPhaseOut).apply(game, source);
         watcher.reset();
         return true;
     }

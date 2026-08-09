@@ -36,7 +36,7 @@ public final class GreenGoblinBackForMore extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // At the beginning of combat on your turn, you may discard a card. If you do, each opponent discards a card.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
