@@ -5,6 +5,7 @@ import mage.abilities.condition.common.ControlYourCommanderCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.common.ControlYourCommanderHint;
 import mage.constants.AbilityWord;
 import mage.constants.Duration;
 import mage.constants.Zone;
@@ -22,6 +23,7 @@ public class LieutenantAbility extends SimpleStaticAbility {
                 "as long as you control your commander, {this} gets +2/+2"
         ));
         this.setAbilityWord(AbilityWord.LIEUTENANT);
+        this.addHint(ControlYourCommanderHint.instance);
         this.addLieutenantEffect(effect, text);
     }
 
