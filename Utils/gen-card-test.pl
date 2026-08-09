@@ -22,7 +22,6 @@ my $keywordsFile = 'keywords.txt';
 
 my %cards;
 my %sets;
-my %knownSets;
 my %keywords;
 
 sub toCamelCase {
@@ -179,13 +178,6 @@ open(DATA, $setsFile) || die "can't open $setsFile : $!";
 while (my $line = <DATA>) {
     my @data = split('\\|', $line);
     $sets{$data[0]} = $data[1];
-}
-close(DATA);
-
-open(DATA, $setsFile) || die "can't open $setsFile : $!";
-while (my $line = <DATA>) {
-    my @data = split('\\|', $line);
-    $knownSets{$data[0]} = $data[2];
 }
 close(DATA);
 

@@ -40,6 +40,17 @@ sub toCamelCase {
     $string;
 }
 
+sub toSetClassName {
+    my $string = $_[0];
+    $string =~ s/&/ And /g;
+    $string =~ s/^(\d+)/The$1/g;
+    $string =~ s/-/ /g;
+    $string =~ s/[.+\/:"']//g;
+
+    my @words = ($string =~ /([A-Za-z0-9]+)/g);
+    return join('', map { ucfirst($_) } @words);
+}
+
 sub fixCost {
     my $string = $_[0];
     $string =~ s/{([2BUGRW])([2BUGRW])}/{$1\/$2}/g;
@@ -71,14 +82,7 @@ open(DATA, $setsFile) || die "can't open $setsFile : $!";
 while (my $line = <DATA>) {
     my @data = split('\\|', $line);
     $sets{$data[0]} = $data[1];
-    #print "$data[0]--$data[1]\n"
-}
-close(DATA);
-
-open(DATA, $setsFile) || die "can't open $setsFile : $!";
-while (my $line = <DATA>) {
-    my @data = split('\\|', $line);
-    $knownSets{$data[0]} = $data[2];
+    $knownSets{$data[0]} = toSetClassName($data[0]);
 }
 close(DATA);
 
