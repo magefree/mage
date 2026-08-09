@@ -42,8 +42,10 @@ sub toCamelCase {
 
 sub toSetClassName {
     my $string = $_[0];
-    $string =~ s/'//g;
     $string =~ s/&/ And /g;
+    $string =~ s/^(\d+)/The$1/g;
+    $string =~ s/-/ /g;
+    $string =~ s/[.+\/:"']//g;
 
     my @words = ($string =~ /([A-Za-z0-9]+)/g);
     return join('', map { ucfirst($_) } @words);
