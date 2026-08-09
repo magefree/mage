@@ -105,4 +105,51 @@ public class ChooseModalAbilityAITest extends CardTestPlayerBaseWithAIHelps {
         assertGraveyardCount(playerA, "Fiery Confluence", 1);
         assertLife(playerB, 20 - 2 * 3);
     }
+
+    private void setupChooseTwoMode() {
+        // Kolaghan's Command {1}{B}{R} - Choose two -
+        // * Return target creature card from your graveyard to your hand;
+        // * Target player discards a card;
+        // * Destroy target artifact;
+        // * Kolaghan's Command deals 2 damage to any target.
+        addCard(Zone.HAND, playerA, "Kolaghan's Command", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+
+        // only 2 modes valid here: mode 2 (discard) and mode 4 (damage any target)
+    }
+
+    @Test
+    public void test_ChooseTwoModal_Manual() {
+        setupChooseTwoMode();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kolaghan's Command");
+        setModeChoice(playerA, "2"); // Target player discards a card
+        addTarget(playerA, playerB);
+        setModeChoice(playerA, "4"); // deals 2 damage to any target
+        addTarget(playerA, playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Kolaghan's Command", 1);
+        assertLife(playerB, 20 - 2);
+    }
+
+    @Test
+    public void test_ChooseTwoModal_AI() {
+        setupChooseTwoMode();
+
+        // test case for AI's getAvailableModes - make sure selected modes processing is correct
+        // if not then will be error like "Wrong call of addSelectedMode: mode already selected, you can't select it again"
+        aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertGraveyardCount(playerA, "Kolaghan's Command", 1);
+    }
 }

@@ -4593,7 +4593,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         // so used protection logic:
         // - fill modes one by one until reach required conditionals or game engine limit
 
-        List<Mode> availableModes = option.getModes().getAvailableModes(option, game);
+        List<Mode> availableModes = option.getModes().getAvailableModes(option, game).stream()
+                .filter(mode -> !option.getModes().getSelectedModes().contains(mode.getId()) || option.getModes().isMayChooseSameModeMoreThanOnce())
+                .filter(mode -> mode.getTargets().canChoose(option.getControllerId(), option, game))
+                .collect(Collectors.toList());
 
         // no more modes to add - finish it on good valid
         if (availableModes.isEmpty()) {

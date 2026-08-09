@@ -28,7 +28,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
     private static final Logger logger = Logger.getLogger(Modes.class);
 
     // TODO: add performance tests for infinite modes and make sure limit works fine, see ChooseModalAbilityAITest
-    private static final int MAX_MODES_TO_SELECT = 10; // limit human and AI choices, cause some modes allow to select infinite amount of times
+    private static final int MAX_MODES_TO_SELECT = 5; // limit human and AI choices, cause some modes allow to select infinite amount of times
 
     // choose ID for options in ability/mode picker dialogs
     public static final UUID CHOOSE_OPTION_DONE_ID = UUID.fromString("33e72ad6-17ae-4bfb-a097-6e7aa06b49e9");
@@ -510,7 +510,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
 
         if (selectedModes.contains(modeId)) {
             if (!mayChooseSameModeMoreThanOnce) {
-                // how-to fix: make sure AI code clean and setup modes and targets correctly
+                // how-to fix: make sure AI code clean, filter and setup modes and targets correctly
                 throw new IllegalArgumentException("Wrong call of addSelectedMode: mode already selected, you can't select it again");
             }
             Mode duplicateMode = mode.copy();
@@ -584,6 +584,8 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
 
     /**
      * Returns all (still) available modes of the ability
+     * 
+     * Warning, you must filter out already selected modes by yourself due diff usages (for AI, for real game cycle, for logs, etc)
      *
      * @param source
      * @param game
