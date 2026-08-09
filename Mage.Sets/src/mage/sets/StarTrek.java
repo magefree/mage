@@ -40,6 +40,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Captain Kathryn Janeway", 340, Rarity.MYTHIC, mage.cards.c.CaptainKathrynJaneway.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain Kathryn Janeway", 386, Rarity.MYTHIC, mage.cards.c.CaptainKathrynJaneway.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain Kathryn Janeway", 520, Rarity.MYTHIC, mage.cards.c.CaptainKathrynJaneway.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cha'DIch Investigator", 97, Rarity.COMMON, mage.cards.c.ChaDIchInvestigator.class));
         cards.add(new SetCardInfo("Cloistered Telepath", 50, Rarity.COMMON, mage.cards.c.CloisteredTelepath.class));
         cards.add(new SetCardInfo("Cold-Blooded Crew", 189, Rarity.COMMON, mage.cards.c.ColdBloodedCrew.class));
         cards.add(new SetCardInfo("Collective Drone", 99, Rarity.UNCOMMON, mage.cards.c.CollectiveDrone.class));
