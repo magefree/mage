@@ -1,5 +1,10 @@
 package mage.abilities;
 
+import java.util.*;
+import java.util.stream.Stream;
+
+import org.apache.log4j.Logger;
+
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.OptionalAdditionalModeSourceCosts;
 import mage.abilities.effects.Effect;
@@ -15,13 +20,12 @@ import mage.util.CardUtil;
 import mage.util.Copyable;
 import mage.util.RandomUtil;
 
-import java.util.*;
-import java.util.stream.Stream;
-
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> {
+
+    private static final Logger logger = Logger.getLogger(Modes.class);
 
     // choose ID for options in ability/mode picker dialogs
     public static final UUID CHOOSE_OPTION_DONE_ID = UUID.fromString("33e72ad6-17ae-4bfb-a097-6e7aa06b49e9");
@@ -171,6 +175,22 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
         this.selectedModes.clear();
         this.selectedDuplicateModes.clear();
         this.selectedDuplicateToOriginalModeRefs.clear();
+
+        // clean predefined targets lists too to make sure it's really new selection 
+        // (it helps to find bad AI code, e.g. in addModeOptions)
+        int selectedTargetsCount = this.values().stream()
+                .mapToInt(m -> m.getTargets().stream()
+                        .mapToInt(t -> t.getTargets().size())
+                        .sum()
+                )
+                .sum();
+        if (selectedTargetsCount > 0) {
+            logger.debug("found predefined targets to clean: " + selectedTargetsCount);
+            this.values().forEach(
+                mode -> logger.debug(" - targets count " + mode.getTargets().stream().mapToInt(t -> t.getTargets().size()).sum() + ", " + mode)
+            );
+        }
+        this.values().forEach(mode -> mode.getTargets().clearChosen());
     }
 
     public int getSelectedStats(UUID modeId) {
@@ -322,10 +342,21 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
     }
 
     public boolean choose(Game game, Ability source) {
-        if (isAlreadySelectedModesOutdated(game, source)) {
-            this.clearAlreadySelectedModes(source, game);
+        // in multi-modal abilities it must keep already selected modes and targets
+        // to make sure AI simulations will keep predefined setup (modes + targets)
+        int selectedTargetsCount = this.values().stream().mapToInt(
+                m -> m.getTargets().stream().mapToInt(t -> t.getTargets().size()).sum()
+        ).sum();
+        if (selectedTargetsCount > 0) {
+            // keep
+            logger.debug("modes choose, keep predefined modes and targets " + selectedTargetsCount);
+        } else {
+            // clear
+            if (isAlreadySelectedModesOutdated(game, source)) {
+                this.clearAlreadySelectedModes(source, game);
+            }
+            this.clearSelectedModes();
         }
-        this.clearSelectedModes();
 
         // runtime check
         if (this.isRandom && limitUsageByOnce) {
@@ -345,7 +376,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
 
         // modal spells must show choose dialog even for 1 option, so check this.size instead availableModes.size here
         if (this.size() > 1) {
-            // multiple modes
+            // MULTI MODAL ability
 
             // modes modifications, e.g. choose max modes instead single
             Card card = game.getCard(source.getSourceId());
@@ -398,11 +429,14 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
             }
 
             // player chooses modes manually
+            logger.debug("modes choose, before clear, currentMode = " + currentMode + " " + game);
             this.currentMode = null;
             int currentMaxModes = this.getMaxModes(game, source);
 
+            logger.debug("modes choose, start " + game);
             while ((this.selectedModes.size() < currentMaxModes && maxPawPrints == 0) ||
                     (this.getSelectedPawPrints() < maxPawPrints && maxPawPrints > 0)) {
+                logger.debug("modes choose, single choose step " + game);
                 Mode choice = player.chooseMode(this, source, game);
                 if (choice == null) {
                     // user press cancel/stop in choose dialog or nothing to choose
@@ -413,6 +447,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
                     currentMode = choice;
                 }
             }
+            logger.debug("modes choose, end " + game);
             // effects helper (keep real choosing player)
             if (chooseController == TargetController.OPPONENT) {
                 selectedModes
@@ -422,10 +457,13 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
                         .forEach(effects -> effects.setValue("choosingPlayer", playerId));
             }
         } else {
-            // only one mode
+            // SINGLE MODAL ability
+            // make sure it selected by default (e.g. for AI simulations)
             Mode mode = this.values().iterator().next();
-            this.addSelectedMode(mode.getId());
-            this.setActiveMode(mode);
+            if (this.getSelectedModes().isEmpty()) {
+                this.addSelectedMode(mode.getId());
+                this.setActiveMode(mode);
+            }
         }
 
         return isSelectedValid(source, game);
@@ -466,7 +504,11 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
 
         Mode mode = get(modeId);
 
-        if (selectedModes.contains(modeId) && mayChooseSameModeMoreThanOnce) {
+        if (selectedModes.contains(modeId)) {
+            if (!mayChooseSameModeMoreThanOnce) {
+                // how-to fix: make sure AI code clean and setup modes and targets correctly
+                throw new IllegalArgumentException("Wrong call of addSelectedMode: mode already selected, you can't select it again");
+            }
             Mode duplicateMode = mode.copy();
             UUID originalId = modeId;
             duplicateMode.setRandomId();
@@ -474,7 +516,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
             selectedDuplicateModes.put(modeId, duplicateMode);
             selectedDuplicateToOriginalModeRefs.put(duplicateMode.getId(), originalId);
         }
-        // TODO: bugged and allows to choose same mode multiple times without mayChooseSameModeMoreThanOnce?
+
         this.selectedModes.add(modeId);
     }
 
