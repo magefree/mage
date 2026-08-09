@@ -938,7 +938,7 @@ public class ComputerPlayer extends PlayerImpl {
                 .collect(Collectors.joining(" | ")));
 
         Mode result = modes.getAvailableModes(source, game).stream()
-                .filter(mode -> !modes.getSelectedModes().contains(mode.getId()))
+                .filter(mode -> modes.isMayChooseSameModeMoreThanOnce() || !modes.getSelectedModes().contains(mode.getId()))
                 .filter(mode -> mode.getTargets().canChoose(source.getControllerId(), source, game))
                 .findFirst()
                 .orElse(null);

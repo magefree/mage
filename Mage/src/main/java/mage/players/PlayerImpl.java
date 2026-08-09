@@ -4597,7 +4597,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         // no more modes to add - finish it on good valid
         if (availableModes.isEmpty()) {
-            if (option.getModes().getSelectedModes().isEmpty()) {
+            if (option.getModes().getSelectedModes().isEmpty() && !option.getModes().isMayChooseNone()) {
                 throw new IllegalStateException("AI, addModeOptions catch ability without modes, report to github (possible reason - require to select too much modes?): " + option);
             }
             if (option.getModes().getSelectedModes().size() >= option.getModes().getMinModes()) {
