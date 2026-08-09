@@ -9,7 +9,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
-import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
@@ -44,7 +43,7 @@ public final class WhiteWidowYelenaBelova extends CardImpl {
 
         // Whenever a creature you control with deathtouch deals combat damage to a player, put a +1/+1 counter on it.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
-            new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
+            new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setText("put a +1/+1 counter on it"),
             filter,
             false, SetTargetPointer.PERMANENT, true
         ));

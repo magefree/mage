@@ -61,7 +61,7 @@ class ShangChiMartialMentorReplacementEffect extends ReplacementEffectImpl {
 
     ShangChiMartialMentorReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature, false);
-        staticText = "If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on it instead";
+        staticText = "If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on that creature instead";
     }
 
     private ShangChiMartialMentorReplacementEffect(final ShangChiMartialMentorReplacementEffect effect) {

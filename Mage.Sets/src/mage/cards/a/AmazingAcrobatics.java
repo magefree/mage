@@ -20,7 +20,7 @@ public final class AmazingAcrobatics extends CardImpl {
 
     public AmazingAcrobatics(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
-        
+
 
         // Choose one or both --
         this.getSpellAbility().getModes().setMinModes(1);
@@ -33,7 +33,7 @@ public final class AmazingAcrobatics extends CardImpl {
         // * Tap one or two target creatures.
         Mode mode = new Mode(new TapTargetEffect());
         mode.addTarget(new TargetPermanent(1, 2, StaticFilters.FILTER_PERMANENT_CREATURES));
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
     }
 
     private AmazingAcrobatics(final AmazingAcrobatics card) {

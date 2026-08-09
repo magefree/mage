@@ -2173,6 +2173,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Sram, Senior Edificer", 461, Rarity.RARE, mage.cards.s.SramSeniorEdificer.class));
         cards.add(new SetCardInfo("Staff of the Storyteller", 1863, Rarity.RARE, mage.cards.s.StaffOfTheStoryteller.class));
         cards.add(new SetCardInfo("Star of Extinction", 1862, Rarity.RARE, mage.cards.s.StarOfExtinction.class));
+        cards.add(new SetCardInfo("Stardew Valley", 2801, Rarity.MYTHIC, mage.cards.s.StardewValley.class));
         cards.add(new SetCardInfo("Stasis", 1103, Rarity.RARE, mage.cards.s.Stasis.class));
         cards.add(new SetCardInfo("Steam Vents", 129, Rarity.RARE, mage.cards.s.SteamVents.class));
         cards.add(new SetCardInfo("Steelshaper's Gift", "1632*", Rarity.RARE, mage.cards.s.SteelshapersGift.class, NON_FULL_USE_VARIOUS));

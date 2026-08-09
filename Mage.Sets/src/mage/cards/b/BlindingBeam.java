@@ -17,7 +17,6 @@ import mage.constants.PhaseStep;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.turn.Step;
 import mage.players.Player;
@@ -43,7 +42,7 @@ public final class BlindingBeam extends CardImpl {
         // or creatures don't untap during target player's next untap step.
         Mode mode = new Mode(new BlindingBeamEffect());
         mode.addTarget(new TargetPlayer());
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
 
         // Entwine {1}
         this.addAbility(new EntwineAbility("{1}"));
@@ -73,7 +72,7 @@ class BlindingBeamEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player != null) {                
+        if (player != null) {
             game.addEffect(new BlindingBeamEffect2(player.getId()), source);
             return true;
         }
@@ -123,7 +122,7 @@ class BlindingBeamEffect2 extends ContinuousRuleModifyingEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.UNTAP;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         // prevent untap event of creatures of target player

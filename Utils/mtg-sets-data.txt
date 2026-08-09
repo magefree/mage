@@ -211,6 +211,7 @@ Mirrodin|MRD|Mirrodin|
 Murders at Karlov Manor|MKM|MurdersAtKarlovManor|
 Murders at Karlov Manor Commander|MKC|MurdersAtKarlovManorCommander|
 Mystery Booster 2|MB2|MysteryBooster2|
+Mystery Booster Commander Edition|MBC|MysteryBoosterCommanderEdition|
 Ravnica: Clue Edition|CLU|RavnicaClueEdition|
 Nemesis|NEM|Nemesis|
 New Phyrexia|NPH|NewPhyrexia|
@@ -271,7 +272,7 @@ Theros Beyond Death|THB|TherosBeyondDeath|
 The Brothers' War|BRO|TheBrothersWar|
 The Brothers' War Commander|BRC|TheBrothersWarCommander|
 The Hobbit|HOB|TheHobbit|
-The Hobbit Commander|HOC|TheHobbitCommander|
+The Hobbit Eternal|HOC|TheHobbitEternal|
 Tempest|TMP|Tempest|
 Throne of Eldraine|ELD|ThroneOfEldraine|
 Torment|TOR|Torment|

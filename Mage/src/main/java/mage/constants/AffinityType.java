@@ -16,38 +16,42 @@ import mage.util.CardUtil;
  * @author TheElk801
  */
 public enum AffinityType {
+    // Card types
     ARTIFACTS(new FilterControlledArtifactPermanent("artifacts"), ArtifactYouControlHint.instance),
     CREATURES(new FilterControlledCreaturePermanent("creatures"), CreaturesYouControlHint.instance),
     ARTIFACT_CREATURES(AffinityFilters.ARTIFACT_CREATURES),
     ENCHANTMENTS(new FilterControlledEnchantmentPermanent("enchantments")),
     PLANESWALKERS(new FilterControlledPlaneswalkerPermanent("planeswalkers")),
 
-    EQUIPMENT(new FilterControlledPermanent(SubType.EQUIPMENT, "Equipment"), "Equipment"),
-    AURAS(new FilterControlledPermanent(SubType.AURA, "Auras")),
-    FOOD(new FilterControlledPermanent(SubType.FOOD, "Food"), "Food"),
-    TOKENS(AffinityFilters.TOKENS),
-
+    // Basic Lands
     PLAINS(new FilterControlledPermanent(SubType.PLAINS, "Plains")),
     ISLANDS(new FilterControlledPermanent(SubType.ISLAND, "Islands")),
     SWAMPS(new FilterControlledPermanent(SubType.SWAMP, "Swamps")),
     MOUNTAINS(new FilterControlledPermanent(SubType.MOUNTAIN, "Mountains")),
     FORESTS(new FilterControlledPermanent(SubType.FOREST, "Forests")),
 
-    SPIRITS(new FilterControlledPermanent(SubType.SPIRIT, "Spirits")),
-    HUMANS(new FilterControlledPermanent(SubType.HUMAN, "Humans")),
-    KNIGHTS(new FilterControlledPermanent(SubType.KNIGHT, "Knights")),
-    DALEKS(new FilterControlledPermanent(SubType.DALEK, "Daleks")),
-    FROGS(new FilterControlledPermanent(SubType.FROG, "Frogs")),
-    LIZARDS(new FilterControlledPermanent(SubType.LIZARD, "Lizards")),
+    // Subtypes
+    ALLIES(new FilterControlledPermanent(SubType.ALLY, "Allies"), "Ally"),
+    AURAS(new FilterControlledPermanent(SubType.AURA, "Auras")),
     BIRDS(new FilterControlledPermanent(SubType.BIRD, "Birds")),
     CITIZENS(new FilterControlledPermanent(SubType.CITIZEN, "Citizens")),
-    SLIVERS(new FilterControlledPermanent(SubType.SLIVER, "Slivers")),
-    ALLIES(new FilterControlledPermanent(SubType.ALLY, "Allies"), "Ally"),
-    TOWNS(new FilterControlledPermanent(SubType.TOWN, "Towns")),
+    DALEKS(new FilterControlledPermanent(SubType.DALEK, "Daleks")),
+    ELVES(new FilterControlledPermanent(SubType.ELF, "Elves")),
+    EQUIPMENT(new FilterControlledPermanent(SubType.EQUIPMENT, "Equipment"), "Equipment"),
+    FOOD(new FilterControlledPermanent(SubType.FOOD, "Food"), "Food"),
+    FROGS(new FilterControlledPermanent(SubType.FROG, "Frogs")),
     GATES(new FilterControlledPermanent(SubType.GATE, "Gates"), GatesYouControlHint.instance),
-    SNOW_LANDS(AffinityFilters.SNOW_LANDS),
+    HUMANS(new FilterControlledPermanent(SubType.HUMAN, "Humans")),
+    KNIGHTS(new FilterControlledPermanent(SubType.KNIGHT, "Knights")),
+    LIZARDS(new FilterControlledPermanent(SubType.LIZARD, "Lizards")),
+    SLIVERS(new FilterControlledPermanent(SubType.SLIVER, "Slivers")),
+    SPIRITS(new FilterControlledPermanent(SubType.SPIRIT, "Spirits")),
+    TOWNS(new FilterControlledPermanent(SubType.TOWN, "Towns")),
+
+    OUTLAWS(AffinityFilters.OUTLAWS),
     HISTORIC(AffinityFilters.HISTORIC),
-    OUTLAWS(AffinityFilters.OUTLAWS);
+    SNOW_LANDS(AffinityFilters.SNOW_LANDS),
+    TOKENS(AffinityFilters.TOKENS);
 
     private final FilterControlledPermanent filter;
     private final Hint hint;
