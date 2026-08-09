@@ -15,12 +15,12 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 
 /**
- *
  * @author muz
  */
 public final class TChakaVenerableKing extends CardImpl {
@@ -28,8 +28,10 @@ public final class TChakaVenerableKing extends CardImpl {
     private static final FilterCard filter = new FilterCard("an artifact or land card");
 
     static {
-        filter.add(CardType.ARTIFACT.getPredicate());
-        filter.add(CardType.LAND.getPredicate());
+        filter.add(Predicates.or(
+            CardType.ARTIFACT.getPredicate(),
+            CardType.LAND.getPredicate()
+        ));
     }
 
     public TChakaVenerableKing(UUID ownerId, CardSetInfo setInfo) {
