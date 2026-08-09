@@ -15,7 +15,7 @@ import java.util.Optional;
 public class RemoveAllCountersEnchantedEffect extends OneShotEffect {
     public RemoveAllCountersEnchantedEffect() {
         super(Outcome.Benefit);
-        staticText ="remove all counters from it";
+        staticText = "remove all counters from it";
     }
 
     protected RemoveAllCountersEnchantedEffect(final RemoveAllCountersEnchantedEffect effect) {
@@ -28,7 +28,7 @@ public class RemoveAllCountersEnchantedEffect extends OneShotEffect {
 
     }
 
-    @override
+    @Override
     public boolean apply(Game game , Ability source) {
         return Optional
                 .ofNullable((Permanent) getValue("permanentEnteredBattlefield"))

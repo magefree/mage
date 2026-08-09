@@ -38,7 +38,7 @@ public final class HonestWork extends CardImpl {
 
         // When this Aura enters, tap enchanted creature and remove all counters from it.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect());
-        ability.addEffect(new RemoveAllCountersEnchantedEffect().setText("and remove all counters from it"));
+        ability.addEffect(new RemoveAllCountersEnchantedEffect().concatBy("and"));
         this.addAbility(ability);
 
         // Enchanted creature loses all abilities and is a Citizen with base power and toughness 1/1 and "{T}: Add {C}" named Humble Merchant.

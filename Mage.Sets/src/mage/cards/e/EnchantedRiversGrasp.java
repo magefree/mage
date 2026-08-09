@@ -38,7 +38,7 @@ public final class EnchantedRiversGrasp extends CardImpl {
 
         // When this Aura enters, tap enchanted creature and remove all counters from it.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect());
-        ability.addEffect(new RemoveAllCountersEnchantedEffect().setText("and remove all counters from it"));
+        ability.addEffect(new RemoveAllCountersEnchantedEffect().concatBy("and"));
         this.addAbility(ability);
 
         // Enchanted creature loses all abilities and doesn't untap during its controller's untap step.
