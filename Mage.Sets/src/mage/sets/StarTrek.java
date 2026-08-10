@@ -40,6 +40,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Captain Kathryn Janeway", 340, Rarity.MYTHIC, mage.cards.c.CaptainKathrynJaneway.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain Kathryn Janeway", 386, Rarity.MYTHIC, mage.cards.c.CaptainKathrynJaneway.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain Kathryn Janeway", 520, Rarity.MYTHIC, mage.cards.c.CaptainKathrynJaneway.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Captain's Tutelage", 144, Rarity.COMMON, mage.cards.c.CaptainsTutelage.class));
         cards.add(new SetCardInfo("Cha'DIch Investigator", 97, Rarity.COMMON, mage.cards.c.ChaDIchInvestigator.class));
         cards.add(new SetCardInfo("Cloistered Telepath", 50, Rarity.COMMON, mage.cards.c.CloisteredTelepath.class));
         cards.add(new SetCardInfo("Cold-Blooded Crew", 189, Rarity.COMMON, mage.cards.c.ColdBloodedCrew.class));
@@ -59,6 +60,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Godless Shrine", 285, Rarity.RARE, mage.cards.g.GodlessShrine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Godless Shrine", 397, Rarity.RARE, mage.cards.g.GodlessShrine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Godless Shrine", 492, Rarity.RARE, mage.cards.g.GodlessShrine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Guidance Failure", 60, Rarity.COMMON, mage.cards.g.GuidanceFailure.class));
         cards.add(new SetCardInfo("Hallowed Fountain", 286, Rarity.RARE, mage.cards.h.HallowedFountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hallowed Fountain", 392, Rarity.RARE, mage.cards.h.HallowedFountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hallowed Fountain", 487, Rarity.RARE, mage.cards.h.HallowedFountain.class, NON_FULL_USE_VARIOUS));
@@ -70,6 +72,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 319, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 320, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Khaaaaaaaaaaaannn!", 154, Rarity.UNCOMMON, mage.cards.k.Khaaaaaaaaaaaannn.class));
+        cards.add(new SetCardInfo("Malfunctioning Holodeck", 22, Rarity.COMMON, mage.cards.m.MalfunctioningHolodeck.class));
         cards.add(new SetCardInfo("Moopsy", 207, Rarity.COMMON, mage.cards.m.Moopsy.class));
         cards.add(new SetCardInfo("Mountain", 323, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 324, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));

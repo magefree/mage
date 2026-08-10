@@ -28,7 +28,7 @@ public final class ConsiderThePrimeDirective extends CardImpl {
         // * Interfere -- Counter target spell unless its controller pays {3}.
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(3)));
-        this.getSpellAbility().withFlavorWord("Interfere");
+        this.getSpellAbility().withFirstModeFlavorWord("Interfere");
 
         // * Observe -- Tap up to one target creature and put a stun counter on it. Draw a card.
         Mode mode = new Mode(new TapTargetEffect()).withFlavorWord("Observe");
