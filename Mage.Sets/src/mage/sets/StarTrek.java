@@ -22,6 +22,7 @@ public final class StarTrek extends ExpansionSet {
 
         // this.enablePlayBooster(276); // TODO: Temporary until spoilers conclude
 
+        cards.add(new SetCardInfo("A Good Day to Die", 111, Rarity.COMMON, mage.cards.a.AGoodDayToDie.class));
         cards.add(new SetCardInfo("Amok Time", 183, Rarity.UNCOMMON, mage.cards.a.AmokTime.class));
         cards.add(new SetCardInfo("Assault Drone", 92, Rarity.COMMON, mage.cards.a.AssaultDrone.class));
         cards.add(new SetCardInfo("Automated Warfare System", 93, Rarity.COMMON, mage.cards.a.AutomatedWarfareSystem.class));
