@@ -24,6 +24,7 @@ public final class StarTrek extends ExpansionSet {
 
         cards.add(new SetCardInfo("Amok Time", 183, Rarity.UNCOMMON, mage.cards.a.AmokTime.class));
         cards.add(new SetCardInfo("Assault Drone", 92, Rarity.COMMON, mage.cards.a.AssaultDrone.class));
+        cards.add(new SetCardInfo("Battle-Scarred Survivalist", 95, Rarity.COMMON, mage.cards.b.BattleScarredSurvivalist.class));
         cards.add(new SetCardInfo("Beckett Mariner, Impetuous Ensign", 138, Rarity.UNCOMMON, mage.cards.b.BeckettMarinerImpetuousEnsign.class));
         cards.add(new SetCardInfo("Blood Crypt", 278, Rarity.RARE, mage.cards.b.BloodCrypt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blood Crypt", 394, Rarity.RARE, mage.cards.b.BloodCrypt.class, NON_FULL_USE_VARIOUS));
