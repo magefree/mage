@@ -22,6 +22,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Badgey, Malicious Glitch", 152, Rarity.UNCOMMON, mage.cards.b.BadgeyMaliciousGlitch.class));
         cards.add(new SetCardInfo("Benjamin Sisko, Besieged", 200, Rarity.MYTHIC, mage.cards.b.BenjaminSiskoBesieged.class));
         cards.add(new SetCardInfo("Bio-Asset Allocator", 196, Rarity.RARE, mage.cards.b.BioAssetAllocator.class));
+        cards.add(new SetCardInfo("Ceti Eel", 153, Rarity.COMMON, mage.cards.c.CetiEel.class));
         cards.add(new SetCardInfo("Cryogenic Stasis", 142, Rarity.COMMON, mage.cards.c.CryogenicStasis.class));
         cards.add(new SetCardInfo("Defense Force Aggressor", 161, Rarity.COMMON, mage.cards.d.DefenseForceAggressor.class));
         cards.add(new SetCardInfo("Direct Hit", 162, Rarity.COMMON, mage.cards.d.DirectHit.class));
