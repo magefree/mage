@@ -310,6 +310,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     // news
     public static final String KEY_NEWS_PAGE_LAST_VERSION = "newsPageLastVersion";
     public static final String KEY_NEWS_PAGE_COOKIES = "newsPageCookiesV2";
+    public static final String KEY_NEWS_PAGE_ENABLED = "newsPageEnabled";
 
     // controls
     public static final String KEY_CONTROL_MODIFIER_POSTFIX = "_modifier";
@@ -816,6 +817,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbDraftLogAutoSave = new javax.swing.JCheckBox();
         cbLimitedDeckAutoSave = new javax.swing.JCheckBox();
         cbGameJsonLogAutoSave = new javax.swing.JCheckBox();
+        cbWhatsNewEnabled = new javax.swing.JCheckBox();
         main_card = new javax.swing.JPanel();
         showCardName = new javax.swing.JCheckBox();
         tooltipDelayLabel = new javax.swing.JLabel();
@@ -1085,6 +1087,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbGameJsonLogAutoSave.setText("Save JSON game logs (dest folder: \"..\\xmage\\mage-client\\gamelogs\")");
         cbGameJsonLogAutoSave.setToolTipText("The JSON logs of all your games will be saved to the mentioned folder if this option is switched on.");
         main_gamelog.add(cbGameJsonLogAutoSave);
+
+        cbWhatsNewEnabled.setSelected(true);
+        cbWhatsNewEnabled.setText("Show 'What's New' dialog on startup");
+        cbWhatsNewEnabled.setToolTipText("If active, the What's New page will be shown when the client starts.");
+        main_gamelog.add(cbWhatsNewEnabled);
 
         main_card.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card"));
 
@@ -3015,6 +3022,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbDraftLogAutoSave, KEY_DRAFT_LOG_AUTO_SAVE, "true", "false");
         save(prefs, dialog.cbLimitedDeckAutoSave, KEY_LIMITED_DECK_AUTO_SAVE, "true", "false");
         save(prefs, dialog.cbGameJsonLogAutoSave, KEY_JSON_GAME_LOG_AUTO_SAVE, "true", "false");
+        save(prefs, dialog.cbWhatsNewEnabled, KEY_NEWS_PAGE_ENABLED, "true", "false");
 
         String paramName = KEY_AUTO_TARGET_LEVEL;
         int paramValue = dialog.cbTargetAutoChooseLevel.getSelectedIndex();
@@ -3457,6 +3465,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.cbDraftLogAutoSave, KEY_DRAFT_LOG_AUTO_SAVE, "true");
         load(prefs, dialog.cbLimitedDeckAutoSave, KEY_LIMITED_DECK_AUTO_SAVE, "true");
         load(prefs, dialog.cbGameJsonLogAutoSave, KEY_JSON_GAME_LOG_AUTO_SAVE, "true", "false");
+        load(prefs, dialog.cbWhatsNewEnabled, KEY_NEWS_PAGE_ENABLED, "true", "false");
 
         String autoTargetParam;
         try {
@@ -4108,6 +4117,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox cbUseDefaultBackground;
     private javax.swing.JCheckBox cbUseDefaultBattleImage;
     private javax.swing.JCheckBox cbUseDefaultImageFolder;
+    private javax.swing.JCheckBox cbWhatsNewEnabled;
     private javax.swing.JCheckBox cbUseRandomBattleImage;
     private javax.swing.JCheckBox cbUseSameSettingsForReplacementEffect;
     private javax.swing.JCheckBox checkBoxBeforeCOthers;

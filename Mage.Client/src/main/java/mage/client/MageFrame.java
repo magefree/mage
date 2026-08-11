@@ -386,9 +386,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         });
 
         // run what's new checks (loading in background)
-        SwingUtilities.invokeLater(() -> {
-            showWhatsNewDialog(false);
-        });
+        String newsEnabled = MageFrame.getPreferences().get(PreferencesDialog.KEY_NEWS_PAGE_ENABLED, "true");
+        if (!"false".equals(newsEnabled)) {
+            SwingUtilities.invokeLater(() -> {
+                showWhatsNewDialog(false);
+            });
+        }
     }
 
     /**
