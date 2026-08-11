@@ -2,31 +2,27 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Ability;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 
 /**
- * @author TheElk801
+ * @author riajones
  */
 public final class LokiGodOfMischief extends CardImpl {
 
     public LokiGodOfMischief(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "1{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
 
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
@@ -75,7 +71,7 @@ class LokiGodOfMischiefTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
-        if (stackObject == null || !(stackObject.getStackAbility() instanceof Ability)) {
+        if (stackObject == null || stackObject.getStackAbility() == null) {
             return false;
         }
         if (!stackObject.isControlledBy(this.getControllerId())) {

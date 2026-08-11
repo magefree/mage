@@ -226,6 +226,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Kree Sentinel", 141, Rarity.COMMON, mage.cards.k.KreeSentinel.class));
         cards.add(new SetCardInfo("Lightning Strike", 142, Rarity.COMMON, mage.cards.l.LightningStrike.class));
         cards.add(new SetCardInfo("Loki, God of Mischief", 65, Rarity.RARE, mage.cards.l.LokiGodOfMischief.class));
+        cards.add(new SetCardInfo("Loki, God of Mischief", 343, Rarity.RARE, mage.cards.l.LokiGodOfMischief.class));
         cards.add(new SetCardInfo("Loki Laufeyson", 143, Rarity.UNCOMMON, mage.cards.l.LokiLaufeyson.class));
         cards.add(new SetCardInfo("Los Diablos Missile Base", 270, Rarity.COMMON, mage.cards.l.LosDiablosMissileBase.class));
         cards.add(new SetCardInfo("Luke Cage, Power Man", 20, Rarity.UNCOMMON, mage.cards.l.LukeCagePowerMan.class));
