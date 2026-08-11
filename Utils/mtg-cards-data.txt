@@ -64605,6 +64605,7 @@ Highly Illogical|Star Trek|62|U|{1}{U}|Instant|||Kicker {1}{U}$Counter target sp
 Hoshi Sato, Exolinguist|Star Trek|64|U|{4}{U}|Legendary Creature - Human Scientist|3|3|Federation -- When Hoshi Sato enters, look at the top X cards of your library, where X is the number of creature types among non-Borg creatures you control. Put one of them into your hand and the rest on the bottom of your library in a random order.|
 Humpback Whales|Star Trek|65|C|{4}{U}{U}|Creature - Whale|5|6|Vigilance, ward {2}$Basic landcycling {2}|
 Marooned|Star Trek|72|C|{U}|Enchantment - Aura|||Enchant artifact or creature$When this Aura enters, you may pay {3}. If you do, tap enchanted permanent.$Enchanted permanent doesn't untap during its controller's untap step and can't be beamed up.|
+Open Communications|Star Trek|76|C|{U}|Sorcery|||Draw a card.$Beam me up {2}{U}|
 V'Ger, the Intruder|Star Trek|87|U|{6}{U}|Legendary Artifact Creature - Construct|5|7|Flying$Whenever V'Ger enters or attacks, choose one --$* Look at target opponent's hand, then draw a card.$* Creatures your opponents control get -1/-0 until your next turn.|
 Assault Drone|Star Trek|92|C|{3}{B}|Artifact Creature - Borg|2|4|Artifact creatures you control get +1/+0.|
 Automated Warfare System|Star Trek|93|C|{2}{B}|Artifact Creature - Construct|2|2|Flying$Whenever this creature attacks, you may sacrifice another creature or artifact. If you do, draw a card.|
@@ -64613,6 +64614,7 @@ Battle-Scarred Survivalist|Star Trek|95|C|{1}{B}|Creature - Klingon Scout|1|1|Me
 Cha'DIch Investigator|Star Trek|97|C|{4}{B}|Creature - Klingon Warrior|4|4|When this creature enters, create a 2/1 red Klingon Warrior creature token with haste.|
 Collective Drone|Star Trek|99|U|{1}{B}|Artifact Creature - Borg|*|2|Collective Drone's power is equal to the number of artifact creatures you control.|
 Eject the Warp Core|Star Trek|105|C|{1}{B}|Instant|||Kicker--Sacrifice an artifact or creature.$Target creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets -6/-6 until end of turn instead.|
+General Chang, Cold Warrior|Star Trek|109|R|{B}|Legendary Creature - Klingon Warrior Officer|1|2|{1}, Sacrifice a creature: Put a +1/+1 counter on each Klingon you control.|
 A Good Day to Die|Star Trek|111|C|{B}|Instant|||Target creature gets +2/+0 until end of turn. When that creature dies this turn, you draw a card.|
 He's Dead, Jim|Star Trek|114|C|{3}{B}|Instant|||Destroy target creature. Surveil 1.|
 Hive Mind Coprocessor|Star Trek|115|U|{4}{B}|Artifact Creature - Borg|4|4|Artifact creatures you control have "Whenever this creature deals combat damage to a player, you may pay 1 life. If you do, draw a card."|
@@ -64689,8 +64691,11 @@ Steam Vents|Star Trek|398|R||Land - Island Mountain|||({T}: Add {U} or {R}.)$As 
 Overgrown Tomb|Star Trek|399|R||Land - Swamp Forest|||({T}: Add {B} or {G}.)$As this land enters, you may pay 2 life. If you don't, it enters tapped.|
 Sacred Foundry|Star Trek|400|R||Land - Mountain Plains|||({T}: Add {R} or {W}.)$As this land enters, you may pay 2 life. If you don't, it enters tapped.|
 Breeding Pool|Star Trek|401|R||Land - Forest Island|||({T}: Add {G} or {U}.)$As this land enters, you may pay 2 life. If you don't, it enters tapped.|
+General Chang, Cold Warrior|Star Trek|415|R|{B}|Legendary Creature - Klingon Warrior Officer|1|2|{1}, Sacrifice a creature: Put a +1/+1 counter on each Klingon you control.|
 Salt Vampire|Star Trek|417|R|{1}{B}|Creature - Vampire Shapeshifter|2|2|Lifelink$When this creature enters, look at target opponent's hand. You may choose a nonland card from it. If you do, that player exiles that card, then draws a card.|
 Captain James T. Kirk|Star Trek|418|M|{2}{R}|Legendary Creature - Human Officer|2|2|Whenever Captain Kirk enters or attacks, choose one. If you have no cards in hand, choose one or more instead.$* Discard a card, then draw a card.$* Create a 1/1 red Officer creature token.$* Creatures you control get +1/+0 until end of turn.|
+General Chang, Cold Warrior|Star Trek|427|R|{B}|Legendary Creature - Klingon Warrior Officer|1|2|{1}, Sacrifice a creature: Put a +1/+1 counter on each Klingon you control.|
+General Chang, Cold Warrior|Star Trek|437|R|{B}|Legendary Creature - Klingon Warrior Officer|1|2|{1}, Sacrifice a creature: Put a +1/+1 counter on each Klingon you control.|
 Crystalline Entity|Star Trek|478|M|{8}|Artifact Creature - Elemental|7|7|Flying$When this creature enters, if you cast it, destroy all nonartifact creatures.|
 U.S.S. Enterprise-D, Galaxy-Class|Star Trek|481|R|{3}|Legendary Artifact - Spacecraft|||Whenever one or more charge counters are put on U.S.S. Enterprise-D for the first time each turn, exile the top card of your library. You may play that card this turn.$Station$STATION 7+$Flying, vigilance$4/5|
 Hallowed Fountain|Star Trek|487|R||Land - Plains Island|||({T}: Add {W} or {U}.)$As this land enters, you may pay 2 life. If you don't, it enters tapped.|
@@ -64705,11 +64710,13 @@ Sacred Foundry|Star Trek|495|R||Land - Mountain Plains|||({T}: Add {R} or {W}.)$
 Breeding Pool|Star Trek|496|R||Land - Forest Island|||({T}: Add {G} or {U}.)$As this land enters, you may pay 2 life. If you don't, it enters tapped.|
 Dr. Beverly Crusher|Star Trek|500|M|{2}{W}|Legendary Creature - Human Doctor|2|2|If you gaining life causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.$Whenever you gain life, put a +1/+1 counter on Dr. Crusher.|
 Captain Kathryn Janeway|Star Trek|520|M|{3}{G}|Legendary Creature - Human Officer|2|3|You may play an additional land on each of your turns.$Whenever Captain Janeway or another creature you control enters, that creature explores.|
+General Chang, Cold Warrior|Star Trek|539|R|{B}|Legendary Creature - Klingon Warrior Officer|1|2|{1}, Sacrifice a creature: Put a +1/+1 counter on each Klingon you control.|
 Salt Vampire|Star Trek|541|R|{1}{B}|Creature - Vampire Shapeshifter|2|2|Lifelink$When this creature enters, look at target opponent's hand. You may choose a nonland card from it. If you do, that player exiles that card, then draws a card.|
 Captain James T. Kirk|Star Trek|542|M|{2}{R}|Legendary Creature - Human Officer|2|2|Whenever Captain Kirk enters or attacks, choose one. If you have no cards in hand, choose one or more instead.$* Discard a card, then draw a card.$* Create a 1/1 red Officer creature token.$* Creatures you control get +1/+0 until end of turn.|
 U.S.S. Enterprise-D, Galaxy-Class|Star Trek|557|R|{3}|Legendary Artifact - Spacecraft|||Whenever one or more charge counters are put on U.S.S. Enterprise-D for the first time each turn, exile the top card of your library. You may play that card this turn.$Station$STATION 7+$Flying, vigilance$4/5|
 Captain James T. Kirk|Star Trek|1701|M|{2}{R}|Legendary Creature - Human Officer|2|2|Whenever Captain Kirk enters or attacks, choose one. If you have no cards in hand, choose one or more instead.$* Discard a card, then draw a card.$* Create a 1/1 red Officer creature token.$* Creatures you control get +1/+0 until end of turn.|
 Captain Kathryn Janeway|Star Trek|1704|M|{3}{G}|Legendary Creature - Human Officer|2|3|You may play an additional land on each of your turns.$Whenever Captain Janeway or another creature you control enters, that creature explores.|
+Christine Chapel, Combat Medic|Star Trek Commander|78|R|{3}{G}|Legendary Creature - Human Doctor|2|2|Strange new worlds -- When Christine Chapel enters, you gain life equal to the number of differently named lands you control.$Whenever you gain life, put two +1/+1 counters on Christine Chapel.|
 Captain Kirk, Boldly Going|Star Trek Commander|85|M|{1}{G}{W}{U}|Legendary Creature - Human Officer|3|4|Vigilance$Spacecraft creatures you control get +3/+3.$Whenever Captain Kirk enters or attacks, search your library and/or graveyard for a basic land card or a card named Starship Enterprise, reveal it, and put it into your hand. If you search your library this way, shuffle.|
 Evasive Maneuvers|Star Trek Commander|132|C|{W}|Instant|||Target blocking creature you control gets +2/+2 until end of turn.$Draw a card.|
 Head of Security|Star Trek Commander|133|C|{1}{W}|Creature - Andorian Soldier|2|2|First strike|
@@ -64746,6 +64753,7 @@ Kirk, Enterprising Captain|Star Trek Commander|198|M|{3}{R}|Legendary Creature -
 Klingon Strike Force|Star Trek Commander|199|R|{3}{R}{R}|Creature - Klingon Warrior|5|5|Trample$Haste$When this creature dies, it deals 2 damage to each opponent.|
 Benjamin Sisko, Besieged|Star Trek Commander|200|M|{4}{G}{G}|Legendary Creature - Human Officer|5|5|Play with the top card of your library revealed.$You may play lands and cast creature spells from the top of your library.|
 Tenacious Tosk|Star Trek Commander|201|R|{3}{G}|Creature - Tosk Rogue|4|4|This creature can't be blocked by more than one creature.$Whenever this creature deals combat damage to a player, put a +1/+1 counter on it.|
+Christine Chapel, Combat Medic|Star Trek Commander|300|R|{3}{G}|Legendary Creature - Human Doctor|2|2|Strange new worlds -- When Christine Chapel enters, you gain life equal to the number of differently named lands you control.$Whenever you gain life, put two +1/+1 counters on Christine Chapel.|
 Refute|Star Trek Commander|579|C|{1}{U}{U}|Instant|||Counter target spell. Draw a card, then discard a card.|
 Last Gasp|Star Trek Commander|580|C|{1}{B}|Instant|||Target creature gets -3/-3 until end of turn.|
 Run Amok|Star Trek Commander|582|C|{1}{R}|Instant|||Target attacking creature gets +3/+3 and gains trample until end of turn.|
