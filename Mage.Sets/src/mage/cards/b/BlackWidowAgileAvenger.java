@@ -32,7 +32,7 @@ public final class BlackWidowAgileAvenger extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever an opponent draws their second card each turn, put a +1/+1 counter on Black Widow and you draw a card.
         Ability ability = new DrawNthCardTriggeredAbility(

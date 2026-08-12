@@ -1,5 +1,6 @@
 package mage.cards.t;
 
+import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -23,11 +24,14 @@ public final class ThrivingGrove extends CardImpl {
     public ThrivingGrove(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // Thriving Grove enters the battlefield tapped.
-        this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // As Thriving Grove enters the battlefield, choose a color other than green.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral, "Green")));
+        // This land enters tapped. As it enters, choose a color other than green.
+        Ability ability = new EntersBattlefieldTappedAbility();
+        ability.addEffect(
+            new ChooseColorEffect(Outcome.Neutral, "Green")
+                .setText("As it enters, choose a color other than green")
+        );
+        this.addAbility(ability);
 
         // {T}: Add {G} or one mana of the chosen color.
         this.addAbility(new GreenManaAbility());

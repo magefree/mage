@@ -48,7 +48,7 @@ public final class BilboLuckwearer extends AdventureCard {
         // Burglar's Plot
         // Exchange control of two target nonland permanents that share a card type.
         this.getSpellCard().getSpellAbility().addEffect(new ExchangeControlTargetEffect(
-                Duration.EndOfGame, "Exchange control of two target permanents that share a card type."
+                Duration.EndOfGame, "Exchange control of two target nonland permanents that share a card type."
         ));
         this.getSpellCard().getSpellAbility().addTarget(new TargetPermanentsThatShareCardType());
 
@@ -68,7 +68,7 @@ public final class BilboLuckwearer extends AdventureCard {
 class TargetPermanentsThatShareCardType extends TargetPermanent {
 
     TargetPermanentsThatShareCardType() {
-        super(2, 2, StaticFilters.FILTER_PERMANENT, false);
+        super(2, 2, StaticFilters.FILTER_PERMANENT_NON_LAND, false);
         targetName = "permanents that share a card type";
     }
 

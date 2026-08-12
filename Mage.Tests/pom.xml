@@ -83,19 +83,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                 </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-<!--                    <configuration>
-                        <compilerArgument>-Xlint:unchecked</compilerArgument>
-                    </configuration> -->
-                </plugin>
-                <plugin>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <configuration>
-                        <encoding>UTF-8</encoding>
-                    </configuration>
-                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -135,8 +122,6 @@
                 </configuration>
             </plugin>
         </plugins>
-
-        <finalName>mage-tests</finalName>
     </build>
 
     <properties>

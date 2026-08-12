@@ -20,12 +20,15 @@ public class Standard extends Constructed {
         setCodes.addAll(makeLegalSets());
 
         banned.add("Abuelo's Awakening");
+        banned.add("Badgermole Cub");
         banned.add("Cori-Steel Cutter");
+        banned.add("Gran-Gran");
         banned.add("Heartfire Hero");
         banned.add("Hopeless Nightmare");
         banned.add("Monstrous Rage");
         banned.add("Proft's Eidetic Memory");
         banned.add("Screaming Nemesis");
+        banned.add("Stormchaser's Talent");
         banned.add("This Town Ain't Big Enough");
         banned.add("Up the Beanstalk");
         banned.add("Vivi Ornitier");

@@ -26,7 +26,7 @@ public final class GunganCaptain extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 
-        // Whenever Gungan Captain deals damage to a creture, tap that creature. That creature does not untap during its controllers untap step.
+        // Whenever Gungan Captain deals damage to a creature, tap that creature. That creature does not untap during its controllers untap step.
         Ability ability = new DealsDamageToACreatureTriggeredAbility(new TapTargetEffect("tap that creature"), false, false, true);
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("That creature"));
         this.addAbility(ability);

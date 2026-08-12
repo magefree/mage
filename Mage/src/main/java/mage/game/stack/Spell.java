@@ -673,24 +673,23 @@ public class Spell extends StackObjectImpl implements Card {
         this.manaCost = costs.copy();
     }
 
-    /**
-     * 202.3b When calculating the converted mana cost of an object with an {X}
-     * in its mana cost, X is treated as 0 while the object is not on the stack,
-     * and X is treated as the number chosen for it while the object is on the
-     * stack.
-     *
-     * @return
-     */
     @Override
     public int getManaValue() {
         int cmc = 0;
+
         if (faceDown) {
             return 0;
         }
+
+        // 202.3e
+        // When calculating the mana value of an object with an {X} in its mana cost, X is 
+        // treated as 0 while the object is not on the stack, and X is treated as the number 
+        // chosen for it while the object is on the stack.
         for (SpellAbility spellAbility : spellAbilities) {
             cmc += spellAbility.getConvertedXManaCost(getCard());
         }
         cmc += this.manaCost.manaValue();
+
         return cmc;
     }
 

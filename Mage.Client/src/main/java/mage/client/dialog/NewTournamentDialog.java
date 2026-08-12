@@ -816,7 +816,11 @@ public class NewTournamentDialog extends MageDialog {
         int ret = fcSelectDeck.showDialog(this, "Select Deck");
         if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fcSelectDeck.getSelectedFile();
-            return (file.getPath());
+            if (file != null) {
+                return file.getPath();
+            } else {
+                return "";
+            }
         }
         return "";
     }
@@ -836,7 +840,11 @@ public class NewTournamentDialog extends MageDialog {
         int ret = fcJumpstartSelectDeck.showDialog(this, "Select Jumpstart Packs file");
         if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fcJumpstartSelectDeck.getSelectedFile();
-            return (file.getPath());
+            if (file != null) {
+                return file.getPath();
+            } else {
+                return "";
+            }
         }
         return "";
     }

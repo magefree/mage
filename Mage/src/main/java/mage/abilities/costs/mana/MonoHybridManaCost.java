@@ -36,8 +36,11 @@ public class MonoHybridManaCost extends ManaCostImpl {
 
     @Override
     public int manaValue() {
-        // from wiki: A card with monocolored hybrid mana symbols in its mana cost has a converted mana cost equal to
-        // the highest possible cost it could be played for. Its converted mana cost never changes.
+        // 202.3f
+        // When calculating the mana value of an object with a hybrid mana symbol in its mana cost, 
+        // use the largest component of each hybrid symbol.
+        // Example: The mana value of a card with mana cost {1}{W/U}{W/U} is 3.
+        // Example: The mana value of a card with mana cost {2/B}{2/B}{2/B} is 6.
         return Math.max(manaGeneric, 1);
     }
 

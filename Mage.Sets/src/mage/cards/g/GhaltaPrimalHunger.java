@@ -17,9 +17,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.predicate.Predicates;
+
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
@@ -41,9 +39,9 @@ public final class GhaltaPrimalHunger extends CardImpl {
 
         // Ghalta, Primal Hunger costs {X} less to cast, where X is the total power of creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new GhaltaPrimalHungerCostReductionEffect()));
+
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-
     }
 
     private GhaltaPrimalHunger(final GhaltaPrimalHunger card) {
@@ -57,12 +55,6 @@ public final class GhaltaPrimalHunger extends CardImpl {
 }
 
 class GhaltaPrimalHungerCostReductionEffect extends CostModificationEffectImpl {
-
-    private static final FilterPermanent filter = new FilterControlledArtifactPermanent("noncreature artifacts you control");
-
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
 
     GhaltaPrimalHungerCostReductionEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);

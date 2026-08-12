@@ -7,10 +7,12 @@ use Scalar::Util qw(looks_like_number);
 
 my $dataFile = "mtg-cards-data.txt";
 my $setsFile = "mtg-sets-data.txt";
-my $templateFile = "issue_tracker.tmpl";
+my $templateFile = "templates/issue_tracker.tmpl";
 
 my %sets;
 my %knownSets;
+my %setNamesByCode;
+my %setCodesByName;
 
 my @setCards;
 
@@ -19,37 +21,52 @@ while(my $line = <DATA>) {
     chomp $line;
     my @data = split('\\|', $line);
     $knownSets{$data[0]} = $data[2];
+    $setNamesByCode{uc($data[1])} = $data[0];
+    $setCodesByName{$data[0]} = $data[1];
 }
 close(DATA);
 
 my @basicLands = ("Plains", "Island", "Swamp", "Mountain", "Forest");
 
-# gets the set name
-my $setName = $ARGV[0];
-if(!$setName) {
-    print 'Enter a set name: ';
-    $setName = <STDIN>;
-    chomp $setName;
+sub resolveSetName {
+    my ($input) = @_;
+
+    return $input if exists $setCodesByName{$input};
+
+    my $setCode = uc($input);
+    return $setNamesByCode{$setCode} if exists $setNamesByCode{$setCode};
+
+    return undef;
 }
 
-while (!defined ($knownSets{$setName}))
+# gets the set name
+my $setInput = join(' ', @ARGV);
+if(!$setInput) {
+    print 'Enter a set name or code: ';
+    $setInput = <STDIN>;
+    chomp $setInput;
+}
+
+my $setName = resolveSetName($setInput);
+while (!defined $setName)
 {
-    print ("Invalid set - '$setName'\n");
+    print ("Invalid set - '$setInput'\n");
     print ("  Possible sets you meant:\n");
-    my $origSetName = $setName;
-    $setName =~ s/^(.).*/$1/;
-    my $key;
-    foreach $key (sort keys (%knownSets))
+    my $searchPrefix = $setInput;
+    $searchPrefix =~ s/^(.).*/$1/;
+    foreach my $name (sort keys (%knownSets))
     {
-        if ($key =~ m/^$setName/img)
+        my $code = $setCodesByName{$name};
+        if ($name =~ m/^$searchPrefix/img || $code =~ m/^$searchPrefix/img)
         {
-            print ("   '$key'\n");
+            print ("   '$name' ($code)\n");
         }
     }
 
-    print 'Enter a set name: ';
-    $setName = <STDIN>;
-    chomp $setName;
+    print 'Enter a set name or code: ';
+    $setInput = <STDIN>;
+    chomp $setInput;
+    $setName = resolveSetName($setInput);
 }
 
 open (DATA, $dataFile) || die "can't open $dataFile";
@@ -121,42 +138,42 @@ foreach my $card (sort cardSort @setCards) {
 
     if(-e $currentFileName) {
         # Card is implemented
-        $cardNames{$cardName} = 1;
+        $cardNames{$cardName} = 0;
         my $implementedEntry = "- [x] [$cardName](https://scryfall.com/search?q=!$cardNameForUrl%20e:$setAbbr)";
         push(@implementedCards, $implementedEntry);
     } else {
         # Card is not implemented
-        $cardNames{$cardName} = 0;
+        $cardNames{$cardName} = $collectorNumber;
         push(@unimplementedCards, $cardEntry);
     }
 }
 
 # Build the unimplemented URL for Scryfall
-my $unimplementedUrl = "https://scryfall.com/search?q=";
-my @unimplementedNames;
+my $unimplementedUrl = "https://scryfall.com/search?q=s:$setAbbr%20%28";
+my @unimplementedNumbers;
 foreach my $cardName (sort keys %cardNames) {
-    if ($cardNames{$cardName} == 0) {
-        my $urlCardName = $cardName;
-        $urlCardName =~ s/ //g;
-        $urlCardName =~ s/"/\\"/g;  # Escape quotes
-        $urlCardName =~ s/\&/%26/g; # URL encode ampersands
-        push(@unimplementedNames, "!\"$urlCardName\"");
+    if ($cardNames{$cardName} != 0) {
+        push(@unimplementedNumbers, "cn:$cardNames{$cardName}");
     }
 }
-$unimplementedUrl .= join("or", @unimplementedNames) . "&unique=cards";
+# Scryfall's UI has a 1024 chracter limit for search queries, which realistically limits us to 100 card numbers for the search query
+$unimplementedUrl .= join("%20or%20", @unimplementedNumbers[0 .. List::Util::min(99, $#unimplementedNumbers)] );
+$unimplementedUrl .= "%29";
 
 # Read template file
 my $template = Text::Template->new(TYPE => 'FILE', SOURCE => $templateFile, DELIMITERS => [ '[=', '=]' ]);
 $vars{'unimplementedCount'} = scalar(@unimplementedCards);
 $vars{'implementedCount'} = scalar(@implementedCards);
 $vars{'totalCount'} = scalar(@unimplementedCards) + scalar(@implementedCards);
-$vars{'unimplemented'} = join("\n", sort @unimplementedCards);
+$vars{'unimplemented'} = @unimplementedCards
+    ? join("\n", sort @unimplementedCards)
+    : "All cards currently implemented";
 $vars{'implemented'} = join("\n", sort @implementedCards);
 $vars{'setName'} = $setName;
 $vars{'unimplementedUrl'} = $unimplementedUrl;
 my $result = $template->fill_in(HASH => \%vars);
 # Write the final issue tracker file
-my $outputFile = lc($sets{$setName}) . "_issue_tracker.txt";
+my $outputFile = "data/" . lc($sets{$setName}) . "_issue_tracker.txt";
 open(OUTPUT, "> $outputFile") || die "can't open $outputFile for writing";
 print OUTPUT $result;
 close(OUTPUT);

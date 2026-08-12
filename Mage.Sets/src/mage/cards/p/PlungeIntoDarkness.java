@@ -18,13 +18,11 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetSacrifice;
 
 /**
@@ -43,7 +41,7 @@ public final class PlungeIntoDarkness extends CardImpl {
         this.getSpellAbility().addEffect(new PlungeIntoDarknessLifeEffect());
         // or pay X life, then look at the top X cards of your library, put one of those cards into your hand, and exile the rest.
         Mode mode = new Mode(new PlungeIntoDarknessSearchEffect());
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
 
         // Entwine {B}
         this.addAbility(new EntwineAbility("{B}"));

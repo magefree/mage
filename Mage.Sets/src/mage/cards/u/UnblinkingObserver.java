@@ -6,7 +6,6 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.keyword.DisturbAbility;
 import mage.abilities.mana.ConditionalColoredManaAbility;
@@ -71,7 +70,7 @@ class UnblinkingObserverConditionalMana extends ConditionalMana {
     }
 }
 
-class UnblinkingObserverManaCondition extends ManaCondition implements Condition {
+class UnblinkingObserverManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {

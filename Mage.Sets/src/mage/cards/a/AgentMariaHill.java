@@ -48,7 +48,7 @@ public final class AgentMariaHill extends CardImpl {
 class AgentMariaHillTriggeredAbility extends TriggeredAbilityImpl {
 
     AgentMariaHillTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()).setText("put a +1/+1 counter on her"));
         this.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
         this.setTriggerPhrase("Whenever {this} becomes tapped to pay a teamwork cost, ");
     }
