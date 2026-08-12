@@ -1478,7 +1478,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         cardName = EmptyNames.replaceTestCommandByObjectName(cardName);
 
         int actual;
-        if (cardName.contains("//")) { // special logic for checked split cards, because in game logic of card name filtering is different from in test
+        if (cardName.contains(" // ")) { // special logic for checked split cards, because in game logic of card name filtering is different from in test
             actual = 0;
             for (Card card : currentGame.getPlayer(player.getId()).getHand().getCards(currentGame)) {
                 if (CardUtil.haveSameNames(card.getName(), cardName, true)) {
@@ -2290,6 +2290,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     /**
      * Declare non target choice. You can use multiple choices in one line like setChoice(name1^name2)
      * Also support "up to" choices, e.g. choose 2 of 3 cards by setChoice(card1^card2) + setChoice(TestPlayer.CHOICE_SKIP)
+     * Replecemnt effects support setChoice(object*ability) choice notation to skip object id inside the choice
      */
     public void setChoice(TestPlayer player, String choice) {
         setChoice(player, choice, 1);

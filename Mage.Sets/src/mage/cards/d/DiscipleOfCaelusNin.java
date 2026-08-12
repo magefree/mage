@@ -6,6 +6,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PhaseOutAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -19,7 +20,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -85,11 +88,13 @@ class DiscipleOfCaelusNinFirstEffect extends OneShotEffect {
             player.choose(outcome, target, source, game);
             toKeep.addAll(target.getTargets());
         }
+        List<UUID> idsToPhaseOut = new ArrayList<>();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if (!toKeep.contains(permanent.getId())) {
-                permanent.phaseOut(game);
+                idsToPhaseOut.add(permanent.getId());
             }
         }
+        new PhaseOutAllEffect(idsToPhaseOut).apply(game, source);
         return true;
     }
 }

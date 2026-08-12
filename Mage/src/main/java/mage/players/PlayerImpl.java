@@ -1,6 +1,14 @@
 package mage.players;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
+
+import org.apache.log4j.Logger;
+
 import com.google.common.collect.ImmutableMap;
+
 import mage.*;
 import mage.abilities.*;
 import mage.abilities.ActivatedAbility.ActivationStatus;
@@ -60,12 +68,6 @@ import mage.target.common.TargetDiscard;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.RandomUtil;
-import org.apache.log4j.Logger;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 /**
  * Server: basic player implementation, shared for human and AI
@@ -4570,6 +4572,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public List<Ability> getPlayableOptions(Ability ability, Game game) {
         List<Ability> options = new ArrayList<>();
         if (ability.isModal()) {
+            ability.getModes().clearSelectedModes(); // clear default first mode too
             addModeOptions(options, ability, game);
         } else if (ability.getTargets().getNextUnchosen(game) != null) {
             // TODO: Handle other variable costs than mana costs
@@ -4588,23 +4591,63 @@ public abstract class PlayerImpl implements Player, Serializable {
      * AI related code
      */
     private void addModeOptions(List<Ability> options, Ability option, Game game) {
-        // TODO: support modal spells with more than one selectable mode (also must use max modes filter)
-        for (Mode mode : option.getModes().values()) {
+        // there are possible ifinite modes to select due isMayChooseSameModeMoreThanOnce
+        // so used protection logic:
+        // - fill modes one by one until reach required conditionals or game engine limit
+        // - also must put any valid up to options
+
+        Modes modes = option.getModes();
+        boolean isValidSelection =
+            (modes.getMaxPawPrints() == 0 && modes.getSelectedModes().size() >= modes.getMinModes())
+            || (modes.getMaxPawPrints() > 0 && modes.getSelectedPawPrints() <= modes.getMaxPawPrints())
+            || (modes.isMayChooseNone() && modes.getSelectedModes().isEmpty());
+        if (isValidSelection) {
+            // add valid option and continue to generate new ones (it already prepared targets in parent call)
+            // see tests paw prints like Galadriel, Light of Valinor, etc.
+            // it can be 0 of 5, 3 of 5, etc
+            Ability finalizedOption = option.copy();
+            finalizedOption.getModes().setPreselected(true);
+            options.add(finalizedOption);
+        }
+
+        List<Mode> availableModes = modes.getAvailableModes(option, game).stream()
+                .filter(mode -> !option.getModes().getSelectedModes().contains(mode.getId()) || option.getModes().isMayChooseSameModeMoreThanOnce())
+                .filter(mode -> mode.getTargets().canChoose(option.getControllerId(), option, game))
+                .collect(Collectors.toList());
+        if (availableModes.isEmpty()) {
+            // all modes selected, nothing to do here
+            return;
+        }
+
+        // continue to adding more modes
+        for (Mode mode : availableModes) {
             Ability newOption = option.copy();
-            // TODO: bugged? Research option.getModes().isMayChooseSameModeMoreThanOnce() - is it affected here
-            newOption.getModes().clearSelectedModes();
             newOption.getModes().addSelectedMode(mode.getId());
             newOption.getModes().setActiveMode(mode);
+
+            // fill each mode with completed targets
+            List<Ability> withTargetsFilled = new ArrayList<>();
             if (newOption.getTargets().getNextUnchosen(game) != null) {
+                // 1
                 if (!newOption.getManaCosts().getVariableCosts().isEmpty()) {
-                    addVariableXOptions(options, newOption, 0, game);
+                    // 1.1
+                    addVariableXOptions(withTargetsFilled, newOption, 0, game);
                 } else {
-                    addTargetOptions(options, newOption, 0, game);
+                    // 1.2
+                    addTargetOptions(withTargetsFilled, newOption, 0, game);
                 }
             } else if (newOption.getCosts().getTargets().getNextUnchosen(game) != null) {
-                addCostTargetOptions(options, newOption, 0, game);
+                // 2
+                addCostTargetOptions(withTargetsFilled, newOption, 0, game);
             } else {
-                options.add(newOption);
+                // 3
+                withTargetsFilled.add(newOption);
+            }
+
+            // now we have added mode with combination of filled targets
+            // add it recursively with additional modes
+            for (Ability filled : withTargetsFilled) {
+                addModeOptions(options, filled, game);
             }
         }
     }
@@ -4656,6 +4699,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 addCostTargetOptions(options, newOption, 0, game);
             } else {
                 // all filled, ability ready with all targets and costs
+                newOption.getModes().setPreselected(true);
                 options.add(newOption);
             }
         }
@@ -4671,6 +4715,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (targetNum < option.getCosts().getTargets().size() - 1) {
                 addCostTargetOptions(options, newOption, targetNum + 1, game);
             } else {
+                newOption.getModes().setPreselected(true);
                 options.add(newOption);
             }
         }

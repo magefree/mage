@@ -17,8 +17,8 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
+import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.permanent.PermanentToken;
 import mage.util.CardUtil;
 import mage.watchers.common.PermanentsSacrificedWatcher;
 
@@ -86,6 +86,16 @@ class EvendoBrushrazerEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        ExileZone exileZone = game
+                .getExile()
+                .getExileZone(CardUtil.getExileZoneId(
+                        game, source.getSourceId(),
+                        game.getState().getZoneChangeCounter(source.getSourceId())
+                ));
+        if (exileZone == null) {
+            return false;
+        }
+
         return source.isControlledBy(affectedControllerId)
                 && game.isActivePlayer(affectedControllerId)
                 && !game
@@ -93,14 +103,8 @@ class EvendoBrushrazerEffect extends AsThoughEffectImpl {
                 .getWatcher(PermanentsSacrificedWatcher.class)
                 .getThisTurnSacrificedPermanents(affectedControllerId)
                 .stream()
-                .allMatch(PermanentToken.class::isInstance)
-                && game
-                .getExile()
-                .getExileZone(CardUtil.getExileZoneId(
-                        game, source.getSourceId(),
-                        game.getState().getZoneChangeCounter(source.getSourceId())
-                ))
-                .contains(CardUtil.getMainCardId(game, objectId));
+                .anyMatch(p -> !p.isToken())
+                && exileZone.contains(CardUtil.getMainCardId(game, objectId));
     }
 
     @Override

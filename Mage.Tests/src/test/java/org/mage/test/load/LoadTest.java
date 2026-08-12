@@ -12,6 +12,7 @@ import mage.remote.Connection;
 import mage.remote.MageRemoteException;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
+import mage.util.JavaUtil;
 import mage.util.RandomUtil;
 import mage.util.ThreadUtils;
 import mage.util.XmageThreadFactory;
@@ -61,6 +62,9 @@ public class LoadTest {
     public static void initDatabase() {
         // recreate missing cards db
         CardScanner.scan();
+
+        // apply default java settings (require for load testing)
+        JavaUtil.applyDefaultClientSettings();
     }
 
     @Test

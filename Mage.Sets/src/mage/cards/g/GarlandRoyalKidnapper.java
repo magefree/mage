@@ -165,7 +165,7 @@ class GarlandRoyalKidnapperSacrificeEffect extends ContinuousEffectImpl {
                 StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), source, game
         )) {
             if (!permanent.isOwnedBy(source.getControllerId())) {
-                permanent.setCanBeSacrificed(true);
+                permanent.setCanBeSacrificed(false);
             }
         }
         return true;

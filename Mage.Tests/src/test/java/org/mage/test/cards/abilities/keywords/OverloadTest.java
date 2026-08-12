@@ -185,4 +185,23 @@ public class OverloadTest extends CardTestPlayerBase {
         execute();
     }
 
+    @Test
+    public void test_OverloadTargetPlayer() {
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.HAND, playerA, "Mind Rake");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.HAND, playerA, "Plains", 7);
+        addCard(Zone.HAND, playerB, "Plains", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mind Rake with overload");
+        setChoice(playerA, "Plains", 2);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+        assertHandCount(playerA, 5);
+        assertHandCount(playerB, 0);
+        assertGraveyardCount(playerA, 3);
+        assertGraveyardCount(playerB, 1);
+    }
 }

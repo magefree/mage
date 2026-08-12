@@ -22,23 +22,23 @@ public final class MysticConfluence extends CardImpl {
     public MysticConfluence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");
 
-        // Choose three. You may choose the same mode more than once. 
+        // Choose three. You may choose the same mode more than once.
         this.getSpellAbility().getModes().setMinModes(3);
         this.getSpellAbility().getModes().setMaxModes(3);
         this.getSpellAbility().getModes().setMayChooseSameModeMoreThanOnce(true);
-        
+
         // - Counter target spell unless its controller pays {3};
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(3)));
         this.getSpellAbility().addTarget(new TargetSpell());
-        
+
         //  Return target creature to its owner's hand;
         Mode mode = new Mode(new ReturnToHandTargetEffect());
         mode.addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().getModes().addMode(mode);
-        
+        this.getSpellAbility().addMode(mode);
+
          // Draw a card.
         mode = new Mode(new DrawCardSourceControllerEffect(1));
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
     }
 
     private MysticConfluence(final MysticConfluence card) {

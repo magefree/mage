@@ -3,6 +3,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageInt;
 import mage.constants.SubType;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedSourceCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -36,10 +37,9 @@ public final class ArmedAssailant extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // As long as this creature is equipped, it gets +2/+0 and has menace.
-        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield), EquippedSourceCondition.instance, rule1);
-        this.addAbility(new SimpleStaticAbility(effect1));
-        ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(new MenaceAbility()), EquippedSourceCondition.instance, rule2);
-        this.addAbility(new SimpleStaticAbility(effect2));
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield), EquippedSourceCondition.instance, rule1));
+        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(new MenaceAbility()).setText("and has menace"), EquippedSourceCondition.instance, rule2));
+        this.addAbility(ability);
     }
 
     private ArmedAssailant(final ArmedAssailant card) {

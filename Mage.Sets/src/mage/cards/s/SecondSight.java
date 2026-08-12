@@ -35,7 +35,7 @@ public final class SecondSight extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         //or look at the top five cards of your library, then put them back in any order.
-        this.getSpellAbility().getModes().addMode(new Mode(new LookLibraryControllerEffect(5)));
+        this.getSpellAbility().addMode(new Mode(new LookLibraryControllerEffect(5)));
 
         // Entwine {U}
         this.addAbility(new EntwineAbility("{U}"));

@@ -1,5 +1,16 @@
 package org.mage.test.player;
 
+import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+import org.apache.log4j.Logger;
+import org.junit.Assert;
+
 import mage.*;
 import mage.abilities.*;
 import mage.abilities.common.SimpleStaticAbility;
@@ -51,15 +62,6 @@ import mage.util.CardUtil;
 import mage.util.MultiAmountMessage;
 import mage.util.RandomUtil;
 import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
-import org.apache.log4j.Logger;
-import org.junit.Assert;
-import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * Basic implementation of testable player
@@ -667,6 +669,7 @@ public class TestPlayer implements Player {
                         }
                     }
                     printStart(game, "Available for " + this.getName());
+                    printMana(game, this.getManaAvailable(game));
                     printAbilities(game, this.getPlayable(game, true));
                     printEnd();
                     Assert.fail("Can't find ability to activate command: " + command);
@@ -2205,11 +2208,6 @@ public class TestPlayer implements Player {
 
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
-        if (modes.getSelectedModes().size() >= modes.getMaxModes(game, source)) {
-            // TODO: no needs here cause min/max mode must be checked by parent code? try to remove it from here
-            return null;
-        }
-
         StringBuilder modesInfo = new StringBuilder();
         modesInfo.append("\nAvailable modes:");
         int i = 1;
@@ -2283,11 +2281,23 @@ public class TestPlayer implements Player {
         }
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
+            // workaround for replecement effects to search in regexp style by object and ability
+            // example:
+            // * Endless One [8a9]: Endless One enters with X +1/+1 counters on it.
+            // * Endless One [8a9]: Endless One enters put three +1/+1 counters on Endless One.
+            // can be selected by:
+            // Endless One
+            // Endless One*put three +1/+1
             String choice = choices.get(0);
+            String[] choiceParts = choice.split("\\*");
 
             int index = 0;
             for (Map.Entry<String, String> entry : effectsMap.entrySet()) {
-                if (entry.getValue().startsWith(choice)) {
+                if (entry.getValue().startsWith(choice) || (
+                        choiceParts.length > 1 
+                        && entry.getValue().contains(choiceParts[0]) 
+                        && entry.getValue().contains(choiceParts[1])
+                    )) {
                     choicesRemoveCurrent(game, "on choose replacements"); // TODO: add short lists?
                     return index;
                 }
@@ -2566,16 +2576,30 @@ public class TestPlayer implements Player {
                     || target.getOriginalTarget() instanceof TargetSpellOrPermanent
                     || target.getOriginalTarget() instanceof TargetStackObject) {
                 for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
-                    checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
+                    checkTargetDefinitionMarksSupport(target, targetDefinition, "^[]");
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
                     for (String targetName : targetList) {
+                        boolean originOnly = false;
+                        boolean copyOnly = false;
+                        if (targetName.endsWith("]")) {
+                            if (targetName.endsWith("[no copy]")) {
+                                originOnly = true;
+                                targetName = targetName.substring(0, targetName.length() - 9);
+                            }
+                            if (targetName.endsWith("[only copy]")) {
+                                copyOnly = true;
+                                targetName = targetName.substring(0, targetName.length() - 11);
+                            }
+                        }
                         for (StackObject stackObject : game.getStack()) {
                             if (hasObjectTargetNameOrAlias(stackObject, targetName)) {
-                                if (target.possibleTargets(abilityControllerId, source, game).contains(stackObject.getId())) {
-                                    target.addTarget(stackObject.getId(), source, game);
-                                    targetFound = true;
-                                    break; // return to next targetName
+                                if ((stackObject.isCopy() && !originOnly) || (!stackObject.isCopy() && !copyOnly)) {
+                                    if (target.possibleTargets(abilityControllerId, source, game).contains(stackObject.getId())) {
+                                        target.addTarget(stackObject.getId(), source, game);
+                                        targetFound = true;
+                                        break; // return to next targetName
+                                    }
                                 }
                             }
                         }

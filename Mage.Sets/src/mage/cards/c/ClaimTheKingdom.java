@@ -28,7 +28,8 @@ public final class ClaimTheKingdom extends CardImpl {
         // Landfall -- Whenever a land you control enters, put a +1/+1 counter on target creature you control and a plan counter on this enchantment.
         Ability ability = new LandfallAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetControlledCreaturePermanent());
-        ability.addEffect(new AddCountersSourceEffect(CounterType.PLAN.createInstance()).concatBy("and"));
+        ability.addEffect(new AddCountersSourceEffect(CounterType.PLAN.createInstance())
+            .setText("and a plan counter on this enchantment"));
         this.addAbility(ability);
 
         // When the fourth plan counter is put on this enchantment, sacrifice it. When you do, put an indestructible counter on target creature you control.
