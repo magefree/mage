@@ -7,8 +7,6 @@ import mage.cards.decks.DeckValidatorFactory;
 import mage.cards.repository.CardScanner;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.cards.repository.RepositoryUtil;
-import mage.game.match.MatchType;
-import mage.game.tournament.TournamentType;
 import mage.interfaces.MageServer;
 import mage.remote.Connection;
 import mage.remote.SessionImpl;
@@ -19,12 +17,11 @@ import mage.server.managers.ConfigSettings;
 import mage.server.managers.ManagerFactory;
 import mage.server.record.UserStatsRepository;
 import mage.server.tournament.TournamentFactory;
-import mage.server.util.ConfigFactory;
-import mage.server.util.ConfigWrapper;
-import mage.server.util.PluginClassLoader;
-import mage.server.util.ServerMessagesUtil;
+import mage.server.util.*;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
+import mage.util.DebugUtil;
+import mage.util.JavaUtil;
 import mage.utils.MageVersion;
 import mage.utils.SystemUtil;
 import org.apache.log4j.Logger;
@@ -42,7 +39,6 @@ import javax.management.MBeanServer;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.MalformedURLException;
 import java.nio.charset.Charset;
 import java.nio.file.Paths;
 import java.util.*;
@@ -76,11 +72,9 @@ public final class Main {
     private static final String adminPasswordProp = "xmage.adminPassword";
     private static final String configPathProp = "xmage.config.path";
 
-    private static final File pluginFolder = new File("plugins");
     private static final File extensionFolder = new File("extensions");
     private static final String defaultConfigPath = Paths.get("config", "config.xml").toString();
 
-    public static final PluginClassLoader classLoader = new PluginClassLoader();
     private static TransporterServer server;
 
     // Special test mode:
@@ -96,10 +90,11 @@ public final class Main {
     private static boolean detailsMode;
 
     public static void main(String[] args) {
-        System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
+        JavaUtil.applyDefaultServerSettings();
+
         logger.info("Starting MAGE SERVER version: " + version);
         logger.info("Java version: " + System.getProperty("java.version"));
-        logger.info("Logging level: " + logger.getEffectiveLevel());
+        DebugUtil.printLogsInfo(logger);
         logger.info("Default charset: " + Charset.defaultCharset());
         String adminPassword = "";
 
@@ -206,31 +201,31 @@ public final class Main {
         int gameTypes = 0;
         for (GamePlugin plugin : config.getGameTypes()) {
             gameTypes++;
-            GameFactory.instance.addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
+            GameFactory.instance.addGameType(plugin.getName(), PluginUtil.loadGameType(plugin), PluginUtil.loadPlugin(plugin, plugin.getClassName()));
         }
 
         int tourneyTypes = 0;
         for (GamePlugin plugin : config.getTournamentTypes()) {
             tourneyTypes++;
-            TournamentFactory.instance.addTournamentType(plugin.getName(), loadTournamentType(plugin), loadPlugin(plugin));
+            TournamentFactory.instance.addTournamentType(plugin.getName(), PluginUtil.loadTournamentType(plugin), PluginUtil.loadPlugin(plugin, plugin.getClassName()));
         }
 
         int playerTypes = 0;
         for (Plugin plugin : config.getPlayerTypes()) {
             playerTypes++;
-            PlayerFactory.instance.addPlayerType(plugin.getName(), loadPlugin(plugin));
+            PlayerFactory.instance.addPlayerType(plugin.getName(), PluginUtil.loadPlugin(plugin, plugin.getClassName()));
         }
 
         int cubeTypes = 0;
         for (Plugin plugin : config.getDraftCubes()) {
             cubeTypes++;
-            CubeFactory.instance.addDraftCube(plugin.getName(), loadPlugin(plugin));
+            CubeFactory.instance.addDraftCube(plugin.getName(), PluginUtil.loadPlugin(plugin, plugin.getClassName()));
         }
 
         int deckTypes = 0;
         for (Plugin plugin : config.getDeckTypes()) {
             deckTypes++;
-            DeckValidatorFactory.instance.addDeckType(plugin.getName(), loadPlugin(plugin));
+            DeckValidatorFactory.instance.addDeckType(plugin.getName(), PluginUtil.loadPlugin(plugin, plugin.getClassName()));
         }
 
         for (ExtensionPackage pkg : extensions) {
@@ -505,55 +500,6 @@ public final class Main {
             }
             managerFactory.sessionManager().disconnect(sessionId, reason, true);
         }
-    }
-
-    private static Class<?> loadPlugin(Plugin plugin) {
-        try {
-            logger.debug("Loading plugin: " + plugin.getClassName());
-            if (plugin.getName() == null || plugin.getName().isEmpty()
-                    || plugin.getJar() == null || plugin.getJar().isEmpty()
-                    || plugin.getClassName() == null || plugin.getClassName().isEmpty()
-            ) {
-                logger.error(String.format("Can't load plugin, found miss fields in config.xml: %s, %s, %s",
-                        plugin.getName(),
-                        plugin.getJar(),
-                        plugin.getClassName()
-                ));
-                return null;
-            }
-            classLoader.addURL(new File(pluginFolder, plugin.getJar()).toURI().toURL());
-            return Class.forName(plugin.getClassName(), true, classLoader);
-        } catch (ClassNotFoundException ex) {
-            logger.warn(new StringBuilder("Plugin not Found: ").append(plugin.getClassName()).append(" - ").append(plugin.getJar()).append(" - check plugin folder"), ex);
-        } catch (MalformedURLException ex) {
-            logger.fatal("Error loading plugin " + plugin.getJar(), ex);
-        }
-        return null;
-    }
-
-    private static MatchType loadGameType(GamePlugin plugin) {
-        try {
-            classLoader.addURL(new File(pluginFolder, plugin.getJar()).toURI().toURL());
-            logger.debug("Loading game type: " + plugin.getClassName());
-            return (MatchType) Class.forName(plugin.getTypeName(), true, classLoader).getConstructor().newInstance();
-        } catch (ClassNotFoundException ex) {
-            logger.warn("Game type not found:" + plugin.getJar() + " - check plugin folder", ex);
-        } catch (Exception ex) {
-            logger.fatal("Error loading game type " + plugin.getJar(), ex);
-        }
-        return null;
-    }
-
-    private static TournamentType loadTournamentType(GamePlugin plugin) {
-        try {
-            classLoader.addURL(new File(pluginFolder, plugin.getJar()).toURI().toURL());
-            return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).getConstructor().newInstance();
-        } catch (ClassNotFoundException ex) {
-            logger.warn("Tournament type not found:" + plugin.getName() + " / " + plugin.getJar() + " - check plugin folder", ex);
-        } catch (Exception ex) {
-            logger.fatal("Error loading game type " + plugin.getJar(), ex);
-        }
-        return null;
     }
 
     private static void deleteSavedGames() {

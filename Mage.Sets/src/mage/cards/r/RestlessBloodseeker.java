@@ -22,6 +22,7 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.BloodToken;
+import mage.watchers.common.PlayerGainedLifeWatcher;
 
 import java.util.UUID;
 
@@ -53,7 +54,7 @@ public final class RestlessBloodseeker extends TransformingDoubleFacedCard {
         this.getLeftHalfCard().addAbility(new BeginningOfEndStepTriggeredAbility(
                 TargetController.YOU, new CreateTokenEffect(new BloodToken()),
                 false, condition
-        ).addHint(hint));
+        ).addHint(hint).addWatcher(new PlayerGainedLifeWatcher()));
 
         // Sacrifice two Blood tokens: Transform Restless Bloodseeker. Activate only as a sorcery.
         this.getLeftHalfCard().addAbility(new ActivateAsSorceryActivatedAbility(

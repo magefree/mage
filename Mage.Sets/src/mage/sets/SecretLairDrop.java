@@ -998,7 +998,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Hero's Downfall", 312, Rarity.RARE, mage.cards.h.HerosDownfall.class));
         cards.add(new SetCardInfo("Heroic Intervention", 1750, Rarity.RARE, mage.cards.h.HeroicIntervention.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Heroic Intervention", 1872, Rarity.RARE, mage.cards.h.HeroicIntervention.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Hex Magic", 2624, Rarity.RARE, mage.cards.h.HexMagic.class));
+        cards.add(new SetCardInfo("Hex Magic", 2624, Rarity.RARE, mage.cards.h.HexMagic.class));
         cards.add(new SetCardInfo("Hexdrinker", 1222, Rarity.MYTHIC, mage.cards.h.Hexdrinker.class));
         cards.add(new SetCardInfo("Hibernation Sliver", 664, Rarity.RARE, mage.cards.h.HibernationSliver.class));
         cards.add(new SetCardInfo("Higure, the Still Wind", 1267, Rarity.RARE, mage.cards.h.HigureTheStillWind.class, NON_FULL_USE_VARIOUS));
@@ -2173,6 +2173,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Sram, Senior Edificer", 461, Rarity.RARE, mage.cards.s.SramSeniorEdificer.class));
         cards.add(new SetCardInfo("Staff of the Storyteller", 1863, Rarity.RARE, mage.cards.s.StaffOfTheStoryteller.class));
         cards.add(new SetCardInfo("Star of Extinction", 1862, Rarity.RARE, mage.cards.s.StarOfExtinction.class));
+        cards.add(new SetCardInfo("Stardew Valley", 2801, Rarity.MYTHIC, mage.cards.s.StardewValley.class));
         cards.add(new SetCardInfo("Stasis", 1103, Rarity.RARE, mage.cards.s.Stasis.class));
         cards.add(new SetCardInfo("Steam Vents", 129, Rarity.RARE, mage.cards.s.SteamVents.class));
         cards.add(new SetCardInfo("Steelshaper's Gift", "1632*", Rarity.RARE, mage.cards.s.SteelshapersGift.class, NON_FULL_USE_VARIOUS));

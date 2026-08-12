@@ -59,7 +59,7 @@ public final class DeckGenerator {
 
         List<String> setsToUse = ConstructedFormats.getSetsByFormat(format);
         if (setsToUse == null) {
-            throw new DeckGeneratorException("Deck sets aren't initialized; please connect to a server to update the database.");
+            throw new DeckGeneratorException("Deck sets aren't initialized; please restart client to fix it.");
         }
         if (setsToUse.isEmpty()) {
             // Default to using all sets

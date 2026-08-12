@@ -38,7 +38,10 @@ public final class FalconJoaquinTorres extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Battalion -- Whenever Falcon and at least two other creatures attack, put a +1/+1 counter on him and scry 1.
-        Ability ability = new BattalionAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+        Ability ability = new BattalionAbility(
+            new AddCountersSourceEffect(CounterType.P1P1.createInstance())
+                .setText("put a +1/+1 counter on him")
+        );
         ability.addEffect(new ScryEffect(1).concatBy("and"));
         this.addAbility(ability);
     }

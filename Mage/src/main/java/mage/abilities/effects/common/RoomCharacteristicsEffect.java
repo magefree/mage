@@ -70,9 +70,9 @@ public class RoomCharacteristicsEffect extends ContinuousEffectImpl {
     }
 
     public boolean removeCharacteristics(Game game, Permanent permanent) {
-        Card roomCardBlueprint = getCard(permanent);
+        SplitCard roomCardBlueprint = findRoomCard(permanent);
 
-        if (!(roomCardBlueprint instanceof SplitCard)) {
+        if (roomCardBlueprint == null) {
             return false;
         }
 
@@ -166,7 +166,7 @@ public class RoomCharacteristicsEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    private static Card getCard(Permanent permanent) {
+    public static SplitCard findRoomCard(Permanent permanent) {
         Card roomCardBlueprint;
 
         // Handle copies
@@ -182,7 +182,11 @@ public class RoomCharacteristicsEffect extends ContinuousEffectImpl {
         } else {
             roomCardBlueprint = permanent.getMainCard();
         }
-        return roomCardBlueprint;
+
+        if (!(roomCardBlueprint instanceof SplitCard)) {
+            return null;
+        }
+        return (SplitCard) roomCardBlueprint;
     }
 
     public void restoreUnlockedStats(Game game, Permanent permanent) {
@@ -198,7 +202,7 @@ public class RoomCharacteristicsEffect extends ContinuousEffectImpl {
         }
         // restore removed abilities
         // copies need abilities to be added back to game state for triggers
-        SplitCard roomCard = (SplitCard) getCard(permanent);
+        SplitCard roomCard = (SplitCard) findRoomCard(permanent);
         UUID sourceId = permanent.isCopy() ? permanent.getId() : null;
         Game gameParam = permanent.isCopy() ? game : null;
         if (permanent.isLeftDoorUnlocked()) {

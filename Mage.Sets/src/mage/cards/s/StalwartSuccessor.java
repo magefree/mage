@@ -1,7 +1,6 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.MenaceAbility;
@@ -9,18 +8,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.watchers.Watcher;
+import mage.watchers.common.CountersAddedFirstTimeWatcher;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -59,7 +54,7 @@ class StalwartSuccessorTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         this.setTriggerPhrase("Whenever one or more counters are put on a creature you control, " +
                 "if it's the first time counters have been put on that creature this turn, ");
-        this.addWatcher(new StalwartSuccessorWatcher());
+        this.addWatcher(new CountersAddedFirstTimeWatcher());
     }
 
     private StalwartSuccessorTriggeredAbility(final StalwartSuccessorTriggeredAbility ability) {
@@ -87,47 +82,10 @@ class StalwartSuccessorTriggeredAbility extends TriggeredAbilityImpl {
         if (permanent == null
                 || !permanent.isCreature(game)
                 || !permanent.isControlledBy(getControllerId())
-                || !StalwartSuccessorWatcher.checkCreature(permanent, event, game)) {
+                || !CountersAddedFirstTimeWatcher.checkEvent(event, permanent, game, zccOffset)) {
             return false;
         }
         this.getEffects().setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game) + zccOffset));
         return true;
-    }
-}
-
-class StalwartSuccessorWatcher extends Watcher {
-
-    private final Map<MageObjectReference, UUID> map = new HashMap<>();
-
-    StalwartSuccessorWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.COUNTERS_ADDED) {
-            if (game.getPermanent(event.getTargetId()) == null) {
-                // permanent entering
-                Permanent permanent = game.getPermanentEntering(event.getTargetId());
-                map.putIfAbsent(new MageObjectReference(event.getTargetId(), permanent.getZoneChangeCounter(game) + 1, game), event.getId());
-            }
-            map.putIfAbsent(new MageObjectReference(event.getTargetId(), game), event.getId());
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        map.clear();
-    }
-
-    static boolean checkCreature(Permanent permanent, GameEvent event, Game game) {
-        return Objects.equals(
-                event.getId(),
-                game.getState()
-                        .getWatcher(StalwartSuccessorWatcher.class)
-                        .map
-                        .getOrDefault(new MageObjectReference(permanent, game), null)
-        );
     }
 }

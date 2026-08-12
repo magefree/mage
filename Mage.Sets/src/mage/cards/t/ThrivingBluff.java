@@ -1,5 +1,6 @@
 package mage.cards.t;
 
+import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -23,11 +24,14 @@ public final class ThrivingBluff extends CardImpl {
     public ThrivingBluff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // Thriving Bluff enters the battlefield tapped.
-        this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // As Thriving Bluff enters the battlefield, choose a color other than red.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral, "Red")));
+        // This land enters tapped. As it enters, choose a color other than red.
+        Ability ability = new EntersBattlefieldTappedAbility();
+        ability.addEffect(
+            new ChooseColorEffect(Outcome.Neutral, "Red")
+                .setText("As it enters, choose a color other than red")
+        );
+        this.addAbility(ability);
 
         // {T}: Add {R} or one mana of the chosen color.
         this.addAbility(new RedManaAbility());

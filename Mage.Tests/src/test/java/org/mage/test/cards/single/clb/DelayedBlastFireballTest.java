@@ -24,14 +24,15 @@ public class DelayedBlastFireballTest extends CardTestPlayerBase {
         // Enough mana to cast mastery
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
 
-        // Cast Mizzix's Mastery targetting delayed blast fireball. This hsoul exile it, copy it into exile, and then cast the copy from exile, which should end up dealing 5 damage to player B
+        // Cast Mizzix's Mastery targetting delayed blast fireball. This should exile it, copy it into exile, and then cast the copy from exile, which should end up dealing 5 damage to player B
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, mastery, fireball);
-        setChoice(playerA, true);
+        addTarget(playerA, fireball);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
         assertLife(playerB, 20 - 5);
+        assertExileCount(playerA, 2);
     }
 }

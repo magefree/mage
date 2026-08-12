@@ -1,5 +1,7 @@
 package mage.game.permanent.token;
 
+import java.util.Objects;
+
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -9,7 +11,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.PermanentToken;
 
 /**
  * @author TheElk801
@@ -69,7 +70,8 @@ class ValorsReachTagTeamTokenTriggeredAbility extends TriggeredAbilityImpl {
                 .stream()
                 .filter(uuid -> !getSourceId().equals(uuid))
                 .map(game::getPermanent)
-                .anyMatch(PermanentToken.class::isInstance);
+                .filter(Objects::nonNull)
+                .anyMatch(p -> p.isToken());
     }
 
     @Override
