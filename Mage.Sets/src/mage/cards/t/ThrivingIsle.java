@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -24,14 +23,11 @@ public final class ThrivingIsle extends CardImpl {
     public ThrivingIsle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
+        // Thriving Isle enters the battlefield tapped.
+        this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // This land enters tapped. As it enters, choose a color other than blue.
-        Ability ability = new EntersBattlefieldTappedAbility();
-        ability.addEffect(
-            new ChooseColorEffect(Outcome.Neutral, "Blue")
-                .setText("As it enters, choose a color other than blue")
-        );
-        this.addAbility(ability);
+        // As Thriving Isle enters the battlefield, choose a color other than blue.
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral, "Blue")));
 
         // {T}: Add {U} or one mana of the chosen color.
         this.addAbility(new BlueManaAbility());
