@@ -13,6 +13,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 
@@ -71,7 +72,7 @@ class LokiGodOfMischiefTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
-        if (stackObject == null || stackObject.getStackAbility() == null) {
+        if (stackObject == null || stackObject.getStackAbility() == null || stackObject instanceof Spell) {
             return false;
         }
         if (!stackObject.isControlledBy(this.getControllerId())) {
