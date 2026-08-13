@@ -43,6 +43,12 @@ public interface Ability extends Controllable, Serializable {
      */
     void newOriginalId(); // TODO: delete newOriginalId???
 
+
+    /**
+     * Assigns a specific originalId (helpful when adding an ability with a continuous effect)
+     */
+    void setOriginalId(UUID originalId);
+
     /**
      * Gets the {@link AbilityType} of this ability.
      *
