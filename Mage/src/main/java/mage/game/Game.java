@@ -379,8 +379,6 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     void fireChoosePileEvent(UUID playerId, String message, List<? extends Card> pile1, List<? extends Card> pile2);
 
-    void fireInformEvent(String message);
-
     void fireStatusEvent(String message, boolean withTime, boolean withTurnInfo);
 
     void fireUpdatePlayersEvent();
