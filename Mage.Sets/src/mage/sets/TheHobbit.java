@@ -110,6 +110,8 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Gleaming Splendor", 275, Rarity.MYTHIC, mage.cards.g.GleamingSplendor.class));
         cards.add(new SetCardInfo("Gigantic Big Bear", 126, Rarity.RARE, mage.cards.g.GiganticBigBear.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gigantic Big Bear", 307, Rarity.RARE, mage.cards.g.GiganticBigBear.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Glamdring, Foe-hammer", 174, Rarity.RARE, mage.cards.g.GlamdringFoeHammer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Glamdring, Foe-hammer", 204, Rarity.RARE, mage.cards.g.GlamdringFoeHammer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gloin the Mighty", 227, Rarity.UNCOMMON, mage.cards.g.GloinTheMighty.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gloin the Mighty", 263, Rarity.UNCOMMON, mage.cards.g.GloinTheMighty.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gloin the Mighty", 99, Rarity.UNCOMMON, mage.cards.g.GloinTheMighty.class, NON_FULL_USE_VARIOUS));
