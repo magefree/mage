@@ -26,6 +26,9 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Along the Crooked Way", 60, Rarity.RARE, mage.cards.a.AlongTheCrookedWay.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("An Unexpected Party", 29, Rarity.RARE, mage.cards.a.AnUnexpectedParty.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("An Unexpected Party", 289, Rarity.RARE, mage.cards.a.AnUnexpectedParty.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Azog, Moria's Ruin", 61, Rarity.RARE, mage.cards.a.AzogMoriasRuin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Azog, Moria's Ruin", 222, Rarity.RARE, mage.cards.a.AzogMoriasRuin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Azog, Moria's Ruin", 258, Rarity.RARE, mage.cards.a.AzogMoriasRuin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Attercop", 116, Rarity.COMMON, mage.cards.a.Attercop.class));
         cards.add(new SetCardInfo("Bard, King of Dale", 144, Rarity.MYTHIC, mage.cards.b.BardKingOfDale.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bard, King of Dale", 244, Rarity.MYTHIC, mage.cards.b.BardKingOfDale.class, NON_FULL_USE_VARIOUS));
