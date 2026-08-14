@@ -2,6 +2,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.condition.common.CastNoncreatureSpellThisTurnCondition;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
@@ -49,14 +50,15 @@ public final class LockjawSlobberingTeleporter extends CardImpl {
 
         // At the beginning of combat on your turn, if you've cast a noncreature spell this turn, put a +1/+1 counter on Lockjaw.
         // When you do, Lockjaw and up to one other target creature you control can’t be blocked this turn.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()))
+
+        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(), false), false
                 .withInterveningIf (CastNoncreatureSpellThisTurnCondition.instance)
-                .addHint(CastNoncreatureSpellThisTurnCondition.getHint());
+                .addHint(CastNoncreatureSpellThisTurnCondition.getHint()));
         ability.addEffect(new CantBeBlockedSourceEffect(Duration.EndOfTurn).setText("{this}"));
         ability.addEffect(new CantBeBlockedTargetEffect(Duration.EndOfTurn)
-                .setText("and up to one other target creature can't be blocked this turn"));
+                .setText ("and up to one other target creature can't be blocked this turn"));
         ability.addTarget(new TargetPermanent(0,1,filterOther));
-        this.addAbility(ability);
     }
 
     private LockjawSlobberingTeleporter(final LockjawSlobberingTeleporter card) {
