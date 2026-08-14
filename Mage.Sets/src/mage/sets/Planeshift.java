@@ -4,6 +4,14 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
+import mage.util.RandomUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author North
@@ -174,5 +182,60 @@ public final class Planeshift extends ExpansionSet {
         cards.add(new SetCardInfo("Volcano Imp", 56, Rarity.COMMON, mage.cards.v.VolcanoImp.class, RETRO_ART));
         cards.add(new SetCardInfo("Warped Devotion", 57, Rarity.UNCOMMON, mage.cards.w.WarpedDevotion.class, RETRO_ART));
         cards.add(new SetCardInfo("Waterspout Elemental", 38, Rarity.RARE, mage.cards.w.WaterspoutElemental.class, RETRO_ART));
+    }
+
+    @Override
+    public BoosterCollator createCollator() {
+        return new PlaneshiftCollator();
+    }
+}
+
+// Booster collation info from https://www.lethe.xyz/mtg/collation/pls.html
+// Using Striped collation
+class PlaneshiftCollator implements BoosterCollator {
+    private final CardRun common = new CardRun(10,
+        "111", "76", "81", "17", "33", "48","111", "95",  "1", "21",
+         "90", "97", "31", "39", "65", "79", "15","125", "50", "76",
+         "34", "41","110", "88",  "3", "27", "53", "66","114",  "7",
+         "58", "87",  "2","109", "54", "67", "93",  "8", "30","110",
+         "17", "25", "56", "71", "97",  "6", "36", "46", "72", "79",
+        "128", "15", "63", "22", "95","101", "13", "65", "31", "87",
+         "64","127", "91", "45",  "7", "58","125", "78", "41",  "6",
+         "81", "39","113", "72", "34", "90", "53","128", "64", "27",
+          "3", "66", "21","114", "50",  "2", "63", "25","113", "46",
+         "33", "88", "48",  "1","127", "22", "93", "45", "13","109",
+          "8", "54", "30", "67", "78","101", "56", "36", "71", "91");
+    private final CardRun uncommon = new CardRun(12,
+        "138", "43","115", "19","136", "32","121", "73","136", "92","105", "55",
+          "5", "32", "75","129", "92", "47",  "9","115", "35","137", "62","126",
+         "99", "94","141", "57","108", "18","142", "24", "99", "73","135", "84",
+         "47","105",  "9","135", "26","123", "68","138", "77","123", "49","142",
+        "137", "16","126", "20","143", "62","105", "83","132", "57","129",  "5",
+         "26","134", "68","115", "84","137", "47","100", "16", "20", "75","100",
+        "123", "83","138", "55","126",  "5","141", "32","122", "60","136", "77",
+         "43","122", "18","134", "24", "99", "62","143", "94","121", "43","132",
+        "143", "19", "35", "60","132", "77", "49", "19","134", "24", "83", "75",
+        "121", "57","142",  "9","122", "35", "60", "92","129", "55", "18", "26",
+         "73","108", "84", "49", "16","100", "20","135", "68","108", "94","141");
+    private final CardRun rare = new CardRun(false, "96", "98", "40", "59", "102", "42", "4", "103", "131", "104", "23", "106", "107", "139", "80", "61", "112", "44", "82", "10", "116", "140", "69", "117", "85", "11", "51", "118", "28", "86", "70", "12", "29", "52", "119", "89", "120", "14", "124", "133", "37", "74", "130", "38");
+
+    private final BoosterStructure C11 = new BoosterStructure(
+            common, common, common, common, common, common,
+            common, common, common, common, common
+    );
+    private final BoosterStructure U3 = new BoosterStructure(uncommon, uncommon, uncommon);
+    private final BoosterStructure R1 = new BoosterStructure(rare);
+
+    private final RarityConfiguration commonRuns = new RarityConfiguration(C11);
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(U3);
+    private final RarityConfiguration rareRuns = new RarityConfiguration(R1);
+
+    @Override
+    public List<String> makeBooster() {
+        List<String> booster = new ArrayList<>();
+        booster.addAll(uncommonRuns.getNext().makeRun());
+        booster.addAll(rareRuns.getNext().makeRun());
+        booster.addAll(commonRuns.getNext().makeRun());
+        return booster;
     }
 }
