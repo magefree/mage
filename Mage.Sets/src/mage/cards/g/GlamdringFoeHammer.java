@@ -44,7 +44,7 @@ public final class GlamdringFoeHammer extends AdventureCard {
 
         // Gleam of Death
         // Mill six cards, then put all instant and sorcery cards from among them into your hand.
-        this.getSpellCard().getSpellAbility().addEffect(new GleamofDdeathEffect());
+        this.getSpellCard().getSpellAbility().addEffect(new GleamofDeathEffect());
 
         this.finalizeAdventure();
     }
@@ -131,20 +131,20 @@ class EquippedCreaturesPowerDynamicValue implements DynamicValue {
     }
 }
 
-class GleamofDdeathEffect extends OneShotEffect {
+class GleamofDeathEffect extends OneShotEffect {
 
-    GleamofDdeathEffect() {
+    GleamofDeathEffect() {
         super(Outcome.DrawCard);
         staticText = "Mill six cards, then put all instant and sorcery cards from among them into your hand";
     }
 
-    private GleamofDdeathEffect(final mage.cards.g.GleamofDdeathEffect effect) {
+    private GleamofDeathEffect(final mage.cards.g.GleamofDeathEffect effect) {
         super(effect);
     }
 
     @Override
-    public mage.cards.g.GleamofDdeathEffect copy() {
-        return new mage.cards.g.GleamofDdeathEffect(this);
+    public mage.cards.g.GleamofDeathEffect copy() {
+        return new mage.cards.g.GleamofDeathEffect(this);
     }
 
     @Override
