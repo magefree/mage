@@ -68,7 +68,7 @@ class GlamdringFoeHammerEffect extends CostModificationEffectImpl {
         staticText = "Instant and sorcery spells you cast cost {X} less to cast, where X is equipped creature’s power";
     }
 
-    private GlamdringFoeHammerEffect(final mage.cards.g.GlamdringFoeHammerEffect effect) {
+    private GlamdringFoeHammerEffect(final GlamdringFoeHammerEffect effect) {
         super(effect);
     }
 
@@ -87,8 +87,8 @@ class GlamdringFoeHammerEffect extends CostModificationEffectImpl {
     }
 
     @Override
-    public mage.cards.g.GlamdringFoeHammerEffect copy() {
-        return new mage.cards.g.GlamdringFoeHammerEffect(this);
+    public GlamdringFoeHammerEffect copy() {
+        return new GlamdringFoeHammerEffect(this);
     }
 
     public static Hint getHint() {
@@ -116,8 +116,8 @@ class EquippedCreaturesPowerDynamicValue implements DynamicValue {
     }
 
     @Override
-    public mage.cards.g.EquippedCreaturesPowerDynamicValue copy() {
-        return new mage.cards.g.EquippedCreaturesPowerDynamicValue();
+    public EquippedCreaturesPowerDynamicValue copy() {
+        return new EquippedCreaturesPowerDynamicValue();
     }
 
     @Override
@@ -138,13 +138,13 @@ class GleamofDeathEffect extends OneShotEffect {
         staticText = "Mill six cards, then put all instant and sorcery cards from among them into your hand";
     }
 
-    private GleamofDeathEffect(final mage.cards.g.GleamofDeathEffect effect) {
+    private GleamofDeathEffect(final GleamofDeathEffect effect) {
         super(effect);
     }
 
     @Override
-    public mage.cards.g.GleamofDeathEffect copy() {
-        return new mage.cards.g.GleamofDeathEffect(this);
+    public GleamofDeathEffect copy() {
+        return new GleamofDeathEffect(this);
     }
 
     @Override
