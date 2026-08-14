@@ -37,9 +37,11 @@ import java.util.stream.Collectors;
 
 public final class NicoMinoruRunaway extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell(" a spell from anywhere other than your hand");
+    private static final FilterSpell filter = new FilterSpell("a spell from anywhere other than your hand");
+    
     static {
-        filter.add(Predicates.not(new CastFromZonePredicate(Zone.HAND)));}
+        filter.add(Predicates.not(new CastFromZonePredicate(Zone.HAND)));
+    }
 
     public NicoMinoruRunaway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
