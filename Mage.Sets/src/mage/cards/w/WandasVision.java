@@ -34,6 +34,7 @@ public final class WandasVision extends CardImpl {
     public WandasVision(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
 
+        // Whenever you cast your second spell each turn, exile cards from the top of your library until you exile a nonland card. You may cast that card without paying its mana cost.
         this.addAbility(new CastSecondSpellTriggeredAbility(new WandasVisionEffect()));
     }
 
