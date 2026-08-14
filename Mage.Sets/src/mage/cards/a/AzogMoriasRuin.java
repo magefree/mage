@@ -19,6 +19,10 @@ import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
+/**
+ *
+ * @author miesma
+ */
 public final class AzogMoriasRuin extends CardImpl {
 
     public AzogMoriasRuin(UUID ownerId, CardSetInfo setInfo) {
