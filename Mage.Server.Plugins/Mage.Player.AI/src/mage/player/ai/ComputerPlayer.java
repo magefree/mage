@@ -37,6 +37,7 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
  * AI: basic server side bot with simple actions support (game, draft, construction/sideboarding).
@@ -924,18 +925,30 @@ public class ComputerPlayer extends PlayerImpl {
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
         if (modes.getMode() != null && modes.getMaxModes(game, source) == modes.getSelectedModes().size()) {
-            // mode was already set by the AI
+            // normal use case with cast/activate on priority like simulated games
+            logger.debug("AI, found already selected modes on " + game);
             return modes.getMode();
         }
 
-        // spell modes simulated by AI, see addModeOptions
-        // trigger modes chooses here
-        // TODO: add AI support to select best modes, current code uses first valid mode
-        return modes.getAvailableModes(source, game).stream()
-                .filter(mode -> !modes.getSelectedModes().contains(mode.getId()))
+        // normal use cases for forced selection (e.g. cast by effect instead priority)
+        // bad use cases for cast/activate on priority
+        logger.debug("AI, fallback to modes selection on " + game);
+        logger.debug("  - available modes order: " + modes.getAvailableModes(source, game).stream()
+                .map(m -> m.getId() + " [" + m.getEffects().getText(m) + "]")
+                .collect(Collectors.joining(" | ")));
+
+        Mode result = modes.getAvailableModes(source, game).stream()
+                .filter(mode -> modes.isMayChooseSameModeMoreThanOnce() || !modes.getSelectedModes().contains(mode.getId()))
                 .filter(mode -> mode.getTargets().canChoose(source.getControllerId(), source, game))
                 .findFirst()
                 .orElse(null);
+
+        logger.debug("  - fallback picked: " + (result == null ? "null" : result.getId() + " [" + result.getEffects().getText(result) + "]"));
+        logger.debug("  - canChoose per mode: " + modes.getAvailableModes(source, game).stream()
+            .map(m -> m.getId() + "=" + m.getTargets().canChoose(source.getControllerId(), source, game))
+            .collect(Collectors.joining(" | ")));
+
+        return result;
     }
 
     @Override

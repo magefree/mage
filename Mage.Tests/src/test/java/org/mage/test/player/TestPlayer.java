@@ -2208,11 +2208,6 @@ public class TestPlayer implements Player {
 
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
-        if (modes.getSelectedModes().size() >= modes.getMaxModes(game, source)) {
-            // TODO: no needs here cause min/max mode must be checked by parent code? try to remove it from here
-            return null;
-        }
-
         StringBuilder modesInfo = new StringBuilder();
         modesInfo.append("\nAvailable modes:");
         int i = 1;
@@ -2286,11 +2281,23 @@ public class TestPlayer implements Player {
         }
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
+            // workaround for replecement effects to search in regexp style by object and ability
+            // example:
+            // * Endless One [8a9]: Endless One enters with X +1/+1 counters on it.
+            // * Endless One [8a9]: Endless One enters put three +1/+1 counters on Endless One.
+            // can be selected by:
+            // Endless One
+            // Endless One*put three +1/+1
             String choice = choices.get(0);
+            String[] choiceParts = choice.split("\\*");
 
             int index = 0;
             for (Map.Entry<String, String> entry : effectsMap.entrySet()) {
-                if (entry.getValue().startsWith(choice)) {
+                if (entry.getValue().startsWith(choice) || (
+                        choiceParts.length > 1 
+                        && entry.getValue().contains(choiceParts[0]) 
+                        && entry.getValue().contains(choiceParts[1])
+                    )) {
                     choicesRemoveCurrent(game, "on choose replacements"); // TODO: add short lists?
                     return index;
                 }

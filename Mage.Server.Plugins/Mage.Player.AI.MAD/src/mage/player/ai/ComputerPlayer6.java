@@ -754,13 +754,19 @@ public class ComputerPlayer6 extends ComputerPlayer {
 
     protected String getAbilityAndSourceInfo(Game game, Ability ability, boolean showTargets) {
         // ability
-        // TODO: add modal info
-        // + (action.isModal() ? " Mode = " + action.getModes().getMode().toString() : "")
-        if (ability.isModal()) {
-            //throw new IllegalStateException("TODO: need implement");
-        }
         MageObject sourceObject = ability.getSourceObject(game);
         String abilityInfo = (sourceObject == null ? "" : sourceObject.getIdName() + ": ") + CardUtil.substring(ability.toString(), 30, "...");
+
+        // modes
+        List<String> modesInfo = new ArrayList<>();
+        String modesInfoStr = "";
+        if (ability.isModal()) {
+            ability.getModes().getSelectedModes().forEach(mode -> {
+                modesInfo.add(String.format("mode: %s", CardUtil.substring(ability.getModes().get(mode).toString(), 20, "...")));
+            });
+            modesInfoStr = "modes " + ability.getModes().getSelectedModes().size() + ": " + String.join(", ", modesInfo);
+        }
+
         // targets
         String targetsInfo = "";
         if (showTargets) {
@@ -797,7 +803,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
             });
             targetsInfo = String.join(" + ", allTargetsInfo);
         }
-        return abilityInfo + (targetsInfo.isEmpty() ? "" : " -> " + targetsInfo);
+        return abilityInfo + (targetsInfo.isEmpty() ? "" : " -> " + targetsInfo) + (modesInfoStr.isEmpty() ? "" : " (" + modesInfoStr + ")");
     }
 
     private String printDiffScore(int score) {

@@ -45,7 +45,7 @@ public final class CetiEel extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(2));
         ability.addEffect(new AddCountersSourceEffect(
                 CounterType.P1P1.createInstance(), xValue, false
-        ).setText("then put a +1/+1 counter on this creature for each artifact and/or creature card in your graveyard"));
+        ).setText(", then put a +1/+1 counter on this creature for each artifact and/or creature card in your graveyard"));
 
         this.addAbility(ability.addHint(hint));
     }
