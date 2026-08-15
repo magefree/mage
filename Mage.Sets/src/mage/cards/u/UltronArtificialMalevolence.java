@@ -96,7 +96,6 @@ class UltronArtificialMaleveolenceEffect extends OneShotEffect {
                 effect.setPower(2);
                 effect.setToughness(2);
 
-                // THE FIX: Tell the copy effect what to copy!
                 effect.setTargetPointer(this.getTargetPointer());
 
                 return effect.apply(game, source);
