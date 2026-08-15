@@ -49,8 +49,7 @@ public final class ConclaveSledgeCaptain extends CardImpl {
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
                 new AddCountersSourceEffect(
                         CounterType.P1P1.createInstance(),
-                        SavedDamageValue.MANY, false
-                ).setText("put that many +1/+1 counters on it"), false
+                        SavedDamageValue.MANY).setText("put that many +1/+1 counters on it"), false
         ).setTriggerPhrase("Whenever this creature deals combat damage to a player, ");
         backupAbility1.addAbility(ability);
         backupAbility2.addAbility(ability, true);

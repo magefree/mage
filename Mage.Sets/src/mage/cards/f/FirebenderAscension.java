@@ -59,7 +59,7 @@ class FirebenderAscensionTriggeredAbility extends TriggeredAbilityImpl {
     private static final Condition condition = new SourceHasCounterCondition(CounterType.QUEST, 4);
 
     FirebenderAscensionTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance(), true), false);
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), false);
         addEffect(new ConditionalOneShotEffect(new OptionalOneShotEffect(new CopyStackObjectEffect()), condition,
                 "Then if it has four or more quest counters on it, you may copy that ability. You may choose new targets for the copy."));
         setTriggerPhrase("Whenever a creature you control attacking causes a triggered ability of that creature to trigger, ");

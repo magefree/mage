@@ -23,37 +23,26 @@ import java.util.UUID;
 public class AddCountersSourceEffect extends OneShotEffect {
 
     private Counter counter;
-    private boolean informPlayers;
     private DynamicValue amount;
     private boolean putOnCard;
 
     public AddCountersSourceEffect(Counter counter) {
-        this(counter, false);
-    }
-
-    public AddCountersSourceEffect(Counter counter, boolean informPlayers) {
-        this(counter, StaticValue.get(0), informPlayers);
+        this(counter, StaticValue.get(0));
     }
 
     public AddCountersSourceEffect(Counter counter, DynamicValue amount) {
-        this(counter, amount, true);
-    }
-
-    public AddCountersSourceEffect(Counter counter, DynamicValue amount, boolean informPlayers) {
-        this(counter, amount, informPlayers, false);
+        this(counter, amount, false);
     }
 
     /**
      * @param counter
-     * @param amount        this amount will be added to the counter instances
-     * @param informPlayers
-     * @param putOnCard     - counters have to be put on a card instead of a
-     *                      permanent
+     * @param amount    this amount will be added to the counter instances
+     * @param putOnCard - counters have to be put on a card instead of a
+     *                  permanent
      */
-    public AddCountersSourceEffect(Counter counter, DynamicValue amount, boolean informPlayers, boolean putOnCard) {
+    public AddCountersSourceEffect(Counter counter, DynamicValue amount, boolean putOnCard) {
         super(Outcome.Benefit);
         this.counter = counter.copy();
-        this.informPlayers = informPlayers;
         this.amount = amount;
         this.putOnCard = putOnCard;
         staticText = CardUtil.getAddRemoveCountersText(amount, counter, "{this}", true);
@@ -64,7 +53,6 @@ public class AddCountersSourceEffect extends OneShotEffect {
         if (effect.counter != null) {
             this.counter = effect.counter.copy();
         }
-        this.informPlayers = effect.informPlayers;
         this.amount = effect.amount;
         this.putOnCard = effect.putOnCard;
     }

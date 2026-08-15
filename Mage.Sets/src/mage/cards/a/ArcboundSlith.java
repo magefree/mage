@@ -25,7 +25,7 @@ public final class ArcboundSlith extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Whenever Arcbound Slith deals combat damage to a player, put a +1/+1 counter on it.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), true), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
 
         // Modular 1
         this.addAbility(new ModularAbility(this, 1));

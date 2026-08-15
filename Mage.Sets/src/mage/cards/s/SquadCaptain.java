@@ -36,8 +36,7 @@ public final class SquadCaptain extends CardImpl {
 
         // Squad Captain enters the battlefield with a +1/+1 counter on it for each other creature you control.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(), xValue, false
-        ).setText("with a +1/+1 counter on it for each other creature you control")));
+                CounterType.P1P1.createInstance(), xValue).setText("with a +1/+1 counter on it for each other creature you control")));
     }
 
     private SquadCaptain(final SquadCaptain card) {

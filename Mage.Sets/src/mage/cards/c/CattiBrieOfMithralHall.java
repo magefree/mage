@@ -55,7 +55,7 @@ public final class CattiBrieOfMithralHall extends CardImpl {
         // Whenever Catti-brie of Mithral Hall attacks, put a +1/+1 counter on it for each Equipment attached to it.
         EquipmentAttachedCount amount = new EquipmentAttachedCount();
         this.addAbility(new AttacksTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(), amount, false).setText("put a +1/+1 counter on it for each Equipment attached to it")));
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(), amount).setText("put a +1/+1 counter on it for each Equipment attached to it")));
 
         // {1}, Remove all +1/+1 counters from Catti-brie: It deals X damage to target attacking or blocking creature an opponent controls, where X is the number of counters removed this way.
         Ability damageAbility = new SimpleActivatedAbility(

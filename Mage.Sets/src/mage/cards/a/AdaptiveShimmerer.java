@@ -29,8 +29,7 @@ public final class AdaptiveShimmerer extends CardImpl {
 
         // Adaptive Shimmerer enters the battlefield with three +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(3), true
-        ), "with three +1/+1 counters on it"));
+                CounterType.P1P1.createInstance(3)), "with three +1/+1 counters on it"));
     }
 
     private AdaptiveShimmerer(final AdaptiveShimmerer card) {

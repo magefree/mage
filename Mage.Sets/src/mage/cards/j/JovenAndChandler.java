@@ -44,7 +44,7 @@ public final class JovenAndChandler extends CardImpl {
 
         // Whenever an artifact is put into a graveyard from the battlefield, put a number of +1/+1 counters equal to that artifact's mana value on Joven and Chandler.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(
-            new AddCountersSourceEffect(CounterType.P1P1.createInstance(), artifactManaValue, false)
+            new AddCountersSourceEffect(CounterType.P1P1.createInstance(), artifactManaValue)
                 .setText("put a number of +1/+1 counters equal to that artifact's mana value on {this}"),
             false, StaticFilters.FILTER_PERMANENT_ARTIFACT_AN, false
         ));
