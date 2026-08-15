@@ -61,7 +61,7 @@ public final class IronManArmor extends CardImpl {
                                 )),
                         CardType.ARTIFACT,
                         Duration.EndOfTurn
-                ).setText("If this Equipment isn’t a creature, it becomes a 0/0 Construct Hero artifact creature with flying and “This creature gets +1/+1 for each artifact you control” until end of turn."),
+                ).setText("If this Equipment isn't a creature, it becomes a 0/0 Construct Hero artifact creature with flying and \"This creature gets +1/+1 for each artifact you control\" until end of turn."),
                 new GenericManaCost(2),
                 new InvertCondition(IsCreatureCondition.instance)
         //Conditiontext already in the BecomesCreatureSourceEffect
