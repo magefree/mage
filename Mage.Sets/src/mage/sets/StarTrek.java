@@ -62,6 +62,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Dr. Beverly Crusher", 500, Rarity.MYTHIC, mage.cards.d.DrBeverlyCrusher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eject the Warp Core", 105, Rarity.COMMON, mage.cards.e.EjectTheWarpCore.class));
         cards.add(new SetCardInfo("Emergency Medical Hologram", 15, Rarity.COMMON, mage.cards.e.EmergencyMedicalHologram.class));
+        cards.add(new SetCardInfo("Federation Field Medic", 17, Rarity.COMMON, mage.cards.f.FederationFieldMedic.class));
         cards.add(new SetCardInfo("Federation Probe", 59, Rarity.COMMON, mage.cards.f.FederationProbe.class));
         cards.add(new SetCardInfo("Forest", 325, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 326, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
