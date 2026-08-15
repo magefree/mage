@@ -199,6 +199,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Iron Man, Master of Machines", 216, Rarity.UNCOMMON, mage.cards.i.IronManMasterOfMachines.class));
         cards.add(new SetCardInfo("Ironheart, Clever Champion", 360, Rarity.RARE, mage.cards.i.IronheartCleverChampion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ironheart, Clever Champion", 60, Rarity.RARE, mage.cards.i.IronheartCleverChampion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Iron Man Armor", 248, Rarity.MYTHIC, mage.cards.i.IronManArmor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Iron Man Armor", 427, Rarity.MYTHIC, mage.cards.i.IronManArmor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 436, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 435, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 280, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
