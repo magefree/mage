@@ -795,14 +795,14 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (card != null) {
                 card.moveToZone(Zone.HAND, source, game, false); // if you want to use event.getSourceId() here then thinks x10 times
                 if (isTopCardRevealed() && !isDrawsFromBottom()) {
-                    game.fireInformEvent(getLogName() + " draws a revealed card  (" + card.getLogName() + ')');
+                    game.informPlayers(getLogName() + " draws a revealed card  (" + card.getLogName() + ')');
                 }
                 game.fireEvent(new DrewCardEvent(card.getId(), getId(), source, event));
                 numDrawn++;
             }
         }
         if ((!isTopCardRevealed() || isDrawsFromBottom()) && numDrawn > 0) {
-            game.fireInformEvent(getLogName() + " draws " + CardUtil.numberToText(numDrawn, "a")
+            game.informPlayers(getLogName() + " draws " + CardUtil.numberToText(numDrawn, "a")
                     + " card" + (numDrawn > 1 ? "s" : "")
                     + (isDrawsFromBottom() ? " from the bottom of their library" : ""));
         }
@@ -1489,7 +1489,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     playText = getLogName() + " plays " + GameLog.replaceNameByColoredName(card, card.getName(), mdfCard)
                             + " as MDF side of " + GameLog.getColoredObjectIdName(mdfCard);
                 }
-                game.fireInformEvent(playText);
+                game.informPlayers(playText);
                 // game.removeBookmark(bookmark);
                 resetStoredBookmark(game); // prevent undo after playing a land
                 return true;
