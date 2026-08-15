@@ -61,11 +61,11 @@ public final class GlamdringFoeHammer extends AdventureCard {
 class GlamdringFoeHammerEffect extends CostModificationEffectImpl {
 
     private static final DynamicValue xValue = new EquippedCreaturesPowerDynamicValue();
-    private static final Hint hint = new ValueHint("equipped creature’s power", xValue);
+    private static final Hint hint = new ValueHint("equipped creature's power", xValue);
 
     GlamdringFoeHammerEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "Instant and sorcery spells you cast cost {X} less to cast, where X is equipped creature’s power";
+        staticText = "Instant and sorcery spells you cast cost {X} less to cast, where X is equipped creature's power";
     }
 
     private GlamdringFoeHammerEffect(final GlamdringFoeHammerEffect effect) {
@@ -127,7 +127,7 @@ class EquippedCreaturesPowerDynamicValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "equipped creature’s power";
+        return "equipped creature's power";
     }
 }
 
@@ -156,7 +156,7 @@ class GleamofDeathEffect extends OneShotEffect {
         Cards cards = player.millCards(6, source, game);
         cards.retainZone(Zone.GRAVEYARD, game);
         for (Card card : cards.getCards(game)) {
-            //Keep all instants and sorcerys
+            //Keep all instants and sorceries
             if (!card.isInstantOrSorcery()) {
                 cards.remove(card);
             }
