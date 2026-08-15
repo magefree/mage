@@ -101,10 +101,7 @@ class UltronArtificialMaleveolenceEffect extends OneShotEffect {
                 return effect.apply(game, source);
             } else {
                 CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId());
-
-                // THE FIX: Tell the copy effect what to copy!
                 effect.setTargetPointer(this.getTargetPointer());
-
                 return effect.apply(game, source);
             }
         }
