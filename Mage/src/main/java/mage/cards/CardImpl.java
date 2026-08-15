@@ -855,7 +855,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             removedAmount++;
         }
 
-        CardUtil.informPlayersCountersChange(null, counterName, startAmount, Math.abs(startAmount - removedAmount), this, game, source);
+        CardUtil.informPlayersCountersChange(null, counterName, startAmount, startAmount - removedAmount, this, game, source);
         GameEvent event = new CountersRemovedEvent(counterName, this, source, removedAmount, isDamage);
         game.fireEvent(event);
         return removedAmount;

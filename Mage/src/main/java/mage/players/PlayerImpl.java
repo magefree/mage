@@ -2550,7 +2550,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             removedAmount++;
         }
 
-        CardUtil.informPlayersCountersChange(null, counterName, startAmount, Math.abs(startAmount - removedAmount), this, game, source);
+        CardUtil.informPlayersCountersChange(null, counterName, startAmount, startAmount - removedAmount, this, game, source);
         GameEvent event = new CountersRemovedEvent(counterName, this, source, removedAmount, false);
         game.fireEvent(event);
     }
