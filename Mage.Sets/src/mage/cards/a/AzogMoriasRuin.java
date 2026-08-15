@@ -57,7 +57,7 @@ class AzogMoriasRuinEffect extends OneShotEffect {
     AzogMoriasRuinEffect() {
         super(Outcome.Benefit);
         staticText = "destroy up to one other target creature. " +
-                "Its controller amasses Goblins X, where X is that creature’s power. " +
+                "Its controller amasses Goblins X, where X is that creature's power. " +
                 "If you controlled that creature, draw a card";
     }
 
