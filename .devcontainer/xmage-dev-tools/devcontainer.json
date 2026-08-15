@@ -76,6 +76,7 @@
 				"debug.console.collapseIdenticalLines": false, // do not collapse same game logs, e.g. for tests
 				"debug.console.wordWrap": false, // better format for ai and load test logs
 				"debug.console.maximumLines": 10000,
+				"terminal.integrated.scrollback": 10000,
 				"[java]": {
 					"editor.defaultFormatter": "OleksandrHavrysh.intellij-formatter"
 				},
