@@ -224,6 +224,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Klaw, Sonic Subjugator", 103, Rarity.UNCOMMON, mage.cards.k.KlawSonicSubjugator.class));
         cards.add(new SetCardInfo("Kree Commandos", 19, Rarity.COMMON, mage.cards.k.KreeCommandos.class));
         cards.add(new SetCardInfo("Kree Sentinel", 141, Rarity.COMMON, mage.cards.k.KreeSentinel.class));
+        cards.add(new SetCardInfo("Leader, Super-Genius", 64, Rarity.RARE, mage.cards.l.LeaderSuperGenius.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Leader, Super-Genius", 330, Rarity.RARE, mage.cards.l.LeaderSuperGenius.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Strike", 142, Rarity.COMMON, mage.cards.l.LightningStrike.class));
         cards.add(new SetCardInfo("Loki, God of Mischief", 65, Rarity.RARE, mage.cards.l.LokiGodOfMischief.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Loki, God of Mischief", 343, Rarity.RARE, mage.cards.l.LokiGodOfMischief.class, NON_FULL_USE_VARIOUS));
