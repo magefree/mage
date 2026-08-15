@@ -20,7 +20,7 @@ public final class CommonGoal extends CardImpl {
 
         // One or two target creatures you control each deal damage equal to their power to target creature an opponent controls.
         this.getSpellAbility().addEffect(new TargetsDamageTargetsEffect(true));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(1, 2).setTargetTag(1).withChooseHint("boost and deal damage"));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(1, 2).setTargetTag(1));
         this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent().setTargetTag(3));
     }
 
