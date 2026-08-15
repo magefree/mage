@@ -46,7 +46,7 @@ public final class EmblazonedGolem extends CardImpl {
         
         // If Emblazoned Golem was kicked, it enters with X +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(),
-                EmblazonedGolemKickerValue.instance, false),
+                EmblazonedGolemKickerValue.instance),
                 KickedCondition.ONCE, "If {this} was kicked, it enters with X +1/+1 counters on it.", ""));
     }
 

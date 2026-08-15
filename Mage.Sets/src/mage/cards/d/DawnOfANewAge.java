@@ -31,7 +31,7 @@ public final class DawnOfANewAge extends CardImpl {
         // Dawn of a New Age enters the battlefield with a hope counter on it for each creature you control.
         DynamicValue numberCounters = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED);
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.HOPE.createInstance(0), numberCounters, true),
+                CounterType.HOPE.createInstance(0), numberCounters),
                 "with a hope counter on it for each creature you control")
         );
 

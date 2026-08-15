@@ -44,7 +44,7 @@ public final class AceFearlessRebel extends CardImpl {
 
         // Nitro-9 -- Whenever Ace, Fearless Rebel attacks, you may sacrifice an artifact. When you do, put a +1/+1 counter on Ace, Fearless Rebel, then it fights up to one target creature defending player controls.
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(), false), false
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false
         );
         ability.addEffect(new FightTargetSourceEffect()
                 .setText(", then it fights up to one target creature defending player controls"));

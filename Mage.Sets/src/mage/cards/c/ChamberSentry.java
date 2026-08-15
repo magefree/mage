@@ -42,7 +42,7 @@ public final class ChamberSentry extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Chamber Sentry enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), ColorsOfManaSpentToCastCount.getInstance(), true),
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), ColorsOfManaSpentToCastCount.getInstance()),
                 "with a +1/+1 counter on it for each color of mana spent to cast it"));
 
         // {X}, {T}, Remove X +1/+1 counters from Chamber Sentry: It deals X damage to any target.

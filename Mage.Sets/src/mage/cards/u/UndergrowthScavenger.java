@@ -28,7 +28,7 @@ public final class UndergrowthScavenger extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Undergrowth Scavenger enters the battlefield with a number of +1/+1 counters on it equal to the number of creature cards in all graveyards.
-        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new CardsInAllGraveyardsCount(StaticFilters.FILTER_CARD_CREATURE), true);
+        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new CardsInAllGraveyardsCount(StaticFilters.FILTER_CARD_CREATURE));
         effect.setText("with a number of +1/+1 counters on it equal to the number of creature cards in all graveyards");
         this.addAbility(new EntersBattlefieldAbility(effect));
     }

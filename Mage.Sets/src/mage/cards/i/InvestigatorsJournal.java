@@ -35,7 +35,7 @@ public final class InvestigatorsJournal extends CardImpl {
 
         // Investigator's Journal enters the battlefield with a number of suspect counters on it equal to the greatest number of creatures a player controls.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.SUSPECT.createInstance(), InvestigatorsJournalValue.instance, false),
+                new AddCountersSourceEffect(CounterType.SUSPECT.createInstance(), InvestigatorsJournalValue.instance),
                 "with a number of suspect counters on it equal to the greatest number of creatures a player controls"
         ));
 

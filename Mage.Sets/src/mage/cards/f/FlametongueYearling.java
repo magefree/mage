@@ -35,8 +35,7 @@ public final class FlametongueYearling extends CardImpl {
 
         // Flametongue Yearling enters the battlefield with a +1/+1 counter on it for each time it was kicked.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(0), MultikickerCount.instance, true
-        ), "with a +1/+1 counter on it for each time it was kicked"));
+                CounterType.P1P1.createInstance(0), MultikickerCount.instance), "with a +1/+1 counter on it for each time it was kicked"));
 
         // When Flametongue Yearling enters the battlefield, it deals damage equal to its power to target creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
