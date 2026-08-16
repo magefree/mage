@@ -295,6 +295,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 277, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 288, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 287, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Powerful Broker", 179, Rarity.COMMON, mage.cards.p.PowerfulBroker.class));
         cards.add(new SetCardInfo("Project Deathlok Soldier", 109, Rarity.COMMON, mage.cards.p.ProjectDeathlokSoldier.class));
         cards.add(new SetCardInfo("Punishing Punch", 180, Rarity.UNCOMMON, mage.cards.p.PunishingPunch.class));
         cards.add(new SetCardInfo("Pym Particles", 70, Rarity.UNCOMMON, mage.cards.p.PymParticles.class));
