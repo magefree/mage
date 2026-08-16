@@ -75,6 +75,10 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Birnin Zana Plaza", 262, Rarity.COMMON, mage.cards.b.BirninZanaPlaza.class));
         cards.add(new SetCardInfo("Black Panther, Vanguard", 207, Rarity.UNCOMMON, mage.cards.b.BlackPantherVanguard.class));
         cards.add(new SetCardInfo("Black Widow, Double Agent", 208, Rarity.UNCOMMON, mage.cards.b.BlackWidowDoubleAgent.class));
+        cards.add(new SetCardInfo("Black Widow, Super Spy", 89, Rarity.MYTHIC, mage.cards.b.BlackWidowSuperSpy.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Widow, Super Spy", 347, Rarity.MYTHIC, mage.cards.b.BlackWidowSuperSpy.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Widow, Super Spy", 364, Rarity.MYTHIC, mage.cards.b.BlackWidowSuperSpy.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Widow, Super Spy", 393, Rarity.MYTHIC, mage.cards.b.BlackWidowSuperSpy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blazing Crescendo", 125, Rarity.COMMON, mage.cards.b.BlazingCrescendo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blazing Crescendo", 340, Rarity.COMMON, mage.cards.b.BlazingCrescendo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bold Biochemist", 48, Rarity.COMMON, mage.cards.b.BoldBiochemist.class));
