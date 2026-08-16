@@ -535,6 +535,7 @@ public enum SubType {
     FREYALISE("Freyalise", SubTypeSet.PlaneswalkerType),
     GARRUK("Garruk", SubTypeSet.PlaneswalkerType),
     GIDEON("Gideon", SubTypeSet.PlaneswalkerType),
+    GREENSLEEVES("Greensleeves", SubTypeSet.PlaneswalkerType),
     GRIST("Grist", SubTypeSet.PlaneswalkerType),
     GUFF("Guff", SubTypeSet.PlaneswalkerType),
     HUATLI("Huatli", SubTypeSet.PlaneswalkerType),
