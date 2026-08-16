@@ -28,6 +28,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Accelerated Evolution", 711, Rarity.COMMON, mage.cards.a.AcceleratedEvolution.class));
         cards.add(new SetCardInfo("Advancing the Spirit", 712, Rarity.UNCOMMON, mage.cards.a.AdvancingTheSpirit.class));
         cards.add(new SetCardInfo("Age of Ultron", 41, Rarity.RARE, mage.cards.a.AgeOfUltron.class));
+        cards.add(new SetCardInfo("Alex Wilder, Runaway", 677, Rarity.UNCOMMON, mage.cards.a.AlexWilderRunaway.class));
         cards.add(new SetCardInfo("Alicia Masters, Skilled Sculptor", 356, Rarity.RARE, mage.cards.a.AliciaMastersSkilledSculptor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Alicia Masters, Skilled Sculptor", 48, Rarity.RARE, mage.cards.a.AliciaMastersSkilledSculptor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Alien Symbiosis", 791, Rarity.UNCOMMON, mage.cards.a.AlienSymbiosis.class));
