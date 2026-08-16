@@ -59,6 +59,9 @@ public final class JenniferWalters extends ModalDoubleFacedCard {
         // Trample
         this.getRightHalfCard().addAbility(TrampleAbility.getInstance());
 
+        // Your opponents can't cast spells during your turn.
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new CantCastDuringYourTurnEffect()));
+
         // Whenever a creature you control is dealt damage, you may have The Sensational She-Hulk deal that much damage to any target. Do this only once each turn.
         Ability ability = new DealtDamageAnyTriggeredAbility(
             new DamageTargetEffect(SavedDamageValue.MUCH)

@@ -4,7 +4,6 @@ import mage.ConditionalMana;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
@@ -85,7 +84,7 @@ class JamesWanderingDadConditionalMana extends ConditionalMana {
     }
 }
 
-class JamesWanderingDadManaCondition extends ManaCondition implements Condition {
+class JamesWanderingDadManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -99,4 +98,3 @@ class JamesWanderingDadManaCondition extends ManaCondition implements Condition 
         return apply(game, source);
     }
 }
-

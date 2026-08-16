@@ -75,6 +75,7 @@ def create_face_line(set_name, collector_number, rarity, card, power, toughness)
         .replace('\n', '$')
         .replace('—', '--')
         .replace('•', '*')
+        .replace(' | ', '$')
         .strip()
     )
     oracle_text = re.sub(r" \([^\)]*\)", "", oracle_text)
@@ -84,6 +85,10 @@ def create_face_line(set_name, collector_number, rarity, card, power, toughness)
     if card.get('loyalty'):
         toughness = card.get('loyalty', '')
         return f"{name}|{set_name}|{collector_number}|{rarity}|{mana_cost}|{type_line}|{toughness}|{oracle_text}|\n"
+    if 'Spacecraft' in card.get('type_line', ''):
+        station_pattern = r"(\d+\+)"
+        oracle_text = re.sub(station_pattern, r"STATION \1", oracle_text)
+        return f"{name}|{set_name}|{collector_number}|{rarity}|{mana_cost}|{type_line}|||{oracle_text}${power}/{toughness}|\n"
     else:
         return f"{name}|{set_name}|{collector_number}|{rarity}|{mana_cost}|{type_line}|{power}|{toughness}|{oracle_text}|\n"
 
@@ -116,9 +121,10 @@ def parse_set_codes(argv):
     return set_codes
 
 # Loop through each set
+data_dir = os.path.join(os.path.dirname(__file__), "data")
 sets_data = parse_set_codes(sys.argv)
 for set_code in sets_data:
-    file_path = set_code.upper() + "-scryfall.json"
+    file_path = os.path.join(data_dir, set_code.upper() + "-scryfall.json")
 
     # Check if file doesn't exist or is stale (older than 24 hours)
     if is_file_stale(file_path, 24):

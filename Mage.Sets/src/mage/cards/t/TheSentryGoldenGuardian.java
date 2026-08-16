@@ -41,7 +41,11 @@ public final class TheSentryGoldenGuardian extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // When The Sentry enters, target opponent creates The Void, a legendary 5/5 black Horror Villain creature token with flying, indestructible, and "The Void attacks each combat if able."
-        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenTargetEffect(new TheVoidToken()));
+        TheVoidToken theVoid = new TheVoidToken();
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+            new CreateTokenTargetEffect(theVoid)
+                .setText("target opponent creates " + theVoid.getDescription())
+        );
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

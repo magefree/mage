@@ -21,6 +21,8 @@ public class TxtDeckImporter extends PlainTextDeckImporter {
     private static final String[] SET_VALUES = new String[]{"lands", "creatures", "planeswalkers", "other spells", "sideboard cards",
             "Instant", "Land", "Enchantment", "Artifact", "Sorcery", "Planeswalker", "Creature"};
     private static final Set<String> IGNORE_NAMES = new HashSet<>(Arrays.asList(SET_VALUES));
+    private static final String[] DOUBLE_SLASH_NAMES = new String[]{"SP//dr, Piloted by Peni"};
+    private static final Set<String> PROBLEM_NAMES = new HashSet<>(Arrays.asList(DOUBLE_SLASH_NAMES));
 
     private boolean sideboard = false;
     private boolean switchSideboardByEmptyLine = true; // all cards after first empty line will be sideboard (like mtgo format)
@@ -117,7 +119,7 @@ public class TxtDeckImporter extends PlainTextDeckImporter {
         }
 
         lineName = CardNameUtil.normalizeCardName(lineName);
-        if (lineName.contains("//") && !lineName.contains(" // ")) {
+        if (lineName.contains("//") && !lineName.contains(" // ") && !PROBLEM_NAMES.contains(lineName)) {
             lineName = lineName.replace("//", " // ");
         }
         lineName = lineName.replaceFirst("(?<=[^/])\\s*/\\s*(?=[^/])", " // ");

@@ -519,6 +519,7 @@ public class ScryfallImageSupportCards {
             add("PLG22"); // Love Your LGS 2022
             add("2X2"); // Double Masters 2022
             add("SCH"); // Store Championships
+            add("PH21"); // 2021 Heroes of the Realm
             add("DMU"); // Dominaria United
             add("DMC"); // Dominaria United Commander
             add("YDMU"); // Alchemy: Dominaria
@@ -629,8 +630,13 @@ public class ScryfallImageSupportCards {
             add("MSH"); // Marvel Super Heroes
             add("MSC"); // Marvel Super Heroes Commander
             add("HOB"); // The Hobbit
-            add("HOC"); // The Hobbit Commander
+            add("HOC"); // The Hobbit Eternal
+            add("MBC"); // Mystery Booster Commander Edition
             add("FRA"); // Reality Fracture
+            add("FRC"); // Reality Fracture Commander
+            add("TRK"); // Star Trek
+            add("TRC"); // Star Trek Commander
+            add("SDS"); // Stardates
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards

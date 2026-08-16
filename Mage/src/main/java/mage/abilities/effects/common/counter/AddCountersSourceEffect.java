@@ -23,37 +23,26 @@ import java.util.UUID;
 public class AddCountersSourceEffect extends OneShotEffect {
 
     private Counter counter;
-    private boolean informPlayers;
     private DynamicValue amount;
     private boolean putOnCard;
 
     public AddCountersSourceEffect(Counter counter) {
-        this(counter, false);
-    }
-
-    public AddCountersSourceEffect(Counter counter, boolean informPlayers) {
-        this(counter, StaticValue.get(0), informPlayers);
+        this(counter, StaticValue.get(0));
     }
 
     public AddCountersSourceEffect(Counter counter, DynamicValue amount) {
-        this(counter, amount, true);
-    }
-
-    public AddCountersSourceEffect(Counter counter, DynamicValue amount, boolean informPlayers) {
-        this(counter, amount, informPlayers, false);
+        this(counter, amount, false);
     }
 
     /**
      * @param counter
-     * @param amount        this amount will be added to the counter instances
-     * @param informPlayers
-     * @param putOnCard     - counters have to be put on a card instead of a
-     *                      permanent
+     * @param amount    this amount will be added to the counter instances
+     * @param putOnCard - counters have to be put on a card instead of a
+     *                  permanent
      */
-    public AddCountersSourceEffect(Counter counter, DynamicValue amount, boolean informPlayers, boolean putOnCard) {
+    public AddCountersSourceEffect(Counter counter, DynamicValue amount, boolean putOnCard) {
         super(Outcome.Benefit);
         this.counter = counter.copy();
-        this.informPlayers = informPlayers;
         this.amount = amount;
         this.putOnCard = putOnCard;
         staticText = CardUtil.getAddRemoveCountersText(amount, counter, "{this}", true);
@@ -64,7 +53,6 @@ public class AddCountersSourceEffect extends OneShotEffect {
         if (effect.counter != null) {
             this.counter = effect.counter.copy();
         }
-        this.informPlayers = effect.informPlayers;
         this.amount = effect.amount;
         this.putOnCard = effect.putOnCard;
     }
@@ -94,12 +82,6 @@ public class AddCountersSourceEffect extends OneShotEffect {
             newCounter.add(countersToAdd);
             List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
             card.addCounters(newCounter, source.getControllerId(), source, game, appliedEffects);
-            if (informPlayers && !game.isSimulation()) {
-                Player player = game.getPlayer(source.getControllerId());
-                if (player != null) {
-                    game.informPlayers(player.getLogName() + " puts " + newCounter.getCount() + ' ' + newCounter.getName() + " counter on " + card.getLogName());
-                }
-            }
             return true;
         } else {
             Permanent permanent = game.getPermanent(source.getSourceId());
@@ -119,16 +101,8 @@ public class AddCountersSourceEffect extends OneShotEffect {
                         countersToAdd--;
                     }
                     newCounter.add(countersToAdd);
-                    int before = permanent.getCounters(game).getCount(newCounter.getName());
                     List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
                     permanent.addCounters(newCounter, source.getControllerId(), source, game, appliedEffects); // if used from a replacement effect, the basic event determines if an effect was already applied to an event
-                    if (informPlayers && !game.isSimulation()) {
-                        int amountAdded = permanent.getCounters(game).getCount(newCounter.getName()) - before;
-                        Player player = game.getPlayer(source.getControllerId());
-                        if (player != null) {
-                            game.informPlayers(player.getLogName() + " puts " + amountAdded + ' ' + newCounter.getName() + " counter on " + permanent.getLogName());
-                        }
-                    }
                 }
             }
         }

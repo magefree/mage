@@ -356,7 +356,7 @@ public interface Ability extends Controllable, Serializable {
     /**
      * Add watcher blueprint (real watcher will be created on card/ability init)
      */
-    void addWatcher(Watcher watcher);
+    Ability addWatcher(Watcher watcher);
 
     /**
      * Allow to control ability/trigger's lifecycle

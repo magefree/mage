@@ -123,12 +123,6 @@ class ResourcefulDefenseMoveCounterEffect extends OneShotEffect {
 
                 toPermanent.addCounters(CounterType.findByName(counterName).createInstance(amount), source, game);
                 fromPermanent.removeCounters(counterName, amount, source, game);
-                game.informPlayers(
-                        controller.getLogName() + "moved " +
-                                amount + " " +
-                                counterName + " counter" + (amount > 1 ? "s" : "") +
-                                " from " + fromPermanent.getLogName() +
-                                "to " + toPermanent.getLogName() + ".");
             }
         }
 

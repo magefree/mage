@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- RUNTIME config sample for config validator tests -->
 
 <!-- Configuration file with integers set as strings to cause unmarshalling errors -->
 <config>

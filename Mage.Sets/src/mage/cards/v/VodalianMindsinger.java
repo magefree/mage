@@ -55,8 +55,7 @@ public final class VodalianMindsinger extends CardImpl {
 
         // Vodalian Mindsinger enters the battlefield with two +1/+1 counters on it for each time it was kicked.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(0), xValue, true
-        ), "with two +1/+1 counters on it for each time it was kicked"));
+                CounterType.P1P1.createInstance(0), xValue), "with two +1/+1 counters on it for each time it was kicked"));
 
         // When Vodalian Mindsinger enters the battlefield, gain control of target creature with power less than Vodalian Mindsinger's power for as long as you control Vodalian Mindsinger.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.WhileControlled));

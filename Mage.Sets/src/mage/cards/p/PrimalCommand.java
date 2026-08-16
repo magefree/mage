@@ -36,15 +36,15 @@ public final class PrimalCommand extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // or put target noncreature permanent on top of its owner's library;
-        this.getSpellAbility().getModes().addMode(new Mode(new PutOnLibraryTargetEffect(true))
+        this.getSpellAbility().addMode(new Mode(new PutOnLibraryTargetEffect(true))
                 .addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_NON_CREATURE)));
 
         // or target player shuffles their graveyard into their library;
-        this.getSpellAbility().getModes().addMode(new Mode(new PrimalCommandShuffleGraveyardEffect())
+        this.getSpellAbility().addMode(new Mode(new PrimalCommandShuffleGraveyardEffect())
                 .addTarget(new TargetPlayer()));
 
         // or search your library for a creature card, reveal it, put it into your hand, then shuffle your library.
-        this.getSpellAbility().getModes().addMode(new Mode(new SearchLibraryPutInHandEffect(
+        this.getSpellAbility().addMode(new Mode(new SearchLibraryPutInHandEffect(
                 new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE), true
         )));
     }

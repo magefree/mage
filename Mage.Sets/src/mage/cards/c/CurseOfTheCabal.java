@@ -103,7 +103,7 @@ class CurseOfTheCabalSacrificeEffect extends OneShotEffect {
 class CurseOfTheCabalTriggeredAbilityConditionalDelay extends AddCountersSourceEffect {
 
     public CurseOfTheCabalTriggeredAbilityConditionalDelay() {
-        super(CounterType.TIME.createInstance(), StaticValue.get(2), false, true);
+        super(CounterType.TIME.createInstance(), StaticValue.get(2), true);
         staticText = "that player may sacrifice a permanent of their choice. If the player does, put two time counters on this card";
     }
 

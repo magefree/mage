@@ -27,7 +27,8 @@ public final class EerieGravestone extends CardImpl {
 
         // {1}{B}, Sacrifice this artifact: Mill four cards. You may put a creature card from among them into your hand.
         Ability ability = new SimpleActivatedAbility(
-                new MillThenPutInHandEffect(4, StaticFilters.FILTER_CARD_CREATURE), new ManaCostsImpl<>("{1}{B}")
+            new MillThenPutInHandEffect(4, StaticFilters.FILTER_CARD_CREATURE).withTextOptions("them"),
+            new ManaCostsImpl<>("{1}{B}")
         );
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

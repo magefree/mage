@@ -33,7 +33,7 @@ public final class PromiseOfPower extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(5).concatBy("and"));
 
         // - Create an X/X black Demon creature token with flying, where X is the number of cards in your hand.
-        this.getSpellAbility().getModes().addMode(new Mode(new PromiseOfPowerEffect()));
+        this.getSpellAbility().addMode(new Mode(new PromiseOfPowerEffect()));
 
         // Entwine {4}
         this.addAbility(new EntwineAbility("{4}"));

@@ -93,6 +93,7 @@ class ThanosTheMadTitanEffect extends OneShotEffect {
         Choice choice = new ChoiceImpl(true);
         choice.setMessage("Choose odd or even");
         choice.setChoices(choices);
+        player.choose(outcome, choice, game);
         boolean odd = "odd".equals(choice.getChoice());
         game.getBattlefield()
             .getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)

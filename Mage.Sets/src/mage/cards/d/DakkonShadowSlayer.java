@@ -33,8 +33,7 @@ public final class DakkonShadowSlayer extends CardImpl {
         // Dakkon, Shadow Slayer enters the battlefield with a number of loyalty counters on him equal to the number of lands you control.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(
-                        CounterType.LOYALTY.createInstance(0), LandsYouControlCount.instance, true
-                ), "with a number of loyalty counters on him equal to the number of lands you control"
+                        CounterType.LOYALTY.createInstance(0), LandsYouControlCount.instance), "with a number of loyalty counters on him equal to the number of lands you control"
         ).addHint(LandsYouControlHint.instance));
 
         // +1: Surveil 2.

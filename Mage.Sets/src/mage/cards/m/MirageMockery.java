@@ -36,7 +36,7 @@ public final class MirageMockery extends CardImpl {
         // • Create a token that's a copy of target nonartifact creature you control.
         Mode mode = new Mode(new CreateTokenCopyTargetEffect());
         mode.addTarget(new TargetPermanent(filter2));
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
 
         // Entwine {2}{U}
         this.addAbility(new EntwineAbility("{2}{U}"));

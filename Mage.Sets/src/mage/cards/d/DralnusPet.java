@@ -99,7 +99,7 @@ class DralnusPetEffect extends OneShotEffect {
                         cmc = ((DiscardCardCost) cost).getCards().get(0).getManaValue();
                     }
                     if (cmc > 0) {
-                        return new AddCountersSourceEffect(CounterType.P1P1.createInstance(cmc), true).apply(game, source);
+                        return new AddCountersSourceEffect(CounterType.P1P1.createInstance(cmc)).apply(game, source);
                     }
                 }
             }

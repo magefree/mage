@@ -43,6 +43,19 @@ public class Brawl extends Constructed {
         banned.add("Time Warp");
         banned.add("Ugin's Labyrinth");
         banned.add("Wash Away");
+
+        // These cards are banned by default in Constructed due to MBC acorn reprints.
+        // Brawl explicitly exempts them.
+        banned.remove("Case of the Lost Witness");
+        banned.remove("Emerald Collector");
+        banned.remove("Euru, Acorn Scrounger");
+        banned.remove("Jet Collector");
+        banned.remove("Oracle of the Alpha");
+        banned.remove("Overcooked");
+        banned.remove("Pearl Collector");
+        banned.remove("Perforator Crocodile");
+        banned.remove("Ruby Collector");
+        banned.remove("Sapphire Collector");
     }
 
     @Override
