@@ -55,6 +55,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Aunt May", 768, Rarity.UNCOMMON, mage.cards.a.AuntMay.class));
         cards.add(new SetCardInfo("Austere Command", 121, Rarity.RARE, mage.cards.a.AustereCommand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Austere Command", 294, Rarity.RARE, mage.cards.a.AustereCommand.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Avengers Quinjet", 102, Rarity.RARE, mage.cards.a.AvengersQuinjet.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Avengers Quinjet", 426, Rarity.RARE, mage.cards.a.AvengersQuinjet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bast, Panther Goddess", 75, Rarity.RARE, mage.cards.b.BastPantherGoddess.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bast, Panther Goddess", 392, Rarity.RARE, mage.cards.b.BastPantherGoddess.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bastion Protector", 122, Rarity.RARE, mage.cards.b.BastionProtector.class, NON_FULL_USE_VARIOUS));
