@@ -27,7 +27,7 @@ public final class CrueltyOfTheSith extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_NON_CREATURE));
 
-        // Target player sacrifices a creture.
+        // Target player sacrifices a creature.
         Mode mode = new Mode(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "Target player"));
         mode.addTarget(new TargetPlayer());
         this.getSpellAbility().addMode(mode);

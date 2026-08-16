@@ -6,7 +6,6 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.keyword.ForetellAbility;
 import mage.abilities.mana.ConditionalColoredManaAbility;
@@ -70,7 +69,7 @@ class KarfellHarbingerConditionalMana extends ConditionalMana {
     }
 }
 
-class KarfellHarbingerManaCondition extends ManaCondition implements Condition {
+class KarfellHarbingerManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {

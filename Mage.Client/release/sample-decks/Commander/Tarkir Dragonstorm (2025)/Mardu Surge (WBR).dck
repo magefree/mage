@@ -1,0 +1,90 @@
+1 [TDC:203] Abrade
+1 [TDC:108] Adeline, Resplendent Cathar
+1 [TDC:11] Ainok Strike Leader
+1 [TDC:109] Angel of Invention
+1 [TDC:105] Arcane Signet
+1 [TDC:280] Aron, Benalia's Ruin
+1 [TDC:171] Bastion of Remembrance
+1 [TDC:340] Battlefield Forge
+1 [TDC:205] Beetleback Chief
+1 [TDC:173] Bitter Triumph
+1 [TDC:313] Blade of Selves
+1 [TDC:341] Bojuka Bog
+1 [TDC:26] Bone Devourer
+1 [TDC:344] Canyon Slough
+1 [TDC:346] Castle Ardenvale
+1 [TDC:347] Castle Embereth
+1 [TDC:348] Caves of Koilos
+1 [TDC:175] Chittering Witch
+1 [TDC:351] Clifftop Retreat
+1 [TDC:107] Command Tower
+1 [TDC:111] Commander's Insignia
+1 [TDC:177] Deadly Dispute
+1 [TDC:113] Divine Visitation
+1 [TDC:357] Dragonskull Summit
+1 [TDC:179] Eliminate the Competition
+1 [TDC:114] Emeria Angel
+1 [TDC:360] Exotic Orchard
+1 [TDC:318] Fellwar Stone
+1 [TDC:362] Fetid Heath
+1 [TDC:181] Gix, Yawgmoth Praetor
+1 [TDC:34] Goldlust Triad
+1 [TDC:117] Goldnight Commander
+1 [TDC:118] Grand Crescendo
+1 [TDC:216] Grenzo, Havoc Raiser
+1 [TDC:119] Hero of Bladehold
+1 [TDC:120] Hour of Reckoning
+1 [TDC:319] Idol of Oblivion
+1 [TDC:35] Infantry Shield
+1 [TDC:13] Ironwill Forger
+1 [TDC:373] Isolated Chapel
+1 [TDC:294] Kaya, Geist Hunter
+1 [TDC:122] Legion Loyalty
+1 [TDC:220] Legion Warboss
+1 [TDC:102] Lightning Greaves
+1 [TDC:123] Lingering Souls
+1 [TDC:222] Loyal Apprentice
+1 [TDC:187] Mindblade Render
+1 [TDC:188] Morbid Opportunist
+5 [TDM:283] Mountain
+1 [TDC:322] Myr Battlesphere
+1 [TDC:6] Neriv, Crackling Vanguard
+1 [TDM:263] Nomad Outpost
+1 [TDC:227] Ogre Battledriver
+1 [TDC:193] Ophiomancer
+1 [TDC:382] Path of Ancestry
+5 [TDM:278] Plains
+1 [TDC:37] Redoubled Stormsinger
+1 [TDC:127] Release the Dogs
+1 [TDC:129] Selfless Spirit
+1 [TDC:101] Shadow Summoning
+1 [TDC:390] Shattered Landscape
+1 [TDC:391] Shattered Sanctum
+1 [TDC:232] Siege-Gang Commander
+1 [TDC:103] Skullclamp
+1 [TDC:395] Smoldering Marsh
+1 [TDC:106] Sol Ring
+1 [TDC:325] Solemn Simulacrum
+1 [TDC:132] Stroke of Midnight
+1 [TDC:133] Sun Titan
+5 [TDM:281] Swamp
+1 [TDC:134] Swords to Plowshares
+1 [TDC:329] Talisman of Conviction
+1 [TDC:331] Talisman of Hierarchy
+1 [TDC:406] Temple of Silence
+1 [TDC:407] Temple of Triumph
+1 [TDC:239] Tempt with Vengeance
+1 [TDC:408] Terramorphic Expanse
+1 [TDC:306] Thalisse, Reverent Medium
+1 [TDC:135] Tocasia's Welcome
+1 [TDC:136] Twilight Drover
+1 [TDC:410] Vault of the Archangel
+1 [TDC:199] Viscera Seer
+1 [TDC:335] Wayfarer's Bauble
+1 [TDC:17] Will of the Mardu
+1 [TDC:411] Windbrisk Heights
+1 [TDC:32] Within Range
+1 [TDC:202] Yahenni, Undying Partisan
+SB: 1 [TDC:10] Zurgo Stormrender
+LAYOUT MAIN:(1,9)(CMC,false,50)|([TDC:340],[TDC:341],[TDC:344],[TDC:346],[TDC:347],[TDC:348],[TDC:351],[TDC:107],[TDC:357],[TDC:360],[TDC:362],[TDC:373],[TDM:283],[TDM:283],[TDM:283],[TDM:283],[TDM:283],[TDM:263],[TDC:382],[TDM:278],[TDM:278],[TDM:278],[TDM:278],[TDM:278],[TDC:390],[TDC:391],[TDC:395],[TDM:281],[TDM:281],[TDM:281],[TDM:281],[TDM:281],[TDC:406],[TDC:407],[TDC:408],[TDC:410],[TDC:411])([TDC:103],[TDC:106],[TDC:134],[TDC:239],[TDC:199],[TDC:335])([TDC:203],[TDC:11],[TDC:105],[TDC:173],[TDC:313],[TDC:177],[TDC:318],[TDC:118],[TDC:216],[TDC:319],[TDC:102],[TDC:222],[TDC:187],[TDC:129],[TDC:101],[TDC:329],[TDC:331])([TDC:108],[TDC:280],[TDC:171],[TDC:181],[TDC:35],[TDC:294],[TDC:220],[TDC:123],[TDC:188],[TDC:193],[TDC:37],[TDC:132],[TDC:135],[TDC:136],[TDC:17],[TDC:202])([TDC:205],[TDC:26],[TDC:175],[TDC:111],[TDC:114],[TDC:117],[TDC:119],[TDC:13],[TDC:227],[TDC:127],[TDC:325],[TDC:32])([TDC:109],[TDC:113],[TDC:179],[TDC:34],[TDC:6],[TDC:232],[TDC:306])([TDC:133])([TDC:120],[TDC:322])([TDC:122])
+LAYOUT SIDEBOARD:(1,1)(RARITY,true,24)|([TDC:10])

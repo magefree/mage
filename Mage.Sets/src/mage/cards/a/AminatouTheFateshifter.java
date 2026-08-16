@@ -7,6 +7,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.abilities.hint.common.PlayersLeftRightHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -57,7 +58,7 @@ public class AminatouTheFateshifter extends CardImpl {
 
         // -6: Choose left or right. Each player gains control of all nonland permanents other than Aminatou, the
         // Fateshifter controlled by the next player in the chosen direction.
-        ability = new LoyaltyAbility(new AminatouUltimateEffect(), -6);
+        ability = new LoyaltyAbility(new AminatouUltimateEffect(), -6).addHint(PlayersLeftRightHint.instance);
         this.addAbility(ability);
 
         // Aminatou, the Fateshifter can be your commander.

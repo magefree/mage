@@ -21,6 +21,7 @@ import mage.abilities.hint.common.CitysBlessingHint;
 import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.hint.common.InitiativeHint;
 import mage.abilities.hint.common.MonarchHint;
+import mage.abilities.hint.common.PlayersLeftRightHint;
 import mage.abilities.keyword.*;
 import mage.cards.*;
 import mage.cards.decks.CardNameUtil;
@@ -58,6 +59,7 @@ import mage.verify.mtgjson.MtgJsonSet;
 import mage.verify.mtgjson.SpellBookCardsPage;
 import mage.watchers.Watcher;
 import net.java.truevfs.access.TFile;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -421,16 +423,16 @@ public class VerifyCardDataTest {
             for (MtgJsonCard refCard : refSet.cards) {
                 String cleanNumber = refCard.number.replaceAll("[\\D]", "");
                 if (cleanNumber.isEmpty()) {
-                    System.out.println("Found non-digit card number: " 
-                        + refSet.code + " - " 
-                        + refCard.getNameAsASCII() + " - " 
+                    System.out.println("Found non-digit card number: "
+                        + refSet.code + " - "
+                        + refCard.getNameAsASCII() + " - "
                         + refCard.number
                     );
                 }
                 if (cleanNumber.equals("0")) {
-                    System.out.println("Found zero card number: " 
-                        + refSet.code + " - " 
-                        + refCard.getNameAsASCII() + " - " 
+                    System.out.println("Found zero card number: "
+                        + refSet.code + " - "
+                        + refCard.getNameAsASCII() + " - "
                         + refCard.number
                     );
                 }
@@ -1203,6 +1205,15 @@ public class VerifyCardDataTest {
         Set<String> implementedSets = sets.stream().map(ExpansionSet::getCode).collect(Collectors.toSet());
         MtgJsonService.sets().values().forEach(jsonSet -> {
             if (jsonSet.booster != null && !jsonSet.booster.isEmpty() && !implementedSets.contains(jsonSet.code)) {
+                if (jsonSet.code.equals("HBG")) {
+                    // TODO: remove after implement dozens A-cards, see HBG - Alchemy Horizons: Baldur's Gate
+                    return;
+                }
+                if (jsonSet.code.equals("OM1")) {
+                    // TODO: Determine how to model this set, if at all.
+                    // Wizards released this in lieu of SPM due to licensing issues. Almost mechannically identical, but with unique card names/art.
+                    return;
+                }
                 // how-to fix: it's miss promo sets with boosters, so just add/generate it in most use cases
                 errorsList.add(String.format("Error: missing set implementation (important for draft format) - %s - %s - boosters: %s",
                         jsonSet.code,
@@ -1972,7 +1983,7 @@ public class VerifyCardDataTest {
 
     // "copy" fails means that the copy constructor are not correct inside a card.
     // To fix those, try to find the class that did trigger the copy failure, and check
-    // that copy() exists, a copy constructor exists, and the copy constructor is right. 
+    // that copy() exists, a copy constructor exists, and the copy constructor is right.
     private void checkCardCanBeCopied(Card card1) {
         Card card2;
         try {
@@ -2600,9 +2611,10 @@ public class VerifyCardDataTest {
         cardHints.put(InitiativeHint.class, "the initiative");
         cardHints.put(CurrentDungeonHint.class, "venture into");
         cardHints.put(ColorsOfManaSpentToCastCount.getHint().getClass(), "Converge —");
+        cardHints.put(PlayersLeftRightHint.class, "choose left or right");
         for (Class hintClass : cardHints.keySet()) {
             String lookupText = cardHints.get(hintClass);
-            boolean needHint = ref.text.contains(lookupText);
+            boolean needHint = StringUtils.containsIgnoreCase(ref.text, lookupText);
             if (needHint) {
                 boolean haveHint = card.getAbilities()
                         .stream()
@@ -3575,7 +3587,7 @@ public class VerifyCardDataTest {
                 if (jsonCard.isUseUnicodeName()) {
                     String inName = jsonCard.getNameAsUnicode();
                     String outName = CardNameUtil.normalizeCardName(inName);
-                    String needOutName = jsonCard.getNameAsFace();
+                    String needOutName = jsonCard.getNameAsASCII();
                     if (!outName.equals(needOutName)) {
                         // how-to fix: add new unicode symbol in CardNameUtil.normalizeCardName
                         errorsList.add(String.format("error, found unsupported unicode symbol in %s - %s", inName, jsonSet.code));

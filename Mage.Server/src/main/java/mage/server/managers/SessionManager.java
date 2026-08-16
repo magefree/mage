@@ -21,7 +21,7 @@ public interface SessionManager {
 
     boolean connectAdmin(String sessionId);
 
-    boolean setUserData(String userName, String sessionId, UserData userData, String clientVersion, String userIdStr) throws MageException;
+    boolean setUserData(String sessionId, UserData userData, String clientVersion, String userIdStr) throws MageException;
 
     /**
      * Disconnect from a session side, e.g. on connection error

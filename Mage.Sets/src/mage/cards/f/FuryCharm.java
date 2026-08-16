@@ -55,11 +55,11 @@ public final class FuryCharm extends CardImpl {
         effect.setText("and gains trample until end of turn");
         mode.addEffect(effect);
         mode.addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
         // or remove two time counters from target permanent or suspended card.
         mode = new Mode(new FuryCharmRemoveCounterEffect());
         mode.addTarget(new TargetPermanentOrSuspendedCard());
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
     }
 
     private FuryCharm(final FuryCharm card) {

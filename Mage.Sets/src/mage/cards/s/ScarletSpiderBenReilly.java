@@ -48,7 +48,7 @@ public final class ScarletSpiderBenReilly extends CardImpl {
         String ruleText = CardUtil.italicizeWithEmDash("Sensational Save") + "If {this} was cast using web-slinging, " +
                 "he enters with X +1/+1 counters on him, where X is the mana value of the returned creature.";
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(),
-                ScarletSpiderBenReillyValue.instance, false),
+                ScarletSpiderBenReillyValue.instance),
                 WebSlingingCondition.THIS, ruleText, ""));
     }
 

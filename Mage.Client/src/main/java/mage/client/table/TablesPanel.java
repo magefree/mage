@@ -1719,6 +1719,7 @@ public class TablesPanel extends javax.swing.JPanel {
             options.setMinimumRating(0);
             String serverAddress = SessionHandler.getSession().getServerHost();
             options.setBannedUsers(IgnoreList.getIgnoredUsers(serverAddress));
+            options.setSpectatorsAllowed(true);
             table = SessionHandler.createTable(roomId, options);
 
             SessionHandler.joinTable(roomId, table.getTableId(), "Human", PlayerType.HUMAN, 1, testDeck, "");

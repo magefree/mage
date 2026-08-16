@@ -6,7 +6,6 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -103,7 +102,7 @@ class PlazaOfHeroesConditionalMana extends ConditionalMana {
     }
 }
 
-class PlazaOfHeroesManaCondition extends ManaCondition implements Condition {
+class PlazaOfHeroesManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {

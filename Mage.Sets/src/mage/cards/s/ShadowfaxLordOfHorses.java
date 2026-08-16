@@ -33,7 +33,7 @@ public final class ShadowfaxLordOfHorses extends CardImpl {
     private static final FilterCard filter2 = new FilterCreatureCard("creature card with lesser power");
 
     static {
-        filter.add(ShadowfaxLordOfHorsesPredicate.instance);
+        filter2.add(ShadowfaxLordOfHorsesPredicate.instance);
     }
 
     public ShadowfaxLordOfHorses(UUID ownerId, CardSetInfo setInfo) {

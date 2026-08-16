@@ -20,7 +20,6 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
  *
@@ -37,7 +36,7 @@ public final class InciteWar extends CardImpl {
 
         // or creatures you control gain first strike until end of turn.
         Mode mode = new Mode(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
 
         // Entwine {2}
         this.addAbility(new EntwineAbility("{2}"));
