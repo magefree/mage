@@ -108,7 +108,7 @@ class DamoclesBaseSwordOfKangFirstChoice extends VillainousChoice {
 
     @Override
     public boolean doChoice(Player player, Game game, Ability source) {
-        if (!game.getBattlefield().contains(filter, player.getId(), source, game, 1)) {
+        if (!game.getBattlefield().containsControlled(filter, player.getId(), source, game, 1)) {
             return false;
         }
         TargetSacrifice target = new TargetSacrifice(filter);
