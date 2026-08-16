@@ -43,7 +43,7 @@ public final class CaptainMarvelShootingStar extends CardImpl {
         // Whenever Captain Marvel enters or attacks, exile up to one target creature. That creature's controller gains life equal to its power.
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(
             new ExileAndGainLifeEqualPowerTargetEffect()
-                .setText("exile target creature. That creature's controller gains life equal to its power")
+                .setText("exile up to one target creature. That creature's controller gains life equal to its power")
         );
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
