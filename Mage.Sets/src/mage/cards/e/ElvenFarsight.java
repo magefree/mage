@@ -21,7 +21,7 @@ public final class ElvenFarsight extends CardImpl {
     public ElvenFarsight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
 
-        // Scry 3, then you may reveal the top card of your library. If it's a creature card, draw a card.
+        // Scry 3, then you may reveal the top card of your library. If a creature card is revealed this way, draw a card.
         this.getSpellAbility().addEffect(new ElvenFarsightEffect());
     }
 
@@ -39,7 +39,7 @@ class ElvenFarsightEffect extends OneShotEffect {
 
     ElvenFarsightEffect() {
         super(Outcome.Benefit);
-        staticText = "scry 3, then you may reveal the top card of your library. If it's a creature card, draw a card";
+        staticText = "scry 3, then you may reveal the top card of your library. If a creature card is revealed this way, draw a card";
     }
 
     private ElvenFarsightEffect(final ElvenFarsightEffect effect) {

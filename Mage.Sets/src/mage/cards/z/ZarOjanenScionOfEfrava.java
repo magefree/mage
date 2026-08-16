@@ -2,7 +2,6 @@ package mage.cards.z;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.common.DomainValue;
@@ -14,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -63,27 +61,10 @@ class ZarOjanenScionOfEfravaEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source);
-        StringBuilder sb = new StringBuilder();
-        if (sourceObject != null) {
-            sb.append(sourceObject.getLogName());
-            sb.append(": ");
-        }
-        if (controller != null) {
-            sb.append(controller.getLogName());
-        } else {
-            sb.append("controller");
-        }
-        sb.append(" puts a +1/+1 counter on ");
-        String prefix = sb.toString();
         int basicLandTypes = DomainValue.REGULAR.calculate(game, source, this);
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
             if (permanent.isCreature(game) && permanent.getToughness().getValue() < basicLandTypes) {
                 permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
-                if (!game.isSimulation()) {
-                    game.informPlayers(prefix + permanent.getLogName());
-                }
             }
         }
         return true;

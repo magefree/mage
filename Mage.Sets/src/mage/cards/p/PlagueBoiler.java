@@ -73,7 +73,7 @@ class PlagueBoilerEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
             if (!sourcePermanent.getCounters(game).containsKey(CounterType.PLAGUE) || controller.chooseUse(outcome, "Put a plague counter on? (No removes one)", source, game)) {
-                return new AddCountersSourceEffect(CounterType.PLAGUE.createInstance(), true).apply(game, source);
+                return new AddCountersSourceEffect(CounterType.PLAGUE.createInstance()).apply(game, source);
             } else {
                 return new RemoveCounterSourceEffect(CounterType.PLAGUE.createInstance()).apply(game, source);
             }

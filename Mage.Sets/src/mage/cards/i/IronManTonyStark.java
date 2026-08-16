@@ -1,14 +1,7 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.filter.FilterSpell;
-import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.permanent.token.RobotHeroToken;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -18,6 +11,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.game.permanent.token.Robot21HeroToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +51,7 @@ public final class IronManTonyStark extends CardImpl {
         )));
 
         // Whenever you cast a red spell, create a 2/1 colorless Robot Hero artifact creature token with flying.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new RobotHeroToken()), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new Robot21HeroToken()), filter, false));
     }
 
     private IronManTonyStark(final IronManTonyStark card) {

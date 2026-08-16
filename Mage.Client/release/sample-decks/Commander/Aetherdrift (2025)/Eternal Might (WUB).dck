@@ -1,0 +1,91 @@
+1 [DRC:20] Accursed Duneyard
+1 [DRC:144] Adarkar Wastes
+1 [DRC:62] Angel of Sanctions
+1 [DRC:146] Arcane Sanctum
+1 [DRC:51] Arcane Signet
+1 [DRC:86] Archfiend of Ifnir
+1 [DRC:147] Ash Barrens
+1 [DRC:63] Binding Mummy
+1 [DRC:124] Bontu's Monument
+1 [DRC:64] Cast Out
+1 [DRC:148] Caves of Koilos
+1 [DRC:87] Cemetery Reaper
+1 [DRC:72] Champion of Wits
+1 [DRC:59] Command Tower
+1 [DRC:125] Commander's Sphere
+1 [DRC:38] Commence the Endgame
+1 [DRC:40] Corpse Augur
+1 [DRC:50] Corpse Knight
+1 [DRC:88] Crowded Crypt
+1 [DRC:41] Cryptbreaker
+1 [DRC:89] Damn
+1 [DRC:149] Desert of the Glorified
+1 [DRC:150] Desert of the Mindful
+1 [DRC:151] Desert of the True
+1 [DRC:115] Despark
+1 [DRC:129] Dimir Signet
+1 [DRC:90] Dread Summons
+1 [DRC:91] Dreadhorde Invasion
+1 [DRC:152] Drowned Catacomb
+1 [DRC:65] Dusk // Dawn
+1 [DRC:76] Eternal Skylord
+1 [DRC:154] Evolving Wilds
+1 [DRC:155] Exotic Orchard
+1 [DRC:156] Fetid Pools
+1 [DRC:92] Fleshbag Marauder
+1 [DRC:77] Forgotten Creation
+1 [DRC:130] Gate to the Afterlife
+1 [DRC:93] Gempalm Polluter
+1 [DRC:159] Glacial Fortress
+1 [DRC:116] Gleaming Overseer
+1 [DRC:66] God-Eternal Oketra
+1 [DRC:131] God-Pharaoh's Gift
+1 [DRC:42] Grave Titan
+1 [DRC:43] Gravecrawler
+1 [DRC:1] Hashaton, Scarab's Fist
+1 [DRC:161] Irrigated Farmland
+4 [DFT:280] Island
+1 [DRC:162] Isolated Chapel
+1 [DRC:117] Lazotep Chancellor
+1 [DRC:94] Liliana, Death's Majesty
+1 [DRC:95] Lord of the Accursed
+1 [DRC:11] Lost Monarch of Ifnir
+1 [DRC:132] Maskwood Nexus
+1 [DRC:44] Midnight Reaper
+1 [DRC:45] Murderous Rider
+1 [DRC:96] Never // Return
+1 [DRC:5] On Wings of Gold
+1 [DRC:164] Orzhov Basilica
+1 [DRC:134] Orzhov Signet
+1 [DRC:166] Path of Ancestry
+1 [DRC:97] Plague Belcher
+5 [DFT:277] Plains
+1 [DRC:167] Prairie Stream
+1 [DRC:6] Priest of the Crossing
+1 [DRC:9] Prophet of the Scarab
+1 [DRC:81] Pull from Tomorrow
+1 [DRC:7] Renewed Solidarity
+1 [DRC:10] Rhet-Tomb Mystic
+1 [DRC:98] Rot Hulk
+1 [DRC:57] Sol Ring
+1 [DRC:174] Sunken Hollow
+5 [DFT:283] Swamp
+1 [DRC:37] Swords to Plowshares
+1 [DRC:141] Talisman of Dominance
+1 [DRC:142] Talisman of Hierarchy
+1 [DRC:176] Temple of Deceit
+1 [DRC:178] Temple of Silence
+1 [DRC:179] Terramorphic Expanse
+1 [DRC:120] The Scarab God
+1 [DRC:67] Timeless Dragon
+1 [DRC:99] Twisted Abomination
+1 [DRC:100] Undead Augur
+1 [DRC:181] Underground River
+1 [DRC:182] Unholy Grotto
+1 [DRC:84] Vizier of Many Faces
+1 [DRC:121] Wayward Servant
+1 [DRC:8] Wizened Mentor
+1 [MB2:188] Zombie Master
+SB: 1 [DRC:4] Temmet, Naktamun's Will
+LAYOUT MAIN:(1,9)(CMC,false,50)|([DRC:20],[DRC:144],[DRC:146],[DRC:147],[DRC:148],[DRC:59],[DRC:149],[DRC:150],[DRC:151],[DRC:152],[DRC:154],[DRC:155],[DRC:156],[DRC:159],[DRC:161],[DFT:280],[DFT:280],[DFT:280],[DFT:280],[DRC:162],[DRC:164],[DRC:166],[DFT:277],[DFT:277],[DFT:277],[DFT:277],[DFT:277],[DRC:167],[DRC:174],[DFT:283],[DFT:283],[DFT:283],[DFT:283],[DFT:283],[DRC:176],[DRC:178],[DRC:179],[DRC:181],[DRC:182])([DRC:41],[DRC:43],[DRC:57],[DRC:37])([DRC:51],[DRC:63],[DRC:50],[DRC:89],[DRC:115],[DRC:129],[DRC:90],[DRC:91],[DRC:1],[DRC:117],[DRC:134],[DRC:81],[DRC:10],[DRC:141],[DRC:142],[DRC:100],[DRC:121],[DRC:8])([DRC:124],[DRC:87],[DRC:72],[DRC:125],[DRC:88],[DRC:92],[DRC:130],[DRC:116],[DRC:95],[DRC:44],[DRC:45],[DRC:97],[DRC:7],[MB2:188])([DRC:64],[DRC:40],[DRC:77],[DRC:11],[DRC:132],[DRC:5],[DRC:6],[DRC:84])([DRC:62],[DRC:86],[DRC:76],[DRC:66],[DRC:94],[DRC:9],[DRC:120],[DRC:67])([DRC:38],[DRC:93],[DRC:42],[DRC:99])([DRC:131],[DRC:96],[DRC:98])([DRC:65])
+LAYOUT SIDEBOARD:(1,1)(RARITY,true,24)|([DRC:4])

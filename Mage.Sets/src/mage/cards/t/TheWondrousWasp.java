@@ -41,7 +41,7 @@ public final class TheWondrousWasp extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(
             new TapTargetEffect().setText("tap up to one target creature")
         );
-        ability.addEffect(new LoseAllAbilitiesTargetEffect(Duration.WhileOnBattlefield)
+        ability.addEffect(new LoseAllAbilitiesTargetEffect(Duration.UntilSourceLeavesBattlefield)
             .setText("It loses all abilities for as long as {this} remains on the battlefield"));
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability.withFlavorWord("Wasp's Sting"));

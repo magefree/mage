@@ -33,7 +33,7 @@ public final class DeathbringerRegent extends CardImpl {
     private static final Condition condition = new CompoundCondition(
             "you cast it from your hand and there are five or more other creatures on the battlefield",
             CastFromHandSourcePermanentCondition.instance,
-            new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 4)
+            new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 4, false)
     );
 
     public DeathbringerRegent(UUID ownerId, CardSetInfo setInfo) {

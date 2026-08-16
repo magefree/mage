@@ -115,7 +115,7 @@ public class CanadianHighlanderMulligan extends VancouverMulligan {
             numToMulliganTo = getNextMulliganNum(mulliganCode);
             usedMulligans.put(player.getId(), getNextMulligan(mulliganCode));
         }
-        game.fireInformEvent(new StringBuilder(player.getLogName())
+        game.informPlayers(new StringBuilder(player.getLogName())
                 .append(" mulligans to ")
                 .append(numToMulliganTo)
                 .append(numToMulliganTo == 1 ? " card" : " cards").toString());

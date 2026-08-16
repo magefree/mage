@@ -3,6 +3,7 @@ package mage.game.permanent.token;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  * @author muz
@@ -12,6 +13,7 @@ public final class VibraniumToken extends TokenImpl {
     public VibraniumToken() {
         super("Vibranium Token", "Vibranium token");
         cardType.add(CardType.ARTIFACT);
+        subtype.add(SubType.VIBRANIUM);
 
         // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());

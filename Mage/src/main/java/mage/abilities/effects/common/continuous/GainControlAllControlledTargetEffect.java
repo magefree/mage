@@ -40,7 +40,7 @@ public class GainControlAllControlledTargetEffect extends OneShotEffect {
         }
         FilterPermanent filterForPlayer = this.filter.copy();
         filterForPlayer.add(new ControllerIdPredicate(player.getId()));
-        return new GainControlAllEffect(Duration.EndOfGame, filterForPlayer, source.getControllerId())
+        return new GainControlAllEffect(Duration.Custom, filterForPlayer, source.getControllerId())
                 .apply(game, source);
     }
 

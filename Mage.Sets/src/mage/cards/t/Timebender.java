@@ -43,7 +43,7 @@ public final class Timebender extends CardImpl {
         // Morph {U}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{U}")));
 
-        // When Timebender is turned face up, choose one — 
+        // When Timebender is turned face up, choose one —
         // Remove two time counters from target permanent or suspended card.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new TimebenderEffect(false));
         ability.addTarget(new TargetPermanentOrSuspendedCard());
@@ -52,7 +52,6 @@ public final class Timebender extends CardImpl {
         Mode mode = new Mode(new TimebenderEffect(true));
         mode.addTarget(new TargetPermanentOrSuspendedCard(filter, false));
         ability.addMode(mode);
-        ability.getModes().addMode(mode);
         this.addAbility(ability);
 
     }

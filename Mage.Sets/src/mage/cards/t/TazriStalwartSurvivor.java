@@ -119,7 +119,7 @@ class TazriStalwartSurvivorManaEffect extends ManaEffect {
         }
     }
 
-    private static final class TazriStalwartSurvivorManaCondition extends ManaCondition implements Condition {
+    private static final class TazriStalwartSurvivorManaCondition extends ManaCondition {
 
         @Override
         public boolean apply(Game game, Ability source) {

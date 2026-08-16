@@ -33,7 +33,7 @@ public final class IroncladRevolutionary extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Ironclad Revolutionary enters the battlefield, you may sacrifice an artifact. If you do, put two +1/+1 counters on Ironclad Revolutionary and each opponent loses 2 life.
-        DoIfCostPaid doEffect = new DoIfCostPaid(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2), true),
+        DoIfCostPaid doEffect = new DoIfCostPaid(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT));
         Effect effect = new LoseLifeOpponentsEffect(2);
         effect.setText("and each opponent loses 2 life");

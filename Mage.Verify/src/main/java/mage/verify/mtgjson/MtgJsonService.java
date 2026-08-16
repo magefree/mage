@@ -14,6 +14,7 @@ import java.text.Normalizer;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.zip.ZipInputStream;
+import java.util.concurrent.TimeUnit;
 
 /**
  * MTGJSON v5: basic service to work with mtgjson data
@@ -21,6 +22,8 @@ import java.util.zip.ZipInputStream;
  * @author JayDi85
  */
 public final class MtgJsonService {
+
+    private static final boolean MTGJSON_OFFLINE_MODE = false; // enable to keep mtgjson files forever instead everyday update
 
     private static final Logger logger = Logger.getLogger(MtgJsonService.class);
 
@@ -46,7 +49,6 @@ public final class MtgJsonService {
     }
 
     private static <T> T readFromZip(String filename, Class<T> clazz) throws IOException {
-
         // build-in file
         InputStream stream = MtgJsonService.class.getResourceAsStream(filename);
         if (stream != null) {
@@ -54,21 +56,33 @@ public final class MtgJsonService {
             return readFromZip(stream, clazz);
         }
 
-        // already downloaded file
+        // already downloaded file - can try to refresh it once per day for better verify results
+        long maxFileAgeMs = TimeUnit.HOURS.toMillis(24);
         File file = new File(filename);
-        if (file.exists()) {
+        boolean hasExistingFile = file.exists();
+        if (hasExistingFile && (MTGJSON_OFFLINE_MODE || System.currentTimeMillis() - file.lastModified() < maxFileAgeMs)) {
             logger.info("mtgjson: use existing file " + filename + " from " + file.getAbsolutePath());
             return readFromZip(Files.newInputStream(file.toPath()), clazz);
+        } else if (hasExistingFile) {
+            logger.info("mtgjson: existing file " + filename + " is older than 24 hours, downloading fresh copy");
         }
 
         // new download
         String url = "https://mtgjson.com/api/v5/" + filename;
         logger.info("mtgjson: downloading new file " + url);
         // mtgjson site require user-agent in headers (otherwise it return 403)
+        // XmageURLConnection done all the work (headers, error processing and other)
         stream = XmageURLConnection.downloadBinary(url);
         if (stream != null) {
             Files.copy(stream, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
             logger.info("mtgjson: download DONE, saved to " + file.getAbsolutePath());
+            hasExistingFile = true; // fall through and read it below
+        } else {
+            logger.warn("mtgjson: download failed for " + filename);
+        }
+
+        if (hasExistingFile) {
+            logger.info("mtgjson: using existing file " + filename + " from " + file.getAbsolutePath());
             return readFromZip(Files.newInputStream(file.toPath()), clazz);
         }
 

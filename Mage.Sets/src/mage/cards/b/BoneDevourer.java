@@ -43,8 +43,7 @@ public final class BoneDevourer extends CardImpl {
 
         // This creature enters with a number of +1/+1 counters on it equal to the number of creatures that died this turn.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(), CreaturesDiedThisTurnCount.instance, false
-        ), "with a number of +1/+1 counters on it equal to the number of creatures that died this turn").addHint(CreaturesDiedThisTurnHint.instance));
+                CounterType.P1P1.createInstance(), CreaturesDiedThisTurnCount.instance), "with a number of +1/+1 counters on it equal to the number of creatures that died this turn").addHint(CreaturesDiedThisTurnHint.instance));
 
         // When this creature dies, you draw X cards and you lose X life, where X is the number of +1/+1 counters on it.
         Ability ability = new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(xValue).setText("you draw X cards"));

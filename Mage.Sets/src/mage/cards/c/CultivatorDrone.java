@@ -7,7 +7,6 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCost;
@@ -74,7 +73,7 @@ class CultivatorDroneConditionalMana extends ConditionalMana {
     }
 }
 
-class CultivatorDroneManaCondition extends ManaCondition implements Condition {
+class CultivatorDroneManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source, UUID originalId, Cost costToPay) {

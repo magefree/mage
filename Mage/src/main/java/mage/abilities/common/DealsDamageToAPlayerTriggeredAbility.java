@@ -62,9 +62,9 @@ public class DealsDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl {
                 return false;
             }
         }
+        getEffects().setValue("damage", event.getAmount());
         if (setTargetPointer) {
             getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
-            getEffects().setValue("damage", event.getAmount());
         }
         return true;
     }

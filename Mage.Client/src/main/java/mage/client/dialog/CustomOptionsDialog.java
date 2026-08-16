@@ -470,8 +470,11 @@ public class CustomOptionsDialog extends MageDialog {
         int ret = fileChooser.showDialog(this, "Select Emblem Cards");
         if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
-            textField.setText(file.getPath());
+            if (file == null) {
+                return;
+            }
             try {
+                textField.setText(file.getPath());
                 MageFrame.getPreferences().put(prefKey, file.getCanonicalPath());
             } catch (IOException ex) {
             }

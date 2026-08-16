@@ -148,7 +148,7 @@ public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEf
         }
         String effectsText = executingEffects.getText(mode);
         boolean payText = (cost == null || cost instanceof ManaCost);
-        String playerText = nameController ? "its controller " + (payText ? "pays" : "") : "they " + (payText ? "pay" : "");
+        String playerText = nameController ? "its controller " + (payText ? "pays " : "") : "they " + (payText ? "pay " : "");
 
         return effectsText.substring(0, effectsText.length() - 1) + " unless " + playerText + (cost != null ? cost.getText() : "{X}");
     }
