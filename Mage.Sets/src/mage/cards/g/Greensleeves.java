@@ -38,7 +38,7 @@ public final class Greensleeves extends CardImpl {
         this.setStartingLoyalty(5);
 
         // +2: Create a Giant Badger token.
-        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new GiantBadgerToken()), 1));
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new GiantBadgerToken()), 2));
 
         // −3: Mill three cards. Put all permanent cards from among them into your hand.
         this.addAbility(new LoyaltyAbility(new GreensleevesMillEffect(), -3));
