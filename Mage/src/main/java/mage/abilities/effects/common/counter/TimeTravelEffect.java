@@ -67,14 +67,12 @@ public class TimeTravelEffect extends OneShotEffect {
             Permanent permanent = game.getPermanent(chosen);
             if (permanent != null) {
                 permanent.addCounters(CounterType.TIME.createInstance(), source.getControllerId(), source, game);
-                game.informPlayers(permanent.getName() + " had a time counter added to it.");
                 filter.getPermanentFilter().add(Predicates.not(new CardIdPredicate(chosen)));
                 continue;
             }
             Card card = game.getCard(chosen);
             if (card != null) {
                 card.addCounters(CounterType.TIME.createInstance(), source.getControllerId(), source, game);
-                game.informPlayers(card.getName() + " had a time counter added to it.");
                 filter.getCardFilter().add(Predicates.not(new CardIdPredicate(chosen)));
             }
         }
@@ -87,13 +85,11 @@ public class TimeTravelEffect extends OneShotEffect {
             Permanent permanent = game.getPermanent(chosen);
             if (permanent != null) {
                 permanent.removeCounters(CounterType.TIME.createInstance(), source, game);
-                game.informPlayers(permanent.getName() + " had a time counter removed from it.");
                 continue;
             }
             Card card = game.getCard(chosen);
             if (card != null) {
                 card.removeCounters(CounterType.TIME.createInstance(), source, game);
-                game.informPlayers(card.getName() + " had a time counter removed from it.");
             }
         }
 

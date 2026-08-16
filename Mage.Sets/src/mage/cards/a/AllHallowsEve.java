@@ -31,7 +31,7 @@ public final class AllHallowsEve extends CardImpl {
         // Exile All Hallow's Eve with two scream counters on it.
         this.getSpellAbility().addEffect(new ExileSpellEffect());
         this.getSpellAbility().addEffect(new AddCountersSourceEffect(
-                CounterType.SCREAM.createInstance(), StaticValue.get(2), true, true
+                CounterType.SCREAM.createInstance(), StaticValue.get(2), true
         ).setText("with two scream counters on it"));
 
         // At the beginning of your upkeep, if All Hallow's Eve is exiled with a scream counter on it, remove a scream counter from it.

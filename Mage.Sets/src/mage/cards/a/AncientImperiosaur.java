@@ -43,8 +43,7 @@ public final class AncientImperiosaur extends CardImpl {
 
         // Ancient Imperiosaur enters the battlefield with two +1/+1 counters on it for each creature that convoked it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(), xValue, true
-        ), null, "{this} enters with two " +
+                CounterType.P1P1.createInstance(), xValue), null, "{this} enters with two " +
                 "+1/+1 counters on it for each creature that convoked it.", null));
     }
 

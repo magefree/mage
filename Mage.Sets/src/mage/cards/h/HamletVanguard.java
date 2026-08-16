@@ -51,8 +51,7 @@ public final class HamletVanguard extends CardImpl {
 
         // Hamlet Vanguard enters the battlefield with two +1/+1 counters on it for each other nontoken Human you control.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(0), xValue, false
-        ), "with two +1/+1 counters on it for each other nontoken Human you control").addHint(hint));
+                CounterType.P1P1.createInstance(0), xValue), "with two +1/+1 counters on it for each other nontoken Human you control").addHint(hint));
     }
 
     private HamletVanguard(final HamletVanguard card) {

@@ -32,12 +32,12 @@ public final class ReptilDinomorpher extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // Brontosaurus -- {3}: Until end of turn, Reptil becomes a Dinosaur Hero with base power and toughness 3/5 and gains vigilance and reach.
+        // Brontosaurus -- {3}: Until end of turn, Reptil becomes a Dinosaur Hero with base power and toughness 3/5 and gains reach and vigilance.
         this.addAbility(new SimpleActivatedAbility(
             new BecomesCreatureSourceEffect(
-                new CreatureToken(3, 5, "Dinosaur Hero with base power and toughness 3/5 and gains vigilance and reach", SubType.DINOSAUR, SubType.HERO)
-                    .withAbility(VigilanceAbility.getInstance())
-                    .withAbility(ReachAbility.getInstance()),
+                new CreatureToken(3, 5, "Dinosaur Hero with base power and toughness 3/5 and gains reach and vigilance", SubType.DINOSAUR, SubType.HERO)
+                    .withAbility(ReachAbility.getInstance())
+                    .withAbility(VigilanceAbility.getInstance()),
                 null, Duration.EndOfTurn
             ).withDurationRuleAtStart(true),
             new ManaCostsImpl<>("{3}")

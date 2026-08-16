@@ -32,7 +32,7 @@ public final class BloodchiefAscension extends CardImpl {
 
         // At the beginning of each end step, if an opponent lost 2 or more life this turn, you may put a quest counter on Bloodchief Ascension. (Damage causes loss of life.)
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                TargetController.ANY, new AddCountersSourceEffect(CounterType.QUEST.createInstance(1), false),
+                TargetController.ANY, new AddCountersSourceEffect(CounterType.QUEST.createInstance(1)),
                 true, new OpponentLostLifeCondition(ComparisonType.MORE_THAN, 1)
         ));
 

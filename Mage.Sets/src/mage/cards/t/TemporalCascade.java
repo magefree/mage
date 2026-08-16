@@ -28,7 +28,7 @@ public final class TemporalCascade extends CardImpl {
 
         // or each player draws seven cards.
         Mode mode = new Mode(new TemporalCascadeDrawEffect());
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
 
         // Entwine {2}
         this.addAbility(new EntwineAbility("{2}"));
@@ -58,7 +58,7 @@ class TemporalCascadeDrawEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player sourcePlayer = game.getPlayer(source.getControllerId());
-        game.getState().handleSimultaneousEvent(game); // needed here so state based triggered effects 
+        game.getState().handleSimultaneousEvent(game); // needed here so state based triggered effects
         for (UUID playerId : game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {

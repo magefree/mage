@@ -45,7 +45,7 @@ public final class KingTChalla extends ModalDoubleFacedCard {
 
         // Whenever a player draws their second card each turn, you draw a card.
         this.getLeftHalfCard().addAbility(new DrawNthCardTriggeredAbility(
-            new DrawCardSourceControllerEffect(1),
+            new DrawCardSourceControllerEffect(1, true),
             false, TargetController.ANY, 2
         ));
 

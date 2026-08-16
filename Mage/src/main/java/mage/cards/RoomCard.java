@@ -1,15 +1,14 @@
 package mage.cards;
 
-import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.RoomAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.RoomCharacteristicsEffect;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 
 import java.util.UUID;
 
@@ -77,30 +76,23 @@ public abstract class RoomCard extends SplitCard {
         game.setZone(getRightHalfCard().getId(), zone);
     }
 
-    public static void setRoomCharacteristics(Permanent permanent, Game game) {
-        if (!(permanent.getMainCard() instanceof RoomCard)) {
-            return;
-        }
-        setRoomCharacteristics(permanent, (RoomCard) permanent.getMainCard(), game, permanent.isLeftDoorUnlocked(), permanent.isRightDoorUnlocked());
-    }
+    public static void addRoomCharacteristics(Permanent permanent, RoomCard roomCard, Game game) {
+        // 709.5.
+        // Some split cards are permanent cards with a single shared type line. A shared type line 
+        // on such an object represents two static abilities that function on the battlefield. These 
+        // are “As long as this permanent doesn’t have the ‘left half unlocked’ designation, it 
+        // doesn’t have the name, mana cost, or rules text of this object’s left half” and “As long 
+        // as this permanent doesn’t have the ‘right half unlocked’ designation, it doesn’t have the 
+        // name, mana cost, or rules text of this object’s right half.” These abilities, as well as 
+        // which half of that permanent a characteristic is in, are part of that object’s copiable 
+        // values.
 
-    // Static method for setting room characteristics on permanents
-    public static void setRoomCharacteristics(Permanent permanent, RoomCard roomCard, Game game, boolean isLeftUnlocked, boolean isRightUnlocked) {
-        permanent.setName(roomCard.name);
+        // add all rooms data, real rule apply by RoomCharacteristicsEffect
+        // if you catch duplicated effect then debug effect's code
 
+        permanent.setName(roomCard.getName());
         permanent.setManaCost(roomCard.getManaCost());
 
-        // Set color indicator based on unlocked halves
-        ObjectColor newColor = new ObjectColor();
-        if (isLeftUnlocked && roomCard.getLeftHalfCard() != null) {
-            newColor.addColor(roomCard.getLeftHalfCard().getColor());
-        }
-        if (isRightUnlocked && roomCard.getRightHalfCard() != null) {
-            newColor.addColor(roomCard.getRightHalfCard().getColor());
-        }
-        permanent.getColor().setColor(roomCard.getColor());
-
-        // Get abilities from each half
         Abilities<Ability> leftAbilities = roomCard.getLeftHalfCard().getAbilities();
         for (Ability ability : leftAbilities) {
             permanent.addAbility(ability, roomCard.getLeftHalfCard().getId(), game, true);
@@ -141,27 +133,17 @@ class RoomEnterUnlockEffect extends OneShotEffect {
         }
 
         permanent.unlockRoomOnCast(game);
-        RoomCard roomCard = null;
+
         // Get the parent card to access the lastCastHalf variable
-        if (permanent instanceof PermanentToken) {
-            Card mainCard = permanent.getMainCard();
-            if (mainCard instanceof RoomCard) {
-                roomCard = (RoomCard) mainCard;
-            }
-        } else {
-            Card card = game.getCard(permanent.getId());
-            if (card instanceof RoomCard) {
-                roomCard = (RoomCard) card;
-            }
-        }
-        if (roomCard == null) {
+        RoomCard roomCardBlueprint = (RoomCard) RoomCharacteristicsEffect.findRoomCard(permanent);
+        if (roomCardBlueprint == null) {
             return true;
         }
 
-        SpellAbilityType lastCastHalf = roomCard.getLastCastHalf();
-
+        // TODO: possible buggy with AI -- find spell mode by spell ability and do not store it in card's data due game states isolation?!
+        SpellAbilityType lastCastHalf = roomCardBlueprint.getLastCastHalf();
         if (lastCastHalf == SpellAbilityType.SPLIT_LEFT || lastCastHalf == SpellAbilityType.SPLIT_RIGHT) {
-            roomCard.setLastCastHalf(null);
+            roomCardBlueprint.setLastCastHalf(null);
             return permanent.unlockDoor(game, source, lastCastHalf == SpellAbilityType.SPLIT_LEFT);
         }
 

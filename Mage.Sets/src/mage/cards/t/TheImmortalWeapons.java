@@ -35,7 +35,8 @@ public final class TheImmortalWeapons extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When The Immortal Weapons enter, return target instant or sorcery card from your graveyard to your hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect())
+            .setTriggerPhrase("When {this} enter, ");
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD));
         this.addAbility(ability);
 

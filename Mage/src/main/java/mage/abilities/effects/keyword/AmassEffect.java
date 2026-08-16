@@ -13,6 +13,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.GoblinArmyToken;
 import mage.game.permanent.token.OrcArmyToken;
 import mage.game.permanent.token.SliverArmyToken;
 import mage.game.permanent.token.Token;
@@ -87,6 +88,8 @@ public class AmassEffect extends OneShotEffect {
                 return new ZombieArmyToken();
             case SLIVER:
                 return new SliverArmyToken();
+            case GOBLIN:
+                return new GoblinArmyToken();
             default:
                 return new CreatureToken(
                         0, 0, "", subType, SubType.ARMY
