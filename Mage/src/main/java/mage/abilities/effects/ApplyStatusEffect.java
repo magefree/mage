@@ -5,6 +5,7 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.constants.*;
 import mage.counters.AbilityCounter;
 import mage.counters.BoostCounter;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -33,10 +34,29 @@ public class ApplyStatusEffect extends ContinuousEffectImpl {
         if (layer == Layer.AbilityAddingRemovingEffects_6) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
                 for (AbilityCounter counter : permanent.getCounters(game).getAbilityCounters()) {
-                    permanent.addAbility(counter.getAbility(), source == null ? permanent.getId() : source.getSourceId(), game);
+                    for (int i = 0; i < counter.getCount(); i++) {
+                        permanent.addAbility(counter.getAbility(), source == null ? permanent.getId() : source.getSourceId(), game);
+                    }
                 }
                 if (permanent.isSuspected()) {
                     permanent.addAbility(new MenaceAbility(false), source == null ? permanent.getId() : source.getSourceId(), game);
+                }
+            }
+        }
+        if (layer == Layer.PTChangingEffects_7 && sublayer == SubLayer.ModifyPT_7c) {
+            for (Permanent equipment : game.getBattlefield().getAllActivePermanents()) {
+                if (!equipment.hasSubtype(SubType.EQUIPMENT, game)) {
+                    continue;
+                }
+
+                int honeCounters = equipment.getCounters(game).getCount(CounterType.HONE);
+                if (honeCounters <= 0) {
+                    continue;
+                }
+
+                Permanent equippedCreature = game.getPermanent(equipment.getAttachedTo());
+                if (equippedCreature != null && equippedCreature.isCreature(game)) {
+                    equippedCreature.addPower(honeCounters);
                 }
             }
         }

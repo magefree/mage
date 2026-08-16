@@ -7,6 +7,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.continuous.PlayerCanOnlyAttackInDirectionRestrictionEffect;
+import mage.abilities.hint.common.PlayersLeftRightHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -51,7 +52,7 @@ public final class TeyoGeometricTactician extends CardImpl {
         ability = new LoyaltyAbility(
                 PlayerCanOnlyAttackInDirectionRestrictionEffect.choiceEffect(),
                 -2
-        );
+        ).addHint(PlayersLeftRightHint.instance);
         ability.addEffect(new PlayerCanOnlyAttackInDirectionRestrictionEffect(
                 Duration.UntilYourNextTurn,
                 "the last chosen direction"

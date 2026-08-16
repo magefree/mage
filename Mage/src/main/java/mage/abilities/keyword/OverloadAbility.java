@@ -59,14 +59,6 @@ public class OverloadAbility extends SpellAbility {
         this.timing = (card.isSorcery(null) ? TimingRule.SORCERY : TimingRule.INSTANT);
     }
 
-    //TODO: Remove once all Overload cards have been converted
-    public OverloadAbility(Card card, Effect effect, ManaCosts costs) {
-        super(costs, card.getName() + " with overload");
-        this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
-        this.addEffect(effect);
-        this.timing = (card.isSorcery(null) ? TimingRule.SORCERY : TimingRule.INSTANT);
-    }
-
     protected OverloadAbility(final OverloadAbility ability) {
         super(ability);
     }

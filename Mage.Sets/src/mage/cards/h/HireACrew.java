@@ -22,7 +22,7 @@ public final class HireACrew extends CardImpl {
         // Create a 2/1 black Villain creature token with menace, then creatures you control get +1/+0 until end of turn.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new VillainToken()));
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 0, Duration.EndOfTurn)
-            .concatBy("then"));
+            .concatBy(", then"));
     }
 
     private HireACrew(final HireACrew card) {

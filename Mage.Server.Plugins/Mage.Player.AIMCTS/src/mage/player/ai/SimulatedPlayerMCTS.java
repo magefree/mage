@@ -23,6 +23,7 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * AI: helper class to simulate games with MCTS AI (each player replaced by simulated)
@@ -370,12 +371,16 @@ public final class SimulatedPlayerMCTS extends MCTSPlayer {
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
         if (this.isHuman()) {
-            Iterator<Mode> it = modes.getAvailableModes(source, game).iterator();
+            List<Mode> availableModes = modes.getAvailableModes(source, game).stream()
+                    .filter(mode -> modes.isMayChooseSameModeMoreThanOnce() || !modes.getSelectedModes().contains(mode.getId()))
+                    .filter(mode -> mode.getTargets().canChoose(source.getControllerId(), source, game))
+                    .collect(Collectors.toList());
+            Iterator<Mode> it = availableModes.iterator();
             Mode mode = it.next();
-            if (modes.size() == 1) {
+            if (availableModes.size() == 1) {
                 return mode;
             }
-            int modeNum = RandomUtil.nextInt(modes.getAvailableModes(source, game).size());
+            int modeNum = RandomUtil.nextInt(availableModes.size());
             for (int i = 0; i < modeNum; i++) {
                 mode = it.next();
             }

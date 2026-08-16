@@ -55,7 +55,7 @@ public final class AntManReformedRogue extends CardImpl {
 
         // Whenever you cast a blue spell, Ant-Man gets -1/-0 until end of turn and can't be blocked this turn.
         ability = new SpellCastControllerTriggeredAbility(
-            new BoostSourceEffect(-1, 0, Duration.EndOfTurn).setText("{this} gets -1/+0"),
+            new BoostSourceEffect(-1, 0, Duration.EndOfTurn),
             blueFilter, false
         );
         ability.addEffect(new CantBeBlockedSourceEffect(Duration.EndOfTurn)

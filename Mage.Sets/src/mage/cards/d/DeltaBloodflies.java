@@ -30,7 +30,7 @@ public final class DeltaBloodflies extends CardImpl {
     }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
-    private static final Hint hint = new ConditionHint(condition, "You control a creture with a counter on it");
+    private static final Hint hint = new ConditionHint(condition, "You control a creature with a counter on it");
 
     public DeltaBloodflies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

@@ -104,7 +104,7 @@ class CrowdControlWardenReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), xValue, false)
+        new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), xValue)
                 .apply(game, source);
         return false;
     }

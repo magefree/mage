@@ -34,8 +34,7 @@ public final class VerazolTheSplitCurrent extends CardImpl {
 
         // Verazol, the Split Current enters the battlefield with a +1/+1 counter on it for each mana spent to cast it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(), ManaSpentToCastCount.instance, true
-        ), "with a +1/+1 counter on it for each mana spent to cast it"));
+                CounterType.P1P1.createInstance(), ManaSpentToCastCount.instance), "with a +1/+1 counter on it for each mana spent to cast it"));
 
         // Whenever you cast a kicked spell, you may remove two +1/+1 counters from Verazol, the Split Current. If you do, copy that spell. You may choose new targets for that copy.
         this.addAbility(new SpellCastControllerTriggeredAbility(

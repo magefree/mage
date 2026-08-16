@@ -40,7 +40,9 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         int ret = fcSelectDeck.showDialog(this, "Select Deck");
         if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fcSelectDeck.getSelectedFile();
-            this.txtPlayerDeck.setText(file.getPath());
+            if (file != null) {
+                this.txtPlayerDeck.setText(file.getPath());
+            }
             try {
                 MageFrame.getPreferences().put("lastDeckFolder", file.getCanonicalPath());
             } catch (IOException ex) {

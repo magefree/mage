@@ -76,7 +76,7 @@ class BaneOfProgressEffect extends OneShotEffect {
             }
         }
         if (destroyedPermanents > 0) {
-            return new AddCountersSourceEffect(CounterType.P1P1.createInstance(destroyedPermanents),true).apply(game, source);
+            return new AddCountersSourceEffect(CounterType.P1P1.createInstance(destroyedPermanents)).apply(game, source);
         }
         return true;
     }

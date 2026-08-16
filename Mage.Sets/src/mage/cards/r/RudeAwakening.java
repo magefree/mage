@@ -30,7 +30,7 @@ public final class RudeAwakening extends CardImpl {
         Mode mode = new Mode(new BecomesCreatureAllEffect(
                 new CreatureToken(2, 2, "2/2 creatures"),
                 "lands", new FilterControlledLandPermanent("lands you control"), Duration.EndOfTurn, false));
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
 
         // Entwine {2}{G}
         this.addAbility(new EntwineAbility("{2}{G}"));

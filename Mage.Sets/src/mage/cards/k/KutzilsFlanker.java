@@ -43,7 +43,7 @@ public final class KutzilsFlanker extends CardImpl {
         // When Kutzil's Flanker enters the battlefield, choose one --
         // * Put a +1/+1 counter on Kutzil's Flanker for each creature that left the battlefield under your control this turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(), KutzilsFlankerValue.instance, true)
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(), KutzilsFlankerValue.instance)
                         .setText("put a +1/+1 counter on {this} for each creature that left the battlefield under your control this turn")
         );
         ability.addHint(KutzilsFlankerValue.getHint());

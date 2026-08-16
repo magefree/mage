@@ -104,7 +104,9 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     Spell getSpell(UUID spellId);
 
-    Spell getSpellOrLKIStack(UUID spellId);
+    Spell getSpellOrLKIStack(UUID spellOrSourceId);
+
+    Spell getSpellOrLKIStack(MageObject sourceObject);
 
     /**
      * Find permanent on the battlefield by id. If you works with cards and want to check it on battlefield then
@@ -376,8 +378,6 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     void fireGetMultiAmountEvent(UUID playerId, List<MultiAmountMessage> messages, int min, int max, Map<String, Serializable> options);
 
     void fireChoosePileEvent(UUID playerId, String message, List<? extends Card> pile1, List<? extends Card> pile2);
-
-    void fireInformEvent(String message);
 
     void fireStatusEvent(String message, boolean withTime, boolean withTurnInfo);
 

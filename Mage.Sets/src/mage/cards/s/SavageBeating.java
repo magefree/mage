@@ -36,7 +36,7 @@ public final class SavageBeating extends CardImpl {
         // or untap all creatures you control and after this phase, there is an additional combat phase.
         Mode mode = new Mode(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), "untap all creatures you control"));
         mode.addEffect(new AdditionalCombatPhaseEffect());
-        this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().addMode(mode);
 
         // Entwine {1}{R}
         this.addAbility(new EntwineAbility("{1}{R}"));

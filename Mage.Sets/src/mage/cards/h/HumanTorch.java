@@ -6,8 +6,8 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.CastNoncreatureSpellThisTurnCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.DamageEachOtherOpponentThatMuchEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -18,10 +18,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.DamagedBatchBySourceEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
+import mage.target.targetpointer.FixedTarget;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -74,7 +74,7 @@ public final class HumanTorch extends CardImpl {
 class HumanTorchTriggeredAbility extends DelayedTriggeredAbility {
 
     HumanTorchTriggeredAbility() {
-        super(new HumanTorchEffect(), Duration.EndOfTurn, false, false);
+        super(new DamageEachOtherOpponentThatMuchEffect(), Duration.EndOfTurn, false, false);
         setTriggerPhrase("Whenever {this} deals combat damage to an opponent, ");
     }
 
@@ -89,52 +89,18 @@ class HumanTorchTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_BY_SOURCE;
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (!event.getSourceId().equals(getSourceId())
-                || !((DamagedBatchBySourceEvent) event).isCombatDamage()
+                || !((DamagedPlayerEvent) event).isCombatDamage()
                 || !game.getOpponents(getControllerId()).contains(event.getTargetId())) {
             return false;
         }
-        this.getEffects().setValue("playerId", event.getTargetId());
         this.getEffects().setValue("damage", event.getAmount());
-        return true;
-    }
-}
-
-class HumanTorchEffect extends OneShotEffect {
-
-    HumanTorchEffect() {
-        super(Outcome.Benefit);
-        staticText = "he deals that much damage to each other opponent";
-    }
-
-    private HumanTorchEffect(final HumanTorchEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public HumanTorchEffect copy() {
-        return new HumanTorchEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        UUID playerId = (UUID) getValue("playerId");
-        int damage = (Integer) getValue("damage");
-        if (damage < 1) {
-            return false;
-        }
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            if (!opponentId.equals(playerId)) {
-                Optional.ofNullable(opponentId)
-                        .map(game::getPlayer)
-                        .ifPresent(player -> player.damage(damage, source, game));
-            }
-        }
+        this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
         return true;
     }
 }
