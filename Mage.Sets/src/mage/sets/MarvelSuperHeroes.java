@@ -277,6 +277,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Ms. Marvel, Kamala Khan", 361, Rarity.RARE, mage.cards.m.MsMarvelKamalaKhan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Multiversal Incursion", 68, Rarity.MYTHIC, mage.cards.m.MultiversalIncursion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Multiversal Incursion", 300, Rarity.MYTHIC, mage.cards.m.MultiversalIncursion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Murdock's Crusade", 24, Rarity.COMMON, mage.cards.m.MurdocksCrusade.class));
         cards.add(new SetCardInfo("Namor the Sub-Mariner", 362, Rarity.MYTHIC, mage.cards.n.NamorTheSubMariner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Namor the Sub-Mariner", 391, Rarity.MYTHIC, mage.cards.n.NamorTheSubMariner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Namor the Sub-Mariner", 69, Rarity.MYTHIC, mage.cards.n.NamorTheSubMariner.class, NON_FULL_USE_VARIOUS));
