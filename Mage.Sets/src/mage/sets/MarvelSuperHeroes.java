@@ -190,6 +190,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Hellcat, Undying Vigilante", 170, Rarity.UNCOMMON, mage.cards.h.HellcatUndyingVigilante.class));
         cards.add(new SetCardInfo("Hercules, Prince of Power", 171, Rarity.UNCOMMON, mage.cards.h.HerculesPrinceOfPower.class));
         cards.add(new SetCardInfo("Hero in Training", 16, Rarity.COMMON, mage.cards.h.HeroInTraining.class));
+        cards.add(new SetCardInfo("Heroic Feast", 172, Rarity.RARE, mage.cards.h.HeroicFeast.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Heroic Feast", 414, Rarity.RARE, mage.cards.h.HeroicFeast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hex Magic", 133, Rarity.UNCOMMON, mage.cards.h.HexMagic.class));
         cards.add(new SetCardInfo("Hidden Lair", 269, Rarity.RARE, mage.cards.h.HiddenLair.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hidden Lair", 383, Rarity.RARE, mage.cards.h.HiddenLair.class, NON_FULL_USE_VARIOUS));
