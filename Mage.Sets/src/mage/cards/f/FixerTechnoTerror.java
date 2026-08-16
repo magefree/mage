@@ -8,6 +8,7 @@ import mage.abilities.condition.common.ArtifactEnteredUnderYourControlCondition;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.watchers.common.ArtifactEnteredControllerWatcher;
@@ -34,7 +35,7 @@ public final class FixerTechnoTerror extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
             new DrawCardSourceControllerEffect(1), new TapSourceCost(),
             ArtifactEnteredUnderYourControlCondition.instance
-        );
+        ).addHint(new ConditionHint(ArtifactEnteredUnderYourControlCondition.instance));
         ability.addCost(new PayLifeCost(2));
         this.addAbility(ability, new ArtifactEnteredControllerWatcher());
     }
