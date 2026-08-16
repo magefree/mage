@@ -68,7 +68,7 @@ class CaptainMarvelShootingStarTriggeredAbility extends ZoneChangeTriggeredAbili
         super(
             Zone.BATTLEFIELD,
             Zone.BATTLEFIELD, Zone.EXILED,
-            new GainLifeEffect(TargetPermanentPowerCount.instance),
+            new GainLifeEffect(TargetPermanentPowerCount.instance).setText("you gain life equal to its power"),
             "Whenever a creature other than Captain Marvel is exiled from the battlefield, ", false
         );
     }
