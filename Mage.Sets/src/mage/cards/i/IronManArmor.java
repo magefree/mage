@@ -46,7 +46,7 @@ public final class IronManArmor extends CardImpl {
         ).setText("and has flying"));
         this.addAbility(ability);
 
-        // If this Equipment isn’t a creature, it becomes a 0/0 Construct Hero artifact creature with flying
+        // {2}: If this Equipment isn’t a creature, it becomes a 0/0 Construct Hero artifact creature with flying
         // and “This creature gets +1/+1 for each artifact you control” until end of turn.
         this.addAbility(new ActivateIfConditionActivatedAbility(
                 new BecomesCreatureSourceEffect(
