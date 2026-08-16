@@ -795,14 +795,14 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (card != null) {
                 card.moveToZone(Zone.HAND, source, game, false); // if you want to use event.getSourceId() here then thinks x10 times
                 if (isTopCardRevealed() && !isDrawsFromBottom()) {
-                    game.fireInformEvent(getLogName() + " draws a revealed card  (" + card.getLogName() + ')');
+                    game.informPlayers(getLogName() + " draws a revealed card  (" + card.getLogName() + ')');
                 }
                 game.fireEvent(new DrewCardEvent(card.getId(), getId(), source, event));
                 numDrawn++;
             }
         }
         if ((!isTopCardRevealed() || isDrawsFromBottom()) && numDrawn > 0) {
-            game.fireInformEvent(getLogName() + " draws " + CardUtil.numberToText(numDrawn, "a")
+            game.informPlayers(getLogName() + " draws " + CardUtil.numberToText(numDrawn, "a")
                     + " card" + (numDrawn > 1 ? "s" : "")
                     + (isDrawsFromBottom() ? " from the bottom of their library" : ""));
         }
@@ -1489,7 +1489,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     playText = getLogName() + " plays " + GameLog.replaceNameByColoredName(card, card.getName(), mdfCard)
                             + " as MDF side of " + GameLog.getColoredObjectIdName(mdfCard);
                 }
-                game.fireInformEvent(playText);
+                game.informPlayers(playText);
                 // game.removeBookmark(bookmark);
                 resetStoredBookmark(game); // prevent undo after playing a land
                 return true;
@@ -2486,18 +2486,19 @@ public abstract class PlayerImpl implements Player, Serializable {
         );
         if (!game.replaceEvent(addingAllEvent)) {
             int amount = addingAllEvent.getAmount();
-            int finalAmount = amount;
+            int startAmount = this.counters.getCount(counter.getName());
+            int addedAmount = amount;
             boolean isEffectFlag = addingAllEvent.getFlag();
             for (int i = 0; i < amount; i++) {
                 Counter eventCounter = counter.copy();
-                eventCounter.remove(eventCounter.getCount() - 1);
+                eventCounter.remove(eventCounter.getCount() - 1); // make 1 counter
                 GameEvent addingOneEvent = GameEvent.getEvent(
                         GameEvent.EventType.ADD_COUNTER, playerId, source,
                         playerAddingCounters, counter.getName(), 1
                 );
                 addingOneEvent.setFlag(isEffectFlag);
                 if (!game.replaceEvent(addingOneEvent)) {
-                    counters.addCounter(eventCounter);
+                    this.counters.addCounter(eventCounter);
                     GameEvent addedOneEvent = GameEvent.getEvent(
                             GameEvent.EventType.COUNTER_ADDED, playerId, source,
                             playerAddingCounters, counter.getName(), 1
@@ -2505,14 +2506,15 @@ public abstract class PlayerImpl implements Player, Serializable {
                     addedOneEvent.setFlag(addingOneEvent.getFlag());
                     game.fireEvent(addedOneEvent);
                 } else {
-                    finalAmount--;
+                    addedAmount--;
                     returnCode = false;
                 }
             }
-            if (finalAmount > 0) {
+            if (addedAmount > 0) {
+                CardUtil.informPlayersCountersChange(playerAddingCounters, counter.getName(), startAmount, startAmount + addedAmount, this, game, source);
                 GameEvent addedAllEvent = GameEvent.getEvent(
                         GameEvent.EventType.COUNTERS_ADDED, playerId, source,
-                        playerAddingCounters, counter.getName(), amount
+                        playerAddingCounters, counter.getName(), addedAmount
                 );
                 addedAllEvent.setFlag(addingAllEvent.getFlag());
                 game.fireEvent(addedAllEvent);
@@ -2531,7 +2533,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             return;
         }
 
-        int finalAmount = 0;
+        int startAmount = this.counters.getCount(counterName);
+        int removedAmount = 0;
         for (int i = 0; i < amount; i++) {
 
             GameEvent event = new RemoveCounterEvent(counterName, this, source, false);
@@ -2544,10 +2547,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             event = new CounterRemovedEvent(counterName, this, source, false);
             game.fireEvent(event);
-            finalAmount++;
+            removedAmount++;
         }
 
-        GameEvent event = new CountersRemovedEvent(counterName, this, source, finalAmount, false);
+        CardUtil.informPlayersCountersChange(null, counterName, startAmount, startAmount - removedAmount, this, game, source);
+        GameEvent event = new CountersRemovedEvent(counterName, this, source, removedAmount, false);
         game.fireEvent(event);
     }
 

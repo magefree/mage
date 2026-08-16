@@ -30,7 +30,7 @@ public final class MoldgrafMillipede extends CardImpl {
 
         // When Moldgraf Millipede enters the battlefield, mill three cards, then put a +1/+1 counter on Moldgraf Millipede for each creature card in your graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(3));
-        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE), false).concatBy(", then"));
+        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE)).concatBy(", then"));
         this.addAbility(ability);
     }
 

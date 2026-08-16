@@ -33,8 +33,7 @@ public final class GeometricNexus extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(
                 new AddCountersSourceEffect(
                         CounterType.CHARGE.createInstance(0),
-                        GeometricNexusMVValue.instance, false
-                ).setText("put a number of charge counters on {this} equal to that spell's mana value"),
+                        GeometricNexusMVValue.instance).setText("put a number of charge counters on {this} equal to that spell's mana value"),
                 StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
         ));
 

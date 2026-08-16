@@ -36,8 +36,7 @@ public final class DrakestownForgotten extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(
                         CounterType.P1P1.createInstance(),
-                        new CardsInAllGraveyardsCount(StaticFilters.FILTER_CARD_CREATURE),
-                        false),
+                        new CardsInAllGraveyardsCount(StaticFilters.FILTER_CARD_CREATURE)),
                 "with X +1/+1 counters on it, where X is the number of creature cards in all graveyards"));
 
         // {2}{B}, Remove a +1/+1 counter from Drakestown Forgotten: Target creature gets -1/-1 until end of turn.

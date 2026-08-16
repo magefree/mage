@@ -43,7 +43,10 @@ public final class VGerTheIntruder extends CardImpl {
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy(", then"));
 
         // * Creatures your opponents control get -1/-0 until your next turn.
-        ability.addMode(new Mode(new BoostOpponentsEffect(-1, 0, Duration.UntilYourNextTurn)));
+        ability.addMode(new Mode(
+            new BoostOpponentsEffect(-1, 0, Duration.UntilYourNextTurn)
+                .setText("creatures your opponents control get -1/-0 until your next turn")
+        ));
         this.addAbility(ability);
     }
 
