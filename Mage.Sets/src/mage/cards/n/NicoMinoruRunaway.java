@@ -61,13 +61,14 @@ public final class NicoMinoruRunaway extends CardImpl {
 
         //{2}{R}, {T}, Discard a card: Exile cards from the top of your library until you exile a nonland card. You may cast that card without paying its mana cost.
         Ability ability = new SimpleActivatedAbility(
-                new NicoMinoruRunawayEffect()
-                        .setText("Exile cards from the top of your library until you exile a nonland card. You may cast that card without paying its mana cost."),
-                new ManaCostsImpl<>("{2}{R}"));
-                ability.addCost(new TapSourceCost());
-                ability.addCost(new DiscardTargetCost(new TargetCardInHand()));
-                this.addAbility(ability);
-        }
+            new NicoMinoruRunawayEffect(),
+            new ManaCostsImpl<>("{2}{R}")
+        );
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand()));
+        this.addAbility(ability);
+    }
+    
     private NicoMinoruRunaway(final NicoMinoruRunaway card) {
         super(card);
     }
