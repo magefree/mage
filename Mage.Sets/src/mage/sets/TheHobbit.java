@@ -236,6 +236,9 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("The Misty Mountains Cold", 104, Rarity.RARE, mage.cards.t.TheMistyMountainsCold.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Misty Mountains Cold", 321, Rarity.RARE, mage.cards.t.TheMistyMountainsCold.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Mountain-king's Return", 22, Rarity.UNCOMMON, mage.cards.t.TheMountainKingsReturn.class));
+        cards.add(new SetCardInfo("The Notary Hobbits", 131, Rarity.RARE, mage.cards.t.TheNotaryHobbits.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Notary Hobbits", 232, Rarity.RARE, mage.cards.t.TheNotaryHobbits.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Notary Hobbits", 268, Rarity.RARE, mage.cards.t.TheNotaryHobbits.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Queen of Dale", 217, Rarity.MYTHIC, mage.cards.t.TheQueenOfDale.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Queen of Dale", 24, Rarity.MYTHIC, mage.cards.t.TheQueenOfDale.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Queen of Dale", 253, Rarity.MYTHIC, mage.cards.t.TheQueenOfDale.class, NON_FULL_USE_VARIOUS));
