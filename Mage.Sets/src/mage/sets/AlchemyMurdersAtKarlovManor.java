@@ -22,5 +22,6 @@ public final class AlchemyMurdersAtKarlovManor extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Emmara, Voice of the Conclave", 22, Rarity.RARE, mage.cards.e.EmmaraVoiceOfTheConclave.class));
+        cards.add(new SetCardInfo("Emporium Thopterist", 5, Rarity.UNCOMMON, mage.cards.e.EmporiumThopterist.class));
     }
 }
