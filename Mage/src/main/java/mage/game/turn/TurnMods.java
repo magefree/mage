@@ -72,21 +72,46 @@ public class TurnMods extends ArrayList<TurnMod> implements Serializable, Copyab
 
         TurnMod lastNewControllerMod = null;
 
-        // find last/actual mod
-        ListIterator<TurnMod> it = this.listIterator(this.size());
-        while (it.hasPrevious()) {
-            TurnMod turnMod = it.previous();
-            if (turnMod.getNewControllerId() != null && turnMod.getPlayerId().equals(playerId)) {
+        // find last/actual mod full or partial control (end of the list)
+        ListIterator<TurnMod> it = this.listIterator();
+        while (it.hasNext()) {
+            TurnMod turnMod = it.next();
+            if ((turnMod.getNewControllerId() != null && turnMod.getPlayerId().equals(playerId))
+              || (turnMod.getPhaseController() != null && turnMod.getPlayerId().equals(playerId))) {
                 lastNewControllerMod = turnMod;
                 it.remove();
             }
         }
 
-        // delete all other outdated mods
-        it = this.listIterator(this.size());
-        while (it.hasPrevious()) {
-            TurnMod turnMod = it.previous();
-            if (turnMod.getNewControllerId() != null && turnMod.getPlayerId().equals(playerId)) {
+        // add subsequent turn mod to execute after current
+        if (lastNewControllerMod != null && lastNewControllerMod.getSubsequentTurnMod() != null) {
+            this.add(lastNewControllerMod.getSubsequentTurnMod());
+        }
+
+        if (lastNewControllerMod != null && lastNewControllerMod.getNewControllerId() != null) {
+            // Opponent has taken control over the full turn
+            return lastNewControllerMod;
+        } else if (lastNewControllerMod != null) {
+            // Keep Partial Turn Mod if it was the last/actual mod
+            this.add(lastNewControllerMod);
+            return null;
+        }
+        return lastNewControllerMod;
+    }
+
+    public TurnMod useNextNewPhaseController(UUID playerId, Phase controlledPhase) {
+
+        TurnMod lastNewControllerMod = null;
+
+        // useNextNewController has already filtered down to the correct last control mod
+        // find the correct phase for the partial turn mod
+        ListIterator<TurnMod> it = this.listIterator();
+        while (it.hasNext()) {
+            TurnMod turnMod = it.next();
+            if (turnMod.getPhaseController() != null
+                    && turnMod.getPlayerId().equals(playerId)
+                    && turnMod.getControlledPhase().getType().equals(controlledPhase.getType())) {
+                lastNewControllerMod = turnMod;
                 it.remove();
             }
         }

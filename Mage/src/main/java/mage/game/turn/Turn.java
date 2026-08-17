@@ -105,6 +105,8 @@ public class Turn implements Serializable {
 
         // turn control must be called after potential turn skip due 720.1.
         checkTurnIsControlledByOtherPlayer(game, activePlayer.getId());
+        // Remember if whole turn is under opponents control
+        boolean opponentInFullControl = !activePlayer.isGameUnderControl();
 
         game.getPlayer(activePlayer.getId()).beginTurn(game);
         GameEvent event = new GameEvent(GameEvent.EventType.BEGIN_TURN, null, null, activePlayer.getId());
@@ -126,6 +128,11 @@ public class Turn implements Serializable {
                         skipPhaseMod.getInfo()
                 ));
                 continue;
+            }
+            // If no opponent has taken full control check individual phases
+            // To not remove control over turn with checkCurrentPhaseIsControlledByOtherPlayer
+            if (!opponentInFullControl) {
+                checkCurrentPhaseIsControlledByOtherPlayer(game, activePlayer.getId(), currentPhase);
             }
 
             game.fireEvent(new PhaseChangedEvent(activePlayer.getId(), null));
@@ -246,6 +253,30 @@ public class Turn implements Serializable {
             // game logs added in child's call (controlPlayersTurn)
             game.getPlayer(newControllerMod.getNewControllerId()).controlPlayersTurn(game, activePlayerId, newControllerMod.getInfo());
         }
+    }
+
+    private void checkCurrentPhaseIsControlledByOtherPlayer(Game game, UUID activePlayerId, Phase currentPhase) {
+
+        // remove old under control
+        game.getPlayers().values().forEach(player -> {
+            if (player.isInGame() && !player.isGameUnderControl()) {
+                Player controllingPlayer = game.getPlayer(player.getTurnControlledBy());
+                if (player != controllingPlayer && controllingPlayer != null) {
+                    game.informPlayers(controllingPlayer.getLogName() + " lost control over " + player.getLogName());
+                }
+                player.setGameUnderYourControl(game, true);
+            }
+        });
+
+        // add new under control
+        TurnMod newControllerMod = game.getState().getTurnMods().useNextNewPhaseController(activePlayerId, currentPhase);
+        if (newControllerMod != null
+                && !newControllerMod.getControlledPhase().equals(activePlayerId)
+                && newControllerMod.getControlledPhase().getType().equals(currentPhase.getType())) {
+            // game logs added in child's call (controlPlayersTurn)
+            game.getPlayer(newControllerMod.getPhaseController()).controlPlayersTurn(game, activePlayerId, newControllerMod.getInfo());
+        }
+
     }
 
     private void resetCounts() {
