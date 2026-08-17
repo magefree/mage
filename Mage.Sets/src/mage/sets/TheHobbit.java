@@ -37,10 +37,13 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Bard the Bowman", 145, Rarity.UNCOMMON, mage.cards.b.BardTheBowman.class));
         cards.add(new SetCardInfo("Bejeweled Warg", 117, Rarity.RARE, mage.cards.b.BejeweledWarg.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bejeweled Warg", 305, Rarity.RARE, mage.cards.b.BejeweledWarg.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Beorn's Hospitality", 120, Rarity.UNCOMMON, mage.cards.b.BeornsHospitality.class));
         cards.add(new SetCardInfo("Belladonna Took", 214, Rarity.RARE, mage.cards.b.BelladonnaTook.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Belladonna Took", 250, Rarity.RARE, mage.cards.b.BelladonnaTook.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Belladonna Took", 4, Rarity.RARE, mage.cards.b.BelladonnaTook.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Beorn the Fierce", 119, Rarity.MYTHIC, mage.cards.b.BeornTheFierce.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Beorn the Fierce", 230, Rarity.MYTHIC, mage.cards.b.BeornTheFierce.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Beorn the Fierce", 266, Rarity.MYTHIC, mage.cards.b.BeornTheFierce.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Beorn's Hospitality", 120, Rarity.UNCOMMON, mage.cards.b.BeornsHospitality.class));
         cards.add(new SetCardInfo("Beorn, Reluctant Host", 118, Rarity.COMMON, mage.cards.b.BeornReluctantHost.class));
         cards.add(new SetCardInfo("Bilbo Baggins, Burglar", 34, Rarity.COMMON, mage.cards.b.BilboBagginsBurglar.class));
         cards.add(new SetCardInfo("Bilbo's Deadly Slice", 62, Rarity.COMMON, mage.cards.b.BilbosDeadlySlice.class));
