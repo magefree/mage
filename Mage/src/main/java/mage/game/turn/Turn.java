@@ -226,13 +226,13 @@ public class Turn implements Serializable {
     }
 
     private void checkTurnIsControlledByOtherPlayer(Game game, UUID activePlayerId) {
-        // 720.1.
+        // 723.1.
         // Some cards allow a player to control another player during that player’s next turn.
         // This effect applies to the next turn that the affected player actually takes.
         // The affected player is controlled during the entire turn; the effect doesn’t end until
         // the beginning of the next turn.
         //
-        // 720.1b
+        // 723.1b
         // If a turn is skipped, any pending player-controlling effects wait until the player who would be
         // affected actually takes a turn.
 
