@@ -30,6 +30,7 @@ public class Turn implements Serializable {
     private UUID activePlayerId;
     private final List<Phase> phases = new ArrayList<>();
     private boolean declareAttackersStepStarted = false;
+    private boolean phaseControl = false;
     private boolean endTurn; // indicates that an end turn effect has resolved.
 
     public Turn() {
@@ -131,6 +132,7 @@ public class Turn implements Serializable {
             }
             // If no opponent has taken full control check individual phases
             // To not remove control over turn with checkCurrentPhaseIsControlledByOtherPlayer
+            // Check after skip phase because of 723.1b
             if (!opponentInFullControl) {
                 checkCurrentPhaseIsControlledByOtherPlayer(game, activePlayer.getId(), currentPhase);
             }
@@ -264,6 +266,7 @@ public class Turn implements Serializable {
                 if (player != controllingPlayer && controllingPlayer != null) {
                     game.informPlayers(controllingPlayer.getLogName() + " lost control over " + player.getLogName());
                 }
+                this.phaseControl = false;
                 player.setGameUnderYourControl(game, true);
             }
         });
@@ -274,6 +277,7 @@ public class Turn implements Serializable {
                 && !newControllerMod.getControlledPhase().equals(activePlayerId)
                 && newControllerMod.getControlledPhase().getType().equals(currentPhase.getType())) {
             // game logs added in child's call (controlPlayersTurn)
+            this.phaseControl = true;
             game.getPlayer(newControllerMod.getPhaseController()).controlPlayersTurn(game, activePlayerId, newControllerMod.getInfo());
         }
 
@@ -326,6 +330,11 @@ public class Turn implements Serializable {
                 phase.keepOnlyStep(skipAllButExtraStep);
             }
             currentPhase = phase;
+            // Remove Phase control and check if a new one exists
+            // In theorie there could be an instant speed Secrets of Bloodbending
+            if (phaseControl) {
+                checkCurrentPhaseIsControlledByOtherPlayer(game, activePlayerId, currentPhase);
+            }
             game.fireEvent(new PhaseChangedEvent(activePlayerId, extraPhaseMod));
             Player activePlayer = game.getPlayer(activePlayerId);
             if (activePlayer != null) {
