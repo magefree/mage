@@ -27,6 +27,7 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Balefang the Unslayable", 20, Rarity.RARE, mage.cards.b.BalefangTheUnslayable.class));
         cards.add(new SetCardInfo("Blor the Impervious", 28, Rarity.RARE, mage.cards.b.BlorTheImpervious.class));
         cards.add(new SetCardInfo("Boss Uramon, Shadow's Reach", 13, Rarity.RARE, mage.cards.b.BossUramonShadowsReach.class));
+        cards.add(new SetCardInfo("Case of the Lost Witness", 62, Rarity.UNCOMMON, mage.cards.c.CaseOfTheLostWitness.class));
         cards.add(new SetCardInfo("Chaos Warp", 72, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 73, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
         cards.add(new SetCardInfo("Davvol, Evincar of Rath", 36, Rarity.RARE, mage.cards.d.DavvolEvincarOfRath.class));
