@@ -332,7 +332,7 @@ public class Turn implements Serializable {
             currentPhase = phase;
             // Remove Phase control and check if a new one exists
             // In theorie there could be an instant speed Secrets of Bloodbending
-            if (phaseControl) {
+            if (phaseControl || game.getPlayer(activePlayerId).isGameUnderControl()) {
                 checkCurrentPhaseIsControlledByOtherPlayer(game, activePlayerId, currentPhase);
             }
             game.fireEvent(new PhaseChangedEvent(activePlayerId, extraPhaseMod));
