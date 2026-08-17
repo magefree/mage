@@ -42,6 +42,7 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Joven and Chandler", 24, Rarity.RARE, mage.cards.j.JovenAndChandler.class));
         cards.add(new SetCardInfo("Mind Stone", 76, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Oracle of the Alpha", 64, Rarity.UNCOMMON, mage.cards.o.OracleOfTheAlpha.class));
+        cards.add(new SetCardInfo("Overcooked", 67, Rarity.UNCOMMON, mage.cards.o.Overcooked.class));
         cards.add(new SetCardInfo("Path of Ancestry", 80, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Ruby Collector", 61, Rarity.UNCOMMON, mage.cards.r.RubyCollector.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 77, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
