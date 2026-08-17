@@ -6,6 +6,7 @@ Alara Reborn|ARB|
 Alchemy: Dominaria|YDMU|
 Alchemy: Innistrad|Y22|
 Alchemy: Secrets of Strixhaven|YSOS|
+Alchemy: Wilds of Eldraine|YWOE|
 Alliances|ALL|
 Amonkhet|AKH|
 Anthologies|ATH|
