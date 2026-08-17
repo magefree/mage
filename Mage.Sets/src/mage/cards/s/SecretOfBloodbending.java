@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.turn.CombatPhase;
-import mage.game.turn.Phase;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -20,7 +19,7 @@ import mage.target.common.TargetOpponent;
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author miesma
  */
 public final class SecretOfBloodbending extends CardImpl {
 
