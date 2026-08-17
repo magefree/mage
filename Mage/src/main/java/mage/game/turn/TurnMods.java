@@ -62,11 +62,11 @@ public class TurnMods extends ArrayList<TurnMod> implements Serializable, Copyab
     }
 
     public TurnMod useNextNewController(UUID playerId) {
-        // 720.1a
+        // 723.1a.
         // Multiple player-controlling effects that affect the same player overwrite each other.
         // The last one to be created is the one that works.
         //
-        // 720.1b
+        // 723.1b.
         // If a turn is skipped, any pending player-controlling effects wait until the player
         // who would be affected actually takes a turn.
 
