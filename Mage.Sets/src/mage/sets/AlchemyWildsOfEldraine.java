@@ -22,5 +22,6 @@ public final class AlchemyWildsOfEldraine extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Overcooked", 11, Rarity.MYTHIC, mage.cards.o.Overcooked.class));
+        cards.add(new SetCardInfo("Victory of the Pyrohammer", 12, Rarity.RARE, mage.cards.v.VictoryOfThePyrohammer.class));
     }
 }
