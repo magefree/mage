@@ -21,6 +21,7 @@ public final class AlchemyWildsOfEldraine extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("First Little Pig", 18, Rarity.UNCOMMON, mage.cards.f.FirstLittlePig.class));
         cards.add(new SetCardInfo("Overcooked", 11, Rarity.MYTHIC, mage.cards.o.Overcooked.class));
     }
 }
