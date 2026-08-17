@@ -103,8 +103,8 @@ public class TurnMods extends ArrayList<TurnMod> implements Serializable, Copyab
 
         TurnMod lastNewControllerMod = null;
 
-        // useNextNewController has already filtered down to the correct last control mod
         // find the correct phase for the partial turn mod
+        // instant speed could have added new ones after useNextNewController
         ListIterator<TurnMod> it = this.listIterator();
         while (it.hasNext()) {
             TurnMod turnMod = it.next();
