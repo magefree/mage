@@ -2629,9 +2629,9 @@ public class TestPlayer implements Player {
 
         // wrong target settings by addTarget
         // how to fix: implement target class processing above (if it a permanent target then check "filter instanceof" code too)
+        Set<UUID> possibleTargets = target.possibleTargets(abilityControllerId, source, game);
         if (!targets.isEmpty()) {
             String message;
-            Set<UUID> possibleTargets = target.possibleTargets(abilityControllerId, source, game);
 
             if (source != null) {
                 message = this.getName() + " - Targets list was setup by addTarget with " + targets + ", but not used"
@@ -2647,6 +2647,10 @@ public class TestPlayer implements Player {
                         + "\nYou must implement target class support in TestPlayer, \"filter instanceof\", or setup good targets";
             }
             Assert.fail(message);
+        }
+
+        if (possibleTargets.isEmpty()) {
+            return false;
         }
 
         this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target, source, game, null));
