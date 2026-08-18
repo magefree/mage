@@ -61,7 +61,7 @@ class LokiLordOfMisruleEffect extends OneShotEffect {
 
     LokiLordOfMisruleEffect() {
         super(Outcome.Copy);
-        staticText = "choose target creature you control — each creature you control other "
+        staticText = "choose target creature you control. Each creature you control other "
                 + "than the chosen creature becomes a copy of that creature until end of turn, "
                 + "except it isn't legendary";
     }
