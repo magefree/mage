@@ -3,6 +3,7 @@ package mage.cards.k;
 import mage.abilities.Ability;
 import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -10,11 +11,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -45,7 +44,7 @@ public final class KondasBanner extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new KondasBannerTypeBoostEffect()));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2, false));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), new TargetPermanent(legendaryFilter.copy().add(TargetController.YOU.getControllerPredicate())), false));
     }
 
     private KondasBanner(final KondasBanner card) {
