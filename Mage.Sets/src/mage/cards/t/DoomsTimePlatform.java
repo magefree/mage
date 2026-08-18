@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
@@ -21,13 +20,7 @@ import java.util.UUID;
 
 public final class DoomsTimePlatform extends CardImpl {
 
-    private static final FilterCard filter = new FilterNonlandCard("nonland card from your graveyard with two or more time counters on it") {
-        @Override
-        public boolean match(Card card, UUID who, Ability source, Game game) {
-            return super.match(card, who, source, game)
-                    && card.getCounters(game).getCount(CounterType.TIME) >= 2;
-        }
-    };
+    private static final FilterCard filter = new FilterNonlandCard("nonland card from your graveyard");
 
     public DoomsTimePlatform(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
@@ -67,10 +60,6 @@ class DoomsTimePlatformEffect extends OneShotEffect {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (controller == null || card == null) {
             return false;
-        }
-        // Verify the card still has 2+ time counters at resolution
-        if (card.getCounters(game).getCount(CounterType.TIME) < 2) {
-            return true;
         }
         controller.moveCards(card, Zone.EXILED, source, game);
         SuspendAbility.addTimeCountersAndSuspend(card, 0, source, game);
