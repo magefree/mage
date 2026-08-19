@@ -35,7 +35,7 @@ public final class SparasAdjudicators extends CardImpl {
         this.addAbility(ability);
 
         // {2}, Exile Spara's Adjudicators from your hand: Target land gains "{T}: Add {G}, {W}, or {U}" until Spara's Adjudicators is cast from exile. You may cast Spara's Adjudicators for as long as it remains exiled.
-        this.addAbility(new GiveManaAbilityAndCastSourceAbility("GWU"));
+        this.addAbility(new GiveManaAbilityAndCastSourceAbility("GWU",2));
     }
 
     private SparasAdjudicators(final SparasAdjudicators card) {
