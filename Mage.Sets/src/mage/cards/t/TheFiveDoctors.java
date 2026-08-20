@@ -50,14 +50,13 @@ public final class TheFiveDoctors extends CardImpl {
 class TheFiveDoctorsEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard(SubType.DOCTOR);
-    private int cardsLeft = 5;
 
     public TheFiveDoctorsEffect() {
         super(Outcome.Benefit);
         staticText = "Search your library and/or graveyard for up to five Doctor cards, "
-            + "reveal them, and put them into your hand. If you search your library this "
-            + "way, shuffle. If this spell was kicked, put those cards onto the battlefield "
-            + "instead of putting them into your hand.";
+        + "reveal them, and put them into your hand. If you search your library this "
+        + "way, shuffle. If this spell was kicked, put those cards onto the battlefield "
+        + "instead of putting them into your hand.";
     }
 
     private TheFiveDoctorsEffect(final TheFiveDoctorsEffect effect) {
@@ -77,16 +76,14 @@ class TheFiveDoctorsEffect extends OneShotEffect {
             return false;
         }
 
+        int cardsLeft = 5;
         Cards cardsFound = new CardsImpl();
         boolean needShuffle = false;
         if (controller.chooseUse(outcome, "Search your library for up to five Doctor cards?", source, game)) {
             TargetCardInLibrary target = new TargetCardInLibrary(0, 5, filter);
-            target.clearChosen();
             if (controller.searchLibrary(target, source, game)) {
-                if (!target.getTargets().isEmpty()) {
-                    for (UUID cardId : target.getTargets()) {
-                        cardsFound.add(game.getCard(cardId));
-                    }
+                for (UUID cardId : target.getTargets()) {
+                    cardsFound.add(game.getCard(cardId));
                 }
             }
             needShuffle = true;
@@ -96,12 +93,9 @@ class TheFiveDoctorsEffect extends OneShotEffect {
 
         if (cardsLeft > 0 && controller.chooseUse(outcome, "Search your graveyard for up to " + CardUtil.numberToText(cardsLeft) + " Doctor card" + (cardsLeft > 1 ? "s" : "") + "?", source, game)) {
             TargetCard target = new TargetCardInYourGraveyard(0, cardsLeft, filter, true);
-            target.clearChosen();
             if (controller.choose(outcome, controller.getGraveyard(), target, source, game)) {
-                if (!target.getTargets().isEmpty()) {
-                    for (UUID cardId : target.getTargets()) {
-                        cardsFound.add(game.getCard(cardId));
-                    }
+                for (UUID cardId : target.getTargets()) {
+                    cardsFound.add(game.getCard(cardId));
                 }
             }
         }
