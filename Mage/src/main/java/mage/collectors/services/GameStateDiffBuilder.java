@@ -9,6 +9,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Abilities;
 import mage.abilities.effects.ContinuousEffect;
@@ -17,6 +18,7 @@ import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.counters.Counters;
 import mage.game.Game;
+import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
@@ -33,7 +35,7 @@ import mage.players.Player;
  * - play lands
  * - combat damage
  * - zone change and zone replacement effects like exile instead put to graveyard after combat or other non stack events
- * - gain abilities to cards and spells
+ * - gain abilities to non-battlefield objects (cards in hand/library/etc, spells on stack)
  *
  * @author JayDi85
  */
@@ -109,6 +111,9 @@ public class GameStateDiffBuilder {
             anyChanged |= addZoneDiff(zonesDiff, "BATTLEFIELD", playerId,
                     getBattlefieldPermanentsForController(prevGame, playerId),
                     getBattlefieldPermanentsForController(game, playerId), prevGame, game);
+            anyChanged |= addZoneDiff(zonesDiff, "COMMAND", playerId,
+                    getCommandObjectsForController(prevGame, playerId),
+                    getCommandObjectsForController(game, playerId), prevGame, game);
         }
 
         // 3 of 4 - other game state changes
@@ -126,6 +131,10 @@ public class GameStateDiffBuilder {
 
         // layer effects changes (added or removed continuous effects)
         anyChanged |= addLayerEffectsDiff(root, prevGame, game);
+
+        // triggered abilities changes (registered/removed - both normal and delayed)
+        anyChanged |= addTriggeredAbilitiesDiff(root, prevGame, game);
+        anyChanged |= addDelayedTriggeredAbilitiesDiff(root, prevGame, game);
 
         // 4 of 4 - final result and changed flag
         root.addProperty("changed", anyChanged);
@@ -199,17 +208,18 @@ public class GameStateDiffBuilder {
     }
 
     private static boolean addZoneDiff(JsonArray target, String zoneName, UUID playerId,
-                                       Collection<? extends Card> beforeCards, Collection<? extends Card> afterCards,
-                                       Game prevGame, Game game) {
-        // changed cards list (moves between zones), also store zone change counter (zcc) to detect "left and came back" cases
+                                        Collection<? extends MageObject> beforeObjects, Collection<? extends MageObject> afterObjects,
+                                        Game prevGame, Game game) {
+        // changed objects list (moves between zones), also store zone change counter (zcc) to detect "left and came back" cases
+        // support: cards, permanents, and command objects
         Map<UUID, Integer> beforeZcc = new HashMap<>();
-        for (Card card : beforeCards) {
-            beforeZcc.put(card.getId(), card.getZoneChangeCounter(prevGame));
+        for (MageObject obj : beforeObjects) {
+            beforeZcc.put(obj.getId(), obj.getZoneChangeCounter(prevGame));
         }
 
         Map<UUID, Integer> afterZcc = new HashMap<>();
-        for (Card card : afterCards) {
-            afterZcc.put(card.getId(), card.getZoneChangeCounter(game));
+        for (MageObject obj : afterObjects) {
+            afterZcc.put(obj.getId(), obj.getZoneChangeCounter(game));
         }
 
         Set<UUID> removedIds = new HashSet<>();
@@ -236,10 +246,10 @@ public class GameStateDiffBuilder {
         zoneDiff.addProperty("zone", zoneName);
         zoneDiff.addProperty("playerId", playerId.toString());
         if (!removedIds.isEmpty()) {
-            zoneDiff.add("removed", cardRefsToJson(removedIds, prevGame));
+            zoneDiff.add("removed", objectRefsToJson(removedIds, prevGame));
         }
         if (!addedIds.isEmpty()) {
-            zoneDiff.add("added", cardRefsToJson(addedIds, game));
+            zoneDiff.add("added", objectRefsToJson(addedIds, game));
         }
         target.add(zoneDiff);
         return true;
@@ -247,6 +257,16 @@ public class GameStateDiffBuilder {
 
     private static List<Permanent> getBattlefieldPermanentsForController(Game game, UUID playerId) {
         return game.getBattlefield().getAllActivePermanents(playerId);
+    }
+
+    private static List<CommandObject> getCommandObjectsForController(Game game, UUID playerId) {
+        List<CommandObject> result = new ArrayList<>();
+        for (CommandObject commandObject : game.getState().getCommand()) {
+            if (playerId.equals(commandObject.getControllerId())) {
+                result.add(commandObject);
+            }
+        }
+        return result;
     }
 
     private static boolean addPermanentsDiff(JsonArray target, Game prevGame, Game game) {
@@ -288,7 +308,7 @@ public class GameStateDiffBuilder {
             if (changed) {
                 permDiff.addProperty("id", p.getId().toString());
                 permDiff.addProperty("zcc", p.getZoneChangeCounter(game));
-                permDiff.addProperty("cardName", p.getName());
+                permDiff.addProperty("objectName", p.getName());
                 target.add(permDiff);
                 anyChanged = true;
             }
@@ -310,7 +330,7 @@ public class GameStateDiffBuilder {
         return true;
     }
 
-    private static Map<String, Integer> abilitiesToKeyCountMap(Abilities<Ability> abilities) {
+    private static Map<String, Integer> abilitiesToKeyCountMap(Iterable<? extends Ability> abilities) {
         Map<String, Integer> result = new TreeMap<>(); // sorted, so equals()/output is stable
         for (Ability a : abilities) {
             String key = a.getClass().getSimpleName() + "::" + a.getRule();
@@ -361,6 +381,32 @@ public class GameStateDiffBuilder {
         } catch (Exception e) {
             return "";
         }
+    }
+
+    private static boolean addTriggeredAbilitiesDiff(JsonObject root, Game prevGame, Game game) {
+        // game-scope changes in triggered abilities
+        Map<String, Integer> beforeCounts = abilitiesToKeyCountMap(prevGame.getState().getTriggers().values());
+        Map<String, Integer> afterCounts = abilitiesToKeyCountMap(game.getState().getTriggers().values());
+
+        if (beforeCounts.equals(afterCounts)) {
+            return false;
+        }
+
+        addMapField(root, "triggeredAbilities", beforeCounts, afterCounts);
+        return true;
+    }
+
+    private static boolean addDelayedTriggeredAbilitiesDiff(JsonObject root, Game prevGame, Game game) {
+        // game-scope changes in delayed triggered abilities
+        Map<String, Integer> beforeCounts = abilitiesToKeyCountMap(prevGame.getState().getDelayed());
+        Map<String, Integer> afterCounts = abilitiesToKeyCountMap(game.getState().getDelayed());
+
+        if (beforeCounts.equals(afterCounts)) {
+            return false;
+        }
+
+        addMapField(root, "delayedTriggeredAbilities", beforeCounts, afterCounts);
+        return true;
     }
 
     private static void addNullBeforeField(JsonObject target, String fieldName, int after) {
@@ -503,17 +549,35 @@ public class GameStateDiffBuilder {
         return game.getExile().getCardsOwned(game, playerId);
     }
 
-    private static JsonArray cardRefsToJson(Set<UUID> cardIds, Game game) {
+    private static JsonArray objectRefsToJson(Set<UUID> objectIds, Game game) {
+        // object info for zone moves history
+        // use class name to find real class under changed name like face down, mutated, copied, etc
         JsonArray arr = new JsonArray();
-        for (UUID cardId : cardIds) {
-            Card card = game.getCard(cardId);
+        for (UUID objectId : objectIds) {
+            MageObject obj = game.getObject(objectId);
             JsonObject ref = new JsonObject();
-            ref.addProperty("id", cardId.toString());
-            ref.addProperty("zcc", card != null ? card.getZoneChangeCounter(game) : null);
-            ref.addProperty("cardName", card != null ? card.getName() : null);
+            ref.addProperty("id", objectId.toString());
+            ref.addProperty("zcc", obj != null ? obj.getZoneChangeCounter(game) : null);
+            ref.addProperty("objectName", obj != null ? obj.getName() : null);
+            ref.addProperty("type", getObjectType(obj));
+            ref.addProperty("class", obj != null ? obj.getClass().getSimpleName() : null);
             arr.add(ref);
         }
         return arr;
+    }
+
+    private static String getObjectType(MageObject obj) {
+        if (obj == null) {
+            return null;
+        }
+        if (obj instanceof Permanent) {
+            return "PERMANENT";
+        } else if (obj instanceof CommandObject) {
+            return "COMMAND_OBJECT";
+        } else if (obj instanceof Card) {
+            return "CARD";
+        }
+        return obj.getClass().getSimpleName();
     }
 
     private static boolean addIfChanged(JsonObject target, String fieldName, int before, int after) {
