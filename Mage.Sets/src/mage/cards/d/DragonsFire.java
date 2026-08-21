@@ -128,7 +128,8 @@ class DragonsFireCost extends CostImpl {
                 if (controller.chooseUse(Outcome.Benefit, "Choose a dragon on the battlefield?", source, game)) {
                     chosenZone = DragonZone.BATTLEFIELD;
                 }
-            } else {
+            }
+            if (chosenZone == null) {
                 return false;
             }
             switch (chosenZone) {
