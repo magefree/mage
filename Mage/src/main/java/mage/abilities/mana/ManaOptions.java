@@ -3,6 +3,7 @@ package mage.abilities.mana;
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
 import mage.constants.ManaType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -61,34 +62,20 @@ public class ManaOptions extends LinkedHashSet<Mana> {
 
         } else { // mana source has more than 1 ability
             //perform a union of all existing options and the new options
-            List<Mana> copy = new ArrayList<>(this);
-            this.clear();
+            ManaOptions out = new ManaOptions();
             for (ActivatedManaAbilityImpl ability : abilities) {
                 for (Mana netMana : ability.getNetMana(game)) {
                     checkManaReplacementAndTriggeredMana(ability, game, netMana);
                     for (Mana triggeredManaVariation : getTriggeredManaVariations(game, ability, netMana)) {
-                        SkipAddMana:
-                        for (Mana mana : copy) {
-                            Mana newMana = new Mana();
-                            newMana.add(mana);
-                            newMana.add(triggeredManaVariation);
-                            for (Mana existingMana : this) {
-                                if (existingMana.equalManaValue(newMana)) {
-                                    continue SkipAddMana;
-                                }
-                                Mana moreValuable = Mana.getMoreValuableMana(newMana, existingMana);
-                                if (moreValuable != null) {
-                                    // only keep the more valuable mana
-                                    existingMana.setToMana(moreValuable);
-                                    continue SkipAddMana;
-                                }
-                            }
-                            this.add(newMana);
-                        }
+                        ManaOptions copy = new ManaOptions(this);
+                        copy.addMana(triggeredManaVariation);
+                        out.addAll(copy);
                     }
-
                 }
             }
+            out.removeFullyIncludedVariations();
+            this.clear();
+            this.addAll(out);
         }
     }
 
@@ -348,7 +335,6 @@ public class ManaOptions extends LinkedHashSet<Mana> {
             }
         }
     }
-
     public void addMana(ManaOptions options) {
         if (isEmpty()) {
             this.add(new Mana());
