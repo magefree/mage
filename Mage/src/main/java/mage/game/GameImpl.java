@@ -1853,10 +1853,11 @@ public abstract class GameImpl implements Game {
     protected void resolve() {
         StackObject top = null;
         boolean wasError = false;
+        boolean applied = false;
         try {
             top = state.getStack().peek();
-            DataCollectorServices.getInstance().onTestsStackResolve(this);
-            top.resolve(this);
+            DataCollectorServices.getInstance().onTestsStackResolveStart(this, top);
+            applied = top.resolve(this);
             resetControlAfterSpellResolve(top.getId());
         } catch (Throwable e) {
             // workaround to show real error in tests instead checkInfiniteLoop
@@ -1874,6 +1875,7 @@ public abstract class GameImpl implements Game {
                     }
                 }
             }
+            DataCollectorServices.getInstance().onTestsStackResolveEnd(this, top, applied);
         }
     }
 

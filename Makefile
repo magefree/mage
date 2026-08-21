@@ -28,6 +28,12 @@ test-verify-cards:
 		-Dxmage.tests.verifyCheckSetCodes="$(VERIFY_CHECK_SET_CODES)" \
 		test
 
+test-with-game-logs:
+	mvn -B -pl Mage.Tests -am \
+		-Dxmage.dataCollectors.printGameLogs=true \
+		-Dxmage.build.tests.treeViewRunnerShowAllLogs=true \
+		test 2>&1 | tee tests_results.log
+
 .PHONY: package
 package:
 	# Packaging Mage.Client to zip
