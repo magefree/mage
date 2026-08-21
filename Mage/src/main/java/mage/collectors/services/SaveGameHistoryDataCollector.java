@@ -32,7 +32,7 @@ import java.util.stream.Stream;
  * - real table logs and chats (table_logs.txt, table_chat.txt);
  * - real game logs and chats (game_logs.html, chat_logs.html);
  * - real deck files (deck_player_xxx.dck);
- * - custom resolve logs for AI's card analyse (resolve_logs.jsonl);
+ * - custom resolve logs for AI's card analyse (gmae_resolve_logs.jsonl);
  * <p>
  * Possible use cases:
  * - load tests or public server analyse and debug to find freeze AI games;
@@ -56,7 +56,7 @@ import java.util.stream.Stream;
  * -             game 1 - UUID
  * -             game 2 - UUID
  * -               game_logs.html
- * -               resolve_logs.jsonl
+ * -               game_resolve_logs.jsonl
  * -               chat_logs.html
  * -               deck_player_1.dck
  * -               deck_player_2.dck

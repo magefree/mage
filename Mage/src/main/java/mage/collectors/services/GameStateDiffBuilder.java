@@ -296,27 +296,6 @@ public class GameStateDiffBuilder {
         return anyChanged;
     }
 
-    /**
-     * Abilities diff for a permanent - compared by (class name + rule text) key, counting
-     * OCCURRENCES (multiset), not just presence/absence.
-     * <p>
-     * Two reasons a plain rule-text comparison isn't enough:
-     * - shield-like abilities (regeneration shields, protection instances, etc) - the game
-     *   engine legitimately creates multiple distinct Ability instances with identical rule
-     *   text, so a Set would collapse "gained a 2nd identical shield" into "no change";
-     * - hidden/silent abilities with an empty or identical rule text but different underlying
-     *   classes (e.g. internal marker abilities) - comparing by text alone would conflate them
-     *   into the same key even though they're functionally different abilities.
-     * <p>
-     * getClass().getSimpleName() is used for the class part - for a nested/inner class (the
-     * common XMage pattern of defining a card's own Ability/Effect class inside the card's own
-     * file) this already returns just the inner class's own name, no outer-class prefix or
-     * '$' separator, so it's uniform for both top-level and inner classes.
-     * <p>
-     * Uses getAbilities(game) (not the no-arg overload) so abilities granted by continuous
-     * effects through the layer system are included, matching how isFaceDown(game)/isTapped
-     * work elsewhere in this file.
-     */
     private static boolean addAbilitiesIfChanged(JsonObject target, Permanent prevP, Permanent p, Game prevGame, Game game) {
         // permanent-scope changes in abilities list
         // store class name + rule text as key co detect multiple instances of the same ability (shield-like effects)
@@ -365,13 +344,6 @@ public class GameStateDiffBuilder {
         return result;
     }
 
-    /**
-     * ContinuousEffect.getText(Mode) needs a Mode, which the effect itself doesn't carry -
-     * only the Ability it came from does. ContinuousEffectsList tracks that effect->ability
-     * link internally (getAbility), so we look it up from there. Defensive try/catch: getText()
-     * implementations can assume specific state that may not hold mid-resolution, and this is a
-     * diagnostic tool - a text-building failure here must not break the diff/crash the resolve.
-     */
     private static String getContinuousEffectText(ContinuousEffectsList<?> layer, ContinuousEffect effect) {
         // text generation require a selected mode info
         // TODO: add multi modes support here
@@ -424,11 +396,6 @@ public class GameStateDiffBuilder {
         return true;
     }
 
-    /**
-     * Generic name->count diff field (used for both counters and abilities/layerEffects
-     * multisets). before:null means "brand new object, nothing to diff against" - full
-     * current state is still reported in "after" so the info isn't lost.
-     */
     private static void addMapField(JsonObject target, String fieldName, Map<String, Integer> before, Map<String, Integer> after) {
         JsonObject field = new JsonObject();
         field.add("before", before != null ? buildMapToJson(before) : JsonNull.INSTANCE);
