@@ -893,13 +893,13 @@ public final class DoctorWho extends ExpansionSet {
         //cards.add(new SetCardInfo("The Doctor's Childhood Barn", 579, Rarity.COMMON, mage.cards.t.TheDoctorsChildhoodBarn.class));
         //cards.add(new SetCardInfo("The Doctor's Tomb", 580, Rarity.COMMON, mage.cards.t.TheDoctorsTomb.class));
         //cards.add(new SetCardInfo("The Drum, Mining Facility", 581, Rarity.COMMON, mage.cards.t.TheDrumMiningFacility.class));
-        //cards.add(new SetCardInfo("The Eighth Doctor", "559z", Rarity.RARE, mage.cards.t.TheEighthDoctor.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Eighth Doctor", 1001, Rarity.RARE, mage.cards.t.TheEighthDoctor.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Eighth Doctor", 1150, Rarity.RARE, mage.cards.t.TheEighthDoctor.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Eighth Doctor", 124, Rarity.RARE, mage.cards.t.TheEighthDoctor.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Eighth Doctor", 410, Rarity.RARE, mage.cards.t.TheEighthDoctor.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Eighth Doctor", 559, Rarity.RARE, mage.cards.t.TheEighthDoctor.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Eighth Doctor", 729, Rarity.RARE, mage.cards.t.TheEighthDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Eighth Doctor", "559z", Rarity.RARE, mage.cards.t.TheEighthDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Eighth Doctor", 1001, Rarity.RARE, mage.cards.t.TheEighthDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Eighth Doctor", 1150, Rarity.RARE, mage.cards.t.TheEighthDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Eighth Doctor", 124, Rarity.RARE, mage.cards.t.TheEighthDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Eighth Doctor", 410, Rarity.RARE, mage.cards.t.TheEighthDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Eighth Doctor", 559, Rarity.RARE, mage.cards.t.TheEighthDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Eighth Doctor", 729, Rarity.RARE, mage.cards.t.TheEighthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Eleventh Doctor", "562z", Rarity.RARE, mage.cards.t.TheEleventhDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Eleventh Doctor", 1002, Rarity.RARE, mage.cards.t.TheEleventhDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Eleventh Doctor", 1153, Rarity.RARE, mage.cards.t.TheEleventhDoctor.class, NON_FULL_USE_VARIOUS));//
