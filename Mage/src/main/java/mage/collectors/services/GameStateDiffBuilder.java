@@ -71,6 +71,7 @@ public class GameStateDiffBuilder {
         root.addProperty("turn", game.getState().getTurnNum());
         root.addProperty("step", game.getState().getTurnStepType() != null ? game.getState().getTurnStepType().toString() : null);
         root.addProperty("applied", applied);
+        root.addProperty("timestampMs", System.currentTimeMillis());
 
         // extra info for unit tests
         root.addProperty("testClassName", findCurrentTestClassName(game.getPlayers().values().iterator().next()));
