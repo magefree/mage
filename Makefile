@@ -34,6 +34,21 @@ test-with-game-logs:
 		-Dxmage.build.tests.treeViewRunnerShowAllLogs=true \
 		test 2>&1 | tee tests_results.log
 
+
+MAX_GAMES_AMOUNT ?= 1
+test-ai-games-build:
+	mvn -q -pl Mage.Tests -am \
+	compile test-compile dependency:build-classpath \
+	-Dmdep.outputFile=/tmp/mage-cp.txt
+	
+test-ai-games-run: test-ai-games-build
+	java -cp "Mage.Tests/target/classes:Mage.Tests/target/test-classes:$$(cat /tmp/mage-cp.txt)" \
+		--add-opens=java.base/java.io=ALL-UNNAMED \
+		-Dxmage.dataCollectors.printGameLogs=true \
+		-Dxmage.loadTests.maxGamesAmount=$(MAX_GAMES_AMOUNT) \
+		org.junit.runner.JUnitCore org.mage.test.load.LoadTest \
+		2>&1 | tee tests_results.log
+
 .PHONY: package
 package:
 	# Packaging Mage.Client to zip

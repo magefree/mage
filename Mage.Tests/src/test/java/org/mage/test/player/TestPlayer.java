@@ -2278,54 +2278,47 @@ public class TestPlayer implements Player {
     }
 
     public boolean tryToChooseByChoices(Game game, Choice choiceDialog, List<String> answers) {
+        String needChoice = answers.get(0);
+
         if (choiceDialog.isKeyChoice()) {
             // keys mode
-            for (String needChoice : answers) {
-                for (Map.Entry<String, String> currentChoice : choiceDialog.getKeyChoices().entrySet()) {
-                    if (currentChoice.getKey().equals(needChoice)) {
-                        choiceDialog.setChoiceByKey(needChoice, false);
-                        choicesRemoveCurrent(game, "on choose key choice");
-                        return true;
-                    }
+            for (Map.Entry<String, String> currentChoice : choiceDialog.getKeyChoices().entrySet()) {
+                if (currentChoice.getKey().equals(needChoice)) {
+                    choiceDialog.setChoiceByKey(needChoice, false);
+                    choicesRemoveCurrent(game, "on choose key choice");
+                    return true;
                 }
-                // it's allow to choose key values by text, so do not raise error here
-                break;
-                // TODO: replace by 0 instead for
             }
 
+            // it's allow to choose key values by text, so do not raise error here
             // text answers support, so dev can use setChoice by 1,2,3 or real text
-            for (String needChoice : answers) {
-                for (Map.Entry<String, String> currentChoice : choiceDialog.getKeyChoices().entrySet()) {
-                    String choiceValue = currentChoice.getValue();
-                    // Clean any html part (for easier unit test matching)
-                    String cleanedChoiceValue = choiceValue.replaceAll("<[^<>]*>", "");
-                    if (choiceValue.startsWith(needChoice) || cleanedChoiceValue.startsWith(needChoice)) {
-                        // TODO: wtf, need research - is it used?
-                        choiceDialog.setChoiceByKey(currentChoice.getKey(), false);
-                        choicesRemoveCurrent(game, "on choose key choice");
-                        return true;
-                    }
+            for (Map.Entry<String, String> currentChoice : choiceDialog.getKeyChoices().entrySet()) {
+                String choiceValue = currentChoice.getValue();
+                // Clean any html part (for easier unit test matching)
+                String cleanedChoiceValue = choiceValue.replaceAll("<[^<>]*>", "");
+                if (choiceValue.startsWith(needChoice) || cleanedChoiceValue.startsWith(needChoice)) {
+                    // TODO: wtf, need research - is it used?
+                    choiceDialog.setChoiceByKey(currentChoice.getKey(), false);
+                    choicesRemoveCurrent(game, "on choose key choice");
+                    return true;
                 }
-                // TODO: replace by 0 instead for
-                throw new IllegalArgumentException("Choice key [" + needChoice + "] not found in " + choiceDialog.getChoices());
             }
+            
+            throw new IllegalArgumentException("Choice key [" + needChoice + "] not found in " + choiceDialog.getChoices());
         } else {
             // string mode
-            for (String needChoice : answers) {
-                for (String currentChoice : choiceDialog.getChoices()) {
-                    // Clean any html part (for easier unit test matching)
-                    String cleanedChoiceValue = currentChoice.replaceAll("<[^<>]*>", "");
-                    if (currentChoice.equals(needChoice) || cleanedChoiceValue.equals(needChoice)) {
-                        choiceDialog.setChoice(needChoice, false);
-                        choicesRemoveCurrent(game, "on choose text choice");
-                        return true;
-                    }
+            for (String currentChoice : choiceDialog.getChoices()) {
+                // Clean any html part (for easier unit test matching)
+                String cleanedChoiceValue = currentChoice.replaceAll("<[^<>]*>", "");
+                if (currentChoice.equals(needChoice) || cleanedChoiceValue.equals(needChoice)) {
+                    choiceDialog.setChoice(needChoice, false);
+                    choicesRemoveCurrent(game, "on choose text choice");
+                    return true;
                 }
-                // TODO: replace by 0 instead for
-                throw new IllegalArgumentException("Choice key [" + needChoice + "] not found in " + choiceDialog.getChoices());
             }
+            // TODO: replace by 0 instead for
+            throw new IllegalArgumentException("Choice key [" + needChoice + "] not found in " + choiceDialog.getChoices());
         }
-        return false; // can't find answer
     }
 
     @Override
