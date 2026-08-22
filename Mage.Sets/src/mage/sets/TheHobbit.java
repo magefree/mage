@@ -148,6 +148,9 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Lake-town Lookout", 18, Rarity.COMMON, mage.cards.l.LakeTownLookout.class));
         cards.add(new SetCardInfo("Lakeshore Apothecary", 43, Rarity.COMMON, mage.cards.l.LakeshoreApothecary.class));
         cards.add(new SetCardInfo("Large Bear", 159, Rarity.UNCOMMON, mage.cards.l.LargeBear.class));
+        cards.add(new SetCardInfo("Last Light of Durin's Day", 103, Rarity.RARE, mage.cards.l.LastLightOfDurinsDay.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Last Light of Durin's Day", 228, Rarity.RARE, mage.cards.l.LastLightOfDurinsDay.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Last Light of Durin's Day", 264, Rarity.RARE, mage.cards.l.LastLightOfDurinsDay.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Little Bear", 128, Rarity.COMMON, mage.cards.l.LittleBear.class));
         cards.add(new SetCardInfo("Long Lake Nuisance", 45, Rarity.COMMON, mage.cards.l.LongLakeNuisance.class));
         cards.add(new SetCardInfo("Long-Bodied Grey Dog", 1, Rarity.COMMON, mage.cards.l.LongBodiedGreyDog.class));
