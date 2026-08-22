@@ -420,6 +420,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Tony Stark", 350, Rarity.MYTHIC, mage.cards.t.TonyStark.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tony Stark", 363, Rarity.MYTHIC, mage.cards.t.TonyStark.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tony Stark", 392, Rarity.MYTHIC, mage.cards.t.TonyStark.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Too Evil to Stay Dead", 118, Rarity.UNCOMMON, mage.cards.t.TooEvilToStayDead.class));
         cards.add(new SetCardInfo("Training Compound", 275, Rarity.RARE, mage.cards.t.TrainingCompound.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Training Compound", 384, Rarity.RARE, mage.cards.t.TrainingCompound.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Training Regimen", 192, Rarity.UNCOMMON, mage.cards.t.TrainingRegimen.class));
