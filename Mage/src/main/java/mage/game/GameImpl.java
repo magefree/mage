@@ -1827,7 +1827,7 @@ public abstract class GameImpl implements Game {
                             continue;
                         } else {
                             // tests - try to fail fast
-                            throw new MageException(UNIT_TESTS_ERROR_TEXT);
+                            throw new MageException(UNIT_TESTS_ERROR_TEXT + ": " + e.getMessage(), e);
                         }
                     }
                     state.getPlayerList().getNext();
@@ -1841,8 +1841,8 @@ public abstract class GameImpl implements Game {
             this.end();
 
             // re-raise error in unit tests, so framework can catch it (example: errors in AI simulations)
-            if (UNIT_TESTS_ERROR_TEXT.equals(e.getMessage())) {
-                throw new IllegalStateException(UNIT_TESTS_ERROR_TEXT);
+            if (e.getMessage() != null && e.getMessage().contains(UNIT_TESTS_ERROR_TEXT)) {
+                throw new IllegalStateException(e.getMessage(), e);
             }
         } finally {
             resetLKI();
