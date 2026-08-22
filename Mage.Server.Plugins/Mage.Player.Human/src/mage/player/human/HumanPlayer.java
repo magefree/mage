@@ -2385,6 +2385,14 @@ public class HumanPlayer extends PlayerImpl {
         // force to show ability picker for double faces cards in hand/commander/exile and other zones
         Card mainCard = game.getCard(CardUtil.getMainCardId(game, ability.getSourceId()));
         if (mainCard != null && !Zone.BATTLEFIELD.equals(game.getState().getZone(mainCard.getId()))) {
+            if (mainCard instanceof CardWithSpellOption) {
+                CardWithSpellOption card = (CardWithSpellOption) mainCard;
+                boolean mainAvailable = card.isMainCardCastOptionAvailable(game);
+                boolean spellAvailable = card.isSpellCardCastOptionAvailable(game);
+                if (mainAvailable != spellAvailable) {
+                    return true;
+                }
+            }
             if (mainCard instanceof SplitCard
                     || mainCard instanceof CardWithSpellOption
                     || mainCard instanceof ModalDoubleFacedCard) {

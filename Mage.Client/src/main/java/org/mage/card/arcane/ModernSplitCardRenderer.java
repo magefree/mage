@@ -55,13 +55,6 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     private boolean isFuse = false;
     private boolean isAftermath = false;
 
-    private static String trimAdventure(String rule) {
-        if (rule.startsWith("Adventure") || rule.startsWith("Omen")) {
-            return rule.substring(rule.lastIndexOf("&mdash;") + 8);
-        }
-        return rule;
-    }
-
     public ModernSplitCardRenderer(CardView view) {
         super(view);
 
@@ -71,15 +64,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         rightHalf.color = new ObjectColor(cardView.getRightSplitCostsStr());
         leftHalf.color = new ObjectColor(cardView.getLeftSplitCostsStr());
 
-        if (isCardWithSpellOption()) {
-            List<String> trimmedRules = new ArrayList<>();
-            for (String rule : view.getRightSplitRules()) {
-                trimmedRules.add(trimAdventure(rule));
-            }
-            parseRules(trimmedRules, rightHalf.keywords, rightHalf.rules);
-        } else {
-            parseRules(view.getRightSplitRules(), rightHalf.keywords, rightHalf.rules);
-        }
+        parseRules(view.getRightSplitRules(), rightHalf.keywords, rightHalf.rules);
         parseRules(view.getLeftSplitRules(), leftHalf.keywords, leftHalf.rules);
 
         rightHalf.typeLineString = cardView.getRightSplitTypeLine();
@@ -321,38 +306,42 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         if (isCardWithSpellOption()) {
             super.drawFrame(g, attribs, image, lessOpaqueRulesTextBox);
 
+            int spellOptionX = isPrepareSpellOption
+                    ? totalContentInset + contentWidth / 2
+                    : totalContentInset;
+
             CardPanelAttributes adventureAttribs = new CardPanelAttributes(
                     attribs.cardWidth, attribs.cardHeight, attribs.isChoosable,
                     attribs.isSelected, true);
 
             // Draw the adventure name line box
             g.setPaint(getBoxColor(rightHalf.color, cardView.getCardTypes(), true));
-            g.fillRect(totalContentInset, typeLineY + boxHeight + 1,
+            g.fillRect(spellOptionX, typeLineY + boxHeight + 1,
                     contentWidth / 2 - 1, boxHeight - 2);
 
             // Draw the adventure type line box
             g.setPaint(getAdventureBoxColor(rightHalf.color));
-            g.fillRect(totalContentInset , typeLineY + boxHeight * 2 - 1,
+            g.fillRect(spellOptionX, typeLineY + boxHeight * 2 - 1,
                     contentWidth / 2 - 1, boxHeight - 2);
 
             // Draw the adventure text box
             g.setPaint(getTextboxPaint(rightHalf.color, cardView.getCardTypes(), cardWidth, lessOpaqueRulesTextBox));
-            g.fillRect(totalContentInset, typeLineY + boxHeight * 3 - 3,
+            g.fillRect(spellOptionX, typeLineY + boxHeight * 3 - 3,
                     contentWidth / 2 - 1, cardHeight - borderWidth * 3 - typeLineY - boxHeight * 3 + 2);
 
             // Draw the adventure name line
             drawNameLine(g, adventureAttribs, rightHalf.name, rightHalf.manaCostString,
-                    totalContentInset + 2, typeLineY + boxHeight,
+                    spellOptionX + 2, typeLineY + boxHeight,
                     contentWidth / 2 - 8, boxHeight - 2);
 
             // Draw the adventure type line
             drawTypeLine(g, adventureAttribs, rightHalf.typeLineString,
-                    totalContentInset + 2, typeLineY + boxHeight * 2 - 2,
+                    spellOptionX + 2, typeLineY + boxHeight * 2 - 2,
                     contentWidth / 2 - 8, boxHeight - 2, true);
 
             // Draw the adventure textbox rules
             drawRulesText(g, rightHalf.keywords, rightHalf.rules,
-                    totalContentInset + 3, typeLineY + boxHeight * 3 - 1,
+                    spellOptionX + 3, typeLineY + boxHeight * 3 - 1,
                     contentWidth / 2 - 8, cardHeight - borderWidth * 3 - typeLineY - boxHeight * 3 + 2, false);
         } else if (isAftermath()) {
             Graphics2D g2 = getUnmodifiedHalfContext(g);
