@@ -111,6 +111,8 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Gandalf, Spark Starter", 97, Rarity.UNCOMMON, mage.cards.g.GandalfSparkStarter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gandalf, Wandering Wizard", 41, Rarity.COMMON, mage.cards.g.GandalfWanderingWizard.class));
         cards.add(new SetCardInfo("Gathering of Darkness", 68, Rarity.UNCOMMON, mage.cards.g.GatheringOfDarkness.class));
+        cards.add(new SetCardInfo("Getaway Barrel", 303, Rarity.RARE, mage.cards.g.GetawayBarrel.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Getaway Barrel", 98, Rarity.RARE, mage.cards.g.GetawayBarrel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Giant's Boulder", 173, Rarity.COMMON, mage.cards.g.GiantsBoulder.class));
         cards.add(new SetCardInfo("Gleaming Splendor", 275, Rarity.MYTHIC, mage.cards.g.GleamingSplendor.class));
         cards.add(new SetCardInfo("Gigantic Big Bear", 126, Rarity.RARE, mage.cards.g.GiganticBigBear.class, NON_FULL_USE_VARIOUS));
