@@ -92,13 +92,13 @@ class TaskmasterMercenaryMimicCopyEffect extends OneShotEffect {
         UUID targetID = source.getFirstTarget();
         if (player != null && targetID != null) {
             Zone zone = game.getState().getZone(targetID);
-            if (zone.match(Zone.BATTLEFIELD)) {
+            if (zone != null && zone.match(Zone.BATTLEFIELD)) {
                 // Copy from Permanent (not card)
                 CopyPermanentEffect copyPermanentEffect = new CopyPermanentEffect(
                         new FilterCreaturePermanent(), new TaskmasterMercenaryMimicCopyApplier(), true
                 ).setDuration(Duration.UntilYourNextTurn);
                 copyPermanentEffect.apply(game, source);
-            } else if (zone.match(Zone.GRAVEYARD)) {
+            } else if (zone != null && zone.match(Zone.GRAVEYARD)) {
                 // Copy from Card
                 Card copyFromCard = game.getCard(targetID);
                 if (copyFromCard != null) {
