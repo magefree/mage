@@ -64,7 +64,7 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
         return extraPredicates.stream().allMatch(p -> p.apply(osp, game));
     }
 
-    public final void add(ObjectSourcePlayerPredicate predicate) {
+    public final FilterPermanent add(ObjectSourcePlayerPredicate predicate) {
         if (isLockedFilter()) {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }
@@ -73,6 +73,7 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
         Predicates.makeSurePredicateCompatibleWithFilter(predicate, Permanent.class);
 
         extraPredicates.add(predicate);
+        return this;
     }
 
     @Override
