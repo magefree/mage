@@ -184,6 +184,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Doctor Doom, King of Latveria", 6, Rarity.MYTHIC, mage.cards.d.DoctorDoomKingOfLatveria.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doctor Doom, King of Latveria", 880, Rarity.MYTHIC, mage.cards.d.DoctorDoomKingOfLatveria.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doctor Doom, Unrivaled", 654, Rarity.MYTHIC, mage.cards.d.DoctorDoomUnrivaled.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Doctor Jane Foster", 757, Rarity.UNCOMMON, mage.cards.d.DoctorJaneFoster.class));
         cards.add(new SetCardInfo("Doctor Spectrum", 590, Rarity.UNCOMMON, mage.cards.d.DoctorSpectrum.class));
         cards.add(new SetCardInfo("Doctor Strange, Surgeon", 591, Rarity.RARE, mage.cards.d.DoctorStrangeSurgeon.class));
         cards.add(new SetCardInfo("Donald Blake, Guise of Thor", 592, Rarity.UNCOMMON, mage.cards.d.DonaldBlakeGuiseOfThor.class));
