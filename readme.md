@@ -1,53 +1,43 @@
 # XMage — Magic, Another Game Engine
 
 [![Build Status](https://github.com/magefree/mage/actions/workflows/maven.yml/badge.svg)](https://github.com/magefree/mage/actions/workflows/maven.yml)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=magefree_mage&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=magefree_mage)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=magefree_mage&metric=coverage)](https://sonarcloud.io/summary/new_code?id=magefree_mage)
-[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=magefree_mage&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=magefree_mage)
 [![Latest release](https://img.shields.io/github/v/release/magefree/mage)](https://github.com/magefree/mage/releases/)
 [![Commits since latest release](https://img.shields.io/github/commits-since/magefree/mage/latest)](https://github.com/magefree/mage/commits/)
-[![Join the chat at https://gitter.im/magefree/mage](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/magefree/mage?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-XMage allows you to play Magic against one or more online players or computer opponents.
-It includes full rules enforcement for over **31 000** unique cards and more than 91 000 reprints from different editions.
-You can also find custom sets like Star Wars. All regular sets have nearly all implemented cards.
+XMage is a full rules-enforcement engine for playing Magic against other players or computer AI,
+online or on your own server. It supports over **32 000** unique cards and more than 91 000 reprints across official sets, plus custom sets like Star Wars.
 
-It supports single matches and tournaments with dozens of game modes like duel, multiplayer, standard, modern, commander,
-pauper, oathbreaker, historic, freeform, richman and much more.
+Local server supports a [special test mode](https://github.com/magefree/mage/wiki/Development-Testing-Tools) for testing combos and other game situations with pre-defined conditions.
 
-Local server supports a [special test mode](https://github.com/magefree/mage/wiki/Development-Testing-Tools) for
-testing combos and other game situations with pre-defined conditions.
-
-There are [public servers](http://xmage.today/servers/) where you can play XMage against other players.
-You can also host your own server to play against the AI and/or your friends.
+There are public servers where you can play XMage against other players.
+You can also host your own server to play against the AI and/or your friends — including fully offline, with no internet connection required.
 
 XMage community and resources:
 * [Official XMage support and feature request on github](https://github.com/magefree/mage/issues);
-* [Official XMage forum](http://www.slightlymagic.net/forum/viewforum.php?f=70) (outdated);
 * [Reddit XMage group](https://www.reddit.com/r/XMage/);
 * [Reddit XMage discord channel](https://discord.gg/Pqf42yn);
-* [Latest changes](https://github.com/magefree/mage/commits/master);
 * [Latest news](https://jaydi85.github.io/xmage-web-news/news.html);
 * [Latest releases](https://github.com/magefree/mage/releases);
 * [Project documentation](https://github.com/magefree/mage/wiki).
 
-Servers status:
-* http://xmage.today/servers/ (temporarily out of service)
+Official public server with released version:
+* http://xmage.today/
 
-Beta server with un-released or under development features:
-* http://xmage.today/ (release version)
+Other servers and status:
+* http://xmage.today/servers/ (temporarily out of service)
 
 ## Features
 
-* Multiplatform app: Windows, Linux, MacOS;
-* Deck editor (support multiple deck formats and deck sources);
-* Two player duel or a multiplayer free-for-all game with up to 10 players;
-* Computer AI opponents;
+* The most tested open-source rules enforcement engine: ~9000 unit tests, ~80% coverage;
+* Cross-platform support: Windows, Linux, MacOS;
+* Two-player duels or multiplayer games (Commander and others) with up to 10 players;
+* Drafts, tournaments and single games with sideboarding supported;
+* Smart and fast AI opponents for both games and draft/deck-building;
+* Cheat-proof by design: all rules and hidden information are enforced server-side — clients never see or act on data they're not authorized to;
+* Deck editor (support deck import from multiple apps and services);
 * Players rating system (Glicko);
-* Supports special formats like Commander (up to 10 players), Oathbreaker, Cube, Tiny Leaders, Super Standard, Historic Standard and more;
-* Single matches or tournaments supported (elimination or swiss type handling), which can be played with up to 16 players:
-    * Booster (also Cube) draft tournaments (4-16)
-    * Sealed (also from Cube) tournaments (2-16)
+* Supports dozens of formats and game modes like Commander, Oathbreaker, Cube, Tiny Leaders, Super Standard, Historic Standard and more;
+* Single matches or tournaments supported (elimination or swiss type handling), which can be played with up to 16 players;
 
 ## Bug report / feature request
 
@@ -55,17 +45,12 @@ The best way to report bug or feature request is [github's issues page](https://
 
 ## Installation / running
 
-* Download [latest XMage launcher and app files](http://xmage.today/) and un-pack it to any folder like `D:\games\xmage`;
-* You need to have [Java version 8 or later](http://java.com/) to run launcher.
+* Download files and follow install instructions on http://xmage.today/
+* You need to have [Java version 8 or later](http://java.com/) to run launcher;
+* Recommended folder to unpack/install: `D:\games\xmage` (don't use Program Files or Download folders);
+* If you want to play with AI opponents then must run "server" app via the launcher and connect to it via localhost;
 
-[Wiki page](https://github.com/magefree/mage/wiki) contains detail information about private or public server setup.
-
-### Server options
-
-The XMage server locates by default the configuration file from the current working directory to the relative path `config/config.xml`
-(`config\config.xml` in Windows). To change this location, start the server with the property `xmage.config.path` set
-to the desired location, for example `-Dxmage.config.path=config/otherconfig.xml`. The option can be set from the
-XMageLauncher in `Settings > Java > Server java options`.
+[Wiki page](https://github.com/magefree/mage/wiki) contains detailed information about private or public server setup, developer onboarding and other useful things
 
 ## Troubleshooting / FAQ
 
@@ -84,45 +69,16 @@ Github issues page contain [popular problems and fixes](https://github.com/magef
 
 ## Performance tweaks
 
-If you have a good GPU, it's very likely you'll be able to increase performance by **a lot** through extra Java flags.
+The main way to increase performance or fix micro-freezes -- increase max memory usage by special java flag:
+1. Run launcher -> Settings -> Java tab -> Client java options text field;
+2. Add or change existing flag to ` -Xmx3000m` or another value based on your free memory stats (recommended settings: 2000m for 1080p desktop, 3000m for 4k desktop). It's useless to give 5+ GB memory;
+3. If you play many AI games then it's recommended to change Server java options with same value too;
 
-XMage runs on JRE 8, so [this link](https://docs.oracle.com/javase/8/docs/technotes/guides/2d/flags.html) should give you the available flags.
-
-### How to enable the extra flags
-
-1. Launch XMage
-2. In the menu bar from the launcher, click on "Settings", which will open up the Settings Window
-3. Go to the "Java" tab
-4. You can pass extra flags by editing the "Client java options" text field
-
-### Linux tweaks
-
-#### Enable OpenGL
-
-More info about [OpenGL](https://docs.oracle.com/javase/8/docs/technotes/guides/2d/flags.html#opengl):
-* `-Dsun.java2d.opengl=true`
-
-Possible problems:
-* _**Caveat**_: [There's a bug](https://bugs.openjdk.java.net/browse/JDK-6545140) with the file chooser when OpenGL is enabled (you use the file chooser when you, for instance, try to load a deck from disk). The [suggested workaround](https://bugs.java.com/bugdatabase/view_bug.do?bug_id=6439320) will make the game crash, so it's not an option.
-* _**Workaround**_: When using [i3](https://github.com/i3/i3), you're able to work around the bug by toggling the "floating" capabilities of the window and forcing it to re-render.
-
-#### Enable XRender
-
-More info about [XRender](https://docs.oracle.com/javase/8/docs/technotes/guides/2d/flags.html#xrender):
-* `-Dsun.java2d.xrender=true`
-
-#### Increase memory usage
-
-This is not guaranteed to yield improvements, but it depends on your use-case.
-If you have a lot of RAM to spare, you can increase the initial heap size for good measure.
-More details about [memory settings](https://stackoverflow.com/a/57839720/8401696):
-* `-Xmx2G`
-
-## Developer
+## Development
 
 Full project documentation and instructions for developers can be found in [wiki pages](http://github.com/magefree/mage/wiki/).
 
-First steps for Xmage's developers:
+First steps for XMage's developers:
 * [Setting up your Development Environment](https://github.com/magefree/mage/wiki/Setting-up-your-Development-Environment)
 * [Development Testing Tools](https://github.com/magefree/mage/wiki/Development-Testing-Tools)
 * [Development Workflow](https://github.com/magefree/mage/wiki/Development-Workflow)

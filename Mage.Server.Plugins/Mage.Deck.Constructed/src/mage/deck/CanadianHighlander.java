@@ -32,13 +32,12 @@ public class CanadianHighlander extends Constructed {
         pointMap.put("Mana Drain", 1);
         pointMap.put("Mana Vault", 1);
         pointMap.put("Merchant Scroll", 1);
-        pointMap.put("Minsc & Boo, Timeless Heroes", 1);
         pointMap.put("Mox Emerald", 3);
         pointMap.put("Mox Jet", 3);
         pointMap.put("Mox Pearl", 3);
         pointMap.put("Mox Ruby", 3);
         pointMap.put("Mox Sapphire", 3);
-        pointMap.put("Mystical Tutor", 1);
+        pointMap.put("Mystical Tutor", 2);
         pointMap.put("Nadu, Winged Wisdom", 1);
         pointMap.put("Natural Order", 1);
         pointMap.put("Psychic Frog", 1);
@@ -46,9 +45,11 @@ public class CanadianHighlander extends Constructed {
         pointMap.put("Sol Ring", 3);
         pointMap.put("Strip Mine", 1);
         pointMap.put("Tainted Pact", 1);
-        pointMap.put("Thassa's Oracle", 6);
+        pointMap.put("Tamiyo, Inquisitive Student", 1);
+        pointMap.put("Thassa's Oracle", 5);
+        pointMap.put("The One Ring", 1);
         pointMap.put("Time Vault", 7);
-        pointMap.put("Time Walk", 6);
+        pointMap.put("Time Walk", 5);
         pointMap.put("Tinker", 3);
         pointMap.put("Tolarian Academy", 1);
         pointMap.put("Treasure Cruise", 1);
