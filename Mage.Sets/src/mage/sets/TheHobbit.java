@@ -146,6 +146,8 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Iron Hills Stalwart", 102, Rarity.COMMON, mage.cards.i.IronHillsStalwart.class));
         cards.add(new SetCardInfo("Island", 190, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 195, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kili the Resourceful", 17, Rarity.RARE, mage.cards.k.KiliTheResourceful.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kili the Resourceful", 287, Rarity.RARE, mage.cards.k.KiliTheResourceful.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lake-town", 186, Rarity.COMMON, mage.cards.l.LakeTown.class));
         cards.add(new SetCardInfo("Lake-town Lookout", 18, Rarity.COMMON, mage.cards.l.LakeTownLookout.class));
         cards.add(new SetCardInfo("Lake-town Mariners", 44, Rarity.UNCOMMON, mage.cards.l.LakeTownMariners.class));
