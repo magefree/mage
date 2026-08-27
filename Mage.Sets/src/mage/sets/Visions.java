@@ -175,6 +175,7 @@ public final class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Teferi's Realm", 44, Rarity.RARE, mage.cards.t.TeferisRealm.class, RETRO_ART));
         cards.add(new SetCardInfo("Tempest Drake", 139, Rarity.UNCOMMON, mage.cards.t.TempestDrake.class, RETRO_ART));
         cards.add(new SetCardInfo("Three Wishes", 45, Rarity.RARE, mage.cards.t.ThreeWishes.class, RETRO_ART));
+        cards.add(new SetCardInfo("Time and Tide", 46, Rarity.UNCOMMON, mage.cards.t.TimeAndTide.class, RETRO_ART));
         cards.add(new SetCardInfo("Tin-Wing Chimera", 157, Rarity.UNCOMMON, mage.cards.t.TinWingChimera.class, RETRO_ART));
         cards.add(new SetCardInfo("Tithe", 23, Rarity.RARE, mage.cards.t.Tithe.class, RETRO_ART));
         cards.add(new SetCardInfo("Tremor", 99, Rarity.COMMON, mage.cards.t.Tremor.class, RETRO_ART));
