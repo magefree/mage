@@ -1364,6 +1364,7 @@ public abstract class GameImpl implements Game {
         //20091005 - 103.3
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
+            player.initStartingDeckSize();
             if (!gameOptions.testMode || player.getLife() == 0) {
                 player.initLife(this.getStartingLife());
             }

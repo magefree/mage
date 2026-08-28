@@ -3446,6 +3446,16 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public int getStartingDeckSize() {
+        return computerPlayer.getStartingDeckSize();
+    }
+
+    @Override
+    public void initStartingDeckSize() {
+        computerPlayer.initStartingDeckSize();
+    }
+
+    @Override
     public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game) {
         return computerPlayer.addCounters(counter, source.getControllerId(), source, game);
     }
