@@ -2,13 +2,12 @@ package mage.cards.c;
 
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.MillCardsCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.effects.mana.ManaEffect;
-import mage.abilities.effects.mana.BasicManaEffect;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -47,17 +46,11 @@ public final class CharmedPendant extends CardImpl {
     }
 }
 
-class CharmedPendantAbility extends ActivatedManaAbilityImpl {
+class CharmedPendantAbility extends ActivatedAbilityImpl {
 
     public CharmedPendantAbility() {
         super(Zone.BATTLEFIELD, new CharmedPendantManaEffect(), new TapSourceCost());
         this.addCost(new MillCardsCost());
-        this.setUndoPossible(false); // Otherwise you could return the card from graveyard
-    }
-
-    public CharmedPendantAbility(Zone zone, Mana mana, Cost cost) {
-        super(zone, new BasicManaEffect(mana), cost);
-
     }
 
     private CharmedPendantAbility(final CharmedPendantAbility ability) {

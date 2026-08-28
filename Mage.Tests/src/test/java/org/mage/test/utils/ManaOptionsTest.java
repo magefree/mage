@@ -78,12 +78,12 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         assertManaOptions("{U}{U}{U}", manaOptions);
     }
 
-    // Chromatic Sphere
-    // {1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color. Draw a card.
+    // Arcum's Astrolabe
+    // {1}, {T}: Add one mana of any color.
     @Test
-    public void testChromaticSphere() {
+    public void testArcumsAstrolabe() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
-        addCard(Zone.BATTLEFIELD, playerA, "Chromatic Sphere", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Arcum's Astrolabe", 2);
 
         setStopAt(1, PhaseStep.UPKEEP);
         execute();
@@ -328,8 +328,8 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         // {1}, {T}, Sacrifice Chromatic Star: Add one mana of any color.
         // When Chromatic Star is put into a graveyard from the battlefield, draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Chromatic Star", 1);
-        // {1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color. Draw a card.
-        addCard(Zone.BATTLEFIELD, playerA, "Chromatic Sphere", 1);
+        // {1}, {T}: Add one mana of any color.
+        addCard(Zone.BATTLEFIELD, playerA, "Arcum's Astrolabe", 1);
         // {T}: Add {C}. If you control an Urza's Mine and an Urza's Power-Plant, add {C}{C}{C} instead.
         addCard(Zone.BATTLEFIELD, playerA, "Urza's Tower", 1);
         // {T}: Add {C}.
