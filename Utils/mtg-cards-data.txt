@@ -64998,3 +64998,366 @@ Swiftfoot Boots|Mystery Booster Commander Edition|77|U|{2}|Artifact - Equipment|
 Thought Vessel|Mystery Booster Commander Edition|78|U|{2}|Artifact|||You have no maximum hand size.${T}: Add {C}.|
 Exotic Orchard|Mystery Booster Commander Edition|79|R||Land|||{T}: Add one mana of any color that a land an opponent controls could produce.|
 Path of Ancestry|Mystery Booster Commander Edition|80|C||Land|||This land enters tapped.${T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1.|
+All That Glitters|The Zeta Set|1|C|{1}{W}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +1/+1 for each artifact and/or enchantment you control.|
+Dispatch|The Zeta Set|2|C|{W}|Instant|||Tap target creature.$Metalcraft -- If you control three or more artifacts, exile that creature.|
+Eerie Interlude|The Zeta Set|3|R|{2}{W}|Instant|||Exile any number of target creatures you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.|
+Generous Gift|The Zeta Set|4|C|{2}{W}|Instant|||Destroy target permanent. Its controller creates a 3/3 green Elephant creature token.|
+Land Tax|The Zeta Set|5|R|{W}|Enchantment|||At the beginning of your upkeep, if an opponent controls more lands than you, you may search your library for up to three basic land cards, reveal them, put them into your hand, then shuffle.|
+Mother of Runes|The Zeta Set|6|U|{W}|Creature - Human Cleric|1|1|{T}: Target creature you control gains protection from the color of your choice until end of turn.|
+Path to Exile|The Zeta Set|7|U|{W}|Instant|||Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle.|
+Return to Dust|The Zeta Set|8|C|{2}{W}{W}|Instant|||Exile target artifact or enchantment. If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment.|
+Savannah Lions|The Zeta Set|9|C|{W}|Creature - Cat|2|1||
+Serra Angel|The Zeta Set|10|C|{3}{W}{W}|Creature - Angel|4|4|Flying$Vigilance|
+Split Up|The Zeta Set|11|R|{1}{W}{W}|Sorcery|||Choose one --$* Destroy all tapped creatures.$* Destroy all untapped creatures.|
+White Sun's Zenith|The Zeta Set|12|U|{X}{W}{W}{W}|Instant|||Create X 2/2 white Cat creature tokens. Shuffle White Sun's Zenith into its owner's library.|
+Brainstorm|The Zeta Set|13|C|{U}|Instant|||Draw three cards, then put two cards from your hand on top of your library in any order.|
+Chain of Vapor|The Zeta Set|14|U|{U}|Instant|||Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land of their choice. If the player does, they may copy this spell and may choose a new target for that copy.|
+Clone|The Zeta Set|15|U|{3}{U}|Creature - Shapeshifter|0|0|You may have this creature enter as a copy of any creature on the battlefield.|
+Dig Through Time|The Zeta Set|16|U|{6}{U}{U}|Instant|||Delve$Look at the top seven cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order.|
+Ghostly Flicker|The Zeta Set|17|C|{2}{U}|Instant|||Exile two target artifacts, creatures, and/or lands you control, then return those cards to the battlefield under your control.|
+High Tide|The Zeta Set|18|C|{U}|Instant|||Until end of turn, whenever a player taps an Island for mana, that player adds an additional {U}.|
+Hullbreaker Horror|The Zeta Set|19|R|{5}{U}{U}|Creature - Kraken Horror|7|8|Flash$This spell can't be countered.$Whenever you cast a spell, choose up to one --$* Return target spell you don't control to its owner's hand.$* Return target nonland permanent to its owner's hand.|
+Imprisoned in the Moon|The Zeta Set|20|U|{2}{U}|Enchantment - Aura|||Enchant creature, land, or planeswalker$Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other card types and abilities.|
+Laboratory Maniac|The Zeta Set|21|U|{2}{U}|Creature - Human Wizard|2|2|If you would draw a card while your library has no cards in it, you win the game instead.|
+Mental Misstep|The Zeta Set|22|U|{U/P}|Instant|||({U/P} can be paid with either {U} or 2 life.)$Counter target spell with mana value 1.|
+Merchant Scroll|The Zeta Set|23|U|{1}{U}|Sorcery|||Search your library for a blue instant card, reveal that card, put it into your hand, then shuffle.|
+Merfolk of the Pearl Trident|The Zeta Set|24|C|{U}|Creature - Merfolk|1|1||
+Mulldrifter|The Zeta Set|25|C|{4}{U}|Creature - Elemental|2|2|Flying$When this creature enters, draw two cards.$Evoke {2}{U}|
+Narcomoeba|The Zeta Set|26|C|{1}{U}|Creature - Illusion|1|1|Flying$When this card is put into your graveyard from your library, you may put it onto the battlefield.|
+An Offer You Can't Refuse|The Zeta Set|27|C|{U}|Instant|||Counter target noncreature spell. Its controller creates two Treasure tokens.|
+Power Sink|The Zeta Set|28|C|{X}{U}|Instant|||Counter target spell unless its controller pays {X}. If that player doesn't, they tap all lands with mana abilities they control and lose all unspent mana.|
+Quicksilver Elemental|The Zeta Set|29|M|{3}{U}{U}|Creature - Elemental|3|4|{U}: This creature gains all activated abilities of target creature until end of turn.$You may spend blue mana as though it were mana of any color to pay the activation costs of this creature's abilities.|
+Spell Pierce|The Zeta Set|30|C|{U}|Instant|||Counter target noncreature spell unless its controller pays {2}.|
+Thought Scour|The Zeta Set|31|C|{U}|Instant|||Target player mills two cards.$Draw a card.|
+Thrummingbird|The Zeta Set|32|U|{1}{U}|Creature - Phyrexian Bird Horror|1|1|Flying$Whenever this creature deals combat damage to a player, proliferate.|
+Windfall|The Zeta Set|33|U|{2}{U}|Sorcery|||Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.|
+Animate Dead|The Zeta Set|34|U|{1}{B}|Enchantment - Aura|||Enchant creature card in a graveyard$When this Aura enters, if it's on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with this Aura." Return enchanted creature card to the battlefield under your control and attach this Aura to it. When this Aura leaves the battlefield, that creature's controller sacrifices it.$Enchanted creature gets -1/-0.|
+Cauldron Familiar|The Zeta Set|35|C|{B}|Creature - Cat|1|1|When this creature enters, each opponent loses 1 life and you gain 1 life.$Sacrifice a Food: Return this card from your graveyard to the battlefield.|
+Cruel Reality|The Zeta Set|36|U|{5}{B}{B}|Enchantment - Aura Curse|||Enchant player$At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker of their choice. If the player can't, they lose 5 life.|
+Cut Down|The Zeta Set|37|C|{B}|Instant|||Destroy target creature with total power and toughness 5 or less.|
+Dark Ritual|The Zeta Set|38|U|{B}|Instant|||Add {B}{B}{B}.|
+Doomsday|The Zeta Set|39|U|{B}{B}{B}|Sorcery|||Search your library and graveyard for five cards and exile the rest. Put the chosen cards on top of your library in any order. You lose half your life, rounded up.|
+Duress|The Zeta Set|40|C|{B}|Sorcery|||Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card.|
+Feed the Swarm|The Zeta Set|41|C|{1}{B}|Sorcery|||Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's mana value.|
+Go for the Throat|The Zeta Set|42|C|{1}{B}|Instant|||Destroy target nonartifact creature.|
+Gray Merchant of Asphodel|The Zeta Set|43|C|{3}{B}{B}|Creature - Zombie|2|4|When this creature enters, each opponent loses X life, where X is your devotion to black. You gain life equal to the life lost this way.|
+Hypnotic Specter|The Zeta Set|44|U|{1}{B}{B}|Creature - Specter|2|2|Flying$Whenever this creature deals damage to an opponent, that player discards a card at random.|
+Imp's Mischief|The Zeta Set|45|R|{1}{B}|Instant|||Change the target of target spell with a single target. You lose life equal to that spell's mana value.|
+Lord Skitter, Sewer King|The Zeta Set|46|U|{2}{B}|Legendary Creature - Rat Noble|3|3|Whenever another Rat you control enters, exile up to one target card from an opponent's graveyard.$At the beginning of combat on your turn, create a 1/1 black Rat creature token with "This token can't block."|
+Mortuary|The Zeta Set|47|M|{3}{B}|Enchantment|||Whenever a creature is put into your graveyard from the battlefield, put that card on top of your library.|
+Night's Whisper|The Zeta Set|48|C|{1}{B}|Sorcery|||You draw two cards and lose 2 life.|
+Sengir Vampire|The Zeta Set|49|C|{3}{B}{B}|Creature - Vampire|4|4|Flying$Whenever a creature dealt damage by this creature this turn dies, put a +1/+1 counter on this creature.|
+Tragic Slip|The Zeta Set|50|C|{B}|Instant|||Target creature gets -1/-1 until end of turn.$Morbid -- That creature gets -13/-13 until end of turn instead if a creature died this turn.|
+Unearth|The Zeta Set|51|C|{B}|Sorcery|||Return target creature card with mana value 3 or less from your graveyard to the battlefield.$Cycling {2}|
+Vito, Thorn of the Dusk Rose|The Zeta Set|52|R|{2}{B}|Legendary Creature - Vampire Cleric|1|3|Whenever you gain life, target opponent loses that much life.${3}{B}{B}: Creatures you control gain lifelink until end of turn.|
+Yargle, Glutton of Urborg|The Zeta Set|53|U|{4}{B}|Legendary Creature - Frog Spirit|9|3||
+Anger|The Zeta Set|54|U|{3}{R}|Creature - Incarnation|2|2|Haste$As long as this card is in your graveyard and you control a Mountain, creatures you control have haste.|
+Cathartic Reunion|The Zeta Set|55|C|{1}{R}|Sorcery|||As an additional cost to cast this spell, discard two cards.$Draw three cards.|
+Disintegrate|The Zeta Set|56|C|{X}{R}|Sorcery|||Disintegrate deals X damage to any target. If it's a creature, it can't be regenerated this turn, and if it would die this turn, exile it instead.|
+Fireball|The Zeta Set|57|C|{X}{R}|Sorcery|||This spell costs {1} more to cast for each target beyond the first.$Fireball deals X damage divided evenly, rounded down, among any number of targets.|
+Glimpse the Impossible|The Zeta Set|58|U|{2}{R}|Sorcery|||Exile the top three cards of your library. You may play those cards this turn. At the beginning of the next end step, if any of those cards remain exiled, put them into your graveyard, then create a 0/1 colorless Eldrazi Spawn creature token for each card put into your graveyard this way. Those tokens have "Sacrifice this token: Add {C}."|
+Gut Shot|The Zeta Set|59|C|{R/P}|Instant|||({R/P} can be paid with either {R} or 2 life.)$Gut Shot deals 1 damage to any target.|
+Guttersnipe|The Zeta Set|60|C|{2}{R}|Creature - Goblin Shaman|2|2|Whenever you cast an instant or sorcery spell, this creature deals 2 damage to each opponent.|
+Imperial Recruiter|The Zeta Set|61|R|{2}{R}|Creature - Human Advisor|1|1|When this creature enters, search your library for a creature card with power 2 or less, reveal it, put it into your hand, then shuffle.|
+Kazuul, Tyrant of the Cliffs|The Zeta Set|62|U|{3}{R}{R}|Legendary Creature - Ogre Warrior|5|4|Whenever a creature an opponent controls attacks, if you're the defending player, create a 3/3 red Ogre creature token unless that creature's controller pays {3}.|
+Lightning Bolt|The Zeta Set|63|C|{R}|Instant|||Lightning Bolt deals 3 damage to any target.|
+Mana Echoes|The Zeta Set|64|M|{2}{R}{R}|Enchantment|||Whenever a creature enters, you may add an amount of {C} equal to the number of creatures you control that share a creature type with it.|
+Price of Progress|The Zeta Set|65|C|{1}{R}|Instant|||Price of Progress deals damage to each player equal to twice the number of nonbasic lands that player controls.|
+Pyroblast|The Zeta Set|66|U|{R}|Instant|||Choose one --$* Counter target spell if it's blue.$* Destroy target permanent if it's blue.|
+Pyrokinesis|The Zeta Set|67|U|{4}{R}{R}|Instant|||You may exile a red card from your hand rather than pay this spell's mana cost.$Pyrokinesis deals 4 damage divided as you choose among any number of target creatures.|
+Simian Spirit Guide|The Zeta Set|68|C|{2}{R}|Creature - Ape Spirit|2|2|Exile this card from your hand: Add {R}.|
+Vandalblast|The Zeta Set|69|C|{R}|Sorcery|||Destroy target artifact you don't control.$Overload {4}{R}|
+Wheel of Misfortune|The Zeta Set|70|U|{2}{R}|Sorcery|||Each player secretly chooses a number 0 or greater, then all players reveal those numbers simultaneously and determine the highest and lowest numbers revealed this way. Wheel of Misfortune deals damage equal to the highest number to each player who chose that number. Each player who didn't choose the lowest number discards their hand, then draws seven cards.|
+Birds of Paradise|The Zeta Set|71|R|{G}|Creature - Bird|0|1|Flying${T}: Add one mana of any color.|
+Chatterstorm|The Zeta Set|72|C|{1}{G}|Sorcery|||Create a 1/1 green Squirrel creature token.$Storm|
+Colossal Dreadmaw|The Zeta Set|73|C|{4}{G}{G}|Creature - Dinosaur|6|6|Trample|
+Cultivate|The Zeta Set|74|C|{2}{G}|Sorcery|||Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle.|
+Giant Spider|The Zeta Set|75|C|{3}{G}|Creature - Spider|2|4|Reach|
+Gigantosaurus|The Zeta Set|76|C|{G}{G}{G}{G}{G}|Creature - Dinosaur|10|10||
+Grizzly Bears|The Zeta Set|77|C|{1}{G}|Creature - Bear|2|2||
+Hornet Queen|The Zeta Set|78|U|{4}{G}{G}{G}|Creature - Insect|2|2|Flying, deathtouch$When this creature enters, create four 1/1 green Insect creature tokens with flying and deathtouch.|
+Invigorate|The Zeta Set|79|C|{2}{G}|Instant|||If you control a Forest, rather than pay this spell's mana cost, you may have an opponent gain 3 life.$Target creature gets +4/+4 until end of turn.|
+Life from the Loam|The Zeta Set|80|R|{1}{G}|Sorcery|||Return up to three target land cards from your graveyard to your hand.$Dredge 3|
+Llanowar Elves|The Zeta Set|81|C|{G}|Creature - Elf Druid|1|1|{T}: Add {G}.|
+Nature's Claim|The Zeta Set|82|C|{G}|Instant|||Destroy target artifact or enchantment. Its controller gains 4 life.|
+Ruxa, Patient Professor|The Zeta Set|83|U|{2}{G}{G}|Legendary Creature - Bear Druid|4|4|Whenever Ruxa enters or attacks, return target creature card with no abilities from your graveyard to your hand.$Creatures you control with no abilities get +1/+1.$For each creature you control with no abilities, you may have that creature assign its combat damage as though it weren't blocked.|
+Scute Swarm|The Zeta Set|84|R|{2}{G}|Creature - Insect|1|1|Landfall -- Whenever a land you control enters, create a 1/1 green Insect creature token. If you control six or more lands, create a token that's a copy of this creature instead.|
+Scythecat Cub|The Zeta Set|85|M|{1}{G}|Creature - Cat|2|2|Trample$Landfall -- Whenever a land you control enters, put a +1/+1 counter on target creature you control. If this is the second time this ability has resolved this turn, double the number of +1/+1 counters on that creature instead.|
+Wild Growth|The Zeta Set|86|C|{G}|Enchantment - Aura|||Enchant land$Whenever enchanted land is tapped for mana, its controller adds an additional {G}.|
+Wild Nacatl|The Zeta Set|87|C|{G}|Creature - Cat Warrior|1|1|This creature gets +1/+1 as long as you control a Mountain.$This creature gets +1/+1 as long as you control a Plains.|
+Baleful Strix|The Zeta Set|88|C|{U}{B}|Artifact Creature - Bird|1|1|Flying, deathtouch$When this creature enters, draw a card.|
+Dueling Grounds|The Zeta Set|89|R|{1}{G}{W}|Enchantment|||No more than one creature can attack each combat.$No more than one creature can block each combat.|
+Garth One-Eye|The Zeta Set|90|U|{W}{U}{B}{R}{G}|Legendary Creature - Human Wizard|5|5|{T}: Choose a card name that hasn't been chosen from among Disenchant, Braingeyser, Terror, Shivan Dragon, Regrowth, and Black Lotus. Create a copy of the card with the chosen name. You may cast the copy.|
+The Jolly Balloon Man|The Zeta Set|91|U|{1}{R}{W}|Legendary Creature - Human Clown|1|4|Haste${1}, {T}: Create a token that's a copy of another target creature you control, except it's a 1/1 red Balloon creature in addition to its other colors and types and it has flying and haste. Sacrifice it at the beginning of the next end step. Activate only as a sorcery.|
+Obeka, Brute Chronologist|The Zeta Set|92|U|{1}{U}{B}{R}|Legendary Creature - Ogre Wizard|3|4|{T}: The player whose turn it is may end the turn.|
+Raffine, Scheming Seer|The Zeta Set|93|U|{W}{U}{B}|Legendary Creature - Sphinx Demon|1|4|Flying, ward {1}$Whenever you attack, target attacking creature connives X, where X is the number of attacking creatures.|
+Arcane Signet|The Zeta Set|94|C|{2}|Artifact|||{T}: Add one mana of any color in your commander's color identity.|
+Ashnod's Altar|The Zeta Set|95|R|{3}|Artifact|||Sacrifice a creature: Add {C}{C}.|
+Chromatic Lantern|The Zeta Set|96|R|{3}|Artifact|||Lands you control have "{T}: Add one mana of any color."${T}: Add one mana of any color.|
+Chromatic Orrery|The Zeta Set|97|M|{7}|Legendary Artifact|||You may spend mana as though it were mana of any color.${T}: Add {C}{C}{C}{C}{C}.${5}, {T}: Draw a card for each color among permanents you control.|
+Chrome Mox|The Zeta Set|98|M|{0}|Artifact|||Imprint -- When this artifact enters, you may exile a nonartifact, nonland card from your hand.${T}: Add one mana of any of the exiled card's colors.|
+Cloud Key|The Zeta Set|99|U|{3}|Artifact|||As this artifact enters, choose artifact, creature, enchantment, instant, or sorcery.$Spells you cast of the chosen type cost {1} less to cast.|
+Clown Car|The Zeta Set|100|U|{X}|Artifact - Vehicle|1|1|When this Vehicle enters, roll X six-sided dice. For each odd result, create a 1/1 white Clown Robot artifact creature token. For each even result, put a +1/+1 counter on this Vehicle.$Crew 2|
+Copper Tablet|The Zeta Set|101|M|{2}|Artifact|||At the beginning of each player's upkeep, this artifact deals 1 damage to that player.|
+Darksteel Monolith|The Zeta Set|102|R|{8}|Artifact|||Indestructible$Once each turn, you may pay {0} rather than pay the mana cost for a colorless spell you cast from your hand.|
+Eternity Vessel|The Zeta Set|103|R|{6}|Artifact|||This artifact enters with X charge counters on it, where X is your life total.$Landfall -- Whenever a land you control enters, you may have your life total become the number of charge counters on this artifact.|
+Foundry Inspector|The Zeta Set|104|U|{3}|Artifact Creature - Construct|3|2|Artifact spells you cast cost {1} less to cast.|
+Jester's Cap|The Zeta Set|105|U|{4}|Artifact|||{2}, {T}, Sacrifice this artifact: Search target player's library for three cards and exile them. Then that player shuffles.|
+Manifold Key|The Zeta Set|106|U|{1}|Artifact|||{1}, {T}: Untap another target artifact.${3}, {T}: Target creature can't be blocked this turn.|
+Mox Tantalite|The Zeta Set|107|M||Artifact|||Suspend 3--{0}${T}: Add one mana of any color.|
+Mycosynth Golem|The Zeta Set|108|R|{11}|Artifact Creature - Golem|4|5|Affinity for artifacts$Artifact creature spells you cast have affinity for artifacts.|
+Ornithopter|The Zeta Set|109|C|{0}|Artifact Creature - Thopter|0|2|Flying|
+Panoptic Mirror|The Zeta Set|110|M|{5}|Artifact|||Imprint -- {X}, {T}: You may exile an instant or sorcery card with mana value X from your hand.$At the beginning of your upkeep, you may copy a card exiled with this artifact. If you do, you may cast the copy without paying its mana cost.|
+Rogue's Gloves|The Zeta Set|111|U|{2}|Artifact - Equipment|||Whenever equipped creature deals combat damage to a player, you may draw a card.$Equip {2}|
+Sensei's Divining Top|The Zeta Set|112|R|{1}|Artifact|||{1}: Look at the top three cards of your library, then put them back in any order.${T}: Draw a card, then put this artifact on top of its owner's library.|
+Skullclamp|The Zeta Set|113|R|{1}|Artifact - Equipment|||Equipped creature gets +1/-1.$Whenever equipped creature dies, draw two cards.$Equip {1}|
+Sol Ring|The Zeta Set|114|U|{1}|Artifact|||{T}: Add {C}{C}.|
+Soul-Guide Lantern|The Zeta Set|115|C|{1}|Artifact|||When this artifact enters, exile target card from a graveyard.${T}, Sacrifice this artifact: Exile each opponent's graveyard.${1}, {T}, Sacrifice this artifact: Draw a card.|
+Thought Vessel|The Zeta Set|116|C|{2}|Artifact|||You have no maximum hand size.${T}: Add {C}.|
+Ward of Bones|The Zeta Set|117|R|{6}|Artifact|||Each opponent who controls more creatures than you can't cast creature spells. The same is true for artifacts and enchantments.$Each opponent who controls more lands than you can't play lands.|
+Command Tower|The Zeta Set|118|C||Land|||{T}: Add one mana of any color in your commander's color identity.|
+Oboro, Palace in the Clouds|The Zeta Set|119|R||Legendary Land|||{T}: Add {U}.${1}: Return Oboro to its owner's hand.|
+Reliquary Tower|The Zeta Set|120|U||Land|||You have no maximum hand size.${T}: Add {C}.|
+Urborg, Tomb of Yawgmoth|The Zeta Set|121|M||Legendary Land|||Each land is a Swamp in addition to its other land types.|
+All That Glitters|The Zeta Set|122|C|{1}{W}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +1/+1 for each artifact and/or enchantment you control.|
+Dispatch|The Zeta Set|123|C|{W}|Instant|||Tap target creature.$Metalcraft -- If you control three or more artifacts, exile that creature.|
+Eerie Interlude|The Zeta Set|124|R|{2}{W}|Instant|||Exile any number of target creatures you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.|
+Generous Gift|The Zeta Set|125|C|{2}{W}|Instant|||Destroy target permanent. Its controller creates a 3/3 green Elephant creature token.|
+Land Tax|The Zeta Set|126|R|{W}|Enchantment|||At the beginning of your upkeep, if an opponent controls more lands than you, you may search your library for up to three basic land cards, reveal them, put them into your hand, then shuffle.|
+Mother of Runes|The Zeta Set|127|U|{W}|Creature - Human Cleric|1|1|{T}: Target creature you control gains protection from the color of your choice until end of turn.|
+Path to Exile|The Zeta Set|128|U|{W}|Instant|||Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle.|
+Return to Dust|The Zeta Set|129|C|{2}{W}{W}|Instant|||Exile target artifact or enchantment. If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment.|
+Savannah Lions|The Zeta Set|130|C|{W}|Creature - Cat|2|1||
+Serra Angel|The Zeta Set|131|C|{3}{W}{W}|Creature - Angel|4|4|Flying$Vigilance|
+Split Up|The Zeta Set|132|R|{1}{W}{W}|Sorcery|||Choose one --$* Destroy all tapped creatures.$* Destroy all untapped creatures.|
+White Sun's Zenith|The Zeta Set|133|U|{X}{W}{W}{W}|Instant|||Create X 2/2 white Cat creature tokens. Shuffle White Sun's Zenith into its owner's library.|
+Brainstorm|The Zeta Set|134|C|{U}|Instant|||Draw three cards, then put two cards from your hand on top of your library in any order.|
+Chain of Vapor|The Zeta Set|135|U|{U}|Instant|||Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land of their choice. If the player does, they may copy this spell and may choose a new target for that copy.|
+Clone|The Zeta Set|136|U|{3}{U}|Creature - Shapeshifter|0|0|You may have this creature enter as a copy of any creature on the battlefield.|
+Dig Through Time|The Zeta Set|137|U|{6}{U}{U}|Instant|||Delve$Look at the top seven cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order.|
+Ghostly Flicker|The Zeta Set|138|C|{2}{U}|Instant|||Exile two target artifacts, creatures, and/or lands you control, then return those cards to the battlefield under your control.|
+High Tide|The Zeta Set|139|C|{U}|Instant|||Until end of turn, whenever a player taps an Island for mana, that player adds an additional {U}.|
+Hullbreaker Horror|The Zeta Set|140|R|{5}{U}{U}|Creature - Kraken Horror|7|8|Flash$This spell can't be countered.$Whenever you cast a spell, choose up to one --$* Return target spell you don't control to its owner's hand.$* Return target nonland permanent to its owner's hand.|
+Imprisoned in the Moon|The Zeta Set|141|U|{2}{U}|Enchantment - Aura|||Enchant creature, land, or planeswalker$Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other card types and abilities.|
+Laboratory Maniac|The Zeta Set|142|U|{2}{U}|Creature - Human Wizard|2|2|If you would draw a card while your library has no cards in it, you win the game instead.|
+Mental Misstep|The Zeta Set|143|U|{U/P}|Instant|||({U/P} can be paid with either {U} or 2 life.)$Counter target spell with mana value 1.|
+Merchant Scroll|The Zeta Set|144|U|{1}{U}|Sorcery|||Search your library for a blue instant card, reveal that card, put it into your hand, then shuffle.|
+Merfolk of the Pearl Trident|The Zeta Set|145|C|{U}|Creature - Merfolk|1|1||
+Mulldrifter|The Zeta Set|146|C|{4}{U}|Creature - Elemental|2|2|Flying$When this creature enters, draw two cards.$Evoke {2}{U}|
+Narcomoeba|The Zeta Set|147|C|{1}{U}|Creature - Illusion|1|1|Flying$When this card is put into your graveyard from your library, you may put it onto the battlefield.|
+An Offer You Can't Refuse|The Zeta Set|148|C|{U}|Instant|||Counter target noncreature spell. Its controller creates two Treasure tokens.|
+Power Sink|The Zeta Set|149|C|{X}{U}|Instant|||Counter target spell unless its controller pays {X}. If that player doesn't, they tap all lands with mana abilities they control and lose all unspent mana.|
+Quicksilver Elemental|The Zeta Set|150|M|{3}{U}{U}|Creature - Elemental|3|4|{U}: This creature gains all activated abilities of target creature until end of turn.$You may spend blue mana as though it were mana of any color to pay the activation costs of this creature's abilities.|
+Spell Pierce|The Zeta Set|151|C|{U}|Instant|||Counter target noncreature spell unless its controller pays {2}.|
+Thought Scour|The Zeta Set|152|C|{U}|Instant|||Target player mills two cards.$Draw a card.|
+Thrummingbird|The Zeta Set|153|U|{1}{U}|Creature - Phyrexian Bird Horror|1|1|Flying$Whenever this creature deals combat damage to a player, proliferate.|
+Windfall|The Zeta Set|154|U|{2}{U}|Sorcery|||Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.|
+Animate Dead|The Zeta Set|155|U|{1}{B}|Enchantment - Aura|||Enchant creature card in a graveyard$When this Aura enters, if it's on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with this Aura." Return enchanted creature card to the battlefield under your control and attach this Aura to it. When this Aura leaves the battlefield, that creature's controller sacrifices it.$Enchanted creature gets -1/-0.|
+Cauldron Familiar|The Zeta Set|156|C|{B}|Creature - Cat|1|1|When this creature enters, each opponent loses 1 life and you gain 1 life.$Sacrifice a Food: Return this card from your graveyard to the battlefield.|
+Cruel Reality|The Zeta Set|157|U|{5}{B}{B}|Enchantment - Aura Curse|||Enchant player$At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker of their choice. If the player can't, they lose 5 life.|
+Cut Down|The Zeta Set|158|C|{B}|Instant|||Destroy target creature with total power and toughness 5 or less.|
+Dark Ritual|The Zeta Set|159|U|{B}|Instant|||Add {B}{B}{B}.|
+Doomsday|The Zeta Set|160|U|{B}{B}{B}|Sorcery|||Search your library and graveyard for five cards and exile the rest. Put the chosen cards on top of your library in any order. You lose half your life, rounded up.|
+Duress|The Zeta Set|161|C|{B}|Sorcery|||Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card.|
+Feed the Swarm|The Zeta Set|162|C|{1}{B}|Sorcery|||Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's mana value.|
+Go for the Throat|The Zeta Set|163|C|{1}{B}|Instant|||Destroy target nonartifact creature.|
+Gray Merchant of Asphodel|The Zeta Set|164|C|{3}{B}{B}|Creature - Zombie|2|4|When this creature enters, each opponent loses X life, where X is your devotion to black. You gain life equal to the life lost this way.|
+Hypnotic Specter|The Zeta Set|165|U|{1}{B}{B}|Creature - Specter|2|2|Flying$Whenever this creature deals damage to an opponent, that player discards a card at random.|
+Imp's Mischief|The Zeta Set|166|R|{1}{B}|Instant|||Change the target of target spell with a single target. You lose life equal to that spell's mana value.|
+Lord Skitter, Sewer King|The Zeta Set|167|U|{2}{B}|Legendary Creature - Rat Noble|3|3|Whenever another Rat you control enters, exile up to one target card from an opponent's graveyard.$At the beginning of combat on your turn, create a 1/1 black Rat creature token with "This token can't block."|
+Mortuary|The Zeta Set|168|M|{3}{B}|Enchantment|||Whenever a creature is put into your graveyard from the battlefield, put that card on top of your library.|
+Night's Whisper|The Zeta Set|169|C|{1}{B}|Sorcery|||You draw two cards and lose 2 life.|
+Sengir Vampire|The Zeta Set|170|C|{3}{B}{B}|Creature - Vampire|4|4|Flying$Whenever a creature dealt damage by this creature this turn dies, put a +1/+1 counter on this creature.|
+Tragic Slip|The Zeta Set|171|C|{B}|Instant|||Target creature gets -1/-1 until end of turn.$Morbid -- That creature gets -13/-13 until end of turn instead if a creature died this turn.|
+Unearth|The Zeta Set|172|C|{B}|Sorcery|||Return target creature card with mana value 3 or less from your graveyard to the battlefield.$Cycling {2}|
+Vito, Thorn of the Dusk Rose|The Zeta Set|173|R|{2}{B}|Legendary Creature - Vampire Cleric|1|3|Whenever you gain life, target opponent loses that much life.${3}{B}{B}: Creatures you control gain lifelink until end of turn.|
+Yargle, Glutton of Urborg|The Zeta Set|174|U|{4}{B}|Legendary Creature - Frog Spirit|9|3||
+Anger|The Zeta Set|175|U|{3}{R}|Creature - Incarnation|2|2|Haste$As long as this card is in your graveyard and you control a Mountain, creatures you control have haste.|
+Cathartic Reunion|The Zeta Set|176|C|{1}{R}|Sorcery|||As an additional cost to cast this spell, discard two cards.$Draw three cards.|
+Disintegrate|The Zeta Set|177|C|{X}{R}|Sorcery|||Disintegrate deals X damage to any target. If it's a creature, it can't be regenerated this turn, and if it would die this turn, exile it instead.|
+Fireball|The Zeta Set|178|C|{X}{R}|Sorcery|||This spell costs {1} more to cast for each target beyond the first.$Fireball deals X damage divided evenly, rounded down, among any number of targets.|
+Glimpse the Impossible|The Zeta Set|179|U|{2}{R}|Sorcery|||Exile the top three cards of your library. You may play those cards this turn. At the beginning of the next end step, if any of those cards remain exiled, put them into your graveyard, then create a 0/1 colorless Eldrazi Spawn creature token for each card put into your graveyard this way. Those tokens have "Sacrifice this token: Add {C}."|
+Gut Shot|The Zeta Set|180|C|{R/P}|Instant|||({R/P} can be paid with either {R} or 2 life.)$Gut Shot deals 1 damage to any target.|
+Guttersnipe|The Zeta Set|181|C|{2}{R}|Creature - Goblin Shaman|2|2|Whenever you cast an instant or sorcery spell, this creature deals 2 damage to each opponent.|
+Imperial Recruiter|The Zeta Set|182|R|{2}{R}|Creature - Human Advisor|1|1|When this creature enters, search your library for a creature card with power 2 or less, reveal it, put it into your hand, then shuffle.|
+Kazuul, Tyrant of the Cliffs|The Zeta Set|183|U|{3}{R}{R}|Legendary Creature - Ogre Warrior|5|4|Whenever a creature an opponent controls attacks, if you're the defending player, create a 3/3 red Ogre creature token unless that creature's controller pays {3}.|
+Lightning Bolt|The Zeta Set|184|C|{R}|Instant|||Lightning Bolt deals 3 damage to any target.|
+Mana Echoes|The Zeta Set|185|M|{2}{R}{R}|Enchantment|||Whenever a creature enters, you may add an amount of {C} equal to the number of creatures you control that share a creature type with it.|
+Price of Progress|The Zeta Set|186|C|{1}{R}|Instant|||Price of Progress deals damage to each player equal to twice the number of nonbasic lands that player controls.|
+Pyroblast|The Zeta Set|187|U|{R}|Instant|||Choose one --$* Counter target spell if it's blue.$* Destroy target permanent if it's blue.|
+Pyrokinesis|The Zeta Set|188|U|{4}{R}{R}|Instant|||You may exile a red card from your hand rather than pay this spell's mana cost.$Pyrokinesis deals 4 damage divided as you choose among any number of target creatures.|
+Simian Spirit Guide|The Zeta Set|189|C|{2}{R}|Creature - Ape Spirit|2|2|Exile this card from your hand: Add {R}.|
+Vandalblast|The Zeta Set|190|C|{R}|Sorcery|||Destroy target artifact you don't control.$Overload {4}{R}|
+Wheel of Misfortune|The Zeta Set|191|U|{2}{R}|Sorcery|||Each player secretly chooses a number 0 or greater, then all players reveal those numbers simultaneously and determine the highest and lowest numbers revealed this way. Wheel of Misfortune deals damage equal to the highest number to each player who chose that number. Each player who didn't choose the lowest number discards their hand, then draws seven cards.|
+Birds of Paradise|The Zeta Set|192|R|{G}|Creature - Bird|0|1|Flying${T}: Add one mana of any color.|
+Chatterstorm|The Zeta Set|193|C|{1}{G}|Sorcery|||Create a 1/1 green Squirrel creature token.$Storm|
+Colossal Dreadmaw|The Zeta Set|194|C|{4}{G}{G}|Creature - Dinosaur|6|6|Trample|
+Cultivate|The Zeta Set|195|C|{2}{G}|Sorcery|||Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle.|
+Giant Spider|The Zeta Set|196|C|{3}{G}|Creature - Spider|2|4|Reach|
+Gigantosaurus|The Zeta Set|197|C|{G}{G}{G}{G}{G}|Creature - Dinosaur|10|10||
+Grizzly Bears|The Zeta Set|198|C|{1}{G}|Creature - Bear|2|2||
+Hornet Queen|The Zeta Set|199|U|{4}{G}{G}{G}|Creature - Insect|2|2|Flying, deathtouch$When this creature enters, create four 1/1 green Insect creature tokens with flying and deathtouch.|
+Invigorate|The Zeta Set|200|C|{2}{G}|Instant|||If you control a Forest, rather than pay this spell's mana cost, you may have an opponent gain 3 life.$Target creature gets +4/+4 until end of turn.|
+Life from the Loam|The Zeta Set|201|R|{1}{G}|Sorcery|||Return up to three target land cards from your graveyard to your hand.$Dredge 3|
+Llanowar Elves|The Zeta Set|202|C|{G}|Creature - Elf Druid|1|1|{T}: Add {G}.|
+Nature's Claim|The Zeta Set|203|C|{G}|Instant|||Destroy target artifact or enchantment. Its controller gains 4 life.|
+Ruxa, Patient Professor|The Zeta Set|204|U|{2}{G}{G}|Legendary Creature - Bear Druid|4|4|Whenever Ruxa enters or attacks, return target creature card with no abilities from your graveyard to your hand.$Creatures you control with no abilities get +1/+1.$For each creature you control with no abilities, you may have that creature assign its combat damage as though it weren't blocked.|
+Scute Swarm|The Zeta Set|205|R|{2}{G}|Creature - Insect|1|1|Landfall -- Whenever a land you control enters, create a 1/1 green Insect creature token. If you control six or more lands, create a token that's a copy of this creature instead.|
+Scythecat Cub|The Zeta Set|206|M|{1}{G}|Creature - Cat|2|2|Trample$Landfall -- Whenever a land you control enters, put a +1/+1 counter on target creature you control. If this is the second time this ability has resolved this turn, double the number of +1/+1 counters on that creature instead.|
+Wild Growth|The Zeta Set|207|C|{G}|Enchantment - Aura|||Enchant land$Whenever enchanted land is tapped for mana, its controller adds an additional {G}.|
+Wild Nacatl|The Zeta Set|208|C|{G}|Creature - Cat Warrior|1|1|This creature gets +1/+1 as long as you control a Mountain.$This creature gets +1/+1 as long as you control a Plains.|
+Baleful Strix|The Zeta Set|209|C|{U}{B}|Artifact Creature - Bird|1|1|Flying, deathtouch$When this creature enters, draw a card.|
+Dueling Grounds|The Zeta Set|210|R|{1}{G}{W}|Enchantment|||No more than one creature can attack each combat.$No more than one creature can block each combat.|
+Garth One-Eye|The Zeta Set|211|U|{W}{U}{B}{R}{G}|Legendary Creature - Human Wizard|5|5|{T}: Choose a card name that hasn't been chosen from among Disenchant, Braingeyser, Terror, Shivan Dragon, Regrowth, and Black Lotus. Create a copy of the card with the chosen name. You may cast the copy.|
+The Jolly Balloon Man|The Zeta Set|212|U|{1}{R}{W}|Legendary Creature - Human Clown|1|4|Haste${1}, {T}: Create a token that's a copy of another target creature you control, except it's a 1/1 red Balloon creature in addition to its other colors and types and it has flying and haste. Sacrifice it at the beginning of the next end step. Activate only as a sorcery.|
+Obeka, Brute Chronologist|The Zeta Set|213|U|{1}{U}{B}{R}|Legendary Creature - Ogre Wizard|3|4|{T}: The player whose turn it is may end the turn.|
+Raffine, Scheming Seer|The Zeta Set|214|U|{W}{U}{B}|Legendary Creature - Sphinx Demon|1|4|Flying, ward {1}$Whenever you attack, target attacking creature connives X, where X is the number of attacking creatures.|
+Arcane Signet|The Zeta Set|215|C|{2}|Artifact|||{T}: Add one mana of any color in your commander's color identity.|
+Ashnod's Altar|The Zeta Set|216|R|{3}|Artifact|||Sacrifice a creature: Add {C}{C}.|
+Chromatic Lantern|The Zeta Set|217|R|{3}|Artifact|||Lands you control have "{T}: Add one mana of any color."${T}: Add one mana of any color.|
+Chromatic Orrery|The Zeta Set|218|M|{7}|Legendary Artifact|||You may spend mana as though it were mana of any color.${T}: Add {C}{C}{C}{C}{C}.${5}, {T}: Draw a card for each color among permanents you control.|
+Chrome Mox|The Zeta Set|219|M|{0}|Artifact|||Imprint -- When this artifact enters, you may exile a nonartifact, nonland card from your hand.${T}: Add one mana of any of the exiled card's colors.|
+Cloud Key|The Zeta Set|220|U|{3}|Artifact|||As this artifact enters, choose artifact, creature, enchantment, instant, or sorcery.$Spells you cast of the chosen type cost {1} less to cast.|
+Clown Car|The Zeta Set|221|U|{X}|Artifact - Vehicle|1|1|When this Vehicle enters, roll X six-sided dice. For each odd result, create a 1/1 white Clown Robot artifact creature token. For each even result, put a +1/+1 counter on this Vehicle.$Crew 2|
+Copper Tablet|The Zeta Set|222|M|{2}|Artifact|||At the beginning of each player's upkeep, this artifact deals 1 damage to that player.|
+Darksteel Monolith|The Zeta Set|223|R|{8}|Artifact|||Indestructible$Once each turn, you may pay {0} rather than pay the mana cost for a colorless spell you cast from your hand.|
+Eternity Vessel|The Zeta Set|224|R|{6}|Artifact|||This artifact enters with X charge counters on it, where X is your life total.$Landfall -- Whenever a land you control enters, you may have your life total become the number of charge counters on this artifact.|
+Foundry Inspector|The Zeta Set|225|U|{3}|Artifact Creature - Construct|3|2|Artifact spells you cast cost {1} less to cast.|
+Jester's Cap|The Zeta Set|226|U|{4}|Artifact|||{2}, {T}, Sacrifice this artifact: Search target player's library for three cards and exile them. Then that player shuffles.|
+Manifold Key|The Zeta Set|227|U|{1}|Artifact|||{1}, {T}: Untap another target artifact.${3}, {T}: Target creature can't be blocked this turn.|
+Mox Tantalite|The Zeta Set|228|M||Artifact|||Suspend 3--{0}${T}: Add one mana of any color.|
+Mycosynth Golem|The Zeta Set|229|R|{11}|Artifact Creature - Golem|4|5|Affinity for artifacts$Artifact creature spells you cast have affinity for artifacts.|
+Ornithopter|The Zeta Set|230|C|{0}|Artifact Creature - Thopter|0|2|Flying|
+Panoptic Mirror|The Zeta Set|231|M|{5}|Artifact|||Imprint -- {X}, {T}: You may exile an instant or sorcery card with mana value X from your hand.$At the beginning of your upkeep, you may copy a card exiled with this artifact. If you do, you may cast the copy without paying its mana cost.|
+Rogue's Gloves|The Zeta Set|232|U|{2}|Artifact - Equipment|||Whenever equipped creature deals combat damage to a player, you may draw a card.$Equip {2}|
+Sensei's Divining Top|The Zeta Set|233|R|{1}|Artifact|||{1}: Look at the top three cards of your library, then put them back in any order.${T}: Draw a card, then put this artifact on top of its owner's library.|
+Skullclamp|The Zeta Set|234|R|{1}|Artifact - Equipment|||Equipped creature gets +1/-1.$Whenever equipped creature dies, draw two cards.$Equip {1}|
+Sol Ring|The Zeta Set|235|U|{1}|Artifact|||{T}: Add {C}{C}.|
+Soul-Guide Lantern|The Zeta Set|236|C|{1}|Artifact|||When this artifact enters, exile target card from a graveyard.${T}, Sacrifice this artifact: Exile each opponent's graveyard.${1}, {T}, Sacrifice this artifact: Draw a card.|
+Thought Vessel|The Zeta Set|237|C|{2}|Artifact|||You have no maximum hand size.${T}: Add {C}.|
+Ward of Bones|The Zeta Set|238|R|{6}|Artifact|||Each opponent who controls more creatures than you can't cast creature spells. The same is true for artifacts and enchantments.$Each opponent who controls more lands than you can't play lands.|
+Command Tower|The Zeta Set|239|C||Land|||{T}: Add one mana of any color in your commander's color identity.|
+Oboro, Palace in the Clouds|The Zeta Set|240|R||Legendary Land|||{T}: Add {U}.${1}: Return Oboro to its owner's hand.|
+Reliquary Tower|The Zeta Set|241|U||Land|||You have no maximum hand size.${T}: Add {C}.|
+Urborg, Tomb of Yawgmoth|The Zeta Set|242|M||Legendary Land|||Each land is a Swamp in addition to its other land types.|
+All That Glitters|The Zeta Set|243|C|{1}{W}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +1/+1 for each artifact and/or enchantment you control.|
+Dispatch|The Zeta Set|244|C|{W}|Instant|||Tap target creature.$Metalcraft -- If you control three or more artifacts, exile that creature.|
+Eerie Interlude|The Zeta Set|245|R|{2}{W}|Instant|||Exile any number of target creatures you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.|
+Generous Gift|The Zeta Set|246|C|{2}{W}|Instant|||Destroy target permanent. Its controller creates a 3/3 green Elephant creature token.|
+Land Tax|The Zeta Set|247|R|{W}|Enchantment|||At the beginning of your upkeep, if an opponent controls more lands than you, you may search your library for up to three basic land cards, reveal them, put them into your hand, then shuffle.|
+Mother of Runes|The Zeta Set|248|U|{W}|Creature - Human Cleric|1|1|{T}: Target creature you control gains protection from the color of your choice until end of turn.|
+Path to Exile|The Zeta Set|249|U|{W}|Instant|||Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle.|
+Return to Dust|The Zeta Set|250|C|{2}{W}{W}|Instant|||Exile target artifact or enchantment. If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment.|
+Savannah Lions|The Zeta Set|251|C|{W}|Creature - Cat|2|1||
+Serra Angel|The Zeta Set|252|C|{3}{W}{W}|Creature - Angel|4|4|Flying$Vigilance|
+Split Up|The Zeta Set|253|R|{1}{W}{W}|Sorcery|||Choose one --$* Destroy all tapped creatures.$* Destroy all untapped creatures.|
+White Sun's Zenith|The Zeta Set|254|U|{X}{W}{W}{W}|Instant|||Create X 2/2 white Cat creature tokens. Shuffle White Sun's Zenith into its owner's library.|
+Brainstorm|The Zeta Set|255|C|{U}|Instant|||Draw three cards, then put two cards from your hand on top of your library in any order.|
+Chain of Vapor|The Zeta Set|256|U|{U}|Instant|||Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land of their choice. If the player does, they may copy this spell and may choose a new target for that copy.|
+Clone|The Zeta Set|257|U|{3}{U}|Creature - Shapeshifter|0|0|You may have this creature enter as a copy of any creature on the battlefield.|
+Dig Through Time|The Zeta Set|258|U|{6}{U}{U}|Instant|||Delve$Look at the top seven cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order.|
+Ghostly Flicker|The Zeta Set|259|C|{2}{U}|Instant|||Exile two target artifacts, creatures, and/or lands you control, then return those cards to the battlefield under your control.|
+High Tide|The Zeta Set|260|C|{U}|Instant|||Until end of turn, whenever a player taps an Island for mana, that player adds an additional {U}.|
+Hullbreaker Horror|The Zeta Set|261|R|{5}{U}{U}|Creature - Kraken Horror|7|8|Flash$This spell can't be countered.$Whenever you cast a spell, choose up to one --$* Return target spell you don't control to its owner's hand.$* Return target nonland permanent to its owner's hand.|
+Imprisoned in the Moon|The Zeta Set|262|U|{2}{U}|Enchantment - Aura|||Enchant creature, land, or planeswalker$Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other card types and abilities.|
+Laboratory Maniac|The Zeta Set|263|U|{2}{U}|Creature - Human Wizard|2|2|If you would draw a card while your library has no cards in it, you win the game instead.|
+Mental Misstep|The Zeta Set|264|U|{U/P}|Instant|||({U/P} can be paid with either {U} or 2 life.)$Counter target spell with mana value 1.|
+Merchant Scroll|The Zeta Set|265|U|{1}{U}|Sorcery|||Search your library for a blue instant card, reveal that card, put it into your hand, then shuffle.|
+Merfolk of the Pearl Trident|The Zeta Set|266|C|{U}|Creature - Merfolk|1|1||
+Mulldrifter|The Zeta Set|267|C|{4}{U}|Creature - Elemental|2|2|Flying$When this creature enters, draw two cards.$Evoke {2}{U}|
+Narcomoeba|The Zeta Set|268|C|{1}{U}|Creature - Illusion|1|1|Flying$When this card is put into your graveyard from your library, you may put it onto the battlefield.|
+An Offer You Can't Refuse|The Zeta Set|269|C|{U}|Instant|||Counter target noncreature spell. Its controller creates two Treasure tokens.|
+Power Sink|The Zeta Set|270|C|{X}{U}|Instant|||Counter target spell unless its controller pays {X}. If that player doesn't, they tap all lands with mana abilities they control and lose all unspent mana.|
+Quicksilver Elemental|The Zeta Set|271|M|{3}{U}{U}|Creature - Elemental|3|4|{U}: This creature gains all activated abilities of target creature until end of turn.$You may spend blue mana as though it were mana of any color to pay the activation costs of this creature's abilities.|
+Spell Pierce|The Zeta Set|272|C|{U}|Instant|||Counter target noncreature spell unless its controller pays {2}.|
+Thought Scour|The Zeta Set|273|C|{U}|Instant|||Target player mills two cards.$Draw a card.|
+Thrummingbird|The Zeta Set|274|U|{1}{U}|Creature - Phyrexian Bird Horror|1|1|Flying$Whenever this creature deals combat damage to a player, proliferate.|
+Windfall|The Zeta Set|275|U|{2}{U}|Sorcery|||Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.|
+Animate Dead|The Zeta Set|276|U|{1}{B}|Enchantment - Aura|||Enchant creature card in a graveyard$When this Aura enters, if it's on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with this Aura." Return enchanted creature card to the battlefield under your control and attach this Aura to it. When this Aura leaves the battlefield, that creature's controller sacrifices it.$Enchanted creature gets -1/-0.|
+Cauldron Familiar|The Zeta Set|277|C|{B}|Creature - Cat|1|1|When this creature enters, each opponent loses 1 life and you gain 1 life.$Sacrifice a Food: Return this card from your graveyard to the battlefield.|
+Cruel Reality|The Zeta Set|278|U|{5}{B}{B}|Enchantment - Aura Curse|||Enchant player$At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker of their choice. If the player can't, they lose 5 life.|
+Cut Down|The Zeta Set|279|C|{B}|Instant|||Destroy target creature with total power and toughness 5 or less.|
+Dark Ritual|The Zeta Set|280|U|{B}|Instant|||Add {B}{B}{B}.|
+Doomsday|The Zeta Set|281|U|{B}{B}{B}|Sorcery|||Search your library and graveyard for five cards and exile the rest. Put the chosen cards on top of your library in any order. You lose half your life, rounded up.|
+Duress|The Zeta Set|282|C|{B}|Sorcery|||Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card.|
+Feed the Swarm|The Zeta Set|283|C|{1}{B}|Sorcery|||Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's mana value.|
+Go for the Throat|The Zeta Set|284|C|{1}{B}|Instant|||Destroy target nonartifact creature.|
+Gray Merchant of Asphodel|The Zeta Set|285|C|{3}{B}{B}|Creature - Zombie|2|4|When this creature enters, each opponent loses X life, where X is your devotion to black. You gain life equal to the life lost this way.|
+Hypnotic Specter|The Zeta Set|286|U|{1}{B}{B}|Creature - Specter|2|2|Flying$Whenever this creature deals damage to an opponent, that player discards a card at random.|
+Imp's Mischief|The Zeta Set|287|R|{1}{B}|Instant|||Change the target of target spell with a single target. You lose life equal to that spell's mana value.|
+Lord Skitter, Sewer King|The Zeta Set|288|U|{2}{B}|Legendary Creature - Rat Noble|3|3|Whenever another Rat you control enters, exile up to one target card from an opponent's graveyard.$At the beginning of combat on your turn, create a 1/1 black Rat creature token with "This token can't block."|
+Mortuary|The Zeta Set|289|M|{3}{B}|Enchantment|||Whenever a creature is put into your graveyard from the battlefield, put that card on top of your library.|
+Night's Whisper|The Zeta Set|290|C|{1}{B}|Sorcery|||You draw two cards and lose 2 life.|
+Sengir Vampire|The Zeta Set|291|C|{3}{B}{B}|Creature - Vampire|4|4|Flying$Whenever a creature dealt damage by this creature this turn dies, put a +1/+1 counter on this creature.|
+Tragic Slip|The Zeta Set|292|C|{B}|Instant|||Target creature gets -1/-1 until end of turn.$Morbid -- That creature gets -13/-13 until end of turn instead if a creature died this turn.|
+Unearth|The Zeta Set|293|C|{B}|Sorcery|||Return target creature card with mana value 3 or less from your graveyard to the battlefield.$Cycling {2}|
+Vito, Thorn of the Dusk Rose|The Zeta Set|294|R|{2}{B}|Legendary Creature - Vampire Cleric|1|3|Whenever you gain life, target opponent loses that much life.${3}{B}{B}: Creatures you control gain lifelink until end of turn.|
+Yargle, Glutton of Urborg|The Zeta Set|295|U|{4}{B}|Legendary Creature - Frog Spirit|9|3||
+Anger|The Zeta Set|296|U|{3}{R}|Creature - Incarnation|2|2|Haste$As long as this card is in your graveyard and you control a Mountain, creatures you control have haste.|
+Cathartic Reunion|The Zeta Set|297|C|{1}{R}|Sorcery|||As an additional cost to cast this spell, discard two cards.$Draw three cards.|
+Disintegrate|The Zeta Set|298|C|{X}{R}|Sorcery|||Disintegrate deals X damage to any target. If it's a creature, it can't be regenerated this turn, and if it would die this turn, exile it instead.|
+Fireball|The Zeta Set|299|C|{X}{R}|Sorcery|||This spell costs {1} more to cast for each target beyond the first.$Fireball deals X damage divided evenly, rounded down, among any number of targets.|
+Glimpse the Impossible|The Zeta Set|300|U|{2}{R}|Sorcery|||Exile the top three cards of your library. You may play those cards this turn. At the beginning of the next end step, if any of those cards remain exiled, put them into your graveyard, then create a 0/1 colorless Eldrazi Spawn creature token for each card put into your graveyard this way. Those tokens have "Sacrifice this token: Add {C}."|
+Gut Shot|The Zeta Set|301|C|{R/P}|Instant|||({R/P} can be paid with either {R} or 2 life.)$Gut Shot deals 1 damage to any target.|
+Guttersnipe|The Zeta Set|302|C|{2}{R}|Creature - Goblin Shaman|2|2|Whenever you cast an instant or sorcery spell, this creature deals 2 damage to each opponent.|
+Imperial Recruiter|The Zeta Set|303|R|{2}{R}|Creature - Human Advisor|1|1|When this creature enters, search your library for a creature card with power 2 or less, reveal it, put it into your hand, then shuffle.|
+Kazuul, Tyrant of the Cliffs|The Zeta Set|304|U|{3}{R}{R}|Legendary Creature - Ogre Warrior|5|4|Whenever a creature an opponent controls attacks, if you're the defending player, create a 3/3 red Ogre creature token unless that creature's controller pays {3}.|
+Lightning Bolt|The Zeta Set|305|C|{R}|Instant|||Lightning Bolt deals 3 damage to any target.|
+Mana Echoes|The Zeta Set|306|M|{2}{R}{R}|Enchantment|||Whenever a creature enters, you may add an amount of {C} equal to the number of creatures you control that share a creature type with it.|
+Price of Progress|The Zeta Set|307|C|{1}{R}|Instant|||Price of Progress deals damage to each player equal to twice the number of nonbasic lands that player controls.|
+Pyroblast|The Zeta Set|308|U|{R}|Instant|||Choose one --$* Counter target spell if it's blue.$* Destroy target permanent if it's blue.|
+Pyrokinesis|The Zeta Set|309|U|{4}{R}{R}|Instant|||You may exile a red card from your hand rather than pay this spell's mana cost.$Pyrokinesis deals 4 damage divided as you choose among any number of target creatures.|
+Simian Spirit Guide|The Zeta Set|310|C|{2}{R}|Creature - Ape Spirit|2|2|Exile this card from your hand: Add {R}.|
+Vandalblast|The Zeta Set|311|C|{R}|Sorcery|||Destroy target artifact you don't control.$Overload {4}{R}|
+Wheel of Misfortune|The Zeta Set|312|U|{2}{R}|Sorcery|||Each player secretly chooses a number 0 or greater, then all players reveal those numbers simultaneously and determine the highest and lowest numbers revealed this way. Wheel of Misfortune deals damage equal to the highest number to each player who chose that number. Each player who didn't choose the lowest number discards their hand, then draws seven cards.|
+Birds of Paradise|The Zeta Set|313|R|{G}|Creature - Bird|0|1|Flying${T}: Add one mana of any color.|
+Chatterstorm|The Zeta Set|314|C|{1}{G}|Sorcery|||Create a 1/1 green Squirrel creature token.$Storm|
+Colossal Dreadmaw|The Zeta Set|315|C|{4}{G}{G}|Creature - Dinosaur|6|6|Trample|
+Cultivate|The Zeta Set|316|C|{2}{G}|Sorcery|||Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle.|
+Giant Spider|The Zeta Set|317|C|{3}{G}|Creature - Spider|2|4|Reach|
+Gigantosaurus|The Zeta Set|318|C|{G}{G}{G}{G}{G}|Creature - Dinosaur|10|10||
+Grizzly Bears|The Zeta Set|319|C|{1}{G}|Creature - Bear|2|2||
+Hornet Queen|The Zeta Set|320|U|{4}{G}{G}{G}|Creature - Insect|2|2|Flying, deathtouch$When this creature enters, create four 1/1 green Insect creature tokens with flying and deathtouch.|
+Invigorate|The Zeta Set|321|C|{2}{G}|Instant|||If you control a Forest, rather than pay this spell's mana cost, you may have an opponent gain 3 life.$Target creature gets +4/+4 until end of turn.|
+Life from the Loam|The Zeta Set|322|R|{1}{G}|Sorcery|||Return up to three target land cards from your graveyard to your hand.$Dredge 3|
+Llanowar Elves|The Zeta Set|323|C|{G}|Creature - Elf Druid|1|1|{T}: Add {G}.|
+Nature's Claim|The Zeta Set|324|C|{G}|Instant|||Destroy target artifact or enchantment. Its controller gains 4 life.|
+Ruxa, Patient Professor|The Zeta Set|325|U|{2}{G}{G}|Legendary Creature - Bear Druid|4|4|Whenever Ruxa enters or attacks, return target creature card with no abilities from your graveyard to your hand.$Creatures you control with no abilities get +1/+1.$For each creature you control with no abilities, you may have that creature assign its combat damage as though it weren't blocked.|
+Scute Swarm|The Zeta Set|326|R|{2}{G}|Creature - Insect|1|1|Landfall -- Whenever a land you control enters, create a 1/1 green Insect creature token. If you control six or more lands, create a token that's a copy of this creature instead.|
+Scythecat Cub|The Zeta Set|327|M|{1}{G}|Creature - Cat|2|2|Trample$Landfall -- Whenever a land you control enters, put a +1/+1 counter on target creature you control. If this is the second time this ability has resolved this turn, double the number of +1/+1 counters on that creature instead.|
+Wild Growth|The Zeta Set|328|C|{G}|Enchantment - Aura|||Enchant land$Whenever enchanted land is tapped for mana, its controller adds an additional {G}.|
+Wild Nacatl|The Zeta Set|329|C|{G}|Creature - Cat Warrior|1|1|This creature gets +1/+1 as long as you control a Mountain.$This creature gets +1/+1 as long as you control a Plains.|
+Baleful Strix|The Zeta Set|330|C|{U}{B}|Artifact Creature - Bird|1|1|Flying, deathtouch$When this creature enters, draw a card.|
+Dueling Grounds|The Zeta Set|331|R|{1}{G}{W}|Enchantment|||No more than one creature can attack each combat.$No more than one creature can block each combat.|
+Garth One-Eye|The Zeta Set|332|U|{W}{U}{B}{R}{G}|Legendary Creature - Human Wizard|5|5|{T}: Choose a card name that hasn't been chosen from among Disenchant, Braingeyser, Terror, Shivan Dragon, Regrowth, and Black Lotus. Create a copy of the card with the chosen name. You may cast the copy.|
+The Jolly Balloon Man|The Zeta Set|333|U|{1}{R}{W}|Legendary Creature - Human Clown|1|4|Haste${1}, {T}: Create a token that's a copy of another target creature you control, except it's a 1/1 red Balloon creature in addition to its other colors and types and it has flying and haste. Sacrifice it at the beginning of the next end step. Activate only as a sorcery.|
+Obeka, Brute Chronologist|The Zeta Set|334|U|{1}{U}{B}{R}|Legendary Creature - Ogre Wizard|3|4|{T}: The player whose turn it is may end the turn.|
+Raffine, Scheming Seer|The Zeta Set|335|U|{W}{U}{B}|Legendary Creature - Sphinx Demon|1|4|Flying, ward {1}$Whenever you attack, target attacking creature connives X, where X is the number of attacking creatures.|
+Arcane Signet|The Zeta Set|336|C|{2}|Artifact|||{T}: Add one mana of any color in your commander's color identity.|
+Ashnod's Altar|The Zeta Set|337|R|{3}|Artifact|||Sacrifice a creature: Add {C}{C}.|
+Chromatic Lantern|The Zeta Set|338|R|{3}|Artifact|||Lands you control have "{T}: Add one mana of any color."${T}: Add one mana of any color.|
+Chromatic Orrery|The Zeta Set|339|M|{7}|Legendary Artifact|||You may spend mana as though it were mana of any color.${T}: Add {C}{C}{C}{C}{C}.${5}, {T}: Draw a card for each color among permanents you control.|
+Chrome Mox|The Zeta Set|340|M|{0}|Artifact|||Imprint -- When this artifact enters, you may exile a nonartifact, nonland card from your hand.${T}: Add one mana of any of the exiled card's colors.|
+Cloud Key|The Zeta Set|341|U|{3}|Artifact|||As this artifact enters, choose artifact, creature, enchantment, instant, or sorcery.$Spells you cast of the chosen type cost {1} less to cast.|
+Clown Car|The Zeta Set|342|U|{X}|Artifact - Vehicle|1|1|When this Vehicle enters, roll X six-sided dice. For each odd result, create a 1/1 white Clown Robot artifact creature token. For each even result, put a +1/+1 counter on this Vehicle.$Crew 2|
+Copper Tablet|The Zeta Set|343|M|{2}|Artifact|||At the beginning of each player's upkeep, this artifact deals 1 damage to that player.|
+Darksteel Monolith|The Zeta Set|344|R|{8}|Artifact|||Indestructible$Once each turn, you may pay {0} rather than pay the mana cost for a colorless spell you cast from your hand.|
+Eternity Vessel|The Zeta Set|345|R|{6}|Artifact|||This artifact enters with X charge counters on it, where X is your life total.$Landfall -- Whenever a land you control enters, you may have your life total become the number of charge counters on this artifact.|
+Foundry Inspector|The Zeta Set|346|U|{3}|Artifact Creature - Construct|3|2|Artifact spells you cast cost {1} less to cast.|
+Jester's Cap|The Zeta Set|347|U|{4}|Artifact|||{2}, {T}, Sacrifice this artifact: Search target player's library for three cards and exile them. Then that player shuffles.|
+Manifold Key|The Zeta Set|348|U|{1}|Artifact|||{1}, {T}: Untap another target artifact.${3}, {T}: Target creature can't be blocked this turn.|
+Mox Tantalite|The Zeta Set|349|M||Artifact|||Suspend 3--{0}${T}: Add one mana of any color.|
+Mycosynth Golem|The Zeta Set|350|R|{11}|Artifact Creature - Golem|4|5|Affinity for artifacts$Artifact creature spells you cast have affinity for artifacts.|
+Ornithopter|The Zeta Set|351|C|{0}|Artifact Creature - Thopter|0|2|Flying|
+Panoptic Mirror|The Zeta Set|352|M|{5}|Artifact|||Imprint -- {X}, {T}: You may exile an instant or sorcery card with mana value X from your hand.$At the beginning of your upkeep, you may copy a card exiled with this artifact. If you do, you may cast the copy without paying its mana cost.|
+Rogue's Gloves|The Zeta Set|353|U|{2}|Artifact - Equipment|||Whenever equipped creature deals combat damage to a player, you may draw a card.$Equip {2}|
+Sensei's Divining Top|The Zeta Set|354|R|{1}|Artifact|||{1}: Look at the top three cards of your library, then put them back in any order.${T}: Draw a card, then put this artifact on top of its owner's library.|
+Skullclamp|The Zeta Set|355|R|{1}|Artifact - Equipment|||Equipped creature gets +1/-1.$Whenever equipped creature dies, draw two cards.$Equip {1}|
+Sol Ring|The Zeta Set|356|U|{1}|Artifact|||{T}: Add {C}{C}.|
+Soul-Guide Lantern|The Zeta Set|357|C|{1}|Artifact|||When this artifact enters, exile target card from a graveyard.${T}, Sacrifice this artifact: Exile each opponent's graveyard.${1}, {T}, Sacrifice this artifact: Draw a card.|
+Thought Vessel|The Zeta Set|358|C|{2}|Artifact|||You have no maximum hand size.${T}: Add {C}.|
+Ward of Bones|The Zeta Set|359|R|{6}|Artifact|||Each opponent who controls more creatures than you can't cast creature spells. The same is true for artifacts and enchantments.$Each opponent who controls more lands than you can't play lands.|
+Command Tower|The Zeta Set|360|C||Land|||{T}: Add one mana of any color in your commander's color identity.|
+Oboro, Palace in the Clouds|The Zeta Set|361|R||Legendary Land|||{T}: Add {U}.${1}: Return Oboro to its owner's hand.|
+Reliquary Tower|The Zeta Set|362|U||Land|||You have no maximum hand size.${T}: Add {C}.|
+Urborg, Tomb of Yawgmoth|The Zeta Set|363|M||Legendary Land|||Each land is a Swamp in addition to its other land types.|

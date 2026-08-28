@@ -103,4 +103,35 @@ public class EquipAbilityTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Elvish Mystic", 0);
     }
 
+    @Test
+    public void testEquipRequirements() {
+        addCard(Zone.BATTLEFIELD, playerA, "O-Naginata");
+        addCard(Zone.BATTLEFIELD, playerA, "Benevolent Bodyguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 2);
+
+        checkPlayableAbility("should not be able to equip", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+    }
+
+    @Test
+    public void testEquipFallsOff() {
+        addCard(Zone.BATTLEFIELD, playerA, "O-Naginata");
+        addCard(Zone.BATTLEFIELD, playerA, "Barbarian Horde");
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 3);
+        addCard(Zone.HAND, playerB, "Befuddle");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Barbarian Horde");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Befuddle", "Barbarian Horde");
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPowerToughness(playerA, "Barbarian Horde", -1, 3);
+        Assert.assertTrue(getPermanent("Barbarian Horde", playerA).getAttachments().isEmpty());
+    }
 }

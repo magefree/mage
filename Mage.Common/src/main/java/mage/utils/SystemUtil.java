@@ -289,6 +289,7 @@ public final class SystemUtil {
                 String mes = String.format("Couldn't find init file: %s", f.getAbsolutePath());
                 logger.warn(mes);
                 errorsList.add(mes);
+                errorsList.add("Look at mage-server-folder/config/init.txt.example for setup and usage instructions");
                 sendCheatCommandsFeedback(game, feedbackPlayer, errorsList);
                 return;
             }

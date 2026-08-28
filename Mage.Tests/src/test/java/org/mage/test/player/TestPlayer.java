@@ -2246,6 +2246,9 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
+        // support:
+        // - key choice dialog - allow to choose by key or by starting text
+        // - text choice dialog - allow to choose full text
         assertAliasSupportInChoices(false);
 
         if (!choices.isEmpty()) {
@@ -2256,7 +2259,7 @@ public class TestPlayer implements Player {
                 return false;
             }
 
-            if (choice.setChoiceByAnswers(choices, true)) {
+            if (tryToChooseByChoices(game, choice, choices)) {
                 return true;
             }
 
@@ -2272,6 +2275,50 @@ public class TestPlayer implements Player {
         this.chooseStrictModeFailed("choice", game,
                 "Message: " + choice.getMessage() + "\nPossible choices:\n" + choicesInfo);
         return computerPlayer.choose(outcome, choice, game);
+    }
+
+    public boolean tryToChooseByChoices(Game game, Choice choiceDialog, List<String> answers) {
+        String needChoice = answers.get(0);
+
+        if (choiceDialog.isKeyChoice()) {
+            // keys mode
+            for (Map.Entry<String, String> currentChoice : choiceDialog.getKeyChoices().entrySet()) {
+                if (currentChoice.getKey().equals(needChoice)) {
+                    choiceDialog.setChoiceByKey(needChoice, false);
+                    choicesRemoveCurrent(game, "on choose key choice");
+                    return true;
+                }
+            }
+
+            // it's allow to choose key values by text, so do not raise error here
+            // text answers support, so dev can use setChoice by 1,2,3 or real text
+            for (Map.Entry<String, String> currentChoice : choiceDialog.getKeyChoices().entrySet()) {
+                String choiceValue = currentChoice.getValue();
+                // Clean any html part (for easier unit test matching)
+                String cleanedChoiceValue = choiceValue.replaceAll("<[^<>]*>", "");
+                if (choiceValue.startsWith(needChoice) || cleanedChoiceValue.startsWith(needChoice)) {
+                    // TODO: wtf, need research - is it used?
+                    choiceDialog.setChoiceByKey(currentChoice.getKey(), false);
+                    choicesRemoveCurrent(game, "on choose key choice");
+                    return true;
+                }
+            }
+            
+            throw new IllegalArgumentException("Choice key [" + needChoice + "] not found in " + choiceDialog.getChoices());
+        } else {
+            // string mode
+            for (String currentChoice : choiceDialog.getChoices()) {
+                // Clean any html part (for easier unit test matching)
+                String cleanedChoiceValue = currentChoice.replaceAll("<[^<>]*>", "");
+                if (currentChoice.equals(needChoice) || cleanedChoiceValue.equals(needChoice)) {
+                    choiceDialog.setChoice(needChoice, false);
+                    choicesRemoveCurrent(game, "on choose text choice");
+                    return true;
+                }
+            }
+            // TODO: replace by 0 instead for
+            throw new IllegalArgumentException("Choice key [" + needChoice + "] not found in " + choiceDialog.getChoices());
+        }
     }
 
     @Override
