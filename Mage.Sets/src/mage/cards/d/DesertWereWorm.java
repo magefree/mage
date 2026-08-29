@@ -2,7 +2,6 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -18,10 +17,9 @@ import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.watchers.Watcher;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -57,6 +55,7 @@ public final class DesertWereWorm extends CardImpl {
                 "untap all attacking creatures"
         ));
         ability.addEffect(new AdditionalCombatPhaseEffect());
+        ability.addWatcher(new DesertWereWormWatcher());
         this.addAbility(ability);
     }
 
@@ -93,31 +92,10 @@ class DesertWereWormAttackAbility extends TriggeredAbilityImpl {
         if (!isControlledBy(game.getCombat().getAttackingPlayerId())) {
             return false;
         }
-        // First attack with power 12 or greater not overall first attack
-        // Could be triggered in an additional combat
-        // From any creatures you control attacking
-        if (TriggeredAbility.checkDidThisTurn(this,game)) {
-            return false;
-        }
-        List<Permanent> attackers = game
-                .getCombat()
-                .getAttackers()
-                .stream()
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .filter(permanent -> StaticFilters.FILTER_PERMANENT_CREATURES.match(permanent, controllerId, this, game))
-                .collect(Collectors.toList());
-        if (!attackers.isEmpty()) {
-            int power = 0;
-            for (Permanent attacker : attackers) {
-                if (attacker != null) {
-                    power += attacker.getPower().getValue();
-                }
-            }
-            if (power >= 12) {
-                TriggeredAbility.setDidThisTurn(this, game);
-                return true;
-            }
+        DesertWereWormWatcher watcher = game.getState().getWatcher(DesertWereWormWatcher.class);
+        if (watcher != null) {
+            // Only first time condition gets met
+            return watcher.conditionMet() && watcher.getTimesConditionMet() == 1;
         }
         return false;
     }
@@ -127,3 +105,57 @@ class DesertWereWormAttackAbility extends TriggeredAbilityImpl {
         return new DesertWereWormAttackAbility(this);
     }
 }
+
+class DesertWereWormWatcher extends Watcher {
+
+    int timesConditionMet = 0;
+
+    DesertWereWormWatcher() {
+        super(WatcherScope.GAME);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() != GameEvent.EventType.DECLARED_ATTACKERS) {
+            return;
+        }
+        // First attack with power 12 or greater not overall first attack
+        // Could be triggered in an additional combat
+        // From any creatures you control attacking
+        List<Permanent> attackers = game
+                 .getCombat()
+                 .getAttackers()
+                 .stream()
+                 .map(game::getPermanent)
+                 .filter(Objects::nonNull)
+                 .filter(permanent -> StaticFilters.FILTER_PERMANENT_CREATURES.match(permanent, controllerId, null, game))
+                 .collect(Collectors.toList());
+        int power = 0;
+        if (!attackers.isEmpty()) {
+            // Check power of attackers
+            for (Permanent attacker : attackers) {
+                if (attacker != null) {
+                     power += attacker.getPower().getValue();
+                }
+            }
+        }
+        // Reset the condition on combats not meeting the condition
+        if (power >= 12) {
+            this.timesConditionMet++;
+            this.condition = true;
+        } else {
+            this.condition = false;
+        }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        this.timesConditionMet = 0;
+    }
+
+    public int getTimesConditionMet() {
+        return timesConditionMet;
+    }
+}
+
