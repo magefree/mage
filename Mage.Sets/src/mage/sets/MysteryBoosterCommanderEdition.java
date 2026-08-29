@@ -54,6 +54,7 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Thought Vessel", 78, Rarity.UNCOMMON, mage.cards.t.ThoughtVessel.class));
         cards.add(new SetCardInfo("Tolabow, Loch Rascal", 12, Rarity.RARE, mage.cards.t.TolabowLochRascal.class));
         cards.add(new SetCardInfo("Tsagan, Raider Warlord", 53, Rarity.RARE, mage.cards.t.TsaganRaiderWarlord.class));
+        cards.add(new SetCardInfo("Valko Indorian", 60, Rarity.RARE, mage.cards.v.ValkoIndorian.class));
         cards.add(new SetCardInfo("Whtz, the Bibliophile", 57, Rarity.RARE, mage.cards.w.WhtzTheBibliophile.class));
         cards.add(new SetCardInfo("Worzel, the Protector", 5, Rarity.RARE, mage.cards.w.WorzelTheProtector.class));
     }
