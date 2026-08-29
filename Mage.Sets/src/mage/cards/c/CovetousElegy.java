@@ -36,14 +36,13 @@ public final class CovetousElegy extends CardImpl {
 
         // Each player chooses up to two creatures they control, then sacrifices the rest. Then you create a tapped Treasure token for each creature your opponents control.
         this.getSpellAbility().addEffect(new CovetousElegyEffect());
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new TreasureToken(), xValue).concatBy("Then"));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new TreasureToken(), xValue, true, false).concatBy("Then"));
         this.getSpellAbility().addHint(hint);
     }
 
     private CovetousElegy(final CovetousElegy card) {
         super(card);
     }
-
     @Override
     public CovetousElegy copy() {
         return new CovetousElegy(this);
