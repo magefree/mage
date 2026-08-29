@@ -95,7 +95,7 @@ class DesertWereWormAttackAbility extends TriggeredAbilityImpl {
         DesertWereWormWatcher watcher = game.getState().getWatcher(DesertWereWormWatcher.class);
         if (watcher != null) {
             // Only first time condition gets met
-            return watcher.conditionMet() && watcher.getFirstTimeMet();
+            return watcher.getFirstTimeMet() && watcher.conditionMet();
         }
         return false;
     }
@@ -140,7 +140,7 @@ class DesertWereWormWatcher extends Watcher {
             }
         }
         // Only once both can be true
-        if (power >= 12 && !condition && !firstTimeMet) {
+        if (!condition && !firstTimeMet && power >= 12) {
             firstTimeMet = true;
             condition = true;
         } else {
