@@ -56,6 +56,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Bofur, Reliable Guardian", 215, Rarity.UNCOMMON, mage.cards.b.BofurReliableGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bofur, Reliable Guardian", 251, Rarity.UNCOMMON, mage.cards.b.BofurReliableGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bofur, Reliable Guardian", 6, Rarity.UNCOMMON, mage.cards.b.BofurReliableGuardian.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bolg of the North", 148, Rarity.UNCOMMON, mage.cards.b.BolgOfTheNorth.class));
         cards.add(new SetCardInfo("Bolg's Company", 149, Rarity.RARE, mage.cards.b.BolgsCompany.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bolg's Company", 211, Rarity.RARE, mage.cards.b.BolgsCompany.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bombur, Gentle Dreamer", 88, Rarity.UNCOMMON, mage.cards.b.BomburGentleDreamer.class));
