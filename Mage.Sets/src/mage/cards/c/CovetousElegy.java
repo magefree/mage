@@ -43,6 +43,7 @@ public final class CovetousElegy extends CardImpl {
     private CovetousElegy(final CovetousElegy card) {
         super(card);
     }
+
     @Override
     public CovetousElegy copy() {
         return new CovetousElegy(this);
