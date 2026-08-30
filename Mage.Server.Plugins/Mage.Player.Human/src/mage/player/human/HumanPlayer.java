@@ -666,8 +666,10 @@ public class HumanPlayer extends PlayerImpl {
                 } else {
                     choice.setChoice(val);
                 }
-                choice.onChooseEnd(game, playerId, val);
-                return true;
+                if (choice.isChosen()) {
+                    choice.onChooseEnd(game, playerId, val);
+                    return true;
+                }
             } else if (!choice.isRequired()) {
                 // cancel
                 choice.onChooseEnd(game, playerId, null);
