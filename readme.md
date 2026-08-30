@@ -26,6 +26,9 @@ Official public server with released version:
 Other servers and status:
 * http://xmage.today/servers/ (temporarily out of service)
 
+Check set implementation status:
+* [Set tracker](https://github.com/magefree/mage/Set-implementation-list.md)
+
 ## Features
 
 * The most tested open-source rules enforcement engine: ~9000 unit tests, ~80% coverage;
