@@ -23,6 +23,7 @@ public class CanadianHighlander extends Constructed {
         pointMap.put("Black Lotus", 7);
         pointMap.put("Demonic Tutor", 3);
         pointMap.put("Dig Through Time", 1);
+        pointMap.put("Enlightened Tutor", 1);
         pointMap.put("Flash", 7);
         pointMap.put("Forth Eorlingas!", 1);
         pointMap.put("Gifts Ungiven", 1);
@@ -43,15 +44,17 @@ public class CanadianHighlander extends Constructed {
         pointMap.put("Psychic Frog", 1);
         pointMap.put("Reanimate", 1);
         pointMap.put("Sol Ring", 3);
+        pointMap.put("Spellseeker", 1);
         pointMap.put("Strip Mine", 1);
         pointMap.put("Tainted Pact", 1);
         pointMap.put("Tamiyo, Inquisitive Student", 1);
         pointMap.put("Thassa's Oracle", 5);
+        pointMap.put("The Fantasticar", 1);
         pointMap.put("The One Ring", 1);
         pointMap.put("Time Vault", 7);
         pointMap.put("Time Walk", 5);
         pointMap.put("Tinker", 3);
-        pointMap.put("Tolarian Academy", 1);
+        pointMap.put("Tolarian Academy", 2);
         pointMap.put("Treasure Cruise", 1);
         pointMap.put("True-Name Nemesis", 1);
         pointMap.put("Underworld Breach", 3);
