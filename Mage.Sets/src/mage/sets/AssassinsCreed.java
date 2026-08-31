@@ -54,7 +54,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Assassin's Trophy", 166, Rarity.RARE, mage.cards.a.AssassinsTrophy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Assassin's Trophy", 228, Rarity.RARE, mage.cards.a.AssassinsTrophy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Assassin's Trophy", 95, Rarity.RARE, mage.cards.a.AssassinsTrophy.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Auditore Ambush", 295, Rarity.RARE, mage.cards.a.AuditoreAmbush.class));
+        cards.add(new SetCardInfo("Auditore Ambush", 295, Rarity.RARE, mage.cards.a.AuditoreAmbush.class));
         cards.add(new SetCardInfo("Aveline de Grandpre", 135, Rarity.RARE, mage.cards.a.AvelineDeGrandpre.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aveline de Grandpre", 220, Rarity.RARE, mage.cards.a.AvelineDeGrandpre.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aveline de Grandpre", 40, Rarity.RARE, mage.cards.a.AvelineDeGrandpre.class, NON_FULL_USE_VARIOUS));
