@@ -35,15 +35,16 @@ public final class TwinbladeGeist extends TransformingDoubleFacedCard {
         // Double strike
         this.getLeftHalfCard().addAbility(DoubleStrikeAbility.getInstance());
 
-        // Disturb {2}{W}
-        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{2}{W}"));
-
         // Twinblade Invocation
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getRightHalfCard().getSpellAbility().addTarget(auraTarget);
         this.getRightHalfCard().getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.getRightHalfCard().addAbility(new EnchantAbility(auraTarget));
+
+        // Disturb {2}{W}
+        // needs to be added after enchant ability is set for target
+        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{2}{W}"));
 
         // Enchanted creature has double strike.
         this.getRightHalfCard().addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
