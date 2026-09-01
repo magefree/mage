@@ -35,6 +35,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Breeding Pool", 279, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Breeding Pool", 401, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Breeding Pool", 496, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cantankerous Captain", 141, Rarity.COMMON, mage.cards.c.CantankerousCaptain.class));
         cards.add(new SetCardInfo("Captain James T. Kirk", 142, Rarity.MYTHIC, mage.cards.c.CaptainJamesTKirk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain James T. Kirk", 1701, Rarity.MYTHIC, mage.cards.c.CaptainJamesTKirk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain James T. Kirk", 418, Rarity.MYTHIC, mage.cards.c.CaptainJamesTKirk.class, NON_FULL_USE_VARIOUS));
