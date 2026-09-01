@@ -77,6 +77,9 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Dain's Company", 152, Rarity.RARE, mage.cards.d.DainsCompany.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dain's Company", 212, Rarity.RARE, mage.cards.d.DainsCompany.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dain, Lord of the Iron Hills", 8, Rarity.UNCOMMON, mage.cards.d.DainLordOfTheIronHills.class));
+        cards.add(new SetCardInfo("Desert Were-Worm", 225, Rarity.RARE, mage.cards.d.DesertWereWorm.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Desert Were-Worm", 261, Rarity.RARE, mage.cards.d.DesertWereWorm.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Desert Were-Worm", 92, Rarity.RARE, mage.cards.d.DesertWereWorm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Desolation Prowler", 64, Rarity.UNCOMMON, mage.cards.d.DesolationProwler.class));
         cards.add(new SetCardInfo("Desolation of Smaug", 226, Rarity.RARE, mage.cards.d.DesolationOfSmaug.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Desolation of Smaug", 262, Rarity.RARE, mage.cards.d.DesolationOfSmaug.class, NON_FULL_USE_VARIOUS));
