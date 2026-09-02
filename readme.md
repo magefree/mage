@@ -21,10 +21,10 @@ XMage community and resources:
 * [Project documentation](https://github.com/magefree/mage/wiki).
 
 Official public server with released version:
-* http://xmage.today/
+* https://xmage.today/
 
 Other servers and status:
-* http://xmage.today/servers/ (temporarily out of service)
+* https://xmage.today/servers/ (temporarily out of service)
 
 ## Features
 
@@ -45,8 +45,8 @@ The best way to report bug or feature request is [github's issues page](https://
 
 ## Installation / running
 
-* Download files and follow install instructions on http://xmage.today/
-* You need to have [Java version 8 or later](http://java.com/) to run launcher;
+* Download files and follow install instructions on https://xmage.today/
+* You need to have [Java version 8 or later](https://java.com/) to run launcher;
 * Recommended folder to unpack/install: `D:\games\xmage` (don't use Program Files or Download folders);
 * If you want to play with AI opponents then must run "server" app via the launcher and connect to it via localhost;
 
@@ -76,7 +76,7 @@ The main way to increase performance or fix micro-freezes -- increase max memory
 
 ## Development
 
-Full project documentation and instructions for developers can be found in [wiki pages](http://github.com/magefree/mage/wiki/).
+Full project documentation and instructions for developers can be found in [wiki pages](https://github.com/magefree/mage/wiki/).
 
 First steps for XMage's developers:
 * [Setting up your Development Environment](https://github.com/magefree/mage/wiki/Setting-up-your-Development-Environment)
