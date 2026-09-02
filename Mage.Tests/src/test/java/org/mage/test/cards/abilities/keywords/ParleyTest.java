@@ -51,7 +51,7 @@ public class ParleyTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Selvala, Explorer Returned");
 
-        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "<i>Parley");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "<i>Parley");
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
