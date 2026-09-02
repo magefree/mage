@@ -52,6 +52,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Paradox Shaper", 143, Rarity.UNCOMMON, mage.cards.p.ParadoxShaper.class));
         cards.add(new SetCardInfo("Perfected Theory", 34, Rarity.UNCOMMON, mage.cards.p.PerfectedTheory.class));
         cards.add(new SetCardInfo("Prudent Fateseer", 146, Rarity.UNCOMMON, mage.cards.p.PrudentFateseer.class));
+        cards.add(new SetCardInfo("Solitary Cell", 149, Rarity.RARE, mage.cards.s.SolitaryCell.class));
         cards.add(new SetCardInfo("Stingcaster Mage", 329, Rarity.MYTHIC, mage.cards.s.StingcasterMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stingcaster Mage", 447, Rarity.MYTHIC, mage.cards.s.StingcasterMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stingcaster Mage", 457, Rarity.MYTHIC, mage.cards.s.StingcasterMage.class, NON_FULL_USE_VARIOUS));

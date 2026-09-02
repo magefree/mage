@@ -64537,6 +64537,7 @@ Paradox Shaper|Reality Fracture|143|U|{1}{U/B}|Creature - Octopus Wizard|1|3|At 
 Omit Variables|Reality Fracture|143|U|{U/B}|Sorcery|1|3|Mill three cards.|
 Prudent Fateseer|Reality Fracture|146|U|{1}{W/U}{W/U}|Creature - Dwarf Wizard|1|4|This creature enters prepared.$Whenever you scry or surveil, creatures you control get +1/+0 until end of turn. This ability triggers only once each turn.|
 Peer Review|Reality Fracture|146|U|{2}{W/U}|Sorcery|1|4|Create a 2/2 colorless Wizard Soldier creature token named Cadet. Surveil 1.|
+Solitary Cell|Reality Fracture|149|R|{R}{W}|Artifact|||When this artifact enters, exile target nonland permanent an opponent controls with mana value 3 or less until this artifact leaves the battlefield.${1}, {T}, Discard a legendary card: Draw a card.|
 Stingerquill Voxmancer|Reality Fracture|151|U|{B/R}|Creature - Goblin Sorcerer|1|2|At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared.|
 Vicious Verse|Reality Fracture|151|U|{B/R}|Sorcery|1|2|Vicious Verse deals 1 damage to target opponent.|
 Vigorbloom Vanguard|Reality Fracture|161|U|{1}{G/W}|Creature - Troll Druid|2|2|This creature enters prepared.$Each creature you control with a +1/+1 counter on it has vigilance.|
