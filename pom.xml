@@ -30,26 +30,16 @@
 
             Output file formats:
               * exec-files - generates in any runs, can be used by IntelliJ IDEA in show coverage data dialog: ./module_name/target/jacoco.exec
-              * XML - used by sonar for analysis and upload: ./Mage.Reports/target/site/jacoco-aggregate/jacoco.xml
+              * XML - used by CI/CD for analysis and upload: ./Mage.Reports/target/site/jacoco-aggregate/jacoco.xml
               * HTML - used by devs for offline view: ./Mage.Reports/target/site/jacoco-aggregate/index.html
               * CSV - for something else: ./Mage.Reports/target/site/jacoco-aggregate/jacoco.csv
 
             How to generate execute stats and reports:
-              * for IDE or sonar usage: mvn install -Djacoco.formats=XML -Djacoco.skip=false -Dmaven.test.failure.ignore=true
+              * for IDE usage: mvn install -Djacoco.formats=XML -Djacoco.skip=false -Dmaven.test.failure.ignore=true
               * for offline report: mvn install -Djacoco.skip=false -Dmaven.test.failure.ignore=true
         -->
         <jacoco.formats>XML,HTML</jacoco.formats>
         <jacoco.skip>true</jacoco.skip>
-
-        <!--
-            report: sonar settings for code static analysis and coverage report
-            Actual analys visible on https://sonarcloud.io/project/overview?id=magefree_mage
-
-            How to analyse and upload to the server (warning, it can takes 15+ hours):
-              1. Collect code coverage data in xml format (see jacoco above);
-              2. mvn -e sonar:sonar -Dsonar.projectKey=magefree_mage -Dsonar.organization=magefree -Dsonar.host.url=https://sonarcloud.io -Dsonar.token=xxx
-        -->
-        <sonar.coverage.jacoco.xmlReportPaths>${root.dir}/Mage.Reports/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
     <build>
