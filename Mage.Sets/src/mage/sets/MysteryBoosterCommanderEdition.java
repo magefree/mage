@@ -32,6 +32,7 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Davvol, Evincar of Rath", 36, Rarity.RARE, mage.cards.d.DavvolEvincarOfRath.class));
         cards.add(new SetCardInfo("Dust to Dust", 71, Rarity.UNCOMMON, mage.cards.d.DustToDust.class));
         cards.add(new SetCardInfo("Dyfed, the Guiding Hand", 7, Rarity.RARE, mage.cards.d.DyfedTheGuidingHand.class));
+        cards.add(new SetCardInfo("Elda, Conjurer of Spectacle", 37, Rarity.RARE, mage.cards.e.EldaConjurerofSpectacle.class));
         cards.add(new SetCardInfo("Emerald Collector", 63, Rarity.UNCOMMON, mage.cards.e.EmeraldCollector.class));
         cards.add(new SetCardInfo("Euru, Acorn Scrounger", 70, Rarity.UNCOMMON, mage.cards.e.EuruAcornScrounger.class));
         cards.add(new SetCardInfo("Exotic Orchard", 79, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
