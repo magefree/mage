@@ -1,5 +1,8 @@
 package mage.cards;
 
+import mage.abilities.Abilities;
+import mage.abilities.AbilitiesImpl;
+import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
@@ -26,6 +29,19 @@ public class RoomCardHalfImpl extends SplitCardHalfImpl implements RoomCardHalf 
     @Override
     public RoomCardHalfImpl copy() {
         return new RoomCardHalfImpl(this);
+    }
+
+    /**
+     * Room halves never exist on the battlefield independently — only the
+     * parent RoomCard does. Half abilities are added to the permanent by
+     * {@link RoomCard#addRoomCharacteristics} during permanent creation.
+     * Returning empty here prevents double-registration in the triggers map
+     * (once from game init via {@code GameImpl.loadCards} and once from
+     * {@code addRoomCharacteristics}).
+     */
+    @Override
+    public Abilities<Ability> getInitAbilities() {
+        return new AbilitiesImpl<>();
     }
 
     @Override

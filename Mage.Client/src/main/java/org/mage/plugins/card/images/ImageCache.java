@@ -94,6 +94,21 @@ public final class ImageCache {
             } else {
                 // CARD
                 path = CardImageUtils.buildImagePathToCardOrToken(info);
+                // Some image sources (pre-built packs, Scryfall) include the collector
+                // ID in the filename even when usesVariousArt is false. Try without it
+                // first, then with collector ID as fallback.
+                TFile cardFile = getTFile(path);
+                if ((cardFile == null || !cardFile.exists())
+                        && !usesVariousArt
+                        && !collectorId.isEmpty()
+                        && !"0".equals(collectorId)) {
+                    CardDownloadData altInfo = new CardDownloadData(name, setCode, collectorId, true, imageNumber);
+                    String altPath = CardImageUtils.buildImagePathToCardOrToken(altInfo);
+                    TFile altFile = getTFile(altPath);
+                    if (altFile != null && altFile.exists()) {
+                        path = altPath;
+                    }
+                }
             }
 
             TFile file = getTFile(path);
