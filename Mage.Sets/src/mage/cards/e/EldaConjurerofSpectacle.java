@@ -110,6 +110,6 @@ class EldaFirstCastCreatureSpellPredicate implements ObjectSourcePlayerPredicate
 
     @Override
     public String toString() {
-        return "The first creature spell you cast each turn";
+        return "The first nonlegendary creature spell you cast each turn";
     }
 }
