@@ -361,6 +361,24 @@ public class DisturbTest extends CardTestPlayerBase {
         execute();
         assertExileCount(mirrorhallMimic, 1);
     }
+
+    @Test
+    public void testDisturbAuraKatilda() {
+        addCard(Zone.GRAVEYARD, playerA, "Katilda, Dawnhart Martyr");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Katilda's Rising Dawn using Disturb");
+        addTarget(playerA, "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Katilda's Rising Dawn", 1);
+        assertAttachedTo(playerA, "Katilda's Rising Dawn", "Grizzly Bears", true);
+    }
+
     /**
     * https://github.com/magefree/mage/issues/16071
     */
