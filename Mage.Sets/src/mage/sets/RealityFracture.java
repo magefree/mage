@@ -33,6 +33,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodline Recollector", 402, Rarity.MYTHIC, mage.cards.b.BloodlineRecollector.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodline Recollector", 427, Rarity.MYTHIC, mage.cards.b.BloodlineRecollector.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodline Recollector", 49, Rarity.MYTHIC, mage.cards.b.BloodlineRecollector.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cast Away Doubt", 51, Rarity.COMMON, mage.cards.c.CastAwayDoubt.class));
         cards.add(new SetCardInfo("Chandra, Chill of Compliance", 212, Rarity.MYTHIC, mage.cards.c.ChandraChillOfCompliance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chandra, Chill of Compliance", 297, Rarity.MYTHIC, mage.cards.c.ChandraChillOfCompliance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chandra, Torch of Defiance", 244, Rarity.MYTHIC, mage.cards.c.ChandraTorchOfDefiance.class, NON_FULL_USE_VARIOUS));
