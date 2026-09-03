@@ -53,6 +53,7 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Ruby Collector", 61, Rarity.UNCOMMON, mage.cards.r.RubyCollector.class));
         cards.add(new SetCardInfo("Seluma, Light of Aysen", 4, Rarity.RARE, mage.cards.s.SelumaLightOfAysen.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 77, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
+        cards.add(new SetCardInfo("Thomil, the Destroyer", 19, Rarity.RARE, mage.cards.t.ThomilTheDestroyer.class));
         cards.add(new SetCardInfo("Thought Vessel", 78, Rarity.UNCOMMON, mage.cards.t.ThoughtVessel.class));
         cards.add(new SetCardInfo("Tolabow, Loch Rascal", 12, Rarity.RARE, mage.cards.t.TolabowLochRascal.class));
         cards.add(new SetCardInfo("Tsagan, Raider Warlord", 53, Rarity.RARE, mage.cards.t.TsaganRaiderWarlord.class));
