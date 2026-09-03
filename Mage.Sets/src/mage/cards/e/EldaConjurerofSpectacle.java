@@ -98,7 +98,7 @@ class EldaFirstCastCreatureSpellPredicate implements ObjectSourcePlayerPredicate
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        if (input.getObject() != null && input.getObject().isCreature(game)) {
+        if (input.getObject() != null && input.getObject().isCreature(game) && !input.getObject().isLegendary(game)) {
             EldaConjurerofSpectacleWatcher watcher = game.getState().getWatcher(EldaConjurerofSpectacleWatcher.class);
             return watcher != null && watcher.creatureSpellsCastThisTurn(input.getPlayerId()) == 0;
         }
