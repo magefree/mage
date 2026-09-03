@@ -77,11 +77,8 @@ class EldaConjurerofSpectacleWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (spell != null && spell.isCreature(game)) {
+            if (spell != null && spell.isCreature(game) && !spell.isLegendary(game)) {
                 playerCreatureSpells.put(event.getPlayerId(), creatureSpellsCastThisTurn(event.getPlayerId()) + 1);
-            }
-            if (spell != null && spell.isCreature(game) && spell.isLegendary()) {
-                playerCreatureSpells.put(event.getPlayerId(), creatureSpellsCastThisTurn(event.getPlayerId()) - 1);
             }
         }
     }
