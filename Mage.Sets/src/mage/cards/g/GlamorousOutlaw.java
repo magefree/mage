@@ -35,7 +35,7 @@ public final class GlamorousOutlaw extends CardImpl {
         this.addAbility(ability);
 
         // {2}, Exile Glamorous Outlaw from your hand: Target land gains "{T}: Add {U}, {B}, or {R}" until Glamorous Outlaw is cast from exile. You may cast Glamorous Outlaw for as long as it remains exiled.
-        this.addAbility(new GiveManaAbilityAndCastSourceAbility("UBR"));
+        this.addAbility(new GiveManaAbilityAndCastSourceAbility("UBR",2));
     }
 
     private GlamorousOutlaw(final GlamorousOutlaw card) {
