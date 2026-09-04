@@ -9,6 +9,7 @@ import mage.abilities.*;
 import mage.abilities.common.*;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ColorsOfManaSpentToCastCount;
 import mage.abilities.effects.Effect;
@@ -2656,6 +2657,21 @@ public class VerifyCardDataTest {
                 // how-to fix: make sure each target has it's own target tag like 1 and 2 (don't use 0 because it's default)
                 fail(card, "abilities", "wrong target tags: miss tag in one of the targets, current list: " + tags);
             }
+        });
+
+        // special check: remove counters cost max targets should be min 1, max equal to number of counters to remove
+        // https://github.com/magefree/mage/pull/16089
+        card.getAbilities().stream().forEach(ability -> {
+            ability.getCosts().stream().filter(RemoveCounterCost.class::isInstance).map(RemoveCounterCost.class::cast).forEach(cost -> {
+                cost.getTargets().stream().forEach(target -> {
+                    if (target.getMinNumberOfTargets() != 1) {
+                        fail(card, "abilities", "RemoveCounterCost min targets should be 1");
+                    }
+                    if (target.getMaxNumberOfTargets() != cost.getCountersToRemove()) {
+                        fail(card, "abilities", "RemoveCounterCost max targets should be equal to number of counters to remove");
+                    }
+                });
+            });
         });
 
         // spells have only 1 ability
