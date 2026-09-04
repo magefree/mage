@@ -45,6 +45,7 @@ public class BecomePreparedTargetEffect extends OneShotEffect {
             return staticText;
         }
         return this.getTargetPointer().describeTargets(mode.getTargets(), "that creature")
-                + " becomes " + (prepared ? "" : "un") + "prepared";
+                + " becomes " + (prepared ? "" : "un") + "prepared"
+                + (prepared ? ". " + BecomePreparedSourceEffect.getReminder() : "");
     }
 }
