@@ -7,6 +7,7 @@ import mage.client.chat.ChatPanelBasic;
 import mage.client.dialog.MageDialog;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
+import mage.constants.PhaseStep;
 import mage.constants.PlayerAction;
 import mage.constants.TurnPhase;
 import mage.util.ThreadUtils;
@@ -21,9 +22,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import static mage.constants.Constants.Option.*;
 
@@ -118,7 +121,13 @@ public class FeedbackPanel extends javax.swing.JPanel {
                 this.helper.setUndoEnabled(false);
                 break;
             case SELECT:
-                setButtonState("", "Done", mode);
+                if (options != null && options.containsKey(CUSTOM_SELECT_MESSAGE)) {
+                    String customMessage = (String) options.get(CUSTOM_SELECT_MESSAGE);
+                    setButtonState("", customMessage, mode);
+                }
+                else {
+                    setButtonState("", "Done", mode);
+                }
                 break;
             case END:
                 setButtonState("", "Close game", mode);
@@ -301,9 +310,18 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     public void pressOKYesOrDone() {
-        if (btnLeft.getText().equals("OK") || btnLeft.getText().equals("Yes")) {
+        if (btnLeft.getText().equals("OK") || btnLeft.getText().equals("Yes") || btnLeft.getText().equals("No response")) {
             btnLeft.doClick();
-        } else if (btnRight.getText().equals("OK") || btnRight.getText().equals("Yes") || btnRight.getText().equals("Done")) {
+        } else if (btnRight.getText().equals("OK") || btnRight.getText().equals("Yes") || btnRight.getText().equals("Done") ||  btnRight.getText().equals("No response")) {
+            btnRight.doClick();
+        }
+
+        List<String> stepsNames = PhaseStep.userFacingSteps.stream().map(phaseStep -> phaseStep.toString()).collect(Collectors.toList());
+
+        if (stepsNames.contains(btnLeft.getText())) {
+            btnLeft.doClick();
+        }
+        else if (stepsNames.contains(btnRight.getText())) {
             btnRight.doClick();
         }
     }
