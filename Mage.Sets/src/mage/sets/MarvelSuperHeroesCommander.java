@@ -741,6 +741,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("War Machine, James Rhodes", 572, Rarity.UNCOMMON, mage.cards.w.WarMachineJamesRhodes.class));
         cards.add(new SetCardInfo("Warriors of Wakanda", 565, Rarity.COMMON, mage.cards.w.WarriorsOfWakanda.class));
         cards.add(new SetCardInfo("Wasp, Shrinking Savior", 646, Rarity.RARE, mage.cards.w.WaspShrinkingSavior.class));
+        cards.add(new SetCardInfo("West Coast Expansion", 345, Rarity.RARE, mage.cards.w.WestCoastExpansion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("West Coast Expansion", 40, Rarity.RARE, mage.cards.w.WestCoastExpansion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Whirlwind of Thought", 190, Rarity.RARE, mage.cards.w.WhirlwindOfThought.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Whirlwind of Thought", 424, Rarity.RARE, mage.cards.w.WhirlwindOfThought.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Whispersilk Cloak", 225, Rarity.UNCOMMON, mage.cards.w.WhispersilkCloak.class));
