@@ -26,6 +26,7 @@ import mage.game.Game;
 import mage.game.command.dungeons.DungeonOfTheMadMageDungeon;
 import mage.game.command.dungeons.LostMineOfPhandelverDungeon;
 import mage.game.command.dungeons.TombOfAnnihilationDungeon;
+import mage.game.command.dungeons.UndercityDungeon;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
@@ -164,6 +165,9 @@ public class Dungeon extends CommandObjectImpl {
                 break;
             case "Dungeon of the Mad Mage":
                 res = new DungeonOfTheMadMageDungeon();
+                break;
+            case "Undercity":
+                res = new UndercityDungeon();
                 break;
             default:
                 if (isNameMustExists) {

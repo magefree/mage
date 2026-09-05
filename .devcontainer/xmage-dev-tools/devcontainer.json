@@ -23,6 +23,7 @@
 	//   run "mvn install -DskipTests"
 	// - disable VS Code auto-update on host system: > Settings -> update.mode = none
 	// - disable VS Code's extensions auto-update on host system: > Settings -> extensions.autoUpdate = false
+	// - disable VS Code's control manifest fetch by sudo nano /etc/hosts and add: 127.0.0.1 containers.dev
 	// - do not change devcontainer.json file to avoid image update and re-download
 	// - run any mvn commands with -o flag (offline mode)
 	// 
@@ -72,6 +73,16 @@
 		"vscode": {
 			"settings": {
 				"java.autobuild.enabled": false,
+				"java.import.exclusions": [
+					"**/node_modules/**",
+					"**/.metadata/**",
+					"**/archetype-resources/**",
+					"**/META-INF/maven/**",
+					"**/target/**"
+				],
+				"files.watcherExclude": {
+					"**/target/**": true
+				},
 				"editor.formatOnSave": false,
 				"debug.console.collapseIdenticalLines": false, // do not collapse same game logs, e.g. for tests
 				"debug.console.wordWrap": false, // better format for ai and load test logs

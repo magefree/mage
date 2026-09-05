@@ -50,6 +50,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Cultivate", 50, Rarity.COMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Dark Ritual", 131, Rarity.MYTHIC, mage.cards.d.DarkRitual.class));
         cards.add(new SetCardInfo("Definitely Not a Turtle", 98, Rarity.UNCOMMON, mage.cards.d.DefinitelyNotATurtle.class));
+        cards.add(new SetCardInfo("Dimension X Pizzasaur", 16, Rarity.RARE, mage.cards.d.DimensionXPizzasaur.class));
         cards.add(new SetCardInfo("Donatello's Science Lesson", 110, Rarity.UNCOMMON, mage.cards.d.DonatellosScienceLesson.class));
         cards.add(new SetCardInfo("Donatello, Rad Scientist", 109, Rarity.MYTHIC, mage.cards.d.DonatelloRadScientist.class));
         cards.add(new SetCardInfo("Donatello, the Brains", 2, Rarity.MYTHIC, mage.cards.d.DonatelloTheBrains.class, NON_FULL_USE_VARIOUS));
@@ -66,6 +67,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Fast Forward", 24, Rarity.RARE, mage.cards.f.FastForward.class));
         cards.add(new SetCardInfo("Foe-liage", 122, Rarity.COMMON, mage.cards.f.FoeLiage.class));
         cards.add(new SetCardInfo("Food Chain", 133, Rarity.MYTHIC, mage.cards.f.FoodChain.class));
+        cards.add(new SetCardInfo("Foot Chopper", 17, Rarity.RARE, mage.cards.f.FootChopper.class));
         cards.add(new SetCardInfo("Game Over", 18, Rarity.RARE, mage.cards.g.GameOver.class));
         cards.add(new SetCardInfo("Grand Coliseum", 68, Rarity.RARE, mage.cards.g.GrandColiseum.class));
         cards.add(new SetCardInfo("Hamato Ninpo", 100, Rarity.COMMON, mage.cards.h.HamatoNinpo.class));

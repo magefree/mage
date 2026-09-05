@@ -4,6 +4,7 @@ import mage.collectors.services.PrintGameLogsDataCollector;
 import mage.collectors.services.SaveGameHistoryDataCollector;
 import mage.game.Game;
 import mage.game.Table;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import org.apache.log4j.Logger;
 
@@ -167,8 +168,14 @@ final public class DataCollectorServices implements DataCollector {
     }
 
     @Override
-    public void onTestsStackResolve(Game game) {
+    public void onTestsStackResolveStart(Game game, StackObject top) {
         if (game.isSimulation()) return;
-        activeServices.forEach(c -> c.onTestsStackResolve(game));
+        activeServices.forEach(c -> c.onTestsStackResolveStart(game, top));
+    }
+
+    @Override
+    public void onTestsStackResolveEnd(Game game, StackObject top, boolean applied) {
+        if (game.isSimulation()) return;
+        activeServices.forEach(c -> c.onTestsStackResolveEnd(game, top, applied));
     }
 }
