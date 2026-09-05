@@ -69,7 +69,7 @@ class WishingWellEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
 
-        if (!new AddCountersSourceEffect(CounterType.COIN.createInstance(), true).apply(game, source)) {
+        if (!new AddCountersSourceEffect(CounterType.COIN.createInstance()).apply(game, source)) {
             return false;
         }
 

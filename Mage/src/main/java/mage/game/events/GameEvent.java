@@ -78,6 +78,7 @@ public class GameEvent implements Serializable {
         DRAW_TWO_OR_MORE_CARDS, // event calls for multi draws only (if player draws 2+ cards at once)
         DRAW_CARD, DREW_CARD,
         EXPLORE, EXPLORED, // targetId is exploring permanent, playerId is its controller
+        CONNIVE, // targetId is conniving permanent, playerId is its controller
         ECHO_PAID,
         MIRACLE_CARD_REVEALED,
         /* MADNESS_CARD_EXILED,

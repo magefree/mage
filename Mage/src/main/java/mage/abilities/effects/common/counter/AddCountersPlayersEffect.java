@@ -88,9 +88,6 @@ public class AddCountersPlayersEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 player.addCounters(newCounterForPlayer, source.getControllerId(), source, game);
-                game.informPlayers(player.getLogName() + " gets "
-                        + newCounterForPlayer.getCount() + ' ' + newCounterForPlayer.getName() + " counters"
-                        + CardUtil.getSourceLogName(game, source));
             }
         }
         return true;

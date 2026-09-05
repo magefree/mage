@@ -39,8 +39,7 @@ public final class BioessenceHydra extends CardImpl {
 
         // Bioessence Hydra enters the battlefield with a +1/+1 counter on it for each loyalty counter on planeswalkers you control.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(), BioessenceHydraDynamicValue.instance, true
-        ), "with a +1/+1 counter on it for each loyalty counter on planeswalkers you control."
+                CounterType.P1P1.createInstance(), BioessenceHydraDynamicValue.instance), "with a +1/+1 counter on it for each loyalty counter on planeswalkers you control."
         ));
 
         // Whenever one or more loyalty counters are put on planeswalkers you control, put that many +1/+1 counters on Bioessence Hydra.

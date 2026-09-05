@@ -431,6 +431,10 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         return this;
     }
 
+    public List<Permanent> getAddedTokenPermanents() {
+        return new ArrayList<>(addedTokenPermanents);
+    }
+
     public void sacrificeTokensCreatedAtNextEndStep(Game game, Ability source) {
         this.removeTokensCreatedAt(game, source, false, PhaseStep.END_TURN, TargetController.ANY);
     }

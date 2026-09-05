@@ -80,18 +80,12 @@ public class AddCountersTargetEffect extends OneShotEffect {
                 if (permanent != null) {
                     permanent.addCounters(newCounterForTarget, source.getControllerId(), source, game);
                     affectedTargets++;
-                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                            + newCounterForTarget.getCount() + ' ' + newCounterForTarget.getName() + " counters on " + permanent.getLogName());
                 } else if (player != null) {
                     player.addCounters(newCounterForTarget, source.getControllerId(), source, game);
                     affectedTargets++;
-                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                            + newCounterForTarget.getCount() + ' ' + newCounterForTarget.getName() + " counters on " + player.getLogName());
                 } else if (card != null) {
                     card.addCounters(newCounterForTarget, source.getControllerId(), source, game);
                     affectedTargets++;
-                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                            + newCounterForTarget.getCount() + ' ' + newCounterForTarget.getName() + " counters on " + card.getLogName());
                 }
             }
             return affectedTargets > 0;

@@ -68,7 +68,7 @@ enum LucyMacLeanPositivelyArmedPredicate implements ObjectSourcePlayerPredicate<
 
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {
-        return CardUtil.getEffectValueFromAbility(input.getSource(), "permanentEnteringBattlefield", Permanent.class)
+        return !CardUtil.getEffectValueFromAbility(input.getSource(), "permanentEnteringBattlefield", Permanent.class)
                 .filter(permanent -> permanent.isControlledBy(input.getObject().getId()))
                 .isPresent();
     }

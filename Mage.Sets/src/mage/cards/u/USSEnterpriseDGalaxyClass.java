@@ -1,8 +1,11 @@
 package mage.cards.u;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.abilities.keyword.StationAbility;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
@@ -11,8 +14,9 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.watchers.common.BoostCountersAddedFirstTimeWatcher;
+import mage.watchers.Watcher;
 import mage.abilities.keyword.StationLevelAbility;
+import mage.MageObjectReference;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -63,7 +67,7 @@ class USSEnterpriseDGalaxyClassTriggeredAbility extends TriggeredAbilityImpl {
     USSEnterpriseDGalaxyClassTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn));
         this.setTriggerPhrase("Whenever one or more charge counters are put on {this} for the first time each turn, ");
-        this.addWatcher(new BoostCountersAddedFirstTimeWatcher());
+        this.addWatcher(new ChargeCountersAddedFirstTimeWatcher());
     }
 
     private USSEnterpriseDGalaxyClassTriggeredAbility(final USSEnterpriseDGalaxyClassTriggeredAbility ability) {
@@ -86,6 +90,47 @@ class USSEnterpriseDGalaxyClassTriggeredAbility extends TriggeredAbilityImpl {
         return permanent != null
                 && this.getSourceId().equals(event.getTargetId())
                 && event.getData().equals(CounterType.CHARGE.getName())
-                && BoostCountersAddedFirstTimeWatcher.checkEvent(event, permanent, game, 0);
+                && ChargeCountersAddedFirstTimeWatcher.checkEvent(event, permanent, game, 0);
+    }
+}
+
+class ChargeCountersAddedFirstTimeWatcher extends Watcher {
+
+    private final Map<MageObjectReference, UUID> map = new HashMap<>();
+
+    public ChargeCountersAddedFirstTimeWatcher() {
+        super(WatcherScope.GAME);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() != GameEvent.EventType.COUNTERS_ADDED) {
+            return;
+        }
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        int offset = 0;
+        if (permanent == null) {
+            permanent = game.getPermanentEntering(event.getTargetId());
+            offset++;
+        }
+        if (permanent != null && event.getData().equals(CounterType.CHARGE.getName())) {
+            map.putIfAbsent(new MageObjectReference(permanent, game, offset), event.getId());
+        }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        map.clear();
+    }
+
+    public static boolean checkEvent(GameEvent event, Permanent permanent, Game game, int offset) {
+        return event
+                .getId()
+                .equals(game
+                        .getState()
+                        .getWatcher(ChargeCountersAddedFirstTimeWatcher.class)
+                        .map
+                        .getOrDefault(new MageObjectReference(permanent, game, offset), null));
     }
 }

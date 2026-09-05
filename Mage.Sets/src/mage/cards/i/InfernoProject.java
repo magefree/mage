@@ -42,8 +42,7 @@ public final class InfernoProject extends CardImpl {
 
         // Inferno Project enters the battlefield with X +1/+1 counters on it, where X is the total mana value of instant and sorcery cards in your graveyard.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(0), InfernoProjectValue.instance, false
-        ), "with X +1/+1 counters on it, where X is the total mana value " +
+                CounterType.P1P1.createInstance(0), InfernoProjectValue.instance), "with X +1/+1 counters on it, where X is the total mana value " +
                 "of instant and sorcery cards in your graveyard").addHint(hint));
     }
 

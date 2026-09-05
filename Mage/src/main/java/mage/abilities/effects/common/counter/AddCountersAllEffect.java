@@ -64,9 +64,6 @@ public class AddCountersAllEffect extends OneShotEffect {
                 Counter newCounterForPermanent = newCounter.copy();
 
                 permanent.addCounters(newCounterForPermanent, source.getControllerId(), source, game);
-                game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                        + newCounterForPermanent.getCount() + ' ' + newCounterForPermanent.getName()
-                        + (newCounterForPermanent.getCount() == 1 ? " counter" : " counters") + " on " + permanent.getLogName());
 
                 result |= true;
             }

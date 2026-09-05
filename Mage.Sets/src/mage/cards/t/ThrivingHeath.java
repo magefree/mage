@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -24,14 +23,11 @@ public final class ThrivingHeath extends CardImpl {
     public ThrivingHeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
+        // Thriving Heath enters the battlefield tapped.
+        this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // This land enters tapped. As it enters, choose a color other than white.
-        Ability ability = new EntersBattlefieldTappedAbility();
-        ability.addEffect(
-            new ChooseColorEffect(Outcome.Neutral, "White")
-                .setText("As it enters, choose a color other than white")
-        );
-        this.addAbility(ability);
+        // As Thriving Heath enters the battlefield, choose a color other than white.
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral, "White")));
 
         // {T}: Add {W} or one mana of the chosen color.
         this.addAbility(new WhiteManaAbility());

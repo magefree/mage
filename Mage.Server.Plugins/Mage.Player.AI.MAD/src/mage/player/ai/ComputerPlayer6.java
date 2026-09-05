@@ -68,8 +68,6 @@ public class ComputerPlayer6 extends ComputerPlayer {
     protected int maxNodes;
     protected int maxThinkTimeSecs;
     protected LinkedList<Ability> actions = new LinkedList<>();
-    protected List<UUID> targets = new ArrayList<>();
-    protected List<String> choices = new ArrayList<>();
     protected Combat combat;
     protected int currentScore;
     protected SimulationNode2 root;
@@ -109,8 +107,6 @@ public class ComputerPlayer6 extends ComputerPlayer {
             this.combat = player.combat.copy();
         }
         this.actions.addAll(player.actions);
-        this.targets.addAll(player.targets);
-        this.choices.addAll(player.choices);
         this.actionCache = player.actionCache;
     }
 
@@ -882,55 +878,22 @@ public class ComputerPlayer6 extends ComputerPlayer {
 
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
-        if (choices.isEmpty()) {
-            return super.choose(outcome, choice, game);
-        }
-        if (!choice.isChosen()) {
-            if (!choice.setChoiceByAnswers(choices, true)) {
-                choice.setRandomChoice();
-            }
-        }
-        return true;
+        // TODO: implement choices simulation?
+        return super.choose(outcome, choice, game);
     }
 
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        if (targets.isEmpty()) {
-            return super.chooseTarget(outcome, cards, target, source, game);
-        }
-
-        UUID abilityControllerId = target.getAffectedAbilityControllerId(getId());
-        if (!target.isChoiceCompleted(abilityControllerId, source, game, cards)) {
-            for (UUID targetId : targets) {
-                target.addTarget(targetId, source, game);
-                if (target.isChoiceCompleted(abilityControllerId, source, game, cards)) {
-                    targets.clear();
-                    return true;
-                }
-            }
-            return false;
-        }
-        return true;
+        // cast/activate ability uses targets simulation
+        // resolve ability can call choose dialogs and do not use simulation, TODO: implement it here?
+        return super.chooseTarget(outcome, cards, target, source, game);
     }
 
     @Override
     public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        if (targets.isEmpty()) {
-            return super.choose(outcome, cards, target, source, game);
-        }
-
-        UUID abilityControllerId = target.getAffectedAbilityControllerId(getId());
-        if (!target.isChoiceCompleted(abilityControllerId, source, game, cards)) {
-            for (UUID targetId : targets) {
-                target.add(targetId, game);
-                if (target.isChoiceCompleted(abilityControllerId, source, game, cards)) {
-                    targets.clear();
-                    return true;
-                }
-            }
-            return false;
-        }
-        return true;
+        // cast/activate ability uses targets simulation
+        // resolve ability can call choose dialogs and do not use simulation, TODO: implement it here?
+        return super.choose(outcome, cards, target, source, game);
     }
 
     private void declareBlockers(Game game, UUID activePlayerId) {

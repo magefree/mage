@@ -2345,7 +2345,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Thassa, God of the Sea", 71, Rarity.MYTHIC, mage.cards.t.ThassaGodOfTheSea.class));
         //cards.add(new SetCardInfo("The Celestial Toymaker", 1582, Rarity.RARE, mage.cards.t.TheCelestialToymaker.class));
         cards.add(new SetCardInfo("The Deck of Many Things", 2460, Rarity.MYTHIC, mage.cards.t.TheDeckOfManyThings.class));
-        //cards.add(new SetCardInfo("The Fifteenth Doctor", 1584, Rarity.RARE, mage.cards.t.TheFifteenthDoctor.class));
+        cards.add(new SetCardInfo("The Fifteenth Doctor", 1584, Rarity.RARE, mage.cards.t.TheFifteenthDoctor.class));
         cards.add(new SetCardInfo("The First Sliver", 1371, Rarity.MYTHIC, mage.cards.t.TheFirstSliver.class));
         cards.add(new SetCardInfo("The Fourteenth Doctor", 1583, Rarity.RARE, mage.cards.t.TheFourteenthDoctor.class));
         cards.add(new SetCardInfo("The Ghoul, Gunslinger", 2448, Rarity.MYTHIC, mage.cards.t.TheGhoulGunslinger.class));

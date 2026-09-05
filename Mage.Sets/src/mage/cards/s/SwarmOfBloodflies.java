@@ -30,7 +30,7 @@ public final class SwarmOfBloodflies extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Swarm of Bloodflies enters the battlefield with two +1/+1 counters on it.
-        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(2), true);
+        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(2));
         effect.setText("with two +1/+1 counters on it");
         this.addAbility(new EntersBattlefieldAbility(effect));
         // Whenever another creature dies, put a +1/+1 counter on Swarm of Bloodflies

@@ -49,8 +49,7 @@ public final class VishKalBloodArbiter extends CardImpl {
         // Sacrifice a creature: Put X +1/+1 counters on Vish Kal, Blood Arbiter, where X is the sacrificed creature's power.
         this.addAbility(new SimpleActivatedAbility(
                 new AddCountersSourceEffect(
-                        CounterType.P1P1.createInstance(), SacrificeCostCreaturesPower.instance, true
-                ).setText("put X +1/+1 counters on {this}, where X is the sacrificed creature's power"),
+                        CounterType.P1P1.createInstance(), SacrificeCostCreaturesPower.instance).setText("put X +1/+1 counters on {this}, where X is the sacrificed creature's power"),
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)
         ));
 

@@ -35,7 +35,6 @@ public class StunCounterEffect extends ReplacementEffectImpl {
             return false;
         }
         permanent.removeCounters(CounterType.STUN.getName(), 1, source, game);
-        game.informPlayers("Removed a stun counter from " + permanent.getLogName());
         return true;
     }
 

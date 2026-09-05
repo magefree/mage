@@ -44,7 +44,7 @@ public final class MurktideRegent extends CardImpl {
 
         // Murktide Regent enters the battlefield with a +1/+1 counter on it for each instant and sorcery card exiled with it.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(), MurktideRegentValue.instance, false),
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(), MurktideRegentValue.instance),
                 "with a +1/+1 counter on it for each instant and sorcery card exiled with it"
         ));
 

@@ -23,7 +23,7 @@ public final class ProctorsGaze extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetNonlandPermanent(0, 1));
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(
-                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true
+                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, false
         ));
     }
 

@@ -97,10 +97,6 @@ class ResplendentMarshalEffect extends OneShotEffect {
                     StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, source.getControllerId(), source, game)) {
                 if (permanent.shareCreatureTypes(game, exiledCard)) {
                     permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
-                    if (!game.isSimulation()) {
-                        game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName()
-                                + " puts a +1/+1 counter on " + permanent.getLogName());
-                    }
                 }
             }
             return true;

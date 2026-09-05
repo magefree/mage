@@ -36,7 +36,7 @@ public final class Tidewalker extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Tidewalker enters the battlefield with a time counter on it for each Island you control.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(0), new PermanentsOnBattlefieldCount(filter), true), "with a time counter on it for each Island you control"));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(0), new PermanentsOnBattlefieldCount(filter)), "with a time counter on it for each Island you control"));
 
         // Vanishing
         this.addAbility(new VanishingAbility(0));

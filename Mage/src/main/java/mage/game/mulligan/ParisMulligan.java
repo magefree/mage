@@ -52,7 +52,7 @@ public class ParisMulligan extends Mulligan {
                 usedFreeMulligans.put(player.getId(), 1);
             }
         }
-        game.fireInformEvent(new StringBuilder(player.getLogName())
+        game.informPlayers(new StringBuilder(player.getLogName())
                 .append(" mulligans")
                 .append(deduction == 0 ? " for free and draws " : " down to ")
                 .append((numCards - deduction))
