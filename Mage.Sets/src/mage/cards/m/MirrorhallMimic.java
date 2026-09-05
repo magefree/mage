@@ -45,6 +45,8 @@ public final class MirrorhallMimic extends TransformingDoubleFacedCard {
                 StaticFilters.FILTER_PERMANENT_CREATURE, new MirrorhallMimicApplier()
         ), true, null, "You may have {this} enter as a copy of any creature on the battlefield, except it's a Spirit in addition to its other types.", null));
 
+        // Disturb {3}{U}{U}
+        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{3}{U}{U}"));
 
         // Ghastly Mimicry
         // Enchant creature
@@ -52,10 +54,6 @@ public final class MirrorhallMimic extends TransformingDoubleFacedCard {
         this.getRightHalfCard().getSpellAbility().addTarget(auraTarget);
         this.getRightHalfCard().getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.getRightHalfCard().addAbility(new EnchantAbility(auraTarget));
-
-        // Disturb {3}{U}{U}
-        // needs to be added after enchant ability is set for target
-        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{3}{U}{U}"));
 
         // At the beginning of your upkeep, create a token that's a copy of enchanted creature, except it's a Spirit in addition to its other types.
         this.getRightHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(new GhastlyMimicryEffect()));
