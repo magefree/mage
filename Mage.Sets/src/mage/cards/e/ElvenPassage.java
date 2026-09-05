@@ -121,8 +121,7 @@ class ElvenPassageUntapLandEffect extends OneShotEffect {
 
         if (beholdCost.canPay(source, source, source.getControllerId(), game)
             && player.chooseUse(this.outcome, "Behold an Elf?", source, game)) {
-                boolean paid = beholdCost.pay(source, game, source, source.getControllerId(), true);
-                if (!paid) return false;
+                if (!beholdCost.pay(source, game, source, source.getControllerId(), true)) return false;
         } else {
             return true;
         }
