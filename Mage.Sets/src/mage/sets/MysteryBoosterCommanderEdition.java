@@ -51,6 +51,7 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Lyna, Veil of Vengeance", 43, Rarity.RARE, mage.cards.l.LynaVeilofVengeance.class));
         cards.add(new SetCardInfo("Meatsqueak, Hoard Lord", 32, Rarity.RARE, mage.cards.m.MeatsqueakHoardLord.class));
         cards.add(new SetCardInfo("Mind Stone", 76, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
+        cards.add(new SetCardInfo("Nivea, Beloved Battlemage", 3, Rarity.RARE, mage.cards.n.NiveaBelovedBattlemage.class));
         cards.add(new SetCardInfo("Olag and Miau, New Friends", 48, Rarity.RARE, mage.cards.o.OlagAndMiauNewFriends.class));
         cards.add(new SetCardInfo("Oracle of the Alpha", 64, Rarity.UNCOMMON, mage.cards.o.OracleOfTheAlpha.class));
         cards.add(new SetCardInfo("Overcooked", 67, Rarity.UNCOMMON, mage.cards.o.Overcooked.class));
