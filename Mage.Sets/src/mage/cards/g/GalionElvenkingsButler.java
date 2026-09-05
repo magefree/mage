@@ -37,7 +37,7 @@ public final class GalionElvenkingsButler extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Galion attacks, choose up to one other target creature you control.
-        // Its base power and toughness become equal to Galion’s power and toughness until end of turn.
+        // Its base power and toughness become equal to Galion's power and toughness until end of turn.
         Ability ability = new AttacksTriggeredAbility(
                 new GalionElvenkingsButlerBoostEffect());
         ability.addTarget(new TargetPermanent(0,1, filter));
@@ -59,7 +59,7 @@ class GalionElvenkingsButlerBoostEffect extends OneShotEffect {
     GalionElvenkingsButlerBoostEffect() {
         super(Outcome.BoostCreature);
         staticText = "choose up to one other target creature you control. " +
-                "Its base power and toughness become equal to Galion’s power and toughness until end of turn.";
+                "Its base power and toughness become equal to Galion's power and toughness until end of turn.";
     }
 
     @Override
