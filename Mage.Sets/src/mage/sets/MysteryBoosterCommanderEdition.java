@@ -32,7 +32,9 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Davvol, Evincar of Rath", 36, Rarity.RARE, mage.cards.d.DavvolEvincarOfRath.class));
         cards.add(new SetCardInfo("Dust to Dust", 71, Rarity.UNCOMMON, mage.cards.d.DustToDust.class));
         cards.add(new SetCardInfo("Dyfed, the Guiding Hand", 7, Rarity.RARE, mage.cards.d.DyfedTheGuidingHand.class));
+        cards.add(new SetCardInfo("Elda, Conjurer of Spectacle", 37, Rarity.RARE, mage.cards.e.EldaConjurerofSpectacle.class));
         cards.add(new SetCardInfo("Emerald Collector", 63, Rarity.UNCOMMON, mage.cards.e.EmeraldCollector.class));
+        cards.add(new SetCardInfo("Euru, Acorn Scrounger", 70, Rarity.UNCOMMON, mage.cards.e.EuruAcornScrounger.class));
         cards.add(new SetCardInfo("Exotic Orchard", 79, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Fellwar Stone", 74, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Feroz, Ulgrotha's Warden", 38, Rarity.RARE, mage.cards.f.FerozUlgrothasWarden.class));
@@ -42,6 +44,7 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Jandor, Fortuned Traveler", 42, Rarity.RARE, mage.cards.j.JandorFortunedTraveler.class));
         cards.add(new SetCardInfo("Jeweled Amulet", 75, Rarity.UNCOMMON, mage.cards.j.JeweledAmulet.class));
         cards.add(new SetCardInfo("Joven and Chandler", 24, Rarity.RARE, mage.cards.j.JovenAndChandler.class));
+        cards.add(new SetCardInfo("Lyna, Veil of Vengeance", 43, Rarity.RARE, mage.cards.l.LynaVeilofVengeance.class));
         cards.add(new SetCardInfo("Meatsqueak, Hoard Lord", 32, Rarity.RARE, mage.cards.m.MeatsqueakHoardLord.class));
         cards.add(new SetCardInfo("Mind Stone", 76, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Olag and Miau, New Friends", 48, Rarity.RARE, mage.cards.o.OlagAndMiauNewFriends.class));
