@@ -3,6 +3,7 @@ package mage.cards.g;
 import mage.abilities.Ability;
 import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -11,10 +12,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
-import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -45,7 +44,7 @@ public final class GateSmasher extends CardImpl {
         this.addAbility(ability);
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3, false));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), new TargetPermanent(filter.copy().add(TargetController.YOU.getControllerPredicate())), false));
     }
 
     private GateSmasher(final GateSmasher card) {

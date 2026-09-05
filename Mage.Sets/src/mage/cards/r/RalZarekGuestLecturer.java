@@ -43,7 +43,10 @@ public final class RalZarekGuestLecturer extends CardImpl {
         this.addAbility(new LoyaltyAbility(new SurveilEffect(2), 1));
 
         // -1: Any number of target players each discard a card.
-        Ability ability = new LoyaltyAbility(new DiscardTargetEffect(1), -1);
+        Ability ability = new LoyaltyAbility(
+            new DiscardTargetEffect(1).setText("any number of target players discards a card"),
+            -1
+        );
         ability.addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));
         this.addAbility(ability);
 

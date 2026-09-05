@@ -331,6 +331,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         assertAllCommandsUsed();
 
+        // workaround for test games - call end game manually instead GameImpl
+        // TODO: remove after refactor execute usage to one per test/run
+        DataCollectorServices.getInstance().onGameEnd(currentGame);
+
         //assertNoDuplicatedEffects();
     }
 
