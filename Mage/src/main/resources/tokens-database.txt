@@ -3072,7 +3072,7 @@
 # HOB
 |TOK:HOB|Axe||AxeToken|
 |TOK:HOB|Bear||BearToken|
-|TOK:HOB|Bird Soldier||BirdSoldierToken|
+|TOK:HOB|Bird Soldier||BirdSoldier44Token|
 |TOK:HOB|Human Soldier||HumanSoldierToken|
 |TOK:HOB|Dragon||Dragon66Token|
 |TOK:HOB|Dwarf||Dwarf22Token|
