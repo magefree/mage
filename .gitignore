@@ -62,5 +62,9 @@ mage-bundle.zip
 /deploy
 /temp
 
+# build and test temp data
+/tmp
+/matrix_results
+
 # dev tools
 .devcontainer/**/*lock.json

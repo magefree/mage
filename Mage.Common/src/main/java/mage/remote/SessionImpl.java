@@ -168,6 +168,7 @@ public class SessionImpl implements Session {
                     if ((exep.getCause().getMessage() != null) && (exep.getCause().getMessage().startsWith("Field hash null is not available on current")
                             || exep.getCause().getMessage().endsWith("end of file"))) {
                         addMessage = "Probably the server version is not compatible with the client. ";
+                        logger.warn("Connect: IO error due bad serialization or blocked ISP/VPN (" + exep.getCause().getMessage() + ")", exep.getCause());
                     }
                 } else {
                     logger.error("Connect: unknown server error", exep.getCause());
