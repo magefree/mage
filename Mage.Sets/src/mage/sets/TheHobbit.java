@@ -89,6 +89,9 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Dwarven Shortsword", 10, Rarity.COMMON, mage.cards.d.DwarvenShortsword.class));
         cards.add(new SetCardInfo("Eagle of the Great Shelf", 11, Rarity.UNCOMMON, mage.cards.e.EagleOfTheGreatShelf.class));
         cards.add(new SetCardInfo("Eagle's Rescue", 155, Rarity.UNCOMMON, mage.cards.e.EaglesRescue.class));
+        cards.add(new SetCardInfo("Elven Passage", 274, Rarity.RARE, mage.cards.e.ElvenPassage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Elven Passage", 238, Rarity.RARE, mage.cards.e.ElvenPassage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Elven Passage", 181, Rarity.RARE, mage.cards.e.ElvenPassage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elven Raft-Steerer", 37, Rarity.UNCOMMON, mage.cards.e.ElvenRaftSteerer.class));
         cards.add(new SetCardInfo("Elvenking's Halls", 182, Rarity.COMMON, mage.cards.e.ElvenkingsHalls.class));
         cards.add(new SetCardInfo("Elvenking's Harper", 38, Rarity.COMMON, mage.cards.e.ElvenkingsHarper.class));
