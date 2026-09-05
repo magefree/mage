@@ -292,57 +292,6 @@ public class ChoiceImpl implements Choice {
     }
 
     @Override
-    public boolean setChoiceByAnswers(List<String> answers, boolean removeSelectAnswerFromList) {
-        // select by answers
-        if (this.isKeyChoice()) {
-            // keys mode
-            for (String needChoice : answers) {
-                for (Map.Entry<String, String> currentChoice : this.getKeyChoices().entrySet()) {
-                    if (currentChoice.getKey().equals(needChoice)) {
-                        if (removeSelectAnswerFromList) {
-                            this.setChoiceByKey(needChoice, false);
-                            answers.remove(needChoice);
-                        }
-                        return true;
-                    }
-
-                }
-            }
-            // no key answer found, try to match by text starting with
-            for (String needChoice : answers) {
-                for (Map.Entry<String, String> currentChoice : this.getKeyChoices().entrySet()) {
-                    String choiceValue = currentChoice.getValue();
-                    // Clean any html part (for easier unit test matching)
-                    String cleanedChoiceValue = choiceValue.replaceAll("<[^<>]*>", "");
-                    if (choiceValue.startsWith(needChoice) || cleanedChoiceValue.startsWith(needChoice)) {
-                        if (removeSelectAnswerFromList) {
-                            this.setChoiceByKey(currentChoice.getKey(), false);
-                            answers.remove(needChoice);
-                        }
-                        return true;
-                    }
-                }
-            }
-        } else {
-            // string mode
-            for (String needChoice : answers) {
-                for (String currentChoice : this.getChoices()) {
-                    // Clean any html part (for easier unit test matching)
-                    String cleanedChoiceValue = currentChoice.replaceAll("<[^<>]*>", "");
-                    if (currentChoice.equals(needChoice) || cleanedChoiceValue.equals(needChoice)) {
-                        if (removeSelectAnswerFromList) {
-                            this.setChoice(needChoice, false);
-                            answers.remove(needChoice);
-                        }
-                        return true;
-                    }
-                }
-            }
-        }
-        return false; // can't find answer
-    }
-
-    @Override
     public void setSpecial(boolean enabled, boolean canBeEmpty, String text, String hint) {
         this.specialEnabled = enabled;
         this.specialCanBeEmpty = canBeEmpty;

@@ -5,7 +5,9 @@ Aetherdrift|DFT|
 Alara Reborn|ARB|
 Alchemy: Dominaria|YDMU|
 Alchemy: Innistrad|Y22|
+Alchemy: Murders at Karlov Manor|YMKM|
 Alchemy: Secrets of Strixhaven|YSOS|
+Alchemy: Wilds of Eldraine|YWOE|
 Alliances|ALL|
 Amonkhet|AKH|
 Anthologies|ATH|
@@ -287,6 +289,7 @@ The Hobbit|HOB|
 The Lord of the Rings: Tales of Middle-earth|LTR|
 The Lost Caverns of Ixalan Commander|LCC|
 The Lost Caverns of Ixalan|LCI|
+The Zeta Set|SLZ|
 Theros Beyond Death|THB|
 Theros|THS|
 Throne of Eldraine|ELD|

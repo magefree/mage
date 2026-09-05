@@ -12,7 +12,7 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.DrawCardEvent;
+import mage.game.events.DrewCardEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
 import mage.util.CardUtil;
@@ -89,8 +89,8 @@ class KrangTheAllPowerfulEffect extends ReplacementEffectImpl {
         GameEvent sourceEvent = ((NumberOfTriggersEvent) event).getSourceEvent();
         // Only draw card triggers
         if (sourceEvent == null
-            || sourceEvent.getType() != GameEvent.EventType.DRAW_CARD
-            || !(sourceEvent instanceof DrawCardEvent)) {
+            || sourceEvent.getType() != GameEvent.EventType.DREW_CARD
+            || !(sourceEvent instanceof DrewCardEvent)) {
             return false;
         }
         // Only for triggers of permanents

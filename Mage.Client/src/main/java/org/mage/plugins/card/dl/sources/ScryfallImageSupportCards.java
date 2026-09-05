@@ -561,6 +561,7 @@ public class ScryfallImageSupportCards {
             add("WOE"); // Wilds of Eldraine
             add("WOT"); // Wilds of Eldraine: Enchanting Tales
             add("WOC"); // Wilds of Eldraine Commander
+            add("YWOE"); // Alchemy: Wilds of Eldraine
             add("LCI"); // The Lost Caverns of Ixalan
             add("LCC"); // The The Lost Caverns of Ixalan Commander
             add("REX"); // Jurassic World Collection
@@ -573,6 +574,7 @@ public class ScryfallImageSupportCards {
             add("MKM"); // Murders at Karlov Manor
             add("MKC"); // Murders at Karlov Manor Commander
             add("PSS4"); // MKM Standard Showdown
+            add("YMKM"); // Alchemy: Murders at Karlov Manor
             add("CLU"); // Ravnica: Clue Edition
             add("OTJ"); // Outlaws of Thunder Junction
             add("OTC"); // Outlaws of Thunder Junction Commander
@@ -632,6 +634,7 @@ public class ScryfallImageSupportCards {
             add("HOB"); // The Hobbit
             add("HOC"); // The Hobbit Eternal
             add("MBC"); // Mystery Booster Commander Edition
+            add("SLZ"); // The Zeta Set
             add("FRA"); // Reality Fracture
             add("FRC"); // Reality Fracture Commander
             add("TRK"); // Star Trek

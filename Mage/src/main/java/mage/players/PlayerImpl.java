@@ -98,6 +98,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean draws;
     protected boolean loses;
 
+    protected int startingDeckSize;
     protected Library library;
     protected Cards sideboard;
     protected Cards hand;
@@ -4834,6 +4835,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void setLoseByZeroOrLessLife(boolean loseByZeroOrLessLife) {
         this.loseByZeroOrLessLife = loseByZeroOrLessLife;
+    }
+
+    @Override
+    public int getStartingDeckSize() {
+        return startingDeckSize;
+    }
+
+    @Override
+    public void initStartingDeckSize() {
+        this.startingDeckSize = getLibrary().size();
     }
 
     @Override
