@@ -13,6 +13,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
+ * TODO: do not merge to master, used for inner testing in client-server serialization problems, 
+ *   keep for future debug and testing improvement
+ * 
  * Minimal headless single-shot connect check - no Swing UI, no JavaFX, no
  * display required. Built for automated Java-version / add-opens
  * compatibility matrix testing (see MultiConnectTest for the original
