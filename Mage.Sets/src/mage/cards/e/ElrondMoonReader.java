@@ -68,10 +68,6 @@ public final class ElrondMoonReader extends CardImpl {
 
 class ElrondMoonReaderTriggeredAbility extends TriggeredAbilityImpl {
 
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a creature");
-
-
     ElrondMoonReaderTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
         setTriggerPhrase("Whenever you activate an ability of a creature, ");
@@ -102,6 +98,6 @@ class ElrondMoonReaderTriggeredAbility extends TriggeredAbilityImpl {
         Permanent source = game.getPermanentOrLKIBattlefield(event.getSourceId());
         return source != null
                 && event.getPlayerId().equals(getControllerId())
-                && filter.match(source, game);
+                && source.isCreature(game);
     }
 }
