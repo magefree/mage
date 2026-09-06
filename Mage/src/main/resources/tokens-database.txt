@@ -3084,6 +3084,8 @@
 |TOK:HOB|Treasure|2|TreasureToken|
 |TOK:HOB|Wolf||WolfToken|
 
+# FRA
+|TOK:FRA|Illusion||Illusion11Token|
 
 # TRK
 |TOK:TRK|Human||Human01Token|
