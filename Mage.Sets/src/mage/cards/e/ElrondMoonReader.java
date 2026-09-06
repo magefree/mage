@@ -52,7 +52,7 @@ public final class ElrondMoonReader extends CardImpl {
         // at the beginning of the next end step.
         Ability flickerAbility = new SimpleActivatedAbility(new ExileReturnBattlefieldNextEndStepTargetEffect().withTextThatCard(true),
                 new ManaCostsImpl<>("{5}{U}{U}"));
-        flickerAbility.addTarget(new TargetPermanent(0,2, filter));
+        flickerAbility.addTarget(new TargetPermanent(0, 2, filter));
         this.addAbility(flickerAbility);
     }
 
