@@ -26830,173 +26830,173 @@ Temporal Fissure|Vintage Masters|96|C|{4}{U}|Sorcery|||Return target permanent t
 Thalakos Drifters|Vintage Masters|97|U|{2}{U}{U}|Creature - Thalakos|3|3|Discard a card: Thalakos Drifters gains shadow until end of turn. <i>(This creature can block or be blocked by only creatures with shadow.)</i>|
 Tradewind Rider|Vintage Masters|98|R|{3}{U}|Creature - Spirit|1|4|Flying${tap}, Tap two untapped creatures you control: Return target permanent to its owner's hand.|
 Turnabout|Vintage Masters|99|U|{2}{U}{U}|Instant|||Choose artifact, creature, or land. Tap all untapped permanents of the chosen type target player controls, or untap all tapped permanents of that type that player controls.|
-Aku Djinn|Visions|1|R|{3}{B}{B}|Creature - Djinn|5|6|Trample$At the beginning of your upkeep, put a +1/+1 counter on each creature each opponent controls.|
-Forbidden Ritual|Visions|10|R|{2}{B}{B}|Sorcery|||Sacrifice a nontoken permanent. If you do, target opponent loses 2 life unless they sacrifice a permanent or discards a card. You may repeat this process any number of times.|
-Relic Ward|Visions|10|U|{1}{W}|Enchantment - Aura|||You may cast Relic Ward as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.$Enchant artifact$Enchanted artifact has shroud. <i>(It can't be the target of spells or abilities.)</i>|
-Viashino Sandstalker|Visions|100|U|{1}{R}{R}|Creature - Viashino Warrior|4|2|Haste <i>(This creature can attack the turn it comes under your control.)</i>$At the beginning of the end step, return Viashino Sandstalker to its owner's hand. <i>(Return it only if it's on the battlefield.)</i>|
-Archangel|Visions|101|R|{5}{W}{W}|Creature - Angel|5|5|Flying, vigilance|
-Daraja Griffin|Visions|102|U|{3}{W}|Creature - Griffin|2|2|Flying$Sacrifice Daraja Griffin: Destroy target black creature.|
-Equipoise|Visions|103|R|{2}{W}|Enchantment|||At the beginning of your upkeep, for each land target player controls in excess of the number you control, choose a land they control, then the chosen permanents phase out. Repeat this process for artifacts and creatures. <i>(While they're phased out, they're treated as though they don't exist. They phase in before that player untaps during their next untap step.)</i>|
-Eye of Singularity|Visions|104|R|{3}{W}|World Enchantment|||When Eye of Singularity enters the battlefield, destroy each permanent with the same name as another permanent, except for basic lands. They can't be regenerated.$Whenever a permanent other than a basic land enters the battlefield, destroy all other permanents with that name. They can't be regenerated.|
-Freewind Falcon|Visions|105|C|{1}{W}|Creature - Bird|1|1|Flying, protection from red|
-Gossamer Chains|Visions|106|C|{W}{W}|Enchantment|||Return Gossamer Chains to its owner's hand: Prevent all combat damage that would be dealt by target unblocked creature this turn.|
-Honorable Passage|Visions|107|U|{1}{W}|Instant|||The next time a source of your choice would deal damage to any target this turn, prevent that damage. If damage from a red source is prevented this way, Honorable Passage deals that much damage to the source's controller.|
-Hope Charm|Visions|108|C|{W}|Instant|||Choose one - Target creature gains first strike until end of turn; or target player gains 2 life; or destroy target Aura.|
-Infantry Veteran|Visions|109|C|{W}|Creature - Human Soldier|1|1|{tap}: Target attacking creature gets +1/+1 until end of turn.|
-Funeral Charm|Visions|11|C|{B}|Instant|||Choose one - Target player discards a card; or target creature gets +2/-1 until end of turn; or target creature gains swampwalk until end of turn.|
-Jamuraan Lion|Visions|110|C|{2}{W}|Creature - Cat|3|1|{W}, {tap}: Target creature can't block this turn.|
-Knight of Valor|Visions|111|C|{2}{W}|Creature - Human Knight|2|2|Flanking <i>(Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)</i>${1}{W}: Each creature without flanking blocking Knight of Valor gets -1/-1 until end of turn. Activate this ability only once each turn.|
-Longbow Archer|Visions|112|U|{W}{W}|Creature - Human Soldier Archer|2|2|First strike; reach <i>(This creature can block creatures with flying.)</i>|
-Miraculous Recovery|Visions|113|U|{4}{W}|Instant|||Return target creature card from your graveyard to the battlefield. Put a +1/+1 counter on it.|
-Parapet|Visions|114|C|{1}{W}|Enchantment|||You may cast Parapet as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.$Creatures you control get +0/+1.|
-Peace Talks|Visions|115|U|{1}{W}|Sorcery|||This turn and next turn, creatures can't attack, and players and permanents can't be the targets of spells or activated abilities.|
-Remedy|Visions|117|C|{1}{W}|Instant|||Prevent the next 5 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.|
-Resistance Fighter|Visions|118|C|{W}|Creature - Human Soldier|1|1|Sacrifice Resistance Fighter: Prevent all combat damage target creature would deal this turn.|
-Retribution of the Meek|Visions|119|R|{2}{W}|Sorcery|||Destroy all creatures with power 4 or greater. They can't be regenerated.|
-Infernal Harvest|Visions|12|C|{1}{B}|Sorcery|||As an additional cost to cast Infernal Harvest, return X Swamps you control to their owner's hand.$Infernal Harvest deals X damage divided as you choose among any number of target creatures.|
-Righteous Aura|Visions|120|C|{1}{W}|Enchantment|||{W}, Pay 2 life: The next time a source of your choice would deal damage to you this turn, prevent that damage.|
-Sun Clasp|Visions|121|C|{1}{W}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +1/+3.${W}: Return enchanted creature to its owner's hand.|
-Teferi's Honor Guard|Visions|122|U|{2}{W}|Creature - Human Knight|2|2|Flanking <i>(Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)</i>${U}{U}: Teferi's Honor Guard phases out. <i>(While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)</i>|
-Warrior's Honor|Visions|124|C|{2}{W}|Instant|||Creatures you control get +1/+1 until end of turn.|
-Zhalfirin Crusader|Visions|125|R|{1}{W}{W}|Creature - Human Knight|2|2|Flanking <i>(Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)</i>${1}{W}: The next 1 damage that would be dealt to Zhalfirin Crusader this turn is dealt to any target instead.|
-Army Ants|Visions|126|U|{1}{B}{R}|Creature - Insect|1|1|{tap}, Sacrifice a land: Destroy target land.|
-Breathstealer's Crypt|Visions|127|R|{2}{U}{B}|Enchantment|||If a player would draw a card, instead they draw a card and reveals it. If it's a creature card, that player discards it unless they pay 3 life.|
-Corrosion|Visions|128|R|{1}{B}{R}|Enchantment|||Cumulative upkeep {1} <i>(At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)</i>$At the beginning of your upkeep, put a rust counter on each artifact target opponent controls. Then destroy each artifact with converted mana cost less than or equal to the number of rust counters on it. Artifacts destroyed this way can't be regenerated.$When Corrosion leaves the battlefield, remove all rust counters from all permanents.|
+Archangel|Visions|1|R|{5}{W}{W}|Creature - Angel|5|5|Flying, vigilance|
+Daraja Griffin|Visions|2|U|{3}{W}|Creature - Griffin|2|2|Flying$Sacrifice this creature: Destroy target black creature.|
+Equipoise|Visions|3|R|{2}{W}|Enchantment|||At the beginning of your upkeep, for each land target player controls in excess of the number you control, choose a land that player controls, then the chosen permanents phase out. Repeat this process for artifacts and creatures.|
+Eye of Singularity|Visions|4|R|{3}{W}|World Enchantment|||When this enchantment enters, destroy each permanent with the same name as another permanent, except for basic lands. They can't be regenerated.$Whenever a permanent other than a basic land enters, destroy all other permanents with that name. They can't be regenerated.|
+Freewind Falcon|Visions|5|C|{1}{W}|Creature - Bird|1|1|Flying, protection from red|
+Gossamer Chains|Visions|6|C|{W}{W}|Enchantment|||Return this enchantment to its owner's hand: Prevent all combat damage that would be dealt by target unblocked creature this turn.|
+Honorable Passage|Visions|7|U|{1}{W}|Instant|||The next time a source of your choice would deal damage to any target this turn, prevent that damage. If damage from a red source is prevented this way, Honorable Passage deals that much damage to the source's controller.|
+Hope Charm|Visions|8|C|{W}|Instant|||Choose one --$* Target creature gains first strike until end of turn.$* Target player gains 2 life.$* Destroy target Aura.|
+Infantry Veteran|Visions|9|C|{W}|Creature - Human Soldier|1|1|{T}: Target attacking creature gets +1/+1 until end of turn.|
+Jamuraan Lion|Visions|10|C|{2}{W}|Creature - Cat|3|1|{W}, {T}: Target creature can't block this turn.|
+Knight of Valor|Visions|11|C|{2}{W}|Creature - Human Knight|2|2|Flanking${1}{W}: Each creature without flanking blocking this creature gets -1/-1 until end of turn. Activate only once each turn.|
+Longbow Archer|Visions|12|U|{W}{W}|Creature - Human Soldier Archer|2|2|Reach$First strike|
+Miraculous Recovery|Visions|13|U|{4}{W}|Instant|||Return target creature card from your graveyard to the battlefield. Put a +1/+1 counter on it.|
+Parapet|Visions|14|C|{1}{W}|Enchantment|||You may cast this spell as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.$Creatures you control get +0/+1.|
+Peace Talks|Visions|15|U|{1}{W}|Sorcery|||This turn and next turn, creatures can't attack, and players and permanents can't be the targets of spells or activated abilities.|
+Relic Ward|Visions|16|U|{1}{W}|Enchantment - Aura|||You may cast this spell as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.$Enchant artifact$Enchanted artifact has shroud.|
+Remedy|Visions|17|C|{1}{W}|Instant|||Prevent the next 5 damage that would be dealt this turn to any number of targets, divided as you choose.|
+Resistance Fighter|Visions|18|C|{W}|Creature - Human Soldier|1|1|Sacrifice this creature: Prevent all combat damage target creature would deal this turn.|
+Retribution of the Meek|Visions|19|R|{2}{W}|Sorcery|||Destroy all creatures with power 4 or greater. They can't be regenerated.|
+Righteous Aura|Visions|20|C|{1}{W}|Enchantment|||{W}, Pay 2 life: The next time a source of your choice would deal damage to you this turn, prevent that damage.|
+Sun Clasp|Visions|21|C|{1}{W}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +1/+3.${W}: Return enchanted creature to its owner's hand.|
+Teferi's Honor Guard|Visions|22|U|{2}{W}|Creature - Human Knight|2|2|Flanking${U}{U}: This creature phases out.|
+Tithe|Visions|23|R|{W}|Instant|||Search your library for a Plains card. If target opponent controls more lands than you, you may search your library for an additional Plains card. Reveal those cards, put them into your hand, then shuffle.|
+Warrior's Honor|Visions|24|C|{2}{W}|Instant|||Creatures you control get +1/+1 until end of turn.|
+Zhalfirin Crusader|Visions|25|R|{1}{W}{W}|Creature - Human Knight|2|2|Flanking${1}{W}: The next 1 damage that would be dealt to this creature this turn is dealt to any target instead.|
+Betrayal|Visions|26|C|{U}|Enchantment - Aura|||Enchant creature an opponent controls$Whenever enchanted creature becomes tapped, you draw a card.|
+Breezekeeper|Visions|27|C|{3}{U}|Creature - Djinn|4|4|Flying$Phasing|
+Chronatog|Visions|28|R|{1}{U}|Creature - Atog|1|2|{0}: This creature gets +3/+3 until end of turn. You skip your next turn. Activate only once each turn.|
+Cloud Elemental|Visions|29|C|{2}{U}|Creature - Elemental|2|3|Flying$This creature can block only creatures with flying.|
+Desertion|Visions|30|R|{3}{U}{U}|Instant|||Counter target spell. If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard.|
+Dream Tides|Visions|31|U|{2}{U}{U}|Enchantment|||Creatures don't untap during their controllers' untap steps.$At the beginning of each player's upkeep, that player may choose any number of tapped nongreen creatures they control and pay {2} for each creature chosen this way. If the player does, untap those creatures.|
+Flooded Shoreline|Visions|32|R|{U}{U}|Enchantment|||{U}{U}, Return two Islands you control to their owner's hand: Return target creature to its owner's hand.|
+Foreshadow|Visions|33|U|{1}{U}|Instant|||Choose a card name, then target opponent mills a card. If a card with the chosen name was milled this way, you draw a card.$Draw a card at the beginning of the next turn's upkeep.|
+Impulse|Visions|34|C|{1}{U}|Instant|||Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.|
+Inspiration|Visions|35|C|{3}{U}|Instant|||Target player draws two cards.|
+Knight of the Mists|Visions|36|C|{2}{U}|Creature - Human Knight|2|2|Flanking$When this creature enters, you may pay {U}. If you don't, destroy target Knight and it can't be regenerated.|
+Man-o'-War|Visions|37|C|{2}{U}|Creature - Jellyfish|2|2|When this creature enters, return target creature to its owner's hand.|
+Mystic Veil|Visions|38|C|{1}{U}|Enchantment - Aura|||You may cast this spell as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.$Enchant creature$Enchanted creature has shroud.|
+Ovinomancer|Visions|39|U|{2}{U}|Creature - Human Wizard|0|1|When this creature enters, sacrifice it unless you return three basic lands you control to their owner's hand.${T}, Return this creature to its owner's hand: Destroy target creature. It can't be regenerated. That creature's controller creates a 0/1 green Sheep creature token.|
+Prosperity|Visions|40|U|{X}{U}|Sorcery|||Each player draws X cards.|
+Rainbow Efreet|Visions|41|R|{3}{U}|Creature - Efreet|3|1|Flying${U}{U}: This creature phases out.|
+Shimmering Efreet|Visions|42|U|{2}{U}|Creature - Efreet|2|2|Flying$Phasing$Whenever this creature phases in, target creature phases out.|
+Shrieking Drake|Visions|43|C|{U}|Creature - Drake|1|1|Flying$When this creature enters, return a creature you control to its owner's hand.|
+Teferi's Realm|Visions|44|R|{1}{U}{U}|World Enchantment|||At the beginning of each player's upkeep, that player chooses artifact, creature, land, or non-Aura enchantment. All nontoken permanents of that type phase out.|
+Three Wishes|Visions|45|R|{1}{U}{U}|Instant|||Exile the top three cards of your library face down. You may look at those cards for as long as they remain exiled. Until your next turn, you may play those cards. At the beginning of your next upkeep, put any of those cards you didn't play into your graveyard.|
+Time and Tide|Visions|46|U|{U}{U}|Instant|||Simultaneously, all phased-out creatures phase in and all creatures with phasing phase out.|
+Undo|Visions|47|C|{1}{U}{U}|Sorcery|||Return two target creatures to their owners' hands.|
+Vanishing|Visions|48|C|{U}|Enchantment - Aura|||Enchant creature${U}{U}: Enchanted creature phases out.|
+Vision Charm|Visions|49|C|{U}|Instant|||Choose one --$* Target player mills four cards.$* Choose a land type and a basic land type. Each land of the first chosen type becomes the second chosen type until end of turn.$* Target artifact phases out.|
+Waterspout Djinn|Visions|50|U|{2}{U}{U}|Creature - Djinn|4|4|Flying$At the beginning of your upkeep, sacrifice this creature unless you return an untapped Island you control to its owner's hand.|
+Aku Djinn|Visions|51|R|{3}{B}{B}|Creature - Djinn|5|6|Trample$At the beginning of your upkeep, put a +1/+1 counter on each creature each opponent controls.|
+Blanket of Night|Visions|52|U|{1}{B}{B}|Enchantment|||Each land is a Swamp in addition to its other land types.|
+Brood of Cockroaches|Visions|53|U|{1}{B}|Creature - Insect|1|1|When this creature is put into your graveyard from the battlefield, at the beginning of the next end step, you lose 1 life and return this card to your hand.|
+Coercion|Visions|54|C|{2}{B}|Sorcery|||Target opponent reveals their hand. You choose a card from it. That player discards that card.|
+Crypt Rats|Visions|55|C|{2}{B}|Creature - Rat|1|1|{X}: This creature deals X damage to each creature and each player. Spend only black mana on X.|
+Dark Privilege|Visions|56|C|{1}{B}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +1/+1.$Sacrifice a creature: Regenerate enchanted creature.|
+Death Watch|Visions|57|C|{B}|Enchantment - Aura|||Enchant creature$When enchanted creature dies, its controller loses life equal to its power and you gain life equal to its toughness.|
+Desolation|Visions|58|U|{1}{B}{B}|Enchantment|||At the beginning of each end step, each player who tapped a land for mana this turn sacrifices a land of their choice. This enchantment deals 2 damage to each player who sacrificed a Plains this way.|
+Fallen Askari|Visions|59|C|{1}{B}|Creature - Human Knight|2|2|Flanking$This creature can't block.|
+Forbidden Ritual|Visions|60|R|{2}{B}{B}|Sorcery|||Sacrifice a nontoken permanent. If you do, target opponent loses 2 life unless that player sacrifices a permanent of their choice or discards a card. You may repeat this process any number of times.|
+Funeral Charm|Visions|61|C|{B}|Instant|||Choose one --$* Target player discards a card.$* Target creature gets +2/-1 until end of turn.$* Target creature gains swampwalk until end of turn.|
+Infernal Harvest|Visions|62|C|{1}{B}|Sorcery|||As an additional cost to cast this spell, return X Swamps you control to their owner's hand.$Infernal Harvest deals X damage divided as you choose among any number of target creatures.|
+Kaervek's Spite|Visions|63|R|{B}{B}{B}|Instant|||As an additional cost to cast this spell, sacrifice all permanents you control and discard your hand.$Target player loses 5 life.|
+Necromancy|Visions|64|U|{2}{B}|Enchantment|||You may cast this spell as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.$When this enchantment enters, if it's on the battlefield, it becomes an Aura with "enchant creature put onto the battlefield with Necromancy." Put target creature card from a graveyard onto the battlefield under your control and attach this enchantment to it. When this enchantment leaves the battlefield, that creature's controller sacrifices it.|
+Necrosavant|Visions|65|R|{3}{B}{B}{B}|Creature - Zombie Giant|5|5|{3}{B}{B}, Sacrifice a creature: Return this card from your graveyard to the battlefield. Activate only during your upkeep.|
+Nekrataal|Visions|66|U|{2}{B}{B}|Creature - Human Assassin|2|1|First strike$When this creature enters, destroy target nonartifact, nonblack creature. That creature can't be regenerated.|
+Pillar Tombs of Aku|Visions|67|R|{2}{B}{B}|World Enchantment|||At the beginning of each player's upkeep, that player may sacrifice a creature of their choice. If that player doesn't, they lose 5 life and you sacrifice this enchantment.|
+Python|Visions|68|C|{1}{B}{B}|Creature - Snake|3|2||
+Suq'Ata Assassin|Visions|69|U|{1}{B}{B}|Creature - Human Assassin|1|1|Fear$Whenever this creature attacks and isn't blocked, defending player gets a poison counter.|
+Tar Pit Warrior|Visions|70|C|{2}{B}|Creature - Cyclops Warrior|3|4|When this creature becomes the target of a spell or ability, sacrifice it.|
+Urborg Mindsucker|Visions|71|C|{2}{B}|Creature - Horror|2|2|{B}, Sacrifice this creature: Target opponent discards a card at random. Activate only as a sorcery.|
+Vampiric Tutor|Visions|72|R|{B}|Instant|||Search your library for a card, then shuffle and put that card on top. You lose 2 life.|
+Vampirism|Visions|73|U|{1}{B}|Enchantment - Aura|||Enchant creature$When this Aura enters, draw a card at the beginning of the next turn's upkeep.$Enchanted creature gets +1/+1 for each other creature you control.$Other creatures you control get -1/-1.|
+Wake of Vultures|Visions|74|C|{3}{B}|Creature - Bird|3|1|Flying${1}{B}, Sacrifice a creature: Regenerate this creature.|
+Wicked Reward|Visions|75|C|{1}{B}|Instant|||As an additional cost to cast this spell, sacrifice a creature.$Target creature gets +4/+2 until end of turn.|
+Bogardan Phoenix|Visions|76|R|{2}{R}{R}{R}|Creature - Phoenix|3|3|Flying$When this creature dies, exile it if it had a death counter on it. Otherwise, return it to the battlefield under your control and put a death counter on it.|
+Dwarven Vigilantes|Visions|77|C|{2}{R}|Creature - Dwarf|2|2|Whenever this creature attacks and isn't blocked, you may have it deal damage equal to its power to target creature. If you do, this creature assigns no combat damage this turn.|
+Elkin Lair|Visions|78|R|{3}{R}|World Enchantment|||At the beginning of each player's upkeep, that player exiles a card at random from their hand. The player may play that card this turn. At the beginning of the next end step, if the player hasn't played the card, they put it into their graveyard.|
+Fireblast|Visions|79|C|{4}{R}{R}|Instant|||You may sacrifice two Mountains rather than pay this spell's mana cost.$Fireblast deals 4 damage to any target.|
+Goblin Recruiter|Visions|80|U|{1}{R}|Creature - Goblin|1|1|When this creature enters, search your library for any number of Goblin cards, reveal them, then shuffle and put those cards on top in any order.|
+Goblin Swine-Rider|Visions|81|C|{R}|Creature - Goblin|1|1|Whenever this creature becomes blocked, it deals 2 damage to each attacking creature and each blocking creature.|
+Hearth Charm|Visions|82|C|{R}|Instant|||Choose one --$* Destroy target artifact creature.$* Attacking creatures get +1/+0 until end of turn.$* Target creature with power 2 or less can't be blocked this turn.|
+Heat Wave|Visions|83|U|{2}{R}|Enchantment|||Cumulative upkeep {R}$Blue creatures can't block creatures you control.$Nonblue creatures can't block creatures you control unless their controller pays 1 life for each blocking creature they control.|
+Hulking Cyclops|Visions|84|U|{3}{R}{R}|Creature - Cyclops|5|5|This creature can't block.|
+Keeper of Kookus|Visions|85|C|{R}|Creature - Goblin|1|1|{R}: This creature gains protection from red until end of turn.|
+Kookus|Visions|86|R|{3}{R}{R}|Creature - Djinn|3|5|Trample$At the beginning of your upkeep, if you don't control a creature named Keeper of Kookus, this creature deals 3 damage to you and attacks this turn if able.${R}: This creature gets +1/+0 until end of turn.|
+Lightning Cloud|Visions|87|R|{3}{R}|Enchantment|||Whenever a player casts a red spell, you may pay {R}. If you do, this enchantment deals 1 damage to any target.|
+Mob Mentality|Visions|88|U|{R}|Enchantment - Aura|||Enchant creature$Enchanted creature has trample.$Whenever all non-Wall creatures you control attack, enchanted creature gets +X/+0 until end of turn, where X is the number of attacking creatures.|
+Ogre Enforcer|Visions|89|R|{3}{R}{R}|Creature - Ogre|4|4|This creature can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.|
+Raging Gorilla|Visions|90|C|{2}{R}|Creature - Ape|2|3|Whenever this creature blocks or becomes blocked, it gets +2/-2 until end of turn.|
+Relentless Assault|Visions|91|R|{2}{R}{R}|Sorcery|||Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.|
+Rock Slide|Visions|92|C|{X}{R}|Instant|||Rock Slide deals X damage divided as you choose among any number of target attacking or blocking creatures without flying.|
+Solfatara|Visions|93|C|{2}{R}|Instant|||Target player can't play lands this turn.$Draw a card at the beginning of the next turn's upkeep.|
+Song of Blood|Visions|94|C|{1}{R}|Sorcery|||Mill four cards. Whenever a creature attacks this turn, it gets +1/+0 until end of turn for each creature card put into your graveyard this way.|
+Spitting Drake|Visions|95|U|{3}{R}|Creature - Drake|2|2|Flying${R}: This creature gets +1/+0 until end of turn. Activate only once each turn.|
+Suq'Ata Lancer|Visions|96|C|{2}{R}|Creature - Human Knight|2|2|Haste$Flanking|
+Talruum Champion|Visions|97|C|{4}{R}|Creature - Minotaur|3|3|First strike$Whenever this creature blocks or becomes blocked by a creature, that creature loses first strike until end of turn.|
+Talruum Piper|Visions|98|U|{4}{R}|Creature - Minotaur|3|3|All creatures with flying able to block this creature do so.|
+Tremor|Visions|99|C|{R}|Sorcery|||Tremor deals 1 damage to each creature without flying.|
+Viashino Sandstalker|Visions|100|U|{1}{R}{R}|Creature - Lizard Warrior|4|2|Haste$At the beginning of the end step, return this creature to its owner's hand.|
+Bull Elephant|Visions|101|C|{3}{G}|Creature - Elephant|4|4|When this creature enters, sacrifice it unless you return two Forests you control to their owner's hand.|
+City of Solitude|Visions|102|R|{2}{G}|Enchantment|||Players can cast spells and activate abilities only during their own turns.|
+Creeping Mold|Visions|103|U|{2}{G}{G}|Sorcery|||Destroy target artifact, enchantment, or land.|
+Elephant Grass|Visions|104|U|{G}|Enchantment|||Cumulative upkeep {1}$Black creatures can't attack you.$Nonblack creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you.|
+Elven Cache|Visions|105|C|{2}{G}{G}|Sorcery|||Return target card from your graveyard to your hand.|
+Emerald Charm|Visions|106|C|{G}|Instant|||Choose one --$* Untap target permanent.$* Destroy target non-Aura enchantment.$* Target creature loses flying until end of turn.|
+Feral Instinct|Visions|107|C|{1}{G}|Instant|||Target creature gets +1/+1 until end of turn.$Draw a card at the beginning of the next turn's upkeep.|
+Giant Caterpillar|Visions|108|C|{3}{G}|Creature - Insect|3|3|{G}, Sacrifice this creature: Create a 1/1 green Insect creature token with flying named Butterfly at the beginning of the next end step.|
+Katabatic Winds|Visions|109|R|{2}{G}|Enchantment|||Phasing$Creatures with flying can't attack or block, and their activated abilities with {T} in their costs can't be activated.|
+King Cheetah|Visions|110|C|{3}{G}|Creature - Cat|3|2|Flash|
+Kyscu Drake|Visions|111|U|{3}{G}|Creature - Drake|2|2|Flying${G}: This creature gets +0/+1 until end of turn. Activate only once each turn.$Sacrifice this creature and a creature named Spitting Drake: Search your library for a card named Viashivan Dragon, put that card onto the battlefield, then shuffle.|
+Lichenthrope|Visions|112|R|{3}{G}{G}|Creature - Plant Fungus|5|5|If damage would be dealt to this creature, put that many -1/-1 counters on it instead.$At the beginning of your upkeep, remove a -1/-1 counter from this creature.|
+Mortal Wound|Visions|113|C|{G}|Enchantment - Aura|||Enchant creature$When enchanted creature is dealt damage, destroy it.|
+Natural Order|Visions|114|R|{2}{G}{G}|Sorcery|||As an additional cost to cast this spell, sacrifice a green creature.$Search your library for a green creature card, put it onto the battlefield, then shuffle.|
+Panther Warriors|Visions|115|C|{4}{G}|Creature - Cat Warrior|6|3||
+Quirion Druid|Visions|116|R|{2}{G}|Creature - Elf Druid|1|2|{G}, {T}: Target land becomes a 2/2 green creature that's still a land.|
+Quirion Ranger|Visions|117|C|{G}|Creature - Elf Ranger|1|1|Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.|
+River Boa|Visions|118|C|{1}{G}|Creature - Snake|2|1|Islandwalk${G}: Regenerate this creature.|
+Rowen|Visions|119|R|{2}{G}{G}|Enchantment|||Reveal the first card you draw each turn. Whenever you reveal a basic land card this way, draw a card.|
+Spider Climb|Visions|120|C|{G}|Enchantment - Aura|||You may cast this spell as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.$Enchant creature$Enchanted creature gets +0/+3 and has reach.|
+Stampeding Wildebeests|Visions|121|U|{2}{G}{G}|Creature - Antelope Beast|5|4|Trample$At the beginning of your upkeep, return a green creature you control to its owner's hand.|
+Summer Bloom|Visions|122|U|{1}{G}|Sorcery|||You may play up to three additional lands this turn.|
+Uktabi Orangutan|Visions|123|U|{2}{G}|Creature - Ape|2|2|When this creature enters, destroy target artifact.|
+Warthog|Visions|124|C|{1}{G}{G}|Creature - Boar|3|2|Swampwalk|
+Wind Shear|Visions|125|U|{2}{G}|Instant|||Attacking creatures with flying get -2/-2 and lose flying until end of turn.|
+Army Ants|Visions|126|U|{1}{B}{R}|Creature - Insect|1|1|{T}, Sacrifice a land: Destroy target land.|
+Breathstealer's Crypt|Visions|127|R|{2}{U}{B}|Enchantment|||If a player would draw a card, instead they draw a card and reveal it. If it's a creature card, that player discards it unless they pay 3 life.|
+Corrosion|Visions|128|R|{1}{B}{R}|Enchantment|||Cumulative upkeep {1}$At the beginning of your upkeep, put a rust counter on each artifact target opponent controls. Then destroy each artifact with mana value less than or equal to the number of rust counters on it. Artifacts destroyed this way can't be regenerated.$When this enchantment leaves the battlefield, remove all rust counters from all permanents.|
 Femeref Enchantress|Visions|129|R|{G}{W}|Creature - Human Druid|1|2|Whenever an enchantment is put into a graveyard from the battlefield, draw a card.|
-Kaervek's Spite|Visions|13|R|{B}{B}{B}|Instant|||As an additional cost to cast Kaervek's Spite, sacrifice all permanents you control and discard your hand.$Target player loses 5 life.|
-Firestorm Hellkite|Visions|130|R|{4}{U}{R}|Creature - Dragon|6|6|Flying, trample$Cumulative upkeep {U}{R} <i>(At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)</i>|
-Guiding Spirit|Visions|131|R|{1}{W}{U}|Creature - Angel Spirit|1|2|Flying${tap}: If the top card of target player's graveyard is a creature card, put that card on top of that player's library.|
-Mundungu|Visions|132|U|{1}{U}{B}|Creature - Human Wizard|1|1|{tap}: Counter target spell unless its controller pays {1} and 1 life.|
-Pygmy Hippo|Visions|133|R|{G}{U}|Creature - Hippo|2|2|Whenever Pygmy Hippo attacks and isn't blocked, you may have defending player activate a mana ability of each land they control and empty their mana pool. If you do, Pygmy Hippo assigns no combat damage this turn and at the beginning of your postcombat main phase, you add X mana of {C}, where X is the amount of mana emptied from defending player's mana pool this way.|
+Firestorm Hellkite|Visions|130|R|{4}{U}{R}|Creature - Dragon|6|6|Flying, trample$Cumulative upkeep {U}{R}|
+Guiding Spirit|Visions|131|R|{1}{W}{U}|Creature - Angel Spirit|1|2|Flying${T}: If the top card of target player's graveyard is a creature card, put that card on top of that player's library.|
+Mundungu|Visions|132|U|{1}{U}{B}|Creature - Human Wizard|1|1|{T}: Counter target spell unless its controller pays {1} and 1 life.|
+Pygmy Hippo|Visions|133|R|{G}{U}|Creature - Hippo|2|2|Whenever this creature attacks and isn't blocked, you may have defending player activate a mana ability of each land they control and lose all unspent mana. If you do, this creature assigns no combat damage this turn and at the beginning of your next main phase this turn, you add an amount of {C} equal to the amount of mana that player lost this way.|
 Righteous War|Visions|134|R|{1}{W}{B}|Enchantment|||White creatures you control have protection from black.$Black creatures you control have protection from white.|
 Scalebane's Elite|Visions|135|U|{3}{G}{W}|Creature - Human Soldier|4|4|Protection from black|
 Simoon|Visions|136|U|{R}{G}|Instant|||Simoon deals 1 damage to each creature target opponent controls.|
 Squandered Resources|Visions|137|R|{B}{G}|Enchantment|||Sacrifice a land: Add one mana of any type the sacrificed land could produce.|
-Suleiman's Legacy|Visions|138|R|{R}{W}|Enchantment|||When Suleiman's Legacy enters the battlefield, destroy all Djinns and Efreets. They can't be regenerated.$Whenever a Djinn or Efreet enters the battlefield, destroy it. It can't be regenerated.|
+Suleiman's Legacy|Visions|138|R|{R}{W}|Enchantment|||When this enchantment enters, destroy all Djinns and Efreets. They can't be regenerated.$Whenever a Djinn or Efreet enters, destroy it. It can't be regenerated.|
 Tempest Drake|Visions|139|U|{1}{W}{U}|Creature - Drake|2|2|Flying, vigilance|
-Necromancy|Visions|14|U|{2}{B}|Enchantment|||You may cast Necromancy as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.$When Necromancy enters the battlefield, if it's on the battlefield, it becomes an Aura with "enchant creature put onto the battlefield with Necromancy." Put target creature card from a graveyard onto the battlefield under your control and attach Necromancy to it. When Necromancy leaves the battlefield, that creature's controller sacrifices it.|
-Viashivan Dragon|Visions|140|R|{2}{R}{R}{G}{G}|Creature - Dragon|4|4|Flying${R}: Viashivan Dragon gets +1/+0 until end of turn.${G}: Viashivan Dragon gets +0/+1 until end of turn.|
+Viashivan Dragon|Visions|140|R|{2}{R}{R}{G}{G}|Creature - Dragon|4|4|Flying${R}: This creature gets +1/+0 until end of turn.${G}: This creature gets +0/+1 until end of turn.|
 Anvil of Bogardan|Visions|141|R|{2}|Artifact|||Players have no maximum hand size.$At the beginning of each player's draw step, that player draws an additional card, then discards a card.|
-Brass-Talon Chimera|Visions|142|U|{4}|Artifact Creature - Chimera|2|2|First strike$Sacrifice Brass-Talon Chimera: Put a +2/+2 counter on target Chimera creature. It gains first strike. <i>(This effect lasts indefinitely.)</i>|
-Diamond Kaleidoscope|Visions|143|R|{4}|Artifact|||{3}, {tap}: Put a 0/1 colorless Prism artifact creature token onto the battlefield.$Sacrifice a Prism token: Add one mana of any color.|
-Dragon Mask|Visions|144|U|{3}|Artifact|||{3}, {tap}: Target creature you control gets +2/+2 until end of turn. Return it to its owner's hand at the beginning of the next end step. <i>(Return it only if it's on the battlefield.)</i>|
+Brass-Talon Chimera|Visions|142|U|{4}|Artifact Creature - Chimera|2|2|First strike$Sacrifice this creature: Put a +2/+2 counter on target Chimera creature. It gains first strike.|
+Diamond Kaleidoscope|Visions|143|R|{4}|Artifact|||{3}, {T}: Create a 0/1 colorless Prism artifact creature token.$Sacrifice a Prism token: Add one mana of any color.|
+Dragon Mask|Visions|144|U|{3}|Artifact|||{3}, {T}: Target creature you control gets +2/+2 until end of turn. Return it to its owner's hand at the beginning of the next end step.|
 Helm of Awakening|Visions|145|U|{2}|Artifact|||Spells cost {1} less to cast.|
-Iron-Heart Chimera|Visions|146|U|{4}|Artifact Creature - Chimera|2|2|Vigilance$Sacrifice Iron-Heart Chimera: Put a +2/+2 counter on target Chimera creature. It gains vigilance. <i>(This effect lasts indefinitely.)</i>|
-Juju Bubble|Visions|147|U|{1}|Artifact|||Cumulative upkeep {1} <i>(At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)</i>$When you play a card, sacrifice Juju Bubble.${2}: You gain 1 life.|
-Lead-Belly Chimera|Visions|148|U|{4}|Artifact Creature - Chimera|2|2|Trample$Sacrifice Lead-Belly Chimera: Put a +2/+2 counter on target Chimera creature. It gains trample. <i>(This effect lasts indefinitely.)</i>|
-Magma Mine|Visions|149|U|{1}|Artifact|||{4}: Put a pressure counter on Magma Mine.${tap}, Sacrifice Magma Mine: Magma Mine deals damage equal to the number of pressure counters on it to any target.|
-Necrosavant|Visions|15|R|{3}{B}{B}{B}|Creature - Zombie Giant|5|5|{3}{B}{B}, Sacrifice a creature: Return Necrosavant from your graveyard to the battlefield. Activate this ability only during your upkeep.|
-Matopi Golem|Visions|150|U|{5}|Artifact Creature - Golem|3|3|{1}: Regenerate Matopi Golem. When it regenerates this way, put a -1/-1 counter on it.|
-Phyrexian Marauder|Visions|151|R|{X}|Artifact Creature - Construct|0|0|Phyrexian Marauder enters the battlefield with X +1/+1 counters on it.$Phyrexian Marauder can't block.$Phyrexian Marauder can't attack unless you pay {1} for each +1/+1 counter on it.|
-Phyrexian Walker|Visions|152|C|{0}|Artifact Creature - Construct|0|3||
+Iron-Heart Chimera|Visions|146|U|{4}|Artifact Creature - Chimera|2|2|Vigilance$Sacrifice this creature: Put a +2/+2 counter on target Chimera creature. It gains vigilance.|
+Juju Bubble|Visions|147|U|{1}|Artifact|||Cumulative upkeep {1}$When you play a card, sacrifice this artifact.${2}: You gain 1 life.|
+Lead-Belly Chimera|Visions|148|U|{4}|Artifact Creature - Chimera|2|2|Trample$Sacrifice this creature: Put a +2/+2 counter on target Chimera creature. It gains trample.|
+Magma Mine|Visions|149|U|{1}|Artifact|||{4}: Put a pressure counter on this artifact.${T}, Sacrifice this artifact: It deals damage equal to the number of pressure counters on it to any target.|
+Matopi Golem|Visions|150|U|{5}|Artifact Creature - Golem|3|3|{1}: Regenerate this creature. When it regenerates this way, put a -1/-1 counter on it.|
+Phyrexian Marauder|Visions|151|R|{X}|Artifact Creature - Phyrexian Construct|0|0|This creature enters with X +1/+1 counters on it.$This creature can't block.$This creature can't attack unless you pay {1} for each +1/+1 counter on it.|
+Phyrexian Walker|Visions|152|C|{0}|Artifact Creature - Phyrexian Construct|0|3||
 Sands of Time|Visions|153|R|{4}|Artifact|||Each player skips their untap step.$At the beginning of each player's upkeep, that player simultaneously untaps each tapped artifact, creature, and land they control and taps each untapped artifact, creature, and land they control.|
-Sisay's Ring|Visions|154|C|{4}|Artifact|||{tap}: Add {C}{C}.|
-Snake Basket|Visions|155|R|{4}|Artifact|||{X}, Sacrifice Snake Basket: Put X 1/1 green Snake creature tokens onto the battlefield. Activate this ability only any time you could cast a sorcery.|
+Sisay's Ring|Visions|154|C|{4}|Artifact|||{T}: Add {C}{C}.|
+Snake Basket|Visions|155|R|{4}|Artifact|||{X}, Sacrifice this artifact: Create X 1/1 green Snake creature tokens. Activate only as a sorcery.|
 Teferi's Puzzle Box|Visions|156|R|{4}|Artifact|||At the beginning of each player's draw step, that player puts the cards in their hand on the bottom of their library in any order, then draws that many cards.|
-Tin-Wing Chimera|Visions|157|U|{4}|Artifact Creature - Chimera|2|2|Flying$Sacrifice Tin-Wing Chimera: Put a +2/+2 counter on target Chimera creature. It gains flying. <i>(This effect lasts indefinitely.)</i>|
-Triangle of War|Visions|158|R|{1}|Artifact|||{2}, Sacrifice Triangle of War: Choose target creature you control and target creature an opponent controls. Those creatures fight each other. <i>(Each deals damage equal to its power to the other.)</i>|
-Wand of Denial|Visions|159|R|{2}|Artifact|||{tap}: Look at the top card of target player's library. If it's a nonland card, you may pay 2 life. If you do, put it into that player's graveyard.|
-Nekrataal|Visions|16|U|{2}{B}{B}|Creature - Human Assassin|2|1|First strike <i>(This creature deals combat damage before creatures without first strike.)</i>$When Nekrataal enters the battlefield, destroy target nonartifact, nonblack creature. That creature can't be regenerated.|
-Coral Atoll|Visions|160|U||Land|||Coral Atoll enters the battlefield tapped.$When Coral Atoll enters the battlefield, sacrifice it unless you return an untapped Island you control to its owner's hand.${tap}: Add {C}{U}.|
-Dormant Volcano|Visions|161|U||Land|||Dormant Volcano enters the battlefield tapped.$When Dormant Volcano enters the battlefield, sacrifice it unless you return an untapped Mountain you control to its owner's hand.${tap}: Add {C}{R}.|
-Everglades|Visions|162|U||Land|||Everglades enters the battlefield tapped.$When Everglades enters the battlefield, sacrifice it unless you return an untapped Swamp you control to its owner's hand.${tap}: Add {C}{B}.|
-Griffin Canyon|Visions|163|R||Land|||{tap}: Add {C}.${tap}: Untap target Griffin. If it's a creature, it gets +1/+1 until end of turn.|
-Jungle Basin|Visions|164|U||Land|||Jungle Basin enters the battlefield tapped.$When Jungle Basin enters the battlefield, sacrifice it unless you return an untapped Forest you control to its owner's hand.${tap}: Add {C}{G}.|
-Karoo|Visions|165|U||Land|||Karoo enters the battlefield tapped.$When Karoo enters the battlefield, sacrifice it unless you return an untapped Plains you control to its owner's hand.${tap}: Add {C}{W}.|
-Quicksand|Visions|166|U||Land|||{tap}: Add {C}.${tap}, Sacrifice Quicksand: Target attacking creature without flying gets -1/-2 until end of turn.|
-Undiscovered Paradise|Visions|167|R||Land|||{tap}: Add one mana of any color. During your next untap step, as you untap your permanents, return Undiscovered Paradise to its owner's hand.|
-Pillar Tombs of Aku|Visions|17|R|{2}{B}{B}|World Enchantment|||At the beginning of each player's upkeep, that player may sacrifice a creature. If that player doesn't, they lose 5 life and you sacrifice Pillar Tombs of Aku.|
-Python|Visions|18|C|{1}{B}{B}|Creature - Snake|3|2||
-Suq'Ata Assassin|Visions|19|U|{1}{B}{B}|Creature - Human Assassin|1|1|Fear <i>(This creature can't be blocked except by artifact creatures and/or black creatures.)</i>$Whenever Suq'Ata Assassin attacks and isn't blocked, defending player gets a poison counter. <i>(A player with ten or more poison counters loses the game.)</i>|
-Blanket of Night|Visions|2|U|{1}{B}{B}|Enchantment|||Each land is a Swamp in addition to its other land types.|
-Tar Pit Warrior|Visions|20|C|{2}{B}|Creature - Cyclops Warrior|3|4|When Tar Pit Warrior becomes the target of a spell or ability, sacrifice it.|
-Urborg Mindsucker|Visions|21|C|{2}{B}|Creature - Horror|2|2|{B}, Sacrifice Urborg Mindsucker: Target opponent discards a card at random. Activate this ability only any time you could cast a sorcery.|
-Vampiric Tutor|Visions|22|R|{B}|Instant|||Search your library for a card, then shuffle your library and put that card on top of it. You lose 2 life.|
-Vampirism|Visions|23|U|{1}{B}|Enchantment - Aura|||Enchant creature$When Vampirism enters the battlefield, draw a card at the beginning of the next turn's upkeep.$Enchanted creature gets +1/+1 for each other creature you control.$Other creatures you control get -1/-1.|
-Wake of Vultures|Visions|24|C|{3}{B}|Creature - Bird|3|1|Flying${1}{B}, Sacrifice a creature: Regenerate Wake of Vultures.|
-Wicked Reward|Visions|25|C|{1}{B}|Instant|||As an additional cost to cast Wicked Reward, sacrifice a creature.$Target creature gets +4/+2 until end of turn.|
-Impulse|Visions|34|C|{1}{U}|Instant|||Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.|
-Betrayal|Visions|26|C|{U}|Enchantment - Aura|||Enchant creature an opponent controls$Whenever enchanted creature becomes tapped, you draw a card.|
-Breezekeeper|Visions|27|C|{3}{U}|Creature - Djinn|4|4|Flying$Phasing <i>(This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)</i>|
-Chronatog|Visions|28|R|{1}{U}|Creature - Atog|1|2|{0}: Chronatog gets +3/+3 until end of turn. You skip your next turn. Activate this ability only once each turn.|
-Cloud Elemental|Visions|29|C|{2}{U}|Creature - Elemental|2|3|Flying$Cloud Elemental can block only creatures with flying.|
-Brood of Cockroaches|Visions|3|U|{1}{B}|Creature - Insect|1|1|When Brood of Cockroaches is put into your graveyard from the battlefield, at the beginning of the next end step, you lose 1 life and return Brood of Cockroaches to your hand.|
-Desertion|Visions|30|R|{3}{U}{U}|Instant|||Counter target spell. If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard.|
-Dream Tides|Visions|31|U|{2}{U}{U}|Enchantment|||Creatures don't untap during their controllers' untap steps.$At the beginning of each player's upkeep, that player may choose any number of tapped nongreen creatures they control and pay {2} for each creature chosen this way. If the player does, untap those creatures.|
-Flooded Shoreline|Visions|32|R|{U}{U}|Enchantment|||{U}{U}, Return two Islands you control to their owner's hand: Return target creature to its owner's hand.|
-Foreshadow|Visions|33|U|{1}{U}|Instant|||Name a card, then target opponent puts the top card of their library into their graveyard. If that card is the named card, you draw a card.$Draw a card at the beginning of the next turn's upkeep.|
-Inspiration|Visions|35|C|{3}{U}|Instant|||Target player draws two cards.|
-Knight of the Mists|Visions|36|C|{2}{U}|Creature - Human Knight|2|2|Flanking <i>(Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)</i>$When Knight of the Mists enters the battlefield, you may pay {U}. If you don't, destroy target Knight and it can't be regenerated.|
-Man-o'-War|Visions|37|C|{2}{U}|Creature - Jellyfish|2|2|When Man-o'-War enters the battlefield, return target creature to its owner's hand.|
-Mystic Veil|Visions|38|C|{1}{U}|Enchantment - Aura|||You may cast Mystic Veil as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.$Enchant creature$Enchanted creature has shroud. <i>(It can't be the target of spells or abilities.)</i>|
-Ovinomancer|Visions|39|U|{2}{U}|Creature - Human Wizard|0|1|When Ovinomancer enters the battlefield, sacrifice it unless you return three basic lands you control to their owner's hand.${tap}, Return Ovinomancer to its owner's hand: Destroy target creature. It can't be regenerated. That creature's controller puts a 0/1 green Sheep creature token onto the battlefield.|
-Vanishing|Visions|39|C|{U}|Enchantment - Aura|||Enchant creature${U}{U}: Enchanted creature phases out. <i>(While it's phased out, it's treated as though it doesn't exist. It phases in before its controller untaps during their next untap step.)</i>|
-Coercion|Visions|4|C|{2}{B}|Sorcery|||Target opponent reveals their hand. You choose a card from it. That player discards that card.|
-Prosperity|Visions|40|U|{X}{U}|Sorcery|||Each player draws X cards.|
-Rainbow Efreet|Visions|41|R|{3}{U}|Creature - Efreet|3|1|Flying${U}{U}: Rainbow Efreet phases out. <i>(While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)</i>|
-Shimmering Efreet|Visions|42|U|{2}{U}|Creature - Efreet|2|2|Flying$Phasing <i>(This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)</i>$Whenever Shimmering Efreet phases in, target creature phases out. <i>(It phases in before its controller untaps during their next untap step.)</i>|
-Shrieking Drake|Visions|43|C|{U}|Creature - Drake|1|1|Flying$When Shrieking Drake enters the battlefield, return a creature you control to its owner's hand.|
-Teferi's Realm|Visions|44|R|{1}{U}{U}|World Enchantment|||At the beginning of each player's upkeep, that player chooses artifact, creature, land, or non-Aura enchantment. All nontoken permanents of that type phase out. <i>(While they're phased out, they're treated as though they don't exist. Each one phases in before its controller untaps during their next untap step.)</i>|
-Three Wishes|Visions|45|R|{1}{U}{U}|Instant|||Exile the top three cards of your library face down. You may look at those cards for as long as they remain exiled. Until your next turn, you may play those cards. At the beginning of your next upkeep, put any of those cards you didn't play into your graveyard.|
-Time and Tide|Visions|46|U|{U}{U}|Instant|||Simultaneously, all phased-out creatures phase in and all creatures with phasing phase out.|
-Undo|Visions|47|C|{1}{U}{U}|Sorcery|||Return two target creatures to their owners' hands.|
-Vision Charm|Visions|49|C|{U}|Instant|||Choose one - Target player puts the top four cards of their library into their graveyard; or choose a land type and a basic land type, and each land of the first chosen type becomes the second chosen type until end of turn; or target artifact phases out. <i>(While it's phased out, it's treated as though it doesn't exist. It phases in before its controller untaps during their next untap step.)</i>|
-Crypt Rats|Visions|5|C|{2}{B}|Creature - Rat|1|1|{X}: Crypt Rats deals X damage to each creature and each player. Spend only black mana this way.|
-Waterspout Djinn|Visions|50|U|{2}{U}{U}|Creature - Djinn|4|4|Flying$At the beginning of your upkeep, sacrifice Waterspout Djinn unless you return an untapped Island you control to its owner's hand.|
-Bull Elephant|Visions|51|C|{3}{G}|Creature - Elephant|4|4|When Bull Elephant enters the battlefield, sacrifice it unless you return two Forests you control to their owner's hand.|
-City of Solitude|Visions|52|R|{2}{G}|Enchantment|||Players can cast spells and activate abilities only during their own turns.|
-Creeping Mold|Visions|53|U|{2}{G}{G}|Sorcery|||Destroy target artifact, enchantment, or land.|
-Elephant Grass|Visions|54|U|{G}|Enchantment|||Cumulative upkeep {1} <i>(At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)</i>$Black creatures can't attack you.$Nonblack creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you.|
-Elven Cache|Visions|55|C|{2}{G}{G}|Sorcery|||Return target card from your graveyard to your hand.|
-Emerald Charm|Visions|56|C|{G}|Instant|||Choose one - Untap target permanent; or destroy target non-Aura enchantment; or target creature loses flying until end of turn.|
-Feral Instinct|Visions|57|C|{1}{G}|Instant|||Target creature gets +1/+1 until end of turn.$Draw a card at the beginning of the next turn's upkeep.|
-Giant Caterpillar|Visions|58|C|{3}{G}|Creature - Insect|3|3|{G}, Sacrifice Giant Caterpillar: Put a 1/1 green Insect creature token with flying named Butterfly onto the battlefield at the beginning of the next end step.|
-Katabatic Winds|Visions|59|R|{2}{G}|Enchantment|||Phasing <i>(This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)</i>$Creatures with flying can't attack or block, and their activated abilities with {tap} in their costs can't be activated.|
-Dark Privilege|Visions|6|C|{1}{B}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +1/+1.$Sacrifice a creature: Regenerate enchanted creature.|
-King Cheetah|Visions|60|C|{3}{G}|Creature - Cat|3|2|Flash|
-Kyscu Drake|Visions|61|U|{3}{G}|Creature - Drake|2|2|Flying${G}: Kyscu Drake gets +0/+1 until end of turn. Activate this ability only once each turn.$Sacrifice Kyscu Drake and a creature named Spitting Drake: Search your library for a card named Viashivan Dragon and put that card onto the battlefield. Then shuffle your library.|
-Lichenthrope|Visions|62|R|{3}{G}{G}|Creature - Plant Fungus|5|5|If damage would be dealt to Lichenthrope, put that many -1/-1 counters on it instead.$At the beginning of your upkeep, remove a -1/-1 counter from Lichenthrope.|
-Mortal Wound|Visions|63|C|{G}|Enchantment - Aura|||Enchant creature$When enchanted creature is dealt damage, destroy it.|
-Natural Order|Visions|64|R|{2}{G}{G}|Sorcery|||As an additional cost to cast Natural Order, sacrifice a green creature.$Search your library for a green creature card and put it onto the battlefield. Then shuffle your library.|
-Panther Warriors|Visions|65|C|{4}{G}|Creature - Cat Warrior|6|3||
-Quirion Druid|Visions|66|R|{2}{G}|Creature - Elf Druid|1|2|{G}, {tap}: Target land becomes a 2/2 green creature that's still a land. <i>(This effect lasts indefinitely.)</i>|
-Quirion Ranger|Visions|67|C|{G}|Creature - Elf|1|1|Return a Forest you control to its owner's hand: Untap target creature. Activate this ability only once each turn.|
-River Boa|Visions|68|C|{1}{G}|Creature - Snake|2|1|Islandwalk${G}: Regenerate River Boa.|
-Rowen|Visions|69|R|{2}{G}{G}|Enchantment|||Reveal the first card you draw each turn. Whenever you reveal a basic land card this way, draw a card.|
-Death Watch|Visions|7|C|{B}|Enchantment - Aura|||Enchant creature$When enchanted creature dies, its controller loses life equal to its power and you gain life equal to its toughness.|
-Spider Climb|Visions|70|C|{G}|Enchantment - Aura|||You may cast Spider Climb as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.$Enchant creature$Enchanted creature gets +0/+3 and has reach. <i>(It can block creatures with flying.)</i>|
-Stampeding Wildebeests|Visions|71|U|{2}{G}{G}|Creature - Antelope Beast|5|4|Trample <i>(If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)</i>$At the beginning of your upkeep, return a green creature you control to its owner's hand.|
-Summer Bloom|Visions|72|U|{1}{G}|Sorcery|||You may play up to three additional lands this turn.|
-Uktabi Orangutan|Visions|73|U|{2}{G}|Creature - Ape|2|2|When Uktabi Orangutan enters the battlefield, destroy target artifact.|
-Warthog|Visions|74|C|{1}{G}{G}|Creature - Boar|3|2|Swampwalk|
-Wind Shear|Visions|75|U|{2}{G}|Instant|||Attacking creatures with flying get -2/-2 and lose flying until end of turn.|
-Bogardan Phoenix|Visions|76|R|{2}{R}{R}{R}|Creature - Phoenix|3|3|Flying$When Bogardan Phoenix dies, exile it if it had a death counter on it. Otherwise, return it to the battlefield under your control and put a death counter on it.|
-Dwarven Vigilantes|Visions|77|C|{2}{R}|Creature - Dwarf|2|2|Whenever Dwarven Vigilantes attacks and isn't blocked, you may have it deal damage equal to its power to target creature. If you do, Dwarven Vigilantes assigns no combat damage this turn.|
-Elkin Lair|Visions|78|R|{3}{R}|World Enchantment|||At the beginning of each player's upkeep, that player exiles a card at random from their hand. The player may play that card this turn. At the beginning of the next end step, if the player hasn't played the card, they put it into their graveyard.|
-Fireblast|Visions|79|C|{4}{R}{R}|Instant|||You may sacrifice two Mountains rather than pay Fireblast's mana cost.$Fireblast deals 4 damage to any target.|
-Desolation|Visions|8|U|{1}{B}{B}|Enchantment|||At the beginning of each end step, each player who tapped a land for mana this turn sacrifices a land. Desolation deals 2 damage to each player who sacrificed a Plains this way.|
-Goblin Recruiter|Visions|80|U|{1}{R}|Creature - Goblin|1|1|When Goblin Recruiter enters the battlefield, search your library for any number of Goblin cards and reveal those cards. Shuffle your library, then put them on top of it in any order.|
-Goblin Swine-Rider|Visions|81|C|{R}|Creature - Goblin|1|1|Whenever Goblin Swine-Rider becomes blocked, it deals 2 damage to each attacking creature and each blocking creature.|
-Hearth Charm|Visions|82|C|{R}|Instant|||Choose one - Destroy target artifact creature; or attacking creatures get +1/+0 until end of turn; or target creature with power 2 or less is unblockable this turn.|
-Heat Wave|Visions|83|U|{2}{R}|Enchantment|||Cumulative upkeep {R} <i>(At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)</i>$Blue creatures can't block creatures you control.$Nonblue creatures can't block creatures you control unless their controller pays 1 life for each blocking creature they control.|
-Hulking Cyclops|Visions|84|U|{3}{R}{R}|Creature - Cyclops|5|5|Hulking Cyclops can't block.|
-Tithe|Visions|84|R|{W}|Instant|||Search your library for a Plains card. If target opponent controls more lands than you, you may search your library for an additional Plains card. Reveal those cards and put them into your hand. Then shuffle your library.|
-Keeper of Kookus|Visions|85|C|{R}|Creature - Goblin|1|1|{R}: Keeper of Kookus gains protection from red until end of turn.|
-Kookus|Visions|85|R|{3}{R}{R}|Creature - Djinn|3|5|Trample$At the beginning of your upkeep, if you don't control a creature named Keeper of Kookus, Kookus deals 3 damage to you and attacks this turn if able.${R}: Kookus gets +1/+0 until end of turn.|
-Lightning Cloud|Visions|87|R|{3}{R}|Enchantment|||Whenever a player casts a red spell, you may pay {R}. If you do, Lightning Cloud deals 1 damage to any target.|
-Mob Mentality|Visions|88|U|{R}|Enchantment - Aura|||Enchant creature$Enchanted creature has trample.$Whenever all non-Wall creatures you control attack, enchanted creature gets +X/+0 until end of turn, where X is the number of attacking creatures.|
-Ogre Enforcer|Visions|89|R|{3}{R}{R}|Creature - Ogre|4|4|Ogre Enforcer can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.|
-Fallen Askari|Visions|9|C|{1}{B}|Creature - Human Knight|2|2|Flanking <i>(Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)</i>$Fallen Askari can't block.|
-Raging Gorilla|Visions|90|C|{2}{R}|Creature - Ape|2|3|Whenever Raging Gorilla blocks or becomes blocked, it gets +2/-2 until end of turn.|
-Relentless Assault|Visions|91|R|{2}{R}{R}|Sorcery|||Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.|
-Rock Slide|Visions|92|C|{X}{R}|Instant|||Rock Slide deals X damage divided as you choose among any number of target attacking or blocking creatures without flying.|
-Solfatara|Visions|93|C|{2}{R}|Instant|||Target player can't play land cards this turn.$Draw a card at the beginning of the next turn's upkeep.|
-Song of Blood|Visions|94|C|{1}{R}|Sorcery|||Put the top four cards of your library into your graveyard.$Whenever a creature attacks this turn, it gets +1/+0 until end of turn for each creature card put into your graveyard this way.|
-Spitting Drake|Visions|95|U|{3}{R}|Creature - Drake|2|2|Flying${R}: Spitting Drake gets +1/+0 until end of turn. Activate this ability only once each turn.|
-Suq'Ata Lancer|Visions|96|C|{2}{R}|Creature - Human Knight|2|2|Haste$Flanking <i>(Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)</i>|
-Talruum Champion|Visions|97|C|{4}{R}|Creature - Minotaur|3|3|First strike$Whenever Talruum Champion blocks or becomes blocked by a creature, that creature loses first strike until end of turn.|
-Talruum Piper|Visions|98|U|{4}{R}|Creature - Minotaur|3|3|All creatures with flying able to block Talruum Piper do so.|
-Tremor|Visions|99|C|{R}|Sorcery|||Tremor deals 1 damage to each creature without flying.|
+Tin-Wing Chimera|Visions|157|U|{4}|Artifact Creature - Chimera|2|2|Flying$Sacrifice this creature: Put a +2/+2 counter on target Chimera creature. It gains flying.|
+Triangle of War|Visions|158|R|{1}|Artifact|||{2}, Sacrifice this artifact: Target creature you control fights target creature an opponent controls.|
+Wand of Denial|Visions|159|R|{2}|Artifact|||{T}: Look at the top card of target player's library. If it's a nonland card, you may pay 2 life. If you do, put it into that player's graveyard.|
+Coral Atoll|Visions|160|U||Land|||This land enters tapped.$When this land enters, sacrifice it unless you return an untapped Island you control to its owner's hand.${T}: Add {C}{U}.|
+Dormant Volcano|Visions|161|U||Land|||This land enters tapped.$When this land enters, sacrifice it unless you return an untapped Mountain you control to its owner's hand.${T}: Add {C}{R}.|
+Everglades|Visions|162|U||Land|||This land enters tapped.$When this land enters, sacrifice it unless you return an untapped Swamp you control to its owner's hand.${T}: Add {C}{B}.|
+Griffin Canyon|Visions|163|R||Land|||{T}: Add {C}.${T}: Untap target Griffin. If it's a creature, it gets +1/+1 until end of turn.|
+Jungle Basin|Visions|164|U||Land|||This land enters tapped.$When this land enters, sacrifice it unless you return an untapped Forest you control to its owner's hand.${T}: Add {C}{G}.|
+Karoo|Visions|165|U||Land|||This land enters tapped.$When this land enters, sacrifice it unless you return an untapped Plains you control to its owner's hand.${T}: Add {C}{W}.|
+Quicksand|Visions|166|U||Land|||{T}: Add {C}.${T}, Sacrifice this land: Target attacking creature without flying gets -1/-2 until end of turn.|
+Undiscovered Paradise|Visions|167|R||Land|||{T}: Add one mana of any color. During your next untap step, as you untap your permanents, return this land to its owner's hand.|
 Abyssal Gatekeeper|Weatherlight|1|C|{1}{B}|Creature - Horror|1|1|When Abyssal Gatekeeper dies, each player sacrifices a creature.|
 Festering Evil|Weatherlight|10|U|{3}{B}{B}|Enchantment|||At the beginning of your upkeep, Festering Evil deals 1 damage to each creature and each player.$${B}{B}, Sacrifice Festering Evil: Festering Evil deals 3 damage to each creature and each player.|
 Fire Whip|Weatherlight|100|C|{1}{R}|Enchantment - Aura|||Enchant creature you control$Enchanted creature has "{tap}: This creature deals 1 damage to any target."$Sacrifice Fire Whip: Fire Whip deals 1 damage to any target.|
