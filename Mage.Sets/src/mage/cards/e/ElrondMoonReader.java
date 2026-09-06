@@ -47,7 +47,7 @@ public final class ElrondMoonReader extends CardImpl {
         // This ability triggers only once each turn.
         this.addAbility(new ElrondMoonReaderTriggeredAbility().setTriggersLimitEachTurn(1));
 
-        // Exile up to two other target nonland permanents you control.
+        // {5}{U}{U}: Exile up to two other target nonland permanents you control.
         // Return those cards to the battlefield under their owner’s control
         // at the beginning of the next end step.
         Ability flickerAbility = new SimpleActivatedAbility(new ExileReturnBattlefieldNextEndStepTargetEffect().withTextThatCard(true),
