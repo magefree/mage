@@ -9,6 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.common.TargetAnyTarget;
 
@@ -18,11 +19,10 @@ import mage.target.common.TargetAnyTarget;
  */
 public final class SpireBarrage extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountain you control");
 
     static {
         filter.add(SubType.MOUNTAIN.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public SpireBarrage(UUID ownerId, CardSetInfo setInfo) {

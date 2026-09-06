@@ -8,7 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetAnyTargetAmount;
 
 /**
@@ -17,7 +17,7 @@ import mage.target.common.TargetAnyTargetAmount;
  */
 public final class JawsOfStone extends CardImpl {
 
-    static final private FilterControlledLandPermanent filter = new FilterControlledLandPermanent("mountains you control");
+    static final private FilterControlledPermanent filter = new FilterControlledPermanent("mountains you control");
 
     static {
         filter.add(SubType.MOUNTAIN.getPredicate());

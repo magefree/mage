@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AdditionalCombatPhaseEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
@@ -13,7 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -28,11 +29,10 @@ import java.util.stream.Collectors;
  */
 public final class DesertWereWorm extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountain you control");
 
     static {
         filter.add(SubType.MOUNTAIN.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public DesertWereWorm(UUID ownerId, CardSetInfo setInfo) {
@@ -45,7 +45,7 @@ public final class DesertWereWorm extends CardImpl {
 
         //This creature gets +2/+0 for each Mountain you control.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter, 2),
-                new PermanentsOnBattlefieldCount(filter, 0),
+                StaticValue.get(0),
                 Duration.WhileOnBattlefield)));
 
         // Whenever you attack with creatures with total power 12 or greater for the first time each turn,

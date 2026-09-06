@@ -7,6 +7,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.constants.*;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.command.Emblem;
@@ -36,11 +37,10 @@ public final class KothOfTheHammerEmblem extends Emblem {
 
 class KothOfTheHammerThirdEffect extends ContinuousEffectImpl {
 
-    static final FilterLandPermanent mountains = new FilterLandPermanent("Mountain you control");
+    private static final FilterControlledPermanent mountains = new FilterControlledPermanent("Mountain you control");
 
     static {
         mountains.add(SubType.MOUNTAIN.getPredicate());
-        mountains.add(TargetController.YOU.getControllerPredicate());
     }
 
     public KothOfTheHammerThirdEffect() {
