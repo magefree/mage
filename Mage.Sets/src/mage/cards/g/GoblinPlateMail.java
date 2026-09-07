@@ -56,7 +56,7 @@ class GoblinPlateMailEffect extends OneShotEffect {
 
     public GoblinPlateMailEffect() {
         super(Outcome.BoostCreature);
-        staticText = "amass Goblins 1, then attach this Equipment to the amassed Army.";
+        staticText = "amass Goblins 1, then attach {this} to the amassed Army.";
     }
 
     @Override
