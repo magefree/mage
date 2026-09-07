@@ -8,6 +8,7 @@ import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
@@ -21,12 +22,6 @@ import java.util.UUID;
  */
 public final class GalionElvenkingsButler extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public GalionElvenkingsButler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.supertype.add(SuperType.LEGENDARY);
@@ -39,7 +34,7 @@ public final class GalionElvenkingsButler extends CardImpl {
         // Whenever Galion attacks, choose up to one other target creature you control.
         // Its base power and toughness become equal to Galion's power and toughness until end of turn.
         Ability ability = new AttacksTriggeredAbility(new GalionElvenkingsButlerBoostEffect());
-        ability.addTarget(new TargetPermanent(0, 1, filter));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
     }
 
