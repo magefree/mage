@@ -441,7 +441,7 @@ public class Session {
                 lastCallbackInfo = call.getInfo();
                 lockSet = true;
                 Callback callback = new Callback(call);
-                boolean sendAsync = SUPER_DUPER_BUGGY_AND_FASTEST_ASYNC_CONNECTION
+                boolean sendAsync = ASYNC_MESSAGES
                         && call.getMethod().getType().canComeInAnyOrder();
                 callbackHandler.handleCallbackOneway(callback, sendAsync);
             }
