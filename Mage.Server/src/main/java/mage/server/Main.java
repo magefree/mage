@@ -132,6 +132,10 @@ public final class Main {
             }
         }
 
+        // network
+        logger.info(String.format("Network async messages: %s",
+            Session.isAsyncMessagesEnabled() ? "enabled" : "disabled"));
+
         logger.info(String.format("Reading configuration from path=%s", configPath));
         final ConfigWrapper config = new ConfigWrapper(ConfigFactory.loadFromFile(configPath));
 
