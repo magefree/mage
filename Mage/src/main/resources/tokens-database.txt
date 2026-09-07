@@ -3049,8 +3049,8 @@
 |TOK:MSC|Bird|2|BirdToken|
 |TOK:MSC|Construct|1|FantasticarConstructToken|
 |TOK:MSC|Construct|2|FantasticarConstructToken|
-#|TOK:MSC|Council of Reeds|1|CouncilofReedsToken|
-#|TOK:MSC|Council of Reeds|2|CouncilofReedsToken|
+|TOK:MSC|Council of Reeds|1|CouncilofReedsToken|
+|TOK:MSC|Council of Reeds|2|CouncilofReedsToken|
 |TOK:MSC|Elephant|1|ElephantToken|
 |TOK:MSC|Elephant|2|ElephantToken|
 |TOK:MSC|Goat|1|GoatToken|
@@ -3072,7 +3072,7 @@
 # HOB
 |TOK:HOB|Axe||AxeToken|
 |TOK:HOB|Bear||BearToken|
-|TOK:HOB|Bird Soldier||BirdSoldierToken|
+|TOK:HOB|Bird Soldier||BirdSoldier44Token|
 |TOK:HOB|Human Soldier||HumanSoldierToken|
 |TOK:HOB|Dragon||Dragon66Token|
 |TOK:HOB|Dwarf||Dwarf22Token|
@@ -3084,6 +3084,8 @@
 |TOK:HOB|Treasure|2|TreasureToken|
 |TOK:HOB|Wolf||WolfToken|
 
+# FRA
+|TOK:FRA|Illusion||Illusion11Token|
 
 # TRK
 |TOK:TRK|Human||Human01Token|

@@ -139,20 +139,35 @@
         <!-- svg support END -->
 
         <!-- JavaFX support (build-in browser) START -->
+        <!--
+        JavaFX version must match the JDK the client runs on:
+          - JavaFX newer than the JDK: build fails (class file version)
+          - JavaFX older than the JDK: JVM can crash with SIGSEGV at runtime,
+            e.g. JavaFX 17 on JDK 26 (jdk.jsobject was removed from the JDK in 26)
+        use follow versions:
+            java 26 build (development only): 26.0.2
+            java 17 build (development only): 17.0.20
+            java 8 build (default, development and release): 11.0.2
+        how-to check:
+            cd Mage.Client
+            mvn test -Dtest=JavaFxCompatibilityTest
+        DEVS HINT:
+            use same version as jdk, example: jdk 26 with 26
+        -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>11.0.2</version>
+            <version>17.0.20</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-swing</artifactId>
-            <version>11.0.2</version>
+            <version>17.0.20</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-web</artifactId>
-            <version>11.0.2</version>
+            <version>17.0.20</version>
         </dependency>
         <!-- JavaFX support (build-in browser) END -->
     </dependencies>

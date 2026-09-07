@@ -53,8 +53,7 @@ public final class EnergyVortex extends CardImpl {
         this.addAbility(new ActivateIfConditionActivatedAbility(
                 new AddCountersSourceEffect(
                         CounterType.VORTEX.createInstance(),
-                        GetXValue.instance, true
-                ), new ManaCostsImpl<>("{X}"),
+                        GetXValue.instance), new ManaCostsImpl<>("{X}"),
                 IsStepCondition.getMyUpkeep()
         ));
     }

@@ -3013,8 +3013,8 @@ public class ScryfallImageSupportTokens {
             put("MSC/Bird/2", "https://api.scryfall.com/cards/tmsc/21?format=image");
             put("MSC/Construct/1", "https://api.scryfall.com/cards/tmsc/14?format=image");
             put("MSC/Construct/2", "https://api.scryfall.com/cards/tmsc/30?format=image");
-            // put("MSC/Council of Reeds/1", "https://api.scryfall.com/cards/tmsc/8?format=image");
-            // put("MSC/Council of Reeds/2", "https://api.scryfall.com/cards/tmsc/24?format=image");
+            put("MSC/Council of Reeds/1", "https://api.scryfall.com/cards/tmsc/8?format=image");
+            put("MSC/Council of Reeds/2", "https://api.scryfall.com/cards/tmsc/24?format=image");
             put("MSC/Elephant/1", "https://api.scryfall.com/cards/tmsc/12?format=image");
             put("MSC/Elephant/2", "https://api.scryfall.com/cards/tmsc/28?format=image");
             put("MSC/Goat/1", "https://api.scryfall.com/cards/tmsc/6?format=image");
@@ -3047,6 +3047,9 @@ public class ScryfallImageSupportTokens {
             put("HOB/Treasure/1", "https://api.scryfall.com/cards/thob/12?format=image");
             put("HOB/Treasure/2", "https://api.scryfall.com/cards/thob/13?format=image");
             put("HOB/Wolf", "https://api.scryfall.com/cards/thob/9?format=image");
+
+            // FRA
+            put("FRA/Illusion", "https://api.scryfall.com/cards/tfra/4?format=image");
 
             // TRK
             put("TRK/Human", "https://api.scryfall.com/cards/ttrk/1?format=image");

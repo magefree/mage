@@ -45,8 +45,7 @@ public final class KurbisHarvestCelebrant extends CardImpl {
 
         // Kurbis, Harvest Celebrant enters the battlefield with a number of +1/+1 counters on it equal to the amount of mana spent to cast it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(), ManaSpentToCastCount.instance, true
-        ), "with a number of +1/+1 counters on it equal to the amount of mana spent to cast it"));
+                CounterType.P1P1.createInstance(), ManaSpentToCastCount.instance), "with a number of +1/+1 counters on it equal to the amount of mana spent to cast it"));
 
         // Remove a +1/+1 counter from Kurbis: Prevent all damage that would be dealt this turn to another target creature with a +1/+1 counter on it.
         Ability ability = new SimpleActivatedAbility(

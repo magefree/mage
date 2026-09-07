@@ -109,6 +109,7 @@ class DragonsFireCost extends CostImpl {
                     break;
                 }
             }
+            // TODO: wtf, dialogs must be simplified
             if (dragonInHand && dragonOnBattlefield) {
                 if (controller.chooseUse(Outcome.Benefit, "Reveal a Dragon card from your hand or choose a Dragon you control?", source, game)) {
                     if (controller.chooseUse(Outcome.Benefit, "Choose Dragon from hand or Dragon on battlefield", null, "Hand", "Battlefield", source, game)) {
@@ -127,6 +128,9 @@ class DragonsFireCost extends CostImpl {
                 if (controller.chooseUse(Outcome.Benefit, "Choose a dragon on the battlefield?", source, game)) {
                     chosenZone = DragonZone.BATTLEFIELD;
                 }
+            }
+            if (chosenZone == null) {
+                return false;
             }
             switch (chosenZone) {
                 case HAND:

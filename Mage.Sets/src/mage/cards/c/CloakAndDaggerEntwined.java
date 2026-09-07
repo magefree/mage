@@ -57,7 +57,7 @@ public final class CloakAndDaggerEntwined extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // When Cloak and Dagger enter, choose target opponent and up to one target creature they control. They reveal their hand. You may exile a nonland card from their hand or the chosen creature until Cloak and Dagger leave the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new CloakAndDaggerEntwinedEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CloakAndDaggerEntwinedEffect()).setTriggerPhrase("When {this} enter, ");
         ability.addTarget(new TargetOpponent());
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);

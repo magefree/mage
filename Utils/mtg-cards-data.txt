@@ -26830,173 +26830,173 @@ Temporal Fissure|Vintage Masters|96|C|{4}{U}|Sorcery|||Return target permanent t
 Thalakos Drifters|Vintage Masters|97|U|{2}{U}{U}|Creature - Thalakos|3|3|Discard a card: Thalakos Drifters gains shadow until end of turn. <i>(This creature can block or be blocked by only creatures with shadow.)</i>|
 Tradewind Rider|Vintage Masters|98|R|{3}{U}|Creature - Spirit|1|4|Flying${tap}, Tap two untapped creatures you control: Return target permanent to its owner's hand.|
 Turnabout|Vintage Masters|99|U|{2}{U}{U}|Instant|||Choose artifact, creature, or land. Tap all untapped permanents of the chosen type target player controls, or untap all tapped permanents of that type that player controls.|
-Aku Djinn|Visions|1|R|{3}{B}{B}|Creature - Djinn|5|6|Trample$At the beginning of your upkeep, put a +1/+1 counter on each creature each opponent controls.|
-Forbidden Ritual|Visions|10|R|{2}{B}{B}|Sorcery|||Sacrifice a nontoken permanent. If you do, target opponent loses 2 life unless they sacrifice a permanent or discards a card. You may repeat this process any number of times.|
-Relic Ward|Visions|10|U|{1}{W}|Enchantment - Aura|||You may cast Relic Ward as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.$Enchant artifact$Enchanted artifact has shroud. <i>(It can't be the target of spells or abilities.)</i>|
-Viashino Sandstalker|Visions|100|U|{1}{R}{R}|Creature - Viashino Warrior|4|2|Haste <i>(This creature can attack the turn it comes under your control.)</i>$At the beginning of the end step, return Viashino Sandstalker to its owner's hand. <i>(Return it only if it's on the battlefield.)</i>|
-Archangel|Visions|101|R|{5}{W}{W}|Creature - Angel|5|5|Flying, vigilance|
-Daraja Griffin|Visions|102|U|{3}{W}|Creature - Griffin|2|2|Flying$Sacrifice Daraja Griffin: Destroy target black creature.|
-Equipoise|Visions|103|R|{2}{W}|Enchantment|||At the beginning of your upkeep, for each land target player controls in excess of the number you control, choose a land they control, then the chosen permanents phase out. Repeat this process for artifacts and creatures. <i>(While they're phased out, they're treated as though they don't exist. They phase in before that player untaps during their next untap step.)</i>|
-Eye of Singularity|Visions|104|R|{3}{W}|World Enchantment|||When Eye of Singularity enters the battlefield, destroy each permanent with the same name as another permanent, except for basic lands. They can't be regenerated.$Whenever a permanent other than a basic land enters the battlefield, destroy all other permanents with that name. They can't be regenerated.|
-Freewind Falcon|Visions|105|C|{1}{W}|Creature - Bird|1|1|Flying, protection from red|
-Gossamer Chains|Visions|106|C|{W}{W}|Enchantment|||Return Gossamer Chains to its owner's hand: Prevent all combat damage that would be dealt by target unblocked creature this turn.|
-Honorable Passage|Visions|107|U|{1}{W}|Instant|||The next time a source of your choice would deal damage to any target this turn, prevent that damage. If damage from a red source is prevented this way, Honorable Passage deals that much damage to the source's controller.|
-Hope Charm|Visions|108|C|{W}|Instant|||Choose one - Target creature gains first strike until end of turn; or target player gains 2 life; or destroy target Aura.|
-Infantry Veteran|Visions|109|C|{W}|Creature - Human Soldier|1|1|{tap}: Target attacking creature gets +1/+1 until end of turn.|
-Funeral Charm|Visions|11|C|{B}|Instant|||Choose one - Target player discards a card; or target creature gets +2/-1 until end of turn; or target creature gains swampwalk until end of turn.|
-Jamuraan Lion|Visions|110|C|{2}{W}|Creature - Cat|3|1|{W}, {tap}: Target creature can't block this turn.|
-Knight of Valor|Visions|111|C|{2}{W}|Creature - Human Knight|2|2|Flanking <i>(Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)</i>${1}{W}: Each creature without flanking blocking Knight of Valor gets -1/-1 until end of turn. Activate this ability only once each turn.|
-Longbow Archer|Visions|112|U|{W}{W}|Creature - Human Soldier Archer|2|2|First strike; reach <i>(This creature can block creatures with flying.)</i>|
-Miraculous Recovery|Visions|113|U|{4}{W}|Instant|||Return target creature card from your graveyard to the battlefield. Put a +1/+1 counter on it.|
-Parapet|Visions|114|C|{1}{W}|Enchantment|||You may cast Parapet as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.$Creatures you control get +0/+1.|
-Peace Talks|Visions|115|U|{1}{W}|Sorcery|||This turn and next turn, creatures can't attack, and players and permanents can't be the targets of spells or activated abilities.|
-Remedy|Visions|117|C|{1}{W}|Instant|||Prevent the next 5 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.|
-Resistance Fighter|Visions|118|C|{W}|Creature - Human Soldier|1|1|Sacrifice Resistance Fighter: Prevent all combat damage target creature would deal this turn.|
-Retribution of the Meek|Visions|119|R|{2}{W}|Sorcery|||Destroy all creatures with power 4 or greater. They can't be regenerated.|
-Infernal Harvest|Visions|12|C|{1}{B}|Sorcery|||As an additional cost to cast Infernal Harvest, return X Swamps you control to their owner's hand.$Infernal Harvest deals X damage divided as you choose among any number of target creatures.|
-Righteous Aura|Visions|120|C|{1}{W}|Enchantment|||{W}, Pay 2 life: The next time a source of your choice would deal damage to you this turn, prevent that damage.|
-Sun Clasp|Visions|121|C|{1}{W}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +1/+3.${W}: Return enchanted creature to its owner's hand.|
-Teferi's Honor Guard|Visions|122|U|{2}{W}|Creature - Human Knight|2|2|Flanking <i>(Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)</i>${U}{U}: Teferi's Honor Guard phases out. <i>(While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)</i>|
-Warrior's Honor|Visions|124|C|{2}{W}|Instant|||Creatures you control get +1/+1 until end of turn.|
-Zhalfirin Crusader|Visions|125|R|{1}{W}{W}|Creature - Human Knight|2|2|Flanking <i>(Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)</i>${1}{W}: The next 1 damage that would be dealt to Zhalfirin Crusader this turn is dealt to any target instead.|
-Army Ants|Visions|126|U|{1}{B}{R}|Creature - Insect|1|1|{tap}, Sacrifice a land: Destroy target land.|
-Breathstealer's Crypt|Visions|127|R|{2}{U}{B}|Enchantment|||If a player would draw a card, instead they draw a card and reveals it. If it's a creature card, that player discards it unless they pay 3 life.|
-Corrosion|Visions|128|R|{1}{B}{R}|Enchantment|||Cumulative upkeep {1} <i>(At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)</i>$At the beginning of your upkeep, put a rust counter on each artifact target opponent controls. Then destroy each artifact with converted mana cost less than or equal to the number of rust counters on it. Artifacts destroyed this way can't be regenerated.$When Corrosion leaves the battlefield, remove all rust counters from all permanents.|
+Archangel|Visions|1|R|{5}{W}{W}|Creature - Angel|5|5|Flying, vigilance|
+Daraja Griffin|Visions|2|U|{3}{W}|Creature - Griffin|2|2|Flying$Sacrifice this creature: Destroy target black creature.|
+Equipoise|Visions|3|R|{2}{W}|Enchantment|||At the beginning of your upkeep, for each land target player controls in excess of the number you control, choose a land that player controls, then the chosen permanents phase out. Repeat this process for artifacts and creatures.|
+Eye of Singularity|Visions|4|R|{3}{W}|World Enchantment|||When this enchantment enters, destroy each permanent with the same name as another permanent, except for basic lands. They can't be regenerated.$Whenever a permanent other than a basic land enters, destroy all other permanents with that name. They can't be regenerated.|
+Freewind Falcon|Visions|5|C|{1}{W}|Creature - Bird|1|1|Flying, protection from red|
+Gossamer Chains|Visions|6|C|{W}{W}|Enchantment|||Return this enchantment to its owner's hand: Prevent all combat damage that would be dealt by target unblocked creature this turn.|
+Honorable Passage|Visions|7|U|{1}{W}|Instant|||The next time a source of your choice would deal damage to any target this turn, prevent that damage. If damage from a red source is prevented this way, Honorable Passage deals that much damage to the source's controller.|
+Hope Charm|Visions|8|C|{W}|Instant|||Choose one --$* Target creature gains first strike until end of turn.$* Target player gains 2 life.$* Destroy target Aura.|
+Infantry Veteran|Visions|9|C|{W}|Creature - Human Soldier|1|1|{T}: Target attacking creature gets +1/+1 until end of turn.|
+Jamuraan Lion|Visions|10|C|{2}{W}|Creature - Cat|3|1|{W}, {T}: Target creature can't block this turn.|
+Knight of Valor|Visions|11|C|{2}{W}|Creature - Human Knight|2|2|Flanking${1}{W}: Each creature without flanking blocking this creature gets -1/-1 until end of turn. Activate only once each turn.|
+Longbow Archer|Visions|12|U|{W}{W}|Creature - Human Soldier Archer|2|2|Reach$First strike|
+Miraculous Recovery|Visions|13|U|{4}{W}|Instant|||Return target creature card from your graveyard to the battlefield. Put a +1/+1 counter on it.|
+Parapet|Visions|14|C|{1}{W}|Enchantment|||You may cast this spell as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.$Creatures you control get +0/+1.|
+Peace Talks|Visions|15|U|{1}{W}|Sorcery|||This turn and next turn, creatures can't attack, and players and permanents can't be the targets of spells or activated abilities.|
+Relic Ward|Visions|16|U|{1}{W}|Enchantment - Aura|||You may cast this spell as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.$Enchant artifact$Enchanted artifact has shroud.|
+Remedy|Visions|17|C|{1}{W}|Instant|||Prevent the next 5 damage that would be dealt this turn to any number of targets, divided as you choose.|
+Resistance Fighter|Visions|18|C|{W}|Creature - Human Soldier|1|1|Sacrifice this creature: Prevent all combat damage target creature would deal this turn.|
+Retribution of the Meek|Visions|19|R|{2}{W}|Sorcery|||Destroy all creatures with power 4 or greater. They can't be regenerated.|
+Righteous Aura|Visions|20|C|{1}{W}|Enchantment|||{W}, Pay 2 life: The next time a source of your choice would deal damage to you this turn, prevent that damage.|
+Sun Clasp|Visions|21|C|{1}{W}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +1/+3.${W}: Return enchanted creature to its owner's hand.|
+Teferi's Honor Guard|Visions|22|U|{2}{W}|Creature - Human Knight|2|2|Flanking${U}{U}: This creature phases out.|
+Tithe|Visions|23|R|{W}|Instant|||Search your library for a Plains card. If target opponent controls more lands than you, you may search your library for an additional Plains card. Reveal those cards, put them into your hand, then shuffle.|
+Warrior's Honor|Visions|24|C|{2}{W}|Instant|||Creatures you control get +1/+1 until end of turn.|
+Zhalfirin Crusader|Visions|25|R|{1}{W}{W}|Creature - Human Knight|2|2|Flanking${1}{W}: The next 1 damage that would be dealt to this creature this turn is dealt to any target instead.|
+Betrayal|Visions|26|C|{U}|Enchantment - Aura|||Enchant creature an opponent controls$Whenever enchanted creature becomes tapped, you draw a card.|
+Breezekeeper|Visions|27|C|{3}{U}|Creature - Djinn|4|4|Flying$Phasing|
+Chronatog|Visions|28|R|{1}{U}|Creature - Atog|1|2|{0}: This creature gets +3/+3 until end of turn. You skip your next turn. Activate only once each turn.|
+Cloud Elemental|Visions|29|C|{2}{U}|Creature - Elemental|2|3|Flying$This creature can block only creatures with flying.|
+Desertion|Visions|30|R|{3}{U}{U}|Instant|||Counter target spell. If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard.|
+Dream Tides|Visions|31|U|{2}{U}{U}|Enchantment|||Creatures don't untap during their controllers' untap steps.$At the beginning of each player's upkeep, that player may choose any number of tapped nongreen creatures they control and pay {2} for each creature chosen this way. If the player does, untap those creatures.|
+Flooded Shoreline|Visions|32|R|{U}{U}|Enchantment|||{U}{U}, Return two Islands you control to their owner's hand: Return target creature to its owner's hand.|
+Foreshadow|Visions|33|U|{1}{U}|Instant|||Choose a card name, then target opponent mills a card. If a card with the chosen name was milled this way, you draw a card.$Draw a card at the beginning of the next turn's upkeep.|
+Impulse|Visions|34|C|{1}{U}|Instant|||Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.|
+Inspiration|Visions|35|C|{3}{U}|Instant|||Target player draws two cards.|
+Knight of the Mists|Visions|36|C|{2}{U}|Creature - Human Knight|2|2|Flanking$When this creature enters, you may pay {U}. If you don't, destroy target Knight and it can't be regenerated.|
+Man-o'-War|Visions|37|C|{2}{U}|Creature - Jellyfish|2|2|When this creature enters, return target creature to its owner's hand.|
+Mystic Veil|Visions|38|C|{1}{U}|Enchantment - Aura|||You may cast this spell as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.$Enchant creature$Enchanted creature has shroud.|
+Ovinomancer|Visions|39|U|{2}{U}|Creature - Human Wizard|0|1|When this creature enters, sacrifice it unless you return three basic lands you control to their owner's hand.${T}, Return this creature to its owner's hand: Destroy target creature. It can't be regenerated. That creature's controller creates a 0/1 green Sheep creature token.|
+Prosperity|Visions|40|U|{X}{U}|Sorcery|||Each player draws X cards.|
+Rainbow Efreet|Visions|41|R|{3}{U}|Creature - Efreet|3|1|Flying${U}{U}: This creature phases out.|
+Shimmering Efreet|Visions|42|U|{2}{U}|Creature - Efreet|2|2|Flying$Phasing$Whenever this creature phases in, target creature phases out.|
+Shrieking Drake|Visions|43|C|{U}|Creature - Drake|1|1|Flying$When this creature enters, return a creature you control to its owner's hand.|
+Teferi's Realm|Visions|44|R|{1}{U}{U}|World Enchantment|||At the beginning of each player's upkeep, that player chooses artifact, creature, land, or non-Aura enchantment. All nontoken permanents of that type phase out.|
+Three Wishes|Visions|45|R|{1}{U}{U}|Instant|||Exile the top three cards of your library face down. You may look at those cards for as long as they remain exiled. Until your next turn, you may play those cards. At the beginning of your next upkeep, put any of those cards you didn't play into your graveyard.|
+Time and Tide|Visions|46|U|{U}{U}|Instant|||Simultaneously, all phased-out creatures phase in and all creatures with phasing phase out.|
+Undo|Visions|47|C|{1}{U}{U}|Sorcery|||Return two target creatures to their owners' hands.|
+Vanishing|Visions|48|C|{U}|Enchantment - Aura|||Enchant creature${U}{U}: Enchanted creature phases out.|
+Vision Charm|Visions|49|C|{U}|Instant|||Choose one --$* Target player mills four cards.$* Choose a land type and a basic land type. Each land of the first chosen type becomes the second chosen type until end of turn.$* Target artifact phases out.|
+Waterspout Djinn|Visions|50|U|{2}{U}{U}|Creature - Djinn|4|4|Flying$At the beginning of your upkeep, sacrifice this creature unless you return an untapped Island you control to its owner's hand.|
+Aku Djinn|Visions|51|R|{3}{B}{B}|Creature - Djinn|5|6|Trample$At the beginning of your upkeep, put a +1/+1 counter on each creature each opponent controls.|
+Blanket of Night|Visions|52|U|{1}{B}{B}|Enchantment|||Each land is a Swamp in addition to its other land types.|
+Brood of Cockroaches|Visions|53|U|{1}{B}|Creature - Insect|1|1|When this creature is put into your graveyard from the battlefield, at the beginning of the next end step, you lose 1 life and return this card to your hand.|
+Coercion|Visions|54|C|{2}{B}|Sorcery|||Target opponent reveals their hand. You choose a card from it. That player discards that card.|
+Crypt Rats|Visions|55|C|{2}{B}|Creature - Rat|1|1|{X}: This creature deals X damage to each creature and each player. Spend only black mana on X.|
+Dark Privilege|Visions|56|C|{1}{B}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +1/+1.$Sacrifice a creature: Regenerate enchanted creature.|
+Death Watch|Visions|57|C|{B}|Enchantment - Aura|||Enchant creature$When enchanted creature dies, its controller loses life equal to its power and you gain life equal to its toughness.|
+Desolation|Visions|58|U|{1}{B}{B}|Enchantment|||At the beginning of each end step, each player who tapped a land for mana this turn sacrifices a land of their choice. This enchantment deals 2 damage to each player who sacrificed a Plains this way.|
+Fallen Askari|Visions|59|C|{1}{B}|Creature - Human Knight|2|2|Flanking$This creature can't block.|
+Forbidden Ritual|Visions|60|R|{2}{B}{B}|Sorcery|||Sacrifice a nontoken permanent. If you do, target opponent loses 2 life unless that player sacrifices a permanent of their choice or discards a card. You may repeat this process any number of times.|
+Funeral Charm|Visions|61|C|{B}|Instant|||Choose one --$* Target player discards a card.$* Target creature gets +2/-1 until end of turn.$* Target creature gains swampwalk until end of turn.|
+Infernal Harvest|Visions|62|C|{1}{B}|Sorcery|||As an additional cost to cast this spell, return X Swamps you control to their owner's hand.$Infernal Harvest deals X damage divided as you choose among any number of target creatures.|
+Kaervek's Spite|Visions|63|R|{B}{B}{B}|Instant|||As an additional cost to cast this spell, sacrifice all permanents you control and discard your hand.$Target player loses 5 life.|
+Necromancy|Visions|64|U|{2}{B}|Enchantment|||You may cast this spell as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.$When this enchantment enters, if it's on the battlefield, it becomes an Aura with "enchant creature put onto the battlefield with Necromancy." Put target creature card from a graveyard onto the battlefield under your control and attach this enchantment to it. When this enchantment leaves the battlefield, that creature's controller sacrifices it.|
+Necrosavant|Visions|65|R|{3}{B}{B}{B}|Creature - Zombie Giant|5|5|{3}{B}{B}, Sacrifice a creature: Return this card from your graveyard to the battlefield. Activate only during your upkeep.|
+Nekrataal|Visions|66|U|{2}{B}{B}|Creature - Human Assassin|2|1|First strike$When this creature enters, destroy target nonartifact, nonblack creature. That creature can't be regenerated.|
+Pillar Tombs of Aku|Visions|67|R|{2}{B}{B}|World Enchantment|||At the beginning of each player's upkeep, that player may sacrifice a creature of their choice. If that player doesn't, they lose 5 life and you sacrifice this enchantment.|
+Python|Visions|68|C|{1}{B}{B}|Creature - Snake|3|2||
+Suq'Ata Assassin|Visions|69|U|{1}{B}{B}|Creature - Human Assassin|1|1|Fear$Whenever this creature attacks and isn't blocked, defending player gets a poison counter.|
+Tar Pit Warrior|Visions|70|C|{2}{B}|Creature - Cyclops Warrior|3|4|When this creature becomes the target of a spell or ability, sacrifice it.|
+Urborg Mindsucker|Visions|71|C|{2}{B}|Creature - Horror|2|2|{B}, Sacrifice this creature: Target opponent discards a card at random. Activate only as a sorcery.|
+Vampiric Tutor|Visions|72|R|{B}|Instant|||Search your library for a card, then shuffle and put that card on top. You lose 2 life.|
+Vampirism|Visions|73|U|{1}{B}|Enchantment - Aura|||Enchant creature$When this Aura enters, draw a card at the beginning of the next turn's upkeep.$Enchanted creature gets +1/+1 for each other creature you control.$Other creatures you control get -1/-1.|
+Wake of Vultures|Visions|74|C|{3}{B}|Creature - Bird|3|1|Flying${1}{B}, Sacrifice a creature: Regenerate this creature.|
+Wicked Reward|Visions|75|C|{1}{B}|Instant|||As an additional cost to cast this spell, sacrifice a creature.$Target creature gets +4/+2 until end of turn.|
+Bogardan Phoenix|Visions|76|R|{2}{R}{R}{R}|Creature - Phoenix|3|3|Flying$When this creature dies, exile it if it had a death counter on it. Otherwise, return it to the battlefield under your control and put a death counter on it.|
+Dwarven Vigilantes|Visions|77|C|{2}{R}|Creature - Dwarf|2|2|Whenever this creature attacks and isn't blocked, you may have it deal damage equal to its power to target creature. If you do, this creature assigns no combat damage this turn.|
+Elkin Lair|Visions|78|R|{3}{R}|World Enchantment|||At the beginning of each player's upkeep, that player exiles a card at random from their hand. The player may play that card this turn. At the beginning of the next end step, if the player hasn't played the card, they put it into their graveyard.|
+Fireblast|Visions|79|C|{4}{R}{R}|Instant|||You may sacrifice two Mountains rather than pay this spell's mana cost.$Fireblast deals 4 damage to any target.|
+Goblin Recruiter|Visions|80|U|{1}{R}|Creature - Goblin|1|1|When this creature enters, search your library for any number of Goblin cards, reveal them, then shuffle and put those cards on top in any order.|
+Goblin Swine-Rider|Visions|81|C|{R}|Creature - Goblin|1|1|Whenever this creature becomes blocked, it deals 2 damage to each attacking creature and each blocking creature.|
+Hearth Charm|Visions|82|C|{R}|Instant|||Choose one --$* Destroy target artifact creature.$* Attacking creatures get +1/+0 until end of turn.$* Target creature with power 2 or less can't be blocked this turn.|
+Heat Wave|Visions|83|U|{2}{R}|Enchantment|||Cumulative upkeep {R}$Blue creatures can't block creatures you control.$Nonblue creatures can't block creatures you control unless their controller pays 1 life for each blocking creature they control.|
+Hulking Cyclops|Visions|84|U|{3}{R}{R}|Creature - Cyclops|5|5|This creature can't block.|
+Keeper of Kookus|Visions|85|C|{R}|Creature - Goblin|1|1|{R}: This creature gains protection from red until end of turn.|
+Kookus|Visions|86|R|{3}{R}{R}|Creature - Djinn|3|5|Trample$At the beginning of your upkeep, if you don't control a creature named Keeper of Kookus, this creature deals 3 damage to you and attacks this turn if able.${R}: This creature gets +1/+0 until end of turn.|
+Lightning Cloud|Visions|87|R|{3}{R}|Enchantment|||Whenever a player casts a red spell, you may pay {R}. If you do, this enchantment deals 1 damage to any target.|
+Mob Mentality|Visions|88|U|{R}|Enchantment - Aura|||Enchant creature$Enchanted creature has trample.$Whenever all non-Wall creatures you control attack, enchanted creature gets +X/+0 until end of turn, where X is the number of attacking creatures.|
+Ogre Enforcer|Visions|89|R|{3}{R}{R}|Creature - Ogre|4|4|This creature can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.|
+Raging Gorilla|Visions|90|C|{2}{R}|Creature - Ape|2|3|Whenever this creature blocks or becomes blocked, it gets +2/-2 until end of turn.|
+Relentless Assault|Visions|91|R|{2}{R}{R}|Sorcery|||Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.|
+Rock Slide|Visions|92|C|{X}{R}|Instant|||Rock Slide deals X damage divided as you choose among any number of target attacking or blocking creatures without flying.|
+Solfatara|Visions|93|C|{2}{R}|Instant|||Target player can't play lands this turn.$Draw a card at the beginning of the next turn's upkeep.|
+Song of Blood|Visions|94|C|{1}{R}|Sorcery|||Mill four cards. Whenever a creature attacks this turn, it gets +1/+0 until end of turn for each creature card put into your graveyard this way.|
+Spitting Drake|Visions|95|U|{3}{R}|Creature - Drake|2|2|Flying${R}: This creature gets +1/+0 until end of turn. Activate only once each turn.|
+Suq'Ata Lancer|Visions|96|C|{2}{R}|Creature - Human Knight|2|2|Haste$Flanking|
+Talruum Champion|Visions|97|C|{4}{R}|Creature - Minotaur|3|3|First strike$Whenever this creature blocks or becomes blocked by a creature, that creature loses first strike until end of turn.|
+Talruum Piper|Visions|98|U|{4}{R}|Creature - Minotaur|3|3|All creatures with flying able to block this creature do so.|
+Tremor|Visions|99|C|{R}|Sorcery|||Tremor deals 1 damage to each creature without flying.|
+Viashino Sandstalker|Visions|100|U|{1}{R}{R}|Creature - Lizard Warrior|4|2|Haste$At the beginning of the end step, return this creature to its owner's hand.|
+Bull Elephant|Visions|101|C|{3}{G}|Creature - Elephant|4|4|When this creature enters, sacrifice it unless you return two Forests you control to their owner's hand.|
+City of Solitude|Visions|102|R|{2}{G}|Enchantment|||Players can cast spells and activate abilities only during their own turns.|
+Creeping Mold|Visions|103|U|{2}{G}{G}|Sorcery|||Destroy target artifact, enchantment, or land.|
+Elephant Grass|Visions|104|U|{G}|Enchantment|||Cumulative upkeep {1}$Black creatures can't attack you.$Nonblack creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you.|
+Elven Cache|Visions|105|C|{2}{G}{G}|Sorcery|||Return target card from your graveyard to your hand.|
+Emerald Charm|Visions|106|C|{G}|Instant|||Choose one --$* Untap target permanent.$* Destroy target non-Aura enchantment.$* Target creature loses flying until end of turn.|
+Feral Instinct|Visions|107|C|{1}{G}|Instant|||Target creature gets +1/+1 until end of turn.$Draw a card at the beginning of the next turn's upkeep.|
+Giant Caterpillar|Visions|108|C|{3}{G}|Creature - Insect|3|3|{G}, Sacrifice this creature: Create a 1/1 green Insect creature token with flying named Butterfly at the beginning of the next end step.|
+Katabatic Winds|Visions|109|R|{2}{G}|Enchantment|||Phasing$Creatures with flying can't attack or block, and their activated abilities with {T} in their costs can't be activated.|
+King Cheetah|Visions|110|C|{3}{G}|Creature - Cat|3|2|Flash|
+Kyscu Drake|Visions|111|U|{3}{G}|Creature - Drake|2|2|Flying${G}: This creature gets +0/+1 until end of turn. Activate only once each turn.$Sacrifice this creature and a creature named Spitting Drake: Search your library for a card named Viashivan Dragon, put that card onto the battlefield, then shuffle.|
+Lichenthrope|Visions|112|R|{3}{G}{G}|Creature - Plant Fungus|5|5|If damage would be dealt to this creature, put that many -1/-1 counters on it instead.$At the beginning of your upkeep, remove a -1/-1 counter from this creature.|
+Mortal Wound|Visions|113|C|{G}|Enchantment - Aura|||Enchant creature$When enchanted creature is dealt damage, destroy it.|
+Natural Order|Visions|114|R|{2}{G}{G}|Sorcery|||As an additional cost to cast this spell, sacrifice a green creature.$Search your library for a green creature card, put it onto the battlefield, then shuffle.|
+Panther Warriors|Visions|115|C|{4}{G}|Creature - Cat Warrior|6|3||
+Quirion Druid|Visions|116|R|{2}{G}|Creature - Elf Druid|1|2|{G}, {T}: Target land becomes a 2/2 green creature that's still a land.|
+Quirion Ranger|Visions|117|C|{G}|Creature - Elf Ranger|1|1|Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.|
+River Boa|Visions|118|C|{1}{G}|Creature - Snake|2|1|Islandwalk${G}: Regenerate this creature.|
+Rowen|Visions|119|R|{2}{G}{G}|Enchantment|||Reveal the first card you draw each turn. Whenever you reveal a basic land card this way, draw a card.|
+Spider Climb|Visions|120|C|{G}|Enchantment - Aura|||You may cast this spell as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.$Enchant creature$Enchanted creature gets +0/+3 and has reach.|
+Stampeding Wildebeests|Visions|121|U|{2}{G}{G}|Creature - Antelope Beast|5|4|Trample$At the beginning of your upkeep, return a green creature you control to its owner's hand.|
+Summer Bloom|Visions|122|U|{1}{G}|Sorcery|||You may play up to three additional lands this turn.|
+Uktabi Orangutan|Visions|123|U|{2}{G}|Creature - Ape|2|2|When this creature enters, destroy target artifact.|
+Warthog|Visions|124|C|{1}{G}{G}|Creature - Boar|3|2|Swampwalk|
+Wind Shear|Visions|125|U|{2}{G}|Instant|||Attacking creatures with flying get -2/-2 and lose flying until end of turn.|
+Army Ants|Visions|126|U|{1}{B}{R}|Creature - Insect|1|1|{T}, Sacrifice a land: Destroy target land.|
+Breathstealer's Crypt|Visions|127|R|{2}{U}{B}|Enchantment|||If a player would draw a card, instead they draw a card and reveal it. If it's a creature card, that player discards it unless they pay 3 life.|
+Corrosion|Visions|128|R|{1}{B}{R}|Enchantment|||Cumulative upkeep {1}$At the beginning of your upkeep, put a rust counter on each artifact target opponent controls. Then destroy each artifact with mana value less than or equal to the number of rust counters on it. Artifacts destroyed this way can't be regenerated.$When this enchantment leaves the battlefield, remove all rust counters from all permanents.|
 Femeref Enchantress|Visions|129|R|{G}{W}|Creature - Human Druid|1|2|Whenever an enchantment is put into a graveyard from the battlefield, draw a card.|
-Kaervek's Spite|Visions|13|R|{B}{B}{B}|Instant|||As an additional cost to cast Kaervek's Spite, sacrifice all permanents you control and discard your hand.$Target player loses 5 life.|
-Firestorm Hellkite|Visions|130|R|{4}{U}{R}|Creature - Dragon|6|6|Flying, trample$Cumulative upkeep {U}{R} <i>(At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)</i>|
-Guiding Spirit|Visions|131|R|{1}{W}{U}|Creature - Angel Spirit|1|2|Flying${tap}: If the top card of target player's graveyard is a creature card, put that card on top of that player's library.|
-Mundungu|Visions|132|U|{1}{U}{B}|Creature - Human Wizard|1|1|{tap}: Counter target spell unless its controller pays {1} and 1 life.|
-Pygmy Hippo|Visions|133|R|{G}{U}|Creature - Hippo|2|2|Whenever Pygmy Hippo attacks and isn't blocked, you may have defending player activate a mana ability of each land they control and empty their mana pool. If you do, Pygmy Hippo assigns no combat damage this turn and at the beginning of your postcombat main phase, you add X mana of {C}, where X is the amount of mana emptied from defending player's mana pool this way.|
+Firestorm Hellkite|Visions|130|R|{4}{U}{R}|Creature - Dragon|6|6|Flying, trample$Cumulative upkeep {U}{R}|
+Guiding Spirit|Visions|131|R|{1}{W}{U}|Creature - Angel Spirit|1|2|Flying${T}: If the top card of target player's graveyard is a creature card, put that card on top of that player's library.|
+Mundungu|Visions|132|U|{1}{U}{B}|Creature - Human Wizard|1|1|{T}: Counter target spell unless its controller pays {1} and 1 life.|
+Pygmy Hippo|Visions|133|R|{G}{U}|Creature - Hippo|2|2|Whenever this creature attacks and isn't blocked, you may have defending player activate a mana ability of each land they control and lose all unspent mana. If you do, this creature assigns no combat damage this turn and at the beginning of your next main phase this turn, you add an amount of {C} equal to the amount of mana that player lost this way.|
 Righteous War|Visions|134|R|{1}{W}{B}|Enchantment|||White creatures you control have protection from black.$Black creatures you control have protection from white.|
 Scalebane's Elite|Visions|135|U|{3}{G}{W}|Creature - Human Soldier|4|4|Protection from black|
 Simoon|Visions|136|U|{R}{G}|Instant|||Simoon deals 1 damage to each creature target opponent controls.|
 Squandered Resources|Visions|137|R|{B}{G}|Enchantment|||Sacrifice a land: Add one mana of any type the sacrificed land could produce.|
-Suleiman's Legacy|Visions|138|R|{R}{W}|Enchantment|||When Suleiman's Legacy enters the battlefield, destroy all Djinns and Efreets. They can't be regenerated.$Whenever a Djinn or Efreet enters the battlefield, destroy it. It can't be regenerated.|
+Suleiman's Legacy|Visions|138|R|{R}{W}|Enchantment|||When this enchantment enters, destroy all Djinns and Efreets. They can't be regenerated.$Whenever a Djinn or Efreet enters, destroy it. It can't be regenerated.|
 Tempest Drake|Visions|139|U|{1}{W}{U}|Creature - Drake|2|2|Flying, vigilance|
-Necromancy|Visions|14|U|{2}{B}|Enchantment|||You may cast Necromancy as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.$When Necromancy enters the battlefield, if it's on the battlefield, it becomes an Aura with "enchant creature put onto the battlefield with Necromancy." Put target creature card from a graveyard onto the battlefield under your control and attach Necromancy to it. When Necromancy leaves the battlefield, that creature's controller sacrifices it.|
-Viashivan Dragon|Visions|140|R|{2}{R}{R}{G}{G}|Creature - Dragon|4|4|Flying${R}: Viashivan Dragon gets +1/+0 until end of turn.${G}: Viashivan Dragon gets +0/+1 until end of turn.|
+Viashivan Dragon|Visions|140|R|{2}{R}{R}{G}{G}|Creature - Dragon|4|4|Flying${R}: This creature gets +1/+0 until end of turn.${G}: This creature gets +0/+1 until end of turn.|
 Anvil of Bogardan|Visions|141|R|{2}|Artifact|||Players have no maximum hand size.$At the beginning of each player's draw step, that player draws an additional card, then discards a card.|
-Brass-Talon Chimera|Visions|142|U|{4}|Artifact Creature - Chimera|2|2|First strike$Sacrifice Brass-Talon Chimera: Put a +2/+2 counter on target Chimera creature. It gains first strike. <i>(This effect lasts indefinitely.)</i>|
-Diamond Kaleidoscope|Visions|143|R|{4}|Artifact|||{3}, {tap}: Put a 0/1 colorless Prism artifact creature token onto the battlefield.$Sacrifice a Prism token: Add one mana of any color.|
-Dragon Mask|Visions|144|U|{3}|Artifact|||{3}, {tap}: Target creature you control gets +2/+2 until end of turn. Return it to its owner's hand at the beginning of the next end step. <i>(Return it only if it's on the battlefield.)</i>|
+Brass-Talon Chimera|Visions|142|U|{4}|Artifact Creature - Chimera|2|2|First strike$Sacrifice this creature: Put a +2/+2 counter on target Chimera creature. It gains first strike.|
+Diamond Kaleidoscope|Visions|143|R|{4}|Artifact|||{3}, {T}: Create a 0/1 colorless Prism artifact creature token.$Sacrifice a Prism token: Add one mana of any color.|
+Dragon Mask|Visions|144|U|{3}|Artifact|||{3}, {T}: Target creature you control gets +2/+2 until end of turn. Return it to its owner's hand at the beginning of the next end step.|
 Helm of Awakening|Visions|145|U|{2}|Artifact|||Spells cost {1} less to cast.|
-Iron-Heart Chimera|Visions|146|U|{4}|Artifact Creature - Chimera|2|2|Vigilance$Sacrifice Iron-Heart Chimera: Put a +2/+2 counter on target Chimera creature. It gains vigilance. <i>(This effect lasts indefinitely.)</i>|
-Juju Bubble|Visions|147|U|{1}|Artifact|||Cumulative upkeep {1} <i>(At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)</i>$When you play a card, sacrifice Juju Bubble.${2}: You gain 1 life.|
-Lead-Belly Chimera|Visions|148|U|{4}|Artifact Creature - Chimera|2|2|Trample$Sacrifice Lead-Belly Chimera: Put a +2/+2 counter on target Chimera creature. It gains trample. <i>(This effect lasts indefinitely.)</i>|
-Magma Mine|Visions|149|U|{1}|Artifact|||{4}: Put a pressure counter on Magma Mine.${tap}, Sacrifice Magma Mine: Magma Mine deals damage equal to the number of pressure counters on it to any target.|
-Necrosavant|Visions|15|R|{3}{B}{B}{B}|Creature - Zombie Giant|5|5|{3}{B}{B}, Sacrifice a creature: Return Necrosavant from your graveyard to the battlefield. Activate this ability only during your upkeep.|
-Matopi Golem|Visions|150|U|{5}|Artifact Creature - Golem|3|3|{1}: Regenerate Matopi Golem. When it regenerates this way, put a -1/-1 counter on it.|
-Phyrexian Marauder|Visions|151|R|{X}|Artifact Creature - Construct|0|0|Phyrexian Marauder enters the battlefield with X +1/+1 counters on it.$Phyrexian Marauder can't block.$Phyrexian Marauder can't attack unless you pay {1} for each +1/+1 counter on it.|
-Phyrexian Walker|Visions|152|C|{0}|Artifact Creature - Construct|0|3||
+Iron-Heart Chimera|Visions|146|U|{4}|Artifact Creature - Chimera|2|2|Vigilance$Sacrifice this creature: Put a +2/+2 counter on target Chimera creature. It gains vigilance.|
+Juju Bubble|Visions|147|U|{1}|Artifact|||Cumulative upkeep {1}$When you play a card, sacrifice this artifact.${2}: You gain 1 life.|
+Lead-Belly Chimera|Visions|148|U|{4}|Artifact Creature - Chimera|2|2|Trample$Sacrifice this creature: Put a +2/+2 counter on target Chimera creature. It gains trample.|
+Magma Mine|Visions|149|U|{1}|Artifact|||{4}: Put a pressure counter on this artifact.${T}, Sacrifice this artifact: It deals damage equal to the number of pressure counters on it to any target.|
+Matopi Golem|Visions|150|U|{5}|Artifact Creature - Golem|3|3|{1}: Regenerate this creature. When it regenerates this way, put a -1/-1 counter on it.|
+Phyrexian Marauder|Visions|151|R|{X}|Artifact Creature - Phyrexian Construct|0|0|This creature enters with X +1/+1 counters on it.$This creature can't block.$This creature can't attack unless you pay {1} for each +1/+1 counter on it.|
+Phyrexian Walker|Visions|152|C|{0}|Artifact Creature - Phyrexian Construct|0|3||
 Sands of Time|Visions|153|R|{4}|Artifact|||Each player skips their untap step.$At the beginning of each player's upkeep, that player simultaneously untaps each tapped artifact, creature, and land they control and taps each untapped artifact, creature, and land they control.|
-Sisay's Ring|Visions|154|C|{4}|Artifact|||{tap}: Add {C}{C}.|
-Snake Basket|Visions|155|R|{4}|Artifact|||{X}, Sacrifice Snake Basket: Put X 1/1 green Snake creature tokens onto the battlefield. Activate this ability only any time you could cast a sorcery.|
+Sisay's Ring|Visions|154|C|{4}|Artifact|||{T}: Add {C}{C}.|
+Snake Basket|Visions|155|R|{4}|Artifact|||{X}, Sacrifice this artifact: Create X 1/1 green Snake creature tokens. Activate only as a sorcery.|
 Teferi's Puzzle Box|Visions|156|R|{4}|Artifact|||At the beginning of each player's draw step, that player puts the cards in their hand on the bottom of their library in any order, then draws that many cards.|
-Tin-Wing Chimera|Visions|157|U|{4}|Artifact Creature - Chimera|2|2|Flying$Sacrifice Tin-Wing Chimera: Put a +2/+2 counter on target Chimera creature. It gains flying. <i>(This effect lasts indefinitely.)</i>|
-Triangle of War|Visions|158|R|{1}|Artifact|||{2}, Sacrifice Triangle of War: Choose target creature you control and target creature an opponent controls. Those creatures fight each other. <i>(Each deals damage equal to its power to the other.)</i>|
-Wand of Denial|Visions|159|R|{2}|Artifact|||{tap}: Look at the top card of target player's library. If it's a nonland card, you may pay 2 life. If you do, put it into that player's graveyard.|
-Nekrataal|Visions|16|U|{2}{B}{B}|Creature - Human Assassin|2|1|First strike <i>(This creature deals combat damage before creatures without first strike.)</i>$When Nekrataal enters the battlefield, destroy target nonartifact, nonblack creature. That creature can't be regenerated.|
-Coral Atoll|Visions|160|U||Land|||Coral Atoll enters the battlefield tapped.$When Coral Atoll enters the battlefield, sacrifice it unless you return an untapped Island you control to its owner's hand.${tap}: Add {C}{U}.|
-Dormant Volcano|Visions|161|U||Land|||Dormant Volcano enters the battlefield tapped.$When Dormant Volcano enters the battlefield, sacrifice it unless you return an untapped Mountain you control to its owner's hand.${tap}: Add {C}{R}.|
-Everglades|Visions|162|U||Land|||Everglades enters the battlefield tapped.$When Everglades enters the battlefield, sacrifice it unless you return an untapped Swamp you control to its owner's hand.${tap}: Add {C}{B}.|
-Griffin Canyon|Visions|163|R||Land|||{tap}: Add {C}.${tap}: Untap target Griffin. If it's a creature, it gets +1/+1 until end of turn.|
-Jungle Basin|Visions|164|U||Land|||Jungle Basin enters the battlefield tapped.$When Jungle Basin enters the battlefield, sacrifice it unless you return an untapped Forest you control to its owner's hand.${tap}: Add {C}{G}.|
-Karoo|Visions|165|U||Land|||Karoo enters the battlefield tapped.$When Karoo enters the battlefield, sacrifice it unless you return an untapped Plains you control to its owner's hand.${tap}: Add {C}{W}.|
-Quicksand|Visions|166|U||Land|||{tap}: Add {C}.${tap}, Sacrifice Quicksand: Target attacking creature without flying gets -1/-2 until end of turn.|
-Undiscovered Paradise|Visions|167|R||Land|||{tap}: Add one mana of any color. During your next untap step, as you untap your permanents, return Undiscovered Paradise to its owner's hand.|
-Pillar Tombs of Aku|Visions|17|R|{2}{B}{B}|World Enchantment|||At the beginning of each player's upkeep, that player may sacrifice a creature. If that player doesn't, they lose 5 life and you sacrifice Pillar Tombs of Aku.|
-Python|Visions|18|C|{1}{B}{B}|Creature - Snake|3|2||
-Suq'Ata Assassin|Visions|19|U|{1}{B}{B}|Creature - Human Assassin|1|1|Fear <i>(This creature can't be blocked except by artifact creatures and/or black creatures.)</i>$Whenever Suq'Ata Assassin attacks and isn't blocked, defending player gets a poison counter. <i>(A player with ten or more poison counters loses the game.)</i>|
-Blanket of Night|Visions|2|U|{1}{B}{B}|Enchantment|||Each land is a Swamp in addition to its other land types.|
-Tar Pit Warrior|Visions|20|C|{2}{B}|Creature - Cyclops Warrior|3|4|When Tar Pit Warrior becomes the target of a spell or ability, sacrifice it.|
-Urborg Mindsucker|Visions|21|C|{2}{B}|Creature - Horror|2|2|{B}, Sacrifice Urborg Mindsucker: Target opponent discards a card at random. Activate this ability only any time you could cast a sorcery.|
-Vampiric Tutor|Visions|22|R|{B}|Instant|||Search your library for a card, then shuffle your library and put that card on top of it. You lose 2 life.|
-Vampirism|Visions|23|U|{1}{B}|Enchantment - Aura|||Enchant creature$When Vampirism enters the battlefield, draw a card at the beginning of the next turn's upkeep.$Enchanted creature gets +1/+1 for each other creature you control.$Other creatures you control get -1/-1.|
-Wake of Vultures|Visions|24|C|{3}{B}|Creature - Bird|3|1|Flying${1}{B}, Sacrifice a creature: Regenerate Wake of Vultures.|
-Wicked Reward|Visions|25|C|{1}{B}|Instant|||As an additional cost to cast Wicked Reward, sacrifice a creature.$Target creature gets +4/+2 until end of turn.|
-Impulse|Visions|34|C|{1}{U}|Instant|||Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.|
-Betrayal|Visions|26|C|{U}|Enchantment - Aura|||Enchant creature an opponent controls$Whenever enchanted creature becomes tapped, you draw a card.|
-Breezekeeper|Visions|27|C|{3}{U}|Creature - Djinn|4|4|Flying$Phasing <i>(This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)</i>|
-Chronatog|Visions|28|R|{1}{U}|Creature - Atog|1|2|{0}: Chronatog gets +3/+3 until end of turn. You skip your next turn. Activate this ability only once each turn.|
-Cloud Elemental|Visions|29|C|{2}{U}|Creature - Elemental|2|3|Flying$Cloud Elemental can block only creatures with flying.|
-Brood of Cockroaches|Visions|3|U|{1}{B}|Creature - Insect|1|1|When Brood of Cockroaches is put into your graveyard from the battlefield, at the beginning of the next end step, you lose 1 life and return Brood of Cockroaches to your hand.|
-Desertion|Visions|30|R|{3}{U}{U}|Instant|||Counter target spell. If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard.|
-Dream Tides|Visions|31|U|{2}{U}{U}|Enchantment|||Creatures don't untap during their controllers' untap steps.$At the beginning of each player's upkeep, that player may choose any number of tapped nongreen creatures they control and pay {2} for each creature chosen this way. If the player does, untap those creatures.|
-Flooded Shoreline|Visions|32|R|{U}{U}|Enchantment|||{U}{U}, Return two Islands you control to their owner's hand: Return target creature to its owner's hand.|
-Foreshadow|Visions|33|U|{1}{U}|Instant|||Name a card, then target opponent puts the top card of their library into their graveyard. If that card is the named card, you draw a card.$Draw a card at the beginning of the next turn's upkeep.|
-Inspiration|Visions|35|C|{3}{U}|Instant|||Target player draws two cards.|
-Knight of the Mists|Visions|36|C|{2}{U}|Creature - Human Knight|2|2|Flanking <i>(Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)</i>$When Knight of the Mists enters the battlefield, you may pay {U}. If you don't, destroy target Knight and it can't be regenerated.|
-Man-o'-War|Visions|37|C|{2}{U}|Creature - Jellyfish|2|2|When Man-o'-War enters the battlefield, return target creature to its owner's hand.|
-Mystic Veil|Visions|38|C|{1}{U}|Enchantment - Aura|||You may cast Mystic Veil as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.$Enchant creature$Enchanted creature has shroud. <i>(It can't be the target of spells or abilities.)</i>|
-Ovinomancer|Visions|39|U|{2}{U}|Creature - Human Wizard|0|1|When Ovinomancer enters the battlefield, sacrifice it unless you return three basic lands you control to their owner's hand.${tap}, Return Ovinomancer to its owner's hand: Destroy target creature. It can't be regenerated. That creature's controller puts a 0/1 green Sheep creature token onto the battlefield.|
-Vanishing|Visions|39|C|{U}|Enchantment - Aura|||Enchant creature${U}{U}: Enchanted creature phases out. <i>(While it's phased out, it's treated as though it doesn't exist. It phases in before its controller untaps during their next untap step.)</i>|
-Coercion|Visions|4|C|{2}{B}|Sorcery|||Target opponent reveals their hand. You choose a card from it. That player discards that card.|
-Prosperity|Visions|40|U|{X}{U}|Sorcery|||Each player draws X cards.|
-Rainbow Efreet|Visions|41|R|{3}{U}|Creature - Efreet|3|1|Flying${U}{U}: Rainbow Efreet phases out. <i>(While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)</i>|
-Shimmering Efreet|Visions|42|U|{2}{U}|Creature - Efreet|2|2|Flying$Phasing <i>(This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)</i>$Whenever Shimmering Efreet phases in, target creature phases out. <i>(It phases in before its controller untaps during their next untap step.)</i>|
-Shrieking Drake|Visions|43|C|{U}|Creature - Drake|1|1|Flying$When Shrieking Drake enters the battlefield, return a creature you control to its owner's hand.|
-Teferi's Realm|Visions|44|R|{1}{U}{U}|World Enchantment|||At the beginning of each player's upkeep, that player chooses artifact, creature, land, or non-Aura enchantment. All nontoken permanents of that type phase out. <i>(While they're phased out, they're treated as though they don't exist. Each one phases in before its controller untaps during their next untap step.)</i>|
-Three Wishes|Visions|45|R|{1}{U}{U}|Instant|||Exile the top three cards of your library face down. You may look at those cards for as long as they remain exiled. Until your next turn, you may play those cards. At the beginning of your next upkeep, put any of those cards you didn't play into your graveyard.|
-Time and Tide|Visions|46|U|{U}{U}|Instant|||Simultaneously, all phased-out creatures phase in and all creatures with phasing phase out.|
-Undo|Visions|47|C|{1}{U}{U}|Sorcery|||Return two target creatures to their owners' hands.|
-Vision Charm|Visions|49|C|{U}|Instant|||Choose one - Target player puts the top four cards of their library into their graveyard; or choose a land type and a basic land type, and each land of the first chosen type becomes the second chosen type until end of turn; or target artifact phases out. <i>(While it's phased out, it's treated as though it doesn't exist. It phases in before its controller untaps during their next untap step.)</i>|
-Crypt Rats|Visions|5|C|{2}{B}|Creature - Rat|1|1|{X}: Crypt Rats deals X damage to each creature and each player. Spend only black mana this way.|
-Waterspout Djinn|Visions|50|U|{2}{U}{U}|Creature - Djinn|4|4|Flying$At the beginning of your upkeep, sacrifice Waterspout Djinn unless you return an untapped Island you control to its owner's hand.|
-Bull Elephant|Visions|51|C|{3}{G}|Creature - Elephant|4|4|When Bull Elephant enters the battlefield, sacrifice it unless you return two Forests you control to their owner's hand.|
-City of Solitude|Visions|52|R|{2}{G}|Enchantment|||Players can cast spells and activate abilities only during their own turns.|
-Creeping Mold|Visions|53|U|{2}{G}{G}|Sorcery|||Destroy target artifact, enchantment, or land.|
-Elephant Grass|Visions|54|U|{G}|Enchantment|||Cumulative upkeep {1} <i>(At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)</i>$Black creatures can't attack you.$Nonblack creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you.|
-Elven Cache|Visions|55|C|{2}{G}{G}|Sorcery|||Return target card from your graveyard to your hand.|
-Emerald Charm|Visions|56|C|{G}|Instant|||Choose one - Untap target permanent; or destroy target non-Aura enchantment; or target creature loses flying until end of turn.|
-Feral Instinct|Visions|57|C|{1}{G}|Instant|||Target creature gets +1/+1 until end of turn.$Draw a card at the beginning of the next turn's upkeep.|
-Giant Caterpillar|Visions|58|C|{3}{G}|Creature - Insect|3|3|{G}, Sacrifice Giant Caterpillar: Put a 1/1 green Insect creature token with flying named Butterfly onto the battlefield at the beginning of the next end step.|
-Katabatic Winds|Visions|59|R|{2}{G}|Enchantment|||Phasing <i>(This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)</i>$Creatures with flying can't attack or block, and their activated abilities with {tap} in their costs can't be activated.|
-Dark Privilege|Visions|6|C|{1}{B}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +1/+1.$Sacrifice a creature: Regenerate enchanted creature.|
-King Cheetah|Visions|60|C|{3}{G}|Creature - Cat|3|2|Flash|
-Kyscu Drake|Visions|61|U|{3}{G}|Creature - Drake|2|2|Flying${G}: Kyscu Drake gets +0/+1 until end of turn. Activate this ability only once each turn.$Sacrifice Kyscu Drake and a creature named Spitting Drake: Search your library for a card named Viashivan Dragon and put that card onto the battlefield. Then shuffle your library.|
-Lichenthrope|Visions|62|R|{3}{G}{G}|Creature - Plant Fungus|5|5|If damage would be dealt to Lichenthrope, put that many -1/-1 counters on it instead.$At the beginning of your upkeep, remove a -1/-1 counter from Lichenthrope.|
-Mortal Wound|Visions|63|C|{G}|Enchantment - Aura|||Enchant creature$When enchanted creature is dealt damage, destroy it.|
-Natural Order|Visions|64|R|{2}{G}{G}|Sorcery|||As an additional cost to cast Natural Order, sacrifice a green creature.$Search your library for a green creature card and put it onto the battlefield. Then shuffle your library.|
-Panther Warriors|Visions|65|C|{4}{G}|Creature - Cat Warrior|6|3||
-Quirion Druid|Visions|66|R|{2}{G}|Creature - Elf Druid|1|2|{G}, {tap}: Target land becomes a 2/2 green creature that's still a land. <i>(This effect lasts indefinitely.)</i>|
-Quirion Ranger|Visions|67|C|{G}|Creature - Elf|1|1|Return a Forest you control to its owner's hand: Untap target creature. Activate this ability only once each turn.|
-River Boa|Visions|68|C|{1}{G}|Creature - Snake|2|1|Islandwalk${G}: Regenerate River Boa.|
-Rowen|Visions|69|R|{2}{G}{G}|Enchantment|||Reveal the first card you draw each turn. Whenever you reveal a basic land card this way, draw a card.|
-Death Watch|Visions|7|C|{B}|Enchantment - Aura|||Enchant creature$When enchanted creature dies, its controller loses life equal to its power and you gain life equal to its toughness.|
-Spider Climb|Visions|70|C|{G}|Enchantment - Aura|||You may cast Spider Climb as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.$Enchant creature$Enchanted creature gets +0/+3 and has reach. <i>(It can block creatures with flying.)</i>|
-Stampeding Wildebeests|Visions|71|U|{2}{G}{G}|Creature - Antelope Beast|5|4|Trample <i>(If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)</i>$At the beginning of your upkeep, return a green creature you control to its owner's hand.|
-Summer Bloom|Visions|72|U|{1}{G}|Sorcery|||You may play up to three additional lands this turn.|
-Uktabi Orangutan|Visions|73|U|{2}{G}|Creature - Ape|2|2|When Uktabi Orangutan enters the battlefield, destroy target artifact.|
-Warthog|Visions|74|C|{1}{G}{G}|Creature - Boar|3|2|Swampwalk|
-Wind Shear|Visions|75|U|{2}{G}|Instant|||Attacking creatures with flying get -2/-2 and lose flying until end of turn.|
-Bogardan Phoenix|Visions|76|R|{2}{R}{R}{R}|Creature - Phoenix|3|3|Flying$When Bogardan Phoenix dies, exile it if it had a death counter on it. Otherwise, return it to the battlefield under your control and put a death counter on it.|
-Dwarven Vigilantes|Visions|77|C|{2}{R}|Creature - Dwarf|2|2|Whenever Dwarven Vigilantes attacks and isn't blocked, you may have it deal damage equal to its power to target creature. If you do, Dwarven Vigilantes assigns no combat damage this turn.|
-Elkin Lair|Visions|78|R|{3}{R}|World Enchantment|||At the beginning of each player's upkeep, that player exiles a card at random from their hand. The player may play that card this turn. At the beginning of the next end step, if the player hasn't played the card, they put it into their graveyard.|
-Fireblast|Visions|79|C|{4}{R}{R}|Instant|||You may sacrifice two Mountains rather than pay Fireblast's mana cost.$Fireblast deals 4 damage to any target.|
-Desolation|Visions|8|U|{1}{B}{B}|Enchantment|||At the beginning of each end step, each player who tapped a land for mana this turn sacrifices a land. Desolation deals 2 damage to each player who sacrificed a Plains this way.|
-Goblin Recruiter|Visions|80|U|{1}{R}|Creature - Goblin|1|1|When Goblin Recruiter enters the battlefield, search your library for any number of Goblin cards and reveal those cards. Shuffle your library, then put them on top of it in any order.|
-Goblin Swine-Rider|Visions|81|C|{R}|Creature - Goblin|1|1|Whenever Goblin Swine-Rider becomes blocked, it deals 2 damage to each attacking creature and each blocking creature.|
-Hearth Charm|Visions|82|C|{R}|Instant|||Choose one - Destroy target artifact creature; or attacking creatures get +1/+0 until end of turn; or target creature with power 2 or less is unblockable this turn.|
-Heat Wave|Visions|83|U|{2}{R}|Enchantment|||Cumulative upkeep {R} <i>(At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)</i>$Blue creatures can't block creatures you control.$Nonblue creatures can't block creatures you control unless their controller pays 1 life for each blocking creature they control.|
-Hulking Cyclops|Visions|84|U|{3}{R}{R}|Creature - Cyclops|5|5|Hulking Cyclops can't block.|
-Tithe|Visions|84|R|{W}|Instant|||Search your library for a Plains card. If target opponent controls more lands than you, you may search your library for an additional Plains card. Reveal those cards and put them into your hand. Then shuffle your library.|
-Keeper of Kookus|Visions|85|C|{R}|Creature - Goblin|1|1|{R}: Keeper of Kookus gains protection from red until end of turn.|
-Kookus|Visions|85|R|{3}{R}{R}|Creature - Djinn|3|5|Trample$At the beginning of your upkeep, if you don't control a creature named Keeper of Kookus, Kookus deals 3 damage to you and attacks this turn if able.${R}: Kookus gets +1/+0 until end of turn.|
-Lightning Cloud|Visions|87|R|{3}{R}|Enchantment|||Whenever a player casts a red spell, you may pay {R}. If you do, Lightning Cloud deals 1 damage to any target.|
-Mob Mentality|Visions|88|U|{R}|Enchantment - Aura|||Enchant creature$Enchanted creature has trample.$Whenever all non-Wall creatures you control attack, enchanted creature gets +X/+0 until end of turn, where X is the number of attacking creatures.|
-Ogre Enforcer|Visions|89|R|{3}{R}{R}|Creature - Ogre|4|4|Ogre Enforcer can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.|
-Fallen Askari|Visions|9|C|{1}{B}|Creature - Human Knight|2|2|Flanking <i>(Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)</i>$Fallen Askari can't block.|
-Raging Gorilla|Visions|90|C|{2}{R}|Creature - Ape|2|3|Whenever Raging Gorilla blocks or becomes blocked, it gets +2/-2 until end of turn.|
-Relentless Assault|Visions|91|R|{2}{R}{R}|Sorcery|||Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.|
-Rock Slide|Visions|92|C|{X}{R}|Instant|||Rock Slide deals X damage divided as you choose among any number of target attacking or blocking creatures without flying.|
-Solfatara|Visions|93|C|{2}{R}|Instant|||Target player can't play land cards this turn.$Draw a card at the beginning of the next turn's upkeep.|
-Song of Blood|Visions|94|C|{1}{R}|Sorcery|||Put the top four cards of your library into your graveyard.$Whenever a creature attacks this turn, it gets +1/+0 until end of turn for each creature card put into your graveyard this way.|
-Spitting Drake|Visions|95|U|{3}{R}|Creature - Drake|2|2|Flying${R}: Spitting Drake gets +1/+0 until end of turn. Activate this ability only once each turn.|
-Suq'Ata Lancer|Visions|96|C|{2}{R}|Creature - Human Knight|2|2|Haste$Flanking <i>(Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)</i>|
-Talruum Champion|Visions|97|C|{4}{R}|Creature - Minotaur|3|3|First strike$Whenever Talruum Champion blocks or becomes blocked by a creature, that creature loses first strike until end of turn.|
-Talruum Piper|Visions|98|U|{4}{R}|Creature - Minotaur|3|3|All creatures with flying able to block Talruum Piper do so.|
-Tremor|Visions|99|C|{R}|Sorcery|||Tremor deals 1 damage to each creature without flying.|
+Tin-Wing Chimera|Visions|157|U|{4}|Artifact Creature - Chimera|2|2|Flying$Sacrifice this creature: Put a +2/+2 counter on target Chimera creature. It gains flying.|
+Triangle of War|Visions|158|R|{1}|Artifact|||{2}, Sacrifice this artifact: Target creature you control fights target creature an opponent controls.|
+Wand of Denial|Visions|159|R|{2}|Artifact|||{T}: Look at the top card of target player's library. If it's a nonland card, you may pay 2 life. If you do, put it into that player's graveyard.|
+Coral Atoll|Visions|160|U||Land|||This land enters tapped.$When this land enters, sacrifice it unless you return an untapped Island you control to its owner's hand.${T}: Add {C}{U}.|
+Dormant Volcano|Visions|161|U||Land|||This land enters tapped.$When this land enters, sacrifice it unless you return an untapped Mountain you control to its owner's hand.${T}: Add {C}{R}.|
+Everglades|Visions|162|U||Land|||This land enters tapped.$When this land enters, sacrifice it unless you return an untapped Swamp you control to its owner's hand.${T}: Add {C}{B}.|
+Griffin Canyon|Visions|163|R||Land|||{T}: Add {C}.${T}: Untap target Griffin. If it's a creature, it gets +1/+1 until end of turn.|
+Jungle Basin|Visions|164|U||Land|||This land enters tapped.$When this land enters, sacrifice it unless you return an untapped Forest you control to its owner's hand.${T}: Add {C}{G}.|
+Karoo|Visions|165|U||Land|||This land enters tapped.$When this land enters, sacrifice it unless you return an untapped Plains you control to its owner's hand.${T}: Add {C}{W}.|
+Quicksand|Visions|166|U||Land|||{T}: Add {C}.${T}, Sacrifice this land: Target attacking creature without flying gets -1/-2 until end of turn.|
+Undiscovered Paradise|Visions|167|R||Land|||{T}: Add one mana of any color. During your next untap step, as you untap your permanents, return this land to its owner's hand.|
 Abyssal Gatekeeper|Weatherlight|1|C|{1}{B}|Creature - Horror|1|1|When Abyssal Gatekeeper dies, each player sacrifices a creature.|
 Festering Evil|Weatherlight|10|U|{3}{B}{B}|Enchantment|||At the beginning of your upkeep, Festering Evil deals 1 damage to each creature and each player.$${B}{B}, Sacrifice Festering Evil: Festering Evil deals 3 damage to each creature and each player.|
 Fire Whip|Weatherlight|100|C|{1}{R}|Enchantment - Aura|||Enchant creature you control$Enchanted creature has "{tap}: This creature deals 1 damage to any target."$Sacrifice Fire Whip: Fire Whip deals 1 damage to any target.|
@@ -56038,36 +56038,36 @@ Reflection Net|Alchemy: Ixalan|27|U|{1}{W}{U}|Artifact|||Flash$When Reflection N
 Scalesoul Gnome|Alchemy: Ixalan|28|R|{3}{R}{W}|Artifact Creature - Gnome|3|5|Trample, Haste$Whenever Scalesoul Gnome deals combat damage to a player, discover X, where X is that damage.$Whenever you play a card from exile, conjure a duplicate of it into your hand.|
 Stalwart Speartail|Alchemy: Ixalan|29|R|{1}{R}{G}|Creature - Dinosaur|4|4|Enrage -- Whenever Stalwart Speartail is dealt damage, other Dinosaurs you control and Dinosaur cards in your hand and library perpetually get +1/+1.$Whenever Stalwart Speartail attacks, you may pay {3}. When you do, Stalwart Speartail deals 1 damage to each creature and each planeswalker.|
 Tan Jolom, the Worldwalker|Alchemy: Ixalan|30|R|{1}{G}{W}{U}|Legendary Creature - Spirit|3|3|At the beginning of combat on your turn, choose up to one target artifact or land you control that isn't a creature or token. Until end of turn, it becomes a 3/3 Spirit creature with vigilance and double team in addition to its other types.|
-Scrutiny of the Guildpact|Alchemy: Murders at Karlov Manor |1|U|{1}{W}|Enchantment|||When Scrutiny of the Guildpact enters, you may choose a creature card in your hand. If you do, that card perpetually incorporates {W} and gains "When you cast this spell, create a 2/2 white and blue Detective creature token."$Multicolored creatures you control get +1/+1.|
-Sleuth Instructor|Alchemy: Murders at Karlov Manor |2|R|{1}{W}|Creature - Elephant Detective|3|2|Disguise {1}{W}$Whenever Sleuth Instructor or another permanent you control is turned face up, seek a non-Elephant creature card with mana value 3 or less and cloak it. This ability triggers only once.|
-Spotlight Falcon|Alchemy: Murders at Karlov Manor |3|R|{2}{W}{W}|Artifact Creature - Bird|4|3|As an additional cost to cast this spell, you may collect evidence 5.$Flying$When Spotlight Falcon enters, if evidence was collected, conjure a card named Spotlight Falcon into your hand.|
-Case of the Lost Witness|Alchemy: Murders at Karlov Manor |4|M|{1}{U}|Enchantment - Case|||When this Case enters, conjure four cards named Fblthp, the Lost into your library, then shuffle. Draw a card.$To solve -- You control a legendary Homunculus.$Solved -- You may look at the top card of your library any time and you may play lands and cast spells from the top of your library.|
-Emporium Thopterist|Alchemy: Murders at Karlov Manor |5|U|{1}{U}|Creature - Vedalken Artificer|1|1|Thopters you control get +2/+0.$At the beginning of your upkeep, conjure a card named Ornithopter into your hand.|
-Excogitator Sphinx|Alchemy: Murders at Karlov Manor |6|R|{2}{U}{U}|Creature - Sphinx Detective|4|4|Flying$Whenever one or more creatures you control deal combat damage to a player, investigate.${1}, Sacrifice a Clue: Seek an instant or sorcery card.|
-Mapping the Maze|Alchemy: Murders at Karlov Manor |7|U|{1}{U}|Instant|||Choose an instant or sorcery card in your hand or graveyard. That card perpetually incorporates {U} and gains "When you cast this spell, draw a card." Then return a multicolored instant or sorcery card from your graveyard to your hand.|
-Ominous Lockbox|Alchemy: Murders at Karlov Manor |8|R|{1}{U}|Artifact - Clue|||As Ominous Lockbox enters, secretly choose a number between 1 and 20.$When an opponent casts a spell with mana value equal to the chosen number, sacrifice Ominous Lockbox. If you do, copy that spell, and you may choose new targets for the copy.${2}, Sacrifice Ominous Lockbox: Draw a card.|
-Cackling Observer|Alchemy: Murders at Karlov Manor |9|R|{1}{B}{B}|Creature - Imp|3|1|Flying$When Cackling Observer enters, target opponent reveals each nonland card in their hand. You choose one of those cards and exile it.$When Cackling Observer leaves the battlefield, the exiled card's owner seeks a nonland card with lesser mana value than the exiled card.|
-Lurking Spinecrawler|Alchemy: Murders at Karlov Manor |10|U|{3}{B}|Creature - Horror|5|4|When Lurking Spinecrawler enters, you may choose a nonland card in your hand. If you do, that card perpetually incorporates {1}{B} and gains "When you cast this spell, each opponent sacrifices a creature. Each opponent who can't discards a card."$Whenever you cast a multicolored spell, for each of that spell's colors, each opponent loses 1 life and you gain 1 life.|
-Perforator Crocodile|Alchemy: Murders at Karlov Manor |11|M|{3}{B}{B}{B}|Creature - Crocodile|6|5|When Perforator Crocodile enters, for each creature your opponents control, conjure a card named Stab Wound onto the battlefield attached to that creature.$Cycling {1}{B}|
-Snarlfang Vermin|Alchemy: Murders at Karlov Manor |12|U|{B}|Creature - Rat|2|1|Whenever Snarlfang Vermin deals combat damage to a creature, if that creature is still on the battlefield, suspect that creature. It perpetually gains this ability.$Whenever a suspected creature an opponent controls dies while Snarlfang Vermin is in your graveyard, that opponent loses 1 life.|
-Case of the Market Melee|Alchemy: Murders at Karlov Manor |13|U|{1}{R}|Enchantment - Case|||When this Case enters, it deals 1 damage to any target.$Damage isn't removed from creatures during cleanup steps.$To solve -- Three or more creatures are damaged.$Solved -- Whenever you attack with one or more creatures, this Case deals that much damage divided as you choose among any number of targets.|
-Concert Kaboomist|Alchemy: Murders at Karlov Manor |14|U|{1}{R}{R}|Creature - Goblin Artificer|4|2|Trample$When Concert Kaboomist enters or is turned face up, it deals X damage to target opponent, where X is the number of noncreature spells you've cast since the beginning of your last turn.$Disguise {R}|
-Construction Arsonist|Alchemy: Murders at Karlov Manor |15|R|{1}{R}|Creature - Goblin Rogue Wizard|2|2|When Construction Arsonist enters, you may choose an instant or sorcery card in your hand. If you do, that card perpetually incorporates {R} and gains "When you cast this spell, it deals 2 damage to each opponent."$Whenever you cast a multicolored spell, Construction Arsonist gets +1/+1 until end of turn for each of that spell's colors.|
-Shove Aside|Alchemy: Murders at Karlov Manor |16|U|{R}|Sorcery|||If you aren't the starting player, you may cast Shove Aside as though it had flash.$Shove Aside deals 3 damage to target creature or planeswalker.|
-Guildpact Greenwalker|Alchemy: Murders at Karlov Manor |17|R|{2}{G}|Creature - Plant Rhino|4|4|When Guildpact Greenwalker enters, you may choose a creature card in your hand. If you do, that card perpetually incorporates {1}{G} and gets +4/+4.$Multicolored creatures you control have ward {2}.|
-Rampaging Ursaguana|Alchemy: Murders at Karlov Manor |18|R|{4}{G}{G}|Creature - Bear Lizard Mutant|4|4|Trample, ward {2}, haste$Rampaging Ursaguana gets +2/+2 for each time this creature attacked this game.$Disguise {2}{G}{G}|
-Relics of the Rubblebelt|Alchemy: Murders at Karlov Manor |19|R|{2}{G}|Sorcery|||Draft a card from Relics of the Rubblebelt's spellbook twice, then put one of those cards onto the battlefield tapped.|
-Sproutwatch Dryad|Alchemy: Murders at Karlov Manor |20|R|{1}{G}{G}|Creature - Dryad|3|3|At the beginning of each combat, Sproutwatch Dryad gains flying until end of turn if a creature you control or a card in your hand has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance.|
-Woodland Investigation|Alchemy: Murders at Karlov Manor |21|U|{G}|Sorcery|||Search your library for a basic land card, reveal it, put it into your hand, then shuffle. It perpetually becomes a Clue artifact in addition to its other types and gains "{2}, Sacrifice this permanent: Draw a card."|
-Emmara, Voice of the Conclave|Alchemy: Murders at Karlov Manor |22|R|{1}{G}{W}|Legendary Creature - Elf Cleric|2|3|Convoke$When Emmara, Voice of the Conclave enters, draft a card from Emmara, Voice of the Conclave's spellbook.|
-Furgul, Quag Nurturer|Alchemy: Murders at Karlov Manor |23|R|{2}{B}{G}|Legendary Creature - Elf Shaman|2|4|At the beginning of your end step, conjure a card named Slimy Dualleech onto the battlefield if you control no Leeches. Otherwise, put a +1/+1 counter on each Leech you control.${T}, Sacrifice a creature: Add an amount of {G} equal to the sacrificed creature's power.|
-Izzet Polarizer|Alchemy: Murders at Karlov Manor |24|R|{U}{R}|Creature - Lizard Wizard|2|1|When Izzet Polarizer dies, conjure a card named Ionize or a card named Electrolyze into your hand.|
-Juggle the Performance|Alchemy: Murders at Karlov Manor |25|M|{1}{B}{R}|Sorcery|||Each player discards their hand, then conjures a duplicate of each of seven random cards from the library of the player to their right into their hand. The duplicates perpetually gain "Mana of any type can be spent to cast this spell."|
-Roalesk, Prime Specimen|Alchemy: Murders at Karlov Manor |26|M|{2}{G}{U}|Legendary Creature - Human Mutant|4|5|Flying$Whenever Roalesk, Prime Specimen or another permanent you control is turned face up, you may pay {X}. If you do, if X is 1 or more, conjure a duplicate of a random creature card with mana value X into your hand. Cloak it. It gains "{G/U}: Turn this creature face up" for as long as it remains face down.$Disguise {G}{U}|
-Scour the Scene|Alchemy: Murders at Karlov Manor |27|U|{W}{U}|Enchantment|||When Scour the Scene enters, create a 2/2 white and blue Detective creature token.$Whenever you sacrifice an artifact, choose a creature card in your hand or a creature you control. It perpetually gets +1/+0.|
-Tajic, Legion's Valor|Alchemy: Murders at Karlov Manor |28|M|{2}{R}{W}|Legendary Creature - Human Soldier|1|1|Indestructible, haste$At the beginning of combat on your turn, put a +1/+1 counter on Tajic, Legion's Valor. Then conjure a card with mana value equal to the number of +1/+1 counters on it from Tajic, Legion's Valor's spellbook onto the battlefield. It gains haste until end of turn and attacks this combat if able.|
-Thought-String Analyst|Alchemy: Murders at Karlov Manor |29|R|{U}{B}|Creature - Human Wizard|2|2|At the beginning of your upkeep, exile the top card of target opponent's library face down. You lose life equal to its mana value. You may look at and play that card for as long as it remains exiled, and mana of any type can be spent to cast that spell.|
-Veko, Death's Doorkeeper|Alchemy: Murders at Karlov Manor |30|R|{W}{B}|Legendary Creature - Spirit Cleric|1|3|Extort${T}, Sacrifice a non-Spirit creature: Return target creature card from your graveyard to your hand. It perpetually becomes a Spirit, has base power and toughness 1/1, and gains "You may pay {W/B} rather than pay this spell's mana cost." Activate only as a sorcery.|
+Scrutiny of the Guildpact|Alchemy: Murders at Karlov Manor|1|U|{1}{W}|Enchantment|||When Scrutiny of the Guildpact enters, you may choose a creature card in your hand. If you do, that card perpetually incorporates {W} and gains "When you cast this spell, create a 2/2 white and blue Detective creature token."$Multicolored creatures you control get +1/+1.|
+Sleuth Instructor|Alchemy: Murders at Karlov Manor|2|R|{1}{W}|Creature - Elephant Detective|3|2|Disguise {1}{W}$Whenever Sleuth Instructor or another permanent you control is turned face up, seek a non-Elephant creature card with mana value 3 or less and cloak it. This ability triggers only once.|
+Spotlight Falcon|Alchemy: Murders at Karlov Manor|3|R|{2}{W}{W}|Artifact Creature - Bird|4|3|As an additional cost to cast this spell, you may collect evidence 5.$Flying$When Spotlight Falcon enters, if evidence was collected, conjure a card named Spotlight Falcon into your hand.|
+Case of the Lost Witness|Alchemy: Murders at Karlov Manor|4|M|{1}{U}|Enchantment - Case|||When this Case enters, conjure four cards named Fblthp, the Lost into your library, then shuffle. Draw a card.$To solve -- You control a legendary Homunculus.$Solved -- You may look at the top card of your library any time and you may play lands and cast spells from the top of your library.|
+Emporium Thopterist|Alchemy: Murders at Karlov Manor|5|U|{1}{U}|Creature - Vedalken Artificer|1|1|Thopters you control get +2/+0.$At the beginning of your upkeep, conjure a card named Ornithopter into your hand.|
+Excogitator Sphinx|Alchemy: Murders at Karlov Manor|6|R|{2}{U}{U}|Creature - Sphinx Detective|4|4|Flying$Whenever one or more creatures you control deal combat damage to a player, investigate.${1}, Sacrifice a Clue: Seek an instant or sorcery card.|
+Mapping the Maze|Alchemy: Murders at Karlov Manor|7|U|{1}{U}|Instant|||Choose an instant or sorcery card in your hand or graveyard. That card perpetually incorporates {U} and gains "When you cast this spell, draw a card." Then return a multicolored instant or sorcery card from your graveyard to your hand.|
+Ominous Lockbox|Alchemy: Murders at Karlov Manor|8|R|{1}{U}|Artifact - Clue|||As Ominous Lockbox enters, secretly choose a number between 1 and 20.$When an opponent casts a spell with mana value equal to the chosen number, sacrifice Ominous Lockbox. If you do, copy that spell, and you may choose new targets for the copy.${2}, Sacrifice Ominous Lockbox: Draw a card.|
+Cackling Observer|Alchemy: Murders at Karlov Manor|9|R|{1}{B}{B}|Creature - Imp|3|1|Flying$When Cackling Observer enters, target opponent reveals each nonland card in their hand. You choose one of those cards and exile it.$When Cackling Observer leaves the battlefield, the exiled card's owner seeks a nonland card with lesser mana value than the exiled card.|
+Lurking Spinecrawler|Alchemy: Murders at Karlov Manor|10|U|{3}{B}|Creature - Horror|5|4|When Lurking Spinecrawler enters, you may choose a nonland card in your hand. If you do, that card perpetually incorporates {1}{B} and gains "When you cast this spell, each opponent sacrifices a creature. Each opponent who can't discards a card."$Whenever you cast a multicolored spell, for each of that spell's colors, each opponent loses 1 life and you gain 1 life.|
+Perforator Crocodile|Alchemy: Murders at Karlov Manor|11|M|{3}{B}{B}{B}|Creature - Crocodile|6|5|When Perforator Crocodile enters, for each creature your opponents control, conjure a card named Stab Wound onto the battlefield attached to that creature.$Cycling {1}{B}|
+Snarlfang Vermin|Alchemy: Murders at Karlov Manor|12|U|{B}|Creature - Rat|2|1|Whenever Snarlfang Vermin deals combat damage to a creature, if that creature is still on the battlefield, suspect that creature. It perpetually gains this ability.$Whenever a suspected creature an opponent controls dies while Snarlfang Vermin is in your graveyard, that opponent loses 1 life.|
+Case of the Market Melee|Alchemy: Murders at Karlov Manor|13|U|{1}{R}|Enchantment - Case|||When this Case enters, it deals 1 damage to any target.$Damage isn't removed from creatures during cleanup steps.$To solve -- Three or more creatures are damaged.$Solved -- Whenever you attack with one or more creatures, this Case deals that much damage divided as you choose among any number of targets.|
+Concert Kaboomist|Alchemy: Murders at Karlov Manor|14|U|{1}{R}{R}|Creature - Goblin Artificer|4|2|Trample$When Concert Kaboomist enters or is turned face up, it deals X damage to target opponent, where X is the number of noncreature spells you've cast since the beginning of your last turn.$Disguise {R}|
+Construction Arsonist|Alchemy: Murders at Karlov Manor|15|R|{1}{R}|Creature - Goblin Rogue Wizard|2|2|When Construction Arsonist enters, you may choose an instant or sorcery card in your hand. If you do, that card perpetually incorporates {R} and gains "When you cast this spell, it deals 2 damage to each opponent."$Whenever you cast a multicolored spell, Construction Arsonist gets +1/+1 until end of turn for each of that spell's colors.|
+Shove Aside|Alchemy: Murders at Karlov Manor|16|U|{R}|Sorcery|||If you aren't the starting player, you may cast Shove Aside as though it had flash.$Shove Aside deals 3 damage to target creature or planeswalker.|
+Guildpact Greenwalker|Alchemy: Murders at Karlov Manor|17|R|{2}{G}|Creature - Plant Rhino|4|4|When Guildpact Greenwalker enters, you may choose a creature card in your hand. If you do, that card perpetually incorporates {1}{G} and gets +4/+4.$Multicolored creatures you control have ward {2}.|
+Rampaging Ursaguana|Alchemy: Murders at Karlov Manor|18|R|{4}{G}{G}|Creature - Bear Lizard Mutant|4|4|Trample, ward {2}, haste$Rampaging Ursaguana gets +2/+2 for each time this creature attacked this game.$Disguise {2}{G}{G}|
+Relics of the Rubblebelt|Alchemy: Murders at Karlov Manor|19|R|{2}{G}|Sorcery|||Draft a card from Relics of the Rubblebelt's spellbook twice, then put one of those cards onto the battlefield tapped.|
+Sproutwatch Dryad|Alchemy: Murders at Karlov Manor|20|R|{1}{G}{G}|Creature - Dryad|3|3|At the beginning of each combat, Sproutwatch Dryad gains flying until end of turn if a creature you control or a card in your hand has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance.|
+Woodland Investigation|Alchemy: Murders at Karlov Manor|21|U|{G}|Sorcery|||Search your library for a basic land card, reveal it, put it into your hand, then shuffle. It perpetually becomes a Clue artifact in addition to its other types and gains "{2}, Sacrifice this permanent: Draw a card."|
+Emmara, Voice of the Conclave|Alchemy: Murders at Karlov Manor|22|R|{1}{G}{W}|Legendary Creature - Elf Cleric|2|3|Convoke$When Emmara, Voice of the Conclave enters, draft a card from Emmara, Voice of the Conclave's spellbook.|
+Furgul, Quag Nurturer|Alchemy: Murders at Karlov Manor|23|R|{2}{B}{G}|Legendary Creature - Elf Shaman|2|4|At the beginning of your end step, conjure a card named Slimy Dualleech onto the battlefield if you control no Leeches. Otherwise, put a +1/+1 counter on each Leech you control.${T}, Sacrifice a creature: Add an amount of {G} equal to the sacrificed creature's power.|
+Izzet Polarizer|Alchemy: Murders at Karlov Manor|24|R|{U}{R}|Creature - Lizard Wizard|2|1|When Izzet Polarizer dies, conjure a card named Ionize or a card named Electrolyze into your hand.|
+Juggle the Performance|Alchemy: Murders at Karlov Manor|25|M|{1}{B}{R}|Sorcery|||Each player discards their hand, then conjures a duplicate of each of seven random cards from the library of the player to their right into their hand. The duplicates perpetually gain "Mana of any type can be spent to cast this spell."|
+Roalesk, Prime Specimen|Alchemy: Murders at Karlov Manor|26|M|{2}{G}{U}|Legendary Creature - Human Mutant|4|5|Flying$Whenever Roalesk, Prime Specimen or another permanent you control is turned face up, you may pay {X}. If you do, if X is 1 or more, conjure a duplicate of a random creature card with mana value X into your hand. Cloak it. It gains "{G/U}: Turn this creature face up" for as long as it remains face down.$Disguise {G}{U}|
+Scour the Scene|Alchemy: Murders at Karlov Manor|27|U|{W}{U}|Enchantment|||When Scour the Scene enters, create a 2/2 white and blue Detective creature token.$Whenever you sacrifice an artifact, choose a creature card in your hand or a creature you control. It perpetually gets +1/+0.|
+Tajic, Legion's Valor|Alchemy: Murders at Karlov Manor|28|M|{2}{R}{W}|Legendary Creature - Human Soldier|1|1|Indestructible, haste$At the beginning of combat on your turn, put a +1/+1 counter on Tajic, Legion's Valor. Then conjure a card with mana value equal to the number of +1/+1 counters on it from Tajic, Legion's Valor's spellbook onto the battlefield. It gains haste until end of turn and attacks this combat if able.|
+Thought-String Analyst|Alchemy: Murders at Karlov Manor|29|R|{U}{B}|Creature - Human Wizard|2|2|At the beginning of your upkeep, exile the top card of target opponent's library face down. You lose life equal to its mana value. You may look at and play that card for as long as it remains exiled, and mana of any type can be spent to cast that spell.|
+Veko, Death's Doorkeeper|Alchemy: Murders at Karlov Manor|30|R|{W}{B}|Legendary Creature - Spirit Cleric|1|3|Extort${T}, Sacrifice a non-Spirit creature: Return target creature card from your graveyard to your hand. It perpetually becomes a Spirit, has base power and toughness 1/1, and gains "You may pay {W/B} rather than pay this spell's mana cost." Activate only as a sorcery.|
 Prairie Survivalist|Alchemy: Outlaws of Thunder Junction|1|R|{1}{W}|Creature - Human Scout|0|1|Flying$At the beginning of combat on your turn, target creature you control perpetually gets +1/+0. Then choose a creature card in your hand. It perpetually gets +1/+0.|
 Resolute Rejection|Alchemy: Outlaws of Thunder Junction|2|U|{1}{W}|Instant|||Target tapped creature perpetually loses all abilities, then Resolute Rejection deals 4 damage to it.$Cycling {2}|
 Ruby Collector|Alchemy: Outlaws of Thunder Junction|3|R|{W}|Creature - Human Detective|1|1|When you attack with three or more creatures, conjure a card named Mox Ruby into your hand. This ability triggers only once.${1}{R}: Creatures you control get +1/+0 until end of turn.|
@@ -64527,15 +64527,21 @@ Plains|The Hobbit|319|C||Basic Land - Plains|||({T}: Add {W}.)|
 Plains|The Hobbit|320|C||Basic Land - Plains|||({T}: Add {W}.)|
 The Misty Mountains Cold|The Hobbit|321|R|{2}{R}|Enchantment - Saga|||(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)$I, II, III, IV -- Create a Treasure token. Then if you control four or more Treasures, sacrifice this Saga. If you do, create a 6/6 red Dragon creature token with flying.|
 Enlightened Confidant|Reality Fracture|5|M|{1}{W}|Creature - Kor Cleric|2|1|Lifelink$At the beginning of your end step, if you gained life this turn, surveil 1. If you put a card with mana value less than or equal to the amount of life you gained this turn into your graveyard this way, put that card into your hand.|
+Generous Revival|Reality Fracture|8|U|{2}{W}|Sorcery|||Return target creature card with mana value 3 or less from your graveyard to the battlefield with an additional +1/+1 counter on it.$Flashback {4}{W}|
+Perfected Theory|Reality Fracture|34|U|{U}|Instant|||Choose one --$* Target creature has base power and toughness 1/1 until end of turn.$* Target creature has base power and toughness 4/5 until end of turn.|
 The Theorist, Jace Beleren|Reality Fracture|43|M|{2}{U}{U}|Legendary Planeswalker - Jace|3|At the beginning of each opponent's draw step, you draw a card.$+1: Create a 1/1 blue Illusion creature token.$−2: For each opponent, return up to one target artifact or creature that player controls to its owner's hand.$−6: Draw three cards. Then put X +1/+1 counters on each creature you control, where X is the number of cards in your hand.|
 Bloodline Recollector|Reality Fracture|49|M|{1}{B}|Creature - Vampire Warlock|2|2|At the beginning of each end step, if three or more creatures died this turn, this creature becomes prepared.|
 Ancestral Craving|Reality Fracture|49|M|{B}|Instant|2|2|Target player draws three cards and loses 3 life.|
+Cast Away Doubt|Reality Fracture|51|C|{2}{B}|Sorcery|||Draw two cards. Cast Away Doubt deals 2 damage to each player.|
 Craterclaw Colossus|Reality Fracture|78|M|{4}{R}{R}{R}|Artifact Creature - Beast Construct|5|5|Haste$When this creature enters, creatures you control gain trample and get +X/+0 until end of turn, where X is the number of artifacts you control.|
 Stingcaster Mage|Reality Fracture|93|M|{1}{R}|Creature - Human Wizard|2|1|Haste$When this creature enters, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.|
+Compel Brutality|Reality Fracture|101|C|{1}{G}|Instant|||Choose one --$* Target creature you control deals damage equal to its power to target creature or planeswalker an opponent controls.$* Target planeswalker you control deals damage equal to its loyalty to target creature or planeswalker an opponent controls.|
+Charge the Sanctum|Reality Fracture|125|C|{2}{R/W}|Instant|||Choose one --$* Creatures you control get +2/+0 until end of turn.$* Target creature gets +2/+0 and gains first strike until end of turn. Put a +1/+1 counter on it.|
 Paradox Shaper|Reality Fracture|143|U|{1}{U/B}|Creature - Octopus Wizard|1|3|At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared.${2}: Put target card from your graveyard on the bottom of your library.|
 Omit Variables|Reality Fracture|143|U|{U/B}|Sorcery|1|3|Mill three cards.|
 Prudent Fateseer|Reality Fracture|146|U|{1}{W/U}{W/U}|Creature - Dwarf Wizard|1|4|This creature enters prepared.$Whenever you scry or surveil, creatures you control get +1/+0 until end of turn. This ability triggers only once each turn.|
 Peer Review|Reality Fracture|146|U|{2}{W/U}|Sorcery|1|4|Create a 2/2 colorless Wizard Soldier creature token named Cadet. Surveil 1.|
+Solitary Cell|Reality Fracture|149|R|{R}{W}|Artifact|||When this artifact enters, exile target nonland permanent an opponent controls with mana value 3 or less until this artifact leaves the battlefield.${1}, {T}, Discard a legendary card: Draw a card.|
 Stingerquill Voxmancer|Reality Fracture|151|U|{B/R}|Creature - Goblin Sorcerer|1|2|At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared.|
 Vicious Verse|Reality Fracture|151|U|{B/R}|Sorcery|1|2|Vicious Verse deals 1 damage to target opponent.|
 Vigorbloom Vanguard|Reality Fracture|161|U|{1}{G/W}|Creature - Troll Druid|2|2|This creature enters prepared.$Each creature you control with a +1/+1 counter on it has vigilance.|
@@ -64998,3 +65004,366 @@ Swiftfoot Boots|Mystery Booster Commander Edition|77|U|{2}|Artifact - Equipment|
 Thought Vessel|Mystery Booster Commander Edition|78|U|{2}|Artifact|||You have no maximum hand size.${T}: Add {C}.|
 Exotic Orchard|Mystery Booster Commander Edition|79|R||Land|||{T}: Add one mana of any color that a land an opponent controls could produce.|
 Path of Ancestry|Mystery Booster Commander Edition|80|C||Land|||This land enters tapped.${T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1.|
+All That Glitters|The Zeta Set|1|C|{1}{W}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +1/+1 for each artifact and/or enchantment you control.|
+Dispatch|The Zeta Set|2|C|{W}|Instant|||Tap target creature.$Metalcraft -- If you control three or more artifacts, exile that creature.|
+Eerie Interlude|The Zeta Set|3|R|{2}{W}|Instant|||Exile any number of target creatures you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.|
+Generous Gift|The Zeta Set|4|C|{2}{W}|Instant|||Destroy target permanent. Its controller creates a 3/3 green Elephant creature token.|
+Land Tax|The Zeta Set|5|R|{W}|Enchantment|||At the beginning of your upkeep, if an opponent controls more lands than you, you may search your library for up to three basic land cards, reveal them, put them into your hand, then shuffle.|
+Mother of Runes|The Zeta Set|6|U|{W}|Creature - Human Cleric|1|1|{T}: Target creature you control gains protection from the color of your choice until end of turn.|
+Path to Exile|The Zeta Set|7|U|{W}|Instant|||Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle.|
+Return to Dust|The Zeta Set|8|C|{2}{W}{W}|Instant|||Exile target artifact or enchantment. If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment.|
+Savannah Lions|The Zeta Set|9|C|{W}|Creature - Cat|2|1||
+Serra Angel|The Zeta Set|10|C|{3}{W}{W}|Creature - Angel|4|4|Flying$Vigilance|
+Split Up|The Zeta Set|11|R|{1}{W}{W}|Sorcery|||Choose one --$* Destroy all tapped creatures.$* Destroy all untapped creatures.|
+White Sun's Zenith|The Zeta Set|12|U|{X}{W}{W}{W}|Instant|||Create X 2/2 white Cat creature tokens. Shuffle White Sun's Zenith into its owner's library.|
+Brainstorm|The Zeta Set|13|C|{U}|Instant|||Draw three cards, then put two cards from your hand on top of your library in any order.|
+Chain of Vapor|The Zeta Set|14|U|{U}|Instant|||Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land of their choice. If the player does, they may copy this spell and may choose a new target for that copy.|
+Clone|The Zeta Set|15|U|{3}{U}|Creature - Shapeshifter|0|0|You may have this creature enter as a copy of any creature on the battlefield.|
+Dig Through Time|The Zeta Set|16|U|{6}{U}{U}|Instant|||Delve$Look at the top seven cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order.|
+Ghostly Flicker|The Zeta Set|17|C|{2}{U}|Instant|||Exile two target artifacts, creatures, and/or lands you control, then return those cards to the battlefield under your control.|
+High Tide|The Zeta Set|18|C|{U}|Instant|||Until end of turn, whenever a player taps an Island for mana, that player adds an additional {U}.|
+Hullbreaker Horror|The Zeta Set|19|R|{5}{U}{U}|Creature - Kraken Horror|7|8|Flash$This spell can't be countered.$Whenever you cast a spell, choose up to one --$* Return target spell you don't control to its owner's hand.$* Return target nonland permanent to its owner's hand.|
+Imprisoned in the Moon|The Zeta Set|20|U|{2}{U}|Enchantment - Aura|||Enchant creature, land, or planeswalker$Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other card types and abilities.|
+Laboratory Maniac|The Zeta Set|21|U|{2}{U}|Creature - Human Wizard|2|2|If you would draw a card while your library has no cards in it, you win the game instead.|
+Mental Misstep|The Zeta Set|22|U|{U/P}|Instant|||({U/P} can be paid with either {U} or 2 life.)$Counter target spell with mana value 1.|
+Merchant Scroll|The Zeta Set|23|U|{1}{U}|Sorcery|||Search your library for a blue instant card, reveal that card, put it into your hand, then shuffle.|
+Merfolk of the Pearl Trident|The Zeta Set|24|C|{U}|Creature - Merfolk|1|1||
+Mulldrifter|The Zeta Set|25|C|{4}{U}|Creature - Elemental|2|2|Flying$When this creature enters, draw two cards.$Evoke {2}{U}|
+Narcomoeba|The Zeta Set|26|C|{1}{U}|Creature - Illusion|1|1|Flying$When this card is put into your graveyard from your library, you may put it onto the battlefield.|
+An Offer You Can't Refuse|The Zeta Set|27|C|{U}|Instant|||Counter target noncreature spell. Its controller creates two Treasure tokens.|
+Power Sink|The Zeta Set|28|C|{X}{U}|Instant|||Counter target spell unless its controller pays {X}. If that player doesn't, they tap all lands with mana abilities they control and lose all unspent mana.|
+Quicksilver Elemental|The Zeta Set|29|M|{3}{U}{U}|Creature - Elemental|3|4|{U}: This creature gains all activated abilities of target creature until end of turn.$You may spend blue mana as though it were mana of any color to pay the activation costs of this creature's abilities.|
+Spell Pierce|The Zeta Set|30|C|{U}|Instant|||Counter target noncreature spell unless its controller pays {2}.|
+Thought Scour|The Zeta Set|31|C|{U}|Instant|||Target player mills two cards.$Draw a card.|
+Thrummingbird|The Zeta Set|32|U|{1}{U}|Creature - Phyrexian Bird Horror|1|1|Flying$Whenever this creature deals combat damage to a player, proliferate.|
+Windfall|The Zeta Set|33|U|{2}{U}|Sorcery|||Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.|
+Animate Dead|The Zeta Set|34|U|{1}{B}|Enchantment - Aura|||Enchant creature card in a graveyard$When this Aura enters, if it's on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with this Aura." Return enchanted creature card to the battlefield under your control and attach this Aura to it. When this Aura leaves the battlefield, that creature's controller sacrifices it.$Enchanted creature gets -1/-0.|
+Cauldron Familiar|The Zeta Set|35|C|{B}|Creature - Cat|1|1|When this creature enters, each opponent loses 1 life and you gain 1 life.$Sacrifice a Food: Return this card from your graveyard to the battlefield.|
+Cruel Reality|The Zeta Set|36|U|{5}{B}{B}|Enchantment - Aura Curse|||Enchant player$At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker of their choice. If the player can't, they lose 5 life.|
+Cut Down|The Zeta Set|37|C|{B}|Instant|||Destroy target creature with total power and toughness 5 or less.|
+Dark Ritual|The Zeta Set|38|U|{B}|Instant|||Add {B}{B}{B}.|
+Doomsday|The Zeta Set|39|U|{B}{B}{B}|Sorcery|||Search your library and graveyard for five cards and exile the rest. Put the chosen cards on top of your library in any order. You lose half your life, rounded up.|
+Duress|The Zeta Set|40|C|{B}|Sorcery|||Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card.|
+Feed the Swarm|The Zeta Set|41|C|{1}{B}|Sorcery|||Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's mana value.|
+Go for the Throat|The Zeta Set|42|C|{1}{B}|Instant|||Destroy target nonartifact creature.|
+Gray Merchant of Asphodel|The Zeta Set|43|C|{3}{B}{B}|Creature - Zombie|2|4|When this creature enters, each opponent loses X life, where X is your devotion to black. You gain life equal to the life lost this way.|
+Hypnotic Specter|The Zeta Set|44|U|{1}{B}{B}|Creature - Specter|2|2|Flying$Whenever this creature deals damage to an opponent, that player discards a card at random.|
+Imp's Mischief|The Zeta Set|45|R|{1}{B}|Instant|||Change the target of target spell with a single target. You lose life equal to that spell's mana value.|
+Lord Skitter, Sewer King|The Zeta Set|46|U|{2}{B}|Legendary Creature - Rat Noble|3|3|Whenever another Rat you control enters, exile up to one target card from an opponent's graveyard.$At the beginning of combat on your turn, create a 1/1 black Rat creature token with "This token can't block."|
+Mortuary|The Zeta Set|47|M|{3}{B}|Enchantment|||Whenever a creature is put into your graveyard from the battlefield, put that card on top of your library.|
+Night's Whisper|The Zeta Set|48|C|{1}{B}|Sorcery|||You draw two cards and lose 2 life.|
+Sengir Vampire|The Zeta Set|49|C|{3}{B}{B}|Creature - Vampire|4|4|Flying$Whenever a creature dealt damage by this creature this turn dies, put a +1/+1 counter on this creature.|
+Tragic Slip|The Zeta Set|50|C|{B}|Instant|||Target creature gets -1/-1 until end of turn.$Morbid -- That creature gets -13/-13 until end of turn instead if a creature died this turn.|
+Unearth|The Zeta Set|51|C|{B}|Sorcery|||Return target creature card with mana value 3 or less from your graveyard to the battlefield.$Cycling {2}|
+Vito, Thorn of the Dusk Rose|The Zeta Set|52|R|{2}{B}|Legendary Creature - Vampire Cleric|1|3|Whenever you gain life, target opponent loses that much life.${3}{B}{B}: Creatures you control gain lifelink until end of turn.|
+Yargle, Glutton of Urborg|The Zeta Set|53|U|{4}{B}|Legendary Creature - Frog Spirit|9|3||
+Anger|The Zeta Set|54|U|{3}{R}|Creature - Incarnation|2|2|Haste$As long as this card is in your graveyard and you control a Mountain, creatures you control have haste.|
+Cathartic Reunion|The Zeta Set|55|C|{1}{R}|Sorcery|||As an additional cost to cast this spell, discard two cards.$Draw three cards.|
+Disintegrate|The Zeta Set|56|C|{X}{R}|Sorcery|||Disintegrate deals X damage to any target. If it's a creature, it can't be regenerated this turn, and if it would die this turn, exile it instead.|
+Fireball|The Zeta Set|57|C|{X}{R}|Sorcery|||This spell costs {1} more to cast for each target beyond the first.$Fireball deals X damage divided evenly, rounded down, among any number of targets.|
+Glimpse the Impossible|The Zeta Set|58|U|{2}{R}|Sorcery|||Exile the top three cards of your library. You may play those cards this turn. At the beginning of the next end step, if any of those cards remain exiled, put them into your graveyard, then create a 0/1 colorless Eldrazi Spawn creature token for each card put into your graveyard this way. Those tokens have "Sacrifice this token: Add {C}."|
+Gut Shot|The Zeta Set|59|C|{R/P}|Instant|||({R/P} can be paid with either {R} or 2 life.)$Gut Shot deals 1 damage to any target.|
+Guttersnipe|The Zeta Set|60|C|{2}{R}|Creature - Goblin Shaman|2|2|Whenever you cast an instant or sorcery spell, this creature deals 2 damage to each opponent.|
+Imperial Recruiter|The Zeta Set|61|R|{2}{R}|Creature - Human Advisor|1|1|When this creature enters, search your library for a creature card with power 2 or less, reveal it, put it into your hand, then shuffle.|
+Kazuul, Tyrant of the Cliffs|The Zeta Set|62|U|{3}{R}{R}|Legendary Creature - Ogre Warrior|5|4|Whenever a creature an opponent controls attacks, if you're the defending player, create a 3/3 red Ogre creature token unless that creature's controller pays {3}.|
+Lightning Bolt|The Zeta Set|63|C|{R}|Instant|||Lightning Bolt deals 3 damage to any target.|
+Mana Echoes|The Zeta Set|64|M|{2}{R}{R}|Enchantment|||Whenever a creature enters, you may add an amount of {C} equal to the number of creatures you control that share a creature type with it.|
+Price of Progress|The Zeta Set|65|C|{1}{R}|Instant|||Price of Progress deals damage to each player equal to twice the number of nonbasic lands that player controls.|
+Pyroblast|The Zeta Set|66|U|{R}|Instant|||Choose one --$* Counter target spell if it's blue.$* Destroy target permanent if it's blue.|
+Pyrokinesis|The Zeta Set|67|U|{4}{R}{R}|Instant|||You may exile a red card from your hand rather than pay this spell's mana cost.$Pyrokinesis deals 4 damage divided as you choose among any number of target creatures.|
+Simian Spirit Guide|The Zeta Set|68|C|{2}{R}|Creature - Ape Spirit|2|2|Exile this card from your hand: Add {R}.|
+Vandalblast|The Zeta Set|69|C|{R}|Sorcery|||Destroy target artifact you don't control.$Overload {4}{R}|
+Wheel of Misfortune|The Zeta Set|70|U|{2}{R}|Sorcery|||Each player secretly chooses a number 0 or greater, then all players reveal those numbers simultaneously and determine the highest and lowest numbers revealed this way. Wheel of Misfortune deals damage equal to the highest number to each player who chose that number. Each player who didn't choose the lowest number discards their hand, then draws seven cards.|
+Birds of Paradise|The Zeta Set|71|R|{G}|Creature - Bird|0|1|Flying${T}: Add one mana of any color.|
+Chatterstorm|The Zeta Set|72|C|{1}{G}|Sorcery|||Create a 1/1 green Squirrel creature token.$Storm|
+Colossal Dreadmaw|The Zeta Set|73|C|{4}{G}{G}|Creature - Dinosaur|6|6|Trample|
+Cultivate|The Zeta Set|74|C|{2}{G}|Sorcery|||Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle.|
+Giant Spider|The Zeta Set|75|C|{3}{G}|Creature - Spider|2|4|Reach|
+Gigantosaurus|The Zeta Set|76|C|{G}{G}{G}{G}{G}|Creature - Dinosaur|10|10||
+Grizzly Bears|The Zeta Set|77|C|{1}{G}|Creature - Bear|2|2||
+Hornet Queen|The Zeta Set|78|U|{4}{G}{G}{G}|Creature - Insect|2|2|Flying, deathtouch$When this creature enters, create four 1/1 green Insect creature tokens with flying and deathtouch.|
+Invigorate|The Zeta Set|79|C|{2}{G}|Instant|||If you control a Forest, rather than pay this spell's mana cost, you may have an opponent gain 3 life.$Target creature gets +4/+4 until end of turn.|
+Life from the Loam|The Zeta Set|80|R|{1}{G}|Sorcery|||Return up to three target land cards from your graveyard to your hand.$Dredge 3|
+Llanowar Elves|The Zeta Set|81|C|{G}|Creature - Elf Druid|1|1|{T}: Add {G}.|
+Nature's Claim|The Zeta Set|82|C|{G}|Instant|||Destroy target artifact or enchantment. Its controller gains 4 life.|
+Ruxa, Patient Professor|The Zeta Set|83|U|{2}{G}{G}|Legendary Creature - Bear Druid|4|4|Whenever Ruxa enters or attacks, return target creature card with no abilities from your graveyard to your hand.$Creatures you control with no abilities get +1/+1.$For each creature you control with no abilities, you may have that creature assign its combat damage as though it weren't blocked.|
+Scute Swarm|The Zeta Set|84|R|{2}{G}|Creature - Insect|1|1|Landfall -- Whenever a land you control enters, create a 1/1 green Insect creature token. If you control six or more lands, create a token that's a copy of this creature instead.|
+Scythecat Cub|The Zeta Set|85|M|{1}{G}|Creature - Cat|2|2|Trample$Landfall -- Whenever a land you control enters, put a +1/+1 counter on target creature you control. If this is the second time this ability has resolved this turn, double the number of +1/+1 counters on that creature instead.|
+Wild Growth|The Zeta Set|86|C|{G}|Enchantment - Aura|||Enchant land$Whenever enchanted land is tapped for mana, its controller adds an additional {G}.|
+Wild Nacatl|The Zeta Set|87|C|{G}|Creature - Cat Warrior|1|1|This creature gets +1/+1 as long as you control a Mountain.$This creature gets +1/+1 as long as you control a Plains.|
+Baleful Strix|The Zeta Set|88|C|{U}{B}|Artifact Creature - Bird|1|1|Flying, deathtouch$When this creature enters, draw a card.|
+Dueling Grounds|The Zeta Set|89|R|{1}{G}{W}|Enchantment|||No more than one creature can attack each combat.$No more than one creature can block each combat.|
+Garth One-Eye|The Zeta Set|90|U|{W}{U}{B}{R}{G}|Legendary Creature - Human Wizard|5|5|{T}: Choose a card name that hasn't been chosen from among Disenchant, Braingeyser, Terror, Shivan Dragon, Regrowth, and Black Lotus. Create a copy of the card with the chosen name. You may cast the copy.|
+The Jolly Balloon Man|The Zeta Set|91|U|{1}{R}{W}|Legendary Creature - Human Clown|1|4|Haste${1}, {T}: Create a token that's a copy of another target creature you control, except it's a 1/1 red Balloon creature in addition to its other colors and types and it has flying and haste. Sacrifice it at the beginning of the next end step. Activate only as a sorcery.|
+Obeka, Brute Chronologist|The Zeta Set|92|U|{1}{U}{B}{R}|Legendary Creature - Ogre Wizard|3|4|{T}: The player whose turn it is may end the turn.|
+Raffine, Scheming Seer|The Zeta Set|93|U|{W}{U}{B}|Legendary Creature - Sphinx Demon|1|4|Flying, ward {1}$Whenever you attack, target attacking creature connives X, where X is the number of attacking creatures.|
+Arcane Signet|The Zeta Set|94|C|{2}|Artifact|||{T}: Add one mana of any color in your commander's color identity.|
+Ashnod's Altar|The Zeta Set|95|R|{3}|Artifact|||Sacrifice a creature: Add {C}{C}.|
+Chromatic Lantern|The Zeta Set|96|R|{3}|Artifact|||Lands you control have "{T}: Add one mana of any color."${T}: Add one mana of any color.|
+Chromatic Orrery|The Zeta Set|97|M|{7}|Legendary Artifact|||You may spend mana as though it were mana of any color.${T}: Add {C}{C}{C}{C}{C}.${5}, {T}: Draw a card for each color among permanents you control.|
+Chrome Mox|The Zeta Set|98|M|{0}|Artifact|||Imprint -- When this artifact enters, you may exile a nonartifact, nonland card from your hand.${T}: Add one mana of any of the exiled card's colors.|
+Cloud Key|The Zeta Set|99|U|{3}|Artifact|||As this artifact enters, choose artifact, creature, enchantment, instant, or sorcery.$Spells you cast of the chosen type cost {1} less to cast.|
+Clown Car|The Zeta Set|100|U|{X}|Artifact - Vehicle|1|1|When this Vehicle enters, roll X six-sided dice. For each odd result, create a 1/1 white Clown Robot artifact creature token. For each even result, put a +1/+1 counter on this Vehicle.$Crew 2|
+Copper Tablet|The Zeta Set|101|M|{2}|Artifact|||At the beginning of each player's upkeep, this artifact deals 1 damage to that player.|
+Darksteel Monolith|The Zeta Set|102|R|{8}|Artifact|||Indestructible$Once each turn, you may pay {0} rather than pay the mana cost for a colorless spell you cast from your hand.|
+Eternity Vessel|The Zeta Set|103|R|{6}|Artifact|||This artifact enters with X charge counters on it, where X is your life total.$Landfall -- Whenever a land you control enters, you may have your life total become the number of charge counters on this artifact.|
+Foundry Inspector|The Zeta Set|104|U|{3}|Artifact Creature - Construct|3|2|Artifact spells you cast cost {1} less to cast.|
+Jester's Cap|The Zeta Set|105|U|{4}|Artifact|||{2}, {T}, Sacrifice this artifact: Search target player's library for three cards and exile them. Then that player shuffles.|
+Manifold Key|The Zeta Set|106|U|{1}|Artifact|||{1}, {T}: Untap another target artifact.${3}, {T}: Target creature can't be blocked this turn.|
+Mox Tantalite|The Zeta Set|107|M||Artifact|||Suspend 3--{0}${T}: Add one mana of any color.|
+Mycosynth Golem|The Zeta Set|108|R|{11}|Artifact Creature - Golem|4|5|Affinity for artifacts$Artifact creature spells you cast have affinity for artifacts.|
+Ornithopter|The Zeta Set|109|C|{0}|Artifact Creature - Thopter|0|2|Flying|
+Panoptic Mirror|The Zeta Set|110|M|{5}|Artifact|||Imprint -- {X}, {T}: You may exile an instant or sorcery card with mana value X from your hand.$At the beginning of your upkeep, you may copy a card exiled with this artifact. If you do, you may cast the copy without paying its mana cost.|
+Rogue's Gloves|The Zeta Set|111|U|{2}|Artifact - Equipment|||Whenever equipped creature deals combat damage to a player, you may draw a card.$Equip {2}|
+Sensei's Divining Top|The Zeta Set|112|R|{1}|Artifact|||{1}: Look at the top three cards of your library, then put them back in any order.${T}: Draw a card, then put this artifact on top of its owner's library.|
+Skullclamp|The Zeta Set|113|R|{1}|Artifact - Equipment|||Equipped creature gets +1/-1.$Whenever equipped creature dies, draw two cards.$Equip {1}|
+Sol Ring|The Zeta Set|114|U|{1}|Artifact|||{T}: Add {C}{C}.|
+Soul-Guide Lantern|The Zeta Set|115|C|{1}|Artifact|||When this artifact enters, exile target card from a graveyard.${T}, Sacrifice this artifact: Exile each opponent's graveyard.${1}, {T}, Sacrifice this artifact: Draw a card.|
+Thought Vessel|The Zeta Set|116|C|{2}|Artifact|||You have no maximum hand size.${T}: Add {C}.|
+Ward of Bones|The Zeta Set|117|R|{6}|Artifact|||Each opponent who controls more creatures than you can't cast creature spells. The same is true for artifacts and enchantments.$Each opponent who controls more lands than you can't play lands.|
+Command Tower|The Zeta Set|118|C||Land|||{T}: Add one mana of any color in your commander's color identity.|
+Oboro, Palace in the Clouds|The Zeta Set|119|R||Legendary Land|||{T}: Add {U}.${1}: Return Oboro to its owner's hand.|
+Reliquary Tower|The Zeta Set|120|U||Land|||You have no maximum hand size.${T}: Add {C}.|
+Urborg, Tomb of Yawgmoth|The Zeta Set|121|M||Legendary Land|||Each land is a Swamp in addition to its other land types.|
+All That Glitters|The Zeta Set|122|C|{1}{W}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +1/+1 for each artifact and/or enchantment you control.|
+Dispatch|The Zeta Set|123|C|{W}|Instant|||Tap target creature.$Metalcraft -- If you control three or more artifacts, exile that creature.|
+Eerie Interlude|The Zeta Set|124|R|{2}{W}|Instant|||Exile any number of target creatures you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.|
+Generous Gift|The Zeta Set|125|C|{2}{W}|Instant|||Destroy target permanent. Its controller creates a 3/3 green Elephant creature token.|
+Land Tax|The Zeta Set|126|R|{W}|Enchantment|||At the beginning of your upkeep, if an opponent controls more lands than you, you may search your library for up to three basic land cards, reveal them, put them into your hand, then shuffle.|
+Mother of Runes|The Zeta Set|127|U|{W}|Creature - Human Cleric|1|1|{T}: Target creature you control gains protection from the color of your choice until end of turn.|
+Path to Exile|The Zeta Set|128|U|{W}|Instant|||Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle.|
+Return to Dust|The Zeta Set|129|C|{2}{W}{W}|Instant|||Exile target artifact or enchantment. If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment.|
+Savannah Lions|The Zeta Set|130|C|{W}|Creature - Cat|2|1||
+Serra Angel|The Zeta Set|131|C|{3}{W}{W}|Creature - Angel|4|4|Flying$Vigilance|
+Split Up|The Zeta Set|132|R|{1}{W}{W}|Sorcery|||Choose one --$* Destroy all tapped creatures.$* Destroy all untapped creatures.|
+White Sun's Zenith|The Zeta Set|133|U|{X}{W}{W}{W}|Instant|||Create X 2/2 white Cat creature tokens. Shuffle White Sun's Zenith into its owner's library.|
+Brainstorm|The Zeta Set|134|C|{U}|Instant|||Draw three cards, then put two cards from your hand on top of your library in any order.|
+Chain of Vapor|The Zeta Set|135|U|{U}|Instant|||Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land of their choice. If the player does, they may copy this spell and may choose a new target for that copy.|
+Clone|The Zeta Set|136|U|{3}{U}|Creature - Shapeshifter|0|0|You may have this creature enter as a copy of any creature on the battlefield.|
+Dig Through Time|The Zeta Set|137|U|{6}{U}{U}|Instant|||Delve$Look at the top seven cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order.|
+Ghostly Flicker|The Zeta Set|138|C|{2}{U}|Instant|||Exile two target artifacts, creatures, and/or lands you control, then return those cards to the battlefield under your control.|
+High Tide|The Zeta Set|139|C|{U}|Instant|||Until end of turn, whenever a player taps an Island for mana, that player adds an additional {U}.|
+Hullbreaker Horror|The Zeta Set|140|R|{5}{U}{U}|Creature - Kraken Horror|7|8|Flash$This spell can't be countered.$Whenever you cast a spell, choose up to one --$* Return target spell you don't control to its owner's hand.$* Return target nonland permanent to its owner's hand.|
+Imprisoned in the Moon|The Zeta Set|141|U|{2}{U}|Enchantment - Aura|||Enchant creature, land, or planeswalker$Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other card types and abilities.|
+Laboratory Maniac|The Zeta Set|142|U|{2}{U}|Creature - Human Wizard|2|2|If you would draw a card while your library has no cards in it, you win the game instead.|
+Mental Misstep|The Zeta Set|143|U|{U/P}|Instant|||({U/P} can be paid with either {U} or 2 life.)$Counter target spell with mana value 1.|
+Merchant Scroll|The Zeta Set|144|U|{1}{U}|Sorcery|||Search your library for a blue instant card, reveal that card, put it into your hand, then shuffle.|
+Merfolk of the Pearl Trident|The Zeta Set|145|C|{U}|Creature - Merfolk|1|1||
+Mulldrifter|The Zeta Set|146|C|{4}{U}|Creature - Elemental|2|2|Flying$When this creature enters, draw two cards.$Evoke {2}{U}|
+Narcomoeba|The Zeta Set|147|C|{1}{U}|Creature - Illusion|1|1|Flying$When this card is put into your graveyard from your library, you may put it onto the battlefield.|
+An Offer You Can't Refuse|The Zeta Set|148|C|{U}|Instant|||Counter target noncreature spell. Its controller creates two Treasure tokens.|
+Power Sink|The Zeta Set|149|C|{X}{U}|Instant|||Counter target spell unless its controller pays {X}. If that player doesn't, they tap all lands with mana abilities they control and lose all unspent mana.|
+Quicksilver Elemental|The Zeta Set|150|M|{3}{U}{U}|Creature - Elemental|3|4|{U}: This creature gains all activated abilities of target creature until end of turn.$You may spend blue mana as though it were mana of any color to pay the activation costs of this creature's abilities.|
+Spell Pierce|The Zeta Set|151|C|{U}|Instant|||Counter target noncreature spell unless its controller pays {2}.|
+Thought Scour|The Zeta Set|152|C|{U}|Instant|||Target player mills two cards.$Draw a card.|
+Thrummingbird|The Zeta Set|153|U|{1}{U}|Creature - Phyrexian Bird Horror|1|1|Flying$Whenever this creature deals combat damage to a player, proliferate.|
+Windfall|The Zeta Set|154|U|{2}{U}|Sorcery|||Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.|
+Animate Dead|The Zeta Set|155|U|{1}{B}|Enchantment - Aura|||Enchant creature card in a graveyard$When this Aura enters, if it's on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with this Aura." Return enchanted creature card to the battlefield under your control and attach this Aura to it. When this Aura leaves the battlefield, that creature's controller sacrifices it.$Enchanted creature gets -1/-0.|
+Cauldron Familiar|The Zeta Set|156|C|{B}|Creature - Cat|1|1|When this creature enters, each opponent loses 1 life and you gain 1 life.$Sacrifice a Food: Return this card from your graveyard to the battlefield.|
+Cruel Reality|The Zeta Set|157|U|{5}{B}{B}|Enchantment - Aura Curse|||Enchant player$At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker of their choice. If the player can't, they lose 5 life.|
+Cut Down|The Zeta Set|158|C|{B}|Instant|||Destroy target creature with total power and toughness 5 or less.|
+Dark Ritual|The Zeta Set|159|U|{B}|Instant|||Add {B}{B}{B}.|
+Doomsday|The Zeta Set|160|U|{B}{B}{B}|Sorcery|||Search your library and graveyard for five cards and exile the rest. Put the chosen cards on top of your library in any order. You lose half your life, rounded up.|
+Duress|The Zeta Set|161|C|{B}|Sorcery|||Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card.|
+Feed the Swarm|The Zeta Set|162|C|{1}{B}|Sorcery|||Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's mana value.|
+Go for the Throat|The Zeta Set|163|C|{1}{B}|Instant|||Destroy target nonartifact creature.|
+Gray Merchant of Asphodel|The Zeta Set|164|C|{3}{B}{B}|Creature - Zombie|2|4|When this creature enters, each opponent loses X life, where X is your devotion to black. You gain life equal to the life lost this way.|
+Hypnotic Specter|The Zeta Set|165|U|{1}{B}{B}|Creature - Specter|2|2|Flying$Whenever this creature deals damage to an opponent, that player discards a card at random.|
+Imp's Mischief|The Zeta Set|166|R|{1}{B}|Instant|||Change the target of target spell with a single target. You lose life equal to that spell's mana value.|
+Lord Skitter, Sewer King|The Zeta Set|167|U|{2}{B}|Legendary Creature - Rat Noble|3|3|Whenever another Rat you control enters, exile up to one target card from an opponent's graveyard.$At the beginning of combat on your turn, create a 1/1 black Rat creature token with "This token can't block."|
+Mortuary|The Zeta Set|168|M|{3}{B}|Enchantment|||Whenever a creature is put into your graveyard from the battlefield, put that card on top of your library.|
+Night's Whisper|The Zeta Set|169|C|{1}{B}|Sorcery|||You draw two cards and lose 2 life.|
+Sengir Vampire|The Zeta Set|170|C|{3}{B}{B}|Creature - Vampire|4|4|Flying$Whenever a creature dealt damage by this creature this turn dies, put a +1/+1 counter on this creature.|
+Tragic Slip|The Zeta Set|171|C|{B}|Instant|||Target creature gets -1/-1 until end of turn.$Morbid -- That creature gets -13/-13 until end of turn instead if a creature died this turn.|
+Unearth|The Zeta Set|172|C|{B}|Sorcery|||Return target creature card with mana value 3 or less from your graveyard to the battlefield.$Cycling {2}|
+Vito, Thorn of the Dusk Rose|The Zeta Set|173|R|{2}{B}|Legendary Creature - Vampire Cleric|1|3|Whenever you gain life, target opponent loses that much life.${3}{B}{B}: Creatures you control gain lifelink until end of turn.|
+Yargle, Glutton of Urborg|The Zeta Set|174|U|{4}{B}|Legendary Creature - Frog Spirit|9|3||
+Anger|The Zeta Set|175|U|{3}{R}|Creature - Incarnation|2|2|Haste$As long as this card is in your graveyard and you control a Mountain, creatures you control have haste.|
+Cathartic Reunion|The Zeta Set|176|C|{1}{R}|Sorcery|||As an additional cost to cast this spell, discard two cards.$Draw three cards.|
+Disintegrate|The Zeta Set|177|C|{X}{R}|Sorcery|||Disintegrate deals X damage to any target. If it's a creature, it can't be regenerated this turn, and if it would die this turn, exile it instead.|
+Fireball|The Zeta Set|178|C|{X}{R}|Sorcery|||This spell costs {1} more to cast for each target beyond the first.$Fireball deals X damage divided evenly, rounded down, among any number of targets.|
+Glimpse the Impossible|The Zeta Set|179|U|{2}{R}|Sorcery|||Exile the top three cards of your library. You may play those cards this turn. At the beginning of the next end step, if any of those cards remain exiled, put them into your graveyard, then create a 0/1 colorless Eldrazi Spawn creature token for each card put into your graveyard this way. Those tokens have "Sacrifice this token: Add {C}."|
+Gut Shot|The Zeta Set|180|C|{R/P}|Instant|||({R/P} can be paid with either {R} or 2 life.)$Gut Shot deals 1 damage to any target.|
+Guttersnipe|The Zeta Set|181|C|{2}{R}|Creature - Goblin Shaman|2|2|Whenever you cast an instant or sorcery spell, this creature deals 2 damage to each opponent.|
+Imperial Recruiter|The Zeta Set|182|R|{2}{R}|Creature - Human Advisor|1|1|When this creature enters, search your library for a creature card with power 2 or less, reveal it, put it into your hand, then shuffle.|
+Kazuul, Tyrant of the Cliffs|The Zeta Set|183|U|{3}{R}{R}|Legendary Creature - Ogre Warrior|5|4|Whenever a creature an opponent controls attacks, if you're the defending player, create a 3/3 red Ogre creature token unless that creature's controller pays {3}.|
+Lightning Bolt|The Zeta Set|184|C|{R}|Instant|||Lightning Bolt deals 3 damage to any target.|
+Mana Echoes|The Zeta Set|185|M|{2}{R}{R}|Enchantment|||Whenever a creature enters, you may add an amount of {C} equal to the number of creatures you control that share a creature type with it.|
+Price of Progress|The Zeta Set|186|C|{1}{R}|Instant|||Price of Progress deals damage to each player equal to twice the number of nonbasic lands that player controls.|
+Pyroblast|The Zeta Set|187|U|{R}|Instant|||Choose one --$* Counter target spell if it's blue.$* Destroy target permanent if it's blue.|
+Pyrokinesis|The Zeta Set|188|U|{4}{R}{R}|Instant|||You may exile a red card from your hand rather than pay this spell's mana cost.$Pyrokinesis deals 4 damage divided as you choose among any number of target creatures.|
+Simian Spirit Guide|The Zeta Set|189|C|{2}{R}|Creature - Ape Spirit|2|2|Exile this card from your hand: Add {R}.|
+Vandalblast|The Zeta Set|190|C|{R}|Sorcery|||Destroy target artifact you don't control.$Overload {4}{R}|
+Wheel of Misfortune|The Zeta Set|191|U|{2}{R}|Sorcery|||Each player secretly chooses a number 0 or greater, then all players reveal those numbers simultaneously and determine the highest and lowest numbers revealed this way. Wheel of Misfortune deals damage equal to the highest number to each player who chose that number. Each player who didn't choose the lowest number discards their hand, then draws seven cards.|
+Birds of Paradise|The Zeta Set|192|R|{G}|Creature - Bird|0|1|Flying${T}: Add one mana of any color.|
+Chatterstorm|The Zeta Set|193|C|{1}{G}|Sorcery|||Create a 1/1 green Squirrel creature token.$Storm|
+Colossal Dreadmaw|The Zeta Set|194|C|{4}{G}{G}|Creature - Dinosaur|6|6|Trample|
+Cultivate|The Zeta Set|195|C|{2}{G}|Sorcery|||Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle.|
+Giant Spider|The Zeta Set|196|C|{3}{G}|Creature - Spider|2|4|Reach|
+Gigantosaurus|The Zeta Set|197|C|{G}{G}{G}{G}{G}|Creature - Dinosaur|10|10||
+Grizzly Bears|The Zeta Set|198|C|{1}{G}|Creature - Bear|2|2||
+Hornet Queen|The Zeta Set|199|U|{4}{G}{G}{G}|Creature - Insect|2|2|Flying, deathtouch$When this creature enters, create four 1/1 green Insect creature tokens with flying and deathtouch.|
+Invigorate|The Zeta Set|200|C|{2}{G}|Instant|||If you control a Forest, rather than pay this spell's mana cost, you may have an opponent gain 3 life.$Target creature gets +4/+4 until end of turn.|
+Life from the Loam|The Zeta Set|201|R|{1}{G}|Sorcery|||Return up to three target land cards from your graveyard to your hand.$Dredge 3|
+Llanowar Elves|The Zeta Set|202|C|{G}|Creature - Elf Druid|1|1|{T}: Add {G}.|
+Nature's Claim|The Zeta Set|203|C|{G}|Instant|||Destroy target artifact or enchantment. Its controller gains 4 life.|
+Ruxa, Patient Professor|The Zeta Set|204|U|{2}{G}{G}|Legendary Creature - Bear Druid|4|4|Whenever Ruxa enters or attacks, return target creature card with no abilities from your graveyard to your hand.$Creatures you control with no abilities get +1/+1.$For each creature you control with no abilities, you may have that creature assign its combat damage as though it weren't blocked.|
+Scute Swarm|The Zeta Set|205|R|{2}{G}|Creature - Insect|1|1|Landfall -- Whenever a land you control enters, create a 1/1 green Insect creature token. If you control six or more lands, create a token that's a copy of this creature instead.|
+Scythecat Cub|The Zeta Set|206|M|{1}{G}|Creature - Cat|2|2|Trample$Landfall -- Whenever a land you control enters, put a +1/+1 counter on target creature you control. If this is the second time this ability has resolved this turn, double the number of +1/+1 counters on that creature instead.|
+Wild Growth|The Zeta Set|207|C|{G}|Enchantment - Aura|||Enchant land$Whenever enchanted land is tapped for mana, its controller adds an additional {G}.|
+Wild Nacatl|The Zeta Set|208|C|{G}|Creature - Cat Warrior|1|1|This creature gets +1/+1 as long as you control a Mountain.$This creature gets +1/+1 as long as you control a Plains.|
+Baleful Strix|The Zeta Set|209|C|{U}{B}|Artifact Creature - Bird|1|1|Flying, deathtouch$When this creature enters, draw a card.|
+Dueling Grounds|The Zeta Set|210|R|{1}{G}{W}|Enchantment|||No more than one creature can attack each combat.$No more than one creature can block each combat.|
+Garth One-Eye|The Zeta Set|211|U|{W}{U}{B}{R}{G}|Legendary Creature - Human Wizard|5|5|{T}: Choose a card name that hasn't been chosen from among Disenchant, Braingeyser, Terror, Shivan Dragon, Regrowth, and Black Lotus. Create a copy of the card with the chosen name. You may cast the copy.|
+The Jolly Balloon Man|The Zeta Set|212|U|{1}{R}{W}|Legendary Creature - Human Clown|1|4|Haste${1}, {T}: Create a token that's a copy of another target creature you control, except it's a 1/1 red Balloon creature in addition to its other colors and types and it has flying and haste. Sacrifice it at the beginning of the next end step. Activate only as a sorcery.|
+Obeka, Brute Chronologist|The Zeta Set|213|U|{1}{U}{B}{R}|Legendary Creature - Ogre Wizard|3|4|{T}: The player whose turn it is may end the turn.|
+Raffine, Scheming Seer|The Zeta Set|214|U|{W}{U}{B}|Legendary Creature - Sphinx Demon|1|4|Flying, ward {1}$Whenever you attack, target attacking creature connives X, where X is the number of attacking creatures.|
+Arcane Signet|The Zeta Set|215|C|{2}|Artifact|||{T}: Add one mana of any color in your commander's color identity.|
+Ashnod's Altar|The Zeta Set|216|R|{3}|Artifact|||Sacrifice a creature: Add {C}{C}.|
+Chromatic Lantern|The Zeta Set|217|R|{3}|Artifact|||Lands you control have "{T}: Add one mana of any color."${T}: Add one mana of any color.|
+Chromatic Orrery|The Zeta Set|218|M|{7}|Legendary Artifact|||You may spend mana as though it were mana of any color.${T}: Add {C}{C}{C}{C}{C}.${5}, {T}: Draw a card for each color among permanents you control.|
+Chrome Mox|The Zeta Set|219|M|{0}|Artifact|||Imprint -- When this artifact enters, you may exile a nonartifact, nonland card from your hand.${T}: Add one mana of any of the exiled card's colors.|
+Cloud Key|The Zeta Set|220|U|{3}|Artifact|||As this artifact enters, choose artifact, creature, enchantment, instant, or sorcery.$Spells you cast of the chosen type cost {1} less to cast.|
+Clown Car|The Zeta Set|221|U|{X}|Artifact - Vehicle|1|1|When this Vehicle enters, roll X six-sided dice. For each odd result, create a 1/1 white Clown Robot artifact creature token. For each even result, put a +1/+1 counter on this Vehicle.$Crew 2|
+Copper Tablet|The Zeta Set|222|M|{2}|Artifact|||At the beginning of each player's upkeep, this artifact deals 1 damage to that player.|
+Darksteel Monolith|The Zeta Set|223|R|{8}|Artifact|||Indestructible$Once each turn, you may pay {0} rather than pay the mana cost for a colorless spell you cast from your hand.|
+Eternity Vessel|The Zeta Set|224|R|{6}|Artifact|||This artifact enters with X charge counters on it, where X is your life total.$Landfall -- Whenever a land you control enters, you may have your life total become the number of charge counters on this artifact.|
+Foundry Inspector|The Zeta Set|225|U|{3}|Artifact Creature - Construct|3|2|Artifact spells you cast cost {1} less to cast.|
+Jester's Cap|The Zeta Set|226|U|{4}|Artifact|||{2}, {T}, Sacrifice this artifact: Search target player's library for three cards and exile them. Then that player shuffles.|
+Manifold Key|The Zeta Set|227|U|{1}|Artifact|||{1}, {T}: Untap another target artifact.${3}, {T}: Target creature can't be blocked this turn.|
+Mox Tantalite|The Zeta Set|228|M||Artifact|||Suspend 3--{0}${T}: Add one mana of any color.|
+Mycosynth Golem|The Zeta Set|229|R|{11}|Artifact Creature - Golem|4|5|Affinity for artifacts$Artifact creature spells you cast have affinity for artifacts.|
+Ornithopter|The Zeta Set|230|C|{0}|Artifact Creature - Thopter|0|2|Flying|
+Panoptic Mirror|The Zeta Set|231|M|{5}|Artifact|||Imprint -- {X}, {T}: You may exile an instant or sorcery card with mana value X from your hand.$At the beginning of your upkeep, you may copy a card exiled with this artifact. If you do, you may cast the copy without paying its mana cost.|
+Rogue's Gloves|The Zeta Set|232|U|{2}|Artifact - Equipment|||Whenever equipped creature deals combat damage to a player, you may draw a card.$Equip {2}|
+Sensei's Divining Top|The Zeta Set|233|R|{1}|Artifact|||{1}: Look at the top three cards of your library, then put them back in any order.${T}: Draw a card, then put this artifact on top of its owner's library.|
+Skullclamp|The Zeta Set|234|R|{1}|Artifact - Equipment|||Equipped creature gets +1/-1.$Whenever equipped creature dies, draw two cards.$Equip {1}|
+Sol Ring|The Zeta Set|235|U|{1}|Artifact|||{T}: Add {C}{C}.|
+Soul-Guide Lantern|The Zeta Set|236|C|{1}|Artifact|||When this artifact enters, exile target card from a graveyard.${T}, Sacrifice this artifact: Exile each opponent's graveyard.${1}, {T}, Sacrifice this artifact: Draw a card.|
+Thought Vessel|The Zeta Set|237|C|{2}|Artifact|||You have no maximum hand size.${T}: Add {C}.|
+Ward of Bones|The Zeta Set|238|R|{6}|Artifact|||Each opponent who controls more creatures than you can't cast creature spells. The same is true for artifacts and enchantments.$Each opponent who controls more lands than you can't play lands.|
+Command Tower|The Zeta Set|239|C||Land|||{T}: Add one mana of any color in your commander's color identity.|
+Oboro, Palace in the Clouds|The Zeta Set|240|R||Legendary Land|||{T}: Add {U}.${1}: Return Oboro to its owner's hand.|
+Reliquary Tower|The Zeta Set|241|U||Land|||You have no maximum hand size.${T}: Add {C}.|
+Urborg, Tomb of Yawgmoth|The Zeta Set|242|M||Legendary Land|||Each land is a Swamp in addition to its other land types.|
+All That Glitters|The Zeta Set|243|C|{1}{W}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +1/+1 for each artifact and/or enchantment you control.|
+Dispatch|The Zeta Set|244|C|{W}|Instant|||Tap target creature.$Metalcraft -- If you control three or more artifacts, exile that creature.|
+Eerie Interlude|The Zeta Set|245|R|{2}{W}|Instant|||Exile any number of target creatures you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.|
+Generous Gift|The Zeta Set|246|C|{2}{W}|Instant|||Destroy target permanent. Its controller creates a 3/3 green Elephant creature token.|
+Land Tax|The Zeta Set|247|R|{W}|Enchantment|||At the beginning of your upkeep, if an opponent controls more lands than you, you may search your library for up to three basic land cards, reveal them, put them into your hand, then shuffle.|
+Mother of Runes|The Zeta Set|248|U|{W}|Creature - Human Cleric|1|1|{T}: Target creature you control gains protection from the color of your choice until end of turn.|
+Path to Exile|The Zeta Set|249|U|{W}|Instant|||Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle.|
+Return to Dust|The Zeta Set|250|C|{2}{W}{W}|Instant|||Exile target artifact or enchantment. If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment.|
+Savannah Lions|The Zeta Set|251|C|{W}|Creature - Cat|2|1||
+Serra Angel|The Zeta Set|252|C|{3}{W}{W}|Creature - Angel|4|4|Flying$Vigilance|
+Split Up|The Zeta Set|253|R|{1}{W}{W}|Sorcery|||Choose one --$* Destroy all tapped creatures.$* Destroy all untapped creatures.|
+White Sun's Zenith|The Zeta Set|254|U|{X}{W}{W}{W}|Instant|||Create X 2/2 white Cat creature tokens. Shuffle White Sun's Zenith into its owner's library.|
+Brainstorm|The Zeta Set|255|C|{U}|Instant|||Draw three cards, then put two cards from your hand on top of your library in any order.|
+Chain of Vapor|The Zeta Set|256|U|{U}|Instant|||Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land of their choice. If the player does, they may copy this spell and may choose a new target for that copy.|
+Clone|The Zeta Set|257|U|{3}{U}|Creature - Shapeshifter|0|0|You may have this creature enter as a copy of any creature on the battlefield.|
+Dig Through Time|The Zeta Set|258|U|{6}{U}{U}|Instant|||Delve$Look at the top seven cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order.|
+Ghostly Flicker|The Zeta Set|259|C|{2}{U}|Instant|||Exile two target artifacts, creatures, and/or lands you control, then return those cards to the battlefield under your control.|
+High Tide|The Zeta Set|260|C|{U}|Instant|||Until end of turn, whenever a player taps an Island for mana, that player adds an additional {U}.|
+Hullbreaker Horror|The Zeta Set|261|R|{5}{U}{U}|Creature - Kraken Horror|7|8|Flash$This spell can't be countered.$Whenever you cast a spell, choose up to one --$* Return target spell you don't control to its owner's hand.$* Return target nonland permanent to its owner's hand.|
+Imprisoned in the Moon|The Zeta Set|262|U|{2}{U}|Enchantment - Aura|||Enchant creature, land, or planeswalker$Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other card types and abilities.|
+Laboratory Maniac|The Zeta Set|263|U|{2}{U}|Creature - Human Wizard|2|2|If you would draw a card while your library has no cards in it, you win the game instead.|
+Mental Misstep|The Zeta Set|264|U|{U/P}|Instant|||({U/P} can be paid with either {U} or 2 life.)$Counter target spell with mana value 1.|
+Merchant Scroll|The Zeta Set|265|U|{1}{U}|Sorcery|||Search your library for a blue instant card, reveal that card, put it into your hand, then shuffle.|
+Merfolk of the Pearl Trident|The Zeta Set|266|C|{U}|Creature - Merfolk|1|1||
+Mulldrifter|The Zeta Set|267|C|{4}{U}|Creature - Elemental|2|2|Flying$When this creature enters, draw two cards.$Evoke {2}{U}|
+Narcomoeba|The Zeta Set|268|C|{1}{U}|Creature - Illusion|1|1|Flying$When this card is put into your graveyard from your library, you may put it onto the battlefield.|
+An Offer You Can't Refuse|The Zeta Set|269|C|{U}|Instant|||Counter target noncreature spell. Its controller creates two Treasure tokens.|
+Power Sink|The Zeta Set|270|C|{X}{U}|Instant|||Counter target spell unless its controller pays {X}. If that player doesn't, they tap all lands with mana abilities they control and lose all unspent mana.|
+Quicksilver Elemental|The Zeta Set|271|M|{3}{U}{U}|Creature - Elemental|3|4|{U}: This creature gains all activated abilities of target creature until end of turn.$You may spend blue mana as though it were mana of any color to pay the activation costs of this creature's abilities.|
+Spell Pierce|The Zeta Set|272|C|{U}|Instant|||Counter target noncreature spell unless its controller pays {2}.|
+Thought Scour|The Zeta Set|273|C|{U}|Instant|||Target player mills two cards.$Draw a card.|
+Thrummingbird|The Zeta Set|274|U|{1}{U}|Creature - Phyrexian Bird Horror|1|1|Flying$Whenever this creature deals combat damage to a player, proliferate.|
+Windfall|The Zeta Set|275|U|{2}{U}|Sorcery|||Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.|
+Animate Dead|The Zeta Set|276|U|{1}{B}|Enchantment - Aura|||Enchant creature card in a graveyard$When this Aura enters, if it's on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with this Aura." Return enchanted creature card to the battlefield under your control and attach this Aura to it. When this Aura leaves the battlefield, that creature's controller sacrifices it.$Enchanted creature gets -1/-0.|
+Cauldron Familiar|The Zeta Set|277|C|{B}|Creature - Cat|1|1|When this creature enters, each opponent loses 1 life and you gain 1 life.$Sacrifice a Food: Return this card from your graveyard to the battlefield.|
+Cruel Reality|The Zeta Set|278|U|{5}{B}{B}|Enchantment - Aura Curse|||Enchant player$At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker of their choice. If the player can't, they lose 5 life.|
+Cut Down|The Zeta Set|279|C|{B}|Instant|||Destroy target creature with total power and toughness 5 or less.|
+Dark Ritual|The Zeta Set|280|U|{B}|Instant|||Add {B}{B}{B}.|
+Doomsday|The Zeta Set|281|U|{B}{B}{B}|Sorcery|||Search your library and graveyard for five cards and exile the rest. Put the chosen cards on top of your library in any order. You lose half your life, rounded up.|
+Duress|The Zeta Set|282|C|{B}|Sorcery|||Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card.|
+Feed the Swarm|The Zeta Set|283|C|{1}{B}|Sorcery|||Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's mana value.|
+Go for the Throat|The Zeta Set|284|C|{1}{B}|Instant|||Destroy target nonartifact creature.|
+Gray Merchant of Asphodel|The Zeta Set|285|C|{3}{B}{B}|Creature - Zombie|2|4|When this creature enters, each opponent loses X life, where X is your devotion to black. You gain life equal to the life lost this way.|
+Hypnotic Specter|The Zeta Set|286|U|{1}{B}{B}|Creature - Specter|2|2|Flying$Whenever this creature deals damage to an opponent, that player discards a card at random.|
+Imp's Mischief|The Zeta Set|287|R|{1}{B}|Instant|||Change the target of target spell with a single target. You lose life equal to that spell's mana value.|
+Lord Skitter, Sewer King|The Zeta Set|288|U|{2}{B}|Legendary Creature - Rat Noble|3|3|Whenever another Rat you control enters, exile up to one target card from an opponent's graveyard.$At the beginning of combat on your turn, create a 1/1 black Rat creature token with "This token can't block."|
+Mortuary|The Zeta Set|289|M|{3}{B}|Enchantment|||Whenever a creature is put into your graveyard from the battlefield, put that card on top of your library.|
+Night's Whisper|The Zeta Set|290|C|{1}{B}|Sorcery|||You draw two cards and lose 2 life.|
+Sengir Vampire|The Zeta Set|291|C|{3}{B}{B}|Creature - Vampire|4|4|Flying$Whenever a creature dealt damage by this creature this turn dies, put a +1/+1 counter on this creature.|
+Tragic Slip|The Zeta Set|292|C|{B}|Instant|||Target creature gets -1/-1 until end of turn.$Morbid -- That creature gets -13/-13 until end of turn instead if a creature died this turn.|
+Unearth|The Zeta Set|293|C|{B}|Sorcery|||Return target creature card with mana value 3 or less from your graveyard to the battlefield.$Cycling {2}|
+Vito, Thorn of the Dusk Rose|The Zeta Set|294|R|{2}{B}|Legendary Creature - Vampire Cleric|1|3|Whenever you gain life, target opponent loses that much life.${3}{B}{B}: Creatures you control gain lifelink until end of turn.|
+Yargle, Glutton of Urborg|The Zeta Set|295|U|{4}{B}|Legendary Creature - Frog Spirit|9|3||
+Anger|The Zeta Set|296|U|{3}{R}|Creature - Incarnation|2|2|Haste$As long as this card is in your graveyard and you control a Mountain, creatures you control have haste.|
+Cathartic Reunion|The Zeta Set|297|C|{1}{R}|Sorcery|||As an additional cost to cast this spell, discard two cards.$Draw three cards.|
+Disintegrate|The Zeta Set|298|C|{X}{R}|Sorcery|||Disintegrate deals X damage to any target. If it's a creature, it can't be regenerated this turn, and if it would die this turn, exile it instead.|
+Fireball|The Zeta Set|299|C|{X}{R}|Sorcery|||This spell costs {1} more to cast for each target beyond the first.$Fireball deals X damage divided evenly, rounded down, among any number of targets.|
+Glimpse the Impossible|The Zeta Set|300|U|{2}{R}|Sorcery|||Exile the top three cards of your library. You may play those cards this turn. At the beginning of the next end step, if any of those cards remain exiled, put them into your graveyard, then create a 0/1 colorless Eldrazi Spawn creature token for each card put into your graveyard this way. Those tokens have "Sacrifice this token: Add {C}."|
+Gut Shot|The Zeta Set|301|C|{R/P}|Instant|||({R/P} can be paid with either {R} or 2 life.)$Gut Shot deals 1 damage to any target.|
+Guttersnipe|The Zeta Set|302|C|{2}{R}|Creature - Goblin Shaman|2|2|Whenever you cast an instant or sorcery spell, this creature deals 2 damage to each opponent.|
+Imperial Recruiter|The Zeta Set|303|R|{2}{R}|Creature - Human Advisor|1|1|When this creature enters, search your library for a creature card with power 2 or less, reveal it, put it into your hand, then shuffle.|
+Kazuul, Tyrant of the Cliffs|The Zeta Set|304|U|{3}{R}{R}|Legendary Creature - Ogre Warrior|5|4|Whenever a creature an opponent controls attacks, if you're the defending player, create a 3/3 red Ogre creature token unless that creature's controller pays {3}.|
+Lightning Bolt|The Zeta Set|305|C|{R}|Instant|||Lightning Bolt deals 3 damage to any target.|
+Mana Echoes|The Zeta Set|306|M|{2}{R}{R}|Enchantment|||Whenever a creature enters, you may add an amount of {C} equal to the number of creatures you control that share a creature type with it.|
+Price of Progress|The Zeta Set|307|C|{1}{R}|Instant|||Price of Progress deals damage to each player equal to twice the number of nonbasic lands that player controls.|
+Pyroblast|The Zeta Set|308|U|{R}|Instant|||Choose one --$* Counter target spell if it's blue.$* Destroy target permanent if it's blue.|
+Pyrokinesis|The Zeta Set|309|U|{4}{R}{R}|Instant|||You may exile a red card from your hand rather than pay this spell's mana cost.$Pyrokinesis deals 4 damage divided as you choose among any number of target creatures.|
+Simian Spirit Guide|The Zeta Set|310|C|{2}{R}|Creature - Ape Spirit|2|2|Exile this card from your hand: Add {R}.|
+Vandalblast|The Zeta Set|311|C|{R}|Sorcery|||Destroy target artifact you don't control.$Overload {4}{R}|
+Wheel of Misfortune|The Zeta Set|312|U|{2}{R}|Sorcery|||Each player secretly chooses a number 0 or greater, then all players reveal those numbers simultaneously and determine the highest and lowest numbers revealed this way. Wheel of Misfortune deals damage equal to the highest number to each player who chose that number. Each player who didn't choose the lowest number discards their hand, then draws seven cards.|
+Birds of Paradise|The Zeta Set|313|R|{G}|Creature - Bird|0|1|Flying${T}: Add one mana of any color.|
+Chatterstorm|The Zeta Set|314|C|{1}{G}|Sorcery|||Create a 1/1 green Squirrel creature token.$Storm|
+Colossal Dreadmaw|The Zeta Set|315|C|{4}{G}{G}|Creature - Dinosaur|6|6|Trample|
+Cultivate|The Zeta Set|316|C|{2}{G}|Sorcery|||Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle.|
+Giant Spider|The Zeta Set|317|C|{3}{G}|Creature - Spider|2|4|Reach|
+Gigantosaurus|The Zeta Set|318|C|{G}{G}{G}{G}{G}|Creature - Dinosaur|10|10||
+Grizzly Bears|The Zeta Set|319|C|{1}{G}|Creature - Bear|2|2||
+Hornet Queen|The Zeta Set|320|U|{4}{G}{G}{G}|Creature - Insect|2|2|Flying, deathtouch$When this creature enters, create four 1/1 green Insect creature tokens with flying and deathtouch.|
+Invigorate|The Zeta Set|321|C|{2}{G}|Instant|||If you control a Forest, rather than pay this spell's mana cost, you may have an opponent gain 3 life.$Target creature gets +4/+4 until end of turn.|
+Life from the Loam|The Zeta Set|322|R|{1}{G}|Sorcery|||Return up to three target land cards from your graveyard to your hand.$Dredge 3|
+Llanowar Elves|The Zeta Set|323|C|{G}|Creature - Elf Druid|1|1|{T}: Add {G}.|
+Nature's Claim|The Zeta Set|324|C|{G}|Instant|||Destroy target artifact or enchantment. Its controller gains 4 life.|
+Ruxa, Patient Professor|The Zeta Set|325|U|{2}{G}{G}|Legendary Creature - Bear Druid|4|4|Whenever Ruxa enters or attacks, return target creature card with no abilities from your graveyard to your hand.$Creatures you control with no abilities get +1/+1.$For each creature you control with no abilities, you may have that creature assign its combat damage as though it weren't blocked.|
+Scute Swarm|The Zeta Set|326|R|{2}{G}|Creature - Insect|1|1|Landfall -- Whenever a land you control enters, create a 1/1 green Insect creature token. If you control six or more lands, create a token that's a copy of this creature instead.|
+Scythecat Cub|The Zeta Set|327|M|{1}{G}|Creature - Cat|2|2|Trample$Landfall -- Whenever a land you control enters, put a +1/+1 counter on target creature you control. If this is the second time this ability has resolved this turn, double the number of +1/+1 counters on that creature instead.|
+Wild Growth|The Zeta Set|328|C|{G}|Enchantment - Aura|||Enchant land$Whenever enchanted land is tapped for mana, its controller adds an additional {G}.|
+Wild Nacatl|The Zeta Set|329|C|{G}|Creature - Cat Warrior|1|1|This creature gets +1/+1 as long as you control a Mountain.$This creature gets +1/+1 as long as you control a Plains.|
+Baleful Strix|The Zeta Set|330|C|{U}{B}|Artifact Creature - Bird|1|1|Flying, deathtouch$When this creature enters, draw a card.|
+Dueling Grounds|The Zeta Set|331|R|{1}{G}{W}|Enchantment|||No more than one creature can attack each combat.$No more than one creature can block each combat.|
+Garth One-Eye|The Zeta Set|332|U|{W}{U}{B}{R}{G}|Legendary Creature - Human Wizard|5|5|{T}: Choose a card name that hasn't been chosen from among Disenchant, Braingeyser, Terror, Shivan Dragon, Regrowth, and Black Lotus. Create a copy of the card with the chosen name. You may cast the copy.|
+The Jolly Balloon Man|The Zeta Set|333|U|{1}{R}{W}|Legendary Creature - Human Clown|1|4|Haste${1}, {T}: Create a token that's a copy of another target creature you control, except it's a 1/1 red Balloon creature in addition to its other colors and types and it has flying and haste. Sacrifice it at the beginning of the next end step. Activate only as a sorcery.|
+Obeka, Brute Chronologist|The Zeta Set|334|U|{1}{U}{B}{R}|Legendary Creature - Ogre Wizard|3|4|{T}: The player whose turn it is may end the turn.|
+Raffine, Scheming Seer|The Zeta Set|335|U|{W}{U}{B}|Legendary Creature - Sphinx Demon|1|4|Flying, ward {1}$Whenever you attack, target attacking creature connives X, where X is the number of attacking creatures.|
+Arcane Signet|The Zeta Set|336|C|{2}|Artifact|||{T}: Add one mana of any color in your commander's color identity.|
+Ashnod's Altar|The Zeta Set|337|R|{3}|Artifact|||Sacrifice a creature: Add {C}{C}.|
+Chromatic Lantern|The Zeta Set|338|R|{3}|Artifact|||Lands you control have "{T}: Add one mana of any color."${T}: Add one mana of any color.|
+Chromatic Orrery|The Zeta Set|339|M|{7}|Legendary Artifact|||You may spend mana as though it were mana of any color.${T}: Add {C}{C}{C}{C}{C}.${5}, {T}: Draw a card for each color among permanents you control.|
+Chrome Mox|The Zeta Set|340|M|{0}|Artifact|||Imprint -- When this artifact enters, you may exile a nonartifact, nonland card from your hand.${T}: Add one mana of any of the exiled card's colors.|
+Cloud Key|The Zeta Set|341|U|{3}|Artifact|||As this artifact enters, choose artifact, creature, enchantment, instant, or sorcery.$Spells you cast of the chosen type cost {1} less to cast.|
+Clown Car|The Zeta Set|342|U|{X}|Artifact - Vehicle|1|1|When this Vehicle enters, roll X six-sided dice. For each odd result, create a 1/1 white Clown Robot artifact creature token. For each even result, put a +1/+1 counter on this Vehicle.$Crew 2|
+Copper Tablet|The Zeta Set|343|M|{2}|Artifact|||At the beginning of each player's upkeep, this artifact deals 1 damage to that player.|
+Darksteel Monolith|The Zeta Set|344|R|{8}|Artifact|||Indestructible$Once each turn, you may pay {0} rather than pay the mana cost for a colorless spell you cast from your hand.|
+Eternity Vessel|The Zeta Set|345|R|{6}|Artifact|||This artifact enters with X charge counters on it, where X is your life total.$Landfall -- Whenever a land you control enters, you may have your life total become the number of charge counters on this artifact.|
+Foundry Inspector|The Zeta Set|346|U|{3}|Artifact Creature - Construct|3|2|Artifact spells you cast cost {1} less to cast.|
+Jester's Cap|The Zeta Set|347|U|{4}|Artifact|||{2}, {T}, Sacrifice this artifact: Search target player's library for three cards and exile them. Then that player shuffles.|
+Manifold Key|The Zeta Set|348|U|{1}|Artifact|||{1}, {T}: Untap another target artifact.${3}, {T}: Target creature can't be blocked this turn.|
+Mox Tantalite|The Zeta Set|349|M||Artifact|||Suspend 3--{0}${T}: Add one mana of any color.|
+Mycosynth Golem|The Zeta Set|350|R|{11}|Artifact Creature - Golem|4|5|Affinity for artifacts$Artifact creature spells you cast have affinity for artifacts.|
+Ornithopter|The Zeta Set|351|C|{0}|Artifact Creature - Thopter|0|2|Flying|
+Panoptic Mirror|The Zeta Set|352|M|{5}|Artifact|||Imprint -- {X}, {T}: You may exile an instant or sorcery card with mana value X from your hand.$At the beginning of your upkeep, you may copy a card exiled with this artifact. If you do, you may cast the copy without paying its mana cost.|
+Rogue's Gloves|The Zeta Set|353|U|{2}|Artifact - Equipment|||Whenever equipped creature deals combat damage to a player, you may draw a card.$Equip {2}|
+Sensei's Divining Top|The Zeta Set|354|R|{1}|Artifact|||{1}: Look at the top three cards of your library, then put them back in any order.${T}: Draw a card, then put this artifact on top of its owner's library.|
+Skullclamp|The Zeta Set|355|R|{1}|Artifact - Equipment|||Equipped creature gets +1/-1.$Whenever equipped creature dies, draw two cards.$Equip {1}|
+Sol Ring|The Zeta Set|356|U|{1}|Artifact|||{T}: Add {C}{C}.|
+Soul-Guide Lantern|The Zeta Set|357|C|{1}|Artifact|||When this artifact enters, exile target card from a graveyard.${T}, Sacrifice this artifact: Exile each opponent's graveyard.${1}, {T}, Sacrifice this artifact: Draw a card.|
+Thought Vessel|The Zeta Set|358|C|{2}|Artifact|||You have no maximum hand size.${T}: Add {C}.|
+Ward of Bones|The Zeta Set|359|R|{6}|Artifact|||Each opponent who controls more creatures than you can't cast creature spells. The same is true for artifacts and enchantments.$Each opponent who controls more lands than you can't play lands.|
+Command Tower|The Zeta Set|360|C||Land|||{T}: Add one mana of any color in your commander's color identity.|
+Oboro, Palace in the Clouds|The Zeta Set|361|R||Legendary Land|||{T}: Add {U}.${1}: Return Oboro to its owner's hand.|
+Reliquary Tower|The Zeta Set|362|U||Land|||You have no maximum hand size.${T}: Add {C}.|
+Urborg, Tomb of Yawgmoth|The Zeta Set|363|M||Legendary Land|||Each land is a Swamp in addition to its other land types.|

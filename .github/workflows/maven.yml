@@ -19,13 +19,30 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - java: '17'
+            distribution: 'temurin'
+            package: 'jdk' # good
+          #- java: '8'
+          #  distribution: 'zulu'
+          #  package: 'jdk+fx' # good, baseline for app's release
+          #- java: '21'
+          #  distribution: 'temurin'
+          #  package: 'jdk' # good
+          #- java: '26'
+          #  distribution: 'temurin'
+          #  package: 'jdk' # bad, javac 26 no longer accepts release 8
     steps:
     - uses: actions/checkout@v6
-    - name: Setup JDK 17
+    - name: Setup JDK ${{ matrix.java }}
       uses: actions/setup-java@v5
       with:
-        java-version: '17'
-        distribution: 'temurin'
+        java-version: ${{ matrix.java }}
+        distribution: ${{ matrix.distribution }}
+        java-package: ${{ matrix.package }}
         cache: maven
     - name: Build and test
       run: mvn test -B -Dxmage.dataCollectors.printGameLogs=false -Dlog4j.configuration=file:${GITHUB_WORKSPACE}/.travis/log4j.properties

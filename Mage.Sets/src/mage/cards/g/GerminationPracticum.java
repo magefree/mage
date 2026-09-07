@@ -23,7 +23,7 @@ public final class GerminationPracticum extends CardImpl {
 
         // Put two +1/+1 counters on each creature you control.
         this.getSpellAbility().addEffect(new AddCountersAllEffect(
-                CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE
+                CounterType.P1P1.createInstance(2), StaticFilters.FILTER_CONTROLLED_CREATURE
         ));
 
         // Paradigm

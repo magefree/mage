@@ -35,7 +35,7 @@ public final class ClayChampion extends CardImpl {
 
         // Clay Champion enters the battlefield with three +1/+1 counters on it for each {G}{G} spent to cast it.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(), xValue, true),
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(), xValue),
                 null, null, "with three +1/+1 counters on it for each {G}{G} spent to cast it"
         ));
 

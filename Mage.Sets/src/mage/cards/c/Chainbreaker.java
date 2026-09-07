@@ -30,8 +30,7 @@ public final class Chainbreaker extends CardImpl {
 
         // Chainbreaker enters the battlefield with two -1/-1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.M1M1.createInstance(2), false
-        ), "with two -1/-1 counters on it"));
+                CounterType.M1M1.createInstance(2)), "with two -1/-1 counters on it"));
 
         // {3}, {tap}: Remove a -1/-1 counter from target creature.
         Ability ability = new SimpleActivatedAbility(

@@ -24,7 +24,11 @@ public class SourceDealsNoncombatDamageToOpponentTriggeredAbility extends Trigge
     }
 
     public SourceDealsNoncombatDamageToOpponentTriggeredAbility(Effect effect, boolean optional, SetTargetPointer setTargetPointer) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        this(Zone.BATTLEFIELD, effect, optional, setTargetPointer);
+    }
+
+    public SourceDealsNoncombatDamageToOpponentTriggeredAbility(Zone zone, Effect effect, boolean optional, SetTargetPointer setTargetPointer) {
+        super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
         setTriggerPhrase("Whenever a source you control deals noncombat damage to an opponent, ");
     }

@@ -139,8 +139,9 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         assertPermanentCount(playerA, "Goblin Token", goblinCount);
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expected = IllegalStateException.class)
     public void test_KrarksOtherThumb_1copy_MustFailOnWrongChoiceSetup() {
+        // Caused by: java.lang.IllegalStateException: Error in unit tests: Choice key [8] not found in [9, 10]
         runKrarksOtherThumbTest(8, 1, 1, 9, 10);
     }
 

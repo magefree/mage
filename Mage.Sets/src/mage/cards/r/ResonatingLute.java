@@ -15,13 +15,24 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
+import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
+import mage.filter.predicate.Predicates;
 
 /**
  *
  * @author muz
  */
 public final class ResonatingLute extends CardImpl {
+
+    private static final FilterSpell filter = new FilterSpell("instant and sorcery spells");
+
+    static {
+        filter.add(Predicates.or(
+            CardType.INSTANT.getPredicate(),
+            CardType.SORCERY.getPredicate()
+        ));
+    }
 
     public ResonatingLute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{U}{R}");
@@ -30,7 +41,7 @@ public final class ResonatingLute extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
             new ConditionalAnyColorManaAbility(
                     new TapSourceCost(), 2,
-                    new ConditionalSpellManaBuilder(StaticFilters.FILTER_SPELLS_INSTANT_OR_SORCERY), true
+                    new ConditionalSpellManaBuilder(filter), true
             ),
             Duration.WhileOnBattlefield,
             StaticFilters.FILTER_LANDS

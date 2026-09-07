@@ -24,7 +24,8 @@ import mage.constants.SetTargetPointer;
  */
 public final class MsMarvelElasticAlly extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+    private static final FilterControlledCreaturePermanent filter =
+        new FilterControlledCreaturePermanent("creature you control with power greater than its base power");
 
     static {
         filter.add(PowerGreaterThanBasePowerPredicate.instance);

@@ -59,7 +59,7 @@ class UndercoverOperativeApplier extends CopyApplier {
         if (!isCopyOfCopy(source, blueprint, copyToObjectId)
                 && ((Permanent) blueprint).isControlledBy(source.getControllerId())) {
             blueprint.getAbilities().add(new EntersBattlefieldAbility(
-                    new AddCountersSourceEffect(CounterType.SHIELD.createInstance(), false)
+                    new AddCountersSourceEffect(CounterType.SHIELD.createInstance())
                             .setText("with a shield counter on it")
             ));
         }

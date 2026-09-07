@@ -32,8 +32,7 @@ public final class ZombieMob extends CardImpl {
 
         // Zombie Mob enters the battlefield with a +1/+1 counter on it for each creature card in your graveyard.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(0), new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE), false
-        ), "with a +1/+1 counter on it for each creature card in your graveyard"));
+                CounterType.P1P1.createInstance(0), new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE)), "with a +1/+1 counter on it for each creature card in your graveyard"));
 
         // When Zombie Mob enters the battlefield, exile all creature cards from your graveyard.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ZombieMobExileEffect()));

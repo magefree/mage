@@ -23,7 +23,7 @@ public final class DisruptorPistol extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {4}, {T}, Sacrifice this artifact: It deals 5 damage to target creature.
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(5), new ManaCostsImpl<>("{4}"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(5, "This artifact"), new ManaCostsImpl<>("{4}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

@@ -47,8 +47,7 @@ public final class CallousSellSword extends AdventureCard {
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(
                         CounterType.P1P1.createInstance(0),
-                        CreaturesYouControlDiedCount.instance, true
-                ).setText("with a +1/+1 counter on it for each creature that died under your control this turn.")
+                        CreaturesYouControlDiedCount.instance).setText("with a +1/+1 counter on it for each creature that died under your control this turn.")
         ).addHint(hint));
 
         // Burn Together

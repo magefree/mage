@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.costs.common.ExileSourceFromGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
@@ -37,10 +38,13 @@ public final class SymbioteSpiderMan extends CardImpl {
 
         // Find New Host -- {2}{U/B}, Exile this card from your graveyard: Put a +1/+1 counter on target creature you control. It gains this card's other abilities. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{2}{U/B}")
+            Zone.GRAVEYARD,
+            new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
+            new ManaCostsImpl<>("{2}{U/B}")
         );
+        ability.addCost(new ExileSourceFromGraveCost());
         ability.addEffect(new GainAbilityTargetEffect(makeAbility(), Duration.Custom)
-                .setText("It gains this card's other abilities"));
+            .setText("It gains this card's other abilities"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability.withFlavorWord("Find New Host"));
     }

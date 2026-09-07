@@ -58,6 +58,16 @@ public class LoadTest {
     private static String TEST_AI_CUSTOM_DECK_PATH_1 = ""; // custom deck file instead random for player 1 (empty for random)
     private static String TEST_AI_CUSTOM_DECK_PATH_2 = ""; // custom deck file instead random for player 2 (empty for random)
 
+    private static int maxGamesAmount = 10;
+    static {
+        // load tests settings:
+        // - max games amount, default 10: -Dxmage.loadTests.maxGamesAmount=10
+        if (System.getProperty("xmage.loadTests.maxGamesAmount") != null) {
+            maxGamesAmount = Integer.parseInt(System.getProperty("xmage.loadTests.maxGamesAmount"));
+        }
+    }
+    
+
     @BeforeClass
     public static void initDatabase() {
         // recreate missing cards db
@@ -383,7 +393,7 @@ public class LoadTest {
 
         int singleGameSID = 0; // set sid for same deck games, set 0 for random decks
 
-        int runTotalGames = 10;
+        int runTotalGames = LoadTest.maxGamesAmount;
         int runMaxParallelGames = 5; // use 1 to run one by one (warning, it's limited by COMPUTER_MAX_THREADS_FOR_SIMULATIONS)
 
         ExecutorService executerService;

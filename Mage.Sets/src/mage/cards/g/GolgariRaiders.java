@@ -38,8 +38,7 @@ public final class GolgariRaiders extends CardImpl {
                         CounterType.P1P1.createInstance(0),
                         new CardsInControllerGraveyardCount(
                                 StaticFilters.FILTER_CARD_CREATURE
-                        ), true
-                ), null, AbilityWord.UNDERGROWTH.formatWord() + "{this} enters " +
+                        )), null, AbilityWord.UNDERGROWTH.formatWord() + "{this} enters " +
                 "with a +1/+1 counter on it for each creature card in your graveyard.", null
         );
         this.addAbility(ability);

@@ -34,8 +34,7 @@ public final class SautekhImmortal extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(
                         CounterType.P1P1.createInstance(0),
-                        CreaturesDiedThisTurnCount.instance, true
-                ).setText("with a +1/+1 counter on it for each creature that died this turn.")
+                        CreaturesDiedThisTurnCount.instance).setText("with a +1/+1 counter on it for each creature that died this turn.")
         ).withFlavorWord("Elite Troops").addHint(CreaturesDiedThisTurnHint.instance));
     }
 

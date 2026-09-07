@@ -23,7 +23,7 @@ public final class Daydream extends CardImpl {
         // Exile target creature you control, then return that card to the battlefield under its owner's control with a +1/+1 counter on it.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addEffect(
-            new ExileThenReturnTargetEffect(false, false).withEnterWithCounters(CounterType.P1P1.createInstance())
+            new ExileThenReturnTargetEffect(false, true).withEnterWithCounters(CounterType.P1P1.createInstance())
         );
 
         // Flashback {2}{W}

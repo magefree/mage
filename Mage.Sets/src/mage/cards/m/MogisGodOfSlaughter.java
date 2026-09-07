@@ -3,7 +3,7 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DoUnlessTargetPlayerOrTargetsControllerPaysEffect;
@@ -16,6 +16,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -41,7 +42,7 @@ public final class MogisGodOfSlaughter extends CardImpl {
 
         // At the beginning of each opponent's upkeep, Mogis deals 2 damage to that player unless they sacrifice a creature.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(
-                new DamageTargetEffect(2).withTargetDescription("that player"),new ManaCostsImpl<>("{2}")).withTheyText(),
+                new DamageTargetEffect(2).withTargetDescription("that player"),new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_A_CREATURE)).withTheyText(),
                 false
         );
         this.addAbility(ability);
