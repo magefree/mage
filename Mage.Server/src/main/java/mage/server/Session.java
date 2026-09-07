@@ -432,9 +432,9 @@ public class Session {
         boolean lockSet = false; // TODO: research about locks, why it here? 2023-12-06
 
         try {
+            call.setMessageId(messageId.incrementAndGet());
             if (valid && callBackLock.tryLock(50, TimeUnit.MILLISECONDS)) {
                 lastCallbackInfo = call.getInfo();
-                call.setMessageId(messageId.incrementAndGet());
                 lockSet = true;
                 Callback callback = new Callback(call);
                 boolean sendAsync = SUPER_DUPER_BUGGY_AND_FASTEST_ASYNC_CONNECTION
