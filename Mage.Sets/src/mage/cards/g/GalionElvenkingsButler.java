@@ -71,7 +71,7 @@ class GalionElvenkingsButlerBoostEffect extends OneShotEffect {
                     permanent.getPower().getValue(),
                     permanent.getToughness().getValue(),
                     Duration.EndOfTurn)
-                    .setTargetPointer(this.getTargetPointer()),source);
+                    .setTargetPointer(this.getTargetPointer().copy()), source);
             return true;
         }
         return false;
