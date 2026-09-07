@@ -11,7 +11,7 @@ public enum ClientCallbackType {
     TABLE_CHANGE, // all important game events + game update
     MESSAGE(true, false), // show message/log without game update
     DIALOG, // all dialogs + game update
-    CLIENT_SIDE_EVENT(true, true); // without game uodate
+    CLIENT_SIDE_EVENT(true, true); // without game update
 
     final boolean canComeInAnyOrder;
     final boolean mustIgnoreOnOutdated; // if event come in any order and contain game update then it must be ignored on outdate
