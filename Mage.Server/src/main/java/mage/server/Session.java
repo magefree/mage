@@ -59,7 +59,11 @@ public class Session {
     //     TODO: need research, possible problem: if something bad with server connection then it can generates
     //      too many requests to a client and can cause threads overflow/limit (example: watch AI only games?);
     //      visualvm can help with threads monitor
-    private static final boolean SUPER_DUPER_BUGGY_AND_FASTEST_ASYNC_CONNECTION = false; // TODO: enable after full research
+    //
+    // TODO: enable after full research
+    // can be enabled by -Dxmage.network.async.messages=true, disabled by default
+    private static final String ASYNC_MESSAGES_PROP = "xmage.network.async.messages";
+    private static final boolean ASYNC_MESSAGES = Boolean.getBoolean(ASYNC_MESSAGES_PROP); // get it from system.property
 
     private final ManagerFactory managerFactory;
     private final String sessionId;
@@ -472,6 +476,14 @@ public class Session {
                 callBackLock.unlock();
             }
         }
+    }
+
+    public static boolean isAsyncMessagesEnabled() {
+        return ASYNC_MESSAGES;
+    }
+
+    public static String getAsyncMessagesProperty() {
+        return ASYNC_MESSAGES_PROP;
     }
 
     public UUID getUserId() {
