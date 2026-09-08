@@ -27,6 +27,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Archmage Emeritus", 150, Rarity.MYTHIC, mage.cards.a.ArchmageEmeritus.class));
         cards.add(new SetCardInfo("Arid Mesa", 109, Rarity.MYTHIC, mage.cards.a.AridMesa.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arid Mesa", 114, Rarity.MYTHIC, mage.cards.a.AridMesa.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Austere Command", 160, Rarity.MYTHIC, mage.cards.a.AustereCommand.class));
         cards.add(new SetCardInfo("Bitterblossom", 133, Rarity.MYTHIC, mage.cards.b.Bitterblossom.class));
         cards.add(new SetCardInfo("Bloom Tender", 79, Rarity.MYTHIC, mage.cards.b.BloomTender.class));
         cards.add(new SetCardInfo("Bone Miser", 87, Rarity.MYTHIC, mage.cards.b.BoneMiser.class, NON_FULL_USE_VARIOUS));
@@ -45,6 +46,8 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Codie, Vociferous Codex", 157, Rarity.MYTHIC, mage.cards.c.CodieVociferousCodex.class));
         cards.add(new SetCardInfo("Collected Company", 72, Rarity.MYTHIC, mage.cards.c.CollectedCompany.class));
         cards.add(new SetCardInfo("Condemn", 74, Rarity.MYTHIC, mage.cards.c.Condemn.class));
+        cards.add(new SetCardInfo("Consider", 164, Rarity.MYTHIC, mage.cards.c.Consider.class));
+        cards.add(new SetCardInfo("Consign to Memory", 162, Rarity.MYTHIC, mage.cards.c.ConsignToMemory.class));
         cards.add(new SetCardInfo("Crashing Footfalls", 25, Rarity.MYTHIC, mage.cards.c.CrashingFootfalls.class));
         cards.add(new SetCardInfo("Damnation", 68, Rarity.MYTHIC, mage.cards.d.Damnation.class));
         cards.add(new SetCardInfo("Dargo, the Shipwrecker", 7, Rarity.UNCOMMON, mage.cards.d.DargoTheShipwrecker.class));
@@ -65,10 +68,12 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Endurance", 53, Rarity.MYTHIC, mage.cards.e.Endurance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Expressive Iteration", 43, Rarity.MYTHIC, mage.cards.e.ExpressiveIteration.class));
         cards.add(new SetCardInfo("Expropriate", 66, Rarity.MYTHIC, mage.cards.e.Expropriate.class));
+        cards.add(new SetCardInfo("Eye of Ugin", 159, Rarity.MYTHIC, mage.cards.e.EyeOfUgin.class));
         cards.add(new SetCardInfo("Fabricate", 20, Rarity.MYTHIC, mage.cards.f.Fabricate.class));
         cards.add(new SetCardInfo("Faerie Macabre", 134, Rarity.MYTHIC, mage.cards.f.FaerieMacabre.class));
         cards.add(new SetCardInfo("Field of the Dead", 28, Rarity.MYTHIC, mage.cards.f.FieldOfTheDead.class));
         cards.add(new SetCardInfo("Fiend Artisan", 83, Rarity.MYTHIC, mage.cards.f.FiendArtisan.class));
+        cards.add(new SetCardInfo("Flesh Duplicate", 161, Rarity.MYTHIC, mage.cards.f.FleshDuplicate.class));
         cards.add(new SetCardInfo("Frogmite", 61, Rarity.MYTHIC, mage.cards.f.Frogmite.class));
         cards.add(new SetCardInfo("Fury", 47, Rarity.MYTHIC, mage.cards.f.Fury.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fury", 52, Rarity.MYTHIC, mage.cards.f.Fury.class, NON_FULL_USE_VARIOUS));
@@ -117,6 +122,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Marsh Flats", 110, Rarity.MYTHIC, mage.cards.m.MarshFlats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Marsh Flats", 115, Rarity.MYTHIC, mage.cards.m.MarshFlats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mephidross Vampire", 4, Rarity.RARE, mage.cards.m.MephidrossVampire.class));
+        cards.add(new SetCardInfo("Mind Twist", 166, Rarity.MYTHIC, mage.cards.m.MindTwist.class));
         cards.add(new SetCardInfo("Mirri, Weatherlight Duelist", 15, Rarity.MYTHIC, mage.cards.m.MirriWeatherlightDuelist.class));
         cards.add(new SetCardInfo("Mistbind Clique", 131, Rarity.MYTHIC, mage.cards.m.MistbindClique.class));
         cards.add(new SetCardInfo("Misty Rainforest", 111, Rarity.MYTHIC, mage.cards.m.MistyRainforest.class, NON_FULL_USE_VARIOUS));
@@ -124,6 +130,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Morbid Opportunist", 32, Rarity.MYTHIC, mage.cards.m.MorbidOpportunist.class));
         cards.add(new SetCardInfo("Murmuring Mystic", 151, Rarity.MYTHIC, mage.cards.m.MurmuringMystic.class));
         cards.add(new SetCardInfo("Mystic Snake", 35, Rarity.MYTHIC, mage.cards.m.MysticSnake.class));
+        cards.add(new SetCardInfo("Necrodominance", 165, Rarity.MYTHIC, mage.cards.n.Necrodominance.class));
         cards.add(new SetCardInfo("Nexus of Fate", 122, Rarity.MYTHIC, mage.cards.n.NexusOfFate.class, FULL_ART));
         cards.add(new SetCardInfo("Notion Thief", 36, Rarity.MYTHIC, mage.cards.n.NotionThief.class));
         cards.add(new SetCardInfo("Noxious Revival", 73, Rarity.MYTHIC, mage.cards.n.NoxiousRevival.class));
@@ -144,6 +151,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Regal Force", 141, Rarity.MYTHIC, mage.cards.r.RegalForce.class));
         cards.add(new SetCardInfo("Relentless Rats", 57, Rarity.MYTHIC, mage.cards.r.RelentlessRats.class));
         cards.add(new SetCardInfo("Robe of Stars", 121, Rarity.MYTHIC, mage.cards.r.RobeOfStars.class, FULL_ART));
+        cards.add(new SetCardInfo("Root Maze", 168, Rarity.MYTHIC, mage.cards.r.RootMaze.class));
         cards.add(new SetCardInfo("Ruinous Ultimatum", 108, Rarity.MYTHIC, mage.cards.r.RuinousUltimatum.class));
         cards.add(new SetCardInfo("Sacrifice", 69, Rarity.MYTHIC, mage.cards.s.Sacrifice.class));
         cards.add(new SetCardInfo("Scalding Tarn", 112, Rarity.MYTHIC, mage.cards.s.ScaldingTarn.class, NON_FULL_USE_VARIOUS));
@@ -159,8 +167,10 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Solitude", 49, Rarity.MYTHIC, mage.cards.s.Solitude.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soul Warden", 65, Rarity.MYTHIC, mage.cards.s.SoulWarden.class));
         cards.add(new SetCardInfo("Sphinx's Tutelage", 75, Rarity.MYTHIC, mage.cards.s.SphinxsTutelage.class));
+        cards.add(new SetCardInfo("Splinter Twin", 167, Rarity.MYTHIC, mage.cards.s.SplinterTwin.class));
         cards.add(new SetCardInfo("Star Compass", 18, Rarity.UNCOMMON, mage.cards.s.StarCompass.class));
         cards.add(new SetCardInfo("Stoneforge Mystic", 29, Rarity.MYTHIC, mage.cards.s.StoneforgeMystic.class));
+        cards.add(new SetCardInfo("Sublime Epiphany", 163, Rarity.MYTHIC, mage.cards.s.SublimeEpiphany.class));
         cards.add(new SetCardInfo("Subtlety", 45, Rarity.MYTHIC, mage.cards.s.Subtlety.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Subtlety", 50, Rarity.MYTHIC, mage.cards.s.Subtlety.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sword of Fire and Ice", 62, Rarity.MYTHIC, mage.cards.s.SwordOfFireAndIce.class));
