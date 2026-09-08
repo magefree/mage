@@ -44,6 +44,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Craterclaw Colossus", 446, Rarity.MYTHIC, mage.cards.c.CraterclawColossus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Craterclaw Colossus", 455, Rarity.MYTHIC, mage.cards.c.CraterclawColossus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Craterclaw Colossus", 78, Rarity.MYTHIC, mage.cards.c.CraterclawColossus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Deserted Beach", 176, Rarity.RARE, mage.cards.d.DesertedBeach.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Deserted Beach", 397, Rarity.RARE, mage.cards.d.DesertedBeach.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 394, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 395, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 396, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
@@ -52,6 +54,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Garruk, Veiled Butcher", 229, Rarity.MYTHIC, mage.cards.g.GarrukVeiledButcher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Garruk, Veiled Butcher", 303, Rarity.MYTHIC, mage.cards.g.GarrukVeiledButcher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Generous Revival", 8, Rarity.UNCOMMON, mage.cards.g.GenerousRevival.class));
+        cards.add(new SetCardInfo("Haunted Ridge", 180, Rarity.RARE, mage.cards.h.HauntedRidge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Haunted Ridge", 398, Rarity.RARE, mage.cards.h.HauntedRidge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Icy Reception", 30, Rarity.COMMON, mage.cards.i.IcyReception.class));
         cards.add(new SetCardInfo("Island", 385, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 386, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
@@ -64,6 +68,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 391, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 392, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 393, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Overgrown Farmland", 185, Rarity.RARE, mage.cards.o.OvergrownFarmland.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Overgrown Farmland", 399, Rarity.RARE, mage.cards.o.OvergrownFarmland.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Paradox Shaper", 143, Rarity.UNCOMMON, mage.cards.p.ParadoxShaper.class));
         cards.add(new SetCardInfo("Perfected Theory", 34, Rarity.UNCOMMON, mage.cards.p.PerfectedTheory.class));
         cards.add(new SetCardInfo("Plains", 382, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
@@ -71,6 +77,10 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 384, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Prudent Fateseer", 146, Rarity.UNCOMMON, mage.cards.p.PrudentFateseer.class));
         cards.add(new SetCardInfo("Restore with Empathy", 112, Rarity.UNCOMMON, mage.cards.r.RestoreWithEmpathy.class));
+        cards.add(new SetCardInfo("Rockfall Vale", 186, Rarity.RARE, mage.cards.r.RockfallVale.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rockfall Vale", 400, Rarity.RARE, mage.cards.r.RockfallVale.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shipwreck Marsh", 189, Rarity.RARE, mage.cards.s.ShipwreckMarsh.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shipwreck Marsh", 401, Rarity.RARE, mage.cards.s.ShipwreckMarsh.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Solitary Cell", 149, Rarity.RARE, mage.cards.s.SolitaryCell.class));
         cards.add(new SetCardInfo("Stingcaster Mage", 329, Rarity.MYTHIC, mage.cards.s.StingcasterMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stingcaster Mage", 447, Rarity.MYTHIC, mage.cards.s.StingcasterMage.class, NON_FULL_USE_VARIOUS));
