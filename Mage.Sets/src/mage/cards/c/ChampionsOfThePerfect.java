@@ -29,7 +29,7 @@ public final class ChampionsOfThePerfect extends CardImpl {
         this.toughness = new MageInt(6);
 
         // As an additional cost to cast this spell, behold an Elf and exile it.
-        this.getSpellAbility().addCost(new BeholdAndExileCost(SubType.ELF));
+        this.getSpellAbility().addCost(new BeholdAndExileCost(SubType.ELF).setAdditional(true));
 
         // Whenever you cast a creature spell, draw a card.
         this.addAbility(new SpellCastControllerTriggeredAbility(

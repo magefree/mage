@@ -552,6 +552,18 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     @Override
+    public boolean getAdditional() {
+        // no-op, mana costs are always paid first
+        return false;
+    }
+
+    @Override
+    public ManaCostsImpl setAdditional(boolean additional) {
+        // no-op, mana costs are always paid first
+        return this;
+    }
+
+    @Override
     public ManaOptions getOptions() {
         return getOptions(true);
     }

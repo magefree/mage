@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.game.Game;
 import mage.target.Targets;
 
-import java.util.Optional;
 import java.util.UUID;
 
 public class CompositeCost implements Cost {
@@ -12,6 +11,7 @@ public class CompositeCost implements Cost {
     private final Cost firstCost;
     private final Cost secondCost;
     private String description;
+    private boolean additional;
 
     public CompositeCost(Cost firstCost, Cost secondCost, String description) {
         this.firstCost = firstCost;
@@ -23,6 +23,7 @@ public class CompositeCost implements Cost {
         this.firstCost = cost.firstCost.copy();
         this.secondCost = cost.secondCost.copy();
         this.description = cost.description;
+        this.additional = cost.additional;
     }
 
     @Override
@@ -39,6 +40,17 @@ public class CompositeCost implements Cost {
     @Override
     public String getText() {
         return description;
+    }
+
+    @Override
+    public boolean getAdditional() {
+        return this.additional;
+    }
+
+    @Override
+    public CompositeCost setAdditional(boolean additional) {
+        this.additional = additional;
+        return this;
     }
 
     @Override
