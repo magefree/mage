@@ -1075,4 +1075,44 @@ public class RoomCardTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, sakashimaTheImpostor, 0);
         assertGraveyardCount(playerA, sakashimaTheImpostor, 1);
     }
+
+    /**
+     * Verify that room half triggered abilities are not duplicated in the
+     * triggers map by dormant init-time registrations.  Before the fix in
+     * {@code RoomCardHalfImpl.getInitAbilities()}, each triggered ability
+     * appeared twice — once keyed to the half card (from
+     * {@code GameState.addCard}) and once keyed to the permanent (from
+     * {@code addRoomCharacteristics}).  The half-card entries are dormant
+     * but pollute the map.
+     */
+    @Test
+    public void testNoDuplicateTriggerRegistrations() {
+        skipInitShuffling();
+        addCard(Zone.HAND, playerA, bottomlessPoolLockerRoom);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bottomlessPool);
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
+
+        runCode("verify no duplicate triggers", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            // After the room enters and the left door unlocks, check that
+            // the right (locked) half's triggered ability is registered at
+            // most once in the triggers map.  Pre-fix, each half ability got
+            // two entries — one init-time (keyed to the half card) and one
+            // runtime (keyed to the permanent).  Post-fix, getInitAbilities()
+            // returns empty so only the runtime entry exists.
+            String rightHalfRule = "Whenever one or more creatures you control"
+                    + " deal combat damage to a player, draw a card.";
+            long count = game.getState().getTriggers().values().stream()
+                    .filter(t -> rightHalfRule.equals(t.getRule()))
+                    .count();
+
+            assertEquals(0, count,
+                    "Right-half trigger must have no dormant registrations"
+                            + " (init-time duplicates from getInitAbilities())");
+        });
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+    }
 }
