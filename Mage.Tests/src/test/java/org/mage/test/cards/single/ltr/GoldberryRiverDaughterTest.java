@@ -9,8 +9,8 @@ import mage.counters.CounterType;
 
 public class GoldberryRiverDaughterTest extends CardTestPlayerBase {
     static final String goldberry = "Goldberry, River-Daughter";
-    static final String ability1 = "{T}: Move a counter of each kind not on {this} from another target permanent you control onto Goldberry.";
-    static final String ability2 = "{U}, {T}: Move one or more counters from Goldberry onto another target permanent you control. If you do, draw a card.";
+    static final String ability1 = "{T}: Move a counter of each kind not on {this} from another target permanent you control onto {this}.";
+    static final String ability2 = "{U}, {T}: Move one or more counters from {this} onto another target permanent you control. If you do, draw a card.";
 
     @Test
     // Author: alexander-novo
