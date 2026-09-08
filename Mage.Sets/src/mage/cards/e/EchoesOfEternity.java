@@ -1,20 +1,16 @@
 package mage.cards.e;
 
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CopyTargetStackObjectEffect;
+import mage.abilities.effects.common.replacement.AdditionalTriggerObjectReplacementEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterSpell;
+import mage.filter.common.FilterSpellOrPermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -29,13 +25,23 @@ public final class EchoesOfEternity extends CardImpl {
         filter.add(ColorlessPredicate.instance);
     }
 
+    private static final FilterSpellOrPermanent filter2 = new FilterSpellOrPermanent("a colorless spell you control or another colorless permanent you control");
+
+    static {
+        filter2.getSpellFilter().add(TargetController.YOU.getControllerPredicate());
+        filter2.getSpellFilter().add(ColorlessPredicate.instance);
+        filter2.getPermanentFilter().add(TargetController.YOU.getControllerPredicate());
+        filter2.getPermanentFilter().add(ColorlessPredicate.instance);
+        filter2.getPermanentFilter().add(AnotherPredicate.instance);
+    }
+
     public EchoesOfEternity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.ENCHANTMENT}, "{3}{C}{C}{C}");
 
         this.subtype.add(SubType.ELDRAZI);
 
         // If a triggered ability of a colorless spell you control or another colorless permanent you control triggers, that ability triggers an additional time.
-        this.addAbility(new SimpleStaticAbility(new EchoesOfEternityEffect()));
+        this.addAbility(new SimpleStaticAbility(new AdditionalTriggerObjectReplacementEffect(filter2)));
 
         // Whenever you cast a colorless spell, copy it. You may choose new targets for the copy.
         this.addAbility(new SpellCastControllerTriggeredAbility(new CopyTargetStackObjectEffect(
@@ -50,48 +56,5 @@ public final class EchoesOfEternity extends CardImpl {
     @Override
     public EchoesOfEternity copy() {
         return new EchoesOfEternity(this);
-    }
-}
-
-class EchoesOfEternityEffect extends ReplacementEffectImpl {
-
-    EchoesOfEternityEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "if a triggered ability of a colorless spell you control or another " +
-                "colorless permanent you control triggers, that ability triggers an additional time";
-    }
-
-    private EchoesOfEternityEffect(final EchoesOfEternityEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public EchoesOfEternityEffect copy() {
-        return new EchoesOfEternityEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.NUMBER_OF_TRIGGERS;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!source.isControlledBy(event.getPlayerId())) {
-            return false;
-        }
-        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (permanent != null && permanent.getColor(game).isColorless()
-                && !permanent.getId().equals(source.getSourceId())) {
-            return true;
-        }
-        Spell spell = game.getSpell(event.getSourceId());
-        return spell != null && spell.getColor(game).isColorless();
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(CardUtil.overflowInc(event.getAmount(), 1));
-        return false;
     }
 }

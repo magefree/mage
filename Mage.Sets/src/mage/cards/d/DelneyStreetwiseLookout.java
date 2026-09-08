@@ -1,18 +1,14 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesAllEffect;
+import mage.abilities.effects.common.replacement.AdditionalTriggerObjectReplacementEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 
 import java.util.UUID;
 
@@ -44,7 +40,7 @@ public final class DelneyStreetwiseLookout extends CardImpl {
         )));
 
         // If an ability of a creature you control with power 2 or less triggers, that ability triggers an additional time.
-        this.addAbility(new SimpleStaticAbility(new DelneyStreetwiseLookoutEffect()));
+        this.addAbility(new SimpleStaticAbility(new AdditionalTriggerObjectReplacementEffect(filterSmall)));
     }
 
     private DelneyStreetwiseLookout(final DelneyStreetwiseLookout card) {
@@ -54,42 +50,5 @@ public final class DelneyStreetwiseLookout extends CardImpl {
     @Override
     public DelneyStreetwiseLookout copy() {
         return new DelneyStreetwiseLookout(this);
-    }
-}
-
-class DelneyStreetwiseLookoutEffect extends ReplacementEffectImpl {
-
-    DelneyStreetwiseLookoutEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "if an ability of a creature you control with power 2 or less triggers, that ability triggers an additional time";
-    }
-
-    private DelneyStreetwiseLookoutEffect(final DelneyStreetwiseLookoutEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DelneyStreetwiseLookoutEffect copy() {
-        return new DelneyStreetwiseLookoutEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.NUMBER_OF_TRIGGERS;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        return permanent != null
-                && permanent.isCreature(game)
-                && permanent.isControlledBy(source.getControllerId())
-                && permanent.getPower().getValue() <= 2;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() + 1);
-        return false;
     }
 }

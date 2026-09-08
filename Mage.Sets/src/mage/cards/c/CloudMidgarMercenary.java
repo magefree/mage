@@ -1,22 +1,19 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.condition.common.EquippedSourceCondition;
+import mage.abilities.effects.common.replacement.AdditionalTriggerObjectReplacementEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.permanent.EquippedPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.NumberOfTriggersEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.FilterPermanent;
+import mage.filter.FilterPermanentThisOrAnother;
+import mage.filter.predicate.permanent.AttachedToSourcePredicate;
 import mage.target.common.TargetCardInLibrary;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -26,10 +23,16 @@ import java.util.UUID;
 public final class CloudMidgarMercenary extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an Equipment card");
-
     static {
         filter.add(SubType.EQUIPMENT.getPredicate());
     }
+
+    private static final FilterPermanent subfilter = new FilterPermanent(SubType.EQUIPMENT, "an equipment attached to it");
+    static {
+        subfilter.add(AttachedToSourcePredicate.instance);
+    }
+
+    private static final FilterPermanentThisOrAnother filter2 = new FilterPermanentThisOrAnother(subfilter, false, "{this} or an equipment attached to it");
 
     public CloudMidgarMercenary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W}");
@@ -47,7 +50,7 @@ public final class CloudMidgarMercenary extends CardImpl {
         ));
 
         // As long as Cloud is equipped, if an ability of Cloud or an Equipment attached to it triggers, that ability triggers an additional time.
-        this.addAbility(new SimpleStaticAbility(new CloudMidgarMercenaryEffect()));
+        this.addAbility(new SimpleStaticAbility(new AdditionalTriggerObjectReplacementEffect(filter2, EquippedSourceCondition.instance)).addHint(EquippedSourceCondition.getHint()));
     }
 
     private CloudMidgarMercenary(final CloudMidgarMercenary card) {
@@ -57,52 +60,5 @@ public final class CloudMidgarMercenary extends CardImpl {
     @Override
     public CloudMidgarMercenary copy() {
         return new CloudMidgarMercenary(this);
-    }
-}
-
-class CloudMidgarMercenaryEffect extends ReplacementEffectImpl {
-
-    CloudMidgarMercenaryEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "as long as {this} is equipped, if an ability of {this} " +
-                "or an Equipment attached to it triggers, that ability triggers an additional time";
-    }
-
-    private CloudMidgarMercenaryEffect(final CloudMidgarMercenaryEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CloudMidgarMercenaryEffect copy() {
-        return new CloudMidgarMercenaryEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.NUMBER_OF_TRIGGERS;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
-        if (sourcePermanent == null || !EquippedPredicate.instance.apply(sourcePermanent, game)) {
-            return false;
-        }
-        NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
-        GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
-        if (sourceEvent == null) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(((NumberOfTriggersEvent) event).getSourceId());
-        return permanent != null
-                && (permanent.equals(sourcePermanent)
-                || (permanent.hasSubtype(SubType.EQUIPMENT, game)
-                && sourcePermanent.getAttachments().contains(permanent.getId())));
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(CardUtil.overflowInc(event.getAmount(), 1));
-        return false;
     }
 }

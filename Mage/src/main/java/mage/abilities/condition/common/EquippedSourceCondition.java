@@ -3,6 +3,8 @@ package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.Hint;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -16,11 +18,16 @@ import mage.constants.SubType;
  */
 public enum EquippedSourceCondition implements Condition {
 
-   instance;
+    instance;
+    private static Hint hint = new ConditionHint(instance);
+
+    public static Hint getHint() {
+        return hint;
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             for (UUID uuid : permanent.getAttachments()) {
                 Permanent attached = game.getPermanent(uuid);
