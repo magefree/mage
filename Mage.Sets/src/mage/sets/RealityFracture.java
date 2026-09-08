@@ -12,7 +12,7 @@ import mage.constants.SetType;
  */
 public final class RealityFracture extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Bloodline Recollector", "Paradox Shaper", "Prudent Fateseer", "Stingerquill Voxmancer", "Vigorbloom Vanguard", "Woodwork Prodigy");
+    private static final List<String> unfinished = Arrays.asList("Bloodline Recollector", "Paradox Shaper", "Pompous Battlemage", "Prudent Fateseer", "Stingerquill Voxmancer", "Vigorbloom Vanguard", "Woodwork Prodigy");
     private static final RealityFracture instance = new RealityFracture();
 
     public static RealityFracture getInstance() {
@@ -69,6 +69,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 382, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 383, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 384, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Pompous Battlemage", 428, Rarity.RARE, mage.cards.p.PompousBattlemage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Pompous Battlemage", 90, Rarity.RARE, mage.cards.p.PompousBattlemage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prudent Fateseer", 146, Rarity.UNCOMMON, mage.cards.p.PrudentFateseer.class));
         cards.add(new SetCardInfo("Restore with Empathy", 112, Rarity.UNCOMMON, mage.cards.r.RestoreWithEmpathy.class));
         cards.add(new SetCardInfo("Solitary Cell", 149, Rarity.RARE, mage.cards.s.SolitaryCell.class));
