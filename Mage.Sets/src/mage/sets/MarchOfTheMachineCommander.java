@@ -157,6 +157,8 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("High Sentinels of Arashin", 189, Rarity.RARE, mage.cards.h.HighSentinelsOfArashin.class));
         cards.add(new SetCardInfo("Hindervines", 301, Rarity.UNCOMMON, mage.cards.h.Hindervines.class));
         cards.add(new SetCardInfo("Hour of Reckoning", 190, Rarity.RARE, mage.cards.h.HourOfReckoning.class));
+        cards.add(new SetCardInfo("Ichor Elixir", 46, Rarity.RARE, mage.cards.i.IchorElixir.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ichor Elixir", 133, Rarity.RARE, mage.cards.i.IchorElixir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Impact Tremors", 285, Rarity.COMMON, mage.cards.i.ImpactTremors.class));
         cards.add(new SetCardInfo("Imprisoned in the Moon", 224, Rarity.RARE, mage.cards.i.ImprisonedInTheMoon.class));
         cards.add(new SetCardInfo("Improbable Alliance", 329, Rarity.UNCOMMON, mage.cards.i.ImprobableAlliance.class));

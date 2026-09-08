@@ -3488,6 +3488,24 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             dieRolls.clear();
             dieRolls.addAll(newRolls);
+        } else if (rollDiceEvent.getRollDieType() == RollDieType.PLANAR && rollDiceEvent.getAmount() > 1) {
+            final Choice choice = new ChoiceImpl(true);
+            choice.setMessage("Choose which die roll result to keep (the rest will be ignored)");
+            choice.setChoices(dieRolls.stream().map(RollDieResult::getPlanarResult).map(PlanarDieRollResult::toString).collect(Collectors.toSet()));
+            this.choose(Outcome.Neutral, choice, game);
+            final RollDieResult chosen = dieRolls.stream()
+                    .filter(o -> o.getPlanarResult().toString().equals(choice.getChoice()))
+                    .findFirst()
+                    .orElse(dieRolls.get(0));
+            dieRolls.remove(chosen);
+            ignoreMessage = String.format(
+                dieRolls.size() > 1 ? ", ignoring [%s]" : ", ignoring %s",
+                dieRolls.stream().map(RollDieResult::getPlanarResult).map(PlanarDieRollResult::toString).collect(Collectors.joining(", "))
+            );
+            dieRolls.clear();
+            dieRolls.add(chosen);
+            dieResults.clear();
+            dieResults.add(chosen.getPlanarResult());
         } else {
             ignoreMessage = "";
         }
