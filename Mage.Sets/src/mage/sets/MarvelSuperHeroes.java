@@ -372,6 +372,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Swordsman, Sharp Scoundrel", 116, Rarity.UNCOMMON, mage.cards.s.SwordsmanSharpScoundrel.class));
         cards.add(new SetCardInfo("Take Up the Shield", 348, Rarity.COMMON, mage.cards.t.TakeUpTheShield.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Take Up the Shield", 39, Rarity.COMMON, mage.cards.t.TakeUpTheShield.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Taskmaster, Mercenary Mimic", 232, Rarity.RARE, mage.cards.t.TaskmasterMercenaryMimic.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Taskmaster, Mercenary Mimic", 425, Rarity.RARE, mage.cards.t.TaskmasterMercenaryMimic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Team Tactics", 155, Rarity.UNCOMMON, mage.cards.t.TeamTactics.class));
         cards.add(new SetCardInfo("Thanos, the Mad Titan", 233, Rarity.MYTHIC, mage.cards.t.ThanosTheMadTitan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thanos, the Mad Titan", 376, Rarity.MYTHIC, mage.cards.t.ThanosTheMadTitan.class, NON_FULL_USE_VARIOUS));
