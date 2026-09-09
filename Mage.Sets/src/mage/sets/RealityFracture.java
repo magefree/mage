@@ -12,7 +12,6 @@ import mage.constants.SetType;
  */
 public final class RealityFracture extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Bloodline Recollector", "Paradox Shaper", "Prudent Fateseer", "Stingerquill Voxmancer", "Vigorbloom Vanguard", "Woodwork Prodigy");
     private static final RealityFracture instance = new RealityFracture();
 
     public static RealityFracture getInstance() {
@@ -100,6 +99,5 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Vigorbloom Vanguard", 161, Rarity.UNCOMMON, mage.cards.v.VigorbloomVanguard.class));
         cards.add(new SetCardInfo("Woodwork Prodigy", 165, Rarity.UNCOMMON, mage.cards.w.WoodworkProdigy.class));
 
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
     }
 }
