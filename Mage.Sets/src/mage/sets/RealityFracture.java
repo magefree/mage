@@ -92,6 +92,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("The Theorist, Jace Beleren", 415, Rarity.MYTHIC, mage.cards.t.TheTheoristJaceBeleren.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Theorist, Jace Beleren", 43, Rarity.MYTHIC, mage.cards.t.TheTheoristJaceBeleren.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Theorist, Jace Beleren", 443, Rarity.MYTHIC, mage.cards.t.TheTheoristJaceBeleren.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Theorist's Sanctum", 191, Rarity.RARE, mage.cards.t.TheoristsSanctum.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Theorist's Sanctum", 381, Rarity.RARE, mage.cards.t.TheoristsSanctum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tinybones, Pocket Nuisance", 237, Rarity.UNCOMMON, mage.cards.t.TinybonesPocketNuisance.class));
         cards.add(new SetCardInfo("Titanbones, Towering Heart", 266, Rarity.UNCOMMON, mage.cards.t.TitanbonesToweringHeart.class));
         cards.add(new SetCardInfo("Vigorbloom Vanguard", 161, Rarity.UNCOMMON, mage.cards.v.VigorbloomVanguard.class));
