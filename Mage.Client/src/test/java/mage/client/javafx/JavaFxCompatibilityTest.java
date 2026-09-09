@@ -17,10 +17,10 @@ import java.util.stream.Collectors;
  * Compatibility tests for different JavaFX and JDK versions. Also can be used by devs to setup environment.
  * TODO: delete after release migrate to single openjdk 26+
  * <p>
- * Reason: JavaFX require strict compatibility between build JDK and runtime JavaFX versions, 
+ * Reason: JavaFX require strict compatibility between build JDK and runtime JavaFX versions,
  * otherwise it can crash the JVM with SIGSEGV on linux and MacOS.
  * Official JavaFX's version support: [-2, current jdk], e.g. [24, 25, 26]
- * Older versions works as is and can fail, e.g. on inner classes changes 
+ * Older versions works as is and can fail, e.g. on inner classes changes
  * like jdk.jsobject removed from JDK 26.
  * <p>
  * Usage example:
@@ -41,7 +41,8 @@ public class JavaFxCompatibilityTest {
     // add here any deps not related to javafx
     private static final List<String> ALLOWED_MISSING_PREFIXES = Arrays.asList(
             "com.sun.media.jfxmediaimpl.platform.ios.", // java 8 + javafx 11 skip (real javafx files taken from jdk)
-            "com.sun.media.jfxmediaimpl.platform.osx." // java 8 + javafx 11 skip (real javafx files taken from jdk)
+            "com.sun.media.jfxmediaimpl.platform.osx.", // java 8 + javafx 11 skip (real javafx files taken from jdk)
+            "netscape.javascript." // optional browser plugin bridge for WebEngine JS interop, removed from newer JDKs, not used by this app
     );
 
     @Test
@@ -127,7 +128,7 @@ public class JavaFxCompatibilityTest {
                 isIdeBundledJre);
     }
 
-    // java 8 (oracle or zulu+fx) has builtin javafx, but not any other openjdk, 
+    // java 8 (oracle or zulu+fx) has builtin javafx, but not any other openjdk,
     // so we need to check maven's javafx from pom.xml
     private static void assumeJavaFxComesFromMaven() {
         boolean bundled = false;
