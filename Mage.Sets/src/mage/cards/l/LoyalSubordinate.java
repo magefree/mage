@@ -3,6 +3,7 @@ package mage.cards.l;
 import mage.MageInt;
 import mage.abilities.condition.common.ControlYourCommanderCondition;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
+import mage.abilities.hint.common.ControlYourCommanderHint;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
@@ -31,7 +32,8 @@ public final class LoyalSubordinate extends CardImpl {
         // Lieutenant — At the beginning of combat on your turn, if you control your commander, each opponent loses 3 life.
         this.addAbility(new BeginningOfCombatTriggeredAbility(new LoseLifeOpponentsEffect(3))
                 .withInterveningIf(ControlYourCommanderCondition.instance)
-                .setAbilityWord(AbilityWord.LIEUTENANT));
+                .setAbilityWord(AbilityWord.LIEUTENANT)
+                .addHint(ControlYourCommanderHint.instance));
     }
 
     private LoyalSubordinate(final LoyalSubordinate card) {

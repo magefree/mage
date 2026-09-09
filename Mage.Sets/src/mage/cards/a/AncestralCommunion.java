@@ -6,6 +6,7 @@ import mage.abilities.condition.common.ControlYourCommanderCondition;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.CopySourceSpellEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.hint.common.ControlYourCommanderHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,7 +28,8 @@ public final class AncestralCommunion extends CardImpl {
         // When you cast this spell while you control your commander, copy this spell. You may choose a new target for the copy.
         this.addAbility(new CastSourceTriggeredAbility(
             new CopySourceSpellEffect().setText("copy this spell. You may choose a new target for the copy")
-        ).withTriggerCondition(ControlYourCommanderCondition.instance));
+        ).withTriggerCondition(ControlYourCommanderCondition.instance)
+                .addHint(ControlYourCommanderHint.instance));
 
         // Return target permanent card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());

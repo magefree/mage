@@ -3,6 +3,7 @@ package mage.cards.l;
 import mage.MageInt;
 import mage.abilities.condition.common.ControlYourCommanderCondition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.hint.common.ControlYourCommanderHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
@@ -31,7 +32,8 @@ public final class LoyalDrake extends CardImpl {
         // Lieutenant — At the beginning of combat on your turn, if you control your commander, draw a card.
         this.addAbility(new BeginningOfCombatTriggeredAbility(new DrawCardSourceControllerEffect(1))
                 .withInterveningIf(ControlYourCommanderCondition.instance)
-                .setAbilityWord(AbilityWord.LIEUTENANT));
+                .setAbilityWord(AbilityWord.LIEUTENANT)
+                .addHint(ControlYourCommanderHint.instance));
     }
 
     private LoyalDrake(final LoyalDrake card) {
