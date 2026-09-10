@@ -111,8 +111,10 @@ public class ChatSession {
             logger.debug(userName + " (" + reason + ')' + " removed from chatId " + chatId);
 
             // inform other users about disconnect (lobby, system tab)
+            // warning, massive broadcast must be done in async style
             if (!reason.messageForUser.isEmpty()) {
-                broadcast(null, userName + reason.messageForUser, MessageColor.BLUE, true, null, MessageType.STATUS, null);
+                managerFactory.threadExecutor().getCallExecutor().execute(() ->
+                        broadcast(null, userName + reason.messageForUser, MessageColor.BLUE, true, null, MessageType.STATUS, null));
             }
         } catch (Exception e) {
             logger.fatal("Chat: disconnecting user catch error: " + e, e);

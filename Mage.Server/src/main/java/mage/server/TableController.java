@@ -593,7 +593,12 @@ public class TableController {
                     }
                     Optional<User> user = managerFactory.userManager().getUser(userId);
                     if (user.isPresent()) {
-                        managerFactory.chatManager().broadcast(chatId, user.get().getName(), "has left the table", ChatMessage.MessageColor.BLUE, true, null, ChatMessage.MessageType.STATUS, ChatMessage.SoundToPlay.PlayerLeft);
+                        // leaveTable is synchronized and can be called from checkExpired, so a broadcast here
+                        // holds both a single expire thread and a table monitor
+                        // warning, massive broadcast must be done in async style
+                        String leftUserName = user.get().getName();
+                        managerFactory.threadExecutor().getCallExecutor().execute(() ->
+                        managerFactory.chatManager().broadcast(chatId, leftUserName, "has left the table", ChatMessage.MessageColor.BLUE, true, null, ChatMessage.MessageType.STATUS, ChatMessage.SoundToPlay.PlayerLeft));
                         if (!table.isTournamentSubTable()) {
                             user.get().removeTable(playerId);
                         }
