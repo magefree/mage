@@ -7,6 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
 import mage.abilities.effects.common.cost.CommanderCostModification;
+import mage.abilities.effects.common.ruleModifying.CastOnlyOneCommanderPerGameEffect;
 import mage.abilities.keyword.CompanionAbility;
 import mage.cards.Card;
 import mage.choices.ChoiceColor;
@@ -24,6 +25,9 @@ public abstract class GameCommanderImpl extends GameImpl {
 
     // private final Map<UUID, Cards> mulliganedCards = new HashMap<>();
     protected boolean checkCommanderDamage = true;
+
+    // Duel Commander: a player can cast only one of their commanders from the command zone each game
+    protected boolean castOnlyOneCommanderPerGame = false;
 
     // old commander's versions (before 2017) restrict return from hand or library to command zone
     protected boolean alsoHand = true;    // replace commander going to hand
@@ -43,6 +47,7 @@ public abstract class GameCommanderImpl extends GameImpl {
         this.alsoLibrary = game.alsoLibrary;
         this.startingPlayerSkipsDraw = game.startingPlayerSkipsDraw;
         this.checkCommanderDamage = game.checkCommanderDamage;
+        this.castOnlyOneCommanderPerGame = game.castOnlyOneCommanderPerGame;
     }
 
     private void handlePipers(Player player, Set<Card> commanders) {
@@ -158,6 +163,9 @@ public abstract class GameCommanderImpl extends GameImpl {
         // all commander effects must be independent from sourceId or controllerId
         commanderAbility.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary, false, "Commander"));
         commanderAbility.addEffect(new CommanderCostModification(commander));
+        if (castOnlyOneCommanderPerGame) {
+            commanderAbility.addEffect(new CastOnlyOneCommanderPerGameEffect(commander));
+        }
     }
 
     //20130711
@@ -283,6 +291,14 @@ public abstract class GameCommanderImpl extends GameImpl {
 
     public void setCheckCommanderDamage(boolean checkCommanderDamage) {
         this.checkCommanderDamage = checkCommanderDamage;
+    }
+
+    public boolean isCastOnlyOneCommanderPerGame() {
+        return castOnlyOneCommanderPerGame;
+    }
+
+    public void setCastOnlyOneCommanderPerGame(boolean castOnlyOneCommanderPerGame) {
+        this.castOnlyOneCommanderPerGame = castOnlyOneCommanderPerGame;
     }
 
     public void addCommander(Card card, Player player) {
