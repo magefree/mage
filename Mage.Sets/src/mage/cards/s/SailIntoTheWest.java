@@ -2,6 +2,7 @@ package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -86,7 +87,7 @@ class SailIntoTheWestEffect extends OneShotEffect {
         int embarkCount = vote.getVoteCount(false);
 
         if(returnCount > embarkCount) {
-            return applyReturn(game, source);
+            return applyReturn(game, source) && new ExileSourceEffect(false).apply(game, source);
         }
         else {
             return applyEmbark(game, source);
