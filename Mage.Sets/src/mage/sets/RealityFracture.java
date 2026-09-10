@@ -86,6 +86,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 388, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 389, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 390, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Tethermage's Advantage", 117, Rarity.COMMON, mage.cards.t.TethermagesAdvantage.class));
         cards.add(new SetCardInfo("The Theorist, Jace Beleren", 363, Rarity.MYTHIC, mage.cards.t.TheTheoristJaceBeleren.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Theorist, Jace Beleren", 405, Rarity.MYTHIC, mage.cards.t.TheTheoristJaceBeleren.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Theorist, Jace Beleren", 415, Rarity.MYTHIC, mage.cards.t.TheTheoristJaceBeleren.class, NON_FULL_USE_VARIOUS));
