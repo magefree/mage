@@ -82,7 +82,10 @@ public class ChatSession {
                 } finally {
                     w.unlock();
                 }
-                broadcast(null, userName + " has joined", MessageColor.BLUE, true, null, MessageType.STATUS, null);
+                // inform other users/chats about connect
+                // warning, massive broadcast must be done in async style
+                managerFactory.threadExecutor().getCallExecutor().execute(() ->
+                        broadcast(null, userName + " has joined", MessageColor.BLUE, true, null, MessageType.STATUS, null));
             }
         });
     }
