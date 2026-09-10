@@ -204,6 +204,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("On the Trail", 349, Rarity.RARE, mage.cards.o.OnTheTrail.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Organic Extinction", 76, Rarity.RARE, mage.cards.o.OrganicExtinction.class));
         cards.add(new SetCardInfo("Orzhov Advokist", 77, Rarity.UNCOMMON, mage.cards.o.OrzhovAdvokist.class));
+        cards.add(new SetCardInfo("Otherworldly Escort", 12, Rarity.RARE, mage.cards.o.OtherworldlyEscort.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Otherworldly Escort", 323, Rarity.RARE, mage.cards.o.OtherworldlyEscort.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Otherworldly Gaze", 115, Rarity.COMMON, mage.cards.o.OtherworldlyGaze.class));
         cards.add(new SetCardInfo("Overseer of the Damned", 132, Rarity.RARE, mage.cards.o.OverseerOfTheDamned.class));
         cards.add(new SetCardInfo("Panoptic Projektor", 44, Rarity.RARE, mage.cards.p.PanopticProjektor.class));
