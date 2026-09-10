@@ -44,7 +44,6 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -1974,8 +1973,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             return;
         }
         Card copy = prepareCard.createPreparedSpellCopy(getId());
-        game.getState().addCardPartCopyToZone(
-                prepareCard.getSpellCard(), copy, getControllerId(), Zone.EXILED
+        game.getState().addCardPartCopyToExileZone(
+                this, prepareCard.getSpellCard(), copy, getControllerId()
         );
         preparedSpellCopyId = copy.getId();
         game.getState().keepCardCopyWhileSourceExists(copy.getId(), getId());
