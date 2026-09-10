@@ -71,6 +71,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 382, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 383, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 384, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Prophesied End", 17, Rarity.UNCOMMON, mage.cards.p.ProphesiedEnd.class));
         cards.add(new SetCardInfo("Prudent Fateseer", 146, Rarity.UNCOMMON, mage.cards.p.PrudentFateseer.class));
         cards.add(new SetCardInfo("Restore with Empathy", 112, Rarity.UNCOMMON, mage.cards.r.RestoreWithEmpathy.class));
         cards.add(new SetCardInfo("Rockfall Vale", 186, Rarity.RARE, mage.cards.r.RockfallVale.class, NON_FULL_USE_VARIOUS));
