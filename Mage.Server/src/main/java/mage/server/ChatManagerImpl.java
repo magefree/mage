@@ -346,12 +346,14 @@ public class ChatManagerImpl implements ChatManager {
 
     @Override
     public void sendReconnectMessage(UUID userId) {
+        // inform other users/chats about reconnect
+        // warning, massive broadcast must be done in async style
         managerFactory.userManager().getUser(userId).ifPresent(user
+                -> managerFactory.threadExecutor().getCallExecutor().execute(()
                 -> getChatSessions()
                 .stream()
                 .filter(chat -> chat.hasUser(userId, true))
-                .forEach(chatSession -> chatSession.broadcast(null, user.getName() + " has reconnected", MessageColor.BLUE, true, null, MessageType.STATUS, null)));
-
+                .forEach(chatSession -> chatSession.broadcast(null, user.getName() + " has reconnected", MessageColor.BLUE, true, null, MessageType.STATUS, null))));
     }
 
     /**
