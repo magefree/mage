@@ -3087,6 +3087,7 @@
 # FRA
 |TOK:FRA|Heartwood||HeartwoodToken|
 |TOK:FRA|Illusion||Illusion11Token|
+|TOK:FRA|Jace||JacePlaneswalkerToken|
 
 # TRK
 |TOK:TRK|Human||Human01Token|
