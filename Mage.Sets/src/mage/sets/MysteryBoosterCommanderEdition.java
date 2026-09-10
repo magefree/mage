@@ -42,6 +42,7 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Exotic Orchard", 79, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Fellwar Stone", 74, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Feroz, Ulgrotha's Warden", 38, Rarity.RARE, mage.cards.f.FerozUlgrothasWarden.class));
+        cards.add(new SetCardInfo("Flitwing, Lyev Detective", 8, Rarity.RARE, mage.cards.f.FlitwingLyevDetective.class));
         cards.add(new SetCardInfo("Grandmother Goby", 9, Rarity.RARE, mage.cards.g.GrandmotherGoby.class));
         cards.add(new SetCardInfo("Greensleeves", 30, Rarity.RARE, mage.cards.g.Greensleeves.class));
         cards.add(new SetCardInfo("Grizzlegom, Hurloon Hero", 39, Rarity.RARE, mage.cards.g.GrizzlegomHurloonHero.class));
