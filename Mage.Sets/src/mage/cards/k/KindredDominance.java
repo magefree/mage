@@ -59,13 +59,20 @@ class KindredDominanceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Choice typeChoice = new ChoiceCreatureType(game, source);
-        if (controller != null && controller.choose(outcome, typeChoice, game)) {
-            game.informPlayers(controller.getLogName() + " has chosen " + typeChoice.getChoiceKey());
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures not of the chosen type");
-            filter.add(Predicates.not(SubType.byDescription(typeChoice.getChoiceKey()).getPredicate()));
-            return new DestroyAllEffect(filter).apply(game, source);
+        if (controller == null) {
+            return false;
         }
-        return false;
+        Choice typeChoice = new ChoiceCreatureType(game, source);
+        if (!controller.choose(outcome, typeChoice, game)) {
+            return false;
+        }
+        SubType subType = SubType.byDescription(typeChoice.getChoiceKey());
+        if (subType == null) {
+            return false;
+        }
+        game.informPlayers(controller.getLogName() + " has chosen " + typeChoice.getChoiceKey());
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures not of the chosen type");
+        filter.add(Predicates.not(subType.getPredicate()));
+        return new DestroyAllEffect(filter).apply(game, source);
     }
 }
