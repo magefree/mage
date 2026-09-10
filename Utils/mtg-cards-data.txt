@@ -64532,6 +64532,7 @@ Enlightened Confidant|Reality Fracture|5|M|{1}{W}|Creature - Kor Cleric|2|1|Life
 Generous Revival|Reality Fracture|8|U|{2}{W}|Sorcery|||Return target creature card with mana value 3 or less from your graveyard to the battlefield with an additional +1/+1 counter on it.$Flashback {4}{W}|
 Loyal Tutor|Reality Fracture|14|R|{W}|Instant|||Search your library for a planeswalker card, reveal it, then shuffle and put that card on top.|
 Memory Trap|Reality Fracture|15|C|{2}{W}|Enchantment|||When this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield.|
+Prophesied End|Reality Fracture|17|U|{1}{W}|Instant|||Destroy target creature. If it wasn't attacking, its controller draws a card.|
 Repurposed Enforcer|Reality Fracture|19|R|{1}{W}|Creature - Human Soldier|3|2|Whenever this creature attacks, empower Jace X, where X is the number of creatures you control.|
 Return to the Light Realms|Reality Fracture|20|M|{7}{W}{W}|Sorcery|||Return all nonland permanent cards from your graveyard to the battlefield.|
 Countersculpt|Reality Fracture|25|U|{U}{U}|Instant|||As an additional cost to cast this spell, behold a Jace or pay {1}.$Counter target spell. Empower Jace 1.|
@@ -64546,6 +64547,7 @@ Theorist's Proxy|Reality Fracture|44|R|{1}{U}|Creature - Illusion|0|3|Flash$When
 Bloodline Recollector|Reality Fracture|49|M|{1}{B}|Creature - Vampire Warlock|2|2|At the beginning of each end step, if three or more creatures died this turn, this creature becomes prepared.|
 Ancestral Craving|Reality Fracture|49|M|{B}|Instant|2|2|Target player draws three cards and loses 3 life.|
 Cast Away Doubt|Reality Fracture|51|C|{2}{B}|Sorcery|||Draw two cards. Cast Away Doubt deals 2 damage to each player.|
+Overwrite the Multiverse|Reality Fracture|59|M|{4}{B}{B}|Sorcery|||Exile all creatures. Empower Jace X, where X is the number of creatures exiled this way.|
 Rewrite Regrets|Reality Fracture|62|U|{3}{B}|Sorcery|||Return target creature or planeswalker card with mana value 6 or less from your graveyard to the battlefield.$Empower Jace 2.|
 Solve for Disappointment|Reality Fracture|67|C|{1}{B}|Sorcery|||Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card.$Empower Jace 1.|
 Craterclaw Colossus|Reality Fracture|78|M|{4}{R}{R}{R}|Artifact Creature - Beast Construct|5|5|Haste$When this creature enters, creatures you control gain trample and get +X/+0 until end of turn, where X is the number of artifacts you control.|
@@ -64554,11 +64556,13 @@ Pompous Battlemage|Reality Fracture|90|R|{R}|Creature - Goblin Sorcerer|1|1|Prow
 Improvised Act|Reality Fracture|90|R|{R}|Sorcery|1|1|You may discard a card. If you do, draw a card.|
 Stingcaster Mage|Reality Fracture|93|M|{1}{R}|Creature - Human Wizard|2|1|Haste$When this creature enters, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.|
 Arcane Amphisbaena|Reality Fracture|97|C|{1}{G}|Creature - Snake|1|1|Deathtouch$When this creature enters, empower Jace 2.|
+Budding Insurgent|Reality Fracture|99|C|{2}{G}|Creature - Dryad Scout|3|3|Vigilance$Sacrifice this creature: Destroy target artifact or enchantment. If that permanent was a legendary enchantment, draw a card. Activate only as a sorcery.|
 Compel Brutality|Reality Fracture|101|C|{1}{G}|Instant|||Choose one --$* Target creature you control deals damage equal to its power to target creature or planeswalker an opponent controls.$* Target planeswalker you control deals damage equal to its loyalty to target creature or planeswalker an opponent controls.|
 Hexhaven Invigorator|Reality Fracture|106|M|{G}{G}{G}{G}|Creature - Chimera Horror|6|6|Vigilance$Whenever this creature is dealt damage, you may search your library for up to that many land cards, put them onto the battlefield tapped, then shuffle.|
 Inspired Tethermage|Reality Fracture|109|C|{2}{G}|Creature - Elf Warrior|3|2|Whenever you put one or more loyalty counters on a planeswalker, put a +1/+1 counter on this creature.${6}: Empower Jace 2.|
 Restore with Empathy|Reality Fracture|112|U|{2}{G}|Instant|||Return target permanent card from your graveyard to your hand. You gain 4 life.|
 Something Worth Saving|Reality Fracture|114|C|{1}{G}|Instant|||Mill four cards. You may put a permanent card from among them into your hand. You gain 1 life.|
+Tethermage's Advantage|Reality Fracture|117|C|{G}|Instant|||Target creature gets +2/+2 and gains reach until end of turn. Untap it.|
 Aerid Konstrari|Reality Fracture|121|M|{1}{R}{G}{G}|Legendary Creature - Elder Sphinx|5|4|Flying$When Aerid Konstrari enters or dies, create a Heartwood token.${6}: Create a Heartwood token. Then Aerid Konstrari gets +X/+0 until end of turn, where X is the number of artifacts you control.|
 Avatar of Burgeoning Echoes|Reality Fracture|122|M|{G}{U}|Creature - Avatar|2|3|Landfall -- Whenever a land you control enters, empower Jace 2.$Planeswalkers you control have "[−10]: Put a +1/+1 counter on target creature for each land you control."|
 Charge the Sanctum|Reality Fracture|125|C|{2}{R/W}|Instant|||Choose one --$* Creatures you control get +2/+0 until end of turn.$* Target creature gets +2/+0 and gains first strike until end of turn. Put a +1/+1 counter on it.|
@@ -64622,6 +64626,7 @@ Hexhaven Invigorator|Reality Fracture|330|M|{G}{G}{G}{G}|Creature - Chimera Horr
 Repurposed Enforcer|Reality Fracture|335|R|{1}{W}|Creature - Human Soldier|3|2|Whenever this creature attacks, empower Jace X, where X is the number of creatures you control.|
 Jace's Machinations|Reality Fracture|337|R|{2}{U}|Instant|||Until end of turn, you may activate loyalty abilities of Jace planeswalkers you control on any player's turn any time you could cast an instant.$Empower Jace 8.|
 Theorist's Proxy|Reality Fracture|339|R|{1}{U}|Creature - Illusion|0|3|Flash$When this creature enters, empower Jace 3.${U}, Sacrifice this creature: The next spell you cast this turn can't be countered.|
+Overwrite the Multiverse|Reality Fracture|341|M|{4}{B}{B}|Sorcery|||Exile all creatures. Empower Jace X, where X is the number of creatures exiled this way.|
 Aerid Konstrari|Reality Fracture|347|M|{1}{R}{G}{G}|Legendary Creature - Elder Sphinx|5|4|Flying$When Aerid Konstrari enters or dies, create a Heartwood token.${6}: Create a Heartwood token. Then Aerid Konstrari gets +X/+0 until end of turn, where X is the number of artifacts you control.|
 Avatar of Burgeoning Echoes|Reality Fracture|348|M|{G}{U}|Creature - Avatar|2|3|Landfall -- Whenever a land you control enters, empower Jace 2.$Planeswalkers you control have "[−10]: Put a +1/+1 counter on target creature for each land you control."|
 Denzilore Fatehold|Reality Fracture|349|M|{1}{W}{U}{U}|Legendary Creature - Elder Sphinx|3|4|Flash$Flying$Whenever you scry or surveil, put a +1/+1 counter on each creature you control.|
@@ -64677,6 +64682,7 @@ Improvised Act|Reality Fracture|428|R|{R}|Sorcery|1|1|You may discard a card. If
 Enlightened Confidant|Reality Fracture|439|M|{1}{W}|Creature - Kor Cleric|2|1|Lifelink$At the beginning of your end step, if you gained life this turn, surveil 1. If you put a card with mana value less than or equal to the amount of life you gained this turn into your graveyard this way, put that card into your hand.|
 Return to the Light Realms|Reality Fracture|440|M|{7}{W}{W}|Sorcery|||Return all nonland permanent cards from your graveyard to the battlefield.|
 The Theorist, Jace Beleren|Reality Fracture|443|M|{2}{U}{U}|Legendary Planeswalker - Jace|3|At the beginning of each opponent's draw step, you draw a card.$+1: Create a 1/1 blue Illusion creature token.$−2: For each opponent, return up to one target artifact or creature that player controls to its owner's hand.$−6: Draw three cards. Then put X +1/+1 counters on each creature you control, where X is the number of cards in your hand.|
+Overwrite the Multiverse|Reality Fracture|445|M|{4}{B}{B}|Sorcery|||Exile all creatures. Empower Jace X, where X is the number of creatures exiled this way.|
 Craterclaw Colossus|Reality Fracture|446|M|{4}{R}{R}{R}|Artifact Creature - Beast Construct|5|5|Haste$When this creature enters, creatures you control gain trample and get +X/+0 until end of turn, where X is the number of artifacts you control.|
 Stingcaster Mage|Reality Fracture|447|M|{1}{R}|Creature - Human Wizard|2|1|Haste$When this creature enters, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.|
 Enlightened Confidant|Reality Fracture|449|M|{1}{W}|Creature - Kor Cleric|2|1|Lifelink$At the beginning of your end step, if you gained life this turn, surveil 1. If you put a card with mana value less than or equal to the amount of life you gained this turn into your graveyard this way, put that card into your hand.|
