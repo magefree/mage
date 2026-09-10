@@ -40,6 +40,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Craterclaw Colossus", 446, Rarity.MYTHIC, mage.cards.c.CraterclawColossus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Craterclaw Colossus", 455, Rarity.MYTHIC, mage.cards.c.CraterclawColossus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Craterclaw Colossus", 78, Rarity.MYTHIC, mage.cards.c.CraterclawColossus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Danitha, Sword of Hope", 196, Rarity.UNCOMMON, mage.cards.d.DanithaSwordOfHope.class));
         cards.add(new SetCardInfo("Deserted Beach", 176, Rarity.RARE, mage.cards.d.DesertedBeach.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deserted Beach", 397, Rarity.RARE, mage.cards.d.DesertedBeach.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 394, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
