@@ -145,6 +145,8 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Head of the Hunt", 260, Rarity.RARE, mage.cards.h.HeadOfTheHunt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Head of the Hunt", 75, Rarity.RARE, mage.cards.h.HeadOfTheHunt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hobbit Hole", 184, Rarity.COMMON, mage.cards.h.HobbitHole.class));
+        cards.add(new SetCardInfo("Inside Information", 76, Rarity.MYTHIC, mage.cards.i.InsideInformation.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Inside Information", 286, Rarity.MYTHIC, mage.cards.i.InsideInformation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iron Hills", 185, Rarity.COMMON, mage.cards.i.IronHills.class));
         cards.add(new SetCardInfo("Iron Hills Blacksmith", 16, Rarity.UNCOMMON, mage.cards.i.IronHillsBlacksmith.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iron Hills Blacksmith", 216, Rarity.UNCOMMON, mage.cards.i.IronHillsBlacksmith.class, NON_FULL_USE_VARIOUS));
