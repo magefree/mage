@@ -66,6 +66,7 @@ public enum SubType {
     FOOD("Food", SubTypeSet.ArtifactType),
     FORTIFICATION("Fortification", SubTypeSet.ArtifactType),
     GOLD("Gold", SubTypeSet.ArtifactType),
+    HEARTWOOD("Heartwood", SubTypeSet.ArtifactType),
     INCUBATOR("Incubator", SubTypeSet.ArtifactType),
     INFINITY("Infinity", SubTypeSet.ArtifactType),
     JUNK("Junk", SubTypeSet.ArtifactType),
