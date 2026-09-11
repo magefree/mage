@@ -50,6 +50,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Denzilore Fatehold", 418, Rarity.MYTHIC, mage.cards.d.DenziloreFatehold.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deserted Beach", 176, Rarity.RARE, mage.cards.d.DesertedBeach.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deserted Beach", 397, Rarity.RARE, mage.cards.d.DesertedBeach.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Eardrum Rattler", 81, Rarity.COMMON, mage.cards.e.EardrumRattler.class));
         cards.add(new SetCardInfo("Fatehold Chronologist", 133, Rarity.COMMON, mage.cards.f.FateholdChronologist.class));
         cards.add(new SetCardInfo("Forest", 394, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 395, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
