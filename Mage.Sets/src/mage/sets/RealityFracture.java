@@ -105,6 +105,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 384, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Pompous Battlemage", 428, Rarity.RARE, mage.cards.p.PompousBattlemage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pompous Battlemage", 90, Rarity.RARE, mage.cards.p.PompousBattlemage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Proft, Consulting Detective", 218, Rarity.UNCOMMON, mage.cards.p.ProftConsultingDetective.class));
         cards.add(new SetCardInfo("Protege's Awakening", 37, Rarity.COMMON, mage.cards.p.ProtegesAwakening.class));
         cards.add(new SetCardInfo("Prudent Fateseer", 146, Rarity.UNCOMMON, mage.cards.p.PrudentFateseer.class));
         cards.add(new SetCardInfo("Restore with Empathy", 112, Rarity.UNCOMMON, mage.cards.r.RestoreWithEmpathy.class));
