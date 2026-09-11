@@ -47,7 +47,7 @@ public class ComputerPlayerMCTS2 extends ComputerPlayerMCTS {
     public String defaultURL = "http://127.0.0.1:50052";
     public transient RemoteModelEvaluator nn;
     MCTSNode2 root;
-    private boolean allowDuplicates = false;
+    public boolean allowDuplicates = true;
 
 
 

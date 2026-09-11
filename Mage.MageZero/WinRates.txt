@@ -270,3 +270,192 @@ WR with UWTempo vs Standard-MonoG: 0.395 in 200 games
 WR with UWTempo vs Standard-MonoW: 0.375 in 200 games
 WR with UWTempo vs Standard-MonoR: 0.495 in 200 games
 WR with UWTempo vs Standard-MonoU: 0.685 in 200 games
+
+WR with UWTempo vs Standard-MonoB: 0.17 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.14 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.21 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.48484848484848486 in 99 games
+
+WR with UWTempo vs Standard-MonoB: 0.25 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.23 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.26 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.54 in 100 games
+
+WR with UWTempo vs Standard-MonoW: 0.24 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.26 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.13 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.26 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.33 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.51 in 100 games
+
+WR with UWTempo vs Standard-MonoB: 0.19 in 100 games
+v24
+WR with UWTempo vs Standard-MonoW: 0.22 in 100 games
+WR with UWTempo vs Standard-MonoW: 0.21 in 100 games
+v23A
+WR with UWTempo vs Standard-MonoW: 0.21 in 100 games
+WR with UWTempo vs Standard-MonoW: 0.2828282828282828 in 99 games
+WR with UWTempo vs Standard-MonoW: 0.21 in 100 games
+v23B
+WR with UWTempo vs Standard-MonoW: 0.24 in 100 games
+WR with UWTempo vs Standard-MonoW: 0.29 in 100 games
+WR with UWTempo vs Standard-MonoW: 0.25 in 100 games
+v24
+WR with UWTempo vs Standard-MonoW: 0.3 in 100 games
+WR with UWTempo vs Standard-MonoW: 0.28 in 100 games
+
+WR with UWTempo vs Standard-MonoB: 0.27 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.25 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.31 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.46 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.41 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.25 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.48 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.5454545454545454 in 99 games
+
+WR with UWTempo vs Standard-MonoB: 0.38 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.26 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.42 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.48 in 100 games
+
+WR with UWTempo vs Standard-MonoG: 0.26 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.41 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.39 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.5 in 100 games
+
+WR with UWTempo vs Standard-MonoG: 0.33 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.53 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.54 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.45 in 100 games
+
+WR with UWTempo vs Standard-MonoG: 0.43 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.44 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.53 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.57 in 100 games
+
+WR with UWTempo vs Standard-MonoB: 0.56 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.32 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.56 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.62 in 100 games
+
+WR with UWTempo vs Standard-MonoG: 0.29 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.37 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.38 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.6 in 100 games
+
+WR with UWTempo vs Standard-MonoB: 0.24 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.24 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.32 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.57 in 100 games
+
+WR with UWTempo vs Standard-MonoB: 0.22 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.2 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.33 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.47 in 100 games
+
+WR with UWTempo vs Standard-MonoG: 0.19 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.29 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.35 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.56 in 100 games
+
+WR with UWTempo vs Standard-MonoB: 0.34 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.31313131313131315 in 99 games
+WR with UWTempo vs Standard-MonoG: 0.35 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.35353535353535354 in 99 games
+WR with UWTempo vs Standard-MonoU: 0.5757575757575758 in 99 games
+
+
+WR with UWTempo vs Standard-MonoG: 0.24 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.3 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.34 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.55 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.29 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.23 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.32323232323232326 in 99 games
+WR with UWTempo vs Standard-MonoU: 0.53 in 100 games
+
+WR with UWTempo vs Standard-MonoG: 0.36 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.28 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.28 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.5353535353535354 in 99 games
+
+WR with UWTempo vs Standard-MonoG: 0.16161616161616163 in 99 games
+WR with UWTempo vs Standard-MonoB: 0.31 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.35 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.5656565656565656 in 99 games
+
+WR with UWTempo vs Standard-MonoB: 0.30303030303030304 in 99 games
+WR with UWTempo vs Standard-MonoG: 0.25 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.36 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.55 in 100 games
+
+WR with UWTempo vs Standard-MonoG: 0.27 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.26 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.25252525252525254 in 99 games
+WR with UWTempo vs Standard-MonoU: 0.53 in 100 games
+
+WR with UWTempo vs Standard-MonoB: 0.28 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.34 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.35 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.47 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.33 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.09 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.1 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.07 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.21 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.06 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.13 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.10101010101010101 in 99 games
+WR with UWTempo vs Standard-MonoU: 0.16161616161616163 in 99 games
+WR with UWTempo vs Standard-MonoB: 0.16 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.08 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.12 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.21212121212121213 in 99 games
+WR with UWTempo vs Standard-MonoG: 0.07 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.15 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.1414141414141414 in 99 games
+WR with UWTempo vs Standard-MonoU: 0.17346938775510204 in 98 games
+WR with UWTempo vs Standard-MonoB: 0.11 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.030303030303030304 in 99 games
+WR with UWTempo vs Standard-MonoR: 0.1111111111111111 in 99 games
+WR with UWTempo vs Standard-MonoU: 0.25252525252525254 in 99 games
+WR with UWTempo vs Standard-MonoB: 0.13 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.05 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.09 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.12 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.23 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.13 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.08 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.1 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.18 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.14 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.22 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.07 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.21 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.03 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.03 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.13 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.07 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.13 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.2 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.14 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.45 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.08 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.09 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.1 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.25 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.19 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.2222222222222222 in 99 games
+WR with UWTempo vs Standard-MonoU: 0.52 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.24 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.21 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.32 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.57 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.29 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.20202020202020202 in 99 games
+WR with UWTempo vs Standard-MonoU: 0.4444444444444444 in 99 games
+WR with UWTempo vs Standard-MonoR: 0.31 in 100 games
+WR with UWTempo vs Standard-MonoG: 0.3 in 100 games
+WR with UWTempo vs Standard-MonoB: 0.22 in 100 games
+WR with UWTempo vs Standard-MonoR: 0.27 in 100 games
+WR with UWTempo vs Standard-MonoU: 0.52 in 100 games

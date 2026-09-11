@@ -601,14 +601,16 @@ public class MCTSNode {
                 sb.append(String.format("[%s score: %.3f count: %d] ", node.priorityAction, node.getMeanScore(), node.getVisits()));
                 if(actionNames.containsKey(node.priorityAction.toString()) && actionNames.get(node.priorityAction.toString()) != null && actionNames.get(node.priorityAction.toString()).stateVector != null) {
                     logger.warn("FOUND DUPLICATE ACTION " + node.priorityAction.toString());
-                    HashSet<Integer> intersection = new HashSet<>(actionNames.get(node.priorityAction.toString()).stateVector);
-                    intersection.retainAll(node.stateVector);
-                    HashSet<Integer> onlyA = new HashSet<>(actionNames.get(node.priorityAction.toString()).stateVector);
-                    onlyA.removeAll(intersection);
-                    HashSet<Integer> onlyB = new HashSet<>(node.stateVector);
-                    onlyB.removeAll(intersection);
-                    logger.warn("ONLY IN A: " + onlyA);
-                    logger.warn("ONLY IN B: " + onlyB);
+                    if(node.stateVector != null) {
+                        HashSet<Integer> intersection = new HashSet<>(actionNames.get(node.priorityAction.toString()).stateVector);
+                        intersection.retainAll(node.stateVector);
+                        HashSet<Integer> onlyA = new HashSet<>(actionNames.get(node.priorityAction.toString()).stateVector);
+                        onlyA.removeAll(intersection);
+                        HashSet<Integer> onlyB = new HashSet<>(node.stateVector);
+                        onlyB.removeAll(intersection);
+                        logger.warn("ONLY IN A: " + onlyA);
+                        logger.warn("ONLY IN B: " + onlyB);
+                    }
                 } else {
                     actionNames.put(node.priorityAction.toString(), node);
                 }

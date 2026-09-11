@@ -34,9 +34,9 @@ player_a:
     see_opponent_hand: true
 
 player_b:
-  deckPath: decks/UWTempo.dck
+  deckPath: decks/Standard-MonoR.dck
   type: mcts
-  #utput_file: data/playerB/BvsA.hdf5
+  #output_file: data/playerB/BvsA.hdf5
 
   priors:
     priority: false
@@ -65,18 +65,18 @@ player_b:
     see_opponent_hand: true
 
 training:
-  games: 200
+  games: 100
   threads: 4
   max_turns: 50 #does nothing
 
 server:
   host: localhost
   port: 50052 #50052
-  opponent_port: 50052 #50053
+  opponent_port: 50053 #50053
 
 logging:
   sparse: false #does nothing
   all_threads: true
-  log_feature_hash: true
+  log_feature_hash: false
   save_final_wr: true
   show_mcts_info: true #does nothing

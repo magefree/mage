@@ -101,12 +101,14 @@ public class Config {
         public final int timeoutMs;
         public final double tdDiscount;
         public boolean offlineMode;
+        public boolean pruneDuplicateStates;
 
         public MctsConfig(Map<String, Object> raw) {
             this.searchBudget = ((Number) raw.getOrDefault("search_budget", 300)).intValue();
             this.timeoutMs = ((Number) raw.getOrDefault("timeout_ms", 4000)).intValue();
             this.tdDiscount = ((Number) raw.getOrDefault("td_discount", 0.95)).doubleValue();
             this.offlineMode = (boolean) raw.getOrDefault("offline_mode", false);
+            this.pruneDuplicateStates = (boolean) raw.getOrDefault("prune_duplicate_states", false);
         }
     }
 
@@ -116,7 +118,7 @@ public class Config {
 
         public GameplayConfig(Map<String, Object> raw) {
             this.mulligans = (boolean) raw.getOrDefault("mulligans_enabled", true);
-            this.manualTap = (boolean) raw.getOrDefault("manual_tapping", true);
+            this.manualTap = (boolean) raw.getOrDefault("manual_tapping", false);
         }
     }
     public static class HiddenInfoConfig {

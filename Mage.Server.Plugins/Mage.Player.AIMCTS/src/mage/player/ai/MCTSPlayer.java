@@ -307,7 +307,7 @@ public class MCTSPlayer extends ComputerPlayer {
         decisionText = "choose num for " + source.toString();
         actionType = ActionEncoder.ActionType.CHOOSE_NUM;
         freezeState(game);
-        return 0;
+        return min;
     }
     @Override
     public boolean isManualTappingAI() {
@@ -321,7 +321,15 @@ public class MCTSPlayer extends ComputerPlayer {
         List<Mode> modeOptions = modes.getAvailableModes(source, game).stream()
                 .filter(mode -> !modes.getSelectedModes().contains(mode.getId()))
                 .filter(mode -> mode.getTargets().canChoose(source.getControllerId(), source, game)).collect(Collectors.toList());
-        if(modes.getMinModes() == 0) modeOptions.add(null);
+        //if(modes.getMinModes() == 0)
+        if(!modeOptions.contains(null)) {
+            modeOptions.add(0, null);
+        }
+        if (modeOptions.isEmpty()) {
+            //illegalGameState(game);
+            logger.error("no legal mode exists");
+            return null;
+        }
         int selected = makeChoiceAmount(0, modeOptions.size()-1, game, source, false);
         return modeOptions.get(selected);
     }

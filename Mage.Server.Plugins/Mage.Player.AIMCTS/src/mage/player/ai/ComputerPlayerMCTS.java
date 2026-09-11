@@ -319,7 +319,10 @@ public class ComputerPlayerMCTS extends ComputerPlayer {
         List<Mode> modeOptions = modes.getAvailableModes(source, game).stream()
                 .filter(mode -> !modes.getSelectedModes().contains(mode.getId()))
                 .filter(mode -> mode.getTargets().canChoose(source.getControllerId(), source, game)).collect(Collectors.toList());
-        if(modes.getMinModes() == 0) modeOptions.add(null);
+        //if(modes.getMinModes() == 0)
+        if(!modeOptions.contains(null)) {
+            modeOptions.add(0, null);
+        }
         int chosenMode = makeChoiceAmount(0, modeOptions.size()-1, game, source, false);
         return modeOptions.get(chosenMode);
     }

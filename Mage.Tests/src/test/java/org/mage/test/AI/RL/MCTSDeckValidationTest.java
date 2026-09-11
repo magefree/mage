@@ -19,10 +19,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MCTSDeckValidationTest {
     //config
-    private static final int GAMES_PER_TEST = 4;
+    private static final int GAMES_PER_TEST = 16;
     private static final int MAX_TURNS = 50;
     private static final String OPPONENT_DECK = "decks/Standard-MonoB.dck";
-    private static final String[] DECK_POOL = {
+    /*private static final String[] DECK_POOL = {
             "decks/Standard-MonoB.dck",
             "decks/Standard-MonoG.dck",
             "decks/Standard-MonoR.dck",
@@ -47,6 +47,24 @@ public class MCTSDeckValidationTest {
             "decks/Mind(MindvsMight).dck",
             "decks/WillS_Tempo.dck",
             "decks/UW Control.dck"
+    };*/
+    private static final String[] DECK_POOL = {
+            "decks/Standard16-UB.dck",
+            "decks/Standard-MonoB.dck",
+            "decks/Standard-MonoG.dck",
+            "decks/Standard-MonoR.dck",
+            "decks/Standard-MonoU.dck",
+            "decks/Standard-MonoW.dck",
+            "decks/Standard16-5C.dck",
+            "decks/Standard16-BW.dck",
+            "decks/Standard16-GB.dck",
+            "decks/Standard16-GW.dck",
+            "decks/Standard16-RB.dck",
+            "decks/Standard16-RG.dck",
+            "decks/Standard16-RW.dck",
+            "decks/Standard16-UG.dck",
+            "decks/Standard16-UR.dck",
+            "decks/Standard16-UW.dck"
     };
     static Stream<String> deckPool() {
         return Arrays.stream(DECK_POOL);
@@ -66,6 +84,30 @@ public class MCTSDeckValidationTest {
 
     @ParameterizedTest
     @MethodSource("deckPool")
+    public void testDeckAgainstMCTS(String testDeck) {
+        Config.INSTANCE.playerA.deckPath = testDeck;
+        Config.INSTANCE.playerB.deckPath = OPPONENT_DECK;
+        Config.INSTANCE.playerA.mcts.offlineMode = true;
+        Config.INSTANCE.playerB.mcts.offlineMode = true;
+        Config.INSTANCE.playerA.type = "mcts";
+        Config.INSTANCE.playerB.type = "mcts";
+        Config.INSTANCE.training.games = GAMES_PER_TEST;
+        Config.INSTANCE.training.maxTurns = MAX_TURNS;
+        Config.INSTANCE.training.threads = 4;
+        //Config.INSTANCE.playerA.gameplay.manualTap = true;
+
+        try {
+            ParallelDataGenerator generator = new ParallelDataGenerator();
+            generator.generateData();
+            int gamesPlayed = generator.gameCount.get();
+            assertEquals(GAMES_PER_TEST, gamesPlayed, "Should complete all games");
+            assertTrue(gamesPlayed > 0, "Should play at least one game");
+        } catch (Exception e) {
+            fail("Deck " + testDeck + " caused crash: " + e.getMessage(), e);
+        }
+    }
+    @ParameterizedTest
+    @MethodSource("deckPool")
     public void testDeckAgainstMinimax(String testDeck) {
         Config.INSTANCE.playerA.deckPath = testDeck;
         Config.INSTANCE.playerB.deckPath = OPPONENT_DECK;
@@ -75,6 +117,7 @@ public class MCTSDeckValidationTest {
         Config.INSTANCE.training.games = GAMES_PER_TEST;
         Config.INSTANCE.training.maxTurns = MAX_TURNS;
         Config.INSTANCE.training.threads = 4;
+        //Config.INSTANCE.playerA.gameplay.manualTap = false;
         try {
             ParallelDataGenerator generator = new ParallelDataGenerator();
             generator.generateData();
@@ -105,18 +148,6 @@ public class MCTSDeckValidationTest {
         } catch (Exception e) {
             fail("Deck " + testDeck + " caused crash: " + e.getMessage(), e);
         }
-    }
-    @ParameterizedTest
-    @MethodSource("deckPool")
-    public void testDeckAgainstMinimaxWithAutoTapping(String testDeck) {
-        Config.INSTANCE.playerA.gameplay.manualTap = false;
-        testDeckAgainstMinimax(testDeck);
-    }
-    @ParameterizedTest
-    @MethodSource("deckPool")
-    public void testMinimaxAgainstDeckWithAutoTapping(String testDeck) {
-        Config.INSTANCE.playerA.gameplay.manualTap = false;
-        testMinimaxAgainstDeck(testDeck);
     }
     @Test
     public void runSeedTest() {

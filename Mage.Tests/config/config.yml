@@ -8,9 +8,9 @@ player_a:
   output_dir: data/playerA
 
   priors:
-    priority: true
+    priority: false
     target: false
-    binary: true
+    binary: false
     opponent: false
     prior_temperature: 1.5 #does nothing
 
@@ -24,10 +24,11 @@ player_a:
     timeout_ms: 4000
     td_discount: 0.95
     offline_mode: true
+    prune_duplicate_states: true
 
   gameplay:
     mulligans_enabled: false
-    manual_tapping: true
+    manual_tapping: false
 
 
   hidden_info:
@@ -55,10 +56,11 @@ player_b:
     timeout_ms: 4000
     td_discount: 0.95
     offline_mode: true
+    prune_duplicate_states: true
 
   gameplay:
     mulligans_enabled: false
-    manual_tapping: true
+    manual_tapping: false
 
 
   hidden_info:

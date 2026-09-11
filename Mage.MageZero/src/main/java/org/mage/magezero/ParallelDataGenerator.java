@@ -32,6 +32,7 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLongArray;
 
 
 /**
@@ -231,14 +232,18 @@ public class ParallelDataGenerator {
         logger.info(String.format("Simulating %d games. Using thread pool of size %d on %d available cores.", numGames, poolSize, availableCores));
 
         ExecutorService executor = Executors.newFixedThreadPool(poolSize);
-        List<Callable<GameResult>> tasks = new ArrayList<>();
+        List<Callable<Boolean>> tasks = new ArrayList<>();
+        AtomicLongArray startNs = new AtomicLongArray(numGames);
+
         for (int i = 0; i < numGames; i++) {
-            tasks.add(new Callable<GameResult>() {
+            final int idx = i;
+            tasks.add(new Callable<Boolean>() {
                 @Override
-                public GameResult call() throws Exception {
+                public Boolean call() throws Exception {
+                    startNs.set(idx, System.nanoTime());
                     GameResult out = runSingleGame();
                     LSQueue.put(out);
-                    return out;
+                    return out.didPlayerAWin;
                 }
             });
         }
@@ -246,17 +251,19 @@ public class ParallelDataGenerator {
         int successfulGames = 0;
         int failedGames = 0;
         try {
-            List<Future<GameResult>> futures = new ArrayList<>();
-            for (Callable<GameResult> task : tasks) {
+            List<Future<Boolean>> futures = new ArrayList<>();
+            for (Callable<Boolean> task : tasks) {
                 futures.add(executor.submit(task));
             }
             executor.shutdown();
-
-            for (Future<GameResult> future : futures) {
+            for (int i = 0; i < futures.size(); i++) {
+                Future<Boolean> future = futures.get(i);
                 try {
                     // future.get() will block until the task is complete.
-                    GameResult result = future.get(maxGameTime, TimeUnit.MINUTES);
-                    if (result.didPlayerAWin()) {
+                    long start = startNs.get(i);
+                    long remainingMs = start == 0 ? TimeUnit.MINUTES.toMillis(maxGameTime) : TimeUnit.MINUTES.toMillis(maxGameTime) - TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - start);
+                    Boolean result = future.get(Math.max(remainingMs, 0), TimeUnit.MILLISECONDS);
+                    if (result) {
                         wins++;
                     }
                     successfulGames++;
@@ -381,6 +388,7 @@ public class ParallelDataGenerator {
                 mcts2.searchTimeout = (double) Config.INSTANCE.playerA.mcts.timeoutMs /1000;
                 mcts2.autoTap = !Config.INSTANCE.playerA.gameplay.manualTap;
                 mcts2.priorTemp = Config.INSTANCE.playerA.priors.priorTemperature;
+                mcts2.allowDuplicates = !Config.INSTANCE.playerA.mcts.pruneDuplicateStates;
                 if(remoteModelEvaluatorA == null || Config.INSTANCE.playerA.mcts.offlineMode) mcts2.offlineMode = true;
             } else {
                 mcts2.nn = remoteModelEvaluatorB;
@@ -394,6 +402,7 @@ public class ParallelDataGenerator {
                 mcts2.searchTimeout = (double) Config.INSTANCE.playerB.mcts.timeoutMs /1000;
                 mcts2.autoTap = !Config.INSTANCE.playerB.gameplay.manualTap;
                 mcts2.priorTemp = Config.INSTANCE.playerB.priors.priorTemperature;
+                mcts2.allowDuplicates = !Config.INSTANCE.playerB.mcts.pruneDuplicateStates;
                 if(remoteModelEvaluatorB == null || Config.INSTANCE.playerB.mcts.offlineMode) mcts2.offlineMode = true;
             }
         } else if (player.getRealPlayer() instanceof ComputerPlayer8) {
