@@ -12,6 +12,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.Targets;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
@@ -177,5 +178,14 @@ public class RemoveCounterCost extends CostImpl {
     @Override
     public RemoveCounterCost copy() {
         return new RemoveCounterCost(this);
+    }
+
+    public int getCountersToRemove() {
+        return this.countersToRemove;
+    }
+
+    @Override
+    public Targets getTargets() {
+        return new Targets(this.target);
     }
 }

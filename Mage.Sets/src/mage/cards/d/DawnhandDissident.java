@@ -112,7 +112,7 @@ class DawnhandDissidentEffect extends AsThoughEffectImpl {
         Costs<Cost> newCosts = new CostsImpl<>();
         newCosts.addAll(card.getSpellAbility().getCosts());
         newCosts.add(new RemoveCounterCost(
-                new TargetControlledCreaturePermanent(), null, 3
+                new TargetControlledCreaturePermanent(1, 3), null, 3
         ).setText("remove three counters from among creatures you control"));
         player.setCastSourceIdWithAlternateMana(
                 card.getId(), card.getManaCost(), newCosts

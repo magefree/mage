@@ -2,7 +2,6 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -53,13 +52,8 @@ public final class TheFiligreeSylex extends CardImpl {
 
         // {T}, Remove ten oil counters from among permanents you control and sacrifice The Filigree Sylex: It deals 10 damage to any target.
         ability = new SimpleActivatedAbility(new DamageTargetEffect(10, "it"), new TapSourceCost());
-        ability.addCost(new CompositeCost(
-                new RemoveCounterCost(new TargetPermanent(
-                        0, Integer.MAX_VALUE,
-                        StaticFilters.FILTER_CONTROLLED_PERMANENTS
-                ), CounterType.OIL, 10), new SacrificeSourceCost(),
-                "remove ten oil counters from among permanents you control and sacrifice {this}"
-        ));
+        ability.addCost(new RemoveCounterCost(new TargetPermanent(1, 10, StaticFilters.FILTER_CONTROLLED_PERMANENTS), CounterType.OIL, 10));
+        ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
