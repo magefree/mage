@@ -28,6 +28,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Ajani Unrelenting", 242, Rarity.MYTHIC, mage.cards.a.AjaniUnrelenting.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ajani Unrelenting", 308, Rarity.MYTHIC, mage.cards.a.AjaniUnrelenting.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Amphisbaena", 97, Rarity.COMMON, mage.cards.a.ArcaneAmphisbaena.class));
+        cards.add(new SetCardInfo("Blazing Crescendo", 75, Rarity.COMMON, mage.cards.b.BlazingCrescendo.class));
         cards.add(new SetCardInfo("Bloodline Recollector", 402, Rarity.MYTHIC, mage.cards.b.BloodlineRecollector.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodline Recollector", 427, Rarity.MYTHIC, mage.cards.b.BloodlineRecollector.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodline Recollector", 49, Rarity.MYTHIC, mage.cards.b.BloodlineRecollector.class, NON_FULL_USE_VARIOUS));
@@ -130,6 +131,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 389, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 390, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Tam's Resistance", 153, Rarity.COMMON, mage.cards.t.TamsResistance.class));
+        cards.add(new SetCardInfo("Tarmogoyf", 116, Rarity.MYTHIC, mage.cards.t.Tarmogoyf.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tarmogoyf", 374, Rarity.MYTHIC, mage.cards.t.Tarmogoyf.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tethermage's Advantage", 117, Rarity.COMMON, mage.cards.t.TethermagesAdvantage.class));
         cards.add(new SetCardInfo("The Theorist, Jace Beleren", 363, Rarity.MYTHIC, mage.cards.t.TheTheoristJaceBeleren.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Theorist, Jace Beleren", 405, Rarity.MYTHIC, mage.cards.t.TheTheoristJaceBeleren.class, NON_FULL_USE_VARIOUS));
