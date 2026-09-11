@@ -124,6 +124,7 @@ public class ModernCardRenderer extends CardRenderer {
 
     static String SUB_TYPE_ADVENTURE = "Adventure";
     static String SUB_TYPE_OMEN = "Omen";
+    static String SUB_TYPE_PREPARE = "Prepare";
 
     ///////////////////////////////////////////////////////////////////////////
     // Layout metrics for modern border cards
@@ -171,6 +172,7 @@ public class ModernCardRenderer extends CardRenderer {
 
     // Is an adventure or omen
     protected boolean isCardWithSpellOption = false;
+    protected boolean isPrepareSpellOption = false;
 
     public ModernCardRenderer(CardView card) {
         // Pass off to parent
@@ -181,7 +183,9 @@ public class ModernCardRenderer extends CardRenderer {
 
         if (cardView.isSplitCard()) {
             isCardWithSpellOption = cardView.getRightSplitTypeLine().contains(SUB_TYPE_ADVENTURE)
-                                || cardView.getRightSplitTypeLine().contains(SUB_TYPE_OMEN);
+                                || cardView.getRightSplitTypeLine().contains(SUB_TYPE_OMEN)
+                                || SUB_TYPE_PREPARE.equals(cardView.getRightSplitSpellType());
+            isPrepareSpellOption = SUB_TYPE_PREPARE.equals(cardView.getRightSplitSpellType());
         }
     }
 
@@ -665,7 +669,8 @@ public class ModernCardRenderer extends CardRenderer {
                     contentWidth / 2 - 8, typeLineY - totalContentInset - boxHeight - 6, false);
         } else if (isCardWithSpellOption) {
             drawRulesText(g, textboxKeywords, textboxRules,
-                    contentWidth / 2 + totalContentInset + 4, typeLineY + boxHeight + 2,
+                    (isPrepareSpellOption ? totalContentInset : contentWidth / 2 + totalContentInset) + 4,
+                    typeLineY + boxHeight + 2,
                     contentWidth / 2 - 8, cardHeight - typeLineY - boxHeight - 4 - borderWidth * 3, false);
         } else if (!isZenUst) {
             drawRulesText(g, textboxKeywords, textboxRules,
