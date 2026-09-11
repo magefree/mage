@@ -22,6 +22,7 @@ public final class RealityFracture extends ExpansionSet {
 
         // this.enablePlayBooster(305); TODO: Enable later
 
+        cards.add(new SetCardInfo("Academic Ascent", 2, Rarity.COMMON, mage.cards.a.AcademicAscent.class));
         cards.add(new SetCardInfo("Ajani Resolute", 195, Rarity.MYTHIC, mage.cards.a.AjaniResolute.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ajani Resolute", 291, Rarity.MYTHIC, mage.cards.a.AjaniResolute.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ajani Unrelenting", 242, Rarity.MYTHIC, mage.cards.a.AjaniUnrelenting.class, NON_FULL_USE_VARIOUS));
