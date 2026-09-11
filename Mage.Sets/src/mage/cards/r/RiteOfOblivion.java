@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetNonlandPermanent;
 
 import java.util.UUID;
@@ -30,7 +29,7 @@ public final class RiteOfOblivion extends CardImpl {
         
 
         // As an additional cost to cast this spell, sacrifice a nonland permanent.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(filter));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(filter).setAdditional(true));
 
         // Exile target nonland permanent
         this.getSpellAbility().addEffect(new ExileTargetEffect());

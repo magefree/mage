@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.GoblinToken;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class KuldothaRebirth extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), 3));
-        this.getSpellAbility().addCost(new SacrificeTargetCost(filter));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(filter).setAdditional(true));
     }
 
     private KuldothaRebirth(final KuldothaRebirth card) {

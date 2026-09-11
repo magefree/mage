@@ -25,7 +25,7 @@ public final class LashOfTheBalrog extends CardImpl {
                 "sacrifice a creature or pay {4}",
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE),
                 new GenericManaCost(4)
-        ));
+        ).setAdditional(true));
 
         // Destroy target creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

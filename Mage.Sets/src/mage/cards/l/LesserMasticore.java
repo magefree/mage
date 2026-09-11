@@ -28,7 +28,7 @@ public final class LesserMasticore extends CardImpl {
         this.toughness = new MageInt(2);
 
         // As an additional cost to cast this spell, discard a card.
-        this.getSpellAbility().addCost(new DiscardCardCost());
+        this.getSpellAbility().addCost(new DiscardCardCost().setAdditional(true));
 
         // {4}: Lesser Masticore deals 1 damage to target creature.
         Ability ability = new SimpleActivatedAbility(

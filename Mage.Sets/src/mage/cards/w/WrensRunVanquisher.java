@@ -37,7 +37,7 @@ public final class WrensRunVanquisher extends CardImpl {
         this.getSpellAbility().addCost(new OrCost(
                 "reveal an Elf card from your hand or pay {3}", new RevealTargetFromHandCost(new TargetCardInHand(filter)),
                 new GenericManaCost(3)
-        ));
+        ).setAdditional(true));
 
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());

@@ -37,7 +37,7 @@ public final class SavageOrder extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
 
         // As an additional cost to cast this spell, sacrifice a creature with power 4 or greater.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(filter));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(filter).setAdditional(true));
         // Search your library for a Dinosaur creature card, put it onto the battlefield, then shuffle. It gains indestructible until your next turn.
         this.getSpellAbility().addEffect(new SavageOrderEffect());
     }

@@ -21,7 +21,7 @@ public final class DevourInFlames extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
         // As an additional cost to cast Devour in Flames, return a land you control to its owner's hand.
-        this.getSpellAbility().addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(new FilterControlledLandPermanent("land"))));
+        this.getSpellAbility().addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(new FilterControlledLandPermanent("land"))).setAdditional(true));
 
         // Devour in Flames deals 5 damage to target creature or planeswalker.
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());

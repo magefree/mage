@@ -31,7 +31,7 @@ public final class MinionMissile extends CardImpl {
             "sacrifice a creature or discard a card",
             new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE),
             new DiscardCardCost()
-        ));
+        ).setAdditional(true));
 
         // Destroy target creature. Minion Missile deals 2 damage to that creature's controller.
         this.getSpellAbility().addEffect(new MinionMissileEffect());

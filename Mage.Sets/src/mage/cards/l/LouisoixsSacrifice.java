@@ -37,7 +37,7 @@ public final class LouisoixsSacrifice extends CardImpl {
                 "sacrifice a legendary creature or pay {2}",
                 new SacrificeTargetCost(StaticFilters.FILTER_CREATURE_LEGENDARY),
                 new GenericManaCost(2)
-        ));
+        ).setAdditional(true));
 
         // Counter target activated ability, triggered ability, or noncreature spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

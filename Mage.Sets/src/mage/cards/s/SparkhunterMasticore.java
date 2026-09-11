@@ -38,7 +38,7 @@ public final class SparkhunterMasticore extends CardImpl {
         this.toughness = new MageInt(4);
 
         // As an additional cost to cast this spell, discard a card.
-        this.getSpellAbility().addCost(new DiscardCardCost());
+        this.getSpellAbility().addCost(new DiscardCardCost().setAdditional(true));
 
         // Protection from planeswalkers
         this.addAbility(new ProtectionAbility(filter));

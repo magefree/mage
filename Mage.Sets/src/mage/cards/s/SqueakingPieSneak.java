@@ -37,7 +37,7 @@ public final class SqueakingPieSneak extends CardImpl {
         this.getSpellAbility().addCost(new OrCost(
                 "reveal a Goblin card from your hand or pay {3}", new RevealTargetFromHandCost(new TargetCardInHand(filter)),
                 new GenericManaCost(3)
-        ));
+        ).setAdditional(true));
         // Fear
         this.addAbility(FearAbility.getInstance());
     }

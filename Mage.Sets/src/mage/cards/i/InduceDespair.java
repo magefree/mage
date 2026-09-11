@@ -31,7 +31,7 @@ public final class InduceDespair extends CardImpl {
         // As an additional cost to cast Induce Despair, reveal a creature card from your hand.
         // Target creature gets -X/-X until end of turn, where X is the revealed card's converted mana cost.
         this.getSpellAbility().addEffect(new InduceDespairEffect());
-        this.getSpellAbility().addCost(new RevealTargetFromHandCost(new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE_YOUR_HAND)));
+        this.getSpellAbility().addCost(new RevealTargetFromHandCost(new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE_YOUR_HAND)).setAdditional(true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

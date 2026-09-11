@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -21,7 +20,7 @@ public final class MagmaRift extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
         // As an additional cost to cast Magma Rift, sacrifice a land.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_LAND));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_LAND).setAdditional(true));
 
         // Magma Rift deals 5 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));

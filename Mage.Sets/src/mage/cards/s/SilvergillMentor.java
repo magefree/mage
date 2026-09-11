@@ -31,7 +31,7 @@ public final class SilvergillMentor extends CardImpl {
         this.getSpellAbility().addCost(new OrCost(
                 "behold a Merfolk or pay {2}",
                 new BeholdCost(SubType.MERFOLK), new GenericManaCost(2)
-        ));
+        ).setAdditional(true));
 
         // When this creature enters, create a 1/1 white and blue Merfolk creature token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new MerfolkWhiteBlueToken())));

@@ -8,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -21,7 +20,7 @@ public final class Harrow extends CardImpl {
         this.color.setGreen(true);        
 
         // As an additional cost to cast Harrow, sacrifice a land.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_LAND));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_LAND).setAdditional(true));
 
         // Search your library for up to two basic land cards and put them onto the battlefield. Then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LANDS);

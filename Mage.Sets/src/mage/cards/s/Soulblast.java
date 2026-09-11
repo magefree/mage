@@ -25,7 +25,7 @@ public final class Soulblast extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}{R}{R}");
 
         // As an additional cost to cast Soulblast, sacrifice all creatures you control.
-        this.getSpellAbility().addCost(new SacrificeAllCost(StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED));
+        this.getSpellAbility().addCost(new SacrificeAllCost(StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED).setAdditional(true));
 
         // Soulblast deals damage to any target equal to the total power of the sacrificed creatures.
         this.getSpellAbility().addEffect(new SoulblastEffect());

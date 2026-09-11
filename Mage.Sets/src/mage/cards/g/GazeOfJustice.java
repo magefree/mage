@@ -33,7 +33,7 @@ public final class GazeOfJustice extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{W}");
 
         // As an additional cost to cast Gaze of Justice, tap three untapped white creatures you control.
-        this.getSpellAbility().addCost(new TapTargetCost(new TargetControlledPermanent(3, filter)));
+        this.getSpellAbility().addCost(new TapTargetCost(new TargetControlledPermanent(3, filter)).setAdditional(true));
 
         // Exile target creature.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

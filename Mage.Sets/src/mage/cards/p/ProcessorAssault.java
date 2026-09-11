@@ -23,7 +23,7 @@ public final class ProcessorAssault extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // As an additional cost to cast Processor Assault, put a card an opponent owns from exile into its owner's graveyard.
-        this.getSpellAbility().addCost(new ExileOpponentsCardFromExileToGraveyardCost(false));
+        this.getSpellAbility().addCost(new ExileOpponentsCardFromExileToGraveyardCost(false).setAdditional(true));
 
         // Processor Assault deals 5 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));

@@ -47,7 +47,7 @@ public final class MyPrecious extends AdventureCard {
         // Allure of Power
         // As an additional cost to cast this spell, sacrifice a creature.
         // Draw two cards.
-        this.getSpellCard().getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
+        this.getSpellCard().getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE).setAdditional(true));
         this.getSpellCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
 
         this.finalizeAdventure();

@@ -26,7 +26,7 @@ public final class GaeasBalance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
         // As an additional cost to cast Gaea's Balance, sacrifice five lands.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(5, StaticFilters.FILTER_LANDS));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(5, StaticFilters.FILTER_LANDS).setAdditional(true));
 
         // Search your library for a land card of each basic land type and put them onto the battlefield. Then shuffle your library.
         String ruleText = "Search your library for a land card of each basic land type, put those cards onto the battlefield, then shuffle.";

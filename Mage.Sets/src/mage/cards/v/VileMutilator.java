@@ -40,7 +40,7 @@ public final class VileMutilator extends CardImpl {
         this.toughness = new MageInt(5);
 
         // As an additional cost to cast this spell, sacrifice a creature or enchantment.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE_OR_ENCHANTMENT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE_OR_ENCHANTMENT).setAdditional(true));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

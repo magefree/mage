@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -38,7 +37,7 @@ public final class SoulsOfTheLost extends CardImpl {
         this.getSpellAbility().addCost(new OrCost("discard a card or sacrifice a permanent",
                 new DiscardCardCost(),
                 new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT)
-        ));
+        ).setAdditional(true));
 
         // Fathomless descent -- Souls of the Lost's power is equal to the number of permanent cards in your graveyard and its toughness is equal to that number plus 1.
         this.addAbility(new SimpleStaticAbility(Zone.ALL,

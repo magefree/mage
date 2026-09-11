@@ -36,7 +36,7 @@ public final class DuskMangler extends CardImpl {
                 "sacrifice a creature, discard a card, or pay 4 life",
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE),
                 new DiscardCardCost(), new PayLifeCost(4)
-        ));
+        ).setAdditional(true));
 
         // When Dusk Mangler enters the battlefield, each opponent sacrifices a creature, discards a card, and loses 4 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(

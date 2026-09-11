@@ -34,7 +34,7 @@ public final class DisruptionProtocol extends CardImpl {
         this.getSpellAbility().addCost(new OrCost(
                 "tap an untapped artifact you control or pay {1}", new TapTargetCost(new TargetControlledPermanent(filter)),
                 new GenericManaCost(1)
-        ));
+        ).setAdditional(true));
 
         // Counter target spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

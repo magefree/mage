@@ -24,7 +24,7 @@ public final class DeadlyPrecision extends CardImpl {
         this.getSpellAbility().addCost(new OrCost(
                 "pay {4} or sacrifice an artifact or creature", new GenericManaCost(4),
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE)
-        ));
+        ).setAdditional(true));
 
         // Destroy target creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

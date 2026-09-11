@@ -38,7 +38,7 @@ public final class CalamityOfTheTitans extends CardImpl {
         // As an additional cost to cast this spell, reveal a colorless creature card from your hand.
         this.getSpellAbility().addCost(new RevealTargetFromHandCost(
             new TargetCardInHand(filterCard)
-        ));
+        ).setAdditional(true));
 
         // Exile each creature and planeswalker with mana value less than the revealed card's mana value.
         this.getSpellAbility().addEffect(new CalamityOfTheTitansEffect());
