@@ -342,6 +342,12 @@ public class HumanPlayer extends PlayerImpl {
                 }
             }
 
+            // dump every raw response (before any game logic approved, not other api calls)
+            // TODO: add callback id and game cycle to response object for better tracing?
+            if (DebugUtil.NETWORK_SHOW_CLIENT_CALLBACK_RESPONSES) {
+                logger.info(response.toString());
+            }
+
             // async command: concede by any player
             // game recived immediately response on OTHER player concede -- need to process end game and continue to wait
             // TODO: is it possible to break choose dialog of current player (check it in multiplayer)?
