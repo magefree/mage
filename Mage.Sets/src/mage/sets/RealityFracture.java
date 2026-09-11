@@ -60,6 +60,10 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Liliana the Faultless", 293, Rarity.RARE, mage.cards.l.LilianaTheFaultless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liliana the Repentant", 231, Rarity.RARE, mage.cards.l.LilianaTheRepentant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liliana the Repentant", 305, Rarity.RARE, mage.cards.l.LilianaTheRepentant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Loyal Tutor", 14, Rarity.RARE, mage.cards.l.LoyalTutor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Loyal Tutor", 404, Rarity.MYTHIC, mage.cards.l.LoyalTutor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Loyal Tutor", 414, Rarity.MYTHIC, mage.cards.l.LoyalTutor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Loyal Tutor", 424, Rarity.RARE, mage.cards.l.LoyalTutor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Memory Trap", 15, Rarity.COMMON, mage.cards.m.MemoryTrap.class));
         cards.add(new SetCardInfo("Mountain", 391, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 392, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
