@@ -168,6 +168,10 @@ public class PermanentCard extends PermanentImpl {
         }
         this.abilities.setControllerId(this.controllerId);
         this.abilities.setSourceId(objectId);
+        this.abilities.stream().flatMap(ability -> ability.getWatchers().stream().map(watcher -> watcher.getKey())).map(game.getState()::getWatcher).distinct().forEach(watcher -> {
+            watcher.setControllerId(this.controllerId);
+            watcher.setSourceId(objectId);
+        });
         this.cardType.clear();
         this.cardType.addAll(card.getCardType());
         if (!isReset) {

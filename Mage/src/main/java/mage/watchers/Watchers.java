@@ -6,6 +6,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.util.HashMap;
+import java.util.stream.Stream;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -33,9 +34,13 @@ public class Watchers extends HashMap<String, Watcher> {
     }
 
     public void watch(GameEvent event, Game game) {
-        for (Watcher watcher : this.values()) {
-            watcher.watch(event, game);
-        }
+        final Watchers isolated = new Watchers();
+        this.values().stream().filter(Watcher::isolated).forEach(isolated::add);
+        Stream.concat(
+            this.values().stream().filter(watcher -> !watcher.isolated()),
+            isolated.values().stream()
+        ).forEach(watcher -> watcher.watch(event, game));
+        isolated.entrySet().stream().forEach(entry -> this.put(entry.getKey(), entry.getValue()));
     }
 
     public void reset() {
