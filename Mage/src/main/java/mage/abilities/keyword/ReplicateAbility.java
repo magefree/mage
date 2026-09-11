@@ -16,9 +16,9 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.Iterator;
-import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -29,13 +29,8 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
     private static final String reminderTextMana = "When you cast this spell, "
             + "copy it for each time you paid its replicate cost."
             + " You may choose new targets for the copies.";
-    /**
-     * link each replicate trigger to its own paid cost (multiple Hatchery Sliver grants must stay independent).
-     * originalId survives AbilityImpl.newId(), but copying a card with Isochron Scepter calls CardImpl.assignNewId() -> newOriginalId(), 
-     * replacing both IDs without updating the trigger's stored link.
-     * keep this separate key unchanged in both copy constructors so the copied cost and trigger still match.
-     */
-    private final UUID replicateId;
+    // Distinguish multiple replicate instances; the tag's value belongs to the cast spell
+    private final String activationKey;
     protected OptionalAdditionalCost additionalCost;
 
     public ReplicateAbility(String manaString) {
@@ -44,30 +39,22 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
 
     public ReplicateAbility(Cost cost) {
         super(Zone.STACK, null);
-        this.replicateId = UUID.randomUUID();
+        this.activationKey = "replicateActivation|" + getOriginalId();
         this.additionalCost = new OptionalAdditionalCostImpl(keywordText, reminderTextMana, cost);
         this.additionalCost.setRepeatable(true);
         setRuleAtTheTop(true);
-        addSubAbility(new ReplicateTriggeredAbility(this.replicateId));
+        addSubAbility(new ReplicateTriggeredAbility(activationKey));
     }
 
     protected ReplicateAbility(final ReplicateAbility ability) {
         super(ability);
-        this.replicateId = ability.replicateId;
-        /**
-         * copy the activation flag and payment count, but do not share their mutable cost object.
-         * otherwise resetting replicate on a copied card/spell would also reset the original's payments.
-         */
+        this.activationKey = ability.activationKey;
         additionalCost = ability.additionalCost.copy();
     }
 
     @Override
     public ReplicateAbility copy() {
         return new ReplicateAbility(this);
-    }
-
-    UUID getReplicateId() {
-        return replicateId;
     }
 
     @Override
@@ -130,6 +117,7 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
                 }
             }
         }
+        ability.setCostsTag(activationKey, getActivateCount());
     }
 
     @Override
@@ -145,21 +133,22 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
     public String getReminderText() {
         return additionalCost == null ? "" : additionalCost.getReminderText();
     }
+
 }
 
 class ReplicateTriggeredAbility extends TriggeredAbilityImpl {
 
-    private UUID replicateId; // need to correspond only to own replicate ability, not any other instances of replicate ability
+    private final String activationKey;
 
-    public ReplicateTriggeredAbility(UUID replicateId) {
+    ReplicateTriggeredAbility(String activationKey) {
         super(Zone.STACK, new ReplicateCopyEffect());
-        this.replicateId = replicateId;
-        this.setRuleVisible(false);
+        this.activationKey = activationKey;
+        setRuleVisible(false);
     }
 
     private ReplicateTriggeredAbility(final ReplicateTriggeredAbility ability) {
         super(ability);
-        this.replicateId = ability.replicateId;
+        this.activationKey = ability.activationKey;
     }
 
     @Override
@@ -181,27 +170,16 @@ class ReplicateTriggeredAbility extends TriggeredAbilityImpl {
         if (!(spell instanceof Spell)) {
             return false;
         }
-        Card card = ((Spell) spell).getCard();
-        if (card == null) {
+        int replicateCount = CardUtil.getSourceCostsTag(game, this,
+                activationKey, 0);
+        if (replicateCount == 0) {
             return false;
         }
-        /**
-         * original and copied cards share the link key, so search only the spell that caused this trigger.
-         * within that spell, match the specific replicate instance: another grant may have a different payment count.
-         */
-        for (Ability ability : card.getAbilities(game)) {
-            if (!(ability instanceof ReplicateAbility)
-                    || !ability.isActivated()
-                    || !((ReplicateAbility) ability).getReplicateId().equals(replicateId)) {
-                continue;
-            }
-            for (Effect effect : this.getEffects()) {
-                effect.setValue("ReplicateSpell", spell);
-                effect.setValue("ReplicateCount", ((ReplicateAbility) ability).getActivateCount());
-            }
-            return true;
+        for (Effect effect : getEffects()) {
+            effect.setValue("ReplicateSpell", spell);
+            effect.setValue("ReplicateCount", replicateCount);
         }
-        return false;
+        return true;
     }
 
     @Override

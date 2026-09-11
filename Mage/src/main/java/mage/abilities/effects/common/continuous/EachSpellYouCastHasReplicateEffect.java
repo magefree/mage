@@ -64,9 +64,10 @@ public class EachSpellYouCastHasReplicateEffect extends ContinuousEffectImpl {
 
         boolean applied = false;
 
+        // Copies of cards can be cast (Isochron Scepter); copies of spells are not cast
         for (StackObject stackObject : game.getStack()) {
             if (!(stackObject instanceof Spell)
-                    || stackObject.isCopy()
+                    || (stackObject.isCopy() && stackObject.getCopyFrom() instanceof Spell)
                     || !stackObject.isControlledBy(source.getControllerId())
                     || (fixedNewCost == null && stackObject.getManaCost().isEmpty())) { // If the spell has no mana cost, it cannot be played by this ability unless an fixed alternative cost (e.g. such as from Threefold Signal) is specified.
                 continue;
@@ -75,7 +76,7 @@ public class EachSpellYouCastHasReplicateEffect extends ContinuousEffectImpl {
             if (filter.match(stackObject, game)) {
                 Cost cost = fixedNewCost != null ? fixedNewCost.copy() : spell.getSpellAbility().getManaCosts().copy();
                 ReplicateAbility replicateAbility = replicateAbilities.computeIfAbsent(spell.getId(), k -> new ReplicateAbility(cost));
-                game.getState().addOtherAbility(spell.getCard(), replicateAbility, false); // Do not copy because paid and # of activations state is handled in the baility
+                game.getState().addOtherAbility(spell.getCard(), replicateAbility, false);
                 applied = true;
             }
         }

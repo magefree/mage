@@ -1,8 +1,11 @@
 
 package org.mage.test.cards.copy;
 
+import mage.abilities.keyword.ReplicateAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.stack.Spell;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -249,6 +252,109 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         // Chalice counters cast copy, but not the Replicate copy because it wasn't cast
         assertGraveyardCount(playerB, "Ornithopter", 1);
         assertPermanentCount(playerB, "Ornithopter", 0);
+    }
+
+    @Test
+    public void testCopiedCardWithTwoGrantedReplicateAbilities() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Hatchery Sliver", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Autochthon Wurm"); // 9/14 survives all four resolutions
+        addCard(Zone.HAND, playerA, "Isochron Scepter");
+        addCard(Zone.HAND, playerA, "Nameless Inversion");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
+        setChoice(playerA, true);
+        setChoice(playerA, "Nameless Inversion");
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}, {T}:");
+        setChoice(playerA, true); // copy the imprinted card
+        setChoice(playerA, true); // cast it
+        setChoice(playerA, true); // first replicate: twice
+        setChoice(playerA, true);
+        setChoice(playerA, false);
+        setChoice(playerA, true); // second replicate: once
+        setChoice(playerA, false);
+        addTarget(playerA, "Autochthon Wurm");
+        setChoice(playerA, "Replicate"); // order the two triggers
+        setChoice(playerA, false); // retain target for all three copies
+        setChoice(playerA, false);
+        setChoice(playerA, false);
+
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN, playerA, true); // Scepter ability
+        checkStackSize("spell and two replicate triggers", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, 3);
+        checkStackObject("two distinct replicate triggers", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Replicate", 2);
+        runCode("two independently paid replicate abilities", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, (info, player, game) -> {
+            Spell spell = (Spell) game.getStack().stream().filter(Spell.class::isInstance).findFirst().get();
+            Assert.assertEquals(2, spell.getCard().getAbilities(game).stream()
+                    .filter(ReplicateAbility.class::isInstance).count());
+        });
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
+        checkPT("four Nameless Inversion resolutions", 1, PhaseStep.POSTCOMBAT_MAIN,
+                playerB, "Autochthon Wurm", 21, 2);
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}:");
+        setChoice(playerA, true);
+        setChoice(playerA, true);
+        setChoice(playerA, false); // decline both replicate costs on the new casting
+        setChoice(playerA, false);
+        addTarget(playerA, "Autochthon Wurm");
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN, playerA, true);
+        checkStackSize("second casting has no replicate triggers", 3, PhaseStep.PRECOMBAT_MAIN, playerA, 1);
+        checkStackObject("only the cast card copy", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Nameless Inversion", 1);
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPowerToughness(playerB, "Autochthon Wurm", 12, 11);
+        assertExileCount("Nameless Inversion", 1);
+        assertPermanentCount(playerA, "Hatchery Sliver", 2);
+    }
+
+    @Test
+    public void testSimultaneousCardCopiesKeepReplicatePaymentsIndependent() {
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 12);
+        addCard(Zone.HAND, playerA, "Isochron Scepter");
+        addCard(Zone.HAND, playerA, "Pyromatics");
+        addCard(Zone.HAND, playerA, "Dramatic Reversal");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
+        setChoice(playerA, true);
+        setChoice(playerA, "Pyromatics");
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}, {T}:");
+        setChoice(playerA, true); // copy the imprinted card
+        setChoice(playerA, true); // cast the first copy
+        setChoice(playerA, true); // replicate twice
+        setChoice(playerA, true);
+        setChoice(playerA, false);
+        addTarget(playerA, playerB);
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN, playerA, true);
+        checkStackSize("first casting and its replicate trigger", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, 2);
+
+        // Cast another copy of the same card while the first copy's trigger is pending.
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Dramatic Reversal", TestPlayer.NO_TARGET, "Replicate");
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN, playerA, true);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}, {T}:",
+                TestPlayer.NO_TARGET, "Replicate", StackClause.WHILE_ON_STACK);
+        setChoice(playerA, true);
+        setChoice(playerA, true); // cast the second copy
+        setChoice(playerA, false); // no replicate for this casting
+        addTarget(playerA, playerA); // different target exposes copies of the wrong spell
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN, playerA, true);
+        checkStackSize("two cast copies and only the first replicate trigger", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, 3);
+        checkStackObject("second casting does not reuse the first payment", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Replicate", 1);
+        setChoice(playerA, false); // retain the first spell's target for both replicate copies
+        setChoice(playerA, false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 19); // second casting: one resolution
+        assertLife(playerB, 17); // first casting: original plus two replicate copies
+        assertExileCount("Pyromatics", 1);
     }
 
 }
