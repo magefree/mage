@@ -64526,6 +64526,7 @@ Plains|The Hobbit|318|C||Basic Land - Plains|||({T}: Add {W}.)|
 Plains|The Hobbit|319|C||Basic Land - Plains|||({T}: Add {W}.)|
 Plains|The Hobbit|320|C||Basic Land - Plains|||({T}: Add {W}.)|
 The Misty Mountains Cold|The Hobbit|321|R|{2}{R}|Enchantment - Saga|||(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)$I, II, III, IV -- Create a Treasure token. Then if you control four or more Treasures, sacrifice this Saga. If you do, create a 6/6 red Dragon creature token with flying.|
+Emrakul, the Exigent Doom|Reality Fracture|1|M|{10}|Legendary Creature - Eldrazi|12|12|When you cast this spell, untap all lands you control.$Flying, trample$Ward--Sacrifice three permanents.${3}, Exile this card from your hand: Target land gains "{T}: Add {C}{C}" until this card is cast from exile. You may cast this card for as long as it remains exiled.|
 Academic Ascent|Reality Fracture|2|C|{1}{W}|Instant|||Target creature gets +2/+2 and gains flying until end of turn.$Empower Jace 2.|
 Campus Crier|Reality Fracture|4|C|{1}{W}|Creature - Human Advisor|3|1|{1}, Exile this card from your graveyard: Empower Jace 2.|
 Enlightened Confidant|Reality Fracture|5|M|{1}{W}|Creature - Kor Cleric|2|1|Lifelink$At the beginning of your end step, if you gained life this turn, surveil 1. If you put a card with mana value less than or equal to the amount of life you gained this turn into your graveyard this way, put that card into your hand.|
@@ -64537,7 +64538,6 @@ Repurposed Enforcer|Reality Fracture|19|R|{1}{W}|Creature - Human Soldier|3|2|Wh
 Return to the Light Realms|Reality Fracture|20|M|{7}{W}{W}|Sorcery|||Return all nonland permanent cards from your graveyard to the battlefield.|
 Countersculpt|Reality Fracture|25|U|{U}{U}|Instant|||As an additional cost to cast this spell, behold a Jace or pay {1}.$Counter target spell. Empower Jace 1.|
 Diviner of Victory|Reality Fracture|28|R|{U}|Creature - Dwarf Wizard|1|1|This creature enters prepared.$Whenever you scry or surveil, this creature gets +1/+1 until end of turn.|
-Unwind History|Reality Fracture|28|R|{1}{U}|Sorcery|1|1|Return target creature an opponent controls with mana value 3 or less to its owner's hand. Surveil 1.|
 Icy Reception|Reality Fracture|30|C|{1}{U}|Instant|||Choose one --$* Counter target creature or legendary spell unless its controller pays {3}.$* Target creature gets -5/-0 until end of turn.|
 Jace's Machinations|Reality Fracture|32|R|{2}{U}|Instant|||Until end of turn, you may activate loyalty abilities of Jace planeswalkers you control on any player's turn any time you could cast an instant.$Empower Jace 8.|
 Perfected Theory|Reality Fracture|34|U|{U}|Instant|||Choose one --$* Target creature has base power and toughness 1/1 until end of turn.$* Target creature has base power and toughness 4/5 until end of turn.|
@@ -64545,16 +64545,15 @@ Protege's Awakening|Reality Fracture|37|C|{3}{U}|Sorcery|||Empower Jace 6.$Draw 
 The Theorist, Jace Beleren|Reality Fracture|43|M|{2}{U}{U}|Legendary Planeswalker - Jace|3|At the beginning of each opponent's draw step, you draw a card.$+1: Create a 1/1 blue Illusion creature token.$−2: For each opponent, return up to one target artifact or creature that player controls to its owner's hand.$−6: Draw three cards. Then put X +1/+1 counters on each creature you control, where X is the number of cards in your hand.|
 Theorist's Proxy|Reality Fracture|44|R|{1}{U}|Creature - Illusion|0|3|Flash$When this creature enters, empower Jace 3.${U}, Sacrifice this creature: The next spell you cast this turn can't be countered.|
 Bloodline Recollector|Reality Fracture|49|M|{1}{B}|Creature - Vampire Warlock|2|2|At the beginning of each end step, if three or more creatures died this turn, this creature becomes prepared.|
-Ancestral Craving|Reality Fracture|49|M|{B}|Instant|2|2|Target player draws three cards and loses 3 life.|
 Cast Away Doubt|Reality Fracture|51|C|{2}{B}|Sorcery|||Draw two cards. Cast Away Doubt deals 2 damage to each player.|
 Overwrite the Multiverse|Reality Fracture|59|M|{4}{B}{B}|Sorcery|||Exile all creatures. Empower Jace X, where X is the number of creatures exiled this way.|
 Rewrite Regrets|Reality Fracture|62|U|{3}{B}|Sorcery|||Return target creature or planeswalker card with mana value 6 or less from your graveyard to the battlefield.$Empower Jace 2.|
 Solve for Disappointment|Reality Fracture|67|C|{1}{B}|Sorcery|||Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card.$Empower Jace 1.|
+Blazing Crescendo|Reality Fracture|75|C|{1}{R}|Instant|||Target creature gets +3/+1 until end of turn.$Exile the top card of your library. Until the end of your next turn, you may play that card.|
 Craterclaw Colossus|Reality Fracture|78|M|{4}{R}{R}{R}|Artifact Creature - Beast Construct|5|5|Haste$When this creature enters, creatures you control gain trample and get +X/+0 until end of turn, where X is the number of artifacts you control.|
 Eardrum Rattler|Reality Fracture|81|C|{1}{R}|Creature - Human Bard|2|2|{1}, {T}: Another target creature you control with power 2 or less can't be blocked this turn.|
 No Admittance|Reality Fracture|89|C|{1}{R}|Sorcery|||No Admittance deals 3 damage to any target.$Empower Jace 1.|
 Pompous Battlemage|Reality Fracture|90|R|{R}|Creature - Goblin Sorcerer|1|1|Prowess$This creature enters prepared.|
-Improvised Act|Reality Fracture|90|R|{R}|Sorcery|1|1|You may discard a card. If you do, draw a card.|
 Stingcaster Mage|Reality Fracture|93|M|{1}{R}|Creature - Human Wizard|2|1|Haste$When this creature enters, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.|
 Arcane Amphisbaena|Reality Fracture|97|C|{1}{G}|Creature - Snake|1|1|Deathtouch$When this creature enters, empower Jace 2.|
 Budding Insurgent|Reality Fracture|99|C|{2}{G}|Creature - Dryad Scout|3|3|Vigilance$Sacrifice this creature: Destroy target artifact or enchantment. If that permanent was a legendary enchantment, draw a card. Activate only as a sorcery.|
@@ -64570,22 +64569,18 @@ Avatar of Burgeoning Echoes|Reality Fracture|122|M|{G}{U}|Creature - Avatar|2|3|
 Charge the Sanctum|Reality Fracture|125|C|{2}{R/W}|Instant|||Choose one --$* Creatures you control get +2/+0 until end of turn.$* Target creature gets +2/+0 and gains first strike until end of turn. Put a +1/+1 counter on it.|
 Clash of Elements|Reality Fracture|126|U|{1}{U}{R}|Instant|||Choose target nonland permanent. Its owner may put it on the top of their library. If they do, Clash of Elements deals 2 damage to them. If they didn't put the card on top of their library, they put it on the bottom.|
 Denzilore Fatehold|Reality Fracture|128|M|{1}{W}{U}{U}|Legendary Creature - Elder Sphinx|3|4|Flash$Flying$Whenever you scry or surveil, put a +1/+1 counter on each creature you control.|
+Fatehold Chronologist|Reality Fracture|133|C|{1}{W/U}|Creature - Bird Wizard|1|2|Flying$This creature enters prepared.|
 Ingris Stingerquill|Reality Fracture|137|M|{B}{R}{R}|Legendary Creature - Elder Sphinx|1|4|Flying$Whenever a creature you control attacks, that creature deals 1 damage to each opponent.${4}: Create a 2/2 colorless Wizard Soldier creature token named Cadet. Then creatures you control gain haste until end of turn.|
 Kwia Vigorbloom|Reality Fracture|140|M|{3}{G}{W}{W}|Legendary Creature - Elder Sphinx|6|6|Flying, vigilance, lifelink, ward {2}$Whenever you gain life, create a colorless artifact token named Lotus with "{T}, Sacrifice this token: Add three mana of any one color." This ability triggers only once each turn.|
 Paradox Shaper|Reality Fracture|143|U|{1}{U/B}|Creature - Octopus Wizard|1|3|At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared.${2}: Put target card from your graveyard on the bottom of your library.|
-Omit Variables|Reality Fracture|143|U|{U/B}|Sorcery|1|3|Mill three cards.|
 Prudent Fateseer|Reality Fracture|146|U|{1}{W/U}{W/U}|Creature - Dwarf Wizard|1|4|This creature enters prepared.$Whenever you scry or surveil, creatures you control get +1/+0 until end of turn. This ability triggers only once each turn.|
-Peer Review|Reality Fracture|146|U|{2}{W/U}|Sorcery|1|4|Create a 2/2 colorless Wizard Soldier creature token named Cadet. Surveil 1.|
 Solitary Cell|Reality Fracture|149|R|{R}{W}|Artifact|||When this artifact enters, exile target nonland permanent an opponent controls with mana value 3 or less until this artifact leaves the battlefield.${1}, {T}, Discard a legendary card: Draw a card.|
 Stingerquill Voxmancer|Reality Fracture|151|U|{B/R}|Creature - Goblin Sorcerer|1|2|At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared.|
-Vicious Verse|Reality Fracture|151|U|{B/R}|Sorcery|1|2|Vicious Verse deals 1 damage to target opponent.|
 Tam's Resistance|Reality Fracture|153|C|{1}{G/U}|Sorcery|||Put a +1/+1 counter on up to one target creature. It gains vigilance until end of turn.$Empower Jace 4.|
 Uldaros Theorix|Reality Fracture|159|M|{3}{U}{B}{B}|Legendary Creature - Elder Sphinx|5|5|Flying$When Uldaros Theorix enters, if you cast him, exile up to one target nonland card of each card type from your graveyard. Copy those cards. You may cast any number of spells with total mana value 6 or less from among the copies without paying their mana costs.|
 Vigorbloom Vanguard|Reality Fracture|161|U|{1}{G/W}|Creature - Troll Druid|2|2|This creature enters prepared.$Each creature you control with a +1/+1 counter on it has vigilance.|
-Seed Suture|Reality Fracture|161|U|{G/W}|Sorcery|2|2|Put a +1/+1 counter on target creature. You gain 1 life.|
 Warrior's Blades|Reality Fracture|163|U|{2}{R}{W}|Artifact - Equipment|||When this Equipment enters, it deals 3 damage to any target and you gain 3 life.$Equipped creature gets +2/+1.$Equip {3}. This ability costs {1} less to activate for each +1/+1 counter on the creature it targets.|
 Woodwork Prodigy|Reality Fracture|165|U|{2}{R/G}|Creature - Cat Druid|3|3|At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared.|
-Soul Tether|Reality Fracture|165|U|{2}{R/G}|Sorcery|3|3|Create a Heartwood token.|
 Keeper of the Quiet Hour|Reality Fracture|171|C|{3}|Artifact Creature - Chimera|3|2|When this creature enters, empower Jace 2.|
 Deserted Beach|Reality Fracture|176|R||Land|||This land enters tapped unless you control two or more other lands.${T}: Add {W} or {U}.|
 Haunted Ridge|Reality Fracture|180|R||Land|||This land enters tapped unless you control two or more other lands.${T}: Add {B} or {R}.|
@@ -64645,28 +64640,13 @@ Solitary Cell|Reality Fracture|355|R|{R}{W}|Artifact|||When this artifact enters
 Uldaros Theorix|Reality Fracture|358|M|{3}{U}{B}{B}|Legendary Creature - Elder Sphinx|5|5|Flying$When Uldaros Theorix enters, if you cast him, exile up to one target nonland card of each card type from your graveyard. Copy those cards. You may cast any number of spells with total mana value 6 or less from among the copies without paying their mana costs.|
 The Theorist, Jace Beleren|Reality Fracture|363|M|{2}{U}{U}|Legendary Planeswalker - Jace|3|At the beginning of each opponent's draw step, you draw a card.$+1: Create a 1/1 blue Illusion creature token.$−2: For each opponent, return up to one target artifact or creature that player controls to its owner's hand.$−6: Draw three cards. Then put X +1/+1 counters on each creature you control, where X is the number of cards in your hand.|
 Theorist's Sanctum|Reality Fracture|381|R||Land - Island|||({T}: Add {U}.)$As this land enters, you may behold a Jace. If you don't, this land enters tapped.${2}{U}, {T}: Empower Jace 2.|
-Plains|Reality Fracture|382|C||Basic Land - Plains|||({T}: Add {W}.)|
-Plains|Reality Fracture|383|C||Basic Land - Plains|||({T}: Add {W}.)|
-Plains|Reality Fracture|384|C||Basic Land - Plains|||({T}: Add {W}.)|
-Island|Reality Fracture|385|C||Basic Land - Island|||({T}: Add {U}.)|
-Island|Reality Fracture|386|C||Basic Land - Island|||({T}: Add {U}.)|
-Island|Reality Fracture|387|C||Basic Land - Island|||({T}: Add {U}.)|
-Swamp|Reality Fracture|388|C||Basic Land - Swamp|||({T}: Add {B}.)|
-Swamp|Reality Fracture|389|C||Basic Land - Swamp|||({T}: Add {B}.)|
-Swamp|Reality Fracture|390|C||Basic Land - Swamp|||({T}: Add {B}.)|
-Mountain|Reality Fracture|391|C||Basic Land - Mountain|||({T}: Add {R}.)|
-Mountain|Reality Fracture|392|C||Basic Land - Mountain|||({T}: Add {R}.)|
-Mountain|Reality Fracture|393|C||Basic Land - Mountain|||({T}: Add {R}.)|
-Forest|Reality Fracture|394|C||Basic Land - Forest|||({T}: Add {G}.)|
-Forest|Reality Fracture|395|C||Basic Land - Forest|||({T}: Add {G}.)|
-Forest|Reality Fracture|396|C||Basic Land - Forest|||({T}: Add {G}.)|
 Deserted Beach|Reality Fracture|397|R||Land|||This land enters tapped unless you control two or more other lands.${T}: Add {W} or {U}.|
 Haunted Ridge|Reality Fracture|398|R||Land|||This land enters tapped unless you control two or more other lands.${T}: Add {B} or {R}.|
 Overgrown Farmland|Reality Fracture|399|R||Land|||This land enters tapped unless you control two or more other lands.${T}: Add {G} or {W}.|
 Rockfall Vale|Reality Fracture|400|R||Land|||This land enters tapped unless you control two or more other lands.${T}: Add {R} or {G}.|
 Shipwreck Marsh|Reality Fracture|401|R||Land|||This land enters tapped unless you control two or more other lands.${T}: Add {U} or {B}.|
 Bloodline Recollector|Reality Fracture|402|M|{1}{B}|Creature - Vampire Warlock|2|2|At the beginning of each end step, if three or more creatures died this turn, this creature becomes prepared.|
-Ancestral Craving|Reality Fracture|402|M|{B}|Instant|2|2|Target player draws three cards and loses 3 life.|
+Emrakul, the Exigent Doom|Reality Fracture|403|M|{10}|Legendary Creature - Eldrazi|12|12|When you cast this spell, untap all lands you control.$Flying, trample$Ward--Sacrifice three permanents.${3}, Exile this card from your hand: Target land gains "{T}: Add {C}{C}" until this card is cast from exile. You may cast this card for as long as it remains exiled.|
 Loyal Tutor|Reality Fracture|404|M|{W}|Instant|||Search your library for a planeswalker card, reveal it, then shuffle and put that card on top.|
 The Theorist, Jace Beleren|Reality Fracture|405|M|{2}{U}{U}|Legendary Planeswalker - Jace|3|At the beginning of each opponent's draw step, you draw a card.$+1: Create a 1/1 blue Illusion creature token.$−2: For each opponent, return up to one target artifact or creature that player controls to its owner's hand.$−6: Draw three cards. Then put X +1/+1 counters on each creature you control, where X is the number of cards in your hand.|
 Aerid Konstrari|Reality Fracture|407|M|{1}{R}{G}{G}|Legendary Creature - Elder Sphinx|5|4|Flying$When Aerid Konstrari enters or dies, create a Heartwood token.${6}: Create a Heartwood token. Then Aerid Konstrari gets +X/+0 until end of turn, where X is the number of artifacts you control.|
@@ -64674,6 +64654,7 @@ Denzilore Fatehold|Reality Fracture|408|M|{1}{W}{U}{U}|Legendary Creature - Elde
 Ingris Stingerquill|Reality Fracture|409|M|{B}{R}{R}|Legendary Creature - Elder Sphinx|1|4|Flying$Whenever a creature you control attacks, that creature deals 1 damage to each opponent.${4}: Create a 2/2 colorless Wizard Soldier creature token named Cadet. Then creatures you control gain haste until end of turn.|
 Kwia Vigorbloom|Reality Fracture|410|M|{3}{G}{W}{W}|Legendary Creature - Elder Sphinx|6|6|Flying, vigilance, lifelink, ward {2}$Whenever you gain life, create a colorless artifact token named Lotus with "{T}, Sacrifice this token: Add three mana of any one color." This ability triggers only once each turn.|
 Uldaros Theorix|Reality Fracture|411|M|{3}{U}{B}{B}|Legendary Creature - Elder Sphinx|5|5|Flying$When Uldaros Theorix enters, if you cast him, exile up to one target nonland card of each card type from your graveyard. Copy those cards. You may cast any number of spells with total mana value 6 or less from among the copies without paying their mana costs.|
+Emrakul, the Exigent Doom|Reality Fracture|413|M|{10}|Legendary Creature - Eldrazi|12|12|When you cast this spell, untap all lands you control.$Flying, trample$Ward--Sacrifice three permanents.${3}, Exile this card from your hand: Target land gains "{T}: Add {C}{C}" until this card is cast from exile. You may cast this card for as long as it remains exiled.|
 Loyal Tutor|Reality Fracture|414|M|{W}|Instant|||Search your library for a planeswalker card, reveal it, then shuffle and put that card on top.|
 The Theorist, Jace Beleren|Reality Fracture|415|M|{2}{U}{U}|Legendary Planeswalker - Jace|3|At the beginning of each opponent's draw step, you draw a card.$+1: Create a 1/1 blue Illusion creature token.$−2: For each opponent, return up to one target artifact or creature that player controls to its owner's hand.$−6: Draw three cards. Then put X +1/+1 counters on each creature you control, where X is the number of cards in your hand.|
 Aerid Konstrari|Reality Fracture|417|M|{1}{R}{G}{G}|Legendary Creature - Elder Sphinx|5|4|Flying$When Aerid Konstrari enters or dies, create a Heartwood token.${6}: Create a Heartwood token. Then Aerid Konstrari gets +X/+0 until end of turn, where X is the number of artifacts you control.|
@@ -64681,13 +64662,12 @@ Denzilore Fatehold|Reality Fracture|418|M|{1}{W}{U}{U}|Legendary Creature - Elde
 Ingris Stingerquill|Reality Fracture|419|M|{B}{R}{R}|Legendary Creature - Elder Sphinx|1|4|Flying$Whenever a creature you control attacks, that creature deals 1 damage to each opponent.${4}: Create a 2/2 colorless Wizard Soldier creature token named Cadet. Then creatures you control gain haste until end of turn.|
 Kwia Vigorbloom|Reality Fracture|420|M|{3}{G}{W}{W}|Legendary Creature - Elder Sphinx|6|6|Flying, vigilance, lifelink, ward {2}$Whenever you gain life, create a colorless artifact token named Lotus with "{T}, Sacrifice this token: Add three mana of any one color." This ability triggers only once each turn.|
 Uldaros Theorix|Reality Fracture|421|M|{3}{U}{B}{B}|Legendary Creature - Elder Sphinx|5|5|Flying$When Uldaros Theorix enters, if you cast him, exile up to one target nonland card of each card type from your graveyard. Copy those cards. You may cast any number of spells with total mana value 6 or less from among the copies without paying their mana costs.|
+Emrakul, the Exigent Doom|Reality Fracture|423|M|{10}|Legendary Creature - Eldrazi|12|12|When you cast this spell, untap all lands you control.$Flying, trample$Ward--Sacrifice three permanents.${3}, Exile this card from your hand: Target land gains "{T}: Add {C}{C}" until this card is cast from exile. You may cast this card for as long as it remains exiled.|
 Loyal Tutor|Reality Fracture|424|R|{W}|Instant|||Search your library for a planeswalker card, reveal it, then shuffle and put that card on top.|
 Diviner of Victory|Reality Fracture|425|R|{U}|Creature - Dwarf Wizard|1|1|This creature enters prepared.$Whenever you scry or surveil, this creature gets +1/+1 until end of turn.|
-Unwind History|Reality Fracture|425|R|{1}{U}|Sorcery|1|1|Return target creature an opponent controls with mana value 3 or less to its owner's hand. Surveil 1.|
 Bloodline Recollector|Reality Fracture|427|M|{1}{B}|Creature - Vampire Warlock|2|2|At the beginning of each end step, if three or more creatures died this turn, this creature becomes prepared.|
-Ancestral Craving|Reality Fracture|427|M|{B}|Instant|2|2|Target player draws three cards and loses 3 life.|
 Pompous Battlemage|Reality Fracture|428|R|{R}|Creature - Goblin Sorcerer|1|1|Prowess$This creature enters prepared.|
-Improvised Act|Reality Fracture|428|R|{R}|Sorcery|1|1|You may discard a card. If you do, draw a card.|
+Emrakul, the Exigent Doom|Reality Fracture|438|M|{10}|Legendary Creature - Eldrazi|12|12|When you cast this spell, untap all lands you control.$Flying, trample$Ward--Sacrifice three permanents.${3}, Exile this card from your hand: Target land gains "{T}: Add {C}{C}" until this card is cast from exile. You may cast this card for as long as it remains exiled.|
 Enlightened Confidant|Reality Fracture|439|M|{1}{W}|Creature - Kor Cleric|2|1|Lifelink$At the beginning of your end step, if you gained life this turn, surveil 1. If you put a card with mana value less than or equal to the amount of life you gained this turn into your graveyard this way, put that card into your hand.|
 Return to the Light Realms|Reality Fracture|440|M|{7}{W}{W}|Sorcery|||Return all nonland permanent cards from your graveyard to the battlefield.|
 The Theorist, Jace Beleren|Reality Fracture|443|M|{2}{U}{U}|Legendary Planeswalker - Jace|3|At the beginning of each opponent's draw step, you draw a card.$+1: Create a 1/1 blue Illusion creature token.$−2: For each opponent, return up to one target artifact or creature that player controls to its owner's hand.$−6: Draw three cards. Then put X +1/+1 counters on each creature you control, where X is the number of cards in your hand.|
