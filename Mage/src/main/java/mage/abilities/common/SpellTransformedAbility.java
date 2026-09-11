@@ -1,6 +1,7 @@
 package mage.abilities.common;
 
 import mage.MageIdentifier;
+import mage.abilities.Modes;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.Card;
@@ -18,10 +19,12 @@ import java.util.UUID;
 public class SpellTransformedAbility extends SpellAbility {
 
     protected final String manaCost; //This variable is only used for rules text
+    private final Modes backFaceModes;
 
     public SpellTransformedAbility(Card card, String manaCost) {
         super(card.getSecondFaceSpellAbility());
         this.newId();
+        this.backFaceModes = card.getSecondFaceSpellAbility().getModes();
 
         // getSecondFaceSpellAbility() already verified that second face exists
         this.setCardName(card.getSecondCardFace().getName());
@@ -37,6 +40,7 @@ public class SpellTransformedAbility extends SpellAbility {
 
     public SpellTransformedAbility(final SpellAbility ability) {
         super(ability);
+        this.backFaceModes = null;
         this.newId();
 
         this.manaCost = null;
@@ -48,13 +52,23 @@ public class SpellTransformedAbility extends SpellAbility {
     }
 
     protected SpellTransformedAbility(final SpellTransformedAbility ability) {
+        // AbilityImpl copies through getModes(), so copied abilities keep an independent snapshot
         super(ability);
         this.manaCost = ability.manaCost;
+        this.backFaceModes = ability.backFaceModes == null ? null : super.getModes();
     }
 
     @Override
     public SpellTransformedAbility copy() {
         return new SpellTransformedAbility(this);
+    }
+
+    @Override
+    public Modes getModes() {
+        // Use live back-face definition until AbilityImpl makes an independent copy
+        return backFaceModes == null
+                ? super.getModes()
+                : backFaceModes;
     }
 
     @Override

@@ -38,16 +38,15 @@ public final class BindingGeist extends TransformingDoubleFacedCard {
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.getLeftHalfCard().addAbility(ability);
 
+        // Disturb {1}{U}
+        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{1}{U}"));
+
         // Spectral Binding
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getRightHalfCard().getSpellAbility().addTarget(auraTarget);
         this.getRightHalfCard().getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.getRightHalfCard().addAbility(new EnchantAbility(auraTarget));
-
-        // Disturb {1}{U}
-        // needs to be added after right half has spell ability target set
-        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{1}{U}"));
 
         // Enchanted creature gets -2/-0.
         this.getRightHalfCard().addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(-2, 0)));

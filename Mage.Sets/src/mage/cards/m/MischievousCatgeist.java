@@ -38,6 +38,8 @@ public final class MischievousCatgeist extends TransformingDoubleFacedCard {
                 new DrawCardSourceControllerEffect(1), false
         ));
 
+        // Disturb {2}{U}
+        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{2}{U}"));
 
         // Catlike Curiosity
         // Enchant creature
@@ -45,10 +47,6 @@ public final class MischievousCatgeist extends TransformingDoubleFacedCard {
         this.getRightHalfCard().getSpellAbility().addTarget(auraTarget);
         this.getRightHalfCard().getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.getRightHalfCard().addAbility(new EnchantAbility(auraTarget));
-
-        // Disturb {2}{U}
-        // needs to be added after enchant ability is set for target
-        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{2}{U}"));
 
         // Enchanted creature has "Whenever this creature deals combat damage to a player, draw a card."
         this.getRightHalfCard().addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(

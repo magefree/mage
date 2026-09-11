@@ -34,16 +34,15 @@ public final class LanternBearer extends TransformingDoubleFacedCard {
         // Flying
         this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
+        // Disturb {2}{U}
+        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{2}{U}"));
+
         // Lanterns' Lift
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getRightHalfCard().getSpellAbility().addTarget(auraTarget);
         this.getRightHalfCard().getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.getRightHalfCard().addAbility(new EnchantAbility(auraTarget));
-
-        // Disturb {2}{U}
-        // needs to be added after right half has spell ability target set
-        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{2}{U}"));
 
         // Enchanted creature gets +1/+1 and has flying.
         Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(
