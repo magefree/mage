@@ -15,7 +15,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public final class LoyalTutor extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a planeswalker card");
+    private static final FilterCard filter = new FilterCard("planeswalker card");
 
     static {
         filter.add(CardType.PLANESWALKER.getPredicate());
