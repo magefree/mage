@@ -31,7 +31,7 @@ public final class DivinerOfVictory extends PrepareCard {
     }
 
     public DivinerOfVictory(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}", "Unwind History", new CardType[]{CardType.INSTANT}, "{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}", "Unwind History", new CardType[]{CardType.SORCERY}, "{1}{U}");
 
         this.subtype.add(SubType.DWARF);
         this.subtype.add(SubType.WIZARD);
