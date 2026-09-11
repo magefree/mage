@@ -96,7 +96,7 @@ class OsteomancerAdeptEffect extends AsThoughEffectImpl {
         }
         Costs<Cost> newCosts = new CostsImpl<>();
         newCosts.addAll(card.getSpellAbility().getCosts());
-        newCosts.add(new ForageCost());
+        newCosts.add(new ForageCost().setAdditional(true));
         player.setCastSourceIdWithAlternateMana(
                 card.getId(), card.getManaCost(), newCosts,
                 MageIdentifier.OsteomancerAdeptAlternateCast

@@ -97,8 +97,8 @@ class DemonicEmbracePlayEffect extends AsThoughEffectImpl {
                 Player player = game.getPlayer(affectedControllerId);
                 if (player != null) {
                     Costs<Cost> costs = new CostsImpl<>();
-                    costs.add(new PayLifeCost(3));
-                    costs.add(new DiscardCardCost());
+                    costs.add(new PayLifeCost(3).setAdditional(true));
+                    costs.add(new DiscardCardCost().setAdditional(true));
                     player.setCastSourceIdWithAlternateMana(
                             sourceId, new ManaCostsImpl<>("{1}{B}{B}"), costs,
                             MageIdentifier.DemonicEmbraceAlternateCast

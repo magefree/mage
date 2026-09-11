@@ -109,7 +109,7 @@ class FalcoSparaPactweaverEffect extends AsThoughEffectImpl {
         }
 
         Costs<Cost> newCosts = new CostsImpl<>();
-        newCosts.add(new RemoveCounterCost(new TargetControlledCreaturePermanent().withNotTarget(true)));
+        newCosts.add(new RemoveCounterCost(new TargetControlledCreaturePermanent().withNotTarget(true)).setAdditional(true));
         newCosts.addAll(cardToCheck.getSpellAbility().getCosts());
         player.setCastSourceIdWithAlternateMana(
                 cardToCheck.getId(), cardToCheck.getManaCost(), newCosts,

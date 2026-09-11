@@ -88,7 +88,7 @@ class FestivalOfEmbersCastEffect extends AsThoughEffectImpl {
         }
         Costs<Cost> newCosts = new CostsImpl<>();
         newCosts.addAll(card.getSpellAbility().getCosts());
-        newCosts.add(new PayLifeCost(1));
+        newCosts.add(new PayLifeCost(1).setAdditional(true));
         player.setCastSourceIdWithAlternateMana(
                 card.getId(), card.getManaCost(), newCosts
         );

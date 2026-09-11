@@ -36,7 +36,7 @@ public final class TegwyllsScouring extends CardImpl {
 
         // You may cast Tegwyll's Scouring as though it had flash by tapping three untapped creatures you control with flying in addition to paying its other costs.
         CostsImpl<Cost> costs = new CostsImpl<>().setText("tapping three untapped creatures you control with flying");
-        costs.add(new TapTargetCost(3, filter).setText(""));
+        costs.add(new TapTargetCost(3, filter).setText("").setAdditional(true));
 
         Ability ability = new PayMoreToCastAsThoughtItHadFlashAbility(this, costs);
         ability.addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES));

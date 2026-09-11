@@ -89,7 +89,7 @@ class MaestrosAscendancyCastEffect extends AsThoughEffectImpl {
         }
         Costs<Cost> newCosts = new CostsImpl<>();
         newCosts.addAll(card.getSpellAbility().getCosts());
-        newCosts.add(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
+        newCosts.add(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE).setAdditional(true));
         player.setCastSourceIdWithAlternateMana(
                 card.getId(), card.getManaCost(), newCosts,
                 MageIdentifier.MaestrosAscendencyAlternateCast

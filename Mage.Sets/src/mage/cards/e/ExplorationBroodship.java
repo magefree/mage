@@ -46,7 +46,7 @@ public final class ExplorationBroodship extends CardImpl {
         this.addAbility(new StationLevelAbility(8)
                 .withLevelAbility(FlyingAbility.getInstance())
                 .withLevelAbility(new CastFromGraveyardOnceDuringEachOfYourTurnAbility(
-                        filter, new SacrificeTargetCost(StaticFilters.FILTER_LAND).setText("sacrificing a land")
+                        filter, new SacrificeTargetCost(StaticFilters.FILTER_LAND).setAdditional(true).setText("sacrificing a land")
                 ))
                 .withPT(4, 4));
     }
