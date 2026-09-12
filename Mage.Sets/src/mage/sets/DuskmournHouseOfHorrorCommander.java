@@ -340,6 +340,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Whispersilk Cloak", 257, Rarity.UNCOMMON, mage.cards.w.WhispersilkCloak.class));
         cards.add(new SetCardInfo("Whisperwood Elemental", 204, Rarity.MYTHIC, mage.cards.w.WhisperwoodElemental.class));
         cards.add(new SetCardInfo("Wilderness Reclamation", 205, Rarity.UNCOMMON, mage.cards.w.WildernessReclamation.class));
+        cards.add(new SetCardInfo("Winter, Cynical Opportunist", 7, Rarity.MYTHIC, mage.cards.w.WinterCynicalOpportunist.class));
         cards.add(new SetCardInfo("Witch's Clinic", 325, Rarity.RARE, mage.cards.w.WitchsClinic.class));
         cards.add(new SetCardInfo("Woodland Cemetery", 326, Rarity.RARE, mage.cards.w.WoodlandCemetery.class));
         cards.add(new SetCardInfo("Worldspine Wurm", 206, Rarity.MYTHIC, mage.cards.w.WorldspineWurm.class));
