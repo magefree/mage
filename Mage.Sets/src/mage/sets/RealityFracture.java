@@ -154,6 +154,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Titanbones, Towering Heart", 266, Rarity.UNCOMMON, mage.cards.t.TitanbonesToweringHeart.class));
         cards.add(new SetCardInfo("Vigorbloom Vanguard", 161, Rarity.UNCOMMON, mage.cards.v.VigorbloomVanguard.class));
         cards.add(new SetCardInfo("Vraska, Soul of Stone", 277, Rarity.RARE, mage.cards.v.VraskaSoulOfStone.class));
+        cards.add(new SetCardInfo("Warrior's Blades", 163, Rarity.UNCOMMON, mage.cards.w.WarriorsBlades.class));
         cards.add(new SetCardInfo("Way of the Cryomancer", 223, Rarity.UNCOMMON, mage.cards.w.WayOfTheCryomancer.class));
         cards.add(new SetCardInfo("Way of the Deathbringer", 238, Rarity.UNCOMMON, mage.cards.w.WayOfTheDeathbringer.class));
         cards.add(new SetCardInfo("Way of the Healer", 207, Rarity.UNCOMMON, mage.cards.w.WayOfTheHealer.class));
