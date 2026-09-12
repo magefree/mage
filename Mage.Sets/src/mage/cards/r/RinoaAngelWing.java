@@ -101,7 +101,7 @@ class RinoaAngelWingEffect extends OneShotEffect {
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
             game.setEnterWithCounters(card.getId(), new Counters(CounterType.FLYING.createInstance()));
-            player.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
+            player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null);
             if (CardUtil.getPermanentFromCardPutToBattlefield(card, game) != null) {
                 return true;
             }
