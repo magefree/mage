@@ -34,7 +34,7 @@ public final class MirkwoodNurturer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When this creature enters,
-        // return up to one other target permanent you control to its owner’s hand.
+        // return up to one other target permanent you control to its owner's hand.
         // If you do, put a +1/+1 counter on this creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new MirkwoodNurturerEffect());
         ability.addTarget(new TargetControlledPermanent(0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_PERMANENT, false));
@@ -59,7 +59,7 @@ class MirkwoodNurturerEffect extends OneShotEffect {
     // no target do not add counters - otherwise return and add counters
     MirkwoodNurturerEffect() {
         super(Outcome.BoostCreature);
-        staticText = "return up to one other target permanent you control to its owner’s hand."
+        staticText = "return up to one other target permanent you control to its owner's hand."
                         +" If you do, put a +1/+1 counter on this creature.";
     }
 
