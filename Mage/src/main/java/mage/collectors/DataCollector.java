@@ -2,6 +2,7 @@ package mage.collectors;
 
 import mage.game.Game;
 import mage.game.Table;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -88,7 +89,12 @@ public interface DataCollector {
     void onTestsStackPush(Game game);
 
     /**
-     * Tests only: on stack object resolve (calls before starting resolve)
+     * Tests only: on stack object resolve start (calls before starting resolve)
      */
-    void onTestsStackResolve(Game game);
+    void onTestsStackResolveStart(Game game, StackObject top);
+
+    /**
+     * Tests only: on stack object resolve end (calls after resolve end - on good and bad resolve, e.g. after counter/fizzle the spell)
+     */
+    void onTestsStackResolveEnd(Game game, StackObject top, boolean applied);
 }

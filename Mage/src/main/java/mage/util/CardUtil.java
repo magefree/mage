@@ -2561,4 +2561,48 @@ public final class CardUtil {
         return !ability.getEffects().isEmpty()
                 && ability.getEffects().stream().allMatch(InfoEffect.class::isInstance);
     }
+
+    public static void informPlayersCountersChange(UUID playerId, String counterName, int oldValue, int newValue, MageItem targetObject, Game game, Ability source) {
+        int change = Math.abs(newValue - oldValue);
+        if (change == 0) {
+            return;
+        }
+
+        String etbInfo = "";
+        if (targetObject instanceof Permanent && game.getPermanentEntering(targetObject.getId()) != null) {
+            etbInfo = " as it enters the battlefield";
+        }
+
+        boolean isRemoval = newValue < oldValue;
+
+        StringBuilder sb = new StringBuilder();
+        Player addingPlayer = game.getPlayer(playerId);
+        if (addingPlayer == null && source != null) {
+            addingPlayer = game.getPlayer(source.getControllerId());
+        }
+        if (addingPlayer != null) {
+            sb.append(addingPlayer.getLogName());
+        } else {
+            sb.append("Player");
+        }
+        sb.append(isRemoval ? " removes " : " puts ");
+        sb.append(change);
+        sb.append(' ');
+        sb.append(counterName);
+        sb.append(change == 1 ? " counter " : " counters ");
+        sb.append(isRemoval ? "from " : "on ");
+        if (targetObject instanceof Player) {
+            sb.append(((Player) targetObject).getLogName());
+        } else if (targetObject instanceof MageObject) {
+            sb.append(((MageObject) targetObject).getLogName());
+        } else {
+            sb.append("object");
+        }
+        sb.append(etbInfo);
+        sb.append(", remaining ");
+        sb.append(newValue);
+        sb.append(CardUtil.getSourceLogName(game, source, targetObject.getId()));
+
+        game.informPlayers(sb.toString());
+    }
 }

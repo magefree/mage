@@ -106,8 +106,8 @@ public final class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Katabatic Winds", 109, Rarity.RARE, mage.cards.k.KatabaticWinds.class, RETRO_ART));
         cards.add(new SetCardInfo("Keeper of Kookus", 85, Rarity.COMMON, mage.cards.k.KeeperOfKookus.class, RETRO_ART));
         cards.add(new SetCardInfo("King Cheetah", 110, Rarity.COMMON, mage.cards.k.KingCheetah.class, RETRO_ART));
-        cards.add(new SetCardInfo("Knight of the Mists", 36, Rarity.COMMON, mage.cards.k.KnightOfTheMists.class, RETRO_ART));
         cards.add(new SetCardInfo("Knight of Valor", 11, Rarity.COMMON, mage.cards.k.KnightOfValor.class, RETRO_ART));
+        cards.add(new SetCardInfo("Knight of the Mists", 36, Rarity.COMMON, mage.cards.k.KnightOfTheMists.class, RETRO_ART));
         cards.add(new SetCardInfo("Kookus", 86, Rarity.RARE, mage.cards.k.Kookus.class, RETRO_ART));
         cards.add(new SetCardInfo("Kyscu Drake", 111, Rarity.UNCOMMON, mage.cards.k.KyscuDrake.class, RETRO_ART));
         cards.add(new SetCardInfo("Lead-Belly Chimera", 148, Rarity.UNCOMMON, mage.cards.l.LeadBellyChimera.class, RETRO_ART));
@@ -167,6 +167,8 @@ public final class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Suleiman's Legacy", 138, Rarity.RARE, mage.cards.s.SuleimansLegacy.class, RETRO_ART));
         cards.add(new SetCardInfo("Summer Bloom", 122, Rarity.UNCOMMON, mage.cards.s.SummerBloom.class, RETRO_ART));
         cards.add(new SetCardInfo("Sun Clasp", 21, Rarity.COMMON, mage.cards.s.SunClasp.class, RETRO_ART));
+        cards.add(new SetCardInfo("Suq'Ata Assassin", 69, Rarity.UNCOMMON, mage.cards.s.SuqAtaAssassin.class, RETRO_ART));
+        cards.add(new SetCardInfo("Suq'Ata Lancer", 96, Rarity.COMMON, mage.cards.s.SuqAtaLancer.class, RETRO_ART));
         cards.add(new SetCardInfo("Talruum Champion", 97, Rarity.COMMON, mage.cards.t.TalruumChampion.class, RETRO_ART));
         cards.add(new SetCardInfo("Talruum Piper", 98, Rarity.UNCOMMON, mage.cards.t.TalruumPiper.class, RETRO_ART));
         cards.add(new SetCardInfo("Tar Pit Warrior", 70, Rarity.COMMON, mage.cards.t.TarPitWarrior.class, RETRO_ART));
@@ -233,7 +235,7 @@ class VisionsCollator implements BoosterCollator {
     private final BoosterStructure U3 = new BoosterStructure(uncommon, uncommon, uncommon);
     private final BoosterStructure R1 = new BoosterStructure(rare);
 
-    // guesses from lethe based on AAAAAAAACCC observed and likely sheet structure  
+    // guesses from lethe based on AAAAAAAACCC observed and likely sheet structure
     private final RarityConfiguration commonRuns = new RarityConfiguration(
         AAAAABBBBBC, AAAAABBBBBC, AAAAABBBBBC, AAAAABBBBBC, AAAAABBBBBC,
         AAAAABBBBBC, AAAAABBBBBC, AAAAABBBBBC, AAAAABBBBBC, AAAAABBBBBC,

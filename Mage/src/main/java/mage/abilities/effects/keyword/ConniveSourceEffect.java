@@ -9,6 +9,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -91,6 +92,11 @@ public class ConniveSourceEffect extends OneShotEffect {
         boolean permanentStillOnBattlefield = game.getState().getZone(permanent.getId()) == Zone.BATTLEFIELD;
         Player player = game.getPlayer(permanent.getControllerId());
         if (player == null) {
+            return false;
+        }
+        if (game.replaceEvent(new GameEvent(
+            GameEvent.EventType.CONNIVE, permanent.getId(), source, player.getId(), amount, false
+        ))) {
             return false;
         }
 

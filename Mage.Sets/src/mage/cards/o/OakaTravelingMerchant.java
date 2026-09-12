@@ -11,7 +11,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -20,6 +22,13 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class OakaTravelingMerchant extends CardImpl {
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a nonland permanent you control");
+
+    static {
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
+        filter.add(CounterAnyPredicate.instance);
+    }
 
     public OakaTravelingMerchant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
@@ -32,7 +41,7 @@ public final class OakaTravelingMerchant extends CardImpl {
 
         // {T}, Remove a counter from a nonland permanent you control: Draw a card.
         Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost());
-        ability.addCost(new RemoveCounterCost(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND)));
+        ability.addCost(new RemoveCounterCost(new TargetPermanent(filter)));
         this.addAbility(ability);
     }
 

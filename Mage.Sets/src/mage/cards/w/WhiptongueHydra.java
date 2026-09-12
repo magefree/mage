@@ -82,8 +82,7 @@ class WhiptongueHydraEffect extends OneShotEffect {
         if (destroyedPermanents > 0) {
             game.processAction();
             new AddCountersSourceEffect(
-                    CounterType.P1P1.createInstance(destroyedPermanents), true
-            ).apply(game, source);
+                    CounterType.P1P1.createInstance(destroyedPermanents)).apply(game, source);
         }
         return true;
     }

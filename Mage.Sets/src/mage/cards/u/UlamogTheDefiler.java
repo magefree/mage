@@ -55,8 +55,7 @@ public final class UlamogTheDefiler extends CardImpl {
         this.addAbility(
                 new EntersBattlefieldAbility(
                         new AddCountersSourceEffect(
-                                CounterType.P1P1.createInstance(), UlamogTheDefilerValue.instance, false
-                        ), "with a number of +1/+1 counters on it equal to " +
+                                CounterType.P1P1.createInstance(), UlamogTheDefilerValue.instance), "with a number of +1/+1 counters on it equal to " +
                         "the greatest mana value among cards in exile"
                 ).addHint(UlamogTheDefilerValue.hint)
         );

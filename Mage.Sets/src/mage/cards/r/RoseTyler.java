@@ -43,8 +43,7 @@ public final class RoseTyler extends CardImpl {
 
         // Bad Wolf -- Whenever Rose Tyler attacks, put a time counter on it for each suspended card you own and each other permanent you control with a time counter on it.
         this.addAbility(new AttacksTriggeredAbility(new AddCountersSourceEffect(
-                CounterType.TIME.createInstance(), RoseTylerValue.instance, true
-        )).addHint(RoseTylerValue.getHint()).withFlavorWord("Bad Wolf"));
+                CounterType.TIME.createInstance(), RoseTylerValue.instance)).addHint(RoseTylerValue.getHint()).withFlavorWord("Bad Wolf"));
 
         // Doctor's companion
         this.addAbility(DoctorsCompanionAbility.getInstance());

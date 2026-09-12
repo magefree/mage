@@ -41,8 +41,7 @@ public final class AmbitiousDragonborn extends CardImpl {
         // Ambitious Dragonborn enters the battlefield with X +1/+1 counters on it, where X is the greatest power among creatures you control and creature cards in your graveyard.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(
-                        CounterType.P1P1.createInstance(), AmbitiousDragonbornValue.instance, false
-                ), "with X +1/+1 counters on it, where X is the greatest power " +
+                        CounterType.P1P1.createInstance(), AmbitiousDragonbornValue.instance), "with X +1/+1 counters on it, where X is the greatest power " +
                 "among creatures you control and creature cards in your graveyard"
         ).addHint(hint));
     }

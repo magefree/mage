@@ -32,8 +32,7 @@ public final class KalonianHydra extends CardImpl {
 
         // Kalonian Hydra enters the battlefield with four +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(4), true
-        ), "with four +1/+1 counters on it"));
+                CounterType.P1P1.createInstance(4)), "with four +1/+1 counters on it"));
 
         // Whenever Kalonian Hydra attacks, double the number of +1/+1 counters on each creature you control.
         this.addAbility(new AttacksTriggeredAbility(

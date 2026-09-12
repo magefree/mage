@@ -38,7 +38,7 @@ public final class WickersmithsTools extends CardImpl {
 
         // {5}, {T}, Sacrifice this artifact: Create X tapped 2/2 colorless Scarecrow artifact creature tokens, where X is the number of charge counters on this artifact.
         Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(
-                new ScarecrowToken(), new CountersSourceCount(CounterType.CHARGE)
+                new ScarecrowToken(), new CountersSourceCount(CounterType.CHARGE), true, false
         ).setText("create X tapped 2/2 colorless Scarecrow artifact creature tokens, " +
                 "where X is the number of charge counters on {this}"), new ManaCostsImpl<>("{5}"));
         ability.addCost(new TapSourceCost());

@@ -98,6 +98,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean draws;
     protected boolean loses;
 
+    protected int startingDeckSize;
     protected Library library;
     protected Cards sideboard;
     protected Cards hand;
@@ -1883,6 +1884,19 @@ public abstract class PlayerImpl implements Player, Serializable {
         // collect and filter playable activated abilities
         // GUI: user clicks on card, but it must activate ability from ANY card's parts (main, left, right)
         Set<UUID> needIds = CardUtil.getObjectParts(object);
+        Card objectCard = object instanceof Card ? (Card) object : null;
+        Card mainCard = objectCard == null ? null : objectCard.getMainCard();
+        if (mainCard instanceof CardWithSpellOption) {
+            // Multipart cards decide which of their parts are casting options in their current state.
+            CardWithSpellOption card = (CardWithSpellOption) mainCard;
+            needIds = new HashSet<>(needIds);
+            if (!card.isMainCardCastOptionAvailable(game)) {
+                needIds.remove(card.getId());
+            }
+            if (!card.isSpellCardCastOptionAvailable(game)) {
+                needIds.remove(card.getSpellCard().getId());
+            }
+        }
 
         // workaround to find all abilities first and filter it for one object
         List<ActivatedAbility> allPlayable = getPlayable(game, true, zone, false);
@@ -2486,18 +2500,19 @@ public abstract class PlayerImpl implements Player, Serializable {
         );
         if (!game.replaceEvent(addingAllEvent)) {
             int amount = addingAllEvent.getAmount();
-            int finalAmount = amount;
+            int startAmount = this.counters.getCount(counter.getName());
+            int addedAmount = amount;
             boolean isEffectFlag = addingAllEvent.getFlag();
             for (int i = 0; i < amount; i++) {
                 Counter eventCounter = counter.copy();
-                eventCounter.remove(eventCounter.getCount() - 1);
+                eventCounter.remove(eventCounter.getCount() - 1); // make 1 counter
                 GameEvent addingOneEvent = GameEvent.getEvent(
                         GameEvent.EventType.ADD_COUNTER, playerId, source,
                         playerAddingCounters, counter.getName(), 1
                 );
                 addingOneEvent.setFlag(isEffectFlag);
                 if (!game.replaceEvent(addingOneEvent)) {
-                    counters.addCounter(eventCounter);
+                    this.counters.addCounter(eventCounter);
                     GameEvent addedOneEvent = GameEvent.getEvent(
                             GameEvent.EventType.COUNTER_ADDED, playerId, source,
                             playerAddingCounters, counter.getName(), 1
@@ -2505,14 +2520,15 @@ public abstract class PlayerImpl implements Player, Serializable {
                     addedOneEvent.setFlag(addingOneEvent.getFlag());
                     game.fireEvent(addedOneEvent);
                 } else {
-                    finalAmount--;
+                    addedAmount--;
                     returnCode = false;
                 }
             }
-            if (finalAmount > 0) {
+            if (addedAmount > 0) {
+                CardUtil.informPlayersCountersChange(playerAddingCounters, counter.getName(), startAmount, startAmount + addedAmount, this, game, source);
                 GameEvent addedAllEvent = GameEvent.getEvent(
                         GameEvent.EventType.COUNTERS_ADDED, playerId, source,
-                        playerAddingCounters, counter.getName(), amount
+                        playerAddingCounters, counter.getName(), addedAmount
                 );
                 addedAllEvent.setFlag(addingAllEvent.getFlag());
                 game.fireEvent(addedAllEvent);
@@ -2531,7 +2547,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             return;
         }
 
-        int finalAmount = 0;
+        int startAmount = this.counters.getCount(counterName);
+        int removedAmount = 0;
         for (int i = 0; i < amount; i++) {
 
             GameEvent event = new RemoveCounterEvent(counterName, this, source, false);
@@ -2544,10 +2561,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             event = new CounterRemovedEvent(counterName, this, source, false);
             game.fireEvent(event);
-            finalAmount++;
+            removedAmount++;
         }
 
-        GameEvent event = new CountersRemovedEvent(counterName, this, source, finalAmount, false);
+        CardUtil.informPlayersCountersChange(null, counterName, startAmount, startAmount - removedAmount, this, game, source);
+        GameEvent event = new CountersRemovedEvent(counterName, this, source, removedAmount, false);
         game.fireEvent(event);
     }
 
@@ -4170,8 +4188,12 @@ public abstract class PlayerImpl implements Player, Serializable {
         } else if (object instanceof CardWithSpellOption) {
             // adventure must use different card characteristics for different spells (main or adventure)
             CardWithSpellOption cardWithSpellOption = (CardWithSpellOption) object;
-            getPlayableFromObjectSingle(game, fromZone, cardWithSpellOption.getSpellCard(), cardWithSpellOption.getSpellCard().getAbilities(game), availableMana, output);
-            getPlayableFromObjectSingle(game, fromZone, cardWithSpellOption, cardWithSpellOption.getSharedAbilities(game), availableMana, output);
+            if (cardWithSpellOption.isSpellCardCastOptionAvailable(game)) {
+                getPlayableFromObjectSingle(game, fromZone, cardWithSpellOption.getSpellCard(), cardWithSpellOption.getSpellCard().getAbilities(game), availableMana, output);
+            }
+            if (cardWithSpellOption.isMainCardCastOptionAvailable(game)) {
+                getPlayableFromObjectSingle(game, fromZone, cardWithSpellOption, cardWithSpellOption.getSharedAbilities(game), availableMana, output);
+            }
         } else if (object instanceof Card) {
             getPlayableFromObjectSingle(game, fromZone, object, ((Card) object).getAbilities(game), availableMana, output);
         } else if (object instanceof StackObject) {
@@ -4317,6 +4339,16 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (ability.getZone().match(Zone.HAND)) {
                         boolean isPlaySpell = (ability instanceof SpellAbility);
                         boolean isPlayLand = (ability instanceof PlayLandAbility);
+
+                        if (isPlaySpell && card instanceof CardWithSpellOption) {
+                            CardWithSpellOption optionCard = (CardWithSpellOption) card;
+                            if ((ability.getSourceId().equals(optionCard.getId())
+                                    && !optionCard.isMainCardCastOptionAvailable(game))
+                                    || (ability.getSourceId().equals(optionCard.getSpellCard().getId())
+                                    && !optionCard.isSpellCardCastOptionAvailable(game))) {
+                                continue;
+                            }
+                        }
 
                         // ignore backside of TDFC
                         // TODO: maybe better way to ignore
@@ -4830,6 +4862,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void setLoseByZeroOrLessLife(boolean loseByZeroOrLessLife) {
         this.loseByZeroOrLessLife = loseByZeroOrLessLife;
+    }
+
+    @Override
+    public int getStartingDeckSize() {
+        return startingDeckSize;
+    }
+
+    @Override
+    public void initStartingDeckSize() {
+        this.startingDeckSize = getLibrary().size();
     }
 
     @Override
