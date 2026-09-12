@@ -33,7 +33,7 @@ public final class BranchingBolt extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(2);
         // Branching Bolt deals 3 damage to target creature with flying;
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_FLYING).withChooseHint("deals 3 damage, without flying"));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_FLYING).withChooseHint("deals 3 damage, with flying"));
         // or Branching Bolt deals 3 damage to target creature without flying.
         Mode mode = new Mode(new DamageTargetEffect(3));
         mode.addTarget(new TargetPermanent(filterNotFlying).withChooseHint("deals 3 damage, without flying"));
