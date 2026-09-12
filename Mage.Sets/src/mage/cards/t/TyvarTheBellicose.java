@@ -1,6 +1,7 @@
 package mage.cards.t;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -91,14 +92,27 @@ class TyvarTheBellicoseTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (isControlledBy(event.getPlayerId())
-                && event.getSourceId().equals(getSourceId())
-                && game
-                .getAbility(event.getTargetId(), event.getSourceId())
-                .map(ManaAbility.class::isInstance)
-                .orElse(false)) {
-            this.getEffects().setValue("damage", event.getAmount());
-            return true;
+        if (isControlledBy(event.getPlayerId()) && event.getSourceId().equals(getSourceId())) {
+            Ability ability = game.getAbility(event.getTargetId(), event.getSourceId()).orElse(null);
+
+            // 1. Standard exact match lookup for inherent abilities
+            if (ability != null) {
+                if (ability instanceof ManaAbility) {
+                    this.getEffects().setValue("damage", event.getAmount());
+                    return true;
+                }
+                return false;
+            }
+
+            // 2. Fallback for dynamically granted abilities.
+            // True mana abilities do not use the stack.
+            boolean usesStack = game.getStack().getStackObject(event.getTargetId()) != null
+                    || game.getLastKnownInformation(event.getTargetId(), Zone.STACK) != null;
+
+            if (!usesStack) {
+                this.getEffects().setValue("damage", event.getAmount());
+                return true;
+            }
         }
         return false;
     }
