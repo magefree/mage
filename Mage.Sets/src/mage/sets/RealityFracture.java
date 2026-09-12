@@ -63,6 +63,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Diviner of Victory", 28, Rarity.RARE, mage.cards.d.DivinerOfVictory.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Diviner of Victory", 425, Rarity.RARE, mage.cards.d.DivinerOfVictory.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eardrum Rattler", 81, Rarity.COMMON, mage.cards.e.EardrumRattler.class));
+        cards.add(new SetCardInfo("Edgar, Ancient Bloodlord", 270, Rarity.UNCOMMON, mage.cards.e.EdgarAncientBloodlord.class));
         cards.add(new SetCardInfo("Edgar, Moonlit Sovereign", 257, Rarity.UNCOMMON, mage.cards.e.EdgarMoonlitSovereign.class));
         cards.add(new SetCardInfo("Emergency Phytomedic", 130, Rarity.COMMON, mage.cards.e.EmergencyPhytomedic.class));
         cards.add(new SetCardInfo("Fatehold Chronologist", 133, Rarity.COMMON, mage.cards.f.FateholdChronologist.class));
