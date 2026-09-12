@@ -145,6 +145,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Semester Foreseer", 39, Rarity.COMMON, mage.cards.s.SemesterForeseer.class));
         cards.add(new SetCardInfo("Shipwreck Marsh", 189, Rarity.RARE, mage.cards.s.ShipwreckMarsh.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shipwreck Marsh", 401, Rarity.RARE, mage.cards.s.ShipwreckMarsh.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Solarium Sentry", 148, Rarity.RARE, mage.cards.s.SolariumSentry.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Solarium Sentry", 376, Rarity.RARE, mage.cards.s.SolariumSentry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Solitary Cell", 149, Rarity.RARE, mage.cards.s.SolitaryCell.class));
         cards.add(new SetCardInfo("Solve for Disappointment", 67, Rarity.COMMON, mage.cards.s.SolveForDisappointment.class));
         cards.add(new SetCardInfo("Something Worth Saving", 114, Rarity.COMMON, mage.cards.s.SomethingWorthSaving.class));
