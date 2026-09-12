@@ -116,6 +116,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Loyal Tutor", 424, Rarity.RARE, mage.cards.l.LoyalTutor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lyra, Archangel of Dawn", 201, Rarity.RARE, mage.cards.l.LyraArchangelOfDawn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lyra, Archangel of Dawn", 294, Rarity.RARE, mage.cards.l.LyraArchangelOfDawn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lyra, Tolarian Archangel", 217, Rarity.RARE, mage.cards.l.LyraTolarianArchangel.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lyra, Tolarian Archangel", 301, Rarity.RARE, mage.cards.l.LyraTolarianArchangel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mabel, Bitter Recluse", 233, Rarity.UNCOMMON, mage.cards.m.MabelBitterRecluse.class));
         cards.add(new SetCardInfo("Memory Trap", 15, Rarity.COMMON, mage.cards.m.MemoryTrap.class));
         cards.add(new SetCardInfo("Mountain", 391, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
