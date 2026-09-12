@@ -5637,18 +5637,24 @@ public abstract class PlayerImpl implements Player, Serializable {
         game.informPlayers(getLogName() + " surveils " + event.getAmount() + CardUtil.getSourceLogName(game, source));
         Cards cards = new CardsImpl();
         cards.addAllCards(getLibrary().getTopCards(game, event.getAmount()));
-        int totalCount = cards.size();
+        Cards cardsPutInGraveyard = new CardsImpl();
+        Cards cardsPutOnTop = new CardsImpl();
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY,
                     new FilterCard("card" + (cards.size() == 1 ? "" : "s")
                             + " to PUT into your GRAVEYARD (Surveil)"));
             chooseTarget(Outcome.Benefit, cards, target, source, game);
-            moveCards(new CardsImpl(target.getTargets()), Zone.GRAVEYARD, source, game);
+            Cards cardsToMove = new CardsImpl(target.getTargets());
+            if (!cardsToMove.isEmpty()) {
+                Set<Card> movedCards = moveCardsToGraveyardWithInfo(cardsToMove.getCards(game), source, game, Zone.LIBRARY);
+                cardsPutInGraveyard.addAllCards(movedCards);
+            }
             cards.removeIf(target.getTargets()::contains);
             putCardsOnTopOfLibrary(cards, game, source, true);
+            cardsPutOnTop.addAll(cards);
         }
         game.fireEvent(new GameEvent(GameEvent.EventType.SURVEILED, getId(), source, getId(), event.getAmount(), true));
-        return SurveilResult.surveil(totalCount - cards.size(), cards.size());
+        return SurveilResult.surveil(cardsPutInGraveyard, cardsPutOnTop);
     }
 
     @Override

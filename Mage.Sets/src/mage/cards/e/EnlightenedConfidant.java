@@ -13,6 +13,8 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -78,18 +80,20 @@ class EnlightenedConfidantEffect extends OneShotEffect {
         }
 
         int lifeGained = ControllerGainedLifeCount.instance.calculate(game, source, this);
-        if (lifeGained < 1) {
-            return false;
-        }
 
-        Card surveilledCard = player.getLibrary().getFromTop(game);
         Player.SurveilResult result = player.doSurveil(1, source, game);
-        if (!result.hasSurveilled() || result.getNumberPutInGraveyard() == 0 || surveilledCard == null) {
+        if (!result.hasSurveilled() || result.getCardsPutInGraveyard().isEmpty()) {
             return result.hasSurveilled();
         }
 
-        if (player.getGraveyard().contains(surveilledCard.getId()) && surveilledCard.getManaValue() <= lifeGained) {
-            return player.moveCards(surveilledCard, Zone.HAND, source, game);
+        Cards toHand = new CardsImpl();
+        for (Card card : result.getCardsPutInGraveyard().getCards(game)) {
+            if (card.getManaValue() <= lifeGained) {
+                toHand.add(card);
+            }
+        }
+        if (!toHand.isEmpty()) {
+            player.moveCards(toHand, Zone.HAND, source, game);
         }
         return true;
     }
