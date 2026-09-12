@@ -19,15 +19,14 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
 public final class MastersCouncillors extends CardImpl {
 
-    private static final DynamicValue xValue = new GraveyardWithXCardsInIt(7);
-    private static final Hint hint = new ValueHint(
-            "Graveyards with seven or more cards in it", xValue
-    );
+    private static final DynamicValue xValue = new GraveyardsWithXOrMoreCardsInIt(7);
+    private static final Hint hint = new ValueHint(xValue.getMessage(), xValue);
 
     public MastersCouncillors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
@@ -63,11 +62,11 @@ public final class MastersCouncillors extends CardImpl {
     }
 }
 
-class GraveyardWithXCardsInIt implements DynamicValue {
+class GraveyardsWithXOrMoreCardsInIt implements DynamicValue {
 
     private final int xValue;
 
-    public GraveyardWithXCardsInIt(int amount) {
+    public GraveyardsWithXOrMoreCardsInIt(int amount) {
         this.xValue = amount;
     }
 
@@ -89,12 +88,12 @@ class GraveyardWithXCardsInIt implements DynamicValue {
     }
 
     @Override
-    public GraveyardWithXCardsInIt copy() {
-        return new GraveyardWithXCardsInIt(xValue);
+    public GraveyardsWithXOrMoreCardsInIt copy() {
+        return new GraveyardsWithXOrMoreCardsInIt(xValue);
     }
 
     @Override
     public String getMessage() {
-        return "Graveyards with seven or more cards in it";
+        return "Graveyards with " + CardUtil.numberToText(xValue) + " or more cards in it";
     }
 }
