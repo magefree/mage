@@ -21,7 +21,7 @@ public final class WildUnraveling extends CardImpl {
 
         // As an additional cost to cast this spell, blight 2 or pay {1}.
         this.getSpellAbility().addCost(new OrCost(
-                "blight 2 or pay {1}", new BlightCost(2), new GenericManaCost(2)
+                "blight 2 or pay {1}", new BlightCost(2), new GenericManaCost(1)
         ));
 
         // Counter target spell.
