@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Interface for card plugins
@@ -37,18 +38,16 @@ public interface CardPlugin extends Plugin {
     /**
      * Uses for show/hide animation on the battlefield
      *
-     * @param card
-     * @param count
+     * @param card The card that got added
      */
-    void onAddCard(MageCard card, int count);
+    CompletableFuture<Void> onAddCard(MageCard card);
 
     /**
      * Uses for show/hide animation on the battlefield
      *
-     * @param card
-     * @param count
+     * @param card The card that got removed
      */
-    void onRemoveCard(MageCard card, int count);
+    CompletableFuture<Void> onRemoveCard(MageCard card);
 
     JComponent getCardInfoPane();
 
