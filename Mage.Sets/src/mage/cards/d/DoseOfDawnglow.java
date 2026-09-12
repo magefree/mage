@@ -1,5 +1,7 @@
 package mage.cards.d;
 
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.IsMainPhaseCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
@@ -17,6 +19,9 @@ import java.util.UUID;
  */
 public final class DoseOfDawnglow extends CardImpl {
 
+    private static final Condition NOT_YOUR_MAIN_PHASE =
+            new InvertCondition(IsMainPhaseCondition.YOURS, "it isn't your main phase");
+
     public DoseOfDawnglow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{B}");
 
@@ -24,7 +29,7 @@ public final class DoseOfDawnglow extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new BlightControllerEffect(2), IsMainPhaseCondition.NOT_YOURS
+                new BlightControllerEffect(2), NOT_YOUR_MAIN_PHASE
         ).concatBy("Then"));
     }
 
