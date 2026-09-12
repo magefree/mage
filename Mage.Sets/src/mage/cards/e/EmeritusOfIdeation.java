@@ -43,7 +43,7 @@ public final class EmeritusOfIdeation extends PrepareCard {
 
         // Whenever this creature attacks, you may exile eight cards from your graveyard. If you do, this creature becomes prepared.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(
-                new BecomePreparedSourceEffect(), new ExileFromGraveCost(new TargetCardInYourGraveyard(8))
+                new BecomePreparedSourceEffect(), new ExileFromGraveCost(new TargetCardInYourGraveyard(8)).withSourceExileZone(false)
         )));
 
         // Ancestral Recall

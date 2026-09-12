@@ -5,6 +5,7 @@ on:
     branches: [ "master", "main" ]
   pull_request:
     branches: [ "master", "main" ]
+    types: ["opened", "ready_for_review", "reopened", "synchronize"]
   schedule:
     - cron: '0 1 * * *'
 
