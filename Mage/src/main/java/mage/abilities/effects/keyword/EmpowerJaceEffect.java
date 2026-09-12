@@ -1,6 +1,8 @@
 package mage.abilities.effects.keyword;
 
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -34,17 +36,31 @@ public class EmpowerJaceEffect extends OneShotEffect {
         FILTER_JACE.setLockedFilter(true);
     }
 
-    protected final int empowerNumber;
+    protected final DynamicValue empowerNumber;
+    private final String empowerText;
+    private final boolean dynamic;
 
     public EmpowerJaceEffect(int empowerNumber) {
+        this(StaticValue.get(empowerNumber), Integer.toString(empowerNumber), false);
+    }
+
+    public EmpowerJaceEffect(DynamicValue empowerNumber) {
+        this(empowerNumber, "X", true);
+    }
+
+    private EmpowerJaceEffect(DynamicValue empowerNumber, String empowerText, boolean dynamic) {
         super(Outcome.Benefit);
         this.empowerNumber = empowerNumber;
+        this.empowerText = empowerText;
+        this.dynamic = dynamic;
         this.setText();
     }
 
     protected EmpowerJaceEffect(final EmpowerJaceEffect effect) {
         super(effect);
-        this.empowerNumber = effect.empowerNumber;
+        this.empowerNumber = effect.empowerNumber.copy();
+        this.empowerText = effect.empowerText;
+        this.dynamic = effect.dynamic;
     }
 
     @Override
@@ -78,7 +94,8 @@ public class EmpowerJaceEffect extends OneShotEffect {
             return false;
         }
 
-        chosenJace.addCounters(CounterType.LOYALTY.createInstance(empowerNumber), source.getControllerId(), source, game);
+        int amount = empowerNumber.calculate(game, source, this);
+        chosenJace.addCounters(CounterType.LOYALTY.createInstance(amount), source.getControllerId(), source, game);
         return true;
     }
 
@@ -88,13 +105,18 @@ public class EmpowerJaceEffect extends OneShotEffect {
     }
 
     private void setText() {
-        StringBuilder sb = new StringBuilder("empower Jace ").append(empowerNumber);
+        StringBuilder sb = new StringBuilder("empower Jace ").append(empowerText);
+        if (dynamic) {
+            sb.append(", where X is the number of ").append(empowerNumber.getMessage());
+        }
         sb.append(". <i>(Put ");
 
-        if (empowerNumber == 1) {
+        if (dynamic) {
+            sb.append("that many loyalty counters");
+        } else if (empowerText.equals("1")) {
             sb.append("a loyalty counter");
         } else {
-            sb.append(CardUtil.numberToText(empowerNumber)).append(" loyalty counters");
+            sb.append(CardUtil.numberToText(Integer.parseInt(empowerText))).append(" loyalty counters");
         }
         sb.append(" on a Jace token you control. If you don't control one, first create");
         sb.append(" a blue Jace planeswalker token with");
