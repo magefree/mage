@@ -23,6 +23,10 @@ import mage.util.CardUtil;
 
 import java.util.UUID;
 
+
+/**
+ * @author miesma
+ */
 public final class MastersCouncillors extends CardImpl {
 
     private static final DynamicValue xValue = new GraveyardsWithXOrMoreCardsInIt(7);
