@@ -3051,6 +3051,7 @@ public class ScryfallImageSupportTokens {
             // FRA
             put("FRA/Heartwood", "https://api.scryfall.com/cards/tfra/11?format=image");
             put("FRA/Illusion", "https://api.scryfall.com/cards/tfra/4?format=image");
+            put("FRA/Jace", "https://api.scryfall.com/cards/tfra/5?format=image");
 
             // TRK
             put("TRK/Human", "https://api.scryfall.com/cards/ttrk/1?format=image");
