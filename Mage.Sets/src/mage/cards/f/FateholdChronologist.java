@@ -19,7 +19,7 @@ import mage.constants.CardType;
 public final class FateholdChronologist extends PrepareCard {
 
     public FateholdChronologist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U/W}", "Peer Review", new CardType[]{CardType.SORCERY}, "{2}{U/W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W/U}", "Peer Review", new CardType[]{CardType.SORCERY}, "{2}{W/U}");
 
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.WIZARD);
@@ -33,7 +33,7 @@ public final class FateholdChronologist extends PrepareCard {
         this.addAbility(new EntersPreparedAbility());
 
         // Peer Review
-        // Sorcery {2}{U/W}
+        // Sorcery {2}{W/U}
         // Create a 2/2 colorless Wizard Soldier creature token named Cadet. Surveil 1.
         this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new CadetToken()));
         this.getSpellCard().getSpellAbility().addEffect(new SurveilEffect(1));
