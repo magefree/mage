@@ -114,18 +114,17 @@ class MidnightCrusaderShuttleSecondChoice extends VillainousChoice {
     @Override
     public boolean doChoice(Player player, Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null || !game.getBattlefield().contains(
-                StaticFilters.FILTER_CONTROLLED_CREATURE,
-                player.getId(), source, game, 1
-        )) {
+        if (controller == null) {
             return false;
         }
         FilterPermanent filter = new FilterCreaturePermanent("creature defending player controls");
         filter.add(new ControllerIdPredicate(player.getId()));
         TargetPermanent target = new TargetPermanent(filter);
         target.withNotTarget(true);
-        controller.choose(Outcome.GainControl, target, source, game);
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (!target.choose(Outcome.GainControl, source.getControllerId(), source, game)) {
+            return false;
+        }
+        Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
             return false;
         }
