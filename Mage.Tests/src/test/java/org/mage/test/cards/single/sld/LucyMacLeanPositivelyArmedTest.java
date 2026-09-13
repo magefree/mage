@@ -1,4 +1,4 @@
-package org.mage.test.cards.sld;
+package org.mage.test.cards.single.sld;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
