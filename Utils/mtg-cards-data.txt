@@ -64536,6 +64536,8 @@ Memory Trap|Reality Fracture|15|C|{2}{W}|Enchantment|||When this enchantment ent
 Prophesied End|Reality Fracture|17|U|{1}{W}|Instant|||Destroy target creature. If it wasn't attacking, its controller draws a card.|
 Repurposed Enforcer|Reality Fracture|19|R|{1}{W}|Creature - Human Soldier|3|2|Whenever this creature attacks, empower Jace X, where X is the number of creatures you control.|
 Return to the Light Realms|Reality Fracture|20|M|{7}{W}{W}|Sorcery|||Return all nonland permanent cards from your graveyard to the battlefield.|
+Shatterwing Pegasus|Reality Fracture|21|C|{2}{W}|Creature - Pegasus|2|3|Flying${4}{W}: Creatures you control get +1/+1 until end of turn.|
+Surgical Precision|Reality Fracture|22|C|{1}{W}|Sorcery|||Choose one --$* Destroy target creature with toughness 4 or greater. You gain 1 life.$* You draw a card and gain 2 life.|
 Countersculpt|Reality Fracture|25|U|{U}{U}|Instant|||As an additional cost to cast this spell, behold a Jace or pay {1}.$Counter target spell. Empower Jace 1.|
 Cruel Calculations|Reality Fracture|26|R|{2}{U}|Sorcery|||Draw X cards, where X is the number of cards that were put into target player's graveyard from their library this turn.|
 Diviner of Victory|Reality Fracture|28|R|{U}|Creature - Dwarf Wizard|1|1|This creature enters prepared.$Whenever you scry or surveil, this creature gets +1/+1 until end of turn.|
@@ -64545,16 +64547,22 @@ Jace's Machinations|Reality Fracture|32|R|{2}{U}|Instant|||Until end of turn, yo
 Perfected Theory|Reality Fracture|34|U|{U}|Instant|||Choose one --$* Target creature has base power and toughness 1/1 until end of turn.$* Target creature has base power and toughness 4/5 until end of turn.|
 Protege's Awakening|Reality Fracture|37|C|{3}{U}|Sorcery|||Empower Jace 6.$Draw a card.|
 Semester Foreseer|Reality Fracture|39|C|{3}{U}|Creature - Human Wizard|3|4|This creature enters prepared.$When this creature enters, surveil 1.|
+Sphinx of False Conclusions|Reality Fracture|40|R|{2}{U}{U}|Creature - Sphinx Illusion|4|2|Flash$Flying$Whenever this creature attacks, draw a card, then discard a card.$When this creature dies, if it isn't a token, create a token that's a copy of it.|
+Surveillance Phantasm|Reality Fracture|42|C|{1}{U}|Creature - Bird Illusion|2|3|Defender, flying, vigilance$As long as you've scried or surveilled this turn, this creature can attack as though it didn't have defender.${3}{U}: Surveil 1.|
 The Theorist, Jace Beleren|Reality Fracture|43|M|{2}{U}{U}|Legendary Planeswalker - Jace|3|At the beginning of each opponent's draw step, you draw a card.$+1: Create a 1/1 blue Illusion creature token.$−2: For each opponent, return up to one target artifact or creature that player controls to its owner's hand.$−6: Draw three cards. Then put X +1/+1 counters on each creature you control, where X is the number of cards in your hand.|
 Theorist's Proxy|Reality Fracture|44|R|{1}{U}|Creature - Illusion|0|3|Flash$When this creature enters, empower Jace 3.${U}, Sacrifice this creature: The next spell you cast this turn can't be countered.|
 Bloodline Recollector|Reality Fracture|49|M|{1}{B}|Creature - Vampire Warlock|2|2|At the beginning of each end step, if three or more creatures died this turn, this creature becomes prepared.|
+Break Under Pressure|Reality Fracture|50|U|{2}{B}|Instant|||Target opponent sacrifices a creature or planeswalker with the greatest mana value among creatures and planeswalkers they control. You gain 2 life.|
 Cast Away Doubt|Reality Fracture|51|C|{2}{B}|Sorcery|||Draw two cards. Cast Away Doubt deals 2 damage to each player.|
 Last Gasp|Reality Fracture|56|C|{1}{B}|Instant|||Target creature gets -3/-3 until end of turn.|
 Overwrite the Multiverse|Reality Fracture|59|M|{4}{B}{B}|Sorcery|||Exile all creatures. Empower Jace X, where X is the number of creatures exiled this way.|
 Rampart Hunter|Reality Fracture|60|C|{3}{B}|Creature - Horror|3|3|Deathtouch$When this creature enters, target creature gets +2/+2 and gains deathtouch until end of turn.|
 Rewrite Regrets|Reality Fracture|62|U|{3}{B}|Sorcery|||Return target creature or planeswalker card with mana value 6 or less from your graveyard to the battlefield.$Empower Jace 2.|
+Silence the Echo|Reality Fracture|66|C|{1}{B}|Sorcery|||As an additional cost to cast this spell, sacrifice a creature or planeswalker or pay {3}.$Destroy target creature or planeswalker.|
 Solve for Disappointment|Reality Fracture|67|C|{1}{B}|Sorcery|||Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card.$Empower Jace 1.|
+Vraska's Final Mercy|Reality Fracture|71|R|{B}{B}|Sorcery|||Choose one --$* You lose 2 life. Destroy target creature or planeswalker.$* You lose 2 life. Empower Jace 6.|
 Blazing Crescendo|Reality Fracture|75|C|{1}{R}|Instant|||Target creature gets +3/+1 until end of turn.$Exile the top card of your library. Until the end of your next turn, you may play that card.|
+Chandra's Emberling|Reality Fracture|76|C|{2}{R}|Creature - Gremlin Elemental|2|2|Haste$Whenever you cast a noncreature spell, put a +1/+1 counter on this creature.|
 Craterclaw Colossus|Reality Fracture|78|M|{4}{R}{R}{R}|Artifact Creature - Beast Construct|5|5|Haste$When this creature enters, creatures you control gain trample and get +X/+0 until end of turn, where X is the number of artifacts you control.|
 Eardrum Rattler|Reality Fracture|81|C|{1}{R}|Creature - Human Bard|2|2|{1}, {T}: Another target creature you control with power 2 or less can't be blocked this turn.|
 Face Yourself|Reality Fracture|83|R|{5}{R}{R}|Sorcery|||For each creature target player controls, create a token that's a copy of that creature, except it has haste and "At the beginning of the end step, if you don't control a planeswalker, sacrifice this creature."|
@@ -64564,6 +64572,7 @@ No Admittance|Reality Fracture|89|C|{1}{R}|Sorcery|||No Admittance deals 3 damag
 Pompous Battlemage|Reality Fracture|90|R|{R}|Creature - Goblin Sorcerer|1|1|Prowess$This creature enters prepared.|
 Stingcaster Mage|Reality Fracture|93|M|{1}{R}|Creature - Human Wizard|2|1|Haste$When this creature enters, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.|
 Violent Echoes|Reality Fracture|95|U|{2}{R}{R}|Instant|||Violent Echoes deals 6 damage to target creature or planeswalker. If excess damage was dealt to that permanent this way, empower Jace X, where X is that excess damage.|
+Wrath of the Bloodmane|Reality Fracture|96|C|{2}{R}|Instant|||This spell costs {1} less to cast if you control a legendary creature.$Wrath of the Bloodmane deals 4 damage to target creature or planeswalker.|
 Arcane Amphisbaena|Reality Fracture|97|C|{1}{G}|Creature - Snake|1|1|Deathtouch$When this creature enters, empower Jace 2.|
 Bestial Incursion|Reality Fracture|98|C|{3}{G}|Sorcery|||Create a 4/4 green Beast creature token with trample.$Flashback {5}{G}|
 Budding Insurgent|Reality Fracture|99|C|{2}{G}|Creature - Dryad Scout|3|3|Vigilance$Sacrifice this creature: Destroy target artifact or enchantment. If that permanent was a legendary enchantment, draw a card. Activate only as a sorcery.|
@@ -64607,6 +64616,8 @@ Vindictive Triumph|Reality Fracture|162|R|{W}{B}{B}|Instant|||Exile target creat
 Warrior's Blades|Reality Fracture|163|U|{2}{R}{W}|Artifact - Equipment|||When this Equipment enters, it deals 3 damage to any target and you gain 3 life.$Equipped creature gets +2/+1.$Equip {3}. This ability costs {1} less to activate for each +1/+1 counter on the creature it targets.|
 Whiplash Wordsmith|Reality Fracture|164|C|{3}{B/R}|Creature - Vampire Sorcerer|3|3|This creature enters prepared.$As long as an opponent was dealt noncombat damage this turn, this creature has flying and haste.|
 Woodwork Prodigy|Reality Fracture|165|U|{2}{R/G}|Creature - Cat Druid|3|3|At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared.|
+Afterthought Sentry|Reality Fracture|166|C|{2}|Artifact Creature - Gargoyle|2|2|{2}: This creature gains flying until end of turn.$Whenever this creature attacks, exile up to one target card from a graveyard.|
+The Echoverse Fulcrum|Reality Fracture|169|M|{2}|Legendary Artifact|||When The Echoverse Fulcrum enters, draw a card, then discard a card.${5}, {T}, Exile The Echoverse Fulcrum: Destroy all creatures. Activate only as a sorcery.|
 Keeper of the Quiet Hour|Reality Fracture|171|C|{3}|Artifact Creature - Chimera|3|2|When this creature enters, empower Jace 2.|
 Deserted Beach|Reality Fracture|176|R||Land|||This land enters tapped unless you control two or more other lands.${T}: Add {W} or {U}.|
 Haunted Ridge|Reality Fracture|180|R||Land|||This land enters tapped unless you control two or more other lands.${T}: Add {B} or {R}.|
@@ -64634,6 +64645,7 @@ Way of the Cryomancer|Reality Fracture|223|U|{2}{U}|Legendary Enchantment|||When
 Yargle, Goliath of Otaria|Reality Fracture|225|U|{4}{U}|Legendary Creature - Frog Spirit|3|9||
 Yuriko, Hope from the Shadows|Reality Fracture|226|U|{U}|Legendary Creature - Human Ninja|1|1|Flash$When Yuriko enters, choose one --$* Target creature gets -X/-0 until end of turn, where X is the number of cards in your graveyard.$* Surveil 2.|
 Danitha, Spear of Agony|Reality Fracture|227|U|{2}{B}|Legendary Creature - Human Knight|2|2|First strike$Whenever you cast a spell that targets an opponent or a creature an opponent controls, put a +1/+1 counter on Danitha.|
+Gallia, Tragic Host|Reality Fracture|228|U|{1}{B}|Legendary Creature - Zombie Satyr|2|1|Menace${4}{B}, Exile another creature card from your graveyard: Return this card from your graveyard to the battlefield tapped with a +1/+1 counter on her.|
 Garruk, Veiled Butcher|Reality Fracture|229|M|{3}{B}{B}|Legendary Planeswalker - Garruk|5|If a creature an opponent controls would die, exile it instead.$+2: Up to one target creature gets -4/-1 until your next turn.$−2: Each player sacrifices a creature of their choice. If you sacrificed a creature this way, create a 4/4 green Beast creature token with trample.$−3: Each opponent discards two cards. For each opponent who didn't discard two nonland cards this way, you draw a card.|
 Gideon the Oathless|Reality Fracture|230|R|{2}{B}|Legendary Creature - Human Mercenary|3|3|Ward--Discard a card.$Whenever a creature an opponent controls enters, Gideon deals 1 damage to that player.$Whenever an opponent activates a loyalty ability, Gideon deals 1 damage to that player.|
 Liliana the Repentant|Reality Fracture|231|R|{1}{B}|Legendary Creature - Human Warlock|2|2|Whenever another creature or planeswalker you control enters, mill two cards.$Exhaust -- {5}{B}: Return target creature or planeswalker card from your graveyard to the battlefield. Put a +1/+1 counter on Liliana. Activate only as a sorcery.|
@@ -64646,6 +64658,7 @@ Winter, Tormented Loner|Reality Fracture|240|U|{2}{B}|Legendary Creature - Human
 Yargle, Glutton of Urborg|Reality Fracture|241|U|{4}{B}|Legendary Creature - Frog Spirit|9|3||
 Ajani Unrelenting|Reality Fracture|242|M|{4}{R}{R}|Legendary Planeswalker - Ajani|5|Whenever you activate a loyalty ability, create a 2/2 colorless Wizard Soldier creature token named Cadet.$+1: Creatures you control get +1/+0 and gain haste until end of turn.$−2: Discard your hand, then draw a card for each creature you control.$−3: Ajani deals 4 damage to each creature except for tokens you control.|
 Chandra, Torch of Defiance|Reality Fracture|244|M|{2}{R}{R}|Legendary Planeswalker - Chandra|4|+1: Exile the top card of your library. You may cast that card. If you don't, Chandra deals 2 damage to each opponent.$+1: Add {R}{R}.$−3: Chandra deals 4 damage to target creature.$−7: You get an emblem with "Whenever you cast a spell, this emblem deals 5 damage to any target."|
+Gallia, the Merrymaker|Reality Fracture|245|U|{1}{R}|Legendary Creature - Satyr|2|1|Haste$Each other creature you control with +1/+1 counter on it has haste.${1}{R}, {T}: Put a +1/+1 counter on target creature that entered this turn.|
 Jiang Yanggu, Alone|Reality Fracture|246|U|{4}{R}|Legendary Creature - Human Berserker|4|4|Menace$Whenever a creature you control attacks a player alone, discard a card, then draw a card. Then put a +1/+1 counter on that creature for each card you've discarded this turn.|
 Kiora of Fire and Ashes|Reality Fracture|247|U|{4}{R}{R}|Legendary Creature - Merfolk Noble|2|2|When Kiora enters, create a 5/5 red Dragon creature token with flying.${8}: Create a 5/5 red Dragon creature token with flying.|
 Tetsuko Umezawa, Pursuer|Reality Fracture|252|U|{3}{R}|Legendary Creature - Human Mercenary|2|4|Double strike$Prowess$Whenever a creature an opponent controls with power or toughness 1 or less blocks, Tetsuko Umezawa deals 1 damage to that creature's controller.|
@@ -64696,8 +64709,10 @@ Hexhaven Invigorator|Reality Fracture|330|M|{G}{G}{G}{G}|Creature - Chimera Horr
 Repurposed Enforcer|Reality Fracture|335|R|{1}{W}|Creature - Human Soldier|3|2|Whenever this creature attacks, empower Jace X, where X is the number of creatures you control.|
 Cruel Calculations|Reality Fracture|336|R|{2}{U}|Sorcery|||Draw X cards, where X is the number of cards that were put into target player's graveyard from their library this turn.|
 Jace's Machinations|Reality Fracture|337|R|{2}{U}|Instant|||Until end of turn, you may activate loyalty abilities of Jace planeswalkers you control on any player's turn any time you could cast an instant.$Empower Jace 8.|
+Sphinx of False Conclusions|Reality Fracture|338|R|{2}{U}{U}|Creature - Sphinx Illusion|4|2|Flash$Flying$Whenever this creature attacks, draw a card, then discard a card.$When this creature dies, if it isn't a token, create a token that's a copy of it.|
 Theorist's Proxy|Reality Fracture|339|R|{1}{U}|Creature - Illusion|0|3|Flash$When this creature enters, empower Jace 3.${U}, Sacrifice this creature: The next spell you cast this turn can't be countered.|
 Overwrite the Multiverse|Reality Fracture|341|M|{4}{B}{B}|Sorcery|||Exile all creatures. Empower Jace X, where X is the number of creatures exiled this way.|
+Vraska's Final Mercy|Reality Fracture|343|R|{B}{B}|Sorcery|||Choose one --$* You lose 2 life. Destroy target creature or planeswalker.$* You lose 2 life. Empower Jace 6.|
 Master of Barbs|Reality Fracture|344|R|{1}{R}|Creature - Lizard Bard|2|1|Menace$Whenever one or more opponents are dealt noncombat damage, creatures you control get +1/+0 until end of turn.|
 Hungering Puppetbeast|Reality Fracture|346|R|{3}{G}{G}|Artifact Creature - Beast Construct|5|5|When this creature enters, create a Heartwood token.${1}, Sacrifice another artifact: Put a +1/+1 counter on this creature. It gains your choice of trample, hexproof, or haste until end of turn.|
 Aerid Konstrari|Reality Fracture|347|M|{1}{R}{G}{G}|Legendary Creature - Elder Sphinx|5|4|Flying$When Aerid Konstrari enters or dies, create a Heartwood token.${6}: Create a Heartwood token. Then Aerid Konstrari gets +X/+0 until end of turn, where X is the number of artifacts you control.|
@@ -64714,6 +64729,7 @@ Face Yourself|Reality Fracture|370|R|{5}{R}{R}|Sorcery|||For each creature targe
 Tarmogoyf|Reality Fracture|374|M|{1}{G}|Creature - Lhurgoyf|*|1+*|Tarmogoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1.|
 Solarium Sentry|Reality Fracture|376|R|{G}{W}|Creature - Cat Soldier|3|3|Whenever an opponent casts a spell with mana value 2 or less, you gain 2 life.|
 Vindictive Triumph|Reality Fracture|377|R|{W}{B}{B}|Instant|||Exile target creature or planeswalker. If that permanent's mana value was 3 or less, return it to the battlefield tapped under your control. Exile it at the beginning of the next end step.|
+The Echoverse Fulcrum|Reality Fracture|378|M|{2}|Legendary Artifact|||When The Echoverse Fulcrum enters, draw a card, then discard a card.${5}, {T}, Exile The Echoverse Fulcrum: Destroy all creatures. Activate only as a sorcery.|
 Theorist's Sanctum|Reality Fracture|381|R||Land - Island|||({T}: Add {U}.)$As this land enters, you may behold a Jace. If you don't, this land enters tapped.${2}{U}, {T}: Empower Jace 2.|
 Deserted Beach|Reality Fracture|397|R||Land|||This land enters tapped unless you control two or more other lands.${T}: Add {W} or {U}.|
 Haunted Ridge|Reality Fracture|398|R||Land|||This land enters tapped unless you control two or more other lands.${T}: Add {B} or {R}.|
