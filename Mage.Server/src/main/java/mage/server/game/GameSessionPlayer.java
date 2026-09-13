@@ -1,6 +1,5 @@
 package mage.server.game;
 
-import mage.cards.Cards;
 import mage.choices.Choice;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
@@ -14,12 +13,12 @@ import mage.server.User;
 import mage.server.managers.ManagerFactory;
 import mage.server.managers.UserManager;
 import mage.util.MultiAmountMessage;
+import mage.util.ThreadUtils;
 import mage.view.*;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.Map.Entry;
 import java.util.concurrent.ExecutorService;
 
 /**
@@ -197,7 +196,21 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     @Override
     public GameView getGameView() {
-        return prepareGameView(game, playerId, userId);
+        // game view calculation can take some time and can be called from non-game thread,
+        // so recalculate game view by game thread only to protect from ConcurrentModificationException
+        // warning, don't forget to sync logci with GameSessionWatcher and GameSessionPlayer
+        if (this.lastGameView != null && !ThreadUtils.isRunGameThread()) {
+            return this.lastGameView;
+        }
+
+        // full processing for player
+        GameView gameView = prepareGameView(game, playerId, userId);
+
+        if (GameView.ENABLE_GAME_VIEW_CACHE) {
+            this.lastGameView = gameView;
+        }
+
+        return gameView;
     }
 
     /**
@@ -209,9 +222,8 @@ public class GameSessionPlayer extends GameSessionWatcher {
      * @return
      */
     public static GameView prepareGameView(Game game, UUID playerId, UUID userId) {
-        // game view calculation can take some time and can be called from non-game thread,
-        // so use copy for thread save (protection from ConcurrentModificationException)
-        Game sourceGame = game.copy();
+        // game copy do not help with ConcurrentModificationException so ignore it
+        Game sourceGame = game;
         GameView gameView = new GameView(sourceGame.getState(), sourceGame, playerId, null);
 
         // playable info (if opponent under control then show opponent's playable)

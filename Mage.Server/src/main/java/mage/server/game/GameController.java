@@ -80,6 +80,8 @@ public class GameController implements GameCallback {
     private boolean useResponseIdleTimeout = true; // control currently active player (if no response for 600 seconds then concede him)
     private final GameOptions gameOptions;
 
+    private GameView defaultGameView = null; // default game view on first connect
+
     private UUID userRequestingRollback;
     private int turnsToRollback;
     private int requestsOpen;
@@ -312,6 +314,7 @@ public class GameController implements GameCallback {
         String joinType;
         if (gameSession == null) {
             gameSession = new GameSessionPlayer(managerFactory, game, userId, playerId);
+            gameSession.startWithGameView(this.defaultGameView); // it's null here, real view on game start
             final Lock w = gameSessionsLock.writeLock();
             w.lock();
             try {
@@ -334,6 +337,12 @@ public class GameController implements GameCallback {
             // workaround to fill range info (cause real range fills after game start, but users must get start event with game data already)
             for (Player player : game.getPlayers().values()) {
                 player.updateRange(game);
+            }
+
+            // init game views in current thread before real game thread strated -- it's safe place here
+            this.defaultGameView = GameSessionWatcher.generateDefaultGameView(game);
+            for (GameSessionPlayer gameSessionPlayer : getGameSessions()) {
+                gameSessionPlayer.startWithGameView(this.defaultGameView);
             }
 
             // send first info to users
@@ -470,6 +479,7 @@ public class GameController implements GameCallback {
         }
         managerFactory.userManager().getUser(userId).ifPresent(user -> {
             GameSessionWatcher gameWatcher = new GameSessionWatcher(managerFactory.userManager(), userId, game, false);
+            gameWatcher.startWithGameView(this.defaultGameView);
             final Lock w = gameWatchersLock.writeLock();
             w.lock();
             try {

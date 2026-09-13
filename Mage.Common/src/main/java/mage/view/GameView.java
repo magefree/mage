@@ -39,6 +39,11 @@ public class GameView implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private static final Logger LOGGER = Logger.getLogger(GameView.class);
+
+    // enable special cache to protect from non-game calls, e.g. fix/concede/watch/etc
+    // TODO: implement RepeatedGameView to send back ref number instead full game view on non-changeable
+    public static final boolean ENABLE_GAME_VIEW_CACHE = true;
+
     // test only: how many views were built, see GameViewTest
     public static final AtomicLong CREATED_COUNT = new AtomicLong();
 
