@@ -96,6 +96,7 @@ import java.util.stream.Collectors;
 public abstract class GameImpl implements Game {
 
     private final static AtomicInteger GLOBAL_INDEX = new AtomicInteger();
+    public final static AtomicInteger COPIED_COUNT = new AtomicInteger();
 
     private static final int ROLLBACK_TURNS_MAX = 4;
     private static final String UNIT_TESTS_ERROR_TEXT = "Error in unit tests";
@@ -188,6 +189,8 @@ public abstract class GameImpl implements Game {
     }
 
     protected GameImpl(final GameImpl game) {
+        COPIED_COUNT.incrementAndGet();
+
         //this.customData = game.customData; // temporary data, no need on game copy
         //this.losingPlayer = game.losingPlayer; // temporary data, no need on game copy
         this.aiGame = game.aiGame;
@@ -258,6 +261,16 @@ public abstract class GameImpl implements Game {
     @Override
     public Integer getGameIndex() {
         return this.gameIndex;
+    }
+
+    @Override
+    public Integer getCreatedCount() {
+        return GLOBAL_INDEX.get();
+    }
+
+    @Override
+    public Integer getCopiedCount() {
+        return COPIED_COUNT.get();
     }
 
     @Override

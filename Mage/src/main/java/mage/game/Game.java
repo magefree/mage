@@ -53,6 +53,16 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
      */
     Integer getGameIndex();
 
+    /**
+     * Return create stats, for tests and performance
+     */
+    Integer getCreatedCount();
+
+    /**
+     * Return copy stats, for tests and performance
+     */
+    Integer getCopiedCount();
+
     MatchType getGameType();
 
     int getNumPlayers();

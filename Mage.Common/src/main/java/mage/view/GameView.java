@@ -29,6 +29,7 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85
@@ -38,6 +39,8 @@ public class GameView implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private static final Logger LOGGER = Logger.getLogger(GameView.class);
+    // test only: how many views were built, see GameViewTest
+    public static final AtomicLong CREATED_COUNT = new AtomicLong();
 
     private final int priorityTime;
     private final int bufferTime;
@@ -70,6 +73,14 @@ public class GameView implements Serializable {
     private int gameCycle;
 
     public GameView(GameState state, Game game, UUID createdForPlayerId, UUID watcherUserId) {
+        // debug only
+        // LOGGER.info("GameView create: game cycle " + game.getState().getApplyEffectsCounter() 
+        //     + ", player " + createdForPlayerId 
+        //     + ", watcher " + watcherUserId 
+        //     + ", thread " + Thread.currentThread().getName()
+        // );
+        CREATED_COUNT.incrementAndGet();
+
         Player createdForPlayer = null;
         this.priorityTime = game.getPriorityTime();
         this.bufferTime = game.getBufferTime();
