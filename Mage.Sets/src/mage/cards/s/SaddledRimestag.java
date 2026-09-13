@@ -1,6 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -12,6 +13,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
 
 import java.util.*;
@@ -53,7 +55,11 @@ enum SaddledRimestagCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         SaddledRimestagWatcher watcher = game.getState().getWatcher(SaddledRimestagWatcher.class);
-        return watcher != null && watcher.enteredCreatureForPlayer(source.getControllerId(), source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+        if (watcher == null || sourcePermanent == null) {
+            return false;
+        }
+        return watcher.anotherCreatureEntered(source.getControllerId(), new MageObjectReference(sourcePermanent, game));
     }
 
     @Override
@@ -64,7 +70,7 @@ enum SaddledRimestagCondition implements Condition {
 
 class SaddledRimestagWatcher extends Watcher {
 
-    private final Map<UUID, Set<UUID>> playerMap = new HashMap<>();
+    private final Map<UUID, Set<MageObjectReference>> playerMap = new HashMap<>();
 
     SaddledRimestagWatcher() {
         super(WatcherScope.GAME);
@@ -77,8 +83,9 @@ class SaddledRimestagWatcher extends Watcher {
             if (zEvent.getToZone() == Zone.BATTLEFIELD
                     && zEvent.isPermanentMoved()
                     && zEvent.getTarget().isCreature(game)) {
-                playerMap.putIfAbsent(zEvent.getTarget().getControllerId(), new HashSet<>());
-                playerMap.get(zEvent.getTarget().getControllerId()).add(zEvent.getTargetId());
+                playerMap
+                        .computeIfAbsent(zEvent.getTarget().getControllerId(), x -> new HashSet<>())
+                        .add(new MageObjectReference(zEvent.getTarget(), game));
             }
         }
     }
@@ -88,8 +95,11 @@ class SaddledRimestagWatcher extends Watcher {
         playerMap.clear();
     }
 
-    boolean enteredCreatureForPlayer(UUID playerId, UUID creatureId) {
-        Set<UUID> s = playerMap.getOrDefault(playerId, null);
-        return s != null && s.stream().anyMatch((UUID id) -> (id != creatureId));
+    // a permanent that left and returned is a different object, so an earlier instance of the source counts as another creature
+    boolean anotherCreatureEntered(UUID playerId, MageObjectReference sourceRef) {
+        return playerMap
+                .getOrDefault(playerId, Collections.emptySet())
+                .stream()
+                .anyMatch(mor -> !mor.equals(sourceRef));
     }
 }

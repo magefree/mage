@@ -1,11 +1,11 @@
 package mage.game.events;
 
-import java.util.List;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -70,8 +70,11 @@ public class ZoneChangeEvent extends GameEvent {
         return target;
     }
 
+    /**
+     * Is a real permanent moving (not a card or mutate part), entering or leaving the battlefield. Warning, check fromZone/isDiesEvent yourself for leave only.
+     */
     public boolean isPermanentMoved() {
-        return Zone.BATTLEFIELD.match(fromZone) && target != null;
+        return target != null;
     }
 
     public void setTarget(Permanent target) {
