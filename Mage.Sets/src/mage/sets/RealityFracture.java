@@ -178,6 +178,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Tethermage's Advantage", 117, Rarity.COMMON, mage.cards.t.TethermagesAdvantage.class));
         cards.add(new SetCardInfo("Thalia, the Survivor", 205, Rarity.UNCOMMON, mage.cards.t.ThaliaTheSurvivor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thalia, the Survivor", 296, Rarity.UNCOMMON, mage.cards.t.ThaliaTheSurvivor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Echoverse Fulcrum", 169, Rarity.MYTHIC, mage.cards.t.TheEchoverseFulcrum.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Echoverse Fulcrum", 378, Rarity.MYTHIC, mage.cards.t.TheEchoverseFulcrum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Theorist, Jace Beleren", 363, Rarity.MYTHIC, mage.cards.t.TheTheoristJaceBeleren.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Theorist, Jace Beleren", 405, Rarity.MYTHIC, mage.cards.t.TheTheoristJaceBeleren.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Theorist, Jace Beleren", 415, Rarity.MYTHIC, mage.cards.t.TheTheoristJaceBeleren.class, NON_FULL_USE_VARIOUS));
