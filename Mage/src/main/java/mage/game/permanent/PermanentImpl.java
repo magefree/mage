@@ -971,6 +971,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         // must change abilities controller too
         this.controllerId = newControllerId;
         this.getAbilities().setControllerId(newControllerId);
+
+        // and watchers
+        this.getAbilities().stream().flatMap(ability -> ability.getWatchers().stream().map(watcher -> watcher.getKey())).map(game.getState()::getWatcher).distinct().forEach(watcher -> watcher.setControllerId(newControllerId));
+
         return true;
     }
 
