@@ -1,7 +1,5 @@
 package mage.cards.c;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -85,17 +83,18 @@ class ChandraChillOfComplianceSurveilEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Set<UUID> graveyardBefore = new HashSet<>(player.getGraveyard());
         Player.SurveilResult result = player.doSurveil(1, source, game);
-        if (!result.hasSurveilled() || result.getNumberPutInGraveyard() == 0) {
+        if (!result.hasSurveilled() || result.getCardsPutInGraveyard().isEmpty()) {
             return result.hasSurveilled();
         }
-        for (Card card : player.getGraveyard().getCards(game)) {
-            if (!graveyardBefore.contains(card.getId())
-                    && !card.isCreature(game)
-                    && !card.isLand(game)) {
-                player.moveCards(card, Zone.HAND, source, game);
+        Cards toHand = new CardsImpl();
+        for (Card card : result.getCardsPutInGraveyard().getCards(game)) {
+            if (!card.isCreature(game) && !card.isLand(game)) {
+                toHand.add(card);
             }
+        }
+        if (!toHand.isEmpty()) {
+            player.moveCards(toHand, Zone.HAND, source, game);
         }
         return true;
     }
