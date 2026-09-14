@@ -1,6 +1,5 @@
 package mage.game.command.emblems;
 
-import mage.abilities.CompoundAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -23,13 +22,13 @@ public final class DomriRadeEmblem extends Emblem {
         super("Emblem Domri");
         FilterPermanent filter = new FilterControlledCreaturePermanent("Creatures");
 
-        CompoundAbility compoundAbilities = new CompoundAbility(
+        this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new GainAbilityControlledEffect(
+                Duration.EndOfGame, filter,
                 DoubleStrikeAbility.getInstance(),
                 TrampleAbility.getInstance(),
                 HexproofAbility.getInstance(),
                 HasteAbility.getInstance()
-        );
-        this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new GainAbilityControlledEffect(compoundAbilities, Duration.EndOfGame, filter)));
+        )));
     }
 
     private DomriRadeEmblem(final DomriRadeEmblem card) {

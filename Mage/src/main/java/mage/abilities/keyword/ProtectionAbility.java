@@ -162,8 +162,9 @@ public class ProtectionAbility extends StaticAbility {
         return filter;
     }
 
-    public void setFilter(FilterCard filter) {
+    public ProtectionAbility setFilter(Filter filter) {
         this.filter = filter;
+        return this;
     }
 
     public void setRemovesAuras(boolean removeAuras) {
