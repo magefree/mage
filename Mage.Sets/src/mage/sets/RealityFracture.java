@@ -27,6 +27,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Aerid Konstrari", 347, Rarity.MYTHIC, mage.cards.a.AeridKonstrari.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aerid Konstrari", 407, Rarity.MYTHIC, mage.cards.a.AeridKonstrari.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aerid Konstrari", 417, Rarity.MYTHIC, mage.cards.a.AeridKonstrari.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Afterthought Sentry", 166, Rarity.COMMON, mage.cards.a.AfterthoughtSentry.class));
         cards.add(new SetCardInfo("Ajani Resolute", 195, Rarity.MYTHIC, mage.cards.a.AjaniResolute.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ajani Resolute", 291, Rarity.MYTHIC, mage.cards.a.AjaniResolute.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ajani Unrelenting", 242, Rarity.MYTHIC, mage.cards.a.AjaniUnrelenting.class, NON_FULL_USE_VARIOUS));
