@@ -84,6 +84,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Generous Revival", 8, Rarity.UNCOMMON, mage.cards.g.GenerousRevival.class));
         cards.add(new SetCardInfo("Ghalta the Immovable", 197, Rarity.UNCOMMON, mage.cards.g.GhaltaTheImmovable.class));
         cards.add(new SetCardInfo("Ghalta the Unstoppable", 260, Rarity.UNCOMMON, mage.cards.g.GhaltaTheUnstoppable.class));
+        cards.add(new SetCardInfo("Gideon the Oathless", 230, Rarity.RARE, mage.cards.g.GideonTheOathless.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gideon the Oathless", 304, Rarity.RARE, mage.cards.g.GideonTheOathless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gideon's Memorial", 198, Rarity.RARE, mage.cards.g.GideonsMemorial.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gideon's Memorial", 292, Rarity.RARE, mage.cards.g.GideonsMemorial.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Greenhouse Propagator", 104, Rarity.COMMON, mage.cards.g.GreenhousePropagator.class));
