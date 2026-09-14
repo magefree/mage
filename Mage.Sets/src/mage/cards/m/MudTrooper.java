@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -43,7 +42,6 @@ public final class MudTrooper extends CardImpl {
                 new GenericManaCost(2));
         this.addAbility(new SimpleStaticAbility(
                 new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, filter, false)
-                        .withForceQuotes()
         ));
     }
 

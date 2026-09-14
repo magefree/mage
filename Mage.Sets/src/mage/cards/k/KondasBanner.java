@@ -1,6 +1,6 @@
 package mage.cards.k;
 
-import mage.abilities.Ability;
+import mage.MageObject;
 import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -10,8 +10,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -24,9 +25,13 @@ import java.util.UUID;
 public final class KondasBanner extends CardImpl {
 
     private static final FilterPermanent legendaryFilter = new FilterCreaturePermanent("legendary creature");
+    private static final FilterPermanent colorFilter = new FilterCreaturePermanent("Creatures that share a color with equipped creature");
+    private static final FilterPermanent typeFilter = new FilterCreaturePermanent("Creatures that share a creature type with equipped creature");
 
     static {
         legendaryFilter.add(SuperType.LEGENDARY.getPredicate());
+        colorFilter.add(ShareColorEquippedPredicate.instance);
+        typeFilter.add(ShareTypeEquippedPredicate.instance);
     }
 
     public KondasBanner(UUID ownerId, CardSetInfo setInfo) {
@@ -38,10 +43,10 @@ public final class KondasBanner extends CardImpl {
         this.addAbility(new AttachableToRestrictedAbility(new TargetPermanent(legendaryFilter)));
 
         // Creatures that share a color with equipped creature get +1/+1.
-        this.addAbility(new SimpleStaticAbility(new KondasBannerColorBoostEffect()));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, colorFilter)));
 
         // Creatures that share a creature type with equipped creature get +1/+1.
-        this.addAbility(new SimpleStaticAbility(new KondasBannerTypeBoostEffect()));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, typeFilter)));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), new TargetPermanent(legendaryFilter.copy().add(TargetController.YOU.getControllerPredicate())), false));
@@ -57,82 +62,36 @@ public final class KondasBanner extends CardImpl {
     }
 }
 
-class KondasBannerTypeBoostEffect extends BoostAllEffect {
-
-    private static final String effectText = "Creatures that share a creature type with equipped creature get +1/+1";
-
-    KondasBannerTypeBoostEffect() {
-        super(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, false);
-        staticText = effectText;
-    }
-
-    private KondasBannerTypeBoostEffect(final KondasBannerTypeBoostEffect effect) {
-        super(effect);
-    }
+enum ShareColorEquippedPredicate implements ObjectSourcePlayerPredicate<MageObject> {
+    instance;
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        // Check if the equipment is attached
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            Permanent equipedCreature = game.getPermanent(equipment.getAttachedTo());
-            if (equipedCreature != null) {
-                for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                    if (perm.shareCreatureTypes(game, equipedCreature)) {
-                        perm.addPower(power.calculate(game, source, this));
-                        perm.addToughness(toughness.calculate(game, source, this));
-
-                    }
-                }
-                return true;
-            }
+    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
+        Permanent source = game.getPermanent(input.getSourceId());
+        if (source == null) {
+            return false;
         }
-        return false;
+        Permanent attached = game.getPermanent(source.getAttachedTo());
+        if (attached == null) {
+            return false;
+        }
+        return input.getObject().getColor(game).shares(attached.getColor(game));
     }
-
-    @Override
-    public KondasBannerTypeBoostEffect copy() {
-        return new KondasBannerTypeBoostEffect(this);
-    }
-
 }
 
-class KondasBannerColorBoostEffect extends BoostAllEffect {
-
-    private static final String effectText = "Creatures that share a color with equipped creature get +1/+1.";
-
-    KondasBannerColorBoostEffect() {
-        super(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, false);
-        staticText = effectText;
-    }
-
-    private KondasBannerColorBoostEffect(final KondasBannerColorBoostEffect effect) {
-        super(effect);
-    }
+enum ShareTypeEquippedPredicate implements ObjectSourcePlayerPredicate<MageObject> {
+    instance;
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        // Check if the equipment is attached
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            Permanent equipedCreature = game.getPermanent(equipment.getAttachedTo());
-            if (equipedCreature != null) {
-                for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                    if (equipedCreature.getColor(game).shares(perm.getColor(game))) {
-                        perm.addPower(power.calculate(game, source, this));
-                        perm.addToughness(toughness.calculate(game, source, this));
-
-                    }
-                }
-                return true;
-            }
+    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
+        Permanent source = game.getPermanent(input.getSourceId());
+        if (source == null) {
+            return false;
         }
-        return false;
+        Permanent attached = game.getPermanent(source.getAttachedTo());
+        if (attached == null) {
+            return false;
+        }
+        return input.getObject().shareCreatureTypes(game, attached);
     }
-
-    @Override
-    public KondasBannerColorBoostEffect copy() {
-        return new KondasBannerColorBoostEffect(this);
-    }
-
 }

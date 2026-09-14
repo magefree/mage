@@ -1,33 +1,18 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.util.CardUtil;
-
-import java.util.Iterator;
-import java.util.Locale;
+import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.target.targetpointer.FilterAllPermanentsTargetPointer;
 
 /**
+ * Grants abilities to every permanent matching a filter. All the work is in the superclass;
+ * this only installs the target pointer.
+ *
  * @author Loki
  */
-public class GainAbilityAllEffect extends ContinuousEffectImpl {
-
-    protected Ability ability;
-    protected boolean excludeSource;
-    protected FilterPermanent filter;
-    protected boolean forceQuotes = false;
+public class GainAbilityAllEffect extends GainAbilityTargetEffect {
 
     public GainAbilityAllEffect(Ability ability, Duration duration, FilterPermanent filter) {
         this(ability, duration, filter, false);
@@ -39,129 +24,23 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
     }
 
     public GainAbilityAllEffect(Ability ability, Duration duration, FilterPermanent filter, boolean excludeSource) {
-        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.ability = ability.copy();
-        this.ability.newId();
-        this.filter = filter;
-        this.excludeSource = excludeSource;
+        super(ability, duration);
+        FilterPermanent filterCopy = filter.copy();
+        if (excludeSource) {
+            filterCopy.add(AnotherPredicate.instance);
+        }
+        filterCopy.setMessage(withOtherPrefix(filter.getMessage(), excludeSource));
+        this.setTargetPointer(new FilterAllPermanentsTargetPointer(filterCopy));
 
         this.generateGainAbilityDependencies(ability, filter);
     }
 
     protected GainAbilityAllEffect(final GainAbilityAllEffect effect) {
         super(effect);
-        this.ability = effect.ability.copy();
-        ability.newId(); // This is needed if the effect is copied e.g. by a clone so the ability can be added multiple times to permanents
-        this.filter = effect.filter.copy();
-        this.excludeSource = effect.excludeSource;
-        this.forceQuotes = effect.forceQuotes;
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        setRuntimeData(source, game);
-        if (getAffectedObjectsSet()) {
-            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
-                    affectedObjectList.add(new MageObjectReference(perm, game));
-                }
-            }
-        }
     }
 
     @Override
     public GainAbilityAllEffect copy() {
         return new GainAbilityAllEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (getAffectedObjectsSet()) {
-            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
-                Permanent permanent = it.next().getPermanentOrLKIBattlefield(game); //LKI is neccessary for "dies triggered abilities" to work given to permanets  (e.g. Showstopper)
-                if (permanent != null) {
-                    permanent.addAbility(ability, source.getSourceId(), game);
-                } else {
-                    it.remove(); // no longer on the battlefield, remove reference to object
-                    if (affectedObjectList.isEmpty()) {
-                        discard();
-                    }
-                }
-            }
-        } else {
-            setRuntimeData(source, game);
-            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
-                    perm.addAbility(ability, source.getSourceId(), game);
-                }
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Overwrite this in effect that inherits from this
-     *
-     * @param source
-     * @param game
-     */
-    protected void setRuntimeData(Ability source, Game game) {
-
-    }
-
-    /**
-     * Overwrite this in effect that inherits from this
-     *
-     * @param permanent
-     * @param source
-     * @param game
-     * @return
-     */
-    protected boolean selectedByRuntimeData(Permanent permanent, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-
-        StringBuilder sb = new StringBuilder();
-
-        boolean quotes = forceQuotes
-                || ability instanceof SimpleActivatedAbility
-                || ability instanceof ActivatedManaAbilityImpl
-                || ability instanceof TriggeredAbility;
-        boolean each = filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("each");
-        if (excludeSource && !each) {
-            sb.append("other ");
-        }
-        sb.append(filter.getMessage());
-        if (duration == Duration.WhileOnBattlefield) {
-            sb.append(each ? " has " : " have ");
-        } else {
-            sb.append(each ? " gains " : " gain ");
-        }
-        if (quotes) {
-            sb.append('"');
-            sb.append(CardUtil.getTextWithFirstCharUpperCase(ability.getRule()));
-            sb.append('"');
-        } else {
-            sb.append(CardUtil.stripReminderText(ability.getRule()));
-        }
-        if (!duration.toString().isEmpty()) {
-            sb.append(' ').append(duration.toString());
-        }
-        return sb.toString();
-    }
-
-    /**
-     * Add quotes to gains abilities (by default static abilities don't have it)
-     */
-    public GainAbilityAllEffect withForceQuotes() {
-        this.forceQuotes = true;
-        return this;
     }
 }
