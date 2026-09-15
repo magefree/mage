@@ -58,6 +58,9 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Craterclaw Colossus", 78, Rarity.MYTHIC, mage.cards.c.CraterclawColossus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Danitha, Spear of Agony", 227, Rarity.UNCOMMON, mage.cards.d.DanithaSpearOfAgony.class));
         cards.add(new SetCardInfo("Danitha, Sword of Hope", 196, Rarity.UNCOMMON, mage.cards.d.DanithaSwordOfHope.class));
+        cards.add(new SetCardInfo("Darklight Phoenix", 325, Rarity.MYTHIC, mage.cards.d.DarklightPhoenix.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Darklight Phoenix", 444, Rarity.MYTHIC, mage.cards.d.DarklightPhoenix.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Darklight Phoenix", 53, Rarity.MYTHIC, mage.cards.d.DarklightPhoenix.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Denzilore Fatehold", 128, Rarity.MYTHIC, mage.cards.d.DenziloreFatehold.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Denzilore Fatehold", 349, Rarity.MYTHIC, mage.cards.d.DenziloreFatehold.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Denzilore Fatehold", 408, Rarity.MYTHIC, mage.cards.d.DenziloreFatehold.class, NON_FULL_USE_VARIOUS));
