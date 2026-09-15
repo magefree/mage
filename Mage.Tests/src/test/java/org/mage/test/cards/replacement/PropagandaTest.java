@@ -57,4 +57,33 @@ public class PropagandaTest extends CardTestPlayerBase {
         assertTappedCount("Plains", true, 4);
     }
 
+    // https://github.com/magefree/mage/issues/10372
+    // https://github.com/magefree/mage/issues/14754
+    @Test
+    public void testClone() {
+        addCard(Zone.BATTLEFIELD, playerB, "Archangel of Tithes");
+        addCard(Zone.HAND, playerA, "Clone");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears");
+        addCard(Zone.BATTLEFIELD, playerB, "Wastes");
+        addCard(Zone.HAND, playerA, "Fell");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA, true);
+        setChoice(playerA, "Archangel of Tithes");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Fell");
+        addTarget(playerA, "Archangel of Tithes[no copy]");
+
+        attack(2, playerB, "Balduvian Bears");
+        setChoice(playerB, true);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 18);
+        assertTappedCount("Balduvian Bears", true, 1);
+    }
+
 }
