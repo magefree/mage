@@ -39,7 +39,7 @@ public final class CloseEncounter extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
         // As an additional cost to cast this spell, choose a creature you control or a warped creature card you own in exile.
-        this.getSpellAbility().addCost(new CloseEncounterCost());
+        this.getSpellAbility().addCost(new CloseEncounterCost().setAdditional(true));
 
         // Close Encounter deals damage equal to the power of the chosen creature or card to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(CloseEncounterValue.instance)

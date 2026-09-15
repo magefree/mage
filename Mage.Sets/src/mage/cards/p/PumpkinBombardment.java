@@ -22,7 +22,7 @@ public final class PumpkinBombardment extends CardImpl {
         // As an additional cost to cast this spell, discard a card or pay {2}.
         this.getSpellAbility().addCost(new OrCost(
                 "discard a card or pay {2}", new DiscardCardCost(), new GenericManaCost(2)
-        ));
+        ).setAdditional(true));
 
         // Pumpkin Bombardment deals 3 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

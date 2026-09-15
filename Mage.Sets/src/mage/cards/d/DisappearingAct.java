@@ -21,7 +21,7 @@ public final class DisappearingAct extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");
 
         // As an additional cost to cast Disappearing Act, return a permanent you control to its owner's hand.
-        this.getSpellAbility().addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(new FilterControlledPermanent("a permanent"))));
+        this.getSpellAbility().addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(new FilterControlledPermanent("a permanent"))).setAdditional(true));
 
         // Counter target spell.
         getSpellAbility().addEffect(new CounterTargetEffect());

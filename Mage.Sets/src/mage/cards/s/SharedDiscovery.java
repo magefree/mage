@@ -18,7 +18,7 @@ public final class SharedDiscovery extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}");
 
         // As an additional cost to cast Shared Discovery, tap four untapped creatures you control.
-        this.getSpellAbility().addCost(new TapTargetCost(4, StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURES));
+        this.getSpellAbility().addCost(new TapTargetCost(4, StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURES).setAdditional(true));
 
         // Draw three cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));

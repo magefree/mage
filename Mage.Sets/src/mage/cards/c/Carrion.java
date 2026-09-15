@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.CarrionBlackInsectToken;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class Carrion extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}{B}");
 
         // As an additional cost to cast Carrion, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE).setAdditional(true));
 
         // Put X 0/1 black Insect creature tokens onto the battlefield, where X is the sacrificed creature's power.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new CarrionBlackInsectToken(), SacrificeCostCreaturesPower.instance));

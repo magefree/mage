@@ -36,7 +36,7 @@ public final class ScroungeForEternity extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // As an additional cost to cast this spell, sacrifice an artifact or creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE).setAdditional(true));
 
         // Return target creature or Spacecraft card with mana value 5 or less from your graveyard to the battlefield. Then create a Lander token.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());

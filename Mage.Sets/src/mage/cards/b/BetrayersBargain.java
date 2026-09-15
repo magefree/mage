@@ -25,7 +25,7 @@ public final class BetrayersBargain extends CardImpl {
         this.getSpellAbility().addCost(new OrCost(
                 "sacrifice a creature or enchantment or pay {2}",
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE_OR_ENCHANTMENT), new GenericManaCost(2)
-        ));
+        ).setAdditional(true));
 
         // Betrayer's Bargain deals 5 damage to target creature. If that creature would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));

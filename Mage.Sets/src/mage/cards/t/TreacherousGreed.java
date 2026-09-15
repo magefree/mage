@@ -37,7 +37,7 @@ public final class TreacherousGreed extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}{B}");
 
         // As an additional cost to cast this spell, sacrifice a creature that dealt damage this turn.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(filter));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(filter).setAdditional(true));
         this.getSpellAbility().addWatcher(new TreacherousGreedWatcher());
 
         // Draw three cards. Each opponent loses 3 life and you gain 3 life.

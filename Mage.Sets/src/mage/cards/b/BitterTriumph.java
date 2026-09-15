@@ -26,7 +26,7 @@ public final class BitterTriumph extends CardImpl {
                         "discard a card or pay 3 life",
                         new DiscardCardCost(),
                         new PayLifeCost(3)
-                )
+                ).setAdditional(true)
         );
 
         // Destroy target creature or planeswalker.

@@ -17,7 +17,7 @@ public final class WildGuess extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}{R}");
 
         // As an additional cost to cast Wild Guess, discard a card.
-        this.getSpellAbility().addCost(new DiscardCardCost());
+        this.getSpellAbility().addCost(new DiscardCardCost().setAdditional(true));
         // Draw two cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }

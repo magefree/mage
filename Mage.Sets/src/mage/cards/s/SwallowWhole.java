@@ -41,7 +41,7 @@ public final class SwallowWhole extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{W}");
 
         // As an additional cost to cast this spell, tap an untapped creature you control.
-        this.getSpellAbility().addCost(new TapTargetCost(new TargetControlledPermanent(filter)));
+        this.getSpellAbility().addCost(new TapTargetCost(new TargetControlledPermanent(filter)).setAdditional(true));
 
         // Exile target tapped creature. Put a +1/+1 counter on the creature tapped to cast this spell.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

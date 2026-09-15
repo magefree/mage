@@ -10,8 +10,6 @@ import mage.constants.CardType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetArtifactPermanent;
-import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -26,7 +24,7 @@ public final class PhyrexianTribute extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         // As an additional cost to cast Phyrexian Tribute, sacrifice two creatures.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(2, filter));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(2, filter).setAdditional(true));
         // Destroy target artifact.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());

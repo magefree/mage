@@ -20,7 +20,7 @@ public final class WitheringBoon extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // As an additional cost to cast Withering Boon, pay 3 life.
-        this.getSpellAbility().addCost(new PayLifeCost(3));
+        this.getSpellAbility().addCost(new PayLifeCost(3).setAdditional(true));
         // Counter target creature spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_CREATURE));

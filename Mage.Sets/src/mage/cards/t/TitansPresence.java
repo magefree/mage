@@ -36,7 +36,7 @@ public final class TitansPresence extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}");
 
         // As an additional cost to cast Titan's Presence, reveal a colorless creature card from your hand.
-        this.getSpellAbility().addCost(new RevealTargetFromHandCost(new TargetCardInHand(filter)));
+        this.getSpellAbility().addCost(new RevealTargetFromHandCost(new TargetCardInHand(filter)).setAdditional(true));
 
         // Exile target creature if its power is less than or equal to the revealed card's power.
         this.getSpellAbility().addEffect(new TitansPresenceEffect());

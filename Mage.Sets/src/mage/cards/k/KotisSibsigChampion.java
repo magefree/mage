@@ -42,7 +42,7 @@ public final class KotisSibsigChampion extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Once during each of your turns, you may cast a creature spell from your graveyard by exiling three other cards from your graveyard in addition to paying its other costs.
-        Cost cost = new ExileFromGraveCost(new TargetCardInYourGraveyard(3, filter));
+        Cost cost = new ExileFromGraveCost(new TargetCardInYourGraveyard(3, filter)).setAdditional(true);
         cost.setText(cost.getText().replace("exile", "exiling"));
         this.addAbility(new CastFromGraveyardOnceDuringEachOfYourTurnAbility(StaticFilters.FILTER_CARD_A_CREATURE_SPELL, cost));
 

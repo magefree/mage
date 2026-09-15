@@ -42,7 +42,7 @@ public final class LysAlanaDignitary extends CardImpl {
         this.getSpellAbility().addCost(new OrCost(
                 "behold an Elf or pay {2}",
                 new BeholdCost(SubType.ELF), new GenericManaCost(2)
-        ));
+        ).setAdditional(true));
 
         // {T}: Add {G}{G}. Activate only if there is an Elf card in your graveyard.
         this.addAbility(new ActivateIfConditionManaAbility(

@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponentOrPlaneswalker;
 
 /**
@@ -23,7 +22,7 @@ public final class FinalStrike extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
 
         // As an additional cost to cast Final Strike, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE).setAdditional(true));
 
         // Final Strike deals damage to target opponent equal to the sacrificed creature's power.
         Effect effect = new DamageTargetEffect(SacrificeCostCreaturesPower.instance);

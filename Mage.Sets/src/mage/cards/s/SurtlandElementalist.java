@@ -40,7 +40,7 @@ public final class SurtlandElementalist extends CardImpl {
         this.getSpellAbility().addCost(new OrCost(
                 "reveal a Giant card from your hand or pay {2}", new RevealTargetFromHandCost(new TargetCardInHand(filter)),
                 new GenericManaCost(2)
-        ));
+        ).setAdditional(true));
 
         // Whenever Surtland Elementalist attacks, you may cast an instant or sorcery spell from your hand without paying its mana cost.
         this.addAbility(new AttacksTriggeredAbility(new CastFromHandForFreeEffect(filter2), true));

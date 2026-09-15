@@ -39,7 +39,7 @@ public final class WarlordsElite extends CardImpl {
         this.toughness = new MageInt(4);
 
         // As an additional cost to cast this spell, tap two untapped artifacts, creatures, and/or lands you control.
-        this.getSpellAbility().addCost(new TapTargetCost(new TargetControlledPermanent(2, filter)));
+        this.getSpellAbility().addCost(new TapTargetCost(new TargetControlledPermanent(2, filter)).setAdditional(true));
     }
 
     private WarlordsElite(final WarlordsElite card) {

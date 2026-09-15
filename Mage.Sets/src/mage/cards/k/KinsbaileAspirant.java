@@ -31,7 +31,7 @@ public final class KinsbaileAspirant extends CardImpl {
         // As an additional cost to cast this spell, behold a Kithkin or pay {2}.
         this.getSpellAbility().addCost(new OrCost(
                 "behold a Kithkin or pay {2}", new BeholdCost(SubType.KITHKIN), new GenericManaCost(2)
-        ));
+        ).setAdditional(true));
 
         // Whenever another creature you control enters, this creature gets +1/+1 until end of turn.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(

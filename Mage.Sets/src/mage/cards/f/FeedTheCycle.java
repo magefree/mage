@@ -22,7 +22,7 @@ public final class FeedTheCycle extends CardImpl {
         // As an additional cost to cast this spell, forage or pay {B}.
         this.getSpellAbility().addCost(new OrCost(
                 "forage or pay {B}", new ForageCost(), new ManaCostsImpl<>("{B}")
-        ));
+        ).setAdditional(true));
 
         // Destroy target creature or planeswalker.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

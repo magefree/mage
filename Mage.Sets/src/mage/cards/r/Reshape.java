@@ -9,8 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
-import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -22,7 +20,7 @@ public final class Reshape extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");
 
         // As an additional cost to cast Reshape, sacrifice an artifact.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT).setAdditional(true));
         
         // Search your library for an artifact card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryWithLessCMCPutInPlayEffect(new FilterArtifactCard()));

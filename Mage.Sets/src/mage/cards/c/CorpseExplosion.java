@@ -27,7 +27,7 @@ public final class CorpseExplosion extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{R}");
 
         // As an additional cost to cast this spell, exile a creature card from your graveyard.
-        this.getSpellAbility().addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD)));
+        this.getSpellAbility().addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD)).setAdditional(true));
 
         // Corpse Explosion deals damage equal to the exiled card's power to each creature and each planeswalker.
         this.getSpellAbility().addEffect(new CorpseExplosionEffect());

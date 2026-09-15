@@ -27,7 +27,7 @@ public final class ChargeOfTheForeverBeast extends CardImpl {
         // As an additional cost to cast this spell, reveal a creature card from your hand.
         this.getSpellAbility().addCost(new RevealTargetFromHandCost(
                 new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE_YOUR_HAND)
-        ));
+        ).setAdditional(true));
 
         // Charge of the Forever-Beast deals damage to target creature or planeswalker equal to the revealed card's power.
         this.getSpellAbility().addEffect(new ChargeOfTheForeverBeastEffect());

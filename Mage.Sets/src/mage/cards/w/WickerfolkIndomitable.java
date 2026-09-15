@@ -5,7 +5,6 @@ import java.util.UUID;
 import mage.MageIdentifier;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.MayCastFromGraveyardSourceAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
@@ -14,8 +13,6 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -83,8 +80,8 @@ class WickerfolkIndomitableGraveyardEffect extends AsThoughEffectImpl {
         Player controller = game.getPlayer(affectedControllerId);
         if (controller != null) {
             Costs<Cost> costs = new CostsImpl<>();
-            costs.add(new PayLifeCost(2));
-            costs.add(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE));
+            costs.add(new PayLifeCost(2).setAdditional(true));
+            costs.add(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE).setAdditional(true));
             controller.setCastSourceIdWithAlternateMana(objectId, new ManaCostsImpl<>("{3}{B}"), costs,
                     MageIdentifier.WickerfolkIndomitableAlternateCast);
             return true;

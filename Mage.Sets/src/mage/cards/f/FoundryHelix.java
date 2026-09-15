@@ -14,7 +14,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -27,7 +26,7 @@ public final class FoundryHelix extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}{W}");
 
         // As an additional cost to cast this spell, sacrifice a permanent.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT).setAdditional(true));
 
         // Foundry Helix deals 4 damage to any target. If the sacrificed permanent was an artifact, you gain 4 life.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));

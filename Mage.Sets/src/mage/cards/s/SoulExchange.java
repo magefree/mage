@@ -28,7 +28,7 @@ public final class SoulExchange extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}{B}");
 
         // As an additional cost to cast Soul Exchange, exile a creature you control.
-        this.getSpellAbility().addCost(new ExileTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_A_CREATURE)));
+        this.getSpellAbility().addCost(new ExileTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_A_CREATURE)).setAdditional(true));
 
         // Return target creature card from your graveyard to the battlefield. Put a +2/+2 counter on that creature if the exiled creature was a Thrull.
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));

@@ -7,8 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -21,7 +19,7 @@ public final class BoneSplinters extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
 
         // As an additional cost to cast Bone Splinters, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE).setAdditional(true));
         // Destroy target creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("to destroy"));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

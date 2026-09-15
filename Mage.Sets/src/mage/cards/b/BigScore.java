@@ -19,7 +19,7 @@ public final class BigScore extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
 
         // As an additional cost to cast this spell, draw a card.
-        this.getSpellAbility().addCost(new DiscardCardCost(false));
+        this.getSpellAbility().addCost(new DiscardCardCost(false).setAdditional(true));
 
         // Draw two cards and create two Treasure tokens.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

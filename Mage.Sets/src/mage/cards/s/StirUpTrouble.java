@@ -24,7 +24,7 @@ public final class StirUpTrouble extends CardImpl {
         this.getSpellAbility().addCost(new OrCost(
             "sacrifice an artifact or creature or pay {4}",
             new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE), new GenericManaCost(4)
-        ));
+        ).setAdditional(true));
 
         // Destroy target creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

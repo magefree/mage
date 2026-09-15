@@ -11,11 +11,13 @@ public abstract class CostImpl implements Cost {
 
     protected UUID id;
     protected String text;
+    protected boolean additional;
     protected boolean paid;
     private Targets targets;
 
     public CostImpl() {
         id = UUID.randomUUID();
+        additional = false;
         paid = false;
         targets = null; // rare usage, must be null by default for performance optimization
     }
@@ -23,6 +25,7 @@ public abstract class CostImpl implements Cost {
     protected CostImpl(final CostImpl cost) {
         this.id = cost.id;
         this.text = cost.text;
+        this.additional = cost.additional;
         this.paid = cost.paid;
         this.targets = cost.targets == null ? null : cost.targets.copy();
     }
@@ -40,6 +43,17 @@ public abstract class CostImpl implements Cost {
     @Override
     public Cost setText(String text) {
         this.text = text;
+        return this;
+    }
+
+    @Override
+    public boolean getAdditional() {
+        return this.additional;
+    }
+
+    @Override
+    public Cost setAdditional(boolean additional) {
+        this.additional = additional;
         return this;
     }
 

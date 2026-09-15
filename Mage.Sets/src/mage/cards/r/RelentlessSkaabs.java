@@ -26,7 +26,7 @@ public final class RelentlessSkaabs extends CardImpl {
         this.toughness = new MageInt(4);
 
         // As an additional cost to cast Relentless Skaabs, exile a creature card from your graveyard.
-        this.getSpellAbility().addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD)));
+        this.getSpellAbility().addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD)).setAdditional(true));
         // Undying
         this.addAbility(new UndyingAbility());
     }

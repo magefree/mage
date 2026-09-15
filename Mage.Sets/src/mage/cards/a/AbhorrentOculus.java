@@ -30,7 +30,7 @@ public final class AbhorrentOculus extends CardImpl {
         // As an additional cost to cast this spell, exile six cards from your graveyard.
         this.getSpellAbility().addCost(new ExileFromGraveCost(
                 new TargetCardInYourGraveyard(6, StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD)
-        ));
+        ).setAdditional(true));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
