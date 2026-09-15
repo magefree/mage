@@ -29,6 +29,8 @@ public final class DrogskolInfantry extends TransformingDoubleFacedCard {
         // Drogskol Infantry
         this.getLeftHalfCard().setPT(2, 2);
 
+        // Disturb {3}{W}
+        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{3}{W}"));
 
         // Drogskol Armaments
 
@@ -37,10 +39,6 @@ public final class DrogskolInfantry extends TransformingDoubleFacedCard {
         this.getRightHalfCard().getSpellAbility().addTarget(auraTarget);
         this.getRightHalfCard().getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.getRightHalfCard().addAbility(new EnchantAbility(auraTarget));
-
-        // Disturb {3}{W}
-        // needs to be added after enchant ability to set correct target
-        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{3}{W}"));
 
         // Enchanted creature gets +2/+2.
         this.getRightHalfCard().addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(2, 2)));

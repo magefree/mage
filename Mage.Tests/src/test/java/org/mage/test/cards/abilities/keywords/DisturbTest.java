@@ -1,5 +1,6 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
@@ -359,5 +360,56 @@ public class DisturbTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
         assertExileCount(mirrorhallMimic, 1);
+    }
+
+    @Test
+    public void testDisturbAuraKatilda() {
+        addCard(Zone.GRAVEYARD, playerA, "Katilda, Dawnhart Martyr");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Katilda's Rising Dawn using Disturb");
+        addTarget(playerA, "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Katilda's Rising Dawn", 1);
+        assertAttachedTo(playerA, "Katilda's Rising Dawn", "Grizzly Bears", true);
+    }
+
+    /**
+    * https://github.com/magefree/mage/issues/16071
+    */
+    @Test
+    public void testDisturbCopiesBackFaceAfterCardSetup() {
+        addCard(Zone.GRAVEYARD, playerA, "Twinblade Geist");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Twinblade Invocation using Disturb");
+        addTarget(playerA, "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Twinblade Invocation", 1);
+        assertAttachedTo(playerA, "Twinblade Invocation", "Grizzly Bears", true);
+        assertAbility(playerA, "Grizzly Bears", DoubleStrikeAbility.getInstance(), true);
+    }
+
+    @Test
+    public void testDisturbUsesCompletedBackFaceForPlayability() {
+        addCard(Zone.GRAVEYARD, playerA, "Twinblade Geist");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+
+        checkPlayableAbility("no legal Aura target", 1, PhaseStep.PRECOMBAT_MAIN,
+                playerA, "Cast Twinblade Invocation using Disturb", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
     }
 }
