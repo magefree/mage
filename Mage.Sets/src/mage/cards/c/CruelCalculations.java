@@ -3,10 +3,13 @@ package mage.cards.c;
 import java.util.UUID;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.hint.Hint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -32,6 +35,7 @@ public final class CruelCalculations extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(CruelCalculationsValue.instance));
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addWatcher(new CruelCalculationsWatcher());
+        this.getSpellAbility().addHint(CruelCalculationsHint.instance);
     }
 
     private CruelCalculations(final CruelCalculations card) {
@@ -41,6 +45,30 @@ public final class CruelCalculations extends CardImpl {
     @Override
     public CruelCalculations copy() {
         return new CruelCalculations(this);
+    }
+}
+
+enum CruelCalculationsHint implements Hint {
+    instance;
+
+    @Override
+    public String getText(Game game, Ability ability) {
+        CruelCalculationsWatcher watcher = game.getState().getWatcher(CruelCalculationsWatcher.class);
+        if (watcher == null) {
+            return null;
+        }
+        return "Cards put into graveyard from library this turn for each player: " + game.getState()
+                .getPlayersInRange(ability.getControllerId(), game)
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .map(player -> player.getName() + " (" + watcher.getCount(player.getId()) + ')')
+                .collect(Collectors.joining(", "));
+    }
+
+    @Override
+    public CruelCalculationsHint copy() {
+        return this;
     }
 }
 
