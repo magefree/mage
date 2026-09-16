@@ -184,14 +184,20 @@ public class ChatSession {
             } finally {
                 r.unlock();
             }
+
+            // fill queue by order, but send as is from async flush
+            List<User> recipients = new ArrayList<>(chatUserIds.size());
             for (UUID userId : chatUserIds) {
                 Optional<User> user = managerFactory.userManager().getUser(userId);
                 if (user.isPresent()) {
-                    user.get().fireCallback(new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId, chatMessage));
+                    user.get().addCallback(new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId, chatMessage));
+                    recipients.add(user.get());
                 } else {
                     clientsToRemove.add(userId);
                 }
             }
+            recipients.forEach(User::flushCallbacksQueue);
+
             if (!clientsToRemove.isEmpty()) {
                 final Lock w = lock.writeLock();
                 w.lock();

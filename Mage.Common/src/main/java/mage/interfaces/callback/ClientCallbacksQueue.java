@@ -55,11 +55,11 @@ public class ClientCallbacksQueue {
         // no room left, drop the oldest message of the same priority and try once more
         ClientCallback dropped = queue.pollFirst();
         if (dropped != null) {
-            // if too much spam in production logs then disable
-            logger.warn("CALLBACKS QUEUE is full, message dropped (add): " + dropped.getInfo());
+            logDropped(dropped, isImportant, "add");
             droppedAsOverflow.add(dropped);
         }
         if (!queue.offerLast(call)) {
+            logDropped(call, isImportant, "add, new one");
             droppedAsOverflow.add(call);
         }
     }
@@ -113,7 +113,7 @@ public class ClientCallbacksQueue {
         // no room: the queue filled up while we were trying to send, so this message is the
         // oldest one now - drop it instead of pushing out something newer
         droppedAsOverflow.add(call);
-        logger.warn("CALLBACKS QUEUE is full, message dropped (returnBack): " + call.getInfo());
+        logDropped(call, isImportant, "returnBack");
     }
 
     /**
@@ -143,5 +143,19 @@ public class ClientCallbacksQueue {
     public void clear() {
         this.importantQueue.clear();
         this.normalQueue.clear();
+    }
+
+    /**
+     * Dropped important messages are a real problem (dialogs, table changes), so always visible.
+     * Dropped normal ones (chats, game logs, updates) are expected for slow clients and can come in
+     * hundreds per burst - debug level only, enable it in a logger config if needed (test lab does it)
+     */
+    private static void logDropped(ClientCallback call, boolean isImportant, String reason) {
+        if (isImportant) {
+            // if too much spam in production logs then switch to debug
+            logger.warn("CALLBACKS QUEUE is full, important message dropped (" + reason + "): " + call.getInfo());
+        } else if (logger.isDebugEnabled()) {
+            logger.debug("CALLBACKS QUEUE is full, message dropped (" + reason + "): " + call.getInfo());
+        }
     }
 }
