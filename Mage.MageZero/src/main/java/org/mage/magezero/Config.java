@@ -78,6 +78,7 @@ public class Config {
         public final boolean binary;
         public final boolean opponent;
         public final double priorTemperature;
+        public final double priorBonus;
 
         public PriorsConfig(Map<String, Object> raw) {
             this.priority = (boolean) raw.getOrDefault("priority", false);
@@ -85,14 +86,20 @@ public class Config {
             this.binary = (boolean) raw.getOrDefault("binary", false);
             this.opponent = (boolean) raw.getOrDefault("opponent", false);
             this.priorTemperature = ((Number) raw.getOrDefault("prior_temperature", 1.5)).doubleValue();
+            this.priorBonus = ((Number) raw.getOrDefault("prior_bonus", 0.1)).doubleValue();
+
         }
     }
 
     public static class NoiseConfig {
         public final boolean enabled;
+        public final double dirichletNoise;
+        public final double selectionTemperature;
 
         public NoiseConfig(Map<String, Object> raw) {
             this.enabled = (boolean) raw.getOrDefault("enabled", false);
+            this.dirichletNoise = ((Number) raw.getOrDefault("dirichlet_noise", 0.15)).doubleValue();
+            this.selectionTemperature = ((Number) raw.getOrDefault("selection_temperature", 2.0)).doubleValue();
         }
     }
 
@@ -100,6 +107,7 @@ public class Config {
         public final int searchBudget;
         public final int timeoutMs;
         public final double tdDiscount;
+        public final double backpropDiscount;
         public boolean offlineMode;
         public boolean pruneDuplicateStates;
 
@@ -107,6 +115,7 @@ public class Config {
             this.searchBudget = ((Number) raw.getOrDefault("search_budget", 300)).intValue();
             this.timeoutMs = ((Number) raw.getOrDefault("timeout_ms", 4000)).intValue();
             this.tdDiscount = ((Number) raw.getOrDefault("td_discount", 0.95)).doubleValue();
+            this.backpropDiscount = ((Number) raw.getOrDefault("backprop_discount", 0.99)).doubleValue();
             this.offlineMode = (boolean) raw.getOrDefault("offline_mode", false);
             this.pruneDuplicateStates = (boolean) raw.getOrDefault("prune_duplicate_states", false);
         }
@@ -133,6 +142,7 @@ public class Config {
         public int games;
         public final int gamesPerFile;
         public int maxTurns;
+        public int maxMinutes;
         public int threads;
         public final boolean trainOpponentHead;
 
@@ -140,6 +150,7 @@ public class Config {
             this.games = ((Number) raw.getOrDefault("games", 1000)).intValue();
             this.gamesPerFile = ((Number) raw.getOrDefault("games_per_file", 200)).intValue();
             this.maxTurns = ((Number) raw.getOrDefault("max_turns", 50)).intValue();
+            this.maxMinutes = ((Number) raw.getOrDefault("max_minutes", 20)).intValue();
             this.threads = ((Number) raw.getOrDefault("threads", 2)).intValue();
             this.trainOpponentHead = (boolean) raw.getOrDefault("train_opponent_head", false);
         }

@@ -518,7 +518,7 @@ public class MCTSNode {
                 node.prior /= sumExp;
                 //assign small exploration bonus to non-mana abilities
                 if(node.priorityAction == null || (!node.priorityAction.isManaAbility() && !(node.priorityAction instanceof PassAbility))) {
-                    node.prior += ComputerPlayerMCTS.PRIOR_BONUS;
+                    node.prior += basePlayer.priorBonus;
                 }
             }
 
@@ -526,7 +526,7 @@ public class MCTSNode {
             if (seed != 0) {
                 logger.warn("using dirichlet seed: " + seed);
                 double alpha = ComputerPlayerMCTS.DIRICHLET_NOISE_ALPHA;
-                double eps = ComputerPlayerMCTS.DIRICHLET_NOISE_EPS;
+                double eps = basePlayer.dirichletNoiseEps;
                 int K = children.size();
                 double[] dir = new double[K];
                 double sum = 0;
@@ -559,7 +559,7 @@ public class MCTSNode {
         score += result;
 
         if (parent != null) {
-            parent.backpropagate(result * ComputerPlayerMCTS.BACKPROP_DISCOUNT, n);
+            parent.backpropagate(result * basePlayer.backpropDiscount, n);
         }
 
     }
@@ -622,7 +622,7 @@ public class MCTSNode {
             logger.info(sb.toString());
         }
         //derive temp from value
-        double temperature = (1-abs(this.networkScore));
+        double temperature = basePlayer.selectionTemperature;
 
         //normal selection
         if (dirichletSeed==0 || temperature < 0.01) {
@@ -691,7 +691,7 @@ public class MCTSNode {
         if (!children.isEmpty() || parent == null) {
             //correct MCTS stats
             if (node.visits > 0) {
-                backpropagate(-node.score * ComputerPlayerMCTS.BACKPROP_DISCOUNT, -node.getVisits());
+                backpropagate(-node.score * basePlayer.backpropDiscount, -node.getVisits());
             }
         } else {
             parent.prune(this);

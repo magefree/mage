@@ -40,6 +40,7 @@ import mage.watchers.Watcher;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 import mage.watchers.common.CreatedTokenWatcher;
 import mage.watchers.common.PlayerGainedLifeWatcher;
+import mage.watchers.common.PlayerLostLifeWatcher;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -183,6 +184,9 @@ public class StateEncoder {
         for (CardType ct : p.getCardType(game)) {
             f.addFeature(ct.name()+"_dynamic");
         }
+        for (SubType st : p.getSubtype(game)) {
+            f.addFeature(st.name()+"_dynamic");
+        }
         if(p.getColor(game).isRed()) f.addFeature("RedCard_dynamic");
         if(p.getColor(game).isWhite()) f.addFeature("WhiteCard_dynamic");
         if(p.getColor(game).isBlack()) f.addFeature("BlackCard_dynamic");
@@ -245,10 +249,10 @@ public class StateEncoder {
         List<StackObject> targetingObjects = getSpellsTargetingPermanent(p, game, stackIndices);
         if(!targetingObjects.isEmpty()) {
             Features targetingFeatures = f.getSubFeatures("TargetedBy", false);
-            for (int i = 0; i < targetingObjects.size(); i++) {
-                StackObject so = targetingObjects.get(i);
-                Features targetingObjectFeatures = targetingFeatures.getSubFeatures(cleanString(so.toString()));
-                processStackObject(so, game, playerId, targetingObjectFeatures);
+            for (StackObject so : targetingObjects) {
+                targetingFeatures.addFeature(cleanString(so.toString()));
+                //Features targetingObjectFeatures = targetingFeatures.getSubFeatures(cleanString(so.toString()));
+                //processStackObject(so, game, playerId, targetingObjectFeatures);
             }
         }
 
@@ -340,8 +344,8 @@ public class StateEncoder {
 
         if(so.getControllerId().equals(playerId)) f.addFeature("isController");
         Ability sa = so.getStackAbility();
-
-        f.addFeature(sa.getRule());
+        //abstract only since non-dynamic
+        f.parent.addFeature(sa.getRule());
 
         Targets myTargets = sa.getTargets();
         if(!myTargets.isEmpty()) {
@@ -376,7 +380,7 @@ public class StateEncoder {
             for(UUID id : selectedModes) {
                 Mode m = sa.getModes().get(id);
                 for(Effect e : m.getEffects()) {
-                    modesFeatures.parent.addFeature(cleanString(e.getText(m)));
+                    modesFeatures.addFeature(cleanString(e.getText(m)));
                 }
             }
         }
@@ -397,12 +401,14 @@ public class StateEncoder {
         }
     }
     private void processStack(SpellStack stack, Game game, UUID playerId, Features f) {
-        Iterator<StackObject> itr = stack.descendingIterator();
+        Iterator<StackObject> itr = stack.iterator();
         StackObject so;
-        Features soFeatures = f;
+        int depth=0;
         while(itr.hasNext()) {
+            depth++;
             so = itr.next();
-            soFeatures = soFeatures.getSubFeatures(cleanString(so.toString()));
+            Features soFeatures = f.getSubFeatures(cleanString(so.toString()));
+            soFeatures.addNumericFeature("Depth", depth, false);
             processStackObject(so, game, playerId, soFeatures);
         }
     }
@@ -485,13 +491,16 @@ public class StateEncoder {
         if (stormW != null) {
             f.addNumericFeature("SpellsCastThisTurn", stormW.getAmountOfSpellsPlayerCastOnCurrentTurn(playerId));
         }
-
         // Life gained this turn
         PlayerGainedLifeWatcher lifeW = game.getState().getWatcher(PlayerGainedLifeWatcher.class);
         if (lifeW != null) {
             f.addNumericFeature("LifeGainedThisTurn", lifeW.getLifeGained(playerId));
         }
-
+        // Life lost this turn
+        PlayerLostLifeWatcher lossW = game.getState().getWatcher(PlayerLostLifeWatcher.class);
+        if (lossW != null) {
+            f.addNumericFeature("LifeLostThisTurn", lossW.getLifeLost(playerId));
+        }
         // Tokens created this turn
         CreatedTokenWatcher tokenW = game.getState().getWatcher(CreatedTokenWatcher.class);
         if (tokenW != null) {
@@ -537,6 +546,14 @@ public class StateEncoder {
         if(decisionPlayerId.equals(playerId)) f.addFeature("IsDecisionPlayer");
         f.addNumericFeature("LifeTotal", myPlayer.getLife());
         if(myPlayer.canPlayLand()) f.addFeature("CanPlayLand");
+        if(game.hasDayNight()) {
+            if(game.checkDayNight(true)) {
+                f.addFeature("DayTime");
+            }
+            if(game.checkDayNight(false)) {
+                f.addFeature("NightTime");
+            }
+        }
 
         //library
         f.addNumericFeature("LibraryCount", myPlayer.getLibrary().size());
@@ -585,7 +602,7 @@ public class StateEncoder {
 
         //global watchers
         Features globalWatcherFeatures = f.getSubFeatures("GlobalWatchers", false);
-        //processWatchers(game, playerId, globalWatcherFeatures);
+        processWatchers(game, playerId, globalWatcherFeatures);
 
 
         //TODO dungeons

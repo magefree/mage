@@ -44,13 +44,14 @@ public class ComputerPlayerMCTS extends ComputerPlayer {
     public boolean noPolicyOpponent = MCTSDefaults.CURRENT.noPolicyOpponent;
 
     //dirichlet noise is applied once to the priors of the root node; this represents how much of those priors should be noise
-    public static double DIRICHLET_NOISE_EPS = 0;
+    public double dirichletNoiseEps = MCTSDefaults.CURRENT.dirichletNoiseEps;
+    public double selectionTemperature = MCTSDefaults.CURRENT.selectionTemperature;
     public static double DIRICHLET_NOISE_ALPHA = 0.03;
     //how confident to be in network policy priors
-    public double priorTemp = 1.5; //probability exponent (Higher = more confident)
-    public static double PRIOR_BONUS = 0.1; //minimum exploration budget (Higher = more stable)
+    public double priorTemp = MCTSDefaults.CURRENT.priorTemp; //probability exponent (Higher = more confident)
+    public double priorBonus = MCTSDefaults.CURRENT.priorBonus; //minimum exploration budget (Higher = more stable)
     //how much to discount the Q scores backpropagation through MCTS; lower means less confident in simulated outcomes
-    public static double BACKPROP_DISCOUNT = 0.99;
+    public double backpropDiscount = MCTSDefaults.CURRENT.backpropDiscount;
     //exploration constant
     public static double C_PUCT = 1;
     //adjust based on available RAM and threads running

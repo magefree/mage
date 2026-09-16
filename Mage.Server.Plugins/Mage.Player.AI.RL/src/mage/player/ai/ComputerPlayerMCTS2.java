@@ -153,7 +153,7 @@ public class ComputerPlayerMCTS2 extends ComputerPlayerMCTS {
 
         long startTime = System.nanoTime();
         long endTime = (long) (startTime + (searchTimeout * 1_000_000_000L));
-        long maxEndTime = startTime + 60_000_000_000L;
+        long maxEndTime = startTime + 300_000_000_000L;
         int simCount = 0;
         int illegalPurged = 0;
         int validDuplicatesPurged = 0;

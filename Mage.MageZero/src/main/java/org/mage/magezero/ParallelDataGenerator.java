@@ -55,12 +55,10 @@ public class ParallelDataGenerator {
     protected RemoteModelEvaluator remoteModelEvaluatorB = null;
     private final BlockingQueue<GameResult> LSQueue = new ArrayBlockingQueue<>(32);
     private final AtomicBoolean stop = new AtomicBoolean(false);
-    private String deckNameA;
-    private String deckNameB;
 
     protected static Map<String, DeckCardLists> loadedDecks = new HashMap<>(); // deck's cache
     protected static Map<String, CardInfo> loadedCardInfo = new HashMap<>(); // db card's cache
-    private static final int maxGameTime = 20;
+    private int maxGameTime = 20;
 
 
 
@@ -151,8 +149,8 @@ public class ParallelDataGenerator {
         LabeledStateWriter fwB;
         Thread writer;
 
-        deckNameA = extractDeckName(Config.INSTANCE.playerA.deckPath);
-        deckNameB = extractDeckName(Config.INSTANCE.playerB.deckPath);
+        String deckNameA = extractDeckName(Config.INSTANCE.playerA.deckPath);
+        String deckNameB = extractDeckName(Config.INSTANCE.playerB.deckPath);
 
         String fileA = "data/playerA/" + deckNameA + "_vs_" + deckNameB + ".hdf5";
         String fileB = "data/playerB/" + deckNameB + "_vs_" + deckNameA + ".hdf5";
@@ -170,6 +168,7 @@ public class ParallelDataGenerator {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        maxGameTime = Config.INSTANCE.training.maxMinutes;
 
 
 
@@ -383,12 +382,16 @@ public class ParallelDataGenerator {
                 mcts2.noPolicyUse = !Config.INSTANCE.playerA.priors.binary;
                 mcts2.noPolicyOpponent = !Config.INSTANCE.playerA.priors.opponent;
                 mcts2.noNoise = !Config.INSTANCE.playerA.noise.enabled;
+                mcts2.dirichletNoiseEps = Config.INSTANCE.playerA.noise.dirichletNoise;
+                mcts2.selectionTemperature = Config.INSTANCE.playerA.noise.selectionTemperature;
                 mcts2.allowMulligans = Config.INSTANCE.playerA.gameplay.mulligans;
                 mcts2.searchBudget = Config.INSTANCE.playerA.mcts.searchBudget;
                 mcts2.searchTimeout = (double) Config.INSTANCE.playerA.mcts.timeoutMs /1000;
                 mcts2.autoTap = !Config.INSTANCE.playerA.gameplay.manualTap;
                 mcts2.priorTemp = Config.INSTANCE.playerA.priors.priorTemperature;
+                mcts2.priorBonus = Config.INSTANCE.playerA.priors.priorBonus;
                 mcts2.allowDuplicates = !Config.INSTANCE.playerA.mcts.pruneDuplicateStates;
+                mcts2.backpropDiscount = Config.INSTANCE.playerA.mcts.backpropDiscount;
                 if(remoteModelEvaluatorA == null || Config.INSTANCE.playerA.mcts.offlineMode) mcts2.offlineMode = true;
             } else {
                 mcts2.nn = remoteModelEvaluatorB;
@@ -397,12 +400,16 @@ public class ParallelDataGenerator {
                 mcts2.noPolicyUse = !Config.INSTANCE.playerB.priors.binary;
                 mcts2.noPolicyOpponent = !Config.INSTANCE.playerB.priors.opponent;
                 mcts2.noNoise = !Config.INSTANCE.playerB.noise.enabled;
+                mcts2.dirichletNoiseEps = Config.INSTANCE.playerB.noise.dirichletNoise;
+                mcts2.selectionTemperature = Config.INSTANCE.playerB.noise.selectionTemperature;
                 mcts2.allowMulligans = Config.INSTANCE.playerB.gameplay.mulligans;
                 mcts2.searchBudget = Config.INSTANCE.playerB.mcts.searchBudget;
                 mcts2.searchTimeout = (double) Config.INSTANCE.playerB.mcts.timeoutMs /1000;
                 mcts2.autoTap = !Config.INSTANCE.playerB.gameplay.manualTap;
                 mcts2.priorTemp = Config.INSTANCE.playerB.priors.priorTemperature;
+                mcts2.priorBonus = Config.INSTANCE.playerB.priors.priorBonus;
                 mcts2.allowDuplicates = !Config.INSTANCE.playerB.mcts.pruneDuplicateStates;
+                mcts2.backpropDiscount = Config.INSTANCE.playerB.mcts.backpropDiscount;
                 if(remoteModelEvaluatorB == null || Config.INSTANCE.playerB.mcts.offlineMode) mcts2.offlineMode = true;
             }
         } else if (player.getRealPlayer() instanceof ComputerPlayer8) {

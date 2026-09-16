@@ -12,17 +12,20 @@ player_a:
     target: false
     binary: false
     opponent: false
-    prior_temperature: 1.5 #does nothing
+    prior_temperature: 1.5
+    prior_bonus: 0.1
+
 
   noise:
     enabled: false
-    dirichlet_noise: 0.15 #does nothing
+    dirichlet_noise: 0.15
     selection_temperature: 2 #does nothing
 
   mcts:
     search_budget: 1000
     timeout_ms: 4000
     td_discount: 0.95
+    backprop_discount: 0.99
     offline_mode: true
     prune_duplicate_states: true
 
@@ -44,17 +47,20 @@ player_b:
     target: false
     binary: false
     opponent: false
-    prior_temperature: 1.5 #does nothing
+    prior_temperature: 1.5
+    prior_bonus: 0.1
+
 
   noise:
     enabled: false
-    dirichlet_noise: 0.15 #does nothing
+    dirichlet_noise: 0.15
     selection_temperature: 2 #does nothing
 
   mcts:
     search_budget: 1000
     timeout_ms: 4000
     td_discount: 0.95
+    backprop_discount: 0.99
     offline_mode: true
     prune_duplicate_states: true
 
@@ -69,7 +75,8 @@ player_b:
 training:
   games: 200
   threads: 4
-  max_turns: 50 #does nothing
+  max_turns: 50
+  max_minutes: 40
 
 server:
   host: localhost
