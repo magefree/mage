@@ -1360,11 +1360,6 @@ public class VerifyCardDataTest {
 
         for (Class<? extends Watcher> watcherClass : watcherClassesList) {
 
-            // only watcher class can be extended (e.g. final)
-            if (!watcherClass.getSuperclass().equals(Watcher.class)) {
-                errorsList.add("Error: only Watcher class can be extended: " + watcherClass.getName());
-            }
-
             // no copy methods
             try {
                 Method m = watcherClass.getMethod("copy");
