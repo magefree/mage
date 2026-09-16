@@ -29,9 +29,10 @@ public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
     }
 
     private final Map<String, Ability> abilityMap;
-    private final boolean includeEnd;
+    private final boolean includeDuration;
     private final TargetType affects;
     private final String targetDescription;
+    private final Duration duration;
 
     public GainsChoiceOfAbilitiesEffect(Ability... abilities) {
         this(TargetType.Target, null, true, abilities);
@@ -41,11 +42,16 @@ public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
         this(affects, null, true, abilities);
     }
 
-    public GainsChoiceOfAbilitiesEffect(TargetType affects, String targetDescription, boolean includeEnd, Ability... abilities) {
+    public GainsChoiceOfAbilitiesEffect(TargetType affects, String targetDescription, boolean includeDuration, Ability... abilities) {
+        this(affects, targetDescription, includeDuration, Duration.EndOfTurn, abilities);
+    }
+
+    public GainsChoiceOfAbilitiesEffect(TargetType affects, String targetDescription, boolean includeDuration, Duration duration, Ability... abilities) {
         super(Outcome.AddAbility);
         this.affects = affects;
         this.targetDescription = targetDescription;
-        this.includeEnd = includeEnd;
+        this.includeDuration = includeDuration;
+        this.duration = duration;
         this.abilityMap = new LinkedHashMap<>();
         for (Ability ability : abilities) {
             this.abilityMap.put(CardUtil.stripReminderText(ability.getRule()), ability);
@@ -57,7 +63,8 @@ public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
         this.affects = effect.affects;
         this.abilityMap = CardUtil.deepCopyObject(effect.abilityMap);
         this.targetDescription = effect.targetDescription;
-        this.includeEnd = effect.includeEnd;
+        this.includeDuration = effect.includeDuration;
+        this.duration = effect.duration;
     }
 
     @Override
@@ -87,7 +94,7 @@ public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
         player.choose(outcome, choice, game);
         Ability ability = abilityMap.get(choice.getChoice());
         if (ability != null) {
-            game.addEffect(new GainAbilityTargetEffect(ability, Duration.EndOfTurn)
+            game.addEffect(new GainAbilityTargetEffect(ability, duration)
                     .setTargetPointer(new FixedTargets(permanents, game)), source);
         }
         return true;
@@ -132,8 +139,8 @@ public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
         } else {
             throw new IllegalStateException("Not enough abilities for GainsChoiceOfAbilitiesEffect");
         }
-        if (includeEnd) {
-            sb.append(" until end of turn");
+        if (includeDuration) {
+            sb.append(" ").append(duration.toString());
         }
         return sb.toString();
     }
