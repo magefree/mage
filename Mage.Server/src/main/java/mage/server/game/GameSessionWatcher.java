@@ -40,16 +40,35 @@ public class GameSessionWatcher {
     }
 
     public boolean init() {
+        return init(true);
+    }
+
+    /**
+     * @param sendNow send it or wait next tick, e.g. fill and flush, see GameController.startGame as example
+     */
+    public boolean init(boolean sendNow) {
         if (!killed) {
             Optional<User> user = userManager.getUser(userId);
             if (user.isPresent()) {
-                // TODO: can be called outside of the game thread, e.g. user start watching already running game
-                //    possible fix: getGameView must use last cached value in non game thread call (split by sessions)
-                user.get().fireCallback(new ClientCallback(ClientCallbackMethod.GAME_INIT, game.getId(), getGameView()));
+                ClientCallback call = new ClientCallback(ClientCallbackMethod.GAME_INIT, game.getId(), getGameView());
+                if (sendNow) {
+                    user.get().fireCallback(call);
+                } else {
+                    user.get().addCallback(call);
+                }
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Sends queued messages in a separate thread, a caller is not blocked
+     */
+    public void flushCallbacks() {
+        if (!killed) {
+            userManager.getUser(userId).ifPresent(User::flushCallbacksQueue);
+        }
     }
 
     public void update() {
@@ -63,7 +82,6 @@ public class GameSessionWatcher {
         if (!killed) {
             userManager.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_UPDATE_AND_INFORM, game.getId(), new GameClientMessage(getGameView(), null, message))));
         }
-
     }
 
     public void informPersonal(final String message) {

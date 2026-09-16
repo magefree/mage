@@ -183,7 +183,6 @@ public class UserManagerImpl implements UserManager {
             Calendar calInform = Calendar.getInstance();
             calInform.add(Calendar.SECOND, -1 * USER_CONNECTION_TIMEOUT_INFORM_AFTER_SECS);
             Calendar calSessionExpire = Calendar.getInstance();
-            calSessionExpire.add(Calendar.SECOND, -1 * USER_CONNECTION_TIMEOUT_SESSION_EXPIRE_AFTER_SECS);
             Calendar calUserRemove = Calendar.getInstance();
             calUserRemove.add(Calendar.SECOND, -1 * USER_CONNECTION_TIMEOUT_REMOVE_FROM_SERVER_SECS);
             List<User> usersToRemove = new ArrayList<>();
@@ -258,6 +257,19 @@ public class UserManagerImpl implements UserManager {
             } finally {
                 w.unlock();
             }
+
+            // flush queued game messages to make sure it will be deliveried on bad or busy connection
+            // runs each 30 secs on production
+            // TODO: move to special scheduled thread with less timeout?
+            List<User> flushingUsers = new ArrayList<>();
+            final Lock fl = lock.readLock();
+            fl.lock();
+            try {
+                flushingUsers.addAll(users.values());
+            } finally {
+                fl.unlock();
+            }
+            flushingUsers.forEach(User::flushCallbacksQueue);
             logger.debug("End Check Expired");
         } catch (Exception ex) {
             handleException(ex);

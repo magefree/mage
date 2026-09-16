@@ -9,6 +9,8 @@ import java.util.UUID;
 
 /**
  * Network: server's event to proccess on client side
+ * 
+ * Warning, do not share between users or requests (one callback per one user session)
  *
  * @author BetaSteward_at_googlemail.com
  */

@@ -264,6 +264,27 @@ public class User {
         }
     }
 
+    /**
+     * Queue only, no sending, see Session#addCallback
+     * Thread safe
+     * Real callbacks will be send on flush command or by another events/schedule
+     */
+    public void addCallback(final ClientCallback call) {
+        if (isConnected()) {
+            managerFactory.sessionManager().getSession(sessionId).ifPresent(session
+                    -> session.addCallback(call)
+            );
+        }
+    }
+
+    /**
+     * Sends messages that are waiting in a session queue, see Session#fireCallback
+     * Thread safe
+     */
+    public void flushCallbacksQueue() {
+        managerFactory.sessionManager().getSession(sessionId).ifPresent(Session::flushCallbacksQueue);
+    }
+
     public void ccJoinedTable(final UUID roomId, final UUID currentTableId, final UUID parentTableId, boolean isTournament) {
         fireCallback(new ClientCallback(
                 ClientCallbackMethod.JOINED_TABLE,
