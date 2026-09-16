@@ -350,20 +350,26 @@ public class HumanPlayer extends PlayerImpl {
 
             // async command: concede by any player
             // game recived immediately response on OTHER player concede -- need to process end game and continue to wait
-            // TODO: is it possible to break choose dialog of current player (check it in multiplayer)?
+            // can come as single mark or with active user response
             if (response.getAsyncWantConcede()) {
+                response.resetAsyncWantConcede();
                 ((GameImpl) game).checkConcede();
                 if (game.hasEnded()) {
                     return;
                 }
                 // wait another answer
-                if (canRespond()) {
+                if (response.hasAnswer()) {
+                    // already has own response, no need to wait next
+                } else if (canRespond()) {
+                    // no other answers, so wait current player response
                     loop = true;
                 }
             }
 
             // async command: cheat by current player
+            // see details in above's getAsyncWantConcede
             if (response.getAsyncWantCheat()) {
+                response.resetAsyncWantCheat();
                 // run cheats
                 SystemUtil.executeCheatCommands(game, null, this);
                 // force to game update for new possible data
@@ -373,12 +379,16 @@ public class HumanPlayer extends PlayerImpl {
                     return;
                 }
                 // wait another answer
-                if (canRespond()) {
+                if (response.hasAnswer()) {
+                    // already has own response, no need to wait next
+                } else if (canRespond()) {
+                    // no other answers, so wait current player response
                     loop = true;
                 }
             }
         }
 
+        // TODO: macro recording outdated, delete it
         if (recordingMacro && !macroTriggeredSelectionFlag) {
             actionQueueSaved.add(new PlayerResponse(response));
         }

@@ -176,7 +176,6 @@ public class ChatSession {
 
             // TODO: wtf, remove all that locks/tries and make it simpler
             Set<UUID> clientsToRemove = new HashSet<>();
-            ClientCallback clientCallback = new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId, chatMessage);
             List<UUID> chatUserIds = new ArrayList<>();
             final Lock r = lock.readLock();
             r.lock();
@@ -188,7 +187,7 @@ public class ChatSession {
             for (UUID userId : chatUserIds) {
                 Optional<User> user = managerFactory.userManager().getUser(userId);
                 if (user.isPresent()) {
-                    user.get().fireCallback(clientCallback);
+                    user.get().fireCallback(new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId, chatMessage));
                 } else {
                     clientsToRemove.add(userId);
                 }

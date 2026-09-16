@@ -24,6 +24,7 @@ public class PlayerResponse implements Serializable, Copyable<PlayerResponse> {
     private String activeAction; // for logs/debug information
     private String activeGameInfo; // for logs/debug info
 
+    // if you add new response type the don't forget to change hasAnswer()
     private String responseString;
     private UUID responseUUID;
     private Boolean responseBoolean;
@@ -168,5 +169,25 @@ public class PlayerResponse implements Serializable, Copyable<PlayerResponse> {
      */
     public void setAsyncWantCheat() {
         this.asyncWantCheat = true;
+    }
+
+    public void resetAsyncWantConcede() {
+        this.asyncWantConcede = null;
+    }
+
+    public void resetAsyncWantCheat() {
+        this.asyncWantCheat = null;
+    }
+
+    /**
+     * Has real answer from a player, async signals (concede, cheat) are not counted
+     */
+    public boolean hasAnswer() {
+        return this.responseString != null
+                || this.responseUUID != null
+                || this.responseBoolean != null
+                || this.responseInteger != null
+                || this.responseManaType != null
+                || this.responseManaPlayerId != null;
     }
 }

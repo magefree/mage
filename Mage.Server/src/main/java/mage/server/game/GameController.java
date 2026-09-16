@@ -346,8 +346,16 @@ public class GameController implements GameCallback {
             }
 
             // send first info to users
-            for (GameSessionPlayer gameSessionPlayer : getGameSessions()) {
-                gameSessionPlayer.init();
+            // order matters: GAME_INIT must be in a session queue BEFORE a game thread sends its
+            // first dialog (starting player choice), otherwise a client gets a dialog for a game it
+            // has not opened yet.
+            // so fill callbacks queue and send it
+            List<GameSessionPlayer> startSessions = getGameSessions();
+            for (GameSessionPlayer gameSessionPlayer : startSessions) {
+                gameSessionPlayer.init(false);
+            }
+            for (GameSessionPlayer gameSessionPlayer : startSessions) {
+                gameSessionPlayer.flushCallbacks();
             }
 
             // real game start
@@ -918,40 +926,31 @@ public class GameController implements GameCallback {
     }
 
     private void informOthers(UUID waitingPlayerId) {
+        // send game status to non-active players and watchers, can be async
         StringBuilder message = new StringBuilder();
         if (game.getStep() != null) {
             message.append(game.getTurnStepType().toString()).append(" - ");
         }
         message.append("Waiting for ").append(game.getPlayer(waitingPlayerId).getLogName());
+        String sendMessage = message.toString();
+
+        // update cached game view before send
+        List<GameSessionWatcher> destPlayers = new ArrayList<>();
         for (final Entry<UUID, GameSessionPlayer> entry : getGameSessionsMap().entrySet()) {
             if (!entry.getKey().equals(waitingPlayerId)) {
-                entry.getValue().inform(message.toString());
+                entry.getValue().getGameView();
+                destPlayers.add(entry.getValue());
             }
         }
         for (final GameSessionWatcher watcher : getGameSessionWatchers()) {
-            watcher.inform(message.toString());
+            watcher.getGameView();
+            destPlayers.add(watcher);
         }
-    }
 
-    private void informOthers(List<UUID> players) {
-        // first player is always original controller
-        Player controller = null;
-        if (players != null && !players.isEmpty()) {
-            controller = game.getPlayer(players.get(0));
-        }
-        if (controller == null || game.getStep() == null || game.getTurnStepType() == null) {
-            return;
-        }
-        final String message = new StringBuilder(game.getTurnStepType().toString()).append(" - Waiting for ").append(controller.getName()).toString();
-        for (final Entry<UUID, GameSessionPlayer> entry : getGameSessionsMap().entrySet()) {
-            boolean skip = players.stream().anyMatch(playerId -> entry.getKey().equals(playerId));
-            if (!skip) {
-                entry.getValue().inform(message);
-            }
-        }
-        for (final GameSessionWatcher watcher : getGameSessionWatchers()) {
-            watcher.inform(message);
-        }
+        // send in a separate thread
+        managerFactory.threadExecutor().getCallExecutor().execute(() ->
+            destPlayers.forEach(destPlayer -> destPlayer.inform(sendMessage))
+        );
     }
 
     private void informPersonal(UUID playerId, final String message) throws MageException {
