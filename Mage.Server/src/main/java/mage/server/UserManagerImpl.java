@@ -183,6 +183,7 @@ public class UserManagerImpl implements UserManager {
             Calendar calInform = Calendar.getInstance();
             calInform.add(Calendar.SECOND, -1 * USER_CONNECTION_TIMEOUT_INFORM_AFTER_SECS);
             Calendar calSessionExpire = Calendar.getInstance();
+            calSessionExpire.add(Calendar.SECOND, -1 * USER_CONNECTION_TIMEOUT_SESSION_EXPIRE_AFTER_SECS);
             Calendar calUserRemove = Calendar.getInstance();
             calUserRemove.add(Calendar.SECOND, -1 * USER_CONNECTION_TIMEOUT_REMOVE_FROM_SERVER_SECS);
             List<User> usersToRemove = new ArrayList<>();
