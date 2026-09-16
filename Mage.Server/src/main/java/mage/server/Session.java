@@ -84,6 +84,10 @@ public class Session {
     private final ClientCallbacksQueue callbacksQueue = new ClientCallbacksQueue(); // queue with waiting callback to send
     private final AtomicBoolean sending = new AtomicBoolean(); // one of the thread sending the callback
 
+    // up to 20 messages per flush task: a burst of queued messages (e.g. game logs) must not wait
+    // for a next sender or a next expire check, but a single task must stay short on a bad connection
+    private static final int FLUSH_MAX_ROUNDS = 10;
+
     public Session(ManagerFactory managerFactory, String sessionId, InvokerCallbackHandler callbackHandler) {
         this.managerFactory = managerFactory;
         this.sessionId = sessionId;
@@ -578,7 +582,13 @@ public class Session {
         if (this.callbacksQueue.isEmpty() || this.sending.get()) {
             return;
         }
-        managerFactory.threadExecutor().getCallExecutor().execute(() -> fireCallback(null));
+        managerFactory.threadExecutor().getCallExecutor().execute(() -> {
+            // each round sends up to two messages, see fireCallback;
+            // if another thread is sending already, a round returns at once
+            for (int i = 0; i < FLUSH_MAX_ROUNDS && !this.callbacksQueue.isEmpty(); i++) {
+                fireCallback(null);
+            }
+        });
     }
 
     public static boolean isAsyncMessagesEnabled() {
