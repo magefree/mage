@@ -192,6 +192,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Tam's Resistance", 153, Rarity.COMMON, mage.cards.t.TamsResistance.class));
         cards.add(new SetCardInfo("Tarmogoyf", 116, Rarity.MYTHIC, mage.cards.t.Tarmogoyf.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tarmogoyf", 374, Rarity.MYTHIC, mage.cards.t.Tarmogoyf.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Terminal Criticism", 366, Rarity.UNCOMMON, mage.cards.t.TerminalCriticism.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Terminal Criticism", 68, Rarity.UNCOMMON, mage.cards.t.TerminalCriticism.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tethermage's Advantage", 117, Rarity.COMMON, mage.cards.t.TethermagesAdvantage.class));
         cards.add(new SetCardInfo("Thalia, the Survivor", 205, Rarity.UNCOMMON, mage.cards.t.ThaliaTheSurvivor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thalia, the Survivor", 296, Rarity.UNCOMMON, mage.cards.t.ThaliaTheSurvivor.class, NON_FULL_USE_VARIOUS));
