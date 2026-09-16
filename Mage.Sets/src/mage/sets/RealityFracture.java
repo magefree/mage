@@ -56,6 +56,9 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Craterclaw Colossus", 446, Rarity.MYTHIC, mage.cards.c.CraterclawColossus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Craterclaw Colossus", 455, Rarity.MYTHIC, mage.cards.c.CraterclawColossus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Craterclaw Colossus", 78, Rarity.MYTHIC, mage.cards.c.CraterclawColossus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Curse-Marred Demon", 328, Rarity.RARE, mage.cards.c.CurseMarredDemon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Curse-Marred Demon", 456, Rarity.RARE, mage.cards.c.CurseMarredDemon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Curse-Marred Demon", 79, Rarity.RARE, mage.cards.c.CurseMarredDemon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Danitha, Spear of Agony", 227, Rarity.UNCOMMON, mage.cards.d.DanithaSpearOfAgony.class));
         cards.add(new SetCardInfo("Danitha, Sword of Hope", 196, Rarity.UNCOMMON, mage.cards.d.DanithaSwordOfHope.class));
         cards.add(new SetCardInfo("Denzilore Fatehold", 128, Rarity.MYTHIC, mage.cards.d.DenziloreFatehold.class, NON_FULL_USE_VARIOUS));
