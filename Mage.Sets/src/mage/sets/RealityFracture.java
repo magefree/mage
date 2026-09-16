@@ -32,6 +32,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Ajani Resolute", 291, Rarity.MYTHIC, mage.cards.a.AjaniResolute.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ajani Unrelenting", 242, Rarity.MYTHIC, mage.cards.a.AjaniUnrelenting.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ajani Unrelenting", 308, Rarity.MYTHIC, mage.cards.a.AjaniUnrelenting.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ajani's Anguish", 367, Rarity.RARE, mage.cards.a.AjanisAnguish.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ajani's Anguish", 72, Rarity.RARE, mage.cards.a.AjanisAnguish.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Amphisbaena", 97, Rarity.COMMON, mage.cards.a.ArcaneAmphisbaena.class));
         cards.add(new SetCardInfo("Avatar of Burgeoning Echoes", 122, Rarity.MYTHIC, mage.cards.a.AvatarOfBurgeoningEchoes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avatar of Burgeoning Echoes", 348, Rarity.MYTHIC, mage.cards.a.AvatarOfBurgeoningEchoes.class, NON_FULL_USE_VARIOUS));
