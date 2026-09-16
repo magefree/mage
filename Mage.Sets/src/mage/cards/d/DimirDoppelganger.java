@@ -87,9 +87,7 @@ class DimirDoppelgangerEffect extends OneShotEffect {
                 applier.apply(game, newBluePrint, source, dimirDoppelganger.getId());
                 CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, dimirDoppelganger.getId());
                 copyEffect.setApplier(applier);
-                Ability newAbility = source.copy(); // TODO: why it copy new ability instead source? Some cards use it, some miss
-                copyEffect.init(newAbility, game);
-                game.addEffect(copyEffect, newAbility);
+                game.addEffect(copyEffect, source);
             }
             return true;
         }

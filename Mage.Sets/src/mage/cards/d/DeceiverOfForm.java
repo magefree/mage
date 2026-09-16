@@ -86,9 +86,7 @@ class DeceiverOfFormEffect extends OneShotEffect {
                                 }
                                 Permanent newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
                                 CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, newBluePrint, permanent.getId());
-                                Ability newAbility = source.copy();
-                                copyEffect.init(newAbility, game);
-                                game.addEffect(copyEffect, newAbility);
+                                game.addEffect(copyEffect, source);
                             }
                         }
                     }

@@ -87,9 +87,7 @@ class IrmaPartTimeMutantEffect extends OneShotEffect {
                 applier.apply(game, newBluePrint, source, irmaPartTimeMutant.getId());
                 CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, irmaPartTimeMutant.getId());
                 copyEffect.setApplier(applier);
-                Ability newAbility = source.copy();
-                copyEffect.init(newAbility, game);
-                game.addEffect(copyEffect, newAbility);
+                game.addEffect(copyEffect, source);
             }
 
             return true;
