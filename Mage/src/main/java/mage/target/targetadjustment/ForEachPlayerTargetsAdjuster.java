@@ -18,7 +18,8 @@ import java.util.stream.Stream;
  */
 public class ForEachPlayerTargetsAdjuster extends GenericTargetAdjuster {
     private final boolean owner;
-    private final boolean onlyOpponents; //Makes this a "For Each Opponent" adjuster
+    private final boolean onlyOpponents; // Makes this a "For Each Opponent" adjuster
+    private final boolean excludeLeavedPlayers;
 
     /**
      * Duplicates the permanent target for each player (or opponent).
@@ -27,8 +28,13 @@ public class ForEachPlayerTargetsAdjuster extends GenericTargetAdjuster {
      */
 
     public ForEachPlayerTargetsAdjuster(boolean owner, boolean onlyOpponents) {
+        this(owner, onlyOpponents, false);
+    }
+
+    public ForEachPlayerTargetsAdjuster(boolean owner, boolean onlyOpponents, boolean excludeLeavedPlayers) {
         this.owner = owner;
         this.onlyOpponents = onlyOpponents;
+        this.excludeLeavedPlayers = excludeLeavedPlayers;
     }
 
     @Override
@@ -45,9 +51,9 @@ public class ForEachPlayerTargetsAdjuster extends GenericTargetAdjuster {
         ability.getTargets().clear();
         Stream<UUID> ids;
         if (onlyOpponents) {
-            ids = game.getOpponents(ability.getControllerId()).stream();
+            ids = game.getOpponents(ability.getControllerId(), excludeLeavedPlayers).stream();
         } else {
-            ids = game.getState().getPlayersInRange(ability.getControllerId(), game).stream();
+            ids = game.getState().getPlayersInRange(ability.getControllerId(), game, excludeLeavedPlayers).stream();
         }
         ids.forEach( id -> {
             Player opponent = game.getPlayer(id);
