@@ -131,6 +131,9 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Gnashing of Teeth", 69, Rarity.UNCOMMON, mage.cards.g.GnashingOfTeeth.class));
         cards.add(new SetCardInfo("Goblin-town", 183, Rarity.COMMON, mage.cards.g.GoblinTown.class));
         cards.add(new SetCardInfo("Goblin-town Flunkies", 100, Rarity.COMMON, mage.cards.g.GoblinTownFlunkies.class));
+        cards.add(new SetCardInfo("Gollum, Riddle Master", 277, Rarity.MYTHIC, mage.cards.g.GollumRiddleMaster.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gollum, Riddle Master", 241, Rarity.MYTHIC, mage.cards.g.GollumRiddleMaster.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gollum, Riddle Master", 70, Rarity.MYTHIC, mage.cards.g.GollumRiddleMaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gollum, Silent Slinker", 71, Rarity.COMMON, mage.cards.g.GollumSilentSlinker.class));
         cards.add(new SetCardInfo("Gollum the Abandoned", 72, Rarity.UNCOMMON, mage.cards.g.GollumTheAbandoned.class));
         cards.add(new SetCardInfo("Great Fierce Bee", 73, Rarity.COMMON, mage.cards.g.GreatFierceBee.class));
