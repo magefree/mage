@@ -71,5 +71,6 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Valko Indorian", 60, Rarity.RARE, mage.cards.v.ValkoIndorian.class));
         cards.add(new SetCardInfo("Whtz, the Bibliophile", 57, Rarity.RARE, mage.cards.w.WhtzTheBibliophile.class));
         cards.add(new SetCardInfo("Worzel, the Protector", 5, Rarity.RARE, mage.cards.w.WorzelTheProtector.class));
+        cards.add(new SetCardInfo("Zagorka, Mother of Sanctum", 58, Rarity.RARE, mage.cards.z.ZagorkaMotherOfSanctum.class));
     }
 }
