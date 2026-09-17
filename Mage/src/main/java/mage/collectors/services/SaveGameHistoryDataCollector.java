@@ -198,7 +198,7 @@ public class SaveGameHistoryDataCollector extends EmptyDataCollector {
     }
 
     @Override
-    public void onGameError(Game game, Exception e) {
+    public void onGameError(Game game, Throwable e) {
         if (!this.enabled) return;
         writeToGameLogsFile(game, new Date() + " [ERROR] " + game.getId() + ", " + game);
         if (e != null) {
