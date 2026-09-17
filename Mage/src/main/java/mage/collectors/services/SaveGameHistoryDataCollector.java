@@ -15,12 +15,11 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -129,13 +128,13 @@ public class SaveGameHistoryDataCollector extends EmptyDataCollector {
     @Override
     public void onTableStart(Table table) {
         if (!this.enabled) return;
-        writeToTableLogsFile(table, new Date() + " [START] " + table.getId() + ", " + table);
+        writeToTableLogsFile(table, new Date() + " [START] table " + table.getId() + ", " + table);
     }
 
     @Override
     public void onTableEnd(Table table) {
         if (!this.enabled) return;
-        writeToTableLogsFile(table, new Date() + " [END] " + table.getId() + ", " + table);
+        writeToTableLogsFile(table, new Date() + " [END] " + table);
 
         // good end - move all files to done folder and change dir refs for possible game and other logs
         writeLock.lock();
@@ -166,7 +165,7 @@ public class SaveGameHistoryDataCollector extends EmptyDataCollector {
     @Override
     public void onGameStart(Game game) {
         if (!this.enabled) return;
-        writeToGameLogsFile(game, new Date() + " [START] " + game.getId() + ", " + game);
+        writeToGameLogsFile(game, new Date() + " [START] game " + game.getId() + ", " + game);
 
         // save deck files
         writeLock.lock();
@@ -212,7 +211,9 @@ public class SaveGameHistoryDataCollector extends EmptyDataCollector {
     @Override
     public void onGameEnd(Game game) {
         if (!this.enabled) return;
-        writeToGameLogsFile(game, new Date() + " [END] " + game.getId() + ", " + game);
+        writeToGameLogsFile(game, new Date() + " [END] " + "result follows");
+
+        // warning, real result will be saved later, but it's safe to move files and write to it on data ready
 
         // clean temp data
         lastGameStatesOnStack.remove(game.getId());
@@ -240,6 +241,40 @@ public class SaveGameHistoryDataCollector extends EmptyDataCollector {
         } finally {
             writeLock.unlock();
         }
+    }
+
+    @Override
+    public void onGameEndResult(Game game) {
+        if (!this.enabled) return;
+
+        // short result
+        writeToGameLogsFile(game, new Date() + " [RESULT] " 
+            + (game.hasEnded() ? game.getWinner() : "Game is running"));
+
+        // full result for each player, see GameImpl on "END game"
+        String fullInfo = game.getState().getPlayers().values().stream()
+                .map(p -> {
+                    List<String> statuses = new ArrayList<>();
+                    if (p.hasWon()) {
+                        statuses.add("won");
+                    }
+                    if (p.hasLost()) {
+                        statuses.add("lost");
+                    }
+                    if (p.hasQuit()) {
+                        statuses.add("quit");
+                    }
+                    if (p.hasIdleTimeout()) {
+                        statuses.add("timeout_idle");
+                    }
+                    if (p.hasTimerTimeout()) {
+                        statuses.add("timeout_timer");
+                    }
+                    return p.getName() + " => " + (statuses.isEmpty() ? "playing" : String.join(", ", statuses));
+                })
+                .collect(Collectors.joining("; "));
+        String details = "Details: " + fullInfo;
+        writeToGameLogsFile(game, new Date() + " [RESULT] " + details);
     }
 
     @Override

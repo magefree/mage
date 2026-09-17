@@ -329,7 +329,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                             .collect(Collectors.joining(", "));
                     game.informPlayers(player.getLogName() + " attacks " + defendersInfo + " with " + groups.size() + (groups.size() == 1 ? " creature" : " creatures"));
                 } else {
-                    game.informPlayers(player.getLogName() + " skip attack");
+                    game.informPlayers(player.getLogName() + " skips attack");
                 }
             }
         }

@@ -2825,7 +2825,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (!this.wins) {
             this.loses = true;
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST, null, null, playerId));
-            game.informPlayers(this.getLogName() + " has lost the game.");
+            game.informPlayers(this.getLogName() + " has lost the game");
         } else {
             logger.debug(this.getName() + " has already won - stop lost");
         }
