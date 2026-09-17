@@ -2,7 +2,6 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,7 +20,7 @@ public final class Fumarole extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{R}");
 
         // As an additional cost to cast Fumarole, pay 3 life.
-        this.getSpellAbility().addCost(new PayLifeCost(3));
+        this.getSpellAbility().addCost(new PayLifeCost(3).setAdditional(true));
         // Destroy target creature and target land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect().setTargetPointer(new EachTargetPointer()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

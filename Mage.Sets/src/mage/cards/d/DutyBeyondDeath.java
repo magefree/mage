@@ -22,7 +22,7 @@ public final class DutyBeyondDeath extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         // As an additional cost to cast this spell, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_A_CREATURE));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_A_CREATURE).setAdditional(true));
 
         // Creatures you control gain indestructible until end of turn. Put a +1/+1 counter on each creature you control.
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(

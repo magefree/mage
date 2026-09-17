@@ -42,7 +42,7 @@ public final class ChampionOfThePath extends CardImpl {
         this.toughness = new MageInt(3);
 
         // As an additional cost to cast this spell, behold an Elemental and exile it.
-        this.getSpellAbility().addCost(new BeholdAndExileCost(SubType.ELEMENTAL));
+        this.getSpellAbility().addCost(new BeholdAndExileCost(SubType.ELEMENTAL).setAdditional(true));
 
         // Whenever another Elemental you control enters, it deals damage equal to its power to each opponent.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(new ChampionOfThePathEffect(), filter));

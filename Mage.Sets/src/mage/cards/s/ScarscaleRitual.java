@@ -28,7 +28,7 @@ public final class ScarscaleRitual extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U/B}");
 
         // As an additional cost to cast Scarscale Ritual, put a -1/-1 counter on a creature you control.
-        this.getSpellAbility().addCost(new ScarscaleRitualCost());
+        this.getSpellAbility().addCost(new ScarscaleRitualCost().setAdditional(true));
 
         // Draw two cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

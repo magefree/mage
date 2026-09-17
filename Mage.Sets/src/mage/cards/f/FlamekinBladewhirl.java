@@ -36,7 +36,7 @@ public final class FlamekinBladewhirl extends CardImpl {
         this.getSpellAbility().addCost(new OrCost(
                 "reveal an Elemental card from your hand or pay {3}", new RevealTargetFromHandCost(new TargetCardInHand(filter)),
                 new GenericManaCost(3)
-        ));
+        ).setAdditional(true));
     }
 
     private FlamekinBladewhirl(final FlamekinBladewhirl card) {

@@ -38,7 +38,7 @@ public final class SilvergillAdept extends CardImpl {
         this.getSpellAbility().addCost(new OrCost(
                 "reveal a Merfolk card from your hand or pay {3}", new RevealTargetFromHandCost(new TargetCardInHand(filter)),
                 new GenericManaCost(3)
-        ));
+        ).setAdditional(true));
 
         // When Silvergill Adept enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));

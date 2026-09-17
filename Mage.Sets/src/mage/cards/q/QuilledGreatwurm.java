@@ -102,7 +102,7 @@ class QuilledGreatwurmEffect extends AsThoughEffectImpl {
             return false;
         }
         Costs<Cost> costs = new CostsImpl<>();
-        costs.add(new RemoveCounterCost(new TargetControlledPermanent(1, 6, filter, true), null, 6));
+        costs.add(new RemoveCounterCost(new TargetControlledPermanent(1, 6, filter, true), null, 6).setAdditional(true));
         controller.setCastSourceIdWithAlternateMana(
                 objectId, new ManaCostsImpl<>("{4}{G}{G}"), costs,
                 MageIdentifier.QuilledGreatwurmAlternateCast

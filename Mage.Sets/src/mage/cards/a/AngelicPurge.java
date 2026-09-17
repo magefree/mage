@@ -8,10 +8,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -31,7 +29,7 @@ public final class AngelicPurge extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");
 
         // As an additional cost to cast Angelic Purge, sacrifice a permanent.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT).setAdditional(true));
 
         // Exile target artifact, creature, or enchantment.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

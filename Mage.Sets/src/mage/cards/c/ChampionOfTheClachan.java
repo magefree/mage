@@ -36,7 +36,7 @@ public final class ChampionOfTheClachan extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // As an additional cost to cast this spell, behold a Kithkin and exile it.
-        this.getSpellAbility().addCost(new BeholdAndExileCost(SubType.KITHKIN));
+        this.getSpellAbility().addCost(new BeholdAndExileCost(SubType.KITHKIN).setAdditional(true));
 
         // Other Kithkin you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(

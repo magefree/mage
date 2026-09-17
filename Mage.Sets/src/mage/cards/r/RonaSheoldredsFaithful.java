@@ -91,7 +91,7 @@ class RonaSheoldredsFaithfulEffect extends AsThoughEffectImpl {
             return false;
         }
         Costs<Cost> costs = new CostsImpl<>();
-        costs.add(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)));
+        costs.add(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)).setAdditional(true));
         controller.setCastSourceIdWithAlternateMana(
                 objectId, new ManaCostsImpl<>("{1}{U}{B}{B}"), costs,
                 MageIdentifier.RonaSheoldredsFaithfulAlternateCast

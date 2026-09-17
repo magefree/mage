@@ -24,7 +24,7 @@ public final class FearOfIsolation extends CardImpl {
         this.toughness = new MageInt(3);
 
         // As an additional cost to cast this spell, return a permanent you control to its owner's hand.
-        this.getSpellAbility().addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent()));
+        this.getSpellAbility().addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent()).setAdditional(true));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

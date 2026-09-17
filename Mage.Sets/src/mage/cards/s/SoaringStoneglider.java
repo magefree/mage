@@ -36,7 +36,7 @@ public final class SoaringStoneglider extends CardImpl {
                     new TargetCardInYourGraveyard(2, StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD)
                 ),
                 new ManaCostsImpl<>("{1}{W}")
-            )
+            ).setAdditional(true)
         );
 
         // Flying

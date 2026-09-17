@@ -90,7 +90,7 @@ class IntoThePitEffect extends AsThoughEffectImpl {
         }
 
         Costs<Cost> newCosts = new CostsImpl<>();
-        newCosts.add(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_NON_LAND));
+        newCosts.add(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_NON_LAND).setAdditional(true));
         newCosts.addAll(cardToCheck.getSpellAbility().getCosts());
         player.setCastSourceIdWithAlternateMana(
                 cardToCheck.getId(), cardToCheck.getManaCost(), newCosts,

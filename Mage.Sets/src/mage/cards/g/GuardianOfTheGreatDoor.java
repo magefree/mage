@@ -39,7 +39,7 @@ public final class GuardianOfTheGreatDoor extends CardImpl {
         this.toughness = new MageInt(4);
 
         // As an additional cost to cast this spell, tap four untapped artifacts, creatures, and/or lands you control.
-        this.getSpellAbility().addCost(new TapTargetCost(new TargetControlledPermanent(4, filter)));
+        this.getSpellAbility().addCost(new TapTargetCost(new TargetControlledPermanent(4, filter)).setAdditional(true));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

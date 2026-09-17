@@ -23,7 +23,7 @@ public final class DemandAnswers extends CardImpl {
         this.getSpellAbility().addCost(new OrCost(
                 "sacrifice an artifact or discard a card",
                 new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN), new DiscardCardCost()
-        ));
+        ).setAdditional(true));
 
         // Draw two cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

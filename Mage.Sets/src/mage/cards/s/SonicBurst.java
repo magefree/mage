@@ -19,7 +19,7 @@ public final class SonicBurst extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
         // As an additional cost to cast Sonic Burst, discard a card at random.
-        this.getSpellAbility().addCost(new DiscardCardCost(true));
+        this.getSpellAbility().addCost(new DiscardCardCost(true).setAdditional(true));
         // Sonic Burst deals 4 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetAnyTarget());

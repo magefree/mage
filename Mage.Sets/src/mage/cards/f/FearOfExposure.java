@@ -38,7 +38,7 @@ public final class FearOfExposure extends CardImpl {
         this.toughness = new MageInt(4);
 
         // As an additional cost to cast this spell, tap two untapped creatures and/or lands you control.
-        this.getSpellAbility().addCost(new TapTargetCost(new TargetControlledPermanent(2, filter)));
+        this.getSpellAbility().addCost(new TapTargetCost(new TargetControlledPermanent(2, filter)).setAdditional(true));
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());

@@ -24,7 +24,7 @@ public final class LivingDestiny extends CardImpl {
 
         // As an additional cost to cast Living Destiny, reveal a creature card from your hand.
         TargetCardInHand targetCard = new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE_YOUR_HAND);
-        this.getSpellAbility().addCost(new RevealTargetFromHandCost(targetCard));
+        this.getSpellAbility().addCost(new RevealTargetFromHandCost(targetCard).setAdditional(true));
 
         // You gain life equal to the revealed card's converted mana cost.
         this.getSpellAbility().addEffect(new LivingDestinyEffect());

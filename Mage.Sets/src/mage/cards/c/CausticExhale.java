@@ -24,7 +24,7 @@ public final class CausticExhale extends CardImpl {
         this.getSpellAbility().addCost(new OrCost(
                 "behold a Dragon or pay {1}",
                 new BeholdCost(SubType.DRAGON), new GenericManaCost(1)
-        ));
+        ).setAdditional(true));
 
         // Target creature gets -3/-3 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-3, -3));

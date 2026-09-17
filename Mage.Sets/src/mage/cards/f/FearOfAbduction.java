@@ -23,7 +23,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
 import static mage.filter.StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE;
@@ -42,7 +41,7 @@ public final class FearOfAbduction extends CardImpl {
 
         // As an additional cost to cast this spell, exile a creature you control.
         this.getSpellAbility().addCost(
-                new ExileTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_A_CREATURE)));
+                new ExileTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_A_CREATURE)).setAdditional(true));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

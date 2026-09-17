@@ -19,7 +19,7 @@ public final class FamiliarsRuse extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{U}");
 
         // As an additional cost to cast Familiar's Ruse, return a creature you control to its owner's hand.
-        this.getSpellAbility().addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledCreaturePermanent()));
+        this.getSpellAbility().addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledCreaturePermanent()).setAdditional(true));
 
         // Counter target spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

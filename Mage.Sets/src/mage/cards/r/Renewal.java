@@ -10,9 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -26,7 +24,7 @@ public final class Renewal extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
         // As an additional cost to cast Renewal, sacrifice a land.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_LAND));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_LAND).setAdditional(true));
         
         // Search your library for a basic land card and put that card onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), false, true));

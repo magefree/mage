@@ -42,7 +42,7 @@ public final class DraconicIntervention extends CardImpl {
         // As an additional cost to cast this spell, exile an instant or sorcery card from your graveyard.
         this.getSpellAbility().addCost(new ExileFromGraveCost(
                 new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY)
-        ));
+        ).setAdditional(true));
 
         // Draconic Intervention deals X damage to each non-Dragon creature, where X is the exiled card's mana value. If a creature dealt damage this way would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DamageAllEffect(DraconicInterventionValue.instance, filter));

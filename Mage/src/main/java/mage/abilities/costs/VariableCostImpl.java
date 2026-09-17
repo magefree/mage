@@ -66,6 +66,18 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
     }
 
     @Override
+    public boolean getAdditional() {
+        // no-op, variable costs are always paid last
+        return false;
+    }
+
+    @Override
+    public VariableCostImpl setAdditional(boolean additional) {
+        // no-op, variable costs are always paid last
+        return this;
+    }
+
+    @Override
     public String getActionText() {
         return actionText;
     }

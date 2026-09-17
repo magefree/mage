@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class MercilessResolve extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
         // As an additional cost to cast Merciless Resolve, sacrifice a creature or land.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(filter));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(filter).setAdditional(true));
 
         // Draw two cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

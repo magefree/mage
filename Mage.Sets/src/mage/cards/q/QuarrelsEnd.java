@@ -19,7 +19,7 @@ public final class QuarrelsEnd extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
         // As an additional cost to cast this spell, discard a card.
-        this.getSpellAbility().addCost(new DiscardCardCost());
+        this.getSpellAbility().addCost(new DiscardCardCost().setAdditional(true));
 
         // Draw two cards and create a 1/1 white Human Soldier creature token.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

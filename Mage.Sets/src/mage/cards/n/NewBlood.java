@@ -2,7 +2,6 @@ package mage.cards.n;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -40,7 +39,7 @@ public final class NewBlood extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
 
         // As an additional cost to cast New Blood, tap an untapped Vampire you control.
-        this.getSpellAbility().addCost(new TapTargetCost(new TargetControlledPermanent(filter)));
+        this.getSpellAbility().addCost(new TapTargetCost(new TargetControlledPermanent(filter)).setAdditional(true));
 
         // Gain control of target creature. Change the text of that creature by replacing all instances of one creature type with Vampire.
         getSpellAbility().addEffect(new NewBloodEffect());

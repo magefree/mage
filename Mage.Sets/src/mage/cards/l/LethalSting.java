@@ -29,7 +29,7 @@ public final class LethalSting extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // As an additional cost to cast Lethal Sting, put a -1/-1 counter on a creature you control.
-        this.getSpellAbility().addCost(new LethalStingCost());
+        this.getSpellAbility().addCost(new LethalStingCost().setAdditional(true));
 
         // Destroy target creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

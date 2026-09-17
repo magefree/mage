@@ -1,7 +1,6 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.Ability; // not sure about this line - think it is not needed
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +23,7 @@ public final class MarduOutrider extends CardImpl {
         this.toughness = new MageInt(5);
 
         // As an additional cost to cast this spell, discard a card.
-        this.getSpellAbility().addCost(new DiscardCardCost());
+        this.getSpellAbility().addCost(new DiscardCardCost().setAdditional(true));
     }
 
     private MarduOutrider(final MarduOutrider card) {

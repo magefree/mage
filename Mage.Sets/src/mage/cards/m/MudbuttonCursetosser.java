@@ -43,7 +43,7 @@ public final class MudbuttonCursetosser extends CardImpl {
         this.getSpellAbility().addCost(new OrCost(
                 "behold a Goblin or pay {2}",
                 new BeholdCost(SubType.GOBLIN), new GenericManaCost(2)
-        ));
+        ).setAdditional(true));
 
         // This creature can't block.
         this.addAbility(new CantBlockAbility());

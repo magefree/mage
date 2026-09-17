@@ -27,7 +27,7 @@ public final class SplittingThePowerstone extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
 
         // As an additional cost to cast this spell, sacrifice an artifact.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN).setAdditional(true));
 
         // Create two tapped Powerstone tokens. If the sacrificed artifact was legendary, draw a card.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new PowerstoneToken(), 2, true));

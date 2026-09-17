@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class CropRotation extends CardImpl {
 
 
         // As an additional cost to cast Crop Rotation, sacrifice a land.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_LAND));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_LAND).setAdditional(true));
 
         // Search your library for a land card and put that card onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterLandCard()), false, true));

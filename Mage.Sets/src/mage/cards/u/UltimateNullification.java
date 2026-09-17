@@ -21,7 +21,7 @@ public final class UltimateNullification extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}");
 
         // As an additional cost to cast this spell, sacrifice a legendary creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CREATURE_LEGENDARY));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CREATURE_LEGENDARY).setAdditional(true));
 
         // Exile all creatures and graveyards. Put Ultimate Nullification on the bottom of its owner's library.
         this.getSpellAbility().addEffect(new ExileAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES));

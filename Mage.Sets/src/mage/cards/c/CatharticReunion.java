@@ -7,7 +7,6 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInHand;
 
@@ -21,7 +20,7 @@ public final class CatharticReunion extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
         // As an additional cost to cast Cathartic Reunion, discard two cards.
-        this.getSpellAbility().addCost(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)));
+        this.getSpellAbility().addCost(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)).setAdditional(true));
 
         // Draw three cards.
         getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
