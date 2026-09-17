@@ -3591,6 +3591,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public void setTechnicalResult(boolean won) {
+        computerPlayer.setTechnicalResult(won);
+    }
+
+    @Override
     public void sendPlayerAction(mage.constants.PlayerAction playerAction, Game game, Object data) {
         computerPlayer.sendPlayerAction(playerAction, game, data);
     }

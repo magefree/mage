@@ -55,7 +55,7 @@ public interface DataCollector {
 
     void onGameLog(Game game, String message);
 
-    void onGameError(Game game, Exception e);
+    void onGameError(Game game, Throwable e);
 
     void onGameEnd(Game game);
 

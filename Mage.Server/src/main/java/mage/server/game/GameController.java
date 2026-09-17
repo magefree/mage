@@ -785,8 +785,13 @@ public class GameController implements GameCallback {
     public void endGame(final String message) throws MageException {
         // send end game message/dialog
         for (final GameSessionPlayer gameSession : getGameSessions()) {
-            gameSession.gameOver(message);
             gameSession.removeGame();
+            try {
+                // it's send gameview so make sure it's safe to continue
+                gameSession.gameOver(message);
+            } catch (Throwable e) {
+                logger.error("Can't send game over to player, user " + gameSession.userId + ", game " + game.getId() + ": " + e, e);
+            }
         }
         for (final GameSessionWatcher gameWatcher : getGameSessionWatchers()) {
             gameWatcher.gameOver(message);
@@ -851,7 +856,12 @@ public class GameController implements GameCallback {
         if (table != null) {
             if (table.getMatch() != null) {
                 for (final GameSessionPlayer gameSession : getGameSessions()) {
-                    gameSession.endGameInfo(table);
+                    try {
+                        // it's send part of gameview so make sure it's safe to continue
+                        gameSession.endGameInfo(table);
+                    } catch (Throwable e) {
+                        logger.error("Can't send end game info to player, user " + gameSession.userId + ", game " + game.getId() + ": " + e, e);
+                    }
                 }
                 // TODO: inform watchers about game end and who won
             }
@@ -957,7 +967,7 @@ public class GameController implements GameCallback {
         perform(playerId, playerId1 -> getGameSession(playerId1).informPersonal(message), false);
     }
 
-    private void error(String message, Exception ex, Game game) {
+    private void error(String message, Throwable ex, Game game) {
         StringBuilder sb = new StringBuilder();
         sb.append(message);
         sb.append("\n");
@@ -1001,7 +1011,26 @@ public class GameController implements GameCallback {
         try {
             endGame(result);
         } catch (MageException ex) {
+            // never called in production logs
             logger.fatal("Game Result error", ex);
+        }
+    }
+
+    @Override
+    public void endGameWithError(Throwable error) {
+        try {
+            // must inform users about critical error and finish a game, a match decides by itself what's next
+
+            // send error
+            error("Game stopped due server error and can't be continued", error, game);
+
+            // finish game with a technical winner (never a draw) and all active dialogs
+            game.endWithTechnicalWinner("game thread error: " + error);
+
+            // send end game dialog and clean, same flow as a normal game end (match stats, next game or table close)
+            endGame(game.getWinner());
+        } catch (Throwable e) {
+            logger.fatal("Can't close a game after an error: " + game.getId(), e);
         }
     }
 
