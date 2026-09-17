@@ -59,6 +59,9 @@ public final class FaithboundJudge extends TransformingDoubleFacedCard {
         ).setText("as long as {this} has three or more judgment counters on it, " +
                 "it can attack as though it didn't have defender")));
 
+        // Disturb {5}{W}{W}
+        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{5}{W}{W}"));
+
         // Sinner's Judgement
 
         // Enchant player
@@ -66,10 +69,6 @@ public final class FaithboundJudge extends TransformingDoubleFacedCard {
         this.getRightHalfCard().getSpellAbility().addTarget(auraTarget);
         this.getRightHalfCard().getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.getRightHalfCard().addAbility(new EnchantAbility(auraTarget));
-
-        // Faithbound Judge - Disturb {5}{W}{W}
-        // needs target from right half spell ability
-        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{5}{W}{W}"));
 
         // At the beginning of your upkeep, put a judgment counter on Sinner's Judgment. Then if there are three or more judgment counters on it, enchanted player loses the game.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.JUDGMENT.createInstance()));
