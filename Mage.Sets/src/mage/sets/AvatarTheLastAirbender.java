@@ -298,6 +298,8 @@ public final class AvatarTheLastAirbender extends ExpansionSet {
         cards.add(new SetCardInfo("Sandbender Scavengers", 239, Rarity.RARE, mage.cards.s.SandbenderScavengers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sandbender Scavengers", 382, Rarity.RARE, mage.cards.s.SandbenderScavengers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sandbenders' Storm", 34, Rarity.COMMON, mage.cards.s.SandbendersStorm.class));
+        cards.add(new SetCardInfo("Secret of Bloodbending", 69, Rarity.MYTHIC, mage.cards.s.SecretOfBloodbending.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Secret of Bloodbending", 337, Rarity.MYTHIC, mage.cards.s.SecretOfBloodbending.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Secret Tunnel", 278, Rarity.RARE, mage.cards.s.SecretTunnel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Secret Tunnel", 392, Rarity.RARE, mage.cards.s.SecretTunnel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Seismic Sense", 195, Rarity.UNCOMMON, mage.cards.s.SeismicSense.class));

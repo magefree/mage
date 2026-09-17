@@ -46,6 +46,9 @@ public class TurnMod implements Serializable, Copyable<TurnMod> {
     private TurnPhase afterPhase;
     private PhaseStep afterStep;
 
+    private Phase controlledPhase;
+    private UUID phaseController;
+
     private boolean locked = false; // locked for modification, used for wrong code usage protection
     private String tag; // for inner usage like enable/disable mod in effects
     private String info; // for GUI usage like additional info in logs
@@ -146,6 +149,18 @@ public class TurnMod implements Serializable, Copyable<TurnMod> {
         return this;
     }
 
+    public TurnMod withPhaseController(Phase controlledPhase, UUID newControllerId) {
+        return withPhaseController(controlledPhase, newControllerId, null);
+    }
+
+    public TurnMod withPhaseController(Phase controlledPhase, UUID newControllerId, TurnMod nextSubsequentTurnMod) {
+        this.controlledPhase = controlledPhase;
+        this.phaseController = newControllerId;
+        this.subsequentTurnMod = nextSubsequentTurnMod;
+        lock();
+        return this;
+    }
+
     public TurnMod withSkipStep(PhaseStep skipStep) {
         this.skipStep = skipStep;
         lock();
@@ -221,9 +236,11 @@ public class TurnMod implements Serializable, Copyable<TurnMod> {
         return afterStep;
     }
 
-    public UUID getNewControllerId() {
-        return newControllerId;
-    }
+    public UUID getNewControllerId() {return newControllerId;}
+
+    public UUID getPhaseController() { return phaseController;}
+
+    public Phase getControlledPhase() { return controlledPhase;}
 
     public UUID getId() {
         return id;

@@ -30,6 +30,7 @@ public class Turn implements Serializable {
     private UUID activePlayerId;
     private final List<Phase> phases = new ArrayList<>();
     private boolean declareAttackersStepStarted = false;
+    private boolean phaseControl = false;
     private boolean endTurn; // indicates that an end turn effect has resolved.
 
     public Turn() {
@@ -105,6 +106,8 @@ public class Turn implements Serializable {
 
         // turn control must be called after potential turn skip due 720.1.
         checkTurnIsControlledByOtherPlayer(game, activePlayer.getId());
+        // Remember if whole turn is under opponents control
+        boolean opponentInFullControl = !activePlayer.isGameUnderControl();
 
         game.getPlayer(activePlayer.getId()).beginTurn(game);
         GameEvent event = new GameEvent(GameEvent.EventType.BEGIN_TURN, null, null, activePlayer.getId());
@@ -126,6 +129,12 @@ public class Turn implements Serializable {
                         skipPhaseMod.getInfo()
                 ));
                 continue;
+            }
+            // If no opponent has taken full control check individual phases
+            // To not remove control over turn with checkCurrentPhaseIsControlledByOtherPlayer
+            // Check after skip phase because of 723.1b
+            if (!opponentInFullControl) {
+                checkCurrentPhaseIsControlledByOtherPlayer(game, activePlayer.getId(), currentPhase);
             }
 
             game.fireEvent(new PhaseChangedEvent(activePlayer.getId(), null));
@@ -219,13 +228,13 @@ public class Turn implements Serializable {
     }
 
     private void checkTurnIsControlledByOtherPlayer(Game game, UUID activePlayerId) {
-        // 720.1.
+        // 723.1.
         // Some cards allow a player to control another player during that player’s next turn.
         // This effect applies to the next turn that the affected player actually takes.
         // The affected player is controlled during the entire turn; the effect doesn’t end until
         // the beginning of the next turn.
         //
-        // 720.1b
+        // 723.1b
         // If a turn is skipped, any pending player-controlling effects wait until the player who would be
         // affected actually takes a turn.
 
@@ -246,6 +255,32 @@ public class Turn implements Serializable {
             // game logs added in child's call (controlPlayersTurn)
             game.getPlayer(newControllerMod.getNewControllerId()).controlPlayersTurn(game, activePlayerId, newControllerMod.getInfo());
         }
+    }
+
+    private void checkCurrentPhaseIsControlledByOtherPlayer(Game game, UUID activePlayerId, Phase currentPhase) {
+
+        // remove old under control
+        game.getPlayers().values().forEach(player -> {
+            if (player.isInGame() && !player.isGameUnderControl()) {
+                Player controllingPlayer = game.getPlayer(player.getTurnControlledBy());
+                if (player != controllingPlayer && controllingPlayer != null) {
+                    game.informPlayers(controllingPlayer.getLogName() + " lost control over " + player.getLogName());
+                }
+                this.phaseControl = false;
+                player.setGameUnderYourControl(game, true);
+            }
+        });
+
+        // add new under control
+        TurnMod newControllerMod = game.getState().getTurnMods().useNextNewPhaseController(activePlayerId, currentPhase);
+        if (newControllerMod != null
+                && !newControllerMod.getControlledPhase().equals(activePlayerId)
+                && newControllerMod.getControlledPhase().getType().equals(currentPhase.getType())) {
+            // game logs added in child's call (controlPlayersTurn)
+            this.phaseControl = true;
+            game.getPlayer(newControllerMod.getPhaseController()).controlPlayersTurn(game, activePlayerId, newControllerMod.getInfo());
+        }
+
     }
 
     private void resetCounts() {
@@ -295,6 +330,11 @@ public class Turn implements Serializable {
                 phase.keepOnlyStep(skipAllButExtraStep);
             }
             currentPhase = phase;
+            // Remove Phase control and check if a new one exists
+            // In theorie there could be an instant speed Secrets of Bloodbending
+            if (phaseControl || game.getPlayer(activePlayerId).isGameUnderControl()) {
+                checkCurrentPhaseIsControlledByOtherPlayer(game, activePlayerId, currentPhase);
+            }
             game.fireEvent(new PhaseChangedEvent(activePlayerId, extraPhaseMod));
             Player activePlayer = game.getPlayer(activePlayerId);
             if (activePlayer != null) {
