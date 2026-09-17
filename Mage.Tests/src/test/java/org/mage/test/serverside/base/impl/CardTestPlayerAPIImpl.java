@@ -333,7 +333,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         // workaround for test games - call end game manually instead GameImpl
         // TODO: remove after refactor execute usage to one per test/run
-        DataCollectorServices.getInstance().onGameEnd(currentGame);
+        if (!currentGame.hasEnded()) {
+            // no needs in second call (after game really ended)
+            DataCollectorServices.getInstance().onGameEnd(currentGame);
+        }
+        DataCollectorServices.getInstance().onGameEndResult(currentGame); // tests don't hava GameController, so call it here
 
         //assertNoDuplicatedEffects();
     }
@@ -2534,7 +2538,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void assertHasNotWonTheGame(Player player) {
 
-        Assert.assertFalse(player.getName() + " has won the game.", player.hasWon());
+        Assert.assertFalse(player.getName() + " has won the game", player.hasWon());
     }
 
     public void assertLostTheGame(Player player) {
@@ -2544,7 +2548,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void assertHasNotLostTheGame(Player player) {
 
-        Assert.assertFalse(player.getName() + " has lost the game.", player.hasLost());
+        Assert.assertFalse(player.getName() + " has lost the game", player.hasLost());
     }
 
     /**

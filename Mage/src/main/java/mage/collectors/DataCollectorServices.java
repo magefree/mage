@@ -130,6 +130,12 @@ final public class DataCollectorServices implements DataCollector {
     }
 
     @Override
+    public void onGameEndResult(Game game) {
+        if (game.isSimulation()) return;
+        activeServices.forEach(c -> c.onGameEndResult(game));
+    }
+
+    @Override
     public void onChatRoom(UUID roomId, String userName, String message) {
         activeServices.forEach(c -> c.onChatRoom(roomId, userName, message));
     }

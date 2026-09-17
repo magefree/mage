@@ -783,6 +783,9 @@ public class GameController implements GameCallback {
     }
 
     public void endGame(final String message) throws MageException {
+        // real game end, all data ready here
+        DataCollectorServices.getInstance().onGameEndResult(game);
+
         // send end game message/dialog
         for (final GameSessionPlayer gameSession : getGameSessions()) {
             gameSession.removeGame();

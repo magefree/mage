@@ -56,6 +56,11 @@ public abstract class EmptyDataCollector implements DataCollector {
     }
 
     @Override
+    public void onGameEndResult(Game game) {
+        // nothing
+    }
+
+    @Override
     public void onChatRoom(UUID roomId, String userName, String message) {
         // nothing
     }
