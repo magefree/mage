@@ -16,6 +16,7 @@ public final class ThreadUtils {
 
     // basic
     public final static String THREAD_PREFIX_GAME = "GAME";
+    public final static String THREAD_PREFIX_GAME_IDLE = "IDLE GAME"; // must not start with GAME, alive 60 secs in the pool after game finish
     public final static String THREAD_PREFIX_AI_SIMULATION_MAD = "AI-SIM-MAD";
     public final static String THREAD_PREFIX_AI_SIMULATION_MCTS = "AI-SIM-MCTS";
     public final static String THREAD_PREFIX_CALL_REQUEST = "CALL";
