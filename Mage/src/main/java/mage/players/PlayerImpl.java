@@ -2714,6 +2714,14 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public void setTechnicalResult(boolean won) {
+        // direct result without game events to stop errored game
+        this.wins = won;
+        this.loses = !won;
+        this.draws = false;
+    }
+
+    @Override
     public void sendPlayerAction(PlayerAction playerAction, Game game, Object data) {
         switch (playerAction) {
             case PASS_PRIORITY_UNTIL_MY_NEXT_TURN: // F9

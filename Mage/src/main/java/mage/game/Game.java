@@ -441,6 +441,11 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     void end();
 
+    /**
+     * Critical error: a game can't continue, so end it with a technical winner and without game mechanics
+     */
+    void endWithTechnicalWinner(String reason);
+
     void cleanUp();
 
     /*

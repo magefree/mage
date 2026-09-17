@@ -1598,6 +1598,7 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void end() {
+        // it's real game end, do not use any game dialogs/rules/events here
         if (!state.isGameOver()) {
             logger.debug("END of gameId: " + this.getId());
             endTime = new Date();
@@ -1628,6 +1629,78 @@ public abstract class GameImpl implements Game {
                     .forEach(this::informPlayers);
 
             DataCollectorServices.getInstance().onGameEnd(this);
+        }
+    }
+
+    /**
+     * End game on critical error with the winner
+     * Despite mtg's paper rules (MTR), we need a real winner to continue match/tourney without infinite games loop
+     * Winner: highest life, then most priority time left, then random.
+     */
+    @Override
+    public void endWithTechnicalWinner(String reason) {
+        if (state.isGameOver()) {
+            return;
+        }
+
+        // find a winner
+        List<Player> candidates = state.getPlayers().values().stream()
+                .filter(Player::isInGame)
+                .collect(Collectors.toList());
+        String decidedBy;
+        if (candidates.isEmpty()) {
+            candidates = new ArrayList<>(state.getPlayers().values());
+            decidedBy = "random from all players, nobody is in game";
+        } else if (candidates.size() == 1) {
+            decidedBy = "last player in game";
+        } else {
+            // find by life
+            int maxLife = candidates.stream().mapToInt(Player::getLife).max().orElse(0);
+            candidates = candidates.stream()
+                    .filter(player -> player.getLife() == maxLife)
+                    .collect(Collectors.toList());
+            decidedBy = "life";
+
+            // find by time left
+            if (candidates.size() > 1 && getPriorityTime() > 0) {
+                int maxTimeLeft = candidates.stream().mapToInt(Player::getPriorityTimeLeft).max().orElse(0);
+                candidates = candidates.stream()
+                        .filter(player -> player.getPriorityTimeLeft() == maxTimeLeft)
+                        .collect(Collectors.toList());
+                decidedBy = "priority time left";
+            }
+
+            // find by random
+            if (candidates.size() > 1) {
+                decidedBy = "random";
+            }
+        }
+        Player winner = candidates.isEmpty() ? null : candidates.get(RandomUtil.nextInt(candidates.size()));
+
+        // skip game events, e.g. replacement effects
+        if (winner != null) {
+            for (Player player : state.getPlayers().values()) {
+                player.setTechnicalResult(player.getId().equals(winner.getId()));
+            }
+            winnerId = winner.getId();
+        }
+
+        // use try/catch to make sure it's really finish all the work
+
+        String message = String.format("Game stopped due critical error, technical winner: %s (decided by %s). Reason: %s",
+                (winner == null ? "none" : winner.getName()), decidedBy, reason);
+        logger.error(message + " - game " + getId());
+
+        try {
+            end();
+        } catch (Throwable e) {
+            logger.fatal("Can't finish game after critical error: " + getId(), e);
+        }
+
+        try {
+            informPlayers(message);
+        } catch (Throwable e) {
+            logger.error("Can't inform players about technical winner: " + getId(), e);
         }
     }
 
@@ -1850,8 +1923,12 @@ public abstract class GameImpl implements Game {
             // OUTER error - game must end (too many errors also come here)
             this.totalErrorsCount.incrementAndGet();
             logger.fatal("Game end on critical error: " + e, e);
-            this.fireErrorEvent("Game end on critical error: " + e, e);
-            this.end();
+            try {
+                this.fireErrorEvent("Game end on critical error: " + e, e);
+            } catch (Throwable ex) {
+                logger.error("Can't send critical error to players: " + getId(), ex);
+            }
+            this.endWithTechnicalWinner(String.valueOf(e));
 
             // re-raise error in unit tests, so framework can catch it (example: errors in AI simulations)
             if (e.getMessage() != null && e.getMessage().contains(UNIT_TESTS_ERROR_TEXT)) {

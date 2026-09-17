@@ -574,6 +574,12 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void concede(Game game);
 
+    /**
+     * Set a final game result directly, without any game events, replacement effects or messages.
+     * Used by a game on critical errors only, see Game.endWithTechnicalWinner
+     */
+    void setTechnicalResult(boolean won);
+
     void abort();
 
     void abortReset();
