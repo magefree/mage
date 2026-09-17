@@ -44,6 +44,13 @@ public class GameWorker implements Callable<Boolean> {
             LOGGER.fatal("GameWorker mage error [" + game.getId() + " - " + game + "]: " + e, e);
         } catch (Throwable e) {
             LOGGER.fatal("GameWorker system error [" + game.getId() + " - " + game + "]: " + e, e);
+            if (!endProcessed) {
+                gameController.endGameWithError(e);
+            }
+        } finally {
+            // a pool keeps a finished thread alive for a while, so it must not look like a game thread
+            // in dumps and stats, and must not pass game thread checks by name
+            Thread.currentThread().setName(ThreadUtils.THREAD_PREFIX_GAME_IDLE + " (last: " + game.getId() + ")");
         }
         return null;
     }
