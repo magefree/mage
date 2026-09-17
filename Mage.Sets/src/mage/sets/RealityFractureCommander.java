@@ -21,6 +21,7 @@ public final class RealityFractureCommander extends ExpansionSet {
 
         cards.add(new SetCardInfo("Akroma, Angel of Fury", 19, Rarity.MYTHIC, mage.cards.a.AkromaAngelOfFury.class));
         cards.add(new SetCardInfo("Arcane Signet", 20, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
+        cards.add(new SetCardInfo("Avacyn, Angel of Horror", 7, Rarity.RARE, mage.cards.a.AvacynAngelOfHorror.class));
         cards.add(new SetCardInfo("Command Tower", 22, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Darksteel Angel", 98, Rarity.RARE, mage.cards.d.DarksteelAngel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Darksteel Angel", 13, Rarity.RARE, mage.cards.d.DarksteelAngel.class, NON_FULL_USE_VARIOUS));
