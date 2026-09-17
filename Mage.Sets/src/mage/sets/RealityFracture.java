@@ -143,6 +143,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Mabel, Valley Hero", 274, Rarity.UNCOMMON, mage.cards.m.MabelValleyHero.class));
         cards.add(new SetCardInfo("Memory Trap", 15, Rarity.COMMON, mage.cards.m.MemoryTrap.class));
         cards.add(new SetCardInfo("Meticulous Commons", 184, Rarity.COMMON, mage.cards.m.MeticulousCommons.class));
+        cards.add(new SetCardInfo("Mindseeker Oculus", 33, Rarity.COMMON, mage.cards.m.MindseekerOculus.class));
         cards.add(new SetCardInfo("Mountain", 391, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 392, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 393, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
