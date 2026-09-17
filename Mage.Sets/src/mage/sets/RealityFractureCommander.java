@@ -26,5 +26,8 @@ public final class RealityFractureCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Darksteel Angel", 13, Rarity.RARE, mage.cards.d.DarksteelAngel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reflecting Pool", 23, Rarity.RARE, mage.cards.r.ReflectingPool.class));
         cards.add(new SetCardInfo("Sol Ring", 21, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
+        cards.add(new SetCardInfo("Turbulent Crater", 16, Rarity.RARE, mage.cards.t.TurbulentCrater.class));
+        cards.add(new SetCardInfo("Turbulent Shore", 17, Rarity.RARE, mage.cards.t.TurbulentShore.class));
+        cards.add(new SetCardInfo("Turbulent Wetlands", 18, Rarity.RARE, mage.cards.t.TurbulentWetlands.class));
     }
 }
