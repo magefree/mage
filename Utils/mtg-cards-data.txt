@@ -65116,6 +65116,69 @@ Arcane Signet|Reality Fracture Commander|20|U|{2}|Artifact|||{T}: Add one mana o
 Sol Ring|Reality Fracture Commander|21|U|{1}|Artifact|||{T}: Add {C}{C}.|
 Command Tower|Reality Fracture Commander|22|C||Land|||{T}: Add one mana of any color in your commander's color identity.|
 Reflecting Pool|Reality Fracture Commander|23|R||Land|||{T}: Add one mana of any type that a land you control could produce.|
+Elspeth, Sun's Champion|Reality Fracture Commander|24|M|{4}{W}{W}|Legendary Planeswalker - Elspeth|4|+1: Create three 1/1 white Soldier creature tokens.$−3: Destroy all creatures with power 4 or greater.$−7: You get an emblem with "Creatures you control get +2/+2 and have flying."|
+Flawless Maneuver|Reality Fracture Commander|25|R|{2}{W}|Instant|||If you control a commander, you may cast this spell without paying its mana cost.$Creatures you control gain indestructible until end of turn.|
+Grand Crescendo|Reality Fracture Commander|26|R|{X}{W}{W}|Instant|||Create X 1/1 green and white Citizen creature tokens. Creatures you control gain indestructible until end of turn.|
+Lingering Souls|Reality Fracture Commander|27|U|{2}{W}|Sorcery|||Create two 1/1 white Spirit creature tokens with flying.$Flashback {1}{B}|
+Martial Coup|Reality Fracture Commander|28|R|{X}{W}{W}|Sorcery|||Create X 1/1 white Soldier creature tokens. If X is 5 or more, destroy all other creatures.|
+Overlord of the Mistmoors|Reality Fracture Commander|29|M|{5}{W}{W}|Enchantment Creature - Avatar Horror|6|6|Impending 4--{2}{W}{W}$Whenever this permanent enters or attacks, create two 2/1 white Insect creature tokens with flying.|
+Path to Exile|Reality Fracture Commander|30|U|{W}|Instant|||Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle.|
+Secure the Wastes|Reality Fracture Commander|31|R|{X}{W}|Instant|||Create X 1/1 white Warrior creature tokens.|
+Serra's Emissary|Reality Fracture Commander|32|M|{4}{W}{W}{W}|Creature - Angel|7|7|Flying$As this creature enters, choose a card type.$You and creatures you control have protection from the chosen card type.|
+Skrelv's Hive|Reality Fracture Commander|33|R|{1}{W}|Enchantment|||At the beginning of your upkeep, you lose 1 life and create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This token can't block."$Corrupted -- As long as an opponent has three or more poison counters, creatures you control with toxic have lifelink.|
+Staff of the Storyteller|Reality Fracture Commander|34|R|{1}{W}|Artifact|||When this artifact enters, create a 1/1 white Spirit creature token with flying.$Whenever you create one or more creature tokens, put a story counter on this artifact.${W}, {T}, Remove a story counter from this artifact: Draw a card.|
+Stroke of Midnight|Reality Fracture Commander|35|U|{2}{W}|Instant|||Destroy target nonland permanent. Its controller creates a 1/1 white Human creature token.|
+Sunfall|Reality Fracture Commander|36|R|{3}{W}{W}|Sorcery|||Exile all creatures. Incubate X, where X is the number of creatures exiled this way.|
+Swords to Plowshares|Reality Fracture Commander|37|U|{W}|Instant|||Exile target creature. Its controller gains life equal to its power.|
+White Sun's Twilight|Reality Fracture Commander|38|R|{X}{W}{W}|Sorcery|||You gain X life. Create X 1/1 colorless Phyrexian Mite artifact creature tokens with toxic 1 and "This token can't block." If X is 5 or more, destroy all other creatures.|
+Brainstorm|Reality Fracture Commander|39|C|{U}|Instant|||Draw three cards, then put two cards from your hand on top of your library in any order.|
+Brainsurge|Reality Fracture Commander|40|U|{2}{U}|Instant|||Draw four cards, then put two cards from your hand on top of your library in any order.|
+Fact or Fiction|Reality Fracture Commander|41|U|{3}{U}|Instant|||Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.|
+Mass Polymorph|Reality Fracture Commander|42|R|{5}{U}|Sorcery|||Exile all creatures you control, then reveal cards from the top of your library until you reveal that many creature cards. Put all creature cards revealed this way onto the battlefield, then shuffle the rest of the revealed cards into your library.|
+Occult Epiphany|Reality Fracture Commander|43|R|{X}{U}|Instant|||Draw X cards, then discard X cards. Create a 1/1 white Spirit creature token with flying for each card type among cards discarded this way.|
+Shark Typhoon|Reality Fracture Commander|44|R|{5}{U}|Enchantment|||Whenever you cast a noncreature spell, create an X/X blue Shark creature token with flying, where X is that spell's mana value.$Cycling {X}{1}{U}$When you cycle this card, create an X/X blue Shark creature token with flying.|
+Synthetic Destiny|Reality Fracture Commander|45|R|{4}{U}{U}|Instant|||Exile all creatures you control. At the beginning of the next end step, reveal cards from the top of your library until you reveal that many creature cards, put all creature cards revealed this way onto the battlefield, then shuffle the rest of the revealed cards into your library.|
+Archfiend of Despair|Reality Fracture Commander|46|M|{6}{B}{B}|Creature - Demon|6|6|Flying$Your opponents can't gain life.$At the beginning of each end step, each opponent loses life equal to the life that player lost this turn.|
+Archon of Cruelty|Reality Fracture Commander|47|M|{6}{B}{B}|Creature - Archon|6|6|Flying$Whenever this creature enters or attacks, target opponent sacrifices a creature or planeswalker of their choice, discards a card, and loses 3 life. You draw a card and gain 3 life.|
+Dreadhorde Invasion|Reality Fracture Commander|48|R|{1}{B}|Enchantment|||At the beginning of your upkeep, you lose 1 life and amass Zombies 1.$Whenever a Zombie token you control with power 6 or greater attacks, it gains lifelink until end of turn.|
+Cursed Mirror|Reality Fracture Commander|49|R|{2}{R}|Artifact|||{T}: Add {R}.$As this artifact enters, you may have it become a copy of any creature on the battlefield until end of turn, except it has haste.|
+Despark|Reality Fracture Commander|50|U|{W}{B}|Instant|||Exile target permanent with mana value 4 or greater.|
+Whirlwind of Thought|Reality Fracture Commander|51|R|{1}{U}{R}{W}|Enchantment|||Whenever you cast a noncreature spell, draw a card.|
+Windcrag Siege|Reality Fracture Commander|52|R|{1}{R}{W}|Enchantment|||As this enchantment enters, choose Mardu or Jeskai.$* Mardu -- If a creature attacking causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.$* Jeskai -- At the beginning of your upkeep, create a 1/1 red Goblin creature token. It gains lifelink and haste until end of turn.|
+Azorius Signet|Reality Fracture Commander|53|U|{2}|Artifact|||{1}, {T}: Add {W}{U}.|
+Chromatic Lantern|Reality Fracture Commander|54|R|{3}|Artifact|||Lands you control have "{T}: Add one mana of any color."${T}: Add one mana of any color.|
+Currency Converter|Reality Fracture Commander|55|R|{1}|Artifact|||Whenever you discard a card, you may exile that card from your graveyard.${2}, {T}: Draw a card, then discard a card.${T}: Put a card exiled with this artifact into its owner's graveyard. If it's a land card, create a Treasure token. If it's a nonland card, create a 2/2 black Rogue creature token.|
+Dimir Signet|Reality Fracture Commander|56|U|{2}|Artifact|||{1}, {T}: Add {U}{B}.|
+Fellwar Stone|Reality Fracture Commander|57|U|{2}|Artifact|||{T}: Add one mana of any color that a land an opponent controls could produce.|
+Izzet Signet|Reality Fracture Commander|58|U|{2}|Artifact|||{1}, {T}: Add {U}{R}.|
+Proteus Staff|Reality Fracture Commander|59|R|{3}|Artifact|||{2}{U}, {T}: Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the top of their library until they reveal a creature card. The player puts that card onto the battlefield and the rest on the bottom of their library in any order. Activate only as a sorcery.|
+Rakdos Signet|Reality Fracture Commander|60|U|{2}|Artifact|||{1}, {T}: Add {B}{R}.|
+Talisman of Creativity|Reality Fracture Commander|61|U|{2}|Artifact|||{T}: Add {C}.${T}: Add {U} or {R}. This artifact deals 1 damage to you.|
+Talisman of Dominance|Reality Fracture Commander|62|U|{2}|Artifact|||{T}: Add {C}.${T}: Add {U} or {B}. This artifact deals 1 damage to you.|
+Talisman of Indulgence|Reality Fracture Commander|63|U|{2}|Artifact|||{T}: Add {C}.${T}: Add {B} or {R}. This artifact deals 1 damage to you.|
+Talisman of Progress|Reality Fracture Commander|64|U|{2}|Artifact|||{T}: Add {C}.${T}: Add {W} or {U}. This artifact deals 1 damage to you.|
+Battlefield Forge|Reality Fracture Commander|65|R||Land|||{T}: Add {C}.${T}: Add {R} or {W}. This land deals 1 damage to you.|
+Caves of Koilos|Reality Fracture Commander|66|R||Land|||{T}: Add {C}.${T}: Add {W} or {B}. This land deals 1 damage to you.|
+Clifftop Retreat|Reality Fracture Commander|67|R||Land|||This land enters tapped unless you control a Mountain or a Plains.${T}: Add {R} or {W}.|
+Contaminated Landscape|Reality Fracture Commander|68|C||Land|||{T}: Add {C}.${T}, Sacrifice this land: Search your library for a basic Plains, Island, or Swamp card, put it onto the battlefield tapped, then shuffle.$Cycling {W}{U}{B}|
+Drowned Catacomb|Reality Fracture Commander|69|R||Land|||This land enters tapped unless you control an Island or a Swamp.${T}: Add {U} or {B}.|
+Exotic Orchard|Reality Fracture Commander|70|R||Land|||{T}: Add one mana of any color that a land an opponent controls could produce.|
+Fabled Passage|Reality Fracture Commander|71|R||Land|||{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Then if you control four or more lands, untap that land.|
+Fetid Heath|Reality Fracture Commander|72|R||Land|||{T}: Add {C}.${W/B}, {T}: Add {W}{W}, {W}{B}, or {B}{B}.|
+Glacial Fortress|Reality Fracture Commander|73|R||Land|||This land enters tapped unless you control a Plains or an Island.${T}: Add {W} or {U}.|
+Isolated Chapel|Reality Fracture Commander|74|R||Land|||This land enters tapped unless you control a Plains or a Swamp.${T}: Add {W} or {B}.|
+Kher Keep|Reality Fracture Commander|75|R||Legendary Land|||{T}: Add {C}.${1}{R}, {T}: Create a 0/1 red Kobold creature token named Kobolds of Kher Keep.|
+Mystic Gate|Reality Fracture Commander|76|R||Land|||{T}: Add {C}.${W/U}, {T}: Add {W}{W}, {W}{U}, or {U}{U}.|
+Path of Ancestry|Reality Fracture Commander|77|C||Land|||This land enters tapped.${T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1.|
+Perilous Landscape|Reality Fracture Commander|78|C||Land|||{T}: Add {C}.${T}, Sacrifice this land: Search your library for a basic Island, Mountain, or Plains card, put it onto the battlefield tapped, then shuffle.$Cycling {U}{R}{W}|
+Prairie Stream|Reality Fracture Commander|79|R||Land - Plains Island|||({T}: Add {W} or {U}.)$This land enters tapped unless you control two or more basic lands.|
+Restless Anchorage|Reality Fracture Commander|81|R||Land|||This land enters tapped.${T}: Add {W} or {U}.${1}{W}{U}: Until end of turn, this land becomes a 2/3 white and blue Bird creature with flying. It's still a land.$Whenever this land attacks, create a Map token.|
+Restless Spire|Reality Fracture Commander|82|R||Land|||This land enters tapped.${T}: Add {U} or {R}.${U}{R}: Until end of turn, this land becomes a 2/1 blue and red Elemental creature with "During your turn, this creature has first strike." It's still a land.$Whenever this land attacks, scry 1.|
+Shivan Reef|Reality Fracture Commander|83|R||Land|||{T}: Add {C}.${T}: Add {U} or {R}. This land deals 1 damage to you.|
+Sulfur Falls|Reality Fracture Commander|84|R||Land|||This land enters tapped unless you control an Island or a Mountain.${T}: Add {U} or {R}.|
+Sulfurous Springs|Reality Fracture Commander|85|R||Land|||{T}: Add {C}.${T}: Add {B} or {R}. This land deals 1 damage to you.|
+Sunken Ruins|Reality Fracture Commander|86|R||Land|||{T}: Add {C}.${U/B}, {T}: Add {U}{U}, {U}{B}, or {B}{B}.|
+Underground River|Reality Fracture Commander|87|R||Land|||{T}: Add {C}.${T}: Add {U} or {B}. This land deals 1 damage to you.|
 Darksteel Angel|Reality Fracture Commander|98|R|{9}|Artifact Creature - Angel|4|4|Flying, indestructible$You can't lose the game and your opponents can't win the game.$Creatures you control can't have -1/-1 counters put on them.|
 Fili and Kili, Joyous|The Hobbit Eternal|1|R|{2}{R}|Legendary Creature - Dwarf Bard|3|3|Haste${T}: Add {R}{R}. Spend this mana only to cast Dwarf, Equipment, and Saga spells.|
 Gandalf, Party Guest|The Hobbit Eternal|2|R|{1}{U}{R}{W}|Legendary Creature - Avatar Wizard|3|4|At the beginning of combat on your turn, you may cast an instant or sorcery spell with mana value X or less from your hand without paying its mana cost, where X is twice the number of legendary Wizards you control.|
