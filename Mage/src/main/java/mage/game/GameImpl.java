@@ -2394,17 +2394,16 @@ public abstract class GameImpl implements Game {
             if (!player.hasLost()) {
                 String lostReason = "";
                 if (player.getLife() <= 0 && player.canLoseByZeroOrLessLife()) {
-                    lostReason = "life is 0 or less";
+                    lostReason = "to having 0 or less life";
                 }
                 if (player.getLibrary().isEmptyDraw()) {
-                    lostReason = "draw from empty library";
+                    lostReason = "drawing from an empty library";
                 }
                 if (player.getCountersCount(CounterType.POISON) >= 10) {
-                    lostReason = "poison counter >= 10";
+                    lostReason = "to having >=10 poison counters";
                 }
-                if (!lostReason.isEmpty()) {
+                if (!lostReason.isEmpty() && player.lost(this)) {
                     this.informPlayers(player.getLogName() + " lost the game due " + lostReason);
-                    player.lost(this);
                 }
             }
         }
