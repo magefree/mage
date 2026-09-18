@@ -3049,9 +3049,24 @@ public class ScryfallImageSupportTokens {
             put("HOB/Wolf", "https://api.scryfall.com/cards/thob/9?format=image");
 
             // FRA
+            put("FRA/Ajani's Pridemate", "https://api.scryfall.com/cards/tfra/2?format=image");
+            put("FRA/Angel", "https://api.scryfall.com/cards/tfra/3?format=image");
+            put("FRA/Beast", "https://api.scryfall.com/cards/tfra/8?format=image");
+            put("FRA/Cadet", "https://api.scryfall.com/cards/tfra/1?format=image");
+            put("FRA/Dragon", "https://api.scryfall.com/cards/tfra/7?format=image");
+            // put("FRA/Forest Tentacle", "https://api.scryfall.com/cards/tfra/9?format=image");
             put("FRA/Heartwood", "https://api.scryfall.com/cards/tfra/11?format=image");
             put("FRA/Illusion", "https://api.scryfall.com/cards/tfra/4?format=image");
             put("FRA/Jace", "https://api.scryfall.com/cards/tfra/5?format=image");
+            // put("FRA/Leviathan", "https://api.scryfall.com/cards/tfra/6?format=image");
+            put("FRA/Lotus", "https://api.scryfall.com/cards/tfra/12?format=image");
+            put("FRA/Mowu", "https://api.scryfall.com/cards/tfra/10?format=image");
+            put("FRA/Sculpture Treasure", "https://api.scryfall.com/cards/tfra/13?format=image");
+            put("FRA/Thopter", "https://api.scryfall.com/cards/tfra/14?format=image");
+            put("FRA/Treasure", "https://api.scryfall.com/cards/tfra/15?format=image");
+            put("FRA/Emblem Ajani", "https://api.scryfall.com/cards/tfra/16?format=image");
+            put("FRA/Emblem Chandra/1", "https://api.scryfall.com/cards/tfra/17?format=image");
+            put("FRA/Emblem Chandra/2", "https://api.scryfall.com/cards/tfra/18?format=image");
 
             // FRC
             put("FRC/Incubator", "https://api.scryfall.com/cards/tfrc/13/en?format=image&face=front");

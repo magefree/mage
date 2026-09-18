@@ -2802,10 +2802,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void lost(Game game) {
+    public boolean lost(Game game) {
         if (canLose(game)) {
             lostForced(game);
+            return true;
         }
+        return false;
     }
 
     @Override
