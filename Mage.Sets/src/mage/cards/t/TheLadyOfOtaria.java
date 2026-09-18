@@ -52,10 +52,10 @@ public final class TheLadyOfOtaria extends CardImpl {
                 new TapTargetCost(new TargetControlledPermanent(3, filter))
         ));
 
-        // At the beginning of each end step, if a land you controlled was put into your graveyard from the battlefield this turn, reveal the top four cards of your library. Put any number of Dwarf cards from among them into your hand and the rest on the bottom of your library in a random order.
+        // At the beginning of each end step, if a land you controlled was put into a graveyard from the battlefield this turn, reveal the top four cards of your library. You may put any number of Dwarf cards from among them into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 TargetController.ANY, new RevealLibraryPickControllerEffect(
-                        4, Integer.MAX_VALUE, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM, false
+                        4, Integer.MAX_VALUE, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM, true
                 ), false, TheLadyOfOtariaCondition.instance
         ).addHint(TheLadyOfOtariaCondition.getHint()), new TheLadyOfOtariaWatcher());
     }
@@ -73,7 +73,7 @@ public final class TheLadyOfOtaria extends CardImpl {
 enum TheLadyOfOtariaCondition implements Condition {
     instance;
     private static final Hint hint = new ConditionHint(
-            instance, "A land you controlled was put into your graveyard"
+            instance, "A land you controlled was put into a graveyard"
     );
 
     @Override
@@ -83,7 +83,7 @@ enum TheLadyOfOtariaCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if a land you controlled was put into your graveyard from the battlefield this turn";
+        return "if a land you controlled was put into a graveyard from the battlefield this turn";
     }
 
     public static Hint getHint() {
@@ -107,8 +107,7 @@ class TheLadyOfOtariaWatcher extends Watcher {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()
                 && zEvent.isPermanentMoved()
-                && zEvent.getTarget().isLand(game)
-                && zEvent.getTarget().isOwnedBy(zEvent.getTarget().getControllerId())) {
+                && zEvent.getTarget().isLand(game)) {
             playerSet.add(zEvent.getTarget().getControllerId());
         }
     }
