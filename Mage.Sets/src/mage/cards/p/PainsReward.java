@@ -69,7 +69,7 @@ class PainsRewardEffect extends OneShotEffect {
 
                 // AI hint
                 int safeLifeToLost = Math.min(6, currentPlayer.getLife() / 2);
-                Outcome aiOutcome = (highBid + 1 <= safeLifeToLost) ? Outcome.Benefit : Outcome.Detriment;
+                Outcome aiOutcome = (highBid + 1 <= safeLifeToLost) ? Outcome.Benefit : Outcome.AIDontUseIt;
 
                 if (currentPlayer.chooseUse(aiOutcome, text, source, game)) {
                     int newBid = chooseLifeAmountToBid(currentPlayer, highBid, source, game);
