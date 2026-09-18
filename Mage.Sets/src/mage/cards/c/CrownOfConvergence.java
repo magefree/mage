@@ -1,6 +1,7 @@
 
 package mage.cards.c;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -17,10 +18,11 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -32,6 +34,12 @@ public final class CrownOfConvergence extends CardImpl {
 
     private static final String rule1 = "As long as the top card of your library is a creature card, creatures you control that share a color with that card get +1/+1";
 
+    private static final FilterPermanent shareColorFilter = new FilterControlledCreaturePermanent("creatures you control that share a color with that card");
+
+    static {
+        shareColorFilter.add(ShareColorTopCardPredicate.instance);
+    }
+
     public CrownOfConvergence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
@@ -39,7 +47,7 @@ public final class CrownOfConvergence extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new PlayWithTheTopCardRevealedEffect()));
 
         // As long as the top card of your library is a creature card, creatures you control that share a color with that card get +1/+1.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new CrownOfConvergenceColorBoostEffect(), new TopLibraryCardTypeCondition(CardType.CREATURE), rule1);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, shareColorFilter), new TopLibraryCardTypeCondition(CardType.CREATURE), rule1);
         this.addAbility(new SimpleStaticAbility(effect));
 
         // {G}{W}: Put the top card of your library on the bottom of your library.
@@ -53,43 +61,6 @@ public final class CrownOfConvergence extends CardImpl {
     @Override
     public CrownOfConvergence copy() {
         return new CrownOfConvergence(this);
-    }
-}
-
-class CrownOfConvergenceColorBoostEffect extends BoostAllEffect {
-
-    private static final String effectText = "creatures you control that share a color with that card get +1/+1";
-
-    CrownOfConvergenceColorBoostEffect() {
-        super(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, false);
-        staticText = effectText;
-    }
-
-    private CrownOfConvergenceColorBoostEffect(CrownOfConvergenceColorBoostEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
-            Card topCard = you.getLibrary().getFromTop(game);
-            if (topCard != null) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), source, game)) {
-                    if (permanent.getColor(game).shares(topCard.getColor(game)) && !permanent.getColor(game).isColorless()) {
-                        permanent.addPower(power.calculate(game, source, this));
-                        permanent.addToughness(toughness.calculate(game, source, this));
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public CrownOfConvergenceColorBoostEffect copy() {
-        return new CrownOfConvergenceColorBoostEffect(this);
     }
 }
 
@@ -122,4 +93,21 @@ class CrownOfConvergenceEffect extends OneShotEffect {
         return false;
     }
 
+}
+
+enum ShareColorTopCardPredicate implements ObjectSourcePlayerPredicate<MageObject> {
+    instance;
+
+    @Override
+    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
+        Player you = game.getPlayer(input.getSource().getControllerId());
+        if (you == null) {
+            return false;
+        }
+        Card topCard = you.getLibrary().getFromTop(game);
+        if (topCard == null) {
+            return false;
+        }
+        return input.getObject().getColor(game).shares(topCard.getColor(game));
+    }
 }
