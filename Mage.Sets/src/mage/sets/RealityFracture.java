@@ -91,6 +91,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Frostbite Pyromental", 135, Rarity.RARE, mage.cards.f.FrostbitePyromental.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frostbite Pyromental", 333, Rarity.RARE, mage.cards.f.FrostbitePyromental.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frostbite Pyromental", 461, Rarity.RARE, mage.cards.f.FrostbitePyromental.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fulminous Forte", 84, Rarity.UNCOMMON, mage.cards.f.FulminousForte.class));
         cards.add(new SetCardInfo("Gallia, the Merrymaker", 245, Rarity.UNCOMMON, mage.cards.g.GalliaTheMerrymaker.class));
         cards.add(new SetCardInfo("Gallia, Tragic Host", 228, Rarity.UNCOMMON, mage.cards.g.GalliaTragicHost.class));
         cards.add(new SetCardInfo("Garruk, Curse Breaker", 259, Rarity.MYTHIC, mage.cards.g.GarrukCurseBreaker.class, NON_FULL_USE_VARIOUS));
