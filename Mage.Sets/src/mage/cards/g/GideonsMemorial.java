@@ -2,6 +2,7 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetAttackingOrBlockingCreature;
@@ -36,7 +37,7 @@ public final class GideonsMemorial extends CardImpl {
 
     public GideonsMemorial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{W}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
 
         // Creature tokens you control get +1/+0 and have vigilance.
@@ -53,6 +54,7 @@ public final class GideonsMemorial extends CardImpl {
 
         // {1}{W}, Discard this card: It deals 4 damage to target attacking or blocking creature.
         Ability ability2 = new SimpleActivatedAbility(
+            Zone.HAND,
             new DamageTargetEffect(4),
             new ManaCostsImpl<>("{1}{W}")
         );
