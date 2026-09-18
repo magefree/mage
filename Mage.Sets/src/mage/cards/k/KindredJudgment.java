@@ -1,7 +1,7 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
@@ -19,41 +19,41 @@ import mage.players.Player;
 
 /**
  *
- * @author caldover
+ * @author muz
  */
-public final class KindredDominance extends CardImpl {
+public final class KindredJudgment extends CardImpl {
 
-    public KindredDominance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{B}{B}");
+    public KindredJudgment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");
 
-        // Choose a creature type. Destroy all creatures that are not the chosen type.
-        this.getSpellAbility().addEffect(new KindredDominanceEffect());
+        // Choose a creature type. Destroy all creatures that aren't of the chosen type.
+        this.getSpellAbility().addEffect(new KindredJudgmentEffect());
     }
 
-    private KindredDominance(final KindredDominance card) {
+    private KindredJudgment(final KindredJudgment card) {
         super(card);
     }
 
     @Override
-    public KindredDominance copy() {
-        return new KindredDominance(this);
+    public KindredJudgment copy() {
+        return new KindredJudgment(this);
     }
 }
 
-class KindredDominanceEffect extends OneShotEffect {
+class KindredJudgmentEffect extends OneShotEffect {
 
-    KindredDominanceEffect() {
+    KindredJudgmentEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Choose a creature type. Destroy all creatures that aren't of the chosen type.";
     }
 
-    private KindredDominanceEffect(final KindredDominanceEffect effect) {
+    private KindredJudgmentEffect(final KindredJudgmentEffect effect) {
         super(effect);
     }
 
     @Override
-    public KindredDominanceEffect copy() {
-        return new KindredDominanceEffect(this);
+    public KindredJudgmentEffect copy() {
+        return new KindredJudgmentEffect(this);
     }
 
     @Override
