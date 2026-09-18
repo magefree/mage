@@ -216,6 +216,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Rockfall Vale", 186, Rarity.RARE, mage.cards.r.RockfallVale.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rockfall Vale", 400, Rarity.RARE, mage.cards.r.RockfallVale.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ruric Thar, Biomagus", 219, Rarity.UNCOMMON, mage.cards.r.RuricTharBiomagus.class));
+        cards.add(new SetCardInfo("Saheeli, Consul of Oversight", 203, Rarity.UNCOMMON, mage.cards.s.SaheeliConsulOfOversight.class));
         cards.add(new SetCardInfo("Screeching Soulbreaker", 65, Rarity.COMMON, mage.cards.s.ScreechingSoulbreaker.class));
         cards.add(new SetCardInfo("Semester Foreseer", 39, Rarity.COMMON, mage.cards.s.SemesterForeseer.class));
         cards.add(new SetCardInfo("Shatterwing Pegasus", 21, Rarity.COMMON, mage.cards.s.ShatterwingPegasus.class));
