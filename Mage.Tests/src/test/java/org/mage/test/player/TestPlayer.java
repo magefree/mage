@@ -3606,8 +3606,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void lost(Game game) {
-        computerPlayer.lost(game);
+    public boolean lost(Game game) {
+        return computerPlayer.lost(game);
     }
 
     @Override
