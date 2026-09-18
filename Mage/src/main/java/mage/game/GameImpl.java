@@ -2400,7 +2400,7 @@ public abstract class GameImpl implements Game {
                     lostReason = "drawing from an empty library";
                 }
                 if (player.getCountersCount(CounterType.POISON) >= 10) {
-                    lostReason = "to having >=10 poison counters";
+                    lostReason = "to having 10 or more poison counters";
                 }
                 if (!lostReason.isEmpty() && player.lost(this)) {
                     this.informPlayers(player.getLogName() + " lost the game due " + lostReason);
