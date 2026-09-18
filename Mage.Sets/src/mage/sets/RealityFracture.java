@@ -300,6 +300,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Yargle, Glutton of Urborg", 241, Rarity.UNCOMMON, mage.cards.y.YargleGluttonOfUrborg.class));
         cards.add(new SetCardInfo("Yargle, Goliath of Otaria", 225, Rarity.UNCOMMON, mage.cards.y.YargleGoliathOfOtaria.class));
         cards.add(new SetCardInfo("Yoshimaru, Beloved Companion", 209, Rarity.UNCOMMON, mage.cards.y.YoshimaruBelovedCompanion.class));
+        cards.add(new SetCardInfo("Your Fate Ends Here", 24, Rarity.UNCOMMON, mage.cards.y.YourFateEndsHere.class));
 
     }
 }
