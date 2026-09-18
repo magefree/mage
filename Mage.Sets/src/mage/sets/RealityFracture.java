@@ -84,6 +84,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Edgar, Ancient Bloodlord", 270, Rarity.UNCOMMON, mage.cards.e.EdgarAncientBloodlord.class));
         cards.add(new SetCardInfo("Edgar, Moonlit Sovereign", 257, Rarity.UNCOMMON, mage.cards.e.EdgarMoonlitSovereign.class));
         cards.add(new SetCardInfo("Emergency Phytomedic", 130, Rarity.COMMON, mage.cards.e.EmergencyPhytomedic.class));
+        cards.add(new SetCardInfo("Entrust the Spark", 131, Rarity.RARE, mage.cards.e.EntrustTheSpark.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Entrust the Spark", 350, Rarity.RARE, mage.cards.e.EntrustTheSpark.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Essence Burn", 369, Rarity.UNCOMMON, mage.cards.e.EssenceBurn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Essence Burn", 82, Rarity.UNCOMMON, mage.cards.e.EssenceBurn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fatehold Annex", 177, Rarity.COMMON, mage.cards.f.FateholdAnnex.class));
