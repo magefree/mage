@@ -3,6 +3,8 @@ package mage.util;
 import com.google.common.base.Throwables;
 
 import javax.swing.*;
+
+import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -23,6 +25,11 @@ public final class ThreadUtils {
     public final static String THREAD_PREFIX_TOURNEY = "TOURNEY";
     public final static String THREAD_PREFIX_TOURNEY_DRAFT = "TOURNEY DRAFT";
     public final static String THREAD_PREFIX_TOURNEY_BOOSTERS_SEND = "TOURNEY BOOSTERS SEND";
+
+    // game thread doing extra work like sideboarding and prepare next game in the match
+    // so keep it with additional status like GAME xxx, sideboard
+    public final static String THREAD_GAME_STATUS_SIDEBOARD = "sideboard";
+    public final static String THREAD_GAME_STATUS_AFTER_GAME = "after game";
 
     // game
     public final static String THREAD_PREFIX_GAME_JOIN_WAITING = "XMAGE game join waiting";
@@ -130,5 +137,26 @@ public final class ThreadUtils {
             // hot-to fix: run GUI changeable code by SwingUtilities.invokeLater(() -> {xxx})
             throw new IllegalArgumentException("Wrong code usage: GUI related code must run in SWING thread by SwingUtilities.invokeLater", new Throwable());
         }
+    }
+
+     /**
+     * More detail game threads for monitor and dumps of the freeze games
+     * Example:
+     * - GAME xxx
+     * - GAME xxx, after game
+     * - GAME xxx, sideboard
+     *
+     * @param status empty for a playing game, see THREAD_GAME_STATUS_xxx
+     */
+    public static void setGameThreadStatus(UUID gameId, String status) {
+        Thread.currentThread().setName(THREAD_PREFIX_GAME + " " + gameId
+            + (status == null || status.isEmpty() ? "" : ", " + status));
+    }
+
+    /**
+     * Set idle status of the game thread (it's must has a different name to skip sleeping threads)
+     */
+    public static void setGameThreadIdle(UUID gameId) {
+        Thread.currentThread().setName(THREAD_PREFIX_GAME_IDLE + " (last: " + gameId + ")");
     }
 }

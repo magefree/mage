@@ -26,6 +26,7 @@ import mage.server.managers.ManagerFactory;
 import mage.server.record.TableRecorderImpl;
 import mage.server.tournament.TournamentFactory;
 import mage.server.util.ServerMessagesUtil;
+import mage.util.ThreadUtils;
 import mage.view.ChatMessage;
 import org.apache.log4j.Logger;
 
@@ -819,6 +820,7 @@ public class TableController {
         if (game == null) {
             return true;
         }
+        ThreadUtils.setGameThreadStatus(game.getId(), ThreadUtils.THREAD_GAME_STATUS_AFTER_GAME);
         UUID choosingPlayerId = match.getChooser();
         match.endGame();
         if (managerFactory.configSettings().isSaveGameActivated() && !game.isSimulation()) {
@@ -861,15 +863,22 @@ public class TableController {
                 }
             }
         }
-        match.sideboard();
-        cancelTimeout();
-        if (table.isTournamentSubTable()) {
-            for (MatchPlayer matchPlayer : match.getPlayers()) {
-                TournamentPlayer tournamentPlayer = table.getTournament().getPlayer(matchPlayer.getPlayer().getId());
-                if (tournamentPlayer != null && tournamentPlayer.getStateInfo().equals("sideboarding")) {
-                    tournamentPlayer.setStateInfo("");
+
+        UUID gameId = match.getGame() == null ? null : match.getGame().getId();
+        ThreadUtils.setGameThreadStatus(gameId, ThreadUtils.THREAD_GAME_STATUS_SIDEBOARD);
+        try {
+            match.sideboard();
+            cancelTimeout();
+            if (table.isTournamentSubTable()) {
+                for (MatchPlayer matchPlayer : match.getPlayers()) {
+                    TournamentPlayer tournamentPlayer = table.getTournament().getPlayer(matchPlayer.getPlayer().getId());
+                    if (tournamentPlayer != null && tournamentPlayer.getStateInfo().equals("sideboarding")) {
+                        tournamentPlayer.setStateInfo("");
+                    }
                 }
             }
+        } finally {
+            ThreadUtils.setGameThreadStatus(gameId, ThreadUtils.THREAD_GAME_STATUS_AFTER_GAME);
         }
     }
 
