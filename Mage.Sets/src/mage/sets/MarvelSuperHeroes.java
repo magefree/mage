@@ -334,6 +334,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Savage Land Dinosaur", 185, Rarity.COMMON, mage.cards.s.SavageLandDinosaur.class));
         cards.add(new SetCardInfo("Scientist Supreme of A.I.M.", 225, Rarity.RARE, mage.cards.s.ScientistSupremeOfAIM.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scientist Supreme of A.I.M.", 423, Rarity.RARE, mage.cards.s.ScientistSupremeOfAIM.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Secret Invasion", 72, Rarity.RARE, mage.cards.s.SecretInvasion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Secret Invasion", 301, Rarity.RARE, mage.cards.s.SecretInvasion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Serpent Specialist", 186, Rarity.COMMON, mage.cards.s.SerpentSpecialist.class));
         cards.add(new SetCardInfo("Shang-Chi, Master of Kung Fu", 187, Rarity.MYTHIC, mage.cards.s.ShangChiMasterOfKungFu.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shang-Chi, Master of Kung Fu", 370, Rarity.MYTHIC, mage.cards.s.ShangChiMasterOfKungFu.class, NON_FULL_USE_VARIOUS));
@@ -343,6 +345,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Speed, Young Avenger", 152, Rarity.UNCOMMON, mage.cards.s.SpeedYoungAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Speed, Young Avenger", 448, Rarity.UNCOMMON, mage.cards.s.SpeedYoungAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Speedball, New Warrior", 227, Rarity.UNCOMMON, mage.cards.s.SpeedballNewWarrior.class));
+        cards.add(new SetCardInfo("Spider-Man, To the Rescue", 228, Rarity.UNCOMMON, mage.cards.s.SpiderManToTheRescue.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Spider-Man, To the Rescue", 335, Rarity.UNCOMMON, mage.cards.s.SpiderManToTheRescue.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spider-Woman, Secret Agent", 229, Rarity.UNCOMMON, mage.cards.s.SpiderWomanSecretAgent.class));
         cards.add(new SetCardInfo("Stature, Size Shifter", 76, Rarity.UNCOMMON, mage.cards.s.StatureSizeShifter.class));
         cards.add(new SetCardInfo("Stark Industries", 272, Rarity.COMMON, mage.cards.s.StarkIndustries.class));
