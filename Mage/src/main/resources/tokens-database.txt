@@ -3120,9 +3120,23 @@
 |TOK:FRA|Treasure||TreasureToken|
 
 # FRC
+|TOK:FRC|Angel||AngelToken|
+|TOK:FRC|Citizen||CitizenGreenWhiteToken|
 |TOK:FRC|Gingerbrute||GingerbruteToken|
+|TOK:FRC|Goblin||GoblinToken|
 |TOK:FRC|Incubator||IncubatorToken|
+|TOK:FRC|Insect||InsectWhiteToken|
+|TOK:FRC|Kobolds of Kher Keep||KherKeepKoboldToken|
+|TOK:FRC|Map||MapToken|
+|TOK:FRC|Myr||MyrToken|
+|TOK:FRC|Phyrexian Mite||PhyrexianMiteToken|
 |TOK:FRC|Phyrexian||Phyrexian00Token|
+|TOK:FRC|Rogue||RogueToken|
+|TOK:FRC|Shark||SharkToken|
+|TOK:FRC|Solder||SoldierToken|
+|TOK:FRC|Spirit||SpiritWhiteToken|
+|TOK:FRC|Warrior||WarriorToken|
+|TOK:FRC|Zombie Army||ZombieArmyToken|
 
 # TRK
 |TOK:TRK|Human||Human01Token|
