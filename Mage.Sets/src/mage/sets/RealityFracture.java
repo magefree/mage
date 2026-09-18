@@ -46,6 +46,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodline Recollector", 402, Rarity.MYTHIC, mage.cards.b.BloodlineRecollector.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodline Recollector", 427, Rarity.MYTHIC, mage.cards.b.BloodlineRecollector.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodline Recollector", 49, Rarity.MYTHIC, mage.cards.b.BloodlineRecollector.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bloombrute", 124, Rarity.UNCOMMON, mage.cards.b.Bloombrute.class));
         cards.add(new SetCardInfo("Budding Insurgent", 99, Rarity.COMMON, mage.cards.b.BuddingInsurgent.class));
         cards.add(new SetCardInfo("Campus Crier", 4, Rarity.COMMON, mage.cards.c.CampusCrier.class));
         cards.add(new SetCardInfo("Carnivorous Cultivator", 437, Rarity.RARE, mage.cards.c.CarnivorousCultivator.class));
