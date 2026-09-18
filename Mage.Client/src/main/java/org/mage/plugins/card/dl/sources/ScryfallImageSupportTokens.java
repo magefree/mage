@@ -2624,6 +2624,24 @@ public class ScryfallImageSupportTokens {
             put("FDN/Emblem Vivien", "https://api.scryfall.com/cards/tfdn/25/en?format=image");
             put("FDN/Zombie", "https://api.scryfall.com/cards/tfdn/15/en?format=image");
 
+            // FDC
+            put("FDC/Angel/1", "https://api.scryfall.com/cards/tfdc/1/en?format=image");
+            put("FDC/Angel/2", "https://api.scryfall.com/cards/tfdc/2/en?format=image");
+            put("FDC/Beast", "https://api.scryfall.com/cards/tfdc/10/en?format=image");
+            put("FDC/Clue", "https://api.scryfall.com/cards/tfdc/13/en?format=image");
+            put("FDC/Dragon/1", "https://api.scryfall.com/cards/tfdc/7/en?format=image");
+            put("FDC/Dragon/2", "https://api.scryfall.com/cards/tfdc/8/en?format=image");
+            put("FDC/Dragon/3", "https://api.scryfall.com/cards/tfdc/9/en?format=image");
+            put("FDC/Myr", "https://api.scryfall.com/cards/tfdc/14/en?format=image");
+            put("FDC/Phyrexian Beast", "https://api.scryfall.com/cards/tfdc/11/en?format=image");
+            put("FDC/Phyrexian Germ", "https://api.scryfall.com/cards/tfdc/4/en?format=image");
+            put("FDC/Spider", "https://api.scryfall.com/cards/tfdc/12/en?format=image");
+            put("FDC/Spirit", "https://api.scryfall.com/cards/tfdc/3/en?format=image");
+            put("FDC/Thopter", "https://api.scryfall.com/cards/tfdc/15/en?format=image");
+            put("FDC/Treasure", "https://api.scryfall.com/cards/tfdc/16/en?format=image");
+            put("FDC/Zombie Knight", "https://api.scryfall.com/cards/tfdc/6/en?format=image");
+            put("FDC/Zombie", "https://api.scryfall.com/cards/tfdc/5/en?format=image");
+
             // H17
             put("H17/Dragon", "https://api.scryfall.com/cards/h17/4/en?format=image");
 

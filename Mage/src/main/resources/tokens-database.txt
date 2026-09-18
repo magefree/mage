@@ -2685,6 +2685,24 @@
 |TOK:FDN|Treasure||TreasureToken|
 |TOK:FDN|Zombie||ZombieToken|
 
+# FDC
+|TOK:FDC|Angel|1|Angel33Token|
+|TOK:FDC|Angel|2|AngelToken|
+|TOK:FDC|Beast||BeastToken|
+|TOK:FDC|Clue||ClueArtifactToken|
+|TOK:FDC|Dragon|1|DragonToken|
+|TOK:FDC|Dragon|2|Dragon55Token|
+|TOK:FDC|Dragon|3|Dragon66Token|
+|TOK:FDC|Myr||MyrToken|
+|TOK:FDC|Phyrexian Beast||PhyrexianBeastToken|
+|TOK:FDC|Phyrexian Germ||PhyrexianGermToken|
+|TOK:FDC|Spider||SpiderToken|
+|TOK:FDC|Spirit||SpiritWhiteToken|
+|TOK:FDC|Thopter||ThopterColorlessToken|
+|TOK:FDC|Treasure||TreasureToken|
+|TOK:FDC|Zombie Knight||ZombieKnightToken|
+|TOK:FDC|Zombie||ZombieToken|
+
 # INR
 |TOK:INR|Blood||BloodToken|
 |TOK:INR|Clue||ClueArtifactToken|
