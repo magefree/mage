@@ -63,6 +63,7 @@ public final class RealityFractureCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Perilous Landscape", 78, Rarity.COMMON, mage.cards.p.PerilousLandscape.class));
         cards.add(new SetCardInfo("Prairie Stream", 79, Rarity.RARE, mage.cards.p.PrairieStream.class));
         cards.add(new SetCardInfo("Proteus Staff", 59, Rarity.RARE, mage.cards.p.ProteusStaff.class));
+        cards.add(new SetCardInfo("Radiant Summit", 80, Rarity.RARE, mage.cards.r.RadiantSummit.class));
         cards.add(new SetCardInfo("Rakdos Signet", 60, Rarity.UNCOMMON, mage.cards.r.RakdosSignet.class));
         cards.add(new SetCardInfo("Reflecting Pool", 23, Rarity.RARE, mage.cards.r.ReflectingPool.class));
         cards.add(new SetCardInfo("Restless Anchorage", 81, Rarity.RARE, mage.cards.r.RestlessAnchorage.class));
