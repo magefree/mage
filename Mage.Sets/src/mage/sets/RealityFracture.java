@@ -268,6 +268,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Theorix Annex", 192, Rarity.COMMON, mage.cards.t.TheorixAnnex.class));
         cards.add(new SetCardInfo("Theorix Charm", 155, Rarity.UNCOMMON, mage.cards.t.TheorixCharm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Theorix Charm", 435, Rarity.UNCOMMON, mage.cards.t.TheorixCharm.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Theorix Metamage", 156, Rarity.COMMON, mage.cards.t.TheorixMetamage.class));
         cards.add(new SetCardInfo("Tinybones, Pocket Nuisance", 237, Rarity.UNCOMMON, mage.cards.t.TinybonesPocketNuisance.class));
         cards.add(new SetCardInfo("Titanbones, Towering Heart", 266, Rarity.UNCOMMON, mage.cards.t.TitanbonesToweringHeart.class));
         cards.add(new SetCardInfo("Transformative Commons", 193, Rarity.COMMON, mage.cards.t.TransformativeCommons.class));
