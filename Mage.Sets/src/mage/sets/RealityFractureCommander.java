@@ -47,6 +47,7 @@ public final class RealityFractureCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fellwar Stone", 57, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Fetid Heath", 72, Rarity.RARE, mage.cards.f.FetidHeath.class));
         cards.add(new SetCardInfo("Flawless Maneuver", 25, Rarity.RARE, mage.cards.f.FlawlessManeuver.class));
+        cards.add(new SetCardInfo("Ginger, Queen of Sweets", 14, Rarity.RARE, mage.cards.g.GingerQueenOfSweets.class));
         cards.add(new SetCardInfo("Glacial Fortress", 73, Rarity.RARE, mage.cards.g.GlacialFortress.class));
         cards.add(new SetCardInfo("Grand Crescendo", 26, Rarity.RARE, mage.cards.g.GrandCrescendo.class));
         cards.add(new SetCardInfo("Isolated Chapel", 74, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
