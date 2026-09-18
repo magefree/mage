@@ -237,6 +237,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("King T'Challa", 399, Rarity.MYTHIC, mage.cards.k.KingTChalla.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kingpin's Enforcers", 102, Rarity.COMMON, mage.cards.k.KingpinsEnforcers.class));
         cards.add(new SetCardInfo("Klaw, Sonic Subjugator", 103, Rarity.UNCOMMON, mage.cards.k.KlawSonicSubjugator.class));
+        cards.add(new SetCardInfo("Knight of Wundagore", 175, Rarity.COMMON, mage.cards.k.KnightOfWundagore.class));
         cards.add(new SetCardInfo("Kree Commandos", 19, Rarity.COMMON, mage.cards.k.KreeCommandos.class));
         cards.add(new SetCardInfo("Kree Sentinel", 141, Rarity.COMMON, mage.cards.k.KreeSentinel.class));
         cards.add(new SetCardInfo("Leader, Super-Genius", 64, Rarity.RARE, mage.cards.l.LeaderSuperGenius.class, NON_FULL_USE_VARIOUS));
