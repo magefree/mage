@@ -85,9 +85,12 @@ public final class RealityFractureCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Talisman of Dominance", 62, Rarity.UNCOMMON, mage.cards.t.TalismanOfDominance.class));
         cards.add(new SetCardInfo("Talisman of Indulgence", 63, Rarity.UNCOMMON, mage.cards.t.TalismanOfIndulgence.class));
         cards.add(new SetCardInfo("Talisman of Progress", 64, Rarity.UNCOMMON, mage.cards.t.TalismanOfProgress.class));
-        cards.add(new SetCardInfo("Turbulent Crater", 16, Rarity.RARE, mage.cards.t.TurbulentCrater.class));
-        cards.add(new SetCardInfo("Turbulent Shore", 17, Rarity.RARE, mage.cards.t.TurbulentShore.class));
-        cards.add(new SetCardInfo("Turbulent Wetlands", 18, Rarity.RARE, mage.cards.t.TurbulentWetlands.class));
+        cards.add(new SetCardInfo("Turbulent Crater", 101, Rarity.RARE, mage.cards.t.TurbulentCrater.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Turbulent Crater", 16, Rarity.RARE, mage.cards.t.TurbulentCrater.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Turbulent Shore", 102, Rarity.RARE, mage.cards.t.TurbulentShore.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Turbulent Shore", 17, Rarity.RARE, mage.cards.t.TurbulentShore.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Turbulent Wetlands", 103, Rarity.RARE, mage.cards.t.TurbulentWetlands.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Turbulent Wetlands", 18, Rarity.RARE, mage.cards.t.TurbulentWetlands.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Underground River", 87, Rarity.RARE, mage.cards.u.UndergroundRiver.class));
         cards.add(new SetCardInfo("Whirlwind of Thought", 51, Rarity.RARE, mage.cards.w.WhirlwindOfThought.class));
         cards.add(new SetCardInfo("White Sun's Twilight", 38, Rarity.RARE, mage.cards.w.WhiteSunsTwilight.class));
