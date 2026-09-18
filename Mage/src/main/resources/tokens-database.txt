@@ -162,8 +162,8 @@
 |EMBLEM:ECL|Emblem Oko||OkoShadowmoorScionEmblem|
 |EMBLEM:SOS|Emblem Dellian||ProfessorDellianFelEmblem|
 |EMBLEM:FRA|Emblem Ajani||AjaniResoluteEmblem|
-|EMBLEM:FRA|Emblem Chandra||ChandraChillOfComplianceEmblem|
-
+|EMBLEM:FRA|Emblem Chandra|1|ChandraChillOfComplianceEmblem|
+|EMBLEM:FRA|Emblem Chandra|2|ChandraTorchOfDefianceEmblem|
 
 # ALL PLANES
 # Usage hints:
@@ -3085,9 +3085,26 @@
 |TOK:HOB|Wolf||WolfToken|
 
 # FRA
+|TOK:FRA|Ajani's Pridemate||AjanisPridemateToken|
+|TOK:FRA|Angel||BlueAngelToken|
+|TOK:FRA|Beast||Beast44TrampleToken|
+|TOK:FRA|Cadet||CadetToken|
+|TOK:FRA|Dragon||Dragon55Token|
+# |TOK:FRA|Forest Tentacle||ForestTentacleToken|
 |TOK:FRA|Heartwood||HeartwoodToken|
 |TOK:FRA|Illusion||Illusion11Token|
 |TOK:FRA|Jace||JacePlaneswalkerToken|
+# |TOK:FRA|Leviathan||Leviathan88Token|
+|TOK:FRA|Lotus||LotusToken|
+|TOK:FRA|Mowu||MowuToken|
+|TOK:FRA|Sculpture Treasure||SculptureTreasureToken|
+|TOK:FRA|Thopter||ThopterColorlessToken|
+|TOK:FRA|Treasure||TreasureToken|
+
+# FRC
+|TOK:FRC|Gingerbrute||GingerbruteToken|
+|TOK:FRC|Incubator||IncubatorToken|
+|TOK:FRC|Phyrexian||Phyrexian00Token|
 
 # TRK
 |TOK:TRK|Human||Human01Token|

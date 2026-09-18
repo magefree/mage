@@ -562,7 +562,10 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean discard(Card card, boolean payForCost, Ability source, Game game);
 
-    void lost(Game game);
+    /**
+     * @return True if player was able to lose, else false
+     */
+    boolean lost(Game game);
 
     void lostForced(Game game);
 
