@@ -201,6 +201,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Prophesied End", 17, Rarity.UNCOMMON, mage.cards.p.ProphesiedEnd.class));
         cards.add(new SetCardInfo("Protege's Awakening", 37, Rarity.COMMON, mage.cards.p.ProtegesAwakening.class));
         cards.add(new SetCardInfo("Prudent Fateseer", 146, Rarity.UNCOMMON, mage.cards.p.PrudentFateseer.class));
+        cards.add(new SetCardInfo("Puppet Crafting", 111, Rarity.RARE, mage.cards.p.PuppetCrafting.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Puppet Crafting", 373, Rarity.RARE, mage.cards.p.PuppetCrafting.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rampart Hunter", 60, Rarity.COMMON, mage.cards.r.RampartHunter.class));
         cards.add(new SetCardInfo("Rank Rat", 61, Rarity.COMMON, mage.cards.r.RankRat.class));
         cards.add(new SetCardInfo("Refute Destiny", 18, Rarity.UNCOMMON, mage.cards.r.RefuteDestiny.class, NON_FULL_USE_VARIOUS));
