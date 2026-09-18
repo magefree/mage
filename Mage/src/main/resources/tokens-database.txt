@@ -3089,6 +3089,10 @@
 |TOK:FRA|Illusion||Illusion11Token|
 |TOK:FRA|Jace||JacePlaneswalkerToken|
 
+# FRC
+|TOK:FRC|Incubator||IncubatorToken|
+|TOK:FRC|Phyrexian||Phyrexian00Token|
+
 # TRK
 |TOK:TRK|Human||Human01Token|
 
