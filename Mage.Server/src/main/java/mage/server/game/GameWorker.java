@@ -32,7 +32,7 @@ public class GameWorker implements Callable<Boolean> {
         boolean endProcessed = false;
         try {
             // play game
-            Thread.currentThread().setName(ThreadUtils.THREAD_PREFIX_GAME + " " + game.getId());
+            ThreadUtils.setGameThreadStatus(game.getId(), "");
             game.start(choosingPlayerId);
 
             // save result and start next game or close finished table
@@ -55,7 +55,7 @@ public class GameWorker implements Callable<Boolean> {
         } finally {
             // a pool keeps a finished thread alive for a while, so it must not look like a game thread
             // in dumps and stats, and must not pass game thread checks by name
-            Thread.currentThread().setName(ThreadUtils.THREAD_PREFIX_GAME_IDLE + " (last: " + game.getId() + ")");
+            ThreadUtils.setGameThreadIdle(game.getId());
         }
         return null;
     }
