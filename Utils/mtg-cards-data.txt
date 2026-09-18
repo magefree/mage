@@ -64549,6 +64549,7 @@ Return to the Light Realms|Reality Fracture|20|M|{7}{W}{W}|Sorcery|||Return all 
 Shatterwing Pegasus|Reality Fracture|21|C|{2}{W}|Creature - Pegasus|2|3|Flying${4}{W}: Creatures you control get +1/+1 until end of turn.|
 Surgical Precision|Reality Fracture|22|C|{1}{W}|Sorcery|||Choose one --$* Destroy target creature with toughness 4 or greater. You gain 1 life.$* You draw a card and gain 2 life.|
 Unflinching Hortimancer|Reality Fracture|23|C|{1}{W}|Creature - Human Cleric|2|1|Ward {1}$Whenever you gain life, put a +1/+1 counter on this creature.|
+Your Fate Ends Here|Reality Fracture|24|U|{2}{W}|Instant|||Destroy target creature or planeswalker with mana value 3 or greater. Surveil 1.|
 Countersculpt|Reality Fracture|25|U|{U}{U}|Instant|||As an additional cost to cast this spell, behold a Jace or pay {1}.$Counter target spell. Empower Jace 1.|
 Cruel Calculations|Reality Fracture|26|R|{2}{U}|Sorcery|||Draw X cards, where X is the number of cards that were put into target player's graveyard from their library this turn.|
 Cryotheory Adept|Reality Fracture|27|C|{1}{U}|Creature - Human Wizard|2|1|Prowess${3}{U}, Exile this card from your graveyard: Tap target creature and put a stun counter on it. Activate only as a sorcery.|
@@ -64597,6 +64598,7 @@ Theoretical Necromancer|Reality Fracture|69|C|{2}{B}|Creature - Vampire Warlock|
 Void Extrapolator|Reality Fracture|70|C|{1}{B}|Creature - Aetherborn Warlock|2|2|This creature enters prepared.$Threshold -- This creature gets +1/+1 as long as there are seven or more cards in your graveyard.|
 Vraska's Final Mercy|Reality Fracture|71|R|{B}{B}|Sorcery|||Choose one --$* You lose 2 life. Destroy target creature or planeswalker.$* You lose 2 life. Empower Jace 6.|
 Ajani's Anguish|Reality Fracture|72|R|{X}{R}|Enchantment|||When this enchantment enters, it deals X damage to any target.$Creatures you control have trample.|
+Artifist Acumen|Reality Fracture|73|C|{R}|Sorcery|||Creatures you control gain first strike until end of turn.$Draw a card.|
 Awaken the Inferno|Reality Fracture|74|C|{4}{R}|Sorcery|||Awaken the Inferno deals 6 damage to target creature or planeswalker an opponent controls. Put a +1/+1 counter on up to one target creature you control.$Basic landcycling {2}|
 Blazing Crescendo|Reality Fracture|75|C|{1}{R}|Instant|||Target creature gets +3/+1 until end of turn.$Exile the top card of your library. Until the end of your next turn, you may play that card.|
 Chandra's Emberling|Reality Fracture|76|C|{2}{R}|Creature - Gremlin Elemental|2|2|Haste$Whenever you cast a noncreature spell, put a +1/+1 counter on this creature.|
@@ -64729,6 +64731,7 @@ Rescue Girl, First Responder|Reality Fracture|202|U|{2}{W}|Legendary Creature - 
 Saheeli, Consul of Oversight|Reality Fracture|203|U|{3}{W}{W}|Legendary Creature - Human Advisor|4|4|Flying$Whenever you scry or surveil, create a 1/1 colorless Thopter artifact creature token with flying. This ability triggers only once each turn.|
 Teyo, Lightshield Expert|Reality Fracture|204|U|{1}{W}|Legendary Creature - Human Cleric|1|1|Flash$When Teyo enters, target permanent you control gains hexproof until end of turn. Put a +1/+1 counter on it if it's a creature. Put a loyalty counter on it if it's a planeswalker.|
 Thalia, the Survivor|Reality Fracture|205|U|{3}{W}|Legendary Creature - Human Soldier|3|4|Lifelink$Noncreature spells your opponents cast cost {1} more to cast.|
+Tomik, Orzhov Lawmage|Reality Fracture|206|U|{1}{W}|Legendary Creature - Human Advisor|2|1|Flying$Planeswalkers you control have "No more than one creature can attack this planeswalker each combat."${T}: Target creature with a +1/+1 counter on it gains flying until end of turn.|
 Way of the Healer|Reality Fracture|207|U|{3}{W}|Legendary Enchantment|||When Way of the Healer enters, empower Jace 5.$Planeswalkers you control have "[−2]: Create a 2/2 colorless Wizard Soldier creature token named Cadet. Surveil 1."|
 Way of the Mentor|Reality Fracture|208|U|{2}{W}|Legendary Enchantment|||When Way of the Mentor enters, empower Jace 5.$Whenever you gain life, put a loyalty counter on each planeswalker you control.|
 Yoshimaru, Beloved Companion|Reality Fracture|209|U|{2}{W}|Legendary Creature - Dog|2|2|If one or more +1/+1 counters would be put on a creature you control, that many plus one +1/+1 counters are put on it instead.${6}: Put a +1/+1 counter on target legendary creature.|
@@ -64775,6 +64778,7 @@ Marwyn, the Clearcutter|Reality Fracture|249|U|{R}|Legendary Creature - Elf Warr
 Pia, Determined Rebuilder|Reality Fracture|250|U|{2}{R}|Legendary Creature - Human Artificer|2|2|When Pia enters, create a 1/1 colorless Thopter artifact creature token with flying.${5}{R}: Target creature gets +X/+0 until end of turn, where X is the number of artifacts you control.|
 Samut, Hazoret's Champion|Reality Fracture|251|R|{1}{R}|Legendary Creature - Human Warrior Cleric|2|2|Creatures you control have haste.|
 Tetsuko Umezawa, Pursuer|Reality Fracture|252|U|{3}{R}|Legendary Creature - Human Mercenary|2|4|Double strike$Prowess$Whenever a creature an opponent controls with power or toughness 1 or less blocks, Tetsuko Umezawa deals 1 damage to that creature's controller.|
+Tomik, Izzet Sparkmage|Reality Fracture|253|U|{1}{R}|Legendary Creature - Human Wizard|1|2|Prowess$If a source you control would deal noncombat damage to an opponent or a permanent an opponent controls, it deals that much damage plus 1 instead.|
 Way of the Pyromancer|Reality Fracture|254|U|{1}{R}|Legendary Enchantment|||When Way of the Pyromancer enters, empower Jace 2.$Planeswalkers you control have "[+1]: Add {R}."|
 Way of the Warlord|Reality Fracture|255|U|{2}{R}|Legendary Enchantment|||When Way of the Warlord enters, empower Jace 5.$Planeswalkers you control have "[−4]: This planeswalker deals 2 damage to up to one target creature or planeswalker and 2 damage to target player."|
 Winter, Team Player|Reality Fracture|256|U|{4}{R}|Legendary Creature - Human Warrior|3|3|Convoke$Whenever you cast a noncreature spell, creatures you control get +1/+0 until end of turn.|
