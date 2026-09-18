@@ -230,6 +230,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Rockfall Vale", 186, Rarity.RARE, mage.cards.r.RockfallVale.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rockfall Vale", 400, Rarity.RARE, mage.cards.r.RockfallVale.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ruric Thar, Biomagus", 219, Rarity.UNCOMMON, mage.cards.r.RuricTharBiomagus.class));
+        cards.add(new SetCardInfo("Saheeli, Consul of Oversight", 203, Rarity.UNCOMMON, mage.cards.s.SaheeliConsulOfOversight.class));
         cards.add(new SetCardInfo("Saheeli, Jewel of Avishkar", 275, Rarity.UNCOMMON, mage.cards.s.SaheeliJewelOfAvishkar.class));
         cards.add(new SetCardInfo("Samut, Hazoret's Champion", 251, Rarity.RARE, mage.cards.s.SamutHazoretsChampion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Samut, Hazoret's Champion", 311, Rarity.RARE, mage.cards.s.SamutHazoretsChampion.class, NON_FULL_USE_VARIOUS));
