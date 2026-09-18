@@ -95,7 +95,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Flickering Hound", 359, Rarity.RARE, mage.cards.f.FlickeringHound.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Flickering Hound", 7, Rarity.RARE, mage.cards.f.FlickeringHound.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 289, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Forest", 390, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 290, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 394, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 395, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 396, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
