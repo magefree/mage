@@ -3069,6 +3069,7 @@ public class ScryfallImageSupportTokens {
             put("FRA/Emblem Chandra/2", "https://api.scryfall.com/cards/tfra/18?format=image");
 
             // FRC
+            put("FRC/Gingerbrute", "https://api.scryfall.com/cards/tfrc/12/en?format=image");
             put("FRC/Incubator", "https://api.scryfall.com/cards/tfrc/13/en?format=image&face=front");
             put("FRC/Phyrexian", "https://api.scryfall.com/cards/tfrc/13/en?format=image&face=back");
 

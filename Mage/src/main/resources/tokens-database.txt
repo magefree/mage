@@ -3102,6 +3102,7 @@
 |TOK:FRA|Treasure||TreasureToken|
 
 # FRC
+|TOK:FRC|Gingerbrute||GingerbruteToken|
 |TOK:FRC|Incubator||IncubatorToken|
 |TOK:FRC|Phyrexian||Phyrexian00Token|
 
