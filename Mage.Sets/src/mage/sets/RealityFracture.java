@@ -118,6 +118,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Geist of Saint Thalia", 214, Rarity.UNCOMMON, mage.cards.g.GeistOfSaintThalia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Geist of Saint Thalia", 299, Rarity.UNCOMMON, mage.cards.g.GeistOfSaintThalia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Generous Revival", 8, Rarity.UNCOMMON, mage.cards.g.GenerousRevival.class));
+        cards.add(new SetCardInfo("Germinate Recruits", 334, Rarity.RARE, mage.cards.g.GerminateRecruits.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Germinate Recruits", 9, Rarity.RARE, mage.cards.g.GerminateRecruits.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ghalta the Immovable", 197, Rarity.UNCOMMON, mage.cards.g.GhaltaTheImmovable.class));
         cards.add(new SetCardInfo("Ghalta the Unstoppable", 260, Rarity.UNCOMMON, mage.cards.g.GhaltaTheUnstoppable.class));
         cards.add(new SetCardInfo("Gideon's Memorial", 198, Rarity.RARE, mage.cards.g.GideonsMemorial.class, NON_FULL_USE_VARIOUS));
