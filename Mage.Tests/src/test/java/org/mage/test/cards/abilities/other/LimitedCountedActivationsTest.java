@@ -19,7 +19,7 @@ public class LimitedCountedActivationsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         // Flying
         // {R}: Dragon Whelp gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice Dragon Whelp at the beginning of the next end step.
-        addCard(Zone.BATTLEFIELD, playerA, "Dragon Whelp", 1); // 3/3
+        addCard(Zone.BATTLEFIELD, playerA, "Dragon Whelp", 1); // 2/3
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: ");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: ");
@@ -41,7 +41,7 @@ public class LimitedCountedActivationsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         // Flying
         // {R}: Dragon Whelp gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice Dragon Whelp at the beginning of the next end step.
-        addCard(Zone.BATTLEFIELD, playerA, "Dragon Whelp", 1); // 3/3
+        addCard(Zone.BATTLEFIELD, playerA, "Dragon Whelp", 1); // 2/3
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: ");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: ");
@@ -65,7 +65,7 @@ public class LimitedCountedActivationsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
         // Flying
         // {R}: Dragon Whelp gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice Dragon Whelp at the beginning of the next end step.
-        addCard(Zone.BATTLEFIELD, playerA, "Dragon Whelp", 1); // 3/3
+        addCard(Zone.BATTLEFIELD, playerA, "Dragon Whelp", 1); // 2/3
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: ");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: ");
@@ -91,7 +91,7 @@ public class LimitedCountedActivationsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         // Flying
         // {R}: Dragon Whelp gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice Dragon Whelp at the beginning of the next end step.
-        addCard(Zone.BATTLEFIELD, playerA, "Dragon Whelp", 1); // 3/3
+        addCard(Zone.BATTLEFIELD, playerA, "Dragon Whelp", 1); // 2/3
         // Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to its converted mana cost.
         addCard(Zone.HAND, playerA, "Reanimate", 1);
         // Target creature gains haste until end of turn.
@@ -135,7 +135,7 @@ public class LimitedCountedActivationsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         // Flying
         // {R}: Dragon Whelp gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice Dragon Whelp at the beginning of the next end step.
-        addCard(Zone.BATTLEFIELD, playerA, "Dragon Whelp", 1); // 3/3
+        addCard(Zone.BATTLEFIELD, playerA, "Dragon Whelp", 1); // 2/3
         // Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to its converted mana cost.
         addCard(Zone.HAND, playerA, "Reanimate", 1);
         // Target creature gains haste until end of turn.
