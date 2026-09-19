@@ -325,7 +325,7 @@ public class ModernCardRenderer extends CardRenderer {
                 cardView.getArtRect() == ArtRect.FULL_LENGTH_RIGHT ||
                 cardView.getArtRect() == ArtRect.RETRO) {
             rect = cardView.getArtRect().rect;
-        } else if (cardView.getFrameStyle().isFullArt() || (cardView.isToken())) {
+        } else if ((cardView.getFrameStyle() != null && cardView.getFrameStyle().isFullArt()) || (cardView.isToken())) {
             rect = new Rectangle2D.Float(.079f, .11f, .84f, .63f);
         } else {
             rect = ArtRect.NORMAL.rect;
@@ -336,7 +336,7 @@ public class ModernCardRenderer extends CardRenderer {
     private float getTypeLineYFrac() {
         if (cardView.isToken() && cardView.getCardNumber().isEmpty()) {
             return TYPE_LINE_Y_FRAC_TOKEN;
-        } else if (cardView.getFrameStyle().isFullArt()) {
+        } else if (cardView.getFrameStyle() != null && cardView.getFrameStyle().isFullArt()) {
             return TYPE_LINE_Y_FRAC_FULL_ART;
         } else if (cardView.getArtRect() == ArtRect.FULL_LENGTH_LEFT ||
                 cardView.getArtRect() == ArtRect.FULL_LENGTH_RIGHT) {

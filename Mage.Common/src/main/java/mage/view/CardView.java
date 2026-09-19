@@ -79,8 +79,8 @@ public class CardView extends SimpleCardView {
     protected SubTypes subTypes;
     protected List<SuperType> superTypes;
     protected ObjectColor color;
-    protected ObjectColor frameColor;
-    protected FrameStyle frameStyle;
+    protected ObjectColor frameColor = new ObjectColor();
+    protected FrameStyle frameStyle = FrameStyle.M15_NORMAL;
     // can combine multiple costs for MockCard from deck editor or db (left/right, card/adventure)
     protected List<String> manaCostLeftStr;
     protected List<String> manaCostRightStr;
@@ -208,9 +208,9 @@ public class CardView extends SimpleCardView {
         this.imageFileName = cardView.imageFileName;
         this.imageNumber = cardView.imageNumber;
 
-        this.color = cardView.color.copy();
-        this.frameColor = cardView.frameColor.copy();
-        this.frameStyle = cardView.frameStyle;
+        this.color = cardView.color != null ? cardView.color.copy() : new ObjectColor();
+        this.frameColor = cardView.frameColor != null ? cardView.frameColor.copy() : new ObjectColor();
+        this.frameStyle = cardView.frameStyle != null ? cardView.frameStyle : FrameStyle.M15_NORMAL;
         this.manaCostLeftStr = cardView.manaCostLeftStr;
         this.manaCostRightStr = cardView.manaCostRightStr;
         this.manaValue = cardView.manaValue;
@@ -659,10 +659,10 @@ public class CardView extends SimpleCardView {
             }
 
             // Frame color
-            this.frameColor = card.getFrameColor(game).copy();
+            this.frameColor = card.getFrameColor(game) != null ? card.getFrameColor(game).copy() : new ObjectColor();
 
             // Frame style
-            this.frameStyle = card.getFrameStyle();
+            this.frameStyle = card.getFrameStyle() != null ? card.getFrameStyle() : FrameStyle.M15_NORMAL;
 
             // Get starting loyalty
             this.startingLoyalty = CardUtil.convertLoyaltyOrDefense(card.getStartingLoyalty());
@@ -877,9 +877,9 @@ public class CardView extends SimpleCardView {
             artRect = ArtRect.FULL_LENGTH_RIGHT;
         }
         // Frame color
-        this.frameColor = object.getFrameColor(game).copy();
+        this.frameColor = object.getFrameColor(game) != null ? object.getFrameColor(game).copy() : new ObjectColor();
         // Frame style
-        this.frameStyle = object.getFrameStyle();
+        this.frameStyle = object.getFrameStyle() != null ? object.getFrameStyle() : FrameStyle.M15_NORMAL;
         // Starting loyalty
         this.startingLoyalty = CardUtil.convertLoyaltyOrDefense(object.getStartingLoyalty());
         // Starting defense
@@ -888,6 +888,8 @@ public class CardView extends SimpleCardView {
 
     protected CardView() {
         super(null, "", "0", false, true);
+        this.frameColor = new ObjectColor();
+        this.frameStyle = FrameStyle.M15_NORMAL;
     }
 
     public CardView(EmblemView emblem) {
@@ -1276,11 +1278,11 @@ public class CardView extends SimpleCardView {
     }
 
     public ObjectColor getFrameColor() {
-        return frameColor;
+        return frameColor != null ? frameColor : new ObjectColor();
     }
 
     public FrameStyle getFrameStyle() {
-        return frameStyle;
+        return frameStyle != null ? frameStyle : FrameStyle.M15_NORMAL;
     }
 
     public String getManaCostStr() {
