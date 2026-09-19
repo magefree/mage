@@ -81,6 +81,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Denzilore Fatehold", 418, Rarity.MYTHIC, mage.cards.d.DenziloreFatehold.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deserted Beach", 176, Rarity.RARE, mage.cards.d.DesertedBeach.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deserted Beach", 397, Rarity.RARE, mage.cards.d.DesertedBeach.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Desperate Futurescribe", 129, Rarity.UNCOMMON, mage.cards.d.DesperateFuturescribe.class));
         cards.add(new SetCardInfo("Diviner of Victory", 28, Rarity.RARE, mage.cards.d.DivinerOfVictory.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Diviner of Victory", 425, Rarity.RARE, mage.cards.d.DivinerOfVictory.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Divining Duelist", 29, Rarity.COMMON, mage.cards.d.DiviningDuelist.class));
