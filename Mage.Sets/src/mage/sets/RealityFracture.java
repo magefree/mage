@@ -99,6 +99,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Fatehold Chronologist", 133, Rarity.COMMON, mage.cards.f.FateholdChronologist.class));
         cards.add(new SetCardInfo("Flickering Hound", 359, Rarity.RARE, mage.cards.f.FlickeringHound.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Flickering Hound", 7, Rarity.RARE, mage.cards.f.FlickeringHound.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Flourishing Grapple", 102, Rarity.UNCOMMON, mage.cards.f.FlourishingGrapple.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Flourishing Grapple", 372, Rarity.UNCOMMON, mage.cards.f.FlourishingGrapple.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 289, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 290, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 394, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
