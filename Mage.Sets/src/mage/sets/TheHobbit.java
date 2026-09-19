@@ -186,6 +186,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Nori, Teller of Tales", 161, Rarity.COMMON, mage.cards.n.NoriTellerOfTales.class));
         cards.add(new SetCardInfo("Oin the Brave", 106, Rarity.COMMON, mage.cards.o.OinTheBrave.class));
         cards.add(new SetCardInfo("Old Fat Spider", 132, Rarity.UNCOMMON, mage.cards.o.OldFatSpider.class));
+        cards.add(new SetCardInfo("Old Fat Spider Can't See Me", 50, Rarity.UNCOMMON, mage.cards.o.OldFatSpiderCantSeeMe.class));
         cards.add(new SetCardInfo("Old Thrush", 2, Rarity.COMMON, mage.cards.o.OldThrush.class));
         cards.add(new SetCardInfo("Orcrist, Goblin-cleaver", 177, Rarity.MYTHIC, mage.cards.o.OrcristGoblinCleaver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Orcrist, Goblin-cleaver", 236, Rarity.MYTHIC, mage.cards.o.OrcristGoblinCleaver.class, NON_FULL_USE_VARIOUS));
