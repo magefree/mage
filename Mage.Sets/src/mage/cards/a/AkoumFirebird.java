@@ -3,10 +3,9 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksEachCombatStaticAbility;
+import mage.abilities.common.LandfallAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -16,9 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -43,7 +39,7 @@ public final class AkoumFirebird extends CardImpl {
 
         // <i>Landfall</i>-Whenever a land you control enters, you may pay {4}{R}{R}.
         // If you do, return Akoum Firebird from your graveyard to the battlefield.
-        this.addAbility(new AkoumFirebirdLandfallAbility(new DoIfCostPaid(
+        this.addAbility(new LandfallAbility(Zone.GRAVEYARD, new DoIfCostPaid(
                 new ReturnSourceFromGraveyardToBattlefieldEffect(false, false), new ManaCostsImpl<>("{4}{R}{R}")), false));
     }
 
@@ -54,37 +50,5 @@ public final class AkoumFirebird extends CardImpl {
     @Override
     public AkoumFirebird copy() {
         return new AkoumFirebird(this);
-    }
-}
-
-class AkoumFirebirdLandfallAbility extends TriggeredAbilityImpl {
-
-    public AkoumFirebirdLandfallAbility(Effect effect, boolean optional) {
-        this(Zone.GRAVEYARD, effect, optional);
-        setTriggerPhrase("<i>Landfall</i> &mdash; Whenever a land you control enters, " );
-    }
-
-    public AkoumFirebirdLandfallAbility (Zone zone, Effect effect, boolean optional ) {
-        super(zone, effect, optional);
-    }
-
-    private AkoumFirebirdLandfallAbility(final AkoumFirebirdLandfallAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        return permanent != null && permanent.isLand(game) && permanent.isControlledBy(this.controllerId);
-    }
-
-    @Override
-    public AkoumFirebirdLandfallAbility copy() {
-        return new AkoumFirebirdLandfallAbility(this);
     }
 }
