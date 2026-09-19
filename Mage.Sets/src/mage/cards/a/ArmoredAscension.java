@@ -13,6 +13,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -24,11 +25,10 @@ import java.util.UUID;
  */
 public final class ArmoredAscension extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Plains you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Plains you control");
 
     static {
         filter.add(SubType.PLAINS.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
