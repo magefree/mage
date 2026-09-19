@@ -37,6 +37,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Apex Witchstalker", 48, Rarity.COMMON, mage.cards.a.ApexWitchstalker.class));
         cards.add(new SetCardInfo("Arcane Amphisbaena", 97, Rarity.COMMON, mage.cards.a.ArcaneAmphisbaena.class));
         cards.add(new SetCardInfo("Archive Arbiter", 167, Rarity.UNCOMMON, mage.cards.a.ArchiveArbiter.class));
+        cards.add(new SetCardInfo("Arni, Renowned Champion", 243, Rarity.UNCOMMON, mage.cards.a.ArniRenownedChampion.class));
         cards.add(new SetCardInfo("Artifist Acumen", 73, Rarity.COMMON, mage.cards.a.ArtifistAcumen.class));
         cards.add(new SetCardInfo("Avatar of Burgeoning Echoes", 122, Rarity.MYTHIC, mage.cards.a.AvatarOfBurgeoningEchoes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avatar of Burgeoning Echoes", 348, Rarity.MYTHIC, mage.cards.a.AvatarOfBurgeoningEchoes.class, NON_FULL_USE_VARIOUS));
