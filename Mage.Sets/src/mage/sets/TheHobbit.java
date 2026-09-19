@@ -217,6 +217,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Reverent Howl", 81, Rarity.COMMON, mage.cards.r.ReverentHowl.class));
         cards.add(new SetCardInfo("Riddles in the Dark", 292, Rarity.RARE, mage.cards.r.RiddlesInTheDark.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Riddles in the Dark", 53, Rarity.RARE, mage.cards.r.RiddlesInTheDark.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Roads Go Ever, Ever On", 25, Rarity.RARE, mage.cards.r.RoadsGoEverEverOn.class));
         cards.add(new SetCardInfo("Roll-Roll-Roll-Roll", 54, Rarity.RARE, mage.cards.r.RollRollRollRoll.class));
         cards.add(new SetCardInfo("Settle the Wreckage", 26, Rarity.RARE, mage.cards.s.SettleTheWreckage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Settle the Wreckage", 288, Rarity.RARE, mage.cards.s.SettleTheWreckage.class, NON_FULL_USE_VARIOUS));
