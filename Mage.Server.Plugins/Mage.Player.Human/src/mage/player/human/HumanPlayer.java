@@ -93,6 +93,9 @@ public class HumanPlayer extends PlayerImpl {
     // * - CALL thread: on closed response - waiting open status of player's response object (if it's too long then cancel the answer)
     // * - CALL thread: on opened response - save answer to player's response object and notify GAME thread about it by response.notifyAll
     // * - GAME thread: on notify from response - check new answer value and process it (if it bad then repeat and wait the next one);
+    // 
+    // There are special async commands that can income at any time like concede.
+    // It's save in sending player response, but processing by any GAME thread any any player priority
     private transient Boolean responseOpenedForAnswer = false; // GAME thread waiting new answer
     private transient long responseLastWaitingThreadId = 0;
     private final transient PlayerResponse response; // data receiver from a client side (must be shared for one player between multiple clients)
@@ -326,15 +329,22 @@ public class HumanPlayer extends PlayerImpl {
         boolean loop = true;
         while (loop) {
             // start waiting for next answer
-            response.clear();
+            response.resetAnswers();
             response.setActiveAction(game, DebugUtil.getMethodNameWithSource(1, "method"));
             game.resumeTimer(getTurnControlledBy());
             responseOpenedForAnswer = true;
 
             loop = false;
-            synchronized (response) { // TODO: synchronized response smells bad here, possible deadlocks? Need research
+            synchronized (response) {
                 try {
-                    response.wait(); // start waiting a response.notifyAll command from CALL thread (client answer)
+                    // async command can come before open, so make sure it will be processing
+                    // it's fix race condition bugs with concede lost (related to test lab, but also for real games with slow watchers)
+                    if (!response.hasAnswer() && !response.hasAsyncCommand()) {
+                        // start waiting a response.notifyAll command from CALL thread (client answer)
+                        response.wait();
+                    } else {
+                        // continue immediately to process async commands (it will return to wait after finish)
+                    }
                 } catch (InterruptedException ignore) {
                 } finally {
                     responseOpenedForAnswer = false;
@@ -348,11 +358,17 @@ public class HumanPlayer extends PlayerImpl {
                 logger.info(response.toString());
             }
 
+            // async commands can be lost on two parallel answers of the same player
+            // like boolean (answer) + concede in 1 ms, but it's ok and can be reproduceable only by test lab
+            // so don't fix a race condition here to keep simple code
+
             // async command: concede by any player
             // game recived immediately response on OTHER player concede -- need to process end game and continue to wait
             // can come as single mark or with active user response
             if (response.getAsyncWantConcede()) {
-                response.resetAsyncWantConcede();
+                // run concede of any player
+                // it's safe to reset all concede marks cause conceding players store in game's data
+                resetAllWantConcedeCommands(game);
                 ((GameImpl) game).checkConcede();
                 if (game.hasEnded()) {
                     return;
@@ -369,8 +385,9 @@ public class HumanPlayer extends PlayerImpl {
             // async command: cheat by current player
             // see details in above's getAsyncWantConcede
             if (response.getAsyncWantCheat()) {
-                response.resetAsyncWantCheat();
-                // run cheats
+                // run cheats of any player
+                // it's safe to reset all cheat marks cause only one cheat at the same time allow
+                resetAllWantCheatCommands(game);
                 SystemUtil.executeCheatCommands(game, null, this);
                 // force to game update for new possible data
                 game.fireUpdatePlayersEvent();
@@ -392,6 +409,24 @@ public class HumanPlayer extends PlayerImpl {
         if (recordingMacro && !macroTriggeredSelectionFlag) {
             actionQueueSaved.add(new PlayerResponse(response));
         }
+    }
+
+    private void resetAllWantConcedeCommands(Game game) {
+        // clear async marks from all players
+        game.getPlayers().values().stream()
+            .map(player -> player.getRealPlayer())
+            .filter(HumanPlayer.class::isInstance)
+            .map(HumanPlayer.class::cast)
+            .forEach(player -> player.response.resetAsyncWantConcede());
+    }
+
+    private void resetAllWantCheatCommands(Game game) {
+        // clear async marks from all players
+        game.getPlayers().values().stream()
+            .map(player -> player.getRealPlayer())
+            .filter(HumanPlayer.class::isInstance)
+            .map(HumanPlayer.class::cast)
+            .forEach(player -> player.response.resetAsyncWantCheat());
     }
 
     private boolean canCallFeedback(Game game) {
