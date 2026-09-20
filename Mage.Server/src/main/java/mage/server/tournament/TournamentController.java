@@ -351,11 +351,12 @@ public class TournamentController {
 
     public void timeout(UUID userId) {
         if (userPlayerMap.containsKey(userId)) {
-            TournamentPlayer tournamentPlayer = tournament.getPlayer(userPlayerMap.get(userId));
+            UUID playerId = userPlayerMap.get(userId);
+            TournamentPlayer tournamentPlayer = tournament.getPlayer(playerId);
             if (tournamentPlayer.getDeck() != null) {
                 DeckValidator deckValidator = DeckValidatorFactory.instance.createDeckValidator(tournament.getOptions().getMatchOptions().getDeckType());
                 int deckMinSize = deckValidator != null ? deckValidator.getDeckMinSize() : 40;
-                tournament.autoSubmit(userPlayerMap.get(userId), tournamentPlayer.generateDeck(deckMinSize));
+                tournament.autoSubmit(playerId, tournamentPlayer.generateDeck(deckMinSize));
             } else {
                 StringBuilder sb = new StringBuilder();
                 managerFactory.userManager().getUser(userId).ifPresent(user
@@ -366,6 +367,7 @@ public class TournamentController {
                 tournamentPlayer.setEliminated();
                 tournamentPlayer.setStateInfo("No deck for auto submit");
             }
+            managerFactory.userManager().getUser(userId).ifPresent(user -> user.removeConstructing(playerId));
         }
     }
 
