@@ -8,7 +8,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -33,8 +32,7 @@ public final class AsForetold extends CardImpl {
         addAbility(
                 new BeginningOfUpkeepTriggeredAbility(
                         new AddCountersSourceEffect(
-                                CounterType.TIME.createInstance(),
-                                StaticValue.get(1)), false
+                                CounterType.TIME.createInstance()), false
                 ));
 
         // Once each turn, you may pay {0} rather than pay the mana cost for a spell you cast with converted mana cost X or less, where X is the number of time counters on As Foretold.
