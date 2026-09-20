@@ -94,6 +94,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Essence Burn", 369, Rarity.UNCOMMON, mage.cards.e.EssenceBurn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Essence Burn", 82, Rarity.UNCOMMON, mage.cards.e.EssenceBurn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Extended Absence", 54, Rarity.COMMON, mage.cards.e.ExtendedAbsence.class));
+        cards.add(new SetCardInfo("Eye of Jace", 170, Rarity.UNCOMMON, mage.cards.e.EyeOfJace.class));
         cards.add(new SetCardInfo("Face Yourself", 370, Rarity.RARE, mage.cards.f.FaceYourself.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Face Yourself", 83, Rarity.RARE, mage.cards.f.FaceYourself.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fatehold Annex", 177, Rarity.COMMON, mage.cards.f.FateholdAnnex.class));
