@@ -44,7 +44,7 @@ public final class GateSmasher extends CardImpl {
         this.addAbility(ability);
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), new TargetPermanent(filter.copy().add(TargetController.YOU.getControllerPredicate())), false));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
     private GateSmasher(final GateSmasher card) {
