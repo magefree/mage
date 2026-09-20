@@ -72,6 +72,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Curse-Marred Demon", 79, Rarity.RARE, mage.cards.c.CurseMarredDemon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Danitha, Spear of Agony", 227, Rarity.UNCOMMON, mage.cards.d.DanithaSpearOfAgony.class));
         cards.add(new SetCardInfo("Danitha, Sword of Hope", 196, Rarity.UNCOMMON, mage.cards.d.DanithaSwordOfHope.class));
+        cards.add(new SetCardInfo("Dark Matter Manipulator", 340, Rarity.RARE, mage.cards.d.DarkMatterManipulator.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dark Matter Manipulator", 52, Rarity.RARE, mage.cards.d.DarkMatterManipulator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Darklight Phoenix", 325, Rarity.MYTHIC, mage.cards.d.DarklightPhoenix.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Darklight Phoenix", 444, Rarity.MYTHIC, mage.cards.d.DarklightPhoenix.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Darklight Phoenix", 453, Rarity.MYTHIC, mage.cards.d.DarklightPhoenix.class, NON_FULL_USE_VARIOUS));
