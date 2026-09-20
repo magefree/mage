@@ -154,6 +154,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Hexhaven Invigorator", 330, Rarity.MYTHIC, mage.cards.h.HexhavenInvigorator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hexhaven Invigorator", 458, Rarity.MYTHIC, mage.cards.h.HexhavenInvigorator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Icy Reception", 30, Rarity.COMMON, mage.cards.i.IcyReception.class));
+        cards.add(new SetCardInfo("Infinite Coursework", 31, Rarity.COMMON, mage.cards.i.InfiniteCoursework.class));
         cards.add(new SetCardInfo("Ingris Stingerquill", 137, Rarity.MYTHIC, mage.cards.i.IngrisStingerquill.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ingris Stingerquill", 351, Rarity.MYTHIC, mage.cards.i.IngrisStingerquill.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ingris Stingerquill", 409, Rarity.MYTHIC, mage.cards.i.IngrisStingerquill.class, NON_FULL_USE_VARIOUS));
