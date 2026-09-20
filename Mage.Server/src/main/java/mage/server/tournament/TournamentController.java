@@ -46,7 +46,7 @@ public class TournamentController {
     private final ManagerFactory managerFactory;
     private final UUID chatId;
     private final UUID tableId;
-    private boolean started = false;
+    private volatile boolean started = false;
     private final Tournament tournament;
     private ConcurrentMap<UUID, UUID> userPlayerMap = new ConcurrentHashMap<>();
     private final ConcurrentMap<UUID, TournamentSession> tournamentSessions = new ConcurrentHashMap<>();
@@ -177,6 +177,7 @@ public class TournamentController {
 
     private synchronized void checkStart() {
         if (!started && allJoined()) {
+            started = true;
             managerFactory.threadExecutor().getTourneyExecutor().execute(this::startTournament);
         }
     }
@@ -202,7 +203,6 @@ public class TournamentController {
                 return;
             }
         }
-        started = true;
         logger.debug("Tournament starts (all players joined): " + tournament.getId() + " - " + tournament.getTournamentType().toString());
         tournament.nextStep();
     }
