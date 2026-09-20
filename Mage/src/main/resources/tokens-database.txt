@@ -162,8 +162,8 @@
 |EMBLEM:ECL|Emblem Oko||OkoShadowmoorScionEmblem|
 |EMBLEM:SOS|Emblem Dellian||ProfessorDellianFelEmblem|
 |EMBLEM:FRA|Emblem Ajani||AjaniResoluteEmblem|
-|EMBLEM:FRA|Emblem Chandra||ChandraChillOfComplianceEmblem|
-
+|EMBLEM:FRA|Emblem Chandra|1|ChandraChillOfComplianceEmblem|
+|EMBLEM:FRA|Emblem Chandra|2|ChandraTorchOfDefianceEmblem|
 
 # ALL PLANES
 # Usage hints:
@@ -2685,6 +2685,24 @@
 |TOK:FDN|Treasure||TreasureToken|
 |TOK:FDN|Zombie||ZombieToken|
 
+# FDC
+|TOK:FDC|Angel|1|Angel33Token|
+|TOK:FDC|Angel|2|AngelToken|
+|TOK:FDC|Beast||BeastToken|
+|TOK:FDC|Clue||ClueArtifactToken|
+|TOK:FDC|Dragon|1|DragonToken|
+|TOK:FDC|Dragon|2|Dragon55Token|
+|TOK:FDC|Dragon|3|Dragon66Token|
+|TOK:FDC|Myr||MyrToken|
+|TOK:FDC|Phyrexian Beast||PhyrexianBeastToken|
+|TOK:FDC|Phyrexian Germ||PhyrexianGermToken|
+|TOK:FDC|Spider||SpiderToken|
+|TOK:FDC|Spirit||SpiritWhiteToken|
+|TOK:FDC|Thopter||ThopterColorlessToken|
+|TOK:FDC|Treasure||TreasureToken|
+|TOK:FDC|Zombie Knight||ZombieKnightToken|
+|TOK:FDC|Zombie||ZombieToken|
+
 # INR
 |TOK:INR|Blood||BloodToken|
 |TOK:INR|Clue||ClueArtifactToken|
@@ -3085,9 +3103,40 @@
 |TOK:HOB|Wolf||WolfToken|
 
 # FRA
+|TOK:FRA|Ajani's Pridemate||AjanisPridemateToken|
+|TOK:FRA|Angel||BlueAngelToken|
+|TOK:FRA|Beast||Beast44TrampleToken|
+|TOK:FRA|Cadet||CadetToken|
+|TOK:FRA|Dragon||Dragon55Token|
+# |TOK:FRA|Forest Tentacle||ForestTentacleToken|
 |TOK:FRA|Heartwood||HeartwoodToken|
 |TOK:FRA|Illusion||Illusion11Token|
 |TOK:FRA|Jace||JacePlaneswalkerToken|
+# |TOK:FRA|Leviathan||Leviathan88Token|
+|TOK:FRA|Lotus||LotusToken|
+|TOK:FRA|Mowu||MowuToken|
+|TOK:FRA|Sculpture Treasure||SculptureTreasureToken|
+|TOK:FRA|Thopter||ThopterColorlessToken|
+|TOK:FRA|Treasure||TreasureToken|
+
+# FRC
+|TOK:FRC|Angel||AngelToken|
+|TOK:FRC|Citizen||CitizenGreenWhiteToken|
+|TOK:FRC|Gingerbrute||GingerbruteToken|
+|TOK:FRC|Goblin||GoblinToken|
+|TOK:FRC|Incubator||IncubatorToken|
+|TOK:FRC|Insect||InsectWhiteToken|
+|TOK:FRC|Kobolds of Kher Keep||KherKeepKoboldToken|
+|TOK:FRC|Map||MapToken|
+|TOK:FRC|Myr||MyrToken|
+|TOK:FRC|Phyrexian Mite||PhyrexianMiteToken|
+|TOK:FRC|Phyrexian||Phyrexian00Token|
+|TOK:FRC|Rogue||RogueToken|
+|TOK:FRC|Shark||SharkToken|
+|TOK:FRC|Solder||SoldierToken|
+|TOK:FRC|Spirit||SpiritWhiteToken|
+|TOK:FRC|Warrior||WarriorToken|
+|TOK:FRC|Zombie Army||ZombieArmyToken|
 
 # TRK
 |TOK:TRK|Human||Human01Token|
