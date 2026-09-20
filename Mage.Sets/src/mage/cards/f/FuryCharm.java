@@ -1,30 +1,26 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.counter.RemoveCounterTargetEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPermanentOrSuspendedCard;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +53,7 @@ public final class FuryCharm extends CardImpl {
         mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
         // or remove two time counters from target permanent or suspended card.
-        mode = new Mode(new FuryCharmRemoveCounterEffect());
+        mode = new Mode(new RemoveCounterTargetEffect(CounterType.TIME.createInstance(2)));
         mode.addTarget(new TargetPermanentOrSuspendedCard());
         this.getSpellAbility().addMode(mode);
     }
@@ -69,37 +65,5 @@ public final class FuryCharm extends CardImpl {
     @Override
     public FuryCharm copy() {
         return new FuryCharm(this);
-    }
-}
-
-class FuryCharmRemoveCounterEffect extends OneShotEffect {
-
-    FuryCharmRemoveCounterEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "remove two time counters from target permanent or suspended card";
-    }
-
-    private FuryCharmRemoveCounterEffect(final FuryCharmRemoveCounterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FuryCharmRemoveCounterEffect copy() {
-        return new FuryCharmRemoveCounterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (permanent != null) {
-            permanent.removeCounters(CounterType.TIME.getName(), 2, source, game);
-            return true;
-        }
-        Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
-        if (card != null) {
-            card.removeCounters(CounterType.TIME.getName(), 2, source, game);
-            return true;
-        }
-        return false;
     }
 }

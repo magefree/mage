@@ -5,18 +5,15 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.effects.common.counter.RemoveCounterTargetEffect;
 import mage.abilities.keyword.MorphAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterPermanentOrSuspendedCard;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetPermanentOrSuspendedCard;
 
 import java.util.UUID;
@@ -45,11 +42,12 @@ public final class Timebender extends CardImpl {
 
         // When Timebender is turned face up, choose one —
         // Remove two time counters from target permanent or suspended card.
-        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new TimebenderEffect(false));
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(
+                new RemoveCounterTargetEffect(CounterType.TIME.createInstance(2)));
         ability.addTarget(new TargetPermanentOrSuspendedCard());
 
         // Put two time counters on target permanent with a time counter on it or suspended card.
-        Mode mode = new Mode(new TimebenderEffect(true));
+        Mode mode = new Mode(new AddCountersTargetEffect(CounterType.TIME.createInstance(2)));
         mode.addTarget(new TargetPermanentOrSuspendedCard(filter, false));
         ability.addMode(mode);
         this.addAbility(ability);
@@ -63,53 +61,5 @@ public final class Timebender extends CardImpl {
     @Override
     public Timebender copy() {
         return new Timebender(this);
-    }
-}
-
-class TimebenderEffect extends OneShotEffect {
-
-    private final boolean addCounters;
-
-    TimebenderEffect(boolean addCounters) {
-        super(Outcome.Benefit);
-        this.addCounters = addCounters;
-        if (addCounters) {
-            this.staticText = "put two time counters on target permanent with a time counter on it or suspended card";
-        } else {
-            this.staticText = "remove two time counters from target permanent or suspended card";
-        }
-    }
-
-    private TimebenderEffect(final TimebenderEffect effect) {
-        super(effect);
-        this.addCounters = effect.addCounters;
-    }
-
-    @Override
-    public TimebenderEffect copy() {
-        return new TimebenderEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (permanent != null) {
-            if (addCounters) {
-                permanent.addCounters(CounterType.TIME.createInstance(2), source.getControllerId(), source, game);
-            } else {
-                permanent.removeCounters(CounterType.TIME.getName(), 2, source, game);
-            }
-            return true;
-        }
-        Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
-        if (card != null) {
-            if (addCounters) {
-                card.addCounters(CounterType.TIME.createInstance(2), source.getControllerId(), source, game);
-            } else {
-                card.removeCounters(CounterType.TIME.getName(), 2, source, game);
-            }
-            return true;
-        }
-        return false;
     }
 }
