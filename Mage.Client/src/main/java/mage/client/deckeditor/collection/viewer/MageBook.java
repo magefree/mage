@@ -290,6 +290,7 @@ public class MageBook extends JComponent {
                 Object newPlane = cons.newInstance();
                 if (newPlane instanceof Plane) {
                     ((Plane) newPlane).setExpansionSetCode(currentSet);
+                    ((Plane) newPlane).setImageNumber(token.getImageNumber());
                     res.add(newPlane);
                 }
             } catch (Exception e) {
@@ -309,6 +310,7 @@ public class MageBook extends JComponent {
                 Object newDungeon = cons.newInstance();
                 if (newDungeon instanceof Dungeon) {
                     ((Dungeon) newDungeon).setExpansionSetCode(currentSet);
+                    ((Dungeon) newDungeon).setImageNumber(token.getImageNumber());
                     res.add(newDungeon);
                 }
             } catch (Exception e) {
