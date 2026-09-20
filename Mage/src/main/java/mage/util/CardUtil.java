@@ -9,9 +9,6 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SavedDamageValue;
-import mage.abilities.dynamicvalue.common.SavedDiscardValue;
-import mage.abilities.dynamicvalue.common.SavedGainedLifeValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -976,6 +973,9 @@ public final class CardUtil {
         return getSimpleCountersText(amount, "a", "+1/+1");
     }
 
+    /**
+     * @param amount null to use the counter's own count
+     */
     public static String getAddRemoveCountersText(DynamicValue amount, Counter counter, String description, boolean add) {
         boolean targetPlayerGets = add && (description.endsWith("player") || description.endsWith("opponent"));
         StringBuilder sb = new StringBuilder();
@@ -985,15 +985,13 @@ public final class CardUtil {
         } else {
             sb.append(add ? "put " : "remove ");
         }
-        boolean xValue = amount.toString().equals("X");
-        if (xValue) {
-            sb.append("X ").append(counter.getName()).append(" counters");
-        } else if (amount == SavedDamageValue.MANY
-                || amount == SavedGainedLifeValue.MANY
-                || amount == SavedDiscardValue.MANY) {
-            sb.append("that many ").append(counter.getName()).append(" counters");
-        } else {
+        // The counter carries the quantity and its article ("a +1/+1 counter", "two time counters"); a null
+        // amount defers to it. toString() "1" means one per something, so the "for each" clause carries the count.
+        String count = amount == null ? "" : amount.toString();
+        if (count.isEmpty() || "1".equals(count)) {
             sb.append(counter.getDescription());
+        } else {
+            sb.append(count).append(' ').append(counter.getName()).append(" counters");
         }
         if (!targetPlayerGets) {
             sb.append(add ? " on " : " from ");
@@ -1002,8 +1000,9 @@ public final class CardUtil {
             }
             sb.append(description);
         }
-        if (!amount.getMessage().isEmpty()) {
-            sb.append(xValue ? ", where X is " : " for each ").append(amount.getMessage());
+        String message = amount == null ? "" : amount.getMessage();
+        if (!message.isEmpty()) {
+            sb.append(count.contains("X") ? ", where X is " : " for each ").append(message);
         }
         return sb.toString();
     }
