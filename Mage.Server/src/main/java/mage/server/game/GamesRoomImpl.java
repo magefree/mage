@@ -82,6 +82,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
                 if (table.isTournament()) {
                     managerFactory.tournamentManager().removeTournament(table.getTournament().getId());
                 }
+                managerFactory.tableManager().removeTable(table.getId());
                 this.removeTable(table.getId());
             }
         }
