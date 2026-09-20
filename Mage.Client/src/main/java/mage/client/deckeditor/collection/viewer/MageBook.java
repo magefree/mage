@@ -270,6 +270,7 @@ public class MageBook extends JComponent {
                 Object newEmblem = cons.newInstance();
                 if (newEmblem instanceof Emblem) {
                     ((Emblem) newEmblem).setExpansionSetCode(currentSet);
+                    ((Emblem) newEmblem).setImageNumber(token.getImageNumber());
                     res.add(newEmblem);
                 }
             } catch (Exception e) {
