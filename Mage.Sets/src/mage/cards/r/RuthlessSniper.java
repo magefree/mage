@@ -5,7 +5,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.CycleOrDiscardControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
@@ -35,7 +34,6 @@ public final class RuthlessSniper extends CardImpl {
                 new DoIfCostPaid(
                         new AddCountersTargetEffect(
                                 CounterType.M1M1.createInstance(),
-                                StaticValue.get(1),
                                 Outcome.Removal),
                         new ManaCostsImpl<>("{1}")));
         ability.addTarget(new TargetCreaturePermanent());

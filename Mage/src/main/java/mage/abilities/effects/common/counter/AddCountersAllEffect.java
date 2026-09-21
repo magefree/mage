@@ -3,7 +3,6 @@ package mage.abilities.effects.common.counter;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.counters.Counter;
@@ -22,7 +21,7 @@ public class AddCountersAllEffect extends OneShotEffect {
     private final FilterPermanent filter;
 
     public AddCountersAllEffect(Counter counter, FilterPermanent filter) {
-        this(counter, StaticValue.get(0), filter);
+        this(counter, null, filter);
     }
 
     public AddCountersAllEffect(Counter counter, DynamicValue amount, FilterPermanent filter) {
@@ -46,13 +45,9 @@ public class AddCountersAllEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null && counter != null) {
             Counter newCounter = counter.copy();
-            int calculated = amount.calculate(game, source, this);
-            if (!(amount instanceof StaticValue) || calculated > 0) {
-                // If dynamic, or static and set to a > 0 value, we use that instead of the counter's internal amount.
+            if (amount != null) {
                 newCounter.remove(newCounter.getCount());
-                newCounter.add(calculated);
-            } else {
-                // StaticValue 0 -- the default counter has the amount, so no adjustment.
+                newCounter.add(amount.calculate(game, source, this));
             }
 
             if (newCounter.getCount() <= 0) {

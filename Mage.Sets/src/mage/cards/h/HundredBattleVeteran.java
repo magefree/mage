@@ -14,7 +14,6 @@ import mage.abilities.condition.common.CastFromGraveyardSourceCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -56,7 +55,7 @@ public final class HundredBattleVeteran extends CardImpl {
         // You may cast this card from your graveyard. If you do, it enters with a finality counter on it.
         AbilityImpl ability = new MayCastFromGraveyardSourceAbility();
         ability.appendToRule(" If you do, it enters with a finality counter on it.");
-        Effect effect1 = new AddCountersSourceEffect(CounterType.FINALITY.createInstance(), StaticValue.get(1));
+        Effect effect1 = new AddCountersSourceEffect(CounterType.FINALITY.createInstance());
         ability.addSubAbility(new EntersBattlefieldAbility(effect1, CastFromGraveyardSourceCondition.instance, "", "")
                 .setRuleVisible(false));
         this.addAbility(ability);

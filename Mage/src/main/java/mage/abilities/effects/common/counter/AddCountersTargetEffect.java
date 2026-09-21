@@ -4,7 +4,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
@@ -34,7 +33,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
     }
 
     public AddCountersTargetEffect(Counter counter, Outcome outcome) {
-        this(counter, StaticValue.get(0), outcome);
+        this(counter, null, outcome);
     }
 
     public AddCountersTargetEffect(Counter counter, DynamicValue amount, Outcome outcome) {
@@ -57,13 +56,10 @@ public class AddCountersTargetEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null && counter != null) {
             Counter newCounter = counter.copy();
-            int calculated = amount.calculate(game, source, this);
-            if (!(amount instanceof StaticValue) || calculated > 0) {
-                // If dynamic, or static and set to a > 0 value, we use that instead of the counter's internal amount.
+            if (amount != null) {
+                // an amount replaces the counter's own count
                 newCounter.remove(newCounter.getCount());
-                newCounter.add(calculated);
-            } else {
-                // StaticValue 0 -- the default counter has the amount, so no adjustment.
+                newCounter.add(amount.calculate(game, source, this));
             }
 
             if (newCounter.getCount() <= 0) {

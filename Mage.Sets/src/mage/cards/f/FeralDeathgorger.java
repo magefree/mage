@@ -4,7 +4,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -45,7 +44,7 @@ public final class FeralDeathgorger extends OmenCard {
 
         // Dusk Sight
         // Put a +1/+1 counter on up to one target creature. Draw a card.
-        this.getSpellCard().getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(), StaticValue.get(1)));
+        this.getSpellCard().getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         this.getSpellCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
         this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
         this.finalizeOmen();
