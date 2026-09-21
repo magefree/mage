@@ -65,6 +65,8 @@
         <playerType name="Human" jar="mage-player-human-${project.version}.jar" className="mage.player.human.HumanPlayer"/>
         <playerType name="Computer - mad" jar="mage-player-ai-mad-${project.version}.jar" className="mage.player.ai.ComputerPlayerControllableProxy"/>
         <playerType name="Computer - draftbot" jar="mage-player-ai-draftbot-${project.version}.jar" className="mage.player.ai.ComputerDraftPlayer"/>
+        <playerType name="Computer - JevAI" jar="mage-player-jevai-${project.version}.jar" className="mage.player.ai.JevPlayer"/>
+        <playerType name="Computer - JevAI hybrid" jar="mage-player-jevai-${project.version}.jar" className="mage.player.ai.JevHybridPlayer"/>
     </playerTypes>
     <gameTypes>
         <gameType name="Two Player Duel" jar="mage-game-twoplayerduel-${project.version}.jar" className="mage.game.TwoPlayerMatch" typeName="mage.game.TwoPlayerDuelType"/>

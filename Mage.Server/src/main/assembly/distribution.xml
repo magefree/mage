@@ -22,6 +22,7 @@
                 <include>org.mage:mage-player-ai-draftbot</include>
                 <include>org.mage:mage-player-ai-mad</include>
                 <include>org.mage:mage-player-ai-mcts</include>
+                <include>org.mage:mage-player-jevai</include>
                 <include>org.mage:mage-game-commanderduel</include>
                 <include>org.mage:mage-game-freeforall</include>
                 <include>org.mage:mage-game-twoplayerduel</include>
@@ -53,6 +54,7 @@
                 <exclude>org.mage:mage-player-ai-draftbot</exclude>
                 <exclude>org.mage:mage-player-ai-mad</exclude>
                 <exclude>org.mage:mage-player-ai-mcts</exclude>
+                <exclude>org.mage:mage-player-jevai</exclude>
                 <exclude>org.mage:mage-game-commanderduel</exclude>
                 <exclude>org.mage:mage-game-freeforall</exclude>
                 <exclude>org.mage:mage-game-twoplayerduel</exclude>
