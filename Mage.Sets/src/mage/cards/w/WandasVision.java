@@ -52,7 +52,7 @@ public final class WandasVision extends CardImpl {
         WandasVisionEffect() {
             super(Outcome.PlayForFree);
             staticText = "exile cards from the top of your library until you exile a nonland card."
-                    + "You may cast that card without paying its mana cost.";
+                    + " You may cast that card without paying its mana cost.";
         }
 
         private WandasVisionEffect(final WandasVisionEffect effect) {
