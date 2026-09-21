@@ -81,7 +81,7 @@ public final class WandasVision extends CardImpl {
                             .stream()
                             .map(MageObject::getLogName)
                             .collect(Collectors.joining(" or "));
-                    if (!controller.chooseUse(Outcome.PlayForFree, "You may cast that card without paying its mana cost.(" + partsInfo + ")?", source, game)) {
+                    if (!controller.chooseUse(Outcome.PlayForFree, "You may cast that card without paying its mana cost. (" + partsInfo + ")?", source, game)) {
                         break;
                     }
                     castableComponents.forEach(partCard -> game.getState().setValue("PlayFromNotOwnHandZone" + partCard.getId(), Boolean.TRUE));
