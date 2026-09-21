@@ -1,17 +1,9 @@
 package mage.cards.w;
 
-import mage.ApprovingObject;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.CastSecondSpellTriggeredAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -20,9 +12,8 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
+
 
 /**
  *
@@ -64,44 +55,30 @@ public final class WandasVision extends CardImpl {
             return new WandasVisionEffect(this);
         }
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller == null || !controller.getLibrary().hasCards()) {
-                return false;
-            }
-            for (Card card : controller.getLibrary().getCards(game)) {
-                controller.moveCards(card, Zone.EXILED, source, game);
+        private Card getCard(Player player, Cards cards, Game game, Ability source) {
+            for (Card card : player.getLibrary().getCards(game)) {
+                cards.add(card);
+                player.moveCards(card, Zone.EXILED, source, game);
+                game.processAction();
                 if (!card.isLand(game)) {
-                    List<Card> castableComponents = CardUtil.getCastableComponents(card, null, source, controller, game, null, false);
-                    if (castableComponents.isEmpty()) {
-                        break;
-                    }
-                    String partsInfo = castableComponents
-                            .stream()
-                            .map(MageObject::getLogName)
-                            .collect(Collectors.joining(" or "));
-                    if (!controller.chooseUse(Outcome.PlayForFree, "You may cast that card without paying its mana cost. (" + partsInfo + ")?", source, game)) {
-                        break;
-                    }
-                    castableComponents.forEach(partCard -> game.getState().setValue("PlayFromNotOwnHandZone" + partCard.getId(), Boolean.TRUE));
-                    SpellAbility chosenAbility = controller.chooseAbilityForCast(card, game, true);
-                    if (chosenAbility != null) {
-                        Card faceCard = game.getCard(chosenAbility.getSourceId());
-                        if (faceCard != null) {
-                            Costs<Cost> newCosts = new CostsImpl<>();
-                            newCosts.addAll(chosenAbility.getCosts());
-                            controller.setCastSourceIdWithAlternateMana(faceCard.getId(), null, newCosts);
-                            controller.cast(
-                                    chosenAbility, game, true,
-                                    new ApprovingObject(source, game)
-                            );
-                        }
-                    }
-                    castableComponents.forEach(partCard -> game.getState().setValue("PlayFromNotOwnHandZone" + partCard.getId(), null));
-                    break;
+                    return card;
                 }
             }
+            return null;
+        }
+
+        @Override
+        public boolean apply(Game game, Ability source) {
+            Player player = game.getPlayer(source.getControllerId());
+            if (player == null) {
+                return false;
+            }
+            Cards cards = new CardsImpl();
+            Card card = getCard(player, cards, game, source);
+            if (card != null) {
+                CardUtil.castSpellWithAttributesForFree(player, source, game, card);
+                }
+            cards.retainZone(Zone.EXILED, game);
             return true;
         }
     }
