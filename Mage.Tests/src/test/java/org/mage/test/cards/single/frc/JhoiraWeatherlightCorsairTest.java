@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * @author Susucr
+ * @author Riley Jones
  */
 public class JhoiraWeatherlightCorsairTest extends CardTestPlayerBase {
 
@@ -143,6 +143,38 @@ public class JhoiraWeatherlightCorsairTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, jhoira, 1);
         assertLife(playerA, 20);
         assertLibraryCount(playerB, 2);
+    }
+
+    @Test
+    public void test_HistoricAuraWithoutLegalTarget_StaysInLibrary_NoLifeLost() {
+        skipInitShuffling();
+        removeAllCardsFromLibrary(playerB);
+
+        // Zone.LIBRARY - last added card goes to the top of the library
+        addCard(Zone.LIBRARY, playerB, "Grizzly Bears"); // 3rd (bottom)
+        addCard(Zone.LIBRARY, playerB, "Eye of Nidhogg"); // 2nd (legendary aura, "Enchant creature", MV 3)
+        addCard(Zone.LIBRARY, playerB, "Lightning Bolt"); // 1st (top)
+
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 3);
+        addCard(Zone.HAND, playerA, jhoira);
+        addCard(Zone.HAND, playerB, "Murder");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, jhoira);
+        addTarget(playerA, playerB); // Target opponent for ETB
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
+        // Kill Jhoira in response to the ETB trigger so no creature is on the battlefield when it resolves
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Murder", jhoira);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        // 303.4g: Eye of Nidhogg has no legal object to enchant, so it remains in its current zone (library)
+        assertPermanentCount(playerA, "Eye of Nidhogg", 0);
+        assertLife(playerA, 20); // no permanent entered the battlefield, so no life is lost
+        assertLibraryCount(playerB, 3); // Eye of Nidhogg stays in library, Lightning Bolt goes to the bottom
+        assertGraveyardCount(playerA, jhoira, 1);
     }
 
     @Test

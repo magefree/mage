@@ -22,7 +22,7 @@ import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author Susucr
+ * @author Riley Jones
  */
 public final class JhoiraWeatherlightCorsair extends CardImpl {
 
@@ -96,9 +96,12 @@ class JhoiraWeatherlightCorsairEffect extends OneShotEffect {
         if (historicCard != null) {
             cards.remove(historicCard);
             controller.moveCards(historicCard, Zone.BATTLEFIELD, source, game);
+            // If the card does not enter the battlefield (e.g. an Aura with no legal target,
+            // see rule 303.4g), there is no permanent, so no life is lost.
             Permanent permanent = game.getPermanent(historicCard.getId());
-            int manaValue = permanent != null ? permanent.getManaValue() : historicCard.getManaValue();
-            controller.loseLife(manaValue, game, source, false);
+            if (permanent != null) {
+                controller.loseLife(permanent.getManaValue(), game, source, false);
+            }
         }
 
         cards.retainZone(Zone.LIBRARY, game);
