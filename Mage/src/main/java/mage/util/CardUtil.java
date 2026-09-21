@@ -985,9 +985,9 @@ public final class CardUtil {
         } else {
             sb.append(add ? "put " : "remove ");
         }
-        // The counter carries the quantity and its article ("a +1/+1 counter", "two time counters"); a null
-        // amount defers to it. toString() "1" means one per something, so the "for each" clause carries the count.
-        String count = amount == null ? "" : amount.toString();
+        // The counter provides both quantity and article ("a +1/+1 counter", "two time counters")
+        // amount.toString() "1" means one per something (X or "for each")
+        String count = (amount == null) ? "" : amount.toString();
         if (count.isEmpty() || "1".equals(count)) {
             sb.append(counter.getDescription());
         } else {
@@ -1000,7 +1000,7 @@ public final class CardUtil {
             }
             sb.append(description);
         }
-        String message = amount == null ? "" : amount.getMessage();
+        String message = (amount == null) ? "" : amount.getMessage();
         if (!message.isEmpty()) {
             sb.append(count.contains("X") ? ", where X is " : " for each ").append(message);
         }

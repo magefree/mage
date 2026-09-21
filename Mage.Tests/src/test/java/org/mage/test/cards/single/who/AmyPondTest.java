@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * @author Steven Knipe
+ * @author notgreat
  */
 public class AmyPondTest extends CardTestPlayerBase {
 
@@ -22,7 +22,7 @@ public class AmyPondTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Suspend");
         attack(1, playerA, amy, playerB);
-        setChoice(playerA, kraken); // a non-target choice, not a target
+        setChoice(playerA, kraken);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
