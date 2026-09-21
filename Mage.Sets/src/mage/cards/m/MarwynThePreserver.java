@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.MageInt;
@@ -39,7 +39,7 @@ public final class MarwynThePreserver extends CardImpl {
         )));
 
         // {2}: Return target land card from your graveyard to your hand.
-        Ability ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new ReturnFromGraveyardToHandTargetEffect(), new GenericManaCost(2));
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_LAND));
         this.addAbility(ability);
     }

@@ -22,7 +22,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  */
 public final class ArniHumbleScribe extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another nontoken creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another nontoken creature");
 
     static {
         filter.add(AnotherPredicate.instance);

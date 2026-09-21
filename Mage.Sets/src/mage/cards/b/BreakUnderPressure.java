@@ -85,8 +85,8 @@ class BreakUnderPressureEffect extends OneShotEffect {
 
     BreakUnderPressureEffect() {
         super(Outcome.Benefit);
-        staticText = "target opponent sacrifices a creature or planeswalker they control with " +
-            "the greatest mana value among creatures and planeswalkers they control";
+        staticText = "target opponent sacrifices a creature or planeswalker with the "
+            + "greatest mana value among creatures and planeswalkers they control";
     }
 
     private BreakUnderPressureEffect(final BreakUnderPressureEffect effect) {

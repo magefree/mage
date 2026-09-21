@@ -43,7 +43,7 @@ public final class TraxosAcademyGuardian extends CardImpl {
 
         // This spell costs {2} less to cast if you've cast a noncreature spell this turn.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(
-            new ManaCostsImpl<>("{2}{U}"), StormwingEntityCondition.instance
+            new ManaCostsImpl<>("{2}"), StormwingEntityCondition.instance
         )).setRuleAtTheTop(true).addHint(hint));
 
         // Flying

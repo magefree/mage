@@ -39,7 +39,7 @@ public final class ArniRenownedChampion extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
             Zone.BATTLEFIELD,
             new BoostSourceEffect(TargetPermanentPowerCount.instance, StaticValue.get(0), Duration.EndOfTurn),
-            StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL, false, SetTargetPointer.PERMANENT
+            StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT
         ));
     }
 

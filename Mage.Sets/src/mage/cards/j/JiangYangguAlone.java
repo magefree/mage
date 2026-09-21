@@ -42,9 +42,9 @@ public final class JiangYangguAlone extends CardImpl {
 
         // Whenever a creature you control attacks a player alone, discard a card, then draw a card. Then put a +1/+1 counter on that creature for each card you've discarded this turn.
         Ability ability = new AttacksPlayerAloneControlledTriggeredAbility(new DiscardControllerEffect(1));
-        ability.addEffect(new DrawCardSourceControllerEffect(JiangYangguAloneValue.instance).concatBy("then"));
+        ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy(", then"));
         ability.addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(), JiangYangguAloneValue.instance)
-            .setText("then put a +1/+1 counter on that creature for each card you've discarded this turn"));
+            .setText("Then put a +1/+1 counter on that creature for each card you've discarded this turn"));
         this.addAbility(ability.addHint(JiangYangguAloneValue.getHint()), new DiscardedCardWatcher());
     }
 

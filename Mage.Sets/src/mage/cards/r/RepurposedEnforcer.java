@@ -27,7 +27,7 @@ public final class RepurposedEnforcer extends CardImpl {
 
         // Whenever this creature attacks, empower Jace X, where X is the number of creatures you control.
         this.addAbility(new AttacksTriggeredAbility(new EmpowerJaceEffect(
-            new PermanentsOnBattlefieldCount(StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED)
+            new PermanentsOnBattlefieldCount(StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED)
         )));
     }
 

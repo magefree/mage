@@ -28,7 +28,7 @@ import mage.filter.predicate.Predicates;
  */
 public final class WinterTormentedLoner extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("creature or planeswalker cards in your graveyard");
+    private static final FilterCard filter = new FilterCard("creature and planeswalker card");
 
     static {
         filter.add(Predicates.or(
