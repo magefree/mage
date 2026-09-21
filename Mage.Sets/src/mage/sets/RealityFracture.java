@@ -342,6 +342,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Undulating Witness", 45, Rarity.COMMON, mage.cards.u.UndulatingWitness.class));
         cards.add(new SetCardInfo("Unflinching Hortimancer", 23, Rarity.COMMON, mage.cards.u.UnflinchingHortimancer.class));
         cards.add(new SetCardInfo("Unsummon", 46, Rarity.COMMON, mage.cards.u.Unsummon.class));
+        cards.add(new SetCardInfo("Verdant Kraken", 118, Rarity.RARE, mage.cards.v.VerdantKraken.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Verdant Kraken", 375, Rarity.RARE, mage.cards.v.VerdantKraken.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vigorbloom Annex", 194, Rarity.COMMON, mage.cards.v.VigorbloomAnnex.class));
         cards.add(new SetCardInfo("Vigorbloom Vanguard", 161, Rarity.UNCOMMON, mage.cards.v.VigorbloomVanguard.class));
         cards.add(new SetCardInfo("Vinelasher Adept", 119, Rarity.COMMON, mage.cards.v.VinelasherAdept.class));
