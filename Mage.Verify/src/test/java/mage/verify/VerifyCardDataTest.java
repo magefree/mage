@@ -3106,6 +3106,15 @@ public class VerifyCardDataTest {
                         refRules[i];
             }
         }
+        if (card instanceof PrepareSpellCard) {
+            // prepare spells aren't a subtype in mtgjson, so detect by our own card class instead
+            for (int i = 0; i < refRules.length; i++) {
+                refRules[i] = ref.types.get(0) + " - " +
+                        ref.faceName + ' ' +
+                        ref.manaCost + " - " +
+                        refRules[i];
+            }
+        }
 
         String[] cardRules = getRulesForReferenceFace(card)
                 .stream()

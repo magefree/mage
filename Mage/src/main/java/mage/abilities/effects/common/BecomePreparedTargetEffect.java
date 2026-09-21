@@ -12,6 +12,9 @@ import mage.game.permanent.Permanent;
  */
 public class BecomePreparedTargetEffect extends OneShotEffect {
 
+    private static final String REMINDER_TEXT
+            = "<i>(Only creatures with prepare spells can become prepared.)</i>";
+
     private final boolean prepared;
 
     public BecomePreparedTargetEffect(boolean prepared) {
@@ -46,6 +49,6 @@ public class BecomePreparedTargetEffect extends OneShotEffect {
         }
         return this.getTargetPointer().describeTargets(mode.getTargets(), "that creature")
                 + " becomes " + (prepared ? "" : "un") + "prepared"
-                + (prepared ? ". " + BecomePreparedSourceEffect.getReminder() : "");
+                + (prepared ? ". " + REMINDER_TEXT : "");
     }
 }
