@@ -20,7 +20,7 @@ public final class RealityFracture extends ExpansionSet {
         this.blockName = "Reality Fracture"; // for sorting in GUI
         this.hasBasicLands = true;
 
-        // this.enablePlayBooster(305); TODO: Enable later
+        this.enablePlayBooster(401);
 
         cards.add(new SetCardInfo("Academic Ascent", 2, Rarity.COMMON, mage.cards.a.AcademicAscent.class));
         cards.add(new SetCardInfo("Aerid Konstrari", 121, Rarity.MYTHIC, mage.cards.a.AeridKonstrari.class, NON_FULL_USE_VARIOUS));
