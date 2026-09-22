@@ -72,6 +72,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Fatehold Charm", 132, Rarity.UNCOMMON, mage.cards.f.FateholdCharm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fatehold Charm", 432, Rarity.UNCOMMON, mage.cards.f.FateholdCharm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fatehold Chronologist", 133, Rarity.COMMON, mage.cards.f.FateholdChronologist.class));
+        cards.add(new SetCardInfo("Fblthp, Knows the Way", 258, Rarity.UNCOMMON, mage.cards.f.FblthpKnowsTheWay.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fblthp, Knows the Way", 313, Rarity.UNCOMMON, mage.cards.f.FblthpKnowsTheWay.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 394, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 395, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 396, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
