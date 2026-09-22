@@ -1,9 +1,11 @@
 package mage.abilities.common;
 
 import mage.MageObjectReference;
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.ExileSourceFromHandCost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -27,7 +29,11 @@ public class GiveManaAbilityAndCastSourceAbility extends ActivatedAbilityImpl {
 
     // TODO: write automated tests for this (it works in manual testing)
     public GiveManaAbilityAndCastSourceAbility(String colors) {
-        super(Zone.HAND, new GainManaAbilitiesWhileExiledEffect(colors), new GenericManaCost(2));
+        this(colors, 2);
+    }
+
+    public GiveManaAbilityAndCastSourceAbility(String colors, int genericCost) {
+        super(Zone.HAND, new GainManaAbilitiesWhileExiledEffect(colors), new GenericManaCost(genericCost));
         this.addCost(new ExileSourceFromHandCost());
         this.addEffect(new CastExiledFromHandCardEffect());
         this.addTarget(new TargetLandPermanent());
@@ -82,11 +88,7 @@ class GainManaAbilitiesWhileExiledEffect extends ContinuousEffectImpl {
         this.colors = colors;
         this.staticText =
                 "target land gains \"{T}: Add " +
-                        CardUtil.concatWithOr(
-                                Arrays.stream(colors.split(""))
-                                        .map(s -> '{' + s + '}')
-                                        .collect(Collectors.toList())
-                        ) +
+                        CardUtil.concatWithOr(getManaTexts(colors)) +
                         "\" until {this} is cast from exile";
     }
 
@@ -111,30 +113,55 @@ class GainManaAbilitiesWhileExiledEffect extends ContinuousEffectImpl {
             discard();
             return false;
         }
-        for (char c : colors.toCharArray()) {
-            Ability ability;
-            switch (c) {
+        for (Map.Entry<Character, Integer> entry : getManaCounts(colors).entrySet()) {
+            Mana mana;
+            switch (entry.getKey()) {
                 case 'W':
-                    ability = new WhiteManaAbility();
+                    mana = Mana.WhiteMana(entry.getValue());
                     break;
                 case 'U':
-                    ability = new BlueManaAbility();
+                    mana = Mana.BlueMana(entry.getValue());
                     break;
                 case 'B':
-                    ability = new BlackManaAbility();
+                    mana = Mana.BlackMana(entry.getValue());
                     break;
                 case 'R':
-                    ability = new RedManaAbility();
+                    mana = Mana.RedMana(entry.getValue());
                     break;
                 case 'G':
-                    ability = new GreenManaAbility();
+                    mana = Mana.GreenMana(entry.getValue());
+                    break;
+                case 'C':
+                    mana = Mana.ColorlessMana(entry.getValue());
                     break;
                 default:
                     continue;
             }
-            permanent.addAbility(ability, source.getSourceId(), game);
+            permanent.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, mana, new TapSourceCost()), source.getSourceId(), game);
         }
         return true;
+    }
+
+    private static List<String> getManaTexts(String colors) {
+        return getManaCounts(colors).entrySet().stream()
+                .map(entry -> repeatManaSymbol(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
+    }
+
+    private static String repeatManaSymbol(char color, int count) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < count; i++) {
+            result.append('{').append(color).append('}');
+        }
+        return result.toString();
+    }
+
+    private static Map<Character, Integer> getManaCounts(String colors) {
+        Map<Character, Integer> manaCounts = new LinkedHashMap<>();
+        for (char color : colors.toCharArray()) {
+            manaCounts.merge(color, 1, Integer::sum);
+        }
+        return manaCounts;
     }
 }
 
