@@ -157,8 +157,6 @@ class FlameshapeEffect extends OneShotEffect {
                     exileName
             )) {
 
-                card.setFaceDown(true, game);
-
                 exiledCards.add(card);
 
                 ContinuousEffect lookEffect =
