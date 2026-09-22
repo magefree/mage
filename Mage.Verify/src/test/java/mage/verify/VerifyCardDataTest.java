@@ -195,7 +195,6 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_SUBTYPE, "FCA", "Traxos, Scourge of Kroog");
         skipListAddName(SKIP_LIST_SUBTYPE, "PDOM", "Traxos, Scourge of Kroog");
         skipListAddName(SKIP_LIST_SUBTYPE, "PRM", "Traxos, Scourge of Kroog");
-        subtypesToIgnore.add("Book"); // temporary
 
         // number
         // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
