@@ -308,6 +308,7 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Skophos Reaver", 513, Rarity.COMMON, mage.cards.s.SkophosReaver.class));
         cards.add(new SetCardInfo("Skullsnatcher", 384, Rarity.COMMON, mage.cards.s.Skullsnatcher.class));
         cards.add(new SetCardInfo("Skyblade's Boon", 136, Rarity.UNCOMMON, mage.cards.s.SkybladesBoon.class));
+        cards.add(new SetCardInfo("Skyshroud Ambush", 29, Rarity.COMMON, mage.cards.s.SkyshroudAmbush.class));
         cards.add(new SetCardInfo("Skyshroud Lookout", 30, Rarity.UNCOMMON, mage.cards.s.SkyshroudLookout.class));
         cards.add(new SetCardInfo("Slag Strider", 514, Rarity.UNCOMMON, mage.cards.s.SlagStrider.class));
         cards.add(new SetCardInfo("Sling-Gang Lieutenant", 386, Rarity.UNCOMMON, mage.cards.s.SlingGangLieutenant.class));
