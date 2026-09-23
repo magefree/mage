@@ -47,7 +47,8 @@ public final class RealityFractureCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fellwar Stone", 57, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Fetid Heath", 72, Rarity.RARE, mage.cards.f.FetidHeath.class));
         cards.add(new SetCardInfo("Flawless Maneuver", 25, Rarity.RARE, mage.cards.f.FlawlessManeuver.class));
-        cards.add(new SetCardInfo("Ginger, Queen of Sweets", 14, Rarity.RARE, mage.cards.g.GingerQueenOfSweets.class));
+        cards.add(new SetCardInfo("Ginger, Queen of Sweets", 14, Rarity.RARE, mage.cards.g.GingerQueenOfSweets.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ginger, Queen of Sweets", 99, Rarity.RARE, mage.cards.g.GingerQueenOfSweets.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glacial Fortress", 73, Rarity.RARE, mage.cards.g.GlacialFortress.class));
         cards.add(new SetCardInfo("Grand Crescendo", 26, Rarity.RARE, mage.cards.g.GrandCrescendo.class));
         cards.add(new SetCardInfo("Isolated Chapel", 74, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
@@ -56,7 +57,8 @@ public final class RealityFractureCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Lingering Souls", 27, Rarity.UNCOMMON, mage.cards.l.LingeringSouls.class));
         cards.add(new SetCardInfo("Martial Coup", 28, Rarity.RARE, mage.cards.m.MartialCoup.class));
         cards.add(new SetCardInfo("Mass Polymorph", 42, Rarity.RARE, mage.cards.m.MassPolymorph.class));
-        cards.add(new SetCardInfo("Memnarch, the Warden", 15, Rarity.RARE, mage.cards.m.MemnarchTheWarden.class));
+        cards.add(new SetCardInfo("Memnarch, the Warden", 100, Rarity.RARE, mage.cards.m.MemnarchTheWarden.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Memnarch, the Warden", 15, Rarity.RARE, mage.cards.m.MemnarchTheWarden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mystic Gate", 76, Rarity.RARE, mage.cards.m.MysticGate.class));
         cards.add(new SetCardInfo("Niv-Mizzet, Ghost Counsel", 10, Rarity.RARE, mage.cards.n.NivMizzetGhostCounsel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Niv-Mizzet, Ghost Counsel", 95, Rarity.RARE, mage.cards.n.NivMizzetGhostCounsel.class, NON_FULL_USE_VARIOUS));
