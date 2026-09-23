@@ -249,7 +249,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
         for (Iterator<Entry<UUID, MageCard>> iterator = permanents.entrySet().iterator(); iterator.hasNext();) {
             Entry<UUID, MageCard> entry = iterator.next();
             if (!battlefield.containsKey(entry.getKey()) || !battlefield.get(entry.getKey()).isPhasedIn()) {
-                removePermanent(entry.getKey(), 1);
+                removePermanent(entry.getKey());
                 iterator.remove();
                 changed = true;
             }
@@ -293,9 +293,12 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
         permanents.put(permanent.getId(), perm);
 
+        perm.setAlpha(0f);
         this.jPanel.add(perm, (Integer) 10);
         moveToFront(jPanel);
-        Plugins.instance.onAddCard(perm, 1);
+        Plugins.instance.onAddCard(perm).thenRunAsync(() -> {
+            perm.setAlpha(1f);
+        }, SwingUtilities::invokeLater);
 
         if (permanent.isArtifact()) {
             addedArtifact = true;
@@ -306,19 +309,17 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
         }
     }
 
-    private void removePermanent(UUID permanentId, final int count) {
+    private void removePermanent(UUID permanentId) {
         for (Component comp : this.jPanel.getComponents()) {
             if (comp instanceof MageCard) {
                 MageCard mageCard = (MageCard) comp;
                 if (mageCard.getMainPanel() instanceof MagePermanent) {
                     MagePermanent magePermanent = (MagePermanent) mageCard.getMainPanel();
                     if (magePermanent.getOriginal().getId().equals(permanentId)) {
-                        Thread t = new Thread(() -> {
-                            Plugins.instance.onRemoveCard(mageCard, count);
+                        Plugins.instance.onRemoveCard(mageCard).thenRunAsync(() -> {
                             mageCard.setVisible(false);
                             this.jPanel.remove(mageCard);
-                        });
-                        t.start();
+                        }, SwingUtilities::invokeLater);
                     }
                     if (magePermanent.getOriginal().isCreature()) {
                         removedCreature = true;

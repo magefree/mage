@@ -33,6 +33,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 import static mage.client.util.CardRenderMode.*;
@@ -733,31 +734,13 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     @Override
-    public void onAddCard(MageCard card, int count) {
-        if (card != null) {
-            Animation.showCard(card, count > 0 ? count : 1);
-            try {
-                while ((card).getAlpha() + 0.05f < 1) {
-                    TimeUnit.MILLISECONDS.sleep(30);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+    public CompletableFuture<Void> onAddCard(MageCard card) {
+        return Animation.showCard(card);
     }
 
     @Override
-    public void onRemoveCard(MageCard card, int count) {
-        if (card != null) {
-            Animation.hideCard(card, count > 0 ? count : 1);
-            try {
-                while ((card).getAlpha() - 0.05f > 0) {
-                    TimeUnit.MILLISECONDS.sleep(30);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+    public CompletableFuture<Void> onRemoveCard(MageCard card) {
+        return Animation.hideCard(card);
     }
 
     @Override
