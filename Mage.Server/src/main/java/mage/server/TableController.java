@@ -867,8 +867,17 @@ public class TableController {
         UUID gameId = match.getGame() == null ? null : match.getGame().getId();
         ThreadUtils.setGameThreadStatus(gameId, ThreadUtils.THREAD_GAME_STATUS_SIDEBOARD);
         try {
-            match.sideboard();
-            cancelTimeout();
+            try {
+                match.sideboard();
+            } finally {
+                cancelTimeout();
+                // make sure no sideboarding status after timeout/autosubmit, 
+                // so user.onReconnect will skip completed sideboard
+                for (UUID userId : userPlayerMap.keySet()) {
+                    managerFactory.userManager().getUser(userId).ifPresent(user -> user.removeSideboarding(table.getId()));
+                }
+            }
+
             if (table.isTournamentSubTable()) {
                 for (MatchPlayer matchPlayer : match.getPlayers()) {
                     TournamentPlayer tournamentPlayer = table.getTournament().getPlayer(matchPlayer.getPlayer().getId());
