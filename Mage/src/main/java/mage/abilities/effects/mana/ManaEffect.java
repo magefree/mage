@@ -43,9 +43,17 @@ public abstract class ManaEffect extends OneShotEffect {
             return true; // No need to add mana to pool during checkPlayable   
         }
         Mana manaToAdd = produceMana(game, source);
-        if (manaToAdd != null && manaToAdd.count() > 0) {
+        if (manaToAdd != null) {
+            // 20260417 - 605.2
+            // A mana ability remains a mana ability even if the game state doesn't allow it to produce mana.
+            // https://www.tumblr.com/magicjudge/71264631258/if-i-have-a-gaeas-cradle-enchanted-with-wild
+            // Q: If I have a Gaea's Cradle enchanted with Wild Growth, and no creatures in play, can I tap it for {G}?
+            // A: Yes. Gae's Cradle always has a mana ability, even if you have no creatures.
+            // https://github.com/magefree/mage/issues/15362
             checkToFirePossibleEvents(manaToAdd, game, source);
-            addManaToPool(player, manaToAdd, game, source);
+            if (manaToAdd.count() > 0) {
+                addManaToPool(player, manaToAdd, game, source);
+            }
         }
         return true;
     }
