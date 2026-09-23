@@ -1,0 +1,289 @@
+name: Update set implementation lists
+on:
+  push:
+   branches: [master]
+  #workflow_dispatch:
+concurrency:
+  group: set-impl
+  cancel-in-progress: true
+jobs:
+  update-set-implementation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm install mustache
+        shell: bash
+        
+      - uses: actions/github-script@v6.4.1
+        id: updateissues
+        with:
+          script: |
+            const mustache = require('mustache')
+            const path = require('path')
+            const fs = require('fs')
+            
+            // Disable mustache html-escape
+            mustache.escape = function(str) {
+              return str;
+            };
+            
+            // https://stackoverflow.com/a/2970667
+            function toCamelCase(str) {
+              return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
+                return index === 0 ? word.toLowerCase() : word.toUpperCase();
+              }).replace(/\s+/g, '')
+            }
+
+            function splitter(input, maxChars) {
+              var output = [];
+              output.push( input.split("\n").reduce(function(a, b) {
+                if (a.length + b.length < maxChars) {
+                  a += "\n" + b; //if comnined length is still not execeeding add it a
+                } else {
+                  output.push(a); //if combined less is exceeding the maxchars then push the last sentence to output
+                  a = b;
+                }
+                return a;
+              })); //push the residue to output
+              return output;
+            }
+            
+            const setsData = fs.readFileSync(path.join('Utils', 'mtg-sets-data.txt'), 'utf8')
+              .split('\n')
+              .map(line => line.split('|'));
+            const cardsData = fs.readFileSync(path.join('Utils', 'mtg-cards-data.txt'), 'utf8')
+              .split('\n')
+              .map(line => line.split('|'))
+              .filter(card => !(card[0].toLowerCase() === "plains" || card[0].toLowerCase() === "swamp" || card[0].toLowerCase() === "island" || card[0].toLowerCase() === "mountain" || card[0].toLowerCase() === "forest"));
+            const cardIssueTemplate = fs.readFileSync(path.join('.github', 'templates', 'set-tracking-issue.md'), 'utf8');
+            
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'tracking set',
+              state: 'all'
+            });
+            //console.log("Found list of existing tracking set issues:", issues);
+            
+            const issuesToUpdate = [];
+            const issuesToCreate = [];
+            
+            for (const set of setsData) {
+              if (!set || !set[0] || !set[1]) continue;
+              let foundIssue = undefined;
+              issues.every(issue => {
+                if(issue && issue.title && issue.title.startsWith(set[1])) {
+                  console.log(`Found tracking issue for ${set[0]} with issue number: ${issue.number}`);
+                  foundIssue = issue;
+                  return false;
+                }
+                return true;
+              });
+
+              let issueComments = undefined;
+              if (foundIssue) {
+                issueComments = await github.paginate(github.rest.issues.listComments, {
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: foundIssue.number
+                });
+                console.log(`Found ${issueComments.length} comments on issue #${foundIssue.number}`);
+              }
+              
+              const cards = cardsData.filter(card => card[1] === set[0]);
+              const unimplemented = [];
+              const implemented = [];
+              
+              for (const cardData of cards) {
+                const className = toCamelCase(cardData[0].replace(/[+]/g, ' Plus ').replace(/[_]+/g, ' Blank ').replace(/[']/g, '').replace(/[-+,.!?`@#$%^&*()_=<>:";~\\|/]/g, ' '));
+                const cleanCardName = cardData[0].replace(/[-,'.!?`@#$%^&*()_=<>:";~\\|/\s]/g, '').toLowerCase();
+                const cardPath = path.join('Mage.Sets', 'src', 'mage', 'cards', className.substring(0, 1), `${className.charAt(0).toUpperCase()+className.slice(1)}.java`);
+
+                // Find if someone left a comment with the card name (if someone did, we will put a check mark on the item)
+                let claimed = false;
+                issueComments && issueComments.forEach(comment => {
+                  if (comment.body && comment.body.search(new RegExp(cardData[0], "i")) != -1 || comment.body.search(new RegExp(cleanCardName, "i")) != -1) {
+                    console.log(`Found a comment by ${comment.user.login} claiming card ${cardData[0]}`);
+                    claimed = true;
+                  }
+                });
+                
+                if (fs.existsSync(cardPath)) {
+                  implemented.push({
+                    pr: true,
+                    name: cardData[0],
+                    cleanName: cleanCardName,
+                    scryfall: `https://scryfall.com/search?q=!"${cleanCardName}"+e:${set[1]}`
+                  });
+                } else {
+                  unimplemented.push({
+                    pr: claimed,
+                    name: cardData[0],
+                    cleanName: cleanCardName,
+                    scryfall: `https://scryfall.com/search?q=!"${cleanCardName}"+e:${set[1]}`
+                  });
+                }
+              }
+              implemented.sort((a, b) => a.name.localeCompare(b.name));
+              unimplemented.sort((a, b) => a.name.localeCompare(b.name));
+              let body = mustache.render(cardIssueTemplate, {
+                  hasUnimplementedCards: unimplemented.length > 0,
+                  hasImplementedCards: implemented.length > 0,
+                  unimplementedCards: unimplemented,
+                  implementedCards: implemented,
+                  unimplementedScryfallLink: `https://scryfall.com/search?q=!"${unimplemented.map(e => e.cleanName).join('"OR!"')}"+e:${set[1]}`,
+                  setName: set[0]
+                });
+
+              // GH API has a max character length of 65536 for issue body. We can try to cut down on unnecessary fat to try to get it to fit.
+              if (body.length > 65536) {
+                console.log(`Issue body for ${set[0]} (${set[1]}) too long! Length: ${body.length}. Attempting to trim down size...`);
+                const trimmedBody = mustache.render(cardIssueTemplate, {
+                  hasUnimplementedCards: unimplemented.length > 0,
+                  hasImplementedCards: implemented.length > 0,
+                  unimplementedCards: unimplemented,
+                  implementedCards: implemented,
+                  unimplementedScryfallLink: `https://scryfall.com/search?q=!"${unimplemented.map(e => e.cleanName).join('"OR!"')}"+e:${set[1]}`,
+                  setName: set[0]
+                }).replaceAll("--", "-").replaceAll("https://", "").replaceAll(`+e:${set[1]}`, "");
+                console.log(`Trimmed body length: ${trimmedBody.length}`);
+                if (trimmedBody.length > 65536) {
+                  console.log(`Could not create issue for ${set[0]} (${set[1]}). Please track this manually.`);
+                  continue;
+                } else {
+                  body = trimmedBody;
+                }
+              }
+              
+              if (foundIssue !== undefined) {
+                foundIssue.body = body;
+                foundIssue.state = unimplemented.length > 0 ? "open" : "closed";
+                issuesToUpdate.push(foundIssue);
+              } else {
+                issuesToCreate.push({
+                  title: `${set[1]}: ${set[0]} Set Card Implementation Tracking`,
+                  body: body,
+                  state: unimplemented.length > 0 ? "open" : "closed"
+                });
+              }
+            }
+            
+            console.log(`Updating ${issuesToUpdate.length} issues`);
+            for (const issue of issuesToUpdate) {
+              github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: issue.body,
+                state: issue.state
+              });
+            }
+            console.log(`Creating ${issuesToCreate.length} issues`);
+            for (const issue of issuesToCreate) {
+              const result = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: issue.title,
+                body: issue.body,
+                labels: ["tracking set"]
+              });
+              if (issue.state === "closed") {
+                github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: result.data.number,
+                  state: issue.state
+                });
+              }
+            }
+      - uses: actions/github-script@v6.4.1
+        id: updatesetimplementations
+        with:
+          script: |
+            const mustache = require('mustache')
+            const path = require('path')
+            const fs = require('fs')
+            
+            // Disable mustache html-escape
+            mustache.escape = function(str) {
+              return str;
+            };
+            
+            // https://stackoverflow.com/a/2970667
+            function toCamelCase(str) {
+              return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
+                return index === 0 ? word.toLowerCase() : word.toUpperCase();
+              }).replace(/\s+/g, '')
+            }
+            
+            const setImplementationTemplate = fs.readFileSync(path.join('.github', 'templates', 'set-tracking-list.md'), 'utf8');
+            
+            const setsData = fs.readFileSync(path.join('Utils', 'mtg-sets-data.txt'), 'utf8')
+              .split('\n')
+              .map(line => line.split('|'));
+            const cardsData = fs.readFileSync(path.join('Utils', 'mtg-cards-data.txt'), 'utf8')
+              .split('\n')
+              .map(line => line.split('|'))
+              .filter(card => !(card[0].toLowerCase() === "plains" || card[0].toLowerCase() === "swamp" || card[0].toLowerCase() === "island" || card[0].toLowerCase() === "mountain" || card[0].toLowerCase() === "forest"))
+            
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'tracking set',
+              state: 'all'
+            });
+            console.log("Found list of existing tracking set issues:", issues);
+            
+            const sets = [];
+            setsData.forEach(set => {
+              let foundIssue = undefined;
+              issues.every(issue => {
+                if(issue && issue.title && issue.title.startsWith(set[1])) {
+                  console.log(`Found tracking issue for ${set[0]} with issue number: ${issue.number}`);
+                  foundIssue = issue;
+                  return false;
+                }
+                return true;
+              });
+              
+              const cards = cardsData.filter(card => card[1] === set[0]);
+              let implementedCount = 0;
+              cards.forEach(cardData => {
+                const className = toCamelCase(cardData[0].replace(/[+]/g, ' Plus ').replace(/[_]+/g, ' Blank ').replace(/[']/g, '').replace(/[-+,.!?`@#$%^&*()_=<>:";~\\|/]/g, ' '));
+                const cleanCardName = cardData[0].replace(/[-,'.!?`@#$%^&*()_=<>:";~\\|/\s]/g, '').toLowerCase();
+                const cardPath = path.join('Mage.Sets', 'src', 'mage', 'cards', className.substring(0, 1), `${className.charAt(0).toUpperCase()+className.slice(1)}.java`);
+                if (fs.existsSync(cardPath)) {
+                  implementedCount++;
+                }
+              });
+              sets.push({
+                name: set[0],
+                issueLink: foundIssue === undefined ? "https://www.github.com/mage/magefree" : foundIssue.html_url,
+                total: cards.length,
+                missing: cards.length - implementedCount
+              });
+            });
+            
+            const content = mustache.render(setImplementationTemplate, {
+              sets: sets
+            });
+            
+            console.log(content);
+            
+            try {
+              fs.writeFileSync(path.join('Set-implementation-list.md'), content);
+            } catch (err) {
+              console.error(err);
+            }
+      - name: commit
+        run: |
+          # Setup git config
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          # Stage the Set-implementation-list.md file, commit, then push
+          git add Set-implementation-list.md
+          git commit -m "Update Set-implementation-list.md" || exit 0
+          git push
