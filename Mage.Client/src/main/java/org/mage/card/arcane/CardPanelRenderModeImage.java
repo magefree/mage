@@ -15,9 +15,12 @@ import mage.constants.SubType;
 import mage.util.DebugUtil;
 import mage.view.CardView;
 import mage.view.CounterView;
+import org.apache.log4j.Logger;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
+import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.images.ImageCacheData;
+import org.mage.plugins.card.images.OnDemandImageDownloader;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 import javax.swing.*;
@@ -26,6 +29,7 @@ import java.awt.image.BufferedImage;
 import java.util.Objects;
 import java.util.StringTokenizer;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 /**
  * Render mode: IMAGE
@@ -33,6 +37,8 @@ import java.util.UUID;
  * @author arcane, nantuko, noxx, stravant, JayDi85
  */
 public class CardPanelRenderModeImage extends CardPanel {
+
+    private static final Logger LOGGER = Logger.getLogger(CardPanelRenderModeImage.class);
 
     private static final long serialVersionUID = -3272134219262184411L;
 
@@ -81,6 +87,9 @@ public class CardPanelRenderModeImage extends CardPanel {
     private final boolean displayFullImagePath;
 
     private int updateArtImageStamp;
+
+    // Listener for on-demand image downloads
+    private Consumer<CardDownloadData> downloadListener;
 
     private static class Key {
 
@@ -356,6 +365,13 @@ public class CardPanelRenderModeImage extends CardPanel {
     public void cleanUp() {
         super.cleanUp();
         counterPanel = null;
+
+        // Unregister download listener
+        if (downloadListener != null) {
+            LOGGER.debug("cleanUp: removing download listener");
+            OnDemandImageDownloader.getInstance().removeDownloadListener(downloadListener);
+            downloadListener = null;
+        }
     }
 
     @Override
@@ -641,13 +657,25 @@ public class CardPanelRenderModeImage extends CardPanel {
 
         final int stamp = ++updateArtImageStamp;
 
+        // Capture card info on EDT before submitting to thread pool
+        final CardView card = getGameCard();
+        if (card == null) {
+            return;
+        }
+        final String cardName = card.getName();
+        final String setCode = card.getExpansionSetCode();
+        final String cardNumber = card.getCardNumber();
+
         Util.threadPool.submit(() -> {
             try {
-                ImageCacheData data = ImageCache.getCardImage(getGameCard(), getCardWidth(), getCardHeight());
+                ImageCacheData data = ImageCache.getCardImage(card, getCardWidth(), getCardHeight());
 
                 // save missing image
+                LOGGER.debug("updateArtImage for " + cardName + " [" + setCode + "/" + cardNumber + "] image=" + (data.getImage() != null ? "found" : "NULL"));
                 if (data.getImage() == null) {
                     setFullPath(data.getPath());
+                    // Register for download notification if not already registered
+                    registerDownloadListener(cardName, setCode, cardNumber);
                 }
 
                 UI.invokeLater(() -> {
@@ -655,12 +683,51 @@ public class CardPanelRenderModeImage extends CardPanel {
                         hasImage = data.getImage() != null;
                         setTitle(getGameCard());
                         setImage(data.getImage());
+
+                        // Unregister listener if we now have an image
+                        if (hasImage && downloadListener != null) {
+                            OnDemandImageDownloader.getInstance().removeDownloadListener(downloadListener);
+                            downloadListener = null;
+                        }
                     }
                 });
             } catch (Exception | Error e) {
                 e.printStackTrace();
             }
         });
+    }
+
+    /**
+     * Register a listener to refresh this card when its image is downloaded.
+     */
+    private void registerDownloadListener(String cardName, String setCode, String cardNumber) {
+        // Only register if auto-download is enabled
+        if (!PreferencesDialog.isAutoDownloadEnabled()) {
+            return;
+        }
+
+        if (downloadListener != null) {
+            return; // Already registered
+        }
+
+        LOGGER.debug("Registering download listener for: " + cardName + " [" + setCode + "/" + cardNumber + "]");
+
+        downloadListener = downloadedCard -> {
+            // Check if this download matches our card
+            boolean matches = downloadedCard.getName().equals(cardName)
+                    && downloadedCard.getSet().equals(setCode)
+                    && downloadedCard.getCollectorId().equals(cardNumber);
+
+            LOGGER.debug("Listener received: " + downloadedCard.getName() + " [" + downloadedCard.getSet() + "/" + downloadedCard.getCollectorId() + "] matches=" + matches + " (looking for " + cardName + " [" + setCode + "/" + cardNumber + "])");
+
+            if (matches) {
+                // Refresh this card's image on the EDT
+                LOGGER.debug("Triggering updateArtImage for: " + cardName);
+                UI.invokeLater(this::updateArtImage);
+            }
+        };
+
+        OnDemandImageDownloader.getInstance().addDownloadListener(downloadListener);
     }
 
     private int getManaWidth(String manaCost, int symbolMarginX) {
