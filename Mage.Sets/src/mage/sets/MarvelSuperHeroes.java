@@ -381,7 +381,8 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Thanos, the Mad Titan", 233, Rarity.MYTHIC, mage.cards.t.ThanosTheMadTitan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thanos, the Mad Titan", 376, Rarity.MYTHIC, mage.cards.t.ThanosTheMadTitan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thanos, the Mad Titan", 400, Rarity.MYTHIC, mage.cards.t.ThanosTheMadTitan.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Astonishing Ant-Man", 204, Rarity.RARE, mage.cards.t.TheAstonishingAntMan.class));
+        cards.add(new SetCardInfo("The Astonishing Ant-Man", 204, Rarity.RARE, mage.cards.t.TheAstonishingAntMan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Astonishing Ant-Man", 397, Rarity.RARE, mage.cards.t.TheAstonishingAntMan.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("The Coming of Galactus", 212, Rarity.MYTHIC, mage.cards.t.TheComingOfGalactus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Coming of Galactus", 307, Rarity.MYTHIC, mage.cards.t.TheComingOfGalactus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Kingpin of Crime", 220, Rarity.RARE, mage.cards.t.TheKingpinOfCrime.class, NON_FULL_USE_VARIOUS));
