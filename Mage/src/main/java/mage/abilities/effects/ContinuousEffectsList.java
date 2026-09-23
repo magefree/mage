@@ -235,8 +235,10 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
         this.add(effect);
     }
 
+    private static final Set<Ability> EMPTY_ABILITY_SET = Collections.emptySet();
+
     public Set<Ability> getAbility(UUID effectId) {
-        return effectAbilityMap.computeIfAbsent(effectId, x -> new HashSet<>());
+        return effectAbilityMap.getOrDefault(effectId, EMPTY_ABILITY_SET);
     }
 
     public void removeTemporaryEffects() {
