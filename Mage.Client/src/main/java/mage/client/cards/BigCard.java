@@ -31,14 +31,10 @@ public class BigCard extends JComponent {
 
     protected Image bigImage;
     protected BufferedImage source;
-    protected volatile BufferedImage foil;
     protected UUID cardId;
     protected JXPanel panel;
     protected int oldWidth;
-    protected boolean foilState;
-    protected Thread foilThread;
     protected float hue = 0.005f;
-    protected float dh = 0.005f;
     protected EnlargeMode enlargeMode;
 
     public BigCard() {
