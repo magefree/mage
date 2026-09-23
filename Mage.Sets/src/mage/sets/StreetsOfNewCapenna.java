@@ -465,6 +465,8 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Urabrask, Heretic Praetor", 346, Rarity.MYTHIC, mage.cards.u.UrabraskHereticPraetor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Urabrask, Heretic Praetor", 360, Rarity.MYTHIC, mage.cards.u.UrabraskHereticPraetor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Urabrask, Heretic Praetor", 446, Rarity.MYTHIC, mage.cards.u.UrabraskHereticPraetor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urabrask, Heretic Praetor", 468, Rarity.MYTHIC, mage.cards.u.UrabraskHereticPraetor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urabrask, Heretic Praetor", 469, Rarity.MYTHIC, mage.cards.u.UrabraskHereticPraetor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vampire Scrivener", 98, Rarity.UNCOMMON, mage.cards.v.VampireScrivener.class));
         cards.add(new SetCardInfo("Venom Connoisseur", 161, Rarity.UNCOMMON, mage.cards.v.VenomConnoisseur.class));
         cards.add(new SetCardInfo("Vivien on the Hunt", 162, Rarity.MYTHIC, mage.cards.v.VivienOnTheHunt.class, NON_FULL_USE_VARIOUS));
