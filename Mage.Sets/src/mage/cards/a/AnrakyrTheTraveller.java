@@ -1,14 +1,8 @@
 package mage.cards.a;
 
-import mage.ApprovingObject;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
@@ -17,11 +11,9 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.util.CardUtil;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author gravitybone
@@ -76,62 +68,9 @@ class AnrakyrTheTravellerEffect extends OneShotEffect {
         Set<Card> cards = player.getHand().getCards(filter, source.getControllerId(), source, game);
         cards.addAll(player.getGraveyard().getCards(filter, source.getControllerId(), source, game));
 
-        Map<UUID, List<Card>> cardMap = new HashMap<>();
-        for (Card card : cards) {
-            List<Card> castableComponents = CardUtil.getCastableComponents(card, filter, source, player, game, null, false);
-            if (!castableComponents.isEmpty()) {
-                cardMap.put(card.getId(), castableComponents);
-            }
-        }
-        Card cardToCast;
-        if (cardMap.isEmpty()) {
-            return false;
-        }
-        Cards castableCards = new CardsImpl(cardMap.keySet());
-        TargetCard target = new TargetCard(0, 1, Zone.ALL, filter);
-        target.withNotTarget(true);
-        player.choose(Outcome.Benefit, castableCards, target, source, game);
-        cardToCast = castableCards.get(target.getFirstTarget(), game);
-
-        if (cardToCast == null) {
-            return false;
-        }
-
-        List<Card> partsToCast = cardMap.get(cardToCast.getId());
-        String partsInfo = partsToCast
-                .stream()
-                .map(MageObject::getLogName)
-                .collect(Collectors.joining(" or "));
-        if (partsToCast.isEmpty()
-                || !player.chooseUse(
-                Outcome.PlayForFree, "Cast spell by paying life equal to its mana value rather than paying its mana cost (" + partsInfo + ")?", source, game
-        )) {
-            return true;
-        }
-        partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE));
-
-        // pay life
-        // copied from BolassCitadelPlayTheTopCardEffect.applies
-        PayLifeCost lifeCost = new PayLifeCost(cardToCast.getSpellAbility().getManaCosts().manaValue()); // TODO: Cost is most likely wrong for multi part cards. See Amped Raptor way for a rework.
-        Costs<Cost> newCosts = new CostsImpl<>();
-        newCosts.add(lifeCost);
-        newCosts.addAll(cardToCast.getSpellAbility().getCosts());
-        player.setCastSourceIdWithAlternateMana(cardToCast.getId(), null, newCosts);
-
-        SpellAbility chosenAbility;
-        chosenAbility = player.chooseAbilityForCast(cardToCast, game, true);
-        boolean result = false;
-        if (chosenAbility != null) {
-            result = player.cast(
-                    chosenAbility,
-                    game, true, new ApprovingObject(source, game)
-            );
-        }
-        partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null));
-        if (player.isComputer() && !result) {
-            cards.remove(cardToCast);
-        }
-        return result;
+        return CardUtil.castSpellWithAttributesForCost(player, source, game, new CardsImpl(cards), filter,
+                "Cast spell by paying life equal to its mana value rather than paying its mana cost",
+                faceCard -> new PayLifeCost(faceCard.getManaValue()));
     }
 
     @Override
