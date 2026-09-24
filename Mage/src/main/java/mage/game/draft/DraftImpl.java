@@ -26,7 +26,7 @@ public abstract class DraftImpl implements Draft {
 
     protected final UUID id;
     protected UUID tableId = null;
-    protected final Map<UUID, DraftPlayer> players = new LinkedHashMap<>();
+    protected final Map<UUID, DraftPlayer> players = new LinkedHashMap<>(); // must use sync access for any changes like synchronized (players)
     protected final PlayerList table = new PlayerList();
     protected int numberBoosters;
     protected DraftCube draftCube;
@@ -171,9 +171,16 @@ public abstract class DraftImpl implements Draft {
 
     @Override
     public void autoPick(UUID playerId) {
-        if (players.containsKey(playerId)) {
-            List<Card> booster = players.get(playerId).getBooster();
-            if (booster.size() > 0) {
+        // WARNING, can be called from any thread like CALL
+        // make sure current booster is open
+        // (pick timeout keeps calling it every second until the round ends)
+        synchronized (players) {
+            DraftPlayer player = players.get(playerId);
+            if (player == null || !player.isPicking()) {
+                return;
+            }
+            List<Card> booster = player.getBooster();
+            if (booster != null && !booster.isEmpty()) {
                 this.addPick(playerId, booster.get(booster.size() - 1).getId(), null);
             }
         }
@@ -376,16 +383,45 @@ public abstract class DraftImpl implements Draft {
 
     @Override
     public boolean addPick(UUID playerId, UUID cardId, Set<UUID> hiddenCards) {
-        DraftPlayer player = players.get(playerId);
-        if (player.isPicking()) {
-            for (Card card : player.booster) {
-                if (card.getId().equals(cardId)) {
-                    player.addPick(card, hiddenCards);
-                    break;
+        // WARNING, can be called from any thread like CALL
+        // pick request can come from any thread at any order (user's call, pick timeout, AI - actual or outdated)
+        // make sure it's an actual pick by card id
+        DraftPlayer player;
+        synchronized (players) {
+            player = players.get(playerId);
+            if (player == null) {
+                logger.warn("Draft " + this.id + ": ignored outdated pick from unknown player " + playerId
+                        + ", pack " + boosterNum + " pick " + cardNum + ", card " + cardId);
+                return false;
+            }
+
+            String outdatedReason = null;
+            Card pickedCard = null;
+            if (!player.isPicking()) {
+                outdatedReason = "player already picked in this round";
+            } else {
+                pickedCard = player.booster.stream()
+                        .filter(card -> card.getId().equals(cardId))
+                        .findFirst()
+                        .orElse(null);
+                if (pickedCard == null) {
+                    outdatedReason = "card is not in the current booster";
                 }
             }
-            picksCheckDone();
+
+            if (outdatedReason != null) {
+                boolean alreadyPicked = player.getDeck().getSideboard().stream().anyMatch(card -> card.getId().equals(cardId));
+                logger.warn("Draft " + this.id + ": ignored outdated pick from " + player.getPlayer().getName()
+                        + ", pack " + boosterNum + " pick " + cardNum + ", card " + cardId
+                        + (alreadyPicked ? " (already picked before)" : "")
+                        + " - " + outdatedReason);
+                return false;
+            }
+
+            player.addPick(pickedCard, hiddenCards);
         }
+
+        picksCheckDone();
         return !player.isPicking();
     }
 
