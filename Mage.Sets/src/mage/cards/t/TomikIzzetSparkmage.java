@@ -16,6 +16,11 @@ import mage.util.CardUtil;
 
 import java.util.UUID;
 
+/**
+ *
+ * @author notshauna
+ */
+
 public final class TomikIzzetSparkmage extends CardImpl {
 
     public TomikIzzetSparkmage(UUID ownerId, CardSetInfo setInfo) {
