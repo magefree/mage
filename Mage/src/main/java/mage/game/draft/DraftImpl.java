@@ -327,14 +327,39 @@ public abstract class DraftImpl implements Draft {
     }
 
     protected boolean sendBoostersToPlayers() {
-        boolean allBoostersLoaded = true;
-        for (DraftPlayer player : getPlayers()) {
-            if (player.isPicking() && !player.isBoosterLoaded()) {
-                allBoostersLoaded = false;
-                player.getPlayer().pickCard(player.getBooster(), player.getDeck(), this);
+        // WARNING, running from task thread
+        // re-send boosters logic:
+        // - first attempt goes to all clients
+        // - second+ attempts goes to not-confirmed clients only
+
+        // find not-confirmed clients
+        List<DraftPlayer> needSend = new ArrayList<>();
+        synchronized (players) {
+            for (DraftPlayer player : players.values()) {
+                if (!player.isPicking()) {
+                    continue;
+                }
+                if (!player.isBoosterSent()) {
+                    player.setBoosterSent();
+                    needSend.add(player);
+                } else if (!player.isBoosterLoaded()) {
+                    needSend.add(player);
+                }
             }
         }
-        return allBoostersLoaded;
+
+        // send boosters to all one by one
+        // TODO: send boosters in async style in new thread here like game init does
+        //   it's require code and logic rework:
+        //   - split humans and bots between threads;
+        //   - sending flag;
+        //   - synchronized remove from DraftController;
+        //   - pick timeout calc before sent
+        for (DraftPlayer player : needSend) {
+            player.getPlayer().pickCard(player.getBooster(), player.getDeck(), this);
+        }
+
+        return needSend.isEmpty();
     }
 
     protected boolean donePicking() {
@@ -462,8 +487,17 @@ public abstract class DraftImpl implements Draft {
 
     @Override
     public void setBoosterLoaded(UUID playerId) {
-        DraftPlayer player = players.get(playerId);
-        player.setBoosterLoaded();
+        // WARNING, can be called from any thread like CALL
+        // confirm request can come at any order (actual or outdated), outdated one can only stop resends
+        synchronized (players) {
+            DraftPlayer player = players.get(playerId);
+            if (player == null) {
+                logger.warn("Draft " + this.id + ": ignored outdated booster confirm from unknown player " + playerId
+                        + ", pack " + boosterNum + " pick " + cardNum);
+                return;
+            }
+            player.setBoosterLoaded();
+        }
     }
 
     @Override

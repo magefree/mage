@@ -195,7 +195,7 @@ public class DraftController {
     }
     
     public void setBoosterLoaded(UUID userId) {
-        draftSessions.get(userPlayerMap.get(userId)).setBoosterLoaded();
+        draft.setBoosterLoaded(userPlayerMap.get(userId));
     }
 
     private synchronized void updateDraft() throws MageException {

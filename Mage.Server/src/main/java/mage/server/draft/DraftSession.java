@@ -162,8 +162,4 @@ public class DraftSession {
     public Draft getDraft() {
         return draft;
     }
-
-    public void setBoosterLoaded() {
-        draft.setBoosterLoaded(playerId);
-    }
 }
