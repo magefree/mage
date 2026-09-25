@@ -246,6 +246,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Paradox Shaper", 143, Rarity.UNCOMMON, mage.cards.p.ParadoxShaper.class));
         cards.add(new SetCardInfo("Perfected Theory", 34, Rarity.UNCOMMON, mage.cards.p.PerfectedTheory.class));
         cards.add(new SetCardInfo("Pia, Aether Ascetic", 264, Rarity.UNCOMMON, mage.cards.p.PiaAetherAscetic.class));
+        cards.add(new SetCardInfo("Pia, Determined Rebuilder", 250, Rarity.UNCOMMON, mage.cards.p.PiaDeterminedRebuilder.class));
         cards.add(new SetCardInfo("Plains", 281, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 282, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 382, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
