@@ -3,6 +3,7 @@ package mage.abilities.common;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.SavedGainedLifeValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.hint.StaticHint;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -14,6 +15,7 @@ import mage.target.targetpointer.FixedTarget;
 public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
 
     private final boolean setTargetPointer;
+    private final boolean showAmountGainedHint;
 
     public GainLifeControllerTriggeredAbility(Effect effect) {
         this(effect, false);
@@ -23,19 +25,25 @@ public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
         this(effect, optional, false);
     }
 
-    public GainLifeControllerTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
-        this(Zone.BATTLEFIELD, effect, optional, setTargetPointer);
+    public GainLifeControllerTriggeredAbility(Effect effect, boolean optional, boolean showAmountGained) {
+        this(effect, optional, showAmountGained, false);
     }
 
-    public GainLifeControllerTriggeredAbility(Zone zone, Effect effect, boolean optional, boolean setTargetPointer) {
+    public GainLifeControllerTriggeredAbility(Effect effect, boolean optional, boolean showAmountGained, boolean setTargetPointer) {
+        this(Zone.BATTLEFIELD, effect, optional, showAmountGained, setTargetPointer);
+    }
+
+    public GainLifeControllerTriggeredAbility(Zone zone, Effect effect, boolean optional, boolean showAmountGained, boolean setTargetPointer) {
         super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
+        this.showAmountGainedHint = showAmountGained;
         setTriggerPhrase("Whenever you gain life, ");
     }
 
     private GainLifeControllerTriggeredAbility(final GainLifeControllerTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
+        this.showAmountGainedHint = ability.showAmountGainedHint;
     }
 
     @Override
@@ -53,9 +61,13 @@ public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
         if (!isControlledBy(event.getPlayerId())) {
             return false;
         }
+        this.getHints().clear();
         this.getEffects().setValue(SavedGainedLifeValue.VALUE_KEY, event.getAmount());
         if (setTargetPointer) {
             this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+        }
+        if (showAmountGainedHint) {
+            this.addHint(new StaticHint("Life gained: " + event.getAmount()));
         }
         return true;
     }

@@ -32,7 +32,7 @@ public final class PrizePig extends CardImpl {
 
         // Whenever you gain life, put that many ribbon counters on Prize Pig. Then if there are three or more ribbon counters on Prize Pig, remove those counters and untap it.
         Ability ability = new GainLifeControllerTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.RIBBON.createInstance(), SavedGainedLifeValue.MANY)
+                new AddCountersSourceEffect(CounterType.RIBBON.createInstance(), SavedGainedLifeValue.MANY), false, true
         );
         ability.addEffect(new PrizePigEffect());
         this.addAbility(ability);

@@ -8,6 +8,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.hint.StaticHint;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -81,11 +82,12 @@ class VizkopaGuildmageDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(controllerId)) {
-            getEffects().get(0).setValue("amountLifeGained", event.getAmount());
-            return true;
+        if (!event.getTargetId().equals(controllerId)) {
+            return false;
         }
-        return false;
+        addHint(new StaticHint("Life gained: " + event.getAmount()));
+        getEffects().get(0).setValue("amountLifeGained", event.getAmount());
+        return true;
     }
 
     @Override
