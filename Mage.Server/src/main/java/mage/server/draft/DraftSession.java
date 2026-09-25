@@ -2,6 +2,7 @@ package mage.server.draft;
 
 import mage.game.draft.Draft;
 import mage.game.draft.DraftPlayer;
+import mage.game.draft.DraftPlayerSnapshot;
 import mage.interfaces.callback.ClientCallback;
 import mage.interfaces.callback.ClientCallbackMethod;
 import mage.server.User;
@@ -50,6 +51,11 @@ public class DraftSession {
     public boolean init() {
         if (!killed) {
             Optional<User> user = managerFactory.userManager().getUser(userId);
+            DraftPlayerSnapshot snapshot = draft.getPlayerSnapshot(playerId);
+            if (snapshot == null) {
+                logger.warn("Draft " + draft.getId() + ": can't init unknown player " + playerId);
+                return false;
+            }
             if (user.isPresent()) {
                 int remaining;
                 if (futureTimeout != null && !futureTimeout.isDone()) {
@@ -60,7 +66,7 @@ public class DraftSession {
                     remaining = draft.getPickTimeout();
                 }
                 user.get().fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_INIT, draft.getId(),
-                        new DraftClientMessage(getDraftView(), getDraftPickView(remaining))));
+                        new DraftClientMessage(new DraftView(draft, snapshot), new DraftPickView(snapshot, remaining))));
                 return true;
             }
         }
@@ -69,10 +75,14 @@ public class DraftSession {
 
     public void update() {
         if (!killed) {
+            DraftPlayerSnapshot snapshot = draft.getPlayerSnapshot(playerId);
+            if (snapshot == null) {
+                return;
+            }
             managerFactory.userManager()
                     .getUser(userId).
                     ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_UPDATE, draft.getId(),
-                            new DraftClientMessage(getDraftView(), null))));
+                            new DraftClientMessage(new DraftView(draft, snapshot), null))));
         }
     }
 
@@ -86,12 +96,17 @@ public class DraftSession {
 
     public void pickCard(int timeout) {
         if (!killed) {
+            DraftPlayerSnapshot snapshot = draft.getPlayerSnapshot(playerId);
+            if (snapshot == null || !snapshot.isPicking()) {
+                // nothing to pick, e.g. a resend after the player's own pick
+                return;
+            }
             setupTimeout(timeout);
-            timeoutCardNum = draft.getCardNum();
+            timeoutCardNum = snapshot.getCardNum();
             managerFactory.userManager()
                     .getUser(userId)
                     .ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_PICK, draft.getId(),
-                            new DraftClientMessage(getDraftView(), getDraftPickView(timeout)))));
+                            new DraftClientMessage(new DraftView(draft, snapshot), new DraftPickView(snapshot, timeout)))));
 
         }
     }
@@ -136,8 +151,10 @@ public class DraftSession {
     }
 
     public DraftPickView sendCardPick(UUID cardId, Set<UUID> hiddenCards) {
-        if (draft.addPick(playerId, cardId, hiddenCards)) {
-            return getDraftPickView(0);
+        // answer uses data from the pick moment (the draft can start the next round before the answer)
+        DraftPlayerSnapshot snapshot = draft.addPick(playerId, cardId, hiddenCards);
+        if (snapshot != null) {
+            return new DraftPickView(snapshot, 0);
         }
         return null;
     }
@@ -145,14 +162,6 @@ public class DraftSession {
     public void removeDraft() {
         managerFactory.userManager().getUser(userId).ifPresent(user -> user.removeDraft(playerId));
 
-    }
-
-    private DraftView getDraftView() {
-        return new DraftView(draft);
-    }
-
-    private DraftPickView getDraftPickView(int timeout) {
-        return new DraftPickView(draft.getPlayer(playerId), timeout);
     }
 
     public DraftPlayer getDraftPlayer() {

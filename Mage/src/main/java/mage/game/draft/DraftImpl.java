@@ -32,11 +32,23 @@ public abstract class DraftImpl implements Draft {
     protected DraftCube draftCube;
     protected List<ExpansionSet> sets;
     protected List<String> setCodes;
-    protected int boosterNum = 1; // starts with booster 1
-    protected int cardNum = 1; // starts with card number 1, increases by +1 after each picking
+    
+    
     protected TimingOption timing;
     protected int boosterLoadingCounter; // number of times the boosters have been sent to players until all are confirmed to have received them
     protected final int BOOSTER_LOADING_INTERVAL_SECS = 2; // interval in seconds
+
+    // WARNING
+    // ---
+    // daft works under multiple threads (booster send/resend, picks processing, timeouts), 
+    // so all changes must be syncronized under same lock (players)
+    // look at DraftView and DraftPickView to find used fields
+    //
+    // access to that fields by snapshots or synchronized (players) { xxx }
+    protected int cardNum = 1; // starts with card number 1, increases by +1 after each picking
+    protected int boosterNum = 1; // starts with booster 1
+    // player state like picking already synced inside locked (players)
+    // ---
 
     protected boolean abort = false;
     protected boolean started = false;
@@ -82,9 +94,15 @@ public abstract class DraftImpl implements Draft {
     public boolean replacePlayer(Player oldPlayer, Player newPlayer) {
         if (newPlayer != null) {
             DraftPlayer newDraftPlayer = new DraftPlayer(newPlayer);
-            DraftPlayer oldDraftPlayer = players.get(oldPlayer.getId());
             Map<UUID, DraftPlayer> newPlayers = new LinkedHashMap<>();
             synchronized (players) {
+                // boosters send to all players by timeout, so don't need to send it manually here
+                DraftPlayer oldDraftPlayer = players.get(oldPlayer.getId());
+                newDraftPlayer.setBoosterAndLoad(oldDraftPlayer.getBooster());
+                if (oldDraftPlayer.isPicking()) {
+                    newDraftPlayer.setPickingAndSending();
+                }
+
                 for (Map.Entry<UUID, DraftPlayer> entry : players.entrySet()) {
                     if (entry.getKey().equals(oldPlayer.getId())) {
                         newPlayers.put(newPlayer.getId(), newDraftPlayer);
@@ -110,11 +128,6 @@ public abstract class DraftImpl implements Draft {
                 table.setCurrent(currentId);
             }
 
-            // boosters send to all players by timeout, so don't need to send it manually here
-            newDraftPlayer.setBoosterAndLoad(oldDraftPlayer.getBooster());
-            if (oldDraftPlayer.isPicking()) {
-                newDraftPlayer.setPickingAndSending();
-            }
             boosterSendingStart(); // if it's AI then make pick from it
 
             return true;
@@ -292,7 +305,9 @@ public abstract class DraftImpl implements Draft {
             picksWait();
         }
 
-        cardNum++;
+        synchronized (players) {
+            cardNum++;
+        }
         return true;
     }
 
@@ -442,17 +457,18 @@ public abstract class DraftImpl implements Draft {
     }
 
     @Override
-    public boolean addPick(UUID playerId, UUID cardId, Set<UUID> hiddenCards) {
+    public DraftPlayerSnapshot addPick(UUID playerId, UUID cardId, Set<UUID> hiddenCards) {
         // WARNING, can be called from any thread like CALL
         // pick request can come from any thread at any order (user's call, pick timeout, AI - actual or outdated)
         // make sure it's an actual pick by card id
+        DraftPlayerSnapshot res;
         DraftPlayer player;
         synchronized (players) {
             player = players.get(playerId);
             if (player == null) {
                 logger.warn("Draft " + this.id + ": ignored outdated pick from unknown player " + playerId
                         + ", pack " + boosterNum + " pick " + cardNum + ", card " + cardId);
-                return false;
+                return null;
             }
 
             String outdatedReason = null;
@@ -475,14 +491,38 @@ public abstract class DraftImpl implements Draft {
                         + ", pack " + boosterNum + " pick " + cardNum + ", card " + cardId
                         + (alreadyPicked ? " (already picked before)" : "")
                         + " - " + outdatedReason);
-                return false;
+                return null;
             }
 
             player.addPick(pickedCard, hiddenCards);
+            // answer data must be from the pick moment, the draft thread can start the next round right after the lock
+            res = makePlayerSnapshot(player);
         }
 
         picksCheckDone();
-        return !player.isPicking();
+        //ThreadUtils.sleep(50); // simulate low CPU in test lab (OS's threads queue)
+        return res;
+    }
+
+    @Override
+    public DraftPlayerSnapshot getPlayerSnapshot(UUID playerId) {
+        synchronized (players) {
+            DraftPlayer player = players.get(playerId);
+            if (player == null) {
+                return null;
+            }
+            return makePlayerSnapshot(player);
+        }
+    }
+
+    private DraftPlayerSnapshot makePlayerSnapshot(DraftPlayer player) {
+        // must be called under players lock
+        List<String> playerNames = new ArrayList<>();
+        for (DraftPlayer draftPlayer : players.values()) {
+            playerNames.add(draftPlayer.getPlayer().getName());
+        }
+        return new DraftPlayerSnapshot(boosterNum, cardNum, playerNames,
+                player.getBooster(), new ArrayList<>(player.getDeck().getSideboard()), player.isPicking());
     }
 
     @Override

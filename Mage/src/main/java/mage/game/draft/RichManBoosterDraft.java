@@ -24,18 +24,24 @@ public class RichManBoosterDraft extends DraftImpl {
 
     @Override
     public void start() {
-        cardNum = 1;
-        boosterNum = 1;
-        while (!isAbort() && cardNum <= 36) {
-            openBooster();
+        synchronized (players) {
             cardNum = 1;
+            boosterNum = 1;
+        }
+        while (!isAbort() && cardNum <= 36) {
+            synchronized (players) {
+                openBooster();
+                cardNum = 1;
+            }
             fireUpdatePlayersEvent();
             while (!isAbort() && pickCards()) {
                 // new booster each time, so order is irrelevant
                 passBoosterToLeft();
                 fireUpdatePlayersEvent();
             }
-            boosterNum++;
+            synchronized (players) {
+                boosterNum++;
+            }
         }
         this.boosterSendingEnd();
         this.fireEndDraftEvent();
@@ -76,7 +82,9 @@ public class RichManBoosterDraft extends DraftImpl {
             picksWait();
         }
 
-        cardNum++;
+        synchronized (players) {
+            cardNum++;
+        }
         return true;
     }
 
