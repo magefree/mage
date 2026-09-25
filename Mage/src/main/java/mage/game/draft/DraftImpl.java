@@ -35,8 +35,9 @@ public abstract class DraftImpl implements Draft {
     
     
     protected TimingOption timing;
-    protected int boosterLoadingCounter; // number of times the boosters have been sent to players until all are confirmed to have received them
-    protected final int BOOSTER_LOADING_INTERVAL_SECS = 2; // interval in seconds
+
+    protected final int BOOSTER_LOADING_INTERVAL_SECS = 2; // re-send interval in seconds for not confirmed boosters
+    protected final int AUTOPICK_BUFFER_SECS = 3; // autopick happens after the pick deadline + buffer (client's timer can lag behind the server)
 
     // WARNING
     // ---
@@ -186,7 +187,7 @@ public abstract class DraftImpl implements Draft {
     public void autoPick(UUID playerId) {
         // WARNING, can be called from any thread like CALL
         // make sure current booster is open
-        // (pick timeout keeps calling it every second until the round ends)
+        // (a pick can come at the same time, so check picking state again)
         synchronized (players) {
             DraftPlayer player = players.get(playerId);
             if (player == null || !player.isPicking()) {
@@ -311,21 +312,32 @@ public abstract class DraftImpl implements Draft {
         return true;
     }
 
+    protected void startPickDeadline(DraftPlayer player) {
+        // must be called under players lock
+        // pick time runs from the first booster send to that player, whatever happens with a player's connection,
+        // so re-sends and reconnects get a remaining time only;
+        // a send order can be slow (sync sending one by one), so a next player's time starts on its own send
+        if (!player.isPicking() || player.getPickDeadline() > 0) {
+            return;
+        }
+        int time = getRoundPickTimeout();
+        if (time > 0) {
+            player.setPickDeadline(System.currentTimeMillis() + time * 1000L);
+        }
+    }
+
     public void boosterSendingStart() {
         if (this.boosterSendingExecutor == null) {
             this.boosterSendingExecutor = Executors.newSingleThreadScheduledExecutor(
                     new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_TOURNEY_BOOSTERS_SEND + " " + this.getId())
             );
         }
-        boosterLoadingCounter = 0;
 
         if (boosterSendingWorker == null) {
             boosterSendingWorker = boosterSendingExecutor.scheduleAtFixedRate(() -> {
                 try {
                     if (isAbort() || sendBoostersToPlayers()) {
                         boosterSendingEnd();
-                    } else {
-                        boosterLoadingCounter++;
                     }
                 } catch (Exception ex) {
                     logger.fatal("Fatal boosterLoadingHandle error in draft " + id + " pack " + boosterNum + " pick " + cardNum, ex);
@@ -371,6 +383,10 @@ public abstract class DraftImpl implements Draft {
         //   - synchronized remove from DraftController;
         //   - pick timeout calc before sent
         for (DraftPlayer player : needSend) {
+            synchronized (players) {
+                // pick time starts right before the first send to that player
+                startPickDeadline(player);
+            }
             player.getPlayer().pickCard(player.getBooster(), player.getDeck(), this);
         }
 
@@ -420,19 +436,31 @@ public abstract class DraftImpl implements Draft {
     @Override
     public void firePickCardEvent(UUID playerId) {
         DraftPlayer player = players.get(playerId);
-        playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), getPickTimeout());
+        playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), getPickTimeout(playerId));
+    }
+
+    /**
+     * Full pick time of the current pick in seconds, 0 - unlimited
+     */
+    protected int getRoundPickTimeout() {
+        return timing.getPickTimeout(cardNum);
     }
 
     @Override
-    public int getPickTimeout() {
-        int cardNum = Math.min(15, this.cardNum);
-        int time = timing.getPickTimeout(cardNum);
-        // if the pack is re-sent to a player because they haven't been able to successfully load it, the pick time is reduced appropriately because of the elapsed time
+    public int getPickTimeout(UUID playerId) {
+        // remaining pick time of the player's current pick, the same for any send (first send, re-send, reconnect)
         // the time is always at least 1 second unless it's set to 0, i.e. unlimited time
-        if (time > 0) {
-            time = Math.max(1, time - boosterLoadingCounter * BOOSTER_LOADING_INTERVAL_SECS);
+        // (0 - no deadline and no auto-pick, e.g. Rich Man draft with NONE timing or a future option to disable the timer)
+        synchronized (players) {
+            int time = getRoundPickTimeout();
+            DraftPlayer player = players.get(playerId);
+            if (time <= 0 || player == null || !player.isPicking() || player.getPickDeadline() == 0) {
+                // unlimited, the booster is not sent yet (e.g. draft init) or no pick now (e.g. between rounds)
+                return time;
+            }
+            long leftMs = player.getPickDeadline() - System.currentTimeMillis();
+            return (int) Math.max(1, (leftMs + 999) / 1000);
         }
-        return time;
     }
 
     public void picksCheckDone() {
@@ -443,16 +471,65 @@ public abstract class DraftImpl implements Draft {
     }
 
     protected void picksWait() {
-        // main thread waiting any picks or changes
+        // main thread waiting any picks, changes or a pick deadline
+        long waitMs = 10000; // checked every 10s to make sure the draft moves on
+        long autoPickTime = 0; // the nearest one
+        boolean notSentYet = false;
+        synchronized (players) {
+            for (DraftPlayer player : players.values()) {
+                if (!player.isPicking()) {
+                    continue;
+                }
+                if (player.getPickDeadline() > 0) {
+                    long playerTime = player.getPickDeadline() + AUTOPICK_BUFFER_SECS * 1000L;
+                    autoPickTime = autoPickTime == 0 ? playerTime : Math.min(autoPickTime, playerTime);
+                } else {
+                    notSentYet = true;
+                }
+            }
+        }
+        if (autoPickTime > 0) {
+            waitMs = Math.max(1, Math.min(waitMs, autoPickTime - System.currentTimeMillis()));
+        }
+        if (notSentYet) {
+            // deadlines start on sends by the booster sending task, so check it again soon
+            waitMs = Math.min(waitMs, 500);
+        }
+
         synchronized (this) {
             try {
-                this.wait(10000); // checked every 10s to make sure the draft moves on
+                this.wait(waitMs);
             } catch (InterruptedException ignore) {
             }
         }
 
+        autoPickByDeadline();
+
         if (donePicking()) {
             boosterSendingEnd();
+        }
+    }
+
+    protected void autoPickByDeadline() {
+        // pick timeout: auto-pick for all players who didn't pick in time (online or offline)
+        List<UUID> latePlayers = new ArrayList<>();
+        synchronized (players) {
+            if (isAbort()) {
+                return;
+            }
+            long now = System.currentTimeMillis();
+            for (Map.Entry<UUID, DraftPlayer> entry : players.entrySet()) {
+                DraftPlayer player = entry.getValue();
+                if (player.isPicking() && player.getPickDeadline() > 0
+                        && now >= player.getPickDeadline() + AUTOPICK_BUFFER_SECS * 1000L) {
+                    latePlayers.add(entry.getKey());
+                }
+            }
+        }
+
+        for (UUID playerId : latePlayers) {
+            // uses user's marked card or a default card
+            autoPick(playerId);
         }
     }
 

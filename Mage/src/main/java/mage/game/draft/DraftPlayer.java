@@ -26,6 +26,7 @@ public class DraftPlayer {
     protected boolean joined = false;
     protected Set<UUID> hiddenCards;
     protected UUID markedCard; // user's choice for autopick on pick timeout, from the current booster only
+    protected long pickDeadline; // end time of the current pick (from the first booster send to that player), 0 - not sent yet or unlimited time
 
     public DraftPlayer(Player player) {
         id = UUID.randomUUID();
@@ -91,6 +92,7 @@ public class DraftPlayer {
         this.boosterLoaded = false;
         this.boosterSent = false;
         this.markedCard = null;
+        this.pickDeadline = 0;
     }
 
     public UUID getMarkedCard() {
@@ -134,4 +136,11 @@ public class DraftPlayer {
         return boosterLoaded;
     }
 
+    public long getPickDeadline() {
+        return pickDeadline;
+    }
+
+    public void setPickDeadline(long pickDeadline) {
+        this.pickDeadline = pickDeadline;
+    }
 }

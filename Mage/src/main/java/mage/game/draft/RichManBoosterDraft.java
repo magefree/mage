@@ -89,12 +89,10 @@ public class RichManBoosterDraft extends DraftImpl {
     }
 
     @Override
-    public void firePickCardEvent(UUID playerId) {
-        DraftPlayer player = players.get(playerId);
+    protected int getRoundPickTimeout() {
         int cardNum = Math.min(36, this.cardNum);
 
         // richman uses custom times
-        int time = (int) Math.ceil(customProfiTimes[cardNum - 1] * timing.getCustomTimeoutFactor());
-        playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), time);
+        return (int) Math.ceil(customProfiTimes[cardNum - 1] * timing.getCustomTimeoutFactor());
     }
 } 

@@ -170,14 +170,6 @@ public class DraftController {
         }
     }
 
-    public void timeout(UUID userId) {
-        UUID playerId = userPlayerMap.get(userId);
-        if (playerId != null) {
-            // autopick uses user's marked card or a default card
-            draft.autoPick(playerId);
-        }
-    }
-
     public UUID getSessionId() {
         return this.draftSessionId;
     }

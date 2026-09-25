@@ -16,9 +16,6 @@ import java.rmi.RemoteException;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -32,17 +29,10 @@ public class DraftSession {
     protected final UUID playerId;
     protected final Draft draft;
     protected boolean killed = false;
-    
-    protected int timeoutCardNum; // the pick number for which the current timeout has been set up
-    protected int timeoutCounter = 0; // increments every second that the player has run out of picking time
-    protected final int AUTOPICK_BUFFER = 2; // seconds - when the player has run out of picking time, the autopick happens after this many seconds (to account for client timer possibly lagging behind server)
 
-    private ScheduledFuture<?> futureTimeout;
-    protected final ScheduledExecutorService timeoutExecutor;
-
+    // pick timeout and auto-pick controlled by draft itself (pick deadline), see DraftImpl.picksWait
     public DraftSession(ManagerFactory managerFactory, Draft draft, UUID userId, UUID playerId) {
         this.managerFactory = managerFactory;
-        this.timeoutExecutor = managerFactory.threadExecutor().getTimeoutExecutor();
         this.userId = userId;
         this.draft = draft;
         this.playerId = playerId;
@@ -57,14 +47,8 @@ public class DraftSession {
                 return false;
             }
             if (user.isPresent()) {
-                int remaining;
-                if (futureTimeout != null && !futureTimeout.isDone()) {
-                    // picking already runs
-                    remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
-                } else {
-                    // picking not started yet
-                    remaining = draft.getPickTimeout();
-                }
+                // remaining time of the current pick (e.g. on reconnect) or a full time before the first pick
+                int remaining = draft.getPickTimeout(playerId);
                 user.get().fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_INIT, draft.getId(),
                         new DraftClientMessage(new DraftView(draft, snapshot), new DraftPickView(snapshot, remaining))));
                 return true;
@@ -101,43 +85,11 @@ public class DraftSession {
                 // nothing to pick, e.g. a resend after the player's own pick
                 return;
             }
-            setupTimeout(timeout);
-            timeoutCardNum = snapshot.getCardNum();
             managerFactory.userManager()
                     .getUser(userId)
                     .ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_PICK, draft.getId(),
                             new DraftClientMessage(new DraftView(draft, snapshot), new DraftPickView(snapshot, timeout)))));
 
-        }
-    }
-
-    private synchronized void setupTimeout(int seconds) {
-        cancelTimeout();
-        if (seconds > 0) {
-            if (seconds > 1 ) {
-                timeoutCounter = 0;
-            }
-            futureTimeout = timeoutExecutor.schedule(
-                    () -> {
-                        try {
-                            if (timeoutCardNum == draft.getCardNum()) {
-                                if (timeoutCounter++ > AUTOPICK_BUFFER) { // the autopick happens after n seconds (to account for client timer possibly lagging behind server)
-                                    managerFactory.draftManager().timeout(draft.getId(), userId);
-                                }
-                                setupTimeout(1); // The timeout keeps happening at a 1 second interval to make sure that the draft moves onto the next pick
-                            }
-                        } catch (Exception e) {
-                            logger.fatal("DraftSession error - userId " + userId + " draftId " + draft.getId(), e);
-                        }
-                    },
-                    seconds, TimeUnit.SECONDS
-            );
-        }
-    }
-
-    private synchronized void cancelTimeout() {
-        if (futureTimeout != null) {
-            futureTimeout.cancel(false);
         }
     }
 

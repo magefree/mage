@@ -60,7 +60,7 @@ public interface Draft extends MageItem, Serializable {
     void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener);
     void firePickCardEvent(UUID playerId);
 
-    int getPickTimeout();
+    int getPickTimeout(UUID playerId);
 
     boolean isAbort();
     void setAbort(boolean abort);
