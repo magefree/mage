@@ -41,7 +41,7 @@ public class RichManCubeBoosterDraft extends DraftImpl {
                 boosterNum++;
             }
         }
-        this.boosterSendingEnd();
+        this.boosterSendingEndDraft();
         this.fireEndDraftEvent();
     }
 

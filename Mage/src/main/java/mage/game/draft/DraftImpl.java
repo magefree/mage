@@ -12,10 +12,7 @@ import mage.util.XmageThreadFactory;
 import org.apache.log4j.Logger;
 
 import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85
@@ -334,22 +331,37 @@ public abstract class DraftImpl implements Draft {
         }
 
         if (boosterSendingWorker == null) {
-            boosterSendingWorker = boosterSendingExecutor.scheduleAtFixedRate(() -> {
-                try {
-                    if (isAbort() || sendBoostersToPlayers()) {
-                        boosterSendingEnd();
+            try {
+                boosterSendingWorker = boosterSendingExecutor.scheduleAtFixedRate(() -> {
+                    try {
+                        if (isAbort() || sendBoostersToPlayers()) {
+                            boosterSendingEndRound();
+                        }
+                    } catch (Exception ex) {
+                        logger.fatal("Fatal boosterLoadingHandle error in draft " + id + " pack " + boosterNum + " pick " + cardNum, ex);
                     }
-                } catch (Exception ex) {
-                    logger.fatal("Fatal boosterLoadingHandle error in draft " + id + " pack " + boosterNum + " pick " + cardNum, ex);
-                }
-            }, 0, BOOSTER_LOADING_INTERVAL_SECS, TimeUnit.SECONDS);
+                }, 0, BOOSTER_LOADING_INTERVAL_SECS, TimeUnit.SECONDS);
+            } catch (RejectedExecutionException e) {
+                // draft already ended and the executor is shut down (e.g. a late reconnect), nothing to send
+                logger.warn("Booster sending start after the draft end, ignored: draft " + id
+                        + " pack " + boosterNum + " pick " + cardNum);
+            }
         }
     }
 
-    protected void boosterSendingEnd() {
+    private void boosterSendingEndRound() {
+        // round end: stop re-sends of current pick
         if (boosterSendingWorker != null) {
             boosterSendingWorker.cancel(true);
             boosterSendingWorker = null;
+        }
+    }
+
+    protected void boosterSendingEndDraft() {
+        // draft end: stop re-sends and free the thread (each draft has its own executor)
+        boosterSendingEndRound();
+        if (boosterSendingExecutor != null) {
+            boosterSendingExecutor.shutdown();
         }
     }
 
@@ -506,7 +518,7 @@ public abstract class DraftImpl implements Draft {
         autoPickByDeadline();
 
         if (donePicking()) {
-            boosterSendingEnd();
+            boosterSendingEndRound();
         }
     }
 
