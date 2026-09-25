@@ -73,6 +73,36 @@ public class BalancingActTest extends CardTestPlayerBase {
     }
 
     /**
+     * Cards must be discarded at the same time, so Rielle, the Everwise triggers once for all of them
+     * (Whenever you discard one or more cards for the first time each turn, draw that many cards.)
+     */
+    @Test
+    public void test_DiscardSimultaneously_Rielle() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.HAND, playerA, balancingAct);
+        addCard(Zone.HAND, playerA, "Plains", 2);
+
+        // same number of permanents (4) -> nothing is sacrificed
+        addCard(Zone.BATTLEFIELD, playerB, "Rielle, the Everwise", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 3);
+        addCard(Zone.HAND, playerB, "Island", 5);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, balancingAct);
+
+        setStrictChooseMode(false);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, 4);
+        assertPermanentCount(playerB, 4);
+        assertPermanentCount(playerB, "Rielle, the Everwise", 1);
+        assertHandCount(playerA, 2);
+        // playerB keeps 2 of 5 cards and discards 3 at once -> Rielle draws 3 (not 1)
+        assertGraveyardCount(playerB, "Island", 3);
+        assertHandCount(playerB, 2 + 3);
+    }
+
+    /**
      * If a player has no cards in hand, every other player must discard their whole hand
      */
     @Test
