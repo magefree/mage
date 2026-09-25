@@ -232,31 +232,35 @@ class ConvokeEffect extends OneShotEffect {
                         } else {
                             chooseManaType.setChoice(chooseManaType.getChoices().iterator().next());
                         }
-                        if (chooseManaType.getChoice().equals("Black")) {
+                        String choiceValue = chooseManaType.getChoice();
+                        if (!chooseManaType.isChosen() || choiceValue == null) {
+                            return false;
+                        }
+                        if (choiceValue.equals("Black")) {
                             manaPool.addMana(Mana.BlackMana(1), game, source);
                             manaPool.unlockManaType(ManaType.BLACK);
                         }
-                        if (chooseManaType.getChoice().equals("Blue")) {
+                        if (choiceValue.equals("Blue")) {
                             manaPool.addMana(Mana.BlueMana(1), game, source);
                             manaPool.unlockManaType(ManaType.BLUE);
                         }
-                        if (chooseManaType.getChoice().equals("Green")) {
+                        if (choiceValue.equals("Green")) {
                             manaPool.addMana(Mana.GreenMana(1), game, source);
                             manaPool.unlockManaType(ManaType.GREEN);
                         }
-                        if (chooseManaType.getChoice().equals("White")) {
+                        if (choiceValue.equals("White")) {
                             manaPool.addMana(Mana.WhiteMana(1), game, source);
                             manaPool.unlockManaType(ManaType.WHITE);
                         }
-                        if (chooseManaType.getChoice().equals("Red")) {
+                        if (choiceValue.equals("Red")) {
                             manaPool.addMana(Mana.RedMana(1), game, source);
                             manaPool.unlockManaType(ManaType.RED);
                         }
-                        if (chooseManaType.getChoice().equals("Colorless")) {
+                        if (choiceValue.equals("Colorless")) {
                             manaPool.addMana(Mana.ColorlessMana(1), game, source);
                             manaPool.unlockManaType(ManaType.COLORLESS);
                         }
-                        manaName = chooseManaType.getChoice().toLowerCase(Locale.ENGLISH);
+                        manaName = choiceValue.toLowerCase(Locale.ENGLISH);
                     } else {
                         manaPool.addMana(Mana.ColorlessMana(1), game, source);
                         manaPool.unlockManaType(ManaType.COLORLESS);
