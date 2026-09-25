@@ -12,8 +12,6 @@ import mage.util.SubTypes;
 import mage.view.CardView;
 import mage.view.PermanentView;
 import org.apache.log4j.Logger;
-import static org.mage.card.arcane.ManaSymbols.getSizedManaSymbol;
-import static org.mage.card.arcane.ModernCardResourceLoader.*;
 
 import java.awt.*;
 import java.awt.font.*;
@@ -25,6 +23,9 @@ import java.text.CharacterIterator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import static org.mage.card.arcane.ManaSymbols.getSizedManaSymbol;
+import static org.mage.card.arcane.ModernCardResourceLoader.*;
 
 /**
  * @author stravant@gmail.com, JayDi85
