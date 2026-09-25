@@ -3,13 +3,15 @@ package mage.view;
 import mage.cards.ExpansionSet;
 import mage.game.draft.Draft;
 import mage.game.draft.DraftCube;
-import mage.game.draft.DraftPlayer;
+import mage.game.draft.DraftPlayerSnapshot;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Warning, if you add new lookup fields then see DraftImpl about data sync
+ * 
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class DraftView implements Serializable {
@@ -23,7 +25,8 @@ public class DraftView implements Serializable {
 
     private final List<String> players = new ArrayList<>();
 
-    public DraftView(Draft draft) {
+    public DraftView(Draft draft, DraftPlayerSnapshot snapshot) {
+        // pack/pick numbers and players from the snapshot, so it's consistent with the player's booster
         this.isCube = draft.getDraftCube() != null;
         if (this.isCube) {
             for (int i = 0; i < draft.getNumberBoosters(); i++) {
@@ -37,11 +40,9 @@ public class DraftView implements Serializable {
                 setCodes.add(set.getCode());
             }
         }
-        this.boosterNum = draft.getBoosterNum();
-        this.cardNum = draft.getCardNum();
-        for (DraftPlayer draftPlayer : draft.getPlayers()) {
-            players.add(draftPlayer.getPlayer().getName());
-        }
+        this.boosterNum = snapshot.getBoosterNum();
+        this.cardNum = snapshot.getCardNum();
+        this.players.addAll(snapshot.getPlayerNames());
     }
 
     public String getBoosterInfo(int index) {
