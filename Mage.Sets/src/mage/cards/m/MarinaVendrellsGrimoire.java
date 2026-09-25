@@ -50,7 +50,7 @@ public final class MarinaVendrellsGrimoire extends CardImpl {
 
         // Whenever you gain life, draw that many cards.
         this.addAbility(new GainLifeControllerTriggeredAbility(
-                new DrawCardSourceControllerEffect(SavedGainedLifeValue.MANY)
+                new DrawCardSourceControllerEffect(SavedGainedLifeValue.MANY), false, true
         ));
 
         // Whenever you lose life, discard that many cards. Then if you have no cards in hand, you lose the game.

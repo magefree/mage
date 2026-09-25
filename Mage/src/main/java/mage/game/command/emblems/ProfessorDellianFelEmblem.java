@@ -17,7 +17,7 @@ public final class ProfessorDellianFelEmblem extends Emblem {
     public ProfessorDellianFelEmblem() {
         super("Emblem Dellian");
         Ability ability = new GainLifeControllerTriggeredAbility(
-                Zone.COMMAND, new LoseLifeTargetEffect(SavedGainedLifeValue.MUCH), false, false
+                Zone.COMMAND, new LoseLifeTargetEffect(SavedGainedLifeValue.MUCH), false, true, false
         );
         ability.addTarget(new TargetOpponent());
         this.getAbilities().add(ability);

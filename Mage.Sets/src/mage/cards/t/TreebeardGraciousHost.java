@@ -56,7 +56,7 @@ public final class TreebeardGraciousHost extends CardImpl {
 
         // Whenever you gain life, put that many +1/+1 counters on target Halfling or Treefolk.
         Ability ability = new GainLifeControllerTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance(), SavedGainedLifeValue.MANY)
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance(), SavedGainedLifeValue.MANY), false, true
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
