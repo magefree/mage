@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.ControlYourCommanderCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.hint.common.ControlYourCommanderHint;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
@@ -36,7 +37,8 @@ public final class LoyalApprentice extends CardImpl {
         // Lieutenant — At the beginning of combat on your turn, if you control your commander, create a 1/1 colorless Thopter artifact creature token with flying. That token gains haste until end of turn.
         this.addAbility(new BeginningOfCombatTriggeredAbility(new LoyalApprenticeEffect())
                 .withInterveningIf(ControlYourCommanderCondition.instance)
-                .setAbilityWord(AbilityWord.LIEUTENANT));
+                .setAbilityWord(AbilityWord.LIEUTENANT)
+                .addHint(ControlYourCommanderHint.instance));
     }
 
     private LoyalApprentice(final LoyalApprentice card) {
