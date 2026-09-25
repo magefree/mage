@@ -43,7 +43,7 @@ public class RichManBoosterDraft extends DraftImpl {
                 boosterNum++;
             }
         }
-        this.boosterSendingEnd();
+        this.boosterSendingEndDraft();
         this.fireEndDraftEvent();
     }
 
