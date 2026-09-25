@@ -89,6 +89,7 @@ public class DraftPlayer {
         // new round - new booster start to sending
         this.picking = true;
         this.boosterLoaded = false;
+        this.boosterSent = false;
         this.markedCard = null;
     }
 
