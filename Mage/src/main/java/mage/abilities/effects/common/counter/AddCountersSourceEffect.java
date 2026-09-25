@@ -2,7 +2,6 @@ package mage.abilities.effects.common.counter;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.AbilityType;
@@ -27,7 +26,7 @@ public class AddCountersSourceEffect extends OneShotEffect {
     private boolean putOnCard;
 
     public AddCountersSourceEffect(Counter counter) {
-        this(counter, StaticValue.get(0));
+        this(counter, null);
     }
 
     public AddCountersSourceEffect(Counter counter, DynamicValue amount) {
@@ -36,7 +35,7 @@ public class AddCountersSourceEffect extends OneShotEffect {
 
     /**
      * @param counter
-     * @param amount    this amount will be added to the counter instances
+     * @param amount    this amount will be added to the counter instances, null to use the counter's own count
      * @param putOnCard - counters have to be put on a card instead of a
      *                  permanent
      */
@@ -75,7 +74,7 @@ public class AddCountersSourceEffect extends OneShotEffect {
             }
 
             Counter newCounter = counter.copy();
-            int countersToAdd = amount.calculate(game, source, this);
+            int countersToAdd = amount == null ? 0 : amount.calculate(game, source, this);
             if (countersToAdd > 0 && newCounter.getCount() == 1) {
                 countersToAdd--;
             }
@@ -95,8 +94,8 @@ public class AddCountersSourceEffect extends OneShotEffect {
             if ((source.getStackMomentSourceZCC() == 0 // from static ability
                     || source.getStackMomentSourceZCC() == permanent.getZoneChangeCounter(game))) { // prevent to add counters to later source objects
                 Counter newCounter = counter.copy();
-                int countersToAdd = amount.calculate(game, source, this);
-                if (amount instanceof StaticValue || countersToAdd > 0) {
+                int countersToAdd = amount == null ? 0 : amount.calculate(game, source, this);
+                if (amount == null || countersToAdd > 0) {
                     if (countersToAdd > 0 && newCounter.getCount() == 1) {
                         countersToAdd--;
                     }

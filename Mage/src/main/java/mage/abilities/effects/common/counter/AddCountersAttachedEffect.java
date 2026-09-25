@@ -2,7 +2,6 @@ package mage.abilities.effects.common.counter;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.counters.Counter;
@@ -19,12 +18,12 @@ public class AddCountersAttachedEffect extends OneShotEffect {
     private DynamicValue amount;
 
     public AddCountersAttachedEffect(Counter counter, String textEnchanted) {
-        this(counter, StaticValue.get(1), textEnchanted);
+        this(counter, null, textEnchanted);
     }
 
     /**
      * @param counter
-     * @param amount        this amount will be added to the counter instances
+     * @param amount        this amount will be added to the counter instances, null to use the counter's own count
      * @param textEnchanted text used for the enchanted permanent in rule text
      */
     public AddCountersAttachedEffect(Counter counter, DynamicValue amount, String textEnchanted) {
@@ -49,12 +48,15 @@ public class AddCountersAttachedEffect extends OneShotEffect {
             Permanent attachedTo = game.getPermanent(permanent.getAttachedTo());
             if (attachedTo != null && counter != null) {
                 Counter newCounter = counter.copy();
-                int countersToAdd = amount.calculate(game, source, this);
-                if (countersToAdd > 0) {
-                    countersToAdd--;
-                    newCounter.add(countersToAdd);
-                    attachedTo.addCounters(newCounter, source.getControllerId(), source, game);
+                if (amount != null) {
+                    int countersToAdd = amount.calculate(game, source, this);
+                    if (countersToAdd < 1) {
+                        return true;
+                    }
+                    // amount counts the counter instance itself, so it contributes one less
+                    newCounter.add(countersToAdd - 1);
                 }
+                attachedTo.addCounters(newCounter, source.getControllerId(), source, game);
             }
             return true;
         }

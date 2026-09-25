@@ -5,6 +5,7 @@ import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
 import mage.abilities.*;
+import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.HasSubtypesSourceEffect;
@@ -983,6 +984,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         }
         if (this.cantBeAttachedBy(attachment, source, game, false)) {
             return false;
+        }
+        // not in cantBeAttachedBy: callers pre-check that one to decide whether to move the card at all, and 301.5e still puts the Equipment onto the battlefield, just unattached
+        for (Ability ability : attachment.getAbilities(game)) {
+            if (ability instanceof AttachableToRestrictedAbility
+                    && !((AttachableToRestrictedAbility) ability).canEquip(this.getId(), game)) {
+                return false;
+            }
         }
         if (game.replaceEvent(new AttachEvent(objectId, attachment, source))) {
             return false;

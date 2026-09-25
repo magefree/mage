@@ -43,7 +43,7 @@ public final class ONaginata extends CardImpl {
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), new TargetPermanent(filter.copy().add(TargetController.YOU.getControllerPredicate()))));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
     private ONaginata(final ONaginata card) {

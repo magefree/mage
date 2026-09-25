@@ -17,11 +17,19 @@ import mage.util.CardUtil;
 public class ManaSpentOnSpellGainsAbilityEffect extends CreateDelayedTriggeredAbilityEffect {
 
     public ManaSpentOnSpellGainsAbilityEffect(FilterSpell filter, ContinuousEffect effect) {
-        super(new ManaSpentToCastSpellDelayedTriggeredAbility(filter, new AddContinuousEffectToGame(effect)));
+        this(filter, effect, false);
+    }
+
+    public ManaSpentOnSpellGainsAbilityEffect(FilterSpell filter, ContinuousEffect effect, boolean anyOfThatMana) {
+        super(new ManaSpentToCastSpellDelayedTriggeredAbility(filter, new AddContinuousEffectToGame(effect), anyOfThatMana));
     }
 
     public ManaSpentOnSpellGainsAbilityEffect(FilterSpell filter, OneShotEffect effect) {
-        super(new ManaSpentToCastSpellDelayedTriggeredAbility(filter, effect));
+        this(filter, effect, false);
+    }
+
+    public ManaSpentOnSpellGainsAbilityEffect(FilterSpell filter, OneShotEffect effect, boolean anyOfThatMana) {
+        super(new ManaSpentToCastSpellDelayedTriggeredAbility(filter, effect, anyOfThatMana));
     }
 
     protected ManaSpentOnSpellGainsAbilityEffect(final ManaSpentOnSpellGainsAbilityEffect effect) {
@@ -37,11 +45,12 @@ public class ManaSpentOnSpellGainsAbilityEffect extends CreateDelayedTriggeredAb
 
 class ManaSpentToCastSpellDelayedTriggeredAbility extends ManaSpentDelayedTriggeredAbility {
 
-    ManaSpentToCastSpellDelayedTriggeredAbility(FilterSpell filter, Effect effect) {
+    ManaSpentToCastSpellDelayedTriggeredAbility(FilterSpell filter, Effect effect, boolean anyOfThatMana) {
         super(effect, filter);
         this.usesStack = false;
         this.triggerOnlyOnce = false;
-        setTriggerPhrase("If that mana is spent on " + CardUtil.addArticle(filter.getMessage()) + ", ");
+        setTriggerPhrase("If " + (anyOfThatMana ? "any of that mana" : "that mana")
+                + " is spent on " + CardUtil.addArticle(filter.getMessage()) + ", ");
     }
 
     private ManaSpentToCastSpellDelayedTriggeredAbility(final ManaSpentToCastSpellDelayedTriggeredAbility effect) {

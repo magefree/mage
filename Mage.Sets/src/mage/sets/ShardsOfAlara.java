@@ -198,7 +198,8 @@ public final class ShardsOfAlara extends ExpansionSet {
         cards.add(new SetCardInfo("Puppet Conjurer", 82, Rarity.UNCOMMON, mage.cards.p.PuppetConjurer.class));
         cards.add(new SetCardInfo("Qasali Ambusher", 184, Rarity.UNCOMMON, mage.cards.q.QasaliAmbusher.class));
         cards.add(new SetCardInfo("Quietus Spike", 217, Rarity.RARE, mage.cards.q.QuietusSpike.class));
-        cards.add(new SetCardInfo("Rafiq of the Many", 185, Rarity.MYTHIC, mage.cards.r.RafiqOfTheMany.class));
+        cards.add(new SetCardInfo("Rafiq of the Many", 185, Rarity.MYTHIC, mage.cards.r.RafiqOfTheMany.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rafiq of the Many", 250, Rarity.MYTHIC, mage.cards.r.RafiqOfTheMany.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rakeclaw Gargantuan", 186, Rarity.COMMON, mage.cards.r.RakeclawGargantuan.class));
         cards.add(new SetCardInfo("Ranger of Eos", 21, Rarity.RARE, mage.cards.r.RangerOfEos.class));
         cards.add(new SetCardInfo("Realm Razer", 187, Rarity.RARE, mage.cards.r.RealmRazer.class));

@@ -22,7 +22,7 @@ public final class NoAdmittance extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // Empower Jace 1.
-        this.getSpellAbility().addEffect(new EmpowerJaceEffect(1));
+        this.getSpellAbility().addEffect(new EmpowerJaceEffect(1).concatBy("<br>"));
     }
 
     private NoAdmittance(final NoAdmittance card) {

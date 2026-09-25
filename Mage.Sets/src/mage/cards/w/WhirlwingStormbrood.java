@@ -2,7 +2,6 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlashAbility;
@@ -51,7 +50,7 @@ public final class WhirlwingStormbrood extends OmenCard {
 
         // Dynamic Soar
         // Put three +1/+1 counters on target creature you control.
-        this.getSpellCard().getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(3), StaticValue.get(3)));
+        this.getSpellCard().getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(3)));
         this.getSpellCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.finalizeOmen();
     }

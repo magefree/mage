@@ -17,11 +17,7 @@ import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.abilities.effects.keyword.ScryEffect;
-import mage.abilities.hint.common.CitysBlessingHint;
-import mage.abilities.hint.common.CurrentDungeonHint;
-import mage.abilities.hint.common.InitiativeHint;
-import mage.abilities.hint.common.MonarchHint;
-import mage.abilities.hint.common.PlayersLeftRightHint;
+import mage.abilities.hint.common.*;
 import mage.abilities.keyword.*;
 import mage.cards.*;
 import mage.cards.decks.CardNameUtil;
@@ -79,6 +75,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author JayDi85
@@ -182,7 +179,6 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
-        subtypesToIgnore.add("Book"); // temporary
 
         // number
         // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
@@ -1024,6 +1020,7 @@ public class VerifyCardDataTest {
         ignoreBoosterSets.add("March of the Machine: The Aftermath"); // epilogue boosters aren't for draft
         ignoreBoosterSets.add("Mystery Booster"); // temporary
         ignoreBoosterSets.add("The Zeta Set"); // Secret Lair adjacent, not draftable
+        ignoreBoosterSets.add("Reality Fracture"); // newly added set, pending MTGJson updates
     }
 
     @Test
@@ -2286,11 +2283,23 @@ public class VerifyCardDataTest {
         return false;
     }
 
+    /**
+     * Effect fields can be declared by a superclass (the boost and ability-gain families keep theirs on a
+     * shared base), so getDeclaredFields alone would miss them.
+     */
+    static Stream<Field> declaredFieldsIncludingSuperclasses(Class<?> type) {
+        Stream<Field> fields = Stream.empty();
+        for (Class<?> current = type; current != null && current != Object.class; current = current.getSuperclass()) {
+            fields = Stream.concat(fields, Arrays.stream(current.getDeclaredFields()));
+        }
+        return fields;
+    }
+
     boolean recursiveTargetEffectCheck(Effect effect, int depth) {
         if (depth < 0) {
             return false;
         }
-        return Arrays.stream(effect.getClass().getDeclaredFields())
+        return declaredFieldsIncludingSuperclasses(effect.getClass())
                 .anyMatch(f -> {
                     f.setAccessible(true);
                     try {
@@ -3092,6 +3101,15 @@ public class VerifyCardDataTest {
             for (int i = 0; i < refRules.length; i++) {
                 refRules[i] = "Omen " +
                         ref.types.get(0) + " - " +
+                        ref.faceName + ' ' +
+                        ref.manaCost + " - " +
+                        refRules[i];
+            }
+        }
+        if (card instanceof PrepareSpellCard) {
+            // prepare spells aren't a subtype in mtgjson, so detect by our own card class instead
+            for (int i = 0; i < refRules.length; i++) {
+                refRules[i] = ref.types.get(0) + " - " +
                         ref.faceName + ' ' +
                         ref.manaCost + " - " +
                         refRules[i];
