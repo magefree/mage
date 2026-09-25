@@ -31,7 +31,6 @@ public class DraftSession {
     protected final UUID playerId;
     protected final Draft draft;
     protected boolean killed = false;
-    protected UUID markedCard;
     
     protected int timeoutCardNum; // the pick number for which the current timeout has been set up
     protected int timeoutCounter = 0; // increments every second that the player has run out of picking time
@@ -46,7 +45,6 @@ public class DraftSession {
         this.userId = userId;
         this.draft = draft;
         this.playerId = playerId;
-        this.markedCard = null;
     }
 
     public boolean init() {
@@ -165,16 +163,7 @@ public class DraftSession {
         return draft;
     }
 
-    public UUID getMarkedCard() {
-        return markedCard;
-    }
-
-    public void setMarkedCard(UUID markedCard) {
-        this.markedCard = markedCard;
-    }
-    
     public void setBoosterLoaded() {
         draft.setBoosterLoaded(playerId);
     }
-
 }
