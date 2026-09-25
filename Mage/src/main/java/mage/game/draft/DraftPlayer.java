@@ -24,6 +24,7 @@ public class DraftPlayer {
     protected boolean boosterLoaded; // client confirmed that it got a booster data (for computer must be always false)
     protected boolean joined = false;
     protected Set<UUID> hiddenCards;
+    protected UUID markedCard; // user's choice for autopick on pick timeout, from the current booster only
 
     public DraftPlayer(Player player) {
         id = UUID.randomUUID();
@@ -66,6 +67,7 @@ public class DraftPlayer {
         }
         booster.remove(card);
         picking = false;
+        markedCard = null;
     }
 
     public void setBoosterAndLoad(List<Card> booster) {
@@ -85,6 +87,15 @@ public class DraftPlayer {
     public void setPickingAndSending() {
         this.picking = true;
         this.boosterLoaded = false;
+        this.markedCard = null; // new round - new booster
+    }
+
+    public UUID getMarkedCard() {
+        return markedCard;
+    }
+
+    public void setMarkedCard(UUID markedCard) {
+        this.markedCard = markedCard;
     }
 
     public boolean isPicking() {

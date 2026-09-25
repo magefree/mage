@@ -181,8 +181,43 @@ public abstract class DraftImpl implements Draft {
             }
             List<Card> booster = player.getBooster();
             if (booster != null && !booster.isEmpty()) {
-                this.addPick(playerId, booster.get(booster.size() - 1).getId(), null);
+                // user's marked card has priority (it's always from the current booster)
+                // TODO: replace last card choice by smark choice, so offline player/ai will get good deck?
+                UUID cardId = player.getMarkedCard() != null
+                        ? player.getMarkedCard()
+                        : booster.get(booster.size() - 1).getId();
+                this.addPick(playerId, cardId, null);
             }
+        }
+    }
+
+    @Override
+    public void setMarkedCard(UUID playerId, UUID cardId) {
+        // WARNING, can be called from any thread like CALL
+        // mark request can come at any order (actual or outdated), so accept it for the current booster only
+        synchronized (players) {
+            DraftPlayer player = players.get(playerId);
+            if (player == null) {
+                logger.warn("Draft " + this.id + ": ignored outdated mark from unknown player " + playerId
+                        + ", pack " + boosterNum + " pick " + cardNum + ", card " + cardId);
+                return;
+            }
+
+            String outdatedReason = null;
+            if (!player.isPicking()) {
+                outdatedReason = "player already picked in this round";
+            } else if (player.booster.stream().noneMatch(card -> card.getId().equals(cardId))) {
+                outdatedReason = "card is not in the current booster";
+            }
+
+            if (outdatedReason != null) {
+                logger.warn("Draft " + this.id + ": ignored outdated mark from " + player.getPlayer().getName()
+                        + ", pack " + boosterNum + " pick " + cardNum + ", card " + cardId
+                        + " - " + outdatedReason);
+                return;
+            }
+
+            player.setMarkedCard(cardId);
         }
     }
 

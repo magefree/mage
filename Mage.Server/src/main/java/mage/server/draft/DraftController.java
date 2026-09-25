@@ -171,17 +171,10 @@ public class DraftController {
     }
 
     public void timeout(UUID userId) {
-        if (userPlayerMap.containsKey(userId)) {
-            DraftSession draftSession = draftSessions.get(userPlayerMap.get(userId));
-            if (draftSession != null) {
-                UUID cardId = draftSession.getMarkedCard();
-                if (cardId != null) {
-                    sendCardPick(userId, cardId, null);
-                    return;
-                }
-            }
-            draft.autoPick(userPlayerMap.get(userId));
-            logger.debug("Draft pick timeout - autopick for player: " + userPlayerMap.get(userId));
+        UUID playerId = userPlayerMap.get(userId);
+        if (playerId != null) {
+            // autopick uses user's marked card or a default card
+            draft.autoPick(playerId);
         }
     }
 
@@ -192,14 +185,13 @@ public class DraftController {
     public DraftPickView sendCardPick(UUID userId, UUID cardId, Set<UUID> hiddenCards) {
         DraftSession draftSession = draftSessions.get(userPlayerMap.get(userId));
         if (draftSession != null) {
-            draftSession.setMarkedCard(null);
             return draftSession.sendCardPick(cardId, hiddenCards);
         }
         return null;
     }
 
     public void sendCardMark(UUID userId, UUID cardId) {
-        draftSessions.get(userPlayerMap.get(userId)).setMarkedCard(cardId);
+        draft.setMarkedCard(userPlayerMap.get(userId), cardId);
     }
     
     public void setBoosterLoaded(UUID userId) {
