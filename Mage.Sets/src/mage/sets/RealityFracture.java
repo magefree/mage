@@ -231,6 +231,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Massacre Girl, Most Wanted", 234, Rarity.UNCOMMON, mage.cards.m.MassacreGirlMostWanted.class));
         cards.add(new SetCardInfo("Master of Barbs", 344, Rarity.RARE, mage.cards.m.MasterOfBarbs.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Master of Barbs", 88, Rarity.RARE, mage.cards.m.MasterOfBarbs.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Medic's Kitesail", 173, Rarity.COMMON, mage.cards.m.MedicsKitesail.class));
         cards.add(new SetCardInfo("Memory Trap", 15, Rarity.COMMON, mage.cards.m.MemoryTrap.class));
         cards.add(new SetCardInfo("Meticulous Commons", 184, Rarity.COMMON, mage.cards.m.MeticulousCommons.class));
         cards.add(new SetCardInfo("Mindseeker Oculus", 33, Rarity.COMMON, mage.cards.m.MindseekerOculus.class));
