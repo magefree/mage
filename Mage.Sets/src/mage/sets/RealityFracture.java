@@ -63,6 +63,10 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Chandra, Torch of Defiance", 309, Rarity.MYTHIC, mage.cards.c.ChandraTorchOfDefiance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Charge the Sanctum", 125, Rarity.COMMON, mage.cards.c.ChargeTheSanctum.class));
         cards.add(new SetCardInfo("Clash of Elements", 126, Rarity.UNCOMMON, mage.cards.c.ClashOfElements.class));
+        cards.add(new SetCardInfo("Codie, Ravenous Codex", 168, Rarity.RARE, mage.cards.c.CodieRavenousCodex.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Codie, Ravenous Codex", 412, Rarity.MYTHIC, mage.cards.c.CodieRavenousCodex.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Codie, Ravenous Codex", 422, Rarity.MYTHIC, mage.cards.c.CodieRavenousCodex.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Codie, Ravenous Codex", 431, Rarity.RARE, mage.cards.c.CodieRavenousCodex.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Compel Brutality", 101, Rarity.COMMON, mage.cards.c.CompelBrutality.class));
         cards.add(new SetCardInfo("Countersculpt", 25, Rarity.UNCOMMON, mage.cards.c.Countersculpt.class));
         cards.add(new SetCardInfo("Craftwork Crusher", 127, Rarity.UNCOMMON, mage.cards.c.CraftworkCrusher.class));
