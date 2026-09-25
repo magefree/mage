@@ -179,22 +179,6 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
-        // temp pending mtgjson update (Sep 21 2026 added)
-        skipListAddName(SKIP_LIST_SUBTYPE, "3ED", "Dragon Engine");
-        skipListAddName(SKIP_LIST_SUBTYPE, "4ED", "Dragon Engine");
-        skipListAddName(SKIP_LIST_SUBTYPE, "5ED", "Dragon Engine");
-        skipListAddName(SKIP_LIST_SUBTYPE, "6ED", "Dragon Engine");
-        skipListAddName(SKIP_LIST_SUBTYPE, "ATQ", "Dragon Engine");
-        skipListAddName(SKIP_LIST_SUBTYPE, "DMR", "Dragon Engine");
-        skipListAddName(SKIP_LIST_SUBTYPE, "ME1", "Dragon Engine");
-        skipListAddName(SKIP_LIST_SUBTYPE, "ME4", "Dragon Engine");
-        skipListAddName(SKIP_LIST_SUBTYPE, "SUM", "Dragon Engine");
-        skipListAddName(SKIP_LIST_SUBTYPE, "BRC", "Traxos, Scourge of Kroog");
-        skipListAddName(SKIP_LIST_SUBTYPE, "DMC", "Traxos, Scourge of Kroog");
-        skipListAddName(SKIP_LIST_SUBTYPE, "DOM", "Traxos, Scourge of Kroog");
-        skipListAddName(SKIP_LIST_SUBTYPE, "FCA", "Traxos, Scourge of Kroog");
-        skipListAddName(SKIP_LIST_SUBTYPE, "PDOM", "Traxos, Scourge of Kroog");
-        skipListAddName(SKIP_LIST_SUBTYPE, "PRM", "Traxos, Scourge of Kroog");
 
         // number
         // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
@@ -1036,6 +1020,7 @@ public class VerifyCardDataTest {
         ignoreBoosterSets.add("March of the Machine: The Aftermath"); // epilogue boosters aren't for draft
         ignoreBoosterSets.add("Mystery Booster"); // temporary
         ignoreBoosterSets.add("The Zeta Set"); // Secret Lair adjacent, not draftable
+        ignoreBoosterSets.add("Reality Fracture"); // newly added set, pending MTGJson updates
     }
 
     @Test
