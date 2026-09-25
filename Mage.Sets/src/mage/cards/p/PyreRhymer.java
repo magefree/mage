@@ -4,20 +4,18 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.EntersPreparedAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.mana.AddManaToManaPoolTargetControllerEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.ProwessAbility;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.PrepareCard;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -62,7 +60,7 @@ public final class PyreRhymer extends PrepareCard {
 class MoltenTideTriggeredAbility extends DelayedTriggeredManaAbility {
 
     MoltenTideTriggeredAbility() {
-        super(new AddManaToManaPoolTargetControllerEffect(new Mana(ColoredManaSymbol.R), "your"), Duration.EndOfTurn, false);
+        super(new BasicManaEffect(Mana.RedMana(1)), Duration.EndOfTurn, false);
         this.usesStack = false;
     }
 
@@ -78,11 +76,7 @@ class MoltenTideTriggeredAbility extends DelayedTriggeredManaAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent land = ((TappedForManaEvent) event).getPermanent();
-        if (land == null || !land.hasSubtype(SubType.MOUNTAIN, game) || !land.isControlledBy(getControllerId())) {
-            return false;
-        }
-        getEffects().setTargetPointer(new FixedTarget(land.getControllerId()));
-        return true;
+        return land != null && land.isControlledBy(getControllerId())  && land.hasSubtype(SubType.MOUNTAIN, game);
     }
 
     @Override
