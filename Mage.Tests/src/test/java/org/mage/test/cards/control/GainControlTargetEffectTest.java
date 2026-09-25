@@ -98,6 +98,74 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Mutavault", 0);
         assertPermanentCount(playerA, "Mutavault", 1);
     }
+
+    @Test
+    public void testThalakosDeceiverControlEffectPersists() {
+        // Whenever Thalakos Deceiver attacks and isn't blocked, you may sacrifice it. If you do, gain control of target creature. This effect lasts indefinitely.
+        addCard(Zone.BATTLEFIELD, playerA, "Thalakos Deceiver");
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+
+        attack(1, playerA, "Thalakos Deceiver", playerB);
+        addTarget(playerA, "Silvercoat Lion");
+        setChoice(playerA, true); // Sacrifice Thalakos Deceiver
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, "Thalakos Deceiver", 1);
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        assertPermanentCount(playerB, "Silvercoat Lion", 0);
+    }
+
+    @Test
+    public void testThalakosDeceiverTokenCopyControlEffectPersists() {
+        // {T}: Create a token that's a copy of target nonlegendary creature you control, except it has haste. Sacrifice it at the beginning of the next end step.
+        addCard(Zone.BATTLEFIELD, playerA, "Kiki-Jiki, Mirror Breaker");
+        addCard(Zone.BATTLEFIELD, playerA, "Thalakos Deceiver");
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Create a token that's a copy", "Thalakos Deceiver");
+        attack(1, playerA, "Thalakos Deceiver:1", playerB);
+        addTarget(playerA, "Silvercoat Lion");
+        setChoice(playerA, true); // Sacrifice the token copy
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Thalakos Deceiver", 1);
+        assertGraveyardCount(playerA, "Thalakos Deceiver", 0);
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        assertPermanentCount(playerB, "Silvercoat Lion", 0);
+    }
+
+    @Test
+    public void testEndOfGameControlEffectKeepsControllerAfterSourceZoneChange() {
+        // Whenever Tolarian Entrancer becomes blocked by a creature, gain control of that creature at end of combat.
+        addCard(Zone.BATTLEFIELD, playerB, "Tolarian Entrancer");
+        addCard(Zone.BATTLEFIELD, playerB, "Ornithopter");
+
+        // Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
+        addCard(Zone.HAND, playerA, "Threaten");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        // Exile target creature. At the beginning of the next end step, return that card to the battlefield under its owner's control with a +1/+1 counter on it.
+        addCard(Zone.HAND, playerA, "Otherworldly Journey");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Threaten", "Tolarian Entrancer");
+        attack(1, playerA, "Tolarian Entrancer", playerB);
+        block(1, playerB, "Ornithopter", "Tolarian Entrancer");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Otherworldly Journey", "Tolarian Entrancer");
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerB, "Tolarian Entrancer", 1);
+        assertPermanentCount(playerA, "Ornithopter", 1);
+        assertPermanentCount(playerB, "Ornithopter", 0);
+    }
     
     /**
      * Steel Golem, once donated to another player does not disable their ability to play creature cards.
