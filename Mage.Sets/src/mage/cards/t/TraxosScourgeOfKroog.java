@@ -27,6 +27,7 @@ public final class TraxosScourgeOfKroog extends CardImpl {
 
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CONSTRUCT);
+        this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

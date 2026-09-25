@@ -7,7 +7,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
@@ -40,7 +39,6 @@ public final class MercilessJavelineer extends CardImpl {
                         Zone.BATTLEFIELD,
                         new AddCountersTargetEffect(
                                 CounterType.M1M1.createInstance(),
-                                StaticValue.get(1),
                                 Outcome.Removal),
                         new ManaCostsImpl<>("{2}"));
         ability.addEffect(

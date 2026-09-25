@@ -2,7 +2,6 @@ package mage.cards;
 
 import mage.constants.CardType;
 import mage.game.Game;
-import mage.abilities.keyword.PrepareReminderAbility;
 
 import java.util.UUID;
 
@@ -69,7 +68,6 @@ public abstract class PrepareCard extends CardWithSpellOption {
     protected PrepareCard(UUID ownerId, CardSetInfo setInfo, CardType[] types, String costs, String preparationName, CardType[] typesSpell, String costsSpell) {
         super(ownerId, setInfo, types, costs);
         this.spellCard = new PrepareSpellCard(ownerId, setInfo, preparationName, typesSpell, costsSpell, this);
-        this.addAbility(new PrepareReminderAbility());
     }
 
     protected PrepareCard(final PrepareCard card) {

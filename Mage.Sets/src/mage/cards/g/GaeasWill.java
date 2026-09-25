@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.replacement.GraveyardFromAnywhereExileReplacementEffect;
 import mage.abilities.effects.common.ruleModifying.PlayFromGraveyardControllerEffect;
@@ -30,7 +29,7 @@ public final class GaeasWill extends CardImpl {
         this.getSpellAbility().addEffect(PlayFromGraveyardControllerEffect.playLandsAndCastSpells(Duration.EndOfTurn));
 
         // If a card would be put into your graveyard from anywhere this turn, exile that card instead.
-        this.addAbility(new SimpleStaticAbility(new GraveyardFromAnywhereExileReplacementEffect(Duration.EndOfTurn)));
+        this.getSpellAbility().addEffect(new GraveyardFromAnywhereExileReplacementEffect(Duration.EndOfTurn).concatBy("<br>"));
     }
 
     private GaeasWill(final GaeasWill card) {

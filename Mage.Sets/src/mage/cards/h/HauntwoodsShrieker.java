@@ -90,7 +90,7 @@ class HauntwoodsShriekerEffect extends OneShotEffect {
             Card trueCard = (Card)faceDownPermanent.getBasicMageObject();
             player.revealCards(source, new CardsImpl(faceDownPermanent), game);
             if (trueCard.isCreature() && player.chooseUse(
-                    faceDownPermanent.getControllerId() == source.getControllerId() ? Outcome.Benefit : Outcome.Detriment,
+                    faceDownPermanent.getControllerId() == source.getControllerId() ? Outcome.Benefit : Outcome.AIDontUseIt,
                     "Turn " + trueCard.getName() + " face up?", source, game)) {
                 return faceDownPermanent.turnFaceUp(source, game, source.getControllerId());
             }

@@ -2,6 +2,7 @@ package mage.abilities.effects.common.counter;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.choices.Choice;
@@ -11,10 +12,11 @@ import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -22,62 +24,71 @@ import java.util.Set;
 public class RemoveCounterTargetEffect extends OneShotEffect {
 
     private final Counter counter;
+    private final DynamicValue amount; // null: as many as the counter itself names
 
     public RemoveCounterTargetEffect() {
-        super(Outcome.UnboostCreature);
-        counter = null;
+        this(null, null);
     }
 
     public RemoveCounterTargetEffect(Counter counter) {
+        this(counter, null);
+    }
+
+    public RemoveCounterTargetEffect(Counter counter, DynamicValue amount) {
         super(Outcome.UnboostCreature);
         this.counter = counter;
+        this.amount = amount;
     }
 
     public RemoveCounterTargetEffect(RemoveCounterTargetEffect effect) {
         super(effect);
         this.counter = (effect.counter == null ? null : effect.counter.copy());
+        this.amount = (effect.amount == null ? null : effect.amount.copy());
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (p != null) {
-            Counter toRemove = (counter == null ? selectCounterType(game, source, p) : counter);
-            if (toRemove != null && p.getCounters(game).getCount(toRemove.getName()) >= toRemove.getCount()) {
-                p.removeCounters(toRemove.getName(), toRemove.getCount(), source, game);
-            }
-        } else {
-            Card c = game.getCard(getTargetPointer().getFirst(game, source));
-            if (c != null && counter != null && c.getCounters(game).getCount(counter.getName()) >= counter.getCount()) {
-                c.removeCounters(counter.getName(), counter.getCount(), source, game);
-            }
+        UUID targetId = getTargetPointer().getFirst(game, source);
+        Permanent permanent = game.getPermanent(targetId);
+        Card target = permanent != null ? permanent : game.getCard(targetId);
+        if (target == null) {
+            return true;
         }
+        Counter toRemove = counter != null ? counter : selectCounterType(game, source, target);
+        if (toRemove == null) {
+            return true;
+        }
+        int count = amount == null ? toRemove.getCount() : amount.calculate(game, source, this);
+        if (count < 1) {
+            return true;
+        }
+        target.removeCounters(toRemove.getName(), count, source, game);
         return true;
     }
 
-    private Counter selectCounterType(Game game, Ability source, Permanent permanent) {
+    private Counter selectCounterType(Game game, Ability source, Card object) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && !permanent.getCounters(game).isEmpty()) {
+        if (controller != null && !object.getCounters(game).isEmpty()) {
             String counterName = null;
-            if (permanent.getCounters(game).size() > 1) {
+            if (object.getCounters(game).size() > 1) {
                 Choice choice = new ChoiceImpl(true);
                 Set<String> choices = new LinkedHashSet<>();
-                for (Counter counterOnPermanent : permanent.getCounters(game).values()) {
-                    if (permanent.getCounters(game).getCount(counterOnPermanent.getName()) > 0) {
-                        choices.add(counterOnPermanent.getName());
+                for (Counter counterOnObject : object.getCounters(game).values()) {
+                    if (object.getCounters(game).getCount(counterOnObject.getName()) > 0) {
+                        choices.add(counterOnObject.getName());
                     }
                 }
                 choice.setChoices(choices);
-                choice.setMessage("Choose a counter type to remove from " + permanent.getName());
+                choice.setMessage("Choose a counter type to remove from " + object.getName());
                 if (controller.choose(Outcome.Detriment, choice, game)) {
                     counterName = choice.getChoice();
                 } else {
                     return null;
                 }
             } else {
-                for (Counter counterOnPermanent : permanent.getCounters(game).values()) {
-                    if (counterOnPermanent.getCount() > 0) {
-                        counterName = counterOnPermanent.getName();
+                for (Counter counterOnObject : object.getCounters(game).values()) {
+                    if (counterOnObject.getCount() > 0) {
+                        counterName = counterOnObject.getName();
                     }
                 }
             }
@@ -96,9 +107,9 @@ public class RemoveCounterTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "remove "
-                + (counter == null ? "a counter" : counter.getDescription())
-                + " from "
-                + getTargetPointer().describeTargets(mode.getTargets(), "that creature");
+        String targets = getTargetPointer().describeTargets(mode.getTargets(), "that creature");
+        return counter == null
+                ? "remove a counter from " + targets
+                : CardUtil.getAddRemoveCountersText(amount, counter, targets, false);
     }
 }
