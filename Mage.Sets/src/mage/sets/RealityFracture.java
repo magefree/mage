@@ -70,6 +70,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Craterclaw Colossus", 446, Rarity.MYTHIC, mage.cards.c.CraterclawColossus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Craterclaw Colossus", 455, Rarity.MYTHIC, mage.cards.c.CraterclawColossus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Craterclaw Colossus", 78, Rarity.MYTHIC, mage.cards.c.CraterclawColossus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cruel Calculations", 26, Rarity.RARE, mage.cards.c.CruelCalculations.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cruel Calculations", 336, Rarity.RARE, mage.cards.c.CruelCalculations.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cryotheory Adept", 27, Rarity.COMMON, mage.cards.c.CryotheoryAdept.class));
         cards.add(new SetCardInfo("Curse-Marred Demon", 328, Rarity.RARE, mage.cards.c.CurseMarredDemon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Curse-Marred Demon", 456, Rarity.RARE, mage.cards.c.CurseMarredDemon.class, NON_FULL_USE_VARIOUS));
