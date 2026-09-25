@@ -25,18 +25,18 @@ public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
         this(effect, optional, false);
     }
 
-    public GainLifeControllerTriggeredAbility(Effect effect, boolean optional, boolean amountHint) {
-        this(effect, optional, amountHint, false);
+    public GainLifeControllerTriggeredAbility(Effect effect, boolean optional, boolean showAmountGained) {
+        this(effect, optional, showAmountGained, false);
     }
 
-    public GainLifeControllerTriggeredAbility(Effect effect, boolean optional, boolean amountHint, boolean setTargetPointer) {
-        this(Zone.BATTLEFIELD, effect, optional, amountHint, setTargetPointer);
+    public GainLifeControllerTriggeredAbility(Effect effect, boolean optional, boolean showAmountGained, boolean setTargetPointer) {
+        this(Zone.BATTLEFIELD, effect, optional, showAmountGained, setTargetPointer);
     }
 
-    public GainLifeControllerTriggeredAbility(Zone zone, Effect effect, boolean optional, boolean amountHint, boolean setTargetPointer) {
+    public GainLifeControllerTriggeredAbility(Zone zone, Effect effect, boolean optional, boolean showAmountGained, boolean setTargetPointer) {
         super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
-        this.showAmountGainedHint = amountHint;
+        this.showAmountGainedHint = showAmountGained;
         setTriggerPhrase("Whenever you gain life, ");
     }
 
