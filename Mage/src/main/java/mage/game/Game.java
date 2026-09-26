@@ -466,6 +466,10 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
      */
     void emptyManaPools(Ability source);
 
+    /**
+     * Copies the effect and the source ability, initializes the copy and registers it.
+     * Do not init the effect before calling this.
+     */
     void addEffect(ContinuousEffect continuousEffect, Ability source);
 
     void addEmblem(Emblem emblem, MageObject sourceObject, Ability source);

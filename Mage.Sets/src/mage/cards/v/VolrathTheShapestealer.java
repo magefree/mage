@@ -105,9 +105,7 @@ class VolrathTheShapestealerEffect extends OneShotEffect {
         applier.apply(game, newBluePrint, source, volrathTheShapestealer.getId());
         CopyEffect copyEffect = new CopyEffect(Duration.UntilYourNextTurn, newBluePrint, volrathTheShapestealer.getId());
         copyEffect.setApplier(applier);
-        Ability newAbility = source.copy();
-        copyEffect.init(newAbility, game);
-        game.addEffect(copyEffect, newAbility);
+        game.addEffect(copyEffect, source);
         return true;
     }
 }

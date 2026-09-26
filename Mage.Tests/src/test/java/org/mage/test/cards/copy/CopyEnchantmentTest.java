@@ -1,7 +1,10 @@
 package org.mage.test.cards.copy;
 
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -66,5 +69,24 @@ public class CopyEnchantmentTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Inferno Fist", 1);
         assertPowerToughness(playerA, "Geist of the Moors", 5, 1);
         assertPowerToughness(playerB, "Silvercoat Lion", 4, 2);
+    }
+
+    @Test
+    public void copySagaLandTest() {
+        addCard(Zone.GRAVEYARD, playerA, "Urza's Saga", 1);
+        addCard(Zone.HAND, playerA, "Echoing Deeps", 1);
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Echoing Deeps");
+        setChoice(playerA, true);
+        setChoice(playerA, "Urza's Saga");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertType("Urza's Saga", CardType.LAND, SubType.CAVE);
+        assertType("Urza's Saga", CardType.LAND, SubType.URZAS);
+        assertType("Urza's Saga", CardType.ENCHANTMENT, SubType.SAGA);
+        assertTapped("Urza's Saga", true);
+        assertCounterCount("Urza's Saga", CounterType.LORE, 1);
     }
 }
