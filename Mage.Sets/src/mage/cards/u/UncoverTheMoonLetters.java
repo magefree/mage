@@ -19,7 +19,7 @@ import java.util.UUID;
 
 /**
  *
- * @author LevelX2
+ * @author miesma
  */
 public final class UncoverTheMoonLetters extends CardImpl {
 
