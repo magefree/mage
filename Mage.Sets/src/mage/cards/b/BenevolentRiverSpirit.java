@@ -30,7 +30,7 @@ public final class BenevolentRiverSpirit extends CardImpl {
         this.toughness = new MageInt(5);
 
         // As an additional cost to cast this spell, waterbend {5}.
-        this.getSpellAbility().addCost(new WaterbendCost(5));
+        this.getSpellAbility().addCost(new WaterbendCost(5).setAdditional(true));
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new InfoEffect("as an additional cost to cast this spell, waterbend {5}")
         ).setRuleAtTheTop(true));

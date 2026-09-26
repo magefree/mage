@@ -34,7 +34,7 @@ public final class TectonicSplit extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
 
         // As an additional cost to cast this spell, sacrifice half the lands you control, rounded up.
-        this.getSpellAbility().addCost(new TectonicSplitCost());
+        this.getSpellAbility().addCost(new TectonicSplitCost().setAdditional(true));
 
         // Hexproof
         this.addAbility(HexproofAbility.getInstance());

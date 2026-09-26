@@ -31,7 +31,7 @@ public final class RedirectLightning extends CardImpl {
         this.subtype.add(SubType.LESSON);
 
         // As an additional cost to cast this spell, pay 5 life or pay {2}.
-        this.getSpellAbility().addCost(new OrCost("pay 5 life or pay {2}", new PayLifeCost(5), new GenericManaCost(2)));
+        this.getSpellAbility().addCost(new OrCost("pay 5 life or pay {2}", new PayLifeCost(5), new GenericManaCost(2)).setAdditional(true));
 
         // Change the target of target spell or ability with a single target.
         this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect(true, true));

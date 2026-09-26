@@ -17,6 +17,7 @@ public class DemonicEmbraceTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Demonic Embrace", "Grizzly Bears");
+        setChoice(playerA, "Pay 3 life");
         setChoice(playerA, "Mountain");
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);

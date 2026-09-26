@@ -39,7 +39,7 @@ public final class SadisticSkymarcher extends CardImpl {
         this.getSpellAbility().addCost(new OrCost(
                 "reveal a Vampire card from your hand or pay {1}", new RevealTargetFromHandCost(new TargetCardInHand(filter)),
                 new GenericManaCost(1)
-        ));
+        ).setAdditional(true));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

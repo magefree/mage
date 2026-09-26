@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -24,7 +23,7 @@ public final class DuskRoseReliquary extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{W}");
 
         // As an additional cost to cast this spell, sacrifice an artifact or creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE).setAdditional(true));
 
         // Ward {2}
         this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));

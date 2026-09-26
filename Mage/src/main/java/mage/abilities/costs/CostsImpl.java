@@ -3,12 +3,18 @@ package mage.abilities.costs;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.VariableManaCost;
+import mage.choices.Choice;
+import mage.choices.ChoiceImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
+import mage.players.Player;
 import mage.target.Targets;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @param <T>
@@ -71,6 +77,17 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
     }
 
     @Override
+    public boolean getAdditional() {
+        return this.stream().anyMatch(Cost::getAdditional);
+    }
+
+    @Override
+    public CostsImpl<T> setAdditional(boolean additional) {
+        this.stream().forEach(cost -> cost.setAdditional(additional));
+        return this;
+    }
+
+    @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         for (T cost : this) {
             if (!cost.canPay(ability, source, controllerId, game)) {
@@ -89,7 +106,24 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         if (this.size() > 0) {
             while (!isPaid()) {
-                T cost = getFirstUnpaid();
+                T cost = null;
+                if (this.getUnpaid().stream().filter(Cost::getAdditional).count() >= 2) {
+                    final Choice choice = new ChoiceImpl(false); // use default order if no response provided
+                    choice.setMessage("Choose a cost to pay first");
+                    choice.setChoices(this.getUnpaid().stream().map(Cost::getText).map(CardUtil::getTextWithFirstCharUpperCase).collect(Collectors.toSet()));
+                    final Player controller = game.getPlayer(controllerId);
+                    if (controller != null) {
+                        controller.choose(Outcome.Neutral, choice, game);
+                    }
+                    if (choice.isChosen()) {
+                        cost = this.getUnpaid().stream()
+                            .filter(c -> CardUtil.getTextWithFirstCharLowerCase(choice.getChoice()).equals(c.getText()))
+                            .findFirst().orElse(null);
+                    }
+                }
+                if (cost == null) {
+                    cost = this.getFirstUnpaid();
+                }
                 if (!cost.pay(ability, game, source, controllerId, noMana, costToPay)) {
                     return false;
                 }

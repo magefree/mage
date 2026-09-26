@@ -25,7 +25,7 @@ public final class Deprive extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}");
 
         // As an additional cost to cast Deprive, return a land you control to its owner's hand.
-        this.getSpellAbility().addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)));
+        this.getSpellAbility().addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)).setAdditional(true));
 
         // Counter target spell.
         this.getSpellAbility().addTarget(new TargetSpell());

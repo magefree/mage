@@ -20,7 +20,7 @@ public final class AcceptableLosses extends CardImpl {
 
 
         // As an additional cost to cast Acceptable Losses, discard a card at random.
-        this.getSpellAbility().addCost(new DiscardCardCost(true));
+        this.getSpellAbility().addCost(new DiscardCardCost(true).setAdditional(true));
         // Acceptable Losses deals 5 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

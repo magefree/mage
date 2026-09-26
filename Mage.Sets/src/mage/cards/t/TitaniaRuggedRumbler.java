@@ -32,7 +32,7 @@ public final class TitaniaRuggedRumbler extends CardImpl {
             "discard a card or pay {2}",
             new DiscardCardCost(),
             new ManaCostsImpl<>("{2}")
-        ));
+        ).setAdditional(true));
 
         // Ward--Discard a card or pay {2}.
         this.addAbility(new WardAbility(new OrCost(

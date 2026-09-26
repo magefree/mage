@@ -31,7 +31,7 @@ public final class ArbiterOfWoe extends CardImpl {
         this.toughness = new MageInt(4);
 
         // As an additional cost to cast this spell, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE).setAdditional(true));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

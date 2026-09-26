@@ -48,7 +48,7 @@ public class DiscardXCardsCostAdjuster implements CostAdjuster {
     public void prepareCost(Ability ability, Game game) {
         int x = CardUtil.getSourceCostsTagX(game, ability, -1);
         if (x >= 0) {
-            ability.addCost(new DiscardTargetCost(new TargetCardInHand(x, x, this.filter)));
+            ability.addCost(new DiscardTargetCost(new TargetCardInHand(x, x, this.filter)).setAdditional(true));
         }
     }
 

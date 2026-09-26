@@ -34,7 +34,7 @@ public final class SurgeOfStrength extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{G}");
 
         // As an additional cost to cast Surge of Strength, discard a red or green card.
-        this.getSpellAbility().addCost(new DiscardTargetCost(new TargetCardInHand(filter)));
+        this.getSpellAbility().addCost(new DiscardTargetCost(new TargetCardInHand(filter)).setAdditional(true));
         
         // Target creature gains trample and gets +X/+0 until end of turn, where X is that creature's converted mana cost.
         Effect effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);

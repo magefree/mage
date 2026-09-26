@@ -18,6 +18,7 @@ public class OrCost implements Cost {
 
     private final List<Cost> costs = new ArrayList<>();
     private String description;
+    private boolean additional;
     // which cost was slected to pay
     private Cost selectedCost;
 
@@ -30,6 +31,7 @@ public class OrCost implements Cost {
         cost.costs.stream().map(Cost::copy).forEach(this.costs::add);
         this.description = cost.description;
         this.selectedCost = cost.selectedCost;
+        this.additional = cost.additional;
     }
 
     @Override
@@ -46,6 +48,17 @@ public class OrCost implements Cost {
     @Override
     public String getText() {
         return description;
+    }
+
+    @Override
+    public boolean getAdditional() {
+        return this.additional;
+    }
+
+    @Override
+    public Cost setAdditional(boolean additional) {
+        this.additional = additional;
+        return this;
     }
 
     public Cost getSelectedCost() {

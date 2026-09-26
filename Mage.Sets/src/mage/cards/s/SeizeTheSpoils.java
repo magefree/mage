@@ -19,7 +19,7 @@ public final class SeizeTheSpoils extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
         // As an additional cost to cast this spell, discard a card.
-        this.getSpellAbility().addCost(new DiscardCardCost());
+        this.getSpellAbility().addCost(new DiscardCardCost().setAdditional(true));
 
         // Draw two cards and create a Treasure token.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

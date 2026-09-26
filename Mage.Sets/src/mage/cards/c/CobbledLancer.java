@@ -31,7 +31,7 @@ public final class CobbledLancer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // As an additional cost to cast this spell, exile a creature card from your graveyard.
-        this.getSpellAbility().addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD)));
+        this.getSpellAbility().addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD)).setAdditional(true));
 
         // {3}{U}, Exile Cobbled Lancer from your graveyard: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{3}{U}"));

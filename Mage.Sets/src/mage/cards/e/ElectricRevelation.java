@@ -7,7 +7,6 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 
 import java.util.UUID;
 
@@ -20,7 +19,7 @@ public final class ElectricRevelation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // As an additional cost to cast this spell, discard a card.
-        this.getSpellAbility().addCost(new DiscardCardCost());
+        this.getSpellAbility().addCost(new DiscardCardCost().setAdditional(true));
 
         // Draw two cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

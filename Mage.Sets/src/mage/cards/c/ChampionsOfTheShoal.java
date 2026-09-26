@@ -34,7 +34,7 @@ public final class ChampionsOfTheShoal extends CardImpl {
         this.toughness = new MageInt(6);
 
         // As an additional cost to cast this spell, behold a Merfolk and exile it.
-        this.getSpellAbility().addCost(new BeholdAndExileCost(SubType.MERFOLK));
+        this.getSpellAbility().addCost(new BeholdAndExileCost(SubType.MERFOLK).setAdditional(true));
 
         // Whenever this creature enters or becomes tapped, tap up to one target creature and put a stun counter on it.
         Ability ability = new OrTriggeredAbility(

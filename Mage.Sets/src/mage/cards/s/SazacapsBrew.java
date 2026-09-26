@@ -30,7 +30,7 @@ public final class SazacapsBrew extends CardImpl {
         this.addAbility(new GiftAbility(this, GiftType.TAPPED_FISH));
 
         // As an additional cost to cast this spell, discard a card.
-        this.getSpellAbility().addCost(new DiscardCardCost());
+        this.getSpellAbility().addCost(new DiscardCardCost().setAdditional(true));
 
         // Target player draws two cards. If the gift was promised, target creature you control gets +2/+0 until end of turn.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));

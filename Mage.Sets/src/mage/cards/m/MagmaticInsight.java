@@ -20,7 +20,7 @@ public final class MagmaticInsight extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
         // As an additional cost to cast Magmatic Insight, discard a land card.
-        this.getSpellAbility().addCost(new DiscardTargetCost(new TargetCardInHand(new FilterLandCard())));
+        this.getSpellAbility().addCost(new DiscardTargetCost(new TargetCardInHand(new FilterLandCard())).setAdditional(true));
         
         // Draw two cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

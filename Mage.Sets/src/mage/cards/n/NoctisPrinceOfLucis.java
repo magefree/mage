@@ -95,7 +95,7 @@ class NoctisPrinceOfLucisEffect extends AsThoughEffectImpl {
         }
         Costs<Cost> newCosts = new CostsImpl<>();
         newCosts.addAll(card.getSpellAbility().getCosts());
-        newCosts.add(new PayLifeCost(3));
+        newCosts.add(new PayLifeCost(3).setAdditional(true));
         player.setCastSourceIdWithAlternateMana(
                 card.getId(), card.getManaCost(), newCosts,
                 MageIdentifier.NoctisPrinceOfLucisAlternateCast

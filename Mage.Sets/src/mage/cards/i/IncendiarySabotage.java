@@ -8,9 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -22,7 +20,7 @@ public final class IncendiarySabotage extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{R}");
 
         // As an additional cost to cast Incendiary Sabotage, sacrifice an artifact.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT).setAdditional(true));
         
         // Incendiary Sabotage deals 3 damage to each creature.
         this.getSpellAbility().addEffect(new DamageAllEffect(3, new FilterCreaturePermanent()));

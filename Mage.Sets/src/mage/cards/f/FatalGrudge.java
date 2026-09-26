@@ -20,7 +20,6 @@ import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSacrifice;
 
 /**
@@ -33,7 +32,7 @@ public final class FatalGrudge extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}{R}");
 
         // As an additional cost to cast this spell, sacrifice a nonland permanent.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND).setAdditional(true));
 
         // Each opponent chooses a permanent they control that shares a type with the sacrificed permanent and sacrifices it.
         this.getSpellAbility().addEffect(new FatalGrudgeEffect());

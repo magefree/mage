@@ -41,7 +41,7 @@ public final class SoulbrightSeeker extends CardImpl {
         this.getSpellAbility().addCost(new OrCost("behold an Elemental or pay {2}",
                 new BeholdCost(SubType.ELEMENTAL),
                 new GenericManaCost(2)
-        ));
+        ).setAdditional(true));
 
         // {R}: Target creature you control gains trample until end of turn. If this is the third time this ability has resolved this turn, add {R}{R}{R}{R}.
         Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(

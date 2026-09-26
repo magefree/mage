@@ -36,7 +36,7 @@ public final class HellishSideswipe extends CardImpl {
         
 
         // As an additional cost to cast this spell, sacrifice an artifact or creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE).setAdditional(true));
         // Destroy target creature or Vehicle. If the sacrificed permanent was a Vehicle, draw a card.
         this.getSpellAbility().addEffect(new DestroyTargetEffect("Destroy target creature or Vehicle"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

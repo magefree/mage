@@ -19,7 +19,7 @@ public final class FinalFlare extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // As an additional cost to cast this spell, sacrifice a creature or enchantment.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE_OR_ENCHANTMENT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE_OR_ENCHANTMENT).setAdditional(true));
 
         // Final Flare deals 5 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));

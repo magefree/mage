@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -28,7 +27,7 @@ public final class Goremand extends CardImpl {
         this.toughness = new MageInt(5);
 
         // As an additional cost to cast this spell, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE).setAdditional(true));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

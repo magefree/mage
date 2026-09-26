@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class WorthyCause extends CardImpl {
         this.addAbility(new BuybackAbility("{2}"));
 
         // As an additional cost to cast Worthy Cause, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE).setAdditional(true));
 
         // You gain life equal to the sacrificed creature's toughness.
         Effect effect = new GainLifeEffect(SacrificeCostCreaturesToughness.instance);

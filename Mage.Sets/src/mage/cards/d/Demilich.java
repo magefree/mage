@@ -90,7 +90,7 @@ class DemilichPlayEffect extends AsThoughEffectImpl {
             Player controller = game.getPlayer(affectedControllerId);
             if (controller != null) {
                 Costs<Cost> costs = new CostsImpl<>();
-                costs.add(new ExileFromGraveCost(new TargetCardInYourGraveyard(4, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD)));
+                costs.add(new ExileFromGraveCost(new TargetCardInYourGraveyard(4, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD)).setAdditional(true));
                 controller.setCastSourceIdWithAlternateMana(objectId, new ManaCostsImpl<>("{U}{U}{U}{U}"), costs, MageIdentifier.DemilichAlternateCast);
                 return true;
             }

@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
 import java.util.UUID;
@@ -25,7 +24,7 @@ public final class EatenAlive extends CardImpl {
         this.getSpellAbility().addCost(new OrCost(
                 "sacrifice a creature or pay {3}{B}", new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE),
                 new ManaCostsImpl<>("{3}{B}")
-        ));
+        ).setAdditional(true));
 
         // Exile target creature or planeswalker.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

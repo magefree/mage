@@ -36,7 +36,7 @@ public final class DaringBuccaneer extends CardImpl {
         this.getSpellAbility().addCost(new OrCost(
                 "reveal a Pirate card from your hand or pay {2}", new RevealTargetFromHandCost(new TargetCardInHand(filter)),
                 new GenericManaCost(2)
-        ));
+        ).setAdditional(true));
 
     }
 

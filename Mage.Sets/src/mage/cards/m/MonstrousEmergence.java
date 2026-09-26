@@ -37,7 +37,7 @@ public final class MonstrousEmergence extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
         // As an additional cost to cast this spell, choose a creature you control or reveal a creature card from your hand.
-        this.getSpellAbility().addCost(new MonstrousEmergenceCost());
+        this.getSpellAbility().addCost(new MonstrousEmergenceCost().setAdditional(true));
 
         // Monstrous Emergence deals damage equal to the power of the creature you chose or the card you revealed to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(MonstrousEmergenceValue.instance)

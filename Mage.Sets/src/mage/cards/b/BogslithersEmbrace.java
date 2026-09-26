@@ -22,7 +22,7 @@ public final class BogslithersEmbrace extends CardImpl {
         // As an additional cost to cast this spell, blight 1 or pay {3}.
         this.getSpellAbility().addCost(new OrCost(
                 "blight 1 or pay {3}", new BlightCost(1), new GenericManaCost(3)
-        ));
+        ).setAdditional(true));
 
         // Exile target creature.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

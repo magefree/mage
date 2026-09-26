@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -22,11 +21,8 @@ public final class RuthlessDisposal extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");
 
         // As an additional cost to cast Ruthless Disposal, discard a card and sacrifice a creature.
-        this.getSpellAbility().addCost(new CompositeCost(
-                new DiscardCardCost(),
-                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE),
-                "discard a card and sacrifice a creature"
-        ));
+        this.getSpellAbility().addCost(new DiscardCardCost().setAdditional(true));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE).setAdditional(true));
 
         // Two target creatures each get -13/-13 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-13, -13, Duration.EndOfTurn)

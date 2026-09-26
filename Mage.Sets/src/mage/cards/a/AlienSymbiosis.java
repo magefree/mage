@@ -92,7 +92,7 @@ class AlienSymbiosisGraveyardEffect extends AsThoughEffectImpl {
         Player controller = game.getPlayer(affectedControllerId);
         if (controller != null) {
             Costs<Cost> costs = new CostsImpl<>();
-            costs.add(new DiscardCardCost());
+            costs.add(new DiscardCardCost().setAdditional(true));
             controller.setCastSourceIdWithAlternateMana(objectId, new ManaCostsImpl<>("{1}{B}"), costs,
                     MageIdentifier.AlienSymbiosisAlternateCast);
             return true;

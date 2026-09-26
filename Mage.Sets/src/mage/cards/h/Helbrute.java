@@ -93,7 +93,7 @@ class HelbruteEffect extends AsThoughEffectImpl {
             return false;
         }
         Costs<Cost> costs = new CostsImpl<>();
-        costs.add(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)));
+        costs.add(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)).setAdditional(true));
         controller.setCastSourceIdWithAlternateMana(
                 objectId, new ManaCostsImpl<>("{3}{B}{R}"), costs,
                 MageIdentifier.HelbruteAlternateCast

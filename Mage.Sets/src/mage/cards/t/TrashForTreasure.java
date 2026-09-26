@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -29,7 +28,7 @@ public final class TrashForTreasure extends CardImpl {
     public TrashForTreasure(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
-        this.getSpellAbility().addCost(new SacrificeTargetCost(filterPermanent));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(filterPermanent).setAdditional(true));
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filterCard));
     }

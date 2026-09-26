@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -20,7 +19,7 @@ public final class SpontaneousCombustion extends CardImpl {
     public SpontaneousCombustion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}{R}");
 
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE).setAdditional(true));
         this.getSpellAbility().addEffect(new DamageAllEffect(3, new FilterCreaturePermanent()));
     }
 
