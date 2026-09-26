@@ -172,6 +172,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Hexhaven Invigorator", 106, Rarity.MYTHIC, mage.cards.h.HexhavenInvigorator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hexhaven Invigorator", 330, Rarity.MYTHIC, mage.cards.h.HexhavenInvigorator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hexhaven Invigorator", 458, Rarity.MYTHIC, mage.cards.h.HexhavenInvigorator.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hungering Puppetbeast", 107, Rarity.RARE, mage.cards.h.HungeringPuppetbeast.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hungering Puppetbeast", 346, Rarity.RARE, mage.cards.h.HungeringPuppetbeast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Icy Reception", 30, Rarity.COMMON, mage.cards.i.IcyReception.class));
         cards.add(new SetCardInfo("Identity Echo", 371, Rarity.RARE, mage.cards.i.IdentityEcho.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Identity Echo", 87, Rarity.RARE, mage.cards.i.IdentityEcho.class, NON_FULL_USE_VARIOUS));
