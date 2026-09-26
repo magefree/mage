@@ -319,6 +319,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Stingcaster Mage", 457, Rarity.MYTHIC, mage.cards.s.StingcasterMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stingcaster Mage", 93, Rarity.MYTHIC, mage.cards.s.StingcasterMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stingerquill Annex", 190, Rarity.COMMON, mage.cards.s.StingerquillAnnex.class));
+        cards.add(new SetCardInfo("Stingerquill Charm", 150, Rarity.UNCOMMON, mage.cards.s.StingerquillCharm.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Stingerquill Charm", 434, Rarity.UNCOMMON, mage.cards.s.StingerquillCharm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stingerquill Voxmancer", 151, Rarity.UNCOMMON, mage.cards.s.StingerquillVoxmancer.class));
         cards.add(new SetCardInfo("Stinging Vitriol", 152, Rarity.RARE, mage.cards.s.StingingVitriol.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stinging Vitriol", 356, Rarity.RARE, mage.cards.s.StingingVitriol.class, NON_FULL_USE_VARIOUS));
