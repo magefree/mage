@@ -38,7 +38,9 @@ import java.util.List;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -73,8 +75,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     private static final int MIN_FILE_SIZE_OF_POSSIBLE_BAD_IMAGE = 1024 * 8; // smaller files will be checked for possible broken mark (slow)
 
     private final DownloadImagesDialog uiDialog;
-    private boolean needCancel;
-    private int errorCount;
+    private final AtomicBoolean needCancel = new AtomicBoolean();
+    private final AtomicInteger errorCount = new AtomicInteger();
     private int cardIndex;
 
     private List<CardInfo> cardsAll;
@@ -157,24 +159,24 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
     @Override
     public boolean isNeedCancel() {
-        return this.needCancel || (this.errorCount > MAX_ERRORS_COUNT_BEFORE_CANCEL) || Thread.currentThread().isInterrupted();
+        return this.needCancel.get() || (this.errorCount.get() > MAX_ERRORS_COUNT_BEFORE_CANCEL) || Thread.currentThread().isInterrupted();
     }
 
     private void setNeedCancel(boolean needCancel) {
-        this.needCancel = needCancel;
+        this.needCancel.set(needCancel);
     }
 
     @Override
     public void incErrorCount() {
-        this.errorCount = this.errorCount + 1;
+        int newCount = this.errorCount.incrementAndGet();
 
-        if (this.errorCount == MAX_ERRORS_COUNT_BEFORE_CANCEL + 1) {
+        if (newCount == MAX_ERRORS_COUNT_BEFORE_CANCEL + 1) {
             logger.warn("Too many errors (> " + MAX_ERRORS_COUNT_BEFORE_CANCEL + ") in images download. Stop.");
         }
     }
 
     private void resetErrorCount() {
-        this.errorCount = 0;
+        this.errorCount.set(0);
     }
 
     public DownloadPicturesService() {
@@ -665,53 +667,55 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         downloadThreadsAmount,
                         new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_IMAGES_DOWNLOADER, false)
                 );
-                for (int i = 0; i < cardsDownloadQueue.size() && !this.isNeedCancel(); i++) {
-                    try {
-                        CardDownloadData card = cardsDownloadQueue.get(i);
+                try {
+                    for (int i = 0; i < cardsDownloadQueue.size() && !this.isNeedCancel(); i++) {
+                        try {
+                            CardDownloadData card = cardsDownloadQueue.get(i);
 
-                        logger.debug("Downloading image: " + card.getName() + " (" + card.getSet() + ')');
+                            logger.debug("Downloading image: " + card.getName() + " (" + card.getSet() + ')');
 
-                        CardImageUrls urls;
-                        if (card.isToken()) {
-                            if (!"0".equals(card.getCollectorId())) {
-                                continue;
+                            CardImageUrls urls;
+                            if (card.isToken()) {
+                                if (!"0".equals(card.getCollectorId())) {
+                                    continue;
+                                }
+                                urls = selectedSource.generateTokenUrl(card);
+                            } else {
+                                urls = selectedSource.generateCardUrl(card);
                             }
-                            urls = selectedSource.generateTokenUrl(card);
-                        } else {
-                            urls = selectedSource.generateCardUrl(card);
-                        }
 
-                        if (urls == null) {
-                            String imageRef = selectedSource.getNextHttpImageUrl();
-                            String fileName = selectedSource.getFileForHttpImage(imageRef);
-                            if (imageRef != null && fileName != null) {
-                                imageRef = selectedSource.getSourceName() + imageRef;
-                                try {
+                            if (urls == null) {
+                                String imageRef = selectedSource.getNextHttpImageUrl();
+                                String fileName = selectedSource.getFileForHttpImage(imageRef);
+                                if (imageRef != null && fileName != null) {
+                                    imageRef = selectedSource.getSourceName() + imageRef;
                                     card.setToken(selectedSource.isTokenSource());
                                     Runnable task = new DownloadTask(card, imageRef, fileName, selectedSource.getTotalImages());
                                     executor.execute(task);
-                                } catch (Exception ex) {
+                                } else if (selectedSource.getTotalImages() == -1) {
+                                    logger.info("Image not available on " + selectedSource.getSourceName() + ": " + card.getName() + " (" + card.getSet() + ')');
+                                    synchronized (sync) {
+                                        update(cardIndex + 1, cardsDownloadQueue.size());
+                                    }
                                 }
-                            } else if (selectedSource.getTotalImages() == -1) {
-                                logger.info("Image not available on " + selectedSource.getSourceName() + ": " + card.getName() + " (" + card.getSet() + ')');
-                                synchronized (sync) {
-                                    update(cardIndex + 1, cardsDownloadQueue.size());
-                                }
+                            } else {
+                                Runnable task = new DownloadTask(card, urls, cardsDownloadQueue.size());
+                                executor.execute(task);
                             }
-                        } else {
-                            Runnable task = new DownloadTask(card, urls, cardsDownloadQueue.size());
-                            executor.execute(task);
+                        } catch (RejectedExecutionException e) {
+                            logger.error("Can't submit image download task", e);
+                            setNeedCancel(true);
+                            break;
+                        } catch (Exception ex) {
+                            logger.error(ex, ex);
                         }
-                    } catch (Exception ex) {
-                        logger.error(ex, ex);
                     }
+                } finally {
+                    // workers must finish before archive unmounting and temp-file cleanup
+                    awaitDownloadWorkersTerminated(executor);
                 }
 
-                executor.shutdown();
-                try {
-                    executor.awaitTermination(30, TimeUnit.SECONDS);
-                } catch (InterruptedException ignore) {
-                }
+                reconcileDownloadedImages();
 
                 // IMAGES CHECK (download process can break some files, so fix it here too)
                 // code executes on finish/cancel download (but not executes on app's close -- it's ok)
@@ -742,6 +746,37 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
         // reset GUI and cards to use new images
         GUISizeHelper.refreshGUIAndCards(false);
+    }
+
+    /**
+     * Shut down the download pool and wait until every worker has finished.
+     * A polling timeout never authorizes archive cleanup. If the coordinator is
+     * interrupted, queued work is dropped, executing workers are interrupted,
+     * and the interrupt status is restored only after the pool has terminated.
+     */
+    static void awaitDownloadWorkersTerminated(ExecutorService executor) {
+        if (executor == null) {
+            return;
+        }
+        boolean interrupted = false;
+        executor.shutdown();
+        try {
+            while (!executor.isTerminated()) {
+                try {
+                    if (executor.awaitTermination(30, TimeUnit.SECONDS)) {
+                        break;
+                    }
+                    logger.info("Images: download workers still running, waiting before archive cleanup...");
+                } catch (InterruptedException e) {
+                    interrupted = true;
+                    executor.shutdownNow();
+                }
+            }
+        } finally {
+            if (interrupted) {
+                Thread.currentThread().interrupt();
+            }
+        }
     }
 
     private final class DownloadTask implements Runnable {
@@ -959,42 +994,37 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     private void update(int lastCardIndex, int needDownloadCount) {
         this.cardIndex = lastCardIndex;
 
-        if (cardIndex < needDownloadCount) {
-            // downloading
-            float mb = ((needDownloadCount - lastCardIndex) * selectedSource.getAverageSizeKb()) / 1024;
-            updateProgressMessage(String.format("%d of %d image downloading... Please wait [%.1f MB left].",
-                    lastCardIndex, needDownloadCount, mb), lastCardIndex, needDownloadCount);
-        } else {
-            // finished
-            updateProgressMessage("Image download DONE, saving last files and refreshing stats... Please wait.");
-            List<CardDownloadData> downloadedCards = Collections.synchronizedList(new ArrayList<>());
-            DownloadPicturesService.this.cardsMissing.parallelStream().forEach(cardDownloadData -> {
-                TFile file = new TFile(CardImageUtils.buildImagePathToCardOrToken(cardDownloadData));
-                if (file.exists() && file.length() > MIN_FILE_SIZE_OF_GOOD_IMAGE) {
-                    downloadedCards.add(cardDownloadData);
-                }
-            });
+        // keep worker progress updates lightweight so a restart cannot overlap the prior batch
+        float mb = ((needDownloadCount - lastCardIndex) * selectedSource.getAverageSizeKb()) / 1024;
+        updateProgressMessage(String.format("%d of %d image downloading... Please wait [%.1f MB left].",
+                lastCardIndex, needDownloadCount, mb), lastCardIndex, needDownloadCount);
+    }
 
-            // remove all downloaded cards, missing must be remains
-            // workaround for fast remove
-            Set<CardDownloadData> finished = new HashSet<>(downloadedCards);
-            this.cardsDownloadQueue = Collections.synchronizedList(this.cardsDownloadQueue.stream()
-                    .filter(c -> !finished.contains(c))
-                    .collect(Collectors.toList())
-            );
-            this.cardsMissing = Collections.synchronizedList(this.cardsMissing.stream()
-                    .filter(c -> !finished.contains(c))
-                    .collect(Collectors.toList())
-            );
-
-            if (this.cardsDownloadQueue.isEmpty()) {
-                // stop download
-                updateProgressMessage("Nothing to download. Please close.");
-            } else {
-                // try download again
+    private void reconcileDownloadedImages() {
+        updateProgressMessage("Image download DONE, saving last files and refreshing stats... Please wait.");
+        List<CardDownloadData> downloadedCards = Collections.synchronizedList(new ArrayList<>());
+        DownloadPicturesService.this.cardsMissing.parallelStream().forEach(cardDownloadData -> {
+            TFile file = new TFile(CardImageUtils.buildImagePathToCardOrToken(cardDownloadData));
+            if (file.exists() && file.length() > MIN_FILE_SIZE_OF_GOOD_IMAGE) {
+                downloadedCards.add(cardDownloadData);
             }
+        });
 
-            enableDialogButtons();
+        // remove all downloaded cards, missing must be remains
+        // workaround for fast remove
+        Set<CardDownloadData> finished = new HashSet<>(downloadedCards);
+        this.cardsDownloadQueue = Collections.synchronizedList(this.cardsDownloadQueue.stream()
+                .filter(c -> !finished.contains(c))
+                .collect(Collectors.toList())
+        );
+        this.cardsMissing = Collections.synchronizedList(this.cardsMissing.stream()
+                .filter(c -> !finished.contains(c))
+                .collect(Collectors.toList())
+        );
+
+        if (this.cardsDownloadQueue.isEmpty()) {
+            // stop download
+            updateProgressMessage("Nothing to download. Please close.");
         }
     }
 
