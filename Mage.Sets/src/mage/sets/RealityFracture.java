@@ -286,6 +286,9 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Return to the Light Realms", 440, Rarity.MYTHIC, mage.cards.r.ReturnToTheLightRealms.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Return to the Light Realms", 451, Rarity.MYTHIC, mage.cards.r.ReturnToTheLightRealms.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rewrite Regrets", 62, Rarity.UNCOMMON, mage.cards.r.RewriteRegrets.class));
+        cards.add(new SetCardInfo("Rise of the Deathbringer", 326, Rarity.RARE, mage.cards.r.RiseOfTheDeathbringer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rise of the Deathbringer", 454, Rarity.RARE, mage.cards.r.RiseOfTheDeathbringer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rise of the Deathbringer", 63, Rarity.RARE, mage.cards.r.RiseOfTheDeathbringer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rockfall Vale", 186, Rarity.RARE, mage.cards.r.RockfallVale.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rockfall Vale", 400, Rarity.RARE, mage.cards.r.RockfallVale.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Roiling Canopy", 187, Rarity.RARE, mage.cards.r.RoilingCanopy.class, NON_FULL_USE_VARIOUS));
