@@ -96,6 +96,11 @@ public abstract class DraftImpl implements Draft {
             synchronized (players) {
                 // boosters send to all players by timeout, so don't need to send it manually here
                 DraftPlayer oldDraftPlayer = players.get(oldPlayer.getId());
+                if (oldDraftPlayer == null) {
+                    logger.error("Draft " + this.id + ": can't replace unknown player " + oldPlayer.getName()
+                            + ", pack " + boosterNum + " pick " + cardNum);
+                    return false;
+                }
                 newDraftPlayer.setBoosterAndLoad(oldDraftPlayer.getBooster());
                 if (oldDraftPlayer.isPicking()) {
                     newDraftPlayer.setPickingAndSending();
@@ -337,7 +342,8 @@ public abstract class DraftImpl implements Draft {
                         if (isAbort() || sendBoostersToPlayers()) {
                             boosterSendingEndRound();
                         }
-                    } catch (Exception ex) {
+                    } catch (Throwable ex) {
+                        // any error must be logged and must not kill the periodic task (a dead task stops all booster sends)
                         logger.fatal("Fatal boosterLoadingHandle error in draft " + id + " pack " + boosterNum + " pick " + cardNum, ex);
                     }
                 }, 0, BOOSTER_LOADING_INTERVAL_SECS, TimeUnit.SECONDS);
@@ -399,7 +405,15 @@ public abstract class DraftImpl implements Draft {
                 // pick time starts right before the first send to that player
                 startPickDeadline(player);
             }
-            player.getPlayer().pickCard(player.getBooster(), player.getDeck(), this);
+            try {
+                player.getPlayer().pickCard(player.getBooster(), player.getDeck(), this);
+            } catch (Throwable e) {
+                // warning
+                // one broken player (a bot's pick, a view build or a send) must not stop sends to other players,
+                // its pick deadline is already started, so an autopick closes its pick
+                logger.error("Draft " + this.id + ": can't send booster to " + player.getPlayer().getName()
+                        + ", pack " + boosterNum + " pick " + cardNum, e);
+            }
         }
 
         return needSend.isEmpty();
@@ -447,8 +461,18 @@ public abstract class DraftImpl implements Draft {
 
     @Override
     public void firePickCardEvent(UUID playerId) {
-        DraftPlayer player = players.get(playerId);
-        playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), getPickTimeout(playerId));
+        List<Card> booster;
+        synchronized (players) {
+            DraftPlayer player = players.get(playerId);
+            if (player == null) {
+                // a send task took the player before a replacement (quit -> draftbot)
+                logger.warn("Draft " + this.id + ": ignored booster send to unknown player " + playerId
+                        + ", pack " + boosterNum + " pick " + cardNum);
+                return;
+            }
+            booster = player.getBooster();
+        }
+        playerQueryEventSource.pickCard(playerId, "Pick card", booster, getPickTimeout(playerId));
     }
 
     /**
@@ -509,9 +533,14 @@ public abstract class DraftImpl implements Draft {
         }
 
         synchronized (this) {
-            try {
-                this.wait(waitMs);
-            } catch (InterruptedException ignore) {
+            // require additional donePicking() cause it can be changed by income answer after parent's donePicking()
+            // so make sure there aren't extra waits
+            // TODO: can be deleted after draft migrage to single thread logic like game thread
+            if (!donePicking()) {
+                try {
+                    this.wait(waitMs);
+                } catch (InterruptedException ignore) {
+                }
             }
         }
 

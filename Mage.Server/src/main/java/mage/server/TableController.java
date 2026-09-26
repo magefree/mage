@@ -221,7 +221,14 @@ public class TableController {
 
     public synchronized boolean replaceDraftPlayer(Player oldPlayer, String name, PlayerType playerType, int skill) {
         Optional<Player> newPlayerOpt = createPlayer(name, playerType, skill);
-        if (!newPlayerOpt.isPresent() || table.getState() != TableState.DRAFTING) {
+        if (!newPlayerOpt.isPresent()) {
+            logger.error("Can't replace draft player " + oldPlayer.getName() + " in table " + table.getId()
+                    + ": can't create player of type " + playerType);
+            return false;
+        }
+        if (table.getState() != TableState.DRAFTING) {
+            logger.warn("Can't replace draft player " + oldPlayer.getName() + " in table " + table.getId()
+                    + ": table state " + table.getState());
             return false;
         }
         Player newPlayer = newPlayerOpt.get();
@@ -233,7 +240,12 @@ public class TableController {
         newTournamentPlayer.setState(oldTournamentPlayer.getState());
         newTournamentPlayer.setReplacedTournamentPlayer(oldTournamentPlayer);
 
-        managerFactory.draftManager().getController(table.getId()).ifPresent(controller -> controller.replacePlayer(oldPlayer, newPlayer));
+        boolean draftReplaced = managerFactory.draftManager().getController(table.getId())
+                .map(controller -> controller.replacePlayer(oldPlayer, newPlayer))
+                .orElse(false);
+        if (!draftReplaced) {
+            logger.error("Draft player " + oldPlayer.getName() + " replaced in tournament but not in draft, table " + table.getId());
+        }
         return true;
     }
 
