@@ -5681,7 +5681,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             putCardsOnTopOfLibrary(cards, game, source, true);
             cardsPutOnTop.addAll(cards);
         }
-        game.fireEvent(new GameEvent(GameEvent.EventType.SURVEILED, getId(), source, getId(), event.getAmount(), true));
+        game.fireEvent(new SurveilledEvent(getId(), source, event.getAmount(), cardsPutInGraveyard.getCards(game)));
         return SurveilResult.surveil(cardsPutInGraveyard, cardsPutOnTop);
     }
 
