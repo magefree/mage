@@ -46,6 +46,9 @@ import java.util.List;
  * * drawNameLine(font, bounding box)
  * <p>
  * * drawTypeLine(font, bounding box)
+ * <p>
+ * Rendered images are cached and shared across views with the same CardPanelRenderModeMTGO.imageKey, so any
+ * CardView field read here or in a subclass must also be added to CardView.appendRenderSignature.
  */
 public abstract class CardRenderer {
 
