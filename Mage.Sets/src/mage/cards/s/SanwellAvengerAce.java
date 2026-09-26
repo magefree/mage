@@ -1,9 +1,7 @@
 package mage.cards.s;
 
-import mage.ApprovingObject;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -21,12 +19,8 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.util.CardUtil;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -105,45 +99,10 @@ class SanwellAvengerAceEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 6));
         player.moveCards(cards, Zone.EXILED, source, game);
-        castSpell(cards, player, source, game);
+        CardUtil.castSpellWithAttributesForCost(player, source, game, cards, filter, null, null);
         cards.retainZone(Zone.EXILED, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
-    }
-
-    // Based on CardUtil.castSpellWithAttributesForFree
-    // also see Anrakyr the Traveller
-    // this sort of thing probably deserves refactoring
-    private static void castSpell(Cards cards, Player player, Ability source, Game game) {
-        Map<UUID, List<Card>> cardMap = new HashMap<>();
-        for (Card card : cards.getCards(game)) {
-            List<Card> castableComponents = CardUtil.getCastableComponents(card, filter, source, player, game, null, false);
-            if (!castableComponents.isEmpty()) {
-                cardMap.put(card.getId(), castableComponents);
-            }
-        }
-        if (cardMap.isEmpty()) {
-            return;
-        }
-        Cards castableCards = new CardsImpl(cardMap.keySet());
-        TargetCard target = new TargetCard(0, 1, Zone.ALL, filter);
-        target.withNotTarget(true);
-        target.withChooseHint("to cast");
-        player.choose(Outcome.Benefit, castableCards, target, source, game);
-        Card cardToCast = castableCards.get(target.getFirstTarget(), game);
-        if (cardToCast == null) {
-            return;
-        }
-        List<Card> partsToCast = cardMap.get(cardToCast.getId());
-        if (partsToCast.isEmpty()) {
-            return;
-        }
-        partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE));
-        SpellAbility chosenAbility = player.chooseAbilityForCast(cardToCast, game, false);
-        if (chosenAbility != null) {
-            player.cast(chosenAbility, game, false, new ApprovingObject(source, game));
-        }
-        partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null));
     }
 
 }
