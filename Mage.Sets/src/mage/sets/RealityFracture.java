@@ -260,6 +260,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 382, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 383, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 384, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Plan for All Outcomes", 35, Rarity.UNCOMMON, mage.cards.p.PlanForAllOutcomes.class));
         cards.add(new SetCardInfo("Pompous Battlemage", 428, Rarity.RARE, mage.cards.p.PompousBattlemage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pompous Battlemage", 90, Rarity.RARE, mage.cards.p.PompousBattlemage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Precise Redaction", 36, Rarity.UNCOMMON, mage.cards.p.PreciseRedaction.class, NON_FULL_USE_VARIOUS));
