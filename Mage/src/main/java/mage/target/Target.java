@@ -2,6 +2,7 @@ package mage.target;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.cards.Card;
 import mage.cards.Cards;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -151,6 +152,10 @@ public interface Target extends Copyable<Target>, Serializable {
                     if (targetPermanent != null) {
                         return canTarget(sourceControllerId, targetId, source, game)
                                 && targetPermanent.canBeTargetedBy(sourceObject, sourceControllerId, source, game);
+                    }
+                    Card targetCard = game.getCard(targetId);
+                    if (targetCard != null) {
+                        return canTarget(sourceControllerId, targetId, source, game);
                     }
                     return true;
                 })

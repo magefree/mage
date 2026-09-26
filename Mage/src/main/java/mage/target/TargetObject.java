@@ -4,6 +4,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.TargetEvent;
 
 import java.util.UUID;
 
@@ -56,7 +57,8 @@ public abstract class TargetObject extends TargetImpl {
         MageObject object = game.getObject(id);
         return object != null
                 && zone != null && zone.match(game.getState().getZone(id))
-                && getFilter() != null && getFilter().match(object, game);
+                && getFilter() != null && getFilter().match(object, game)
+                && !game.getContinuousEffects().preventedByRuleModification(new TargetEvent(id, source), source, game, true);
     }
 
     @Override
