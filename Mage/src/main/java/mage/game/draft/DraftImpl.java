@@ -49,7 +49,8 @@ public abstract class DraftImpl implements Draft {
     // table change must be done under same lock too (e.g. players list)
     // ---
 
-    protected boolean abort = false;
+    // volatile: set by a quit thread, read without a lock by the draft thread and the booster sending thread
+    protected volatile boolean abort = false;
     protected boolean started = false;
 
     protected transient TableEventSource tableEventSource = new TableEventSource();

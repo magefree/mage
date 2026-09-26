@@ -7,7 +7,6 @@ import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
 import mage.players.Player;
-import mage.server.game.GameController;
 import mage.server.managers.ManagerFactory;
 import mage.util.ThreadUtils;
 import mage.view.DraftPickView;
@@ -19,6 +18,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -33,6 +33,8 @@ public class DraftController {
     private final UUID draftSessionId;
     private final Draft draft;
     private final UUID tableId;
+
+    private final AtomicBoolean draftEnded = new AtomicBoolean(false); // thread safe end mark, so can be called multiple times
 
     public DraftController(ManagerFactory managerFactory, Draft draft, ConcurrentMap<UUID, UUID> userPlayerMap, UUID tableId) {
         this.managerFactory = managerFactory;
@@ -153,6 +155,17 @@ public class DraftController {
     }
 
     private void endDraft() throws MageException {
+        //
+        if (!draftEnded.compareAndSet(false, true)) {
+            if (draft.isAbort()) {
+                // aborted draft: the draft thread ends later with own end event
+                logger.info("Draft " + draft.getId() + " already ended by abort, ignored end event");
+            } else {
+                logger.error("Draft " + draft.getId() + " already ended, ignored second end", new Throwable());
+            }
+            return;
+        }
+
         for (final DraftSession draftSession : draftSessions.values()) {
             draftSession.draftOver();
             draftSession.removeDraft();
@@ -211,7 +224,7 @@ public class DraftController {
         try {
             endDraft();
         } catch (MageException ex) {
-
+            logger.error("Draft " + draft.getId() + ": can't end the draft on abort", ex);
         }
     }
 }
