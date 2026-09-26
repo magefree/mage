@@ -56,4 +56,44 @@ public class FracturedPowerstoneTest extends CardTestPlayerBaseWithAIHelps {
         assertPermanentCount(playerA, "Eldrazi Token", 3);
         assertTappedCount("Mountain", true, 1); // cost for second planar die
     }
+
+    @Test
+    public void testIchorElixir() {
+        // Active player can roll the planar die: Whenever you roll {CHAOS}, create a 7/7 colorless Eldrazi creature with annhilator 1
+        addPlane(playerA, Planes.PLANE_HEDRON_FIELDS_OF_AGADEEM);
+        addCard(Zone.BATTLEFIELD, playerA, "Fractured Powerstone");
+        addCard(Zone.BATTLEFIELD, playerA, "Ichor Elixir");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Roll the planar");
+        setDieRollResult(playerA, 1);
+        setDieRollResult(playerA, 3);
+        setChoice(playerA, "Blank Roll");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Eldrazi Token", 0);
+    }
+
+    @Test
+    public void testMultipleIchorElixir() {
+        // Active player can roll the planar die: Whenever you roll {CHAOS}, create a 7/7 colorless Eldrazi creature with annhilator 1
+        addPlane(playerA, Planes.PLANE_HEDRON_FIELDS_OF_AGADEEM);
+        addCard(Zone.BATTLEFIELD, playerA, "Fractured Powerstone");
+        addCard(Zone.BATTLEFIELD, playerA, "Ichor Elixir", 2);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Roll the planar");
+        setChoice(playerA, "Ichor Elixir");
+        setDieRollResult(playerA, 1);
+        setDieRollResult(playerA, 1);
+        setDieRollResult(playerA, 3);
+        setChoice(playerA, "Blank Roll");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Eldrazi Token", 0);
+    }
 }
