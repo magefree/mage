@@ -31,6 +31,7 @@ public enum AbilityWord {
     ENRAGE("Enrage"),
     FATEFUL_HOUR("Fateful hour"),
     FATHOMLESS_DESCENT("Fathomless descent"),
+    FEDERATION("Federation"),
     FEROCIOUS("Ferocious"),
     FLURRY("Flurry"),
     FORMIDABLE("Formidable"),
