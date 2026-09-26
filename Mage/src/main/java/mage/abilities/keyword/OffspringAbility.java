@@ -46,7 +46,7 @@ public class OffspringAbility extends StaticAbility implements OptionalAdditiona
                 .withInterveningIf(OffspringCondition.instance).setRuleVisible(false));
     }
 
-    private OffspringAbility(final OffspringAbility ability) {
+    protected OffspringAbility(final OffspringAbility ability) {
         super(ability);
         this.rule = ability.rule;
         this.additionalCost = ability.additionalCost.copy();
