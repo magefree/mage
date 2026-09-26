@@ -15,8 +15,9 @@ import mage.game.permanent.Permanent;
 public class LandwalkAbility extends EvasionAbility {
 
     /**
-     * Don't use source related filters here (example: landwalk for user selected land type).
-     * If you want it then use workaround from Traveler's Cloak to transfer settings after gain
+     * The filter is evaluated against the creature that has the landwalk, so a filter that reads
+     * its own source cannot see the object that chose the land type. Build the filter around that
+     * object's id instead, the way Traveler's Cloak does.
      *
      * @param filter
      */
