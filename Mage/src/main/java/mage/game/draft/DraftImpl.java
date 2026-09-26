@@ -46,6 +46,7 @@ public abstract class DraftImpl implements Draft {
     protected int cardNum = 1; // starts with card number 1, increases by +1 after each picking
     protected int boosterNum = 1; // starts with booster 1
     // player state like picking already synced inside locked (players)
+    // table change must be done under same lock too (e.g. players list)
     // ---
 
     protected boolean abort = false;
@@ -117,8 +118,9 @@ public abstract class DraftImpl implements Draft {
                 for (Map.Entry<UUID, DraftPlayer> entry : newPlayers.entrySet()) {
                     players.put(entry.getKey(), entry.getValue());
                 }
-            }
-            synchronized (table) {
+
+                // move table change inside lock (players), 
+                // so it will contain only actual ids and no NPE on boosters open
                 UUID currentId = table.get();
                 if (currentId.equals(oldPlayer.getId())) {
                     currentId = newPlayer.getId();
@@ -127,7 +129,6 @@ public abstract class DraftImpl implements Draft {
                 for (UUID playerId : players.keySet()) {
                     table.add(playerId);
                 }
-
                 table.setCurrent(currentId);
             }
 
@@ -358,7 +359,7 @@ public abstract class DraftImpl implements Draft {
     private void boosterSendingEndRound() {
         // round end: stop re-sends of current pick
         if (boosterSendingWorker != null) {
-            boosterSendingWorker.cancel(true);
+            boosterSendingWorker.cancel(false); // false, e.g. must wait jboss send end (if interrupted then client catch ping fail and disconnect)
             boosterSendingWorker = null;
         }
     }
