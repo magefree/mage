@@ -167,6 +167,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Haunted Ridge", 180, Rarity.RARE, mage.cards.h.HauntedRidge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Haunted Ridge", 398, Rarity.RARE, mage.cards.h.HauntedRidge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Heartstring Puller", 86, Rarity.COMMON, mage.cards.h.HeartstringPuller.class));
+        cards.add(new SetCardInfo("Heartwood Crafter", 105, Rarity.UNCOMMON, mage.cards.h.HeartwoodCrafter.class));
         cards.add(new SetCardInfo("Hexhaven Battalion", 12, Rarity.COMMON, mage.cards.h.HexhavenBattalion.class));
         cards.add(new SetCardInfo("Hexhaven Dueling Arena", 181, Rarity.UNCOMMON, mage.cards.h.HexhavenDuelingArena.class));
         cards.add(new SetCardInfo("Hexhaven Invigorator", 106, Rarity.MYTHIC, mage.cards.h.HexhavenInvigorator.class, NON_FULL_USE_VARIOUS));
