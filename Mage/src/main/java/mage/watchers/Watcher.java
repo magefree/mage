@@ -24,8 +24,18 @@ public abstract class Watcher implements Serializable {
     protected boolean condition;
     protected final WatcherScope scope;
 
+    // if a watcher can dynamically add other watchers to the game state, set this flag.
+    // this will protect it from modifying the watchers map inside its own watch(),
+    // which would cause a ConcurrentModificationException.
+    protected final boolean isolated;
+
     public Watcher(WatcherScope scope) {
+        this(scope, false);
+    }
+
+    public Watcher(WatcherScope scope, boolean isolated) {
         this.scope = scope;
+        this.isolated = isolated;
     }
 
     protected Watcher(final Watcher watcher) {
@@ -33,6 +43,7 @@ public abstract class Watcher implements Serializable {
         this.controllerId = watcher.controllerId;
         this.sourceId = watcher.sourceId;
         this.scope = watcher.scope;
+        this.isolated = watcher.isolated;
     }
 
     public UUID getControllerId() {
@@ -124,5 +135,9 @@ public abstract class Watcher implements Serializable {
 
     public WatcherScope getScope() {
         return scope;
+    }
+
+    public boolean isolated() {
+        return this.isolated;
     }
 }

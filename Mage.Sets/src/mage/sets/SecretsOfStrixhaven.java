@@ -193,6 +193,8 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Lluwen, Exchange Student", 199, Rarity.UNCOMMON, mage.cards.l.LluwenExchangeStudent.class));
         cards.add(new SetCardInfo("Lorehold Charm", 200, Rarity.UNCOMMON, mage.cards.l.LoreholdCharm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lorehold Charm", 363, Rarity.UNCOMMON, mage.cards.l.LoreholdCharm.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lorehold, the Historian", 201, Rarity.MYTHIC, mage.cards.l.LoreholdTheHistorian.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lorehold, the Historian", 284, Rarity.MYTHIC, mage.cards.l.LoreholdTheHistorian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lumaret's Favor", 153, Rarity.UNCOMMON, mage.cards.l.LumaretsFavor.class));
         cards.add(new SetCardInfo("Maelstrom Artisan", 122, Rarity.RARE, mage.cards.m.MaelstromArtisan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Maelstrom Artisan", 334, Rarity.RARE, mage.cards.m.MaelstromArtisan.class, NON_FULL_USE_VARIOUS));
