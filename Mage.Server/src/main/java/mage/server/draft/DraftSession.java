@@ -108,6 +108,13 @@ public class DraftSession {
         if (snapshot != null) {
             return new DraftPickView(snapshot, 0);
         }
+
+        // rejected pick, e.g. a late click after an autopick
+        // client must get it and refresh draft view with own cards only (hide outdated pick)
+        DraftPlayerSnapshot current = draft.getPlayerSnapshot(playerId);
+        if (current != null && !current.isPicking()) {
+            return new DraftPickView(current, 0);
+        }
         return null;
     }
 
