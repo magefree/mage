@@ -407,6 +407,8 @@ public class TournamentController {
             } else if (tournamentPlayer.getState() == TournamentPlayerState.DRAFTING) {
                 info = "during Draft phase";
                 if (!checkToReplaceDraftPlayerByAi(userId, tournamentPlayer)) {
+                    logger.info("Tourney " + tournament.getId() + ": draft player " + tournamentPlayer.getPlayer().getName()
+                            + " quit, no other humans - draft tournament aborted");
                     this.abortDraftTournament();
                 } else {
                     managerFactory.draftManager().getController(tableId).ifPresent(draftController -> {
@@ -446,7 +448,13 @@ public class TournamentController {
                 if (user.isPresent()) {
                     replacePlayerName = "Draftbot (" + user.get().getName() + ')';
                 }
-                tableController.replaceDraftPlayer(leavingPlayer.getPlayer(), replacePlayerName, PlayerType.COMPUTER_DRAFT_BOT, 5);
+                if (tableController.replaceDraftPlayer(leavingPlayer.getPlayer(), replacePlayerName, PlayerType.COMPUTER_DRAFT_BOT, 5)) {
+                    logger.info("Tourney " + tournament.getId() + ": draft player " + leavingPlayer.getPlayer().getName()
+                            + " quit and was replaced by " + replacePlayerName);
+                } else {
+                    logger.error("Tourney " + tournament.getId() + ": draft player " + leavingPlayer.getPlayer().getName()
+                            + " quit but was NOT replaced by draftbot");
+                }
                 if (user.isPresent()) {
                     user.get().removeDraft(leavingPlayer.getPlayer().getId());
                     user.get().removeTable(leavingPlayer.getPlayer().getId());
