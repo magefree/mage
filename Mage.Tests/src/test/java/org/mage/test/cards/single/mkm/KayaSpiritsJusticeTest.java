@@ -1,11 +1,8 @@
 package org.mage.test.cards.single.mkm;
 
-import mage.abilities.Mode;
-import mage.abilities.effects.common.ExileAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -69,5 +66,58 @@ public class KayaSpiritsJusticeTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Food Token", 0);
         assertPermanentCount(playerA, "Llanowar Elves", 1);
         assertAbility(playerA, "Llanowar Elves", FlyingAbility.getInstance(), true);
+    }
+
+    /**
+     * Copies outlive both Kaya and the exiled cards they copy, including when Kaya dies with her trigger on the stack.
+     */
+    @Test
+    public void test_CopiesOutliveKaya() {
+        addCard(Zone.BATTLEFIELD, playerA, "Scrubland", 9);
+        addCard(Zone.BATTLEFIELD, playerA, "Kaya, Spirits' Justice");
+        addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerA, "Fyndhorn Elves");
+        addCard(Zone.HAND, playerA, "Thraben Inspector", 2);
+        addCard(Zone.HAND, playerA, "Swords to Plowshares", 2);
+        addCard(Zone.HAND, playerA, "Hero's Downfall");
+        // {W} instant: put target face-up exiled card into its owner's graveyard
+        addCard(Zone.HAND, playerA, "Pull from Eternity", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thraben Inspector", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thraben Inspector", true);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Swords to Plowshares", "Llanowar Elves");
+        addTarget(playerA, "Clue Token");
+        addTarget(playerA, "Llanowar Elves");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pull from Eternity", "Llanowar Elves", true);
+
+        // kill Kaya in response to her second trigger
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Swords to Plowshares", "Fyndhorn Elves");
+        addTarget(playerA, "Clue Token");
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN, playerA, true);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Hero's Downfall", "Kaya, Spirits' Justice");
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN, playerA, true);
+        checkPermanentCount("Kaya gone", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Kaya, Spirits' Justice", 0);
+        checkStackObject("trigger still pending", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Whenever one or more", 1);
+        addTarget(playerA, "Fyndhorn Elves");
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN, playerA);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Pull from Eternity", "Fyndhorn Elves", true);
+
+        checkPermanentCount("first copy survives", 1, PhaseStep.END_TURN, playerA, "Llanowar Elves", 1);
+        checkPermanentCount("second copy made", 1, PhaseStep.END_TURN, playerA, "Fyndhorn Elves", 1);
+        checkAbility("with flying", 1, PhaseStep.END_TURN, playerA, "Fyndhorn Elves", FlyingAbility.class, true);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        // both copies end at cleanup
+        assertPermanentCount(playerA, "Llanowar Elves", 0);
+        assertPermanentCount(playerA, "Fyndhorn Elves", 0);
+        assertPermanentCount(playerA, "Clue Token", 2);
+        // the copied cards really did leave exile
+        assertGraveyardCount(playerA, "Llanowar Elves", 1);
+        assertGraveyardCount(playerA, "Fyndhorn Elves", 1);
     }
 }

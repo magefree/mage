@@ -175,7 +175,6 @@ class KayaSpiritsJusticeCopyEffect extends OneShotEffect {
         CopyApplier applier = new KayaSpiritsJusticeCopyApplier();
         applier.apply(game, newBlueprint, source, copyToPermanent.getId());
         CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, newBlueprint, copyToPermanent.getId());
-        copyEffect.newId();
         copyEffect.setApplier(applier);
         game.addEffect(copyEffect, source);
 
