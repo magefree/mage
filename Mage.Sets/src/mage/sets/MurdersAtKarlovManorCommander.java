@@ -105,6 +105,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Exotic Orchard", 260, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Experiment Twelve", 37, Rarity.RARE, mage.cards.e.ExperimentTwelve.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Experiment Twelve", 347, Rarity.RARE, mage.cards.e.ExperimentTwelve.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Eye of Duskmantle", 27, Rarity.RARE, mage.cards.e.EyeOfDuskmantle.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Eye of Duskmantle", 337, Rarity.RARE, mage.cards.e.EyeOfDuskmantle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Farewell", 64, Rarity.RARE, mage.cards.f.Farewell.class));
         cards.add(new SetCardInfo("Fell the Mighty", 65, Rarity.RARE, mage.cards.f.FellTheMighty.class));
         cards.add(new SetCardInfo("Fellwar Stone", 228, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
