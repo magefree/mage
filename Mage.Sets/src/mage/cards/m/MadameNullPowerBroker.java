@@ -3,8 +3,6 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
@@ -15,6 +13,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -37,7 +36,8 @@ public final class MadameNullPowerBroker extends CardImpl {
 
         // Whenever another creature you control enters, you may pay life equal to its power. If you do, put that many +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new MadameNullPowerBrokerEffect(), StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL, true, SetTargetPointer.PERMANENT
+                Zone.BATTLEFIELD, new MadameNullPowerBrokerEffect(), StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL,
+                true, SetTargetPointer.PERMANENT
         ));
     }
 
@@ -75,11 +75,9 @@ class MadameNullPowerBrokerEffect extends OneShotEffect {
             return false;
         }
         int power = permanent.getPower().getValue();
-        Cost cost = new PayLifeCost(power);
-        if (power < 1 || !cost.canPay(source, source, source.getControllerId(), game)) {
+        if (power < 1 || !CardUtil.tryPayLife(power, player, source, game)) {
             return false;
         }
-        cost.pay(source, game, source, source.getControllerId(), true);
         permanent.addCounters(CounterType.P1P1.createInstance(power), source, game);
         return true;
     }
