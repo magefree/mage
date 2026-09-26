@@ -209,6 +209,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Kwia Vigorbloom", 410, Rarity.MYTHIC, mage.cards.k.KwiaVigorbloom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kwia Vigorbloom", 420, Rarity.MYTHIC, mage.cards.k.KwiaVigorbloom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Last Gasp", 56, Rarity.COMMON, mage.cards.l.LastGasp.class));
+        cards.add(new SetCardInfo("Lich's Relic", 365, Rarity.RARE, mage.cards.l.LichsRelic.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lich's Relic", 57, Rarity.RARE, mage.cards.l.LichsRelic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liliana the Faultless", 200, Rarity.RARE, mage.cards.l.LilianaTheFaultless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liliana the Faultless", 293, Rarity.RARE, mage.cards.l.LilianaTheFaultless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liliana the Repentant", 231, Rarity.RARE, mage.cards.l.LilianaTheRepentant.class, NON_FULL_USE_VARIOUS));
