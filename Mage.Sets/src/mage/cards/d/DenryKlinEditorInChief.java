@@ -67,8 +67,8 @@ class DenryKlinEditorInChiefCopyCountersEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent denryPermanent = game.getPermanent(source.getSourceId());
-        Permanent enteringCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-        if (controller == null || denryPermanent == null) {
+        Permanent enteringCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (controller == null || denryPermanent == null || enteringCreature == null) {
             return false;
         }
 
