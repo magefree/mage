@@ -23,7 +23,7 @@ public class SourceHasSubtypeCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (permanent == null) {
             return false;
         }
