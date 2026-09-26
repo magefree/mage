@@ -409,6 +409,8 @@ public class TournamentController {
                 if (!checkToReplaceDraftPlayerByAi(userId, tournamentPlayer)) {
                     logger.info("Tourney " + tournament.getId() + ": draft player " + tournamentPlayer.getPlayer().getName()
                             + " quit, no other humans - draft tournament aborted");
+                    // quit status must be set before the abort: so last player will get actual status on save to table history
+                    tournamentPlayer.setQuit(info, TourneyQuitStatus.DURING_DRAFTING);
                     this.abortDraftTournament();
                 } else {
                     managerFactory.draftManager().getController(tableId).ifPresent(draftController -> {
