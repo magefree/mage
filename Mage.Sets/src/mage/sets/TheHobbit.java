@@ -228,6 +228,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Roll-Roll-Roll-Roll", 54, Rarity.RARE, mage.cards.r.RollRollRollRoll.class));
         cards.add(new SetCardInfo("Settle the Wreckage", 26, Rarity.RARE, mage.cards.s.SettleTheWreckage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Settle the Wreckage", 288, Rarity.RARE, mage.cards.s.SettleTheWreckage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Silvan Reveler", 163, Rarity.UNCOMMON, mage.cards.s.SilvanReveler.class));
         cards.add(new SetCardInfo("Smaug's Fury", 111, Rarity.COMMON, mage.cards.s.SmaugsFury.class));
         cards.add(new SetCardInfo("Smaug, the Great Calamity", 109, Rarity.COMMON, mage.cards.s.SmaugTheGreatCalamity.class));
         cards.add(new SetCardInfo("Smaug, Wicked Worm", 164, Rarity.RARE, mage.cards.s.SmaugWickedWorm.class, NON_FULL_USE_VARIOUS));
