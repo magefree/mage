@@ -389,6 +389,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Way of the Mentor", 208, Rarity.UNCOMMON, mage.cards.w.WayOfTheMentor.class));
         cards.add(new SetCardInfo("Way of the Necromancer", 239, Rarity.UNCOMMON, mage.cards.w.WayOfTheNecromancer.class));
         cards.add(new SetCardInfo("Way of the Pyromancer", 254, Rarity.UNCOMMON, mage.cards.w.WayOfThePyromancer.class));
+        cards.add(new SetCardInfo("Way of the Warlord", 255, Rarity.UNCOMMON, mage.cards.w.WayOfTheWarlord.class));
         cards.add(new SetCardInfo("Way of the Wildspeaker", 268, Rarity.UNCOMMON, mage.cards.w.WayOfTheWildspeaker.class));
         cards.add(new SetCardInfo("Winter, Team Player", 256, Rarity.UNCOMMON, mage.cards.w.WinterTeamPlayer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Winter, Team Player", 312, Rarity.UNCOMMON, mage.cards.w.WinterTeamPlayer.class, NON_FULL_USE_VARIOUS));
