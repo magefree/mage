@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -21,7 +22,7 @@ public class TargetCardInYourGraveyardOrExile extends TargetCard {
     private final FilterCard filterExile;
 
     public TargetCardInYourGraveyardOrExile(FilterCard filterGraveyard, FilterCard filterExile) {
-        super(1, 1, Zone.GRAVEYARD, filterGraveyard); // we do not actually use those, as all is overwritten
+        super(1, 1, Zone.ALL, StaticFilters.FILTER_CARD); // we do not actually use those, as all is overwritten
         this.filterGraveyard = filterGraveyard;
         this.filterExile = filterExile;
         this.targetName = filterGraveyard.getMessage() + " or " + filterExile.getMessage();
@@ -57,6 +58,9 @@ public class TargetCardInYourGraveyardOrExile extends TargetCard {
 
     @Override
     public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        if (!super.canTarget(playerId, id, source, game)) {
+            return false;
+        }
         Card card = game.getCard(id);
         if (card == null) {
             return false;
