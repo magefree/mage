@@ -162,17 +162,26 @@ public final class CollectionViewerPanel extends JPanel {
         next.addActionListener(e -> mageBook.next());
         buttonPanel.add(next);
 
-        JLabel labelCardTokenSwitch = new JLabel("Show cards or tokens:");
+        JLabel labelCardTokenSwitch = new JLabel("View:");
         labelCardTokenSwitch.setAlignmentX(Component.LEFT_ALIGNMENT);
         labelCardTokenSwitch.setForeground(Color.white);
         buttonsPanel.add(labelCardTokenSwitch);
 
-        JCheckBox cardsOrTokens = new JCheckBox("Display Cards");
-        cardsOrTokens.setSelected(true);
-        cardsOrTokens.setForeground(Color.white);
-        cardsOrTokens.setToolTipText("Select to show Cards for the chosen set.  When unselected, will show Tokens, Emblems and Planes for the set instead");
-        cardsOrTokens.addActionListener(e -> mageBook.cardsOrTokens(cardsOrTokens.isSelected()));
-        buttonsPanel.add(cardsOrTokens);
+        JRadioButton cards = new JRadioButton("Cards");
+        cards.setSelected(true);
+        cards.setForeground(Color.white);
+        cards.addActionListener(e -> mageBook.cardsOrTokens(true));
+        buttonsPanel.add(cards);
+
+        JRadioButton tokens = new JRadioButton("Tokens");
+        tokens.setForeground(Color.white);
+        tokens.setToolTipText("Show tokens, emblems, planes and dungeons for the chosen set");
+        tokens.addActionListener(e -> mageBook.cardsOrTokens(false));
+        buttonsPanel.add(tokens);
+
+        ButtonGroup cardsOrTokens = new ButtonGroup();
+        cardsOrTokens.add(cards);
+        cardsOrTokens.add(tokens);
 
         buttonsPanel.add(Box.createVerticalGlue());
 
