@@ -28,6 +28,7 @@ public class OffspringAbility extends StaticAbility implements OptionalAdditiona
     public static final String OFFSPRING_ACTIVATION_VALUE_KEY = "offspringActivation";
 
     protected OptionalAdditionalCost additionalCost;
+    private final String activationKey;
 
     public OffspringAbility(String manaString) {
         this(new ManaCostsImpl<>(manaString));
@@ -35,6 +36,7 @@ public class OffspringAbility extends StaticAbility implements OptionalAdditiona
 
     public OffspringAbility(Cost cost) {
         super(Zone.STACK, null);
+        this.activationKey = OFFSPRING_ACTIVATION_VALUE_KEY + "_" + this.getId();
         this.additionalCost = new OptionalAdditionalCostImpl(
                 keywordText + ' ' + cost.getText(),
                 String.format(reminderText, cost.getText()), cost
@@ -43,11 +45,12 @@ public class OffspringAbility extends StaticAbility implements OptionalAdditiona
         this.rule = additionalCost.getName() + ' ' + additionalCost.getReminderText();
         this.setRuleAtTheTop(true);
         this.addSubAbility(new EntersBattlefieldTriggeredAbility(new OffspringEffect())
-                .withInterveningIf(OffspringCondition.instance).setRuleVisible(false));
+                .withInterveningIf(new OffspringCondition(this.activationKey)).setRuleVisible(false));
     }
 
     protected OffspringAbility(final OffspringAbility ability) {
         super(ability);
+        this.activationKey = ability.activationKey;
         this.rule = ability.rule;
         this.additionalCost = ability.additionalCost.copy();
     }
@@ -73,7 +76,13 @@ public class OffspringAbility extends StaticAbility implements OptionalAdditiona
         }
         additionalCost.activate();
         ability.addCost(additionalCost.copy());
-        ability.setCostsTag(OFFSPRING_ACTIVATION_VALUE_KEY, null);
+        ability.setCostsTag(this.activationKey, null);
+        mage.cards.Card card = game.getCard(ability.getSourceId());
+        if (card != null && !card.getAbilities().contains(this)) {
+            ability.setCostsTag("offspring_trigger_" + this.activationKey,
+                    new EntersBattlefieldTriggeredAbility(new OffspringEffect())
+                            .withInterveningIf(new OffspringCondition(this.activationKey)).setRuleVisible(false));
+        }
     }
 
     @Override
@@ -113,12 +122,17 @@ class OffspringEffect extends OneShotEffect {
     }
 }
 
-enum OffspringCondition implements Condition {
-    instance;
+class OffspringCondition implements Condition {
+
+    private final String activationKey;
+
+    OffspringCondition(String activationKey) {
+        this.activationKey = activationKey;
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return CardUtil.checkSourceCostsTagExists(game, source, OffspringAbility.OFFSPRING_ACTIVATION_VALUE_KEY);
+        return CardUtil.checkSourceCostsTagExists(game, source, activationKey);
     }
 
     @Override

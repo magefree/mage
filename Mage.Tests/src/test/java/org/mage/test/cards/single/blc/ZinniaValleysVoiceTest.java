@@ -136,4 +136,40 @@ public class ZinniaValleysVoiceTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Iridescent Vinelasher", 3);
         assertTokenCount(playerA, "Iridescent Vinelasher", 2);
     }
+
+    @Test
+    public void testPayOnlyGrantedOffspring() {
+        addCard(Zone.BATTLEFIELD, playerA, zinnia);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.HAND, playerA, "Iridescent Vinelasher");
+
+        setChoice(playerA, false); // Don't pay printed offspring
+        setChoice(playerA, true);  // Pay Zinnia's granted offspring
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Iridescent Vinelasher");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertTokenCount(playerA, "Iridescent Vinelasher", 1);
+    }
+
+    @Test
+    public void testOffspringUnderDressDown() {
+        addCard(Zone.BATTLEFIELD, playerA, zinnia);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.HAND, playerA, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.HAND, playerB, "Dress Down");
+
+        setChoice(playerA, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Dress Down", null, "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertTokenCount(playerA, "Grizzly Bears", 0);
+    }
 }
