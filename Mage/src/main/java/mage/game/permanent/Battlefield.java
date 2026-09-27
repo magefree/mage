@@ -290,23 +290,25 @@ public class Battlefield implements Serializable {
 
     /**
      * Returns controlled permanents with phasing ability that are phased in, so that they can be phased out
+     * If controllerId == null, returns all permanents with phasing ability that are phased in
      */
     public List<Permanent> getPhasingOut(Game game, UUID controllerId) {
         return field.values()
                 .stream()
                 .filter(perm -> perm.hasAbility(PhasingAbility.getInstance(), game)
                         && perm.isPhasedIn()
-                        && perm.isControlledBy(controllerId))
+                        && (controllerId == null || perm.isControlledBy(controllerId)))
                 .collect(Collectors.toList());
     }
 
     /**
      * Returns controlled permanents that are phased out, so that they can be phased in
+     * If controllerId == null, returns all permanents that are phased out
      */
     public List<Permanent> getPhasedOut(UUID controllerId) {
         return field.values()
                 .stream()
-                .filter(perm -> !perm.isPhasedIn() && perm.isControlledBy(controllerId))
+                .filter(perm -> !perm.isPhasedIn() && (controllerId == null || perm.isControlledBy(controllerId)))
                 .collect(Collectors.toList());
     }
 

@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class SculptureTreasureToken extends TokenImpl {
 
     public SculptureTreasureToken() {
-        super("Sculpture Treasure Token", "1/1 colorless Sculpture Treasure artifact creature token with \"{T}, Sacrifice this token: Add mana of any color.\"");
+        super("Sculpture Treasure Token", "1/1 colorless Sculpture Treasure artifact creature token with \"{T}, Sacrifice this token: Add one mana of any color.\"");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.SCULPTURE);

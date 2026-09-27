@@ -3,7 +3,6 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.ProwessAbility;
@@ -69,7 +68,7 @@ class SoulScarMageDamageReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent toGetCounters = game.getPermanent(event.getTargetId());
         if (toGetCounters != null) {
-            AddCountersTargetEffect addCounters = new AddCountersTargetEffect(CounterType.M1M1.createInstance(), StaticValue.get(event.getAmount()));
+            AddCountersTargetEffect addCounters = new AddCountersTargetEffect(CounterType.M1M1.createInstance(event.getAmount()));
             addCounters.setTargetPointer(new FixedTarget(toGetCounters.getId(), game));
             addCounters.apply(game, source);
             return true;
