@@ -34,7 +34,7 @@ public class ClientCallbacksQueue {
      * <p>
      * Increase it if you see too many SESSION LOCK, possible connection problem
      */
-    private static final int MAX_SIZE = 20;
+    private static final int MAX_SIZE = 100;
 
     private final LinkedBlockingDeque<ClientCallback> importantQueue = new LinkedBlockingDeque<>(MAX_SIZE);
     private final LinkedBlockingDeque<ClientCallback> normalQueue = new LinkedBlockingDeque<>(MAX_SIZE);
