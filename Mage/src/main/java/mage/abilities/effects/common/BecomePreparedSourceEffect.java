@@ -12,7 +12,7 @@ import mage.game.permanent.Permanent;
 public class BecomePreparedSourceEffect extends OneShotEffect {
 
     private static final String REMINDER_TEXT
-            = "<i>(Only creatures with prepare spells can become prepared.)</i>";
+            = "<i>(While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)</i>";
 
     public static String getReminder() {
         return REMINDER_TEXT;

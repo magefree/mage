@@ -38,7 +38,7 @@ public final class WayOfTheHealer extends CardImpl {
         Ability ability = new SimpleStaticAbility(new GainAbilityControlledEffect(
             loyaltyAbility,
             Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER
-        ).setText("Planeswalkers you control have \"[-2]: Create a 2/2 colorless Wizard Soldier creature token named Cadet. Surveil 1.\""));
+        ).setText("Planeswalkers you control have \"-2: Create a 2/2 colorless Wizard Soldier creature token named Cadet. Surveil 1.\""));
         this.addAbility(ability);
     }
 
