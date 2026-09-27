@@ -57,10 +57,7 @@ public final class TekuthalInquiryDominus extends CardImpl {
 
         // {1}{U/P}{U/P}, Remove three counters from among other artifacts, creatures, and planeswalkers you control: Put an indestructible counter on Tekuthal, Inquiry Dominus.
         Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.INDESTRUCTIBLE.createInstance()), new ManaCostsImpl<>("{1}{U/P}{U/P}"));
-        ability.addCost(new RemoveCounterCost(new TargetPermanent(
-                0, Integer.MAX_VALUE,
-                filter
-        ), null, 3).setText("Remove three counters from among " + filter.getMessage()));
+        ability.addCost(new RemoveCounterCost(new TargetPermanent(1, 3, filter), null, 3).setText("Remove three counters from among " + filter.getMessage()));
         this.addAbility(ability);
     }
 
