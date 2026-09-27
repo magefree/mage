@@ -63,6 +63,7 @@ public final class RealityFractureCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Niv-Mizzet, Ghost Counsel", 10, Rarity.RARE, mage.cards.n.NivMizzetGhostCounsel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Niv-Mizzet, Ghost Counsel", 95, Rarity.RARE, mage.cards.n.NivMizzetGhostCounsel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Occult Epiphany", 43, Rarity.RARE, mage.cards.o.OccultEpiphany.class));
+        cards.add(new SetCardInfo("Omnath, Locus of the Void", 3, Rarity.RARE, mage.cards.o.OmnathLocusOfTheVoid.class));
         cards.add(new SetCardInfo("Overlord of the Mistmoors", 29, Rarity.MYTHIC, mage.cards.o.OverlordOfTheMistmoors.class));
         cards.add(new SetCardInfo("Path of Ancestry", 77, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Path to Exile", 30, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
