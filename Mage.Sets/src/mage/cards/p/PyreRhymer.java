@@ -76,7 +76,7 @@ class MoltenTideTriggeredAbility extends DelayedTriggeredManaAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent land = ((TappedForManaEvent) event).getPermanent();
-        return land != null && land.isControlledBy(getControllerId())  && land.hasSubtype(SubType.MOUNTAIN, game);
+        return land != null && land.isControlledBy(getControllerId()) && land.hasSubtype(SubType.MOUNTAIN, game);
     }
 
     @Override
