@@ -89,6 +89,10 @@
      // Cached booster data to be written into the log (see logLastPick).
      private String[] currentBooster;
 
+     // Pack and pick numbers of the last loaded booster (from the draft view of its message), used to ignore outdated boosters.
+     private int lastBoosterPackNo = 0;
+     private int lastBoosterPickNo = 0;
+
      private static final CardsView EMPTY_VIEW = new CardsView();
 
      private Listener<Event> selectedCardsListener = null;
@@ -338,7 +342,35 @@
          }
      }
 
-     public void loadBooster(DraftPickView draftPickView) {
+    public void loadBooster(int messageId, DraftView draftView, DraftPickView draftPickView) {
+         // ignore outdated booster - a same or an older pack/pick than the last loaded booster:
+         // - server re-sends a booster until a load confirm, so a slow connection can get it again (even after own pick);
+         // - an old message can come after a newer one;
+         // such a booster must not be shown again, restart timers or send a second load confirm
+         int newPackNo = draftView.getBoosterNum();
+         int newPickNo = draftView.getCardNum();
+         if (newPackNo < lastBoosterPackNo || (newPackNo == lastBoosterPackNo && newPickNo <= lastBoosterPickNo)) {
+             logger.warn(String.format("ignore outdated booster message %d - pack %d pick %d, last loaded pack %d pick %d, possible reason: slow connection/performance",
+                     messageId,
+                     newPackNo,
+                     newPickNo,
+                     lastBoosterPackNo,
+                     lastBoosterPickNo
+             ));
+             return;
+         }
+         if (!draftPickView.getBooster().isEmpty()) {
+             lastBoosterPackNo = newPackNo;
+             lastBoosterPickNo = newPickNo;
+         }
+
+
+         // pack/pick numbers of this booster from its own message (DRAFT_UPDATE can come later),
+         // used by draft log, pick timer and clicks protection below
+         packNo = newPackNo;
+         pickNo = newPickNo;
+         setCodes = draftView.getSetCodes();
+
          logLastPick(draftPickView);
          // upper area that shows the picks
          loadCardsToPickedCardsArea(draftPickView.getPicks());
@@ -540,7 +572,8 @@
          if (currentBooster != null) {
              String lastPick = getCardName(getLastPick(pickView.getPicks().values()));
              if (lastPick != null && currentBooster.length > 1) {
-                 draftLogger.logPick(getCurrentSetCode(), packNo, pickNo - 1, lastPick, currentBooster); // wtf pickno need -1?
+                // a picked card is known from the next booster's picks only, so it is logged on the next booster: current pick - 1
+                 draftLogger.logPick(getCurrentSetCode(), packNo, pickNo - 1, lastPick, currentBooster);
              }
              currentBooster = null;
          }
