@@ -117,6 +117,7 @@ Final Fantasy|FIN|
 Forgotten Realms Commander|AFC|
 Foundations Jumpstart|J25|
 Foundations|FDN|
+Foundations Commander|FDC|
 Fourth Edition|4ED|
 Friday Night Magic|FNMP|
 From the Vault: Angels|V15|

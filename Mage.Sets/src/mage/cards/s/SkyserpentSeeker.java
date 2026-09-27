@@ -3,7 +3,6 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -41,7 +40,7 @@ public final class SkyserpentSeeker extends CardImpl {
 
         // Exhaust -- {4}: Reveal cards from the top of your library until you reveal two land cards. Put those land cards onto the battlefield tapped and the rest on the bottom of your library in a random order. Put a +1/+1 counter on this creature.
         Ability ability = (new ExhaustAbility(new SkyserpentSeekerEffect(), new ManaCostsImpl<>("{4}")));
-        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), StaticValue.get(1)));
+        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         this.addAbility(ability);
     }
 

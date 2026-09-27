@@ -18,9 +18,11 @@ public class CommanderDuelMatch extends MatchImpl {
         int startLife = 40;
         // Don't like it to compare but seems like it's complicated to do it in another way
         boolean checkCommanderDamage = true;
+        boolean castOnlyOneCommanderPerGame = false;
         if (options.getDeckType().equals("Variant Magic - Duel Commander")) {
             startLife = 20;   // Starting with the Commander 2016 update (on November 11th, 2016), Duel Commander will be played with 20 life points instead of 30.
             checkCommanderDamage = false; // since nov 16 duel commander uses no longer commander damage rule
+            castOnlyOneCommanderPerGame = true; // duel commander allows to cast only one commander from the command zone per game
         }
         if (options.getDeckType().equals("Variant Magic - MTGO 1v1 Commander")) {
             startLife = 30;
@@ -36,6 +38,7 @@ public class CommanderDuelMatch extends MatchImpl {
                 mulligan, startLife, startHandSize
         );
         game.setCheckCommanderDamage(checkCommanderDamage);
+        game.setCastOnlyOneCommanderPerGame(castOnlyOneCommanderPerGame);
         game.setStartMessage(this.createGameStartMessage());
         initGame(game);
         games.add(game);

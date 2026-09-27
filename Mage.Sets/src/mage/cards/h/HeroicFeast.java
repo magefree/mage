@@ -33,9 +33,7 @@ public final class HeroicFeast extends CardImpl {
         Ability heroicFeastAbility = new GainLifeControllerTriggeredAbility(
                 new AddCountersTargetEffect(
                         CounterType.P1P1.createInstance()
-                ).setText("choose up to that many target creatures you control. " +
-                        "Put a +1/+1 counter on each of them"),
-                false, false
+                ).setText("choose up to that many target creatures you control. Put a +1/+1 counter on each of them")
         );
         heroicFeastAbility.addTarget(new TargetControlledCreaturePermanent(0, 0));
         heroicFeastAbility.setTargetAdjuster(new TargetsCountAdjuster(SavedGainedLifeValue.MANY));

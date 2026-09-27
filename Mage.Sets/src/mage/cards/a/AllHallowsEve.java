@@ -2,7 +2,6 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -31,7 +30,7 @@ public final class AllHallowsEve extends CardImpl {
         // Exile All Hallow's Eve with two scream counters on it.
         this.getSpellAbility().addEffect(new ExileSpellEffect());
         this.getSpellAbility().addEffect(new AddCountersSourceEffect(
-                CounterType.SCREAM.createInstance(), StaticValue.get(2), true
+                CounterType.SCREAM.createInstance(2), null, true
         ).setText("with two scream counters on it"));
 
         // At the beginning of your upkeep, if All Hallow's Eve is exiled with a scream counter on it, remove a scream counter from it.

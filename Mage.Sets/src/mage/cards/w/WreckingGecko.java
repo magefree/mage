@@ -34,10 +34,12 @@ public final class WreckingGecko extends CardImpl {
 
         // {6}{G}{G}: This creature gets +4/+4 and gains trample until end of turn.
         Ability ability = new SimpleActivatedAbility(
-            new BoostSourceEffect(4, 4, Duration.EndOfTurn),
+            new BoostSourceEffect(4, 4, Duration.EndOfTurn).setText("This creature gets +4/+4"),
             new ManaCostsImpl<>("{6}{G}{G}")
         );
-        ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
+        ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)
+            .setText("and gains trample until end of turn")
+        );
         this.addAbility(ability);
     }
 

@@ -214,7 +214,7 @@ class CosimaGodOfTheVoyageReturnEffect extends OneShotEffect {
 
         // AI hint to return card on 2+ counters
         int currentCount = card.getCounters(game).getCount(CounterType.VOYAGE);
-        Outcome aiOutcome = (currentCount >= 2) ? Outcome.Benefit : Outcome.Detriment;
+        Outcome aiOutcome = (currentCount >= 2) ? Outcome.Benefit : Outcome.AIDontUseIt;
 
         if (player.chooseUse(aiOutcome, "Add a voyage counter (current: " + currentCount + ")?", null,
                 "Yes, add counter", "No, return to battlefield", source, game)
