@@ -44,7 +44,8 @@ public final class PyreRhymer extends PrepareCard {
         // Instant {R}
         // Until end of turn, whenever you tap a Mountain for mana, add an additional {R}.
         this.getSpellCard().getSpellAbility().addEffect(
-                new CreateDelayedTriggeredAbilityEffect(new MoltenTideTriggeredAbility()));
+            new CreateDelayedTriggeredAbilityEffect(new MoltenTideTriggeredAbility())
+        );
     }
 
     private PyreRhymer(final PyreRhymer card) {
