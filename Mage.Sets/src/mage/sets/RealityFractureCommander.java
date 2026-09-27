@@ -24,6 +24,7 @@ public final class RealityFractureCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Archfiend of Despair", 46, Rarity.MYTHIC, mage.cards.a.ArchfiendOfDespair.class));
         cards.add(new SetCardInfo("Archon of Cruelty", 47, Rarity.MYTHIC, mage.cards.a.ArchonOfCruelty.class));
         cards.add(new SetCardInfo("Azorius Signet", 53, Rarity.UNCOMMON, mage.cards.a.AzoriusSignet.class));
+        cards.add(new SetCardInfo("Avacyn, Angel of Horror", 7, Rarity.RARE, mage.cards.a.AvacynAngelOfHorror.class));
         cards.add(new SetCardInfo("Battlefield Forge", 65, Rarity.RARE, mage.cards.b.BattlefieldForge.class));
         cards.add(new SetCardInfo("Brainstorm", 39, Rarity.COMMON, mage.cards.b.Brainstorm.class));
         cards.add(new SetCardInfo("Brainsurge", 40, Rarity.UNCOMMON, mage.cards.b.Brainsurge.class));
