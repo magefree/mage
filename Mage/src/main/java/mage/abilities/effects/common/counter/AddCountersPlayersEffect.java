@@ -2,7 +2,6 @@ package mage.abilities.effects.common.counter;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -10,7 +9,6 @@ import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 import java.util.*;
 
@@ -24,7 +22,7 @@ public class AddCountersPlayersEffect extends OneShotEffect {
     private final TargetController targetController;
 
     public AddCountersPlayersEffect(Counter counter, TargetController targetController) {
-        this(counter, StaticValue.get(0), targetController);
+        this(counter, null, targetController);
     }
 
     public AddCountersPlayersEffect(Counter counter, DynamicValue amount, TargetController targetController) {
@@ -71,13 +69,10 @@ public class AddCountersPlayersEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Counter newCounter = counter.copy();
-        int calculated = amount.calculate(game, source, this);
-        if (!(amount instanceof StaticValue) || calculated > 0) {
-            // If dynamic, or static and set to a > 0 value, we use that instead of the counter's internal amount.
+        if (amount != null) {
+            // an amount replaces the counter's own count
             newCounter.remove(newCounter.getCount());
-            newCounter.add(calculated);
-        } else {
-            // StaticValue 0 -- the default counter has the amount, so no adjustment.
+            newCounter.add(amount.calculate(game, source, this));
         }
 
         if (newCounter.getCount() <= 0) {
@@ -112,7 +107,7 @@ public class AddCountersPlayersEffect extends OneShotEffect {
             default:
                 throw new UnsupportedOperationException(targetController + " not supported");
         }
-        if (amount.toString().equals("X")) {
+        if (amount != null && amount.toString().equals("X")) {
             sb.append("X ").append(counter.getName()).append(" counters");
         } else {
             sb.append(counter.getDescription());

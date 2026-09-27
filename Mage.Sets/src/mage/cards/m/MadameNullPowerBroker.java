@@ -7,10 +7,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -39,7 +36,8 @@ public final class MadameNullPowerBroker extends CardImpl {
 
         // Whenever another creature you control enters, you may pay life equal to its power. If you do, put that many +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                new MadameNullPowerBrokerEffect(), StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL, true
+                Zone.BATTLEFIELD, new MadameNullPowerBrokerEffect(), StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL,
+                true, SetTargetPointer.PERMANENT
         ));
     }
 
@@ -72,7 +70,7 @@ class MadameNullPowerBrokerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = (Permanent) getValue("permanentEnteringBattlefield");
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (player == null || permanent == null) {
             return false;
         }
