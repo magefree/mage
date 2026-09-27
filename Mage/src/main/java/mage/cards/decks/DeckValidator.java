@@ -41,19 +41,22 @@ public abstract class DeckValidator implements Serializable {
     static {
         MAIN_BASIC_LAND_NAMES.forEach(s -> maxCopiesMap.put(s, Integer.MAX_VALUE));
         ADDITIONAL_BASIC_LAND_NAMES.forEach(s -> maxCopiesMap.put(s, Integer.MAX_VALUE));
-        maxCopiesMap.put("Relentless Rats", Integer.MAX_VALUE);
-        maxCopiesMap.put("Shadowborn Apostle", Integer.MAX_VALUE);
-        maxCopiesMap.put("Rat Colony", Integer.MAX_VALUE);
-        maxCopiesMap.put("Persistent Petitioners", Integer.MAX_VALUE);
-        maxCopiesMap.put("Dragon's Approach", Integer.MAX_VALUE);
-        maxCopiesMap.put("Slime Against Humanity", Integer.MAX_VALUE);
-        maxCopiesMap.put("Templar Knight", Integer.MAX_VALUE);
-        maxCopiesMap.put("Hare Apparent", Integer.MAX_VALUE);
-        maxCopiesMap.put("Tempest Hawk", Integer.MAX_VALUE);
-        maxCopiesMap.put("Cid, Timeless Artificer", Integer.MAX_VALUE);
+        // Cards with fixed numbers of max copies in a deck
         maxCopiesMap.put("Once More with Feeling", 1);
         maxCopiesMap.put("Seven Dwarves", 7);
         maxCopiesMap.put("Nazgul", 9);
+        // Cards that can have any number of copies in a deck
+        maxCopiesMap.put("Cid, Timeless Artificer", Integer.MAX_VALUE);
+        maxCopiesMap.put("Dragon's Approach", Integer.MAX_VALUE);
+        maxCopiesMap.put("Hare Apparent", Integer.MAX_VALUE);
+        maxCopiesMap.put("Persistent Petitioners", Integer.MAX_VALUE);
+        maxCopiesMap.put("Rat Colony", Integer.MAX_VALUE);
+        maxCopiesMap.put("Relentless Rats", Integer.MAX_VALUE);
+        maxCopiesMap.put("Shadowborn Apostle", Integer.MAX_VALUE);
+        maxCopiesMap.put("Slime Against Humanity", Integer.MAX_VALUE);
+        maxCopiesMap.put("Sphinx's Approach", Integer.MAX_VALUE);
+        maxCopiesMap.put("Tempest Hawk", Integer.MAX_VALUE);
+        maxCopiesMap.put("Templar Knight", Integer.MAX_VALUE);
     }
 
     protected String name;
