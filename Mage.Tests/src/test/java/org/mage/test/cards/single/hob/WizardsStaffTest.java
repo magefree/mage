@@ -15,6 +15,10 @@ public class WizardsStaffTest extends CardTestPlayerBase {
     private static final String instant = "Obsessive Search";
     // Alliance — Whenever another creature you control enters, this creature gets +1/+1 until end of turn. 2/1
     private static final String otherTrigger = "Attended Socialite";
+    // When this creature dies, it deals damage equal to its power to each opponent.
+    private static final String deathTrigger = "Heartfire Hero";
+    private static final String sacOutlef = "Altar of Dementia";
+
 
 
     @Test
@@ -103,5 +107,23 @@ public class WizardsStaffTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, prowess_wizard, 1+1, 3+1);
         // Four Prowess tiggers (creature itself + staff + doubled)
         assertPowerToughness(playerA, prowess_wizard, 1+4, 3+4);
+    }
+
+    @Test
+    public void testDeathTrigger() {
+        addCard(Zone.BATTLEFIELD, playerA, deathTrigger);
+        addCard(Zone.BATTLEFIELD, playerA, staff);
+        addCard(Zone.BATTLEFIELD, playerA, sacOutlef);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {3}", deathTrigger);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice a creature:", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        // 1 / 1 -> after equip 2 / 2 from trigger -> deal 2 damage twice on death
+        assertLife(playerB, 16);
     }
 }
