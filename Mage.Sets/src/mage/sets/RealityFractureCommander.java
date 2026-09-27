@@ -24,6 +24,7 @@ public final class RealityFractureCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Archfiend of Despair", 46, Rarity.MYTHIC, mage.cards.a.ArchfiendOfDespair.class));
         cards.add(new SetCardInfo("Archon of Cruelty", 47, Rarity.MYTHIC, mage.cards.a.ArchonOfCruelty.class));
         cards.add(new SetCardInfo("Azorius Signet", 53, Rarity.UNCOMMON, mage.cards.a.AzoriusSignet.class));
+        cards.add(new SetCardInfo("Avacyn, Angel of Horror", 7, Rarity.RARE, mage.cards.a.AvacynAngelOfHorror.class));
         cards.add(new SetCardInfo("Battlefield Forge", 65, Rarity.RARE, mage.cards.b.BattlefieldForge.class));
         cards.add(new SetCardInfo("Brainstorm", 39, Rarity.COMMON, mage.cards.b.Brainstorm.class));
         cards.add(new SetCardInfo("Brainsurge", 40, Rarity.UNCOMMON, mage.cards.b.Brainsurge.class));
@@ -60,9 +61,12 @@ public final class RealityFractureCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Memnarch, the Warden", 100, Rarity.RARE, mage.cards.m.MemnarchTheWarden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Memnarch, the Warden", 15, Rarity.RARE, mage.cards.m.MemnarchTheWarden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mystic Gate", 76, Rarity.RARE, mage.cards.m.MysticGate.class));
+        cards.add(new SetCardInfo("Nissa, Leyline Tamer", 2, Rarity.MYTHIC, mage.cards.n.NissaLeylineTamer.class));
         cards.add(new SetCardInfo("Niv-Mizzet, Ghost Counsel", 10, Rarity.RARE, mage.cards.n.NivMizzetGhostCounsel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Niv-Mizzet, Ghost Counsel", 95, Rarity.RARE, mage.cards.n.NivMizzetGhostCounsel.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ob Nixilis, the Ascended", 5, Rarity.RARE, mage.cards.o.ObNixilisTheAscended.class));
         cards.add(new SetCardInfo("Occult Epiphany", 43, Rarity.RARE, mage.cards.o.OccultEpiphany.class));
+        cards.add(new SetCardInfo("Omnath, Locus of the Void", 3, Rarity.RARE, mage.cards.o.OmnathLocusOfTheVoid.class));
         cards.add(new SetCardInfo("Overlord of the Mistmoors", 29, Rarity.MYTHIC, mage.cards.o.OverlordOfTheMistmoors.class));
         cards.add(new SetCardInfo("Path of Ancestry", 77, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Path to Exile", 30, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
