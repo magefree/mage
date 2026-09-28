@@ -46,7 +46,7 @@ public final class FootChopper extends CardImpl {
         ));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private FootChopper(final FootChopper card) {
