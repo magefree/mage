@@ -5,12 +5,14 @@
  import mage.client.dialog.PreferencesDialog;
  import mage.client.plugins.adapters.MageActionCallback;
  import mage.client.plugins.impl.Plugins;
- import mage.client.util.CardsViewUtil;
  import mage.client.util.ClientDefaultSettings;
  import mage.client.util.GUISizeHelper;
  import mage.constants.Zone;
  import mage.util.DebugUtil;
- import mage.view.*;
+ import mage.view.CardView;
+ import mage.view.CardsView;
+ import mage.view.PermanentView;
+ import mage.view.StackAbilityView;
  import org.apache.log4j.Logger;
 
  import javax.swing.*;
@@ -192,8 +194,6 @@
                  tmp.getCardIcons().clear();
                  tmp.getCardIcons().addAll(card.getCardIcons());
                  card = tmp;
-             } else {
-                 card.setAbilityType(null);
              }
              if (!cards.containsKey(card.getId())) {
                  addCard(card, bigCard, gameId);
