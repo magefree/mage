@@ -357,6 +357,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Stinging Vitriol", 356, Rarity.RARE, mage.cards.s.StingingVitriol.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sureshot Sower", 115, Rarity.COMMON, mage.cards.s.SureshotSower.class));
         cards.add(new SetCardInfo("Surgical Precision", 22, Rarity.COMMON, mage.cards.s.SurgicalPrecision.class));
+        cards.add(new SetCardInfo("Surveillance Phantasm", 42, Rarity.COMMON, mage.cards.s.SurveillancePhantasm.class));
         cards.add(new SetCardInfo("Swamp", 285, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 286, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 388, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
