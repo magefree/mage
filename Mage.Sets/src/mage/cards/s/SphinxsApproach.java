@@ -41,7 +41,7 @@ public final class SphinxsApproach extends CardImpl {
 
     public SphinxsApproach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
-        
+
         // Draw two cards. Then you may exile this spell and four cards named Sphinx's Approach from your graveyard. If you do, search your library for a Sphinx creature card, put it onto the battlefield, then shuffle.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
         this.getSpellAbility().addEffect(new DoIfCostPaid(
@@ -50,8 +50,8 @@ public final class SphinxsApproach extends CardImpl {
                 new ExileSourceCost(), new ExileFromGraveCost(new TargetCardInYourGraveyard(4, filter2)),
                 "exile this spell and four cards named Sphinx's Approach from your graveyard"
             )
-        ));
-        this.getSpellAbility().addHint(hint);        
+        ).concatBy("Then"));
+        this.getSpellAbility().addHint(hint);
 
         // A deck can have any number of cards named Sphinx's Approach.
         this.getSpellAbility().addEffect(new InfoEffect(
