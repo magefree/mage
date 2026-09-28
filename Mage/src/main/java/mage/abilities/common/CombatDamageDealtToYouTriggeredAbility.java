@@ -73,7 +73,7 @@ public class CombatDamageDealtToYouTriggeredAbility extends TriggeredAbilityImpl
                         .filter(Objects::nonNull)
                         .map(permanent -> new MageObjectReference(permanent, game))
                         .collect(Collectors.toSet());
-                this.getAllEffects().setTargetPointer(new FixedTargets(attackerSet));
+                this.getEffects().setTargetPointer(new FixedTargets(attackerSet));
             case NONE:
                 break;
             default:
