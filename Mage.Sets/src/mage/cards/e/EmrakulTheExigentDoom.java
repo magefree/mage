@@ -40,7 +40,7 @@ public final class EmrakulTheExigentDoom extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Ward--Sacrifice three permanents.
-        this.addAbility(new WardAbility(new SacrificeTargetCost(3, StaticFilters.FILTER_PERMANENT), false));
+        this.addAbility(new WardAbility(new SacrificeTargetCost(3, StaticFilters.FILTER_PERMANENTS), false));
 
         // {3}, Exile this card from your hand: Target land gains "{T}: Add {C}{C}" until this card is cast from exile. You may cast this card for as long as it remains exiled.
         this.addAbility(new GiveManaAbilityAndCastSourceAbility("CC", 3));

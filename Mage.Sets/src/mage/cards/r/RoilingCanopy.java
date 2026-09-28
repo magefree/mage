@@ -23,7 +23,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public final class RoilingCanopy extends CardImpl {
 
     private static final FilterPermanent forestFilter = new FilterPermanent("a Forest");
-    private static final FilterPermanent otherForestsFilter = new FilterPermanent("at least five other Forests");
+    private static final FilterPermanent otherForestsFilter = new FilterPermanent("you control at least five other Forests");
 
     static {
         forestFilter.add(SubType.FOREST.getPredicate());

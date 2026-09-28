@@ -40,7 +40,7 @@ class ClashOfElementsEffect extends OneShotEffect {
 
     ClashOfElementsEffect() {
         super(Outcome.Removal);
-        staticText = "choose target nonland permanent. Its owner may put it on the top of their library. "
+        staticText = "choose target nonland permanent. Its owner may put it on top of their library. "
                 + "If they do, {this} deals 2 damage to them. If they didn't put the card on top of their library, they put it on the bottom";
     }
 
