@@ -35,8 +35,7 @@ public final class ShagratLootBearer extends CardImpl {
                 new AttachTargetToSourceEffect().setText("attach up to one target Equipment to it")
         );
         ability.addEffect(new AmassEffect(new EquipmentAttachedCount(), SubType.ORC, false)
-                .setText("amass Orcs X, where X is the number of Equipment attached to {this}")
-                .concatBy("Then"));
+                .setText("Then amass Orcs X, where X is the number of Equipment attached to {this}"));
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_PERMANENT_EQUIPMENT));
         this.addAbility(ability);
     }
