@@ -172,4 +172,106 @@ public class ZinniaValleysVoiceTest extends CardTestPlayerBase {
 
         assertTokenCount(playerA, "Grizzly Bears", 0);
     }
+
+    @Test
+    public void testTwoZinniasTwoOffspring() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mirror Box");
+        addCard(Zone.BATTLEFIELD, playerA, zinnia, 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+        addCard(Zone.HAND, playerA, "Grizzly Bears");
+
+        setChoice(playerA, true); // Pay first offspring
+        setChoice(playerA, true); // Pay second offspring
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+
+        // If two ETB triggers trigger, order them
+        setChoice(playerA, "When {this} enters, if its offspring cost was paid");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Grizzly Bears", 3);
+        assertTokenCount(playerA, "Grizzly Bears", 2);
+    }
+
+    @Test
+    public void testSparkDoubleZinniaTwoOffspring() {
+        addCard(Zone.BATTLEFIELD, playerA, zinnia);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.HAND, playerA, "Spark Double");
+
+        setChoice(playerA, false); // Don't pay offspring for Spark Double itself
+        setChoice(playerA, true); // Choose to use Spark Double copy effect
+        setChoice(playerA, zinnia); // Choose Zinnia to copy
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
+
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+        addCard(Zone.HAND, playerA, "Grizzly Bears");
+
+        setChoice(playerA, true); // Pay first offspring on Grizzly Bears
+        setChoice(playerA, true); // Pay second offspring on Grizzly Bears
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+
+        setChoice(playerA, "When {this} enters, if its offspring cost was paid");
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Grizzly Bears", 3);
+        assertTokenCount(playerA, "Grizzly Bears", 2);
+    }
+
+    @Test
+    public void testSparkDoubleZinniaPayOnlyOneOffspring() {
+        addCard(Zone.BATTLEFIELD, playerA, zinnia);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.HAND, playerA, "Spark Double");
+
+        setChoice(playerA, false); // Don't pay offspring for Spark Double itself
+        setChoice(playerA, true); // Choose to use Spark Double copy effect
+        setChoice(playerA, zinnia); // Choose Zinnia to copy
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
+
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.HAND, playerA, "Grizzly Bears");
+
+        setChoice(playerA, true); // Pay first offspring on Grizzly Bears
+        setChoice(playerA, false); // Don't pay second offspring on Grizzly Bears
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Grizzly Bears", 2);
+        assertTokenCount(playerA, "Grizzly Bears", 1);
+    }
+
+    @Test
+    public void testSparkDoubleZinniaPayOnlySecondOffspring() {
+        addCard(Zone.BATTLEFIELD, playerA, zinnia);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.HAND, playerA, "Spark Double");
+
+        setChoice(playerA, false); // Don't pay offspring for Spark Double itself
+        setChoice(playerA, true); // Choose to use Spark Double copy effect
+        setChoice(playerA, zinnia); // Choose Zinnia to copy
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
+
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.HAND, playerA, "Grizzly Bears");
+
+        setChoice(playerA, false); // Don't pay first offspring on Grizzly Bears
+        setChoice(playerA, true); // Pay second offspring on Grizzly Bears
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Grizzly Bears", 2);
+        assertTokenCount(playerA, "Grizzly Bears", 1);
+    }
 }
