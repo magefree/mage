@@ -10,11 +10,15 @@ import mage.abilities.costs.*;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.cards.Card;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
@@ -89,12 +93,26 @@ public class OffspringAbility extends StaticAbility implements OptionalAdditiona
         additionalCost.activate();
         ability.addCost(additionalCost.copy());
         ability.setCostsTag(this.activationKey, null);
-        mage.cards.Card card = game.getCard(ability.getSourceId());
+
+        Card card = game.getCard(ability.getSourceId());
         if (card != null && !card.getAbilities().contains(this)) {
-            ability.setCostsTag("offspring_trigger_" + this.activationKey,
-                    new EntersBattlefieldTriggeredAbility(new OffspringEffect())
-                            .withInterveningIf(new OffspringCondition(this.activationKey)).setRuleVisible(false));
+            addOffspringTriggeredAbility(game, ability);
         }
+    }
+
+    // Printed offspring carries the ETB sub-ability added in the constructor. Offspring
+    // granted while casting is registered only as an additional cost on the spell, so that
+    // sub-ability is not present on the card and must be granted to the resolving permanent.
+    protected void addOffspringTriggeredAbility(Game game, Ability source) {
+        Card card = game.getCard(source.getSourceId());
+        if (card == null) {
+            return;
+        }
+        TriggeredAbility trigger = new EntersBattlefieldTriggeredAbility(new OffspringEffect())
+                .withInterveningIf(new OffspringCondition(this.activationKey));
+        trigger.setRuleVisible(false);
+        game.addEffect(new GainAbilityTargetEffect(trigger, Duration.EndOfTurn, "", true)
+                .setTargetPointer(new FixedTarget(card, game)), source);
     }
 
     @Override
@@ -127,6 +145,14 @@ class OffspringEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentOrLKI(game);
+        if (permanent == null) {
+            if (game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD
+                    && source.getStackMomentSourceZCC() + 1 == game.getState().getZoneChangeCounter(source.getSourceId())) {
+                permanent = game.getPermanent(source.getSourceId());
+            } else {
+                permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD, source.getStackMomentSourceZCC() + 1);
+            }
+        }
         return permanent != null && new CreateTokenCopyTargetEffect(
                 null, null, false, 1, false,
                 false, null, 1, 1, false
