@@ -1,10 +1,8 @@
 package mage.game.permanent;
 
-import java.util.Map;
 import java.util.UUID;
 
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
@@ -106,26 +104,6 @@ public class PermanentCard extends PermanentImpl {
         Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(card.getId());
         if (otherAbilities != null) {
             abilities.addAll(otherAbilities);
-        }
-        if (game.getPermanentCostsTags() != null) {
-            for (Map.Entry<MageObjectReference, Map<String, Object>> morEntry : game.getPermanentCostsTags().entrySet()) {
-                if (morEntry.getKey().getSourceId().equals(card.getId())) {
-                    Map<String, Object> costTags = morEntry.getValue();
-                    if (costTags != null) {
-                        for (Map.Entry<String, Object> entry : costTags.entrySet()) {
-                            if (entry.getKey().startsWith("offspring_trigger_") && entry.getValue() instanceof Ability) {
-                                Ability offspringTrigger = ((Ability) entry.getValue()).copy();
-                                offspringTrigger.newId();
-                                offspringTrigger.setSourceId(this.objectId);
-                                offspringTrigger.setControllerId(this.controllerId);
-                                this.card.addAbility(offspringTrigger);
-                                this.abilities.add(offspringTrigger);
-                                game.getState().addAbility(offspringTrigger, this);
-                            }
-                        }
-                    }
-                }
-            }
         }
         if (card instanceof LevelerCard) {
             maxLevelCounters = ((LevelerCard) card).getMaxLevelCounters();
