@@ -3,6 +3,7 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.*;
@@ -28,7 +29,7 @@ public class OffspringAbility extends StaticAbility implements OptionalAdditiona
     public static final String OFFSPRING_ACTIVATION_VALUE_KEY = "offspringActivation";
 
     protected OptionalAdditionalCost additionalCost;
-    private final String activationKey;
+    private String activationKey;
 
     public OffspringAbility(String manaString) {
         this(new ManaCostsImpl<>(manaString));
@@ -53,6 +54,17 @@ public class OffspringAbility extends StaticAbility implements OptionalAdditiona
         this.activationKey = ability.activationKey;
         this.rule = ability.rule;
         this.additionalCost = ability.additionalCost.copy();
+    }
+
+    @Override
+    public void newId() {
+        super.newId();
+        this.activationKey = OFFSPRING_ACTIVATION_VALUE_KEY + "_" + this.getId();
+        for (Ability sub : getSubAbilities()) {
+            if (sub instanceof TriggeredAbility) {
+                ((TriggeredAbility) sub).withInterveningIf(new OffspringCondition(this.activationKey));
+            }
+        }
     }
 
     @Override

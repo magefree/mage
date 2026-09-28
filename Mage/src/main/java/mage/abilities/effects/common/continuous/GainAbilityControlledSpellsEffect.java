@@ -26,9 +26,10 @@ public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
         staticText = filter.getMessage() + " have " + CardUtil.getTextWithFirstCharLowerCase(CardUtil.stripReminderText(ability.getRule()));
     }
 
-    private GainAbilityControlledSpellsEffect(final GainAbilityControlledSpellsEffect effect) {
+    protected GainAbilityControlledSpellsEffect(final GainAbilityControlledSpellsEffect effect) {
         super(effect);
-        this.ability = effect.ability;
+        this.ability = effect.ability.copy();
+        this.ability.newId();
         this.filter = effect.filter;
     }
 
