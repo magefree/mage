@@ -15,13 +15,11 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetImpl;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -99,10 +97,11 @@ class InventoryManagementEffect extends OneShotEffect {
             TargetPermanent targetCreature = new TargetControlledCreaturePermanent(0, 1);
             targetCreature.withNotTarget(true);
             targetCreature.withChooseHint("to attach " + permanent.getLogName() + " to");
-            Optional.ofNullable(targetCreature)
-                    .map(TargetImpl::getFirstTarget)
-                    .map(game::getPermanent)
-                    .ifPresent(p -> p.addAttachment(permanent.getId(), source, game));
+            player.choose(outcome, targetCreature, source, game);
+            Permanent creature = game.getPermanent(targetCreature.getFirstTarget());
+            if (creature != null) {
+                creature.addAttachment(permanent.getId(), source, game);
+            }
         }
         return true;
     }

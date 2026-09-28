@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 
@@ -22,7 +21,7 @@ import java.util.UUID;
  */
 public final class RidesEnd extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("a tapped permanent");
+    private static final FilterPermanent filter = new FilterPermanent("a tapped permanent");
 
     static {
         filter.add(TappedPredicate.TAPPED);
