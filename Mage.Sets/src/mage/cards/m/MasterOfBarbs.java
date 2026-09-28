@@ -27,7 +27,7 @@ public final class MasterOfBarbs extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever one or more opponents are dealt noncombat damage, creatures you control get +1/+0 until end of turn.
         this.addAbility(new OpponentDealtNoncombatDamageTriggeredAbility(

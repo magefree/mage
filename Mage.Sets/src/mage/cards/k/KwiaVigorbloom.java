@@ -41,7 +41,7 @@ public final class KwiaVigorbloom extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Whenever you gain life, create a colorless artifact token named Lotus with "{T}, Sacrifice this token: Add three mana of any one color." This ability triggers only once each turn.
         this.addAbility(new GainLifeControllerTriggeredAbility(

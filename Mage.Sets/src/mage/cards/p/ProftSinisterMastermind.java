@@ -43,7 +43,7 @@ public final class ProftSinisterMastermind extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ProftSinisterMastermindEffect()).setAbilityWord(AbilityWord.THRESHOLD));
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // {B}, Discard this card: Target creature gets -3/-1 until end of turn.
         Ability ability = new SimpleActivatedAbility(
