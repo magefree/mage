@@ -60,7 +60,7 @@ class YurikoBladeOfTheMightyEffect extends ContinuousRuleModifyingEffectImpl {
 
     YurikoBladeOfTheMightyEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "During combat, players can't cast instant spells or activate abilities that aren't mana abilities";
+        staticText = "During combat, players can't cast spells or activate abilities that aren't mana abilities";
     }
 
     private YurikoBladeOfTheMightyEffect(final YurikoBladeOfTheMightyEffect effect) {
@@ -76,7 +76,7 @@ class YurikoBladeOfTheMightyEffect extends ContinuousRuleModifyingEffectImpl {
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
-            return "During combat, players can't cast instant spells or activate abilities that aren't mana abilities (" + mageObject.getIdName() + ").";
+            return "During combat, players can't cast spells or activate abilities that aren't mana abilities (" + mageObject.getIdName() + ").";
         }
         return null;
     }
@@ -92,7 +92,7 @@ class YurikoBladeOfTheMightyEffect extends ContinuousRuleModifyingEffectImpl {
         if (game.getTurnPhaseType() == TurnPhase.COMBAT) {
             MageObject object = game.getObject(event.getSourceId());
             if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-                if (object != null && object.isInstant(game)) {
+                if (object != null) {
                     return true;
                 }
             }
