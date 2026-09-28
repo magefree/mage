@@ -110,7 +110,6 @@ class LazavWearerOfFacesEffect extends OneShotEffect {
         }
 
         CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, copyFromCard, lazav.getId());
-        copyEffect.newId();
         game.addEffect(copyEffect, source);
 
         return true;

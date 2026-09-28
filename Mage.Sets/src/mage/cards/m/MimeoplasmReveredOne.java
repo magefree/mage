@@ -149,7 +149,6 @@ class MimeoplasmReveredOneEffect extends OneShotEffect {
         applier.apply(game, newBluePrint, source, mimeoplasm.getId());
         CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, mimeoplasm.getId());
         copyEffect.setApplier(applier);
-        copyEffect.init(source.copy(), game);
         game.addEffect(copyEffect, source);
         return true;
     }
