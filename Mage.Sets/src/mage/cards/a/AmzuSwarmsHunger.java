@@ -41,7 +41,7 @@ public final class AmzuSwarmsHunger extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Other Insects you control have menace.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter, true)));

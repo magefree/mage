@@ -36,7 +36,7 @@ public final class TheFrightfulFour extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever an opponent casts their first noncreature spell each turn, that player loses life equal to that spell's mana value.
         this.addAbility(new TheFrightfulFourTriggeredAbility());
