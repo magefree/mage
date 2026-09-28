@@ -28,7 +28,7 @@ public final class DesperateFuturescribe extends CardImpl {
 
     public DesperateFuturescribe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
-        
+
         this.subtype.add(SubType.KOR);
         this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(3);
@@ -37,18 +37,18 @@ public final class DesperateFuturescribe extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // At the beginning of combat on your turn, another target creature you control gets +1/+1 until end of turn. 
+        // At the beginning of combat on your turn, another target creature you control gets +1/+1 until end of turn.
         // If you've scried or surveilled this turn, put a +1/+1 counter on that creature instead.
         Ability ability = new BeginningOfCombatTriggeredAbility(new ConditionalOneShotEffect(
-            new AddCountersTargetEffect(CounterType.P1P1.createInstance()), 
+            new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
             new AddContinuousEffectToGame(new BoostTargetEffect(1, 1, Duration.EndOfTurn)),
-            ScryOrSurveilCondition.instance, 
+            ScryOrSurveilCondition.instance,
             "another target creature you control gets +1/+1 until end of turn. "
             + "If you've scried or surveilled this turn, put a +1/+1 counter on that creature instead"
         ));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         ability.addWatcher(new ScryOrSurveilWatcher());
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(ScryOrSurveilCondition.getHint()));
     }
 
     private DesperateFuturescribe(final DesperateFuturescribe card) {
