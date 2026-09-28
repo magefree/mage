@@ -274,4 +274,131 @@ public class ZinniaValleysVoiceTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Grizzly Bears", 2);
         assertTokenCount(playerA, "Grizzly Bears", 1);
     }
+
+    @Test
+    public void testCopiedSpellDoesNotCopyGrantedOffspring() {
+        addCard(Zone.BATTLEFIELD, playerA, zinnia);
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 6);
+        addCard(Zone.HAND, playerA, "Grizzly Bears");
+        addCard(Zone.HAND, playerA, "Double Major");
+
+        setChoice(playerA, true); // Pay offspring for the original spell
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA,
+                "Double Major", "Grizzly Bears", "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        // CR 707.2: Zinnia's granted ability isn't copiable. Only the original makes offspring.
+        assertPermanentCount(playerA, "Grizzly Bears", 3);
+        assertTokenCount(playerA, "Grizzly Bears", 2);
+    }
+
+    @Test
+    public void testTorporOrbPreventsGrantedOffspring() {
+        addCard(Zone.BATTLEFIELD, playerA, zinnia);
+        addCard(Zone.BATTLEFIELD, playerA, "Torpor Orb");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.HAND, playerA, "Grizzly Bears");
+
+        setChoice(playerA, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Grizzly Bears", 1);
+        assertTokenCount(playerA, "Grizzly Bears", 0);
+    }
+
+    @Test
+    public void testPanharmoniconDoublesGrantedOffspring() {
+        addCard(Zone.BATTLEFIELD, playerA, zinnia);
+        addCard(Zone.BATTLEFIELD, playerA, "Panharmonicon");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.HAND, playerA, "Grizzly Bears");
+
+        setChoice(playerA, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+
+        // Allow automatic ordering of the two identical offspring triggers.
+        setStrictChooseMode(false);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertTokenCount(playerA, "Grizzly Bears", 2);
+    }
+
+    @Test
+    public void testHushbringerPreventsGrantedOffspring() {
+        addCard(Zone.BATTLEFIELD, playerA, zinnia);
+        addCard(Zone.BATTLEFIELD, playerA, "Hushbringer");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.HAND, playerA, "Grizzly Bears");
+
+        setChoice(playerA, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Grizzly Bears", 1);
+        assertTokenCount(playerA, "Grizzly Bears", 0);
+    }
+
+    @Test
+    public void testEleshNornDoublesGrantedOffspring() {
+        addCard(Zone.BATTLEFIELD, playerA, zinnia);
+        addCard(Zone.BATTLEFIELD, playerA, "Elesh Norn, Mother of Machines");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.HAND, playerA, "Grizzly Bears");
+
+        setChoice(playerA, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+
+        setStrictChooseMode(false);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertTokenCount(playerA, "Grizzly Bears", 2);
+    }
+
+    @Test
+    public void testOpponentEleshNornPreventsGrantedOffspring() {
+        addCard(Zone.BATTLEFIELD, playerA, zinnia);
+        addCard(Zone.BATTLEFIELD, playerB, "Elesh Norn, Mother of Machines");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.HAND, playerA, "Grizzly Bears");
+
+        setChoice(playerA, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Grizzly Bears", 1);
+        assertTokenCount(playerA, "Grizzly Bears", 0);
+    }
+
+    @Test
+    public void testYarokDoublesGrantedOffspring() {
+        addCard(Zone.BATTLEFIELD, playerA, zinnia);
+        addCard(Zone.BATTLEFIELD, playerA, "Yarok, the Desecrated");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.HAND, playerA, "Grizzly Bears");
+
+        setChoice(playerA, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+
+        setStrictChooseMode(false);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertTokenCount(playerA, "Grizzly Bears", 2);
+    }
 }
