@@ -55,7 +55,7 @@ public final class GideonsMemorial extends CardImpl {
         // {1}{W}, Discard this card: It deals 4 damage to target attacking or blocking creature.
         Ability ability2 = new SimpleActivatedAbility(
             Zone.HAND,
-            new DamageTargetEffect(4),
+            new DamageTargetEffect(4, "it"),
             new ManaCostsImpl<>("{1}{W}")
         );
         ability2.addCost(new DiscardSourceCost());

@@ -42,6 +42,7 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Exotic Orchard", 79, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Fellwar Stone", 74, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Feroz, Ulgrotha's Warden", 38, Rarity.RARE, mage.cards.f.FerozUlgrothasWarden.class));
+        cards.add(new SetCardInfo("Flitwing, Lyev Detective", 8, Rarity.RARE, mage.cards.f.FlitwingLyevDetective.class));
         cards.add(new SetCardInfo("Grandmother Goby", 9, Rarity.RARE, mage.cards.g.GrandmotherGoby.class));
         cards.add(new SetCardInfo("Greensleeves", 30, Rarity.RARE, mage.cards.g.Greensleeves.class));
         cards.add(new SetCardInfo("Grizzlegom, Hurloon Hero", 39, Rarity.RARE, mage.cards.g.GrizzlegomHurloonHero.class));
@@ -72,5 +73,6 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Valko Indorian", 60, Rarity.RARE, mage.cards.v.ValkoIndorian.class));
         cards.add(new SetCardInfo("Whtz, the Bibliophile", 57, Rarity.RARE, mage.cards.w.WhtzTheBibliophile.class));
         cards.add(new SetCardInfo("Worzel, the Protector", 5, Rarity.RARE, mage.cards.w.WorzelTheProtector.class));
+        cards.add(new SetCardInfo("Zagorka, Mother of Sanctum", 58, Rarity.RARE, mage.cards.z.ZagorkaMotherOfSanctum.class));
     }
 }

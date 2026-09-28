@@ -49,7 +49,7 @@ public final class OrcristGoblinCleaver extends CardImpl {
         ));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
 
     }
 

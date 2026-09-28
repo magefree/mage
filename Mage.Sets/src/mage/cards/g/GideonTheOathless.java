@@ -38,7 +38,7 @@ public final class GideonTheOathless extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Ward -- Discard a card.
-        this.addAbility(new WardAbility(new DiscardCardCost()));
+        this.addAbility(new WardAbility(new DiscardCardCost(), false));
 
         // Whenever a creature an opponent controls enters, Gideon deals 1 damage to that player.
         this.addAbility(new GideonTheOathlessCreatureAbility());

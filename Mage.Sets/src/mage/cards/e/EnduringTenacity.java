@@ -28,7 +28,7 @@ public final class EnduringTenacity extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you gain life, target opponent loses that much life.
-        Ability ability = new GainLifeControllerTriggeredAbility(new LoseLifeTargetEffect(SavedGainedLifeValue.MUCH));
+        Ability ability = new GainLifeControllerTriggeredAbility(new LoseLifeTargetEffect(SavedGainedLifeValue.MUCH), false, true);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 

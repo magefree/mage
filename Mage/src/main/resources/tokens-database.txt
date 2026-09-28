@@ -3108,7 +3108,7 @@
 |TOK:FRA|Beast||Beast44TrampleToken|
 |TOK:FRA|Cadet||CadetToken|
 |TOK:FRA|Dragon||Dragon55Token|
-# |TOK:FRA|Forest Tentacle||ForestTentacleToken|
+|TOK:FRA|Forest Tentacle||ForestTentacleToken|
 |TOK:FRA|Heartwood||HeartwoodToken|
 |TOK:FRA|Illusion||Illusion11Token|
 |TOK:FRA|Jace||JacePlaneswalkerToken|

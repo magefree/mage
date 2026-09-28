@@ -38,7 +38,8 @@ public final class ArniRenownedChampion extends CardImpl {
         // Whenever another creature you control enters, Arni gets +X/+0 until end of turn, where X is that creature's power.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
             Zone.BATTLEFIELD,
-            new BoostSourceEffect(TargetPermanentPowerCount.instance, StaticValue.get(0), Duration.EndOfTurn),
+            new BoostSourceEffect(TargetPermanentPowerCount.instance, StaticValue.get(0), Duration.EndOfTurn)
+                .setText("{this} gets +X/+0 until end of turn, where X is that creature's power"),
             StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT
         ));
     }

@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class BoneDevourer extends CardImpl {
 
-    private static final DynamicValue xValue = new CountersSourceCount(null);
+    private static final DynamicValue xValue = new CountersSourceCount(CounterType.P1P1);
 
     public BoneDevourer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

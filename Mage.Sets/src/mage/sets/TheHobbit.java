@@ -153,6 +153,8 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Head of the Hunt", 260, Rarity.RARE, mage.cards.h.HeadOfTheHunt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Head of the Hunt", 75, Rarity.RARE, mage.cards.h.HeadOfTheHunt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hobbit Hole", 184, Rarity.COMMON, mage.cards.h.HobbitHole.class));
+        cards.add(new SetCardInfo("Inside Information", 76, Rarity.MYTHIC, mage.cards.i.InsideInformation.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Inside Information", 296, Rarity.MYTHIC, mage.cards.i.InsideInformation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iron Hills", 185, Rarity.COMMON, mage.cards.i.IronHills.class));
         cards.add(new SetCardInfo("Iron Hills Blacksmith", 16, Rarity.UNCOMMON, mage.cards.i.IronHillsBlacksmith.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iron Hills Blacksmith", 216, Rarity.UNCOMMON, mage.cards.i.IronHillsBlacksmith.class, NON_FULL_USE_VARIOUS));
@@ -160,6 +162,7 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Iron Hills Stalwart", 102, Rarity.COMMON, mage.cards.i.IronHillsStalwart.class));
         cards.add(new SetCardInfo("Island", 190, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 195, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Key to the Side-Door", 175, Rarity.UNCOMMON, mage.cards.k.KeyToTheSideDoor.class));
         cards.add(new SetCardInfo("Kili the Resourceful", 17, Rarity.RARE, mage.cards.k.KiliTheResourceful.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kili the Resourceful", 287, Rarity.RARE, mage.cards.k.KiliTheResourceful.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lake-town", 186, Rarity.COMMON, mage.cards.l.LakeTown.class));
@@ -175,8 +178,10 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Long Lake Nuisance", 45, Rarity.COMMON, mage.cards.l.LongLakeNuisance.class));
         cards.add(new SetCardInfo("Long-Bodied Grey Dog", 1, Rarity.COMMON, mage.cards.l.LongBodiedGreyDog.class));
         cards.add(new SetCardInfo("Magnificent End", 20, Rarity.COMMON, mage.cards.m.MagnificentEnd.class));
+        cards.add(new SetCardInfo("Master's Councillors", 47, Rarity.UNCOMMON, mage.cards.m.MastersCouncillors.class));
         cards.add(new SetCardInfo("Mirkwood", 188, Rarity.COMMON, mage.cards.m.Mirkwood.class));
         cards.add(new SetCardInfo("Mirkwood Meditator", 48, Rarity.COMMON, mage.cards.m.MirkwoodMeditator.class));
+        cards.add(new SetCardInfo("Mirkwood Nurturer", 160, Rarity.COMMON, mage.cards.m.MirkwoodNurturer.class));
         cards.add(new SetCardInfo("Mirkwood Pathmaker", 129, Rarity.UNCOMMON, mage.cards.m.MirkwoodPathmaker.class));
         cards.add(new SetCardInfo("Misty Mountains Raider", 105, Rarity.UNCOMMON, mage.cards.m.MistyMountainsRaider.class));
         cards.add(new SetCardInfo("Moment of Glory", 21, Rarity.COMMON, mage.cards.m.MomentOfGlory.class));

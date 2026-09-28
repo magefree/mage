@@ -67,9 +67,8 @@ class BreachingDragonstormEffect extends OneShotEffect {
         return new BreachingDragonstormEffect(this);
     }
 
-    private static Card getCard(Player player, Cards cards, Game game, Ability source) {
+    private static Card getCard(Player player, Game game, Ability source) {
         for (Card card : player.getLibrary().getCards(game)) {
-            cards.add(card);
             player.moveCards(card, Zone.EXILED, source, game);
             game.processAction();
             if (!card.isLand(game)) {
@@ -85,16 +84,13 @@ class BreachingDragonstormEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Cards cards = new CardsImpl();
-        Card card = getCard(player, cards, game, source);
+        Card card = getCard(player, game, source);
         if (card != null) {
             CardUtil.castSpellWithAttributesForFree(player, source, game, card, filter);
             if (game.getState().getZone(card.getId()) == Zone.EXILED) {
                 player.moveCards(card, Zone.HAND, source, game);
             }
         }
-        cards.retainZone(Zone.EXILED, game);
-        player.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
     }
 }

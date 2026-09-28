@@ -707,10 +707,16 @@ public class GameState implements Serializable, Copyable<GameState> {
         delayed.removeStartOfNewTurn(game);
     }
 
+    /**
+     * Registers the effect as-is, without copying or initializing it. You probably want {@link Game#addEffect}.
+     */
     public void addEffect(ContinuousEffect effect, Ability source) {
         addEffect(effect, null, source);
     }
 
+    /**
+     * Registers the effect as-is, without copying or initializing it. You probably want {@link Game#addEffect}.
+     */
     public void addEffect(ContinuousEffect effect, UUID sourceId, Ability source) {
         if (sourceId == null) {
             effects.addEffect(effect, source);

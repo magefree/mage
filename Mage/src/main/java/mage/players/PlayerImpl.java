@@ -3503,6 +3503,24 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             dieRolls.clear();
             dieRolls.addAll(newRolls);
+        } else if (rollDiceEvent.getRollDieType() == RollDieType.PLANAR && rollDiceEvent.getAmount() > 1) {
+            final Choice choice = new ChoiceImpl(true);
+            choice.setMessage("Choose which die roll result to keep (the rest will be ignored)");
+            choice.setChoices(dieRolls.stream().map(RollDieResult::getPlanarResult).map(PlanarDieRollResult::toString).collect(Collectors.toSet()));
+            this.choose(Outcome.Neutral, choice, game);
+            final RollDieResult chosen = dieRolls.stream()
+                    .filter(o -> o.getPlanarResult().toString().equals(choice.getChoice()))
+                    .findFirst()
+                    .orElse(dieRolls.get(0));
+            dieRolls.remove(chosen);
+            ignoreMessage = String.format(
+                dieRolls.size() > 1 ? ", ignoring [%s]" : ", ignoring %s",
+                dieRolls.stream().map(RollDieResult::getPlanarResult).map(PlanarDieRollResult::toString).collect(Collectors.joining(", "))
+            );
+            dieRolls.clear();
+            dieRolls.add(chosen);
+            dieResults.clear();
+            dieResults.add(chosen.getPlanarResult());
         } else {
             ignoreMessage = "";
         }
@@ -5639,18 +5657,24 @@ public abstract class PlayerImpl implements Player, Serializable {
         game.informPlayers(getLogName() + " surveils " + event.getAmount() + CardUtil.getSourceLogName(game, source));
         Cards cards = new CardsImpl();
         cards.addAllCards(getLibrary().getTopCards(game, event.getAmount()));
-        int totalCount = cards.size();
+        Cards cardsPutInGraveyard = new CardsImpl();
+        Cards cardsPutOnTop = new CardsImpl();
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY,
                     new FilterCard("card" + (cards.size() == 1 ? "" : "s")
                             + " to PUT into your GRAVEYARD (Surveil)"));
             chooseTarget(Outcome.Benefit, cards, target, source, game);
-            moveCards(new CardsImpl(target.getTargets()), Zone.GRAVEYARD, source, game);
+            Cards cardsToMove = new CardsImpl(target.getTargets());
+            if (!cardsToMove.isEmpty()) {
+                Set<Card> movedCards = moveCardsToGraveyardWithInfo(cardsToMove.getCards(game), source, game, Zone.LIBRARY);
+                cardsPutInGraveyard.addAllCards(movedCards);
+            }
             cards.removeIf(target.getTargets()::contains);
             putCardsOnTopOfLibrary(cards, game, source, true);
+            cardsPutOnTop.addAll(cards);
         }
         game.fireEvent(new GameEvent(GameEvent.EventType.SURVEILED, getId(), source, getId(), event.getAmount(), true));
-        return SurveilResult.surveil(totalCount - cards.size(), cards.size());
+        return SurveilResult.surveil(cardsPutInGraveyard, cardsPutOnTop);
     }
 
     @Override

@@ -3072,7 +3072,7 @@ public class ScryfallImageSupportTokens {
             put("FRA/Beast", "https://api.scryfall.com/cards/tfra/8?format=image");
             put("FRA/Cadet", "https://api.scryfall.com/cards/tfra/1?format=image");
             put("FRA/Dragon", "https://api.scryfall.com/cards/tfra/7?format=image");
-            // put("FRA/Forest Tentacle", "https://api.scryfall.com/cards/tfra/9?format=image");
+            put("FRA/Forest Tentacle", "https://api.scryfall.com/cards/tfra/9?format=image");
             put("FRA/Heartwood", "https://api.scryfall.com/cards/tfra/11?format=image");
             put("FRA/Illusion", "https://api.scryfall.com/cards/tfra/4?format=image");
             put("FRA/Jace", "https://api.scryfall.com/cards/tfra/5?format=image");

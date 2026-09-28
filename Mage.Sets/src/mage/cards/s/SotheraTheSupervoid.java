@@ -105,7 +105,7 @@ class SotheraTheSupervoidExileEffect extends OneShotEffect {
             if (player == null || !game.getBattlefield().contains(
                     StaticFilters.FILTER_CONTROLLED_CREATURE, playerId, source, game, 1
             )) {
-                return false;
+                continue;
             }
             TargetPermanent target = new TargetControlledCreaturePermanent();
             target.withChooseHint("to exile");
