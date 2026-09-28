@@ -30,10 +30,9 @@ public class OffspringAbility extends StaticAbility implements OptionalAdditiona
     private static final String reminderText = "You may pay an additional %s as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.";
     private final String rule;
 
-    public static final String OFFSPRING_ACTIVATION_VALUE_KEY = "offspringActivation";
-
+    // Distinguish multiple offspring instances; the tag's value belongs to the cast spell
+    private final String activationKey;
     protected OptionalAdditionalCost additionalCost;
-    private String activationKey;
 
     public OffspringAbility(String manaString) {
         this(new ManaCostsImpl<>(manaString));
@@ -41,7 +40,7 @@ public class OffspringAbility extends StaticAbility implements OptionalAdditiona
 
     public OffspringAbility(Cost cost) {
         super(Zone.STACK, null);
-        this.activationKey = OFFSPRING_ACTIVATION_VALUE_KEY + "_" + this.getId();
+        this.activationKey = "offspringActivation|" + getOriginalId();
         this.additionalCost = new OptionalAdditionalCostImpl(
                 keywordText + ' ' + cost.getText(),
                 String.format(reminderText, cost.getText()), cost
@@ -58,17 +57,6 @@ public class OffspringAbility extends StaticAbility implements OptionalAdditiona
         this.activationKey = ability.activationKey;
         this.rule = ability.rule;
         this.additionalCost = ability.additionalCost.copy();
-    }
-
-    @Override
-    public void newId() {
-        super.newId();
-        this.activationKey = OFFSPRING_ACTIVATION_VALUE_KEY + "_" + this.getId();
-        for (Ability sub : getSubAbilities()) {
-            if (sub instanceof TriggeredAbility) {
-                ((TriggeredAbility) sub).withInterveningIf(new OffspringCondition(this.activationKey));
-            }
-        }
     }
 
     @Override
