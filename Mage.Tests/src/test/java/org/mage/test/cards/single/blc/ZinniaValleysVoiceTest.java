@@ -3,6 +3,7 @@ package org.mage.test.cards.single.blc;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -400,5 +401,131 @@ public class ZinniaValleysVoiceTest extends CardTestPlayerBase {
         execute();
 
         assertTokenCount(playerA, "Grizzly Bears", 2);
+    }
+
+    @Test
+    public void testPayOnlyPrintedOffspring() {
+        addCard(Zone.BATTLEFIELD, playerA, zinnia);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.HAND, playerA, "Iridescent Vinelasher");
+
+        setChoice(playerA, true);  // Pay printed offspring
+        setChoice(playerA, false); // Don't pay Zinnia's granted offspring
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Iridescent Vinelasher");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Iridescent Vinelasher", 2);
+        assertTokenCount(playerA, "Iridescent Vinelasher", 1);
+    }
+
+    @Test
+    public void testGrantedOffspringSourceCreatureDiesBeforeETBResolves() {
+        addCard(Zone.BATTLEFIELD, playerA, zinnia);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.HAND, playerA, "Grizzly Bears");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+        addCard(Zone.HAND, playerB, "Doom Blade");
+
+        setChoice(playerA, true); // Pay granted offspring {2}
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+
+        // Grizzly Bears enters the battlefield; its offspring ETB trigger goes on the stack.
+        // In response, Player B destroys Grizzly Bears with Doom Blade.
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Doom Blade", "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, "Grizzly Bears", 1);
+        // Offspring trigger resolves using LKI to create the 1/1 token copy
+        assertPermanentCount(playerA, "Grizzly Bears", 1);
+        assertTokenCount(playerA, "Grizzly Bears", 1);
+        assertPowerToughness(playerA, "Grizzly Bears", 1, 1);
+    }
+
+    @Test
+    public void testHumilityBeforeResolution() {
+        addCard(Zone.BATTLEFIELD, playerA, zinnia);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.HAND, playerA, "Grizzly Bears");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Leyline of Anticipation");
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 4);
+        addCard(Zone.HAND, playerB, "Humility");
+
+        setChoice(playerA, true); // Pay granted offspring {2}
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+        // Cast Humility in response to Grizzly Bears so it resolves before Grizzly Bears enters
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Humility", null, "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        // Humility makes all creatures lose abilities and have P/T 1/1; no offspring ETB triggers
+        assertPermanentCount(playerA, "Grizzly Bears", 1);
+        assertTokenCount(playerA, "Grizzly Bears", 0);
+        assertPowerToughness(playerA, "Grizzly Bears", 1, 1);
+    }
+
+    @Test
+    public void testRollbackClearsStaleOffspringPayment() {
+        addCard(Zone.BATTLEFIELD, playerA, zinnia);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+        addCard(Zone.HAND, playerA, "Iridescent Vinelasher");
+
+        // First attempt: pay both offspring costs (printed and granted) -> would make 2 tokens
+        setChoice(playerA, true); // printed offspring
+        setChoice(playerA, true); // granted offspring
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Iridescent Vinelasher");
+        setChoice(playerA, "When {this} enters, if its offspring cost was paid"); // stack order
+
+        rollbackTurns(1, PhaseStep.BEGIN_COMBAT, playerA, 0);
+
+        rollbackAfterActionsStart();
+        // Second attempt after rollback: pay only printed offspring -> makes 1 token
+        setChoice(playerA, true);  // printed offspring
+        setChoice(playerA, false); // granted offspring
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Iridescent Vinelasher");
+        rollbackAfterActionsEnd();
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Iridescent Vinelasher", 2);
+        assertTokenCount(playerA, "Iridescent Vinelasher", 1);
+    }
+
+    @Test
+    public void testCancelDuringPayment() {
+        disableManaAutoPayment(playerA);
+        addCard(Zone.BATTLEFIELD, playerA, zinnia);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.HAND, playerA, "Grizzly Bears");
+
+        // First attempt: choose to pay offspring, then cancel during mana payment
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+        setChoice(playerA, true); // Pay offspring
+        setChoice(playerA, TestPlayer.MANA_CANCEL);
+        setChoice(playerA, TestPlayer.SKIP_FAILED_COMMAND);
+
+        // Second attempt: cast again declining offspring, and pay the {1}{G} mana
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 2);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+        setChoice(playerA, false); // Decline offspring
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Grizzly Bears", 1);
+        assertTokenCount(playerA, "Grizzly Bears", 0);
     }
 }
