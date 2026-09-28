@@ -19,8 +19,12 @@ public class BecomePreparedSourceEffect extends OneShotEffect {
     }
 
     public BecomePreparedSourceEffect() {
+        this(false);
+    }
+
+    public BecomePreparedSourceEffect(boolean itBecomes) {
         super(Outcome.Benefit);
-        staticText = "{this} becomes prepared. " + getReminder();
+        staticText = (itBecomes ? "it" : "{this}") + " becomes prepared. " + getReminder();
     }
 
     private BecomePreparedSourceEffect(final BecomePreparedSourceEffect effect) {
