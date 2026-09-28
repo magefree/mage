@@ -1530,6 +1530,16 @@ public final class CardUtil {
     }
 
     public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, SpellCastTracker spellCastTracker, boolean playLand) {
+        return castSpellWithAttributes(player, source, game, cards, filter, spellCastTracker, playLand, true);
+    }
+
+    /**
+     * Cast one spell from among the given cards, restricted to the card parts that match the filter.
+     *
+     * @param noMana true to cast without paying its mana cost
+     */
+    public static boolean castSpellWithAttributes(Player player, Ability source, Game game, Cards cards, FilterCard filter, SpellCastTracker spellCastTracker, boolean playLand, boolean noMana) {
+        Outcome outcome = noMana ? Outcome.PlayForFree : Outcome.Benefit;
         Map<UUID, List<Card>> cardMap = new HashMap<>();
         for (Card card : cards.getCards(game)) {
             List<Card> castableComponents = getCastableComponents(card, filter, source, player, game, spellCastTracker, playLand);
@@ -1548,7 +1558,7 @@ public final class CardUtil {
                 Cards castableCards = new CardsImpl(cardMap.keySet());
                 TargetCard target = new TargetCard(0, 1, Zone.ALL, defaultFilter);
                 target.withNotTarget(true);
-                player.choose(Outcome.PlayForFree, castableCards, target, source, game);
+                player.choose(outcome, castableCards, target, source, game);
                 cardToCast = castableCards.get(target.getFirstTarget(), game);
         }
         if (cardToCast == null) {
@@ -1561,22 +1571,22 @@ public final class CardUtil {
                 .collect(Collectors.joining(" or "));
         if (partsToCast.size() < 1
                 || !player.chooseUse(
-                Outcome.PlayForFree, "Cast spell without paying its mana cost (" + partsInfo + ")?", source, game
+                outcome, (noMana ? "Cast spell without paying its mana cost (" : "Cast spell (") + partsInfo + ")?", source, game
         )) {
             return false;
         }
         partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE));
         ActivatedAbility chosenAbility;
         if (playLand) {
-            chosenAbility = player.chooseLandOrSpellAbility(cardToCast, game, true);
+            chosenAbility = player.chooseLandOrSpellAbility(cardToCast, game, noMana);
         } else {
-            chosenAbility = player.chooseAbilityForCast(cardToCast, game, true);
+            chosenAbility = player.chooseAbilityForCast(cardToCast, game, noMana);
         }
         boolean result;
         if (chosenAbility instanceof SpellAbility) {
             result = player.cast(
                     (SpellAbility) chosenAbility,
-                    game, true, new ApprovingObject(source, game)
+                    game, noMana, new ApprovingObject(source, game)
             );
         } else if (playLand && chosenAbility instanceof PlayLandAbility) {
             Card land = game.getCard(chosenAbility.getSourceId());
