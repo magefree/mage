@@ -14,6 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -36,7 +37,7 @@ public final class TheWarGames extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.WARRIOR, "Warrior creature");
     private static final FilterPermanent filter2 = new FilterPermanent(SubType.WARRIOR, "Warriors");
-    private static final FilterControlledPermanent filter3 = new FilterControlledPermanent("nontoken creature you control");
+    private static final FilterControlledPermanent filter3 = new FilterControlledCreaturePermanent("nontoken creature you control");
 
     static {
         filter3.add(TokenPredicate.FALSE);
