@@ -47,7 +47,7 @@ public final class JadziStewardOfFate extends PrepareCard {
         this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new FractalToken(), GetXValue.instance));
         this.getSpellCard().getSpellAbility().addEffect(new AddCountersAllEffect(
                 CounterType.P1P1.createInstance(), GetXValue.instance, filter
-        ).concatBy(", then"));
+        ).setText("put X +1/+1 counters on each Fractal you control").concatBy(", then"));
     }
 
     private JadziStewardOfFate(final JadziStewardOfFate card) {
