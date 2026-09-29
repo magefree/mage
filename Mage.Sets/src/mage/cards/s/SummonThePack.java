@@ -21,6 +21,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -90,9 +91,6 @@ class SummonThePackEffect extends OneShotEffect {
                         if (c != null && c.isCreature(game)) {
                             message.append(c.getName()).append(" ");
                             message.append(" (creature card) ");
-                            ContinuousEffect effect2 = new AddCreatureTypeAdditionEffect(SubType.ZOMBIE, false);
-                            effect2.setTargetPointer(new FixedTarget(c.getId()));
-                            game.addEffect(effect2, source);
                             creatureCards.add(c);
                             c.setZone(Zone.OUTSIDE, game);
                         }
@@ -102,6 +100,14 @@ class SummonThePackEffect extends OneShotEffect {
                         Set<Card> ccs = new HashSet<>(creatureCards);
                         game.loadCards(ccs, controller.getId());
                         controller.moveCards(ccs, Zone.BATTLEFIELD, source, game);
+                        for (Card card : ccs) {
+                            Permanent permanent = game.getPermanent(card.getId());
+                            if (permanent != null) {
+                                ContinuousEffect effect2 = new AddCreatureTypeAdditionEffect(SubType.ZOMBIE, false);
+                                effect2.setTargetPointer(new FixedTarget(permanent, game));
+                                game.addEffect(effect2, source);
+                            }
+                        }
                     }
 
                     game.informPlayers(message.toString());
