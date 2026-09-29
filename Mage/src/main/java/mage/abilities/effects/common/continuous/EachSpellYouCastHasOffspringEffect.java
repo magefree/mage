@@ -51,8 +51,10 @@ public class EachSpellYouCastHasOffspringEffect extends ContinuousEffectImpl {
     private EachSpellYouCastHasOffspringEffect(final EachSpellYouCastHasOffspringEffect effect) {
         super(effect);
         this.filter = effect.filter;
-        this.offspringCost = effect.offspringCost;
-        this.offspringAbilities.putAll(effect.offspringAbilities);
+        this.offspringCost = effect.offspringCost != null ? effect.offspringCost.copy() : null;
+        for (Map.Entry<UUID, OffspringAbility> entry : effect.offspringAbilities.entrySet()) {
+            this.offspringAbilities.put(entry.getKey(), entry.getValue().copy());
+        }
     }
 
     @Override

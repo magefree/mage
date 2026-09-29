@@ -1,7 +1,11 @@
 package org.mage.test.cards.single.blc;
 
+import mage.abilities.keyword.OffspringAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.Game;
+import mage.game.stack.Spell;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -527,5 +531,50 @@ public class ZinniaValleysVoiceTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Grizzly Bears", 1);
         assertTokenCount(playerA, "Grizzly Bears", 0);
+    }
+
+    @Test
+    public void testStateCopyPreservesOffspringPaymentIndependence() {
+        addCard(Zone.BATTLEFIELD, playerA, zinnia);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.HAND, playerA, "Grizzly Bears");
+
+        setChoice(playerA, true); // Pay {2} for offspring
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+
+        // While Grizzly Bears is on the stack, copy the game state (as done during AI simulations / bookmarks)
+        // to verify that EachSpellYouCastHasOffspringEffect safely deep-copies cached OffspringAbility instances.
+        runCode("verify-game-copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Game copiedGame = game.copy();
+            Assert.assertNotNull(copiedGame);
+            Assert.assertEquals(1, game.getStack().size());
+            Assert.assertEquals(1, copiedGame.getStack().size());
+
+            Spell originalSpell = (Spell) game.getStack().getFirstOrNull();
+            Spell copiedSpell = (Spell) copiedGame.getStack().getFirstOrNull();
+            Assert.assertNotNull(originalSpell);
+            Assert.assertNotNull(copiedSpell);
+
+            OffspringAbility origOffspring = originalSpell.getCard().getAbilities(game).stream()
+                    .filter(OffspringAbility.class::isInstance)
+                    .map(OffspringAbility.class::cast)
+                    .findFirst().orElse(null);
+            OffspringAbility copiedOffspring = copiedSpell.getCard().getAbilities(copiedGame).stream()
+                    .filter(OffspringAbility.class::isInstance)
+                    .map(OffspringAbility.class::cast)
+                    .findFirst().orElse(null);
+
+            Assert.assertNotNull(origOffspring);
+            Assert.assertNotNull(copiedOffspring);
+            Assert.assertNotSame("Copied game state must have an independent OffspringAbility instance",
+                    origOffspring, copiedOffspring);
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Grizzly Bears", 2);
+        assertTokenCount(playerA, "Grizzly Bears", 1);
     }
 }
