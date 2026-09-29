@@ -9,7 +9,7 @@ import mage.abilities.costs.EarlyTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachTargetToSourceEffect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
@@ -56,7 +56,7 @@ public final class CaptainAmericaFirstAvenger extends CardImpl {
 
         // ... Catch — At the beginning of combat on your turn, attach up to one target Equipment you control to Captain America.
         ability = new BeginningOfCombatTriggeredAbility(
-                new CaptainAmericaFirstAvengerCatchEffect()
+                new AttachTargetToSourceEffect()
         );
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_EQUIPMENT));
         this.addAbility(ability.withFlavorWord("... Catch"));
@@ -160,29 +160,5 @@ class CaptainAmericaFirstAvengerUnattachCost extends CostImpl implements EarlyTa
     @Override
     public String getText() {
         return "Unattach an Equipment from {this}";
-    }
-}
-
-class CaptainAmericaFirstAvengerCatchEffect extends OneShotEffect {
-
-    CaptainAmericaFirstAvengerCatchEffect() {
-        super(Outcome.Benefit);
-        staticText = "attach up to one target Equipment you control to {this}";
-    }
-
-    private CaptainAmericaFirstAvengerCatchEffect(final CaptainAmericaFirstAvengerCatchEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CaptainAmericaFirstAvengerCatchEffect copy() {
-        return new CaptainAmericaFirstAvengerCatchEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        Permanent creature = source.getSourcePermanentIfItStillExists(game);
-        return equipment != null && creature != null && creature.addAttachment(equipment.getId(), source, game);
     }
 }

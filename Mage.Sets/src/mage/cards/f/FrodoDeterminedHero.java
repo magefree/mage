@@ -6,7 +6,7 @@ import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalPreventionEffect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachTargetToSourceEffect;
 import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -14,8 +14,6 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -44,7 +42,7 @@ public final class FrodoDeterminedHero extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Frodo, Determined Hero enters the battlefield or attacks, you may attach target Equipment you control with mana value 2 or 3 to Frodo.
-        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new FrodoDeterminedHeroEffect(), true);
+        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new AttachTargetToSourceEffect(), true);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
@@ -62,30 +60,5 @@ public final class FrodoDeterminedHero extends CardImpl {
     @Override
     public FrodoDeterminedHero copy() {
         return new FrodoDeterminedHero(this);
-    }
-}
-
-class FrodoDeterminedHeroEffect extends OneShotEffect {
-
-    FrodoDeterminedHeroEffect() {
-        super(Outcome.Benefit);
-        staticText = "attach target Equipment you control with mana value 2 or 3 to {this}";
-    }
-
-    private FrodoDeterminedHeroEffect(final FrodoDeterminedHeroEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FrodoDeterminedHeroEffect copy() {
-        return new FrodoDeterminedHeroEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(getTargetPointer().getFirst(game, source));
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        return permanent != null && equipment != null
-                && permanent.addAttachment(equipment.getId(), source, game);
     }
 }
