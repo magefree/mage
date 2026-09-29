@@ -18,7 +18,9 @@ public class CardRendererFactory {
     }
 
     public CardRenderer create(CardView card, int renderModeOverride) {
-        if (card.isSplitCard()) {
+        if (shouldRenderFuture(renderModeOverride)) {
+            return new FutureCardRenderer(card);
+        } else if (card.isSplitCard()) {
             return new ModernSplitCardRenderer(card);
         } else if (shouldRenderRetro(card, renderModeOverride)) {
             // TODO: implement split card renderer for retro cards
@@ -26,6 +28,14 @@ public class CardRendererFactory {
         } else {
             return new ModernCardRenderer(card);
         }
+    }
+
+    private static boolean shouldRenderFuture(int renderModeOverride) {
+        int renderMode = PreferencesDialog.getRenderMode();
+        if (renderModeOverride != -1) {
+            renderMode = renderModeOverride;
+        }
+        return renderMode == CardRenderMode.FORCED_FUTURE.getId();
     }
 
     private static boolean shouldRenderRetro(CardView card, int renderModeOverride) {

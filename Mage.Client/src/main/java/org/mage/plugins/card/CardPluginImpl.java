@@ -110,6 +110,7 @@ public class CardPluginImpl implements CardPlugin {
             case MTGO:
             case FORCED_M15:
             case FORCED_RETRO:
+            case FORCED_FUTURE:
                 return new CardPanelRenderModeMTGO(view, gameId, loadImage, callback, isFoil, dimension,
                         needFullPermanentRender, renderModeId);
             case IMAGE:
