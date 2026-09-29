@@ -174,6 +174,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Hall of Echoes", 179, Rarity.RARE, mage.cards.h.HallOfEchoes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hall of Echoes", 379, Rarity.RARE, mage.cards.h.HallOfEchoes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hallway Heckler", 85, Rarity.COMMON, mage.cards.h.HallwayHeckler.class));
+        cards.add(new SetCardInfo("Hapatra, the Desert Fang", 271, Rarity.UNCOMMON, mage.cards.h.HapatraTheDesertFang.class));
         cards.add(new SetCardInfo("Hapatra, the Desert Frost", 215, Rarity.UNCOMMON, mage.cards.h.HapatraTheDesertFrost.class));
         cards.add(new SetCardInfo("Haunted Ridge", 180, Rarity.RARE, mage.cards.h.HauntedRidge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Haunted Ridge", 398, Rarity.RARE, mage.cards.h.HauntedRidge.class, NON_FULL_USE_VARIOUS));
