@@ -33,7 +33,7 @@ public final class Unfinity extends ExpansionSet {
         cards.add(new SetCardInfo("Blorbian Buddy", 131, Rarity.COMMON, mage.cards.b.BlorbianBuddy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blorbian Buddy", 417, Rarity.COMMON, mage.cards.b.BlorbianBuddy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Boing!", 40, Rarity.COMMON, mage.cards.b.Boing.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Boing!", 40, Rarity.COMMON, mage.cards.b.Boing.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Boing!", 326, Rarity.COMMON, mage.cards.b.Boing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Breeding Pool", 286, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Breeding Pool", 537, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Celebr-8000", 185, Rarity.RARE, mage.cards.c.Celebr8000.class, NON_FULL_USE_VARIOUS));
@@ -85,7 +85,7 @@ public final class Unfinity extends ExpansionSet {
         cards.add(new SetCardInfo("Overgrown Tomb", 284, Rarity.RARE, mage.cards.o.OvergrownTomb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overgrown Tomb", 535, Rarity.RARE, mage.cards.o.OvergrownTomb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pair o' Dice Lost", 149, Rarity.UNCOMMON, mage.cards.p.PairODiceLost.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Pair o' Dice Lost", 149, Rarity.UNCOMMON, mage.cards.p.PairODiceLost.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Pair o' Dice Lost", 435, Rarity.UNCOMMON, mage.cards.p.PairODiceLost.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 235, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_UST_VARIOUS));
         cards.add(new SetCardInfo("Plains", 240, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_UST_VARIOUS));
         cards.add(new SetCardInfo("Plains", 486, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_UST_VARIOUS));
