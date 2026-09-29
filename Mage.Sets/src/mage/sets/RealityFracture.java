@@ -232,6 +232,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Liliana the Repentant", 231, Rarity.RARE, mage.cards.l.LilianaTheRepentant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liliana the Repentant", 305, Rarity.RARE, mage.cards.l.LilianaTheRepentant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Living Library", 172, Rarity.COMMON, mage.cards.l.LivingLibrary.class));
+        cards.add(new SetCardInfo("Loot, the Nexus", 262, Rarity.UNCOMMON, mage.cards.l.LootTheNexus.class));
         cards.add(new SetCardInfo("Loyal Tutor", 14, Rarity.RARE, mage.cards.l.LoyalTutor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Loyal Tutor", 404, Rarity.MYTHIC, mage.cards.l.LoyalTutor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Loyal Tutor", 414, Rarity.MYTHIC, mage.cards.l.LoyalTutor.class, NON_FULL_USE_VARIOUS));
