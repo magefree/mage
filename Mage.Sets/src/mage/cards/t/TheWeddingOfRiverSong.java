@@ -74,6 +74,7 @@ class TheWeddingOfRiverSongEffect extends OneShotEffect {
                 continue;
             }
             player.drawCards(2, source, game);
+            game.processAction();
             if (player.getHand().count(StaticFilters.FILTER_CARD_NON_LAND, game) < 1
                     || !player.chooseUse(outcome, "Suspend a nonland card from your hand?", source, game)) {
                 continue;
@@ -86,6 +87,7 @@ class TheWeddingOfRiverSongEffect extends OneShotEffect {
             }
             player.moveCards(card, Zone.EXILED, source, game);
             SuspendAbility.addTimeCountersAndSuspend(card, card.getManaValue(), source, game);
+            game.processAction();
         }
         return true;
     }

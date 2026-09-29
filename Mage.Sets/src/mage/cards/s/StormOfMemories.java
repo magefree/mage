@@ -82,6 +82,7 @@ class StormOfMemoriesEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(card, Zone.EXILED, source, game);
+        game.processAction();
         return game.getState().getZone(card.getId()) == Zone.EXILED
                 && CardUtil.castSpellWithAttributesForFree(
                 player, source, game, new CardsImpl(card),
