@@ -9,7 +9,7 @@ import mage.abilities.costs.EarlyTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AttachTargetToSourceEffect;
+import mage.abilities.effects.common.AttachToSourceTargetEffect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
@@ -56,7 +56,7 @@ public final class CaptainAmericaFirstAvenger extends CardImpl {
 
         // ... Catch — At the beginning of combat on your turn, attach up to one target Equipment you control to Captain America.
         ability = new BeginningOfCombatTriggeredAbility(
-                new AttachTargetToSourceEffect()
+                new AttachToSourceTargetEffect()
         );
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_EQUIPMENT));
         this.addAbility(ability.withFlavorWord("... Catch"));

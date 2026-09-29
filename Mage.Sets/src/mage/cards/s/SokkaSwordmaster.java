@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachTargetToSourceEffect;
+import mage.abilities.effects.common.AttachToSourceTargetEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
@@ -41,7 +41,7 @@ public final class SokkaSwordmaster extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new SokkaSwordmasterEffect()).addHint(AffinityType.ALLIES.getHint()));
 
         // At the beginning of combat on your turn, attach up to one target Equipment you control to Sokka.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new AttachTargetToSourceEffect());
+        Ability ability = new BeginningOfCombatTriggeredAbility(new AttachToSourceTargetEffect());
         ability.addTarget(new TargetPermanent(
                 0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_EQUIPMENT
         ));

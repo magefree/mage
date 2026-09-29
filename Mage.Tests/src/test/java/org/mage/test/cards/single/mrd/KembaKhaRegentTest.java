@@ -10,7 +10,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * At the beginning of your upkeep, create a 2/2 white Cat creature token for each Equipment attached to
  * Kemba, Kha Regent.
  *
- * @author notgreat, Claude Opus 5.5
+ * @author notgreat
  */
 public class KembaKhaRegentTest extends CardTestPlayerBase {
 

@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.AttachTargetToSourceEffect;
+import mage.abilities.effects.common.AttachToSourceTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,7 +27,7 @@ public final class KazuulsTollCollector extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {0}: Attach target Equipment you control to Kazuul's Toll Collector. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(new AttachTargetToSourceEffect(), new GenericManaCost(0));
+        Ability ability = new ActivateAsSorceryActivatedAbility(new AttachToSourceTargetEffect(), new GenericManaCost(0));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_EQUIPMENT));
         this.addAbility(ability);
     }

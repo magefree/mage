@@ -6,7 +6,7 @@ import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalPreventionEffect;
-import mage.abilities.effects.common.AttachTargetToSourceEffect;
+import mage.abilities.effects.common.AttachToSourceTargetEffect;
 import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -42,7 +42,7 @@ public final class FrodoDeterminedHero extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Frodo, Determined Hero enters the battlefield or attacks, you may attach target Equipment you control with mana value 2 or 3 to Frodo.
-        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new AttachTargetToSourceEffect(), true);
+        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new AttachToSourceTargetEffect(), true);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 

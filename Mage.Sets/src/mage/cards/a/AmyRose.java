@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.AttachTargetToSourceEffect;
+import mage.abilities.effects.common.AttachToSourceTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
@@ -46,7 +46,7 @@ public final class AmyRose extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever Amy Rose attacks, attach up to one target Equipment to her. Then up to one other target attacking creature gets +X/+0 until end of turn, where X is Amy Rose's power.
-        Ability ability = new AttacksTriggeredAbility(new AttachTargetToSourceEffect().setText("attach up to one target Equipment to her"));
+        Ability ability = new AttacksTriggeredAbility(new AttachToSourceTargetEffect().setText("attach up to one target Equipment to her"));
         ability.addEffect(new BoostTargetEffect(
                 SourcePermanentPowerValue.NOT_NEGATIVE, StaticValue.get(0)
         ).setTargetPointer(new SecondTargetPointer())

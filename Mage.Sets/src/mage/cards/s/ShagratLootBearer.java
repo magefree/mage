@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.dynamicvalue.common.EquipmentAttachedCount;
-import mage.abilities.effects.common.AttachTargetToSourceEffect;
+import mage.abilities.effects.common.AttachToSourceTargetEffect;
 import mage.abilities.effects.keyword.AmassEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,7 +32,7 @@ public final class ShagratLootBearer extends CardImpl {
 
         // Whenever Shagrat, Loot Bearer attacks, attach up to one target Equipment to it. Then amass Orcs X, where X is the number of Equipment attached to Shagrat.
         Ability ability = new AttacksTriggeredAbility(
-                new AttachTargetToSourceEffect().setText("attach up to one target Equipment to it")
+                new AttachToSourceTargetEffect().setText("attach up to one target Equipment to it")
         );
         ability.addEffect(new AmassEffect(new EquipmentAttachedCount(), SubType.ORC, false)
                 .setText("Then amass Orcs X, where X is the number of Equipment attached to {this}"));

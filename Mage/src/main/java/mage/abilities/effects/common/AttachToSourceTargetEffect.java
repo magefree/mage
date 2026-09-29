@@ -13,21 +13,21 @@ import java.util.UUID;
  * Attaches the targeted permanents (Equipment, say) to this ability's source. {@link AttachEffect} is the
  * other way round: it attaches the source to its target.
  *
- * @author notgreat, Claude Opus 5.5
+ * @author notgreat
  */
-public class AttachTargetToSourceEffect extends OneShotEffect {
+public class AttachToSourceTargetEffect extends OneShotEffect {
 
-    public AttachTargetToSourceEffect() {
+    public AttachToSourceTargetEffect() {
         super(Outcome.BoostCreature);
     }
 
-    private AttachTargetToSourceEffect(final AttachTargetToSourceEffect effect) {
+    private AttachToSourceTargetEffect(final AttachToSourceTargetEffect effect) {
         super(effect);
     }
 
     @Override
-    public AttachTargetToSourceEffect copy() {
-        return new AttachTargetToSourceEffect(this);
+    public AttachToSourceTargetEffect copy() {
+        return new AttachToSourceTargetEffect(this);
     }
 
     @Override

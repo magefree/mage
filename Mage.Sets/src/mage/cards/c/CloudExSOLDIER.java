@@ -7,7 +7,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.AttachTargetToSourceEffect;
+import mage.abilities.effects.common.AttachToSourceTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -56,7 +56,7 @@ public final class CloudExSOLDIER extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // When Cloud enters, attach up to one target Equipment you control to it.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new AttachTargetToSourceEffect().setText("attach up to one target Equipment you control to it"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new AttachToSourceTargetEffect().setText("attach up to one target Equipment you control to it"));
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_EQUIPMENT));
         this.addAbility(ability);
 
