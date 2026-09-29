@@ -1,6 +1,7 @@
 package org.mage.test.cards.mana;
 
 import mage.abilities.mana.ManaOptions;
+import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -22,8 +23,7 @@ public class TappedForManaRelatedTest extends CardTestPlayerBase {
      * This is a new rule that slightly changes how we resolve abilities that
      * trigger whenever a permanent is tapped for mana or for mana of a
      * specified type. Now, you look at what was actually produced after the
-     * activated mana ability resolves. So, tapping a Gaea's Cradle while you no
-     * control no creatures won't cause a Wild Growth attached to it to trigger.
+     * activated mana ability resolves.
      */
     @Test
     public void TestCradleWithWildGrowthNoCreatures() {
@@ -323,5 +323,25 @@ public class TappedForManaRelatedTest extends CardTestPlayerBase {
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{Any}", manaOptions);
     }    
-    
+
+    // https://github.com/magefree/mage/issues/15362
+    @Test
+    public void TestEnchantedGaeasCradle() {
+        addCard(Zone.BATTLEFIELD, playerA, "Upwelling");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.HAND, playerA, "Fertile Ground");
+        addCard(Zone.BATTLEFIELD, playerA, "Gaea's Cradle");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fertile Ground");
+        addTarget(playerA, "Gaea's Cradle");
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add {G} for each");
+        setChoice(playerA, "Green");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertManaPool(playerA, ManaType.GREEN, 1);
+    }
 }
