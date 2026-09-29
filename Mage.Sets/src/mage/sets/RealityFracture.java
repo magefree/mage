@@ -416,6 +416,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Vigorbloom Charm", 160, Rarity.UNCOMMON, mage.cards.v.VigorbloomCharm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vigorbloom Charm", 436, Rarity.UNCOMMON, mage.cards.v.VigorbloomCharm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vigorbloom Vanguard", 161, Rarity.UNCOMMON, mage.cards.v.VigorbloomVanguard.class));
+        cards.add(new SetCardInfo("Vindictive Triumph", 162, Rarity.RARE, mage.cards.v.VindictiveTriumph.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vindictive Triumph", 377, Rarity.RARE, mage.cards.v.VindictiveTriumph.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vinelasher Adept", 119, Rarity.COMMON, mage.cards.v.VinelasherAdept.class));
         cards.add(new SetCardInfo("Violent Echoes", 95, Rarity.UNCOMMON, mage.cards.v.ViolentEchoes.class));
         cards.add(new SetCardInfo("Void Extrapolator", 70, Rarity.COMMON, mage.cards.v.VoidExtrapolator.class));
