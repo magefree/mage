@@ -43,7 +43,7 @@ public final class SalvationColossus extends CardImpl {
         ).setText("other creatures you control get +2/+2"), 1);
         ability.addEffect(new GainAbilityControlledEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn,
-                StaticFilters.FILTER_PERMANENT_CREATURE
+                StaticFilters.FILTER_PERMANENT_CREATURE, true
         ).setText("and gain indestructible until end of turn"));
         this.addAbility(ability);
 
