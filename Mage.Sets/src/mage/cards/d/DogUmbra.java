@@ -3,6 +3,8 @@ package mage.cards.d;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -17,19 +19,19 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.game.Controllable;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
  * @author Susucr
  */
 public final class DogUmbra extends CardImpl {
+
+    private static final Condition condition
+            = new AttachedToMatchesFilterCondition(StaticFilters.FILTER_CONTROLLED_PERMANENT);
 
     public DogUmbra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
@@ -48,12 +50,12 @@ public final class DogUmbra extends CardImpl {
         // As long as another player controls enchanted creature, it can't attack or block. Otherwise, Dog Umbra has umbra armor.
         Ability ability = new SimpleStaticAbility(new ConditionalRestrictionEffect(
                 new CantAttackBlockAttachedEffect(AttachmentType.AURA),
-                DogUmbraCondition.TRUE,
+                new InvertCondition(condition),
                 "As long as another player controls enchanted creature, it can't attack or block."
         ));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new UmbraArmorAbility()),
-                DogUmbraCondition.FALSE,
+                condition,
                 "Otherwise, {this} has umbra armor"
         ));
         this.addAbility(ability);
@@ -66,27 +68,5 @@ public final class DogUmbra extends CardImpl {
     @Override
     public DogUmbra copy() {
         return new DogUmbra(this);
-    }
-}
-
-enum DogUmbraCondition implements Condition {
-    TRUE(true),
-    FALSE(false);
-    private final boolean value;
-
-    DogUmbraCondition(boolean value) {
-        this.value = value;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return Optional
-                .ofNullable(source.getSourcePermanentIfItStillExists(game))
-                .map(Permanent::getAttachedTo)
-                .map(game::getPermanentOrLKIBattlefield)
-                .map(Controllable::getControllerId)
-                .map(source::isControlledBy)
-                .orElse(false)
-                .equals(!value);
     }
 }
