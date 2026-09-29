@@ -24,5 +24,6 @@ public final class ShardsOfAlaraPromos extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Ajani Vengeant", "154*", Rarity.MYTHIC, mage.cards.a.AjaniVengeant.class));
+        cards.add(new SetCardInfo("Broodmate Dragon", "A3", Rarity.MYTHIC, mage.cards.b.BroodmateDragon.class));
     }
 }
