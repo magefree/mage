@@ -4,6 +4,7 @@ import mage.abilities.effects.Effect;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.players.Player;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -68,6 +69,16 @@ public abstract class DelayedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public boolean isInactive(Game game) {
-        return false;
+        // discard  on stack
+        // 800.4d. If an object that would be owned by a player who has left the game would be created in any zone, it isn't created.
+        // If a triggered ability that would be controlled by a player who has left the game would be put onto the stack, it isn't put on the stack.
+        Player player = game.getPlayer(getControllerId());
+        if (player != null && player.isInGame()) {
+            return false;
+        }
+        // If using the stack, discard as soon as possible for leaved player
+        // If not using the stack (for instance return of "exile target player until {this} leaves the battlefield"),
+        // we wait till the player would have played a next turn to make sure they are debounced after the player leaves.
+        return usesStack || player.hasReachedNextTurnAfterLeaving();
     }
 }

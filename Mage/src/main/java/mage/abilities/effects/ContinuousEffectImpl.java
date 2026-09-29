@@ -314,22 +314,12 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
             return false;
         }
 
-        boolean canDelete;
         Player player = game.getPlayer(startingControllerId);
-
         // discard on start of turn for leaved player
         // 800.4i When a player leaves the game, any continuous effects with durations that last until that player's next turn
         // or until a specific point in that turn will last until that turn would have begun.
         // They neither expire immediately nor last indefinitely.
-        switch (duration) {
-            case UntilYourNextTurn:
-            case UntilEndOfYourNextTurn:
-                canDelete = player == null || (!player.isInGame() && player.hasReachedNextTurnAfterLeaving());
-                break;
-            default:
-                canDelete = false;
-        }
-
+        boolean canDelete = player == null || (!player.isInGame() && player.hasReachedNextTurnAfterLeaving());
         if (canDelete) {
             return true;
         }
@@ -337,28 +327,20 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         // discard on another conditions (start of your turn)
         switch (duration) {
             case UntilYourNextTurn:
-                if (player != null && player.isInGame()) {
-                    return this.isYourNextTurn(game);
-                }
-                break;
+                return this.isYourNextTurn(game);
             case UntilYourNextEndStep:
-                if (player != null && player.isInGame()) {
-                    return this.isYourNextEndStep(game);
-                }
-                break;
+                return this.isYourNextEndStep(game);
             case UntilEndCombatOfYourNextTurn:
-                if (player != null && player.isInGame()) {
-                    return this.isEndCombatOfYourNextTurn(game);
-                }
-                break;
+                return this.isEndCombatOfYourNextTurn(game);
             case UntilYourNextUpkeepStep:
-                if (player != null && player.isInGame()) {
-                    return this.isYourNextUpkeepStep(game);
-                }
-                break;
+                return this.isYourNextUpkeepStep(game);
+            case UntilEndOfYourNextTurn:
+                // cleanup handled by ContinuousEffectsList::removeEndOfTurnEffects
+                // TODO: should those be aligned to all be handled in the same place?
+                return false;
+            default: // Should handle all the duration that do pass the first switch.
+                throw new IllegalStateException("Missing case for isInactive's Duration:" + duration);
         }
-
-        return canDelete;
     }
 
     @Override
