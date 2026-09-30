@@ -67,6 +67,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Codie, Ravenous Codex", 412, Rarity.MYTHIC, mage.cards.c.CodieRavenousCodex.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Codie, Ravenous Codex", 422, Rarity.MYTHIC, mage.cards.c.CodieRavenousCodex.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Codie, Ravenous Codex", 431, Rarity.RARE, mage.cards.c.CodieRavenousCodex.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Command the Stage", 77, Rarity.UNCOMMON, mage.cards.c.CommandTheStage.class));
         cards.add(new SetCardInfo("Compel Brutality", 101, Rarity.COMMON, mage.cards.c.CompelBrutality.class));
         cards.add(new SetCardInfo("Countersculpt", 25, Rarity.UNCOMMON, mage.cards.c.Countersculpt.class));
         cards.add(new SetCardInfo("Craftwork Crusher", 127, Rarity.UNCOMMON, mage.cards.c.CraftworkCrusher.class));
