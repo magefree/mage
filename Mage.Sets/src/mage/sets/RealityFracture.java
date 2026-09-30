@@ -287,6 +287,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Precise Redaction", 362, Rarity.UNCOMMON, mage.cards.p.PreciseRedaction.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Predictive Preparations", 16, Rarity.COMMON, mage.cards.p.PredictivePreparations.class));
         cards.add(new SetCardInfo("Primal Witchstalker", 144, Rarity.UNCOMMON, mage.cards.p.PrimalWitchstalker.class));
+        cards.add(new SetCardInfo("Proctor of Potential", 145, Rarity.RARE, mage.cards.p.ProctorOfPotential.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Proctor of Potential", 354, Rarity.RARE, mage.cards.p.ProctorOfPotential.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Proft, Consulting Detective", 218, Rarity.UNCOMMON, mage.cards.p.ProftConsultingDetective.class));
         cards.add(new SetCardInfo("Proft, Sinister Mastermind", 235, Rarity.UNCOMMON, mage.cards.p.ProftSinisterMastermind.class));
         cards.add(new SetCardInfo("Prophesied End", 17, Rarity.UNCOMMON, mage.cards.p.ProphesiedEnd.class));
