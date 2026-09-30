@@ -50,8 +50,8 @@ public class LoadTest {
     private static final String TEST_PROXY_TYPE = "None";
     private static final String TEST_USER_NAME_GLOBAL_PREFIX = "t_";
     private static final Boolean TEST_SHOW_GAME_LOGS_AS_HTML = false; // html is original format with full data, but can be too bloated
-    private static final String TEST_AI_GAME_MODE = "Freeform Commander Free For All";
-    private static final String TEST_AI_DECK_TYPE = "Variant Magic - Freeform Commander";
+    private static final String TEST_AI_GAME_MODE = "Freeform Unlimited Commander";
+    private static final String TEST_AI_DECK_TYPE = "Variant Magic - Freeform Unlimited Commander";
     private static final String TEST_AI_RANDOM_DECK_SETS = ""; // sets list for random generated decks (GRN,ACR for specific sets, empty for all sets, PELP for lands only - communication test)
     private static final String TEST_AI_RANDOM_DECK_COLORS_FOR_EMPTY_GAME = "GR";  // colors list for deck generation, empty for all colors
     private static final String TEST_AI_RANDOM_DECK_COLORS_FOR_AI_GAME = "WUBRG";

@@ -2727,6 +2727,14 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public void setTechnicalResult(boolean won) {
+        // direct result without game events to stop errored game
+        this.wins = won;
+        this.loses = !won;
+        this.draws = false;
+    }
+
+    @Override
     public void sendPlayerAction(PlayerAction playerAction, Game game, Object data) {
         switch (playerAction) {
             case PASS_PRIORITY_UNTIL_MY_NEXT_TURN: // F9
@@ -2817,7 +2825,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (!this.wins) {
             this.loses = true;
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST, null, null, playerId));
-            game.informPlayers(this.getLogName() + " has lost the game.");
+            game.informPlayers(this.getLogName() + " has lost the game");
         } else {
             logger.debug(this.getName() + " has already won - stop lost");
         }

@@ -16,7 +16,7 @@ public class CustomThreadPool extends BasicThreadPool {
          * just to fix this and the executor is private
          */
         try {
-            Field executorField = BasicThreadPool.class.getField("executor");
+            Field executorField = BasicThreadPool.class.getDeclaredField("executor");
             executorField.setAccessible(true);
             ThreadPoolExecutor executor = (ThreadPoolExecutor) executorField.get(this);
             synchronized (executor) {

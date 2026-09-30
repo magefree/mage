@@ -26,6 +26,7 @@ import mage.server.managers.ManagerFactory;
 import mage.server.record.TableRecorderImpl;
 import mage.server.tournament.TournamentFactory;
 import mage.server.util.ServerMessagesUtil;
+import mage.util.ThreadUtils;
 import mage.view.ChatMessage;
 import org.apache.log4j.Logger;
 
@@ -220,7 +221,14 @@ public class TableController {
 
     public synchronized boolean replaceDraftPlayer(Player oldPlayer, String name, PlayerType playerType, int skill) {
         Optional<Player> newPlayerOpt = createPlayer(name, playerType, skill);
-        if (!newPlayerOpt.isPresent() || table.getState() != TableState.DRAFTING) {
+        if (!newPlayerOpt.isPresent()) {
+            logger.error("Can't replace draft player " + oldPlayer.getName() + " in table " + table.getId()
+                    + ": can't create player of type " + playerType);
+            return false;
+        }
+        if (table.getState() != TableState.DRAFTING) {
+            logger.warn("Can't replace draft player " + oldPlayer.getName() + " in table " + table.getId()
+                    + ": table state " + table.getState());
             return false;
         }
         Player newPlayer = newPlayerOpt.get();
@@ -232,7 +240,12 @@ public class TableController {
         newTournamentPlayer.setState(oldTournamentPlayer.getState());
         newTournamentPlayer.setReplacedTournamentPlayer(oldTournamentPlayer);
 
-        managerFactory.draftManager().getController(table.getId()).ifPresent(controller -> controller.replacePlayer(oldPlayer, newPlayer));
+        boolean draftReplaced = managerFactory.draftManager().getController(table.getId())
+                .map(controller -> controller.replacePlayer(oldPlayer, newPlayer))
+                .orElse(false);
+        if (!draftReplaced) {
+            logger.error("Draft player " + oldPlayer.getName() + " replaced in tournament but not in draft, table " + table.getId());
+        }
         return true;
     }
 
@@ -593,7 +606,12 @@ public class TableController {
                     }
                     Optional<User> user = managerFactory.userManager().getUser(userId);
                     if (user.isPresent()) {
-                        managerFactory.chatManager().broadcast(chatId, user.get().getName(), "has left the table", ChatMessage.MessageColor.BLUE, true, null, ChatMessage.MessageType.STATUS, ChatMessage.SoundToPlay.PlayerLeft);
+                        // leaveTable is synchronized and can be called from checkExpired, so a broadcast here
+                        // holds both a single expire thread and a table monitor
+                        // warning, massive broadcast must be done in async style
+                        String leftUserName = user.get().getName();
+                        managerFactory.threadExecutor().getCallExecutor().execute(() ->
+                        managerFactory.chatManager().broadcast(chatId, leftUserName, "has left the table", ChatMessage.MessageColor.BLUE, true, null, ChatMessage.MessageType.STATUS, ChatMessage.SoundToPlay.PlayerLeft));
                         if (!table.isTournamentSubTable()) {
                             user.get().removeTable(playerId);
                         }
@@ -814,6 +832,7 @@ public class TableController {
         if (game == null) {
             return true;
         }
+        ThreadUtils.setGameThreadStatus(game.getId(), ThreadUtils.THREAD_GAME_STATUS_AFTER_GAME);
         UUID choosingPlayerId = match.getChooser();
         match.endGame();
         if (managerFactory.configSettings().isSaveGameActivated() && !game.isSimulation()) {
@@ -856,15 +875,31 @@ public class TableController {
                 }
             }
         }
-        match.sideboard();
-        cancelTimeout();
-        if (table.isTournamentSubTable()) {
-            for (MatchPlayer matchPlayer : match.getPlayers()) {
-                TournamentPlayer tournamentPlayer = table.getTournament().getPlayer(matchPlayer.getPlayer().getId());
-                if (tournamentPlayer != null && tournamentPlayer.getStateInfo().equals("sideboarding")) {
-                    tournamentPlayer.setStateInfo("");
+
+        UUID gameId = match.getGame() == null ? null : match.getGame().getId();
+        ThreadUtils.setGameThreadStatus(gameId, ThreadUtils.THREAD_GAME_STATUS_SIDEBOARD);
+        try {
+            try {
+                match.sideboard();
+            } finally {
+                cancelTimeout();
+                // make sure no sideboarding status after timeout/autosubmit, 
+                // so user.onReconnect will skip completed sideboard
+                for (UUID userId : userPlayerMap.keySet()) {
+                    managerFactory.userManager().getUser(userId).ifPresent(user -> user.removeSideboarding(table.getId()));
                 }
             }
+
+            if (table.isTournamentSubTable()) {
+                for (MatchPlayer matchPlayer : match.getPlayers()) {
+                    TournamentPlayer tournamentPlayer = table.getTournament().getPlayer(matchPlayer.getPlayer().getId());
+                    if (tournamentPlayer != null && tournamentPlayer.getStateInfo().equals("sideboarding")) {
+                        tournamentPlayer.setStateInfo("");
+                    }
+                }
+            }
+        } finally {
+            ThreadUtils.setGameThreadStatus(gameId, ThreadUtils.THREAD_GAME_STATUS_AFTER_GAME);
         }
     }
 

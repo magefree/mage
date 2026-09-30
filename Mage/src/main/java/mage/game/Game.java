@@ -53,6 +53,16 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
      */
     Integer getGameIndex();
 
+    /**
+     * Return create stats, for tests and performance
+     */
+    Integer getCreatedCount();
+
+    /**
+     * Return copy stats, for tests and performance
+     */
+    Integer getCopiedCount();
+
     MatchType getGameType();
 
     int getNumPlayers();
@@ -430,6 +440,11 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     boolean isPaused();
 
     void end();
+
+    /**
+     * Critical error: a game can't continue, so end it with a technical winner and without game mechanics
+     */
+    void endWithTechnicalWinner(String reason);
 
     void cleanUp();
 

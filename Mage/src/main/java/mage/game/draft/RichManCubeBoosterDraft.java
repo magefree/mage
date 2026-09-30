@@ -22,20 +22,26 @@ public class RichManCubeBoosterDraft extends DraftImpl {
 
     @Override
     public void start() {
-        cardNum = 1;
-        boosterNum = 1;
-        while (!isAbort() && cardNum <= 36) {
-            openBooster();
+        synchronized (players) {
             cardNum = 1;
+            boosterNum = 1;
+        }
+        while (!isAbort() && cardNum <= 36) {
+            synchronized (players) {
+                openBooster();
+                cardNum = 1;
+            }
             fireUpdatePlayersEvent();
             while (!isAbort() && pickCards()) {
                 // new booster each time, so order is irrelevant
                 passBoosterToLeft();
                 fireUpdatePlayersEvent();
             }
-            boosterNum++;
+            synchronized (players) {
+                boosterNum++;
+            }
         }
-        this.boosterSendingEnd();
+        this.boosterSendingEndDraft();
         this.fireEndDraftEvent();
     }
 
@@ -91,17 +97,17 @@ public class RichManCubeBoosterDraft extends DraftImpl {
             picksWait();
         }
 
-        cardNum++;
+        synchronized (players) {
+            cardNum++;
+        }
         return true;
     }
 
     @Override
-    public void firePickCardEvent(UUID playerId) {
-        DraftPlayer player = players.get(playerId);
+    protected int getRoundPickTimeout() {
         int cardNum = Math.min(36, this.cardNum);
 
         // richman uses custom times
-        int time = (int) Math.ceil(customProfiTimes[cardNum - 1] * timing.getCustomTimeoutFactor());
-        playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), time);
+        return (int) Math.ceil(customProfiTimes[cardNum - 1] * timing.getCustomTimeoutFactor());
     }
 }

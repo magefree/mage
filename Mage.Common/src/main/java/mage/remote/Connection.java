@@ -35,7 +35,12 @@ public class Connection {
 
     private static final String serialization = "?serializationtype=java";
     private static final String transport = "bisocket";
-    private static final String threadpool = "onewayThreadPool=mage.remote.CustomThreadPool";
+    // two independent fixes for jboss oneway pools on java 9+, see issue #6514:
+    // - onewayThreadPool replaces a broken pool of ServerInvoker (incoming oneway invocations);
+    // - maxNumThreadsOneway limits a pool of jboss Client inside ServerInvokerCallbackHandler;
+    // current usage: in async mode it create one stable thread per user session to send async callbacks from server to client
+    // see ASYNC_MESSAGES
+    private static final String threadpool = "onewayThreadPool=mage.remote.CustomThreadPool&maxNumThreadsOneway=1";
 
     private final String parameter;
 
