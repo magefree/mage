@@ -29,7 +29,7 @@ public final class RabidAttack extends CardImpl {
         effect.setText("Until end of turn, any number of target creatures you control each get +1/+0");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(ability)
-            .setText("and gain \"When this creature dies, draw a card.\" until end of turn"));
+            .setText("and gain \"When this creature dies, draw a card.\""));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE));
     }
 

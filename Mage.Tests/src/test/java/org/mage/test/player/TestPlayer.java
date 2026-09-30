@@ -2208,11 +2208,6 @@ public class TestPlayer implements Player {
 
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
-        if (modes.getSelectedModes().size() >= modes.getMaxModes(game, source)) {
-            // TODO: no needs here cause min/max mode must be checked by parent code? try to remove it from here
-            return null;
-        }
-
         StringBuilder modesInfo = new StringBuilder();
         modesInfo.append("\nAvailable modes:");
         int i = 1;
@@ -2251,6 +2246,9 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
+        // support:
+        // - key choice dialog - allow to choose by key or by starting text
+        // - text choice dialog - allow to choose full text
         assertAliasSupportInChoices(false);
 
         if (!choices.isEmpty()) {
@@ -2261,7 +2259,7 @@ public class TestPlayer implements Player {
                 return false;
             }
 
-            if (choice.setChoiceByAnswers(choices, true)) {
+            if (tryToChooseByChoices(game, choice, choices)) {
                 return true;
             }
 
@@ -2279,6 +2277,50 @@ public class TestPlayer implements Player {
         return computerPlayer.choose(outcome, choice, game);
     }
 
+    public boolean tryToChooseByChoices(Game game, Choice choiceDialog, List<String> answers) {
+        String needChoice = answers.get(0);
+
+        if (choiceDialog.isKeyChoice()) {
+            // keys mode
+            for (Map.Entry<String, String> currentChoice : choiceDialog.getKeyChoices().entrySet()) {
+                if (currentChoice.getKey().equals(needChoice)) {
+                    choiceDialog.setChoiceByKey(needChoice, false);
+                    choicesRemoveCurrent(game, "on choose key choice");
+                    return true;
+                }
+            }
+
+            // it's allow to choose key values by text, so do not raise error here
+            // text answers support, so dev can use setChoice by 1,2,3 or real text
+            for (Map.Entry<String, String> currentChoice : choiceDialog.getKeyChoices().entrySet()) {
+                String choiceValue = currentChoice.getValue();
+                // Clean any html part (for easier unit test matching)
+                String cleanedChoiceValue = choiceValue.replaceAll("<[^<>]*>", "");
+                if (choiceValue.startsWith(needChoice) || cleanedChoiceValue.startsWith(needChoice)) {
+                    // TODO: wtf, need research - is it used?
+                    choiceDialog.setChoiceByKey(currentChoice.getKey(), false);
+                    choicesRemoveCurrent(game, "on choose key choice");
+                    return true;
+                }
+            }
+            
+            throw new IllegalArgumentException("Choice key [" + needChoice + "] not found in " + choiceDialog.getChoices());
+        } else {
+            // string mode
+            for (String currentChoice : choiceDialog.getChoices()) {
+                // Clean any html part (for easier unit test matching)
+                String cleanedChoiceValue = currentChoice.replaceAll("<[^<>]*>", "");
+                if (currentChoice.equals(needChoice) || cleanedChoiceValue.equals(needChoice)) {
+                    choiceDialog.setChoice(needChoice, false);
+                    choicesRemoveCurrent(game, "on choose text choice");
+                    return true;
+                }
+            }
+            // TODO: replace by 0 instead for
+            throw new IllegalArgumentException("Choice key [" + needChoice + "] not found in " + choiceDialog.getChoices());
+        }
+    }
+
     @Override
     public int chooseReplacementEffect(Map<String, String> effectsMap, Map<String, MageObject> objectsMap, Game game) {
         if (effectsMap.size() <= 1) {
@@ -2286,11 +2328,23 @@ public class TestPlayer implements Player {
         }
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
+            // workaround for replecement effects to search in regexp style by object and ability
+            // example:
+            // * Endless One [8a9]: Endless One enters with X +1/+1 counters on it.
+            // * Endless One [8a9]: Endless One enters put three +1/+1 counters on Endless One.
+            // can be selected by:
+            // Endless One
+            // Endless One*put three +1/+1
             String choice = choices.get(0);
+            String[] choiceParts = choice.split("\\*");
 
             int index = 0;
             for (Map.Entry<String, String> entry : effectsMap.entrySet()) {
-                if (entry.getValue().startsWith(choice)) {
+                if (entry.getValue().startsWith(choice) || (
+                        choiceParts.length > 1 
+                        && entry.getValue().contains(choiceParts[0]) 
+                        && entry.getValue().contains(choiceParts[1])
+                    )) {
                     choicesRemoveCurrent(game, "on choose replacements"); // TODO: add short lists?
                     return index;
                 }
@@ -3392,6 +3446,16 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public int getStartingDeckSize() {
+        return computerPlayer.getStartingDeckSize();
+    }
+
+    @Override
+    public void initStartingDeckSize() {
+        computerPlayer.initStartingDeckSize();
+    }
+
+    @Override
     public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game) {
         return computerPlayer.addCounters(counter, source.getControllerId(), source, game);
     }
@@ -3542,8 +3606,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void lost(Game game) {
-        computerPlayer.lost(game);
+    public boolean lost(Game game) {
+        return computerPlayer.lost(game);
     }
 
     @Override

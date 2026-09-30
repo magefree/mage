@@ -4,14 +4,10 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import mage.cards.action.ActionCallback;
 import mage.client.util.ImageCaches;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.view.CardView;
-import mage.view.CounterView;
-import mage.view.PermanentView;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
 import org.mage.plugins.card.images.ImageCache;
+import org.mage.plugins.card.images.ImageCacheData;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -29,7 +25,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
 
     // https://www.mtg.onl/evolution-of-magic-token-card-frame-design/
 
-    private static final Cache<ImageKey, BufferedImage> MTGO_MODE_RENDERED_CACHE = ImageCaches.register(
+    private static final Cache<String, BufferedImage> MTGO_MODE_RENDERED_CACHE = ImageCaches.register(
             CacheBuilder
                     .newBuilder()
                     .maximumSize(3000)
@@ -40,6 +36,8 @@ public class CardPanelRenderModeMTGO extends CardPanel {
 
     // The art image for the card, loaded in from the disk
     private BufferedImage artImage;
+    // The file it was loaded from and the size it was scaled to on load (for caching purposes)
+    private String artKey;
 
     // Factory to generate card appropriate views
     private final CardRendererFactory cardRendererFactory = new CardRendererFactory();
@@ -52,95 +50,20 @@ public class CardPanelRenderModeMTGO extends CardPanel {
     private int updateArtImageStamp;
     private final int cardRenderMode;
 
-    private static class ImageKey {
-        final BufferedImage artImage;
-        final int width;
-        final int height;
-        final boolean isChoosable;
-        final boolean isSelected;
-        final boolean isTransformed;
-        final CardView view;
-        final int hashCode;
-
-        public ImageKey(CardView view, BufferedImage artImage, int width, int height, boolean isChoosable, boolean isSelected, boolean isTransformed) {
-            this.view = view;
-            this.artImage = artImage;
-            this.width = width;
-            this.height = height;
-            this.isChoosable = isChoosable;
-            this.isSelected = isSelected;
-            this.isTransformed = isTransformed;
-            this.hashCode = hashCodeImpl();
-        }
-
-        private int hashCodeImpl() { // TODO: Why is this using a string builder???
-            StringBuilder sb = new StringBuilder();
-            sb.append((char) (artImage != null ? 1 : 0));
-            sb.append((char) width);
-            sb.append((char) height);
-            sb.append((char) (isSelected ? 1 : 0));
-            sb.append((char) (isChoosable ? 1 : 0));
-            sb.append((char) (isTransformed ? 1 : 0));
-            sb.append((char) (this.view.isPlayable() ? 1 : 0));
-            sb.append((char) (this.view.isCanAttack() ? 1 : 0));
-            sb.append((char) (this.view.isCanBlock() ? 1 : 0));
-            sb.append((char) (this.view.isFaceDown() ? 1 : 0));
-            sb.append((char) (this.view.getFrameStyle() != null ? this.view.getFrameStyle().ordinal() : -1));
-            if (this.view instanceof PermanentView) {
-                sb.append((char) (((PermanentView) this.view).hasSummoningSickness() ? 1 : 0));
-                sb.append((char) (((PermanentView) this.view).getDamage()));
-            }
-            sb.append(this.view.getDisplayName());
-            sb.append(this.view.getPower());
-            sb.append(this.view.getToughness());
-            sb.append(this.view.getLoyalty());
-            sb.append(this.view.getDefense());
-            sb.append(this.view.getColor().toString());
-            sb.append(this.view.getImageNumber());
-            sb.append(this.view.getExpansionSetCode());
-            for (CardType type : this.view.getCardTypes()) {
-                sb.append((char) type.ordinal());
-            }
-            for (SuperType s : this.view.getSuperTypes()) {
-                sb.append(s);
-            }
-            for (SubType s : this.view.getSubTypes()) {
-                sb.append(s);
-            }
-            sb.append(this.view.getManaCostStr());
-            for (String s : this.view.getRules()) {
-                sb.append(s);
-            }
-            if (this.view.getCounters() != null) {
-                for (CounterView v : this.view.getCounters()) {
-                    sb.append(v.getName()).append(v.getCount());
-                }
-            }
-            return sb.toString().hashCode();
-        }
-
-        @Override
-        public int hashCode() {
-            return hashCode;
-        }
-
-        @Override
-        public boolean equals(Object object) {
-            if (this == object) {
-                return true;
-            }
-            if (object == null || this.getClass() != object.getClass()) {
-                return false;
-            }
-            final ImageKey that = (ImageKey) object;
-
-            return (artImage == null) == (that.artImage == null)
-                    && this.width == that.width
-                    && this.height == that.height
-                    && this.isChoosable == that.isChoosable
-                    && this.isSelected == that.isSelected
-                    && CardView.cardViewEquals(this.view, that.view);
-        }
+    /**
+     * Cache key for a rendered card image: the view's render signature, then the art it was drawn
+     * with, then the panel state the signature does not cover.
+     */
+    private String imageKey() {
+        CardPanelAttributes attribs = getAttributes();
+        return getGameCard().getRenderSignature()
+                + artKey + '|'
+                + attribs.cardWidth + '|'
+                + attribs.cardHeight + '|'
+                + attribs.isChoosable + '|'
+                + attribs.isSelected + '|'
+                + attribs.isTransformed + '|'
+                + cardRenderMode;
     }
 
     public CardPanelRenderModeMTGO(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback,
@@ -169,17 +92,8 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         // Render the card if we don't have an image ready to use
         if (cardImage == null) {
             // Try to get card image from cache based on our card characteristics
-            ImageKey key = new ImageKey(
-                    getGameCard(),
-                    artImage,
-                    getCardWidth() * MTGO_MODE_RENDER_SCALED_IMAGES_COEF,
-                    getCardHeight() * MTGO_MODE_RENDER_SCALED_IMAGES_COEF,
-                    isChoosable(),
-                    isSelected(),
-                    isTransformed()
-            );
             try {
-                cardImage = MTGO_MODE_RENDERED_CACHE.get(key, this::renderCard);
+                cardImage = MTGO_MODE_RENDERED_CACHE.get(imageKey(), this::renderCard);
             } catch (Exception e) {
                 // TODO: research and replace with logs, message and backface image
                 throw new RuntimeException(e);
@@ -255,6 +169,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
 
             // Use the art image and current rendered image from the card
             artImage = impl.artImage;
+            artKey = impl.artKey;
             cardRenderer.setArtImage(artImage);
             cardImage = impl.cardImage;
         }
@@ -278,6 +193,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
     public void updateArtImage() {
         // Invalidate
         artImage = null;
+        artKey = null;
         cardImage = null;
         cardRenderer.setArtImage(null);
 
@@ -297,11 +213,14 @@ public class CardPanelRenderModeMTGO extends CardPanel {
             final int stamp = ++updateArtImageStamp;
             Util.threadPool.submit(() -> {
                 try {
-                    final BufferedImage srcImage;
-                    srcImage = ImageCache.getCardImage(getGameCard(), getCardWidth(), getCardHeight()).getImage();
+                    final ImageCacheData srcData = ImageCache.getCardImage(getGameCard(), getCardWidth(), getCardHeight());
+                    final BufferedImage srcImage = srcData.getImage();
+                    final String srcKey = srcImage == null ? null
+                            : srcData.getPath() + '@' + srcImage.getWidth() + 'x' + srcImage.getHeight();
                     UI.invokeLater(() -> {
                         if (stamp == updateArtImageStamp) {
                             artImage = srcImage;
+                            artKey = srcKey;
                             cardRenderer.setArtImage(srcImage);
                             if (srcImage != null) {
                                 // Invalidate and repaint

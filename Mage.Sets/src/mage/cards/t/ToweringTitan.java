@@ -49,8 +49,7 @@ public final class ToweringTitan extends CardImpl {
 
         // Towering Titan enters the battlefield with X +1/+1 counters on it, where X is the total toughness of other creatures you control.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(), ToweringTitanCount.instance, false
-        ), "with X +1/+1 counters on it, where X is the total toughness of other creatures you control"));
+                CounterType.P1P1.createInstance(), ToweringTitanCount.instance), "with X +1/+1 counters on it, where X is the total toughness of other creatures you control"));
 
         // Sacrifice a creature with defender: All creatures gain trample until end of turn.
         this.addAbility(new SimpleActivatedAbility(

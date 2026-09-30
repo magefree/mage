@@ -48,7 +48,7 @@ public final class CoralReef extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(effect));
 
         // Sacrifice an Island: Put two polyp counters on Coral Reef.
-        effect = new AddCountersSourceEffect(CounterType.POLYP.createInstance(2), true);
+        effect = new AddCountersSourceEffect(CounterType.POLYP.createInstance(2));
         effect.setText("Put two polyp counters on {this}");
         this.addAbility(new SimpleActivatedAbility(effect,
                 new SacrificeTargetCost(islandFilter)));

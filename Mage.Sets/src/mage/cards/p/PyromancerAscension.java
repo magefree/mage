@@ -47,7 +47,7 @@ public final class PyromancerAscension extends CardImpl {
 class PyromancerAscensionQuestTriggeredAbility extends TriggeredAbilityImpl {
 
     PyromancerAscensionQuestTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance(), true), true);
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true);
     }
 
     private PyromancerAscensionQuestTriggeredAbility(final PyromancerAscensionQuestTriggeredAbility ability) {

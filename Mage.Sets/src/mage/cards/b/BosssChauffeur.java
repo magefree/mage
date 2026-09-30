@@ -48,8 +48,7 @@ public final class BosssChauffeur extends CardImpl {
 
         // Boss's Chauffeur enters the battlefield with a number of +1/+1 counters on it equal to one plus the number of other creatures you control.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(), xValue, false
-        ), "with a number of +1/+1 counters on it equal to " +
+                CounterType.P1P1.createInstance(), xValue), "with a number of +1/+1 counters on it equal to " +
                 "one plus the number of other creatures you control").addHint(hint));
 
         // Alliance — Whenever another creature you control enters, put a +1/+1 counter on Boss's Chauffeur.

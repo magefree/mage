@@ -99,6 +99,6 @@ class BoilingRockRioterEffect extends OneShotEffect {
                 .map(CardsImpl::new)
                 .orElseGet(CardsImpl::new);
         cards.removeIf(uuid -> !source.isControlledBy(game.getOwnerId(uuid)));
-        return CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter);
+        return CardUtil.castSpellWithAttributes(player, source, game, cards, filter, null, false, false);
     }
 }

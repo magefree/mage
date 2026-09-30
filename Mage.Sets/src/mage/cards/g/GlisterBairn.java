@@ -10,7 +10,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -32,7 +33,7 @@ public final class GlisterBairn extends CardImpl {
                 ColorsAmongControlledPermanentsCount.ALL_PERMANENTS
         ).setText("another target creature you control gets +X/+X until end of turn, " +
                 "where X is the number of colors among permanents you control"));
-        ability.addTarget(new TargetControlledCreaturePermanent());
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability.setAbilityWord(AbilityWord.VIVID).addHint(ColorsAmongControlledPermanentsCount.ALL_PERMANENTS.getHint()));
     }
 

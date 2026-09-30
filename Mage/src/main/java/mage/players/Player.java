@@ -10,6 +10,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.constants.*;
@@ -196,6 +197,10 @@ public interface Player extends MageItem, Copyable<Player> {
     void setLoseByZeroOrLessLife(boolean loseByZeroOrLessLife);
 
     boolean canLoseByZeroOrLessLife();
+
+    int getStartingDeckSize();
+
+    void initStartingDeckSize();
 
     void setPlotFromTopOfLibrary(boolean canPlotFromTopOfLibrary);
 
@@ -558,7 +563,10 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean discard(Card card, boolean payForCost, Ability source, Game game);
 
-    void lost(Game game);
+    /**
+     * @return True if player was able to lose, else false
+     */
+    boolean lost(Game game);
 
     void lostForced(Game game);
 
@@ -1193,8 +1201,22 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     class SurveilResult {
         private final boolean surveilled;
+        private final Cards cardsPutInGraveyard = new CardsImpl();
+        private final Cards cardsPutOnTop = new CardsImpl();
         private final int numberInGraveyard; // how many cards were put into the graveyard
-        private final int numberOnTop; // how many cards were put into the graveyard
+        private final int numberOnTop; // how many cards were put on top of library
+
+        private SurveilResult(boolean surveilled, Cards cardsPutInGraveyard, Cards cardsPutOnTop) {
+            this.surveilled = surveilled;
+            if (cardsPutInGraveyard != null) {
+                this.cardsPutInGraveyard.addAll(cardsPutInGraveyard);
+            }
+            if (cardsPutOnTop != null) {
+                this.cardsPutOnTop.addAll(cardsPutOnTop);
+            }
+            this.numberInGraveyard = this.cardsPutInGraveyard.size();
+            this.numberOnTop = this.cardsPutOnTop.size();
+        }
 
         private SurveilResult(boolean surveilled, int inGrave, int onTop) {
             this.surveilled = surveilled;
@@ -1204,6 +1226,10 @@ public interface Player extends MageItem, Copyable<Player> {
 
         public static SurveilResult noSurveil() {
             return new SurveilResult(false, 0, 0);
+        }
+
+        public static SurveilResult surveil(Cards cardsPutInGraveyard, Cards cardsPutOnTop) {
+            return new SurveilResult(true, cardsPutInGraveyard, cardsPutOnTop);
         }
 
         public static SurveilResult surveil(int inGrave, int onTop) {
@@ -1220,6 +1246,14 @@ public interface Player extends MageItem, Copyable<Player> {
 
         public int getNumberPutOnTop() {
             return this.numberOnTop;
+        }
+
+        public Cards getCardsPutInGraveyard() {
+            return this.cardsPutInGraveyard;
+        }
+
+        public Cards getCardsPutOnTop() {
+            return this.cardsPutOnTop;
         }
     }
 

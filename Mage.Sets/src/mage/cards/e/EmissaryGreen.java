@@ -3,7 +3,6 @@ package mage.cards.e;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
@@ -81,8 +80,7 @@ class EmissaryGreenEffect extends OneShotEffect {
         }
         if (securityCounter > 0) {
             AddCountersAllEffect countersAllEffect = new AddCountersAllEffect(
-                    CounterType.P1P1.createInstance(),
-                    StaticValue.get(securityCounter),
+                    CounterType.P1P1.createInstance(securityCounter),
                     StaticFilters.FILTER_CONTROLLED_CREATURE
             );
             countersAllEffect.setText("put a number of +1/+1 counters on each creature you control equal to the number of security votes.");

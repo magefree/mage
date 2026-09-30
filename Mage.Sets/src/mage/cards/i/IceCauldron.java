@@ -47,7 +47,7 @@ public final class IceCauldron extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 new IceCauldronExileEffect(), new ManaCostsImpl<>("{X}"), condition
         );
-        ability.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true));
+        ability.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()));
         ability.addEffect(new IceCauldronNoteManaEffect());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

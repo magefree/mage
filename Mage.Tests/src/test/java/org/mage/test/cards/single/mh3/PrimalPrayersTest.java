@@ -135,7 +135,8 @@ public class PrimalPrayersTest extends CardTestPlayerBase {
             execute();
             throw new IllegalStateException("Execute went without error");
         } catch (Throwable e) {
-            if (!e.getMessage().contains("Choose an alternative cost")) {
+            // java.lang.IllegalArgumentException: Choice key [Cast with no alternative cost: ] not found in []
+            if (!e.getMessage().contains("Choice key")) {
                 Assert.fail("Should have thrown error about missing the choice for the alternative cost, but got:\n" + e.getMessage());
             }
         }

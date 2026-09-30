@@ -33,7 +33,7 @@ public final class HuatliRadiantChampion extends CardImpl {
 
         // +1: Put a loyalty counter on Huatli, Radiant Champion for each creature you control.
         this.addAbility(new LoyaltyAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(0),
-                new PermanentsOnBattlefieldCount(StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED), true), 1));
+                new PermanentsOnBattlefieldCount(StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED)), 1));
 
         // -1: Target creature gets +X/+X until end of turn, where X is the number of creatures you control.
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED);

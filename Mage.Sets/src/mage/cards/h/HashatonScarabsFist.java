@@ -26,7 +26,7 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- * @author sobiech
+ * @author Meowcelia
  */
 public final class HashatonScarabsFist extends CardImpl {
 

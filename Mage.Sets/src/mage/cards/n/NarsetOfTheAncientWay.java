@@ -6,7 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -93,7 +92,7 @@ class NarsetOfTheAncientWayManaEffect extends OneShotEffect {
     }
 }
 
-class NarsetOfTheAncientWayManaCondition extends ManaCondition implements Condition {
+class NarsetOfTheAncientWayManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {

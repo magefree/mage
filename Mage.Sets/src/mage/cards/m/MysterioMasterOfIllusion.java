@@ -109,7 +109,7 @@ class MysterioMasterOfIllusionTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return Zone.BATTLEFIELD.match(((ZoneChangeEvent) event).getFromZone())
-                && event.getSourceId().equals(getSourceId());
+                && event.getTargetId().equals(getSourceId());
     }
 
     @Override

@@ -29,4 +29,33 @@ public class DrawNCardsTest extends CardTestPlayerBase {
 
         assertTapped(snacker, true);
     }
+
+    // https://github.com/magefree/mage/issues/15962
+    @Test
+    public void testAdditionalTriggers() {
+        addCard(Zone.BATTLEFIELD, playerA, "Krang, the All-Powerful");
+        addCard(Zone.BATTLEFIELD, playerA, "Throne of Eldraine");
+        addCard(Zone.BATTLEFIELD, playerA, "Iron Man, Armored Avenger");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+
+        setChoice(playerA, "Blue");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Draw two cards");
+
+        setChoice(playerA, "Whenever you draw a card");
+        setChoice(playerA, "Whenever you draw a card");
+        setChoice(playerA, "Whenever you draw a card");
+        setChoice(playerA, "Whenever you draw a card");
+        setChoice(playerA, "Whenever a player draws their second card each turn");
+        addTarget(playerA, "Iron Man, Armored Avenger");
+        addTarget(playerA, "Iron Man, Armored Avenger");
+        addTarget(playerA, "Iron Man, Armored Avenger");
+        addTarget(playerA, "Iron Man, Armored Avenger");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPowerToughness(playerA, "Iron Man, Armored Avenger", 6, 6);
+        assertPowerToughness(playerA, "Krang, the All-Powerful", 5, 5);
+    }
 }

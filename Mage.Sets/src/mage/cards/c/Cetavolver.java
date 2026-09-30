@@ -39,7 +39,7 @@ public final class Cetavolver extends CardImpl {
 
         // If Cetavolver was kicked with its {1}{R} kicker, it enters with two +1/+1 counters on it and with first strike.
         EntersBattlefieldAbility ability1 = new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2),false),
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
                 new KickedCostCondition("{1}{R}"), "If {this} was kicked with its {1}{R} kicker, it enters with two +1/+1 counters on it and with first strike.",
                 "{this} enters with two +1/+1 counters on it and with first strike");
         ((EntersBattlefieldEffect)ability1.getEffects().get(0)).addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield));
@@ -47,7 +47,7 @@ public final class Cetavolver extends CardImpl {
 
         // If Cetavolver was kicked with its {G} kicker, it enters with a +1/+1 counter on it and with trample.
         EntersBattlefieldAbility ability2 = new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(1),false), new KickedCostCondition("{G}"),
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new KickedCostCondition("{G}"),
                 "If {this} was kicked with its {G} kicker, it enters with a +1/+1 counter on it and with trample.",
                 "{this} enters with a +1/+1 counter on it and with trample");
         ((EntersBattlefieldEffect)ability2.getEffects().get(0)).addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield));

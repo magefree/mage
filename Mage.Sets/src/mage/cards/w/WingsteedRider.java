@@ -29,7 +29,7 @@ public final class WingsteedRider extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Heroic - Whenever you cast a spell that targets Wingsteed Rider, put a +1/+1 counter on Wingsteed Rider.
-        this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), true)));
+        this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
     }
 
     private WingsteedRider(final WingsteedRider card) {

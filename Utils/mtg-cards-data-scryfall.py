@@ -50,6 +50,11 @@ def extract_collector_number(card_json):
     except KeyError:
         return 0
 
+def is_basic_land(card):
+    if card.get('type_line', '').startswith('Basic Land'):
+        return True
+    return any(face.get('type_line', '').startswith('Basic Land') for face in card.get('card_faces', []))
+
 # Function to replace accented characters with ASCII equivalents
 def replace_accented_chars(text):
     """
@@ -146,12 +151,17 @@ for set_code in sets_data:
     # cards_data.sort(key=extract_collector_number)
     # cards_data_sorted = sorted(cards_data['data'], key=lambda x: int(x['collector_number']))
     for card in cards_data:
+        if is_basic_land(card):
+            continue
         rarity = rarity_map.get(card['rarity'].lower(), 'C')
         p = card.get('power', '')
         t = card.get('toughness', '')
         if 'card_faces' in card:
-            for face in card['card_faces']:
-                output += create_face_line(card['set_name'], card['collector_number'], rarity, face, p, t)
+            if card['layout'] == 'prepare':
+                output += create_face_line(card['set_name'], card['collector_number'], rarity, card['card_faces'][0], p, t)
+            else:
+                for face in card['card_faces']:
+                    output += create_face_line(card['set_name'], card['collector_number'], rarity, face, p, t)
         else:
             output += create_card_line(card['set_name'], card['collector_number'], rarity, card)
 

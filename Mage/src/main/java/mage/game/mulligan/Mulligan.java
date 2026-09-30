@@ -61,10 +61,10 @@ public abstract class Mulligan implements Serializable {
                     if (keep) {
                         game.endMulligan(player.getId());
                         keepPlayers.add(playerId);
-                        game.fireInformEvent(player.getLogName() + " keeps hand");
+                        game.informPlayers(player.getLogName() + " keeps hand");
                     } else {
                         mulliganPlayers.add(playerId);
-                        game.fireInformEvent(player.getLogName() + " decides to take mulligan");
+                        game.informPlayers(player.getLogName() + " decides to take mulligan");
                     }
                 }
             }

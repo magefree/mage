@@ -6,7 +6,6 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.ConditionalColoredManaAbility;
@@ -75,7 +74,7 @@ class SteelswarmOperatorSpellConditionalMana extends ConditionalMana {
     }
 }
 
-class SteelswarmOperatorSpellManaCondition extends ManaCondition implements Condition {
+class SteelswarmOperatorSpellManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -114,7 +113,7 @@ class SteelswarmOperatorAbilitiesConditionalMana extends ConditionalMana {
     }
 }
 
-class SteelswarmOperatorAbilitiesManaCondition extends ManaCondition implements Condition {
+class SteelswarmOperatorAbilitiesManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {

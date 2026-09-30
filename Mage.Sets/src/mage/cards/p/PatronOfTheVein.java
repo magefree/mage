@@ -157,7 +157,6 @@ class PatronOfTheVeinExileCreatureEffect extends OneShotEffect {
 
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
             permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
-            game.informPlayers(sourceObject.getName() + ": Put a +1/+1 counter on " + permanent.getLogName());
         }
         return true;
 

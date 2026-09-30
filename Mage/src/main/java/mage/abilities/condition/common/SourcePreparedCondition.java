@@ -26,6 +26,6 @@ public enum SourcePreparedCondition implements Condition {
 
     @Override
     public String toString() {
-        return "{this} is " + (prepared ? "prepared" : "unprepared");
+        return "{this} is" + (prepared ? "" : "n't") + " prepared";
     }
 }

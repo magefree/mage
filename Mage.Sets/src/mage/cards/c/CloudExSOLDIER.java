@@ -7,7 +7,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachToSourceTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -21,8 +21,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.EquippedPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.TargetPermanent;
 
@@ -58,7 +56,7 @@ public final class CloudExSOLDIER extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // When Cloud enters, attach up to one target Equipment you control to it.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new CloudExSOLDIEREntersEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new AttachToSourceTargetEffect().setText("attach up to one target Equipment you control to it"));
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_EQUIPMENT));
         this.addAbility(ability);
 
@@ -79,30 +77,5 @@ public final class CloudExSOLDIER extends CardImpl {
     @Override
     public CloudExSOLDIER copy() {
         return new CloudExSOLDIER(this);
-    }
-}
-
-
-class CloudExSOLDIEREntersEffect extends OneShotEffect {
-
-    CloudExSOLDIEREntersEffect() {
-        super(Outcome.Benefit);
-        staticText = "attach up to one target Equipment you control to it";
-    }
-
-    private CloudExSOLDIEREntersEffect(final CloudExSOLDIEREntersEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CloudExSOLDIEREntersEffect copy() {
-        return new CloudExSOLDIEREntersEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        Permanent creature = source.getSourcePermanentIfItStillExists(game);
-        return equipment != null && creature != null && creature.addAttachment(equipment.getId(), source, game);
     }
 }

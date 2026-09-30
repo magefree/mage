@@ -32,7 +32,7 @@ public class AuraAttachedCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int count = 0;
-        Permanent p = game.getPermanent(sourceAbility.getSourceId());
+        Permanent p = sourceAbility.getSourcePermanentOrLKI(game);
         if (p != null) {
             List<UUID> attachments = p.getAttachments();
             for (UUID attachmentId : attachments) {

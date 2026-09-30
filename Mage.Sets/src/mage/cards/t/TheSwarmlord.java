@@ -43,7 +43,7 @@ public final class TheSwarmlord extends CardImpl {
 
         // Rapid Regeneration -- The Swarmlord enters the battlefield with two +1/+1 counters on it for each time you've cast your commander from the command zone this game.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), xValue, true),
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), xValue),
                 "with two +1/+1 counters on it for each time you've cast your commander from the command zone this game"
         ).addHint(CommanderCastCountValue.getHint()).withFlavorWord("Rapid Regeneration"));
 

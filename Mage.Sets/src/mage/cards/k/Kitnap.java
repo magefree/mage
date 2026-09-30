@@ -39,7 +39,7 @@ public final class Kitnap extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
         this.addAbility(new EnchantAbility(auraTarget));
 
         // When Kitnap enters, tap enchanted creature. If the gift wasn't promised, put three stun counters on it.

@@ -35,8 +35,7 @@ public final class StormEntity extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(
                         CounterType.P1P1.createInstance(),
-                        new OtherSpellsCastThisTurnCount(),
-                        true),
+                        new OtherSpellsCastThisTurnCount()),
                 "with a +1/+1 counter on it for each other spell cast this turn"));
     }
 

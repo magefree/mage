@@ -6,11 +6,12 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.common.FilterControlledPermanent;
 
 /**
  *
@@ -18,11 +19,10 @@ import mage.filter.common.FilterLandPermanent;
  */
 public final class EarthServant extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountain you control");
 
     static {
         filter.add(SubType.MOUNTAIN.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public EarthServant(UUID ownerId, CardSetInfo setInfo) {
@@ -32,7 +32,7 @@ public final class EarthServant extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter, 0),
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(StaticValue.get(0),
                 new PermanentsOnBattlefieldCount(filter, 1),
                 Duration.WhileOnBattlefield)));
     }

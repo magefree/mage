@@ -15,7 +15,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -25,7 +25,7 @@ import java.util.UUID;
 public final class PrehistoricTurtlesaurus extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledPermanent("you control a creature with a +1/+1 counter on it");
+            = new FilterControlledCreaturePermanent("you control a creature with a +1/+1 counter on it");
 
     static {
         filter.add(CounterType.P1P1.getPredicate());

@@ -34,7 +34,7 @@ public final class PhantomNishoba extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Phantom Nishoba enters the battlefield with seven +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(7), true), "with seven +1/+1 counters on it"));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(7)), "with seven +1/+1 counters on it"));
 
         // Whenever Phantom Nishoba deals damage, you gain that much life.
         this.addAbility(new DealsDamageSourceTriggeredAbility(new GainLifeEffect(SavedDamageValue.MUCH)));

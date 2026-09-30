@@ -39,7 +39,7 @@ public final class SlumberingTrudge extends CardImpl {
 
         // This creature enters with a number of stun counters on it equal to three minus X. If X is 2 or less, it enters tapped.
         Ability ability = new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.STUN.createInstance(), xValue, false),
+                new AddCountersSourceEffect(CounterType.STUN.createInstance(), xValue),
                 "with a number of stun counters on it equal to three minus X.");
         ability.addEffect(new ConditionalOneShotEffect(new TapSourceEffect(true), condition, null));
         this.addAbility(ability);

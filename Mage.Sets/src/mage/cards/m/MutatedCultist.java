@@ -94,7 +94,7 @@ class MutatedCultistEffect extends OneShotEffect {
             countersRemoved = targetPermanent.removeAllCounters(source, game);
         }
         if (countersRemoved > 0) {
-            game.informPlayers("Removed " + countersRemoved);
+
             game.addEffect(new MutatedCultistSpellsCostReductionEffect(countersRemoved).setDuration(Duration.OneUse), source);
             return true;
         }

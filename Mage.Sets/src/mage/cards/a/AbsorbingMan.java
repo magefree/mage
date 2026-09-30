@@ -78,12 +78,12 @@ class AbsorbingManCopyApplier extends CopyApplier {
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         blueprint.setName("Absorbing Man");
         blueprint.addSuperType(SuperType.LEGENDARY);
-        blueprint.addCardType(game, CardType.CREATURE);
-        blueprint.removePTCDA();
+        blueprint.addCardType(CardType.CREATURE);
+        blueprint.addSubType(SubType.HUMAN, SubType.VILLAIN);
         blueprint.getPower().setModifiedBaseValue(4);
         blueprint.getToughness().setModifiedBaseValue(4);
-        blueprint.addSubType(SubType.HUMAN, SubType.VILLAIN);
         blueprint.getAbilities().add(VigilanceAbility.getInstance());
+
         return true;
     }
 }

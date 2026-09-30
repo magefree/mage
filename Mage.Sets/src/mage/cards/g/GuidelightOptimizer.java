@@ -7,7 +7,6 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
 import mage.abilities.mana.ConditionalColoredManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
@@ -25,7 +24,7 @@ public final class GuidelightOptimizer extends CardImpl {
 
     public GuidelightOptimizer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{U}");
-        
+
         this.subtype.add(SubType.ROBOT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
@@ -66,7 +65,7 @@ class ArtifactOrActivatedConditionalMana extends ConditionalMana {
     }
 }
 
-class ArtifactOrActivatedManaCondition extends ManaCondition implements Condition {
+class ArtifactOrActivatedManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {

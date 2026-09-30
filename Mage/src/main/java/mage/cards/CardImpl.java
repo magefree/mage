@@ -5,6 +5,7 @@ import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
 import mage.abilities.*;
+import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.HasSubtypesSourceEffect;
@@ -783,10 +784,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 amount = addingAllEvent.getAmount();
             }
             boolean isEffectFlag = addingAllEvent.getFlag();
-            int finalAmount = amount;
+            int startAmount = getCounters(game).getCount(counter.getName());
+            int addedAmount = amount;
             for (int i = 0; i < amount; i++) {
                 Counter eventCounter = counter.copy();
-                eventCounter.remove(eventCounter.getCount() - 1);
+                eventCounter.remove(eventCounter.getCount() - 1); // make 1 counter
                 GameEvent addingOneEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, source, playerAddingCounters, counter.getName(), 1);
                 addingOneEvent.setAppliedEffects(appliedEffects);
                 addingOneEvent.setFlag(isEffectFlag);
@@ -796,12 +798,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     addedOneEvent.setFlag(addingOneEvent.getFlag());
                     game.fireEvent(addedOneEvent);
                 } else {
-                    finalAmount--;
+                    addedAmount--;
                     returnCode = false; // restricted by ADD_COUNTER
                 }
             }
-            if (finalAmount > 0) {
-                GameEvent addedAllEvent = GameEvent.getEvent(GameEvent.EventType.COUNTERS_ADDED, objectId, source, playerAddingCounters, counter.getName(), amount);
+            if (addedAmount > 0) {
+                CardUtil.informPlayersCountersChange(playerAddingCounters, counter.getName(), startAmount, startAmount + addedAmount, this, game, source);
+                GameEvent addedAllEvent = GameEvent.getEvent(GameEvent.EventType.COUNTERS_ADDED, objectId, source, playerAddingCounters, counter.getName(), addedAmount);
                 addedAllEvent.setFlag(isEffectFlag);
                 game.fireEvent(addedAllEvent);
             } else {
@@ -834,7 +837,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             return 0;
         }
 
-        int finalAmount = 0;
+        int startAmount = this.getCounters(game).getCount(counterName);
+        int removedAmount = 0;
         for (int i = 0; i < removeCountersEvent.getAmount(); i++) {
 
             GameEvent event = new RemoveCounterEvent(counterName, this, source, isDamage);
@@ -849,12 +853,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             event = new CounterRemovedEvent(counterName, this, source, isDamage);
             game.fireEvent(event);
 
-            finalAmount++;
+            removedAmount++;
         }
 
-        GameEvent event = new CountersRemovedEvent(counterName, this, source, finalAmount, isDamage);
+        CardUtil.informPlayersCountersChange(null, counterName, startAmount, startAmount - removedAmount, this, game, source);
+        GameEvent event = new CountersRemovedEvent(counterName, this, source, removedAmount, isDamage);
         game.fireEvent(event);
-        return finalAmount;
+        return removedAmount;
     }
 
     @Override
@@ -979,6 +984,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         }
         if (this.cantBeAttachedBy(attachment, source, game, false)) {
             return false;
+        }
+        // not in cantBeAttachedBy: callers pre-check that one to decide whether to move the card at all, and 301.5e still puts the Equipment onto the battlefield, just unattached
+        for (Ability ability : attachment.getAbilities(game)) {
+            if (ability instanceof AttachableToRestrictedAbility
+                    && !((AttachableToRestrictedAbility) ability).canEquip(this.getId(), game)) {
+                return false;
+            }
         }
         if (game.replaceEvent(new AttachEvent(objectId, attachment, source))) {
             return false;

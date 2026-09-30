@@ -1,5 +1,10 @@
 package mage.abilities;
 
+import java.util.*;
+import java.util.stream.Stream;
+
+import org.apache.log4j.Logger;
+
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.OptionalAdditionalModeSourceCosts;
 import mage.abilities.effects.Effect;
@@ -15,13 +20,15 @@ import mage.util.CardUtil;
 import mage.util.Copyable;
 import mage.util.RandomUtil;
 
-import java.util.*;
-import java.util.stream.Stream;
-
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> {
+
+    private static final Logger logger = Logger.getLogger(Modes.class);
+
+    // TODO: add performance tests for infinite modes and make sure limit works fine, see ChooseModalAbilityAITest
+    private static final int MAX_MODES_TO_SELECT = 5; // limit human and AI choices, cause some modes allow to select infinite amount of times
 
     // choose ID for options in ability/mode picker dialogs
     public static final UUID CHOOSE_OPTION_DONE_ID = UUID.fromString("33e72ad6-17ae-4bfb-a097-6e7aa06b49e9");
@@ -29,6 +36,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
 
     private Mode currentMode; // current active mode for resolving
 
+    private boolean isPreselected = false; // true after filled by AI auto-select, e.g. hide choose call on good options
     private final List<UUID> selectedModes = new ArrayList<>(); // all selected modes (this + duplicate), use getSelectedModes all the time to keep modes order
     private final Map<UUID, Mode> selectedDuplicateModes = new LinkedHashMap<>(); // for 2x selects: additional selected modes
     private final Map<UUID, UUID> selectedDuplicateToOriginalModeRefs = new LinkedHashMap<>(); // for 2x selects: stores ref from duplicate to original mode
@@ -64,6 +72,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
         for (Map.Entry<UUID, Mode> entry : modes.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }
+        this.isPreselected = modes.isPreselected;
         for (Map.Entry<UUID, Mode> entry : modes.selectedDuplicateModes.entrySet()) {
             selectedDuplicateModes.put(entry.getKey(), entry.getValue().copy());
         }
@@ -149,6 +158,17 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
     }
 
     /**
+     * Returns true if the mode was preselected by AI auto-select.
+     */
+    public boolean isPreselected() {
+        return isPreselected;
+    }
+
+    public void setPreselected(boolean isPreselected) {
+        this.isPreselected = isPreselected;
+    }
+
+    /**
      * Return full list of selected modes in default/rules order (without multi selects)
      */
     public List<UUID> getSelectedModes() {
@@ -168,6 +188,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
     }
 
     public void clearSelectedModes() {
+        this.setPreselected(false);
         this.selectedModes.clear();
         this.selectedDuplicateModes.clear();
         this.selectedDuplicateToOriginalModeRefs.clear();
@@ -322,6 +343,23 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
     }
 
     public boolean choose(Game game, Ability source) {
+        // in multi-modal abilities it must keep already selected modes and targets
+        // to make sure AI simulations will keep predefined setup (modes + targets)
+        if (this.isPreselected()) {
+            int selectedTargetsCount = this.values().stream()
+                    .mapToInt(m -> m.getTargets().stream()
+                            .mapToInt(t -> t.getTargets().size())
+                            .sum()
+                    )
+                    .sum();
+            logger.debug("modes choose, keep predefined modes " + this.selectedModes.size() + " and targets " + selectedTargetsCount);
+            if (isSelectedValid(source, game)) {
+                return true;
+            }
+            logger.warn("modes choose, not valid - need fallback to manual select (something wrong with AI targets generation?)");
+        }
+
+        // fallback to manual select, full cleanup from prev selections or wrong preselections
         if (isAlreadySelectedModesOutdated(game, source)) {
             this.clearAlreadySelectedModes(source, game);
         }
@@ -345,7 +383,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
 
         // modal spells must show choose dialog even for 1 option, so check this.size instead availableModes.size here
         if (this.size() > 1) {
-            // multiple modes
+            // MULTI MODAL ability
 
             // modes modifications, e.g. choose max modes instead single
             Card card = game.getCard(source.getSourceId());
@@ -398,11 +436,30 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
             }
 
             // player chooses modes manually
+            logger.debug("modes choose, before clear, currentMode = " + currentMode + " " + game);
             this.currentMode = null;
             int currentMaxModes = this.getMaxModes(game, source);
 
+            // clean predefined targets lists too to make sure it's really new selection 
+            // (it helps to find bad AI code, e.g. in addModeOptions)
+            int selectedTargetsCount = this.values().stream()
+                    .mapToInt(m -> m.getTargets().stream()
+                            .mapToInt(t -> t.getTargets().size())
+                            .sum()
+                    )
+                    .sum();
+            if (selectedTargetsCount > 0) {
+                logger.debug("found predefined targets to clean: " + selectedTargetsCount);
+                this.values().forEach(
+                    mode -> logger.debug(" - targets count " + mode.getTargets().stream().mapToInt(t -> t.getTargets().size()).sum() + ", " + mode)
+                );
+            }
+            this.values().forEach(mode -> mode.getTargets().clearChosen());
+
+            logger.debug("modes choose, start " + game);
             while ((this.selectedModes.size() < currentMaxModes && maxPawPrints == 0) ||
                     (this.getSelectedPawPrints() < maxPawPrints && maxPawPrints > 0)) {
+                logger.debug("modes choose, single choose step " + game);
                 Mode choice = player.chooseMode(this, source, game);
                 if (choice == null) {
                     // user press cancel/stop in choose dialog or nothing to choose
@@ -413,6 +470,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
                     currentMode = choice;
                 }
             }
+            logger.debug("modes choose, end " + game);
             // effects helper (keep real choosing player)
             if (chooseController == TargetController.OPPONENT) {
                 selectedModes
@@ -422,10 +480,13 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
                         .forEach(effects -> effects.setValue("choosingPlayer", playerId));
             }
         } else {
-            // only one mode
+            // SINGLE MODAL ability
+            // make sure it selected by default (e.g. for AI simulations)
             Mode mode = this.values().iterator().next();
-            this.addSelectedMode(mode.getId());
-            this.setActiveMode(mode);
+            if (this.getSelectedModes().isEmpty()) {
+                this.addSelectedMode(mode.getId());
+                this.setActiveMode(mode);
+            }
         }
 
         return isSelectedValid(source, game);
@@ -466,7 +527,11 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
 
         Mode mode = get(modeId);
 
-        if (selectedModes.contains(modeId) && mayChooseSameModeMoreThanOnce) {
+        if (selectedModes.contains(modeId)) {
+            if (!mayChooseSameModeMoreThanOnce) {
+                // how-to fix: make sure AI code clean, filter and setup modes and targets correctly
+                throw new IllegalArgumentException("Wrong call of addSelectedMode: mode already selected, you can't select it again");
+            }
             Mode duplicateMode = mode.copy();
             UUID originalId = modeId;
             duplicateMode.setRandomId();
@@ -474,7 +539,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
             selectedDuplicateModes.put(modeId, duplicateMode);
             selectedDuplicateToOriginalModeRefs.put(duplicateMode.getId(), originalId);
         }
-        // TODO: bugged and allows to choose same mode multiple times without mayChooseSameModeMoreThanOnce?
+
         this.selectedModes.add(modeId);
     }
 
@@ -538,6 +603,8 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
 
     /**
      * Returns all (still) available modes of the ability
+     * 
+     * Warning, you must filter out already selected modes by yourself due diff usages (for AI, for real game cycle, for logs, etc)
      *
      * @param source
      * @param game
@@ -545,6 +612,18 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
      */
     public List<Mode> getAvailableModes(Ability source, Game game) {
         List<Mode> availableModes = new ArrayList<>();
+
+        // limit by max selected
+        if (this.getSelectedModes().size() >= this.getMaxModes(game, source)) {
+            return availableModes;
+        }
+
+        // limit by max allowed by game engine
+        if (this.getSelectedModes().size() >= MAX_MODES_TO_SELECT) {
+            logger.warn("reach max modes limit for " + source + " in " + game);
+            return availableModes;
+        }
+
         Set<UUID> nonAvailableModes;
         if (isMayChooseSameModeMoreThanOnce()) {
             nonAvailableModes = new HashSet<>();

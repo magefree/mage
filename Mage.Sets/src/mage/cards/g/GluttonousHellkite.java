@@ -39,7 +39,7 @@ public final class GluttonousHellkite extends CardImpl {
         // When you cast this spell, each player sacrifices X creatures. Gluttonous Hellkite enters the battlefield with two +1/+1 counters on it for each creature sacrificed this way.
         this.addAbility(new CastSourceTriggeredAbility(new SacrificeAllEffect(GetXValue.instance, StaticFilters.FILTER_PERMANENT_CREATURES)));
         Ability ability = new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), GluttonousHellkiteDynamicValue.instance, true),
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), GluttonousHellkiteDynamicValue.instance),
                 "with two +1/+1 counters on it for each creature sacrificed this way");
         ability.addHint(new ValueHint("Will get +1/+1 counters on ETB", GluttonousHellkiteDynamicValue.instance));
         //ability.setRuleVisible(false);

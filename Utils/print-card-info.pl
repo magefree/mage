@@ -8,7 +8,7 @@ use utf8;
 use open ':std', ':encoding(UTF-8)';
 
 my $dataFile = 'mtg-cards-data.txt';
-my $cardInfoTemplate = 'cardInfo.tmpl';
+my $cardInfoTemplate = 'templates/cardInfo.tmpl';
 
 my %cards;
 

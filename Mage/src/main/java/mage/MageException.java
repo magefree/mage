@@ -11,6 +11,10 @@ public class MageException extends Exception {
 
     private static final long serialVersionUID = 8340806803178193696L;
 
+    public MageException(String message, Throwable t) {
+        super(message, t);
+    }
+
     public MageException(String message) {
         super(message);
     }

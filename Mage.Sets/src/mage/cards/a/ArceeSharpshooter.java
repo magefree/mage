@@ -84,8 +84,7 @@ class ArceeAcrobaticCoupeTriggeredAbility extends SpellCastControllerTriggeredAb
     ArceeAcrobaticCoupeTriggeredAbility() {
         super(new AddCountersSourceEffect(
                 CounterType.P1P1.createInstance(0),
-                SavedDamageValue.MANY, false
-        ), false);
+                SavedDamageValue.MANY), false);
         this.addEffect(new TransformSourceEffect());
     }
 

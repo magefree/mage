@@ -41,7 +41,7 @@ public final class ScourgeOfSkolaVale extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Scourge of Skola Vale enters the battlefield with two +1/+1 counters on it.
-        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(2), true);
+        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(2));
         effect.setText("with two +1/+1 counters on it");
         this.addAbility(new EntersBattlefieldAbility(effect));
         // {T}, Sacrifice another creature: Put a number of +1/+1 counters on Scourge of Skola Vale equal to the sacrificed creature's toughness.
@@ -83,7 +83,7 @@ class ScourgeOfSkolaValeEffect extends OneShotEffect {
                 int amount = ((SacrificeTargetCost) cost).getPermanents().get(0).getToughness().getValue();
                 Player player = game.getPlayer(source.getControllerId());
                 if (amount > 0 && player != null) {
-                    return new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount), true).apply(game, source);
+                    return new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount)).apply(game, source);
                 }
             }
         }

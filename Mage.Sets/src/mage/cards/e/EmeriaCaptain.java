@@ -35,8 +35,7 @@ public final class EmeriaCaptain extends CardImpl {
 
         // When Emeria Captain enters the battlefield, put a +1/+1 counter on it for each creature in your party.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(), PartyCount.instance, false
-        ).setText("put a +1/+1 counter on it for each creature in your party. " + PartyCount.getReminder())));
+                CounterType.P1P1.createInstance(), PartyCount.instance).setText("put a +1/+1 counter on it for each creature in your party. " + PartyCount.getReminder())));
     }
 
     private EmeriaCaptain(final EmeriaCaptain card) {

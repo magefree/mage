@@ -27,7 +27,7 @@ public final class WickerWarcrawler extends CardImpl {
         // Whenever Wicker Warcrawler attacks or blocks, put a -1/-1 counter on it at end of combat.
         this.addAbility(new AttacksOrBlocksTriggeredAbility(
                 new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(
-                        new AddCountersSourceEffect(CounterType.M1M1.createInstance(), true)
+                        new AddCountersSourceEffect(CounterType.M1M1.createInstance())
                 ), false).setText("put a -1/-1 counter on it at end of combat"), false
         ).setTriggerPhrase("Whenever {this} attacks or blocks, "));
     }

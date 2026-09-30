@@ -58,6 +58,7 @@ public class Vintage extends Constructed {
         restricted.add("Necropotence");
         restricted.add("Sol Ring");
         restricted.add("Strip Mine");
+        restricted.add("The Fantasticar");
         restricted.add("Thorn of Amethyst");
         restricted.add("Time Vault");
         restricted.add("Time Walk");

@@ -22,7 +22,6 @@ my $keywordsFile = 'keywords.txt';
 
 my %cards;
 my %sets;
-my %knownSets;
 my %keywords;
 
 sub toCamelCase {
@@ -182,13 +181,6 @@ while (my $line = <DATA>) {
 }
 close(DATA);
 
-open(DATA, $setsFile) || die "can't open $setsFile : $!";
-while (my $line = <DATA>) {
-    my @data = split('\\|', $line);
-    $knownSets{$data[0]} = $data[2];
-}
-close(DATA);
-
 open(DATA, $keywordsFile) || die "can't open $keywordsFile : $!";
 while (my $line = <DATA>) {
     my @data = split('\\|', $line);
@@ -237,8 +229,8 @@ if (!exists $cards{$mainCardName}) {
     die "Card name doesn't exist: $mainCardName\n";
 }
 
-my $cardTemplate = 'cardTest.tmpl';
-my $cardInfoTemplate = 'cardInfo.tmpl';
+my $cardTemplate = 'templates/cardTest.tmpl';
+my $cardInfoTemplate = 'templates/cardInfo.tmpl';
 my $originalName = $mainCardName;
 my $setCode;
 

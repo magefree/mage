@@ -11,7 +11,6 @@ import mage.constants.SuperType;
 import mage.game.Game;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.ConditionalColoredManaAbility;
@@ -75,7 +74,7 @@ class LaForgeSpellConditionalMana extends ConditionalMana {
     }
 }
 
-class LaForgeSpellManaCondition extends ManaCondition implements Condition {
+class LaForgeSpellManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {

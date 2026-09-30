@@ -55,9 +55,7 @@ public final class EomerKingOfRohan extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(
                         CounterType.P1P1.createInstance(),
-                        new PermanentsOnBattlefieldCount(filter),
-                        true
-                ), "with a +1/+1 counter on it for each other Human you control"
+                        new PermanentsOnBattlefieldCount(filter)), "with a +1/+1 counter on it for each other Human you control"
         ));
 
         // When Eomer enters the battlefield, target player becomes the monarch. Eomer deals damage equal to its power to any target.

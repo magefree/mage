@@ -45,8 +45,7 @@ public final class BlastZone extends CardImpl {
 
         // {X}{X}, {T}: Put X charge counters on Blast Zone.
         Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(
-                CounterType.CHARGE.createInstance(), GetXValue.instance, true
-        ), new ManaCostsImpl<>("{X}{X}"));
+                CounterType.CHARGE.createInstance(), GetXValue.instance), new ManaCostsImpl<>("{X}{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

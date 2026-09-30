@@ -38,7 +38,7 @@ public final class JeweledAmulet extends CardImpl {
 
         // {1}, {tap}: Put a charge counter on Jeweled Amulet. Note the type of mana spent to pay this activation cost. Activate this ability only if there are no charge counters on Jeweled Amulet.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true), new GenericManaCost(1), condition
+                new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new GenericManaCost(1), condition
         );
         ability.addEffect(new JeweledAmuletAddCounterEffect());
         ability.addCost(new TapSourceCost());

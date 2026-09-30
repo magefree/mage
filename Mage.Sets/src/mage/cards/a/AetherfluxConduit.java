@@ -26,7 +26,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * @author sobiech
+ * @author Meowcelia
  */
 public final class AetherfluxConduit extends CardImpl {
 

@@ -54,6 +54,8 @@ public class LoseLifeTriggeredAbility extends TriggeredAbilityImpl implements Ba
                 return isControlledBy(playerId);
             case OPPONENT:
                 return game.getOpponents(getControllerId()).contains(playerId);
+            case ANY:
+                return true;
             default:
                 throw new IllegalArgumentException("Wrong code usage: not supported targetController: " + targetController);
         }
@@ -78,6 +80,8 @@ public class LoseLifeTriggeredAbility extends TriggeredAbilityImpl implements Ba
                 return "Whenever you lose life, ";
             case OPPONENT:
                 return "Whenever an opponent loses life, ";
+            case ANY:
+                return "Whenever a player loses life, ";
             default:
                 throw new IllegalArgumentException("Wrong code usage: not supported targetController: " + targetController);
         }

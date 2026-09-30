@@ -31,8 +31,7 @@ public final class VexingPuzzlebox extends CardImpl {
 
         // Whenever you roll one or more dice, put a number of charge counters on Vexing Puzzlebox equal to the result.
         this.addAbility(new OneOrMoreDiceRolledTriggeredAbility(new AddCountersSourceEffect(
-                CounterType.CHARGE.createInstance(), VexingPuzzleboxValue.instance, true
-        ).setText("put a number of charge counters on {this} equal to the result")));
+                CounterType.CHARGE.createInstance(), VexingPuzzleboxValue.instance).setText("put a number of charge counters on {this} equal to the result")));
 
         // {T}: Add one mana of any color. Roll a d20.
         AnyColorManaAbility manaAbility = new AnyColorManaAbility();

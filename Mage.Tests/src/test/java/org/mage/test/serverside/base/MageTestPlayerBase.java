@@ -93,7 +93,6 @@ public abstract class MageTestPlayerBase {
 
     @BeforeClass
     public static void init() {
-        Logger.getRootLogger().setLevel(Level.DEBUG);
         logger.debug("Starting MAGE tests");
         DebugUtil.printLogsInfo(logger);
         logger.debug("Default charset: " + Charset.defaultCharset());

@@ -6,6 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.Mode;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -431,6 +432,10 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         return this;
     }
 
+    public List<Permanent> getAddedTokenPermanents() {
+        return new ArrayList<>(addedTokenPermanents);
+    }
+
     public void sacrificeTokensCreatedAtNextEndStep(Game game, Ability source) {
         this.removeTokensCreatedAt(game, source, false, PhaseStep.END_TURN, TargetController.ANY);
     }
@@ -452,6 +457,9 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
                 break;
             case END_COMBAT:
                 exileAbility = new AtTheEndOfCombatDelayedTriggeredAbility(effect);
+                break;
+            case UPKEEP:
+                exileAbility = new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(effect);
                 break;
             default:
                 throw new UnsupportedOperationException("Unsupported PhaseStep in CreateTokenCopyTargetEffect::removeTokensCreatedAt");

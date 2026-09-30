@@ -45,7 +45,7 @@ public final class KravensLastHunt extends CardImpl {
         // I -- Mill five cards. When you do, this Saga deals damage equal to the greatest power among creature cards in your graveyard to target creature.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_I,
-                new MillCardsControllerEffect(4), new KravensLastHuntEffect()
+                new MillCardsControllerEffect(5), new KravensLastHuntEffect()
         );
 
         // II -- Target creature you control gets +2/+2 until end of turn.

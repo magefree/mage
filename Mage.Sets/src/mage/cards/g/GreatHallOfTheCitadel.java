@@ -5,7 +5,6 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -71,7 +70,7 @@ class GreatHallOfTheCitadelConditionalMana extends ConditionalMana {
     }
 }
 
-class GreatHallOfTheCitadelManaCondition extends ManaCondition implements Condition {
+class GreatHallOfTheCitadelManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {

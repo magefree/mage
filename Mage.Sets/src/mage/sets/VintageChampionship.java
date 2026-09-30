@@ -32,6 +32,7 @@ public class VintageChampionship extends ExpansionSet {
         cards.add(new SetCardInfo("Mox Jet", "2019NA", Rarity.SPECIAL, mage.cards.m.MoxJet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mox Pearl", 2006, Rarity.RARE, mage.cards.m.MoxPearl.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mox Pearl", 2014, Rarity.SPECIAL, mage.cards.m.MoxPearl.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mox Pearl", 2019, Rarity.MYTHIC, mage.cards.m.MoxPearl.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mox Ruby", 2008, Rarity.RARE, mage.cards.m.MoxRuby.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mox Ruby", "2017EU", Rarity.SPECIAL, mage.cards.m.MoxRuby.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mox Sapphire", 2010, Rarity.RARE, mage.cards.m.MoxSapphire.class, NON_FULL_USE_VARIOUS));

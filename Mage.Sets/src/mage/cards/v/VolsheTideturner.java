@@ -6,7 +6,6 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -71,7 +70,7 @@ class VolsheTideturnerConditionalMana extends ConditionalMana {
     }
 }
 
-class VolsheTideturnerCondition extends ManaCondition implements Condition {
+class VolsheTideturnerCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {

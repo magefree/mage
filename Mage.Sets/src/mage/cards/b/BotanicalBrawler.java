@@ -36,8 +36,7 @@ public final class BotanicalBrawler extends CardImpl {
 
         // Botanical Brawler enters the battlefield with two +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(2), true
-        ), "with two +1/+1 counters on it"));
+                CounterType.P1P1.createInstance(2)), "with two +1/+1 counters on it"));
 
         // Whenever one or more +1/+1 counters are put on another permanent you control, if it's the first time +1/+1 counters have been put on that permanent this turn, put a +1/+1 counter on Botanical Brawler.
         this.addAbility(new BotanicalBrawlerTriggeredAbility());

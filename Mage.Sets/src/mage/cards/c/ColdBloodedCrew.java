@@ -6,7 +6,7 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
-import mage.abilities.common.LandfallAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.BasicLandcyclingAbility;
@@ -30,7 +30,7 @@ public final class ColdBloodedCrew extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When this creature enters, put two +1/+1 counters on target creature.
-        Ability ability = new LandfallAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

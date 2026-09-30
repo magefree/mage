@@ -80,8 +80,7 @@ public final class RalMonsoonMage extends TransformingDoubleFacedCard {
 
         // Ral, Leyline Prodigy enters the battlefield with an additional loyalty counter on him for each instant and sorcery spell you've cast this turn.
         this.getRightHalfCard().addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(), InstantAndSorceryCastThisTurn.YOU,
-                        false)
+                new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(), InstantAndSorceryCastThisTurn.YOU)
                         .setText("with an additional loyalty counter on him for each instant and sorcery spell you've cast this turn"))
                 .addHint(InstantAndSorceryCastThisTurn.YOU.getHint())
         );

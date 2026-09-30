@@ -8,7 +8,6 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -72,7 +71,7 @@ class LegendaryCastConditionalMana extends ConditionalMana {
     }
 }
 
-class LegendaryCastManaCondition extends ManaCondition implements Condition {
+class LegendaryCastManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {

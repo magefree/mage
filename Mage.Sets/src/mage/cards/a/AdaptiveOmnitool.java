@@ -22,7 +22,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import java.util.UUID;
 
 /**
- * @author sobiech
+ * @author Meowcelia
  */
 public final class AdaptiveOmnitool extends CardImpl {
 

@@ -30,7 +30,7 @@ public final class TenaciousTosk extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CantBeBlockedByMoreThanOneSourceEffect()));
 
         // Whenever this creature deals combat damage to a player, put a +1/+1 counter on it.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), true)));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
     }
 
     private TenaciousTosk(final TenaciousTosk card) {

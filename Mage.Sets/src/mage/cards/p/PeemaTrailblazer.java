@@ -20,7 +20,7 @@ import mage.counters.CounterType;
 import java.util.UUID;
 
 /**
- * @author sobiech
+ * @author Meowcelia
  */
 public final class PeemaTrailblazer extends CardImpl {
 

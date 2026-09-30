@@ -35,7 +35,7 @@ public final class WestgateRegent extends CardImpl {
 
         // Whenever Westgate Regent deals combat damage to a player, put that many +1/+1 counters on it.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(), SavedDamageValue.MANY, false)
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(), SavedDamageValue.MANY)
                         .setText("put that many +1/+1 counters on it"), false, true
         ));
     }

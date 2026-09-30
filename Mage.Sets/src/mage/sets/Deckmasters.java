@@ -49,6 +49,7 @@ public class Deckmasters extends ExpansionSet {
         cards.add(new SetCardInfo("Incinerate", "14*", Rarity.COMMON, mage.cards.i.Incinerate.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Jokulhaups", 15, Rarity.RARE, mage.cards.j.Jokulhaups.class, RETRO_ART));
         cards.add(new SetCardInfo("Karplusan Forest", 39, Rarity.RARE, mage.cards.k.KarplusanForest.class, RETRO_ART));
+        cards.add(new SetCardInfo("Lava Burst", "16", Rarity.COMMON, mage.cards.l.LavaBurst.class, RETRO_ART));
         cards.add(new SetCardInfo("Lhurgoyf", 29, Rarity.RARE, mage.cards.l.Lhurgoyf.class, RETRO_ART));
         cards.add(new SetCardInfo("Lim-Dul's High Guard", "6a", Rarity.COMMON, mage.cards.l.LimDulsHighGuard.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Lim-Dul's High Guard", "6b", Rarity.COMMON, mage.cards.l.LimDulsHighGuard.class, RETRO_ART_USE_VARIOUS));

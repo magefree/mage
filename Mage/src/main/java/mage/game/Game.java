@@ -379,8 +379,6 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     void fireChoosePileEvent(UUID playerId, String message, List<? extends Card> pile1, List<? extends Card> pile2);
 
-    void fireInformEvent(String message);
-
     void fireStatusEvent(String message, boolean withTime, boolean withTurnInfo);
 
     void fireUpdatePlayersEvent();
@@ -468,6 +466,10 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
      */
     void emptyManaPools(Ability source);
 
+    /**
+     * Copies the effect and the source ability, initializes the copy and registers it.
+     * Do not init the effect before calling this.
+     */
     void addEffect(ContinuousEffect continuousEffect, Ability source);
 
     void addEmblem(Emblem emblem, MageObject sourceObject, Ability source);

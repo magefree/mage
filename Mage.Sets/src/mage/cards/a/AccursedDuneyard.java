@@ -17,7 +17,7 @@ import mage.target.TargetPermanent;
 
 /**
  *
- * @author sobiech
+ * @author Meowcelia
  */
 public final class AccursedDuneyard extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Shade, Skeleton, Specter, Spirit, Vampire, Wraith, or Zombie");

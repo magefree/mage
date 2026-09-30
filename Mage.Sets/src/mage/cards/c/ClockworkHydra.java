@@ -44,7 +44,7 @@ public final class ClockworkHydra extends CardImpl {
 
         // {tap}: Put a +1/+1 counter on Clockwork Hydra.
         this.addAbility(new SimpleActivatedAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(), true), new TapSourceCost()
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new TapSourceCost()
         ));
     }
 

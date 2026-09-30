@@ -30,19 +30,23 @@ public class ResourcefulDefenseTest extends CardTestPlayerBase {
      */
     @Test
     public void testMoveWhenDied() {
-        addCard(Zone.BATTLEFIELD, playerA, "Archway Commons", 9);
         addCard(Zone.BATTLEFIELD, playerA, resourcefulDefense);
         addCard(Zone.BATTLEFIELD, playerA, everflowingChalice);
         addCard(Zone.HAND, playerA, steelbaneHydra);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Zone.HAND, playerA, lightningBolt);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
 
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 3);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, steelbaneHydra);
         setChoice(playerA, "X=1");
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, lightningBolt, steelbaneHydra);
         addTarget(playerA, everflowingChalice);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+
         assertCounterCount(everflowingChalice, CounterType.P1P1, 1);
     }
 
@@ -51,18 +55,21 @@ public class ResourcefulDefenseTest extends CardTestPlayerBase {
      */
     @Test
     public void testMoveAllSingleCounters() {
-        addCard(Zone.BATTLEFIELD, playerA, "Archway Commons", 5);
         addCard(Zone.BATTLEFIELD, playerA, resourcefulDefense);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.BATTLEFIELD, playerA, vividCreek);
         addCard(Zone.BATTLEFIELD, playerA, everflowingChalice);
 
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}", 5);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{W}: ");
         addTarget(playerA, vividCreek);
         addTarget(playerA, everflowingChalice);
         setChoiceAmount(playerA, 2);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        
         assertCounterCount(vividCreek, CounterType.CHARGE, 0);
         assertCounterCount(everflowingChalice, CounterType.CHARGE, 2);
     }
@@ -72,18 +79,21 @@ public class ResourcefulDefenseTest extends CardTestPlayerBase {
      */
     @Test
     public void testSomeAllSingleCounters() {
-        addCard(Zone.BATTLEFIELD, playerA, "Archway Commons", 5);
         addCard(Zone.BATTLEFIELD, playerA, resourcefulDefense);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.BATTLEFIELD, playerA, vividCreek);
         addCard(Zone.BATTLEFIELD, playerA, everflowingChalice);
 
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}", 5);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{W}: ");
         addTarget(playerA, vividCreek);
         addTarget(playerA, everflowingChalice);
         setChoiceAmount(playerA, 1);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+
         assertCounterCount(vividCreek, CounterType.CHARGE, 1);
         assertCounterCount(everflowingChalice, CounterType.CHARGE, 1);
     }
@@ -97,28 +107,34 @@ public class ResourcefulDefenseTest extends CardTestPlayerBase {
      */
     @Test
     public void testMoveAllMultipleCounters() {
-        addCard(Zone.BATTLEFIELD, playerA, "Archway Commons", 8);
         addCard(Zone.BATTLEFIELD, playerA, resourcefulDefense);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.BATTLEFIELD, playerA, vividCreek);
         addCard(Zone.HAND, playerA, steelbaneHydra);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 3);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, steelbaneHydra);
         setChoice(playerA, "X=1");
-
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}", 5);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{W}: ");
         addTarget(playerA, vividCreek);
         addTarget(playerA, steelbaneHydra);
         setChoiceAmount(playerA, 2);
-
         waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
+
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}", 5);
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{W}: ");
         addTarget(playerA, steelbaneHydra);
         addTarget(playerA, vividCreek);
         setChoiceAmount(playerA, 1, 2); // +1/+1, Charge
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
+
         assertCounterCount(vividCreek, CounterType.CHARGE, 2);
         assertCounterCount(vividCreek, CounterType.P1P1, 1);
         assertGraveyardCount(playerA, steelbaneHydra, 1);
@@ -129,28 +145,35 @@ public class ResourcefulDefenseTest extends CardTestPlayerBase {
      */
     @Test
     public void testMoveMultipleWhenDied() {
-        addCard(Zone.BATTLEFIELD, playerA, "Archway Commons", 9);
         addCard(Zone.BATTLEFIELD, playerA, resourcefulDefense);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.BATTLEFIELD, playerA, everflowingChalice);
         addCard(Zone.BATTLEFIELD, playerA, vividCreek);
         addCard(Zone.HAND, playerA, steelbaneHydra);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Zone.HAND, playerA, lightningBolt);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
 
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 3);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, steelbaneHydra);
         setChoice(playerA, "X=1");
 
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}", 5);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{W}: ");
         addTarget(playerA, vividCreek);
         addTarget(playerA, steelbaneHydra);
         setChoiceAmount(playerA, 2);
 
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 1);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lightningBolt, steelbaneHydra);
         addTarget(playerA, everflowingChalice);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+
         assertCounterCount(vividCreek, CounterType.CHARGE, 0);
         assertCounterCount(everflowingChalice, CounterType.CHARGE, 2);
         assertCounterCount(everflowingChalice, CounterType.P1P1, 1);

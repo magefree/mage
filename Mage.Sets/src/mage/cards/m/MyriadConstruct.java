@@ -53,7 +53,7 @@ public final class MyriadConstruct extends CardImpl {
 
         // If Myriad Construct was kicked, it enters with a +1/+1 counter on it for each nonbasic land your opponents control.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(), xValue, false),
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(), xValue),
                 KickedCondition.ONCE, "If {this} was kicked, it enters " +
                 "with a +1/+1 counter on it for each nonbasic land your opponents control.", ""
         ));

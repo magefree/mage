@@ -34,7 +34,7 @@ public final class StagBeetle extends CardImpl {
 
         // Stag Beetle enters the battlefield with X +1/+1 counters on it, where X is the number of other creatures on the battlefield.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(),
-            new PermanentsOnBattlefieldCount(filter), false),
+            new PermanentsOnBattlefieldCount(filter)),
             "with X +1/+1 counters on it, where X is the number of other creatures on the battlefield"));
     }
 

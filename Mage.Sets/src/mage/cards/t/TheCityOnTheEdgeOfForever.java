@@ -58,7 +58,7 @@ public final class TheCityOnTheEdgeOfForever extends CardImpl {
 
         // II -- You draw two cards and each player loses 2 life.
         Effects effects2 = new Effects();
-        effects2.add(new DrawCardSourceControllerEffect(2));
+        effects2.add(new DrawCardSourceControllerEffect(2, true));
         effects2.add(new LoseLifeAllPlayersEffect(2).concatBy("and"));
         sagaAbility.addChapterEffect(
             this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_II, effects2

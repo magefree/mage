@@ -29,7 +29,7 @@ public class RepairAbility extends DiesSourceTriggeredAbility {
 
     public RepairAbility(int count) {
         super(new AddCountersSourceEffect(
-                CounterType.REPAIR.createInstance(), StaticValue.get(count), false, true));
+                CounterType.REPAIR.createInstance(), StaticValue.get(count), true));
         addSubAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
                 TargetController.YOU, new RemoveCounterSourceEffect(CounterType.REPAIR.createInstance()), false)
                 .setRuleVisible(false));

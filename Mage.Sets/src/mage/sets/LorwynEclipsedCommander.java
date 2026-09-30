@@ -28,6 +28,7 @@ public final class LorwynEclipsedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 55, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Signet", 56, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Archfiend of Ifnir", 70, Rarity.RARE, mage.cards.a.ArchfiendOfIfnir.class));
+        cards.add(new SetCardInfo("Ashling, the Limitless", 1, Rarity.MYTHIC, mage.cards.a.AshlingTheLimitless.class));
         cards.add(new SetCardInfo("Assassin's Trophy", 119, Rarity.RARE, mage.cards.a.AssassinsTrophy.class));
         cards.add(new SetCardInfo("Auntie Ool, Cursewretch", 2, Rarity.MYTHIC, mage.cards.a.AuntieOolCursewretch.class));
         cards.add(new SetCardInfo("Avenger of Zendikar", 98, Rarity.MYTHIC, mage.cards.a.AvengerOfZendikar.class));

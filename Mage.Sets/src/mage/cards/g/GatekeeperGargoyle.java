@@ -33,8 +33,7 @@ public final class GatekeeperGargoyle extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(
                         CounterType.P1P1.createInstance(),
-                        GateYouControlCount.instance, true
-                ), "with a +1/+1 counter on it for each Gate you control"
+                        GateYouControlCount.instance), "with a +1/+1 counter on it for each Gate you control"
         ).addHint(GatesYouControlHint.instance));
     }
 

@@ -24,7 +24,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- * @author sobiech
+ * @author Meowcelia
  */
 public final class AethericAmplifier extends CardImpl {
 

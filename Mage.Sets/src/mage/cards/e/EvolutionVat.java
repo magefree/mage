@@ -35,7 +35,7 @@ public final class EvolutionVat extends CardImpl {
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
         effect.setText("and put a +1/+1 counter on it");
         ability.addEffect(effect);
-        effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(), new CountersSourceCount(CounterType.P1P1), false);
+        effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(), new CountersSourceCount(CounterType.P1P1));
         effect.setText("Double the number of +1/+1 counters on this creature");
         Ability gainedAbility = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{2}{G}{U}"));
         ability.addEffect(new GainAbilityTargetEffect(gainedAbility, Duration.EndOfTurn,

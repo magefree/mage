@@ -39,7 +39,7 @@ public final class Momentum extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, you may put a growth counter on Momentum.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.GROWTH.createInstance(), true), true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.GROWTH.createInstance()), true));
 
         // Enchanted creature gets +1/+1 for each growth counter on Momentum.
         this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(new CountersSourceCount(CounterType.GROWTH), new CountersSourceCount(CounterType.GROWTH))));

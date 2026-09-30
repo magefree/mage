@@ -4,7 +4,6 @@ import mage.ConditionalMana;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.abilities.mana.ConditionalColoredManaAbility;
@@ -69,7 +68,7 @@ class AdarkarUnicornConditionalMana extends ConditionalMana {
     }
 }
 
-class AdarkarUnicornManaCondition extends ManaCondition implements Condition {
+class AdarkarUnicornManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {

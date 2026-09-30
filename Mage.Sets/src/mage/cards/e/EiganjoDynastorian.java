@@ -19,7 +19,7 @@ import mage.constants.CardType;
 public final class EiganjoDynastorian extends PrepareCard {
 
     public EiganjoDynastorian(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}", "Replenish", new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}", "Replenish", new CardType[]{CardType.SORCERY}, "{3}{W}");
 
         this.subtype.add(SubType.FOX);
         this.subtype.add(SubType.ADVISOR);

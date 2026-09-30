@@ -38,7 +38,7 @@ public final class CentaurVinecrasher extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Centaur Vinecrasher enters the battlefield with a number of +1/+1 counters on it equal to the number of land cards in all graveyards.
-        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new CardsInAllGraveyardsCount(new FilterLandCard()), true);
+        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new CardsInAllGraveyardsCount(new FilterLandCard()));
         effect.setText("with a number of +1/+1 counters on it equal to the number of land cards in all graveyards");
         this.addAbility(new EntersBattlefieldAbility(effect));
         // Whenever a land card is put into a graveyard from anywhere, you may pay {G}{G}. If you do, return Centaur Vinecrasher from your graveyard to your hand.

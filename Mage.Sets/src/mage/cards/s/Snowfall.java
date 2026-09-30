@@ -6,7 +6,6 @@ import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.mana.ManaEffect;
@@ -153,7 +152,7 @@ class SnowfallConditionalMana extends ConditionalMana {
     }
 }
 
-class SnowfallManaCondition extends ManaCondition implements Condition {
+class SnowfallManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -5,7 +5,6 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.mana.AddConditionalColorlessManaEffect;
@@ -95,7 +94,7 @@ class ThranTurbineConditionalMana extends ConditionalMana {
     }
 }
 
-class ThranTurbineManaCondition extends ManaCondition implements Condition {
+class ThranTurbineManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source, UUID originalId, Cost costToPay) {

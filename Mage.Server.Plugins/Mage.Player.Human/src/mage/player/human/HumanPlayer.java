@@ -2385,6 +2385,14 @@ public class HumanPlayer extends PlayerImpl {
         // force to show ability picker for double faces cards in hand/commander/exile and other zones
         Card mainCard = game.getCard(CardUtil.getMainCardId(game, ability.getSourceId()));
         if (mainCard != null && !Zone.BATTLEFIELD.equals(game.getState().getZone(mainCard.getId()))) {
+            if (mainCard instanceof CardWithSpellOption) {
+                CardWithSpellOption card = (CardWithSpellOption) mainCard;
+                boolean mainAvailable = card.isMainCardCastOptionAvailable(game);
+                boolean spellAvailable = card.isSpellCardCastOptionAvailable(game);
+                if (mainAvailable != spellAvailable) {
+                    return true;
+                }
+            }
             if (mainCard instanceof SplitCard
                     || mainCard instanceof CardWithSpellOption
                     || mainCard instanceof ModalDoubleFacedCard) {
@@ -2564,9 +2572,11 @@ public class HumanPlayer extends PlayerImpl {
             }
 
             // done button for "for up" choices only
-            boolean canEndChoice = (modes.getSelectedModes().size() >= modes.getMinModes() && modes.getMaxPawPrints() == 0) ||
-                    (modes.getSelectedPawPrints() >= modes.getMaxPawPrints() && modes.getMaxPawPrints() > 0) ||
-                    modes.isMayChooseNone();
+            boolean isValidSelection = 
+                (modes.getMaxPawPrints() == 0 && modes.getSelectedModes().size() >= modes.getMinModes())
+                || (modes.getMaxPawPrints() > 0 && modes.getSelectedPawPrints() <= modes.getMaxPawPrints())
+                || (modes.isMayChooseNone() && modes.getSelectedModes().isEmpty());
+            boolean canEndChoice = isValidSelection;
             if (canEndChoice) {
                 modeMap.put(Modes.CHOOSE_OPTION_DONE_ID, "Done");
             }
@@ -2595,11 +2605,14 @@ public class HumanPlayer extends PlayerImpl {
             // process choice
             UUID responseId = getFixedResponseUUID(game);
             if (responseId != null) {
-                for (Mode mode : modes.getAvailableModes(source, game)) {
-                    if (mode.getId().equals(responseId)) {
+                for (Mode responseMode : modes.getAvailableModes(source, game).stream()
+                        .filter(mode -> modes.isMayChooseSameModeMoreThanOnce() || !modes.getSelectedModes().contains(mode.getId()))
+                        .filter(mode -> mode.getTargets().canChoose(source.getControllerId(), source, game))
+                        .collect(Collectors.toList())) {
+                    if (responseMode.getId().equals(responseId)) {
                         // TODO: add checks on 2x selects (cheaters can rewrite client side code and select same mode multiple times)
                         // reason: wrong setup eachModeMoreThanOnce and eachModeOnlyOnce in many cards
-                        return mode;
+                        return responseMode;
                     }
                 }
 

@@ -28,7 +28,7 @@ public final class PrismArray extends CardImpl {
 
         // <i>Converge</i> &mdash; Prism Array enters the battlefield with a crystal counter on it for each color of mana spent to cast it.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.CRYSTAL.createInstance(), ColorsOfManaSpentToCastCount.getInstance(), true),
+                new AddCountersSourceEffect(CounterType.CRYSTAL.createInstance(), ColorsOfManaSpentToCastCount.getInstance()),
                 null, "<i>Converge</i> &mdash; {this} enters with a crystal counter on it for each color of mana spent to cast it.", null));
         this.getSpellAbility().addHint(ColorsOfManaSpentToCastCount.getHint());
 

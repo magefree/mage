@@ -70,6 +70,7 @@ public class Legacy extends Constructed {
         banned.add("Sowing Mycospawn");
         banned.add("Strip Mine");
         banned.add("Survival of the Fittest");
+        banned.add("The Fantasticar");
         banned.add("Time Vault");
         banned.add("Time Walk");
         banned.add("Timetwister");

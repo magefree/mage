@@ -99,10 +99,10 @@ public class LondonMulligan extends Mulligan {
         openingHandSizes.put(playerId, openingHandSizes.get(playerId) - deduction);
         int newHandSize = openingHandSizes.get(player.getId());
         if (deduction == 0) {
-            game.fireInformEvent(player.getLogName() +
+            game.informPlayers(player.getLogName() +
                     " mulligans for free.");
         } else {
-            game.fireInformEvent(player.getLogName() +
+            game.informPlayers(player.getLogName() +
                     " mulligans down to " +
                     newHandSize +
                     (newHandSize == 1 ? " card" : " cards"));
