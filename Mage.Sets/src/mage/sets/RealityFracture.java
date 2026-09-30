@@ -214,6 +214,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Kindred Judgment", 322, Rarity.RARE, mage.cards.k.KindredJudgment.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kindred Judgment", 450, Rarity.RARE, mage.cards.k.KindredJudgment.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kiora of Fire and Ashes", 247, Rarity.UNCOMMON, mage.cards.k.KioraOfFireAndAshes.class));
+        cards.add(new SetCardInfo("Kiora of Salt and Sand", 273, Rarity.UNCOMMON, mage.cards.k.KioraOfSaltAndSand.class));
         cards.add(new SetCardInfo("Konstrari Annex", 183, Rarity.COMMON, mage.cards.k.KonstrariAnnex.class));
         cards.add(new SetCardInfo("Konstrari Charm", 138, Rarity.UNCOMMON, mage.cards.k.KonstrariCharm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Konstrari Charm", 433, Rarity.UNCOMMON, mage.cards.k.KonstrariCharm.class, NON_FULL_USE_VARIOUS));

@@ -3112,7 +3112,7 @@
 |TOK:FRA|Heartwood||HeartwoodToken|
 |TOK:FRA|Illusion||Illusion11Token|
 |TOK:FRA|Jace||JacePlaneswalkerToken|
-# |TOK:FRA|Leviathan||Leviathan88Token|
+|TOK:FRA|Leviathan||Leviathan88Token|
 |TOK:FRA|Lotus||LotusToken|
 |TOK:FRA|Mowu||MowuToken|
 |TOK:FRA|Sculpture Treasure||SculptureTreasureToken|
