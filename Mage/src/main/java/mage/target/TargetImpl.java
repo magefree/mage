@@ -538,6 +538,14 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
+    public boolean hasChangedZones(UUID id, Game game) {
+        Card card = game.getCard(id);
+        return card != null
+                && zoneChangeCounters.containsKey(id)
+                && zoneChangeCounters.get(id) != card.getZoneChangeCounter(game);
+    }
+
+    @Override
     public boolean isLegal(Ability source, Game game) {
         //20101001 - 608.2b
         Set<UUID> illegalTargets = new HashSet<>();
@@ -551,9 +559,7 @@ public abstract class TargetImpl implements Target {
                     illegalTargets.add(targetId);
                     continue; // it's not legal so continue to have a look at other targeted objects
                 }
-                // check if the card moved to another zone
-                if (zoneChangeCounters.containsKey(targetId)
-                        && zoneChangeCounters.get(targetId) != card.getZoneChangeCounter(game)) {
+                if (hasChangedZones(targetId, game)) {
                     illegalTargets.add(targetId);
                     continue; // it's not legal so continue to have a look at other targeted objects
                 }
