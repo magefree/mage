@@ -1,16 +1,87 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.choices.Choice;
+import mage.choices.ChoiceColor;
+import mage.constants.Outcome;
 import mage.constants.PhaseStep;
+import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
+import mage.game.Game;
+import mage.player.human.HumanPlayer;
+import mage.player.human.PlayerResponse;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
+
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Queue;
 
 /**
  * @author JayDi85
  */
 
 public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
+
+    private static class QueuedHumanPlayer extends HumanPlayer {
+
+        private final PlayerResponse response;
+        private final Queue<String> responses;
+        private int responseCount;
+
+        private QueuedHumanPlayer(PlayerResponse response, String... responses) {
+            super(new HumanPlayer("Test Player", RangeOfInfluence.ALL, 1), response);
+            this.response = response;
+            this.responses = new ArrayDeque<>(Arrays.asList(responses));
+        }
+
+        @Override
+        public boolean canRespond() {
+            return !responses.isEmpty();
+        }
+
+        @Override
+        protected boolean isExecutingMacro() {
+            return true;
+        }
+
+        @Override
+        protected void prepareForResponse(Game game) {
+        }
+
+        @Override
+        protected void waitForResponse(Game game) {
+            response.clear();
+            response.setString(responses.remove());
+            responseCount++;
+        }
+    }
+
+    @Test
+    public void test_HumanPlayer_InvalidChoiceRePrompts() {
+        PlayerResponse response = new PlayerResponse();
+        QueuedHumanPlayer player = new QueuedHumanPlayer(response, "Unknown", "Black");
+        Choice choice = new ChoiceColor();
+
+        Assert.assertTrue(player.choose(Outcome.Benefit, choice, currentGame));
+        Assert.assertTrue(choice.isChosen());
+        Assert.assertEquals("Black", choice.getChoice());
+        Assert.assertEquals(2, player.responseCount);
+    }
+
+    @Test
+    public void test_HumanPlayer_CancelChoice() {
+        PlayerResponse response = new PlayerResponse();
+        QueuedHumanPlayer player = new QueuedHumanPlayer(response, "");
+        Choice choice = new ChoiceColor();
+
+        Assert.assertFalse(player.choose(Outcome.Benefit, choice, currentGame));
+        Assert.assertFalse(choice.isChosen());
+        Assert.assertNull(choice.getChoice());
+        Assert.assertFalse(currentGame.hasEnded());
+    }
 
     @Test
     public void test_Playable_NoMana_NoConvoke() {
@@ -279,6 +350,50 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+    }
+
+    @Test
+    public void test_Other_MulticolorCreatureConvokeChoice() {
+        // {5}{B/G}{B/G}
+        // You can't spend mana to cast this spell.
+        // Convoke, delve
+        addCard(Zone.GRAVEYARD, playerA, "Hogaak, Arisen Necropolis", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Lluwen, Imperfect Naturalist", 1); // black and green convoke pay
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears", 1); // green convoke pay
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 5); // generic convoke pay
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hogaak, Arisen Necropolis");
+        addTarget(playerA, "Lluwen, Imperfect Naturalist");
+        setChoice(playerA, "Black");
+        addTarget(playerA, "Grizzly Bears");
+        addTarget(playerA, "Balduvian Bears", 5);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Hogaak, Arisen Necropolis", 1);
+        assertTapped("Lluwen, Imperfect Naturalist", true);
+    }
+
+    @Test
+    public void test_Other_CancelMulticolorCreatureConvokeChoice() {
+        addCard(Zone.GRAVEYARD, playerA, "Hogaak, Arisen Necropolis", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Lluwen, Imperfect Naturalist", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 6);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hogaak, Arisen Necropolis");
+        addTarget(playerA, "Lluwen, Imperfect Naturalist");
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
+        setChoice(playerA, TestPlayer.SKIP_FAILED_COMMAND);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Hogaak, Arisen Necropolis", 1);
+        assertTapped("Lluwen, Imperfect Naturalist", false);
+        Assert.assertFalse(currentGame.hasEnded());
     }
 
     @Test
