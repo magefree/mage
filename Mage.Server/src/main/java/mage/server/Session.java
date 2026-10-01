@@ -84,10 +84,6 @@ public class Session {
     private final ClientCallbacksQueue callbacksQueue = new ClientCallbacksQueue(); // queue with waiting callback to send
     private final AtomicBoolean sending = new AtomicBoolean(); // one of the thread sending the callback
 
-    // up to 20 messages per flush task: a burst of queued messages (e.g. game logs) must not wait
-    // for a next sender or a next expire check, but a single task must stay short on a bad connection
-    private static final int FLUSH_MAX_ROUNDS = 10;
-
     public Session(ManagerFactory managerFactory, String sessionId, InvokerCallbackHandler callbackHandler) {
         this.managerFactory = managerFactory;
         this.sessionId = sessionId;
@@ -502,7 +498,8 @@ public class Session {
 
             try {
                 // two per call is enough to make a queue shrink while messages keep coming
-                // e.g. increse queue on bad connection and decrease queue on return to good connection
+                // e.g. increase queue on bad connection and decrease queue on good connection;
+                // the rest of the queue is taken by flush re-run in finally
                 for (int i = 0; i < 2; i++) {
                     ClientCallback next = this.callbacksQueue.poll();
                     if (next == null) {
@@ -517,6 +514,12 @@ public class Session {
                 }
             } finally {
                 this.sending.set(false);
+                // re-run flush on new messages (if something come from other threads while sending)
+                // test lab's s05 scenarios with slow clients
+                // so no needs to wait 30 secs for global checkExpired
+                if (!this.callbacksQueue.isEmpty()) {
+                    flushCallbacksQueue();
+                }
             }
         } finally {
             // drop stats
@@ -583,11 +586,10 @@ public class Session {
             return;
         }
         managerFactory.threadExecutor().getCallExecutor().execute(() -> {
-            // each round sends up to two messages, see fireCallback;
-            // if another thread is sending already, a round returns at once
-            for (int i = 0; i < FLUSH_MAX_ROUNDS && !this.callbacksQueue.isEmpty(); i++) {
-                fireCallback(null);
-            }
+            // one send round per task (up to two messages, see fireCallback)
+            // if new messages arrive while sending then it's will create a new flush task
+            // no blocking code here, it's safe to call multiple flushes, only one will really work
+            managerFactory.threadExecutor().getCallExecutor().execute(() -> fireCallback(null));
         });
     }
 
