@@ -3,6 +3,7 @@ package mage.cards.l;
 import mage.MageInt;
 import mage.abilities.condition.common.ControlYourCommanderCondition;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
+import mage.abilities.hint.common.ControlYourCommanderHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
@@ -33,7 +34,9 @@ public final class LoyalGuardian extends CardImpl {
         // Lieutenant — At the beginning of combat on your turn, if you control your commander, put a +1/+1 counter on each creature you control.
         this.addAbility(new BeginningOfCombatTriggeredAbility(new AddCountersAllEffect(
                 CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE
-        )).withInterveningIf(ControlYourCommanderCondition.instance).setAbilityWord(AbilityWord.LIEUTENANT));
+        )).withInterveningIf(ControlYourCommanderCondition.instance)
+                .setAbilityWord(AbilityWord.LIEUTENANT)
+                .addHint(ControlYourCommanderHint.instance));
     }
 
     private LoyalGuardian(final LoyalGuardian card) {

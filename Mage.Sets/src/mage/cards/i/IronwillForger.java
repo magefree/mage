@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.ControlYourCommanderCondition;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.hint.common.ControlYourCommanderHint;
 import mage.abilities.keyword.MyriadAbility;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
@@ -43,6 +44,7 @@ public final class IronwillForger extends CardImpl {
                 new GainAbilityTargetEffect(new MyriadAbility(false))
         ).withInterveningIf(ControlYourCommanderCondition.instance);
         ability.addTarget(new TargetPermanent(filter));
+        ability.addHint(ControlYourCommanderHint.instance);
         this.addAbility(ability.setAbilityWord(AbilityWord.LIEUTENANT));
     }
 
