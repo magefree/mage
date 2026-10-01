@@ -1,15 +1,9 @@
 package mage.cards.a;
 
-import mage.ApprovingObject;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromHandSourcePermanentCondition;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -27,9 +21,7 @@ import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.common.CastFromHandWatcher;
 
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author Susucr
@@ -91,35 +83,9 @@ class AmpedRaptorEffect extends OneShotEffect {
         for (Card card : controller.getLibrary().getCards(game)) {
             controller.moveCards(card, Zone.EXILED, source, game);
             if (!card.isLand(game)) {
-                List<Card> castableComponents = CardUtil.getCastableComponents(card, null, source, controller, game, null, false);
-                if (castableComponents.isEmpty()) {
-                    break;
-                }
-                String partsInfo = castableComponents
-                        .stream()
-                        .map(MageObject::getLogName)
-                        .collect(Collectors.joining(" or "));
-                if (!controller.chooseUse(Outcome.PlayForFree, "Cast spell by paying energy instead of mana (" + partsInfo + ")?", source, game)) {
-                    break;
-                }
-                castableComponents.forEach(partCard -> game.getState().setValue("PlayFromNotOwnHandZone" + partCard.getId(), Boolean.TRUE));
-                SpellAbility chosenAbility = controller.chooseAbilityForCast(card, game, true);
-                if (chosenAbility != null) {
-                    Card faceCard = game.getCard(chosenAbility.getSourceId());
-                    if (faceCard != null) {
-                        // pay energy instead of mana cost
-                        PayEnergyCost energyCost = new PayEnergyCost(faceCard.getManaValue());
-                        Costs<Cost> newCosts = new CostsImpl<>();
-                        newCosts.add(energyCost);
-                        newCosts.addAll(chosenAbility.getCosts());
-                        controller.setCastSourceIdWithAlternateMana(faceCard.getId(), null, newCosts);
-                        controller.cast(
-                                chosenAbility, game, true,
-                                new ApprovingObject(source, game)
-                        );
-                    }
-                }
-                castableComponents.forEach(partCard -> game.getState().setValue("PlayFromNotOwnHandZone" + partCard.getId(), null));
+                CardUtil.castSpellWithAttributesForCost(controller, source, game, card, null,
+                        "Cast spell by paying energy instead of mana",
+                        faceCard -> new PayEnergyCost(faceCard.getManaValue()));
                 break;
             }
         }
