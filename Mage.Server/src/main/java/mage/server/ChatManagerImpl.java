@@ -367,8 +367,10 @@ public class ChatManagerImpl implements ChatManager {
         // warning, massive broadcast must be done in async style
         managerFactory.userManager().getUser(userId).ifPresent(user
                 -> managerFactory.threadExecutor().getCallExecutor().execute(() -> {
+            UUID mainChatId = managerFactory.gamesRoomManager().getMainChatId();
             List<ChatSession> chatSessions = getChatSessions()
                     .stream()
+                    .filter(chat -> !chat.getChatId().equals(mainChatId)) // ignore main lobby, it's for real user messages only
                     .filter(chat -> chat.hasUser(userId, true))
                     .collect(Collectors.toList());
             if (!chatSessions.isEmpty()) {
