@@ -141,7 +141,7 @@ public class GameViewTest extends CardTestPlayerBase {
 
         // fake session without real threads manager
         GameSessionWatcher sessionWatcher = new GameSessionWatcher(null, UUID.randomUUID(), currentGame, false);
-        sessionWatcher.startWithGameView(GameSessionWatcher.generateDefaultGameView(currentGame));
+        sessionWatcher.startWithGameView(GameSessionWatcher.generateDefaultGameViewForWatcher(currentGame));
         copiesBefore = currentGame.getCopiedCount();
         viewsBefore = GameView.CREATED_COUNT.get();
         startMs = System.currentTimeMillis();

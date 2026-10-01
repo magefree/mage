@@ -35,6 +35,7 @@ import mage.view.ChatMessage.MessageType;
 import org.apache.log4j.Logger;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.*;
@@ -51,6 +52,9 @@ public class GameController implements GameCallback {
 
     private static final int GAME_TIMEOUTS_CHECK_JOINING_STATUS_EVERY_SECS = 10; // checks and inform players about joining status
     private static final int GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS = 2 * 60; // leave player from game if it don't join and inactive on server
+
+    // use fake id for shared logic between player and watcher sessions
+    private static final UUID WATCHER_SESSION_FAKE_PLAYER_ID = UUID.nameUUIDFromBytes("fakeWatcher".getBytes(StandardCharsets.UTF_8));
 
     private final ExecutorService gameExecutor;
     private static final Logger logger = Logger.getLogger(GameController.class);
@@ -80,7 +84,7 @@ public class GameController implements GameCallback {
     private boolean useResponseIdleTimeout = true; // control currently active player (if no response for 600 seconds then concede him)
     private final GameOptions gameOptions;
 
-    private GameView defaultGameView = null; // default game view on first connect
+    private ConcurrentHashMap<UUID, GameView> defaultGameViews = new ConcurrentHashMap<>(); // default game views on first connect
 
     private UUID userRequestingRollback;
     private int turnsToRollback;
@@ -314,7 +318,7 @@ public class GameController implements GameCallback {
         String joinType;
         if (gameSession == null) {
             gameSession = new GameSessionPlayer(managerFactory, game, userId, playerId);
-            gameSession.startWithGameView(this.defaultGameView); // it's null here, real view on game start
+            gameSession.startWithGameView(null); // it's null here, real default view generates on game start
             final Lock w = gameSessionsLock.writeLock();
             w.lock();
             try {
@@ -340,9 +344,18 @@ public class GameController implements GameCallback {
             }
 
             // init game views in current thread before real game thread strated -- it's safe place here
-            this.defaultGameView = GameSessionWatcher.generateDefaultGameView(game);
+            // players - per player view (cause human controlled player has special GUI like hints, cheat, etc)
+            // watchers - shared view
+            this.defaultGameViews.clear();
+            this.defaultGameViews.put(
+                WATCHER_SESSION_FAKE_PLAYER_ID, 
+                GameSessionWatcher.generateDefaultGameViewForWatcher(game)
+            );
             for (GameSessionPlayer gameSessionPlayer : getGameSessions()) {
-                gameSessionPlayer.startWithGameView(this.defaultGameView);
+                this.defaultGameViews.put(
+                    gameSessionPlayer.getPlayerId(), 
+                    GameSessionPlayer.generateDefaultGameViewForPlayer(game, gameSessionPlayer.getPlayerId())
+                );
             }
 
             // send first info to users
@@ -487,7 +500,7 @@ public class GameController implements GameCallback {
         }
         managerFactory.userManager().getUser(userId).ifPresent(user -> {
             GameSessionWatcher gameWatcher = new GameSessionWatcher(managerFactory.userManager(), userId, game, false);
-            gameWatcher.startWithGameView(this.defaultGameView);
+            gameWatcher.startWithGameView(this.defaultGameViews.get(WATCHER_SESSION_FAKE_PLAYER_ID));
             final Lock w = gameWatchersLock.writeLock();
             w.lock();
             try {

@@ -40,6 +40,14 @@ public class GameSessionPlayer extends GameSessionWatcher {
         this.playerId = playerId;
     }
 
+    static public GameView generateDefaultGameViewForPlayer(Game game, UUID playerId) {
+        return new GameView(game.getState(), game, playerId, null);
+    }
+
+    public UUID getPlayerId() {
+        return this.playerId;
+    }
+
     @Override
     public void cleanUp() {
         super.cleanUp();

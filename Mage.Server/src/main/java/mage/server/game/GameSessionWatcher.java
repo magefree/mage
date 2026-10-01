@@ -127,7 +127,7 @@ public class GameSessionWatcher {
         }
     }
 
-    static public GameView generateDefaultGameView(Game game) {
+    static public GameView generateDefaultGameViewForWatcher(Game game) {
         return new GameView(game.getState(), game, null, UUID.randomUUID());
     }
 
