@@ -35,6 +35,8 @@ public final class RealityFractureCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Contaminated Landscape", 68, Rarity.COMMON, mage.cards.c.ContaminatedLandscape.class));
         cards.add(new SetCardInfo("Currency Converter", 55, Rarity.RARE, mage.cards.c.CurrencyConverter.class));
         cards.add(new SetCardInfo("Cursed Mirror", 49, Rarity.RARE, mage.cards.c.CursedMirror.class));
+        cards.add(new SetCardInfo("Dack Fayden, Helping Hand", 4, Rarity.RARE, mage.cards.d.DackFaydenHelpingHand.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dack Fayden, Helping Hand", 89, Rarity.RARE, mage.cards.d.DackFaydenHelpingHand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Darksteel Angel", 98, Rarity.RARE, mage.cards.d.DarksteelAngel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Darksteel Angel", 13, Rarity.RARE, mage.cards.d.DarksteelAngel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Despark", 50, Rarity.UNCOMMON, mage.cards.d.Despark.class));
