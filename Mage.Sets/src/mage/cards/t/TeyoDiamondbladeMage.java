@@ -1,13 +1,6 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -16,9 +9,13 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.*;
+import mage.counters.CounterType;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -77,7 +74,8 @@ class TeyoDiamondbladeMageEffect extends OneShotEffect {
         if (permanent != null) {
             if (permanent.isCreature()) {
                 permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
-            } else if (permanent.isPlaneswalker()) {
+            }
+            if (permanent.isPlaneswalker()) {
                 permanent.addCounters(CounterType.LOYALTY.createInstance(), source.getControllerId(), source, game);
             }
         }

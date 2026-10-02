@@ -1,16 +1,17 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.common.DiesOneOrMoreTriggeredAbility;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -18,7 +19,7 @@ import mage.constants.CardType;
  */
 public final class GreatFierceBee extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("one or more other creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -35,7 +36,7 @@ public final class GreatFierceBee extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever one or more other creatures die, scry 1.
-        this.addAbility(new DiesCreatureTriggeredAbility(new ScryEffect(1), false, filter));
+        this.addAbility(new DiesOneOrMoreTriggeredAbility(new ScryEffect(1), filter, false));
     }
 
     private GreatFierceBee(final GreatFierceBee card) {

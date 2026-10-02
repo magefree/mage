@@ -68,7 +68,7 @@ class CeaselessConflictEffect extends OneShotEffect {
         }
         if (count > 0) {
             game.processAction();
-            new Spirit32Token().putOntoBattlefield(count, game, source, source.getControllerId(), true, false);
+            new Spirit32Token().putOntoBattlefield(count, game, source, source.getControllerId());
         }
         return true;
     }

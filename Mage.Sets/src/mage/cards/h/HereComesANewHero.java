@@ -1,7 +1,5 @@
 package mage.cards.h;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
@@ -20,6 +18,8 @@ import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.SecondTargetPointer;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -66,6 +66,6 @@ enum HereComesANewHeroAdjuster implements TargetAdjuster {
 
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with mana value " + xValue + " or less");
         filter.add(new ManaValuePredicate(ComparisonType.OR_LESS, xValue));
-        ability.addTarget(new TargetPermanent(filter).setTargetTag(2));
+        ability.addTarget(new TargetPermanent(0, 1, filter).setTargetTag(2));
     }
 }
