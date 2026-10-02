@@ -44,16 +44,15 @@ public final class GutterSkulker extends TransformingDoubleFacedCard {
                 "{this} can't be blocked as long as it's attacking alone"
         )));
 
+        // Disturb {3}{U}
+        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{3}{U}"));
+
         // Gutter Shortcut
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getRightHalfCard().getSpellAbility().addTarget(auraTarget);
         this.getRightHalfCard().getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.getRightHalfCard().addAbility(new EnchantAbility(auraTarget));
-
-        // Disturb {3}{U}
-        // needs to be added after right half has spell ability target set
-        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{3}{U}"));
 
         // Enchanted creature can't be blocked as long as it's attacking alone.
         this.getRightHalfCard().addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(

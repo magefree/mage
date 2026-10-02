@@ -45,6 +45,8 @@ public final class BrineComber extends TransformingDoubleFacedCard {
                 new EntersBattlefieldTriggeredAbility(null),
                 new BecomesTargetSourceTriggeredAbility(null, filter)));
 
+        // Disturb {W}{U}
+        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{W}{U}"));
 
         // Brinebound Gift
         // Enchant creature
@@ -52,10 +54,6 @@ public final class BrineComber extends TransformingDoubleFacedCard {
         this.getRightHalfCard().getSpellAbility().addTarget(auraTarget);
         this.getRightHalfCard().getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.getRightHalfCard().addAbility(new EnchantAbility(auraTarget));
-
-        // Disturb {W}{U}
-        // needs to be added after enchant ability is set for target
-        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{W}{U}"));
 
         // Whenever Brinebound Gift enters the battlefield or enchanted creature becomes the target of an Aura spell, create a 1/1 white Spirit creature token with flying.
         this.getRightHalfCard().addAbility(new OrTriggeredAbility(Zone.ALL, new CreateTokenEffect(new SpiritWhiteToken()), false,
