@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.condition.IntCompareCondition;
 import mage.constants.ComparisonType;
 import mage.counters.CounterType;
-import mage.counters.Counters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
@@ -12,8 +11,7 @@ import mage.util.CardUtil;
 import java.util.Optional;
 
 /**
- * Don't use ComparisonType.OR_GREATER with value 0.
- * A null counterType counts counters of every type.
+ * Don't use ComparisonType.OR_GREATER with value 0
  *
  * @author TheElk801
  */
@@ -32,6 +30,9 @@ public class SourceHasCounterCondition extends IntCompareCondition {
 
     public SourceHasCounterCondition(CounterType counterType, ComparisonType type, int value) {
         super(type, value);
+        if (counterType == null) {
+            throw new IllegalArgumentException("Wrong code usage: counterType param can't be empty, use SourceHasCountersCondition for any counter type");
+        }
         this.counterType = counterType;
     }
 
@@ -39,17 +40,13 @@ public class SourceHasCounterCondition extends IntCompareCondition {
     protected int getInputValue(Game game, Ability source) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (permanent != null) {
-            return getCount(permanent.getCounters(game));
+            return permanent.getCounters(game).getCount(counterType);
         }
         return Optional.ofNullable(source)
                 .map(Ability::getSourceId)
                 .map(game::getCard)
-                .map(card -> getCount(card.getCounters(game)))
+                .map(card -> card.getCounters(game).getCount(counterType))
                 .orElse(0);
-    }
-
-    private int getCount(Counters counters) {
-        return counterType == null ? counters.getTotalCount() : counters.getCount(counterType);
     }
 
     public SourceHasCounterCondition withText(String text) {
@@ -89,9 +86,6 @@ public class SourceHasCounterCondition extends IntCompareCondition {
                     case 0:
                         throw new IllegalArgumentException("0 or greater should not be used");
                     case 1:
-                        if (counterType == null) {
-                            return "{this} has a counter on it";
-                        }
                         return "{this} has " + counterType.getArticle() + ' ' + counterType.getName() + " counter on it";
                     default:
                         return "there are " + CardUtil.numberToText(value) + " or more " + counterType.getName() + " counters on {this}";
