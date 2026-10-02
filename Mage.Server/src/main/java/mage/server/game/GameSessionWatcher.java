@@ -79,8 +79,23 @@ public class GameSessionWatcher {
     }
 
     public void inform(final String message) {
+        inform(message, true);
+    }
+
+    /**
+     * @param message additional text to show in feedback panel after update the battlefield
+     * @param sendNow send it or wait next tick, e.g. fill and flush, see GameController.startGame as example
+     */
+    public void inform(final String message, boolean sendNow) {
         if (!killed) {
-            userManager.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_UPDATE_AND_INFORM, game.getId(), new GameClientMessage(getGameView(), null, message))));
+            userManager.getUser(userId).ifPresent(user -> {
+                ClientCallback call = new ClientCallback(ClientCallbackMethod.GAME_UPDATE_AND_INFORM, game.getId(), new GameClientMessage(getGameView(), null, message));
+                if (sendNow) {
+                    user.fireCallback(call);
+                } else {
+                    user.addCallback(call);
+                }
+            });
         }
     }
 

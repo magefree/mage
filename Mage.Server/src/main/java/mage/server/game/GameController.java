@@ -973,10 +973,11 @@ public class GameController implements GameCallback {
             destPlayers.add(watcher);
         }
 
-        // send in a separate thread
-        managerFactory.threadExecutor().getCallExecutor().execute(() ->
-            destPlayers.forEach(destPlayer -> destPlayer.inform(sendMessage))
-        );
+        // warning, it's game update so make sure it's actual for current time, not on sending time
+        // so prepare data now, send it later
+        // test lab's s10 scenario with enabled low CPU simulation
+        destPlayers.forEach(destPlayer -> destPlayer.inform(sendMessage, false));
+        destPlayers.forEach(destPlayer -> destPlayer.flushCallbacks());
     }
 
     private void informPersonal(UUID playerId, final String message) throws MageException {
