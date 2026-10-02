@@ -7,6 +7,7 @@ import mage.interfaces.callback.ClientCallbackMethod;
 import mage.interfaces.callback.ClientCallbacksQueue;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
+import mage.remote.CustomThreadPool;
 import mage.server.game.GamesRoom;
 import mage.server.managers.ConfigSettings;
 import mage.server.managers.ManagerFactory;
@@ -14,10 +15,9 @@ import mage.util.RandomUtil;
 import mage.util.ThreadUtils;
 import mage.utils.SystemUtil;
 import org.apache.log4j.Logger;
-import org.jboss.remoting.callback.AsynchInvokerCallbackHandler;
-import org.jboss.remoting.callback.Callback;
-import org.jboss.remoting.callback.HandleCallbackException;
-import org.jboss.remoting.callback.InvokerCallbackHandler;
+import org.jboss.remoting.callback.*;
+import org.jboss.util.threadpool.BlockingMode;
+import org.jboss.remoting.Client;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -49,6 +49,10 @@ public class Session {
     // - if server can't remove another user intance then restrict to connect (example: anon user connected, but there is another anon with diff IP)
     private static final boolean ANON_IDENTIFY_BY_HOST = true; // for anon mode only: true - kick all other users with same IP; false - keep first connected user
 
+    // TODO: async mode is outdated after network rework in #16434 (before rework it's never really works)
+    //   it's adds 2 secs timeout on each slow client call for client recive signal
+    //   DELETE after few releases
+    //
     // async data transfer for all callbacks (transfer of game updates from server to client):
     // - pros:
     //   * SIGNIFICANT performance boost and pings (yep, that's true);
@@ -92,6 +96,35 @@ public class Session {
         this.timeConnected = new Date();
         this.lock = new ReentrantLock();
         this.callBackLock = new ReentrantLock();
+
+        // inject custom thread pool instead buggy jboss's
+        if (ASYNC_MESSAGES) {
+            setupAsyncSendingPool(callbackHandler);
+        }
+    }
+
+    /**
+     * Async mode only, e.g. callbackHandler.handleCallbackOneway(callback, true);
+     *
+     * Inject improved oneway thread for better lifecycle control and memory leaks fixes,
+     * see CustomThreadPool for more details
+     *
+     * Must be called before a first async send
+     */
+    private static void setupAsyncSendingPool(InvokerCallbackHandler handler) {
+        if (!(handler instanceof ServerInvokerCallbackHandler)) {
+            logger.warn("Unknown callback handler, async sending pool is not replaced: " + handler.getClass().getName());
+            return;
+        }
+        Client client = ((ServerInvokerCallbackHandler) handler).getCallbackClient();
+        if (client == null) {
+            logger.warn("Callback client is missing, async sending pool is not replaced");
+            return;
+        }
+        CustomThreadPool pool = new CustomThreadPool("JBossRemoting Client Oneway fixed");
+        pool.setMaximumPoolSize(1); // send one by one, it's help to keep better message order
+        pool.setBlockingMode(BlockingMode.RUN); // if client freeze and wait queue reach the limit in 1024 then parent thread will call it directly without pool (same as default jboss's pool does)
+        client.setOnewayThreadPool(pool);
     }
 
     public String registerUser(String userName, String password, String email) {
@@ -547,7 +580,7 @@ public class Session {
             if (valid) {
                 // connection busy by another message, skip current call and send next time (depends on queue)
                 logger.warn("SESSION LOCK, possible connection problem - fireCallback - userId: "
-                    + userId + ", prev call: " + lastCallbackInfo + ", current call: " + call.getInfo());
+                        + userId + ", prev call: " + lastCallbackInfo + ", current call: " + call.getInfo());
                 return false; // keep call
             }
             return true; // session is dead, no need to keep a message
@@ -558,14 +591,14 @@ public class Session {
             // general error
             // can raise on server freeze or normal connection problem from a client side
             // no need to print a full stack log here
-            logger.warn("SESSION CALLBACK EXCEPTION - " + ThreadUtils.findRootException(ex) 
-                + ", userId " + userId + ", messageId: " + call.getMessageId());
+            logger.warn("SESSION CALLBACK EXCEPTION - " + ThreadUtils.findRootException(ex)
+                    + ", userId " + userId + ", messageId: " + call.getMessageId());
             this.valid = false; // do not send data anymore (user must reconnect)
             managerFactory.sessionManager().disconnect(sessionId, DisconnectReason.LostConnection, true);
             return true;
         } catch (Throwable ex) {
             logger.error("SESSION CALLBACK UNKNOWN EXCEPTION - " + ThreadUtils.findRootException(ex)
-                + ", userId " + userId + ", messageId: " + call.getMessageId(), ex);
+                    + ", userId " + userId + ", messageId: " + call.getMessageId(), ex);
             this.valid = false; // do not send data anymore (user must reconnect)
             managerFactory.sessionManager().disconnect(sessionId, DisconnectReason.LostConnection, true);
             return true;
