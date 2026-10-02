@@ -1,8 +1,6 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -13,8 +11,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.SpellAbilityCastMode;
+import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.stack.Spell;
+
+import java.util.UUID;
 
 /**
  *
@@ -62,8 +63,8 @@ class TwinnedVisionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean castFromHand = source instanceof SpellAbility
-            && ((SpellAbility) source).getSpellAbilityCastMode() == SpellAbilityCastMode.NORMAL;
+        Spell spell = game.getStack().getSpell(source.getSourceId());
+        boolean castFromHand = spell != null && spell.getFromZone() == Zone.HAND;
         int amount = castFromHand ? 1 : 2;
         return new DrawCardSourceControllerEffect(amount).apply(game, source);
     }

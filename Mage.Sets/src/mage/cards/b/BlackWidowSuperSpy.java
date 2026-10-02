@@ -8,12 +8,7 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -95,7 +90,9 @@ class BlackWidowSuperSpyEffect extends OneShotEffect {
             return true;
         }
 
-        CardUtil.makeCardPlayable(game, source, cardToCast, true, Duration.EndOfTurn, true);
+        if (cardToCast != null) {
+            CardUtil.makeCardPlayable(game, source, cardToCast, true, Duration.EndOfTurn, true);
+        }
         return true;
     }
 }

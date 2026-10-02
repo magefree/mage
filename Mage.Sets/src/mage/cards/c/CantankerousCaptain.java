@@ -1,19 +1,21 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.FormidableCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
-import mage.constants.SubType;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +36,7 @@ public final class CantankerousCaptain extends CardImpl {
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addEffect(new ConditionalContinuousEffect(
             new GainAbilityTargetEffect(new MenaceAbility()),
-            FormidableCondition.instance,
+            new LockedInCondition(FormidableCondition.instance),
             "Then that creature gains menace until end of turn if creatures you control have total power 8 or greater"
         ));
         this.addAbility(ability);

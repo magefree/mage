@@ -86,7 +86,8 @@ class BlossombindUntapEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return source.getSourceId().equals(event.getTargetId());
+        Permanent aura = game.getPermanent(source.getSourceId());
+        return aura != null && event.getTargetId().equals(aura.getAttachedTo());
     }
 }
 

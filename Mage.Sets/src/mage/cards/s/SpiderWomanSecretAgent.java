@@ -1,13 +1,6 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.target.TargetPermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -15,9 +8,13 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.*;
+import mage.filter.StaticFilters;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +56,7 @@ public final class SpiderWomanSecretAgent extends CardImpl {
 class SpiderWomanSecretAgentEffect extends ReplacementEffectImpl {
 
     SpiderWomanSecretAgentEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Tap);
+        super(Duration.WhileControlled, Outcome.Tap);
         staticText = "That creature can't become untapped for as long as you control {this}";
     }
 
@@ -84,6 +81,6 @@ class SpiderWomanSecretAgentEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return source.getSourceId().equals(event.getTargetId());
+        return event.getTargetId().equals(getTargetPointer().getFirst(game, source));
     }
 }

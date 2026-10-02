@@ -1,28 +1,26 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.ExileFromGraveCost;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.mana.BasicManaEffect;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.game.Game;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.TargetController;
+import mage.game.Game;
+import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +42,7 @@ public final class RubbleRouser extends CardImpl {
         ));
 
         // {T}, Exile a card from your graveyard: Add {R}. When you do, this creature deals 1 damage to each opponent.
-        Ability ability = new SimpleActivatedAbility(new BasicManaEffect(Mana.RedMana(1)), new TapSourceCost());
+        Ability ability = new RedManaAbility();
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard()));
         ability.addEffect(new RubbleRouserDamageEffect());
         this.addAbility(ability);

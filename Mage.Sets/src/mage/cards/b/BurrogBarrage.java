@@ -1,11 +1,8 @@
 package mage.cards.b;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.DamageWithPowerFromOneToAnotherTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -19,6 +16,10 @@ import mage.game.stack.Spell;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 import mage.watchers.common.SpellsCastWatcher;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +37,7 @@ public final class BurrogBarrage extends CardImpl {
         // Target creature you control gets +1/+0 until end of turn if you've cast another instant or sorcery spell this turn. Then it deals damage equal to its power to up to one target creature an opponent controls.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
             new BoostTargetEffect(1, 0),
-            BurrogBarrageCondition.instance,
+            new LockedInCondition(BurrogBarrageCondition.instance),
             "Target creature you control gets +1/+0 until end of turn if you've cast another instant or sorcery spell this turn"
         ));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
@@ -45,7 +46,7 @@ public final class BurrogBarrage extends CardImpl {
             new DamageWithPowerFromOneToAnotherTargetEffect()
                 .setText("Then it deals damage equal to its power to up to one target creature an opponent controls")
         );
-        this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent(0, 1));
         this.getSpellAbility().addHint(hint);
     }
 

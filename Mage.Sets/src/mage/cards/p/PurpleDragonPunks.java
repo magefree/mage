@@ -1,7 +1,5 @@
 package mage.cards.p;
 
-import java.util.UUID;
-
 import mage.ConditionalMana;
 import mage.MageInt;
 import mage.MageObject;
@@ -10,11 +8,13 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.mana.ConditionalColoredManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
-import mage.constants.SubType;
-import mage.game.Game;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -71,6 +71,6 @@ enum PurpleDragonPunksCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source);
-        return object != null && (object.isArtifact(game) || source.isActivated());
+        return object != null && (object.isArtifact(game) || (source.isActivatedAbility() && !source.isActivated()));
     }
 }

@@ -1,10 +1,9 @@
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.ConditionalMana;
-import mage.Mana;
 import mage.MageInt;
 import mage.MageObject;
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersPreparedAbility;
@@ -14,14 +13,16 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.mana.AddConditionalColorlessManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
+import mage.cards.CardSetInfo;
+import mage.cards.PrepareCard;
+import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.HeartwoodToken;
 import mage.game.stack.Spell;
-import mage.cards.CardSetInfo;
-import mage.cards.PrepareCard;
-import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *
@@ -93,7 +94,8 @@ enum HeartwoodCrafterManaCondition implements Condition {
         }
         MageObject object = game.getObject(source);
         if (!source.isControlledBy(game.getOwnerId(object))) {
-            return false;
+            // a card you don't own can't be cast from your hand
+            return true;
         }
         if (object instanceof Spell) {
             return ((Spell) object).getFromZone() != Zone.HAND;

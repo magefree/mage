@@ -1,6 +1,5 @@
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -19,6 +18,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -82,6 +83,6 @@ class FlourishingGrappleEffect extends OneShotEffect {
         if (sourcePermanent == null || targetPermanent == null) {
             return false;
         }
-        return targetPermanent.damage(sourcePermanent.getPower().getValue(), source.getSourceId(), source, game) > 0;
+        return targetPermanent.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), source, game) > 0;
     }
 }
