@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.permanent.OtherThanEnteringPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -29,7 +29,7 @@ public final class RoilingCanopy extends CardImpl {
     static {
         forestFilter.add(SubType.FOREST.getPredicate());
         otherForestsFilter.add(SubType.FOREST.getPredicate());
-        otherForestsFilter.add(AnotherPredicate.instance);
+        otherForestsFilter.add(OtherThanEnteringPredicate.instance);
     }
 
     public RoilingCanopy(UUID ownerId, CardSetInfo setInfo) {

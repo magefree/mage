@@ -56,6 +56,32 @@ public class ValakutTheMoltenPinnacleTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * "Other" means other than the Mountain that entered. If that Mountain leaves before the trigger
+     * resolves, the five Mountains left still satisfy the intervening "if".
+     */
+    @Test
+    public void enteringMountainLeavesBeforeResolution() {
+        addCard(Zone.BATTLEFIELD, playerA, "Valakut, the Molten Pinnacle");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.HAND, playerA, "Stomping Ground");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.HAND, playerB, "Boomerang"); // {U}{U} Instant: Return target permanent to its owner's hand.
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Stomping Ground");
+        setChoice(playerA, false); // don't pay 2 life, so it enters tapped
+        addTarget(playerA, playerB); // Valakut's target
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Boomerang", "Stomping Ground", "Whenever a Mountain");
+        setChoice(playerA, true); // yes to deal damage
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertHandCount(playerA, "Stomping Ground", 1);
+        assertLife(playerB, 20 - 3);
+    }
+
     // Scapeshift {2}{G}{G}
     // Sorcery
     // Sacrifice any number of lands. Search your library for that many land cards, put them onto the battlefield tapped, then shuffle your library.
