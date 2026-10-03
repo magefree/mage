@@ -31,6 +31,7 @@ import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.events.BatchEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.NumberOfTriggersEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -1411,6 +1412,24 @@ public abstract class AbilityImpl implements Ability {
             //   - ability's task: code like ability.setLookBackInTime
             //   - event's task: code like current switch
             // TODO: alternative solution: replace check by source.isLeavesTheBattlefieldTrigger?
+
+            if(e instanceof NumberOfTriggersEvent) {
+                // For Trigger Duplication Events
+                // Get the creating Event
+                GameEvent g = ((NumberOfTriggersEvent) e).getSourceEvent();
+                // Check as normal
+                switch (g.getType()) {
+                    case DESTROYED_PERMANENT:
+                    case EXPLOITED_CREATURE:
+                    case SACRIFICED_PERMANENT:
+                        return true;
+                    case ZONE_CHANGE:
+                        return ((ZoneChangeEvent) g).getFromZone() == Zone.BATTLEFIELD;
+                    default:
+                        return false;
+                }
+            }
+
             switch (e.getType()) {
                 case DESTROYED_PERMANENT:
                 case EXPLOITED_CREATURE:

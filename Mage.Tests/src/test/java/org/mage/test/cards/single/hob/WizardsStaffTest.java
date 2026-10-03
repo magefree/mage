@@ -18,6 +18,8 @@ public class WizardsStaffTest extends CardTestPlayerBase {
     // When this creature dies, it deals damage equal to its power to each opponent.
     private static final String deathTrigger = "Heartfire Hero";
     private static final String sacOutlef = "Altar of Dementia";
+    // Let the World Burn — Destroy all artifacts and creatures
+    private static String kill_both = "What Must Be Done";
 
 
 
@@ -125,5 +127,26 @@ public class WizardsStaffTest extends CardTestPlayerBase {
 
         // 1 / 1 -> after equip 2 / 2 from trigger -> deal 2 damage twice on death
         assertLife(playerB, 16);
+    }
+
+    @Test
+    public void testSimultateousDeathTrigger() {
+        addCard(Zone.BATTLEFIELD, playerA, deathTrigger);
+        addCard(Zone.BATTLEFIELD, playerA, staff);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 8);
+        addCard(Zone.HAND, playerA, kill_both,1);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {3}", deathTrigger);
+        // 1 / 1 -> after equip 2 / 2
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, kill_both, true);
+        // Let the World Burn — Destroy all artifacts and creatures
+        setModeChoice(playerA, "1");
+        // 2 / 2 -> two prowess triggers -> 4 / 4
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        // 4 / 4 -> deal 4 damage twice on death
+        assertLife(playerB, 12);
     }
 }

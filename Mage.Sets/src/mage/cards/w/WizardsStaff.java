@@ -81,7 +81,7 @@ class WizardsStaffEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        Permanent equipment = game.getPermanent(source.getSourceId());
+        Permanent equipment = game.getPermanentOrLKIBattlefield(source.getSourceId());
         return permanent != null && equipment != null
                 && permanent.getId().equals(equipment.getAttachedTo());
     }
