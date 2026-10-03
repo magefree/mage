@@ -1418,16 +1418,7 @@ public abstract class AbilityImpl implements Ability {
                 // Get the creating Event
                 GameEvent g = ((NumberOfTriggersEvent) e).getSourceEvent();
                 // Check as normal
-                switch (g.getType()) {
-                    case DESTROYED_PERMANENT:
-                    case EXPLOITED_CREATURE:
-                    case SACRIFICED_PERMANENT:
-                        return true;
-                    case ZONE_CHANGE:
-                        return ((ZoneChangeEvent) g).getFromZone() == Zone.BATTLEFIELD;
-                    default:
-                        return false;
-                }
+                return isEventCanLookBackInTime(g);
             }
 
             switch (e.getType()) {
