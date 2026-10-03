@@ -118,7 +118,7 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;Image - Renders card image with text overlay&lt;br&gt; MTGO - Renders card frame around card art&lt;br&gt; Forced M15 - Renders all cards in the MTGO style with the modern frame&lt;br&gt; Forced Retro - Renders all cards in the MTGO style with the retro frame"/>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;Image - Renders card image with text overlay&lt;br&gt; MTGO - Renders card frame around card art&lt;br&gt; Forced M15 - Renders all cards in the MTGO style with the modern frame&lt;br&gt; Forced Retro - Renders all cards in the MTGO style with the retro frame&lt;br&gt; Forced Future Sight - Renders all cards in the MTGO style with the futureshifted frame"/>
       </Properties>
       <Events>
         <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboRenderModeItemStateChanged"/>
