@@ -62,8 +62,8 @@ class TetsukoUmezawaPursuerTrigger extends TriggeredAbilityImpl {
     static {
         filter.add(
                 Predicates.or(
-                        new PowerPredicate(ComparisonType.EQUAL_TO, 1),
-                        new ToughnessPredicate(ComparisonType.EQUAL_TO, 1)));
+                        new PowerPredicate(ComparisonType.OR_LESS, 1),
+                        new ToughnessPredicate(ComparisonType.OR_LESS, 1)));
     }
 
 
