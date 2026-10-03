@@ -69,7 +69,11 @@ class TetsukoUmezawaPursuerTrigger extends TriggeredAbilityImpl {
 
     public TetsukoUmezawaPursuerTrigger() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
-    }
+public TetsukoUmezawaPursuerTrigger() {
+    super(Zone.BATTLEFIELD, new DamageTargetEffect(1)
+            .withTargetDescription("that creature's controller"));
+    setTriggerPhrase("Whenever a creature an opponent controls with power or toughness 1 or less blocks, ");
+}
 
     private TetsukoUmezawaPursuerTrigger(final TetsukoUmezawaPursuerTrigger ability) {
         super(ability);
