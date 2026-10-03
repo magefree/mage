@@ -131,6 +131,16 @@ public class WizardsStaffTest extends CardTestPlayerBase {
 
     @Test
     public void testSimultateousDeathTrigger() {
+        /*
+        If a creature dying at the same time that another permanent you control leaves the battlefield causes a triggered ability of that permanent to trigger, that ability triggers an additional time.
+        (2023-02-04)
+
+        If a creature dying at the same time as Drivnod (including Drivnod itself dying) causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+        (2023-02-04)
+
+        Objects dying at the same time see each other and each others triggers (Oracle of Drivnod)
+         */
+
         addCard(Zone.BATTLEFIELD, playerA, deathTrigger);
         addCard(Zone.BATTLEFIELD, playerA, staff);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 8);

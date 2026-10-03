@@ -1401,6 +1401,8 @@ public abstract class AbilityImpl implements Ability {
         List<GameEvent> allEvents = new ArrayList<>();
         if (event instanceof BatchEvent) {
             allEvents.addAll(((BatchEvent) event).getEvents());
+        } else if (event instanceof NumberOfTriggersEvent) {
+            allEvents.add(((NumberOfTriggersEvent) event).getSourceEvent());
         } else {
             allEvents.add(event);
         }
@@ -1412,14 +1414,6 @@ public abstract class AbilityImpl implements Ability {
             //   - ability's task: code like ability.setLookBackInTime
             //   - event's task: code like current switch
             // TODO: alternative solution: replace check by source.isLeavesTheBattlefieldTrigger?
-
-            if(e instanceof NumberOfTriggersEvent) {
-                // For Trigger Duplication Events
-                // Get the creating Event
-                GameEvent g = ((NumberOfTriggersEvent) e).getSourceEvent();
-                // Check as normal
-                return isEventCanLookBackInTime(g);
-            }
 
             switch (e.getType()) {
                 case DESTROYED_PERMANENT:

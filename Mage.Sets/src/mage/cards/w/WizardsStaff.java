@@ -36,8 +36,7 @@ public final class WizardsStaff extends CardImpl {
                 new ProwessAbility(), AttachmentType.EQUIPMENT
         )));
 
-        // If a triggered ability of equipped creature triggers,
-        // that ability triggers an additional time.
+        // If a triggered ability of equipped creature triggers, that ability triggers an additional time.
         this.addAbility(new SimpleStaticAbility(new WizardsStaffEffect()));
 
         // Equip Wizard {1}
