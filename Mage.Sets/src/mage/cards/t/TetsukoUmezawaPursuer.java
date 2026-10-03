@@ -90,8 +90,7 @@ class TetsukoUmezawaPursuerTrigger extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent blocker = game.getPermanent(event.getSourceId());
         Player controller = game.getPlayer(this.getControllerId());
-        if (blocker != null && controller != null &&
-                filter.match(blocker, game) && game.isOpponent(controller, blocker.getControllerId())) {
+        if (blocker != null && filter.match(blocker, game) && game.isOpponent(controller, blocker.getControllerId())) {
             getEffects().get(0).setTargetPointer(new FixedTarget(blocker.getControllerId()));
             return true;
         }
