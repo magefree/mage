@@ -31,6 +31,7 @@ import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.events.BatchEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.NumberOfTriggersEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -1400,6 +1401,8 @@ public abstract class AbilityImpl implements Ability {
         List<GameEvent> allEvents = new ArrayList<>();
         if (event instanceof BatchEvent) {
             allEvents.addAll(((BatchEvent) event).getEvents());
+        } else if (event instanceof NumberOfTriggersEvent) {
+            allEvents.add(((NumberOfTriggersEvent) event).getSourceEvent());
         } else {
             allEvents.add(event);
         }
@@ -1411,6 +1414,7 @@ public abstract class AbilityImpl implements Ability {
             //   - ability's task: code like ability.setLookBackInTime
             //   - event's task: code like current switch
             // TODO: alternative solution: replace check by source.isLeavesTheBattlefieldTrigger?
+
             switch (e.getType()) {
                 case DESTROYED_PERMANENT:
                 case EXPLOITED_CREATURE:
