@@ -9,7 +9,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- * Describes condition when equipped permanent has superType
+ * True if the permanent the source is attached to matches the filter.
+ * The filter is matched from the source controller's point of view, so "you control" means the
+ * controller of the Aura or Equipment.
  *
  * @author LevelX
  */
@@ -35,7 +37,7 @@ public class AttachedToMatchesFilterCondition implements Condition {
             if (attachedTo == null) {
                 return false;
             }
-            if (filter.match(attachedTo, attachedTo.getControllerId(), source, game)) {
+            if (filter.match(attachedTo, source.getControllerId(), source, game)) {
                 return true;
             }
 

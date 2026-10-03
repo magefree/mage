@@ -3,10 +3,10 @@ package mage.cards.h;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsPhaseCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -20,7 +20,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -88,7 +87,9 @@ class HeartWolfDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isPermanentMoved() && zEvent.getTargetId().equals(getTargets().getFirstTarget())) {
+        if (Zone.BATTLEFIELD.match(zEvent.getFromZone())
+                && zEvent.isPermanentMoved()
+                && zEvent.getTargetId().equals(getTargets().getFirstTarget())) {
             this.getTargets().clear(); // else spell fizzles because target creature died
             return true;
         }

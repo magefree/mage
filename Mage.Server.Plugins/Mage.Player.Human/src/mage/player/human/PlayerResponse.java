@@ -16,6 +16,7 @@ import java.util.UUID;
  * - waiting and writing response on diff threads;
  * - start by response.wait (game thread) and end by response.notifyAll (network/call thread)
  * - user's request can income in diff order, so only one latest response allowed (except async commands like concede and cheat)
+ * - async reponses like concede has different lifecycle - can income at any time, processing on first free time under any player
  *
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
@@ -24,6 +25,7 @@ public class PlayerResponse implements Serializable, Copyable<PlayerResponse> {
     private String activeAction; // for logs/debug information
     private String activeGameInfo; // for logs/debug info
 
+    // if you add new response type the don't forget to change hasAnswer()
     private String responseString;
     private UUID responseUUID;
     private Boolean responseBoolean;
@@ -39,7 +41,9 @@ public class PlayerResponse implements Serializable, Copyable<PlayerResponse> {
     private Boolean asyncWantCheat;
 
     public PlayerResponse() {
-        clear();
+        resetAnswers();
+        resetAsyncWantConcede();
+        resetAsyncWantCheat();
     }
 
     @Override
@@ -77,7 +81,7 @@ public class PlayerResponse implements Serializable, Copyable<PlayerResponse> {
         this.asyncWantCheat = response.asyncWantCheat;
     }
 
-    public void clear() {
+    public void resetAnswers() {
         this.activeAction = null;
         this.activeGameInfo = null;
         this.responseString = null;
@@ -86,8 +90,10 @@ public class PlayerResponse implements Serializable, Copyable<PlayerResponse> {
         this.responseInteger = null;
         this.responseManaType = null;
         this.responseManaPlayerId = null;
-        this.asyncWantConcede = null;
-        this.asyncWantCheat = null;
+
+        // do not reset async commands -- it's processing independend
+        //this.asyncWantConcede = null;
+        //this.asyncWantCheat = null;
     }
 
     public String getActiveAction() {
@@ -168,5 +174,30 @@ public class PlayerResponse implements Serializable, Copyable<PlayerResponse> {
      */
     public void setAsyncWantCheat() {
         this.asyncWantCheat = true;
+    }
+
+    public void resetAsyncWantConcede() {
+        this.asyncWantConcede = null;
+    }
+
+    public void resetAsyncWantCheat() {
+        this.asyncWantCheat = null;
+    }
+
+    /**
+     * Has real answer from a player, async signals (concede, cheat) are not counted
+     */
+    public boolean hasAnswer() {
+        return this.responseString != null
+                || this.responseUUID != null
+                || this.responseBoolean != null
+                || this.responseInteger != null
+                || this.responseManaType != null
+                || this.responseManaPlayerId != null;
+    }
+
+    public boolean hasAsyncCommand() {
+        return this.asyncWantConcede != null
+                || this.asyncWantCheat != null;
     }
 }

@@ -349,6 +349,8 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Sheoldred, the Apocalypse", 290, Rarity.MYTHIC, mage.cards.s.SheoldredTheApocalypse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sheoldred, the Apocalypse", 331, Rarity.MYTHIC, mage.cards.s.SheoldredTheApocalypse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sheoldred, the Apocalypse", 369, Rarity.MYTHIC, mage.cards.s.SheoldredTheApocalypse.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sheoldred, the Apocalypse", 435, Rarity.MYTHIC, mage.cards.s.SheoldredTheApocalypse.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sheoldred, the Apocalypse", 436, Rarity.MYTHIC, mage.cards.s.SheoldredTheApocalypse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shield-Wall Sentinel", 238, Rarity.COMMON, mage.cards.s.ShieldWallSentinel.class));
         cards.add(new SetCardInfo("Shivan Devastator", 143, Rarity.MYTHIC, mage.cards.s.ShivanDevastator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shivan Devastator", 410, Rarity.MYTHIC, mage.cards.s.ShivanDevastator.class, NON_FULL_USE_VARIOUS));

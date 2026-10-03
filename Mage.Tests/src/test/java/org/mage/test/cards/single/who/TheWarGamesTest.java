@@ -24,6 +24,7 @@ public class TheWarGamesTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, war, 1);
 
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, war);
 
@@ -57,6 +58,7 @@ public class TheWarGamesTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Warrior Token", 3);
         assertPermanentCount(playerB, "Warrior Token", 3);
+        assertPermanentCount(playerA, "Memnite", 1);
         assertLife(playerA, 20 - 3 - 6 - 9);
         assertLife(playerB, 20 - 6 - 9);
     }

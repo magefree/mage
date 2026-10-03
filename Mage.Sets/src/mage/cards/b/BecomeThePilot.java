@@ -48,7 +48,7 @@ public final class BecomeThePilot extends CardImpl {
         // Enchant noncommander creature
         TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
         this.addAbility(new EnchantAbility(auraTarget));
 
         // You control enchanted creature.

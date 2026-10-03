@@ -26,8 +26,6 @@ public interface DraftManager {
 
     void kill(UUID draftId, UUID userId);
 
-    void timeout(UUID gameId, UUID userId);
-
     void removeDraft(UUID draftId);
 
     DraftController getControllerByDraftId(UUID draftId);

@@ -3,8 +3,8 @@ package mage.cards.v;
 import mage.ConditionalMana;
 import mage.MageInt;
 import mage.MageObject;
-import mage.abilities.Ability;
 import mage.Mana;
+import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.ChooseABackgroundAbility;
 import mage.abilities.condition.Condition;
@@ -117,7 +117,8 @@ enum VhalCandlekeepResearcherManaCondition implements Condition {
         }
         MageObject object = game.getObject(source);
         if (!source.isControlledBy(game.getOwnerId(object))) {
-            return false;
+            // a card you don't own can't be cast from your hand
+            return true;
         }
         if (object instanceof Spell) {
             return ((Spell) object).getFromZone() != Zone.HAND;

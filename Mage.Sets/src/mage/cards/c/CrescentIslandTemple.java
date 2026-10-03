@@ -30,7 +30,7 @@ public final class CrescentIslandTemple extends CardImpl {
     private static final FilterPermanent filter2 = new FilterControlledPermanent(SubType.SHRINE, "another Shrine you control");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter2.add(AnotherPredicate.instance);
     }
 
     public CrescentIslandTemple(UUID ownerId, CardSetInfo setInfo) {

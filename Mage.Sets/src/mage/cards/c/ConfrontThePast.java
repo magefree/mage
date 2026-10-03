@@ -2,18 +2,22 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.MultipliedValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.abilities.effects.common.counter.RemoveCounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
@@ -26,7 +30,8 @@ import java.util.UUID;
  */
 public final class ConfrontThePast extends CardImpl {
 
-    public static final FilterPermanent filter = new FilterPlaneswalkerPermanent();
+    public static final FilterPermanent filter
+            = new FilterPlaneswalkerPermanent("planeswalker an opponent controls");
 
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
@@ -44,7 +49,8 @@ public final class ConfrontThePast extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(ConfrontThePastAdjuster.instance);
 
         // • Remove twice X loyalty counters from target planeswalker an opponent controls.
-        Mode mode = new Mode(new ConfrontThePastLoyaltyEffect());
+        Mode mode = new Mode(new RemoveCounterTargetEffect(
+                CounterType.LOYALTY.createInstance(), new MultipliedValue(GetXValue.instance, 2)));
         mode.addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addMode(mode);
     }
@@ -73,30 +79,5 @@ enum ConfrontThePastAdjuster implements TargetAdjuster {
             filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
             ability.addTarget(new TargetCardInYourGraveyard(filter));
         }
-    }
-}
-
-class ConfrontThePastLoyaltyEffect extends OneShotEffect {
-
-    ConfrontThePastLoyaltyEffect() {
-        super(Outcome.Benefit);
-        staticText = "remove twice X loyalty counters from target planeswalker an opponent controls";
-    }
-
-    private ConfrontThePastLoyaltyEffect(final ConfrontThePastLoyaltyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ConfrontThePastLoyaltyEffect copy() {
-        return new ConfrontThePastLoyaltyEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
-        Permanent target = game.getPermanent(source.getFirstTarget());
-        target.removeCounters(CounterType.LOYALTY.createInstance(xValue * 2), source, game);
-        return true;
     }
 }

@@ -1,8 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.constants.SubType;
-import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -11,13 +8,17 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.combat.GoadAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.constants.Outcome;
-import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class CoerciveImpetus extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +1/+1 and is goaded.
-        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 2));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 1));
         ability.addEffect(new GoadAttachedEffect());
         this.addAbility(ability);
 

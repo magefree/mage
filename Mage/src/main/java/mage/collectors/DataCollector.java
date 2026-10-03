@@ -55,9 +55,18 @@ public interface DataCollector {
 
     void onGameLog(Game game, String message);
 
-    void onGameError(Game game, Exception e);
+    void onGameError(Game game, Throwable e);
 
+    /**
+     * Stops on real game end (on normal end, on concede, on critical error)
+     * Warning, real result will be calculated after game end, see onGameResult
+     */
     void onGameEnd(Game game);
+
+    /**
+     * Stops on game result ready, e.g. on winner selected
+     */
+    void onGameEndResult(Game game);
 
     /**
      * @param userName can be null for system messages

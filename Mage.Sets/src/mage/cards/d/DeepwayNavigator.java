@@ -22,6 +22,7 @@ import mage.constants.SubType;
 import mage.constants.WatcherScope;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -37,6 +38,7 @@ public final class DeepwayNavigator extends CardImpl {
 
     private static final FilterPermanent filter
             = new FilterControlledPermanent(SubType.MERFOLK, "each other Merfolk you control");
+    private static final FilterPermanent filter2 = new FilterCreaturePermanent(SubType.MERFOLK, "Merfolk");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -59,7 +61,7 @@ public final class DeepwayNavigator extends CardImpl {
         // As long as you attacked with three or more Merfolk this turn, Merfolk you control get +1/+0.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostControlledEffect(
-                        1, 0, Duration.WhileOnBattlefield, filter, false
+                        1, 0, Duration.WhileOnBattlefield, filter2, false
                 ), DeepwayNavigatorCondition.instance, "as long as you attacked " +
                 "with three or more Merfolk this turn, Merfolk you control get +1/+0"
         )).addHint(DeepwayNavigatorValue.getHint()), new DeepwayNavigatorWatcher());

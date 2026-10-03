@@ -57,7 +57,6 @@ class CharmedPendantAbility extends ActivatedManaAbilityImpl {
 
     public CharmedPendantAbility(Zone zone, Mana mana, Cost cost) {
         super(zone, new BasicManaEffect(mana), cost);
-
     }
 
     private CharmedPendantAbility(final CharmedPendantAbility ability) {
@@ -76,11 +75,6 @@ class CharmedPendantAbility extends ActivatedManaAbilityImpl {
     @Override
     public CharmedPendantAbility copy() {
         return new CharmedPendantAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return super.getRule() + " Activate only as an instant.";
     }
 }
 

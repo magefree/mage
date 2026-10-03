@@ -1,25 +1,26 @@
 package mage.cards.m;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.hint.Hint;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.permanent.token.FoodToken;
+import mage.abilities.hint.Hint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.game.Game;
+import mage.game.permanent.token.FoodToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +40,7 @@ public final class MeatsqueakHoardLord extends CardImpl {
 
         // Whenever another creature dies, create a Food token. This ability triggers only once each turn.
         this.addAbility(new DiesCreatureTriggeredAbility(
-            new CreateTokenEffect(new FoodToken()), false
+            new CreateTokenEffect(new FoodToken()), false, true
         ).setTriggersLimitEachTurn(1));
 
         // For every seven Foods you control, Squirrels you control get +3/+3.
@@ -68,7 +69,7 @@ enum MeatSqueakDynamicValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int foodCount = game.getBattlefield().count(
-            new FilterPermanent(SubType.FOOD, "Foods"),
+            new FilterControlledPermanent(SubType.FOOD, "Foods"),
             sourceAbility.getControllerId(),
             sourceAbility, game
         );
@@ -97,7 +98,7 @@ enum MeatSqueakHint implements Hint {
     @Override
     public String getText(Game game, Ability ability) {
         int foodCount = game.getBattlefield().count(
-            new FilterPermanent(SubType.FOOD, "Foods"),
+            new FilterControlledPermanent(SubType.FOOD, "Foods"),
             ability.getControllerId(),
             ability, game
         );

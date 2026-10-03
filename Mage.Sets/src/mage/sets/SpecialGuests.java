@@ -150,6 +150,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Rat Colony", 56, Rarity.MYTHIC, mage.cards.r.RatColony.class));
         cards.add(new SetCardInfo("Regal Force", 141, Rarity.MYTHIC, mage.cards.r.RegalForce.class));
         cards.add(new SetCardInfo("Relentless Rats", 57, Rarity.MYTHIC, mage.cards.r.RelentlessRats.class));
+        cards.add(new SetCardInfo("Risen Reef", 143, Rarity.MYTHIC, mage.cards.r.RisenReef.class));
         cards.add(new SetCardInfo("Robe of Stars", 121, Rarity.MYTHIC, mage.cards.r.RobeOfStars.class, FULL_ART));
         cards.add(new SetCardInfo("Root Maze", 168, Rarity.MYTHIC, mage.cards.r.RootMaze.class));
         cards.add(new SetCardInfo("Ruinous Ultimatum", 108, Rarity.MYTHIC, mage.cards.r.RuinousUltimatum.class));

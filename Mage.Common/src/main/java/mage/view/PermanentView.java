@@ -244,4 +244,12 @@ public class PermanentView extends CardView {
     public boolean isMutated() {
         return mutated;
     }
+
+    @Override
+    protected void appendRenderSignature(StringBuilder sb) {
+        super.appendRenderSignature(sb);
+        // tapped, flipped and the mutate button are drawn by the panel, not baked into the image
+        appendField(sb, hasSummoningSickness());
+        appendField(sb, getDamage());
+    }
 }
