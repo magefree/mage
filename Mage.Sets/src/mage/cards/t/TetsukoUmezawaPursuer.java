@@ -1,6 +1,7 @@
 package mage.cards.t;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -37,12 +38,11 @@ public final class TetsukoUmezawaPursuer extends CardImpl {
 
         // Double strike
         this.addAbility(DoubleStrikeAbility.getInstance());
-        // Prowess <em>(Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)</em>
+
+        // Prowess
         this.addAbility(new ProwessAbility());
 
-        // Whenever a creature an opponent controls
-        // with power or toughness 1 or less blocks,
-        // Tetsuko Umezawa deals 1 damage to that creature’s controller.
+        // Whenever a creature an opponent controls with power or toughness 1 or less blocks, Tetsuko Umezawa deals 1 damage to that creature’s controller.
         this.addAbility(new TetsukoUmezawaPursuerTrigger());
     }
 
@@ -58,12 +58,12 @@ public final class TetsukoUmezawaPursuer extends CardImpl {
 
 class TetsukoUmezawaPursuerTrigger extends TriggeredAbilityImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with power or toughness 1");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with power or toughness 1 or less");
     static {
         filter.add(
-                Predicates.or(
-                        new PowerPredicate(ComparisonType.OR_LESS, 1),
-                        new ToughnessPredicate(ComparisonType.OR_LESS, 1)));
+            Predicates.or(
+                new PowerPredicate(ComparisonType.OR_LESS, 1),
+                new ToughnessPredicate(ComparisonType.OR_LESS, 1)));
     }
 
 
@@ -97,8 +97,7 @@ class TetsukoUmezawaPursuerTrigger extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
-    public String getRule() {
+    public String getText() {
         return "Whenever a creature an opponent controls " +
                 "with power or toughness 1 or less blocks, " +
                 "{this} deals 1 damage to that creature's controller.";
