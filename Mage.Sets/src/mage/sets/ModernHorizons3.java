@@ -2,13 +2,17 @@ package mage.sets;
 
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 import mage.util.RandomUtil;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -671,19 +675,8 @@ public final class ModernHorizons3 extends ExpansionSet {
                         .stream()
                         .filter(info -> info.getCardNumberAsInt() >= 262 && info.getCardNumberAsInt() <= 303)
                         .collect(Collectors.toList());
-        List<CardInfo> list_SPG =
-                SpecialGuests.getInstance().getCardsByRarity(Rarity.MYTHIC)
-                        .stream()
-                        .filter(info -> {
-                            int cn = info.getCardNumberAsInt();
-                            return cn >= 39 && cn <= 48;
-                        })
-                        .collect(Collectors.toList());
-        List<CardInfo> list_M3C =
-                ModernHorizons3Commander.getInstance().getCardsByRarity(Rarity.MYTHIC)
-                        .stream()
-                        .filter(info -> info.getCardNumberAsInt() <= 8)
-                        .collect(Collectors.toList());
+        List<CardInfo> list_SPG = findUniqueCards(SpecialGuests.getInstance().getCode(), Rarity.MYTHIC, 39, 48);
+        List<CardInfo> list_M3C = findUniqueCards(ModernHorizons3Commander.getInstance().getCode(), Rarity.MYTHIC, 1, 8);
 
         for (int i = 0; i < spg; i++) {
             addToBooster(booster, list_SPG);
@@ -721,5 +714,23 @@ public final class ModernHorizons3 extends ExpansionSet {
         }
 
         return booster;
+    }
+
+    /**
+     * One printing per card name, taken from the given collector number range.
+     * <p>
+     * The range must be applied before reprints are removed: getCardsByRarity keeps
+     * one printing per name, and if that printing is outside the range, the card is
+     * lost (e.g. most M3C commanders have their kept printing above #8).
+     */
+    private static List<CardInfo> findUniqueCards(String setCode, Rarity rarity, int minCardNumber, int maxCardNumber) {
+        Map<String, CardInfo> cardsByName = new LinkedHashMap<>();
+        CardRepository.instance.findCards(new CardCriteria()
+                        .setCodes(setCode)
+                        .rarities(rarity)
+                        .minCardNumber(minCardNumber)
+                        .maxCardNumber(maxCardNumber))
+                .forEach(info -> cardsByName.putIfAbsent(info.getName(), info));
+        return new ArrayList<>(cardsByName.values());
     }
 }
