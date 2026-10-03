@@ -1,7 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
-
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfMainPhaseDelayedTriggeredAbility;
@@ -25,6 +23,9 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
 import mage.target.targetpointer.FixedTarget;
+import mage.watchers.common.ManaPaidSourceWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -80,8 +81,8 @@ public final class ManaSculpt extends CardImpl {
             game.getStack().counter(spell.getId(), source, game);
 
             if (game.getBattlefield().contains(filter, source.getControllerId(), source, game, 1)) {
-                int cmc = spell.getManaValue();
-                Effect effect = new AddManaToManaPoolTargetControllerEffect(Mana.ColorlessMana(cmc), "your");
+                int manaSpent = ManaPaidSourceWatcher.getTotalPaid(spell.getId(), game);
+                Effect effect = new AddManaToManaPoolTargetControllerEffect(Mana.ColorlessMana(manaSpent), "your");
                 effect.setTargetPointer(new FixedTarget(source.getControllerId()));
                 AtTheBeginOfMainPhaseDelayedTriggeredAbility delayedAbility
                         = new AtTheBeginOfMainPhaseDelayedTriggeredAbility(effect, false, TargetController.YOU, PhaseSelection.NEXT_MAIN);

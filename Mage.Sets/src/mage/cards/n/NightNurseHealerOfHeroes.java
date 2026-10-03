@@ -1,13 +1,6 @@
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.card.PutIntoGraveFromAnywhereThisTurnPredicate;
-import mage.target.common.TargetCardInGraveyard;
-import mage.watchers.common.CardsPutIntoGraveyardWatcher;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
@@ -16,6 +9,14 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.filter.common.FilterPermanentCard;
+import mage.filter.predicate.card.PutIntoGraveFromAnywhereThisTurnPredicate;
+import mage.target.common.TargetCardInYourGraveyard;
+import mage.watchers.common.CardsPutIntoGraveyardWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +53,7 @@ public final class NightNurseHealerOfHeroes extends CardImpl {
             new ReturnFromGraveyardToHandTargetEffect()
                 .setText("choose target permanent card in your graveyard that was put there from anywhere this turn. Return it to your hand")
         );
-        ability.addTarget(new TargetCardInGraveyard(filter));
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability, new CardsPutIntoGraveyardWatcher());
     }
 

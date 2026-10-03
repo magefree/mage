@@ -48,7 +48,7 @@ public final class AceFearlessRebel extends CardImpl {
         );
         ability.addEffect(new FightTargetSourceEffect()
                 .setText(", then it fights up to one target creature defending player controls"));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(new AttacksTriggeredAbility(new DoWhenCostPaid(
                 ability,
                 new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN),

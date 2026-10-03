@@ -29,21 +29,33 @@ public class GameWorker implements Callable<Boolean> {
 
     @Override
     public Boolean call() {
+        boolean endProcessed = false;
         try {
             // play game
-            Thread.currentThread().setName(ThreadUtils.THREAD_PREFIX_GAME + " " + game.getId());
+            ThreadUtils.setGameThreadStatus(game.getId(), "");
             game.start(choosingPlayerId);
 
             // save result and start next game or close finished table
             game.fireUpdatePlayersEvent(); // TODO: no needs in update event (gameController.endGameWithResult already send game end dialog)?
+            endProcessed = true; // errors after that point must not close a game twice
             gameController.endGameWithResult(game.getWinner());
 
             // clear resources
             game.cleanUp();// TODO: no needs in cleanup code (cards list are useless for memory optimization, game states are more important)?
         } catch (MageException e) {
             LOGGER.fatal("GameWorker mage error [" + game.getId() + " - " + game + "]: " + e, e);
+            if (!endProcessed) {
+                gameController.endGameWithError(e);
+            }
         } catch (Throwable e) {
             LOGGER.fatal("GameWorker system error [" + game.getId() + " - " + game + "]: " + e, e);
+            if (!endProcessed) {
+                gameController.endGameWithError(e);
+            }
+        } finally {
+            // a pool keeps a finished thread alive for a while, so it must not look like a game thread
+            // in dumps and stats, and must not pass game thread checks by name
+            ThreadUtils.setGameThreadIdle(game.getId());
         }
         return null;
     }

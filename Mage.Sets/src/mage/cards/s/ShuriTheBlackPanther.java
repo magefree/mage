@@ -1,25 +1,23 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.LockedInCondition;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Duration;
+import mage.constants.*;
+import mage.filter.common.FilterControlledArtifactPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +51,7 @@ public final class ShuriTheBlackPanther extends CardImpl {
         ));
         ability.addEffect(new ConditionalContinuousEffect(
             new BoostControlledEffect(2, 2, Duration.EndOfTurn),
-            condition,
+            new LockedInCondition(condition),
             "Then if you control six or more artifacts, creatures you control get +2/+2 until end of turn"
         ));
         this.addAbility(ability);

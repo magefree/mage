@@ -24,7 +24,7 @@ public final class CaughtInTheCrossfire extends CardImpl {
 
     static {
         filter.add(OutlawPredicate.instance);
-        filter.add(Predicates.not(OutlawPredicate.instance));
+        filter2.add(Predicates.not(OutlawPredicate.instance));
     }
 
     public CaughtInTheCrossfire(UUID ownerId, CardSetInfo setInfo) {

@@ -1,23 +1,20 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+
+import java.util.UUID;
 
 /**
  *
@@ -78,7 +75,8 @@ class DrBeverlyCrusherEffect extends ReplacementEffectImpl {
             NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
             if (source.isControlledBy(event.getPlayerId())
                     && game.getPermanentOrLKIBattlefield(numberOfTriggersEvent.getSourceId()) != null
-                    && numberOfTriggersEvent.getSourceEvent().getType() == GameEvent.EventType.GAINED_LIFE) {
+                    && numberOfTriggersEvent.getSourceEvent().getType() == GameEvent.EventType.GAINED_LIFE
+                    && source.isControlledBy(numberOfTriggersEvent.getSourceEvent().getPlayerId())) {
                 return true;
             }
         }

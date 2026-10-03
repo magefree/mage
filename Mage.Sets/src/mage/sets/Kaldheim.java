@@ -433,6 +433,8 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Vorinclex, Monstrous Raider", 199, Rarity.MYTHIC, mage.cards.v.VorinclexMonstrousRaider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vorinclex, Monstrous Raider", 320, Rarity.MYTHIC, mage.cards.v.VorinclexMonstrousRaider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vorinclex, Monstrous Raider", 333, Rarity.MYTHIC, mage.cards.v.VorinclexMonstrousRaider.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vorinclex, Monstrous Raider", 406, Rarity.MYTHIC, mage.cards.v.VorinclexMonstrousRaider.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vorinclex, Monstrous Raider", 407, Rarity.MYTHIC, mage.cards.v.VorinclexMonstrousRaider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Waking the Trolls", 234, Rarity.RARE, mage.cards.w.WakingTheTrolls.class));
         cards.add(new SetCardInfo("Warchanter Skald", 381, Rarity.UNCOMMON, mage.cards.w.WarchanterSkald.class));
         cards.add(new SetCardInfo("Warhorn Blast", 38, Rarity.COMMON, mage.cards.w.WarhornBlast.class));

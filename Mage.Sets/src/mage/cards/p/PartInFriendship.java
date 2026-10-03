@@ -1,21 +1,17 @@
 package mage.cards.p;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -76,11 +72,7 @@ class PartInFriendshipEffect extends OneShotEffect {
         Cards cards = new CardsImpl();
         Card creatureCard = null;
 
-        while (true) {
-            Card card = controller.getLibrary().getFromTop(game);
-            if (card == null) {
-                break;
-            }
+        for (Card card : controller.getLibrary().getCards(game)) {
             cards.add(card);
             if (card.isCreature(game)) {
                 creatureCard = card;

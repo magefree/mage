@@ -33,7 +33,7 @@ public final class HonestWork extends CardImpl {
         // Enchant creature an opponent controls
         TargetPermanent auraTarget = new TargetOpponentsCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget));
 
         // When this Aura enters, tap enchanted creature and remove all counters from it.

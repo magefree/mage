@@ -46,7 +46,7 @@ public class TournamentController {
     private final ManagerFactory managerFactory;
     private final UUID chatId;
     private final UUID tableId;
-    private boolean started = false;
+    private volatile boolean started = false;
     private final Tournament tournament;
     private ConcurrentMap<UUID, UUID> userPlayerMap = new ConcurrentHashMap<>();
     private final ConcurrentMap<UUID, TournamentSession> tournamentSessions = new ConcurrentHashMap<>();
@@ -177,6 +177,7 @@ public class TournamentController {
 
     private synchronized void checkStart() {
         if (!started && allJoined()) {
+            started = true;
             managerFactory.threadExecutor().getTourneyExecutor().execute(this::startTournament);
         }
     }
@@ -202,7 +203,6 @@ public class TournamentController {
                 return;
             }
         }
-        started = true;
         logger.debug("Tournament starts (all players joined): " + tournament.getId() + " - " + tournament.getTournamentType().toString());
         tournament.nextStep();
     }
@@ -351,11 +351,12 @@ public class TournamentController {
 
     public void timeout(UUID userId) {
         if (userPlayerMap.containsKey(userId)) {
-            TournamentPlayer tournamentPlayer = tournament.getPlayer(userPlayerMap.get(userId));
+            UUID playerId = userPlayerMap.get(userId);
+            TournamentPlayer tournamentPlayer = tournament.getPlayer(playerId);
             if (tournamentPlayer.getDeck() != null) {
                 DeckValidator deckValidator = DeckValidatorFactory.instance.createDeckValidator(tournament.getOptions().getMatchOptions().getDeckType());
                 int deckMinSize = deckValidator != null ? deckValidator.getDeckMinSize() : 40;
-                tournament.autoSubmit(userPlayerMap.get(userId), tournamentPlayer.generateDeck(deckMinSize));
+                tournament.autoSubmit(playerId, tournamentPlayer.generateDeck(deckMinSize));
             } else {
                 StringBuilder sb = new StringBuilder();
                 managerFactory.userManager().getUser(userId).ifPresent(user
@@ -366,6 +367,7 @@ public class TournamentController {
                 tournamentPlayer.setEliminated();
                 tournamentPlayer.setStateInfo("No deck for auto submit");
             }
+            managerFactory.userManager().getUser(userId).ifPresent(user -> user.removeConstructing(playerId));
         }
     }
 
@@ -405,6 +407,10 @@ public class TournamentController {
             } else if (tournamentPlayer.getState() == TournamentPlayerState.DRAFTING) {
                 info = "during Draft phase";
                 if (!checkToReplaceDraftPlayerByAi(userId, tournamentPlayer)) {
+                    logger.info("Tourney " + tournament.getId() + ": draft player " + tournamentPlayer.getPlayer().getName()
+                            + " quit, no other humans - draft tournament aborted");
+                    // quit status must be set before the abort: so last player will get actual status on save to table history
+                    tournamentPlayer.setQuit(info, TourneyQuitStatus.DURING_DRAFTING);
                     this.abortDraftTournament();
                 } else {
                     managerFactory.draftManager().getController(tableId).ifPresent(draftController -> {
@@ -444,7 +450,13 @@ public class TournamentController {
                 if (user.isPresent()) {
                     replacePlayerName = "Draftbot (" + user.get().getName() + ')';
                 }
-                tableController.replaceDraftPlayer(leavingPlayer.getPlayer(), replacePlayerName, PlayerType.COMPUTER_DRAFT_BOT, 5);
+                if (tableController.replaceDraftPlayer(leavingPlayer.getPlayer(), replacePlayerName, PlayerType.COMPUTER_DRAFT_BOT, 5)) {
+                    logger.info("Tourney " + tournament.getId() + ": draft player " + leavingPlayer.getPlayer().getName()
+                            + " quit and was replaced by " + replacePlayerName);
+                } else {
+                    logger.error("Tourney " + tournament.getId() + ": draft player " + leavingPlayer.getPlayer().getName()
+                            + " quit but was NOT replaced by draftbot");
+                }
                 if (user.isPresent()) {
                     user.get().removeDraft(leavingPlayer.getPlayer().getId());
                     user.get().removeTable(leavingPlayer.getPlayer().getId());

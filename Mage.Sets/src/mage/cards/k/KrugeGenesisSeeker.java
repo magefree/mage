@@ -1,18 +1,15 @@
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
+import mage.constants.*;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AttackingPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +21,7 @@ public final class KrugeGenesisSeeker extends CardImpl {
 
     static {
         filter.add(AttackingPredicate.instance);
-        filter.add(TargetController.YOU.getOwnerPredicate());
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public KrugeGenesisSeeker(UUID ownerId, CardSetInfo setInfo) {

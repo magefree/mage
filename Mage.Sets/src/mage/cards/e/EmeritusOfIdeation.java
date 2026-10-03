@@ -36,7 +36,7 @@ public final class EmeritusOfIdeation extends PrepareCard {
         this.addAbility(FlyingAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // This creature enters prepared.
         this.addAbility(new EntersPreparedAbility());

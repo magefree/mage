@@ -44,7 +44,7 @@ public final class KondasBanner extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new KondasBannerTypeBoostEffect()));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), new TargetPermanent(legendaryFilter.copy().add(TargetController.YOU.getControllerPredicate())), false));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
     }
 
     private KondasBanner(final KondasBanner card) {

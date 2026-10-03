@@ -1,12 +1,10 @@
 package mage.cards.i;
 
-import java.util.UUID;
-import mage.constants.SubType;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAttachToTarget;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.GainLifeTargetControllerEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -14,6 +12,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +32,7 @@ public final class InfinityFormula extends CardImpl {
 
         // Equipped creature gets +1/+2 and has "Whenever this creature attacks, you gain 2 life."
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(1, 2));
-        AttacksTriggeredAbility attacksAbility = new AttacksTriggeredAbility(new GainLifeTargetControllerEffect(2));
+        AttacksTriggeredAbility attacksAbility = new AttacksTriggeredAbility(new GainLifeEffect(2));
         ability.addEffect(new GainAbilityAttachedEffect(attacksAbility, AttachmentType.EQUIPMENT)
             .setText("and has \"Whenever this creature attacks, you gain 2 life.\""));
         this.addAbility(ability);

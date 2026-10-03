@@ -1,11 +1,6 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -16,14 +11,20 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.CounterAnyPredicate;
+
+import java.util.UUID;
 
 /**
  * @author muz
  */
 public final class GammaGrotesque extends CardImpl {
 
-    private static final FilterCreaturePermanent filter
-        = new FilterCreaturePermanent("creature you control with a counter on it");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creature you control with a counter on it");
 
     static {
         filter.add(CounterAnyPredicate.instance);

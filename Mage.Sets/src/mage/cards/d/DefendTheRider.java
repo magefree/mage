@@ -8,6 +8,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.PilotSaddleCrewToken;
 import mage.target.TargetPermanent;
 
@@ -27,7 +28,7 @@ public final class DefendTheRider extends CardImpl {
                 .setText("target permanent you control gains hexproof"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(IndestructibleAbility.getInstance())
                 .setText("and indestructible until end of turn"));
-        this.getSpellAbility().addTarget(new TargetPermanent());
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT));
 
         // * Create a 1/1 colorless Pilot creature token with "This token saddles Mounts and crews Vehicles as though its power were 2 greater."
         this.getSpellAbility().addMode(new Mode(new CreateTokenEffect(new PilotSaddleCrewToken())));

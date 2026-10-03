@@ -40,7 +40,7 @@ public final class TractorBeam extends CardImpl {
         // Enchant creature or Spacecraft
         TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
         this.addAbility(new EnchantAbility(auraTarget));
 
         // When this Aura enters, tap enchanted permanent.

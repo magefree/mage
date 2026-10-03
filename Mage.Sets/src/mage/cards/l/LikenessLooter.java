@@ -97,9 +97,7 @@ class LikenessLooterEffect extends OneShotEffect {
         applier.apply(game, newBluePrint, source, permanent.getId());
         CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, permanent.getId());
         copyEffect.setApplier(applier);
-        Ability newAbility = source.copy();
-        copyEffect.init(newAbility, game);
-        game.addEffect(copyEffect, newAbility);
+        game.addEffect(copyEffect, source);
         return true;
     }
 }

@@ -63,6 +63,6 @@ public class DethroneAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Dethrone (<i>Whenever this creature attacks the player with the most life or tied for most life, put a +1/+1 counter on it.</i>)";
+        return "Dethrone <i>(Whenever this creature attacks the player with the most life or tied for most life, put a +1/+1 counter on it.)</i>";
     }
 }

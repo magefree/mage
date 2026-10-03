@@ -7,6 +7,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -61,7 +62,7 @@ class SoldOutEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        boolean flag = permanent.getDamage() > 0;
+        boolean flag = WasDealtDamageThisTurnPredicate.instance.apply(permanent, game);
         Optional.ofNullable(source)
                 .map(Controllable::getControllerId)
                 .map(game::getPlayer)

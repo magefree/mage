@@ -71,7 +71,7 @@ public final class IronManArmor extends CardImpl {
         // Fails to equip if activated as creature according to 301.5c 701.3b 701.3a
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private IronManArmor(final IronManArmor card) {

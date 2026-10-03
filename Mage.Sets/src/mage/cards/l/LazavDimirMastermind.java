@@ -86,9 +86,7 @@ class LazavDimirMastermindEffect extends OneShotEffect {
                 applier.apply(game, newBluePrint, source, lazavDimirMastermind.getId());
                 CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, lazavDimirMastermind.getId());
                 copyEffect.setApplier(applier);
-                Ability newAbility = source.copy();
-                copyEffect.init(newAbility, game);
-                game.addEffect(copyEffect, newAbility);
+                game.addEffect(copyEffect, source);
             }
             return true;
         }

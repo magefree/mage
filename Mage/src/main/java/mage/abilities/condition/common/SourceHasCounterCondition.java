@@ -30,6 +30,9 @@ public class SourceHasCounterCondition extends IntCompareCondition {
 
     public SourceHasCounterCondition(CounterType counterType, ComparisonType type, int value) {
         super(type, value);
+        if (counterType == null) {
+            throw new IllegalArgumentException("Wrong code usage: counterType param can't be empty, use SourceHasCountersCondition for any counter type");
+        }
         this.counterType = counterType;
     }
 

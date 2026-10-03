@@ -1,15 +1,7 @@
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.token.RobotVillainToken;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -19,6 +11,15 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.token.RobotVillainToken;
+
+import java.util.UUID;
 
 /**
  * @author muz
@@ -84,12 +85,13 @@ class UltronTheAnnihilatorTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.isDiesEvent()
                 && zEvent.isPermanentMoved()
                 && !zEvent.getTargetId().equals(this.getSourceId())
-                && zEvent.getTarget().isArtifact(game)) {
+                && zEvent.getTarget().isArtifact(game)
+                && zEvent.getTarget().isOwnedBy(getControllerId())) {
             return true;
         }
         Card card = game.getCard(zEvent.getTargetId());
-        // Or an artifact card is put into a graveyard from anywhere other than the battlefield
-        if (card == null || !card.isArtifact(game)) {
+        // Or an artifact card is put into your graveyard from anywhere other than the battlefield
+        if (card == null || !card.isArtifact(game) || !card.isOwnedBy(getControllerId())) {
             return false;
         }
         if (zEvent.getToZone() == Zone.GRAVEYARD

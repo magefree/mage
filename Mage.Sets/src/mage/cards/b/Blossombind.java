@@ -36,7 +36,7 @@ public final class Blossombind extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget));
 
         // When this Aura enters, tap enchanted creature.
@@ -86,7 +86,8 @@ class BlossombindUntapEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return source.getSourceId().equals(event.getTargetId());
+        Permanent aura = game.getPermanent(source.getSourceId());
+        return aura != null && event.getTargetId().equals(aura.getAttachedTo());
     }
 }
 

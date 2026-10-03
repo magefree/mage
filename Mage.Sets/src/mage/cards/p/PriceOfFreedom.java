@@ -26,7 +26,7 @@ public final class PriceOfFreedom extends CardImpl {
                 CardType.ARTIFACT.getPredicate(),
                 CardType.LAND.getPredicate()
         ));
-        filter.add(TargetController.OPPONENT.getOwnerPredicate());
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public PriceOfFreedom(UUID ownerId, CardSetInfo setInfo) {

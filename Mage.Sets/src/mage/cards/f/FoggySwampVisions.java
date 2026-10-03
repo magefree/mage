@@ -18,7 +18,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.targetadjustment.XManaValueTargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
 
@@ -43,7 +43,7 @@ public final class FoggySwampVisions extends CardImpl {
         // Exile X target creature cards from graveyards. For each creature card exiled this way, create a token that's a copy of it. At the beginning of your next end step, sacrifice those tokens.
         this.getSpellAbility().addEffect(new FoggySwampVisionsEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURES));
-        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private FoggySwampVisions(final FoggySwampVisions card) {

@@ -9,6 +9,7 @@ import mage.abilities.*;
 import mage.abilities.common.*;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ColorsOfManaSpentToCastCount;
 import mage.abilities.effects.Effect;
@@ -17,11 +18,7 @@ import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.abilities.effects.keyword.ScryEffect;
-import mage.abilities.hint.common.CitysBlessingHint;
-import mage.abilities.hint.common.CurrentDungeonHint;
-import mage.abilities.hint.common.InitiativeHint;
-import mage.abilities.hint.common.MonarchHint;
-import mage.abilities.hint.common.PlayersLeftRightHint;
+import mage.abilities.hint.common.*;
 import mage.abilities.keyword.*;
 import mage.cards.*;
 import mage.cards.decks.CardNameUtil;
@@ -79,6 +76,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author JayDi85
@@ -182,7 +180,6 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
-        subtypesToIgnore.add("Book"); // temporary
 
         // number
         // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
@@ -1023,7 +1020,9 @@ public class VerifyCardDataTest {
         ignoreBoosterSets.add("Zendikar Rising Expeditions"); // box toppers
         ignoreBoosterSets.add("March of the Machine: The Aftermath"); // epilogue boosters aren't for draft
         ignoreBoosterSets.add("Mystery Booster"); // temporary
+        ignoreBoosterSets.add("Mystery Booster Commander Edition"); // temporary - not enough info to collate and draft yet
         ignoreBoosterSets.add("The Zeta Set"); // Secret Lair adjacent, not draftable
+        ignoreBoosterSets.add("Reality Fracture"); // newly added set, pending MTGJson updates
     }
 
     @Test
@@ -2286,11 +2285,23 @@ public class VerifyCardDataTest {
         return false;
     }
 
+    /**
+     * Effect fields can be declared by a superclass (the boost and ability-gain families keep theirs on a
+     * shared base), so getDeclaredFields alone would miss them.
+     */
+    static Stream<Field> declaredFieldsIncludingSuperclasses(Class<?> type) {
+        Stream<Field> fields = Stream.empty();
+        for (Class<?> current = type; current != null && current != Object.class; current = current.getSuperclass()) {
+            fields = Stream.concat(fields, Arrays.stream(current.getDeclaredFields()));
+        }
+        return fields;
+    }
+
     boolean recursiveTargetEffectCheck(Effect effect, int depth) {
         if (depth < 0) {
             return false;
         }
-        return Arrays.stream(effect.getClass().getDeclaredFields())
+        return declaredFieldsIncludingSuperclasses(effect.getClass())
                 .anyMatch(f -> {
                     f.setAccessible(true);
                     try {
@@ -2662,6 +2673,21 @@ public class VerifyCardDataTest {
                 // how-to fix: make sure each target has it's own target tag like 1 and 2 (don't use 0 because it's default)
                 fail(card, "abilities", "wrong target tags: miss tag in one of the targets, current list: " + tags);
             }
+        });
+
+        // special check: remove counters cost max targets should be min 1, max equal to number of counters to remove
+        // https://github.com/magefree/mage/pull/16089
+        card.getAbilities().stream().forEach(ability -> {
+            ability.getCosts().stream().filter(RemoveCounterCost.class::isInstance).map(RemoveCounterCost.class::cast).forEach(cost -> {
+                cost.getTargets().stream().forEach(target -> {
+                    if (target.getMinNumberOfTargets() != 1) {
+                        fail(card, "abilities", "RemoveCounterCost min targets should be 1");
+                    }
+                    if (target.getMaxNumberOfTargets() != cost.getCountersToRemove()) {
+                        fail(card, "abilities", "RemoveCounterCost max targets should be equal to number of counters to remove");
+                    }
+                });
+            });
         });
 
         // spells have only 1 ability
@@ -3092,6 +3118,15 @@ public class VerifyCardDataTest {
             for (int i = 0; i < refRules.length; i++) {
                 refRules[i] = "Omen " +
                         ref.types.get(0) + " - " +
+                        ref.faceName + ' ' +
+                        ref.manaCost + " - " +
+                        refRules[i];
+            }
+        }
+        if (card instanceof PrepareSpellCard) {
+            // prepare spells aren't a subtype in mtgjson, so detect by our own card class instead
+            for (int i = 0; i < refRules.length; i++) {
+                refRules[i] = ref.types.get(0) + " - " +
                         ref.faceName + ' ' +
                         ref.manaCost + " - " +
                         refRules[i];

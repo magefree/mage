@@ -9,9 +9,6 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SavedDamageValue;
-import mage.abilities.dynamicvalue.common.SavedDiscardValue;
-import mage.abilities.dynamicvalue.common.SavedGainedLifeValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -976,6 +973,9 @@ public final class CardUtil {
         return getSimpleCountersText(amount, "a", "+1/+1");
     }
 
+    /**
+     * @param amount null to use the counter's own count
+     */
     public static String getAddRemoveCountersText(DynamicValue amount, Counter counter, String description, boolean add) {
         boolean targetPlayerGets = add && (description.endsWith("player") || description.endsWith("opponent"));
         StringBuilder sb = new StringBuilder();
@@ -985,15 +985,13 @@ public final class CardUtil {
         } else {
             sb.append(add ? "put " : "remove ");
         }
-        boolean xValue = amount.toString().equals("X");
-        if (xValue) {
-            sb.append("X ").append(counter.getName()).append(" counters");
-        } else if (amount == SavedDamageValue.MANY
-                || amount == SavedGainedLifeValue.MANY
-                || amount == SavedDiscardValue.MANY) {
-            sb.append("that many ").append(counter.getName()).append(" counters");
-        } else {
+        // The counter provides both quantity and article ("a +1/+1 counter", "two time counters")
+        // amount.toString() "1" means one per something (X or "for each")
+        String count = (amount == null) ? "" : amount.toString();
+        if (count.isEmpty() || "1".equals(count)) {
             sb.append(counter.getDescription());
+        } else {
+            sb.append(count).append(' ').append(counter.getName()).append(" counters");
         }
         if (!targetPlayerGets) {
             sb.append(add ? " on " : " from ");
@@ -1002,8 +1000,9 @@ public final class CardUtil {
             }
             sb.append(description);
         }
-        if (!amount.getMessage().isEmpty()) {
-            sb.append(xValue ? ", where X is " : " for each ").append(amount.getMessage());
+        String message = (amount == null) ? "" : amount.getMessage();
+        if (!message.isEmpty()) {
+            sb.append(count.contains("X") ? ", where X is " : " for each ").append(message);
         }
         return sb.toString();
     }
@@ -1531,6 +1530,16 @@ public final class CardUtil {
     }
 
     public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, SpellCastTracker spellCastTracker, boolean playLand) {
+        return castSpellWithAttributes(player, source, game, cards, filter, spellCastTracker, playLand, true);
+    }
+
+    /**
+     * Cast one spell from among the given cards, restricted to the card parts that match the filter.
+     *
+     * @param noMana true to cast without paying its mana cost
+     */
+    public static boolean castSpellWithAttributes(Player player, Ability source, Game game, Cards cards, FilterCard filter, SpellCastTracker spellCastTracker, boolean playLand, boolean noMana) {
+        Outcome outcome = noMana ? Outcome.PlayForFree : Outcome.Benefit;
         Map<UUID, List<Card>> cardMap = new HashMap<>();
         for (Card card : cards.getCards(game)) {
             List<Card> castableComponents = getCastableComponents(card, filter, source, player, game, spellCastTracker, playLand);
@@ -1549,7 +1558,7 @@ public final class CardUtil {
                 Cards castableCards = new CardsImpl(cardMap.keySet());
                 TargetCard target = new TargetCard(0, 1, Zone.ALL, defaultFilter);
                 target.withNotTarget(true);
-                player.choose(Outcome.PlayForFree, castableCards, target, source, game);
+                player.choose(outcome, castableCards, target, source, game);
                 cardToCast = castableCards.get(target.getFirstTarget(), game);
         }
         if (cardToCast == null) {
@@ -1562,22 +1571,22 @@ public final class CardUtil {
                 .collect(Collectors.joining(" or "));
         if (partsToCast.size() < 1
                 || !player.chooseUse(
-                Outcome.PlayForFree, "Cast spell without paying its mana cost (" + partsInfo + ")?", source, game
+                outcome, (noMana ? "Cast spell without paying its mana cost (" : "Cast spell (") + partsInfo + ")?", source, game
         )) {
             return false;
         }
         partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE));
         ActivatedAbility chosenAbility;
         if (playLand) {
-            chosenAbility = player.chooseLandOrSpellAbility(cardToCast, game, true);
+            chosenAbility = player.chooseLandOrSpellAbility(cardToCast, game, noMana);
         } else {
-            chosenAbility = player.chooseAbilityForCast(cardToCast, game, true);
+            chosenAbility = player.chooseAbilityForCast(cardToCast, game, noMana);
         }
         boolean result;
         if (chosenAbility instanceof SpellAbility) {
             result = player.cast(
                     (SpellAbility) chosenAbility,
-                    game, true, new ApprovingObject(source, game)
+                    game, noMana, new ApprovingObject(source, game)
             );
         } else if (playLand && chosenAbility instanceof PlayLandAbility) {
             Card land = game.getCard(chosenAbility.getSourceId());

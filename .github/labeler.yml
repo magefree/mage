@@ -1,6 +1,6 @@
 dev:
   - changed-files:
-    - any-glob-to-any-file: [ '*', 'Utils/**', '/.github/**' ]
+    - any-glob-to-any-file: [ '*', 'Utils/**', '.github/**' ]
 
 engine:
   - changed-files:

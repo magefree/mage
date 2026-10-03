@@ -13,7 +13,9 @@ import mage.view.PermanentView;
 
 import java.awt.*;
 import java.awt.font.*;
-import java.awt.geom.*;
+import java.awt.geom.Area;
+import java.awt.geom.Path2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
@@ -22,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static org.mage.card.arcane.ModernCardResourceLoader.*;
+import static org.mage.card.arcane.ModernCardResourceLoader.loadBackgroundImage;
 
 /**
  * @author stravant@gmail.com, JayDi85, Jmlundeen

@@ -8,7 +8,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityWithAttachmentEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -39,7 +39,7 @@ public final class TrustyBoomerang extends CardImpl {
         // Equipped creature has "{1}, {T}: Tap target creature. Return Trusty Boomerang to its owner's hand."
         this.addAbility(new SimpleStaticAbility(new GainAbilityWithAttachmentEffect(
                 "equipped creature has \"{1}, {T}: Tap target creature. Return {this} to its owner's hand.\"",
-                new Effects(new ReturnToHandTargetEffect(), new TrustyBoomerangEffect()),
+                new Effects(new TapTargetEffect(), new TrustyBoomerangEffect()),
                 new Targets(new TargetCreaturePermanent()), null,
                 new GenericManaCost(1), new TapSourceCost()
         )));

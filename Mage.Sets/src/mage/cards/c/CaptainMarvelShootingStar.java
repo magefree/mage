@@ -1,7 +1,16 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
+import mage.abilities.common.ZoneChangeTriggeredAbility;
+import mage.abilities.dynamicvalue.common.TargetPermanentPowerCount;
+import mage.abilities.effects.common.ExileAndGainLifeEqualPowerTargetEffect;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
@@ -10,17 +19,9 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.TargetPermanentPowerCount;
-import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
-import mage.abilities.common.ZoneChangeTriggeredAbility;
-import mage.abilities.effects.common.ExileAndGainLifeEqualPowerTargetEffect;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * @author muz
@@ -85,7 +86,7 @@ class CaptainMarvelShootingStarTriggeredAbility extends ZoneChangeTriggeredAbili
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (permanent != null && permanent.isCreature(game) && permanent.getId() != this.getSourceId() ) {
+        if (permanent != null && permanent.isCreature(game) && !permanent.getId().equals(this.getSourceId())) {
             // custom check cause ZoneChangeTriggeredAbility for source object only
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if ((fromZone == null || zEvent.getFromZone() == fromZone)

@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.permanent.token.RabbitToken;
@@ -26,7 +26,7 @@ import java.util.UUID;
 public final class HareApparent extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledPermanent("other creatures you control named Hare Apparent");
+            = new FilterControlledCreaturePermanent("other creatures you control named Hare Apparent");
 
     static {
         filter.add(AnotherPredicate.instance);
