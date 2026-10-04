@@ -6,6 +6,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
@@ -45,7 +46,7 @@ public class OverloadAbility extends SpellAbility {
         Ability overload = new OverloadAbility(card, costs);
         for (Effect effect : effects) {
             card.getSpellAbility().addEffect(effect.copy());
-            OverloadedEffect overloadEffect = new OverloadedEffect(effect, target.copy());
+            OverloadedEffect overloadEffect = new OverloadedEffect(new Effects(effects), target.copy());
             overloadEffect.setText(effect.getText(card.getSpellAbility().getModes().getMode())
                     .replace("target", "each"));
             overload.addEffect(overloadEffect);
@@ -81,33 +82,35 @@ public class OverloadAbility extends SpellAbility {
 }
 
 class OverloadedEffect extends OneShotEffect {
-    Effect innerEffect;
+    Effects innerEffects;
     Target target;
 
-    public OverloadedEffect(Effect innerEffect, Target target) {
+    public OverloadedEffect(Effects innerEffects, Target target) {
         super(Outcome.Benefit);
-        this.innerEffect = innerEffect;
+        this.innerEffects = innerEffects;
         this.target = target.withNotTarget(true);
     }
 
     protected OverloadedEffect(final OverloadedEffect effect) {
         super(effect);
-        this.innerEffect = effect.innerEffect.copy();
+        this.innerEffects = effect.innerEffects.copy();
         this.target = effect.target.copy();
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        innerEffect.setTargetPointer(new FixedTargets(
+        innerEffects.setTargetPointer(new FixedTargets(
                 target.possibleTargets(source.getControllerId(), source, game)
                         .stream().map(id -> new MageObjectReference(id, game))
                         .collect(Collectors.toSet())));
-        if (innerEffect instanceof OneShotEffect) {
-            return innerEffect.apply(game, source);
-        } else {
-            game.addEffect((ContinuousEffect) innerEffect, source);
-            return true;
-        }
+        return innerEffects.stream().allMatch(effect -> {
+            if (effect instanceof OneShotEffect) {
+                return effect.apply(game, source);
+            } else {
+                game.addEffect((ContinuousEffect) effect, source);
+                return true;
+            }
+        });
     }
 
     @Override
