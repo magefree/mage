@@ -37,7 +37,7 @@ jobs:
           #  distribution: 'temurin'
           #  package: 'jdk' # bad, javac 26 no longer accepts release 8
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - name: Setup JDK ${{ matrix.java }}
       uses: actions/setup-java@v5
       with:
