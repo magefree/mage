@@ -1,5 +1,7 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.filter.Filter;
@@ -61,6 +63,86 @@ public class MorphTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
         assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2);
 
+    }
+
+    @Test
+    public void testGiftOfDoomCastFaceDown() {
+        addCard(Zone.HAND, playerA, "Gift of Doom");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gift of Doom using Morph");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2);
+    }
+
+    @Test
+    public void testGiftOfDoomTurnFaceUp() {
+        addCard(Zone.HAND, playerA, "Gift of Doom");
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite");
+        addCard(Zone.BATTLEFIELD, playerA, "Runeclaw Bear");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gift of Doom using Morph");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Turn this face-down permanent face up");
+        setChoice(playerA, "Memnite"); // Sacrifice another creature
+        setChoice(playerA, true); // Attach Gift of Doom
+        addTarget(playerA, "Runeclaw Bear");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Memnite", 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
+        assertPermanentCount(playerA, "Gift of Doom", 1);
+        assertAttachedTo(playerA, "Gift of Doom", "Runeclaw Bear", true);
+        assertAbility(playerA, "Runeclaw Bear", DeathtouchAbility.getInstance(), true);
+        assertAbility(playerA, "Runeclaw Bear", IndestructibleAbility.getInstance(), true);
+    }
+
+    @Test
+    public void testGiftOfDoomCastNormally() {
+        addCard(Zone.HAND, playerA, "Gift of Doom");
+        addCard(Zone.BATTLEFIELD, playerA, "Runeclaw Bear");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gift of Doom", "Runeclaw Bear");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Gift of Doom", 1);
+        assertAttachedTo(playerA, "Gift of Doom", "Runeclaw Bear", true);
+        assertAbility(playerA, "Runeclaw Bear", DeathtouchAbility.getInstance(), true);
+        assertAbility(playerA, "Runeclaw Bear", IndestructibleAbility.getInstance(), true);
+    }
+
+    @Test
+    public void testGiftOfDoomCastWithIllegalTarget() {
+        addCard(Zone.HAND, playerA, "Gift of Doom");
+        addCard(Zone.HAND, playerA, "One with the Stars");
+        addCard(Zone.BATTLEFIELD, playerA, "Runeclaw Bear");
+        addCard(Zone.BATTLEFIELD, playerA, "Vedalken Orrery");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gift of Doom", "Runeclaw Bear");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "One with the Stars", "Runeclaw Bear");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Gift of Doom", 1);
+        assertPermanentCount(playerA, "Gift of Doom", 0);
     }
 
     /**
