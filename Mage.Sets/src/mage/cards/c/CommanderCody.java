@@ -1,13 +1,16 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.TrooperWhiteToken;
@@ -37,9 +40,7 @@ public final class CommanderCody extends CardImpl {
         // Non-token Trooper creatures you control have "At the beginning of your upkeep, create a 1/1 white Trooper creature token."
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new TrooperWhiteToken())),
-                Duration.WhileOnBattlefield, filter, false)
-                .withForceQuotes()
-        ));
+                Duration.WhileOnBattlefield, filter, false)));
     }
 
     private CommanderCody(final CommanderCody card) {

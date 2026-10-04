@@ -11,10 +11,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -22,6 +19,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -43,7 +41,7 @@ public final class HoldForRansom extends CardImpl {
 
         // Enchanted creature can't attack or block and has "{7}: Hold for Ransom's controller sacrifices it and draws a card. Activate only as a sorcery."
         Ability ability = new SimpleStaticAbility(new CantAttackBlockAttachedEffect(AttachmentType.AURA));
-        ability.addEffect(new HoldForRansomGainEffect());
+        ability.addEffect(new HoldForRansomGainEffect().concatBy("and"));
         this.addAbility(ability);
     }
 
@@ -60,8 +58,9 @@ public final class HoldForRansom extends CardImpl {
 class HoldForRansomGainEffect extends GainAbilityAttachedEffect {
 
     HoldForRansomGainEffect() {
-        super(new ActivateAsSorceryActivatedAbility(new HoldForRansomSacrificeEffect(), new GenericManaCost(7)), AttachmentType.AURA);
-        this.staticText = "and has \"" + ability.getRule() + '"';
+        super(new ActivateAsSorceryActivatedAbility(new HoldForRansomSacrificeEffect(), new GenericManaCost(7)),
+                AttachmentType.AURA, Duration.WhileOnBattlefield, null, "Aura");
+        this.getTargetPointer().setTargetDescription("");
     }
 
     private HoldForRansomGainEffect(final HoldForRansomGainEffect effect) {
@@ -74,9 +73,12 @@ class HoldForRansomGainEffect extends GainAbilityAttachedEffect {
     }
 
     @Override
-    public void afterGain(Game game, Ability source, Permanent permanent, Ability addedAbility) {
+    protected List<Ability> getAbilitiesToGrant(Game game, Ability source) {
         Permanent aura = game.getPermanent(source.getSourceId());
-        addedAbility.getEffects().setTargetPointer(new FixedTarget(aura == null ? null : aura.getId(), game));
+        List<Ability> granted = copyOfGrantedAbilities();
+        granted.forEach(ability -> ability.getEffects()
+                .setTargetPointer(new FixedTarget(aura == null ? null : aura.getId(), game)));
+        return granted;
     }
 }
 

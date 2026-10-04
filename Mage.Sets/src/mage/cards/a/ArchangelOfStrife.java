@@ -1,7 +1,7 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,17 +12,32 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author Eirkei
  */
 public final class ArchangelOfStrife extends CardImpl {
+
+    private static final FilterPermanent warFilter = new FilterCreaturePermanent("Creatures controlled by players who chose war");
+    private static final FilterPermanent peaceFilter = new FilterCreaturePermanent("Creatures controlled by players who chose peace");
+
+    static {
+        warFilter.add(WarPredicate.instance);
+        peaceFilter.add(PeacePredicate.instance);
+    }
 
     public ArchangelOfStrife(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
@@ -37,10 +52,10 @@ public final class ArchangelOfStrife extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ArchangelOfStrifeChooseEffect()));
 
         // Creatures controlled by players who chose war get +3/+0.
-        this.addAbility(new SimpleStaticAbility(new ArchangelOfStrifeWarEffect()));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(3, 0, Duration.WhileOnBattlefield, warFilter)));
 
         // Creatures controlled by players who chose peace get +0/+3.
-        this.addAbility(new SimpleStaticAbility(new ArchangelOfStrifePeaceEffect()));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(0, 3, Duration.WhileOnBattlefield, peaceFilter)));
     }
 
     private ArchangelOfStrife(final ArchangelOfStrife card) {
@@ -105,64 +120,24 @@ class ArchangelOfStrifeChooseEffect extends OneShotEffect {
 
 }
 
-class ArchangelOfStrifeWarEffect extends BoostAllEffect {
-
-    private static final FilterCreaturePermanent creaturefilter = new FilterCreaturePermanent("Creatures controlled by players who chose war");
-
-    public ArchangelOfStrifeWarEffect() {
-        super(3, 0, Duration.WhileOnBattlefield, creaturefilter, false);
-    }
+enum WarPredicate implements ObjectSourcePlayerPredicate<MageObject> {
+    instance;
 
     @Override
-    protected boolean selectedByRuntimeData(Permanent permanent, Ability source, Game game) {
-        if (permanent != null) {
-            UUID controllerId = permanent.getControllerId();
-
-            String chosenMode = (String) game.getState().getValue(controllerId + "_" + source.getSourceId() + "_modeChoice");
-
-            return creaturefilter.match(permanent, game) && chosenMode != null && chosenMode.equals("war");
-        }
-
-        return false;
-    }
-
-    private ArchangelOfStrifeWarEffect(final ArchangelOfStrifeWarEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ArchangelOfStrifeWarEffect copy() {
-        return new ArchangelOfStrifeWarEffect(this);
+    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
+        UUID controllerId = ((Permanent) input.getObject()).getControllerId();
+        String chosenMode = (String) game.getState().getValue(controllerId + "_" + input.getSourceId() + "_modeChoice");
+        return chosenMode != null && chosenMode.equals("war");
     }
 }
 
-class ArchangelOfStrifePeaceEffect extends BoostAllEffect {
-
-    private static final FilterCreaturePermanent creaturefilter = new FilterCreaturePermanent("Creatures controlled by players who chose peace");
-
-    public ArchangelOfStrifePeaceEffect() {
-        super(0, 3, Duration.WhileOnBattlefield, creaturefilter, false);
-    }
+enum PeacePredicate implements ObjectSourcePlayerPredicate<MageObject> {
+    instance;
 
     @Override
-    protected boolean selectedByRuntimeData(Permanent permanent, Ability source, Game game) {
-        if (permanent != null) {
-            UUID controllerId = permanent.getControllerId();
-
-            String chosenMode = (String) game.getState().getValue(controllerId + "_" + source.getSourceId() + "_modeChoice");
-
-            return creaturefilter.match(permanent, game) && chosenMode != null && chosenMode.equals("peace");
-        }
-
-        return false;
-    }
-
-    private ArchangelOfStrifePeaceEffect(final ArchangelOfStrifePeaceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ArchangelOfStrifePeaceEffect copy() {
-        return new ArchangelOfStrifePeaceEffect(this);
+    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
+        UUID controllerId = ((Permanent) input.getObject()).getControllerId();
+        String chosenMode = (String) game.getState().getValue(controllerId + "_" + input.getSourceId() + "_modeChoice");
+        return chosenMode != null && chosenMode.equals("peace");
     }
 }

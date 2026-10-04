@@ -45,7 +45,7 @@ public final class HexingSquelcher extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new WardAbility(new PayLifeCost(2), false), Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_PERMANENT_CREATURES, true
-        ).withForceQuotes()));
+        )));
     }
 
     private HexingSquelcher(final HexingSquelcher card) {

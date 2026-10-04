@@ -2,7 +2,6 @@ package mage.abilities.effects;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.CompoundAbility;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.constants.*;
 import mage.filter.Filter;
@@ -471,17 +470,17 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.generateGainAbilityDependenciesFromFilter(filterToSearch);
     }
 
-    public void generateGainAbilityDependencies(CompoundAbility abilityToGain, Filter filterToSearch) {
+    public void generateGainAbilityDependencies(Collection<Ability> abilityToGain, Filter filterToSearch) {
         this.addDependencyType(DependencyType.AddingAbility);
         this.generateGainAbilityDependenciesFromAbility(abilityToGain);
         this.generateGainAbilityDependenciesFromFilter(filterToSearch);
     }
 
-    private void generateGainAbilityDependenciesFromAbility(CompoundAbility compoundAbility) {
-        if (compoundAbility == null) {
+    private void generateGainAbilityDependenciesFromAbility(Collection<Ability> grantedAbilities) {
+        if (grantedAbilities == null) {
             return;
         }
-        for (Ability ability : compoundAbility) {
+        for (Ability ability : grantedAbilities) {
             generateGainAbilityDependenciesFromAbility(ability);
         }
     }

@@ -1,8 +1,5 @@
 package mage.cards.g;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -11,14 +8,9 @@ import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.WatcherScope;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
@@ -26,6 +18,12 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.Watcher;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  *
@@ -83,13 +81,14 @@ class GrothamaAllDevouringGainAbilityEffect extends GainAbilityAllEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    protected List<Ability> getAbilitiesToGrant(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null) {
-            return false;
+            return Collections.emptyList();
         }
-        ability = new AttacksTriggeredAbility(new GrothamaAllDevouringFightEffect(permanent.getId(), permanent.getName()), true);
-        return super.apply(game, source);
+        return Collections.singletonList(new AttacksTriggeredAbility(
+                new GrothamaAllDevouringFightEffect(permanent.getId(), permanent.getName()), true
+        ));
     }
 }
 

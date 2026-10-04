@@ -37,7 +37,7 @@ public final class MishraTamerOfMakFawa extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new WardAbility(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT), false),
                 Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENTS
-        ).withForceQuotes()));
+        )));
 
         // Each artifact card in your graveyard has unearth {1}{B}{R}
         this.addAbility(new SimpleStaticAbility(new MishraTamerOfMakFawaEffect()));

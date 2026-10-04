@@ -43,7 +43,7 @@ public final class AcolyteOfBahamut extends CardImpl {
                 new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 2)),
                 Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_CREATURES_OWNED_COMMANDER
-        ).withForceQuotes()), new AcolyteOfBahamutWatcher());
+        )), new AcolyteOfBahamutWatcher());
     }
 
     private AcolyteOfBahamut(final AcolyteOfBahamut card) {
