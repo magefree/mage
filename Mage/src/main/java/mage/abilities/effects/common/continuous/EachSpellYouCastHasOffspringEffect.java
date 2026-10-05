@@ -44,7 +44,7 @@ public class EachSpellYouCastHasOffspringEffect extends ContinuousEffectImpl {
         this.offspringCost = offspringCost;
         this.staticText = CardUtil.getTextWithFirstCharUpperCase(this.filter.getMessage())
                 + (this.filter.getMessage().contains("cast") ? "" : " you cast")
-                + " have offspring " + this.offspringCost.getText()
+                + " gains offspring " + this.offspringCost.getText()
                 + ((reminderText != null && !reminderText.isEmpty()) ? (". <i>(" + reminderText + ")</i>") : "");
     }
 
