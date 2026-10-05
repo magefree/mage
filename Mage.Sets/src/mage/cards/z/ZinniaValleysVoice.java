@@ -53,7 +53,7 @@ public final class ZinniaValleysVoice extends CardImpl {
                 new PermanentsOnBattlefieldCount(filterBuff), StaticValue.get(0), Duration.WhileOnBattlefield
         )));
 
-        // Creature spells you cast have offspring {2}.
+        // Creature spells you cast gain offspring {2} as you cast them.
         this.addAbility(new SimpleStaticAbility(new EachSpellYouCastHasOffspringEffect(
                 "{2}", filterSpells
         )));
