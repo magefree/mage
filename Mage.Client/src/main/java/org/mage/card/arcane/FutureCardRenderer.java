@@ -30,9 +30,7 @@ public class FutureCardRenderer extends ModernCardRenderer {
 
     private int manaRailWidth;
     private int railRight;
-    private int artX;
     private int artY;
-    private int artWidth;
     private int artHeight;
 
     public FutureCardRenderer(CardView card) {
@@ -45,15 +43,13 @@ public class FutureCardRenderer extends ModernCardRenderer {
         manaRailWidth = Math.max(boxHeight, (int) (cardWidth * 0.135f));
         typeLineY = (int) (TYPE_LINE_Y_FRAC_FUTURE * cardHeight);
         railRight = totalContentInset + manaRailWidth;
-        artX = totalContentInset;
         artY = totalContentInset + boxHeight;
-        artWidth = cardWidth - totalContentInset - artX;
         artHeight = typeLineY - artY;
     }
 
     @Override
     protected void drawArt(Graphics2D g) {
-        if (artImage == null || artWidth <= 0 || artHeight <= 0) {
+        if (artImage == null || contentWidth <= 0 || artHeight <= 0) {
             return;
         }
         Rectangle2D sourceRect = cardView.getArtRect() == null
@@ -62,7 +58,7 @@ public class FutureCardRenderer extends ModernCardRenderer {
         Graphics2D artGraphics = (Graphics2D) g.create();
         try {
             artGraphics.setClip(createArtWindow());
-            drawArtIntoRect(artGraphics, artX, artY, artWidth, artHeight, sourceRect, true);
+            drawArtIntoRect(artGraphics, totalContentInset, artY, contentWidth, artHeight, sourceRect, true);
         } finally {
             artGraphics.dispose();
         }
@@ -300,7 +296,7 @@ public class FutureCardRenderer extends ModernCardRenderer {
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         for (String symbol : symbols) {
-            if (symbol.isEmpty() || y + diameter > typeLineY - 1) {
+            if (y + diameter > typeLineY - 1) {
                 break;
             }
             float symbolCenterY = y + diameter / 2f;
@@ -332,5 +328,3 @@ public class FutureCardRenderer extends ModernCardRenderer {
         }
     }
 }
-
-
