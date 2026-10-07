@@ -43,6 +43,12 @@ import java.util.stream.Collectors;
  */
 public class LoadTest {
 
+    static {
+        // must be first java code
+        // apply default java settings (require for load testing)
+        JavaUtil.applyDefaultClientSettings();
+    }
+
     private static final Logger logger = Logger.getLogger(LoadTest.class);
 
     private static final String TEST_SERVER = "localhost";
@@ -72,9 +78,6 @@ public class LoadTest {
     public static void initDatabase() {
         // recreate missing cards db
         CardScanner.scan();
-
-        // apply default java settings (require for load testing)
-        JavaUtil.applyDefaultClientSettings();
     }
 
     @Test

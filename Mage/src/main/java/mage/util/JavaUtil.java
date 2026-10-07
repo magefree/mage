@@ -2,6 +2,9 @@ package mage.util;
 
 /**
  * Apply default java settings for better compatibility in different environments
+ * 
+ * WARNING, must be called from static method before any other code 
+ * (some dependency libs can init some values before our code, see #16450)
  *
  * It's still possible to change default settings by JVM params like -Djava.net.preferIPv4Stack=false
  *

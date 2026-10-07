@@ -48,6 +48,11 @@ import java.util.*;
  */
 public final class Main {
 
+    static {
+        // must be first java code
+        JavaUtil.applyDefaultServerSettings();
+    }
+
     private static final Logger logger = Logger.getLogger(Main.class);
     private static final MageVersion version = new MageVersion(Main.class);
 
@@ -90,8 +95,6 @@ public final class Main {
     private static boolean detailsMode;
 
     public static void main(String[] args) {
-        JavaUtil.applyDefaultServerSettings();
-
         logger.info("Starting MAGE SERVER version: " + version);
         logger.info("Java version: " + System.getProperty("java.version"));
         DebugUtil.printLogsInfo(logger);

@@ -89,6 +89,11 @@ import java.util.stream.Collectors;
  */
 public class MageFrame extends javax.swing.JFrame implements MageClient {
 
+    static {
+        // must be first java code
+        JavaUtil.applyDefaultClientSettings();
+    }
+
     private static final String TITLE_NAME = "XMage";
 
     private static final Logger LOGGER = Logger.getLogger(MageFrame.class);
@@ -1520,7 +1525,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
      * @param args the command line arguments
      */
     public static void main(final String[] args) {
-        JavaUtil.applyDefaultClientSettings();
 
         LOGGER.info("Starting MAGE CLIENT version: " + VERSION);
         LOGGER.info("Java version: " + System.getProperty("java.version"));
