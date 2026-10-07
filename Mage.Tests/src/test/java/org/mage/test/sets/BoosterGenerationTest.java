@@ -511,6 +511,32 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
         }
     }
 
+    @Test
+    public void test_BoosterSize_NoMissingOrExtraCards() {
+        // https://github.com/magefree/mage/issues/16370
+        // 30A: no mythics in set, so the rare slot must not try to take a mythic
+        // SWS: the only double-faced card must not add an extra card
+        // MH3: second commander card from the wildcard slots must not be lost
+        for (int i = 0; i < 1000; i++) {
+            assertEquals("30A booster must contain 15 cards", 15, The30thAnniversaryEdition.getInstance().createBooster().size());
+            assertEquals("SWS booster must contain 15 cards", 15, StarWars.getInstance().createBooster().size());
+            assertEquals("MH3 booster must contain 14 cards", 14, ModernHorizons3.getInstance().createBooster().size());
+        }
+    }
+
+    @Test
+    public void test_ModernHorizons3_AllCommandersInBoosters() {
+        // https://github.com/magefree/mage/issues/16370
+        // all 8 face commanders from M3C #1-8 must be possible, not only one of them
+        Set<String> commanders = new HashSet<>();
+        for (int i = 0; i < 5000 && commanders.size() < 8; i++) {
+            ModernHorizons3.getInstance().createBooster().stream()
+                    .filter(card -> card.getExpansionSetCode().equals("M3C"))
+                    .forEach(card -> commanders.add(card.getName()));
+        }
+        assertEquals("MH3 boosters must contain all 8 commanders from M3C: " + commanders, 8, commanders.size());
+    }
+
     // String output formatter for the below debug test
     private static String getManaCostOrColorIdentity(Card card) {
         String result = card.getManaCost().getText();

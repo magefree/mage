@@ -28,7 +28,7 @@ public final class StarWars extends ExpansionSet {
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
-        this.numBoosterDoubleFaced = 1;
+        this.numBoosterDoubleFaced = -1; // only one double-faced card (mythic), so it uses the normal rarity slots
         this.ratioBoosterMythic = 8;
         this.maxCardNumberInBooster = 271;
 
