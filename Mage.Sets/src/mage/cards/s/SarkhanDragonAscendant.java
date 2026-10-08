@@ -47,7 +47,7 @@ public final class SarkhanDragonAscendant extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter
         );
         ability.addEffect(new AddCardSubTypeSourceEffect(
-                Duration.EndOfTurn, SubType.DRAGON
+                Duration.EndOfTurn, true, SubType.DRAGON
         ).setText("until end of turn, {this} becomes a Dragon in addition to its other types"));
         ability.addEffect(new GainAbilitySourceEffect(
                 FlyingAbility.getInstance(), Duration.EndOfTurn
