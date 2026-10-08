@@ -51,7 +51,7 @@ class KorChantEffect extends RedirectionEffect {
 
     private KorChantEffect(final KorChantEffect effect) {
         super(effect);
-        this.target = effect.target;
+        this.target = effect.target.copy();
     }
 
     @Override
