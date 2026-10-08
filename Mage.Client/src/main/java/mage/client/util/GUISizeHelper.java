@@ -3,6 +3,7 @@ package mage.client.util;
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.gui.GuiDisplayUtil;
+import mage.util.ThreadUtils;
 import org.mage.card.arcane.CardRenderer;
 
 import javax.swing.*;
@@ -90,6 +91,8 @@ public final class GUISizeHelper {
      * @param reloadTheme use it after theme changes only
      */
     public static void refreshGUIAndCards(boolean reloadTheme) {
+        ThreadUtils.ensureRunInGUISwingThread();
+
         calculateGUISizes();
         if (reloadTheme) {
             GuiDisplayUtil.refreshThemeSettings();
