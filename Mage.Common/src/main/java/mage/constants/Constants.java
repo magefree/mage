@@ -60,5 +60,6 @@ public final class Constants {
         public static final String SECOND_MESSAGE = "secondMessage";
         public static final String HINT_TEXT = "hintText";
         public static final String AUTO_ANSWER_MESSAGE = "autoAnswerMessage";
+        public static final String CUSTOM_SELECT_MESSAGE = "customSelectMessage";
     }
 }
