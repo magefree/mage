@@ -63,6 +63,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Spock, Logical Choice", 194, Rarity.MYTHIC, mage.cards.s.SpockLogicalChoice.class));
         cards.add(new SetCardInfo("Spot, Felis catus", 237, Rarity.RARE, mage.cards.s.SpotFelisCatus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spot, Felis catus", 29, Rarity.RARE, mage.cards.s.SpotFelisCatus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Starfleet Communicator", 121, Rarity.RARE, mage.cards.s.StarfleetCommunicator.class));
         cards.add(new SetCardInfo("Starfleet Crew", 139, Rarity.COMMON, mage.cards.s.StarfleetCrew.class));
         cards.add(new SetCardInfo("Starship Enterprise", 122, Rarity.RARE, mage.cards.s.StarshipEnterprise.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Starship Enterprise", 211, Rarity.RARE, mage.cards.s.StarshipEnterprise.class, NON_FULL_USE_VARIOUS));
