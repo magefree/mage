@@ -47,5 +47,12 @@ public class JavaUtil {
         if (System.getProperty("sun.jnu.encoding") == null) {
             System.setProperty("sun.jnu.encoding", "UTF-8");
         }
+
+        // workaround for bad graphic card drivers:
+        // some systems has ugly cards, buttons or other GUI drawing artifacts due bad nvidia drivers
+        // see #4626
+        if (System.getProperty("sun.java2d.d3d") == null) {
+            System.setProperty("sun.java2d.d3d", "false");
+        }
     }
 }
