@@ -61,6 +61,7 @@ public enum SubType {
     BOBBLEHEAD("Bobblehead", SubTypeSet.ArtifactType),
     BOOK("Book", SubTypeSet.ArtifactType),
     CLUE("Clue", SubTypeSet.ArtifactType),
+    COMMUNICATOR("Communicator", SubTypeSet.ArtifactType),
     CONTRAPTION("Contraption", SubTypeSet.ArtifactType),
     EQUIPMENT("Equipment", SubTypeSet.ArtifactType),
     FOOD("Food", SubTypeSet.ArtifactType),
