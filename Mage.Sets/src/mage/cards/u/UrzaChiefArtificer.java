@@ -10,8 +10,7 @@ import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.KarnConstructToken;
 
 import java.util.UUID;
@@ -20,13 +19,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class UrzaChiefArtificer extends CardImpl {
-
-    private static final FilterControlledPermanent filter
-            = new FilterControlledCreaturePermanent("artifact creatures");
-
-    static {
-        filter.add(CardType.ARTIFACT.getPredicate());
-    }
 
     public UrzaChiefArtificer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{U}{B}");
@@ -42,8 +34,9 @@ public final class UrzaChiefArtificer extends CardImpl {
 
         // Artifact creatures you control have menace.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new MenaceAbility(false), Duration.WhileOnBattlefield, filter)
-        ));
+            new MenaceAbility(false), Duration.WhileOnBattlefield,
+            StaticFilters.FILTER_PERMANENTS_ARTIFACT_CREATURE
+        )));
 
         // At the beginning of your end step, create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new KarnConstructToken())));

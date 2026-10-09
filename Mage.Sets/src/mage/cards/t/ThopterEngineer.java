@@ -6,14 +6,14 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.ThopterColorlessToken;
 
 /**
@@ -21,12 +21,6 @@ import mage.game.permanent.token.ThopterColorlessToken;
  * @author Wehk
  */
 public final class ThopterEngineer extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Artifact creatures you control");
-
-    static {
-        filter.add(CardType.ARTIFACT.getPredicate());
-    }
 
     public ThopterEngineer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
@@ -39,7 +33,10 @@ public final class ThopterEngineer extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken(), 1)));
 
         // Artifact creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
+            HasteAbility.getInstance(), Duration.WhileOnBattlefield,
+            StaticFilters.FILTER_PERMANENTS_ARTIFACT_CREATURE
+        )));
     }
 
     private ThopterEngineer(final ThopterEngineer card) {
