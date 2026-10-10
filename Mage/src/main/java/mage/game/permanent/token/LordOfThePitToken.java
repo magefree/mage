@@ -1,14 +1,16 @@
-package mage.cards.l;
+package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
@@ -17,35 +19,37 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetSacrifice;
 
-import java.util.UUID;
-
 /**
- * @author dustinconrad
+ * @author muz
  */
-public final class LordOfThePit extends CardImpl {
+public final class LordOfThePitToken extends TokenImpl {
 
-    public LordOfThePit(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}");
-        this.subtype.add(SubType.DEMON);
-
-        this.power = new MageInt(7);
-        this.toughness = new MageInt(7);
+    public LordOfThePitToken() {
+        super("Lord of the Pit", "Lord of the Pit token");
+        manaCost = new ManaCostsImpl<>("{4}{B}{B}");
+        cardType.add(CardType.CREATURE);
+        color.setBlack(true);
+        subtype.add(SubType.DEMON);
+        power = new MageInt(7);
+        toughness = new MageInt(7);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Trample
         this.addAbility(TrampleAbility.getInstance());
+
         // At the beginning of your upkeep, sacrifice a creature other than Lord of the Pit. If you can't, Lord of the Pit deals 7 damage to you.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LordOfThePitEffect()));
     }
 
-    private LordOfThePit(final LordOfThePit card) {
-        super(card);
+    private LordOfThePitToken(final LordOfThePitToken token) {
+        super(token);
     }
 
     @Override
-    public LordOfThePit copy() {
-        return new LordOfThePit(this);
+    public LordOfThePitToken copy() {
+        return new LordOfThePitToken(this);
     }
 }
 
