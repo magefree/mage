@@ -49,9 +49,8 @@ public final class SparkshaperVisionary extends CardImpl {
                 .withAbility(FlyingAbility.getInstance())
                 .withAbility(HexproofAbility.getInstance())
                 .withAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ScryEffect(1, false), false)),
-                false, false, Duration.EndOfTurn,
-                false, true, true
-                ).setText("choose any number of target planeswalkers you control. Until end of turn, "
+                false, false, Duration.EndOfTurn
+                ).withLoseOtherCardTypes(true).setText("choose any number of target planeswalkers you control. Until end of turn, "
                 + "they become 3/3 blue Bird creatures with flying, hexproof, and "
                 + "\"Whenever this creature deals combat damage to a player, scry 1.\""
                 + " <i>(They're no longer planeswalkers. Loyalty abilities can still be activated.)</i>"),

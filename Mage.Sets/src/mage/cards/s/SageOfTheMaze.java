@@ -99,8 +99,8 @@ class SageOfTheMazeEffect extends OneShotEffect {
                 new CreatureToken(pt, pt, "")
                         .withSubType(SubType.CITIZEN)
                         .withAbility(HasteAbility.getInstance()),
-                false, true, Duration.EndOfTurn
-        ), source);
+                false, false, Duration.EndOfTurn
+        ).withKeepPriorTypes(true), source);
         return true;
     }
 }

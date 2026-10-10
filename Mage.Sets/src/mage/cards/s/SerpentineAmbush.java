@@ -23,7 +23,7 @@ public final class SerpentineAmbush extends CardImpl {
                         5, 5, "blue Serpent with base power and toughness 5/5"
                 ).withColor("U").withSubType(SubType.SERPENT),
                 false, false, Duration.EndOfTurn
-        ).withDurationRuleAtStart(true).setRemoveSubtypes(true));
+        ).withDurationRuleAtStart(true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

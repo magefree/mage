@@ -36,7 +36,7 @@ public final class VengeantEarth extends CardImpl {
         // Target creature or land you control becomes a 4/4 Elemental creature with haste in addition to its other types until end of turn. It must be blocked this turn if able.
         this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new CreatureToken(
                 4, 4, "4/4 Elemental creature with haste", SubType.ELEMENTAL
-        ).withAbility(HasteAbility.getInstance()), false, false, Duration.EndOfTurn));
+        ).withAbility(HasteAbility.getInstance()), false, false, Duration.EndOfTurn).withKeepPriorTypes(true));
         this.getSpellAbility().addEffect(new MustBeBlockedByAtLeastOneTargetEffect().setText("it must be blocked this turn if able"));
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
