@@ -3,6 +3,8 @@ package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.common.EnduringStoryHint;
 import mage.designations.DesignationType;
 import mage.game.Game;
 
@@ -13,6 +15,10 @@ import mage.game.Game;
 public enum EnduringStoryCondition implements Condition {
 
     instance;
+
+    public static Hint getHint() {
+        return EnduringStoryHint.instance;
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
