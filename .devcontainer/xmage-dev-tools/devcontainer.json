@@ -44,7 +44,9 @@
 		"ghcr.io/devcontainers/features/python:1": {
 			"version": "latest",
 			"installTools": true
-		}
+		},
+		// github cli
+		"ghcr.io/devcontainers/features/github-cli:1": {}
 	},
 	// run under custom user, not root
 	"remoteUser": "vscode",
