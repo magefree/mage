@@ -2334,10 +2334,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbCardRenderShowAbilityTextOverlay.setText("Show ability text as overlay in big card view");
 
         labelRenderMode.setText("Render Mode:");
-        labelRenderMode.setToolTipText("<HTML>Image - Renders card image with text overlay<br> MTGO - Renders card frame around card art<br> Forced M15 - Renders all cards in the modern frame<br> Forced Retro - Renders all cards in the retro frame");
+        labelRenderMode.setToolTipText("<HTML>Image - Renders card image with text overlay<br> MTGO - Renders card frame around card art<br> Forced M15 - Renders all cards in the modern frame<br> Forced Retro - Renders all cards in the retro frame<br> Forced Future Sight - Adapts all cards to the futureshifted frame");
 
         cbCardRenderImageFallback.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbCardRenderImageFallback.setToolTipText("<HTML>Image - Renders card image with text overlay<br> MTGO - Renders card frame around card art<br> Forced M15 - Renders all cards in the MTGO style with the modern frame<br> Forced Retro - Renders all cards in the MTGO style with the retro frame");
+        cbCardRenderImageFallback.setToolTipText("<HTML>Image - Renders card image with text overlay<br> MTGO - Renders card frame around card art<br> Forced M15 - Renders all cards in the MTGO style with the modern frame<br> Forced Retro - Renders all cards in the MTGO style with the retro frame<br> Forced Future Sight - Renders all cards in the MTGO style with the futureshifted frame");
 
         org.jdesktop.layout.GroupLayout panelCardStylesLayout = new org.jdesktop.layout.GroupLayout(panelCardStyles);
         panelCardStyles.setLayout(panelCardStylesLayout);
