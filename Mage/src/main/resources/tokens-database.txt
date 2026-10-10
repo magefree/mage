@@ -3222,3 +3222,8 @@
 
 # PL26
 |TOK:PL26|Treasure||TreasureToken|
+
+# MDD
+#|TOK:MDD|ElfWarrior||ElfWarriorToken|
+
+# MDC
