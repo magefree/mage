@@ -305,7 +305,7 @@ public enum SubType {
     MERFOLK("Merfolk", SubTypeSet.CreatureType),
     METATHRAN("Metathran", SubTypeSet.CreatureType),
     MINION("Minion", SubTypeSet.CreatureType),
-    MINDLESS_ONE("Mindless-One", SubTypeSet.CreatureType, true),
+    MINDLESS_ONE("Mindless-One", SubTypeSet.CreatureType),
     MINOTAUR("Minotaur", SubTypeSet.CreatureType),
     MIRIALAN("Mirialan", SubTypeSet.CreatureType, true), // Star Wars
     MITE("Mite", SubTypeSet.CreatureType),
