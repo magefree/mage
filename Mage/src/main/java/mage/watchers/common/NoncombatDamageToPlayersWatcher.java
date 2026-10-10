@@ -24,6 +24,11 @@ public class NoncombatDamageToPlayersWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.BEGINNING_PHASE_PRE && game.getTurnNum() == 1) {
+            damagedThisTurn.clear();
+            damagedLastTurn.clear();
+            return;
+        }
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER
                 && !((DamagedPlayerEvent) event).isCombatDamage() && event.getAmount() > 0) {
             damagedThisTurn.add(event.getTargetId());
