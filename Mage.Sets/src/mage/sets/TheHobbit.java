@@ -321,5 +321,6 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Wizard's Staff", 59, Rarity.RARE, mage.cards.w.WizardsStaff.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wizard's Staff", 294, Rarity.RARE, mage.cards.w.WizardsStaff.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wood Elves", 142, Rarity.COMMON, mage.cards.w.WoodElves.class));
+        cards.add(new SetCardInfo("Woodland Weavemaster", 143, Rarity.UNCOMMON, mage.cards.w.WoodlandWeavemaster.class));
     }
 }
