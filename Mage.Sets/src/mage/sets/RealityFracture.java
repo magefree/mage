@@ -268,6 +268,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Multiply by Zero", 58, Rarity.UNCOMMON, mage.cards.m.MultiplyByZero.class));
         cards.add(new SetCardInfo("Murmuring Volume", 174, Rarity.COMMON, mage.cards.m.MurmuringVolume.class));
         cards.add(new SetCardInfo("No Admittance", 89, Rarity.COMMON, mage.cards.n.NoAdmittance.class));
+        cards.add(new SetCardInfo("Null Summoner", 142, Rarity.RARE, mage.cards.n.NullSummoner.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Null Summoner", 353, Rarity.RARE, mage.cards.n.NullSummoner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Omnipresence", 110, Rarity.MYTHIC, mage.cards.o.Omnipresence.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Omnipresence", 331, Rarity.MYTHIC, mage.cards.o.Omnipresence.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Omnipresence", 448, Rarity.MYTHIC, mage.cards.o.Omnipresence.class, NON_FULL_USE_VARIOUS));
