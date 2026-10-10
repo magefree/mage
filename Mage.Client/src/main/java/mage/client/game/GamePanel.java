@@ -114,6 +114,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private ReplayTask replayTask;
     private final PickNumberDialog pickNumber;
     private final PickMultiNumberDialog pickMultiNumber;
+    private PickChoiceDialog pickChoice;
     private JLayeredPane jLayeredPane;
     private String chosenHandKey = "You";
     private final skipButtonsList skipButtons = new skipButtonsList();
@@ -415,6 +416,7 @@ public final class GamePanel extends javax.swing.JPanel {
         if (pickMultiNumber != null) {
             pickMultiNumber.removeDialog();
         }
+        clearPickChoiceDialog();
         for (CardInfoWindowDialog windowDialog : exiles.values()) {
             windowDialog.cleanUp();
             windowDialog.removeDialog();
@@ -469,6 +471,15 @@ public final class GamePanel extends javax.swing.JPanel {
         // remove dialogs forever on clean or full update
         clearPickTargetDialogs();
         clearPickPileDialogs();
+    }
+
+    private void clearPickChoiceDialog() {
+        if (this.pickChoice != null) {
+            PickChoiceDialog oldPickChoice = this.pickChoice;
+            this.pickChoice = null;
+            oldPickChoice.hideDialog();
+            oldPickChoice.removeDialog();
+        }
     }
 
     private void clearPickTargetDialogs() {
@@ -2234,8 +2245,16 @@ public final class GamePanel extends javax.swing.JPanel {
         DialogManager.getManager(gameId).fadeOut();
 
         // TODO: remember last choices and search incremental for same events?
-        PickChoiceDialog pickChoice = new PickChoiceDialog();
-        pickChoice.showDialog(choice, null, objectId, choiceWindowState, bigCard, () -> {
+        clearPickChoiceDialog();
+        PickChoiceDialog newPickChoice = new PickChoiceDialog();
+        this.pickChoice = newPickChoice;
+        newPickChoice.showDialog(choice, null, objectId, choiceWindowState, bigCard, () -> {
+            if (this.pickChoice != newPickChoice) {
+                newPickChoice.removeDialog();
+                return;
+            }
+            this.pickChoice = null;
+
             // special mode adds # to the answer (server side code must process that prefix, see replacementEffectChoice)
             String specialPrefix = choice.isChosenSpecial() ? "#" : "";
 
@@ -2248,9 +2267,9 @@ public final class GamePanel extends javax.swing.JPanel {
             SessionHandler.sendPlayerString(gameId, valueToSend == null ? null : specialPrefix + valueToSend);
 
             // keep dialog position
-            choiceWindowState = new MageDialogState(pickChoice);
+            choiceWindowState = new MageDialogState(newPickChoice);
 
-            pickChoice.removeDialog();
+            newPickChoice.removeDialog();
         });
     }
 
