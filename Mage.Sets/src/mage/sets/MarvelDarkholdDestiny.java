@@ -25,6 +25,7 @@ public final class MarvelDarkholdDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 301, Rarity.LAND, mage.cards.basiclands.Forest.class));
         cards.add(new SetCardInfo("Island", 294, Rarity.LAND, mage.cards.basiclands.Island.class));
         cards.add(new SetCardInfo("Mountain", 298, Rarity.LAND, mage.cards.basiclands.Mountain.class));
+        cards.add(new SetCardInfo("Penance Stare", 28, Rarity.UNCOMMON, mage.cards.p.PenanceStare.class));
         cards.add(new SetCardInfo("Plains", 292, Rarity.LAND, mage.cards.basiclands.Plains.class));
         cards.add(new SetCardInfo("Swamp", 296, Rarity.LAND, mage.cards.basiclands.Swamp.class));
     }
