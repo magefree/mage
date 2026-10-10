@@ -643,6 +643,7 @@ public class ScryfallImageSupportCards {
             add("SDS"); // Stardates
             add("PF27"); // MagicFest 2027
             add("MDD"); // Marvel: Darkhold Destiny
+            add("MDC"); // Marvel: Darkhold Destiny Commander
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards

@@ -186,6 +186,7 @@ March of the Machine Commander|MOC|
 March of the Machine: The Aftermath|MAT|
 March of the Machine|MOM|
 Marvel: Darkhold Destiny|MDD|
+Marvel: Darkhold Destiny Commander|MDC|
 Marvel Super Heroes Commander|MSC|
 Marvel Super Heroes|MSH|
 Marvel's Spider-Man Eternal|SPE|
