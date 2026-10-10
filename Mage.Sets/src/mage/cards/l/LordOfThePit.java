@@ -83,14 +83,11 @@ class LordOfThePitEffect extends OneShotEffect {
         if (target.canChoose(player.getId(), source, game)) {
             player.choose(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
-            if (permanent != null) {
-                permanent.sacrifice(source, game);
+            if (permanent != null && permanent.sacrifice(source, game)) {
                 return true;
             }
-        } else {
-            player.damage(7, source.getSourceId(), source, game);
-            return true;
         }
-        return false;
+        player.damage(7, source.getSourceId(), source, game);
+        return true;
     }
 }
