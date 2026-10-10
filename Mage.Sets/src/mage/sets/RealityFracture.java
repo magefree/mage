@@ -377,6 +377,7 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Terminal Criticism", 68, Rarity.UNCOMMON, mage.cards.t.TerminalCriticism.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tether Technician", 94, Rarity.COMMON, mage.cards.t.TetherTechnician.class));
         cards.add(new SetCardInfo("Tethermage's Advantage", 117, Rarity.COMMON, mage.cards.t.TethermagesAdvantage.class));
+        cards.add(new SetCardInfo("Tetsuko Umezawa, Pursuer", 252, Rarity.UNCOMMON, mage.cards.t.TetsukoUmezawaPursuer.class));
         cards.add(new SetCardInfo("Tetsuko Umezawa, Fugitive", 221, Rarity.UNCOMMON, mage.cards.t.TetsukoUmezawaFugitive.class));
         cards.add(new SetCardInfo("Teyo, Diamondblade Mage", 236, Rarity.UNCOMMON, mage.cards.t.TeyoDiamondbladeMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Teyo, Diamondblade Mage", 306, Rarity.UNCOMMON, mage.cards.t.TeyoDiamondbladeMage.class, NON_FULL_USE_VARIOUS));
