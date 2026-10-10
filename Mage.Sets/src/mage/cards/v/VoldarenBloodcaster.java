@@ -80,7 +80,7 @@ public final class VoldarenBloodcaster extends TransformingDoubleFacedCard {
                         .withAbility(HasteAbility.getInstance())
                         .withColor("B"),
                 false, false, Duration.Custom
-        ).setText("up to one target Blood token you control becomes a " +
+        ).withKeepPriorTypes(true).setText("up to one target Blood token you control becomes a " +
                 "2/2 black Bat creature with flying and haste in addition to its other types"));
         ability.addTarget(new TargetPermanent(0, 1, filter2));
         this.getRightHalfCard().addAbility(ability);

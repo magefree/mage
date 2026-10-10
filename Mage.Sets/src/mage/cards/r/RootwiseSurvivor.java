@@ -39,7 +39,7 @@ public final class RootwiseSurvivor extends CardImpl {
         Ability ability = new SurvivalAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance(3)));
         ability.addEffect(new BecomesCreatureTargetEffect(new CreatureToken(
                 0, 0, "0/0 Elemental creature"
-        ).withSubType(SubType.ELEMENTAL), false, false, Duration.Custom)
+        ).withSubType(SubType.ELEMENTAL), false, false, Duration.Custom).withKeepPriorTypes(true)
                 .setText("That land becomes a 0/0 Elemental creature in addition to its other types"));
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
         ability.addEffect(new GainAbilityTargetEffect(

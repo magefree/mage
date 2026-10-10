@@ -107,6 +107,7 @@ class JolraelVoiceOfZhalfirEffect extends OneShotEffect {
         }
         game.addEffect(new BecomesCreatureTargetEffect(
                 new CreatureToken(count, count, "", SubType.BIRD)
+                        .withColor("GU")
                         .withAbility(FlyingAbility.getInstance())
                         .withAbility(HasteAbility.getInstance()),
                 false, true, Duration.EndOfTurn

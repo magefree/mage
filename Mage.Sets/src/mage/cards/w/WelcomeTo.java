@@ -75,6 +75,7 @@ public final class WelcomeTo extends TransformingDoubleFacedCard {
             ability.addEffect(
                     new BecomesCreatureTargetEffect(
                             new CreatureToken(0, 4)
+                            .withType(CardType.ARTIFACT)
                             .withSubType(SubType.WALL)
                             .withAbility(DefenderAbility.getInstance()),
                             false, false, Duration.WhileControlled

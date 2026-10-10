@@ -56,7 +56,7 @@ public final class TheMechanistAerialArtisan extends CardImpl {
                 new BecomesCreatureTargetEffect(
                         new CreatureToken(
                                 3, 1, "3/1 Construct artifact creature with flying", SubType.CONSTRUCT
-                        ).withAbility(FlyingAbility.getInstance()), false, false, Duration.EndOfTurn
+                        ).withType(CardType.ARTIFACT).withAbility(FlyingAbility.getInstance()), false, false, Duration.EndOfTurn
                 ).withDurationRuleAtStart(true), new TapSourceCost()
         );
         ability.addTarget(new TargetPermanent(filter));

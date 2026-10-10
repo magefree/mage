@@ -54,8 +54,7 @@ public final class KitesailLarcenist extends CardImpl {
         // When Kitesail Larcenist enters the battlefield, for each player, choose up to one other target artifact or creature that player controls. For as long as Kitesail Larcenist remains on the battlefield, the chosen permanents become Treasure artifacts with "{T}, Sacrifice this artifact: Add one mana of any color" and lose all other abilities.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BecomesCreatureTargetEffect(
                 new TreasureToken(), true, false,
-                Duration.UntilSourceLeavesBattlefield,
-                false, false, true
+                Duration.UntilSourceLeavesBattlefield
         ).setTargetPointer(new EachTargetPointer()).setText("for each player, choose up to one other " +
                 "target artifact or creature that player controls. For as long as {this} " +
                 "remains on the battlefield, the chosen permanents become Treasure artifacts with " +

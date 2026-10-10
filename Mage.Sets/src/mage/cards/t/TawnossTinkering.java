@@ -83,7 +83,7 @@ class TawnossTinkeringEffect extends OneShotEffect {
         game.addEffect(new BecomesCreatureTargetEffect(
                 new CreatureToken(0, 0),
                 false, false, Duration.Custom
-        ).setTargetPointer(new FixedTarget(permanent, game)), source);
+        ).withKeepPriorTypes(true).setTargetPointer(new FixedTarget(permanent, game)), source);
         return true;
     }
 }
