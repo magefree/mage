@@ -126,6 +126,7 @@ public class ModernCardRenderer extends CardRenderer {
     static String SUB_TYPE_ADVENTURE = "Adventure";
     static String SUB_TYPE_OMEN = "Omen";
     static String SUB_TYPE_PREPARE = "Prepare";
+    static String SUB_TYPE_VENGEANCE = "Vengeance";
 
     ///////////////////////////////////////////////////////////////////////////
     // Layout metrics for modern border cards
@@ -185,6 +186,7 @@ public class ModernCardRenderer extends CardRenderer {
         if (cardView.isSplitCard()) {
             isCardWithSpellOption = cardView.getRightSplitTypeLine().contains(SUB_TYPE_ADVENTURE)
                                 || cardView.getRightSplitTypeLine().contains(SUB_TYPE_OMEN)
+                                || cardView.getRightSplitTypeLine().contains(SUB_TYPE_VENGEANCE)
                                 || SUB_TYPE_PREPARE.equals(cardView.getRightSplitSpellType());
             isPrepareSpellOption = SUB_TYPE_PREPARE.equals(cardView.getRightSplitSpellType());
         }
