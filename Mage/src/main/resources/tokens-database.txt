@@ -3224,6 +3224,11 @@
 |TOK:PL26|Treasure||TreasureToken|
 
 # MDD
-#|TOK:MDD|ElfWarrior||ElfWarriorToken|
+#|TOK:MDD|Angel||AngelVigilance33Token|
+#|TOK:MDD|Elf Warrior||ElfWarriorToken|
+#|TOK:MDD|Giant||GiantBlueRedToken|
+#|TOK:MDD|Mindless-One||MindlessOneToken|
+#|TOK:MDD|Spirit Sorcerer||SpiritSorcererToken|
+#|TOK:MDD|Zombie||ZombieToken|
 
 # MDC

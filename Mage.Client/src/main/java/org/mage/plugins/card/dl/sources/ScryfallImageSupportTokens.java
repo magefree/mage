@@ -3202,6 +3202,16 @@ public class ScryfallImageSupportTokens {
             // PL26
             put("PL26/Treasure", "https://api.scryfall.com/cards/pl26/2?format=image");
 
+            // MDD
+            // put("MDD/Angel", "https://api.scryfall.com/cards/tmdd/3?format=image");
+            // put("MDD/Elf Warrior", "https://api.scryfall.com/cards/tmdd/11?format=image");
+            // put("MDD/Giant", "https://api.scryfall.com/cards/tmdd/12?format=image");
+            // put("MDD/Mindless-One", "https://api.scryfall.com/cards/tmdd/9?format=image");
+            // put("MDD/Spirit Sorcerer", "https://api.scryfall.com/cards/tmdd/8?format=image");
+            // put("MDD/Zombie", "https://api.scryfall.com/cards/tmdd/10?format=image");
+
+            // MDC
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
