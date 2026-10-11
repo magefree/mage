@@ -1102,10 +1102,6 @@ public class VerifyCardDataTest {
 
         // CHECK: unknown set or wrong name
         for (ExpansionSet set : sets) {
-            if ("MDD".equals(set.getCode()) || "MDC".equals(set.getCode())) {
-                // TODO: skip name check until MDD/MDC metadata is updated in MtgJSON
-                continue;
-            }
             if (set.getSetType().equals(SetType.CUSTOM_SET)) {
                 // skip unofficial sets like Star Wars
                 continue;
