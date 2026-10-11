@@ -44,7 +44,7 @@ public final class NullSummoner extends CardImpl {
 
         // Threshold — As long as there are seven or more cards in your graveyard, you may cast the exiled card, and mana of any type can be spent to cast that spell.
         Ability staticThreshold = new SimpleStaticAbility(new NullSummonerCastEffect());
-        staticThreshold.withFlavorWord("Threshold");
+        staticThreshold.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(staticThreshold);
     }
 
@@ -98,12 +98,14 @@ class NullSummonerExileEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null) {
             // Will never be able to cast this one
+            // Still differentiate to avoid confusion
             unique = new StringBuilder("unused");
+            unique.append(UUID.randomUUID());
         } else {
             unique = new StringBuilder("nullsummonereffect_");
             unique.append(permanent.getId().toString());
+            unique.append(permanent.getZoneChangeCounter(game));
         }
-        unique.append(permanent.getZoneChangeCounter(game));
         return controller.moveCardsToExile(
                 card, source, game, true,
                 CardUtil.getExileZoneId(unique.toString(), game),
