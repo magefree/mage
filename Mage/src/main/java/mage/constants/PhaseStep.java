@@ -1,6 +1,8 @@
 package mage.constants;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author North
@@ -19,6 +21,24 @@ public enum PhaseStep {
     POSTCOMBAT_MAIN("Postcombat Main", 10, "postcombat main step", "M2"),
     END_TURN("End Turn", 11, "end turn step", "ET"),
     CLEANUP("Cleanup", 12, "cleanup step", "CL");
+
+    /**
+     * List of phase steps where the player has agency
+     */
+    public static final List<PhaseStep> userFacingSteps = Arrays.asList(
+            PhaseStep.UNTAP,
+            PhaseStep.UPKEEP,
+            PhaseStep.DRAW,
+            PhaseStep.PRECOMBAT_MAIN,
+            PhaseStep.BEGIN_COMBAT,
+            PhaseStep.DECLARE_ATTACKERS,
+            PhaseStep.DECLARE_BLOCKERS,
+            PhaseStep.FIRST_COMBAT_DAMAGE,
+            PhaseStep.COMBAT_DAMAGE,
+            PhaseStep.END_COMBAT,
+            PhaseStep.POSTCOMBAT_MAIN,
+            PhaseStep.END_TURN
+    );
 
     private final String text;
     private final String stepText;
