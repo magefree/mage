@@ -100,7 +100,7 @@ public class DeckLegalityPanel extends javax.swing.JPanel {
                 // common
                 new Commander(), new Oathbreaker(), new Brawl(),
                 // other
-                new Frontier(), new HistoricalType2(), new PennyDreadfulCommander(), new EuropeanHighlander(), new CanadianHighlander()
+                new Frontier(), new HistoricalType2(), new PennyDreadfulCommander(), new EuropeanHighlander(), new CanadianHighlander(), new PauperCommander()
                 // not used: new Eternal(), new Momir(), new TinyLeaders()
         ).forEach(this::addLegalityLabel);
 
