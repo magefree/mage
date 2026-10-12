@@ -79,41 +79,16 @@ public abstract class Watcher implements Serializable {
     public abstract void watch(GameEvent event, Game game);
 
     public <T extends Watcher> T copy() {
+        CopyPlan plan = COPY_PLANS.get(getClass());
+        if (plan.constructor == null) {
+            logger.error(getClass().getSimpleName() + " has multiple constructors");
+            return null;
+        }
         try {
-            //use getDeclaredConstructors to allow for package-private constructors (i.e. omit public)
-            List<?> constructors = Arrays.asList(this.getClass().getDeclaredConstructors());
-            if (constructors.size() > 1) {
-                logger.error(getClass().getSimpleName() + " has multiple constructors");
-                return null;
-            }
-
-            Constructor<? extends Watcher> constructor = (Constructor<? extends Watcher>) constructors.get(0);
-
-            // collect all fields
-            constructor.setAccessible(true);
-            Object[] args = new Object[constructor.getParameterCount()];
-            for (int index = 0; index < constructor.getParameterTypes().length; index++) {
-                Class<?> parameterType = constructor.getParameterTypes()[index];
-                if (parameterType.isPrimitive()) {
-                    if (parameterType.getSimpleName().equalsIgnoreCase("boolean")) {
-                        args[index] = false;
-                    }
-                } else {
-                    args[index] = null;
-                }
-
-            }
-            T watcher = (T) constructor.newInstance(args);
-            List<Field> allFields = new ArrayList<>();
-            allFields.addAll(Arrays.asList(getClass().getDeclaredFields()));
-            allFields.addAll(Arrays.asList(getClass().getSuperclass().getDeclaredFields()));
-
+            T watcher = (T) plan.constructor.newInstance(plan.args.clone());
             // copy field's values
-            for (Field field : allFields) {
-                if (!Modifier.isStatic(field.getModifiers())) {
-                    field.setAccessible(true);
-                    field.set(watcher, CardUtil.deepCopyObject(field.get(this)));
-                }
+            for (Field field : plan.fields) {
+                field.set(watcher, CardUtil.deepCopyObject(field.get(this)));
             }
             return watcher;
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
@@ -121,6 +96,50 @@ public abstract class Watcher implements Serializable {
         }
         return null;
     }
+
+    /**
+     * What copy() needs from a watcher class, looked up once per class: game states are copied (with every watcher)
+     * many times a turn, and the reflective lookups cost more than the copying itself
+     */
+    private static final class CopyPlan {
+
+        private final Constructor<? extends Watcher> constructor;
+        private final Object[] args;
+        private final List<Field> fields = new ArrayList<>();
+
+        private CopyPlan(Class<?> type) {
+            //use getDeclaredConstructors to allow for package-private constructors (i.e. omit public)
+            Constructor<?>[] constructors = type.getDeclaredConstructors();
+            this.constructor = constructors.length > 1 ? null : (Constructor<? extends Watcher>) constructors[0];
+            if (constructor == null) {
+                this.args = new Object[0];
+                return;
+            }
+            constructor.setAccessible(true);
+            Class<?>[] parameterTypes = constructor.getParameterTypes();
+            this.args = new Object[parameterTypes.length];
+            for (int index = 0; index < parameterTypes.length; index++) {
+                if (parameterTypes[index] == boolean.class) {
+                    args[index] = false;
+                }
+            }
+            List<Field> allFields = new ArrayList<>(Arrays.asList(type.getDeclaredFields()));
+            allFields.addAll(Arrays.asList(type.getSuperclass().getDeclaredFields()));
+            for (Field field : allFields) {
+                if (!Modifier.isStatic(field.getModifiers())) {
+                    field.setAccessible(true);
+                    fields.add(field);
+                }
+            }
+        }
+    }
+
+    private static final ClassValue<CopyPlan> COPY_PLANS = new ClassValue<CopyPlan>() {
+        @Override
+        protected CopyPlan computeValue(Class<?> type) {
+            return new CopyPlan(type);
+        }
+    };
 
     public WatcherScope getScope() {
         return scope;
