@@ -24,7 +24,10 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
     protected Mana payment;
     protected Mana usedManaToPay;
     protected Mana cost;
+    // the ways to pay this cost, set up by constructors and only read afterwards: copies share them until one
+    // changes them (call ownOptions() first), since mana costs are copied with every ability of every game copy
     protected ManaOptions options;
+    private boolean optionsShared = false;
     protected Filter sourceFilter;
     protected boolean phyrexian = false;
 
@@ -39,7 +42,9 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
         this.payment = manaCost.payment.copy();
         this.usedManaToPay = manaCost.usedManaToPay.copy();
         this.cost = manaCost.cost.copy();
-        this.options = manaCost.options.copy();
+        this.options = manaCost.options;
+        this.optionsShared = true;
+        manaCost.optionsShared = true;
         if (manaCost.sourceFilter != null) {
             this.sourceFilter = manaCost.sourceFilter.copy();
         }
@@ -289,7 +294,19 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
         this.payment.add(mana);
     }
 
+    /**
+     * The options of this cost alone, to change them
+     */
+    protected ManaOptions ownOptions() {
+        if (optionsShared) {
+            options = options.copy();
+            optionsShared = false;
+        }
+        return options;
+    }
+
     protected void addColoredOption(ColoredManaSymbol symbol) {
+        ownOptions();
         switch (symbol) {
             case B:
                 this.options.add(Mana.BlackMana(1));
@@ -324,7 +341,7 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
     @Override
     public void setPhyrexian(boolean phyrexian) {
         if (phyrexian) {
-            this.options.add(Mana.GenericMana(0));
+            ownOptions().add(Mana.GenericMana(0));
         }
         this.phyrexian = phyrexian;
     }
