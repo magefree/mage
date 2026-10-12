@@ -50,10 +50,11 @@ public final class CardScanner {
         }
         ExpansionRepository.instance.saveSets(setsToAdd, setsToUpdate, ExpansionRepository.instance.getContentVersionConstant());
 
-        // check cards (only add mode, without updates)
+        // check cards (only add mode, without updates); the cards already in the database come in one query
+        java.util.Set<String> known = CardRepository.instance.getSetAndNumberKeys();
         for (ExpansionSet set : Sets.getInstance().values()) {
             for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
-                if (CardRepository.instance.findCard(set.getCode(), setInfo.getCardNumber(), false) == null) {
+                if (!known.contains(CardRepository.setAndNumberKey(set.getCode(), setInfo.getCardNumber()))) {
                     // found new card
                     Card card = CardImpl.createCard(
                             setInfo.getCardClass(),

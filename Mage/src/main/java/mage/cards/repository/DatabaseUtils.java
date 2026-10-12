@@ -40,7 +40,10 @@ public class DatabaseUtils {
             // max query cache size in kb (default: 65 Mb per 1 GB of java's max memory)
             // warning, xmage require 150Mb cache for big queries in AI games like all card names (db can be broken on lower cache)
             //res += ";CACHE_SIZE=150000";
-            res += ";CACHE_SIZE=" + Math.round(Math.max(150000, Runtime.getRuntime().maxMemory() * 0.1 / 1024));
+            // -Dxmage.db.cacheSizeKB overrides it: the cache lives in the heap, and on a small server most of what it
+            // holds (card rows read once at startup) is better given to games
+            long defaultCacheKb = Math.round(Math.max(150000, Runtime.getRuntime().maxMemory() * 0.1 / 1024));
+            res += ";CACHE_SIZE=" + Long.getLong("xmage.db.cacheSizeKB", defaultCacheKb);
 
 
             // QUERY_CACHE_SIZE

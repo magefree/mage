@@ -354,6 +354,43 @@ public enum CardRepository {
         return findCard(setCode, cardNumber, true);
     }
 
+    /**
+     * Set code and card number ({@link #setAndNumberKey}) of every card in the database, read in one query: the
+     * startup scan checks each implemented card against it instead of querying them one by one.
+     */
+    public Set<String> getSetAndNumberKeys() {
+        Set<String> keys = new HashSet<>();
+        try {
+            QueryBuilder<CardInfo, Object> qb = cardsDao.queryBuilder();
+            qb.selectColumns("setCode", "cardNumber");
+            try (GenericRawResults<String[]> rows = cardsDao.queryRaw(qb.prepareStatementString())) {
+                for (String[] row : rows) {
+                    keys.add(setAndNumberKey(row[0], row[1]));
+                }
+            }
+        } catch (Exception e) {
+            Logger.getLogger(CardRepository.class).error("Error reading card numbers from DB: " + e, e);
+        }
+        return keys;
+    }
+
+    /** the database compares text ignoring case (IGNORECASE=TRUE), and so do these keys */
+    public static String setAndNumberKey(String setCode, String cardNumber) {
+        return (setCode + '\t' + cardNumber).toLowerCase(Locale.ROOT);
+    }
+
+    /**
+     * Number of card rows (night sides included), counted by the database.
+     */
+    public long countCards() {
+        try {
+            return cardsDao.countOf();
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error counting cards in DB: " + e, e);
+            return 0;
+        }
+    }
+
     public CardInfo findCard(String setCode, String cardNumber, boolean ignoreNightCards) {
         try {
             QueryBuilder<CardInfo, Object> queryBuilder = cardsDao.queryBuilder();

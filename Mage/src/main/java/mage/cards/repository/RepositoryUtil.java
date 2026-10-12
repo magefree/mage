@@ -31,8 +31,7 @@ public final class RepositoryUtil {
 
         // stats
         int totalSets = ExpansionRepository.instance.getAll().size();
-        int totalCards = CardRepository.instance.findCards(new CardCriteria().nightCard(false)).size()
-                + CardRepository.instance.findCards(new CardCriteria().nightCard(true)).size();
+        long totalCards = CardRepository.instance.countCards(); // counted by the database, not by loading every row
         logger.info("Database stats:");
         logger.info(" - sets: " + (totalSets == 0 ? "updating" : totalSets));
         logger.info(" - cards: " + (totalCards == 0 ? "updating" : totalCards));
