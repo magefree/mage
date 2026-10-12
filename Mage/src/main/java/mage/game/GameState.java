@@ -1545,8 +1545,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public CardState getCardState(UUID cardId) {
-        cardState.putIfAbsent(cardId, new CardState());
-        return cardState.get(cardId);
+        // called for every card on every characteristic read, so don't build a state just to throw it away
+        return cardState.computeIfAbsent(cardId, k -> new CardState());
     }
 
     public MageObjectAttribute getMageObjectAttribute(UUID cardId) {
