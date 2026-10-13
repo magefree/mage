@@ -324,27 +324,36 @@ public class CardIconsPanel extends JPanel {
         ).getImage();
 
         if (iconImageCached != null && this.font != null) {
-            BufferedImage iconImageWithText = ImageManagerImpl.deepCopy(iconImageCached); // must copy cached value before modify
-
             // text
             String hint = ManaSymbols.replaceSymbolsWithHTML(icon.getHint(), ManaSymbols.Type.CARD_ICON_HINT);
             hint = GUISizeHelper.textToHtmlWithSize(hint, GUISizeHelper.cardTooltipFont.getSize());
             JLabel label = new JLabel();
             label.setToolTipText("<html>" + hint);
-            if (!icon.getText().isEmpty()) {
+            int logicalSize = this.halfSize * 2;
+            Font iconFont = this.font;
+            StretchIcon s = StretchIcon.fromRasterSource(pixels -> {
+                BufferedImage source = ImageCache.getCardIconImage(icon.getIconType().getResourceName(), pixels, color.toString()).getImage();
+                if (source == null) {
+                    source = iconImageCached;
+                }
+                if (icon.getText().isEmpty()) {
+                    return source;
+                }
+                BufferedImage iconImageWithText = ImageManagerImpl.deepCopy(source);
                 Graphics2D g2 = iconImageWithText.createGraphics();
                 try {
                     g2.setColor(PreferencesDialog.getCurrentTheme().getCardIconsTextColor(this.color));
                     g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                     Rectangle rect = CardRendererUtils.reduceRect(new Rectangle(0, 0, iconImageWithText.getWidth(), iconImageWithText.getHeight()), 0.8f);
-                    CardRendererUtils.drawCenteredText(g2, icon.getText(), rect, this.font, true);
+                    Font rasterFont = iconFont.deriveFont(iconFont.getSize2D() * source.getWidth() / Math.max(1, logicalSize));
+                    CardRendererUtils.drawCenteredText(g2, icon.getText(), rect, rasterFont, true);
                 } finally {
                     g2.dispose();
                 }
-            }
+                return iconImageWithText;
+            }, true);
 
             // the stretch icon can occupy all space (full grid's cell)
-            StretchIcon s = new StretchIcon(iconImageWithText, true);
             label.setIcon(s);
             label.setIconTextGap(0);
             if (DebugUtil.GUI_CARD_ICONS_DRAW_ICON_BORDER) {
