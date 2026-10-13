@@ -416,8 +416,9 @@ public final class ManaSymbols {
     }
 
     public static void draw(Graphics g, String manaCost, int x, int y, int symbolWidth, Color symbolsTextColor, int symbolMarginX) {
-        if (!manaImages.containsKey(symbolWidth)) {
-            loadSymbolImages(symbolWidth);
+        int rasterWidth = getRasterTier(mage.client.util.gui.HiDpiRenderUtil.getRasterSize((Graphics2D) g, symbolWidth, symbolWidth).width);
+        if (!manaImages.containsKey(rasterWidth)) {
+            loadSymbolImages(rasterWidth);
         }
 
         // TODO: replace with jlabel render (look at table renderer)?
@@ -465,7 +466,7 @@ public final class ManaSymbols {
         g.drawImage(image, x, y, null);
          */
         // OLD version with custom draw
-        Map<String, BufferedImage> sizedSymbols = manaImages.get(symbolWidth);
+        Map<String, BufferedImage> sizedSymbols = manaImages.get(rasterWidth);
         if (manaCost.isEmpty()) {
             return;
         }
@@ -523,7 +524,7 @@ public final class ManaSymbols {
                 }
             } else {
                 // ICON draw
-                g.drawImage(image, x, y, null);
+                g.drawImage(image, x, y, symbolWidth, symbolWidth, null);
             }
             x += symbolWidth + symbolMarginX;
         }
@@ -688,5 +689,17 @@ public final class ManaSymbols {
         }
         Map<String, BufferedImage> sizedSymbols = manaImages.get(size);
         return sizedSymbols.get(symbol);
+    }
+
+    public static BufferedImage getHiDpiManaSymbol(String symbol, int pixelSize) {
+        return getSizedManaSymbol(symbol, getRasterTier(pixelSize));
+    }
+
+    private static int getRasterTier(int pixelSize) {
+        int size = 16;
+        while (size < pixelSize && size < 512) {
+            size *= 2;
+        }
+        return size;
     }
 }
