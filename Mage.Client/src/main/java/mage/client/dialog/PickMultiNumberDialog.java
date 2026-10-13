@@ -2,6 +2,7 @@ package mage.client.dialog;
 
 import mage.client.cards.BigCard;
 import mage.client.components.MageTextArea;
+import mage.client.util.GUISizeHelper;
 import mage.constants.ColoredManaSymbol;
 import mage.util.MultiAmountMessage;
 
@@ -76,6 +77,7 @@ public class PickMultiNumberDialog extends MageDialog {
         for (int i = 0; i < size; i++) {
             MageTextArea info = new MageTextArea();
             info.enableTextLabelMode();
+            info.setForeground(PreferencesDialog.getCurrentTheme().getTextColor());
             info.setGameData(this.gameId, this.bigCard);
 
             // mana mode
@@ -107,7 +109,9 @@ public class PickMultiNumberDialog extends MageDialog {
             }
 
             GridBagConstraints infoC = new GridBagConstraints();
-            infoC.weightx = 0.5;
+            infoC.weightx = 1;
+            infoC.fill = GridBagConstraints.HORIZONTAL;
+            infoC.insets = new Insets(4, 8, 4, 8);
             infoC.gridx = 0;
             infoC.gridy = i;
             jPanel1.add(info, infoC);
@@ -115,11 +119,14 @@ public class PickMultiNumberDialog extends MageDialog {
 
             JSpinner spinner = new JSpinner();
             spinner.setModel(new SpinnerNumberModel(messages.get(i).defaultValue, messages.get(i).min, messages.get(i).max, 1));
+            spinner.setFont(GUISizeHelper.dialogFont);
+            ((JSpinner.DefaultEditor) spinner.getEditor()).getTextField().setColumns(
+                    Math.max(3, Integer.toString(messages.get(i).max).length()));
             GridBagConstraints spinnerC = new GridBagConstraints();
-            spinnerC.weightx = 0.5;
+            spinnerC.weightx = 0;
             spinnerC.gridx = 1;
             spinnerC.gridy = i;
-            spinnerC.ipadx = 20;
+            spinnerC.insets = new Insets(4, 8, 4, 8);
             spinner.addChangeListener(e -> {
                 updateControls(min, max, messages);
             });
@@ -129,6 +136,18 @@ public class PickMultiNumberDialog extends MageDialog {
         this.counterText.setText("0 out of 0");
 
         updateControls(min, max, messages);
+
+        // Use the actual row heights (including HTML text) before packing. Large lists scroll.
+        mage.client.util.gui.GuiFontDefaults.apply(getContentPane());
+        Dimension contentSize = jPanel1.getPreferredSize();
+        int availableHeight = mage.client.MageFrame.getDesktop() == null ? 600 : mage.client.MageFrame.getDesktop().getHeight();
+        int commandsHeight = panelCommands.getPreferredSize().height + panelHeader.getPreferredSize().height + 60;
+        Insets scrollInsets = jScrollPane1.getInsets();
+        jScrollPane1.setPreferredSize(new Dimension(contentSize.width + scrollInsets.left + scrollInsets.right
+                + jScrollPane1.getVerticalScrollBar().getPreferredSize().width,
+                Math.min(contentSize.height + scrollInsets.top + scrollInsets.bottom,
+                        Math.max(100, availableHeight - commandsHeight))));
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(GUISizeHelper.dialogFont.getSize() * 2);
 
         this.pack();
         this.makeWindowCentered();
