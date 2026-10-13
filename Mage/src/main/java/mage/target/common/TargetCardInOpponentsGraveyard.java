@@ -38,6 +38,9 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
 
     @Override
     public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        if (!super.canTarget(playerId, id, source, game)) {
+            return false;
+        }
         Card card = game.getCard(id);
         if (card != null && zone.match(game.getState().getZone(id))) {
             if (game.getPlayer(source.getControllerId()).hasOpponent(card.getOwnerId(), game)) {
@@ -55,6 +58,9 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
+        if (!super.canTarget(id, source, game)) {
+            return false;
+        }
         Card card = game.getCard(id);
         if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
             if (game.getPlayer(source.getControllerId()).hasOpponent(card.getOwnerId(), game)) {
