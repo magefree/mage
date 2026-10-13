@@ -482,6 +482,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 saveValue(settingsKey, String.valueOf(settingsValue));
             }
         }
+
+        public void applyPresetIfMissing(String presetName) {
+            List<Integer> values = getPresetValues(presetName);
+            for (int i = 0; i < values.size(); i++) {
+                String key = getSettingsKeyByIndex(i);
+                if (MageFrame.getPreferences().get(key, null) == null) {
+                    saveValue(key, String.valueOf(values.get(i)));
+                }
+            }
+        }
     }
 
     // GUI size settings
@@ -686,7 +696,28 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public PreferencesDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setResizable(false);
+        setResizable(true);
+
+        // Keep commands visible while large fonts or a small display require scrolling.
+        getContentPane().removeAll();
+        getContentPane().setLayout(new BorderLayout());
+        JScrollPane settingsScroll = new JScrollPane(tabsPanel);
+        settingsScroll.getVerticalScrollBar().setUnitIncrement(24);
+        getContentPane().add(settingsScroll, BorderLayout.CENTER);
+        JPanel commands = new JPanel(new FlowLayout(FlowLayout.TRAILING));
+        for (JButton button : new JButton[]{saveButton, exitButton}) {
+            button.setPreferredSize(null);
+            button.setMinimumSize(null);
+            button.setMaximumSize(null);
+            commands.add(button);
+        }
+        getContentPane().add(commands, BorderLayout.SOUTH);
+        // Eleven four-digit tick labels overlap at large fonts. Keep the range readable.
+        Hashtable<Integer, JLabel> delayLabels = new Hashtable<>();
+        for (int delay : new int[]{0, 2500, 5000}) {
+            delayLabels.put(delay, new JLabel(String.valueOf(delay)));
+        }
+        tooltipDelay.setLabelTable(delayLabels);
 
         txtImageFolderPath.setEditable(false);
         cbProxyType.setModel(new DefaultComboBoxModel<>(Connection.ProxyType.values()));
@@ -1196,7 +1227,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                         .add(lblTargetAutoChoose)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(cbTargetAutoChooseLevel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(cbAskMoveToGraveOrder, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 596, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(cbAskMoveToGraveOrder, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                         .add(showPlayerNamesPermanently, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .add(nonLandPermanentsInOnePile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -2128,11 +2159,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
             themesCategoryLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(themesCategoryLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(lbSelectLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(lbSelectLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(themesCategoryLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(lbThemeHint, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(cbTheme, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 313, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(cbTheme, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         themesCategoryLayout.setVerticalGroup(
@@ -2141,7 +2172,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .add(themesCategoryLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(cbTheme, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(lbSelectLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 22, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(lbSelectLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(lbThemeHint, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -2301,7 +2332,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                 .add(6, 6, 6)
                                 .add(labelPreferredImageLanguage)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(cbPreferredImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                                .add(cbPreferredImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                         .add(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -2353,7 +2384,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(6, 6, 6)
                 .add(labelRenderMode)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(cbCardRenderImageFallback, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 122, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(cbCardRenderImageFallback, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
         panelCardStylesLayout.setVerticalGroup(
             panelCardStylesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -2915,7 +2946,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .add(connection_ProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(connection_ProxyLayout.createSequentialGroup()
-                        .add(cbProxyType, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 126, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(cbProxyType, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(0, 629, Short.MAX_VALUE))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, pnlProxy, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -3432,7 +3463,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 // open specified tab before displaying
                 openTab(openedTab);
 
-                dialog.setLocation(300, 200);
+                mage.client.util.gui.GuiFontDefaults.apply(dialog.getContentPane());
+                dialog.pack();
+                GraphicsConfiguration display = dialog.getOwner() == null ? dialog.getGraphicsConfiguration() : dialog.getOwner().getGraphicsConfiguration();
+                Rectangle available = GuiDisplayUtil.getUsableScreenBounds(display);
+                dialog.setSize(Math.min(dialog.getWidth(), available.width), Math.min(dialog.getHeight(), available.height));
+                dialog.setLocationRelativeTo(dialog.getOwner());
+                GuiDisplayUtil.keepComponentInsideScreen(dialog.getX(), dialog.getY(), dialog);
 
                 dialog.setVisible(true);
             } else {

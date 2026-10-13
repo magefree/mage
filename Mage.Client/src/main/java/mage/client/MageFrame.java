@@ -128,6 +128,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static boolean guiModalModeEnabled = false; // non-blocking UI mode enabled by default
 
     private JToggleButton switchPanelsButton = null; // from main menu
+    private JScrollPane toolbarScroll;
+    private JLabel gamesPlayedLabel;
     private static String SWITCH_PANELS_BUTTON_NAME = "Switch panels";
 
     private static final Map<UUID, ChatPanelBasic> CHATS = new HashMap<>();
@@ -269,6 +271,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         initComponents();
 
+        // Large menu fonts can exceed the window width. Keep every command reachable.
+        toolbarScroll = GuiDisplayUtil.createHorizontalScrollPane(mageToolbar);
+        getContentPane().removeAll();
+        getContentPane().setLayout(new BorderLayout(0, 2));
+        getContentPane().add(toolbarScroll, BorderLayout.NORTH);
+        getContentPane().add(desktopPane, BorderLayout.CENTER);
+
         // auto-update switch panels button with actual stats
         desktopPane.addContainerListener(new ContainerAdapter() {
             @Override
@@ -369,10 +378,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (Plugins.instance.isCounterPluginLoaded()) {
             int i = Plugins.instance.getGamesPlayed();
             JLabel label = new JLabel("  Games played: " + i);
+            gamesPlayedLabel = label;
             desktopPane.add(label, JLayeredPane.DEFAULT_LAYER + 1);
             label.setVisible(true);
             label.setForeground(Color.white);
-            label.setBounds(0, 0, 180, 30);
+            label.setBounds(0, 0, label.getPreferredSize().width, label.getPreferredSize().height);
         }
 
         setGUISize();
@@ -1598,7 +1608,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 String preset = PreferencesDialog.getDefaultSizeSettings().findBestPreset(screenDPI, screenHeight);
                 if (preset != null) {
                     LOGGER.info("Settings: selected preset " + preset);
-                    PreferencesDialog.getDefaultSizeSettings().applyPreset(preset);
+                    PreferencesDialog.getDefaultSizeSettings().applyPresetIfMissing(preset);
                 } else {
                     LOGGER.info("Settings: WARNING, can't find compatible preset, use Preferences - GUI Size to setup your app");
                 }
@@ -1937,26 +1947,20 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private void setGUISize() {
         Font font = GUISizeHelper.dialogFont;
         mageToolbar.setFont(font);
-        int newHeight = font.getSize() + 6;
-        Dimension mageToolbarDimension = mageToolbar.getPreferredSize();
-        mageToolbarDimension.height = newHeight + 6;
-        mageToolbar.setMinimumSize(mageToolbarDimension);
-        mageToolbar.setMaximumSize(mageToolbarDimension);
-        mageToolbar.setPreferredSize(mageToolbarDimension);
+        mageToolbar.setMinimumSize(null);
+        mageToolbar.setMaximumSize(null);
+        mageToolbar.setPreferredSize(null);
         for (Component component : mageToolbar.getComponents()) {
             if (component instanceof JButton || component instanceof JLabel || component instanceof JToggleButton) {
                 component.setFont(font);
-                Dimension d = component.getPreferredSize();
-                d.height = newHeight;
-                component.setMinimumSize(d);
-                component.setMaximumSize(d);
+                component.setMinimumSize(null);
+                component.setMaximumSize(null);
+                component.setPreferredSize(null);
 
             }
             if (component instanceof javax.swing.JToolBar.Separator) {
-                Dimension d = component.getPreferredSize();
-                d.height = newHeight;
-                component.setMinimumSize(d);
-                component.setMaximumSize(d);
+                component.setMinimumSize(null);
+                component.setMaximumSize(null);
             }
         }
 
@@ -1972,6 +1976,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.getParent().setBackground(PreferencesDialog.getCurrentTheme().getMageToolbar());
 
         updateTooltipContainerSizes();
+        toolbarScroll.revalidate();
+        if (gamesPlayedLabel != null) {
+            gamesPlayedLabel.setFont(font);
+            gamesPlayedLabel.setSize(gamesPlayedLabel.getPreferredSize());
+        }
     }
 
     public void showWhatsNewDialog(boolean forceToShowPage) {

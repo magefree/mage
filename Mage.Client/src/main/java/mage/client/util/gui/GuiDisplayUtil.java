@@ -34,8 +34,6 @@ public final class GuiDisplayUtil {
     private static final Logger logger = Logger.getLogger(GuiDisplayUtil.class);
 
     private static final Font cardNameFont = new Font("Calibri", Font.BOLD, 15);
-    private static final Insets DEFAULT_INSETS = new Insets(0, 0, 70, 25);
-    private static final Insets COMPONENT_INSETS = new Insets(0, 0, 40, 40);
 
     public static class TextLines {
 
@@ -131,33 +129,69 @@ public final class GuiDisplayUtil {
     }
 
     public static void keepComponentInsideScreen(int centerX, int centerY, Component component) {
-        Dimension screenDim = component.getToolkit().getScreenSize();
-        GraphicsConfiguration g = component.getGraphicsConfiguration();
-
-        if (g != null) {
-            Insets insets = component.getToolkit().getScreenInsets(g); // no usable space like toolbar
-            boolean setLocation = false;
-            if (centerX + component.getWidth() > screenDim.width - insets.right) {
-                centerX = (screenDim.width - insets.right) - component.getWidth();
-                setLocation = true;
-            } else if (centerX < insets.left) {
-                centerX = insets.left;
-                setLocation = true;
+        Rectangle available;
+        if (component instanceof JInternalFrame) {
+            JDesktopPane desktop = ((JInternalFrame) component).getDesktopPane();
+            if (desktop == null) {
+                desktop = MageFrame.getDesktop();
             }
-
-            if (centerY + component.getHeight() > screenDim.height - insets.bottom) {
-                centerY = (screenDim.height - insets.bottom) - component.getHeight();
-                setLocation = true;
-            } else if (centerY < insets.top) {
-                centerY = insets.top;
-                setLocation = true;
+            if (desktop == null) {
+                return;
             }
-            if (setLocation) {
-                component.setLocation(centerX, centerY);
-            }
+            available = new Rectangle(0, 0, desktop.getWidth(), desktop.getHeight());
         } else {
-            System.out.println("GuiDisplayUtil::keepComponentInsideScreen -> no GraphicsConfiguration");
+            available = getUsableScreenBounds(component.getGraphicsConfiguration());
         }
+        component.setLocation(clampLocation(new Point(centerX, centerY), component.getSize(), available));
+    }
+
+    public static Rectangle getUsableScreenBounds(GraphicsConfiguration display) {
+        if (display == null) {
+            display = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
+        }
+        Rectangle bounds = new Rectangle(display.getBounds());
+        Insets insets = Toolkit.getDefaultToolkit().getScreenInsets(display);
+        bounds.x += insets.left;
+        bounds.y += insets.top;
+        bounds.width -= insets.left + insets.right;
+        bounds.height -= insets.top + insets.bottom;
+        return bounds;
+    }
+
+    /** All arguments use the same coordinate space, including negative monitor origins. */
+    public static Point clampLocation(Point location, Dimension size, Rectangle available) {
+        return new Point(Math.max(available.x, Math.min(location.x, available.x + Math.max(0, available.width - size.width))),
+                Math.max(available.y, Math.min(location.y, available.y + Math.max(0, available.height - size.height))));
+    }
+
+    /** Keep a single-row toolbar readable and scrollable when it is wider than its panel. */
+    public static JScrollPane createHorizontalScrollPane(JComponent content) {
+        JScrollPane scroll = new JScrollPane(content, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED) {
+            @Override
+            public Dimension getPreferredSize() {
+                Dimension size = content.getPreferredSize();
+                Insets border = getInsets();
+                int scrollbar = getWidth() == 0 || getWidth() < size.width + border.left + border.right
+                        ? getHorizontalScrollBar().getPreferredSize().height : 0;
+                return new Dimension(Math.min(1024, size.width + border.left + border.right),
+                        size.height + border.top + border.bottom + scrollbar);
+            }
+
+            @Override
+            public Dimension getMinimumSize() {
+                return new Dimension(0, getPreferredSize().height);
+            }
+        };
+        scroll.setBorder(null);
+        scroll.getHorizontalScrollBar().setUnitIncrement(48);
+        scroll.addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
+            public void componentResized(java.awt.event.ComponentEvent event) {
+                scroll.revalidate();
+            }
+        });
+        return scroll;
     }
 
     static final int OVERLAP_LIMIT = 10;
@@ -177,17 +211,8 @@ public final class GuiDisplayUtil {
     }
 
     public static Point keepComponentInsideParent(Point l, Point parentPoint, Component c, Component parent) {
-        int dx = parentPoint.x + parent.getWidth() - DEFAULT_INSETS.right - COMPONENT_INSETS.right;
-        if (l.x + c.getWidth() > dx) {
-            l.x = dx - c.getWidth();
-        }
-
-        int dy = parentPoint.y + parent.getHeight() - DEFAULT_INSETS.bottom - COMPONENT_INSETS.bottom;
-        if (l.y + c.getHeight() > dy) {
-            l.y = Math.max(10, dy - c.getHeight());
-        }
-
-        return l;
+        return clampLocation(l, c.getSize(), new Rectangle(parentPoint.x + 10, parentPoint.y + 10,
+                Math.max(0, parent.getWidth() - 20), Math.max(0, parent.getHeight() - 20)));
     }
 
     public static TextLines getTextLinesfromCardView(CardView card) {
@@ -493,6 +518,7 @@ public final class GuiDisplayUtil {
         UIManager.put("nimbusLightBackground", PreferencesDialog.getCurrentTheme().getNimbusLightBackground()); // inputs, table rows
         UIManager.put("info", PreferencesDialog.getCurrentTheme().getInfo()); // tooltips
         UIManager.put("nimbusBase", PreferencesDialog.getCurrentTheme().getNimbusBase()); // title bars, scrollbar foreground
+        GuiFontDefaults.install();
 
 	    UIManager.put("text", PreferencesDialog.getCurrentTheme().getTextColor()); // Default text color
 
@@ -521,7 +547,7 @@ public final class GuiDisplayUtil {
             try {
                 Component comp = MageFrame.getUI().getComponent(compName, false);
                 if (comp != null) {
-                    SwingUtilities.updateComponentTreeUI(comp);
+                    GuiFontDefaults.refresh(comp);
                 }
             } catch (InterruptedException ignore) {
             }
@@ -532,6 +558,6 @@ public final class GuiDisplayUtil {
         for (Window childWindow : window.getOwnedWindows()) {
             refreshLookAndFeel(childWindow);
         }
-        SwingUtilities.updateComponentTreeUI(window);
+        GuiFontDefaults.refresh(window);
     }
 }
