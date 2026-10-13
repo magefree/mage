@@ -3,7 +3,6 @@ package mage.client.cards;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -116,12 +115,16 @@ public class BigCard extends JComponent {
         if (bigImage != null) {
             Graphics2D g = (Graphics2D) graphics.create();
             try {
-                Dimension raster = HiDpiRenderUtil.getRasterSize(g, getWidth(), getHeight());
-                BufferedImage scaled = TransformedImageCache.getResizedImage((BufferedImage) bigImage, raster.width, raster.height);
                 double scale = Math.min(getWidth() / (double) bigImage.getWidth(null), getHeight() / (double) bigImage.getHeight(null));
-                g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-                g.drawImage(scaled, 0, 0, (int) Math.round(bigImage.getWidth(null) * scale),
-                        (int) Math.round(bigImage.getHeight(null) * scale), this);
+                int width = (int) Math.round(bigImage.getWidth(null) * scale);
+                int height = (int) Math.round(bigImage.getHeight(null) * scale);
+                if (width <= 0 || height <= 0) {
+                    return;
+                }
+                Dimension raster = HiDpiRenderUtil.getRasterSize(g, width, height);
+                BufferedImage scaled = TransformedImageCache.getResizedImageExact((BufferedImage) bigImage, raster.width, raster.height);
+                HiDpiRenderUtil.configureRasterDraw(g, scaled, width, height);
+                g.drawImage(scaled, 0, 0, width, height, this);
             } finally {
                 g.dispose();
             }

@@ -2,6 +2,7 @@ package mage.client.util.gui;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 
 /** Convert logical drawing sizes to raster pixels, including rotated card transforms. */
 public final class HiDpiRenderUtil {
@@ -31,5 +32,16 @@ public final class HiDpiRenderUtil {
     public static Dimension getSourceSize(Dimension raster, double oversampling) {
         int width = Math.max(64, (int) Math.ceil(raster.width * oversampling / 64) * 64);
         return new Dimension(width, Math.max(1, (int) Math.ceil(raster.height * (width / (double) raster.width))));
+    }
+
+    /** Device-sized caches need a pixel copy; resample only for rotation or animation. */
+    public static void configureRasterDraw(Graphics2D graphics, BufferedImage image, int width, int height) {
+        AffineTransform transform = graphics.getTransform();
+        boolean deviceSized = transform.getShearX() == 0 && transform.getShearY() == 0
+                && Math.abs(Math.abs(transform.getScaleX()) * width - image.getWidth()) < 1
+                && Math.abs(Math.abs(transform.getScaleY()) * height - image.getHeight()) < 1;
+        graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, deviceSized
+                ? RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR
+                : RenderingHints.VALUE_INTERPOLATION_BICUBIC);
     }
 }
