@@ -1,13 +1,13 @@
 package mage.client.draft;
 
 import mage.abilities.icon.CardIconRenderSettings;
-import mage.cards.CardDimensions;
 import mage.cards.MageCard;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.ClientEventType;
 import mage.client.util.Event;
 import mage.client.util.Listener;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.comparators.CardViewRarityComparator;
 import mage.constants.Constants;
@@ -40,6 +40,7 @@ public class DraftGrid extends javax.swing.JPanel implements CardEventProducer {
 
     public DraftGrid() {
         initComponents();
+        setLayout(null);
         markedCard = null;
         emptyGrid = true;
 
@@ -112,57 +113,19 @@ public class DraftGrid extends javax.swing.JPanel implements CardEventProducer {
             return;
         }
 
-        int maxRows = 4;
-
-        int numColumns = 5;
-        int curColumn = 0;
-        int curRow = 0;
-        int offsetX = 5;
-        int offsetY = 3;
-
-        CardDimensions cardDimension = null;
-        int maxCards;
-        double scale;
-
-        for (int i = 1; i < maxRows; i++) {
-            scale = (double) (this.getHeight() / i) / Constants.FRAME_MAX_HEIGHT;
-            cardDimension = new CardDimensions(scale);
-            maxCards = this.getWidth() / (cardDimension.getFrameWidth() + offsetX);
-            if ((maxCards * i) >= booster.size()) {
-                numColumns = booster.size() / i;
-                if (booster.size() % i > 0) {
-                    numColumns++;
-                }
-                break;
-            }
+        List<CardView> sortedCards = new ArrayList<>(booster.values());
+        sortedCards.sort(new CardViewRarityComparator());
+        for (CardView card : sortedCards) {
+            MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, new CardIconRenderSettings(),
+                    GUISizeHelper.editorCardDimension, null, true, true, PreferencesDialog.getRenderMode(), true);
+            cardImg.setCardContainerRef(this);
+            cardImg.update(card);
+            this.add(cardImg);
         }
-
-        if (cardDimension != null) {
-            Rectangle rectangle = new Rectangle(cardDimension.getFrameWidth(), cardDimension.getFrameHeight());
-            Dimension dimension = new Dimension(cardDimension.getFrameWidth(), cardDimension.getFrameHeight());
-
-            List<CardView> sortedCards = new ArrayList<>(booster.values());
-            sortedCards.sort(new CardViewRarityComparator());
-            for (CardView card : sortedCards) {
-                MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, new CardIconRenderSettings(), dimension, null, true, true, PreferencesDialog.getRenderMode(), true);
-                cardImg.setCardContainerRef(this);
-                cardImg.update(card);
-                this.add(cardImg);
-
-                rectangle.setLocation(curColumn * (cardDimension.getFrameWidth() + offsetX) + offsetX, curRow * (rectangle.height + offsetY) + offsetY);
-                cardImg.setCardBounds(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
-                curColumn++;
-                if (curColumn == numColumns) {
-                    curColumn = 0;
-                    curRow++;
-                }
-            }
-            repaint();
-        } else {
-            logger.warn("Draft Grid - no possible fit of cards");
-        }
+        doLayout();
+        revalidate();
+        repaint();
     }
-
     public void addCardEventListener(Listener<Event> listener) {
         cardEventSource.addListener(listener);
     }
@@ -200,6 +163,48 @@ public class DraftGrid extends javax.swing.JPanel implements CardEventProducer {
 
     public boolean isEmptyGrid() {
         return emptyGrid;
+    }
+
+    @Override
+    public void doLayout() {
+        List<MageCard> cards = new ArrayList<>();
+        for (Component component : getComponents()) {
+            if (component instanceof MageCard) {
+                cards.add((MageCard) component);
+            }
+        }
+        List<Rectangle> bounds = calculateCardBounds(cards.size(), getWidth(), getHeight());
+        for (int i = 0; i < bounds.size(); i++) {
+            Rectangle card = bounds.get(i);
+            cards.get(i).setCardBounds(card.x, card.y, card.width, card.height);
+        }
+    }
+
+    /** Fit all booster cards at the largest common size while retaining their aspect ratio. */
+    public static List<Rectangle> calculateCardBounds(int count, int width, int height) {
+        List<Rectangle> result = new ArrayList<>();
+        if (count <= 0 || width <= 0 || height <= 0) {
+            return result;
+        }
+        int columns = count;
+        int cardWidth = 1;
+        int cardHeight = 1;
+        double bestScale = 0;
+        for (int rows = 1; rows <= count; rows++) {
+            int candidateColumns = (count + rows - 1) / rows;
+            double scale = Math.min((width - (candidateColumns + 1) * 5.0) / candidateColumns / Constants.FRAME_MAX_WIDTH,
+                    (height - (rows + 1) * 3.0) / rows / Constants.FRAME_MAX_HEIGHT);
+            if (scale > bestScale) {
+                bestScale = scale;
+                columns = candidateColumns;
+                cardWidth = Math.max(1, (int) (Constants.FRAME_MAX_WIDTH * scale));
+                cardHeight = Math.max(1, (int) (Constants.FRAME_MAX_HEIGHT * scale));
+            }
+        }
+        for (int i = 0; i < count; i++) {
+            result.add(new Rectangle(5 + (i % columns) * (cardWidth + 5), 3 + (i / columns) * (cardHeight + 3), cardWidth, cardHeight));
+        }
+        return result;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
