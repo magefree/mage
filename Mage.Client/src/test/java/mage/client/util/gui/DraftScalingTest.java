@@ -12,6 +12,31 @@ import static org.junit.Assert.*;
 
 public class DraftScalingTest extends GuiScalingTestSupport {
     @Test
+    public void draggingDividerThroughMouseHandlersRetainsResizedPosition() throws Exception {
+        SwingUtilities.invokeAndWait(() -> {
+            ProportionalSplitPane split = createSplit();
+            split.setPreferenceKey("mouseDraftRatio");
+            split.setSize(800, 600);
+            split.doLayout();
+            javax.swing.plaf.basic.BasicSplitPaneUI ui = (javax.swing.plaf.basic.BasicSplitPaneUI) split.getUI();
+            Component divider = ui.getDivider();
+            int old = split.getDividerLocation();
+            divider.dispatchEvent(new java.awt.event.MouseEvent(divider, java.awt.event.MouseEvent.MOUSE_PRESSED,
+                    0, java.awt.event.InputEvent.BUTTON1_DOWN_MASK, 10, 2, 1, false, java.awt.event.MouseEvent.BUTTON1));
+            divider.dispatchEvent(new java.awt.event.MouseEvent(divider, java.awt.event.MouseEvent.MOUSE_DRAGGED,
+                    1, java.awt.event.InputEvent.BUTTON1_DOWN_MASK, 10, 102, 0, false, java.awt.event.MouseEvent.NOBUTTON));
+            divider.dispatchEvent(new java.awt.event.MouseEvent(divider, java.awt.event.MouseEvent.MOUSE_RELEASED,
+                    2, 0, 10, 102, 1, false, java.awt.event.MouseEvent.BUTTON1));
+            assertTrue("Divider moved after mouse drag", split.getDividerLocation() > old + 50);
+            String saved = PreferencesDialog.getCachedValue("mouseDraftRatio", "");
+            assertFalse(saved.isEmpty());
+            split.setSize(800, 1000);
+            split.doLayout();
+            assertEquals(Double.parseDouble(saved), split.getDividerLocation() / 1000.0, 0.02);
+        });
+    }
+
+    @Test
     public void draftDividerRetainsProportionAcrossResizeAndRecreation() throws Exception {
         SwingUtilities.invokeAndWait(() -> {
             ProportionalSplitPane split = createSplit();
