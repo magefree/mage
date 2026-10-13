@@ -14,11 +14,14 @@ public class MageTextArea extends MageEditorPane {
 
     private String currentText;
     private int currentPanelWidth;
+    private int currentFontSize;
+    private Color currentColor;
 
     public MageTextArea() {
         super();
         setEditable(false);
         setBackground(new Color(0, 0, 0, 0)); // transparent background
+        setForeground(Color.WHITE);
         setFocusable(false);
         enableHyperlinksAndCardPopups();
     }
@@ -32,12 +35,16 @@ public class MageTextArea extends MageEditorPane {
         if (text == null) {
             return;
         }
-        if (text.equals(currentText) && panelWidth == currentPanelWidth) {
+        if (text.equals(currentText) && panelWidth == currentPanelWidth
+                && currentFontSize == GUISizeHelper.gameFeedbackPanelMainMessageFontSize
+                && java.util.Objects.equals(getForeground(), currentColor)) {
             return;
         }
 
         currentText = text;
         currentPanelWidth = panelWidth;
+        currentFontSize = GUISizeHelper.gameFeedbackPanelMainMessageFontSize;
+        currentColor = getForeground() == null ? Color.WHITE : getForeground();
 
         // prepare text format as header and details texts
 
@@ -45,7 +52,9 @@ public class MageTextArea extends MageEditorPane {
         // Dialog is a java logical font family, so it should work on all systems
         buffer.append("<body style='font-family:Dialog;font-size:");
         buffer.append(GUISizeHelper.gameFeedbackPanelMainMessageFontSize);
-        buffer.append("pt;margin:3px 3px 3px 3px;color: #FFFFFF'><b><center>");
+        buffer.append("pt;margin:3px 3px 3px 3px;color: ");
+        buffer.append(String.format("#%02x%02x%02x", currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue()));
+        buffer.append("'><b><center>");
 
         // Don't know what it does (easy italc?) but it bugs with multiple #HTML color codes (LevelX2)
         //text = text.replaceAll("#([^#]+)#", "<i>$1</i>");
@@ -58,7 +67,7 @@ public class MageTextArea extends MageEditorPane {
         }
         buffer.append("</b></center></body></html>");
 
-        SwingUtilities.invokeLater(() -> {
+        Runnable updateText = () -> {
             String promptText = buffer.toString();
             MageTextArea.super.setText(promptText);
             // in case the text don't fit in the panel a tooltip with the text is added
@@ -71,6 +80,11 @@ public class MageTextArea extends MageEditorPane {
                 MageTextArea.super.setToolTipText(null);
             }
             setCaretPosition(0);
-        });
+        };
+        if (SwingUtilities.isEventDispatchThread()) {
+            updateText.run();
+        } else {
+            SwingUtilities.invokeLater(updateText);
+        }
     }
 }
