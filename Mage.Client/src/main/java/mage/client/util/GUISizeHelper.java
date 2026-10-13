@@ -3,6 +3,7 @@ package mage.client.util;
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.gui.GuiDisplayUtil;
+import mage.client.util.gui.GuiFontDefaults;
 import org.mage.card.arcane.CardRenderer;
 
 import javax.swing.*;
@@ -93,6 +94,8 @@ public final class GUISizeHelper {
         calculateGUISizes();
         if (reloadTheme) {
             GuiDisplayUtil.refreshThemeSettings();
+        } else {
+            GuiFontDefaults.refresh();
         }
         if (MageFrame.getInstance() != null) {
             MageFrame.getInstance().refreshGUIAndCards();
@@ -106,10 +109,14 @@ public final class GUISizeHelper {
         symbolDialogSize = dialogFontSize;
         // for auto-sizeable dialogs - use scale logic (example: player panel, pick choice, pick ability, etc)
         dialogGuiScale = dialogFontSize / 14.0f;
+        GuiFontDefaults.install();
 
         // app - frame/window title
         // nimbus's LaF limited to static title size, so font can't be too big (related code in SynthInternalFrameTitlePane, BasicInternalFrameTitlePane)
-        UIManager.put("InternalFrame.titleFont", new FontUIResource(dialogFont.deriveFont(Font.BOLD, Math.min(17, 0.8f * dialogFont.getSize()))));
+        FontUIResource titleFont = new FontUIResource(dialogFont.deriveFont(Font.BOLD, Math.min(17, 0.8f * dialogFont.getSize())));
+        UIManager.put("InternalFrame.titleFont", titleFont);
+        UIManager.put("InternalFrame:InternalFrameTitlePane.font", titleFont);
+        UIManager.getLookAndFeelDefaults().put("InternalFrame:InternalFrameTitlePane.font", titleFont);
 
         // app - tables
         tableFont = new java.awt.Font("Arial", 0, dialogFontSize);

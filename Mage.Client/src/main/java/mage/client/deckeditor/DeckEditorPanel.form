@@ -154,9 +154,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnNew" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="btnNew" min="-2" pref="-1" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnGenDeck" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="btnGenDeck" min="-2" pref="-1" max="-2" attributes="0"/>
                           <EmptySpace pref="70" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -166,8 +166,8 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnGenDeck" pref="30" max="32767" attributes="0"/>
-                              <Component id="btnNew" alignment="0" pref="30" max="32767" attributes="0"/>
+                              <Component id="btnGenDeck" pref="-1" max="32767" attributes="0"/>
+                              <Component id="btnNew" alignment="0" pref="-1" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -211,9 +211,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnLoad" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="btnLoad" min="-2" pref="-1" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnImport" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="btnImport" min="-2" pref="-1" max="-2" attributes="0"/>
                           <EmptySpace pref="70" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -224,7 +224,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="btnLoad" pref="0" max="32767" attributes="0"/>
-                              <Component id="btnImport" pref="30" max="32767" attributes="0"/>
+                              <Component id="btnImport" pref="-1" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -268,9 +268,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnSave" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="btnSave" min="-2" pref="-1" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnExport" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="btnExport" min="-2" pref="-1" max="-2" attributes="0"/>
                           <EmptySpace pref="70" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -280,8 +280,8 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnSave" pref="30" max="32767" attributes="0"/>
-                              <Component id="btnExport" pref="30" max="32767" attributes="0"/>
+                              <Component id="btnSave" pref="-1" max="32767" attributes="0"/>
+                              <Component id="btnExport" pref="-1" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -325,9 +325,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnSubmit" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="btnSubmit" min="-2" pref="-1" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnSubmitTimer" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="btnSubmitTimer" min="-2" pref="-1" max="-2" attributes="0"/>
                           <EmptySpace pref="70" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -338,7 +338,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="btnSubmit" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="btnSubmit" min="-2" pref="-1" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <Component id="btnSubmitTimer" alignment="0" pref="0" max="32767" attributes="0"/>
@@ -390,9 +390,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnAddLand" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="btnAddLand" min="-2" pref="-1" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnLegality" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="btnLegality" min="-2" pref="-1" max="-2" attributes="0"/>
                           <EmptySpace pref="70" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -446,7 +446,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnExit" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="btnExit" min="-2" pref="-1" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txtTimeRemaining" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace pref="70" max="32767" attributes="0"/>
@@ -458,7 +458,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnExit" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="btnExit" alignment="3" min="-2" pref="-1" max="-2" attributes="0"/>
                               <Component id="txtTimeRemaining" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                       </Group>

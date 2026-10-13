@@ -4,6 +4,7 @@ import mage.client.MageFrame;
 import mage.client.components.MageDesktopIconifySupport;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
+import mage.client.util.gui.GuiFontDefaults;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
@@ -75,7 +76,45 @@ public class MageDialog extends javax.swing.JInternalFrame {
     }
 
     public void changeGUISize() {
+        GuiFontDefaults.apply(getContentPane());
+        if (!isResizable()) {
+            pack();
+        }
+        revalidate();
+        repaint();
+    }
 
+    @Override
+    public void pack() {
+        GuiFontDefaults.apply(getContentPane());
+        super.pack();
+        JDesktopPane desktop = getDesktopPane();
+        if (desktop == null) {
+            desktop = MageFrame.getDesktop();
+        }
+        if (desktop == null || desktop.getWidth() <= 0 || desktop.getHeight() <= 0) {
+            return;
+        }
+        final JDesktopPane availableDesktop = desktop;
+        if ((getWidth() > desktop.getWidth() || getHeight() > desktop.getHeight())
+                && !(getContentPane() instanceof JScrollPane)) {
+            Container content = getContentPane();
+            JScrollPane scroll = new JScrollPane(content) {
+                @Override
+                public Dimension getPreferredSize() {
+                    Dimension size = super.getPreferredSize();
+                    Insets frameInsets = MageDialog.this.getInsets();
+                    size.width = Math.min(size.width, Math.max(1, availableDesktop.getWidth() - frameInsets.left - frameInsets.right));
+                    size.height = Math.min(size.height, Math.max(1, availableDesktop.getHeight() - frameInsets.top - frameInsets.bottom));
+                    return size;
+                }
+            };
+            scroll.getVerticalScrollBar().setUnitIncrement(24);
+            scroll.getHorizontalScrollBar().setUnitIncrement(24);
+            setContentPane(scroll);
+            super.pack();
+        }
+        setSize(Math.min(getWidth(), desktop.getWidth()), Math.min(getHeight(), desktop.getHeight()));
     }
 
     public static boolean isModalDialogActivated() {
@@ -135,6 +174,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
         super.setVisible(value);
 
         if (value) {
+            GuiFontDefaults.apply(getContentPane());
             this.toFront();
             try {
                 this.setSelected(true);

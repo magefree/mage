@@ -279,7 +279,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="cbTargetAutoChooseLevel" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="cbAskMoveToGraveOrder" alignment="0" min="-2" pref="596" max="-2" attributes="0"/>
+                              <Component id="cbAskMoveToGraveOrder" alignment="0" min="-2" pref="-1" max="-2" attributes="0"/>
                               <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="showPlayerNamesPermanently" alignment="0" max="32767" attributes="0"/>
                                   <Component id="nonLandPermanentsInOnePile" alignment="0" max="32767" attributes="0"/>
@@ -1981,11 +1981,11 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lbSelectLabel" min="-2" pref="96" max="-2" attributes="0"/>
+                          <Component id="lbSelectLabel" min="-2" pref="-1" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lbThemeHint" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbTheme" min="-2" pref="313" max="-2" attributes="0"/>
+                              <Component id="cbTheme" min="-2" pref="-1" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -1997,7 +1997,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="cbTheme" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbSelectLabel" min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="lbSelectLabel" min="-2" pref="-1" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="lbThemeHint" min="-2" max="-2" attributes="0"/>
@@ -2224,7 +2224,7 @@
                                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                           <Component id="labelPreferredImageLanguage" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="cbPreferredImageLanguage" min="-2" pref="153" max="-2" attributes="0"/>
+                                          <Component id="cbPreferredImageLanguage" min="-2" pref="-1" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -2330,7 +2330,7 @@
                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                           <Component id="labelRenderMode" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cbCardRenderImageFallback" min="-2" pref="122" max="-2" attributes="0"/>
+                          <Component id="cbCardRenderImageFallback" min="-2" pref="-1" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -3240,7 +3240,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="cbProxyType" min="-2" pref="126" max="-2" attributes="0"/>
+                                  <Component id="cbProxyType" min="-2" pref="-1" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="629" max="32767" attributes="0"/>
                               </Group>
                               <Component id="pnlProxy" alignment="1" max="32767" attributes="0"/>
