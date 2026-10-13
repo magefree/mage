@@ -45,9 +45,9 @@ public class ScaledImagePanel extends JPanel {
             Graphics2D graphics = (Graphics2D) g.create();
             try {
                 Dimension raster = HiDpiRenderUtil.getRasterSize(graphics, width, height);
-                graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-                graphics.drawImage(TransformedImageCache.getResizedImage(srcImage, raster.width, raster.height),
-                        x, y, width, height, null);
+                BufferedImage image = TransformedImageCache.getResizedImageExact(srcImage, raster.width, raster.height);
+                HiDpiRenderUtil.configureRasterDraw(graphics, image, width, height);
+                graphics.drawImage(image, x, y, width, height, null);
             } finally {
                 graphics.dispose();
             }

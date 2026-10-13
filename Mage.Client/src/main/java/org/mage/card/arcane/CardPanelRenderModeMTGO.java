@@ -117,7 +117,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
 
         Graphics2D g2 = (Graphics2D) g.create();
         try {
-            g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+            HiDpiRenderUtil.configureRasterDraw(g2, cardImage, getCardWidth(), getCardHeight());
             g2.drawImage(cardImage, cardOffsetX, cardOffsetY, getCardWidth(), getCardHeight(), null);
         } finally {
             g2.dispose();

@@ -111,6 +111,10 @@ public class HiDpiRenderingTest extends GuiScalingTestSupport {
             image.setSize(100, 100);
             image.setImage(source);
             assertDevicePixelDetail(image);
+            // Image mode fills its panel even when the source aspect ratio differs.
+            // Avoid shrinking the width first and stretching that intermediate raster.
+            image.setSize(100, 80);
+            assertDevicePixelDetail(image);
             mage.client.cards.BigCard preview = new mage.client.cards.BigCard();
             preview.setSize(100, 100);
             preview.setCard(UUID.randomUUID(), mage.constants.EnlargeMode.NORMAL, source, Collections.emptyList(), false);
