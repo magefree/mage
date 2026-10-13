@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.ControlYourCommanderCondition;
 import mage.abilities.effects.common.PreventAllDamageToAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.hint.common.ControlYourCommanderHint;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
@@ -40,6 +41,7 @@ public final class LoyalUnicorn extends CardImpl {
                 VigilanceAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_CONTROLLED_CREATURES, true
         ));
+        ability.addHint(ControlYourCommanderHint.instance);
         this.addAbility(ability.setAbilityWord(AbilityWord.LIEUTENANT));
     }
 
