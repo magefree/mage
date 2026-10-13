@@ -1,6 +1,7 @@
 package org.mage.card.arcane;
 
 import mage.client.util.TransformedImageCache;
+import mage.client.util.gui.HiDpiRenderUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,7 +41,17 @@ public class ScaledImagePanel extends JPanel {
         int y = border.top;
         int width = getWidth() - border.left - border.right;
         int height = getHeight() - border.top - border.bottom;
-        g.drawImage(TransformedImageCache.getResizedImage(srcImage, width, height), x, y, width, height, null);
+        if (width > 0 && height > 0) {
+            Graphics2D graphics = (Graphics2D) g.create();
+            try {
+                Dimension raster = HiDpiRenderUtil.getRasterSize(graphics, width, height);
+                graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+                graphics.drawImage(TransformedImageCache.getResizedImage(srcImage, raster.width, raster.height),
+                        x, y, width, height, null);
+            } finally {
+                graphics.dispose();
+            }
+        }
 
         super.paint(g);
     }

@@ -6,6 +6,7 @@ import mage.cards.action.ActionCallback;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageCaches;
+import mage.client.util.gui.HiDpiRenderUtil;
 import mage.client.util.ImageHelper;
 import mage.client.util.SoftValuesLoadingCache;
 import mage.components.ImagePanel;
@@ -81,6 +82,8 @@ public class CardPanelRenderModeImage extends CardPanel {
     private final boolean displayFullImagePath;
 
     private int updateArtImageStamp;
+    private int sourceWidth;
+    private int sourceHeight;
 
     private static class Key {
 
@@ -91,6 +94,8 @@ public class CardPanelRenderModeImage extends CardPanel {
         final int cardHeight;
         final int cardXOffset;
         final int cardYOffset;
+        final int rasterWidth;
+        final int rasterHeight;
         final boolean hasImage;
         final boolean isSelected;
         final boolean isChoosable;
@@ -98,7 +103,7 @@ public class CardPanelRenderModeImage extends CardPanel {
         final boolean canAttack;
         final boolean canBlock;
 
-        public Key(Insets border, int width, int height, int cardWidth, int cardHeight, int cardXOffset, int cardYOffset, boolean hasImage, boolean isSelected, boolean isChoosable, boolean isPlayable, boolean canAttack, boolean canBlock) {
+        public Key(Insets border, int width, int height, int cardWidth, int cardHeight, int cardXOffset, int cardYOffset, boolean hasImage, boolean isSelected, boolean isChoosable, boolean isPlayable, boolean canAttack, boolean canBlock, Dimension raster) {
             this.border = border;
             this.width = width;
             this.height = height;
@@ -106,6 +111,8 @@ public class CardPanelRenderModeImage extends CardPanel {
             this.cardHeight = cardHeight;
             this.cardXOffset = cardXOffset;
             this.cardYOffset = cardYOffset;
+            this.rasterWidth = raster.width;
+            this.rasterHeight = raster.height;
             this.hasImage = hasImage;
             this.isSelected = isSelected;
             this.isChoosable = isChoosable;
@@ -130,6 +137,8 @@ public class CardPanelRenderModeImage extends CardPanel {
                     && this.cardHeight == that.cardHeight
                     && this.cardXOffset == that.cardXOffset
                     && this.cardYOffset == that.cardYOffset
+                    && this.rasterWidth == that.rasterWidth
+                    && this.rasterHeight == that.rasterHeight
                     && this.hasImage == that.hasImage
                     && this.isSelected == that.isSelected
                     && this.isChoosable == that.isChoosable
@@ -140,7 +149,7 @@ public class CardPanelRenderModeImage extends CardPanel {
 
         @Override
         public int hashCode() {
-            return Objects.hash(border, width, height, cardWidth, cardHeight, cardXOffset, cardYOffset, hasImage, isSelected, isChoosable, isPlayable, canAttack, canBlock);
+            return Objects.hash(border, width, height, cardWidth, cardHeight, cardXOffset, cardYOffset, hasImage, isSelected, isChoosable, isPlayable, canAttack, canBlock, rasterWidth, rasterHeight);
         }
     }
 
@@ -182,9 +191,10 @@ public class CardPanelRenderModeImage extends CardPanel {
         int cardXOffset = key.cardXOffset;
         int cardYOffset = key.cardYOffset;
 
-        BufferedImage image = GraphicsUtilities.createCompatibleTranslucentImage(renderWidth, renderHeight);
+        BufferedImage image = GraphicsUtilities.createCompatibleTranslucentImage(key.rasterWidth, key.rasterHeight);
         Graphics2D g2 = image.createGraphics();
         try {
+            g2.scale(key.rasterWidth / (double) renderWidth, key.rasterHeight / (double) renderHeight);
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
             // card full size = select border + black border + real card
@@ -232,27 +242,28 @@ public class CardPanelRenderModeImage extends CardPanel {
         return image;
     }
 
-    private static ImageIcon getCounterImageWithAmount(int amount, BufferedImage image, int cardWidth) {
+    private static Icon getCounterImageWithAmount(int amount, BufferedImage image, int cardWidth) {
         int factor = cardWidth > WIDTH_LIMIT ? 2 : 1;
         int xOffset = amount > 9 ? 2 : 5;
         int fontSize = factor == 1 ? amount < 10 ? 12 : amount < 100 ? 10 : amount < 1000 ? 7 : 6
                 : amount < 10 ? 19 : amount < 100 ? 15 : amount < 1000 ? 12 : amount < 10000 ? 9 : 8;
-        BufferedImage newImage;
-        if (cardWidth > WIDTH_LIMIT) {
-            newImage = ImageManagerImpl.deepCopy(image);
-        } else {
-            newImage = ImageHelper.getResizedImage(image, 20, 20);
-        }
-        Graphics g2 = newImage.createGraphics();
-        try {
-            g2.setColor(Color.BLACK);
-            g2.setFont(new Font("Arial Black", amount > 100 ? Font.PLAIN : Font.BOLD, fontSize));
-            g2.drawString(Integer.toString(amount), xOffset * factor, 11 * factor);
-        } finally {
-            g2.dispose();
-        }
-
-        return new ImageIcon(newImage);
+        int logicalSize = cardWidth > WIDTH_LIMIT ? image.getWidth() : 20;
+        return new mage.client.util.gui.HiDpiIcon(logicalSize, pixelSize -> {
+            BufferedImage result = new BufferedImage(pixelSize, pixelSize, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D graphics = result.createGraphics();
+            try {
+                graphics.scale(pixelSize / (double) logicalSize, pixelSize / (double) logicalSize);
+                graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+                graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+                graphics.drawImage(image, 0, 0, logicalSize, logicalSize, null);
+                graphics.setColor(Color.BLACK);
+                graphics.setFont(new Font("Arial Black", amount > 100 ? Font.PLAIN : Font.BOLD, fontSize));
+                graphics.drawString(Integer.toString(amount), xOffset * factor, 11 * factor);
+            } finally {
+                graphics.dispose();
+            }
+            return result;
+        });
     }
 
     public CardPanelRenderModeImage(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback, final boolean foil, Dimension dimension, boolean needFullPermanentRender) {
@@ -486,6 +497,10 @@ public class CardPanelRenderModeImage extends CardPanel {
 
     @Override
     protected void paintCard(Graphics2D g2d) {
+        Dimension source = HiDpiRenderUtil.getSourceSize(HiDpiRenderUtil.getRasterSize(g2d, getCardWidth(), getCardHeight()), 1);
+        if (hasImage && (source.width != sourceWidth || source.height != sourceHeight)) {
+            loadArtImage(source);
+        }
         float alpha = getAlpha();
         if (alpha != 1.0f) {
             AlphaComposite composite = AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, alpha);
@@ -502,7 +517,7 @@ public class CardPanelRenderModeImage extends CardPanel {
                                 0,
                                 0,
                                 hasImage, isSelected(), isChoosable(), getGameCard().isPlayable(), getGameCard().isCanAttack(),
-                                getGameCard().isCanBlock())),
+                                getGameCard().isCanBlock(), HiDpiRenderUtil.getRasterSize(g2d, cardLocation.getCardWidth(), cardLocation.getCardHeight()))),
                 0, 0, cardLocation.getCardWidth(), cardLocation.getCardHeight(), null);
         g2d.dispose();
     }
@@ -608,6 +623,8 @@ public class CardPanelRenderModeImage extends CardPanel {
             synchronized (panel.imagePanel) {
                 if (panel.imagePanel.hasImage()) {
                     setImage(panel.imagePanel.getSrcImage());
+                    sourceWidth = panel.sourceWidth;
+                    sourceHeight = panel.sourceHeight;
                 }
             }
         }
@@ -639,11 +656,18 @@ public class CardPanelRenderModeImage extends CardPanel {
         setTappedAngle(isTapped() ? CardPanel.TAPPED_ANGLE : 0);
         setFlippedAngle(isFlipped() ? CardPanel.FLIPPED_ANGLE : 0);
 
+        loadArtImage(HiDpiRenderUtil.getSourceSize(HiDpiRenderUtil.getRasterSize(this, getCardWidth(), getCardHeight()), 1));
+    }
+
+    private void loadArtImage(Dimension source) {
+        sourceWidth = source.width;
+        sourceHeight = source.height;
+
         final int stamp = ++updateArtImageStamp;
 
         Util.threadPool.submit(() -> {
             try {
-                ImageCacheData data = ImageCache.getCardImage(getGameCard(), getCardWidth(), getCardHeight());
+                ImageCacheData data = ImageCache.getCardImage(getGameCard(), source.width, source.height);
 
                 // save missing image
                 if (data.getImage() == null) {
