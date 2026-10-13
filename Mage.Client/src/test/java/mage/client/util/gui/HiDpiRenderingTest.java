@@ -11,6 +11,35 @@ import static org.junit.Assert.*;
 
 public class HiDpiRenderingTest extends GuiScalingTestSupport {
     @Test
+    public void stretchIconsRetainDetailAndLoadOneRasterPerDisplaySize() {
+        java.util.List<Integer> sizes = new ArrayList<>();
+        mage.client.components.StretchIcon icon = mage.client.components.StretchIcon.fromRasterSource(pixels -> {
+            sizes.add(pixels);
+            BufferedImage source = new BufferedImage(pixels, pixels, BufferedImage.TYPE_INT_RGB);
+            for (int x = 0; x < pixels; x++) {
+                for (int y = 0; y < pixels; y++) source.setRGB(x, y, (x % 2 == 0 ? Color.BLACK : Color.WHITE).getRGB());
+            }
+            return source;
+        }, true);
+        JLabel label = new JLabel(icon);
+        label.setSize(32, 32);
+        for (double scale : new double[]{1, 1.25, 1.5, 2, 1}) {
+            BufferedImage output = new BufferedImage(64, 64, BufferedImage.TYPE_INT_RGB);
+            Graphics2D graphics = output.createGraphics();
+            try {
+                graphics.scale(scale, scale);
+                icon.paintIcon(label, graphics, 0, 0);
+                icon.paintIcon(label, graphics, 0, 0);
+            } finally { graphics.dispose(); }
+            assertEquals(Color.BLACK.getRGB(), output.getRGB(10, 20));
+            assertEquals(Color.WHITE.getRGB(), output.getRGB(11, 20));
+        }
+        assertEquals(Arrays.asList(32, 40, 48, 64, 32), sizes);
+        assertEquals(0, icon.getIconWidth());
+        assertEquals(0, icon.getIconHeight());
+    }
+
+    @Test
     public void iconsKeepLogicalSizeAndReuseDeviceRasterBetweenRepaints() {
         java.util.List<Integer> requests = new ArrayList<>();
         HiDpiIcon icon = new HiDpiIcon(32, pixels -> {
