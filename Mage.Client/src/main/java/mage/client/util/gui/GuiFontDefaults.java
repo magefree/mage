@@ -25,6 +25,12 @@ public final class GuiFontDefaults {
             UIManager.put(control + ".font", font);
             UIManager.getLookAndFeelDefaults().put(control + ".font", font);
         }
+        // Nimbus uses separate styles while tabs are selected/hovered and for combo renderers.
+        for (String region : new String[]{"TabbedPane:TabbedPaneTab", "ComboBox:\"ComboBox.renderer\"",
+                "ComboBox:\"ComboBox.listRenderer\""}) {
+            UIManager.put(region + ".font", font);
+            UIManager.getLookAndFeelDefaults().put(region + ".font", font);
+        }
         UIManager.put("OptionPane.messageFont", font);
         UIManager.put("OptionPane.buttonFont", font);
         FontUIResource title = new FontUIResource(GUISizeHelper.dialogFont.deriveFont(Font.BOLD,

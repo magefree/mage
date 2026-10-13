@@ -139,7 +139,10 @@ import mage.client.game.GamePanel;
      }
 
      public void showDialog() {
+         pack();
          this.setLocation(100, 100);
+         mage.client.util.gui.GuiDisplayUtil.keepComponentInsideScreen(
+                 100 + getWidth() / 2, 100 + getHeight() / 2, this);
          this.setVisible(true);
      }
 
