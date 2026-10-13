@@ -14,6 +14,29 @@ import static org.junit.Assert.*;
 
 public class GuiFontDefaultsTest extends GuiScalingTestSupport {
     @Test
+    public void nimbusTabStatesKeepTheDialogFont() throws Exception {
+        SwingUtilities.invokeAndWait(() -> {
+            try {
+                UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+                for (int size : new int[]{14, 17, 23, 34}) {
+                    PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, String.valueOf(size));
+                    GUISizeHelper.calculateGUISizes();
+                    GuiFontDefaults.refresh();
+                    JTabbedPane tabs = new JTabbedPane();
+                    javax.swing.plaf.synth.Region region = javax.swing.plaf.synth.Region.TABBED_PANE_TAB;
+                    javax.swing.plaf.synth.SynthStyle style = javax.swing.plaf.synth.SynthLookAndFeel.getStyle(tabs, region);
+                    for (int state : new int[]{javax.swing.plaf.synth.SynthConstants.ENABLED,
+                            javax.swing.plaf.synth.SynthConstants.ENABLED | javax.swing.plaf.synth.SynthConstants.SELECTED,
+                            javax.swing.plaf.synth.SynthConstants.ENABLED | javax.swing.plaf.synth.SynthConstants.MOUSE_OVER}) {
+                        assertEquals("Tab font in state " + state, size,
+                                style.getFont(new javax.swing.plaf.synth.SynthContext(tabs, region, style, state)).getSize());
+                    }
+                }
+            } catch (Exception error) { throw new RuntimeException(error); }
+        });
+    }
+
+    @Test
     public void existingPlayerPanelKeepsItsBaseFontDuringPreferenceRefresh() throws Exception {
         SwingUtilities.invokeAndWait(() -> {
             try {

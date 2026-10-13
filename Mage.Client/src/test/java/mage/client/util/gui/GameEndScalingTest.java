@@ -32,8 +32,13 @@ public class GameEndScalingTest extends GuiScalingTestSupport {
                     GUISizeHelper.calculateGUISizes();
                     GameEndDialog dialog = new GameEndDialog(view);
                     desktop.add(dialog);
-                    dialog.pack();
+                    dialog.setModal(false);
+                    dialog.showDialog();
                     layoutTree(dialog);
+                    JButton ok = (JButton) field(GameEndDialog.class, "btnOk").get(dialog);
+                    Rectangle okBounds = SwingUtilities.convertRectangle(ok.getParent(), ok.getBounds(), dialog);
+                    assertTrue("OK stays inside dialog at " + font,
+                            new Rectangle(0, 0, dialog.getWidth(), dialog.getHeight()).contains(okBounds));
                     for (String name : new String[]{"lblGameInfo", "lblMatchInfo"}) {
                         Component message = (Component) field(GameEndDialog.class, name).get(dialog);
                         assertTrue(name + " full message at " + font, message.getWidth() >= message.getPreferredSize().width);
