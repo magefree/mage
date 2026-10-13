@@ -14,6 +14,26 @@ import static org.junit.Assert.*;
 
 public class GuiFontDefaultsTest extends GuiScalingTestSupport {
     @Test
+    public void existingPlayerPanelKeepsItsBaseFontDuringPreferenceRefresh() throws Exception {
+        SwingUtilities.invokeAndWait(() -> {
+            try {
+                PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, "14");
+                GUISizeHelper.calculateGUISizes();
+                GuiFontDefaults.refresh();
+                mage.client.game.PlayerPanelExt panel = new mage.client.game.PlayerPanelExt(1.0f);
+                assertEquals(12, panel.getFont().getSize());
+                for (int size : new int[]{34, 17, 14}) {
+                    PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, String.valueOf(size));
+                    GUISizeHelper.calculateGUISizes();
+                    GuiFontDefaults.refresh(panel);
+                    assertEquals(12, panel.getFont().getSize());
+                }
+                panel.cleanUp();
+            } catch (Exception error) { throw new RuntimeException(error); }
+        });
+    }
+
+    @Test
     public void startupPresetPreservesExistingFontAndPlayerChoices() {
         PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, "34");
         PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_PLAYER_PANEL_SIZE, "23");
@@ -85,7 +105,8 @@ public class GuiFontDefaultsTest extends GuiScalingTestSupport {
                 for (mage.client.dialog.MageDialog dialog : new mage.client.dialog.MageDialog[]{
                         new mage.client.dialog.AboutDialog(), new mage.client.dialog.AddLandDialog(),
                         new mage.client.dialog.ErrorDialog(), new mage.client.dialog.ResetPasswordDialog(),
-                        new mage.client.dialog.NewTableDialog(), new mage.client.dialog.NewTournamentDialog()}) {
+                        new mage.client.dialog.NewTableDialog(), new mage.client.dialog.NewTournamentDialog(),
+                        new mage.client.dialog.CustomOptionsDialog(mage.client.dialog.CustomOptionsDialog.SaveLoadKeys.TABLE, new JButton("Custom options"))}) {
                     desktop.add(dialog);
                     dialog.pack();
                     layoutTree(dialog);
