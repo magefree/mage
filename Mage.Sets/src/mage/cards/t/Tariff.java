@@ -6,19 +6,16 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.players.PlayerList;
-import mage.target.TargetCard;
+import mage.target.TargetPermanent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,14 +118,13 @@ class TariffEffect extends OneShotEffect {
         if (permanents.size() == 1) {
             permanent = permanents.iterator().next();
         } else if (permanents.size() > 1) {
-            Cards cards = new CardsImpl();
-            for (Permanent card : permanents) {
-                cards.add(card);
-            }
-
-            TargetCard targetCard = new TargetCard(Zone.BATTLEFIELD, new FilterCard());
-            if (player.choose(Outcome.Benefit, cards, targetCard, source, game)) {
-                permanent = game.getPermanent(targetCard.getFirstTarget());
+            FilterPermanent filter = new FilterPermanent("creature with the highest mana value");
+            filter.add(new PermanentReferenceInCollectionPredicate(permanents, game));
+            TargetPermanent target = new TargetPermanent(filter);
+            target.withNotTarget(true);
+            // the chosen creature must be paid for or sacrificed
+            if (player.choose(Outcome.Detriment, target, source, game)) {
+                permanent = game.getPermanent(target.getFirstTarget());
             }
         }
         return permanent;
