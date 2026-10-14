@@ -530,6 +530,7 @@ public final class GuiDisplayUtil {
         UIManager.put("info", PreferencesDialog.getCurrentTheme().getInfo()); // tooltips
         UIManager.put("nimbusBase", PreferencesDialog.getCurrentTheme().getNimbusBase()); // title bars, scrollbar foreground
         GuiFontDefaults.install();
+        configureSplitPaneGameShortcuts();
 
 	    UIManager.put("text", PreferencesDialog.getCurrentTheme().getTextColor()); // Default text color
 
@@ -563,6 +564,16 @@ public final class GuiDisplayUtil {
             } catch (InterruptedException ignore) {
             }
         });
+    }
+
+    /** Reapply game function keys after the look and feel recreates Swing's split-pane bindings. */
+    static void configureSplitPaneGameShortcuts() {
+        Object bindings = UIManager.get("SplitPane.ancestorInputMap");
+        if (bindings instanceof InputMap) {
+            for (int key = java.awt.event.KeyEvent.VK_F2; key <= java.awt.event.KeyEvent.VK_F12; key++) {
+                ((InputMap) bindings).remove(KeyStroke.getKeyStroke(key, 0));
+            }
+        }
     }
 
     private static void refreshLookAndFeel(Window window) {

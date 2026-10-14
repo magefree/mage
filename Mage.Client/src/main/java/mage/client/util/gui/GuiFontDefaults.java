@@ -18,12 +18,6 @@ public final class GuiFontDefaults {
         Object[] defaults = getFontDefaults();
         UIManager.getDefaults().putDefaults(defaults);
         UIManager.getLookAndFeelDefaults().putDefaults(defaults);
-        Object map = UIManager.get("SplitPane.ancestorInputMap");
-        if (map instanceof InputMap) {
-            for (int key = java.awt.event.KeyEvent.VK_F2; key <= java.awt.event.KeyEvent.VK_F12; key++) {
-                ((InputMap) map).remove(KeyStroke.getKeyStroke(key, 0));
-            }
-        }
     }
 
     private static Object[] getFontDefaults() {
@@ -121,6 +115,7 @@ public final class GuiFontDefaults {
             }
         }
         install();
+        GuiDisplayUtil.configureSplitPaneGameShortcuts();
         for (Window window : Window.getWindows()) {
             // Replaced dialogs no longer need component UI updates or layout validation.
             if (!window.isDisplayable()) {
