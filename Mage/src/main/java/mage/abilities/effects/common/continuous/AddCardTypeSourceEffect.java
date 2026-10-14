@@ -33,6 +33,8 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
                 dependencyTypes.add(DependencyType.ArtifactAddingRemoving);
             } else if (cardType == CardType.LAND) {
                 dependencyTypes.add(DependencyType.BecomeNonbasicLand);
+            } else if (cardType == CardType.CREATURE) {
+                dependencyTypes.add(DependencyType.BecomeCreature);
             }
         }
     }
