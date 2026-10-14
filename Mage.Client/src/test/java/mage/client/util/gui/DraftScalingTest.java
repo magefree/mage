@@ -12,6 +12,29 @@ import static org.junit.Assert.*;
 
 public class DraftScalingTest extends GuiScalingTestSupport {
     @Test
+    public void dividerRatioSurvivesBorderAndDividerSizeChanges() throws Exception {
+        SwingUtilities.invokeAndWait(() -> {
+            ProportionalSplitPane split = createSplit();
+            split.setPreferenceKey("draftChromeRatio");
+            split.setSize(800, 600);
+            split.doLayout();
+            split.setDividerLocation(200);
+            String saved = PreferencesDialog.getCachedValue("draftChromeRatio", "");
+            double ratio = Double.parseDouble(saved);
+            split.setDividerSize(40);
+            split.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
+            split.doLayout();
+            assertEquals(10 + Math.round(ratio * (600 - 40 - 10 - 20)), split.getDividerLocation());
+            assertEquals("Layout changes must not overwrite the user's chosen ratio", saved,
+                    PreferencesDialog.getCachedValue("draftChromeRatio", ""));
+            GuiFontDefaults.refresh(split);
+            split.doLayout();
+            assertEquals("UI refresh must retain the saved ratio", saved,
+                    PreferencesDialog.getCachedValue("draftChromeRatio", ""));
+        });
+    }
+
+    @Test
     public void draggingDividerThroughMouseHandlersRetainsResizedPosition() throws Exception {
         SwingUtilities.invokeAndWait(() -> {
             ProportionalSplitPane split = createSplit();
