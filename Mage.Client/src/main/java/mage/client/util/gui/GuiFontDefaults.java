@@ -15,6 +15,19 @@ public final class GuiFontDefaults {
     }
 
     public static void install() {
+        Object[] defaults = getFontDefaults();
+        UIManager.getDefaults().putDefaults(defaults);
+        UIManager.getLookAndFeelDefaults().putDefaults(defaults);
+        Object map = UIManager.get("SplitPane.ancestorInputMap");
+        if (map instanceof InputMap) {
+            for (int key = java.awt.event.KeyEvent.VK_F2; key <= java.awt.event.KeyEvent.VK_F12; key++) {
+                ((InputMap) map).remove(KeyStroke.getKeyStroke(key, 0));
+            }
+        }
+    }
+
+    private static Object[] getFontDefaults() {
+        java.util.List<Object> defaults = new java.util.ArrayList<>();
         FontUIResource font = new FontUIResource(GUISizeHelper.dialogFont);
         String[] controls = {"Button", "ToggleButton", "CheckBox", "RadioButton", "Label",
                 "ComboBox", "TextField", "PasswordField", "FormattedTextField", "TextArea",
@@ -22,30 +35,27 @@ public final class GuiFontDefaults {
                 "Menu", "MenuItem", "CheckBoxMenuItem", "RadioButtonMenuItem", "MenuBar",
                 "PopupMenu", "OptionPane", "TabbedPane", "Slider", "TitledBorder"};
         for (String control : controls) {
-            UIManager.put(control + ".font", font);
-            UIManager.getLookAndFeelDefaults().put(control + ".font", font);
+            defaults.add(control + ".font");
+            defaults.add(font);
         }
         // Nimbus uses separate styles while tabs are selected/hovered and for combo renderers.
         for (String region : new String[]{"TabbedPane:TabbedPaneTab", "ComboBox:\"ComboBox.renderer\"",
                 "ComboBox:\"ComboBox.listRenderer\""}) {
-            UIManager.put(region + ".font", font);
-            UIManager.getLookAndFeelDefaults().put(region + ".font", font);
+            defaults.add(region + ".font");
+            defaults.add(font);
         }
-        UIManager.put("OptionPane.messageFont", font);
-        UIManager.put("OptionPane.buttonFont", font);
+        defaults.add("OptionPane.messageFont");
+        defaults.add(font);
+        defaults.add("OptionPane.buttonFont");
+        defaults.add(font);
         FontUIResource title = new FontUIResource(GUISizeHelper.dialogFont.deriveFont(Font.BOLD,
                 Math.min(17, 0.8f * GUISizeHelper.dialogFont.getSize())));
-        UIManager.put("InternalFrame:InternalFrameTitlePane.font", title);
-        UIManager.getLookAndFeelDefaults().put("InternalFrame:InternalFrameTitlePane.font", title);
+        defaults.add("InternalFrame:InternalFrameTitlePane.font");
+        defaults.add(title);
         FontUIResource tooltip = new FontUIResource(GUISizeHelper.cardTooltipFont);
-        UIManager.put("ToolTip.font", tooltip);
-        UIManager.getLookAndFeelDefaults().put("ToolTip.font", tooltip);
-        Object map = UIManager.get("SplitPane.ancestorInputMap");
-        if (map instanceof InputMap) {
-            for (int key = java.awt.event.KeyEvent.VK_F2; key <= java.awt.event.KeyEvent.VK_F12; key++) {
-                ((InputMap) map).remove(KeyStroke.getKeyStroke(key, 0));
-            }
-        }
+        defaults.add("ToolTip.font");
+        defaults.add(tooltip);
+        return defaults.toArray();
     }
 
     /** Apply the dialog preference to generated forms while retaining bold/italic emphasis. */
@@ -101,13 +111,20 @@ public final class GuiFontDefaults {
         // Recreate its styles on a preference change; theme overrides in UIManager survive.
         if (UIManager.getLookAndFeel() instanceof NimbusLookAndFeel) {
             try {
-                UIManager.setLookAndFeel(new NimbusLookAndFeel());
+                NimbusLookAndFeel lookAndFeel = new NimbusLookAndFeel();
+                // Populate the replacement before listeners can cache its default 12pt styles.
+                lookAndFeel.getDefaults().putDefaults(getFontDefaults());
+                UIManager.setLookAndFeel(lookAndFeel);
             } catch (UnsupportedLookAndFeelException error) {
                 throw new IllegalStateException("Unable to refresh Nimbus fonts", error);
             }
         }
         install();
         for (Window window : Window.getWindows()) {
+            // Replaced dialogs no longer need component UI updates or layout validation.
+            if (!window.isDisplayable()) {
+                continue;
+            }
             refresh(window);
             window.invalidate();
             window.validate();
