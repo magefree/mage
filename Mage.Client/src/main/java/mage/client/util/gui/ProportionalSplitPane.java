@@ -9,7 +9,7 @@ import java.awt.*;
 public class ProportionalSplitPane extends JSplitPane {
     private double proportion = 0.5;
     private String preferenceKey;
-    private int previousHeight = -1;
+    private int previousAvailableHeight = -1;
     private boolean restoring;
 
     public ProportionalSplitPane() {
@@ -36,7 +36,7 @@ public class ProportionalSplitPane extends JSplitPane {
         } catch (NumberFormatException ignored) {
             proportion = 0.5;
         }
-        previousHeight = -1;
+        previousAvailableHeight = -1;
     }
 
     private int getAvailableHeight() {
@@ -46,11 +46,12 @@ public class ProportionalSplitPane extends JSplitPane {
 
     @Override
     public void doLayout() {
-        if (previousHeight != getHeight() && getAvailableHeight() > 0) {
+        int availableHeight = getAvailableHeight();
+        if (previousAvailableHeight != availableHeight && availableHeight > 0) {
             restoring = true;
             try {
-                setDividerLocation(getInsets().top + (int) Math.round(proportion * getAvailableHeight()));
-                previousHeight = getHeight();
+                setDividerLocation(getInsets().top + (int) Math.round(proportion * availableHeight));
+                previousAvailableHeight = availableHeight;
             } finally {
                 restoring = false;
             }
