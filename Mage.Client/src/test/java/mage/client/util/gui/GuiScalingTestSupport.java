@@ -6,6 +6,7 @@ import mage.client.util.GUISizeHelper;
 import org.junit.*;
 
 import javax.swing.*;
+import javax.swing.plaf.InputMapUIResource;
 import java.awt.*;
 import java.lang.reflect.Field;
 import java.util.*;
@@ -17,9 +18,28 @@ public abstract class GuiScalingTestSupport {
     private Object originalDesktop;
     private Map<String, String> originalCache;
     private final Map<Field, Object> originalSizes = new HashMap<>();
+    private LookAndFeel originalLookAndFeel;
+    private Map<Object, Object> originalFontDefaults;
+    private Map<Object, Object> originalLookAndFeelFonts;
+    private InputMap originalSplitPaneBindings;
 
     @Before
     public void isolatePreferences() throws Exception {
+        onEdt(() -> {
+            originalLookAndFeel = UIManager.getLookAndFeel();
+            originalFontDefaults = fontDefaults(UIManager.getDefaults());
+            originalLookAndFeelFonts = fontDefaults(UIManager.getLookAndFeelDefaults());
+            Object bindings = UIManager.get("SplitPane.ancestorInputMap");
+            if (bindings instanceof InputMap) {
+                originalSplitPaneBindings = new InputMapUIResource();
+                KeyStroke[] keys = ((InputMap) bindings).allKeys();
+                if (keys != null) {
+                    for (KeyStroke key : keys) {
+                        originalSplitPaneBindings.put(key, ((InputMap) bindings).get(key));
+                    }
+                }
+            }
+        });
         for (Field size : GUISizeHelper.class.getDeclaredFields()) {
             if (java.lang.reflect.Modifier.isStatic(size.getModifiers()) && !java.lang.reflect.Modifier.isFinal(size.getModifiers())) {
                 size.setAccessible(true);
@@ -42,6 +62,41 @@ public abstract class GuiScalingTestSupport {
         cache().putAll(originalCache);
         for (Map.Entry<Field, Object> size : originalSizes.entrySet()) {
             size.getKey().set(null, size.getValue());
+        }
+        onEdt(() -> {
+            restoreFontDefaults(UIManager.getDefaults(), originalFontDefaults);
+            restoreFontDefaults(originalLookAndFeel.getDefaults(), originalLookAndFeelFonts);
+            try {
+                UIManager.setLookAndFeel(originalLookAndFeel);
+            } catch (UnsupportedLookAndFeelException error) {
+                throw new IllegalStateException("Unable to restore the test look and feel", error);
+            }
+            UIManager.put("SplitPane.ancestorInputMap", originalSplitPaneBindings);
+        });
+    }
+
+    private static Map<Object, Object> fontDefaults(UIDefaults defaults) {
+        Map<Object, Object> fonts = new HashMap<>();
+        for (Object key : new HashSet<>(defaults.keySet())) {
+            if (key instanceof String && ((String) key).toLowerCase(Locale.ROOT).endsWith("font")) {
+                fonts.put(key, defaults.get(key));
+            }
+        }
+        return fonts;
+    }
+
+    private static void restoreFontDefaults(UIDefaults defaults, Map<Object, Object> fonts) {
+        for (Object key : fontDefaults(defaults).keySet()) {
+            defaults.put(key, null);
+        }
+        fonts.forEach(defaults::put);
+    }
+
+    private static void onEdt(Runnable task) throws Exception {
+        if (SwingUtilities.isEventDispatchThread()) {
+            task.run();
+        } else {
+            SwingUtilities.invokeAndWait(task);
         }
     }
 

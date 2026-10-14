@@ -58,7 +58,7 @@ public final class GuiFontDefaults {
         return defaults.toArray();
     }
 
-    /** Apply the dialog preference to generated forms while retaining bold/italic emphasis. */
+    /** Apply the dialog preference to generated forms on the EDT, retaining bold/italic emphasis. */
     public static void apply(Component component) {
         if (component instanceof JLabel || component instanceof AbstractButton
                 || component instanceof JTextComponent || component instanceof JComboBox
@@ -106,6 +106,7 @@ public final class GuiFontDefaults {
         }
     }
 
+    /** Refresh live windows on the EDT after changing font preferences. */
     public static void refresh() {
         // Nimbus caches Synth styles, including fonts, across component UI updates.
         // Recreate its styles on a preference change; theme overrides in UIManager survive.
