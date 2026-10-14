@@ -20,6 +20,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class CardPanelRenderModeMTGO extends CardPanel {
 
+    private static final double ART_OVERSAMPLING = 1.5;
+
     // https://www.mtg.onl/evolution-of-magic-token-card-frame-design/
 
     private static final Cache<String, BufferedImage> MTGO_MODE_RENDERED_CACHE = ImageCaches.register(
@@ -96,7 +98,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
             rasterHeight = raster.height;
             cardImage = null;
         }
-        Dimension source = HiDpiRenderUtil.getSourceSize(raster, 1.5);
+        Dimension source = HiDpiRenderUtil.getSourceSize(raster, ART_OVERSAMPLING);
         if (artImage != null && (source.width != sourceWidth || source.height != sourceHeight)) {
             loadArtImage(source);
         }
@@ -215,7 +217,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         // Leave room for cropping the art out of the full card without keeping full-size files.
         Dimension raster = rasterWidth > 0 ? new Dimension(rasterWidth, rasterHeight)
                 : HiDpiRenderUtil.getRasterSize(this, getCardWidth(), getCardHeight());
-        loadArtImage(HiDpiRenderUtil.getSourceSize(raster, 1.5));
+        loadArtImage(HiDpiRenderUtil.getSourceSize(raster, ART_OVERSAMPLING));
     }
 
     private void loadArtImage(Dimension source) {
