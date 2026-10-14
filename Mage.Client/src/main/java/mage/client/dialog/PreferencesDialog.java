@@ -621,8 +621,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     public static PreferencesDialog getInstance() {
-        if (instance == null) {
-            instance = new PreferencesDialog(new javax.swing.JFrame(), true);
+        return getInstance(MageFrame.getInstance());
+    }
+
+    static PreferencesDialog getInstance(Frame owner) {
+        if (instance == null || (owner != null && instance.getOwner() != owner)) {
+            // A dialog requested before client startup must attach to the real frame later.
+            if (instance != null) {
+                instance.dispose();
+            }
+            instance = new PreferencesDialog(owner, true);
         }
         return instance;
     }
@@ -3465,11 +3473,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
                 mage.client.util.gui.GuiFontDefaults.apply(dialog.getContentPane());
                 dialog.pack();
-                GraphicsConfiguration display = dialog.getOwner() == null ? dialog.getGraphicsConfiguration() : dialog.getOwner().getGraphicsConfiguration();
-                Rectangle available = GuiDisplayUtil.getUsableScreenBounds(display);
-                dialog.setSize(Math.min(dialog.getWidth(), available.width), Math.min(dialog.getHeight(), available.height));
-                dialog.setLocationRelativeTo(dialog.getOwner());
-                GuiDisplayUtil.keepComponentInsideScreen(dialog.getX(), dialog.getY(), dialog);
+                GuiDisplayUtil.positionWindowRelativeToOwner(dialog);
 
                 dialog.setVisible(true);
             } else {

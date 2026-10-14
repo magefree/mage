@@ -14,6 +14,39 @@ import static org.junit.Assert.*;
 
 public class GuiFontDefaultsTest extends GuiScalingTestSupport {
     @Test
+    public void fontRefreshUpdatesHiddenPeersAndSkipsDisposedWindows() throws Exception {
+        Assume.assumeFalse(GraphicsEnvironment.isHeadless());
+        SwingUtilities.invokeAndWait(() -> {
+            JFrame window = new JFrame();
+            final int[] uiUpdates = {0};
+            JButton control = new JButton("Hidden window") {
+                @Override
+                public void updateUI() {
+                    super.updateUI();
+                    uiUpdates[0]++;
+                }
+            };
+            try {
+                window.add(control);
+                window.pack();
+                PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, "34");
+                GUISizeHelper.calculateGUISizes();
+                GuiFontDefaults.refresh();
+                assertEquals("A hidden live peer receives the new font", 34, control.getFont().getSize());
+                assertFalse(window.isVisible());
+                window.dispose();
+                int before = uiUpdates[0];
+                PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, "17");
+                GUISizeHelper.calculateGUISizes();
+                GuiFontDefaults.refresh();
+                assertEquals("Disposed windows do not receive UI updates", before, uiUpdates[0]);
+            } finally {
+                window.dispose();
+            }
+        });
+    }
+
+    @Test
     public void nimbusTabStatesKeepTheDialogFont() throws Exception {
         SwingUtilities.invokeAndWait(() -> {
             try {
@@ -23,6 +56,7 @@ public class GuiFontDefaultsTest extends GuiScalingTestSupport {
                     GUISizeHelper.calculateGUISizes();
                     GuiFontDefaults.refresh();
                     JTabbedPane tabs = new JTabbedPane();
+                    assertEquals("Refresh preserves the selected font", size, GUISizeHelper.dialogFont.getSize());
                     javax.swing.plaf.synth.Region region = javax.swing.plaf.synth.Region.TABBED_PANE_TAB;
                     javax.swing.plaf.synth.SynthStyle style = javax.swing.plaf.synth.SynthLookAndFeel.getStyle(tabs, region);
                     for (int state : new int[]{javax.swing.plaf.synth.SynthConstants.ENABLED,
@@ -102,6 +136,7 @@ public class GuiFontDefaultsTest extends GuiScalingTestSupport {
                     GUISizeHelper.calculateGUISizes();
                     GuiFontDefaults.refresh();
                     GuiFontDefaults.refresh(existing);
+                    assertEquals("Refresh preserves the selected font", size, GUISizeHelper.dialogFont.getSize());
                     assertEquals(size, existing.getFont().getSize());
                     assertEquals(size, new JTextField("Text").getFont().getSize());
                     assertEquals(size, new JCheckBox("Check").getFont().getSize());

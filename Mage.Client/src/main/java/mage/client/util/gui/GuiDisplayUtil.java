@@ -145,6 +145,17 @@ public final class GuiDisplayUtil {
         component.setLocation(clampLocation(new Point(centerX, centerY), component.getSize(), available));
     }
 
+    /** Size and position a dialog on its owner's current display when it is reopened. */
+    public static void positionWindowRelativeToOwner(Window window) {
+        Window owner = window.getOwner();
+        GraphicsConfiguration display = owner == null ? window.getGraphicsConfiguration() : owner.getGraphicsConfiguration();
+        Rectangle available = getUsableScreenBounds(display);
+        window.setSize(Math.min(window.getWidth(), available.width), Math.min(window.getHeight(), available.height));
+        window.setLocationRelativeTo(owner);
+        // The dialog peer can still report its old monitor until the move is processed.
+        window.setLocation(clampLocation(window.getLocation(), window.getSize(), available));
+    }
+
     public static Rectangle getUsableScreenBounds(GraphicsConfiguration display) {
         if (display == null) {
             display = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
