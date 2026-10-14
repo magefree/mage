@@ -175,6 +175,16 @@ public final class GuiDisplayUtil {
                 Math.max(available.y, Math.min(location.y, available.y + Math.max(0, available.height - size.height))));
     }
 
+    /** Discard cached control measurements after a display's font metrics change. */
+    public static void invalidateLayoutTree(Component component) {
+        if (component instanceof Container) {
+            for (Component child : ((Container) component).getComponents()) {
+                invalidateLayoutTree(child);
+            }
+        }
+        component.invalidate();
+    }
+
     /** Keep a single-row toolbar readable and scrollable when it is wider than its panel. */
     public static JScrollPane createHorizontalScrollPane(JComponent content) {
         JScrollPane scroll = new JScrollPane(content, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,

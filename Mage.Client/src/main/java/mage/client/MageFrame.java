@@ -276,6 +276,18 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         getContentPane().removeAll();
         getContentPane().setLayout(new BorderLayout(0, 2));
         getContentPane().add(toolbarScroll, BorderLayout.NORTH);
+        addPropertyChangeListener("graphicsConfiguration", event -> {
+            if (event.getOldValue() != null && event.getNewValue() != null) {
+                // The font is unchanged, but its measurements can differ on the new display.
+                SwingUtilities.invokeLater(() -> {
+                    if (isDisplayable()) {
+                        GuiDisplayUtil.invalidateLayoutTree(this);
+                        validate();
+                        repaint();
+                    }
+                });
+            }
+        });
         getContentPane().add(desktopPane, BorderLayout.CENTER);
 
         // auto-update switch panels button with actual stats
