@@ -87,7 +87,7 @@ public class WarpAbility extends SpellAbility {
         if (!super.activate(game, allowedIdentifiers, noMana)) {
             return false;
         }
-        this.setCostsTag(WARP_ACTIVATION_VALUE_KEY, null);
+        CardUtil.setSourceCostsTag(game, this, WARP_ACTIVATION_VALUE_KEY, null);
         return true;
     }
 

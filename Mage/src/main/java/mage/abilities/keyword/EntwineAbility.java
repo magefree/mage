@@ -95,7 +95,7 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
                     ability.addCost(cost.copy());
                 }
             }
-            ability.setCostsTag(ENTWINE_ACTIVATION_VALUE_KEY, null);
+            CardUtil.setSourceCostsTag(game, ability, ENTWINE_ACTIVATION_VALUE_KEY, null);
         }
     }
 

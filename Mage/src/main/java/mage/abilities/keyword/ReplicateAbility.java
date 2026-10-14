@@ -117,7 +117,7 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
                 }
             }
         }
-        ability.setCostsTag(activationKey, getActivateCount());
+        CardUtil.setSourceCostsTag(game, ability, activationKey, getActivateCount());
     }
 
     @Override

@@ -9,6 +9,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -84,7 +85,7 @@ public class WaterbendAbility extends StaticAbility implements OptionalAdditiona
         for (Cost cost : ((Costs<Cost>) additionalCost)) {
             ability.addCost(cost.copy());
         }
-        ability.setCostsTag(WATERBEND_ACTIVATION_VALUE_KEY, null);
+        CardUtil.setSourceCostsTag(game, ability, WATERBEND_ACTIVATION_VALUE_KEY, null);
     }
 
     @Override

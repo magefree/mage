@@ -11,6 +11,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DiscardedCardsEvent;
 import mage.game.events.GameEvent;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;
@@ -62,7 +63,7 @@ public class MayhemAbility extends SpellAbility {
         if (!super.activate(game, allowedIdentifiers, noMana)) {
             return false;
         }
-        this.setCostsTag(MAYHEM_ACTIVATION_VALUE_KEY, null);
+        CardUtil.setSourceCostsTag(game, this, MAYHEM_ACTIVATION_VALUE_KEY, null);
         return true;
     }
 

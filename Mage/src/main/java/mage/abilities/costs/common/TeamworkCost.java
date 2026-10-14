@@ -16,6 +16,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
 
 import java.awt.Color;
 import java.util.HashSet;
@@ -57,7 +58,7 @@ public class TeamworkCost extends CostImpl {
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         int amount = this.amount.calculate(game, ability, null);
         if (amount <= 0) {
-            ability.setCostsTag(TeamworkAbility.TEAMWORK_CREATURES_KEY, new HashSet<MageObjectReference>());
+            CardUtil.setSourceCostsTag(game, ability, TeamworkAbility.TEAMWORK_CREATURES_KEY, new HashSet<MageObjectReference>());
             paid = true;
             return true;
         }
@@ -98,7 +99,7 @@ public class TeamworkCost extends CostImpl {
 
         paid = sumPower >= amount;
         if (paid) {
-            ability.setCostsTag(TeamworkAbility.TEAMWORK_CREATURES_KEY, teamworkCreatures);
+            CardUtil.setSourceCostsTag(game, ability, TeamworkAbility.TEAMWORK_CREATURES_KEY, teamworkCreatures);
             for (UUID targetId : paidCreatureIds) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PAID_TEAMWORK_COST, targetId, source, controllerId));
             }

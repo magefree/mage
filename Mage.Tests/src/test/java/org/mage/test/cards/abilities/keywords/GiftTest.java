@@ -14,7 +14,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -311,7 +310,6 @@ public class GiftTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore // TODO: fix costsTag data leak on rollbacks
     public void test_Rollback_MustNotLostGift_ManaAbilityCanceledWhilePaying() {
         // a canceled mana ability while paying a spell rolls back the game (example: a human cancels the sacrifice
         // of Ashnod's Altar), the spell must keep the promised gift after that
@@ -343,7 +341,6 @@ public class GiftTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore // TODO: fix costsTag data leak on rollbacks
     public void test_Rollback_MustNotLostGift_ManaAbilityFailedWhilePaying() {
         // a failed mana ability while paying a spell rolls back the game, the spell must keep the promised gift after
         // that (Rakdos Signet is tried for {1} when nothing is left to pay its own {1}, then convoke pays)
@@ -377,6 +374,43 @@ public class GiftTest extends CardTestPlayerBase {
         assertTapped("Rakdos Signet", false);
         assertPermanentCount(playerB, "Treasure Token", 1);
         assertLife(playerB, 20 - 3);
+    }
+
+    @Test
+    public void test_Rollback_MustNotLostGift_PermanentManaAbilityFailedWhilePaying() {
+        // a failed mana ability while paying a permanent spell rolls back the game, the permanent must keep the promised
+        // gift after that (Golgari Signet is tried for {1} when nothing is left to pay its own {1}, then convoke pays)
+        //
+        // Gift a card
+        // When this creature enters, if the gift was promised, destroy target artifact or enchantment an opponent controls.
+        addCard(Zone.HAND, playerA, "Scrapshooter"); // {1}{G}{G}, creature
+        //
+        // {T}: The next spell you cast this turn has convoke.
+        addCard(Zone.BATTLEFIELD, playerA, "Wand of the Worldsoul");
+        addCard(Zone.BATTLEFIELD, playerA, "Runeclaw Bear"); // 2/2, for convoke
+        addCard(Zone.BATTLEFIELD, playerA, "Golgari Signet"); // {1}, {T}: Add {B}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Ornithopter"); // artifact 0/2
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: The next spell you cast this turn");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scrapshooter");
+        setChoice(playerA, true); // promise
+        addTarget(playerA, "Runeclaw Bear"); // convoke for {1}
+        setChoice(playerA, playerB.getName()); // gift to
+        setChoice(playerA, "When this permanent enters, if the gift was promised, they draw"); // triggers order
+        addTarget(playerA, "Ornithopter"); // destroy
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Scrapshooter", 1);
+        assertTapped("Runeclaw Bear", true);
+        assertTapped("Golgari Signet", false);
+        assertHandCount(playerB, 1);
+        assertPermanentCount(playerB, "Ornithopter", 0);
     }
 }
 

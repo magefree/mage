@@ -89,7 +89,7 @@ public class GiftAbility extends StaticAbility implements OptionalAdditionalSour
         }
         additionalCost.activate();
         ability.addCost(additionalCost.copy());
-        ability.setCostsTag(GIFT_ACTIVATION_VALUE_KEY, null);
+        CardUtil.setSourceCostsTag(game, ability, GIFT_ACTIVATION_VALUE_KEY, null);
     }
 
     @Override
@@ -131,7 +131,7 @@ class PromiseGiftCost extends CostImpl {
         if (opponent == null) {
             return paid;
         }
-        source.setCostsTag(GiftAbility.GIFT_ACTIVATION_VALUE_KEY, opponent.getId());
+        CardUtil.setSourceCostsTag(game, source, GiftAbility.GIFT_ACTIVATION_VALUE_KEY, opponent.getId());
         paid = true;
         return paid;
     }

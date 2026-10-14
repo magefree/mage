@@ -73,7 +73,7 @@ public class OffspringAbility extends StaticAbility implements OptionalAdditiona
         }
         additionalCost.activate();
         ability.addCost(additionalCost.copy());
-        ability.setCostsTag(OFFSPRING_ACTIVATION_VALUE_KEY, null);
+        CardUtil.setSourceCostsTag(game, ability, OFFSPRING_ACTIVATION_VALUE_KEY, null);
     }
 
     @Override

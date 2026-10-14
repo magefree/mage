@@ -13,6 +13,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +80,7 @@ public class ExileFromHandCost extends CostImpl {
                 // If a spell has {X} in its mana cost, include the value chosen for that X when determining the mana value
                 // of that spell, even if it was cast for an alternative cost and no mana was spent on X.
                 // (2018-12-07)
-                ability.setCostsTag("X", cmc); // example: Nourishing Shoal
+                CardUtil.setSourceCostsTag(game, ability, "X", cmc); // example: Nourishing Shoal
             }
         }
         return paid;

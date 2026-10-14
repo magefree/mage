@@ -12,6 +12,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
 import java.util.Set;
 
@@ -52,7 +53,7 @@ public class WebSlingingAbility extends SpellAbility {
         if (!super.activate(game, allowedIdentifiers, noMana)) {
             return false;
         }
-        this.setCostsTag(WEB_SLINGING_ACTIVATION_VALUE_KEY, null);
+        CardUtil.setSourceCostsTag(game, this, WEB_SLINGING_ACTIVATION_VALUE_KEY, null);
         return true;
     }
 

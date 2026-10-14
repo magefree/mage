@@ -10,6 +10,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -86,7 +87,7 @@ public class CollectEvidenceAbility extends StaticAbility implements OptionalAdd
 
         additionalCost.activate();
         ability.addCost(additionalCost.copy());
-        ability.setCostsTag(COLLECT_EVIDENCE_ACTIVATION_VALUE_KEY, null);
+        CardUtil.setSourceCostsTag(game, ability, COLLECT_EVIDENCE_ACTIVATION_VALUE_KEY, null);
     }
 
     @Override

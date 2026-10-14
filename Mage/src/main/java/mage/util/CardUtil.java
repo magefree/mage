@@ -41,6 +41,7 @@ import mage.game.permanent.PermanentMeld;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.Target;
@@ -1995,6 +1996,27 @@ public final class CardUtil {
             return (T) value;
         }
         return defaultValue;
+    }
+
+    /**
+     * Set a costs tag to the source ability on the stack (search it by id).
+     * Use it in code that runs after a mana payment step (non-mana costs, after activate, etc)
+     *
+     * @param game
+     * @param source
+     * @param tag    The tag's string identifier
+     * @param value  The tag's value
+     */
+    public static void setSourceCostsTag(Game game, Ability source, String tag, Object value) {
+        // warning, it's important to use id to find real object 
+        // (setSourceCostsTag can be wrongly called from outdated game state, e.g. after cost payment cancel's rollback)
+        StackObject stackObject = game.getStack().getStackObject(source.getId());
+        if (stackObject != null) {
+            stackObject.getStackAbility().setCostsTag(tag, value);
+        } else {
+            // ability without stack
+            source.setCostsTag(tag, value);
+        }
     }
 
     public static int getSourceCostsTagX(Game game, Ability source, int defaultValue) {
