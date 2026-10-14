@@ -6,9 +6,10 @@ import mage.cards.action.ActionCallback;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageCaches;
-import mage.client.util.gui.HiDpiRenderUtil;
 import mage.client.util.ImageHelper;
 import mage.client.util.SoftValuesLoadingCache;
+import mage.client.util.gui.HiDpiIcon;
+import mage.client.util.gui.HiDpiRenderUtil;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
 import mage.constants.AbilityType;
@@ -248,7 +249,7 @@ public class CardPanelRenderModeImage extends CardPanel {
         int fontSize = factor == 1 ? amount < 10 ? 12 : amount < 100 ? 10 : amount < 1000 ? 7 : 6
                 : amount < 10 ? 19 : amount < 100 ? 15 : amount < 1000 ? 12 : amount < 10000 ? 9 : 8;
         int logicalSize = cardWidth > WIDTH_LIMIT ? image.getWidth() : 20;
-        return new mage.client.util.gui.HiDpiIcon(logicalSize, pixelSize -> {
+        return new HiDpiIcon(logicalSize, pixelSize -> {
             BufferedImage result = new BufferedImage(pixelSize, pixelSize, BufferedImage.TYPE_INT_ARGB);
             Graphics2D graphics = result.createGraphics();
             try {
