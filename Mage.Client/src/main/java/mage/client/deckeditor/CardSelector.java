@@ -15,6 +15,8 @@ import mage.client.deckeditor.table.TableModel;
 import mage.client.dialog.CheckBoxList;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.gui.FastSearchUtil;
+import mage.client.util.gui.GuiDisplayUtil;
+import mage.client.util.gui.GuiFontDefaults;
 import mage.client.util.sets.ConstructedFormats;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -86,11 +88,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         JPanel filters = new JPanel();
         filters.setOpaque(false);
         filters.setLayout(new BoxLayout(filters, BoxLayout.Y_AXIS));
-        filters.add(mage.client.util.gui.GuiDisplayUtil.createHorizontalScrollPane(tbColor));
-        filters.add(mage.client.util.gui.GuiDisplayUtil.createHorizontalScrollPane(tbTypes));
+        filters.add(GuiDisplayUtil.createHorizontalScrollPane(tbColor));
+        filters.add(GuiDisplayUtil.createHorizontalScrollPane(tbTypes));
         add(filters, BorderLayout.NORTH);
         add(cardSelectorScrollPane, BorderLayout.CENTER);
-        add(mage.client.util.gui.GuiDisplayUtil.createHorizontalScrollPane(cardSelectorBottomPanel), BorderLayout.SOUTH);
+        add(GuiDisplayUtil.createHorizontalScrollPane(cardSelectorBottomPanel), BorderLayout.SOUTH);
         cardGrid = new CardGrid();
         makeTransparent();
         initListViewComponents();
@@ -203,9 +205,9 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     }
 
     private void setGUISize() {
-        mage.client.util.gui.GuiFontDefaults.apply(tbColor);
-        mage.client.util.gui.GuiFontDefaults.apply(tbTypes);
-        mage.client.util.gui.GuiFontDefaults.apply(cardSelectorBottomPanel);
+        GuiFontDefaults.apply(tbColor);
+        GuiFontDefaults.apply(tbTypes);
+        GuiFontDefaults.apply(cardSelectorBottomPanel);
         tbTypes.setPreferredSize(null);
         mainTable.getTableHeader().setFont(GUISizeHelper.tableFont);
         mainTable.setFont(GUISizeHelper.tableFont);
