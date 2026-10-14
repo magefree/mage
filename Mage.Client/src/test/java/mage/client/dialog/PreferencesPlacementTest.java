@@ -16,9 +16,17 @@ public class PreferencesPlacementTest extends GuiScalingTestSupport {
     public void cachedNativePeerIsRecreatedWhenOwnerChangesDisplays() throws Exception {
         Assume.assumeFalse(GraphicsEnvironment.isHeadless());
         GraphicsDevice[] devices = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
-        Assume.assumeTrue("Requires multiple native displays", devices.length > 1);
         GraphicsConfiguration primary = GraphicsEnvironment.getLocalGraphicsEnvironment()
                 .getDefaultScreenDevice().getDefaultConfiguration();
+        java.util.List<GraphicsConfiguration> displays = new java.util.ArrayList<>();
+        for (GraphicsDevice device : devices) {
+            GraphicsConfiguration display = device.getDefaultConfiguration();
+            // Mirrored monitors and separate X screens can share an origin; moving a window
+            // in one coordinate space cannot select another such device.
+            if (!primary.getBounds().intersects(display.getBounds())) displays.add(display);
+        }
+        Assume.assumeFalse("Requires non-overlapping displays in one virtual desktop", displays.isEmpty());
+        displays.add(primary);
         JFrame[] owner = new JFrame[1];
         PreferencesDialog[] original = new PreferencesDialog[1];
         SwingUtilities.invokeAndWait(() -> {
@@ -34,14 +42,10 @@ public class PreferencesPlacementTest extends GuiScalingTestSupport {
             }
         });
         try {
-            java.util.List<GraphicsConfiguration> displays = new java.util.ArrayList<>();
-            for (GraphicsDevice device : devices) {
-                if (device != primary.getDevice()) displays.add(device.getDefaultConfiguration());
-            }
-            displays.add(primary);
             for (GraphicsConfiguration display : displays) {
                 SwingUtilities.invokeAndWait(() -> owner[0].setLocation(display.getBounds().x + 30, display.getBounds().y + 30));
-                awaitDisplay(owner[0], display);
+                Assume.assumeTrue("Platform must update the display of a hidden owner",
+                        awaitDisplay(owner[0], display));
                 PreferencesDialog[] current = new PreferencesDialog[1];
                 SwingUtilities.invokeAndWait(() -> {
                     try {
@@ -57,7 +61,7 @@ public class PreferencesPlacementTest extends GuiScalingTestSupport {
                         throw new RuntimeException(error);
                     }
                 });
-                awaitDisplay(current[0], display);
+                assertTrue("Recreated native dialog uses the owner's display", awaitDisplay(current[0], display));
                 SwingUtilities.invokeAndWait(() -> {
                     assertTrue("Native dialog bounds remain on the owner's display",
                             GuiDisplayUtil.getUsableScreenBounds(display).contains(current[0].getBounds()));
@@ -80,15 +84,15 @@ public class PreferencesPlacementTest extends GuiScalingTestSupport {
         }
     }
 
-    private static void awaitDisplay(Window window, GraphicsConfiguration display) throws Exception {
+    private static boolean awaitDisplay(Window window, GraphicsConfiguration display) throws Exception {
         boolean[] matches = {false};
         long deadline = System.nanoTime() + java.util.concurrent.TimeUnit.SECONDS.toNanos(3);
         do {
             SwingUtilities.invokeAndWait(() -> matches[0] = window.getGraphicsConfiguration() == display);
-            if (matches[0]) return;
+            if (matches[0]) return true;
             Thread.sleep(25);
         } while (System.nanoTime() < deadline);
-        fail("Native peer did not reach display " + display.getDevice().getIDstring());
+        return false;
     }
 
     @Test
