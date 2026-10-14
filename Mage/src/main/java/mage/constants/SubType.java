@@ -89,6 +89,7 @@ public enum SubType {
     ALIEN("Alien", SubTypeSet.CreatureType),
     ALLY("Ally", SubTypeSet.CreatureType),
     ANDORIAN("Andorian", SubTypeSet.CreatureType),
+    ANDROID("Android", SubTypeSet.CreatureType),
     ANGEL("Angel", SubTypeSet.CreatureType),
     ANTELOPE("Antelope", SubTypeSet.CreatureType),
     ANZELLAN("Anzellan", SubTypeSet.CreatureType, true), // Star Wars
@@ -203,6 +204,7 @@ public enum SubType {
     EYE("Eye", SubTypeSet.CreatureType),
     // F
     FAERIE("Faerie", SubTypeSet.CreatureType),
+    FERENGI("Ferengi", SubTypeSet.CreatureType),
     FERRET("Ferret", SubTypeSet.CreatureType),
     FISH("Fish", SubTypeSet.CreatureType),
     FLAGBEARER("Flagbearer", SubTypeSet.CreatureType),
@@ -460,6 +462,7 @@ public enum SubType {
     TOY("Toy", SubTypeSet.CreatureType),
     TRANDOSHAN("Trandoshan", SubTypeSet.CreatureType, true), // Star Wars
     TREEFOLK("Treefolk", SubTypeSet.CreatureType),
+    TRIBBLE("Tribble", SubTypeSet.CreatureType),
     TRILOBITE("Trilobite", SubTypeSet.CreatureType),
     TRISKELAVITE("Triskelavite", SubTypeSet.CreatureType),
     TROLL("Troll", SubTypeSet.CreatureType),
