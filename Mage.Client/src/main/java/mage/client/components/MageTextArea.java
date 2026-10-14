@@ -35,23 +35,36 @@ public class MageTextArea extends MageEditorPane {
         if (text == null) {
             return;
         }
+        // Keep the cache, formatting and Swing updates on the same event thread.
+        if (SwingUtilities.isEventDispatchThread()) {
+            updateText(text, panelWidth);
+        } else {
+            SwingUtilities.invokeLater(() -> updateText(text, panelWidth));
+        }
+    }
+
+    private void updateText(String text, int panelWidth) {
+        int fontSize = GUISizeHelper.gameFeedbackPanelMainMessageFontSize;
+        Color textColor = getForeground();
+        if (textColor == null) {
+            textColor = Color.WHITE;
+        }
         if (text.equals(currentText) && panelWidth == currentPanelWidth
-                && currentFontSize == GUISizeHelper.gameFeedbackPanelMainMessageFontSize
-                && java.util.Objects.equals(getForeground(), currentColor)) {
+                && currentFontSize == fontSize && textColor.equals(currentColor)) {
             return;
         }
 
         currentText = text;
         currentPanelWidth = panelWidth;
-        currentFontSize = GUISizeHelper.gameFeedbackPanelMainMessageFontSize;
-        currentColor = getForeground() == null ? Color.WHITE : getForeground();
+        currentFontSize = fontSize;
+        currentColor = textColor;
 
         // prepare text format as header and details texts
 
         final StringBuilder buffer = new StringBuilder();
         // Dialog is a java logical font family, so it should work on all systems
         buffer.append("<body style='font-family:Dialog;font-size:");
-        buffer.append(GUISizeHelper.gameFeedbackPanelMainMessageFontSize);
+        buffer.append(fontSize);
         buffer.append("pt;margin:3px 3px 3px 3px;color: ");
         buffer.append(String.format("#%02x%02x%02x", currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue()));
         buffer.append("'><b><center>");
@@ -67,24 +80,16 @@ public class MageTextArea extends MageEditorPane {
         }
         buffer.append("</b></center></body></html>");
 
-        Runnable updateText = () -> {
-            String promptText = buffer.toString();
-            MageTextArea.super.setText(promptText);
-            // in case the text don't fit in the panel a tooltip with the text is added
-            if (panelWidth > 0 && MageTextArea.this.getPreferredSize().getWidth() > panelWidth) {
-                String tooltip = "<html><center><body style='font-family:Dialog;font-size:"
-                        + GUISizeHelper.gameFeedbackPanelMainMessageFontSize
-                        + "pt;color: #FFFFFF'><p width='500'>" + basicText + "</p></body></html>";
-                MageTextArea.super.setToolTipText(tooltip);
-            } else {
-                MageTextArea.super.setToolTipText(null);
-            }
-            setCaretPosition(0);
-        };
-        if (SwingUtilities.isEventDispatchThread()) {
-            updateText.run();
+        super.setText(buffer.toString());
+        // in case the text don't fit in the panel a tooltip with the text is added
+        if (panelWidth > 0 && getPreferredSize().getWidth() > panelWidth) {
+            String tooltip = "<html><center><body style='font-family:Dialog;font-size:"
+                    + fontSize
+                    + "pt;color: #FFFFFF'><p width='500'>" + basicText + "</p></body></html>";
+            super.setToolTipText(tooltip);
         } else {
-            SwingUtilities.invokeLater(updateText);
+            super.setToolTipText(null);
         }
+        setCaretPosition(0);
     }
 }
