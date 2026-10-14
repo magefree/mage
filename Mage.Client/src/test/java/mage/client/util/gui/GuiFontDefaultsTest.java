@@ -14,6 +14,43 @@ import static org.junit.Assert.*;
 
 public class GuiFontDefaultsTest extends GuiScalingTestSupport {
     @Test
+    public void oversizedResizableChoiceFitsDesktopWhenShown() throws Exception {
+        Assume.assumeFalse(GraphicsEnvironment.isHeadless());
+        SwingUtilities.invokeAndWait(() -> {
+            try {
+                JDesktopPane desktop = new JDesktopPane();
+                desktop.setSize(1366, 700);
+                field(MageFrame.class, "desktopPane").set(null, desktop);
+                for (int size : new int[]{14, 17, 23, 34}) {
+                    PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, String.valueOf(size));
+                    GUISizeHelper.calculateGUISizes();
+                    GuiFontDefaults.refresh();
+                    mage.client.dialog.PickChoiceDialog dialog = new mage.client.dialog.PickChoiceDialog();
+                    dialog.setModal(false);
+                    dialog.setSize(1600, 1200);
+                    mage.choices.Choice choice = new mage.choices.ChoiceImpl(false);
+                    choice.setMessage("Choose commands group to run");
+                    choice.setChoices(new LinkedHashSet<>(Arrays.asList("Lands: add to battlefield", "Cards: add to hand")));
+                    dialog.showDialog(choice, null, () -> { });
+                    layoutTree(dialog);
+                    assertTrue("Dialog fits the desktop at " + size, desktop.getBounds().contains(dialog.getBounds()));
+                    for (String name : new String[]{"btOK", "btCancel"}) {
+                        JButton button = (JButton) field(mage.client.dialog.PickChoiceDialog.class, name).get(dialog);
+                        Rectangle bounds = SwingUtilities.convertRectangle(button.getParent(), button.getBounds(), desktop);
+                        assertTrue("Choice footer remains visible at " + size, desktop.getBounds().contains(bounds));
+                        assertTrue(button.getHeight() >= button.getPreferredSize().height);
+                    }
+                    dialog.setVisible(false);
+                    dialog.setSize(1000, 600);
+                    dialog.setVisible(true);
+                    assertEquals("Keep a user size that already fits", new Dimension(1000, 600), dialog.getSize());
+                    dialog.dispose();
+                }
+            } catch (Exception error) { throw new RuntimeException(error); }
+        });
+    }
+
+    @Test
     public void layoutRefreshUsesChangedMeasurementsWithoutChangingFonts() throws Exception {
         SwingUtilities.invokeAndWait(() -> {
             JPanel root = new JPanel(new BorderLayout());

@@ -171,10 +171,19 @@ public class MageDialog extends javax.swing.JInternalFrame {
 
     @Override
     public void setVisible(boolean value) {
+        if (value) {
+            GuiFontDefaults.apply(getContentPane());
+            JDesktopPane desktop = getDesktopPane();
+            if (desktop != null && desktop.getWidth() > 0 && desktop.getHeight() > 0
+                    && (getWidth() > desktop.getWidth() || getHeight() > desktop.getHeight())) {
+                // Resizable dialogs can reopen with a saved or scaled size larger than the desktop.
+                pack();
+                GuiDisplayUtil.keepComponentInsideScreen(getX(), getY(), this);
+            }
+        }
         super.setVisible(value);
 
         if (value) {
-            GuiFontDefaults.apply(getContentPane());
             this.toFront();
             try {
                 this.setSelected(true);
