@@ -1,6 +1,7 @@
 package mage.client.util.gui;
 
 import mage.client.MageFrame;
+import mage.client.components.MageTextArea;
 import mage.client.dialog.PickMultiNumberDialog;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.GUISizeHelper;
@@ -11,10 +12,47 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static org.junit.Assert.*;
 
 public class DamageDistributionScalingTest extends GuiScalingTestSupport {
+    @Test
+    public void queuedTextUsesCurrentFontAndColorOnTheEventDispatchThread() throws Exception {
+        MageTextArea[] textArea = new MageTextArea[1];
+        AtomicReference<String> renderedHtml = new AtomicReference<>();
+        SwingUtilities.invokeAndWait(() -> {
+            try {
+                PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, "14");
+                GUISizeHelper.calculateGUISizes();
+                textArea[0] = new MageTextArea() {
+                    @Override
+                    public void append(String text) {
+                        renderedHtml.set(text);
+                        super.append(text);
+                    }
+                };
+                Thread producer = new Thread(() -> textArea[0].setText("Queued prompt", 1000), "queued-prompt-test");
+                producer.start();
+                producer.join(2000);
+                assertFalse("Queuing text must not wait for the Swing thread", producer.isAlive());
+                PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, "34");
+                GUISizeHelper.calculateGUISizes();
+                textArea[0].setForeground(Color.BLACK);
+            } catch (InterruptedException error) {
+                Thread.currentThread().interrupt();
+                throw new RuntimeException(error);
+            }
+        });
+        SwingUtilities.invokeAndWait(() -> {
+            String html = renderedHtml.get().replaceAll("\\s+", "");
+            assertTrue("Queued prompt is displayed", html.contains("Queuedprompt"));
+            assertTrue("Font is read when the queued text is rendered: " + html,
+                    html.contains("font-size:" + GUISizeHelper.gameFeedbackPanelMainMessageFontSize + "pt"));
+            assertTrue("Color is read when the queued text is rendered: " + html, html.contains("#000000"));
+        });
+    }
+
     @Test
     @SuppressWarnings("unchecked")
     public void spinnerKeyboardActionsAndTypedValuesSubmitTheSameDistribution() throws Exception {
