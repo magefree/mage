@@ -62,8 +62,10 @@ public final class GuiFontDefaults {
             int style = oldFont == null ? Font.PLAIN : oldFont.getStyle();
             component.setFont(new FontUIResource(GUISizeHelper.dialogFont.deriveFont(style)));
             // Generated size properties can cap an otherwise font-driven control.
-            if (component instanceof JComboBox || component instanceof AbstractButton
-                    && ((AbstractButton) component).getText() != null && !((AbstractButton) component).getText().isEmpty()) {
+            boolean textButton = component instanceof AbstractButton
+                    && ((AbstractButton) component).getText() != null
+                    && !((AbstractButton) component).getText().isEmpty();
+            if (component instanceof JComboBox || textButton) {
                 component.setPreferredSize(null);
                 component.setMinimumSize(null);
                 component.setMaximumSize(null);
@@ -94,10 +96,6 @@ public final class GuiFontDefaults {
             }
         }
         component.invalidate();
-        if (component instanceof Container && ((Container) component).getLayout() instanceof LayoutManager2) {
-            // Hidden generated forms can retain GroupLayout's old preferred-size cache.
-            ((LayoutManager2) ((Container) component).getLayout()).invalidateLayout((Container) component);
-        }
     }
 
     /** Refresh live windows on the EDT after changing font preferences. */
@@ -140,8 +138,7 @@ public final class GuiFontDefaults {
         }
         // Nimbus can keep a cached Synth font after updateComponentTreeUI. Replace only
         // look-and-feel fonts, leaving explicit chat, card and player fonts untouched.
-        if (component.getFont() instanceof FontUIResource
-                && !(component instanceof JToolTip) && !(component instanceof JInternalFrame)) {
+        if (component.getFont() instanceof FontUIResource && !(component instanceof JToolTip)) {
             component.setFont(new FontUIResource(GUISizeHelper.dialogFont.deriveFont(component.getFont().getStyle())));
         }
         if (component instanceof Container) {
