@@ -14,6 +14,39 @@ import static org.junit.Assert.*;
 
 public class GuiFontDefaultsTest extends GuiScalingTestSupport {
     @Test
+    public void layoutRefreshUsesChangedMeasurementsWithoutChangingFonts() throws Exception {
+        SwingUtilities.invokeAndWait(() -> {
+            JPanel root = new JPanel(new BorderLayout());
+            JPanel nested = new JPanel();
+            final boolean[] largerMetrics = {false};
+            JButton button = new JButton("Command") {
+                @Override
+                public Dimension getPreferredSize() {
+                    return new Dimension(largerMetrics[0] ? 160 : 100, largerMetrics[0] ? 50 : 30);
+                }
+            };
+            GroupLayout layout = new GroupLayout(nested);
+            nested.setLayout(layout);
+            layout.setHorizontalGroup(layout.createSequentialGroup()
+                    .addComponent(button, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE));
+            layout.setVerticalGroup(layout.createSequentialGroup()
+                    .addComponent(button, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE));
+            root.add(nested);
+            root.setSize(400, 200);
+            layoutTree(root);
+            assertEquals(new Dimension(100, 30), button.getSize());
+            Font font = button.getFont();
+            largerMetrics[0] = true;
+            layoutTree(root);
+            assertEquals("The old measurements remain cached", new Dimension(100, 30), button.getSize());
+            GuiDisplayUtil.invalidateLayoutTree(root);
+            layoutTree(root);
+            assertEquals("Nested controls use the new display measurements", new Dimension(160, 50), button.getSize());
+            assertSame("Display relayout does not change the selected font", font, button.getFont());
+        });
+    }
+
+    @Test
     public void fontRefreshUpdatesHiddenPeersAndSkipsDisposedWindows() throws Exception {
         Assume.assumeFalse(GraphicsEnvironment.isHeadless());
         SwingUtilities.invokeAndWait(() -> {
