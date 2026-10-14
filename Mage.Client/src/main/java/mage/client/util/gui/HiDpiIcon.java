@@ -38,7 +38,7 @@ public final class HiDpiIcon implements Icon {
                 cachedSize = pixelSize;
             }
             if (cachedImage != null) {
-                g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+                HiDpiRenderUtil.configureRasterDraw(g, cachedImage, size, size);
                 g.drawImage(cachedImage, x, y, size, size, component);
             }
         } finally {
