@@ -7,7 +7,9 @@ import java.awt.*;
 
 /** A vertical card-area divider that retains a proportion rather than a pixel position. */
 public class ProportionalSplitPane extends JSplitPane {
-    private double proportion = 0.5;
+    private static final double DEFAULT_PROPORTION = 0.5;
+
+    private double proportion = DEFAULT_PROPORTION;
     private String preferenceKey;
     private int previousAvailableHeight = -1;
     private boolean restoring;
@@ -15,7 +17,7 @@ public class ProportionalSplitPane extends JSplitPane {
     public ProportionalSplitPane() {
         super(VERTICAL_SPLIT);
         setContinuousLayout(true);
-        setResizeWeight(0.5);
+        setResizeWeight(DEFAULT_PROPORTION);
         setOneTouchExpandable(true);
         addPropertyChangeListener(DIVIDER_LOCATION_PROPERTY, event -> {
             int space = getAvailableHeight();
@@ -31,10 +33,10 @@ public class ProportionalSplitPane extends JSplitPane {
     public void setPreferenceKey(String key) {
         preferenceKey = key;
         try {
-            double saved = Double.parseDouble(PreferencesDialog.getCachedValue(key, "0.5"));
-            proportion = Double.isFinite(saved) && saved >= 0 && saved <= 1 ? saved : 0.5;
+            double saved = Double.parseDouble(PreferencesDialog.getCachedValue(key, Double.toString(DEFAULT_PROPORTION)));
+            proportion = Double.isFinite(saved) && saved >= 0 && saved <= 1 ? saved : DEFAULT_PROPORTION;
         } catch (NumberFormatException ignored) {
-            proportion = 0.5;
+            proportion = DEFAULT_PROPORTION;
         }
         previousAvailableHeight = -1;
     }

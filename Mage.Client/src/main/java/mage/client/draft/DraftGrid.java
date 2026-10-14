@@ -30,6 +30,8 @@ import mage.client.cards.CardEventSource;
 public class DraftGrid extends javax.swing.JPanel implements CardEventProducer {
 
     private static final Logger logger = Logger.getLogger(DraftGrid.class);
+    private static final int HORIZONTAL_CARD_GAP = 5;
+    private static final int VERTICAL_CARD_GAP = 3;
 
     private DraftPanel parentPanel;
 
@@ -192,8 +194,9 @@ public class DraftGrid extends javax.swing.JPanel implements CardEventProducer {
         double bestScale = 0;
         for (int rows = 1; rows <= count; rows++) {
             int candidateColumns = (count + rows - 1) / rows;
-            double scale = Math.min((width - (candidateColumns + 1) * 5.0) / candidateColumns / Constants.FRAME_MAX_WIDTH,
-                    (height - (rows + 1) * 3.0) / rows / Constants.FRAME_MAX_HEIGHT);
+            double scale = Math.min((width - (candidateColumns + 1) * (double) HORIZONTAL_CARD_GAP)
+                            / candidateColumns / Constants.FRAME_MAX_WIDTH,
+                    (height - (rows + 1) * (double) VERTICAL_CARD_GAP) / rows / Constants.FRAME_MAX_HEIGHT);
             if (scale > bestScale) {
                 bestScale = scale;
                 columns = candidateColumns;
@@ -202,7 +205,8 @@ public class DraftGrid extends javax.swing.JPanel implements CardEventProducer {
             }
         }
         for (int i = 0; i < count; i++) {
-            result.add(new Rectangle(5 + (i % columns) * (cardWidth + 5), 3 + (i / columns) * (cardHeight + 3), cardWidth, cardHeight));
+            result.add(new Rectangle(HORIZONTAL_CARD_GAP + (i % columns) * (cardWidth + HORIZONTAL_CARD_GAP),
+                    VERTICAL_CARD_GAP + (i / columns) * (cardHeight + VERTICAL_CARD_GAP), cardWidth, cardHeight));
         }
         return result;
     }
