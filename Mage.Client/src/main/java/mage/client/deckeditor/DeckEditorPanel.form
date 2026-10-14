@@ -85,7 +85,7 @@
         <Component class="org.mage.plugins.card.info.CardInfoPaneImpl" name="cardInfoPane">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="Plugins.instance.getCardInfoPane()"/>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="if (cardInfoPane != null &amp;&amp; System.getProperty(&quot;testCardInfo&quot;) != null) {&#xa;            cardInfoPane.setPreferredSize(new Dimension(170, 150));&#xa;            cardInfoPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 0, 0)));&#xa;            isShowCardInfo = true;&#xa;        } else {&#xa;            cardInfoPane = new JLabel();&#xa;            cardInfoPane.setVisible(false);&#xa;        }"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="if (cardInfoPane != null &amp;&amp; System.getProperty(&quot;testCardInfo&quot;) != null) {&#xa;            cardInfoPane.setPreferredSize(new Dimension(170, 150));&#xa;            cardInfoPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 0, 0)));&#xa;        } else {&#xa;            cardInfoPane = new JLabel();&#xa;            cardInfoPane.setVisible(false);&#xa;        }"/>
             <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="*/"/>
             <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="private JComponent cardInfoPane;&#xa;/*"/>
           </AuxValues>

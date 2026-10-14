@@ -1277,8 +1277,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="panelSizeDefaultSettings" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="panelSizeDetailedSettings" min="-2" pref="510" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="panelSizeDetailedSettings" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -1349,7 +1349,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                 <Property name="columns" type="int" value="1"/>
-                <Property name="rows" type="int" value="16"/>
+                <Property name="rows" type="int" value="0"/>
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="labelSizeGroup1">
@@ -2011,9 +2011,6 @@
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="text" type="java.lang.String" value="GUI color style:"/>
                     <Property name="horizontalTextPosition" type="int" value="10"/>
-                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[110, 16]"/>
-                    </Property>
                     <Property name="verticalTextPosition" type="int" value="1"/>
                   </Properties>
                 </Component>

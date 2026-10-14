@@ -625,8 +625,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     static PreferencesDialog getInstance(Frame owner) {
-        if (instance == null || (owner != null && instance.getOwner() != owner)) {
-            // A dialog requested before client startup must attach to the real frame later.
+        if (instance == null || (owner != null && (instance.getOwner() != owner
+                || (!instance.isVisible() && instance.getGraphicsConfiguration() != owner.getGraphicsConfiguration())))) {
+            // Attach early instances to the client, and recreate hidden peers on a new display.
+            // A cached native peer may still use the previous display's coordinate scale.
             if (instance != null) {
                 instance.dispose();
             }
@@ -1776,7 +1778,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         panelSizeDefaultSettings.add(buttonSizeDefault6);
 
         panelSizeDetailedSettings.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Detailed settings"));
-        panelSizeDetailedSettings.setLayout(new java.awt.GridLayout(16, 1));
+        panelSizeDetailedSettings.setLayout(new java.awt.GridLayout(0, 1));
 
         labelSizeGroup1.setText("App's elements:");
         labelSizeGroup1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
@@ -2138,8 +2140,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .add(tabGuiSizeLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(panelSizeDefaultSettings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(panelSizeDetailedSettings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 510, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(panelSizeDetailedSettings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -2150,7 +2152,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         lbSelectLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbSelectLabel.setText("GUI color style:");
         lbSelectLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        lbSelectLabel.setPreferredSize(new java.awt.Dimension(110, 16));
         lbSelectLabel.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         cbTheme.addActionListener(new java.awt.event.ActionListener() {
