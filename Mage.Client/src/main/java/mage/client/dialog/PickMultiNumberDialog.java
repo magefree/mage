@@ -4,7 +4,7 @@ import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.components.MageTextArea;
 import mage.client.util.GUISizeHelper;
-import mage.client.util.gui.GuiFontDefaults;
+import mage.client.util.gui.GuiLayoutUtil;
 import mage.constants.ColoredManaSymbol;
 import mage.util.MultiAmountMessage;
 
@@ -140,7 +140,7 @@ public class PickMultiNumberDialog extends MageDialog {
         updateControls(min, max, messages);
 
         // Use the actual row heights (including HTML text) before packing. Large lists scroll.
-        GuiFontDefaults.apply(getContentPane());
+        GuiLayoutUtil.prepare(getContentPane());
         Dimension contentSize = jPanel1.getPreferredSize();
         JDesktopPane desktop = MageFrame.getDesktop();
         int availableHeight = desktop == null ? 600 : desktop.getHeight();
