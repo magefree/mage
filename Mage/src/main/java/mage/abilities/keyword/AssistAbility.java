@@ -69,7 +69,8 @@ public class AssistAbility extends SimpleStaticAbility implements AlternateManaP
     }
 
     @Override
-    public void addSpecialAction(Ability source, Game game, ManaCost unpaid) {
+    public void addSpecialAction(Ability source, Game game, ManaCost paying) {
+        ManaCost unpaid = paying.getUnpaid();
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null
                 && source.getAbilityType() == AbilityType.SPELL

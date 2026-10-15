@@ -17,29 +17,28 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.AbilityType;
-import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.stack.Spell;
-import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
+import mage.util.ManaUtil;
 
 import java.util.List;
 
 /**
- * 702.65. Delve
+ * 702.66. Delve
  * <p>
- * 702.65a Delve is a static ability that functions while the spell with delve is on the stack. “Delve” means “For
+ * 702.66a Delve is a static ability that functions while the spell with delve is on the stack. “Delve” means “For
  * each generic mana in this spell’s total cost, you may exile a card from your graveyard rather than pay that mana.”
  * <p>
- * 702.65b The delve ability isn’t an additional or alternative cost and applies only after the total cost of the spell
+ * 702.66b The delve ability isn’t an additional or alternative cost and applies only after the total cost of the spell
  * with delve is determined.
  * <p>
- * 702.65c Multiple instances of delve on the same spell are redundant.
+ * 702.66c Multiple instances of delve on the same spell are redundant.
  * <p>
  * The rules for delve have changed slightly since it was last in an expansion. Previously, delve reduced the cost
  * to cast a spell. Under the current rules, you exile cards from your graveyard at the same time you pay the spell’s
@@ -54,10 +53,6 @@ import java.util.List;
  * Because delve isn’t an alternative cost, it can be used in conjunction with alternative costs.
  *
  * @author LevelX2, JayDi85
- * <p>
- * TODO: Change card exiling to a way to pay mana costs, now it's maybe not
- * possible to pay costs from effects that increase the mana costs.
- * If it real bug then possible fix: choose cards on apply like convoke and improvise, not as cost
  */
 public class DelveAbility extends SimpleStaticAbility implements AlternateManaPaymentAbility {
 
@@ -95,20 +90,17 @@ public class DelveAbility extends SimpleStaticAbility implements AlternateManaPa
     }
 
     @Override
-    public void addSpecialAction(Ability source, Game game, ManaCost unpaid) {
+    public void addSpecialAction(Ability source, Game game, ManaCost paying) {
         Player controller = game.getPlayer(source.getControllerId());
+        int unpaidGeneric = ManaUtil.getUnpaidGeneric(paying);
         if (controller != null && !controller.getGraveyard().isEmpty()) {
-            if (source.getAbilityType() == AbilityType.SPELL && unpaid.getMana().getGeneric() > 0) {
-                SpecialAction specialAction = new DelveSpecialAction(this);
+            if (source.getAbilityType() == AbilityType.SPELL && unpaidGeneric > 0) {
+                SpecialAction specialAction = new DelveSpecialAction(paying, this);
                 specialAction.setControllerId(source.getControllerId());
                 specialAction.setSourceId(source.getSourceId());
-                int unpaidAmount = unpaid.getMana().getGeneric();
-                if (!controller.getManaPool().isAutoPayment() && unpaidAmount > 1) {
-                    unpaidAmount = 1;
-                }
                 specialAction.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(
                         0,
-                        Math.min(controller.getGraveyard().size(), unpaidAmount),
+                        Math.min(controller.getGraveyard().size(), unpaidGeneric),
                         new FilterCard("cards from your graveyard"),
                         true
                 )).withSourceExileZone(this.useSourceExileZone));
@@ -125,7 +117,7 @@ public class DelveAbility extends SimpleStaticAbility implements AlternateManaPa
         Player controller = game.getPlayer(source.getControllerId());
         int graveCount = cardsInGraveyard.calculate(game, source, null);
         if (controller != null && graveCount > 0) {
-            options.addMana(Mana.GenericMana(Math.min(unpaid.getMana().getGeneric(), graveCount)));
+            options.addMana(Mana.GenericMana(Math.min(ManaUtil.getUnpaidGeneric(unpaid), graveCount)));
         }
         return options;
     }
@@ -133,10 +125,10 @@ public class DelveAbility extends SimpleStaticAbility implements AlternateManaPa
 
 class DelveSpecialAction extends SpecialAction {
 
-    public DelveSpecialAction(AlternateManaPaymentAbility manaAbility) {
+    public DelveSpecialAction(ManaCost paying, AlternateManaPaymentAbility manaAbility) {
         super(Zone.ALL, manaAbility);
         this.abilityType = AbilityType.SPECIAL_MANA_PAYMENT;
-        this.addEffect(new DelveEffect());
+        this.addEffect(new DelveEffect(paying));
     }
 
     protected DelveSpecialAction(final DelveSpecialAction ability) {
@@ -151,13 +143,17 @@ class DelveSpecialAction extends SpecialAction {
 
 class DelveEffect extends OneShotEffect {
 
-    public DelveEffect() {
+    private final ManaCost paying; // not copied, see AlternateManaPaymentAbility.addSpecialAction
+
+    public DelveEffect(ManaCost paying) {
         super(Outcome.Benefit);
+        this.paying = paying;
         this.staticText = "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)";
     }
 
     protected DelveEffect(final DelveEffect effect) {
         super(effect);
+        this.paying = effect.paying;
     }
 
     @Override
@@ -177,9 +173,7 @@ class DelveEffect extends OneShotEffect {
                 for (Card card : exiledCards) {
                     toDelve.add(card);
                 }
-                ManaPool manaPool = controller.getManaPool();
-                manaPool.addMana(Mana.ColorlessMana(toDelve.size()), game, source);
-                manaPool.unlockManaType(ManaType.COLORLESS);
+                ManaUtil.payGeneric(paying, toDelve.size(), null);
                 String keyString = CardUtil.getCardZoneString("delvedCards", source.getSourceId(), game);
                 @SuppressWarnings("unchecked")
                 Cards delvedCards = (Cards) game.getState().getValue(keyString);

@@ -28,15 +28,8 @@ public class DelveTest extends CardTestPlayerBaseWithAIHelps {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ethereal Forager");
         setChoice(playerA, "Blue"); // pay 1
         setChoice(playerA, "Blue"); // pay 2
-        // delve can be payed in test only by one card
-        setChoice(playerA, "Exile a card");
-        setChoice(playerA, "Balduvian Bears"); // pay 3 as delve
-        setChoice(playerA, "Exile a card");
-        setChoice(playerA, "Balduvian Bears"); // pay 4 as delve
-        setChoice(playerA, "Exile a card");
-        setChoice(playerA, "Balduvian Bears"); // pay 5 as delve
-        setChoice(playerA, "Exile a card");
-        setChoice(playerA, "Balduvian Bears"); // pay 6 as delve
+        setChoice(playerA, "Exile up to");
+        setChoice(playerA, "Balduvian Bears^Balduvian Bears^Balduvian Bears^Balduvian Bears"); // pay 3-6 as delve
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -102,7 +95,7 @@ public class DelveTest extends CardTestPlayerBaseWithAIHelps {
 
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treasure Cruise");
-        setChoice(playerA, "Exile a card"); // delve activate (special button in UI)
+        setChoice(playerA, "Exile up to"); // delve activate (special button in UI)
         setChoice(playerA, TestPlayer.CHOICE_SKIP); // devle cost with nothing (done button in UI)
         setChoice(playerA, TestPlayer.MANA_CANCEL); // mana payment cancel (cancel button in UI)
         setChoice(playerA, TestPlayer.SKIP_FAILED_COMMAND); // delete cast/activate command from queue
