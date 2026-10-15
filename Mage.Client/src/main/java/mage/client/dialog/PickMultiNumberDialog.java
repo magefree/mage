@@ -121,7 +121,6 @@ public class PickMultiNumberDialog extends MageDialog {
 
             JSpinner spinner = new JSpinner();
             spinner.setModel(new SpinnerNumberModel(messages.get(i).defaultValue, messages.get(i).min, messages.get(i).max, 1));
-            spinner.setFont(GUISizeHelper.dialogFont);
             ((JSpinner.DefaultEditor) spinner.getEditor()).getTextField().setColumns(
                     Math.max(3, Integer.toString(messages.get(i).max).length()));
             GridBagConstraints spinnerC = new GridBagConstraints();
