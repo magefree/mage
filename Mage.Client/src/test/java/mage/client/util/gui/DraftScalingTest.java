@@ -27,7 +27,7 @@ public class DraftScalingTest extends GuiScalingTestSupport {
             assertEquals(10 + Math.round(ratio * (600 - 40 - 10 - 20)), split.getDividerLocation());
             assertEquals("Layout changes must not overwrite the user's chosen ratio", saved,
                     PreferencesDialog.getCachedValue("draftChromeRatio", ""));
-            GuiFontDefaults.refresh(split);
+            GuiLayoutUtil.refresh(split);
             split.doLayout();
             assertEquals("UI refresh must retain the saved ratio", saved,
                     PreferencesDialog.getCachedValue("draftChromeRatio", ""));
