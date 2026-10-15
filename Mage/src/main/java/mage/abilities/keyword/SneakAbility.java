@@ -14,7 +14,6 @@ import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.UnblockedPredicate;
 import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
-import mage.util.CardUtil;
 
 import java.util.Set;
 
@@ -57,7 +56,7 @@ public class SneakAbility extends SpellAbility {
                 || game.getStep().getType() != PhaseStep.DECLARE_BLOCKERS) {
             return false;
         }
-        CardUtil.setSourceCostsTag(game, this, SNEAK_ACTIVATION_VALUE_KEY, null);
+        this.setCostsTag(SNEAK_ACTIVATION_VALUE_KEY, null);
         return true;
     }
 

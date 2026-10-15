@@ -15,7 +15,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 /**
  * Written before ruling was clarified. Feel free to put the ruling once it gets there.
@@ -98,7 +97,7 @@ public class BargainAbility extends StaticAbility implements OptionalAdditionalS
 
         additionalCost.activate();
         ability.addCost(additionalCost.copy());
-        CardUtil.setSourceCostsTag(game, ability, BARGAIN_ACTIVATION_VALUE_KEY, null);
+        ability.setCostsTag(BARGAIN_ACTIVATION_VALUE_KEY, null);
     }
 
     @Override

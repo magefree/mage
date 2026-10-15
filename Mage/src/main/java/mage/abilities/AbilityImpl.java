@@ -663,7 +663,7 @@ public abstract class AbilityImpl implements Ability {
                 String message = controller.getLogName() + " announces a value of " + xValue + " (" + variableCost.getActionText() + ')'
                         + CardUtil.getSourceLogName(game, this);
                 announceString.append(message);
-                CardUtil.setSourceCostsTag(game, this, "X", xValue);
+                setCostsTag("X", xValue);
             }
         }
         return announceString.toString();
@@ -873,7 +873,7 @@ public abstract class AbilityImpl implements Ability {
                 addManaCostsToPay(new WaterbendCost(amountMana));
             }
             getManaCostsToPay().setX(xValue, amountMana);
-            CardUtil.setSourceCostsTag(game, this, "X", xValue);
+            setCostsTag("X", xValue);
         }
         variableManaCost.setPaid();
 

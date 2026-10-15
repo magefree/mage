@@ -264,7 +264,7 @@ class ConvokeEffect extends OneShotEffect {
                     }
                     HashSet<MageObjectReference> set = CardUtil.getSourceCostsTag(game, spell.getSpellAbility(), ConvokeAbility.convokingCreaturesKey, new HashSet<>());
                     set.add(new MageObjectReference(perm, game));
-                    CardUtil.setSourceCostsTag(game, spell.getSpellAbility(), ConvokeAbility.convokingCreaturesKey, set);
+                    spell.getSpellAbility().setCostsTag(ConvokeAbility.convokingCreaturesKey, set);
                     game.informPlayers("Convoke: " + controller.getLogName() + " taps " + perm.getLogName() + " to pay one " + manaName + " mana");
 
                     // can't use mana abilities after that (convoke cost must be payed after mana abilities only)
