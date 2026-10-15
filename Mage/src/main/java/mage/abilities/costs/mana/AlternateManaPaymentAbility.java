@@ -18,7 +18,8 @@ public interface AlternateManaPaymentAbility {
      * <p>
      * The action pays {@code paying} directly, using {@link ManaCost#setPayment}
      * on its unpaid parts ({@link mage.util.ManaUtil#getUnpaidParts}).
-     * Manipulate {@link ManaCost#getUsedManaToPay} if it should count as real mana.
+     * Mana it really spends (assist) must also be added to {@link ManaCost#getUsedManaToPay},
+     * and paid as the spell so its MANA_PAID events count.
      * <p>
      * Copies of the action must share {@code paying}, not copy it: the payment loop keeps paying
      * that object, even across a rollback mid-payment.
