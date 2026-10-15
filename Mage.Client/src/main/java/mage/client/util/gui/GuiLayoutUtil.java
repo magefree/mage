@@ -76,6 +76,6 @@ public final class GuiLayoutUtil {
 
     public static void refresh(Component component) {
         SwingUtilities.updateComponentTreeUI(component);
-        prepare(component);
+        GuiDisplayUtil.invalidateLayoutTree(component);
     }
 }

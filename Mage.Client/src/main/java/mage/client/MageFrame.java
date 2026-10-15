@@ -1956,23 +1956,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private void setGUISize() {
         Font font = GUISizeHelper.dialogFont;
-        mageToolbar.setFont(font);
-        mageToolbar.setMinimumSize(null);
-        mageToolbar.setMaximumSize(null);
-        mageToolbar.setPreferredSize(null);
-        for (Component component : mageToolbar.getComponents()) {
-            if (component instanceof JButton || component instanceof JLabel || component instanceof JToggleButton) {
-                component.setFont(font);
-                component.setMinimumSize(null);
-                component.setMaximumSize(null);
-                component.setPreferredSize(null);
-
-            }
-            if (component instanceof javax.swing.JToolBar.Separator) {
-                component.setMinimumSize(null);
-                component.setMaximumSize(null);
-            }
-        }
+        sizeMainToolbar(mageToolbar, font);
 
         this.connectDialog.changeGUISize();
         this.errorDialog.changeGUISize();
@@ -1988,9 +1972,34 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         updateTooltipContainerSizes();
         toolbarScroll.revalidate();
         if (gamesPlayedLabel != null) {
-            gamesPlayedLabel.setFont(font);
             gamesPlayedLabel.setSize(gamesPlayedLabel.getPreferredSize());
         }
+    }
+
+    private static void sizeMainToolbar(JToolBar toolbar, Font font) {
+        toolbar.setFont(font);
+        int controlHeight = font.getSize() + 6;
+        for (Component component : toolbar.getComponents()) {
+            if (component instanceof JButton || component instanceof JLabel || component instanceof JToggleButton) {
+                component.setFont(font);
+            }
+            if (component instanceof JButton || component instanceof JLabel || component instanceof JToggleButton
+                    || component instanceof JToolBar.Separator) {
+                Dimension size = component.getPreferredSize();
+                size.height = controlHeight;
+                component.setMinimumSize(size);
+                component.setMaximumSize(size);
+            }
+        }
+        // Retain the original menu heights, but measure its full width for horizontal scrolling.
+        toolbar.setMinimumSize(null);
+        toolbar.setMaximumSize(null);
+        toolbar.setPreferredSize(null);
+        Dimension size = toolbar.getPreferredSize();
+        size.height = controlHeight + 6;
+        toolbar.setMinimumSize(size);
+        toolbar.setMaximumSize(size);
+        toolbar.setPreferredSize(size);
     }
 
     public void showWhatsNewDialog(boolean forceToShowPage) {
