@@ -1009,6 +1009,15 @@ public abstract class GameImpl implements Game {
      */
     @Override
     public GameState restoreState(int bookmark, String context) {
+        return restoreState(bookmark, context, false);
+    }
+
+    @Override
+    public GameState restoreStateKeepingStack(int bookmark, String context) {
+        return restoreState(bookmark, context, true);
+    }
+
+    private GameState restoreState(int bookmark, String context, boolean keepStack) {
         if (!simulation && !this.hasEnded()) { // if player left or game is over no undo is possible - this could lead to wrong winner
             if (bookmark != 0) {
                 if (!savedStates.contains(bookmark - 1)) {
@@ -1021,7 +1030,7 @@ public abstract class GameImpl implements Game {
                     removeBookmark(bookmark);
                     GameState restore = gameStates.rollback(stateNum);
                     if (restore != null) {
-                        state.restore(restore);
+                        state.restore(restore, keepStack);
                         playerList.setCurrent(state.getPlayerByOrderId());
                         return state;
                     }
