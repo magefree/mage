@@ -429,14 +429,14 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 break;
 
             case ALL_HISTORIC_IMAGES:
-                formatSets = ConstructedFormats.getSetsByFormat(ConstructedFormats.HISTORIC);
+                formatSets = ImageDownloadSets.historic();
                 formatSets.stream()
                         .filter(sourceSets::contains)
                         .forEachOrdered(selectedSets::add);
                 break;
 
             case ALL_VINTAGE_IMAGES:
-                formatSets = ConstructedFormats.getSetsByFormat(ConstructedFormats.VINTAGE_LEGACY);
+                formatSets = ImageDownloadSets.vintage();
                 formatSets.stream()
                         .filter(sourceSets::contains)
                         .forEachOrdered(selectedSets::add);
