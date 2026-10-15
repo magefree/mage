@@ -3,7 +3,6 @@ package mage.client.util;
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.gui.GuiDisplayUtil;
-import mage.client.util.gui.GuiLayoutUtil;
 import org.mage.card.arcane.CardRenderer;
 
 import javax.swing.*;
@@ -94,8 +93,6 @@ public final class GUISizeHelper {
         calculateGUISizes();
         if (reloadTheme) {
             GuiDisplayUtil.refreshThemeSettings();
-        } else {
-            GuiLayoutUtil.refresh();
         }
         if (MageFrame.getInstance() != null) {
             MageFrame.getInstance().refreshGUIAndCards();
@@ -112,8 +109,7 @@ public final class GUISizeHelper {
 
         // app - frame/window title
         // nimbus's LaF limited to static title size, so font can't be too big (related code in SynthInternalFrameTitlePane, BasicInternalFrameTitlePane)
-        FontUIResource titleFont = new FontUIResource(dialogFont.deriveFont(Font.BOLD, Math.min(17, 0.8f * dialogFont.getSize())));
-        UIManager.put("InternalFrame.titleFont", titleFont);
+        UIManager.put("InternalFrame.titleFont", new FontUIResource(dialogFont.deriveFont(Font.BOLD, Math.min(17, 0.8f * dialogFont.getSize()))));
 
         // app - tables
         tableFont = new java.awt.Font("Arial", 0, dialogFontSize);
