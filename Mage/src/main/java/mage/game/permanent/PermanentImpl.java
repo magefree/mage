@@ -44,6 +44,7 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -373,17 +374,24 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                             restrictHints.add(HintUtils.prepareText("Must block all attackers" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_REQUIRE));
                         }
 
-                        MageObject object = game.getObject(entry.getKey().mustAttackDefender(ability, game));
-                        if (object != null) {
-                            restrictHints.add(HintUtils.prepareText("Must attack defender " + object.getLogName() + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_REQUIRE));
-                        }
-                        Player player = game.getPlayer(entry.getKey().mustAttackDefender(ability, game));
-                        if (player != null) {
+                        String defendersInfo = entry.getKey().mustAttackDefenders(ability, game)
+                                .stream()
+                                .map(defenderId -> {
+                                    Player player = game.getPlayer(defenderId);
+                                    if (player != null) {
+                                        return player.getLogName();
+                                    }
+                                    MageObject defender = game.getObject(defenderId);
+                                    return defender == null ? null : defender.getLogName();
+                                })
+                                .filter(Objects::nonNull)
+                                .collect(Collectors.joining(" or "));
+                        if (!defendersInfo.isEmpty()) {
                             restrictHints.add(HintUtils.prepareText(
-                                    "Must attack defender " + player.getLogName() + addSourceObjectName(game, ability),
+                                    "Must attack defender " + defendersInfo + addSourceObjectName(game, ability),
                                     null, HintUtils.HINT_ICON_REQUIRE));
                         }
-                        object = game.getObject(entry.getKey().mustBlockAttacker(ability, game));
+                        MageObject object = game.getObject(entry.getKey().mustBlockAttacker(ability, game));
                         if (object != null) {
                             restrictHints.add(HintUtils.prepareText("Must block attacker " + object.getLogName() + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_REQUIRE));
                         }
