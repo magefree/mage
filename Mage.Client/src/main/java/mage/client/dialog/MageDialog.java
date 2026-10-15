@@ -33,6 +33,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
     private static final Logger LOGGER = Logger.getLogger(MageDialog.class);
 
     private boolean modal = false; // warning, app can work in non-modal mode, so make sure result processing on callback
+    private JScrollPane desktopScroll;
 
     // GUI performance and bugs issues:
     // TODO: swing components should override paintComponent() instead paint()
@@ -86,6 +87,15 @@ public class MageDialog extends javax.swing.JInternalFrame {
 
     @Override
     public void pack() {
+        // Measure the original content again: a startup desktop or an earlier font can be smaller.
+        if (desktopScroll != null) {
+            if (getContentPane() == desktopScroll) {
+                Container content = (Container) desktopScroll.getViewport().getView();
+                desktopScroll.setViewportView(null);
+                setContentPane(content);
+            }
+            desktopScroll = null;
+        }
         GuiFontDefaults.apply(getContentPane());
         super.pack();
         JDesktopPane desktop = getDesktopPane();
@@ -95,23 +105,13 @@ public class MageDialog extends javax.swing.JInternalFrame {
         if (desktop == null || desktop.getWidth() <= 0 || desktop.getHeight() <= 0) {
             return;
         }
-        final JDesktopPane availableDesktop = desktop;
         if ((getWidth() > desktop.getWidth() || getHeight() > desktop.getHeight())
                 && !(getContentPane() instanceof JScrollPane)) {
             Container content = getContentPane();
-            JScrollPane scroll = new JScrollPane(content) {
-                @Override
-                public Dimension getPreferredSize() {
-                    Dimension size = super.getPreferredSize();
-                    Insets frameInsets = MageDialog.this.getInsets();
-                    size.width = Math.min(size.width, Math.max(1, availableDesktop.getWidth() - frameInsets.left - frameInsets.right));
-                    size.height = Math.min(size.height, Math.max(1, availableDesktop.getHeight() - frameInsets.top - frameInsets.bottom));
-                    return size;
-                }
-            };
-            scroll.getVerticalScrollBar().setUnitIncrement(24);
-            scroll.getHorizontalScrollBar().setUnitIncrement(24);
-            setContentPane(scroll);
+            desktopScroll = new JScrollPane(content);
+            desktopScroll.getVerticalScrollBar().setUnitIncrement(24);
+            desktopScroll.getHorizontalScrollBar().setUnitIncrement(24);
+            setContentPane(desktopScroll);
             super.pack();
         }
         setSize(Math.min(getWidth(), desktop.getWidth()), Math.min(getHeight(), desktop.getHeight()));
@@ -175,8 +175,8 @@ public class MageDialog extends javax.swing.JInternalFrame {
             GuiFontDefaults.apply(getContentPane());
             JDesktopPane desktop = getDesktopPane();
             if (desktop != null && desktop.getWidth() > 0 && desktop.getHeight() > 0
-                    && (getWidth() > desktop.getWidth() || getHeight() > desktop.getHeight())) {
-                // Resizable dialogs can reopen with a saved or scaled size larger than the desktop.
+                    && (desktopScroll != null || getWidth() > desktop.getWidth() || getHeight() > desktop.getHeight())) {
+                // Recheck content previously constrained by the desktop, retaining other requested sizes.
                 pack();
                 GuiDisplayUtil.keepComponentInsideScreen(getX(), getY(), this);
             }
