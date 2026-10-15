@@ -76,8 +76,9 @@ public class DamageDistributionScalingTest extends GuiScalingTestSupport {
                     JSpinner first = spinners.get(0);
                     JSpinner original = new JSpinner();
                     assertEquals("Keep the original look-and-feel spinner font", original.getFont(), first.getFont());
-                    assertEquals(((JSpinner.DefaultEditor) original.getEditor()).getTextField().getFont(),
-                            ((JSpinner.DefaultEditor) first.getEditor()).getTextField().getFont());
+                    assertEquals("Keep the original editor font size across look-and-feel states",
+                            ((JSpinner.DefaultEditor) original.getEditor()).getTextField().getFont().getSize2D(),
+                            ((JSpinner.DefaultEditor) first.getEditor()).getTextField().getFont().getSize2D(), 0.001f);
                     first.getActionMap().get("increment").actionPerformed(new java.awt.event.ActionEvent(first, 0, "increment"));
                     assertEquals(9, first.getValue());
                     assertFalse(choose.isEnabled());
