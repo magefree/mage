@@ -59,6 +59,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     private static final String ALL_IMAGES = "- ALL images from selected source (can be slow)";
     private static final String ALL_MODERN_IMAGES = "- MODERN images (can be slow)";
     private static final String ALL_STANDARD_IMAGES = "- STANDARD images";
+    private static final String ALL_HISTORIC_IMAGES = "- HISTORIC images (can be slow)";
+    private static final String ALL_VINTAGE_IMAGES = "- VINTAGE images (can be slow)";
     private static final String ALL_TOKENS = "- TOKEN images";
     private static final String ALL_BASICS = "- BASIC LAND images";
 
@@ -329,6 +331,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             setNames.add(ALL_IMAGES);
             setNames.add(ALL_MODERN_IMAGES);
             setNames.add(ALL_STANDARD_IMAGES);
+            setNames.add(ALL_HISTORIC_IMAGES);
+            setNames.add(ALL_VINTAGE_IMAGES);
             setNames.add(ALL_BASICS);
         }
         if (selectedSource.isTokenSource()) {
@@ -373,6 +377,20 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
             case ALL_MODERN_IMAGES:
                 formatSets = ConstructedFormats.getSetsByFormat(ConstructedFormats.MODERN);
+                formatSets.stream()
+                        .filter(sourceSets::contains)
+                        .forEachOrdered(selectedSets::add);
+                break;
+
+            case ALL_HISTORIC_IMAGES:
+                formatSets = ConstructedFormats.getSetsByFormat(ConstructedFormats.HISTORIC);
+                formatSets.stream()
+                        .filter(sourceSets::contains)
+                        .forEachOrdered(selectedSets::add);
+                break;
+
+            case ALL_VINTAGE_IMAGES:
+                formatSets = ConstructedFormats.getSetsByFormat(ConstructedFormats.VINTAGE_LEGACY);
                 formatSets.stream()
                         .filter(sourceSets::contains)
                         .forEachOrdered(selectedSets::add);
