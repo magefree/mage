@@ -190,7 +190,7 @@
      private void setGUISize() {
          GUISizeHelper.changePopupMenuFont(popupMenuPickedArea);
          draftSplit.setDividerSize(GUISizeHelper.dividerBarSize);
-         mage.client.util.gui.GuiFontDefaults.apply(panelLeft);
+         mage.client.util.gui.GuiLayoutUtil.prepare(panelLeft);
          for (JTextField pack : new JTextField[]{editPack1, editPack2, editPack3}) {
              pack.setPreferredSize(null);
              pack.setColumns(12);
