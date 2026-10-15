@@ -18,8 +18,11 @@ public class GuiLayoutUtilTest extends GuiScalingTestSupport {
     public void mainToolbarRetainsOriginalHeightsAndScrollsAtEveryFontValue() throws Exception {
         SwingUtilities.invokeAndWait(() -> {
             try {
+                UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
                 JToolBar toolbar = new JToolBar();
                 toolbar.setFloatable(false);
+                // The generated main form starts at 48; the first sizing pass must replace it.
+                toolbar.setFont(new Font("Segoe UI", Font.PLAIN, 48));
                 toolbar.add(new JButton("Preferences"));
                 toolbar.add(new JToolBar.Separator());
                 toolbar.add(new JToggleButton("Connect to server"));
@@ -27,6 +30,14 @@ public class GuiLayoutUtilTest extends GuiScalingTestSupport {
                 JScrollPane scroll = GuiDisplayUtil.createHorizontalScrollPane(toolbar);
                 java.lang.reflect.Method resize = MageFrame.class.getDeclaredMethod("sizeMainToolbar", JToolBar.class, Font.class);
                 resize.setAccessible(true);
+                resize.invoke(null, toolbar, new Font("Arial", Font.PLAIN, 14));
+                GuiLayoutUtil.refresh(scroll);
+                assertEquals("Original startup toolbar height", 26, toolbar.getPreferredSize().height);
+                JButton command = (JButton) toolbar.getComponent(0);
+                javax.swing.plaf.synth.SynthContext context =
+                        ((javax.swing.plaf.synth.SynthUI) command.getUI()).getContext(command);
+                assertEquals("Nimbus paints the default font on the first sizing pass", 14,
+                        context.getStyle().getFont(context).getSize());
                 for (int size = 7; size <= 99; size++) {
                     resize.invoke(null, toolbar, new Font("Dialog", Font.PLAIN, size));
                     GuiLayoutUtil.refresh(scroll);
@@ -35,6 +46,7 @@ public class GuiLayoutUtilTest extends GuiScalingTestSupport {
                         if (control instanceof JToolBar.Separator) {
                             continue; // The look and feel owns separator metrics during updateUI.
                         }
+                        assertEquals("Selected font at " + size, size, control.getFont().getSize());
                         assertEquals("Original control height at " + size, size + 6, control.getMinimumSize().height);
                         assertEquals(size + 6, control.getMaximumSize().height);
                     }
