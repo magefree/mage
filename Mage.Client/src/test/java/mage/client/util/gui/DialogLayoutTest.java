@@ -28,7 +28,6 @@ public class DialogLayoutTest extends GuiScalingTestSupport {
         field(MageFrame.class, "desktopPane").set(null, desktop);
         PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, String.valueOf(fontSize));
         GUISizeHelper.calculateGUISizes();
-        GuiLayoutUtil.refresh();
         if (!GraphicsEnvironment.isHeadless()) {
             // A hidden peer gives the controls the real display's font measurements.
             JFrame window = new JFrame();

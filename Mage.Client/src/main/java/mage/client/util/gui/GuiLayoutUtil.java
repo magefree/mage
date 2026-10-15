@@ -62,18 +62,6 @@ public final class GuiLayoutUtil {
         }
     }
 
-    /** Refresh live peers after a preference/theme change, retaining explicit application fonts. */
-    public static void refresh() {
-        GuiDisplayUtil.configureSplitPaneGameShortcuts();
-        for (Window window : Window.getWindows()) {
-            if (window.isDisplayable()) {
-                refresh(window);
-                window.validate();
-                window.repaint();
-            }
-        }
-    }
-
     public static void refresh(Component component) {
         SwingUtilities.updateComponentTreeUI(component);
         GuiDisplayUtil.invalidateLayoutTree(component);

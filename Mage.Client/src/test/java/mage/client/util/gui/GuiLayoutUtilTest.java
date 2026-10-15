@@ -27,7 +27,7 @@ public class GuiLayoutUtilTest extends GuiScalingTestSupport {
                 JScrollPane scroll = GuiDisplayUtil.createHorizontalScrollPane(toolbar);
                 java.lang.reflect.Method resize = MageFrame.class.getDeclaredMethod("sizeMainToolbar", JToolBar.class, Font.class);
                 resize.setAccessible(true);
-                for (int size = 10; size <= 50; size++) {
+                for (int size = 7; size <= 99; size++) {
                     resize.invoke(null, toolbar, new Font("Dialog", Font.PLAIN, size));
                     GuiLayoutUtil.refresh(scroll);
                     assertEquals("Original toolbar height at " + size, size + 12, toolbar.getPreferredSize().height);
@@ -55,7 +55,7 @@ public class GuiLayoutUtilTest extends GuiScalingTestSupport {
             try {
                 UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
                 JComponent[] original = standardControls();
-                for (int size = 10; size <= 50; size++) {
+                for (int size = 7; size <= 99; size++) {
                     PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, String.valueOf(size));
                     GUISizeHelper.calculateGUISizes();
                     JComponent[] current = standardControls();
@@ -149,7 +149,6 @@ public class GuiLayoutUtilTest extends GuiScalingTestSupport {
                 for (int size : new int[]{14, 17, 23, 34}) {
                     PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, String.valueOf(size));
                     GUISizeHelper.calculateGUISizes();
-                    GuiLayoutUtil.refresh();
                     mage.client.dialog.PickChoiceDialog dialog = new mage.client.dialog.PickChoiceDialog();
                     dialog.setModal(false);
                     dialog.setSize(1600, 1200);
@@ -209,40 +208,6 @@ public class GuiLayoutUtilTest extends GuiScalingTestSupport {
     }
 
     @Test
-    public void layoutRefreshPreservesHiddenPeerFontsAndSkipsDisposedWindows() throws Exception {
-        Assume.assumeFalse(GraphicsEnvironment.isHeadless());
-        SwingUtilities.invokeAndWait(() -> {
-            JFrame window = new JFrame();
-            final int[] uiUpdates = {0};
-            JButton control = new JButton("Hidden window") {
-                @Override
-                public void updateUI() {
-                    super.updateUI();
-                    uiUpdates[0]++;
-                }
-            };
-            try {
-                window.add(control);
-                window.pack();
-                Font originalFont = control.getFont();
-                PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, "34");
-                GUISizeHelper.calculateGUISizes();
-                GuiLayoutUtil.refresh();
-                assertEquals("Refreshing a hidden peer retains its original font", originalFont, control.getFont());
-                assertFalse(window.isVisible());
-                window.dispose();
-                int before = uiUpdates[0];
-                PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, "17");
-                GUISizeHelper.calculateGUISizes();
-                GuiLayoutUtil.refresh();
-                assertEquals("Disposed windows do not receive UI updates", before, uiUpdates[0]);
-            } finally {
-                window.dispose();
-            }
-        });
-    }
-
-    @Test
     public void nimbusTabStatesKeepTheirOriginalFonts() throws Exception {
         SwingUtilities.invokeAndWait(() -> {
             try {
@@ -250,7 +215,6 @@ public class GuiLayoutUtilTest extends GuiScalingTestSupport {
                 for (int size : new int[]{14, 17, 23, 34}) {
                     PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, String.valueOf(size));
                     GUISizeHelper.calculateGUISizes();
-                    GuiLayoutUtil.refresh();
                     JTabbedPane tabs = new JTabbedPane();
                     assertEquals("Refresh preserves the selected font", size, GUISizeHelper.dialogFont.getSize());
                     javax.swing.plaf.synth.Region region = javax.swing.plaf.synth.Region.TABBED_PANE_TAB;
@@ -272,7 +236,6 @@ public class GuiLayoutUtilTest extends GuiScalingTestSupport {
             try {
                 PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, "14");
                 GUISizeHelper.calculateGUISizes();
-                GuiLayoutUtil.refresh();
                 mage.client.game.PlayerPanelExt panel = new mage.client.game.PlayerPanelExt(1.0f);
                 assertEquals(12, panel.getFont().getSize());
                 for (int size : new int[]{34, 17, 14}) {
@@ -306,7 +269,6 @@ public class GuiLayoutUtilTest extends GuiScalingTestSupport {
                 for (int size : new int[]{14, 34}) {
                     PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, String.valueOf(size));
                     GUISizeHelper.calculateGUISizes();
-                    GuiLayoutUtil.refresh();
                     mage.client.game.PlayerPanelExt panel = new mage.client.game.PlayerPanelExt(1.0f);
                     assertEquals(12, panel.getFont().getSize());
                     JButton hints = (JButton) field(mage.client.game.PlayerPanelExt.class, "toolHintsHelper").get(panel);
@@ -334,7 +296,6 @@ public class GuiLayoutUtilTest extends GuiScalingTestSupport {
                     PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_CHAT_FONT_SIZE, "17");
                     PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_PLAYER_PANEL_SIZE, "23");
                     GUISizeHelper.calculateGUISizes();
-                    GuiLayoutUtil.refresh();
                     GuiLayoutUtil.refresh(existing);
                     assertEquals("Refresh preserves the selected font", size, GUISizeHelper.dialogFont.getSize());
                     assertEquals(buttonFont, existing.getFont());
