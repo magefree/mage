@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Properties;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -21,22 +22,37 @@ public class ImageDownloadSetsTest {
     public void everyAuditedExpansionMatchesTheSourcePrintingInventory() throws Exception {
         Set<String> historic = new HashSet<>(ImageDownloadSets.historic());
         Set<String> vintage = new HashSet<>(ImageDownloadSets.vintage());
-        int checked = 0;
+        Set<String> checked = new HashSet<>();
+        Properties audited = new Properties();
+        try (InputStream input = getClass().getResourceAsStream("download-format-sets.properties")) {
+            assertNotNull("Missing runtime set inventory", input);
+            audited.load(new InputStreamReader(input, StandardCharsets.UTF_8));
+        }
         InputStream input = getClass().getResourceAsStream("download-format-coverage.csv");
-        assertNotNull("Missing independently counted Scryfall printing inventory", input);
+        assertNotNull("Missing Scryfall printing-count fixture", input);
         try (BufferedReader rows = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
             String row;
             while ((row = rows.readLine()) != null) {
-                if (row.startsWith("#") || row.isEmpty()) continue;
-                String[] values = row.split(",");
+                if (row.startsWith("#") || row.isEmpty()) {
+                    continue;
+                }
+                String[] values = row.split(",", -1);
+                assertEquals("Malformed printing-count row: " + row, 4, values.length);
                 String code = values[0];
+                assertTrue("Duplicate audited set: " + code, checked.add(code));
                 assertTrue("Audited set must exist: " + code, Sets.getInstance().containsKey(code));
-                assertEquals(code + " Arena printing coverage", Integer.parseInt(values[2]) > 0, historic.contains(code));
-                assertEquals(code + " Vintage printing coverage", Integer.parseInt(values[3]) > 0, vintage.contains(code));
-                checked++;
+                assertEquals(code + " expansion type", Sets.getInstance().get(code).getSetType().name(), values[1]);
+                int arenaPrintings = Integer.parseInt(values[2]);
+                int vintagePrintings = Integer.parseInt(values[3]);
+                assertTrue(code + " negative printing count", arenaPrintings >= 0 && vintagePrintings >= 0);
+                assertEquals(code + " Arena printing coverage", arenaPrintings > 0, historic.contains(code));
+                assertEquals(code + " Vintage printing coverage", vintagePrintings > 0, vintage.contains(code));
+                String expected = (arenaPrintings > 0 ? "H" : "") + (vintagePrintings > 0 ? "V" : "");
+                assertEquals(code + " audited membership", expected, audited.getProperty(code));
             }
         }
-        assertTrue("Audit must cover the complete existing expansion inventory", checked >= 591);
+        assertFalse("Empty printing-count fixture", checked.isEmpty());
+        assertEquals("Every audited entry must have source printing counts", audited.stringPropertyNames(), checked);
     }
 
     @Test
