@@ -13,7 +13,7 @@
  import mage.client.util.*;
  import mage.client.util.comparators.*;
  import mage.client.util.gui.GuiDisplayUtil;
- import mage.client.util.gui.GuiFontDefaults;
+ import mage.client.util.gui.GuiLayoutUtil;
  import mage.client.util.gui.TableSpinnerEditor;
  import mage.view.CardView;
  import mage.view.CardsView;
@@ -61,7 +61,7 @@
      public CardsList() {
          initComponents();
          // Keep the font-sized command row reachable when the picked-card area narrows.
-         GuiFontDefaults.apply(panelControl);
+         GuiLayoutUtil.prepare(panelControl);
          setLayout(new BorderLayout(0, 2));
          add(GuiDisplayUtil.createHorizontalScrollPane(panelControl), BorderLayout.NORTH);
          add(panelCardArea, BorderLayout.CENTER);
@@ -561,6 +561,9 @@
 
          cbSortBy.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"SortBy"}));
          cbSortBy.setToolTipText("Sort the cards if card view is active.");
+         cbSortBy.setMaximumSize(new java.awt.Dimension(120, 20));
+         cbSortBy.setMinimumSize(new java.awt.Dimension(120, 20));
+         cbSortBy.setPreferredSize(new java.awt.Dimension(120, 20));
          cbSortBy.setName("SortBy"); // NOI18N
          cbSortBy.setOpaque(false);
          cbSortBy.addActionListener(evt -> cbSortByActionPerformed(evt));

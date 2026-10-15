@@ -187,13 +187,15 @@ public final class GuiDisplayUtil {
 
     /** Keep a single-row toolbar readable and scrollable when it is wider than its panel. */
     public static JScrollPane createHorizontalScrollPane(JComponent content) {
-        JScrollPane scroll = new JScrollPane(content, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
+        JPanel view = new HorizontalScrollPanel(content);
+        JScrollPane scroll = new JScrollPane(view, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED) {
             @Override
             public Dimension getPreferredSize() {
                 Dimension size = content.getPreferredSize();
                 Insets border = getInsets();
-                int scrollbar = getWidth() == 0 || getWidth() < size.width + border.left + border.right
+                int availableWidth = getWidth() == 0 ? 0 : getParent() == null ? getWidth() : getParent().getWidth();
+                int scrollbar = availableWidth > 0 && availableWidth < content.getMinimumSize().width + border.left + border.right
                         ? getHorizontalScrollBar().getPreferredSize().height : 0;
                 return new Dimension(Math.min(1024, size.width + border.left + border.right),
                         size.height + border.top + border.bottom + scrollbar);
@@ -201,18 +203,63 @@ public final class GuiDisplayUtil {
 
             @Override
             public Dimension getMinimumSize() {
+                if (isMinimumSizeSet()) {
+                    return super.getMinimumSize();
+                }
                 return new Dimension(0, getPreferredSize().height);
             }
         };
-        scroll.setBorder(null);
+        // A null border lets Nimbus reinstall its padded border on an ancestor/style change.
+        scroll.setBorder(BorderFactory.createEmptyBorder());
+        scroll.setViewportBorder(BorderFactory.createEmptyBorder());
         scroll.getHorizontalScrollBar().setUnitIncrement(48);
         scroll.addComponentListener(new java.awt.event.ComponentAdapter() {
             @Override
             public void componentResized(java.awt.event.ComponentEvent event) {
                 scroll.revalidate();
+                if (scroll.getParent() instanceof JComponent) {
+                    ((JComponent) scroll.getParent()).revalidate();
+                }
             }
         });
         return scroll;
+    }
+
+    /** Let flexible layouts use the viewport width, scrolling only below their minimum width. */
+    private static final class HorizontalScrollPanel extends JPanel implements Scrollable {
+        private final JComponent content;
+
+        private HorizontalScrollPanel(JComponent content) {
+            super(new BorderLayout());
+            this.content = content;
+            setOpaque(false);
+            add(content);
+        }
+
+        @Override
+        public Dimension getPreferredScrollableViewportSize() {
+            return getPreferredSize();
+        }
+
+        @Override
+        public int getScrollableUnitIncrement(Rectangle visible, int orientation, int direction) {
+            return 48;
+        }
+
+        @Override
+        public int getScrollableBlockIncrement(Rectangle visible, int orientation, int direction) {
+            return Math.max(48, visible.width - 48);
+        }
+
+        @Override
+        public boolean getScrollableTracksViewportWidth() {
+            return getParent() != null && getParent().getWidth() >= content.getMinimumSize().width;
+        }
+
+        @Override
+        public boolean getScrollableTracksViewportHeight() {
+            return true;
+        }
     }
 
     static final int OVERLAP_LIMIT = 10;
@@ -539,7 +586,6 @@ public final class GuiDisplayUtil {
         UIManager.put("nimbusLightBackground", PreferencesDialog.getCurrentTheme().getNimbusLightBackground()); // inputs, table rows
         UIManager.put("info", PreferencesDialog.getCurrentTheme().getInfo()); // tooltips
         UIManager.put("nimbusBase", PreferencesDialog.getCurrentTheme().getNimbusBase()); // title bars, scrollbar foreground
-        GuiFontDefaults.install();
         configureSplitPaneGameShortcuts();
 
 	    UIManager.put("text", PreferencesDialog.getCurrentTheme().getTextColor()); // Default text color
@@ -569,7 +615,7 @@ public final class GuiDisplayUtil {
             try {
                 Component comp = MageFrame.getUI().getComponent(compName, false);
                 if (comp != null) {
-                    GuiFontDefaults.refresh(comp);
+                    GuiLayoutUtil.refresh(comp);
                 }
             } catch (InterruptedException ignore) {
             }
@@ -590,6 +636,6 @@ public final class GuiDisplayUtil {
         for (Window childWindow : window.getOwnedWindows()) {
             refreshLookAndFeel(childWindow);
         }
-        GuiFontDefaults.refresh(window);
+        GuiLayoutUtil.refresh(window);
     }
 }

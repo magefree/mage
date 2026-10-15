@@ -28,7 +28,7 @@ public class DialogLayoutTest extends GuiScalingTestSupport {
         field(MageFrame.class, "desktopPane").set(null, desktop);
         PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, String.valueOf(fontSize));
         GUISizeHelper.calculateGUISizes();
-        GuiFontDefaults.refresh();
+        GuiLayoutUtil.refresh();
         if (!GraphicsEnvironment.isHeadless()) {
             // A hidden peer gives the controls the real display's font measurements.
             JFrame window = new JFrame();
@@ -46,7 +46,7 @@ public class DialogLayoutTest extends GuiScalingTestSupport {
         Assume.assumeFalse(GraphicsEnvironment.isHeadless());
         SwingUtilities.invokeAndWait(() -> {
             try {
-                JDesktopPane desktop = desktop(800, 500, 34);
+                JDesktopPane desktop = desktop(400, 300, 34);
                 ConnectDialog dialog = new ConnectDialog();
                 desktop.add(dialog);
                 dialog.pack();
@@ -54,7 +54,7 @@ public class DialogLayoutTest extends GuiScalingTestSupport {
                 JButton cancel = (JButton) field(ConnectDialog.class, "btnCancel").get(dialog);
                 cancel.scrollRectToVisible(new Rectangle(cancel.getSize()));
                 assertFullyVisible(cancel);
-                assertTrue("Dialog remains within a smaller desktop", dialog.getWidth() <= 800 && dialog.getHeight() <= 500);
+                assertTrue("Dialog remains within a smaller desktop", dialog.getWidth() <= 400 && dialog.getHeight() <= 300);
                 dialog.dispose();
             } catch (Exception error) {
                 throw new RuntimeException(error);
@@ -67,7 +67,7 @@ public class DialogLayoutTest extends GuiScalingTestSupport {
         Assume.assumeFalse(GraphicsEnvironment.isHeadless());
         SwingUtilities.invokeAndWait(() -> {
             try {
-                JDesktopPane desktop = desktop(1000, 650, 34);
+                JDesktopPane desktop = desktop(400, 300, 34);
                 ConnectDialog dialog = new ConnectDialog();
                 desktop.add(dialog);
                 dialog.setModal(false);
