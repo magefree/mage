@@ -2,8 +2,10 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 /**
@@ -104,9 +106,7 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setChoice(playerA, "Red"); // pay 1
         setChoice(playerA, "Red"); // pay 2
         setChoice(playerA, "Convoke");
-        addTarget(playerA, "Goblin Racketeer"); // pay 3 as convoke
-        setChoice(playerA, "Convoke");
-        addTarget(playerA, "Goblin Racketeer"); // pay 4 as convoke
+        addTarget(playerA, "Goblin Racketeer^Goblin Racketeer"); // pay 3 and 4 as convoke
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -391,9 +391,7 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Venerated Loxodon");
         setChoice(playerA, "White", 3); // pay WWW
         setChoice(playerA, "Convoke");
-        addTarget(playerA, "Memnite"); // pay 4 as convoke
-        setChoice(playerA, "Convoke");
-        addTarget(playerA, "Grizzly Bears"); // pay 5 as convoke
+        addTarget(playerA, "Memnite^Grizzly Bears"); // pay 4 and 5 as convoke
 
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 1);
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 1);
@@ -437,9 +435,7 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Venerated Loxodon");
         setChoice(playerA, "White", 3); //Pay WWW
         setChoice(playerA, "Convoke");
-        addTarget(playerA, "Memnite"); // pay 4 as convoke
-        setChoice(playerA, "Convoke");
-        addTarget(playerA, "Grizzly Bears"); // pay 5 as convoke
+        addTarget(playerA, "Memnite^Grizzly Bears"); // pay 4 and 5 as convoke
 
         waitStackResolved(1,PhaseStep.PRECOMBAT_MAIN);
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 4);
@@ -458,5 +454,141 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         assertGraveyardCount(playerA,"Grizzly Bears",1);
         assertPowerToughness(playerA,"Grizzly Bears", 1, 1);
         assertPermanentCount(playerA,"Venerated Loxodon",2);
+    }
+
+    @Test
+    public void test_PlayConvoke_MonoHybrid() {
+        // {2/W}{2/W}{2/W}
+        // Create three 1/1 white Spirit creature tokens with flying.
+        addCard(Zone.HAND, playerA, "Spectral Procession", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Wand of the Worldsoul", 1); // {T}: The next spell you cast this turn has convoke.
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 3);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: The next spell you cast this turn");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spectral Procession");
+        // a Memnite finishes the {2/W} the Mountain started, the Lion pays one by color, two Memnites pay one as {2}
+        addTarget(playerA, "Memnite^Silvercoat Lion^Memnite^Memnite");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Spirit Token", 3);
+        assertTapped("Mountain", true);
+        assertTapped("Silvercoat Lion", true);
+        assertTappedCount("Memnite", true, 3);
+    }
+
+    @Test
+    public void test_PlayConvoke_Manual_LeavesHybridUnpaid() {
+        // {G}{G/W}{W}
+        addCard(Zone.HAND, playerA, "Trostani, Three Whispers", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Wand of the Worldsoul", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Selesnya Guildmage", 1); // green and white
+
+        disableManaAutoPayment(playerA);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: The next spell you cast this turn");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trostani, Three Whispers");
+        setChoice(playerA, "Convoke");
+        // picked first, the Guildmage still pays {W} so the Bears can pay {G}, leaving the {G/W} for the second Bears
+        addTarget(playerA, "Selesnya Guildmage^Grizzly Bears");
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
+        setChoice(playerA, "Convoke");
+        addTarget(playerA, "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Trostani, Three Whispers", 1);
+        assertTapped("Selesnya Guildmage", true);
+        assertTappedCount("Grizzly Bears", true, 2);
+    }
+
+    @Test
+    public void test_PlayConvoke_ColorlessHybrid() {
+        // {C/W}{C/U}{C/B}{C/R}{C/G}
+        addCard(Zone.HAND, playerA, "Ulalek, Fused Atrocity", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Wand of the Worldsoul", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Merfolk of the Pearl Trident", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Walking Corpse", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Raging Goblin", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears", 1);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: The next spell you cast this turn");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ulalek, Fused Atrocity");
+        addTarget(playerA, "Silvercoat Lion^Merfolk of the Pearl Trident^Walking Corpse^Raging Goblin^Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Ulalek, Fused Atrocity", 1);
+    }
+
+    @Test
+    public void test_PlayConvoke_CantPayColorless() {
+        // {2}{C}
+        addCard(Zone.HAND, playerA, "Matter Reshaper", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Wand of the Worldsoul", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 1); // makes it castable
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 3);
+
+        disableManaAutoPayment(playerA);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: The next spell you cast this turn");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Matter Reshaper");
+        setChoice(playerA, "Convoke");
+        addTarget(playerA, "Memnite^Memnite"); // {2}
+        setChoice(playerA, "Convoke"); // only {C} is left
+        addTarget(playerA, "Memnite");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        try {
+            execute();
+            Assert.fail("convoke must not pay {C}");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Can't use choice in play mana: Convoke")) {
+                Assert.fail("must not offer convoke for {C}, but got:\n" + e.getMessage());
+            }
+        }
+        assertTappedCount("Memnite", true, 2);
+    }
+
+    @Test
+    public void test_PlayConvoke_NoManaSpent() {
+        // {2}{R/W}
+        // Target player can't play land cards this turn if {R} was spent to cast Moonhold and can't play creature
+        // cards this turn if {W} was spent to cast it.
+        addCard(Zone.HAND, playerA, "Moonhold", 1);
+        addCard(Zone.HAND, playerA, "Forest", 1);
+        addCard(Zone.HAND, playerA, "Ornithopter", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Wand of the Worldsoul", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Boros Guildmage", 1); // red and white
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 2);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: The next spell you cast this turn");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Moonhold", playerA);
+        // 702.51a: creatures are tapped "rather than pay that mana", so neither {R} nor {W} was spent
+        addTarget(playerA, "Boros Guildmage^Memnite^Memnite");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ornithopter");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Forest", 1);
+        assertPermanentCount(playerA, "Ornithopter", 1);
     }
 }
