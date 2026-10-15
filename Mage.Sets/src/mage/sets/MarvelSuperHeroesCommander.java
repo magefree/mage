@@ -611,6 +611,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Stick, Fearless Mentor", 706, Rarity.UNCOMMON, mage.cards.s.StickFearlessMentor.class));
         cards.add(new SetCardInfo("Stilt-Man, Towering Terror", 373, Rarity.RARE, mage.cards.s.StiltManToweringTerror.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stilt-Man, Towering Terror", 61, Rarity.RARE, mage.cards.s.StiltManToweringTerror.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Storm, Queen of Wakanda", 418, Rarity.RARE, mage.cards.s.StormQueenOfWakanda.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Storm, Queen of Wakanda", 97, Rarity.RARE, mage.cards.s.StormQueenOfWakanda.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Storm, Shaker of Skies", 733, Rarity.UNCOMMON, mage.cards.s.StormShakerOfSkies.class));
         cards.add(new SetCardInfo("Stunning Shot", 610, Rarity.UNCOMMON, mage.cards.s.StunningShot.class));
         cards.add(new SetCardInfo("Sudden Strike", 779, Rarity.UNCOMMON, mage.cards.s.SuddenStrike.class));
