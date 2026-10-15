@@ -3472,7 +3472,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 // open specified tab before displaying
                 openTab(openedTab);
 
-                mage.client.util.gui.GuiFontDefaults.apply(dialog.getContentPane());
+                mage.client.util.gui.GuiLayoutUtil.prepare(dialog.getContentPane());
                 dialog.pack();
                 GuiDisplayUtil.positionWindowRelativeToOwner(dialog);
 

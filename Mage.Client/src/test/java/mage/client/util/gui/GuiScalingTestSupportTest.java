@@ -24,8 +24,9 @@ public class GuiScalingTestSupportTest {
                 try {
                     PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, "34");
                     GUISizeHelper.calculateGUISizes();
-                    GuiFontDefaults.refresh();
-                    assertEquals(34, UIManager.getFont("Button.font").getSize());
+                    GuiLayoutUtil.refresh();
+                    assertEquals(beforeFont, UIManager.getFont("Button.font"));
+                    UIManager.put("Button.font", new javax.swing.plaf.FontUIResource(GUISizeHelper.dialogFont));
                 } finally {
                     fixture.restorePreferences();
                 }

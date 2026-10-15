@@ -15,8 +15,6 @@ import mage.client.deckeditor.table.TableModel;
 import mage.client.dialog.CheckBoxList;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.gui.FastSearchUtil;
-import mage.client.util.gui.GuiDisplayUtil;
-import mage.client.util.gui.GuiFontDefaults;
 import mage.client.util.sets.ConstructedFormats;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -70,29 +68,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     public CardSelector() {
         sortSetting = SortSettingBase.getInstance();
         initComponents();
-        // Reuse the generated controls, with scrolling rows instead of pixel-capped search fields.
-        cardSelectorBottomPanel.removeAll();
-        cardSelectorBottomPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 4, 2));
-        cardSelectorBottomPanel.setPreferredSize(null);
-        jTextFieldSearch.setColumns(16);
-        for (Component control : new Component[]{jButtonAddToMain, jButtonRemoveFromMain, jButtonAddToSideboard,
-                jButtonRemoveFromSideboard, jTextFieldSearch, jButtonSearch, jButtonClean,
-                chkNames, chkTypes, chkRules, chkUnique, cardCountLabel, cardCount}) {
-            control.setPreferredSize(null);
-            control.setMinimumSize(null);
-            control.setMaximumSize(null);
-            cardSelectorBottomPanel.add(control);
-        }
-        removeAll();
-        setLayout(new BorderLayout());
-        JPanel filters = new JPanel();
-        filters.setOpaque(false);
-        filters.setLayout(new BoxLayout(filters, BoxLayout.Y_AXIS));
-        filters.add(GuiDisplayUtil.createHorizontalScrollPane(tbColor));
-        filters.add(GuiDisplayUtil.createHorizontalScrollPane(tbTypes));
-        add(filters, BorderLayout.NORTH);
-        add(cardSelectorScrollPane, BorderLayout.CENTER);
-        add(GuiDisplayUtil.createHorizontalScrollPane(cardSelectorBottomPanel), BorderLayout.SOUTH);
         cardGrid = new CardGrid();
         makeTransparent();
         initListViewComponents();
@@ -205,10 +180,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     }
 
     private void setGUISize() {
-        GuiFontDefaults.apply(tbColor);
-        GuiFontDefaults.apply(tbTypes);
-        GuiFontDefaults.apply(cardSelectorBottomPanel);
-        tbTypes.setPreferredSize(null);
         mainTable.getTableHeader().setFont(GUISizeHelper.tableFont);
         mainTable.setFont(GUISizeHelper.tableFont);
         mainTable.setRowHeight(GUISizeHelper.tableRowHeight);

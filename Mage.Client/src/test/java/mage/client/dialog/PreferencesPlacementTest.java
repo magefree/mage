@@ -2,7 +2,7 @@ package mage.client.dialog;
 
 import mage.client.util.GUISizeHelper;
 import mage.client.util.gui.GuiDisplayUtil;
-import mage.client.util.gui.GuiFontDefaults;
+import mage.client.util.gui.GuiLayoutUtil;
 import mage.client.util.gui.GuiScalingTestSupport;
 import org.junit.*;
 
@@ -53,7 +53,7 @@ public class PreferencesPlacementTest extends GuiScalingTestSupport {
                         current[0] = PreferencesDialog.getInstance(owner[0]);
                         assertNotSame("A hidden peer on the previous display is replaced", previous, current[0]);
                         assertFalse("The old peer is released", previous.isDisplayable());
-                        GuiFontDefaults.apply(current[0].getContentPane());
+                        GuiLayoutUtil.prepare(current[0].getContentPane());
                         current[0].pack();
                         GuiDisplayUtil.positionWindowRelativeToOwner(current[0]);
                         assertSame(current[0], PreferencesDialog.getInstance(owner[0]));
@@ -106,7 +106,7 @@ public class PreferencesPlacementTest extends GuiScalingTestSupport {
                     PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, String.valueOf(font));
                     GUISizeHelper.calculateGUISizes();
                     dialog = new PreferencesDialog(owner, false);
-                    GuiFontDefaults.apply(dialog.getContentPane());
+                    GuiLayoutUtil.prepare(dialog.getContentPane());
                     ((JTabbedPane) field(PreferencesDialog.class, "tabsPanel").get(dialog)).setSelectedIndex(2);
                     dialog.pack();
                     layoutTree(dialog);

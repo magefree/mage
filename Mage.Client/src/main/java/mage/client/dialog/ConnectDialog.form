@@ -45,7 +45,7 @@
                           <Component id="btnForgotPassword" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnCancel" min="-2" pref="-1" max="-2" attributes="0"/>
+                      <Component id="btnCancel" min="-2" pref="77" max="-2" attributes="0"/>
                   </Group>
                   <Component id="panelFast" alignment="0" max="32767" attributes="0"/>
                   <Component id="panelServer" alignment="1" max="32767" attributes="0"/>
@@ -85,7 +85,7 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="txtUserName" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblUserName" min="-2" pref="-1" max="-2" attributes="0"/>
+                          <Component id="lblUserName" min="-2" pref="20" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -100,18 +100,18 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="panelFlag" min="-2" pref="-1" max="-2" attributes="0"/>
-                  <Component id="lblFlag" min="-2" pref="-1" max="-2" attributes="0"/>
+                  <Component id="panelFlag" min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="lblFlag" min="-2" pref="18" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Component id="chkAutoConnect" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jProxySettingsButton" alignment="3" min="-2" pref="-1" max="-2" attributes="0"/>
-                  <Component id="btnWhatsNew" alignment="3" min="-2" pref="-1" max="-2" attributes="0"/>
+                  <Component id="jProxySettingsButton" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="btnWhatsNew" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-              <Component id="lblStatus" min="-2" pref="-1" max="-2" attributes="0"/>
+              <Component id="lblStatus" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Group type="102" attributes="0">
@@ -212,6 +212,11 @@
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblStatus">
+      <Properties>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[0, 24]"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnRegister">
       <Properties>
@@ -312,15 +317,15 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                  <Component id="btnFindMain" min="-2" pref="-1" max="-2" attributes="0"/>
+                  <Component id="btnFindMain" min="-2" pref="80" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnFindEU" min="-2" pref="-1" max="-2" attributes="0"/>
+                  <Component id="btnFindEU" min="-2" pref="80" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnFindUs" min="-2" pref="-1" max="-2" attributes="0"/>
+                  <Component id="btnFindUs" min="-2" pref="80" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnFindBeta" min="-2" pref="-1" max="-2" attributes="0"/>
+                  <Component id="btnFindBeta" min="-2" pref="90" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="btnFindLocal" min="-2" pref="-1" max="-2" attributes="0"/>
+                  <Component id="btnFindLocal" min="-2" pref="90" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnFindOther" max="32767" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
@@ -332,12 +337,12 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnFindMain" alignment="3" min="-2" pref="-1" max="-2" attributes="0"/>
-                      <Component id="btnFindLocal" alignment="3" min="-2" pref="-1" max="-2" attributes="0"/>
-                      <Component id="btnFindUs" alignment="3" min="-2" pref="-1" max="-2" attributes="0"/>
-                      <Component id="btnFindBeta" alignment="3" min="-2" pref="-1" max="-2" attributes="0"/>
-                      <Component id="btnFindOther" alignment="3" min="-2" pref="-1" max="-2" attributes="0"/>
-                      <Component id="btnFindEU" alignment="3" min="-2" pref="-1" max="-2" attributes="0"/>
+                      <Component id="btnFindMain" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="btnFindLocal" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="btnFindUs" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="btnFindBeta" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="btnFindOther" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="btnFindEU" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               </Group>
@@ -470,11 +475,11 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Component id="txtServer" min="-2" pref="-1" max="-2" attributes="0"/>
+                  <Component id="txtServer" min="-2" pref="212" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblPort" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtPort" min="-2" pref="-1" max="-2" attributes="0"/>
+                  <Component id="txtPort" min="-2" pref="75" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnCheckStatus" max="32767" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
