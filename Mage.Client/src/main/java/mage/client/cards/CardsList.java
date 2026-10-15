@@ -12,6 +12,8 @@
  import mage.client.util.Event;
  import mage.client.util.*;
  import mage.client.util.comparators.*;
+ import mage.client.util.gui.GuiDisplayUtil;
+ import mage.client.util.gui.GuiFontDefaults;
  import mage.client.util.gui.TableSpinnerEditor;
  import mage.view.CardView;
  import mage.view.CardsView;
@@ -58,6 +60,11 @@
       */
      public CardsList() {
          initComponents();
+         // Keep the font-sized command row reachable when the picked-card area narrows.
+         GuiFontDefaults.apply(panelControl);
+         setLayout(new BorderLayout(0, 2));
+         add(GuiDisplayUtil.createHorizontalScrollPane(panelControl), BorderLayout.NORTH);
+         add(panelCardArea, BorderLayout.CENTER);
          makeTransparent();
          initListViewComponents();
          setGUISize();
@@ -513,10 +520,7 @@
                  : (new Dimension(600, 600)));
          setRequestFocusEnabled(false);
 
-         panelControl.setMaximumSize(new java.awt.Dimension(32767, 23));
-         panelControl.setMinimumSize(new java.awt.Dimension(616, 23));
          panelControl.setName(""); // NOI18N
-         panelControl.setPreferredSize(new java.awt.Dimension(616, 23));
          panelControl.setRequestFocusEnabled(false);
 
          lblCount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/deck_pack.png"))); // NOI18N
@@ -557,11 +561,8 @@
 
          cbSortBy.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"SortBy"}));
          cbSortBy.setToolTipText("Sort the cards if card view is active.");
-         cbSortBy.setMaximumSize(new java.awt.Dimension(120, 20));
-         cbSortBy.setMinimumSize(new java.awt.Dimension(120, 20));
          cbSortBy.setName("SortBy"); // NOI18N
          cbSortBy.setOpaque(false);
-         cbSortBy.setPreferredSize(new java.awt.Dimension(120, 20));
          cbSortBy.addActionListener(evt -> cbSortByActionPerformed(evt));
 
          bgView.add(jToggleListView);

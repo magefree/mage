@@ -51,16 +51,7 @@
   <SubComponents>
     <Container class="javax.swing.JPanel" name="panelControl">
       <Properties>
-        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[32767, 23]"/>
-        </Property>
-        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[616, 23]"/>
-        </Property>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[616, 23]"/>
-        </Property>
         <Property name="requestFocusEnabled" type="boolean" value="false"/>
       </Properties>
       <AuxValues>
@@ -180,17 +171,8 @@
               </StringArray>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Sort the cards if card view is active."/>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[120, 20]"/>
-            </Property>
-            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[120, 20]"/>
-            </Property>
             <Property name="name" type="java.lang.String" value="SortBy" noResource="true"/>
             <Property name="opaque" type="boolean" value="false"/>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[120, 20]"/>
-            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbSortByActionPerformed"/>

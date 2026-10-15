@@ -1,6 +1,7 @@
 package mage.client.util.gui;
 
 import mage.client.MageFrame;
+import mage.client.cards.CardsList;
 import mage.client.dialog.ConnectDialog;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.GUISizeHelper;
@@ -13,6 +14,39 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class GuiFontDefaultsTest extends GuiScalingTestSupport {
+    @Test
+    public void draftPickedCardToolbarFitsFontsAndScrollsWhenNarrow() throws Exception {
+        SwingUtilities.invokeAndWait(() -> {
+            try {
+                for (int size : new int[]{34, 23, 17, 14}) {
+                    PreferencesDialog.saveValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, String.valueOf(size));
+                    GUISizeHelper.calculateGUISizes();
+                    GuiFontDefaults.install();
+                    CardsList cards = new CardsList();
+                    JPanel controls = (JPanel) field(CardsList.class, "panelControl").get(cards);
+                    JComboBox<?> sort = (JComboBox<?>) field(CardsList.class, "cbSortBy").get(cards);
+                    JCheckBox piles = (JCheckBox) field(CardsList.class, "chkPiles").get(cards);
+                    cards.setSize(1000, 400);
+                    layoutTree(cards);
+                    assertTrue("Complete toolbar height at font " + size,
+                            controls.getHeight() >= Math.max(sort.getPreferredSize().height, piles.getPreferredSize().height));
+                    assertTrue("Sort control fits font " + size, sort.getHeight() >= sort.getPreferredSize().height);
+                    assertTrue("Piles checkbox fits font " + size, piles.getHeight() >= piles.getPreferredSize().height);
+                    cards.setSize(300, 400);
+                    layoutTree(cards);
+                    assertTrue("Narrow toolbar has a viewport", controls.getParent() instanceof JViewport);
+                    JScrollPane scroll = (JScrollPane) controls.getParent().getParent();
+                    assertTrue("All commands remain reachable by scrolling", scroll.getHorizontalScrollBar().isVisible());
+                    assertTrue("The full row fits above the horizontal scrollbar",
+                            scroll.getViewport().getHeight() >= controls.getPreferredSize().height);
+                    cards.cleanUp();
+                }
+            } catch (Exception error) {
+                throw new RuntimeException(error);
+            }
+        });
+    }
+
     @Test
     public void oversizedResizableChoiceFitsDesktopWhenShown() throws Exception {
         Assume.assumeFalse(GraphicsEnvironment.isHeadless());
