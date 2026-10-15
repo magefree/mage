@@ -7,6 +7,8 @@ import mage.game.permanent.Permanent;
 import mage.watchers.common.CrewedVehicleWatcher;
 
 /**
+ * Warning, don't forget to add CrewedVehicleWatcher watcher to the ability
+ * 
  * @author TheElk801
  */
 public enum CrewedSourceThisTurnPredicate implements ObjectSourcePlayerPredicate<Permanent> {

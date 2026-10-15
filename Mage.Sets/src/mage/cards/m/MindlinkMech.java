@@ -14,7 +14,6 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.permanent.CrewedSourceThisTurnPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -22,6 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.util.functions.CopyApplier;
 import mage.watchers.Watcher;
+import mage.watchers.common.CrewedVehicleWatcher;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -70,6 +70,7 @@ class MindlinkMechTriggeredAbility extends TriggeredAbilityImpl {
     MindlinkMechTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MindlinkMechEffect());
         this.addWatcher(new MindlinkMechWatcher());
+        this.addWatcher(new CrewedVehicleWatcher()); // for the target filter
         this.addTarget(new TargetPermanent(filter));
         this.setTriggerPhrase("Whenever {this} becomes crewed for the first time each turn");
     }
@@ -90,18 +91,13 @@ class MindlinkMechTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getSourceId().equals(getSourceId()) && MindlinkMechWatcher.checkVehicle(this, game);
+        return event.getSourceId().equals(getSourceId()) && MindlinkMechWatcher.checkVehicle(event, game);
     }
 }
 
 class MindlinkMechWatcher extends Watcher {
 
     private final Map<MageObjectReference, Integer> crewCount = new HashMap<>();
-    private static final FilterPermanent invalidFilter = new FilterPermanent();
-
-    static {
-        invalidFilter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, -2));
-    }
 
     MindlinkMechWatcher() {
         super(WatcherScope.GAME);
@@ -122,12 +118,13 @@ class MindlinkMechWatcher extends Watcher {
         crewCount.clear();
     }
 
-    public static boolean checkVehicle(Ability source, Game game) {
+    public static boolean checkVehicle(GameEvent event, Game game) {
+        Permanent vehicle = game.getPermanent(event.getTargetId());
         return game
                 .getState()
                 .getWatcher(MindlinkMechWatcher.class)
                 .crewCount
-                .getOrDefault(new MageObjectReference(source), 0) < 2;
+                .getOrDefault(new MageObjectReference(vehicle, game), 0) < 2;
     }
 }
 
