@@ -15,12 +15,19 @@ import mage.game.Game;
 public interface AlternateManaPaymentAbility {
     /**
      * Adds the special action to the state, that allows the user to do the alternate mana payment
+     * <p>
+     * The action pays {@code paying} directly, using {@link ManaCost#setPayment}
+     * on its unpaid parts ({@link mage.util.ManaUtil#getUnpaidParts}).
+     * Manipulate {@link ManaCost#getUsedManaToPay} if it should count as real mana.
+     * <p>
+     * Copies of the action must share {@code paying}, not copy it: the payment loop keeps paying
+     * that object, even across a rollback mid-payment.
      *
      * @param source
      * @param game
-     * @param unpaid unapaid mana costs of the spell
+     * @param paying the cost being paid, including any parts already paid
      */
-    void addSpecialAction(Ability source, Game game, ManaCost unpaid);
+    void addSpecialAction(Ability source, Game game, ManaCost paying);
 
     /**
      * All possible mana payments that can make that ability (uses to find playable abilities)
