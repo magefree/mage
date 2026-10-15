@@ -165,19 +165,31 @@ public class ComputerPlayer extends PlayerImpl {
             (MageItem item) -> { target.add(item.getId(), game); } :
             (MageItem item) -> { target.addTarget(item.getId(), source, game); };
 
+        // Some targets narrow their possible targets by what's already chosen (convoke, one creature of each color),
+        // and Target.add doesn't check, so after each pick the candidates above are rechecked against this set.
+        Set<UUID> stillPossible = null;
+
         // good targets -- choose as much as possible
         for (MageItem item : possibleTargetsSelector.getGoodTargets()) {
+            if (stillPossible != null && !stillPossible.contains(item.getId())) {
+                continue;
+            }
             targetAdder.accept(item);
             if (target.isChoiceCompleted(abilityControllerId, source, game, fromCards)) {
                 return true;
             }
+            stillPossible = target.possibleTargets(abilityControllerId, source, game, fromCards);
         }
         // bad targets -- choose as low as possible
         for (MageItem item : possibleTargetsSelector.getBadTargets()) {
             if (target.isChosen(game)) {
                 break;
             }
+            if (stillPossible != null && !stillPossible.contains(item.getId())) {
+                continue;
+            }
             targetAdder.accept(item);
+            stillPossible = target.possibleTargets(abilityControllerId, source, game, fromCards);
         }
 
         return target.isChosen(game) && !target.getTargets().isEmpty();
