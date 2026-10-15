@@ -1,7 +1,6 @@
 package org.mage.plugins.card.dl.sources;
 
 import mage.client.dialog.DownloadImagesDialog;
-import mage.client.util.sets.ConstructedFormats;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +20,6 @@ public class DownloadPicturesServiceFormatsTest {
 
     private DownloadPicturesService service;
     private DownloadImagesDialog dialog;
-    private final Map<String, List<String>> originalFormats = new HashMap<>();
 
     @Before
     public void setUp() throws Exception {
@@ -31,7 +29,8 @@ public class DownloadPicturesServiceFormatsTest {
             field("selectedSource").set(service, new ScryfallImageSource() {
                 @Override
                 public List<String> getSupportedSets() {
-                    return Arrays.asList("XLN", "LEA", "UNH", "SWS");
+                    return Arrays.asList("XLN", "LEA", "UNH", "SWS", "YDMU", "CMB1",
+                            "JMP", "STA", "LTR", "MH3", "M3C", "KTK", "J25", "MB2");
                 }
 
                 @Override
@@ -44,15 +43,13 @@ public class DownloadPicturesServiceFormatsTest {
                     return true;
                 }
             });
-            replaceFormat(ConstructedFormats.HISTORIC, "XLN", "UNSUPPORTED");
-            replaceFormat(ConstructedFormats.VINTAGE_LEGACY, "LEA", "XLN", "UNSUPPORTED");
-
             CardDownloadData token = card("Treasure", "XLN");
             token.setToken(true);
             cards("cardsMissing").addAll(Arrays.asList(
                     card("Historic card", "XLN"), token, card("Vintage card", "LEA"),
-                    card("Joke card", "UNH"), card("Custom card", "SWS"),
-                    card("Unsupported set", "UNSUPPORTED"), card("Unavailable image", "XLN")
+                    card("Mixed-set image", "UNH"), card("Custom card", "SWS"),
+                    card("Arena-only image", "YDMU"), card("Playtest image", "CMB1"),
+                    card("Unsupported set", "FCA"), card("Unavailable image", "XLN")
             ));
             Method choices = DownloadPicturesService.class.getDeclaredMethod("getSetsForCurrentImageSource");
             choices.setAccessible(true);
@@ -64,11 +61,6 @@ public class DownloadPicturesServiceFormatsTest {
     @After
     public void tearDown() throws Exception {
         onEdt(() -> {
-            originalFormats.forEach((format, sets) -> {
-                List<String> current = ConstructedFormats.getSetsByFormat(format);
-                current.clear();
-                current.addAll(sets);
-            });
             if (dialog != null) {
                 dialog.dispose();
             }
@@ -96,20 +88,46 @@ public class DownloadPicturesServiceFormatsTest {
 
     @Test
     public void historicSelectionIncludesItsCardsAndTokensOnly() throws Exception {
-        assertSelection("- HISTORIC images (can be slow)", "XLN",
-                "Historic card", "Treasure");
+        assertSelection("- HISTORIC images (can be slow)",
+                "Historic card", "Treasure", "Arena-only image");
     }
 
     @Test
     public void vintageSelectionIncludesOlderSetsAndExcludesUnsupportedImages() throws Exception {
-        assertSelection("- VINTAGE images (can be slow)", "LEA,XLN",
-                "Historic card", "Treasure", "Vintage card");
+        assertSelection("- VINTAGE images (can be slow)",
+                "Historic card", "Treasure", "Vintage card", "Mixed-set image");
     }
 
-    private void assertSelection(String mode, String expectedSets, String... expectedCards) throws Exception {
+    @Test
+    public void historicSelectionIncludesSupplementalAndPartialArenaReleases() throws Exception {
+        onEdt(() -> {
+            cards("cardsMissing").clear();
+            for (String code : Arrays.asList("JMP", "STA", "LTR", "MH3", "M3C", "KTK", "J25")) {
+                cards("cardsMissing").add(card(code + " image", code));
+            }
+            return null;
+        });
+        assertSelection("- HISTORIC images (can be slow)", "JMP image", "STA image", "LTR image",
+                "MH3 image", "M3C image", "KTK image", "J25 image");
+    }
+
+    @Test
+    public void vintageSelectionDownloadsAllImagesFromAMixedRelease() throws Exception {
+        onEdt(() -> {
+            cards("cardsMissing").clear();
+            cards("cardsMissing").add(card("Regular reprint", "MB2"));
+            cards("cardsMissing").add(card("Playtest printing in a mixed set", "MB2"));
+            cards("cardsMissing").add(card("Pure playtest set", "CMB1"));
+            return null;
+        });
+        assertSelection("- VINTAGE images (can be slow)",
+                "Regular reprint", "Playtest printing in a mixed set");
+    }
+
+    private void assertSelection(String mode, String... expectedCards) throws Exception {
         onEdt(() -> {
             dialog.getSetsCombo().setSelectedItem(mode);
-            assertEquals(Arrays.asList(expectedSets.split(",")), field("selectedSets").get(service));
+            assertFalse(((List<?>) field("selectedSets").get(service)).contains("FCA"));
             List<String> names = new ArrayList<>();
             for (CardDownloadData card : cards("cardsDownloadQueue")) {
                 names.add(card.getName());
@@ -118,13 +136,6 @@ public class DownloadPicturesServiceFormatsTest {
             assertEquals(expectedCards.length, dialog.getProgressBar().getMaximum());
             return null;
         });
-    }
-
-    private void replaceFormat(String format, String... sets) {
-        List<String> current = ConstructedFormats.getSetsByFormat(format);
-        originalFormats.put(format, new ArrayList<>(current));
-        current.clear();
-        current.addAll(Arrays.asList(sets));
     }
 
     private static CardDownloadData card(String name, String set) {
