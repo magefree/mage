@@ -81,7 +81,9 @@ public class GuiRefreshThreadingTest {
         PropertyChangeListener listener = event -> {
             if ("InternalFrame.titleFont".equals(event.getPropertyName())) {
                 updates.incrementAndGet();
-                offEdt.set(!SwingUtilities.isEventDispatchThread());
+                if (!SwingUtilities.isEventDispatchThread()) {
+                    offEdt.set(true);
+                }
             }
         };
         UIDefaults defaults = UIManager.getDefaults();

@@ -86,6 +86,8 @@ public final class GUISizeHelper {
     /**
      * Reset all caches and reload all GUI with actual settings.
      * Use it after GUI settings change like colors/fonts/sizes.
+     * Runs synchronously on the event dispatch thread; other callers queue a refresh
+     * and return without waiting for it to finish.
      *
      * @param reloadTheme use it after theme changes only
      */
