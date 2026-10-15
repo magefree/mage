@@ -15,6 +15,41 @@ import static org.junit.Assert.*;
 
 public class GuiLayoutUtilTest extends GuiScalingTestSupport {
     @Test
+    public void mainToolbarRetainsOriginalHeightsAndScrollsAtEveryFontValue() throws Exception {
+        SwingUtilities.invokeAndWait(() -> {
+            try {
+                JToolBar toolbar = new JToolBar();
+                toolbar.setFloatable(false);
+                toolbar.add(new JButton("Preferences"));
+                toolbar.add(new JToolBar.Separator());
+                toolbar.add(new JToggleButton("Connect to server"));
+                toolbar.add(new JLabel("Free memory"));
+                JScrollPane scroll = GuiDisplayUtil.createHorizontalScrollPane(toolbar);
+                java.lang.reflect.Method resize = MageFrame.class.getDeclaredMethod("sizeMainToolbar", JToolBar.class, Font.class);
+                resize.setAccessible(true);
+                for (int size = 10; size <= 50; size++) {
+                    resize.invoke(null, toolbar, new Font("Dialog", Font.PLAIN, size));
+                    GuiLayoutUtil.refresh(scroll);
+                    assertEquals("Original toolbar height at " + size, size + 12, toolbar.getPreferredSize().height);
+                    for (Component control : toolbar.getComponents()) {
+                        if (control instanceof JToolBar.Separator) {
+                            continue; // The look and feel owns separator metrics during updateUI.
+                        }
+                        assertEquals("Original control height at " + size, size + 6, control.getMinimumSize().height);
+                        assertEquals(size + 6, control.getMaximumSize().height);
+                    }
+                    scroll.setSize(150, toolbar.getPreferredSize().height + 30);
+                    layoutTree(scroll);
+                    assertTrue("Wide menu remains reachable at " + size, scroll.getHorizontalScrollBar().isVisible());
+                    assertTrue(scroll.getViewport().getViewSize().width >= toolbar.getMinimumSize().width);
+                }
+            } catch (Exception error) {
+                throw new RuntimeException(error);
+            }
+        });
+    }
+
+    @Test
     public void allDialogFontValuesPreserveStandardControlFontsAndSizes() throws Exception {
         SwingUtilities.invokeAndWait(() -> {
             try {
