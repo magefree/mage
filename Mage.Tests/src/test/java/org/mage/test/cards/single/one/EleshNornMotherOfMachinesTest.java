@@ -2,7 +2,9 @@ package org.mage.test.cards.single.one;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -68,4 +70,65 @@ public class EleshNornMotherOfMachinesTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Bloodghast", 1);
     }
 
+    @Test
+    public void test_EleshNorn_DoNotStopDiesBatchTriggerOfDiedPermanent() {
+        // possible bug: game error on batch event usage (Wrong code usage. Must search value from a getEvents list)
+
+        // Permanents entering the battlefield don't cause abilities of permanents your opponents control to trigger.
+        addCard(Zone.BATTLEFIELD, playerB, "Elesh Norn, Mother of Machines"); // mana value 5
+        //
+        // Whenever one or more other creatures die, scry 1.
+        addCard(Zone.BATTLEFIELD, playerA, "Great Fierce Bee"); // mana value 3
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // mana value 2
+        //
+        // Destroy all creatures with converted mana cost 3 or less.
+        addCard(Zone.HAND, playerA, "Ritual of Soot"); // {2}{B}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+
+        // bee and bears die together, bee must trigger from the graveyard (look back in time)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ritual of Soot");
+        addTarget(playerA, TestPlayer.TARGET_SKIP); // scry: keep on top
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Great Fierce Bee", 1);
+        assertGraveyardCount(playerA, "Grizzly Bears", 1);
+        assertPermanentCount(playerB, "Elesh Norn, Mother of Machines", 1);
+    }
+
+    @Test
+    public void test_EleshNorn_DoNotStopDamageBatchTriggerOfInitiative() {
+        // possible bug: game error on batch event usage (Wrong code usage. Must search value from a getEvents list)
+        removeAllCardsFromLibrary(playerA);
+        removeAllCardsFromLibrary(playerB);
+        addCard(Zone.LIBRARY, playerA, "Island", 3);
+        addCard(Zone.LIBRARY, playerB, "Plains", 3);
+
+        // When Aarakocra Sneak enters the battlefield, you take the initiative.
+        addCard(Zone.HAND, playerA, "Aarakocra Sneak"); // {3}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        //
+        // Permanents entering the battlefield don't cause abilities of permanents your opponents control to trigger.
+        addCard(Zone.HAND, playerB, "Elesh Norn, Mother of Machines"); // {4}{W}
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears", 1);
+
+        // A takes the initiative
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aarakocra Sneak");
+        addTarget(playerA, "Island"); // venture: Secret Entrance
+
+        // B steals the initiative by combat damage with Elesh Norn on the battlefield
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Elesh Norn, Mother of Machines");
+        attack(2, playerB, "Grizzly Bears", playerA);
+        addTarget(playerB, "Plains"); // venture: Secret Entrance
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20 - 2);
+        Assert.assertEquals("initiative must be taken by combat damage", playerB.getId(), currentGame.getInitiativeId());
+    }
 }

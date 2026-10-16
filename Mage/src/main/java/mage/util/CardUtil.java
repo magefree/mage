@@ -2567,6 +2567,19 @@ public final class CardUtil {
     }
 
     /**
+     * One single event can be a batch (contain multiple events)
+     */
+    public static Set<UUID> getEventSources(GameEvent event) {
+        Set<UUID> res = new HashSet<>();
+        if (event instanceof BatchEvent) {
+            res.addAll(((BatchEvent<?>) event).getSourceIds());
+        } else if (event != null && event.getSourceId() != null) {
+            res.add(event.getSourceId());
+        }
+        return res;
+    }
+
+    /**
      * Prepare card name for render in card panels, popups, etc. Can show face down status and real card name instead empty string
      *
      * @param imageFileName face down status or another inner image name like Morph, Copy, etc
