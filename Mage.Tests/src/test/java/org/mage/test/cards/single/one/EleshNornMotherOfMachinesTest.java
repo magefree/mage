@@ -131,4 +131,26 @@ public class EleshNornMotherOfMachinesTest extends CardTestPlayerBase {
         assertLife(playerA, 20 - 2);
         Assert.assertEquals("initiative must be taken by combat damage", playerB.getId(), currentGame.getInitiativeId());
     }
+
+    @Test
+    public void test_EleshNorn_PreventOneOrMoreTokensEnter() {
+        // Permanents entering the battlefield don't cause abilities of permanents your opponents control to trigger.
+        addCard(Zone.BATTLEFIELD, playerB, "Elesh Norn, Mother of Machines");
+        //
+        // Whenever one or more tokens enter the battlefield under your control, put that many +1/+1 counters on Woodland Champion.
+        addCard(Zone.BATTLEFIELD, playerA, "Woodland Champion"); // 2/2
+        //
+        // Create two 1/1 white Soldier creature tokens.
+        addCard(Zone.HAND, playerA, "Raise the Alarm"); // {1}{W}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raise the Alarm");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Soldier Token", 2);
+        assertPowerToughness(playerA, "Woodland Champion", 2, 2);
+    }
 }

@@ -73,7 +73,6 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          */
         ZONE_CHANGE,
-        ZONE_CHANGE_GROUP, // between two specific zones only; TODO: rework all usages to ZONE_CHANGE_BATCH instead, see #11895
         ZONE_CHANGE_BATCH(true), // all zone changes that occurred from a single effect
         DRAW_TWO_OR_MORE_CARDS, // event calls for multi draws only (if player draws 2+ cards at once)
         DRAW_CARD, DREW_CARD,

@@ -6,12 +6,11 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.command.Commander;
+import mage.game.events.ZoneChangeBatchEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentMeld;
-import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -27,25 +26,12 @@ public final class ZonesHandler {
     public static boolean cast(ZoneChangeInfo info, Ability source, Game game) {
         if (maybeRemoveFromSourceZone(info, game, source)) {
             placeInDestinationZone(info, 0, source, game);
-            // create a group zone change event if a card is moved to stack for casting (it's always only one card, but some effects check for group events (one or more xxx))
-            Set<Card> cards = new HashSet<>();
-            Set<PermanentToken> tokens = new HashSet<>();
-            Card targetCard = getTargetCard(game, info.event.getTargetId());
-            if (targetCard instanceof PermanentToken) {
-                tokens.add((PermanentToken) targetCard);
-            } else {
-                cards.add(targetCard);
-            }
-            game.fireEvent(new ZoneChangeGroupEvent(
-                    cards,
-                    tokens,
-                    info.event.getSourceId(),
-                    info.event.getSource(),
-                    info.event.getPlayerId(),
-                    info.event.getFromZone(),
-                    info.event.getToZone()));
             // normal movement
             game.fireEvent(info.event);
+            // create a batch zone change event if a card is moved to stack for casting (it's always only one card, but some effects check for batch events (one or more xxx))
+            ZoneChangeBatchEvent batchEvent = new ZoneChangeBatchEvent();
+            batchEvent.addEvent(info.event);
+            game.fireEvent(batchEvent);
             return true;
         }
         return false;

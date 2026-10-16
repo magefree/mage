@@ -53,7 +53,9 @@ public class BalanceEffect extends OneShotEffect {
         }
 
         choosePermanentsToKeep(game, source, controller, filterLand);
+        game.processAction(); // each step is a separate event, e.g. for one or more triggers
         choosePermanentsToKeep(game, source, controller, filterCreature);
+        game.processAction();
 
         //Cards in hand
         int lowestHandSize = Integer.MAX_VALUE;
