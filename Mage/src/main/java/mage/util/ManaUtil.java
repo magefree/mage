@@ -23,6 +23,7 @@ import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author noxx, JayDi85
@@ -434,10 +435,10 @@ public final class ManaUtil {
      *
      * @param source ability the mana costs have to be paid for
      * @param game
-     * @param unpaid mana that has still to be paid
+     * @param paying the cost being paid, which the special actions pay directly
      * @return message to be shown in human players feedback area
      */
-    public static String addSpecialManaPayAbilities(Ability source, Game game, ManaCost unpaid) {
+    public static String addSpecialManaPayAbilities(Ability source, Game game, ManaCost paying) {
         MageObject baseObject = game.getPermanent(source.getSourceId());
         if (baseObject == null) {
             baseObject = game.getCard(source.getSourceId());
@@ -447,7 +448,7 @@ public final class ManaUtil {
         if (mageObject instanceof Card) {
             for (Ability ability : ((Card) mageObject).getAbilities(game)) {
                 if (ability instanceof AlternateManaPaymentAbility) {
-                    ((AlternateManaPaymentAbility) ability).addSpecialAction(source, game, unpaid);
+                    ((AlternateManaPaymentAbility) ability).addSpecialAction(source, game, paying);
                 }
             }
             if (baseObject == null) {
@@ -455,9 +456,85 @@ public final class ManaUtil {
             }
         }
         if (baseObject != null) {
-            return unpaid.getText() + "<div style='font-size:11pt'>" + baseObject.getLogName() + "</div>";
+            return paying.getUnpaid().getText() + "<div style='font-size:11pt'>" + baseObject.getLogName() + "</div>";
         } else {
-            return unpaid.getText();
+            return paying.getUnpaid().getText();
+        }
+    }
+
+    /**
+     * The parts of a cost still to pay, with nested costs flattened
+     */
+    public static List<ManaCost> getUnpaidParts(ManaCost cost) {
+        List<ManaCost> parts = new ArrayList<>();
+        addUnpaidParts(cost, parts);
+        return parts;
+    }
+
+    private static void addUnpaidParts(ManaCost cost, List<ManaCost> parts) {
+        if (cost instanceof ManaCosts) {
+            for (ManaCost part : (ManaCosts<?>) cost) {
+                addUnpaidParts(part, parts);
+            }
+        } else if (!cost.isPaid()) {
+            parts.add(cost);
+        }
+    }
+
+    /**
+     * Generic mana still to pay, counting the generic half of {2/W}. {S} isn't generic (107.4h) and neither is {C}.
+     */
+    public static int getUnpaidGeneric(ManaCost cost) {
+        return getUnpaidParts(cost).stream().mapToInt(ManaUtil::getUnpaidGenericOfPart).sum();
+    }
+
+    /**
+     * Generic mana still to pay in one part of a cost. The part must be a single unpaid symbol, as returned by
+     * {@link #getUnpaidParts}; for a whole cost, use {@link #getUnpaidGeneric}.
+     */
+    public static int getUnpaidGenericOfPart(ManaCost part) {
+        if (part instanceof GenericManaCost || part instanceof MonoHybridManaCost) {
+            return part.getMana().getGeneric() - part.getPayment().count();
+        }
+        return 0;
+    }
+
+    /**
+     * Whether a part of a cost can only be paid as generic. A partly paid {2/W} can only be finished as generic.
+     */
+    public static boolean isGenericOnly(ManaCost part) {
+        return part instanceof GenericManaCost || (part instanceof MonoHybridManaCost && part.getPayment().count() > 0);
+    }
+
+    /**
+     * The unpaid parts with generic mana still to pay, in the order generic payment fills them. An untouched {2/W}
+     * goes last, so it can still be paid with one {W}.
+     */
+    public static List<ManaCost> getUnpaidGenericParts(ManaCost cost) {
+        return getUnpaidParts(cost)
+                .stream()
+                .filter(part -> getUnpaidGenericOfPart(part) > 0)
+                .sorted(Comparator.comparing(part -> !isGenericOnly(part)))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Pays {@code amount} of a cost's unpaid generic mana.
+     *
+     * @param cost the whole cost being paid
+     * @param amount how much generic to pay
+     * @param spent the mana spent, added to the cost's used mana; null when none is spent
+     */
+    public static void payGeneric(ManaCost cost, int amount, Mana spent) {
+        List<ManaCost> parts = getUnpaidGenericParts(cost);
+        if (spent != null && !parts.isEmpty()) {
+            // a cost's spent mana is the sum over its parts, so which part records it doesn't matter
+            parts.get(0).getUsedManaToPay().add(spent);
+        }
+        for (ManaCost part : parts) {
+            int paid = Math.min(amount, getUnpaidGenericOfPart(part));
+            part.setPayment(Mana.ColorlessMana(paid));
+            amount -= paid;
         }
     }
 
