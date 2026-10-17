@@ -29,7 +29,7 @@ public class DelveTest extends CardTestPlayerBaseWithAIHelps {
         setChoice(playerA, "Blue"); // pay 1
         setChoice(playerA, "Blue"); // pay 2
         setChoice(playerA, "Exile up to");
-        setChoice(playerA, "Balduvian Bears^Balduvian Bears^Balduvian Bears^Balduvian Bears"); // pay 3-6 as delve
+        setChoice(playerA, "Balduvian Bears", 4); // pay 3-6 as delve
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
