@@ -86,10 +86,17 @@ public final class GUISizeHelper {
     /**
      * Reset all caches and reload all GUI with actual settings.
      * Use it after GUI settings change like colors/fonts/sizes.
+     * Runs synchronously on the event dispatch thread; other callers queue a refresh
+     * and return without waiting for it to finish.
      *
      * @param reloadTheme use it after theme changes only
      */
     public static void refreshGUIAndCards(boolean reloadTheme) {
+        if (!SwingUtilities.isEventDispatchThread()) {
+            // Image downloads finish on a worker; Swing updates must run on the event thread.
+            SwingUtilities.invokeLater(() -> refreshGUIAndCards(reloadTheme));
+            return;
+        }
         calculateGUISizes();
         if (reloadTheme) {
             GuiDisplayUtil.refreshThemeSettings();
