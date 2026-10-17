@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
 import mage.util.CardUtil;
@@ -80,12 +79,10 @@ class AncientGreenwardenEffect extends ReplacementEffectImpl {
         if (!source.isControlledBy(event.getPlayerId())) {
             return false;
         }
-        GameEvent sourceEvent = ((NumberOfTriggersEvent) event).getSourceEvent();
         // Only EtB triggers of lands
-        if (sourceEvent == null
-                || sourceEvent.getType() != GameEvent.EventType.ENTERS_THE_BATTLEFIELD
-                || !(sourceEvent instanceof EntersTheBattlefieldEvent)
-                || !((EntersTheBattlefieldEvent) sourceEvent).getTarget().isLand(game)) {
+        if (((NumberOfTriggersEvent) event).getEnteredPermanents(game)
+                .stream()
+                .noneMatch(permanent -> permanent.isLand(game))) {
             return false;
         }
         // Only for triggers of permanents

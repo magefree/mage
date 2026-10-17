@@ -12,11 +12,9 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -74,13 +72,8 @@ class StarfieldVocalistEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return source.isControlledBy(event.getPlayerId())
-                && Optional
-                .ofNullable(event)
-                .filter(NumberOfTriggersEvent.class::isInstance)
-                .map(NumberOfTriggersEvent.class::cast)
-                .map(NumberOfTriggersEvent::getSourceEvent)
-                .filter(EntersTheBattlefieldEvent.class::isInstance)
-                .isPresent()
+                && event instanceof NumberOfTriggersEvent
+                && !((NumberOfTriggersEvent) event).getEnteredPermanents(game).isEmpty()
                 && game.getPermanent(event.getSourceId()) != null;
     }
 

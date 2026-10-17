@@ -12,7 +12,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
 
@@ -66,19 +65,13 @@ class PanharmoniconEffect extends ReplacementEffectImpl {
             NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
             // Only triggers of the controller of Panharmonicon
             if (source.isControlledBy(event.getPlayerId())) {
-                GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
-                // Only EtB triggers
-                if (sourceEvent != null
-                        && sourceEvent.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
-                        && sourceEvent instanceof EntersTheBattlefieldEvent) {
-                    EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) sourceEvent;
-                    // Only for entering artifacts or creatures
-                    if (entersTheBattlefieldEvent.getTarget().isArtifact(game)
-                            || entersTheBattlefieldEvent.getTarget().isCreature(game)) {
-                        // Only for triggers of permanents
-                        if (game.getPermanent(numberOfTriggersEvent.getSourceId()) != null) {
-                            return true;
-                        }
+                // Only for entering artifacts or creatures
+                if (numberOfTriggersEvent.getEnteredPermanents(game)
+                        .stream()
+                        .anyMatch(permanent -> permanent.isArtifact(game) || permanent.isCreature(game))) {
+                    // Only for triggers of permanents
+                    if (game.getPermanent(numberOfTriggersEvent.getSourceId()) != null) {
+                        return true;
                     }
                 }
             }

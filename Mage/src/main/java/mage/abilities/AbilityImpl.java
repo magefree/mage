@@ -1398,13 +1398,25 @@ public abstract class AbilityImpl implements Ability {
             return false;
         }
 
+        // there are game engine only special proxy/packed events like batch and number of triggers,
+        // so make sure it's spread to real game events
         List<GameEvent> allEvents = new ArrayList<>();
-        if (event instanceof BatchEvent) {
-            allEvents.addAll(((BatchEvent) event).getEvents());
-        } else if (event instanceof NumberOfTriggersEvent) {
-            allEvents.add(((NumberOfTriggersEvent) event).getSourceEvent());
+
+        // number of triggers support
+        GameEvent checkingEvent;
+        if (event instanceof NumberOfTriggersEvent) {
+            // number of triggers event must be checked by its source event 
+            // (e.g. doubler dies at the same time as other creatures)
+            checkingEvent = ((NumberOfTriggersEvent) event).getSourceEvent();
         } else {
-            allEvents.add(event);
+            checkingEvent = event;
+        }
+
+        // batch support
+        if (checkingEvent instanceof BatchEvent) {
+            allEvents.addAll(((BatchEvent) checkingEvent).getEvents());
+        } else if (checkingEvent != null) {
+            allEvents.add(checkingEvent);
         }
 
         return allEvents.stream().anyMatch(e -> {

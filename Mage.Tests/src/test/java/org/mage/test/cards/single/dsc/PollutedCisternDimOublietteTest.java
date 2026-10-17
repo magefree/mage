@@ -21,13 +21,14 @@ public class PollutedCisternDimOublietteTest extends CardTestPlayerBase {
         //
         // Target player mills ten cards.
         addCard(Zone.HAND, playerA, "Glimpse the Unthinkable"); // {U}{B}
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         //
         addCard(Zone.LIBRARY, playerA, "Forest", 2); // land
         addCard(Zone.LIBRARY, playerA, "Grizzly Bears", 1); // creature
         addCard(Zone.LIBRARY, playerA, "Shock", 1); // instant
 
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}", 2);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Polluted Cistern");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
@@ -53,12 +54,13 @@ public class PollutedCisternDimOublietteTest extends CardTestPlayerBase {
         //
         // Target player mills ten cards.
         addCard(Zone.HAND, playerA, "Glimpse the Unthinkable"); // {U}{B}
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         //
         addCard(Zone.LIBRARY, playerB, "Forest", 1);
         addCard(Zone.LIBRARY, playerB, "Grizzly Bears", 1);
 
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}", 2);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Polluted Cistern");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 

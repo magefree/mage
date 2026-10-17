@@ -5,7 +5,6 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
 import mage.util.CardUtil;
@@ -41,11 +40,8 @@ public class AdditionalTriggerControlledETBReplacementEffect extends Replacement
         if (!source.isControlledBy(event.getPlayerId())) {
             return false;
         }
-        GameEvent sourceEvent = ((NumberOfTriggersEvent) event).getSourceEvent();
         // Only EtB triggers
-        if (sourceEvent == null
-                || sourceEvent.getType() != GameEvent.EventType.ENTERS_THE_BATTLEFIELD
-                || !(sourceEvent instanceof EntersTheBattlefieldEvent)) {
+        if (((NumberOfTriggersEvent) event).getEnteredPermanents(game).isEmpty()) {
             return false;
         }
         // Only for triggers of permanents

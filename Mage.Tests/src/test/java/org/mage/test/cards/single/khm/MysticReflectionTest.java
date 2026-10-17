@@ -15,13 +15,14 @@ public class MysticReflectionTest extends CardTestPlayerBase {
         // Choose target nonlegendary creature. The next time one or more creatures or planeswalkers enter the
         // battlefield this turn, they enter as copies of the chosen creature instead.
         addCard(Zone.HAND, playerA, "Mystic Reflection"); // {1}{U}
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears", 1);
         //
         // Create two 1/1 white Soldier creature tokens.
         addCard(Zone.HAND, playerA, "Raise the Alarm", 2); // {1}{W}
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
 
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 2);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mystic Reflection", "Grizzly Bears");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
