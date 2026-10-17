@@ -96,6 +96,8 @@ public final class RealityFractureCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Talisman of Dominance", 62, Rarity.UNCOMMON, mage.cards.t.TalismanOfDominance.class));
         cards.add(new SetCardInfo("Talisman of Indulgence", 63, Rarity.UNCOMMON, mage.cards.t.TalismanOfIndulgence.class));
         cards.add(new SetCardInfo("Talisman of Progress", 64, Rarity.UNCOMMON, mage.cards.t.TalismanOfProgress.class));
+        cards.add(new SetCardInfo("Tamiyo, Upriser Crowned", 11, Rarity.RARE, mage.cards.t.TamiyoUpriserCrowned.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tamiyo, Upriser Crowned", 96, Rarity.RARE, mage.cards.t.TamiyoUpriserCrowned.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turbulent Crater", 101, Rarity.RARE, mage.cards.t.TurbulentCrater.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turbulent Crater", 16, Rarity.RARE, mage.cards.t.TurbulentCrater.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turbulent Shore", 102, Rarity.RARE, mage.cards.t.TurbulentShore.class, NON_FULL_USE_VARIOUS));
