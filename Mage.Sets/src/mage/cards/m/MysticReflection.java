@@ -1,8 +1,6 @@
 package mage.cards.m;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -16,14 +14,14 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeBatchEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import java.util.UUID;
-import mage.MageItem;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
-import mage.game.events.ZoneChangeGroupEvent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
@@ -160,19 +158,13 @@ class MysticReflectionWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.ZONE_CHANGE_GROUP) {
+        if (event.getType() != GameEvent.EventType.ZONE_CHANGE_BATCH) {
             return;
         }
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        if (zEvent.getToZone() != Zone.BATTLEFIELD) {
-            return;
-        }
-        Set<Card> cards = new HashSet<>();
-        cards.addAll(zEvent.getCards());
-        cards.addAll(zEvent.getTokens());
-        if (cards.stream()
-                .filter(Objects::nonNull)
-                .map(MageItem::getId)
+        if (((ZoneChangeBatchEvent) event).getEvents()
+                .stream()
+                .filter(e -> e.getToZone() == Zone.BATTLEFIELD)
+                .map(ZoneChangeEvent::getTargetId)
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
                 .anyMatch(p -> p.isPlaneswalker(game) || p.isCreature(game))) {

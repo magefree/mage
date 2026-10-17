@@ -22,7 +22,6 @@ import mage.game.events.*;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
-import mage.game.permanent.PermanentToken;
 import mage.game.stack.SpellStack;
 import mage.game.stack.StackObject;
 import mage.game.turn.Phase;
@@ -1066,93 +1065,11 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public List<GameEvent> createEventGroups(List<GameEvent> events, Game game) {
-
-        class ZoneChangeData {
-
-            private final Zone fromZone;
-            private final Zone toZone;
-            private final UUID sourceId;
-            private final UUID playerId;
-            Ability source;
-
-            public ZoneChangeData(Ability source, UUID sourceId, UUID playerId, Zone fromZone, Zone toZone) {
-                this.sourceId = sourceId;
-                this.playerId = playerId;
-                this.fromZone = fromZone;
-                this.toZone = toZone;
-                this.source = source;
-            }
-
-            @Override
-            public int hashCode() {
-                return (this.fromZone.ordinal() + 1) * 1
-                        + (this.toZone.ordinal() + 1) * 10
-                        + (this.sourceId != null ? this.sourceId.hashCode() : 0)
-                        + (this.source != null ? this.source.hashCode() : 0);
-            }
-
-            @Override
-            public boolean equals(Object obj) {
-                if (obj instanceof ZoneChangeData) {
-                    ZoneChangeData data = (ZoneChangeData) obj;
-                    return this.fromZone == data.fromZone
-                            && this.toZone == data.toZone
-                            && Objects.equals(this.sourceId, data.sourceId)
-                            && Objects.equals(this.source, data.source);
-                }
-                return false;
-            }
-        }
-
-        Map<ZoneChangeData, List<GameEvent>> eventsByKey = new HashMap<>();
         List<GameEvent> groupEvents = new LinkedList<>();
         ZoneChangeBatchEvent batchEvent = new ZoneChangeBatchEvent();
         for (GameEvent event : events) {
             if (event instanceof ZoneChangeEvent) {
-                ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
-                batchEvent.addEvent(castEvent);
-                ZoneChangeData key = new ZoneChangeData(
-                        castEvent.getSource(),
-                        castEvent.getSourceId(),
-                        castEvent.getPlayerId(),
-                        castEvent.getFromZone(),
-                        castEvent.getToZone());
-                if (eventsByKey.containsKey(key)) {
-                    eventsByKey.get(key).add(event);
-                } else {
-                    List<GameEvent> list = new LinkedList<>();
-                    list.add(event);
-                    eventsByKey.put(key, list);
-                }
-            }
-        }
-        for (Map.Entry<ZoneChangeData, List<GameEvent>> entry : eventsByKey.entrySet()) {
-            Set<Card> movedCards = new LinkedHashSet<>();
-            Set<PermanentToken> movedTokens = new LinkedHashSet<>();
-            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext(); ) {
-                GameEvent event = it.next();
-                ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
-                UUID targetId = castEvent.getTargetId();
-                Card card = ZonesHandler.getTargetCard(game, targetId);
-                if (card instanceof PermanentToken) {
-                    movedTokens.add((PermanentToken) card);
-                } else if (game.getObject(targetId) instanceof PermanentToken) {
-                    movedTokens.add((PermanentToken) game.getObject(targetId));
-                } else if (card != null) {
-                    movedCards.add(card);
-                }
-            }
-            ZoneChangeData eventData = entry.getKey();
-            if (!movedCards.isEmpty() || !movedTokens.isEmpty()) {
-                ZoneChangeGroupEvent event = new ZoneChangeGroupEvent(
-                        movedCards,
-                        movedTokens,
-                        eventData.sourceId,
-                        eventData.source,
-                        eventData.playerId,
-                        eventData.fromZone,
-                        eventData.toZone);
-                groupEvents.add(event);
+                batchEvent.addEvent((ZoneChangeEvent) event);
             }
         }
         if (!batchEvent.getEvents().isEmpty()) {
