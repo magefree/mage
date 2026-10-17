@@ -52,7 +52,10 @@ public final class ManaSymbolsCellRenderer extends DefaultTableCellRenderer {
                 BufferedImage image = ManaSymbols.getSizedManaSymbol(symbol, symbolWidth);
                 if (image != null) {
                     // icon
-                    symbolLabel.setIcon(new ImageIcon(image));
+                    symbolLabel.setIcon(new mage.client.util.gui.HiDpiIcon(symbolWidth, size -> {
+                        BufferedImage raster = ManaSymbols.getHiDpiManaSymbol(symbol, size);
+                        return raster == null ? image : raster;
+                    }));
                 } else {
                     // text (mana symbols withoiut brackets like R U * B)
                     // TODO: add auto-size text from ManaSymbols.draw

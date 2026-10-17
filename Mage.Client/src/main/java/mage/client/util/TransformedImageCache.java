@@ -111,6 +111,14 @@ public final class TransformedImageCache {
         return getRotatedResizedImage(image, width, height, 0.0);
     }
 
+    /** Cache the final raster of an image panel that fills its entire drawing rectangle. */
+    public static BufferedImage getResizedImageExact(BufferedImage image, int width, int height) {
+        if (image.getWidth() == width && image.getHeight() == height) {
+            return image;
+        }
+        return TRANSFORMED_IMAGES_CACHE.getOrThrow(new Key(width, height, 0.0)).getOrThrow(image);
+    }
+
     public static BufferedImage getRotatedImage(BufferedImage image, double angle) {
         return getRotatedResizedImage(image, -1, -1, angle);
     }
