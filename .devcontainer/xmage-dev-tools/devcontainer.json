@@ -32,6 +32,7 @@
 	"features": {
 		// java build tools and vsc extentions
 		"ghcr.io/devcontainers/features/java:1": {
+			"version": "25", // latest LTS
 			"installMaven": "true"
 		},
 		// virtual desktop to run GUI app and view it by web-browser
