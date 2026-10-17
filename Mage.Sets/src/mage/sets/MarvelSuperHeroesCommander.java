@@ -748,6 +748,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Voltaic Whip", 675, Rarity.COMMON, mage.cards.v.VoltaicWhip.class));
         cards.add(new SetCardInfo("Voracious Brood", 735, Rarity.UNCOMMON, mage.cards.v.VoraciousBrood.class));
         cards.add(new SetCardInfo("Vulture, Feathered Fiend", 645, Rarity.RARE, mage.cards.v.VultureFeatheredFiend.class));
+        cards.add(new SetCardInfo("W'Kabi, Shield of the Nation", 387, Rarity.RARE, mage.cards.w.WKabiShieldOfTheNation.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("W'Kabi, Shield of the Nation", 70, Rarity.RARE, mage.cards.w.WKabiShieldOfTheNation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wakanda Forever!", 388, Rarity.RARE, mage.cards.w.WakandaForever.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wakanda Forever!", 71, Rarity.RARE, mage.cards.w.WakandaForever.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wakandan Shield Guard", 613, Rarity.COMMON, mage.cards.w.WakandanShieldGuard.class));
