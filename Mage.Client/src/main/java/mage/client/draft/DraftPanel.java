@@ -105,6 +105,13 @@
       */
      public DraftPanel() {
          initComponents();
+         draftSplit.setPreferenceKey("draftPickedBoosterProportion");
+         draftPicks.setMinimumSize(new Dimension(0, 0));
+         draftBooster.setMinimumSize(new Dimension(0, 0));
+         draftSplit.setDividerSize(GUISizeHelper.dividerBarSize);
+         JScrollPane informationScroll = new JScrollPane(panelLeft);
+         informationScroll.setBorder(null);
+         informationScroll.getVerticalScrollBar().setUnitIncrement(24);
 
          // keep player labels for auto-sizing
          playerLabels.put(panelPlayersLeft, Arrays.stream(panelPlayersLeft.getComponents())
@@ -148,6 +155,12 @@
              protectionTimeout = 100;
          }
          protectionTimer = new Timer(protectionTimeout, e -> protectionTimer.stop());
+         // Install after creating popup menus; unconstrained popup add() would replace CENTER.
+         setLayout(new BorderLayout(6, 0));
+         removeAll();
+         add(informationScroll, BorderLayout.WEST);
+         add(panelRight, BorderLayout.CENTER);
+         setGUISize();
      }
 
      public void cleanUp() {
@@ -176,6 +189,16 @@
 
      private void setGUISize() {
          GUISizeHelper.changePopupMenuFont(popupMenuPickedArea);
+         draftSplit.setDividerSize(GUISizeHelper.dividerBarSize);
+         mage.client.util.gui.GuiLayoutUtil.prepare(panelLeft);
+         for (JTextField pack : new JTextField[]{editPack1, editPack2, editPack3}) {
+             pack.setPreferredSize(null);
+             pack.setColumns(12);
+         }
+         panelPlayersLeft.setPreferredSize(null);
+         panelPlayersLeft.setMinimumSize(null);
+         panelPlayersRight.setPreferredSize(null);
+         panelPlayersRight.setMinimumSize(null);
      }
 
      public synchronized void showDraft(UUID draftId) {
@@ -1008,7 +1031,7 @@
             .addGroup(panelLeftLayout.createSequentialGroup()
                 .addComponent(panelCommands, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelPacks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1031,27 +1054,11 @@
             .addGap(0, 439, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout panelRightLayout = new javax.swing.GroupLayout(panelRight);
-        panelRight.setLayout(panelRightLayout);
-        panelRightLayout.setHorizontalGroup(
-            panelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRightLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(draftPicks, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
-                    .addComponent(draftBooster, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        panelRightLayout.setVerticalGroup(
-            panelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRightLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(draftPicks, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(draftBooster, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
+        draftSplit = new mage.client.util.gui.ProportionalSplitPane();
+        draftSplit.setTopComponent(draftPicks);
+        draftSplit.setBottomComponent(draftBooster);
+        panelRight.setLayout(new java.awt.BorderLayout());
+        panelRight.add(draftSplit, java.awt.BorderLayout.CENTER);
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -1083,6 +1090,7 @@
     private javax.swing.JCheckBox checkPack1;
     private javax.swing.JCheckBox checkPack2;
     private javax.swing.JCheckBox checkPack3;
+    private mage.client.util.gui.ProportionalSplitPane draftSplit;
     private mage.client.draft.DraftGrid draftBooster;
     private mage.client.cards.CardsList draftPicks;
     private javax.swing.JTextField editPack1;
