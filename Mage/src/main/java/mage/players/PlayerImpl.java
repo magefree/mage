@@ -1606,7 +1606,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                 resetStoredBookmark(game);
                 return true;
             }
-            restoreState(bookmark, ability.getRule(), game);
         } else {
             // resolve without stack
             if (ability.activate(game, false)) {
