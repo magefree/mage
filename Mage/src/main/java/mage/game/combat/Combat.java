@@ -487,9 +487,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                     }
                     mustAttack = true;
                     for (Ability ability : entry.getValue()) {
-                        UUID defenderId = effect.mustAttackDefender(ability, game);
-
-                        if (defenderId != null) {
+                        // attacking any one of the returned defenders obeys the requirement
+                        for (UUID defenderId : effect.mustAttackDefenders(ability, game)) {
                             // creature is not forced to attack players that are no longer in the game
                             if (game.getPermanentOrLKIBattlefield(defenderId) == null && game.getPlayer(defenderId).hasLost()) {
                                 // TODO: must attack bugged (not goad)? Must use not LKI here or must check controller's lost too?
