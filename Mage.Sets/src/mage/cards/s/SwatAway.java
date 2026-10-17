@@ -21,7 +21,7 @@ import java.util.UUID;
 public final class SwatAway extends CardImpl {
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
-            new FilterCreatureAttackingYou("a creature is attacking you")
+            new FilterCreatureAttackingYou("a creature is attacking you"), false
     );
     private static final FilterSpellOrPermanent filter = new FilterSpellOrPermanent("spell or creature");
 
