@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * Used for when you need to know how attributes are assigned among cards, such as for party count
  * Can be adapted for various card attributes
  *
- * @author TheElk801
+ * @author TheElk801, JayDi85
  */
 public abstract class RoleAssignment<T> implements Serializable {
 
@@ -26,35 +26,6 @@ public abstract class RoleAssignment<T> implements Serializable {
 
     protected abstract Set<T> makeSet(Card card, Game game);
 
-    private boolean attemptRearrange(T attribute, UUID uuid, Set<T> attributes, Map<T, UUID> attributeUUIDMap, Map<UUID, Set<T>> attributeSetMap) {
-        UUID uuid1 = attributeUUIDMap.get(attribute);
-        if (uuid1 == null) {
-            return false;
-        }
-        Set<T> attributes1 = attributeSetMap.get(uuid1);
-        for (T attribute1 : attributes1) {
-            if (attribute == attribute1) {
-                continue;
-            }
-            if (!attributeUUIDMap.containsKey(attribute1)) {
-                attributeUUIDMap.put(attribute, uuid);
-                attributeUUIDMap.put(attribute1, uuid1);
-                return true;
-            }
-        }
-        for (T attribute1 : attributes1) {
-            if (attribute == attribute1) {
-                continue;
-            }
-            if (attemptRearrange(attribute1, uuid1, attributes, attributeUUIDMap, attributeSetMap)) {
-                attributeUUIDMap.put(attribute, uuid);
-                attributeUUIDMap.put(attribute1, uuid1);
-                return true;
-            }
-        }
-        return false;
-    }
-
     public int getRoleCount(Cards cards, Game game) {
         return getRoleCount(cards.getCards(game), game);
     }
@@ -66,40 +37,56 @@ public abstract class RoleAssignment<T> implements Serializable {
         return getRoleCount(cards.getCards(game), game) < cards.size();
     }
 
+    /**
+     * Max number of cards that can get a role at the same time: each card takes up to one of its roles,
+     * each role goes to up to one card (example: party count, each card type one card)
+     */
     public int getRoleCount(Set<? extends Card> cards, Game game) {
-        Map<UUID, Set<T>> attributeMap = new HashMap<>();
-        cards.forEach(card -> attributeMap.put(card.getId(), this.makeSet(card, game)));
-        if (attributeMap.size() < 2) {
-            return attributeMap.size();
-        }
-        Set<T> availableTypes = attributeMap
-                .values()
+        List<Set<T>> cardRoles = cards
+                .stream()
+                .map(card -> this.makeSet(card, game))
+                .collect(Collectors.toList());
+        return getMaxAssignment(cardRoles);
+    }
+
+    /**
+     * Maximum bipartite matching between cards and roles (Kuhn's algorithm).
+     * Package-private for unit tests.
+     *
+     * @param cardRoles possible roles of each card
+     * @return max number of cards with own role
+     */
+    static <T> int getMaxAssignment(List<? extends Set<T>> cardRoles) {
+        int maxRoles = (int) cardRoles
                 .stream()
                 .flatMap(Collection::stream)
-                .collect(Collectors.toSet());
-        if (attributeMap.size() == 2) {
-            return Math.min(2, availableTypes.size());
-        }
-        Map<T, UUID> attributeUUIDMap = new HashMap<>();
-        for (Map.Entry<UUID, Set<T>> entry : attributeMap.entrySet()) {
-            for (T attribute : entry.getValue()) {
-                if (!attributeUUIDMap.containsKey(attribute)) {
-                    attributeUUIDMap.put(attribute, entry.getKey());
-                    break;
-                }
+                .distinct()
+                .count();
+        Map<T, Integer> roleOwners = new HashMap<>();
+        for (int cardIndex = 0; cardIndex < cardRoles.size(); cardIndex++) {
+            if (roleOwners.size() >= maxRoles) {
+                break;
             }
-            if (attributeUUIDMap.size() >= availableTypes.size()) {
-                return attributeUUIDMap.size();
-            } else if (attributeUUIDMap.containsValue(entry.getKey())) {
+            findRole(cardIndex, cardRoles, roleOwners, new HashSet<>());
+        }
+        return roleOwners.size();
+    }
+
+    /**
+     * Try to give a role to the card, other cards can move to their free roles for it (augmenting path).
+     * Each role is checked only once per search, so the search always ends.
+     */
+    private static <T> boolean findRole(int cardIndex, List<? extends Set<T>> cardRoles, Map<T, Integer> roleOwners, Set<T> checkedRoles) {
+        for (T role : cardRoles.get(cardIndex)) {
+            if (!checkedRoles.add(role)) {
                 continue;
-            } else {
-                for (T attribute : entry.getValue()) {
-                    if (attemptRearrange(attribute, entry.getKey(), entry.getValue(), attributeUUIDMap, attributeMap)) {
-                        break;
-                    }
-                }
+            }
+            Integer owner = roleOwners.get(role);
+            if (owner == null || findRole(owner, cardRoles, roleOwners, checkedRoles)) {
+                roleOwners.put(role, cardIndex);
+                return true;
             }
         }
-        return attributeUUIDMap.keySet().size();
+        return false;
     }
 }

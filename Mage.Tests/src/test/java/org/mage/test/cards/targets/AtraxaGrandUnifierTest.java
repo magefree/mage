@@ -3,6 +3,7 @@ package org.mage.test.cards.targets;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 /**
@@ -74,5 +75,39 @@ public class AtraxaGrandUnifierTest extends CardTestPlayerBaseWithAIHelps {
 
         assertHandCount(playerA, "Mountain", 1);
         assertHandCount(playerA, "Grizzly Bears", 1);
+    }
+
+    @Test
+    public void test_Play_Manual_ManyCardsWithSameTwoTypes() {
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, "Frogmite", 1); // artifact creature
+        addCard(Zone.LIBRARY, playerA, "Memnite", 1); // artifact creature
+        addCard(Zone.LIBRARY, playerA, "Ornithopter", 1); // artifact creature
+        addCard(Zone.LIBRARY, playerA, "Urza's Saga", 1); // enchantment land
+
+        // When Atraxa, Grand Unifier enters the battlefield, reveal the top ten cards of your library.
+        // For each card type, you may put a card of that type from among the revealed cards into your hand.
+        // Put the rest on the bottom of your library in a random order.
+        addCard(Zone.HAND, playerA, "Atraxa, Grand Unifier", 1); // {3}{G}{W}{U}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Atraxa, Grand Unifier");
+        setChoice(playerA, "Urza's Saga", 1); // as enchantment or land
+        setChoice(playerA, "Ornithopter", 1); // as artifact or creature
+        setChoice(playerA, "Memnite", 1); // as artifact or creature
+        setChoice(playerA, TestPlayer.CHOICE_SKIP); // no more cards
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        // Frogmite can't be taken: artifact and creature already have a card
+        assertHandCount(playerA, "Urza's Saga", 1);
+        assertHandCount(playerA, "Ornithopter", 1);
+        assertHandCount(playerA, "Memnite", 1);
+        assertHandCount(playerA, "Frogmite", 0);
     }
 }
