@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 public abstract class ExpansionSet implements Serializable {
 
     private static final Logger logger = Logger.getLogger(ExpansionSet.class);
+    private static final Date FIRST_ARENA_STANDARD_SET = buildDate(2017, 9, 29);
 
     // TODO: remove all usage to default (see below), keep bfz/zen/ust art styles for specific sets only
     //  the main different in art styles - full art lands can have big mana icon at the bottom
@@ -133,6 +134,9 @@ public abstract class ExpansionSet implements Serializable {
     protected String name;
     protected String code;
     protected Date releaseDate;
+    // Optional full-set Arena launch override; ordinary modern Standard/Arena
+    // sets inherit their existing releaseDate without per-card registration.
+    protected Date arenaReleaseDate;
     protected ExpansionSet parentSet; // used to search additional lands and reprints for booster
     protected SetType setType;
 
@@ -196,6 +200,22 @@ public abstract class ExpansionSet implements Serializable {
 
     public Date getReleaseDate() {
         return releaseDate;
+    }
+
+    /**
+     * Date when this entire set is available on Arena, or null for partial or
+     * unsupported releases. Special releases can override this metadata once
+     * per set. Individual card implementations need no availability changes.
+     */
+    public Date getArenaReleaseDate() {
+        if (arenaReleaseDate != null) {
+            return arenaReleaseDate;
+        }
+        if (setType == SetType.MAGIC_ARENA
+                || setType.isStandardLegal() && !releaseDate.before(FIRST_ARENA_STANDARD_SET)) {
+            return releaseDate;
+        }
+        return null;
     }
 
     public int getReleaseYear() {
