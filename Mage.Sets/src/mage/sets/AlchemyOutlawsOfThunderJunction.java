@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public final class AlchemyOutlawsOfThunderJunction extends ExpansionSet {
@@ -21,7 +22,7 @@ public final class AlchemyOutlawsOfThunderJunction extends ExpansionSet {
 
         // Jet Collector (18)
 
-        // Saint Elenda (4)
+        cards.add(new SetCardInfo("Saint Elenda", 4, Rarity.MYTHIC, mage.cards.s.SaintElenda.class));
 
         // Vona de Iedo, the Antifex (28)
     }
