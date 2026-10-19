@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public final class AlchemyRealityFracture extends ExpansionSet {
@@ -23,6 +24,6 @@ public final class AlchemyRealityFracture extends ExpansionSet {
 
         // Diabolic Formula (21)
 
-        // Selfless Germinator (17)
+        cards.add(new SetCardInfo("Selfless Germinator", 17, Rarity.UNCOMMON, mage.cards.s.SelflessGerminator.class));
     }
 }
