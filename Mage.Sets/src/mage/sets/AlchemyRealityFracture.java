@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public final class AlchemyRealityFracture extends ExpansionSet {
@@ -17,7 +18,7 @@ public final class AlchemyRealityFracture extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        // Asymmetry Sage (4)
+        cards.add(new SetCardInfo("Asymmetry Sage", 4, Rarity.UNCOMMON, mage.cards.a.AsymmetrySage.class));
 
         // Avoided Stairwurm (10)
 
