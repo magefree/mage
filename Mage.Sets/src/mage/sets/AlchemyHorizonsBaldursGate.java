@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public final class AlchemyHorizonsBaldursGate extends ExpansionSet {
@@ -19,7 +20,7 @@ public final class AlchemyHorizonsBaldursGate extends ExpansionSet {
 
         // Calim, Djinn Emperor (33)
 
-        // Goblin Trapfinder (56)
+        cards.add(new SetCardInfo("Goblin Trapfinder", 56, Rarity.UNCOMMON, mage.cards.g.GoblinTrapfinder.class));
 
         // Lae'zel, Githyanki Warrior (2)
     }
