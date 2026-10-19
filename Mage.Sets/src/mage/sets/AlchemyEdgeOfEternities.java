@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public final class AlchemyEdgeOfEternities extends ExpansionSet {
@@ -19,7 +20,7 @@ public final class AlchemyEdgeOfEternities extends ExpansionSet {
 
         // Cosmic Sovereign (14)
 
-        // Hydroponics Architect (6)
+        cards.add(new SetCardInfo("Hydroponics Architect", 6, Rarity.UNCOMMON, mage.cards.h.HydroponicsArchitect.class));
 
         // Val, Marooned Surveyor (26)
 
