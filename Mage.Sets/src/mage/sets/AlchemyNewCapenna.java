@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public final class AlchemyNewCapenna extends ExpansionSet {
@@ -17,6 +18,6 @@ public final class AlchemyNewCapenna extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        // Diviner of Fates (22)
+        cards.add(new SetCardInfo("Diviner of Fates", 22, Rarity.MYTHIC, mage.cards.d.DivinerOfFates.class));
     }
 }
