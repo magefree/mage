@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public final class AlchemyTarkir extends ExpansionSet {
@@ -17,6 +18,6 @@ public final class AlchemyTarkir extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        // Lam, Storm Crane Elder (1)
+        cards.add(new SetCardInfo("Lam, Storm Crane Elder", 1, Rarity.MYTHIC, mage.cards.l.LamStormCraneElder.class));
     }
 }
