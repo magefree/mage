@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public final class AlchemyOutlawsOfThunderJunction extends ExpansionSet {
@@ -17,7 +18,7 @@ public final class AlchemyOutlawsOfThunderJunction extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        // Impetuous Lootmonger (12)
+        cards.add(new SetCardInfo("Impetuous Lootmonger", 12, Rarity.UNCOMMON, mage.cards.i.ImpetuousLootmonger.class));
 
         // Jet Collector (18)
 
