@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public final class AlchemyAetherdrift extends ExpansionSet {
@@ -21,6 +22,6 @@ public final class AlchemyAetherdrift extends ExpansionSet {
 
         // Ornate Imitations (23)
 
-        // Trackhand Trainer (6)
+        cards.add(new SetCardInfo("Trackhand Trainer", 6, Rarity.RARE, mage.cards.t.TrackhandTrainer.class));
     }
 }
