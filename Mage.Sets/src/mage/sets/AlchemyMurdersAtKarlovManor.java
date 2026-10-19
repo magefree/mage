@@ -25,7 +25,7 @@ public final class AlchemyMurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Emmara, Voice of the Conclave", 22, Rarity.RARE, mage.cards.e.EmmaraVoiceOfTheConclave.class));
         cards.add(new SetCardInfo("Emporium Thopterist", 5, Rarity.UNCOMMON, mage.cards.e.EmporiumThopterist.class));
 
-        // Excogitator Sphinx (6)
+        cards.add(new SetCardInfo("Excogitator Sphinx", 6, Rarity.RARE, mage.cards.e.ExcogitatorSphinx.class));
 
         // Roalesk, Prime Specimen (26)
 
