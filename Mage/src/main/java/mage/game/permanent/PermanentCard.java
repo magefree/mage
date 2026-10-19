@@ -121,6 +121,12 @@ public class PermanentCard extends PermanentImpl {
 
     @Override
     public void reset(Game game) {
+        Card perpetual = game.getState().getPerpetualCard(card.getId());
+        if (perpetual != null) {
+            card = perpetual;
+            originalColor = card.getColor().copy();
+            originalFrameColor = card.getFrameColor(null).copy();
+        }
         // when the permanent is reset, copy all original values from the card
         // must copy card each reset so that the original values don't get modified
         if (transformed && secondSideCard != null && getCard() instanceof DoubleFacedCardHalf) {
@@ -146,7 +152,12 @@ public class PermanentCard extends PermanentImpl {
         }
     }
 
-    protected void copyFromCard(final Card card, final Game game, boolean isReset) {
+    protected void copyFromCard(Card card, final Game game, boolean isReset) {
+        // Perpetual changes are applied in their normal layers, after copiable characteristics.
+        Card original = game.getState().getPerpetualOriginalCard(card.getId());
+        if (original != null) {
+            card = original;
+        }
         // TODO: must research - is it copy all fields or something miss
         this.name = card.getName();
         this.abilities.clear();

@@ -55,7 +55,7 @@ public class SpellCostIncreaseSourceEffect extends CostModificationEffectImpl {
     }
 
     public SpellCostIncreaseSourceEffect(DynamicValue amount, Condition condition) {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         this.amount = amount;
         this.condition = condition;
         StringBuilder sb = new StringBuilder();

@@ -383,7 +383,7 @@ public abstract class GameImpl implements Game {
 
     @Override
     public Collection<Card> getCards() {
-        return gameCards.values();
+        return gameCards.keySet().stream().map(this::getCard).collect(Collectors.toList());
     }
 
     @Override
@@ -803,7 +803,10 @@ public abstract class GameImpl implements Game {
         if (cardId == null) {
             return null;
         }
-        Card card = gameCards.get(cardId);
+        Card card = state.getPerpetualCard(cardId);
+        if (card == null) {
+            card = gameCards.get(cardId);
+        }
         if (card == null) {
             card = state.getCopiedCard(cardId);
         }

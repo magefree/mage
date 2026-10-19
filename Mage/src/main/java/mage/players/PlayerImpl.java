@@ -22,6 +22,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.RestrictionUntapNotMoreThanEffect;
+import mage.abilities.effects.common.SeekCardEffect;
 import mage.abilities.keyword.*;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaOptions;
@@ -3067,18 +3068,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean seekCard(FilterCard filter, Ability source, Game game) {
-        Set<Card> cards = this.getLibrary()
-                .getCards(game)
-                .stream()
-                .filter(card -> filter.match(card, getId(), source, game))
-                .collect(Collectors.toSet());
-        Card card = RandomUtil.randomFromCollection(cards);
-        if (card == null) {
-            return false;
-        }
-        game.informPlayers(this.getLogName() + " seeks a card from their library");
-        this.moveCards(card, Zone.HAND, source, game);
-        return true;
+        return SeekCardEffect.seekCard(this, filter, source, game) != null;
     }
 
     @Override

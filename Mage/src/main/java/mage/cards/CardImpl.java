@@ -145,12 +145,22 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public void assignNewId() {
-        this.objectId = UUID.randomUUID();
+        assignId(UUID.randomUUID());
+    }
+
+    /** Keeps a card's identity when an Alchemy specialization replaces its characteristics. */
+    public void assignId(UUID id) {
+        this.objectId = id;
         this.abilities.newOriginalId();
         this.abilities.setSourceId(objectId);
         if (this.spellAbility != null) {
             this.spellAbility.setSourceId(objectId);
         }
+    }
+
+    public void setBasePowerToughness(int power, int toughness) {
+        this.power = new MageInt(power);
+        this.toughness = new MageInt(toughness);
     }
 
     public static Card createCard(String name, CardSetInfo setInfo) {

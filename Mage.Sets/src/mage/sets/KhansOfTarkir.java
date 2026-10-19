@@ -24,6 +24,8 @@ public final class KhansOfTarkir extends ExpansionSet {
 
     private KhansOfTarkir() {
         super("Khans of Tarkir", "KTK", ExpansionSet.buildDate(2014, 9, 26), SetType.EXPANSION);
+        // https://magic.wizards.com/en/news/mtg-arena/khans-of-tarkir-card-image-gallery
+        this.arenaReleaseDate = ExpansionSet.buildDate(2023, 12, 12);
         this.blockName = "Khans of Tarkir";
         this.hasBoosters = true;
         this.hasBasicLands = true;

@@ -54,22 +54,23 @@ public class ConjureCardEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        CardInfo cardInfo = CardRepository
-                .instance
-                .findCards(new CardCriteria().name(cardName))
-                .stream()
-                .findFirst()
-                .orElse(null);
-        if (cardInfo == null) {
-            return false;
-        }
         Set<Card> cards = new HashSet<>();
         for (int i = 0; i < amount; i++) {
-            Card card = cardInfo.createCard();
+            Card card = createCard(cardName);
+            if (card == null) {
+                return false;
+            }
             cards.add(card);
         }
         game.loadCards(cards, source.getControllerId());
         return player.moveCards(cards, zone, source, game);
+    }
+
+    /** A duplicate is a fresh printed card; it does not inherit perpetual changes. */
+    public static Card createCard(String cardName) {
+        CardInfo info = CardRepository.instance.findCards(new CardCriteria().name(cardName))
+                .stream().findFirst().orElse(null);
+        return info == null ? null : info.createCard();
     }
 
     @Override
