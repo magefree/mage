@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public final class AlchemyDuskmourn extends ExpansionSet {
@@ -17,7 +18,7 @@ public final class AlchemyDuskmourn extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        // Chittering Illuminator (15)
+        cards.add(new SetCardInfo("Chittering Illuminator", 15, Rarity.RARE, mage.cards.c.ChitteringIlluminator.class));
 
         // Ethrimik, Imagined Fiend (1)
 
