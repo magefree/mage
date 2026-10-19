@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public final class AlchemyAetherdrift extends ExpansionSet {
@@ -17,7 +18,7 @@ public final class AlchemyAetherdrift extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        // Motivated Muralist (15)
+        cards.add(new SetCardInfo("Motivated Muralist", 15, Rarity.UNCOMMON, mage.cards.m.MotivatedMuralist.class));
 
         // Ornate Imitations (23)
 
