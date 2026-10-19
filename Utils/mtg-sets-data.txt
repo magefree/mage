@@ -7,7 +7,7 @@ Alchemy: Aetherdrift|YDFT|
 Alchemy: Dominaria|YDMU|
 Alchemy: Duskmourn|YDSK|
 Alchemy: Edge of Eternities|YEOE|
-Alchemy: Innistrad|Y22|
+Alchemy: Innistrad|YMID|
 Alchemy: Ixalan|YLCI|
 Alchemy: Lorwyn Eclipsed|YECL|
 Alchemy: Murders at Karlov Manor|YMKM|
