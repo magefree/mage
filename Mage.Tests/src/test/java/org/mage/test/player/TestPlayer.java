@@ -2423,6 +2423,7 @@ public class TestPlayer implements Player {
 
             // permanent in battlefield
             if ((target.getOriginalTarget() instanceof TargetPermanent)
+                    || (target.getOriginalTarget() instanceof TargetSpellOrPermanent)
                     || (target.getOriginalTarget() instanceof TargetPermanentOrPlayer)
                     || (target.getOriginalTarget() instanceof TargetPermanentOrSuspendedCard)) {
                 for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
@@ -2447,6 +2448,9 @@ public class TestPlayer implements Player {
                             }
                         }
                         Filter filter = target.getOriginalTarget().getFilter();
+                        if (filter instanceof FilterSpellOrPermanent) {
+                            filter = ((FilterSpellOrPermanent) filter).getPermanentFilter();
+                        }
                         if (filter instanceof FilterPermanentOrPlayer) {
                             filter = ((FilterPermanentOrPlayer) filter).getPermanentFilter();
                         }

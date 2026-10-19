@@ -105,6 +105,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, MageObjectAttribute> mageObjectAttribute = new HashMap<>();
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
     private Map<UUID, Card> copiedCards = new HashMap<>();
+    private Map<UUID, Card> perpetualCards = new HashMap<>();
+    private Map<UUID, Card> perpetualOriginalCards = new HashMap<>();
     // Card copies that remain in a nonstandard zone while a source permanent exists.
     // The normal state-based action removes all other card copies outside the stack/battlefield.
     private Map<UUID, UUID> persistentCardCopySources = new HashMap<>();
@@ -182,6 +184,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.mageObjectAttribute = CardUtil.deepCopyObject(state.mageObjectAttribute);
         this.zoneChangeCounter.putAll(state.zoneChangeCounter);
         this.copiedCards.putAll(state.copiedCards);
+        this.perpetualCards = CardUtil.deepCopyObject(state.perpetualCards);
+        this.perpetualOriginalCards = CardUtil.deepCopyObject(state.perpetualOriginalCards);
         this.persistentCardCopySources.putAll(state.persistentCardCopySources);
         this.permanentOrderNumber = state.permanentOrderNumber;
         this.applyEffectsCounter = state.applyEffectsCounter;
@@ -229,6 +233,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         zones.clear();
         simultaneousEvents.clear();
         copiedCards.clear();
+        perpetualCards.clear();
+        perpetualOriginalCards.clear();
         persistentCardCopySources.clear();
         usePowerInsteadOfToughnessForDamageLethalityFilters.clear();
         permanentOrderNumber = 0;
@@ -278,6 +284,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.mageObjectAttribute = state.mageObjectAttribute;
         this.zoneChangeCounter = state.zoneChangeCounter;
         this.copiedCards = state.copiedCards;
+        this.perpetualCards = state.perpetualCards;
+        this.perpetualOriginalCards = state.perpetualOriginalCards;
         this.persistentCardCopySources = state.persistentCardCopySources;
         this.permanentOrderNumber = state.permanentOrderNumber;
         this.applyEffectsCounter = state.applyEffectsCounter;
@@ -1530,6 +1538,28 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public Card getCopiedCard(UUID cardId) {
         return copiedCards.get(cardId);
+    }
+
+    public Card getPerpetualOriginalCard(UUID cardId) {
+        return perpetualOriginalCards.get(cardId);
+    }
+
+    public void setPerpetualOriginalCard(Card card) {
+        CardUtil.getObjectPartsAsObjects(card).stream().filter(Card.class::isInstance).map(Card.class::cast)
+                .forEach(part -> perpetualOriginalCards.put(part.getId(), part));
+    }
+
+    public Card getPerpetualCard(UUID cardId) {
+        return perpetualCards.get(cardId);
+    }
+
+    /** Stores a changed blueprint in the restorable state, without changing its zone or identity. */
+    public void setPerpetualCard(Card card) {
+        CardUtil.getObjectPartsAsObjects(card).stream().filter(Card.class::isInstance).map(Card.class::cast)
+                .forEach(part -> {
+                    perpetualCards.put(part.getId(), part);
+                    part.getInitAbilities().forEach(ability -> addAbility(ability, null, part));
+                });
     }
 
     public Collection<Card> getCopiedCards() {
