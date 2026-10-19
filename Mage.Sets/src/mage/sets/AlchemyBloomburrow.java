@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public final class AlchemyBloomburrow extends ExpansionSet {
@@ -19,6 +20,6 @@ public final class AlchemyBloomburrow extends ExpansionSet {
 
         // Chittering Skullspeaker (9)
 
-        // Fountainport Charmer (17)
+        cards.add(new SetCardInfo("Fountainport Charmer", 17, Rarity.UNCOMMON, mage.cards.f.FountainportCharmer.class));
     }
 }
