@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public final class AlchemyPhyrexia extends ExpansionSet {
@@ -21,6 +22,6 @@ public final class AlchemyPhyrexia extends ExpansionSet {
 
         // Innovative Metatect (24)
 
-        // Quicksilver Lapidary (26)
+        cards.add(new SetCardInfo("Quicksilver Lapidary", 26, Rarity.UNCOMMON, mage.cards.q.QuicksilverLapidary.class));
     }
 }
