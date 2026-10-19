@@ -1,0 +1,117 @@
+name: opencode-zai
+
+# Z.ai GLM-4.7-Flash lane for the mage fork (free tier, $0/input/output).
+# Single lane triggered by /oc-zai as first token.
+#
+# Purpose (Owner 2026-10-19): independent reviews and mechanical Java tasks
+# Muse cannot execute (policy: engine-bridge changes need Claude-thread
+# requalification - this lane does NOT bypass that). NOT for architecture
+# decisions. Always VARIANT: max.
+#
+# Trust gate: only OWNER/MEMBER/COLLABORATOR may trigger.
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+
+env:
+  ZAI_PROVIDER_CONFIG: >-
+    {"enabled_providers":["zai"],"provider":{"zai":{"npm":"@ai-sdk/openai-compatible","name":"Z.ai","options":{"baseURL":"https://api.z.ai/api/paas/v4"},"models":{"glm-4.7-flash":{"name":"GLM 4.7 Flash"}}}},"model":"zai/glm-4.7-flash","small_model":"zai/glm-4.7-flash","experimental":{"policies":[{"action":"provider.use","effect":"deny","resource":"*"},{"action":"provider.use","effect":"allow","resource":"zai"}]}}
+
+jobs:
+  oc-zai:
+    if: |
+      contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association) &&
+      contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.issue.author_association || github.event.pull_request.author_association) && (
+        github.event.comment.body == '/oc-zai' ||
+        startsWith(github.event.comment.body, '/oc-zai ') ||
+        startsWith(github.event.comment.body, format('/oc-zai{0}', fromJSON('"\n"'))) ||
+        startsWith(github.event.comment.body, format('/oc-zai{0}', fromJSON('"\r\n"')))
+      )
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: read
+      issues: read
+    env:
+      OPENCODE_CONFIG_CONTENT: ${{ env.ZAI_PROVIDER_CONFIG }}
+    steps:
+      - name: Refuse fork pull requests as agent targets
+        if: github.event.issue.pull_request || github.event.pull_request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.issue.number || github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          head_repo="$(gh api "repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}" --jq '.head.repo.full_name')"
+          if [ "$head_repo" != "$GITHUB_REPOSITORY" ]; then
+            echo "Refusing: PR head repository '${head_repo}' is not ${GITHUB_REPOSITORY}." >&2
+            exit 1
+          fi
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install pinned OpenCode CLI v1.18.30
+        env:
+          VERSION: 1.18.30
+          OPENCODE_X64_SHA256: 55007246858165496ff85ba1c2b648f7421e8e2013bf4189a680c9ff8e699d17
+          OPENCODE_ARM64_SHA256: 4111a55c2a02c0fac314bd51e9a2330280e6d29d2b85b9554fff6d62612566ed
+        run: |
+          set -euo pipefail
+          ARCH="$(uname -m)"
+          case "${ARCH}" in
+            x86_64) ASSET="opencode-linux-x64.tar.gz"; SHA="${OPENCODE_X64_SHA256}" ;;
+            aarch64|arm64) ASSET="opencode-linux-arm64.tar.gz"; SHA="${OPENCODE_ARM64_SHA256}" ;;
+            *) echo "unsupported arch ${ARCH} (fail closed)"; exit 1 ;;
+          esac
+          URL="https://github.com/sst/opencode/releases/download/v${VERSION}/${ASSET}"
+          curl -fsSL -o "/tmp/${ASSET}" "${URL}"
+          echo "${SHA}  /tmp/${ASSET}" | sha256sum -c -
+          mkdir -p "$HOME/.opencode/bin"
+          tar -xzf "/tmp/${ASSET}" -C "$HOME/.opencode/bin"
+          rm -f "/tmp/${ASSET}"
+          echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
+
+      - name: Assert OpenCode CLI is exactly v1.18.30
+        run: |
+          set -euo pipefail
+          BIN="$HOME/.opencode/bin/opencode"
+          test -x "$BIN"
+          RESOLVED="$(command -v opencode)"
+          test "${RESOLVED}" = "${BIN}"
+          test "$("${BIN}" --version)" = "1.18.30"
+          test "$(opencode --version)" = "1.18.30"
+
+      - name: Preflight Z.ai provider
+        run: |
+          set -euo pipefail
+          opencode debug config > "$RUNNER_TEMP/zai-config.json"
+          python3 - <<'PYTHON'
+          import json, os
+          cfg = json.load(open(os.path.join(os.environ["RUNNER_TEMP"], "zai-config.json")))
+          model = cfg.get("model", "")
+          print(f"resolved model: {model}")
+          assert model == "zai/glm-4.7-flash", f"unexpected model: {model}"
+          print("preflight OK")
+          PYTHON
+        env:
+          ZAI_API_KEY: ${{ secrets.ZAI_API_KEY }}
+
+      - name: Run opencode (Z.ai)
+        timeout-minutes: 55
+        run: opencode github run
+        env:
+          ZAI_API_KEY: ${{ secrets.ZAI_API_KEY }}
+          MODEL: zai/glm-4.7-flash
+          AGENT: ''
+          SHARE: 'false'
+          PROMPT: ''
+          USE_GITHUB_TOKEN: 'false'
+          MENTIONS: '/oc-zai'
+          VARIANT: max
+          OIDC_BASE_URL: ''
