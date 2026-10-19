@@ -28,7 +28,7 @@ public final class AlchemyKamigawa extends ExpansionSet {
         cards.add(new SetCardInfo("Experimental Pilot", 6, Rarity.UNCOMMON, mage.cards.e.ExperimentalPilot.class));
         cards.add(new SetCardInfo("Jukai Liberator", 27, Rarity.RARE, mage.cards.j.JukaiLiberator.class));
         cards.add(new SetCardInfo("Kami of Bamboo Groves", 24, Rarity.UNCOMMON, mage.cards.k.KamiOfBambooGroves.class));
-        // Saiba Syphoner (11)
+        cards.add(new SetCardInfo("Saiba Syphoner", 11, Rarity.MYTHIC, mage.cards.s.SaibaSyphoner.class));
 
         cards.add(new SetCardInfo("Swarm Saboteur", 13, Rarity.RARE, mage.cards.s.SwarmSaboteur.class));
 
