@@ -29,7 +29,7 @@ public final class AlchemyMurdersAtKarlovManor extends ExpansionSet {
 
         // Roalesk, Prime Specimen (26)
 
-        // Tajic, Legion's Valor (28)
+        cards.add(new SetCardInfo("Tajic, Legion's Valor", 28, Rarity.MYTHIC, mage.cards.t.TajicLegionsValor.class));
 
     }
 }
