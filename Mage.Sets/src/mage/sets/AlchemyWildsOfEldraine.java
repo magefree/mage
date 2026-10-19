@@ -22,7 +22,7 @@ public final class AlchemyWildsOfEldraine extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Brawler's Plate", 31, Rarity.UNCOMMON, mage.cards.b.BrawlersPlate.class));
-        // Dedicated Dollmaker (2)
+        cards.add(new SetCardInfo("Dedicated Dollmaker", 2, Rarity.RARE, mage.cards.d.DedicatedDollmaker.class));
 
         cards.add(new SetCardInfo("First Little Pig", 18, Rarity.UNCOMMON, mage.cards.f.FirstLittlePig.class));
         cards.add(new SetCardInfo("Overcooked", 11, Rarity.MYTHIC, mage.cards.o.Overcooked.class));
