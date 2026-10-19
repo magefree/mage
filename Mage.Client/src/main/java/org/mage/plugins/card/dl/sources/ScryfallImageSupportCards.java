@@ -601,6 +601,7 @@ public class ScryfallImageSupportCards {
             add("PF25"); // MagicFest 2025
             add("PL25"); // Year of the Snake 2025
             add("DFT"); // Aetherdrift
+            add("YDFT"); // Alchemy: Aetherdrift
             add("DRC"); // Aetherdrift Commander
             add("PLG25"); // Love Your LGS 2025
             add("TDM"); // Tarkir: Dragonstorm
@@ -637,6 +638,7 @@ public class ScryfallImageSupportCards {
             add("MBC"); // Mystery Booster Commander Edition
             add("SLZ"); // The Zeta Set
             add("FRA"); // Reality Fracture
+            add("YFRA"); // Alchemy: Reality Fracture
             add("FRC"); // Reality Fracture Commander
             add("TRK"); // Star Trek
             add("TRC"); // Star Trek Commander

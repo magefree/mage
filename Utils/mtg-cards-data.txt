@@ -143,6 +143,9 @@ Trace of Abundance|Alara Reborn|142|C|{RW}{G}|Enchantment - Aura|||Enchant land$
 Bant Sureblade|Alara Reborn|143|C|{GU}{W}|Creature - Human Soldier|2|1|As long as you control another multicolored permanent, Bant Sureblade gets +1/+1 and has first strike.|
 Crystallization|Alara Reborn|144|C|{GU}{W}|Enchantment - Aura|||Enchant creature$Enchanted creature can't attack or block.$When enchanted creature becomes the target of a spell or ability, exile that creature.|
 Messenger Falcons|Alara Reborn|145|U|{2}{GU}{W}|Creature - Bird|2|2|Flying$When Messenger Falcons enters the battlefield, draw a card.|
+Trackhand Trainer|Alchemy: Aetherdrift|6|R|{U}|Creature - Merfolk|1|2|{3}{U}{U}: Draw a card.$Exhaust -- {U}: Conjure a card named Training Grounds onto the battlefield.|
+Motivated Muralist|Alchemy: Aetherdrift|15|U|{1}{R}|Creature - Dwarf Bard|2|1|Improvise$When this creature enters, conjure a card named Inspiring Statuary into your hand.|
+Selfless Germinator|Alchemy: Reality Fracture|17|U|{G}|Creature - Treefolk Druid|2|1|Exhaust -- {1}: Conjure a card named Seed of Hope into your hand.|
 Balduvian Dead|Alliances|1|U|{3}{B}|Creature - Zombie|2|3|{2}{R}, Exile a creature card from your graveyard: Put a 3/1 black and red Graveborn creature token with haste onto the battlefield. Sacrifice it at the beginning of the next end step.|
 Fevered Strength|Alliances|10|C|{2}{B}|Instant|||Target creature gets +2/+0 until end of turn.$$Draw a card at the beginning of the next turn's upkeep.|
 Burnout|Alliances|101|U|{1}{R}|Instant|||Counter target instant spell if it's blue.$Draw a card at the beginning of the next turn's upkeep.|

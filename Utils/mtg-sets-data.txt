@@ -3,9 +3,11 @@ Aether Revolt|AER|
 Aetherdrift Commander|DRC|
 Aetherdrift|DFT|
 Alara Reborn|ARB|
+Alchemy: Aetherdrift|YDFT|
 Alchemy: Dominaria|YDMU|
 Alchemy: Innistrad|Y22|
 Alchemy: Murders at Karlov Manor|YMKM|
+Alchemy: Reality Fracture|YFRA|
 Alchemy: Secrets of Strixhaven|YSOS|
 Alchemy: Wilds of Eldraine|YWOE|
 Alliances|ALL|
