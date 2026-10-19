@@ -513,6 +513,7 @@ public class ScryfallImageSupportCards {
             add("PW22"); // Wizards Play Network 2022
             add("GDY"); // Game Day Promos
             add("SNC"); // Streets of New Capenna
+            add("YSNC"); // Alchemy: New Capenna
             add("NCC"); // New Capenna Commander
             add("SLX"); // Universes Within
             add("CLB"); // Commander Legends: Battle for Baldur's Gate
