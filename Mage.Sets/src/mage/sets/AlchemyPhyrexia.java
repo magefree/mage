@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public final class AlchemyPhyrexia extends ExpansionSet {
@@ -19,7 +20,7 @@ public final class AlchemyPhyrexia extends ExpansionSet {
 
         // Ghalma the Shaper (1)
 
-        // Innovative Metatect (24)
+        cards.add(new SetCardInfo("Innovative Metatect", 24, Rarity.RARE, mage.cards.i.InnovativeMetatect.class));
 
         // Quicksilver Lapidary (26)
     }
