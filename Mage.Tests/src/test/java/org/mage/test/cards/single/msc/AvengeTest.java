@@ -10,12 +10,8 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class AvengeTest extends CardTestPlayerBase {
 
-    /**
-     * Avenge {4}{W}{W}
-     * Sorcery
-     * This spell costs {2} less to cast if a player attacked you during their last turn.
-     * Destroy all creatures. You gain 1 life for each creature destroyed this way.
-     */
+    // This spell costs {2} less to cast if a player attacked you during their last turn.
+    // Destroy all creatures. You gain 1 life for each creature destroyed this way.
     private static final String avenge = "Avenge";
 
     private static final String lion = "Silvercoat Lion";

@@ -70,9 +70,6 @@ enum AvengeCondition implements Condition {
     }
 }
 
-/**
- * Remembers the players each player attacked during their last turn.
- */
 class AvengeWatcher extends Watcher {
 
     private final Map<UUID, Set<UUID>> attackedPlayers = new HashMap<>();
