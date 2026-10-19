@@ -28,23 +28,22 @@ import mage.util.CardUtil;
 import java.util.UUID;
 
 /**
- * @author padfoothelix 
+ * @author padfoothelix
  */
 public final class RiverSongsDiary extends CardImpl {
 
     public RiverSongsDiary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        
 
         // Imprint -- Whenever a player casts an instant or sorcery spell from their hand, exile it instead of putting it into a graveyard as it resolves.
-	this.addAbility(new RiverSongsDiaryImprintAbility().setAbilityWord(AbilityWord.IMPRINT));
+        this.addAbility(new RiverSongsDiaryImprintAbility().setAbilityWord(AbilityWord.IMPRINT));
 
-	// At the beginning of your upkeep, if there are four or more cards exiled with River Song's Diary, choose one of them at random. You may cast it without paying its mana cost.
-	this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new RiverSongsDiaryCastEffect()
-                        .setText("choose one of them at random. You may cast it without paying its mana cost.")
-                ).withInterveningIf(RiverSongsDiaryCondition.instance)
-                .addHint(RiverSongsDiaryExiledSpellsCount.getHint())
+        // At the beginning of your upkeep, if there are four or more cards exiled with River Song's Diary, choose one of them at random. You may cast it without paying its mana cost.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+            new RiverSongsDiaryCastEffect()
+                    .setText("choose one of them at random. You may cast it without paying its mana cost.")
+            ).withInterveningIf(RiverSongsDiaryCondition.instance)
+            .addHint(RiverSongsDiaryExiledSpellsCount.getHint())
         );
     }
 
@@ -64,7 +63,6 @@ enum RiverSongsDiaryCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         return RiverSongsDiaryExiledSpellsCount.instance.calculate(game, source, null) > 3;
-
     }
 
     @Override
@@ -81,8 +79,8 @@ enum RiverSongsDiaryExiledSpellsCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(
-	        game, sourceAbility.getSourceId(), 
-                game.getState().getZoneChangeCounter(sourceAbility.getSourceId())
+	        game, sourceAbility.getSourceId(),
+            game.getState().getZoneChangeCounter(sourceAbility.getSourceId())
         ));
         if (exileZone != null) {
             return exileZone.size();
@@ -105,14 +103,12 @@ enum RiverSongsDiaryExiledSpellsCount implements DynamicValue {
     }
 }
 
-
-
 class RiverSongsDiaryImprintAbility extends TriggeredAbilityImpl {
-    	
+
     public RiverSongsDiaryImprintAbility() {
         super(Zone.BATTLEFIELD, null, false);
         setTriggerPhrase("Whenever a player casts an instant or sorcery spell from their hand" +
-                ", exile it instead of putting it into a graveyard as it resolves.");
+            ", exile it instead of putting it into a graveyard as it resolves.");
     }
 
     private RiverSongsDiaryImprintAbility(final RiverSongsDiaryImprintAbility ability) {
@@ -171,10 +167,10 @@ class RiverSongsDiaryExileEffect extends ReplacementEffectImpl {
         }
         player.moveCardsToExile(
 	        sourceSpell, source, game, false,
-		CardUtil.getExileZoneId(game, source),
-		CardUtil.getSourceName(game, source)
-	); 
-	return true;
+		    CardUtil.getExileZoneId(game, source),
+		    CardUtil.getSourceName(game, source)
+	    );
+	    return true;
     }
 
     @Override
@@ -186,9 +182,9 @@ class RiverSongsDiaryExileEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
 	ZoneChangeEvent zEvent = ((ZoneChangeEvent) event);
         return Zone.STACK.equals(zEvent.getFromZone())
-                && Zone.GRAVEYARD.equals(zEvent.getToZone())
-                && morSpell.refersTo(event.getSourceId(), game) // this is how we check that the spell resolved properly (and was not countered or the like)
-                && morCard.refersTo(event.getTargetId(), game); // this is how we check that the card being moved is the one we want.
+            && Zone.GRAVEYARD.equals(zEvent.getToZone())
+            && morSpell.refersTo(event.getSourceId(), game) // this is how we check that the spell resolved properly (and was not countered or the like)
+            && morCard.refersTo(event.getTargetId(), game); // this is how we check that the card being moved is the one we want.
     }
 
     @Override
@@ -228,4 +224,3 @@ class RiverSongsDiaryCastEffect extends OneShotEffect {
         return true;
     }
 }
-
