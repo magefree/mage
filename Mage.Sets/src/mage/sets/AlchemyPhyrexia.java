@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public final class AlchemyPhyrexia extends ExpansionSet {
@@ -17,7 +18,7 @@ public final class AlchemyPhyrexia extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        // Ghalma the Shaper (1)
+        cards.add(new SetCardInfo("Ghalma the Shaper", 1, Rarity.MYTHIC, mage.cards.g.GhalmaTheShaper.class));
 
         // Innovative Metatect (24)
 
