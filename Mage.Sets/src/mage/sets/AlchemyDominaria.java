@@ -23,6 +23,7 @@ public final class AlchemyDominaria extends ExpansionSet {
 
         cards.add(new SetCardInfo("Ancestral Recall", 32, Rarity.MYTHIC, mage.cards.a.AncestralRecall.class));
         cards.add(new SetCardInfo("Black Lotus", 35, Rarity.MYTHIC, mage.cards.b.BlackLotus.class));
+        cards.add(new SetCardInfo("Juggernaut Peddler", 23, Rarity.RARE, mage.cards.j.JuggernautPeddler.class));
         cards.add(new SetCardInfo("Marwyn's Kindred", 16, Rarity.MYTHIC, mage.cards.m.MarwynsKindred.class));
         cards.add(new SetCardInfo("Mox Emerald", 36, Rarity.MYTHIC, mage.cards.m.MoxEmerald.class));
         cards.add(new SetCardInfo("Mox Jet", 37, Rarity.MYTHIC, mage.cards.m.MoxJet.class));
