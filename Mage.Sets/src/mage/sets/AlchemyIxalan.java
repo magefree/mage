@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public final class AlchemyIxalan extends ExpansionSet {
@@ -19,6 +20,6 @@ public final class AlchemyIxalan extends ExpansionSet {
 
         // Landlore Navigator (7)
 
-        // Wingbane Vantasaur (22)
+        cards.add(new SetCardInfo("Wingbane Vantasaur", 22, Rarity.UNCOMMON, mage.cards.w.WingbaneVantasaur.class));
     }
 }
