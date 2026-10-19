@@ -6,6 +6,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 
 /**
  * @author TheElk801
@@ -33,7 +34,9 @@ public class CantBeCopiedSourceEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getTargetId().equals(source.getSourceId());
+        // the event targets the spell on the stack, which has its own id
+        Spell spell = game.getSpell(event.getTargetId());
+        return spell != null && spell.getSourceId().equals(source.getSourceId());
     }
 
     @Override
