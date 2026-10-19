@@ -21,7 +21,7 @@ public final class AlchemyKamigawa extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        // Artillery Enthusiast (18)
+        cards.add(new SetCardInfo("Artillery Enthusiast", 18, Rarity.UNCOMMON, mage.cards.a.ArtilleryEnthusiast.class));
 
         cards.add(new SetCardInfo("Boseiju Pathlighter", 26, Rarity.RARE, mage.cards.b.BoseijuPathlighter.class));
         cards.add(new SetCardInfo("Dragonfly Pilot", 1, Rarity.UNCOMMON, mage.cards.d.DragonflyPilot.class));
