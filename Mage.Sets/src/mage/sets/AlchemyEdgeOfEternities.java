@@ -1,0 +1,22 @@
+package mage.sets;
+
+import mage.cards.ExpansionSet;
+import mage.constants.SetType;
+
+public final class AlchemyEdgeOfEternities extends ExpansionSet {
+
+    private static final AlchemyEdgeOfEternities instance = new AlchemyEdgeOfEternities();
+
+    public static AlchemyEdgeOfEternities getInstance() {
+        return instance;
+    }
+
+    private AlchemyEdgeOfEternities() {
+        super("Alchemy: Edge of Eternities", "YEOE", ExpansionSet.buildDate(2025, 8, 19), SetType.MAGIC_ARENA);
+        this.blockName = "Alchemy";
+        this.hasBoosters = false;
+        this.hasBasicLands = false;
+
+        // Cosmic Sovereign (14)
+    }
+}

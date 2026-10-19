@@ -17,10 +17,10 @@ public final class AlchemyAetherdrift extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        // Uncommons
+        // Motivated Muralist (15)
 
-        // Rares
+        // Ornate Imitations (23)
 
-        // Mythics
+        // Trackhand Trainer (6)
     }
 }

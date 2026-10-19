@@ -538,6 +538,7 @@ public class ScryfallImageSupportCards {
             add("SLC"); // Secret Lair Countdown
             add("DMR"); // Dominaria Remastered
             add("ONE"); // Phyrexia: All Will Be One
+            add("YONE"); // Alchemy: Phyrexia
             add("ONC"); // Phyrexia: All Will Be One Commander
             add("PL23"); // Year of the Rabbit 2023
             add("UNK"); // Unknown Event
@@ -563,6 +564,7 @@ public class ScryfallImageSupportCards {
             add("WOC"); // Wilds of Eldraine Commander
             add("YWOE"); // Alchemy: Wilds of Eldraine
             add("LCI"); // The Lost Caverns of Ixalan
+            add("YLCI"); // Alchemy: Ixalan
             add("LCC"); // The The Lost Caverns of Ixalan Commander
             add("REX"); // Jurassic World Collection
             add("SPG"); // Special Guests
@@ -591,6 +593,7 @@ public class ScryfallImageSupportCards {
             add("MB2"); // Mystery Booster 2
             add("DSK"); // Duskmourn: House of Horror
             add("DSC"); // Duskmourn: House of Horror Commander
+            add("YDSK"); // Alchemy: Duskmourn
             add("FDN"); // Foundations
             add("FDC"); // Foundations Commander
             add("J25"); // Foundations Jumpstart
@@ -605,12 +608,14 @@ public class ScryfallImageSupportCards {
             add("DRC"); // Aetherdrift Commander
             add("PLG25"); // Love Your LGS 2025
             add("TDM"); // Tarkir: Dragonstorm
+            add("YTDM"); // Alchemy: Tarkir
             add("TDC"); // Tarkir: Dragonstorm Commander
             add("FIN"); // Final Fantasy
             add("FIC"); // Final Fantasy Commander
             add("FCA"); // Final Fantasy: Through the Ages
             add("PSS5"); // FIN Standard Showdown
             add("EOE"); // Edge of Eternities
+            add("YEOE"); // Alchemy: Edge of Eternities
             add("EOC"); // Edge of Eternities Commander
             add("EOS"); // Edge of Eternities: Stellar Sights
             add("SPM"); // Marvel's Spider-Man
@@ -622,6 +627,7 @@ public class ScryfallImageSupportCards {
             add("PF26"); // MagicFest 2026
             add("PW26"); // Wizards Play Network 2026
             add("ECL"); // Lorwyn Eclipsed
+            add("YECL"); // Alchemy: Lorwyn Eclipsed
             add("ECC"); // Lorwyn Eclipsed Commander
             add("PL26"); // Year of the Horse 2026
             add("TMT"); // Teenage Mutant Ninja Turtles

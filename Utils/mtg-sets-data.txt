@@ -5,10 +5,16 @@ Aetherdrift|DFT|
 Alara Reborn|ARB|
 Alchemy: Aetherdrift|YDFT|
 Alchemy: Dominaria|YDMU|
+Alchemy: Duskmourn|YDSK|
+Alchemy: Edge of Eternities|YEOE|
 Alchemy: Innistrad|Y22|
+Alchemy: Ixalan|YLCI|
+Alchemy: Lorwyn Eclipsed|YECL|
 Alchemy: Murders at Karlov Manor|YMKM|
+Alchemy: Phyrexia|YONE|
 Alchemy: Reality Fracture|YFRA|
 Alchemy: Secrets of Strixhaven|YSOS|
+Alchemy: Tarkir|YTDM|
 Alchemy: Wilds of Eldraine|YWOE|
 Alliances|ALL|
 Amonkhet|AKH|

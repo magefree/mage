@@ -17,10 +17,12 @@ public final class AlchemyRealityFracture extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        // Uncommons
+        // Asymmetry Sage (4)
 
-        // Rares
+        // Avoided Stairwurm (10)
 
-        // Mythics
+        // Diabolic Formula (21)
+
+        // Selfless Germinator (17)
     }
 }
