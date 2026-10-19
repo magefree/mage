@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public final class AlchemyLorwynEclipsed extends ExpansionSet {
@@ -17,6 +18,6 @@ public final class AlchemyLorwynEclipsed extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        // Gilt-Leaf Alchemist (14)
+        cards.add(new SetCardInfo("Gilt-Leaf Alchemist", 14, Rarity.RARE, mage.cards.g.GiltLeafAlchemist.class));
     }
 }
