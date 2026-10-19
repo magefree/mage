@@ -116,7 +116,6 @@ class GalactusDevourerOfWorldsEffect extends RequirementEffect {
 
     @Override
     public Set<UUID> mustAttackDefenders(Ability source, Game game) {
-        // tied opponents all have the most life, attacking any of them obeys the requirement
         List<Player> opponents = game
                 .getOpponents(source.getControllerId(), true)
                 .stream()

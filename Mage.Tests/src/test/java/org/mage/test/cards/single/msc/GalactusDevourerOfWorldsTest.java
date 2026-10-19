@@ -18,19 +18,12 @@ import java.io.FileNotFoundException;
  */
 public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
 
-    /**
-     * Galactus, Devourer of Worlds {10}
-     * Legendary Creature - Elder Alien 12/12
-     * Flying, trample, indestructible
-     * When Galactus enters, exile target permanent.
-     * Insatiable Hunger -- Galactus attacks an opponent with the most life among your opponents each combat if able
-     * unless you control a creature named Silver Surfer, Galactus's Herald.
-     */
+    // 12/12 flying, trample, indestructible
+    // When Galactus enters, exile target permanent.
+    // Insatiable Hunger -- Galactus attacks an opponent with the most life among your opponents each combat if able
+    // unless you control a creature named Silver Surfer, Galactus's Herald.
     private static final String galactus = "Galactus, Devourer of Worlds";
-
-    /**
-     * Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you.
-     */
+    // Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you.
     private static final String propaganda = "Propaganda";
 
     @Override
