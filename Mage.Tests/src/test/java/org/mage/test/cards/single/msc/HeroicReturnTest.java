@@ -11,13 +11,9 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class HeroicReturnTest extends CardTestPlayerBase {
 
-    /**
-     * Heroic Return {5}{W}
-     * Instant
-     * This spell costs {2} less to cast if a creature is attacking you.
-     * Return target creature card from your graveyard to the battlefield.
-     * If a Hero enters this way, it enters with two additional +1/+1 counters on it.
-     */
+    // This spell costs {2} less to cast if a creature is attacking you.
+    // Return target creature card from your graveyard to the battlefield.
+    // If a Hero enters this way, it enters with two additional +1/+1 counters on it.
     private static final String heroicReturn = "Heroic Return";
 
     private static final String hero = "Agent of Atlas"; // 2/2 Human Spy Hero
