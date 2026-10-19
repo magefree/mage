@@ -337,6 +337,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Inspired Fire", 690, Rarity.COMMON, mage.cards.i.InspiredFire.class));
         cards.add(new SetCardInfo("Into the Time Vortex", 165, Rarity.RARE, mage.cards.i.IntoTheTimeVortex.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Into the Time Vortex", 363, Rarity.RARE, mage.cards.i.IntoTheTimeVortex.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Intrepid Ace", 691, Rarity.UNCOMMON, mage.cards.i.IntrepidAce.class));
         cards.add(new SetCardInfo("Invisible Force Field", 19, Rarity.RARE, mage.cards.i.InvisibleForceField.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Invisible Force Field", 311, Rarity.RARE, mage.cards.i.InvisibleForceField.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Invisible Woman", 1, Rarity.MYTHIC, mage.cards.i.InvisibleWoman.class, NON_FULL_USE_VARIOUS));
