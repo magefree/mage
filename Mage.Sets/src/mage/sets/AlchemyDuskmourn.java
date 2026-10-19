@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public final class AlchemyDuskmourn extends ExpansionSet {
@@ -19,7 +20,7 @@ public final class AlchemyDuskmourn extends ExpansionSet {
 
         // Chittering Illuminator (15)
 
-        // Ethrimik, Imagined Fiend (1)
+        cards.add(new SetCardInfo("Ethrimik, Imagined Fiend", 1, Rarity.MYTHIC, mage.cards.e.EthrimikImaginedFiend.class));
 
         // Fear of Change (21)
     }
