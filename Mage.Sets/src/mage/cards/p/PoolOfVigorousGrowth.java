@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import java.util.List;
 import java.util.UUID;
 
 import mage.abilities.Ability;
@@ -12,18 +11,12 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.ExpansionSet;
-import mage.cards.Sets;
-import mage.cards.repository.CardCriteria;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
-import mage.game.permanent.token.custom.CreatureToken;
 import mage.util.CardUtil;
-import mage.util.RandomUtil;
+import mage.util.RandomCardUtil;
 import mage.util.functions.CopyTokenFunction;
 
 /**
@@ -71,34 +64,12 @@ class PoolOfVigorousGrowthEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int value = CardUtil.getSourceCostsTag(game, source, "X", 0);
-        if (game.isSimulation()) {
-            // Use a dummy token during AI simulation to avoid repeated DB lookups causing instability
-            Token token = new CreatureToken(value, value + 1);
-            token.putOntoBattlefield(1, game, source, source.getControllerId(), false, false);
-            return true;
-        }
-        CardCriteria criteria = new CardCriteria().types(CardType.CREATURE).manaValue(value);
-        List<CardInfo> options = CardRepository.instance.findCards(criteria);
-        if (options == null || options.isEmpty()) {
+        Card card = RandomCardUtil.createRandomCreature(value);
+        if (card == null) {
             game.informPlayers("No random creature card with mana value of " + value + " was found.");
             return false;
         }
-        Token token = null;
-        while (!options.isEmpty()) {
-            int index = RandomUtil.nextInt(options.size());
-            ExpansionSet expansionSet = Sets.findSet(options.get(index).getSetCode());
-            if (expansionSet == null || !expansionSet.getSetType().isEternalLegal()) {
-                options.remove(index);
-            } else {
-                Card card = options.get(index).createCard();
-                if (card != null) {
-                    token = CopyTokenFunction.createTokenCopy(card, game);
-                    break;
-                } else {
-                    options.remove(index);
-                }
-            }
-        }
+        Token token = CopyTokenFunction.createTokenCopy(card, game);
         if (token != null) {
             token.putOntoBattlefield(1, game, source, source.getControllerId(), false, false);
             return true;

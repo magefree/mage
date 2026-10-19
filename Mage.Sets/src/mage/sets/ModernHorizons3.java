@@ -28,6 +28,8 @@ public final class ModernHorizons3 extends ExpansionSet {
 
     private ModernHorizons3() {
         super("Modern Horizons 3", "MH3", ExpansionSet.buildDate(2024, 6, 7), SetType.SUPPLEMENTAL_MODERN_LEGAL);
+        // https://magic.wizards.com/en/news/announcements/a-first-look-at-modern-horizons-3
+        this.arenaReleaseDate = ExpansionSet.buildDate(2024, 6, 11);
         this.blockName = "Modern Horizons 3";
         this.hasBasicLands = true;
         this.hasBoosters = true;

@@ -17,6 +17,8 @@ public final class MarvelsSpiderMan extends ExpansionSet {
 
     private MarvelsSpiderMan() {
         super("Marvel's Spider-Man", "SPM", ExpansionSet.buildDate(2025, 9, 26), SetType.EXPANSION);
+        // https://magic.wizards.com/en/news/mtg-arena/marvel-super-heroes
+        this.arenaReleaseDate = ExpansionSet.buildDate(2026, 6, 16);
         this.blockName = "Marvel's Spider-Man"; // for sorting in GUI
         this.hasBasicLands = true;
 
