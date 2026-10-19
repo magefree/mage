@@ -17,6 +17,8 @@ public final class AlchemyIxalan extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
+        // Landlore Navigator (7)
+
         // Wingbane Vantasaur (22)
     }
 }

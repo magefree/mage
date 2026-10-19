@@ -28,5 +28,8 @@ public final class AlchemyMurdersAtKarlovManor extends ExpansionSet {
         // Excogitator Sphinx (6)
 
         // Roalesk, Prime Specimen (26)
+
+        // Tajic, Legion's Valor (28)
+
     }
 }

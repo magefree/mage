@@ -516,6 +516,7 @@ public class ScryfallImageSupportCards {
             add("NCC"); // New Capenna Commander
             add("SLX"); // Universes Within
             add("CLB"); // Commander Legends: Battle for Baldur's Gate
+            add("HBG"); // Alchemy Horizons: Baldur's Gate
             add("PLG22"); // Love Your LGS 2022
             add("2X2"); // Double Masters 2022
             add("SCH"); // Store Championships
@@ -528,6 +529,7 @@ public class ScryfallImageSupportCards {
             add("UNF"); // Unfinity
             add("GN3"); // Game Night: Free-for-All
             add("BRO"); // The Brothers' War
+            add("YBRO"); // Alchemy: The Brothers' War
             add("BRC"); // The Brothers' War Commander
             add("BRR"); // The Brothers' War Retro Artifacts
             add("BOT"); // Transformers
@@ -579,6 +581,7 @@ public class ScryfallImageSupportCards {
             add("YMKM"); // Alchemy: Murders at Karlov Manor
             add("CLU"); // Ravnica: Clue Edition
             add("OTJ"); // Outlaws of Thunder Junction
+            add("YOTJ"); // Alchemy: Outlaws of Thunder Junction
             add("OTC"); // Outlaws of Thunder Junction Commander
             add("OTP"); // Breaking News
             add("BIG"); // The Big Score
@@ -587,6 +590,7 @@ public class ScryfallImageSupportCards {
             add("H2R"); // Modern Horizons 2 Timeshifts
             add("ACR"); // Assassin's Creed
             add("BLB"); // Bloomburrow
+            add("YBLB"); // Alchemy: Bloomburrow
             add("BLC"); // Bloomburrow Commander
             add("PLG24"); // Love Your LGS 2024
             add("PCBB"); // Cowboy Bebop

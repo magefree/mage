@@ -3,18 +3,23 @@ Aether Revolt|AER|
 Aetherdrift Commander|DRC|
 Aetherdrift|DFT|
 Alara Reborn|ARB|
+Alchemy Horizons: Baldur's Gate|HBG|
 Alchemy: Aetherdrift|YDFT|
+Alchemy: Bloomburrow|YBLB|
 Alchemy: Dominaria|YDMU|
 Alchemy: Duskmourn|YDSK|
 Alchemy: Edge of Eternities|YEOE|
 Alchemy: Innistrad|YMID|
 Alchemy: Ixalan|YLCI|
+Alchemy: Kamigawa|YNEO|
 Alchemy: Lorwyn Eclipsed|YECL|
 Alchemy: Murders at Karlov Manor|YMKM|
+Alchemy: Outlaws of Thunder Junction|YOTJ|
 Alchemy: Phyrexia|YONE|
 Alchemy: Reality Fracture|YFRA|
 Alchemy: Secrets of Strixhaven|YSOS|
 Alchemy: Tarkir|YTDM|
+Alchemy: The Brothers' War|YBRO|
 Alchemy: Wilds of Eldraine|YWOE|
 Alliances|ALL|
 Amonkhet|AKH|

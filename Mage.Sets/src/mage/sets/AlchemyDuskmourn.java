@@ -17,6 +17,8 @@ public final class AlchemyDuskmourn extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
+        // Chittering Illuminator (15)
+
         // Ethrimik, Imagined Fiend (1)
 
         // Fear of Change (21)

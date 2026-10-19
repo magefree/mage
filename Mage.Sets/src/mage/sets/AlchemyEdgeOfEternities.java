@@ -18,5 +18,10 @@ public final class AlchemyEdgeOfEternities extends ExpansionSet {
         this.hasBasicLands = false;
 
         // Cosmic Sovereign (14)
+
+        // Hydroponics Architect (6)
+
+        // Val, Marooned Surveyor (26)
+
     }
 }

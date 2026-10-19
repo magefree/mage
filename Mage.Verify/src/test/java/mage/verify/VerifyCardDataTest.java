@@ -1010,6 +1010,8 @@ public class VerifyCardDataTest {
         ignoreBoosterSets.add("Unhinged");
         ignoreBoosterSets.add("Unstable");
         ignoreBoosterSets.add("Unfinity");
+        // Partial digital set; draft needs the remaining rebalanced Baldur's Gate cards.
+        ignoreBoosterSets.add("Alchemy Horizons: Baldur's Gate");
         // spellbook boosters, not for draft
         ignoreBoosterSets.add("Signature Spellbook: Jace");
         ignoreBoosterSets.add("Signature Spellbook: Gideon");
