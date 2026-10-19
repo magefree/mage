@@ -248,4 +248,27 @@ public class CommanderDeckValidationTest extends MageTestPlayerBase {
 
         deckTester.validate("Lutri can't be your companion in commander");
     }
+
+    @Test
+    public void testGrizzlegomAnyLands() {
+        // Rulebreaker -- A deck with this commander can have any land cards.
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Island", 50);
+        deckTester.addMaindeck("Plains", 49);
+
+        deckTester.addSideboard("Grizzlegom, Hurloon Hero", 1);
+
+        deckTester.validate("Grizzlegom allows land cards of any color identity");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testGrizzlegomMaximumDeckSize() {
+        // Grizzlegom's Rulebreaker doesn't remove the maximum deck size
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Forest", 100);
+
+        deckTester.addSideboard("Grizzlegom, Hurloon Hero", 1);
+
+        deckTester.validate("Deck must contain 100 cards");
+    }
 }
