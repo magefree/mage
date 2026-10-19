@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public final class AlchemyOutlawsOfThunderJunction extends ExpansionSet {
@@ -19,7 +20,7 @@ public final class AlchemyOutlawsOfThunderJunction extends ExpansionSet {
 
         // Impetuous Lootmonger (12)
 
-        // Jet Collector (18)
+        cards.add(new SetCardInfo("Jet Collector", 18, Rarity.RARE, mage.cards.j.JetCollector.class));
 
         // Saint Elenda (4)
 
