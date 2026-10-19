@@ -26,7 +26,7 @@ public final class AlchemyWildsOfEldraine extends ExpansionSet {
 
         cards.add(new SetCardInfo("First Little Pig", 18, Rarity.UNCOMMON, mage.cards.f.FirstLittlePig.class));
         cards.add(new SetCardInfo("Overcooked", 11, Rarity.MYTHIC, mage.cards.o.Overcooked.class));
-        // Talion's Throneguard (5)
+        cards.add(new SetCardInfo("Talion's Throneguard", 5, Rarity.RARE, mage.cards.t.TalionsThroneguard.class));
 
         cards.add(new SetCardInfo("Victory of the Pyrohammer", 12, Rarity.RARE, mage.cards.v.VictoryOfThePyrohammer.class));
     }
