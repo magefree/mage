@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public final class AlchemyAetherdrift extends ExpansionSet {
@@ -19,7 +20,7 @@ public final class AlchemyAetherdrift extends ExpansionSet {
 
         // Motivated Muralist (15)
 
-        // Ornate Imitations (23)
+        cards.add(new SetCardInfo("Ornate Imitations", 23, Rarity.MYTHIC, mage.cards.o.OrnateImitations.class));
 
         // Trackhand Trainer (6)
     }

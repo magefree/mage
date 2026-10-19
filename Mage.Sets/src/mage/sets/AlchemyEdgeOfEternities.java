@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public final class AlchemyEdgeOfEternities extends ExpansionSet {
@@ -17,7 +18,7 @@ public final class AlchemyEdgeOfEternities extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        // Cosmic Sovereign (14)
+        cards.add(new SetCardInfo("Cosmic Sovereign", 14, Rarity.MYTHIC, mage.cards.c.CosmicSovereign.class));
 
         // Hydroponics Architect (6)
 

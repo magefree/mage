@@ -23,7 +23,7 @@ public final class AlchemyInnistrad extends ExpansionSet {
 
         cards.add(new SetCardInfo("Citystalker Connoisseur", 27, Rarity.RARE, mage.cards.c.CitystalkerConnoisseur.class));
 
-        // Clone Crafter (14)
+        cards.add(new SetCardInfo("Clone Crafter", 14, Rarity.RARE, mage.cards.c.CloneCrafter.class));
 
         cards.add(new SetCardInfo("Cursebound Witch", 24, Rarity.UNCOMMON, mage.cards.c.CurseboundWitch.class));
         cards.add(new SetCardInfo("Expedition Supplier", 6, Rarity.RARE, mage.cards.e.ExpeditionSupplier.class));

@@ -27,7 +27,7 @@ public final class AlchemyMurdersAtKarlovManor extends ExpansionSet {
 
         // Excogitator Sphinx (6)
 
-        // Roalesk, Prime Specimen (26)
+        cards.add(new SetCardInfo("Roalesk, Prime Specimen", 26, Rarity.MYTHIC, mage.cards.r.RoaleskPrimeSpecimen.class));
 
         // Tajic, Legion's Valor (28)
 

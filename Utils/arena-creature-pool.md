@@ -1,7 +1,8 @@
 # Arena random creature selection
 
-`Pool of Vigorous Growth` uses `RandomCardUtil.createRandomCreature`.
-Random-creature conjure effects can reuse the same selector.
+`Pool of Vigorous Growth` and the global random-creature conjure effects use
+`RandomCardUtil.createRandomCreature`. Clone Crafter selects from an opponent's
+library instead, as its text requires.
 
 The selector combines automatic full-set availability with a checked-in legacy
 catalog. Adding a normal card class and set registration is enough: card authors
@@ -66,6 +67,62 @@ the canonical identities; ambiguous normalized entries are rejected. A card's
 printing need not be tagged with an Arena set type: MB2's normal cards and ATC's
 official tutorial implementations are usable when the catalog permits them.
 Other custom-set implementations remain excluded.
+
+## Audit of the original 571 missing entries (2026-10-18)
+
+`Utils/arena-creature-pool-audit.tsv` records every original missing entry, its
+classification, matching implementation and evidence. The original audit compared
+94,023 repository printing records, all alternate/face-name fields, set registrations,
+and card-class filenames. The report was refreshed against 94,031 printing records
+on upstream `bb0ed0f72d`. Its current classifications are:
+
+| Classification | Entries | Result |
+| --- | ---: | --- |
+| ASCII/accent or case spelling | 33 | Match the canonical identity and preserve one outcome per name. |
+| Set filter | 5 | Restore Rusko, Clockmaker (MB2) and four ATC tutorial creatures. |
+| Invalid meld result | 1 | Remove Ragnarok, Divine Deliverance from the catalog. |
+| Implemented since original audit | 2 | Thor, Asgard's Avenger and Magik, Illyana Rasputin are now implemented upstream and included automatically. |
+| No implementation | 530 | No matching repository name/face, source registration or class. |
+
+The case mismatch also exposed a duplicate Sol'Kanar/Sol'kanar identity already
+partly selectable under the other spelling. The source merge now combines case
+variants, using Scryfall's canonical spelling. Together with the meld correction,
+the catalog shrinks from 9,193 to 9,191 identities. Supported identities increase
+from 8,622 to 8,659 (37 newly available identities; the case alias was already
+available). Upstream subsequently implemented Thor, Asgard's Avenger and Magik,
+Illyana Rasputin; the selector includes both without a catalog edit, bringing
+current support to 8,661 identities.
+The remaining 530 are actual implementation gaps in this checkout; similar
+paper/Alchemy names are not treated as interchangeable cards.
+An additional near-name review checked Paradigm Shifter versus Paradigm Shift,
+Pearl Collector versus Pelt Collector, and Seasoned Cryomancer versus Seasoned
+Pyromancer. These are distinct cards: respectively a creature versus a sorcery,
+different costs and stats, and blue versus red mana costs. None is a spelling
+alias that can safely reuse the other implementation.
+
+Regressions cover all 38 repaired entries, unique alias/reprint weighting,
+MDFC/adventure front faces, ordinary backs, and alternate-printing meld results.
+The face review also found and fixed Cosmic Sovereign's lookup of a conjured
+MDFC: haste and delayed exile must refer to the front-face permanent ID, not the
+whole card ID. A gameplay regression exercises both effects on Tangled Florahedron.
+
+To reproduce the audit, export the following columns from an initialized XMage
+cards database using the repository's H2 driver and a read-only JDBC connection
+(`jdbc:h2:file:PATH_TO_DB/cards.h2;ACCESS_MODE_DATA=r`). Close other users of the
+database before opening the snapshot. H2's `CSVWRITE` uses UTF-8 by default:
+
+```sql
+CALL CSVWRITE('arena-creature-inventory.csv',
+ 'SELECT NAME, MANAVALUE, TYPES, CLASSNAME, SETCODE, CARDNUMBER,
+ NIGHTCARD, SPLITCARDHALF, SECONDSIDENAME, DOUBLEFACEDSECONDSIDENAME,
+ SPELLOPTIONCARDNAME, FLIPCARDNAME, MELDSTOCARDNAME FROM CARD');
+```
+
+Run `python Utils/audit_arena_creature_pool.py arena-creature-inventory.csv
+--check` on one command line. Omit `--check` to update the classifications after
+implementing more cards. The tool requires all original 571 identities, rejects
+unresolved naming/face/source candidates, and checks that the remaining missing
+set across the **entire** current catalog equals the recorded unimplemented set.
 
 ## Limits of parity
 
