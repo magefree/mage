@@ -34,6 +34,7 @@ public final class RiverSongsDiary extends CardImpl {
 
     public RiverSongsDiary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
+        this.subtype.add(SubType.BOOK);
 
         // Imprint -- Whenever a player casts an instant or sorcery spell from their hand, exile it instead of putting it into a graveyard as it resolves.
         this.addAbility(new RiverSongsDiaryImprintAbility().setAbilityWord(AbilityWord.IMPRINT));
