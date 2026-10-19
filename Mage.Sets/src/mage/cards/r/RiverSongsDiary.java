@@ -41,7 +41,6 @@ public final class RiverSongsDiary extends CardImpl {
         // At the beginning of your upkeep, if there are four or more cards exiled with River Song's Diary, choose one of them at random. You may cast it without paying its mana cost.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
             new RiverSongsDiaryCastEffect()
-                    .setText("choose one of them at random. You may cast it without paying its mana cost.")
             ).withInterveningIf(RiverSongsDiaryCondition.instance)
             .addHint(RiverSongsDiaryExiledSpellsCount.getHint())
         );
@@ -105,10 +104,9 @@ enum RiverSongsDiaryExiledSpellsCount implements DynamicValue {
 
 class RiverSongsDiaryImprintAbility extends TriggeredAbilityImpl {
 
-    public RiverSongsDiaryImprintAbility() {
+    RiverSongsDiaryImprintAbility() {
         super(Zone.BATTLEFIELD, null, false);
-        setTriggerPhrase("Whenever a player casts an instant or sorcery spell from their hand" +
-            ", exile it instead of putting it into a graveyard as it resolves.");
+        setTriggerPhrase("Whenever a player casts an instant or sorcery spell from their hand, ");
     }
 
     private RiverSongsDiaryImprintAbility(final RiverSongsDiaryImprintAbility ability) {
@@ -148,6 +146,7 @@ class RiverSongsDiaryExileEffect extends ReplacementEffectImpl {
 
     RiverSongsDiaryExileEffect(Spell spell, Game game) {
    	super(Duration.OneUse, Outcome.Benefit);
+        this.setText("exile it instead of putting it into a graveyard as it resolves.");
         this.morSpell = new MageObjectReference(spell.getCard(), game);
         this.morCard = new MageObjectReference(spell.getMainCard(), game);
     }
@@ -197,6 +196,7 @@ class RiverSongsDiaryCastEffect extends OneShotEffect {
 
     RiverSongsDiaryCastEffect() {
         super(Outcome.Benefit);
+        this.setText("choose one of them at random. You may cast it without paying its mana cost.");
     }
 
     private RiverSongsDiaryCastEffect(final RiverSongsDiaryCastEffect effect) {
