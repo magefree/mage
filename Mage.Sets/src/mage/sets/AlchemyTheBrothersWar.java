@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public final class AlchemyTheBrothersWar extends ExpansionSet {
@@ -19,6 +20,6 @@ public final class AlchemyTheBrothersWar extends ExpansionSet {
 
         // Crucias, Titan of the Waves (18)
 
-        // Jarsyl, Dark Age Scion (20)
+        cards.add(new SetCardInfo("Jarsyl, Dark Age Scion", 20, Rarity.MYTHIC, mage.cards.j.JarsylDarkAgeScion.class));
     }
 }
