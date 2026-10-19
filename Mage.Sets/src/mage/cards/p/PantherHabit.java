@@ -62,7 +62,7 @@ class PantherHabitEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        // no preventable check: counters are put even if the damage can't be prevented (same wording as Gatta and Luzzu, see its 2025-06-06 ruling)
+        // counters are put even if the damage can't be prevented, same as the Gatta and Luzzu ruling
         return event.getTargetId().equals(getEquippedCreatureId(source, game));
     }
 

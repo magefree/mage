@@ -12,12 +12,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class PantherHabitTest extends CardTestPlayerBase {
 
-    /**
-     * Panther Habit {4}
-     * Artifact - Equipment
-     * If equipped creature would be dealt damage, prevent that damage and put that many +1/+1 counters on it.
-     * Equip {2}
-     */
+    // If equipped creature would be dealt damage, prevent that damage and put that many +1/+1 counters on it.
     private static final String habit = "Panther Habit";
 
     private static final String lion = "Silvercoat Lion"; // 2/2
