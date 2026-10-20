@@ -58,10 +58,7 @@ enum AvengeCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         AvengeWatcher watcher = game.getState().getWatcher(AvengeWatcher.class);
-        return watcher != null
-                && game.getOpponents(source.getControllerId())
-                .stream()
-                .anyMatch(playerId -> watcher.attackedDuringLastTurn(playerId, source.getControllerId()));
+        return watcher != null && watcher.wasAttackedDuringLastTurn(source.getControllerId(), game);
     }
 
     @Override
@@ -91,8 +88,14 @@ class AvengeWatcher extends Watcher {
         }
     }
 
-    boolean attackedDuringLastTurn(UUID attackingPlayerId, UUID defendingPlayerId) {
-        return attackedPlayers.getOrDefault(attackingPlayerId, new HashSet<>()).contains(defendingPlayerId);
+    // 800.4i A player who left the game still counts until their next turn would have begun
+    boolean wasAttackedDuringLastTurn(UUID defendingPlayerId, Game game) {
+        return attackedPlayers.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue().contains(defendingPlayerId))
+                .map(entry -> game.getPlayer(entry.getKey()))
+                .anyMatch(player -> player != null
+                        && (player.isInGame() || !player.hasReachedNextTurnAfterLeaving()));
     }
 }
 
