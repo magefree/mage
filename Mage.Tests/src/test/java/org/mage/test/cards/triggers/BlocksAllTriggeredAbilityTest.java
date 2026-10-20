@@ -69,6 +69,32 @@ public class BlocksAllTriggeredAbilityTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_TargetPermanent_TwoBlockers() {
+        addCustomCardWithAbility("tester", playerB, new BlocksAllTriggeredAbility(
+                new BoostTargetEffect(1, 1), false, StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.PERMANENT
+        ));
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerB, "Runeclaw Bear");
+
+        attack(1, playerA, "Grizzly Bears");
+        attack(1, playerA, "Llanowar Elves");
+        block(1, playerB, "Silvercoat Lion", "Grizzly Bears");
+        block(1, playerB, "Runeclaw Bear", "Llanowar Elves");
+        setChoice(playerB, "Whenever a creature blocks"); // order triggers
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+
+        assertPowerToughness(playerB, "Silvercoat Lion", 3, 3);
+        assertPowerToughness(playerB, "Runeclaw Bear", 3, 3);
+        assertGraveyardCount(playerA, "Grizzly Bears", 1);
+        assertGraveyardCount(playerA, "Llanowar Elves", 1);
+    }
+
+    @Test
     public void test_Filter_NobleStand() {
         // Whenever a creature you control blocks, you gain 2 life.
         addCard(Zone.BATTLEFIELD, playerA, "Noble Stand");
