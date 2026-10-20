@@ -57,7 +57,7 @@ public final class GrizzlegomHurloonHero extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Rulebreaker -- A deck with this commander can have any land cards.
-        this.addAbility(new RulebreakerAbility(new FilterLandCard("can have any land cards"), false, false));
+        this.addAbility(new RulebreakerAbility(new FilterLandCard("can have any land cards.")));
 
         // Whenever Grizzlegom attacks, create a 1/1 white Soldier creature token for each Plains you control. Draw a card for each Island you control. Each opponent loses 1 life for each Swamp you control. Put a +1/+1 counter on Grizzlegom for each Mountain you control. You gain 1 life for each Forest you control.
         Ability ability = new AttacksTriggeredAbility(new CreateTokenEffect(new SoldierToken(), countPlains)
