@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BlocksAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -10,13 +10,9 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.filter.StaticFilters;
 
 
 
@@ -30,7 +26,10 @@ public final class CarnageGladiator extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever a creature blocks, that creature's controller loses 1 life.
-        this.addAbility(new CarnageGladiatorTriggeredAbility());
+        this.addAbility(new BlocksAllTriggeredAbility(
+                new LoseLifeTargetEffect(1).withTargetDescription("that creature's controller"),
+                false, StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.PLAYER
+        ));
 
         // {1}{B}{R}: Renegerate Carnage Gladiator.
         this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(),new ManaCostsImpl<>("{1}{B}{R}")));
@@ -47,40 +46,4 @@ public final class CarnageGladiator extends CardImpl {
         return new CarnageGladiator(this);
     }
 
-}
-
-class CarnageGladiatorTriggeredAbility extends TriggeredAbilityImpl {
-
-    public CarnageGladiatorTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1));
-    }
-
-    private CarnageGladiatorTriggeredAbility(final CarnageGladiatorTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public CarnageGladiatorTriggeredAbility copy() {
-        return new CarnageGladiatorTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CREATURE_BLOCKS;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent blocker = game.getPermanent(event.getTargetId());
-        if (blocker != null) {
-            getEffects().get(0).setTargetPointer(new FixedTarget(blocker.getControllerId()));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature blocks, that creature's controller loses 1 life.";
-    }
 }
