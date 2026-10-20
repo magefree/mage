@@ -420,6 +420,7 @@ public class GameEvent implements Serializable {
         CAN_TAKE_MULLIGAN,
         SCRY, SCRIED, SCRY_TO_BOTTOM,
         SURVEIL, SURVEILED,
+        SOUGHT, // playerId sought amount cards; targetId is the sought card
         PROLIFERATE, PROLIFERATED,
         FATESEALED,
         FLIP_COIN, FLIP_COINS, COIN_FLIPPED,
