@@ -869,6 +869,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean phaseOut(Game game, boolean indirectPhase) {
         if (phasedIn && !replaceEvent(EventType.PHASE_OUT, game)) {
+            // a phased-out permanent is treated as though it doesn't exist, so keep its last known information
+            game.rememberLKI(Zone.BATTLEFIELD, this);
             for (UUID attachedId : this.getAttachments()) {
                 Permanent attachedPerm = game.getPermanent(attachedId);
                 if (attachedPerm != null) {
@@ -1170,7 +1172,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             return 0;
         }
         int lethal = getLethalDamage(attackerId, game);
-        MageObject attacker = game.getObject(attackerId);
+        MageObject attacker = game.getPermanentOrLKIBattlefield(attackerId);
+        if (attacker == null) {
+            attacker = game.getObject(attackerId);
+        }
         if (this.isCreature(game)) {
             if (checkWither(event, attacker, game)) {
                 if (markDamage) {
