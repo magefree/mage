@@ -2,6 +2,8 @@ package mage.abilities.costs;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.Outcome;
@@ -70,16 +72,26 @@ public class OrCost implements Cost {
         return selectedCost.pay(ability, game, source, controllerId, noMana, costToPay);
     }
 
-    public boolean hasManaCost() {
-        return costs.stream().anyMatch(OrCost::hasManaCost);
+    public List<Cost> getCosts() {
+        return Collections.unmodifiableList(costs);
     }
 
-    private static boolean hasManaCost(Cost cost) {
-        if (cost instanceof CompositeCost) {
-            return hasManaCost(((CompositeCost) cost).getFirstCost())
-                    || hasManaCost(((CompositeCost) cost).getSecondCost());
+    public boolean hasManaCost() {
+        return costs.stream().anyMatch(cost -> !getManaPart(cost).isEmpty());
+    }
+
+    /**
+     * @return mana part of one of the costs, e.g. {3} for "{3}, {T}", empty if it has no mana
+     */
+    public static ManaCosts<ManaCost> getManaPart(Cost cost) {
+        ManaCosts<ManaCost> manaPart = new ManaCostsImpl<>();
+        if (cost instanceof ManaCost) {
+            manaPart.add((ManaCost) cost.copy());
+        } else if (cost instanceof CompositeCost) {
+            manaPart.addAll(getManaPart(((CompositeCost) cost).getFirstCost()));
+            manaPart.addAll(getManaPart(((CompositeCost) cost).getSecondCost()));
         }
-        return cost instanceof ManaCost;
+        return manaPart;
     }
 
     /**

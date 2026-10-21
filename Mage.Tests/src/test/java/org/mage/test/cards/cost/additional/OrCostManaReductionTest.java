@@ -2,16 +2,20 @@ package org.mage.test.cards.cost.additional;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.OrCost;
 import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.costadjusters.LegendaryCreatureCostAdjuster;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -161,5 +165,82 @@ public class OrCostManaReductionTest extends CardTestPlayerBase {
         assertLife(playerA, 20 + 3);
         assertHandCount(playerA, "Grizzly Bears", 1);
         assertTappedCount("Mountain", true, 1);
+    }
+
+    private void checkCustomInstantPlayable(boolean withVadrik, int mountains, boolean withArtifact, boolean mustBePlayable) {
+        if (withVadrik) {
+            // Instant and sorcery spells you cast cost {X} less to cast, where X is Vadrik's power.
+            addCard(Zone.BATTLEFIELD, playerA, "Vadrik, Astral Archmage"); // 1/2
+        }
+        if (withArtifact) {
+            addCard(Zone.BATTLEFIELD, playerA, "Ornithopter");
+        }
+        // As an additional cost to cast this spell, sacrifice an artifact or pay {2}.
+        // You gain 1 life.
+        SpellAbility spellAbility = new SpellAbility(new ManaCostsImpl<>("{R}"), "test instant");
+        spellAbility.addCost(new OrCost(
+                "sacrifice an artifact or pay {2}",
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT_AN),
+                new GenericManaCost(2)
+        ));
+        spellAbility.addEffect(new GainLifeEffect(1));
+        addCustomCardWithAbility("test instant", playerA, null, spellAbility, CardType.INSTANT, "{R}", Zone.HAND);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", mountains);
+
+        checkPlayableAbility("playable", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast test instant", mustBePlayable);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_Playable_ReducedManaOption() {
+        checkCustomInstantPlayable(true, 2, false, true); // {R} + {2} - {1}
+    }
+
+    @Test
+    public void test_Playable_NotEnoughManaForReducedOption() {
+        checkCustomInstantPlayable(true, 1, false, false);
+    }
+
+    @Test
+    public void test_Playable_NoReduction() {
+        checkCustomInstantPlayable(false, 2, false, false); // needs {R} + {2}
+    }
+
+    @Test
+    public void test_Playable_NonManaOption() {
+        checkCustomInstantPlayable(false, 1, true, true); // {R} and sacrifice Ornithopter
+    }
+
+    @Test
+    public void test_Playable_ManaAndTapOption() {
+        // Abilities you activate that aren't mana abilities cost {2} less to activate.
+        // This effect can't reduce the mana in that cost to less than one mana.
+        addCard(Zone.BATTLEFIELD, playerA, "Zirda, the Dawnwaker");
+        //
+        // {3}, {T} or {U}, {T}: Return target creature to its owner's hand unless its controller pays {1}.
+        addCard(Zone.BATTLEFIELD, playerA, "Crystal Shard");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1); // {3} - {2}, no blue for the other option
+
+        checkPlayableAbility("playable", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T} or {U}, {T}", true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_Playable_ManaAndTapOption_NoReduction() {
+        // {3}, {T} or {U}, {T}: Return target creature to its owner's hand unless its controller pays {1}.
+        addCard(Zone.BATTLEFIELD, playerA, "Crystal Shard");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1); // not enough for {3} and no blue for {U}
+
+        checkPlayableAbility("not playable", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T} or {U}, {T}", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
     }
 }

@@ -3823,9 +3823,13 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         // apply dynamic costs and cost modification
         copy.adjustX(game);
+        List<ActivatedAbility> orCostVariants = getOrCostManaVariants(copy, game);
         if (availableMana != null) {
             // TODO: need research, why it look at availableMana here - can delete condition?
             game.getContinuousEffects().costModification(copy, game);
+            if (orCostVariants != null) {
+                orCostVariants.forEach(variant -> game.getContinuousEffects().costModification(variant, game));
+            }
         }
         boolean canBeCastRegularly = true;
         Set<MageIdentifier> allowedIdentifiers = null;
@@ -3842,7 +3846,10 @@ public abstract class PlayerImpl implements Player, Serializable {
                 canBeCastRegularly = false;
             }
         }
-        if (canBeCastRegularly && canPayMinimumManaCost(copy, availableMana, game)) {
+        boolean canPayRegularly = orCostVariants == null
+                ? canPayMinimumManaCost(copy, availableMana, game)
+                : orCostVariants.stream().anyMatch(variant -> canPayMinimumManaCost(variant, availableMana, game));
+        if (canBeCastRegularly && canPayRegularly) {
             return true;
         }
 
@@ -3872,6 +3879,52 @@ public abstract class PlayerImpl implements Player, Serializable {
             return canPlayCardByAlternateCost(game.getCard(ability.getSourceId()), availableMana, copy, game);
         }
         return false;
+    }
+
+    /**
+     * The mana part of a chosen "or" cost is added to the total cost on activate (see AbilityImpl.handleOrCostsWithMana),
+     * so the playable check needs a copy of the ability for each way to pay it.
+     *
+     * @return copies with the mana part added, or null if the ability has no "or" cost with mana
+     */
+    private List<ActivatedAbility> getOrCostManaVariants(ActivatedAbility ability, Game game) {
+        if (ability.getCosts().stream().noneMatch(cost -> cost instanceof OrCost && ((OrCost) cost).hasManaCost())) {
+            return null;
+        }
+        List<ActivatedAbility> variants = new ArrayList<>();
+        variants.add(ability.copy());
+        for (Cost cost : ability.getCosts()) {
+            if (!(cost instanceof OrCost) || !((OrCost) cost).hasManaCost()) {
+                continue;
+            }
+            List<ManaCosts<ManaCost>> manaParts = new ArrayList<>();
+            boolean canPayWithoutMana = false;
+            for (Cost option : ((OrCost) cost).getCosts()) {
+                if (!option.canPay(ability, ability, playerId, game)) {
+                    continue;
+                }
+                ManaCosts<ManaCost> manaPart = OrCost.getManaPart(option);
+                if (manaPart.isEmpty()) {
+                    canPayWithoutMana = true;
+                    break;
+                }
+                manaParts.add(manaPart);
+            }
+            if (canPayWithoutMana) {
+                // e.g. a card to discard, so the minimum cost doesn't change
+                continue;
+            }
+            List<ActivatedAbility> newVariants = new ArrayList<>();
+            for (ActivatedAbility variant : variants) {
+                for (ManaCosts<ManaCost> manaPart : manaParts) {
+                    ActivatedAbility newVariant = variant.copy();
+                    newVariant.addManaCostsToPay(manaPart.copy());
+                    newVariants.add(newVariant);
+                }
+            }
+            variants = newVariants;
+        }
+        return variants;
     }
 
     /**

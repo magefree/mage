@@ -30,4 +30,21 @@ public class OrCostManaReductionAITest extends CardTestPlayerBaseWithAIHelps {
         assertGraveyardCount(playerA, "Lightning Axe", 1);
         assertGraveyardCount(playerB, "Serra Angel", 1);
     }
+
+    @Test
+    public void test_AI_DontCastWithoutEnoughMana() {
+        // As an additional cost to cast this spell, discard a card or pay {5}.
+        // Lightning Axe deals 5 damage to target creature.
+        addCard(Zone.HAND, playerA, "Lightning Axe"); // {R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4); // needs {R} + {5}
+        addCard(Zone.BATTLEFIELD, playerB, "Serra Angel"); // 4/4
+
+        aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerA, "Lightning Axe", 1);
+        assertPermanentCount(playerB, "Serra Angel", 1);
+    }
 }
