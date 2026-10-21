@@ -54,7 +54,6 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Break Under Pressure", 50, Rarity.UNCOMMON, mage.cards.b.BreakUnderPressure.class));
         cards.add(new SetCardInfo("Budding Insurgent", 99, Rarity.COMMON, mage.cards.b.BuddingInsurgent.class));
         cards.add(new SetCardInfo("Campus Crier", 4, Rarity.COMMON, mage.cards.c.CampusCrier.class));
-        cards.add(new SetCardInfo("Carnivorous Cultivator", 437, Rarity.RARE, mage.cards.c.CarnivorousCultivator.class));
         cards.add(new SetCardInfo("Carnivorous Cultivator", 100, Rarity.RARE, mage.cards.c.CarnivorousCultivator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Carnivorous Cultivator", 430, Rarity.RARE, mage.cards.c.CarnivorousCultivator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Carnivorous Cultivator", 437, Rarity.RARE, mage.cards.c.CarnivorousCultivator.class, NON_FULL_USE_VARIOUS));
@@ -355,8 +354,6 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Something Worth Saving", 114, Rarity.COMMON, mage.cards.s.SomethingWorthSaving.class));
         cards.add(new SetCardInfo("Sphinx of False Conclusions", 338, Rarity.RARE, mage.cards.s.SphinxOfFalseConclusions.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sphinx of False Conclusions", 40, Rarity.RARE, mage.cards.s.SphinxOfFalseConclusions.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sphinx's Approach", 41, Rarity.COMMON, mage.cards.s.SphinxsApproach.class));
-        cards.add(new SetCardInfo("Sphinx's Approach", 41, Rarity.COMMON, mage.cards.s.SphinxsApproach.class));
         cards.add(new SetCardInfo("Sphinx's Approach", 41, Rarity.COMMON, mage.cards.s.SphinxsApproach.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sphinx's Approach", 442, Rarity.RARE, mage.cards.s.SphinxsApproach.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stingcaster Mage", 329, Rarity.MYTHIC, mage.cards.s.StingcasterMage.class, NON_FULL_USE_VARIOUS));
