@@ -187,6 +187,9 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("The Duras Sisters", 432, Rarity.UNCOMMON, mage.cards.t.TheDurasSisters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Duras Sisters", 442, Rarity.UNCOMMON, mage.cards.t.TheDurasSisters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tricorder", 270, Rarity.COMMON, mage.cards.t.Tricorder.class));
+        cards.add(new SetCardInfo("Troubling Tribbles", 408, Rarity.RARE, mage.cards.t.TroublingTribbles.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Troubling Tribbles", 41, Rarity.RARE, mage.cards.t.TroublingTribbles.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Troubling Tribbles", 532, Rarity.RARE, mage.cards.t.TroublingTribbles.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("U.S.S. Enterprise-D, Galaxy-Class", 273, Rarity.RARE, mage.cards.u.USSEnterpriseDGalaxyClass.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("U.S.S. Enterprise-D, Galaxy-Class", 481, Rarity.RARE, mage.cards.u.USSEnterpriseDGalaxyClass.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("U.S.S. Enterprise-D, Galaxy-Class", 557, Rarity.RARE, mage.cards.u.USSEnterpriseDGalaxyClass.class, FULL_ART_USE_VARIOUS));
