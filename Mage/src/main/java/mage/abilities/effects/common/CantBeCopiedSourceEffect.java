@@ -34,8 +34,7 @@ public class CantBeCopiedSourceEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        // the event targets the spell on the stack, which has its own id
-        Spell spell = game.getSpell(event.getTargetId());
+        Spell spell = game.getSpellOrLKIStack(event.getTargetId());
         return spell != null && spell.getSourceId().equals(source.getSourceId());
     }
 
