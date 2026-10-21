@@ -1582,7 +1582,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             return true;
         }
-        restoreState(bookmark, ability.getRule(), game);
+        // 605.3b "An activated mana ability doesn't go on the stack"
+        restoreStateKeepingStack(bookmark, ability.getRule(), game);
         return false;
     }
 
@@ -1605,7 +1606,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                 resetStoredBookmark(game);
                 return true;
             }
-            restoreState(bookmark, ability.getRule(), game);
         } else {
             // resolve without stack
             if (ability.activate(game, false)) {
@@ -1660,7 +1660,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                     return true;
                 }
             }
-            restoreState(bookmark, action.getRule(), game);
+            // like mana abilities, special mana payments don't use the stack
+            restoreStateKeepingStack(bookmark, action.getRule(), game);
         }
         return false;
     }

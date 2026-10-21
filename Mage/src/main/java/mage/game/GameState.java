@@ -235,11 +235,14 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void restoreForRollBack(GameState state) {
-        restore(state);
+        restore(state, false);
         this.turn = state.turn;
     }
 
-    public void restore(GameState state) {
+    /**
+     * @param keepStack keep this state's stack instead of the restored one, see Game.restoreStateKeepingStack
+     */
+    public void restore(GameState state, boolean keepStack) {
         // no needs in copy here cause GameState already copied on save and it will be used only one time here
         this.activePlayerId = state.activePlayerId;
         this.playerList.setCurrent(state.activePlayerId);
@@ -247,7 +250,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.priorityPlayerId = state.priorityPlayerId;
         this.monarchId = state.monarchId;
         this.initiativeId = state.initiativeId;
-        this.stack = state.stack;
+        if (!keepStack) {
+            this.stack = state.stack;
+        }
         this.command = state.command;
         this.isPlaneChase = state.isPlaneChase;
         this.seenPlanes = state.seenPlanes;

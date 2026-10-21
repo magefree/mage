@@ -617,6 +617,17 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     GameState restoreState(int bookmark, String context);
 
     /**
+     * Same as restoreState, but keeps the current stack. Use it to roll back an action that doesn't use the stack,
+     * such as a mana ability, while a spell is being cast or an ability activated: that activation keeps writing to
+     * its object on the current stack, so a restored copy would lose those writes. Changes to the stack since the
+     * bookmark aren't rolled back, so take the bookmark right before the action, which must not change the stack.
+     * Call it only through {@link Player#restoreStateKeepingStack}, which also resets the player's stored bookmark.
+     * Otherwise that bookmark can outlive the rollback, and the player's Undo would use a bookmark that no longer
+     * exists or now marks a different state.
+     */
+    GameState restoreStateKeepingStack(int bookmark, String context);
+
+    /**
      * Remove selected bookmark and all newer bookmarks and game states
      * Part of restore/rollback lifecycle
      *

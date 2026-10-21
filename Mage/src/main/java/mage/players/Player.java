@@ -621,6 +621,17 @@ public interface Player extends MageItem, Copyable<Player> {
         return state;
     }
 
+    /**
+     * Same as restoreState, but keeps the current stack, see {@link Game#restoreStateKeepingStack}
+     */
+    default GameState restoreStateKeepingStack(int bookmark, String text, Game game) {
+        GameState state = game.restoreStateKeepingStack(bookmark, text);
+        if (getStoredBookmark() >= bookmark) {
+            resetStoredBookmark(game);
+        }
+        return state;
+    }
+
     void revealCards(Ability source, Cards cards, Game game);
 
     void revealCards(String titleSuffix, Cards cards, Game game);

@@ -16,7 +16,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 /**
  *
@@ -101,7 +100,7 @@ public class TeamworkAbility extends StaticAbility implements OptionalAdditional
         for (Cost cost : (Costs<Cost>) additionalCost) {
             ability.addCost(cost.copy());
         }
-        CardUtil.setSourceCostsTag(game, ability, TEAMWORK_ACTIVATION_VALUE_KEY, null);
+        ability.setCostsTag(TEAMWORK_ACTIVATION_VALUE_KEY, null);
     }
 
     @Override

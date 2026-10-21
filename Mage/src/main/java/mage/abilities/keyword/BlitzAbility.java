@@ -19,7 +19,6 @@ import mage.constants.SpellAbilityType;
 import mage.constants.TimingRule;
 import mage.game.Game;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 
 import java.util.Set;
 
@@ -81,7 +80,7 @@ public class BlitzAbility extends SpellAbility {
         if (!super.activate(game, allowedIdentifiers, noMana)) {
             return false;
         }
-        CardUtil.setSourceCostsTag(game, this, BLITZ_ACTIVATION_VALUE_KEY, null);
+        this.setCostsTag(BLITZ_ACTIVATION_VALUE_KEY, null);
         return true;
     }
 }
