@@ -338,13 +338,6 @@ public class SpellAbility extends ActivatedAbilityImpl {
     }
 
     /**
-     * Some spell abilities (e.g. flashback) get the card's own costs on cast only (see getSpellAbilityToResolve),
-     * so cost calculations before the cast (e.g. playable) must add them first, without side effects
-     */
-    public void prepareCostsBeforeCast(Game game) {
-    }
-
-    /**
      * Returns combined card object with the spell characteristics like color, types,
      * subtypes etc. E.g. if you cast a Bestow card as enchantment, the
      * characteristics don't include the creature type.

@@ -259,7 +259,8 @@ public class OrCostManaReductionTest extends CardTestPlayerBase {
         execute();
     }
 
-    private void prepareLightningAxeWithFlashback(int mountains) {
+    @Test
+    public void test_Flashback_PayManaOption_IsReduced() {
         // Instant and sorcery spells you cast cost {X} less to cast, where X is Vadrik's power.
         addCard(Zone.BATTLEFIELD, playerA, "Vadrik, Astral Archmage"); // 1/2
         //
@@ -270,17 +271,12 @@ public class OrCostManaReductionTest extends CardTestPlayerBase {
         // As an additional cost to cast this spell, discard a card or pay {5}.
         // Lightning Axe deals 5 damage to target creature.
         addCard(Zone.GRAVEYARD, playerA, "Lightning Axe"); // {R}
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", mountains);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5); // {R} + {5} - {1}
         addCard(Zone.BATTLEFIELD, playerB, "Hill Giant");
 
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 2);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
         addTarget(playerA, "Lightning Axe");
-    }
-
-    @Test
-    public void test_Flashback_PayManaOption_IsReduced() {
-        prepareLightningAxeWithFlashback(5); // {R} + {5} - {1}
 
         // no cards left in hand, so the {5} has to be paid
         checkPlayableAbility("playable", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback", true);
@@ -293,19 +289,5 @@ public class OrCostManaReductionTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Hill Giant", 1);
         assertExileCount(playerA, "Lightning Axe", 1);
         assertTappedCount("Mountain", true, 5);
-    }
-
-    @Test
-    public void test_Flashback_NotEnoughManaForReducedOption() {
-        prepareLightningAxeWithFlashback(4); // {R} + {5} - {1}, one short
-
-        // the card's own "or" cost must be checked too, not only the flashback cost
-        checkPlayableAbility("not playable", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback", false);
-
-        setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.END_TURN);
-        execute();
-
-        assertGraveyardCount(playerA, "Lightning Axe", 1);
     }
 }

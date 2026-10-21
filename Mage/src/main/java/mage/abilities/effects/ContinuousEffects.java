@@ -4,7 +4,6 @@ import mage.ApprovingObject;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
-import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.costs.OrCost;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
@@ -703,10 +702,7 @@ public class ContinuousEffects implements Serializable {
     public void costModification(Ability abilityToModify, Game game) {
         List<CostModificationEffect> costEffects = getApplicableCostModificationEffects(game);
 
-        // card's own costs (e.g. on flashback) and mana from "or" costs must be part of the total cost before it's modified
-        if (abilityToModify instanceof SpellAbility) {
-            ((SpellAbility) abilityToModify).prepareCostsBeforeCast(game);
-        }
+        // mana from "or" costs must be part of the total cost before it's modified
         OrCost.addMinimumManaToCostsToPay(abilityToModify, game);
 
         // add dynamic costs from X and other places

@@ -319,11 +319,6 @@ class PlotSpellAbility extends SpellAbility {
     }
 
     @Override
-    public void prepareCostsBeforeCast(Game game) {
-        getSpellAbilityToResolve(game);
-    }
-
-    @Override
     public Costs<Cost> getCosts() {
         if (spellAbilityToResolve == null) {
             return super.getCosts();

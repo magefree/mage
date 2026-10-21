@@ -28,7 +28,6 @@ public abstract class CastFromGraveyardAbility extends SpellAbility {
 
     protected String abilityName;
     private SpellAbility spellAbilityToResolve;
-    private boolean replacementEffectAdded = false;
 
     protected CastFromGraveyardAbility(Card card, Cost cost, SpellAbilityCastMode spellAbilityCastMode) {
         super(null, "", Zone.GRAVEYARD, SpellAbilityType.BASE_ALTERNATE, spellAbilityCastMode);
@@ -42,7 +41,6 @@ public abstract class CastFromGraveyardAbility extends SpellAbility {
         super(ability);
         this.abilityName = ability.abilityName;
         this.spellAbilityToResolve = ability.spellAbilityToResolve;
-        this.replacementEffectAdded = ability.replacementEffectAdded;
     }
 
     @Override
@@ -83,28 +81,9 @@ public abstract class CastFromGraveyardAbility extends SpellAbility {
 
     @Override
     public SpellAbility getSpellAbilityToResolve(Game game) {
-        prepareCostsBeforeCast(game);
-        if (spellAbilityToResolve == null || replacementEffectAdded) {
-            return spellAbilityToResolve;
-        }
-        replacementEffectAdded = true;
-        ContinuousEffect effect = new CastFromGraveyardReplacementEffect();
-        effect.setTargetPointer(new FixedTarget(getSourceId(), game.getState().getZoneChangeCounter(getSourceId())));
-        game.addEffect(effect, this);
-        return spellAbilityToResolve;
-    }
-
-    @Override
-    public void prepareCostsBeforeCast(Game game) {
-        if (spellAbilityToResolve == null) {
-            spellAbilityToResolve = createSpellAbilityToResolve(game);
-        }
-    }
-
-    private SpellAbility createSpellAbilityToResolve(Game game) {
         Card card = game.getCard(getSourceId());
-        if (card == null) {
-            return null;
+        if (card == null || spellAbilityToResolve != null) {
+            return spellAbilityToResolve;
         }
         SpellAbility spellAbilityCopy;
         if (card instanceof SplitCard) {
@@ -136,7 +115,11 @@ public abstract class CastFromGraveyardAbility extends SpellAbility {
         spellAbilityCopy.addCost(this.getManaCosts().copy());
         spellAbilityCopy.setSpellAbilityCastMode(this.getSpellAbilityCastMode());
         spellAbilityCopy.setCostAdjuster(this.getCostAdjuster());
-        return spellAbilityCopy;
+        spellAbilityToResolve = spellAbilityCopy;
+        ContinuousEffect effect = new CastFromGraveyardReplacementEffect();
+        effect.setTargetPointer(new FixedTarget(getSourceId(), game.getState().getZoneChangeCounter(getSourceId())));
+        game.addEffect(effect, this);
+        return spellAbilityToResolve;
     }
 
     @Override
