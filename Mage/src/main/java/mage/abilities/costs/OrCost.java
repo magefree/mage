@@ -1,11 +1,16 @@
 package mage.abilities.costs;
 
 import mage.abilities.Ability;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.MonoHybridManaCost;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
@@ -81,11 +86,80 @@ public class OrCost implements Cost {
     }
 
     /**
+     * An "or" cost is replaced by the chosen cost on activate (see AbilityImpl.handleOrCostsWithMana).
+     * Other cost calculations (playable, alternative costs, loyalty) still have it, so its minimum mana
+     * is moved to the mana costs to pay before cost modification.
+     */
+    public static void addMinimumManaToCostsToPay(Ability ability, Game game) {
+        if (ability instanceof ActivatedManaAbilityImpl) {
+            return;
+        }
+        for (Cost cost : new ArrayList<>(ability.getCosts())) {
+            if (!(cost instanceof OrCost) || !((OrCost) cost).hasManaCost()) {
+                continue;
+            }
+            ManaCost minimumMana = ((OrCost) cost).getMinimumMana(ability, game);
+            ability.getCosts().remove(cost);
+            if (minimumMana != null) {
+                ability.addManaCostsToPay(minimumMana);
+            }
+        }
+    }
+
+    /**
+     * @return null if a cost without mana can be paid
+     */
+    private ManaCost getMinimumMana(Ability ability, Game game) {
+        List<ManaCosts<ManaCost>> manaParts = new ArrayList<>();
+        for (Cost cost : costs) {
+            if (!cost.canPay(ability, ability, ability.getControllerId(), game)) {
+                continue;
+            }
+            ManaCosts<ManaCost> manaPart = getManaPart(cost);
+            if (manaPart.isEmpty()) {
+                return null;
+            }
+            manaParts.add(manaPart);
+        }
+        if (manaParts.isEmpty()) {
+            return null;
+        }
+        if (manaParts.size() == 2) {
+            // e.g. the Shards "{3}, {T} or {U}, {T}" -- same as {3/U}, so both options are checked and can be reduced
+            ManaCost monoHybrid = makeMonoHybrid(manaParts.get(0), manaParts.get(1));
+            if (monoHybrid == null) {
+                monoHybrid = makeMonoHybrid(manaParts.get(1), manaParts.get(0));
+            }
+            if (monoHybrid != null) {
+                return monoHybrid;
+            }
+        }
+        // TODO: no card has other combinations yet, use the cheapest one
+        return manaParts.stream()
+                .min(Comparator.comparingInt(ManaCosts::manaValue))
+                .orElse(null);
+    }
+
+    private static ManaCost makeMonoHybrid(ManaCosts<ManaCost> generic, ManaCosts<ManaCost> colored) {
+        if (generic.size() != 1 || !(generic.get(0) instanceof GenericManaCost)
+                || colored.size() != 1 || !(colored.get(0) instanceof ColoredManaCost)) {
+            return null;
+        }
+        return Arrays.stream(ColoredManaSymbol.values())
+                .filter(colored.get(0)::containsColor)
+                .findFirst()
+                .map(color -> new MonoHybridManaCost(color, generic.manaValue()))
+                .orElse(null);
+    }
+
+    /**
      * @return mana part of one of the costs, e.g. {3} for "{3}, {T}", empty if it has no mana
      */
     public static ManaCosts<ManaCost> getManaPart(Cost cost) {
         ManaCosts<ManaCost> manaPart = new ManaCostsImpl<>();
-        if (cost instanceof ManaCost) {
+        if (cost instanceof ManaCosts) {
+            ((ManaCosts<ManaCost>) cost).forEach(manaCost -> manaPart.add(manaCost.copy()));
+        } else if (cost instanceof ManaCost) {
             manaPart.add((ManaCost) cost.copy());
         } else if (cost instanceof CompositeCost) {
             manaPart.addAll(getManaPart(((CompositeCost) cost).getFirstCost()));

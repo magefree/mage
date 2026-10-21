@@ -236,11 +236,76 @@ public class OrCostManaReductionTest extends CardTestPlayerBase {
         // {3}, {T} or {U}, {T}: Return target creature to its owner's hand unless its controller pays {1}.
         addCard(Zone.BATTLEFIELD, playerA, "Crystal Shard");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1); // not enough for {3} and no blue for {U}
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // target
 
         checkPlayableAbility("not playable", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T} or {U}, {T}", false);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+    }
+
+    @Test
+    public void test_Playable_ManaAndTapOption_ColoredOption() {
+        // {3}, {T} or {U}, {T}: Return target creature to its owner's hand unless its controller pays {1}.
+        addCard(Zone.BATTLEFIELD, playerA, "Crystal Shard");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1); // pays {U}
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // target
+
+        checkPlayableAbility("playable", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T} or {U}, {T}", true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    private void prepareLightningAxeWithFlashback(int mountains) {
+        // Instant and sorcery spells you cast cost {X} less to cast, where X is Vadrik's power.
+        addCard(Zone.BATTLEFIELD, playerA, "Vadrik, Astral Archmage"); // 1/2
+        //
+        // When Snapcaster Mage enters, target instant or sorcery card in your graveyard gains flashback until end of turn.
+        addCard(Zone.HAND, playerA, "Snapcaster Mage"); // {1}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        //
+        // As an additional cost to cast this spell, discard a card or pay {5}.
+        // Lightning Axe deals 5 damage to target creature.
+        addCard(Zone.GRAVEYARD, playerA, "Lightning Axe"); // {R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", mountains);
+        addCard(Zone.BATTLEFIELD, playerB, "Hill Giant");
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 2);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
+        addTarget(playerA, "Lightning Axe");
+    }
+
+    @Test
+    public void test_Flashback_PayManaOption_IsReduced() {
+        prepareLightningAxeWithFlashback(5); // {R} + {5} - {1}
+
+        // no cards left in hand, so the {5} has to be paid
+        checkPlayableAbility("playable", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback", true);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback", "Hill Giant");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerB, "Hill Giant", 1);
+        assertExileCount(playerA, "Lightning Axe", 1);
+        assertTappedCount("Mountain", true, 5);
+    }
+
+    @Test
+    public void test_Flashback_NotEnoughManaForReducedOption() {
+        prepareLightningAxeWithFlashback(4); // {R} + {5} - {1}, one short
+
+        // the card's own "or" cost must be checked too, not only the flashback cost
+        checkPlayableAbility("not playable", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Lightning Axe", 1);
     }
 }
