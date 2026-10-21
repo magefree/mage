@@ -191,6 +191,7 @@ public enum SubType {
     ECHIDNA("Echidna", SubTypeSet.CreatureType),
     EFREET("Efreet", SubTypeSet.CreatureType),
     EGG("Egg", SubTypeSet.CreatureType),
+    EL_AURIAN("El-Aurian", SubTypeSet.CreatureType),
     ELDER("Elder", SubTypeSet.CreatureType),
     ELDRAZI("Eldrazi", SubTypeSet.CreatureType),
     ELEMENTAL("Elemental", SubTypeSet.CreatureType),
