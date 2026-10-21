@@ -87,10 +87,7 @@ class FlickerformEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         // Exile enchanted creature and all Auras attached to it.
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment == null) {
-            enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        }
+        Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent enchantedCreature = game.getPermanent(enchantment.getAttachedTo());
             if (enchantedCreature != null) {
