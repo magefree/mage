@@ -78,6 +78,8 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Engineered Explosives", 264, Rarity.RARE, mage.cards.e.EngineeredExplosives.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Engineered Explosives", 480, Rarity.RARE, mage.cards.e.EngineeredExplosives.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Federation Field Medic", 17, Rarity.COMMON, mage.cards.f.FederationFieldMedic.class));
+        cards.add(new SetCardInfo("Federation Outpost", 282, Rarity.RARE, mage.cards.f.FederationOutpost.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Federation Outpost", 332, Rarity.RARE, mage.cards.f.FederationOutpost.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Federation Probe", 59, Rarity.COMMON, mage.cards.f.FederationProbe.class));
         cards.add(new SetCardInfo("Ferenginar", 283, Rarity.COMMON, mage.cards.f.Ferenginar.class));
         cards.add(new SetCardInfo("Forest", 311, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
