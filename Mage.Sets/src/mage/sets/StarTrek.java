@@ -120,6 +120,9 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Deanna Troi, Psychic Counsel", 11, Rarity.RARE, mage.cards.d.DeannaTroiPsychicCounsel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deanna Troi, Psychic Counsel", 365, Rarity.RARE, mage.cards.d.DeannaTroiPsychicCounsel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deanna Troi, Psychic Counsel", 499, Rarity.RARE, mage.cards.d.DeannaTroiPsychicCounsel.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Deep Space 9", 263, Rarity.MYTHIC, mage.cards.d.DeepSpace9.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Deep Space 9", 479, Rarity.MYTHIC, mage.cards.d.DeepSpace9.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Deep Space 9", 556, Rarity.MYTHIC, mage.cards.d.DeepSpace9.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deep Space Scan", 370, Rarity.RARE, mage.cards.d.DeepSpaceScan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deep Space Scan", 504, Rarity.RARE, mage.cards.d.DeepSpaceScan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deep Space Scan", 53, Rarity.RARE, mage.cards.d.DeepSpaceScan.class, NON_FULL_USE_VARIOUS));
