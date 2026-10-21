@@ -100,6 +100,8 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Hallowed Fountain", 487, Rarity.RARE, mage.cards.h.HallowedFountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("He's Dead, Jim", 114, Rarity.COMMON, mage.cards.h.HesDeadJim.class));
         cards.add(new SetCardInfo("Highly Illogical", 62, Rarity.UNCOMMON, mage.cards.h.HighlyIllogical.class));
+        cards.add(new SetCardInfo("Hit It!", 240, Rarity.RARE, mage.cards.h.HitIt.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hit It!", 476, Rarity.RARE, mage.cards.h.HitIt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hive Mind Coprocessor", 115, Rarity.UNCOMMON, mage.cards.h.HiveMindCoprocessor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hive Mind Coprocessor", 573, Rarity.UNCOMMON, mage.cards.h.HiveMindCoprocessor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Horta", 152, Rarity.COMMON, mage.cards.h.Horta.class));
