@@ -22,6 +22,7 @@ import mage.cards.repository.TokenRepository;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentMeld;
 import mage.game.permanent.token.EmptyToken;
 import mage.game.permanent.token.Token;
 import mage.util.CardUtil;
@@ -184,7 +185,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
             } else {
                 permanent = game.getPermanent(source.getSourceId());
             }
-            if (permanent != null) {
+            if (permanent != null && canBeTurnedFaceDown(permanent)) {
                 permanent.setFaceDown(true, game);
             }
         }
@@ -364,6 +365,20 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
         if (object instanceof Card) {
             ((Card) object).setRarity(Rarity.SPECIAL);
         }
+    }
+
+    /**
+     * 712.16. Melded permanents and other double-faced permanents can't be turned face down. If a spell or ability
+     * tries to turn a double-faced permanent face down, nothing happens and that effect doesn't change any of its
+     * characteristics or their copiable values.
+     * <p>
+     * 730.2j A face-up merged permanent that contains a double-faced component can't be turned face down.
+     * (a mutated permanent keeps the double-faced card it merged with as its own card, so it's covered too)
+     */
+    public static boolean canBeTurnedFaceDown(Permanent permanent) {
+        return !permanent.isTransformable()
+                && !(permanent instanceof PermanentMeld)
+                && !(permanent.getMainCard() instanceof DoubleFacedCard);
     }
 
     /**
