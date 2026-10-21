@@ -76,21 +76,21 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
     }
 
     @Override
-    public void addSpecialAction(Ability source, Game game, ManaCost paying) {
+    public void addSpecialAction(Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null
                 || source.getAbilityType() != AbilityType.SPELL
                 || !game.getBattlefield().containsControlled(StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURE, source, game, 1)) {
             return;
         }
-        int maxCreatures = new ConvokePayment(paying).getMaxCreatures();
+        int maxCreatures = new ConvokePayment(ManaUtil.getCastingCost(game, source)).getMaxCreatures();
         if (maxCreatures == 0) {
             return;
         }
-        SpecialAction specialAction = new ConvokeSpecialAction(paying, this);
+        SpecialAction specialAction = new ConvokeSpecialAction(this);
         specialAction.setControllerId(source.getControllerId());
         specialAction.setSourceId(source.getSourceId());
-        specialAction.addTarget(new ConvokeTarget(maxCreatures, paying));
+        specialAction.addTarget(new ConvokeTarget(maxCreatures));
         if (specialAction.canActivate(source.getControllerId(), game).canActivate()) {
             game.getState().getSpecialActions().add(specialAction);
         }
@@ -305,17 +305,13 @@ class ConvokePayment {
  */
 class ConvokeTarget extends TargetPermanent {
 
-    private final ManaCost paying; // not copied, see AlternateManaPaymentAbility.addSpecialAction
-
-    ConvokeTarget(int maxCreatures, ManaCost paying) {
+    ConvokeTarget(int maxCreatures) {
         super(1, maxCreatures, StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURE, true);
-        this.paying = paying;
         withTargetName("creature to tap for convoke");
     }
 
     private ConvokeTarget(final ConvokeTarget target) {
         super(target);
-        this.paying = target.paying;
     }
 
     @Override
@@ -326,7 +322,7 @@ class ConvokeTarget extends TargetPermanent {
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
-        ConvokePayment payment = new ConvokePayment(paying);
+        ConvokePayment payment = new ConvokePayment(ManaUtil.getCastingCost(game, source));
         List<Set<ManaType>> chosen = ConvokePayment.colorsOf(this.getTargets()
                 .stream()
                 .map(game::getPermanent)
@@ -350,11 +346,11 @@ class ConvokeTarget extends TargetPermanent {
 
 class ConvokeSpecialAction extends SpecialAction {
 
-    public ConvokeSpecialAction(ManaCost paying, AlternateManaPaymentAbility manaAbility) {
+    public ConvokeSpecialAction(AlternateManaPaymentAbility manaAbility) {
         super(Zone.ALL, manaAbility);
         this.abilityType = AbilityType.SPECIAL_MANA_PAYMENT;
         setRuleVisible(false);
-        this.addEffect(new ConvokeEffect(paying));
+        this.addEffect(new ConvokeEffect());
     }
 
     protected ConvokeSpecialAction(final ConvokeSpecialAction ability) {
@@ -369,17 +365,13 @@ class ConvokeSpecialAction extends SpecialAction {
 
 class ConvokeEffect extends OneShotEffect {
 
-    private final ManaCost paying; // not copied, see AlternateManaPaymentAbility.addSpecialAction
-
-    public ConvokeEffect(ManaCost paying) {
+    public ConvokeEffect() {
         super(Outcome.Benefit);
-        this.paying = paying;
         this.staticText = "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)";
     }
 
     protected ConvokeEffect(final ConvokeEffect effect) {
         super(effect);
-        this.paying = effect.paying;
     }
 
     @Override
@@ -394,7 +386,7 @@ class ConvokeEffect extends OneShotEffect {
         if (controller == null || spell == null) {
             return false;
         }
-        ConvokePayment payment = new ConvokePayment(paying);
+        ConvokePayment payment = new ConvokePayment(ManaUtil.getCastingCost(game, source));
         Map<Permanent, Set<ManaType>> creatures = new LinkedHashMap<>();
         for (UUID creatureId : this.getTargetPointer().getTargets(game, source)) {
             Permanent perm = game.getPermanent(creatureId);

@@ -20,6 +20,7 @@ import mage.constants.ManaType;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
+import mage.game.stack.Spell;
 import mage.players.Player;
 
 import java.util.*;
@@ -435,10 +436,10 @@ public final class ManaUtil {
      *
      * @param source ability the mana costs have to be paid for
      * @param game
-     * @param paying the cost being paid, which the special actions pay directly
+     * @param unpaid mana that has still to be paid
      * @return message to be shown in human players feedback area
      */
-    public static String addSpecialManaPayAbilities(Ability source, Game game, ManaCost paying) {
+    public static String addSpecialManaPayAbilities(Ability source, Game game, ManaCost unpaid) {
         MageObject baseObject = game.getPermanent(source.getSourceId());
         if (baseObject == null) {
             baseObject = game.getCard(source.getSourceId());
@@ -448,7 +449,7 @@ public final class ManaUtil {
         if (mageObject instanceof Card) {
             for (Ability ability : ((Card) mageObject).getAbilities(game)) {
                 if (ability instanceof AlternateManaPaymentAbility) {
-                    ((AlternateManaPaymentAbility) ability).addSpecialAction(source, game, paying);
+                    ((AlternateManaPaymentAbility) ability).addSpecialAction(source, game);
                 }
             }
             if (baseObject == null) {
@@ -456,10 +457,22 @@ public final class ManaUtil {
             }
         }
         if (baseObject != null) {
-            return paying.getUnpaid().getText() + "<div style='font-size:11pt'>" + baseObject.getLogName() + "</div>";
+            return unpaid.getText() + "<div style='font-size:11pt'>" + baseObject.getLogName() + "</div>";
         } else {
-            return paying.getUnpaid().getText();
+            return unpaid.getText();
         }
+    }
+
+    /**
+     * The mana cost of the spell being cast from the source, which alternate mana payments pay directly
+     * (see {@link AlternateManaPaymentAbility#addSpecialAction}). A payment rollback keeps the stack,
+     * so this is the object the payment loop is paying.
+     *
+     * @return an empty cost if no spell from the source is on the stack
+     */
+    public static ManaCost getCastingCost(Game game, Ability source) {
+        Spell spell = game.getStack().getSpell(source.getSourceId());
+        return spell == null ? new ManaCostsImpl<>() : spell.getSpellAbility().getManaCostsToPay();
     }
 
     /**

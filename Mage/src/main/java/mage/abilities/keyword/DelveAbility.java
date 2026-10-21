@@ -90,12 +90,12 @@ public class DelveAbility extends SimpleStaticAbility implements AlternateManaPa
     }
 
     @Override
-    public void addSpecialAction(Ability source, Game game, ManaCost paying) {
+    public void addSpecialAction(Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        int unpaidGeneric = ManaUtil.getUnpaidGeneric(paying);
+        int unpaidGeneric = ManaUtil.getUnpaidGeneric(ManaUtil.getCastingCost(game, source));
         if (controller != null && !controller.getGraveyard().isEmpty()) {
             if (source.getAbilityType() == AbilityType.SPELL && unpaidGeneric > 0) {
-                SpecialAction specialAction = new DelveSpecialAction(paying, this);
+                SpecialAction specialAction = new DelveSpecialAction(this);
                 specialAction.setControllerId(source.getControllerId());
                 specialAction.setSourceId(source.getSourceId());
                 specialAction.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(
@@ -125,10 +125,10 @@ public class DelveAbility extends SimpleStaticAbility implements AlternateManaPa
 
 class DelveSpecialAction extends SpecialAction {
 
-    public DelveSpecialAction(ManaCost paying, AlternateManaPaymentAbility manaAbility) {
+    public DelveSpecialAction(AlternateManaPaymentAbility manaAbility) {
         super(Zone.ALL, manaAbility);
         this.abilityType = AbilityType.SPECIAL_MANA_PAYMENT;
-        this.addEffect(new DelveEffect(paying));
+        this.addEffect(new DelveEffect());
     }
 
     protected DelveSpecialAction(final DelveSpecialAction ability) {
@@ -143,17 +143,13 @@ class DelveSpecialAction extends SpecialAction {
 
 class DelveEffect extends OneShotEffect {
 
-    private final ManaCost paying; // not copied, see AlternateManaPaymentAbility.addSpecialAction
-
-    public DelveEffect(ManaCost paying) {
+    public DelveEffect() {
         super(Outcome.Benefit);
-        this.paying = paying;
         this.staticText = "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)";
     }
 
     protected DelveEffect(final DelveEffect effect) {
         super(effect);
-        this.paying = effect.paying;
     }
 
     @Override
@@ -173,7 +169,7 @@ class DelveEffect extends OneShotEffect {
                 for (Card card : exiledCards) {
                     toDelve.add(card);
                 }
-                ManaUtil.payGeneric(paying, toDelve.size(), null);
+                ManaUtil.payGeneric(ManaUtil.getCastingCost(game, source), toDelve.size(), null);
                 String keyString = CardUtil.getCardZoneString("delvedCards", source.getSourceId(), game);
                 @SuppressWarnings("unchecked")
                 Cards delvedCards = (Cards) game.getState().getValue(keyString);

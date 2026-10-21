@@ -78,13 +78,13 @@ public class ImproviseAbility extends SimpleStaticAbility implements AlternateMa
     }
 
     @Override
-    public void addSpecialAction(Ability source, Game game, ManaCost paying) {
+    public void addSpecialAction(Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         int canPayCount = untappedCount.calculate(game, source, null);
-        int unpaidGeneric = ManaUtil.getUnpaidGeneric(paying);
+        int unpaidGeneric = ManaUtil.getUnpaidGeneric(ManaUtil.getCastingCost(game, source));
         if (controller != null && canPayCount > 0) {
             if (source.getAbilityType() == AbilityType.SPELL && unpaidGeneric > 0) {
-                SpecialAction specialAction = new ImproviseSpecialAction(paying, this);
+                SpecialAction specialAction = new ImproviseSpecialAction(this);
                 specialAction.setControllerId(source.getControllerId());
                 specialAction.setSourceId(source.getSourceId());
                 // create filter for possible artifacts to tap
@@ -112,11 +112,11 @@ public class ImproviseAbility extends SimpleStaticAbility implements AlternateMa
 
 class ImproviseSpecialAction extends SpecialAction {
 
-    public ImproviseSpecialAction(ManaCost paying, AlternateManaPaymentAbility manaAbility) {
+    public ImproviseSpecialAction(AlternateManaPaymentAbility manaAbility) {
         super(Zone.ALL, manaAbility);
         this.abilityType = AbilityType.SPECIAL_MANA_PAYMENT;
         setRuleVisible(false);
-        this.addEffect(new ImproviseEffect(paying));
+        this.addEffect(new ImproviseEffect());
     }
 
     protected ImproviseSpecialAction(final ImproviseSpecialAction ability) {
@@ -131,17 +131,13 @@ class ImproviseSpecialAction extends SpecialAction {
 
 class ImproviseEffect extends OneShotEffect {
 
-    private final ManaCost paying; // not copied, see AlternateManaPaymentAbility.addSpecialAction
-
-    public ImproviseEffect(ManaCost paying) {
+    public ImproviseEffect() {
         super(Outcome.Benefit);
-        this.paying = paying;
         this.staticText = "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)";
     }
 
     protected ImproviseEffect(final ImproviseEffect effect) {
         super(effect);
-        this.paying = effect.paying;
     }
 
     @Override
@@ -156,6 +152,7 @@ class ImproviseEffect extends OneShotEffect {
         if (controller == null || spell == null) {
             return false;
         }
+        ManaCost paying = ManaUtil.getCastingCost(game, source);
         for (UUID artifactId : this.getTargetPointer().getTargets(game, source)) {
             Permanent perm = game.getPermanent(artifactId);
             if (perm == null || ManaUtil.getUnpaidGeneric(paying) == 0) {
