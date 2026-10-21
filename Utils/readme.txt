@@ -1,4 +1,5 @@
 Usage:
+check-set-printings.py <SET_CODE> - lists implemented cards whose printing (collector number) is not registered in the set's Java class
 gen-card.pl - enter the card name when prompted to generate the java classes
 gen-existing-cards-by-set.pl - generates the java clases for the cards from the set of your choice that already have an implementation
 gen-list-cards-for-set.pl - generates the file for cards for a set in data/
