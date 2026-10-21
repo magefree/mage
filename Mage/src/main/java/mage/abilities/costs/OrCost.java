@@ -64,6 +64,22 @@ public class OrCost implements Cost {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        if (chooseCost(ability, game, source, controllerId) == null) {
+            return false;
+        }
+        return selectedCost.pay(ability, game, source, controllerId, noMana, costToPay);
+    }
+
+    public boolean hasManaCost() {
+        return costs.stream().anyMatch(ManaCost.class::isInstance);
+    }
+
+    /**
+     * Asks the controller which cost to pay, without paying it
+     *
+     * @return the selected cost or null if none can be paid
+     */
+    public Cost chooseCost(Ability ability, Game game, Ability source, UUID controllerId) {
         selectedCost = null;
         List<Cost> usable = costs
                 .stream()
@@ -71,11 +87,11 @@ public class OrCost implements Cost {
                 .collect(Collectors.toList());
         Player controller = game.getPlayer(controllerId);
         if (controller == null) {
-            return false;
+            return null;
         }
         switch (usable.size()) {
             case 0:
-                return false;
+                return null;
             case 1:
                 selectedCost = usable.get(0);
                 break;
@@ -115,10 +131,7 @@ public class OrCost implements Cost {
                 selectedCost = costMap.getOrDefault(
                         CardUtil.getTextWithFirstCharLowerCase(choice.getChoice()), null);
         }
-        if (selectedCost == null) {
-            return false;
-        }
-        return selectedCost.pay(ability, game, source, controllerId, noMana, costToPay);
+        return selectedCost;
     }
 
     @Override
