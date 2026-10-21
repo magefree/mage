@@ -70,13 +70,13 @@ public class AssistAbility extends SimpleStaticAbility implements AlternateManaP
     }
 
     @Override
-    public void addSpecialAction(Ability source, Game game, ManaCost paying) {
+    public void addSpecialAction(Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null
                 && source.getAbilityType() == AbilityType.SPELL
-                && ManaUtil.getUnpaidGeneric(paying) >= 1
+                && ManaUtil.getUnpaidGeneric(ManaUtil.getCastingCost(game, source)) >= 1
                 && game.getState().getValue(source.getSourceId().toString() + game.getState().getZoneChangeCounter(source.getSourceId()) + "_assisted") == null) {
-            SpecialAction specialAction = new AssistSpecialAction(paying, this);
+            SpecialAction specialAction = new AssistSpecialAction(this);
             specialAction.setControllerId(source.getControllerId());
             specialAction.setSourceId(source.getSourceId());
             Target target = new TargetPlayer(1, 1, true, filter);
@@ -129,11 +129,11 @@ public class AssistAbility extends SimpleStaticAbility implements AlternateManaP
 
 class AssistSpecialAction extends SpecialAction {
 
-    AssistSpecialAction(ManaCost paying, AlternateManaPaymentAbility manaAbility) {
+    AssistSpecialAction(AlternateManaPaymentAbility manaAbility) {
         super(Zone.ALL, manaAbility);
         this.abilityType = AbilityType.SPECIAL_MANA_PAYMENT;
         setRuleVisible(false);
-        this.addEffect(new AssistEffect(paying));
+        this.addEffect(new AssistEffect());
     }
 
     AssistSpecialAction(final AssistSpecialAction ability) {
@@ -148,17 +148,13 @@ class AssistSpecialAction extends SpecialAction {
 
 class AssistEffect extends OneShotEffect {
 
-    private final ManaCost paying; // not copied, see AlternateManaPaymentAbility.addSpecialAction
-
-    AssistEffect(ManaCost paying) {
+    AssistEffect() {
         super(Outcome.Benefit);
-        this.paying = paying;
         this.staticText = "Assist <i>(Another player can help pay the generic mana of this spell's cost.)</i>";
     }
 
     AssistEffect(final AssistEffect effect) {
         super(effect);
-        this.paying = effect.paying;
     }
 
     @Override
@@ -172,6 +168,7 @@ class AssistEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         Spell spell = game.getStack().getSpell(source.getSourceId());
         if (controller != null && spell != null && targetPlayer != null) {
+            ManaCost paying = ManaUtil.getCastingCost(game, source);
             // AI can't assist other players, maybe for teammates only (but tests must work as normal)
             int amountToPay = 0;
             if (!targetPlayer.isComputer()) {
@@ -180,9 +177,11 @@ class AssistEffect extends OneShotEffect {
             }
 
             if (amountToPay > 0) {
+                // assist pays only generic (702.132a), so the helper pays a generic cost of their own
                 ManaCost cost = ManaUtil.createManaCost(amountToPay, false);
                 // the helper's mana is spent to cast the spell, so it's paid as the spell (Mishra's Workshop,
-                // Powerstone) and under the spell's source restriction (Myr Superion)
+                // Powerstone) and under the spell's source restriction (Myr Superion). That filter comes from a
+                // generic part: paying.getSourceFilter() returns the first any part has, which can be {S}'s snow filter
                 ManaUtil.getUnpaidGenericParts(paying)
                         .stream()
                         .findFirst()

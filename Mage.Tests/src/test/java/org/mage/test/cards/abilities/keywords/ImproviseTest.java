@@ -104,4 +104,27 @@ public class ImproviseTest extends CardTestPlayerBaseWithAIHelps {
         }
         assertTappedCount("Memnite", true, 2);
     }
+
+    @Test
+    public void test_PlayImprovise_CantPayCostOnResolution() {
+        addCard(Zone.HAND, playerA, "Grizzly Bears", 1);
+        // {1}{U} Instant
+        // Counter target spell unless its controller pays {3}.
+        addCard(Zone.HAND, playerA, "Mana Leak", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Inspiring Statuary", 1); // Nonartifact spells you cast have improvise.
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mana Leak", "Grizzly Bears");
+        // the lands pay for both spells. Improvise can help cast a spell, but it can't pay the {3} Mana Leak asks for
+        setChoice(playerA, true); // pay {3}
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Grizzly Bears", 1);
+        assertTappedCount("Memnite", false, 3);
+    }
 }

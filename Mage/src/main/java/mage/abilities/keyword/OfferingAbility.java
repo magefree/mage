@@ -84,7 +84,7 @@ public class OfferingAbility extends StaticAbility implements AlternateManaPayme
     }
 
     @Override
-    public void addSpecialAction(Ability source, Game game, ManaCost paying) {
+    public void addSpecialAction(Ability source, Game game) {
         // No special Action
     }
 
