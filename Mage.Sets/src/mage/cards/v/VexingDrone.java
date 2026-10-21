@@ -13,14 +13,13 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author muz
  */
 public final class VexingDrone extends CardImpl {
 
     public VexingDrone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{W}");
-        
+
         this.subtype.add(SubType.BORG);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
