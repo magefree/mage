@@ -666,13 +666,21 @@ public abstract class AbilityImpl implements Ability {
                 return false;
             }
             costs.remove(cost);
-            if (selectedCost instanceof ManaCost) {
-                addManaCostsToPay((ManaCost) selectedCost.copy());
-            } else {
-                costs.add(selectedCost.copy());
-            }
+            addChosenOrCost(selectedCost);
         }
         return true;
+    }
+
+    private void addChosenOrCost(Cost cost) {
+        if (cost instanceof ManaCost) {
+            addManaCostsToPay((ManaCost) cost.copy());
+        } else if (cost instanceof CompositeCost) {
+            // e.g. "{3}, {T}" -- the mana part goes to the total cost, the rest is paid as usual
+            addChosenOrCost(((CompositeCost) cost).getFirstCost());
+            addChosenOrCost(((CompositeCost) cost).getSecondCost());
+        } else {
+            costs.add(cost.copy());
+        }
     }
 
     /**

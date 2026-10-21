@@ -1,5 +1,15 @@
 package org.mage.test.cards.cost.additional;
 
+import mage.abilities.Ability;
+import mage.abilities.Mode;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.OrCost;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.costadjusters.LegendaryCreatureCostAdjuster;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.GetXValue;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
@@ -54,5 +64,102 @@ public class OrCostManaReductionTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertPermanentCount(playerA, "Vadrik, Astral Archmage", 1);
+    }
+
+    @Test
+    public void test_ActivatedAbility_ManaAndTapOption_IsReduced() {
+        // Abilities you activate that aren't mana abilities cost {2} less to activate.
+        // This effect can't reduce the mana in that cost to less than one mana.
+        addCard(Zone.BATTLEFIELD, playerA, "Zirda, the Dawnwaker");
+        //
+        // {3}, {T} or {U}, {T}: Return target creature to its owner's hand unless its controller pays {1}.
+        addCard(Zone.BATTLEFIELD, playerA, "Crystal Shard");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1); // {3} - {2}
+        addCard(Zone.BATTLEFIELD, playerB, "Hill Giant");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T} or {U}, {T}", "Hill Giant");
+        setChoice(playerA, true); // pay {3}, {T}
+        setChoice(playerB, false); // don't pay {1}
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerB, "Hill Giant", 1);
+        assertTapped("Crystal Shard", true);
+        assertTappedCount("Mountain", true, 1);
+    }
+
+    @Test
+    public void test_XCost_AndOrCostManaOption_AreReducedTogether() {
+        // Abilities you activate that aren't mana abilities cost {2} less to activate.
+        // This effect can't reduce the mana in that cost to less than one mana.
+        addCard(Zone.BATTLEFIELD, playerA, "Zirda, the Dawnwaker");
+        //
+        // {X}, discard a card or pay {2}: You gain X life.
+        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(GetXValue.instance), new ManaCostsImpl<>("{X}"));
+        ability.addCost(new OrCost("discard a card or pay {2}", new DiscardCardCost(), new GenericManaCost(2)));
+        addCustomCardWithAbility("test", playerA, ability);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1); // {1} + {2} - {2}
+
+        // no cards in hand, so the {2} has to be paid
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{X}");
+        setChoice(playerA, "X=1");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20 + 1);
+        assertTappedCount("Mountain", true, 1);
+    }
+
+    @Test
+    public void test_CostAdjuster_ReducesOrCostManaOption() {
+        // Isamaru is a legendary creature for the cost adjuster below
+        addCard(Zone.BATTLEFIELD, playerA, "Isamaru, Hound of Konda");
+        //
+        // Discard a card or pay {2}: You gain 1 life. This ability costs {1} less to activate for each legendary creature you control.
+        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(1), new ManaCostsImpl<>(""));
+        ability.addCost(new OrCost("discard a card or pay {2}", new DiscardCardCost(), new GenericManaCost(2)));
+        ability.setCostAdjuster(LegendaryCreatureCostAdjuster.instance);
+        addCustomCardWithAbility("test", playerA, ability);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1); // {2} - {1}
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Discard a card or pay {2}");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20 + 1);
+        assertTappedCount("Mountain", true, 1);
+    }
+
+    @Test
+    public void test_Modes_ChosenBeforeOrCost() {
+        // Abilities you activate that aren't mana abilities cost {2} less to activate.
+        // This effect can't reduce the mana in that cost to less than one mana.
+        addCard(Zone.BATTLEFIELD, playerA, "Zirda, the Dawnwaker");
+        //
+        // Discard a card or pay {2}: Choose one -- You gain 1 life; or You gain 3 life.
+        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(1), new ManaCostsImpl<>(""));
+        ability.addMode(new Mode(new GainLifeEffect(3)));
+        ability.addCost(new OrCost("discard a card or pay {2}", new DiscardCardCost(), new GenericManaCost(2)));
+        addCustomCardWithAbility("test", playerA, ability);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1); // {2} - {2}, but at least one mana
+        addCard(Zone.HAND, playerA, "Grizzly Bears"); // can be discarded, so both options are offered
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Discard a card or pay {2}");
+        setModeChoice(playerA, "2");
+        setChoice(playerA, false); // pay {2} instead of discarding
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20 + 3);
+        assertHandCount(playerA, "Grizzly Bears", 1);
+        assertTappedCount("Mountain", true, 1);
     }
 }

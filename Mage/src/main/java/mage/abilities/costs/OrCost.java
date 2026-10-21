@@ -71,7 +71,15 @@ public class OrCost implements Cost {
     }
 
     public boolean hasManaCost() {
-        return costs.stream().anyMatch(ManaCost.class::isInstance);
+        return costs.stream().anyMatch(OrCost::hasManaCost);
+    }
+
+    private static boolean hasManaCost(Cost cost) {
+        if (cost instanceof CompositeCost) {
+            return hasManaCost(((CompositeCost) cost).getFirstCost())
+                    || hasManaCost(((CompositeCost) cost).getSecondCost());
+        }
+        return cost instanceof ManaCost;
     }
 
     /**

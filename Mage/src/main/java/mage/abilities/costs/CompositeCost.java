@@ -41,6 +41,14 @@ public class CompositeCost implements Cost {
         return description;
     }
 
+    public Cost getFirstCost() {
+        return firstCost;
+    }
+
+    public Cost getSecondCost() {
+        return secondCost;
+    }
+
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         return firstCost.canPay(ability, source, controllerId, game) && secondCost.canPay(ability, source, controllerId, game);
