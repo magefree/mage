@@ -177,6 +177,8 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Temple Garden", 396, Rarity.RARE, mage.cards.t.TempleGarden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temple Garden", 491, Rarity.RARE, mage.cards.t.TempleGarden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The City on the Edge of Forever", 228, Rarity.RARE, mage.cards.t.TheCityOnTheEdgeOfForever.class));
+        cards.add(new SetCardInfo("The Unicomplex", 304, Rarity.RARE, mage.cards.t.TheUnicomplex.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Unicomplex", 337, Rarity.RARE, mage.cards.t.TheUnicomplex.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tricorder", 270, Rarity.COMMON, mage.cards.t.Tricorder.class));
         cards.add(new SetCardInfo("U.S.S. Enterprise-D, Galaxy-Class", 273, Rarity.RARE, mage.cards.u.USSEnterpriseDGalaxyClass.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("U.S.S. Enterprise-D, Galaxy-Class", 481, Rarity.RARE, mage.cards.u.USSEnterpriseDGalaxyClass.class, NON_FULL_USE_VARIOUS));
