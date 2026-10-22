@@ -42,8 +42,8 @@ public final class LockjawSlobberingTeleporter extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
-        // At the beginning of combat on your turn, if you've cast a noncreature spell this turn, put a +1/+1 counter on Lockjaw.
-        // When you do, Lockjaw and up to one other target creature you control can’t be blocked this turn.
+        //At the beginning of combat on your turn, if you've cast a noncreature spell this turn, put a +1/+1 counter on Lockjaw.
+        // When you do, Lockjaw and up to one other target creature you control can't be blocked this turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()))
                 .withInterveningIf(CastNoncreatureSpellThisTurnCondition.instance)
                 .addHint(CastNoncreatureSpellThisTurnCondition.getHint());
@@ -68,7 +68,6 @@ class LockJawUnblockableEffect extends OneShotEffect {
     static {
         filterOther.add(AnotherPredicate.instance);
     }
-
 
     LockJawUnblockableEffect() {
         super(Outcome.Benefit);
