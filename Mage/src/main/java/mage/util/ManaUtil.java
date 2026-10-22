@@ -13,7 +13,10 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.mana.*;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardWithSpellOption;
+import mage.cards.DoubleFacedCard;
+import mage.cards.SplitCard;
 import mage.choices.Choice;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
@@ -436,7 +439,7 @@ public final class ManaUtil {
      *
      * @param source ability the mana costs have to be paid for
      * @param game
-     * @param unpaid mana that has still to be paid
+     * @param unpaid mana that has still to be paid - here used only to construct the returned prompt text
      * @return message to be shown in human players feedback area
      */
     public static String addSpecialManaPayAbilities(Ability source, Game game, ManaCost unpaid) {
@@ -467,6 +470,9 @@ public final class ManaUtil {
      * The mana cost of the spell being cast from the source, which alternate mana payments pay directly
      * (see {@link AlternateManaPaymentAbility#addSpecialAction}). A payment rollback keeps the stack,
      * so this is the object the payment loop is paying.
+     * <p>
+     * It's the spell's own cost, not a copy, so paying it pays the spell. Look it up each time rather than keep
+     * it in an ability, effect or target: their copies in saved game states would all share it.
      *
      * @return an empty cost if no spell from the source is on the stack
      */
@@ -476,22 +482,14 @@ public final class ManaUtil {
     }
 
     /**
-     * The parts of a cost still to pay, with nested costs flattened
+     * The parts of a cost still to pay. They're the cost's own parts, so paying one pays the cost.
      */
     public static List<ManaCost> getUnpaidParts(ManaCost cost) {
-        List<ManaCost> parts = new ArrayList<>();
-        addUnpaidParts(cost, parts);
-        return parts;
-    }
-
-    private static void addUnpaidParts(ManaCost cost, List<ManaCost> parts) {
-        if (cost instanceof ManaCosts) {
-            for (ManaCost part : (ManaCosts<?>) cost) {
-                addUnpaidParts(part, parts);
-            }
-        } else if (!cost.isPaid()) {
-            parts.add(cost);
-        }
+        // ManaCostsImpl.add flattens costs added to it, so its parts are single symbols
+        Collection<? extends ManaCost> parts = cost instanceof ManaCosts
+                ? (ManaCosts<?>) cost
+                : Collections.singletonList(cost);
+        return parts.stream().filter(part -> !part.isPaid()).collect(Collectors.toList());
     }
 
     /**

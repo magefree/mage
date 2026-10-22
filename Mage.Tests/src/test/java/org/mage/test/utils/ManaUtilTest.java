@@ -1,22 +1,24 @@
 package org.mage.test.utils;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.UUID;
+import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.mana.BasicManaAbility;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
-import mage.abilities.mana.RedManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
+import mage.abilities.mana.*;
 import mage.cards.Card;
 import mage.cards.repository.CardRepository;
 import mage.util.ManaUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author noxx
@@ -92,6 +94,104 @@ public class ManaUtilTest extends CardTestPlayerBase {
         Assert.assertEquals("{5}{C}{R}{R}{R}{U}",   ManaUtil.condenseManaCostString("{R}{C}{R}{2}{R}{3}{U}"));
     }
 
+    @Test
+    public void testUnpaidParts() {
+        ManaCosts<ManaCost> cost = parse("{W}{W/U}{2/W}{C/W}{W/P}{C}{S}{1}");
+        Assert.assertEquals("{W} {W/U} {2/W} {C/W} {W/P} {C} {S} {1}", texts(ManaUtil.getUnpaidParts(cost)));
+
+        cost = parse("{W}{2/W}{3}");
+        cost.get(0).setPayment(Mana.WhiteMana(1));
+        cost.get(1).setPayment(Mana.ColorlessMana(1));
+        cost.get(2).setPayment(Mana.ColorlessMana(3));
+        Assert.assertEquals("{2/W}", texts(ManaUtil.getUnpaidParts(cost))); // paid parts are left out, partly paid ones kept
+
+        cost = parse("{W}{U}");
+        ManaUtil.getUnpaidParts(cost).get(0).setPayment(Mana.WhiteMana(1));
+        Assert.assertEquals("{U}", cost.getUnpaid().getText()); // the parts are the cost's own
+
+        // a single symbol, such as the unpaid part ManaCostImpl.pay hands to playMana
+        GenericManaCost symbol = new GenericManaCost(2);
+        Assert.assertEquals("{2}", texts(ManaUtil.getUnpaidParts(symbol)));
+        symbol.setPayment(Mana.ColorlessMana(2));
+        Assert.assertEquals("", texts(ManaUtil.getUnpaidParts(symbol)));
+    }
+
+    @Test
+    public void testUnpaidGeneric() {
+        Assert.assertEquals(3, ManaUtil.getUnpaidGeneric(parse("{3}{W}")));
+        Assert.assertEquals(5, ManaUtil.getUnpaidGeneric(parse("{2/W}{2/W}{1}"))); // generic half of {2/W}
+        Assert.assertEquals(0, ManaUtil.getUnpaidGeneric(parse("{W/U}{C/W}{W/P}"))); // hybrid and phyrexian symbols are colored
+        Assert.assertEquals(0, ManaUtil.getUnpaidGeneric(parse("{C}")));
+        Assert.assertEquals(0, ManaUtil.getUnpaidGeneric(parse("{S}"))); // 107.4h, though SnowManaCost.getMana() is generic
+
+        ManaCosts<ManaCost> partlyPaid = parse("{3}{2/W}{2/W}");
+        partlyPaid.get(0).setPayment(Mana.ColorlessMana(1));
+        partlyPaid.get(1).setPayment(Mana.ColorlessMana(1));
+        partlyPaid.get(2).setPayment(Mana.WhiteMana(1));
+        Assert.assertEquals(2, ManaUtil.getUnpaidGenericOfPart(partlyPaid.get(0)));
+        Assert.assertEquals(1, ManaUtil.getUnpaidGenericOfPart(partlyPaid.get(1)));
+        Assert.assertEquals(0, ManaUtil.getUnpaidGenericOfPart(parse("{W/U}").get(0)));
+        Assert.assertEquals(3, ManaUtil.getUnpaidGeneric(partlyPaid)); // nothing left of the {2/W} paid with {W}
+    }
+
+    @Test
+    public void testGenericOnly() {
+        ManaCosts<ManaCost> cost = parse("{3}{2/W}{2/W}{W}{W/U}{C}{S}");
+        cost.get(2).setPayment(Mana.ColorlessMana(1));
+        Assert.assertTrue(ManaUtil.isGenericOnly(cost.get(0)));
+        Assert.assertFalse(ManaUtil.isGenericOnly(cost.get(1))); // can still be paid with {W}
+        Assert.assertTrue(ManaUtil.isGenericOnly(cost.get(2))); // a partly paid {2/W} can only be finished as generic
+        for (ManaCost part : cost.subList(3, cost.size())) {
+            Assert.assertFalse(part.getText(), ManaUtil.isGenericOnly(part));
+        }
+    }
+
+    @Test
+    public void testUnpaidGenericParts() {
+        Assert.assertEquals("{2} {2/W}", texts(ManaUtil.getUnpaidGenericParts(parse("{2/W}{W}{2}{C}{S}{W/U}")))); // an untouched {2/W} goes last
+
+        ManaCosts<ManaCost> cost = parse("{2/W}{2/W}{1}");
+        cost.get(1).setPayment(Mana.ColorlessMana(1));
+        cost.get(2).setPayment(Mana.ColorlessMana(1));
+        List<ManaCost> parts = ManaUtil.getUnpaidGenericParts(cost);
+        Assert.assertEquals(2, parts.size()); // the paid {1} is left out
+        Assert.assertSame(cost.get(1), parts.get(0)); // the partly paid {2/W} is generic only
+        Assert.assertSame(cost.get(0), parts.get(1));
+    }
+
+    @Test
+    public void testPayGeneric() {
+        ManaCosts<ManaCost> cost = parse("{3}{W}");
+        ManaUtil.payGeneric(cost, 2, null);
+        Assert.assertEquals("{1}{W}", cost.getUnpaid().getText());
+        ManaUtil.payGeneric(cost, 1, null);
+        Assert.assertEquals("{W}", cost.getUnpaid().getText());
+        Assert.assertEquals(0, cost.getUsedManaToPay().count()); // no mana spent
+
+        // generic-only parts are paid first, so an untouched {2/W} can still be paid with {W}
+        cost = parse("{2/W}{2}");
+        ManaUtil.payGeneric(cost, 2, null);
+        Assert.assertEquals("{2/W}", cost.getUnpaid().getText());
+        cost.get(0).setPayment(Mana.WhiteMana(1));
+        Assert.assertTrue(cost.isPaid());
+
+        cost = parse("{2/W}{2}");
+        ManaUtil.payGeneric(cost, 3, null);
+        Assert.assertEquals(1, ManaUtil.getUnpaidGeneric(cost));
+        Assert.assertTrue(ManaUtil.isGenericOnly(cost.get(0)));
+
+        cost = parse("{2/W}{2/W}");
+        ManaUtil.payGeneric(cost, 3, null);
+        Assert.assertEquals(1, ManaUtil.getUnpaidParts(cost).size());
+        Assert.assertEquals(1, ManaUtil.getUnpaidGeneric(cost));
+
+        cost = parse("{2}{1}");
+        Mana spent = Mana.RedMana(1);
+        spent.add(Mana.GreenMana(1));
+        ManaUtil.payGeneric(cost, 2, spent);
+        Assert.assertEquals(spent, cost.getUsedManaToPay());
+    }
+
     /**
      * Common way to test ManaUtil.tryToAutoPay
      *
@@ -161,6 +261,14 @@ public class ManaUtilTest extends CardTestPlayerBase {
             }
         }
         return useableAbilities;
+    }
+
+    private static ManaCosts<ManaCost> parse(String text) {
+        return new ManaCostsImpl<>(text);
+    }
+
+    private static String texts(List<ManaCost> parts) {
+        return parts.stream().map(ManaCost::getText).collect(Collectors.joining(" "));
     }
 
 }
