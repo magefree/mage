@@ -103,17 +103,15 @@ public class EachTargetPointer extends TargetPointerImpl {
         if (zoneChangeCounter.containsKey(targetId)) {
             permanent = game.getPermanent(targetId);
             if (permanent != null && permanent.getZoneChangeCounter(game) == zoneChangeCounter.get(targetId)) {
-                return permanent;
+                // phased-out permanent uses its LKI
+                return game.getPermanentOrLKIBattlefield(targetId);
             }
             MageObject mageObject = game.getLastKnownInformation(targetId, Zone.BATTLEFIELD, zoneChangeCounter.get(targetId));
             if (mageObject instanceof Permanent) {
                 return (Permanent) mageObject;
             }
         } else {
-            permanent = game.getPermanent(targetId);
-            if (permanent == null) {
-                permanent = (Permanent) game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
-            }
+            permanent = game.getPermanentOrLKIBattlefield(targetId);
         }
         return permanent;
     }
