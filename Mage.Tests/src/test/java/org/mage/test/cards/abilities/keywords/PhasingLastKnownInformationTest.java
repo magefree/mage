@@ -187,4 +187,29 @@ public class PhasingLastKnownInformationTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Hill Giant", 1);
     }
+
+    @Test
+    public void test_Power_PhasedOutTarget_FixedTarget() {
+        // Whenever another creature enters, you may put X +1/+1 counters on this creature, where X is that creature's power.
+        addCard(Zone.BATTLEFIELD, playerA, "Hamletback Goliath"); // 6/6
+        // Creatures you control get +1/+1.
+        addCard(Zone.BATTLEFIELD, playerA, "Glorious Anthem");
+        addCard(Zone.HAND, playerA, "Grizzly Bears"); // {1}{G}, 2/2
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.HAND, playerA, ripple);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1); // resolve the creature, keep the Goliath trigger
+        // the Anthem no longer applies to the phased-out Bears, so only the LKI still has power 3
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ripple, "Grizzly Bears");
+        setChoice(playerA, true); // put the counters
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertCounterCount(playerA, "Hamletback Goliath", CounterType.P1P1, 3);
+        assertPowerToughness(playerA, "Hamletback Goliath", 6 + 1 + 3, 6 + 1 + 3);
+    }
 }
