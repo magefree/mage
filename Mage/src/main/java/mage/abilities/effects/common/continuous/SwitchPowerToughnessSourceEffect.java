@@ -42,7 +42,7 @@ public class SwitchPowerToughnessSourceEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = source.getSourcePermanentEvenIfPhasedOut(game);
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game, true);
         if (sourcePermanent == null) {
             if (duration.isOnlyValidIfNoZoneChange()) {
                 discard();

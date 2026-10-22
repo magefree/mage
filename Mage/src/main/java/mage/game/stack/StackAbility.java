@@ -669,8 +669,8 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public Permanent getSourcePermanentEvenIfPhasedOut(Game game) {
-        return this.ability.getSourcePermanentEvenIfPhasedOut(game);
+    public Permanent getSourcePermanentIfItStillExists(Game game, boolean includePhasedOut) {
+        return this.ability.getSourcePermanentIfItStillExists(game, includePhasedOut);
     }
 
     @Override

@@ -544,11 +544,11 @@ public interface Ability extends Controllable, Serializable {
     Permanent getSourcePermanentIfItStillExists(Game game);
 
     /**
-     * Same as getSourcePermanentIfItStillExists, but also finds a phased-out permanent.
+     * Same as getSourcePermanentIfItStillExists, but with includePhasedOut it also finds a phased-out permanent.
      * Use it where the source must still be tracked while it's phased out, e.g. continuous effects
      * that don't end on phasing (702.26f) or "until it leaves the battlefield" checks (702.26d)
      */
-    Permanent getSourcePermanentEvenIfPhasedOut(Game game);
+    Permanent getSourcePermanentIfItStillExists(Game game, boolean includePhasedOut);
 
     /**
      * Returns source permanent info (actual if it exists, otherwise from LKI)

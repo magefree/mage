@@ -64,7 +64,7 @@ class WerewolfPackLeaderEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent permanent = source.getSourcePermanentEvenIfPhasedOut(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game, true);
         if (permanent == null) {
             discard();
             return false;

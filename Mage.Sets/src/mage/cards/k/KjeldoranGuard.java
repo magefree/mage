@@ -104,7 +104,7 @@ class KjeldoranGuardEffect extends OneShotEffect {
         );
 
         // Locking in the Kjeldoran Guard (and its zcc), to be sacrificed later.
-        Permanent guard = source.getSourcePermanentEvenIfPhasedOut(game);
+        Permanent guard = source.getSourcePermanentIfItStillExists(game, true);
         if (guard != null) {
             delayed.getEffects().setTargetPointer(new FixedTarget(guard, game));
         }

@@ -116,7 +116,7 @@ class SecretInvasionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = source.getSourcePermanentEvenIfPhasedOut(game);
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game, true);
         if (sourcePermanent == null || sourcePermanent.getAttachedTo() == null) {
             return false;
         }
@@ -158,6 +158,6 @@ class SecretInvasionCopyEffect extends CopyEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        return super.isInactive(source, game) || source.getSourcePermanentEvenIfPhasedOut(game) == null;
+        return super.isInactive(source, game) || source.getSourcePermanentIfItStillExists(game, true) == null;
     }
 }

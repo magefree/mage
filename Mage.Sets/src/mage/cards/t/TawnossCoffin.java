@@ -193,7 +193,7 @@ class TawnossCoffinReturnEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        UUID exileZoneId = CardUtil.getCardExileZoneId(game, source.getSourceId(), source.getSourcePermanentEvenIfPhasedOut(game) == null);
+        UUID exileZoneId = CardUtil.getCardExileZoneId(game, source.getSourceId(), source.getSourcePermanentIfItStillExists(game, true) == null);
         ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
         if (exileZone == null) {
             return true;

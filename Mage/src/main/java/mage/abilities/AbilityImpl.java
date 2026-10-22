@@ -1760,16 +1760,12 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public Permanent getSourcePermanentIfItStillExists(Game game) {
-        MageObject mageObject = getSourceObjectIfItStillExists(game);
-        if (mageObject instanceof Permanent) {
-            return (Permanent) mageObject;
-        }
-        return null;
+        return getSourcePermanentIfItStillExists(game, false);
     }
 
     @Override
-    public Permanent getSourcePermanentEvenIfPhasedOut(Game game) {
-        MageObject mageObject = getSourceObjectIfZccNotChanged(game);
+    public Permanent getSourcePermanentIfItStillExists(Game game, boolean includePhasedOut) {
+        MageObject mageObject = includePhasedOut ? getSourceObjectIfZccNotChanged(game) : getSourceObjectIfItStillExists(game);
         if (mageObject instanceof Permanent) {
             return (Permanent) mageObject;
         }
@@ -1778,7 +1774,7 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public Permanent getSourcePermanentOrLKI(Game game) {
-        Permanent permanent = getSourcePermanentEvenIfPhasedOut(game);
+        Permanent permanent = getSourcePermanentIfItStillExists(game, true);
         if (permanent == null) {
             permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, getStackMomentSourceZCC());
         } else if (!permanent.isPhasedIn()) {

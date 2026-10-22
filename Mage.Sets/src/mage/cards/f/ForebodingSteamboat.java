@@ -91,7 +91,7 @@ class ForebodingSteamboatExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source.getSourcePermanentEvenIfPhasedOut(game) == null) {
+        if (source.getSourcePermanentIfItStillExists(game, true) == null) {
             // if source permanent is already gone then nothing gets exiled in the first place
             return false;
         }
