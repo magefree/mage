@@ -74,6 +74,35 @@ public class PhasedOutSourceTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_OneShot_PhasedOutSource_CountersOnSource() {
+        // Whenever a creature dies, if it had power greater than Drizzt's power,
+        // put a number of +1/+1 counters on Drizzt equal to the difference.
+        addCard(Zone.BATTLEFIELD, playerA, "Drizzt Do'Urden"); // 3/3
+        // Whenever one or more +1/+1 counters are put on a creature you control,
+        // put that many growth counters on Simic Ascendancy.
+        addCard(Zone.BATTLEFIELD, playerA, "Simic Ascendancy");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        // Destroy target creature.
+        addCard(Zone.HAND, playerA, "Murder");
+        addCard(Zone.HAND, playerA, ripple);
+        addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm"); // 6/4
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Murder", "Craw Wurm");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1); // resolve Murder, keep the Drizzt trigger
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ripple, "Drizzt Do'Urden");
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN); // Drizzt phases in on turn 3
+        execute();
+
+        // the counters can't be put on a phased-out Drizzt, so Simic Ascendancy doesn't trigger
+        assertCounterCount(playerA, "Drizzt Do'Urden", CounterType.P1P1, 0);
+        assertPowerToughness(playerA, "Drizzt Do'Urden", 3, 3);
+        assertCounterCount(playerA, "Simic Ascendancy", CounterType.GROWTH, 0);
+    }
+
+    @Test
     public void test_ForAsLongAsYouControl_PhasedOutSource() {
         // When Master Thief enters, gain control of target artifact for as long as you control Master Thief.
         addCard(Zone.HAND, playerA, "Master Thief"); // {2}{U}{U}

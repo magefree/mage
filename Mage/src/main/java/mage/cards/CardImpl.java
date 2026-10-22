@@ -767,7 +767,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect, int maxCounters) {
         if (this instanceof Permanent) {
             Permanent permanent = (Permanent) this;
-            if (!permanent.isPhasedIn() || !permanent.canHaveCounterAdded(counter, game, source)) {
+            // LKI of a phased-out permanent is a phased-in copy, so check the permanent itself too (702.26b)
+            Permanent onBattlefield = game.getPermanent(objectId);
+            if (!permanent.isPhasedIn()
+                    || (onBattlefield != null && !onBattlefield.isPhasedIn())
+                    || !permanent.canHaveCounterAdded(counter, game, source)) {
                 return false;
             }
         }
