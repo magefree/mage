@@ -82,7 +82,7 @@ class PinnacleStarcageExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null || source.getSourcePermanentIfItStillExists(game) == null) {
+        if (player == null || source.getSourcePermanentEvenIfPhasedOut(game) == null) {
             return false;
         }
         Cards cards = new CardsImpl(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game));

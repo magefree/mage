@@ -73,7 +73,7 @@ class AlignedHedronNetworkExileEffect extends OneShotEffect {
             return false;
         }
 
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentEvenIfPhasedOut(game);
         if (permanent == null) {
             return false;
         }

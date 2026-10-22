@@ -537,8 +537,18 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Finds the source object as long as it is a Permanent and its zcc has not changed
+     * <p>
+     * A phased-out permanent is treated as though it doesn't exist, so it returns null for it,
+     * same as getSourceObjectIfItStillExists and getSourceCardIfItStillExists
      */
     Permanent getSourcePermanentIfItStillExists(Game game);
+
+    /**
+     * Same as getSourcePermanentIfItStillExists, but also finds a phased-out permanent.
+     * Use it where the source must still be tracked while it's phased out, e.g. continuous effects
+     * that don't end on phasing (702.26f) or "until it leaves the battlefield" checks (702.26d)
+     */
+    Permanent getSourcePermanentEvenIfPhasedOut(Game game);
 
     /**
      * Returns source permanent info (actual if it exists, otherwise from LKI)

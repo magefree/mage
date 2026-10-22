@@ -110,7 +110,7 @@ class TheWarGamesEffect extends OneShotEffect {
         if (addedTokens.isEmpty()) {
             return false;
         }
-        if (source.getSourceObjectIfItStillExists(game) != null) {
+        if (source.getSourcePermanentEvenIfPhasedOut(game) != null) {
             game.addEffect(
                     new GoadTargetEffect(Duration.UntilSourceLeavesBattlefield)
                             .setTargetPointer(new FixedTargets(

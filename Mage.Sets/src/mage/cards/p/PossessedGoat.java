@@ -70,7 +70,7 @@ class PossessedGoatEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentEvenIfPhasedOut(game);
         if (permanent == null) {
             discard();
             return false;

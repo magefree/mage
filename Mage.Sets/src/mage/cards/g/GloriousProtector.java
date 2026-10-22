@@ -88,7 +88,7 @@ class GloriousProtectorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
+        Permanent sourceObject = source.getSourcePermanentEvenIfPhasedOut(game);
         if (player == null || sourceObject == null) {
             return false;
         }

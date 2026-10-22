@@ -79,7 +79,7 @@ class YannikScavengingSentinelEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+        Permanent sourcePermanent = source.getSourcePermanentEvenIfPhasedOut(game);
         if (player == null || sourcePermanent == null
                 || game.getBattlefield().count(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL, source.getControllerId(), source, game) < 1) {
             return false;

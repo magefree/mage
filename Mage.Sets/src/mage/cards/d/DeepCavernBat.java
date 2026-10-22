@@ -86,7 +86,7 @@ class DeepCaverBatEffect extends OneShotEffect {
         // Looking at the opponent's hand without check on if the bat is still on the battlefield.
         controller.lookAtCards(sourceObj == null ? null : sourceObj.getIdName(), opponent.getHand(), game);
 
-        Permanent bat = source.getSourcePermanentIfItStillExists(game);
+        Permanent bat = source.getSourcePermanentEvenIfPhasedOut(game);
         if (bat == null) {
             return true;
         }

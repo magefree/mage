@@ -96,7 +96,7 @@ class LumberingBattlementEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent sourcePerm = source.getSourcePermanentIfItStillExists(game);
+        Permanent sourcePerm = source.getSourcePermanentEvenIfPhasedOut(game);
         if (player == null || sourcePerm == null) {
             return false;
         }

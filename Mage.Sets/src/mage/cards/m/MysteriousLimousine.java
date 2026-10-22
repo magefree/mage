@@ -85,7 +85,7 @@ class MysteriousLimousineEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (player == null || permanent == null || source.getSourcePermanentIfItStillExists(game) == null) {
+        if (player == null || permanent == null || source.getSourcePermanentEvenIfPhasedOut(game) == null) {
             return false;
         }
         UUID exileId = CardUtil.getExileZoneId(game, source);

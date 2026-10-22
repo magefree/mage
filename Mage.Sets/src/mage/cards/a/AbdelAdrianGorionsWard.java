@@ -82,7 +82,7 @@ class AbdelAdrianGorionsWardEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentEvenIfPhasedOut(game);
         if (player == null || permanent == null) {
             return false;
         }
