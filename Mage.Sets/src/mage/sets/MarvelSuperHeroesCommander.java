@@ -471,6 +471,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Overwhelming Stampede", 385, Rarity.RARE, mage.cards.o.OverwhelmingStampede.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pacifism", 575, Rarity.COMMON, mage.cards.p.Pacifism.class));
         cards.add(new SetCardInfo("Palace Jailer", 140, Rarity.UNCOMMON, mage.cards.p.PalaceJailer.class));
+        cards.add(new SetCardInfo("Panther Habit", 112, Rarity.RARE, mage.cards.p.PantherHabit.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Panther Habit", 446, Rarity.RARE, mage.cards.p.PantherHabit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Panther Robot", 113, Rarity.RARE, mage.cards.p.PantherRobot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Panther Robot", 448, Rarity.RARE, mage.cards.p.PantherRobot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Patchwork Banner", 207, Rarity.UNCOMMON, mage.cards.p.PatchworkBanner.class));
