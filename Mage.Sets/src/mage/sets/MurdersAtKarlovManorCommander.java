@@ -110,6 +110,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Experiment Twelve", 37, Rarity.RARE, mage.cards.e.ExperimentTwelve.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Experiment Twelve", 347, Rarity.RARE, mage.cards.e.ExperimentTwelve.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Farewell", 64, Rarity.RARE, mage.cards.f.Farewell.class));
+        cards.add(new SetCardInfo("Feather, Radiant Arbiter", 6, Rarity.MYTHIC, mage.cards.f.FeatherRadiantArbiter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Feather, Radiant Arbiter", 313, Rarity.MYTHIC, mage.cards.f.FeatherRadiantArbiter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fell the Mighty", 65, Rarity.RARE, mage.cards.f.FellTheMighty.class));
         cards.add(new SetCardInfo("Fellwar Stone", 228, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Fetid Pools", 261, Rarity.RARE, mage.cards.f.FetidPools.class));
