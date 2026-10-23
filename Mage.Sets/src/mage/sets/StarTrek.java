@@ -22,6 +22,7 @@ public final class StarTrek extends ExpansionSet {
 
         // this.enablePlayBooster(276); // TODO: Temporary until spoilers conclude
 
+        cards.add(new SetCardInfo("70,000 Light-Years from Home", 1, Rarity.UNCOMMON, mage.cards.s.SeventyThousandLightYearsFromHome.class));
         cards.add(new SetCardInfo("A Good Day to Die", 111, Rarity.COMMON, mage.cards.a.AGoodDayToDie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("A Good Day to Die", 428, Rarity.COMMON, mage.cards.a.AGoodDayToDie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("A Good Day to Die", 438, Rarity.COMMON, mage.cards.a.AGoodDayToDie.class, NON_FULL_USE_VARIOUS));
