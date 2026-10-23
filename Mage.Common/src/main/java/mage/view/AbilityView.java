@@ -2,6 +2,7 @@ package mage.view;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.cards.FrameStyle;
 import mage.util.SubTypes;
 
 import java.util.ArrayList;
@@ -33,6 +34,13 @@ public class AbilityView extends CardView {
         this.color = new ObjectColor();
         this.manaCostLeftStr = ability.getManaCostSymbols();
         this.manaCostRightStr = new ArrayList<>();
+        if (sourceCard != null) {
+            this.frameStyle = sourceCard.getFrameStyle();
+            this.frameColor = sourceCard.getFrameColor() != null ? sourceCard.getFrameColor().copy() : new ObjectColor();
+        } else {
+            this.frameStyle = FrameStyle.M15_NORMAL;
+            this.frameColor = new ObjectColor();
+        }
     }
 
     public CardView getSourceCard() {

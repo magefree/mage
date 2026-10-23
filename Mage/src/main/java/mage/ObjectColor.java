@@ -65,6 +65,14 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
      */
     public ObjectColor union(ObjectColor other) {
         ObjectColor newColor = new ObjectColor();
+        if (other == null) {
+            newColor.white = white;
+            newColor.blue = blue;
+            newColor.black = black;
+            newColor.red = red;
+            newColor.green = green;
+            return newColor;
+        }
         newColor.white = white || other.white;
         newColor.blue = blue || other.blue;
         newColor.black = black || other.black;

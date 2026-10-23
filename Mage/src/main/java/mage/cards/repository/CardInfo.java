@@ -276,11 +276,11 @@ public class CardInfo {
     }
 
     public ObjectColor getFrameColor() {
-        return new ObjectColor(frameColor);
+        return frameColor != null ? new ObjectColor(frameColor) : new ObjectColor();
     }
 
     public FrameStyle getFrameStyle() {
-        return FrameStyle.valueOf(this.frameStyle);
+        return this.frameStyle != null ? FrameStyle.valueOf(this.frameStyle) : FrameStyle.M15_NORMAL;
     }
 
     private String joinList(List<String> items) {

@@ -1,12 +1,14 @@
 package mage.view;
 
 import mage.MageObject;
+import mage.ObjectColor;
 import mage.abilities.Mode;
 import mage.abilities.Modes;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
 import mage.cards.Card;
+import mage.cards.FrameStyle;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.MageObjectType;
@@ -75,6 +77,14 @@ public class StackAbilityView extends CardView {
         updateTargets(game, ability);
 
         this.generateCardIcons(ability, sourceObject, game);
+
+        if (sourceCard != null) {
+            this.frameStyle = sourceCard.getFrameStyle();
+            this.frameColor = sourceCard.getFrameColor() != null ? sourceCard.getFrameColor().copy() : new ObjectColor();
+        } else {
+            this.frameStyle = FrameStyle.M15_NORMAL;
+            this.frameColor = new ObjectColor();
+        }
     }
 
     private void updateTargets(Game game, StackAbility ability) {
