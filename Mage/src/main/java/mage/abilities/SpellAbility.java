@@ -146,6 +146,15 @@ public class SpellAbility extends ActivatedAbilityImpl {
         // no super.canActivate() call
         Set<MageIdentifier> allowedIdentifiers = this.spellCanBeActivatedNow(playerId, game);
         if (!allowedIdentifiers.isEmpty()) {
+            if (spellAbilityType == SpellAbilityType.VENGEANCE_SPELL) {
+                // cast only from the owner's graveyard
+                Card vengeanceCard = game.getCard(sourceId);
+                if (vengeanceCard == null
+                        || !vengeanceCard.isOwnedBy(playerId)
+                        || game.getState().getZone(vengeanceCard.getMainCard().getId()) != Zone.GRAVEYARD) {
+                    return ActivationStatus.getFalse();
+                }
+            }
             if (spellAbilityType == SpellAbilityType.SPLIT
                     || spellAbilityType == SpellAbilityType.SPLIT_AFTERMATH) {
                 return ActivationStatus.getFalse();
