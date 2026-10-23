@@ -4,10 +4,9 @@ import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.cost.MiracleCostModifier;
+import mage.abilities.effects.common.cost.MiracleCostModifierFlat;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -15,6 +14,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.functions.MiracleCostModifierCreator;
 import mage.watchers.common.MiracleWatcher;
 
 /**
@@ -75,16 +75,23 @@ public class MiracleAbility extends TriggeredAbilityImpl {
 
     private static final String staticRule = " <i>(You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)</i>";
     private final String ruleText;
+    private final MiracleCostModifierCreator miracleCostModifierCreator;
+
+    public MiracleAbility(MiracleCostModifierCreator miracleCostModifierCreator, String costText) {
+        super(Zone.HAND, new MiracleEffect(miracleCostModifierCreator), true);
+        this.addWatcher(new MiracleWatcher());
+        this.ruleText = "Miracle " + costText + staticRule;
+        this.miracleCostModifierCreator = miracleCostModifierCreator;
+    }
 
     public MiracleAbility(String miracleCosts) {
-        super(Zone.HAND, new MiracleEffect(miracleCosts), true);
-        addWatcher(new MiracleWatcher());
-        ruleText = "Miracle " + miracleCosts + staticRule;
+        this(() -> new MiracleCostModifierFlat(miracleCosts), miracleCosts);
     }
 
     private MiracleAbility(final MiracleAbility ability) {
         super(ability);
         this.ruleText = ability.ruleText;
+        this.miracleCostModifierCreator = ability.miracleCostModifierCreator;
     }
 
     @Override
@@ -115,17 +122,16 @@ public class MiracleAbility extends TriggeredAbilityImpl {
 
 class MiracleEffect extends OneShotEffect {
 
-    private final ManaCosts<ManaCost> miracleCosts;
+    private final MiracleCostModifierCreator miracleCostModifierCreator;
 
-    public MiracleEffect(String miracleCosts) {
+    public MiracleEffect(MiracleCostModifierCreator miracleCostModifierCreator) {
         super(Outcome.Benefit);
-        this.staticText = "cast this card for its miracle cost";
-        this.miracleCosts = new ManaCostsImpl<>(miracleCosts);
+        this.miracleCostModifierCreator = miracleCostModifierCreator;
     }
 
     protected MiracleEffect(final MiracleEffect effect) {
         super(effect);
-        this.miracleCosts = effect.miracleCosts;
+        this.miracleCostModifierCreator = effect.miracleCostModifierCreator;
     }
 
     @Override
@@ -140,11 +146,10 @@ class MiracleEffect extends OneShotEffect {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (controller != null && card != null) {
             SpellAbility abilityToCast = card.getSpellAbility().copy();
-            ManaCosts<ManaCost> costRef = abilityToCast.getManaCostsToPay();
-            // replace with the new cost
-            costRef.clear();
-            costRef.add(miracleCosts);
+            final MiracleCostModifier effect = this.miracleCostModifierCreator.get().setCastToModify(abilityToCast);
+            game.getState().getContinuousEffects().addEffect(effect, source);
             controller.cast(abilityToCast, game, false, new ApprovingObject(source, game));
+            effect.discard();
             return true;
         }
         return false;
