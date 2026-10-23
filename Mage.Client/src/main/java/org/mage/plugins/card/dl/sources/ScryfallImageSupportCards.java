@@ -610,6 +610,7 @@ public class ScryfallImageSupportCards {
             add("FCA"); // Final Fantasy: Through the Ages
             add("PSS5"); // FIN Standard Showdown
             add("EOE"); // Edge of Eternities
+            add("YEOE"); // Alchemy: Edge of Eternities
             add("EOC"); // Edge of Eternities Commander
             add("EOS"); // Edge of Eternities: Stellar Sights
             add("SPM"); // Marvel's Spider-Man
