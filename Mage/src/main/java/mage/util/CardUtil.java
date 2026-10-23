@@ -6,6 +6,7 @@ import mage.abilities.*;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
+import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -1512,6 +1513,82 @@ public final class CardUtil {
     }
 
     private static final FilterCard defaultFilter = new FilterCard("card to cast");
+
+    /**
+     * Cast one card with its usual mana cost or a cost supplied for the chosen spell face.
+     * The prompt is shown before choosing which part of a split or modal card to cast.
+     */
+    public static boolean castSpellWithAttributesForCost(Player player, Ability source, Game game, Card card,
+                                                          FilterCard filter, String prompt, Function<Card, Cost> alternateCost) {
+        return castSpellWithAttributesForCost(player, source, game, new CardsImpl(card), filter, prompt, alternateCost, false);
+    }
+
+    /**
+     * Let the player choose one of the cards and cast its chosen spell face.
+     * Pass a null alternateCost to pay the normal mana cost, or a null prompt when
+     * choosing a card is the only confirmation needed.
+     */
+    public static boolean castSpellWithAttributesForCost(Player player, Ability source, Game game, Cards cards,
+                                                          FilterCard filter, String prompt, Function<Card, Cost> alternateCost) {
+        return castSpellWithAttributesForCost(player, source, game, cards, filter, prompt, alternateCost, true);
+    }
+
+    private static boolean castSpellWithAttributesForCost(Player player, Ability source, Game game, Cards cards,
+                                                           FilterCard filter, String prompt, Function<Card, Cost> alternateCost,
+                                                           boolean chooseCard) {
+        Map<UUID, List<Card>> cardMap = new HashMap<>();
+        for (Card card : cards.getCards(game)) {
+            List<Card> parts = getCastableComponents(card, filter, source, player, game, null, false);
+            if (!parts.isEmpty()) {
+                cardMap.put(card.getId(), parts);
+            }
+        }
+        if (cardMap.isEmpty()) {
+            return false;
+        }
+
+        Card cardToCast;
+        if (chooseCard) {
+            Cards castableCards = new CardsImpl(cardMap.keySet());
+            TargetCard target = new TargetCard(0, 1, Zone.ALL, defaultFilter);
+            target.withNotTarget(true);
+            target.withChooseHint("to cast");
+            player.choose(Outcome.Benefit, castableCards, target, source, game);
+            cardToCast = castableCards.get(target.getFirstTarget(), game);
+        } else {
+            cardToCast = cards.get(cardMap.keySet().iterator().next(), game);
+        }
+        if (cardToCast == null) {
+            return false;
+        }
+
+        List<Card> partsToCast = cardMap.get(cardToCast.getId());
+        String partsInfo = partsToCast.stream().map(MageObject::getLogName).collect(Collectors.joining(" or "));
+        if (prompt != null && !player.chooseUse(Outcome.PlayForFree, prompt + " (" + partsInfo + ")?", source, game)) {
+            return false;
+        }
+
+        partsToCast.forEach(part -> game.getState().setValue("PlayFromNotOwnHandZone" + part.getId(), Boolean.TRUE));
+        try {
+            SpellAbility chosenAbility = player.chooseAbilityForCast(cardToCast, game, alternateCost != null);
+            if (chosenAbility == null) {
+                return false;
+            }
+            if (alternateCost != null) {
+                Card faceCard = game.getCard(chosenAbility.getSourceId());
+                if (faceCard == null) {
+                    return false;
+                }
+                Costs<Cost> costs = new CostsImpl<>();
+                costs.add(alternateCost.apply(faceCard));
+                costs.addAll(chosenAbility.getCosts());
+                player.setCastSourceIdWithAlternateMana(faceCard.getId(), null, costs);
+            }
+            return player.cast(chosenAbility, game, alternateCost != null, new ApprovingObject(source, game));
+        } finally {
+            partsToCast.forEach(part -> game.getState().setValue("PlayFromNotOwnHandZone" + part.getId(), null));
+        }
+    }
 
     public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Card card) {
         return castSpellWithAttributesForFree(player, source, game, card, StaticFilters.FILTER_CARD);
