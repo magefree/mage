@@ -194,7 +194,7 @@ public class TargetCard extends TargetObject {
     public boolean canTarget(UUID id, Ability source, Game game) {
         // copy-pasted from super but with card instead object
         Card card = game.getCard(id);
-        return card != null
+        return super.canTarget(id, source, game) && card != null
                 && zone != null && zone.match(game.getState().getZone(id))
                 && getFilter() != null && getFilter().match(card, game);
     }
@@ -202,7 +202,7 @@ public class TargetCard extends TargetObject {
     @Override
     public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
         Card card = game.getCard(id);
-        return card != null
+        return super.canTarget(id, source, game) && card != null
                 && zone != null && zone.match(game.getState().getZone(id))
                 && getFilter() != null && getFilter().match(card, playerId, source, game);
     }
