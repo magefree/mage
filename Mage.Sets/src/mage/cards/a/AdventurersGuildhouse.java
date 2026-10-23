@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -11,9 +10,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +32,7 @@ public final class AdventurersGuildhouse extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // Green legendary creatures you control have "bands with other legendary creatures."
-        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(new BandsWithOtherAbility(SuperType.LEGENDARY), Duration.WhileOnBattlefield, filter).withForceQuotes()));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(new BandsWithOtherAbility(SuperType.LEGENDARY), Duration.WhileOnBattlefield, filter)));
     }
 
     private AdventurersGuildhouse(final AdventurersGuildhouse card) {

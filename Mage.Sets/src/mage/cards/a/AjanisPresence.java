@@ -1,9 +1,7 @@
 package mage.cards.a;
 
 import mage.abilities.abilityword.StriveAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.BoostGainAbilityGenericEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,12 +23,9 @@ public final class AjanisPresence extends CardImpl {
         this.addAbility(new StriveAbility("{2}{W}"));
 
         // Any number of target creatures each get +1/+1 and gain indestructible until end of turn.
-        Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
-        effect.setText("Any number of target creatures each get +1/+1");
-        this.getSpellAbility().addEffect(effect);
-        effect = new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gain indestructible until end of turn");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new BoostGainAbilityGenericEffect(
+                1, 1, Duration.EndOfTurn, IndestructibleAbility.getInstance()
+        ));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
     }
 

@@ -46,7 +46,7 @@ public final class JubilantSkybonder extends CardImpl {
                         .withTargetName("this creature")
         );
 
-        ContinuousEffect effect = new GainAbilityAllEffect(gainAbility, Duration.WhileOnBattlefield, filter).withForceQuotes();
+        ContinuousEffect effect = new GainAbilityAllEffect(gainAbility, Duration.WhileOnBattlefield, filter);
         effect.setDependedToType(DependencyType.AddingAbility);
         this.addAbility(new SimpleStaticAbility(effect));
     }

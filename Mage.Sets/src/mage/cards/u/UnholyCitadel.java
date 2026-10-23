@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -32,9 +31,7 @@ public final class UnholyCitadel extends CardImpl {
 
         // Black legendary creatures you control have "bands with other legendary creatures."
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new BandsWithOtherAbility(SuperType.LEGENDARY), Duration.WhileOnBattlefield, filter)
-                .withForceQuotes()
-        ));
+                new BandsWithOtherAbility(SuperType.LEGENDARY), Duration.WhileOnBattlefield, filter)));
     }
 
     private UnholyCitadel(final UnholyCitadel card) {

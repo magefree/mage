@@ -3,7 +3,6 @@ package mage.cards.h;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.CompoundAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
@@ -59,9 +58,8 @@ public final class HofriGhostforge extends CardImpl {
                 1, 1, Duration.WhileOnBattlefield, filter
         ));
         ability.addEffect(new GainAbilityControlledEffect(
-                new CompoundAbility(
-                        TrampleAbility.getInstance(), HasteAbility.getInstance()
-                ), Duration.WhileOnBattlefield, filter2
+                Duration.WhileOnBattlefield, filter2,
+                TrampleAbility.getInstance(), HasteAbility.getInstance()
         ).setText("and have trample and haste"));
         this.addAbility(ability);
 

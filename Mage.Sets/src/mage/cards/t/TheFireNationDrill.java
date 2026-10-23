@@ -2,7 +2,6 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CompoundAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
@@ -54,7 +53,8 @@ public final class TheFireNationDrill extends CardImpl {
 
         // {1}: Permanents your opponents control lose hexproof and indestructible until end of turn.
         this.addAbility(new SimpleActivatedAbility(new LoseAbilityAllEffect(
-                new CompoundAbility(HexproofAbility.getInstance(), IndestructibleAbility.getInstance()), Duration.EndOfTurn, filter
+                Duration.EndOfTurn, filter,
+                HexproofAbility.getInstance(), IndestructibleAbility.getInstance()
         ).setText("permanents your opponents control lose hexproof and indestructible until end of turn."), new GenericManaCost(1)));
 
         // Crew 2

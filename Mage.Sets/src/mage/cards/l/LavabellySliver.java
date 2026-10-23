@@ -37,7 +37,7 @@ public final class LavabellySliver extends CardImpl {
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 ability, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_SLIVERS
-        ).withForceQuotes()));
+        )));
     }
 
     private LavabellySliver(final LavabellySliver card) {

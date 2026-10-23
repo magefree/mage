@@ -11,8 +11,9 @@ import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.List;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -58,17 +59,15 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (creature != null) {
-            FilterCard protectionFilter = (FilterCard) ((ProtectionAbility) ability).getFilter();
-            protectionFilter.add(new ColorPredicate(choice.getColor()));
-            protectionFilter.setMessage(choice.getChoice());
-            ((ProtectionAbility) ability).setFilter(protectionFilter);
-            creature.addAbility(ability, source.getSourceId(), game);
-            return true;
-        }
-        return false;
+    protected List<Ability> getAbilitiesToGrant(Game game, Ability source) {
+        FilterCard protectionFilter = new FilterCard();
+        protectionFilter.add(new ColorPredicate(choice.getColor()));
+        protectionFilter.setMessage(choice.getChoice());
+        List<Ability> granted = copyOfGrantedAbilities();
+        granted.stream()
+                .filter(ProtectionAbility.class::isInstance)
+                .forEach(ability -> ((ProtectionAbility) ability).setFilter(protectionFilter));
+        return granted;
     }
 
     @Override
