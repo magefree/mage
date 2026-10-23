@@ -11,9 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.predicate.permanent.AttackingAlonePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -54,21 +52,5 @@ public final class CrowdOfTrueBelievers extends CardImpl {
     @Override
     public CrowdOfTrueBelievers copy() {
         return new CrowdOfTrueBelievers(this);
-    }
-}
-
-enum AttackingAlonePredicate implements Predicate<Permanent> {
-    instance;
-
-    @Override
-    public boolean apply(Permanent input, Game game) {
-        return input.isAttacking()
-            && game.getCombat().attacksAlone()
-            && game.getCombat().getAttackers().contains(input.getId());
-    }
-
-    @Override
-    public String toString() {
-        return "Attacking alone";
     }
 }
