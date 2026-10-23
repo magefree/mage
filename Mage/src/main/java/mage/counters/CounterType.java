@@ -69,6 +69,7 @@ public enum CounterType {
     DOUBLE_STRIKE("double strike"),
     DREAD("dread"),
     DREAM("dream"),
+    DUTY("duty"),
     ECHO("echo"),
     EGG("egg"),
     ELIXIR("elixir"),
