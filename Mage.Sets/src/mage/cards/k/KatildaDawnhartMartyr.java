@@ -66,15 +66,14 @@ public final class KatildaDawnhartMartyr extends TransformingDoubleFacedCard {
                 Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue)
         ).addHint(hint));
 
+        // Disturb {3}{W}{W}
+        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{3}{W}{W}"));
+
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getRightHalfCard().getSpellAbility().addTarget(auraTarget);
         this.getRightHalfCard().getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.getRightHalfCard().addAbility(new EnchantAbility(auraTarget));
-
-        // Disturb {3}{W}{W}
-        // needs to be added after right half has spell ability target set
-        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{3}{W}{W}"));
 
         // Katilda's Rising Dawn
         // Enchanted creature has flying, lifelink, and protection from Vampires, and it gets +X/+X where X is the number of permanents you control that are Spirits and/or enchantments.
