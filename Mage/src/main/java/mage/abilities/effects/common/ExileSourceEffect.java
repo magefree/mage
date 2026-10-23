@@ -5,7 +5,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -49,11 +48,6 @@ public class ExileSourceEffect extends OneShotEffect {
         Card card = source.getSourceCardIfItStillExists(game);
         if (controller == null || card == null) {
             return false;
-        }
-        if (card instanceof Permanent) {
-            if (!((Permanent) card).isPhasedIn()) {
-                return false;
-            }
         }
         UUID exileZoneId = null;
         String exileZoneName = "";

@@ -99,7 +99,11 @@ class TheHorusHeresyControlEffect extends GainControlTargetEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return source.getSourcePermanentIfItStillExists(game) != null && super.apply(game, source);
+        if (source.getSourcePermanentIfItStillExists(game) == null) {
+            discard();
+            return false;
+        }
+        return super.apply(game, source);
     }
 }
 

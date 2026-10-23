@@ -92,7 +92,7 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
                 // Duration is a workaround for Primal Clay and similar which are incorrectly implemented
                 mageObject = game.getObject(source);
             } else {
-                mageObject = source.getSourcePermanentIfItStillExists(game);
+                mageObject = source.getSourcePermanentIfItStillExists(game, true);
             }
         }
         if (mageObject == null) {

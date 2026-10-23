@@ -48,7 +48,7 @@ public class ExileUntilSourceLeavesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game, true);
 
         // If source permanent leaves the battlefield before its triggered ability resolves, the target permanent won't be exiled.
         if (permanent == null) {

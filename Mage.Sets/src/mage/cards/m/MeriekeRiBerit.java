@@ -103,7 +103,7 @@ class MeriekeRiBeritDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean isInactive(Game game) {
-        return getSourceObjectIfItStillExists(game) == null
+        return getSourcePermanentIfItStillExists(game, true) == null
                 && game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, getStackMomentSourceZCC()) == null;
     }
 
