@@ -8,6 +8,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.constants.SubType;
+import mage.constants.SubTypeSet;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 
@@ -27,6 +28,7 @@ public enum FederationCount implements DynamicValue {
             .filter(permanent -> !permanent.hasSubtype(SubType.BORG, game))
             .map(permanent -> permanent.getSubtype(game))
             .flatMap(Collection::stream)
+            .filter(subType -> subType.getSubTypeSet() == SubTypeSet.CreatureType)
             .distinct()
             .mapToInt(x -> 1)
             .sum();
