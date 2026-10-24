@@ -1453,11 +1453,13 @@ public class Combat implements Serializable, Copyable<Combat> {
 
             // player
             defenders.add(playerId);
+        }
 
-            // planeswalkers
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, playerId, game)) {
-                defenders.add(permanent.getId());
-            }
+        // planeswalkers
+        // 508.1b: rescan on every call, so a planeswalker that entered during the beginning
+        // of the combat step can still be attacked
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, playerId, game)) {
+            defenders.add(permanent.getId());
         }
     }
 

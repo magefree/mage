@@ -153,4 +153,33 @@ public class AttackPlaneswalkerTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Grizzly Bears", 1);
         assertGraveyardCount(playerB, "Grizzly Bears", 1);
     }
+
+    /**
+     * A planeswalker that enters the battlefield during the beginning of combat step can
+     * be attacked: the active player announces each attacker's target as attackers are
+     * declared (rule 508.1b), so the defending player's planeswalkers are checked then,
+     * not when the beginning of combat step starts.
+     */
+    @Test
+    public void testAttackPlaneswalkerEnteredDuringBeginningOfCombat() {
+        // Flash (Leyline of Anticipation) lets playerA cast the planeswalker during
+        // playerB's beginning of combat step.
+        addCard(Zone.BATTLEFIELD, playerA, "Leyline of Anticipation");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.HAND, playerA, "Jace Beleren"); // {1}{U}{U}, starts at 3 loyalty
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // 2/2
+
+        castSpell(2, PhaseStep.BEGIN_COMBAT, playerA, "Jace Beleren");
+        attack(2, playerB, "Grizzly Bears", "Jace Beleren");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerA, "Jace Beleren", 1);
+        assertCounterCount("Jace Beleren", CounterType.LOYALTY, 1);
+        assertTapped("Grizzly Bears", true);
+    }
 }
