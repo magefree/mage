@@ -264,6 +264,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Furious Strength", 544, Rarity.COMMON, mage.cards.f.FuriousStrength.class));
         cards.add(new SetCardInfo("Furycalm Snarl", 247, Rarity.RARE, mage.cards.f.FurycalmSnarl.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Furycalm Snarl", 476, Rarity.RARE, mage.cards.f.FurycalmSnarl.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Galactus, Devourer of Worlds", 291, Rarity.RARE, mage.cards.g.GalactusDevourerOfWorlds.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Galactus, Devourer of Worlds", 8, Rarity.RARE, mage.cards.g.GalactusDevourerOfWorlds.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gallant Citizen", 820, Rarity.COMMON, mage.cards.g.GallantCitizen.class));
         cards.add(new SetCardInfo("Galvanic Iteration", 184, Rarity.RARE, mage.cards.g.GalvanicIteration.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Galvanic Iteration", 404, Rarity.RARE, mage.cards.g.GalvanicIteration.class, NON_FULL_USE_VARIOUS));
