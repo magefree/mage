@@ -3,7 +3,6 @@ package org.mage.test.cards.abilities.keywords;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
@@ -293,11 +292,9 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    @Ignore
-    // I don't know how to test it by framework - manual test works fine for HumanPlayer
-    // (he get warning message and can't activate mana abilities after convoke)
     public void test_Other_CantUseConvokeBeforeManaAbilities() {
         // https://github.com/magefree/mage/issues/768
+        // Mana abilities come before convoke, so a Scion tapped for convoke can't then be sacrificed for mana.
 
         // {6}
         // Convoke
@@ -309,20 +306,31 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3 * 2);
 
         // prepare scions
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Call the Scions");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Call the Scions");
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        disableManaAutoPayment(playerA);
+        for (int i = 0; i < 2; i++) {
+            activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 3);
+            castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Call the Scions");
+            setChoice(playerA, "Green", 3);
+            waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        }
         checkPermanentCount("scions", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Eldrazi Scion Token", 4);
 
-        // test case 1 - playable abilities must not show it as playable (not work, cause we don't known real payment order before payment)
-        //checkPlayableAbility("can't use convoke", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Will-Forged Golem", false);
-
-        // test case 2 - it's in playable list, but mana abilities can't be activated after convoke pay
-        //castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Will-Forged Golem");
+        // playable, because the playable check doesn't know that convoke must come last
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Will-Forged Golem");
+        setChoice(playerA, "Convoke");
+        addTarget(playerA, "Eldrazi Scion Token^Eldrazi Scion Token^Eldrazi Scion Token^Eldrazi Scion Token"); // pay 1-4
+        setChoice(playerA, "Sacrifice {this}: Add {C}"); // too late for a mana ability
+        setChoice(playerA, TestPlayer.SKIP_FAILED_COMMAND);
+        setChoice(playerA, TestPlayer.MANA_CANCEL); // nothing can pay the {2} that is left
+        setChoice(playerA, TestPlayer.SKIP_FAILED_COMMAND); // remove the failed cast
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+
+        assertHandCount(playerA, "Will-Forged Golem", 1);
+        assertPermanentCount(playerA, "Eldrazi Scion Token", 4);
+        assertTappedCount("Eldrazi Scion Token", false, 4);
     }
 
     @Test
