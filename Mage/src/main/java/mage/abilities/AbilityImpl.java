@@ -391,6 +391,13 @@ public abstract class AbilityImpl implements Ability {
             }
         }
 
+        // 20260925 - 601.2b
+        // choose now which part of an "or" cost will be paid, so a mana part is included in the total cost (601.2f)
+        // and can be changed by cost modification effects, e.g. "sacrifice a legendary creature or pay {2}"
+        if (!(this instanceof ActivatedManaAbilityImpl) && !handleOrCostsWithMana(game)) {
+            return false;
+        }
+
         // unit tests only: it allows to add targets/choices by two ways:
         // 1. From cast/activate command params (process it here)
         // 2. From single addTarget/setChoice, it's a preferred method for tests (process it in normal choose dialogs like human player)
@@ -641,6 +648,39 @@ public abstract class AbilityImpl implements Ability {
             }
         }
         return true;
+    }
+
+    /**
+     * Replaces each "or" cost with a mana part by the cost the controller chooses to pay.
+     * A chosen mana cost is moved to the mana costs to pay.
+     *
+     * @return false to stop activation process, e.g. if none of the costs can be paid
+     */
+    protected boolean handleOrCostsWithMana(Game game) {
+        for (Cost cost : new ArrayList<>(costs)) {
+            if (!(cost instanceof OrCost) || !((OrCost) cost).hasManaCost()) {
+                continue;
+            }
+            Cost selectedCost = ((OrCost) cost).chooseCost(this, game, this, getControllerId());
+            if (selectedCost == null) {
+                return false;
+            }
+            costs.remove(cost);
+            addChosenOrCost(selectedCost);
+        }
+        return true;
+    }
+
+    private void addChosenOrCost(Cost cost) {
+        if (cost instanceof ManaCost) {
+            addManaCostsToPay((ManaCost) cost.copy());
+        } else if (cost instanceof CompositeCost) {
+            // e.g. "{3}, {T}" -- the mana part goes to the total cost, the rest is paid as usual
+            addChosenOrCost(((CompositeCost) cost).getFirstCost());
+            addChosenOrCost(((CompositeCost) cost).getSecondCost());
+        } else {
+            costs.add(cost.copy());
+        }
     }
 
     /**
