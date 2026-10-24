@@ -366,7 +366,8 @@ class ConvokeSpecialAction extends SpecialAction {
 class ConvokeEffect extends OneShotEffect {
 
     public ConvokeEffect() {
-        super(Outcome.Benefit);
+        // tapping is a downside, so the AI convokes with its least valuable creatures first
+        super(Outcome.Tap);
         this.staticText = "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)";
     }
 

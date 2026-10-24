@@ -132,7 +132,8 @@ class ImproviseSpecialAction extends SpecialAction {
 class ImproviseEffect extends OneShotEffect {
 
     public ImproviseEffect() {
-        super(Outcome.Benefit);
+        // tapping is a downside, so the AI improvises with its least valuable artifacts first
+        super(Outcome.Tap);
         this.staticText = "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)";
     }
 

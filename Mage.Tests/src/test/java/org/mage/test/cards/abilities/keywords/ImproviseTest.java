@@ -61,6 +61,26 @@ public class ImproviseTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
+    public void test_PlayImprovise_AI_TapsLeastValuableArtifacts() {
+        // {5}{U} creature
+        // Improvise (Your artifacts can help cast this spell. Each artifact you tap after you’re done activating mana abilities pays for {1}.)
+        addCard(Zone.HAND, playerA, "Bastion Inventor", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Alpha Myr", 5); // improvise pay
+        addCard(Zone.BATTLEFIELD, playerA, "Darksteel Colossus", 2); // can pay too, but worth keeping untapped
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bastion Inventor");
+
+        setStrictChooseMode(false); // AI must choose targets
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Bastion Inventor", 1);
+        assertTappedCount("Alpha Myr", true, 5);
+        assertTappedCount("Darksteel Colossus", false, 2);
+    }
+
+    @Test
     public void test_PlayImprovise_AI_FullPlay() {
         // {5}{U} creature
         // Improvise (Your artifacts can help cast this spell. Each artifact you tap after you’re done activating mana abilities pays for {1}.)

@@ -158,6 +158,24 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
+    public void test_PlayConvoke_AI_TapsLeastValuableCreatures() {
+        // {2}{R}{R}
+        addCard(Zone.HAND, playerA, "Stoke the Flames", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Goblin Racketeer", 4); // convoke pay
+        addCard(Zone.BATTLEFIELD, playerA, "Shivan Dragon", 2); // can pay too, but worth keeping untapped
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Stoke the Flames", playerB);
+
+        setStrictChooseMode(false); // AI must choose targets
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 4);
+        assertTappedCount("Goblin Racketeer", true, 4);
+        assertTappedCount("Shivan Dragon", false, 2);
+    }
+
+    @Test
     public void test_PlayConvoke_AI_FullPlay() {
         // {2}{R}{R}
         // Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature’s color.)
