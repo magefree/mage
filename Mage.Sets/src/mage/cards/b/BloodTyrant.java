@@ -73,7 +73,7 @@ class PlayerLosesTheGameTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.LOSES;
+        return event.getType() == GameEvent.EventType.LOST;
     }
 
     @Override
