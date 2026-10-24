@@ -697,6 +697,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param player
      */
     public void disableManaAutoPayment(TestPlayer player) {
+        // a rollback resets the pool from the user's settings (PlayerImpl.restore), so change those too
+        player.getUserData().setManaPoolAutomatic(false);
         player.getManaPool().setAutoPayment(false);
     }
 

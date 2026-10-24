@@ -1,31 +1,32 @@
 package mage.abilities.keyword;
 
-import java.util.UUID;
-
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.costs.mana.AlternateManaPaymentAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ManaOptions;
-import mage.constants.*;
+import mage.constants.AbilityType;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.FilterPlayer;
 import mage.game.Game;
 import mage.game.stack.Spell;
-import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPlayer;
 import mage.util.ManaUtil;
 
+import java.util.UUID;
+
 /**
- * 702.131. Assist
+ * 702.132. Assist
  * <p>
- * 702.131a Assist is a static ability that modifies the rules of paying for the
+ * 702.132a Assist is a static ability that modifies the rules of paying for the
  * spell with assist (see rules 601.2g-h). If the total cost to cast a spell
  * with assist includes a generic mana component, before you activate mana
  * abilities while casting it, you may choose another player. That player has a
@@ -69,13 +70,13 @@ public class AssistAbility extends SimpleStaticAbility implements AlternateManaP
     }
 
     @Override
-    public void addSpecialAction(Ability source, Game game, ManaCost unpaid) {
+    public void addSpecialAction(Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null
                 && source.getAbilityType() == AbilityType.SPELL
-                && unpaid.getMana().getGeneric() >= 1
+                && ManaUtil.getUnpaidGeneric(ManaUtil.getCastingCost(game, source)) >= 1
                 && game.getState().getValue(source.getSourceId().toString() + game.getState().getZoneChangeCounter(source.getSourceId()) + "_assisted") == null) {
-            SpecialAction specialAction = new AssistSpecialAction(unpaid, this);
+            SpecialAction specialAction = new AssistSpecialAction(this);
             specialAction.setControllerId(source.getControllerId());
             specialAction.setSourceId(source.getSourceId());
             Target target = new TargetPlayer(1, 1, true, filter);
@@ -89,7 +90,8 @@ public class AssistAbility extends SimpleStaticAbility implements AlternateManaP
     @Override
     public ManaOptions getManaOptions(Ability source, Game game, ManaCost unpaid) {
         ManaOptions options = new ManaOptions();
-        if (unpaid.getMana().getGeneric() == 0) {
+        int unpaidGeneric = ManaUtil.getUnpaidGeneric(unpaid);
+        if (unpaidGeneric == 0) {
             // nothing to pay
             return options;
         }
@@ -118,7 +120,7 @@ public class AssistAbility extends SimpleStaticAbility implements AlternateManaP
         }
 
         if (opponentCanPayMax > 0) {
-            options.addMana(Mana.GenericMana(Math.min(unpaid.getMana().getGeneric(), opponentCanPayMax)));
+            options.addMana(Mana.GenericMana(Math.min(unpaidGeneric, opponentCanPayMax)));
         }
 
         return options;
@@ -127,11 +129,11 @@ public class AssistAbility extends SimpleStaticAbility implements AlternateManaP
 
 class AssistSpecialAction extends SpecialAction {
 
-    AssistSpecialAction(ManaCost unpaid, AlternateManaPaymentAbility manaAbility) {
+    AssistSpecialAction(AlternateManaPaymentAbility manaAbility) {
         super(Zone.ALL, manaAbility);
         this.abilityType = AbilityType.SPECIAL_MANA_PAYMENT;
         setRuleVisible(false);
-        this.addEffect(new AssistEffect(unpaid));
+        this.addEffect(new AssistEffect());
     }
 
     AssistSpecialAction(final AssistSpecialAction ability) {
@@ -146,17 +148,13 @@ class AssistSpecialAction extends SpecialAction {
 
 class AssistEffect extends OneShotEffect {
 
-    private final ManaCost unpaid;
-
-    AssistEffect(ManaCost unpaid) {
+    AssistEffect() {
         super(Outcome.Benefit);
-        this.unpaid = unpaid;
         this.staticText = "Assist <i>(Another player can help pay the generic mana of this spell's cost.)</i>";
     }
 
     AssistEffect(final AssistEffect effect) {
         super(effect);
-        this.unpaid = effect.unpaid;
     }
 
     @Override
@@ -170,22 +168,30 @@ class AssistEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         Spell spell = game.getStack().getSpell(source.getSourceId());
         if (controller != null && spell != null && targetPlayer != null) {
+            ManaCost paying = ManaUtil.getCastingCost(game, source);
             // AI can't assist other players, maybe for teammates only (but tests must work as normal)
             int amountToPay = 0;
             if (!targetPlayer.isComputer()) {
-                amountToPay = targetPlayer.announceX(0, unpaid.getMana().getGeneric(),
+                amountToPay = targetPlayer.announceX(0, ManaUtil.getUnpaidGeneric(paying),
                         "How much mana to pay as assist for " + controller.getName() + "?", game, source, true);
             }
 
             if (amountToPay > 0) {
-                Cost cost = ManaUtil.createManaCost(amountToPay, false);
-                if (cost.pay(source, game, source, targetPlayer.getId(), false)) {
-                    ManaPool manaPool = controller.getManaPool();
-                    manaPool.addMana(Mana.ColorlessMana(amountToPay), game, source);
-                    manaPool.unlockManaType(ManaType.COLORLESS); // it's unlock mana for one use/click, but it can gives more
-                    game.informPlayers(targetPlayer.getLogName() + " paid {" + amountToPay + "} for " + controller.getLogName());
-                    game.getState().setValue(source.getSourceId().toString() + game.getState().getZoneChangeCounter(source.getSourceId()) + "_assisted", true);
+                // assist pays only generic (702.132a), so the helper pays a generic cost of their own
+                ManaCost cost = ManaUtil.createManaCost(amountToPay, false);
+                // the helper's mana is spent to cast the spell, so it's paid as the spell (Mishra's Workshop,
+                // Powerstone) and under the spell's source restriction (Myr Superion). That filter comes from a
+                // generic part: paying.getSourceFilter() returns the first any part has, which can be {S}'s snow filter
+                ManaUtil.getUnpaidGenericParts(paying)
+                        .stream()
+                        .findFirst()
+                        .ifPresent(part -> cost.setSourceFilter(part.getSourceFilter()));
+                if (!cost.pay(spell.getSpellAbility(), game, source, targetPlayer.getId(), false)) {
+                    return false; // fails the action, so specialManaPayment rolls back what the helper tapped
                 }
+                ManaUtil.payGeneric(paying, amountToPay, cost.getUsedManaToPay());
+                game.informPlayers(targetPlayer.getLogName() + " paid {" + amountToPay + "} for " + controller.getLogName());
+                game.getState().setValue(source.getSourceId().toString() + game.getState().getZoneChangeCounter(source.getSourceId()) + "_assisted", true);
 
                 // assist must be used before activating mana abilities, so no need to switch step after usage
                 // (mana and other special abilities can be used after assist)
