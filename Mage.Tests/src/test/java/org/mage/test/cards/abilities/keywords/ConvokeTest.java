@@ -116,6 +116,32 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
+    public void test_PlayConvoke_Manual_TwoInstances() {
+        // 702.51d "Multiple instances of convoke on the same spell are redundant."
+        // {2}{R}{R}, convoke
+        addCard(Zone.HAND, playerA, "Stoke the Flames", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Wand of the Worldsoul", 1); // {T}: The next spell you cast this turn has convoke.
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Goblin Racketeer", 2);
+
+        disableManaAutoPayment(playerA);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: The next spell you cast this turn");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 2);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Stoke the Flames", playerB);
+        setChoice(playerA, "Red", 2);
+        setChoice(playerA, "Convoke"); // one Convoke action pays the {2}, though the spell has convoke twice
+        addTarget(playerA, "Goblin Racketeer^Goblin Racketeer");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 4);
+        assertTappedCount("Goblin Racketeer", true, 2);
+    }
+
+    @Test
     public void test_PlayConvoke_AI_AutoPay() {
         // {2}{R}{R}
         // Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature’s color.)

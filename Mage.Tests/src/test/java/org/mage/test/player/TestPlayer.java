@@ -4475,6 +4475,8 @@ public class TestPlayer implements Player {
                             } else {
                                 Assert.fail("Found non active special mana action, but must generates only active: " + specialAction.getRule(true));
                             }
+                            // one choice activates one action, even when a spell has convoke twice (its own and one from Wand of the Worldsoul)
+                            break;
                         }
                     }
                 }
