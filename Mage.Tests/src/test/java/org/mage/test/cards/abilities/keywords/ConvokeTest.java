@@ -201,6 +201,46 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
+    public void test_PlayConvoke_AI_TapsLandsBeforeConvoking() {
+        // {2}{R}{R}
+        addCard(Zone.HAND, playerA, "Stoke the Flames", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2); // can only pay the {2}
+        addCard(Zone.BATTLEFIELD, playerA, "Goblin Racketeer", 2); // the only source of {R}, as convoke pay
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Stoke the Flames", playerB);
+
+        setStrictChooseMode(false); // AI must choose targets
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 4);
+        assertTappedCount("Island", true, 2);
+        assertTappedCount("Goblin Racketeer", true, 2);
+    }
+
+    @Test
+    public void test_PlayConvoke_AI_PaysPhyrexianSymbol() {
+        // {R/P}
+        // Gut Shot deals 1 damage to any target.
+        addCard(Zone.HAND, playerA, "Gut Shot", 1);
+        // {T}: The next spell you cast this turn has convoke.
+        addCard(Zone.BATTLEFIELD, playerA, "Wand of the Worldsoul");
+        addCard(Zone.BATTLEFIELD, playerA, "Raging Goblin"); // the only source of {R}, as convoke pay
+        setLife(playerA, 1); // can't pay 2 life for {R/P}
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: The next spell you cast this turn");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gut Shot", playerB);
+
+        setStrictChooseMode(false); // AI must choose targets
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 1);
+        assertTapped("Raging Goblin", true);
+    }
+
+    @Test
     public void test_PlayConvoke_AI_FullPlay() {
         // {2}{R}{R}
         // Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature’s color.)
