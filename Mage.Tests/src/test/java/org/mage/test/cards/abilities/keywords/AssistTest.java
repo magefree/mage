@@ -225,6 +225,40 @@ public class AssistTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
+    public void test_PlayAssist_ManaRestriction_HelperPaysTowardsSpellsXCost() {
+        addCard(Zone.HAND, playerA, "Memnite", 1);
+        // {X}{B} Instant, assist
+        // Destroy target creature with power X or less.
+        addCard(Zone.HAND, playerA, "Gang Up", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        // {T}: Add {C}{C}{C}{C}. Spend this mana only on costs that contain {X}.
+        addCard(Zone.BATTLEFIELD, playerB, "Rosheen Meanderer", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears", 1);
+
+        // B gets priority while Memnite is on the stack, and floats Rosheen's mana
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Memnite");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: Add {C}{C}{C}{C}");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        disableManaAutoPayment(playerA);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gang Up");
+        setChoice(playerA, "X=2");
+        addTarget(playerA, "Grizzly Bears"); // chosen after X, which its filter depends on
+        setChoice(playerA, "Assist");
+        addTarget(playerA, playerB);
+        setChoice(playerB, "X=2"); // Gang Up's total cost contains {X}, so Rosheen's mana can pay it
+        setChoice(playerA, "Black");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Gang Up", 1);
+        assertGraveyardCount(playerB, "Grizzly Bears", 1);
+    }
+
+    @Test
     public void test_PlayAssist_HelperPaysGenericBeforeMonoHybrid() {
         String monoHybridFirst = "Assisted Procession";
         addCustomCardWithSpell(playerA, new SpellAbility(new ManaCostsImpl<>("{2/W}{1}"), monoHybridFirst),

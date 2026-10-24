@@ -180,13 +180,14 @@ class AssistEffect extends OneShotEffect {
                 // assist pays only generic (702.132a), so the helper pays a generic cost of their own
                 ManaCost cost = ManaUtil.createManaCost(amountToPay, false);
                 // the helper's mana is spent to cast the spell, so it's paid as the spell (Mishra's Workshop,
-                // Powerstone) and under the spell's source restriction (Myr Superion). That filter comes from a
-                // generic part: paying.getSourceFilter() returns the first any part has, which can be {S}'s snow filter
+                // Powerstone), towards the spell's cost (Rosheen Meanderer's {X} mana) and under the spell's source
+                // restriction (Myr Superion). That filter comes from a generic part: paying.getSourceFilter() returns
+                // the first any part has, which can be {S}'s snow filter
                 ManaUtil.getUnpaidGenericParts(paying)
                         .stream()
                         .findFirst()
                         .ifPresent(part -> cost.setSourceFilter(part.getSourceFilter()));
-                if (!cost.pay(spell.getSpellAbility(), game, source, targetPlayer.getId(), false)) {
+                if (!cost.pay(spell.getSpellAbility(), game, source, targetPlayer.getId(), false, paying)) {
                     return false; // fails the action, so specialManaPayment rolls back what the helper tapped
                 }
                 ManaUtil.payGeneric(paying, amountToPay, cost.getUsedManaToPay());
