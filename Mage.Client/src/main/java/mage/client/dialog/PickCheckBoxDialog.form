@@ -164,7 +164,7 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="btOK" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="btCancel" min="-2" pref="83" max="-2" attributes="0"/>
+                  <Component id="btCancel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
