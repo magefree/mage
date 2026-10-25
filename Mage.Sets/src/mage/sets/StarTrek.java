@@ -79,6 +79,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Crystalline Entity", 261, Rarity.MYTHIC, mage.cards.c.CrystallineEntity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crystalline Entity", 478, Rarity.MYTHIC, mage.cards.c.CrystallineEntity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cybernetic Specialist", 262, Rarity.COMMON, mage.cards.c.CyberneticSpecialist.class));
+        cards.add(new SetCardInfo("D'Ghor Bloodletter", 101, Rarity.UNCOMMON, mage.cards.d.DGhorBloodletter.class));
         cards.add(new SetCardInfo("D'Vana Tendi, Optimistic Ensign", 236, Rarity.UNCOMMON, mage.cards.d.DVanaTendiOptimisticEnsign.class));
         cards.add(new SetCardInfo("DOT-7 Repair Squad", 12, Rarity.COMMON, mage.cards.d.DOT7RepairSquad.class));
         cards.add(new SetCardInfo("Dal R'El, Augment Orphan", 231, Rarity.UNCOMMON, mage.cards.d.DalRElAugmentOrphan.class));
