@@ -267,6 +267,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Watery Grave", 488, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Xenobotanist", 224, Rarity.COMMON, mage.cards.x.Xenobotanist.class));
         cards.add(new SetCardInfo("Xindi Surveyors", 225, Rarity.COMMON, mage.cards.x.XindiSurveyors.class));
+        cards.add(new SetCardInfo("Year of Hell", 257, Rarity.RARE, mage.cards.y.YearOfHell.class));
         cards.add(new SetCardInfo("Zero, Incorporeal Sensate", 258, Rarity.UNCOMMON, mage.cards.z.ZeroIncorporealSensate.class));
     }
 }
