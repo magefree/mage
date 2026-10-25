@@ -37,6 +37,8 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Exocomp", 145, Rarity.COMMON, mage.cards.e.Exocomp.class));
         cards.add(new SetCardInfo("Gin'tak Charge", 163, Rarity.COMMON, mage.cards.g.GintakCharge.class));
         cards.add(new SetCardInfo("Gorn Captain", 172, Rarity.COMMON, mage.cards.g.GornCaptain.class));
+        cards.add(new SetCardInfo("Guinan, Ancient Advisor", 17, Rarity.RARE, mage.cards.g.GuinanAncientAdvisor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Guinan, Ancient Advisor", 223, Rarity.RARE, mage.cards.g.GuinanAncientAdvisor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gumato", 173, Rarity.UNCOMMON, mage.cards.g.Gumato.class));
         cards.add(new SetCardInfo("Head of Security", 133, Rarity.COMMON, mage.cards.h.HeadOfSecurity.class));
         cards.add(new SetCardInfo("Jean-Luc Picard, Luminary", 3, Rarity.MYTHIC, mage.cards.j.JeanLucPicardLuminary.class, NON_FULL_USE_VARIOUS));
