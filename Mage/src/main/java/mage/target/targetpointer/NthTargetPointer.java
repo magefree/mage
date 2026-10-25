@@ -3,7 +3,6 @@ package mage.target.targetpointer;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.cards.Card;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
@@ -143,10 +142,7 @@ public abstract class NthTargetPointer extends TargetPointerImpl {
         } else {
             // need any zcc
             // TODO: must research, is it used at all?! Init code must fill all static zcc data before go here
-            Permanent permanent = game.getPermanent(targetId);
-            if (permanent == null) {
-                permanent = (Permanent) game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
-            }
+            Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
             return permanent;
         }
     }

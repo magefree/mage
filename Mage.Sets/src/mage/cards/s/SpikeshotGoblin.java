@@ -58,10 +58,7 @@ class SpikeshotGoblinEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent == null) {
-            sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        }
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourcePermanent == null) {
             return false;
         }

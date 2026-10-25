@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -32,8 +31,9 @@ public class DamageEachOtherEffect extends OneShotEffect {
         boolean sourceOnBattlefield = true;
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
         Permanent sourceCreature = game.getPermanent(source.getSourceId());
-        if (sourceCreature == null) {
-            sourceCreature = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+        if (sourceCreature == null || !sourceCreature.isPhasedIn()) {
+            // left the battlefield or phased out (treated as though it doesn't exist)
+            sourceCreature = game.getPermanentOrLKIBattlefield(source.getSourceId());
             sourceOnBattlefield = false;
         }
 
