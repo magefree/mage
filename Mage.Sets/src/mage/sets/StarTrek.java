@@ -137,6 +137,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 483, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 319, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 320, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jake Sisko, War Correspondent", 205, Rarity.UNCOMMON, mage.cards.j.JakeSiskoWarCorrespondent.class));
         cards.add(new SetCardInfo("Khaaaaaaaaaaaannn!", 154, Rarity.UNCOMMON, mage.cards.k.Khaaaaaaaaaaaannn.class));
         cards.add(new SetCardInfo("Kobayashi Maru Scenario", 410, Rarity.MYTHIC, mage.cards.k.KobayashiMaruScenario.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kobayashi Maru Scenario", 534, Rarity.MYTHIC, mage.cards.k.KobayashiMaruScenario.class, NON_FULL_USE_VARIOUS));
