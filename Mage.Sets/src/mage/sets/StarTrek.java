@@ -209,6 +209,9 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Troubling Tribbles", 408, Rarity.RARE, mage.cards.t.TroublingTribbles.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Troubling Tribbles", 41, Rarity.RARE, mage.cards.t.TroublingTribbles.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Troubling Tribbles", 532, Rarity.RARE, mage.cards.t.TroublingTribbles.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("U.S.S. Discovery, at Black Alert", 221, Rarity.RARE, mage.cards.u.USSDiscoveryAtBlackAlert.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("U.S.S. Discovery, at Black Alert", 474, Rarity.RARE, mage.cards.u.USSDiscoveryAtBlackAlert.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("U.S.S. Discovery, at Black Alert", 554, Rarity.RARE, mage.cards.u.USSDiscoveryAtBlackAlert.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("U.S.S. Enterprise-D, Galaxy-Class", 273, Rarity.RARE, mage.cards.u.USSEnterpriseDGalaxyClass.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("U.S.S. Enterprise-D, Galaxy-Class", 481, Rarity.RARE, mage.cards.u.USSEnterpriseDGalaxyClass.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("U.S.S. Enterprise-D, Galaxy-Class", 557, Rarity.RARE, mage.cards.u.USSEnterpriseDGalaxyClass.class, FULL_ART_USE_VARIOUS));
