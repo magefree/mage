@@ -37,6 +37,8 @@ import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -240,6 +242,21 @@ public class DownloadPicturesServiceTest {
         TestDownloadService restore = runDownload(cards("TS1", 0, imagesPerSet * 2), 10);
         Assert.assertEquals(imagesPerSet * 2, countZipEntries(zipFile, "TS1/"));
         assertMissing(restore, 0);
+    }
+
+    @Test
+    public void test_GuiRefresh_RunsOnceInSwingThreadAfterDownload() throws Exception {
+        // the app runs the service in a separate thread, but GUI changes are allowed in the Swing thread only
+        // (random NPE in layouts like BasicScrollBarUI.layoutHScrollbar, see #13503)
+        int imagesPerSet = 10;
+
+        TestDownloadService service = runDownload(cards(imagesPerSet), 10, true);
+
+        assertRefreshedOnceAfterDownload(service);
+        SwingUtilities.invokeAndWait(() -> Assert.assertTrue("dialog's start button must be enabled after download",
+                service.isStartButtonEnabledForTests()));
+        assertSavedImages(imagesPerSet);
+        assertMissing(service, 0);
     }
 
     @Test
@@ -466,21 +483,42 @@ public class DownloadPicturesServiceTest {
     }
 
     private TestDownloadService runDownload(List<CardDownloadData> missingCards, int imageDownloadMillis) throws Exception {
+        return runDownload(missingCards, imageDownloadMillis, false);
+    }
+
+    /**
+     * @param inDownloadThread true - run the service in a separate thread like the app's start button does
+     *                         (false - run in the current thread, same result)
+     */
+    private TestDownloadService runDownload(List<CardDownloadData> missingCards, int imageDownloadMillis, boolean inDownloadThread) throws Exception {
         TestDownloadService service = new TestDownloadService(imageDownloadMillis);
         service.prepareDownloadForTests(new TestImageSource(), missingCards, DOWNLOAD_THREADS);
 
-        // GUI refresh (reset fonts) must be one time and after the last image only
+        // GUI refresh (reset fonts) must be one time, after the last image only and in the Swing thread
         // (new font size, so a refresh will change the fonts and raise an event)
         setCachedSetting(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, String.valueOf(GUISizeHelper.dialogFont.getSize() + 1));
         PropertyChangeListener refreshListener = event -> {
             if ("InternalFrame.titleFont".equals(event.getPropertyName())) {
                 service.refreshCalls.incrementAndGet();
                 service.downloadsOnRefresh.set(service.finishedDownloads.get());
+                if (!SwingUtilities.isEventDispatchThread()) {
+                    service.refreshOutsideSwingThread.set(true);
+                }
             }
         };
         UIManager.getDefaults().addPropertyChangeListener(refreshListener);
         try {
-            service.run(); // same thread, returns after a full download process
+            if (inDownloadThread) {
+                Thread downloadThread = new Thread(service, "test-images-download");
+                downloadThread.start();
+                downloadThread.join(TimeUnit.MINUTES.toMillis(5));
+                Assert.assertFalse("download thread must be finished", downloadThread.isAlive());
+            } else {
+                service.run(); // same thread, returns after a full download process
+            }
+            // workaround to wait GUI refresh
+            SwingUtilities.invokeAndWait(() -> {
+            });
         } finally {
             UIManager.getDefaults().removePropertyChangeListener(refreshListener);
         }
@@ -501,6 +539,7 @@ public class DownloadPicturesServiceTest {
     private void assertRefreshedOnceAfterDownload(TestDownloadService service) {
         Assert.assertEquals("GUI must be refreshed one time", 1, service.refreshCalls.get());
         Assert.assertEquals("GUI must be refreshed after the last image", service.finishedDownloads.get(), service.downloadsOnRefresh.get());
+        Assert.assertFalse("GUI must be refreshed in the Swing thread only (see #13503)", service.refreshOutsideSwingThread.get());
     }
 
     private void assertProgressMessage(TestDownloadService service, String text, int progressCurrent, int progressNeed) {
@@ -664,6 +703,7 @@ public class DownloadPicturesServiceTest {
         final AtomicInteger failedDownloads = new AtomicInteger();
         final AtomicInteger refreshCalls = new AtomicInteger();
         final AtomicInteger downloadsOnRefresh = new AtomicInteger(-1);
+        final AtomicBoolean refreshOutsideSwingThread = new AtomicBoolean(false);
         final List<String> progressMessages = Collections.synchronizedList(new ArrayList<>()); // text [current/need]
         boolean failAll = false;
         Function<CardDownloadData, Boolean> failFilter = card -> false;

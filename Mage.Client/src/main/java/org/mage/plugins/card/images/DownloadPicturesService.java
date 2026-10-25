@@ -305,6 +305,10 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         return this.uiDialog.getGlobalInfo();
     }
 
+    boolean isStartButtonEnabledForTests() {
+        return this.uiDialog.getStartButton().isEnabled();
+    }
+
     File getDownloadLogFileForTests() {
         return this.downloadLog == null ? null : this.downloadLog.getFile();
     }
@@ -821,12 +825,13 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     + " storage problems, see details in " + downloadLog.getFile());
         }
 
-        // stop
-        reloadCardsToDownload(uiDialog.getSetsCombo().getSelectedItem().toString());
-        enableDialogButtons();
-
-        // reset GUI and cards to use new images
-        GUISizeHelper.refreshGUIAndCards(false);
+        // stop: refresh dialog's controls and whole GUI (reset caches and use new images)
+        // GUI changes must be done in the Swing thread only (see #13503)
+        SwingUtilities.invokeLater(() -> {
+            reloadCardsToDownload(uiDialog.getSetsCombo().getSelectedItem().toString());
+            enableDialogButtons();
+            GUISizeHelper.refreshGUIAndCards(false);
+        });
     }
 
     /**
