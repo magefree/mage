@@ -1763,6 +1763,9 @@ public abstract class AbilityImpl implements Ability {
         Permanent permanent = getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
             permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, getStackMomentSourceZCC());
+        } else if (!permanent.isPhasedIn()) {
+            // phased-out permanent is treated as though it doesn't exist, so use its LKI (702.26b)
+            permanent = game.getPermanentOrLKIBattlefield(getSourceId());
         }
         return permanent;
     }

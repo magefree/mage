@@ -10,7 +10,6 @@ import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.ObjectSourcePlayer;
@@ -95,10 +94,7 @@ class ShellOfTheLastKappaEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell != null) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            if (sourcePermanent == null) {
-                sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-            }
+            Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
             if (sourcePermanent != null) {
                 game.getStack().counter(spell.getId(), source, game);
                 Card card = spell.getCard();

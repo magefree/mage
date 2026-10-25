@@ -141,4 +141,75 @@ public class PhasingLastKnownInformationTest extends CardTestPlayerBase {
         assertCounterCount(playerA, "Psychic Pickpocket", CounterType.P1P1, 0);
         assertPowerToughness(playerA, "Psychic Pickpocket", 3, 2);
     }
+
+    @Test
+    public void test_Power_PhasedOutSource_CardOwnLookup() {
+        // {1}{R}{R}: Spikeshot Elder deals damage equal to its power to any target.
+        addCard(Zone.BATTLEFIELD, playerA, "Spikeshot Elder"); // 1/1
+        // Equipped creature gets +2/+0. Equip {1}
+        addCard(Zone.BATTLEFIELD, playerA, "Bonesplitter");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.HAND, playerA, ripple);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {1}", "Spikeshot Elder");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        // the equipment phases out indirectly with the creature, so only the LKI still has power 3
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{R}{R}: {this} deals damage", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ripple, "Spikeshot Elder");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 3);
+    }
+
+    @Test
+    public void test_Power_PhasedOutSource_SourcePermanentOrLKI() {
+        // {B}, {T}: Tap target creature. Abyssal Hunter deals damage equal to Abyssal Hunter's power to that creature.
+        addCard(Zone.BATTLEFIELD, playerA, "Abyssal Hunter"); // 1/1
+        // Equipped creature gets +2/+0. Equip {1}
+        addCard(Zone.BATTLEFIELD, playerA, "Bonesplitter");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.HAND, playerA, ripple);
+        addCard(Zone.BATTLEFIELD, playerB, "Hill Giant"); // 3/3
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {1}", "Abyssal Hunter");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{B}, {T}: Tap target creature", "Hill Giant");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ripple, "Abyssal Hunter");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerB, "Hill Giant", 1);
+    }
+
+    @Test
+    public void test_Power_PhasedOutTarget_FixedTarget() {
+        // Whenever another creature enters, you may put X +1/+1 counters on this creature, where X is that creature's power.
+        addCard(Zone.BATTLEFIELD, playerA, "Hamletback Goliath"); // 6/6
+        // Creatures you control get +1/+1.
+        addCard(Zone.BATTLEFIELD, playerA, "Glorious Anthem");
+        addCard(Zone.HAND, playerA, "Grizzly Bears"); // {1}{G}, 2/2
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.HAND, playerA, ripple);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1); // resolve the creature, keep the Goliath trigger
+        // the Anthem no longer applies to the phased-out Bears, so only the LKI still has power 3
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ripple, "Grizzly Bears");
+        setChoice(playerA, true); // put the counters
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertCounterCount(playerA, "Hamletback Goliath", CounterType.P1P1, 3);
+        assertPowerToughness(playerA, "Hamletback Goliath", 6 + 1 + 3, 6 + 1 + 3);
+    }
 }

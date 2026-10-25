@@ -55,6 +55,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Aunt May", 768, Rarity.UNCOMMON, mage.cards.a.AuntMay.class));
         cards.add(new SetCardInfo("Austere Command", 121, Rarity.RARE, mage.cards.a.AustereCommand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Austere Command", 294, Rarity.RARE, mage.cards.a.AustereCommand.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Avenge", 11, Rarity.RARE, mage.cards.a.Avenge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Avenge", 295, Rarity.RARE, mage.cards.a.Avenge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avengers Quinjet", 102, Rarity.RARE, mage.cards.a.AvengersQuinjet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avengers Quinjet", 426, Rarity.RARE, mage.cards.a.AvengersQuinjet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bast, Panther Goddess", 75, Rarity.RARE, mage.cards.b.BastPantherGoddess.class, NON_FULL_USE_VARIOUS));
@@ -310,6 +312,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hero's Blade", 201, Rarity.UNCOMMON, mage.cards.h.HerosBlade.class));
         cards.add(new SetCardInfo("Heroes for Hire", 688, Rarity.UNCOMMON, mage.cards.h.HeroesForHire.class));
         cards.add(new SetCardInfo("Heroes' Hangout", 804, Rarity.UNCOMMON, mage.cards.h.HeroesHangout.class));
+        cards.add(new SetCardInfo("Heroic Return", 17, Rarity.RARE, mage.cards.h.HeroicReturn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Heroic Return", 309, Rarity.RARE, mage.cards.h.HeroicReturn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Heroic Teamwork", 597, Rarity.COMMON, mage.cards.h.HeroicTeamwork.class));
         cards.add(new SetCardInfo("Hinterland Harbor", 250, Rarity.RARE, mage.cards.h.HinterlandHarbor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hinterland Harbor", 480, Rarity.RARE, mage.cards.h.HinterlandHarbor.class, NON_FULL_USE_VARIOUS));
@@ -460,12 +464,15 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Nova Flame", 57, Rarity.RARE, mage.cards.n.NovaFlame.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Origin of Black Widow", 664, Rarity.UNCOMMON, mage.cards.o.OriginOfBlackWidow.class));
         cards.add(new SetCardInfo("Origin of Captain America", 605, Rarity.UNCOMMON, mage.cards.o.OriginOfCaptainAmerica.class));
+        cards.add(new SetCardInfo("Origin of Iron Man", 633, Rarity.UNCOMMON, mage.cards.o.OriginOfIronMan.class));
         cards.add(new SetCardInfo("Origin of the Hulk", 728, Rarity.UNCOMMON, mage.cards.o.OriginOfTheHulk.class));
         cards.add(new SetCardInfo("Origin of Thor", 701, Rarity.UNCOMMON, mage.cards.o.OriginOfThor.class));
         cards.add(new SetCardInfo("Overwhelming Stampede", 178, Rarity.RARE, mage.cards.o.OverwhelmingStampede.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overwhelming Stampede", 385, Rarity.RARE, mage.cards.o.OverwhelmingStampede.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pacifism", 575, Rarity.COMMON, mage.cards.p.Pacifism.class));
         cards.add(new SetCardInfo("Palace Jailer", 140, Rarity.UNCOMMON, mage.cards.p.PalaceJailer.class));
+        cards.add(new SetCardInfo("Panther Habit", 112, Rarity.RARE, mage.cards.p.PantherHabit.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Panther Habit", 446, Rarity.RARE, mage.cards.p.PantherHabit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Panther Robot", 113, Rarity.RARE, mage.cards.p.PantherRobot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Panther Robot", 448, Rarity.RARE, mage.cards.p.PantherRobot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Patchwork Banner", 207, Rarity.UNCOMMON, mage.cards.p.PatchworkBanner.class));
