@@ -82,10 +82,7 @@ class MayTapOrUntapAttachedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment == null) {
-            equipment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        }
+        Permanent equipment = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent equipedCreature = game.getPermanent(equipment.getAttachedTo());
             Player player = game.getPlayer(source.getControllerId());

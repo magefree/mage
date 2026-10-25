@@ -171,6 +171,7 @@ public enum SubType {
     DAUTHI("Dauthi", SubTypeSet.CreatureType),
     DEMIGOD("Demigod", SubTypeSet.CreatureType),
     DEMON("Demon", SubTypeSet.CreatureType),
+    DENOBULAN("Denobulan", SubTypeSet.CreatureType),
     DESERTER("Deserter", SubTypeSet.CreatureType),
     DETECTIVE("Detective", SubTypeSet.CreatureType),
     DEVIL("Devil", SubTypeSet.CreatureType),
@@ -191,6 +192,7 @@ public enum SubType {
     ECHIDNA("Echidna", SubTypeSet.CreatureType),
     EFREET("Efreet", SubTypeSet.CreatureType),
     EGG("Egg", SubTypeSet.CreatureType),
+    EL_AURIAN("El-Aurian", SubTypeSet.CreatureType),
     ELDER("Elder", SubTypeSet.CreatureType),
     ELDRAZI("Eldrazi", SubTypeSet.CreatureType),
     ELEMENTAL("Elemental", SubTypeSet.CreatureType),
@@ -286,6 +288,7 @@ public enum SubType {
     KOR("Kor", SubTypeSet.CreatureType),
     KRAKEN("Kraken", SubTypeSet.CreatureType),
     KREE("Kree", SubTypeSet.CreatureType),
+    KWEJIAN("Kwejian", SubTypeSet.CreatureType),
     // L
     LADYOFPROPERETIQUETTE("Lady of Proper Etiquette", SubTypeSet.CreatureType, true), // Unglued
     LAMIA("Lamia", SubTypeSet.CreatureType),
