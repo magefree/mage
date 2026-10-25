@@ -221,6 +221,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Stomping Ground", 395, Rarity.RARE, mage.cards.s.StompingGround.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stomping Ground", 490, Rarity.RARE, mage.cards.s.StompingGround.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Support Mission", 216, Rarity.UNCOMMON, mage.cards.s.SupportMission.class));
+        cards.add(new SetCardInfo("Suurok-Class Science Vessel", 83, Rarity.COMMON, mage.cards.s.SuurokClassScienceVessel.class));
         cards.add(new SetCardInfo("Swamp", 309, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 314, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 484, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
