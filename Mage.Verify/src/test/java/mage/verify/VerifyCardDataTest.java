@@ -1214,6 +1214,10 @@ public class VerifyCardDataTest {
                     // Wizards released this in lieu of SPM due to licensing issues. Almost mechannically identical, but with unique card names/art.
                     return;
                 }
+                if (jsonSet.code.equals("BCHR")) {
+                    // Skip for now, not a real draft set over Chronicles
+                    return;
+                }
                 // how-to fix: it's miss promo sets with boosters, so just add/generate it in most use cases
                 errorsList.add(String.format("Error: missing set implementation (important for draft format) - %s - %s - boosters: %s",
                         jsonSet.code,
