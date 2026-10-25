@@ -41,13 +41,13 @@ public final class LlanowarGreenwidow extends CardImpl {
         // Domain -- {7}{G}: Return Llanowar Greenwidow from your graveyard to the battlefield tapped. It gains "If this permanent would leave the battlefield, exile it instead of putting it anywhere else." This ability costs {1} less to activate for each basic land type among lands you control.
         Ability ability = new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToBattlefieldEffect(true, false),
+                new ReturnSourceFromGraveyardToBattlefieldEffect(true, false)
+                        .withAdditionalEffect(new GainAbilitySourceEffect(
+                                new SimpleStaticAbility(new LeaveBattlefieldExileSourceReplacementEffect("this permanent")),
+                                Duration.Custom
+                        ).setText("It gains \"If this permanent would leave the battlefield, exile it instead of putting it anywhere else.\"")),
                 new ManaCostsImpl<>("{7}{G}")
         );
-        ability.addEffect(new GainAbilitySourceEffect(
-                new SimpleStaticAbility(new LeaveBattlefieldExileSourceReplacementEffect("this permanent")),
-                Duration.Custom
-        ).setText("It gains \"If this permanent would leave the battlefield, exile it instead of putting it anywhere else.\""));
         ability.addEffect(new InfoEffect("This ability costs {1} less to activate " +
                 "for each basic land type among lands you control."));
         ability.addHint(DomainHint.instance);

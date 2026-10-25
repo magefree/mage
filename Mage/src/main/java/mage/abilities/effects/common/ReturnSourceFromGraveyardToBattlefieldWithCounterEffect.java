@@ -1,14 +1,11 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.ReplacementEffectImpl;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.cards.Card;
 import mage.counters.Counter;
+import mage.counters.Counters;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  * @author weirddan455
@@ -27,7 +24,7 @@ public class ReturnSourceFromGraveyardToBattlefieldWithCounterEffect extends Ret
         this.staticText += " with " + counter.getDescription() + " on it";
     }
 
-    private ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(final ReturnSourceFromGraveyardToBattlefieldWithCounterEffect effect) {
+    protected ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(final ReturnSourceFromGraveyardToBattlefieldWithCounterEffect effect) {
         super(effect);
         this.counter = effect.counter.copy();
     }
@@ -38,51 +35,10 @@ public class ReturnSourceFromGraveyardToBattlefieldWithCounterEffect extends Ret
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        AddCounterSourceReplacementEffect counterEffect = new AddCounterSourceReplacementEffect(counter);
-        game.addEffect(counterEffect, source);
-        return super.apply(game, source);
-    }
-
-}
-
-class AddCounterSourceReplacementEffect extends ReplacementEffectImpl {
-
-    private final Counter counter;
-
-    public AddCounterSourceReplacementEffect(Counter counter) {
-        super(Duration.EndOfStep, Outcome.BoostCreature);
-        this.counter = counter;
-    }
-
-    private AddCounterSourceReplacementEffect(final AddCounterSourceReplacementEffect effect) {
-        super(effect);
-        this.counter = effect.counter.copy();
-    }
-
-    @Override
-    public AddCounterSourceReplacementEffect copy() {
-        return new AddCounterSourceReplacementEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getTargetId().equals(source.getSourceId());
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (creature == null) {
-            return false;
-        }
-        creature.addCounters(counter.copy(), source.getControllerId(), source, game, event.getAppliedEffects());
-        discard();
-        return false;
+    protected void putOntoBattlefield(Player player, Card card, Ability source, Game game) {
+        Counters counters = new Counters();
+        counters.addCounter(counter.copy());
+        game.setEnterWithCounters(card.getId(), counters);
+        super.putOntoBattlefield(player, card, source, game);
     }
 }

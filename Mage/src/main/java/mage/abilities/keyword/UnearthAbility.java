@@ -1,23 +1,15 @@
 package mage.abilities.keyword;
 
-import mage.MageObjectReference;
-import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.Cost;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.effects.common.replacement.LeaveBattlefieldExileSourceReplacementEffect;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -35,10 +27,13 @@ import mage.target.targetpointer.FixedTarget;
 public class UnearthAbility extends ActivatedAbilityImpl {
 
     public UnearthAbility(Cost costs) {
-        super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(false, true, true), costs);
+        super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(false, true, true)
+                .withAdditionalEffect(new CreateDelayedTriggeredAbilityEffect(
+                        new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ExileSourceEffect())
+                ))
+                // a replacement effect of the ability, not an ability the permanent gains, so losing all abilities doesn't stop it
+                .withAdditionalEffect(new LeaveBattlefieldExileSourceReplacementEffect("it").setDuration(Duration.Custom)), costs);
         this.timing = TimingRule.SORCERY;
-        this.addEffect(new CreateDelayedTriggeredAbilityEffect(new UnearthDelayedTriggeredAbility()));
-        this.addEffect(new UnearthLeavesBattlefieldEffect());
     }
 
     protected UnearthAbility(final UnearthAbility ability) {
@@ -58,88 +53,4 @@ public class UnearthAbility extends ActivatedAbilityImpl {
         return sb.toString();
     }
 
-}
-
-class UnearthDelayedTriggeredAbility extends DelayedTriggeredAbility {
-
-    public UnearthDelayedTriggeredAbility() {
-        super(new ExileTargetEffect());
-    }
-
-    protected UnearthDelayedTriggeredAbility(final UnearthDelayedTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public UnearthDelayedTriggeredAbility copy() {
-        return new UnearthDelayedTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.END_TURN_STEP_PRE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getPlayerId().equals(this.controllerId)) {
-            return false;
-        }
-        // The delayed trigger source is the card in the graveyard.
-        // So we need to exile the zcc + 1 permanent
-        MageObjectReference object = new MageObjectReference(getSourceId(), getStackMomentSourceZCC() + 1, game);
-        Permanent permanent = object.getPermanent(game);
-        if (permanent == null || !permanent.isPhasedIn()) {
-            // Triggers, but do nothing.
-            return true;
-        }
-        getEffects().setTargetPointer(new FixedTarget(permanent, game));
-        return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Exile {this} at the beginning of the next end step";
-    }
-
-}
-
-class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl {
-
-    public UnearthLeavesBattlefieldEffect() {
-        super(Duration.OneUse, Outcome.Exile);
-        staticText = "When {this} leaves the battlefield, exile it";
-    }
-
-    protected UnearthLeavesBattlefieldEffect(final UnearthLeavesBattlefieldEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public UnearthLeavesBattlefieldEffect copy() {
-        return new UnearthLeavesBattlefieldEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() != Zone.EXILED) {
-                // Only move it to exile if it was this instance that was moved to battlefield with unearth
-                return source.getStackMomentSourceZCC() == game.getState().getZoneChangeCounter(source.getSourceId());
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
 }
