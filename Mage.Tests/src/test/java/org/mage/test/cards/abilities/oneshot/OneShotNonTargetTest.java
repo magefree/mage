@@ -41,6 +41,34 @@ public class OneShotNonTargetTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void BoltbenderChooseSpellTest() {
+        // Disguise {1}{R}
+        // When Boltbender is turned face up, you may choose new targets for any number of other spells and/or abilities.
+        String boltbender = "Boltbender"; // {3}{R} 4/2
+        addCard(Zone.HAND, playerA, boltbender);
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Boltbender using Disguise", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{R}: Turn");
+        // a spell chosen on the stack must still be found when the new targets are chosen
+        setChoice(playerA, "Lightning Bolt");
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
+        setChoice(playerA, true); // change the target
+        addTarget(playerA, "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerB, "Grizzly Bears", 1);
+        assertPermanentCount(playerA, boltbender, 1);
+    }
+
+    @Test
     public void NonTargetAdjusterTest() {
         addCard(Zone.HAND, playerA, "Temporal Firestorm");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
