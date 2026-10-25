@@ -38,10 +38,11 @@ public class DarkImpostorTest extends CardTestPlayerBase {
     public void testDarkImpostor() {
         setStrictChooseMode(true);
 
-        addCard(Zone.BATTLEFIELD, playerA, darkImposter);
+        addCard(Zone.HAND, playerA, darkImposter);
         addCard(Zone.BATTLEFIELD, playerA, deathriteShaman);
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 9);
 
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, darkImposter, true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{B}{B}");
         addTarget(playerA, deathriteShaman);
 
