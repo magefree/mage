@@ -43,24 +43,19 @@ public class OneShotNonTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean result = false;
-        Target target = notTarget.copy();
-        if (source.getTargetAdjuster() != null || !source.getTargets().isEmpty()){
-            throw new IllegalStateException("source ability already has target but is using OneShotNonTargetEffect");
-        }
-        source.addTarget(target);
+        // choose on a copy: the resolving ability is still on the stack and keeps its own targets and adjuster.
+        // The choice is the copy's only target, so it is the wrapped effect's first target.
+        Ability choosingSource = source.copy();
+        choosingSource.getTargets().clear();
+        choosingSource.setTargetAdjuster(null);
+        choosingSource.addTarget(notTarget.copy());
         if (adjuster != null) {
             adjuster.clearDefaultTargets();
-            source.setTargetAdjuster(adjuster);
-            source.adjustTargets(game);
-            source.setTargetAdjuster(null);
+            choosingSource.setTargetAdjuster(adjuster);
+            choosingSource.adjustTargets(game);
         }
-
-        if (source.getTargets().choose(outcome, source.getControllerId(), source.getId(), source, game)) {
-            result = effect.apply(game, source);
-        }
-        source.getTargets().clear();
-        return result;
+        return choosingSource.getTargets().choose(outcome, choosingSource.getControllerId(), choosingSource.getId(), choosingSource, game)
+                && effect.apply(game, choosingSource);
     }
 
     @Override
