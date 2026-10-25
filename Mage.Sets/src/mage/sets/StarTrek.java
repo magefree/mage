@@ -125,6 +125,11 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Kobayashi Maru Scenario", 534, Rarity.MYTHIC, mage.cards.k.KobayashiMaruScenario.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kobayashi Maru Scenario", 68, Rarity.MYTHIC, mage.cards.k.KobayashiMaruScenario.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("La'An Noonien-Singh, Security", 156, Rarity.UNCOMMON, mage.cards.l.LaAnNoonienSinghSecurity.class));
+        cards.add(new SetCardInfo("Locutus, the One Who Speaks", 245, Rarity.UNCOMMON, mage.cards.l.LocutusTheOneWhoSpeaks.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Locutus, the One Who Speaks", 360, Rarity.UNCOMMON, mage.cards.l.LocutusTheOneWhoSpeaks.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Locutus, the One Who Speaks", 389, Rarity.UNCOMMON, mage.cards.l.LocutusTheOneWhoSpeaks.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Locutus, the One Who Speaks", 523, Rarity.UNCOMMON, mage.cards.l.LocutusTheOneWhoSpeaks.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Locutus, the One Who Speaks", 576, Rarity.UNCOMMON, mage.cards.l.LocutusTheOneWhoSpeaks.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Malfunctioning Holodeck", 22, Rarity.COMMON, mage.cards.m.MalfunctioningHolodeck.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Malfunctioning Holodeck", 571, Rarity.COMMON, mage.cards.m.MalfunctioningHolodeck.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Moopsy", 207, Rarity.COMMON, mage.cards.m.Moopsy.class));
