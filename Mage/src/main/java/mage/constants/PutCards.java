@@ -95,9 +95,7 @@ public enum PutCards {
             case SHUFFLE:
                 return player.shuffleCardsToLibrary(card, game, source);
             case BATTLEFIELD_TRANSFORMED:
-                if (card instanceof TransformingDoubleFacedCard) {
-                    card = ((TransformingDoubleFacedCard) card).getRightHalfCard();
-                }
+                card = getCardToMove(card);
                 game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId() + card.getZoneChangeCounter(game), Boolean.TRUE);
             case BATTLEFIELD:
             case EXILED:
@@ -107,6 +105,23 @@ public enum PutCards {
             default:
                 throw new UnsupportedOperationException("Missing case for " + this.name() + "in PutCards.moveCard");
         }
+    }
+
+    /**
+     * After {@link #moveCard}, the permanent it put onto the battlefield for this card, or null if it put none.
+     */
+    public Permanent getPermanentPutOntoBattlefield(Card card, Game game) {
+        if (zone != Zone.BATTLEFIELD) {
+            return null;
+        }
+        return CardUtil.getPermanentFromCardPutToBattlefield(getCardToMove(card), game);
+    }
+
+    private Card getCardToMove(Card card) {
+        if (this == BATTLEFIELD_TRANSFORMED && card instanceof TransformingDoubleFacedCard) {
+            return ((TransformingDoubleFacedCard) card).getRightHalfCard();
+        }
+        return card;
     }
 
     public boolean moveCards(Player player, Cards cards, Ability source, Game game) {
