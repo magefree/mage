@@ -171,6 +171,7 @@ public enum SubType {
     DAUTHI("Dauthi", SubTypeSet.CreatureType),
     DEMIGOD("Demigod", SubTypeSet.CreatureType),
     DEMON("Demon", SubTypeSet.CreatureType),
+    DENOBULAN("Denobulan", SubTypeSet.CreatureType),
     DESERTER("Deserter", SubTypeSet.CreatureType),
     DETECTIVE("Detective", SubTypeSet.CreatureType),
     DEVIL("Devil", SubTypeSet.CreatureType),
