@@ -61,6 +61,11 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Cold-Blooded Crew", 574, Rarity.COMMON, mage.cards.c.ColdBloodedCrew.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Collective Drone", 99, Rarity.UNCOMMON, mage.cards.c.CollectiveDrone.class));
         cards.add(new SetCardInfo("Command Decision", 8, Rarity.COMMON, mage.cards.c.CommandDecision.class));
+        cards.add(new SetCardInfo("Command Subadjunct", 341, Rarity.UNCOMMON, mage.cards.c.CommandSubadjunct.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Command Subadjunct", 364, Rarity.UNCOMMON, mage.cards.c.CommandSubadjunct.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Command Subadjunct", 498, Rarity.UNCOMMON, mage.cards.c.CommandSubadjunct.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Command Subadjunct", 569, Rarity.UNCOMMON, mage.cards.c.CommandSubadjunct.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Command Subadjunct", 9, Rarity.UNCOMMON, mage.cards.c.CommandSubadjunct.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Common Goal", 190, Rarity.COMMON, mage.cards.c.CommonGoal.class));
         cards.add(new SetCardInfo("Consider the Prime Directive", 51, Rarity.COMMON, mage.cards.c.ConsiderThePrimeDirective.class));
         cards.add(new SetCardInfo("Crystalline Entity", 261, Rarity.MYTHIC, mage.cards.c.CrystallineEntity.class, NON_FULL_USE_VARIOUS));
