@@ -7,6 +7,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
+import mage.util.CardUtil;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
@@ -57,6 +58,10 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
         this.zoneChangeCounter = -1;
     }
 
+    /**
+     * @deprecated use {@link #MageObjectReference(Ability, Game)}, which also works for an ability that isn't
+     * tied to an object yet
+     */
     @Deprecated // cause of many bugs, see issue #10479
     public MageObjectReference(Ability source) {
         this(source, 0);
@@ -69,6 +74,19 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
     }
 
     /**
+     * References the object the ability's source was when the ability was put on the stack or its effect was
+     * created. If the source moves, the reference stops matching (400.7), so a continuous effect created by the
+     * ability doesn't follow the source to its new object. An ability that isn't tied to an object yet refers to
+     * the source's current object.
+     */
+    public MageObjectReference(Ability source, Game game) {
+        this(source.getSourceId(), CardUtil.getActualSourceObjectZoneChangeCounter(game, source), game);
+    }
+
+    /**
+     * References the object the id belongs to now. For an ability's source, use
+     * {@link #MageObjectReference(Ability, Game)}: the source may have moved since the ability was put on the stack.
+     *
      * @param sourceId can be null
      * @param game
      */
