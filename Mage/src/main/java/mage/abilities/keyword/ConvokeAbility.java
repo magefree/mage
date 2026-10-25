@@ -117,25 +117,25 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
 }
 
 /**
- * Works out which symbol each tapped creature pays (702.51a), so a whole group can be tapped at once.
+ * Works out which symbol each tapped creature pays (702.51a), so that a group of creatures can be tapped at once.
  * <p>
- * Each creature pays one colored symbol it shares a color with, or one generic. A maximum matching of creatures to
- * colored symbols leaves the fewest creatures to pay generic, so a group can pay together iff those fit in the
- * generic left. A {2/W} is either a colored symbol or two generic, so every choice of which are paid by color is
- * tried (at most 2^5, for Reaper King).
+ * Each creature pays one colored symbol that shares a color with it, or one generic mana. A maximum matching of
+ * creatures to colored symbols leaves the fewest creatures to pay generic, so a group can pay together exactly when
+ * those creatures fit in the generic that is left. An unpaid {2/W} is either a colored symbol or two generic, so each
+ * choice of which ones are paid by color is tried (at most 2^5, for Reaper King).
  */
 class ConvokePayment {
 
     private final ManaCost paying;
     private final List<ManaCost> symbolCosts = new ArrayList<>(); // the colored symbols to be paid
     private final List<Set<ManaType>> symbolColors = new ArrayList<>(); // colors that can pay each symbol
-    private final List<Integer> genericAlternatives = new ArrayList<>(); // a {2/W}'s generic amount, 0 for any other
+    private final List<Integer> genericAlternatives = new ArrayList<>(); // for each symbol: its generic amount if a {2/W}, else 0
     private int generic = 0; // includes what's left of a partly paid {2/W}
-    // the order symbols are matched in, which decides what's left over: fewest kinds of mana first (COLORLESS counts
-    // for {C/W}), so {W} is paid before {W/U} or {C/W}, leaving those to mana that can pay them more ways; {2/W} last,
-    // since generic can also pay it
+    // match order of the colored symbols: fewest colors first ({C/W} counts COLORLESS as a color), and {2/W} last
+    // because generic can also pay it. If the creatures can't pay every symbol, they pay the earliest ones, which
+    // are the hardest to pay in other ways, so {W} gets a creature before {W/U} does
     private final int[] symbolOrder;
-    private final int[] monoHybrids; // the {2/W} symbols
+    private final int[] monoHybrids; // indices of the {2/W} symbols
 
     ConvokePayment(ManaCost paying) {
         this.paying = paying;
@@ -167,30 +167,31 @@ class ConvokePayment {
             genericAlternatives.add(unpaidGeneric);
             symbolCosts.add(part);
         }
-        // {C} and snow can't be paid by convoke
+        // convoke can't pay {C} or {S}
     }
 
     int getMaxCreatures() {
-        // each colored symbol takes one creature, a {2/W} paid as generic as many as its generic amount
+        // one creature for each colored symbol and each generic mana, counting each {2/W} as generic,
+        // because that takes more creatures
         return generic + symbolColors.size() + genericAlternatives.stream().mapToInt(amount -> Math.max(amount - 1, 0)).sum();
     }
 
     /**
      * @param creatureColors the colors of each creature, see {@link #colorsOf}
-     * @return whether each of these creatures can pay for something alongside the others
+     * @return whether all these creatures can pay at once, each paying one mana of the cost
      */
     boolean canPay(List<Set<ManaType>> creatureColors) {
         return IntStream.range(0, 1 << monoHybrids.length).anyMatch(byColor -> match(creatureColors, byColor) != null);
     }
 
     /**
-     * Matches creatures to as many colored symbols as they can pay; the rest pay generic. A symbol is left unpaid
-     * only if it can't be paid alongside the ones before it in symbolOrder.
+     * Matches as many creatures as possible to colored symbols, and the rest pay generic. A symbol is left unpaid
+     * only if it can't be paid together with the symbols before it in symbolOrder.
      *
      * @return null if some creature would pay for nothing
      */
     Assignment assign(List<Set<ManaType>> creatureColors) {
-        // keep the choice that pays the most colored symbols, since those are harder to pay with mana
+        // keep the choice that pays the most colored symbols, because those are harder to pay with mana
         int[] best = null;
         int bestMatched = -1;
         for (int byColor = 0; byColor < 1 << monoHybrids.length; byColor++) {
@@ -209,8 +210,8 @@ class ConvokePayment {
 
     /**
      * @param byColor bit i set: monoHybrids[i] is paid by a creature of its color, otherwise as generic
-     * @return symbolOf[creature] is the colored symbol that creature pays, or -1 for generic; null if some creature
-     * would pay for nothing
+     * @return for each creature, the index of the colored symbol it pays, or -1 if it pays generic. Null if some
+     * creature would pay for nothing
      */
     private int[] match(List<Set<ManaType>> creatureColors, int byColor) {
         List<Set<ManaType>> payableColors = new ArrayList<>(symbolColors);
@@ -246,8 +247,8 @@ class ConvokePayment {
     }
 
     /**
-     * Kuhn's augmenting path: finds a creature to pay the symbol, moving already matched symbols to other creatures if
-     * that frees one. A matched symbol stays matched.
+     * Kuhn's augmenting path step: finds a creature to pay the symbol. If needed, it moves matched symbols to other
+     * creatures to free one. A matched symbol stays matched.
      */
     private boolean augment(int symbol, List<Set<ManaType>> creatureColors, List<Set<ManaType>> payableColors,
                             int[] symbolOf, boolean[] visited) {
@@ -286,7 +287,8 @@ class ConvokePayment {
                 int symbol = matching[creature];
                 if (symbol >= 0) {
                     symbolOf[creature] = symbolCosts.get(symbol);
-                    // a creature sharing both colors of a hybrid pays with the first in ManaType order; either pays it
+                    // a creature with both colors of a hybrid symbol pays with the first one in ManaType order.
+                    // Either color pays the symbol
                     Set<ManaType> colors = EnumSet.copyOf(creatureColors.get(creature));
                     colors.retainAll(symbolColors.get(symbol));
                     manaTypes[creature] = colors.iterator().next();
@@ -301,7 +303,7 @@ class ConvokePayment {
 }
 
 /**
- * Offers only the creatures that can still pay for something alongside the ones already chosen
+ * Offers only the creatures that can still pay for something alongside the ones already chosen.
  */
 class ConvokeTarget extends TargetPermanent {
 
@@ -330,7 +332,8 @@ class ConvokeTarget extends TargetPermanent {
                 .collect(Collectors.toList()), game);
         Set<ManaType> colorless = EnumSet.noneOf(ManaType.class);
         if (canPayAlongside(payment, chosen, colorless)) {
-            // a colorless creature can only pay generic, so if one fits, so does any creature
+            // any creature can pay what a colorless creature can (generic only),
+            // so if a colorless one fits, every creature fits
             return possibleTargets;
         }
         possibleTargets.removeIf(id -> !canPayAlongside(payment, chosen, ConvokePayment.colorsOf(game.getPermanent(id), game)));
@@ -395,7 +398,7 @@ class ConvokeEffect extends OneShotEffect {
                 creatures.put(perm, ConvokePayment.colorsOf(perm, game));
             }
         }
-        // ConvokeTarget offers only creatures that can pay together, but Target.add doesn't check
+        // ConvokeTarget offers only creatures that can pay together, but Target.add doesn't check this
         if (!payment.canPay(new ArrayList<>(creatures.values()))) {
             return false;
         }
@@ -405,7 +408,7 @@ class ConvokeEffect extends OneShotEffect {
         }
 
         List<Permanent> tapped = new ArrayList<>(creatures.keySet());
-        // not null: any subset of a group that can pay can still pay, so those that tapped can
+        // not null: the tapped creatures are a subset of a group that passed canPay
         ConvokePayment.Assignment assignment = payment.assign(new ArrayList<>(creatures.values()));
         payment.pay(assignment);
         SpellAbility spellAbility = spell.getSpellAbility();
@@ -419,7 +422,7 @@ class ConvokeEffect extends OneShotEffect {
         }
         spellAbility.setCostsTag(ConvokeAbility.convokingCreaturesKey, convokingCreatures);
 
-        // can't use mana abilities after that (convoke cost must be paid after mana abilities only)
+        // mana abilities can't be activated after convoke pays part of the cost
         spell.setCurrentActivatingManaAbilitiesStep(ActivationManaAbilityStep.AFTER);
         return true;
     }

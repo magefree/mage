@@ -20,8 +20,8 @@ public class AngelsHeraldTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Air Elemental");
         addCard(Zone.LIBRARY, playerA, "Empyrial Archangel");
 
-        // the AI sacrifices its least valuable creatures first, so it reaches the second Bears before Air Elemental;
-        // the second Bears would leave blue unpaid
+        // the AI sacrifices its least valuable creatures first. It must skip the second Bears, because a green
+        // creature is already chosen
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{W}, {T}, Sacrifice");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

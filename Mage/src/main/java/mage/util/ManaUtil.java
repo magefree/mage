@@ -493,7 +493,8 @@ public final class ManaUtil {
     }
 
     /**
-     * Generic mana still to pay, counting the generic half of {2/W}. {S} isn't generic (107.4h) and neither is {C}.
+     * Generic mana still to pay, counting an unpaid {2/W} as {2}. {C} isn't generic, and neither is {S} (107.4h:
+     * "Effects that reduce the amount of generic mana you pay don't affect {S} costs.").
      */
     public static int getUnpaidGeneric(ManaCost cost) {
         return getUnpaidParts(cost).stream().mapToInt(ManaUtil::getUnpaidGenericOfPart).sum();
@@ -518,7 +519,7 @@ public final class ManaUtil {
     }
 
     /**
-     * The unpaid parts with generic mana still to pay, in the order generic payment fills them. An untouched {2/W}
+     * The unpaid parts with generic mana still to pay, in the order payGeneric fills them. An untouched {2/W}
      * goes last, so it can still be paid with one {W}.
      */
     public static List<ManaCost> getUnpaidGenericParts(ManaCost cost) {

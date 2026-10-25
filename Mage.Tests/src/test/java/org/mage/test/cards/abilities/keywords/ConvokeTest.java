@@ -561,7 +561,8 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: The next spell you cast this turn");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spectral Procession");
-        // a Memnite finishes the {2/W} the Mountain started, the Lion pays one by color, two Memnites pay one as {2}
+        // the Mountain pays {1} of a {2/W} and a Memnite pays the rest. The Lion pays a {2/W} with {W}. Two Memnites
+        // pay the last {2/W} as {2}
         addTarget(playerA, "Memnite^Silvercoat Lion^Memnite^Memnite");
 
         setStrictChooseMode(true);
@@ -587,7 +588,8 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trostani, Three Whispers");
         setChoice(playerA, "Convoke");
-        // picked first, the Guildmage still pays {W} so the Bears can pay {G}, leaving the {G/W} for the second Bears
+        // the Guildmage is chosen first, but it pays {W} so that the Bears can pay {G}. The other Bears pays {G/W} in a
+        // second convoke
         addTarget(playerA, "Selesnya Guildmage^Grizzly Bears");
         addTarget(playerA, TestPlayer.TARGET_SKIP);
         setChoice(playerA, "Convoke");

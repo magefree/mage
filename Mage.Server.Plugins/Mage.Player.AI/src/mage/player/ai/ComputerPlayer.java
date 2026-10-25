@@ -162,8 +162,8 @@ public class ComputerPlayer extends PlayerImpl {
             (MageItem item) -> { target.add(item.getId(), game); } :
             (MageItem item) -> { target.addTarget(item.getId(), source, game); };
 
-        // Some targets narrow their possible targets by what's already chosen (convoke, one creature of each color),
-        // and Target.add doesn't check, so after each pick the candidates above are rechecked against this set.
+        // Some targets (convoke, Angel's Herald) allow fewer possible targets as more are chosen, and Target.add
+        // doesn't check this. After each pick, skip the candidates that are no longer possible.
         Set<UUID> stillPossible = null;
 
         // good targets -- choose as much as possible
@@ -446,7 +446,7 @@ public class ComputerPlayer extends PlayerImpl {
                 .findFirst()
                 .orElse(null);
 
-        // before an action that endsManaAbilities, try mana abilities on the rest of the cost
+        // if the action ends mana abilities, first try mana abilities on the rest of the cost
         if (specialAction != null && specialAction.endsManaAbilities() && unpaid instanceof ManaCosts) {
             for (ManaCost otherCost : (ManaCosts<ManaCost>) unpaid) {
                 if (otherCost != cost && payWithManaAbilities(ability, unpaid, otherCost, producers, hasApprovingObject, game)) {
@@ -476,8 +476,8 @@ public class ComputerPlayer extends PlayerImpl {
 
     /**
      * Activates one mana ability whose mana can pay {@code cost}. For a colored {@code cost}, it first tries abilities
-     * that make only mana {@code unpaid} can use. The mana goes to the pool, so the payment can spend it on any part of
-     * {@code unpaid}.
+     * that make only mana that {@code unpaid} can use. The mana goes to the pool, so the payment can spend it on any
+     * part of {@code unpaid}.
      *
      * @return whether a mana ability was activated
      */

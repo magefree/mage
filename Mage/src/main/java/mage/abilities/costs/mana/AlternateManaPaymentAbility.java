@@ -16,14 +16,14 @@ public interface AlternateManaPaymentAbility {
     /**
      * Adds the special action to the state, that allows the user to do the alternate mana payment
      * <p>
-     * The action pays the spell's cost directly. It calls {@link ManaCost#setPayment} on the unpaid parts
-     * ({@link mage.util.ManaUtil#getUnpaidParts}) of the cost, and it looks the cost up with
-     * {@link mage.util.ManaUtil#getCastingCost} each time it is used.
-     * Mana it really spends (assist) must also be added to {@link ManaCost#getUsedManaToPay},
-     * and paid as the spell so its MANA_PAID events count.
+     * The action pays the spell's cost directly. Each time it is used, it looks up the cost with
+     * {@link mage.util.ManaUtil#getCastingCost} and calls {@link ManaCost#setPayment} on its unpaid parts
+     * ({@link mage.util.ManaUtil#getUnpaidParts}). If the action spends real mana (assist), it must also add that
+     * mana to {@link ManaCost#getUsedManaToPay}, and pay with the spell's ability so that the MANA_PAID events count
+     * it as mana spent on the spell.
      * <p>
-     * If the action fails, the rollback keeps the stack, so the cost stays as the action left it.
-     * The action must not pay anything before its last step that can fail.
+     * If the action fails, the rollback keeps the stack, so the cost stays as the action left it. The action must
+     * not pay anything until its steps that can fail are done.
      *
      * @param source
      * @param game
