@@ -58,6 +58,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Captain Michael Burnham", 143, Rarity.UNCOMMON, mage.cards.c.CaptainMichaelBurnham.class));
         cards.add(new SetCardInfo("Captain's Tutelage", 144, Rarity.COMMON, mage.cards.c.CaptainsTutelage.class));
         cards.add(new SetCardInfo("Cardassia Prime", 280, Rarity.COMMON, mage.cards.c.CardassiaPrime.class));
+        cards.add(new SetCardInfo("Cetacean Ops", 48, Rarity.COMMON, mage.cards.c.CetaceanOps.class));
         cards.add(new SetCardInfo("Cha'DIch Investigator", 572, Rarity.COMMON, mage.cards.c.ChaDIchInvestigator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cha'DIch Investigator", 97, Rarity.COMMON, mage.cards.c.ChaDIchInvestigator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cleveland Booker, Empath", 229, Rarity.UNCOMMON, mage.cards.c.ClevelandBookerEmpath.class));
