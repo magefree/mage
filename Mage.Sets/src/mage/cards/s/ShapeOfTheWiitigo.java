@@ -72,10 +72,7 @@ class AttachedAttackedOrBlockedSinceYourLastUpkeepCondition implements Condition
         Permanent permanent = game.getPermanent(source.getSourceId());
         AttackedOrBlockedSinceYourLastUpkeepWatcher watcher = game.getState().getWatcher(AttackedOrBlockedSinceYourLastUpkeepWatcher.class);
         if (permanent != null && permanent.getAttachedTo() != null && watcher != null) {
-            Permanent attachedTo = game.getPermanent(permanent.getAttachedTo());
-            if (attachedTo == null) {
-                attachedTo = (Permanent) game.getLastKnownInformation(permanent.getAttachedTo(), Zone.BATTLEFIELD);
-            }
+            Permanent attachedTo = game.getPermanentOrLKIBattlefield(permanent.getAttachedTo());
             if (attachedTo != null) {
                 return watcher.attackedSinceLastUpkeep(new MageObjectReference(attachedTo.getId(), attachedTo.getZoneChangeCounter(game), game), source.getControllerId());
             }

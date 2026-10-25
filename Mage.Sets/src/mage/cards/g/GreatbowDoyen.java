@@ -114,10 +114,7 @@ class GreatbowDoyenEffect extends OneShotEffect {
         UUID controllerId = (UUID) this.getValue("controller");
         UUID sourceOfDamage = (UUID) this.getValue("source");
         if (damageAmount != null && controllerId != null) {
-            Permanent permanent = game.getPermanent(sourceOfDamage);
-            if (permanent == null) {
-                permanent = (Permanent) game.getLastKnownInformation(sourceOfDamage, Zone.BATTLEFIELD);
-            }
+            Permanent permanent = game.getPermanentOrLKIBattlefield(sourceOfDamage);
             if (permanent != null) {
                 Player player = game.getPlayer(controllerId);
                 if (player != null) {
