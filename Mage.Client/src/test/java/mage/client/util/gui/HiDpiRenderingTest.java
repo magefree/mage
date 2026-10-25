@@ -179,6 +179,65 @@ public class HiDpiRenderingTest extends GuiScalingTestSupport {
         }
     }
 
+    @Test
+    public void mtgoFadeKeepsDeviceRasterAndBlendsAtEveryDisplayScale() throws Exception {
+        Assume.assumeFalse(GraphicsEnvironment.isHeadless());
+        SwingUtilities.invokeAndWait(() -> {
+            try {
+                RasterTestPanel panel = new RasterTestPanel();
+                for (double scale : new double[]{1, 1.25, 1.5, 2}) {
+                    int width = (int) Math.ceil(panel.getCardWidth() * scale);
+                    int height = (int) Math.ceil(panel.getCardHeight() * scale);
+                    BufferedImage raster = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+                    Graphics2D source = raster.createGraphics();
+                    try {
+                        source.setColor(Color.RED);
+                        source.fillRect(0, 0, width, height);
+                    } finally {
+                        source.dispose();
+                    }
+                    field(org.mage.card.arcane.CardPanelRenderModeMTGO.class, "rasterWidth").setInt(panel, width);
+                    field(org.mage.card.arcane.CardPanelRenderModeMTGO.class, "rasterHeight").setInt(panel, height);
+                    field(org.mage.card.arcane.CardPanelRenderModeMTGO.class, "cardImage").set(panel, raster);
+                    for (float alpha : new float[]{1, 0.5f, 0.25f, 1}) {
+                        panel.setAlpha(alpha);
+                        BufferedImage output = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+                        Graphics2D graphics = output.createGraphics();
+                        try {
+                            graphics.setColor(Color.BLUE);
+                            graphics.fillRect(0, 0, width, height);
+                            graphics.scale(scale, scale);
+                            panel.paintRaster(graphics);
+                        } finally {
+                            graphics.dispose();
+                        }
+                        Color blended = new Color(output.getRGB(width / 2, height / 2), true);
+                        assertEquals("red at scale " + scale + ", alpha " + alpha,
+                                Math.round(255 * alpha), blended.getRed(), 1);
+                        assertEquals("blue at scale " + scale + ", alpha " + alpha,
+                                Math.round(255 * (1 - alpha)), blended.getBlue(), 1);
+                        assertEquals(255, blended.getAlpha());
+                        assertSame("fading must not rebuild the device raster", raster,
+                                field(org.mage.card.arcane.CardPanelRenderModeMTGO.class, "cardImage").get(panel));
+                    }
+                }
+            } catch (Exception error) {
+                throw new RuntimeException(error);
+            }
+        });
+    }
+
+    private static class RasterTestPanel extends org.mage.card.arcane.CardPanelRenderModeMTGO {
+        RasterTestPanel() {
+            super(new mage.view.CardView(new RasterTestCard()), null, false, null, false,
+                    new Dimension(100, 145), false, 0);
+        }
+
+        void paintRaster(Graphics2D graphics) {
+            super.paintCard(graphics);
+        }
+    }
+
     private static class RasterTestCard extends mage.cards.CardImpl {
         RasterTestCard() {
             super(UUID.randomUUID(), new mage.cards.CardSetInfo("Raster test", "TST", "1", mage.constants.Rarity.COMMON),
