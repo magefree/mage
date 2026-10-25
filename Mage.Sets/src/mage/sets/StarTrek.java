@@ -181,6 +181,9 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 318, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Planetary Patrol", 163, Rarity.COMMON, mage.cards.p.PlanetaryPatrol.class));
         cards.add(new SetCardInfo("Plasma Cascade", 164, Rarity.COMMON, mage.cards.p.PlasmaCascade.class));
+        cards.add(new SetCardInfo("Primary Unimatrix Adjunct", 30, Rarity.RARE, mage.cards.p.PrimaryUnimatrixAdjunct.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Primary Unimatrix Adjunct", 368, Rarity.RARE, mage.cards.p.PrimaryUnimatrixAdjunct.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Primary Unimatrix Adjunct", 502, Rarity.RARE, mage.cards.p.PrimaryUnimatrixAdjunct.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Qo'noS", 291, Rarity.COMMON, mage.cards.q.QonoS.class));
         cards.add(new SetCardInfo("Quark's Bar", 292, Rarity.RARE, mage.cards.q.QuarksBar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Quark's Bar", 335, Rarity.RARE, mage.cards.q.QuarksBar.class, NON_FULL_USE_VARIOUS));
