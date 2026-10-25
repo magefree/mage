@@ -46,7 +46,8 @@ public abstract class ReturnSourceThenEffect extends OneShotEffect {
      * the additional effects change it.
      * <p>
      * 400.7j: "it" later in the ability is the returned permanent, a new object. The shared ability keeps
-     * referring to the old one; only the additional effects get a copy that follows.
+     * referring to the old one; only the additional effects get a copy that follows. The copy takes the
+     * permanent's id too: a transforming double-faced card returned transformed is its back half.
      */
     protected void resolveAdditionalEffects(Game game, Ability source, Permanent returned) {
         if (additionalEffects.isEmpty()) {

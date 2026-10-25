@@ -9,7 +9,7 @@ import mage.constants.PutCards;
 public class ExileSourceAndReturnFaceUpEffect extends ExileAndReturnSourceEffect {
 
     public ExileSourceAndReturnFaceUpEffect() {
-        super(PutCards.BATTLEFIELD, Pronoun.IT, true, null);
+        super(PutCards.BATTLEFIELD, Pronoun.IT, true);
         staticText = "exile {this}, then return it to the battlefield <i>(front face up)</i>.";
     }
 

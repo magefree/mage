@@ -9,7 +9,7 @@ import mage.constants.PutCards;
 public class ExileSagaAndReturnTransformedEffect extends ExileAndReturnSourceEffect {
 
     public ExileSagaAndReturnTransformedEffect() {
-        super(PutCards.BATTLEFIELD_TRANSFORMED, Pronoun.IT, true, null);
+        super(PutCards.BATTLEFIELD_TRANSFORMED, Pronoun.IT, true);
         staticText = "exile this Saga, then return it to the battlefield transformed under your control";
     }
 
