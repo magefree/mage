@@ -121,6 +121,9 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 319, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 320, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Khaaaaaaaaaaaannn!", 154, Rarity.UNCOMMON, mage.cards.k.Khaaaaaaaaaaaannn.class));
+        cards.add(new SetCardInfo("Kobayashi Maru Scenario", 410, Rarity.MYTHIC, mage.cards.k.KobayashiMaruScenario.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kobayashi Maru Scenario", 534, Rarity.MYTHIC, mage.cards.k.KobayashiMaruScenario.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kobayashi Maru Scenario", 68, Rarity.MYTHIC, mage.cards.k.KobayashiMaruScenario.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("La'An Noonien-Singh, Security", 156, Rarity.UNCOMMON, mage.cards.l.LaAnNoonienSinghSecurity.class));
         cards.add(new SetCardInfo("Malfunctioning Holodeck", 22, Rarity.COMMON, mage.cards.m.MalfunctioningHolodeck.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Malfunctioning Holodeck", 571, Rarity.COMMON, mage.cards.m.MalfunctioningHolodeck.class, NON_FULL_USE_VARIOUS));
