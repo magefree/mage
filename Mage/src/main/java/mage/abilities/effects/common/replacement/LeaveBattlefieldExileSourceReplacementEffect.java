@@ -41,9 +41,20 @@ public class LeaveBattlefieldExileSourceReplacementEffect extends ReplacementEff
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        // 400.7: from a resolved ability, only the object that ability knew
         return source.getSourceId().equals(event.getTargetId())
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD
-                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED;
+                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED
+                && source.getSourcePermanentIfItStillExists(game) != null;
+    }
+
+    @Override
+    public boolean isInactive(Ability source, Game game) {
+        // An ability creating this (Duration.Custom) ends it once the object it knew is gone. The zone check
+        // catches a token that left: it keeps its counter, so its last known information would still be found.
+        return super.isInactive(source, game)
+                || game.getState().getZone(source.getSourceId()) != Zone.BATTLEFIELD
+                || source.getSourcePermanentIfItStillExists(game) == null;
     }
 
 }

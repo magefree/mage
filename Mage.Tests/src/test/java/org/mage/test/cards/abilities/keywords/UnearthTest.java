@@ -106,4 +106,106 @@ public class UnearthTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * "If it would leave the battlefield, exile it instead of putting it anywhere else."
+     */
+    @Test
+    public void testUnearthedCreatureThatDiesIsExiled() {
+        addCard(Zone.BATTLEFIELD, playerA, "Badlands", 2);
+        addCard(Zone.GRAVEYARD, playerA, "Dregscape Zombie"); // 2/1, Unearth {B}
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unearth");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Dregscape Zombie");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Dregscape Zombie", 0);
+        assertExileCount(playerA, "Dregscape Zombie", 1);
+    }
+
+    /**
+     * An unearth that returns nothing exiles nothing, not even the same card put onto the battlefield
+     * later by something else.
+     */
+    @Test
+    public void testUnearthThatReturnsNothing() {
+        addCard(Zone.BATTLEFIELD, playerA, "Badlands", 4);
+        addCard(Zone.BATTLEFIELD, playerB, "Grafdigger's Cage"); // Creature cards in graveyards can't enter the battlefield.
+        addCard(Zone.GRAVEYARD, playerA, "Dregscape Zombie"); // 2/1, Unearth {B}
+        addCard(Zone.HAND, playerA, "Shatter");
+        addCard(Zone.HAND, playerA, "Reanimate");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unearth");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        checkGraveyardCount("Cage keeps it in the graveyard", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dregscape Zombie", 1);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shatter", "Grafdigger's Cage", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reanimate", "Dregscape Zombie", true);
+
+        checkPermanentCount("not exiled at the end step", 3, PhaseStep.UPKEEP, playerA, "Dregscape Zombie", 1);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Dregscape Zombie");
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Dregscape Zombie", 1);
+        assertExileCount(playerA, "Dregscape Zombie", 0);
+    }
+
+    /**
+     * 400.7: a card that leaves the graveyard and comes back in response is a new object, so unearth has
+     * nothing to return.
+     */
+    @Test
+    public void testUnearthedCardLeftAndReturnedInResponse() {
+        addCard(Zone.BATTLEFIELD, playerA, "Badlands", 6);
+        addCard(Zone.GRAVEYARD, playerA, "Dregscape Zombie"); // 2/1, Unearth {B}
+        addCard(Zone.HAND, playerA, "Makeshift Mannequin"); // {3}{B} instant: return target creature card from your graveyard to the battlefield
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unearth");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Makeshift Mannequin", "Dregscape Zombie", "Unearth");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Dregscape Zombie", "Unearth");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Dregscape Zombie", 0);
+        assertGraveyardCount(playerA, "Dregscape Zombie", 1);
+    }
+
+    /**
+     * 400.7j: "it" is only the permanent this unearth returned. When something else returns the card in
+     * response, unearth returns nothing, so neither the end step exile nor the leave-the-battlefield
+     * replacement touches that creature.
+     */
+    @Test
+    public void testCardReturnedByOtherEffectInResponseIsNotExiled() {
+        addCard(Zone.BATTLEFIELD, playerA, "Badlands", 6);
+        addCard(Zone.GRAVEYARD, playerA, "Dregscape Zombie"); // 2/1, Unearth {B}
+        addCard(Zone.HAND, playerA, "Makeshift Mannequin"); // {3}{B} instant: return target creature card from your graveyard to the battlefield
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unearth");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Makeshift Mannequin", "Dregscape Zombie", "Unearth");
+
+        checkPermanentCount("not exiled at the end step", 3, PhaseStep.UPKEEP, playerA, "Dregscape Zombie", 1);
+        // targeting it makes the Mannequin'd creature sacrifice itself
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Dregscape Zombie");
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Dregscape Zombie", 1);
+        assertExileCount(playerA, "Dregscape Zombie", 0);
+    }
+
 }
