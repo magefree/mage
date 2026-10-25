@@ -75,5 +75,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Warship Flight Crew", 168, Rarity.COMMON, mage.cards.w.WarshipFlightCrew.class));
         cards.add(new SetCardInfo("Will Riker, Assuming Command", 140, Rarity.UNCOMMON, mage.cards.w.WillRikerAssumingCommand.class));
         cards.add(new SetCardInfo("Worf, Chief Tactical Officer", 141, Rarity.UNCOMMON, mage.cards.w.WorfChiefTacticalOfficer.class));
+        cards.add(new SetCardInfo("Worf, Defiant Commander", 4, Rarity.MYTHIC, mage.cards.w.WorfDefiantCommander.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Worf, Defiant Commander", 8, Rarity.MYTHIC, mage.cards.w.WorfDefiantCommander.class, NON_FULL_USE_VARIOUS));
     }
 }
