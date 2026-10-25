@@ -35,6 +35,7 @@ import mage.game.GameState;
 import mage.game.command.Commander;
 import mage.game.events.BatchEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentMeld;
@@ -1239,6 +1240,8 @@ public final class CardUtil {
         game.getPermanentsEntering().put(permanent.getId(), permanent);
         permCard.applyEnterWithCounters(permanent, source, game);
         permanent.entersBattlefield(source, game, Zone.OUTSIDE, false);
+        // +1 zcc as on a real enter: abilities that triggered while entering (e.g. a Saga's chapter I) already expect it
+        permanent.updateZoneChangeCounter(game, new ZoneChangeEvent(permanent, source, player.getId(), Zone.OUTSIDE, Zone.BATTLEFIELD));
         game.addPermanent(permanent, game.getState().getNextPermanentOrderNumber());
         game.getPermanentsEntering().remove(permanent.getId());
 
