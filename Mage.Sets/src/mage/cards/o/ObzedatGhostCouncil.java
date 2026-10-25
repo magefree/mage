@@ -1,6 +1,7 @@
 package mage.cards.o;
 
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
@@ -8,7 +9,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -19,6 +20,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -78,13 +81,17 @@ class ObzedatGhostCouncilExileSourceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null
                 || controller == null
                 || !controller.moveCards(permanent, Zone.EXILED, source, game)) {
             return false;
         }
-        game.addDelayedTriggeredAbility(new ObzedatGhostCouncilDelayedTriggeredAbility(permanent), source);
+        Card card = game.getCard(permanent.getId());
+        if (card == null || game.getState().getZone(card.getId()) != Zone.EXILED) {
+            return false;
+        }
+        game.addDelayedTriggeredAbility(new ObzedatGhostCouncilDelayedTriggeredAbility(new MageObjectReference(card, game)), source);
         return true;
     }
 
@@ -92,8 +99,8 @@ class ObzedatGhostCouncilExileSourceEffect extends OneShotEffect {
 
 class ObzedatGhostCouncilDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    ObzedatGhostCouncilDelayedTriggeredAbility(Card card) {
-        super(new ObzedatGhostCouncilReturnEffect(card));
+    ObzedatGhostCouncilDelayedTriggeredAbility(MageObjectReference exiled) {
+        super(new ObzedatGhostCouncilReturnEffect(exiled));
     }
 
     private ObzedatGhostCouncilDelayedTriggeredAbility(ObzedatGhostCouncilDelayedTriggeredAbility ability) {
@@ -123,16 +130,16 @@ class ObzedatGhostCouncilDelayedTriggeredAbility extends DelayedTriggeredAbility
 
 class ObzedatGhostCouncilReturnEffect extends OneShotEffect {
 
-    private final Card card;
+    private final MageObjectReference exiled;
 
-    ObzedatGhostCouncilReturnEffect(Card card) {
+    ObzedatGhostCouncilReturnEffect(MageObjectReference exiled) {
         super(Outcome.Benefit);
-        this.card = card;
+        this.exiled = exiled;
     }
 
     private ObzedatGhostCouncilReturnEffect(final ObzedatGhostCouncilReturnEffect effect) {
         super(effect);
-        this.card = effect.card;
+        this.exiled = effect.exiled;
     }
 
     @Override
@@ -142,15 +149,21 @@ class ObzedatGhostCouncilReturnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Card card = exiled.getCard(game); // null once it has left exile (400.7)
         if (card == null) {
             return false;
         }
         Player owner = game.getPlayer(card.getOwnerId());
-        if (owner == null
-                || !owner.moveCards(card, Zone.BATTLEFIELD, source, game)) { // comes back from any zone
+        if (owner == null) {
             return false;
         }
-        game.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield), source);
+        owner.moveCards(card, Zone.BATTLEFIELD, source, game);
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+        if (permanent == null) {
+            return false;
+        }
+        game.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom)
+                .setTargetPointer(new FixedTarget(permanent, game)), source);
         return true;
     }
 }
