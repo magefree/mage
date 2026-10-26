@@ -7,7 +7,6 @@ import mage.target.Target;
 import mage.target.Targets;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FixedTargets;
-import mage.target.targetpointer.TargetPointer;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,6 +29,10 @@ public class OneShotNonTargetEffect extends OneShotEffect {
         this.notTarget = notTarget;
         this.notTarget.withNotTarget(true);
         this.adjuster = adjuster;
+        if (adjuster != null) {
+            // every copy of this effect shares the adjuster, so its blueprint is set once here and never changed
+            adjuster.addDefaultTargets(this.notTarget);
+        }
         if (effect.staticText == null || effect.staticText.equals("")){
             throw new IllegalArgumentException("Effect must use static text");
         }
@@ -54,10 +57,7 @@ public class OneShotNonTargetEffect extends OneShotEffect {
             // adjusters write into an ability's target list, so give them a throwaway one
             Ability scratch = source.copy();
             scratch.getTargets().clear();
-            scratch.addTarget(notTarget.copy());
-            adjuster.clearDefaultTargets();
-            scratch.setTargetAdjuster(adjuster);
-            scratch.adjustTargets(game);
+            adjuster.adjustTargets(scratch, game);
             targets = scratch.getTargets();
         }
         // the result is ignored: a for-each adjuster can leave some players with nothing to choose
@@ -76,15 +76,6 @@ public class OneShotNonTargetEffect extends OneShotEffect {
         OneShotEffect chosenEffect = effect.copy();
         chosenEffect.setTargetPointer(new FixedTargets(chosen));
         return chosenEffect.apply(game, source);
-    }
-
-    @Override
-    public OneShotEffect setTargetPointer(TargetPointer targetPointer) {
-        if (targetPointer == null) {
-            return null;
-        }
-        effect.setTargetPointer(targetPointer);
-        return super.setTargetPointer(targetPointer);
     }
 
     @Override

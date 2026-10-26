@@ -34,8 +34,8 @@ public class ThatPlayerControlsTargetAdjuster extends GenericTargetAdjuster {
     }
 
     @Override
-    public void addDefaultTargets(Ability ability) {
-        super.addDefaultTargets(ability);
+    public void addDefaultTargets(Target firstTarget) {
+        super.addDefaultTargets(firstTarget);
         if (blueprintTarget instanceof TargetCard && !owner) {
             throw new IllegalArgumentException("DamagedPlayerControlsTargetAdjuster has TargetCard but checking for Controller instead of Owner - " + blueprintTarget);
         }
