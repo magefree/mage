@@ -108,6 +108,8 @@ public final class RealityFractureCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Turbulent Wetlands", 103, Rarity.RARE, mage.cards.t.TurbulentWetlands.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turbulent Wetlands", 18, Rarity.RARE, mage.cards.t.TurbulentWetlands.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Underground River", 87, Rarity.RARE, mage.cards.u.UndergroundRiver.class));
+        cards.add(new SetCardInfo("Venser, Fervent Forger", 9, Rarity.RARE, mage.cards.v.VenserFerventForger.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Venser, Fervent Forger", 94, Rarity.RARE, mage.cards.v.VenserFerventForger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Whirlwind of Thought", 51, Rarity.RARE, mage.cards.w.WhirlwindOfThought.class));
         cards.add(new SetCardInfo("White Sun's Twilight", 38, Rarity.RARE, mage.cards.w.WhiteSunsTwilight.class));
         cards.add(new SetCardInfo("Windcrag Siege", 52, Rarity.RARE, mage.cards.w.WindcragSiege.class));
