@@ -8,7 +8,8 @@ public enum CardRenderMode {
     MTGO("MTGO", 0),
     IMAGE("Image", 1),
     FORCED_M15("Forced M15", 2),
-    FORCED_RETRO("Forced Retro", 3);
+    FORCED_RETRO("Forced Retro", 3),
+    FORCED_FUTURE("Forced Future Sight", 4);
 
     private final String text;
     private final int id;
