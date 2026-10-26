@@ -35,6 +35,7 @@ public final class TeenageMutantNinjaTurtlesEternal extends ExpansionSet {
         cards.add(new SetCardInfo("Big Mother Mouser", 97, Rarity.RARE, mage.cards.b.BigMotherMouser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Biogenic Ooze", 49, Rarity.RARE, mage.cards.b.BiogenicOoze.class));
         cards.add(new SetCardInfo("Blasphemous Act", 47, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
+        cards.add(new SetCardInfo("Casey & Raph, Hotheads", 114, Rarity.RARE, mage.cards.c.CaseyAndRaphHotheads.class));
         cards.add(new SetCardInfo("Casey Jones, Asphalt Hooligan", 115, Rarity.RARE, mage.cards.c.CaseyJonesAsphaltHooligan.class));
         cards.add(new SetCardInfo("Casey Jones, Back Alley Brute", 22, Rarity.RARE, mage.cards.c.CaseyJonesBackAlleyBrute.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Casey Jones, Back Alley Brute", 90, Rarity.RARE, mage.cards.c.CaseyJonesBackAlleyBrute.class, NON_FULL_USE_VARIOUS));
