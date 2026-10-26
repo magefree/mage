@@ -78,9 +78,6 @@ public class ComputerPlayer extends PlayerImpl {
     // TODO: make sure it thread safe for AI simulations (all transient fields above and bottom)
     private final transient Map<UUID, ManaCost> lastUnpaidMana = new LinkedHashMap<>();
 
-    // For stopping infinite loops when trying to pay Phyrexian mana when the player can't spend life and no other sources are available
-    private transient boolean alreadyTryingToPayPhyrexian;
-
     public ComputerPlayer(String name, RangeOfInfluence range) {
         super(name, range);
         human = false;
@@ -165,19 +162,31 @@ public class ComputerPlayer extends PlayerImpl {
             (MageItem item) -> { target.add(item.getId(), game); } :
             (MageItem item) -> { target.addTarget(item.getId(), source, game); };
 
+        // Some targets (convoke, Angel's Herald) allow fewer possible targets as more are chosen, and Target.add
+        // doesn't check this. After each pick, skip the candidates that are no longer possible.
+        Set<UUID> stillPossible = null;
+
         // good targets -- choose as much as possible
         for (MageItem item : possibleTargetsSelector.getGoodTargets()) {
+            if (stillPossible != null && !stillPossible.contains(item.getId())) {
+                continue;
+            }
             targetAdder.accept(item);
             if (target.isChoiceCompleted(abilityControllerId, source, game, fromCards)) {
                 return true;
             }
+            stillPossible = target.possibleTargets(abilityControllerId, source, game, fromCards);
         }
         // bad targets -- choose as low as possible
         for (MageItem item : possibleTargetsSelector.getBadTargets()) {
             if (target.isChosen(game)) {
                 break;
             }
+            if (stillPossible != null && !stillPossible.contains(item.getId())) {
+                continue;
+            }
             targetAdder.accept(item);
+            stillPossible = target.possibleTargets(abilityControllerId, source, game, fromCards);
         }
 
         return target.isChosen(game) && !target.getTargets().isEmpty();
@@ -404,6 +413,10 @@ public class ComputerPlayer extends PlayerImpl {
         }
     }
 
+    /**
+     * Takes one step towards paying the last symbol of {@code unpaid}. It activates a mana ability that can pay that
+     * symbol. If none can, it activates the first special mana action, but only if that action can pay the symbol.
+     */
     protected boolean playManaHandling(Ability ability, ManaCost unpaid, final Game game) {
 //        log.info("paying for " + unpaid.getText());
         Set<ApprovingObject> approvingObjects = game.getContinuousEffects().asThough(ability.getSourceId(), AsThoughEffectType.SPEND_OTHER_MANA, ability, ability.getControllerId(), game);
@@ -421,6 +434,54 @@ public class ComputerPlayer extends PlayerImpl {
             producers.addAll(this.getAvailableManaProducersWithCost(game));
         }
 
+        if (payWithManaAbilities(ability, unpaid, cost, producers, hasApprovingObject, game)) {
+            return true;
+        }
+
+        // pay special mana like convoke cost (tap for pay)
+        // GUI: user see "special" button while pay spell's cost
+        // TODO: AI can't prioritize special mana types to pay, e.g. it will use first available
+        SpecialAction specialAction = game.getState().getSpecialActions().getControlledBy(this.getId(), true).values()
+                .stream()
+                .findFirst()
+                .orElse(null);
+
+        // if the action ends mana abilities, first try mana abilities on the rest of the cost
+        if (specialAction != null && specialAction.endsManaAbilities() && unpaid instanceof ManaCosts) {
+            for (ManaCost otherCost : (ManaCosts<ManaCost>) unpaid) {
+                if (otherCost != cost && payWithManaAbilities(ability, unpaid, otherCost, producers, hasApprovingObject, game)) {
+                    return true;
+                }
+            }
+        }
+
+        ManaOptions specialMana = specialAction == null ? null : specialAction.getManaOptions(ability, game, unpaid);
+        if (specialMana != null) {
+            for (Mana netMana : specialMana) {
+                if (cost.testPay(netMana) || hasApprovingObject) {
+                    if (netMana instanceof ConditionalMana && !((ConditionalMana) netMana).apply(ability, game, getId(), cost)) {
+                        continue;
+                    }
+                    if (activateAbility(specialAction, game)) {
+                        return true;
+                    }
+                    // only one time try to pay to skip infinite AI loop
+                    break;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Activates one mana ability whose mana can pay {@code cost}. For a colored {@code cost}, it first tries abilities
+     * that make only mana that {@code unpaid} can use. The mana goes to the pool, so the payment can spend it on any
+     * part of {@code unpaid}.
+     *
+     * @return whether a mana ability was activated
+     */
+    private boolean payWithManaAbilities(Ability ability, ManaCost unpaid, ManaCost cost, List<MageObject> producers, boolean hasApprovingObject, Game game) {
         // use fully compatible colored mana producers first
         for (MageObject mageObject : producers) {
             ManaAbility:
@@ -589,43 +650,6 @@ public class ComputerPlayer extends PlayerImpl {
                 }
             }
         }
-
-        if (alreadyTryingToPayPhyrexian) {
-            return false;
-        }
-
-        // pay phyrexian life costs
-        if (cost.isPhyrexian()) {
-            alreadyTryingToPayPhyrexian = true;
-            // TODO: make sure it's thread safe and protected from modifications (cost/unpaid can be shared between AI simulation threads?)
-            boolean paidPhyrexian = cost.pay(ability, game, ability, playerId, false, null) || hasApprovingObject;
-            alreadyTryingToPayPhyrexian = false;
-            return paidPhyrexian;
-        }
-
-        // pay special mana like convoke cost (tap for pay)
-        // GUI: user see "special" button while pay spell's cost
-        // TODO: AI can't prioritize special mana types to pay, e.g. it will use first available
-        SpecialAction specialAction = game.getState().getSpecialActions().getControlledBy(this.getId(), true).values()
-                .stream()
-                .findFirst()
-                .orElse(null);
-        ManaOptions specialMana = specialAction == null ? null : specialAction.getManaOptions(ability, game, unpaid);
-        if (specialMana != null) {
-            for (Mana netMana : specialMana) {
-                if (cost.testPay(netMana) || hasApprovingObject) {
-                    if (netMana instanceof ConditionalMana && !((ConditionalMana) netMana).apply(ability, game, getId(), cost)) {
-                        continue;
-                    }
-                    if (activateAbility(specialAction, game)) {
-                        return true;
-                    }
-                    // only one time try to pay to skip infinite AI loop
-                    break;
-                }
-            }
-        }
-
         return false;
     }
 

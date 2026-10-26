@@ -79,7 +79,7 @@ public class TestPlayer implements Player {
     public static final String MODE_SKIP = "[mode_skip]"; // stop/skip mode selection
     public static final String CHOICE_NORMAL_COST = "Cast with no alternative cost: "; // when there is the possibility for an alternative cost, use the normal cost instead.
     public static final String MANA_CANCEL = "[mana_cancel]"; // cancel payment
-    public static final String SKIP_FAILED_COMMAND = "[skip_failed_command]"; // skip next command in player's queue (can remove cast commands after try to activate)
+    public static final String SKIP_FAILED_COMMAND = "[skip_failed_command]"; // skip next command in player's queue (can remove cast commands after try to activate), or accept a failed special mana action or a failed mana ability
     public static final String BLOCK_SKIP = "[block_skip]";
     public static final String ATTACK_SKIP = "[attack_skip]";
     public static final String NO_TARGET = "NO_TARGET"; // cast spell or activate ability without target defines
@@ -4467,10 +4467,41 @@ public class TestPlayer implements Player {
                                 choiceRemoved = true;
                                 if (activateAbility(specialAction, game)) {
                                     choiceUsed = true;
+                                } else if (!choices.isEmpty() && choices.get(0).equals(SKIP_FAILED_COMMAND)) {
+                                    // expected failure: the action was rolled back and payment goes on
+                                    choicesRemoveCurrent(game, "on play mana");
+                                    choiceUsed = true;
                                 }
                             } else {
                                 Assert.fail("Found non active special mana action, but must generates only active: " + specialAction.getRule(true));
                             }
+                            // one choice activates one action, even when a spell has convoke twice (its own and one from Wand of the Worldsoul)
+                            break;
+                        }
+                    }
+                }
+
+                // manual pay with a permanent's mana ability (a click on it in the UI), e.g. to check that convoke locks mana
+                // abilities. Its mana goes to the pool, so a color choice must then spend it
+                if (!choiceUsed && !choiceRemoved) {
+                    List<ActivatedManaAbilityImpl> manaAbilities = game.getBattlefield().getAllActivePermanents(this.getId()).stream()
+                            .flatMap(permanent -> permanent.getAbilities(game).getActivatedManaAbilities(Zone.BATTLEFIELD).stream())
+                            .filter(a -> hasAbilityTargetNameOrAlias(game, a, choice))
+                            .collect(Collectors.toList());
+                    if (!manaAbilities.isEmpty()) {
+                        // prefer one that can be activated. If none can, use the first, so the test sees it fail
+                        ActivatedManaAbilityImpl manaAbility = manaAbilities.stream()
+                                .filter(a -> a.canActivate(this.getId(), game).canActivate())
+                                .findFirst()
+                                .orElse(manaAbilities.get(0));
+                        choicesRemoveCurrent(game, "on play mana");
+                        choiceRemoved = true;
+                        if (activateAbility(manaAbility, game)) {
+                            choiceUsed = true;
+                        } else if (!choices.isEmpty() && choices.get(0).equals(SKIP_FAILED_COMMAND)) {
+                            // expected failure, e.g. mana abilities can't be activated after convoke
+                            choicesRemoveCurrent(game, "on play mana");
+                            choiceUsed = true;
                         }
                     }
                 }

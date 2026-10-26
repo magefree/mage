@@ -4,7 +4,6 @@ package org.mage.test.cards.abilities.other;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -23,20 +22,25 @@ public class ChiefEngineerTest extends CardTestPlayerBase {
      *
      */
 
-    @Ignore // at this time player.getPlayable() does not take into account convoke payments
     @Test
     public void testGainsConvoke() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Chief Engineer");
+        // makes Fortress Crab an artifact spell
+        addCard(Zone.BATTLEFIELD, playerA, "Encroaching Mycosynth");
         addCard(Zone.BATTLEFIELD, playerA, "Alpha Myr");
-        addCard(Zone.HAND, playerA, "Goblin Roughrider");
+        // {3}{U}
+        addCard(Zone.HAND, playerA, "Fortress Crab");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Roughrider");
-        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fortress Crab");
+        addTarget(playerA, "Chief Engineer^Alpha Myr");
+
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Goblin Roughrider", 1);
+        assertPermanentCount(playerA, "Fortress Crab", 1);
+        assertTapped("Chief Engineer", true);
         assertTapped("Alpha Myr", true);
 
     }
