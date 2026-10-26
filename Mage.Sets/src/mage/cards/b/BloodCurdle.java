@@ -1,17 +1,12 @@
 package mage.cards.b;
 
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.OneShotNonTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -28,7 +23,11 @@ public final class BloodCurdle extends CardImpl {
         // Destroy target creature. Put a menace counter on a creature you control.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BloodCurdleEffect());
+        this.getSpellAbility().addEffect(new OneShotNonTargetEffect(
+                new AddCountersTargetEffect(CounterType.MENACE.createInstance())
+                        .setText("Put a menace counter on a creature you control. " +
+                                "<i>(It can't be blocked except by two or more creatures.)</i>"),
+                new TargetControlledCreaturePermanent()));
     }
 
     private BloodCurdle(final BloodCurdle card) {
@@ -38,41 +37,5 @@ public final class BloodCurdle extends CardImpl {
     @Override
     public BloodCurdle copy() {
         return new BloodCurdle(this);
-    }
-}
-
-class BloodCurdleEffect extends OneShotEffect {
-
-    BloodCurdleEffect() {
-        super(Outcome.Benefit);
-        staticText = "Put a menace counter on a creature you control. " +
-                "<i>(It can't be blocked except by two or more creatures.)</i>";
-    }
-
-    private BloodCurdleEffect(final BloodCurdleEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BloodCurdleEffect copy() {
-        return new BloodCurdleEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        Target target = new TargetControlledCreaturePermanent();
-        target.withNotTarget(true);
-        if (!player.choose(outcome, target, source, game)) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(target.getFirstTarget());
-        if (permanent == null) {
-            return false;
-        }
-        return permanent.addCounters(CounterType.MENACE.createInstance(), source.getControllerId(), source, game);
     }
 }
