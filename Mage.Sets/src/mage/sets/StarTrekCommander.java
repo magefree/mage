@@ -67,7 +67,6 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Isolated Chapel", 539, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
         cards.add(new SetCardInfo("Jean-Luc Picard, Luminary", 3, Rarity.MYTHIC, mage.cards.j.JeanLucPicardLuminary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jean-Luc Picard, Luminary", 7, Rarity.MYTHIC, mage.cards.j.JeanLucPicardLuminary.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Join the Collective", 20, Rarity.RARE, mage.cards.j.JoinTheCollective.class));
         cards.add(new SetCardInfo("Join the Collective", 20, Rarity.RARE, mage.cards.j.JoinTheCollective.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Join the Collective", 226, Rarity.RARE, mage.cards.j.JoinTheCollective.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kirk, Enterprising Captain", 198, Rarity.MYTHIC, mage.cards.k.KirkEnterprisingCaptain.class));
@@ -102,7 +101,6 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Spock, Logical Choice", 194, Rarity.MYTHIC, mage.cards.s.SpockLogicalChoice.class));
         cards.add(new SetCardInfo("Spot, Felis catus", 237, Rarity.RARE, mage.cards.s.SpotFelisCatus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spot, Felis catus", 29, Rarity.RARE, mage.cards.s.SpotFelisCatus.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Starfleet Communicator", 121, Rarity.RARE, mage.cards.s.StarfleetCommunicator.class));
         cards.add(new SetCardInfo("Starfleet Communicator", 121, Rarity.RARE, mage.cards.s.StarfleetCommunicator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Starfleet Communicator", 356, Rarity.RARE, mage.cards.s.StarfleetCommunicator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Starfleet Crew", 139, Rarity.COMMON, mage.cards.s.StarfleetCrew.class));
