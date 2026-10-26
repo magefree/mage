@@ -1,14 +1,8 @@
 package mage.cards.b;
 
-import mage.ApprovingObject;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DevoidAbility;
@@ -24,9 +18,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  *
@@ -100,35 +92,9 @@ class BismuthMindrenderEffect extends OneShotEffect {
             return false;
         }
 
-        List<Card> castableComponents = CardUtil.getCastableComponents(cardToCast, null, source, controller, game, null, false);
-        if (castableComponents.isEmpty()) {
-            return true;
-        }
-        String partsInfo = castableComponents
-                .stream()
-                .map(MageObject::getLogName)
-                .collect(Collectors.joining(" or "));
-        if (!controller.chooseUse(Outcome.PlayForFree, "Cast spell by paying life instead of mana (" + partsInfo + ")?", source, game)) {
-            return true;
-        }
-        castableComponents.forEach(partCard -> game.getState().setValue("PlayFromNotOwnHandZone" + partCard.getId(), Boolean.TRUE));
-        SpellAbility chosenAbility = controller.chooseAbilityForCast(cardToCast, game, true);
-        if (chosenAbility != null) {
-            Card faceCard = game.getCard(chosenAbility.getSourceId());
-            if (faceCard != null) {
-                // pay life instead of mana cost
-                PayLifeCost lifeCost = new PayLifeCost(faceCard.getManaValue());
-                Costs<Cost> newCosts = new CostsImpl<>();
-                newCosts.add(lifeCost);
-                newCosts.addAll(chosenAbility.getCosts());
-                controller.setCastSourceIdWithAlternateMana(faceCard.getId(), null, newCosts);
-                controller.cast(
-                    chosenAbility, game, true,
-                    new ApprovingObject(source, game)
-                );
-            }
-        }
-        castableComponents.forEach(partCard -> game.getState().setValue("PlayFromNotOwnHandZone" + partCard.getId(), null));
+        CardUtil.castSpellWithAttributesForCost(controller, source, game, cardToCast, null,
+                "Cast spell by paying life instead of mana",
+                faceCard -> new PayLifeCost(faceCard.getManaValue()));
 
         return true;
     }
