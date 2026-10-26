@@ -141,6 +141,8 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 483, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 319, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 320, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 561, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 562, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jake Sisko, War Correspondent", 205, Rarity.UNCOMMON, mage.cards.j.JakeSiskoWarCorrespondent.class));
         cards.add(new SetCardInfo("Khaaaaaaaaaaaannn!", 154, Rarity.UNCOMMON, mage.cards.k.Khaaaaaaaaaaaannn.class));
         cards.add(new SetCardInfo("Kobayashi Maru Scenario", 410, Rarity.MYTHIC, mage.cards.k.KobayashiMaruScenario.class, NON_FULL_USE_VARIOUS));
@@ -184,6 +186,8 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 482, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 317, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 318, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 559, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 560, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Planetary Patrol", 163, Rarity.COMMON, mage.cards.p.PlanetaryPatrol.class));
         cards.add(new SetCardInfo("Plasma Cascade", 164, Rarity.COMMON, mage.cards.p.PlasmaCascade.class));
         cards.add(new SetCardInfo("Primary Unimatrix Adjunct", 30, Rarity.RARE, mage.cards.p.PrimaryUnimatrixAdjunct.class, NON_FULL_USE_VARIOUS));
@@ -233,6 +237,8 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 484, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 321, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 322, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 563, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 564, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Syndicate Liquidators", 218, Rarity.UNCOMMON, mage.cards.s.SyndicateLiquidators.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Syndicate Liquidators", 575, Rarity.UNCOMMON, mage.cards.s.SyndicateLiquidators.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tactical Officer", 38, Rarity.COMMON, mage.cards.t.TacticalOfficer.class));
