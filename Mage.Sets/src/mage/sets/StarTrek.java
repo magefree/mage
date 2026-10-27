@@ -31,6 +31,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Antagonist Incorporator", 3, Rarity.RARE, mage.cards.a.AntagonistIncorporator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Antagonist Incorporator", 446, Rarity.RARE, mage.cards.a.AntagonistIncorporator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Assault Drone", 92, Rarity.COMMON, mage.cards.a.AssaultDrone.class));
+        cards.add(new SetCardInfo("Assembly Specialist", 4, Rarity.UNCOMMON, mage.cards.a.AssemblySpecialist.class));
         cards.add(new SetCardInfo("Automated Warfare System", 93, Rarity.COMMON, mage.cards.a.AutomatedWarfareSystem.class));
         cards.add(new SetCardInfo("Bajor", 277, Rarity.COMMON, mage.cards.b.Bajor.class));
         cards.add(new SetCardInfo("Bat'leth", 426, Rarity.UNCOMMON, mage.cards.b.Batleth.class, NON_FULL_USE_VARIOUS));
