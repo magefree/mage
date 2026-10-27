@@ -58,6 +58,8 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Captain Jean-Luc Picard", 363, Rarity.MYTHIC, mage.cards.c.CaptainJeanLucPicard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain Jean-Luc Picard", 497, Rarity.MYTHIC, mage.cards.c.CaptainJeanLucPicard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain Jean-Luc Picard", 7, Rarity.MYTHIC, mage.cards.c.CaptainJeanLucPicard.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Captain Jonathan Archer", 186, Rarity.RARE, mage.cards.c.CaptainJonathanArcher.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Captain Jonathan Archer", 467, Rarity.RARE, mage.cards.c.CaptainJonathanArcher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain Kathryn Janeway", 1704, Rarity.MYTHIC, mage.cards.c.CaptainKathrynJaneway.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain Kathryn Janeway", 187, Rarity.MYTHIC, mage.cards.c.CaptainKathrynJaneway.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain Kathryn Janeway", 340, Rarity.MYTHIC, mage.cards.c.CaptainKathrynJaneway.class, NON_FULL_USE_VARIOUS));
