@@ -90,6 +90,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Maturation Chamber", 24, Rarity.RARE, mage.cards.m.MaturationChamber.class));
         cards.add(new SetCardInfo("Mek'leth Berserker", 166, Rarity.COMMON, mage.cards.m.MeklethBerserker.class));
         cards.add(new SetCardInfo("Morphic Pool", 540, Rarity.RARE, mage.cards.m.MorphicPool.class));
+        cards.add(new SetCardInfo("One, Borg Evolved", 100, Rarity.RARE, mage.cards.o.OneBorgEvolved.class));
         cards.add(new SetCardInfo("Operations Officer", 192, Rarity.RARE, mage.cards.o.OperationsOfficer.class));
         cards.add(new SetCardInfo("Path of Ancestry", 545, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Pelia, Immortal Innovator", 148, Rarity.UNCOMMON, mage.cards.p.PeliaImmortalInnovator.class));
