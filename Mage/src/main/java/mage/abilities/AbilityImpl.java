@@ -1865,7 +1865,7 @@ public abstract class AbilityImpl implements Ability {
             throw new IllegalStateException("Target adjuster being added but no targets are set!");
         }
         this.targetAdjuster = targetAdjuster;
-        this.targetAdjuster.addDefaultTargets(this);
+        this.targetAdjuster.addDefaultTargets(this.getTargets().isEmpty() ? null : this.getTargets().get(0));
         return this;
     }
 

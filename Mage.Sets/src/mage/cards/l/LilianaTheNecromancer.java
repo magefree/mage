@@ -2,17 +2,19 @@ package mage.cards.l;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.OneShotNonTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
-import mage.cards.*;
-import mage.constants.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -24,6 +26,8 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class LilianaTheNecromancer extends CardImpl {
+
+    private static final FilterCard filter = new FilterCreatureCard("creature cards from graveyards");
 
     public LilianaTheNecromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");
@@ -45,7 +49,11 @@ public final class LilianaTheNecromancer extends CardImpl {
         // −7: Destroy up to two target creatures. Put up to two creature cards from graveyards onto the battlefield under your control.
         ability = new LoyaltyAbility(new DestroyTargetEffect(), -7);
         ability.addTarget(new TargetCreaturePermanent(0, 2));
-        ability.addEffect(new LilianaTheNecromancerEffect());
+        ability.addEffect(new OneShotNonTargetEffect(
+                new ReturnFromGraveyardToBattlefieldTargetEffect()
+                        .setText("Put up to two creature cards from graveyards onto the battlefield under your control"),
+                new TargetCardInGraveyard(0, 2, filter)
+        ));
         this.addAbility(ability);
     }
 
@@ -56,45 +64,5 @@ public final class LilianaTheNecromancer extends CardImpl {
     @Override
     public LilianaTheNecromancer copy() {
         return new LilianaTheNecromancer(this);
-    }
-}
-
-class LilianaTheNecromancerEffect extends OneShotEffect {
-
-    private static final FilterCreatureCard filter = new FilterCreatureCard("creature cards from graveyards");
-
-    public LilianaTheNecromancerEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Put up to two creature cards from graveyards onto the battlefield under your control";
-    }
-
-    private LilianaTheNecromancerEffect(final LilianaTheNecromancerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LilianaTheNecromancerEffect copy() {
-        return new LilianaTheNecromancerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        Target target = new TargetCardInGraveyard(0, 2, filter);
-        target.withNotTarget(true);
-        if (!player.choose(outcome, target, source, game)) {
-            return false;
-        }
-        Cards cardsToMove = new CardsImpl();
-        for (UUID targetId : target.getTargets()) {
-            Card card = game.getCard(targetId);
-            if (card != null) {
-                cardsToMove.add(card);
-            }
-        }
-        return player.moveCards(cardsToMove, Zone.BATTLEFIELD, source, game);
     }
 }
