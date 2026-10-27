@@ -95,6 +95,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("D'Ghor Bloodletter", 101, Rarity.UNCOMMON, mage.cards.d.DGhorBloodletter.class));
         cards.add(new SetCardInfo("D'Vana Tendi, Optimistic Ensign", 236, Rarity.UNCOMMON, mage.cards.d.DVanaTendiOptimisticEnsign.class));
         cards.add(new SetCardInfo("DOT-7 Repair Squad", 12, Rarity.COMMON, mage.cards.d.DOT7RepairSquad.class));
+        cards.add(new SetCardInfo("Dahar Master", 146, Rarity.COMMON, mage.cards.d.DaharMaster.class));
         cards.add(new SetCardInfo("Dal R'El, Augment Orphan", 231, Rarity.UNCOMMON, mage.cards.d.DalRElAugmentOrphan.class));
         cards.add(new SetCardInfo("Daniels, Temporal Agent", 232, Rarity.UNCOMMON, mage.cards.d.DanielsTemporalAgent.class));
         cards.add(new SetCardInfo("Data, New Life", 52, Rarity.UNCOMMON, mage.cards.d.DataNewLife.class));
