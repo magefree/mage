@@ -121,6 +121,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Stonespeaker Crystal", 500, Rarity.UNCOMMON, mage.cards.s.StonespeakerCrystal.class));
         cards.add(new SetCardInfo("Stratagem Emulator", 30, Rarity.RARE, mage.cards.s.StratagemEmulator.class));
         cards.add(new SetCardInfo("Sunken Hollow", 564, Rarity.RARE, mage.cards.s.SunkenHollow.class));
+        cards.add(new SetCardInfo("Supplementation Node", 31, Rarity.RARE, mage.cards.s.SupplementationNode.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 501, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("T'Pol, Vulcan Representative", 151, Rarity.UNCOMMON, mage.cards.t.TPolVulcanRepresentative.class));
         cards.add(new SetCardInfo("Talarian Hook Spider", 175, Rarity.COMMON, mage.cards.t.TalarianHookSpider.class));
