@@ -26,6 +26,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 485, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Astral Cornucopia", 486, Rarity.RARE, mage.cards.a.AstralCornucopia.class));
         cards.add(new SetCardInfo("Badgey, Malicious Glitch", 152, Rarity.UNCOMMON, mage.cards.b.BadgeyMaliciousGlitch.class));
+        cards.add(new SetCardInfo("Battle of Wolf 359", 57, Rarity.RARE, mage.cards.b.BattleOfWolf359.class));
         cards.add(new SetCardInfo("Benjamin Sisko, Besieged", 200, Rarity.MYTHIC, mage.cards.b.BenjaminSiskoBesieged.class));
         cards.add(new SetCardInfo("Bio-Asset Allocator", 196, Rarity.RARE, mage.cards.b.BioAssetAllocator.class));
         cards.add(new SetCardInfo("Bitter Triumph", 445, Rarity.UNCOMMON, mage.cards.b.BitterTriumph.class));
