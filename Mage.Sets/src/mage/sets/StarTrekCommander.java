@@ -20,6 +20,7 @@ public final class StarTrekCommander extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Academy Ruins", 512, Rarity.RARE, mage.cards.a.AcademyRuins.class));
+        cards.add(new SetCardInfo("Ambulatory Reactor", 35, Rarity.RARE, mage.cards.a.AmbulatoryReactor.class));
         cards.add(new SetCardInfo("Anguished Unmaking", 472, Rarity.RARE, mage.cards.a.AnguishedUnmaking.class));
         cards.add(new SetCardInfo("Arcane Sanctum", 513, Rarity.UNCOMMON, mage.cards.a.ArcaneSanctum.class));
         cards.add(new SetCardInfo("Arcane Signet", 485, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
