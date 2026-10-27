@@ -253,6 +253,7 @@ public enum SubType {
     HERO("Hero", SubTypeSet.CreatureType),
     HIPPO("Hippo", SubTypeSet.CreatureType),
     HIPPOGRIFF("Hippogriff", SubTypeSet.CreatureType),
+    HIROGEN("Hirogen", SubTypeSet.CreatureType),
     HOMARID("Homarid", SubTypeSet.CreatureType),
     HOMUNCULUS("Homunculus", SubTypeSet.CreatureType),
     HORROR("Horror", SubTypeSet.CreatureType),
