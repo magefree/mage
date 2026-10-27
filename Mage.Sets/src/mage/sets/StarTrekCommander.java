@@ -55,6 +55,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Door of Destinies", 489, Rarity.RARE, mage.cards.d.DoorOfDestinies.class));
         cards.add(new SetCardInfo("Drowned Catacomb", 525, Rarity.RARE, mage.cards.d.DrownedCatacomb.class));
         cards.add(new SetCardInfo("Eclipsed Steppe", 526, Rarity.RARE, mage.cards.e.EclipsedSteppe.class));
+        cards.add(new SetCardInfo("Emergency Regeneration", 14, Rarity.RARE, mage.cards.e.EmergencyRegeneration.class));
         cards.add(new SetCardInfo("Evasive Maneuvers", 132, Rarity.COMMON, mage.cards.e.EvasiveManeuvers.class));
         cards.add(new SetCardInfo("Everflowing Chalice", 490, Rarity.COMMON, mage.cards.e.EverflowingChalice.class));
         cards.add(new SetCardInfo("Evolving Wilds", 527, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
