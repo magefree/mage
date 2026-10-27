@@ -31,16 +31,15 @@ public final class KindlyAncestor extends TransformingDoubleFacedCard {
         // Lifelink
         this.getLeftHalfCard().addAbility(LifelinkAbility.getInstance());
 
+        // Disturb {1}{W}
+        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{1}{W}"));
+
         // Ancestor's Embrace
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getRightHalfCard().getSpellAbility().addTarget(auraTarget);
         this.getRightHalfCard().getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.getRightHalfCard().addAbility(new EnchantAbility(auraTarget));
-
-        // Disturb {1}{W}
-        // needs to be added after right half has spell ability target set
-        this.getLeftHalfCard().addAbility(new DisturbAbility(this, "{1}{W}"));
 
         // Enchanted creature has lifelink.
         this.getRightHalfCard().addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
