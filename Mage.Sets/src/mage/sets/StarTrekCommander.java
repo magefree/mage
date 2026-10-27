@@ -31,6 +31,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bio-Asset Allocator", 196, Rarity.RARE, mage.cards.b.BioAssetAllocator.class));
         cards.add(new SetCardInfo("Bitter Triumph", 445, Rarity.UNCOMMON, mage.cards.b.BitterTriumph.class));
         cards.add(new SetCardInfo("Borg Queen, One Who Is Many", 131, Rarity.RARE, mage.cards.b.BorgQueenOneWhoIsMany.class));
+        cards.add(new SetCardInfo("Borg Scout Sphere", 36, Rarity.RARE, mage.cards.b.BorgScoutSphere.class));
         cards.add(new SetCardInfo("Captain Kirk, Boldly Going", 85, Rarity.MYTHIC, mage.cards.c.CaptainKirkBoldlyGoing.class));
         cards.add(new SetCardInfo("Ceti Eel", 153, Rarity.COMMON, mage.cards.c.CetiEel.class));
         cards.add(new SetCardInfo("Choked Estuary", 517, Rarity.RARE, mage.cards.c.ChokedEstuary.class));
