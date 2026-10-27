@@ -286,6 +286,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 322, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 563, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 564, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sylvia Tilly, Joy of Discovery", 217, Rarity.UNCOMMON, mage.cards.s.SylviaTillyJoyOfDiscovery.class));
         cards.add(new SetCardInfo("Syndicate Liquidators", 218, Rarity.UNCOMMON, mage.cards.s.SyndicateLiquidators.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Syndicate Liquidators", 575, Rarity.UNCOMMON, mage.cards.s.SyndicateLiquidators.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tactical Officer", 38, Rarity.COMMON, mage.cards.t.TacticalOfficer.class));
