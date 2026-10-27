@@ -313,6 +313,10 @@ public interface Permanent extends Card, Controllable {
 
     void setAttacking(MageObjectReference defender);
 
+    void setEntersAttacking(boolean entersAttacking);
+
+    boolean getEntersAttacking();
+
     MageObjectReference getAttacking();
 
     void setBlocking(int blocking);

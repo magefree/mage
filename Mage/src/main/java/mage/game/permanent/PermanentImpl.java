@@ -95,6 +95,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean indirectPhase = false;
     protected boolean faceDown;
     protected MageObjectReference attacking; // refers to defenderId if attacking, null if not attacking
+    protected boolean entersAttacking;
     protected int blocking;
     protected final Set<MageObjectReference> blockingSet = new HashSet<>(); // refers to blocked creatures
     // number of creatures the permanent can block
@@ -1744,6 +1745,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void setAttacking(MageObjectReference defender) {
         this.attacking = defender;
+    }
+
+    @Override
+    public void setEntersAttacking(boolean entersAttacking) {
+        this.entersAttacking = entersAttacking;
+    }
+
+    @Override
+    public boolean getEntersAttacking() {
+        return entersAttacking;
     }
 
     @Override

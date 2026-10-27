@@ -120,6 +120,7 @@ public enum SubType {
     BARD("Bard", SubTypeSet.CreatureType),
     BASILISK("Basilisk", SubTypeSet.CreatureType),
     BAT("Bat", SubTypeSet.CreatureType),
+    BAJORAN("Bajoran", SubTypeSet.CreatureType),
     BEAR("Bear", SubTypeSet.CreatureType),
     BEAST("Beast", SubTypeSet.CreatureType),
     BEAVER("Beaver", SubTypeSet.CreatureType),
