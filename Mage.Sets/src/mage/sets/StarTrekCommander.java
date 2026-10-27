@@ -63,6 +63,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Exotic Orchard", 528, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Fetid Pools", 530, Rarity.RARE, mage.cards.f.FetidPools.class));
         cards.add(new SetCardInfo("Forsaken Monument", 491, Rarity.MYTHIC, mage.cards.f.ForsakenMonument.class));
+        cards.add(new SetCardInfo("Geordi La Forge, Innovator", 42, Rarity.RARE, mage.cards.g.GeordiLaForgeInnovator.class));
         cards.add(new SetCardInfo("Gin'tak Charge", 163, Rarity.COMMON, mage.cards.g.GintakCharge.class));
         cards.add(new SetCardInfo("Glacial Fortress", 535, Rarity.RARE, mage.cards.g.GlacialFortress.class));
         cards.add(new SetCardInfo("Gorn Captain", 172, Rarity.COMMON, mage.cards.g.GornCaptain.class));
