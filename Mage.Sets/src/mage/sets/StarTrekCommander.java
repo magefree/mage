@@ -97,6 +97,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Picard, Steadfast Captain", 193, Rarity.MYTHIC, mage.cards.p.PicardSteadfastCaptain.class));
         cards.add(new SetCardInfo("Port Town", 547, Rarity.RARE, mage.cards.p.PortTown.class));
         cards.add(new SetCardInfo("Prairie Stream", 548, Rarity.RARE, mage.cards.p.PrairieStream.class));
+        cards.add(new SetCardInfo("Reclamation Specialist", 62, Rarity.RARE, mage.cards.r.ReclamationSpecialist.class));
         cards.add(new SetCardInfo("Refute", 579, Rarity.COMMON, mage.cards.r.Refute.class));
         cards.add(new SetCardInfo("Return to Dust", 427, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
         cards.add(new SetCardInfo("Rogue's Passage", 552, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
