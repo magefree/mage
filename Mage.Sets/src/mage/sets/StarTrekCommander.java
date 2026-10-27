@@ -208,6 +208,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Jefferies Tube", 114, Rarity.RARE, mage.cards.j.JefferiesTube.class));
         cards.add(new SetCardInfo("Join the Collective", 20, Rarity.RARE, mage.cards.j.JoinTheCollective.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Join the Collective", 226, Rarity.RARE, mage.cards.j.JoinTheCollective.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jurati, Cordial Queen", 95, Rarity.RARE, mage.cards.j.JuratiCordialQueen.class));
         cards.add(new SetCardInfo("K'Vort-Class Raider", 116, Rarity.RARE, mage.cards.k.KVortClassRaider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("K'Vort-Class Raider", 350, Rarity.RARE, mage.cards.k.KVortClassRaider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("K't'inga-Class Battle Cruiser", 115, Rarity.RARE, mage.cards.k.KtingaClassBattleCruiser.class, NON_FULL_USE_VARIOUS));
