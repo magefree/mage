@@ -85,6 +85,9 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Command Subadjunct", 9, Rarity.UNCOMMON, mage.cards.c.CommandSubadjunct.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Commander Raffi Musiker", 100, Rarity.UNCOMMON, mage.cards.c.CommanderRaffiMusiker.class));
         cards.add(new SetCardInfo("Common Goal", 190, Rarity.COMMON, mage.cards.c.CommonGoal.class));
+        cards.add(new SetCardInfo("Conquest Mission", 10, Rarity.UNCOMMON, mage.cards.c.ConquestMission.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Conquest Mission", 342, Rarity.UNCOMMON, mage.cards.c.ConquestMission.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Conquest Mission", 570, Rarity.UNCOMMON, mage.cards.c.ConquestMission.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Consider the Prime Directive", 51, Rarity.COMMON, mage.cards.c.ConsiderThePrimeDirective.class));
         cards.add(new SetCardInfo("Constable Odo", 230, Rarity.UNCOMMON, mage.cards.c.ConstableOdo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Constable Odo", 348, Rarity.UNCOMMON, mage.cards.c.ConstableOdo.class, NON_FULL_USE_VARIOUS));
