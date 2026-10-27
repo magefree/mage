@@ -256,6 +256,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("The Duras Sisters", 235, Rarity.UNCOMMON, mage.cards.t.TheDurasSisters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Duras Sisters", 432, Rarity.UNCOMMON, mage.cards.t.TheDurasSisters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Duras Sisters", 442, Rarity.UNCOMMON, mage.cards.t.TheDurasSisters.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Traveler", 254, Rarity.UNCOMMON, mage.cards.t.TheTraveler.class));
         cards.add(new SetCardInfo("The Unicomplex", 304, Rarity.RARE, mage.cards.t.TheUnicomplex.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Unicomplex", 337, Rarity.RARE, mage.cards.t.TheUnicomplex.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tricorder", 270, Rarity.COMMON, mage.cards.t.Tricorder.class));
