@@ -259,6 +259,7 @@ public enum SubType {
     HYENA("Hyena", SubTypeSet.CreatureType),
     // I
     ILLUSION("Illusion", SubTypeSet.CreatureType),
+    ILLYRIAN("Illyrian", SubTypeSet.CreatureType),
     IMP("Imp", SubTypeSet.CreatureType),
     INCARNATION("Incarnation", SubTypeSet.CreatureType),
     INHUMAN("Inhuman", SubTypeSet.CreatureType),
