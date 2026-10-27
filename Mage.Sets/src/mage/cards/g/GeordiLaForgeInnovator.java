@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
@@ -37,7 +37,7 @@ public final class GeordiLaForgeInnovator extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Geordi La Forge can't be blocked if you control a Spacecraft.
-        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
             new CantBeBlockedSourceEffect(),
             new PermanentsOnTheBattlefieldCondition(filter),
             "{this} can't be blocked if you control a Spacecraft"
