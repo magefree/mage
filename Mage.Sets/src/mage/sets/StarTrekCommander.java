@@ -257,6 +257,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("One, Borg Evolved", 100, Rarity.RARE, mage.cards.o.OneBorgEvolved.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("One, Borg Evolved", 324, Rarity.RARE, mage.cards.o.OneBorgEvolved.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Operations Officer", 192, Rarity.RARE, mage.cards.o.OperationsOfficer.class));
+        cards.add(new SetCardInfo("Optimization Annex", 48, Rarity.RARE, mage.cards.o.OptimizationAnnex.class));
         cards.add(new SetCardInfo("Painful Truths", 274, Rarity.RARE, mage.cards.p.PainfulTruths.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Painful Truths", 447, Rarity.RARE, mage.cards.p.PainfulTruths.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Path of Ancestry", 545, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
