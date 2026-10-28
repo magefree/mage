@@ -188,6 +188,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Talisman of Progress", 508, Rarity.UNCOMMON, mage.cards.t.TalismanOfProgress.class));
         cards.add(new SetCardInfo("Tempered Steel", 241, Rarity.RARE, mage.cards.t.TemperedSteel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tempered Steel", 430, Rarity.RARE, mage.cards.t.TemperedSteel.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Temporal Tribulation", 51, Rarity.RARE, mage.cards.t.TemporalTribulation.class));
         cards.add(new SetCardInfo("Tenacious Tosk", 201, Rarity.RARE, mage.cards.t.TenaciousTosk.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 571, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("The Immortal Sun", 347, Rarity.MYTHIC, mage.cards.t.TheImmortalSun.class, NON_FULL_USE_VARIOUS));
