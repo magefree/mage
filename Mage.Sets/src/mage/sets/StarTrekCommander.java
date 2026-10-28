@@ -84,6 +84,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cryogenic Stasis", 142, Rarity.COMMON, mage.cards.c.CryogenicStasis.class));
         cards.add(new SetCardInfo("Cryptic Command", 252, Rarity.RARE, mage.cards.c.CrypticCommand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cryptic Command", 435, Rarity.RARE, mage.cards.c.CrypticCommand.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Curzon Dax, Bound by Blood", 92, Rarity.RARE, mage.cards.c.CurzonDaxBoundByBlood.class));
         cards.add(new SetCardInfo("Darksteel Plate", 341, Rarity.RARE, mage.cards.d.DarksteelPlate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Darksteel Plate", 488, Rarity.RARE, mage.cards.d.DarksteelPlate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Data, Exploring Humanity", 202, Rarity.RARE, mage.cards.d.DataExploringHumanity.class, NON_FULL_USE_VARIOUS));
