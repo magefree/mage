@@ -84,16 +84,10 @@ class SifaGrentExileEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            Cards cards = new CardsImpl();
-            for (Card card : player.getLibrary().getTopCards(game, 2)) {
-                player.moveCards(card, Zone.EXILED, source, game);
-                cards.add(card);
-                }
-            exiled.addAll(cards);
-            }
-        game.addEffect(new PlayFromNotOwnHandZoneTargetEffect(
-                Zone.EXILED, TargetController.YOU, Duration.EndOfTurn, true, false
-        ).setTargetPointer(new FixedTargets(exiled, game)), source);
+        PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(
+                game, source, opponent.getLibrary().getTopCards(game, 2),
+                TargetController.YOU, Duration.EndOfTurn, true, false, false
+        );
         return true;
     }
 }
