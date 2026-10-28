@@ -199,6 +199,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Thought Vessel", 509, Rarity.UNCOMMON, mage.cards.t.ThoughtVessel.class));
         cards.add(new SetCardInfo("Thoughtcast", 444, Rarity.COMMON, mage.cards.t.Thoughtcast.class));
         cards.add(new SetCardInfo("Thrill of Possibility", 455, Rarity.COMMON, mage.cards.t.ThrillOfPossibility.class));
+        cards.add(new SetCardInfo("Tom Paris, Risk-Taker", 105, Rarity.RARE, mage.cards.t.TomParisRiskTaker.class));
         cards.add(new SetCardInfo("Toxic Deluge", 277, Rarity.RARE, mage.cards.t.ToxicDeluge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Toxic Deluge", 448, Rarity.RARE, mage.cards.t.ToxicDeluge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Training Center", 572, Rarity.RARE, mage.cards.t.TrainingCenter.class));
