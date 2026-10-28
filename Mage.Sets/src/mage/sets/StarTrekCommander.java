@@ -70,6 +70,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Disruptor Pistol", 177, Rarity.COMMON, mage.cards.d.DisruptorPistol.class));
         cards.add(new SetCardInfo("Door of Destinies", 342, Rarity.RARE, mage.cards.d.DoorOfDestinies.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Door of Destinies", 489, Rarity.RARE, mage.cards.d.DoorOfDestinies.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dr. Pulaski, Cynical Clinician", 13, Rarity.RARE, mage.cards.d.DrPulaskiCynicalClinician.class));
         cards.add(new SetCardInfo("Drowned Catacomb", 376, Rarity.RARE, mage.cards.d.DrownedCatacomb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Drowned Catacomb", 525, Rarity.RARE, mage.cards.d.DrownedCatacomb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eclipsed Steppe", 377, Rarity.RARE, mage.cards.e.EclipsedSteppe.class, NON_FULL_USE_VARIOUS));
