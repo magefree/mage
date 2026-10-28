@@ -28,6 +28,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("A Good Day to Die", 438, Rarity.COMMON, mage.cards.a.AGoodDayToDie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Amok Time", 183, Rarity.UNCOMMON, mage.cards.a.AmokTime.class));
         cards.add(new SetCardInfo("Andoria", 275, Rarity.COMMON, mage.cards.a.Andoria.class));
+        cards.add(new SetCardInfo("Andromedan Automatons", 2, Rarity.COMMON, mage.cards.a.AndromedanAutomatons.class));
         cards.add(new SetCardInfo("Antagonist Incorporator", 3, Rarity.RARE, mage.cards.a.AntagonistIncorporator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Antagonist Incorporator", 446, Rarity.RARE, mage.cards.a.AntagonistIncorporator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anthropological Mission", 46, Rarity.UNCOMMON, mage.cards.a.AnthropologicalMission.class));
