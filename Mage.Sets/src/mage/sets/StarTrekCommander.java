@@ -176,6 +176,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kolinahr Priest", 146, Rarity.COMMON, mage.cards.k.KolinahrPriest.class));
         cards.add(new SetCardInfo("Koloth, Tribble Hunter", 289, Rarity.RARE, mage.cards.k.KolothTribbleHunter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Koloth, Tribble Hunter", 72, Rarity.RARE, mage.cards.k.KolothTribbleHunter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kor, Cause of Vengeance", 96, Rarity.MYTHIC, mage.cards.k.KorCauseOfVengeance.class));
         cards.add(new SetCardInfo("Kruge, Genesis Seeker", 165, Rarity.UNCOMMON, mage.cards.k.KrugeGenesisSeeker.class));
         cards.add(new SetCardInfo("La Forge, Perceptive Engineer", 147, Rarity.UNCOMMON, mage.cards.l.LaForgePerceptiveEngineer.class));
         cards.add(new SetCardInfo("Last Gasp", 580, Rarity.COMMON, mage.cards.l.LastGasp.class));
