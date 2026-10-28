@@ -122,6 +122,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Morphic Pool", 540, Rarity.RARE, mage.cards.m.MorphicPool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mystic Monastery", 543, Rarity.UNCOMMON, mage.cards.m.MysticMonastery.class));
         cards.add(new SetCardInfo("Negate", 439, Rarity.COMMON, mage.cards.n.Negate.class));
+        cards.add(new SetCardInfo("On the Shoulders of Giants", 47, Rarity.RARE, mage.cards.o.OnTheShouldersOfGiants.class));
         cards.add(new SetCardInfo("One, Borg Evolved", 100, Rarity.RARE, mage.cards.o.OneBorgEvolved.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("One, Borg Evolved", 324, Rarity.RARE, mage.cards.o.OneBorgEvolved.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Operations Officer", 192, Rarity.RARE, mage.cards.o.OperationsOfficer.class));
