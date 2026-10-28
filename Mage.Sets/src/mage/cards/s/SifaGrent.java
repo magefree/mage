@@ -15,7 +15,6 @@ import mage.cards.*;
 import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTargets;
