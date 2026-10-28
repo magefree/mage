@@ -115,6 +115,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fabled Passage", 379, Rarity.RARE, mage.cards.f.FabledPassage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fabled Passage", 529, Rarity.RARE, mage.cards.f.FabledPassage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Faithful Mending", 473, Rarity.UNCOMMON, mage.cards.f.FaithfulMending.class));
+        cards.add(new SetCardInfo("Ferocious Colonist", 65, Rarity.RARE, mage.cards.f.FerociousColonist.class));
         cards.add(new SetCardInfo("Fetid Pools", 380, Rarity.RARE, mage.cards.f.FetidPools.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fetid Pools", 530, Rarity.RARE, mage.cards.f.FetidPools.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fevered Visions", 319, Rarity.RARE, mage.cards.f.FeveredVisions.class, NON_FULL_USE_VARIOUS));
