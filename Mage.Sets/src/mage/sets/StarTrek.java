@@ -116,6 +116,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("David and Carol Marcus, Creators", 193, Rarity.UNCOMMON, mage.cards.d.DavidAndCarolMarcusCreators.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("David and Carol Marcus, Creators", 420, Rarity.UNCOMMON, mage.cards.d.DavidAndCarolMarcusCreators.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("David and Carol Marcus, Creators", 544, Rarity.UNCOMMON, mage.cards.d.DavidAndCarolMarcusCreators.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("De-evolve", 104, Rarity.UNCOMMON, mage.cards.d.DeEvolve.class));
         cards.add(new SetCardInfo("Deanna Troi, Psychic Counsel", 11, Rarity.RARE, mage.cards.d.DeannaTroiPsychicCounsel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deanna Troi, Psychic Counsel", 365, Rarity.RARE, mage.cards.d.DeannaTroiPsychicCounsel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deanna Troi, Psychic Counsel", 499, Rarity.RARE, mage.cards.d.DeannaTroiPsychicCounsel.class, NON_FULL_USE_VARIOUS));
