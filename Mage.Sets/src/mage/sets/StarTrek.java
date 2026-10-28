@@ -221,6 +221,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Perils of the Past", 161, Rarity.COMMON, mage.cards.p.PerilsOfThePast.class));
         cards.add(new SetCardInfo("Pet Sehlat", 28, Rarity.COMMON, mage.cards.p.PetSehlat.class));
         cards.add(new SetCardInfo("Phlox, Unorthodox Doctor", 250, Rarity.UNCOMMON, mage.cards.p.PhloxUnorthodoxDoctor.class));
+        cards.add(new SetCardInfo("Photosynthetic Physician", 210, Rarity.COMMON, mage.cards.p.PhotosyntheticPhysician.class));
         cards.add(new SetCardInfo("Picard, Leading by Example", 29, Rarity.UNCOMMON, mage.cards.p.PicardLeadingByExample.class));
         cards.add(new SetCardInfo("Plains", 307, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 312, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
