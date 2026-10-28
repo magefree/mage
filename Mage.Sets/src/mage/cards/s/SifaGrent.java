@@ -89,7 +89,6 @@ class SifaGrentExileEffect extends OneShotEffect {
                     game, source, player.getLibrary().getTopCards(game, 2),
                     TargetController.YOU, Duration.EndOfTurn, true, false, false
             );
-            return true;
         }
         return true;
     }
