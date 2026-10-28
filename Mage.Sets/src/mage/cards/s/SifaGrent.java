@@ -17,7 +17,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTargets;
 
 import java.util.UUID;
 
@@ -84,10 +83,12 @@ class SifaGrentExileEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-        PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(
-                game, source, opponent.getLibrary().getTopCards(game, 2),
-                TargetController.YOU, Duration.EndOfTurn, true, false, false
-        );
-        return true;
+            PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(
+                    game, source, player.getLibrary().getTopCards(game, 2),
+                    TargetController.YOU, Duration.EndOfTurn, true, false, false
+            );
+            return true;
+        }
+        return false;
     }
 }
