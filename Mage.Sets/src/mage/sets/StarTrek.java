@@ -73,6 +73,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Cha'DIch Investigator", 97, Rarity.COMMON, mage.cards.c.ChaDIchInvestigator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Class-F Shuttlecraft", 259, Rarity.COMMON, mage.cards.c.ClassFShuttlecraft.class));
         cards.add(new SetCardInfo("Cleveland Booker, Empath", 229, Rarity.UNCOMMON, mage.cards.c.ClevelandBookerEmpath.class));
+        cards.add(new SetCardInfo("Cloak and Phaser", 49, Rarity.UNCOMMON, mage.cards.c.CloakAndPhaser.class));
         cards.add(new SetCardInfo("Cloistered Telepath", 50, Rarity.COMMON, mage.cards.c.CloisteredTelepath.class));
         cards.add(new SetCardInfo("Cold-Blooded Crew", 189, Rarity.COMMON, mage.cards.c.ColdBloodedCrew.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cold-Blooded Crew", 574, Rarity.COMMON, mage.cards.c.ColdBloodedCrew.class, NON_FULL_USE_VARIOUS));
