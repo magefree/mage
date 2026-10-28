@@ -217,6 +217,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Run Amok", 582, Rarity.COMMON, mage.cards.r.RunAmok.class));
         cards.add(new SetCardInfo("Scorched Geyser", 398, Rarity.RARE, mage.cards.s.ScorchedGeyser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scorched Geyser", 554, Rarity.RARE, mage.cards.s.ScorchedGeyser.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Scotty, Chief Engineer", 184, Rarity.RARE, mage.cards.s.ScottyChiefEngineer.class));
         cards.add(new SetCardInfo("Shared Animosity", 454, Rarity.RARE, mage.cards.s.SharedAnimosity.class));
         cards.add(new SetCardInfo("Shattered Landscape", 557, Rarity.COMMON, mage.cards.s.ShatteredLandscape.class));
         cards.add(new SetCardInfo("Shineshadow Snarl", 400, Rarity.RARE, mage.cards.s.ShineshadowSnarl.class, NON_FULL_USE_VARIOUS));
