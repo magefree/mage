@@ -459,6 +459,8 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Vindicate", 482, Rarity.RARE, mage.cards.v.Vindicate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vineglimmer Snarl", 417, Rarity.RARE, mage.cards.v.VineglimmerSnarl.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vineglimmer Snarl", 577, Rarity.RARE, mage.cards.v.VineglimmerSnarl.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Voq, Torchbearer", 63, Rarity.RARE, mage.cards.v.VoqTorchbearer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Voq, Torchbearer", 278, Rarity.RARE, mage.cards.v.VoqTorchbearer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Warleader's Call", 335, Rarity.RARE, mage.cards.w.WarleadersCall.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Warleader's Call", 483, Rarity.RARE, mage.cards.w.WarleadersCall.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Warship Flight Crew", 168, Rarity.COMMON, mage.cards.w.WarshipFlightCrew.class));
