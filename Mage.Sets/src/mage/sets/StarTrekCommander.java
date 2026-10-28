@@ -55,6 +55,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Command Chair", 111, Rarity.RARE, mage.cards.c.CommandChair.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Command Chair", 340, Rarity.RARE, mage.cards.c.CommandChair.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Command Tower", 521, Rarity.COMMON, mage.cards.c.CommandTower.class));
+        cards.add(new SetCardInfo("Commander William Riker", 91, Rarity.RARE, mage.cards.c.CommanderWilliamRiker.class));
         cards.add(new SetCardInfo("Commander's Sphere", 487, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Contaminated Landscape", 522, Rarity.COMMON, mage.cards.c.ContaminatedLandscape.class));
         cards.add(new SetCardInfo("Cryogenic Stasis", 142, Rarity.COMMON, mage.cards.c.CryogenicStasis.class));
