@@ -51,6 +51,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected boolean flipCard;
     protected String flipCardName;
     protected boolean morphCard;
+    protected boolean entersAttacking;
     protected List<UUID> attachments = new ArrayList<>();
     protected boolean extraDeckCard = false;
 
@@ -737,6 +738,16 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public Counters getCounters(GameState state) {
         return state.getCardState(this.objectId).getCounters();
+    }
+
+    @Override
+    public void setEntersAttacking(boolean entersAttacking) {
+        this.entersAttacking = entersAttacking;
+    }
+
+    @Override
+    public boolean getEntersAttacking() {
+        return entersAttacking;
     }
 
     @Override
