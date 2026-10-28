@@ -61,6 +61,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cryogenic Stasis", 142, Rarity.COMMON, mage.cards.c.CryogenicStasis.class));
         cards.add(new SetCardInfo("Darksteel Plate", 341, Rarity.RARE, mage.cards.d.DarksteelPlate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Darksteel Plate", 488, Rarity.RARE, mage.cards.d.DarksteelPlate.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Data, Exploring Humanity", 40, Rarity.RARE, mage.cards.d.DataExploringHumanity.class));
         cards.add(new SetCardInfo("Defense Force Aggressor", 161, Rarity.COMMON, mage.cards.d.DefenseForceAggressor.class));
         cards.add(new SetCardInfo("Direct Hit", 162, Rarity.COMMON, mage.cards.d.DirectHit.class));
         cards.add(new SetCardInfo("Disallow", 253, Rarity.RARE, mage.cards.d.Disallow.class, NON_FULL_USE_VARIOUS));
