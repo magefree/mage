@@ -731,16 +731,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public Counters getCounters(Game game) {
-        return getCounters(game.getState());
-    }
-
-    @Override
-    public Counters getCounters(GameState state) {
-        return state.getCardState(this.objectId).getCounters();
-    }
-
-    @Override
     public void setEntersAttacking(boolean entersAttacking) {
         this.entersAttacking = entersAttacking;
     }
@@ -748,6 +738,16 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public boolean getEntersAttacking() {
         return entersAttacking;
+    }
+
+    @Override
+    public Counters getCounters(Game game) {
+        return getCounters(game.getState());
+    }
+
+    @Override
+    public Counters getCounters(GameState state) {
+        return state.getCardState(this.objectId).getCounters();
     }
 
     @Override
