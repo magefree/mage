@@ -64,7 +64,7 @@ class SifaGrentExileEffect extends OneShotEffect {
 
     SifaGrentExileEffect() {
         super(Outcome.Benefit);
-        staticText = " Each opponent exiles the top two cards of their library." +
+        staticText = "Each opponent exiles the top two cards of their library." +
                 " Until end of turn, you may play those cards without paying their mana costs.";
     }
 
