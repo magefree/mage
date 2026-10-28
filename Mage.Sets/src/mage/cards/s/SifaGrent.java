@@ -49,7 +49,8 @@ public final class SifaGrent extends CardImpl {
         // Sifa Grent can be your commander.
         this.addAbility(CanBeYourCommanderAbility.getInstance());
     }
-    private SifaGrent(final SifaGrent card){
+
+    private SifaGrent(final SifaGrent card) {
         super(card);
     }
 
