@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 
 import java.io.InputStream;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Class responsible for reading ratings from resources and rating given cards.
@@ -28,9 +29,10 @@ public final class RateCard {
 
     public static final boolean PRELOAD_CARD_RATINGS_ON_STARTUP = false; // warning, rating and card classes preloading can cause lags for users with low memory
 
-    private static Map<String, Integer> baseRatings = new HashMap<>();
-    private static final Map<String, Integer> ratedCard = new HashMap<>();
-    private static final Map<String, Integer> ratedCardView = new HashMap<>(); // Rating is not exactly the same for CardView, so cached in a different map.
+    // caches are shared by all threads and AI/bots, so make sure it's thread safe
+    private static final Map<String, Integer> baseRatings = new ConcurrentHashMap<>();
+    private static final Map<String, Integer> ratedCard = new ConcurrentHashMap<>();
+    private static final Map<String, Integer> ratedCardView = new ConcurrentHashMap<>(); // Rating is not exactly the same for CardView, so cached in a different map.
     private static boolean isLoaded = false;
 
     /**
@@ -90,8 +92,11 @@ public final class RateCard {
         }
 
         String name = card.getName();
-        if (useCache && allowedColors.isEmpty() && ratedCard.containsKey(name)) {
-            return ratedCard.get(name);
+        if (useCache && allowedColors.isEmpty()) {
+            Integer cachedScore = ratedCard.get(name);
+            if (cachedScore != null) {
+                return cachedScore;
+            }
         }
 
         int typeMultiplier = typeMultiplier(card);
@@ -111,8 +116,11 @@ public final class RateCard {
         }
 
         String name = cardview.getName();
-        if (useCache && allowedColors.isEmpty() && ratedCardView.containsKey(name)) {
-            return ratedCardView.get(name);
+        if (useCache && allowedColors.isEmpty()) {
+            Integer cachedScore = ratedCardView.get(name);
+            if (cachedScore != null) {
+                return cachedScore;
+            }
         }
 
         int typeMultiplier = typeMultiplier(cardview);
