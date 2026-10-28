@@ -208,6 +208,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Mr. Spock, Science Officer", 74, Rarity.MYTHIC, mage.cards.m.MrSpockScienceOfficer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mugato", 208, Rarity.UNCOMMON, mage.cards.m.Mugato.class));
         cards.add(new SetCardInfo("Munitions Enthusiast", 158, Rarity.UNCOMMON, mage.cards.m.MunitionsEnthusiast.class));
+        cards.add(new SetCardInfo("Oberth-Class Starship", 26, Rarity.COMMON, mage.cards.o.OberthClassStarship.class));
         cards.add(new SetCardInfo("Organic Avulsion Unit", 121, Rarity.UNCOMMON, mage.cards.o.OrganicAvulsionUnit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Organic Avulsion Unit", 376, Rarity.UNCOMMON, mage.cards.o.OrganicAvulsionUnit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Organic Avulsion Unit", 510, Rarity.UNCOMMON, mage.cards.o.OrganicAvulsionUnit.class, NON_FULL_USE_VARIOUS));
