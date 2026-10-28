@@ -247,6 +247,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Sacred Foundry", 295, Rarity.RARE, mage.cards.s.SacredFoundry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sacred Foundry", 400, Rarity.RARE, mage.cards.s.SacredFoundry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sacred Foundry", 495, Rarity.RARE, mage.cards.s.SacredFoundry.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Saru, Unthreatened", 212, Rarity.UNCOMMON, mage.cards.s.SaruUnthreatened.class));
         cards.add(new SetCardInfo("Saurian Explorer", 213, Rarity.COMMON, mage.cards.s.SaurianExplorer.class));
         cards.add(new SetCardInfo("Set Phasers to...", 34, Rarity.COMMON, mage.cards.s.SetPhasersTo.class));
         cards.add(new SetCardInfo("Seven of Nine, Unassimilated", 1705, Rarity.MYTHIC, mage.cards.s.SevenOfNineUnassimilated.class, NON_FULL_USE_VARIOUS));
