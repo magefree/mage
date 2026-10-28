@@ -410,6 +410,9 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Vulcan", 305, Rarity.COMMON, mage.cards.v.Vulcan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vulcan", 579, Rarity.COMMON, mage.cards.v.Vulcan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Warp Core", 274, Rarity.COMMON, mage.cards.w.WarpCore.class));
+        cards.add(new SetCardInfo("Warp Speed", 223, Rarity.UNCOMMON, mage.cards.w.WarpSpeed.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Warp Speed", 387, Rarity.UNCOMMON, mage.cards.w.WarpSpeed.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Warp Speed", 521, Rarity.UNCOMMON, mage.cards.w.WarpSpeed.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Watery Grave", 306, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Watery Grave", 393, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Watery Grave", 488, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
