@@ -37,8 +37,7 @@ public final class SifaGrent extends CardImpl {
         // Whenever a creature dies, target opponent loses 1 life and you gain 1 life.
         Ability ability = new DiesCreatureTriggeredAbility(new LoseLifeTargetEffect(1), false);
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
-        Target target = new TargetOpponent();
-        ability.addTarget(target);
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
         // +1: Goad up to two target creatures.
