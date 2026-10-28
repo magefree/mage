@@ -40,7 +40,7 @@ public final class SifaGrent extends CardImpl {
         this.addAbility(ability);
 
         // +1: Goad up to two target creatures.
-        Ability ability2 = new LoyaltyAbility(new GoadTargetEffect().setText("Goad up to two target creatures"), 1);
+        Ability ability2 = new LoyaltyAbility(new GoadTargetEffect(), 1);
         ability2.addTarget(new TargetCreaturePermanent(0, 2));
         this.addAbility(ability2);
 
