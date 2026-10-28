@@ -44,7 +44,7 @@ public final class SifaGrent extends CardImpl {
         this.addAbility(ability2);
 
         // -6: Each opponent exiles the top two cards of their library. Until end of turn, you may play those cards without paying their mana costs.
-         this.addAbility(new LoyaltyAbility(new SifaGrentExileEffect(), -6));
+        this.addAbility(new LoyaltyAbility(new SifaGrentExileEffect(), -6));
 
         // Sifa Grent can be your commander.
         this.addAbility(CanBeYourCommanderAbility.getInstance());
