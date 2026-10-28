@@ -137,6 +137,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Hit It!", 476, Rarity.RARE, mage.cards.h.HitIt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hive Mind Coprocessor", 115, Rarity.UNCOMMON, mage.cards.h.HiveMindCoprocessor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hive Mind Coprocessor", 573, Rarity.UNCOMMON, mage.cards.h.HiveMindCoprocessor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hologram Janeway", 21, Rarity.UNCOMMON, mage.cards.h.HologramJaneway.class));
         cards.add(new SetCardInfo("Horta", 152, Rarity.COMMON, mage.cards.h.Horta.class));
         cards.add(new SetCardInfo("Hoshi Sato, Exolinguist", 64, Rarity.UNCOMMON, mage.cards.h.HoshiSatoExolinguist.class));
         cards.add(new SetCardInfo("Humpback Whales", 65, Rarity.COMMON, mage.cards.h.HumpbackWhales.class));
