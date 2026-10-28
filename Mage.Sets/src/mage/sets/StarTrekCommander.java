@@ -136,6 +136,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Furycalm Snarl", 384, Rarity.RARE, mage.cards.f.FurycalmSnarl.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Furycalm Snarl", 534, Rarity.RARE, mage.cards.f.FurycalmSnarl.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gagh Slinger", 66, Rarity.RARE, mage.cards.g.GaghSlinger.class));
+        cards.add(new SetCardInfo("Galvanizing Tenor", 67, Rarity.RARE, mage.cards.g.GalvanizingTenor.class));
         cards.add(new SetCardInfo("Geordi La Forge, Innovator", 256, Rarity.RARE, mage.cards.g.GeordiLaForgeInnovator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Geordi La Forge, Innovator", 42, Rarity.RARE, mage.cards.g.GeordiLaForgeInnovator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gin'tak Charge", 163, Rarity.COMMON, mage.cards.g.GintakCharge.class));
