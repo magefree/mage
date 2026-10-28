@@ -85,6 +85,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Darksteel Plate", 488, Rarity.RARE, mage.cards.d.DarksteelPlate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Data, Exploring Humanity", 202, Rarity.RARE, mage.cards.d.DataExploringHumanity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Data, Exploring Humanity", 40, Rarity.RARE, mage.cards.d.DataExploringHumanity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Data, Professor of Humanities", 189, Rarity.RARE, mage.cards.d.DataProfessorOfHumanities.class));
         cards.add(new SetCardInfo("Defense Force Aggressor", 161, Rarity.COMMON, mage.cards.d.DefenseForceAggressor.class));
         cards.add(new SetCardInfo("Desolate Lighthouse", 374, Rarity.RARE, mage.cards.d.DesolateLighthouse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Desolate Lighthouse", 523, Rarity.RARE, mage.cards.d.DesolateLighthouse.class, NON_FULL_USE_VARIOUS));
