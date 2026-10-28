@@ -312,6 +312,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Worf, Defiant Commander", 8, Rarity.MYTHIC, mage.cards.w.WorfDefiantCommander.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Worf, Son of Mogh", 109, Rarity.RARE, mage.cards.w.WorfSonOfMogh.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Worf, Son of Mogh", 336, Rarity.RARE, mage.cards.w.WorfSonOfMogh.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Worf, Still Not Merry", 186, Rarity.RARE, mage.cards.w.WorfStillNotMerry.class));
         cards.add(new SetCardInfo("World at War", 456, Rarity.RARE, mage.cards.w.WorldAtWar.class));
     }
 }
