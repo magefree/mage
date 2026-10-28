@@ -175,6 +175,8 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 485, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 323, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 324, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 565, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 566, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mr. Spock, Science Officer", 1702, Rarity.MYTHIC, mage.cards.m.MrSpockScienceOfficer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mr. Spock, Science Officer", 353, Rarity.MYTHIC, mage.cards.m.MrSpockScienceOfficer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mr. Spock, Science Officer", 411, Rarity.MYTHIC, mage.cards.m.MrSpockScienceOfficer.class, NON_FULL_USE_VARIOUS));
