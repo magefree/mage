@@ -460,6 +460,9 @@ public final class RateCard {
         for (String symbol : manaCostSymbols) {
             int count = 0;
             symbol = symbol.replace("{", "").replace("}", "");
+            if (isOffColorHybridMana(symbol, allowedColors)) {
+                return OFF_COLOR_PENALTY;
+            }
             if (isColoredMana(symbol)) {
                 for (ColoredManaSymbol allowed : allowedColors) {
                     if (allowed.toString().equals(symbol)) {
@@ -486,6 +489,23 @@ public final class RateCard {
             rate += MULTICOLOR_BONUS;
         }
         return rate;
+    }
+
+    /**
+     * Hybrid mana symbol of two colors (example: R/G) without any allowed color
+     * (mono hybrid like 2/G and phyrexian like G/P can be paid by generic mana or life, so it's fine)
+     */
+    private static boolean isOffColorHybridMana(String symbol, List<ColoredManaSymbol> allowedColors) {
+        String[] parts = symbol.split("/");
+        if (parts.length != 2 || !isColoredMana(parts[0]) || !isColoredMana(parts[1])) {
+            return false;
+        }
+        for (ColoredManaSymbol allowed : allowedColors) {
+            if (allowed.toString().equals(parts[0]) || allowed.toString().equals(parts[1])) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

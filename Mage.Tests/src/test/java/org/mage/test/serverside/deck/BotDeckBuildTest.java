@@ -123,6 +123,23 @@ public class BotDeckBuildTest extends MageTestPlayerBase {
         assertCardsCount(deck, "Swamp", 5);
     }
 
+    @Test
+    public void test_Limited_HybridCardsMustBeOnColor() {
+        // hybrid cards without any deck color must not be used
+        List<Card> pool = new ArrayList<>();
+        addCards(pool, "Grizzly Bears", 25); // {1}{G}
+        addCards(pool, "Kitchen Finks", 3); // {1}{G/W}{G/W} - on color
+        addCards(pool, "Seedpod Squire", 3); // {3}{W/U} - off color
+        addCards(pool, "Boros Reckoner", 3); // {R/W}{R/W}{R/W} - off color
+
+        Deck deck = ComputerPlayer.buildDeck(LIMITED_DECK_SIZE, pool, Collections.singletonList(ColoredManaSymbol.G));
+        assertDeck(deck, LIMITED_DECK_SIZE, LIMITED_DECK_LANDS, LIMITED_DECK_SPELLS);
+        assertCardsCount(deck, "Kitchen Finks", 3);
+        assertCardsCount(deck, "Seedpod Squire", 0);
+        assertCardsCount(deck, "Boros Reckoner", 0);
+        assertCardsCount(deck, "Forest", LIMITED_DECK_LANDS);
+    }
+
     private void assertCardsCount(Deck deck, String cardName, int needAmount) {
         Assert.assertEquals("wrong amount of " + cardName, needAmount, deck.getMaindeckCards().stream()
                 .filter(card -> card.getName().equals(cardName))
