@@ -41,7 +41,7 @@ public final class SifaGrent extends CardImpl {
 
         // +1: Goad up to two target creatures.
         Ability ability2 = new LoyaltyAbility(new GoadTargetEffect().setText("Goad up to two target creatures"), 1);
-        ability2.addTarget(new TargetCreaturePermanent(0,2));
+        ability2.addTarget(new TargetCreaturePermanent(0, 2));
         this.addAbility(ability2);
 
         // -6: Each opponent exiles the top two cards of their library. Until end of turn, you may play those cards without paying their mana costs.
