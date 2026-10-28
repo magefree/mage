@@ -206,6 +206,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Trelane, Squire of Gothos", 195, Rarity.RARE, mage.cards.t.TrelaneSquireOfGothos.class));
         cards.add(new SetCardInfo("Type-03 Borg Vessel", 243, Rarity.RARE, mage.cards.t.Type03BorgVessel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Type-03 Borg Vessel", 33, Rarity.RARE, mage.cards.t.Type03BorgVessel.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("U.S.S. Defiant, Tough Little Ship", 125, Rarity.RARE, mage.cards.u.USSDefiantToughLittleShip.class));
         cards.add(new SetCardInfo("Umbral Expanse", 414, Rarity.RARE, mage.cards.u.UmbralExpanse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Umbral Expanse", 574, Rarity.RARE, mage.cards.u.UmbralExpanse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Underground River", 415, Rarity.RARE, mage.cards.u.UndergroundRiver.class, NON_FULL_USE_VARIOUS));
