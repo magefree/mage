@@ -3,10 +3,12 @@ package org.mage.test.serverside.deck;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.CardScanner;
 import mage.game.GameException;
 import mage.util.DeckBuildUtils;
 import mage.util.TournamentUtil;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.mage.test.serverside.base.MageTestPlayerBase;
 
@@ -23,6 +25,11 @@ import java.util.stream.Collectors;
  * @author JayDi85
  */
 public class DeckAutoLandsTest extends MageTestPlayerBase {
+
+    @Before
+    public void setUp() {
+        CardScanner.scan();
+    }
 
     @Test
     public void test_LandsSuggest_OneColor() {
@@ -62,6 +69,26 @@ public class DeckAutoLandsTest extends MageTestPlayerBase {
                 new DeckCardInfo("Abstruse Archaic", "712", "CMM", 40)
         ));
         assertSuggestedLands("no colors", deck, 60, 4, 4, 4, 4, 4);
+    }
+
+    @Test
+    public void test_LandsSuggest_HybridMustUseDeckColors() {
+        // hybrid symbols must use deck colors only: {G/W} and {R/G} in a green deck need Forests only
+        Deck deck = prepareDeck(Arrays.asList(
+                new DeckCardInfo("Grizzly Bears", "268", "10E", 13), // {1}{G}
+                new DeckCardInfo("Kitchen Finks", "229", "SHM", 5), // {1}{G/W}{G/W}
+                new DeckCardInfo("Boggart Ram-Gang", "203", "SHM", 5) // {R/G}{R/G}{R/G}
+        ));
+        assertSuggestedLands("hybrid in one color deck", deck, 40, 0, 0, 0, 0, 17);
+    }
+
+    @Test
+    public void test_LandsSuggest_HybridOnlyDeck() {
+        // deck without normal colored symbols must use both colors of hybrid symbols
+        Deck deck = prepareDeck(Arrays.asList(
+                new DeckCardInfo("Kitchen Finks", "229", "SHM", 20) // {1}{G/W}{G/W}
+        ));
+        assertSuggestedLands("hybrid only deck", deck, 40, 10, 0, 0, 0, 10);
     }
 
     @Test

@@ -1087,7 +1087,7 @@ public class ComputerPlayer extends PlayerImpl {
 
         // add basic lands by colored mana symbols of the spells
         // TODO: compensate colors of non basic lands
-        Map<ColoredManaSymbol, Integer> landsByColors = splitLandsByColors(BASIC_LANDS_COUNT, countColoredManaSymbols(deck.getCards(), colors));
+        Map<ColoredManaSymbol, Integer> landsByColors = DeckBuildUtils.splitLandsByColors(BASIC_LANDS_COUNT, DeckBuildUtils.countColoredManaSymbols(deck.getCards(), colors));
         int mostLand = 0;
         String mostLandName = "Forest"; // default for colorless decks
         for (Entry<ColoredManaSymbol, Integer> entry : landsByColors.entrySet()) {
@@ -1103,65 +1103,6 @@ public class ComputerPlayer extends PlayerImpl {
         addBasicLands(deck, mostLandName, DECK_SIZE - deck.getMaindeckCards().size());
 
         return deck;
-    }
-
-    /**
-     * Colored mana symbols of the cards by colors. Hybrid symbol is paid by one color only, so it counts
-     * for the deck colors only (a half per color if both are deck colors), e.g. {R/G} in a green deck needs Forest only
-     */
-    private static Map<ColoredManaSymbol, Double> countColoredManaSymbols(Collection<Card> cards, List<ColoredManaSymbol> deckColors) {
-        Map<ColoredManaSymbol, Double> res = new EnumMap<>(ColoredManaSymbol.class);
-        for (Card card : cards) {
-            for (String symbol : card.getManaCostSymbols()) {
-                // examples: {G}, {R/G}, {2/G}, {G/P}
-                List<ColoredManaSymbol> symbolColors = new ArrayList<>();
-                for (String part : symbol.replace("{", "").replace("}", "").split("/")) {
-                    if (part.length() == 1 && "WUBRG".contains(part)) {
-                        symbolColors.add(ColoredManaSymbol.lookup(part.charAt(0)));
-                    }
-                }
-                List<ColoredManaSymbol> payColors = new ArrayList<>(symbolColors);
-                payColors.retainAll(deckColors);
-                if (payColors.isEmpty()) {
-                    // off-color card in the deck
-                    payColors = symbolColors;
-                }
-                for (ColoredManaSymbol color : payColors) {
-                    res.merge(color, 1.0 / payColors.size(), Double::sum);
-                }
-            }
-        }
-        return res;
-    }
-
-    /**
-     * Split lands between colors by needed amount, total amount is always landsCount (largest remainder method)
-     */
-    private static Map<ColoredManaSymbol, Integer> splitLandsByColors(int landsCount, Map<ColoredManaSymbol, Double> colorsNeed) {
-        Map<ColoredManaSymbol, Integer> res = new EnumMap<>(ColoredManaSymbol.class);
-        double total = colorsNeed.values().stream().mapToDouble(Double::doubleValue).sum();
-        if (landsCount <= 0 || total <= 0) {
-            return res;
-        }
-
-        Map<ColoredManaSymbol, Double> remainders = new EnumMap<>(ColoredManaSymbol.class);
-        int usedLands = 0;
-        for (Entry<ColoredManaSymbol, Double> entry : colorsNeed.entrySet()) {
-            double exactLands = landsCount * entry.getValue() / total;
-            int lands = (int) Math.floor(exactLands);
-            res.put(entry.getKey(), lands);
-            remainders.put(entry.getKey(), exactLands - lands);
-            usedLands += lands;
-        }
-
-        // remaining lands go to the colors with the biggest remainders
-        List<ColoredManaSymbol> byRemainder = new ArrayList<>(remainders.keySet());
-        byRemainder.sort((c1, c2) -> Double.compare(remainders.get(c2), remainders.get(c1)));
-        for (int i = 0; i < landsCount - usedLands; i++) {
-            ColoredManaSymbol color = byRemainder.get(i);
-            res.put(color, res.get(color) + 1);
-        }
-        return res;
     }
 
     private static String getBasicLandName(ColoredManaSymbol color) {
