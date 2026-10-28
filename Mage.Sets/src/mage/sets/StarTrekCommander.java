@@ -42,6 +42,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Beverly Crusher, Ship's Doctor", 214, Rarity.RARE, mage.cards.b.BeverlyCrusherShipsDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bio-Asset Allocator", 196, Rarity.RARE, mage.cards.b.BioAssetAllocator.class));
         cards.add(new SetCardInfo("Bitter Triumph", 445, Rarity.UNCOMMON, mage.cards.b.BitterTriumph.class));
+        cards.add(new SetCardInfo("Blood-Sport Champion", 58, Rarity.RARE, mage.cards.b.BloodSportChampion.class));
         cards.add(new SetCardInfo("Borg Queen, One Who Is Many", 131, Rarity.RARE, mage.cards.b.BorgQueenOneWhoIsMany.class));
         cards.add(new SetCardInfo("Borg Scout Sphere", 248, Rarity.RARE, mage.cards.b.BorgScoutSphere.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Borg Scout Sphere", 36, Rarity.RARE, mage.cards.b.BorgScoutSphere.class, NON_FULL_USE_VARIOUS));
