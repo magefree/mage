@@ -39,6 +39,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Borg Queen, One Who Is Many", 131, Rarity.RARE, mage.cards.b.BorgQueenOneWhoIsMany.class));
         cards.add(new SetCardInfo("Borg Scout Sphere", 248, Rarity.RARE, mage.cards.b.BorgScoutSphere.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Borg Scout Sphere", 36, Rarity.RARE, mage.cards.b.BorgScoutSphere.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Captain Janeway, Endgame", 84, Rarity.MYTHIC, mage.cards.c.CaptainJanewayEndgame.class));
         cards.add(new SetCardInfo("Captain Kirk, Boldly Going", 85, Rarity.MYTHIC, mage.cards.c.CaptainKirkBoldlyGoing.class));
         cards.add(new SetCardInfo("Ceti Eel", 153, Rarity.COMMON, mage.cards.c.CetiEel.class));
         cards.add(new SetCardInfo("Choked Estuary", 370, Rarity.RARE, mage.cards.c.ChokedEstuary.class, NON_FULL_USE_VARIOUS));
