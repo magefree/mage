@@ -144,6 +144,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Refute", 579, Rarity.COMMON, mage.cards.r.Refute.class));
         cards.add(new SetCardInfo("Reliquary Tower", 551, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Return to Dust", 427, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
+        cards.add(new SetCardInfo("Ro Laren, Double Agent", 75, Rarity.RARE, mage.cards.r.RoLarenDoubleAgent.class));
         cards.add(new SetCardInfo("Rogue's Passage", 552, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
         cards.add(new SetCardInfo("Run Amok", 582, Rarity.COMMON, mage.cards.r.RunAmok.class));
         cards.add(new SetCardInfo("Scorched Geyser", 554, Rarity.RARE, mage.cards.s.ScorchedGeyser.class));

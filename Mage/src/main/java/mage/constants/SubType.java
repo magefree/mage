@@ -114,6 +114,7 @@ public enum SubType {
     AZRA("Azra", SubTypeSet.CreatureType),
     // B
     BADGER("Badger", SubTypeSet.CreatureType),
+    BAJORAN("Bajoran", SubTypeSet.CreatureType),
     BALLOON("Balloon", SubTypeSet.CreatureType),
     BARABEL("Barabel", SubTypeSet.CreatureType, true), // Star Wars
     BARBARIAN("Barbarian", SubTypeSet.CreatureType),
