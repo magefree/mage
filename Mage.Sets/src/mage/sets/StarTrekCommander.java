@@ -52,6 +52,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ceti Eel", 153, Rarity.COMMON, mage.cards.c.CetiEel.class));
         cards.add(new SetCardInfo("Chain Reaction", 280, Rarity.RARE, mage.cards.c.ChainReaction.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chain Reaction", 450, Rarity.RARE, mage.cards.c.ChainReaction.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Chancellor Gorkon", 86, Rarity.RARE, mage.cards.c.ChancellorGorkon.class));
         cards.add(new SetCardInfo("Choked Estuary", 370, Rarity.RARE, mage.cards.c.ChokedEstuary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Choked Estuary", 517, Rarity.RARE, mage.cards.c.ChokedEstuary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Christine Chapel, Combat Medic", 300, Rarity.RARE, mage.cards.c.ChristineChapelCombatMedic.class, NON_FULL_USE_VARIOUS));
