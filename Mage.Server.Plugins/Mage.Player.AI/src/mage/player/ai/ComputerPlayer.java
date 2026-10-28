@@ -1066,18 +1066,27 @@ public class ComputerPlayer extends PlayerImpl {
         });
 
         // get top cards
+        // nonbasic lands from the pool use lands slots, not spells slots
+        int spellsCount = 0;
+        int nonBasicLandsCount = 0;
         int cardNum = 0;
-        while (deck.getMaindeckCards().size() < DECK_CARDS_COUNT && sortedCards.size() > cardNum) {
+        while (spellsCount < DECK_CARDS_COUNT && sortedCards.size() > cardNum) {
             Card card = sortedCards.get(cardNum);
-            if (!card.isBasic()) {
+            if (card.isLand()) {
+                if (!card.isBasic() && nonBasicLandsCount < DECK_LANDS_COUNT) {
+                    deck.getCards().add(card);
+                    nonBasicLandsCount++;
+                }
+            } else {
                 deck.getCards().add(card);
-                deck.getSideboard().remove(card);
+                spellsCount++;
             }
             cardNum++;
         }
+        final int BASIC_LANDS_COUNT = DECK_LANDS_COUNT - nonBasicLandsCount;
 
         // add basic lands by color percent
-        // TODO:  compensate for non basic lands
+        // TODO: compensate colors of non basic lands
         Mana mana = new Mana();
         for (Card card : deck.getCards()) {
             mana.add(card.getManaCost().getMana());
@@ -1088,13 +1097,13 @@ public class ComputerPlayer extends PlayerImpl {
         int mostLand = 0;
         String mostLandName = "Forest";
         if (mana.getGreen() > 0) {
-            int number = (int) Math.round(mana.getGreen() / total * DECK_LANDS_COUNT);
+            int number = (int) Math.round(mana.getGreen() / total * BASIC_LANDS_COUNT);
             addBasicLands(deck, "Forest", number);
             mostLand = number;
         }
 
         if (mana.getBlack() > 0) {
-            int number = (int) Math.round(mana.getBlack() / total * DECK_LANDS_COUNT);
+            int number = (int) Math.round(mana.getBlack() / total * BASIC_LANDS_COUNT);
             addBasicLands(deck, "Swamp", number);
             if (number > mostLand) {
                 mostLand = number;
@@ -1103,7 +1112,7 @@ public class ComputerPlayer extends PlayerImpl {
         }
 
         if (mana.getBlue() > 0) {
-            int number = (int) Math.round(mana.getBlue() / total * DECK_LANDS_COUNT);
+            int number = (int) Math.round(mana.getBlue() / total * BASIC_LANDS_COUNT);
             addBasicLands(deck, "Island", number);
             if (number > mostLand) {
                 mostLand = number;
@@ -1112,7 +1121,7 @@ public class ComputerPlayer extends PlayerImpl {
         }
 
         if (mana.getWhite() > 0) {
-            int number = (int) Math.round(mana.getWhite() / total * DECK_LANDS_COUNT);
+            int number = (int) Math.round(mana.getWhite() / total * BASIC_LANDS_COUNT);
             addBasicLands(deck, "Plains", number);
             if (number > mostLand) {
                 mostLand = number;
@@ -1121,7 +1130,7 @@ public class ComputerPlayer extends PlayerImpl {
         }
 
         if (mana.getRed() > 0) {
-            int number = (int) Math.round(mana.getRed() / total * DECK_LANDS_COUNT);
+            int number = (int) Math.round(mana.getRed() / total * BASIC_LANDS_COUNT);
             addBasicLands(deck, "Mountain", number);
             if (number > mostLand) {
                 mostLandName = "Plains";
