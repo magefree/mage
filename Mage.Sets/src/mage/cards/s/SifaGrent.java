@@ -89,6 +89,6 @@ class SifaGrentExileEffect extends OneShotEffect {
             );
             return true;
         }
-        return false;
+        return true;
     }
 }
