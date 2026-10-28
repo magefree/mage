@@ -368,6 +368,9 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Test of Loyalty", 134, Rarity.UNCOMMON, mage.cards.t.TestOfLoyalty.class));
         cards.add(new SetCardInfo("Test of Priorities", 85, Rarity.UNCOMMON, mage.cards.t.TestOfPriorities.class));
         cards.add(new SetCardInfo("The City on the Edge of Forever", 228, Rarity.RARE, mage.cards.t.TheCityOnTheEdgeOfForever.class));
+        cards.add(new SetCardInfo("The Destruction of Praxis", 103, Rarity.RARE, mage.cards.t.TheDestructionOfPraxis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Destruction of Praxis", 414, Rarity.RARE, mage.cards.t.TheDestructionOfPraxis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Destruction of Praxis", 538, Rarity.RARE, mage.cards.t.TheDestructionOfPraxis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Doctor, EMH", 234, Rarity.UNCOMMON, mage.cards.t.TheDoctorEMH.class));
         cards.add(new SetCardInfo("The Duras Sisters", 235, Rarity.UNCOMMON, mage.cards.t.TheDurasSisters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Duras Sisters", 432, Rarity.UNCOMMON, mage.cards.t.TheDurasSisters.class, NON_FULL_USE_VARIOUS));
