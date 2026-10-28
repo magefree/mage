@@ -147,6 +147,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Herald's Horn", 493, Rarity.UNCOMMON, mage.cards.h.HeraldsHorn.class));
         cards.add(new SetCardInfo("Howling Mine", 345, Rarity.RARE, mage.cards.h.HowlingMine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Howling Mine", 494, Rarity.RARE, mage.cards.h.HowlingMine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Imperial Hullbreachers", 18, Rarity.RARE, mage.cards.i.ImperialHullbreachers.class));
         cards.add(new SetCardInfo("Indelicate Healer", 19, Rarity.RARE, mage.cards.i.IndelicateHealer.class));
         cards.add(new SetCardInfo("Irrigated Farmland", 388, Rarity.RARE, mage.cards.i.IrrigatedFarmland.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Irrigated Farmland", 538, Rarity.RARE, mage.cards.i.IrrigatedFarmland.class, NON_FULL_USE_VARIOUS));
