@@ -33,6 +33,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Battle of Wolf 359", 203, Rarity.RARE, mage.cards.b.BattleOfWolf359.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Battle of Wolf 359", 57, Rarity.RARE, mage.cards.b.BattleOfWolf359.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Benjamin Sisko, Besieged", 200, Rarity.MYTHIC, mage.cards.b.BenjaminSiskoBesieged.class));
+        cards.add(new SetCardInfo("Beverly Crusher, Ship's Doctor", 11, Rarity.RARE, mage.cards.b.BeverlyCrusherShipsDoctor.class));
         cards.add(new SetCardInfo("Bio-Asset Allocator", 196, Rarity.RARE, mage.cards.b.BioAssetAllocator.class));
         cards.add(new SetCardInfo("Bitter Triumph", 445, Rarity.UNCOMMON, mage.cards.b.BitterTriumph.class));
         cards.add(new SetCardInfo("Borg Queen, One Who Is Many", 131, Rarity.RARE, mage.cards.b.BorgQueenOneWhoIsMany.class));
