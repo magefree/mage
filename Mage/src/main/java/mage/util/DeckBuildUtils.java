@@ -1,6 +1,7 @@
 package mage.util;
 
 import mage.cards.Card;
+import mage.cards.SplitCard;
 import mage.constants.ColoredManaSymbol;
 
 import java.util.*;
@@ -62,7 +63,7 @@ public final class DeckBuildUtils {
     public static Map<ColoredManaSymbol, Double> countColoredManaSymbols(Collection<Card> cards, List<ColoredManaSymbol> deckColors) {
         Map<ColoredManaSymbol, Double> res = new EnumMap<>(ColoredManaSymbol.class);
         for (Card card : cards) {
-            for (String symbol : card.getManaCostSymbols()) {
+            for (String symbol : getCastableManaCostSymbols(card, deckColors)) {
                 List<ColoredManaSymbol> symbolColors = getSymbolColors(symbol);
                 List<ColoredManaSymbol> payColors = new ArrayList<>(symbolColors);
                 payColors.retainAll(deckColors);
@@ -76,6 +77,36 @@ public final class DeckBuildUtils {
             }
         }
         return res;
+    }
+
+    /**
+     * Mana symbols of the card. Split and room cards: each half can be cast alone, so it uses halves with deck colors only
+     * (example: Fire // Ice in a red deck needs Mountains only)
+     */
+    private static List<String> getCastableManaCostSymbols(Card card, List<ColoredManaSymbol> deckColors) {
+        if (card instanceof SplitCard) {
+            SplitCard splitCard = (SplitCard) card;
+            List<String> res = new ArrayList<>();
+            for (Card half : Arrays.asList(splitCard.getLeftHalfCard(), splitCard.getRightHalfCard())) {
+                if (isCastableByColors(half.getManaCostSymbols(), deckColors)) {
+                    res.addAll(half.getManaCostSymbols());
+                }
+            }
+            if (!res.isEmpty()) {
+                return res;
+            }
+        }
+        return card.getManaCostSymbols();
+    }
+
+    private static boolean isCastableByColors(List<String> manaCostSymbols, List<ColoredManaSymbol> deckColors) {
+        for (String symbol : manaCostSymbols) {
+            List<ColoredManaSymbol> symbolColors = getSymbolColors(symbol);
+            if (!symbolColors.isEmpty() && symbolColors.stream().noneMatch(deckColors::contains)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

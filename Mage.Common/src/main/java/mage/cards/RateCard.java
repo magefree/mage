@@ -398,12 +398,27 @@ public final class RateCard {
         if (isOffColorNonBasicLand(card, allowedColors)) {
             return OFF_COLOR_PENALTY;
         }
+        // split and room cards: each half can be cast alone, so use the best half
+        // (whole card contains mana symbols of both halves)
+        if (card instanceof SplitCard) {
+            SplitCard splitCard = (SplitCard) card;
+            return Math.max(
+                    getManaCostScore(splitCard.getLeftHalfCard(), allowedColors),
+                    getManaCostScore(splitCard.getRightHalfCard(), allowedColors)
+            );
+        }
         return getManaCostScore(
                 card.getName(),
-                card.getManaValue(),
                 card.getManaCostSymbols(),
                 allowedColors
         );
+    }
+
+    /**
+     * Card with mana symbols of other colors (it's useless for a deck with allowed colors)
+     */
+    public static boolean isOffColorCard(Card card, List<ColoredManaSymbol> allowedColors) {
+        return !allowedColors.isEmpty() && getManaCostScore(card, allowedColors) == OFF_COLOR_PENALTY;
     }
 
     /**
@@ -433,13 +448,14 @@ public final class RateCard {
     private static int getManaCostScore(CardView cardview, List<ColoredManaSymbol> allowedColors) {
         return getManaCostScore(
                 cardview.getName(),
-                cardview.getManaValue(),
                 cardview.getManaCostSymbols(),
                 allowedColors
         );
     }
 
-    private static int getManaCostScore(String name, int manaValue, List<String> manaCostSymbols, List<ColoredManaSymbol> allowedColors) {
+    private static int getManaCostScore(String name, List<String> manaCostSymbols, List<ColoredManaSymbol> allowedColors) {
+        // mana value is not used here: an expensive card must not be better than a cheap one by its cost only,
+        // a deck curve is checked by the deck building logic instead
         if (allowedColors.isEmpty()) {
             int colorPenalty = 0;
             for (String symbol : manaCostSymbols) {
@@ -447,7 +463,7 @@ public final class RateCard {
                     colorPenalty++;
                 }
             }
-            return 2 * (manaValue - colorPenalty + 1);
+            return -2 * colorPenalty;
         }
 
         // Basic lands have no value so they're always treated as off-color
@@ -484,7 +500,7 @@ public final class RateCard {
         if (maxSingleCount > 5)
             maxSingleCount = 5;
 
-        int rate = 2 * manaValue + 3 * (10 - SINGLE_PENALTY[maxSingleCount]);
+        int rate = 3 * (10 - SINGLE_PENALTY[maxSingleCount]);
         if (singleCount.size() > 1 && singleCount.size() < 5) {
             rate += MULTICOLOR_BONUS;
         }

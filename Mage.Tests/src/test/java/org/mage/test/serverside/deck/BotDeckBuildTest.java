@@ -1,6 +1,7 @@
 package org.mage.test.serverside.deck;
 
 import mage.cards.Card;
+import mage.cards.RateCard;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -138,6 +139,106 @@ public class BotDeckBuildTest extends MageTestPlayerBase {
         assertCardsCount(deck, "Seedpod Squire", 0);
         assertCardsCount(deck, "Boros Reckoner", 0);
         assertCardsCount(deck, "Forest", LIMITED_DECK_LANDS);
+    }
+
+    @Test
+    public void test_Limited_DefaultDeckSize() {
+        // deck size 0 must build default 40 cards deck with spells, not lands only
+        List<Card> pool = new ArrayList<>();
+        addCards(pool, "Grizzly Bears", 30);
+
+        Deck deck = ComputerPlayer.buildDeck(0, pool, Collections.singletonList(ColoredManaSymbol.G));
+        assertDeck(deck, LIMITED_DECK_SIZE, LIMITED_DECK_LANDS, LIMITED_DECK_SPELLS);
+    }
+
+    @Test
+    public void test_Rating_SplitCardMustUseBestHalf() {
+        // split card can be cast by any half, so a red deck can use Fire // Ice
+        Card fireIce = createCard("Fire // Ice"); // {1}{R} // {1}{U}
+        int scoreRed = RateCard.rateCard(fireIce, Collections.singletonList(ColoredManaSymbol.R), false);
+        int scoreRedBlue = RateCard.rateCard(fireIce, Arrays.asList(ColoredManaSymbol.R, ColoredManaSymbol.U), false);
+        int scoreGreen = RateCard.rateCard(fireIce, Collections.singletonList(ColoredManaSymbol.G), false);
+        Assert.assertEquals("red deck must use red half", scoreRedBlue, scoreRed);
+        Assert.assertFalse("red deck must use red half", RateCard.isOffColorCard(fireIce, Collections.singletonList(ColoredManaSymbol.R)));
+        Assert.assertTrue("green deck can't use any half", RateCard.isOffColorCard(fireIce, Collections.singletonList(ColoredManaSymbol.G)));
+        Assert.assertTrue("green deck can't use any half", scoreGreen < scoreRed);
+    }
+
+    @Test
+    public void test_Rating_ExpensiveCardMustNotBeBetterByCostOnly() {
+        // same rarity, type and colored symbols, but diff mana value
+        List<ColoredManaSymbol> colors = Collections.singletonList(ColoredManaSymbol.G);
+        int scoreCheap = RateCard.rateCard(createCard("Grizzly Bears"), colors, false); // {1}{G}, common creature
+        int scoreExpensive = RateCard.rateCard(createCard("Spined Wurm"), colors, false); // {4}{G}, common creature
+        Assert.assertEquals("mana value must not change a score", scoreCheap, scoreExpensive);
+    }
+
+    @Test
+    public void test_Limited_SplitCardMustUseLandsForCastableHalfOnly() {
+        // red deck with Fire // Ice needs Mountains only
+        List<Card> pool = new ArrayList<>();
+        addCards(pool, "Raging Goblin", 15); // {R}
+        addCards(pool, "Fire // Ice", 8); // {1}{R} // {1}{U}
+
+        Deck deck = ComputerPlayer.buildDeck(LIMITED_DECK_SIZE, pool, Collections.singletonList(ColoredManaSymbol.R));
+        assertDeck(deck, LIMITED_DECK_SIZE, LIMITED_DECK_LANDS, LIMITED_DECK_SPELLS);
+        assertCardsCount(deck, "Fire // Ice", 8);
+        assertCardsCount(deck, "Mountain", LIMITED_DECK_LANDS);
+    }
+
+    @Test
+    public void test_Limited_MinCreatures() {
+        // deck must have 15 creatures if the pool has it
+        List<Card> pool = new ArrayList<>();
+        addCards(pool, "Harmonize", 15); // {2}{G}{G}, uncommon sorcery
+        addCards(pool, "Explosive Vegetation", 8); // {3}{G}, uncommon sorcery
+        addCards(pool, "Grizzly Bears", 20); // {1}{G}, common creature
+
+        Deck deck = ComputerPlayer.buildDeck(LIMITED_DECK_SIZE, pool, Collections.singletonList(ColoredManaSymbol.G));
+        assertDeck(deck, LIMITED_DECK_SIZE, LIMITED_DECK_LANDS, LIMITED_DECK_SPELLS);
+        assertCardsCount(deck, "Grizzly Bears", 15);
+    }
+
+    @Test
+    public void test_Limited_MaxExpensiveCards() {
+        // deck must have max 3 cards with mana value 6+
+        List<Card> pool = new ArrayList<>();
+        addCards(pool, "Craterhoof Behemoth", 10); // {5}{G}{G}{G}, mythic creature
+        addCards(pool, "Grizzly Bears", 30); // {1}{G}, common creature
+
+        Deck deck = ComputerPlayer.buildDeck(LIMITED_DECK_SIZE, pool, Collections.singletonList(ColoredManaSymbol.G));
+        assertDeck(deck, LIMITED_DECK_SIZE, LIMITED_DECK_LANDS, LIMITED_DECK_SPELLS);
+        assertCardsCount(deck, "Craterhoof Behemoth", 3);
+    }
+
+    @Test
+    public void test_Limited_MinCheapCards() {
+        // deck must have min 4 cards with mana value 2 or less
+        List<Card> pool = new ArrayList<>();
+        addCards(pool, "Ravenous Baloth", 25); // {2}{G}{G}, rare creature
+        addCards(pool, "Grizzly Bears", 10); // {1}{G}, common creature
+
+        Deck deck = ComputerPlayer.buildDeck(LIMITED_DECK_SIZE, pool, Collections.singletonList(ColoredManaSymbol.G));
+        assertDeck(deck, LIMITED_DECK_SIZE, LIMITED_DECK_LANDS, LIMITED_DECK_SPELLS);
+        assertCardsCount(deck, "Grizzly Bears", 4);
+    }
+
+    @Test
+    public void test_Limited_RoomIsNotExpensiveCard() {
+        // room card can be cast by any half, so it's not a card with mana value 6+ (cheapest half is used)
+        List<Card> pool = new ArrayList<>();
+        addCards(pool, "Bottomless Pool // Locker Room", 6); // {U} // {4}{U}, mana value of the whole card is 6
+        addCards(pool, "Coral Merfolk", 30); // {1}{U}, common creature
+
+        Deck deck = ComputerPlayer.buildDeck(LIMITED_DECK_SIZE, pool, Collections.singletonList(ColoredManaSymbol.U));
+        assertDeck(deck, LIMITED_DECK_SIZE, LIMITED_DECK_LANDS, LIMITED_DECK_SPELLS);
+        assertCardsCount(deck, "Bottomless Pool // Locker Room", 6);
+    }
+
+    private Card createCard(String cardName) {
+        CardInfo cardInfo = CardRepository.instance.findCard(cardName);
+        Assert.assertNotNull("can't find card " + cardName, cardInfo);
+        return cardInfo.createCard();
     }
 
     private void assertCardsCount(Deck deck, String cardName, int needAmount) {
