@@ -144,6 +144,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Glacial Fortress", 535, Rarity.RARE, mage.cards.g.GlacialFortress.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glittering Massif", 386, Rarity.RARE, mage.cards.g.GlitteringMassif.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glittering Massif", 536, Rarity.RARE, mage.cards.g.GlitteringMassif.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Glory to the Empire!", 68, Rarity.RARE, mage.cards.g.GloryToTheEmpire.class));
         cards.add(new SetCardInfo("Gnarling Targ", 69, Rarity.RARE, mage.cards.g.GnarlingTarg.class));
         cards.add(new SetCardInfo("Gorn Captain", 172, Rarity.COMMON, mage.cards.g.GornCaptain.class));
         cards.add(new SetCardInfo("Grand Crescendo", 222, Rarity.RARE, mage.cards.g.GrandCrescendo.class, NON_FULL_USE_VARIOUS));
