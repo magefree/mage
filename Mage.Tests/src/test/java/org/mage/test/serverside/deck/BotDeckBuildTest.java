@@ -59,6 +59,30 @@ public class BotDeckBuildTest extends MageTestPlayerBase {
                 .count());
     }
 
+    @Test
+    public void test_Limited_NonBasicLandsMustBeOnColor() {
+        // nonbasic lands that make only other colors must not be used
+        List<Card> pool = new ArrayList<>();
+        addCards(pool, "Grizzly Bears", 10);
+        addCards(pool, "Centaur Courser", 10);
+        addCards(pool, "Llanowar Elves", 10);
+        addCards(pool, "Oakhollow Village", 2); // G - on color
+        addCards(pool, "Lilypad Village", 2); // U - off color
+        addCards(pool, "Lupinflower Village", 2); // W - off color
+
+        Deck deck = ComputerPlayer.buildDeck(LIMITED_DECK_SIZE, pool, Collections.singletonList(ColoredManaSymbol.G));
+        assertDeck(deck, LIMITED_DECK_SIZE, LIMITED_DECK_LANDS, LIMITED_DECK_SPELLS);
+        assertCardsCount(deck, "Oakhollow Village", 2);
+        assertCardsCount(deck, "Lilypad Village", 0);
+        assertCardsCount(deck, "Lupinflower Village", 0);
+    }
+
+    private void assertCardsCount(Deck deck, String cardName, int needAmount) {
+        Assert.assertEquals("wrong amount of " + cardName, needAmount, deck.getMaindeckCards().stream()
+                .filter(card -> card.getName().equals(cardName))
+                .count());
+    }
+
     private void addCards(List<Card> pool, String cardName, int amount) {
         CardInfo cardInfo = CardRepository.instance.findCard(cardName);
         Assert.assertNotNull("can't find card " + cardName, cardInfo);

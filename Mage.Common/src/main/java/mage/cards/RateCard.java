@@ -1,5 +1,6 @@
 package mage.cards;
 
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
@@ -12,6 +13,7 @@ import mage.constants.SubType;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
+import mage.util.ManaUtil;
 import mage.view.CardView;
 import org.apache.log4j.Logger;
 
@@ -392,12 +394,40 @@ public final class RateCard {
      */
 
     private static int getManaCostScore(Card card, List<ColoredManaSymbol> allowedColors) {
+        // lands have no mana cost, so check the colors they make instead
+        if (isOffColorNonBasicLand(card, allowedColors)) {
+            return OFF_COLOR_PENALTY;
+        }
         return getManaCostScore(
                 card.getName(),
                 card.getManaValue(),
                 card.getManaCostSymbols(),
                 allowedColors
         );
+    }
+
+    /**
+     * Nonbasic land with colored mana in its rules (color identity), but without any allowed color
+     * (lands without colored mana symbols like "any color" or colorless ones are fine for any deck)
+     */
+    private static boolean isOffColorNonBasicLand(Card card, List<ColoredManaSymbol> allowedColors) {
+        if (allowedColors.isEmpty() || !card.isLand() || card.isBasic()) {
+            return false;
+        }
+        List<ObjectColor> landColors = ManaUtil.getColorIdentity(card).getColors();
+        if (landColors.isEmpty()) {
+            return false;
+        }
+        ObjectColor deckColors = new ObjectColor();
+        for (ColoredManaSymbol allowedColor : allowedColors) {
+            deckColors.addColor(new ObjectColor(allowedColor.toString()));
+        }
+        for (ObjectColor landColor : landColors) {
+            if (deckColors.shares(landColor)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private static int getManaCostScore(CardView cardview, List<ColoredManaSymbol> allowedColors) {
