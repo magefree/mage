@@ -187,6 +187,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Locutus of Borg", 97, Rarity.MYTHIC, mage.cards.l.LocutusOfBorg.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Loran of the Third Path", 229, Rarity.RARE, mage.cards.l.LoranOfTheThirdPath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Loran of the Third Path", 424, Rarity.RARE, mage.cards.l.LoranOfTheThirdPath.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Martok, Hero of the Empire", 23, Rarity.RARE, mage.cards.m.MartokHeroOfTheEmpire.class));
         cards.add(new SetCardInfo("Maturation Chamber", 231, Rarity.RARE, mage.cards.m.MaturationChamber.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Maturation Chamber", 24, Rarity.RARE, mage.cards.m.MaturationChamber.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mek'leth Berserker", 166, Rarity.COMMON, mage.cards.m.MeklethBerserker.class));
