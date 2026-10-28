@@ -26,6 +26,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("A Good Day to Die", 111, Rarity.COMMON, mage.cards.a.AGoodDayToDie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("A Good Day to Die", 428, Rarity.COMMON, mage.cards.a.AGoodDayToDie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("A Good Day to Die", 438, Rarity.COMMON, mage.cards.a.AGoodDayToDie.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Academy Instructor", 137, Rarity.UNCOMMON, mage.cards.a.AcademyInstructor.class));
         cards.add(new SetCardInfo("Amok Time", 183, Rarity.UNCOMMON, mage.cards.a.AmokTime.class));
         cards.add(new SetCardInfo("Andoria", 275, Rarity.COMMON, mage.cards.a.Andoria.class));
         cards.add(new SetCardInfo("Andromedan Automatons", 2, Rarity.COMMON, mage.cards.a.AndromedanAutomatons.class));
