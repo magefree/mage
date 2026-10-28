@@ -214,6 +214,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Underground River", 575, Rarity.RARE, mage.cards.u.UndergroundRiver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Unwinding Clock", 359, Rarity.RARE, mage.cards.u.UnwindingClock.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Unwinding Clock", 510, Rarity.RARE, mage.cards.u.UnwindingClock.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vic Fontaine, One Night Only", 108, Rarity.RARE, mage.cards.v.VicFontaineOneNightOnly.class));
         cards.add(new SetCardInfo("Warship Flight Crew", 168, Rarity.COMMON, mage.cards.w.WarshipFlightCrew.class));
         cards.add(new SetCardInfo("Wayfarer's Bauble", 511, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));
         cards.add(new SetCardInfo("Will Riker, Assuming Command", 140, Rarity.UNCOMMON, mage.cards.w.WillRikerAssumingCommand.class));
