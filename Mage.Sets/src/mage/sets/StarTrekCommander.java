@@ -396,6 +396,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("U.S.S. Defiant, Tough Little Ship", 361, Rarity.RARE, mage.cards.u.USSDefiantToughLittleShip.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("U.S.S. Enterprise-E, Sovereign", 244, Rarity.RARE, mage.cards.u.USSEnterpriseESovereign.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("U.S.S. Enterprise-E, Sovereign", 34, Rarity.RARE, mage.cards.u.USSEnterpriseESovereign.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("U.S.S. Prometheus, Prototype", 128, Rarity.RARE, mage.cards.u.USSPrometheusPrototype.class));
         cards.add(new SetCardInfo("Uhura, Xenolinguist", 182, Rarity.RARE, mage.cards.u.UhuraXenolinguist.class));
         cards.add(new SetCardInfo("Umbral Expanse", 414, Rarity.RARE, mage.cards.u.UmbralExpanse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Umbral Expanse", 574, Rarity.RARE, mage.cards.u.UmbralExpanse.class, NON_FULL_USE_VARIOUS));
