@@ -55,6 +55,11 @@ public final class RateCard {
     // Cards that aren't in the deck's colors get a penalty to their rating
     private static final int OFF_COLOR_PENALTY = -100;
 
+    // Score of a card without ratings (rarity + type + mana + removal) must be comparable with the file ratings [1..100]
+    // of other cards in the same booster or pool (mixed sets, cubes, cards without ratings in a set with ratings),
+    // so it uses a regression from all 17Lands sets (8622 cards): rating = 0.5 * heuristic score (spearman 0.46)
+    private static final float HEURISTIC_TO_RATING_SCALE = 0.5f;
+
     private static String RATINGS_DIR = "/ratings/";
     private static String RATINGS_SET_LIST = RATINGS_DIR + "setsWithRatings.csv";
 
@@ -105,9 +110,20 @@ public final class RateCard {
             }
         }
 
-        int typeMultiplier = typeMultiplier(card);
-        int score = getBaseCardScore(card) + 2 * typeMultiplier + getManaCostScore(card, allowedColors)
-                + 40 * isRemoval(card);
+        int score;
+        if (hasFileRating(card.getName(), card.getExpansionSetCode())) {
+            // file rating already contains the card's value (type, removal, mana cost), so use it as is
+            // (any bonuses on top make bot's picks worse, checked on real human picks from 17Lands)
+            score = getBaseCardScore(card);
+        } else {
+            // no ratings, so try to find card's value by rarity and other params
+            int heuristicScore = getBaseCardScore(card) + 2 * typeMultiplier(card)
+                    + getManaCostScore(card, Collections.emptyList()) + 40 * isRemoval(card);
+            score = Math.round(heuristicScore * HEURISTIC_TO_RATING_SCALE);
+        }
+        if (isOffColorCard(card, allowedColors)) {
+            score += OFF_COLOR_PENALTY;
+        }
 
         if (useCache && allowedColors.isEmpty()) {
             ratedCard.put(cacheKey, score);
@@ -129,9 +145,19 @@ public final class RateCard {
             }
         }
 
-        int typeMultiplier = typeMultiplier(cardview);
-        int score = getBaseCardScore(cardview) + 2 * typeMultiplier + getManaCostScore(cardview, allowedColors);
-        // Cardview does not have enough info to know the card is a removal.
+        // same as for card
+        int score;
+        if (hasFileRating(cardview.getName(), cardview.getExpansionSetCode())) {
+            score = getBaseCardScore(cardview);
+        } else {
+            // Cardview does not have enough info to know the card is a removal.
+            int heuristicScore = getBaseCardScore(cardview) + 2 * typeMultiplier(cardview)
+                    + getManaCostScore(cardview, Collections.emptyList());
+            score = Math.round(heuristicScore * HEURISTIC_TO_RATING_SCALE);
+        }
+        if (isOffColorCard(cardview, allowedColors)) {
+            score += OFF_COLOR_PENALTY;
+        }
 
         if (useCache && allowedColors.isEmpty()) {
             ratedCardView.put(cacheKey, score);
@@ -297,6 +323,14 @@ public final class RateCard {
             return bonusRatings.get(name);
         }
         return nameRatings.get(name);
+    }
+
+    /**
+     * Card has a rating from files (not a rarity based rating)
+     */
+    public static boolean hasFileRating(String name, String setCode) {
+        prepareAndLoadRatings();
+        return findFileRating(name, setCode) != null;
     }
 
     private static int getRarityRating(String name, Rarity rarity) {
@@ -479,6 +513,10 @@ public final class RateCard {
      */
     public static boolean isOffColorCard(Card card, List<ColoredManaSymbol> allowedColors) {
         return !allowedColors.isEmpty() && getManaCostScore(card, allowedColors) == OFF_COLOR_PENALTY;
+    }
+
+    public static boolean isOffColorCard(CardView cardview, List<ColoredManaSymbol> allowedColors) {
+        return !allowedColors.isEmpty() && getManaCostScore(cardview, allowedColors) == OFF_COLOR_PENALTY;
     }
 
     /**

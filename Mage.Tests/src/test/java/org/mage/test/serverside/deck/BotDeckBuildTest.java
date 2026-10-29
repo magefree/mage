@@ -224,6 +224,29 @@ public class BotDeckBuildTest extends MageTestPlayerBase {
     }
 
     @Test
+    public void test_Rating_CardWithRatingMustUseRatingOnly() {
+        // rating from file already contains the card's value (type, removal, mana cost), so no more bonuses
+        // FRA: Last Gasp {1}{B} - common removal
+        Card card = createCard("Last Gasp", "FRA");
+        int rating = RateCard.getBaseCardScore(card);
+        Assert.assertTrue("must have rating from file", RateCard.hasFileRating(card.getName(), card.getExpansionSetCode()));
+        Assert.assertEquals("no colors", rating, RateCard.rateCard(card, Collections.emptyList(), false));
+        Assert.assertEquals("on color", rating, RateCard.rateCard(card, Collections.singletonList(ColoredManaSymbol.B), false));
+        Assert.assertEquals("off color", rating - 100, RateCard.rateCard(card, Collections.singletonList(ColoredManaSymbol.W), false));
+    }
+
+    @Test
+    public void test_Rating_CardWithoutRatingMustUseRatingScale() {
+        // card without rating uses rarity + type + mana + removal, scaled to file ratings [1..100] by half
+        // Grizzly Bears {1}{G}: (common 40 + creature 2 * 10 + mana -2 for colored symbol) / 2 = 29
+        Card card = createCard("Grizzly Bears");
+        Assert.assertFalse("must have no ratings", RateCard.hasFileRating(card.getName(), card.getExpansionSetCode()));
+        Assert.assertEquals("no colors", 29, RateCard.rateCard(card, Collections.emptyList(), false));
+        Assert.assertEquals("on color", 29, RateCard.rateCard(card, Collections.singletonList(ColoredManaSymbol.G), false));
+        Assert.assertEquals("off color", 29 - 100, RateCard.rateCard(card, Collections.singletonList(ColoredManaSymbol.W), false));
+    }
+
+    @Test
     public void test_Rating_SetsListMustIgnoreEmptyLines() {
         // empty line in setsWithRatings.csv must not stop the loading of other sets
         List<String> lines = Arrays.asList("# comment", "", "lci", "   ", " fra ", "#dom");
