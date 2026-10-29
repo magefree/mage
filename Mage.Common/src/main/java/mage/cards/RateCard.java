@@ -508,6 +508,65 @@ public final class RateCard {
         );
     }
 
+    private static final List<List<ColoredManaSymbol>> TWO_COLORS_PAIRS = makeTwoColorsPairs();
+    private static final int DECK_COLORS_MIN_COLORED_CARDS = 3;
+
+    private static List<List<ColoredManaSymbol>> makeTwoColorsPairs() {
+        List<ColoredManaSymbol> wubrg = Arrays.asList(
+                ColoredManaSymbol.W, ColoredManaSymbol.U, ColoredManaSymbol.B, ColoredManaSymbol.R, ColoredManaSymbol.G
+        );
+        List<List<ColoredManaSymbol>> res = new ArrayList<>();
+        for (int i = 0; i < wubrg.size(); i++) {
+            for (int j = i + 1; j < wubrg.size(); j++) {
+                res.add(Collections.unmodifiableList(Arrays.asList(wubrg.get(i), wubrg.get(j))));
+            }
+        }
+        return Collections.unmodifiableList(res);
+    }
+
+    /**
+     * Two deck colors by already picked cards (draft) or a cards pool (sealed): the colors pair with the max sum
+     * of the cards scores. Must be called on each pick, so a draft can change the colors at any time.
+     * Checked on real human picks from 17Lands: it's much closer to humans than colors of the first best cards.
+     *
+     * @return empty list if there are not enough colored cards yet (no color restrictions)
+     */
+    public static List<ColoredManaSymbol> chooseDeckColors(Collection<Card> cards) {
+        int coloredCards = 0;
+        int[] pairsScore = new int[TWO_COLORS_PAIRS.size()];
+        for (Card card : cards) {
+            boolean[] isOffColor = new boolean[TWO_COLORS_PAIRS.size()];
+            boolean isColored = false;
+            for (int i = 0; i < TWO_COLORS_PAIRS.size(); i++) {
+                isOffColor[i] = isOffColorCard(card, TWO_COLORS_PAIRS.get(i));
+                isColored |= isOffColor[i];
+            }
+            if (!isColored) {
+                // colorless card is good for any colors, so it can't help to choose
+                continue;
+            }
+            coloredCards++;
+            int score = rateCard(card, Collections.emptyList());
+            for (int i = 0; i < TWO_COLORS_PAIRS.size(); i++) {
+                if (!isOffColor[i]) {
+                    pairsScore[i] += score;
+                }
+            }
+        }
+        if (coloredCards < DECK_COLORS_MIN_COLORED_CARDS) {
+            return new ArrayList<>();
+        }
+
+        // same scores - first pair by WUBRG order
+        int bestPair = 0;
+        for (int i = 1; i < TWO_COLORS_PAIRS.size(); i++) {
+            if (pairsScore[i] > pairsScore[bestPair]) {
+                bestPair = i;
+            }
+        }
+        return new ArrayList<>(TWO_COLORS_PAIRS.get(bestPair));
+    }
+
     /**
      * Card with mana symbols of other colors (it's useless for a deck with allowed colors)
      */

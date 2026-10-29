@@ -247,6 +247,36 @@ public class BotDeckBuildTest extends MageTestPlayerBase {
     }
 
     @Test
+    public void test_Colors_MustUseMaxSumOfCardsAndCanBeChanged() {
+        // deck colors = colors pair with the max sum of cards scores, it's recalculated on each pick
+        // all cards without ratings: common creatures with one colored mana symbol (same score)
+        List<Card> picks = new ArrayList<>();
+        addCards(picks, "Raging Goblin", 3); // {R}
+        List<ColoredManaSymbol> colors = RateCard.chooseDeckColors(picks);
+        Assert.assertEquals("first picks - red", 2, colors.size());
+        Assert.assertTrue("first picks - red", colors.contains(ColoredManaSymbol.R));
+
+        // new picks of other colors must change the colors
+        addCards(picks, "Coral Merfolk", 5); // {1}{U}
+        addCards(picks, "Glory Seeker", 4); // {1}{W}
+        Assert.assertEquals("more blue and white picks", Arrays.asList(ColoredManaSymbol.W, ColoredManaSymbol.U),
+                RateCard.chooseDeckColors(picks));
+    }
+
+    @Test
+    public void test_Colors_MustIgnoreColorlessCardsAndWaitColoredCards() {
+        // colors can be chosen after 3 colored cards only
+        List<Card> picks = new ArrayList<>();
+        addCards(picks, "Alpha Myr", 10); // {2}, colorless
+        addCards(picks, "Raging Goblin", 2); // {R}
+        Assert.assertEquals("not enough colored cards", 0, RateCard.chooseDeckColors(picks).size());
+
+        addCards(picks, "Coral Merfolk", 1); // {1}{U}
+        Assert.assertEquals("enough colored cards", Arrays.asList(ColoredManaSymbol.U, ColoredManaSymbol.R),
+                RateCard.chooseDeckColors(picks));
+    }
+
+    @Test
     public void test_Rating_SetsListMustIgnoreEmptyLines() {
         // empty line in setsWithRatings.csv must not stop the loading of other sets
         List<String> lines = Arrays.asList("# comment", "", "lci", "   ", " fra ", "#dom");
