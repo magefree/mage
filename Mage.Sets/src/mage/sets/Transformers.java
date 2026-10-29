@@ -36,8 +36,8 @@ public final class Transformers extends ExpansionSet {
         cards.add(new SetCardInfo("Megatron, Tyrant", 26, Rarity.MYTHIC, mage.cards.m.MegatronTyrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Optimus Prime, Hero", 13, Rarity.MYTHIC, mage.cards.o.OptimusPrimeHero.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Optimus Prime, Hero", 27, Rarity.MYTHIC, mage.cards.o.OptimusPrimeHero.class, NON_FULL_USE_VARIOUS));
-        // cards.add(new SetCardInfo("Prowl, Stoic Strategist", 1, Rarity.MYTHIC, mage.cards.a.ProwlStoicStrategist.class, NON_FULL_USE_VARIOUS));
-        // cards.add(new SetCardInfo("Prowl, Stoic Strategist", 16, Rarity.MYTHIC, mage.cards.a.ProwlStoicStrategist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Prowl, Stoic Strategist", 1, Rarity.MYTHIC, mage.cards.p.ProwlStoicStrategist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Prowl, Stoic Strategist", 16, Rarity.MYTHIC, mage.cards.p.ProwlStoicStrategist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ratchet, Field Medic", 2, Rarity.MYTHIC, mage.cards.r.RatchetFieldMedic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ratchet, Field Medic", 17, Rarity.MYTHIC, mage.cards.r.RatchetFieldMedic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Slicer, Hired Muscle", 6, Rarity.MYTHIC, mage.cards.s.SlicerHiredMuscle.class, NON_FULL_USE_VARIOUS));
