@@ -202,6 +202,28 @@ public class BotDeckBuildTest extends MageTestPlayerBase {
     }
 
     @Test
+    public void test_Rating_SameCardMustUseRatingOfOwnSet() {
+        // draft rating is a card place among the cards of one set, so same card can have diff ratings in diff sets
+        // Lightning Strike: XLN - one of the best commons, DFT - average card
+        int ratingXLN = RateCard.getBaseCardScore(createCard("Lightning Strike", "XLN"));
+        int ratingDFT = RateCard.getBaseCardScore(createCard("Lightning Strike", "DFT"));
+        Assert.assertTrue("must use rating of own set: XLN " + ratingXLN + ", DFT " + ratingDFT, ratingXLN > ratingDFT + 20);
+
+        // set without ratings file must use max rating from other sets (M15 has no file)
+        Assert.assertEquals("set without ratings must use max rating from other sets",
+                ratingXLN, RateCard.getBaseCardScore(createCard("Lightning Strike", "M15")));
+    }
+
+    @Test
+    public void test_Rating_BonusSheetCardMustUseRatingOfBoosterSet() {
+        // OTJ boosters contain OTP cards (Breaking News bonus sheet), so OTJ ratings file contains it too
+        // Electrodominance: RNA - one of the best uncommons, OTJ - average card from bonus sheet
+        int ratingRNA = RateCard.getBaseCardScore(createCard("Electrodominance", "RNA"));
+        int ratingOTP = RateCard.getBaseCardScore(createCard("Electrodominance", "OTP"));
+        Assert.assertTrue("bonus sheet card must use rating of booster's set: RNA " + ratingRNA + ", OTP " + ratingOTP, ratingRNA > ratingOTP + 20);
+    }
+
+    @Test
     public void test_Rating_SetsListMustIgnoreEmptyLines() {
         // empty line in setsWithRatings.csv must not stop the loading of other sets
         List<String> lines = Arrays.asList("# comment", "", "lci", "   ", " fra ", "#dom");
@@ -273,6 +295,15 @@ public class BotDeckBuildTest extends MageTestPlayerBase {
     private Card createCard(String cardName) {
         CardInfo cardInfo = CardRepository.instance.findCard(cardName);
         Assert.assertNotNull("can't find card " + cardName, cardInfo);
+        return cardInfo.createCard();
+    }
+
+    private Card createCard(String cardName, String setCode) {
+        CardInfo cardInfo = CardRepository.instance.findCards(cardName).stream()
+                .filter(info -> info.getSetCode().equals(setCode))
+                .findFirst()
+                .orElse(null);
+        Assert.assertNotNull("can't find card " + cardName + " in " + setCode, cardInfo);
         return cardInfo.createCard();
     }
 

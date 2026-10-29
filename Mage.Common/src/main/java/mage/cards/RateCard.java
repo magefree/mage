@@ -32,8 +32,12 @@ public final class RateCard {
     public static final boolean PRELOAD_CARD_RATINGS_ON_STARTUP = false; // warning, rating and card classes preloading can cause lags for users with low memory
 
     // caches are shared by all threads and AI/bots, so make sure it's thread safe
-    private static final Map<String, Integer> baseRatings = new ConcurrentHashMap<>();
-    private static final Map<String, Integer> ratedCard = new ConcurrentHashMap<>();
+    // draft rating is a card place among the cards of one set, so same card can have diff ratings in diff sets
+    private static final Map<String, Map<String, Integer>> setRatings = new ConcurrentHashMap<>(); // set code -> card name -> rating from set file
+    private static final Map<String, Integer> bonusRatings = new ConcurrentHashMap<>(); // card name -> rating from a file of another set (bonus sheet, example: OTP cards in OTJ file)
+    private static final Map<String, Integer> nameRatings = new ConcurrentHashMap<>(); // card name -> max rating from all files (for sets without ratings file)
+    private static final Map<String, Integer> baseRatings = new ConcurrentHashMap<>(); // set code + card name -> base rating
+    private static final Map<String, Integer> ratedCard = new ConcurrentHashMap<>(); // set code + card name -> score
     private static final Map<String, Integer> ratedCardView = new ConcurrentHashMap<>(); // Rating is not exactly the same for CardView, so cached in a different map.
     private static boolean isLoaded = false;
 
@@ -93,9 +97,9 @@ public final class RateCard {
             return 0;
         }
 
-        String name = card.getName();
+        String cacheKey = getCardKey(card.getExpansionSetCode(), card.getName());
         if (useCache && allowedColors.isEmpty()) {
-            Integer cachedScore = ratedCard.get(name);
+            Integer cachedScore = ratedCard.get(cacheKey);
             if (cachedScore != null) {
                 return cachedScore;
             }
@@ -106,7 +110,7 @@ public final class RateCard {
                 + 40 * isRemoval(card);
 
         if (useCache && allowedColors.isEmpty()) {
-            ratedCard.put(name, score);
+            ratedCard.put(cacheKey, score);
         }
 
         return score;
@@ -117,9 +121,9 @@ public final class RateCard {
             return 0;
         }
 
-        String name = cardview.getName();
+        String cacheKey = getCardKey(cardview.getExpansionSetCode(), cardview.getName());
         if (useCache && allowedColors.isEmpty()) {
-            Integer cachedScore = ratedCardView.get(name);
+            Integer cachedScore = ratedCardView.get(cacheKey);
             if (cachedScore != null) {
                 return cachedScore;
             }
@@ -130,7 +134,7 @@ public final class RateCard {
         // Cardview does not have enough info to know the card is a removal.
 
         if (useCache && allowedColors.isEmpty()) {
-            ratedCardView.put(name, score);
+            ratedCardView.put(cacheKey, score);
         }
 
         return score;
@@ -240,6 +244,7 @@ public final class RateCard {
     public static int getBaseCardScore(Card card) {
         return getBaseScore(
                 card.getName(),
+                card.getExpansionSetCode(),
                 card.getRarity()
         );
     }
@@ -247,19 +252,54 @@ public final class RateCard {
     public static int getBaseCardScore(CardView cardview) {
         return getBaseScore(
                 cardview.getName(),
+                cardview.getExpansionSetCode(),
                 cardview.getRarity()
         );
     }
 
-    protected static int getBaseScore(String name, Rarity rarity) {
-        // same card name must have same rating
+    protected static int getBaseScore(String name, String setCode, Rarity rarity) {
+        // same card name in same set must have same rating
 
         // ratings from files
         // lazy loading on first request
         prepareAndLoadRatings();
 
-        // ratings from card rarity
-        // some cards can have different rarity -- it's will be used from first set
+        String key = getCardKey(setCode, name);
+        Integer cachedRating = baseRatings.get(key);
+        if (cachedRating != null) {
+            return cachedRating;
+        }
+
+        Integer newRating = findFileRating(name, setCode);
+        if (newRating == null) {
+            newRating = getRarityRating(name, rarity);
+        }
+
+        // some cards can have different rarity in same set -- it's will be used from first card
+        Integer oldRating = baseRatings.putIfAbsent(key, newRating);
+        return oldRating != null ? oldRating : newRating;
+    }
+
+    /**
+     * Rating from files, priority:
+     * 1. file of the card's set;
+     * 2. file of another set that contains the card as a bonus sheet card (example: OTP cards in OTJ boosters and OTJ file);
+     * 3. max rating from all files (reprint in a set without file, so it can be another scale than other cards of the set)
+     *
+     * @return null for card without ratings
+     */
+    private static Integer findFileRating(String name, String setCode) {
+        Map<String, Integer> ratings = setRatings.get(getSetKey(setCode));
+        if (ratings != null && ratings.containsKey(name)) {
+            return ratings.get(name);
+        }
+        if (bonusRatings.containsKey(name)) {
+            return bonusRatings.get(name);
+        }
+        return nameRatings.get(name);
+    }
+
+    private static int getRarityRating(String name, Rarity rarity) {
         int newRating;
         if (rarity != null) {
             switch (rarity) {
@@ -287,18 +327,15 @@ public final class RateCard {
             // tokens
             newRating = DEFAULT_NOT_RATED_CARD_RATING;
         }
+        return newRating;
+    }
 
-        int oldRating = baseRatings.getOrDefault(name, 0);
-        if (oldRating != 0 && oldRating != newRating) {
-            //log.info("card have different rating by sets: " + card.getName() + " (" + oldRating + " <> " + newRating + ")");
-        }
+    private static String getSetKey(String setCode) {
+        return setCode == null ? "" : setCode.toUpperCase(Locale.ENGLISH);
+    }
 
-        if (oldRating != 0) {
-            return oldRating;
-        } else {
-            baseRatings.put(name, newRating);
-            return newRating;
-        }
+    private static String getCardKey(String setCode, String name) {
+        return getSetKey(setCode) + "-" + name;
     }
 
     /**
@@ -322,7 +359,7 @@ public final class RateCard {
             // one broken file must not stop other sets
             String rateFile = RATINGS_DIR + code + ".csv";
             try {
-                readFromFile(rateFile);
+                readFromFile(rateFile, code);
             } catch (Exception e) {
                 log.error("Failed to read ratings set file: " + rateFile, e);
             }
@@ -359,8 +396,7 @@ public final class RateCard {
     /**
      * reads ratings from the file
      */
-    private synchronized static void readFromFile(String path) {
-        // card must get max rating from multiple cards
+    private synchronized static void readFromFile(String path, String setCode) {
         Integer min = Integer.MAX_VALUE, max = 0;
         Map<String, Integer> thisFileRatings = new HashMap<>();
 
@@ -381,17 +417,26 @@ public final class RateCard {
             }
         }
 
+        // cards from other sets inside the file (bonus sheets like OTP cards in OTJ file)
+        ExpansionSet set = Sets.findSet(setCode.toUpperCase(Locale.ENGLISH));
+        Set<String> setCardNames = new HashSet<>();
+        if (set != null) {
+            set.getSetCardInfo().forEach(info -> setCardNames.add(info.getName()));
+        }
+
         // normalize for the file to [1..100]
-        // warning, 0 means no rating (see getBaseScore), so the worst card of the file must get 1, not 0
+        Map<String, Integer> fileRatings = new HashMap<>();
         for (Map.Entry<String, Integer> ratingByName : thisFileRatings.entrySet()) {
             int r = ratingByName.getValue();
             String name = ratingByName.getKey();
             int newRating = max > min ? 1 + (int) (99.0f * (r - min) / (max - min)) : 100;
-            int oldRating = baseRatings.getOrDefault(name, 0);
-            if (newRating > oldRating) {
-                baseRatings.put(name, newRating);
+            fileRatings.put(name, newRating);
+            nameRatings.merge(name, newRating, Math::max);
+            if (set != null && !setCardNames.contains(name)) {
+                bonusRatings.merge(name, newRating, Math::max);
             }
         }
+        setRatings.put(getSetKey(setCode), fileRatings);
     }
 
     private static final int[] SINGLE_PENALTY = {0, 1, 1, 3, 6, 9};
