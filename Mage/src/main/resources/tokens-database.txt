@@ -3140,6 +3140,27 @@
 
 # TRK
 |TOK:TRK|Human||Human01Token|
+|TOK:TRK|Klingon Warrior|1|KlingonWarriorToken|
+|TOK:TRK|Klingon Warrior|2|KlingonWarriorToken|
+|TOK:TRK|Klingon Warrior|3|KlingonWarriorToken|
+|TOK:TRK|Officer|1|OfficerToken|
+|TOK:TRK|Officer|2|OfficerToken|
+|TOK:TRK|Officer|3|OfficerToken|
+|TOK:TRK|Officer|4|OfficerToken|
+|TOK:TRK|Officer|5|OfficerToken|
+|TOK:TRK|Porthos||PorthosToken|
+|TOK:TRK|Borg|1|BorgToken|
+|TOK:TRK|Borg|2|BorgToken|
+|TOK:TRK|Clue||ClueArtifactToken|
+|TOK:TRK|Treasure||TreasureToken|
+
+# TRC
+|TOK:TRC|Tribble||TribbleToken|
+|TOK:TRC|Ape||ApeToken|
+|TOK:TRC|Beast||BeastToken|
+|TOK:TRC|Insect||InsectToken|
+|TOK:TRC|Citizen||CitizenGreenWhiteToken|
+#|TOK:TRC|Spacecraft Illusion||SpacecraftIllusionToken|
 
 # JVC
 |TOK:JVC|Elemental Shaman||ElementalShamanToken|

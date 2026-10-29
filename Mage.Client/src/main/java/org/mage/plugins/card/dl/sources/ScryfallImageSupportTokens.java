@@ -3109,6 +3109,27 @@ public class ScryfallImageSupportTokens {
 
             // TRK
             put("TRK/Human", "https://api.scryfall.com/cards/ttrk/1?format=image");
+            put("TRK/Klingon Warrior/1", "https://api.scryfall.com/cards/ttrk/3?format=image");
+            put("TRK/Klingon Warrior/2", "https://api.scryfall.com/cards/ttrk/4?format=image");
+            put("TRK/Klingon Warrior/3", "https://api.scryfall.com/cards/ttrk/5?format=image");
+            put("TRK/Officer/1", "https://api.scryfall.com/cards/ttrk/6?format=image");
+            put("TRK/Officer/2", "https://api.scryfall.com/cards/ttrk/9?format=image");
+            put("TRK/Officer/3", "https://api.scryfall.com/cards/ttrk/9?format=image");
+            put("TRK/Officer/4", "https://api.scryfall.com/cards/ttrk/10?format=image");
+            put("TRK/Officer/5", "https://api.scryfall.com/cards/ttrk/12?format=image");
+            put("TRK/Porthos", "https://api.scryfall.com/cards/ttrk/17?format=image");
+            put("TRK/Borg/1", "https://api.scryfall.com/cards/ttrk/19?format=image");
+            put("TRK/Borg/2", "https://api.scryfall.com/cards/ttrk/20?format=image");
+            put("TRK/Clue", "https://api.scryfall.com/cards/ttrk/21?format=image");
+            put("TRK/Treasure", "https://api.scryfall.com/cards/ttrk/26?format=image");
+
+            // TRC
+            put("TRC/Tribble", "https://api.scryfall.com/cards/ttrc/2?format=image");
+            put("TRC/Ape", "https://api.scryfall.com/cards/ttrc/3?format=image");
+            put("TRC/Beast", "https://api.scryfall.com/cards/ttrc/4?format=image");
+            put("TRC/Insect", "https://api.scryfall.com/cards/ttrc/5?format=image");
+            put("TRC/Citizen", "https://api.scryfall.com/cards/ttrc/6?format=image");
+            // put("TRC/Spacecraft Illusion", "https://api.scryfall.com/cards/ttrc/7?format=image");
 
             // UGL
             put("UGL/Goblin", "https://api.scryfall.com/cards/tugl/92?format=image");
