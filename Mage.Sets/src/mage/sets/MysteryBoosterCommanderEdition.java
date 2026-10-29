@@ -65,6 +65,7 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Ruby Collector", 61, Rarity.UNCOMMON, mage.cards.r.RubyCollector.class));
         cards.add(new SetCardInfo("Selenia, the Cursed Heart", 50, Rarity.RARE, mage.cards.s.SeleniaTheCursedHeart.class));
         cards.add(new SetCardInfo("Seluma, Light of Aysen", 4, Rarity.RARE, mage.cards.s.SelumaLightOfAysen.class));
+        cards.add(new SetCardInfo("Sifa Grent", 51, Rarity.RARE, mage.cards.s.SifaGrent.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 77, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("The Everforger", 59, Rarity.RARE, mage.cards.t.TheEverforger.class));
         cards.add(new SetCardInfo("Thought Vessel", 78, Rarity.UNCOMMON, mage.cards.t.ThoughtVessel.class));
