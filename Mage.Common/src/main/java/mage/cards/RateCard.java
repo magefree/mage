@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.*;
+import mage.cards.decks.CardNameUtil;
 import mage.cards.repository.CardScanner;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
@@ -17,7 +18,6 @@ import mage.util.ManaUtil;
 import mage.view.CardView;
 import org.apache.log4j.Logger;
 
-import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -310,33 +310,50 @@ public final class RateCard {
         }
 
         // load sets list
-        List<String> setsToLoad = new LinkedList<>();
+        List<String> setsToLoad = new ArrayList<>();
         try {
-            InputStream is = RateCard.class.getResourceAsStream(RATINGS_SET_LIST);
-            Scanner scanner = new Scanner(is);
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                if (!line.substring(0, 1).equals("#")) {
-                    setsToLoad.add(line);
-                }
-            }
+            setsToLoad.addAll(parseSetsList(readLines(RATINGS_SET_LIST)));
         } catch (Throwable e) {
             log.error("Failed to read ratings sets list file: " + RATINGS_SET_LIST, e);
         }
 
         // load set data
-        String rateFile = "";
-        try {
-            for (String code : setsToLoad) {
-                //log.info("Reading ratings for the set " + code);
-                rateFile = RATINGS_DIR + code + ".csv";
+        for (String code : setsToLoad) {
+            // one broken file must not stop other sets
+            String rateFile = RATINGS_DIR + code + ".csv";
+            try {
                 readFromFile(rateFile);
+            } catch (Exception e) {
+                log.error("Failed to read ratings set file: " + rateFile, e);
             }
-        } catch (Exception e) {
-            log.error("Failed to read ratings set file: " + rateFile, e);
         }
 
         isLoaded = true;
+    }
+
+    /**
+     * Set codes from the lines of setsWithRatings.csv (comments and empty lines are ignored)
+     */
+    public static List<String> parseSetsList(List<String> lines) {
+        List<String> res = new ArrayList<>();
+        for (String line : lines) {
+            String code = line.trim();
+            if (!code.isEmpty() && !code.startsWith("#")) {
+                res.add(code);
+            }
+        }
+        return res;
+    }
+
+    private static List<String> readLines(String path) {
+        // warning, files contain non ascii card names, so use utf-8 (default charset depends on OS before java 18)
+        List<String> res = new ArrayList<>();
+        try (Scanner scanner = new Scanner(RateCard.class.getResourceAsStream(path), "UTF-8")) {
+            while (scanner.hasNextLine()) {
+                res.add(scanner.nextLine());
+            }
+        }
+        return res;
     }
 
     /**
@@ -348,15 +365,12 @@ public final class RateCard {
         Map<String, Integer> thisFileRatings = new HashMap<>();
 
         // load
-        InputStream is = RateCard.class.getResourceAsStream(path);
-        Scanner scanner = new Scanner(is);
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
+        for (String line : readLines(path)) {
             String[] s = line.split(":");
             if (s.length == 2) {
                 Integer rating = Integer.parseInt(s[1].trim());
-                String name = s[0].trim();
-                name = name.replace("’", "'");
+                // files keep original names from the data source (17Lands: Tura Kennerüd), xmage uses ascii names
+                String name = CardNameUtil.normalizeCardName(s[0].trim());
                 if (rating > max) {
                     max = rating;
                 }
@@ -368,10 +382,11 @@ public final class RateCard {
         }
 
         // normalize for the file to [1..100]
+        // warning, 0 means no rating (see getBaseScore), so the worst card of the file must get 1, not 0
         for (Map.Entry<String, Integer> ratingByName : thisFileRatings.entrySet()) {
             int r = ratingByName.getValue();
             String name = ratingByName.getKey();
-            int newRating = (int) (100.0f * (r - min) / (max - min));
+            int newRating = max > min ? 1 + (int) (99.0f * (r - min) / (max - min)) : 100;
             int oldRating = baseRatings.getOrDefault(name, 0);
             if (newRating > oldRating) {
                 baseRatings.put(name, newRating);
