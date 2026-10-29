@@ -105,8 +105,11 @@ public abstract class Watcher implements Serializable {
             }
             T watcher = (T) constructor.newInstance(args);
             List<Field> allFields = new ArrayList<>();
-            allFields.addAll(Arrays.asList(getClass().getDeclaredFields()));
-            allFields.addAll(Arrays.asList(getClass().getSuperclass().getDeclaredFields()));
+            Class<?> currentClass = this.getClass();
+            while (currentClass != null && Watcher.class.isAssignableFrom(currentClass)) {
+                allFields.addAll(Arrays.asList(currentClass.getDeclaredFields()));
+                currentClass = currentClass.getSuperclass();
+            }
 
             // copy field's values
             for (Field field : allFields) {
