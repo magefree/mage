@@ -18,37 +18,37 @@ import mage.target.TargetPlayer;
  *
  * @author NinthWorld
  */
-public final class SinsOfTheFather extends CardImpl {
+public final class SinsOfTheFatherStarWars extends CardImpl {
 
-    public SinsOfTheFather(UUID ownerId, CardSetInfo setInfo) {
+    public SinsOfTheFatherStarWars(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        
+
 
         // Exile target player's graveyard. That player loses 1 life for each instant or sorcery card exiled this way.
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new SinsOfTheFatherEffect());
+        this.getSpellAbility().addEffect(new TheSinsOfTheFatherEffect());
     }
 
-    private SinsOfTheFather(final SinsOfTheFather card) {
+    private SinsOfTheFatherStarWars(final SinsOfTheFatherStarWars card) {
         super(card);
     }
 
     @Override
-    public SinsOfTheFather copy() {
-        return new SinsOfTheFather(this);
+    public SinsOfTheFatherStarWars copy() {
+        return new SinsOfTheFatherStarWars(this);
     }
 }
 
-class SinsOfTheFatherEffect extends OneShotEffect {
+class TheSinsOfTheFatherEffect extends OneShotEffect {
 
     private static final FilterInstantOrSorceryCard filter = new FilterInstantOrSorceryCard();
 
-    public SinsOfTheFatherEffect() {
+    public TheSinsOfTheFatherEffect() {
         super(Outcome.Detriment);
         staticText = "Exile target player's graveyard. That player loses 1 life for each instant or sorcery card exiled this way";
     }
 
-    private SinsOfTheFatherEffect(final SinsOfTheFatherEffect effect) {
+    private TheSinsOfTheFatherEffect(final TheSinsOfTheFatherEffect effect) {
         super(effect);
     }
 
@@ -72,7 +72,7 @@ class SinsOfTheFatherEffect extends OneShotEffect {
     }
 
     @Override
-    public SinsOfTheFatherEffect copy() {
-        return new SinsOfTheFatherEffect(this);
+    public TheSinsOfTheFatherEffect copy() {
+        return new TheSinsOfTheFatherEffect(this);
     }
 }
