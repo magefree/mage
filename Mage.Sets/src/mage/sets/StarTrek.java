@@ -35,6 +35,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Anthropological Mission", 46, Rarity.UNCOMMON, mage.cards.a.AnthropologicalMission.class));
         cards.add(new SetCardInfo("Armus, Skin of Evil", 91, Rarity.RARE, mage.cards.a.ArmusSkinOfEvil.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Armus, Skin of Evil", 454, Rarity.RARE, mage.cards.a.ArmusSkinOfEvil.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Artificial Anomaly", 276, Rarity.UNCOMMON, mage.cards.a.ArtificialAnomaly.class));
         cards.add(new SetCardInfo("Assault Drone", 92, Rarity.COMMON, mage.cards.a.AssaultDrone.class));
         cards.add(new SetCardInfo("Assembly Specialist", 4, Rarity.UNCOMMON, mage.cards.a.AssemblySpecialist.class));
         cards.add(new SetCardInfo("Astute Terraformer", 184, Rarity.COMMON, mage.cards.a.AstuteTerraformer.class));
