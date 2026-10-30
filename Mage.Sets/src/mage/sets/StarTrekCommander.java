@@ -290,6 +290,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ruinous Ultimatum", 329, Rarity.RARE, mage.cards.r.RuinousUltimatum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ruinous Ultimatum", 479, Rarity.RARE, mage.cards.r.RuinousUltimatum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Run Amok", 582, Rarity.COMMON, mage.cards.r.RunAmok.class));
+        cards.add(new SetCardInfo("Sam Kirk, Xenoanthropologist", 49, Rarity.RARE, mage.cards.s.SamKirkXenoanthropologist.class));
         cards.add(new SetCardInfo("Satyr Wayfinder", 469, Rarity.COMMON, mage.cards.s.SatyrWayfinder.class));
         cards.add(new SetCardInfo("Scattered Groves", 553, Rarity.RARE, mage.cards.s.ScatteredGroves.class));
         cards.add(new SetCardInfo("Scorched Geyser", 398, Rarity.RARE, mage.cards.s.ScorchedGeyser.class, NON_FULL_USE_VARIOUS));
