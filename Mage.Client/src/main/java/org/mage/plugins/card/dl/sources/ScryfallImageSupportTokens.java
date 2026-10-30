@@ -2,6 +2,7 @@ package org.mage.plugins.card.dl.sources;
 
 import mage.cards.repository.TokenRepository;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ public class ScryfallImageSupportTokens {
             //   api example: https://api.scryfall.com/cards/trix/6?format=image
             //   api example: https://api.scryfall.com/cards/tvow/21/en?format=image&face=back
             // api format is primary (direct images links can be changed by scryfall)
+            // download uses direct links from scryfall's bulk data for api links (same set/number/lang/face, no api calls)
             //
             // code form for one token:
             //   set/token_name
@@ -3011,7 +3013,7 @@ public class ScryfallImageSupportTokens {
             put("MSH/Soldier/3", "https://api.scryfall.com/cards/tmsh/23?format=image");
             put("MSH/Squirrel", "https://api.scryfall.com/cards/tmsh/14?format=image");
             put("MSH/Sturdy Shield", "https://api.scryfall.com/cards/tmsh/21?format=image");
-            put("MSH/The Tiger God", "https://api.scryfall.com/cards/tmsh/1?5format=image");
+            put("MSH/The Tiger God", "https://api.scryfall.com/cards/tmsh/1?format=image");
             put("MSH/The Void", "https://api.scryfall.com/cards/tmsh/10?format=image");
             put("MSH/Treasure/1", "https://api.scryfall.com/cards/tmsh/22?format=image");
             put("MSH/Treasure/2", "https://api.scryfall.com/cards/tmsh/27?format=image");
@@ -3225,6 +3227,13 @@ public class ScryfallImageSupportTokens {
 
     public static Map<String, String> getSupportedSets() {
         return supportedSets;
+    }
+
+    /**
+     * All tokens links: set/token_name[/N] -> link (for tests)
+     */
+    static Map<String, String> getTokenLinks() {
+        return Collections.unmodifiableMap(supportedCards);
     }
 
     public static String findTokenLink(String setCode, String tokenName, Integer imageNumber) {

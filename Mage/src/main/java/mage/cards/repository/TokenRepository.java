@@ -351,7 +351,7 @@ public enum TokenRepository {
 
         // Speed
         // https://scryfall.com/search?q=oracleid%3Aa0ddfd98-17ca-4327-b4db-8188af39f0f8+include%3Aextras&unique=art&as=grid&order=released
-        res.add(createXmageToken(XMAGE_IMAGE_NAME_SPEED, 1, "https://api.scryfall.com/cards/tdft/14/en?format=image&&face=back"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_SPEED, 1, "https://api.scryfall.com/cards/tdft/14/en?format=image&face=back"));
 
         // Helper emblem (for global card hints)
         // use backface for it
