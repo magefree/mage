@@ -113,6 +113,25 @@ public class BotDeckBuildTest extends MageTestPlayerBase {
     }
 
     @Test
+    public void test_Limited_NonBasicLandsMustBeColorSources() {
+        // nonbasic lands of the deck give colors too, so basic lands must cover the missing colors only
+        // (17 lands: 8.5 G + 8.5 W sources needed, 4 green nonbasic lands -> 13 basic lands as 4.5 G + 8.5 W)
+        List<Card> pool = new ArrayList<>();
+        addCards(pool, "Grizzly Bears", 10); // {1}{G}
+        addCards(pool, "Savannah Lions", 10); // {W}
+        addCards(pool, "Ornithopter", 3); // {0}
+        addCards(pool, "Treetop Village", 4); // {T}: Add {G}
+
+        Deck deck = ComputerPlayer.buildDeck(LIMITED_DECK_SIZE, pool, Arrays.asList(ColoredManaSymbol.G, ColoredManaSymbol.W));
+        assertDeck(deck, LIMITED_DECK_SIZE, LIMITED_DECK_LANDS, LIMITED_DECK_SPELLS);
+        assertCardsCount(deck, "Treetop Village", 4);
+        long forests = deck.getMaindeckCards().stream().filter(card -> card.getName().equals("Forest")).count();
+        long plains = deck.getMaindeckCards().stream().filter(card -> card.getName().equals("Plains")).count();
+        Assert.assertTrue("basic lands must compensate green nonbasic lands: forests " + forests + ", plains " + plains,
+                (forests == 4 && plains == 9) || (forests == 5 && plains == 8));
+    }
+
+    @Test
     public void test_Limited_RedDeckMustNotGetPlains() {
         // remaining lands after the colors split must go to the deck colors
         List<Card> pool = new ArrayList<>();
