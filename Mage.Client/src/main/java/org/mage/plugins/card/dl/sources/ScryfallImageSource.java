@@ -165,6 +165,20 @@ public class ScryfallImageSource implements CardImageSource {
         return new CardImageUrls(baseUrl, alternativeUrl);
     }
 
+    /**
+     * Rate limit error from the server (HTTP 429), the download must be stopped
+     */
+    private static class RateLimitException extends Exception {
+        private final String url;
+        private final String retryAfter;
+
+        RateLimitException(String url, String retryAfter) {
+            super("too many requests (HTTP 429): " + url);
+            this.url = url;
+            this.retryAfter = retryAfter;
+        }
+    }
+
     // TODO: delete face code after bulk data implemented?
     private String getFaceImageUrl(CardDownloadData card, boolean isToken) throws Exception {
         final String defaultCode = CardLanguage.ENGLISH.getCode();
@@ -208,9 +222,24 @@ public class ScryfallImageSource implements CardImageSource {
             // find first workable api endpoint
             waitBeforeRequest();
 
-            jsonStream = XmageURLConnection.downloadBinary(currentUrl);
-            if (jsonStream != null) {
+            XmageURLConnection connection = new XmageURLConnection(currentUrl);
+            connection.startConnection();
+            if (!connection.isConnected()) {
+                continue;
+            }
+            try {
+                connection.connect();
+            } catch (IOException e) {
+                logger.error("Scryfall: can't connect to " + currentUrl + " - " + e, e);
+                continue;
+            }
+            int responseCode = connection.getResponseCode();
+            if (responseCode == XmageURLConnection.HTTP_TOO_MANY_REQUESTS) {
+                throw new RateLimitException(currentUrl, connection.getHeaderField("Retry-After"));
+            }
+            if (responseCode == 200) {
                 // found good url, can stop
+                jsonStream = connection.getGoodResponseAsStream();
                 jsonUrl = currentUrl;
                 break;
             } else {
@@ -287,6 +316,9 @@ public class ScryfallImageSource implements CardImageSource {
                 try {
                     String url = getFaceImageUrl(card, card.isToken());
                     preparedUrls.put(card, url);
+                } catch (RateLimitException e) {
+                    downloadServiceInfo.stopOnRateLimit(e.url, e.retryAfter);
+                    return false;
                 } catch (Exception e) {
                     logger.warn("Failed to prepare image URL (back face) for " + card.getName() + " (" + card.getSet() + ") #"
                             + card.getCollectorId() + ", Error Message: " + e.getMessage());
@@ -813,8 +845,12 @@ public class ScryfallImageSource implements CardImageSource {
 
     @Override
     public void doPause(String fullUrl) {
-        // scryfall recommends 300 ms timeout per each request to API to work under a rate limit
-        // possible error: 429 Too Many Requests
+        // scryfall rate limits (https://scryfall.com/docs/api/rate-limits):
+        // - api.scryfall.com: 10 requests per second (search/named/random/collection: 2 per second);
+        // - *.scryfall.io (images, bulk data): no limits;
+        // - on limit error (HTTP 429) all requests are blocked for 30 secs, continue to send requests can lead to a ban,
+        //   so download service stops on first 429 (see stopOnRateLimit)
+        // xmage uses 300 ms pause for all download threads (~3 requests per second, safe margin)
 
         // cdn source can be safe and called without pause
         if (fullUrl.contains("scryfall.io")) {
@@ -833,7 +869,9 @@ public class ScryfallImageSource implements CardImageSource {
             } finally {
                 waitBeforeRequestLock.unlock();
             }
-        } catch (InterruptedException ignore) {
+        } catch (InterruptedException e) {
+            // keep interrupt status, so download threads can stop (see isNeedCancel)
+            Thread.currentThread().interrupt();
         }
     }
 
