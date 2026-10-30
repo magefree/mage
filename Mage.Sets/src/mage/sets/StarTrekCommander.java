@@ -37,6 +37,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Augur of Autumn", 458, Rarity.RARE, mage.cards.a.AugurOfAutumn.class));
         cards.add(new SetCardInfo("Austere Command", 418, Rarity.RARE, mage.cards.a.AustereCommand.class));
         cards.add(new SetCardInfo("Badgey, Malicious Glitch", 152, Rarity.UNCOMMON, mage.cards.b.BadgeyMaliciousGlitch.class));
+        cards.add(new SetCardInfo("Balance of Terror", 10, Rarity.RARE, mage.cards.b.BalanceOfTerror.class));
         cards.add(new SetCardInfo("Battle of Wolf 359", 203, Rarity.RARE, mage.cards.b.BattleOfWolf359.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Battle of Wolf 359", 57, Rarity.RARE, mage.cards.b.BattleOfWolf359.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Battlefield Forge", 367, Rarity.RARE, mage.cards.b.BattlefieldForge.class, NON_FULL_USE_VARIOUS));
