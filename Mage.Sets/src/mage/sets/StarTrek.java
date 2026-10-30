@@ -358,6 +358,8 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("There's Coffee in that Nebula", 40, Rarity.UNCOMMON, mage.cards.t.TheresCoffeeInThatNebula.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("There's Coffee in that Nebula", 369, Rarity.UNCOMMON, mage.cards.t.TheresCoffeeInThatNebula.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("There's Coffee in that Nebula", 503, Rarity.UNCOMMON, mage.cards.t.TheresCoffeeInThatNebula.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Transporter Malfunction", 178, Rarity.UNCOMMON, mage.cards.t.TransporterMalfunction.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Transporter Malfunction", 357, Rarity.UNCOMMON, mage.cards.t.TransporterMalfunction.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tricorder", 270, Rarity.COMMON, mage.cards.t.Tricorder.class));
         cards.add(new SetCardInfo("Troubling Tribbles", 408, Rarity.RARE, mage.cards.t.TroublingTribbles.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Troubling Tribbles", 41, Rarity.RARE, mage.cards.t.TroublingTribbles.class, NON_FULL_USE_VARIOUS));
