@@ -110,7 +110,6 @@ public class ScryfallImageSupportCards {
             add("F02"); // Friday Night Magic 2002
             add("TOR"); // Torment
             add("JUD"); // Judgment
-            //add("PHJ"); // Hobby Japan Promos
             add("WC02"); // World Championship Decks 2002
             add("ONS"); // Onslaught
             //add("PMOA"); // Magic Online Avatars
@@ -429,12 +428,10 @@ public class ScryfallImageSupportCards {
             add("PMH1"); // Modern Horizons Promos
             add("MH1"); // Modern Horizons
             add("SS2"); // Signature Spellbook: Gideon
-            add("PRES"); // Resale Promos
             add("PPP1"); // M20 Promo Packs
             add("PM20"); // Core Set 2020 Promos
             add("M20"); // Core Set 2020
             add("PS19"); // San Diego Comic-Con 2019
-            //add("HTR18"); // Heroes of the Realm 2018
             add("C19"); // Commander 2019
             add("PELD"); // Throne of Eldraine Promos
             add("ELD"); // Throne of Eldraine
@@ -454,7 +451,6 @@ public class ScryfallImageSupportCards {
             add("PWOR"); // World Championship Promos
             add("PANA"); // MTG Arena Promos
             add("UND"); // Unsanctioned
-            //add("FMB1"); // Mystery Booster Retail Edition Foils
             add("HA2"); // Historic Anthology 2
             add("SLD"); // Secret Lair Drop
             add("PMEI"); // Media and Collaboration Promos
@@ -464,7 +460,6 @@ public class ScryfallImageSupportCards {
             // add("TD0"); // Commander Theme Decks
             // add("TD2"); // Duel Decks: Mirrodin Pure vs. New Phyrexia
             // add("MD1"); // Modern Event Deck
-            // add("DD3"); // Duel Decks Anthology
             // add("PZ1"); // Legendary Cube
             add("PLG20"); // Love Your LGS 2020
             add("IKO"); // Ikoria: Lair of Behemoths
