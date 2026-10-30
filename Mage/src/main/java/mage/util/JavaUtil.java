@@ -21,6 +21,7 @@ public class JavaUtil {
             System.setProperty("java.net.preferIPv4Stack", "true");
         }
 
+        // TODO: works with java 18+, all prev versions must use command line params by launcher
         // workaround for broken images download, decks import and draft rating files:
         // there are some images links with non-ascii chars, so non-utf8 systems 
         // can't use it (example: encoding windows-1251 in old russian windows)
