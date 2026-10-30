@@ -5,6 +5,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.repository.CardInfo;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.remote.XmageURLConnection;
 import mage.client.util.GUISizeHelper;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -30,6 +31,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.net.HttpURLConnection;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
@@ -71,11 +73,15 @@ import java.util.zip.ZipFile;
  * - tests re-downloads and forced re-download;
  * - tests download and miss stats;
  * - tests max errors stops;
+ * - tests http errors: failed images (404, 5xx, 403, no response) stop the download after max fails in a row only
+ * ---- (any good image resets it, so a broken set or many missing images can't stop the whole download);
+ * - tests rate limit (HTTP 429): the download stops at once, no more requests (alternative urls too), clear message, next start works;
  * - tests read only storage (e.g. Program Files on Windows);
  * - tests archive changed by another program while download runs;
  * - tests images reading by a game while download runs (no errors, no locks, periodic archives save);
  * - TODO: tests double faced cards (second side added two times, need cards database);
- * - TODO: tests dialog re-open while download runs (lists reload must not break the download);
+ * - tests dialog re-open while a cancelled download is finishing (lists reload waits the finish, cancel is not reset);
+ * - tests errors on download finish (dialog's controls must be enabled after any errors);
  *
  * @author JayDi85
  */
@@ -346,6 +352,161 @@ public class DownloadPicturesServiceTest {
         Assert.assertTrue("downloaded images must be saved on cancel", saved > 0);
         Assert.assertEquals("missing stats must be refreshed on cancel", imagesPerSet * SET_CODES.length - saved, service.getCardsMissingForTests().size());
         assertNoTempFiles();
+    }
+
+    @Test
+    public void test_DialogReopen_WhileCancelledDownloadFinishing() throws Exception {
+        // cancel/close doesn't wait the download threads, so a user can open the dialog again while the
+        // cancelled download is finishing (in-flight images, archives save, stats); the dialog must not
+        // reset the cancel and must not reload the lists in that time (NPE in stats and disabled dialog's controls)
+        int imagesPerSet = 20; // 100 images with 500 ms each on 10 threads = 5 secs
+        TestDownloadService service = new TestDownloadService(500);
+        service.prepareDownloadForTests(new TestImageSource(), cards(imagesPerSet), DOWNLOAD_THREADS);
+
+        Thread downloadThread = new Thread(service, "test-images-download");
+        downloadThread.start();
+        sleep(1500);
+
+        // close and open the dialog again (cancel, then open while the in-flight images are still downloading)
+        service.setNeedCancel(true);
+        SwingUtilities.invokeAndWait(() -> {
+            Assert.assertFalse("dialog open must not load lists while the previous download is finishing", service.prepareDialogOpen());
+            Assert.assertTrue("dialog open must not reset the cancel of the previous download", service.isNeedCancel());
+            Assert.assertTrue("dialog must show a wait message, but found: " + service.getGlobalMessageForTests(),
+                    service.getGlobalMessageForTests().contains("Stopping the previous download"));
+        });
+        Assert.assertEquals("missing cards must not be loaded while the download is finishing", 0, service.loadMissingCalls.get());
+
+        downloadThread.join(TimeUnit.MINUTES.toMillis(1));
+        Assert.assertFalse("download thread must be finished", downloadThread.isAlive());
+        SwingUtilities.invokeAndWait(() -> {
+        }); // workaround to wait GUI refresh
+
+        Assert.assertTrue("cancelled download must be stopped before the end", service.finishedDownloads.get() < imagesPerSet * SET_CODES.length);
+        Assert.assertEquals("missing cards must be loaded one time after the download finished", 1, service.loadMissingCalls.get());
+        Assert.assertFalse("new dialog must be ready for a new download", service.isNeedCancel());
+        SwingUtilities.invokeAndWait(() -> {
+            Assert.assertTrue("dialog's start button must be enabled after download", service.isStartButtonEnabledForTests());
+            Assert.assertTrue("next dialog open must load lists at once", service.prepareDialogOpen());
+        });
+    }
+
+    @Test
+    public void test_FinishErrors_DialogControlsEnabled() throws Exception {
+        // any errors on download finish (stats, GUI refresh) must not keep the dialog in a disabled state
+        int imagesPerSet = 2;
+        TestDownloadService service = new TestDownloadService(10);
+        service.prepareDownloadForTests(new TestImageSource(), cards(imagesPerSet), DOWNLOAD_THREADS);
+        service.getCardsMissingForTests().add(null); // broken data, raise NPE in stats and GUI refresh
+
+        service.run(); // must not fail
+        SwingUtilities.invokeAndWait(() -> {
+        }); // workaround to wait GUI refresh
+
+        Assert.assertEquals("all images must be downloaded", imagesPerSet * SET_CODES.length, service.finishedDownloads.get());
+        assertSavedImages(imagesPerSet);
+        assertLogContains(service, "can't finish download");
+        SwingUtilities.invokeAndWait(() -> {
+            Assert.assertTrue("dialog's start button must be enabled after finish errors", service.isStartButtonEnabledForTests());
+            Assert.assertTrue("next dialog open must load lists at once", service.prepareDialogOpen());
+        });
+    }
+
+    @Test
+    public void test_RateLimit_StopsDownloadAtOnce() throws Exception {
+        // server's rate limit (HTTP 429, example: scryfall api) blocks all next requests for some time,
+        // so download must stop on first 429 - new requests are useless and can lead to a ban
+        int imagesPerSet = 100; // 500 images
+        String limitedUrl = "http://test.local/TS2/10"; // first 429 in the middle of the queue
+        TestDownloadService service = new TestDownloadService(0);
+        service.httpCodes = url -> {
+            // like a real server: after the first 429 all requests are blocked
+            if (url.equals(limitedUrl) || service.httpRequests.contains(limitedUrl)) {
+                return XmageURLConnection.HTTP_TOO_MANY_REQUESTS;
+            }
+            return 200;
+        };
+        service.prepareDownloadForTests(new TestImageSource(true), cards(imagesPerSet), DOWNLOAD_THREADS);
+
+        service.run();
+
+        List<String> requests = new ArrayList<>(service.httpRequests);
+        int limitedIndex = requests.indexOf(limitedUrl);
+        Assert.assertTrue("rate limited url must be requested", limitedIndex >= 0);
+        int requestsAfterLimit = requests.size() - limitedIndex - 1;
+        Assert.assertTrue("download must stop at once on rate limit, but found " + requestsAfterLimit + " requests after it",
+                requestsAfterLimit <= DOWNLOAD_THREADS);
+        Assert.assertFalse("alternative url must not be requested after rate limit",
+                requests.contains(limitedUrl + TestImageSource.ALTERNATIVE_URL_SUFFIX));
+        Assert.assertEquals("download threads must be finished before run() ends", 0, service.activeDownloads.get());
+        Assert.assertTrue("clear message about rate limit must be shown: " + service.getGlobalMessageForTests(),
+                service.getGlobalMessageForTests().contains("HTTP 429"));
+        assertLogContains(service, "rate limit (HTTP 429)");
+        // in-flight images can be cancelled while saving, so stats must be the same as saved files
+        int savedImages = 0;
+        for (String setCode : SET_CODES) {
+            File zipFile = new File(imagesDir, setCode + ".zip");
+            savedImages += zipFile.exists() ? countZipEntries(zipFile, setCode + "/") : 0;
+        }
+        Assert.assertTrue("images before rate limit must be saved", savedImages > 0);
+        assertMissing(service, imagesPerSet * SET_CODES.length - savedImages);
+        assertNoTempFiles();
+
+        // next start (same dialog) must work and download all missing images
+        int missingBefore = service.getCardsMissingForTests().size();
+        service.httpRequests.clear();
+        service.httpCodes = url -> 200;
+        service.setNeedCancel(false); // start button
+        service.prepareDownloadForTests(new TestImageSource(true), new ArrayList<>(service.getCardsMissingForTests()), DOWNLOAD_THREADS);
+        service.run();
+        Assert.assertEquals("next start must download all missing images", missingBefore, service.httpRequests.size());
+        Assert.assertEquals("rate limit message must be cleared on next start", "", service.getGlobalMessageForTests());
+        assertMissing(service, 0);
+        assertSavedImages(imagesPerSet);
+    }
+
+    @Test
+    public void test_HttpErrors_TooManyFailsInRowStopDownload() throws Exception {
+        // dead or blocked server: all images fail, download must stop after max fails in a row (not run through the whole queue)
+        int imagesPerSet = 100; // 500 images
+        for (int code : new int[]{HttpURLConnection.HTTP_NOT_FOUND, HttpURLConnection.HTTP_UNAVAILABLE, HttpURLConnection.HTTP_FORBIDDEN, -1}) {
+            TestDownloadService service = new TestDownloadService(0);
+            service.httpCodes = url -> code;
+            service.prepareDownloadForTests(new TestImageSource(true), cards(imagesPerSet), DOWNLOAD_THREADS);
+
+            service.run();
+
+            int triedImages = service.httpRequests.size() / 2; // main and alternative urls
+            Assert.assertTrue("download must stop on too many fails in a row " + code + ", tried images: " + triedImages,
+                    triedImages > 300 && triedImages < imagesPerSet * SET_CODES.length);
+            Assert.assertTrue("must stop by max fails", service.isNeedCancel());
+            Assert.assertEquals("download threads must be finished before run() ends", 0, service.activeDownloads.get());
+            assertMissing(service, imagesPerSet * SET_CODES.length);
+            assertLogContains(service, "http code: " + code);
+        }
+    }
+
+    @Test
+    public void test_HttpErrors_BrokenSetAndManyMissingImagesDoNotStopDownload() throws Exception {
+        // a whole broken set (all images missing) and many missing images in other sets, but with good images between
+        // them - download must try the whole list
+        int imagesPerSet = 100; // 500 images
+        TestDownloadService service = new TestDownloadService(0);
+        service.httpCodes = url -> {
+            if (url.contains("/TS2/")) {
+                return HttpURLConnection.HTTP_NOT_FOUND; // broken set
+            }
+            int number = Integer.parseInt(url.replaceAll(".*/(\\d+)(\\?.*)?$", "$1"));
+            return number % 5 == 0 ? 200 : HttpURLConnection.HTTP_UNAVAILABLE; // 80% of images fail
+        };
+        service.prepareDownloadForTests(new TestImageSource(true), cards(imagesPerSet), DOWNLOAD_THREADS);
+
+        service.run();
+
+        Assert.assertFalse("fails with good images between them must not stop the download", service.isNeedCancel());
+        Assert.assertEquals("all images and alternative urls must be tried",
+                imagesPerSet * SET_CODES.length * 2 - 80, service.httpRequests.size()); // good images use main url only
+        assertMissing(service, imagesPerSet + 4 * 80); // broken set + 80% of other sets
     }
 
     @Test
@@ -709,6 +870,9 @@ public class DownloadPicturesServiceTest {
         Function<CardDownloadData, Boolean> failFilter = card -> false;
         java.util.function.Consumer<CardDownloadData> onDownload = card -> {
         }; // e.g. a storage change by another program
+        Function<String, Integer> httpCodes = null; // fake http mode: response code by url (null - fake images stream only)
+        final List<String> httpRequests = Collections.synchronizedList(new ArrayList<>()); // urls in requests order
+        final AtomicInteger loadMissingCalls = new AtomicInteger(); // dialog's lists reload (no cards database in tests)
 
         TestDownloadService(int imageDownloadMillis) {
             this.imageDownloadMillis = imageDownloadMillis;
@@ -721,7 +885,11 @@ public class DownloadPicturesServiceTest {
         }
 
         @Override
-        InputStream openImageStream(CardDownloadData card, List<String> downloadUrls, List<String> errorsList) {
+        InputStream openImageStream(CardDownloadData card, List<String> downloadUrls, List<String> errorsList) throws IOException {
+            if (httpCodes != null) {
+                // real urls processing with fake http connections
+                return super.openImageStream(card, downloadUrls, errorsList);
+            }
             if (failAll || failFilter.apply(card)) {
                 // like a broken url, a blocked network or a non-image result
                 incErrorCount();
@@ -731,6 +899,65 @@ public class DownloadPicturesServiceTest {
             }
 
             onDownload.accept(card);
+            return createImageStream();
+        }
+
+        @Override
+        void loadMissingCardsInBackground() {
+            loadMissingCalls.incrementAndGet();
+        }
+
+        @Override
+        XmageURLConnection createConnection(String url) {
+            if (httpCodes == null) {
+                throw new IllegalStateException("Wrong test usage: http requests are not allowed in fake images stream mode");
+            }
+            return new XmageURLConnection(url) {
+                int responseCode = -1;
+
+                @Override
+                public void startConnection() {
+                    // no network
+                }
+
+                @Override
+                public boolean isConnected() {
+                    return true;
+                }
+
+                @Override
+                public void setRequestHeaders(Map<String, String> additionalHeaders) {
+                }
+
+                @Override
+                public void connect() {
+                    httpRequests.add(url);
+                    responseCode = httpCodes.apply(url);
+                }
+
+                @Override
+                public int getResponseCode() {
+                    return responseCode;
+                }
+
+                @Override
+                public String getHeaderField(String name) {
+                    return responseCode == HTTP_TOO_MANY_REQUESTS && "Retry-After".equals(name) ? "30" : null;
+                }
+
+                @Override
+                public String getErrorResponseAsString() {
+                    return "";
+                }
+
+                @Override
+                public InputStream getGoodResponseAsStream() {
+                    return createImageStream();
+                }
+            };
+        }
+
+        private InputStream createImageStream() {
             byte[] data = new byte[IMAGE_SIZE_BYTES];
             ThreadLocalRandom.current().nextBytes(data);
             activeDownloads.incrementAndGet();
@@ -757,9 +984,25 @@ public class DownloadPicturesServiceTest {
 
     private static class TestImageSource implements CardImageSource {
 
+        static final String ALTERNATIVE_URL_SUFFIX = "?alternative";
+
+        final boolean useAlternativeUrls; // like scryfall: localized url + default url
+
+        TestImageSource() {
+            this(false);
+        }
+
+        TestImageSource(boolean useAlternativeUrls) {
+            this.useAlternativeUrls = useAlternativeUrls;
+        }
+
         @Override
         public CardImageUrls generateCardUrl(CardDownloadData card) {
-            return new CardImageUrls("http://test.local/" + card.getSet() + "/" + card.getCollectorId());
+            String url = "http://test.local/" + card.getSet() + "/" + card.getCollectorId();
+            if (useAlternativeUrls) {
+                return new CardImageUrls(url, url + ALTERNATIVE_URL_SUFFIX);
+            }
+            return new CardImageUrls(url);
         }
 
         @Override

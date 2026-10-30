@@ -1,5 +1,7 @@
  package mage.client.draft;
 
+ import mage.abilities.icon.CardIconImpl;
+ import mage.abilities.icon.CardIconType;
  import mage.cards.repository.CardInfo;
  import mage.cards.repository.CardRepository;
  import mage.client.MageFrame;
@@ -13,6 +15,7 @@
  import mage.client.util.audio.AudioManager;
  import mage.client.util.gui.BufferedImageBuilder;
  import mage.constants.PlayerAction;
+ import mage.game.draft.DraftPickSuggest;
  import mage.view.*;
  import org.apache.log4j.Logger;
 
@@ -342,6 +345,23 @@
          }
      }
 
+    /**
+     * Mark suggested cards by icons with its place in the source: 1, 2, 3... (hint - source and reason)
+     * Booster's cards are new objects on each load, so old icons are removed automatically
+     */
+    private void addPickSuggestIcons(CardsView boosterView, List<DraftPickSuggest> pickSuggests) {
+         if (pickSuggests == null) {
+             return;
+         }
+         for (DraftPickSuggest suggest : pickSuggests) {
+             CardView card = boosterView.get(suggest.getCardId());
+             if (card != null) {
+                 String hint = "Suggested pick #" + suggest.getRank() + " by " + suggest.getSource() + ": " + suggest.getInfo();
+                 card.getCardIcons().add(new CardIconImpl(CardIconType.DRAFT_PICK_SUGGEST, hint, String.valueOf(suggest.getRank())));
+             }
+         }
+     }
+
     public void loadBooster(int messageId, DraftView draftView, DraftPickView draftPickView) {
          // ignore outdated booster - a same or an older pack/pick than the last loaded booster:
          // - server re-sends a booster until a load confirm, so a slow connection can get it again (even after own pick);
@@ -393,7 +413,9 @@
          }
 
          // lower area that shows the booster
-         this.draftBooster.loadBooster(CardsViewUtil.convertSimple(draftPickView.getBooster()), bigCard);
+         CardsView boosterView = CardsViewUtil.convertSimple(draftPickView.getBooster());
+         addPickSuggestIcons(boosterView, draftPickView.getPickSuggests());
+         this.draftBooster.loadBooster(boosterView, bigCard);
          if (this.pickingCardsListener == null) {
              this.pickingCardsListener = event -> {
                  if (event.getEventType() == ClientEventType.DRAFT_PICK_CARD) {
