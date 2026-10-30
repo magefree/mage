@@ -199,11 +199,19 @@ public abstract class DraftImpl implements Draft {
             }
             List<Card> booster = player.getBooster();
             if (booster != null && !booster.isEmpty()) {
-                // user's marked card has priority (it's always from the current booster)
-                // TODO: replace last card choice by smark choice, so offline player/ai will get good deck?
-                UUID cardId = player.getMarkedCard() != null
-                        ? player.getMarkedCard()
-                        : booster.get(booster.size() - 1).getId();
+                // priority:
+                // 1. user's marked card (it's always from the current booster);
+                // 2. first suggested card (suggestions are always from the current booster);
+                // 3. last card (no suggestions, e.g. not calculated in time)
+                UUID cardId;
+                List<DraftPickSuggest> suggests = player.getPickSuggests();
+                if (player.getMarkedCard() != null) {
+                    cardId = player.getMarkedCard();
+                } else if (suggests != null && !suggests.isEmpty()) {
+                    cardId = suggests.get(0).getCardId();
+                } else {
+                    cardId = booster.get(booster.size() - 1).getId();
+                }
                 this.addPick(playerId, cardId, null);
             }
         }
@@ -236,6 +244,35 @@ public abstract class DraftImpl implements Draft {
             }
 
             player.setMarkedCard(cardId);
+        }
+    }
+
+    @Override
+    public boolean isPickSuggestsNeeded(UUID playerId) {
+        synchronized (players) {
+            DraftPlayer player = players.get(playerId);
+            return player != null && player.isPicking() && player.getPickSuggests() == null;
+        }
+    }
+
+    @Override
+    public void setPickSuggests(UUID playerId, List<DraftPickSuggest> pickSuggests) {
+        // WARNING, can be called from any thread
+        // suggestions are calculated outside the lock, so the round can be changed - accept current booster's cards only
+        synchronized (players) {
+            DraftPlayer player = players.get(playerId);
+            if (player == null || !player.isPicking() || player.getPickSuggests() != null) {
+                return;
+            }
+            Set<UUID> boosterIds = new HashSet<>();
+            player.getBooster().forEach(card -> boosterIds.add(card.getId()));
+            List<DraftPickSuggest> actual = new ArrayList<>();
+            for (DraftPickSuggest suggest : pickSuggests) {
+                if (suggest != null && boosterIds.contains(suggest.getCardId())) {
+                    actual.add(suggest);
+                }
+            }
+            player.setPickSuggests(actual);
         }
     }
 
@@ -642,7 +679,8 @@ public abstract class DraftImpl implements Draft {
             playerNames.add(draftPlayer.getPlayer().getName());
         }
         return new DraftPlayerSnapshot(boosterNum, cardNum, playerNames,
-                player.getBooster(), new ArrayList<>(player.getDeck().getSideboard()), player.isPicking());
+                player.getBooster(), new ArrayList<>(player.getDeck().getSideboard()), player.isPicking(),
+                player.getPickSuggests());
     }
 
     @Override
