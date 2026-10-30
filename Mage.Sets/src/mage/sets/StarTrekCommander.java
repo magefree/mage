@@ -146,6 +146,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fetid Pools", 530, Rarity.RARE, mage.cards.f.FetidPools.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fevered Visions", 319, Rarity.RARE, mage.cards.f.FeveredVisions.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fevered Visions", 474, Rarity.RARE, mage.cards.f.FeveredVisions.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fleet Captain Christopher Pike", 41, Rarity.RARE, mage.cards.f.FleetCaptainChristopherPike.class));
         cards.add(new SetCardInfo("Foreboding Ruins", 381, Rarity.RARE, mage.cards.f.ForebodingRuins.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Foreboding Ruins", 531, Rarity.RARE, mage.cards.f.ForebodingRuins.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forsaken Monument", 343, Rarity.MYTHIC, mage.cards.f.ForsakenMonument.class, NON_FULL_USE_VARIOUS));
