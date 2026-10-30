@@ -233,6 +233,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Martok, Hero of the Empire", 230, Rarity.RARE, mage.cards.m.MartokHeroOfTheEmpire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Maturation Chamber", 231, Rarity.RARE, mage.cards.m.MaturationChamber.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Maturation Chamber", 24, Rarity.RARE, mage.cards.m.MaturationChamber.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("McCoy, Not a Bricklayer", 99, Rarity.RARE, mage.cards.m.McCoyNotABricklayer.class));
         cards.add(new SetCardInfo("Mek'leth Berserker", 166, Rarity.COMMON, mage.cards.m.MeklethBerserker.class));
         cards.add(new SetCardInfo("Mind Stone", 497, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Morphic Pool", 390, Rarity.RARE, mage.cards.m.MorphicPool.class, NON_FULL_USE_VARIOUS));
