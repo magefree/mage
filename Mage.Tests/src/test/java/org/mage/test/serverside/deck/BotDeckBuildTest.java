@@ -2,6 +2,7 @@ package org.mage.test.serverside.deck;
 
 import mage.cards.Card;
 import mage.cards.RateCard;
+import mage.cards.decks.CardNameUtil;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -20,6 +21,9 @@ import java.util.List;
 
 /**
  * AI: bot's deck building from a limited pool (draft, sealed and other bot's constructs)
+ * <p>
+ * Warning, a card with draft ratings from resources/ratings gets a score from it instead a rarity, so deck building
+ * tests must use cards without ratings (or check the ratings files after the update)
  *
  * @author JayDi85
  */
@@ -52,12 +56,12 @@ public class BotDeckBuildTest extends MageTestPlayerBase {
         addCards(pool, "Grizzly Bears", 10);
         addCards(pool, "Centaur Courser", 10);
         addCards(pool, "Llanowar Elves", 10);
-        addCards(pool, "Oakhollow Village", 3); // green nonbasic land with a high bot's rating (uncommon)
+        addCards(pool, "Treetop Village", 3); // green nonbasic land with a high bot's rating (uncommon)
 
         Deck deck = ComputerPlayer.buildDeck(LIMITED_DECK_SIZE, pool, Collections.singletonList(ColoredManaSymbol.G));
         assertDeck(deck, LIMITED_DECK_SIZE, LIMITED_DECK_LANDS, LIMITED_DECK_SPELLS);
         Assert.assertEquals("nonbasic lands must be used", 3, deck.getMaindeckCards().stream()
-                .filter(card -> card.getName().equals("Oakhollow Village"))
+                .filter(card -> card.getName().equals("Treetop Village"))
                 .count());
     }
 
@@ -68,15 +72,15 @@ public class BotDeckBuildTest extends MageTestPlayerBase {
         addCards(pool, "Grizzly Bears", 10);
         addCards(pool, "Centaur Courser", 10);
         addCards(pool, "Llanowar Elves", 10);
-        addCards(pool, "Oakhollow Village", 2); // G - on color
-        addCards(pool, "Lilypad Village", 2); // U - off color
-        addCards(pool, "Lupinflower Village", 2); // W - off color
+        addCards(pool, "Treetop Village", 2); // G - on color
+        addCards(pool, "Faerie Conclave", 2); // U - off color
+        addCards(pool, "Forbidding Watchtower", 2); // W - off color
 
         Deck deck = ComputerPlayer.buildDeck(LIMITED_DECK_SIZE, pool, Collections.singletonList(ColoredManaSymbol.G));
         assertDeck(deck, LIMITED_DECK_SIZE, LIMITED_DECK_LANDS, LIMITED_DECK_SPELLS);
-        assertCardsCount(deck, "Oakhollow Village", 2);
-        assertCardsCount(deck, "Lilypad Village", 0);
-        assertCardsCount(deck, "Lupinflower Village", 0);
+        assertCardsCount(deck, "Treetop Village", 2);
+        assertCardsCount(deck, "Faerie Conclave", 0);
+        assertCardsCount(deck, "Forbidding Watchtower", 0);
     }
 
     @Test
@@ -174,6 +178,112 @@ public class BotDeckBuildTest extends MageTestPlayerBase {
     }
 
     @Test
+    public void test_Rating_FileRatingsMustUseFullRange() {
+        // ratings of every file are normalized to [1..100], 0 means no rating (rarity rating will be used instead)
+        // LCI: The Millennium Calendar is the worst card (and mythic), Bonehoard Dracosaur is the best card
+        Assert.assertEquals("worst card of the set must get min rating, not rarity rating",
+                1, RateCard.getBaseCardScore(createCard("The Millennium Calendar")));
+        Assert.assertEquals("best card of the set must get max rating",
+                100, RateCard.getBaseCardScore(createCard("Bonehoard Dracosaur")));
+    }
+
+    @Test
+    public void test_Rating_FileRatingsMustSupportUnicodeNames() {
+        // ratings files keep original card names (17Lands: Tura Kennerüd), so it must be found by xmage names (ascii)
+        Assert.assertEquals("Aether Vial", CardNameUtil.normalizeCardName("Æther Vial"));
+        Assert.assertEquals("Yahenni's Expertise", CardNameUtil.normalizeCardName("Yahenni’s Expertise"));
+        Assert.assertEquals("Kongming, \"Sleeping Dragon\"", CardNameUtil.normalizeCardName("Kongming, “Sleeping Dragon”"));
+
+        // uncommon cards from 17Lands files: DMU Tura Kennerüd, Skyknight and LCI Bartolomé del Presidio
+        Assert.assertNotEquals("must use file rating, not uncommon rarity rating",
+                60, RateCard.getBaseCardScore(createCard("Tura Kennerud, Skyknight")));
+        Assert.assertNotEquals("must use file rating, not uncommon rarity rating",
+                60, RateCard.getBaseCardScore(createCard("Bartolome del Presidio")));
+    }
+
+    @Test
+    public void test_Rating_SameCardMustUseRatingOfOwnSet() {
+        // draft rating is a card place among the cards of one set, so same card can have diff ratings in diff sets
+        // Lightning Strike: XLN - one of the best commons, DFT - average card
+        int ratingXLN = RateCard.getBaseCardScore(createCard("Lightning Strike", "XLN"));
+        int ratingDFT = RateCard.getBaseCardScore(createCard("Lightning Strike", "DFT"));
+        Assert.assertTrue("must use rating of own set: XLN " + ratingXLN + ", DFT " + ratingDFT, ratingXLN > ratingDFT + 20);
+
+        // set without ratings file must use max rating from other sets (M15 has no file)
+        Assert.assertEquals("set without ratings must use max rating from other sets",
+                ratingXLN, RateCard.getBaseCardScore(createCard("Lightning Strike", "M15")));
+    }
+
+    @Test
+    public void test_Rating_BonusSheetCardMustUseRatingOfBoosterSet() {
+        // OTJ boosters contain OTP cards (Breaking News bonus sheet), so OTJ ratings file contains it too
+        // Electrodominance: RNA - one of the best uncommons, OTJ - average card from bonus sheet
+        int ratingRNA = RateCard.getBaseCardScore(createCard("Electrodominance", "RNA"));
+        int ratingOTP = RateCard.getBaseCardScore(createCard("Electrodominance", "OTP"));
+        Assert.assertTrue("bonus sheet card must use rating of booster's set: RNA " + ratingRNA + ", OTP " + ratingOTP, ratingRNA > ratingOTP + 20);
+    }
+
+    @Test
+    public void test_Rating_CardWithRatingMustUseRatingOnly() {
+        // rating from file already contains the card's value (type, removal, mana cost), so no more bonuses
+        // FRA: Last Gasp {1}{B} - common removal
+        Card card = createCard("Last Gasp", "FRA");
+        int rating = RateCard.getBaseCardScore(card);
+        Assert.assertTrue("must have rating from file", RateCard.hasFileRating(card.getName(), card.getExpansionSetCode()));
+        Assert.assertEquals("no colors", rating, RateCard.rateCard(card, Collections.emptyList(), false));
+        Assert.assertEquals("on color", rating, RateCard.rateCard(card, Collections.singletonList(ColoredManaSymbol.B), false));
+        Assert.assertEquals("off color", rating - 100, RateCard.rateCard(card, Collections.singletonList(ColoredManaSymbol.W), false));
+    }
+
+    @Test
+    public void test_Rating_CardWithoutRatingMustUseRatingScale() {
+        // card without rating uses rarity + type + mana + removal, scaled to file ratings [1..100] by half
+        // Grizzly Bears {1}{G}: (common 40 + creature 2 * 10 + mana -2 for colored symbol) / 2 = 29
+        Card card = createCard("Grizzly Bears");
+        Assert.assertFalse("must have no ratings", RateCard.hasFileRating(card.getName(), card.getExpansionSetCode()));
+        Assert.assertEquals("no colors", 29, RateCard.rateCard(card, Collections.emptyList(), false));
+        Assert.assertEquals("on color", 29, RateCard.rateCard(card, Collections.singletonList(ColoredManaSymbol.G), false));
+        Assert.assertEquals("off color", 29 - 100, RateCard.rateCard(card, Collections.singletonList(ColoredManaSymbol.W), false));
+    }
+
+    @Test
+    public void test_Colors_MustUseMaxSumOfCardsAndCanBeChanged() {
+        // deck colors = colors pair with the max sum of cards scores, it's recalculated on each pick
+        // all cards without ratings: common creatures with one colored mana symbol (same score)
+        List<Card> picks = new ArrayList<>();
+        addCards(picks, "Raging Goblin", 3); // {R}
+        List<ColoredManaSymbol> colors = RateCard.chooseDeckColors(picks);
+        Assert.assertEquals("first picks - red", 2, colors.size());
+        Assert.assertTrue("first picks - red", colors.contains(ColoredManaSymbol.R));
+
+        // new picks of other colors must change the colors
+        addCards(picks, "Coral Merfolk", 5); // {1}{U}
+        addCards(picks, "Glory Seeker", 4); // {1}{W}
+        Assert.assertEquals("more blue and white picks", Arrays.asList(ColoredManaSymbol.W, ColoredManaSymbol.U),
+                RateCard.chooseDeckColors(picks));
+    }
+
+    @Test
+    public void test_Colors_MustIgnoreColorlessCardsAndWaitColoredCards() {
+        // colors can be chosen after 3 colored cards only
+        List<Card> picks = new ArrayList<>();
+        addCards(picks, "Alpha Myr", 10); // {2}, colorless
+        addCards(picks, "Raging Goblin", 2); // {R}
+        Assert.assertEquals("not enough colored cards", 0, RateCard.chooseDeckColors(picks).size());
+
+        addCards(picks, "Coral Merfolk", 1); // {1}{U}
+        Assert.assertEquals("enough colored cards", Arrays.asList(ColoredManaSymbol.U, ColoredManaSymbol.R),
+                RateCard.chooseDeckColors(picks));
+    }
+
+    @Test
+    public void test_Rating_SetsListMustIgnoreEmptyLines() {
+        // empty line in setsWithRatings.csv must not stop the loading of other sets
+        List<String> lines = Arrays.asList("# comment", "", "lci", "   ", " fra ", "#dom");
+        Assert.assertEquals(Arrays.asList("lci", "fra"), RateCard.parseSetsList(lines));
+    }
+
+    @Test
     public void test_Limited_SplitCardMustUseLandsForCastableHalfOnly() {
         // red deck with Fire // Ice needs Mountains only
         List<Card> pool = new ArrayList<>();
@@ -203,12 +313,12 @@ public class BotDeckBuildTest extends MageTestPlayerBase {
     public void test_Limited_MaxExpensiveCards() {
         // deck must have max 3 cards with mana value 6+
         List<Card> pool = new ArrayList<>();
-        addCards(pool, "Craterhoof Behemoth", 10); // {5}{G}{G}{G}, mythic creature
+        addCards(pool, "Avenger of Zendikar", 10); // {5}{G}{G}, mythic creature
         addCards(pool, "Grizzly Bears", 30); // {1}{G}, common creature
 
         Deck deck = ComputerPlayer.buildDeck(LIMITED_DECK_SIZE, pool, Collections.singletonList(ColoredManaSymbol.G));
         assertDeck(deck, LIMITED_DECK_SIZE, LIMITED_DECK_LANDS, LIMITED_DECK_SPELLS);
-        assertCardsCount(deck, "Craterhoof Behemoth", 3);
+        assertCardsCount(deck, "Avenger of Zendikar", 3);
     }
 
     @Test
@@ -238,6 +348,15 @@ public class BotDeckBuildTest extends MageTestPlayerBase {
     private Card createCard(String cardName) {
         CardInfo cardInfo = CardRepository.instance.findCard(cardName);
         Assert.assertNotNull("can't find card " + cardName, cardInfo);
+        return cardInfo.createCard();
+    }
+
+    private Card createCard(String cardName, String setCode) {
+        CardInfo cardInfo = CardRepository.instance.findCards(cardName).stream()
+                .filter(info -> info.getSetCode().equals(setCode))
+                .findFirst()
+                .orElse(null);
+        Assert.assertNotNull("can't find card " + cardName + " in " + setCode, cardInfo);
         return cardInfo.createCard();
     }
 

@@ -70,11 +70,6 @@ public class ComputerPlayer extends PlayerImpl {
     // TODO: rework AI implementation to use multiple sims calculation instead one by one
     final static int COMPUTER_MAX_THREADS_FOR_SIMULATIONS = 5;//DebugUtil.AI_ENABLE_DEBUG_MODE ? 1 : 5;
 
-
-    // remember picked cards for better draft choices
-    private final transient List<PickedCard> pickedCards = new ArrayList<>();
-    private final transient List<ColoredManaSymbol> chosenColors = new ArrayList<>();
-
     // keep current paying cost info for choose dialogs
     // mana abilities must ask payment too, so keep full chain
     // TODO: make sure it thread safe for AI simulations (all transient fields above and bottom)
@@ -1232,16 +1227,8 @@ public class ComputerPlayer extends PlayerImpl {
         int deckMinSize = deckValidator != null ? deckValidator.getDeckMinSize() : 0;
 
         if (deck != null && deck.getMaindeckCards().size() < deckMinSize && !deck.getSideboard().isEmpty()) {
-            if (chosenColors.isEmpty()) {
-                for (Card card : deck.getSideboard()) {
-                    rememberPick(card, RateCard.rateCard(card, Collections.emptyList()));
-                }
-                List<ColoredManaSymbol> deckColors = chooseDeckColorsIfPossible();
-                if (deckColors != null) {
-                    chosenColors.addAll(deckColors);
-                }
-            }
-            deck = buildDeck(deckMinSize, new ArrayList<>(deck.getSideboard()), chosenColors);
+            List<Card> pool = new ArrayList<>(deck.getSideboard());
+            deck = buildDeck(deckMinSize, pool, RateCard.chooseDeckColors(pool));
         }
         tournament.submitDeck(playerId, deck);
     }
@@ -1277,8 +1264,11 @@ public class ComputerPlayer extends PlayerImpl {
             throw new IllegalArgumentException("No cards to pick from.");
         }
         try {
+            // colors by own picks, it can be changed during the draft
+            List<ColoredManaSymbol> chosenColors = deck == null
+                    ? Collections.emptyList()
+                    : RateCard.chooseDeckColors(new ArrayList<>(deck.getSideboard()));
             Card bestCard = makePickCard(cards, chosenColors);
-            int maxScore = RateCard.rateCard(bestCard, chosenColors);
             int pickedCardRate = RateCard.getBaseCardScore(bestCard);
 
             if (pickedCardRate <= 30) {
@@ -1290,98 +1280,13 @@ public class ComputerPlayer extends PlayerImpl {
                 // take it!
                 if (counterPickScore >= 80) {
                     bestCard = counterPick;
-                    maxScore = RateCard.rateCard(bestCard, chosenColors);
                 }
             }
 
-            String colors = "not chosen yet";
-            // remember card if colors are not chosen yet
-            if (chosenColors.isEmpty()) {
-                rememberPick(bestCard, maxScore);
-                List<ColoredManaSymbol> chosen = chooseDeckColorsIfPossible();
-                if (chosen != null) {
-                    chosenColors.addAll(chosen);
-                }
-            }
-            if (!chosenColors.isEmpty()) {
-                colors = "";
-                for (ColoredManaSymbol symbol : chosenColors) {
-                    colors += symbol.toString();
-                }
-            }
             draft.addPick(playerId, bestCard.getId(), null);
         } catch (Exception e) {
             logger.error("Error during AI pick card for draft playerId = " + getId(), e);
             draft.addPick(playerId, cards.get(0).getId(), null);
-        }
-    }
-
-    /**
-     * Remember picked card with its score.
-     */
-    protected void rememberPick(Card card, int score) {
-        pickedCards.add(new PickedCard(card, score));
-    }
-
-    /**
-     * Choose 2 deck colors for draft: 1. there should be at least 3 cards in
-     * card pool 2. at least 2 cards should have different colors 3. get card
-     * colors as chosen starting from most rated card
-     */
-    protected List<ColoredManaSymbol> chooseDeckColorsIfPossible() {
-        if (pickedCards.size() > 2) {
-            // sort by score and color mana symbol count in descending order
-            pickedCards.sort((o1, o2) -> {
-                if (o1.score.equals(o2.score)) {
-                    Integer i1 = RateCard.getColorManaCount(o1.card);
-                    Integer i2 = RateCard.getColorManaCount(o2.card);
-                    return i2.compareTo(i1);
-                }
-                return o2.score.compareTo(o1.score);
-            });
-            Set<String> chosenSymbols = new HashSet<>();
-            for (PickedCard picked : pickedCards) {
-                int differentColorsInCost = RateCard.getDifferentColorManaCount(picked.card);
-                // choose only color card, but only if they are not too gold
-                if (differentColorsInCost > 0 && differentColorsInCost < 3) {
-                    // if some colors were already chosen, total amount shouldn't be more than 3
-                    if (chosenSymbols.size() + differentColorsInCost < 4) {
-                        for (String symbol : picked.card.getManaCostSymbols()) {
-                            symbol = symbol.replace("{", "").replace("}", "");
-                            if (RateCard.isColoredMana(symbol)) {
-                                chosenSymbols.add(symbol);
-                            }
-                        }
-                    }
-                }
-                // only two or three color decks are allowed
-                if (chosenSymbols.size() > 1 && chosenSymbols.size() < 4) {
-                    List<ColoredManaSymbol> colorsChosen = new ArrayList<>();
-                    for (String symbol : chosenSymbols) {
-                        ColoredManaSymbol manaSymbol = ColoredManaSymbol.lookup(symbol.charAt(0));
-                        if (manaSymbol != null) {
-                            colorsChosen.add(manaSymbol);
-                        }
-                    }
-                    if (colorsChosen.size() > 1) {
-                        // no need to remember picks anymore
-                        pickedCards.clear();
-                        return colorsChosen;
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
-    private static class PickedCard {
-
-        public Card card;
-        public Integer score;
-
-        public PickedCard(Card card, int score) {
-            this.card = card;
-            this.score = score;
         }
     }
 

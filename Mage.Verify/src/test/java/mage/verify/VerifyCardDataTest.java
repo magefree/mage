@@ -3501,19 +3501,17 @@ public class VerifyCardDataTest {
 
     @Test
     public void test_checkCardRatingConsistency() {
-        // all cards with same name must have same rating (see RateCard.rateCard)
+        // all cards with same name in same set must have same rating (see RateCard.rateCard)
         // cards rating must be consistency (same) for card sorting
+        // warning, draft rating is a card place among the cards of one set, so diff sets can have diff ratings
         List<Card> cardsList = new ArrayList<>(CardScanner.getAllCards());
         Map<String, Integer> cardRates = new HashMap<>();
         for (Card card : cardsList) {
             int curRate = RateCard.rateCard(card, Collections.emptyList(), false);
-            int prevRate = cardRates.getOrDefault(card.getName(), 0);
-            if (prevRate == 0) {
-                cardRates.putIfAbsent(card.getName(), curRate);
-            } else {
-                if (curRate != prevRate) {
-                    Assert.fail("Card with same name have different ratings: " + card.getName());
-                }
+            String key = card.getExpansionSetCode() + " - " + card.getName();
+            Integer prevRate = cardRates.putIfAbsent(key, curRate);
+            if (prevRate != null && curRate != prevRate) {
+                Assert.fail("Card with same name in same set have different ratings: " + key);
             }
         }
     }
