@@ -127,6 +127,9 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Earth, Sector 001", 577, Rarity.COMMON, mage.cards.e.EarthSector001.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eject the Warp Core", 105, Rarity.COMMON, mage.cards.e.EjectTheWarpCore.class));
         cards.add(new SetCardInfo("Emergency Medical Hologram", 15, Rarity.COMMON, mage.cards.e.EmergencyMedicalHologram.class));
+        cards.add(new SetCardInfo("Encounter the Unknown", 148, Rarity.RARE, mage.cards.e.EncounterTheUnknown.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Encounter the Unknown", 381, Rarity.RARE, mage.cards.e.EncounterTheUnknown.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Encounter the Unknown", 515, Rarity.RARE, mage.cards.e.EncounterTheUnknown.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Engineered Explosives", 264, Rarity.RARE, mage.cards.e.EngineeredExplosives.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Engineered Explosives", 480, Rarity.RARE, mage.cards.e.EngineeredExplosives.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Enterprise NX-01", 58, Rarity.UNCOMMON, mage.cards.e.EnterpriseNX01.class));
