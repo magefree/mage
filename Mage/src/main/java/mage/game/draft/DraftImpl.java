@@ -202,7 +202,7 @@ public abstract class DraftImpl implements Draft {
                 // priority:
                 // 1. user's marked card (it's always from the current booster);
                 // 2. first suggested card (suggestions are always from the current booster);
-                // 3. last card (no suggestions, e.g. not calculated in time)
+                // 3. rarest card (no suggestions, e.g. not calculated in time), first one on same rarity
                 UUID cardId;
                 List<DraftPickSuggest> suggests = player.getPickSuggests();
                 if (player.getMarkedCard() != null) {
@@ -210,11 +210,23 @@ public abstract class DraftImpl implements Draft {
                 } else if (suggests != null && !suggests.isEmpty()) {
                     cardId = suggests.get(0).getCardId();
                 } else {
-                    cardId = booster.get(booster.size() - 1).getId();
+                    cardId = findRarestCard(booster).getId();
                 }
                 this.addPick(playerId, cardId, null);
             }
         }
+    }
+
+    private static Card findRarestCard(List<Card> booster) {
+        // rarity is a simple and stable value, so it's a good choice for a pick without ratings
+        // (boosters have no sorting by rarity, e.g. basic land can be the last card)
+        Card res = booster.get(0);
+        for (Card card : booster) {
+            if (card.getRarity().getSorting() > res.getRarity().getSorting()) {
+                res = card;
+            }
+        }
+        return res;
     }
 
     @Override

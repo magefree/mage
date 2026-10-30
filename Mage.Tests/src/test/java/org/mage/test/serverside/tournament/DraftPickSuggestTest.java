@@ -131,7 +131,7 @@ public class DraftPickSuggestTest {
 
         // no suggestions
         picked = autoPick(false, false);
-        Assert.assertEquals("last card", "Extended Absence", picked.getName()); // last card of the booster
+        Assert.assertEquals("rarest card, first on same rarity", "Hexhaven Battalion", picked.getName()); // all commons
 
         // outdated suggestions (cards from another booster) must be ignored
         BoosterDraft draft = new BoosterDraft(new DraftOptions(), Collections.emptyList());
@@ -143,6 +143,27 @@ public class DraftPickSuggestTest {
         draft.setPickSuggests(player.getId(), Collections.singletonList(new DraftPickSuggest(UUID.randomUUID(), "outdated")));
         Assert.assertEquals("outdated suggestions must be ignored", 0, draftPlayer.getPickSuggests().size());
         Assert.assertFalse("suggestions are calculated", draft.isPickSuggestsNeeded(player.getId()));
+    }
+
+    @Test
+    public void test_AutoPick_WithoutSuggestsMustUseRarestCard() {
+        // boosters have no sorting by rarity (basic land goes last), so autopick without suggestions must use rarity
+        BoosterDraft draft = new BoosterDraft(new DraftOptions(), Collections.emptyList());
+        StubPlayer player = new StubPlayer("test", RangeOfInfluence.ALL);
+        draft.addPlayer(player);
+        DraftPlayer draftPlayer = draft.getPlayer(player.getId());
+        List<Card> booster = new ArrayList<>();
+        addCards(booster, "Last Gasp", 1); // C
+        addCards(booster, "Archive Arbiter", 1); // U
+        addCards(booster, "Ajani's Anguish", 1); // R
+        addCards(booster, "Bloombrute", 1); // U
+        addCards(booster, "Forest", 1); // L
+        draftPlayer.setBoosterAndLoad(booster);
+        draftPlayer.setPickingAndSending();
+
+        draft.autoPick(player.getId());
+        Assert.assertFalse("must pick", draftPlayer.isPicking());
+        Assert.assertEquals("Ajani's Anguish", draftPlayer.getDeck().getSideboard().iterator().next().getName());
     }
 
     private Card autoPick(boolean useMarked, boolean useSuggests) {
