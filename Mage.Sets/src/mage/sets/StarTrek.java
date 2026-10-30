@@ -267,6 +267,8 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Risa", 293, Rarity.COMMON, mage.cards.r.Risa.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Risa", 578, Rarity.COMMON, mage.cards.r.Risa.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rogue Artificial Intelligence", 126, Rarity.COMMON, mage.cards.r.RogueArtificialIntelligence.class));
+        cards.add(new SetCardInfo("Rok-Tahk, Budding Scientist", 211, Rarity.MYTHIC, mage.cards.r.RokTahkBuddingScientist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rok-Tahk, Budding Scientist", 472, Rarity.MYTHIC, mage.cards.r.RokTahkBuddingScientist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Romulus", 294, Rarity.COMMON, mage.cards.r.Romulus.class));
         cards.add(new SetCardInfo("Saavik, Stoic Student", 33, Rarity.UNCOMMON, mage.cards.s.SaavikStoicStudent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Saavik, Stoic Student", 406, Rarity.UNCOMMON, mage.cards.s.SaavikStoicStudent.class, NON_FULL_USE_VARIOUS));

@@ -136,6 +136,7 @@ public enum SubType {
     BOLIAN("Bolian", SubTypeSet.CreatureType),
     BORG("Borg", SubTypeSet.CreatureType),
     BRAINIAC("Brainiac", SubTypeSet.CreatureType, true), // Unstable
+    BRIKAR("Brikar", SubTypeSet.CreatureType),
     BRINGER("Bringer", SubTypeSet.CreatureType),
     BRUSHWAGG("Brushwagg", SubTypeSet.CreatureType),
     // C
