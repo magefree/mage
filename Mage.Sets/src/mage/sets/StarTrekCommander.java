@@ -208,7 +208,8 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Jefferies Tube", 114, Rarity.RARE, mage.cards.j.JefferiesTube.class));
         cards.add(new SetCardInfo("Join the Collective", 20, Rarity.RARE, mage.cards.j.JoinTheCollective.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Join the Collective", 226, Rarity.RARE, mage.cards.j.JoinTheCollective.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Jurati, Cordial Queen", 95, Rarity.RARE, mage.cards.j.JuratiCordialQueen.class));
+        cards.add(new SetCardInfo("Jurati, Cordial Queen", 322, Rarity.RARE, mage.cards.j.JuratiCordialQueen.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jurati, Cordial Queen", 95, Rarity.RARE, mage.cards.j.JuratiCordialQueen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("K'Vort-Class Raider", 116, Rarity.RARE, mage.cards.k.KVortClassRaider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("K'Vort-Class Raider", 350, Rarity.RARE, mage.cards.k.KVortClassRaider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("K't'inga-Class Battle Cruiser", 115, Rarity.RARE, mage.cards.k.KtingaClassBattleCruiser.class, NON_FULL_USE_VARIOUS));
@@ -257,8 +258,10 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("One, Borg Evolved", 100, Rarity.RARE, mage.cards.o.OneBorgEvolved.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("One, Borg Evolved", 324, Rarity.RARE, mage.cards.o.OneBorgEvolved.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Operations Officer", 192, Rarity.RARE, mage.cards.o.OperationsOfficer.class));
-        cards.add(new SetCardInfo("Optimization Annex", 48, Rarity.RARE, mage.cards.o.OptimizationAnnex.class));
-        cards.add(new SetCardInfo("Own the Day", 73, Rarity.RARE, mage.cards.o.OwnTheDay.class));
+        cards.add(new SetCardInfo("Optimization Annex", 262, Rarity.RARE, mage.cards.o.OptimizationAnnex.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Optimization Annex", 48, Rarity.RARE, mage.cards.o.OptimizationAnnex.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Own the Day", 290, Rarity.RARE, mage.cards.o.OwnTheDay.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Own the Day", 73, Rarity.RARE, mage.cards.o.OwnTheDay.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Painful Truths", 274, Rarity.RARE, mage.cards.p.PainfulTruths.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Painful Truths", 447, Rarity.RARE, mage.cards.p.PainfulTruths.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Path of Ancestry", 545, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
@@ -401,7 +404,8 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("U.S.S. Defiant, Tough Little Ship", 361, Rarity.RARE, mage.cards.u.USSDefiantToughLittleShip.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("U.S.S. Enterprise-E, Sovereign", 244, Rarity.RARE, mage.cards.u.USSEnterpriseESovereign.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("U.S.S. Enterprise-E, Sovereign", 34, Rarity.RARE, mage.cards.u.USSEnterpriseESovereign.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("U.S.S. Prometheus, Prototype", 128, Rarity.RARE, mage.cards.u.USSPrometheusPrototype.class));
+        cards.add(new SetCardInfo("U.S.S. Prometheus, Prototype", 128, Rarity.RARE, mage.cards.u.USSPrometheusPrototype.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("U.S.S. Prometheus, Prototype", 364, Rarity.RARE, mage.cards.u.USSPrometheusPrototype.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Uhura, Xenolinguist", 182, Rarity.RARE, mage.cards.u.UhuraXenolinguist.class));
         cards.add(new SetCardInfo("Umbral Expanse", 414, Rarity.RARE, mage.cards.u.UmbralExpanse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Umbral Expanse", 574, Rarity.RARE, mage.cards.u.UmbralExpanse.class, NON_FULL_USE_VARIOUS));
