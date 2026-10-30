@@ -56,6 +56,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Captain James T. Kirk", 1701, Rarity.MYTHIC, mage.cards.c.CaptainJamesTKirk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain James T. Kirk", 418, Rarity.MYTHIC, mage.cards.c.CaptainJamesTKirk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain James T. Kirk", 542, Rarity.MYTHIC, mage.cards.c.CaptainJamesTKirk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Captain Jean-Luc Picard", "1701D", Rarity.MYTHIC, mage.cards.c.CaptainJeanLucPicard.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain Jean-Luc Picard", 363, Rarity.MYTHIC, mage.cards.c.CaptainJeanLucPicard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain Jean-Luc Picard", 497, Rarity.MYTHIC, mage.cards.c.CaptainJeanLucPicard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captain Jean-Luc Picard", 7, Rarity.MYTHIC, mage.cards.c.CaptainJeanLucPicard.class, NON_FULL_USE_VARIOUS));
@@ -142,6 +143,8 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 486, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 325, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 326, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 567, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 568, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Free Borg Revolutionaries", 19, Rarity.COMMON, mage.cards.f.FreeBorgRevolutionaries.class));
         cards.add(new SetCardInfo("Fugitive Listener", 107, Rarity.COMMON, mage.cards.f.FugitiveListener.class));
         cards.add(new SetCardInfo("General Chang, Cold Warrior", 109, Rarity.RARE, mage.cards.g.GeneralChangColdWarrior.class, NON_FULL_USE_VARIOUS));
