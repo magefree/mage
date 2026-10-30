@@ -413,6 +413,9 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Watery Grave", 306, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Watery Grave", 393, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Watery Grave", 488, Rarity.RARE, mage.cards.w.WateryGrave.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wesley Crusher, Starfleet Cadet", 89, Rarity.RARE, mage.cards.w.WesleyCrusherStarfleetCadet.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wesley Crusher, Starfleet Cadet", 374, Rarity.RARE, mage.cards.w.WesleyCrusherStarfleetCadet.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wesley Crusher, Starfleet Cadet", 508, Rarity.RARE, mage.cards.w.WesleyCrusherStarfleetCadet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Worf, Honor-Bound Warrior", 256, Rarity.UNCOMMON, mage.cards.w.WorfHonorBoundWarrior.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Worf, Honor-Bound Warrior", 390, Rarity.UNCOMMON, mage.cards.w.WorfHonorBoundWarrior.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Worf, Honor-Bound Warrior", 435, Rarity.UNCOMMON, mage.cards.w.WorfHonorBoundWarrior.class, NON_FULL_USE_VARIOUS));
