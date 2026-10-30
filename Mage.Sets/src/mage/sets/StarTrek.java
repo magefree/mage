@@ -246,6 +246,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Overgrown Tomb", 494, Rarity.RARE, mage.cards.o.OvergrownTomb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pah-Wraith", 160, Rarity.RARE, mage.cards.p.PahWraith.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pah-Wraith", 465, Rarity.RARE, mage.cards.p.PahWraith.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Pattern Buffer Preservation", 123, Rarity.COMMON, mage.cards.p.PatternBufferPreservation.class));
         cards.add(new SetCardInfo("Perils of the Past", 161, Rarity.COMMON, mage.cards.p.PerilsOfThePast.class));
         cards.add(new SetCardInfo("Pet Sehlat", 28, Rarity.COMMON, mage.cards.p.PetSehlat.class));
         cards.add(new SetCardInfo("Phlox, Unorthodox Doctor", 250, Rarity.UNCOMMON, mage.cards.p.PhloxUnorthodoxDoctor.class));
