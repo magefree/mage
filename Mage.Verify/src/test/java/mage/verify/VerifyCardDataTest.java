@@ -174,12 +174,13 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
-
+        skipListAddName(SKIP_LIST_TYPE, "TRK", "Culber and Stamets, Star-Crossed"); // TODO: Remove once MTGJson resyncs (Oct 30, 2026)
         // subtype
         // skipListAddName(SKIP_LIST_SUBTYPE, set, cardName);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
+        skipListAddName(SKIP_LIST_SUBTYPE, "TRK", "Culber and Stamets, Star-Crossed"); // TODO: Remove once MTGJson resyncs (Oct 30, 2026)
 
         // number
         // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
