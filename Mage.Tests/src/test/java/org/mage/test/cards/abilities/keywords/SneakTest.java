@@ -201,6 +201,76 @@ public class SneakTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_SneakFromGraveyardAndModalDoubleFaced_NinjaTeen() {
+        // Whenever a creature you control leaves the battlefield, each opponent loses 1 life.
+        // Level 2: Creatures you control get +1/+0 and have menace.
+        // Level 3: Creature cards in your graveyard have sneak {3}{B}.
+        // Level 3: You may cast creature spells from your graveyard using their sneak abilities.
+        addCard(Zone.BATTLEFIELD, playerA, "Ninja Teen");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3); // {1}{B} + {B} for levels
+        //
+        addCard(Zone.GRAVEYARD, playerA, "Tergrid, God of Fright"); // modal double-faced, front 4/5, menace
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4); // {3}{B} for sneak
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2, attacker
+        addCard(Zone.BATTLEFIELD, playerB, "Jace Beleren"); // planeswalker, loyalty 3
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{B}: Level 2");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{B}: Level 3");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        attack(1, playerA, "Grizzly Bears", playerB);
+
+        castSpell(1, PhaseStep.DECLARE_BLOCKERS, playerA, "Tergrid, God of Fright with Sneak");
+        setChoice(playerA, "Grizzly Bears"); // unblocked attacker to return
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+
+        assertHandCount(playerA, "Grizzly Bears", 1);
+        assertTapped("Tergrid, God of Fright", true);
+        assertCounterCount(playerB, "Jace Beleren", CounterType.LOYALTY, 3);
+        assertLife(playerB, 20 - 1 - 5); // bear left the battlefield + Tergrid 5/5 with level 2
+    }
+
+    @Test
+    public void test_SneakFromGraveyardAndTransformingDoubleFaced_NinjaTeen() {
+        // Whenever a creature you control leaves the battlefield, each opponent loses 1 life.
+        // Level 2: Creatures you control get +1/+0 and have menace.
+        // Level 3: Creature cards in your graveyard have sneak {3}{B}.
+        // Level 3: You may cast creature spells from your graveyard using their sneak abilities.
+        addCard(Zone.BATTLEFIELD, playerA, "Ninja Teen");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3); // {1}{B} + {B} for levels
+        //
+        addCard(Zone.GRAVEYARD, playerA, "Delver of Secrets"); // transforming double-faced, front 1/1
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4); // {3}{B} for sneak
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2, attacker
+        addCard(Zone.BATTLEFIELD, playerB, "Jace Beleren"); // planeswalker, loyalty 3
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{B}: Level 2");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{B}: Level 3");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        attack(1, playerA, "Grizzly Bears", playerB);
+
+        castSpell(1, PhaseStep.DECLARE_BLOCKERS, playerA, "Delver of Secrets with Sneak");
+        setChoice(playerA, "Grizzly Bears"); // unblocked attacker to return
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+
+        assertHandCount(playerA, "Grizzly Bears", 1);
+        assertTapped("Delver of Secrets", true);
+        assertCounterCount(playerB, "Jace Beleren", CounterType.LOYALTY, 3);
+        assertLife(playerB, 20 - 1 - 2); // bear left the battlefield + Delver 2/1 with level 2
+    }
+
+    @Test
     public void test_SneakAndEntersTrigger_TurncoatKunoichi() {
         // Sneak {2}{W}{B}
         // When this creature enters, choose target creature an opponent controls. Exile that creature until this
