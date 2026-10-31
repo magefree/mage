@@ -367,6 +367,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Troubling Tribbles", 41, Rarity.RARE, mage.cards.t.TroublingTribbles.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Troubling Tribbles", 532, Rarity.RARE, mage.cards.t.TroublingTribbles.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Type-2 Phaser", 271, Rarity.UNCOMMON, mage.cards.t.Type2Phaser.class));
+        cards.add(new SetCardInfo("U.S.S. Cerritos, Following Up", 272, Rarity.UNCOMMON, mage.cards.u.USSCerritosFollowingUp.class));
         cards.add(new SetCardInfo("U.S.S. Discovery, at Black Alert", 221, Rarity.RARE, mage.cards.u.USSDiscoveryAtBlackAlert.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("U.S.S. Discovery, at Black Alert", 474, Rarity.RARE, mage.cards.u.USSDiscoveryAtBlackAlert.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("U.S.S. Discovery, at Black Alert", 554, Rarity.RARE, mage.cards.u.USSDiscoveryAtBlackAlert.class, NON_FULL_USE_VARIOUS));
