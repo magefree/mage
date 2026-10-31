@@ -2918,7 +2918,8 @@ public abstract class GameImpl implements Game {
                 if (perm
                         .getCounters(this)
                         .getCount(CounterType.DEFENSE) == 0
-                        && this.getStack()
+                        && (!perm.hasSubtype(SubType.SIEGE, this) // 704.5w, 704.5v
+                        || this.getStack()
                         .stream()
                         .filter(StackAbility.class::isInstance)
                         .filter(stackObject -> stackObject.getStackAbility() instanceof TriggeredAbilityImpl)
@@ -2929,7 +2930,7 @@ public abstract class GameImpl implements Game {
                         .stream()
                         .filter(TriggeredAbility.class::isInstance)
                         .map(Ability::getSourceId)
-                        .noneMatch(perm.getId()::equals)) {
+                        .noneMatch(perm.getId()::equals))) {
                     if (movePermanentToGraveyardWithInfo(perm, "SBA: battle with 0 defense")) {
                         somethingHappened = true;
                     }
@@ -2940,12 +2941,13 @@ public abstract class GameImpl implements Game {
                         .map(CombatGroup::getDefenderId)
                         .filter(Objects::nonNull)
                         .noneMatch(perm.getId()::equals)
-                        && this.getPlayer(perm.getProtectorId()) == null
-                        || perm.isControlledBy(perm.getProtectorId())) {
+                        && !perm.canBeProtectedBy(perm.getProtectorId(), this) // 704.5x
+                        || !perm.canBeProtectedBy(perm.getProtectorId(), this) // 704.5y
+                        && this.getPlayer(perm.getProtectorId()) != null
+                        && this.getPlayer(perm.getProtectorId()).isInGame()) {
                     perm.chooseProtector(this, null);
-                    if (this.getPlayer(perm.getProtectorId()) == null) {
-                        logger.error("Something wrong, battle without protector: " + perm + ", " + this);
-                        movePermanentToGraveyardWithInfo(perm, "SBA: something wrong, battle wthout protector");
+                    if (!perm.canBeProtectedBy(perm.getProtectorId(), this)) {
+                        movePermanentToGraveyardWithInfo(perm, "SBA: no player can protect the battle");
                     }
                     somethingHappened = true;
                 }

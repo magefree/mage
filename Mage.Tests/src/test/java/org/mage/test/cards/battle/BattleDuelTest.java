@@ -3,7 +3,6 @@ package org.mage.test.cards.battle;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -317,8 +316,8 @@ public class BattleDuelTest extends BattleBaseTest {
     }
 
     @Test
-    @Ignore("TODO: 506.4 - a battle must be removed from combat when its controller or protector changes")
     public void test_ChangeControlDuringCombat_RemovedFromCombat() {
+        // 506.4 - a permanent is removed from combat if its controller or protector changes
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
         addCard(Zone.BATTLEFIELD, playerA, bear);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 5);

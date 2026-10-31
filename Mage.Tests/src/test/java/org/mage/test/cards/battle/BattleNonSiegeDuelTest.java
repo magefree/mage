@@ -5,7 +5,6 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -16,8 +15,8 @@ import org.junit.Test;
 public class BattleNonSiegeDuelTest extends BattleBaseTest {
 
     @Test
-    @Ignore("TODO: 310.9a - a battle without battle types must be protected by its controller, but engine chooses an opponent")
     public void test_NoBattleType_ControllerIsProtector() {
+        // 310.9a - if it has no battle types, only its controller can be its protector
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
         addTypelessBattleToHand(playerA, 3, null);
 
@@ -32,8 +31,8 @@ public class BattleNonSiegeDuelTest extends BattleBaseTest {
     }
 
     @Test
-    @Ignore("TODO: 310.9b - opponent must be able to attack a battle protected by its controller (depends on 310.9a)")
     public void test_NoBattleType_OpponentCanAttack() {
+        // 310.9b - any attacking player for whom the protector is a defending player can attack it
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
         addCard(Zone.BATTLEFIELD, playerB, bear);
         addTypelessBattleToHand(playerA, 3, null);
@@ -52,8 +51,8 @@ public class BattleNonSiegeDuelTest extends BattleBaseTest {
     }
 
     @Test
-    @Ignore("TODO: 704.5y - after control change only the new controller can protect a battle without battle types")
     public void test_NoBattleType_ChangeControl() {
+        // 704.5y - after control change only the new controller can protect it
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 6);
         addCard(Zone.HAND, playerB, confiscate);
@@ -91,8 +90,8 @@ public class BattleNonSiegeDuelTest extends BattleBaseTest {
     }
 
     @Test
-    @Ignore("TODO: 704.5w - unlike 704.5v (Siege), non-Siege battle with 0 defense dies even with its own waiting triggers")
     public void test_DefenseZero_GoesToGraveyardWithWaitingTrigger() {
+        // 704.5w - unlike 704.5v (Siege), it dies even if it's the source of a waiting trigger
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         addCard(Zone.HAND, playerA, "Lightning Bolt");
         addTypelessBattleToHand(playerA, 3, new DealtDamageToSourceTriggeredAbility(new GainLifeEffect(1), false));

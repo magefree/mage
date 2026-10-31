@@ -9,7 +9,6 @@ import mage.game.FreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.mulligan.MulliganType;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
@@ -36,8 +35,8 @@ public class BattleNonSiegeMultiplayerTest extends BattleBaseTest {
     }
 
     @Test
-    @Ignore("TODO: 310.9a - a battle without battle types must be protected by its controller, but engine asks for an opponent")
     public void test_NoBattleType_ControllerIsProtector() {
+        // 310.9a - if it has no battle types, only its controller can be its protector
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
         addTypelessBattleToHand(playerA, 3, null);
 
@@ -52,8 +51,8 @@ public class BattleNonSiegeMultiplayerTest extends BattleBaseTest {
     }
 
     @Test
-    @Ignore("TODO: 310.9b - any opponent must be able to attack a battle protected by its controller (depends on 310.9a)")
     public void test_NoBattleType_AnyOpponentCanAttack() {
+        // 310.9b - any attacking player for whom the protector is a defending player can attack it
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
         addCard(Zone.BATTLEFIELD, playerD, bear);
         addTypelessBattleToHand(playerA, 3, null);

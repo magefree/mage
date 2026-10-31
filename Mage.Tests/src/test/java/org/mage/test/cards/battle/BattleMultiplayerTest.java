@@ -9,7 +9,6 @@ import mage.game.FreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.mulligan.MulliganType;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
@@ -99,8 +98,8 @@ public class BattleMultiplayerTest extends BattleBaseTest {
     }
 
     @Test
-    @Ignore("TODO: 704.5x - a player who left the game isn't in the game, so controller must choose a new protector")
     public void testProtectorLeftGame() {
+        // 704.5x - a player who left the game isn't in the game, so its controller chooses a new protector
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
         addCard(Zone.HAND, playerA, belenon);
 

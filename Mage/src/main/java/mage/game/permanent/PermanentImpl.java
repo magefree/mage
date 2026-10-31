@@ -22,7 +22,9 @@ import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
-import mage.filter.FilterOpponent;
+import mage.filter.FilterPlayer;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.other.PlayerIdPredicate;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.ZoneChangeInfo;
@@ -44,6 +46,7 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -1818,7 +1821,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public boolean removeFromCombat(Game game, boolean withEvent) {
         if (this.isAttacking() || this.blocking > 0) {
             return game.getCombat().removeFromCombat(objectId, game, withEvent);
-        } else if (this.isPlaneswalker(game) && game.getCombat().getDefenders().contains(getId())) {
+        } else if ((this.isPlaneswalker(game) || this.isBattle(game)) && game.getCombat().getDefenders().contains(getId())) {
             game.getCombat().removeDefendingPermanentFromCombat(objectId, game);
         }
         return false;
@@ -2061,33 +2064,56 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void chooseProtector(Game game, Ability source) {
-        Set<UUID> opponents = game.getOpponents(this.getControllerId());
+        Set<UUID> possibleProtectors = game.getState().getPlayersInRange(this.getControllerId(), game, true)
+                .stream()
+                .filter(playerId -> canBeProtectedBy(playerId, game))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
         Player controller = game.getPlayer(this.getControllerId());
         if (controller == null) {
             return;
         }
 
         Player newProtector;
-        if (opponents.size() > 1) {
-            TargetPlayer target = new TargetPlayer(new FilterOpponent("protector for " + getName()));
+        if (possibleProtectors.size() > 1) {
+            FilterPlayer filter = new FilterPlayer("protector for " + getName());
+            filter.add(Predicates.or(possibleProtectors.stream().map(PlayerIdPredicate::new).collect(Collectors.toList())));
+            TargetPlayer target = new TargetPlayer(filter);
             target.withNotTarget(true);
             target.setRequired(true);
             controller.choose(Outcome.Neutral, target, source, game);
             newProtector = game.getPlayer(target.getFirstTarget());
-        } else if (opponents.size() == 1) {
-            newProtector = game.getPlayer(opponents.iterator().next());
+        } else if (possibleProtectors.size() == 1) {
+            newProtector = game.getPlayer(possibleProtectors.iterator().next());
         } else {
             newProtector = null;
         }
 
         if (newProtector != null) {
+            if (protectorId != null && !protectorId.equals(newProtector.getId())) {
+                // 506.4 - a permanent is removed from combat if its protector changes
+                game.getCombat().removeDefendingPermanentFromCombat(this.getId(), game);
+            }
             String protectorName = newProtector.getLogName();
             game.informPlayers(protectorName + " has been chosen to protect " + this.getLogName());
             this.addInfo("protector", "Protected by " + protectorName, game);
             this.setProtectorId(newProtector.getId());
         } else {
-            game.informPlayers(controller.getLogName() + " remains in protect of " + this.getLogName() + " as there are no opponents for new protector");
+            game.informPlayers("No player can protect " + this.getLogName());
         }
+    }
+
+    @Override
+    public boolean canBeProtectedBy(UUID playerId, Game game) {
+        Player player = game.getPlayer(playerId);
+        if (player == null || !player.isInGame()) {
+            return false;
+        }
+        if (this.hasSubtype(SubType.SIEGE, game)) {
+            // 310.12a - a Siege's protector must be one of its controller's opponents
+            return game.getOpponents(this.getControllerId(), true).contains(playerId);
+        }
+        // 310.9a - if it has no battle types, only its controller can be its protector
+        return this.isControlledBy(playerId);
     }
 
     @Override
