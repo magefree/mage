@@ -344,6 +344,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Temple Garden", 301, Rarity.RARE, mage.cards.t.TempleGarden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temple Garden", 396, Rarity.RARE, mage.cards.t.TempleGarden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temple Garden", 491, Rarity.RARE, mage.cards.t.TempleGarden.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tenacious Drone", 133, Rarity.COMMON, mage.cards.t.TenaciousDrone.class));
         cards.add(new SetCardInfo("Test of Conviction", 39, Rarity.UNCOMMON, mage.cards.t.TestOfConviction.class));
         cards.add(new SetCardInfo("Test of Courage", 220, Rarity.UNCOMMON, mage.cards.t.TestOfCourage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Test of Courage", 339, Rarity.UNCOMMON, mage.cards.t.TestOfCourage.class, NON_FULL_USE_VARIOUS));
