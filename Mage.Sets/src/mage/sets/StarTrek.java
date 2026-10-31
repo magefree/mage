@@ -154,6 +154,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Federation Resupply", 528, Rarity.RARE, mage.cards.f.FederationResupply.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ferenginar", 283, Rarity.COMMON, mage.cards.f.Ferenginar.class));
         cards.add(new SetCardInfo("Final Frontier", 198, Rarity.COMMON, mage.cards.f.FinalFrontier.class));
+        cards.add(new SetCardInfo("First Contact", 199, Rarity.COMMON, mage.cards.f.FirstContact.class));
         cards.add(new SetCardInfo("Forest", 311, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 316, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 486, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
