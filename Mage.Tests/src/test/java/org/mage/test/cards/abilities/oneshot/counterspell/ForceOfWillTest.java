@@ -2,7 +2,6 @@ package org.mage.test.cards.abilities.oneshot.counterspell;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -69,19 +68,14 @@ public class ForceOfWillTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thoughtseize", playerB);
         playerA.addChoice("Fireball");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Force of Will", "Thoughtseize");
+        // the spell is on the stack when its costs are paid, so it can't exile itself
+        checkPlayableAbility("can't pay alternative cost", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Force of Will", false);
 
         setStopAt(1, PhaseStep.CLEANUP);
+        execute();
 
-        // TODO: Needed since the alternative cost is not being properly check for playability.
-        try {
-            execute();
-            Assert.fail("must throw exception on execute");
-        } catch (Throwable e) {
-            if (!e.getMessage().contains("Cast Force of Will$target=Thoughtseize")) {
-                Assert.fail("must throw error about not being able to cast Force of Will, but got:\n" + e.getMessage());
-            }
-        }
+        assertHandCount(playerB, "Force of Will", 1);
+        assertGraveyardCount(playerB, "Fireball", 1);
     }
 
     // https://github.com/magefree/mage/issues/14397
