@@ -1,5 +1,6 @@
 package mage.cards.e;
 
+import java.util.Collections;
 import java.util.UUID;
 
 import mage.abilities.Ability;
@@ -59,7 +60,7 @@ class EndlessFootAssaultEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
-            new Ninja11Token().putOntoBattlefield(1, game, source, source.getControllerId(), true, true, playerId);
+            new Ninja11Token().putOntoBattlefield(1, game, source, source.getControllerId(), true, true, Collections.singleton(playerId));
         }
         return true;
     }

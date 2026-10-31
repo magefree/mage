@@ -210,6 +210,94 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     /**
+     * Add permanents marked as entering attacking (Permanent.setEntersAttacking) to the combat (rule 508.4).
+     * <p>
+     * Warning, it's use choose dialogs, so call it only after game state prepared (all permanents moved and ApplyEffects used)
+     *
+     * @param permanentIds in the enter order
+     * @param game
+     */
+    public void addEnteringAttackers(List<UUID> permanentIds, Game game) {
+        for (UUID permanentId : permanentIds) {
+            Permanent permanent = game.getPermanent(permanentId);
+            if (permanent == null || !permanent.isEntersAttacking()) {
+                throw new IllegalStateException("Wrong code usage: entering attacker must be on the battlefield and marked as entering attacking");
+            }
+            // 506.3a, 506.3b, 506.3f - enters the battlefield, but it's never an attacking creature
+            if (!permanent.isCreature(game)
+                    || permanent.isBattle(game)
+                    || attackingPlayerId == null
+                    || !permanent.isControlledBy(attackingPlayerId)) {
+                continue;
+            }
+            Set<UUID> possibleDefenders = permanent.getEntersAttackingDefenders()
+                    .stream()
+                    .filter(defenderId -> isValidDefender(defenderId, game))
+                    .collect(Collectors.toCollection(LinkedHashSet::new));
+            if (possibleDefenders.isEmpty()) {
+                continue;
+            }
+            chooseDefenderAndAddAttacker(permanentId, possibleDefenders, game);
+        }
+    }
+
+    /**
+     * 508.4a, 506.3c - a defender of an entering attacker must still be
+     * - a defending player in the game
+     * - a planeswalker on the battlefield controlled by a defending player
+     * - a battle protected by a defending player
+     */
+    private boolean isValidDefender(UUID defenderId, Game game) {
+        if (!defenders.contains(defenderId)) {
+            return false;
+        }
+        Player player = game.getPlayer(defenderId);
+        if (player != null) {
+            return player.isInGame();
+        }
+        Permanent defender = game.getPermanent(defenderId);
+        if (defender == null) {
+            return false;
+        }
+        if (defender.isPlaneswalker(game)) {
+            return defenders.contains(defender.getControllerId());
+        }
+        if (defender.isBattle(game)) {
+            return defenders.contains(defender.getProtectorId());
+        }
+        return false;
+    }
+
+    /**
+     * Defenders a creature can attack in the current combat
+     *
+     * @param attackerId     can be null, e.g. for tokens before they are created
+     * @param playerToAttack the player and its planeswalkers without battles ("that player or a planeswalker they control",
+     *                       e.g. myriad), or null for all defenders
+     * @param game
+     * @return
+     */
+    public Set<UUID> getPossibleDefenders(UUID attackerId, UUID playerToAttack, Game game) {
+        if (playerToAttack == null) {
+            return new LinkedHashSet<>(defenders);
+        }
+        Set<UUID> possibleDefenders = new LinkedHashSet<>();
+        for (UUID objectId : defenders) {
+            if (playerToAttack.equals(objectId)) {
+                possibleDefenders.add(objectId);
+                continue;
+            }
+            Permanent permanent = game.getPermanent(objectId);
+            if (permanent != null
+                    && permanent.isPlaneswalker(game)
+                    && permanent.canBeAttacked(attackerId, playerToAttack, game)) {
+                possibleDefenders.add(objectId);
+            }
+        }
+        return possibleDefenders;
+    }
+
+    /**
      * Add an additional attacker to the combat (e.g. token of Geist of Saint
      * Traft) This method doesn't trigger ATTACKER_DECLARED event (as intended).
      * If the creature has to be tapped that won't do this method.
@@ -223,22 +311,10 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public boolean addAttackingCreature(UUID creatureId, Game game, UUID playerToAttack) {
-        Set<UUID> possibleDefenders;
-        if (playerToAttack != null) {
-            possibleDefenders = new HashSet<>();
-            for (UUID objectId : defenders) {
-                if (playerToAttack.equals(objectId)) {
-                    possibleDefenders.add(objectId);
-                    continue;
-                }
-                Permanent permanent = game.getPermanent(objectId);
-                if (permanent != null && permanent.canBeAttacked(creatureId, playerToAttack, game)) {
-                    possibleDefenders.add(objectId);
-                }
-            }
-        } else {
-            possibleDefenders = new HashSet<>(defenders);
-        }
+        return chooseDefenderAndAddAttacker(creatureId, getPossibleDefenders(creatureId, playerToAttack, game), game);
+    }
+
+    private boolean chooseDefenderAndAddAttacker(UUID creatureId, Set<UUID> possibleDefenders, Game game) {
         Player player = game.getPlayer(attackingPlayerId);
         if (player == null) {
             return false;
@@ -1481,6 +1557,12 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public boolean addAttackerToCombat(UUID attackerId, UUID defenderId, Game game) {
+        if (findGroup(attackerId) != null) {
+            // one creature can't attack twice (a second combat group gives double damage and triggers)
+            Permanent attackingCreature = game.getPermanent(attackerId);
+            throw new IllegalStateException("Wrong code usage: creature is already attacking, it must be removed from combat first - "
+                    + (attackingCreature == null ? attackerId : attackingCreature.getIdName()));
+        }
         if (!defenders.contains(defenderId)) {
             return false;
         }

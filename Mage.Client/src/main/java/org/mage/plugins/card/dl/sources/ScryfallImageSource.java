@@ -17,12 +17,16 @@ import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
 
 import java.io.*;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
 
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
@@ -59,6 +63,11 @@ public class ScryfallImageSource implements CardImageSource {
 
     private static final List<ScryfallApiCard> bulkCardsDatabaseAll = new ArrayList<>(); // 100MB memory footprint, cleaning on download stop
     private static final Map<String, ScryfallApiCard> bulkCardsDatabaseDefault = new HashMap<>(); // card/set/number
+
+    // api image link, e.g. https://api.scryfall.com/cards/tvow/21/en?format=image&face=back
+    // (used by tokens, bulk data has the same cards, so it can be replaced by direct link without api calls)
+    private static final Pattern API_IMAGE_LINK_PATTERN = Pattern.compile(
+            "^https://api\\.scryfall\\.com/cards/([^/?]+)/([^/?]+)(?:/([^/?]*))?\\?format=image(?:&face=(front|back))?$");
 
     public static ScryfallImageSource getInstance() {
         return instance;
@@ -165,6 +174,20 @@ public class ScryfallImageSource implements CardImageSource {
         return new CardImageUrls(baseUrl, alternativeUrl);
     }
 
+    /**
+     * Rate limit error from the server (HTTP 429), the download must be stopped
+     */
+    private static class RateLimitException extends Exception {
+        private final String url;
+        private final String retryAfter;
+
+        RateLimitException(String url, String retryAfter) {
+            super("too many requests (HTTP 429): " + url);
+            this.url = url;
+            this.retryAfter = retryAfter;
+        }
+    }
+
     // TODO: delete face code after bulk data implemented?
     private String getFaceImageUrl(CardDownloadData card, boolean isToken) throws Exception {
         final String defaultCode = CardLanguage.ENGLISH.getCode();
@@ -208,9 +231,24 @@ public class ScryfallImageSource implements CardImageSource {
             // find first workable api endpoint
             waitBeforeRequest();
 
-            jsonStream = XmageURLConnection.downloadBinary(currentUrl);
-            if (jsonStream != null) {
+            XmageURLConnection connection = new XmageURLConnection(currentUrl);
+            connection.startConnection();
+            if (!connection.isConnected()) {
+                continue;
+            }
+            try {
+                connection.connect();
+            } catch (IOException e) {
+                logger.error("Scryfall: can't connect to " + currentUrl + " - " + e, e);
+                continue;
+            }
+            int responseCode = connection.getResponseCode();
+            if (responseCode == XmageURLConnection.HTTP_TOO_MANY_REQUESTS) {
+                throw new RateLimitException(currentUrl, connection.getHeaderField("Retry-After"));
+            }
+            if (responseCode == 200) {
                 // found good url, can stop
+                jsonStream = connection.getGoodResponseAsStream();
                 jsonUrl = currentUrl;
                 break;
             } else {
@@ -287,6 +325,9 @@ public class ScryfallImageSource implements CardImageSource {
                 try {
                     String url = getFaceImageUrl(card, card.isToken());
                     preparedUrls.put(card, url);
+                } catch (RateLimitException e) {
+                    downloadServiceInfo.stopOnRateLimit(e.url, e.retryAfter);
+                    return false;
                 } catch (Exception e) {
                     logger.warn("Failed to prepare image URL (back face) for " + card.getName() + " (" + card.getSet() + ") #"
                             + card.getCollectorId() + ", Error Message: " + e.getMessage());
@@ -533,6 +574,10 @@ public class ScryfallImageSource implements CardImageSource {
         AtomicInteger statsDirectLinks = new AtomicInteger();
         AtomicInteger statsNewPrepared = new AtomicInteger();
         AtomicInteger statsNotFound = new AtomicInteger();
+        AtomicInteger statsTokensPrepared = new AtomicInteger();
+        AtomicInteger statsTokensNotFound = new AtomicInteger();
+        AtomicInteger statsTokensOther = new AtomicInteger();
+        Map<String, ScryfallApiCard> bulkTokensIndex = null; // created on first token only
         for (CardDownloadData card : downloadList) {
             // fast cancel
             if (downloadServiceInfo.isNeedCancel()) {
@@ -545,8 +590,32 @@ public class ScryfallImageSource implements CardImageSource {
                 continue;
             }
 
-            // only cards supported
+            // tokens: api links to direct links (same set, number and face in bulk data)
             if (card.isToken()) {
+                if (bulkCardsDatabaseAll.isEmpty()) {
+                    // bulk data disabled
+                    continue;
+                }
+                String tokenLink = ScryfallImageSupportTokens.findTokenLink(card.getSet(), card.getName(), card.getImageNumber());
+                ApiImageLink apiLink = tokenLink == null ? null : parseApiImageLink(tokenLink);
+                if (apiLink == null) {
+                    // non scryfall or non api link (e.g. xmage's face down image)
+                    statsTokensOther.incrementAndGet();
+                    continue;
+                }
+                if (bulkTokensIndex == null) {
+                    bulkTokensIndex = createBulkTokensIndex(downloadServiceInfo, downloadList);
+                }
+                String link = findBulkImage(bulkTokensIndex, apiLink);
+                if (link.isEmpty()) {
+                    // how-to fix: make sure the token's link is valid (open it in a browser), it will be downloaded by api link
+                    logger.info("Scryfall: bulk token image not found, api link will be used: "
+                            + card.getSet() + "/" + card.getName() + "/" + card.getImageNumber() + " - " + tokenLink);
+                    statsTokensNotFound.incrementAndGet();
+                } else {
+                    preparedUrls.put(card, link);
+                    statsTokensPrepared.incrementAndGet();
+                }
                 continue;
             }
 
@@ -609,6 +678,122 @@ public class ScryfallImageSource implements CardImageSource {
                 statsNewPrepared.get(),
                 statsNotFound.get() // all not founded cards must be fixed
         ));
+        if (statsTokensPrepared.get() + statsTokensNotFound.get() + statsTokensOther.get() > 0) {
+            logger.info(String.format("Scryfall: bulk optimization result for tokens - direct links: %d, NOT FOUND (api links): %d, other links: %d",
+                    statsTokensPrepared.get(),
+                    statsTokensNotFound.get(),
+                    statsTokensOther.get()
+            ));
+        }
+    }
+
+    /**
+     * Scryfall API image link info (set, number, language, face)
+     */
+    static final class ApiImageLink {
+        final String set; // scryfall's set code
+        final String number; // xmage's format (34* instead 34★, same as bulk data after prepareCompatibleData)
+        final String lang; // empty for default language
+        final String face; // empty, front or back
+
+        ApiImageLink(String set, String number, String lang, String face) {
+            this.set = set;
+            this.number = number;
+            this.lang = lang;
+            this.face = face;
+        }
+    }
+
+    /**
+     * Parse api image link like https://api.scryfall.com/cards/tvow/21/en?format=image&face=back
+     *
+     * @return null for non api or unsupported links
+     */
+    static ApiImageLink parseApiImageLink(String link) {
+        if (link == null) {
+            return null;
+        }
+        Matcher matcher = API_IMAGE_LINK_PATTERN.matcher(link);
+        if (!matcher.matches()) {
+            return null;
+        }
+        String number = matcher.group(2);
+        if (number.contains("%")) {
+            try {
+                number = URLDecoder.decode(number, StandardCharsets.UTF_8.name());
+            } catch (UnsupportedEncodingException | IllegalArgumentException e) {
+                return null;
+            }
+        }
+        return new ApiImageLink(
+                matcher.group(1).toLowerCase(Locale.ENGLISH),
+                ScryfallApiCard.transformCardNumberFromScryfallToXmage(number),
+                matcher.group(3) == null ? "" : matcher.group(3),
+                matcher.group(4) == null ? "" : matcher.group(4)
+        );
+    }
+
+    /**
+     * Bulk cards index for tokens: set/number/lang and set/number/ (default version: en or first found)
+     * Only sets from tokens api links are indexed
+     */
+    private Map<String, ScryfallApiCard> createBulkTokensIndex(DownloadServiceInfo downloadServiceInfo, List<CardDownloadData> downloadList) {
+        Set<String> needSets = new HashSet<>();
+        for (CardDownloadData card : downloadList) {
+            if (card.isToken()) {
+                ApiImageLink apiLink = parseApiImageLink(ScryfallImageSupportTokens.findTokenLink(card.getSet(), card.getName(), card.getImageNumber()));
+                if (apiLink != null) {
+                    needSets.add(apiLink.set);
+                }
+            }
+        }
+
+        Map<String, ScryfallApiCard> res = new HashMap<>();
+        for (ScryfallApiCard card : bulkCardsDatabaseAll) {
+            if (downloadServiceInfo.isNeedCancel()) {
+                return res;
+            }
+            if (!needSets.contains(card.set)) {
+                continue;
+            }
+            String key = card.set + "/" + card.collector_number + "/";
+            res.putIfAbsent(key + card.lang, card);
+            ScryfallApiCard defaultCard = res.get(key);
+            if (defaultCard == null
+                    || (!defaultCard.lang.equals(CardLanguage.ENGLISH.getCode()) && card.lang.equals(CardLanguage.ENGLISH.getCode()))) {
+                res.put(key, card);
+            }
+        }
+        return res;
+    }
+
+    /**
+     * Find direct image link in bulk data like scryfall's api does for the image link (same language and face)
+     *
+     * @return empty for not found
+     */
+    private String findBulkImage(Map<String, ScryfallApiCard> bulkIndex, ApiImageLink apiLink) {
+        String key = apiLink.set + "/" + apiLink.number + "/";
+        ScryfallApiCard card = bulkIndex.get(key + apiLink.lang);
+        if (card == null && !apiLink.lang.isEmpty()) {
+            card = bulkIndex.get(key);
+        }
+        if (card == null) {
+            return "";
+        }
+
+        String quality = getImageQuality();
+        if (apiLink.face.equals("back")) {
+            // double faced token
+            return card.card_faces != null && card.card_faces.size() > 1 ? card.card_faces.get(1).findImage(quality) : "";
+        }
+
+        // single face or front face (api returns front face image for double faced cards without face param)
+        String image = card.findImage(quality);
+        if (image.isEmpty() && card.card_faces != null && !card.card_faces.isEmpty()) {
+            image = card.card_faces.get(0).findImage(quality);
+        }
+        return image;
     }
 
     private Map<String, String> createBulkImagesIndex(DownloadServiceInfo downloadServiceInfo, Collection<ScryfallApiCard> sourceList, boolean useLocalization) {
@@ -813,8 +998,12 @@ public class ScryfallImageSource implements CardImageSource {
 
     @Override
     public void doPause(String fullUrl) {
-        // scryfall recommends 300 ms timeout per each request to API to work under a rate limit
-        // possible error: 429 Too Many Requests
+        // scryfall rate limits (https://scryfall.com/docs/api/rate-limits):
+        // - api.scryfall.com: 10 requests per second (search/named/random/collection: 2 per second);
+        // - *.scryfall.io (images, bulk data): no limits;
+        // - on limit error (HTTP 429) all requests are blocked for 30 secs, continue to send requests can lead to a ban,
+        //   so download service stops on first 429 (see stopOnRateLimit)
+        // xmage uses 300 ms pause for all download threads (~3 requests per second, safe margin)
 
         // cdn source can be safe and called without pause
         if (fullUrl.contains("scryfall.io")) {
@@ -833,7 +1022,9 @@ public class ScryfallImageSource implements CardImageSource {
             } finally {
                 waitBeforeRequestLock.unlock();
             }
-        } catch (InterruptedException ignore) {
+        } catch (InterruptedException e) {
+            // keep interrupt status, so download threads can stop (see isNeedCancel)
+            Thread.currentThread().interrupt();
         }
     }
 

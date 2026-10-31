@@ -136,6 +136,7 @@ public enum SubType {
     BOLIAN("Bolian", SubTypeSet.CreatureType),
     BORG("Borg", SubTypeSet.CreatureType),
     BRAINIAC("Brainiac", SubTypeSet.CreatureType, true), // Unstable
+    BRIKAR("Brikar", SubTypeSet.CreatureType),
     BRINGER("Bringer", SubTypeSet.CreatureType),
     BRUSHWAGG("Brushwagg", SubTypeSet.CreatureType),
     // C
@@ -278,6 +279,7 @@ public enum SubType {
     JAWA("Jawa", SubTypeSet.CreatureType, true),
     JEDI("Jedi", SubTypeSet.CreatureType, true), // Star Wars
     JELLYFISH("Jellyfish", SubTypeSet.CreatureType),
+    JEMHADAR("Jem'Hadar", SubTypeSet.CreatureType),
     JUGGERNAUT("Juggernaut", SubTypeSet.CreatureType),
     // K
     KALEESH("Kaleesh", SubTypeSet.CreatureType, true), // Star Wars
@@ -459,6 +461,7 @@ public enum SubType {
     SYMBIOTE("Symbiote", SubTypeSet.CreatureType),
     SYNTH("Synth", SubTypeSet.CreatureType),
     // T
+    TALAXIAN("Talaxian", SubTypeSet.CreatureType),
     TALOSIAN("Talosian", SubTypeSet.CreatureType),
     TELLARITE("Tellarite", SubTypeSet.CreatureType),
     TENTACLE("Tentacle", SubTypeSet.CreatureType),

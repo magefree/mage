@@ -13,6 +13,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.token.CordycepsInfectedToken;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.Collections;
 import java.util.UUID;
 
 /**
@@ -100,7 +101,7 @@ class EllieBrickMasterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         return new CordycepsInfectedToken().putOntoBattlefield(
                 1, game, source, game.getActivePlayerId(),
-                true, true, getTargetPointer().getFirst(game, source)
+                true, true, Collections.singleton(getTargetPointer().getFirst(game, source))
         );
     }
 }
