@@ -4,6 +4,7 @@ Aetherdrift Commander|DRC|
 Aetherdrift|DFT|
 Alara Reborn|ARB|
 Alchemy: Dominaria|YDMU|
+Alchemy: Edge of Eternities|YEOE|
 Alchemy: Innistrad|Y22|
 Alchemy: Murders at Karlov Manor|YMKM|
 Alchemy: Secrets of Strixhaven|YSOS|
