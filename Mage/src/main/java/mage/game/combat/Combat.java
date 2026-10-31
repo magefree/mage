@@ -271,7 +271,7 @@ public class Combat implements Serializable, Copyable<Combat> {
     /**
      * Defenders a creature can attack in the current combat
      *
-     * @param attackerId
+     * @param attackerId     can be null, e.g. for tokens before they are created
      * @param playerToAttack the player and its planeswalkers and battles, or null for all defenders
      * @param game
      * @return

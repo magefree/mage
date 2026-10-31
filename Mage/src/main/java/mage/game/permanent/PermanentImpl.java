@@ -1750,7 +1750,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void setEntersAttacking(Set<UUID> possibleDefenders) {
-        this.entersAttackingDefenders = new LinkedHashSet<>(possibleDefenders);
+        this.entersAttackingDefenders = possibleDefenders == null ? null : new LinkedHashSet<>(possibleDefenders);
     }
 
     @Override

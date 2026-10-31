@@ -207,21 +207,21 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     }
 
     @Override
-    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer) {
-        return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, attackedPlayer, null);
+    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, Set<UUID> attackedDefenders) {
+        return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, attackedDefenders, null);
     }
 
     @Override
-    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo) {
-        return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, attackedPlayer, attachedTo, true);
+    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, Set<UUID> attackedDefenders, UUID attachedTo) {
+        return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, attackedDefenders, attachedTo, true);
     }
 
-    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created) {
-        return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, attackedPlayer, attachedTo, created, Collections.singletonList(this));
+    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, Set<UUID> attackedDefenders, UUID attachedTo, boolean created) {
+        return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, attackedDefenders, attachedTo, created, Collections.singletonList(this));
     }
 
     @Override
-    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created, List<Token> tokens) {
+    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, Set<UUID> attackedDefenders, UUID attachedTo, boolean created, List<Token> tokens) {
         Player controller = game.getPlayer(controllerId);
         if (controller == null) {
             return false;
@@ -257,7 +257,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                     it.remove();
                 }
             }
-            putOntoBattlefieldHelper(event, game, source, tapped, attacking, attackedPlayer, attachedTo, created);
+            putOntoBattlefieldHelper(event, game, source, tapped, attacking, attackedDefenders, attachedTo, created);
             event.getTokens()
                     .keySet()
                     .stream()
@@ -271,7 +271,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return false;
     }
 
-    private static void putOntoBattlefieldHelper(CreateTokenEvent event, Game game, Ability source, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created) {
+    private static void putOntoBattlefieldHelper(CreateTokenEvent event, Game game, Ability source, boolean tapped, boolean attacking, Set<UUID> attackedDefenders, UUID attachedTo, boolean created) {
         Player controller = game.getPlayer(event.getPlayerId());
         if (controller == null) {
             return;
@@ -450,7 +450,9 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
 
                 // must attack (added to combat after all tokens are on the battlefield, see below)
                 if (attacking) {
-                    permanent.setEntersAttacking(game.getCombat().getPossibleDefenders(permanent.getId(), attackedPlayer, game));
+                    permanent.setEntersAttacking(attackedDefenders == null
+                            ? game.getCombat().getPossibleDefenders(permanent.getId(), null, game)
+                            : attackedDefenders);
                 }
                 if (permanent.isEntersAttacking()) {
                     enteringAttackers.add(permanent.getId());
