@@ -40,7 +40,7 @@ public class BlasterCombatDJTest extends CardTestPlayerBase {
     @Test
     public void test_GrantedModular_EntersWithCounterAndMovesOnDeath() {
         addCard(Zone.BATTLEFIELD, playerA, blaster);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         addCard(Zone.HAND, playerA, memnite);
         addCard(Zone.HAND, playerA, ornithopter);
