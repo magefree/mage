@@ -3168,12 +3168,18 @@
 |TOK:TRK|Worm||WormCantBlockToken|
 
 # TRC
-|TOK:TRC|Tribble||TribbleToken|
-|TOK:TRC|Ape||ApeToken|
-|TOK:TRC|Beast||BeastToken|
-|TOK:TRC|Insect||InsectToken|
-|TOK:TRC|Citizen||CitizenGreenWhiteToken|
-#|TOK:TRC|Spacecraft Illusion||SpacecraftIllusionToken|
+|TOK:TRC|Tribble|1|TribbleToken|
+|TOK:TRC|Tribble|2|TribbleToken|
+|TOK:TRC|Ape|1|ApeToken|
+|TOK:TRC|Ape|2|ApeToken|
+|TOK:TRC|Beast|1|BeastToken|
+|TOK:TRC|Beast|2|BeastToken|
+|TOK:TRC|Insect|1|InsectToken|
+|TOK:TRC|Insect|2|InsectToken|
+|TOK:TRC|Citizen|1|CitizenGreenWhiteToken|
+|TOK:TRC|Citizen|2|CitizenGreenWhiteToken|
+#|TOK:TRC|Spacecraft Illusion|1|SpacecraftIllusionToken|
+#|TOK:TRC|Spacecraft Illusion|2|SpacecraftIllusionToken|
 
 # JVC
 |TOK:JVC|Elemental Shaman||ElementalShamanToken|

@@ -3137,12 +3137,18 @@ public class ScryfallImageSupportTokens {
             put("TRK/Worm", "https://api.scryfall.com/cards/ttrk/18?format=image");
 
             // TRC
-            put("TRC/Tribble", "https://api.scryfall.com/cards/ttrc/2?format=image");
-            put("TRC/Ape", "https://api.scryfall.com/cards/ttrc/3?format=image");
-            put("TRC/Beast", "https://api.scryfall.com/cards/ttrc/4?format=image");
-            put("TRC/Insect", "https://api.scryfall.com/cards/ttrc/5?format=image");
-            put("TRC/Citizen", "https://api.scryfall.com/cards/ttrc/6?format=image");
-            // put("TRC/Spacecraft Illusion", "https://api.scryfall.com/cards/ttrc/7?format=image");
+            put("TRC/Tribble/1", "https://api.scryfall.com/cards/ttrc/2?format=image");
+            put("TRC/Ape/1", "https://api.scryfall.com/cards/ttrc/3?format=image");
+            put("TRC/Beast/1", "https://api.scryfall.com/cards/ttrc/4?format=image");
+            put("TRC/Insect/1", "https://api.scryfall.com/cards/ttrc/5?format=image");
+            put("TRC/Citizen/1", "https://api.scryfall.com/cards/ttrc/6?format=image");
+            // put("TRC/Spacecraft Illusion/1", "https://api.scryfall.com/cards/ttrc/7?format=image");
+            put("TRC/Tribble/2", "https://api.scryfall.com/cards/ttrc/9?format=image");
+            put("TRC/Ape/2", "https://api.scryfall.com/cards/ttrc/10?format=image");
+            put("TRC/Beast/2", "https://api.scryfall.com/cards/ttrc/11?format=image");
+            put("TRC/Insect/2", "https://api.scryfall.com/cards/ttrc/12?format=image");
+            put("TRC/Citizen/2", "https://api.scryfall.com/cards/ttrc/13?format=image");
+            // put("TRC/Spacecraft Illusion/2", "https://api.scryfall.com/cards/ttrc/14?format=image");
 
             // UGL
             put("UGL/Goblin", "https://api.scryfall.com/cards/tugl/92?format=image");
