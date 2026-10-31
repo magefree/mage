@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.*;
+import mage.cards.decks.CardNameUtil;
 import mage.cards.repository.CardScanner;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
@@ -17,7 +18,6 @@ import mage.util.ManaUtil;
 import mage.view.CardView;
 import org.apache.log4j.Logger;
 
-import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -32,8 +32,14 @@ public final class RateCard {
     public static final boolean PRELOAD_CARD_RATINGS_ON_STARTUP = false; // warning, rating and card classes preloading can cause lags for users with low memory
 
     // caches are shared by all threads and AI/bots, so make sure it's thread safe
-    private static final Map<String, Integer> baseRatings = new ConcurrentHashMap<>();
-    private static final Map<String, Integer> ratedCard = new ConcurrentHashMap<>();
+    // draft rating is a card place among the cards of one set, so same card can have diff ratings in diff sets
+    private static final Map<String, Map<String, Integer>> setRatings = new ConcurrentHashMap<>(); // set code -> card name -> rating from set file
+    private static final Map<String, Integer> bonusRatings = new ConcurrentHashMap<>(); // card name -> rating from a file of another set (bonus sheet, example: OTP cards in OTJ file)
+    private static final Map<String, Integer> nameRatings = new ConcurrentHashMap<>(); // card name -> max rating from all files (for sets without ratings file)
+    private static final Map<String, String> setRatingSources = new ConcurrentHashMap<>(); // set code -> ratings source for GUI (example: 17Lands FRA 2026-10-17)
+    private static final Map<String, String> bonusRatingSources = new ConcurrentHashMap<>(); // card name -> set code of the bonus rating
+    private static final Map<String, Integer> baseRatings = new ConcurrentHashMap<>(); // set code + card name -> base rating
+    private static final Map<String, Integer> ratedCard = new ConcurrentHashMap<>(); // set code + card name -> score
     private static final Map<String, Integer> ratedCardView = new ConcurrentHashMap<>(); // Rating is not exactly the same for CardView, so cached in a different map.
     private static boolean isLoaded = false;
 
@@ -50,6 +56,13 @@ public final class RateCard {
     
     // Cards that aren't in the deck's colors get a penalty to their rating
     private static final int OFF_COLOR_PENALTY = -100;
+
+    // Score of a card without ratings (rarity + type + mana + removal) must be comparable with the file ratings [1..100]
+    // of other cards in the same booster or pool (mixed sets, cubes, cards without ratings in a set with ratings),
+    // so it uses a regression from all 17Lands sets (8622 cards): rating = 0.5 * heuristic score (spearman 0.46)
+    private static final float HEURISTIC_TO_RATING_SCALE = 0.5f;
+
+    private static final String RATINGS_DATA_DATE_PREFIX = "# 17Lands data from "; // see Utils/gen-draft-rates-17Lands.py
 
     private static String RATINGS_DIR = "/ratings/";
     private static String RATINGS_SET_LIST = RATINGS_DIR + "setsWithRatings.csv";
@@ -93,20 +106,31 @@ public final class RateCard {
             return 0;
         }
 
-        String name = card.getName();
+        String cacheKey = getCardKey(card.getExpansionSetCode(), card.getName());
         if (useCache && allowedColors.isEmpty()) {
-            Integer cachedScore = ratedCard.get(name);
+            Integer cachedScore = ratedCard.get(cacheKey);
             if (cachedScore != null) {
                 return cachedScore;
             }
         }
 
-        int typeMultiplier = typeMultiplier(card);
-        int score = getBaseCardScore(card) + 2 * typeMultiplier + getManaCostScore(card, allowedColors)
-                + 40 * isRemoval(card);
+        int score;
+        if (hasFileRating(card.getName(), card.getExpansionSetCode())) {
+            // file rating already contains the card's value (type, removal, mana cost), so use it as is
+            // (any bonuses on top make bot's picks worse, checked on real human picks from 17Lands)
+            score = getBaseCardScore(card);
+        } else {
+            // no ratings, so try to find card's value by rarity and other params
+            int heuristicScore = getBaseCardScore(card) + 2 * typeMultiplier(card)
+                    + getManaCostScore(card, Collections.emptyList()) + 40 * isRemoval(card);
+            score = Math.round(heuristicScore * HEURISTIC_TO_RATING_SCALE);
+        }
+        if (isOffColorCard(card, allowedColors)) {
+            score += OFF_COLOR_PENALTY;
+        }
 
         if (useCache && allowedColors.isEmpty()) {
-            ratedCard.put(name, score);
+            ratedCard.put(cacheKey, score);
         }
 
         return score;
@@ -117,20 +141,30 @@ public final class RateCard {
             return 0;
         }
 
-        String name = cardview.getName();
+        String cacheKey = getCardKey(cardview.getExpansionSetCode(), cardview.getName());
         if (useCache && allowedColors.isEmpty()) {
-            Integer cachedScore = ratedCardView.get(name);
+            Integer cachedScore = ratedCardView.get(cacheKey);
             if (cachedScore != null) {
                 return cachedScore;
             }
         }
 
-        int typeMultiplier = typeMultiplier(cardview);
-        int score = getBaseCardScore(cardview) + 2 * typeMultiplier + getManaCostScore(cardview, allowedColors);
-        // Cardview does not have enough info to know the card is a removal.
+        // same as for card
+        int score;
+        if (hasFileRating(cardview.getName(), cardview.getExpansionSetCode())) {
+            score = getBaseCardScore(cardview);
+        } else {
+            // Cardview does not have enough info to know the card is a removal.
+            int heuristicScore = getBaseCardScore(cardview) + 2 * typeMultiplier(cardview)
+                    + getManaCostScore(cardview, Collections.emptyList());
+            score = Math.round(heuristicScore * HEURISTIC_TO_RATING_SCALE);
+        }
+        if (isOffColorCard(cardview, allowedColors)) {
+            score += OFF_COLOR_PENALTY;
+        }
 
         if (useCache && allowedColors.isEmpty()) {
-            ratedCardView.put(name, score);
+            ratedCardView.put(cacheKey, score);
         }
 
         return score;
@@ -240,6 +274,7 @@ public final class RateCard {
     public static int getBaseCardScore(Card card) {
         return getBaseScore(
                 card.getName(),
+                card.getExpansionSetCode(),
                 card.getRarity()
         );
     }
@@ -247,19 +282,62 @@ public final class RateCard {
     public static int getBaseCardScore(CardView cardview) {
         return getBaseScore(
                 cardview.getName(),
+                cardview.getExpansionSetCode(),
                 cardview.getRarity()
         );
     }
 
-    protected static int getBaseScore(String name, Rarity rarity) {
-        // same card name must have same rating
+    protected static int getBaseScore(String name, String setCode, Rarity rarity) {
+        // same card name in same set must have same rating
 
         // ratings from files
         // lazy loading on first request
         prepareAndLoadRatings();
 
-        // ratings from card rarity
-        // some cards can have different rarity -- it's will be used from first set
+        String key = getCardKey(setCode, name);
+        Integer cachedRating = baseRatings.get(key);
+        if (cachedRating != null) {
+            return cachedRating;
+        }
+
+        Integer newRating = findFileRating(name, setCode);
+        if (newRating == null) {
+            newRating = getRarityRating(name, rarity);
+        }
+
+        // some cards can have different rarity in same set -- it's will be used from first card
+        Integer oldRating = baseRatings.putIfAbsent(key, newRating);
+        return oldRating != null ? oldRating : newRating;
+    }
+
+    /**
+     * Rating from files, priority:
+     * 1. file of the card's set;
+     * 2. file of another set that contains the card as a bonus sheet card (example: OTP cards in OTJ boosters and OTJ file);
+     * 3. max rating from all files (reprint in a set without file, so it can be another scale than other cards of the set)
+     *
+     * @return null for card without ratings
+     */
+    private static Integer findFileRating(String name, String setCode) {
+        Map<String, Integer> ratings = setRatings.get(getSetKey(setCode));
+        if (ratings != null && ratings.containsKey(name)) {
+            return ratings.get(name);
+        }
+        if (bonusRatings.containsKey(name)) {
+            return bonusRatings.get(name);
+        }
+        return nameRatings.get(name);
+    }
+
+    /**
+     * Card has a rating from files (not a rarity based rating)
+     */
+    public static boolean hasFileRating(String name, String setCode) {
+        prepareAndLoadRatings();
+        return findFileRating(name, setCode) != null;
+    }
+
+    private static int getRarityRating(String name, Rarity rarity) {
         int newRating;
         if (rarity != null) {
             switch (rarity) {
@@ -287,18 +365,15 @@ public final class RateCard {
             // tokens
             newRating = DEFAULT_NOT_RATED_CARD_RATING;
         }
+        return newRating;
+    }
 
-        int oldRating = baseRatings.getOrDefault(name, 0);
-        if (oldRating != 0 && oldRating != newRating) {
-            //log.info("card have different rating by sets: " + card.getName() + " (" + oldRating + " <> " + newRating + ")");
-        }
+    private static String getSetKey(String setCode) {
+        return setCode == null ? "" : setCode.toUpperCase(Locale.ENGLISH);
+    }
 
-        if (oldRating != 0) {
-            return oldRating;
-        } else {
-            baseRatings.put(name, newRating);
-            return newRating;
-        }
+    private static String getCardKey(String setCode, String name) {
+        return getSetKey(setCode) + "-" + name;
     }
 
     /**
@@ -310,53 +385,78 @@ public final class RateCard {
         }
 
         // load sets list
-        List<String> setsToLoad = new LinkedList<>();
+        List<String> setsToLoad = new ArrayList<>();
         try {
-            InputStream is = RateCard.class.getResourceAsStream(RATINGS_SET_LIST);
-            Scanner scanner = new Scanner(is);
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                if (!line.substring(0, 1).equals("#")) {
-                    setsToLoad.add(line);
-                }
-            }
+            setsToLoad.addAll(parseSetsList(readLines(RATINGS_SET_LIST)));
         } catch (Throwable e) {
             log.error("Failed to read ratings sets list file: " + RATINGS_SET_LIST, e);
         }
 
         // load set data
-        String rateFile = "";
-        try {
-            for (String code : setsToLoad) {
-                //log.info("Reading ratings for the set " + code);
-                rateFile = RATINGS_DIR + code + ".csv";
-                readFromFile(rateFile);
+        for (String code : setsToLoad) {
+            // one broken file must not stop other sets
+            String rateFile = RATINGS_DIR + code + ".csv";
+            try {
+                readFromFile(rateFile, code);
+            } catch (Exception e) {
+                log.error("Failed to read ratings set file: " + rateFile, e);
             }
-        } catch (Exception e) {
-            log.error("Failed to read ratings set file: " + rateFile, e);
         }
 
         isLoaded = true;
     }
 
     /**
+     * Set codes from the lines of setsWithRatings.csv (comments and empty lines are ignored)
+     */
+    public static List<String> parseSetsList(List<String> lines) {
+        List<String> res = new ArrayList<>();
+        for (String line : lines) {
+            String code = line.trim();
+            if (!code.isEmpty() && !code.startsWith("#")) {
+                res.add(code);
+            }
+        }
+        return res;
+    }
+
+    private static List<String> readLines(String path) {
+        // warning, files contain non ascii card names, so use utf-8 (default charset depends on OS before java 18)
+        List<String> res = new ArrayList<>();
+        try (Scanner scanner = new Scanner(RateCard.class.getResourceAsStream(path), "UTF-8")) {
+            while (scanner.hasNextLine()) {
+                res.add(scanner.nextLine());
+            }
+        }
+        return res;
+    }
+
+    /**
      * reads ratings from the file
      */
-    private synchronized static void readFromFile(String path) {
-        // card must get max rating from multiple cards
+    private synchronized static void readFromFile(String path, String setCode) {
         Integer min = Integer.MAX_VALUE, max = 0;
         Map<String, Integer> thisFileRatings = new HashMap<>();
+        String source = "draftaholics"; // old files without comments
+        String sourceDate = "";
 
         // load
-        InputStream is = RateCard.class.getResourceAsStream(path);
-        Scanner scanner = new Scanner(is);
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
+        for (String line : readLines(path)) {
+            if (line.startsWith("#")) {
+                // generated file: "# generated by ... 17Lands.com ..." and "# 17Lands data from 2026-10-17 (timestamp ...)"
+                if (line.contains("17Lands")) {
+                    source = "17Lands";
+                }
+                if (line.startsWith(RATINGS_DATA_DATE_PREFIX)) {
+                    sourceDate = line.substring(RATINGS_DATA_DATE_PREFIX.length()).split(" ")[0];
+                }
+                continue;
+            }
             String[] s = line.split(":");
             if (s.length == 2) {
                 Integer rating = Integer.parseInt(s[1].trim());
-                String name = s[0].trim();
-                name = name.replace("’", "'");
+                // files keep original names from the data source (17Lands: Tura Kennerüd), xmage uses ascii names
+                String name = CardNameUtil.normalizeCardName(s[0].trim());
                 if (rating > max) {
                     max = rating;
                 }
@@ -367,16 +467,51 @@ public final class RateCard {
             }
         }
 
+        // cards from other sets inside the file (bonus sheets like OTP cards in OTJ file)
+        ExpansionSet set = Sets.findSet(setCode.toUpperCase(Locale.ENGLISH));
+        Set<String> setCardNames = new HashSet<>();
+        if (set != null) {
+            set.getSetCardInfo().forEach(info -> setCardNames.add(info.getName()));
+        }
+
         // normalize for the file to [1..100]
+        Map<String, Integer> fileRatings = new HashMap<>();
         for (Map.Entry<String, Integer> ratingByName : thisFileRatings.entrySet()) {
             int r = ratingByName.getValue();
             String name = ratingByName.getKey();
-            int newRating = (int) (100.0f * (r - min) / (max - min));
-            int oldRating = baseRatings.getOrDefault(name, 0);
-            if (newRating > oldRating) {
-                baseRatings.put(name, newRating);
+            int newRating = max > min ? 1 + (int) (99.0f * (r - min) / (max - min)) : 100;
+            fileRatings.put(name, newRating);
+            nameRatings.merge(name, newRating, Math::max);
+            if (set != null && !setCardNames.contains(name)) {
+                Integer oldBonusRating = bonusRatings.get(name);
+                if (oldBonusRating == null || newRating > oldBonusRating) {
+                    bonusRatings.put(name, newRating);
+                    bonusRatingSources.put(name, getSetKey(setCode));
+                }
             }
         }
+        setRatings.put(getSetKey(setCode), fileRatings);
+        setRatingSources.put(getSetKey(setCode), (source + " " + getSetKey(setCode) + " " + sourceDate).trim());
+    }
+
+    /**
+     * Source of the card's rating for GUI (example: 17Lands FRA 2026-10-17)
+     *
+     * @return null for card without ratings (rarity based score)
+     */
+    public static String getRatingSource(String name, String setCode) {
+        prepareAndLoadRatings();
+        Map<String, Integer> ratings = setRatings.get(getSetKey(setCode));
+        if (ratings != null && ratings.containsKey(name)) {
+            return setRatingSources.get(getSetKey(setCode));
+        }
+        if (bonusRatings.containsKey(name)) {
+            return setRatingSources.get(bonusRatingSources.get(name)) + ", bonus sheet";
+        }
+        if (nameRatings.containsKey(name)) {
+            return "other sets";
+        }
+        return null;
     }
 
     private static final int[] SINGLE_PENALTY = {0, 1, 1, 3, 6, 9};
@@ -414,11 +549,74 @@ public final class RateCard {
         );
     }
 
+    private static final List<List<ColoredManaSymbol>> TWO_COLORS_PAIRS = makeTwoColorsPairs();
+    private static final int DECK_COLORS_MIN_COLORED_CARDS = 3;
+
+    private static List<List<ColoredManaSymbol>> makeTwoColorsPairs() {
+        List<ColoredManaSymbol> wubrg = Arrays.asList(
+                ColoredManaSymbol.W, ColoredManaSymbol.U, ColoredManaSymbol.B, ColoredManaSymbol.R, ColoredManaSymbol.G
+        );
+        List<List<ColoredManaSymbol>> res = new ArrayList<>();
+        for (int i = 0; i < wubrg.size(); i++) {
+            for (int j = i + 1; j < wubrg.size(); j++) {
+                res.add(Collections.unmodifiableList(Arrays.asList(wubrg.get(i), wubrg.get(j))));
+            }
+        }
+        return Collections.unmodifiableList(res);
+    }
+
+    /**
+     * Two deck colors by already picked cards (draft) or a cards pool (sealed): the colors pair with the max sum
+     * of the cards scores. Must be called on each pick, so a draft can change the colors at any time.
+     * Checked on real human picks from 17Lands: it's much closer to humans than colors of the first best cards.
+     *
+     * @return empty list if there are not enough colored cards yet (no color restrictions)
+     */
+    public static List<ColoredManaSymbol> chooseDeckColors(Collection<Card> cards) {
+        int coloredCards = 0;
+        int[] pairsScore = new int[TWO_COLORS_PAIRS.size()];
+        for (Card card : cards) {
+            boolean[] isOffColor = new boolean[TWO_COLORS_PAIRS.size()];
+            boolean isColored = false;
+            for (int i = 0; i < TWO_COLORS_PAIRS.size(); i++) {
+                isOffColor[i] = isOffColorCard(card, TWO_COLORS_PAIRS.get(i));
+                isColored |= isOffColor[i];
+            }
+            if (!isColored) {
+                // colorless card is good for any colors, so it can't help to choose
+                continue;
+            }
+            coloredCards++;
+            int score = rateCard(card, Collections.emptyList());
+            for (int i = 0; i < TWO_COLORS_PAIRS.size(); i++) {
+                if (!isOffColor[i]) {
+                    pairsScore[i] += score;
+                }
+            }
+        }
+        if (coloredCards < DECK_COLORS_MIN_COLORED_CARDS) {
+            return new ArrayList<>();
+        }
+
+        // same scores - first pair by WUBRG order
+        int bestPair = 0;
+        for (int i = 1; i < TWO_COLORS_PAIRS.size(); i++) {
+            if (pairsScore[i] > pairsScore[bestPair]) {
+                bestPair = i;
+            }
+        }
+        return new ArrayList<>(TWO_COLORS_PAIRS.get(bestPair));
+    }
+
     /**
      * Card with mana symbols of other colors (it's useless for a deck with allowed colors)
      */
     public static boolean isOffColorCard(Card card, List<ColoredManaSymbol> allowedColors) {
         return !allowedColors.isEmpty() && getManaCostScore(card, allowedColors) == OFF_COLOR_PENALTY;
+    }
+
+    public static boolean isOffColorCard(CardView cardview, List<ColoredManaSymbol> allowedColors) {
+        return !allowedColors.isEmpty() && getManaCostScore(cardview, allowedColors) == OFF_COLOR_PENALTY;
     }
 
     /**

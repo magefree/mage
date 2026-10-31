@@ -7,6 +7,7 @@ import mage.cards.Card;
 import mage.game.Game;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -34,13 +35,18 @@ public interface Token extends MageObject {
 
     boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking);
 
-    boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer);
+    /**
+     * @param attacking          tokens enter the battlefield attacking (rule 508.4)
+     * @param attackedDefenders  defenders (player, planeswalker, battle) the attacking tokens can attack,
+     *                           its controller chooses one of them, null for any defender (see Combat.getPossibleDefenders)
+     */
+    boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, Set<UUID> attackedDefenders);
 
-    boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo);
+    boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, Set<UUID> attackedDefenders, UUID attachedTo);
 
-    boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created);
+    boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, Set<UUID> attackedDefenders, UUID attachedTo, boolean created);
 
-    boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created, List<Token> additionalTokens);
+    boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, Set<UUID> attackedDefenders, UUID attachedTo, boolean created, List<Token> additionalTokens);
 
     void setPower(int power);
 

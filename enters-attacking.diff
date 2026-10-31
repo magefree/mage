@@ -1,0 +1,1029 @@
+diff --git a/Mage.Sets/src/mage/cards/k/KiraNerysFirebrand.java b/Mage.Sets/src/mage/cards/k/KiraNerysFirebrand.java
+index 81de5ff417..591434c8d2 100644
+--- a/Mage.Sets/src/mage/cards/k/KiraNerysFirebrand.java
++++ b/Mage.Sets/src/mage/cards/k/KiraNerysFirebrand.java
+@@ -16,7 +16,6 @@ import mage.game.Game;
+ import mage.game.events.EntersTheBattlefieldEvent;
+ import mage.game.events.GameEvent;
+ import mage.game.permanent.Permanent;
+-import mage.players.Player;
+ 
+ /**
+  *
+@@ -75,8 +74,9 @@ class KiraNerysFirebrandEffect extends ReplacementEffectImpl {
+     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+         Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
+         if (target != null) {
+-            target.tap(true, source, game);
+-            target.setEntersAttacking(true);
++            // enters tapped - it does not become tapped (no tapped event and triggers)
++            target.setTapped(true);
++            target.setEntersAttacking(game.getCombat().getPossibleDefenders(target.getId(), null, game));
+         }
+         return false;
+     }
+@@ -89,10 +89,16 @@ class KiraNerysFirebrandEffect extends ReplacementEffectImpl {
+     @Override
+     public boolean applies(GameEvent event, Ability source, Game game) {
+         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
+-        Player player = game.getPlayer(source.getControllerId());
+-        if (permanent == null || player == null || game.getCombat() == null) {
++        if (permanent == null
++                || !permanent.isCreature(game)
++                || !permanent.isControlledBy(source.getControllerId())) {
+             return false;
+         }
+-        return permanent.isCreature(game) && permanent.isControlledBy(player.getId()) && player.getId().equals(game.getCombat().getAttackingPlayerId());
++        // while you control an attacking creature
++        return game.getCombat()
++                .getAttackers()
++                .stream()
++                .map(game::getPermanent)
++                .anyMatch(attacker -> attacker != null && attacker.isControlledBy(source.getControllerId()));
+     }
+ }
+diff --git a/Mage.Tests/src/test/java/org/mage/test/cards/single/trk/KiraNerysFirebrandTest.java b/Mage.Tests/src/test/java/org/mage/test/cards/single/trk/KiraNerysFirebrandTest.java
+new file mode 100644
+index 0000000000..7081ebf63a
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/cards/single/trk/KiraNerysFirebrandTest.java
+@@ -0,0 +1,229 @@
++package org.mage.test.cards.single.trk;
++
++import mage.constants.PhaseStep;
++import mage.constants.Zone;
++import org.junit.Test;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++/**
++ * @author JayDi85
++ */
++public class KiraNerysFirebrandTest extends CardTestPlayerBase {
++
++    /**
++     * {@link mage.cards.k.KiraNerysFirebrand}
++     * <p>
++     * {1}{R}{W} Legendary Creature - Bajoran Soldier 4/3<br>
++     * Trample<br>
++     * If a creature you control would enter while you control an attacking creature, instead it enters tapped and attacking.<br>
++     * Whenever another creature you control enters, it gets +1/+1 until end of turn.
++     */
++    private static final String KIRA = "Kira Nerys, Firebrand";
++
++    @Test
++    public void test_EnterAttacking_AmbushViper() {
++        addCard(Zone.BATTLEFIELD, playerA, KIRA);
++        //
++        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2, attacker
++        // Flash
++        addCard(Zone.HAND, playerA, "Ambush Viper"); // {1}{G}, 2/1
++        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
++
++        attack(3, playerA, "Grizzly Bears", playerB);
++
++        castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerA, "Ambush Viper");
++
++        setStrictChooseMode(true);
++        setStopAt(3, PhaseStep.END_COMBAT);
++        execute();
++
++        assertTapped("Ambush Viper", true);
++        assertLife(playerB, 20 - 2 - (2 + 1));
++    }
++
++    @Test
++    public void test_EnterAttacking_CollectedCompany() {
++        addCard(Zone.BATTLEFIELD, playerA, KIRA);
++        //
++        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2, attacker
++        // Look at the top six cards of your library. Put up to two creature cards with mana value 3 or less
++        // from among them onto the battlefield. Put the rest on the bottom of your library in any order.
++        addCard(Zone.HAND, playerA, "Collected Company"); // {3}{G}
++        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
++        removeAllCardsFromLibrary(playerA);
++        addCard(Zone.LIBRARY, playerA, "Silvercoat Lion"); // 2/2
++        addCard(Zone.LIBRARY, playerA, "Elite Vanguard"); // 2/1
++        addCard(Zone.LIBRARY, playerA, "Island"); // top of library, for the draw of turn 3
++        skipInitShuffling();
++
++        attack(3, playerA, "Grizzly Bears", playerB);
++
++        castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerA, "Collected Company");
++        addTarget(playerA, "Silvercoat Lion^Elite Vanguard"); // creatures to put onto the battlefield
++        setChoice(playerA, "Whenever another creature you control enters"); // order of Kira's two +1/+1 triggers
++
++        setStrictChooseMode(true);
++        setStopAt(3, PhaseStep.END_COMBAT);
++        execute();
++
++        assertTapped("Silvercoat Lion", true);
++        assertTapped("Elite Vanguard", true);
++        assertLife(playerB, 20 - 2 - (2 + 1) - (2 + 1));
++    }
++
++    @Test
++    public void test_EnterAttacking_RaiseTheAlarm() {
++        addCard(Zone.BATTLEFIELD, playerA, KIRA);
++        //
++        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2, attacker
++        // Create two 1/1 white Soldier creature tokens.
++        addCard(Zone.HAND, playerA, "Raise the Alarm"); // {1}{W}
++        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
++
++        attack(3, playerA, "Grizzly Bears", playerB);
++
++        castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerA, "Raise the Alarm");
++        setChoice(playerA, "Whenever another creature you control enters"); // order of Kira's two +1/+1 triggers
++
++        setStrictChooseMode(true);
++        setStopAt(3, PhaseStep.END_COMBAT);
++        execute();
++
++        assertTappedCount("Soldier Token", true, 2);
++        assertLife(playerB, 20 - 2 - (1 + 1) - (1 + 1));
++    }
++
++    @Test
++    public void test_EnterAttacking_CacklingCounterpart() {
++        addCard(Zone.BATTLEFIELD, playerA, KIRA);
++        //
++        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2, attacker
++        // Create a token that's a copy of target creature you control.
++        addCard(Zone.HAND, playerA, "Cackling Counterpart"); // {1}{U}{U}
++        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
++
++        attack(3, playerA, "Grizzly Bears", playerB);
++
++        castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerA, "Cackling Counterpart", "Grizzly Bears");
++
++        setStrictChooseMode(true);
++        setStopAt(3, PhaseStep.END_COMBAT);
++        execute();
++
++        assertPermanentCount(playerA, "Grizzly Bears", 2);
++        assertTappedCount("Grizzly Bears", true, 2);
++        assertLife(playerB, 20 - 2 - (2 + 1));
++    }
++
++    @Test
++    public void test_EnterAttacking_DoubleMajor() {
++        // the copy of a creature spell becomes a token, so the card and the token enter
++        addCard(Zone.BATTLEFIELD, playerA, KIRA);
++        //
++        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2, attacker
++        // Flash
++        addCard(Zone.HAND, playerA, "Ambush Viper"); // {1}{G}, 2/1
++        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
++        // Copy target creature spell you control
++        addCard(Zone.HAND, playerA, "Double Major"); // {G}{U}
++        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
++        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
++
++        attack(3, playerA, "Grizzly Bears", playerB);
++
++        activateManaAbility(3, PhaseStep.DECLARE_ATTACKERS, playerA, "{T}: Add {G}", 2);
++        castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerA, "Ambush Viper");
++
++        activateManaAbility(3, PhaseStep.DECLARE_ATTACKERS, playerA, "{T}: Add {G}", 1);
++        activateManaAbility(3, PhaseStep.DECLARE_ATTACKERS, playerA, "{T}: Add {U}", 1);
++        castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerA, "Double Major", "Ambush Viper", "Ambush Viper");
++
++        setStrictChooseMode(true);
++        setStopAt(3, PhaseStep.END_COMBAT);
++        execute();
++
++        assertPermanentCount(playerA, "Ambush Viper", 2);
++        assertTappedCount("Ambush Viper", true, 2);
++        assertLife(playerB, 20 - 2 - (2 + 1) - (2 + 1));
++    }
++
++    @Test
++    public void test_EnterAttacking_HanweirGarrison() {
++        // the tokens are tapped and attacking by their own text too
++        addCard(Zone.BATTLEFIELD, playerA, KIRA);
++        //
++        // Whenever this creature attacks, create two 1/1 red Human creature tokens that are tapped and attacking.
++        addCard(Zone.BATTLEFIELD, playerA, "Hanweir Garrison"); // 2/3
++
++        attack(3, playerA, "Hanweir Garrison", playerB);
++        setChoice(playerA, "Whenever another creature you control enters"); // order of Kira's two +1/+1 triggers
++
++        setStrictChooseMode(true);
++        setStopAt(3, PhaseStep.END_COMBAT);
++        execute();
++
++        assertTappedCount("Human Token", true, 2);
++        assertLife(playerB, 20 - 2 - (1 + 1) - (1 + 1));
++    }
++
++    @Test
++    public void test_NotEnterAttacking_MainPhase() {
++        addCard(Zone.BATTLEFIELD, playerA, KIRA);
++        //
++        // Flash
++        addCard(Zone.HAND, playerA, "Ambush Viper"); // {1}{G}, 2/1
++        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
++
++        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Ambush Viper");
++
++        setStrictChooseMode(true);
++        setStopAt(3, PhaseStep.END_TURN);
++        execute();
++
++        assertTapped("Ambush Viper", false);
++        assertLife(playerB, 20);
++    }
++
++    @Test
++    public void test_NotEnterAttacking_BeginningOfCombat() {
++        // no attacking creature before attackers are declared
++        addCard(Zone.BATTLEFIELD, playerA, KIRA);
++        //
++        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2, attacker
++        // Flash
++        addCard(Zone.HAND, playerA, "Ambush Viper"); // {1}{G}, 2/1
++        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
++
++        castSpell(3, PhaseStep.BEGIN_COMBAT, playerA, "Ambush Viper");
++
++        attack(3, playerA, "Grizzly Bears", playerB);
++
++        setStrictChooseMode(true);
++        setStopAt(3, PhaseStep.END_COMBAT);
++        execute();
++
++        assertTapped("Ambush Viper", false);
++        assertLife(playerB, 20 - 2);
++    }
++
++    @Test
++    public void test_NotEnterAttacking_OpponentCreature() {
++        addCard(Zone.BATTLEFIELD, playerA, KIRA);
++        //
++        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2, attacker
++        // Flash
++        addCard(Zone.HAND, playerB, "Ambush Viper"); // {1}{G}, 2/1
++        addCard(Zone.BATTLEFIELD, playerB, "Forest", 2);
++
++        attack(3, playerA, "Grizzly Bears", playerB);
++
++        castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerB, "Ambush Viper");
++
++        setStrictChooseMode(true);
++        setStopAt(3, PhaseStep.END_COMBAT);
++        execute();
++
++        assertTapped("Ambush Viper", false);
++        assertLife(playerB, 20 - 2);
++    }
++}
+diff --git a/Mage.Tests/src/test/java/org/mage/test/combat/EnterAttackingDefenderChoiceStateTest.java b/Mage.Tests/src/test/java/org/mage/test/combat/EnterAttackingDefenderChoiceStateTest.java
+new file mode 100644
+index 0000000000..98c1f340af
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/combat/EnterAttackingDefenderChoiceStateTest.java
+@@ -0,0 +1,120 @@
++package org.mage.test.combat;
++
++import mage.abilities.Ability;
++import mage.constants.Outcome;
++import mage.constants.PhaseStep;
++import mage.constants.RangeOfInfluence;
++import mage.constants.Zone;
++import mage.game.Game;
++import mage.game.permanent.Permanent;
++import mage.target.Target;
++import mage.target.common.TargetDefender;
++import org.junit.Assert;
++import org.junit.Test;
++import org.mage.test.player.TestComputerPlayer;
++import org.mage.test.player.TestPlayer;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.List;
++import java.util.stream.Collectors;
++
++/**
++ * 508.4
++ * If a creature is put onto the battlefield attacking, its controller chooses which defending player, planeswalker
++ * a defending player controls, or battle a defending player protects it’s attacking as it enters the battlefield
++ * (unless the effect that put it onto the battlefield specifies what it’s attacking). Similarly, if an effect states
++ * that a creature is attacking, its controller chooses which defending player, planeswalker a defending player
++ * controls, or battle a defending player protects it’s attacking (unless the effect has already specified). Such
++ * creatures are “attacking” but, for the purposes of trigger events and effects, they never “attacked.” They remain
++ * attacking creatures until they’re removed from combat or the combat phase ends, whichever comes first.
++ *
++ * @author JayDi85
++ */
++public class EnterAttackingDefenderChoiceStateTest extends CardTestPlayerBase {
++
++    // the player sees the game in the defender choice dialog, so it must show all permanents of the same move
++    // with all continuous effects applied: the battlefield of the attacking player at every defender choice
++    private final List<String> battlefieldOnDefenderChoice = new ArrayList<>();
++
++    @Override
++    protected TestPlayer createPlayer(String name, RangeOfInfluence rangeOfInfluence) {
++        return new TestPlayer(new TestComputerPlayer(name, rangeOfInfluence)) {
++            @Override
++            public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
++                if (target instanceof TargetDefender) {
++                    battlefieldOnDefenderChoice.add(game.getBattlefield().getAllActivePermanents(this.getId())
++                            .stream()
++                            .filter(permanent -> permanent.isCreature(game))
++                            .map(permanent -> permanent.getName() + " " + permanent.getPower().getValue())
++                            .sorted()
++                            .collect(Collectors.joining(", ")));
++                }
++                return super.chooseTarget(outcome, target, source, game);
++            }
++        };
++    }
++
++    @Test
++    public void test_EnterAttacking_Tokens() {
++        // Whenever this creature attacks, create two 1/1 red Human creature tokens that are tapped and attacking.
++        addCard(Zone.BATTLEFIELD, playerA, "Hanweir Garrison"); // 2/3
++        //
++        addCard(Zone.BATTLEFIELD, playerA, "Glorious Anthem"); // creatures you control get +1/+1
++        addCard(Zone.BATTLEFIELD, playerB, "Jace Beleren"); // planeswalker, loyalty 3
++
++        attack(3, playerA, "Hanweir Garrison", playerB);
++        addTarget(playerA, playerB); // defender for the first Human token
++        addTarget(playerA, playerB); // defender for the second Human token
++
++        setStrictChooseMode(true);
++        setStopAt(3, PhaseStep.END_COMBAT);
++        execute();
++
++        Assert.assertEquals(Arrays.asList(
++                "Hanweir Garrison 3, Human Token 2, Human Token 2",
++                "Hanweir Garrison 3, Human Token 2, Human Token 2"
++        ), battlefieldOnDefenderChoice);
++        assertLife(playerB, 20 - 3 - 2 - 2);
++    }
++
++    @Test
++    public void test_EnterAttacking_Cards() {
++        // If a creature you control would enter while you control an attacking creature,
++        // instead it enters tapped and attacking.
++        addCard(Zone.BATTLEFIELD, playerA, "Kira Nerys, Firebrand"); // 4/3
++        //
++        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2, attacker
++        addCard(Zone.BATTLEFIELD, playerA, "Glorious Anthem"); // creatures you control get +1/+1
++        // Look at the top six cards of your library. Put up to two creature cards with mana value 3 or less
++        // from among them onto the battlefield. Put the rest on the bottom of your library in any order.
++        addCard(Zone.HAND, playerA, "Collected Company"); // {3}{G}
++        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
++        removeAllCardsFromLibrary(playerA);
++        addCard(Zone.LIBRARY, playerA, "Silvercoat Lion"); // 2/2
++        addCard(Zone.LIBRARY, playerA, "Elite Vanguard"); // 2/1
++        addCard(Zone.LIBRARY, playerA, "Island"); // top of library, for the draw of turn 3
++        skipInitShuffling();
++        addCard(Zone.BATTLEFIELD, playerB, "Jace Beleren"); // planeswalker, loyalty 3
++
++        attack(3, playerA, "Grizzly Bears", playerB);
++
++        castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerA, "Collected Company");
++        addTarget(playerA, "Silvercoat Lion^Elite Vanguard"); // creatures to put onto the battlefield
++        addTarget(playerA, playerB); // defender for the first creature
++        addTarget(playerA, playerB); // defender for the second creature
++        setChoice(playerA, "Whenever another creature you control enters"); // order of Kira's two +1/+1 triggers
++
++        setStrictChooseMode(true);
++        setStopAt(3, PhaseStep.END_COMBAT);
++        execute();
++
++        // Kira's +1/+1 triggers resolve after the creatures entered, so they aren't in the dialog yet
++        Assert.assertEquals(Arrays.asList(
++                "Elite Vanguard 3, Grizzly Bears 3, Kira Nerys, Firebrand 5, Silvercoat Lion 3",
++                "Elite Vanguard 3, Grizzly Bears 3, Kira Nerys, Firebrand 5, Silvercoat Lion 3"
++        ), battlefieldOnDefenderChoice);
++        assertLife(playerB, 20 - 3 - (3 + 1) - (3 + 1));
++    }
++}
+diff --git a/Mage.Tests/src/test/java/org/mage/test/combat/EnterAttackingTest.java b/Mage.Tests/src/test/java/org/mage/test/combat/EnterAttackingTest.java
+new file mode 100644
+index 0000000000..c63ea43de0
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/combat/EnterAttackingTest.java
+@@ -0,0 +1,276 @@
++package org.mage.test.combat;
++
++import mage.abilities.Ability;
++import mage.abilities.common.SimpleStaticAbility;
++import mage.abilities.effects.ReplacementEffectImpl;
++import mage.constants.Duration;
++import mage.constants.Outcome;
++import mage.constants.PhaseStep;
++import mage.constants.TurnPhase;
++import mage.constants.Zone;
++import mage.counters.CounterType;
++import mage.game.Game;
++import mage.game.events.EntersTheBattlefieldEvent;
++import mage.game.events.GameEvent;
++import mage.game.permanent.Permanent;
++import mage.players.Player;
++import org.junit.Test;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++import java.util.Collections;
++import java.util.Set;
++import java.util.UUID;
++
++/**
++ * 506.3a
++ * If an effect would put a noncreature permanent onto the battlefield attacking or blocking, the permanent does enter
++ * the battlefield but it’s never considered to be an attacking or blocking permanent.
++ * <p>
++ * 506.3b
++ * If an effect would put a creature onto the battlefield attacking under the control of any player except an attacking
++ * player, that creature does enter the battlefield, but it’s never considered to be an attacking creature.
++ * <p>
++ * 506.3c
++ * If an effect would put a creature onto the battlefield attacking either a player not in the game or a permanent
++ * that’s no longer on the battlefield or isn’t either a planeswalker or a battle, that creature does enter
++ * the battlefield, but it’s never considered to be an attacking creature. See rule 508.4a.
++ * <p>
++ * 508.4
++ * If a creature is put onto the battlefield attacking, its controller chooses which defending player, planeswalker
++ * a defending player controls, or battle a defending player protects it’s attacking as it enters the battlefield
++ * (unless the effect that put it onto the battlefield specifies what it’s attacking). Similarly, if an effect states
++ * that a creature is attacking, its controller chooses which defending player, planeswalker a defending player
++ * controls, or battle a defending player protects it’s attacking (unless the effect has already specified). Such
++ * creatures are “attacking” but, for the purposes of trigger events and effects, they never “attacked.” They remain
++ * attacking creatures until they’re removed from combat or the combat phase ends, whichever comes first.
++ *
++ * @author JayDi85
++ */
++public class EnterAttackingTest extends CardTestPlayerBase {
++
++    @Test
++    public void test_EnterAttacking_ControllerChoosesDefender() {
++        // During combat, permanents enter tapped and attacking.
++        addCustomCardWithAbility("enter attacking", playerA, new SimpleStaticAbility(new EnterAttackingTestEffect(null)));
++        //
++        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2, attacker
++        addCard(Zone.HAND, playerA, "Ambush Viper"); // {1}{G}, 2/1, flash
++        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
++        addCard(Zone.BATTLEFIELD, playerB, "Jace Beleren"); // planeswalker, loyalty 3
++
++        attack(3, playerA, "Grizzly Bears", playerB);
++
++        castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerA, "Ambush Viper");
++        addTarget(playerA, "Jace Beleren"); // defender for Ambush Viper
++
++        setStrictChooseMode(true);
++        setStopAt(3, PhaseStep.END_COMBAT);
++        execute();
++
++        assertTapped("Ambush Viper", true);
++        assertCounterCount(playerB, "Jace Beleren", CounterType.LOYALTY, 3 - 2);
++        assertLife(playerB, 20 - 2);
++    }
++
++    @Test
++    public void test_EnterAttacking_EffectSetsPlaneswalker() {
++        // During combat, permanents enter tapped and attacking Jace Beleren.
++        addCustomCardWithAbility("enter attacking", playerA, new SimpleStaticAbility(new EnterAttackingTestEffect("Jace Beleren")));
++        //
++        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2, attacker
++        addCard(Zone.HAND, playerA, "Ambush Viper"); // {1}{G}, 2/1, flash
++        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
++        addCard(Zone.BATTLEFIELD, playerB, "Jace Beleren"); // planeswalker, loyalty 3
++
++        attack(3, playerA, "Grizzly Bears", playerB);
++
++        castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerA, "Ambush Viper");
++
++        setStrictChooseMode(true);
++        setStopAt(3, PhaseStep.END_COMBAT);
++        execute();
++
++        assertTapped("Ambush Viper", true);
++        assertCounterCount(playerB, "Jace Beleren", CounterType.LOYALTY, 3 - 2);
++        assertLife(playerB, 20 - 2);
++    }
++
++    @Test
++    public void test_EnterAttacking_EffectSetsPlayer() {
++        // During combat, permanents enter tapped and attacking PlayerB.
++        addCustomCardWithAbility("enter attacking", playerA, new SimpleStaticAbility(new EnterAttackingTestEffect("PlayerB")));
++        //
++        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2, attacker
++        addCard(Zone.HAND, playerA, "Ambush Viper"); // {1}{G}, 2/1, flash
++        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
++        addCard(Zone.BATTLEFIELD, playerB, "Jace Beleren"); // planeswalker, loyalty 3
++
++        attack(3, playerA, "Grizzly Bears", playerB);
++
++        castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerA, "Ambush Viper");
++
++        setStrictChooseMode(true);
++        setStopAt(3, PhaseStep.END_COMBAT);
++        execute();
++
++        assertTapped("Ambush Viper", true);
++        assertCounterCount(playerB, "Jace Beleren", CounterType.LOYALTY, 3);
++        assertLife(playerB, 20 - 2 - 2);
++    }
++
++    @Test
++    public void test_EnterAttacking_EffectSetsPlaneswalker_Tokens() {
++        // During combat, permanents enter tapped and attacking Jace Beleren.
++        addCustomCardWithAbility("enter attacking", playerA, new SimpleStaticAbility(new EnterAttackingTestEffect("Jace Beleren")));
++        //
++        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2, attacker
++        // Create two 1/1 white Soldier creature tokens.
++        addCard(Zone.HAND, playerA, "Raise the Alarm"); // {1}{W}
++        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
++        addCard(Zone.BATTLEFIELD, playerB, "Jace Beleren"); // planeswalker, loyalty 3
++
++        attack(3, playerA, "Grizzly Bears", playerB);
++
++        castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerA, "Raise the Alarm");
++
++        setStrictChooseMode(true);
++        setStopAt(3, PhaseStep.END_COMBAT);
++        execute();
++
++        assertTappedCount("Soldier Token", true, 2);
++        assertCounterCount(playerB, "Jace Beleren", CounterType.LOYALTY, 3 - 1 - 1);
++        assertLife(playerB, 20 - 2);
++    }
++
++    @Test
++    public void test_EnterAttackingButNoncreature() {
++        // During combat, permanents enter tapped and attacking.
++        addCustomCardWithAbility("enter attacking", playerA, new SimpleStaticAbility(new EnterAttackingTestEffect(null)));
++        //
++        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2, attacker
++        // As an additional cost to cast this spell, discard a card.
++        // Draw two cards and create two Treasure tokens.
++        addCard(Zone.HAND, playerA, "Big Score"); // {3}{R}
++        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
++        addCard(Zone.HAND, playerA, "Island"); // to discard
++
++        attack(3, playerA, "Grizzly Bears", playerB);
++
++        castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerA, "Big Score");
++        setChoice(playerA, "Island"); // discard cost
++
++        setStrictChooseMode(true);
++        setStopAt(3, PhaseStep.END_COMBAT);
++        execute();
++
++        assertTappedCount("Treasure Token", true, 2);
++        assertAttacking("Treasure Token", false);
++        assertLife(playerB, 20 - 2);
++    }
++
++    @Test
++    public void test_EnterAttackingButNotAttackingPlayer() {
++        // During combat, permanents enter tapped and attacking.
++        addCustomCardWithAbility("enter attacking", playerA, new SimpleStaticAbility(new EnterAttackingTestEffect(null)));
++        //
++        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2, attacker
++        addCard(Zone.HAND, playerB, "Ambush Viper"); // {1}{G}, 2/1, flash
++        addCard(Zone.BATTLEFIELD, playerB, "Forest", 2);
++
++        attack(3, playerA, "Grizzly Bears", playerB);
++
++        castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerB, "Ambush Viper");
++
++        setStrictChooseMode(true);
++        setStopAt(3, PhaseStep.END_COMBAT);
++        execute();
++
++        assertTapped("Ambush Viper", true);
++        assertAttacking("Ambush Viper", false);
++        assertLife(playerB, 20 - 2);
++        assertLife(playerA, 20);
++    }
++
++    @Test
++    public void test_EnterAttackingButNotPlaneswalkerOrBattle() {
++        // During combat, permanents enter tapped and attacking Silvercoat Lion.
++        addCustomCardWithAbility("enter attacking", playerA, new SimpleStaticAbility(new EnterAttackingTestEffect("Silvercoat Lion")));
++        //
++        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2, attacker
++        addCard(Zone.HAND, playerA, "Ambush Viper"); // {1}{G}, 2/1, flash
++        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
++        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion"); // creature 2/2
++
++        attack(3, playerA, "Grizzly Bears", playerB);
++
++        castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerA, "Ambush Viper");
++
++        setStrictChooseMode(true);
++        setStopAt(3, PhaseStep.END_COMBAT);
++        execute();
++
++        assertTapped("Ambush Viper", true);
++        assertAttacking("Ambush Viper", false);
++        assertLife(playerB, 20 - 2);
++    }
++}
++
++/**
++ * During combat, permanents enter tapped and attacking.
++ * Defender: null - the controller chooses it, a player name or a permanent name.
++ */
++class EnterAttackingTestEffect extends ReplacementEffectImpl {
++
++    private final String defender;
++
++    EnterAttackingTestEffect(String defender) {
++        super(Duration.WhileOnBattlefield, Outcome.Benefit, false);
++        this.defender = defender;
++        staticText = "during combat, permanents enter tapped and attacking" + (defender == null ? "" : " " + defender);
++    }
++
++    private EnterAttackingTestEffect(final EnterAttackingTestEffect effect) {
++        super(effect);
++        this.defender = effect.defender;
++    }
++
++    @Override
++    public EnterAttackingTestEffect copy() {
++        return new EnterAttackingTestEffect(this);
++    }
++
++    @Override
++    public boolean checksEventType(GameEvent event, Game game) {
++        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
++    }
++
++    @Override
++    public boolean applies(GameEvent event, Ability source, Game game) {
++        return game.getTurnPhaseType() == TurnPhase.COMBAT;
++    }
++
++    @Override
++    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
++        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
++        permanent.setTapped(true);
++        permanent.setEntersAttacking(findDefenders(permanent, game));
++        return false;
++    }
++
++    private Set<UUID> findDefenders(Permanent permanent, Game game) {
++        if (defender == null) {
++            return game.getCombat().getPossibleDefenders(permanent.getId(), null, game);
++        }
++        for (Player player : game.getPlayers().values()) {
++            if (player.getName().equals(defender)) {
++                return Collections.singleton(player.getId());
++            }
++        }
++        return Collections.singleton(game.getBattlefield().getAllPermanents()
++                .stream()
++                .filter(p -> p.getName().equals(defender))
++                .map(Permanent::getId)
++                .findFirst()
++                .orElseThrow(() -> new IllegalStateException("Can't find " + defender)));
++    }
++}
+diff --git a/Mage/src/main/java/mage/cards/Card.java b/Mage/src/main/java/mage/cards/Card.java
+index 328677c2e6..2edff92335 100644
+--- a/Mage/src/main/java/mage/cards/Card.java
++++ b/Mage/src/main/java/mage/cards/Card.java
+@@ -160,10 +160,6 @@ public interface Card extends MageObject, Ownerable {
+ 
+     void loseAllAbilities(Game game);
+ 
+-    void setEntersAttacking(boolean entersAttacking);
+-
+-    boolean getEntersAttacking();
+-
+     boolean addCounters(Counter counter, Ability source, Game game);
+ 
+     boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game);
+diff --git a/Mage/src/main/java/mage/cards/CardImpl.java b/Mage/src/main/java/mage/cards/CardImpl.java
+index 576618930c..ab184ebab0 100644
+--- a/Mage/src/main/java/mage/cards/CardImpl.java
++++ b/Mage/src/main/java/mage/cards/CardImpl.java
+@@ -51,7 +51,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
+     protected boolean flipCard;
+     protected String flipCardName;
+     protected boolean morphCard;
+-    protected boolean entersAttacking;
+     protected List<UUID> attachments = new ArrayList<>();
+     protected boolean extraDeckCard = false;
+ 
+@@ -730,16 +729,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
+         return flipCardName;
+     }
+ 
+-    @Override
+-    public void setEntersAttacking(boolean entersAttacking) {
+-        this.entersAttacking = entersAttacking;
+-    }
+-
+-    @Override
+-    public boolean getEntersAttacking() {
+-        return entersAttacking;
+-    }
+-
+     @Override
+     public Counters getCounters(Game game) {
+         return getCounters(game.getState());
+diff --git a/Mage/src/main/java/mage/game/ZonesHandler.java b/Mage/src/main/java/mage/game/ZonesHandler.java
+index 37d7e7452b..a0af1f215e 100644
+--- a/Mage/src/main/java/mage/game/ZonesHandler.java
++++ b/Mage/src/main/java/mage/game/ZonesHandler.java
+@@ -115,6 +115,20 @@ public final class ZonesHandler {
+                 game.addSimultaneousEvent(zoneChangeInfo.event);
+             }
+         }
++
++        // enters attacking (508.4): only after the whole group is on the battlefield and effects are applied,
++        // so a defender choice shows a finished game state
++        List<UUID> enteringAttackers = new ArrayList<>();
++        for (ZoneChangeInfo zoneChangeInfo : zoneChangeInfos) {
++            if (Zone.BATTLEFIELD.equals(zoneChangeInfo.event.getToZone())
++                    && zoneChangeInfo.event.getTarget().isEntersAttacking()) {
++                enteringAttackers.add(zoneChangeInfo.event.getTarget().getId());
++            }
++        }
++        if (!enteringAttackers.isEmpty()) {
++            game.applyEffects();
++            game.getCombat().addEnteringAttackers(enteringAttackers, game);
++        }
+         return zoneChangeInfos;
+     }
+ 
+@@ -278,9 +292,6 @@ public final class ZonesHandler {
+                     Permanent permanent = event.getTarget();
+                     game.addPermanent(permanent, createOrder);
+                     game.getPermanentsEntering().remove(permanent.getId());
+-                    if (permanent.getEntersAttacking() && permanent.isCreature(game) && game.getCombat() != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
+-                        game.getCombat().addAttackingCreature(permanent.getId(), game);
+-                    }
+                     break;
+                 default:
+                     throw new UnsupportedOperationException("to Zone " + toZone + " not supported yet");
+diff --git a/Mage/src/main/java/mage/game/combat/Combat.java b/Mage/src/main/java/mage/game/combat/Combat.java
+index c3228d6f6f..b57399d5c8 100644
+--- a/Mage/src/main/java/mage/game/combat/Combat.java
++++ b/Mage/src/main/java/mage/game/combat/Combat.java
+@@ -209,6 +209,91 @@ public class Combat implements Serializable, Copyable<Combat> {
+         this.attackingPlayerId = playerId;
+     }
+ 
++    /**
++     * Add permanents marked as entering attacking (Permanent.setEntersAttacking) to the combat (rule 508.4).
++     * <p>
++     * Warning, it's use choose dialogs, so call it only after game state prepared (all permanents moved and ApplyEffects used)
++     *
++     * @param permanentIds in the enter order
++     * @param game
++     */
++    public void addEnteringAttackers(List<UUID> permanentIds, Game game) {
++        for (UUID permanentId : permanentIds) {
++            Permanent permanent = game.getPermanent(permanentId);
++            if (permanent == null || !permanent.isEntersAttacking()) {
++                throw new IllegalStateException("Wrong code usage: entering attacker must be on the battlefield and marked as entering attacking");
++            }
++            // 506.3a, 506.3b, 506.3f - enters the battlefield, but it's never an attacking creature
++            if (!permanent.isCreature(game)
++                    || permanent.isBattle(game)
++                    || attackingPlayerId == null
++                    || !permanent.isControlledBy(attackingPlayerId)) {
++                continue;
++            }
++            Set<UUID> possibleDefenders = permanent.getEntersAttackingDefenders()
++                    .stream()
++                    .filter(defenderId -> isValidDefender(defenderId, game))
++                    .collect(Collectors.toCollection(LinkedHashSet::new));
++            if (possibleDefenders.isEmpty()) {
++                continue;
++            }
++            chooseDefenderAndAddAttacker(permanentId, possibleDefenders, game);
++        }
++    }
++
++    /**
++     * 508.4a, 506.3c - a defender of an entering attacker must still be
++     * - a defending player in the game
++     * - a planeswalker on the battlefield controlled by a defending player
++     * - a battle protected by a defending player
++     */
++    private boolean isValidDefender(UUID defenderId, Game game) {
++        if (!defenders.contains(defenderId)) {
++            return false;
++        }
++        Player player = game.getPlayer(defenderId);
++        if (player != null) {
++            return player.isInGame();
++        }
++        Permanent defender = game.getPermanent(defenderId);
++        if (defender == null) {
++            return false;
++        }
++        if (defender.isPlaneswalker(game)) {
++            return defenders.contains(defender.getControllerId());
++        }
++        if (defender.isBattle(game)) {
++            return defenders.contains(defender.getProtectorId());
++        }
++        return false;
++    }
++
++    /**
++     * Defenders a creature can attack in the current combat
++     *
++     * @param attackerId
++     * @param playerToAttack the player and its planeswalkers and battles, or null for all defenders
++     * @param game
++     * @return
++     */
++    public Set<UUID> getPossibleDefenders(UUID attackerId, UUID playerToAttack, Game game) {
++        if (playerToAttack == null) {
++            return new LinkedHashSet<>(defenders);
++        }
++        Set<UUID> possibleDefenders = new LinkedHashSet<>();
++        for (UUID objectId : defenders) {
++            if (playerToAttack.equals(objectId)) {
++                possibleDefenders.add(objectId);
++                continue;
++            }
++            Permanent permanent = game.getPermanent(objectId);
++            if (permanent != null && permanent.canBeAttacked(attackerId, playerToAttack, game)) {
++                possibleDefenders.add(objectId);
++            }
++        }
++        return possibleDefenders;
++    }
++
+     /**
+      * Add an additional attacker to the combat (e.g. token of Geist of Saint
+      * Traft) This method doesn't trigger ATTACKER_DECLARED event (as intended).
+@@ -223,22 +308,10 @@ public class Combat implements Serializable, Copyable<Combat> {
+     }
+ 
+     public boolean addAttackingCreature(UUID creatureId, Game game, UUID playerToAttack) {
+-        Set<UUID> possibleDefenders;
+-        if (playerToAttack != null) {
+-            possibleDefenders = new HashSet<>();
+-            for (UUID objectId : defenders) {
+-                if (playerToAttack.equals(objectId)) {
+-                    possibleDefenders.add(objectId);
+-                    continue;
+-                }
+-                Permanent permanent = game.getPermanent(objectId);
+-                if (permanent != null && permanent.canBeAttacked(creatureId, playerToAttack, game)) {
+-                    possibleDefenders.add(objectId);
+-                }
+-            }
+-        } else {
+-            possibleDefenders = new HashSet<>(defenders);
+-        }
++        return chooseDefenderAndAddAttacker(creatureId, getPossibleDefenders(creatureId, playerToAttack, game), game);
++    }
++
++    private boolean chooseDefenderAndAddAttacker(UUID creatureId, Set<UUID> possibleDefenders, Game game) {
+         Player player = game.getPlayer(attackingPlayerId);
+         if (player == null) {
+             return false;
+diff --git a/Mage/src/main/java/mage/game/permanent/Permanent.java b/Mage/src/main/java/mage/game/permanent/Permanent.java
+index 3c2ac8c5eb..10d1c9ecdd 100644
+--- a/Mage/src/main/java/mage/game/permanent/Permanent.java
++++ b/Mage/src/main/java/mage/game/permanent/Permanent.java
+@@ -315,6 +315,25 @@ public interface Permanent extends Card, Controllable {
+ 
+     MageObjectReference getAttacking();
+ 
++    /**
++     * Mark a permanent that is entering the battlefield as entering attacking (rule 508.4), e.g. from
++     * an ETB replacement effect. The game adds it to the combat after the whole zone change (all permanents
++     * of the same move on the battlefield, continuous effects applied).
++     * A noncreature, a permanent under another player's control or no legal defender gives
++     * a permanent that enters the battlefield but never attacks (rules 506.3, 508.4a).
++     *
++     * @param possibleDefenders players, planeswalkers and battles it can attack, its controller chooses one of them
++     *                          (see Combat.getPossibleDefenders)
++     */
++    void setEntersAttacking(Set<UUID> possibleDefenders);
++
++    boolean isEntersAttacking();
++
++    /**
++     * @return defenders set by setEntersAttacking, null if it doesn't enter attacking
++     */
++    Set<UUID> getEntersAttackingDefenders();
++
+     void setBlocking(int blocking);
+ 
+     void addBlocking(UUID attackerId, Game game);
+diff --git a/Mage/src/main/java/mage/game/permanent/PermanentImpl.java b/Mage/src/main/java/mage/game/permanent/PermanentImpl.java
+index c65c06837f..5f1890c928 100644
+--- a/Mage/src/main/java/mage/game/permanent/PermanentImpl.java
++++ b/Mage/src/main/java/mage/game/permanent/PermanentImpl.java
+@@ -95,6 +95,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
+     protected boolean indirectPhase = false;
+     protected boolean faceDown;
+     protected MageObjectReference attacking; // refers to defenderId if attacking, null if not attacking
++    protected Set<UUID> entersAttackingDefenders; // enters the battlefield attacking one of them (508.4), null if not
+     protected int blocking;
+     protected final Set<MageObjectReference> blockingSet = new HashSet<>(); // refers to blocked creatures
+     // number of creatures the permanent can block
+@@ -165,6 +166,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
+         this.indirectPhase = permanent.indirectPhase;
+         this.faceDown = permanent.faceDown;
+         this.attacking = permanent.attacking;
++        this.entersAttackingDefenders = permanent.entersAttackingDefenders == null ? null : new LinkedHashSet<>(permanent.entersAttackingDefenders);
+         this.blocking = permanent.blocking;
+         this.blockingSet.addAll(permanent.blockingSet);
+         this.maxBlocks = permanent.maxBlocks;
+@@ -1746,6 +1748,21 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
+         this.attacking = defender;
+     }
+ 
++    @Override
++    public void setEntersAttacking(Set<UUID> possibleDefenders) {
++        this.entersAttackingDefenders = new LinkedHashSet<>(possibleDefenders);
++    }
++
++    @Override
++    public boolean isEntersAttacking() {
++        return this.entersAttackingDefenders != null;
++    }
++
++    @Override
++    public Set<UUID> getEntersAttackingDefenders() {
++        return this.entersAttackingDefenders;
++    }
++
+     @Override
+     public MageObjectReference getAttacking() {
+         return this.attacking;
+diff --git a/Mage/src/main/java/mage/game/permanent/token/TokenImpl.java b/Mage/src/main/java/mage/game/permanent/token/TokenImpl.java
+index 593d82193b..cf59a61154 100644
+--- a/Mage/src/main/java/mage/game/permanent/token/TokenImpl.java
++++ b/Mage/src/main/java/mage/game/permanent/token/TokenImpl.java
+@@ -278,6 +278,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
+         }
+ 
+         Set<PermanentToken> allAddedTokens = new HashSet<>();
++        List<UUID> enteringAttackers = new ArrayList<>();
+         for (Map.Entry<Token, Integer> entry : event.getTokens().entrySet()) {
+             Token token = entry.getKey();
+             int amount = entry.getValue();
+@@ -447,9 +448,12 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
+                     }
+                 }
+ 
+-                // must attack
+-                if (attacking && game.getCombat() != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
+-                    game.getCombat().addAttackingCreature(permanent.getId(), game, attackedPlayer);
++                // must attack (added to combat after all tokens are on the battlefield, see below)
++                if (attacking) {
++                    permanent.setEntersAttacking(game.getCombat().getPossibleDefenders(permanent.getId(), attackedPlayer, game));
++                }
++                if (permanent.isEntersAttacking()) {
++                    enteringAttackers.add(permanent.getId());
+                 }
+ 
+                 // game logs
+@@ -463,6 +467,10 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
+         CreatedTokensEvent.addEvents(allAddedTokens, source, game);
+ 
+         game.applyEffects(); // without LKI reset
++
++        // must attack (508.4): only after all tokens are on the battlefield and effects are applied,
++        // so a defender choice shows a finished game state
++        game.getCombat().addEnteringAttackers(enteringAttackers, game);
+     }
+ 
+     @Override
+diff --git a/Mage/src/main/java/mage/game/stack/Spell.java b/Mage/src/main/java/mage/game/stack/Spell.java
+index 52b9abb8f3..c9de588727 100644
+--- a/Mage/src/main/java/mage/game/stack/Spell.java
++++ b/Mage/src/main/java/mage/game/stack/Spell.java
+@@ -61,7 +61,6 @@ public class Spell extends StackObjectImpl implements Card {
+     private boolean faceDown;
+     private boolean countered;
+     private boolean resolving = false;
+-    protected boolean entersAttacking;
+     private UUID commandedByPlayerId = null; // controller of the spell resolve, example: Word of Command
+     private String commandedByInfo; // info about spell commanded, e.g. source
+     private boolean prototyped;
+@@ -1049,16 +1048,6 @@ public class Spell extends StackObjectImpl implements Card {
+         return this.copyFrom;
+     }
+ 
+-    @Override
+-    public void setEntersAttacking(boolean entersAttacking) {
+-        this.entersAttacking = entersAttacking;
+-    }
+-
+-    @Override
+-    public boolean getEntersAttacking() {
+-        return entersAttacking;
+-    }
+-
+     @Override
+     public Counters getCounters(Game game) {
+         return card.getCounters(game);
