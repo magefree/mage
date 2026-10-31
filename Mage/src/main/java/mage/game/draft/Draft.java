@@ -44,6 +44,16 @@ public interface Draft extends MageItem, Serializable {
     DraftPlayerSnapshot getPlayerSnapshot(UUID playerId);
 
     void setMarkedCard(UUID playerId, UUID cardId);
+
+    /**
+     * Player needs suggested picks for the current booster (it's picking and suggestions are not calculated yet)
+     */
+    boolean isPickSuggestsNeeded(UUID playerId);
+
+    /**
+     * Suggested picks for the current booster, cards from other boosters (outdated suggestions) are ignored
+     */
+    void setPickSuggests(UUID playerId, List<DraftPickSuggest> pickSuggests);
     void setBoosterLoaded(UUID playerID);
     void boosterSendingStart();
     void start();

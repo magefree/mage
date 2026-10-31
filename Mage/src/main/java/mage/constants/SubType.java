@@ -85,6 +85,7 @@ public enum SubType {
     // 205.3m : Creatures and kindreds share their lists of subtypes; these subtypes are called creature types.
     // A
     ADVISOR("Advisor", SubTypeSet.CreatureType),
+    AENAR("Aenar", SubTypeSet.CreatureType),
     AETHERBORN("Aetherborn", SubTypeSet.CreatureType),
     ALIEN("Alien", SubTypeSet.CreatureType),
     ALLY("Ally", SubTypeSet.CreatureType),
@@ -113,6 +114,7 @@ public enum SubType {
     AZRA("Azra", SubTypeSet.CreatureType),
     // B
     BADGER("Badger", SubTypeSet.CreatureType),
+    BAJORAN("Bajoran", SubTypeSet.CreatureType),
     BALLOON("Balloon", SubTypeSet.CreatureType),
     BARABEL("Barabel", SubTypeSet.CreatureType, true), // Star Wars
     BARBARIAN("Barbarian", SubTypeSet.CreatureType),
@@ -125,13 +127,16 @@ public enum SubType {
     BEEBLE("Beeble", SubTypeSet.CreatureType),
     BEHOLDER("Beholder", SubTypeSet.CreatureType),
     BERSERKER("Berserker", SubTypeSet.CreatureType),
+    BETAZOID("Betazoid", SubTypeSet.CreatureType),
     BIRD("Bird", SubTypeSet.CreatureType),
     BISON("Bison", SubTypeSet.CreatureType),
     BITH("Bith", SubTypeSet.CreatureType, true), // Star Wars
     BLINKMOTH("Blinkmoth", SubTypeSet.CreatureType),
     BOAR("Boar", SubTypeSet.CreatureType),
+    BOLIAN("Bolian", SubTypeSet.CreatureType),
     BORG("Borg", SubTypeSet.CreatureType),
     BRAINIAC("Brainiac", SubTypeSet.CreatureType, true), // Unstable
+    BRIKAR("Brikar", SubTypeSet.CreatureType),
     BRINGER("Bringer", SubTypeSet.CreatureType),
     BRUSHWAGG("Brushwagg", SubTypeSet.CreatureType),
     // C
@@ -203,6 +208,7 @@ public enum SubType {
     ETERNAL("Eternal", SubTypeSet.CreatureType),
     EWOK("Ewok", SubTypeSet.CreatureType, true), // Star Wars
     EXPANSION_SYMBOL("Expansion-Symbol", SubTypeSet.CreatureType, true), // Unhinged
+    EXCALBIAN("Excalbian", SubTypeSet.CreatureType),
     EYE("Eye", SubTypeSet.CreatureType),
     // F
     FAERIE("Faerie", SubTypeSet.CreatureType),
@@ -248,6 +254,7 @@ public enum SubType {
     HERO("Hero", SubTypeSet.CreatureType),
     HIPPO("Hippo", SubTypeSet.CreatureType),
     HIPPOGRIFF("Hippogriff", SubTypeSet.CreatureType),
+    HIROGEN("Hirogen", SubTypeSet.CreatureType),
     HOMARID("Homarid", SubTypeSet.CreatureType),
     HOMUNCULUS("Homunculus", SubTypeSet.CreatureType),
     HORROR("Horror", SubTypeSet.CreatureType),
@@ -259,6 +266,7 @@ public enum SubType {
     HYENA("Hyena", SubTypeSet.CreatureType),
     // I
     ILLUSION("Illusion", SubTypeSet.CreatureType),
+    ILLYRIAN("Illyrian", SubTypeSet.CreatureType),
     IMP("Imp", SubTypeSet.CreatureType),
     INCARNATION("Incarnation", SubTypeSet.CreatureType),
     INHUMAN("Inhuman", SubTypeSet.CreatureType),
@@ -271,6 +279,7 @@ public enum SubType {
     JAWA("Jawa", SubTypeSet.CreatureType, true),
     JEDI("Jedi", SubTypeSet.CreatureType, true), // Star Wars
     JELLYFISH("Jellyfish", SubTypeSet.CreatureType),
+    JEMHADAR("Jem'Hadar", SubTypeSet.CreatureType),
     JUGGERNAUT("Juggernaut", SubTypeSet.CreatureType),
     // K
     KALEESH("Kaleesh", SubTypeSet.CreatureType, true), // Star Wars
@@ -306,6 +315,7 @@ public enum SubType {
     MANTELLIAN("Mantellian", SubTypeSet.CreatureType, true), // Star Wars
     MANTICORE("Manticore", SubTypeSet.CreatureType),
     MASTICORE("Masticore", SubTypeSet.CreatureType),
+    MEDUSAN("Medusan", SubTypeSet.CreatureType),
     MERCENARY("Mercenary", SubTypeSet.CreatureType),
     MERFOLK("Merfolk", SubTypeSet.CreatureType),
     METATHRAN("Metathran", SubTypeSet.CreatureType),
@@ -451,6 +461,7 @@ public enum SubType {
     SYMBIOTE("Symbiote", SubTypeSet.CreatureType),
     SYNTH("Synth", SubTypeSet.CreatureType),
     // T
+    TALAXIAN("Talaxian", SubTypeSet.CreatureType),
     TALOSIAN("Talosian", SubTypeSet.CreatureType),
     TELLARITE("Tellarite", SubTypeSet.CreatureType),
     TENTACLE("Tentacle", SubTypeSet.CreatureType),
@@ -466,6 +477,7 @@ public enum SubType {
     TRANDOSHAN("Trandoshan", SubTypeSet.CreatureType, true), // Star Wars
     TREEFOLK("Treefolk", SubTypeSet.CreatureType),
     TRIBBLE("Tribble", SubTypeSet.CreatureType),
+    TRILL("Trill", SubTypeSet.CreatureType),
     TRILOBITE("Trilobite", SubTypeSet.CreatureType),
     TRISKELAVITE("Triskelavite", SubTypeSet.CreatureType),
     TROLL("Troll", SubTypeSet.CreatureType),
@@ -582,6 +594,7 @@ public enum SubType {
     SARKHAN("Sarkhan", SubTypeSet.PlaneswalkerType),
     SERRA("Serra", SubTypeSet.PlaneswalkerType),
     SIDIOUS("Sidious", SubTypeSet.PlaneswalkerType, true), // Star Wars
+    SIFA("Sifa", SubTypeSet.PlaneswalkerType),
     SIVITRI("Sivitri", SubTypeSet.PlaneswalkerType),
     SNOKE("Snoke", SubTypeSet.PlaneswalkerType, true), // Star Wars
     SORIN("Sorin", SubTypeSet.PlaneswalkerType),
