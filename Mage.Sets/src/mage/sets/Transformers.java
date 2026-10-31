@@ -20,8 +20,8 @@ public final class Transformers extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Arcee, Sharpshooter", 7, Rarity.MYTHIC, mage.cards.a.ArceeSharpshooter.class));
-        // cards.add(new SetCardInfo("Blaster, Combat DJ", 8, Rarity.MYTHIC, mage.cards.a.BlasterCombatDj.class, NON_FULL_USE_VARIOUS));
-        // cards.add(new SetCardInfo("Blaster, Combat DJ", 22, Rarity.MYTHIC, mage.cards.a.BlasterCombatDj.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Blaster, Combat DJ", 8, Rarity.MYTHIC, mage.cards.b.BlasterCombatDJ.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Blaster, Combat DJ", 22, Rarity.MYTHIC, mage.cards.b.BlasterCombatDJ.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blitzwing, Cruel Tormentor", 4, Rarity.MYTHIC, mage.cards.b.BlitzwingCruelTormentor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blitzwing, Cruel Tormentor", 19, Rarity.MYTHIC, mage.cards.b.BlitzwingCruelTormentor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cyclonus, the Saboteur", 9, Rarity.MYTHIC, mage.cards.c.CyclonusTheSaboteur.class, NON_FULL_USE_VARIOUS));
