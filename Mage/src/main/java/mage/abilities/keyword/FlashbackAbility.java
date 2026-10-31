@@ -36,7 +36,7 @@ public class FlashbackAbility extends CastFromGraveyardAbility {
     @Override
     public String getRule() {
         StringBuilder sbRule = new StringBuilder("Flashback");
-        if (!getCosts().isEmpty()) {
+        if (!getOwnCosts().isEmpty()) {
             sbRule.append("&mdash;");
         } else {
             sbRule.append(' ');
@@ -44,11 +44,11 @@ public class FlashbackAbility extends CastFromGraveyardAbility {
         if (!getManaCosts().isEmpty()) {
             sbRule.append(getManaCosts().getText());
         }
-        if (!getCosts().isEmpty()) {
+        if (!getOwnCosts().isEmpty()) {
             if (!getManaCosts().isEmpty()) {
                 sbRule.append(", ");
             }
-            sbRule.append(getCosts().getText());
+            sbRule.append(getOwnCosts().getText());
             sbRule.append('.');
         }
         if (abilityName != null) {

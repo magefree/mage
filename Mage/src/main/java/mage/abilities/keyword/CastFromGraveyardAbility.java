@@ -3,7 +3,11 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.Costs;
+import mage.abilities.costs.CostsImpl;
+import mage.abilities.costs.costadjusters.CompositeCostAdjuster;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -27,11 +31,25 @@ import java.util.UUID;
 public abstract class CastFromGraveyardAbility extends SpellAbility {
 
     protected String abilityName;
-    private SpellAbility spellAbilityToResolve;
+    private final CostAdjuster cardCostAdjuster;
+    private final Costs<Cost> ownCosts; // without the card's own costs, for the rules text
+    private boolean replacementEffectAdded = false;
 
     protected CastFromGraveyardAbility(Card card, Cost cost, SpellAbilityCastMode spellAbilityCastMode) {
-        super(null, "", Zone.GRAVEYARD, SpellAbilityType.BASE_ALTERNATE, spellAbilityCastMode);
+        // same as jump-start or escape: it's the card's spell ability with another mana cost, so the card's own costs
+        // and cost adjuster are part of it from the start (playable and AI must see the same costs as the real cast)
+        super(card.getSpellAbility() != null
+                ? card.getSpellAbility()
+                : new SpellAbility(null, "", Zone.GRAVEYARD, SpellAbilityType.BASE_ALTERNATE, spellAbilityCastMode));
+        this.newId();
+        this.zone = Zone.GRAVEYARD;
+        this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+        this.spellAbilityCastMode = spellAbilityCastMode;
+        this.cardCostAdjuster = this.getCostAdjuster();
+        this.ownCosts = new CostsImpl<>();
         this.setAdditionalCostsRuleVisible(false);
+        this.clearManaCosts();
+        this.clearManaCostsToPay();
         this.name = spellAbilityCastMode + " " + cost.getText();
         this.addCost(cost);
         this.timing = card.isSorcery() ? TimingRule.SORCERY : TimingRule.INSTANT;
@@ -40,7 +58,31 @@ public abstract class CastFromGraveyardAbility extends SpellAbility {
     protected CastFromGraveyardAbility(final CastFromGraveyardAbility ability) {
         super(ability);
         this.abilityName = ability.abilityName;
-        this.spellAbilityToResolve = ability.spellAbilityToResolve;
+        this.cardCostAdjuster = ability.cardCostAdjuster;
+        this.ownCosts = ability.ownCosts.copy();
+        this.replacementEffectAdded = ability.replacementEffectAdded;
+    }
+
+    @Override
+    public void addCost(Cost cost, int index) {
+        super.addCost(cost, index);
+        if (cost != null && !(cost instanceof Costs) && !(cost instanceof ManaCost)) {
+            ownCosts.add(cost.copy());
+        }
+    }
+
+    /**
+     * Non-mana costs of this ability, without the card's own additional costs
+     */
+    protected Costs<Cost> getOwnCosts() {
+        return ownCosts;
+    }
+
+    @Override
+    public CastFromGraveyardAbility setCostAdjuster(CostAdjuster costAdjuster) {
+        // the card's own cost adjuster still applies (e.g. Hurkyl's Final Meditation cast with harmonize)
+        super.setCostAdjuster(CompositeCostAdjuster.of(cardCostAdjuster, costAdjuster));
+        return this;
     }
 
     @Override
@@ -81,53 +123,13 @@ public abstract class CastFromGraveyardAbility extends SpellAbility {
 
     @Override
     public SpellAbility getSpellAbilityToResolve(Game game) {
-        Card card = game.getCard(getSourceId());
-        if (card == null || spellAbilityToResolve != null) {
-            return spellAbilityToResolve;
+        if (!replacementEffectAdded) {
+            replacementEffectAdded = true;
+            ContinuousEffect effect = new CastFromGraveyardReplacementEffect();
+            effect.setTargetPointer(new FixedTarget(getSourceId(), game.getState().getZoneChangeCounter(getSourceId())));
+            game.addEffect(effect, this);
         }
-        SpellAbility spellAbilityCopy;
-        if (card instanceof SplitCard) {
-            if (((SplitCard) card).getLeftHalfCard().getName().equals(abilityName)) {
-                spellAbilityCopy = ((SplitCard) card).getLeftHalfCard().getSpellAbility().copy();
-            } else if (((SplitCard) card).getRightHalfCard().getName().equals(abilityName)) {
-                spellAbilityCopy = ((SplitCard) card).getRightHalfCard().getSpellAbility().copy();
-            } else {
-                spellAbilityCopy = null;
-            }
-        } else if (card instanceof ModalDoubleFacedCard) {
-            if (((ModalDoubleFacedCard) card).getLeftHalfCard().getName().equals(abilityName)) {
-                spellAbilityCopy = ((ModalDoubleFacedCard) card).getLeftHalfCard().getSpellAbility().copy();
-            } else if (((ModalDoubleFacedCard) card).getRightHalfCard().getName().equals(abilityName)) {
-                spellAbilityCopy = ((ModalDoubleFacedCard) card).getRightHalfCard().getSpellAbility().copy();
-            } else {
-                spellAbilityCopy = null;
-            }
-        } else {
-            spellAbilityCopy = card.getSpellAbility().copy();
-        }
-        if (spellAbilityCopy == null) {
-            return null;
-        }
-        spellAbilityCopy.setId(this.getId());
-        spellAbilityCopy.clearManaCosts();
-        spellAbilityCopy.clearManaCostsToPay();
-        spellAbilityCopy.addCost(this.getCosts().copy());
-        spellAbilityCopy.addCost(this.getManaCosts().copy());
-        spellAbilityCopy.setSpellAbilityCastMode(this.getSpellAbilityCastMode());
-        spellAbilityCopy.setCostAdjuster(this.getCostAdjuster());
-        spellAbilityToResolve = spellAbilityCopy;
-        ContinuousEffect effect = new CastFromGraveyardReplacementEffect();
-        effect.setTargetPointer(new FixedTarget(getSourceId(), game.getState().getZoneChangeCounter(getSourceId())));
-        game.addEffect(effect, this);
-        return spellAbilityToResolve;
-    }
-
-    @Override
-    public Costs<Cost> getCosts() {
-        if (spellAbilityToResolve == null) {
-            return super.getCosts();
-        }
-        return spellAbilityToResolve.getCosts();
+        return this;
     }
 
     @Override

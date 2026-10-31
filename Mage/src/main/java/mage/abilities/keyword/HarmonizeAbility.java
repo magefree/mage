@@ -3,7 +3,6 @@ package mage.abilities.keyword;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -24,9 +23,6 @@ import mage.util.CardUtil;
  * @author TheElk801
  */
 public class HarmonizeAbility extends CastFromGraveyardAbility {
-
-    private String abilityName;
-    private SpellAbility spellAbilityToResolve;
 
     public HarmonizeAbility(Card card, String manaString) {
         super(card, new ManaCostsImpl<>(manaString), SpellAbilityCastMode.HARMONIZE);
