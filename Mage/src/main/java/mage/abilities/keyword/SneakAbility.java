@@ -47,6 +47,10 @@ public class SneakAbility extends SpellAbility {
 
     public SneakAbility(Card card, String manaString) {
         super(card.getSpellAbility());
+        if (card.isInstantOrSorcery() && card.getSpellAbility().getEffects().isEmpty()) {
+            // sneak copies the main spell ability, so it must be added after all spell's effects
+            throw new IllegalArgumentException("Wrong code usage: sneak ability must be added after spell's effects - " + card.getName());
+        }
         this.newId();
         this.setCardName(card.getName() + " with Sneak");
         timing = TimingRule.INSTANT;

@@ -234,4 +234,33 @@ public class SneakTest extends CardTestPlayerBase {
         assertCounterCount(playerB, "Jace Beleren", CounterType.LOYALTY, 3);
         assertLife(playerB, 20 - 3);
     }
+
+    @Test
+    public void test_SneakAndTokensAttackChosenDefenders_TheLastRoninsTechnique() {
+        // Sneak {1}{W}
+        // Create three 1/1 white Ninja Turtle Spirit creature tokens. If this spell's sneak cost was paid,
+        // they enter tapped and attacking.
+        addCard(Zone.HAND, playerA, "The Last Ronin's Technique"); // {1}{W}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2, attacker
+        addCard(Zone.BATTLEFIELD, playerB, "Jace Beleren"); // planeswalker, loyalty 3
+
+        attack(1, playerA, "Grizzly Bears", playerB);
+
+        castSpell(1, PhaseStep.DECLARE_BLOCKERS, playerA, "The Last Ronin's Technique with Sneak");
+        setChoice(playerA, "Grizzly Bears"); // unblocked attacker to return
+        addTarget(playerA, "Jace Beleren"); // defender for the first token
+        addTarget(playerA, playerB); // defender for the second token
+        addTarget(playerA, playerB); // defender for the third token
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+
+        assertHandCount(playerA, "Grizzly Bears", 1);
+        assertTappedCount("Ninja Turtle Spirit Token", true, 3);
+        assertCounterCount(playerB, "Jace Beleren", CounterType.LOYALTY, 3 - 1);
+        assertLife(playerB, 20 - 1 - 1);
+    }
 }
