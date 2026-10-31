@@ -508,6 +508,7 @@ public abstract class AbilityImpl implements Ability {
             switch (((SpellAbility) this).getSpellAbilityCastMode()) {
                 case FLASHBACK:
                 case HARMONIZE:
+                case BEAM_ME_UP:
                 case MADNESS:
                 case TRANSFORMED:
                 case DISTURB:

@@ -61,6 +61,7 @@ public class Spell extends StackObjectImpl implements Card {
     private boolean faceDown;
     private boolean countered;
     private boolean resolving = false;
+    protected boolean entersAttacking;
     private UUID commandedByPlayerId = null; // controller of the spell resolve, example: Word of Command
     private String commandedByInfo; // info about spell commanded, e.g. source
     private boolean prototyped;
@@ -1046,6 +1047,16 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public MageObject getCopyFrom() {
         return this.copyFrom;
+    }
+
+    @Override
+    public void setEntersAttacking(boolean entersAttacking) {
+        this.entersAttacking = entersAttacking;
+    }
+
+    @Override
+    public boolean getEntersAttacking() {
+        return entersAttacking;
     }
 
     @Override
