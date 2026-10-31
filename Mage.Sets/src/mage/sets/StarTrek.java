@@ -347,6 +347,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Test of Conviction", 39, Rarity.UNCOMMON, mage.cards.t.TestOfConviction.class));
         cards.add(new SetCardInfo("Test of Courage", 220, Rarity.UNCOMMON, mage.cards.t.TestOfCourage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Test of Courage", 339, Rarity.UNCOMMON, mage.cards.t.TestOfCourage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Test of Identity", 177, Rarity.UNCOMMON, mage.cards.t.TestOfIdentity.class));
         cards.add(new SetCardInfo("Test of Loyalty", 134, Rarity.UNCOMMON, mage.cards.t.TestOfLoyalty.class));
         cards.add(new SetCardInfo("Test of Priorities", 85, Rarity.UNCOMMON, mage.cards.t.TestOfPriorities.class));
         cards.add(new SetCardInfo("The City on the Edge of Forever", 228, Rarity.RARE, mage.cards.t.TheCityOnTheEdgeOfForever.class));
