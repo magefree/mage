@@ -174,12 +174,13 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
-
+        skipListAddName(SKIP_LIST_TYPE, "TRK", "Culber and Stamets, Star-Crossed"); // TODO: Remove once MTGJson resyncs (Oct 30, 2026)
         // subtype
         // skipListAddName(SKIP_LIST_SUBTYPE, set, cardName);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
+        skipListAddName(SKIP_LIST_SUBTYPE, "TRK", "Culber and Stamets, Star-Crossed"); // TODO: Remove once MTGJson resyncs (Oct 30, 2026)
 
         // number
         // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
@@ -1212,6 +1213,10 @@ public class VerifyCardDataTest {
                 if (jsonSet.code.equals("OM1")) {
                     // TODO: Determine how to model this set, if at all.
                     // Wizards released this in lieu of SPM due to licensing issues. Almost mechannically identical, but with unique card names/art.
+                    return;
+                }
+                if (jsonSet.code.equals("BCHR")) {
+                    // Skip for now, not a real draft set over Chronicles
                     return;
                 }
                 // how-to fix: it's miss promo sets with boosters, so just add/generate it in most use cases
@@ -3496,19 +3501,17 @@ public class VerifyCardDataTest {
 
     @Test
     public void test_checkCardRatingConsistency() {
-        // all cards with same name must have same rating (see RateCard.rateCard)
+        // all cards with same name in same set must have same rating (see RateCard.rateCard)
         // cards rating must be consistency (same) for card sorting
+        // warning, draft rating is a card place among the cards of one set, so diff sets can have diff ratings
         List<Card> cardsList = new ArrayList<>(CardScanner.getAllCards());
         Map<String, Integer> cardRates = new HashMap<>();
         for (Card card : cardsList) {
             int curRate = RateCard.rateCard(card, Collections.emptyList(), false);
-            int prevRate = cardRates.getOrDefault(card.getName(), 0);
-            if (prevRate == 0) {
-                cardRates.putIfAbsent(card.getName(), curRate);
-            } else {
-                if (curRate != prevRate) {
-                    Assert.fail("Card with same name have different ratings: " + card.getName());
-                }
+            String key = card.getExpansionSetCode() + " - " + card.getName();
+            Integer prevRate = cardRates.putIfAbsent(key, curRate);
+            if (prevRate != null && curRate != prevRate) {
+                Assert.fail("Card with same name in same set have different ratings: " + key);
             }
         }
     }

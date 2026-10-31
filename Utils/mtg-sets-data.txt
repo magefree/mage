@@ -10,6 +10,7 @@ Alchemy: Secrets of Strixhaven|YSOS|
 Alchemy: Wilds of Eldraine|YWOE|
 Alliances|ALL|
 Amonkhet|AKH|
+Amonkhet Invocations|MP2|
 Anthologies|ATH|
 Antiquities|ATQ|
 Apocalypse|APC|
@@ -163,6 +164,7 @@ Jumpstart: Historic Horizons|J21|
 Jumpstart|JMP|
 Jurassic World Collection|REX|
 Kaladesh|KLD|
+Kaladesh Inventions|MPS|
 Kaldheim Commander|KHC|
 Kaldheim|KHM|
 Kamigawa: Neon Dynasty|NEO|
@@ -191,8 +193,6 @@ Marvel Super Heroes Commander|MSC|
 Marvel Super Heroes|MSH|
 Marvel's Spider-Man Eternal|SPE|
 Marvel's Spider-Man|SPM|
-Masterpiece Series Amonkhet||
-Masterpiece Series|MPS|
 Masters 25|A25|
 Masters Edition III|ME3|
 Masters Edition II|ME2|
