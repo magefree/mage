@@ -102,7 +102,7 @@ class CloakAndDaggerEntwinedEffect extends OneShotEffect {
         opponent.revealCards(source, opponent.getHand(), game);
 
         // Nothing can be exiled if Cloak and Dagger left before this ability resolved.
-        if (source.getSourcePermanentIfItStillExists(game) == null) {
+        if (source.getSourcePermanentIfItStillExists(game, true) == null) {
             return true;
         }
 
