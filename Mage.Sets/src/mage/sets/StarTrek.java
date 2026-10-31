@@ -84,6 +84,8 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Cloistered Telepath", 50, Rarity.COMMON, mage.cards.c.CloisteredTelepath.class));
         cards.add(new SetCardInfo("Cold-Blooded Crew", 189, Rarity.COMMON, mage.cards.c.ColdBloodedCrew.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cold-Blooded Crew", 574, Rarity.COMMON, mage.cards.c.ColdBloodedCrew.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Collation Trimatrix", 98, Rarity.RARE, mage.cards.c.CollationTrimatrix.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Collation Trimatrix", 455, Rarity.RARE, mage.cards.c.CollationTrimatrix.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Collective Drone", 99, Rarity.UNCOMMON, mage.cards.c.CollectiveDrone.class));
         cards.add(new SetCardInfo("Command Decision", 8, Rarity.COMMON, mage.cards.c.CommandDecision.class));
         cards.add(new SetCardInfo("Command Subadjunct", 341, Rarity.UNCOMMON, mage.cards.c.CommandSubadjunct.class, NON_FULL_USE_VARIOUS));
