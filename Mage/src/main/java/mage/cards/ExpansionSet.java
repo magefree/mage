@@ -432,17 +432,7 @@ public abstract class ExpansionSet implements Serializable {
             return booster;
         }
 
-        if (numBoosterLands > 0) {
-            List<CardInfo> specialLands = getSpecialCardsByRarity(Rarity.LAND);
-            List<CardInfo> basicLands = getCardsByRarity(Rarity.LAND);
-            for (int i = 0; i < numBoosterLands; i++) {
-                if (ratioBoosterSpecialLand > 0 && RandomUtil.nextInt(ratioBoosterSpecialLand) < ratioBoosterSpecialLandNumerator) {
-                    addToBooster(booster, specialLands);
-                } else {
-                    addToBooster(booster, basicLands);
-                }
-            }
-        }
+        // cards order like in real boosters and collators: commons, uncommons, rares, special and lands at the end
 
         int numCommonsToGenerate = numBoosterCommon;
         int numSpecialToGenerate = numBoosterSpecial;
@@ -488,6 +478,18 @@ public abstract class ExpansionSet implements Serializable {
 
         if (numSpecialToGenerate > 0) {
             addSpecialCards(booster, numSpecialToGenerate);
+        }
+
+        if (numBoosterLands > 0) {
+            List<CardInfo> specialLands = getSpecialCardsByRarity(Rarity.LAND);
+            List<CardInfo> basicLands = getCardsByRarity(Rarity.LAND);
+            for (int i = 0; i < numBoosterLands; i++) {
+                if (ratioBoosterSpecialLand > 0 && RandomUtil.nextInt(ratioBoosterSpecialLand) < ratioBoosterSpecialLandNumerator) {
+                    addToBooster(booster, specialLands);
+                } else {
+                    addToBooster(booster, basicLands);
+                }
+            }
         }
 
         return booster;
