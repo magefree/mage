@@ -3,6 +3,7 @@ package mage.util;
 import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.ColoredManaSymbol;
+import mage.filter.FilterMana;
 
 import java.util.*;
 
@@ -29,12 +30,14 @@ public final class DeckBuildUtils {
 
         // deck colors are unknown here, so find it from the deck itself
         Map<ColoredManaSymbol, Double> colorsNeed = countColoredManaSymbols(deckList, findDeckColors(deckList));
+        Map<ColoredManaSymbol, Integer> lands;
         if (colorsNeed.isEmpty()) {
             // no colored mana symbols, so distribute evenly
             BASIC_LAND_COLORS.forEach(color -> colorsNeed.put(color, 1.0));
+            lands = splitLandsByColors(landsNeeded, colorsNeed);
+        } else {
+            lands = splitBasicLandsByColors(landsNeeded, colorsNeed, deckList);
         }
-
-        Map<ColoredManaSymbol, Integer> lands = splitLandsByColors(landsNeeded, colorsNeed);
         return BASIC_LAND_COLORS.stream()
                 .mapToInt(color -> lands.getOrDefault(color, 0))
                 .toArray();
@@ -137,6 +140,67 @@ public final class DeckBuildUtils {
             res.put(color, res.get(color) + 1);
         }
         return res;
+    }
+
+    /**
+     * Split basic lands between colors by needed amount, nonbasic lands of the deck are used as color sources too
+     * (example: a G/W deck with 3 green nonbasic lands needs fewer Forests), total amount is always basicLandsCount
+     */
+    public static Map<ColoredManaSymbol, Integer> splitBasicLandsByColors(int basicLandsCount, Map<ColoredManaSymbol, Double> colorsNeed, Collection<Card> deckCards) {
+        Map<ColoredManaSymbol, Integer> sources = countNonBasicLandSources(deckCards);
+        double totalNeed = colorsNeed.values().stream().mapToDouble(Double::doubleValue).sum();
+        if (sources.isEmpty() || basicLandsCount <= 0 || totalNeed <= 0) {
+            return splitLandsByColors(basicLandsCount, colorsNeed);
+        }
+
+        // all lands of the deck must give sources by needed amount, so basic lands cover the missing part only
+        int nonBasicLandsCount = (int) deckCards.stream().filter(DeckBuildUtils::isNonBasicLand).count();
+        int allLandsCount = basicLandsCount + nonBasicLandsCount;
+        Map<ColoredManaSymbol, Double> colorsMissing = new EnumMap<>(ColoredManaSymbol.class);
+        for (Map.Entry<ColoredManaSymbol, Double> entry : colorsNeed.entrySet()) {
+            double missing = allLandsCount * entry.getValue() / totalNeed - sources.getOrDefault(entry.getKey(), 0);
+            if (missing > 0) {
+                colorsMissing.put(entry.getKey(), missing);
+            }
+        }
+        if (colorsMissing.isEmpty()) {
+            // nonbasic lands give enough sources for all colors
+            return splitLandsByColors(basicLandsCount, colorsNeed);
+        }
+        return splitLandsByColors(basicLandsCount, colorsMissing);
+    }
+
+    /**
+     * Nonbasic lands as color sources: a land counts for every color of its color identity (example: a G/U dual land
+     * is a source of G and U), lands without colored mana symbols (any color, colorless) are not counted
+     */
+    public static Map<ColoredManaSymbol, Integer> countNonBasicLandSources(Collection<Card> cards) {
+        Map<ColoredManaSymbol, Integer> res = new EnumMap<>(ColoredManaSymbol.class);
+        cards.stream()
+                .filter(DeckBuildUtils::isNonBasicLand)
+                .forEach(card -> {
+                    FilterMana colors = ManaUtil.getColorIdentity(card);
+                    if (colors.isWhite()) {
+                        res.merge(ColoredManaSymbol.W, 1, Integer::sum);
+                    }
+                    if (colors.isBlue()) {
+                        res.merge(ColoredManaSymbol.U, 1, Integer::sum);
+                    }
+                    if (colors.isBlack()) {
+                        res.merge(ColoredManaSymbol.B, 1, Integer::sum);
+                    }
+                    if (colors.isRed()) {
+                        res.merge(ColoredManaSymbol.R, 1, Integer::sum);
+                    }
+                    if (colors.isGreen()) {
+                        res.merge(ColoredManaSymbol.G, 1, Integer::sum);
+                    }
+                });
+        return res;
+    }
+
+    private static boolean isNonBasicLand(Card card) {
+        return card.isLand() && !card.isBasic();
     }
 
     /**

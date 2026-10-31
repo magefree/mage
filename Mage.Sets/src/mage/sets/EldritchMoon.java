@@ -59,7 +59,7 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Borrowed Malevolence", 82, Rarity.COMMON, mage.cards.b.BorrowedMalevolence.class));
         cards.add(new SetCardInfo("Brazen Wolves", 122, Rarity.COMMON, mage.cards.b.BrazenWolves.class));
         cards.add(new SetCardInfo("Brisela, Voice of Nightmares", "15b", Rarity.MYTHIC, mage.cards.b.BriselaVoiceOfNightmares.class));
-        cards.add(new SetCardInfo("Bruna, the Fading Light", "15a", Rarity.RARE, mage.cards.b.BrunaTheFadingLight.class));
+        cards.add(new SetCardInfo("Bruna, the Fading Light", 15, Rarity.RARE, mage.cards.b.BrunaTheFadingLight.class));
         cards.add(new SetCardInfo("Campaign of Vengeance", 182, Rarity.UNCOMMON, mage.cards.c.CampaignOfVengeance.class));
         cards.add(new SetCardInfo("Cathar's Shield", 192, Rarity.COMMON, mage.cards.c.CatharsShield.class));
         cards.add(new SetCardInfo("Cemetery Recruitment", 83, Rarity.COMMON, mage.cards.c.CemeteryRecruitment.class));
@@ -132,7 +132,7 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Guardian of Pilgrims", 30, Rarity.COMMON, mage.cards.g.GuardianOfPilgrims.class));
         cards.add(new SetCardInfo("Hamlet Captain", 161, Rarity.UNCOMMON, mage.cards.h.HamletCaptain.class));
         cards.add(new SetCardInfo("Hanweir Battlements", 204, Rarity.RARE, mage.cards.h.HanweirBattlements.class));
-        cards.add(new SetCardInfo("Hanweir Garrison", "130a", Rarity.RARE, mage.cards.h.HanweirGarrison.class));
+        cards.add(new SetCardInfo("Hanweir Garrison", 130, Rarity.RARE, mage.cards.h.HanweirGarrison.class));
         cards.add(new SetCardInfo("Hanweir, the Writhing Township", "130b", Rarity.RARE, mage.cards.h.HanweirTheWrithingTownship.class));
         cards.add(new SetCardInfo("Harmless Offering", 131, Rarity.RARE, mage.cards.h.HarmlessOffering.class));
         cards.add(new SetCardInfo("Haunted Dead", 92, Rarity.UNCOMMON, mage.cards.h.HauntedDead.class));
@@ -161,7 +161,7 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Markov Crusader", 95, Rarity.UNCOMMON, mage.cards.m.MarkovCrusader.class));
         cards.add(new SetCardInfo("Mausoleum Wanderer", 69, Rarity.RARE, mage.cards.m.MausoleumWanderer.class));
         cards.add(new SetCardInfo("Mercurial Geists", 186, Rarity.UNCOMMON, mage.cards.m.MercurialGeists.class));
-        cards.add(new SetCardInfo("Midnight Scavengers", "96a", Rarity.COMMON, mage.cards.m.MidnightScavengers.class));
+        cards.add(new SetCardInfo("Midnight Scavengers", 96, Rarity.COMMON, mage.cards.m.MidnightScavengers.class));
         cards.add(new SetCardInfo("Mind's Dilation", 70, Rarity.MYTHIC, mage.cards.m.MindsDilation.class));
         cards.add(new SetCardInfo("Mirrorwing Dragon", 136, Rarity.MYTHIC, mage.cards.m.MirrorwingDragon.class));
         cards.add(new SetCardInfo("Mockery of Nature", 10, Rarity.UNCOMMON, mage.cards.m.MockeryOfNature.class));
@@ -319,10 +319,10 @@ class EldritchMoonCollator implements BoosterCollator {
     private final CardRun commonC2 = new CardRun(true, "127", "32", "58", "120", "44", "74", "201", "144", "30", "53", "135", "32", "55", "127", "25", "195", "120", "44", "58", "144", "30", "53", "135", "25", "74", "144", "32", "55", "201", "120", "30", "58", "127", "44", "53", "135", "201", "55", "127", "32", "74", "144", "25", "58", "195", "44", "74", "120", "30", "55", "201", "135", "25", "53");
     private final CardRun uncommonA = new CardRun(true, "36", "71", "198", "128", "79", "114", "27", "68", "140", "205", "102", "34", "103", "119", "196", "61", "101", "182", "202", "13", "141", "92", "157", "38", "114", "128", "71", "198", "90", "36", "115", "68", "10", "205", "140", "101", "79", "27", "119", "102", "202", "10", "34", "103", "13", "115", "157", "92", "182", "38", "141", "61", "196", "90");
     private final CardRun uncommonB = new CardRun(true, "18", "149", "152", "11", "24", "159", "188", "134", "73", "158", "62", "164", "29", "97", "125", "187", "95", "4", "161", "45", "50", "169", "110", "22", "186", "134", "88", "153", "49", "159", "133", "1", "152", "18", "11", "97", "158", "9", "143", "73", "161", "24", "94", "164", "62", "95", "187", "149", "45", "153", "4", "110", "188", "22", "88", "50", "125", "169", "1", "186", "143", "49", "29", "133", "94", "9");
-    private final CardRun commonDFC = new CardRun(true, "148", "124", "23", "63", "175", "91", "96a", "142", "148", "54", "91", "175", "163", "148", "33", "168", "91", "96a", "174", "175", "63", "193", "96a", "124", "54", "142", "148", "91", "96a", "23", "175", "163", "91", "148", "174", "175", "168", "63", "91", "96a", "193", "148", "33", "124", "96a", "142", "23", "54", "175", "91", "96a", "163", "148", "174", "33", "175", "168", "148", "193", "124", "91", "96a", "23", "175", "33", "148", "175", "142", "54", "63", "148", "91", "96a", "163", "175", "174", "91", "96a", "33", "148", "168", "23", "91", "96a", "193", "175", "63", "54", "148", "124", "142", "163", "175", "91", "96a", "174", "148", "168", "193", "96a", "63", "175", "124", "54", "91", "96a", "23", "148", "142", "91", "175", "163", "33", "174", "148", "91", "96a", "168", "175", "193");
+    private final CardRun commonDFC = new CardRun(true, "148", "124", "23", "63", "175", "91", "96", "142", "148", "54", "91", "175", "163", "148", "33", "168", "91", "96", "174", "175", "63", "193", "96", "124", "54", "142", "148", "91", "96", "23", "175", "163", "91", "148", "174", "175", "168", "63", "91", "96", "193", "148", "33", "124", "96", "142", "23", "54", "175", "91", "96", "163", "148", "174", "33", "175", "168", "148", "193", "124", "91", "96", "23", "175", "33", "148", "175", "142", "54", "63", "148", "91", "96", "163", "175", "174", "91", "96", "33", "148", "168", "23", "91", "96", "193", "175", "63", "54", "148", "124", "142", "163", "175", "91", "96", "174", "148", "168", "193", "96", "63", "175", "124", "54", "91", "96", "23", "148", "142", "91", "175", "163", "33", "174", "148", "91", "96", "168", "175", "193");
     private final CardRun rare = new CardRun(false, "3", "5", "7", "17", "37", "39", "40", "41", "46", "47", "51", "64", "65", "69", "72", "75", "80", "85", "86", "87", "98", "99", "106", "117", "118", "123", "131", "132", "146", "155", "156", "165", "170", "171", "176", "181", "185", "189", "197", "199", "200", "203");
     private final CardRun mythic = new CardRun(false, "2", "6", "20", "70", "93", "109", "136", "137", "162", "183", "184", "190");
-    private final CardRun rareDFC = new CardRun(false, "15a", "56", "111", "130a", "204", "15a", "56", "111", "130a", "204", "28", "191");
+    private final CardRun rareDFC = new CardRun(false, "15", "56", "111", "130", "204", "15", "56", "111", "130", "204", "28", "191");
     private final CardRun land = new CardRun(false, "SOI_283", "SOI_284", "SOI_285", "SOI_286", "SOI_287", "SOI_288", "SOI_289", "SOI_290", "SOI_291", "SOI_292", "SOI_293", "SOI_294", "SOI_295", "SOI_296", "SOI_297");
 
     private final BoosterStructure AABBC1C1C1C1C1 = new BoosterStructure(
