@@ -7,6 +7,7 @@ import mage.client.SessionHandler;
 import mage.client.preference.MagePreferences;
 import mage.client.util.AppUtil;
 import mage.client.util.ClientDefaultSettings;
+import mage.client.util.gui.GuiDisplayUtil;
 import mage.client.util.gui.countryBox.CountryItemEditor;
 import mage.remote.Connection;
 import mage.utils.StreamUtils;
@@ -45,6 +46,18 @@ public class ConnectDialog extends MageDialog {
 
     public ConnectDialog() {
         initComponents();
+
+        lblStatus.addPropertyChangeListener("text", event -> {
+            Runnable resize = () -> {
+                pack();
+                GuiDisplayUtil.keepComponentInsideScreen(getX(), getY(), this);
+            };
+            if (SwingUtilities.isEventDispatchThread()) {
+                resize.run();
+            } else {
+                SwingUtilities.invokeLater(resize);
+            }
+        });
 
         this.txtServer.addActionListener(connectAction);
         this.txtPort.addActionListener(connectAction);
@@ -87,6 +100,8 @@ public class ConnectDialog extends MageDialog {
         MageFrame.getDesktop().add(this, this.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         //this.makeWindowCentered();
         this.setLocation(50, 50); // make sure it will be visible in any sizes
+        pack();
+        GuiDisplayUtil.keepComponentInsideScreen(getX(), getY(), this);
 
         // Close on "ESC"
         registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
@@ -255,6 +270,8 @@ public class ConnectDialog extends MageDialog {
                 btnCancelActionPerformed(evt);
             }
         });
+
+        lblStatus.setMinimumSize(new java.awt.Dimension(0, 24));
 
         btnRegister.setText("Register new user...");
         btnRegister.setToolTipText("<html>XMage now supports user authentication.<br>Register your account before you log in.<html>");
@@ -543,7 +560,7 @@ public class ConnectDialog extends MageDialog {
                     .addComponent(jProxySettingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnWhatsNew, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
-                .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
