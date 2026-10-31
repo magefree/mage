@@ -322,6 +322,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Stomping Ground", 299, Rarity.RARE, mage.cards.s.StompingGround.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stomping Ground", 395, Rarity.RARE, mage.cards.s.StompingGround.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stomping Ground", 490, Rarity.RARE, mage.cards.s.StompingGround.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Stray from History", 130, Rarity.COMMON, mage.cards.s.StrayFromHistory.class));
         cards.add(new SetCardInfo("Subcommander T'Pol", 82, Rarity.RARE, mage.cards.s.SubcommanderTPol.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Subcommander T'Pol", 453, Rarity.RARE, mage.cards.s.SubcommanderTPol.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Subspace Anomaly", 300, Rarity.UNCOMMON, mage.cards.s.SubspaceAnomaly.class));
