@@ -115,6 +115,21 @@ public final class ZonesHandler {
                 game.addSimultaneousEvent(zoneChangeInfo.event);
             }
         }
+
+        // enters attacking (508.4): only after the whole group is on the battlefield and effects are applied,
+        // so a defender choice shows a finished game state
+        // same for tokens in another place
+        List<UUID> enteringAttackers = new ArrayList<>();
+        for (ZoneChangeInfo zoneChangeInfo : zoneChangeInfos) {
+            if (Zone.BATTLEFIELD.equals(zoneChangeInfo.event.getToZone())
+                    && zoneChangeInfo.event.getTarget().isEntersAttacking()) {
+                enteringAttackers.add(zoneChangeInfo.event.getTarget().getId());
+            }
+        }
+        if (!enteringAttackers.isEmpty()) {
+            game.applyEffects();
+            game.getCombat().addEnteringAttackers(enteringAttackers, game);
+        }
         return zoneChangeInfos;
     }
 
@@ -278,9 +293,6 @@ public final class ZonesHandler {
                     Permanent permanent = event.getTarget();
                     game.addPermanent(permanent, createOrder);
                     game.getPermanentsEntering().remove(permanent.getId());
-                    if (permanent.getEntersAttacking() && permanent.isCreature(game) && game.getCombat() != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
-                        game.getCombat().addAttackingCreature(permanent.getId(), game);
-                    }
                     break;
                 default:
                     throw new UnsupportedOperationException("to Zone " + toZone + " not supported yet");

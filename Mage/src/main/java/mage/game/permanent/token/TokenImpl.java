@@ -278,6 +278,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         }
 
         Set<PermanentToken> allAddedTokens = new HashSet<>();
+        List<UUID> enteringAttackers = new ArrayList<>();
         for (Map.Entry<Token, Integer> entry : event.getTokens().entrySet()) {
             Token token = entry.getKey();
             int amount = entry.getValue();
@@ -447,9 +448,12 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                     }
                 }
 
-                // must attack
-                if (attacking && game.getCombat() != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
-                    game.getCombat().addAttackingCreature(permanent.getId(), game, attackedPlayer);
+                // must attack (added to combat after all tokens are on the battlefield, see below)
+                if (attacking) {
+                    permanent.setEntersAttacking(game.getCombat().getPossibleDefenders(permanent.getId(), attackedPlayer, game));
+                }
+                if (permanent.isEntersAttacking()) {
+                    enteringAttackers.add(permanent.getId());
                 }
 
                 // game logs
@@ -463,6 +467,10 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         CreatedTokensEvent.addEvents(allAddedTokens, source, game);
 
         game.applyEffects(); // without LKI reset
+
+        // must attack (508.4): only after all tokens are on the battlefield and effects are applied,
+        // so a defender choice shows a finished game state
+        game.getCombat().addEnteringAttackers(enteringAttackers, game);
     }
 
     @Override

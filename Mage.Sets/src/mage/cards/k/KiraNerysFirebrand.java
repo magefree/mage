@@ -16,7 +16,6 @@ import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -75,8 +74,9 @@ class KiraNerysFirebrandEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
         if (target != null) {
-            target.tap(true, source, game);
-            target.setEntersAttacking(true);
+            // enters tapped - it does not become tapped (no tapped event and triggers)
+            target.setTapped(true);
+            target.setEntersAttacking(game.getCombat().getPossibleDefenders(target.getId(), null, game));
         }
         return false;
     }
@@ -89,10 +89,16 @@ class KiraNerysFirebrandEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        Player player = game.getPlayer(source.getControllerId());
-        if (permanent == null || player == null || game.getCombat() == null) {
+        if (permanent == null
+                || !permanent.isCreature(game)
+                || !permanent.isControlledBy(source.getControllerId())) {
             return false;
         }
-        return permanent.isCreature(game) && permanent.isControlledBy(player.getId()) && player.getId().equals(game.getCombat().getAttackingPlayerId());
+        // while you control an attacking creature
+        return game.getCombat()
+                .getAttackers()
+                .stream()
+                .map(game::getPermanent)
+                .anyMatch(attacker -> attacker != null && attacker.isControlledBy(source.getControllerId()));
     }
 }

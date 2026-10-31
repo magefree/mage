@@ -160,10 +160,6 @@ public interface Card extends MageObject, Ownerable {
 
     void loseAllAbilities(Game game);
 
-    void setEntersAttacking(boolean entersAttacking);
-
-    boolean getEntersAttacking();
-
     boolean addCounters(Counter counter, Ability source, Game game);
 
     boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game);
