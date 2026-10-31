@@ -434,6 +434,8 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Troi, Winging It", 191, Rarity.RARE, mage.cards.t.TroiWingingIt.class));
         cards.add(new SetCardInfo("Type-03 Borg Vessel", 243, Rarity.RARE, mage.cards.t.Type03BorgVessel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Type-03 Borg Vessel", 33, Rarity.RARE, mage.cards.t.Type03BorgVessel.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("U.S.S. Defiant, Mirror Migrant", 124, Rarity.RARE, mage.cards.u.USSDefiantMirrorMigrant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("U.S.S. Defiant, Mirror Migrant", 360, Rarity.RARE, mage.cards.u.USSDefiantMirrorMigrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("U.S.S. Defiant, Tough Little Ship", 125, Rarity.RARE, mage.cards.u.USSDefiantToughLittleShip.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("U.S.S. Defiant, Tough Little Ship", 361, Rarity.RARE, mage.cards.u.USSDefiantToughLittleShip.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("U.S.S. Enterprise-E, Sovereign", 244, Rarity.RARE, mage.cards.u.USSEnterpriseESovereign.class, NON_FULL_USE_VARIOUS));
