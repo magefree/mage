@@ -4,6 +4,7 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import mage.cards.action.ActionCallback;
 import mage.client.util.ImageCaches;
+import mage.client.util.gui.HiDpiRenderUtil;
 import mage.view.CardView;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
 import org.mage.plugins.card.images.ImageCache;
@@ -19,9 +20,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class CardPanelRenderModeMTGO extends CardPanel {
 
-    // TODO: share code and use for all images/rendering (potential injection point - images cache), see #969
-    private static final boolean MTGO_MODE_RENDER_SMOOTH_IMAGES_ENABLED = false;
-    private static final int MTGO_MODE_RENDER_SCALED_IMAGES_COEF = 1; // TODO: experiment with scale settings, is it useful to render in x2-x4 sizes?
+    private static final double ART_OVERSAMPLING = 1.5;
 
     // https://www.mtg.onl/evolution-of-magic-token-card-frame-design/
 
@@ -45,6 +44,10 @@ public class CardPanelRenderModeMTGO extends CardPanel {
     // The rendered card image, with or without the art image loaded yet
     // = null while invalid
     private BufferedImage cardImage;
+    private int rasterWidth;
+    private int rasterHeight;
+    private int sourceWidth;
+    private int sourceHeight;
     private CardRenderer cardRenderer;
 
     private int updateArtImageStamp;
@@ -63,7 +66,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
                 + attribs.isChoosable + '|'
                 + attribs.isSelected + '|'
                 + attribs.isTransformed + '|'
-                + cardRenderMode;
+                + cardRenderMode + '|' + rasterWidth + '|' + rasterHeight;
     }
 
     public CardPanelRenderModeMTGO(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback,
@@ -94,6 +97,16 @@ public class CardPanelRenderModeMTGO extends CardPanel {
             g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, alpha));
         }
 
+        Dimension raster = HiDpiRenderUtil.getRasterSize(g, getCardWidth(), getCardHeight());
+        if (raster.width != rasterWidth || raster.height != rasterHeight) {
+            rasterWidth = raster.width;
+            rasterHeight = raster.height;
+            cardImage = null;
+        }
+        Dimension source = HiDpiRenderUtil.getSourceSize(raster, ART_OVERSAMPLING);
+        if (artImage != null && (source.width != sourceWidth || source.height != sourceHeight)) {
+            loadArtImage(source);
+        }
         // Render the card if we don't have an image ready to use
         if (cardImage == null) {
             // Try to get card image from cache based on our card characteristics
@@ -111,19 +124,8 @@ public class CardPanelRenderModeMTGO extends CardPanel {
 
         Graphics2D g2 = (Graphics2D) g.create();
         try {
-            // render with antialiasing
-            if (MTGO_MODE_RENDER_SMOOTH_IMAGES_ENABLED) {
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-                g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-            }
-
-            // render scaled
-            if (MTGO_MODE_RENDER_SCALED_IMAGES_COEF > 1) {
-                g2.drawImage(cardImage, cardOffsetX, cardOffsetY, getCardWidth(), getCardHeight(), null);
-            } else {
-                g2.drawImage(cardImage, cardOffsetX, cardOffsetY, null);
-            }
+            HiDpiRenderUtil.configureRasterDraw(g2, cardImage, getCardWidth(), getCardHeight());
+            g2.drawImage(cardImage, cardOffsetX, cardOffsetY, getCardWidth(), getCardHeight(), null);
         } finally {
             g2.dispose();
         }
@@ -177,6 +179,10 @@ public class CardPanelRenderModeMTGO extends CardPanel {
             artKey = impl.artKey;
             cardRenderer.setArtImage(artImage);
             cardImage = impl.cardImage;
+            rasterWidth = impl.rasterWidth;
+            rasterHeight = impl.rasterHeight;
+            sourceWidth = impl.sourceWidth;
+            sourceHeight = impl.sourceHeight;
         }
     }
 
@@ -213,32 +219,38 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         //artImage = ImageCache.tryGetImage(gameCard, getCardWidth(), getCardHeight());
         //this.cardRenderer.setArtImage(artImage);
 
-        // Submit a task to draw with the card art when it arrives
-        if (artImage == null) {
-            final int stamp = ++updateArtImageStamp;
-            Util.threadPool.submit(() -> {
-                try {
-                    final ImageCacheData srcData = ImageCache.getCardImage(getGameCard(), getCardWidth(), getCardHeight());
-                    final BufferedImage srcImage = srcData.getImage();
-                    final String srcKey = srcImage == null ? null
-                            : srcData.getPath() + '@' + srcImage.getWidth() + 'x' + srcImage.getHeight();
-                    UI.invokeLater(() -> {
-                        if (stamp == updateArtImageStamp) {
-                            artImage = srcImage;
-                            artKey = srcKey;
-                            cardRenderer.setArtImage(srcImage);
-                            if (srcImage != null) {
-                                // Invalidate and repaint
-                                cardImage = null;
-                                repaint();
-                            }
+        // Leave room for cropping the art out of the full card without keeping full-size files.
+        Dimension raster = rasterWidth > 0 ? new Dimension(rasterWidth, rasterHeight)
+                : HiDpiRenderUtil.getRasterSize(this, getCardWidth(), getCardHeight());
+        loadArtImage(HiDpiRenderUtil.getSourceSize(raster, ART_OVERSAMPLING));
+    }
+
+    private void loadArtImage(Dimension source) {
+        sourceWidth = source.width;
+        sourceHeight = source.height;
+        final int stamp = ++updateArtImageStamp;
+        Util.threadPool.submit(() -> {
+            try {
+                final ImageCacheData srcData = ImageCache.getCardImage(getGameCard(), source.width, source.height);
+                final BufferedImage srcImage = srcData.getImage();
+                final String srcKey = srcImage == null ? null
+                        : srcData.getPath() + '@' + srcImage.getWidth() + 'x' + srcImage.getHeight();
+                UI.invokeLater(() -> {
+                    if (stamp == updateArtImageStamp) {
+                        artImage = srcImage;
+                        artKey = srcKey;
+                        cardRenderer.setArtImage(srcImage);
+                        if (srcImage != null) {
+                            // Invalidate and repaint
+                            cardImage = null;
+                            repaint();
                         }
-                    });
-                } catch (Exception | Error e) {
-                    e.printStackTrace();
-                }
-            });
-        }
+                    }
+                });
+            } catch (Exception | Error e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private CardPanelAttributes getAttributes() {
@@ -256,13 +268,15 @@ public class CardPanelRenderModeMTGO extends CardPanel {
 
         // Create image to render to
         BufferedImage image
-                = GraphicsUtilities.createCompatibleTranslucentImage(cardWidth, cardHeight);
+                = GraphicsUtilities.createCompatibleTranslucentImage(rasterWidth, rasterHeight);
         Graphics2D g2 = image.createGraphics();
         try {
+            g2.scale(rasterWidth / (double) cardWidth, rasterHeight / (double) cardHeight);
             // Render with Antialialsing
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
             g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
 
             // Draw card itself
             cardRenderer.draw(g2, getAttributes(), image);
