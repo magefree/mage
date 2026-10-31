@@ -136,6 +136,8 @@ class TheArgentEtchingsEffect extends OneShotEffect {
         for (int i = 0; i < 5; i++) {
             IncubateEffect.doIncubate(2, game, source);
         }
+        // enter triggers must see the Incubator tokens before they transform
+        game.processAction();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 filter, source.getControllerId(), source, game
         )) {
