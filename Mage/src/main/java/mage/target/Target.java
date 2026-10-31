@@ -188,6 +188,12 @@ public interface Target extends Copyable<Target>, Serializable {
     boolean isLegal(Ability source, Game game);
 
     /**
+     * True if the chosen card has changed zones since it was chosen, so its id now names a new object
+     * (e.g. a flickered permanent). Players and tokens have no zone change counter, so are never changed.
+     */
+    boolean hasChangedZones(UUID id, Game game);
+
+    /**
      * AI related code. Returns all possible different target combinations
      */
     List<? extends Target> getTargetOptions(Ability source, Game game);

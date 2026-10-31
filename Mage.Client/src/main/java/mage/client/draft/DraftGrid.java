@@ -9,7 +9,6 @@ import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.audio.AudioManager;
-import mage.client.util.comparators.CardViewRarityComparator;
 import mage.constants.Constants;
 import mage.view.CardView;
 import mage.view.CardsView;
@@ -115,9 +114,8 @@ public class DraftGrid extends javax.swing.JPanel implements CardEventProducer {
             return;
         }
 
-        List<CardView> sortedCards = new ArrayList<>(booster.values());
-        sortedCards.sort(new CardViewRarityComparator());
-        for (CardView card : sortedCards) {
+        // Keep the generator order, including its land and foil slots.
+        for (CardView card : booster.values()) {
             MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, new CardIconRenderSettings(),
                     GUISizeHelper.editorCardDimension, null, true, true, PreferencesDialog.getRenderMode(), true);
             cardImg.setCardContainerRef(this);

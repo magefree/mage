@@ -278,6 +278,9 @@ public final class ZonesHandler {
                     Permanent permanent = event.getTarget();
                     game.addPermanent(permanent, createOrder);
                     game.getPermanentsEntering().remove(permanent.getId());
+                    if (permanent.getEntersAttacking() && permanent.isCreature(game) && game.getCombat() != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
+                        game.getCombat().addAttackingCreature(permanent.getId(), game);
+                    }
                     break;
                 default:
                     throw new UnsupportedOperationException("to Zone " + toZone + " not supported yet");
