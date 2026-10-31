@@ -18,6 +18,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.AngelToken;
 import mage.players.Player;
 
+import java.util.Collections;
 import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -128,6 +129,6 @@ class SeraphicGreatswordEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         return new AngelToken()
-                .putOntoBattlefield(1, game, source, source.getControllerId(), true, true, playerId);
+                .putOntoBattlefield(1, game, source, source.getControllerId(), true, true, Collections.singleton(playerId));
     }
 }

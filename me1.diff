@@ -1,0 +1,338 @@
+diff --git a/Mage.Sets/src/mage/cards/k/KiraNerysFirebrand.java b/Mage.Sets/src/mage/cards/k/KiraNerysFirebrand.java
+index 81de5ff417..4bf0240f29 100644
+--- a/Mage.Sets/src/mage/cards/k/KiraNerysFirebrand.java
++++ b/Mage.Sets/src/mage/cards/k/KiraNerysFirebrand.java
+@@ -16,7 +16,6 @@ import mage.game.Game;
+ import mage.game.events.EntersTheBattlefieldEvent;
+ import mage.game.events.GameEvent;
+ import mage.game.permanent.Permanent;
+-import mage.players.Player;
+ 
+ /**
+  *
+@@ -75,8 +74,9 @@ class KiraNerysFirebrandEffect extends ReplacementEffectImpl {
+     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+         Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
+         if (target != null) {
+-            target.tap(true, source, game);
+-            target.setEntersAttacking(true);
++            // enters tapped - it does not become tapped (no tapped event and triggers)
++            target.setTapped(true);
++            target.setEntersAttacking(null);
+         }
+         return false;
+     }
+@@ -89,10 +89,16 @@ class KiraNerysFirebrandEffect extends ReplacementEffectImpl {
+     @Override
+     public boolean applies(GameEvent event, Ability source, Game game) {
+         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
+-        Player player = game.getPlayer(source.getControllerId());
+-        if (permanent == null || player == null || game.getCombat() == null) {
++        if (permanent == null
++                || !permanent.isCreature(game)
++                || !permanent.isControlledBy(source.getControllerId())) {
+             return false;
+         }
+-        return permanent.isCreature(game) && permanent.isControlledBy(player.getId()) && player.getId().equals(game.getCombat().getAttackingPlayerId());
++        // while you control an attacking creature
++        return game.getCombat()
++                .getAttackers()
++                .stream()
++                .map(game::getPermanent)
++                .anyMatch(attacker -> attacker != null && attacker.isControlledBy(source.getControllerId()));
+     }
+ }
+diff --git a/Mage/src/main/java/mage/cards/Card.java b/Mage/src/main/java/mage/cards/Card.java
+index 328677c2e6..2edff92335 100644
+--- a/Mage/src/main/java/mage/cards/Card.java
++++ b/Mage/src/main/java/mage/cards/Card.java
+@@ -160,10 +160,6 @@ public interface Card extends MageObject, Ownerable {
+ 
+     void loseAllAbilities(Game game);
+ 
+-    void setEntersAttacking(boolean entersAttacking);
+-
+-    boolean getEntersAttacking();
+-
+     boolean addCounters(Counter counter, Ability source, Game game);
+ 
+     boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game);
+diff --git a/Mage/src/main/java/mage/cards/CardImpl.java b/Mage/src/main/java/mage/cards/CardImpl.java
+index 576618930c..ab184ebab0 100644
+--- a/Mage/src/main/java/mage/cards/CardImpl.java
++++ b/Mage/src/main/java/mage/cards/CardImpl.java
+@@ -51,7 +51,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
+     protected boolean flipCard;
+     protected String flipCardName;
+     protected boolean morphCard;
+-    protected boolean entersAttacking;
+     protected List<UUID> attachments = new ArrayList<>();
+     protected boolean extraDeckCard = false;
+ 
+@@ -730,16 +729,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
+         return flipCardName;
+     }
+ 
+-    @Override
+-    public void setEntersAttacking(boolean entersAttacking) {
+-        this.entersAttacking = entersAttacking;
+-    }
+-
+-    @Override
+-    public boolean getEntersAttacking() {
+-        return entersAttacking;
+-    }
+-
+     @Override
+     public Counters getCounters(Game game) {
+         return getCounters(game.getState());
+diff --git a/Mage/src/main/java/mage/game/ZonesHandler.java b/Mage/src/main/java/mage/game/ZonesHandler.java
+index 37d7e7452b..a0af1f215e 100644
+--- a/Mage/src/main/java/mage/game/ZonesHandler.java
++++ b/Mage/src/main/java/mage/game/ZonesHandler.java
+@@ -115,6 +115,20 @@ public final class ZonesHandler {
+                 game.addSimultaneousEvent(zoneChangeInfo.event);
+             }
+         }
++
++        // enters attacking (508.4): only after the whole group is on the battlefield and effects are applied,
++        // so a defender choice shows a finished game state
++        List<UUID> enteringAttackers = new ArrayList<>();
++        for (ZoneChangeInfo zoneChangeInfo : zoneChangeInfos) {
++            if (Zone.BATTLEFIELD.equals(zoneChangeInfo.event.getToZone())
++                    && zoneChangeInfo.event.getTarget().isEntersAttacking()) {
++                enteringAttackers.add(zoneChangeInfo.event.getTarget().getId());
++            }
++        }
++        if (!enteringAttackers.isEmpty()) {
++            game.applyEffects();
++            game.getCombat().addEnteringAttackers(enteringAttackers, game);
++        }
+         return zoneChangeInfos;
+     }
+ 
+@@ -278,9 +292,6 @@ public final class ZonesHandler {
+                     Permanent permanent = event.getTarget();
+                     game.addPermanent(permanent, createOrder);
+                     game.getPermanentsEntering().remove(permanent.getId());
+-                    if (permanent.getEntersAttacking() && permanent.isCreature(game) && game.getCombat() != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
+-                        game.getCombat().addAttackingCreature(permanent.getId(), game);
+-                    }
+                     break;
+                 default:
+                     throw new UnsupportedOperationException("to Zone " + toZone + " not supported yet");
+diff --git a/Mage/src/main/java/mage/game/combat/Combat.java b/Mage/src/main/java/mage/game/combat/Combat.java
+index c3228d6f6f..ae705024e2 100644
+--- a/Mage/src/main/java/mage/game/combat/Combat.java
++++ b/Mage/src/main/java/mage/game/combat/Combat.java
+@@ -209,6 +209,63 @@ public class Combat implements Serializable, Copyable<Combat> {
+         this.attackingPlayerId = playerId;
+     }
+ 
++    /**
++     * Add permanents marked as entering attacking (Permanent.setEntersAttacking) to the combat (rule 508.4).
++     * <p>
++     * Warning, it's use choose dialogs, so call it only after game state prepared (all permanents moved and ApplyEffects used)
++     *
++     * @param permanentIds in the enter order
++     * @param game
++     */
++    public void addEnteringAttackers(List<UUID> permanentIds, Game game) {
++        for (UUID permanentId : permanentIds) {
++            Permanent permanent = game.getPermanent(permanentId);
++            if (permanent == null || !permanent.isEntersAttacking()) {
++                throw new IllegalStateException("Wrong code usage: entering attacker must be on the battlefield and marked as entering attacking");
++            }
++            // 506.3a, 506.3b, 506.3f - enters the battlefield, but it's never an attacking creature
++            if (!permanent.isCreature(game)
++                    || permanent.isBattle(game)
++                    || attackingPlayerId == null
++                    || !permanent.isControlledBy(attackingPlayerId)) {
++                continue;
++            }
++            UUID defenderId = permanent.getEntersAttackingDefenderId();
++            if (defenderId == null) {
++                addAttackingCreature(permanentId, game);
++            } else if (isValidDefender(defenderId, game)) {
++                addAttackerToCombat(permanentId, defenderId, game);
++            }
++        }
++    }
++
++    /**
++     * 508.4a, 506.3c - a defender of an entering attacker must still be
++     * - a defending player in the game
++     * - a planeswalker on the battlefield controlled by a defending player
++     * - a battle protected by a defending player
++     */
++    private boolean isValidDefender(UUID defenderId, Game game) {
++        if (!defenders.contains(defenderId)) {
++            return false;
++        }
++        Player player = game.getPlayer(defenderId);
++        if (player != null) {
++            return player.isInGame();
++        }
++        Permanent defender = game.getPermanent(defenderId);
++        if (defender == null) {
++            return false;
++        }
++        if (defender.isPlaneswalker(game)) {
++            return defenders.contains(defender.getControllerId());
++        }
++        if (defender.isBattle(game)) {
++            return defenders.contains(defender.getProtectorId());
++        }
++        return false;
++    }
++
+     /**
+      * Add an additional attacker to the combat (e.g. token of Geist of Saint
+      * Traft) This method doesn't trigger ATTACKER_DECLARED event (as intended).
+diff --git a/Mage/src/main/java/mage/game/permanent/Permanent.java b/Mage/src/main/java/mage/game/permanent/Permanent.java
+index 3c2ac8c5eb..de10c18f7f 100644
+--- a/Mage/src/main/java/mage/game/permanent/Permanent.java
++++ b/Mage/src/main/java/mage/game/permanent/Permanent.java
+@@ -315,6 +315,24 @@ public interface Permanent extends Card, Controllable {
+ 
+     MageObjectReference getAttacking();
+ 
++    /**
++     * Mark a permanent that is entering the battlefield as entering attacking (rule 508.4), e.g. from
++     * an ETB replacement effect. The game adds it to the combat after the whole zone change (all permanents
++     * of the same move on the battlefield, continuous effects applied).
++     * A noncreature, a permanent under another player's control or an illegal defender gives
++     * a permanent that enters the battlefield but never attacks (rules 506.3, 508.4a).
++     *
++     * @param defenderId the player, planeswalker or battle it attacks, or null if its controller chooses it
++     */
++    void setEntersAttacking(UUID defenderId);
++
++    boolean isEntersAttacking();
++
++    /**
++     * @return the defender set by setEntersAttacking, null if the controller chooses it
++     */
++    UUID getEntersAttackingDefenderId();
++
+     void setBlocking(int blocking);
+ 
+     void addBlocking(UUID attackerId, Game game);
+diff --git a/Mage/src/main/java/mage/game/permanent/PermanentImpl.java b/Mage/src/main/java/mage/game/permanent/PermanentImpl.java
+index c65c06837f..ad3456d286 100644
+--- a/Mage/src/main/java/mage/game/permanent/PermanentImpl.java
++++ b/Mage/src/main/java/mage/game/permanent/PermanentImpl.java
+@@ -95,6 +95,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
+     protected boolean indirectPhase = false;
+     protected boolean faceDown;
+     protected MageObjectReference attacking; // refers to defenderId if attacking, null if not attacking
++    protected boolean entersAttacking; // enters the battlefield attacking (508.4)
++    protected UUID entersAttackingDefenderId; // defender for entersAttacking, null if the controller chooses it
+     protected int blocking;
+     protected final Set<MageObjectReference> blockingSet = new HashSet<>(); // refers to blocked creatures
+     // number of creatures the permanent can block
+@@ -165,6 +167,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
+         this.indirectPhase = permanent.indirectPhase;
+         this.faceDown = permanent.faceDown;
+         this.attacking = permanent.attacking;
++        this.entersAttacking = permanent.entersAttacking;
++        this.entersAttackingDefenderId = permanent.entersAttackingDefenderId;
+         this.blocking = permanent.blocking;
+         this.blockingSet.addAll(permanent.blockingSet);
+         this.maxBlocks = permanent.maxBlocks;
+@@ -1746,6 +1750,22 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
+         this.attacking = defender;
+     }
+ 
++    @Override
++    public void setEntersAttacking(UUID defenderId) {
++        this.entersAttacking = true;
++        this.entersAttackingDefenderId = defenderId;
++    }
++
++    @Override
++    public boolean isEntersAttacking() {
++        return this.entersAttacking;
++    }
++
++    @Override
++    public UUID getEntersAttackingDefenderId() {
++        return this.entersAttackingDefenderId;
++    }
++
+     @Override
+     public MageObjectReference getAttacking() {
+         return this.attacking;
+diff --git a/Mage/src/main/java/mage/game/permanent/token/TokenImpl.java b/Mage/src/main/java/mage/game/permanent/token/TokenImpl.java
+index 593d82193b..a3a33e5be9 100644
+--- a/Mage/src/main/java/mage/game/permanent/token/TokenImpl.java
++++ b/Mage/src/main/java/mage/game/permanent/token/TokenImpl.java
+@@ -278,6 +278,8 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
+         }
+ 
+         Set<PermanentToken> allAddedTokens = new HashSet<>();
++        List<UUID> attackingTokens = new ArrayList<>(); // tapped and attacking by the token's own effect
++        List<UUID> enteringAttackers = new ArrayList<>(); // enters attacking by an ETB replacement effect
+         for (Map.Entry<Token, Integer> entry : event.getTokens().entrySet()) {
+             Token token = entry.getKey();
+             int amount = entry.getValue();
+@@ -447,9 +449,11 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
+                     }
+                 }
+ 
+-                // must attack
+-                if (attacking && game.getCombat() != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
+-                    game.getCombat().addAttackingCreature(permanent.getId(), game, attackedPlayer);
++                // must attack (added to combat after all tokens are on the battlefield, see below)
++                if (attacking) {
++                    attackingTokens.add(permanent.getId());
++                } else if (permanent.isEntersAttacking()) {
++                    enteringAttackers.add(permanent.getId());
+                 }
+ 
+                 // game logs
+@@ -463,6 +467,15 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
+         CreatedTokensEvent.addEvents(allAddedTokens, source, game);
+ 
+         game.applyEffects(); // without LKI reset
++
++        // must attack (508.4): only after all tokens are on the battlefield and effects are applied,
++        // so a defender choice shows a finished game state
++        for (UUID tokenId : attackingTokens) {
++            if (game.getActivePlayerId().equals(game.getPermanent(tokenId).getControllerId())) {
++                game.getCombat().addAttackingCreature(tokenId, game, attackedPlayer);
++            }
++        }
++        game.getCombat().addEnteringAttackers(enteringAttackers, game);
+     }
+ 
+     @Override
+diff --git a/Mage/src/main/java/mage/game/stack/Spell.java b/Mage/src/main/java/mage/game/stack/Spell.java
+index 52b9abb8f3..c9de588727 100644
+--- a/Mage/src/main/java/mage/game/stack/Spell.java
++++ b/Mage/src/main/java/mage/game/stack/Spell.java
+@@ -61,7 +61,6 @@ public class Spell extends StackObjectImpl implements Card {
+     private boolean faceDown;
+     private boolean countered;
+     private boolean resolving = false;
+-    protected boolean entersAttacking;
+     private UUID commandedByPlayerId = null; // controller of the spell resolve, example: Word of Command
+     private String commandedByInfo; // info about spell commanded, e.g. source
+     private boolean prototyped;
+@@ -1049,16 +1048,6 @@ public class Spell extends StackObjectImpl implements Card {
+         return this.copyFrom;
+     }
+ 
+-    @Override
+-    public void setEntersAttacking(boolean entersAttacking) {
+-        this.entersAttacking = entersAttacking;
+-    }
+-
+-    @Override
+-    public boolean getEntersAttacking() {
+-        return entersAttacking;
+-    }
+-
+     @Override
+     public Counters getCounters(Game game) {
+         return card.getCounters(game);

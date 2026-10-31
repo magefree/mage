@@ -2,6 +2,7 @@ package org.mage.plugins.card.dl.sources;
 
 import mage.cards.repository.TokenRepository;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ public class ScryfallImageSupportTokens {
             //   api example: https://api.scryfall.com/cards/trix/6?format=image
             //   api example: https://api.scryfall.com/cards/tvow/21/en?format=image&face=back
             // api format is primary (direct images links can be changed by scryfall)
+            // download uses direct links from scryfall's bulk data for api links (same set/number/lang/face, no api calls)
             //
             // code form for one token:
             //   set/token_name
@@ -3015,7 +3017,7 @@ public class ScryfallImageSupportTokens {
             put("MSH/Soldier/3", "https://api.scryfall.com/cards/tmsh/23?format=image");
             put("MSH/Squirrel", "https://api.scryfall.com/cards/tmsh/14?format=image");
             put("MSH/Sturdy Shield", "https://api.scryfall.com/cards/tmsh/21?format=image");
-            put("MSH/The Tiger God", "https://api.scryfall.com/cards/tmsh/1?5format=image");
+            put("MSH/The Tiger God", "https://api.scryfall.com/cards/tmsh/1?format=image");
             put("MSH/The Void", "https://api.scryfall.com/cards/tmsh/10?format=image");
             put("MSH/Treasure/1", "https://api.scryfall.com/cards/tmsh/22?format=image");
             put("MSH/Treasure/2", "https://api.scryfall.com/cards/tmsh/27?format=image");
@@ -3110,7 +3112,47 @@ public class ScryfallImageSupportTokens {
             put("FRC/Zombie Army", "https://api.scryfall.com/cards/tfrc/8/en?format=image");
 
             // TRK
+            put("TRK/Borg/1", "https://api.scryfall.com/cards/ttrk/19?format=image");
+            put("TRK/Borg/2", "https://api.scryfall.com/cards/ttrk/20?format=image");
+            put("TRK/Clue/1", "https://api.scryfall.com/cards/ttrk/21?format=image");
+            put("TRK/Clue/2", "https://api.scryfall.com/cards/ttrk/22?format=image");
+            put("TRK/Food", "https://api.scryfall.com/cards/ttrk/23?format=image");
             put("TRK/Human", "https://api.scryfall.com/cards/ttrk/1?format=image");
+            put("TRK/Illusion", "https://api.scryfall.com/cards/ttrk/24?format=image");
+            put("TRK/Klingon Warrior/1", "https://api.scryfall.com/cards/ttrk/3?format=image");
+            put("TRK/Klingon Warrior/2", "https://api.scryfall.com/cards/ttrk/4?format=image");
+            put("TRK/Klingon Warrior/3", "https://api.scryfall.com/cards/ttrk/5?format=image");
+            put("TRK/Murf", "https://api.scryfall.com/cards/ttrk/16?format=image");
+            // put("TRK/Neuroflux Heirloom", "https://api.scryfall.com/cards/ttrk/25?format=image");
+            put("TRK/New Planet", "https://api.scryfall.com/cards/ttrk/27?format=image");
+            put("TRK/Officer/1", "https://api.scryfall.com/cards/ttrk/6?format=image");
+            put("TRK/Officer/10", "https://api.scryfall.com/cards/ttrk/15?format=image");
+            put("TRK/Officer/2", "https://api.scryfall.com/cards/ttrk/7?format=image");
+            put("TRK/Officer/3", "https://api.scryfall.com/cards/ttrk/8?format=image");
+            put("TRK/Officer/4", "https://api.scryfall.com/cards/ttrk/9?format=image");
+            put("TRK/Officer/5", "https://api.scryfall.com/cards/ttrk/10?format=image");
+            put("TRK/Officer/6", "https://api.scryfall.com/cards/ttrk/11?format=image");
+            put("TRK/Officer/7", "https://api.scryfall.com/cards/ttrk/12?format=image");
+            put("TRK/Officer/8", "https://api.scryfall.com/cards/ttrk/13?format=image");
+            put("TRK/Officer/9", "https://api.scryfall.com/cards/ttrk/14?format=image");
+            put("TRK/Porthos", "https://api.scryfall.com/cards/ttrk/17?format=image");
+            put("TRK/Romulan", "https://api.scryfall.com/cards/ttrk/2?format=image");
+            put("TRK/Treasure", "https://api.scryfall.com/cards/ttrk/26?format=image");
+            put("TRK/Worm", "https://api.scryfall.com/cards/ttrk/18?format=image");
+
+            // TRC
+            put("TRC/Tribble/1", "https://api.scryfall.com/cards/ttrc/2?format=image");
+            put("TRC/Ape/1", "https://api.scryfall.com/cards/ttrc/3?format=image");
+            put("TRC/Beast/1", "https://api.scryfall.com/cards/ttrc/4?format=image");
+            put("TRC/Insect/1", "https://api.scryfall.com/cards/ttrc/5?format=image");
+            put("TRC/Citizen/1", "https://api.scryfall.com/cards/ttrc/6?format=image");
+            // put("TRC/Spacecraft Illusion/1", "https://api.scryfall.com/cards/ttrc/7?format=image");
+            put("TRC/Tribble/2", "https://api.scryfall.com/cards/ttrc/9?format=image");
+            put("TRC/Ape/2", "https://api.scryfall.com/cards/ttrc/10?format=image");
+            put("TRC/Beast/2", "https://api.scryfall.com/cards/ttrc/11?format=image");
+            put("TRC/Insect/2", "https://api.scryfall.com/cards/ttrc/12?format=image");
+            put("TRC/Citizen/2", "https://api.scryfall.com/cards/ttrc/13?format=image");
+            // put("TRC/Spacecraft Illusion/2", "https://api.scryfall.com/cards/ttrc/14?format=image");
 
             // UGL
             put("UGL/Goblin", "https://api.scryfall.com/cards/tugl/92?format=image");
@@ -3229,6 +3271,13 @@ public class ScryfallImageSupportTokens {
 
     public static Map<String, String> getSupportedSets() {
         return supportedSets;
+    }
+
+    /**
+     * All tokens links: set/token_name[/N] -> link (for tests)
+     */
+    static Map<String, String> getTokenLinks() {
+        return Collections.unmodifiableMap(supportedCards);
     }
 
     public static String findTokenLink(String setCode, String tokenName, Integer imageNumber) {

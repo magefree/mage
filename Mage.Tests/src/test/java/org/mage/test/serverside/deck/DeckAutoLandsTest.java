@@ -92,6 +92,18 @@ public class DeckAutoLandsTest extends MageTestPlayerBase {
     }
 
     @Test
+    public void test_LandsSuggest_NonBasicLandsMustBeColorSources() {
+        // nonbasic lands of the deck give colors too, so basic lands must cover the missing colors only
+        // (20 lands: 10 G + 10 W sources needed, 4 green nonbasic lands -> 6 Forest + 10 Plains)
+        Deck deck = prepareDeck(Arrays.asList(
+                new DeckCardInfo("Grizzly Bears", "268", "10E", 10), // {1}{G}
+                new DeckCardInfo("Savannah Lions", "24", "DMR", 10), // {W}
+                new DeckCardInfo("Treetop Village", "143", "ULG", 4) // {T}: Add {G}
+        ));
+        assertSuggestedLands("nonbasic lands as sources", deck, 40, 10, 0, 0, 0, 6);
+    }
+
+    @Test
     public void test_LandsSuggest_NoNeedLands() {
         Deck deck = prepareDeck(Arrays.asList(
                 new DeckCardInfo("Grizzly Bears", "129", "S99", 40)

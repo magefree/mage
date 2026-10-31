@@ -3143,7 +3143,47 @@
 |TOK:FRC|Zombie Army||ZombieArmyToken|
 
 # TRK
+|TOK:TRK|Borg|1|BorgToken|
+|TOK:TRK|Borg|2|BorgToken|
+|TOK:TRK|Clue|1|ClueArtifactToken|
+|TOK:TRK|Clue|2|ClueArtifactToken|
+|TOK:TRK|Food||FoodToken|
 |TOK:TRK|Human||Human01Token|
+|TOK:TRK|Illusion||IllusionArtifactToken|
+|TOK:TRK|Klingon Warrior|1|KlingonWarriorToken|
+|TOK:TRK|Klingon Warrior|2|KlingonWarriorToken|
+|TOK:TRK|Klingon Warrior|3|KlingonWarriorToken|
+|TOK:TRK|Murf||MurfToken|
+#|TOK:TRK|Neuroflux Heirloom||NeurofluxHeirloomToken|
+|TOK:TRK|New Planet||NewPlanetToken|
+|TOK:TRK|Officer|1|OfficerToken|
+|TOK:TRK|Officer|10|OfficerToken|
+|TOK:TRK|Officer|2|OfficerToken|
+|TOK:TRK|Officer|3|OfficerToken|
+|TOK:TRK|Officer|4|OfficerToken|
+|TOK:TRK|Officer|5|OfficerToken|
+|TOK:TRK|Officer|6|OfficerToken|
+|TOK:TRK|Officer|7|OfficerToken|
+|TOK:TRK|Officer|8|OfficerToken|
+|TOK:TRK|Officer|9|OfficerToken|
+|TOK:TRK|Porthos||PorthosToken|
+|TOK:TRK|Romulan||RomulanToken|
+|TOK:TRK|Treasure||TreasureToken|
+|TOK:TRK|Worm||WormCantBlockToken|
+
+# TRC
+|TOK:TRC|Tribble|1|TribbleToken|
+|TOK:TRC|Tribble|2|TribbleToken|
+|TOK:TRC|Ape|1|ApeToken|
+|TOK:TRC|Ape|2|ApeToken|
+|TOK:TRC|Beast|1|BeastToken|
+|TOK:TRC|Beast|2|BeastToken|
+|TOK:TRC|Insect|1|InsectToken|
+|TOK:TRC|Insect|2|InsectToken|
+|TOK:TRC|Citizen|1|CitizenGreenWhiteToken|
+|TOK:TRC|Citizen|2|CitizenGreenWhiteToken|
+#|TOK:TRC|Spacecraft Illusion|1|SpacecraftIllusionToken|
+#|TOK:TRC|Spacecraft Illusion|2|SpacecraftIllusionToken|
 
 # JVC
 |TOK:JVC|Elemental Shaman||ElementalShamanToken|

@@ -32,7 +32,9 @@ import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.SocketException;
+import java.net.URL;
 import java.net.UnknownHostException;
 import java.nio.file.AccessDeniedException;
 import java.util.List;
@@ -41,6 +43,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -67,6 +70,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     private static final List<String> basicList = Arrays.asList("Plains", "Island", "Swamp", "Mountain", "Forest");
 
     private static final int MAX_ERRORS_COUNT_BEFORE_CANCEL = 50;
+    private static final int MAX_NETWORK_ERRORS_IN_ROW_BEFORE_CANCEL = 300; // images without any successful download between them
     private static final int ARCHIVES_SAVE_PERIOD_SECS = 30;
     private static final int STATS_PROGRESS_STEP = 500; // refresh stats progress after each N cards
     private static final int DEFAULT_DOWNLOAD_THREADS = 5;
@@ -78,8 +82,11 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
     private final DownloadImagesDialog uiDialog;
     private volatile boolean needCancel; // set from GUI thread, read by download threads
-    private volatile boolean downloadRunning;
+    private volatile boolean downloadRunning; // from start button until the finish GUI update (lists must not be changed)
+    private boolean reloadAfterDownload; // dialog re-opened while a previous download was finishing (swing thread only)
     private final AtomicInteger errorCount = new AtomicInteger(); // increased by download threads
+    private final AtomicInteger networkErrorsInRow = new AtomicInteger(); // failed images (http errors), reset by any good image
+    private final AtomicBoolean rateLimitStop = new AtomicBoolean(); // server's rate limit error (HTTP 429), download stopped
     private final Set<String> changedArchives = ConcurrentHashMap.newKeySet(); // archives used by download threads (to save it one by one with progress)
     private int cardIndex;
     private DownloadLog downloadLog; // details of the last download (debug only)
@@ -143,14 +150,12 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         instance.uiDialog.setGlobalInfo("Initializing image download...");
         instance.uiDialog.getProgressBar().setValue(0);
 
-        // start new thread
-        loadMissingDataThread = new Thread(new LoadMissingCardDataNew(instance));
-        loadMissingDataThread.setDaemon(true);
-        loadMissingDataThread.start();
+        // load images info in background task (or after the previous download finished)
+        if (instance.prepareDialogOpen()) {
+            instance.loadMissingCardsInBackground();
+        }
 
         // show control dialog
-        instance.setNeedCancel(false);
-        instance.resetErrorCount();
         instance.uiDialog.showDialog(() -> {
             // on finish/close/cancel
             doStopAndClose();
@@ -159,12 +164,45 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
     static private void doStopAndClose() {
         instance.setNeedCancel(true);
+        instance.reloadAfterDownload = false;
         instance.uiDialog.hideDialog();
+    }
+
+    /**
+     * Dialog open (swing thread only)
+     * <p>
+     * Cancel/close doesn't wait the download threads, so a user can open the dialog again while the previous
+     * download is finishing (cancel, archives save, stats). Its lists must not be changed or cleared, so the
+     * missing cards will be loaded after the finish (see run)
+     *
+     * @return true if can load missing cards now
+     */
+    boolean prepareDialogOpen() {
+        if (this.downloadRunning) {
+            this.reloadAfterDownload = true;
+            updateGlobalMessage("Stopping the previous download, please wait...");
+            return false;
+        }
+        setNeedCancel(false);
+        resetErrorCount();
+        return true;
+    }
+
+    /**
+     * Find missing cards in background (tests can override it to work without cards database)
+     */
+    void loadMissingCardsInBackground() {
+        loadMissingDataThread = new Thread(new LoadMissingCardDataNew(this));
+        loadMissingDataThread.setDaemon(true);
+        loadMissingDataThread.start();
     }
 
     @Override
     public boolean isNeedCancel() {
-        return this.needCancel || (this.errorCount.get() > MAX_ERRORS_COUNT_BEFORE_CANCEL) || Thread.currentThread().isInterrupted();
+        return this.needCancel
+                || (this.errorCount.get() > MAX_ERRORS_COUNT_BEFORE_CANCEL)
+                || (this.networkErrorsInRow.get() > MAX_NETWORK_ERRORS_IN_ROW_BEFORE_CANCEL)
+                || Thread.currentThread().isInterrupted();
     }
 
     void setNeedCancel(boolean needCancel) {
@@ -178,8 +216,43 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         }
     }
 
+    /**
+     * Network errors, safe to skip
+     * Some sets or images can be missing on the server,
+     * so it's not a critical error until too many errors in a row
+     * (example: dead or blocked server)
+     */
+    private void incNetworkErrorCount() {
+        if (this.networkErrorsInRow.incrementAndGet() == MAX_NETWORK_ERRORS_IN_ROW_BEFORE_CANCEL + 1) {
+            logger.warn("Too many failed images in a row (> " + MAX_NETWORK_ERRORS_IN_ROW_BEFORE_CANCEL + ") in images download. Stop.");
+        }
+    }
+
     private void resetErrorCount() {
         this.errorCount.set(0);
+        this.networkErrorsInRow.set(0);
+    }
+
+    @Override
+    public void stopOnRateLimit(String url, String retryAfter) {
+        setNeedCancel(true);
+
+        // can be called by many download threads, so inform one time only
+        if (!this.rateLimitStop.compareAndSet(false, true)) {
+            return;
+        }
+        String host = url;
+        try {
+            host = new URL(url).getHost();
+        } catch (MalformedURLException ignore) {
+        }
+        String message = "Download stopped: too many requests to " + host
+                + " (HTTP 429), wait a minute and start the download again";
+        logger.error("Images: " + message + ", url: " + url + ", retry after: " + (retryAfter == null ? "unknown" : retryAfter + " secs"));
+        if (this.downloadLog != null) {
+            this.downloadLog.add("ERROR: rate limit (HTTP 429), download stopped, url: " + url + ", retry after: " + retryAfter);
+        }
+        updateGlobalMessage(message);
     }
 
     public DownloadPicturesService() {
@@ -232,6 +305,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             // run
             uiDialog.enableActionControls(false);
             uiDialog.getStartButton().setEnabled(false);
+            setNeedCancel(false); // a new start after a stop by errors (rate limit, storage) in the same dialog
+            downloadRunning = true;
             new Thread(DownloadPicturesService.this).start();
         });
 
@@ -258,8 +333,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             }
 
             // storage check before missing search (e.g. delete broken archives, so a download will save to a new file)
-            // TODO: it's possible to open the dialog again while a download runs, the check and the lists reload
-            //  below must not work in that case (it will break the running download)
+            // (dialog loads lists after the previous download finished only, see prepareDialogOpen)
             if (!downloadRunning) {
                 updateGlobalMessage("Checking images storage...");
                 storageError = CardImageUtils.checkImagesFolderWritable();
@@ -693,6 +767,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     public void run() {
         this.cardIndex = 0;
         this.resetErrorCount();
+        this.rateLimitStop.set(false);
         this.changedArchives.clear();
         this.downloadRunning = true;
         List<String> problems = new ArrayList<>(); // storage problems found and fixed on finish
@@ -781,7 +856,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 executor.shutdown();
                 downloadLog.add("all images queued, waiting download threads");
                 waitDownloadThreads(executor, problems);
-                downloadLog.add("download threads finished, cancel: " + isNeedCancel() + ", errors: " + errorCount.get());
+                downloadLog.add("download threads finished, cancel: " + isNeedCancel() + ", errors: " + errorCount.get()
+                        + ", failed images in a row: " + networkErrorsInRow.get());
 
                 // ARCHIVES SAVE (one by one with progress, see issue #14014)
                 saveChangedArchives(problems);
@@ -807,31 +883,53 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 downloadLog.add("ERROR: archives save failed: " + e);
                 problems.addAll(CardImageUtils.deleteBrokenArchives(e));
             }
-            this.downloadRunning = false;
         }
 
-        // cleanup resources
-        Arrays.stream(DownloadSources.values()).forEach(resource -> {
-            resource.source.onFinished();
-        });
+        try {
+            // cleanup resources
+            Arrays.stream(DownloadSources.values()).forEach(resource -> {
+                resource.source.onFinished();
+            });
 
-        // refresh missing list (after archives close, so it can read saved zip files without re-sync)
-        removeDownloadedFromMissing();
-        problems.forEach(problem -> downloadLog.add("PROBLEM: " + problem));
-        downloadLog.add("finished, errors: " + errorCount.get() + ", problems: " + problems.size() + ", missing images: " + cardsMissing.size());
-        downloadLog.close();
-        if (errorCount.get() > 0 || !problems.isEmpty()) {
-            logger.warn("Images: download finished with " + errorCount.get() + " errors and " + problems.size()
-                    + " storage problems, see details in " + downloadLog.getFile());
+            // refresh missing list (after archives close, so it can read saved zip files without re-sync)
+            removeDownloadedFromMissing();
+            problems.forEach(problem -> downloadLog.add("PROBLEM: " + problem));
+            downloadLog.add("finished, errors: " + errorCount.get() + ", problems: " + problems.size() + ", missing images: " + cardsMissing.size());
+            if (errorCount.get() > 0 || !problems.isEmpty()) {
+                logger.warn("Images: download finished with " + errorCount.get() + " errors and " + problems.size()
+                        + " storage problems, see details in " + downloadLog.getFile());
+            }
+        } catch (Throwable e) {
+            // dialog must be workable after any errors
+            logger.error("Images: can't finish download: " + e, e);
+            downloadLog.add("ERROR: can't finish download: " + e);
+        } finally {
+            downloadLog.close();
+
+            // stop: refresh dialog's controls and whole GUI (reset caches and use new images)
+            // GUI changes must be done in the Swing thread only (see #13503)
+            SwingUtilities.invokeLater(this::finishDownloadInSwingThread);
         }
+    }
 
-        // stop: refresh dialog's controls and whole GUI (reset caches and use new images)
-        // GUI changes must be done in the Swing thread only (see #13503)
-        SwingUtilities.invokeLater(() -> {
+    private void finishDownloadInSwingThread() {
+        try {
             reloadCardsToDownload(uiDialog.getSetsCombo().getSelectedItem().toString());
-            enableDialogButtons();
             GUISizeHelper.refreshGUIAndCards(false);
-        });
+        } catch (Throwable e) {
+            logger.error("Images: can't refresh GUI after download: " + e, e);
+        } finally {
+            enableDialogButtons();
+            this.downloadRunning = false;
+
+            // dialog was opened again while the download was finishing - now it can load missing cards
+            if (this.reloadAfterDownload) {
+                this.reloadAfterDownload = false;
+                if (prepareDialogOpen()) {
+                    loadMissingCardsInBackground();
+                }
+            }
+        }
     }
 
     /**
@@ -1101,7 +1199,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             // timeout before each request
             selectedSource.doPause(currentUrl);
 
-            XmageURLConnection connection = new XmageURLConnection(currentUrl);
+            XmageURLConnection connection = createConnection(currentUrl);
             connection.startConnection();
             if (!connection.isConnected()) {
                 continue;
@@ -1123,6 +1221,19 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             }
             int responseCode = connection.getResponseCode();
 
+            // rate limit: stop whole download at once (the server blocks all requests for some time, so
+            // any new request - including alternative urls - makes it worse and can lead to a ban)
+            if (responseCode == XmageURLConnection.HTTP_TOO_MANY_REQUESTS) {
+                errorsList.add(String.format("Image download stopped by rate limit for %s - %s, http code: %d, url: %s",
+                        card.getSet(),
+                        card.getName(),
+                        responseCode,
+                        currentUrl
+                ));
+                stopOnRateLimit(currentUrl, connection.getHeaderField("Retry-After"));
+                return null;
+            }
+
             // check result
             if (responseCode != 200) {
                 // show errors only on full fail (all urls were not work)
@@ -1143,9 +1254,22 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             }
 
             // all fine
+            this.networkErrorsInRow.set(0);
             return connection.getGoodResponseAsStream();
         }
+
+        // full fail (all urls): missing image or server problems, download stops after too many fails in a row
+        if (!isNeedCancel()) {
+            incNetworkErrorCount();
+        }
         return null;
+    }
+
+    /**
+     * Create http connection (tests can override it to work without network)
+     */
+    XmageURLConnection createConnection(String url) {
+        return new XmageURLConnection(url);
     }
 
     private void update(int lastCardIndex, int needDownloadCount) {

@@ -17,11 +17,11 @@ public final class JennikasTechnique extends CardImpl {
     public JennikasTechnique(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
-        // Sneak {R}
-        this.addAbility(new SneakAbility(this, "{R}"));
-
         // Jennika's Technique deals 2 damage to each creature.
         this.getSpellAbility().addEffect(new DamageAllEffect(2, StaticFilters.FILTER_PERMANENT_CREATURE));
+
+        // Sneak {R}
+        this.addAbility(new SneakAbility(this, "{R}"));
     }
 
     private JennikasTechnique(final JennikasTechnique card) {
