@@ -272,7 +272,8 @@ public class Combat implements Serializable, Copyable<Combat> {
      * Defenders a creature can attack in the current combat
      *
      * @param attackerId     can be null, e.g. for tokens before they are created
-     * @param playerToAttack the player and its planeswalkers and battles, or null for all defenders
+     * @param playerToAttack the player and its planeswalkers without battles ("that player or a planeswalker they control",
+     *                       e.g. myriad), or null for all defenders
      * @param game
      * @return
      */
@@ -287,7 +288,9 @@ public class Combat implements Serializable, Copyable<Combat> {
                 continue;
             }
             Permanent permanent = game.getPermanent(objectId);
-            if (permanent != null && permanent.canBeAttacked(attackerId, playerToAttack, game)) {
+            if (permanent != null
+                    && permanent.isPlaneswalker(game)
+                    && permanent.canBeAttacked(attackerId, playerToAttack, game)) {
                 possibleDefenders.add(objectId);
             }
         }

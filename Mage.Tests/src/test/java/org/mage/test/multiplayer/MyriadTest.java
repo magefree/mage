@@ -4,6 +4,7 @@ import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.FreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
@@ -156,4 +157,27 @@ public class MyriadTest extends CardTestMultiPlayerBase {
 
     }
 
+    @Test
+    public void test_MyriadAttackingThatPlayerOrPlaneswalkerNotBattle_CallerOfThePack() {
+        // Myriad (Whenever this creature attacks, for each opponent other than defending player, you may create a token
+        // copy that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)
+        addCard(Zone.BATTLEFIELD, playerD, "Caller of the Pack"); // 8/6, trample
+        //
+        addCard(Zone.BATTLEFIELD, playerD, "Invasion of Segovia"); // battle, defense 4
+        setChoice(playerD, "PlayerB"); // protector of the battle
+
+        // turns: A, D, C, B
+        attack(2, playerD, "Caller of the Pack", playerA);
+        setChoice(playerD, true); // copy for the first other opponent
+        setChoice(playerD, true); // copy for the second other opponent
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.END_COMBAT);
+        execute();
+
+        assertCounterCount(playerD, "Invasion of Segovia", CounterType.DEFENSE, 4);
+        assertLife(playerA, 40 - 8);
+        assertLife(playerB, 40 - 8);
+        assertLife(playerC, 40 - 8);
+    }
 }

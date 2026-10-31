@@ -100,4 +100,24 @@ public class EnterAttackingThatPlayerTest extends CardTestPlayerBase {
         assertCounterCount(playerB, "Jace Beleren", CounterType.LOYALTY, 3 - 1);
         assertLife(playerB, 20 - 2);
     }
+
+    @Test
+    public void test_EnterAttackingThatPlayerOrPlaneswalkerNotBattle_AdelineResplendentCathar() {
+        // Whenever you attack, for each opponent, create a 1/1 white Human creature token
+        // that's tapped and attacking that player or a planeswalker they control.
+        addCard(Zone.BATTLEFIELD, playerA, "Adeline, Resplendent Cathar"); // */4, vigilance
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2, attacker
+        addCard(Zone.BATTLEFIELD, playerA, "Invasion of Segovia"); // battle protected by playerB, defense 4
+
+        attack(3, playerA, "Grizzly Bears", playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_COMBAT);
+        execute();
+
+        assertTapped("Human Token", true);
+        assertCounterCount(playerA, "Invasion of Segovia", CounterType.DEFENSE, 4);
+        assertLife(playerB, 20 - 2 - 1);
+    }
 }
