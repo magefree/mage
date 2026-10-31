@@ -158,6 +158,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 568, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Free Borg Revolutionaries", 19, Rarity.COMMON, mage.cards.f.FreeBorgRevolutionaries.class));
         cards.add(new SetCardInfo("Fugitive Listener", 107, Rarity.COMMON, mage.cards.f.FugitiveListener.class));
+        cards.add(new SetCardInfo("Gaseous Anomaly", 284, Rarity.UNCOMMON, mage.cards.g.GaseousAnomaly.class));
         cards.add(new SetCardInfo("General Chang, Cold Warrior", 109, Rarity.RARE, mage.cards.g.GeneralChangColdWarrior.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("General Chang, Cold Warrior", 415, Rarity.RARE, mage.cards.g.GeneralChangColdWarrior.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("General Chang, Cold Warrior", 427, Rarity.RARE, mage.cards.g.GeneralChangColdWarrior.class, NON_FULL_USE_VARIOUS));
