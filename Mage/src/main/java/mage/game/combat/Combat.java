@@ -1557,6 +1557,12 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public boolean addAttackerToCombat(UUID attackerId, UUID defenderId, Game game) {
+        if (findGroup(attackerId) != null) {
+            // one creature can't attack twice (a second combat group gives double damage and triggers)
+            Permanent attackingCreature = game.getPermanent(attackerId);
+            throw new IllegalStateException("Wrong code usage: creature is already attacking, it must be removed from combat first - "
+                    + (attackingCreature == null ? attackerId : attackingCreature.getIdName()));
+        }
         if (!defenders.contains(defenderId)) {
             return false;
         }
