@@ -61,6 +61,7 @@ public enum AbilityWord {
     REVOLT("Revolt"),
     SECRET_COUNCIL("Secret council"),
     SPELL_MASTERY("Spell mastery"),
+    STRANGE_NEW_WORLDS("Strange new worlds"),
     STRIVE("Strive"),
     SURVIVAL("Survival"),
     SWEEP("Sweep"),

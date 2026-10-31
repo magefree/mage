@@ -84,7 +84,8 @@ class CloudMidgarMercenaryEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+        // use LKI, so leaves-the-battlefield triggers still work (e.g. Cloud dies with Skullclamp attached)
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourcePermanent == null || !EquippedPredicate.instance.apply(sourcePermanent, game)) {
             return false;
         }
@@ -93,7 +94,7 @@ class CloudMidgarMercenaryEffect extends ReplacementEffectImpl {
         if (sourceEvent == null) {
             return false;
         }
-        Permanent permanent = game.getPermanent(((NumberOfTriggersEvent) event).getSourceId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(numberOfTriggersEvent.getSourceId());
         return permanent != null
                 && (permanent.equals(sourcePermanent)
                 || (permanent.hasSubtype(SubType.EQUIPMENT, game)

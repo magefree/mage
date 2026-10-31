@@ -11,6 +11,7 @@ import mage.abilities.keyword.WarpAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.DoubleFacedCard;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
@@ -90,7 +91,9 @@ class TannukSteadfastSecondEffect extends ContinuousEffectImpl {
             return false;
         }
         for (Card card : controller.getHand().getCards(filter, game)) {
-            game.getState().addOtherAbility(card, new WarpAbility(card, "{2}{R}"));
+            // double-faced cards are cast by their front face, so it must have the ability for warp to track the permanent
+            Card face = card instanceof DoubleFacedCard ? ((DoubleFacedCard) card).getLeftHalfCard() : card;
+            game.getState().addOtherAbility(face, new WarpAbility(face, "{2}{R}"));
         }
         return true;
     }
