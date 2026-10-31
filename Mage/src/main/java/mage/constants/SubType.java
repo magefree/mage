@@ -279,6 +279,7 @@ public enum SubType {
     JAWA("Jawa", SubTypeSet.CreatureType, true),
     JEDI("Jedi", SubTypeSet.CreatureType, true), // Star Wars
     JELLYFISH("Jellyfish", SubTypeSet.CreatureType),
+    JEMHADAR("Jem'Hadar", SubTypeSet.CreatureType),
     JUGGERNAUT("Juggernaut", SubTypeSet.CreatureType),
     // K
     KALEESH("Kaleesh", SubTypeSet.CreatureType, true), // Star Wars

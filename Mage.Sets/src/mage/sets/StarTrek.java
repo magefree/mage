@@ -120,6 +120,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Deep Space Scan", 370, Rarity.RARE, mage.cards.d.DeepSpaceScan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deep Space Scan", 504, Rarity.RARE, mage.cards.d.DeepSpaceScan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deep Space Scan", 53, Rarity.RARE, mage.cards.d.DeepSpaceScan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dominion Assault Force", 194, Rarity.COMMON, mage.cards.d.DominionAssaultForce.class));
         cards.add(new SetCardInfo("Dominion Supervisor", 195, Rarity.COMMON, mage.cards.d.DominionSupervisor.class));
         cards.add(new SetCardInfo("Dr. Beverly Crusher", 13, Rarity.MYTHIC, mage.cards.d.DrBeverlyCrusher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dr. Beverly Crusher", 366, Rarity.MYTHIC, mage.cards.d.DrBeverlyCrusher.class, NON_FULL_USE_VARIOUS));
