@@ -4,8 +4,6 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
-import mage.abilities.condition.common.NotTransformedCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.dynamicvalue.common.CardsInAllHandsCount;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -37,11 +35,7 @@ public final class SageOfAncientLore extends TransformingDoubleFacedCard {
 
         // Sage of Ancient Lore's power and toughness are each equal to the number of cards in your hand.
         this.getLeftHalfCard().addAbility(new SimpleStaticAbility(
-                Zone.ALL,
-                new ConditionalContinuousEffect(
-                        new SetBasePowerToughnessSourceEffect(CardsInControllerHandCount.ANY), NotTransformedCondition.instance,
-                        "{this}'s power and toughness are each equal to the total number of cards in your hand"
-                )
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(CardsInControllerHandCount.ANY)
         ));
 
         // When Sage of Ancient Lore enters the battlefield, draw a card.
@@ -61,11 +55,8 @@ public final class SageOfAncientLore extends TransformingDoubleFacedCard {
 
         // Werewolf of Ancient Hunger's power and toughness are each equal to the total number of cards in all players' hands.
         this.getRightHalfCard().addAbility(new SimpleStaticAbility(
-                Zone.ALL,
-                new ConditionalContinuousEffect(
-                        new SetBasePowerToughnessSourceEffect(CardsInAllHandsCount.instance), NotTransformedCondition.instance,
-                        "{this}'s power and toughness are each equal to the total number of cards in all players' hands"
-                )
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(CardsInAllHandsCount.instance)
+                .setText("{this}'s power and toughness are each equal to the total number of cards in all players' hands")
         ));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Werewolf of Ancient Hunger.
