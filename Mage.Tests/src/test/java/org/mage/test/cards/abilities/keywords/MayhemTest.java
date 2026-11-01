@@ -86,4 +86,30 @@ public class MayhemTest extends CardTestPlayerBase {
             );
         }
     }
+
+    // https://github.com/magefree/mage/issues/14107
+    @Test
+    public void testCastDiscardedWithMadnessDeclined() {
+        // Goblin Formula -- Each nonland card in your graveyard has mayhem. The mayhem cost is equal to its mana cost.
+        // Spells you cast from your graveyard cost {2} less to cast.
+        addCard(Zone.BATTLEFIELD, playerA, "Green Goblin");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, imp);
+        // Madness {R}
+        addCard(Zone.HAND, playerA, "Fiery Temper"); // {1}{R}{R}, 3 damage to any target
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Discard");
+        setChoice(playerA, "Fiery Temper");
+        setChoice(playerA, false); // don't cast with madness, so it goes to the graveyard
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkGraveyardCount("discarded", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fiery Temper", 1);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Fiery Temper with Mayhem", playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 3);
+        assertGraveyardCount(playerA, "Fiery Temper", 1);
+    }
 }
