@@ -77,7 +77,9 @@ public class AssimilateTargetEffect extends OneShotEffect {
         }
         StringBuilder sb = new StringBuilder();
         sb.append("assimilate ");
-        String targetName = mode.getTargets().get(0).getTargetName();
+        String targetName = mode.getTargets().isEmpty()
+                ? "target"
+                : mode.getTargets().get(0).getTargetName();
         sb.append(targetName);
         sb.append(". <i>(Put it onto the battlefield under your control with a +1/+1 counter. "
             + "It's a Borg artifact creature and loses all other creature types.)</i>");
