@@ -215,6 +215,9 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Kobayashi Maru Scenario", 410, Rarity.MYTHIC, mage.cards.k.KobayashiMaruScenario.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kobayashi Maru Scenario", 534, Rarity.MYTHIC, mage.cards.k.KobayashiMaruScenario.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kobayashi Maru Scenario", 68, Rarity.MYTHIC, mage.cards.k.KobayashiMaruScenario.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("L'Rell, Fierce Visionary", 247, Rarity.UNCOMMON, mage.cards.l.LRellFierceVisionary.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("L'Rell, Fierce Visionary", 434, Rarity.UNCOMMON, mage.cards.l.LRellFierceVisionary.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("L'Rell, Fierce Visionary", 444, Rarity.UNCOMMON, mage.cards.l.LRellFierceVisionary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("La'An Noonien-Singh, Security", 156, Rarity.UNCOMMON, mage.cards.l.LaAnNoonienSinghSecurity.class));
         cards.add(new SetCardInfo("Lieutenant Commander Data", 1703, Rarity.MYTHIC, mage.cards.l.LieutenantCommanderData.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lieutenant Commander Data", 359, Rarity.MYTHIC, mage.cards.l.LieutenantCommanderData.class, NON_FULL_USE_VARIOUS));
