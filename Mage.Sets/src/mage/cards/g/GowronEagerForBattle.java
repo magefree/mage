@@ -31,7 +31,7 @@ import java.util.UUID;
 public final class GowronEagerForBattle extends CardImpl {
 
     private static final Condition condition = new SacrificedPermanentCondition(
-            new FilterPermanent(SubType.KLINGON, "Klingon"), true
+            new FilterPermanent(SubType.KLINGON), true
     );
 
     public GowronEagerForBattle(UUID ownerId, CardSetInfo setInfo) {
@@ -54,7 +54,7 @@ public final class GowronEagerForBattle extends CardImpl {
                 new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)
         );
         ability.addEffect(new ConditionalOneShotEffect(
-                new DrawCardSourceControllerEffect(1, true), condition,
+                new DrawCardSourceControllerEffect(1), condition,
                 "If you sacrificed a Klingon this way, you draw a card and lose 1 life"
         ).addEffect(new LoseLifeSourceControllerEffect(1)));
         this.addAbility(ability);
