@@ -17,7 +17,6 @@ import mage.constants.Outcome;
 import mage.constants.PutCards;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -83,22 +82,23 @@ class USSVoyagerLoneWandererEffect extends OneShotEffect {
         if (controller == null || !controller.getLibrary().hasCards()) {
             return false;
         }
-        Cards revealed = new CardsImpl();
+        Cards nonlands = new CardsImpl();
         Cards lands = new CardsImpl();
         for (Card card : controller.getLibrary().getCards(game)) {
-            revealed.add(card);
             if (card.isLand(game)) {
                 lands.add(card);
-                if (lands.size() >= 2) {
+                if (lands.size() == 2) {
                     break;
                 }
+            } else {
+                nonlands.add(card);
             }
         }
+        Cards revealed = new CardsImpl(nonlands);
+        revealed.addAll(lands);
         controller.revealCards(source, revealed, game);
         PutCards.BATTLEFIELD_TAPPED.moveCards(controller, lands, source, game);
-        // lands that couldn't enter stay with the rest of the revealed cards
-        revealed.retainZone(Zone.LIBRARY, game);
-        PutCards.BOTTOM_RANDOM.moveCards(controller, revealed, source, game);
+        PutCards.BOTTOM_RANDOM.moveCards(controller, nonlands, source, game);
         return true;
     }
 }
