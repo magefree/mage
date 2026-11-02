@@ -77,8 +77,7 @@ class TemporalConquerorEffect extends OneShotEffect {
         if (target.canChoose(source.getControllerId(), source, game)
                 && player.choose(outcome, target, source, game)) {
             Card card = player.getGraveyard().get(target.getFirstTarget(), game);
-            if (card != null) {
-                player.moveCards(card, Zone.HAND, source, game);
+            if (card != null && player.moveCards(card, Zone.HAND, source, game)) {
                 return true;
             }
         }
