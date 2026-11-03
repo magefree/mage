@@ -3079,6 +3079,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         game.informPlayers(this.getLogName() + " seeks a card from their library");
         this.moveCards(card, Zone.HAND, source, game);
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.SOUGHT, card.getId(), source, getId(), 1));
         return true;
     }
 
