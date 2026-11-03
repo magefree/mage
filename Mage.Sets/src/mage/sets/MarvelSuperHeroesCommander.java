@@ -250,6 +250,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fleecemane Lion", 282, Rarity.RARE, mage.cards.f.FleecemaneLion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fleecemane Lion", 423, Rarity.RARE, mage.cards.f.FleecemaneLion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Flora Colossus", 561, Rarity.RARE, mage.cards.f.FloraColossus.class));
+        cards.add(new SetCardInfo("Flying Drone", 621, Rarity.COMMON, mage.cards.f.FlyingDrone.class));
         cards.add(new SetCardInfo("Flying Octobot", 785, Rarity.UNCOMMON, mage.cards.f.FlyingOctobot.class));
         cards.add(new SetCardInfo("Foggy Nelson, On Retainer", 594, Rarity.UNCOMMON, mage.cards.f.FoggyNelsonOnRetainer.class));
         cards.add(new SetCardInfo("Fogwell's Gym", 754, Rarity.UNCOMMON, mage.cards.f.FogwellsGym.class));
