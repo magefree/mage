@@ -34,8 +34,6 @@ public final class GuiDisplayUtil {
     private static final Logger logger = Logger.getLogger(GuiDisplayUtil.class);
 
     private static final Font cardNameFont = new Font("Calibri", Font.BOLD, 15);
-    private static final Insets DEFAULT_INSETS = new Insets(0, 0, 70, 25);
-    private static final Insets COMPONENT_INSETS = new Insets(0, 0, 40, 40);
 
     public static class TextLines {
 
@@ -131,32 +129,136 @@ public final class GuiDisplayUtil {
     }
 
     public static void keepComponentInsideScreen(int centerX, int centerY, Component component) {
-        Dimension screenDim = component.getToolkit().getScreenSize();
-        GraphicsConfiguration g = component.getGraphicsConfiguration();
-
-        if (g != null) {
-            Insets insets = component.getToolkit().getScreenInsets(g); // no usable space like toolbar
-            boolean setLocation = false;
-            if (centerX + component.getWidth() > screenDim.width - insets.right) {
-                centerX = (screenDim.width - insets.right) - component.getWidth();
-                setLocation = true;
-            } else if (centerX < insets.left) {
-                centerX = insets.left;
-                setLocation = true;
+        Rectangle available;
+        if (component instanceof JInternalFrame) {
+            JDesktopPane desktop = ((JInternalFrame) component).getDesktopPane();
+            if (desktop == null) {
+                desktop = MageFrame.getDesktop();
             }
-
-            if (centerY + component.getHeight() > screenDim.height - insets.bottom) {
-                centerY = (screenDim.height - insets.bottom) - component.getHeight();
-                setLocation = true;
-            } else if (centerY < insets.top) {
-                centerY = insets.top;
-                setLocation = true;
+            if (desktop == null) {
+                return;
             }
-            if (setLocation) {
-                component.setLocation(centerX, centerY);
-            }
+            available = new Rectangle(0, 0, desktop.getWidth(), desktop.getHeight());
         } else {
-            System.out.println("GuiDisplayUtil::keepComponentInsideScreen -> no GraphicsConfiguration");
+            available = getUsableScreenBounds(component.getGraphicsConfiguration());
+        }
+        component.setLocation(clampLocation(new Point(centerX, centerY), component.getSize(), available));
+    }
+
+    /** Size and position a dialog on its owner's current display when it is reopened. */
+    public static void positionWindowRelativeToOwner(Window window) {
+        Window owner = window.getOwner();
+        GraphicsConfiguration display = owner == null ? window.getGraphicsConfiguration() : owner.getGraphicsConfiguration();
+        Rectangle available = getUsableScreenBounds(display);
+        window.setSize(Math.min(window.getWidth(), available.width), Math.min(window.getHeight(), available.height));
+        window.setLocationRelativeTo(owner);
+        // The dialog peer can still report its old monitor until the move is processed.
+        window.setLocation(clampLocation(window.getLocation(), window.getSize(), available));
+    }
+
+    public static Rectangle getUsableScreenBounds(GraphicsConfiguration display) {
+        if (display == null) {
+            display = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
+        }
+        Rectangle bounds = new Rectangle(display.getBounds());
+        Insets insets = Toolkit.getDefaultToolkit().getScreenInsets(display);
+        bounds.x += insets.left;
+        bounds.y += insets.top;
+        bounds.width -= insets.left + insets.right;
+        bounds.height -= insets.top + insets.bottom;
+        return bounds;
+    }
+
+    /** All arguments use the same coordinate space, including negative monitor origins. */
+    public static Point clampLocation(Point location, Dimension size, Rectangle available) {
+        return new Point(Math.max(available.x, Math.min(location.x, available.x + Math.max(0, available.width - size.width))),
+                Math.max(available.y, Math.min(location.y, available.y + Math.max(0, available.height - size.height))));
+    }
+
+    /** Discard cached control measurements after a display's font metrics change. */
+    public static void invalidateLayoutTree(Component component) {
+        if (component instanceof Container) {
+            for (Component child : ((Container) component).getComponents()) {
+                invalidateLayoutTree(child);
+            }
+        }
+        component.invalidate();
+    }
+
+    /** Keep a single-row toolbar readable and scrollable when it is wider than its panel. */
+    public static JScrollPane createHorizontalScrollPane(JComponent content) {
+        JPanel view = new HorizontalScrollPanel(content);
+        JScrollPane scroll = new JScrollPane(view, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED) {
+            @Override
+            public Dimension getPreferredSize() {
+                Dimension size = content.getPreferredSize();
+                Insets border = getInsets();
+                int availableWidth = getWidth() == 0 ? 0 : getParent() == null ? getWidth() : getParent().getWidth();
+                int scrollbar = availableWidth > 0 && availableWidth < content.getMinimumSize().width + border.left + border.right
+                        ? getHorizontalScrollBar().getPreferredSize().height : 0;
+                return new Dimension(Math.min(1024, size.width + border.left + border.right),
+                        size.height + border.top + border.bottom + scrollbar);
+            }
+
+            @Override
+            public Dimension getMinimumSize() {
+                if (isMinimumSizeSet()) {
+                    return super.getMinimumSize();
+                }
+                return new Dimension(0, getPreferredSize().height);
+            }
+        };
+        // A null border lets Nimbus reinstall its padded border on an ancestor/style change.
+        scroll.setBorder(BorderFactory.createEmptyBorder());
+        scroll.setViewportBorder(BorderFactory.createEmptyBorder());
+        scroll.getHorizontalScrollBar().setUnitIncrement(48);
+        scroll.addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
+            public void componentResized(java.awt.event.ComponentEvent event) {
+                scroll.revalidate();
+                if (scroll.getParent() instanceof JComponent) {
+                    ((JComponent) scroll.getParent()).revalidate();
+                }
+            }
+        });
+        return scroll;
+    }
+
+    /** Let flexible layouts use the viewport width, scrolling only below their minimum width. */
+    private static final class HorizontalScrollPanel extends JPanel implements Scrollable {
+        private final JComponent content;
+
+        private HorizontalScrollPanel(JComponent content) {
+            super(new BorderLayout());
+            this.content = content;
+            setOpaque(false);
+            add(content);
+        }
+
+        @Override
+        public Dimension getPreferredScrollableViewportSize() {
+            return getPreferredSize();
+        }
+
+        @Override
+        public int getScrollableUnitIncrement(Rectangle visible, int orientation, int direction) {
+            return 48;
+        }
+
+        @Override
+        public int getScrollableBlockIncrement(Rectangle visible, int orientation, int direction) {
+            return Math.max(48, visible.width - 48);
+        }
+
+        @Override
+        public boolean getScrollableTracksViewportWidth() {
+            return getParent() != null && getParent().getWidth() >= content.getMinimumSize().width;
+        }
+
+        @Override
+        public boolean getScrollableTracksViewportHeight() {
+            return true;
         }
     }
 
@@ -177,17 +279,8 @@ public final class GuiDisplayUtil {
     }
 
     public static Point keepComponentInsideParent(Point l, Point parentPoint, Component c, Component parent) {
-        int dx = parentPoint.x + parent.getWidth() - DEFAULT_INSETS.right - COMPONENT_INSETS.right;
-        if (l.x + c.getWidth() > dx) {
-            l.x = dx - c.getWidth();
-        }
-
-        int dy = parentPoint.y + parent.getHeight() - DEFAULT_INSETS.bottom - COMPONENT_INSETS.bottom;
-        if (l.y + c.getHeight() > dy) {
-            l.y = Math.max(10, dy - c.getHeight());
-        }
-
-        return l;
+        return clampLocation(l, c.getSize(), new Rectangle(parentPoint.x + 10, parentPoint.y + 10,
+                Math.max(0, parent.getWidth() - 20), Math.max(0, parent.getHeight() - 20)));
     }
 
     public static TextLines getTextLinesfromCardView(CardView card) {
@@ -493,6 +586,7 @@ public final class GuiDisplayUtil {
         UIManager.put("nimbusLightBackground", PreferencesDialog.getCurrentTheme().getNimbusLightBackground()); // inputs, table rows
         UIManager.put("info", PreferencesDialog.getCurrentTheme().getInfo()); // tooltips
         UIManager.put("nimbusBase", PreferencesDialog.getCurrentTheme().getNimbusBase()); // title bars, scrollbar foreground
+        configureSplitPaneGameShortcuts();
 
 	    UIManager.put("text", PreferencesDialog.getCurrentTheme().getTextColor()); // Default text color
 
@@ -521,17 +615,27 @@ public final class GuiDisplayUtil {
             try {
                 Component comp = MageFrame.getUI().getComponent(compName, false);
                 if (comp != null) {
-                    SwingUtilities.updateComponentTreeUI(comp);
+                    GuiLayoutUtil.refresh(comp);
                 }
             } catch (InterruptedException ignore) {
             }
         });
     }
 
+    /** Reapply game function keys after the look and feel recreates Swing's split-pane bindings. */
+    static void configureSplitPaneGameShortcuts() {
+        Object bindings = UIManager.get("SplitPane.ancestorInputMap");
+        if (bindings instanceof InputMap) {
+            for (int key = java.awt.event.KeyEvent.VK_F2; key <= java.awt.event.KeyEvent.VK_F12; key++) {
+                ((InputMap) bindings).remove(KeyStroke.getKeyStroke(key, 0));
+            }
+        }
+    }
+
     private static void refreshLookAndFeel(Window window) {
         for (Window childWindow : window.getOwnedWindows()) {
             refreshLookAndFeel(childWindow);
         }
-        SwingUtilities.updateComponentTreeUI(window);
+        GuiLayoutUtil.refresh(window);
     }
 }
