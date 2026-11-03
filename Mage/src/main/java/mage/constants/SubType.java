@@ -30,6 +30,7 @@ public enum SubType {
     SWAMP("Swamp", SubTypeSet.BasicLandType),
     CAVE("Cave", SubTypeSet.NonBasicLandType),
     DESERT("Desert", SubTypeSet.NonBasicLandType),
+    DIMENSION("Dimension", SubTypeSet.NonBasicLandType), // TODO: Confirm if it is indeed a non-basic land type
     GATE("Gate", SubTypeSet.NonBasicLandType),
     LAIR("Lair", SubTypeSet.NonBasicLandType),
     LOCUS("Locus", SubTypeSet.NonBasicLandType),
