@@ -8,8 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.common.FilterControlledPermanent;
 
 /**
  *
@@ -17,11 +16,10 @@ import mage.filter.common.FilterLandPermanent;
  */
 public final class LandbindRitual extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Plains you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Plains you control");
 
     static {
         filter.add(SubType.PLAINS.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public LandbindRitual(UUID ownerId, CardSetInfo setInfo) {
