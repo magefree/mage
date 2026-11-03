@@ -628,7 +628,7 @@ public class TestCardRenderDialog extends MageDialog {
 
         labelRenderMode.setText("Render mode:");
 
-        comboRenderMode.setToolTipText("<HTML>Image - Renders card image with text overlay<br> MTGO - Renders card frame around card art<br> Forced M15 - Renders all cards in the MTGO style with the modern frame<br> Forced Retro - Renders all cards in the MTGO style with the retro frame");
+        comboRenderMode.setToolTipText("<HTML>Image - Renders card image with text overlay<br> MTGO - Renders card frame around card art<br> Forced M15 - Renders all cards in the MTGO style with the modern frame<br> Forced Retro - Renders all cards in the MTGO style with the retro frame<br> Forced Future Sight - Renders all cards in the MTGO style with the futureshifted frame");
         comboRenderMode.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboRenderModeItemStateChanged(evt);
