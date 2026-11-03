@@ -767,20 +767,20 @@ public class MageActionCallback implements ActionCallback {
 
             case PUT_INSIDE_PARENT: {
                 location = new Point((int) data.getLocationOnScreen().getX() + data.getPopupOffsetX() - 40, (int) data.getLocationOnScreen().getY() + data.getPopupOffsetY() - 40);
-                location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, popupComponent, parentComponent);
+                location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, popupContainer, parentComponent);
                 break;
             }
 
             case PUT_NEAR_MOUSE_POSITION: {
                 location = MouseInfo.getPointerInfo().getLocation();
-                boolean hasRightSpace = location.x + popupContainer.getWidth() < parentComponent.getX() + parentComponent.getWidth();
-                boolean hasBottomSpace = location.y + popupContainer.getHeight() < parentComponent.getY() + parentComponent.getHeight();
+                boolean hasRightSpace = location.x + popupContainer.getWidth() < parentPoint.x + parentComponent.getWidth();
+                boolean hasBottomSpace = location.y + popupContainer.getHeight() < parentPoint.y + parentComponent.getHeight();
                 if (!hasRightSpace) {
                     location.setLocation(location.x - popupContainer.getWidth(), location.y);
                 }
                 if (!hasBottomSpace) {
                     // if no upper space, then put at the top by Math.max
-                    location.setLocation(location.x, Math.max(parentComponent.getY(), location.y - popupContainer.getHeight()));
+                    location.setLocation(location.x, Math.max(parentPoint.y, location.y - popupContainer.getHeight()));
                 }
                 break;
             }
@@ -788,7 +788,14 @@ public class MageActionCallback implements ActionCallback {
             default:
                 throw new IllegalArgumentException("Unsupport auto-location " + data.getPopupAutoLocationMode());
         }
-        location.translate(-parentPoint.x, -parentPoint.y);
+        location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, popupContainer, parentComponent);
+        if (popupContainer.getParent() != null) {
+            SwingUtilities.convertPointFromScreen(location, popupContainer.getParent());
+            location = GuiDisplayUtil.clampLocation(location, popupContainer.getSize(),
+                    new Rectangle(0, 0, popupContainer.getParent().getWidth(), popupContainer.getParent().getHeight()));
+        } else {
+            location.translate(-parentPoint.x, -parentPoint.y);
+        }
         return location;
     }
 
