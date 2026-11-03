@@ -41,6 +41,58 @@ public class OneShotNonTargetTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void YuffieChooseOtherThanTargetTest() {
+        // When Yuffie enters, gain control of target noncreature artifact for as long as you control Yuffie.
+        // Then you may attach an Equipment you control to Yuffie.
+        String yuffie = "Yuffie, Materia Hunter"; // {2}{R} 3/3
+        addCard(Zone.HAND, playerA, yuffie);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Short Sword");
+        addCard(Zone.BATTLEFIELD, playerB, "Bonesplitter");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, yuffie);
+        addTarget(playerA, "Bonesplitter");
+        setChoice(playerA, "Short Sword");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Bonesplitter", 1);
+        assertAttachedTo(playerA, "Short Sword", yuffie, true);
+        assertAttachedTo(playerA, "Bonesplitter", yuffie, false);
+        assertPowerToughness(playerA, yuffie, 4, 4);
+    }
+
+    @Test
+    public void BoltbenderChooseSpellTest() {
+        // Disguise {1}{R}
+        // When Boltbender is turned face up, you may choose new targets for any number of other spells and/or abilities.
+        String boltbender = "Boltbender"; // {3}{R} 4/2
+        addCard(Zone.HAND, playerA, boltbender);
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Boltbender using Disguise", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{R}: Turn");
+        // a spell chosen on the stack must still be found when the new targets are chosen
+        setChoice(playerA, "Lightning Bolt");
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
+        setChoice(playerA, true); // change the target
+        addTarget(playerA, "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerB, "Grizzly Bears", 1);
+        assertPermanentCount(playerA, boltbender, 1);
+    }
+
+    @Test
     public void NonTargetAdjusterTest() {
         addCard(Zone.HAND, playerA, "Temporal Firestorm");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
@@ -61,6 +113,28 @@ public class OneShotNonTargetTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Squire", 0);
         assertGraveyardCount(playerA, "Python", 0);
         assertGraveyardCount(playerA, "Watchwolf", 1);
+    }
+
+    @Test
+    public void BlackSunsTwilightAdjusterWithTargetTest() {
+        // Up to one target creature gets -X/-X until end of turn. If X is 5 or more,
+        // return a creature card with mana value X or less from your graveyard to the battlefield tapped.
+        String twilight = "Black Sun's Twilight"; // {X}{B}
+        addCard(Zone.HAND, playerA, twilight);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
+        addCard(Zone.GRAVEYARD, playerA, "Craw Wurm"); // mana value 6
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
+
+        // strict mode fails if Craw Wurm is offered, since no choice is queued
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, twilight, "Grizzly Bears");
+        setChoice(playerA, "X=5");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerB, "Grizzly Bears", 1);
+        assertGraveyardCount(playerA, "Craw Wurm", 1);
     }
 
     @Test

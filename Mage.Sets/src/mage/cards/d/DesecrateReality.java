@@ -1,28 +1,21 @@
 package mage.cards.d;
 
-import mage.abilities.Ability;
 import mage.abilities.condition.common.AdamantCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.OneShotNonTargetEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ManaValueParityPredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -32,9 +25,12 @@ import java.util.UUID;
 public final class DesecrateReality extends CardImpl {
 
     private static final FilterPermanent evenFilter = new FilterPermanent("permanent with an even mana value");
+    private static final FilterCard oddFilter
+        = new FilterPermanentCard("permanent card with an odd mana value in your graveyard");
 
     static {
         evenFilter.add(ManaValueParityPredicate.EVEN);
+        oddFilter.add(ManaValueParityPredicate.ODD);
     }
     public DesecrateReality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{7}");
@@ -49,7 +45,11 @@ public final class DesecrateReality extends CardImpl {
 
         // Adamant -- If at least three colorless mana was spent to cast this spell, return a permanent card with an odd mana value from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-            new DesecrateRealityEffect(),
+            new OneShotNonTargetEffect(
+                new ReturnFromGraveyardToBattlefieldTargetEffect()
+                    .setText("return a permanent card with an odd mana value from your graveyard to the battlefield"),
+                new TargetCardInYourGraveyard(oddFilter)
+            ),
             AdamantCondition.COLORLESS, "<br><i>Adamant</i> &mdash; "
             + "If at least three colorless mana was spent to cast this spell, "
             + "return a permanent card with an odd mana value from your graveyard to the battlefield."
@@ -63,46 +63,5 @@ public final class DesecrateReality extends CardImpl {
     @Override
     public DesecrateReality copy() {
         return new DesecrateReality(this);
-    }
-}
-
-class DesecrateRealityEffect extends OneShotEffect {
-
-    private static final FilterCard filter
-        = new FilterPermanentCard("permanent card with an odd mana value in your graveyard");
-
-    static {
-        filter.add(ManaValueParityPredicate.ODD);
-    }
-
-    DesecrateRealityEffect() {
-        super(Outcome.PutCardInPlay);
-    }
-
-    private DesecrateRealityEffect(final DesecrateRealityEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DesecrateRealityEffect copy() {
-        return new DesecrateRealityEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-
-        // return a permanent card with an odd mana value from your graveyard to the battlefield.
-        Target target = new TargetCardInYourGraveyard(filter);
-        target.withNotTarget(true);
-        if (controller.choose(outcome, target, source, game)) {
-            Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
-            effect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));
-            effect.apply(game, source);
-        }
-        return true;
     }
 }

@@ -66,14 +66,10 @@ public class ConditionalTargetAdjuster implements TargetAdjuster {
     }
 
     @Override
-    public void addDefaultTargets(Ability ability) {
-        if (blueprintTarget == null && !ability.getTargets().isEmpty()) {
-            blueprintTarget = ability.getTargets().get(0).copy();
+    public void addDefaultTargets(Target firstTarget) {
+        if (blueprintTarget == null && firstTarget != null) {
+            blueprintTarget = firstTarget.copy();
         }
-    }
-    @Override
-    public void clearDefaultTargets() {
-        blueprintTarget = null;
     }
 
     @Override
