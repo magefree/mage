@@ -10,6 +10,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -246,7 +247,7 @@ class TawnossCoffinReturnEffect extends OneShotEffect {
                 Card auraCard = game.getCard(auraId);
                 if (auraCard != null && exileZone.contains(auraId)) {
                     returningAuras.add(auraCard);
-                    game.getState().setValue("attachTo:" + auraCard.getId(), newPermanent);
+                    AttachEffect.setAttachTo(game, auraCard.getId(), newPermanent);
                 }
             }
             controller.moveCards(returningAuras, Zone.BATTLEFIELD, source, game, false, false, true, null);

@@ -63,4 +63,31 @@ public class AttachEffect extends OneShotEffect {
         return card != null && card.addAttachment(source.getSourceId(), source, game);
     }
 
+    /**
+     * Mark aura to be attached on ETB. Must be called before the card's move
+     * and support and cards and parts like mdf
+     *
+     * @param cardId      aura card to put onto the battlefield
+     * @param attachToObj permanent or player's id to attach to
+     */
+    public static void setAttachTo(Game game, UUID cardId, Object attachToObj) {
+        game.getState().setValue(makeAttachToKey(game, cardId), attachToObj);
+    }
+
+    /**
+     * Find and remove the object or player for an Aura that enters the battlefield, see setAttachTo
+     *
+     * @param objectId entering card or permanent
+     * @return permanent, player's id or null
+     */
+    public static Object pollAttachTo(Game game, UUID objectId) {
+        String key = makeAttachToKey(game, objectId);
+        Object res = game.getState().getValue(key);
+        game.getState().removeValue(key);
+        return res;
+    }
+
+    private static String makeAttachToKey(Game game, UUID objectId) {
+        return "attachTo:" + CardUtil.getMainCardId(game, objectId);
+    }
 }

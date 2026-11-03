@@ -106,7 +106,7 @@ class GiftOfDoomEffect extends OneShotEffect {
         if (player.choose(outcome, target, source, game)
                 && game.getPermanent(target.getFirstTarget()) != null
                 && !game.getPermanent(target.getFirstTarget()).cantBeAttachedBy(giftOfDoom, source, game, false)) {
-            game.getState().setValue("attachTo:" + giftOfDoom.getId(), target.getFirstTarget());
+            AttachEffect.setAttachTo(game, giftOfDoom.getId(), target.getFirstTarget());
             game.getPermanent(target.getFirstTarget()).addAttachment(giftOfDoom.getId(), source, game);
             return true;
         }

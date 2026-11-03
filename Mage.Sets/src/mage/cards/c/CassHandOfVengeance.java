@@ -11,6 +11,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -143,8 +144,10 @@ class CassHandOfVengeanceEffect extends OneShotEffect {
                 continue;
             }
             if (lki.isEnchantment(game)) {
+                // double faced cards: an attachment is a side, but a graveyard contains a main card
                 Card card = game.getCard(attachmentId);
-                if (card != null && controller.getGraveyard().contains(attachmentId)
+                card = card == null ? null : card.getMainCard();
+                if (card != null && controller.getGraveyard().contains(card.getId())
                         && auraFilter.match(card, game)) {
                     validAuras.add(card);
                 }
@@ -169,7 +172,7 @@ class CassHandOfVengeanceEffect extends OneShotEffect {
             if (card == null) {
                 continue;
             }
-            game.getState().setValue("attachTo:" + card.getId(), targetCreature);
+            AttachEffect.setAttachTo(game, card.getId(), targetCreature);
             controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             Permanent aura = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
             if (aura != null) {

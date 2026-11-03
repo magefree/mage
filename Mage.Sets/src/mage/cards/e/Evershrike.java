@@ -8,6 +8,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.AuraAttachedCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -101,9 +102,9 @@ class EvershrikeEffect extends OneShotEffect {
             if (controller.choose(Outcome.Benefit, controller.getHand(), targetAura, source, game)) {
                 Card aura = game.getCard(targetAura.getFirstTarget());
                 if (aura != null) {
-                    game.getState().setValue("attachTo:" + aura.getId(), evershrikePermanent);
+                    AttachEffect.setAttachTo(game, aura.getId(), evershrikePermanent);
                     if (controller.moveCards(aura, Zone.BATTLEFIELD, source, game)) {
-                        evershrikePermanent.addAttachment(aura.getId(), source, game);
+                        evershrikePermanent.addAttachment(CardUtil.getDefaultCardSideForBattlefield(game, aura).getId(), source, game);
                     }
                     exileSource = false;
                 }
