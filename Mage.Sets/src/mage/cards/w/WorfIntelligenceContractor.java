@@ -16,6 +16,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
+import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
 
@@ -23,7 +24,6 @@ import java.util.UUID;
  *
  * @author notshauna
  */
-
 public final class WorfIntelligenceContractor extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("creature with mana value 3 or less");
@@ -33,7 +33,7 @@ public final class WorfIntelligenceContractor extends CardImpl {
     }
 
     public WorfIntelligenceContractor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KLINGON);
@@ -44,14 +44,18 @@ public final class WorfIntelligenceContractor extends CardImpl {
 
         // When Worf enters, for each opponent, gain control of up to one target creature that player controls with mana value 3 or less until end of turn.
         // Untap those creatures. Until end of turn, they become Warriors in addition to their other types and gain haste.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn), false);
-        ability.addEffect(new UntapTargetEffect()
-                .setText("Untap those creatures"));
-        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn)
-                .setText("Until end of turn, they gain haste"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn)
+                .setText ("for each opponent, gain control of up to one target creature with mana value 3 or less that player controls until end of turn")
+                .setTargetPointer(new EachTargetPointer()), false);
         ability.addEffect(new AddCardSubTypeTargetEffect(SubType.WARRIOR, Duration.EndOfTurn)
                 .setText("Until end of turn, they become Warriors in addition to their other types"));
-        ability.addTarget(new TargetPermanent(0,1, filter));
+        ability.addEffect(new UntapTargetEffect()
+                .setText("Untap those creatures")
+                .setTargetPointer(new EachTargetPointer()));
+        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn)
+                .setText("and gain haste")
+                .setTargetPointer(new EachTargetPointer()));
+        ability.addTarget(new TargetPermanent(0, 1, filter));
         ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, true));
         this.addAbility(ability);
     }
