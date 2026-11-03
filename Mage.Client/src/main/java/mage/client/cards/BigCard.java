@@ -2,6 +2,7 @@ package mage.client.cards;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -19,6 +20,7 @@ import mage.client.util.ImageHelper;
 import mage.constants.EnlargeMode;
 import org.jdesktop.swingx.JXPanel;
 import mage.client.util.TransformedImageCache;
+import mage.client.util.gui.HiDpiRenderUtil;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
 
@@ -75,9 +77,7 @@ public class BigCard extends JComponent {
     
     public void setCard(UUID cardId, EnlargeMode enlargeMode, Image image, List<String> strings, boolean rotate) {
         if (rotate && getWidth() > getHeight()) {
-            image = TransformedImageCache.getRotatedResizedImage((BufferedImage)image, getHeight(), getWidth(), Math.toRadians(90.0));
-        } else {
-            image = TransformedImageCache.getResizedImage((BufferedImage)image, getWidth(), getHeight());
+            image = TransformedImageCache.getRotatedImage((BufferedImage) image, Math.toRadians(90.0));
         }
 
         if (this.cardId == null || enlargeMode != this.enlargeMode || !this.cardId.equals(cardId)) {
@@ -113,7 +113,21 @@ public class BigCard extends JComponent {
     @Override
     public void paintComponent(Graphics graphics) {
         if (bigImage != null) {
-            graphics.drawImage(bigImage, 0, 0, this);
+            Graphics2D g = (Graphics2D) graphics.create();
+            try {
+                double scale = Math.min(getWidth() / (double) bigImage.getWidth(null), getHeight() / (double) bigImage.getHeight(null));
+                int width = (int) Math.round(bigImage.getWidth(null) * scale);
+                int height = (int) Math.round(bigImage.getHeight(null) * scale);
+                if (width <= 0 || height <= 0) {
+                    return;
+                }
+                Dimension raster = HiDpiRenderUtil.getRasterSize(g, width, height);
+                BufferedImage scaled = TransformedImageCache.getResizedImageExact((BufferedImage) bigImage, raster.width, raster.height);
+                HiDpiRenderUtil.configureRasterDraw(g, scaled, width, height);
+                g.drawImage(scaled, 0, 0, width, height, this);
+            } finally {
+                g.dispose();
+            }
         }
         super.paintComponent(graphics);
     }
@@ -175,7 +189,6 @@ public class BigCard extends JComponent {
 
     public void setDefaultImage() {
         bigImage = ImageHelper.getImageFromResources("/empty.png");
-        bigImage = ImageHelper.getResizedImage((BufferedImage) bigImage, getWidth(), getHeight());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
