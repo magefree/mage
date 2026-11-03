@@ -6,13 +6,11 @@ import mage.client.game.GamePanel;
  import mage.client.util.Format;
  import mage.client.util.ImageHelper;
  import mage.client.util.audio.AudioManager;
- import mage.client.util.gui.BufferedImageBuilder;
  import mage.view.GameEndView;
  import mage.view.PlayerView;
 
  import javax.swing.*;
  import java.awt.*;
- import java.awt.image.BufferedImage;
  import java.io.File;
  import java.io.FileNotFoundException;
  import java.io.PrintWriter;
@@ -48,13 +46,40 @@ import mage.client.game.GamePanel;
              image = ImageHelper.getImageFromResources(PreferencesDialog.getCurrentTheme().getWinlossPath("game_lost.jpg"));
          }
 
-         BufferedImage imageResult = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-         ImageIcon icon = new ImageIcon(imageResult);
-         lblResultImage.setIcon(icon);
+         lblResultImage.setIcon(new mage.client.components.StretchIcon(image, true));
+         lblResultImage.setPreferredSize(new Dimension(r.width, r.height));
 
          this.lblGameInfo.setText(gameEndView.getGameInfo());
          this.lblMatchInfo.setText(gameEndView.getMatchInfo());
          this.lblAdditionalInfo.setText(gameEndView.getAdditionalInfo());
+         lblAdditionalInfo.setVisible(!gameEndView.getAdditionalInfo().isEmpty());
+
+         // The old absolute bounds clipped larger result messages and statistics tabs.
+         pnlText.removeAll();
+         pnlText.setLayout(new BoxLayout(pnlText, BoxLayout.Y_AXIS));
+         pnlText.setBorder(BorderFactory.createEmptyBorder(6, 8, 6, 8));
+         for (JLabel label : new JLabel[]{lblGameInfo, lblMatchInfo, lblAdditionalInfo}) {
+             label.setAlignmentX(Component.CENTER_ALIGNMENT);
+             pnlText.add(label);
+         }
+         tabResult.removeAll();
+         tabResult.setLayout(new GridBagLayout());
+         GridBagConstraints text = new GridBagConstraints();
+         text.gridx = 0;
+         text.gridy = 0;
+         text.weightx = 1;
+         text.weighty = 1;
+         text.fill = GridBagConstraints.HORIZONTAL;
+         text.anchor = GridBagConstraints.SOUTH;
+         text.insets = new Insets(0, 12, 12, 12);
+         tabResult.add(pnlText, text);
+         GridBagConstraints background = new GridBagConstraints();
+         background.gridx = 0;
+         background.gridy = 0;
+         background.weightx = 1;
+         background.weighty = 1;
+         background.fill = GridBagConstraints.BOTH;
+         tabResult.add(lblResultImage, background);
 
          String autoSave = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_LOG_AUTO_SAVE, "true");
          if (autoSave.equals("true")) {
@@ -121,7 +146,10 @@ import mage.client.game.GamePanel;
      }
 
      public void showDialog() {
+         pack();
          this.setLocation(100, 100);
+         mage.client.util.gui.GuiDisplayUtil.keepComponentInsideScreen(
+                 100 + getWidth() / 2, 100 + getHeight() / 2, this);
          this.setVisible(true);
      }
 
@@ -228,11 +256,11 @@ import mage.client.game.GamePanel;
                          .addGroup(tabStatisticsLayout.createSequentialGroup()
                                  .addContainerGap()
                                  .addGroup(tabStatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                         .addComponent(lblPlayerInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                         .addComponent(lblDurationMatch, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                         .addComponent(lblMatchScore, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                         .addComponent(lblDurationGame, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                         .addComponent(lblLife, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                         .addComponent(lblPlayerInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                         .addComponent(lblDurationMatch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                         .addComponent(lblMatchScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                         .addComponent(lblDurationGame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                         .addComponent(lblLife, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                  .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                  .addGroup(tabStatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                          .addComponent(txtPlayerInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -246,24 +274,24 @@ import mage.client.game.GamePanel;
                  tabStatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                          .addGroup(tabStatisticsLayout.createSequentialGroup()
                                  .addGroup(tabStatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                         .addComponent(lblDurationGame, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                         .addComponent(txtDurationGame, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                         .addComponent(lblDurationGame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                         .addComponent(txtDurationGame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                  .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                  .addGroup(tabStatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                         .addComponent(lblLife, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                         .addComponent(txtLife, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                         .addComponent(lblLife, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                         .addComponent(txtLife, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                  .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                  .addGroup(tabStatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                         .addComponent(lblDurationMatch, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                         .addComponent(txtDurationMatch, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                         .addComponent(lblDurationMatch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                         .addComponent(txtDurationMatch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                  .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                  .addGroup(tabStatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                         .addComponent(lblMatchScore, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                         .addComponent(txtMatchScore, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                         .addComponent(lblMatchScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                         .addComponent(txtMatchScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                  .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                  .addGroup(tabStatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                         .addComponent(lblPlayerInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                         .addComponent(txtPlayerInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                         .addComponent(lblPlayerInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                         .addComponent(txtPlayerInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                  .addContainerGap(105, Short.MAX_VALUE))
          );
 
@@ -285,13 +313,13 @@ import mage.client.game.GamePanel;
                                  .addComponent(btnOk)
                                  .addContainerGap())
                          .addGroup(layout.createSequentialGroup()
-                                 .addComponent(tabPane, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                 .addComponent(tabPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                  .addGap(0, 0, Short.MAX_VALUE))
          );
          layout.setVerticalGroup(
                  layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                          .addGroup(layout.createSequentialGroup()
-                                 .addComponent(tabPane, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                 .addComponent(tabPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                  .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                  .addComponent(btnOk)
                                  .addGap(0, 8, Short.MAX_VALUE))
