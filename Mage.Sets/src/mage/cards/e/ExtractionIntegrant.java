@@ -34,13 +34,9 @@ public final class ExtractionIntegrant extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Artifact creatures you control have menace and “Whenever a creature blocks this creature, that creature gets -1/-1 until end of turn.”
-        Ability ability = new SimpleStaticAbility(
-                new GainAbilityControlledEffect(
-                        new MenaceAbility(),
-                        Duration.WhileOnBattlefield,
-                        StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE
-                )
-        );
+        Ability ability = new SimpleStaticAbility(new GainAbilityControlledEffect(
+                new MenaceAbility(),
+                Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE));
         ability.addEffect(new GainAbilityControlledEffect(
                 new ExtractionIntegrantEffect(),
                 Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE)
