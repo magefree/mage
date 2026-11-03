@@ -54,6 +54,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bitter Triumph", 445, Rarity.UNCOMMON, mage.cards.b.BitterTriumph.class));
         cards.add(new SetCardInfo("Blood-Sport Champion", 271, Rarity.RARE, mage.cards.b.BloodSportChampion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blood-Sport Champion", 58, Rarity.RARE, mage.cards.b.BloodSportChampion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Borg Queen, Perfection Manifest", 197, Rarity.MYTHIC, mage.cards.b.BorgQueenPerfectionManifest.class));
         cards.add(new SetCardInfo("Borg Scout Sphere", 248, Rarity.RARE, mage.cards.b.BorgScoutSphere.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Borg Scout Sphere", 36, Rarity.RARE, mage.cards.b.BorgScoutSphere.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Brainstorm", 434, Rarity.COMMON, mage.cards.b.Brainstorm.class));
@@ -412,6 +413,8 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Terramorphic Expanse", 571, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("The Beacon of Kahless", 279, Rarity.RARE, mage.cards.t.TheBeaconOfKahless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Beacon of Kahless", 64, Rarity.RARE, mage.cards.t.TheBeaconOfKahless.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Borg Queen", 1, Rarity.MYTHIC, mage.cards.t.TheBorgQueen.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Borg Queen", 5, Rarity.MYTHIC, mage.cards.t.TheBorgQueen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Immortal Sun", 347, Rarity.MYTHIC, mage.cards.t.TheImmortalSun.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Immortal Sun", 495, Rarity.MYTHIC, mage.cards.t.TheImmortalSun.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Sword of Kahless", 123, Rarity.RARE, mage.cards.t.TheSwordOfKahless.class, NON_FULL_USE_VARIOUS));
