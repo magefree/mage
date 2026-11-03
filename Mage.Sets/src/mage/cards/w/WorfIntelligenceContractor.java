@@ -48,7 +48,8 @@ public final class WorfIntelligenceContractor extends CardImpl {
                 .setText ("for each opponent, gain control of up to one target creature with mana value 3 or less that player controls until end of turn")
                 .setTargetPointer(new EachTargetPointer()), false);
         ability.addEffect(new AddCardSubTypeTargetEffect(SubType.WARRIOR, Duration.EndOfTurn)
-                .setText("Until end of turn, they become Warriors in addition to their other types"));
+                .setText("Until end of turn, they become Warriors in addition to their other types")
+                .setTargetPointer(new EachTargetPointer()));
         ability.addEffect(new UntapTargetEffect()
                 .setText("Untap those creatures")
                 .setTargetPointer(new EachTargetPointer()));
