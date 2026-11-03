@@ -37,7 +37,7 @@ public class ReturnToBattlefieldAttachedEffect extends OneShotEffect {
             return false;
         }
 
-        game.getState().setValue("attachTo:" + aura.getId(), creature);
+        AttachEffect.setAttachTo(game, aura.getId(), creature);
         controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
         return creature.addAttachment(aura.getId(), source, game);
     }

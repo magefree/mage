@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ExertCreatureControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.ExertAbility;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -86,7 +87,7 @@ class RohirrimChargersEffect extends OneShotEffect {
         if (toBattlefield != null) {
             Permanent attachTarget = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (attachTarget != null) {
-                game.getState().setValue("attachTo:" + toBattlefield.getId(), attachTarget);
+                AttachEffect.setAttachTo(game, toBattlefield.getId(), attachTarget);
             }
             player.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game);
             if (attachTarget != null) {

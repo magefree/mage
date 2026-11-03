@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.Card;
@@ -121,7 +122,7 @@ class RunedCrownEffect extends OneShotEffect {
         }
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
-            game.getState().setValue("attachTo:" + card.getId(), permanent);
+            AttachEffect.setAttachTo(game, card.getId(), permanent);
         }
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
         if (permanent != null) {

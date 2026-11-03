@@ -6,6 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -19,6 +20,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 /**
  *
@@ -78,9 +80,9 @@ class BitterheartWitchEffect extends OneShotEffect {
             if (controller.searchLibrary(targetCard, source, game)) {
                 Card card = game.getCard(targetCard.getFirstTarget());
                 if (card != null) {
-                    game.getState().setValue("attachTo:" + card.getId(), targetPlayer.getId());
+                    AttachEffect.setAttachTo(game, card.getId(), targetPlayer.getId());
                     if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                        targetPlayer.addAttachment(card.getId(), source, game);
+                        targetPlayer.addAttachment(CardUtil.getDefaultCardSideForBattlefield(game, card).getId(), source, game);
                     }
                 }
             }

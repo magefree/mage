@@ -20,6 +20,7 @@ import mage.abilities.costs.mana.AlternateManaPaymentAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.AuraReplacementEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.RestrictionUntapNotMoreThanEffect;
 import mage.abilities.keyword.*;
@@ -5125,18 +5126,19 @@ public abstract class PlayerImpl implements Player, Serializable {
                     // 303.4g. If an Aura is entering the battlefield and there is no legal object or player for it to enchant,
                     // the Aura remains in its current zone, unless that zone is the stack. In that case, the Aura is put into
                     // its owner's graveyard instead of entering the battlefield. If the Aura is a token, it isn't created.
-                    if (card.hasSubtype(SubType.AURA, game) && !(source instanceof BestowAbility)) {
+                    Card auraCard = AuraReplacementEffect.findEnteringAura(game, card, faceDown);
+                    if (auraCard != null && !(source instanceof BestowAbility)) {
                         SpellAbility auraSpellAbility;
-                        if (source instanceof SpellAbility && card.getAbilities(game).contains(source)) {
+                        if (source instanceof SpellAbility && auraCard.getAbilities(game).contains(source)) {
                             // cast aura - use source ability
                             auraSpellAbility = (SpellAbility) source;
                         } else {
                             // put to battlefield by another effect - use default spell
-                            auraSpellAbility = card.getSpellAbility();
+                            auraSpellAbility = auraCard.getSpellAbility();
                         }
                         if (auraSpellAbility != null) {
                             if (auraSpellAbility.getTargets().isEmpty()) {
-                                throw new IllegalArgumentException("Something wrong, found etb aura with empty spell ability or without any targets: " + card + ", source: " + source);
+                                throw new IllegalArgumentException("Something wrong, found etb aura with empty spell ability or without any targets: " + auraCard + ", source: " + source);
                             }
                             if (!auraSpellAbility.getTargets().get(0).copy().withNotTarget(true).canChooseOrAlreadyChosen(byOwner ? card.getOwnerId() : getId(), source, game)) {
                                 continue;
