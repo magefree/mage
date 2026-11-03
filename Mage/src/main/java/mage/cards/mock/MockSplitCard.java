@@ -3,6 +3,7 @@ package mage.cards.mock;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
+import mage.cards.CardGraphicInfo;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.cards.SplitCardHalf;
@@ -21,7 +22,8 @@ import java.util.List;
 public class MockSplitCard extends SplitCard implements MockableCard {
 
     public MockSplitCard(CardInfo card) {
-        super(null, new CardSetInfo(card.getName(), card.getSetCode(), card.getCardNumber(), card.getRarity()),
+        super(null, new CardSetInfo(card.getName(), card.getSetCode(), card.getCardNumber(), card.getRarity(),
+                        new CardGraphicInfo(card.getFrameStyle(), card.usesVariousArt())),
                 card.getTypes().toArray(new CardType[0]),
                 join(card.getManaCosts(CardInfo.ManaCostSide.LEFT)),
                 join(card.getManaCosts(CardInfo.ManaCostSide.RIGHT)),
