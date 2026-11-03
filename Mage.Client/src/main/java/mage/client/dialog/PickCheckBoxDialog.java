@@ -3,6 +3,7 @@ package mage.client.dialog;
 import mage.choices.Choice;
 import mage.client.MageFrame;
 import mage.client.util.gui.MageDialogState;
+import mage.client.util.gui.GuiDisplayUtil;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -28,6 +29,7 @@ public class PickCheckBoxDialog extends MageDialog {
 
     CheckBoxList tList;
     int[] startingCheckboxes; // restore to it on cancel
+    final List<Object> startingItems = new ArrayList<>();
     PickCheckBoxCallback callback = null;
 
     final private static String HTML_TEMPLATE = "<html><div style='text-align: center;'>%s</div></html>";
@@ -51,6 +53,13 @@ public class PickCheckBoxDialog extends MageDialog {
     public void showDialog(Choice choice, UUID objectId, MageDialogState mageDialogState, String startSelectionValue, PickCheckBoxCallback callback) {
         this.choice = choice;
         this.callback = callback;
+        if (tList != null) {
+            startingCheckboxes = tList.getCheckedIndices();
+            startingItems.clear();
+            for (int i = 0; i < tList.getModel().getSize(); i++) {
+                startingItems.add(tList.getModel().getElementAt(i));
+            }
+        }
 
         KeyValueItem tempKeyValue;
         int indexInTList;
@@ -177,7 +186,6 @@ public class PickCheckBoxDialog extends MageDialog {
         MageFrame.getDesktop().remove(this);
         MageFrame.getDesktop().add(this, this.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         if (mageDialogState != null) mageDialogState.setStateToDialog(this);
-        else this.makeWindowCentered();
 
         // final load
         loadData();
@@ -205,6 +213,16 @@ public class PickCheckBoxDialog extends MageDialog {
             }
         }
 
+        // The requested list height can be useful, but commands must fit the current font.
+        Dimension requested = getSize();
+        pack();
+        Dimension available = MageFrame.getDesktop().getSize();
+        setSize(Math.min(available.width, Math.max(requested.width, getWidth())),
+                Math.min(available.height, Math.max(requested.height, getHeight())));
+        if (mageDialogState == null) {
+            makeWindowCentered();
+        }
+        GuiDisplayUtil.keepComponentInsideScreen(getX(), getY(), this);
         this.setVisible(true);
     }
 
@@ -238,11 +256,15 @@ public class PickCheckBoxDialog extends MageDialog {
         filter = filter.toLowerCase(Locale.ENGLISH);
 
         this.dataModel.clear();
-        this.m_dataModel.clear();
+        if (this.m_dataModel != null) {
+            this.m_dataModel.clear();
+        }
         for (KeyValueItem item : this.allItems) {
             if (!choice.isSearchEnabled() || item.Value.toLowerCase(Locale.ENGLISH).contains(filter)) {
                 this.dataModel.addElement(item);
-                this.m_dataModel.addElement(item.getObjectValue());
+                if (this.m_dataModel != null) {
+                    this.m_dataModel.addElement(item.getObjectValue());
+                }
             }
         }
     }
@@ -258,35 +280,44 @@ public class PickCheckBoxDialog extends MageDialog {
     }
 
     private void doNextSelect() {
-        int newSel = this.listChoices.getSelectedIndex() + 1;
-        int maxSel = this.listChoices.getModel().getSize() - 1;
+        JList visibleList = get_a_Jlist_from_ScrollListView();
+        int newSel = visibleList.getSelectedIndex() + 1;
+        int maxSel = visibleList.getModel().getSize() - 1;
         if (newSel <= maxSel) {
-            this.listChoices.setSelectedIndex(newSel);
-            this.listChoices.ensureIndexIsVisible(newSel);
+            visibleList.setSelectedIndex(newSel);
+            visibleList.ensureIndexIsVisible(newSel);
         }
     }
 
     private void doPrevSelect() {
-        int newSel = this.listChoices.getSelectedIndex() - 1;
+        JList visibleList = get_a_Jlist_from_ScrollListView();
+        int newSel = visibleList.getSelectedIndex() - 1;
         if (newSel >= 0) {
-            this.listChoices.setSelectedIndex(newSel);
-            this.listChoices.ensureIndexIsVisible(newSel);
+            visibleList.setSelectedIndex(newSel);
+            visibleList.ensureIndexIsVisible(newSel);
         }
     }
 
     private void doChoose() {
         if ((tList != null) || (setChoice())) {
-            this.m_dataModel.clear();
-            restoreData(this.m_dataModel);
+            if (this.m_dataModel != null) {
+                this.m_dataModel.clear();
+                restoreData(this.m_dataModel);
+            }
             doClose();
         }
     }
 
     private void doCancel() {
         // restore starting checkboxes
-        Set<Integer> checks = Arrays.stream(startingCheckboxes).boxed().collect(Collectors.toSet());
-        for (int i = 0; i < tList.getModel().getSize(); i++) {
-            tList.setChecked(i, checks.contains(i));
+        if (this.m_dataModel != null) {
+            // Filtering edits the caller's model. Restore all entries before its check state.
+            this.m_dataModel.clear();
+            startingItems.forEach(this.m_dataModel::addElement);
+            Set<Integer> checks = Arrays.stream(startingCheckboxes).boxed().collect(Collectors.toSet());
+            for (int i = 0; i < tList.getModel().getSize(); i++) {
+                tList.setChecked(i, checks.contains(i));
+            }
         }
 
         this.listChoices.clearSelection();
@@ -304,7 +335,7 @@ public class PickCheckBoxDialog extends MageDialog {
     public PickCheckBoxDialog(CheckBoxList list) {
         initComponents();
         tList = list;
-        startingCheckboxes = list.getCheckedIndices();
+        startingCheckboxes = list == null ? new int[0] : list.getCheckedIndices();
 
         this.listChoices.setModel(dataModel);
         this.setModal(true);
@@ -505,7 +536,7 @@ public class PickCheckBoxDialog extends MageDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btOK)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelCommandsLayout.setVerticalGroup(
