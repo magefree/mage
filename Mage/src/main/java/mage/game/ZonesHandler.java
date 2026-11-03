@@ -6,6 +6,7 @@ import mage.cards.*;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.counters.Counters;
 import mage.game.command.Commander;
 import mage.game.events.ZoneChangeBatchEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -93,12 +94,12 @@ public final class ZonesHandler {
                     }
 
                     if (forceToMainSide) {
-                        info.event.setTargetId(((DoubleFacedCard) card.getMainCard()).getLeftHalfCard().getId());
+                        changeEnteringCard(info, ((DoubleFacedCard) card.getMainCard()).getLeftHalfCard().getId(), game);
                     }
 
                     // if left half is being moved, but entering transformed, change to transformed side
                     if (enterTransformed && card instanceof DoubleFacedCardHalf && !((DoubleFacedCardHalf) card).isBackSide()) {
-                        info.event.setTargetId(((DoubleFacedCardHalf) card).getOtherSide().getId());
+                        changeEnteringCard(info, ((DoubleFacedCardHalf) card).getOtherSide().getId(), game);
                     }
                 }
             }
@@ -132,6 +133,19 @@ public final class ZonesHandler {
             game.getCombat().addEnteringAttackers(enteringAttackers, game);
         }
         return zoneChangeInfos;
+    }
+
+    /**
+     * Enter with counters are stored by card id, so they must follow the card that really enters the battlefield
+     */
+    private static void changeEnteringCard(ZoneChangeInfo info, UUID newCardId, Game game) {
+        UUID oldCardId = info.event.getTargetId();
+        Counters counters = game.getEnterWithCounters(oldCardId);
+        if (counters != null && !oldCardId.equals(newCardId)) {
+            game.setEnterWithCounters(oldCardId, null);
+            game.setEnterWithCounters(newCardId, counters);
+        }
+        info.event.setTargetId(newCardId);
     }
 
     private static void placeInDestinationZone(ZoneChangeInfo info, int createOrder, Ability source, Game game) {
