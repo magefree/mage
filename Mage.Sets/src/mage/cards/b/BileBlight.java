@@ -1,16 +1,21 @@
 package mage.cards.b;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -23,7 +28,7 @@ public final class BileBlight extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}{B}");
 
 
-        // Target creature and all creatures with the same name as that creature get -3/-3 until end of turn.
+        // Target creature and all other creatures with the same name as that creature get -3/-3 until end of turn.
         this.getSpellAbility().addEffect(new BileBlightEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
@@ -38,10 +43,10 @@ public final class BileBlight extends CardImpl {
     }
 }
 
-class BileBlightEffect extends BoostAllEffect {
+class BileBlightEffect extends OneShotEffect {
 
     BileBlightEffect() {
-        super(-3, -3, Duration.EndOfTurn);
+        super(Outcome.UnboostCreature);
         staticText = "Target creature and all other creatures with the same name as that creature get -3/-3 until end of turn";
     }
 
@@ -50,26 +55,19 @@ class BileBlightEffect extends BoostAllEffect {
     }
 
     @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        affectedObjectList.clear();
-        if (!getAffectedObjectsSet()) {
-            return;
-        }
+    public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (target == null) {
-            return;
+            return false;
         }
-        if (CardUtil.haveEmptyName(target)) { // face down creature
-            affectedObjectList.add(new MageObjectReference(target, game));
-            return;
-        }
-        String name = target.getName();
-        for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            if (CardUtil.haveSameNames(perm, name, game)) {
-                affectedObjectList.add(new MageObjectReference(perm, game));
-            }
-        }
+        FilterPermanent filter = new FilterCreaturePermanent();
+        // a face down creature has no name, and nothing shares a name with it, so the target has to
+        // be matched by identity rather than through the name it may not have
+        filter.add(Predicates.or(
+                new MageObjectReferencePredicate(target, game),
+                new NamePredicate(target.getName())));
+        game.addEffect(new BoostAllEffect(-3, -3, Duration.EndOfTurn, filter), source);
+        return true;
     }
 
     @Override

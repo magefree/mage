@@ -1,10 +1,10 @@
 package mage.cards.c;
 
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CreaturePutInYourGraveyardCondition;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -31,7 +31,7 @@ public final class CloakwoodHermit extends CardImpl {
                         TargetController.YOU, new CreateTokenEffect(new SquirrelToken(), 2, true, false),
                         false, CreaturePutInYourGraveyardCondition.instance
                 ), Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURES_OWNED_COMMANDER
-        ).withForceQuotes()).addHint(CreaturePutInYourGraveyardCondition.getHint()), new CreaturePutIntoGraveyardWatcher());
+        )).addHint(CreaturePutInYourGraveyardCondition.getHint()), new CreaturePutIntoGraveyardWatcher());
     }
 
     private CloakwoodHermit(final CloakwoodHermit card) {

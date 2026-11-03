@@ -25,7 +25,7 @@ import java.util.UUID;
 public final class DeathBaron extends CardImpl {
 
     private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("Skeletons you control and other Zombies");
+            = new FilterCreaturePermanent("Skeletons you control and other Zombies you control");
 
     static {
         filter.add(DeathBaronPredicate.instance);
