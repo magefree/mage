@@ -191,6 +191,7 @@ public class VerifyCardDataTest {
 
         // missing abilities
         // skipListAddName(SKIP_LIST_MISSING_ABILITIES, set, cardName);
+        skipListAddName(SKIP_LIST_MISSING_ABILITIES, "MH1", "Icehide Golem"); // reminder text only, no abilities
 
         // double rare cards
         // skipListAddName(SKIP_LIST_DOUBLE_RARE, set, cardName);
