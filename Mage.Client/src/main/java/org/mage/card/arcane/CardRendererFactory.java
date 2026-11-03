@@ -33,7 +33,8 @@ public class CardRendererFactory {
         if (renderModeOverride != -1) {
             renderMode = renderModeOverride;
         }
-        boolean renderMTGO = (card.getFrameStyle().equals(FrameStyle.RETRO) || card.getFrameStyle().equals(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC)) && renderMode == CardRenderMode.MTGO.ordinal();
+        FrameStyle frameStyle = card != null ? card.getFrameStyle() : null;
+        boolean renderMTGO = (frameStyle == FrameStyle.RETRO || frameStyle == FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC) && renderMode == CardRenderMode.MTGO.ordinal();
         boolean forcedRetro = renderMode == CardRenderMode.FORCED_RETRO.ordinal();
         return renderMTGO || forcedRetro;
     }
