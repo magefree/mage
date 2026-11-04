@@ -1,6 +1,5 @@
 package mage.abilities.effects.keyword;
 
-import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -12,6 +11,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * 702.192a Paradigm represents two spell abilities, one of which creates a
@@ -53,16 +53,15 @@ public class ParadigmEffect extends OneShotEffect {
         if (controller == null || spell == null) {
             return false;
         }
-        // blueprint must be independent of the exiled card, which can leave exile without any effect on paradigm
-        Card blueprint = spell.getMainCard().copy();
         // copied spells have no card to exile, they just leave the stack
         if (!spell.isCopy()) {
-            controller.moveCards(spell.getMainCard(), Zone.EXILED, source, game);
+            controller.moveCards(spell.getCard(), Zone.EXILED, source, game);
         }
         String resolvedKey = "paradigmResolved|" + controller.getId() + '|' + spell.getName();
         if (game.getState().getValue(resolvedKey) == null) {
             game.getState().setValue(resolvedKey, Boolean.TRUE);
-            game.addDelayedTriggeredAbility(new ParadigmDelayedTriggeredAbility(blueprint), source);
+            // it's a fake spell (template) like in Epic, it doesn't depend on the exiled card
+            game.addDelayedTriggeredAbility(new ParadigmDelayedTriggeredAbility(spell.copy()), source);
         }
         return true;
     }
@@ -70,8 +69,8 @@ public class ParadigmEffect extends OneShotEffect {
 
 class ParadigmDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    ParadigmDelayedTriggeredAbility(Card blueprint) {
-        super(new ParadigmCastCopyEffect(blueprint), Duration.EndOfGame, false, false);
+    ParadigmDelayedTriggeredAbility(Spell spell) {
+        super(new ParadigmCastCopyEffect(spell), Duration.EndOfGame, false, false);
     }
 
     private ParadigmDelayedTriggeredAbility(final ParadigmDelayedTriggeredAbility ability) {
@@ -102,16 +101,16 @@ class ParadigmDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
 class ParadigmCastCopyEffect extends OneShotEffect {
 
-    private final Card blueprint;
+    private final Spell spell;
 
-    ParadigmCastCopyEffect(Card blueprint) {
+    ParadigmCastCopyEffect(Spell spell) {
         super(Outcome.PlayForFree);
-        this.blueprint = blueprint;
+        this.spell = spell;
     }
 
     private ParadigmCastCopyEffect(final ParadigmCastCopyEffect effect) {
         super(effect);
-        this.blueprint = effect.blueprint.copy();
+        this.spell = effect.spell;
     }
 
     @Override
@@ -126,14 +125,12 @@ class ParadigmCastCopyEffect extends OneShotEffect {
             return false;
         }
         // a declined copy would cease to exist right away, so there is no need to create it
-        if (!controller.chooseUse(outcome, "Cast a copy of " + blueprint.getName() + " without paying its mana cost?", source, game)) {
+        if (!controller.chooseUse(outcome, "Cast a copy of " + spell.getName() + " without paying its mana cost?", source, game)) {
             return true;
         }
-        Card copiedCard = game.copyCard(blueprint, source, controller.getId());
+        Card copiedCard = game.copyCard(spell.getMainCard(), source, controller.getId());
         copiedCard.setZone(Zone.EXILED, game);
-        game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
-        controller.cast(controller.chooseAbilityForCast(copiedCard, game, true), game, true, new ApprovingObject(source, game));
-        game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
+        CardUtil.castSingle(controller, source, game, copiedCard, true, null);
         return true;
     }
 }
