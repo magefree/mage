@@ -148,7 +148,7 @@ public class ScryfallTokensBulkDataTest {
         Assert.assertTrue(sourceSmall.prepareDownloadList(new TestServiceInfo(), downloadList));
         Assert.assertEquals(expectedImage(links.get(tokenEn), "en", "small", "front"), sourceSmall.generateTokenUrl(tokens.get(tokenEn)).getBaseUrl());
         Assert.assertEquals(expectedImage(links.get(tokenBack), "en", "small", "back"), sourceSmall.generateTokenUrl(tokens.get(tokenBack)).getBaseUrl());
-        Assert.assertEquals(links.get(tokenMissing).replace("format=image", "format=image&version=small"),
+        Assert.assertEquals(links.get(tokenMissing).replace("format=image", "format=image&version=thumb"),
                 sourceSmall.generateTokenUrl(tokens.get(tokenMissing)).getBaseUrl());
     }
 
