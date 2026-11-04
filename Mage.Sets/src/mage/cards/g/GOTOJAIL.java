@@ -70,7 +70,7 @@ class GoToJailExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game, true);
         Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
 
         // If GO TO JAIL leaves the battlefield before its triggered ability resolves,
