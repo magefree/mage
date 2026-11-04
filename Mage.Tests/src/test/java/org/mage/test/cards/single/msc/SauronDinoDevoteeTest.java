@@ -10,111 +10,132 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * 105.3
+ * Effects may change an object’s color or give a color to a colorless object. If an effect gives an object a new
+ * color, the new color replaces all previous colors the object had (unless the effect said the object became that
+ * color “in addition” to its other colors). Effects may also make a colored object become colorless.
+ * <p>
+ * 205.1a
+ * ... Similarly, when an effect sets one or more of an object’s subtypes, the new subtype(s) replaces any existing
+ * subtypes from the appropriate set (creature types, land types, artifact types, enchantment types, planeswalker
+ * types, or spell types). ...
+ * <p>
+ * 613.4b
+ * Layer 7b: Effects that set power and/or toughness to a specific number or value are applied. Effects that refer to
+ * the base power and/or toughness of a creature apply in this layer.
+ * <p>
+ * 613.4c
+ * Layer 7c: Effects and counters that modify power and/or toughness (but don’t set power and/or toughness to a
+ * specific number or value) are applied.
+ *
  * @author DarioBarrabinoDev
  */
 public class SauronDinoDevoteeTest extends CardTestPlayerBase {
 
-    // Flying
-    // Whenever Sauron enters or attacks, choose one --
-    // * Cure Cancer -- You gain 3 life.
-    // * Turn People into Dinosaurs -- Put a saurian counter on another target creature. It's a green Dinosaur
-    //   with base power and toughness 5/5 for as long as it has a saurian counter on it.
-    private static final String sauron = "Sauron, Dino Devotee"; // 4/4
-    private static final String ornithopter = "Ornithopter"; // 0/2 colorless Thopter artifact creature with flying
-    private static final String hexmage = "Vampire Hexmage"; // Sacrifice: Remove all counters from target permanent.
-
     @Test
     public void test_EntersGainLife() {
-        setStrictChooseMode(true);
-
-        addCard(Zone.HAND, playerA, sauron);
+        // Whenever Sauron enters or attacks, choose one --
+        // * Cure Cancer -- You gain 3 life.
+        // * Turn People into Dinosaurs -- Put a saurian counter on another target creature. It's a green Dinosaur
+        // with base power and toughness 5/5 for as long as it has a saurian counter on it.
+        addCard(Zone.HAND, playerA, "Sauron, Dino Devotee"); // {3}{G}{G}, 4/4, flying
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, sauron);
-        setModeChoice(playerA, "1");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sauron, Dino Devotee");
+        setModeChoice(playerA, "1"); // Cure Cancer
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, sauron, 1);
+        assertPermanentCount(playerA, "Sauron, Dino Devotee", 1);
         assertLife(playerA, 20 + 3);
     }
 
     @Test
     public void test_AttacksSaurianCounter() {
+        // Whenever Sauron enters or attacks, choose one --
+        // * Cure Cancer -- You gain 3 life.
+        // * Turn People into Dinosaurs -- Put a saurian counter on another target creature. It's a green Dinosaur
+        // with base power and toughness 5/5 for as long as it has a saurian counter on it.
+        addCard(Zone.BATTLEFIELD, playerA, "Sauron, Dino Devotee"); // 4/4, flying
+        addCard(Zone.BATTLEFIELD, playerA, "Ornithopter"); // colorless Thopter artifact creature 0/2, flying
+        addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ornithopter", CounterType.P1P1, 1);
+
+        attack(1, playerA, "Sauron, Dino Devotee");
+        setModeChoice(playerA, "2"); // Turn People into Dinosaurs
+        addTarget(playerA, "Ornithopter"); // saurian counter target
+
         setStrictChooseMode(true);
-
-        addCard(Zone.BATTLEFIELD, playerA, sauron);
-        addCard(Zone.BATTLEFIELD, playerA, ornithopter);
-        addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerA, ornithopter, CounterType.P1P1, 1);
-
-        attack(1, playerA, sauron);
-        setModeChoice(playerA, "2");
-        addTarget(playerA, ornithopter);
-
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20 - 4);
-        assertCounterCount(ornithopter, CounterType.SAURIAN, 1);
-        assertColor(playerA, ornithopter, "G", true);
-        assertSubtype(ornithopter, SubType.DINOSAUR);
-        assertNotSubtype(ornithopter, SubType.THOPTER);
-        assertType(ornithopter, CardType.ARTIFACT, true);
-        assertAbility(playerA, ornithopter, FlyingAbility.getInstance(), true);
-        // base 5/5 plus the +1/+1 counter
-        assertPowerToughness(playerA, ornithopter, 5 + 1, 5 + 1);
+        assertCounterCount("Ornithopter", CounterType.SAURIAN, 1);
+        assertColor(playerA, "Ornithopter", "G", true);
+        assertSubtype("Ornithopter", SubType.DINOSAUR);
+        assertNotSubtype("Ornithopter", SubType.THOPTER); // creature types are replaced
+        assertType("Ornithopter", CardType.ARTIFACT, true); // card types stay
+        assertAbility(playerA, "Ornithopter", FlyingAbility.getInstance(), true); // abilities stay
+        assertPowerToughness(playerA, "Ornithopter", 5 + 1, 5 + 1); // base 5/5 plus the +1/+1 counter
     }
 
     @Test
     public void test_CounterRemoved() {
-        setStrictChooseMode(true);
+        // Whenever Sauron enters or attacks, choose one --
+        // * Cure Cancer -- You gain 3 life.
+        // * Turn People into Dinosaurs -- Put a saurian counter on another target creature. It's a green Dinosaur
+        // with base power and toughness 5/5 for as long as it has a saurian counter on it.
+        addCard(Zone.BATTLEFIELD, playerA, "Sauron, Dino Devotee"); // 4/4, flying
+        addCard(Zone.BATTLEFIELD, playerA, "Ornithopter"); // colorless Thopter artifact creature 0/2, flying
+        //
+        // Sacrifice Vampire Hexmage: Remove all counters from target permanent.
+        addCard(Zone.BATTLEFIELD, playerA, "Vampire Hexmage"); // 2/1
 
-        addCard(Zone.BATTLEFIELD, playerA, sauron);
-        addCard(Zone.BATTLEFIELD, playerA, ornithopter);
-        addCard(Zone.BATTLEFIELD, playerA, hexmage);
+        attack(1, playerA, "Sauron, Dino Devotee");
+        setModeChoice(playerA, "2"); // Turn People into Dinosaurs
+        addTarget(playerA, "Ornithopter"); // saurian counter target
 
-        attack(1, playerA, sauron);
-        setModeChoice(playerA, "2");
-        addTarget(playerA, ornithopter);
+        checkPT("dinosaur", 1, PhaseStep.END_COMBAT, playerA, "Ornithopter", 5, 5);
+        checkColor("dinosaur", 1, PhaseStep.END_COMBAT, playerA, "Ornithopter", "G", true);
+        checkSubType("dinosaur", 1, PhaseStep.END_COMBAT, playerA, "Ornithopter", SubType.DINOSAUR, true);
 
-        checkPT("dinosaur", 1, PhaseStep.END_COMBAT, playerA, ornithopter, 5, 5);
-        checkColor("dinosaur", 1, PhaseStep.END_COMBAT, playerA, ornithopter, "G", true);
-        checkSubType("dinosaur", 1, PhaseStep.END_COMBAT, playerA, ornithopter, SubType.DINOSAUR, true);
-
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sacrifice", ornithopter);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sacrifice", "Ornithopter"); // remove the saurian counter
         waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
 
         // the effect has ended, a new saurian counter doesn't bring it back
-        addCounters(1, PhaseStep.END_TURN, playerA, ornithopter, CounterType.SAURIAN, 1);
+        addCounters(1, PhaseStep.END_TURN, playerA, "Ornithopter", CounterType.SAURIAN, 1);
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.UPKEEP);
         execute();
 
-        assertCounterCount(ornithopter, CounterType.SAURIAN, 1);
-        assertColor(playerA, ornithopter, "G", false);
-        assertSubtype(ornithopter, SubType.THOPTER);
-        assertNotSubtype(ornithopter, SubType.DINOSAUR);
-        assertPowerToughness(playerA, ornithopter, 0, 2);
+        assertCounterCount("Ornithopter", CounterType.SAURIAN, 1);
+        assertColor(playerA, "Ornithopter", "G", false);
+        assertSubtype("Ornithopter", SubType.THOPTER);
+        assertNotSubtype("Ornithopter", SubType.DINOSAUR);
+        assertPowerToughness(playerA, "Ornithopter", 0, 2);
     }
 
     @Test
     public void test_CantTargetItself() {
+        // Whenever Sauron enters or attacks, choose one --
+        // * Cure Cancer -- You gain 3 life.
+        // * Turn People into Dinosaurs -- Put a saurian counter on another target creature. It's a green Dinosaur
+        // with base power and toughness 5/5 for as long as it has a saurian counter on it.
+        addCard(Zone.BATTLEFIELD, playerA, "Sauron, Dino Devotee"); // 4/4, flying
+
+        attack(1, playerA, "Sauron, Dino Devotee");
+        setModeChoice(playerA, "2"); // Turn People into Dinosaurs, Sauron is the only creature, so no legal target
+
         setStrictChooseMode(true);
-
-        addCard(Zone.BATTLEFIELD, playerA, sauron);
-
-        // Sauron is the only creature, so the second mode has no legal target
-        attack(1, playerA, sauron);
-        setModeChoice(playerA, "2");
-
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerB, 20 - 4);
-        assertCounterCount(sauron, CounterType.SAURIAN, 0);
-        assertSubtype(sauron, SubType.VAMPIRE);
-        assertPowerToughness(playerA, sauron, 4, 4);
+        assertCounterCount("Sauron, Dino Devotee", CounterType.SAURIAN, 0);
+        assertSubtype("Sauron, Dino Devotee", SubType.VAMPIRE);
+        assertPowerToughness(playerA, "Sauron, Dino Devotee", 4, 4);
     }
 }
