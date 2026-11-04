@@ -170,4 +170,79 @@ public class TeferisReproachTest extends CardTestMultiPlayerBase {
         assertGraveyardCount(playerC, "Lightning Bolt", 1); // fizzled, B has protection from everything
         assertExileCount(playerA, "Teferi's Reproach", 1);
     }
+
+    @Test
+    public void test_AttackingThatPlayer_CombatDamagePrevented() {
+        // Choose target opponent. Until that player's next turn, they gain protection from everything and their
+        // life total can't change. All nonland permanents they control phase out.
+        // Exile Teferi's Reproach.
+        addCard(Zone.HAND, playerA, "Teferi's Reproach"); // {2}{W}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        //
+        addCard(Zone.BATTLEFIELD, playerC, "Silvercoat Lion"); // lion 2/2
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Teferi's Reproach", playerB);
+
+        // turn 3 (C): B can still be attacked, but the combat damage is prevented
+        attack(3, playerC, "Silvercoat Lion", playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+
+        assertTapped("Silvercoat Lion", true); // attacked
+        assertLife(playerB, 20);
+    }
+
+    @Test
+    public void test_LifeGainHasNoEffect_RestOfSpellResolves() {
+        // Choose target opponent. Until that player's next turn, they gain protection from everything and their
+        // life total can't change. All nonland permanents they control phase out.
+        // Exile Teferi's Reproach.
+        addCard(Zone.HAND, playerA, "Teferi's Reproach"); // {2}{W}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        //
+        addCard(Zone.HAND, playerB, "Revitalize"); // {1}{W}, instant, you gain 3 life, draw a card
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Teferi's Reproach", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // turn 1 (A): B gains no life, but still draws
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Revitalize");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerB, "Revitalize", 1);
+        assertLife(playerB, 20);
+        assertHandCount(playerB, 1); // draw from Revitalize
+    }
+
+    @Test
+    public void test_AuraAttachedToThatPlayerFallsOff() {
+        // Choose target opponent. Until that player's next turn, they gain protection from everything and their
+        // life total can't change. All nonland permanents they control phase out.
+        // Exile Teferi's Reproach.
+        addCard(Zone.HAND, playerA, "Teferi's Reproach"); // {2}{W}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        //
+        addCard(Zone.HAND, playerA, "Curse of the Pierced Heart"); // {1}{R}, aura curse, enchant player
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of the Pierced Heart", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("curse on B", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of the Pierced Heart", 1);
+
+        // the curse is A's permanent, so it doesn't phase out, it goes to the graveyard as a state-based action
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Teferi's Reproach", playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Curse of the Pierced Heart", 0);
+        assertGraveyardCount(playerA, "Curse of the Pierced Heart", 1);
+    }
 }
