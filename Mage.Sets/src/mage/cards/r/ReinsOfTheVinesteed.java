@@ -17,6 +17,7 @@ import mage.filter.predicate.mageobject.SharesCreatureTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -90,7 +91,8 @@ class ReinsOfTheVinesteedEffect extends OneShotEffect {
                 if (!targetPermanent.cantBeAttachedBy(aura, source, game, false)) {
                     AttachEffect.setAttachTo(game, aura.getId(), targetPermanent);
                     controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
-                    return targetPermanent.addAttachment(aura.getId(), source, game);
+                    Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(aura, game);
+                    return attachment != null && targetPermanent.addAttachment(attachment.getId(), source, game);
                 }
             }
         }

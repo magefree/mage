@@ -20,6 +20,7 @@ import mage.filter.predicate.permanent.UnblockedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
@@ -105,7 +106,7 @@ class ZarethSanTheTricksterEffect extends OneShotEffect {
                 card, Zone.BATTLEFIELD, source, game, true,
                 false, true, null
         );
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent != null) {
             game.getCombat().addAttackingCreature(permanent.getId(), game);
         }

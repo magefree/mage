@@ -89,7 +89,10 @@ class CurseOfMisfortunesEffect extends OneShotEffect {
                         this.setTargetPointer(new FixedTarget(targetPlayer.getId()));
                         AttachEffect.setAttachTo(game, card.getId(), targetPlayer.getId());
                         if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                            targetPlayer.addAttachment(CardUtil.getDefaultCardSideForBattlefield(game, card).getId(), source, game);
+                            Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+                            if (attachment != null) {
+                                targetPlayer.addAttachment(attachment.getId(), source, game);
+                            }
                         }
                     }
                 }

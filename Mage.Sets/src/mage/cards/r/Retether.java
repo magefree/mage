@@ -122,7 +122,10 @@ class RetetherEffect extends OneShotEffect {
                 Card aura = entry.getKey();
                 Permanent permanent = entry.getValue();
                 if (aura != null && permanent != null) {
-                    permanent.addAttachment(CardUtil.getDefaultCardSideForBattlefield(game, aura).getId(), source, game);
+                    Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(aura, game);
+                    if (attachment != null) {
+                        permanent.addAttachment(attachment.getId(), source, game);
+                    }
                 }
             }
             return true;

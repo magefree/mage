@@ -15,6 +15,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Library;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -91,7 +92,10 @@ class RohirrimChargersEffect extends OneShotEffect {
             }
             player.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game);
             if (attachTarget != null) {
-                attachTarget.addAttachment(toBattlefield.getId(), source, game);
+                Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(toBattlefield, game);
+                if (attachment != null) {
+                    attachTarget.addAttachment(attachment.getId(), source, game);
+                }
             }
         }
         player.revealCards(source, cards, game);

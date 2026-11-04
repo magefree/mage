@@ -24,6 +24,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
@@ -137,7 +138,10 @@ class LyndeCheerfulTormentorReturnCurseEffect extends OneShotEffect {
         if (controller != null && curse != null) {
             AttachEffect.setAttachTo(game, curse.getId(), controller.getId());
             controller.moveCards(curse, Zone.BATTLEFIELD, source, game);
-            controller.addAttachment(curse.getId(), source, game);
+            Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(curse, game);
+            if (attachment != null) {
+                controller.addAttachment(attachment.getId(), source, game);
+            }
             return true;
         }
         return false;

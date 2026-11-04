@@ -93,7 +93,8 @@ class HolyAvengerEffect extends OneShotEffect {
         }
         AttachEffect.setAttachTo(game, card.getId(), permanent);
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        if (!permanent.addAttachment(CardUtil.getDefaultCardSideForBattlefield(game, card).getId(), source, game)) {
+        Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+        if (attachment == null || !permanent.addAttachment(attachment.getId(), source, game)) {
             return false;
         }
         game.informPlayers(player.getLogName() + " put " + card.getLogName()

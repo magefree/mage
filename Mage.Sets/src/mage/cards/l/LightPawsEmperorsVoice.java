@@ -127,7 +127,10 @@ class LightPawsEmperorsVoiceEffect extends OneShotEffect {
                 && new AuraCardCanAttachToPermanentId(permanent.getId()).apply(card, game)) {
             AttachEffect.setAttachTo(game, card.getId(), permanent);
             player.moveCards(card, Zone.BATTLEFIELD, source, game);
-            permanent.addAttachment(CardUtil.getDefaultCardSideForBattlefield(game, card).getId(), source, game);
+            Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+            if (attachment != null) {
+                permanent.addAttachment(attachment.getId(), source, game);
+            }
         }
         player.shuffleLibrary(source, game);
         return true;

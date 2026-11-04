@@ -112,7 +112,10 @@ class TakklemaggotEffect extends OneShotEffect {
             }
             AttachEffect.setAttachTo(game, auraCard.getId(), creature);
             controller.moveCards(auraCard, Zone.BATTLEFIELD, source, game);
-            creature.addAttachment(auraCard.getId(), source, game);
+            Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(auraCard, game);
+            if (attachment != null) {
+                creature.addAttachment(attachment.getId(), source, game);
+            }
         } else {
             // return as non-Aura enchantment
             game.addEffect(new TakklemaggotNonAuraEffect(player.getId()), source);

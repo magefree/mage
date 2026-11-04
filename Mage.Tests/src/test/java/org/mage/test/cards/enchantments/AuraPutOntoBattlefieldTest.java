@@ -589,6 +589,179 @@ public class AuraPutOntoBattlefieldTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_PutOntoBattlefieldAttached_ArachnusSpinner() {
+        // Tap an untapped Spider you control: Search your graveyard and/or library for a card named Arachnus Web and
+        // put it onto the battlefield attached to target creature. If you search your library this way, shuffle it.
+        addCard(Zone.BATTLEFIELD, playerA, "Arachnus Spinner"); // spider 5/7
+        //
+        addCard(Zone.GRAVEYARD, playerA, "Arachnus Web"); // aura, enchant creature, can't attack or block
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // bear 2/2
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tap an untapped Spider", "Grizzly Bears");
+        setChoice(playerA, "Arachnus Spinner"); // spider to tap
+        setChoice(playerA, true); // search graveyard
+        setChoice(playerA, "Arachnus Web"); // aura to put
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertAttachedTo(playerB, "Arachnus Web", "Grizzly Bears", true);
+    }
+
+    @Test
+    public void test_PutOntoBattlefieldAttached_DragonShadow() {
+        // When a creature with mana value 6 or greater enters, you may return Dragon Shadow from your graveyard
+        // to the battlefield attached to that creature.
+        addCard(Zone.GRAVEYARD, playerA, "Dragon Shadow"); // aura, enchant creature, +1/+0, fear
+        //
+        addCard(Zone.HAND, playerA, "Craw Wurm"); // {4}{G}{G}, 6/4
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Craw Wurm");
+        setChoice(playerA, true); // return the aura
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertAttachedTo(playerA, "Dragon Shadow", "Craw Wurm", true);
+        assertPowerToughness(playerA, "Craw Wurm", 6 + 1, 4);
+    }
+
+    @Test
+    public void test_PutOntoBattlefieldAttached_EaglesRescue() {
+        // {2}{W/U}{W/U}: Return this card from your graveyard to the battlefield attached to target creature you
+        // control with power 1 or less. Activate only as a sorcery.
+        addCard(Zone.GRAVEYARD, playerA, "Eagle's Rescue"); // aura, enchant creature, +2/+2, flying
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite"); // 1/1
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{W/U}{W/U}: Return", "Memnite");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertAttachedTo(playerA, "Eagle's Rescue", "Memnite", true);
+        assertPowerToughness(playerA, "Memnite", 1 + 2, 1 + 2);
+    }
+
+    @Test
+    public void test_PutOntoBattlefieldAttached_GryffsBoon() {
+        // {3}{W}: Return Gryff's Boon from your graveyard to the battlefield attached to target creature.
+        // Activate only as a sorcery.
+        addCard(Zone.GRAVEYARD, playerA, "Gryff's Boon"); // aura, enchant creature, +1/+0, flying
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{W}: Return", "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertAttachedTo(playerA, "Gryff's Boon", "Grizzly Bears", true);
+        assertPowerToughness(playerA, "Grizzly Bears", 2 + 1, 2);
+    }
+
+    @Test
+    public void test_PutOntoBattlefieldAttached_ReinsOfTheVinesteed() {
+        // When enchanted creature dies, you may return Reins of the Vinesteed from your graveyard to the battlefield
+        // attached to a creature that shares a creature type with that creature.
+        addCard(Zone.HAND, playerA, "Reins of the Vinesteed"); // {3}{G}, aura, enchant creature, +2/+2
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        //
+        addCustomEffect_TargetDestroy(playerA);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2
+        addCard(Zone.BATTLEFIELD, playerA, "Runeclaw Bear"); // bear 2/2
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reins of the Vinesteed", "Grizzly Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "target destroy", "Grizzly Bears");
+        setChoice(playerA, true); // return the aura
+        setChoice(playerA, "Runeclaw Bear"); // creature to enchant
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertAttachedTo(playerA, "Reins of the Vinesteed", "Runeclaw Bear", true);
+        assertPowerToughness(playerA, "Runeclaw Bear", 2 + 2, 2 + 2);
+    }
+
+    @Test
+    public void test_PutOntoBattlefieldAttached_TravelingPlague() {
+        // When enchanted creature leaves the battlefield, that creature's controller returns Traveling Plague from
+        // its owner's graveyard to the battlefield.
+        addCard(Zone.HAND, playerA, "Traveling Plague"); // {3}{B}{B}, aura, enchant creature
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+        //
+        addCustomEffect_TargetDestroy(playerA);
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // bear 2/2
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion"); // lion 2/2
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Traveling Plague", "Grizzly Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "target destroy", "Grizzly Bears");
+        setChoice(playerB, "Silvercoat Lion"); // creature to enchant
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertAttachedTo(playerB, "Traveling Plague", "Silvercoat Lion", true);
+    }
+
+    @Test
+    public void test_PutOntoBattlefieldAttachedToEquipment_RohirrimChargers() {
+        // You may exert Rohirrim Chargers as it attacks.
+        // Whenever you exert a creature, reveal cards from the top of your library until you reveal an Equipment
+        // card. Put that card onto the battlefield attached to that creature, then put the rest on the bottom of
+        // your library in a random order.
+        addCard(Zone.BATTLEFIELD, playerA, "Rohirrim Chargers"); // 4/4
+        //
+        addCard(Zone.LIBRARY, playerA, "Bonesplitter"); // equipment, +2/+0
+
+        attack(1, playerA, "Rohirrim Chargers");
+        setChoice(playerA, true); // exert
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertAttachedTo(playerA, "Bonesplitter", "Rohirrim Chargers", true);
+        assertPowerToughness(playerA, "Rohirrim Chargers", 4 + 2, 4);
+        assertLife(playerB, 20 - 4 - 2);
+    }
+
+    @Test
+    public void test_PutOntoBattlefieldAttachedToEquipment_RunedCrown() {
+        // When Runed Crown enters, you may search your library, hand, and/or graveyard for a Rune card and put it
+        // onto the battlefield attached to Runed Crown. If you search your library this way, shuffle it.
+        addCard(Zone.HAND, playerA, "Runed Crown"); // {3}, equipment
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 3);
+        //
+        addCard(Zone.HAND, playerA, "Rune of Might"); // aura, enchant permanent, draw a card on enters
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Runed Crown");
+        setChoice(playerA, false); // search graveyard
+        setChoice(playerA, true); // search hand
+        setChoice(playerA, "Rune of Might"); // rune to put
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertAttachedTo(playerA, "Rune of Might", "Runed Crown", true);
+        assertHandCount(playerA, 1);
+    }
+
+    @Test
     public void test_PutOntoBattlefieldAttachedToPlayer_BitterheartWitch() {
         // When Bitterheart Witch dies, you may search your library for a Curse card, put it onto the battlefield
         // attached to target player, then shuffle.
@@ -693,5 +866,73 @@ public class AuraPutOntoBattlefieldTest extends CardTestPlayerBase {
 
         Assert.assertEquals("must be attached to the player", playerB.getId(), getPermanent("Infectious Curse").getAttachedTo());
         Assert.assertTrue("player must be enchanted", playerB.getAttachments().contains(getPermanent("Infectious Curse").getId()));
+    }
+
+    @Test
+    public void test_PutOntoBattlefieldTransformedAttachedToPlayer_RadiantGrace() {
+        // When enchanted creature dies, return Radiant Grace to the battlefield transformed under your control
+        // attached to target opponent.
+        addCard(Zone.HAND, playerA, "Radiant Grace"); // {W}, aura, back face is curse Radiant Restraints, enchant player
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        //
+        addCustomEffect_TargetDestroy(playerA);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion"); // lion 2/2
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Radiant Grace", "Grizzly Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "target destroy", "Grizzly Bears");
+        addTarget(playerA, playerB); // opponent for the curse
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        Assert.assertEquals("must be attached to the player", playerB.getId(), getPermanent("Radiant Restraints").getAttachedTo());
+        Assert.assertTrue("player must be enchanted", playerB.getAttachments().contains(getPermanent("Radiant Restraints").getId()));
+    }
+
+    @Test
+    public void test_PutOntoBattlefieldTransformedAttachedToPlayerWithoutCreatures_RadiantGrace() {
+        // When enchanted creature dies, return Radiant Grace to the battlefield transformed under your control
+        // attached to target opponent.
+        addCard(Zone.HAND, playerA, "Radiant Grace"); // {W}, aura, back face is curse Radiant Restraints, enchant player
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        //
+        addCustomEffect_TargetDestroy(playerA);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Radiant Grace", "Grizzly Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "target destroy", "Grizzly Bears");
+        addTarget(playerA, playerB); // opponent for the curse
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        Assert.assertEquals("must be attached to the player", playerB.getId(), getPermanent("Radiant Restraints").getAttachedTo());
+        Assert.assertTrue("player must be enchanted", playerB.getAttachments().contains(getPermanent("Radiant Restraints").getId()));
+    }
+
+    @Test
+    public void test_PutOntoBattlefieldTransformedAttached_VengefulStrangler() {
+        // When Vengeful Strangler dies, return it to the battlefield transformed under your control attached to
+        // target creature or planeswalker an opponent controls.
+        addCard(Zone.BATTLEFIELD, playerA, "Vengeful Strangler"); // 2/1, back face is aura Strangling Grasp
+        //
+        addCustomEffect_TargetDestroy(playerA);
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // bear 2/2
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "target destroy", "Vengeful Strangler");
+        addTarget(playerA, "Grizzly Bears"); // creature for the aura
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertAttachedTo(playerB, "Strangling Grasp", "Grizzly Bears", true);
     }
 }

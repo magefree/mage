@@ -92,7 +92,8 @@ class IridescentDrakeEffect extends OneShotEffect {
             if (target != null) {
                 AttachEffect.setAttachTo(game, targetAuraCard.getId(), permanent);
                 controller.moveCards(targetAuraCard, Zone.BATTLEFIELD, source, game);
-                return permanent.addAttachment(CardUtil.getDefaultCardSideForBattlefield(game, targetAuraCard).getId(), source, game);
+                Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(targetAuraCard, game);
+                return attachment != null && permanent.addAttachment(attachment.getId(), source, game);
             }
         }
         return false;

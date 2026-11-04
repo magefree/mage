@@ -119,7 +119,12 @@ class MantleOfTheAncientsEffect extends OneShotEffect {
 
         cards.forEach(card -> AttachEffect.setAttachTo(game, card.getId(), permanent));
         player.moveCards(cards, Zone.BATTLEFIELD, source, game);
-        cards.forEach(card -> permanent.addAttachment(CardUtil.getDefaultCardSideForBattlefield(game, card).getId(), source, game));
+        for (Card card : cards) {
+            Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+            if (attachment != null) {
+                permanent.addAttachment(attachment.getId(), source, game);
+            }
+        }
         return true;
     }
 }

@@ -18,6 +18,7 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -126,7 +127,8 @@ class RunedCrownEffect extends OneShotEffect {
         }
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
         if (permanent != null) {
-            return permanent.addAttachment(card.getId(), source, game);
+            Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+            return attachment != null && permanent.addAttachment(attachment.getId(), source, game);
         }
         return true;
     }

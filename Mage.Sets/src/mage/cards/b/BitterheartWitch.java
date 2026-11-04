@@ -17,6 +17,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
@@ -82,7 +83,10 @@ class BitterheartWitchEffect extends OneShotEffect {
                 if (card != null) {
                     AttachEffect.setAttachTo(game, card.getId(), targetPlayer.getId());
                     if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                        targetPlayer.addAttachment(CardUtil.getDefaultCardSideForBattlefield(game, card).getId(), source, game);
+                        Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+                        if (attachment != null) {
+                            targetPlayer.addAttachment(attachment.getId(), source, game);
+                        }
                     }
                 }
             }

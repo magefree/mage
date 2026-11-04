@@ -130,7 +130,10 @@ class ForumFilibusterAttachEffect extends OneShotEffect {
         if (!tokenPermanent.cantBeAttachedBy(card, source, game, true)) {
             AttachEffect.setAttachTo(game, card.getId(), tokenPermanent);
             controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-            tokenPermanent.addAttachment(CardUtil.getDefaultCardSideForBattlefield(game, card).getId(), source, game);
+            Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+            if (attachment != null) {
+                tokenPermanent.addAttachment(attachment.getId(), source, game);
+            }
         }
         return true;
     }

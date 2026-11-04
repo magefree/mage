@@ -59,7 +59,10 @@ class ReturnSourceAttachedToItEffect extends OneShotEffect {
         if (sourceCard != null && permanent != null && controller != null) {
             AttachEffect.setAttachTo(game, sourceCard.getId(), permanent);
             if (controller.moveCards(sourceCard, Zone.BATTLEFIELD, source, game)) {
-                permanent.addAttachment(sourceCard.getId(), source, game);
+                Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(sourceCard, game);
+                if (attachment != null) {
+                    permanent.addAttachment(attachment.getId(), source, game);
+                }
             }
             return true;
         }

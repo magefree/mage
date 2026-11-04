@@ -107,7 +107,8 @@ class HakimLoreweaverEffect extends OneShotEffect {
             if (target != null) {
                 AttachEffect.setAttachTo(game, targetAuraCard.getId(), hakimLoreweaver);
                 controller.moveCards(targetAuraCard, Zone.BATTLEFIELD, source, game);
-                return hakimLoreweaver.addAttachment(CardUtil.getDefaultCardSideForBattlefield(game, targetAuraCard).getId(), source, game);
+                Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(targetAuraCard, game);
+                return attachment != null && hakimLoreweaver.addAttachment(attachment.getId(), source, game);
             }
         }
         return false;

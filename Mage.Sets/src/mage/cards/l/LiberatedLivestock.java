@@ -92,7 +92,10 @@ class LiberatedLivestockEffect extends OneShotEffect {
             if (auraCard != null && !tokenPermanent.cantBeAttachedBy(auraCard, source, game, true)) {
                 AttachEffect.setAttachTo(game, auraCard.getId(), tokenPermanent);
                 controller.moveCards(auraCard, Zone.BATTLEFIELD, source, game);
-                tokenPermanent.addAttachment(CardUtil.getDefaultCardSideForBattlefield(game, auraCard).getId(), source, game);
+                Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(auraCard, game);
+                if (attachment != null) {
+                    tokenPermanent.addAttachment(attachment.getId(), source, game);
+                }
             }
         }
         return true;

@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.cards.Card;
+import mage.cards.DoubleFacedCardHalf;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.game.Game;
@@ -222,9 +223,12 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
 
         // as transformed (dfc)
         Card enteringCard;
-        if (Boolean.TRUE.equals(game.getState().getValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId() + card.getZoneChangeCounter(game)))
-                && card.getSecondCardFace() != null) {
-            // transformable enchantments
+        boolean enterTransformed = Boolean.TRUE.equals(game.getState().getValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId() + card.getZoneChangeCounter(game)));
+        if (enterTransformed && card instanceof DoubleFacedCardHalf) {
+            // side of a transformable card enters with its back face up, same as in ZonesHandler
+            enteringCard = ((DoubleFacedCardHalf) card).isBackSide() ? card : ((DoubleFacedCardHalf) card).getOtherSide();
+        } else if (enterTransformed && card.getSecondCardFace() != null) {
+            // main card of a transformable card
             enteringCard = card.getSecondCardFace();
         } else {
             // double faced cards: a main card has no own characteristics, must check the side that enters the battlefield

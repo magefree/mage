@@ -18,6 +18,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
@@ -114,7 +115,8 @@ class NecroticPlagueEffect extends OneShotEffect {
                 if (sourceEnchantmentCard != null && creature != null) {
                     AttachEffect.setAttachTo(game, sourceEnchantmentCard.getId(), creature);
                     creatureController.moveCards(sourceEnchantmentCard, Zone.BATTLEFIELD, source, game);
-                    return creature.addAttachment(sourceEnchantmentCard.getId(), source, game);
+                    Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(sourceEnchantmentCard, game);
+                    return attachment != null && creature.addAttachment(attachment.getId(), source, game);
                 }
             }
         }

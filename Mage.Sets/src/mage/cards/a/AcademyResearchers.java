@@ -80,7 +80,8 @@ class AcademyResearchersEffect extends OneShotEffect {
                 if (auraInHand != null) {
                     AttachEffect.setAttachTo(game, auraInHand.getId(), academyResearchers);
                     controller.moveCards(auraInHand, Zone.BATTLEFIELD, source, game);
-                    if (academyResearchers.addAttachment(CardUtil.getDefaultCardSideForBattlefield(game, auraInHand).getId(), source, game)) {
+                    Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(auraInHand, game);
+                    if (attachment != null && academyResearchers.addAttachment(attachment.getId(), source, game)) {
                         game.informPlayers(controller.getLogName() + " put " + auraInHand.getLogName() + " on the battlefield attached to " + academyResearchers.getLogName() + '.');
                         return true;
                     }

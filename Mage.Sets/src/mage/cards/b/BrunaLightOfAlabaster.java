@@ -197,7 +197,10 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
 
             AttachEffect.setAttachTo(game, aura.getId(), sourcePermanent);
             controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
-            sourcePermanent.addAttachment(CardUtil.getDefaultCardSideForBattlefield(game, aura).getId(), source, game);
+            Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(aura, game);
+            if (attachment != null) {
+                sourcePermanent.addAttachment(attachment.getId(), source, game);
+            }
         }
         return true;
     }

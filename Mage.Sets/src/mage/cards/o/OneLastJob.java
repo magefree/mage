@@ -122,7 +122,10 @@ class OneLastJobEffect extends OneShotEffect {
             );
             AttachEffect.setAttachTo(game, cardToReturn.getId(), permanent);
             controller.moveCards(cardToReturn, Zone.BATTLEFIELD, source, game);
-            permanent.addAttachment(CardUtil.getDefaultCardSideForBattlefield(game, cardToReturn).getId(), source, game);
+            Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(cardToReturn, game);
+            if (attachment != null) {
+                permanent.addAttachment(attachment.getId(), source, game);
+            }
             return true;
         }
 
