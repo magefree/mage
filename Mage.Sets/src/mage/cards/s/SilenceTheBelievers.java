@@ -5,6 +5,8 @@ import mage.abilities.abilityword.StriveAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -14,8 +16,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 
@@ -66,19 +66,21 @@ class SilenceTheBelieversExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
+            // creatures and their auras must be exiled at the same time
+            Cards toExile = new CardsImpl();
             for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
                 Permanent creature = game.getPermanent(targetId);
                 if (creature != null) {
-                    List<UUID> attachments = new ArrayList<>(creature.getAttachments());
-                    for (UUID attachmentId : attachments) {
+                    toExile.add(creature);
+                    for (UUID attachmentId : creature.getAttachments()) {
                         Permanent attachment = game.getPermanent(attachmentId);
                         if (attachment != null && attachment.hasSubtype(SubType.AURA, game)) {
-                            controller.moveCardToExileWithInfo(attachment, null, null, source, game, Zone.BATTLEFIELD, true);
+                            toExile.add(attachment);
                         }
                     }
-                    controller.moveCardToExileWithInfo(creature, null, null, source, game, Zone.BATTLEFIELD, true);
                 }
             }
+            controller.moveCards(toExile, Zone.EXILED, source, game);
             return true;
         }
         return false;
