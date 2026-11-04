@@ -4,6 +4,7 @@ import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.FreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
@@ -219,5 +220,96 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 30 - 12);
         assertLife(playerC, 20);
+    }
+
+    @Test
+    public void test_MustAttackOpponentWithMostLife_LifeChangesBeforeCombat() {
+        setStrictChooseMode(true);
+
+        // Insatiable Hunger -- Galactus attacks an opponent with the most life among your opponents each combat if able
+        // unless you control a creature named Silver Surfer, Galactus's Herald.
+        addCard(Zone.BATTLEFIELD, playerD, "Galactus, Devourer of Worlds"); // 12/12, flying, trample, indestructible
+        addCard(Zone.HAND, playerD, "Lightning Bolt"); // {R}, 3 damage to any target
+        addCard(Zone.BATTLEFIELD, playerD, "Mountain");
+        setLife(playerB, 30);
+        setLife(playerC, 28);
+
+        // most life is checked on declare attackers, so after the bolt it's playerC
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Lightning Bolt", playerB);
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 30 - 3);
+        assertLife(playerC, 28 - 12);
+    }
+
+    @Test
+    public void test_SilverSurferLeavesBeforeCombat_ForcedToAttack() {
+        setStrictChooseMode(true);
+
+        // Insatiable Hunger -- Galactus attacks an opponent with the most life among your opponents each combat if able
+        // unless you control a creature named Silver Surfer, Galactus's Herald.
+        addCard(Zone.BATTLEFIELD, playerD, "Galactus, Devourer of Worlds"); // 12/12, flying, trample, indestructible
+        addCard(Zone.BATTLEFIELD, playerD, "Silver Surfer, Galactus's Herald"); // 4/5, flying
+        addCard(Zone.HAND, playerD, "Murder"); // {1}{B}{B}, destroy target creature
+        addCard(Zone.BATTLEFIELD, playerD, "Swamp", 3);
+        setLife(playerB, 30);
+
+        // without Silver Surfer the requirement applies again in the same turn
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Murder", "Silver Surfer, Galactus's Herald");
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerD, "Silver Surfer, Galactus's Herald", 1);
+        assertLife(playerA, 20);
+        assertLife(playerB, 30 - 12);
+        assertLife(playerC, 20);
+    }
+
+    @Test
+    public void test_MustAttackOpponentWithMostLife_NotTheirPlaneswalker() {
+        setStrictChooseMode(true);
+
+        // Insatiable Hunger -- Galactus attacks an opponent with the most life among your opponents each combat if able
+        // unless you control a creature named Silver Surfer, Galactus's Herald.
+        addCard(Zone.BATTLEFIELD, playerD, "Galactus, Devourer of Worlds"); // 12/12, flying, trample, indestructible
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Ajani Goldmane"); // planeswalker, loyalty 4
+        setLife(playerB, 30);
+
+        // Galactus must attack the opponent, so playerB's planeswalker isn't a valid choice
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 30 - 12);
+        assertLife(playerC, 20);
+        assertCounterCount(playerB, "Ajani Goldmane", CounterType.LOYALTY, 4);
+    }
+
+    @Test
+    public void test_MustAttackOpponentWithMostLife_OpponentLeftTheGame() {
+        setStrictChooseMode(true);
+
+        // Insatiable Hunger -- Galactus attacks an opponent with the most life among your opponents each combat if able
+        // unless you control a creature named Silver Surfer, Galactus's Herald.
+        addCard(Zone.BATTLEFIELD, playerD, "Galactus, Devourer of Worlds"); // 12/12, flying, trample, indestructible
+        setLife(playerB, 30);
+
+        // playerB had the most life but left the game, so playerA and playerC are tied
+        concede(1, PhaseStep.POSTCOMBAT_MAIN, playerB);
+        checkPlayerInGame("playerB left", 2, PhaseStep.PRECOMBAT_MAIN, playerD, playerB, false);
+
+        addTarget(playerD, playerC); // tied for most life, any of them can be attacked
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerC, 20 - 12);
     }
 }
