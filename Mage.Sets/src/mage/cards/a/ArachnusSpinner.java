@@ -6,6 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -21,6 +22,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.target.common.*;
 
 /**
@@ -108,9 +110,12 @@ class ArachnusSpinnerEffect extends OneShotEffect {
         if (card != null) {
             Permanent permanent = game.getPermanent(source.getFirstTarget());
             if (permanent != null) {
-                game.getState().setValue("attachTo:" + card.getId(), permanent.getId());
+                AttachEffect.setAttachTo(game, card.getId(), permanent);
                 if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                    permanent.addAttachment(card.getId(), source, game); // shouldn't this be done automatically by the logic using the "attachTo:" calue?
+                    Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+                    if (attachment != null) {
+                        permanent.addAttachment(attachment.getId(), source, game);
+                    }
                 }
             }
         }

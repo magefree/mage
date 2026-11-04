@@ -16,6 +16,7 @@ import mage.filter.predicate.permanent.CanBeEnchantedByPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.RandomUtil;
@@ -99,9 +100,10 @@ class InfectiousRageReattachEffect extends OneShotEffect {
         if (creature == null) {
             return false;
         }
-        game.getState().setValue("attachTo:" + auraCard.getId(), creature);
+        AttachEffect.setAttachTo(game, auraCard.getId(), creature);
         controller.moveCards(auraCard, Zone.BATTLEFIELD, source, game);
-        return creature.addAttachment(auraCard.getId(), source, game);
+        Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(auraCard, game);
+        return attachment != null && creature.addAttachment(attachment.getId(), source, game);
 
     }
 

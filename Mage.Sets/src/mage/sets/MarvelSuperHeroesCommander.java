@@ -250,6 +250,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fleecemane Lion", 282, Rarity.RARE, mage.cards.f.FleecemaneLion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fleecemane Lion", 423, Rarity.RARE, mage.cards.f.FleecemaneLion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Flora Colossus", 561, Rarity.RARE, mage.cards.f.FloraColossus.class));
+        cards.add(new SetCardInfo("Flying Drone", 621, Rarity.COMMON, mage.cards.f.FlyingDrone.class));
         cards.add(new SetCardInfo("Flying Octobot", 785, Rarity.UNCOMMON, mage.cards.f.FlyingOctobot.class));
         cards.add(new SetCardInfo("Foggy Nelson, On Retainer", 594, Rarity.UNCOMMON, mage.cards.f.FoggyNelsonOnRetainer.class));
         cards.add(new SetCardInfo("Fogwell's Gym", 754, Rarity.UNCOMMON, mage.cards.f.FogwellsGym.class));
@@ -436,6 +437,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Mist-Cloaked Herald", 760, Rarity.COMMON, mage.cards.m.MistCloakedHerald.class));
         cards.add(new SetCardInfo("Mister Fantastic", 2, Rarity.MYTHIC, mage.cards.m.MisterFantastic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mister Fantastic", 876, Rarity.MYTHIC, mage.cards.m.MisterFantastic.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mister Immortal", 727, Rarity.RARE, mage.cards.m.MisterImmortal.class));
         cards.add(new SetCardInfo("Mjolnir's Might", 697, Rarity.COMMON, mage.cards.m.MjolnirsMight.class));
         cards.add(new SetCardInfo("Mob Lookout", 821, Rarity.COMMON, mage.cards.m.MobLookout.class));
         cards.add(new SetCardInfo("Mockingbird, Bobbi Morse", 522, Rarity.COMMON, mage.cards.m.MockingbirdBobbiMorse.class, NON_FULL_USE_VARIOUS));

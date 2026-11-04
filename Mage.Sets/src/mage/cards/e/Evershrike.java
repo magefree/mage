@@ -8,6 +8,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.AuraAttachedCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -82,7 +83,7 @@ class EvershrikeEffect extends OneShotEffect {
         }
         int xAmount = CardUtil.getSourceCostsTag(game, source, "X", 0);
         controller.moveCards(evershrikeCard, Zone.BATTLEFIELD, source, game);
-        Permanent evershrikePermanent = game.getPermanent(evershrikeCard.getId());
+        Permanent evershrikePermanent = CardUtil.getPermanentFromCardPutToBattlefield(evershrikeCard, game);
         if (evershrikePermanent == null) {
             if (game.getState().getZone(evershrikeCard.getId()) != Zone.EXILED) {
                 controller.moveCards(evershrikeCard, Zone.EXILED, source, game);
@@ -101,9 +102,12 @@ class EvershrikeEffect extends OneShotEffect {
             if (controller.choose(Outcome.Benefit, controller.getHand(), targetAura, source, game)) {
                 Card aura = game.getCard(targetAura.getFirstTarget());
                 if (aura != null) {
-                    game.getState().setValue("attachTo:" + aura.getId(), evershrikePermanent);
+                    AttachEffect.setAttachTo(game, aura.getId(), evershrikePermanent);
                     if (controller.moveCards(aura, Zone.BATTLEFIELD, source, game)) {
-                        evershrikePermanent.addAttachment(aura.getId(), source, game);
+                        Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(aura, game);
+                        if (attachment != null) {
+                            evershrikePermanent.addAttachment(attachment.getId(), source, game);
+                        }
                     }
                     exileSource = false;
                 }

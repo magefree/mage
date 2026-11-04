@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -15,6 +16,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 
 /**
  * @author Mael
@@ -74,9 +76,12 @@ class AuraSwapEffect extends OneShotEffect {
                 if (controller.choose(Outcome.PutCardInPlay, target, source, game)) {
                     Card auraInHand = game.getCard(target.getFirstTarget());
                     if (auraInHand != null) {
-                        game.getState().setValue("attachTo:" + auraInHand.getId(), enchantedPermanent);
+                        AttachEffect.setAttachTo(game, auraInHand.getId(), enchantedPermanent);
                         controller.moveCards(auraInHand, Zone.BATTLEFIELD, source, game);
-                        enchantedPermanent.addAttachment(auraInHand.getId(), source, game);
+                        Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(auraInHand, game);
+                        if (attachment != null) {
+                            enchantedPermanent.addAttachment(attachment.getId(), source, game);
+                        }
                         game.informPlayers(controller.getLogName() + " put " + auraInHand.getLogName() + " on the battlefield attached to " + enchantedPermanent.getLogName() + '.');
                         enchantedPermanent.removeAttachment(auraSourcePermanent.getId(), source, game);
                         return controller.moveCards(auraSourcePermanent, Zone.HAND, source, game);
