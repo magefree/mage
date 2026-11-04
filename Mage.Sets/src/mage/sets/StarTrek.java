@@ -441,6 +441,9 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Worf, Honor-Bound Warrior", 435, Rarity.UNCOMMON, mage.cards.w.WorfHonorBoundWarrior.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Worf, Honor-Bound Warrior", 445, Rarity.UNCOMMON, mage.cards.w.WorfHonorBoundWarrior.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Worf, Honor-Bound Warrior", 524, Rarity.UNCOMMON, mage.cards.w.WorfHonorBoundWarrior.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Worf, Intelligence Contractor", 180, Rarity.RARE, mage.cards.w.WorfIntelligenceContractor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Worf, Intelligence Contractor", 431, Rarity.RARE, mage.cards.w.WorfIntelligenceContractor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Worf, Intelligence Contractor", 441, Rarity.RARE, mage.cards.w.WorfIntelligenceContractor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Xenobotanist", 224, Rarity.COMMON, mage.cards.x.Xenobotanist.class));
         cards.add(new SetCardInfo("Xindi Surveyors", 225, Rarity.COMMON, mage.cards.x.XindiSurveyors.class));
         cards.add(new SetCardInfo("Year of Hell", 257, Rarity.RARE, mage.cards.y.YearOfHell.class));
