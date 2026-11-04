@@ -101,11 +101,11 @@ public class AttackRequirementTest extends CardTestPlayerBase {
 
         // {T}: Target creature an opponent controls attacks you this turn if able.
         addCard(Zone.BATTLEFIELD, playerA, "Alluring Siren");
-        // Loyalty 4
-        addCard(Zone.BATTLEFIELD, playerA, "Ajani Goldmane");
-        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // 2/2
+        addCard(Zone.BATTLEFIELD, playerA, "Ajani Goldmane"); // planeswalker, loyalty 4
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // bear 2/2
 
-        activateAbility(2, PhaseStep.UPKEEP, playerA, "{T}: Target creature an opponent controls attacks you this turn if able.", "Grizzly Bears");
+        activateAbility(2, PhaseStep.UPKEEP, playerA, "{T}: Target creature an opponent controls attacks you this turn if able.", "Grizzly Bears"); // bear must attack playerA
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -122,11 +122,11 @@ public class AttackRequirementTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Alluring Siren");
         // Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you.
         addCard(Zone.BATTLEFIELD, playerA, "Propaganda");
-        // Loyalty 4
-        addCard(Zone.BATTLEFIELD, playerA, "Ajani Goldmane");
-        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // 2/2
+        addCard(Zone.BATTLEFIELD, playerA, "Ajani Goldmane"); // planeswalker, loyalty 4
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // bear 2/2
 
-        activateAbility(2, PhaseStep.UPKEEP, playerA, "{T}: Target creature an opponent controls attacks you this turn if able.", "Grizzly Bears");
+        activateAbility(2, PhaseStep.UPKEEP, playerA, "{T}: Target creature an opponent controls attacks you this turn if able.", "Grizzly Bears"); // bear must attack playerA
 
         // attacking playerA has a cost, so the requirement can't be obeyed and the bears don't have to attack Ajani instead
 
