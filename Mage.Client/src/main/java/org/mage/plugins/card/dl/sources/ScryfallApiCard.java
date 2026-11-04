@@ -181,8 +181,8 @@ public class ScryfallApiCard {
     	// - thumb
         // - normal (deprecated)
     	// - grid
-        // - large
-    	// - display (deprecated)
+        // - large (deprecated)
+    	// - display
         // - png
         // - art_crop
         // - border_crop
