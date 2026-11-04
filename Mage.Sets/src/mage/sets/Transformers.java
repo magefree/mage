@@ -42,8 +42,8 @@ public final class Transformers extends ExpansionSet {
         cards.add(new SetCardInfo("Ratchet, Field Medic", 17, Rarity.MYTHIC, mage.cards.r.RatchetFieldMedic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Slicer, Hired Muscle", 6, Rarity.MYTHIC, mage.cards.s.SlicerHiredMuscle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Slicer, Hired Muscle", 21, Rarity.MYTHIC, mage.cards.s.SlicerHiredMuscle.class, NON_FULL_USE_VARIOUS));
-        // cards.add(new SetCardInfo("Soundwave, Sonic Spy", 14, Rarity.MYTHIC, mage.cards.s.SoundwaveSonicSpy.class, NON_FULL_USE_VARIOUS));
-        // cards.add(new SetCardInfo("Soundwave, Sonic Spy", 28, Rarity.MYTHIC, mage.cards.s.SoundwaveSonicSpy.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Soundwave, Sonic Spy", 14, Rarity.MYTHIC, mage.cards.s.SoundwaveSonicSpy.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Soundwave, Sonic Spy", 28, Rarity.MYTHIC, mage.cards.s.SoundwaveSonicSpy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Starscream, Power Hungry", 5, Rarity.MYTHIC, mage.cards.s.StarscreamPowerHungry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Starscream, Power Hungry", 20, Rarity.MYTHIC, mage.cards.s.StarscreamPowerHungry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultra Magnus, Tactician", 15, Rarity.MYTHIC, mage.cards.u.UltraMagnusTactician.class, NON_FULL_USE_VARIOUS));

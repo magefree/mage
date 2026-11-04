@@ -1990,6 +1990,10 @@
 |TOK:BRC|Servo||ServoToken|
 |TOK:BRC|Thopter||ThopterToken|
 
+# BOT
+|TOK:BOT|Laserbeak||LaserbeakToken|
+|TOK:BOT|Ravage||RavageToken|
+
 # DMR
 |TOK:DMR|Bird||BirdToken|
 |TOK:DMR|Cat|1|PenumbraBobcatToken|
