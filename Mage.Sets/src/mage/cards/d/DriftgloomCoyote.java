@@ -3,19 +3,17 @@ package mage.cards.d;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.TargetObjectMatchesFilterCondition;
+import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
 import java.util.UUID;
@@ -24,12 +22,6 @@ import java.util.UUID;
  * @author notgreat
  */
 public final class DriftgloomCoyote extends CardImpl {
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creature with power 2 or less");
-
-    static {
-        filter.add(new PowerPredicate(ComparisonType.OR_LESS, 2));
-    }
-
     public DriftgloomCoyote(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
 
@@ -42,7 +34,7 @@ public final class DriftgloomCoyote extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         ability.addEffect(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                new TargetObjectMatchesFilterCondition("that creature had power 2 or less", filter)));
+                DriftgloomCoyoteCondition.instance));
         this.addAbility(ability);
     }
 
@@ -53,5 +45,21 @@ public final class DriftgloomCoyote extends CardImpl {
     @Override
     public DriftgloomCoyote copy() {
         return new DriftgloomCoyote(this);
+    }
+}
+
+enum DriftgloomCoyoteCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        // the creature is already exiled, so it needs last known information
+        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
+        return permanent != null && permanent.getPower().getValue() <= 2;
+    }
+
+    @Override
+    public String toString() {
+        return "that creature had power 2 or less";
     }
 }

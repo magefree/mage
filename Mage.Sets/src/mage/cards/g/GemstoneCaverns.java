@@ -29,6 +29,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -129,7 +130,7 @@ class GemstoneCavernsEffect extends OneShotEffect {
                 effect.setDuration(Duration.OneUse);
                 game.addEffect(effect, source);
                 if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                    Permanent permanent = game.getPermanent(card.getId());
+                    Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                     if (permanent != null) {
                         Cost cost = new ExileFromHandCost(new TargetCardInHand());
                         if (cost.canPay(source, source, source.getControllerId(), game)) {

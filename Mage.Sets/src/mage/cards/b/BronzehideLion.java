@@ -91,7 +91,7 @@ class BronzehideLionReturnEffect extends OneShotEffect {
         target.withNotTarget(true);
         if (controller.choose(outcome, target, source, game)
                 && game.getPermanent(target.getFirstTarget()) != null) {
-            game.getState().setValue("attachTo:" + source.getSourceId(), target.getFirstTarget());
+            AttachEffect.setAttachTo(game, source.getSourceId(), target.getFirstTarget());
         }
         game.addEffect(new BronzehideLionContinuousEffect(game.getState().getZoneChangeCounter(source.getSourceId()) + 1), source);
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);

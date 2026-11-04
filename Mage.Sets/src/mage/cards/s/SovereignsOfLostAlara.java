@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAloneControlledTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -18,6 +19,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -74,9 +76,12 @@ class SovereignsOfLostAlaraEffect extends OneShotEffect {
             if (controller.searchLibrary(target, source, game)) {
                 if (target.getFirstTarget() != null) {
                     Card aura = game.getCard(target.getFirstTarget());
-                    game.getState().setValue("attachTo:" + aura.getId(), attackingCreature);
+                    AttachEffect.setAttachTo(game, aura.getId(), attackingCreature);
                     controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
-                    attackingCreature.addAttachment(aura.getId(), source, game);
+                    Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(aura, game);
+                    if (attachment != null) {
+                        attackingCreature.addAttachment(attachment.getId(), source, game);
+                    }
                 }
             }
             controller.shuffleLibrary(source, game);

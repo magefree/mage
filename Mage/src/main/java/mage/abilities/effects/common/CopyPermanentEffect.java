@@ -158,7 +158,7 @@ public class CopyPermanentEffect extends OneShotEffect {
         // select new target
         auraTarget.withNotTarget(true);
 
-        UUID targetId = (UUID) game.getState().getValue("attachTo:" + sourcePermanent.getId());
+        UUID targetId = (UUID) AttachEffect.pollAttachTo(game, sourcePermanent.getId());
         if (targetId == null) {
             if (!controller.choose(auraOutcome, auraTarget, source, game)) {
                 return true;

@@ -6,6 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,6 +20,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 
 /**
  *
@@ -76,9 +78,10 @@ class AcademyResearchersEffect extends OneShotEffect {
             if (controller.choose(Outcome.PutCardInPlay, target, source, game)) {
                 Card auraInHand = game.getCard(target.getFirstTarget());
                 if (auraInHand != null) {
-                    game.getState().setValue("attachTo:" + auraInHand.getId(), academyResearchers);
+                    AttachEffect.setAttachTo(game, auraInHand.getId(), academyResearchers);
                     controller.moveCards(auraInHand, Zone.BATTLEFIELD, source, game);
-                    if (academyResearchers.addAttachment(auraInHand.getId(), source, game)) {
+                    Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(auraInHand, game);
+                    if (attachment != null && academyResearchers.addAttachment(attachment.getId(), source, game)) {
                         game.informPlayers(controller.getLogName() + " put " + auraInHand.getLogName() + " on the battlefield attached to " + academyResearchers.getLogName() + '.');
                         return true;
                     }
