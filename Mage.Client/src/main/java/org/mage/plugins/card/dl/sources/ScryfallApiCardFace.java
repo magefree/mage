@@ -22,27 +22,33 @@ public class ScryfallApiCardFace {
 
     public void prepareCompatibleData() {
         if (this.image_uris != null) {
-            this.imageSmall = this.image_uris.getOrDefault("small", "");
-            this.imageNormal = this.image_uris.getOrDefault("normal", "");
-            this.imageLarge = this.image_uris.getOrDefault("large", "");
+            this.imageSmall = this.image_uris.getOrDefault("thumb", "");
+            this.imageNormal = this.image_uris.getOrDefault("grid", "");
+            this.imageLarge = this.image_uris.getOrDefault("display", "");
             this.image_uris = null;
         }
     }
 
     public String findImage(String imageSize) {
         // api possible values:
-        // - small
-        // - normal
+        // - small (deprecated)
+    	// - thumb
+        // - normal (deprecated)
+    	// - grid
         // - large
+    	// - display (deprecated)
         // - png
         // - art_crop
         // - border_crop
         switch (imageSize) {
             case "small":
+            case "thumb":
                 return this.imageSmall;
             case "normal":
+            case "grid":
                 return this.imageNormal;
             case "large":
+            case "display":
                 return this.imageLarge;
             default:
                 throw new IllegalArgumentException("Unsupported image size: " + imageSize);

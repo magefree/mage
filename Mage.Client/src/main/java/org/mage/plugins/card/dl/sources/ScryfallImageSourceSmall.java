@@ -17,7 +17,7 @@ public class ScryfallImageSourceSmall extends ScryfallImageSource {
     }
 
     private static String innerModifyUrlString(String oneUrl) {
-        return oneUrl.replaceFirst("/large/", "/small/").replaceFirst("format=image", "format=image&version=small");
+        return oneUrl.replaceFirst("/display/", "/thumb/").replaceFirst("format=image", "format=image&version=thumb");
     }
 
     private static CardImageUrls innerModifyUrl(CardImageUrls cardUrls) {
