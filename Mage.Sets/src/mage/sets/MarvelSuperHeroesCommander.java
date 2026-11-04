@@ -551,6 +551,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rescue, Pepper Potts", 882, Rarity.UNCOMMON, mage.cards.r.RescuePepperPotts.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Return of the Mole Man", 729, Rarity.MYTHIC, mage.cards.r.ReturnOfTheMoleMan.class));
         cards.add(new SetCardInfo("Rhino's Rampage", 823, Rarity.UNCOMMON, mage.cards.r.RhinosRampage.class));
+        cards.add(new SetCardInfo("Rhino, Terrible Trampler", 730, Rarity.RARE, mage.cards.r.RhinoTerribleTrampler.class));
         cards.add(new SetCardInfo("Rip Apart", 187, Rarity.UNCOMMON, mage.cards.r.RipApart.class));
         cards.add(new SetCardInfo("Robotics Mastery", 786, Rarity.UNCOMMON, mage.cards.r.RoboticsMastery.class));
         cards.add(new SetCardInfo("Rocket-Powered Goblin Glider", 825, Rarity.RARE, mage.cards.r.RocketPoweredGoblinGlider.class));
