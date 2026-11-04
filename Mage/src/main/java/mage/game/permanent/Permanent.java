@@ -124,6 +124,11 @@ public interface Permanent extends Card, Controllable {
 
     boolean isProtectedBy(UUID playerId);
 
+    /**
+     * Battle's protector restrictions by battle type (310.9a, 310.12a)
+     */
+    boolean canBeProtectedBy(UUID playerId, Game game);
+
     void setCanBeSacrificed(boolean canBeSacrificed);
 
     boolean canBeSacrificed();
