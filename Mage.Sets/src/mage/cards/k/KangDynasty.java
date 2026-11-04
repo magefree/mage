@@ -52,7 +52,7 @@ public final class KangDynasty extends CardImpl {
                     ability.addEffect(new TapTargetEffect()
                             .setText("For each opponent, tap up to one target creature that player controls"));
                     ability.addEffect(new GoadTargetEffect()
-                            .setText("Goad those creatures"));
+                            .withTargetDescription("those creatures"));
                     ability.addEffect(new KangDynastyEffect());
 
                     ability.getEffects().setTargetPointer(new EachTargetPointer());
@@ -63,8 +63,7 @@ public final class KangDynasty extends CardImpl {
 
         // III -- Target creature you control gets +1/+1 until end of turn for each card in your hand and can't be blocked this turn.
         Effects effects = new Effects();
-        effects.add(new BoostTargetEffect(CardsInControllerHandCount.ANY, CardsInControllerHandCount.ANY, Duration.EndOfTurn)
-                .setText("Target creature you control gets +1/+1 until end of turn for each card in your hand"));
+        effects.add(new BoostTargetEffect(CardsInControllerHandCount.ANY_SINGULAR, CardsInControllerHandCount.ANY_SINGULAR, Duration.EndOfTurn));
         effects.add(new CantBeBlockedTargetEffect()
                 .setText("and can't be blocked this turn"));
         sagaAbility.addChapterEffect(
@@ -127,7 +126,7 @@ class KangDynastyDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private KangDynastyDelayedTriggeredAbility(final KangDynastyDelayedTriggeredAbility ability) {
         super(ability);
-        this.creatures = ability.creatures;
+        this.creatures = new ArrayList<>(ability.creatures);
     }
 
     @Override
