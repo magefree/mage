@@ -173,6 +173,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Damocles Base, Sword of Kang", 347, Rarity.RARE, mage.cards.d.DamoclesBaseSwordOfKang.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Damocles Base, Sword of Kang", 42, Rarity.RARE, mage.cards.d.DamoclesBaseSwordOfKang.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Daredevil's Billy Club", 686, Rarity.UNCOMMON, mage.cards.d.DaredevilsBillyClub.class));
+        cards.add(new SetCardInfo("Daredevil, Fearless Fighter", 685, Rarity.RARE, mage.cards.d.DaredevilFearlessFighter.class));
         cards.add(new SetCardInfo("Dark Ritual", 793, Rarity.UNCOMMON, mage.cards.d.DarkRitual.class));
         cards.add(new SetCardInfo("Darwin, Adaptive Mutant", 718, Rarity.UNCOMMON, mage.cards.d.DarwinAdaptiveMutant.class));
         cards.add(new SetCardInfo("Daughter of the Deep", 618, Rarity.UNCOMMON, mage.cards.d.DaughterOfTheDeep.class));
