@@ -368,6 +368,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Jarvis, Earth's Mightiest Butler", 34, Rarity.RARE, mage.cards.j.JarvisEarthsMightiestButler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jocasta, Automaton Avenger", 108, Rarity.RARE, mage.cards.j.JocastaAutomatonAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jocasta, Automaton Avenger", 439, Rarity.RARE, mage.cards.j.JocastaAutomatonAvenger.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kang Dynasty", 35, Rarity.RARE, mage.cards.k.KangDynasty.class));
         cards.add(new SetCardInfo("Kang Prime", 406, Rarity.RARE, mage.cards.k.KangPrime.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kang Prime", 85, Rarity.RARE, mage.cards.k.KangPrime.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Karolina Dean, Runaway", 694, Rarity.UNCOMMON, mage.cards.k.KarolinaDeanRunaway.class));
