@@ -123,7 +123,7 @@ class GideonTheOathswornEffect extends OneShotEffect {
 
     private GideonTheOathswornEffect(final GideonTheOathswornEffect effect) {
         super(effect);
-        this.attackers = effect.attackers;
+        this.attackers = new HashSet<>(effect.attackers);
     }
 
     @Override

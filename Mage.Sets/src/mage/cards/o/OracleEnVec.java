@@ -27,6 +27,7 @@ import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -248,7 +249,7 @@ class OracleEnVecDestroyEffect extends OneShotEffect {
 
     private OracleEnVecDestroyEffect(final OracleEnVecDestroyEffect effect) {
         super(effect);
-        this.chosenCreatures = effect.chosenCreatures;
+        this.chosenCreatures = new ArrayList<>(effect.chosenCreatures);
     }
 
     @Override

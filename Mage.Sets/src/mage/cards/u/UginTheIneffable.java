@@ -157,7 +157,7 @@ class UginTheIneffableDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private UginTheIneffableDelayedTriggeredAbility(final UginTheIneffableDelayedTriggeredAbility ability) {
         super(ability);
-        this.tokenRefs = ability.tokenRefs;
+        this.tokenRefs = new HashSet<>(ability.tokenRefs);
         this.cardRef = ability.cardRef;
     }
 

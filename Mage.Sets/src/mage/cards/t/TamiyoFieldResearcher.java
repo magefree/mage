@@ -118,7 +118,7 @@ class TamiyoFieldResearcherDelayedTriggeredAbility extends DelayedTriggeredAbili
 
     private TamiyoFieldResearcherDelayedTriggeredAbility(final TamiyoFieldResearcherDelayedTriggeredAbility ability) {
         super(ability);
-        this.creatures = ability.creatures;
+        this.creatures = new ArrayList<>(ability.creatures);
         this.startingTurn = ability.startingTurn;
     }
 
