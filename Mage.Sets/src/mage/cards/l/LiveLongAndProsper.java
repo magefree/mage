@@ -33,7 +33,7 @@ public final class LiveLongAndProsper extends CardImpl {
             .setText("Draw cards equal to the number of cards in your hand"));
         this.getSpellAbility().addEffect(new MaximumHandSizeControllerEffect(
             Integer.MAX_VALUE, Duration.UntilYourNextTurn, HandSizeModification.SET
-        ).setText("You have no maximum hand size until your next turn"));
+        ));
     }
 
     private LiveLongAndProsper(final LiveLongAndProsper card) {
