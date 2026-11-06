@@ -73,7 +73,7 @@ class EiganjoUprisingEffect extends OneShotEffect {
         if (amount < 2) {
             return true;
         }
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+        for (UUID opponentId : game.getOpponents(source.getControllerId(), true)) {
             token.putOntoBattlefield(amount - 1, game, source, opponentId);
         }
         return true;

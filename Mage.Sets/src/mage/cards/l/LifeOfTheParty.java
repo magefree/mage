@@ -105,7 +105,7 @@ class LifeOfThePartyEffect extends OneShotEffect {
             return false;
         }
         Set<Permanent> permanents = new HashSet<>();
-        for (UUID playerId : game.getOpponents(source.getControllerId())) {
+        for (UUID playerId : game.getOpponents(source.getControllerId(), true)) {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(playerId);
             effect.setSavedPermanent(permanent);
             effect.apply(game, source);
