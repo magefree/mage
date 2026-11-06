@@ -94,37 +94,21 @@ class TeferiTimelessVoyagerEffect extends OneShotEffect {
 
 class TeferiTimelessVoyagerPhaseEffect extends ContinuousRuleModifyingEffectImpl {
 
-    private int castOnTurn = 0;
     private final MageObjectReference mor;
 
     TeferiTimelessVoyagerPhaseEffect(MageObjectReference mor) {
-        super(Duration.Custom, Outcome.Neutral);
+        super(Duration.UntilEndOfYourNextTurn, Outcome.Neutral);
         this.mor = mor;
     }
 
     private TeferiTimelessVoyagerPhaseEffect(final TeferiTimelessVoyagerPhaseEffect effect) {
         super(effect);
-        this.castOnTurn = effect.castOnTurn;
         this.mor = effect.mor;
     }
 
     @Override
     public TeferiTimelessVoyagerPhaseEffect copy() {
         return new TeferiTimelessVoyagerPhaseEffect(this);
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        castOnTurn = game.getTurnNum();
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        if (castOnTurn != game.getTurnNum() && game.getPhase().getStep().getType() == PhaseStep.END_TURN) {
-            return game.isActivePlayer(source.getControllerId());
-        }
-        return false;
     }
 
     @Override

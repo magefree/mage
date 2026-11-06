@@ -87,17 +87,15 @@ class ExpeditedInheritanceExileEffect extends OneShotEffect {
 class ExpeditedInheritanceMayPlayEffect extends AsThoughEffectImpl {
 
     private final UUID cardOwnerId;
-    private int triggeredOnTurn = 0;
 
     ExpeditedInheritanceMayPlayEffect(UUID playerId) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.UntilEndOfYourNextTurn, Outcome.Benefit);
         this.staticText = "Until the end of your next turn, you may play this card.";
         this.cardOwnerId = playerId;
     }
 
     private ExpeditedInheritanceMayPlayEffect(final ExpeditedInheritanceMayPlayEffect effect) {
         super(effect);
-        triggeredOnTurn = effect.triggeredOnTurn;
         cardOwnerId = effect.cardOwnerId;
     }
 
@@ -109,14 +107,7 @@ class ExpeditedInheritanceMayPlayEffect extends AsThoughEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        triggeredOnTurn = game.getTurnNum();
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        return triggeredOnTurn != game.getTurnNum()
-                && game.getPhase().getStep().getType() == PhaseStep.END_TURN
-                && game.isActivePlayer(cardOwnerId);
+        setStartingControllerAndTurnNum(game, cardOwnerId, game.getActivePlayerId()); // setup startingController to calc isYourTurn calls
     }
 
     @Override

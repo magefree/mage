@@ -8,10 +8,14 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * 400.7
- * An object that moves from one zone to another becomes a new object with no memory of, or relation to, its previous existence. This rule has the following exceptions.
+ * An object that moves from one zone to another becomes a new object with no memory of, or
+ * relation to, its previous existence. This rule has the following exceptions.
  * <p>
  * 702.26b
- * If a permanent phases out, its status changes to “phased out.” Except for rules and effects that specifically mention phased-out permanents, a phased-out permanent is treated as though it does not exist. It can’t affect or be affected by anything else in the game. A permanent that phases out is removed from combat. (See rule 506.4.)
+ * If a permanent phases out, its status changes to “phased out.” Except for rules and effects
+ * that specifically mention phased-out permanents, a phased-out permanent is treated as though
+ * it does not exist. It can’t affect or be affected by anything else in the game. A permanent
+ * that phases out is removed from combat. (See rule 506.4.)
  *
  * @author JayDi85
  */

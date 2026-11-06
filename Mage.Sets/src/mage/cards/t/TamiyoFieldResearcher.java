@@ -92,7 +92,7 @@ class TamiyoFieldResearcherEffect1 extends OneShotEffect {
                 creatures.add(new MageObjectReference(uuid, game));
             }
             if (!creatures.isEmpty()) {
-                DelayedTriggeredAbility delayedAbility = new TamiyoFieldResearcherDelayedTriggeredAbility(creatures, game.getTurnNum());
+                DelayedTriggeredAbility delayedAbility = new TamiyoFieldResearcherDelayedTriggeredAbility(creatures);
                 game.addDelayedTriggeredAbility(delayedAbility, source);
             }
             return true;
@@ -106,20 +106,17 @@ class TamiyoFieldResearcherEffect1 extends OneShotEffect {
 // > (2016-08-23)
 class TamiyoFieldResearcherDelayedTriggeredAbility extends DelayedTriggeredAbility implements BatchTriggeredAbility<DamagedEvent> {
 
-    private final int startingTurn;
     private final List<MageObjectReference> creatures;
 
-    TamiyoFieldResearcherDelayedTriggeredAbility(List<MageObjectReference> creatures, int startingTurn) {
-        super(new DrawCardSourceControllerEffect(1, true), Duration.Custom, false);
+    TamiyoFieldResearcherDelayedTriggeredAbility(List<MageObjectReference> creatures) {
+        super(new DrawCardSourceControllerEffect(1, true), Duration.UntilYourNextTurn, false);
         this.creatures = creatures;
-        this.startingTurn = startingTurn;
         setTriggerPhrase("Until your next turn, whenever either of those creatures deals combat damage, ");
     }
 
     private TamiyoFieldResearcherDelayedTriggeredAbility(final TamiyoFieldResearcherDelayedTriggeredAbility ability) {
         super(ability);
         this.creatures = new ArrayList<>(ability.creatures);
-        this.startingTurn = ability.startingTurn;
     }
 
     @Override
@@ -142,11 +139,6 @@ class TamiyoFieldResearcherDelayedTriggeredAbility extends DelayedTriggeredAbili
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return !getFilteredEvents((DamagedBatchBySourceEvent) event, game).isEmpty();
-    }
-
-    @Override
-    public boolean isInactive(Game game) {
-        return game.isActivePlayer(getControllerId()) && game.getTurnNum() != startingTurn;
     }
 
     @Override

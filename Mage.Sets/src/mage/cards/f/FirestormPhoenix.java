@@ -103,15 +103,12 @@ class FirestormPhoenixEffect extends ReplacementEffectImpl {
 
 class FirestormPhoenixRevealEffect extends ContinuousEffectImpl {
 
-    private int startingTurnNum;
-
     FirestormPhoenixRevealEffect() {
-        super(Duration.Custom, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
+        super(Duration.UntilYourNextTurn, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
     }
 
     private FirestormPhoenixRevealEffect(final FirestormPhoenixRevealEffect effect) {
         super(effect);
-        this.startingTurnNum = effect.startingTurnNum;
     }
 
     @Override
@@ -123,7 +120,12 @@ class FirestormPhoenixRevealEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        startingTurnNum = game.getTurnNum();
+        UUID ownerId = game.getOwnerId(getTargetPointer().getFirst(game, source));
+        if (ownerId != null) {
+            setStartingControllerAndTurnNum(game, ownerId, game.getActivePlayerId()); // setup startingController to calc isYourTurn calls
+        } else {
+            discard();
+        }
     }
 
     @Override
@@ -131,8 +133,7 @@ class FirestormPhoenixRevealEffect extends ContinuousEffectImpl {
         if (game.getCard(getTargetPointer().getFirst(game, source)) == null) {
             return true;
         }
-        return game.isActivePlayer(game.getOwnerId(getTargetPointer().getFirst(game, source)))
-                && game.getTurnNum() > startingTurnNum;
+        return super.isInactive(source, game);
     }
 
     @Override
@@ -152,15 +153,12 @@ class FirestormPhoenixRevealEffect extends ContinuousEffectImpl {
 
 class FirestormPhoenixRestrictEffect extends ContinuousRuleModifyingEffectImpl {
 
-    private int startingTurnNum;
-
     FirestormPhoenixRestrictEffect() {
-        super(Duration.Custom, Outcome.Detriment);
+        super(Duration.UntilYourNextTurn, Outcome.Detriment);
     }
 
     private FirestormPhoenixRestrictEffect(final FirestormPhoenixRestrictEffect effect) {
         super(effect);
-        this.startingTurnNum = effect.startingTurnNum;
     }
 
     @Override
@@ -171,7 +169,12 @@ class FirestormPhoenixRestrictEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        startingTurnNum = game.getTurnNum();
+        UUID ownerId = game.getOwnerId(getTargetPointer().getFirst(game, source));
+        if (ownerId != null) {
+            setStartingControllerAndTurnNum(game, ownerId, game.getActivePlayerId()); // setup startingController to calc isYourTurn calls
+        } else {
+            discard();
+        }
     }
 
     @Override
@@ -179,8 +182,7 @@ class FirestormPhoenixRestrictEffect extends ContinuousRuleModifyingEffectImpl {
         if (game.getCard(getTargetPointer().getFirst(game, source)) == null) {
             return true;
         }
-        return game.isActivePlayer(game.getOwnerId(getTargetPointer().getFirst(game, source)))
-                && game.getTurnNum() > startingTurnNum;
+        return super.isInactive(source, game);
     }
 
     @Override
