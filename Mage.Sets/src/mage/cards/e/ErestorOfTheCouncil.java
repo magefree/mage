@@ -69,7 +69,7 @@ class ErestorOfTheCouncilEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Set<UUID> playerIds = (Set<UUID>) getValue("votedAgainst");
         int scryCount = 0;
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+        for (UUID opponentId : game.getOpponents(source.getControllerId(), true)) {
             if (playerIds.contains(opponentId)) {
                 scryCount++;
             } else {
