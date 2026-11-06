@@ -126,7 +126,7 @@ class MarduSiegebreakerEffect extends OneShotEffect {
         }
         Set<MageObjectReference> addedTokens = new HashSet<>();
         Token token = CopyTokenFunction.createTokenCopy(card, game);
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+        for (UUID opponentId : game.getOpponents(source.getControllerId(), true)) {
             token.putOntoBattlefield(1, game, source, source.getControllerId(), true, true, Collections.singleton(opponentId));
             token.getLastAddedTokenIds()
                     .stream()

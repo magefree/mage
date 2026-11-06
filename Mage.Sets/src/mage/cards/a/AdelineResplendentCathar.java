@@ -71,7 +71,7 @@ class AdelineResplendentCatharEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+        for (UUID opponentId : game.getOpponents(source.getControllerId(), true)) {
             new HumanToken().putOntoBattlefield(1, game, source, source.getControllerId(), true, true,
                     game.getCombat().getPossibleDefenders(null, opponentId, game)); // that player or a planeswalker they control
         }
