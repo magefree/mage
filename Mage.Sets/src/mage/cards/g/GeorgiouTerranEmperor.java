@@ -45,7 +45,7 @@ public final class GeorgiouTerranEmperor extends CardImpl {
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
         ability.addEffect(new ConditionalOneShotEffect(new CreateTokenEffect(new OfficerToken(), 10),
             new LifeCompareCondition(TargetController.YOU, ComparisonType.FEWER_THAN, 1),
-            "then if your life total is 0 or less, create ten 1/1 red Officer creature tokens"));
+            "Then if your life total is 0 or less, create ten 1/1 red Officer creature tokens"));
         this.addAbility(ability);
     }
 
