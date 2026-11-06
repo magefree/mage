@@ -103,7 +103,7 @@ class AinokStrikeLeaderEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getOpponents(source.getControllerId())) {
+        for (UUID playerId : game.getOpponents(source.getControllerId(), true)) {
             new GoblinToken().putOntoBattlefield(1, game, source, source.getControllerId(), true, true, Collections.singleton(playerId));
         }
         return true;
