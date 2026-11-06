@@ -73,11 +73,11 @@ class SaltVampireEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (controller == null || opponent == null) {
+        if (controller == null || opponent == null || opponent.getHand().isEmpty()) {
             return false;
         }
         controller.lookAtCards(source, "Hand of " + opponent.getName(), opponent.getHand(), game);
-        TargetCard target = new TargetCard(0, 1, Zone.HAND, StaticFilters.FILTER_CARD_NON_LAND);
+        TargetCard target = new TargetCard(0, 1, Zone.HAND, StaticFilters.FILTER_CARD_A_NON_LAND);
         if (controller.choose(outcome, opponent.getHand(), target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
