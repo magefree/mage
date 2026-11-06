@@ -34,7 +34,7 @@ public class FaceVillainousChoiceOpponentsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getOpponents(source.getControllerId())) {
+        for (UUID playerId : game.getOpponents(source.getControllerId(), true)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 choice.faceChoice(player, game, source);
