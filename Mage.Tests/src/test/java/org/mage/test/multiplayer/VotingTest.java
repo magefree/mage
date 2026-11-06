@@ -2,6 +2,7 @@ package org.mage.test.multiplayer;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestCommander4PlayersWithAIHelps;
 
@@ -296,5 +297,48 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         assertLife(playerB, 20);
         assertLife(playerC, 20);
         assertLife(playerD, 20);
+    }
+
+    /**
+     * 102.1
+     * A player is one of the people in the game. The active player is the player whose turn it is. The other players
+     * are nonactive players.
+     * <p>
+     * 701.38a
+     * Some spells and abilities instruct players to vote for one choice from a list of options to determine some aspect
+     * of the effect of that spell or ability. To vote, each player, starting with a specified player and proceeding in
+     * turn order, chooses one of those choices.
+     */
+    @Test
+    public void test_LieutenantsOfTheGuard_PlayerLostThisTurn() {
+        // Council's dilemma -- When this creature enters, starting with you, each player votes for strength or
+        // numbers. Put a +1/+1 counter on this creature for each strength vote and create a 1/1 white Soldier
+        // creature token for each numbers vote.
+        addCard(Zone.HAND, playerA, "Lieutenants of the Guard"); // {4}{W}, 2/2
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.HAND, playerA, "Lightning Bolt"); // {R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        //
+        setLife(playerB, 3);
+
+        // playerB loses the game
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        runCode("playerB lost", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Assert.assertTrue("playerB must lose", playerB.hasLost());
+        });
+
+        // only 3 players vote, playerB must not vote
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lieutenants of the Guard");
+        setChoice(playerA, "Yes"); // strength
+        setChoice(playerD, "Yes"); // strength
+        setChoice(playerC, "No"); // numbers
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPowerToughness(playerA, "Lieutenants of the Guard", 2 + 2, 2 + 2);
+        assertPermanentCount(playerA, "Soldier Token", 1);
     }
 }
