@@ -233,6 +233,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.loses = player.loses;
 
         this.library = player.library.copy();
+        this.startingDeckSize = player.startingDeckSize;
         this.sideboard = player.sideboard.copy();
         this.hand = player.hand.copy();
         this.graveyard = player.graveyard.copy();
