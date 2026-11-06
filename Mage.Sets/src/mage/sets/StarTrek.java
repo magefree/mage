@@ -227,6 +227,9 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Lieutenant Commander Data", 371, Rarity.MYTHIC, mage.cards.l.LieutenantCommanderData.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lieutenant Commander Data", 505, Rarity.MYTHIC, mage.cards.l.LieutenantCommanderData.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lieutenant Commander Data", 69, Rarity.MYTHIC, mage.cards.l.LieutenantCommanderData.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Live Long and Prosper", 244, Rarity.RARE, mage.cards.l.LiveLongAndProsper.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Live Long and Prosper", 423, Rarity.RARE, mage.cards.l.LiveLongAndProsper.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Live Long and Prosper", 547, Rarity.RARE, mage.cards.l.LiveLongAndProsper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Locutus, the One Who Speaks", 245, Rarity.UNCOMMON, mage.cards.l.LocutusTheOneWhoSpeaks.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Locutus, the One Who Speaks", 360, Rarity.UNCOMMON, mage.cards.l.LocutusTheOneWhoSpeaks.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Locutus, the One Who Speaks", 389, Rarity.UNCOMMON, mage.cards.l.LocutusTheOneWhoSpeaks.class, NON_FULL_USE_VARIOUS));
