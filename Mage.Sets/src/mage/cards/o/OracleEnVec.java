@@ -6,25 +6,25 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.Mode;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
+import mage.abilities.common.delayed.AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
 import java.util.ArrayList;
@@ -92,8 +92,10 @@ class OracleEnVecEffect extends OneShotEffect {
         if (!target.choose(Outcome.Neutral, opponent.getId(), source.getSourceId(), source, game)) {
             return false;
         }
+        List<Permanent> chosenPermanents = new ArrayList<>();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), opponent.getId(), source, game)) {
             if (target.getTargets().contains(permanent.getId())) {
+                chosenPermanents.add(permanent);
                 RequirementEffect effect = new OracleEnVecMustAttackRequirementEffect();
                 effect.setTargetPointer(new FixedTarget(permanent, game));
                 game.addEffect(effect, source);
@@ -103,7 +105,12 @@ class OracleEnVecEffect extends OneShotEffect {
                 game.addEffect(effect, source);
             }
         }
-        game.addDelayedTriggeredAbility(new OracleEnVecDelayedTriggeredAbility(game.getTurnNum(), target.getTargets()), source);
+        Effect destroyEffect = new OracleEnVecDestroyEffect();
+        destroyEffect.setTargetPointer(new FixedTargets(chosenPermanents, game));
+        DelayedTriggeredAbility ability = new AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility(
+                destroyEffect, opponent.getId()
+        ).setTriggerPhrase("At the beginning of that turn's end step, ");
+        game.addDelayedTriggeredAbility(ability, source);
         return true;
     }
 }
@@ -206,50 +213,15 @@ class OracleEnVecCantAttackRestrictionEffect extends RestrictionEffect {
     }
 }
 
-class OracleEnVecDelayedTriggeredAbility extends DelayedTriggeredAbility {
-
-    private final int startingTurn;
-
-    OracleEnVecDelayedTriggeredAbility(int startingTurn, List<UUID> chosenCreatures) {
-        super(new OracleEnVecDestroyEffect(chosenCreatures), Duration.EndOfGame, true);
-        this.startingTurn = startingTurn;
-        setTriggerPhrase("At the beginning of that turn's end step, ");
-    }
-
-    private OracleEnVecDelayedTriggeredAbility(final OracleEnVecDelayedTriggeredAbility ability) {
-        super(ability);
-        this.startingTurn = ability.startingTurn;
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.END_TURN_STEP_PRE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return startingTurn != game.getTurnNum() && game.isActivePlayer(event.getPlayerId());
-    }
-
-    @Override
-    public OracleEnVecDelayedTriggeredAbility copy() {
-        return new OracleEnVecDelayedTriggeredAbility(this);
-    }
-}
-
 class OracleEnVecDestroyEffect extends OneShotEffect {
 
-    private final List<UUID> chosenCreatures;
-
-    OracleEnVecDestroyEffect(List<UUID> chosenCreatures) { // need to be changed to MageObjectReference
+    OracleEnVecDestroyEffect() {
         super(Outcome.DestroyPermanent);
-        this.chosenCreatures = chosenCreatures;
         this.staticText = "destroy each of the chosen creatures that didn't attack";
     }
 
     private OracleEnVecDestroyEffect(final OracleEnVecDestroyEffect effect) {
         super(effect);
-        this.chosenCreatures = new ArrayList<>(effect.chosenCreatures);
     }
 
     @Override
@@ -260,17 +232,17 @@ class OracleEnVecDestroyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
-        if (watcher != null) {
-            for (UUID targetId : chosenCreatures) {
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null && !watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
-                    Effect effect = new DestroyTargetEffect();
-                    effect.setTargetPointer(new FixedTarget(targetId, game));
-                    effect.apply(game, source);
-                }
-            }
-            return true;
+        if (watcher == null) {
+            return false;
         }
-        return false;
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(targetId);
+            if (permanent != null
+                    && permanent.isPhasedIn()
+                    && !watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
+                permanent.destroy(source, game, false);
+            }
+        }
+        return true;
     }
 }
