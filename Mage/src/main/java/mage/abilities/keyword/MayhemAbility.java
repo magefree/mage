@@ -11,6 +11,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DiscardedCardsEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;
@@ -25,6 +26,10 @@ public class MayhemAbility extends SpellAbility {
     public static final String MAYHEM_ACTIVATION_VALUE_KEY = "mayhemActivation";
 
     private final String rule;
+
+    public static Watcher createWatcher() {
+        return new MayhemWatcher();
+    }
 
     public MayhemAbility(Card card, String manaString) {
         super(card.getSpellAbility());
@@ -87,6 +92,17 @@ class MayhemWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
+        // 702.35c: a discarded card put into the graveyard by a declined madness trigger can still be found
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE
+                && ((ZoneChangeEvent) event).getFromZone() == Zone.EXILED
+                && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
+                && ((ZoneChangeEvent) event).getSource() instanceof MadnessTriggeredAbility) {
+            Card card = game.getCard(event.getTargetId());
+            if (card != null && set.stream().anyMatch(mor -> mor.refersTo(card, game, 1))) {
+                set.add(new MageObjectReference(card, game));
+            }
+            return;
+        }
         if (event.getType() != GameEvent.EventType.DISCARDED_CARDS) {
             return;
         }

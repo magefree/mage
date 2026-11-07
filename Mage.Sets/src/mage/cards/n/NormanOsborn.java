@@ -64,7 +64,9 @@ public final class NormanOsborn extends ModalDoubleFacedCard {
         this.getRightHalfCard().addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 2)));
 
         // Goblin Formula -- Each nonland card in your graveyard has mayhem. The mayhem cost is equal to its mana cost.
-        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new GreenGoblinEffect()).withFlavorWord("Goblin Formula"));
+        Ability ability = new SimpleStaticAbility(new GreenGoblinEffect()).withFlavorWord("Goblin Formula");
+        ability.addWatcher(MayhemAbility.createWatcher());
+        this.getRightHalfCard().addAbility(ability);
     }
 
     private NormanOsborn(final NormanOsborn card) {

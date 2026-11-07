@@ -86,4 +86,39 @@ public class MayhemTest extends CardTestPlayerBase {
             );
         }
     }
+
+    // https://github.com/magefree/mage/issues/14107
+    // 702.35c
+    // After resolving a madness triggered ability, if the exiled card wasn’t cast and was moved to a public zone,
+    // effects referencing the discarded card can find that card. See rule 400.7k.
+    @Test
+    public void testCastDiscardedWithMadnessDeclined() {
+        // Green Goblin, back face of Norman Osborn
+        // Flying, menace
+        // Spells you cast from your graveyard cost {2} less to cast.
+        // Goblin Formula -- Each nonland card in your graveyard has mayhem. The mayhem cost is equal to its mana cost.
+        addCard(Zone.BATTLEFIELD, playerA, "Green Goblin");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        //
+        // Discard a card: Putrid Imp gains flying until end of turn.
+        addCard(Zone.BATTLEFIELD, playerA, "Putrid Imp");
+        //
+        // Fiery Temper deals 3 damage to any target.
+        // Madness {R}
+        addCard(Zone.HAND, playerA, "Fiery Temper"); // {1}{R}{R}, mayhem for {R}{R} after the {2} reduction
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Discard");
+        setChoice(playerA, "Fiery Temper"); // card to discard
+        setChoice(playerA, false); // don't cast with madness, so it goes to the graveyard
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkGraveyardCount("discarded", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fiery Temper", 1);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Fiery Temper with Mayhem", playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 3);
+        assertGraveyardCount(playerA, "Fiery Temper", 1);
+    }
 }
