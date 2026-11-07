@@ -88,6 +88,7 @@ class DeepSpace9Effect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));
         controller.moveCards(cards, Zone.EXILED, source, game);
+        game.processAction();
         cards.retainZone(Zone.EXILED, game);
         cards.removeIf(cardId -> {
             Card card = game.getCard(cardId);
