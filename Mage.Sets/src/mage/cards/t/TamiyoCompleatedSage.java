@@ -12,10 +12,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterNonlandCard;
-import mage.filter.predicate.mageobject.PermanentPredicate;
 import mage.game.Game;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.token.TamiyosNotebookToken;
@@ -31,11 +28,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class TamiyoCompleatedSage extends CardImpl {
-    private static final FilterCard filter = new FilterNonlandCard("nonland permanent card");
-
-    static {
-        filter.add(PermanentPredicate.instance);
-    }
 
     public TamiyoCompleatedSage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{G/U/P}{U}");
@@ -57,7 +49,7 @@ public final class TamiyoCompleatedSage extends CardImpl {
 
         // −X: Exile target nonland permanent card with mana value X from your graveyard. Create a token that's a copy of that card.
         Ability ability2 = new LoyaltyAbility(new TamiyoCompleatedSageEffect());
-        ability2.addTarget(new TargetCardInYourGraveyard(filter));
+        ability2.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_NON_LAND_PERMANENT));
         ability2.setTargetAdjuster(new XManaValueTargetAdjuster());
         this.addAbility(ability2);
 

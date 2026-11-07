@@ -7,9 +7,9 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.PutCards;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.filter.predicate.mageobject.PermanentPredicate;
 
 import java.util.UUID;
 
@@ -18,12 +18,11 @@ import java.util.UUID;
  */
 public final class UnitedBattlefront extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("noncreature, nonland permanent cards with mana value 3 or less");
+    private static final FilterCard filter = new FilterPermanentCard("noncreature, nonland permanent cards with mana value 3 or less");
 
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
-        filter.add(PermanentPredicate.instance);
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 

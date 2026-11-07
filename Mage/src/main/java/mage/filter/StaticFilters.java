@@ -266,6 +266,27 @@ public final class StaticFilters {
         FILTER_CARD_PERMANENTS.setLockedFilter(true);
     }
 
+    public static final FilterPermanentCard FILTER_CARD_NON_LAND_PERMANENT = new FilterPermanentCard("nonland permanent card");
+
+    static {
+        FILTER_CARD_NON_LAND_PERMANENT.add(Predicates.not(CardType.LAND.getPredicate()));
+        FILTER_CARD_NON_LAND_PERMANENT.setLockedFilter(true);
+    }
+
+    public static final FilterPermanentCard FILTER_CARD_A_NON_LAND_PERMANENT = new FilterPermanentCard("a nonland permanent card");
+
+    static {
+        FILTER_CARD_A_NON_LAND_PERMANENT.add(Predicates.not(CardType.LAND.getPredicate()));
+        FILTER_CARD_A_NON_LAND_PERMANENT.setLockedFilter(true);
+    }
+
+    public static final FilterPermanentCard FILTER_CARDS_NON_LAND_PERMANENT = new FilterPermanentCard("nonland permanent cards");
+
+    static {
+        FILTER_CARDS_NON_LAND_PERMANENT.add(Predicates.not(CardType.LAND.getPredicate()));
+        FILTER_CARDS_NON_LAND_PERMANENT.setLockedFilter(true);
+    }
+
     public static final FilterPermanent FILTER_PERMANENT = new FilterPermanent();
 
     static {

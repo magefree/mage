@@ -11,15 +11,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
 
 import java.util.UUID;
-
 
 /**
  * @author Svyatoslav28
@@ -55,12 +51,6 @@ public final class JukaiLiberator extends CardImpl {
 
 class JukaiLiberatorEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterPermanentCard("nonland permanent card");
-
-    static {
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
-    }
-
     JukaiLiberatorEffect() {
         super(Outcome.Benefit);
         staticText = "choose land or nonland." +
@@ -89,10 +79,9 @@ class JukaiLiberatorEffect extends OneShotEffect {
         if (land) {
             player.seekCard(StaticFilters.FILTER_CARD_LAND, source, game);
         } else {
-            player.seekCard(filter, source, game);
+            player.seekCard(StaticFilters.FILTER_CARD_NON_LAND_PERMANENT, source, game);
         }
         return true;
     }
 }
-
 

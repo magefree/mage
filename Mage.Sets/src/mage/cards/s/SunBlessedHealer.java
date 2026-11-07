@@ -13,9 +13,9 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterNonlandCard;
+import mage.filter.common.FilterPermanentCard;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.filter.predicate.mageobject.PermanentPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -26,10 +26,10 @@ import java.util.UUID;
 public final class SunBlessedHealer extends CardImpl {
 
     private static final FilterCard filter
-            = new FilterNonlandCard("nonland permanent card with mana value 2 or less from your graveyard");
+            = new FilterPermanentCard("nonland permanent card with mana value 2 or less from your graveyard");
 
     static {
-        filter.add(PermanentPredicate.instance);
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
     }
 

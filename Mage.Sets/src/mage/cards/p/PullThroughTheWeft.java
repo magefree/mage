@@ -7,8 +7,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterNonlandCard;
-import mage.filter.predicate.mageobject.PermanentPredicate;
+import mage.filter.common.FilterPermanentCard;
+import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.SecondTargetPointer;
 
@@ -19,10 +19,10 @@ import java.util.UUID;
  */
 public final class PullThroughTheWeft extends CardImpl {
 
-    private static final FilterCard filter = new FilterNonlandCard("nonland permanent cards from your graveyard");
+    private static final FilterCard filter = new FilterPermanentCard("nonland permanent cards from your graveyard");
 
     static {
-        filter.add(PermanentPredicate.instance);
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public PullThroughTheWeft(UUID ownerId, CardSetInfo setInfo) {

@@ -6,8 +6,7 @@ import mage.abilities.effects.common.ReturnFromYourGraveyardToBattlefieldAllEffe
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -15,17 +14,11 @@ import mage.filter.predicate.Predicates;
  */
 public final class ReturnToTheLightRealms extends CardImpl {
 
-    private static final FilterPermanentCard filter = new FilterPermanentCard("nonland permanent cards");
-
-    static {
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
-    }
-
     public ReturnToTheLightRealms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{7}{W}{W}");
 
         // Return all nonland permanent cards from your graveyard to the battlefield.
-        this.getSpellAbility().addEffect(new ReturnFromYourGraveyardToBattlefieldAllEffect(filter));
+        this.getSpellAbility().addEffect(new ReturnFromYourGraveyardToBattlefieldAllEffect(StaticFilters.FILTER_CARDS_NON_LAND_PERMANENT));
     }
 
     private ReturnToTheLightRealms(final ReturnToTheLightRealms card) {

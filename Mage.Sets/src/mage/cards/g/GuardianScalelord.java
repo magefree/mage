@@ -13,10 +13,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterNonlandCard;
+import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.filter.predicate.mageobject.PermanentPredicate;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -30,10 +30,10 @@ import java.util.UUID;
 public final class GuardianScalelord extends CardImpl {
 
     private static final FilterCard filter
-            = new FilterNonlandCard("nonland permanent card with mana value less than this creature's power");
+            = new FilterPermanentCard("nonland permanent card with mana value less than this creature's power");
 
     static {
-        filter.add(PermanentPredicate.instance);
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
         filter.add(GuardianScalelordPredicate.instance);
     }
 
