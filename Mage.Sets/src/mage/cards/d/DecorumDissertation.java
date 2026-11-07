@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.keyword.ParadigmAbility;
+import mage.abilities.effects.keyword.ParadigmEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,7 +27,7 @@ public final class DecorumDissertation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Paradigm
-        this.addAbility(new ParadigmAbility());
+        this.getSpellAbility().addEffect(new ParadigmEffect());
     }
 
     private DecorumDissertation(final DecorumDissertation card) {
