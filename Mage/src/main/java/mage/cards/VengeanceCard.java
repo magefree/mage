@@ -29,6 +29,8 @@ public abstract class VengeanceCard extends CardWithSpellOption {
 
     @Override
     public boolean isSpellCardCastOptionAvailable(Game game) {
+        // GUI's workaround to skip the ability choose dialog while casting the main card from hand
+        // (the vengeance spell can be cast from a graveyard only)
         return game.getState().getZone(getId()) == Zone.GRAVEYARD;
     }
 

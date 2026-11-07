@@ -136,6 +136,19 @@ class VengeanceCardSpellAbility extends SpellOptionCardSpellAbility {
     }
 
     @Override
+    public ActivationStatus canActivate(UUID playerId, Game game) {
+        // cast only from your graveyard
+        Card spellCard = game.getCard(this.getSourceId());
+        if (spellCard instanceof VengeanceSpellCard) {
+            Card card = ((VengeanceSpellCard) spellCard).getParentCard();
+            if (!card.isOwnedBy(playerId) || game.getState().getZone(card.getId()) != Zone.GRAVEYARD) {
+                return ActivationStatus.getFalse();
+            }
+        }
+        return super.canActivate(playerId, game);
+    }
+
+    @Override
     public VengeanceCardSpellAbility copy() {
         return new VengeanceCardSpellAbility(this);
     }

@@ -8,6 +8,7 @@ import mage.abilities.dynamicvalue.common.SavedLifeLossValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.VengeanceCard;
@@ -48,7 +49,7 @@ public final class HelaMistressOfDarkness extends VengeanceCard {
         this.addAbility(new LoseLifeTriggeredAbility(
             new CreateTokenEffect(new ZombieToken(), SavedLifeLossValue.MANY, true, false),
             TargetController.ANY, true, false
-        ).withTriggerCondition(MyTurnCondition.instance).setDoOnlyOnceEachTurn(true));
+        ).withTriggerCondition(MyTurnCondition.instance).setDoOnlyOnceEachTurn(true).addHint(MyTurnHint.instance));
 
         // Dark Tutor
         // Sorcery - Vengeance

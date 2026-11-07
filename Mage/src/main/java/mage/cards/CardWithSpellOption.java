@@ -35,12 +35,24 @@ public abstract class CardWithSpellOption extends CardImpl {
         return spellCard;
     }
 
-    /** Whether the main card is one of this object's current casting options. */
+    /**
+     * Whether the main card is one of this object's current casting options.
+     * <p>
+     * Used for a quick filter of playable abilities and by GUI to show or skip the dialog
+     * to choose the casting part, works in pair with isSpellCardCastOptionAvailable
+     * (one available part only - no dialog).
+     */
     public boolean isMainCardCastOptionAvailable(Game game) {
         return true;
     }
 
-    /** Whether the inset spell is one of this object's current casting options. */
+    /**
+     * Whether the inset spell is one of this object's current casting options.
+     * <p>
+     * Used for a quick filter of playable abilities and by GUI to show or skip the dialog
+     * to choose the casting part, works in pair with isMainCardCastOptionAvailable
+     * (one available part only - no dialog).
+     */
     public boolean isSpellCardCastOptionAvailable(Game game) {
         return true;
     }
