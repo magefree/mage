@@ -2608,14 +2608,12 @@ public abstract class GameImpl implements Game {
         );
         Set<Card> copiedCardsToRemove = new HashSet<>();
         for (Card copiedCard : allCopiedCards) {
-            UUID copiedCardId = copiedCard.getMainCard().getId();
-            UUID persistentCopySource = state.getPersistentCardCopySource(copiedCardId);
-            if (persistentCopySource != null) {
-                // Persistent copies opt out of 704.5e only while their registered source remains.
-                if (getPermanent(persistentCopySource) != null) {
-                    continue;
-                }
-                state.stopKeepingCardCopy(copiedCardId);
+            // 722.3c
+            // This copy remains in exile for as long as the prepared permanent remains on the battlefield and has
+            // the prepared designation. This is an exception to rule 704.5e.
+            if (copiedCard instanceof PreparedSpellCopy
+                    && ((PreparedSpellCopy) copiedCard).getPreparedPermanent(this) != null) {
+                continue;
             }
             // 1. Zone must be checked from main card only cause mdf parts can have different zones
             //    (one side on battlefield, another side on outside)
