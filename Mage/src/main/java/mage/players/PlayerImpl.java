@@ -5611,6 +5611,11 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (game.replaceEvent(event)) {
             return false;
         }
+        // 701.22b If a player is instructed to scry 0, no scry event occurs.
+        // Abilities that trigger whenever a player scries won't trigger.
+        if (event.getAmount() < 1) {
+            return false;
+        }
         game.informPlayers(getLogName() + " scries " + event.getAmount() + CardUtil.getSourceLogName(game, source));
         Cards cards = new CardsImpl();
         cards.addAllCards(getLibrary().getTopCards(game, event.getAmount()));

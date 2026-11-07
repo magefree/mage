@@ -166,4 +166,25 @@ public class ScryTest extends CardTestPlayerBase {
         assertHandCount(playerA, cardB, 1);
         assertLibrary(playerA, cardA, cardC, cardD);
     }
+
+    @Test
+    public void Scry0_NoScryEvent_NoTriggers() {
+        // 701.22b If a player is instructed to scry 0, no scry event occurs.
+        // Abilities that trigger whenever a player scries won't trigger.
+
+        // Whenever you scry or surveil, draw a card.
+        addCard(Zone.BATTLEFIELD, playerA, "Matoya, Archon Elder");
+        //
+        // Scry X, where X is the amount of {S} spent to cast this spell, then draw three cards.
+        addCard(Zone.HAND, playerA, "Graven Lore"); // {3}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5); // no snow mana - scry 0
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Graven Lore");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerA, 3); // no draw from Matoya
+    }
 }
