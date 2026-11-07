@@ -3059,6 +3059,22 @@ public class VerifyCardDataTest {
         // planeswalker fix [-7]: xxx
         refText = refText.replaceAll("\\[([\\−\\+]?\\d*)\\]\\: ", "$1: ").replaceAll("\\[\\−X\\]\\: ", "-X: ");
 
+        // station fix
+        // mtgjson: 
+        // - keeps the level in the first ability line and the P/T in the card's fields.
+        // - "STATION 12+\n0/8\nFlying"
+        // xmage:
+        // - shows each station level as a separate line, the P/T of a creature level as a line too
+        // - "12+ | Flying" with P/T 0/8 and "It's an artifact creature at 12+."
+        if (card.getAbilities().containsClass(StationAbility.class)) {
+            refText = refText.replaceAll("(?m)^(\\d+)\\+ \\| ", "STATION $1+\n");
+            Matcher creatureLevel = Pattern.compile("It's an artifact creature at (\\d+)\\+").matcher(refText);
+            if (creatureLevel.find() && ref.power != null && ref.toughness != null) {
+                String levelLine = "STATION " + creatureLevel.group(1) + "+\n";
+                refText = refText.replace(levelLine, levelLine + ref.power + "/" + ref.toughness + "\n");
+            }
+        }
+
         // evergreen keyword fix
         for (String s : refText.replaceAll(" \\(.+?\\)", "").split("[\\$\\\n]")) {
             if (Arrays
