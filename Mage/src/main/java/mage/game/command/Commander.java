@@ -62,6 +62,7 @@ public class Commander extends CommandObjectImpl {
                         break;
                     case SPLICE: // only from hand
                     case SPLIT_AFTERMATH: // only from graveyard
+                    case VENGEANCE_SPELL: // only from graveyard
                     case PREPARE_SPELL: // only from exile when main card is Prepared
                         // can't use from command zone
                         break;
