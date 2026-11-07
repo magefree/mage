@@ -21,6 +21,7 @@ public class RootingMolochTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Renewed Faith"); // {2}{W}
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
 
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 5);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rooting Moloch");
         addTarget(playerA, "Renewed Faith");
 
