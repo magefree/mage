@@ -19,7 +19,9 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -31,11 +33,20 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class LoreholdArchivist extends PrepareCard {
 
+    private static final FilterCard filter = new FilterCard("artifact and/or creature cards");
+
+    static {
+        filter.add(Predicates.or(
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()
+        ));
+    }
+
     private static final CardsInControllerGraveyardCondition condition
-            = new CardsInControllerGraveyardCondition(3, StaticFilters.FILTER_CARD_ARTIFACT_OR_CREATURE);
+            = new CardsInControllerGraveyardCondition(3, filter);
     private static final Hint hint = new ValueHint(
             "Artifact or creature cards in your graveyard",
-            new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_ARTIFACT_OR_CREATURE)
+            new CardsInControllerGraveyardCount(filter)
     );
 
     public LoreholdArchivist(UUID ownerId, CardSetInfo setInfo) {
