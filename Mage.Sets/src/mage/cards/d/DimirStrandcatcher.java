@@ -87,7 +87,7 @@ class DimirStrandcatcherEffect extends OneShotEffect {
         int count = game
                 .getOpponents(source.getControllerId())
                 .stream()
-                .filter(game.getCombat().getDefenders()::contains)
+                .filter(game.getCombat().getPlayerDefenders(game, false)::contains)
                 .mapToInt(x -> 1)
                 .sum();
         return player.surveil(count, source, game);
