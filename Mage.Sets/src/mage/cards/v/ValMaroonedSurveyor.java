@@ -2,14 +2,12 @@ package mage.cards.v;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
@@ -29,7 +27,10 @@ public final class ValMaroonedSurveyor extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
+        // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
+
+        // Whenever you discover, investigate, scry, surveil, or seek one or more cards, Val deals 2 damage to each opponent and you gain 2 life.
         this.addAbility(new ValMaroonedSurveyorTriggeredAbility());
     }
 
@@ -46,7 +47,7 @@ public final class ValMaroonedSurveyor extends CardImpl {
 class ValMaroonedSurveyorTriggeredAbility extends TriggeredAbilityImpl {
 
     ValMaroonedSurveyorTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamagePlayersEffect(Outcome.Damage, StaticValue.get(2), TargetController.OPPONENT), false);
+        super(Zone.BATTLEFIELD, new DamagePlayersEffect(2, TargetController.OPPONENT));
         addEffect(new GainLifeEffect(2).concatBy("and"));
         setTriggerPhrase("Whenever you discover, investigate, scry, surveil, or seek one or more cards, ");
     }
