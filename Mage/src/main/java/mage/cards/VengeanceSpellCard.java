@@ -1,5 +1,6 @@
 package mage.cards;
 
+import mage.MageIdentifier;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.ExileVengeanceSpellEffect;
@@ -9,7 +10,9 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public class VengeanceSpellCard extends CardImpl implements SpellOptionCard {
@@ -136,16 +139,17 @@ class VengeanceCardSpellAbility extends SpellOptionCardSpellAbility {
     }
 
     @Override
-    public ActivationStatus canActivate(UUID playerId, Game game) {
+    public Set<MageIdentifier> spellCanBeActivatedNow(UUID playerId, Game game) {
         // cast only from your graveyard
+        // (it's a common check for all cast ways, e.g. cast without paying mana cost from cascade)
         Card spellCard = game.getCard(this.getSourceId());
         if (spellCard instanceof VengeanceSpellCard) {
             Card card = ((VengeanceSpellCard) spellCard).getParentCard();
             if (!card.isOwnedBy(playerId) || game.getState().getZone(card.getId()) != Zone.GRAVEYARD) {
-                return ActivationStatus.getFalse();
+                return Collections.emptySet();
             }
         }
-        return super.canActivate(playerId, game);
+        return super.spellCanBeActivatedNow(playerId, game);
     }
 
     @Override

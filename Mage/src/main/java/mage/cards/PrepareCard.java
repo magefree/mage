@@ -83,14 +83,5 @@ public abstract class PrepareCard extends CardWithSpellOption {
         return new PreparedSpellCopy(getSpellCard(), permanentId);
     }
 
-    @Override
-    public boolean isMainCardCastOptionAvailable(Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean isSpellCardCastOptionAvailable(Game game) {
-        return false;
-    }
 
 }

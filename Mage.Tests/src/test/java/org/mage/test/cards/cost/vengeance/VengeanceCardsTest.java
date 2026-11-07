@@ -240,4 +240,30 @@ public class VengeanceCardsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
     }
+
+    @Test
+    public void test_CastWithoutPayingManaCost_CantCastVengeanceFromExile() {
+        skipInitShuffling();
+        removeAllCardsFromLibrary(playerA);
+
+        // Cascade, cascade
+        addCard(Zone.HAND, playerA, "Maelstrom Wanderer"); // {5}{U}{R}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
+        addCard(Zone.BATTLEFIELD, playerA, "Taiga", 8);
+        //
+        addCard(Zone.LIBRARY, playerA, "Swamp", 3);
+        addCard(Zone.LIBRARY, playerA, HELA);
+
+        // cascade into a vengeance card - only the main card can be cast, no choice of the vengeance spell
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Maelstrom Wanderer");
+        setChoice(playerA, "cascade"); // triggers order
+        setChoice(playerA, true); // cast the exiled card
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, HELA, 1);
+        assertExileCount(playerA, HELA, 0);
+    }
 }
