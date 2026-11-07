@@ -32,7 +32,7 @@ public final class WerewolfPackLeader extends CardImpl {
         // Pack tactics — Whenever Werewolf Pack Leader attacks, if you attacked with creatures with total power 6 or greater this combat, draw a card.
         this.addAbility(new PackTacticsAbility(new DrawCardSourceControllerEffect(1)));
 
-        // {3}{G}: Until end of turn, Werewolf Pack Leader has base power and toughness 5/3, gains trample, and isn't a Human.
+        // {3}{G}: Until end of turn, Werewolf Pack Leader has base power and toughness 5/3, gains trample, and is a Werewolf.
         this.addAbility(new SimpleActivatedAbility(new WerewolfPackLeaderEffect(), new ManaCostsImpl<>("{3}{G}")));
     }
 
@@ -50,7 +50,7 @@ class WerewolfPackLeaderEffect extends ContinuousEffectImpl {
 
     WerewolfPackLeaderEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "until end of turn, {this} has base power and toughness 5/3, gains trample, and isn't a Human";
+        staticText = "until end of turn, {this} has base power and toughness 5/3, gains trample, and is a Werewolf";
     }
 
     private WerewolfPackLeaderEffect(final WerewolfPackLeaderEffect effect) {
@@ -71,7 +71,8 @@ class WerewolfPackLeaderEffect extends ContinuousEffectImpl {
         }
         switch (layer) {
             case TypeChangingEffects_4:
-                permanent.removeSubType(game, SubType.HUMAN);
+                permanent.removeAllCreatureTypes(game);
+                permanent.addSubType(game, SubType.WEREWOLF);
                 return true;
             case AbilityAddingRemovingEffects_6:
                 permanent.addAbility(TrampleAbility.getInstance(), source.getSourceId(), game);
