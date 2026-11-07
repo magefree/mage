@@ -65,4 +65,9 @@ enum EmeritusOfWoeCondition implements Condition {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "two or more creatures died this turn";
+    }
 }
