@@ -83,7 +83,7 @@ class ZeroIncorporealSensateEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (controller == null || opponent == null) {
+        if (controller == null || opponent == null || opponent.getHand().isEmpty()) {
             return false;
         }
         controller.lookAtCards(source, "Hand of " + opponent.getName(), opponent.getHand(), game);

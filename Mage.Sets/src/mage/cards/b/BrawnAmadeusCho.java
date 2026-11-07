@@ -39,8 +39,8 @@ public final class BrawnAmadeusCho extends CardImpl {
         Ability ability = new PowerUpAbility(
             new AddCountersSourceEffect(
                 CounterType.P1P1.createInstance(),
-                CardsInControllerHandCount.ANY
-            ).setText("Put a +1/+1 counter on {this} for each card in your hand"),
+                CardsInControllerHandCount.ANY_SINGULAR
+            ),
             new ManaCostsImpl<>("{4}{G/U}")
         );
         this.addAbility(ability);

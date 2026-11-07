@@ -55,7 +55,13 @@ public abstract class Animation {
     /**
      * Shared Swing timer, runs while there are animations to process
      */
-    private static final javax.swing.Timer timer = new javax.swing.Timer((int) TARGET_MILLIS_PER_FRAME, e -> processTick());
+    private static final javax.swing.Timer timer;
+
+    static {
+        // init in static block, not in field: javac 8 fails on a field lambda with "variable e might not have been initialized"
+        // in the constructor's early return
+        timer = new javax.swing.Timer((int) TARGET_MILLIS_PER_FRAME, e -> processTick());
+    }
 
     private enum State {
         SCHEDULED, // waits a delay or the first tick

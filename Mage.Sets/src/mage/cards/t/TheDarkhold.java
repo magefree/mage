@@ -40,8 +40,7 @@ public final class TheDarkhold extends CardImpl {
             new TapSourceCost()
         );
         sinAbility.addEffect(new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.SIN)));
-        sinAbility.addEffect(new LoseLifeSourceControllerEffect(CardsInControllerHandCount.ANY)
-            .setText("then you lose 1 life for each card in your hand"));
+        sinAbility.addEffect(new LoseLifeSourceControllerEffect(CardsInControllerHandCount.ANY_SINGULAR).concatBy(", then"));
         this.addAbility(sinAbility);
 
         // {6}{B}{B}, {T}: Each player's life total becomes the lowest life total among all players. Activate only as a sorcery.

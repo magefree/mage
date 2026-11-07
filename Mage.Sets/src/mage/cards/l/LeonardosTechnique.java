@@ -28,12 +28,12 @@ public final class LeonardosTechnique extends CardImpl {
     public LeonardosTechnique(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}");
 
-        // Sneak {1}{W}
-        this.addAbility(new SneakAbility(this, "{1}{W}"));
-
         // Return one or two target creature cards each with mana value 3 or less from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(1, 2, filter));
+
+        // Sneak {1}{W}
+        this.addAbility(new SneakAbility(this, "{1}{W}"));
     }
 
     private LeonardosTechnique(final LeonardosTechnique card) {

@@ -1,3 +1,3 @@
 #!/bin/sh
 
-java -Xmx1024m -jar ./lib/mage-server-${project.version}.jar
+java -Xmx1024m -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -jar ./lib/mage-server-${project.version}.jar

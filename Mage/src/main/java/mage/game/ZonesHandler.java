@@ -1,6 +1,7 @@
 package mage.game;
 
 import mage.abilities.Ability;
+import mage.abilities.keyword.SneakAbility;
 import mage.cards.*;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -114,6 +115,21 @@ public final class ZonesHandler {
             if (game.getPhase() != null) { // moving cards to zones before game started does not need events
                 game.addSimultaneousEvent(zoneChangeInfo.event);
             }
+        }
+
+        // enters attacking (508.4): only after the whole group is on the battlefield and effects are applied,
+        // so a defender choice shows a finished game state
+        // same for tokens in another place
+        List<UUID> enteringAttackers = new ArrayList<>();
+        for (ZoneChangeInfo zoneChangeInfo : zoneChangeInfos) {
+            if (Zone.BATTLEFIELD.equals(zoneChangeInfo.event.getToZone())
+                    && zoneChangeInfo.event.getTarget().isEntersAttacking()) {
+                enteringAttackers.add(zoneChangeInfo.event.getTarget().getId());
+            }
+        }
+        if (!enteringAttackers.isEmpty()) {
+            game.applyEffects();
+            game.getCombat().addEnteringAttackers(enteringAttackers, game);
         }
         return zoneChangeInfos;
     }
@@ -416,11 +432,17 @@ public final class ZonesHandler {
                 permanent.setTapped(info instanceof ZoneChangeInfo.Battlefield
                         && ((ZoneChangeInfo.Battlefield) info).tapped);
 
-                // if need prototyped version
+                // if need prototyped or sneaked version
                 if (Zone.STACK == event.getFromZone()) {
                     Spell spell = game.getStack().getSpell(event.getTargetId());
                     if (spell != null) {
                         permanent.setPrototyped(spell.isPrototyped());
+                        // TODO: if more sneak style mechanics arrive then combine to shared logic and methods like CardUtil.getForcedAttackingDefenders(Game game, Ability source)
+                        Set<UUID> sneakDefenders = SneakAbility.getSneakDefenders(spell, game);
+                        if (sneakDefenders != null) {
+                            permanent.setTapped(true);
+                            permanent.setEntersAttacking(sneakDefenders);
+                        }
                     }
                 }
 

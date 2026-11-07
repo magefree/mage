@@ -10,6 +10,7 @@ import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.util.CardUtil;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -67,7 +68,7 @@ public class CreateTokenTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int value = amount.calculate(game, source, this);
         if (value > 0) {
-            return token.putOntoBattlefield(value, game, source, getTargetPointer().getFirst(game, source), tapped, attacking, (UUID) getValue("playerToAttack"));
+            return token.putOntoBattlefield(value, game, source, getTargetPointer().getFirst(game, source), tapped, attacking, (Set<UUID>) getValue("attackedDefenders"));
         }
         return true;
     }

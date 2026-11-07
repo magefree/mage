@@ -87,18 +87,22 @@ class FlickerformEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         // Exile enchanted creature and all Auras attached to it.
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
+        if (controller != null && enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent enchantedCreature = game.getPermanent(enchantment.getAttachedTo());
             if (enchantedCreature != null) {
-                UUID exileZoneId = UUID.randomUUID();
-                enchantedCreature.moveToExile(exileZoneId, enchantment.getName(), source, game);
-                for (UUID attachementId : enchantedCreature.getAttachments()) {
-                    Permanent attachment = game.getPermanent(attachementId);
+                // creature and its auras must be exiled at the same time
+                Set<Card> toExile = new HashSet<>();
+                toExile.add(enchantedCreature);
+                for (UUID attachmentId : enchantedCreature.getAttachments()) {
+                    Permanent attachment = game.getPermanent(attachmentId);
                     if (attachment != null && filter.match(attachment, game)) {
-                        attachment.moveToExile(exileZoneId, enchantment.getName(), source, game);
+                        toExile.add(attachment);
                     }
                 }
+                UUID exileZoneId = CardUtil.getExileZoneId(game, source);
+                controller.moveCardsToExile(toExile, source, game, true, exileZoneId, CardUtil.getSourceName(game, source));
                 if (!(enchantedCreature instanceof Token)) {
                     // At the beginning of the next end step, return that card to the battlefield under its owner's control.
                     // If you do, return the other cards exiled this way to the battlefield under their owners' control attached to that creature
@@ -151,7 +155,8 @@ class FlickerformReturnEffect extends OneShotEffect {
             return false;
         }
         ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
-        Card enchantedCard = exileZone.get(enchantedCardId, game);
+        // double faced cards: a permanent is a side, but an exile zone contains a main card
+        Card enchantedCard = exileZone.get(CardUtil.getMainCardId(game, enchantedCardId), game);
         if (enchantedCard == null) {
             return false;
         }
@@ -166,7 +171,7 @@ class FlickerformReturnEffect extends OneShotEffect {
             for (Card enchantment : exileZone.getCards(game)) {
                 if (filterAura.match(enchantment, game)) {
                     boolean canTarget = false;
-                    for (Target target : enchantment.getSpellAbility().getTargets()) {
+                    for (Target target : CardUtil.getDefaultCardSideForBattlefield(game, enchantment).getSpellAbility().getTargets()) {
                         Filter filter = target.getFilter();
                         if (filter.match(newPermanent, game)) {
                             canTarget = true;
@@ -177,15 +182,16 @@ class FlickerformReturnEffect extends OneShotEffect {
                         // Aura stays exiled
                         continue;
                     }
-                    game.getState().setValue("attachTo:" + enchantment.getId(), newPermanent);
+                    AttachEffect.setAttachTo(game, enchantment.getId(), newPermanent);
                 }
                 toBattlefieldAttached.add(enchantment);
             }
             if (!toBattlefieldAttached.isEmpty()) {
                 controller.moveCards(toBattlefieldAttached, Zone.BATTLEFIELD, source, game);
                 for (Card card : toBattlefieldAttached) {
-                    if (game.getState().getZone(card.getId()) == Zone.BATTLEFIELD) {
-                        newPermanent.addAttachment(card.getId(), source, game);
+                    Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+                    if (attachment != null) {
+                        newPermanent.addAttachment(attachment.getId(), source, game);
                     }
                 }
             }

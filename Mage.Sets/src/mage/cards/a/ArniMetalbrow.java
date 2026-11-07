@@ -6,6 +6,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.hint.StaticHint;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.StaticFilters;
@@ -18,6 +19,7 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -51,7 +53,8 @@ public final class ArniMetalbrow extends CardImpl {
 class ArniMetalbrowTriggeredAbility extends TriggeredAbilityImpl {
 
     ArniMetalbrowTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new ArniMetalbrowEffect(), new ManaCostsImpl<>("{1}{R}")));
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new ArniMetalbrowEffect(), new ManaCostsImpl<>("{1}{R}"))
+                .withChooseHint(new ArniMetalbrowHint()));
         setTriggerPhrase("Whenever a creature you control attacks or a creature you control enters attacking, ");
     }
 
@@ -91,6 +94,21 @@ class ArniMetalbrowTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getEffects().setValue("attacker", permanent);
         return true;
+    }
+}
+
+class ArniMetalbrowHint extends StaticHint {
+
+    ArniMetalbrowHint() {
+        super("");
+    }
+
+    @Override
+    public String getText(Game game, Ability source) {
+        return source.getEffects().stream()
+            .map(effect -> effect.getValue("attacker")).filter(Objects::nonNull)
+            .filter(Permanent.class::isInstance).map(Permanent.class::cast).filter(Objects::nonNull)
+            .findFirst().map(attacker -> "Attacker: " + attacker).orElse("");
     }
 }
 

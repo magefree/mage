@@ -7,6 +7,7 @@ import mage.cards.Card;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.SpellAbilityCastMode;
 import mage.constants.SpellAbilityType;
+import mage.constants.SubType;
 import mage.game.Game;
 
 import java.util.Set;
@@ -22,6 +23,13 @@ public class SpellTransformedAbility extends SpellAbility {
     public SpellTransformedAbility(Card card, String manaCost) {
         super(card.getSecondFaceSpellAbility());
         this.newId();
+
+        // verify check: make sure targets setup of second side done before alternative spell create, e.g. disturb on aura
+        if (card.getSecondCardFace().hasSubtype(SubType.AURA, null) 
+              && this.getTargets().isEmpty()) {
+            // how-to fix: add left spell ability after second side targets setup
+            throw new IllegalArgumentException("Wrong code usage: transformed spell ability must be added after the aura target of the second face - " + card.getName());
+        }
 
         // getSecondFaceSpellAbility() already verified that second face exists
         this.setCardName(card.getSecondCardFace().getName());

@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
+import mage.abilities.effects.AuraReplacementEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -109,12 +110,16 @@ class TakklemaggotEffect extends OneShotEffect {
             if (creature == null) {
                 return false;
             }
-            game.getState().setValue("attachTo:" + auraCard.getId(), creature);
+            AttachEffect.setAttachTo(game, auraCard.getId(), creature);
             controller.moveCards(auraCard, Zone.BATTLEFIELD, source, game);
-            creature.addAttachment(auraCard.getId(), source, game);
+            Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(auraCard, game);
+            if (attachment != null) {
+                creature.addAttachment(attachment.getId(), source, game);
+            }
         } else {
             // return as non-Aura enchantment
             game.addEffect(new TakklemaggotNonAuraEffect(player.getId()), source);
+            AuraReplacementEffect.setEnterAsNonAura(game, auraCard);
             controller.moveCards(auraCard, Zone.BATTLEFIELD, source, game);
             auraCard.addInfo("chosen player", CardUtil.addToolTipMarkTags("Chosen player: " + player.getLogName()), game);
         }

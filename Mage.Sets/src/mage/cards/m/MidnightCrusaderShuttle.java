@@ -135,7 +135,7 @@ class MidnightCrusaderShuttleSecondChoice extends VillainousChoice {
             return false;
         }
         permanent.tap(source, game);
-        game.getCombat().addAttackingCreature(permanent.getId(), game, player.getId());
+        game.getCombat().addAttackerToCombat(permanent.getId(), player.getId(), game);
         return true;
     }
 }

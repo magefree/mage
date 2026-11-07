@@ -21,11 +21,11 @@ public final class TheLastRoninsTechnique extends CardImpl {
     public TheLastRoninsTechnique(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");
 
-        // Sneak {1}{W}
-        this.addAbility(new SneakAbility(this, "{1}{W}"));
-
         // Create three 1/1 white Ninja Turtle Spirit creature tokens. If this spell's sneak cost was paid, they enter tapped and attacking.
         this.getSpellAbility().addEffect(new TheLastRoninsTechniqueEffect());
+
+        // Sneak {1}{W}
+        this.addAbility(new SneakAbility(this, "{1}{W}"));
     }
 
     private TheLastRoninsTechnique(final TheLastRoninsTechnique card) {

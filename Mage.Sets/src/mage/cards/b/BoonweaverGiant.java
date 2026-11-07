@@ -6,6 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,6 +22,7 @@ import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
 
 /**
  *
@@ -111,11 +113,12 @@ class BoonweaverGiantEffect extends OneShotEffect {
         // Aura card found - attach it
         if (card != null) {
             if (sourcePermanent != null) {
-                game.getState().setValue("attachTo:" + card.getId(), sourcePermanent);
+                AttachEffect.setAttachTo(game, card.getId(), sourcePermanent);
             }
             controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             if (sourcePermanent != null) {
-                return sourcePermanent.addAttachment(card.getId(), source, game);
+                Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+                return attachment != null && sourcePermanent.addAttachment(attachment.getId(), source, game);
             }
         }
         return true;

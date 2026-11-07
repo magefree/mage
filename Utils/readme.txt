@@ -1,6 +1,7 @@
 Usage:
 check-set-printings.py <SET_CODE> - lists implemented cards whose printing (collector number) is not registered in the set's Java class
 gen-card.pl - enter the card name when prompted to generate the java classes
+gen-draft-rates-17Lands.py - generates draft ratings for AI/bots (Mage/src/main/resources/ratings) from 17Lands public datasets, run without params for sets table and menu
 gen-existing-cards-by-set.pl - generates the java clases for the cards from the set of your choice that already have an implementation
 gen-list-cards-for-set.pl - generates the file for cards for a set in data/
 gen-list-unimplemented-cards-for-set.pl - generates the file for unimplemented cards for a set in data/

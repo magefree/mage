@@ -7,6 +7,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
@@ -25,6 +26,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
 
 /**
  * @author noxx
@@ -143,7 +145,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
                 break;
             }
 
-            Target target = aura.getSpellAbility().getTargets().get(0);
+            Target target = CardUtil.getDefaultCardSideForBattlefield(game, aura).getSpellAbility().getTargets().get(0);
             if (target == null) {
                 break;
             }
@@ -167,7 +169,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
                 break;
             }
 
-            Target target = aura.getSpellAbility().getTargets().get(0);
+            Target target = CardUtil.getDefaultCardSideForBattlefield(game, aura).getSpellAbility().getTargets().get(0);
             if (target == null) {
                 break;
             }
@@ -193,9 +195,12 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
                 continue;
             }
 
-            game.getState().setValue("attachTo:" + aura.getId(), sourcePermanent);
+            AttachEffect.setAttachTo(game, aura.getId(), sourcePermanent);
             controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
-            sourcePermanent.addAttachment(aura.getId(), source, game);
+            Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(aura, game);
+            if (attachment != null) {
+                sourcePermanent.addAttachment(attachment.getId(), source, game);
+            }
         }
         return true;
     }

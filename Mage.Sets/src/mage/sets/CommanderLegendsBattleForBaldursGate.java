@@ -929,8 +929,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Wilson, Refined Grizzly", 411, Rarity.UNCOMMON, mage.cards.w.WilsonRefinedGrizzly.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wilson, Refined Grizzly", 522, Rarity.UNCOMMON, mage.cards.w.WilsonRefinedGrizzly.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Windbrisk Heights", 930, Rarity.RARE, mage.cards.w.WindbriskHeights.class));
-        //cards.add(new SetCardInfo("Windshaper Planetar", 50, Rarity.RARE, mage.cards.w.WindshaperPlanetar.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Windshaper Planetar", 559, Rarity.RARE, mage.cards.w.WindshaperPlanetar.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Windshaper Planetar", 50, Rarity.RARE, mage.cards.w.WindshaperPlanetar.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Windshaper Planetar", 559, Rarity.RARE, mage.cards.w.WindshaperPlanetar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Winter Eladrin", 104, Rarity.COMMON, mage.cards.w.WinterEladrin.class));
         cards.add(new SetCardInfo("Wizards of Thay", 105, Rarity.RARE, mage.cards.w.WizardsOfThay.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wizards of Thay", 568, Rarity.RARE, mage.cards.w.WizardsOfThay.class, NON_FULL_USE_VARIOUS));

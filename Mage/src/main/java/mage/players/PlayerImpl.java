@@ -20,6 +20,7 @@ import mage.abilities.costs.mana.AlternateManaPaymentAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.AuraReplacementEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.RestrictionUntapNotMoreThanEffect;
 import mage.abilities.keyword.*;
@@ -232,6 +233,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.loses = player.loses;
 
         this.library = player.library.copy();
+        this.startingDeckSize = player.startingDeckSize;
         this.sideboard = player.sideboard.copy();
         this.hand = player.hand.copy();
         this.graveyard = player.graveyard.copy();
@@ -1885,19 +1887,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         // collect and filter playable activated abilities
         // GUI: user clicks on card, but it must activate ability from ANY card's parts (main, left, right)
         Set<UUID> needIds = CardUtil.getObjectParts(object);
-        Card objectCard = object instanceof Card ? (Card) object : null;
-        Card mainCard = objectCard == null ? null : objectCard.getMainCard();
-        if (mainCard instanceof CardWithSpellOption) {
-            // Multipart cards decide which of their parts are casting options in their current state.
-            CardWithSpellOption card = (CardWithSpellOption) mainCard;
-            needIds = new HashSet<>(needIds);
-            if (!card.isMainCardCastOptionAvailable(game)) {
-                needIds.remove(card.getId());
-            }
-            if (!card.isSpellCardCastOptionAvailable(game)) {
-                needIds.remove(card.getSpellCard().getId());
-            }
-        }
 
         // workaround to find all abilities first and filter it for one object
         List<ActivatedAbility> allPlayable = getPlayable(game, true, zone, false);
@@ -4217,12 +4206,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         } else if (object instanceof CardWithSpellOption) {
             // adventure must use different card characteristics for different spells (main or adventure)
             CardWithSpellOption cardWithSpellOption = (CardWithSpellOption) object;
-            if (cardWithSpellOption.isSpellCardCastOptionAvailable(game)) {
-                getPlayableFromObjectSingle(game, fromZone, cardWithSpellOption.getSpellCard(), cardWithSpellOption.getSpellCard().getAbilities(game), availableMana, output);
-            }
-            if (cardWithSpellOption.isMainCardCastOptionAvailable(game)) {
-                getPlayableFromObjectSingle(game, fromZone, cardWithSpellOption, cardWithSpellOption.getSharedAbilities(game), availableMana, output);
-            }
+            getPlayableFromObjectSingle(game, fromZone, cardWithSpellOption.getSpellCard(), cardWithSpellOption.getSpellCard().getAbilities(game), availableMana, output);
+            getPlayableFromObjectSingle(game, fromZone, cardWithSpellOption, cardWithSpellOption.getSharedAbilities(game), availableMana, output);
         } else if (object instanceof Card) {
             getPlayableFromObjectSingle(game, fromZone, object, ((Card) object).getAbilities(game), availableMana, output);
         } else if (object instanceof StackObject) {
@@ -4368,16 +4353,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (ability.getZone().match(Zone.HAND)) {
                         boolean isPlaySpell = (ability instanceof SpellAbility);
                         boolean isPlayLand = (ability instanceof PlayLandAbility);
-
-                        if (isPlaySpell && card instanceof CardWithSpellOption) {
-                            CardWithSpellOption optionCard = (CardWithSpellOption) card;
-                            if ((ability.getSourceId().equals(optionCard.getId())
-                                    && !optionCard.isMainCardCastOptionAvailable(game))
-                                    || (ability.getSourceId().equals(optionCard.getSpellCard().getId())
-                                    && !optionCard.isSpellCardCastOptionAvailable(game))) {
-                                continue;
-                            }
-                        }
 
                         // ignore backside of TDFC
                         // TODO: maybe better way to ignore
@@ -5125,18 +5100,19 @@ public abstract class PlayerImpl implements Player, Serializable {
                     // 303.4g. If an Aura is entering the battlefield and there is no legal object or player for it to enchant,
                     // the Aura remains in its current zone, unless that zone is the stack. In that case, the Aura is put into
                     // its owner's graveyard instead of entering the battlefield. If the Aura is a token, it isn't created.
-                    if (card.hasSubtype(SubType.AURA, game) && !(source instanceof BestowAbility)) {
+                    Card auraCard = AuraReplacementEffect.findEnteringAura(game, card, faceDown);
+                    if (auraCard != null && !(source instanceof BestowAbility)) {
                         SpellAbility auraSpellAbility;
-                        if (source instanceof SpellAbility && card.getAbilities(game).contains(source)) {
+                        if (source instanceof SpellAbility && auraCard.getAbilities(game).contains(source)) {
                             // cast aura - use source ability
                             auraSpellAbility = (SpellAbility) source;
                         } else {
                             // put to battlefield by another effect - use default spell
-                            auraSpellAbility = card.getSpellAbility();
+                            auraSpellAbility = auraCard.getSpellAbility();
                         }
                         if (auraSpellAbility != null) {
                             if (auraSpellAbility.getTargets().isEmpty()) {
-                                throw new IllegalArgumentException("Something wrong, found etb aura with empty spell ability or without any targets: " + card + ", source: " + source);
+                                throw new IllegalArgumentException("Something wrong, found etb aura with empty spell ability or without any targets: " + auraCard + ", source: " + source);
                             }
                             if (!auraSpellAbility.getTargets().get(0).copy().withNotTarget(true).canChooseOrAlreadyChosen(byOwner ? card.getOwnerId() : getId(), source, game)) {
                                 continue;

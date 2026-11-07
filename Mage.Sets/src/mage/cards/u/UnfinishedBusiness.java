@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -16,6 +17,7 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -75,7 +77,7 @@ class UnfinishedBusinessEffect extends OneShotEffect{
             controller.moveCards(targetCreature, Zone.BATTLEFIELD, source, game);
             game.processAction();
         }
-        Permanent permanentCreature = targetCreature == null ? null : game.getPermanent(targetCreature.getId());
+        Permanent permanentCreature = targetCreature == null ? null : CardUtil.getPermanentFromCardPutToBattlefield(targetCreature, game);
 
         // Target auras and/or equipment in your graveyard.
         Cards cardsInitial = new CardsImpl(source.getTargets().get(1).getTargets());
@@ -106,13 +108,15 @@ class UnfinishedBusinessEffect extends OneShotEffect{
         // Handle return of legal auras and equipment
         if (permanentCreature != null){
             cards.getCards(game)
-                    .forEach(card -> game.getState().setValue("attachTo:" + card.getId(), permanentCreature));
+                    .forEach(card -> AttachEffect.setAttachTo(game, card.getId(), permanentCreature));
         }
         controller.moveCards(cards, Zone.BATTLEFIELD, source, game);
         if (permanentCreature != null){
             for(UUID id: cards){
-                if (!permanentCreature.cantBeAttachedBy(game.getCard(id), source, game, true)){
-                    permanentCreature.addAttachment(id, source, game);
+                Card card = game.getCard(id);
+                Permanent attachment = card == null ? null : CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+                if (attachment != null && !permanentCreature.cantBeAttachedBy(card, source, game, true)){
+                    permanentCreature.addAttachment(attachment.getId(), source, game);
                 }
             }
         }

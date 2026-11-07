@@ -61,7 +61,15 @@ import static org.junit.Assert.assertTrue;
 public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implements CardTestAPI {
 
     // DEBUG only, enable it to fast startup tests without database create (delete \db\ folder to force db recreate)
-    private static final boolean FAST_SCAN_WITHOUT_DATABASE_CREATE = false;
+    // set true or run with -Dxmage.tests.fastScanDb=true
+    private static boolean FAST_SCAN_WITHOUT_DATABASE_CREATE = false;
+
+    static {
+        String val = System.getProperty("xmage.tests.fastScanDb");
+        if (val != null) {
+            FAST_SCAN_WITHOUT_DATABASE_CREATE = Boolean.parseBoolean(val);
+        }
+    }
 
     private static final boolean SHOW_EXECUTE_TIME_PER_TEST = false;
 

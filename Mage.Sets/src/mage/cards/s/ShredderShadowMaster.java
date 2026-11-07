@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -127,7 +128,7 @@ class ShredderShadowMasterEffect extends OneShotEffect {
             if (!playerId.equals(defendingPlayerId) && controller.hasOpponent(playerId, game)) {
                 Player opponent = game.getPlayer(playerId);
                 if (opponent != null) {
-                    CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(controller.getId(), null, false, 1, true, true, playerId).setIsntLegendary(true);
+                    CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(controller.getId(), null, false, 1, true, true, Collections.singleton(playerId)).setIsntLegendary(true);
                     effect.setTargetPointer(new FixedTarget(sourceObject, game));
                     effect.apply(game, source);
                     tokens.addAll(effect.getAddedPermanents());

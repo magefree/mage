@@ -15,6 +15,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.token.GlimmerToken;
 
+import java.util.Collections;
 import java.util.UUID;
 
 /**
@@ -78,7 +79,7 @@ class SoaringLightbringerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         return new GlimmerToken().putOntoBattlefield(
                 1, game, source, source.getControllerId(), true, true,
-                this.getTargetPointer().getFirst(game, source)
+                Collections.singleton(this.getTargetPointer().getFirst(game, source))
         );
     }
 }

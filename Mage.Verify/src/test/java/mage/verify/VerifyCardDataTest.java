@@ -174,12 +174,13 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
-
+        skipListAddName(SKIP_LIST_TYPE, "TRK", "Culber and Stamets, Star-Crossed"); // TODO: Remove once MTGJson resyncs (Oct 30, 2026)
         // subtype
         // skipListAddName(SKIP_LIST_SUBTYPE, set, cardName);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
+        skipListAddName(SKIP_LIST_SUBTYPE, "TRK", "Culber and Stamets, Star-Crossed"); // TODO: Remove once MTGJson resyncs (Oct 30, 2026)
 
         // number
         // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
@@ -190,6 +191,7 @@ public class VerifyCardDataTest {
 
         // missing abilities
         // skipListAddName(SKIP_LIST_MISSING_ABILITIES, set, cardName);
+        skipListAddName(SKIP_LIST_MISSING_ABILITIES, "MH1", "Icehide Golem"); // reminder text only, no abilities
 
         // double rare cards
         // skipListAddName(SKIP_LIST_DOUBLE_RARE, set, cardName);
@@ -3057,6 +3059,22 @@ public class VerifyCardDataTest {
         // planeswalker fix [-7]: xxx
         refText = refText.replaceAll("\\[([\\−\\+]?\\d*)\\]\\: ", "$1: ").replaceAll("\\[\\−X\\]\\: ", "-X: ");
 
+        // station fix
+        // mtgjson: 
+        // - keeps the level in the first ability line and the P/T in the card's fields.
+        // - "STATION 12+\n0/8\nFlying"
+        // xmage:
+        // - shows each station level as a separate line, the P/T of a creature level as a line too
+        // - "12+ | Flying" with P/T 0/8 and "It's an artifact creature at 12+."
+        if (card.getAbilities().containsClass(StationAbility.class)) {
+            refText = refText.replaceAll("(?m)^(\\d+)\\+ \\| ", "STATION $1+\n");
+            Matcher creatureLevel = Pattern.compile("It's an artifact creature at (\\d+)\\+").matcher(refText);
+            if (creatureLevel.find() && ref.power != null && ref.toughness != null) {
+                String levelLine = "STATION " + creatureLevel.group(1) + "+\n";
+                refText = refText.replace(levelLine, levelLine + ref.power + "/" + ref.toughness + "\n");
+            }
+        }
+
         // evergreen keyword fix
         for (String s : refText.replaceAll(" \\(.+?\\)", "").split("[\\$\\\n]")) {
             if (Arrays
@@ -3083,6 +3101,9 @@ public class VerifyCardDataTest {
 
         // remove unnecessary reminder text
         refText = refText.replaceAll("^\\(.+(can be paid with|ransforms from|represents).+\\)\n", "");
+
+        // vengeance fix: mtgjson keeps the reminder text of a vengeance spell as a separate line
+        refText = refText.replaceAll("^\\(Cast only from your graveyard\\. Then exile it\\.\\)\n", "");
 
         // mana ability fix
         // Current implementation makes one Activated Ability per kind of color.
@@ -3121,6 +3142,15 @@ public class VerifyCardDataTest {
         if (ref.subtypes.contains("Omen")) {
             for (int i = 0; i < refRules.length; i++) {
                 refRules[i] = "Omen " +
+                        ref.types.get(0) + " - " +
+                        ref.faceName + ' ' +
+                        ref.manaCost + " - " +
+                        refRules[i];
+            }
+        }
+        if (ref.subtypes.contains("Vengeance")) {
+            for (int i = 0; i < refRules.length; i++) {
+                refRules[i] = "Vengeance " +
                         ref.types.get(0) + " - " +
                         ref.faceName + ' ' +
                         ref.manaCost + " - " +
@@ -3500,19 +3530,17 @@ public class VerifyCardDataTest {
 
     @Test
     public void test_checkCardRatingConsistency() {
-        // all cards with same name must have same rating (see RateCard.rateCard)
+        // all cards with same name in same set must have same rating (see RateCard.rateCard)
         // cards rating must be consistency (same) for card sorting
+        // warning, draft rating is a card place among the cards of one set, so diff sets can have diff ratings
         List<Card> cardsList = new ArrayList<>(CardScanner.getAllCards());
         Map<String, Integer> cardRates = new HashMap<>();
         for (Card card : cardsList) {
             int curRate = RateCard.rateCard(card, Collections.emptyList(), false);
-            int prevRate = cardRates.getOrDefault(card.getName(), 0);
-            if (prevRate == 0) {
-                cardRates.putIfAbsent(card.getName(), curRate);
-            } else {
-                if (curRate != prevRate) {
-                    Assert.fail("Card with same name have different ratings: " + card.getName());
-                }
+            String key = card.getExpansionSetCode() + " - " + card.getName();
+            Integer prevRate = cardRates.putIfAbsent(key, curRate);
+            if (prevRate != null && curRate != prevRate) {
+                Assert.fail("Card with same name in same set have different ratings: " + key);
             }
         }
     }

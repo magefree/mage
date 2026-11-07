@@ -91,6 +91,7 @@ class TannukSteadfastSecondEffect extends ContinuousEffectImpl {
             return false;
         }
         for (Card card : controller.getHand().getCards(filter, game)) {
+            // TODO: refactor GainRetraceYourGraveyardEffect, NinjaTeen and TannukSteadfastSecond to use shared effect and logic
             // double-faced cards are cast by their front face, so it must have the ability for warp to track the permanent
             Card face = card instanceof DoubleFacedCard ? ((DoubleFacedCard) card).getLeftHalfCard() : card;
             game.getState().addOtherAbility(face, new WarpAbility(face, "{2}{R}"));

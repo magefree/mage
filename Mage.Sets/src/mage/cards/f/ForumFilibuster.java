@@ -6,6 +6,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.Card;
@@ -23,6 +24,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.InklingToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
 
 /**
  *
@@ -126,9 +128,12 @@ class ForumFilibusterAttachEffect extends OneShotEffect {
             return false;
         }
         if (!tokenPermanent.cantBeAttachedBy(card, source, game, true)) {
-            game.getState().setValue("attachTo:" + card.getId(), tokenPermanent);
+            AttachEffect.setAttachTo(game, card.getId(), tokenPermanent);
             controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-            tokenPermanent.addAttachment(card.getId(), source, game);
+            Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+            if (attachment != null) {
+                tokenPermanent.addAttachment(attachment.getId(), source, game);
+            }
         }
         return true;
     }

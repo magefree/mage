@@ -10,6 +10,8 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -17,8 +19,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -80,16 +80,15 @@ class ScarabOfTheUnseenEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
         if (controller != null && targetPermanent != null) {
-            if (!targetPermanent.getAttachments().isEmpty()) {
-                List<UUID> attachments = new ArrayList<>();
-                attachments.addAll(targetPermanent.getAttachments());
-                for (UUID attachedId : attachments) {
-                    Permanent attachedPerm = game.getPermanent(attachedId);
-                    if (attachedPerm != null && filter.match(attachedPerm, game)) {
-                        controller.moveCards(attachedPerm, Zone.HAND, source, game);
-                    }
+            // all auras must be returned at the same time
+            Cards toHand = new CardsImpl();
+            for (UUID attachedId : targetPermanent.getAttachments()) {
+                Permanent attachedPerm = game.getPermanent(attachedId);
+                if (attachedPerm != null && filter.match(attachedPerm, game)) {
+                    toHand.add(attachedPerm);
                 }
             }
+            controller.moveCards(toHand, Zone.HAND, source, game);
             return true;
         }
         return false;

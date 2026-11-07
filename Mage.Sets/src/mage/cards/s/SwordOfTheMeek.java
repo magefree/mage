@@ -18,6 +18,7 @@ import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -83,7 +84,8 @@ class SwordOfTheMeekEffect extends OneShotEffect {
             controller.moveCards(equipment, Zone.BATTLEFIELD, source, game);
             Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent != null) {
-                return permanent.addAttachment(equipment.getId(), source, game);
+                Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(equipment, game);
+                return attachment != null && permanent.addAttachment(attachment.getId(), source, game);
             }
         }
         return false;

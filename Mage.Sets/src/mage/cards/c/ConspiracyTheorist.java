@@ -13,6 +13,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
@@ -22,6 +23,7 @@ import mage.game.events.DiscardedCardsEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
 import java.util.Set;
@@ -62,7 +64,7 @@ public final class ConspiracyTheorist extends CardImpl {
 class ConspiracyTheoristAbility extends TriggeredAbilityImpl {
 
     ConspiracyTheoristAbility() {
-        super(Zone.BATTLEFIELD, null);
+        super(Zone.BATTLEFIELD, new ConspiracyTheoristEffect());
     }
 
     private ConspiracyTheoristAbility(final ConspiracyTheoristAbility ability) {
@@ -79,9 +81,8 @@ class ConspiracyTheoristAbility extends TriggeredAbilityImpl {
         if (event.getPlayerId().equals(getControllerId())) {
             DiscardedCardsEvent discardedCardsEvent = (DiscardedCardsEvent) event;
             Set<Card> discardedNonLandCards = discardedCardsEvent.getDiscardedCards().getCards(StaticFilters.FILTER_CARD_NON_LAND, game);
-            if (discardedNonLandCards.size() > 0) {
-                this.getEffects().clear();
-                this.getEffects().add(new ConspiracyTheoristEffect(discardedNonLandCards));
+            if (!discardedNonLandCards.isEmpty()) {
+                this.getEffects().setTargetPointer(new FixedTargets(discardedNonLandCards, game));
                 return true;
             }
         }
@@ -101,23 +102,20 @@ class ConspiracyTheoristAbility extends TriggeredAbilityImpl {
 
 class ConspiracyTheoristEffect extends OneShotEffect {
 
-    private final Set<Card> discardedCards;
-
-    ConspiracyTheoristEffect(Set<Card> discardedCards) {
+    ConspiracyTheoristEffect() {
         super(Outcome.Benefit);
-        this.discardedCards = discardedCards;
     }
 
     private ConspiracyTheoristEffect(final ConspiracyTheoristEffect effect) {
         super(effect);
-        this.discardedCards = effect.discardedCards;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            CardsImpl cards = new CardsImpl(discardedCards);
+            Cards cards = new CardsImpl(getTargetPointer().getTargets(game, source));
+            cards.retainZone(Zone.GRAVEYARD, game);
             TargetCard target = new TargetCard(Zone.GRAVEYARD, new FilterCard("card to exile"));
             boolean validTarget = cards.stream().anyMatch(card -> target.canTarget(card, source, game));
             if (validTarget && controller.chooseUse(Outcome.Benefit, "Exile a card?", source, game)) {

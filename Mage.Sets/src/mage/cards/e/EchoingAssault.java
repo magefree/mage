@@ -24,6 +24,7 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
+import java.util.Collections;
 import java.util.UUID;
 
 /**
@@ -98,7 +99,7 @@ class EchoingAssaultEffect extends OneShotEffect {
             return false;
         }
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, null, false,
-                1, true, true, (UUID) attackedPlayer, 1, 1, false);
+                1, true, true, Collections.singleton((UUID) attackedPlayer), 1, 1, false);
         effect.setSavedPermanent(permanent);
         effect.apply(game, source);
         effect.sacrificeTokensCreatedAtNextEndStep(game, source);
