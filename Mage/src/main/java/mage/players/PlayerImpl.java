@@ -809,14 +809,24 @@ public abstract class PlayerImpl implements Player, Serializable {
                     + " card" + (numDrawn > 1 ? "s" : "")
                     + (isDrawsFromBottom() ? " from the bottom of their library" : ""));
         }
+
         // if this method was called from a replacement event, pass the number of cards back through
-        // (uncomment conditions if correct ruling is to only count cards drawn by the same player)
-        if (event instanceof DrawCardEvent /* && event.getPlayerId().equals(getId()) */) {
+        //
+        // cards drawn by another player instead of you (Notion Thief, Alms Collector) are counted too
+        //
+        // Onslaught FAQ for "drawn this way": "However, it doesn't matter *who* drew the cards. ... Plagiarize
+        // could cause another player to draw cards from Read the Runes instead of you; that would not affect
+        // the number of cards you'd need to discard."
+        // (Onslaught FAQ, 2002-09-22)
+        //
+        // 614.11b excludes only an additional action on that card itself (e.g. reveal it), not a count of drawn cards
+        if (event instanceof DrawCardEvent) {
             ((DrawCardEvent) event).incrementCardsDrawn(numDrawn);
         }
-        if (event instanceof DrawTwoOrMoreCardsEvent /* && event.getPlayerId().equals(getId()) */) {
+        if (event instanceof DrawTwoOrMoreCardsEvent) {
             ((DrawTwoOrMoreCardsEvent) event).incrementCardsDrawn(numDrawn);
         }
+
         return numDrawn;
     }
 
