@@ -9,9 +9,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.ExhaustAbility;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.abilities.mana.builder.common.ActivatedAbilityManaBuilder;
+import mage.abilities.meta.ExhaustMetaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -86,7 +86,7 @@ class PitAutomatonTriggeredAbility extends DelayedTriggeredAbility {
             return false;
         }
         StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
-        if (stackObject == null || !(stackObject.getStackAbility() instanceof ExhaustAbility)) {
+        if (stackObject == null || !(stackObject.getStackAbility() instanceof ExhaustMetaAbility)) {
             return false;
         }
         this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));

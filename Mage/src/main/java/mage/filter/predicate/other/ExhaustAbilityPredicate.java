@@ -1,6 +1,6 @@
 package mage.filter.predicate.other;
 
-import mage.abilities.keyword.ExhaustAbility;
+import mage.abilities.meta.ExhaustMetaAbility;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.stack.StackObject;
@@ -13,6 +13,6 @@ public enum ExhaustAbilityPredicate implements Predicate<StackObject> {
 
     @Override
     public boolean apply(StackObject input, Game game) {
-        return input.getStackAbility() instanceof ExhaustAbility;
+        return input.getStackAbility() instanceof ExhaustMetaAbility;
     }
 }

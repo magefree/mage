@@ -101,10 +101,14 @@ public interface ActivatedAbility extends Ability {
 
     int getMaxActivationsPerGame(Game game);
 
+    int getTotalActivations(Game game);
+
     /**
      * how many more time can this be activated this turn?
      */
     int getMaxMoreActivationsThisTurn(Game game);
+
+    TimingRule getTiming();
 
     ActivatedAbility setTiming(TimingRule timing);
 

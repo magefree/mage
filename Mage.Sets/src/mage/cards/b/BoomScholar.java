@@ -9,6 +9,7 @@ import mage.abilities.effects.common.cost.AbilitiesCostReductionControllerEffect
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.ExhaustAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.meta.ExhaustMetaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -44,7 +45,7 @@ public final class BoomScholar extends CardImpl {
 
         // Exhaust abilities of other permanents you control cost {2} less to activate.
         this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(
-                ExhaustAbility.class, "", 2, true
+                ExhaustMetaAbility.class, "", 2, true
         ).setText("exhaust abilities of other permanents you control cost {2} less to activate")));
 
         // Exhaust -- {4}{R}{G}: Creatures and Vehicles you control gain trample until end of turn. Put two +1/+1 counters on this creature.

@@ -15,6 +15,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -188,6 +189,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         return this;
     }
 
+    @Override
     public TimingRule getTiming() {
         return timing;
     }
@@ -274,6 +276,11 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
                 this.getOriginalId(), this, controllerId, maxActivationsPerGame, true);
         game.replaceEvent(maxActivationsEvent);
         return maxActivationsEvent.getAmount();
+    }
+
+    @Override
+    public int getTotalActivations(Game game) {
+        return Optional.ofNullable(this.getActivationInfo(game)).map(info -> info.totalActivations).orElse(0);
     }
 
     protected ActivationInfo getActivationInfo(Game game) {
