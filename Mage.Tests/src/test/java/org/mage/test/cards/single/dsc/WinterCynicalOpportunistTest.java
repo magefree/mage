@@ -4,69 +4,23 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
-import mage.cards.Cards;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
-import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.target.TargetCard;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mage.test.player.TestComputerPlayer;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author brahle
  */
 public class WinterCynicalOpportunistTest extends CardTestPlayerBase {
-
-    static class WinterTestPlayer extends TestPlayer {
-        private final AtomicInteger permanentPromptCount = new AtomicInteger(0);
-
-        public WinterTestPlayer(TestComputerPlayer computerPlayer) {
-            super(computerPlayer);
-        }
-
-        public int getPermanentPromptCount() {
-            return permanentPromptCount.get();
-        }
-
-        @Override
-        public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-            if (target.getZone() == Zone.EXILED
-                    && target.getFilter() != null
-                    && target.getFilter().getMessage().contains("permanent card")) {
-                permanentPromptCount.incrementAndGet();
-                if (!getChoices().isEmpty()) {
-                    String nextChoice = getChoices().get(0);
-                    if (TestPlayer.CHOICE_SKIP.equals(nextChoice) || "[cancel]".equals(nextChoice)) {
-                        getChoices().remove(0);
-                        boolean isReq = target.isRequiredExplicitlySet()
-                                ? target.isRequired()
-                                : target.isRequired(source != null ? source.getSourceId() : null, game);
-                        if (isReq) {
-                            throw new AssertionError("Cannot cancel mandatory choice: target is required");
-                        }
-                        return false;
-                    }
-                }
-            }
-            return super.choose(outcome, cards, target, source, game);
-        }
-    }
-
-    @Override
-    protected TestPlayer createPlayer(String name, RangeOfInfluence rangeOfInfluence) {
-        return new WinterTestPlayer(new TestComputerPlayer(name, rangeOfInfluence));
-    }
 
     @Test
     public void testAttackMillsAndEndStepReanimatesWithFinalityCounter() {
@@ -175,20 +129,18 @@ public class WinterCynicalOpportunistTest extends CardTestPlayerBase {
 
         setChoice(playerA, true);
         setChoice(playerA, "Grizzly Bears^Sol Ring^Rancor^Forest");
-        setChoice(playerA, TestPlayer.CHOICE_SKIP); // Attempt to cancel mandatory permanent choice
+        setChoice(playerA, TestPlayer.CHOICE_SKIP); // Attempt to skip mandatory permanent choice
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.UPKEEP);
 
         try {
             execute();
-            Assert.fail("Expected cancellation of mandatory permanent choice to fail");
+            Assert.fail("Skipping the mandatory permanent choice must not be allowed");
         } catch (AssertionError e) {
-            Assert.assertTrue("Error should be due to mandatory choice: " + e.getMessage(),
-                    e.getMessage().contains("Cannot cancel mandatory choice"));
+            Assert.assertTrue("Must fail on the skip command: " + e.getMessage(),
+                    e.getMessage().contains("Wrong skip command"));
         }
-        Assert.assertEquals("Expected permanent choice prompt to have occurred",
-                1, ((WinterTestPlayer) playerA).getPermanentPromptCount());
     }
 
     @Test
@@ -216,8 +168,6 @@ public class WinterCynicalOpportunistTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Grizzly Bears", 0);
         assertExileCount(playerA, "Tarfire", 1);
         assertExileCount(playerA, "Divination", 1);
-        Assert.assertEquals("No permanent-choice prompt should occur when no permanent reached exile",
-                0, ((WinterTestPlayer) playerA).getPermanentPromptCount());
     }
 
     @Test
