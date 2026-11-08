@@ -3,6 +3,7 @@ package mage.cards.h;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.BlitzAbility;
@@ -11,17 +12,21 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterCreatureSpell;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.common.CommanderPlaysCountWatcher;
 
-import java.util.HashSet;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author xenohedron
@@ -58,8 +63,15 @@ public final class HenzieToolboxTorre extends CardImpl {
 class HenzieToolboxTorreGainBlitzEffect extends ContinuousEffectImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature spell you cast with mana value 4 or greater");
+    private static final FilterCreatureSpell filter2 = new FilterCreatureSpell("creature spell you cast with mana value 4 or greater");
     static {
-        filter.add(new ManaValuePredicate(ComparisonType.OR_GREATER, 4));
+        filter.add(Predicates.or(
+                new ManaValuePredicate(ComparisonType.OR_GREATER, 4),
+                // a card outside the stack treats X as 0, so any {X} creature could reach 4 or greater
+                (Predicate<Card>) (input, game) -> input.getManaCost().containsX()
+        ));
+        // a spell on the stack already counts its chosen X, so only its actual mana value matters
+        filter2.add(new ManaValuePredicate(ComparisonType.OR_GREATER, 4));
     }
 
     HenzieToolboxTorreGainBlitzEffect() {
@@ -81,31 +93,38 @@ class HenzieToolboxTorreGainBlitzEffect extends ContinuousEffectImpl {
         if (controller == null) {
             return false;
         }
-        Set<Card> cardsToGainBlitz = new HashSet<>();
-        cardsToGainBlitz.addAll(controller.getHand().getCards(filter, game));
-        cardsToGainBlitz.addAll(controller.getGraveyard().getCards(filter, game));
-        controller.getLibrary().getCards(game).stream()
-                .filter(c -> filter.match(c, game))
-                .forEach(cardsToGainBlitz::add);
-        game.getExile().getCardsInRange(game, controller.getId()).stream()
-                .filter(c -> filter.match(c, game))
-                .forEach(cardsToGainBlitz::add);
-        game.getCommanderCardsFromCommandZone(controller, CommanderCardType.ANY)
-                .stream()
-                .filter(card -> filter.match(card, game))
-                .forEach(cardsToGainBlitz::add);
-        game.getStack().stream()
-                .filter(Spell.class::isInstance)
-                .filter(s -> s.isControlledBy(controller.getId()))
-                .filter(s -> filter.match((Spell) s, game))
-                .map(s -> game.getCard(s.getSourceId()))
-                .filter(Objects::nonNull)
-                .forEach(cardsToGainBlitz::add);
+        Set<Card> cardsToGainBlitz = Stream.concat(
+                        Stream.<Collection<Card>>of(
+                                        controller.getHand().getCards(game),
+                                        controller.getGraveyard().getCards(game),
+                                        controller.getLibrary().getCards(game),
+                                        game.getExile().getCardsInRange(game, controller.getId()),
+                                        game.getCommanderCardsFromCommandZone(controller, CommanderCardType.ANY)
+                                )
+                                .flatMap(Collection::stream)
+                                .flatMap(card -> CardUtil.getCastableComponents(card, filter, source, controller, game, null, false).stream()),
+                        game.getStack().stream()
+                                .filter(s -> s.isControlledBy(controller.getId()))
+                                .filter(s -> filter2.match(s, controller.getId(), source, game))
+                                .map(s -> game.getCard(s.getSourceId()))
+                                .filter(Objects::nonNull)
+                )
+                .collect(Collectors.toSet());
         for (Card card : cardsToGainBlitz) {
             if (card.getManaCost().getText().isEmpty()) {
                 continue; // card must have a mana cost
             }
             Ability ability = new BlitzAbility(card, card.getManaCost().getText());
+            int xInstances = card.getManaCost().getVariableCosts().stream()
+                    .filter(VariableManaCost.class::isInstance)
+                    .map(VariableManaCost.class::cast)
+                    .mapToInt(VariableManaCost::getXInstancesCount)
+                    .sum();
+            int missingManaValue = 4 - card.getManaValue();
+            if (xInstances > 0 && missingManaValue > 0) {
+                // the chosen X must still make the spell's mana value 4 or greater
+                ability.setVariableCostsMinMax((missingManaValue + xInstances - 1) / xInstances, Integer.MAX_VALUE);
+            }
             ability.setSourceId(card.getId());
             ability.setControllerId(card.getControllerOrOwnerId());
             game.getState().addOtherAbility(card, ability);
