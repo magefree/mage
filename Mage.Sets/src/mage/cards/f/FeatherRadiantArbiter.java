@@ -50,10 +50,7 @@ public final class FeatherRadiantArbiter extends CardImpl {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
 
-        // Whenever you cast a noncreature spell that targets only Feather, Radiant Arbiter,
-        // you may choose any number of other creatures that spell could target and pay {2} for each of those creatures.
-        // If you do, for each of those creatures, copy that spell. The copy targets that creature.
-        // (Copies of permanent spells become tokens.)
+        // Whenever you cast a noncreature spell that targets only Feather, you may choose any number of other creatures that spell could target and pay {2} for each of those creatures. If you do, for each of those creatures, copy that spell. The copy targets that creature. (Copies of permanent spells become tokens.)
         this.addAbility(new FeatherRadiantArbiterTriggeredAbility());
     }
 
@@ -71,6 +68,7 @@ class FeatherRadiantArbiterTriggeredAbility extends TriggeredAbilityImpl {
 
     FeatherRadiantArbiterTriggeredAbility() {
         super(Zone.BATTLEFIELD, new FeatherRadiantArbiterEffect(), false);
+        setTriggerPhrase("Whenever you cast a noncreature spell that targets only {this}, ");
     }
 
     private FeatherRadiantArbiterTriggeredAbility(final FeatherRadiantArbiterTriggeredAbility ability) {
@@ -118,13 +116,6 @@ class FeatherRadiantArbiterTriggeredAbility extends TriggeredAbilityImpl {
         getEffects().setValue("triggeringSpell", spell);
         return true;
     }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cast a noncreature spell that targets only {this}, you may choose any number of other creatures that spell could target and pay {2} for each of those creatures. "
-                + "If you do, for each of those creatures, copy that spell. The copy targets that creature. "
-                + "<i>(Copies of permanent spells become tokens.)</i>";
-    }
 }
 
 class FeatherRadiantArbiterEffect extends CopySpellForEachItCouldTargetEffect {
@@ -158,14 +149,13 @@ class FeatherRadiantArbiterEffect extends CopySpellForEachItCouldTargetEffect {
     @Override
     protected List<MageObjectReferencePredicate> prepareCopiesWithTargets(StackObject stackObject, Player player, Ability source, Game game) {
         Spell spell = (Spell) stackObject;
-        Permanent feather = source.getSourcePermanentOrLKI(game);
-        UUID featherId = feather != null ? feather.getId() : source.getSourceId();
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
 
         List<Permanent> eligibleCreatures = game.getBattlefield()
                 .getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(p -> !p.getId().equals(featherId))
+                .filter(p -> !p.equals(permanent))
                 .filter(p -> spell.canTarget(game, p.getId()))
                 .collect(Collectors.toList());
 
@@ -182,7 +172,6 @@ class FeatherRadiantArbiterEffect extends CopySpellForEachItCouldTargetEffect {
         ));
 
         TargetPermanent target = new TargetPermanent(0, eligibleCreatures.size(), filter, true);
-        target.withNotTarget(true);
         target.withChooseHint("to copy " + spell.getName() + " for ({2} each)");
         target.chooseTarget(Outcome.Benefit, player.getId(), source, game);
 
