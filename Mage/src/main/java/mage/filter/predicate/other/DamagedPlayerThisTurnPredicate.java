@@ -45,7 +45,7 @@ public class DamagedPlayerThisTurnPredicate implements ObjectSourcePlayerPredica
                 return playerDealtDamageBy(controllerId, objectId, game);
             case OPPONENT:
                 // that dealt damage to an opponent this turn
-                for (UUID opponentId : game.getOpponents(playerId)) {
+                for (UUID opponentId : game.getOpponents(playerId, false)) {
                     if (playerDealtDamageBy(opponentId, objectId, game)) {
                         return true;
                     }

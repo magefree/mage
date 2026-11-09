@@ -70,7 +70,7 @@ class BorosBattleshaperEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent creature1 = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (creature1 != null) {
-            if (game.getOpponents(creature1.getControllerId()).contains(game.getActivePlayerId())) {
+            if (game.getOpponents(creature1.getControllerId(), false).contains(game.getActivePlayerId())) {
                 // Blocks
                 ContinuousEffectImpl effect = new BlocksIfAbleTargetEffect(Duration.EndOfTurn);
                 effect.setTargetPointer(new FixedTarget(creature1.getId(), game));
@@ -84,7 +84,7 @@ class BorosBattleshaperEffect extends OneShotEffect {
         }
         Permanent creature2 = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (creature2 != null) {
-            if (game.getOpponents(creature2.getControllerId()).contains(game.getActivePlayerId())) {
+            if (game.getOpponents(creature2.getControllerId(), false).contains(game.getActivePlayerId())) {
                 // Blocks
                 ContinuousEffectImpl effect = new CantBlockTargetEffect(Duration.EndOfTurn);
                 effect.setTargetPointer(new FixedTarget(creature2.getId(), game));

@@ -60,7 +60,7 @@ enum GnollWarBandValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return game
-                .getOpponents(sourceAbility.getControllerId())
+                .getOpponents(sourceAbility.getControllerId(), false)
                 .stream()
                 .map(game
                         .getState()
