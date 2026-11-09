@@ -13,20 +13,18 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreatureSpell;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
+import mage.filter.predicate.mageobject.VariableManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.common.CommanderPlaysCountWatcher;
 
-import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author xenohedron
@@ -62,16 +60,16 @@ public final class HenzieToolboxTorre extends CardImpl {
 
 class HenzieToolboxTorreGainBlitzEffect extends ContinuousEffectImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("creature spell you cast with mana value 4 or greater");
-    private static final FilterCreatureSpell filter2 = new FilterCreatureSpell("creature spell you cast with mana value 4 or greater");
+    private static final FilterCreatureCard filterCard = new FilterCreatureCard("creature spell you cast with mana value 4 or greater");
+    private static final FilterCreatureSpell filterSpell = new FilterCreatureSpell("creature spell you cast with mana value 4 or greater");
+
     static {
-        filter.add(Predicates.or(
+        // a card with {X} can be cast with mana value 4 or greater (X is 0 only while the card is not on the stack)
+        filterCard.add(Predicates.or(
                 new ManaValuePredicate(ComparisonType.OR_GREATER, 4),
-                // a card outside the stack treats X as 0, so any {X} creature could reach 4 or greater
-                (Predicate<Card>) (input, game) -> input.getManaCost().containsX()
+                VariableManaCostPredicate.instance
         ));
-        // a spell on the stack already counts its chosen X, so only its actual mana value matters
-        filter2.add(new ManaValuePredicate(ComparisonType.OR_GREATER, 4));
+        filterSpell.add(new ManaValuePredicate(ComparisonType.OR_GREATER, 4));
     }
 
     HenzieToolboxTorreGainBlitzEffect() {
@@ -93,37 +91,39 @@ class HenzieToolboxTorreGainBlitzEffect extends ContinuousEffectImpl {
         if (controller == null) {
             return false;
         }
-        Set<Card> cardsToGainBlitz = Stream.concat(
-                        Stream.<Collection<Card>>of(
-                                        controller.getHand().getCards(game),
-                                        controller.getGraveyard().getCards(game),
-                                        controller.getLibrary().getCards(game),
-                                        game.getExile().getCardsInRange(game, controller.getId()),
-                                        game.getCommanderCardsFromCommandZone(controller, CommanderCardType.ANY)
-                                )
-                                .flatMap(Collection::stream)
-                                .flatMap(card -> CardUtil.getCastableComponents(card, filter, source, controller, game, null, false).stream()),
-                        game.getStack().stream()
-                                .filter(s -> s.isControlledBy(controller.getId()))
-                                .filter(s -> filter2.match(s, controller.getId(), source, game))
-                                .map(s -> game.getCard(s.getSourceId()))
-                                .filter(Objects::nonNull)
-                )
-                .collect(Collectors.toSet());
+        Set<Card> cards = new LinkedHashSet<>();
+        cards.addAll(controller.getHand().getCards(game));
+        cards.addAll(controller.getGraveyard().getCards(game));
+        cards.addAll(controller.getLibrary().getCards(game));
+        cards.addAll(game.getExile().getCardsInRange(game, controller.getId()));
+        cards.addAll(game.getCommanderCardsFromCommandZone(controller, CommanderCardType.ANY));
+        Set<Card> cardsToGainBlitz = new LinkedHashSet<>();
+        for (Card card : cards) {
+            // double-faced cards are cast by their faces, so the castable faces must have the blitz ability
+            cardsToGainBlitz.addAll(CardUtil.getCastableComponents(card, filterCard, source, controller, game, null, false));
+        }
+        game.getStack().stream()
+                .filter(s -> s.isControlledBy(controller.getId()))
+                .filter(s -> filterSpell.match(s, controller.getId(), source, game))
+                .map(s -> game.getCard(s.getSourceId()))
+                .filter(Objects::nonNull)
+                .forEach(cardsToGainBlitz::add);
         for (Card card : cardsToGainBlitz) {
             if (card.getManaCost().getText().isEmpty()) {
                 continue; // card must have a mana cost
             }
             Ability ability = new BlitzAbility(card, card.getManaCost().getText());
-            int xInstances = card.getManaCost().getVariableCosts().stream()
+            // 202.3e ... X is treated as the number chosen for it while the object is on the stack.
+            // so a spell with {X} has blitz only with X big enough for mana value 4 or greater
+            VariableManaCost xCost = card.getManaCost().stream()
                     .filter(VariableManaCost.class::isInstance)
                     .map(VariableManaCost.class::cast)
-                    .mapToInt(VariableManaCost::getXInstancesCount)
-                    .sum();
-            int missingManaValue = 4 - card.getManaValue();
-            if (xInstances > 0 && missingManaValue > 0) {
-                // the chosen X must still make the spell's mana value 4 or greater
-                ability.setVariableCostsMinMax((missingManaValue + xInstances - 1) / xInstances, Integer.MAX_VALUE);
+                    .findFirst()
+                    .orElse(null);
+            int needManaValue = 4 - card.getManaValue();
+            if (xCost != null && needManaValue > 0) {
+                int minX = (needManaValue + xCost.getXInstancesCount() - 1) / xCost.getXInstancesCount();
+                ability.setVariableCostsMinMax(minX, Integer.MAX_VALUE);
             }
             ability.setSourceId(card.getId());
             ability.setControllerId(card.getControllerOrOwnerId());

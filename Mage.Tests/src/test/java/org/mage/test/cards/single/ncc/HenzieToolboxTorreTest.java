@@ -51,10 +51,12 @@ public class HenzieToolboxTorreTest extends CardTestCommander4Players {
     }
 
     @Test
-    public void testTDFCFront() {
+    public void test_DoubleFaced_TransformingFrontFace() {
         addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
+        //
+        // transforms to Braska's Final Aeon
+        addCard(Zone.HAND, playerA, "Jecht, Reluctant Guardian"); // {3}{B}
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
-        addCard(Zone.HAND, playerA, "Jecht, Reluctant Guardian");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jecht, Reluctant Guardian" + withBlitz);
 
@@ -66,11 +68,51 @@ public class HenzieToolboxTorreTest extends CardTestCommander4Players {
     }
 
     @Test
-    public void testMDFCBack() {
+    public void test_DoubleFaced_TransformingFrontFace_SacrificeAndDraw() {
         addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
+        //
+        // transforms to Braska's Final Aeon
+        addCard(Zone.HAND, playerA, "Jecht, Reluctant Guardian"); // {3}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jecht, Reluctant Guardian" + withBlitz);
+
+        // sacrifice at the beginning of the next end step and draw on dies
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        assertGraveyardCount(playerA, "Jecht, Reluctant Guardian", 1);
+        assertHandCount(playerA, 1 + 1); // draw step + draw on dies
+    }
+
+    @Test
+    public void test_DoubleFaced_TransformingBackFace_CantCast() {
+        addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
+        //
+        // transforms to Braska's Final Aeon
+        addCard(Zone.HAND, playerA, "Jecht, Reluctant Guardian"); // {3}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+
+        checkPlayableAbility("front face with blitz", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Jecht, Reluctant Guardian" + withBlitz, true);
+        checkPlayableAbility("back face with blitz", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Braska's Final Aeon" + withBlitz, false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+    }
+
+    @Test
+    public void test_DoubleFaced_ModalBackFace() {
+        // If the back face of a modal double-faced card is a creature with mana value 4 or greater,
+        // you may cast it using the blitz ability granted by Henzie.
+        // (2022-04-29)
+        addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
+        //
+        // front face Bruce Banner {U}, back face The Incredible Hulk {4}{G}{G}
+        addCard(Zone.HAND, playerA, "Bruce Banner");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
-        addCard(Zone.HAND, playerA, "Bruce Banner");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Incredible Hulk" + withBlitz);
 
@@ -82,86 +124,31 @@ public class HenzieToolboxTorreTest extends CardTestCommander4Players {
     }
 
     @Test
-    public void testMDFCInvalidFront() {
+    public void test_DoubleFaced_ModalFrontFaceWithLowManaValue_NoBlitz() {
         addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
-        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        //
+        // front face Bruce Banner {U}, back face The Incredible Hulk {4}{G}{G}
         addCard(Zone.HAND, playerA, "Bruce Banner");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
 
-        checkPlayableAbility("front face is castable", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + "Bruce Banner", true);
-        checkPlayableAbility("front face has no blitz", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + "Bruce Banner" + withBlitz, false);
+        checkPlayableAbility("front face", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Bruce Banner", true);
+        checkPlayableAbility("front face with blitz", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Bruce Banner" + withBlitz, false);
 
         setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
     }
 
-    // double X-cost creature, valid X
     @Test
-    public void testDoubleXCostValid() {
+    public void test_XCost() {
         addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
-        addCard(Zone.HAND, playerA, "Walking Ballista");
-
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Walking Ballista" + withBlitz);
-        setChoice(playerA, "X=2");
-        setChoice(playerA, "Walking Ballista");
-
-        setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
-        execute();
-
-        assertBlitzed("Walking Ballista", true);
-    }
-
-    // double X-cost creature, invalid X
-    @Test
-    public void testDoubleXCostInvalid() {
-        addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
-        addCard(Zone.HAND, playerA, "Walking Ballista");
-
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Walking Ballista" + withBlitz);
-        setChoice(playerA, "X=1");
-
-        setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
-        try {
-            execute();
-            Assert.fail("Casting Walking Ballista with blitz for X=1 should fail");
-        } catch (AssertionError e) {
-            Assert.assertTrue("Unexpected error: " + e.getMessage(),
-                    e.getMessage().contains("Found wrong X value = 1"));
-        }
-    }
-
-    // double X-cost creature, normal cast with X below the blitz threshold
-    @Test
-    public void testDoubleXCostNormalCastWithLowX() {
-        addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Zone.HAND, playerA, "Walking Ballista");
-
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Walking Ballista");
-        setChoice(playerA, "X=1");
-
-        setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
-        execute();
-
-        assertBlitzed("Walking Ballista", false);
-        assertCounterCount(playerA, "Walking Ballista", CounterType.P1P1, 1);
-    }
-
-    // regular X-cost creature
-    @Test
-    public void testXCost() {
-        addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
+        //
+        addCard(Zone.HAND, playerA, "Stonecoil Serpent"); // {X}
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
-        addCard(Zone.HAND, playerA, "Stonecoil Serpent");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Stonecoil Serpent" + withBlitz);
-        setChoice(playerA, "X=4");
-        setChoice(playerA, "Stonecoil Serpent");
+        setChoice(playerA, "X=4"); // mana value 4
+        setChoice(playerA, "Stonecoil Serpent"); // order of the replacement effects on enter
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -170,22 +157,82 @@ public class HenzieToolboxTorreTest extends CardTestCommander4Players {
         assertBlitzed("Stonecoil Serpent", true);
     }
 
-    // X-cost creature with other costs
     @Test
-    public void testXCostWithOtherCosts() {
+    public void test_XCost_WithOtherMana() {
         addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
+        //
+        addCard(Zone.HAND, playerA, "Genesis Hydra"); // {X}{G}{G}
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
-        addCard(Zone.HAND, playerA, "Genesis Hydra");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Genesis Hydra" + withBlitz);
-        setChoice(playerA, "X=2");
-        setChoice(playerA, "Genesis Hydra");
+        setChoice(playerA, "X=2"); // mana value 4
+        setChoice(playerA, "Genesis Hydra"); // order of the replacement effects on enter
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
         assertBlitzed("Genesis Hydra", true);
+    }
+
+    @Test
+    public void test_XCost_DoubleX() {
+        addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
+        //
+        // enters with X +1/+1 counters
+        addCard(Zone.HAND, playerA, "Walking Ballista"); // {X}{X}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Walking Ballista" + withBlitz);
+        setChoice(playerA, "X=2"); // mana value 4
+        setChoice(playerA, "Walking Ballista"); // order of the replacement effects on enter
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertBlitzed("Walking Ballista", true);
+        assertCounterCount(playerA, "Walking Ballista", CounterType.P1P1, 2);
+    }
+
+    @Test
+    public void test_XCost_DoubleX_LowManaValue_CantUseBlitz() {
+        addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
+        //
+        addCard(Zone.HAND, playerA, "Walking Ballista"); // {X}{X}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Walking Ballista" + withBlitz);
+        setChoice(playerA, "X=1"); // mana value 2
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        try {
+            execute();
+        } catch (AssertionError e) {
+            Assert.assertTrue("X must have limits: " + e.getMessage(), e.getMessage().contains("Found wrong X value = 1"));
+            return;
+        }
+        Assert.fail("test must fail");
+    }
+
+    @Test
+    public void test_XCost_DoubleX_LowManaValue_NormalCast() {
+        addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
+        //
+        // enters with X +1/+1 counters
+        addCard(Zone.HAND, playerA, "Walking Ballista"); // {X}{X}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Walking Ballista");
+        setChoice(playerA, "X=1"); // mana value 2
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertBlitzed("Walking Ballista", false);
+        assertCounterCount(playerA, "Walking Ballista", CounterType.P1P1, 1);
     }
 
     /**
