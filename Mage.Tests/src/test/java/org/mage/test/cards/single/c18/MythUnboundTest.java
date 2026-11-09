@@ -126,6 +126,7 @@ public class MythUnboundTest extends CardTestCommander4Players {
 
     @Test
     public void test_SorceryCommanderResolves() {
+        skipInitShuffling();
         // Legendary Sorcery {1}{R}{G}
         // Discover X, where X is the amount of mana spent to cast this spell.
         // Ashaya's Enduring Bond can be your commander.
@@ -135,6 +136,7 @@ public class MythUnboundTest extends CardTestCommander4Players {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         addCard(Zone.LIBRARY, playerA, "Grizzly Bears", 1);
+        addCard(Zone.LIBRARY, playerA, "Mountain", 1); // draw on turn 1
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ashaya's Enduring Bond");
         setChoice(playerA, false); // discover: put Grizzly Bears into hand
