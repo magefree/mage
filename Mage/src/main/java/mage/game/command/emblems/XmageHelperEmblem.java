@@ -4,7 +4,6 @@ import mage.MageObject;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.hint.Hint;
-import mage.cards.FrameStyle;
 import mage.cards.repository.TokenInfo;
 import mage.cards.repository.TokenRepository;
 import mage.constants.Zone;
@@ -19,7 +18,6 @@ public class XmageHelperEmblem extends Emblem {
 
     public XmageHelperEmblem() {
         super("Helper Emblem");
-        this.frameStyle = FrameStyle.M15_NORMAL;
 
         // helper don't have source, so image can be initialized immediately
         setSourceObjectAndInitImage(null);

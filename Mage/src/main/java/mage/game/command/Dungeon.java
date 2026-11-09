@@ -60,6 +60,7 @@ public class Dungeon extends CommandObjectImpl {
 
     public Dungeon(String name) {
         super(name);
+        this.frameStyle = FrameStyle.M15_NORMAL;
     }
 
     protected Dungeon(final Dungeon dungeon) {

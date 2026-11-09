@@ -1742,6 +1742,11 @@ public class VerifyCardDataTest {
                 if (plane.getPlaneType() == null) {
                     errorsList.add("Error: plane must have plane type: " + className + " from " + planeClass.getName());
                 }
+
+                // 5. must have frame style (GUI can't render an object without it)
+                if (plane.getFrameStyle() == null) {
+                    errorsList.add("Error: plane must have frame style: " + className + " from " + planeClass.getName());
+                }
             } catch (Throwable e) {
                 errorsList.add("Error: can't create plane with default constructor: " + className + " from " + planeClass.getName());
             }
@@ -1783,6 +1788,11 @@ public class VerifyCardDataTest {
             Dungeon dungeon;
             try {
                 dungeon = (Dungeon) createNewObject(dungeonClass);
+
+                // 4. must have frame style (GUI can't render an object without it)
+                if (dungeon.getFrameStyle() == null) {
+                    errorsList.add("Error: dungeon must have frame style: " + className + " from " + dungeonClass.getName());
+                }
             } catch (Throwable e) {
                 errorsList.add("Error: can't create dungeon with default constructor: " + className + " from " + dungeonClass.getName());
             }
@@ -1839,6 +1849,11 @@ public class VerifyCardDataTest {
                 } catch (Throwable e) {
                     e.printStackTrace();
                     errorsList.add("Error: can't setup emblem's image data - make sure tokens-database.txt has it: " + className + " from " + emblemClass.getName());
+                }
+
+                // 5. must have frame style (GUI can't render an object without it)
+                if (emblem.getFrameStyle() == null) {
+                    errorsList.add("Error: emblem must have frame style: " + className + " from " + emblemClass.getName());
                 }
             } catch (Throwable e) {
                 e.printStackTrace();
