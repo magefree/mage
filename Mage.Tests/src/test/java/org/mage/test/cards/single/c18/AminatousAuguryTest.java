@@ -205,4 +205,94 @@ public class AminatousAuguryTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Ornithopter", 1);
     }
 
+    @Test
+    public void test_SplitCard() {
+        // Exile the top eight cards of your library. You may put a land card from among them onto the battlefield.
+        // Until end of turn, for each nonland card type, you may cast a spell of that type from among the exiled cards
+        // without paying its mana cost.
+        addCard(Zone.HAND, playerA, "Aminatou's Augury"); // {6}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
+        //
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.LIBRARY, playerA, "Lightning Bolt"); // instant
+        addCard(Zone.LIBRARY, playerA, "Fire // Ice"); // instant // instant
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aminatou's Augury");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fire", playerB); // one half as instant
+        addTargetAmount(playerA, playerB, 2); // all damage to playerB
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("instant is used", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lightning Bolt", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Fire // Ice", 1);
+        assertLife(playerB, 20 - 2);
+    }
+
+    @Test
+    public void test_AdventureCard() {
+        // Exile the top eight cards of your library. You may put a land card from among them onto the battlefield.
+        // Until end of turn, for each nonland card type, you may cast a spell of that type from among the exiled cards
+        // without paying its mana cost.
+        addCard(Zone.HAND, playerA, "Aminatou's Augury"); // {6}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
+        //
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.LIBRARY, playerA, "Grizzly Bears"); // creature 2/2
+        addCard(Zone.LIBRARY, playerA, "Bonecrusher Giant"); // creature, adventure Stomp (instant)
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aminatou's Augury");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears"); // creature
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Stomp", playerB); // adventure as instant
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Grizzly Bears", 1);
+        assertLife(playerB, 20 - 2);
+    }
+
+    @Test
+    public void test_CastAgainLaterTurn_OwnCardTypes() {
+        // Exile the top eight cards of your library. You may put a land card from among them onto the battlefield.
+        // Until end of turn, for each nonland card type, you may cast a spell of that type from among the exiled cards
+        // without paying its mana cost.
+        addCard(Zone.HAND, playerA, "Aminatou's Augury"); // {6}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
+        // Return target card from your graveyard to your hand.
+        addCard(Zone.HAND, playerA, "Regrowth"); // {1}{G}, sorcery
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        //
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.LIBRARY, playerA, "Grizzly Bears", 17); // 8 for turn 1, 1 draw and 8 for turn 3
+        skipInitShuffling();
+
+        // turn 1: use the creature type
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aminatou's Augury");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+
+        // turn 3: return and cast Augury again, the creature type is available again
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Regrowth", "Aminatou's Augury"); // return Augury
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Aminatou's Augury");
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Grizzly Bears", 2);
+        assertGraveyardCount(playerA, "Aminatou's Augury", 1);
+    }
+
 }
