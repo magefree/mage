@@ -1444,7 +1444,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                                 // remove blocking creatures for AI
                                 for (CombatGroup combatGroup : this.getGroups()) {
                                     if (combatGroup.getAttackers().contains(attackingCreatureId)) {
-                                        for (UUID blockerId : combatGroup.getBlockers()) {
+                                        // removeBlocker modifies in-place while iterating
+                                        for (UUID blockerId : new ArrayList<>(combatGroup.getBlockers())) {
                                             removeBlocker(blockerId, game);
                                         }
                                     }
