@@ -17,6 +17,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterInstantOrSorcerySpell;
+import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.filter.predicate.other.HasOnlySingleTargetPermanentPredicate;
@@ -118,11 +119,16 @@ class ExterminatorMagmarchTriggeredAbility extends SpellCastControllerTriggeredA
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
+        Spell spell = (Spell) getEffects().get(0).getValue("spellCast");
+        if (spell == null) {
+            return false;
+        }
         return CardUtil
                 .getEffectValueFromAbility(this, OPPONENT_ID_KEY, UUID.class)
                 .map(opponentId -> {
                     FilterPermanent filter = StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND.copy();
                     filter.add(Predicates.not(new ControllerIdPredicate(opponentId)));
+                    filter.add(new ExterminatorMagmarchPredicate(spell));
                     return game.getBattlefield().contains(filter, this, game, 1);
                 })
                 .orElse(false);
@@ -180,6 +186,7 @@ class ExterminatorMagmarchEffect extends OneShotEffect {
         }
         FilterPermanent filter = StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND.copy();
         filter.add(Predicates.not(new ControllerIdPredicate(opponentId)));
+        filter.add(new ExterminatorMagmarchPredicate(spell));
         TargetPermanent target = new TargetPermanent(filter);
         target.withChooseHint("to target with the copy");
         target.withNotTarget(true);
@@ -193,5 +200,19 @@ class ExterminatorMagmarchEffect extends OneShotEffect {
                 1, new ExterminatorMagmarchApplier(permanent, game)
         );
         return true;
+    }
+}
+
+class ExterminatorMagmarchPredicate implements Predicate<Permanent> {
+
+    private final Spell spell;
+
+    ExterminatorMagmarchPredicate(Spell spell) {
+        this.spell = spell;
+    }
+
+    @Override
+    public boolean apply(Permanent input, Game game) {
+        return spell != null && spell.canTarget(game, input.getId());
     }
 }

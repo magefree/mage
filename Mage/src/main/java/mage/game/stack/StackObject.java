@@ -30,6 +30,16 @@ public interface StackObject extends MageObject, Controllable {
 
     boolean chooseNewTargets(Game game, UUID playerId, boolean forceChange, boolean onlyOneTarget, Predicate<MageItem> newTargetFilterPredicate);
 
+    /**
+     * Checks "could target" of the copy effects (see 707.10d, 707.10e): the player or object must be a legal target
+     * for each target of the spell or ability, checked for the controller of the spell or ability.
+     * <p>
+     * It's not the targets check on resolve - that check is done by the targets themselves.
+     *
+     * @param game
+     * @param targetId player or object to check
+     * @return false for a spell or ability without targets
+     */
     boolean canTarget(Game game, UUID targetId);
 
     void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets);
