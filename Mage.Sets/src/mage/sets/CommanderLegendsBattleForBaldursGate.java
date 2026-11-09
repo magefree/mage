@@ -281,8 +281,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Dungeon Delver", 483, Rarity.UNCOMMON, mage.cards.d.DungeonDelver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dungeon Delver", 67, Rarity.UNCOMMON, mage.cards.d.DungeonDelver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dungeoneer's Pack", 312, Rarity.UNCOMMON, mage.cards.d.DungeoneersPack.class));
-        //cards.add(new SetCardInfo("Durnan of the Yawning Portal", 635, Rarity.MYTHIC, mage.cards.d.DurnanOfTheYawningPortal.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Durnan of the Yawning Portal", 657, Rarity.MYTHIC, mage.cards.d.DurnanOfTheYawningPortal.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Durnan of the Yawning Portal", 635, Rarity.MYTHIC, mage.cards.d.DurnanOfTheYawningPortal.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Durnan of the Yawning Portal", 657, Rarity.MYTHIC, mage.cards.d.DurnanOfTheYawningPortal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dusk // Dawn", 691, Rarity.RARE, mage.cards.d.DuskDawn.class));
         cards.add(new SetCardInfo("Dusk Mangler", 751, Rarity.UNCOMMON, mage.cards.d.DuskMangler.class));
         cards.add(new SetCardInfo("Dynaheir, Invoker Adept", 273, Rarity.RARE, mage.cards.d.DynaheirInvokerAdept.class, NON_FULL_USE_VARIOUS));
