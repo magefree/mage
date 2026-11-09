@@ -290,6 +290,32 @@ public class ValgavothTerrorEaterTest extends CardTestPlayerBase {
         assertLife(playerB, 20 - 3 - 2);
     }
 
+    // https://github.com/magefree/mage/issues/16113
+    @Test
+    public void testCastOpponentDuressFromExile() {
+        addCard(Zone.BATTLEFIELD, playerA, valgavoth, 1);
+        addCard(Zone.HAND, playerB, "Duress", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
+        addCard(Zone.HAND, playerB, bolt, 1);
+        addCard(Zone.HAND, playerA, bolt, 1);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Duress", playerA);
+        setChoice(playerB, bolt);
+
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Duress", playerB);
+        setChoice(playerA, bolt);
+
+        setStopAt(3, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertExileCount(playerB, "Duress", 0);
+        assertGraveyardCount(playerB, "Duress", 1);
+        assertExileCount(playerB, bolt, 1);
+        assertGraveyardCount(playerA, bolt, 1);
+        assertLife(playerA, 20 - 1);
+    }
+
     @Test
     public void testCastMDFC() {
         skipInitShuffling();

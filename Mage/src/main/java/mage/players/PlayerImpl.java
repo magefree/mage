@@ -4324,7 +4324,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                 try {
                     playAbility = findActivatedAbilityFromPlayable(object, availableMana, ability, game);
                     if (playAbility != null && !output.contains(playAbility)) {
-                        output.add(playAbility);
+                        // store a copy, as the original ability's controller is restored below
+                        // https://github.com/magefree/mage/issues/16113
+                        output.add(playAbility.copy());
                     }
                 } finally {
                     ability.setControllerId(savedControllerId);
