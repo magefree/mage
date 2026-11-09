@@ -85,6 +85,7 @@ class InitiativeDamageTriggeredAbility extends TriggeredAbilityImpl implements B
         if (playerId == null) {
             return false;
         }
+        setControllerId(game.getInitiativeId());
         this.getEffects().setTargetPointer(new FixedTarget(playerId));
         return true;
     }
@@ -155,6 +156,7 @@ class InitiativeVentureTriggeredAbility extends TriggeredAbilityImpl {
             default:
                 return false;
         }
+        setControllerId(playerId);
         this.getEffects().setTargetPointer(new FixedTarget(playerId));
         return true;
     }
