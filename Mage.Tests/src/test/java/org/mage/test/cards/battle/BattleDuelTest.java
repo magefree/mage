@@ -339,4 +339,29 @@ public class BattleDuelTest extends BattleBaseTest {
         assertCounterCount(belenon, CounterType.DEFENSE, 5);
         assertLife(playerB, 20);
     }
+
+    @Test
+    public void test_DefenseZero_SiegeStaysWithWaitingTrigger() {
+        // 122.1g, 704.5v - a Siege with 0 defense stays while it's the source of a triggered ability on the stack
+        addCard(Zone.HAND, playerA, "Invasion of Kaladesh"); // {U}{R}, Siege with defense 4
+        addCard(Zone.HAND, playerA, "Explosive Impact"); // {5}{R}, 5 damage to any target
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 2 + 6);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Invasion of Kaladesh");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Explosive Impact", "Invasion of Kaladesh");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA, true);
+        // defeated trigger is on the stack now
+        checkStackSize("defeated trigger on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 1);
+        checkPermanentCount("siege stays before trigger resolved", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Invasion of Kaladesh", 1);
+        setChoice(playerA, true); // yes to cast it transformed
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Invasion of Kaladesh", 0);
+        assertPermanentCount(playerA, "Aetherwing, Golden-Scale Flagship", 1);
+        assertPermanentCount(playerA, "Thopter Token", 1);
+    }
 }
