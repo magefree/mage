@@ -1,33 +1,40 @@
 
 package mage.abilities.effects.common.continuous;
 
-import mage.MageObjectReference;
+import mage.MageObject;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.choices.ChoiceColor;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.List;
 
 /**
  * @author LevelX2
  */
 public class GainProtectionFromColorSourceEffect extends GainAbilitySourceEffect {
-
-    FilterCard protectionFilter;
-
+    protected ChoiceColor choice;
     public GainProtectionFromColorSourceEffect(Duration duration) {
-        super(new ProtectionAbility(new FilterCard()), duration);
-        protectionFilter = (FilterCard) ((ProtectionAbility) ability).getFilter();
+        this(duration, null);
     }
 
+    public GainProtectionFromColorSourceEffect(Duration duration, ObjectColor protectColor) {
+        super(new ProtectionAbility(new FilterCard()), duration);
+        choice = new ChoiceColor(true, "Choose a color to gain protection against it");
+        if (protectColor != null) {
+            choice.setChoice(protectColor.toString());
+        }
+    }
     protected GainProtectionFromColorSourceEffect(final GainProtectionFromColorSourceEffect effect) {
         super(effect);
-        this.protectionFilter = effect.protectionFilter.copy();
+        choice = effect.choice.copy();
     }
 
     @Override
@@ -38,15 +45,11 @@ public class GainProtectionFromColorSourceEffect extends GainAbilitySourceEffect
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
+        MageObject sourceObject = game.getObject(source);
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            ChoiceColor colorChoice = new ChoiceColor(true);
-            colorChoice.setMessage("Choose color for protection ability");
-            if (controller.choose(outcome, colorChoice, game)) {
-                game.informPlayers("Chosen color: " + colorChoice.getColor());
-                protectionFilter.add(new ColorPredicate(colorChoice.getColor()));
-                protectionFilter.setMessage(colorChoice.getChoice());
-                ((ProtectionAbility) ability).setFilter(protectionFilter);
+        if (sourceObject != null && controller != null) {
+            if (controller.choose(Outcome.Protect, choice, game)) {
+                game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen protection from " + choice.getChoice());
                 return;
             }
         }
@@ -54,15 +57,15 @@ public class GainProtectionFromColorSourceEffect extends GainAbilitySourceEffect
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && new MageObjectReference(permanent, game).refersTo(source.getSourceObject(game), game)) {
-            permanent.addAbility(ability, source.getSourceId(), game);
-        } else {
-            // the source permanent is no longer on the battlefield, effect can be discarded
-            discard();
-        }
-        return true;
+    protected List<Ability> getAbilitiesToGrant(Game game, Ability source) {
+        FilterCard protectionFilter = new FilterCard();
+        protectionFilter.add(new ColorPredicate(choice.getColor()));
+        protectionFilter.setMessage(choice.getChoice());
+        List<Ability> granted = copyOfGrantedAbilities();
+        granted.stream()
+                .filter(ProtectionAbility.class::isInstance)
+                .forEach(ability -> ((ProtectionAbility) ability).setFilter(protectionFilter));
+        return granted;
     }
 
     @Override
