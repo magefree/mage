@@ -2,6 +2,7 @@ package mage.target.targetadjustment;
 
 import mage.abilities.Ability;
 import mage.game.Game;
+import mage.target.Target;
 
 import java.io.Serializable;
 
@@ -16,11 +17,9 @@ public interface TargetAdjuster extends Serializable {
     void adjustTargets(Ability ability, Game game);
 
     /**
-     * Add default blueprint target to the ability
+     * Set the blueprint target from the first target of the ability or effect using this adjuster (null if it has none).
+     * Called once at setup. Copies of that ability or effect share the adjuster, so the blueprint must not change after.
      */
-    default void addDefaultTargets(Ability ability) {
-    }
-
-    default void clearDefaultTargets() {
+    default void addDefaultTargets(Target firstTarget) {
     }
 }

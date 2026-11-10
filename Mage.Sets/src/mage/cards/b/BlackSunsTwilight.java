@@ -1,23 +1,24 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.OneShotNonTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.Duration;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -36,7 +37,17 @@ public final class BlackSunsTwilight extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(
                 xValue, xValue, Duration.EndOfTurn
         ));
-        this.getSpellAbility().addEffect(new BlackSunsTwilightEffect());
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                new OneShotNonTargetEffect(
+                        new ReturnFromGraveyardToBattlefieldTargetEffect(true)
+                                .setText("return a creature card with mana value X or less from your graveyard to the battlefield tapped"),
+                        new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD),
+                        new XManaValueTargetAdjuster(ComparisonType.OR_LESS)
+                ),
+                BlackSunsTwilightCondition.instance,
+                "If X is 5 or more, return a creature card with mana value " +
+                        "X or less from your graveyard to the battlefield tapped"
+        ));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
     }
 
@@ -50,44 +61,11 @@ public final class BlackSunsTwilight extends CardImpl {
     }
 }
 
-class BlackSunsTwilightEffect extends OneShotEffect {
-
-    BlackSunsTwilightEffect() {
-        super(Outcome.Benefit);
-        staticText = "If X is 5 or more, return a creature card with mana value " +
-                "X or less from your graveyard to the battlefield tapped";
-    }
-
-    private BlackSunsTwilightEffect(final BlackSunsTwilightEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BlackSunsTwilightEffect copy() {
-        return new BlackSunsTwilightEffect(this);
-    }
+enum BlackSunsTwilightCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
-        if (player == null || xValue < 5) {
-            return false;
-        }
-        FilterCard filter = new FilterCreatureCard(
-                "creature card with mana value " + xValue + " or less from your graveyard"
-        );
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
-        if (player.getGraveyard().count(filter, game) < 1) {
-            return false;
-        }
-        TargetCard target = new TargetCardInYourGraveyard(filter);
-        target.withNotTarget(true);
-        player.choose(outcome, target, source, game);
-        Card card = game.getCard(target.getFirstTarget());
-        return card != null && player.moveCards(
-                card, Zone.BATTLEFIELD, source, game,
-                true, false, false, null
-        );
+        return CardUtil.getSourceCostsTag(game, source, "X", 0) >= 5;
     }
 }
