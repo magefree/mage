@@ -233,4 +233,35 @@ public class OneShotNonTargetTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Squire", 1);
         assertPermanentCount(playerA, "Alpha Myr", 1);
     }
+
+    // The chosen card must be referenced with its current zcc. With zcc 0 the play permission
+    // would follow it to a new object after it changed zones.
+    @Test
+    public void MuseVesselPermissionEndsOnZoneChangeTest() {
+        // {3}, {T}: Target player exiles a card from their hand. Activate only as a sorcery.
+        // {1}: Choose a card exiled with Muse Vessel. You may play that card this turn.
+        // Rest in Peace: If a card or token would be put into a graveyard from anywhere, exile it instead.
+        addCard(Zone.BATTLEFIELD, playerA, "Muse Vessel");
+        addCard(Zone.BATTLEFIELD, playerA, "Rest in Peace");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6); // one spare, so mana never blocks the second cast
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Target player", playerB);
+        setChoice(playerB, "Lightning Bolt");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: Choose");
+        setChoice(playerA, "Lightning Bolt");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("Chosen card can be cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lightning Bolt", true);
+        // Rest in Peace exiles it again on resolution, outside Muse Vessel's exile zone
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkExileCount("Bolt exiled again", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", 1);
+        checkPlayableAbility("New object can't be cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lightning Bolt", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertLife(playerB, 17);
+    }
 }

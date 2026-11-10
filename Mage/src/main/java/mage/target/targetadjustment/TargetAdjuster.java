@@ -17,8 +17,8 @@ public interface TargetAdjuster extends Serializable {
     void adjustTargets(Ability ability, Game game);
 
     /**
-     * Set the blueprint target from the owner's first target (null if it has none).
-     * Called once when the adjuster is set up; copies share the adjuster, so the blueprint must not change after.
+     * Set the blueprint target from the first target of the ability or effect using this adjuster (null if it has none).
+     * Called once at setup. Copies of that ability or effect share the adjuster, so the blueprint must not change after.
      */
     default void addDefaultTargets(Target firstTarget) {
     }

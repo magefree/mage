@@ -30,7 +30,7 @@ public class OneShotNonTargetEffect extends OneShotEffect {
         this.notTarget.withNotTarget(true);
         this.adjuster = adjuster;
         if (adjuster != null) {
-            // every copy of this effect shares the adjuster, so its blueprint is set once here and never changed
+            // copies share the adjuster, so its blueprint is set only here
             adjuster.addDefaultTargets(this.notTarget);
         }
         if (effect.staticText == null || effect.staticText.equals("")){
@@ -54,7 +54,7 @@ public class OneShotNonTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Targets targets = new Targets(notTarget.copy());
         if (adjuster != null) {
-            // adjusters write into an ability's target list, so give them a throwaway one
+            // adjusters write into an ability's targets, so give them a copy and leave the source's targets alone
             Ability scratch = source.copy();
             scratch.getTargets().clear();
             adjuster.adjustTargets(scratch, game);
@@ -62,12 +62,11 @@ public class OneShotNonTargetEffect extends OneShotEffect {
         }
         // the result is ignored: a for-each adjuster can leave some players with nothing to choose
         targets.choose(outcome, source.getControllerId(), source.getSourceId(), source, game);
-        // zcc 0 accepts any zcc. A spell's or stack ability's zcc is not stored under its own id,
-        // so MageObjectReference(id, game) would mark chosen stack objects as gone.
-        // Any zcc is safe because the effect applies right after the choice.
+        // Take the zcc that FixedTargets checks; MageObjectReference(id, game) would make a chosen spell look gone.
+        // A spell's reference then never expires, which is fine only because the effect applies right away.
         List<MageObjectReference> chosen = targets.stream()
                 .flatMap(target -> target.getTargets().stream())
-                .map(id -> new MageObjectReference(id, 0, game))
+                .map(id -> new MageObjectReference(id, game.getState().getZoneChangeCounter(id), game))
                 .collect(Collectors.toList());
         // some effects fall back to other objects when their pointer is empty (ExileTargetForSourceEffect)
         if (chosen.isEmpty()) {
