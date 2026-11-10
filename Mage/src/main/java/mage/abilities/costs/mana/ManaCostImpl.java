@@ -2,7 +2,6 @@ package mage.abilities.costs.mana;
 
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.AbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.mana.ManaOptions;
