@@ -3,6 +3,7 @@ package org.mage.test.cards.targets;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -76,5 +77,22 @@ public class TargetRestrictionsTest extends CardTestPlayerBase {
         
         assertLife(playerA, 20);
         assertLife(playerB, 20);
+    }
+
+    // https://github.com/magefree/mage/issues/15756
+    @Test
+    public void testCantTargetCardsInGraveyards() {
+        addCard(Zone.BATTLEFIELD, playerA, "Dennick, Pious Apprentice");
+        addCard(Zone.GRAVEYARD, playerA, "Balduvian Bears");
+        addCard(Zone.BATTLEFIELD, playerA, "Scrabbling Claws");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player exiles a card from their graveyard");
+        addTarget(playerA, playerA);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, "Balduvian Bears", 1);
     }
 }
