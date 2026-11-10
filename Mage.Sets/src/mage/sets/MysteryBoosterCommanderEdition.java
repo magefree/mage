@@ -53,6 +53,7 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Jeweled Amulet", 75, Rarity.UNCOMMON, mage.cards.j.JeweledAmulet.class));
         cards.add(new SetCardInfo("Joven and Chandler", 24, Rarity.RARE, mage.cards.j.JovenAndChandler.class));
         cards.add(new SetCardInfo("Lyna, Veil of Vengeance", 43, Rarity.RARE, mage.cards.l.LynaVeilofVengeance.class));
+        cards.add(new SetCardInfo("Massimo, the Magician", 45, Rarity.RARE, mage.cards.m.MassimoTheMagician.class));
         cards.add(new SetCardInfo("Maular, the Next Evolution", 31, Rarity.RARE, mage.cards.m.MaularTheNextEvolution.class));
         cards.add(new SetCardInfo("Meatsqueak, Hoard Lord", 32, Rarity.RARE, mage.cards.m.MeatsqueakHoardLord.class));
         cards.add(new SetCardInfo("Mind Stone", 76, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
