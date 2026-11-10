@@ -57,7 +57,7 @@ public enum InstantAndSorceryCastThisTurn implements DynamicValue
 				playerIds = game.getState().getPlayersInRange(ability.getControllerId(), game);
 				break;
 			case OPPONENTS:
-				playerIds = game.getOpponents(ability.getControllerId());
+				playerIds = game.getOpponents(ability.getControllerId(), false);
 				break;
 			default:
 				return 0;

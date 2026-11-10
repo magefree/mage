@@ -36,7 +36,7 @@ public class FirstSpellOpponentsTurnTriggeredAbility extends SpellCastController
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.isActivePlayer(this.getControllerId()) // ignore controller turn
-                || !game.getOpponents(this.getControllerId()).contains(game.getActivePlayerId())) {
+                || !game.getOpponents(this.getControllerId(), false).contains(game.getActivePlayerId())) {
             return false;
         }
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);

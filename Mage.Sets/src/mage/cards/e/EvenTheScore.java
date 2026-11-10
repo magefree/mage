@@ -52,7 +52,7 @@ enum EvenTheScoreCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.getOpponents(source.getControllerId())
+        return game.getOpponents(source.getControllerId(), false)
                 .stream()
                 .mapToInt(game.getState().getWatcher(CardsDrawnThisTurnWatcher.class)::getCardsDrawnThisTurn)
                 .anyMatch(x -> x >= 4);

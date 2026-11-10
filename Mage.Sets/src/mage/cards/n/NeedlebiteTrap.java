@@ -53,7 +53,7 @@ enum NeedlebiteTrapCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         PlayerGainedLifeWatcher watcher = game.getState().getWatcher(PlayerGainedLifeWatcher.class);
         if (watcher != null) {
-            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+            for (UUID opponentId : game.getOpponents(source.getControllerId(), false)) {
                 if (watcher.getLifeGained(opponentId) > 0) {
                     return true;
                 }

@@ -77,7 +77,7 @@ class TahngarthFirstMateTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getOpponents(getControllerId()).contains(game.getActivePlayerId())
+        return game.getOpponents(getControllerId(), false).contains(game.getActivePlayerId())
                 && !game.getCombat().getAttackers().isEmpty();
     }
 
