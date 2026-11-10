@@ -77,8 +77,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
     // protect from wrong data save
     // there are possible land images with small sizes, so must research content in check
-    private static final int MIN_FILE_SIZE_OF_GOOD_IMAGE = 1024 * 6; // smaller files will be mark as broken
-    private static final int MIN_FILE_SIZE_OF_POSSIBLE_BAD_IMAGE = 1024 * 8; // smaller files will be checked for possible broken mark (slow)
+    private static final int MIN_FILE_SIZE_OF_GOOD_IMAGE = 1024 * 1; // smaller files will be mark as broken
+    private static final int MIN_FILE_SIZE_OF_POSSIBLE_BAD_IMAGE = 1024 * 4; // smaller files will be checked for possible broken mark (slow)
 
     private final DownloadImagesDialog uiDialog;
     private volatile boolean needCancel; // set from GUI thread, read by download threads

@@ -44,8 +44,8 @@ public class ScryfallImageSourceNormal extends ScryfallImageSource {
 
     @Override
     public float getAverageSizeKb() {
-        // June 2024: MH3 set - 30500 Kb / 332 = 92 Kb
-        return 92f;
+    	// November 2026 (webp): MH3 set - 30848 Kb / 562 = 54 Kb
+        return 54f;
     }
 
     @Override
