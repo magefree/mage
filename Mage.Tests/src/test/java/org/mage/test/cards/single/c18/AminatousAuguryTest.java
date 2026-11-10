@@ -58,9 +58,7 @@ public class AminatousAuguryTest extends CardTestPlayerBase {
         setChoice(playerA, "Badlands"); // Select a land card
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Adarkar Sentinel", true);
-        setChoice(playerA, "Artifact"); // Which card type do you want to consume?
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aegis of the Gods", true);
-        setChoice(playerA, "Enchantment"); // Which card type do you want to consume?
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Storm Crow", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -191,7 +189,6 @@ public class AminatousAuguryTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aminatou's Augury");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Adarkar Sentinel");
-        setChoice(playerA, "Creature"); // Which card type do you want to consume?
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ornithopter"); // as artifact
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -203,6 +200,105 @@ public class AminatousAuguryTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Adarkar Sentinel", 1);
         assertPermanentCount(playerA, "Ornithopter", 1);
+    }
+
+    @Test
+    public void test_ArtifactCreature_ThenArtifactOrCreature() {
+        // Exile the top eight cards of your library. You may put a land card from among them onto the battlefield.
+        // Until end of turn, for each nonland card type, you may cast a spell of that type from among the exiled cards
+        // without paying its mana cost.
+        addCard(Zone.HAND, playerA, "Aminatou's Augury"); // {6}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
+        //
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.LIBRARY, playerA, "Adarkar Sentinel"); // artifact creature 3/3
+        addCard(Zone.LIBRARY, playerA, "Sol Ring"); // artifact
+        addCard(Zone.LIBRARY, playerA, "Storm Crow"); // creature 1/2
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aminatou's Augury");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Adarkar Sentinel"); // no type choice
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("artifact is free", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Sol Ring", true);
+        checkPlayableAbility("creature is free", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Storm Crow", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sol Ring"); // Adarkar Sentinel counts as creature now
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("artifact and creature are used", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Storm Crow", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Adarkar Sentinel", 1);
+        assertPermanentCount(playerA, "Sol Ring", 1);
+        assertExileCount(playerA, "Storm Crow", 1);
+    }
+
+    @Test
+    public void test_TwoArtifactCreatures() {
+        // Exile the top eight cards of your library. You may put a land card from among them onto the battlefield.
+        // Until end of turn, for each nonland card type, you may cast a spell of that type from among the exiled cards
+        // without paying its mana cost.
+        addCard(Zone.HAND, playerA, "Aminatou's Augury"); // {6}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
+        //
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.LIBRARY, playerA, "Memnite"); // artifact creature 1/1
+        addCard(Zone.LIBRARY, playerA, "Ornithopter"); // artifact creature 0/2
+        addCard(Zone.LIBRARY, playerA, "Sol Ring"); // artifact
+        addCard(Zone.LIBRARY, playerA, "Storm Crow"); // creature 1/2
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aminatou's Augury");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Memnite"); // as artifact or creature
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ornithopter"); // as the other type
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("artifact is used", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Sol Ring", false);
+        checkPlayableAbility("creature is used", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Storm Crow", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Memnite", 1);
+        assertPermanentCount(playerA, "Ornithopter", 1);
+    }
+
+    @Test
+    public void test_KindredInstant() {
+        // Exile the top eight cards of your library. You may put a land card from among them onto the battlefield.
+        // Until end of turn, for each nonland card type, you may cast a spell of that type from among the exiled cards
+        // without paying its mana cost.
+        addCard(Zone.HAND, playerA, "Aminatou's Augury"); // {6}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // 2/2
+        //
+        removeAllCardsFromLibrary(playerA);
+        // Exile target creature. Its controller creates a 1/1 colorless Shapeshifter creature token with changeling.
+        addCard(Zone.LIBRARY, playerA, "Crib Swap"); // kindred instant
+        addCard(Zone.LIBRARY, playerA, "Lightning Bolt"); // instant
+        addCard(Zone.LIBRARY, playerA, "Shock"); // instant
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aminatou's Augury");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crib Swap", "Grizzly Bears"); // as kindred
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB); // as instant
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("kindred and instant are used", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Shock", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertExileCount(playerB, "Grizzly Bears", 1);
+        assertPermanentCount(playerB, "Shapeshifter Token", 1);
+        assertLife(playerB, 20 - 3);
     }
 
     @Test
