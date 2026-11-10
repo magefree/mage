@@ -3087,6 +3087,15 @@ public class VerifyCardDataTest {
             if (creatureLevel.find() && ref.power != null && ref.toughness != null) {
                 String levelLine = "STATION " + creatureLevel.group(1) + "+\n";
                 refText = refText.replace(levelLine, levelLine + ref.power + "/" + ref.toughness + "\n");
+            } else if (ref.power != null && ref.toughness != null) {
+                // printed without reminder text: the P/T box belongs to the only station symbol
+                Matcher levels = Pattern.compile("(?m)^STATION \\d+\\+\n").matcher(refText);
+                if (levels.find()) {
+                    String levelLine = levels.group();
+                    if (!levels.find()) {
+                        refText = refText.replace(levelLine, levelLine + ref.power + "/" + ref.toughness + "\n");
+                    }
+                }
             }
         }
 
