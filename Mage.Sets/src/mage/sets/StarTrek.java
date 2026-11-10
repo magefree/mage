@@ -105,6 +105,9 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Crystalline Entity", 478, Rarity.MYTHIC, mage.cards.c.CrystallineEntity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Culber and Stamets, Star-Crossed", 191, Rarity.UNCOMMON, mage.cards.c.CulberAndStametsStarCrossed.class));
         cards.add(new SetCardInfo("Cybernetic Specialist", 262, Rarity.COMMON, mage.cards.c.CyberneticSpecialist.class));
+        cards.add(new SetCardInfo("D-7 Battle Cruiser", 145, Rarity.RARE, mage.cards.d.D7BattleCruiser.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("D-7 Battle Cruiser", 463, Rarity.RARE, mage.cards.d.D7BattleCruiser.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("D-7 Battle Cruiser", 553, Rarity.RARE, mage.cards.d.D7BattleCruiser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("D'Ghor Bloodletter", 101, Rarity.UNCOMMON, mage.cards.d.DGhorBloodletter.class));
         cards.add(new SetCardInfo("D'Vana Tendi, Optimistic Ensign", 236, Rarity.UNCOMMON, mage.cards.d.DVanaTendiOptimisticEnsign.class));
         cards.add(new SetCardInfo("DOT-7 Repair Squad", 12, Rarity.COMMON, mage.cards.d.DOT7RepairSquad.class));
@@ -215,7 +218,15 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Kobayashi Maru Scenario", 410, Rarity.MYTHIC, mage.cards.k.KobayashiMaruScenario.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kobayashi Maru Scenario", 534, Rarity.MYTHIC, mage.cards.k.KobayashiMaruScenario.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kobayashi Maru Scenario", 68, Rarity.MYTHIC, mage.cards.k.KobayashiMaruScenario.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("L'Rell, Fierce Visionary", 247, Rarity.UNCOMMON, mage.cards.l.LRellFierceVisionary.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("L'Rell, Fierce Visionary", 434, Rarity.UNCOMMON, mage.cards.l.LRellFierceVisionary.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("L'Rell, Fierce Visionary", 444, Rarity.UNCOMMON, mage.cards.l.LRellFierceVisionary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("La'An Noonien-Singh, Security", 156, Rarity.UNCOMMON, mage.cards.l.LaAnNoonienSinghSecurity.class));
+        cards.add(new SetCardInfo("Lieutenant Commander Data", 1703, Rarity.MYTHIC, mage.cards.l.LieutenantCommanderData.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lieutenant Commander Data", 359, Rarity.MYTHIC, mage.cards.l.LieutenantCommanderData.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lieutenant Commander Data", 371, Rarity.MYTHIC, mage.cards.l.LieutenantCommanderData.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lieutenant Commander Data", 505, Rarity.MYTHIC, mage.cards.l.LieutenantCommanderData.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lieutenant Commander Data", 69, Rarity.MYTHIC, mage.cards.l.LieutenantCommanderData.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Locutus, the One Who Speaks", 245, Rarity.UNCOMMON, mage.cards.l.LocutusTheOneWhoSpeaks.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Locutus, the One Who Speaks", 360, Rarity.UNCOMMON, mage.cards.l.LocutusTheOneWhoSpeaks.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Locutus, the One Who Speaks", 389, Rarity.UNCOMMON, mage.cards.l.LocutusTheOneWhoSpeaks.class, NON_FULL_USE_VARIOUS));
@@ -370,6 +381,9 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Test of Loyalty", 134, Rarity.UNCOMMON, mage.cards.t.TestOfLoyalty.class));
         cards.add(new SetCardInfo("Test of Priorities", 85, Rarity.UNCOMMON, mage.cards.t.TestOfPriorities.class));
         cards.add(new SetCardInfo("The City on the Edge of Forever", 228, Rarity.RARE, mage.cards.t.TheCityOnTheEdgeOfForever.class));
+        cards.add(new SetCardInfo("The Destruction of Praxis", 103, Rarity.RARE, mage.cards.t.TheDestructionOfPraxis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Destruction of Praxis", 414, Rarity.RARE, mage.cards.t.TheDestructionOfPraxis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Destruction of Praxis", 538, Rarity.RARE, mage.cards.t.TheDestructionOfPraxis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Doctor, EMH", 234, Rarity.UNCOMMON, mage.cards.t.TheDoctorEMH.class));
         cards.add(new SetCardInfo("The Duras Sisters", 235, Rarity.UNCOMMON, mage.cards.t.TheDurasSisters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Duras Sisters", 432, Rarity.UNCOMMON, mage.cards.t.TheDurasSisters.class, NON_FULL_USE_VARIOUS));

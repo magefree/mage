@@ -99,7 +99,7 @@ class InfectiousRageReattachEffect extends OneShotEffect {
         if (creature == null) {
             return false;
         }
-        game.getState().setValue("attachTo:" + auraCard.getId(), creature);
+        AttachEffect.setAttachTo(game, auraCard.getId(), creature);
         controller.moveCards(auraCard, Zone.BATTLEFIELD, source, game);
         return creature.addAttachment(auraCard.getId(), source, game);
 

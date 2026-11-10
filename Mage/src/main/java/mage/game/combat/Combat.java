@@ -1542,6 +1542,8 @@ public class Combat implements Serializable, Copyable<Combat> {
         Permanent attacker = game.getPermanent(creatureId);
         if (attacker == null
                 || game.replaceEvent(new DeclareAttackerEvent(defenderId, creatureId, playerId))
+                || !defenders.contains(defenderId)
+                || !canDefenderBeAttacked(creatureId, defenderId, game) // restrictions affect only declared attackers (508.1c)
                 || !addAttackerToCombat(creatureId, defenderId, game)) {
             return false;
         }
@@ -1567,10 +1569,6 @@ public class Combat implements Serializable, Copyable<Combat> {
             return false;
         }
         Permanent defender = game.getPermanent(defenderId);
-        // Check if defending player can be attacked with another creature
-        if (!canDefenderBeAttacked(attackerId, defenderId, game)) {
-            return false;
-        }
         Permanent attacker = game.getPermanent(attackerId);
         if (attacker == null) {
             return false;

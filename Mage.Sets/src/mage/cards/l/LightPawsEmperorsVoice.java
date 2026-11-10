@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -124,9 +125,9 @@ class LightPawsEmperorsVoiceEffect extends OneShotEffect {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (card != null && permanent != null
                 && new AuraCardCanAttachToPermanentId(permanent.getId()).apply(card, game)) {
-            game.getState().setValue("attachTo:" + card.getId(), permanent);
+            AttachEffect.setAttachTo(game, card.getId(), permanent);
             player.moveCards(card, Zone.BATTLEFIELD, source, game);
-            permanent.addAttachment(card.getId(), source, game);
+            permanent.addAttachment(CardUtil.getDefaultCardSideForBattlefield(game, card).getId(), source, game);
         }
         player.shuffleLibrary(source, game);
         return true;

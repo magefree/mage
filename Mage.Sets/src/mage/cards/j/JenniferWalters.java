@@ -66,7 +66,7 @@ public final class JenniferWalters extends ModalDoubleFacedCard {
         Ability ability = new DealtDamageAnyTriggeredAbility(
             new DamageTargetEffect(SavedDamageValue.MUCH)
                 .setText("have {this} deal that much damage to any target"),
-            StaticFilters.FILTER_CONTROLLED_A_CREATURE, SetTargetPointer.PERMANENT, true
+            StaticFilters.FILTER_CONTROLLED_A_CREATURE, SetTargetPointer.NONE, true
         ).setDoOnlyOnceEachTurn(true);
         ability.addTarget(new TargetAnyTarget());
         this.getRightHalfCard().addAbility(ability);

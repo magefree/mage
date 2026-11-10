@@ -177,7 +177,7 @@ class FlickerformReturnEffect extends OneShotEffect {
                         // Aura stays exiled
                         continue;
                     }
-                    game.getState().setValue("attachTo:" + enchantment.getId(), newPermanent);
+                    AttachEffect.setAttachTo(game, enchantment.getId(), newPermanent);
                 }
                 toBattlefieldAttached.add(enchantment);
             }

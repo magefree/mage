@@ -88,7 +88,7 @@ class ReinsOfTheVinesteedEffect extends OneShotEffect {
                     && controller.choose(Outcome.PutCardInPlay, target, source, game)) {
                 Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
                 if (!targetPermanent.cantBeAttachedBy(aura, source, game, false)) {
-                    game.getState().setValue("attachTo:" + aura.getId(), targetPermanent);
+                    AttachEffect.setAttachTo(game, aura.getId(), targetPermanent);
                     controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
                     return targetPermanent.addAttachment(aura.getId(), source, game);
                 }
