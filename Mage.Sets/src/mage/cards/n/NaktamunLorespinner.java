@@ -59,7 +59,7 @@ enum NaktamunLorespinnerCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         return game
                 .getState()
-                .getPlayersInRange(source.getControllerId(), game)
+                .getPlayersInRange(source.getControllerId(), game, true)
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
