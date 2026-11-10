@@ -28,10 +28,10 @@ import java.util.UUID;
  *
  * @author notshauna
  */
-public final class  JulianBashirFrontierDoctor extends CardImpl {
+public final class JulianBashirFrontierDoctor extends CardImpl {
 
     private static final FilterCard filter = new FilterCreatureCard(
-            "creature card with mana value X or less from your graveyard to the battlefield, where X is Julian Bashir’s power"
+            "creature card with mana value X or less from your graveyard"
     );
 
     static {
@@ -54,7 +54,9 @@ public final class  JulianBashirFrontierDoctor extends CardImpl {
 
         // Whenever Julian Bashir attacks, return target creature card with mana value X or less from your graveyard
         // to the battlefield, where X is Julian Bashir’s power.
-        Ability reanimationability = new AttacksTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        Ability reanimationability = new AttacksTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()
+                .setText("return target creature card with mana value X or less from your graveyard " +
+                        "to the battlefield, where X is Julian Bashir’s power"));
         reanimationability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(reanimationability);
     }
