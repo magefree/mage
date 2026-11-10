@@ -487,6 +487,15 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean seekCard(FilterCard filter, Ability source, Game game);
 
     /**
+     * One seek action for several cards (e.g. "seek a land card and a nonland card"): gets a random card for each
+     * filter and puts them into their owner's hand, one sought event for the whole action
+     * Doesn't reveal the cards
+     *
+     * @return number of sought cards
+     */
+    int seekCards(List<FilterCard> filters, Ability source, Game game);
+
+    /**
      * Reveals all players' libraries. Useful for abilities like Jace, Architect
      * of Thought's -8 that have effects that require information from all
      * libraries.

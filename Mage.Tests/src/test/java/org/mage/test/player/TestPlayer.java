@@ -3687,6 +3687,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public int seekCards(List<FilterCard> filters, Ability source, Game game) {
+        return computerPlayer.seekCards(filters, source, game);
+    }
+
+    @Override
     public void lookAtAllLibraries(Ability source, Game game) {
         computerPlayer.lookAtAllLibraries(source, game);
     }

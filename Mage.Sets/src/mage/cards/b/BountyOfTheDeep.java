@@ -10,6 +10,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -57,12 +58,12 @@ class BountyOfTheDeepEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
+        // one seek action for both cards
         if (player.getHand().count(StaticFilters.FILTER_CARD_LAND, game) < 1) {
-            player.seekCard(StaticFilters.FILTER_CARD_LAND, source, game);
+            player.seekCards(Arrays.asList(StaticFilters.FILTER_CARD_LAND, StaticFilters.FILTER_CARD_NON_LAND), source, game);
         } else {
-            player.seekCard(StaticFilters.FILTER_CARD_NON_LAND, source, game);
+            player.seekCards(Arrays.asList(StaticFilters.FILTER_CARD_NON_LAND, StaticFilters.FILTER_CARD_NON_LAND), source, game);
         }
-        player.seekCard(StaticFilters.FILTER_CARD_NON_LAND, source, game);
         return true;
     }
 }

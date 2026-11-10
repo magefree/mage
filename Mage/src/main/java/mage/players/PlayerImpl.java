@@ -3067,19 +3067,33 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean seekCard(FilterCard filter, Ability source, Game game) {
-        Set<Card> cards = this.getLibrary()
-                .getCards(game)
-                .stream()
-                .filter(card -> filter.match(card, getId(), source, game))
-                .collect(Collectors.toSet());
-        Card card = RandomUtil.randomFromCollection(cards);
-        if (card == null) {
-            return false;
+        return seekCards(Collections.singletonList(filter), source, game) > 0;
+    }
+
+    @Override
+    public int seekCards(List<FilterCard> filters, Ability source, Game game) {
+        Cards soughtCards = new CardsImpl();
+        for (FilterCard filter : filters) {
+            Set<Card> cards = this.getLibrary()
+                    .getCards(game)
+                    .stream()
+                    .filter(card -> !soughtCards.contains(card.getId()))
+                    .filter(card -> filter.match(card, getId(), source, game))
+                    .collect(Collectors.toSet());
+            Card card = RandomUtil.randomFromCollection(cards);
+            if (card != null) {
+                soughtCards.add(card);
+            }
         }
-        game.informPlayers(this.getLogName() + " seeks a card from their library");
-        this.moveCards(card, Zone.HAND, source, game);
-        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.SOUGHT, card.getId(), source, getId(), 1));
-        return true;
+        if (soughtCards.isEmpty()) {
+            return 0;
+        }
+        game.informPlayers(this.getLogName() + " seeks " + CardUtil.numberToText(soughtCards.size(), "a")
+                + (soughtCards.size() > 1 ? " cards" : " card") + " from their library");
+        this.moveCards(soughtCards, Zone.HAND, source, game);
+        // one seek action is one event, whatever the number of sought cards
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.SOUGHT, getId(), source, getId(), soughtCards.size()));
+        return soughtCards.size();
     }
 
     @Override

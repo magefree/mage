@@ -150,6 +150,36 @@ public class ValMaroonedSurveyorTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_Seek_TwoCardsByOneAction_TriggersOnce() {
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.LIBRARY, playerA, "Grizzly Bears");
+        addCard(Zone.LIBRARY, playerA, "Island");
+        //
+        // Whenever you discover, investigate, scry, surveil, or seek one or more cards, Val deals 2 damage to each
+        // opponent and you gain 2 life.
+        addCard(Zone.BATTLEFIELD, playerA, "Val, Marooned Surveyor");
+        //
+        // If you have no land cards in your hand, seek a land card and a nonland card.
+        addCard(Zone.HAND, playerA, "Bounty of the Deep"); // {2}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+
+        // one seek action for two cards - one trigger, same as scry of several cards:
+        // Flamespeaker Adept's ability triggers once for each scry instruction, no matter how many cards you're
+        // scrying.
+        // (2013-09-15)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bounty of the Deep");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerA, "Island", 1);
+        assertHandCount(playerA, "Grizzly Bears", 1);
+        assertLife(playerA, 20 + 2);
+        assertLife(playerB, 20 - 2);
+    }
+
+    @Test
     public void test_Seek_NothingFound_NoTrigger() {
         removeAllCardsFromLibrary(playerA);
         addCard(Zone.LIBRARY, playerA, "Grizzly Bears");
