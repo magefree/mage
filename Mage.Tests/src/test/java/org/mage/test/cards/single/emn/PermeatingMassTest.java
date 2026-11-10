@@ -2,6 +2,7 @@ package org.mage.test.cards.single.emn;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.filter.Filter;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -30,7 +31,32 @@ public class PermeatingMassTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Permeating Mass", 1);
         assertPowerToughness(playerA, "Permeating Mass", 1, 3);
     }
-    
+
+    // https://github.com/magefree/mage/issues/14116
+    @Test
+    public void testCopyDealsCombatDamageAndDies() {
+        addCard(Zone.BATTLEFIELD, playerA, "Permeating Mass");
+        addCard(Zone.BATTLEFIELD, playerA, "Hill Giant");
+        addCard(Zone.BATTLEFIELD, playerB, "Oashra Cultivator");
+
+        attack(1, playerA, "Permeating Mass");
+        block(1, playerB, "Oashra Cultivator", "Permeating Mass");
+
+        // the copy deals combat damage and dies, so Hill Giant should become a copy of Permeating Mass
+        attack(2, playerB, "Permeating Mass");
+        block(2, playerA, "Hill Giant", "Permeating Mass");
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.END_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Oashra Cultivator", 1);
+        assertPermanentCount(playerA, "Permeating Mass", 2);
+        assertPowerToughness(playerA, "Permeating Mass", 1, 3, Filter.ComparisonScope.All);
+        assertPermanentCount(playerA, "Hill Giant", 0);
+        assertPermanentCount(playerA, "Oashra Cultivator", 0);
+    }
+
     /*
      * NOTE: As of 04/19/2017 this test is failing due to a bug in code. See issue #3167
     */
