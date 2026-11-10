@@ -43,6 +43,12 @@ public class LondonMulligan extends Mulligan {
          * take any further mulligans. This process is then repeated until no player takes a mulligan. A
          * player can’t take a number of mulligans greater their starting hand size.
          *
+         * Note: this implementation resolves the mulligan the way sanctioned digital products (paper play,
+         * MTGO and MTGA) do: after mulliganning, the player looks at the full newly drawn hand and decides
+         * whether to keep it or mulligan again; the cards owed to the bottom of the library are put there
+         * only once the player keeps (see endMulligan). The quoted 2019 wording places that bottoming at
+         * mulligan time; we intentionally diverge from it to match that practice.
+         *
          * https://magic.wizards.com/en/articles/archive/competitive-gaming/mythic-championship-ii-format-and-london-test-2019-02-21
          */
 
@@ -108,16 +114,22 @@ public class LondonMulligan extends Mulligan {
                     (newHandSize == 1 ? " card" : " cards"));
         }
         drawHand(numCards, player, game);
-
-        while (player.canRespond() && player.getHand().size() > newHandSize) {
-            Target target = new TargetCardInHand(new FilterCard("card (" + (player.getHand().size() - newHandSize) + " more) to put on the bottom of your library"));
-            player.chooseTarget(Outcome.Discard, target, null, game);
-            player.putCardsOnBottomOfLibrary(new CardsImpl(target.getTargets()), game, null, true);
-        }
     }
 
     @Override
     public void endMulligan(Game game, UUID playerId) {
+        Player player = game.getPlayer(playerId);
+        // The debt is the number of paid mulligans taken (free mulligans do not reduce
+        // openingHandSize, so they add nothing to it): startingHandSize - openingHandSize.
+        // Bottoming exactly the debt (rather than all cards above openingHandSize) leaves
+        // hands that were enlarged by other effects - and never mulliganned - untouched.
+        int owed = startingHandSizes.get(playerId) - openingHandSizes.get(playerId);
+        while (owed > 0 && player.canRespond() && !player.getHand().isEmpty()) {
+            Target target = new TargetCardInHand(new FilterCard("card (" + owed + " more) to put on the bottom of your library"));
+            player.chooseTarget(Outcome.Discard, target, null, game);
+            player.putCardsOnBottomOfLibrary(new CardsImpl(target.getTargets()), game, null, true);
+            owed--;
+        }
     }
 
     @Override
