@@ -1,19 +1,18 @@
 package mage.cards.r;
 
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.MultipliedValue;
+import mage.abilities.dynamicvalue.common.ControllerLifeCount;
+import mage.abilities.effects.common.LoseHalfLifeTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.abilities.effects.common.SetPlayerLifeSourceEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetOpponent;
 
@@ -41,7 +40,10 @@ public final class RevivalRevenge extends SplitCard {
 
         // Revenge
         // Double your life total. Target opponent loses half their life, rounded up.
-        this.getRightHalfCard().getSpellAbility().addEffect(new RevivalRevengeEffect());
+        this.getRightHalfCard().getSpellAbility().addEffect(new SetPlayerLifeSourceEffect(
+                new MultipliedValue(ControllerLifeCount.instance, 2)
+        ).setText("double your life total"));
+        this.getRightHalfCard().getSpellAbility().addEffect(new LoseHalfLifeTargetEffect());
         this.getRightHalfCard().getSpellAbility().addTarget(new TargetOpponent());
     }
 
@@ -52,35 +54,5 @@ public final class RevivalRevenge extends SplitCard {
     @Override
     public RevivalRevenge copy() {
         return new RevivalRevenge(this);
-    }
-}
-
-class RevivalRevengeEffect extends OneShotEffect {
-
-    RevivalRevengeEffect() {
-        super(Outcome.Benefit);
-        staticText = "Double your life total. Target opponent loses half their life, rounded up.";
-    }
-
-    private RevivalRevengeEffect(final RevivalRevengeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RevivalRevengeEffect copy() {
-        return new RevivalRevengeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (controller == null || player == null) {
-            return false;
-        }
-        controller.gainLife(controller.getLife(), game, source);
-        int life = player.getLife();
-        player.loseLife(Math.floorDiv(life, 2) + (life % 2), game, source, false);
-        return true;
     }
 }

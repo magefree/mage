@@ -1,8 +1,8 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.MageItem;
 import mage.MageObject;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.abilities.keyword.MenaceAbility;
@@ -11,12 +11,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.events.ZoneChangeBatchEvent;
+import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -49,7 +49,7 @@ public final class SeerOfStolenSight extends CardImpl {
     }
 }
 
-class SeerOfStolenSightTriggeredAbility extends TriggeredAbilityImpl {
+class SeerOfStolenSightTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     SeerOfStolenSightTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SurveilEffect(1));
@@ -68,28 +68,30 @@ class SeerOfStolenSightTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
+    }
+
+    @Override
+    public boolean checkEvent(ZoneChangeEvent event, Game game) {
+        if (event.getFromZone() != Zone.BATTLEFIELD || event.getToZone() != Zone.GRAVEYARD) {
+            return false;
+        }
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        return permanent != null
+                && (permanent.isArtifact(game) || permanent.isCreature(game))
+                && permanent.isControlledBy(getControllerId());
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        return zEvent.getToZone().match(Zone.GRAVEYARD)
-                && zEvent.getFromZone().match(Zone.BATTLEFIELD)
-                && zEvent
-                .getCards()
-                .stream()
-                .filter(Objects::nonNull)
-                .map(MageItem::getId)
-                .map(game::getPermanentOrLKIBattlefield)
-                .filter(Objects::nonNull)
-                .filter(permanent -> permanent.isArtifact(game) || permanent.isCreature(game))
-                .map(Controllable::getControllerId)
-                .anyMatch(this::isControlledBy);
+        return !getFilteredEvents((ZoneChangeBatchEvent) event, game).isEmpty();
     }
 
     @Override
     public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
-        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+        return ((ZoneChangeBatchEvent) event)
+                .getEvents()
+                .stream()
+                .anyMatch(e -> TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, e, game));
     }
 }

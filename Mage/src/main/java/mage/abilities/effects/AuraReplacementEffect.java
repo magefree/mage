@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.cards.Card;
+import mage.cards.DoubleFacedCardHalf;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.game.Game;
@@ -14,6 +15,7 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
+import mage.util.CardUtil;
 
 import java.util.Locale;
 import java.util.UUID;
@@ -23,9 +25,9 @@ import java.util.UUID;
  * valid target on the battlefield. Also, when entering the battlefield and it
  * was not cast (so from Zone != Stack), this effect gets the target to which to
  * attach it and adds the Aura the the battlefield and attachs it to the target.
- * The "attachTo:" value in game state has to be set therefore.
+ * The "attachTo" value has to be set therefore (AttachEffect.setAttachTo).
  * <p>
- * If no "attachTo:" value is defined, the controlling player has to chose the
+ * If no "attachTo" value is defined, the controlling player has to chose the
  * aura target.
  * <p>
  * This effect is automatically added to ContinuousEffects at the start of a
@@ -34,6 +36,8 @@ import java.util.UUID;
  * @author North
  */
 public class AuraReplacementEffect extends ReplacementEffectImpl {
+
+    private static final String VALUE_KEY_ENTER_AS_NON_AURA = "EnterAsNonAura";
 
     public AuraReplacementEffect() {
         super(Duration.EndOfGame, Outcome.Neutral);
@@ -61,7 +65,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             return false;
         }
         // Aura enters the battlefield attached
-        Object object = game.getState().getValue("attachTo:" + card.getId());
+        Object object = AttachEffect.pollAttachTo(game, card.getId());
         if (object != null) {
             if (object instanceof Permanent) {
                 // Aura is attached to a permanent on the battlefield
@@ -183,11 +187,58 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         if (card == null) {
             return false;
         }
-        // in case of transformable enchantments
-        if (Boolean.TRUE.equals(game.getState().getValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId() + card.getZoneChangeCounter(game)))
-                && card.getSecondCardFace() != null) {
-            card = card.getSecondCardFace();
+        return findEnteringAura(game, card, card.isFaceDown(game)) != null;
+    }
+
+    /**
+     * Mark a card to enter the battlefield as a non-Aura permanent (example: Takklemaggot), so the Aura's
+     * enter rules (303.4f, 303.4g) are not used for it (e.g. no target choose). 
+     * Must be called before the card's move.
+     */
+    public static void setEnterAsNonAura(Game game, Card card) {
+        Card mainCard = card.getMainCard();
+        game.getState().setValue(VALUE_KEY_ENTER_AS_NON_AURA + mainCard.getId() + mainCard.getZoneChangeCounter(game), Boolean.TRUE);
+    }
+
+    /**
+     * Find the Aura that will enter the battlefield - the card's characteristics as it will exist on the battlefield
+     * (side of a double faced card, transformed, face down, non-Aura).
+     * Must be called before the card's move.
+     *
+     * @param faceDown the card enters the battlefield face down
+     * @return the card's side that enters the battlefield as an Aura or null if it doesn't enter as an Aura
+     */
+    public static Card findEnteringAura(Game game, Card card, boolean faceDown) {
+        // as face down
+        // 708.2. face down permanent has no name, types, subtypes
+        if (faceDown) {
+            return null;
         }
-        return card.isEnchantment(game) && card.hasSubtype(SubType.AURA, game);
+
+        // as non-aura
+        Card mainCard = card.getMainCard();
+        if (Boolean.TRUE.equals(game.getState().getValue(VALUE_KEY_ENTER_AS_NON_AURA + mainCard.getId() + mainCard.getZoneChangeCounter(game)))) {
+            return null;
+        }
+
+        // as transformed (dfc)
+        Card enteringCard;
+        boolean enterTransformed = Boolean.TRUE.equals(game.getState().getValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId() + card.getZoneChangeCounter(game)));
+        if (enterTransformed && card instanceof DoubleFacedCardHalf) {
+            // side of a transformable card enters with its back face up, same as in ZonesHandler
+            enteringCard = ((DoubleFacedCardHalf) card).isBackSide() ? card : ((DoubleFacedCardHalf) card).getOtherSide();
+        } else if (enterTransformed && card.getSecondCardFace() != null) {
+            // main card of a transformable card
+            enteringCard = card.getSecondCardFace();
+        } else {
+            // double faced cards: a main card has no own characteristics, must check the side that enters the battlefield
+            enteringCard = CardUtil.getDefaultCardSideForBattlefield(game, card);
+        }
+
+        // as normal aura
+        if (enteringCard.isEnchantment(game) && enteringCard.hasSubtype(SubType.AURA, game)) {
+            return enteringCard;
+        }
+        return null;
     }
 }

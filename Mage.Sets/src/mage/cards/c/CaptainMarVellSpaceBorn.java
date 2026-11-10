@@ -73,6 +73,6 @@ enum OpponentCastSpellThisTurnCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         return watcher != null
-                && game.getOpponents(source.getControllerId()).stream().anyMatch(playerId -> watcher.getCount(playerId) > 0);
+                && game.getOpponents(source.getControllerId(), false).stream().anyMatch(playerId -> watcher.getCount(playerId) > 0);
     }
 }

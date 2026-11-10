@@ -11,9 +11,9 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterNonlandCard;
+import mage.filter.common.FilterPermanentCard;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.filter.predicate.mageobject.PermanentPredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,11 +29,11 @@ import mage.target.common.TargetCardInGraveyard;
 public final class BilboUnexpectedAdventurer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 3 or greater");
-    private static final FilterCard filterCard = new FilterNonlandCard("nonland permanent card with mana value 3 or less");
+    private static final FilterCard filterCard = new FilterPermanentCard("nonland permanent card with mana value 3 or less");
 
     static {
         filter.add(new PowerPredicate(ComparisonType.OR_GREATER, 3));
-        filterCard.add(PermanentPredicate.instance);
+        filterCard.add(Predicates.not(CardType.LAND.getPredicate()));
         filterCard.add(new ManaValuePredicate(ComparisonType.OR_LESS, 3));
     }
 

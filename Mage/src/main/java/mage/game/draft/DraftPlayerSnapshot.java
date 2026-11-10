@@ -22,15 +22,18 @@ public class DraftPlayerSnapshot {
     private final List<Card> booster;
     private final List<Card> picks;
     private final boolean picking;
+    private final List<DraftPickSuggest> pickSuggests;
 
     public DraftPlayerSnapshot(int boosterNum, int cardNum, List<String> playerNames,
-                               List<Card> booster, List<Card> picks, boolean picking) {
+                               List<Card> booster, List<Card> picks, boolean picking,
+                               List<DraftPickSuggest> pickSuggests) {
         this.boosterNum = boosterNum;
         this.cardNum = cardNum;
         this.playerNames = Collections.unmodifiableList(new ArrayList<>(playerNames));
         this.booster = booster == null ? Collections.emptyList() : Collections.unmodifiableList(new ArrayList<>(booster));
         this.picks = Collections.unmodifiableList(new ArrayList<>(picks));
         this.picking = picking;
+        this.pickSuggests = pickSuggests == null ? Collections.emptyList() : Collections.unmodifiableList(new ArrayList<>(pickSuggests));
     }
 
     public int getBoosterNum() {
@@ -55,5 +58,9 @@ public class DraftPlayerSnapshot {
 
     public boolean isPicking() {
         return picking;
+    }
+
+    public List<DraftPickSuggest> getPickSuggests() {
+        return pickSuggests;
     }
 }

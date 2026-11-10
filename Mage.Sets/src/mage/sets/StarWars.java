@@ -325,7 +325,7 @@ public final class StarWars extends ExpansionSet {
         cards.add(new SetCardInfo("Shadow Trooper", 56, Rarity.COMMON, mage.cards.s.ShadowTrooper.class));
         cards.add(new SetCardInfo("Shock Trooper", 119, Rarity.UNCOMMON, mage.cards.s.ShockTrooper.class));
         cards.add(new SetCardInfo("Show of Dominance", 156, Rarity.UNCOMMON, mage.cards.s.ShowOfDominance.class));
-        cards.add(new SetCardInfo("Sins of the Father", 413, Rarity.COMMON, mage.cards.s.SinsOfTheFather.class));
+        cards.add(new SetCardInfo("Sins of the Father (Star Wars)", 413, Rarity.COMMON, mage.cards.s.SinsOfTheFatherStarWars.class));
         cards.add(new SetCardInfo("Sith Assassin", 87, Rarity.UNCOMMON, mage.cards.s.SithAssassin.class));
         cards.add(new SetCardInfo("Sith Citadel", 249, Rarity.UNCOMMON, mage.cards.s.SithCitadel.class));
         cards.add(new SetCardInfo("Sith Eternal Lightning", 711, Rarity.RARE, mage.cards.s.SithEternalLightning.class));

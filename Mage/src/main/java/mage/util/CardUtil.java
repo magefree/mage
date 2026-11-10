@@ -1980,13 +1980,16 @@ public final class CardUtil {
      * @return The object stored by the tag if found, the default if not
      */
     public static <T> T getSourceCostsTag(Game game, Ability source, String tag, T defaultValue) {
+        if (defaultValue == null) {
+            throw new IllegalArgumentException("Wrong code usage: Costs tag " + tag + " must be read with a non null default value. Use checkSourceCostsTagExists");
+        }
         Map<String, Object> costTags = getSourceCostsTagsMap(game, source);
         if (costTags != null) {
             Object value = costTags.getOrDefault(tag, defaultValue);
             if (value == null) {
                 throw new IllegalStateException("Wrong code usage: Costs tag " + tag + " has value stored of type null but is trying to be read. Use checkSourceCostsTagExists");
             }
-            if (defaultValue != null && value.getClass() != defaultValue.getClass()) {
+            if (value.getClass() != defaultValue.getClass()) {
                 throw new IllegalStateException("Wrong code usage: Costs tag " + tag + " has value stored of type " + value.getClass().getName() + " different from default of type " + defaultValue.getClass().getName());
             }
             return (T) value;
@@ -2537,6 +2540,19 @@ public final class CardUtil {
             res.addAll(((BatchEvent<?>) event).getTargetIds());
         } else if (event != null && event.getTargetId() != null) {
             res.add(event.getTargetId());
+        }
+        return res;
+    }
+
+    /**
+     * One single event can be a batch (contain multiple events)
+     */
+    public static Set<UUID> getEventSources(GameEvent event) {
+        Set<UUID> res = new HashSet<>();
+        if (event instanceof BatchEvent) {
+            res.addAll(((BatchEvent<?>) event).getSourceIds());
+        } else if (event != null && event.getSourceId() != null) {
+            res.add(event.getSourceId());
         }
         return res;
     }

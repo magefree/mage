@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.keyword.HasteAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -47,6 +48,191 @@ public class HenzieToolboxTorreTest extends CardTestCommander4Players {
                         .map(Ability::getRule)
                         .anyMatch("When this creature dies, draw a card."::equals)
         );
+    }
+
+    @Test
+    public void test_DoubleFaced_TransformingFrontFace() {
+        addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
+        //
+        // transforms to Braska's Final Aeon
+        addCard(Zone.HAND, playerA, "Jecht, Reluctant Guardian"); // {3}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jecht, Reluctant Guardian" + withBlitz);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertBlitzed("Jecht, Reluctant Guardian", true);
+    }
+
+    @Test
+    public void test_DoubleFaced_TransformingFrontFace_SacrificeAndDraw() {
+        addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
+        //
+        // transforms to Braska's Final Aeon
+        addCard(Zone.HAND, playerA, "Jecht, Reluctant Guardian"); // {3}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jecht, Reluctant Guardian" + withBlitz);
+
+        // sacrifice at the beginning of the next end step and draw on dies
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        assertGraveyardCount(playerA, "Jecht, Reluctant Guardian", 1);
+        assertHandCount(playerA, 1 + 1); // draw step + draw on dies
+    }
+
+    @Test
+    public void test_DoubleFaced_TransformingBackFace_CantCast() {
+        addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
+        //
+        // transforms to Braska's Final Aeon
+        addCard(Zone.HAND, playerA, "Jecht, Reluctant Guardian"); // {3}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+
+        checkPlayableAbility("front face with blitz", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Jecht, Reluctant Guardian" + withBlitz, true);
+        checkPlayableAbility("back face with blitz", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Braska's Final Aeon" + withBlitz, false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+    }
+
+    @Test
+    public void test_DoubleFaced_ModalBackFace() {
+        // If the back face of a modal double-faced card is a creature with mana value 4 or greater,
+        // you may cast it using the blitz ability granted by Henzie.
+        // (2022-04-29)
+        addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
+        //
+        // front face Bruce Banner {U}, back face The Incredible Hulk {4}{G}{G}
+        addCard(Zone.HAND, playerA, "Bruce Banner");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Incredible Hulk" + withBlitz);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertBlitzed("The Incredible Hulk", true);
+    }
+
+    @Test
+    public void test_DoubleFaced_ModalFrontFaceWithLowManaValue_NoBlitz() {
+        addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
+        //
+        // front face Bruce Banner {U}, back face The Incredible Hulk {4}{G}{G}
+        addCard(Zone.HAND, playerA, "Bruce Banner");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+
+        checkPlayableAbility("front face", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Bruce Banner", true);
+        checkPlayableAbility("front face with blitz", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Bruce Banner" + withBlitz, false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+    }
+
+    @Test
+    public void test_XCost() {
+        addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
+        //
+        addCard(Zone.HAND, playerA, "Stonecoil Serpent"); // {X}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Stonecoil Serpent" + withBlitz);
+        setChoice(playerA, "X=4"); // mana value 4
+        setChoice(playerA, "Stonecoil Serpent"); // order of the replacement effects on enter
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertBlitzed("Stonecoil Serpent", true);
+    }
+
+    @Test
+    public void test_XCost_WithOtherMana() {
+        addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
+        //
+        addCard(Zone.HAND, playerA, "Genesis Hydra"); // {X}{G}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Genesis Hydra" + withBlitz);
+        setChoice(playerA, "X=2"); // mana value 4
+        setChoice(playerA, "Genesis Hydra"); // order of the replacement effects on enter
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertBlitzed("Genesis Hydra", true);
+    }
+
+    @Test
+    public void test_XCost_DoubleX() {
+        addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
+        //
+        // enters with X +1/+1 counters
+        addCard(Zone.HAND, playerA, "Walking Ballista"); // {X}{X}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Walking Ballista" + withBlitz);
+        setChoice(playerA, "X=2"); // mana value 4
+        setChoice(playerA, "Walking Ballista"); // order of the replacement effects on enter
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertBlitzed("Walking Ballista", true);
+        assertCounterCount(playerA, "Walking Ballista", CounterType.P1P1, 2);
+    }
+
+    @Test
+    public void test_XCost_DoubleX_LowManaValue_CantUseBlitz() {
+        addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
+        //
+        addCard(Zone.HAND, playerA, "Walking Ballista"); // {X}{X}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Walking Ballista" + withBlitz);
+        setChoice(playerA, "X=1"); // mana value 2
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        try {
+            execute();
+        } catch (AssertionError e) {
+            Assert.assertTrue("X must have limits: " + e.getMessage(), e.getMessage().contains("Found wrong X value = 1"));
+            return;
+        }
+        Assert.fail("test must fail");
+    }
+
+    @Test
+    public void test_XCost_DoubleX_LowManaValue_NormalCast() {
+        addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
+        //
+        // enters with X +1/+1 counters
+        addCard(Zone.HAND, playerA, "Walking Ballista"); // {X}{X}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Walking Ballista");
+        setChoice(playerA, "X=1"); // mana value 2
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertBlitzed("Walking Ballista", false);
+        assertCounterCount(playerA, "Walking Ballista", CounterType.P1P1, 1);
     }
 
     /**

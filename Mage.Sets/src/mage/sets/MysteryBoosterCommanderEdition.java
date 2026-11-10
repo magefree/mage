@@ -43,6 +43,7 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Fellwar Stone", 74, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Feroz, Ulgrotha's Warden", 38, Rarity.RARE, mage.cards.f.FerozUlgrothasWarden.class));
         cards.add(new SetCardInfo("Flitwing, Lyev Detective", 8, Rarity.RARE, mage.cards.f.FlitwingLyevDetective.class));
+        cards.add(new SetCardInfo("Grakk the Pacifist", 2, Rarity.RARE, mage.cards.g.GrakkThePacifist.class));
         cards.add(new SetCardInfo("Grandmother Goby", 9, Rarity.RARE, mage.cards.g.GrandmotherGoby.class));
         cards.add(new SetCardInfo("Greensleeves", 30, Rarity.RARE, mage.cards.g.Greensleeves.class));
         cards.add(new SetCardInfo("Grizzlegom, Hurloon Hero", 39, Rarity.RARE, mage.cards.g.GrizzlegomHurloonHero.class));
@@ -64,6 +65,7 @@ public final class MysteryBoosterCommanderEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Ruby Collector", 61, Rarity.UNCOMMON, mage.cards.r.RubyCollector.class));
         cards.add(new SetCardInfo("Selenia, the Cursed Heart", 50, Rarity.RARE, mage.cards.s.SeleniaTheCursedHeart.class));
         cards.add(new SetCardInfo("Seluma, Light of Aysen", 4, Rarity.RARE, mage.cards.s.SelumaLightOfAysen.class));
+        cards.add(new SetCardInfo("Sifa Grent", 51, Rarity.RARE, mage.cards.s.SifaGrent.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 77, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("The Everforger", 59, Rarity.RARE, mage.cards.t.TheEverforger.class));
         cards.add(new SetCardInfo("Thought Vessel", 78, Rarity.UNCOMMON, mage.cards.t.ThoughtVessel.class));

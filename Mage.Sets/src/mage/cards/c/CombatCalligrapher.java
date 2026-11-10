@@ -21,6 +21,7 @@ import mage.game.permanent.token.InklingToken;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.Collections;
 import java.util.UUID;
 
 /**
@@ -93,7 +94,7 @@ class CombatCalligrapherTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
 
-        getEffects().setValue("playerToAttack", defender.getId());
+        getEffects().setValue("attackedDefenders", Collections.singleton(defender.getId()));
         getEffects().setTargetPointer(new FixedTarget(attacker.getId()));
         return true;
     }

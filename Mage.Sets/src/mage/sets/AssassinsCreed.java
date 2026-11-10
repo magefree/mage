@@ -37,9 +37,9 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Altair Ibn-La'Ahad", 225, Rarity.MYTHIC, mage.cards.a.AltairIbnLaAhad.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Altair Ibn-La'Ahad", 268, Rarity.MYTHIC, mage.cards.a.AltairIbnLaAhad.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Altair Ibn-La'Ahad", 45, Rarity.MYTHIC, mage.cards.a.AltairIbnLaAhad.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Apple of Eden, Isu Relic", 122, Rarity.MYTHIC, mage.cards.a.AppleOfEdenIsuRelic.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Apple of Eden, Isu Relic", 254, Rarity.MYTHIC, mage.cards.a.AppleOfEdenIsuRelic.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Apple of Eden, Isu Relic", 70, Rarity.MYTHIC, mage.cards.a.AppleOfEdenIsuRelic.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Apple of Eden, Isu Relic", 122, Rarity.MYTHIC, mage.cards.a.AppleOfEdenIsuRelic.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Apple of Eden, Isu Relic", 254, Rarity.MYTHIC, mage.cards.a.AppleOfEdenIsuRelic.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Apple of Eden, Isu Relic", 70, Rarity.MYTHIC, mage.cards.a.AppleOfEdenIsuRelic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arbaaz Mir", 138, Rarity.UNCOMMON, mage.cards.a.ArbaazMir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arbaaz Mir", 226, Rarity.UNCOMMON, mage.cards.a.ArbaazMir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arbaaz Mir", 46, Rarity.UNCOMMON, mage.cards.a.ArbaazMir.class, NON_FULL_USE_VARIOUS));
@@ -54,7 +54,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Assassin's Trophy", 166, Rarity.RARE, mage.cards.a.AssassinsTrophy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Assassin's Trophy", 228, Rarity.RARE, mage.cards.a.AssassinsTrophy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Assassin's Trophy", 95, Rarity.RARE, mage.cards.a.AssassinsTrophy.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Auditore Ambush", 295, Rarity.RARE, mage.cards.a.AuditoreAmbush.class));
+        cards.add(new SetCardInfo("Auditore Ambush", 295, Rarity.RARE, mage.cards.a.AuditoreAmbush.class));
         cards.add(new SetCardInfo("Aveline de Grandpre", 135, Rarity.RARE, mage.cards.a.AvelineDeGrandpre.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aveline de Grandpre", 220, Rarity.RARE, mage.cards.a.AvelineDeGrandpre.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aveline de Grandpre", 40, Rarity.RARE, mage.cards.a.AvelineDeGrandpre.class, NON_FULL_USE_VARIOUS));

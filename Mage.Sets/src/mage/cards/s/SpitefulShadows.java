@@ -67,7 +67,7 @@ class SpitefulShadowsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Integer damageAmount = (Integer) this.getValue("damage");
         if (damageAmount != null) {
-            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+            Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
             if (permanent == null) {
                 FixedTarget fixedTarget = (FixedTarget) getTargetPointer();
                 permanent = (Permanent) game.getLastKnownInformation(fixedTarget.getTarget(), Zone.BATTLEFIELD, fixedTarget.getZoneChangeCounter());

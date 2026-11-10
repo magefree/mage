@@ -86,10 +86,7 @@ class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
                 UUID targetId = event.getTargetId();
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent == null) {
-                    permanent = (Permanent) game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
-                }
+                Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
                 return permanent != null && filter.match(permanent, getControllerId(), this, game);
             }
         }

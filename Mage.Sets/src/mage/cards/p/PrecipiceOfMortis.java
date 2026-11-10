@@ -8,10 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
-import mage.game.events.ZoneChangeEvent;
 
 import java.util.UUID;
 
@@ -66,36 +64,26 @@ class PrecipiceOfMortisEffect extends ReplacementEffectImpl {
             NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
             // Only triggers of the controller of Precipice of Mortis
             if (source.isControlledBy(event.getPlayerId())) {
-                GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
                 // enters triggers
-                if (sourceEvent != null
-                        && sourceEvent.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
-                        && sourceEvent instanceof EntersTheBattlefieldEvent) {
-                    EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) sourceEvent;
-                    // Only for entering Jedis
-                    if (entersTheBattlefieldEvent.getTarget().hasSubtype(SubType.JEDI, game)) {
-                        // Only for triggers of permanents
-                        if (game.getPermanent(numberOfTriggersEvent.getSourceId()) != null) {
-                            return true;
-                        }
+                // Only for entering Jedis
+                if (numberOfTriggersEvent.getEnteredPermanents(game)
+                        .stream()
+                        .anyMatch(permanent -> permanent.hasSubtype(SubType.JEDI, game))) {
+                    // Only for triggers of permanents
+                    if (game.getPermanent(numberOfTriggersEvent.getSourceId()) != null) {
+                        return true;
                     }
                 }
 
                 // leaves triggers
-                if (sourceEvent != null
-                        && sourceEvent.getType() == GameEvent.EventType.ZONE_CHANGE
-                        && sourceEvent instanceof ZoneChangeEvent) {
-                    ZoneChangeEvent leavesTheBattlefieldEvent = (ZoneChangeEvent) sourceEvent;
-                    if (leavesTheBattlefieldEvent.getFromZone() == Zone.BATTLEFIELD) {
-                        // Only for leaving Jedis
-                        if (leavesTheBattlefieldEvent.getTarget().hasSubtype(SubType.JEDI, game)) {
-                            // Only for triggers of permanents
-                            if (game.getPermanent(numberOfTriggersEvent.getSourceId()) != null) {
-                                return true;
-                            }
-                        }
+                // Only for leaving Jedis
+                if (numberOfTriggersEvent.getLeftPermanents(game)
+                        .stream()
+                        .anyMatch(permanent -> permanent.hasSubtype(SubType.JEDI, game))) {
+                    // Only for triggers of permanents
+                    if (game.getPermanent(numberOfTriggersEvent.getSourceId()) != null) {
+                        return true;
                     }
-
                 }
             }
         }

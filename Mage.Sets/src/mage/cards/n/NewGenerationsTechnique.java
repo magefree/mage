@@ -19,13 +19,13 @@ public final class NewGenerationsTechnique extends CardImpl {
     public NewGenerationsTechnique(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
-        // Sneak {2}{G}
-        this.addAbility(new SneakAbility(this, "{2}{G}"));
-
         // Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(
             new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LANDS), true
         ));
+
+        // Sneak {2}{G}
+        this.addAbility(new SneakAbility(this, "{2}{G}"));
     }
 
     private NewGenerationsTechnique(final NewGenerationsTechnique card) {

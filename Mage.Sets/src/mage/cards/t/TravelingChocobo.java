@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
 
@@ -93,16 +92,10 @@ class TravelingChocoboEffect extends ReplacementEffectImpl {
         if (!source.isControlledBy(event.getPlayerId())) {
             return false;
         }
-        GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
-        if (sourceEvent == null
-                || sourceEvent.getType() != GameEvent.EventType.ENTERS_THE_BATTLEFIELD
-                || !(sourceEvent instanceof EntersTheBattlefieldEvent)) {
-            return false;
-        }
-        EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) sourceEvent;
-        return (entersTheBattlefieldEvent.getTarget().isLand(game)
-                || entersTheBattlefieldEvent.getTarget().hasSubtype(SubType.BIRD, game))
-                && entersTheBattlefieldEvent.getTarget().isControlledBy(source.getControllerId())
+        return numberOfTriggersEvent.getEnteredPermanents(game)
+                .stream()
+                .anyMatch(permanent -> (permanent.isLand(game) || permanent.hasSubtype(SubType.BIRD, game))
+                        && permanent.isControlledBy(source.getControllerId()))
                 && game.getPermanent(numberOfTriggersEvent.getSourceId()) != null;
     }
 

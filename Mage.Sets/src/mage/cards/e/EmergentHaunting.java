@@ -36,9 +36,9 @@ public final class EmergentHaunting extends CardImpl {
         // At the beginning of your end step, if you haven't cast a spell from your hand this turn and Emergent Haunting isn't a creature, it becomes a 3/3 Spirit creature with flying in addition to its other types.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 TargetController.YOU, new BecomesCreatureSourceEffect(
-                        new CreatureToken(3, 3, "3/3 Spirit creature with flying in addition to its other types")
+                        new CreatureToken(3, 3, "3/3 Spirit creature with flying")
                                 .withSubType(SubType.SPIRIT).withAbility(FlyingAbility.getInstance()),
-                        null, Duration.WhileOnBattlefield
+                        CardType.ENCHANTMENT, Duration.WhileOnBattlefield
                 ),
                 false, condition
         ).withRuleTextReplacement(true).addHint(HaventCastSpellFromHandThisTurnCondition.hint));

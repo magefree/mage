@@ -1,5 +1,6 @@
 package mage.cards;
 
+import mage.MageIdentifier;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.constants.CardType;
@@ -7,7 +8,9 @@ import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 /*
@@ -93,6 +96,14 @@ class PrepareCardSpellAbility extends SpellOptionCardSpellAbility {
 
     private PrepareCardSpellAbility(final PrepareCardSpellAbility ability) {
         super(ability);
+    }
+
+    @Override
+    public Set<MageIdentifier> spellCanBeActivatedNow(UUID playerId, Game game) {
+        // 722.3. Preparation cards can't be cast using the alternative characteristics found within their inset
+        // frames. Rather, these characteristics are used to define characteristics of copies which may be cast.
+        // (it's a common check for all cast ways, e.g. cast without paying mana cost from cascade)
+        return Collections.emptySet();
     }
 
     @Override

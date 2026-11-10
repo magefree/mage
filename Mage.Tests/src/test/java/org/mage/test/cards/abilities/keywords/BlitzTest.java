@@ -68,6 +68,37 @@ public class BlitzTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_Rollback_MustNotLostBlitz_ManaAbilityFailedWhilePaying() {
+        // a failed mana ability while paying a spell rolls back the game, the spell must keep the blitz cast after
+        // that (Golgari Signet is tried for {1} when nothing is left to pay its own {1}, then convoke pays)
+        //
+        // Blitz {3}{G} (If you cast this spell for its blitz cost, it gains haste and "When this creature dies,
+        // draw a card." Sacrifice it at the beginning of the next end step.)
+        addCard(Zone.HAND, playerA, decoy); // {1}{G}
+        //
+        // {T}: The next spell you cast this turn has convoke.
+        addCard(Zone.BATTLEFIELD, playerA, "Wand of the Worldsoul");
+        addCard(Zone.BATTLEFIELD, playerA, "Runeclaw Bear"); // 2/2, for convoke
+        addCard(Zone.BATTLEFIELD, playerA, "Golgari Signet"); // {1}, {T}: Add {B}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: The next spell you cast this turn");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, decoy + withBlitz);
+        addTarget(playerA, "Runeclaw Bear"); // convoke for {1}
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertTapped("Runeclaw Bear", true);
+        assertTapped("Golgari Signet", false);
+        assertPermanentCount(playerA, decoy, 0);
+        assertGraveyardCount(playerA, decoy, 1);
+        assertHandCount(playerA, 1);
+    }
+
+    @Test
     public void testBlitzCopy() {
         //Copying the spell on the stack must include the Blitz ability activation
         addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 6);

@@ -1,7 +1,7 @@
 package mage.cards.n;
 
 import mage.MageInt;
-import mage.MageItem;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -10,14 +10,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.events.ZoneChangeBatchEvent;
+import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 
-import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Stream;
 
 /**
  * @author TheElk801
@@ -48,7 +47,7 @@ public final class NefariousImp extends CardImpl {
     }
 }
 
-class NefariousImpTriggeredAbility extends TriggeredAbilityImpl {
+class NefariousImpTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     NefariousImpTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ScryEffect(1));
@@ -66,21 +65,20 @@ class NefariousImpTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
+    }
+
+    @Override
+    public boolean checkEvent(ZoneChangeEvent event, Game game) {
+        if (event.getFromZone() != Zone.BATTLEFIELD) {
+            return false;
+        }
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        return permanent != null && permanent.isControlledBy(getControllerId());
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        return zEvent.getFromZone() == Zone.BATTLEFIELD
-                && Stream.concat(
-                zEvent.getTokens()
-                        .stream(),
-                zEvent.getCards()
-                        .stream()
-                        .map(MageItem::getId)
-                        .map(game::getPermanentOrLKIBattlefield)
-                        .filter(Objects::nonNull)
-        ).map(Controllable::getControllerId).anyMatch(this::isControlledBy);
+        return !getFilteredEvents((ZoneChangeBatchEvent) event, game).isEmpty();
     }
 }

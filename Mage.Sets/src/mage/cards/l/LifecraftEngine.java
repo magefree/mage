@@ -69,6 +69,8 @@ class LifecraftEngineAddSubTypeAllEffect extends ContinuousEffectImpl {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
 
         staticText = "Vehicle creatures you control are the chosen creature type in addition to their other types.";
+        // Crew and Aerial Modification turn Vehicles into creatures in this same layer.
+        this.addDependedToType(DependencyType.BecomeCreature);
     }
 
     private LifecraftEngineAddSubTypeAllEffect(final LifecraftEngineAddSubTypeAllEffect effect) {

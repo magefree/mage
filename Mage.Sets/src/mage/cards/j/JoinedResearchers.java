@@ -11,6 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.PrepareCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -33,7 +34,7 @@ public final class JoinedResearchers extends PrepareCard {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // At the beginning of each end step, if an opponent has more cards in hand than you, this creature becomes prepared.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new BecomePreparedSourceEffect())
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new BecomePreparedSourceEffect(), false)
                 .withInterveningIf(OpponentHasMoreCardsInHandCondition.instance)
                 .addHint(OpponentHasMoreCardsInHandCondition.getHint()));
 

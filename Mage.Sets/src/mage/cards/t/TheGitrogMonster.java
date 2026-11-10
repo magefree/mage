@@ -2,6 +2,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -17,7 +18,8 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.events.ZoneChangeBatchEvent;
+import mage.game.events.ZoneChangeEvent;
 
 /**
  *
@@ -56,7 +58,7 @@ public final class TheGitrogMonster extends CardImpl {
     }
 }
 
-class TheGitrogMonsterTriggeredAbility extends TriggeredAbilityImpl {
+class TheGitrogMonsterTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     public TheGitrogMonsterTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
@@ -68,27 +70,21 @@ class TheGitrogMonsterTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
+    }
+
+    @Override
+    public boolean checkEvent(ZoneChangeEvent event, Game game) {
+        if (event.getToZone() != Zone.GRAVEYARD) {
+            return false;
+        }
+        Card card = game.getCard(event.getTargetId());
+        return card != null && card.isOwnedBy(getControllerId()) && card.isLand(game);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        if (zEvent != null
-                && Zone.GRAVEYARD == zEvent.getToZone()
-                && zEvent.getCards() != null) {
-            for (Card card : zEvent.getCards()) {
-                if (card != null) {
-                    UUID cardOwnerId = card.getOwnerId();
-                    if (cardOwnerId != null
-                            && card.isOwnedBy(getControllerId())
-                            && card.isLand(game)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+        return !getFilteredEvents((ZoneChangeBatchEvent) event, game).isEmpty();
     }
 
     @Override

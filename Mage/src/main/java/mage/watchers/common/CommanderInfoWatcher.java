@@ -97,7 +97,7 @@ public class CommanderInfoWatcher extends Watcher {
                                 "<b>" + commanderTypeName + "</b> did " + entry.getValue() + " combat damage to player " + damagedPlayer.getLogName() + '.', game);
                     }
                     if (rightObject != null) {
-                        this.addInfoToObject(object, "Commander" + entry.getKey(),
+                        this.addInfoToObject(rightObject, "Commander" + entry.getKey(),
                                 "<b>" + commanderTypeName + "</b> did " + entry.getValue() + " combat damage to player " + damagedPlayer.getLogName() + '.', game);
                     }
                 }

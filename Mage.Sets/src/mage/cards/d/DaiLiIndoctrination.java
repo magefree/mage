@@ -7,9 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledLandPermanent;
 import mage.target.common.TargetOpponent;
 
@@ -20,12 +18,6 @@ import java.util.UUID;
  */
 public final class DaiLiIndoctrination extends CardImpl {
 
-    private static final FilterCard filter = new FilterPermanentCard("a nonland permanent card");
-
-    static {
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
-    }
-
     public DaiLiIndoctrination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
@@ -33,7 +25,7 @@ public final class DaiLiIndoctrination extends CardImpl {
 
         // Choose one --
         // * Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card.
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter));
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(StaticFilters.FILTER_CARD_A_NON_LAND_PERMANENT));
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // * Earthbend 2.

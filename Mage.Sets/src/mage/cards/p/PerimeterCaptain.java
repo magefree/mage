@@ -3,25 +3,27 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.BlocksAllTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
  * @author jeffwadsworth
  */
 public final class PerimeterCaptain extends CardImpl {
+
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control with defender");
+
+    static {
+        filter.add(new AbilityPredicate(DefenderAbility.class));
+    }
 
     public PerimeterCaptain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
@@ -35,7 +37,7 @@ public final class PerimeterCaptain extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // Whenever a creature you control with defender blocks, you may gain 2 life.
-        this.addAbility(new PerimeterCaptainTriggeredAbility(new GainLifeEffect(2), true));
+        this.addAbility(new BlocksAllTriggeredAbility(new GainLifeEffect(2), true, filter));
     }
 
     private PerimeterCaptain(final PerimeterCaptain card) {
@@ -45,38 +47,5 @@ public final class PerimeterCaptain extends CardImpl {
     @Override
     public PerimeterCaptain copy() {
         return new PerimeterCaptain(this);
-    }
-}
-
-class PerimeterCaptainTriggeredAbility extends TriggeredAbilityImpl {
-
-    public PerimeterCaptainTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        setTriggerPhrase("Whenever a creature you control with defender blocks, ");
-    }
-
-    private PerimeterCaptainTriggeredAbility(final PerimeterCaptainTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent creature = game.getPermanent(event.getSourceId());
-        if (creature != null) {
-            if (creature.isControlledBy(this.getControllerId()) && creature.getAbilities().contains(DefenderAbility.getInstance())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public PerimeterCaptainTriggeredAbility copy() {
-        return new PerimeterCaptainTriggeredAbility(this);
     }
 }

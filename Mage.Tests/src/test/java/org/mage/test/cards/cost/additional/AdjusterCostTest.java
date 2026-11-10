@@ -552,6 +552,104 @@ public class AdjusterCostTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
+    public void test_modifyCost_WhtzTheBibliophile_StartingDeckSizePreserved() {
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.BATTLEFIELD, playerA, "Whtz, the Bibliophile");
+        addCard(Zone.LIBRARY, playerA, "Island", 200);
+
+        runCode("starting deck size", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Assert.assertEquals(200, player.getStartingDeckSize());
+        });
+        checkPlayableAbility("200 cards without mana", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Draw", true);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Draw");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("tap cost still required", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Draw", false);
+        runCode("starting size after drawing", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Assert.assertEquals(199, player.getLibrary().size());
+            Assert.assertEquals(200, player.getStartingDeckSize());
+            Assert.assertEquals(200, player.copy().getStartingDeckSize());
+            Assert.assertEquals(200, game.createSimulationForPlayableCalc().getPlayer(player.getId()).getStartingDeckSize());
+            assertHandCount(playerA, 1);
+            assertLife(playerA, 21);
+            assertTapped("Whtz, the Bibliophile", true);
+        });
+
+        checkPlayableAbility("discount survives draw and untap", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Draw", true);
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Draw");
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerA, 3); // two activations and the turn's draw
+        assertLife(playerA, 22);
+        assertTapped("Whtz, the Bibliophile", true);
+    }
+
+    @Test
+    public void test_modifyCost_WhtzTheBibliophile_249Cards() {
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.BATTLEFIELD, playerA, "Whtz, the Bibliophile");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.LIBRARY, playerA, "Island", 249);
+
+        checkPlayableAbility("249 cards without spending mana", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Draw", true);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Draw");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertTappedCount("Island", true, 0);
+        assertTapped("Whtz, the Bibliophile", true);
+        assertHandCount(playerA, 1);
+        assertLife(playerA, 21);
+    }
+
+    @Test
+    public void test_modifyCost_WhtzTheBibliophile_199Cards() {
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.BATTLEFIELD, playerA, "Whtz, the Bibliophile");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.LIBRARY, playerA, "Island", 199);
+
+        activateManaAbility(1, PhaseStep.UPKEEP, playerA, "{T}: Add {U}");
+        checkPlayableAbility("199 cards and only two mana", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Draw", false);
+        checkPlayableAbility("199 cards and three mana", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Draw", true);
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Draw");
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+
+        assertTappedCount("Island", true, 3);
+        assertTapped("Whtz, the Bibliophile", true);
+        assertHandCount(playerA, 2);
+        assertLife(playerA, 21);
+    }
+
+    @Test
+    public void test_modifyCost_WhtzTheBibliophile_SummoningSickness() {
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.HAND, playerA, "Whtz, the Bibliophile");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5); // leave three mana available after casting
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.LIBRARY, playerA, "Island", 200);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Whtz, the Bibliophile");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("summoning sickness prevents tap cost", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Draw", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertTapped("Whtz, the Bibliophile", false);
+        assertHandCount(playerA, 0);
+        assertLife(playerA, 20);
+    }
+
+    @Test
     public void test_modifyCost_BaruWurmspeaker() {
         // Wurms you control get +2/+2 and have trample.
         // {7}{G}, {T}: Create a 4/4 green Wurm creature token. This ability costs {X} less to activate, where X is the greatest power among Wurms you control.

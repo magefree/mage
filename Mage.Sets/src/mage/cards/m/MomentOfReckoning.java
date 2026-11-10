@@ -9,8 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterNonlandCard;
-import mage.filter.predicate.mageobject.PermanentPredicate;
+import mage.filter.common.FilterPermanentCard;
+import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetNonlandPermanent;
 
@@ -20,10 +20,10 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public final class MomentOfReckoning extends CardImpl {
 
-    private static final FilterCard filter = new FilterNonlandCard("nonland permanent card from your graveyard");
+    private static final FilterCard filter = new FilterPermanentCard("nonland permanent card from your graveyard");
 
     static {
-        filter.add(PermanentPredicate.instance);
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public MomentOfReckoning(UUID ownerId, CardSetInfo setInfo) {

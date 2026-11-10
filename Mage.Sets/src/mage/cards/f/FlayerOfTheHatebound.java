@@ -110,10 +110,7 @@ class FlayerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         UUID creatureId = (UUID) getValue("damageSource");
-        Permanent creature = game.getPermanent(creatureId);
-        if (creature == null) {
-            creature = (Permanent) game.getLastKnownInformation(creatureId, Zone.BATTLEFIELD);
-        }
+        Permanent creature = game.getPermanentOrLKIBattlefield(creatureId);
         if (creature != null) {
             int amount = creature.getPower().getValue();
             UUID target = source.getTargets().getFirstTarget();

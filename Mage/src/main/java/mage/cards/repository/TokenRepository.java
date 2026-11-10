@@ -283,7 +283,8 @@ public enum TokenRepository {
         res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 19, "https://api.scryfall.com/cards/tsos/1/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 20, "https://api.scryfall.com/cards/tmsc/1/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 21, "https://api.scryfall.com/cards/tmsc/17/en?format=image"));
-
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 22, "https://api.scryfall.com/cards/ttrc/1/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 23, "https://api.scryfall.com/cards/ttrc/8/en?format=image"));
 
         // City's Blessing
         // https://scryfall.com/search?q=type%3Atoken+include%3Aextras+unique%3Aprints+City%27s+Blessing+&unique=cards&as=grid&order=name
@@ -351,7 +352,7 @@ public enum TokenRepository {
 
         // Speed
         // https://scryfall.com/search?q=oracleid%3Aa0ddfd98-17ca-4327-b4db-8188af39f0f8+include%3Aextras&unique=art&as=grid&order=released
-        res.add(createXmageToken(XMAGE_IMAGE_NAME_SPEED, 1, "https://api.scryfall.com/cards/tdft/14/en?format=image&&face=back"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_SPEED, 1, "https://api.scryfall.com/cards/tdft/14/en?format=image&face=back"));
 
         // Helper emblem (for global card hints)
         // use backface for it

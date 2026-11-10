@@ -3,6 +3,8 @@ package mage.client.util;
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.gui.GuiDisplayUtil;
+import mage.util.ThreadUtils;
+
 import org.mage.card.arcane.CardRenderer;
 
 import javax.swing.*;
@@ -86,10 +88,20 @@ public final class GUISizeHelper {
     /**
      * Reset all caches and reload all GUI with actual settings.
      * Use it after GUI settings change like colors/fonts/sizes.
+     * 
+     * Thread and GUI safe, can be called from any source
      *
      * @param reloadTheme use it after theme changes only
      */
     public static void refreshGUIAndCards(boolean reloadTheme) {
+        // GUI depends on images but can be updated from swing thread only (EDT)
+        // GUI midification from non-EDT threads will raise random errors like layoutHScrollbar from #13503
+        if (!SwingUtilities.isEventDispatchThread()) {
+            SwingUtilities.invokeLater(() -> refreshGUIAndCards(reloadTheme));
+            return;
+        }
+        ThreadUtils.ensureRunInGUISwingThread();
+
         calculateGUISizes();
         if (reloadTheme) {
             GuiDisplayUtil.refreshThemeSettings();

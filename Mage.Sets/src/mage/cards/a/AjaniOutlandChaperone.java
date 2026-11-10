@@ -12,9 +12,9 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterNonlandCard;
+import mage.filter.common.FilterPermanentCard;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.filter.predicate.mageobject.PermanentPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.KithkinGreenWhiteToken;
 import mage.target.TargetPermanent;
@@ -27,11 +27,11 @@ import java.util.UUID;
 public final class AjaniOutlandChaperone extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("tapped creature");
-    private static final FilterCard filter2 = new FilterNonlandCard("nonland permanent cards with mana value 3 or less");
+    private static final FilterCard filter2 = new FilterPermanentCard("nonland permanent cards with mana value 3 or less");
 
     static {
         filter.add(TappedPredicate.TAPPED);
-        filter2.add(PermanentPredicate.instance);
+        filter2.add(Predicates.not(CardType.LAND.getPredicate()));
         filter2.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 

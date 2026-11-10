@@ -487,6 +487,15 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean seekCard(FilterCard filter, Ability source, Game game);
 
     /**
+     * One seek action for several cards (e.g. "seek a land card and a nonland card"): gets a random card for each
+     * filter and puts them into their owner's hand, one sought event for the whole action
+     * Doesn't reveal the cards
+     *
+     * @return number of sought cards
+     */
+    int seekCards(List<FilterCard> filters, Ability source, Game game);
+
+    /**
      * Reveals all players' libraries. Useful for abilities like Jace, Architect
      * of Thought's -8 that have effects that require information from all
      * libraries.
@@ -621,6 +630,17 @@ public interface Player extends MageItem, Copyable<Player> {
         return state;
     }
 
+    /**
+     * Same as restoreState, but keeps the current stack, see {@link Game#restoreStateKeepingStack}
+     */
+    default GameState restoreStateKeepingStack(int bookmark, String text, Game game) {
+        GameState state = game.restoreStateKeepingStack(bookmark, text);
+        if (getStoredBookmark() >= bookmark) {
+            resetStoredBookmark(game);
+        }
+        return state;
+    }
+
     void revealCards(Ability source, Cards cards, Game game);
 
     void revealCards(String titleSuffix, Cards cards, Game game);
@@ -706,6 +726,12 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1, List<? extends Card> pile2, Game game);
 
+    /**
+     * Takes one step towards paying {@code unpaid}, such as activating one mana ability or special mana action. The
+     * caller then spends the mana pool on the cost and calls this again until the cost is paid.
+     *
+     * @return false to give up paying, which fails the whole payment
+     */
     boolean playMana(Ability ability, ManaCost unpaid, String promptText, Game game);
 
     /**

@@ -12,10 +12,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.PermanentPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.watchers.common.ManaPaidSourceWatcher;
@@ -27,14 +27,13 @@ import java.util.UUID;
  */
 public final class AstelliReclaimer extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard(
+    private static final FilterCard filter = new FilterPermanentCard(
             "noncreature, nonland permanent card with mana value X or less"
     );
 
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
-        filter.add(PermanentPredicate.instance);
         filter.add(AstelliReclaimerPredicate.instance);
     }
 

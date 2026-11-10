@@ -6,6 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,6 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -91,9 +93,10 @@ class NomadMythmakerEffect extends OneShotEffect {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null
                     && !permanent.cantBeAttachedBy(aura, source, game, false)) {
-                game.getState().setValue("attachTo:" + aura.getId(), permanent);
+                AttachEffect.setAttachTo(game, aura.getId(), permanent);
                 controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
-                return permanent.addAttachment(aura.getId(), source, game);
+                Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(aura, game);
+                return attachment != null && permanent.addAttachment(attachment.getId(), source, game);
             }
         }
         return false;

@@ -1,17 +1,17 @@
 package mage.game;
 
 import mage.abilities.Ability;
+import mage.abilities.keyword.SneakAbility;
 import mage.cards.*;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.command.Commander;
+import mage.game.events.ZoneChangeBatchEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentMeld;
-import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -27,25 +27,12 @@ public final class ZonesHandler {
     public static boolean cast(ZoneChangeInfo info, Ability source, Game game) {
         if (maybeRemoveFromSourceZone(info, game, source)) {
             placeInDestinationZone(info, 0, source, game);
-            // create a group zone change event if a card is moved to stack for casting (it's always only one card, but some effects check for group events (one or more xxx))
-            Set<Card> cards = new HashSet<>();
-            Set<PermanentToken> tokens = new HashSet<>();
-            Card targetCard = getTargetCard(game, info.event.getTargetId());
-            if (targetCard instanceof PermanentToken) {
-                tokens.add((PermanentToken) targetCard);
-            } else {
-                cards.add(targetCard);
-            }
-            game.fireEvent(new ZoneChangeGroupEvent(
-                    cards,
-                    tokens,
-                    info.event.getSourceId(),
-                    info.event.getSource(),
-                    info.event.getPlayerId(),
-                    info.event.getFromZone(),
-                    info.event.getToZone()));
             // normal movement
             game.fireEvent(info.event);
+            // create a batch zone change event if a card is moved to stack for casting (it's always only one card, but some effects check for batch events (one or more xxx))
+            ZoneChangeBatchEvent batchEvent = new ZoneChangeBatchEvent();
+            batchEvent.addEvent(info.event);
+            game.fireEvent(batchEvent);
             return true;
         }
         return false;
@@ -128,6 +115,21 @@ public final class ZonesHandler {
             if (game.getPhase() != null) { // moving cards to zones before game started does not need events
                 game.addSimultaneousEvent(zoneChangeInfo.event);
             }
+        }
+
+        // enters attacking (508.4): only after the whole group is on the battlefield and effects are applied,
+        // so a defender choice shows a finished game state
+        // same for tokens in another place
+        List<UUID> enteringAttackers = new ArrayList<>();
+        for (ZoneChangeInfo zoneChangeInfo : zoneChangeInfos) {
+            if (Zone.BATTLEFIELD.equals(zoneChangeInfo.event.getToZone())
+                    && zoneChangeInfo.event.getTarget().isEntersAttacking()) {
+                enteringAttackers.add(zoneChangeInfo.event.getTarget().getId());
+            }
+        }
+        if (!enteringAttackers.isEmpty()) {
+            game.applyEffects();
+            game.getCombat().addEnteringAttackers(enteringAttackers, game);
         }
         return zoneChangeInfos;
     }
@@ -430,11 +432,17 @@ public final class ZonesHandler {
                 permanent.setTapped(info instanceof ZoneChangeInfo.Battlefield
                         && ((ZoneChangeInfo.Battlefield) info).tapped);
 
-                // if need prototyped version
+                // if need prototyped or sneaked version
                 if (Zone.STACK == event.getFromZone()) {
                     Spell spell = game.getStack().getSpell(event.getTargetId());
                     if (spell != null) {
                         permanent.setPrototyped(spell.isPrototyped());
+                        // TODO: if more sneak style mechanics arrive then combine to shared logic and methods like CardUtil.getForcedAttackingDefenders(Game game, Ability source)
+                        Set<UUID> sneakDefenders = SneakAbility.getSneakDefenders(spell, game);
+                        if (sneakDefenders != null) {
+                            permanent.setTapped(true);
+                            permanent.setEntersAttacking(sneakDefenders);
+                        }
                     }
                 }
 

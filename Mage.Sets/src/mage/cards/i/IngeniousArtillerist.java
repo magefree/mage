@@ -1,7 +1,7 @@
 package mage.cards.i;
 
 import mage.MageInt;
-import mage.MageItem;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.DamagePlayersEffect;
@@ -10,11 +10,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.events.ZoneChangeBatchEvent;
+import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 
-import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Stream;
 
 /**
  * @author TheElk801
@@ -43,7 +43,7 @@ public final class IngeniousArtillerist extends CardImpl {
     }
 }
 
-class IngeniousArtilleristTriggeredAbility extends TriggeredAbilityImpl {
+class IngeniousArtilleristTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     IngeniousArtilleristTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamagePlayersEffect(
@@ -57,25 +57,21 @@ class IngeniousArtilleristTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
+    }
+
+    @Override
+    public boolean checkEvent(ZoneChangeEvent event, Game game) {
+        if (event.getToZone() != Zone.BATTLEFIELD) {
+            return false;
+        }
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        return permanent != null && permanent.isArtifact(game) && permanent.isControlledBy(getControllerId());
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        if (zEvent.getToZone() != Zone.BATTLEFIELD
-                || !this.controllerId.equals(event.getPlayerId())) {
-            return false;
-        }
-        int artifacts = Stream.concat(
-                zEvent.getTokens()
-                        .stream(),
-                zEvent.getCards()
-                        .stream()
-                        .map(MageItem::getId)
-                        .map(game::getPermanent)
-                        .filter(Objects::nonNull)
-        ).filter(permanent -> permanent.isArtifact(game)).mapToInt(x -> 1).sum();
+        int artifacts = getFilteredEvents((ZoneChangeBatchEvent) event, game).size();
         if (artifacts > 0) {
             this.getEffects().setValue("damage", artifacts);
             return true;

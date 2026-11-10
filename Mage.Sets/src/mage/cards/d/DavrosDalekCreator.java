@@ -76,7 +76,7 @@ enum DavrosDalekCreatorHint implements Hint {
         PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
         String sep = "";
         String hint = "Opponents that lost 3 or more this turn: [";
-        Set<UUID> opponents = game.getOpponents(ability.getControllerId());
+        Set<UUID> opponents = game.getOpponents(ability.getControllerId(), false);
         if (watcher != null) {
             for (UUID playerId : game.getState().getPlayersInRange(ability.getControllerId(), game)) {
                 if (!opponents.contains(playerId)) {
@@ -125,7 +125,7 @@ class DavrosDalekCreatorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
-        Set<UUID> opponents = game.getOpponents(source.getControllerId());
+        Set<UUID> opponents = game.getOpponents(source.getControllerId(), false);
         if (watcher != null) {
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 if (!opponents.contains(playerId)) {

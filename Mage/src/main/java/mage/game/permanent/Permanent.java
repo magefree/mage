@@ -100,6 +100,11 @@ public interface Permanent extends Card, Controllable {
 
     boolean isPrepared();
 
+    /**
+     * Prepare spell's copy in exile, created by the current prepared designation (722.3c)
+     */
+    UUID getPreparedSpellCopyId();
+
     void setPrepared(boolean prepared, Game game);
 
     int getClassLevel();
@@ -314,6 +319,22 @@ public interface Permanent extends Card, Controllable {
     void setAttacking(MageObjectReference defender);
 
     MageObjectReference getAttacking();
+
+    /**
+     * Mark a permanent that is entering the battlefield as entering attacking (rule 508.4)
+     * Can be used from ETB replacement effects.
+     * If no legal defenders then permanent enters without attack (rules 506.3, 508.4a).
+     *
+     * @param possibleDefenders filter possible defenders (player, planeswalker, battle), null not attacking
+     */
+    void setEntersAttacking(Set<UUID> possibleDefenders);
+
+    boolean isEntersAttacking();
+
+    /**
+     * @return filtered defenders on etb attacking, null for not attacking
+     */
+    Set<UUID> getEntersAttackingDefenders();
 
     void setBlocking(int blocking);
 

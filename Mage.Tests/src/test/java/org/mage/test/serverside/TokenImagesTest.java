@@ -17,6 +17,7 @@ import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.HumanToken;
+import mage.game.permanent.token.Phyrexian00Token;
 import mage.game.permanent.token.SoldierToken;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
@@ -290,6 +291,23 @@ public class TokenImagesTest extends CardTestPlayerBase {
         Assert.assertEquals("client side", imagesNeed, imagesClient);
     }
 
+    private void assert_TokenOrCardImageNumberFromList(String tokenOrCardName, List<Integer> possibleImages) {
+        // each object must use one of the possible images, server and client sides must have same data
+        GameView gameView = new GameView(currentGame.getState(), currentGame, playerA.getId(), null);
+        currentGame.getBattlefield().getAllPermanents()
+                .stream()
+                .filter(card -> card.getName().equals(tokenOrCardName))
+                .filter(card -> card instanceof MageObjectImpl)
+                .forEach(card -> {
+                    int serverImage = ((MageObjectImpl) card).getImageNumber();
+                    Assert.assertTrue("server side - wrong image number " + serverImage + " for " + card,
+                            possibleImages.contains(serverImage));
+                    CardView cardView = gameView.getMyPlayer().getBattlefield().get(card.getId());
+                    Assert.assertNotNull("client side - can't find " + card, cardView);
+                    Assert.assertEquals("client side - wrong image number for " + card, serverImage, cardView.getImageNumber());
+                });
+    }
+
     private void assertFaceDownCharacteristics(String info, MageObject object, String faceDownTypeName) {
         String prefix = info + " - " + object;
 
@@ -321,18 +339,9 @@ public class TokenImagesTest extends CardTestPlayerBase {
         }
     }
 
-    private void assert_FaceDownMorphImageNumber(List<Integer> needUniqueImages) {
-        Set<Integer> serverStats = currentGame.getBattlefield().getAllPermanents()
-                .stream()
-                .filter(card -> card.isFaceDown(currentGame))
-                .filter(card -> {
-                    Assert.assertEquals("server side - wrong set code - " + card, TokenRepository.XMAGE_TOKENS_SET_CODE, card.getExpansionSetCode());
-                    return true;
-                })
-                .sorted(Comparator.comparing(Card::getExpansionSetCode))
-                .map(card -> (MageObjectImpl) card)
-                .map(MageObjectImpl::getImageNumber)
-                .collect(Collectors.toSet());
+    private void assert_FaceDownMorphImageNumber(List<Integer> possibleImages) {
+        // each face down object must use one of the possible images, image number is generated from object's id,
+        // server and client sides must have same data
 
         // use another player to hide card view names in face down
         GameView gameView = new GameView(currentGame.getState(), currentGame, playerB.getId(), null);
@@ -342,23 +351,25 @@ public class TokenImagesTest extends CardTestPlayerBase {
                 .findFirst()
                 .orElse(null);
         Assert.assertNotNull(playerView);
-        Set<Integer> clientStats = playerView.getBattlefield().values()
-                .stream()
-                .filter(CardView::isFaceDown)
-                .filter(card -> {
-                    Assert.assertEquals("client side - wrong set code - " + card, TokenRepository.XMAGE_TOKENS_SET_CODE, card.getExpansionSetCode());
-                    return true;
-                })
-                .sorted(Comparator.comparing(CardView::getExpansionSetCode))
-                .map(CardView::getImageNumber)
-                .collect(Collectors.toSet());
 
-        // server and client sides must have same data
-        String imagesNeed = needUniqueImages.stream().sorted().map(Object::toString).collect(Collectors.joining(", "));
-        String imagesServer = serverStats.stream().sorted().map(Object::toString).collect(Collectors.joining(", "));
-        String imagesClient = clientStats.stream().sorted().map(Object::toString).collect(Collectors.joining(", "));
-        Assert.assertEquals("server side", imagesNeed, imagesServer);
-        Assert.assertEquals("client side", imagesNeed, imagesClient);
+        currentGame.getBattlefield().getAllPermanents()
+                .stream()
+                .filter(card -> card.isFaceDown(currentGame))
+                .forEach(card -> {
+                    // server side
+                    int needImage = TokenRepository.instance.findPreferredTokenInfoForXmage(TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, card.getId()).getImageNumber();
+                    Assert.assertTrue("wrong possible image number " + needImage, possibleImages.contains(needImage));
+                    Assert.assertEquals("server side - wrong set code - " + card, TokenRepository.XMAGE_TOKENS_SET_CODE, card.getExpansionSetCode());
+                    int serverImage = ((MageObjectImpl) card).getImageNumber();
+                    Assert.assertEquals("server side - wrong image number - " + card, needImage, serverImage);
+
+                    // client side
+                    CardView cardView = playerView.getBattlefield().get(card.getId());
+                    Assert.assertNotNull("client side - can't find " + card, cardView);
+                    Assert.assertTrue("client side - must be face down - " + card, cardView.isFaceDown());
+                    Assert.assertEquals("client side - wrong set code - " + card, TokenRepository.XMAGE_TOKENS_SET_CODE, cardView.getExpansionSetCode());
+                    Assert.assertEquals("client side - wrong image number - " + card, needImage, cardView.getImageNumber());
+                });
     }
 
     @Test
@@ -680,15 +691,12 @@ public class TokenImagesTest extends CardTestPlayerBase {
         assert_SacredCat(3 + 5, "AKH=3", "AKR=5");
     }
 
-    @Test // it's ok for fail in 1 of 50
-    // TODO: implement mock or test command to setup "random" images in TokenImpl.generateTokenInfo
-    //  (see setFlipCoinResult and setDieRollResult), so no needs in big amount
+    @Test
     public void test_Abilities_Incubator_MustTransformWithSameSettings() {
         // bug with miss image data in transformed incubator token: https://github.com/magefree/mage/issues/11535
-
-        // make sure random images take all 3 diff images
-        int needIncubatorTokens = 30;
-        int needPhyrexianTokens = 30 / 2;
+        // random images usage checked by test_Abilities_Incubator_PhyrexianTokenMustUseAllImages
+        int needIncubatorTokens = 6;
+        int needPhyrexianTokens = needIncubatorTokens / 2;
 
         // When Sculpted Perfection enters the battlefield, incubate 2. (Create an Incubator token with two +1/+1
         // counters on it and “{2}: Transform this artifact.” It transforms into a 0/0 Phyrexian artifact creature.)
@@ -725,15 +733,25 @@ public class TokenImagesTest extends CardTestPlayerBase {
 
         // MOM-Incubator has 1 image (number is 0)
         assert_TokenOrCardImageNumber("Incubator Token", Arrays.asList(0));
-        // MOM-Phyrexian has 3 images
-        assert_TokenOrCardImageNumber("Phyrexian Token", Arrays.asList(1, 2, 3));
+        // MOM-Phyrexian has 3 images, so each transformed token must keep one of it
+        assert_TokenOrCardImageNumberFromList("Phyrexian Token", Arrays.asList(1, 2, 3));
     }
 
-    @Test // it's ok for fail in very rare random
-    // TODO: implement mock or test command to setup "random" images in TokenImpl.generateTokenInfo
-    //  (see setFlipCoinResult and setDieRollResult), so no needs in big amount
+    @Test
+    public void test_Abilities_Incubator_PhyrexianTokenMustUseAllImages() {
+        // random token images must take all 3 diff images of MOM-Phyrexian
+        // (it's a direct call without game, so big amount is fast and fail chance is 3 * (2/3)^1000)
+        Set<Integer> usedImages = new HashSet<>();
+        IntStream.range(0, 1000).forEach(x -> usedImages.add(TokenRepository.instance
+                .findPreferredTokenInfoForClass(Phyrexian00Token.class.getName(), "MOM")
+                .getImageNumber()));
+        Assert.assertEquals("must use all images", new HashSet<>(Arrays.asList(1, 2, 3)), usedImages);
+    }
+
+    @Test
     public void test_FaceDown_CardWithMorph_MustGetDefaultImage() {
-        int faceDownAmount = 20;
+        // random images usage checked by test_FaceDown_MorphImageMustUseAllImages
+        int faceDownAmount = 5;
         addCard(Zone.HAND, playerA, "Ainok Tracker", faceDownAmount); // {5}{R}, Morph {4}{R}, face up {3}
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5 * faceDownAmount);
 
@@ -750,9 +768,10 @@ public class TokenImagesTest extends CardTestPlayerBase {
         assert_FaceDownMorphImageNumber(Arrays.asList(1, 2));
     }
 
-    @Test // it's ok for fail in very rare random
+    @Test
     public void test_FaceDown_LandWithMorph_MustGetDefaultImage() {
-        int faceDownAmount = 20;
+        // random images usage checked by test_FaceDown_MorphImageMustUseAllImages
+        int faceDownAmount = 5;
         addCard(Zone.HAND, playerA, "Zoetic Cavern", faceDownAmount);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3 * faceDownAmount);
 
@@ -767,6 +786,17 @@ public class TokenImagesTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), faceDownAmount);
         assert_FaceDownMorphImageNumber(Arrays.asList(1, 2));
+    }
+
+    @Test
+    public void test_FaceDown_MorphImageMustUseAllImages() {
+        // face down image number is generated from object's id, so it must take all diff images for diff ids
+        // (fixed ids from names like real random ids, so it's a stable result)
+        Set<Integer> usedImages = new HashSet<>();
+        IntStream.range(0, 100).forEach(x -> usedImages.add(TokenRepository.instance
+                .findPreferredTokenInfoForXmage(TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, UUID.nameUUIDFromBytes(("object " + x).getBytes()))
+                .getImageNumber()));
+        Assert.assertEquals("must use all images", new HashSet<>(Arrays.asList(1, 2)), usedImages);
     }
 
     @Test

@@ -16,7 +16,7 @@ server:
 
 tests:
   - changed-files:
-    - any-glob-to-any-file: [ 'Mage.Verify/**', 'Mage.Tests/**', 'Mage.Reports/**' ]
+    - any-glob-to-any-file: [ 'Mage.Verify/**', 'Mage.Tests/**', 'Mage.Reports/**', '**/src/test/**' ]
 
 cards:
   - changed-files:

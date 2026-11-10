@@ -47,6 +47,7 @@ public enum AffinityType {
     SLIVERS(new FilterControlledPermanent(SubType.SLIVER, "Slivers")),
     SPIRITS(new FilterControlledPermanent(SubType.SPIRIT, "Spirits")),
     TOWNS(new FilterControlledPermanent(SubType.TOWN, "Towns")),
+    VULCANS(new FilterControlledPermanent(SubType.VULCAN, "Vulcans"), "Vulcan"),
 
     OUTLAWS(AffinityFilters.OUTLAWS),
     HISTORIC(AffinityFilters.HISTORIC),

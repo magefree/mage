@@ -32,6 +32,7 @@ import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 import mage.util.functions.CopyTokenFunction;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -126,7 +127,7 @@ class MarduSiegebreakerEffect extends OneShotEffect {
         Set<MageObjectReference> addedTokens = new HashSet<>();
         Token token = CopyTokenFunction.createTokenCopy(card, game);
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            token.putOntoBattlefield(1, game, source, source.getControllerId(), true, true, opponentId);
+            token.putOntoBattlefield(1, game, source, source.getControllerId(), true, true, Collections.singleton(opponentId));
             token.getLastAddedTokenIds()
                     .stream()
                     .map(uuid -> new MageObjectReference(uuid, game))

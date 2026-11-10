@@ -273,9 +273,7 @@ public class LethalSchemeTest extends CardTestPlayerBase {
         setChoice(playerA, "Black"); // pay 1
         setChoice(playerA, "Black"); // pay 2
         setChoice(playerA, "Convoke");
-        addTarget(playerA, bear); // pay 3 as convoke
-        setChoice(playerA, "Convoke");
-        addTarget(playerA, mino); // pay 4 as convoke
+        addTarget(playerA, bear + "^" + mino); // pay 3 and 4 as convoke
 
         // Choose to discard the "Gray Ogre" for the "Grizzly Bears" connive choice.
         setChoice(playerA, pBear.getIdName());
@@ -330,9 +328,7 @@ public class LethalSchemeTest extends CardTestPlayerBase {
         setChoice(playerA, "Black"); // pay 1
         setChoice(playerA, "Black"); // pay 2
         setChoice(playerA, "Convoke");
-        addTarget(playerA, bear); // pay 3 as convoke
-        setChoice(playerA, "Convoke");
-        addTarget(playerA, mino); // pay 4 as convoke
+        addTarget(playerA, bear + "^" + mino); // pay 3 and 4 as convoke
 
         // Choose to discard the "Gray Ogre" for the "Felhide Minotaur" connive choice.
         setChoice(playerA, pMino.getIdName());
@@ -401,9 +397,7 @@ public class LethalSchemeTest extends CardTestPlayerBase {
         setChoice(playerA, "Black"); // pay 1
         setChoice(playerA, "Black"); // pay 2
         setChoice(playerA, "Convoke");
-        addTarget(playerA, bear); // pay 3 as convoke
-        setChoice(playerA, "Convoke");
-        addTarget(playerA, mino); // pay 4 as convoke
+        addTarget(playerA, bear + "^" + mino); // pay 3 and 4 as convoke
 
         // player B takes control of the "Grizzly Bears" in response
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, aggression, bear, scheme, StackClause.WHILE_ON_STACK);

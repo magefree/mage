@@ -180,7 +180,8 @@ public class FixedTarget extends TargetPointerImpl {
         init(game, source);
         Permanent permanent = game.getPermanent(targetId);
         if (permanent != null && permanent.getZoneChangeCounter(game) == zoneChangeCounter) {
-            return permanent;
+            // phased-out permanent uses its LKI
+            return game.getPermanentOrLKIBattlefield(targetId);
         }
         MageObject mageObject = game.getLastKnownInformation(targetId, Zone.BATTLEFIELD, zoneChangeCounter);
         if (mageObject instanceof Permanent) {

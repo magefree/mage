@@ -372,7 +372,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public SpellAbility getSpellAbility() {
         if (spellAbility == null) {
-            for (Ability ability : abilities.getActivatedAbilities(Zone.HAND)) {
+            for (Ability ability : abilities) {
                 if (ability instanceof SpellAbility
                         && ((SpellAbility) ability).getSpellAbilityType() != SpellAbilityType.BASE_ALTERNATE) {
                     return spellAbility = (SpellAbility) ability;

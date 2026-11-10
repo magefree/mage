@@ -6,6 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -17,6 +18,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 /**
  *
@@ -74,9 +76,12 @@ class AuratouchedMageEffect extends OneShotEffect {
                     Permanent auratouchedMage = source.getSourcePermanentIfItStillExists(game);
                     if (aura != null && auratouchedMage != null
                             && game.getState().getZoneChangeCounter(source.getSourceId()) == source.getStackMomentSourceZCC()) {
-                        game.getState().setValue("attachTo:" + aura.getId(), auratouchedMage);
+                        AttachEffect.setAttachTo(game, aura.getId(), auratouchedMage);
                         if (controller.moveCards(aura, Zone.BATTLEFIELD, source, game)) {
-                            auratouchedMage.addAttachment(aura.getId(), source, game);
+                            Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(aura, game);
+                            if (attachment != null) {
+                                auratouchedMage.addAttachment(attachment.getId(), source, game);
+                            }
                         }
                     } else {
                         Cards auraRevealed = new CardsImpl(aura);

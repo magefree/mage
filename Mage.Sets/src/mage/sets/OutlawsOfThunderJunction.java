@@ -574,18 +574,15 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
                         })
                         .collect(Collectors.toList());
 
-        for (int i = 0; i < spg; i++) {
-            addToBooster(booster, list_SPG);
+        // cards order like in real boosters and collators: commons, uncommons, rares, special and lands at the end
+        for (int i = 0; i < common; i++) {
+            addToBooster(booster, list_OTJ_C);
         }
-        for (int i = 0; i < big; i++) {
-            addToBooster(booster, list_BIG);
+        for (int i = 0; i < uncommon; i++) {
+            addToBooster(booster, list_OTJ_U);
         }
-        for (int i = 0; i < rareOrMythic; i++) {
-            if (RandomUtil.nextDouble() <= ratioMythic) {
-                addToBooster(booster, list_OTJ_M);
-            } else {
-                addToBooster(booster, list_OTJ_R);
-            }
+        for (int i = 0; i < otpUncommon; i++) {
+            addToBooster(booster, list_OTP_U);
         }
         for (int i = 0; i < otpRareOrMythic; i++) {
             if (RandomUtil.nextDouble() <= ratioOTPMythic) {
@@ -594,14 +591,18 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
                 addToBooster(booster, list_OTP_R);
             }
         }
-        for (int i = 0; i < otpUncommon; i++) {
-            addToBooster(booster, list_OTP_U);
+        for (int i = 0; i < rareOrMythic; i++) {
+            if (RandomUtil.nextDouble() <= ratioMythic) {
+                addToBooster(booster, list_OTJ_M);
+            } else {
+                addToBooster(booster, list_OTJ_R);
+            }
         }
-        for (int i = 0; i < uncommon; i++) {
-            addToBooster(booster, list_OTJ_U);
+        for (int i = 0; i < big; i++) {
+            addToBooster(booster, list_BIG);
         }
-        for (int i = 0; i < common; i++) {
-            addToBooster(booster, list_OTJ_C);
+        for (int i = 0; i < spg; i++) {
+            addToBooster(booster, list_SPG);
         }
         for (int i = 0; i < nonbasicLand; i++) {
             addToBooster(booster, list_OTJ_SL);

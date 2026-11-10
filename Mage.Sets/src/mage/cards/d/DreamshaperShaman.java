@@ -12,10 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.PutCards;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.Predicates;
 
 import java.util.UUID;
 
@@ -23,12 +20,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class DreamshaperShaman extends CardImpl {
-
-    private static final FilterCard filter = new FilterPermanentCard("nonland permanent card");
-
-    static {
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
-    }
 
     public DreamshaperShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{5}{R}");
@@ -41,7 +32,7 @@ public final class DreamshaperShaman extends CardImpl {
         // At the beginning of your end step, you may pay {2}{R} and sacrifice a nonland permanent. If you do, reveal cards from the top of your library until you reveal a nonland permanent card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DoIfCostPaid(
                 new RevealCardsFromLibraryUntilEffect(
-                        filter, PutCards.BATTLEFIELD, PutCards.BOTTOM_RANDOM
+                        StaticFilters.FILTER_CARD_NON_LAND_PERMANENT, PutCards.BATTLEFIELD, PutCards.BOTTOM_RANDOM
                 ),
                 new CompositeCost(
                         new ManaCostsImpl<>("{2}{R}"),

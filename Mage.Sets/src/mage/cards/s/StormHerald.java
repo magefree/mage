@@ -9,6 +9,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
@@ -30,6 +31,7 @@ import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,11 +112,11 @@ class StormHeraldEffect extends OneShotEffect {
                         if (controller.choose(Outcome.PutCardInPlay, targetCreature, source, game)) {
                             Permanent targetPermanent = game.getPermanent(targetCreature.getFirstTarget());
                             if (!targetPermanent.cantBeAttachedBy(auraCard, source, game, true)) {
-                                game.getState().setValue("attachTo:" + auraCard.getId(), targetPermanent);
+                                AttachEffect.setAttachTo(game, auraCard.getId(), targetPermanent);
                                 controller.moveCards(auraCard, Zone.BATTLEFIELD, source, game);
-                                targetPermanent.addAttachment(auraCard.getId(), source, game);
-                                Permanent permanent = game.getPermanent(auraId);
+                                Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(auraCard, game);
                                 if (permanent != null) {
+                                    targetPermanent.addAttachment(permanent.getId(), source, game);
                                     toExile.add(permanent);
                                 }
                             }
@@ -189,7 +191,7 @@ class StormHeraldAttachablePredicate implements mage.filter.predicate.Predicate<
     @Override
     public boolean apply(Card input, Game game) {
         Filter filter;
-        for (Target target : input.getSpellAbility().getTargets()) {
+        for (Target target : CardUtil.getDefaultCardSideForBattlefield(game, input).getSpellAbility().getTargets()) {
             filter = target.getFilter();
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controllerId, game)) {
                 if (filter.match(permanent, game)) {
@@ -218,7 +220,7 @@ class StormHeraldAttachableToPredicate implements mage.filter.predicate.Predicat
     @Override
     public boolean apply(Permanent input, Game game) {
         Filter filter;
-        for (Target target : aura.getSpellAbility().getTargets()) {
+        for (Target target : CardUtil.getDefaultCardSideForBattlefield(game, aura).getSpellAbility().getTargets()) {
             filter = target.getFilter();
             if (filter.match(input, game)) {
                 return true;

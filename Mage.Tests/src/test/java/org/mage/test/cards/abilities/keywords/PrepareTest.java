@@ -690,4 +690,65 @@ public class PrepareTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Treasure Token", 2);
     }
+
+    @Test
+    public void test_CastWithoutPayingManaCost_CantCastPrepareSpellFromCard() {
+        // 722.3. Preparation cards can't be cast using the alternative characteristics found within their inset
+        // frames. Rather, these characteristics are used to define characteristics of copies which may be cast.
+        skipInitShuffling();
+        removeAllCardsFromLibrary(playerA);
+
+        // Cascade
+        addCard(Zone.HAND, playerA, "Bloodbraid Elf"); // {2}{R}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Taiga", 4);
+        //
+        addCard(Zone.LIBRARY, playerA, "Island", 3);
+        addCard(Zone.LIBRARY, playerA, "Harmonized Trio"); // {U}, prepare spell Brainstorm {U}
+
+        // cascade into a preparation card - only the creature can be cast, no choice of the prepare spell
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodbraid Elf");
+        setChoice(playerA, true); // cast the exiled card
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Harmonized Trio", 1);
+        assertHandCount(playerA, 0);
+    }
+
+    @Test
+    public void test_Blink_OldPreparedCopyCeasesToExist() {
+        // 722.3c
+        // ... This copy remains in exile for as long as the prepared permanent remains on the battlefield and
+        // has the prepared designation. This is an exception to rule 704.5e.
+
+        // This creature enters prepared.
+        // Craft with Pride {R} - Create a Treasure token.
+        addCard(Zone.HAND, playerA, "Goblin Glasswright"); // {1}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Plateau", 2 + 1 + 1);
+        //
+        // Exile target creature you control, then return that card to the battlefield under your control.
+        addCard(Zone.HAND, playerA, "Cloudshift"); // {W}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Glasswright");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkExileCount("prepared", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Craft with Pride", 1);
+
+        // blink - a new object enters prepared, the copy of the old object ceases to exist
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloudshift", "Goblin Glasswright");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkExileCount("prepared again", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Craft with Pride", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Craft with Pride");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("only one cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Craft with Pride", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Treasure Token", 1);
+        assertExileCount(playerA, "Craft with Pride", 0);
+    }
 }

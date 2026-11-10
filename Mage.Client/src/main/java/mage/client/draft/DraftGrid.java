@@ -9,7 +9,6 @@ import mage.client.util.ClientEventType;
 import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.client.util.audio.AudioManager;
-import mage.client.util.comparators.CardViewRarityComparator;
 import mage.constants.Constants;
 import mage.view.CardView;
 import mage.view.CardsView;
@@ -142,7 +141,9 @@ public class DraftGrid extends javax.swing.JPanel implements CardEventProducer {
             Dimension dimension = new Dimension(cardDimension.getFrameWidth(), cardDimension.getFrameHeight());
 
             List<CardView> sortedCards = new ArrayList<>(booster.values());
-            sortedCards.sort(new CardViewRarityComparator());
+            // show booster as is (cards order from the generator, e.g. collator's slots like foil at the end),
+            // no need in rarity sorting: autopick uses ratings/suggestions now and doesn't depend on cards order
+            //sortedCards.sort(new CardViewRarityComparator());
             for (CardView card : sortedCards) {
                 MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, new CardIconRenderSettings(), dimension, null, true, true, PreferencesDialog.getRenderMode(), true);
                 cardImg.setCardContainerRef(this);

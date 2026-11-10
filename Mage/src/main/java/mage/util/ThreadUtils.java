@@ -25,6 +25,7 @@ public final class ThreadUtils {
     public final static String THREAD_PREFIX_TOURNEY = "TOURNEY";
     public final static String THREAD_PREFIX_TOURNEY_DRAFT = "TOURNEY DRAFT";
     public final static String THREAD_PREFIX_TOURNEY_BOOSTERS_SEND = "TOURNEY BOOSTERS SEND";
+    public final static String THREAD_PREFIX_TOURNEY_PICK_SUGGEST = "TOURNEY PICK SUGGEST";
 
     // game thread doing extra work like sideboarding and prepare next game in the match
     // so keep it with additional status like GAME xxx, sideboard

@@ -15,9 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterNonlandCard;
-import mage.filter.predicate.mageobject.PermanentPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -30,12 +28,6 @@ import java.util.UUID;
  */
 public final class ConduitOfWorlds extends CardImpl {
 
-    private static final FilterCard filter = new FilterNonlandCard("nonland permanent card");
-
-    static {
-        filter.add(PermanentPredicate.instance);
-    }
-
     public ConduitOfWorlds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{G}{G}");
 
@@ -44,7 +36,7 @@ public final class ConduitOfWorlds extends CardImpl {
 
         // {T}: Choose target nonland permanent card in your graveyard. If you haven't cast a spell this turn, you may cast that card. If you do, you can't cast additional spells this turn. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(new ConduitOfWorldsEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_NON_LAND_PERMANENT));
         this.addAbility(ability);
     }
 

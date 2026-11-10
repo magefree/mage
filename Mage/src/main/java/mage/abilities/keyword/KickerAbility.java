@@ -175,7 +175,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
 
         String activationKey = getActivationKey(kickerCost.getText(true));
         Integer next = CardUtil.getSourceCostsTag(game, source, activationKey,0)+1;
-        source.setCostsTag(activationKey,next);
+        source.setCostsTag(activationKey, next);
     }
 
     @Override

@@ -33,10 +33,10 @@ public final class FirdochCore extends CardImpl {
         // {4}: This artifact becomes a 4/4 artifact creature until end of turn.
         this.addAbility(new SimpleActivatedAbility(
             new BecomesCreatureSourceEffect(
-                new CreatureToken(4, 4).withType(CardType.ARTIFACT).withSubType(SubType.SHAPESHIFTER),
+                new CreatureToken(4, 4).withType(CardType.ARTIFACT),
                 CardType.ARTIFACT,
                 Duration.EndOfTurn
-            ).setText("this artifact becomes a 4/4 artifact creature until end of turn"),
+            ).withKeepCreatureSubtypes(true).setText("this artifact becomes a 4/4 artifact creature until end of turn"),
             new GenericManaCost(4)
         ));
     }

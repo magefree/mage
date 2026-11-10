@@ -1,9 +1,13 @@
 package mage.cards.b;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -75,7 +79,7 @@ enum BeastEruditeAerialistCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return BeastEruditeAerialistWatcher.checkPlayer(source.getControllerId(), game);
+        return BeastEruditeAerialistWatcher.checkPermanent(source, game);
     }
 
     public static Hint getHint() {
@@ -85,7 +89,8 @@ enum BeastEruditeAerialistCondition implements Condition {
 
 class BeastEruditeAerialistWatcher extends Watcher {
 
-    private final Set<UUID> playerSet = new HashSet<>();
+    // player -> permanents that player put +1/+1 counters on this turn
+    private final Map<UUID, Set<MageObjectReference>> map = new HashMap<>();
 
     BeastEruditeAerialistWatcher() {
         super(WatcherScope.GAME);
@@ -94,27 +99,28 @@ class BeastEruditeAerialistWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() != GameEvent.EventType.COUNTER_ADDED
-                || playerSet.contains(event.getPlayerId())
-                || !event.getData().equals(CounterType.P1P1.getName())
-                || !event.getTargetId().equals(getSourceId())) {
+                || !event.getData().equals(CounterType.P1P1.getName())) {
             return;
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null) {
-            playerSet.add(event.getPlayerId());
+            map.computeIfAbsent(event.getPlayerId(), x -> new HashSet<>())
+                .add(new MageObjectReference(permanent, game));
         }
     }
 
     @Override
     public void reset() {
         super.reset();
-        playerSet.clear();
+        map.clear();
     }
 
-    static boolean checkPlayer(UUID playerId, Game game) {
-        return game.getState()
+    static boolean checkPermanent(Ability source, Game game) {
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        return permanent != null && game.getState()
             .getWatcher(BeastEruditeAerialistWatcher.class)
-            .playerSet
-            .contains(playerId);
+            .map
+            .getOrDefault(source.getControllerId(), Collections.emptySet())
+            .contains(new MageObjectReference(permanent, game));
     }
 }

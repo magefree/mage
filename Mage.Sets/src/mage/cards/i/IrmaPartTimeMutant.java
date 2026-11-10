@@ -5,10 +5,8 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
-import mage.cards.Card;
 import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -16,8 +14,6 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.util.functions.CopyApplier;
 
@@ -74,25 +70,15 @@ class IrmaPartTimeMutantEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
         Permanent irmaPartTimeMutant = game.getPermanent(source.getSourceId());
-        Permanent newBluePrint = null;
-        if (controller != null
-                && irmaPartTimeMutant != null) {
-            Card copyFromCard = game.getCard(source.getFirstTarget());
-            if (copyFromCard != null) {
-                newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
-                newBluePrint.assignNewId();
-                CopyApplier applier = new IrmaPartTimeMutantCopyApplier();
-                applier.apply(game, newBluePrint, source, irmaPartTimeMutant.getId());
-                CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, irmaPartTimeMutant.getId());
-                copyEffect.setApplier(applier);
-                game.addEffect(copyEffect, source);
-            }
-
-            return true;
+        if (irmaPartTimeMutant == null) {
+            return false;
         }
-        return false;
+        Permanent copyFromPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (copyFromPermanent != null) {
+            game.copyPermanent(copyFromPermanent, irmaPartTimeMutant.getId(), source, new IrmaPartTimeMutantCopyApplier());
+        }
+        return true;
     }
 }
 

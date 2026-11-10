@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -62,11 +61,8 @@ class MurderousRedcapEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (sourcePermanent == null) {
-            sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        }
         if (sourcePermanent != null && permanent != null) {
             permanent.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), source, game, false, true);
             return true;

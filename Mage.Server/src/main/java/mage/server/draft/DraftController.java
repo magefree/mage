@@ -3,6 +3,7 @@ package mage.server.draft;
 import mage.MageException;
 import mage.game.draft.Draft;
 import mage.game.draft.DraftPlayer;
+import mage.game.draft.DraftPlayerSnapshot;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
@@ -209,10 +210,29 @@ public class DraftController {
         }
     }
 
-    private synchronized void pickCard(UUID playerId, int timeout) throws MageException {
+    private void pickCard(UUID playerId, int timeout) throws MageException {
+        // suggestions are needed for disconnected players too (autopick uses it), so prepare it before session check;
+        // it can take time, so do it outside the lock
+        preparePickSuggests(playerId);
+        sendPickCard(playerId, timeout);
+    }
+
+    private synchronized void sendPickCard(UUID playerId, int timeout) throws MageException {
         if (draftSessions.containsKey(playerId)) {
             draftSessions.get(playerId).pickCard(timeout);
         }
+    }
+
+    private void preparePickSuggests(UUID playerId) {
+        // only first send of each pick, re-sends use the same suggestions
+        if (!draft.isPickSuggestsNeeded(playerId)) {
+            return;
+        }
+        DraftPlayerSnapshot snapshot = draft.getPlayerSnapshot(playerId);
+        if (snapshot == null || !snapshot.isPicking()) {
+            return;
+        }
+        draft.setPickSuggests(playerId, DraftPickSuggesters.makeSuggests(snapshot.getBooster(), snapshot.getPicks()));
     }
 
     public UUID getTableId() {

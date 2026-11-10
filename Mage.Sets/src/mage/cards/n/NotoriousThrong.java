@@ -76,7 +76,7 @@ class NotoriousThrongEffect extends OneShotEffect {
         AmountOfDamageAPlayerReceivedThisTurnWatcher watcher = game.getState().getWatcher(AmountOfDamageAPlayerReceivedThisTurnWatcher.class);
         if (controller != null && watcher != null) {
             int numTokens = 0;
-            for (UUID opponentId : game.getOpponents(controller.getId())) {
+            for (UUID opponentId : game.getOpponents(controller.getId(), false)) {
                 numTokens += watcher.getAmountOfDamageReceivedThisTurn(opponentId);
             }
             if (numTokens > 0) {

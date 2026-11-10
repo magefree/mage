@@ -56,7 +56,7 @@ enum ErtaisScornCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
         if (watcher != null) {
-            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+            for (UUID opponentId : game.getOpponents(source.getControllerId(), false)) {
                 if (watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(opponentId) >= 2) {
                     return true;
                 }

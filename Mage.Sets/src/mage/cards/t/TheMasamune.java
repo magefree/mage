@@ -17,7 +17,6 @@ import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.util.CardUtil;
 
 import java.util.Optional;
@@ -88,17 +87,10 @@ class TheMasamuneEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return Optional
-                .ofNullable(event)
-                .filter(NumberOfTriggersEvent.class::isInstance)
-                .map(NumberOfTriggersEvent.class::cast)
-                .map(NumberOfTriggersEvent::getSourceEvent)
-                .filter(ZoneChangeEvent.class::isInstance)
-                .map(ZoneChangeEvent.class::cast)
-                .filter(ZoneChangeEvent::isDiesEvent)
-                .map(ZoneChangeEvent::getTarget)
-                .map(permanent -> permanent.isCreature(game))
-                .orElse(false)
+        return event instanceof NumberOfTriggersEvent
+                && ((NumberOfTriggersEvent) event).getDiedPermanents(game)
+                .stream()
+                .anyMatch(permanent -> permanent.isCreature(game))
                 && source.isControlledBy(event.getPlayerId())
                 && (source.getSourceId().equals(event.getSourceId())
                 || Optional

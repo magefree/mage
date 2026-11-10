@@ -22,7 +22,6 @@ import mage.game.events.*;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
-import mage.game.permanent.PermanentToken;
 import mage.game.stack.SpellStack;
 import mage.game.stack.StackObject;
 import mage.game.turn.Phase;
@@ -106,9 +105,6 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, MageObjectAttribute> mageObjectAttribute = new HashMap<>();
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
     private Map<UUID, Card> copiedCards = new HashMap<>();
-    // Card copies that remain in a nonstandard zone while a source permanent exists.
-    // The normal state-based action removes all other card copies outside the stack/battlefield.
-    private Map<UUID, UUID> persistentCardCopySources = new HashMap<>();
     private int permanentOrderNumber;
     private final Map<UUID, FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = new HashMap<>();
     private Set<MageObjectReference> commandersToStay = new HashSet<>(); // commanders that do not go back to command zone
@@ -183,7 +179,6 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.mageObjectAttribute = CardUtil.deepCopyObject(state.mageObjectAttribute);
         this.zoneChangeCounter.putAll(state.zoneChangeCounter);
         this.copiedCards.putAll(state.copiedCards);
-        this.persistentCardCopySources.putAll(state.persistentCardCopySources);
         this.permanentOrderNumber = state.permanentOrderNumber;
         this.applyEffectsCounter = state.applyEffectsCounter;
         state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach((uuid, filter)
@@ -230,17 +225,19 @@ public class GameState implements Serializable, Copyable<GameState> {
         zones.clear();
         simultaneousEvents.clear();
         copiedCards.clear();
-        persistentCardCopySources.clear();
         usePowerInsteadOfToughnessForDamageLethalityFilters.clear();
         permanentOrderNumber = 0;
     }
 
     public void restoreForRollBack(GameState state) {
-        restore(state);
+        restore(state, false);
         this.turn = state.turn;
     }
 
-    public void restore(GameState state) {
+    /**
+     * @param keepStack keep this state's stack instead of the restored one, see Game.restoreStateKeepingStack
+     */
+    public void restore(GameState state, boolean keepStack) {
         // no needs in copy here cause GameState already copied on save and it will be used only one time here
         this.activePlayerId = state.activePlayerId;
         this.playerList.setCurrent(state.activePlayerId);
@@ -248,7 +245,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.priorityPlayerId = state.priorityPlayerId;
         this.monarchId = state.monarchId;
         this.initiativeId = state.initiativeId;
-        this.stack = state.stack;
+        if (!keepStack) {
+            this.stack = state.stack;
+        }
         this.command = state.command;
         this.isPlaneChase = state.isPlaneChase;
         this.seenPlanes = state.seenPlanes;
@@ -279,7 +278,6 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.mageObjectAttribute = state.mageObjectAttribute;
         this.zoneChangeCounter = state.zoneChangeCounter;
         this.copiedCards = state.copiedCards;
-        this.persistentCardCopySources = state.persistentCardCopySources;
         this.permanentOrderNumber = state.permanentOrderNumber;
         this.applyEffectsCounter = state.applyEffectsCounter;
         state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach((uuid, filter)
@@ -1066,93 +1064,11 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public List<GameEvent> createEventGroups(List<GameEvent> events, Game game) {
-
-        class ZoneChangeData {
-
-            private final Zone fromZone;
-            private final Zone toZone;
-            private final UUID sourceId;
-            private final UUID playerId;
-            Ability source;
-
-            public ZoneChangeData(Ability source, UUID sourceId, UUID playerId, Zone fromZone, Zone toZone) {
-                this.sourceId = sourceId;
-                this.playerId = playerId;
-                this.fromZone = fromZone;
-                this.toZone = toZone;
-                this.source = source;
-            }
-
-            @Override
-            public int hashCode() {
-                return (this.fromZone.ordinal() + 1) * 1
-                        + (this.toZone.ordinal() + 1) * 10
-                        + (this.sourceId != null ? this.sourceId.hashCode() : 0)
-                        + (this.source != null ? this.source.hashCode() : 0);
-            }
-
-            @Override
-            public boolean equals(Object obj) {
-                if (obj instanceof ZoneChangeData) {
-                    ZoneChangeData data = (ZoneChangeData) obj;
-                    return this.fromZone == data.fromZone
-                            && this.toZone == data.toZone
-                            && Objects.equals(this.sourceId, data.sourceId)
-                            && Objects.equals(this.source, data.source);
-                }
-                return false;
-            }
-        }
-
-        Map<ZoneChangeData, List<GameEvent>> eventsByKey = new HashMap<>();
         List<GameEvent> groupEvents = new LinkedList<>();
         ZoneChangeBatchEvent batchEvent = new ZoneChangeBatchEvent();
         for (GameEvent event : events) {
             if (event instanceof ZoneChangeEvent) {
-                ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
-                batchEvent.addEvent(castEvent);
-                ZoneChangeData key = new ZoneChangeData(
-                        castEvent.getSource(),
-                        castEvent.getSourceId(),
-                        castEvent.getPlayerId(),
-                        castEvent.getFromZone(),
-                        castEvent.getToZone());
-                if (eventsByKey.containsKey(key)) {
-                    eventsByKey.get(key).add(event);
-                } else {
-                    List<GameEvent> list = new LinkedList<>();
-                    list.add(event);
-                    eventsByKey.put(key, list);
-                }
-            }
-        }
-        for (Map.Entry<ZoneChangeData, List<GameEvent>> entry : eventsByKey.entrySet()) {
-            Set<Card> movedCards = new LinkedHashSet<>();
-            Set<PermanentToken> movedTokens = new LinkedHashSet<>();
-            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext(); ) {
-                GameEvent event = it.next();
-                ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
-                UUID targetId = castEvent.getTargetId();
-                Card card = ZonesHandler.getTargetCard(game, targetId);
-                if (card instanceof PermanentToken) {
-                    movedTokens.add((PermanentToken) card);
-                } else if (game.getObject(targetId) instanceof PermanentToken) {
-                    movedTokens.add((PermanentToken) game.getObject(targetId));
-                } else if (card != null) {
-                    movedCards.add(card);
-                }
-            }
-            ZoneChangeData eventData = entry.getKey();
-            if (!movedCards.isEmpty() || !movedTokens.isEmpty()) {
-                ZoneChangeGroupEvent event = new ZoneChangeGroupEvent(
-                        movedCards,
-                        movedTokens,
-                        eventData.sourceId,
-                        eventData.source,
-                        eventData.playerId,
-                        eventData.fromZone,
-                        eventData.toZone);
-                groupEvents.add(event);
+                batchEvent.addEvent((ZoneChangeEvent) event);
             }
         }
         if (!batchEvent.getEvents().isEmpty()) {
@@ -1617,19 +1533,6 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public Collection<Card> getCopiedCards() {
         return copiedCards.values();
-    }
-
-    public void keepCardCopyWhileSourceExists(UUID cardId, UUID sourcePermanentId) {
-        // Some rules create persistent card copies that are exempt from the normal copy cleanup SBA.
-        persistentCardCopySources.put(cardId, sourcePermanentId);
-    }
-
-    public void stopKeepingCardCopy(UUID cardId) {
-        persistentCardCopySources.remove(cardId);
-    }
-
-    public UUID getPersistentCardCopySource(UUID cardId) {
-        return persistentCardCopySources.get(cardId);
     }
 
     /**
