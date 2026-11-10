@@ -26,11 +26,15 @@ public enum CastAnotherSpellThisTurnCondition implements Condition {
         if (watcher == null) {
             return false;
         }
+        // a trigger checks its intervening if before it goes on the stack, so its own ZCC is not set yet
+        int sourceZcc = source.getStackMomentSourceZCC() != 0
+                ? source.getStackMomentSourceZCC()
+                : game.getState().getZoneChangeCounter(source.getSourceId());
         List<Spell> spells = watcher.getSpellsCastThisTurn(source.getControllerId());
         return spells != null && spells
                 .stream()
                 .filter(Objects::nonNull)
-                .anyMatch(spell -> !spell.getSourceId().equals(source.getSourceId()) || spell.getZoneChangeCounter(game) != source.getStackMomentSourceZCC());
+                .anyMatch(spell -> !spell.getSourceId().equals(source.getSourceId()) || spell.getZoneChangeCounter(game) != sourceZcc);
     }
 
     public Hint getHint() {
