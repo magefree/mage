@@ -33,7 +33,7 @@ public final class USSDefiantMirrorMigrant extends CardImpl {
 
         // When U.S.S. Defiant enters, it and up to one target creature you control phase out.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PhaseOutSourceEffect().setText("it"));
-        ability.addEffect(new PhaseOutTargetEffect().concatBy("and"));
+        ability.addEffect(new PhaseOutTargetEffect().setText("up to one target creature you control phase out").concatBy("and"));
         ability.addTarget(new TargetControlledCreaturePermanent(0, 1));
         this.addAbility(ability);
 
