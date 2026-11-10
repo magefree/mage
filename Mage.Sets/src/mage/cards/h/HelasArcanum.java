@@ -3,7 +3,7 @@ package mage.cards.h;
 import mage.abilities.Mode;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -27,7 +28,7 @@ import java.util.UUID;
  */
 public final class HelasArcanum extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("non-Zombie creature with power 3 or less");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("each non-Zombie creature with power 3 or less");
 
     static {
         filter.add(Predicates.not(SubType.ZOMBIE.getPredicate()));
@@ -55,7 +56,11 @@ public final class HelasArcanum extends CardImpl {
 
         // {P}{P} -- Until end of turn, target creature gains "When this creature dies, return it to the battlefield tapped under its owner's control."
         Mode mode2 = new Mode(new GainAbilityTargetEffect(
-            new DiesSourceTriggeredAbility(new ReturnSourceFromGraveyardToBattlefieldEffect(true, true)),
+            new DiesSourceTriggeredAbility(
+                new ReturnToBattlefieldUnderOwnerControlTargetEffect(true, false)
+                    .setText("return it to the battlefield tapped under its owner's control"),
+                false, SetTargetPointer.CARD
+            ).setTriggerPhrase("When this creature dies, "),
             Duration.EndOfTurn, "until end of turn, target creature gains \"When this creature dies, "
             + "return it to the battlefield tapped under its owner's control.\""
         ));
