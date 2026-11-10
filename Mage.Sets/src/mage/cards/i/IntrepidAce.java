@@ -16,7 +16,7 @@ import mage.filter.common.FilterAttackingOrBlockingCreature;
 import java.util.UUID;
 
 /**
- * @author Codex
+ * @author ChristianKleineidam
  */
 public final class IntrepidAce extends CardImpl {
 
