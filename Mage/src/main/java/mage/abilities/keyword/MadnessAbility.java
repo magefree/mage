@@ -211,7 +211,10 @@ class MadnessTriggeredAbility extends TriggeredAbilityImpl {
         }
 
         // if cast was not successfull, the card is moved to graveyard
-        owner.moveCards(card, Zone.GRAVEYARD, this, game);
+        if (owner.moveCards(card, Zone.GRAVEYARD, this, game)) {
+            // 702.35c: effects referencing the discarded card can find it
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.MADNESS_CARD_PUT_INTO_GRAVEYARD, card.getId(), this, owner.getId()));
+        }
         return false;
     }
 }

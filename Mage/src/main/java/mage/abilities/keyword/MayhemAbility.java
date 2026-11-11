@@ -87,6 +87,13 @@ class MayhemWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.MADNESS_CARD_PUT_INTO_GRAVEYARD) {
+            Card card = game.getCard(event.getTargetId());
+            if (card != null) {
+                set.add(new MageObjectReference(card, game));
+            }
+            return;
+        }
         if (event.getType() != GameEvent.EventType.DISCARDED_CARDS) {
             return;
         }
