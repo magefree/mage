@@ -23,6 +23,7 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
+import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 
 /**
@@ -87,7 +88,7 @@ class VoqTorchbearerEffect extends OneShotEffect {
             player.choose(outcome, target, source, game);
             Card copyFromCard = game.getCard(target.getFirstTarget());
             if (copyFromCard != null) {
-                Permanent newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
+                Permanent newBluePrint = new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, copyFromCard), source.getControllerId(), game);
                 newBluePrint.assignNewId();
                 VoqTorchbearerCopyApplier applier = new VoqTorchbearerCopyApplier();
                 applier.apply(game, newBluePrint, source, source.getSourceId());
