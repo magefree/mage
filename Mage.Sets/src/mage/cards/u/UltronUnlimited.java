@@ -54,8 +54,7 @@ class UltronUnlimitedConniveTriggeredAbility extends TriggeredAbilityImpl {
                 new CreateTokenEffect(new UltronUnlimitedRobotToken()),
                 new GenericManaCost(1), "pay {1} to create a Robot token?"
         ), false);
-        setTriggerPhrase("Whenever a creature you control connives, you may pay {1}. If you do, create a 2/2 "
-                + "colorless Robot Villain artifact creature token");
+        setTriggerPhrase("Whenever a creature you control connives,");
     }
 
     private UltronUnlimitedConniveTriggeredAbility(final UltronUnlimitedConniveTriggeredAbility ability) {
