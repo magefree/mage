@@ -287,6 +287,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Glamorous Grapplers", 536, Rarity.COMMON, mage.cards.g.GlamorousGrapplers.class));
         cards.add(new SetCardInfo("Glittering Massif", 249, Rarity.RARE, mage.cards.g.GlitteringMassif.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glittering Massif", 478, Rarity.RARE, mage.cards.g.GlitteringMassif.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Glorious Purpose", 31, Rarity.RARE, mage.cards.g.GloriousPurpose.class));
         cards.add(new SetCardInfo("Goliath, Mass Manipulator", 766, Rarity.UNCOMMON, mage.cards.g.GoliathMassManipulator.class));
         cards.add(new SetCardInfo("Grapeshot", 803, Rarity.COMMON, mage.cards.g.Grapeshot.class));
         cards.add(new SetCardInfo("Graviton, Fundamental Force", 531, Rarity.UNCOMMON, mage.cards.g.GravitonFundamentalForce.class));

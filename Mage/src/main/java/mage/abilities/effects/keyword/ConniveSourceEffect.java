@@ -107,6 +107,9 @@ public class ConniveSourceEffect extends OneShotEffect {
         if (permanentStillOnBattlefield && counters > 0) {
             permanent.addCounters(CounterType.P1P1.createInstance(counters), source, game);
         }
+        game.fireEvent(new GameEvent(
+                GameEvent.EventType.CONNIVE, permanent.getId(), source, player.getId(), amount, false
+        ));
         return true;
     }
 
