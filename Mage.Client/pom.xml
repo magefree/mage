@@ -138,6 +138,18 @@
         </dependency>
         <!-- svg support END -->
 
+        <!-- webp support START -->
+        <!--
+            adds a webp ImageIO reader plugin (self-registers via META-INF/services),
+            so ImageCache.loadImage can decode webp card images; read only - webp images
+            must be prepared outside of xmage (there is no free pure java webp encoder)
+        -->
+        <dependency>
+            <groupId>com.twelvemonkeys.imageio</groupId>
+            <artifactId>imageio-webp</artifactId>
+        </dependency>
+        <!-- webp support END -->
+
         <!-- JavaFX support (build-in browser) START -->
         <!--
         JavaFX version must match the JDK the client runs on:

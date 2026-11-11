@@ -43,9 +43,9 @@ public class ScryfallApiCard {
     public void prepareCompatibleData() {
         // take images from main card
         if (this.image_uris != null) {
-            this.imageSmall = this.image_uris.getOrDefault("small", "");
-            this.imageNormal = this.image_uris.getOrDefault("normal", "");
-            this.imageLarge = this.image_uris.getOrDefault("large", "");
+            this.imageSmall = this.image_uris.getOrDefault("thumb", "");
+            this.imageNormal = this.image_uris.getOrDefault("grid", "");
+            this.imageLarge = this.image_uris.getOrDefault("display", "");
             this.image_uris = null;
         }
 
@@ -177,18 +177,15 @@ public class ScryfallApiCard {
 
     public String findImage(String imageSize) {
         // api possible values:
-        // - small
-        // - normal
-        // - large
-        // - png
-        // - art_crop
-        // - border_crop
+        // - webp: thumb, grid, display, art, crop
+        // - jpg: jpeg
+        // - png: png
         switch (imageSize) {
-            case "small":
+            case "thumb":
                 return this.imageSmall;
-            case "normal":
+            case "grid":
                 return this.imageNormal;
-            case "large":
+            case "display":
                 return this.imageLarge;
             default:
                 throw new IllegalArgumentException("Unsupported image size: " + imageSize);

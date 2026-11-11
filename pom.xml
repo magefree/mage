@@ -382,6 +382,12 @@
                 <artifactId>jsoup</artifactId>
                 <version>1.21.2</version>
             </dependency>
+            <dependency>
+                <!-- webp images support (ImageIO reader plugin, read only - there is no webp encoder) -->
+                <groupId>com.twelvemonkeys.imageio</groupId>
+                <artifactId>imageio-webp</artifactId>
+                <version>3.15.3</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

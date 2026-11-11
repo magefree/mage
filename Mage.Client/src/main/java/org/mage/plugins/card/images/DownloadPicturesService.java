@@ -77,8 +77,9 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
     // protect from wrong data save
     // there are possible land images with small sizes, so must research content in check
-    private static final int MIN_FILE_SIZE_OF_GOOD_IMAGE = 1024 * 6; // smaller files will be mark as broken
-    private static final int MIN_FILE_SIZE_OF_POSSIBLE_BAD_IMAGE = 1024 * 8; // smaller files will be checked for possible broken mark (slow)
+    // WARNING: do not raise these without serious testing
+    private static final int MIN_FILE_SIZE_OF_GOOD_IMAGE = 1024 * 2; // smaller files will be mark as broken
+    private static final int MIN_FILE_SIZE_OF_POSSIBLE_BAD_IMAGE = 1024 * 5; // smaller files will be checked for possible broken mark (slow)
 
     private final DownloadImagesDialog uiDialog;
     private volatile boolean needCancel; // set from GUI thread, read by download threads
@@ -102,9 +103,9 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
     enum DownloadSources {
         WIZARDS("1. wizards.com - low quality, cards only", WizardCardsImageSource.instance),
-        SCRYFALL_BIG("2a. scryfall.com - BIG: high quality (~15 GB)", ScryfallImageSource.getInstance()),
-        SCRYFALL_NORM("2b. scryfall.com - normal: good quality (~10 GB)", ScryfallImageSourceNormal.getInstance()),
-        SCRYFALL_SMALL("2c. scryfall.com - small: low quality, unreadable text (~1.5 GB)", ScryfallImageSourceSmall.getInstance()),
+        SCRYFALL_BIG("2a. scryfall.com - BIG: high quality (~9 GB)", ScryfallImageSource.getInstance()),
+        SCRYFALL_NORM("2b. scryfall.com - normal: good quality (~6 GB)", ScryfallImageSourceNormal.getInstance()),
+        SCRYFALL_SMALL("2c. scryfall.com - small: low quality, unreadable text (~1 GB)", ScryfallImageSourceSmall.getInstance()),
         GRAB_BAG("3. GrabBag - unofficial STAR WARS + Arena Tutorial cards", GrabbagImageSource.instance),
         COPYPASTE("4. Experimental - copy and paste image URLs", CopyPasteImageSource.instance); // TODO: need rework for user friendly GUI
 
@@ -728,7 +729,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 cardsToDownload.add(card);
             } else {
                 // need missing cards
-                String imagePath = CardImageUtils.buildImagePathToCardOrToken(card);
+                String imagePath = CardImageUtils.findImagePathToCardOrToken(card);
                 File file = new TFile(imagePath);
                 if (!file.exists()) {
                     cardsToDownload.add(card);
@@ -743,7 +744,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     try {
                         try (TFileInputStream inputStream = new TFileInputStream(file)) {
                             BufferedImage image = ImageIO.read(inputStream);
-                            if (image.getWidth() <= 0) {
+                            if (image == null || image.getWidth() <= 0) {
                                 throw new IOException("bad format");
                             }
                         }
@@ -996,7 +997,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
         List<CardDownloadData> downloadedCards = Collections.synchronizedList(new ArrayList<>());
         this.cardsMissing.parallelStream().forEach(card -> {
-            TFile file = new TFile(CardImageUtils.buildImagePathToCardOrToken(card));
+            TFile file = new TFile(CardImageUtils.findImagePathToCardOrToken(card));
             if (file.exists() && file.length() > MIN_FILE_SIZE_OF_GOOD_IMAGE) {
                 downloadedCards.add(card);
             }
@@ -1062,12 +1063,15 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     return;
                 }
 
+                // image data is saved as is (no transcode), so the file extension must match the source's format
+                String imageExtension = selectedSource.getImageExtension();
+
                 // gen temp file (download to images folder)
                 String tempPath = getImagesDir() + File.separator + CardImageUtils.DOWNLOADING_FOLDER + File.separator;
                 if (useSpecifiedPaths) {
-                    fileTempImage = new TFile(tempPath + CardImageUtils.prepareCardNameForFile(actualFilename) + "-" + card.hashCode() + ".jpg");
+                    fileTempImage = new TFile(tempPath + CardImageUtils.prepareCardNameForFile(actualFilename) + "-" + card.hashCode() + imageExtension);
                 } else {
-                    fileTempImage = new TFile(tempPath + CardImageUtils.prepareCardNameForFile(card.getName()) + "-" + card.hashCode() + ".jpg");
+                    fileTempImage = new TFile(tempPath + CardImageUtils.prepareCardNameForFile(card.getName()) + "-" + card.hashCode() + imageExtension);
                 }
                 TFile parentFile = fileTempImage.getParentFile();
                 if (parentFile != null) {
@@ -1079,12 +1083,12 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 // gen dest file name
                 if (useSpecifiedPaths) {
                     if (card.isToken()) {
-                        destFile = new TFile(CardImageUtils.buildImagePathToSet(card) + CardImageUtils.prepareCardNameForFile(actualFilename) + ".jpg");
+                        destFile = new TFile(CardImageUtils.buildImagePathToSet(card) + CardImageUtils.prepareCardNameForFile(actualFilename) + imageExtension);
                     } else {
-                        destFile = new TFile(CardImageUtils.buildImagePathToTokens() + CardImageUtils.prepareCardNameForFile(actualFilename) + ".jpg");
+                        destFile = new TFile(CardImageUtils.buildImagePathToTokens() + CardImageUtils.prepareCardNameForFile(actualFilename) + imageExtension);
                     }
                 } else {
-                    destFile = new TFile(CardImageUtils.buildImagePathToCardOrToken(card));
+                    destFile = new TFile(CardImageUtils.buildImagePathToCardOrToken(card, imageExtension));
                 }
 
                 // check zip access
@@ -1156,6 +1160,20 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                             logger.error("Can't delete temp file: " + e.getMessage(), e);
                         }
                         downloadLog.add("SAVED: " + card + " - " + destFile.length() + " bytes - " + destFile);
+
+                        // keep one image only, e.g., an old jpg image must be replaced by a new webp image
+                        // (or an old webp image will be loaded instead a re-downloaded jpg image)
+                        for (String otherPath : CardImageUtils.findOtherFormatImagePaths(destFile.getPath())) {
+                            TFile otherFile = new TFile(otherPath);
+                            if (otherFile.exists()) {
+                                try {
+                                    TFile.rm(otherFile);
+                                    downloadLog.add("REPLACED: " + card + " - " + otherFile);
+                                } catch (Exception e) {
+                                    logger.warn("Can't delete image in other format: " + otherFile + " - " + e.getMessage());
+                                }
+                            }
+                        }
                     } else {
                         downloadLog.add("ERROR: " + card + " - downloaded temp file not found: " + fileTempImage);
                     }
