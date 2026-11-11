@@ -64,7 +64,7 @@ class FogPatchEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Effect effect = new BecomeBlockedTargetEffect();
         effect.setTargetPointer(new FixedTargets(game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_ATTACKING_CREATURES, source.getSourceId(), game
+                StaticFilters.FILTER_ATTACKING_CREATURES, source.getControllerId(), game
         ), game));
         return effect.apply(game, source);
     }

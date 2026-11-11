@@ -78,7 +78,7 @@ class TsabosDecreeEffect extends OneShotEffect {
         targetPlayer.discard(new CardsImpl(targetPlayer.getHand().getCards(filterCard, game)), false, source, game);
         FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent();
         filterCreaturePermanent.add(SubType.byDescription(typeChoice.getChoiceKey()).getPredicate());
-        for (Permanent creature : game.getBattlefield().getActivePermanents(filterCreaturePermanent, source.getSourceId(), game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(filterCreaturePermanent, source.getControllerId(), game)) {
             if (creature.isControlledBy(targetPlayer.getId())) {
                 creature.destroy(source, game, true);
             }
