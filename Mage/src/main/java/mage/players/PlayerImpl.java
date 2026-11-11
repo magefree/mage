@@ -1362,7 +1362,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         SpellAbility ability = originalAbility.copy();
         Set<MageIdentifier> allowedIdentifiers = originalAbility.spellCanBeActivatedNow(getId(), game);
         ability.setControllerId(getId());
-        ability.initSourceObjectZoneChangeCounter(game, true);
+        // spell.activate ties an untied ability to the spell on the stack; it would keep an earlier tie
+        if (ability.getStackMomentSourceZCC() != 0) {
+            throw new IllegalStateException("Spell ability is already tied to an object before the cast: " + ability.getRule());
+        }
 
         //20091005 - 601.2a
         if (ability.getSourceId() == null) {
@@ -1387,8 +1390,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (card.isCopy()) {
                     spell.setCopy(true, null);
                 }
-                // Update the zcc to the stack
-                ability.initSourceObjectZoneChangeCounter(game, true);
 
                 // ALTERNATIVE COST from dynamic effects
                 // some effects set sourceId to cast without paying mana costs or other costs
@@ -1420,6 +1421,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         spell.getSpellAbility().getId(), spell.getSpellAbility(), playerId, approvingObject);
                 castEvent.setZone(fromZone);
                 game.fireEvent(castEvent);
+                // activate ties the spell ability to the spell, now on the stack
                 if (spell.activate(game, allowedIdentifiers, noMana)) {
                     game.processAction();
                     GameEvent castedEvent = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST,

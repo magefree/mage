@@ -679,8 +679,8 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public void initSourceObjectZoneChangeCounter(Game game, boolean force) {
-        ability.initSourceObjectZoneChangeCounter(game, force);
+    public void initSourceObjectZoneChangeCounter(Game game) {
+        ability.initSourceObjectZoneChangeCounter(game);
     }
     @Override
     public int getStackMomentSourceZCC() {

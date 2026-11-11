@@ -2121,7 +2121,7 @@ public abstract class GameImpl implements Game {
         // 400.7: the effect refers to the object the ability knew, so keep the ability's counter --
         // a source that changed zones since is a new object. A static ability has none yet (0), and
         // takes the current one here, entering permanents included.
-        newAbility.initSourceObjectZoneChangeCounter(this, false);
+        newAbility.initSourceObjectZoneChangeCounter(this);
         ContinuousEffect newEffect = continuousEffect.copy();
 
         newEffect.newId();
@@ -2322,14 +2322,14 @@ public abstract class GameImpl implements Game {
             // countered, or otherwise responded to. Rather, it resolves immediately after the mana
             // ability that triggered it, without waiting for priority.
             Ability manaAbility = ability.copy();
-            manaAbility.initSourceObjectZoneChangeCounter(this, false);
+            manaAbility.initSourceObjectZoneChangeCounter(this);
             if (manaAbility.activate(this, false)) {
                 manaAbility.resolve(this);
             }
         } else {
             TriggeredAbility newAbility = ability.copy();
             newAbility.newId();
-            newAbility.initSourceObjectZoneChangeCounter(this, false);
+            newAbility.initSourceObjectZoneChangeCounter(this);
             if (!(newAbility instanceof DelayedTriggeredAbility)) {
                 newAbility.setSourcePermanentTransformCount(this);
             }

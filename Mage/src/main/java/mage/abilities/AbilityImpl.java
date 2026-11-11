@@ -244,7 +244,7 @@ public abstract class AbilityImpl implements Ability {
         game.applyEffects();
 
         MageObject sourceObject = getSourceObject(game);
-        initSourceObjectZoneChangeCounter(game, false);
+        initSourceObjectZoneChangeCounter(game);
         setSourcePermanentTransformCount(game);
 
         // if ability can be cast for no mana, clear the mana costs now, because additional mana costs must be paid.
@@ -1746,8 +1746,8 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public void initSourceObjectZoneChangeCounter(Game game, boolean force) {
-        if (!(this instanceof MageSingleton) && (force || sourceObjectZoneChangeCounter == 0)) {
+    public void initSourceObjectZoneChangeCounter(Game game) {
+        if (!(this instanceof MageSingleton) && getStackMomentSourceZCC() == 0) {
             setSourceObjectZoneChangeCounter(getCurrentSourceObjectZoneChangeCounter(game));
         }
     }

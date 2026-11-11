@@ -505,16 +505,12 @@ public interface Ability extends Controllable, Serializable {
 
     void setSourceObjectZoneChangeCounter(int zoneChangeCounter);
     /**
-     * Initializes the internally stored Source Object ZCC value
-     * to be equal to the source object's current ZCC.
+     * Ties this ability (a copy) to its source's current object by storing that object's ZCC.
+     * An entering permanent counts as if it had already entered the battlefield.
      * <p>
-     * If the source is an entering permanent, then
-     * the ZCC is set as if the permanent had already entered the battlefield.
-     *
-     * @param game
-     * @param force Update only occurs if stored ZCC is zero or if force is true.
+     * Does nothing once the ability is tied (stored ZCC is not zero), or for singletons.
      */
-    void initSourceObjectZoneChangeCounter(Game game, boolean force);
+    void initSourceObjectZoneChangeCounter(Game game);
 
     /**
      * Returns the internally stored Source Object ZCC value, which is set at the time this ability was put on the stack.
