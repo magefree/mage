@@ -1295,20 +1295,30 @@ public class MorphTest extends CardTestPlayerBase {
         execute();
     }
 
+    /**
+     * "As this is turned face up" must work again on a later trip to the battlefield. It once kept the first
+     * face-up's zone change counter, so the second face-up put no counters on it.
+     */
     @Test
     public void test_Morph_HoodedHydra() {
         // Morph {2}
         addCard(Zone.HAND, playerA, "Hooded Hydra");
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3+5);
+        addCard(Zone.HAND, playerA, "Unsummon");
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 3+5+1);
 
         // prepare face down
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hooded Hydra using Morph");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{G}{G}: Turn this face-down permanent face up.");
+        checkPT("first face up", 1, PhaseStep.BEGIN_COMBAT, playerA, "Hooded Hydra", 5, 5);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Unsummon", "Hooded Hydra");
 
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{3}{G}{G}: Turn this face-down permanent face up.");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Hooded Hydra using Morph");
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN, playerA);
+        activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{3}{G}{G}: Turn this face-down permanent face up.");
 
         setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.END_TURN);
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
         assertPermanentCount(playerA, "Hooded Hydra", 1);
         assertPowerToughness(playerA, "Hooded Hydra", 5, 5);
