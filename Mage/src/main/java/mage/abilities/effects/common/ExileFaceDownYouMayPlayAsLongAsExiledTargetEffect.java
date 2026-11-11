@@ -2,6 +2,9 @@ package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.condition.common.SourceIsSpellCondition;
+import mage.abilities.costs.AlternativeCostSourceAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.asthought.MayLookAtTargetCardEffect;
@@ -10,7 +13,12 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CastManaAdjustment;
 import mage.constants.Duration;
+import mage.constants.Layer;
 import mage.constants.Outcome;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -39,9 +47,9 @@ public class ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect extends OneShotEf
             case NONE:
             case AS_THOUGH_ANY_MANA_TYPE:
             case AS_THOUGH_ANY_MANA_COLOR:
+            case WITHOUT_PAYING_MANA_COST:
                 this.manaAdjustment = manaAdjustment;
                 break;
-            case WITHOUT_PAYING_MANA_COST: // TODO when needed
             default:
                 throw new IllegalArgumentException("Wrong code usage, manaAdjustment is not yet supported: " + manaAdjustment);
         }
@@ -89,7 +97,10 @@ public class ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect extends OneShotEf
                         // TODO: untangle why there is a confusion between the two.
                         CardUtil.makeCardPlayable(game, source, card, useCastSpellOnly, Duration.Custom, true, controller.getId(), null);
                         break;
-                    case WITHOUT_PAYING_MANA_COST: // TODO.
+                    case WITHOUT_PAYING_MANA_COST:
+                        CardUtil.makeCardPlayable(game, source, card, useCastSpellOnly, Duration.Custom, false, controller.getId(), null);
+                        game.addEffect(new CastWithoutPayingManaCostEffect(card.getId(), controller.getId()), source);
+                        break;
                     default:
                         throw new IllegalArgumentException("Wrong code usage, manaAdjustment is not yet supported: " + manaAdjustment);
                 }
@@ -100,5 +111,63 @@ public class ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect extends OneShotEf
             }
         }
         return true;
+    }
+
+    private static class CastWithoutPayingManaCostEffect extends ContinuousEffectImpl {
+
+        private final UUID cardId;
+        private final UUID playerId;
+        private final AlternativeCostSourceAbility alternativeCost;
+
+        CastWithoutPayingManaCostEffect(UUID cardId, UUID playerId) {
+            super(Duration.Custom, Outcome.PlayForFree);
+            this.cardId = cardId;
+            this.playerId = playerId;
+
+            FilterCard filter = new FilterCard("this card");
+            filter.add(new CardIdPredicate(cardId));
+            this.alternativeCost = new AlternativeCostSourceAbility(
+                    null, SourceIsSpellCondition.instance, null, filter, true
+            );
+        }
+
+        private CastWithoutPayingManaCostEffect(final CastWithoutPayingManaCostEffect effect) {
+            super(effect);
+            this.cardId = effect.cardId;
+            this.playerId = effect.playerId;
+            this.alternativeCost = effect.alternativeCost.copy();
+        }
+
+        @Override
+        public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+            Card card = game.getCard(cardId);
+            Zone zone = game.getState().getZone(cardId);
+            if (card == null || (zone != Zone.EXILED && zone != Zone.STACK)) {
+                discard();
+                return false;
+            }
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                return false;
+            }
+            alternativeCost.setSourceId(source.getSourceId());
+            player.getAlternativeSourceCosts().add(alternativeCost);
+            return true;
+        }
+
+        @Override
+        public boolean apply(Game game, Ability source) {
+            return false;
+        }
+
+        @Override
+        public boolean hasLayer(Layer layer) {
+            return layer == Layer.RulesEffects;
+        }
+
+        @Override
+        public CastWithoutPayingManaCostEffect copy() {
+            return new CastWithoutPayingManaCostEffect(this);
+        }
     }
 }
