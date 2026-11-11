@@ -1,6 +1,7 @@
 
 package org.mage.test.cards.single.c18;
 
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
@@ -299,6 +300,76 @@ public class AminatousAuguryTest extends CardTestPlayerBase {
         assertExileCount(playerB, "Grizzly Bears", 1);
         assertPermanentCount(playerB, "Shapeshifter Token", 1);
         assertLife(playerB, 20 - 3);
+    }
+
+    @Test
+    public void test_CastCardGainsType_MustNotFreeUsedType() {
+        // Exile the top eight cards of your library. You may put a land card from among them onto the battlefield.
+        // Until end of turn, for each nonland card type, you may cast a spell of that type from among the exiled cards
+        // without paying its mana cost.
+        addCard(Zone.HAND, playerA, "Aminatou's Augury"); // {6}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion"); // creature 2/2, to crew
+        //
+        removeAllCardsFromLibrary(playerA);
+        // Crew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an
+        // artifact creature until end of turn.)
+        addCard(Zone.LIBRARY, playerA, "Smuggler's Copter"); // artifact
+        addCard(Zone.LIBRARY, playerA, "Sol Ring"); // artifact
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aminatou's Augury");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Smuggler's Copter"); // as artifact
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("artifact is used", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Sol Ring", false);
+
+        // Smuggler's Copter becomes an artifact creature, but it was cast as artifact only
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crew 1");
+        setChoice(playerA, "Silvercoat Lion"); // crew cost
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("artifact is still used after crew", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Sol Ring", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertType("Smuggler's Copter", CardType.CREATURE, true);
+        assertTapped("Silvercoat Lion", true);
+        assertExileCount(playerA, "Sol Ring", 1);
+    }
+
+    @Test
+    public void test_CastCardLosesType_MustNotBlockOtherType() {
+        // Exile the top eight cards of your library. You may put a land card from among them onto the battlefield.
+        // Until end of turn, for each nonland card type, you may cast a spell of that type from among the exiled cards
+        // without paying its mana cost.
+        addCard(Zone.HAND, playerA, "Aminatou's Augury"); // {6}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
+        //
+        removeAllCardsFromLibrary(playerA);
+        // As long as your devotion to white is less than five, Heliod, God of the Sun isn't a creature.
+        addCard(Zone.LIBRARY, playerA, "Heliod, God of the Sun"); // enchantment creature {3}{W}
+        // Creatures you control get +1/+1.
+        addCard(Zone.LIBRARY, playerA, "Glorious Anthem"); // enchantment {1}{W}{W}
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aminatou's Augury");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Heliod, God of the Sun"); // as creature
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Heliod isn't a creature on the battlefield (devotion 1), but it was cast as enchantment creature
+        checkPlayableAbility("enchantment is free", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Glorious Anthem", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glorious Anthem"); // as enchantment
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertNotType("Heliod, God of the Sun", CardType.CREATURE); // devotion 1 + 2
+        assertPermanentCount(playerA, "Glorious Anthem", 1);
     }
 
     @Test
