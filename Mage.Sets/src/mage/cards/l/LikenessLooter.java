@@ -22,6 +22,7 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.XManaValueTargetAdjuster;
+import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
@@ -91,7 +92,7 @@ class LikenessLooterEffect extends OneShotEffect {
             return false;
         }
 
-        Permanent newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
+        Permanent newBluePrint = new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, copyFromCard), source.getControllerId(), game);
         newBluePrint.assignNewId();
         CopyApplier applier = new LikenessLooterCopyApplier();
         applier.apply(game, newBluePrint, source, permanent.getId());

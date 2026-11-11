@@ -20,6 +20,7 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.XManaValueTargetAdjuster;
+import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
@@ -91,7 +92,7 @@ class LazavTheMultifariousEffect extends OneShotEffect {
                 && lazavTheMultifarious != null) {
             Card copyFromCard = game.getCard(source.getFirstTarget());
             if (copyFromCard != null) {
-                newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
+                newBluePrint = new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, copyFromCard), source.getControllerId(), game);
                 newBluePrint.assignNewId();
                 CopyApplier applier = new LazavTheMultifariousCopyApplier();
                 applier.apply(game, newBluePrint, source, lazavTheMultifarious.getId());

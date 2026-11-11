@@ -105,7 +105,7 @@ class OlagLudevicsHubrisEffect extends ReplacementEffectImpl {
         if (copyFromCard == null) {
             return false;
         }
-        Permanent newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
+        Permanent newBluePrint = new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, copyFromCard), source.getControllerId(), game);
         newBluePrint.assignNewId();
         CopyApplier applier = new OlagLudevicsHubrisCopyApplier();
         applier.apply(game, newBluePrint, source, source.getSourceId());

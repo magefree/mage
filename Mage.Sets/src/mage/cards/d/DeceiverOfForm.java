@@ -13,6 +13,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -84,7 +85,7 @@ class DeceiverOfFormEffect extends OneShotEffect {
                                         && ((ModalDoubleFacedCard) cardFromTop).getLeftHalfCard().isCreature(game)) {
                                     copyFromCard = ((ModalDoubleFacedCard) cardFromTop).getLeftHalfCard();
                                 }
-                                Permanent newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
+                                Permanent newBluePrint = new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, copyFromCard), source.getControllerId(), game);
                                 CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, newBluePrint, permanent.getId());
                                 game.addEffect(copyEffect, source);
                             }

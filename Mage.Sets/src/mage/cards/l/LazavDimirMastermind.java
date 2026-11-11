@@ -19,6 +19,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 
 /**
@@ -80,7 +81,7 @@ class LazavDimirMastermindEffect extends OneShotEffect {
                 && lazavDimirMastermind != null) {
             Card copyFromCard = game.getCard(((FixedTarget) getTargetPointer()).getTarget());
             if (copyFromCard != null) {
-                newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
+                newBluePrint = new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, copyFromCard), source.getControllerId(), game);
                 newBluePrint.assignNewId();
                 CopyApplier applier = new LazavDimirMastermindCopyApplier();
                 applier.apply(game, newBluePrint, source, lazavDimirMastermind.getId());

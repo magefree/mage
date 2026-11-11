@@ -21,6 +21,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.effects.common.CopyEffect;
 import mage.game.permanent.PermanentCard;
+import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 
 /**
@@ -126,7 +127,7 @@ class DermotaxiCopyEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        Permanent newBluePrint = new PermanentCard(card, source.getControllerId(), game);
+        Permanent newBluePrint = new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, card), source.getControllerId(), game);
         newBluePrint.assignNewId();
         DermotaxiCopyApplier applier = new DermotaxiCopyApplier();
         applier.apply(game, newBluePrint, source, sourcePermanent.getId());
