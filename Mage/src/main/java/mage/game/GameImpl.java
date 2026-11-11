@@ -2396,15 +2396,10 @@ public abstract class GameImpl implements Game {
             // The controller of that delayed triggered ability is the same as the controller of that object at the time
             // the replacement effect was applied.
             //
-            // There are two possibility for the zcc:
-            // 1/ the source is an Ability with a valid (not 0) zcc, and we must use the same.
-            int zcc = source.getStackMomentSourceZCC();
-            if (zcc == 0) {
-                // 2/ the source has not a valid zcc (it is most likely a StaticAbility instantiated at beginning of game)
-                //    we use the source objects's zcc
-                zcc = getState().getZoneChangeCounter(source.getSourceId());
-            }
-            newAbility.setSourceObjectZoneChangeCounter(zcc);
+            // So it refers to the object its source ability knew. A static source has none: take the current
+            // object, which for a permanent that is entering is the permanent it becomes.
+            newAbility.setSourceObjectZoneChangeCounter(source.getStackMomentSourceZCC());
+            newAbility.initSourceObjectZoneChangeCounter(this);
             newAbility.setSourcePermanentTransformCount(this);
         }
         newAbility.init(this);
