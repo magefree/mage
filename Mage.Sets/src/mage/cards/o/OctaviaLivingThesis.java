@@ -44,7 +44,7 @@ public final class OctaviaLivingThesis extends CardImpl {
 
         // This spell costs {8} less to cast if you have eight or more instant and/or sorcery cards in your graveyard.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(8, condition).setCanWorksOnStackOnly(true)
+                Zone.ALL, new SpellCostReductionSourceEffect(8, condition)
         ).setRuleAtTheTop(true).addHint(hint));
 
         // Ward {8}

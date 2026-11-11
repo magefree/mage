@@ -24,7 +24,7 @@ public final class FocusTheMind extends CardImpl {
 
         // This spell costs {2} less to cast if you've cast another spell this turn.
         Effect effect = new SpellCostReductionSourceEffect(2, CastAnotherSpellThisTurnCondition.instance)
-                .setCanWorksOnStackOnly(true);
+                ;
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect)
                 .setRuleAtTheTop(true)
                 .addHint(CastAnotherSpellThisTurnCondition.instance.getHint()));

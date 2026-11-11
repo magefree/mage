@@ -31,7 +31,7 @@ public final class DelightfulDiscovery extends CardImpl {
                 Zone.ALL,
                 new SpellCostReductionForEachSourceEffect(
                         1, DelightfulDiscoveryValue.instance
-                ).setCanWorksOnStackOnly(true)
+                )
         ).setRuleAtTheTop(true).addHint(DelightfulDiscoveryValue.getHint()));
 
         // Scry 2, then draw two cards.

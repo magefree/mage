@@ -37,7 +37,7 @@ public final class RallyTheMonastery extends CardImpl {
         // This spell costs {2} less to cast if you've cast another spell this turn.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SpellCostReductionSourceEffect(2, CastAnotherSpellThisTurnCondition.instance).setCanWorksOnStackOnly(true)
+                new SpellCostReductionSourceEffect(2, CastAnotherSpellThisTurnCondition.instance)
         ).setRuleAtTheTop(true).addHint(CastAnotherSpellThisTurnCondition.instance.getHint()));
 
         // Choose one —

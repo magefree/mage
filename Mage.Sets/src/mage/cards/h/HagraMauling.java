@@ -44,7 +44,7 @@ public final class HagraMauling extends ModalDoubleFacedCard {
 
         // This spell costs {1} less to cast if an opponent controls no basic lands.
         this.getLeftHalfCard().addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(1, HagraMaulingCondition.instance).setCanWorksOnStackOnly(true)
+                Zone.ALL, new SpellCostReductionSourceEffect(1, HagraMaulingCondition.instance)
         ).setRuleAtTheTop(true));
 
         // Destroy target creature.

@@ -28,7 +28,7 @@ public final class MortalitySpear extends CardImpl {
 
         // This spell costs {2} less to cast if you gained life this turn.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(2, condition).setCanWorksOnStackOnly(true)
+                Zone.ALL, new SpellCostReductionSourceEffect(2, condition)
         ).setRuleAtTheTop(true).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
 
         // Destroy target nonland permanent.

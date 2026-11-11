@@ -27,7 +27,7 @@ public final class GigastormTitan extends CardImpl {
         // This spell costs {3} less to cast if you've cast another spell this turn.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SpellCostReductionSourceEffect(3, CastAnotherSpellThisTurnCondition.instance)
-                .setCanWorksOnStackOnly(true)
+                
         ).setRuleAtTheTop(true).addHint(CastAnotherSpellThisTurnCondition.instance.getHint()));
     }
 

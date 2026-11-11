@@ -57,7 +57,7 @@ public final class WolfkinOutcast extends TransformingDoubleFacedCard {
 
         // This spell costs {2} less to cast if you control a Wolf or Werewolf.
         this.getLeftHalfCard().addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(2, condition).setCanWorksOnStackOnly(true))
+                Zone.ALL, new SpellCostReductionSourceEffect(2, condition))
                 .setRuleAtTheTop(true)
                 .addHint(hint)
         );

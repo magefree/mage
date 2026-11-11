@@ -37,10 +37,10 @@ public final class GeistlightSnare extends CardImpl {
 
         // This spell costs {1} less to cast if you control a Spirit. It also costs {1} less to cast if you control an enchantment.
         Ability ability = new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(1, condition1).setCanWorksOnStackOnly(true)
+                Zone.ALL, new SpellCostReductionSourceEffect(1, condition1)
                 .setText("this spell costs {1} less to cast if you control a Spirit")
         ).setRuleAtTheTop(true);
-        ability.addEffect(new SpellCostReductionSourceEffect(1, condition2).setCanWorksOnStackOnly(true)
+        ability.addEffect(new SpellCostReductionSourceEffect(1, condition2)
                 .setText("It also costs {1} less to cast if you control an enchantment"));
         this.addAbility(ability);
 

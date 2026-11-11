@@ -33,7 +33,7 @@ public final class GnollWarBand extends CardImpl {
         // This spell costs {1} less to cast for each opponent who was dealt damage this turn.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SpellCostReductionSourceEffect(GnollWarBandValue.instance)
-                .setCanWorksOnStackOnly(true)
+                
                 .setText("this spell costs {1} less to cast for each opponent who was dealt damage this turn")
         ), new AmountOfDamageAPlayerReceivedThisTurnWatcher());
 
