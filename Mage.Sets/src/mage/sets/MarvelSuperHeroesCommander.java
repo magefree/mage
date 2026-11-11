@@ -385,6 +385,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("King Solomon's Frogs", 20, Rarity.RARE, mage.cards.k.KingSolomonsFrogs.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("King Solomon's Frogs", 312, Rarity.RARE, mage.cards.k.KingSolomonsFrogs.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kingpin, Wilson Fisk", 661, Rarity.RARE, mage.cards.k.KingpinWilsonFisk.class));
+        cards.add(new SetCardInfo("Klaw, Master of Sound", 46, Rarity.RARE, mage.cards.k.KlawMasterOfSound.class));
         cards.add(new SetCardInfo("Lady Loki, Agent of Chaos", 365, Rarity.RARE, mage.cards.l.LadyLokiAgentOfChaos.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lady Loki, Agent of Chaos", 54, Rarity.RARE, mage.cards.l.LadyLokiAgentOfChaos.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lady Spider, Maybelle Reilly", 695, Rarity.UNCOMMON, mage.cards.l.LadySpiderMaybelleReilly.class));
