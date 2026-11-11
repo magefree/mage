@@ -1,0 +1,102 @@
+name: Mage.Verify card info
+
+on:
+  push:
+    branches-ignore:
+      - main
+      - master
+    paths:
+      - 'Mage.Sets/src/mage/cards/**/*.java'
+  pull_request:
+    paths:
+      - 'Mage.Sets/src/mage/cards/**/*.java'
+
+permissions:
+  contents: read
+
+# Allow a newer push to replace an older informational run for the same ref.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  show-card-info:
+    name: Full ability text
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          # The changed-file calculation needs the PR base or previous push.
+          fetch-depth: 0
+
+      - name: Find added or edited card files
+        id: cards
+        shell: bash
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
+            diff_range="${PR_BASE_SHA}...${PR_HEAD_SHA}"
+          elif [[ -n "${BEFORE_SHA}" && ! "${BEFORE_SHA}" =~ ^0+$ ]] \
+            && git cat-file -e "${BEFORE_SHA}^{commit}" 2>/dev/null; then
+            diff_range="${BEFORE_SHA}..${GITHUB_SHA}"
+          else
+            # A new branch push has an all-zero "before" SHA. Compare the
+            # branch with its merge base on the repository's default branch.
+            git fetch --no-tags origin "${DEFAULT_BRANCH}"
+            base_sha="$(git merge-base "${GITHUB_SHA}" "origin/${DEFAULT_BRANCH}")"
+            diff_range="${base_sha}..${GITHUB_SHA}"
+          fi
+
+          card_names=()
+          while IFS= read -r -d '' card_file; do
+            filename="${card_file##*/}"
+            card_names+=("${filename%.java}")
+          done < <(
+            git diff --name-only --diff-filter=AMR -z "${diff_range}" -- \
+              ':(glob)Mage.Sets/src/mage/cards/**/*.java'
+          )
+
+          if (( ${#card_names[@]} == 0 )); then
+            echo "found=false" >> "${GITHUB_OUTPUT}"
+            echo "No added or edited card files were found." >> "${GITHUB_STEP_SUMMARY}"
+            exit 0
+          fi
+
+          sorted_card_names="$(printf '%s\n' "${card_names[@]}" | sort -u)"
+          card_searches="$(printf '%s\n' "${sorted_card_names}" | paste -sd ';' -)"
+
+          echo "found=true" >> "${GITHUB_OUTPUT}"
+          echo "names=${card_searches}" >> "${GITHUB_OUTPUT}"
+
+          {
+            echo "## Cards selected for info output"
+            echo
+            while IFS= read -r card_name; do
+              printf -- '- `%s`\n' "${card_name}"
+            done <<< "${sorted_card_names}"
+          } >> "${GITHUB_STEP_SUMMARY}"
+
+      - name: Setup JDK 17
+        if: steps.cards.outputs.found == 'true'
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Show card info
+        if: steps.cards.outputs.found == 'true'
+        env:
+          CARD_SEARCHES: ${{ steps.cards.outputs.names }}
+        run: >-
+          mvn test -B
+          -Dmaven.test.failure.ignore=true
+          -Dxmage.dataCollectors.printGameLogs=false
+          "-Dxmage.showCardInfo=${CARD_SEARCHES}"
+          "-Dsurefire.failIfNoSpecifiedTests=false"
+          "-Dxmage.build.tests.treeViewRunnerShowAllLogs=true"
+          -Dtest=VerifyCardDataTest#test_showCardInfo
