@@ -739,6 +739,7 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Tome of Legends", 454, Rarity.RARE, mage.cards.t.TomeOfLegends.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Toxic Deluge", 161, Rarity.RARE, mage.cards.t.ToxicDeluge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Toxic Deluge", 354, Rarity.RARE, mage.cards.t.ToxicDeluge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Typhoid Mary, Fractured", 99, Rarity.RARE, mage.cards.t.TyphoidMaryFractured.class));
         cards.add(new SetCardInfo("Trading Post", 224, Rarity.RARE, mage.cards.t.TradingPost.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Trading Post", 455, Rarity.RARE, mage.cards.t.TradingPost.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tragic Arrogance", 144, Rarity.RARE, mage.cards.t.TragicArrogance.class, NON_FULL_USE_VARIOUS));
