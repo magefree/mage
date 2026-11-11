@@ -41,7 +41,7 @@ public final class HaphazardBombardment extends CardImpl {
         filter.add(CounterType.AIM.getPredicate());
     }
 
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1);
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1, false);
 
     public HaphazardBombardment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
