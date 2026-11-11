@@ -59,7 +59,8 @@ public final class GloriousPurpose extends CardImpl {
 class GloriousPurposeConniveTriggeredAbility extends TriggeredAbilityImpl {
 
     GloriousPurposeConniveTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null, false);
+        super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
+        addEffect(new AddCountersSourceEffect(CounterType.PLAN.createInstance()));
         setTriggerPhrase("Whenever a creature you control connives, put a +1/+1 counter on that creature and a plan counter on {this}");
     }
 
