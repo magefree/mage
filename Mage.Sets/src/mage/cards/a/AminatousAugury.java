@@ -3,7 +3,7 @@ package mage.cards.a;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.assignment.common.CardTypeAssignment;
+import mage.abilities.assignment.RoleAssignment;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
@@ -19,9 +19,11 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -135,8 +137,6 @@ class AminatousAuguryEffect extends OneShotEffect {
 
 class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
 
-    private static final CardTypeAssignment cardTypeAssigner = new CardTypeAssignment(CardType.values());
-
     AminatousAuguryCastFromExileEffect() {
         super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.PlayForFree);
         staticText = "Cast this card without paying its mana cost";
@@ -173,7 +173,7 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
             return false;
         }
 
-        Set<UUID> castCards = AminatousAuguryWatcher.getCastCards(source, game);
+        List<Set<CardType>> castCardTypes = AminatousAuguryWatcher.getCastCardTypes(source, game);
 
         if (objectId == null || !CardUtil.getMainCardId(game, objectId).equals(getTargetPointer().getFirst(game, source))) {
             return false;
@@ -189,9 +189,9 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
         }
 
         // Each spell cast this way needs its own card type, a card with multiple types can be cast as any of them
-        Cards cards = new CardsImpl(castCards);
-        cards.add(card);
-        if (cardTypeAssigner.hasSharedRoles(cards, game)) {
+        List<Set<CardType>> cardRoles = new ArrayList<>(castCardTypes);
+        cardRoles.add(EnumSet.copyOf(card.getCardType(game)));
+        if (RoleAssignment.getMaxAssignment(cardRoles) < cardRoles.size()) {
             return false;
         }
 
@@ -201,11 +201,11 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
 }
 
 /**
- * Holds track of the cards cast with each Aminatou's Augury
+ * Holds track of the card types of the spells cast with each Aminatou's Augury
  */
 class AminatousAuguryWatcher extends Watcher {
 
-    private final Map<MageObjectReference, Set<UUID>> morMap = new HashMap<>();
+    private final Map<MageObjectReference, List<Set<CardType>>> morMap = new HashMap<>();
 
     AminatousAuguryWatcher() {
         super(WatcherScope.GAME);
@@ -216,13 +216,13 @@ class AminatousAuguryWatcher extends Watcher {
         if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getApprovingObject() == null) {
             return;
         }
-        Set<UUID> castCards = morMap.get(new MageObjectReference(event.getApprovingObject().getApprovingAbility()));
+        List<Set<CardType>> castCardTypes = morMap.get(new MageObjectReference(event.getApprovingObject().getApprovingAbility()));
         Spell spell = game.getSpell(event.getTargetId());
-        if (castCards == null || spell == null) {
+        if (castCardTypes == null || spell == null) {
             return;
         }
-        // card part as cast (split half, adventure spell, mdf side)
-        castCards.add(spell.getCard().getId());
+        // card types as cast (split half, adventure spell, mdf side), later changes on battlefield don't matter
+        castCardTypes.add(EnumSet.copyOf(spell.getCardType(game)));
     }
 
     @Override
@@ -235,13 +235,13 @@ class AminatousAuguryWatcher extends Watcher {
         game.getState()
                 .getWatcher(AminatousAuguryWatcher.class)
                 .morMap
-                .computeIfAbsent(new MageObjectReference(source), m -> new HashSet<>());
+                .computeIfAbsent(new MageObjectReference(source), m -> new ArrayList<>());
     }
 
-    static Set<UUID> getCastCards(Ability source, Game game) {
+    static List<Set<CardType>> getCastCardTypes(Ability source, Game game) {
         return game.getState()
                 .getWatcher(AminatousAuguryWatcher.class)
                 .morMap
-                .getOrDefault(new MageObjectReference(source), Collections.emptySet());
+                .getOrDefault(new MageObjectReference(source), Collections.emptyList());
     }
 }
