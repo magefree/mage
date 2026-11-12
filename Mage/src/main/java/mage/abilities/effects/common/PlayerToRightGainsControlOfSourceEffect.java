@@ -38,7 +38,7 @@ public class PlayerToRightGainsControlOfSourceEffect extends OneShotEffect {
         }
         UUID playerToRightId = game
                 .getState()
-                .getPlayersInRange(source.getControllerId(), game)
+                .getPlayersInRange(source.getControllerId(), game, true)
                 .stream()
                 .reduce((u1, u2) -> u2)
                 .orElse(null);

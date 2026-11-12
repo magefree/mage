@@ -131,6 +131,12 @@ public interface Target extends Copyable<Target>, Serializable {
         return possibleTargets.stream()
                 .filter(this::notContains)
                 .filter(targetId -> {
+                    // players out of the game can't be chosen, targeted or not
+                    Player targetPlayer = game.getPlayer(targetId);
+                    if (targetPlayer != null && !targetPlayer.isInGame()) {
+                        return false;
+                    }
+
                     // non-target allow any
                     if (source == null || source.getSourceId() == null || isNotTarget()) {
                         return true;
@@ -141,10 +147,8 @@ public interface Target extends Copyable<Target>, Serializable {
                     }
 
                     // target allow non-protected
-                    Player targetPlayer = game.getPlayer(targetId);
                     if (targetPlayer != null) {
-                        return !targetPlayer.hasLeft()
-                                && canTarget(sourceControllerId, targetId, source, game)
+                        return canTarget(sourceControllerId, targetId, source, game)
                                 && targetPlayer.canBeTargetedBy(sourceObject, sourceControllerId, source, game);
                     }
                     Permanent targetPermanent = game.getPermanent(targetId);
