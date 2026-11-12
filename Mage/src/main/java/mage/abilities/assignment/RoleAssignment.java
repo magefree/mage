@@ -51,12 +51,12 @@ public abstract class RoleAssignment<T> implements Serializable {
 
     /**
      * Maximum bipartite matching between cards and roles (Kuhn's algorithm).
-     * Package-private for unit tests.
+     * Can be used with stored roles, e.g. card types of spells as they were cast (Aminatou's Augury).
      *
      * @param cardRoles possible roles of each card
      * @return max number of cards with own role
      */
-    static <T> int getMaxAssignment(List<? extends Set<T>> cardRoles) {
+    public static <T> int getMaxAssignment(List<? extends Set<T>> cardRoles) {
         int maxRoles = (int) cardRoles
                 .stream()
                 .flatMap(Collection::stream)
