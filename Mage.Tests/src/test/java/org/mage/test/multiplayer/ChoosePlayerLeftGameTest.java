@@ -94,23 +94,21 @@ public class ChoosePlayerLeftGameTest extends CardTestMultiPlayerBase {
     }
 
     @Test
-    public void test_OpponentSeparatesPiles_OnlyOneOpponentLeft() {
+    public void test_OpponentSeparatesPiles_TwoOpponentsLeftThisTurn() {
         // Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile
         // into your hand and the other into your graveyard.
         addCard(Zone.HAND, playerA, "Fact or Fiction"); // {3}{U}
-        addCard(Zone.HAND, playerA, "Lightning Bolt", 2); // {R}
+        addCard(Zone.HAND, playerA, "Lightning Bolt"); // {R}
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
         //
         setLife(playerB, 3);
-        setLife(playerD, 3);
 
-        // playerB and playerD lose the game, playerC is the only opponent
+        // playerD concedes and playerB loses the game, playerC is the only opponent
+        concede(1, PhaseStep.UPKEEP, playerD);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerD);
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
-        runCode("playerB and playerD lost", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+        runCode("playerB and playerD left", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             Assert.assertTrue(info + " - playerB must leave the game", playerB.hasLeft());
             Assert.assertTrue(info + " - playerD must leave the game", playerD.hasLeft());
         });
@@ -124,7 +122,7 @@ public class ChoosePlayerLeftGameTest extends CardTestMultiPlayerBase {
         execute();
 
         assertHandCount(playerA, 1); // turn 1 draw step (no skip in multiplayer)
-        assertGraveyardCount(playerA, 2 + 1 + 5); // two bolts, Fact or Fiction and the second pile
+        assertGraveyardCount(playerA, 1 + 1 + 5); // bolt, Fact or Fiction and the second pile
     }
 
     @Test

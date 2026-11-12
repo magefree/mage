@@ -131,9 +131,9 @@ public interface Target extends Copyable<Target>, Serializable {
         return possibleTargets.stream()
                 .filter(this::notContains)
                 .filter(targetId -> {
-                    // leaved players can't be chosen, targeted or not
+                    // players out of the game can't be chosen, targeted or not
                     Player targetPlayer = game.getPlayer(targetId);
-                    if (targetPlayer != null && targetPlayer.hasLeft()) {
+                    if (targetPlayer != null && !targetPlayer.isInGame()) {
                         return false;
                     }
 
