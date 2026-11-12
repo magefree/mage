@@ -42,6 +42,32 @@ public class CopyOfDoubleFacedCardTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_EntersAsCopyOfCardPutIntoGraveyard_ActivatedSleeper() {
+        // You may have this creature enter as a copy of any creature card in a graveyard that was put there from the
+        // battlefield this turn, except it's a Phyrexian in addition to its other types.
+        addCard(Zone.HAND, playerA, "Activated Sleeper"); // {2}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.HAND, playerA, "Lightning Bolt"); // {R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Delver of Secrets"); // double-faced, front 1/1 Human Wizard
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Delver of Secrets");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Activated Sleeper");
+        setChoice(playerA, true); // use copy
+        setChoice(playerA, "Delver of Secrets");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPowerToughness(playerA, "Delver of Secrets", 1, 1);
+        assertSubtype("Delver of Secrets", SubType.WIZARD);
+        assertSubtype("Delver of Secrets", SubType.PHYREXIAN);
+    }
+
+    @Test
     public void test_BecomesCopyOfCardInGraveyard_DimirDoppelganger() {
         // {1}{U}{B}: Exile target creature card from a graveyard. This creature becomes a copy of that card, except
         // it has this ability.
