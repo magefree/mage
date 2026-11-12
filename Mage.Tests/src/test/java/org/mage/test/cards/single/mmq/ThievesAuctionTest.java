@@ -22,19 +22,17 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class ThievesAuctionTest extends CardTestPlayerBase {
 
-    private static final String THIEVES_AUCTION = "Thieves' Auction";
-
     @Test
     public void test_ModalDoubleFaced_FrontFace() {
         // Exile all nontoken permanents. Starting with you, each player chooses one of the exiled cards and puts it
         // onto the battlefield tapped under their control. Repeat this process until all cards exiled this way have
         // been chosen.
-        addCard(Zone.HAND, playerA, THIEVES_AUCTION); // {4}{R}{R}{R}
+        addCard(Zone.HAND, playerA, "Thieves' Auction"); // {4}{R}{R}{R}
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
         //
         addCard(Zone.BATTLEFIELD, playerB, "Tergrid, God of Fright"); // modal double-faced, front 4/5
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, THIEVES_AUCTION);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thieves' Auction");
         setChoice(playerA, "Tergrid, God of Fright"); // first pick
         setChoice(playerB, "Mountain", 4); // other picks
         setChoice(playerA, "Mountain", 3);
@@ -55,12 +53,12 @@ public class ThievesAuctionTest extends CardTestPlayerBase {
         // Exile all nontoken permanents. Starting with you, each player chooses one of the exiled cards and puts it
         // onto the battlefield tapped under their control. Repeat this process until all cards exiled this way have
         // been chosen.
-        addCard(Zone.HAND, playerA, THIEVES_AUCTION); // {4}{R}{R}{R}
+        addCard(Zone.HAND, playerA, "Thieves' Auction"); // {4}{R}{R}{R}
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
         //
         addCard(Zone.BATTLEFIELD, playerB, "Tergrid's Lantern"); // modal double-faced, back face artifact
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, THIEVES_AUCTION);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thieves' Auction");
         setChoice(playerA, "Tergrid, God of Fright"); // first pick, front face in exile
         setChoice(playerB, "Mountain", 4); // other picks
         setChoice(playerA, "Mountain", 3);
@@ -82,12 +80,12 @@ public class ThievesAuctionTest extends CardTestPlayerBase {
         // Exile all nontoken permanents. Starting with you, each player chooses one of the exiled cards and puts it
         // onto the battlefield tapped under their control. Repeat this process until all cards exiled this way have
         // been chosen.
-        addCard(Zone.HAND, playerA, THIEVES_AUCTION); // {4}{R}{R}{R}
+        addCard(Zone.HAND, playerA, "Thieves' Auction"); // {4}{R}{R}{R}
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
         //
         addCard(Zone.BATTLEFIELD, playerB, "Insectile Aberration"); // transformed Delver of Secrets, 3/2 flying
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, THIEVES_AUCTION);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thieves' Auction");
         setChoice(playerA, "Delver of Secrets"); // first pick, front face in exile
         setChoice(playerB, "Mountain", 4); // other picks
         setChoice(playerA, "Mountain", 3);

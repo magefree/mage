@@ -18,18 +18,16 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class GerrymanderingTest extends CardTestPlayerBase {
 
-    private static final String GERRYMANDERING = "Gerrymandering";
-
     @Test
     public void test_ModalDoubleFaced_BackFace() {
         // Exile all lands. Give each player a number of those cards chosen at random equal to the number of those
         // cards the player controlled. Each player returns those cards to the battlefield under their control.
-        addCard(Zone.HAND, playerA, GERRYMANDERING); // {2}{G}
+        addCard(Zone.HAND, playerA, "Gerrymandering"); // {2}{G}
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Boulderloft Pathway"); // modal double-faced, back face land
 
         // only playerA controls lands, so all of them return to playerA
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, GERRYMANDERING);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gerrymandering");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -45,12 +43,12 @@ public class GerrymanderingTest extends CardTestPlayerBase {
     public void test_TransformingDoubleFaced_BackFace() {
         // Exile all lands. Give each player a number of those cards chosen at random equal to the number of those
         // cards the player controlled. Each player returns those cards to the battlefield under their control.
-        addCard(Zone.HAND, playerA, GERRYMANDERING); // {2}{G}
+        addCard(Zone.HAND, playerA, "Gerrymandering"); // {2}{G}
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Azcanta, the Sunken Ruin"); // transformed Search for Azcanta, land
 
         // only playerA controls lands, so all of them return to playerA
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, GERRYMANDERING);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gerrymandering");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
