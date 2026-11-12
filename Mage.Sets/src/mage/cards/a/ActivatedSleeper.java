@@ -18,9 +18,12 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.card.PutIntoGraveFromBattlefieldThisTurnPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
+import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 import mage.watchers.common.CardsPutIntoGraveyardWatcher;
 
@@ -97,16 +100,23 @@ class ActivatedSleeperEffect extends OneShotEffect {
         player.choose(outcome, target, source, game);
         Card copyFromCard = game.getCard(target.getFirstTarget());
         if (copyFromCard != null) {
-            CopyEffect copyEffect = new CopyEffect(Duration.Custom, copyFromCard, source.getSourceId());
-            copyEffect.setApplier(new CopyApplier() {
-                @Override
-                public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
-                    blueprint.addSubType(SubType.PHYREXIAN);
-                    return true;
-                }
-            });
+            Permanent newBluePrint = new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, copyFromCard), source.getControllerId(), game);
+            newBluePrint.assignNewId();
+            CopyApplier applier = new ActivatedSleeperCopyApplier();
+            applier.apply(game, newBluePrint, source, source.getSourceId());
+            CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, source.getSourceId());
+            copyEffect.setApplier(applier);
             game.addEffect(copyEffect, source);
         }
+        return true;
+    }
+}
+
+class ActivatedSleeperCopyApplier extends CopyApplier {
+
+    @Override
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
+        blueprint.addSubType(SubType.PHYREXIAN);
         return true;
     }
 }
