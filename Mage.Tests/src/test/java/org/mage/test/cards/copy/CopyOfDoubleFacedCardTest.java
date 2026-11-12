@@ -156,6 +156,30 @@ public class CopyOfDoubleFacedCardTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_TransformsIntoCopyOfExiledCard_LudevicNecrogenius() {
+        // As this creature transforms into Olag, Ludevic's Hubris, it becomes a copy of a creature card exiled with
+        // it, except its name is Olag, Ludevic's Hubris, it's 4/4, and it's a legendary blue and black Zombie in
+        // addition to its other colors and types. Put a number of +1/+1 counters on Olag equal to the number of
+        // creature cards exiled with it.
+        addCard(Zone.BATTLEFIELD, playerA, "Ludevic, Necrogenius"); // {X}{U}{U}{B}{B}, exile X creature cards: transform
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 1 + 4);
+        //
+        addCard(Zone.GRAVEYARD, playerA, "Delver of Secrets"); // double-faced, front 1/1 Human Wizard
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{X}{U}{U}{B}{B}");
+        setChoice(playerA, "X=1"); // mana
+        setChoice(playerA, "X=1"); // creature cards to exile
+        setChoice(playerA, "Delver of Secrets"); // exile for the cost
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPowerToughness(playerA, "Olag, Ludevic's Hubris", 4 + 1, 4 + 1);
+        assertSubtype("Olag, Ludevic's Hubris", SubType.WIZARD);
+    }
+
+    @Test
     public void test_BecomesCopyOfImprintedCard_Dermotaxi() {
         // Imprint — As this Vehicle enters, exile a creature card from a graveyard.
         // Tap two untapped creatures you control: Until end of turn, this Vehicle becomes a copy of the exiled card,

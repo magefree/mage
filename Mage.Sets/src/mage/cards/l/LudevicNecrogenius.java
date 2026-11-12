@@ -15,6 +15,7 @@ import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.cards.*;
 import mage.constants.*;
+import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -90,7 +91,14 @@ class OlagLudevicsHubrisEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent == null) {
+            return false;
+        }
+
+        // must use object's zcc cause static and activated abilities init in diff time with diff zcc (see #13022)
+        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), permanent.getZoneChangeCounter(game));
+        ExileZone exileZone = game.getExile().getExileZone(exileId);
         if (exileZone == null) {
             return false;
         }
@@ -101,7 +109,7 @@ class OlagLudevicsHubrisEffect extends ReplacementEffectImpl {
             return false;
         }
 
-        Card copyFromCard = getCard(cards, source, game);
+        Card copyFromCard = getCard(cards, exileId, source, game);
         if (copyFromCard == null) {
             return false;
         }
@@ -112,10 +120,12 @@ class OlagLudevicsHubrisEffect extends ReplacementEffectImpl {
         CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, source.getSourceId());
         copyEffect.setApplier(applier);
         game.addEffect(copyEffect, source);
+
+        permanent.addCounters(CounterType.P1P1.createInstance(cards.size()), source.getControllerId(), source, game);
         return false;
     }
 
-    private Card getCard(Cards cards, Ability source, Game game) {
+    private Card getCard(Cards cards, UUID exileId, Ability source, Game game) {
         if (cards.size() == 1) {
             return cards.getRandom(game);
         }
@@ -123,7 +133,7 @@ class OlagLudevicsHubrisEffect extends ReplacementEffectImpl {
         if (player == null) {
             return cards.getRandom(game);
         }
-        TargetCard target = new TargetCardInExile(StaticFilters.FILTER_CARD);
+        TargetCard target = new TargetCardInExile(StaticFilters.FILTER_CARD_CREATURE, exileId);
         player.choose(outcome, target, source, game);
         return cards.get(target.getFirstTarget(), game);
     }
