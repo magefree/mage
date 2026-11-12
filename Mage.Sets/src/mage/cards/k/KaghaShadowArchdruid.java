@@ -147,6 +147,6 @@ class KaghaShadowArchdruidWatcher extends Watcher {
     boolean checkCard(Card card, Game game) {
         return morSet
                 .stream()
-                .anyMatch(mor -> mor.refersTo(card, game));
+                .anyMatch(mor -> mor.refersTo(card.getMainCard(), game));
     }
 }

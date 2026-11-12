@@ -100,7 +100,8 @@ class StorrevDevkarinLichWatcher extends Watcher {
                 && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
             Card card = game.getCard(event.getTargetId());
             if (card != null && (card.isCreature(game) || card.isPlaneswalker(game))) {
-                cards.add(new MageObjectReference(card, game));
+                // must use main card cause a double faced permanent is a side object with another id
+                cards.add(new MageObjectReference(card.getMainCard(), game));
             }
         }
     }
