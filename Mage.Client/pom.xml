@@ -170,6 +170,11 @@
             <version>17.0.20</version>
         </dependency>
         <!-- JavaFX support (build-in browser) END -->
+        <dependency>
+            <groupId>com.twelvemonkeys.imageio</groupId>
+            <artifactId>imageio-webp</artifactId>
+            <version>3.15.3</version>
+        </dependency>
     </dependencies>
 
     <!-- to get the reference to local repository with com\googlecode\jspf\jspf-core\0.9.1\ -->
