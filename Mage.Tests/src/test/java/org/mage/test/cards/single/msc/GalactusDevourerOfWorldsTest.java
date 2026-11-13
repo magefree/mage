@@ -43,8 +43,6 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
 
     @Test
     public void test_EntersExileTargetPermanent() {
-        setStrictChooseMode(true);
-
         // When Galactus enters, exile target permanent.
         addCard(Zone.HAND, playerA, "Galactus, Devourer of Worlds"); // {10}
         addCard(Zone.BATTLEFIELD, playerA, "Wastes", 10);
@@ -54,6 +52,7 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Galactus, Devourer of Worlds");
         addTarget(playerA, "Silvercoat Lion"); // exile target
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -63,8 +62,6 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
 
     @Test
     public void test_MustAttackOpponentWithMostLife() {
-        setStrictChooseMode(true);
-
         // Insatiable Hunger -- Galactus attacks an opponent with the most life among your opponents each combat if able
         // unless you control a creature named Silver Surfer, Galactus's Herald.
         addCard(Zone.BATTLEFIELD, playerD, "Galactus, Devourer of Worlds"); // 12/12, flying, trample, indestructible
@@ -72,6 +69,7 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
 
         // turn 2: Galactus must attack playerB, the only opponent with the most life
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -82,8 +80,6 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
 
     @Test
     public void test_MustAttackOpponentWithMostLife_TiedChooseFirst() {
-        setStrictChooseMode(true);
-
         // Insatiable Hunger -- Galactus attacks an opponent with the most life among your opponents each combat if able
         // unless you control a creature named Silver Surfer, Galactus's Herald.
         addCard(Zone.BATTLEFIELD, playerD, "Galactus, Devourer of Worlds"); // 12/12, flying, trample, indestructible
@@ -92,6 +88,7 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
 
         addTarget(playerD, playerB); // tied for most life, any of them can be attacked
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -102,8 +99,6 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
 
     @Test
     public void test_MustAttackOpponentWithMostLife_TiedChooseSecond() {
-        setStrictChooseMode(true);
-
         // Insatiable Hunger -- Galactus attacks an opponent with the most life among your opponents each combat if able
         // unless you control a creature named Silver Surfer, Galactus's Herald.
         addCard(Zone.BATTLEFIELD, playerD, "Galactus, Devourer of Worlds"); // 12/12, flying, trample, indestructible
@@ -112,6 +107,7 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
 
         addTarget(playerD, playerC); // tied for most life, any of them can be attacked
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -122,8 +118,6 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
 
     @Test
     public void test_MustAttackOpponentWithMostLife_TiedOneWithPropaganda() {
-        setStrictChooseMode(true);
-
         // Insatiable Hunger -- Galactus attacks an opponent with the most life among your opponents each combat if able
         // unless you control a creature named Silver Surfer, Galactus's Herald.
         addCard(Zone.BATTLEFIELD, playerD, "Galactus, Devourer of Worlds"); // 12/12, flying, trample, indestructible
@@ -135,6 +129,7 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
 
         // attacking PlayerB requires a cost, so the only tied opponent left to attack is PlayerC
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -145,8 +140,6 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
 
     @Test
     public void test_MustAttackOpponentWithMostLife_AllWithPropaganda() {
-        setStrictChooseMode(true);
-
         // Insatiable Hunger -- Galactus attacks an opponent with the most life among your opponents each combat if able
         // unless you control a creature named Silver Surfer, Galactus's Herald.
         addCard(Zone.BATTLEFIELD, playerD, "Galactus, Devourer of Worlds"); // 12/12, flying, trample, indestructible
@@ -159,6 +152,7 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
 
         // attacking any opponent with the most life requires a cost, so Galactus doesn't have to attack PlayerA instead
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -187,14 +181,13 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
 
     @Test
     public void test_YouControlSilverSurfer_NotForcedToAttack() {
-        setStrictChooseMode(true);
-
         // Insatiable Hunger -- Galactus attacks an opponent with the most life among your opponents each combat if able
         // unless you control a creature named Silver Surfer, Galactus's Herald.
         addCard(Zone.BATTLEFIELD, playerD, "Galactus, Devourer of Worlds"); // 12/12, flying, trample, indestructible
         addCard(Zone.BATTLEFIELD, playerD, "Silver Surfer, Galactus's Herald"); // 4/5, flying
         setLife(playerB, 30);
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -205,8 +198,6 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
 
     @Test
     public void test_OpponentControlsSilverSurfer_StillForcedToAttack() {
-        setStrictChooseMode(true);
-
         // Insatiable Hunger -- Galactus attacks an opponent with the most life among your opponents each combat if able
         // unless you control a creature named Silver Surfer, Galactus's Herald.
         addCard(Zone.BATTLEFIELD, playerD, "Galactus, Devourer of Worlds"); // 12/12, flying, trample, indestructible
@@ -214,6 +205,7 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silver Surfer, Galactus's Herald"); // 4/5, flying
         setLife(playerB, 30);
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -224,8 +216,6 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
 
     @Test
     public void test_MustAttackOpponentWithMostLife_LifeChangesBeforeCombat() {
-        setStrictChooseMode(true);
-
         // Insatiable Hunger -- Galactus attacks an opponent with the most life among your opponents each combat if able
         // unless you control a creature named Silver Surfer, Galactus's Herald.
         addCard(Zone.BATTLEFIELD, playerD, "Galactus, Devourer of Worlds"); // 12/12, flying, trample, indestructible
@@ -237,6 +227,7 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
         // most life is checked on declare attackers, so after the bolt it's playerC
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Lightning Bolt", playerB);
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -247,8 +238,6 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
 
     @Test
     public void test_SilverSurferLeavesBeforeCombat_ForcedToAttack() {
-        setStrictChooseMode(true);
-
         // Insatiable Hunger -- Galactus attacks an opponent with the most life among your opponents each combat if able
         // unless you control a creature named Silver Surfer, Galactus's Herald.
         addCard(Zone.BATTLEFIELD, playerD, "Galactus, Devourer of Worlds"); // 12/12, flying, trample, indestructible
@@ -260,6 +249,7 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
         // without Silver Surfer the requirement applies again in the same turn
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Murder", "Silver Surfer, Galactus's Herald");
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -271,8 +261,6 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
 
     @Test
     public void test_MustAttackOpponentWithMostLife_NotTheirPlaneswalker() {
-        setStrictChooseMode(true);
-
         // Insatiable Hunger -- Galactus attacks an opponent with the most life among your opponents each combat if able
         // unless you control a creature named Silver Surfer, Galactus's Herald.
         addCard(Zone.BATTLEFIELD, playerD, "Galactus, Devourer of Worlds"); // 12/12, flying, trample, indestructible
@@ -282,6 +270,7 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
 
         // Galactus must attack the opponent, so playerB's planeswalker isn't a valid choice
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -293,8 +282,6 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
 
     @Test
     public void test_MustAttackOpponentWithMostLife_OpponentLeftTheGame() {
-        setStrictChooseMode(true);
-
         // Insatiable Hunger -- Galactus attacks an opponent with the most life among your opponents each combat if able
         // unless you control a creature named Silver Surfer, Galactus's Herald.
         addCard(Zone.BATTLEFIELD, playerD, "Galactus, Devourer of Worlds"); // 12/12, flying, trample, indestructible
@@ -306,6 +293,7 @@ public class GalactusDevourerOfWorldsTest extends CardTestMultiPlayerBase {
 
         addTarget(playerD, playerC); // tied for most life, any of them can be attacked
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 

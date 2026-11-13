@@ -96,9 +96,7 @@ public class AttackRequirementTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testAttackRequirementWithSpecificDefender() {
-        setStrictChooseMode(true);
-
+    public void test_SpecificDefender() {
         // {T}: Target creature an opponent controls attacks you this turn if able.
         addCard(Zone.BATTLEFIELD, playerA, "Alluring Siren");
         addCard(Zone.BATTLEFIELD, playerA, "Ajani Goldmane"); // planeswalker, loyalty 4
@@ -107,6 +105,7 @@ public class AttackRequirementTest extends CardTestPlayerBase {
 
         activateAbility(2, PhaseStep.UPKEEP, playerA, "{T}: Target creature an opponent controls attacks you this turn if able.", "Grizzly Bears"); // bear must attack playerA
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -115,9 +114,7 @@ public class AttackRequirementTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testAttackRequirementWithSpecificDefenderThatHasAttackCost() {
-        setStrictChooseMode(true);
-
+    public void test_SpecificDefender_AttackCost_NotForced() {
         // {T}: Target creature an opponent controls attacks you this turn if able.
         addCard(Zone.BATTLEFIELD, playerA, "Alluring Siren");
         // Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you.
@@ -130,6 +127,7 @@ public class AttackRequirementTest extends CardTestPlayerBase {
 
         // attacking playerA has a cost, so the requirement can't be obeyed and the bears don't have to attack Ajani instead
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 

@@ -6,14 +6,18 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalRequirementEffect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.Hint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -34,6 +38,19 @@ import java.util.stream.Collectors;
  * @author DarioBarrabinoDev
  */
 public final class GalactusDevourerOfWorlds extends CardImpl {
+
+    private static final FilterControlledCreaturePermanent filter
+            = new FilterControlledCreaturePermanent("a creature named Silver Surfer, Galactus's Herald");
+
+    static {
+        filter.add(new NamePredicate("Silver Surfer, Galactus's Herald"));
+    }
+
+    private static final Condition condition
+            = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.FEWER_THAN, 1);
+    private static final Hint hint = new ConditionHint(
+            new PermanentsOnTheBattlefieldCondition(filter), "You control a creature named Silver Surfer, Galactus's Herald"
+    );
 
     public GalactusDevourerOfWorlds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{10}");
@@ -59,7 +76,11 @@ public final class GalactusDevourerOfWorlds extends CardImpl {
         this.addAbility(ability);
 
         // Insatiable Hunger -- Galactus attacks an opponent with the most life among your opponents each combat if able unless you control a creature named Silver Surfer, Galactus's Herald.
-        this.addAbility(new SimpleStaticAbility(new GalactusDevourerOfWorldsEffect()).withFlavorWord("Insatiable Hunger"));
+        this.addAbility(new SimpleStaticAbility(new ConditionalRequirementEffect(
+                new GalactusDevourerOfWorldsEffect(), condition,
+                "{this} attacks an opponent with the most life among your opponents each combat if able "
+                        + "unless you control a creature named Silver Surfer, Galactus's Herald"
+        )).withFlavorWord("Insatiable Hunger").addHint(hint));
     }
 
     private GalactusDevourerOfWorlds(final GalactusDevourerOfWorlds card) {
@@ -74,19 +95,8 @@ public final class GalactusDevourerOfWorlds extends CardImpl {
 
 class GalactusDevourerOfWorldsEffect extends RequirementEffect {
 
-    private static final FilterControlledCreaturePermanent filter
-            = new FilterControlledCreaturePermanent("a creature named Silver Surfer, Galactus's Herald");
-
-    static {
-        filter.add(new NamePredicate("Silver Surfer, Galactus's Herald"));
-    }
-
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
-
     GalactusDevourerOfWorldsEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "{this} attacks an opponent with the most life among your opponents each combat if able "
-                + "unless you control " + filter.getMessage();
     }
 
     private GalactusDevourerOfWorldsEffect(final GalactusDevourerOfWorldsEffect effect) {
@@ -100,8 +110,7 @@ class GalactusDevourerOfWorldsEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(source.getSourceId())
-                && !condition.apply(game, source);
+        return permanent.getId().equals(source.getSourceId());
     }
 
     @Override
