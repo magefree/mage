@@ -597,12 +597,19 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public void applyEnterWithCounters(Permanent permanent, Ability source, Game game) {
-        Counters countersToAdd = game.getEnterWithCounters(permanent.getId());
+        // counters can be set by the permanent's id or by the main card's id,
+        // e.g. a double faced card enters as a side object with another id
+        UUID countersId = permanent.getId();
+        Counters countersToAdd = game.getEnterWithCounters(countersId);
+        if (countersToAdd == null && !this.getMainCard().getId().equals(countersId)) {
+            countersId = this.getMainCard().getId();
+            countersToAdd = game.getEnterWithCounters(countersId);
+        }
         if (countersToAdd != null) {
             for (Counter counter : countersToAdd.values()) {
                 permanent.addCounters(counter, source.getControllerId(), source, game);
             }
-            game.setEnterWithCounters(permanent.getId(), null);
+            game.setEnterWithCounters(countersId, null);
         }
     }
 
