@@ -81,7 +81,7 @@ class IdolOfEnduranceExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game, true);
         if (player == null || permanent == null) {
             return false;
         }
