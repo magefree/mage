@@ -1108,6 +1108,10 @@ public class VerifyCardDataTest {
                 // skip unofficial sets like Star Wars
                 continue;
             }
+            if ("NAC".equalsIgnoreCase(set.getCode())) {
+                // TODO: Remove once MTGJson data syncs.
+                continue;
+            }
 
             MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
             if (jsonSet == null) {
@@ -3075,7 +3079,7 @@ public class VerifyCardDataTest {
         refText = refText.replaceAll("\\[([\\−\\+]?\\d*)\\]\\: ", "$1: ").replaceAll("\\[\\−X\\]\\: ", "-X: ");
 
         // station fix
-        // mtgjson: 
+        // mtgjson:
         // - keeps the level in the first ability line and the P/T in the card's fields.
         // - "STATION 12+\n0/8\nFlying"
         // xmage:
