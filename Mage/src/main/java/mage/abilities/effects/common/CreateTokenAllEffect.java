@@ -71,7 +71,7 @@ public class CreateTokenAllEffect extends OneShotEffect {
         switch (targetController) {
             case ANY:
             case EACH_PLAYER:
-                return game.getState().getPlayersInRange(source.getControllerId(), game);
+                return game.getState().getPlayersInRange(source.getControllerId(), game, true);
             case OPPONENT:
                 return game.getOpponents(source.getControllerId());
         }
