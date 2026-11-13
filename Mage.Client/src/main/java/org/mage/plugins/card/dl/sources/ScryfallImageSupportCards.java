@@ -638,6 +638,8 @@ public class ScryfallImageSupportCards {
             add("TRC"); // Star Trek Commander
             add("SDS"); // Stardates
             add("PF27"); // MagicFest 2027
+            add("NAU"); // Nauctis: The Sunken Realm
+            add("NAC"); // Nauctis: The Sunken Realm Commander
             add("MDD"); // Marvel: Darkhold Destiny
             add("MDC"); // Darkhold Destiny Commander
 

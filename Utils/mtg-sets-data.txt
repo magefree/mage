@@ -217,6 +217,8 @@ Murders at Karlov Manor Commander|MKC|
 Murders at Karlov Manor|MKM|
 Mystery Booster 2|MB2|
 Mystery Booster Commander Edition|MBC|
+Nauctis: The Sunken Realm|NAU|
+Nauctis: The Sunken Realm Commander|NAC|
 Nemesis|NEM|
 Neon Dynasty Commander|NEC|
 New Capenna Commander|NCC|
