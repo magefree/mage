@@ -3,7 +3,9 @@ package mage.abilities.common;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoWhenCostPaid;
+import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -14,8 +16,12 @@ import mage.util.CardUtil;
 import java.util.Optional;
 
 /**
- * "When the Nth plan counter is put on {this}, sacrifice it. When you do, [effect]."
- * triggered ability used by Plan-subtype enchantments.
+ * Triggered ability used by Plan-subtype enchantments:
+ * <ul>
+ *     <li>"When the Nth plan counter is put on {this}, sacrifice it, [effects]." - add the other effects to the ability,
+ *     they apply even if the sacrifice is impossible;</li>
+ *     <li>"When the Nth plan counter is put on {this}, sacrifice it. When you do, [effect]." - reflexive ability.</li>
+ * </ul>
  *
  * @author muz
  */
@@ -25,10 +31,21 @@ public class PlanCounterThresholdTriggeredAbility extends TriggeredAbilityImpl {
 
     /**
      * @param threshold the plan counter count at which this ability fires
+     */
+    public PlanCounterThresholdTriggeredAbility(int threshold) {
+        this(threshold, new SacrificeSourceEffect().setText("sacrifice it"));
+    }
+
+    /**
+     * @param threshold the plan counter count at which this ability fires
      * @param reflexive the reflexive triggered ability to fire after sacrificing
      */
     public PlanCounterThresholdTriggeredAbility(int threshold, ReflexiveTriggeredAbility reflexive) {
-        super(Zone.ALL, new DoWhenCostPaid(reflexive, new SacrificeSourceCost().setText("sacrifice it"), "Sacrifice {this}?", false), false);
+        this(threshold, new DoWhenCostPaid(reflexive, new SacrificeSourceCost().setText("sacrifice it"), "Sacrifice {this}?", false));
+    }
+
+    private PlanCounterThresholdTriggeredAbility(int threshold, Effect effect) {
+        super(Zone.ALL, effect, false);
         this.threshold = threshold;
         setTriggerPhrase("When the " + CardUtil.numberToOrdinalText(threshold) + " plan counter is put on {this}, ");
     }

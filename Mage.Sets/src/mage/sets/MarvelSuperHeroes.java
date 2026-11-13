@@ -307,6 +307,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 277, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 288, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 287, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Political Triumph", 31, Rarity.UNCOMMON, mage.cards.p.PoliticalTriumph.class));
         cards.add(new SetCardInfo("Powerful Broker", 179, Rarity.COMMON, mage.cards.p.PowerfulBroker.class));
         cards.add(new SetCardInfo("Project Deathlok Soldier", 109, Rarity.COMMON, mage.cards.p.ProjectDeathlokSoldier.class));
         cards.add(new SetCardInfo("Punishing Punch", 180, Rarity.UNCOMMON, mage.cards.p.PunishingPunch.class));
@@ -326,6 +327,7 @@ public final class MarvelSuperHeroes extends ExpansionSet {
         cards.add(new SetCardInfo("Restorative Technique", 183, Rarity.COMMON, mage.cards.r.RestorativeTechnique.class));
         cards.add(new SetCardInfo("Rewrite History", 71, Rarity.UNCOMMON, mage.cards.r.RewriteHistory.class));
         cards.add(new SetCardInfo("Rick Jones, Destined Sidekick", 184, Rarity.UNCOMMON, mage.cards.r.RickJonesDestinedSidekick.class));
+        cards.add(new SetCardInfo("Robot Domination", 111, Rarity.UNCOMMON, mage.cards.r.RobotDomination.class));
         cards.add(new SetCardInfo("Ronin, Shadow Stalker", 112, Rarity.UNCOMMON, mage.cards.r.RoninShadowStalker.class));
         cards.add(new SetCardInfo("Roxxon Brutes", 113, Rarity.COMMON, mage.cards.r.RoxxonBrutes.class));
         cards.add(new SetCardInfo("S.H.I.E.L.D. Deployment Drone", 73, Rarity.COMMON, mage.cards.s.SHIELDDeploymentDrone.class));
