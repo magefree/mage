@@ -1,6 +1,7 @@
 package mage.cards.h;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -35,9 +36,11 @@ public final class HERBIELovableRobot extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of combat on your turn, if you've cast a noncreature spell this turn, surveil 1.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(
-            new SurveilEffect(1)
-        ).withInterveningIf(CastNoncreatureSpellThisTurnCondition.instance));
+        this.addAbility(
+                new BeginningOfCombatTriggeredAbility(new SurveilEffect(1))
+                        .withInterveningIf(CastNoncreatureSpellThisTurnCondition.instance)
+                        .addHint(CastNoncreatureSpellThisTurnCondition.getHint())
+        );
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
