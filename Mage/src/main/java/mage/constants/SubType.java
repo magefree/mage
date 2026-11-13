@@ -147,6 +147,7 @@ public enum SubType {
     CAMARID("Camarid", SubTypeSet.CreatureType),
     CAMEL("Camel", SubTypeSet.CreatureType),
     CAPYBARA("Capybara", SubTypeSet.CreatureType),
+    CARDASSIAN("Cardassian", SubTypeSet.CreatureType),
     CARIBOU("Caribou", SubTypeSet.CreatureType),
     CARRIER("Carrier", SubTypeSet.CreatureType),
     CAT("Cat", SubTypeSet.CreatureType),
@@ -196,6 +197,7 @@ public enum SubType {
     DWARF("Dwarf", SubTypeSet.CreatureType),
     // E
     ECHIDNA("Echidna", SubTypeSet.CreatureType),
+    EDOSIAN("Edosian", SubTypeSet.CreatureType),
     EFREET("Efreet", SubTypeSet.CreatureType),
     EGG("Egg", SubTypeSet.CreatureType),
     EL_AURIAN("El-Aurian", SubTypeSet.CreatureType),
@@ -317,6 +319,7 @@ public enum SubType {
     MANTICORE("Manticore", SubTypeSet.CreatureType),
     MASTICORE("Masticore", SubTypeSet.CreatureType),
     MEDUSAN("Medusan", SubTypeSet.CreatureType),
+    MELKOTIAN("Melkotian", SubTypeSet.CreatureType),
     MERCENARY("Mercenary", SubTypeSet.CreatureType),
     MERFOLK("Merfolk", SubTypeSet.CreatureType),
     METATHRAN("Metathran", SubTypeSet.CreatureType),
@@ -338,6 +341,7 @@ public enum SubType {
     MYR("Myr", SubTypeSet.CreatureType),
     MYSTIC("Mystic", SubTypeSet.CreatureType),
     // N
+    NAKUHL("Na'kuhl", SubTypeSet.CreatureType),
     NAUTILUS("Nautilus", SubTypeSet.CreatureType),
     NAUTOLAN("Nautolan", SubTypeSet.CreatureType, true), // Star Wars
     NECRON("Necron", SubTypeSet.CreatureType),
@@ -351,6 +355,7 @@ public enum SubType {
     NOMAD("Nomad", SubTypeSet.CreatureType),
     NYMPH("Nymph", SubTypeSet.CreatureType),
     // O
+    OCAMPA("Ocampa", SubTypeSet.CreatureType),
     OCTOPUS("Octopus", SubTypeSet.CreatureType),
     OFFICER("Officer", SubTypeSet.CreatureType),
     OGRE("Ogre", SubTypeSet.CreatureType),
@@ -464,6 +469,7 @@ public enum SubType {
     // T
     TALAXIAN("Talaxian", SubTypeSet.CreatureType),
     TALOSIAN("Talosian", SubTypeSet.CreatureType),
+    TAMARIAN("Tamarian", SubTypeSet.CreatureType),
     TELLARITE("Tellarite", SubTypeSet.CreatureType),
     TENTACLE("Tentacle", SubTypeSet.CreatureType),
     TETRAVITE("Tetravite", SubTypeSet.CreatureType),
@@ -494,6 +500,7 @@ public enum SubType {
     // V
     VAMPIRE("Vampire", SubTypeSet.CreatureType),
     VARMINT("Varmint", SubTypeSet.CreatureType),
+    VAU_NAKAT("Vau-N'Akat", SubTypeSet.CreatureType),
     VEDALKEN("Vedalken", SubTypeSet.CreatureType),
     VILLAIN("Villain", SubTypeSet.CreatureType),
     VOLVER("Volver", SubTypeSet.CreatureType),
