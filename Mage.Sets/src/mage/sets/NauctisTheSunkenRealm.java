@@ -22,5 +22,9 @@ public final class NauctisTheSunkenRealm extends ExpansionSet {
 
         // this.enablePlayBooster(401); // TODO: Enable once booster details are available
 
+        cards.add(new SetCardInfo("Ring of Unity", 238, Rarity.MYTHIC, mage.cards.r.RingOfUnity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ring of Unity", 317, Rarity.MYTHIC, mage.cards.r.RingOfUnity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ring of Unity", 360, Rarity.MYTHIC, mage.cards.r.RingOfUnity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ring of Unity", 376, Rarity.MYTHIC, mage.cards.r.RingOfUnity.class, NON_FULL_USE_VARIOUS));
     }
 }
