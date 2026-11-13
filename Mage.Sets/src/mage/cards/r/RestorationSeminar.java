@@ -1,7 +1,7 @@
 package mage.cards.r;
 
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.abilities.keyword.ParadigmAbility;
+import mage.abilities.effects.keyword.ParadigmEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -34,7 +34,7 @@ public final class RestorationSeminar extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
 
         // Paradigm
-        this.addAbility(new ParadigmAbility());
+        this.getSpellAbility().addEffect(new ParadigmEffect());
     }
 
     private RestorationSeminar(final RestorationSeminar card) {
