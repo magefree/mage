@@ -618,7 +618,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         game.informPlayers(getLogName() + " taken turn control of " + playerUnderControl.getLogName() + info);
         if (!playerUnderControlId.equals(this.getId())) {
             this.playersUnderYourControl.add(playerUnderControlId);
-            if (!playerUnderControl.hasLeft() && !playerUnderControl.hasLost()) {
+            if (playerUnderControl.isInGame()) {
                 playerUnderControl.setGameUnderYourControl(game, false);
             }
             // control will reset on start of the turn
@@ -716,7 +716,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean canBeTargetedBy(MageObject sourceObject, UUID sourceControllerId, Ability source, Game game) {
-        if (this.hasLost() || this.hasLeft()) {
+        if (!this.isInGame()) {
             return false;
         }
         if (sourceObject != null) {
@@ -2677,7 +2677,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void resetPassed() {
-        this.passed = this.loses || this.hasLeft();
+        this.passed = !this.isInGame();
     }
 
     @Override
