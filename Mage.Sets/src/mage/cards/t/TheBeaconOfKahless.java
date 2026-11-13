@@ -7,6 +7,7 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.watchers.common.PlayersAttackedThisTurnWatcher;
@@ -34,7 +35,7 @@ public final class TheBeaconOfKahless extends CardImpl {
                 new TapSourceCost(),
                 "choose a color. Add an amount of mana of that color equal to the number of opponents you attacked this turn",
                 true
-            ).withFlavorWord("Battlefront").addHint(AttackedThisTurnOpponentsCount.getHint()),
+            ).setAbilityWord(AbilityWord.BATTLEFRONT).addHint(AttackedThisTurnOpponentsCount.getHint()),
             new PlayersAttackedThisTurnWatcher()
         );
     }

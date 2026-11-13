@@ -10,6 +10,7 @@ import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -42,7 +43,7 @@ public final class KurnSonOfMogh extends CardImpl {
             new LoseLifeSourceControllerEffect(AttackedThisTurnOpponentsCount.instance)
                 .setText("and lose X life, where X is the number of opponents you attacked this turn")
         );
-        this.addAbility(ability.withFlavorWord("Battlefront").addHint(AttackedThisTurnOpponentsCount.getHint()), new PlayersAttackedThisTurnWatcher());
+        this.addAbility(ability.setAbilityWord(AbilityWord.BATTLEFRONT).addHint(AttackedThisTurnOpponentsCount.getHint()), new PlayersAttackedThisTurnWatcher());
     }
 
     private KurnSonOfMogh(final KurnSonOfMogh card) {

@@ -8,6 +8,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -41,7 +42,7 @@ public final class WorfDefiantCommander extends CardImpl {
                 AttackedThisTurnOpponentsCount.instance, false, Duration.UntilEndOfYourNextTurn
             ).setText("exile the top X cards of your library, where X is the number of opponents you attacked this turn. "
                 + "Until the end of your next turn, you may play those cards"), 1
-        ).withFlavorWord("Battlefront").addHint(AttackedThisTurnOpponentsCount.getHint()),
+        ).setAbilityWord(AbilityWord.BATTLEFRONT).addHint(AttackedThisTurnOpponentsCount.getHint()),
             new PlayersAttackedThisTurnWatcher());
     }
 

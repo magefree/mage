@@ -6,6 +6,7 @@ import mage.abilities.dynamicvalue.common.AttackedThisTurnOpponentsCount;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -35,7 +36,7 @@ public final class KorokLiberatedRage extends CardImpl {
                 AttackedThisTurnOpponentsCount.instance,
                 Duration.EndOfTurn
             ).setText("creatures you control get +X/+X until end of turn, where X is the number of opponents you attacked this turn"))
-                .withFlavorWord("Battlefront")
+                .setAbilityWord(AbilityWord.BATTLEFRONT)
                 .addHint(AttackedThisTurnOpponentsCount.getHint()),
             new PlayersAttackedThisTurnWatcher()
         );
