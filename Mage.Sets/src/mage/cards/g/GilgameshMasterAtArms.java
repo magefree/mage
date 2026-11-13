@@ -26,6 +26,7 @@ import mage.util.RandomUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -96,9 +97,9 @@ class GilgameshMasterAtArmsLookEffect extends OneShotEffect {
         player.moveCards(toPlay, Zone.BATTLEFIELD, source, game);
         cards.retainZone(Zone.LIBRARY, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
-        Set<Permanent> permanents = toPlay
+        Set<Permanent> permanents = toPlay.getCards(game)
                 .stream()
-                .map(game::getPermanent)
+                .map(card -> CardUtil.getPermanentFromCardPutToBattlefield(card, game))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
         if (!permanents.isEmpty()) {

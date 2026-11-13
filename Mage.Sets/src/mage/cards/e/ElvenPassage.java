@@ -21,6 +21,7 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+import mage.util.CardUtil;
 
 /**
  * @author miesma
@@ -126,7 +127,7 @@ class ElvenPassageUntapLandEffect extends OneShotEffect {
             return true;
         }
 
-        Permanent land = game.getPermanent(targetLandCard.getId());
+        Permanent land = CardUtil.getPermanentFromCardPutToBattlefield(targetLandCard, game);
         if (land == null) {
             return false;
         }

@@ -145,7 +145,11 @@ class LegionsInitiativeReturnFromExileEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(exileZone);
         controller.moveCards(cards, Zone.BATTLEFIELD, source, game);
-        List<Permanent> permanents = cards.stream().map(game::getPermanent).filter(Objects::nonNull).collect(Collectors.toList());
+        List<Permanent> permanents = cards.getCards(game)
+                .stream()
+                .map(card -> CardUtil.getPermanentFromCardPutToBattlefield(card, game))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
         if (permanents.isEmpty()) {
             return false;
         }

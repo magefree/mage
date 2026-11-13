@@ -19,8 +19,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
-import java.util.Optional;
 import java.util.UUID;
+import mage.util.CardUtil;
+import java.util.Objects;
 
 /**
  * @author TheElk801
@@ -81,11 +82,11 @@ class SmileAtDeathEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(cards, Zone.BATTLEFIELD, source, game);
-        for (UUID cardId : cards) {
-            Optional.ofNullable(cardId)
-                    .map(game::getPermanent)
-                    .ifPresent(permanent -> permanent.addCounters(CounterType.P1P1.createInstance(), source, game));
-        }
+        cards.getCards(game)
+                .stream()
+                .map(card -> CardUtil.getPermanentFromCardPutToBattlefield(card, game))
+                .filter(Objects::nonNull)
+                .forEach(permanent -> permanent.addCounters(CounterType.P1P1.createInstance(), source, game));
         return true;
     }
 }

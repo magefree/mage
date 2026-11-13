@@ -25,9 +25,11 @@ import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.XTargetsCountAdjuster;
 import mage.target.targetpointer.FixedTargets;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.util.CardUtil;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -78,14 +80,11 @@ class WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEff
         if (controller != null) {
             Cards cards = new CardsImpl(getTargetPointer().getTargets(game, source));
             controller.moveCards(cards, Zone.BATTLEFIELD, source, game);
-            List<Permanent> toSacrifice = new ArrayList<>(cards.size());
-            for (UUID targetId : cards) {
-                Permanent creature = game.getPermanent(targetId);
-                if (creature != null) {
-                    toSacrifice.add(creature);
-                }
-
-            }
+            List<Permanent> toSacrifice = cards.getCards(game)
+                    .stream()
+                    .map(card -> CardUtil.getPermanentFromCardPutToBattlefield(card, game))
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
             Effect effect = new SacrificeTargetEffect("Sacrifice those creatures at the beginning of the next end step", source.getControllerId());
             effect.setTargetPointer(new FixedTargets(toSacrifice, game));
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);

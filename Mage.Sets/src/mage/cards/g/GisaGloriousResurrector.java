@@ -24,6 +24,10 @@ import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import mage.game.permanent.Permanent;
 
 /**
  * @author TheElk801
@@ -145,13 +149,17 @@ class GisaGloriousResurrectorReturnEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(cards, Zone.BATTLEFIELD, source, game);
-        cards.retainZone(Zone.BATTLEFIELD, game);
-        if (cards.isEmpty()) {
+        List<Permanent> permanents = cards.getCards(game)
+                .stream()
+                .map(card -> CardUtil.getPermanentFromCardPutToBattlefield(card, game))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        if (permanents.isEmpty()) {
             return false;
         }
         game.addEffect(new GainAbilityTargetEffect(
                 new DecayedAbility(), Duration.Custom
-        ).setTargetPointer(new FixedTargets(cards, game)), source);
+        ).setTargetPointer(new FixedTargets(permanents, game)), source);
         return true;
     }
 }

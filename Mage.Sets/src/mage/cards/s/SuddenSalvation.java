@@ -20,6 +20,7 @@ import mage.watchers.common.CardsPutIntoGraveyardWatcher;
 
 import java.util.Objects;
 import java.util.UUID;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -83,8 +84,9 @@ class SuddenSalvationEffect extends OneShotEffect {
                 cards.getCards(game), Zone.BATTLEFIELD, source, game,
                 true, false, true, null
         );
-        int opponents = cards.stream()
-                .map(game::getPermanent)
+        int opponents = cards.getCards(game)
+                .stream()
+                .map(card -> CardUtil.getPermanentFromCardPutToBattlefield(card, game))
                 .filter(Objects::nonNull)
                 .map(Controllable::getControllerId)
                 .distinct()
