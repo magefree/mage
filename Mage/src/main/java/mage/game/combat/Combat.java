@@ -1037,7 +1037,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                             Set<UUID> attackersToBlock = new HashSet<>();
                             boolean mayBlock = false;
                             for (UUID attackingCreatureId : getAttackers()) {
-                                if (creature.canBlock(attackingCreatureId, game)) {
+                                if (findGroup(attackingCreatureId).canBlock(creature, game)) {
                                     Permanent attackingCreature = game.getPermanent(attackingCreatureId);
                                     if (attackingCreature != null) {
                                         // check if the attacker is already blocked by a max of blockers, so blocker can't block it also
@@ -1090,7 +1090,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                                     Player defender = game.getPlayer(creature.getControllerId());
                                     if (defender != null) {
                                         for (UUID attackingCreatureId : getAttackers()) {
-                                            if (creature.canBlock(attackingCreatureId, game)
+                                            if (findGroup(attackingCreatureId).canBlock(creature, game)
                                                     && !findGroup(attackingCreatureId).getBlockers().contains(creature.getId())
                                                     && attackersToBlock.contains(attackingCreatureId)) {
                                                 // TODO: might need to revisit this (calls some pickBlockerOrder instances even for a single blocker - damage distribution appears to be working correctly however)
@@ -1140,7 +1140,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                             // check that it can block at least one of the attackers and no restictions prevent this
                             boolean mayBlock = false;
                             for (UUID attackingCreatureId : getAttackers()) {
-                                if (creature.canBlock(attackingCreatureId, game)) {
+                                if (findGroup(attackingCreatureId).canBlock(creature, game)) {
                                     Permanent attackingCreature = game.getPermanent(attackingCreatureId);
                                     if (attackingCreature != null) {
                                         // check if the attacker is already blocked by a max of blockers, so blocker can't block it also
@@ -1186,7 +1186,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                                     Player defender = game.getPlayer(creature.getControllerId());
                                     if (defender != null) {
                                         for (UUID attackingCreatureId : getAttackers()) {
-                                            if (creature.canBlock(attackingCreatureId, game)
+                                            if (findGroup(attackingCreatureId).canBlock(creature, game)
                                                     && !findGroup(attackingCreatureId).getBlockers().contains(creature.getId())) {
                                                 defender.declareBlocker(defender.getId(), creature.getId(), attackingCreatureId, game);
                                                 break;
