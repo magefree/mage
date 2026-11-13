@@ -25,6 +25,8 @@ public final class NauctisTheSunkenRealm extends ExpansionSet {
         cards.add(new SetCardInfo("Abyssal Lotus", 234, Rarity.MYTHIC, mage.cards.a.AbyssalLotus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Abyssal Lotus", 316, Rarity.MYTHIC, mage.cards.a.AbyssalLotus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Abyssal Lotus", 361, Rarity.MYTHIC, mage.cards.a.AbyssalLotus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Calmwater Mentor", 281, Rarity.MYTHIC, mage.cards.c.CalmwaterMentor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Calmwater Mentor", 5, Rarity.MYTHIC, mage.cards.c.CalmwaterMentor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ring of Unity", 238, Rarity.MYTHIC, mage.cards.r.RingOfUnity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ring of Unity", 317, Rarity.MYTHIC, mage.cards.r.RingOfUnity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ring of Unity", 360, Rarity.MYTHIC, mage.cards.r.RingOfUnity.class, NON_FULL_USE_VARIOUS));
