@@ -49,14 +49,14 @@ class RepayInKindEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int lowestLife = game
                 .getState()
-                .getPlayersInRange(source.getControllerId(), game)
+                .getPlayersInRange(source.getControllerId(), game, true)
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
                 .mapToInt(Player::getLife)
                 .min()
                 .orElse(0);
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game, true)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 player.setLife(lowestLife, game, source);
