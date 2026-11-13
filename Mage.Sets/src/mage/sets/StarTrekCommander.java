@@ -149,6 +149,8 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Exotic Orchard", 528, Rarity.RARE, mage.cards.e.ExoticOrchard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Exploration", 301, Rarity.RARE, mage.cards.e.Exploration.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Exploration", 461, Rarity.RARE, mage.cards.e.Exploration.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Extraction Integrant", 59, Rarity.RARE, mage.cards.e.ExtractionIntegrant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Extraction Integrant", 272, Rarity.RARE, mage.cards.e.ExtractionIntegrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fabled Passage", 379, Rarity.RARE, mage.cards.f.FabledPassage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fabled Passage", 529, Rarity.RARE, mage.cards.f.FabledPassage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Faithful Mending", 473, Rarity.UNCOMMON, mage.cards.f.FaithfulMending.class));
