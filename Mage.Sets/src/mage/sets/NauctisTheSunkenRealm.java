@@ -29,5 +29,7 @@ public final class NauctisTheSunkenRealm extends ExpansionSet {
         cards.add(new SetCardInfo("Ring of Unity", 317, Rarity.MYTHIC, mage.cards.r.RingOfUnity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ring of Unity", 360, Rarity.MYTHIC, mage.cards.r.RingOfUnity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ring of Unity", 376, Rarity.MYTHIC, mage.cards.r.RingOfUnity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shimmering Citadel", 260, Rarity.RARE, mage.cards.s.ShimmeringCitadel.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shimmering Citadel", 346, Rarity.RARE, mage.cards.s.ShimmeringCitadel.class, NON_FULL_USE_VARIOUS));
     }
 }
