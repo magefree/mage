@@ -56,6 +56,7 @@ public final class RealityFractureCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Isolated Chapel", 74, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
         cards.add(new SetCardInfo("Jace, Multiverse Architect", 1, Rarity.MYTHIC, mage.cards.j.JaceMultiverseArchitect.class));
         cards.add(new SetCardInfo("Izzet Signet", 58, Rarity.UNCOMMON, mage.cards.i.IzzetSignet.class));
+        cards.add(new SetCardInfo("Jhoira, Weatherlight Corsair", 8, Rarity.RARE, mage.cards.j.JhoiraWeatherlightCorsair.class));
         cards.add(new SetCardInfo("Kher Keep", 75, Rarity.RARE, mage.cards.k.KherKeep.class));
         cards.add(new SetCardInfo("Lingering Souls", 27, Rarity.UNCOMMON, mage.cards.l.LingeringSouls.class));
         cards.add(new SetCardInfo("Martial Coup", 28, Rarity.RARE, mage.cards.m.MartialCoup.class));
