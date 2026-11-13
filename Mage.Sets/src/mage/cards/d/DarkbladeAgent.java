@@ -8,6 +8,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -53,6 +54,7 @@ public final class DarkbladeAgent extends CardImpl {
                 "and \"Whenever this creature deals "
                         + "combat damage to a player, you draw a card.\""
         ));
+        ability.addHint(new ConditionHint(DarkbladeAgentCondition.instance, "You've surveilled this turn"));
         this.addAbility(ability, new DarkbladeAgentWatcher());
     }
 
