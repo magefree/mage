@@ -96,4 +96,23 @@ public class BattleMultiplayerTest extends BattleBaseTest {
         assertLife(playerC, 20);
         assertCounterCount(belenon, CounterType.DEFENSE, 5);
     }
+
+    @Test
+    public void testProtectorLeftGame() {
+        // 704.5x - a player who left the game isn't in the game, so its controller chooses a new protector
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.HAND, playerA, belenon);
+
+        setChoice(playerA, playerC.getName());
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, belenon);
+
+        concede(1, PhaseStep.POSTCOMBAT_MAIN, playerC);
+        setChoice(playerA, playerB.getName()); // new protector
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertBattle(playerA, playerB, belenon);
+    }
 }

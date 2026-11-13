@@ -264,4 +264,104 @@ public class BattleDuelTest extends BattleBaseTest {
         assertCounterCount(belenon, CounterType.DEFENSE, 5);
         assertCounterCount(fayden, CounterType.LOYALTY, 3 - 2);
     }
+
+    @Test
+    public void test_Evasion_AllAbilitiesMustBeSatisfied() {
+        // 509.1b - evasion abilities are cumulative, also for creatures attacking a battle
+        // flying + menace attacker can't be blocked by a flyer and a non-flyer
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Dimir Spybug"); // 1/1 flying, menace
+        addCard(Zone.BATTLEFIELD, playerB, bearWithFlyingAndVigilance);
+        addCard(Zone.BATTLEFIELD, playerB, bear);
+        addCard(Zone.HAND, playerA, belenon);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, belenon);
+
+        attack(1, playerA, "Dimir Spybug", belenon);
+        block(1, playerB, bearWithFlyingAndVigilance, "Dimir Spybug");
+        block(1, playerB, bear, "Dimir Spybug");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertBattle(playerA, playerB, belenon);
+        assertPermanentCount(playerA, "Dimir Spybug", 1);
+        assertCounterCount(belenon, CounterType.DEFENSE, 5 - 1);
+    }
+
+    @Test
+    public void test_Evasion_AllAbilitiesSatisfied() {
+        // 509.1b - two flyers can block a flying + menace attacker
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Dimir Spybug"); // 1/1 flying, menace
+        addCard(Zone.BATTLEFIELD, playerB, bearWithFlyingAndVigilance);
+        addCard(Zone.BATTLEFIELD, playerB, "Wind Drake");
+        addCard(Zone.HAND, playerA, belenon);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, belenon);
+
+        attack(1, playerA, "Dimir Spybug", belenon);
+        block(1, playerB, bearWithFlyingAndVigilance, "Dimir Spybug");
+        block(1, playerB, "Wind Drake", "Dimir Spybug");
+        setChoiceAmount(playerA, 1, 0); // assign damage to blockers
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertBattle(playerA, playerB, belenon);
+        assertGraveyardCount(playerA, "Dimir Spybug", 1);
+        assertCounterCount(belenon, CounterType.DEFENSE, 5);
+    }
+
+    @Test
+    public void test_ChangeControlDuringCombat_RemovedFromCombat() {
+        // 506.4 - a permanent is removed from combat if its controller or protector changes
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.BATTLEFIELD, playerA, bear);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 5);
+        addCard(Zone.HAND, playerB, "Word of Seizing"); // gain control of target permanent until end of turn
+        addCard(Zone.HAND, playerA, belenon);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, belenon);
+
+        attack(1, playerA, bear, belenon);
+        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerB, "Word of Seizing", belenon);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+
+        // new controller can't protect a Siege (704.5y), so it chooses its opponent
+        assertBattle(playerB, playerA, belenon);
+        // battle left combat, so attacker deals no damage to it
+        assertCounterCount(belenon, CounterType.DEFENSE, 5);
+        assertLife(playerB, 20);
+    }
+
+    @Test
+    public void test_DefenseZero_SiegeStaysWithWaitingTrigger() {
+        // 122.1g, 704.5v - a Siege with 0 defense stays while it's the source of a triggered ability on the stack
+        addCard(Zone.HAND, playerA, "Invasion of Kaladesh"); // {U}{R}, Siege with defense 4
+        addCard(Zone.HAND, playerA, "Explosive Impact"); // {5}{R}, 5 damage to any target
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 2 + 6);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Invasion of Kaladesh");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Explosive Impact", "Invasion of Kaladesh");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA, true);
+        // defeated trigger is on the stack now
+        checkStackSize("defeated trigger on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 1);
+        checkPermanentCount("siege stays before trigger resolved", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Invasion of Kaladesh", 1);
+        setChoice(playerA, true); // yes to cast it transformed
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Invasion of Kaladesh", 0);
+        assertPermanentCount(playerA, "Aetherwing, Golden-Scale Flagship", 1);
+        assertPermanentCount(playerA, "Thopter Token", 1);
+    }
 }
