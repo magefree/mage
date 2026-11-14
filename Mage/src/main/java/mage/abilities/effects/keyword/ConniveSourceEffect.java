@@ -68,8 +68,8 @@ public class ConniveSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // 701.47c If a permanent changes zones before an effect causes it to connive,
-        // its last known information is used to determine which object connived and who controlled it.
+        // 701.50b If a permanent is no longer on the battlefield as an effect instructs it to connive, its last known
+        // information is used to determine which object connived and who controlled it.
         Permanent permanent = source.getSourcePermanentOrLKI(game);
         boolean connived = connive(permanent, 1, source, game);
         if (ability != null && connived) {

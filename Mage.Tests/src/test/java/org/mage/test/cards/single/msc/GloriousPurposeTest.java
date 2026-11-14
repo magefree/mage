@@ -95,6 +95,35 @@ public class GloriousPurposeTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_Connive_NoLongerCreature_NoTrigger() {
+        skipInitShuffling();
+        addCard(Zone.BATTLEFIELD, playerA, purpose);
+        //
+        addCard(Zone.HAND, playerA, "Echo Inspector"); // {3}{U}, 2/3, connives on enter
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.HAND, playerA, "Grizzly Bears"); // nonland card to discard
+        addCard(Zone.LIBRARY, playerA, "Island"); // card to draw
+        //
+        addCard(Zone.HAND, playerA, "Imprisoned in the Moon"); // {2}{U}, enchanted permanent is a colorless land
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Leyline of Anticipation"); // you may cast spells as though they had flash
+
+        // turn Echo Inspector into a land in response to its connive trigger
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Echo Inspector");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Imprisoned in the Moon", "Echo Inspector");
+        setChoice(playerA, "Grizzly Bears"); // connive discard
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        // it's a land, not a creature, when it connives
+        assertGraveyardCount(playerA, "Grizzly Bears", 1);
+        assertCounterCount(playerA, purpose, CounterType.PLAN, 0);
+    }
+
+    @Test
     public void test_Connive_CreatureLeftBattlefield_StillTriggers() {
         skipInitShuffling();
         addCard(Zone.BATTLEFIELD, playerA, purpose);
