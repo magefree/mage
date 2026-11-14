@@ -8,6 +8,7 @@ import mage.abilities.dynamicvalue.common.AttackedThisTurnOpponentsCount;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -35,7 +36,7 @@ public final class MartokHeroOfTheEmpire extends CardImpl {
             new AddCountersTargetEffect(CounterType.P1P1.createInstance())
                 .setText("put a +1/+1 counter on each of up to X target creatures you control, "
                     + "where X is the number of opponents you attacked this turn"), 1
-        ).withFlavorWord("Battlefront").addHint(AttackedThisTurnOpponentsCount.getHint());
+        ).setAbilityWord(AbilityWord.BATTLEFRONT).addHint(AttackedThisTurnOpponentsCount.getHint());
         ability.addTarget(new TargetControlledCreaturePermanent(0, 1));
         ability.setTargetAdjuster(new TargetsCountAdjuster(AttackedThisTurnOpponentsCount.instance));
         this.addAbility(ability, new PlayersAttackedThisTurnWatcher());

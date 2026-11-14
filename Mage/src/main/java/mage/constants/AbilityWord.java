@@ -11,6 +11,7 @@ public enum AbilityWord {
     ADAMANT("Adamant"),
     ALLIANCE("Alliance"),
     BATTALION("Battalion"),
+    BATTLEFRONT("Battlefront"),
     BLOODRUSH("Bloodrush"),
     CELEBRATION("Celebration"),
     CHANNEL("Channel"),
