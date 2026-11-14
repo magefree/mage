@@ -57,7 +57,7 @@ public class ExileAdventureSpellEffect extends OneShotEffect implements MageSing
                     AdventureSpellCard adventureSpellCard = (AdventureSpellCard) spellCard;
                     Card parentCard = adventureSpellCard.getParentCard();
                     if (controller.moveCardsToExile(parentCard, source, game, true, exileId, "On an Adventure from " + controller.getName())) {
-                        ContinuousEffect effect = new AdventureCastFromExileEffect();
+                        ContinuousEffect effect = new AdventureCastFromExileEffect(adventureSpellCard.getParentCardReminderText());
                         effect.setTargetPointer(new FixedTarget(parentCard, game));
                         game.addEffect(effect, source);
                     }
@@ -71,13 +71,14 @@ public class ExileAdventureSpellEffect extends OneShotEffect implements MageSing
 
 class AdventureCastFromExileEffect extends AsThoughEffectImpl {
 
-    public AdventureCastFromExileEffect() {
+    public AdventureCastFromExileEffect(String reminderText) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        staticText = "Then exile this card. You may cast the creature later from exile.";
+        staticText = reminderText;
     }
 
     protected AdventureCastFromExileEffect(final AdventureCastFromExileEffect effect) {
         super(effect);
+        this.staticText = effect.staticText;
     }
 
     @Override

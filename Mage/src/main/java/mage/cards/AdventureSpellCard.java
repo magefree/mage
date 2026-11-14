@@ -24,7 +24,9 @@ public class AdventureSpellCard extends CardImpl implements SpellOptionCard {
         super(ownerId, setInfo, cardTypes, costs, SpellAbilityType.ADVENTURE_SPELL);
         this.subtype.add(SubType.ADVENTURE);
 
-        AdventureCardSpellAbility newSpellAbility = new AdventureCardSpellAbility(getSpellAbility(), adventureName, cardTypes, costs);
+        AdventureCardSpellAbility newSpellAbility = new AdventureCardSpellAbility(
+            getSpellAbility(), adventureName, cardTypes, costs, getReminderText(adventureCardParent)
+        );
         this.replaceSpellAbility(newSpellAbility);
         spellAbility = newSpellAbility;
 
@@ -94,6 +96,28 @@ public class AdventureSpellCard extends CardImpl implements SpellOptionCard {
         return this.adventureCardParent;
     }
 
+    public String getParentCardReminderText() {
+        return getReminderText(adventureCardParent);
+    }
+
+    private static String getReminderText(Card card) {
+        List<CardType> types = card.getCardTypeForDeckbuilding();
+        String verb = "cast";
+        String cardType = "card";
+        if (types.contains(CardType.LAND)) {
+            verb = "play";
+            cardType = "land";
+        } else if (types.contains(CardType.ARTIFACT)) {
+            cardType = "artifact";
+        } else if (types.contains(CardType.ENCHANTMENT)) {
+            cardType = "enchantment";
+        }
+        else if (types.contains(CardType.CREATURE)) {
+            cardType = "creature";
+        }
+        return " <i>(Then exile this card. You may " + verb + " the " + cardType + " later from exile.)</i>";
+    }
+
     @Override
     public String getIdName() {
         // id must send to main card (popup card hint in game logs)
@@ -110,9 +134,8 @@ class AdventureCardSpellAbility extends SpellOptionCardSpellAbility {
 
     private boolean finalized = false;
 
-    public AdventureCardSpellAbility(final SpellAbility baseSpellAbility, String adventureName, CardType[] cardTypes, String costs) {
-        super(baseSpellAbility, "Adventure", adventureName, cardTypes, costs,
-                " <i>(Then exile this card. You may cast the creature later from exile.)</i>");
+    public AdventureCardSpellAbility(final SpellAbility baseSpellAbility, String adventureName, CardType[] cardTypes, String costs, String reminderText) {
+        super(baseSpellAbility, "Adventure", adventureName, cardTypes, costs, reminderText);
     }
 
     // The exile effect needs to be added last.
