@@ -84,8 +84,8 @@ class PuppetMasterEffect extends OneShotEffect {
         if (game.getState().getZone(card.getId()) != Zone.HAND) {
             return false;
         }
-        card = game.getCard(source.getSourceId());
-        if (card == null || card.getZoneChangeCounter(game) != source.getStackMomentSourceZCC() + 1) {
+        card = DiesAttachedTriggeredAbility.getAttachmentCardInGraveyard(game, source);
+        if (card == null) {
             return false;
         }
         Cost cost = new ManaCostsImpl<>("{U}{U}{U}");

@@ -87,14 +87,9 @@ class JourneyToEternityReturnTransformedSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
+        Card card = DiesAttachedTriggeredAbility.getAttachmentCardInGraveyard(game, source);
         Player controller = game.getPlayer(source.getControllerId());
         if (card != null && controller != null) {
-            Zone zone = game.getState().getZone(card.getId());
-            // cards needs to be in public non battlefield zone
-            if (zone == Zone.BATTLEFIELD || !zone.isPublicZone()) {
-                return true;
-            }
             game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId() + card.getZoneChangeCounter(game), Boolean.TRUE);
             controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, false, null);
         }

@@ -80,11 +80,8 @@ class InfectiousRageReattachEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
 
         Player controller = game.getPlayer(source.getControllerId());
-        Card auraCard = game.getCard(source.getSourceId());
+        Card auraCard = DiesAttachedTriggeredAbility.getAttachmentCardInGraveyard(game, source);
         if (controller == null || auraCard == null) {
-            return false;
-        }
-        if (source.getStackMomentSourceZCC() != auraCard.getZoneChangeCounter(game)) {
             return false;
         }
 

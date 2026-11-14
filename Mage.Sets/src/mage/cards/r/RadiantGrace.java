@@ -105,12 +105,11 @@ class RadiantGraceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(source.getFirstTarget());
-        if (controller == null || player == null
-                || game.getState().getZone(source.getSourceId()) != Zone.GRAVEYARD) {
+        if (controller == null || player == null) {
             return false;
         }
 
-        DoubleFacedCardHalf card = (DoubleFacedCardHalf) game.getCard(source.getSourceId());
+        DoubleFacedCardHalf card = (DoubleFacedCardHalf) DiesAttachedTriggeredAbility.getAttachmentCardInGraveyard(game, source);
         if (card == null) {
             return false;
         }

@@ -110,7 +110,7 @@ class NecroticPlagueEffect extends OneShotEffect {
         if (attachedTo != null) {
             Player creatureController = game.getPlayer(attachedTo.getControllerId());
             if (creatureController != null) {
-                Card sourceEnchantmentCard = game.getCard(source.getSourceId());
+                Card sourceEnchantmentCard = DiesAttachedTriggeredAbility.getAttachmentCardInGraveyard(game, source);
                 Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                 if (sourceEnchantmentCard != null && creature != null) {
                     AttachEffect.setAttachTo(game, sourceEnchantmentCard.getId(), creature);

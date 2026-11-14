@@ -82,4 +82,30 @@ public class NecroticPlagueTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Sejiri Merfolk", 1);
     }
 
+    /**
+     * Exiled from the graveyard in response, Necrotic Plague stays in exile.
+     */
+    @Test
+    public void testExiledFromGraveyardInResponse() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+        addCard(Zone.HAND, playerA, "Necrotic Plague");
+        addCard(Zone.HAND, playerA, "Coffin Purge"); // {B}: Exile target card from a graveyard.
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        addCustomEffect_TargetDestroy(playerA);
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Necrotic Plague", "Grizzly Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "target destroy", "Grizzly Bears");
+        addTarget(playerB, "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Coffin Purge", "Necrotic Plague", "When enchanted creature dies");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertExileCount(playerA, "Necrotic Plague", 1);
+        assertAttachedTo(playerA, "Necrotic Plague", "Silvercoat Lion", false);
+    }
+
 }
