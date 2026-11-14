@@ -47,7 +47,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 192, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Signet", 193, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Signet", 194, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Archnemesis", 74, Rarity.RARE, mage.cards.a.Archnemesis.class));
+        cards.add(new SetCardInfo("Archnemesis", 391, Rarity.RARE, mage.cards.a.Archnemesis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Archnemesis", 74, Rarity.RARE, mage.cards.a.Archnemesis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Armed Assailant", 647, Rarity.COMMON, mage.cards.a.ArmedAssailant.class));
         cards.add(new SetCardInfo("Asgardian Inspiration", 678, Rarity.UNCOMMON, mage.cards.a.AsgardianInspiration.class));
         cards.add(new SetCardInfo("Astonishing Spider-Man", 740, Rarity.RARE, mage.cards.a.AstonishingSpiderMan.class));
