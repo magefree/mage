@@ -33,6 +33,7 @@ public final class StoreChampionships extends ExpansionSet {
         cards.add(new SetCardInfo("Charming Scoundrel", 37, Rarity.RARE, mage.cards.c.CharmingScoundrel.class));
         cards.add(new SetCardInfo("Chromatic Sphere", 30, Rarity.RARE, mage.cards.c.ChromaticSphere.class));
         cards.add(new SetCardInfo("City of Brass", 41, Rarity.RARE, mage.cards.c.CityOfBrass.class));
+        cards.add(new SetCardInfo("Cosmogrand Zenith", 56, Rarity.RARE, mage.cards.c.CosmograndZenith.class, FULL_ART));
         cards.add(new SetCardInfo("Dark Confidant", 3, Rarity.RARE, mage.cards.d.DarkConfidant.class, FULL_ART));
         cards.add(new SetCardInfo("Dark Petition", 19, Rarity.RARE, mage.cards.d.DarkPetition.class));
         cards.add(new SetCardInfo("Dauthi Voidwalker", "23e", Rarity.RARE, mage.cards.d.DauthiVoidwalker.class, FULL_ART));
@@ -56,8 +57,10 @@ public final class StoreChampionships extends ExpansionSet {
         cards.add(new SetCardInfo("Monastery Swiftspear", 27, Rarity.RARE, mage.cards.m.MonasterySwiftspear.class));
         cards.add(new SetCardInfo("Moonshaker Cavalry", 17, Rarity.MYTHIC, mage.cards.m.MoonshakerCavalry.class, FULL_ART));
         cards.add(new SetCardInfo("Mortify", 21, Rarity.RARE, mage.cards.m.Mortify.class));
+        cards.add(new SetCardInfo("Novice Inspector", 54, Rarity.RARE, mage.cards.n.NoviceInspector.class));
         cards.add(new SetCardInfo("Ocelot Pride", 47, Rarity.RARE, mage.cards.o.OcelotPride.class, FULL_ART));
         cards.add(new SetCardInfo("Omnath, Locus of Creation", 6, Rarity.MYTHIC, mage.cards.o.OmnathLocusOfCreation.class, FULL_ART));
+        cards.add(new SetCardInfo("Phelia, Exuberant Shepherd", 55, Rarity.RARE, mage.cards.p.PheliaExuberantShepherd.class));
         cards.add(new SetCardInfo("Preacher of the Schism", 34, Rarity.RARE, mage.cards.p.PreacherOfTheSchism.class));
         cards.add(new SetCardInfo("Preordain", 39, Rarity.RARE, mage.cards.p.Preordain.class));
         cards.add(new SetCardInfo("Psychic Frog", 49, Rarity.RARE, mage.cards.p.PsychicFrog.class));
