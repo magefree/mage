@@ -2,7 +2,6 @@ package mage.client.dialog;
 
 import mage.client.MageFrame;
 import mage.client.util.gui.FastSearchUtil;
-import mage.client.util.gui.MageDialogState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,8 +17,6 @@ import java.util.Map;
  */
 public class DownloadImagesDialog extends MageDialog {
 
-    private final Dimension sizeModeMessageOnly;
-    private final Dimension sizeModeMessageAndControls;
     private final Map<Component, Boolean> actionsControlStates = new HashMap<>();
     private DownloadImagesCallback callback = null;
 
@@ -30,13 +27,24 @@ public class DownloadImagesDialog extends MageDialog {
         // fix for panelInfo (it's resets aligmentX after netbeans designer opened)
         panelInfo.setAlignmentX(CENTER_ALIGNMENT);
 
-        // save default sizes (WARNING, you must sync it manually with designer sizes)
-        //
-        this.sizeModeMessageAndControls = new Dimension(716, 329); // dialog -> properties -> code tab -> designer size
-        //
-        this.sizeModeMessageOnly = new Dimension(this.sizeModeMessageAndControls.getSize());
-        sizeModeMessageOnly.height = 25 * 4;
-        sizeModeMessageOnly.width = sizeModeMessageOnly.width / 2;
+        // Keep each label above its control; FlowLayout cannot measure wrapped rows when packing.
+        for (JPanel column : new JPanel[]{panelSourceLeft, panelSourceCenter, panelSourceRight, panelModeInner}) {
+            column.setLayout(new BoxLayout(column, BoxLayout.Y_AXIS));
+            column.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+            for (Component control : column.getComponents()) {
+                ((JComponent) control).setAlignmentX(LEFT_ALIGNMENT);
+            }
+        }
+        comboSource.setPrototypeDisplayValue("Scryfall images (English)");
+        comboSets.setPrototypeDisplayValue("All sets with missing images");
+        comboLanguage.setPrototypeDisplayValue("English");
+        comboDownloadThreads.setPrototypeDisplayValue("100");
+
+        setTabTitle(0, "Standard download", "/buttons/card_panel.png");
+        setTabTitle(1, "Custom download", "/buttons/list_panel.png");
+        // TODO: add manual mode as tab
+        tabsList.getTabComponentAt(1).setEnabled(false);
+        tabsList.setEnabledAt(1, false);
 
         // Close the dialog when Esc is pressed
         String cancelName = "cancel";
@@ -48,10 +56,6 @@ public class DownloadImagesDialog extends MageDialog {
                 onCancel();
             }
         });
-    }
-
-    public void setWindowSize(int width, int heigth) {
-        this.setSize(new Dimension(width, heigth));
     }
 
     public interface DownloadImagesCallback {
@@ -69,13 +73,13 @@ public class DownloadImagesDialog extends MageDialog {
     }
 
     public void setGlobalInfo(String info) {
-        // workaround to keep auto-sizeable and centered text
-        Dimension newSize = new Dimension(Integer.MAX_VALUE, this.labelGlobal.getPreferredSize().height);
-        this.labelGlobal.setPreferredSize(newSize);
-        this.labelGlobal.setMaximumSize(newSize);
-        this.labelGlobal.setHorizontalAlignment(SwingConstants.CENTER);
-
-        this.labelGlobal.setText(info);
+        if (!SwingUtilities.isEventDispatchThread()) {
+            SwingUtilities.invokeLater(() -> setGlobalInfo(info));
+            return;
+        }
+        labelGlobal.setText(info);
+        pack();
+        makeWindowCentered();
     }
 
     public String getGlobalInfo() {
@@ -83,7 +87,13 @@ public class DownloadImagesDialog extends MageDialog {
     }
 
     public void setCurrentInfo(String info) {
-        this.labelInfo.setText(info);
+        if (!SwingUtilities.isEventDispatchThread()) {
+            SwingUtilities.invokeLater(() -> setCurrentInfo(info));
+            return;
+        }
+        labelInfo.setText(info);
+        pack();
+        makeWindowCentered();
     }
 
     public JComboBox getSourcesCombo() {
@@ -161,6 +171,10 @@ public class DownloadImagesDialog extends MageDialog {
     }
 
     public void showDownloadControls(boolean needToShow) {
+        if (!SwingUtilities.isEventDispatchThread()) {
+            SwingUtilities.invokeLater(() -> showDownloadControls(needToShow));
+            return;
+        }
         // 2 modes:
         //  - only message;
         //  - message + download controls and buttons        
@@ -169,24 +183,8 @@ public class DownloadImagesDialog extends MageDialog {
         this.tabsList.setVisible(needToShow);
         this.panelCommands.setVisible(needToShow);
 
-        // auto-size form
-        if (needToShow) {
-            this.setWindowSize(this.sizeModeMessageAndControls.width, this.sizeModeMessageAndControls.height);
-        } else {
-            this.setWindowSize(this.sizeModeMessageOnly.width, this.sizeModeMessageOnly.height);
-        }
+        pack();
         this.makeWindowCentered();
-        //this.setLocationRelativeTo(null); // center screen //FIX
-
-        // icons on tabs left side
-        setTabTitle(0, "Standard download", "/buttons/card_panel.png");
-        setTabTitle(1, "Custom download", "/buttons/list_panel.png");
-
-        // TODO: add manual mode as tab
-        this.tabsList.getTabComponentAt(1).setEnabled(false);
-        this.tabsList.setEnabledAt(1, false);
-
-        this.invalidate();
     }
 
     /**
@@ -241,7 +239,6 @@ public class DownloadImagesDialog extends MageDialog {
         buttonCancel = new javax.swing.JButton();
 
         setTitle("Downloading images");
-        setPreferredSize(new java.awt.Dimension(600, 400));
         getContentPane().setLayout(new java.awt.BorderLayout());
 
         panelGlobal.setLayout(new javax.swing.BoxLayout(panelGlobal, javax.swing.BoxLayout.Y_AXIS));
@@ -253,7 +250,6 @@ public class DownloadImagesDialog extends MageDialog {
 
         buttonStop.setText("Cancel");
         buttonStop.setAlignmentX(0.5F);
-        buttonStop.setPreferredSize(new java.awt.Dimension(65, 30));
         buttonStop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonStopActionPerformed(evt);
@@ -263,8 +259,6 @@ public class DownloadImagesDialog extends MageDialog {
         panelGlobal.add(fillerglobal2);
 
         getContentPane().add(panelGlobal, java.awt.BorderLayout.NORTH);
-
-        tabsList.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
 
         tabMain.setLayout(new javax.swing.BoxLayout(tabMain, javax.swing.BoxLayout.Y_AXIS));
 
@@ -278,12 +272,8 @@ public class DownloadImagesDialog extends MageDialog {
 
         tabMain.add(panelInfo);
 
-        panelSource.setMaximumSize(new java.awt.Dimension(65536, 55));
-        panelSource.setMinimumSize(new java.awt.Dimension(352, 55));
-        panelSource.setPreferredSize(new java.awt.Dimension(593, 55));
         panelSource.setLayout(new javax.swing.BoxLayout(panelSource, javax.swing.BoxLayout.X_AXIS));
 
-        panelSourceLeft.setMinimumSize(new java.awt.Dimension(430, 30));
         panelSourceLeft.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
 
         labelSource.setText("Images source to download:");
@@ -291,16 +281,11 @@ public class DownloadImagesDialog extends MageDialog {
 
         comboSource.setMaximumRowCount(15);
         comboSource.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
-        comboSource.setMinimumSize(new java.awt.Dimension(300, 20));
-        comboSource.setPreferredSize(new java.awt.Dimension(400, 25));
         panelSourceLeft.add(comboSource);
 
         panelSource.add(panelSourceLeft);
 
         panelSourceCenter.setAlignmentX(0.0F);
-        panelSourceCenter.setMaximumSize(new java.awt.Dimension(130, 32767));
-        panelSourceCenter.setMinimumSize(new java.awt.Dimension(130, 10));
-        panelSourceCenter.setPreferredSize(new java.awt.Dimension(130, 100));
         panelSourceCenter.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
 
         labelLanguage.setText("Language:");
@@ -308,13 +293,10 @@ public class DownloadImagesDialog extends MageDialog {
 
         comboLanguage.setMaximumRowCount(15);
         comboLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
-        comboLanguage.setPreferredSize(new java.awt.Dimension(110, 25));
         panelSourceCenter.add(comboLanguage);
 
         panelSource.add(panelSourceCenter);
 
-        panelSourceRight.setMinimumSize(new java.awt.Dimension(150, 30));
-        panelSourceRight.setPreferredSize(new java.awt.Dimension(150, 35));
         panelSourceRight.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
 
         labelDownloadThreads.setText("Download threads:");
@@ -322,19 +304,14 @@ public class DownloadImagesDialog extends MageDialog {
 
         comboDownloadThreads.setMaximumRowCount(15);
         comboDownloadThreads.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
-        comboDownloadThreads.setPreferredSize(new java.awt.Dimension(110, 25));
         panelSourceRight.add(comboDownloadThreads);
 
         panelSource.add(panelSourceRight);
 
         tabMain.add(panelSource);
 
-        panelMode.setMaximumSize(new java.awt.Dimension(32869, 55));
-        panelMode.setMinimumSize(new java.awt.Dimension(322, 55));
-        panelMode.setPreferredSize(new java.awt.Dimension(100, 55));
         panelMode.setLayout(new javax.swing.BoxLayout(panelMode, javax.swing.BoxLayout.LINE_AXIS));
 
-        panelModeInner.setMinimumSize(new java.awt.Dimension(430, 43));
         panelModeInner.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         labelMode.setText("Sets to download:");
@@ -345,14 +322,12 @@ public class DownloadImagesDialog extends MageDialog {
 
         comboSets.setMaximumRowCount(15);
         comboSets.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
-        comboSets.setPreferredSize(new java.awt.Dimension(373, 25));
         panelModeSelect.add(comboSets);
         panelModeSelect.add(fillerMode1);
 
         buttonSearchSet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_24.png"))); // NOI18N
         buttonSearchSet.setToolTipText("Search set to download");
         buttonSearchSet.setAlignmentX(1.0F);
-        buttonSearchSet.setPreferredSize(new java.awt.Dimension(25, 25));
         buttonSearchSet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSearchSetActionPerformed(evt);
@@ -365,9 +340,6 @@ public class DownloadImagesDialog extends MageDialog {
         panelMode.add(panelModeInner);
 
         panelRedownload.setAlignmentX(0.0F);
-        panelRedownload.setMaximumSize(new java.awt.Dimension(130, 32767));
-        panelRedownload.setMinimumSize(new java.awt.Dimension(280, 30));
-        panelRedownload.setPreferredSize(new java.awt.Dimension(280, 100));
         panelRedownload.setLayout(new java.awt.BorderLayout());
 
         checkboxRedownload.setText("<html>Re-download all selected images");
@@ -380,14 +352,10 @@ public class DownloadImagesDialog extends MageDialog {
         tabMain.add(panelMode);
         tabMain.add(fillerMain1);
 
-        panelProgress.setMaximumSize(new java.awt.Dimension(32777, 30));
-        panelProgress.setMinimumSize(new java.awt.Dimension(20, 30));
-        panelProgress.setPreferredSize(new java.awt.Dimension(564, 30));
         panelProgress.setLayout(new javax.swing.BoxLayout(panelProgress, javax.swing.BoxLayout.X_AXIS));
         panelProgress.add(fillerProgress1);
 
         progress.setValue(75);
-        progress.setMaximumSize(new java.awt.Dimension(32767, 25));
         progress.setString("123 of 12313 (120 cards/546 tokens) image downloads finished! Please wait! [123 Mb]");
         progress.setStringPainted(true);
         panelProgress.add(progress);
@@ -407,12 +375,10 @@ public class DownloadImagesDialog extends MageDialog {
         panelCommands.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.TRAILING));
 
         buttonOK.setText("Start download");
-        buttonOK.setPreferredSize(new java.awt.Dimension(120, 30));
         panelCommands.add(buttonOK);
         getRootPane().setDefaultButton(buttonOK);
 
         buttonCancel.setText("Cancel");
-        buttonCancel.setPreferredSize(new java.awt.Dimension(80, 30));
         panelCommands.add(buttonCancel);
 
         getContentPane().add(panelCommands, java.awt.BorderLayout.SOUTH);
