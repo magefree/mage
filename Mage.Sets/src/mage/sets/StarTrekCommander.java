@@ -210,6 +210,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hinterland Harbor", 537, Rarity.RARE, mage.cards.h.HinterlandHarbor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Howling Mine", 345, Rarity.RARE, mage.cards.h.HowlingMine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Howling Mine", 494, Rarity.RARE, mage.cards.h.HowlingMine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hugh, First of Many", 94, Rarity.RARE, mage.cards.h.HughFirstOfMany.class));
         cards.add(new SetCardInfo("I.K.S. Negh'Var, Imperial Flagship", 113, Rarity.RARE, mage.cards.i.IKSNeghVarImperialFlagship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("I.K.S. Negh'Var, Imperial Flagship", 346, Rarity.RARE, mage.cards.i.IKSNeghVarImperialFlagship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Imperial Hullbreachers", 18, Rarity.RARE, mage.cards.i.ImperialHullbreachers.class, NON_FULL_USE_VARIOUS));
