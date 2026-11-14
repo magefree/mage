@@ -35,4 +35,24 @@ public class AbsorbingManTest extends CardTestPlayerBase {
         // Check Power and Toughness
         assertPowerToughness(playerA, "Absorbing Man", 4, 4);
     }
+
+    @Test
+    public void test_BlinkInResponse_NoCopy() {
+        addCard(Zone.BATTLEFIELD, playerA, "Absorbing Man");
+        addCard(Zone.BATTLEFIELD, playerA, "Impostor Syndrome");
+        //
+        addCard(Zone.HAND, playerA, "Cloudshift"); // {W}, exile target creature you control, then return it
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+
+        // 400.7 the returned Absorbing Man is a new object, the old trigger can't make it a copy
+        addTarget(playerA, "Impostor Syndrome"); // enchantment to copy
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloudshift", "Absorbing Man", "becomes a copy");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Cloudshift", 1);
+        assertType("Absorbing Man", CardType.ENCHANTMENT, false);
+    }
 }
