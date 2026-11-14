@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class ElrondMoonReader extends CardImpl {
 
-    public static final FilterControlledPermanent filter = new FilterControlledPermanent("other nonland permanents you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("other target nonland permanents you control");
 
     static {
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
@@ -42,14 +42,10 @@ public final class ElrondMoonReader extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever you activate an ability of a creature,
-        // draw a card.
-        // This ability triggers only once each turn.
+        // Whenever you activate an ability of a creature, draw a card. This ability triggers only once each turn.
         this.addAbility(new ElrondMoonReaderTriggeredAbility().setTriggersLimitEachTurn(1));
 
-        // {5}{U}{U}: Exile up to two other target nonland permanents you control.
-        // Return those cards to the battlefield under their owner’s control
-        // at the beginning of the next end step.
+        // {5}{U}{U}: Exile up to two other target nonland permanents you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.
         Ability flickerAbility = new SimpleActivatedAbility(new ExileReturnBattlefieldNextEndStepTargetEffect().withTextThatCard(true),
                 new ManaCostsImpl<>("{5}{U}{U}"));
         flickerAbility.addTarget(new TargetPermanent(0, 2, filter));
