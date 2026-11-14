@@ -29,6 +29,25 @@ public class GideonJuraAndRowanKenrithNextTurnTest extends CardTestPlayerBase {
         execute();
     }
 
+    /**
+     * The Gideon that comes back from the blink is a new object (400.7), so nothing has to attack it.
+     */
+    @Test
+    public void test_GideonJuraBlinkedInResponse() {
+        addCard(Zone.BATTLEFIELD, playerA, "Gideon Jura");
+        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 1); // 2/2
+        addCustomEffect_TargetBlink(playerA);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2:", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "target blink", "Gideon Jura", "+2:");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertCounterCount(playerA, "Gideon Jura", CounterType.LOYALTY, 6);
+    }
+
     @Test
     public void test_SingleOpponentMustAttackRowanKenrith() {
         // +2: During target player's next turn, each creature that player controls attacks if able.
