@@ -22,6 +22,7 @@ public final class DoomsTimePlatform extends CardImpl {
     public DoomsTimePlatform(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
+        // Whenever you attack, exile target nonland card from your graveyard with two time counters on it. If it doesn't have suspend, it gains suspend.
         Ability ability = new AttacksWithCreaturesTriggeredAbility(new DoomsTimePlatformEffect(), 1);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_NON_LAND));
         this.addAbility(ability);
