@@ -2,7 +2,9 @@ package mage.abilities.effects;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.constants.Outcome;
+import mage.game.Game;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.CardUtil;
 
@@ -203,5 +205,31 @@ public class Effects extends ArrayList<Effect> {
         for (Effect effect : this) {
             effect.setValue(key, value);
         }
+    }
+
+    /**
+     * The effect loop of resolving an ability, also used for effects nested inside another effect: one-shot
+     * effects happen, continuous effects begin, and each is processed before the next. No targets, fizzling or
+     * resolution events -- AbilityImpl.resolve handles those around it.
+     *
+     * @return false if any one-shot effect returned false
+     */
+    public boolean resolve(Game game, Ability source) {
+        boolean result = true;
+        for (Effect effect : this) {
+            if (game.inCheckPlayableState() && !(effect instanceof ManaEffect)) {
+                continue; // see GameEvent.TAPPED_FOR_MANA
+            }
+            if (effect instanceof OneShotEffect) {
+                result &= effect.apply(game, source);
+            } else {
+                game.addEffect((ContinuousEffect) effect, source);
+            }
+            // fire the events held back while several objects moved at once (Valakut, the Molten Pinnacle), and
+            // apply effects so static abilities see the new zones before the next effect
+            // (DryadMilitantTest.testDiesByDestroy)
+            game.processAction();
+        }
+        return result;
     }
 }

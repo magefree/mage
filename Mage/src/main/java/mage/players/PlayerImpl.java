@@ -5150,6 +5150,14 @@ public abstract class PlayerImpl implements Player, Serializable {
                     infoList.add(new ZoneChangeInfo.Battlefield(event, faceDown, tapped, source));
                 }
                 infoList = ZonesHandler.moveCards(infoList, source, game);
+                // entering uses up enter-with-counters; a card that didn't enter must not keep them for its next entry
+                for (Card card : cards) {
+                    game.setEnterWithCounters(card.getId(), null);
+                    if (card instanceof MeldCard) {
+                        game.setEnterWithCounters(((MeldCard) card).getTopHalfCard().getId(), null);
+                        game.setEnterWithCounters(((MeldCard) card).getBottomHalfCard().getId(), null);
+                    }
+                }
                 for (ZoneChangeInfo info : infoList) {
                     Permanent permanent = game.getPermanent(info.event.getTargetId());
                     if (permanent != null) {

@@ -197,12 +197,12 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
                         // 514.2
                         break;
                     case UntilSourceLeavesBattlefield:
-                        if (hasOwnerLeftGame || game.getState().getZone(ability.getSourceId()) != Zone.BATTLEFIELD) {
+                        if (hasOwnerLeftGame || getSourcePermanentStillOnBattlefield(ability, game) == null) {
                             it.remove();
                         }
                         break;
                     case WhileControlled:
-                        Permanent permanent = ability.getSourcePermanentIfItStillExists(game);
+                        Permanent permanent = getSourcePermanentStillOnBattlefield(ability, game);
                         if (hasOwnerLeftGame || permanent == null || !permanent.isControlledBy(ability.getControllerId())) {
                             it.remove();
                         }
@@ -213,6 +213,17 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
             }
         }
         return set.isEmpty();
+    }
+
+    /**
+     * 400.7: a source back from another zone is a new object. The zone check catches a token that left: it keeps
+     * its counter, and getSourcePermanentIfItStillExists would find its last known information.
+     */
+    private static Permanent getSourcePermanentStillOnBattlefield(Ability ability, Game game) {
+        if (game.getState().getZone(ability.getSourceId()) != Zone.BATTLEFIELD) {
+            return null;
+        }
+        return ability.getSourcePermanentIfItStillExists(game);
     }
 
     /**

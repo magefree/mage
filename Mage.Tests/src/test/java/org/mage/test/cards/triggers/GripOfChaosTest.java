@@ -57,16 +57,17 @@ public class GripOfChaosTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Felidar Guardian", 1);
 
-        int zcc = 0;
+        // Grip of Chaos never moves, so it shows the zcc every seeded permanent started with
+        int zcc = -5 * getPermanent("Grip of Chaos").getZoneChangeCounter(currentGame);
         zcc += getPermanent("Mountain").getZoneChangeCounter(currentGame);
         zcc += getPermanent("Forest").getZoneChangeCounter(currentGame);
         zcc += getPermanent("Swamp").getZoneChangeCounter(currentGame);
         zcc += getPermanent("Plains").getZoneChangeCounter(currentGame);
         zcc += getPermanent("Panharmonicon").getZoneChangeCounter(currentGame);
-        // If both select the same permanent to exile, one spell fizzles so zcc == 7 otherwise 9
-        if (zcc != 7) {
-            Assert.assertEquals("Sum of zone change counter should be 9", 9, zcc);
-            // creates error if the random targets do select the same target twice zcc is 7 then the second trigger has an invalid target
+        // Each blink adds 2. If both select the same permanent to exile, one spell fizzles so zcc == 2 otherwise 4
+        if (zcc != 2) {
+            Assert.assertEquals("Sum of zone change counter changes should be 4", 4, zcc);
+            // creates error if the random targets do select the same target twice zcc is 2 then the second trigger has an invalid target
         }
     }
 

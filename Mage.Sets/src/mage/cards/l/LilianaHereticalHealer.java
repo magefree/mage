@@ -54,8 +54,8 @@ public final class LilianaHereticalHealer extends TransformingDoubleFacedCard {
 
         // Whenever another nontoken creature you control dies, exile Liliana Heretical Healer, then return her to the battlefield transformed under her owner's control. If you do, create a 2/2 black Zombie creature token.
         this.getLeftHalfCard().addAbility(new DiesCreatureTriggeredAbility(new ExileAndReturnSourceEffect(
-                PutCards.BATTLEFIELD_TRANSFORMED, Pronoun.SHE, false, new CreateTokenEffect(new ZombieToken())
-        ), false, filter));
+                PutCards.BATTLEFIELD_TRANSFORMED, Pronoun.SHE
+        ).withAdditionalEffect(new CreateTokenEffect(new ZombieToken()).concatBy("If you do,")), false, filter));
 
         // Liliana, Defiant Necromancer
         this.getRightHalfCard().setStartingLoyalty(3);

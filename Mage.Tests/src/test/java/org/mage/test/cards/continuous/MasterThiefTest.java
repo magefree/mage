@@ -105,4 +105,33 @@ public class MasterThiefTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Accorder's Shield", 1);
         assertPermanentCount(playerB, 1);
     }
+
+    /**
+     * A token copy's control ends the moment the token leaves, not once the stack is empty.
+     */
+    @Test
+    public void testMasterThief_TokenCopyLeaves() {
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Master Thief");
+        addCard(Zone.BATTLEFIELD, playerB, "Accorder's Shield");
+        addCard(Zone.HAND, playerA, "Cackling Counterpart"); // {1}{U}{U} instant: token copy of target creature you control
+        addCard(Zone.HAND, playerA, "Shock");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cackling Counterpart", "Master Thief");
+        addTarget(playerA, "Accorder's Shield"); // the token's enters trigger
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        checkPermanentCount("the token takes it", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Accorder's Shield", 1);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Master Thief[only copy]", "Shock");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA, true);
+        checkPermanentCount("token gone, Shock still on the stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Accorder's Shield", 0);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerB, "Accorder's Shield", 1);
+        assertLife(playerB, 20 - 2);
+    }
 }

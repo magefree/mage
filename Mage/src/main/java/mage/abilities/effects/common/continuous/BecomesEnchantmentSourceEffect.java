@@ -6,6 +6,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  * @author jeffwadsworth
@@ -30,7 +31,7 @@ public class BecomesEnchantmentSourceEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
+        affectedObjectList.add(new MageObjectReference(source.getSourceId(), CardUtil.getActualSourceObjectZoneChangeCounter(game, source), game));
     }
 
     @Override
