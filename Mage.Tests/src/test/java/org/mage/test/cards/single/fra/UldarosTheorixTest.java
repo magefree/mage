@@ -120,9 +120,10 @@ public class UldarosTheorixTest extends CardTestPlayerBase {
      */
     @Test
     public void test_PermanentCastThisWayIsAToken() {
+        // exactly the six lands of {3}{U}{B}{B}, so none of them is left for the bolt
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.HAND, playerA, "Mountain"); // played after the sphinx, so it can't be tapped for him
         addCard(Zone.HAND, playerA, "Uldaros Theorix");
         addCard(Zone.HAND, playerA, "Lightning Bolt"); // {R}, kills the 2/2 token
         addCard(Zone.GRAVEYARD, playerA, "Gray Ogre"); // creature, {2}{R}
@@ -131,12 +132,12 @@ public class UldarosTheorixTest extends CardTestPlayerBase {
         addTarget(playerA, "Gray Ogre"); // the only nonland card in the graveyard
         setChoice(playerA, true); // cast the copy of Gray Ogre for free
 
-        // on a later turn, so that the lands tapped for Uldaros Theorix can't leave the bolt without red mana
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt");
+        playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mountain");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt");
         addTarget(playerA, "Gray Ogre"); // the token on the battlefield
 
         setStrictChooseMode(true);
-        setStopAt(3, PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Gray Ogre", 0);
