@@ -767,6 +767,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ultron's Auxiliary", 669, Rarity.UNCOMMON, mage.cards.u.UltronsAuxiliary.class));
         cards.add(new SetCardInfo("Ultron the Annihilator", 668, Rarity.MYTHIC, mage.cards.u.UltronTheAnnihilator.class));
         cards.add(new SetCardInfo("Ultron, Machine Overlord", 507, Rarity.RARE, mage.cards.u.UltronMachineOverlord.class));
+        cards.add(new SetCardInfo("Ultron, Unlimited", 100, Rarity.RARE, mage.cards.u.UltronUnlimited.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ultron, Unlimited", 422, Rarity.RARE, mage.cards.u.UltronUnlimited.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Unclaimed Territory", 275, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));
         cards.add(new SetCardInfo("Undead Hand Ninja", 670, Rarity.UNCOMMON, mage.cards.u.UndeadHandNinja.class));
         cards.add(new SetCardInfo("Unlucky Witness", 812, Rarity.UNCOMMON, mage.cards.u.UnluckyWitness.class));
