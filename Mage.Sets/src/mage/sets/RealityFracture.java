@@ -420,6 +420,10 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Traxos, Scourge Eternal", 280, Rarity.UNCOMMON, mage.cards.t.TraxosScourgeEternal.class));
         cards.add(new SetCardInfo("Twinned Vision", 157, Rarity.COMMON, mage.cards.t.TwinnedVision.class));
         cards.add(new SetCardInfo("Twisted Fates", 158, Rarity.UNCOMMON, mage.cards.t.TwistedFates.class));
+        cards.add(new SetCardInfo("Uldaros Theorix", 159, Rarity.MYTHIC, mage.cards.u.UldarosTheorix.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Uldaros Theorix", 358, Rarity.MYTHIC, mage.cards.u.UldarosTheorix.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Uldaros Theorix", 411, Rarity.MYTHIC, mage.cards.u.UldarosTheorix.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Uldaros Theorix", 421, Rarity.MYTHIC, mage.cards.u.UldarosTheorix.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Undulating Witness", 45, Rarity.COMMON, mage.cards.u.UndulatingWitness.class));
         cards.add(new SetCardInfo("Unflinching Hortimancer", 23, Rarity.COMMON, mage.cards.u.UnflinchingHortimancer.class));
         cards.add(new SetCardInfo("Unsummon", 46, Rarity.COMMON, mage.cards.u.Unsummon.class));
