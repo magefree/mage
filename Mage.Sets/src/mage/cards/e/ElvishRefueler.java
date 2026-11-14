@@ -16,6 +16,7 @@ import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
 import mage.constants.*;
 import mage.abilities.keyword.ExhaustAbility;
+import mage.abilities.meta.ExhaustMetaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
@@ -98,7 +99,7 @@ class ElvishRefuelerWatcher extends Watcher {
             return;
         }
         StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
-        if (stackObject != null && stackObject.getStackAbility() instanceof ExhaustAbility) {
+        if (stackObject != null && stackObject.getStackAbility() instanceof ExhaustMetaAbility) {
             activatedExhaustAbilities.put(event.getPlayerId(), true);
         }
     }

@@ -3,13 +3,13 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.keyword.ExhaustAbility;
+import mage.abilities.mana.ExhaustManaAbility;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -45,7 +45,7 @@ public final class LootThePathfinder extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Exhaust -- {G}, {T}: Add three mana of any one color.
-        Ability abilityOne = new ExhaustAbility(new AddManaOfAnyColorEffect(3), new ManaCostsImpl<>("{G}"));
+        Ability abilityOne = new ExhaustManaAbility(new AddManaOfAnyColorEffect(3), new ManaCostsImpl<>("{G}"));
         abilityOne.addCost(new TapSourceCost());
         this.addAbility(abilityOne);
 

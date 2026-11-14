@@ -3,7 +3,7 @@ package mage.abilities.keyword;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
-import mage.constants.AsThoughEffectType;
+import mage.abilities.meta.ExhaustMetaAbility;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -11,7 +11,7 @@ import mage.game.Game;
 /**
  * @author TheElk801
  */
-public class ExhaustAbility extends ActivatedAbilityImpl {
+public class ExhaustAbility extends ActivatedAbilityImpl implements ExhaustMetaAbility {
 
     private final boolean withReminderText;
 
@@ -42,22 +42,11 @@ public class ExhaustAbility extends ActivatedAbilityImpl {
 
     @Override
     public boolean hasMoreActivationsThisTurn(Game game) {
-        ActivationInfo info = getActivationInfo(game);
-        if (info != null && info.totalActivations >= getMaxActivationsPerGame(game)) {
-            boolean canActivate = !game.getContinuousEffects()
-                    .asThough(sourceId, AsThoughEffectType.ALLOW_EXHAUST_PER_TURN, this, controllerId, game)
-                    .isEmpty();
-            if (canActivate) {
-                return true;
-            }
-        }
-        return super.hasMoreActivationsThisTurn(game);
+        return this.hasMoreExhaustActivationsThisTurn(game) || super.hasMoreActivationsThisTurn(game);
     }
 
     @Override
     public String getRule() {
-        return "Exhaust &mdash; " + super.getRule() +
-                (timing == TimingRule.SORCERY ? " Activate only as a sorcery." : "") +
-                (withReminderText ? " <i>(Activate each exhaust ability only once.)</i>" : "");
+        return this.getExhaustRule(super.getRule(), this.withReminderText);
     }
 }
