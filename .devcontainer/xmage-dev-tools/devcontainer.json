@@ -51,8 +51,13 @@
 	},
 	// run under custom user, not root
 	"remoteUser": "vscode",
-	// .m2 to keep maven download cache betweeb rebuilds
-	"postCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.m2",
+	// commands run in parallel, each one has own name and log in the creation output
+	"postCreateCommand": {
+		// .m2 to keep maven download cache between rebuilds
+		"maven-cache": "sudo chown -R vscode:vscode /home/vscode/.m2",
+		// perl modules for Utils/*.pl scripts (gen-card.pl, build-and-package.pl, cut.pl, etc)
+		"perl-modules": "sudo apt-get update && sudo apt-get install -y libtext-template-perl libarchive-zip-perl libarchive-extract-perl libwww-perl liblwp-protocol-https-perl"
+	},
 	"mounts": [
 		"source=maven-repo-cache,target=/home/vscode/.m2,type=volume"
 	],
