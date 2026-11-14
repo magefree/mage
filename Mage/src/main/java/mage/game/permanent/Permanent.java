@@ -294,6 +294,10 @@ public interface Permanent extends Card, Controllable {
 
     boolean legendRuleApplies();
 
+    void setZeroLoyaltyRuleApplies(boolean zeroLoyaltyRuleApplies);
+
+    boolean zeroLoyaltyRuleApplies();
+
     void resetControl();
 
     boolean changeControllerId(UUID controllerId, Game game, Ability source);

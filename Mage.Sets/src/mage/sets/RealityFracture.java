@@ -338,6 +338,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Samut, Hazoret's Champion", 311, Rarity.RARE, mage.cards.s.SamutHazoretsChampion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Samut, Tyrant of Naktamun", 220, Rarity.RARE, mage.cards.s.SamutTyrantOfNaktamun.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Samut, Tyrant of Naktamun", 302, Rarity.RARE, mage.cards.s.SamutTyrantOfNaktamun.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sanctum Lurker", 342, Rarity.RARE, mage.cards.s.SanctumLurker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sanctum Lurker", 64, Rarity.RARE, mage.cards.s.SanctumLurker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Screeching Soulbreaker", 65, Rarity.COMMON, mage.cards.s.ScreechingSoulbreaker.class));
         cards.add(new SetCardInfo("Semester Foreseer", 39, Rarity.COMMON, mage.cards.s.SemesterForeseer.class));
         cards.add(new SetCardInfo("Shatterwing Pegasus", 21, Rarity.COMMON, mage.cards.s.ShatterwingPegasus.class));
