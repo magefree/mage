@@ -4,6 +4,7 @@ import mage.client.MageFrame;
 import mage.client.components.MageDesktopIconifySupport;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
+import mage.client.util.gui.GuiLayoutUtil;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
@@ -32,6 +33,8 @@ public class MageDialog extends javax.swing.JInternalFrame {
     private static final Logger LOGGER = Logger.getLogger(MageDialog.class);
 
     private boolean modal = false; // warning, app can work in non-modal mode, so make sure result processing on callback
+    private JScrollPane desktopScroll;
+    private boolean contentInitialized;
 
     // GUI performance and bugs issues:
     // TODO: swing components should override paintComponent() instead paint()
@@ -40,6 +43,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
 
     public MageDialog() {
         initComponents();
+        contentInitialized = true;
 
         // paint calls optimization - no needs in transparent
         setOpaque(true);
@@ -75,7 +79,49 @@ public class MageDialog extends javax.swing.JInternalFrame {
     }
 
     public void changeGUISize() {
+        GuiLayoutUtil.prepare(getContentPane());
+        if (!isResizable()) {
+            pack();
+        }
+        revalidate();
+        repaint();
+    }
 
+    @Override
+    public void pack() {
+        // The base form packs before subclasses install their layouts.
+        if (!contentInitialized) {
+            super.pack();
+            return;
+        }
+        // Measure the original content again: a startup desktop or an earlier font can be smaller.
+        if (desktopScroll != null) {
+            if (getContentPane() == desktopScroll) {
+                Container content = (Container) desktopScroll.getViewport().getView();
+                desktopScroll.setViewportView(null);
+                setContentPane(content);
+            }
+            desktopScroll = null;
+        }
+        GuiLayoutUtil.prepare(getContentPane());
+        super.pack();
+        JDesktopPane desktop = getDesktopPane();
+        if (desktop == null) {
+            desktop = MageFrame.getDesktop();
+        }
+        if (desktop == null || desktop.getWidth() <= 0 || desktop.getHeight() <= 0) {
+            return;
+        }
+        if ((getWidth() > desktop.getWidth() || getHeight() > desktop.getHeight())
+                && !(getContentPane() instanceof JScrollPane)) {
+            Container content = getContentPane();
+            desktopScroll = new JScrollPane(content);
+            desktopScroll.getVerticalScrollBar().setUnitIncrement(24);
+            desktopScroll.getHorizontalScrollBar().setUnitIncrement(24);
+            setContentPane(desktopScroll);
+            super.pack();
+        }
+        setSize(Math.min(getWidth(), desktop.getWidth()), Math.min(getHeight(), desktop.getHeight()));
     }
 
     public static boolean isModalDialogActivated() {
@@ -132,6 +178,16 @@ public class MageDialog extends javax.swing.JInternalFrame {
 
     @Override
     public void setVisible(boolean value) {
+        if (value) {
+            GuiLayoutUtil.prepare(getContentPane());
+            JDesktopPane desktop = getDesktopPane();
+            if (desktop != null && desktop.getWidth() > 0 && desktop.getHeight() > 0
+                    && (desktopScroll != null || getWidth() > desktop.getWidth() || getHeight() > desktop.getHeight())) {
+                // Recheck content previously constrained by the desktop, retaining other requested sizes.
+                pack();
+                GuiDisplayUtil.keepComponentInsideScreen(getX(), getY(), this);
+            }
+        }
         super.setVisible(value);
 
         if (value) {
