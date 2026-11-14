@@ -44,7 +44,6 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -983,6 +982,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         // must change abilities controller too
         this.controllerId = newControllerId;
         this.getAbilities().setControllerId(newControllerId);
+
+        // and watchers
+        this.getAbilities().stream().flatMap(ability -> ability.getWatchers().stream().map(watcher -> watcher.getKey())).map(game.getState()::getWatcher).distinct().forEach(watcher -> watcher.setControllerId(newControllerId));
+
         return true;
     }
 
