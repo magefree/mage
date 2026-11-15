@@ -80,6 +80,37 @@ public class SanctumLurkerTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_ZeroLoyalty_CanActivateAbilitiesThatAddCounters() {
+        // If a planeswalker you control has zero loyalty counters while you control Sanctum Lurker, it will not be
+        // put into its owner's graveyard. You may still activate abilities of that planeswalker that cost [0] or that
+        // add counters to it as a cost, such as the one granted by Sanctum Lurker.
+        // (2026-08-21)
+
+        // Planeswalkers you control aren't put into their owners' graveyards for having 0 loyalty.
+        // Planeswalkers you control have "[+2]: This planeswalker deals 1 damage to each opponent and you gain 1 life."
+        addCard(Zone.BATTLEFIELD, playerA, "Sanctum Lurker"); // 3/2
+        addCard(Zone.BATTLEFIELD, playerA, "Liliana of the Veil"); // starting loyalty 3, +1 / -2 / -6
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.HAND, playerA, "Lightning Bolt"); // {R}
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // bear 2/2 for -2
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Liliana of the Veil"); // removes all 3 loyalty
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("can't remove counters", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "-2: Target player sacrifices", false);
+        checkPlayableAbility("can add counters", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Each player discards", true);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: This planeswalker deals 1 damage to each opponent");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertCounterCount(playerA, "Liliana of the Veil", CounterType.LOYALTY, 0 + 2);
+        assertLife(playerB, 20 - 1);
+        assertLife(playerA, 20 + 1);
+    }
+
+    @Test
     public void test_GrantedAbility_DamageEachOpponentAndGainLife() {
         // Planeswalkers you control have "[+2]: This planeswalker deals 1 damage to each opponent and you gain 1 life."
         addCard(Zone.BATTLEFIELD, playerA, "Sanctum Lurker"); // 3/2
