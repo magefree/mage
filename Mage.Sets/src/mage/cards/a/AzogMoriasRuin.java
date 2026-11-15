@@ -35,7 +35,7 @@ public final class AzogMoriasRuin extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Azog enters, destroy up to one other target creature.
-        // Its controller amasses Goblins X, where X is that creature’s power.
+        // Its controller amasses Goblins X, where X is that creature's power.
         // If you controlled that creature, draw a card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new AzogMoriasRuinEffect());
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
@@ -55,7 +55,7 @@ public final class AzogMoriasRuin extends CardImpl {
 class AzogMoriasRuinEffect extends OneShotEffect {
 
     AzogMoriasRuinEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.DestroyPermanent);
         staticText = "destroy up to one other target creature. " +
                 "Its controller amasses Goblins X, where X is that creature's power. " +
                 "If you controlled that creature, draw a card";
@@ -84,11 +84,11 @@ class AzogMoriasRuinEffect extends OneShotEffect {
         int xValue = permanent.getPower().getValue();
         // Destroy up to one other target creature
         permanent.destroy(source, game);
-        // Its controller amasses Goblins X, where X is that creature’s power.
+        // Its controller amasses Goblins X, where X is that creature's power.
         AmassEffect.doAmass(player, xValue, SubType.GOBLIN, game, source);
         // If you controlled that creature, draw a card.
-        if (player.equals(controller)) {
-            player.drawCards(1, source, game);
+        if (player.getId().equals(controller.getId())) {
+            controller.drawCards(1, source, game);
         }
         return true;
     }

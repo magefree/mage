@@ -102,6 +102,9 @@ public class AmassEffect extends OneShotEffect {
         return doAmass(player, xValue, subType, game, source);
     }
 
+    /**
+     * Amass by the given player instead of the source's controller (example: its controller amasses)
+     */
     public static Permanent doAmass(Player player, int xValue, SubType subType, Game game, Ability source) {
         if (player == null) {
             return null;
@@ -130,9 +133,6 @@ public class AmassEffect extends OneShotEffect {
             return null;
         }
         if (!armyPermanent.hasSubtype(subType, game)) {
-            game.informPlayers(player.getLogName() + " added the "
-                    + subType.getDescription() + " subtype to their army token from "
-                    + source.getSourceObject(game).getLogName());
             game.addEffect(new AddCardSubTypeTargetEffect(subType, Duration.Custom)
                     .setTargetPointer(new FixedTarget(armyPermanent, game)), source);
         }
@@ -141,9 +141,6 @@ public class AmassEffect extends OneShotEffect {
                     CounterType.P1P1.createInstance(xValue),
                     player.getId(), source, game
             );
-            game.informPlayers(player.getLogName() + " added " + xValue
-                    + " +1/+1 counters to their army token from "
-                    + source.getSourceObject(game).getLogName());
         }
         return armyPermanent;
     }
