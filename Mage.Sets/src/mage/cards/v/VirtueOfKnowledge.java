@@ -7,7 +7,7 @@ import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.filter.FilterStackObject;
+import mage.filter.common.FilterActivatedOrTriggeredAbility;
 import mage.target.common.TargetActivatedOrTriggeredAbility;
 
 import java.util.UUID;
@@ -17,8 +17,8 @@ import java.util.UUID;
  */
 public final class VirtueOfKnowledge extends AdventureCard {
 
-    private static final FilterStackObject filter
-            = new FilterStackObject("activated or triggered ability you control");
+    private static final FilterActivatedOrTriggeredAbility filter
+            = new FilterActivatedOrTriggeredAbility("activated or triggered ability you control");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());

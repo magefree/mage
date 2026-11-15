@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.filter.FilterStackObject;
+import mage.filter.common.FilterActivatedOrTriggeredAbility;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.stack.StackAbility;
@@ -26,8 +26,8 @@ import java.util.UUID;
  */
 public final class AbstruseArchaic extends CardImpl {
 
-    private static final FilterStackObject filter
-            = new FilterStackObject("activated or triggered ability you control from a colorless source");
+    private static final FilterActivatedOrTriggeredAbility filter
+            = new FilterActivatedOrTriggeredAbility("activated or triggered ability you control from a colorless source");
 
     static {
         filter.add(AbstruseArchaicPredicate.instance);

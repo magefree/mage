@@ -11,7 +11,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterStackObject;
 import mage.filter.common.FilterActivatedOrTriggeredAbility;
 import mage.game.Game;
 import mage.game.stack.StackObject;
@@ -25,7 +24,7 @@ import java.util.UUID;
  */
 public final class GogoMasterOfMimicry extends CardImpl {
 
-    private static final FilterStackObject filter
+    private static final FilterActivatedOrTriggeredAbility filter
             = new FilterActivatedOrTriggeredAbility("activated or triggered ability you control");
 
     static {

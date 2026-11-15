@@ -12,9 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.FilterStackObject;
 import mage.filter.common.FilterActivatedOrTriggeredAbility;
-import mage.target.TargetStackObject;
+import mage.target.common.TargetActivatedOrTriggeredAbility;
 
 import java.util.UUID;
 
@@ -23,7 +22,7 @@ import java.util.UUID;
  */
 public final class PeterParkersCamera extends CardImpl {
 
-    private static final FilterStackObject filter = new FilterActivatedOrTriggeredAbility("activated or triggered ability you control");
+    private static final FilterActivatedOrTriggeredAbility filter = new FilterActivatedOrTriggeredAbility("activated or triggered ability you control");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
@@ -39,7 +38,7 @@ public final class PeterParkersCamera extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new CopyTargetStackObjectEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.FILM.createInstance()));
-        ability.addTarget(new TargetStackObject(filter));
+        ability.addTarget(new TargetActivatedOrTriggeredAbility(filter));
         this.addAbility(ability);
     }
 

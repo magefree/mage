@@ -11,7 +11,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterStackObject;
+import mage.filter.common.FilterActivatedOrTriggeredAbility;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.mageobject.CommanderPredicate;
@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 public final class ThePeregrineDynamo extends CardImpl {
 
-    private static final FilterStackObject filter = new FilterStackObject(
+    private static final FilterActivatedOrTriggeredAbility filter = new FilterActivatedOrTriggeredAbility(
             "activated or triggered ability you control from another legendary source that's not a commander"
     );
 
