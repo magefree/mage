@@ -68,11 +68,12 @@ class CreepingPeeperConditionalMana extends ConditionalMana {
 
     public CreepingPeeperConditionalMana(Mana mana) {
         super(mana);
-        addCondition(new CreepingPeeperManaCondition());
+        addCondition(CreepingPeeperManaCondition.instance);
     }
 }
 
-class CreepingPeeperManaCondition implements Condition {
+enum CreepingPeeperManaCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

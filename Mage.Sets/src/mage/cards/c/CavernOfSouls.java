@@ -25,6 +25,8 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.watchers.Watcher;
 
+import java.util.Objects;
+
 /**
  *
  * @author noxx
@@ -128,6 +130,16 @@ class CavernOfSoulsManaCondition extends CreatureCastManaCondition {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj) && Objects.equals(this.creatureType, ((CavernOfSoulsManaCondition) obj).creatureType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), creatureType);
     }
 }
 

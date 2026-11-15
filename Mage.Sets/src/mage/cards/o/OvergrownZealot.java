@@ -70,11 +70,12 @@ class OvergrownZealotConditionalMana extends ConditionalMana {
 
     public OvergrownZealotConditionalMana(Mana mana) {
         super(mana);
-        addCondition(new OvergrownZealotManaCondition());
+        addCondition(OvergrownZealotManaCondition.instance);
     }
 }
 
-class OvergrownZealotManaCondition implements Condition {
+enum OvergrownZealotManaCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

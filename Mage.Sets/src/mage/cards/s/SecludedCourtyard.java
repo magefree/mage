@@ -123,4 +123,15 @@ class SecludedCourtyardManaCondition implements Condition {
         }
         return false;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj != null && this.getClass() == obj.getClass()
+                && Objects.equals(this.creatureType, ((SecludedCourtyardManaCondition) obj).creatureType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getClass(), creatureType);
+    }
 }

@@ -70,11 +70,12 @@ class TinStreetGossipConditionalMana extends ConditionalMana {
     TinStreetGossipConditionalMana(Mana mana) {
         super(mana);
         staticText = "Spend this mana only to cast face-down spells or to turn creatures face up.";
-        addCondition(new TinStreetGossipManaCondition());
+        addCondition(TinStreetGossipManaCondition.instance);
     }
 }
 
-class TinStreetGossipManaCondition implements Condition {
+enum TinStreetGossipManaCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

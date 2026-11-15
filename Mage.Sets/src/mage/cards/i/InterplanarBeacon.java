@@ -79,11 +79,12 @@ class InterplanarBeaconConditionalMana extends ConditionalMana {
     InterplanarBeaconConditionalMana(Mana mana) {
         super(mana);
         this.staticText = "Spend this mana only to cast planeswalker spells";
-        this.addCondition(new InterplanarBeaconManaCondition());
+        this.addCondition(InterplanarBeaconManaCondition.instance);
     }
 }
 
-class InterplanarBeaconManaCondition implements Condition {
+enum InterplanarBeaconManaCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -65,11 +65,12 @@ class InterdimensionalWebWatchConditionalMana extends ConditionalMana {
     public InterdimensionalWebWatchConditionalMana(Mana mana) {
         super(mana);
         staticText = "Spend this mana only to cast spells from exile";
-        addCondition(new InterdimensionalWebWatchCondition());
+        addCondition(InterdimensionalWebWatchCondition.instance);
     }
 }
 
-class InterdimensionalWebWatchCondition implements Condition {
+enum InterdimensionalWebWatchCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

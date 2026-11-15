@@ -125,4 +125,14 @@ class UnclaimedTerritoryManaCondition extends CreatureCastManaCondition {
         }
         return false;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj) && Objects.equals(this.creatureType, ((UnclaimedTerritoryManaCondition) obj).creatureType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), creatureType);
+    }
 }
