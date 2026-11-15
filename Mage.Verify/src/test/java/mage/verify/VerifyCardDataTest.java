@@ -1108,10 +1108,6 @@ public class VerifyCardDataTest {
                 // skip unofficial sets like Star Wars
                 continue;
             }
-            if ("NAC".equalsIgnoreCase(set.getCode())) {
-                // TODO: Remove once MTGJson data syncs.
-                continue;
-            }
 
             MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
             if (jsonSet == null) {
