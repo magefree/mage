@@ -83,7 +83,7 @@ class MondoGeckoEffect extends OneShotEffect {
         player.choose(outcome, choice, game);
         ObjectColor color = choice.getColor();
         game.addEffect(new BecomesColorSourceEffect(color, Duration.EndOfTurn), source);
-        game.addEffect(new GainAbilitySourceEffect(HexproofBaseAbility.getFirstFromColor(color)), source);
+        game.addEffect(new GainAbilitySourceEffect(HexproofBaseAbility.getFirstFromColor(color), Duration.EndOfTurn), source);
         return true;
     }
 }

@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -27,9 +26,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class FearOfDeath extends CardImpl {
 
-    private static final DynamicValue xValue = new SignInversionDynamicValue(
-            new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CARDS, null)
-    );
+    private static final DynamicValue xValue = new SignInversionDynamicValue(new CardsInControllerGraveyardCount());
 
     public FearOfDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

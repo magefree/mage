@@ -160,8 +160,8 @@ public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl {
             }
         }
 
-        if (duration == Duration.EndOfGame) {
-            sb.append(" for the rest of the game");
+        if (!duration.toString().isEmpty()) {
+            sb.append(' ').append(duration.toString());
         }
         staticText = sb.toString();
     }

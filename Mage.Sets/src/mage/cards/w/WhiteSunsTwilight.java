@@ -68,7 +68,7 @@ class WhiteSunsTwilightEffect extends OneShotEffect {
         }
         List<UUID> tokenIds = token.getLastAddedTokenIds();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_PERMANENT_CREATURE, source.getSourceId(), game
+                StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game
         )) {
             if (!tokenIds.contains(permanent.getId())) {
                 permanent.destroy(source, game);

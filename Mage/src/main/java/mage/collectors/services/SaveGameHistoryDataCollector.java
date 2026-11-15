@@ -5,6 +5,7 @@ import mage.constants.TableState;
 import mage.game.Game;
 import mage.game.Table;
 import mage.game.match.MatchPlayer;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.CardUtil;
 import org.apache.log4j.Logger;
@@ -14,12 +15,11 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -27,13 +27,19 @@ import java.util.stream.Stream;
  * <p>
  * WARNING, it's not production ready yet, use for load tests only (see todos below)
  * <p>
+ * Data collection:
+ * - real table logs and chats (table_logs.txt, table_chat.txt);
+ * - real game logs and chats (game_logs.html, chat_logs.html);
+ * - real deck files (deck_player_xxx.dck);
+ * - custom resolve logs for AI's card analyse (gmae_resolve_logs.jsonl);
+ * <p>
  * Possible use cases:
- * - load tests debugging to find freeze AI games;
- * - public server debugging to find human freeze games;
+ * - load tests or public server analyse and debug to find freeze AI games;
+ * - load tests or public server analyse to find fizzled or wrongly working cards by AI tools;
  * - AI learning data collection;
- * - fast access to saved decks for public tourneys, e.g. after draft
+ * - fast access to saved decks for public draft servers;
  * Tasks:
- * - TODO: drafts - save picks history per player;
+ * - TODO: drafts - save picks history per player in mtgo compatible format;
  * - TODO: tourneys - fix chat logs
  * - TODO: tourneys - fix miss end events on table or server quite (active table/game freeze bug)
  * <p>
@@ -49,6 +55,7 @@ import java.util.stream.Stream;
  * -             game 1 - UUID
  * -             game 2 - UUID
  * -               game_logs.html
+ * -               game_resolve_logs.jsonl
  * -               chat_logs.html
  * -               deck_player_1.dck
  * -               deck_player_2.dck
@@ -72,6 +79,7 @@ public class SaveGameHistoryDataCollector extends EmptyDataCollector {
     private static final String DECK_FILE_NAME_FORMAT = "deck_player_%d.dck";
     private static final String GAME_LOGS_FILE_NAME = "game_logs.html";
     private static final String GAME_CHAT_FILE_NAME = "game_chat.txt";
+    private static final String GAME_RESOLVE_LOGS_FILE_NAME = "game_resolve_logs.jsonl";
 
     private static final UUID NO_TABLE_ID = UUID.randomUUID();
     private static final String NO_TABLE_NAME = "SINGLE"; // need for unit tests
@@ -87,6 +95,9 @@ public class SaveGameHistoryDataCollector extends EmptyDataCollector {
     // TODO: analyse load tests performance and split locks per table/game
     // TODO: limit file sizes for possible game freeze?
     ReentrantLock writeLock = new ReentrantLock();
+
+    // temp data for diff logs, require one copy game per game
+    private static Map<UUID, Game> lastGameStatesOnStack = new ConcurrentHashMap<>();
 
     public SaveGameHistoryDataCollector() {
         // prepare
@@ -117,13 +128,13 @@ public class SaveGameHistoryDataCollector extends EmptyDataCollector {
     @Override
     public void onTableStart(Table table) {
         if (!this.enabled) return;
-        writeToTableLogsFile(table, new Date() + " [START] " + table.getId() + ", " + table);
+        writeToTableLogsFile(table, new Date() + " [START] table " + table.getId() + ", " + table);
     }
 
     @Override
     public void onTableEnd(Table table) {
         if (!this.enabled) return;
-        writeToTableLogsFile(table, new Date() + " [END] " + table.getId() + ", " + table);
+        writeToTableLogsFile(table, new Date() + " [END] " + table);
 
         // good end - move all files to done folder and change dir refs for possible game and other logs
         writeLock.lock();
@@ -154,7 +165,7 @@ public class SaveGameHistoryDataCollector extends EmptyDataCollector {
     @Override
     public void onGameStart(Game game) {
         if (!this.enabled) return;
-        writeToGameLogsFile(game, new Date() + " [START] " + game.getId() + ", " + game);
+        writeToGameLogsFile(game, new Date() + " [START] game " + game.getId() + ", " + game);
 
         // save deck files
         writeLock.lock();
@@ -186,7 +197,7 @@ public class SaveGameHistoryDataCollector extends EmptyDataCollector {
     }
 
     @Override
-    public void onGameError(Game game, Exception e) {
+    public void onGameError(Game game, Throwable e) {
         if (!this.enabled) return;
         writeToGameLogsFile(game, new Date() + " [ERROR] " + game.getId() + ", " + game);
         if (e != null) {
@@ -200,7 +211,12 @@ public class SaveGameHistoryDataCollector extends EmptyDataCollector {
     @Override
     public void onGameEnd(Game game) {
         if (!this.enabled) return;
-        writeToGameLogsFile(game, new Date() + " [END] " + game.getId() + ", " + game);
+        writeToGameLogsFile(game, new Date() + " [END] " + "result follows");
+
+        // warning, real result will be saved later, but it's safe to move files and write to it on data ready
+
+        // clean temp data
+        lastGameStatesOnStack.remove(game.getId());
 
         // good end - move game data to done folder
         writeLock.lock();
@@ -228,6 +244,40 @@ public class SaveGameHistoryDataCollector extends EmptyDataCollector {
     }
 
     @Override
+    public void onGameEndResult(Game game) {
+        if (!this.enabled) return;
+
+        // short result
+        writeToGameLogsFile(game, new Date() + " [RESULT] " 
+            + (game.hasEnded() ? game.getWinner() : "Game is running"));
+
+        // full result for each player, see GameImpl on "END game"
+        String fullInfo = game.getState().getPlayers().values().stream()
+                .map(p -> {
+                    List<String> statuses = new ArrayList<>();
+                    if (p.hasWon()) {
+                        statuses.add("won");
+                    }
+                    if (p.hasLost()) {
+                        statuses.add("lost");
+                    }
+                    if (p.hasQuit()) {
+                        statuses.add("quit");
+                    }
+                    if (p.hasIdleTimeout()) {
+                        statuses.add("timeout_idle");
+                    }
+                    if (p.hasTimerTimeout()) {
+                        statuses.add("timeout_timer");
+                    }
+                    return p.getName() + " => " + (statuses.isEmpty() ? "playing" : String.join(", ", statuses));
+                })
+                .collect(Collectors.joining("; "));
+        String details = "Details: " + fullInfo;
+        writeToGameLogsFile(game, new Date() + " [RESULT] " + details);
+    }
+
+    @Override
     public void onChatTourney(UUID tourneyId, String userName, String message) {
         // TODO: implement?
     }
@@ -244,6 +294,29 @@ public class SaveGameHistoryDataCollector extends EmptyDataCollector {
         if (!this.enabled) return;
         String needMessage = Jsoup.parse(message).text(); // convert html to txt format, so users can't break something
         writeToGameChatFile(gameId, new Date() + " [CHAT] " + (userName == null ? "system" : userName) + ": " + needMessage);
+    }
+
+    @Override
+    public void onTestsStackResolveStart(Game game, StackObject top) {
+        if (!this.enabled) return;
+
+        lastGameStatesOnStack.put(game.getId(), game.copy());
+    }
+
+    @Override
+    public void onTestsStackResolveEnd(Game game, StackObject top, boolean applied) {
+        if (!this.enabled) return;
+
+        // diff logs for AI tools
+        Game prevGame = lastGameStatesOnStack.get(game.getId());
+        if (prevGame == null) {
+            logger.error("onTestsStackResolveEnd: something wrong, prevGame is null, gameId=" + game.getId(), new Throwable());
+            return;
+        }
+
+        String diff = GameStateDiffBuilder.buildDiffJson(prevGame, game, applied);
+
+        writeToGameResolveLogsFile(game, diff);
     }
 
 
@@ -370,6 +443,14 @@ public class SaveGameHistoryDataCollector extends EmptyDataCollector {
             return;
         }
         writeToFile(Paths.get(gameDir, GAME_CHAT_FILE_NAME).toString(), data, "\n");
+    }
+
+    private void writeToGameResolveLogsFile(Game game, String data) {
+        String gameDir = getOrCreateGameDir(game, isActive(game));
+        if (gameDir.isEmpty()) {
+            return;
+        }
+        writeToFile(Paths.get(gameDir, GAME_RESOLVE_LOGS_FILE_NAME).toString(), data, "\n");
     }
 
     private void writeToFile(String destFile, String data, String newLine) {

@@ -31,8 +31,7 @@ public final class GlintingCreeper extends CardImpl {
 
         // Converge — Glinting Creeper enters the battlefield with two +1/+1 counters on it for each color of mana spent to cast it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(), xValue, true
-        ), null, "<i>Converge</i> &mdash; {this} enters " +
+                CounterType.P1P1.createInstance(), xValue), null, "<i>Converge</i> &mdash; {this} enters " +
                 "with two +1/+1 counters on it for each color of mana spent to cast it.", null));
         this.getSpellAbility().addHint(ColorsOfManaSpentToCastCount.getHint());
 

@@ -9,10 +9,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCounterChoiceSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -43,7 +40,8 @@ public class DenryKlinEditorInChief extends CardImpl {
         // Whenever a nontoken creature you control enters,
         // if Denry has counters on it, put the same number of each kind of counter on that creature.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                new DenryKlinEditorInChiefCopyCountersEffect(), StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN
+                Zone.BATTLEFIELD, new DenryKlinEditorInChiefCopyCountersEffect(), StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN,
+                false, SetTargetPointer.PERMANENT
         ).withInterveningIf(SourceHasCountersCondition.instance));
 
     }
@@ -69,11 +67,10 @@ class DenryKlinEditorInChiefCopyCountersEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent denryPermanent = game.getPermanent(source.getSourceId());
-        Object enteringObject = getValue("permanentEnteringBattlefield");
-        if (controller == null || denryPermanent == null || !(enteringObject instanceof Permanent)) {
+        Permanent enteringCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (controller == null || denryPermanent == null || enteringCreature == null) {
             return false;
         }
-        Permanent enteringCreature = (Permanent) enteringObject;
 
         for (Counter counter : denryPermanent.getCounters(game).values()) {
             enteringCreature.addCounters(counter, source, game);

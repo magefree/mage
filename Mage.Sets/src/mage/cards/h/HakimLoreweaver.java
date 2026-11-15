@@ -8,6 +8,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -23,6 +24,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -101,11 +103,12 @@ class HakimLoreweaverEffect extends OneShotEffect {
                 && controller.canRespond()
                 && targetAuraCard != null
                 && new AuraCardCanAttachToPermanentId(hakimLoreweaver.getId()).apply(targetAuraCard, game)) {
-            Target target = targetAuraCard.getSpellAbility().getTargets().get(0);
+            Target target = CardUtil.getDefaultCardSideForBattlefield(game, targetAuraCard).getSpellAbility().getTargets().get(0);
             if (target != null) {
-                game.getState().setValue("attachTo:" + targetAuraCard.getId(), hakimLoreweaver);
+                AttachEffect.setAttachTo(game, targetAuraCard.getId(), hakimLoreweaver);
                 controller.moveCards(targetAuraCard, Zone.BATTLEFIELD, source, game);
-                return hakimLoreweaver.addAttachment(targetAuraCard.getId(), source, game);
+                Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(targetAuraCard, game);
+                return attachment != null && hakimLoreweaver.addAttachment(attachment.getId(), source, game);
             }
         }
         return false;

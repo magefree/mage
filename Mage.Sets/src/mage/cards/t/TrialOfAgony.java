@@ -12,7 +12,7 @@ import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -97,7 +97,7 @@ class TrialOfAgonyEffect extends OneShotEffect {
                         permanents
                                 .stream()
                                 .map(MageItem::getId)
-                                .map(ControllerIdPredicate::new)
+                                .map(PermanentIdPredicate::new)
                                 .collect(Collectors.toList())
                 ));
                 TargetPermanent target = new TargetPermanent(filter);

@@ -44,8 +44,7 @@ public final class RasputinTheOneiromancer extends CardImpl {
         // When Rasputin, the Oneiromancer enters the battlefield, put a dream counter on it for each
         // opponent you have. Each opponent creates a 1/1 red Goblin creature token.
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(
-                CounterType.DREAM.createInstance(), OpponentsCount.instance, false
-        ).setText("put a dream counter on it for each opponent you have."));
+                CounterType.DREAM.createInstance(), OpponentsCount.instance).setText("put a dream counter on it for each opponent you have."));
         ability.addEffect(new CreateTokenAllEffect(new GoblinToken(), TargetController.OPPONENT));
         this.addAbility(ability);
 

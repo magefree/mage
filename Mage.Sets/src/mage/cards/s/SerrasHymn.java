@@ -28,7 +28,7 @@ public final class SerrasHymn extends CardImpl {
 
         // At the beginning of your upkeep, you may put a verse counter on Serra's Hymn.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), true));
+                new AddCountersSourceEffect(CounterType.VERSE.createInstance()), true));
 
         // Sacrifice Serra's Hymn: Prevent the next X damage that would be dealt this turn to any number of targets, divided as you choose, where X is the number of verse counters on Serra's Hymn.
         Ability ability = new SimpleActivatedAbility(

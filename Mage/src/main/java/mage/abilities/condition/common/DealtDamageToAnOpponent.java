@@ -15,7 +15,7 @@ public enum DealtDamageToAnOpponent implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+        for (UUID opponentId : game.getOpponents(source.getControllerId(), false)) {
             PlayerDamagedBySourceWatcher watcher = game.getState().getWatcher(PlayerDamagedBySourceWatcher.class, opponentId);
             if (watcher != null && watcher.hasSourceDoneDamage(source.getSourceId(), game)) {
                 return true;

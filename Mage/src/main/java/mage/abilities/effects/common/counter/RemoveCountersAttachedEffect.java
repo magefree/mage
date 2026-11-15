@@ -2,7 +2,6 @@ package mage.abilities.effects.common.counter;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.counters.Counter;
@@ -19,12 +18,12 @@ public class RemoveCountersAttachedEffect extends OneShotEffect {
     private DynamicValue amount;
 
     public RemoveCountersAttachedEffect(Counter counter, String textEnchanted) {
-        this(counter, StaticValue.get(0), textEnchanted);
+        this(counter, null, textEnchanted);
     }
 
     /**
      * @param counter
-     * @param amount        this amount will be added to the counter instances
+     * @param amount        this amount will be added to the counter's own count, null to use that count alone
      * @param textEnchanted text used for the enchanted permanent in rule text
      */
     public RemoveCountersAttachedEffect(Counter counter, DynamicValue amount, String textEnchanted) {
@@ -49,7 +48,9 @@ public class RemoveCountersAttachedEffect extends OneShotEffect {
             Permanent attachedTo = game.getPermanent(permanent.getAttachedTo());
             if (attachedTo != null && counter != null) {
                 Counter newCounter = counter.copy();
-                newCounter.add(amount.calculate(game, source, this));
+                if (amount != null) {
+                    newCounter.add(amount.calculate(game, source, this));
+                }
                 attachedTo.removeCounters(newCounter, source, game);
             }
             return true;

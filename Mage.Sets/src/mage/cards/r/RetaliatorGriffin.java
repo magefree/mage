@@ -29,8 +29,7 @@ public final class RetaliatorGriffin extends CardImpl {
 
         // Whenever a source an opponent controls deals damage to you, you may put that many +1/+1 counters on Retaliator Griffin.
         this.addAbility(new SourceDealsDamageToYouTriggeredAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(), SavedDamageValue.MANY, true
-        ), true));
+                CounterType.P1P1.createInstance(), SavedDamageValue.MANY), true));
     }
 
     private RetaliatorGriffin(final RetaliatorGriffin card) {

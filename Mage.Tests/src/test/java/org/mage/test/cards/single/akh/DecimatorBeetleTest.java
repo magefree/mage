@@ -4,6 +4,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -18,13 +19,11 @@ When Decimator Beetle enters the battlefield, put a -1/-1 counter on target crea
 Whenever Decimator Beetle attacks, remove a -1/-1 counter from target creature you control and put a -1/-1 counter on up to one target creature defending player controls.
     */
     private final String decimator = "Decimator Beetle";
+    private final String grizzly = "Grizzly Bears"; // {1}{G} 2/2
+    private final String hillGiant = "Hill Giant"; // {3}{R} 3/3
 
     @Test
     public void targetOpponentCreatureWithDecimator() {
-
-        String grizzly = "Grizzly Bears"; // {1}{G} 2/2
-        String hillGiant = "Hill Giant"; // {3}{R} 3/3
-
         addCard(Zone.HAND, playerA, decimator);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
@@ -49,5 +48,33 @@ Whenever Decimator Beetle attacks, remove a -1/-1 counter from target creature y
         assertCounterCount(playerA, grizzly, CounterType.M1M1, 0);
         assertCounterCount(playerB, hillGiant, CounterType.M1M1, 1);
         assertLife(playerB, 16);
+    }
+
+    @Test
+    public void declineOptionalTargetWithDecimator() {
+        addCard(Zone.HAND, playerA, decimator);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, grizzly);
+        addCard(Zone.BATTLEFIELD, playerB, hillGiant);
+
+        // put -1/-1 on own creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, decimator);
+        addTarget(playerA, grizzly);
+
+        // target decimator so -1/-1 remains on grizzly, decline the "up to one" defender target
+        attack(3, playerA, decimator);
+        addTarget(playerA, decimator); // remove from self with no counters
+        addTarget(playerA, TestPlayer.TARGET_SKIP); // put -- declined
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_COMBAT);
+        execute();
+
+        assertPowerToughness(playerA, decimator, 4, 5);
+        assertPowerToughness(playerA, grizzly, 1, 1);
+        assertPowerToughness(playerB, hillGiant, 3, 3);
+        assertCounterCount(playerA, grizzly, CounterType.M1M1, 1);
+        assertCounterCount(playerB, hillGiant, CounterType.M1M1, 0);
     }
 }

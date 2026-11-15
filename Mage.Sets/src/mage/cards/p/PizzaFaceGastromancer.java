@@ -107,9 +107,10 @@ class PizzaFaceGastromancerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (!permanent.isCreature(game)) {
+        if (permanent != null && !permanent.isCreature(game)) {
             ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(
-                new CreatureToken(0, 0, "0/0 Mutant creature", SubType.MUTANT), false, true, Duration.Custom);
+                new CreatureToken(0, 0, "0/0 Mutant creature", SubType.MUTANT), false, false, Duration.Custom
+            ).withKeepPriorTypes(true);
             continuousEffect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(continuousEffect, source);
             return true;

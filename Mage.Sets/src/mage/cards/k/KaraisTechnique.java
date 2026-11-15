@@ -19,9 +19,6 @@ public final class KaraisTechnique extends CardImpl {
     public KaraisTechnique(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{W}{B}");
 
-        // Sneak {W}{B}
-        this.addAbility(new SneakAbility(this, "{W}{B}"));
-
         // Choose one or both --
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(2);
@@ -34,6 +31,9 @@ public final class KaraisTechnique extends CardImpl {
         Mode mode2 = new Mode(new BoostTargetEffect(-3, -3));
         mode2.addTarget(new TargetCreaturePermanent().withChooseHint("gets -3/-3 until end of turn"));
         this.getSpellAbility().addMode(mode2);
+
+        // Sneak {W}{B}
+        this.addAbility(new SneakAbility(this, "{W}{B}"));
     }
 
     private KaraisTechnique(final KaraisTechnique card) {

@@ -1,22 +1,23 @@
 
 package mage.cards.m;
 
-import java.util.EnumSet;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import mage.MageIdentifier;
 import mage.MageInt;
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.assignment.RoleAssignment;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -27,9 +28,7 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.players.Player;
 import mage.watchers.Watcher;
 
 /**
@@ -92,16 +91,18 @@ class MuldrothaTheGravetideCastFromGraveyardEffect extends AsThoughEffectImpl {
                 && affectedControllerId.equals(game.getActivePlayerId()) // only during your turns (e.g. prevent flash creatures)
                 && Zone.GRAVEYARD.equals(game.getState().getZone(objectId))) {
             MuldrothaTheGravetideWatcher watcher = game.getState().getWatcher(MuldrothaTheGravetideWatcher.class);
-            MageObject mageObject = game.getObject(objectId);
-            if (mageObject != null && watcher != null) {
-                for (CardType cardType : mageObject.getCardType(game)) {
-                    if (cardType.isPermanentType()) {
-                        MageObjectReference mor = new MageObjectReference(source.getSourceObject(game), game);
-                        if (!watcher.permanentTypePlayedFromGraveyard(mor, cardType)) {
-                            return true;
-                        }
-                    }
+            Card card = game.getCard(objectId);
+            if (card != null && watcher != null) {
+                MageObjectReference mor = new MageObjectReference(source.getSourceObject(game), game);
+                List<Set<CardType>> playedCardTypes = watcher.getPlayedCardTypes(mor);
+                if (card.isLand(game)) {
+                    // a land card can be played only as a land (305.9)
+                    return playedCardTypes.stream().noneMatch(cardTypes -> cardTypes.contains(CardType.LAND));
                 }
+                // each spell cast this way needs its own permanent type, a card with multiple types can be cast as any of them
+                List<Set<CardType>> cardRoles = new ArrayList<>(playedCardTypes);
+                cardRoles.add(card.getCardType(game).stream().filter(CardType::isPermanentType).collect(Collectors.toSet()));
+                return RoleAssignment.getMaxAssignment(cardRoles) == cardRoles.size();
             }
         }
         return false;
@@ -109,13 +110,13 @@ class MuldrothaTheGravetideCastFromGraveyardEffect extends AsThoughEffectImpl {
 }
 
 /**
- * Holds track of the consumed types of each permission giving source
+ * Holds track of the permanent types of the cards played with each permission giving source
  *
  * @author LevelX2
  */
 class MuldrothaTheGravetideWatcher extends Watcher {
 
-    private final HashMap<MageObjectReference, Set<CardType>> sourcePlayedPermanentTypes = new HashMap<>(); // source that played permanent types from graveyard
+    private final HashMap<MageObjectReference, List<Set<CardType>>> sourcePlayedCardTypes = new HashMap<>(); // source that played cards from graveyard
     // final HashMap<UUID, Set<CardType>> playerPlayedPermanentTypes = new HashMap<>(); // player that played permanent types from graveyard
     // 4/27/2018 If multiple effects allow you to play a card from your graveyard, such as those of Gisa and Geralf and Karador,
     // Ghost Chieftain, you must announce which permission you're using as you begin to play the card.
@@ -133,82 +134,36 @@ class MuldrothaTheGravetideWatcher extends Watcher {
             fromZone = game.getState().getZone(event.getTargetId()); // Remember the Zone the land came from
         }
         if (event.getType() == GameEvent.EventType.LAND_PLAYED && fromZone == Zone.GRAVEYARD) {
-            addPermanentTypes(event, game.getPermanentOrLKIBattlefield(event.getTargetId()), game);
+            addPlayedCard(event, game.getPermanentOrLKIBattlefield(event.getTargetId()), game);
         }
 
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
             if (spell.getFromZone() == Zone.GRAVEYARD) {
-                addPermanentTypes(event, spell, game);
+                addPlayedCard(event, spell, game);
             }
         }
     }
 
-    private void addPermanentTypes(GameEvent event, Card mageObject, Game game) {
-        if (mageObject != null 
+    private void addPlayedCard(GameEvent event, Card card, Game game) {
+        if (card != null
                 && event.getApprovingObject() != null
                 && MageIdentifier.MuldrothaTheGravetideWatcher.equals(event.getApprovingObject().getApprovingAbility().getIdentifier())) {
-            UUID playerId = null;
-            if (mageObject instanceof Spell) {
-                playerId = ((Spell) mageObject).getControllerId();
-            } else if (mageObject instanceof Permanent) {
-                playerId = ((Permanent) mageObject).getControllerId();
-            }
-            if (playerId != null) {
-                Set<CardType> permanentTypes = sourcePlayedPermanentTypes.get(event.getApprovingObject().getApprovingMageObjectReference());
-                if (permanentTypes == null) {
-                    permanentTypes = EnumSet.noneOf(CardType.class);
-                    sourcePlayedPermanentTypes.put(event.getApprovingObject().getApprovingMageObjectReference(), permanentTypes);
-                }
-                Set<CardType> typesNotCast = EnumSet.noneOf(CardType.class);
-                for (CardType cardType : mageObject.getCardType(game)) {
-                    if (cardType.isPermanentType()) {
-                        if (!permanentTypes.contains(cardType)) {
-                            typesNotCast.add(cardType);
-                        }
-                    }
-                }
-                if (typesNotCast.size() <= 1) {
-                    permanentTypes.addAll(typesNotCast);
-                } else {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        Choice typeChoice = new ChoiceImpl(true);
-                        typeChoice.setMessage("Choose permanent type you consume for casting from graveyard.");
-                        for (CardType cardType : typesNotCast) {
-                            typeChoice.getChoices().add(cardType.toString());
-                        }
-                        if (player.choose(Outcome.Detriment, typeChoice, game)) {
-                            String typeName = typeChoice.getChoice();
-                            CardType chosenType = null;
-                            for (CardType cardType : CardType.values()) {
-                                if (cardType.toString().equals(typeName)) {
-                                    chosenType = cardType;
-                                    break;
-                                }
-                            }
-                            if (chosenType != null) {
-                                permanentTypes.add(chosenType);
-                            }
-                        }
-                    }
-                }
-            }
+            // card types as played or cast (split half, adventure spell, mdf side), later changes on battlefield don't matter
+            sourcePlayedCardTypes
+                    .computeIfAbsent(event.getApprovingObject().getApprovingMageObjectReference(), m -> new ArrayList<>())
+                    .add(card.getCardType(game).stream().filter(CardType::isPermanentType).collect(Collectors.toSet()));
         }
     }
 
     @Override
     public void reset() {
-        sourcePlayedPermanentTypes.clear();
+        sourcePlayedCardTypes.clear();
         super.reset();
     }
 
-    public boolean permanentTypePlayedFromGraveyard(MageObjectReference sourceMor, CardType cardType) {
-        Set<CardType> permanentTypes = sourcePlayedPermanentTypes.get(sourceMor);
-        if (permanentTypes != null) {
-            return permanentTypes.contains(cardType);
-        }
-        return false;
+    public List<Set<CardType>> getPlayedCardTypes(MageObjectReference sourceMor) {
+        return sourcePlayedCardTypes.getOrDefault(sourceMor, Collections.emptyList());
     }
 
 }

@@ -40,13 +40,13 @@ public final class ArenaOfGlory extends CardImpl {
         // {T}: Add {R}.
         this.addAbility(new RedManaAbility());
 
-        // {R}, {T}, Exert Arena of Glory: Add {R}{R}. If that mana is spent on a creature spell, it gains haste until end of turn.
+        // {R}, {T}, Exert Arena of Glory: Add {R}{R}. If any of that mana is spent on a creature spell, it gains haste until end of turn.
         SimpleManaAbility ability = new SimpleManaAbility(
                 new BasicManaEffect(Mana.RedMana(2)),
                 new ManaCostsImpl<>("{R}")
         );
         ability.addEffect(new ManaSpentOnSpellGainsAbilityEffect(StaticFilters.FILTER_SPELL_CREATURE,
-                new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn, null, true)));
+            new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn, null, true), true));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExertSourceCost());
         this.addAbility(ability);

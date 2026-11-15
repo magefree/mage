@@ -38,7 +38,7 @@ public final class SylvanPrimordial extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
 
-        // When Sylvan Primordial enters the battlefield, for each opponent, destroy target noncreature permanent that player controls. For each permanent destroyed this way, search your library for a Forest card and put that card onto the battlefield tapped. Then shuffle your library.
+        // When Sylvan Primordial enters the battlefield, for each opponent, destroy target noncreature permanent that player controls. Search your library for up to X Forest cards, where X is the number of permanents destroyed this way, put those cards onto the battlefield tapped, then shuffle.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SylvanPrimordialEffect(), false);
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_NON_CREATURE));
         ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, true));
@@ -65,7 +65,7 @@ class SylvanPrimordialEffect extends OneShotEffect {
 
     public SylvanPrimordialEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "for each opponent, destroy target noncreature permanent that player controls. For each permanent destroyed this way, search your library for a Forest card and put that card onto the battlefield tapped. Then shuffle";
+        this.staticText = "for each opponent, destroy target noncreature permanent that player controls. Search your library for up to X Forest cards, where X is the number of permanents destroyed this way, put those cards onto the battlefield tapped, then shuffle";
     }
 
     private SylvanPrimordialEffect(final SylvanPrimordialEffect effect) {

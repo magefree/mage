@@ -31,10 +31,10 @@ public final class HeroesBane extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Heroe's Bane enters the battlefield with four +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(4), true), 
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(4)), 
                 "with four +1/+1 counters on it"));
         // {2}{G}{G}: Put X +1/+1 counters on Heroe's Bane, where X is its power.
-        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), SourcePermanentPowerValue.NOT_NEGATIVE, true);
+        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), SourcePermanentPowerValue.NOT_NEGATIVE);
         effect.setText("Put X +1/+1 counters on {this}, where X is its power");
         this.addAbility(new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{2}{G}{G}")));
     }

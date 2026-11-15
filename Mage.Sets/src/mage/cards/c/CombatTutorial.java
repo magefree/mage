@@ -7,7 +7,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.SecondTargetPointer;
 
 import java.util.UUID;
@@ -26,7 +26,7 @@ public final class CombatTutorial extends CardImpl {
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance())
                 .setText("put a +1/+1 counter on up to one target creature you control")
                 .setTargetPointer(new SecondTargetPointer()));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 1));
     }
 
     private CombatTutorial(final CombatTutorial card) {

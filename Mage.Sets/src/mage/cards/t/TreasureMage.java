@@ -22,7 +22,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public final class TreasureMage extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("an artifact card with mana value 6 or more");
+    private static final FilterCard filter = new FilterCard("an artifact card with mana value 6 or greater");
 
     static {
         filter.add(CardType.ARTIFACT.getPredicate());
@@ -37,9 +37,9 @@ public final class TreasureMage extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Treasure Mage enters the battlefield, you may search your library for an artifact card with converted mana cost 6 or greater,
-        // reveal that card, and put it into your hand. If you do, shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
+        // When this creature enters, you may search your library for an artifact card with mana value 6 or greater,
+        // reveal it, put it into your hand, then shuffle.
+        TargetCardInLibrary target = new TargetCardInLibrary(1, filter);
         SearchEffect effect = new SearchLibraryPutInHandEffect(target, true);
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, true));
     }

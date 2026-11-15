@@ -65,7 +65,7 @@ class BurningTreeShamanTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getTargetId());
         if (stackAbility != null && stackAbility.isNonManaActivatedAbility()) {
             for (Effect effect : getEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getPlayerId()));

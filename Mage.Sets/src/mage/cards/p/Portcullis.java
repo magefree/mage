@@ -13,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.OtherThanEnteringPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -28,9 +29,15 @@ import java.util.UUID;
  */
 public final class Portcullis extends CardImpl {
 
+    private static final FilterCreaturePermanent filter
+            = new FilterCreaturePermanent("there are two or more other creatures on the battlefield");
+
+    static {
+        filter.add(OtherThanEnteringPredicate.instance);
+    }
+
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
-            new FilterCreaturePermanent("there are two or more other creatures on the battlefield"),
-            ComparisonType.MORE_THAN, 1, false
+            filter, ComparisonType.OR_GREATER, 2, false
     );
 
     public Portcullis(UUID ownerId, CardSetInfo setInfo) {

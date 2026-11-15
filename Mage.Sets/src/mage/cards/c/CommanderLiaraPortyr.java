@@ -2,6 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
@@ -71,7 +72,9 @@ class CommanderLiaraPortyrCostEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return Optional
+        return abilityToModify instanceof SpellAbility
+                && abilityToModify.isControlledBy(source.getControllerId())
+                && Optional
                 .ofNullable(abilityToModify)
                 .map(Ability::getSourceId)
                 .map(game::getSpell)

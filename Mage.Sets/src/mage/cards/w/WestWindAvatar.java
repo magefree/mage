@@ -1,26 +1,26 @@
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
-import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.TokenPredicate;
-import mage.watchers.common.RevoltWatcher;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RevoltCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.TokenPredicate;
+import mage.watchers.common.RevoltWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +28,7 @@ import mage.constants.CardType;
  */
 public final class WestWindAvatar extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("a token or a land");
+    private static final FilterPermanent filter = new FilterControlledPermanent("a token or a land");
 
     static {
         filter.add(Predicates.or(

@@ -33,7 +33,7 @@ public final class GnollWarBand extends CardImpl {
         // This spell costs {1} less to cast for each opponent who was dealt damage this turn.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SpellCostReductionSourceEffect(GnollWarBandValue.instance)
-                .setCanWorksOnStackOnly(true)
+                
                 .setText("this spell costs {1} less to cast for each opponent who was dealt damage this turn")
         ), new AmountOfDamageAPlayerReceivedThisTurnWatcher());
 
@@ -60,7 +60,7 @@ enum GnollWarBandValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return game
-                .getOpponents(sourceAbility.getControllerId())
+                .getOpponents(sourceAbility.getControllerId(), false)
                 .stream()
                 .map(game
                         .getState()

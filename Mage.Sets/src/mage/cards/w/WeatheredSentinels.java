@@ -148,7 +148,7 @@ enum WeatheredSentinelsPlayersWhoAttackedYouLastTurn implements Hint {
         }
 
         StringBuilder stringBuilder = new StringBuilder("Attacked you on their last turn: ");
-        Iterator<UUID> opponentIdIterator = game.getOpponents(controller.getId()).iterator();
+        Iterator<UUID> opponentIdIterator = game.getOpponents(controller.getId(), false).iterator();
 
         while (opponentIdIterator.hasNext()) {
             UUID opponentId = opponentIdIterator.next();
@@ -184,7 +184,7 @@ enum WeatheredSentinelsCanAttackSomeoneCondition implements Condition {
             return false;
         }
 
-        for (UUID opponentId : game.getOpponents(controller.getId())) {
+        for (UUID opponentId : game.getOpponents(controller.getId(), false)) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent != null && watcher.checkPlayer(controller.getId(), opponentId)) {
                 return true;

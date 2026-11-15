@@ -110,7 +110,6 @@ public class ScryfallImageSupportCards {
             add("F02"); // Friday Night Magic 2002
             add("TOR"); // Torment
             add("JUD"); // Judgment
-            //add("PHJ"); // Hobby Japan Promos
             add("WC02"); // World Championship Decks 2002
             add("ONS"); // Onslaught
             //add("PMOA"); // Magic Online Avatars
@@ -429,12 +428,10 @@ public class ScryfallImageSupportCards {
             add("PMH1"); // Modern Horizons Promos
             add("MH1"); // Modern Horizons
             add("SS2"); // Signature Spellbook: Gideon
-            add("PRES"); // Resale Promos
             add("PPP1"); // M20 Promo Packs
             add("PM20"); // Core Set 2020 Promos
             add("M20"); // Core Set 2020
             add("PS19"); // San Diego Comic-Con 2019
-            //add("HTR18"); // Heroes of the Realm 2018
             add("C19"); // Commander 2019
             add("PELD"); // Throne of Eldraine Promos
             add("ELD"); // Throne of Eldraine
@@ -454,7 +451,6 @@ public class ScryfallImageSupportCards {
             add("PWOR"); // World Championship Promos
             add("PANA"); // MTG Arena Promos
             add("UND"); // Unsanctioned
-            //add("FMB1"); // Mystery Booster Retail Edition Foils
             add("HA2"); // Historic Anthology 2
             add("SLD"); // Secret Lair Drop
             add("PMEI"); // Media and Collaboration Promos
@@ -464,7 +460,6 @@ public class ScryfallImageSupportCards {
             // add("TD0"); // Commander Theme Decks
             // add("TD2"); // Duel Decks: Mirrodin Pure vs. New Phyrexia
             // add("MD1"); // Modern Event Deck
-            // add("DD3"); // Duel Decks Anthology
             // add("PZ1"); // Legendary Cube
             add("PLG20"); // Love Your LGS 2020
             add("IKO"); // Ikoria: Lair of Behemoths
@@ -561,6 +556,7 @@ public class ScryfallImageSupportCards {
             add("WOE"); // Wilds of Eldraine
             add("WOT"); // Wilds of Eldraine: Enchanting Tales
             add("WOC"); // Wilds of Eldraine Commander
+            add("YWOE"); // Alchemy: Wilds of Eldraine
             add("LCI"); // The Lost Caverns of Ixalan
             add("LCC"); // The The Lost Caverns of Ixalan Commander
             add("REX"); // Jurassic World Collection
@@ -573,6 +569,7 @@ public class ScryfallImageSupportCards {
             add("MKM"); // Murders at Karlov Manor
             add("MKC"); // Murders at Karlov Manor Commander
             add("PSS4"); // MKM Standard Showdown
+            add("YMKM"); // Alchemy: Murders at Karlov Manor
             add("CLU"); // Ravnica: Clue Edition
             add("OTJ"); // Outlaws of Thunder Junction
             add("OTC"); // Outlaws of Thunder Junction Commander
@@ -590,6 +587,7 @@ public class ScryfallImageSupportCards {
             add("DSK"); // Duskmourn: House of Horror
             add("DSC"); // Duskmourn: House of Horror Commander
             add("FDN"); // Foundations
+            add("FDC"); // Foundations Commander
             add("J25"); // Foundations Jumpstart
             add("PIO"); // Pioneer Masters
             add("PW25"); // Wizards Play Network 2025
@@ -607,6 +605,7 @@ public class ScryfallImageSupportCards {
             add("FCA"); // Final Fantasy: Through the Ages
             add("PSS5"); // FIN Standard Showdown
             add("EOE"); // Edge of Eternities
+            add("YEOE"); // Alchemy: Edge of Eternities
             add("EOC"); // Edge of Eternities Commander
             add("EOS"); // Edge of Eternities: Stellar Sights
             add("SPM"); // Marvel's Spider-Man
@@ -632,11 +631,18 @@ public class ScryfallImageSupportCards {
             add("HOB"); // The Hobbit
             add("HOC"); // The Hobbit Eternal
             add("MBC"); // Mystery Booster Commander Edition
+            add("SLZ"); // The Zeta Set
             add("FRA"); // Reality Fracture
             add("FRC"); // Reality Fracture Commander
             add("TRK"); // Star Trek
             add("TRC"); // Star Trek Commander
             add("SDS"); // Stardates
+            add("PF27"); // MagicFest 2027
+            add("PW27"); // Wizards Play Network 2027
+            add("NAU"); // Nauctis: The Sunken Realm
+            add("NAC"); // Nauctis: The Sunken Realm Commander
+            add("MDD"); // Marvel: Darkhold Destiny
+            add("MDC"); // Darkhold Destiny Commander
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards

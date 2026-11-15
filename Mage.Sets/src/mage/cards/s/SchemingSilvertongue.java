@@ -26,7 +26,7 @@ import mage.constants.ComparisonType;
  */
 public final class SchemingSilvertongue extends PrepareCard {
 
-    private static final Condition condition = new YouGainedLifeCondition(ComparisonType.OR_GREATER, 2);
+    private static final Condition condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 1);
     private static final Hint hint = new ConditionHint(condition);
 
     public SchemingSilvertongue(UUID ownerId, CardSetInfo setInfo) {

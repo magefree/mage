@@ -22,6 +22,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -32,6 +33,10 @@ import java.util.UUID;
 public final class CliveIfritsDominant extends TransformingDoubleFacedCard {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("other target creature");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
     private static final Condition condition = new SourceHasCounterCondition(CounterType.LORE, 3);
 
     public CliveIfritsDominant(UUID ownerId, CardSetInfo setInfo) {

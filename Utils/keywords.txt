@@ -8,6 +8,7 @@ Backup|card, number|
 Basic landcycling|cost|
 Bargain|new|
 Battle cry|new|
+Beam me up|manaString|
 Bestow|card, manaString|
 Blitz|card, manaString|
 Bloodthirst|number|

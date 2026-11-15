@@ -29,7 +29,7 @@ public final class WarWingSiren extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Heroic — Whenever you cast a spell that targets War-Wing Siren, put a +1/+1 counter on War-Wing Siren.
-        this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), false)));
+        this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
     }
 
     private WarWingSiren(final WarWingSiren card) {

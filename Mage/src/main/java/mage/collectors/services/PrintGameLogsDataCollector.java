@@ -1,9 +1,11 @@
 package mage.collectors.services;
 
 import mage.game.Game;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.util.ConsoleUtil;
+
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 
@@ -79,9 +81,18 @@ public class PrintGameLogsDataCollector extends EmptyDataCollector {
     }
 
     @Override
-    public void onTestsStackResolve(Game game) {
-        writeLog("LOG", "GAME", String.format("%s: Stack resolve: %s",
+    public void onTestsStackResolveStart(Game game, StackObject top) {
+        writeLog("LOG", "GAME", String.format("%s: Stack resolve start: %s",
                 CardUtil.getTurnInfo(game),
+                game.getStack().toString()
+        ));
+    }
+
+    @Override
+    public void onTestsStackResolveEnd(Game game, StackObject top, boolean applied) {
+        writeLog("LOG", "GAME", String.format("%s: Stack resolve end with %s, stack after: %s",
+                CardUtil.getTurnInfo(game),
+                applied ? "GOOD result" : "FAIL result",
                 game.getStack().toString()
         ));
     }

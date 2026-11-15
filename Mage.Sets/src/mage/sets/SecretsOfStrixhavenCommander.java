@@ -4,15 +4,11 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author TheElk801
  */
 public final class SecretsOfStrixhavenCommander extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Defacing Duskmage", "Dirgur Focusmage", "Eccentric Pestfinder", "Eiganjo Dynastorian", "Inspired Skypainter", "Lorehold Archivist", "Naktamun Lorespinner", "Stensian Sanguinist", "Striding Shotcaller", "Yavimaya Bloomsage");
     private static final SecretsOfStrixhavenCommander instance = new SecretsOfStrixhavenCommander();
 
     public static SecretsOfStrixhavenCommander getInstance() {
@@ -449,7 +445,5 @@ public final class SecretsOfStrixhavenCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Zimone, Infinite Analyst", 10, Rarity.MYTHIC, mage.cards.z.ZimoneInfiniteAnalyst.class));
         cards.add(new SetCardInfo("Zimone, Quandrix Prodigy", 341, Rarity.UNCOMMON, mage.cards.z.ZimoneQuandrixProdigy.class));
         cards.add(new SetCardInfo("Zulaport Cutthroat", 233, Rarity.UNCOMMON, mage.cards.z.ZulaportCutthroat.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
     }
 }

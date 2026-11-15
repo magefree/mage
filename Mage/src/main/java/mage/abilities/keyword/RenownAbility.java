@@ -86,7 +86,7 @@ class BecomesRenownedSourceEffect extends OneShotEffect {
             if (renownValue == Integer.MAX_VALUE) {
                 renownValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
             }
-            new AddCountersSourceEffect(CounterType.P1P1.createInstance(renownValue), true).apply(game, source);
+            new AddCountersSourceEffect(CounterType.P1P1.createInstance(renownValue)).apply(game, source);
             permanent.setRenowned(true);
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BECOMES_RENOWNED, source.getSourceId(), source, source.getControllerId(), renownValue));
             return true;

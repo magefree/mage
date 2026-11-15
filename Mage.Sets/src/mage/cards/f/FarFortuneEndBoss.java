@@ -88,7 +88,7 @@ class FarFortuneEndBossEffect extends ReplacementEffectImpl {
         }
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
         return opponents.contains(event.getTargetId())
-                && opponents.contains(game.getControllerId(event.getTargetId()));
+                || opponents.contains(game.getControllerId(event.getTargetId()));
     }
 
     @Override

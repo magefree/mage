@@ -1,23 +1,20 @@
 package mage.cards.r;
 
-import java.util.UUID;
-import mage.constants.SubType;
-import mage.game.permanent.token.custom.CreatureToken;
-import mage.abilities.keyword.FlashAbility;
-import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.CantAttackAttachedEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAttachedEffect;
 import mage.abilities.effects.common.continuous.LoseAllAbilitiesAttachedEffect;
-import mage.constants.Outcome;
-import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Duration;
+import mage.constants.*;
+import mage.game.permanent.token.custom.CreatureToken;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +41,7 @@ public final class RetroMutation extends CardImpl {
         new BecomesCreatureAttachedEffect(
             new CreatureToken(0, 1, "0/1 Turtle creature", SubType.TURTLE),
             "Enchanted creature is a Turtle with base power and toughness 0/1",
-            Duration.WhileOnBattlefield
+            Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.SUBTYPE
         ));
         ability.addEffect(new CantAttackAttachedEffect(AttachmentType.AURA).setText("It can't attack"));
         ability.addEffect(new LoseAllAbilitiesAttachedEffect(AttachmentType.AURA).setText("and loses all abilities"));

@@ -45,7 +45,6 @@ import mage.filter.predicate.permanent.LegendRuleAppliesPredicate;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.command.*;
-import mage.game.command.dungeons.UndercityDungeon;
 import mage.game.command.emblems.EmblemOfCard;
 import mage.game.command.emblems.RadiationEmblem;
 import mage.game.command.emblems.TheRingEmblem;
@@ -97,6 +96,7 @@ import java.util.stream.Collectors;
 public abstract class GameImpl implements Game {
 
     private final static AtomicInteger GLOBAL_INDEX = new AtomicInteger();
+    public final static AtomicInteger COPIED_COUNT = new AtomicInteger();
 
     private static final int ROLLBACK_TURNS_MAX = 4;
     private static final String UNIT_TESTS_ERROR_TEXT = "Error in unit tests";
@@ -189,6 +189,8 @@ public abstract class GameImpl implements Game {
     }
 
     protected GameImpl(final GameImpl game) {
+        COPIED_COUNT.incrementAndGet();
+
         //this.customData = game.customData; // temporary data, no need on game copy
         //this.losingPlayer = game.losingPlayer; // temporary data, no need on game copy
         this.aiGame = game.aiGame;
@@ -259,6 +261,16 @@ public abstract class GameImpl implements Game {
     @Override
     public Integer getGameIndex() {
         return this.gameIndex;
+    }
+
+    @Override
+    public Integer getCreatedCount() {
+        return GLOBAL_INDEX.get();
+    }
+
+    @Override
+    public Integer getCopiedCount() {
+        return COPIED_COUNT.get();
     }
 
     @Override
@@ -571,7 +583,7 @@ public abstract class GameImpl implements Game {
             return dungeon;
         }
         removeDungeon(dungeon);
-        return this.addDungeon(undercity ? new UndercityDungeon() : Dungeon.selectDungeon(playerId, this), playerId);
+        return this.addDungeon(undercity ? Dungeon.createDungeon("Undercity", true) : Dungeon.selectDungeon(playerId, this), playerId);
     }
 
     @Override
@@ -762,8 +774,20 @@ public abstract class GameImpl implements Game {
         Permanent permanent = state.getPermanent(permanentId);
         if (permanent == null) {
             permanent = (Permanent) this.getLastKnownInformation(permanentId, Zone.BATTLEFIELD);
+        } else if (!permanent.isPhasedIn()) {
+            permanent = getPhasedOutLKI(permanent);
         }
         return permanent;
+    }
+
+    /**
+     * 702.26b A phased-out permanent is treated as though it does not exist, so effects that look for it
+     * must use its last known information, as for a permanent that is no longer on the battlefield.
+     * The information is kept on phase out until the stack is empty (see resetLKI).
+     */
+    private Permanent getPhasedOutLKI(Permanent phasedOutPermanent) {
+        MageObject object = this.getLastKnownInformation(phasedOutPermanent.getId(), Zone.BATTLEFIELD);
+        return object instanceof Permanent ? (Permanent) object : phasedOutPermanent;
     }
 
     @Override
@@ -772,6 +796,8 @@ public abstract class GameImpl implements Game {
         Permanent permanent = state.getPermanent(id);
         if (permanent == null || state.getZoneChangeCounter(id) != permanentRef.getZoneChangeCounter()) {
             permanent = (Permanent) this.getLastKnownInformation(id, Zone.BATTLEFIELD, permanentRef.getZoneChangeCounter());
+        } else if (!permanent.isPhasedIn()) {
+            permanent = getPhasedOutLKI(permanent);
         }
         return permanent;
     }
@@ -997,6 +1023,15 @@ public abstract class GameImpl implements Game {
      */
     @Override
     public GameState restoreState(int bookmark, String context) {
+        return restoreState(bookmark, context, false);
+    }
+
+    @Override
+    public GameState restoreStateKeepingStack(int bookmark, String context) {
+        return restoreState(bookmark, context, true);
+    }
+
+    private GameState restoreState(int bookmark, String context, boolean keepStack) {
         if (!simulation && !this.hasEnded()) { // if player left or game is over no undo is possible - this could lead to wrong winner
             if (bookmark != 0) {
                 if (!savedStates.contains(bookmark - 1)) {
@@ -1009,7 +1044,7 @@ public abstract class GameImpl implements Game {
                     removeBookmark(bookmark);
                     GameState restore = gameStates.rollback(stateNum);
                     if (restore != null) {
-                        state.restore(restore);
+                        state.restore(restore, keepStack);
                         playerList.setCurrent(state.getPlayerByOrderId());
                         return state;
                     }
@@ -1364,6 +1399,7 @@ public abstract class GameImpl implements Game {
         //20091005 - 103.3
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
+            player.initStartingDeckSize();
             if (!gameOptions.testMode || player.getLife() == 0) {
                 player.initLife(this.getStartingLife());
             }
@@ -1585,6 +1621,7 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void end() {
+        // it's real game end, do not use any game dialogs/rules/events here
         if (!state.isGameOver()) {
             logger.debug("END of gameId: " + this.getId());
             endTime = new Date();
@@ -1615,6 +1652,78 @@ public abstract class GameImpl implements Game {
                     .forEach(this::informPlayers);
 
             DataCollectorServices.getInstance().onGameEnd(this);
+        }
+    }
+
+    /**
+     * End game on critical error with the winner
+     * Despite mtg's paper rules (MTR), we need a real winner to continue match/tourney without infinite games loop
+     * Winner: highest life, then most priority time left, then random.
+     */
+    @Override
+    public void endWithTechnicalWinner(String reason) {
+        if (state.isGameOver()) {
+            return;
+        }
+
+        // find a winner
+        List<Player> candidates = state.getPlayers().values().stream()
+                .filter(Player::isInGame)
+                .collect(Collectors.toList());
+        String decidedBy;
+        if (candidates.isEmpty()) {
+            candidates = new ArrayList<>(state.getPlayers().values());
+            decidedBy = "random from all players, nobody is in game";
+        } else if (candidates.size() == 1) {
+            decidedBy = "last player in game";
+        } else {
+            // find by life
+            int maxLife = candidates.stream().mapToInt(Player::getLife).max().orElse(0);
+            candidates = candidates.stream()
+                    .filter(player -> player.getLife() == maxLife)
+                    .collect(Collectors.toList());
+            decidedBy = "life";
+
+            // find by time left
+            if (candidates.size() > 1 && getPriorityTime() > 0) {
+                int maxTimeLeft = candidates.stream().mapToInt(Player::getPriorityTimeLeft).max().orElse(0);
+                candidates = candidates.stream()
+                        .filter(player -> player.getPriorityTimeLeft() == maxTimeLeft)
+                        .collect(Collectors.toList());
+                decidedBy = "priority time left";
+            }
+
+            // find by random
+            if (candidates.size() > 1) {
+                decidedBy = "random";
+            }
+        }
+        Player winner = candidates.isEmpty() ? null : candidates.get(RandomUtil.nextInt(candidates.size()));
+
+        // skip game events, e.g. replacement effects
+        if (winner != null) {
+            for (Player player : state.getPlayers().values()) {
+                player.setTechnicalResult(player.getId().equals(winner.getId()));
+            }
+            winnerId = winner.getId();
+        }
+
+        // use try/catch to make sure it's really finish all the work
+
+        String message = String.format("Game stopped due critical error, technical winner: %s (decided by %s). Reason: %s",
+                (winner == null ? "none" : winner.getName()), decidedBy, reason);
+        logger.error(message + " - game " + getId());
+
+        try {
+            end();
+        } catch (Throwable e) {
+            logger.fatal("Can't finish game after critical error: " + getId(), e);
+        }
+
+        try {
+            informPlayers(message);
+        } catch (Throwable e) {
+            logger.error("Can't inform players about technical winner: " + getId(), e);
         }
     }
 
@@ -1827,7 +1936,7 @@ public abstract class GameImpl implements Game {
                             continue;
                         } else {
                             // tests - try to fail fast
-                            throw new MageException(UNIT_TESTS_ERROR_TEXT);
+                            throw new MageException(UNIT_TESTS_ERROR_TEXT + ": " + e.getMessage(), e);
                         }
                     }
                     state.getPlayerList().getNext();
@@ -1837,12 +1946,16 @@ public abstract class GameImpl implements Game {
             // OUTER error - game must end (too many errors also come here)
             this.totalErrorsCount.incrementAndGet();
             logger.fatal("Game end on critical error: " + e, e);
-            this.fireErrorEvent("Game end on critical error: " + e, e);
-            this.end();
+            try {
+                this.fireErrorEvent("Game end on critical error: " + e, e);
+            } catch (Throwable ex) {
+                logger.error("Can't send critical error to players: " + getId(), ex);
+            }
+            this.endWithTechnicalWinner(String.valueOf(e));
 
             // re-raise error in unit tests, so framework can catch it (example: errors in AI simulations)
-            if (UNIT_TESTS_ERROR_TEXT.equals(e.getMessage())) {
-                throw new IllegalStateException(UNIT_TESTS_ERROR_TEXT);
+            if (e.getMessage() != null && e.getMessage().contains(UNIT_TESTS_ERROR_TEXT)) {
+                throw new IllegalStateException(e.getMessage(), e);
             }
         } finally {
             resetLKI();
@@ -1853,10 +1966,11 @@ public abstract class GameImpl implements Game {
     protected void resolve() {
         StackObject top = null;
         boolean wasError = false;
+        boolean applied = false;
         try {
             top = state.getStack().peek();
-            DataCollectorServices.getInstance().onTestsStackResolve(this);
-            top.resolve(this);
+            DataCollectorServices.getInstance().onTestsStackResolveStart(this, top);
+            applied = top.resolve(this);
             resetControlAfterSpellResolve(top.getId());
         } catch (Throwable e) {
             // workaround to show real error in tests instead checkInfiniteLoop
@@ -1874,6 +1988,7 @@ public abstract class GameImpl implements Game {
                     }
                 }
             }
+            DataCollectorServices.getInstance().onTestsStackResolveEnd(this, top, applied);
         }
     }
 
@@ -2120,6 +2235,10 @@ public abstract class GameImpl implements Game {
 
         // if it was no copy of copy take the target itself
         if (newBluePrint == null) {
+            if (copyFromPermanent.isCopy() && copyFromPermanent.getCopyFrom() instanceof Permanent) {
+                // copy effect is no longer active (e.g. source is LKI), use the original copy link
+                copyFromPermanent = (Permanent) copyFromPermanent.getCopyFrom();
+            }
             newBluePrint = copyFromPermanent.copy();
 
             // reset to original characteristics
@@ -2392,17 +2511,16 @@ public abstract class GameImpl implements Game {
             if (!player.hasLost()) {
                 String lostReason = "";
                 if (player.getLife() <= 0 && player.canLoseByZeroOrLessLife()) {
-                    lostReason = "life is 0 or less";
+                    lostReason = "to having 0 or less life";
                 }
                 if (player.getLibrary().isEmptyDraw()) {
-                    lostReason = "draw from empty library";
+                    lostReason = "drawing from an empty library";
                 }
                 if (player.getCountersCount(CounterType.POISON) >= 10) {
-                    lostReason = "poison counter >= 10";
+                    lostReason = "to having 10 or more poison counters";
                 }
-                if (!lostReason.isEmpty()) {
+                if (!lostReason.isEmpty() && player.lost(this)) {
                     this.informPlayers(player.getLogName() + " lost the game due " + lostReason);
-                    player.lost(this);
                 }
             }
         }
@@ -2494,6 +2612,13 @@ public abstract class GameImpl implements Game {
         );
         Set<Card> copiedCardsToRemove = new HashSet<>();
         for (Card copiedCard : allCopiedCards) {
+            // 722.3c
+            // This copy remains in exile for as long as the prepared permanent remains on the battlefield and has
+            // the prepared designation. This is an exception to rule 704.5e.
+            if (copiedCard instanceof PreparedSpellCopy
+                    && ((PreparedSpellCopy) copiedCard).getPreparedPermanent(this) != null) {
+                continue;
+            }
             // 1. Zone must be checked from main card only cause mdf parts can have different zones
             //    (one side on battlefield, another side on outside)
             // 2. Copied card creates in OUTSIDE zone and put to stack manually in the same code,
@@ -2648,7 +2773,8 @@ public abstract class GameImpl implements Game {
             }
             if (perm.isPlaneswalker(this)) {
                 //20091005 - 704.5i
-                if (perm.getCounters(this).getCount(CounterType.LOYALTY) == 0) {
+                if (perm.getCounters(this).getCount(CounterType.LOYALTY) == 0
+                        && perm.zeroLoyaltyRuleApplies()) {
                     if (movePermanentToGraveyardWithInfo(perm, "SBA: planeswalker has loyalty 0")) {
                         somethingHappened = true;
                         continue;

@@ -9,12 +9,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -76,15 +71,17 @@ class MoonstoneHarshMistressEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Card card = (Card) getValue("discardedCard");
-        if (card == null || player == null) {
+        if (card == null || player == null || game.getState().getZone(card.getId()) != Zone.GRAVEYARD) {
             return false;
         }
 
-        player.moveCardsToExile(
+        if (!player.moveCardsToExile(
             card, source, game, true,
             CardUtil.getExileZoneId(game, source),
             CardUtil.getSourceName(game, source)
-        );
+        )) {
+            return false;
+        }
 
         game.addEffect(new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED,Duration.UntilEndOfYourNextTurn)
             .setTargetPointer(new FixedTarget(card.getId(), game)), source);

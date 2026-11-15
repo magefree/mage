@@ -37,8 +37,7 @@ public final class ThoughtSponge extends CardImpl {
 
         // Thought Sponge enters the battlefield with a number of +1/+1 counters on it equal to the greatest number of cards an opponent has drawn this turn.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(), ThoughtSpongeValue.instance, false
-        ), "with a number of +1/+1 counters on it equal to " +
+                CounterType.P1P1.createInstance(), ThoughtSpongeValue.instance), "with a number of +1/+1 counters on it equal to " +
                 "the greatest number of cards an opponent has drawn this turn"
         ));
 
@@ -67,7 +66,7 @@ enum ThoughtSpongeValue implements DynamicValue {
         if (watcher == null) {
             return 0;
         }
-        return game.getOpponents(sourceAbility.getControllerId())
+        return game.getOpponents(sourceAbility.getControllerId(), false)
                 .stream()
                 .map(watcher::getCardsDrawnThisTurn)
                 .max(Integer::compare)

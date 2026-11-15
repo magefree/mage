@@ -46,7 +46,7 @@ public final class TheSpaceFamilyGoblinson extends CardImpl {
 
         // The Space Family Goblinson has trample as long as you've rolled three or more dice this turn.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn),
+                new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
                 TheSpaceFamilyGoblinsonCondition.instance, "{this} has trample " +
                 "as long as you've rolled three or more dice this turn"
         )).addHint(hint), new TheSpaceFamilyGoblinsonWatcher());

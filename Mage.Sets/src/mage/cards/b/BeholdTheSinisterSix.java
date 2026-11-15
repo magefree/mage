@@ -8,7 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterPermanentCard;
+import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -42,7 +42,7 @@ public final class BeholdTheSinisterSix extends CardImpl {
 
 class BeholdTheSinisterSixTarget extends TargetCardInYourGraveyard {
 
-    private static final FilterCard filter = new FilterPermanentCard("creature cards with different names");
+    private static final FilterCard filter = new FilterCreatureCard("creature cards with different names");
 
     BeholdTheSinisterSixTarget() {
         super(0, 6, filter, false);

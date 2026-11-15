@@ -23,7 +23,7 @@ import java.util.UUID;
 public final class ScorpionSentinel extends CardImpl {
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
-            StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, ComparisonType.MORE_THAN, 7
+            StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, ComparisonType.OR_GREATER, 7
     );
 
     public ScorpionSentinel(UUID ownerId, CardSetInfo setInfo) {

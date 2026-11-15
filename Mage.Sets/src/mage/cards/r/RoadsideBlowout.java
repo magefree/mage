@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetPermanent;
@@ -22,7 +21,7 @@ import java.util.UUID;
  */
 public final class RoadsideBlowout extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("a permanent with mana value 1");
+    private static final FilterPermanent filter = new FilterPermanent("a permanent with mana value 1");
     private static final FilterPermanent filter2 = new FilterPermanent("creature or Vehicle an opponent controls");
 
     static {

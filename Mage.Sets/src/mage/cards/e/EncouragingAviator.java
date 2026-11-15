@@ -30,7 +30,7 @@ public final class EncouragingAviator extends PrepareCard {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever this creature attacks, it becomes prepared.
-        this.addAbility(new AttacksTriggeredAbility(new BecomePreparedSourceEffect()));
+        this.addAbility(new AttacksTriggeredAbility(new BecomePreparedSourceEffect(true)));
 
         // Jump
         // Instant {U}

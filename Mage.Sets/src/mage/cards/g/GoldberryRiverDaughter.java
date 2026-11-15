@@ -69,7 +69,7 @@ public final class GoldberryRiverDaughter extends CardImpl {
 class GoldberryRiverDaughterFromEffect extends OneShotEffect {
     GoldberryRiverDaughterFromEffect() {
         super(Outcome.Neutral);
-        staticText = "Move a counter of each kind not on {this} from another target permanent you control onto Goldberry.";
+        staticText = "Move a counter of each kind not on {this} from another target permanent you control onto {this}.";
     }
 
     private GoldberryRiverDaughterFromEffect(final GoldberryRiverDaughterFromEffect effect) {
@@ -111,7 +111,7 @@ class GoldberryRiverDaughterFromEffect extends OneShotEffect {
 class GoldberryRiverDaughterToEffect extends OneShotEffect {
     GoldberryRiverDaughterToEffect() {
         super(Outcome.Neutral);
-        staticText = "Move one or more counters from Goldberry onto another target permanent you control. If you do, draw a card.";
+        staticText = "Move one or more counters from {this} onto another target permanent you control. If you do, draw a card.";
     }
 
     private GoldberryRiverDaughterToEffect(final GoldberryRiverDaughterToEffect effect) {
@@ -167,12 +167,6 @@ class GoldberryRiverDaughterToEffect extends OneShotEffect {
                         source,
                         game);
                 fromPermanent.removeCounters(counterName, amount, source, game);
-                game.informPlayers(
-                        controller.getLogName() + "moved " +
-                                amount + " " +
-                                counterName + " counter" + (amount > 1 ? "s" : "") +
-                                " from " + fromPermanent.getLogName() +
-                                "to " + toPermanent.getLogName() + ".");
             }
         }
 

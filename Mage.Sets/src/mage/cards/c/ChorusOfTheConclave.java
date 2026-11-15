@@ -147,7 +147,6 @@ class ChorusOfTheConclaveReplacementEffect2 extends ReplacementEffectImpl {
             int xValue = spellX.get(key);
             if (xValue > 0) {
                 creature.addCounters(CounterType.P1P1.createInstance(xValue), source.getControllerId(), source, game, event.getAppliedEffects());
-                game.informPlayers(sourceObject.getLogName() + ": " + creature.getLogName() + " enters the battlefield with " + xValue + " +1/+1 counter" + (xValue > 1 ? "s" : "") + " on it");
             }
             spellX.remove(key);
         }

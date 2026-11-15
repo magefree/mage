@@ -19,7 +19,10 @@ public enum SpellAbilityType {
     MODAL_RIGHT("RightModal SpellAbility"),
     SPLICE("Spliced SpellAbility"),
     ADVENTURE_SPELL("Adventure SpellAbility"),
-    OMEN_SPELL("Omen SpellAbility");
+    OMEN_SPELL("Omen SpellAbility"),
+    PREPARE_SPELL("Prepare SpellAbility"),
+    VENGEANCE_SPELL("Vengeance SpellAbility");
+    // If you're adding a new SpellAbilityType, make sure to add handling (can it be used from the Command Zone) in Commander.java
 
     private final String text;
 

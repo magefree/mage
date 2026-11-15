@@ -61,7 +61,7 @@ class DelayingShieldReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         DamageEvent damageEvent = (DamageEvent) event;
-        new AddCountersSourceEffect(CounterType.DELAY.createInstance(damageEvent.getAmount()), true).apply(game, source);
+        new AddCountersSourceEffect(CounterType.DELAY.createInstance(damageEvent.getAmount())).apply(game, source);
         return true;
     }
 

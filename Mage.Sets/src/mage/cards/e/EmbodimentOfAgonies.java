@@ -38,8 +38,7 @@ public final class EmbodimentOfAgonies extends CardImpl {
 
         // Embodiment of Agonies enters the battlefield with a +1/+1 counter on it for each different mana cost among nonland cards in your graveyard.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(), EmbodimentOfAgoniesValue.instance, false
-        ), "with a +1/+1 counter on it for each different mana cost among nonland cards in your graveyard"));
+                CounterType.P1P1.createInstance(), EmbodimentOfAgoniesValue.instance), "with a +1/+1 counter on it for each different mana cost among nonland cards in your graveyard"));
     }
 
     private EmbodimentOfAgonies(final EmbodimentOfAgonies card) {

@@ -1,7 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
-
 import mage.Mana;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -15,6 +13,8 @@ import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author muz
@@ -24,7 +24,7 @@ public final class DragonsDesire extends CardImpl {
     private static final FilterPermanent filter = new FilterArtifactPermanent("artifact your opponents control");
 
     static {
-        filter.add(TargetController.OPPONENT.getOwnerPredicate());
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);

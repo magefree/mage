@@ -1,8 +1,7 @@
 package mage.cards.u;
 
-import java.util.UUID;
-import mage.abilities.condition.Condition;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceTargetsPermanentCondition;
 import mage.abilities.effects.common.PutOnTopOrBottomLibraryTargetEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
@@ -12,9 +11,10 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +25,7 @@ public final class UneasyPartings extends CardImpl {
     private static final FilterPermanent filter = new FilterAttackingCreature("an attacking nontoken creature");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.FALSE));
+        filter.add(TokenPredicate.FALSE);
     }
 
     private static final Condition condition = new SourceTargetsPermanentCondition(filter);

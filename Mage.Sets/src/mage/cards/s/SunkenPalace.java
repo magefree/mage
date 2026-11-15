@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -27,6 +26,8 @@ import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -102,7 +103,7 @@ class SunkenPalaceTriggeredAbility extends DelayedTriggeredAbility {
             return false;
         }
         // trigger on spells and activated abilities (not triggered abilities)
-        if (!(stackObject instanceof StackAbility) || ((StackAbility) stackObject).isActivated()) {
+        if (!(stackObject instanceof StackAbility) || ((StackAbility) stackObject).isActivatedAbility()) {
             getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
             return true;
         }

@@ -5,12 +5,16 @@ import mage.abilities.Ability;
 import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.constants.Outcome;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterAnyTarget;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
+
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -22,6 +26,8 @@ public abstract class RedirectionEffect extends ReplacementEffectImpl {
         ONE_USAGE_ABSOLUTE,
         ONE_USAGE_AT_THE_SAME_TIME; // all damage dealt at the same time
     }
+
+    private static final FilterPermanent DAMAGEABLE = new FilterAnyTarget().getPermanentFilter();
 
     protected Target redirectTarget;
     protected int amountToRedirect;
@@ -62,6 +68,9 @@ public abstract class RedirectionEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         int damageToRedirect = event.getAmount();
         if (damageToRedirect < 1) { // if multiple replacement effect apply, the rest damage can be 0, so the effect is not applied/replaced
+            return false;
+        }
+        if (!canRedirectTo(redirectTarget.getFirstTarget(), game)) {
             return false;
         }
         String sourceLogName = source != null ? game.getObject(source).getLogName() + ": " : "";
@@ -106,6 +115,19 @@ public abstract class RedirectionEffect extends ReplacementEffectImpl {
             return false;
         }
         return true;
+    }
+
+    /**
+     * 614.9: redirecting to a permanent that has left the battlefield or is no longer a battle, creature or
+     * planeswalker, or to a player who has left the game, does nothing
+     */
+    private boolean canRedirectTo(UUID id, Game game) {
+        Permanent permanent = game.getPermanent(id);
+        if (permanent != null) {
+            return !redirectTarget.hasChangedZones(id, game) && DAMAGEABLE.match(permanent, game);
+        }
+        Player player = game.getPlayer(id);
+        return player != null && player.isInGame();
     }
 
     private String getRedirectedFromText(GameEvent event, Game game) {

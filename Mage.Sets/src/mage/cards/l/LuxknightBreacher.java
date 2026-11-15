@@ -35,8 +35,7 @@ public final class LuxknightBreacher extends CardImpl {
 
         // This creature enters with a +1/+1 counter on it for each other creature and/or artifact you control.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(0), xValue, true
-        ), "with a +1/+1 counter on it for each other creature and/or artifact you control").addHint(hint));
+                CounterType.P1P1.createInstance(0), xValue), "with a +1/+1 counter on it for each other creature and/or artifact you control").addHint(hint));
     }
 
     private LuxknightBreacher(final LuxknightBreacher card) {

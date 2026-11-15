@@ -31,6 +31,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import mage.util.CardUtil;
 
 /**
  *
@@ -101,8 +102,7 @@ class PullEffect extends OneShotEffect {
         }
 
         Set<Permanent> permanents = cards.stream()
-                .map(Card::getId)
-                .map(game::getPermanent)
+                .map(card -> CardUtil.getPermanentFromCardPutToBattlefield(card, game))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
         if (permanents.isEmpty()) {

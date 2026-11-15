@@ -30,7 +30,7 @@ public final class DiscordantDirge extends CardImpl {
 
         // At the beginning of your upkeep, you may put a verse counter on Discordant Dirge.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), true));
+                new AddCountersSourceEffect(CounterType.VERSE.createInstance()), true));
 
         // {B}, Sacrifice Discordant Dirge: Look at target opponent's hand and choose up to X cards from it, where X is the number of verse counters on Discordant Dirge. That player discards those cards.
         Ability ability = new SimpleActivatedAbility(

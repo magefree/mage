@@ -49,7 +49,7 @@ public final class SerahFarron extends TransformingDoubleFacedCard {
         filter2.add(SuperType.LEGENDARY.getPredicate());
     }
 
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter2);
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter2, ComparisonType.OR_GREATER, 2);
     private static final Hint hint = new ValueConditionHint(
             "You control two or more other legendary creatures",
             new PermanentsOnBattlefieldCount(filter2), condition

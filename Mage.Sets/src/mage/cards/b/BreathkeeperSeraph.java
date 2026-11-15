@@ -3,15 +3,16 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityPairedEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 
 import java.util.UUID;
@@ -37,9 +38,10 @@ public final class BreathkeeperSeraph extends CardImpl {
         // As long as Breathkeeper Seraph is paired with another creature, each of those creatures has "When this creature dies, you may return it to the battlefield under its owner's control at the beginning of your next upkeep."
         this.addAbility(new SimpleStaticAbility(new GainAbilityPairedEffect(
                 new DiesSourceTriggeredAbility(
-                        new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(
-                                new ReturnSourceFromGraveyardToBattlefieldEffect()
-                        )).setText("return it to the battlefield under its owner's control at the beginning of your next upkeep"), true
+                        new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(
+                                new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false)
+                        )).setText("return it to the battlefield under its owner's control at the beginning of your next upkeep"),
+                        true, SetTargetPointer.CARD
                 ).setTriggerPhrase("When this creature dies, "), "As long as {this} is paired with " +
                 "another creature, each of those creatures has \"When this creature dies, you may return " +
                 "it to the battlefield under its owner's control at the beginning of your next upkeep.\""

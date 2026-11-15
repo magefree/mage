@@ -36,7 +36,7 @@ public final class SongOfStupefaction extends CardImpl {
         // Enchant creature or Vehicle
         TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE_OR_VEHICLE);
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
         this.addAbility(new EnchantAbility(auraTarget));
 
         // When Song of Stupefaction enters the battlefield, you may mill two cards.

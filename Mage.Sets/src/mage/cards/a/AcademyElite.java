@@ -36,7 +36,7 @@ public final class AcademyElite extends CardImpl {
         // Academy Elite enters the battlefield with X +1/+1 counters on it, where X is the number of instant and
         // sorcery cards in all graveyards.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(),
-                new CardsInAllGraveyardsCount(new FilterInstantOrSorceryCard()), false),
+                new CardsInAllGraveyardsCount(new FilterInstantOrSorceryCard())),
                 "with X +1/+1 counters on it, where X is the number of instant and sorcery cards in all graveyards"));
 
         // {2}{U}, Remove a +1/+1 counter from Academy Elite: Draw a card, then discard a card.

@@ -1,7 +1,5 @@
 package mage.cards.i;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,16 +8,21 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.filter.FilterSpell;
-import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.TargetsPermanentPredicate;
-import mage.target.common.TargetAnyTarget;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterAnyTarget;
+import mage.filter.common.FilterPermanentOrPlayer;
+import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.mageobject.TargetsPermanentPredicate;
+import mage.target.common.TargetPermanentOrPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,9 +31,11 @@ import mage.constants.Duration;
 public final class IronFistLivingWeapon extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a spell that targets a creature you control");
+    private static final FilterPermanentOrPlayer filter2 = new FilterAnyTarget("any other target");
 
     static {
         filter.add(new TargetsPermanentPredicate(StaticFilters.FILTER_CONTROLLED_CREATURE));
+        filter2.getPermanentFilter().add(AnotherPredicate.instance);
     }
 
     public IronFistLivingWeapon(UUID ownerId, CardSetInfo setInfo) {
@@ -49,7 +54,7 @@ public final class IronFistLivingWeapon extends CardImpl {
                 .setText("{this} deals damage equal to his power to any other target"),
             new TapSourceCost()
         );
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetPermanentOrPlayer(filter2));
         this.addAbility(new SpellCastControllerTriggeredAbility(
             new GainAbilitySourceEffect(ability, Duration.EndOfTurn)
                 .setText("{this} gains \"" + ability.getRule() + "\" until end of turn"),

@@ -51,7 +51,7 @@ public final class SummonPrimalGaruda extends CardImpl {
 
         // II, III -- Slipstream -- Another target creature you control gets +1/+0 and gains flying until end of turn.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_III, ability -> {
-            ability.addEffect(new BoostTargetEffect(2, 0).setText("another target creature you control gets +1/+0"));
+            ability.addEffect(new BoostTargetEffect(1, 0).setText("another target creature you control gets +1/+0"));
             ability.addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance()).setText("and gains flying until end of turn"));
             ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
             ability.withFlavorWord("Slipstream");

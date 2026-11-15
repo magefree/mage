@@ -30,7 +30,7 @@ public final class SetPhasersTo extends CardImpl {
                 .withTargetDescription("it").concatBy("and")
         );
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().withFlavorWord("Stun");
+        this.getSpellAbility().getModes().getMode().withFlavorWord("Stun");
 
         // * Kill -- This spell deals 3 damage to target attacking creature.
         Mode mode = new Mode(new DamageTargetEffect(3)).withFlavorWord("Kill");

@@ -77,7 +77,7 @@ class SunspineLynxEffect extends OneShotEffect {
                 .getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_LANDS_NONBASIC,
-                        source.getSourceId(), source, game
+                        source.getControllerId(), source, game
                 )
                 .stream()
                 .collect(Collectors.toMap(

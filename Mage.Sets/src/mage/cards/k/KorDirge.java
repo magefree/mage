@@ -51,7 +51,7 @@ class KorDirgeEffect extends RedirectionEffect {
 
     private KorDirgeEffect(final KorDirgeEffect effect) {
         super(effect);
-        this.target = effect.target;
+        this.target = effect.target.copy();
     }
 
     @Override

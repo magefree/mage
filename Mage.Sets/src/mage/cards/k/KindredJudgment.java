@@ -1,0 +1,81 @@
+package mage.cards.k;
+
+import java.util.UUID;
+
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DestroyAllEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.choices.Choice;
+import mage.choices.ChoiceCreatureType;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.game.Game;
+import mage.players.Player;
+
+/**
+ *
+ * @author muz
+ */
+public final class KindredJudgment extends CardImpl {
+
+    public KindredJudgment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");
+
+        // Choose a creature type. Destroy all creatures that aren't of the chosen type.
+        this.getSpellAbility().addEffect(new KindredJudgmentEffect());
+    }
+
+    private KindredJudgment(final KindredJudgment card) {
+        super(card);
+    }
+
+    @Override
+    public KindredJudgment copy() {
+        return new KindredJudgment(this);
+    }
+}
+
+class KindredJudgmentEffect extends OneShotEffect {
+
+    KindredJudgmentEffect() {
+        super(Outcome.DestroyPermanent);
+        this.staticText = "Choose a creature type. Destroy all creatures that aren't of the chosen type.";
+    }
+
+    private KindredJudgmentEffect(final KindredJudgmentEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public KindredJudgmentEffect copy() {
+        return new KindredJudgmentEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+
+        Choice typeChoice = new ChoiceCreatureType(game, source);
+        if (!controller.choose(outcome, typeChoice, game)) {
+            return false;
+        }
+
+        SubType subType = SubType.byDescription(typeChoice.getChoiceKey());
+        if (subType == null) {
+            return false;
+        }
+
+        game.informPlayers(controller.getLogName() + " has chosen " + typeChoice.getChoiceKey());
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures not of the chosen type");
+        filter.add(Predicates.not(subType.getPredicate()));
+        return new DestroyAllEffect(filter).apply(game, source);
+    }
+}

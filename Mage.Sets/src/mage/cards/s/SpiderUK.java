@@ -91,6 +91,7 @@ class SpiderUKWatcher extends Watcher {
         Optional.of(event)
                 .map(EntersTheBattlefieldEvent.class::cast)
                 .map(EntersTheBattlefieldEvent::getTarget)
+                .filter(permanent -> permanent.isCreature(game))
                 .map(Controllable::getControllerId)
                 .ifPresent(uuid -> map.compute(uuid, CardUtil::setOrIncrementValue));
     }

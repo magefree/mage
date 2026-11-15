@@ -67,7 +67,7 @@ public class ColdsnapThemeDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 371, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Portent", 90, Rarity.COMMON, mage.cards.p.Portent.class));
         cards.add(new SetCardInfo("Reinforcements", "12b", Rarity.COMMON, mage.cards.r.Reinforcements.class));
-        //ards.add(new SetCardInfo("Scars of the Veteran", 16, Rarity.UNCOMMON, mage.cards.s.ScarsOfTheVeteran.class));
+        cards.add(new SetCardInfo("Scars of the Veteran", 16, Rarity.UNCOMMON, mage.cards.s.ScarsOfTheVeteran.class));
         cards.add(new SetCardInfo("Skull Catapult", 336, Rarity.UNCOMMON, mage.cards.s.SkullCatapult.class));
         cards.add(new SetCardInfo("Snow Devil", 100, Rarity.COMMON, mage.cards.s.SnowDevil.class));
         cards.add(new SetCardInfo("Soul Burn", 161, Rarity.COMMON, mage.cards.s.SoulBurn.class));

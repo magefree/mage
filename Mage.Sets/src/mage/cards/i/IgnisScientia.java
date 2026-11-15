@@ -14,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.token.TreasureToken;
+import mage.game.permanent.token.FoodToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -83,7 +83,7 @@ class IgnisScientiaEffect extends OneShotEffect {
         boolean flag = card.isCreature(game);
         player.moveCards(card, Zone.EXILED, source, game);
         if (flag) {
-            new TreasureToken().putOntoBattlefield(1, game, source);
+            new FoodToken().putOntoBattlefield(1, game, source);
         }
         return true;
     }

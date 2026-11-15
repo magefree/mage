@@ -55,7 +55,7 @@ public final class CaseOfTheFilchedFalcon extends CardImpl {
         solvedAbility.addEffect(new BecomesCreatureTargetEffect(
             new CreatureToken(0, 0, "0/0 Bird creature with flying", SubType.BIRD).withAbility(FlyingAbility.getInstance()),
             false, false, Duration.WhileOnBattlefield
-        ).setText("It becomes a 0/0 Bird creature with flying in addition to its other types"));
+        ).withKeepPriorTypes(true).setText("It becomes a 0/0 Bird creature with flying in addition to its other types"));
         solvedAbility.addCost(new SacrificeSourceCost().setText("sacrifice this Case"));
         solvedAbility.addTarget(new TargetPermanent(StaticFilters.FILTER_ARTIFACT_NON_CREATURE));
 

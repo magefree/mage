@@ -5,17 +5,15 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.*;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetCard;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 
 import java.util.*;
@@ -159,14 +157,13 @@ class JuxtaposeEffect extends ContinuousEffectImpl {
         if (permanents.size() == 1) {
             permanent = permanents.iterator().next();
         } else if (permanents.size() > 1) {
-            Cards cards = new CardsImpl();
-            for (Permanent card : permanents) {
-                cards.add(card);
-            }
-
-            TargetCard targetCard = new TargetCard(Zone.BATTLEFIELD, new FilterCard());
-            if (player.choose(Outcome.Benefit, cards, targetCard, source, game)) {
-                permanent = game.getPermanent(targetCard.getFirstTarget());
+            FilterPermanent filterTied = new FilterPermanent(filter.getMessage() + " with the highest mana value");
+            filterTied.add(new PermanentReferenceInCollectionPredicate(permanents, game));
+            TargetPermanent target = new TargetPermanent(filterTied);
+            target.withNotTarget(true);
+            // the chosen permanent is given away
+            if (player.choose(Outcome.Detriment, target, source, game)) {
+                permanent = game.getPermanent(target.getFirstTarget());
             }
         }
         return permanent;

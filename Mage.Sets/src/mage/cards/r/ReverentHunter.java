@@ -27,8 +27,7 @@ public final class ReverentHunter extends CardImpl {
 
         // When Reverent Hunter enters the battlefield, put a number of +1/+1 counters on it equal to your devotion to green.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(0), DevotionCount.G, true
-        )).addHint(DevotionCount.G.getHint()));
+                CounterType.P1P1.createInstance(0), DevotionCount.G)).addHint(DevotionCount.G.getHint()));
     }
 
     private ReverentHunter(final ReverentHunter card) {

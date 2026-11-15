@@ -15,6 +15,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackObject;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
 
@@ -74,16 +75,23 @@ class AbilityActivatedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        UUID tappedPermanent = null;
-        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
-            tappedPermanent = event.getSourceId();
-        }
+        UUID artifactId;
         if (event.getType() == GameEvent.EventType.TAPPED) {
-            tappedPermanent = event.getTargetId();
+            artifactId = event.getTargetId();
+        } else {
+            // abilities with {T} trigger by the tapped event, mana abilities have no stack object (605.3b)
+            StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
+            Ability ability = stackObject != null
+                    ? stackObject.getStackAbility()
+                    : game.getAbility(event.getTargetId(), event.getSourceId()).orElse(null);
+            if (ability == null || ability.hasTapCost()) {
+                return false;
+            }
+            artifactId = event.getSourceId();
         }
 
         Permanent aura = game.getPermanent(this.getSourceId());
-        return aura != null && aura.isAttachedTo(tappedPermanent);
+        return aura != null && aura.isAttachedTo(artifactId);
     }
 
     @Override

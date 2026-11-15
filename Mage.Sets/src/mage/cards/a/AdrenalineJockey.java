@@ -13,7 +13,7 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
-import mage.filter.FilterStackObject;
+import mage.filter.FilterAbility;
 import mage.filter.predicate.other.ExhaustAbilityPredicate;
 
 import java.util.UUID;
@@ -24,7 +24,7 @@ import java.util.UUID;
 public final class AdrenalineJockey extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a spell, if it's not their turn");
-    private static final FilterStackObject filter2 = new FilterStackObject("an exhaust ability");
+    private static final FilterAbility filter2 = new FilterAbility("an exhaust ability");
 
     static {
         filter.add(TargetController.INACTIVE.getControllerPredicate());

@@ -30,7 +30,7 @@ public final class ElephantMandrill extends CardImpl {
     private static final FilterPermanent filter = new FilterArtifactPermanent("artifact your opponents control");
 
     static {
-        filter.add(TargetController.OPPONENT.getOwnerPredicate());
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);

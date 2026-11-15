@@ -75,7 +75,7 @@ class HeroOfLeinaTowerEffect extends OneShotEffect {
             if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                 Permanent sourcePermanent = game.getPermanent(source.getSourceId());
                 if (sourcePermanent != null) {
-                    return new AddCountersSourceEffect(CounterType.P1P1.createInstance(costX), true).apply(game, source);
+                    return new AddCountersSourceEffect(CounterType.P1P1.createInstance(costX)).apply(game, source);
                 }
             }
         }

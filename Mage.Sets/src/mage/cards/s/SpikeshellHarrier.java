@@ -14,6 +14,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -84,16 +85,17 @@ class SpikeshellHarrierEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(permanent, Zone.HAND, source, game);
-        int minSpeed = game
+        int maxSpeed = game
                 .getState()
                 .getPlayersInRange(source.getControllerId(), game)
                 .stream()
                 .filter(uuid -> !uuid.equals(player.getId()))
                 .map(game::getPlayer)
+                .filter(Objects::nonNull)
                 .mapToInt(Player::getSpeed)
-                .min()
+                .max()
                 .orElse(0);
-        if (player.getSpeed() > minSpeed) {
+        if (player.getSpeed() > maxSpeed) {
             player.decreaseSpeed(game);
         }
         return true;

@@ -5,6 +5,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -13,7 +14,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -23,11 +24,10 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class ClawsOfValakut extends CardImpl {
 
-     private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountain you control");
 
     static {
         filter.add(SubType.MOUNTAIN.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public ClawsOfValakut (UUID ownerId, CardSetInfo setInfo) {
@@ -40,7 +40,7 @@ public final class ClawsOfValakut extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(new EnchantAbility(auraTarget));
         SimpleStaticAbility ability = new SimpleStaticAbility(new BoostEnchantedEffect(new PermanentsOnBattlefieldCount(filter, 1),
-                new PermanentsOnBattlefieldCount(filter, 0),
+                StaticValue.get(0),
                 Duration.WhileOnBattlefield));
         ability.addEffect(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA).setText("and has first strike"));
         this.addAbility(ability);

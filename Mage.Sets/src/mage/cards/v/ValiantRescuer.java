@@ -78,7 +78,7 @@ class ValiantRescuerTriggeredAbility extends TriggeredAbilityImpl {
                 || event.getSourceId().equals(this.getSourceId())) {
             return false;
         }
-        StackObject item = game.getState().getStack().getFirstOrNull();
+        StackObject item = game.getStack().getStackObject(event.getTargetId());
         return item instanceof StackAbility
                 && item.getStackAbility() instanceof CyclingAbility;
     }
@@ -108,7 +108,7 @@ class ValiantRescuerWatcher extends Watcher {
         if (event.getType() != GameEvent.EventType.ACTIVATED_ABILITY) {
             return;
         }
-        StackObject item = game.getState().getStack().getFirstOrNull();
+        StackObject item = game.getStack().getStackObject(event.getTargetId());
         if (item instanceof StackAbility
                 && item.getStackAbility() instanceof CyclingAbility) {
             playerMap.computeIfAbsent(event.getPlayerId(), u -> new HashMap<>());

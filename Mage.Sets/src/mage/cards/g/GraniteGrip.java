@@ -4,13 +4,14 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -20,11 +21,10 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class GraniteGrip extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountain you control");
 
     static {
         filter.add(SubType.MOUNTAIN.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public GraniteGrip(UUID ownerId, CardSetInfo setInfo) {
@@ -40,7 +40,7 @@ public final class GraniteGrip extends CardImpl {
 
         // Enchanted creature gets +1/+0 for each Mountain you control.
         SimpleStaticAbility ability = new SimpleStaticAbility(
-                new BoostEnchantedEffect(new PermanentsOnBattlefieldCount(filter, 1), new PermanentsOnBattlefieldCount(filter, 0),
+                new BoostEnchantedEffect(new PermanentsOnBattlefieldCount(filter, 1), StaticValue.get(0),
                 Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }

@@ -26,7 +26,7 @@ public final class PheresBandThunderhoof extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Heroic - Whenever you cast a spell that targets Pheres-Band Thunderhood, put two +1/+1 counters on Pheres-Band Thunderhoof.
-        this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2), true)));
+        this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2))));
     }
 
     private PheresBandThunderhoof(final PheresBandThunderhoof card) {

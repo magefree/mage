@@ -1,10 +1,13 @@
 version: 2
 updates:
+  # bot for reminds only, do not spam repo by PRs
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
-      interval: 'weekly'
+      interval: 'quarterly'
+    open-pull-requests-limit: 1
   - package-ecosystem: 'maven'
     directory: '/'
     schedule:
-      interval: 'weekly'
+      interval: 'quarterly'
+    open-pull-requests-limit: 3

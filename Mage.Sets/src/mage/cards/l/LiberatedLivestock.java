@@ -6,6 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.cards.*;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -18,6 +19,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.*;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
 
 /**
  * @author Codermann63, xenohedron
@@ -88,9 +90,12 @@ class LiberatedLivestockEffect extends OneShotEffect {
             controller.chooseTarget(outcome, auraCards, target, source, game);
             Card auraCard = game.getCard(target.getFirstTarget());
             if (auraCard != null && !tokenPermanent.cantBeAttachedBy(auraCard, source, game, true)) {
-                game.getState().setValue("attachTo:" + auraCard.getId(), tokenPermanent);
+                AttachEffect.setAttachTo(game, auraCard.getId(), tokenPermanent);
                 controller.moveCards(auraCard, Zone.BATTLEFIELD, source, game);
-                tokenPermanent.addAttachment(auraCard.getId(), source, game);
+                Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(auraCard, game);
+                if (attachment != null) {
+                    tokenPermanent.addAttachment(attachment.getId(), source, game);
+                }
             }
         }
         return true;

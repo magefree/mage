@@ -19,6 +19,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -214,7 +215,7 @@ class CosimaGodOfTheVoyageReturnEffect extends OneShotEffect {
 
         // AI hint to return card on 2+ counters
         int currentCount = card.getCounters(game).getCount(CounterType.VOYAGE);
-        Outcome aiOutcome = (currentCount >= 2) ? Outcome.Benefit : Outcome.Detriment;
+        Outcome aiOutcome = (currentCount >= 2) ? Outcome.Benefit : Outcome.AIDontUseIt;
 
         if (player.chooseUse(aiOutcome, "Add a voyage counter (current: " + currentCount + ")?", null,
                 "Yes, add counter", "No, return to battlefield", source, game)
@@ -231,7 +232,7 @@ class CosimaGodOfTheVoyageReturnEffect extends OneShotEffect {
 
         // draw and boost
         player.drawCards(newCount, source, game);
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent != null) {
             permanent.addCounters(CounterType.P1P1.createInstance(newCount), player.getId(), source, game);
         }

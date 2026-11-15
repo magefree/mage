@@ -16,6 +16,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -26,6 +27,7 @@ import java.util.UUID;
 public final class KratosStoicFather extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.GOD);
+    private static final FilterPermanent filter2 = new FilterCreaturePermanent(SubType.GOD, "God");
     private static final DynamicValue xValue = new CountersControllerCount(CounterType.EXPERIENCE);
 
     public KratosStoicFather(UUID ownerId, CardSetInfo setInfo) {
@@ -42,7 +44,7 @@ public final class KratosStoicFather extends CardImpl {
                 Zone.BATTLEFIELD,
                 new AddCountersPlayersEffect(CounterType.EXPERIENCE.createInstance(), TargetController.YOU),
                 new AttacksWithCreaturesTriggeredAbility(null, 1, filter),
-                new DiesCreatureTriggeredAbility(null, false, filter)
+                new DiesCreatureTriggeredAbility(null, false, filter2)
         ).setTriggerPhrase("Whenever you attack with one or more Gods and whenever a God dies, "));
 
         // At the beginning of your end step, put a number of +1/+1 counters on target creature equal to the number of experience counters you have.

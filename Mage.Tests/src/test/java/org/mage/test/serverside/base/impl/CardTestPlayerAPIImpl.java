@@ -61,7 +61,15 @@ import static org.junit.Assert.assertTrue;
 public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implements CardTestAPI {
 
     // DEBUG only, enable it to fast startup tests without database create (delete \db\ folder to force db recreate)
-    private static final boolean FAST_SCAN_WITHOUT_DATABASE_CREATE = false;
+    // set true or run with -Dxmage.tests.fastScanDb=true
+    private static boolean FAST_SCAN_WITHOUT_DATABASE_CREATE = false;
+
+    static {
+        String val = System.getProperty("xmage.tests.fastScanDb");
+        if (val != null) {
+            FAST_SCAN_WITHOUT_DATABASE_CREATE = Boolean.parseBoolean(val);
+        }
+    }
 
     private static final boolean SHOW_EXECUTE_TIME_PER_TEST = false;
 
@@ -330,6 +338,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
 
         assertAllCommandsUsed();
+
+        // workaround for test games - call end game manually instead GameImpl
+        // TODO: remove after refactor execute usage to one per test/run
+        if (!currentGame.hasEnded()) {
+            // no needs in second call (after game really ended)
+            DataCollectorServices.getInstance().onGameEnd(currentGame);
+        }
+        DataCollectorServices.getInstance().onGameEndResult(currentGame); // tests don't hava GameController, so call it here
 
         //assertNoDuplicatedEffects();
     }
@@ -689,6 +705,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param player
      */
     public void disableManaAutoPayment(TestPlayer player) {
+        // a rollback resets the pool from the user's settings (PlayerImpl.restore), so change those too
+        player.getUserData().setManaPoolAutomatic(false);
         player.getManaPool().setAutoPayment(false);
     }
 
@@ -2530,7 +2548,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void assertHasNotWonTheGame(Player player) {
 
-        Assert.assertFalse(player.getName() + " has won the game.", player.hasWon());
+        Assert.assertFalse(player.getName() + " has won the game", player.hasWon());
     }
 
     public void assertLostTheGame(Player player) {
@@ -2540,7 +2558,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void assertHasNotLostTheGame(Player player) {
 
-        Assert.assertFalse(player.getName() + " has lost the game.", player.hasLost());
+        Assert.assertFalse(player.getName() + " has lost the game", player.hasLost());
     }
 
     /**

@@ -39,6 +39,10 @@ public class XmageURLConnection {
     private static final MageVersion version = new MageVersion(XmageURLConnection.class);
     private static final Logger logger = Logger.getLogger(XmageURLConnection.class);
 
+    // rate limit error, server can block next requests for some time (example: scryfall blocks for 30 secs)
+    // must stop requests on it, see https://scryfall.com/docs/api/rate-limits
+    public static final int HTTP_TOO_MANY_REQUESTS = 429;
+
     private static final int CONNECTION_STARTING_TIMEOUT_MS = 10000;
     private static final int CONNECTION_READING_TIMEOUT_MS = 60000;
 
@@ -243,6 +247,15 @@ public class XmageURLConnection {
         } catch (IOException ignore) {
             return "";
         }
+    }
+
+    /**
+     * Get response header like Retry-After (null if not found)
+     */
+    public String getHeaderField(String name) {
+        makeSureConnectionStarted();
+
+        return this.connection.getHeaderField(name);
     }
 
     /**

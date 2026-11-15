@@ -11,9 +11,20 @@ import mage.game.permanent.Permanent;
  */
 public class BecomePreparedSourceEffect extends OneShotEffect {
 
+    private static final String REMINDER_TEXT
+            = "<i>(While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)</i>";
+
+    public static String getReminder() {
+        return REMINDER_TEXT;
+    }
+
     public BecomePreparedSourceEffect() {
+        this(false);
+    }
+
+    public BecomePreparedSourceEffect(boolean itBecomes) {
         super(Outcome.Benefit);
-        staticText = "{this} becomes prepared";
+        staticText = (itBecomes ? "it" : "{this}") + " becomes prepared. " + getReminder();
     }
 
     private BecomePreparedSourceEffect(final BecomePreparedSourceEffect effect) {

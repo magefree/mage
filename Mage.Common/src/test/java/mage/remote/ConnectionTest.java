@@ -81,7 +81,7 @@ public class ConnectionTest {
             final String parameter = RandomStringUtils.randomAlphanumeric(12);
             final String query = make(testeeBuilder.with(c -> c.parameter = parameter)).getQuery();
 
-            assertThat(query).contains("onewayThreadPool=mage.remote.CustomThreadPool" + parameter);
+            assertThat(query).contains("onewayThreadPool=mage.remote.CustomThreadPool&maxNumThreadsOneway=1" + parameter);
         }
 
     }

@@ -11,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
+import mage.filter.FilterAbility;
+import mage.filter.predicate.other.AbilityClassPredicate;
 
 import java.util.UUID;
 
@@ -20,6 +22,12 @@ import java.util.UUID;
  */
 public final class WeequayBeastmaster extends CardImpl {
 
+    private static final FilterAbility filterMonstrosity = new FilterAbility("monstrosity abilities you activate");
+
+    static {
+        filterMonstrosity.add(new AbilityClassPredicate(MonstrosityAbility.class));
+    }
+
     public WeequayBeastmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add(SubType.WEEQUAY);
@@ -28,7 +36,7 @@ public final class WeequayBeastmaster extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Monstrosity abilities you activate cost {1} less to activate.
-        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(MonstrosityAbility.class, "Monstrosity")));
+        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(filterMonstrosity)));
 
         // Whenever a creature you control becomes monstrous, put an additional +1/+1 counter on that creature.
         this.addAbility(new BecomesMonstrousTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance())

@@ -47,7 +47,6 @@ class FractalizeEffect extends BecomesCreatureTargetEffect {
             false, false, Duration.EndOfTurn
         );
         this.withDurationRuleAtStart(true);
-        this.setRemoveSubtypes(true);
     }
 
     private FractalizeEffect(final FractalizeEffect effect) {

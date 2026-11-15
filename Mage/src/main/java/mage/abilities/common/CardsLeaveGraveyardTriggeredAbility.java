@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
@@ -8,14 +9,14 @@ import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.events.ZoneChangeBatchEvent;
+import mage.game.events.ZoneChangeEvent;
 
-import java.util.Objects;
 
 /**
  * @author TheElk801
  */
-public class CardsLeaveGraveyardTriggeredAbility extends TriggeredAbilityImpl {
+public class CardsLeaveGraveyardTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     private final FilterCard filter;
     private final boolean yourTurn;
@@ -43,7 +44,18 @@ public class CardsLeaveGraveyardTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
+    }
+
+    @Override
+    public boolean checkEvent(ZoneChangeEvent event, Game game) {
+        if (event.getFromZone() != Zone.GRAVEYARD || event.getToZone() == Zone.GRAVEYARD) {
+            return false;
+        }
+        Card card = game.getCard(event.getTargetId());
+        return card != null
+                && card.isOwnedBy(getControllerId())
+                && filter.match(card, getControllerId(), this, game);
     }
 
     @Override
@@ -51,17 +63,7 @@ public class CardsLeaveGraveyardTriggeredAbility extends TriggeredAbilityImpl {
         if (yourTurn && !isControlledBy(game.getActivePlayerId())) {
             return false;
         }
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        return zEvent != null
-                && Zone.GRAVEYARD == zEvent.getFromZone()
-                && Zone.GRAVEYARD != zEvent.getToZone()
-                && zEvent.getCards() != null
-                && zEvent.getCards()
-                .stream()
-                .filter(Objects::nonNull)
-                .filter(card -> filter.match(card, getControllerId(), this, game))
-                .map(Card::getOwnerId)
-                .anyMatch(this::isControlledBy);
+        return !getFilteredEvents((ZoneChangeBatchEvent) event, game).isEmpty();
     }
 
     @Override

@@ -75,10 +75,7 @@ class USAgentJohnWalkerEffect extends OneShotEffect {
         }
 
         for (UUID tokenId : token.getLastAddedTokenIds()) {
-            Permanent tokenPermanent = game.getPermanent(tokenId);
-            if (tokenPermanent != null) {
-                tokenPermanent.addAttachment(sourcePermanent.getId(), source, game);
-            }
+            sourcePermanent.addAttachment(tokenId, source, game);
         }
         return true;
     }

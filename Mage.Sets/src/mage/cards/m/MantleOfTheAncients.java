@@ -25,6 +25,7 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.util.CardUtil;
 
 import java.util.Objects;
 import java.util.Set;
@@ -116,11 +117,14 @@ class MantleOfTheAncientsEffect extends OneShotEffect {
             return false;
         }
 
-        cards.forEach(card -> game.getState().setValue("attachTo:" + card.getId(), permanent));
+        cards.forEach(card -> AttachEffect.setAttachTo(game, card.getId(), permanent));
         player.moveCards(cards, Zone.BATTLEFIELD, source, game);
-        Cards movedCards = new CardsImpl(cards);
-        movedCards.retainZone(Zone.BATTLEFIELD, game);
-        movedCards.forEach(card -> permanent.addAttachment(card, source, game));
+        for (Card card : cards) {
+            Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+            if (attachment != null) {
+                permanent.addAttachment(attachment.getId(), source, game);
+            }
+        }
         return true;
     }
 }

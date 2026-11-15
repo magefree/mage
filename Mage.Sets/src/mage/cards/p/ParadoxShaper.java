@@ -36,7 +36,7 @@ public final class ParadoxShaper extends PrepareCard {
 
         // At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-            new BecomePreparedSourceEffect(), false
+            new BecomePreparedSourceEffect(true), false
         ).withInterveningIf(SourcePreparedCondition.UNPREPARED));
 
         // {2}: Put target card from your graveyard on the bottom of your library.

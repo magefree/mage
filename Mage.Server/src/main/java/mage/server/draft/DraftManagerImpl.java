@@ -68,14 +68,6 @@ public class DraftManagerImpl implements DraftManager {
     }
 
     @Override
-    public void timeout(UUID gameId, UUID userId) {
-        if (draftControllers.containsKey(gameId)) {
-            // timeout calls from timer, so it can be too late here (e.g. after real draft ends)
-            draftControllers.get(gameId).timeout(userId);
-        }
-    }
-
-    @Override
     public void removeDraft(UUID draftId) {
         draftControllers.remove(draftId);
     }

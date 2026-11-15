@@ -28,7 +28,7 @@ public final class BullRushBruiser extends CardImpl {
         filter.add(AnotherPredicate.instance);
     }
 
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, false);
 
     public BullRushBruiser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

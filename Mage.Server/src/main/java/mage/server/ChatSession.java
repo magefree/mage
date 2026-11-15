@@ -82,7 +82,10 @@ public class ChatSession {
                 } finally {
                     w.unlock();
                 }
-                broadcast(null, userName + " has joined", MessageColor.BLUE, true, null, MessageType.STATUS, null);
+                // inform other users/chats about connect
+                // warning, massive broadcast must be done in async style
+                managerFactory.threadExecutor().getCallExecutor().execute(() ->
+                        broadcast(null, userName + " has joined", MessageColor.BLUE, true, null, MessageType.STATUS, null));
             }
         });
     }
@@ -108,8 +111,10 @@ public class ChatSession {
             logger.debug(userName + " (" + reason + ')' + " removed from chatId " + chatId);
 
             // inform other users about disconnect (lobby, system tab)
+            // warning, massive broadcast must be done in async style
             if (!reason.messageForUser.isEmpty()) {
-                broadcast(null, userName + reason.messageForUser, MessageColor.BLUE, true, null, MessageType.STATUS, null);
+                managerFactory.threadExecutor().getCallExecutor().execute(() ->
+                        broadcast(null, userName + reason.messageForUser, MessageColor.BLUE, true, null, MessageType.STATUS, null));
             }
         } catch (Exception e) {
             logger.fatal("Chat: disconnecting user catch error: " + e, e);
@@ -171,7 +176,6 @@ public class ChatSession {
 
             // TODO: wtf, remove all that locks/tries and make it simpler
             Set<UUID> clientsToRemove = new HashSet<>();
-            ClientCallback clientCallback = new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId, chatMessage);
             List<UUID> chatUserIds = new ArrayList<>();
             final Lock r = lock.readLock();
             r.lock();
@@ -180,14 +184,20 @@ public class ChatSession {
             } finally {
                 r.unlock();
             }
+
+            // fill queue by order, but send as is from async flush
+            List<User> recipients = new ArrayList<>(chatUserIds.size());
             for (UUID userId : chatUserIds) {
                 Optional<User> user = managerFactory.userManager().getUser(userId);
                 if (user.isPresent()) {
-                    user.get().fireCallback(clientCallback);
+                    user.get().addCallback(new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId, chatMessage));
+                    recipients.add(user.get());
                 } else {
                     clientsToRemove.add(userId);
                 }
             }
+            recipients.forEach(User::flushCallbacksQueue);
+
             if (!clientsToRemove.isEmpty()) {
                 final Lock w = lock.writeLock();
                 w.lock();

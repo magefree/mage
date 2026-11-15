@@ -1,5 +1,6 @@
 package mage.abilities;
 
+import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.costs.mana.AlternateManaPaymentAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.mana.ManaOptions;
@@ -39,6 +40,13 @@ public abstract class SpecialAction extends ActivatedAbilityImpl {
 
     public boolean isManaAction() {
         return manaAbility != null;
+    }
+
+    /**
+     * Whether mana abilities can no longer be activated for the spell after this action is used (convoke, delve, improvise).
+     */
+    public boolean endsManaAbilities() {
+        return manaAbility != null && manaAbility.useOnActivationManaAbilityStep() == ActivationManaAbilityStep.AFTER;
     }
 
     public ManaOptions getManaOptions(Ability source, Game game, ManaCost unpaid) {

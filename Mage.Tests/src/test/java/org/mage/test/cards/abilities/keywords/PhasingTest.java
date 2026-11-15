@@ -121,4 +121,40 @@ public class PhasingTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Spitting Image", 1);
         assertPermanentCount(playerB, "Tolarian Drake", 1);
     }
+
+    @Test
+    public void testForcedPhaseIn() {
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears");
+        addCard(Zone.BATTLEFIELD, playerA, "Bear Cub");
+        addCard(Zone.HAND, playerA, "Sandbar Crocodile");
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerB, "Forest Bear");
+        addCard(Zone.HAND, playerB, "Tolarian Drake");
+        addCard(Zone.HAND, playerA, "Slip Out the Back", 2);
+        addCard(Zone.HAND, playerA, "Time and Tide");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 12);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sandbar Crocodile");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Tolarian Drake");
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Slip Out the Back", "Balduvian Bears");
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Slip Out the Back", "Grizzly Bears");
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Time and Tide");
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Balduvian Bears", 1);
+        assertPermanentCount(playerA, "Bear Cub", 1);
+        assertPermanentCount(playerA, "Sandbar Crocodile", 0);
+        assertPermanentCount(playerB, "Grizzly Bears", 1);
+        assertPermanentCount(playerB, "Forest Bear", 1);
+        assertPermanentCount(playerB, "Tolarian Drake", 0);
+        assertPowerToughness(playerA, "Balduvian Bears", 3, 3);
+        assertPowerToughness(playerB, "Grizzly Bears", 3, 3);
+    }
 }

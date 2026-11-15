@@ -29,7 +29,7 @@ public final class QuestForTheNihilStone extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");
 
         // Whenever an opponent discards a card, you may put a quest counter on Quest for the Nihil Stone.
-        this.addAbility(new DiscardsACardOpponentTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance(), true), true));
+        this.addAbility(new DiscardsACardOpponentTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
 
         // At the beginning of each opponent's upkeep, if that player has no cards in hand and Quest for the Nihil Stone has two or more quest counters on it, you may have that player lose 5 life.
         this.addAbility(new QuestForTheNihilStoneTriggeredAbility());
@@ -67,11 +67,7 @@ class QuestForTheNihilStoneTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent quest = game.getPermanent(super.getSourceId());
-        if (quest == null) {
-            Permanent questLKI = (Permanent) game.getLastKnownInformation(super.getSourceId(), Zone.BATTLEFIELD);
-            quest = questLKI;
-        }
+        Permanent quest = game.getPermanentOrLKIBattlefield(super.getSourceId());
         if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Player opponent = game.getPlayer(event.getPlayerId());
             if (opponent != null

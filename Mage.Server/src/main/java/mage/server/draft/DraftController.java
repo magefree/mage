@@ -3,11 +3,11 @@ package mage.server.draft;
 import mage.MageException;
 import mage.game.draft.Draft;
 import mage.game.draft.DraftPlayer;
+import mage.game.draft.DraftPlayerSnapshot;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
 import mage.players.Player;
-import mage.server.game.GameController;
 import mage.server.managers.ManagerFactory;
 import mage.util.ThreadUtils;
 import mage.view.DraftPickView;
@@ -19,6 +19,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -33,6 +34,8 @@ public class DraftController {
     private final UUID draftSessionId;
     private final Draft draft;
     private final UUID tableId;
+
+    private final AtomicBoolean draftEnded = new AtomicBoolean(false); // thread safe end mark, so can be called multiple times
 
     public DraftController(ManagerFactory managerFactory, Draft draft, ConcurrentMap<UUID, UUID> userPlayerMap, UUID tableId) {
         this.managerFactory = managerFactory;
@@ -153,6 +156,17 @@ public class DraftController {
     }
 
     private void endDraft() throws MageException {
+        //
+        if (!draftEnded.compareAndSet(false, true)) {
+            if (draft.isAbort()) {
+                // aborted draft: the draft thread ends later with own end event
+                logger.info("Draft " + draft.getId() + " already ended by abort, ignored end event");
+            } else {
+                logger.error("Draft " + draft.getId() + " already ended, ignored second end", new Throwable());
+            }
+            return;
+        }
+
         for (final DraftSession draftSession : draftSessions.values()) {
             draftSession.draftOver();
             draftSession.removeDraft();
@@ -170,21 +184,6 @@ public class DraftController {
         }
     }
 
-    public void timeout(UUID userId) {
-        if (userPlayerMap.containsKey(userId)) {
-            DraftSession draftSession = draftSessions.get(userPlayerMap.get(userId));
-            if (draftSession != null) {
-                UUID cardId = draftSession.getMarkedCard();
-                if (cardId != null) {
-                    sendCardPick(userId, cardId, null);
-                    return;
-                }
-            }
-            draft.autoPick(userPlayerMap.get(userId));
-            logger.debug("Draft pick timeout - autopick for player: " + userPlayerMap.get(userId));
-        }
-    }
-
     public UUID getSessionId() {
         return this.draftSessionId;
     }
@@ -192,18 +191,17 @@ public class DraftController {
     public DraftPickView sendCardPick(UUID userId, UUID cardId, Set<UUID> hiddenCards) {
         DraftSession draftSession = draftSessions.get(userPlayerMap.get(userId));
         if (draftSession != null) {
-            draftSession.setMarkedCard(null);
             return draftSession.sendCardPick(cardId, hiddenCards);
         }
         return null;
     }
 
     public void sendCardMark(UUID userId, UUID cardId) {
-        draftSessions.get(userPlayerMap.get(userId)).setMarkedCard(cardId);
+        draft.setMarkedCard(userPlayerMap.get(userId), cardId);
     }
     
     public void setBoosterLoaded(UUID userId) {
-        draftSessions.get(userPlayerMap.get(userId)).setBoosterLoaded();
+        draft.setBoosterLoaded(userPlayerMap.get(userId));
     }
 
     private synchronized void updateDraft() throws MageException {
@@ -212,10 +210,29 @@ public class DraftController {
         }
     }
 
-    private synchronized void pickCard(UUID playerId, int timeout) throws MageException {
+    private void pickCard(UUID playerId, int timeout) throws MageException {
+        // suggestions are needed for disconnected players too (autopick uses it), so prepare it before session check;
+        // it can take time, so do it outside the lock
+        preparePickSuggests(playerId);
+        sendPickCard(playerId, timeout);
+    }
+
+    private synchronized void sendPickCard(UUID playerId, int timeout) throws MageException {
         if (draftSessions.containsKey(playerId)) {
             draftSessions.get(playerId).pickCard(timeout);
         }
+    }
+
+    private void preparePickSuggests(UUID playerId) {
+        // only first send of each pick, re-sends use the same suggestions
+        if (!draft.isPickSuggestsNeeded(playerId)) {
+            return;
+        }
+        DraftPlayerSnapshot snapshot = draft.getPlayerSnapshot(playerId);
+        if (snapshot == null || !snapshot.isPicking()) {
+            return;
+        }
+        draft.setPickSuggests(playerId, DraftPickSuggesters.makeSuggests(snapshot.getBooster(), snapshot.getPicks()));
     }
 
     public UUID getTableId() {
@@ -227,7 +244,7 @@ public class DraftController {
         try {
             endDraft();
         } catch (MageException ex) {
-
+            logger.error("Draft " + draft.getId() + ": can't end the draft on abort", ex);
         }
     }
 }

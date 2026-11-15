@@ -79,7 +79,7 @@ class WaterspoutWardenWatcher extends Watcher {
             return;
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null) {
+        if (permanent != null && permanent.isCreature(game)) {
             map.computeIfAbsent(permanent.getControllerId(), x -> new HashSet<>())
                     .add(new MageObjectReference(permanent, game));
         }

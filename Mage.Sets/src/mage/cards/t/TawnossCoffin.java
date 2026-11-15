@@ -10,6 +10,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -137,7 +138,11 @@ class TawnossCoffinEffect extends OneShotEffect {
         // uniqueKey string allows us to track each instance separately
         String uniqueKey = exileZoneId.toString() + source.getId().toString();
         // exileData keeps track of all creatures/auras/counters and their relationship
+        // double faced cards: a permanent is a side, but an exile zone contains a main card
         Map<String, Object> exileData = new HashMap<>();
+        UUID creatureCardId = CardUtil.getMainCardId(game, creature.getId());
+        Counters notedCounters = creature.getCounters(game).copy();
+        // creature and its auras must be exiled at the same time
         Set<Card> toExile = new HashSet<>();
         toExile.add(creature);
         Map<UUID, List<UUID>> creatureToAurasMap = new HashMap<>();
@@ -147,14 +152,14 @@ class TawnossCoffinEffect extends OneShotEffect {
             if (attachment != null
                     && attachment.hasSubtype(SubType.AURA, game)) {
                 toExile.add(attachment);
-                auras.add(attachmentId);
+                auras.add(CardUtil.getMainCardId(game, attachmentId));
             }
         }
 
-        creatureToAurasMap.put(creature.getId(), auras);
-        controller.moveCardsToExile(toExile, source, game, true, exileZoneId, sourceObject.getIdName());
-        exileData.put("NotedCounters", creature.getCounters(game).copy());
-        exileData.put("Creature", creature.getId());
+        creatureToAurasMap.put(creatureCardId, auras);
+        controller.moveCardsToExile(toExile, source, game, true, exileZoneId, CardUtil.getSourceName(game, source));
+        exileData.put("NotedCounters", notedCounters);
+        exileData.put("Creature", creatureCardId);
         exileData.put("Auras", creatureToAurasMap);
         game.getState().setValue(uniqueKey, exileData);
 
@@ -220,7 +225,7 @@ class TawnossCoffinReturnEffect extends OneShotEffect {
             if (creatureCard == null) {
                 continue;
             }
-            controller.moveCards(creatureCard, Zone.BATTLEFIELD, source, game, false, false, true, null);
+            controller.moveCards(creatureCard, Zone.BATTLEFIELD, source, game, true, false, true, null);
             Permanent newPermanent = CardUtil.getPermanentFromCardPutToBattlefield(creatureCard, game);
             if (newPermanent == null) {
                 continue;
@@ -246,14 +251,14 @@ class TawnossCoffinReturnEffect extends OneShotEffect {
                 Card auraCard = game.getCard(auraId);
                 if (auraCard != null && exileZone.contains(auraId)) {
                     returningAuras.add(auraCard);
-                    game.getState().setValue("attachTo:" + auraCard.getId(), newPermanent);
+                    AttachEffect.setAttachTo(game, auraCard.getId(), newPermanent);
                 }
             }
             controller.moveCards(returningAuras, Zone.BATTLEFIELD, source, game, false, false, true, null);
             for (Card enchantment : returningAuras) {
-                Permanent permanent = game.getPermanent(enchantment.getId());
-                if (permanent != null) {
-                    newPermanent.addAttachment(permanent.getId(), source, game);
+                Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(enchantment, game);
+                if (attachment != null) {
+                    newPermanent.addAttachment(attachment.getId(), source, game);
                 }
             }
         }

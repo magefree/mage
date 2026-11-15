@@ -3,6 +3,7 @@ package mage.collectors.services;
 import mage.collectors.DataCollector;
 import mage.game.Game;
 import mage.game.Table;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -45,12 +46,17 @@ public abstract class EmptyDataCollector implements DataCollector {
     }
 
     @Override
-    public void onGameError(Game game, Exception e) {
+    public void onGameError(Game game, Throwable e) {
         // nothing
     }
 
     @Override
     public void onGameEnd(Game game) {
+        // nothing
+    }
+
+    @Override
+    public void onGameEndResult(Game game) {
         // nothing
     }
 
@@ -90,7 +96,12 @@ public abstract class EmptyDataCollector implements DataCollector {
     }
 
     @Override
-    public void onTestsStackResolve(Game game) {
+    public void onTestsStackResolveStart(Game game, StackObject top) {
+        // nothing
+    }
+
+    @Override
+    public void onTestsStackResolveEnd(Game game, StackObject top, boolean applied) {
         // nothing
     }
 }

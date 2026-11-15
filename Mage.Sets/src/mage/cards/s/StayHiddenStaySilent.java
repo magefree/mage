@@ -38,7 +38,7 @@ public final class StayHiddenStaySilent extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget));
 
         // When Stay Hidden, Stay Silent enters, tap enchanted creature.
@@ -87,7 +87,7 @@ class StayHiddenStaySilentEffect extends OneShotEffect {
                 .map(Permanent::getAttachedTo)
                 .map(game::getPermanent)
                 .ifPresent(permanent -> {
-                    Player player = game.getPlayer(permanent.getControllerId());
+                    Player player = game.getPlayer(permanent.getOwnerId());
                     if (player != null) {
                         player.shuffleCardsToLibrary(permanent, game, source);
                     }

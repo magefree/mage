@@ -810,7 +810,7 @@ public class RoomCardTest extends CardTestPlayerBase {
         addTarget(playerA, bottomlessPoolLockerRoom);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
-        // Cast Bile Blight targeting the fully locked room
+        // Cast Bile Blight targeting the fully unlocked room
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bile Blight");
         addTarget(playerA, bottomlessPoolLockerRoom);
 

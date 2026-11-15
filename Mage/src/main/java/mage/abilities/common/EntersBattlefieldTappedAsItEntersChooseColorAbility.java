@@ -9,18 +9,28 @@ import mage.abilities.effects.common.TapSourceEffect;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 
+import java.util.Locale;
+
 /**
  * @author Susucr
  */
 public class EntersBattlefieldTappedAsItEntersChooseColorAbility extends StaticAbility {
 
+    private final String exceptColor;
+
     public EntersBattlefieldTappedAsItEntersChooseColorAbility() {
+        this((String) null);
+    }
+
+    public EntersBattlefieldTappedAsItEntersChooseColorAbility(String exceptColor) {
         super(Zone.ALL, new EntersBattlefieldEffect(new TapSourceEffect(true)));
-        this.addEffect(new ChooseColorEffect(Outcome.Benefit));
+        this.addEffect(new ChooseColorEffect(Outcome.Benefit, exceptColor));
+        this.exceptColor = exceptColor;
     }
 
     private EntersBattlefieldTappedAsItEntersChooseColorAbility(final EntersBattlefieldTappedAsItEntersChooseColorAbility ability) {
         super(ability);
+        this.exceptColor = ability.exceptColor;
     }
 
     @Override
@@ -42,6 +52,7 @@ public class EntersBattlefieldTappedAsItEntersChooseColorAbility extends StaticA
 
     @Override
     public String getRule() {
-        return "{this} enters tapped. As it enters, choose a color.";
+        return "{this} enters tapped. As it enters, choose a color"
+                + (exceptColor != null ? " other than " + exceptColor.toLowerCase(Locale.ENGLISH) : "") + ".";
     }
 }

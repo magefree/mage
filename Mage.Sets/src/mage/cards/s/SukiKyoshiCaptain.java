@@ -28,7 +28,7 @@ public final class SukiKyoshiCaptain extends CardImpl {
     private static final FilterPermanent filter2 = new FilterPermanent(SubType.WARRIOR, "attacking Warriors");
 
     static {
-        filter.add(AttackingPredicate.instance);
+        filter2.add(AttackingPredicate.instance);
     }
 
     public SukiKyoshiCaptain(UUID ownerId, CardSetInfo setInfo) {

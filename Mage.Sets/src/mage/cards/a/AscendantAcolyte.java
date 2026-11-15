@@ -35,8 +35,7 @@ public final class AscendantAcolyte extends CardImpl {
 
         // Ascendant Acolyte enters the battlefield with a +1/+1 counter on it for each +1/+1 counter among other creatures you control.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(), AscendantAcolyteValue.instance, true
-        ), "with a +1/+1 counter on it for each +1/+1 counter among other creatures you control").addHint(AscendantAcolyteValue.getHint()));
+                CounterType.P1P1.createInstance(), AscendantAcolyteValue.instance), "with a +1/+1 counter on it for each +1/+1 counter among other creatures you control").addHint(AscendantAcolyteValue.getHint()));
 
         // At the beginning of your upkeep, double the number of +1/+1 counters on Ascendant Acolyte.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(

@@ -131,6 +131,12 @@ public interface Target extends Copyable<Target>, Serializable {
         return possibleTargets.stream()
                 .filter(this::notContains)
                 .filter(targetId -> {
+                    // players out of the game can't be chosen, targeted or not
+                    Player targetPlayer = game.getPlayer(targetId);
+                    if (targetPlayer != null && !targetPlayer.isInGame()) {
+                        return false;
+                    }
+
                     // non-target allow any
                     if (source == null || source.getSourceId() == null || isNotTarget()) {
                         return true;
@@ -141,10 +147,8 @@ public interface Target extends Copyable<Target>, Serializable {
                     }
 
                     // target allow non-protected
-                    Player targetPlayer = game.getPlayer(targetId);
                     if (targetPlayer != null) {
-                        return !targetPlayer.hasLeft()
-                                && canTarget(sourceControllerId, targetId, source, game)
+                        return canTarget(sourceControllerId, targetId, source, game)
                                 && targetPlayer.canBeTargetedBy(sourceObject, sourceControllerId, source, game);
                     }
                     Permanent targetPermanent = game.getPermanent(targetId);
@@ -186,6 +190,12 @@ public interface Target extends Copyable<Target>, Serializable {
     boolean canTarget(UUID playerId, UUID id, Ability source, Game game);
 
     boolean isLegal(Ability source, Game game);
+
+    /**
+     * True if the chosen card has changed zones since it was chosen, so its id now names a new object
+     * (e.g. a flickered permanent). Players and tokens have no zone change counter, so are never changed.
+     */
+    boolean hasChangedZones(UUID id, Game game);
 
     /**
      * AI related code. Returns all possible different target combinations

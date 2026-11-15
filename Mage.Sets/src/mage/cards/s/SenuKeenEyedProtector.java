@@ -20,6 +20,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -89,7 +90,7 @@ class SenuKeenEyedProtectorEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent creature = game.getPermanent(card.getId());
+        Permanent creature = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (creature != null) {
             game.getCombat().addAttackingCreature(creature.getId(), game);
         }

@@ -17,6 +17,7 @@ import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 import mage.util.CardUtil;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -25,6 +26,12 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
+ * 707.10d
+ * Some effects copy a spell or ability for each player or object it “could target.” The copies are put onto the stack
+ * with those targets in the order of their controller’s choice. If the spell or ability has more than one target, each
+ * of its targets must be the same player or object. If that player or object isn’t a legal target for each instance of
+ * the word “target,” a copy isn’t created for that player or object.
+ *
  * @author LevelX2, JayDi85
  */
 public class CopySpellTest extends CardTestPlayerBase {
@@ -996,5 +1003,106 @@ public class CopySpellTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Wizard Token", 1);
+    }
+
+    @Test
+    public void test_CopyForEachItCouldTarget_MustBeLegalForEachTarget() {
+        // Whenever a player casts an instant or sorcery spell, if that spell targets only this creature, copy the spell
+        // for each other creature that spell could target. Each copy targets a different one of those creatures.
+        addCard(Zone.BATTLEFIELD, playerA, "Ink-Treader Nephilim"); // 3/3
+        //
+        // Target creature you control deals damage equal to its power to any target.
+        addCard(Zone.HAND, playerA, "Soul's Fire"); // {2}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion"); // lion 2/2, legal for both targets
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // bear 2/2, not a creature you control
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soul's Fire");
+        addTarget(playerA, "Ink-Treader Nephilim"); // creature you control
+        addTarget(playerA, "Ink-Treader Nephilim"); // any target
+
+        // copy only for the lion: it deals 2 damage to itself
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+        assertPermanentCount(playerB, "Grizzly Bears", 1);
+        assertGraveyardCount(playerA, "Ink-Treader Nephilim", 1);
+    }
+
+    @Test
+    public void test_CopyForEachItCouldTarget_MustBeLegalForEachTargetWord() {
+        // Glimmervoid Basin ruling:
+        // Other than choices involving modes or additional costs, the copies are created based on what they could
+        // target if the spell were cast anew. For example, if a player casts Naturalize ("Destroy target artifact or
+        // enchantment") targeting an artifact, Glimmervoid Basin's first ability will copy it for each artifact and
+        // enchantment it could target (and each copy will target a different one of those), not just for each artifact
+        // it could target.
+        // (2009-10-01)
+
+        // Whenever a player casts an instant or sorcery spell, if that spell targets only this creature, copy the spell
+        // for each other creature that spell could target. Each copy targets a different one of those creatures.
+        addCard(Zone.BATTLEFIELD, playerA, "Ink-Treader Nephilim"); // 3/3
+        //
+        // Destroy up to one target artifact. Put a +1/+1 counter on up to one target creature.
+        addCard(Zone.HAND, playerA, "Explosive Entry"); // {1}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion"); // lion 2/2, not an artifact
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // bear 2/2, not an artifact
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Explosive Entry");
+        addTarget(playerA, TestPlayer.TARGET_SKIP); // no artifact
+        addTarget(playerA, "Ink-Treader Nephilim"); // creature
+
+        // no copies: the lion and the bear aren't legal for "target artifact"
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertCounterCount(playerA, "Ink-Treader Nephilim", CounterType.P1P1, 1);
+        assertCounterCount(playerA, "Silvercoat Lion", CounterType.P1P1, 0);
+        assertCounterCount(playerB, "Grizzly Bears", CounterType.P1P1, 0);
+    }
+
+    @Test
+    @Ignore // TODO: the copy's controller is asked "No target object selected. Reset to original target?" instead of the copy put onto the stack with the lion as its target (707.10d)
+    public void test_CopyForEachItCouldTarget_LegalForOriginalSpellController() {
+        // Ink-Treader Nephilim ruling:
+        // Even though you control the copies, the ability cares about who cast the original spell when determining
+        // which other creatures that spell could target. If the original spell has a targeting restriction that refers
+        // to "an opponent," the copies will see that from the perspective of the original spell's controller. For
+        // example, if your opponent casts a spell that says "Destroy target creature an opponent controls" targeting
+        // your Ink-Treader Nephilim, its ability will create a copy for each other creature the original spell could
+        // target: the rest of your creatures. However, since you control the copies, all the copies won't resolve for
+        // having illegal targets.
+        // (2006-02-01)
+
+        // Whenever a player casts an instant or sorcery spell, if that spell targets only this creature, copy the spell
+        // for each other creature that spell could target. Each copy targets a different one of those creatures.
+        addCard(Zone.BATTLEFIELD, playerA, "Ink-Treader Nephilim"); // 3/3
+        //
+        // Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's mana
+        // value.
+        addCard(Zone.HAND, playerB, "Feed the Swarm"); // {1}{B}
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion"); // lion 2/2, opponent's creature for player B
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // bear 2/2, own creature for player B
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Feed the Swarm", "Ink-Treader Nephilim");
+
+        // copy for the lion only, controlled by player A, so it doesn't resolve
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Ink-Treader Nephilim", 1);
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        assertPermanentCount(playerB, "Grizzly Bears", 1);
+        assertLife(playerB, 20 - 4); // Ink-Treader Nephilim mana value
+        assertLife(playerA, 20);
     }
 }

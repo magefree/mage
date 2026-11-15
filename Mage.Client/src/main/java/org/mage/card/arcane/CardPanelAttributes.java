@@ -4,6 +4,8 @@ package org.mage.card.arcane;
  * @author stravant@gmail.com
  * Attributes of a card panel outside of the CardView itself that the renderer
  * needs to know in order to render a card.
+ * <p>
+ * Any attribute added here must also be added to CardPanelRenderModeMTGO.imageKey (rendered images are cached by it).
  */
 public class CardPanelAttributes {
     public final int cardWidth;

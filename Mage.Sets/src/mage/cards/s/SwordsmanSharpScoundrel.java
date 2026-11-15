@@ -33,6 +33,7 @@ public final class SwordsmanSharpScoundrel extends CardImpl {
     static {
         filter.add(AnotherPredicate.instance);
         filter2.add(EquippedPredicate.instance);
+        filter2.add(TargetController.YOU.getControllerPredicate());
     }
 
     public SwordsmanSharpScoundrel(UUID ownerId, CardSetInfo setInfo) {

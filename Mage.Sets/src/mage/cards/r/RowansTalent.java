@@ -98,7 +98,7 @@ class RowansTalentTriggeredAbility extends TriggeredAbilityImpl {
                 || !isControlledBy(event.getPlayerId())) {
             return false;
         }
-        StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
+        StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
         if (stackObject == null || !(stackObject.getStackAbility() instanceof LoyaltyAbility)) {
             return false;
         }

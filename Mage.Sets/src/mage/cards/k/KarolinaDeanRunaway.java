@@ -1,16 +1,9 @@
 package mage.cards.k;
 
-import java.util.UUID;
-
 import mage.ConditionalMana;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.condition.Condition;
@@ -21,6 +14,13 @@ import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.game.stack.Spell;
+
+import java.util.UUID;
 
 /**
  * @author muz
@@ -91,7 +91,8 @@ enum KarolinaDeanRunawayManaCondition implements Condition {
         }
         MageObject object = game.getObject(source);
         if (!source.isControlledBy(game.getOwnerId(object))) {
-            return false;
+            // a card you don't own can't be cast from your hand
+            return true;
         }
         if (object instanceof Spell) {
             return ((Spell) object).getFromZone() != Zone.HAND;

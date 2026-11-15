@@ -44,8 +44,7 @@ public final class DrakeHatcher extends CardImpl {
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
                 new AddCountersSourceEffect(
                         CounterType.INCUBATION.createInstance(),
-                        SavedDamageValue.MANY, false
-                ).setText("put that many incubation counters on it"), false
+                        SavedDamageValue.MANY).setText("put that many incubation counters on it"), false
         ).setTriggerPhrase("Whenever this creature deals combat damage to a player, ");
         this.addAbility(ability);
 

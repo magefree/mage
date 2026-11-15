@@ -13,6 +13,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -49,7 +50,7 @@ public final class ArmoredKincaller extends CardImpl {
 class ArmoredKincallerEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("a Dinosaur card");
-    private static final FilterPermanent filter2 = new FilterPermanent(SubType.DINOSAUR, "");
+    private static final FilterPermanent filter2 = new FilterControlledPermanent(SubType.DINOSAUR, "");
 
     static {
         filter.add(SubType.DINOSAUR.getPredicate());

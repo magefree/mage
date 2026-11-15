@@ -15,7 +15,8 @@ import org.apache.log4j.Logger;
  */
 public class DebugUtil {
 
-    public static boolean NETWORK_SHOW_CLIENT_CALLBACK_MESSAGES_LOG = false; // show all callback messages (server commands)
+    public static boolean NETWORK_SHOW_CLIENT_CALLBACK_MESSAGES_LOG = false; // show all callback messages (client side)
+    public static boolean NETWORK_SHOW_CLIENT_CALLBACK_RESPONSES = false; // show all callback responses (server side)
 
     // AI
     // game simulations runs in multiple threads, if you stop code to debug then it will be terminated by timeout

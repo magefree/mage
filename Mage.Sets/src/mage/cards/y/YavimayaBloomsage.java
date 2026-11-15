@@ -49,7 +49,7 @@ public final class YavimayaBloomsage extends PrepareCard {
         ability.addEffect(new ConditionalOneShotEffect(
             new BecomePreparedSourceEffect(),
             YavimayaBloomsageCondition.instance,
-            "Then if that creature has toughness 7 or greater, this creature becomes prepared"
+            "Then if that creature has power 7 or greater, this creature becomes prepared"
         ));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
@@ -77,14 +77,14 @@ enum YavimayaBloomsageCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            return permanent.getToughness().getValue() >= 7;
+            return permanent.getPower().getValue() >= 7;
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return "that creature has toughness 7 or greater";
+        return "that creature has power 7 or greater";
     }
 }
 

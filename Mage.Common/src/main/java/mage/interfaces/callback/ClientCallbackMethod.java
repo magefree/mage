@@ -32,7 +32,7 @@ public enum ClientCallbackMethod {
     DRAFT_OVER(ClientCallbackType.TABLE_CHANGE, "draftOver"),
     DRAFT_INIT(ClientCallbackType.TABLE_CHANGE, "draftInit"),
     DRAFT_PICK(ClientCallbackType.TABLE_CHANGE, "draftPick"),
-    DRAFT_UPDATE(ClientCallbackType.UPDATE, "draftUpdate"),
+    DRAFT_UPDATE(ClientCallbackType.TABLE_CHANGE, "draftUpdate"), // contains important packno/pickno
 
     // watch
     SHOW_TOURNAMENT(ClientCallbackType.TABLE_CHANGE, "showTournament"),

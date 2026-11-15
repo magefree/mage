@@ -2,7 +2,7 @@ package mage.cards.w;
 
 import mage.abilities.Mode;
 import mage.abilities.condition.common.ControlACommanderCondition;
-import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
@@ -42,7 +42,7 @@ public final class WillOfTheAbzan extends CardImpl {
         this.getSpellAbility().addEffect(new SacrificeEffect(filter, 1, "")
                 .setText("any number of target opponents each sacrifice a creature " +
                         "with the greatest power among creatures that player controls"));
-        this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(3).setText("and lose 3 life"));
+        this.getSpellAbility().addEffect(new LoseLifeTargetEffect(3).setText("and lose 3 life"));
         this.getSpellAbility().addTarget(new TargetOpponent(0, Integer.MAX_VALUE, false));
 
         // * Return target creature card from your graveyard to the battlefield.

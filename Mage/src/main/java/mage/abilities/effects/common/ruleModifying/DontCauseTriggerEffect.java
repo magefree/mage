@@ -11,9 +11,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.*;
 import mage.game.permanent.Permanent;
-
-import java.util.Iterator;
-import java.util.Optional;
+import mage.util.CardUtil;
 
 /**
  * @author xenohedron
@@ -81,8 +79,8 @@ public class DontCauseTriggerEffect extends ContinuousRuleModifyingEffectImpl {
             // like Elesh Norn does not prevent that. 
             if (triggeringPermanent == null
                     && sourceEvent != null
-                    && (ability.getSourceId().equals(sourceEvent.getSourceId())
-                    || ability.getSourceId().equals(sourceEvent.getTargetId()))) {
+                    && (CardUtil.getEventSources(sourceEvent).contains(ability.getSourceId())
+                    || CardUtil.getEventTargets(sourceEvent).contains(ability.getSourceId()))) {
                 triggeringPermanent = ability.getSourcePermanentOrLKI(game);
             }
             if (triggeringPermanent == null || !filterTriggering.match(triggeringPermanent, source.getControllerId(), source, game)) {

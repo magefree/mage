@@ -5,22 +5,18 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.common.counter.RemoveCounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.SecondTargetPointer;
 
 import java.util.UUID;
 
@@ -49,7 +45,11 @@ public final class DecimatorBeetle extends CardImpl {
         this.addAbility(ability);
 
         // Whenever Decimator Beetle attacks, remove a -1/-1 counter from target creature you control and put a -1/-1 counter on up to one target creature defending player controls.
-        ability = new AttacksTriggeredAbility(new DecimatorBeetleEffect(), false);
+        ability = new AttacksTriggeredAbility(
+                new RemoveCounterTargetEffect(CounterType.M1M1.createInstance()), false);
+        ability.addEffect(new AddCountersTargetEffect(CounterType.M1M1.createInstance())
+                .setTargetPointer(new SecondTargetPointer())
+                .concatBy("and"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
@@ -62,41 +62,5 @@ public final class DecimatorBeetle extends CardImpl {
     @Override
     public DecimatorBeetle copy() {
         return new DecimatorBeetle(this);
-    }
-}
-
-class DecimatorBeetleEffect extends OneShotEffect {
-
-    DecimatorBeetleEffect() {
-        super(Outcome.DestroyPermanent);
-        staticText = "remove a -1/-1 counter from target creature you control and put a -1/-1 counter on up to one target creature defending player controls";
-    }
-
-    private DecimatorBeetleEffect(final DecimatorBeetleEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (targetCreature != null
-                && targetCreature.getCounters(game).containsKey(CounterType.M1M1)) {
-            Effect effect = new RemoveCounterTargetEffect(CounterType.M1M1.createInstance(1));
-            effect.setTargetPointer(this.getTargetPointer().copy());
-            effect.apply(game, source);
-        }
-        targetCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (targetCreature != null) {
-            Effect effect = new AddCountersTargetEffect(CounterType.M1M1.createInstance(1));
-            effect.setTargetPointer(new FixedTarget(source.getTargets().get(1).getFirstTarget(), game));
-            effect.apply(game, source);
-        }
-
-        return true;
-    }
-
-    @Override
-    public DecimatorBeetleEffect copy() {
-        return new DecimatorBeetleEffect(this);
     }
 }

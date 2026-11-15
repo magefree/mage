@@ -167,7 +167,8 @@ public class SessionImpl implements Session {
                 if (exep.getCause() instanceof IOException) {
                     if ((exep.getCause().getMessage() != null) && (exep.getCause().getMessage().startsWith("Field hash null is not available on current")
                             || exep.getCause().getMessage().endsWith("end of file"))) {
-                        addMessage = "Probably the server version is not compatible with the client. ";
+                        addMessage = "Probably the server version is not compatible with the client or connection blocked by ISP/VPN.";
+                        logger.warn("Connect: IO error due bad serialization or blocked ISP/VPN (" + exep.getCause().getMessage() + ")", exep.getCause());
                     }
                 } else {
                     logger.error("Connect: unknown server error", exep.getCause());
@@ -600,13 +601,19 @@ public class SessionImpl implements Session {
 
     class CallbackHandler implements InvokerCallbackHandler {
 
-        final CopyOnWriteArrayList<ClientCallback> waitingCallbacks = new CopyOnWriteArrayList<>();
+        // callbacks come from a oneway thread pool (several threads at once), so an add and a
+        // copy + clear must be under the same lock, otherwise a callback added between the copy
+        // and the clear of another thread is lost; all access goes through synchronized (waitingCallbacks)
+        final List<ClientCallback> waitingCallbacks = new ArrayList<>();
+        //final CopyOnWriteArrayList<ClientCallback> waitingCallbacks = new CopyOnWriteArrayList<>();
 
         @Override
         public void handleCallback(Callback callback) {
             // keep callbacks
             ClientCallback clientCallback = (ClientCallback) callback.getCallbackObject();
-            waitingCallbacks.add(clientCallback);
+            synchronized (waitingCallbacks) {
+                waitingCallbacks.add(clientCallback);
+            }
 
             // wait for client ready
             // on connection client will receive all waiting callbacks from a server, e.g. started table, draft pick, etc
@@ -615,10 +622,13 @@ public class SessionImpl implements Session {
             // - hidden cheat button or enabled clicks protection in draft
             // - miss dialogs like draft or game panels
             // so wait for server state some time
+            // possible use cases:
+            // - massive reconnections with chat messages spam
+            // - slow network and return to active game/draft
             if (serverState == null) {
                 ThreadUtils.sleep(CONNECT_WAIT_BEFORE_PROCESS_ANY_CALLBACKS_SECS * 1000);
                 if (serverState == null) {
-                    logger.error("Can't receive server state before other data (possible reason: unstable network): "
+                    logger.warn("Can't receive server state before other data (possible reason: unstable network): "
                             + clientCallback.getInfo());
                 }
             }

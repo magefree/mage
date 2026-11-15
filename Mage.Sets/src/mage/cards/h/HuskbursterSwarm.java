@@ -39,7 +39,7 @@ public final class HuskbursterSwarm extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
                 new SpellCostReductionForEachSourceEffect(1, HuskbursterSwarmValue.instance)
-                        .setCanWorksOnStackOnly(true)
+                        
         ).setRuleAtTheTop(true).addHint(HuskbursterSwarmValue.getHint()));
 
         // Menace

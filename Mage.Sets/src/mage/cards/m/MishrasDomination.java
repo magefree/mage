@@ -3,6 +3,8 @@ package mage.cards.m;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -15,19 +17,19 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.game.Controllable;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
  * @author TheElk801
  */
 public final class MishrasDomination extends CardImpl {
+
+    private static final Condition condition
+            = new AttachedToMatchesFilterCondition(StaticFilters.FILTER_CONTROLLED_PERMANENT);
 
     public MishrasDomination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
@@ -42,12 +44,12 @@ public final class MishrasDomination extends CardImpl {
 
         // As long as you control enchanted creature, it gets +2/+2. Otherwise, it can't block.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new BoostEnchantedEffect(2, 2), MishrasDominationCondition.TRUE,
+                new BoostEnchantedEffect(2, 2), condition,
                 "as long as you control enchanted creature, it gets +2/+2"
         ));
         ability.addEffect(new ConditionalRestrictionEffect(
                 new CantBlockAttachedEffect(AttachmentType.AURA),
-                MishrasDominationCondition.FALSE, "otherwise, it can't block"
+                new InvertCondition(condition), "otherwise, it can't block"
         ));
         this.addAbility(ability);
     }
@@ -59,27 +61,5 @@ public final class MishrasDomination extends CardImpl {
     @Override
     public MishrasDomination copy() {
         return new MishrasDomination(this);
-    }
-}
-
-enum MishrasDominationCondition implements Condition {
-    TRUE(true),
-    FALSE(false);
-    private final boolean value;
-
-    MishrasDominationCondition(boolean value) {
-        this.value = value;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return Optional
-                .ofNullable(source.getSourcePermanentIfItStillExists(game))
-                .map(Permanent::getAttachedTo)
-                .map(game::getPermanentOrLKIBattlefield)
-                .map(Controllable::getControllerId)
-                .map(source::isControlledBy)
-                .orElse(false)
-                .equals(value);
     }
 }

@@ -31,11 +31,11 @@ public final class GeneratorServant extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // {T}, Sacrifice Generator Servant: Add {C}{C}. If that mana is spent on a creature spell, it gains haste until end of turn.
+        // {T}, Sacrifice Generator Servant: Add {C}{C}. If any of that mana is spent on a creature spell, it gains haste until end of turn.
         SimpleManaAbility ability = new SimpleManaAbility(
                 new BasicManaEffect(Mana.ColorlessMana(2)), new TapSourceCost());
         ability.addEffect(new ManaSpentOnSpellGainsAbilityEffect(StaticFilters.FILTER_SPELL_CREATURE,
-                new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn, null, true)));
+            new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn, null, true), true));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
 

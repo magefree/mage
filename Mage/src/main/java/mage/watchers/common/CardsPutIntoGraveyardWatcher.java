@@ -49,10 +49,13 @@ public class CardsPutIntoGraveyardWatcher extends Watcher {
 
         amountOfCardsThisTurn.compute(playerId, (k, amount) -> amount == null ? 1 : Integer.sum(amount, 1));
 
+        // must use main card cause a double faced permanent or spell is a side object with another id,
+        // but the graveyard keeps the main card (same zcc for all parts)
+        MageObjectReference mor = new MageObjectReference(card.getMainCard(), game);
         if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
-            cardsPutIntoGraveyardFromBattlefield.add(new MageObjectReference(((ZoneChangeEvent) event).getTarget(), game, 1));
+            cardsPutIntoGraveyardFromBattlefield.add(mor);
         } else {
-            cardsPutIntoGraveyardFromEverywhereElse.add(new MageObjectReference(game.getCard(event.getTargetId()), game, 0));
+            cardsPutIntoGraveyardFromEverywhereElse.add(mor);
         }
     }
 
@@ -107,7 +110,7 @@ public class CardsPutIntoGraveyardWatcher extends Watcher {
      * @return Boolean indicating if the card was put into the graveyard from the battlefield this turn.
      */
     public boolean checkCardFromBattlefield(Card card, Game game) {
-        return cardsPutIntoGraveyardFromBattlefield.stream().anyMatch(mor -> mor.refersTo(card, game));
+        return cardsPutIntoGraveyardFromBattlefield.stream().anyMatch(mor -> mor.refersTo(card.getMainCard(), game));
     }
 
     /**
@@ -118,7 +121,7 @@ public class CardsPutIntoGraveyardWatcher extends Watcher {
      * @return Boolean indicating if the card was put into the graveyard from anywhere other than the battlefield this turn.
      */
     public boolean checkCardNotFromBattlefield(Card card, Game game) {
-        return cardsPutIntoGraveyardFromEverywhereElse.stream().anyMatch(mor -> mor.refersTo(card, game));
+        return cardsPutIntoGraveyardFromEverywhereElse.stream().anyMatch(mor -> mor.refersTo(card.getMainCard(), game));
     }
 
     /**

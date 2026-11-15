@@ -1,12 +1,6 @@
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -15,6 +9,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.counters.CounterType;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -65,7 +66,7 @@ class WakandanRoyalGuardEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
-            if (permanent.getId() != source.getSourceId() && permanent.hasSubtype(SubType.HERO, game)) {
+            if (!permanent.getId().equals(source.getSourceId()) && permanent.hasSubtype(SubType.HERO, game)) {
                 permanent.addCounters(CounterType.P1P1.createInstance(2), source.getControllerId(), source, game);
             } else {
                 permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);

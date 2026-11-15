@@ -21,6 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
+import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 
 /**
@@ -81,15 +82,13 @@ class DimirDoppelgangerEffect extends OneShotEffect {
                 Cards cardsToExile = new CardsImpl();
                 cardsToExile.add(copyFromCard);
                 controller.moveCards(cardsToExile, Zone.EXILED, source, game);
-                newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
+                newBluePrint = new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, copyFromCard), source.getControllerId(), game);
                 newBluePrint.assignNewId();
                 CopyApplier applier = new DimirDoppelgangerCopyApplier();
                 applier.apply(game, newBluePrint, source, dimirDoppelganger.getId());
                 CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, dimirDoppelganger.getId());
                 copyEffect.setApplier(applier);
-                Ability newAbility = source.copy(); // TODO: why it copy new ability instead source? Some cards use it, some miss
-                copyEffect.init(newAbility, game);
-                game.addEffect(copyEffect, newAbility);
+                game.addEffect(copyEffect, source);
             }
             return true;
         }

@@ -2,6 +2,7 @@
 package mage.game.draft;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,9 +22,13 @@ public class DraftPlayer {
     protected Deck deck;
     protected List<Card> booster;
     protected boolean picking;
-    protected boolean boosterLoaded; // client confirmed that it got a booster data (for computer must be always false)
+    protected boolean boosterSent; // server sent current booster
+    protected boolean boosterLoaded; // client confirmed current booster (computer do not confirm and always false)
     protected boolean joined = false;
     protected Set<UUID> hiddenCards;
+    protected UUID markedCard; // user's choice for autopick on pick timeout, from the current booster only
+    protected long pickDeadline; // end time of the current pick (from the first booster send to that player), 0 - not sent yet or unlimited time
+    protected List<DraftPickSuggest> pickSuggests; // suggested cards of the current booster, null - not calculated yet
 
     public DraftPlayer(Player player) {
         id = UUID.randomUUID();
@@ -66,6 +71,8 @@ public class DraftPlayer {
         }
         booster.remove(card);
         picking = false;
+        markedCard = null;
+        pickSuggests = null;
     }
 
     public void setBoosterAndLoad(List<Card> booster) {
@@ -83,8 +90,21 @@ public class DraftPlayer {
     }
 
     public void setPickingAndSending() {
+        // new round - new booster start to sending
         this.picking = true;
         this.boosterLoaded = false;
+        this.boosterSent = false;
+        this.markedCard = null;
+        this.pickDeadline = 0;
+        this.pickSuggests = null;
+    }
+
+    public UUID getMarkedCard() {
+        return markedCard;
+    }
+
+    public void setMarkedCard(UUID markedCard) {
+        this.markedCard = markedCard;
     }
 
     public boolean isPicking() {
@@ -98,7 +118,16 @@ public class DraftPlayer {
     public void setJoined() {
         this.joined = true;
     }
-    
+
+    public boolean isBoosterSent() {
+        return boosterSent;
+    }
+
+    public void setBoosterSent() {
+        this.boosterSent = true;
+        this.boosterLoaded = false; // new booster sent, so client must confirmed it
+    }
+
     public void setBoosterLoaded() {
         boosterLoaded = true;
     }
@@ -111,4 +140,22 @@ public class DraftPlayer {
         return boosterLoaded;
     }
 
+    /**
+     * Suggested cards of the current booster, null - not calculated yet
+     */
+    public List<DraftPickSuggest> getPickSuggests() {
+        return pickSuggests == null ? null : Collections.unmodifiableList(pickSuggests);
+    }
+
+    public void setPickSuggests(List<DraftPickSuggest> pickSuggests) {
+        this.pickSuggests = pickSuggests == null ? null : new ArrayList<>(pickSuggests);
+    }
+
+    public long getPickDeadline() {
+        return pickDeadline;
+    }
+
+    public void setPickDeadline(long pickDeadline) {
+        this.pickDeadline = pickDeadline;
+    }
 }

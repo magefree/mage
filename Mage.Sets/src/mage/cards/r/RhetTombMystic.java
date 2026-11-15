@@ -18,7 +18,7 @@ import mage.players.Player;
 
 /**
  *
- * @author sobiech
+ * @author Meowcelia
  */
 public final class RhetTombMystic extends CardImpl {
 

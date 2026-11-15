@@ -28,7 +28,7 @@ public final class CrescendoOfWar extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         // At the beginning of each upkeep, put a strife counter on Crescendo of War.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new AddCountersSourceEffect(CounterType.STRIFE.createInstance(1), true), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new AddCountersSourceEffect(CounterType.STRIFE.createInstance(1)), false));
 
         // Attacking creatures get +1/+0 for each strife counter on Crescendo of War.
         this.addAbility(new SimpleStaticAbility(new BoostAllEffect(xValue, StaticValue.get(0),

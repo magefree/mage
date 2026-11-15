@@ -18,9 +18,11 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 import mage.watchers.common.SpellsCastWatcher;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -76,12 +78,13 @@ class PlaneswalkersMischiefEffect extends OneShotEffect {
             opponent.revealCards(source, cards, game);
             if (revealedCard.isInstant(game)
                     || revealedCard.isSorcery(game)) {
-                opponent.moveCardToExileWithInfo(revealedCard, source.getSourceId(), "Planeswalker's Mischief", source, game, Zone.HAND, true);
+                UUID exileId = CardUtil.getExileZoneId(game, source);
+                opponent.moveCardToExileWithInfo(revealedCard, exileId, "Planeswalker's Mischief", source, game, Zone.HAND, true);
                 AsThoughEffect effect = new PlaneswalkersMischiefCastFromExileEffect();
                 effect.setTargetPointer(new FixedTarget(revealedCard.getId()));
                 game.addEffect(effect, source);
                 OneShotEffect effect2 = new ReturnFromExileForSourceEffect(Zone.HAND);
-                Condition condition = new PlaneswalkersMischiefCondition(source.getSourceId(), revealedCard.getId());
+                Condition condition = new PlaneswalkersMischiefCondition(exileId, revealedCard.getId());
                 ConditionalOneShotEffect effect3 = new ConditionalOneShotEffect(effect2, condition, "if you haven't cast it, return it to its owner's hand.");
                 DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect3);
                 game.addDelayedTriggeredAbility(delayedAbility, source);
@@ -140,7 +143,7 @@ class PlaneswalkersMischiefCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (!game.getExile().getExileZone(exileId).contains(cardId)) {
+        if (!Optional.ofNullable(game.getExile().getExileZone(exileId)).map(zone -> zone.contains(cardId)).orElse(false)) {
             return false;
         }
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);

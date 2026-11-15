@@ -139,7 +139,7 @@ class LeoriSparktouchedHunterTriggeredAbility extends DelayedTriggeredAbility {
             return false;
         }
 
-        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getTargetId());
         if (stackAbility == null || stackAbility.getStackAbility().isManaActivatedAbility()) {
             return false;
         }

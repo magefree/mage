@@ -3,8 +3,7 @@ package mage.cards.d;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.SourceHasCounterCondition;
+import mage.abilities.condition.common.SourceHasCountersCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
@@ -25,8 +24,6 @@ import java.util.UUID;
  */
 public final class DemonWall extends CardImpl {
 
-    private static final Condition condition = new SourceHasCounterCondition(null);
-
     public DemonWall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{B}");
 
@@ -43,7 +40,7 @@ public final class DemonWall extends CardImpl {
 
         // As long as this creature has a counter on it, it can attack as though it didn't have defender.
         this.addAbility(new SimpleStaticAbility(new ConditionalAsThoughEffect(
-                new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield), condition
+                new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield), SourceHasCountersCondition.instance
         ).setText("as long as this creature has a counter on it, it can attack as though it didn't have defender")));
 
         // {5}{B}: Put two +1/+1 counters on this creature.

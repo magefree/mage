@@ -17,6 +17,7 @@ import mage.abilities.keyword.*;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.PrepareCard;
+import mage.abilities.effects.common.PrepareCastFromExileEffect;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -74,6 +75,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean renowned;
     protected boolean suspected;
     protected boolean prepared;
+    protected UUID preparedSpellCopyId;
     protected boolean harnessed = false;
     protected boolean manifested = false;
     protected boolean cloaked = false;
@@ -94,6 +96,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean indirectPhase = false;
     protected boolean faceDown;
     protected MageObjectReference attacking; // refers to defenderId if attacking, null if not attacking
+    protected Set<UUID> entersAttackingDefenders; // enters the battlefield attacking one of them (508.4), null if not
     protected int blocking;
     protected final Set<MageObjectReference> blockingSet = new HashSet<>(); // refers to blocked creatures
     // number of creatures the permanent can block
@@ -127,6 +130,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected Map<String, String> info = new LinkedHashMap<>(); // additional info for permanent's rules
     protected int createOrder;
     protected boolean legendRuleApplies = true;
+    protected boolean zeroLoyaltyRuleApplies = true;
     protected boolean prototyped;
 
     private static final List<UUID> emptyList = Collections.unmodifiableList(new ArrayList<>());
@@ -164,6 +168,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.indirectPhase = permanent.indirectPhase;
         this.faceDown = permanent.faceDown;
         this.attacking = permanent.attacking;
+        this.entersAttackingDefenders = permanent.entersAttackingDefenders == null ? null : new LinkedHashSet<>(permanent.entersAttackingDefenders);
         this.blocking = permanent.blocking;
         this.blockingSet.addAll(permanent.blockingSet);
         this.maxBlocks = permanent.maxBlocks;
@@ -189,6 +194,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.renowned = permanent.renowned;
         this.suspected = permanent.suspected;
         this.prepared = permanent.prepared;
+        this.preparedSpellCopyId = permanent.preparedSpellCopyId;
         this.harnessed = permanent.harnessed;
         this.ringBearerFlag = permanent.ringBearerFlag;
         this.classLevel = permanent.classLevel;
@@ -202,6 +208,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.timesLoyaltyUsed = permanent.timesLoyaltyUsed;
         this.loyaltyActivationsAvailable = permanent.loyaltyActivationsAvailable;
         this.legendRuleApplies = permanent.legendRuleApplies;
+        this.zeroLoyaltyRuleApplies = permanent.zeroLoyaltyRuleApplies;
         this.transformCount = permanent.transformCount;
         this.protectorId = permanent.protectorId;
 
@@ -265,6 +272,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.goadingPlayers.clear();
         this.loyaltyActivationsAvailable = 1;
         this.legendRuleApplies = true;
+        this.zeroLoyaltyRuleApplies = true;
         this.canBeSacrificed = true;
     }
 
@@ -371,17 +379,24 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                             restrictHints.add(HintUtils.prepareText("Must block all attackers" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_REQUIRE));
                         }
 
-                        MageObject object = game.getObject(entry.getKey().mustAttackDefender(ability, game));
-                        if (object != null) {
-                            restrictHints.add(HintUtils.prepareText("Must attack defender " + object.getLogName() + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_REQUIRE));
-                        }
-                        Player player = game.getPlayer(entry.getKey().mustAttackDefender(ability, game));
-                        if (player != null) {
+                        String defendersInfo = entry.getKey().mustAttackDefenders(ability, game)
+                                .stream()
+                                .map(defenderId -> {
+                                    Player player = game.getPlayer(defenderId);
+                                    if (player != null) {
+                                        return player.getLogName();
+                                    }
+                                    MageObject defender = game.getObject(defenderId);
+                                    return defender == null ? null : defender.getLogName();
+                                })
+                                .filter(Objects::nonNull)
+                                .collect(Collectors.joining(" or "));
+                        if (!defendersInfo.isEmpty()) {
                             restrictHints.add(HintUtils.prepareText(
-                                    "Must attack defender " + player.getLogName() + addSourceObjectName(game, ability),
+                                    "Must attack defender " + defendersInfo + addSourceObjectName(game, ability),
                                     null, HintUtils.HINT_ICON_REQUIRE));
                         }
-                        object = game.getObject(entry.getKey().mustBlockAttacker(ability, game));
+                        MageObject object = game.getObject(entry.getKey().mustBlockAttacker(ability, game));
                         if (object != null) {
                             restrictHints.add(HintUtils.prepareText("Must block attacker " + object.getLogName() + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_REQUIRE));
                         }
@@ -600,6 +615,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean legendRuleApplies() {
         return this.legendRuleApplies;
+    }
+
+    @Override
+    public void setZeroLoyaltyRuleApplies(boolean zeroLoyaltyRuleApplies) {
+        this.zeroLoyaltyRuleApplies = zeroLoyaltyRuleApplies;
+    }
+
+    @Override
+    public boolean zeroLoyaltyRuleApplies() {
+        return this.zeroLoyaltyRuleApplies;
     }
 
     @Override
@@ -850,6 +875,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     attachedPerm.phaseIn(game, false);
                 }
             }
+            if (prepared) {
+                createPreparedCopy(game);
+            }
             game.addSimultaneousEvent(GameEvent.getEvent(EventType.PHASED_IN, this.objectId, null, this.controllerId));
             return true;
         }
@@ -864,6 +892,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean phaseOut(Game game, boolean indirectPhase) {
         if (phasedIn && !replaceEvent(EventType.PHASE_OUT, game)) {
+            // a phased-out permanent is treated as though it doesn't exist, so keep its last known information
+            game.rememberLKI(Zone.BATTLEFIELD, this);
             for (UUID attachedId : this.getAttachments()) {
                 Permanent attachedPerm = game.getPermanent(attachedId);
                 if (attachedPerm != null) {
@@ -873,6 +903,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             this.removeFromCombat(game);
             this.phasedIn = false;
             this.indirectPhase = indirectPhase;
+            if (prepared) {
+                removePreparedCopy(game);
+            }
             game.informPlayers(getLogName() + " phased out");
             fireEvent(EventType.PHASED_OUT, game);
             return true;
@@ -1162,7 +1195,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             return 0;
         }
         int lethal = getLethalDamage(attackerId, game);
-        MageObject attacker = game.getObject(attackerId);
+        MageObject attacker = game.getPermanentOrLKIBattlefield(attackerId);
+        if (attacker == null) {
+            attacker = game.getObject(attackerId);
+        }
         if (this.isCreature(game)) {
             if (checkWither(event, attacker, game)) {
                 if (markDamage) {
@@ -1734,6 +1770,21 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public void setEntersAttacking(Set<UUID> possibleDefenders) {
+        this.entersAttackingDefenders = possibleDefenders == null ? null : new LinkedHashSet<>(possibleDefenders);
+    }
+
+    @Override
+    public boolean isEntersAttacking() {
+        return this.entersAttackingDefenders != null;
+    }
+
+    @Override
+    public Set<UUID> getEntersAttackingDefenders() {
+        return this.entersAttackingDefenders;
+    }
+
+    @Override
     public MageObjectReference getAttacking() {
         return this.attacking;
     }
@@ -1938,13 +1989,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public UUID getPreparedSpellCopyId() {
+        return preparedSpellCopyId;
+    }
+
+    @Override
     public void setPrepared(boolean prepared, Game game) {
-        // 722.3a Some spells and abilities cause a permanent with a prepare spell to become prepared or state that a permanent enters prepared.
-        // If that permanent has the alternative characteristics of a prepare spell, this gives the permanent the “prepared” designation.
-        // Prepared is a designation that acts as a marker which rules and effects can identify.
-        // A permanent can’t gain this designation unless it has a prepare spell,
-        // Additionally, a permanent can’t gain this designation if the permanent already has it.
-        if (prepared && !(getMainCard() instanceof PrepareCard)) {
+        // Rule 722.3a requires the permanent's current copiable values to include a prepare spell.
+        if (prepared && getPrepareCharacteristicsSource() == null) {
             return;
         }
         if (this.prepared == prepared) {
@@ -1953,8 +2005,56 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.prepared = prepared;
         if (this.prepared) {
             addInfo(preparedInfoKey, CardUtil.addToolTipMarkTags("Prepared"), game);
+            createPreparedCopy(game);
         } else {
             addInfo(preparedInfoKey, null, game);
+            removePreparedCopy(game);
+        }
+    }
+
+    private void createPreparedCopy(Game game) {
+        if (preparedSpellCopyId != null) {
+            return;
+        }
+        PrepareCard prepareCard = getPrepareCharacteristicsSource();
+        if (prepareCard == null) {
+            return;
+        }
+        Card copy = prepareCard.createPreparedSpellCopy(getId());
+        game.getState().addCardPartCopyToExileZone(
+                this, prepareCard.getSpellCard(), copy, getControllerId()
+        );
+        preparedSpellCopyId = copy.getId();
+        PrepareCastFromExileEffect effect = new PrepareCastFromExileEffect(copy.getId());
+        // The permanent can have lost all abilities (for example to Darksteel Mutation).
+        // The permission is linked by IDs above, so use the persistent copy's spell
+        // ability as the continuous-effect source instead of an ability on the permanent.
+        game.addEffect(effect, copy.getSpellAbility());
+    }
+
+    private PrepareCard getPrepareCharacteristicsSource() {
+        MageObject copyFrom = getCopyFrom();
+        // Rule 722.3c ignores "except" modifications such as Croaking Counterpart's Frog characteristics.
+        Card sourceCard = getMainCard();
+        if (copyFrom instanceof Permanent) {
+            sourceCard = ((Permanent) copyFrom).getMainCard();
+        } else if (copyFrom instanceof Card) {
+            sourceCard = ((Card) copyFrom).getMainCard();
+        }
+        return sourceCard instanceof PrepareCard ? (PrepareCard) sourceCard : null;
+    }
+
+    private void removePreparedCopy(Game game) {
+        UUID copyId = preparedSpellCopyId;
+        preparedSpellCopyId = null;
+        if (copyId == null) {
+            return;
+        }
+        Card card = game.getCard(copyId);
+        // Once cast, the copy is already on the stack and normal copied-spell cleanup owns it.
+        if (card != null && game.getState().getZone(copyId) == Zone.EXILED) {
+            game.getExile().removeCard(card);
+            card.setZone(Zone.OUTSIDE, game);
         }
     }
 

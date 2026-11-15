@@ -20,6 +20,7 @@ import mage.abilities.costs.mana.AlternateManaPaymentAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.AuraReplacementEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.RestrictionUntapNotMoreThanEffect;
 import mage.abilities.keyword.*;
@@ -98,6 +99,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean draws;
     protected boolean loses;
 
+    protected int startingDeckSize;
     protected Library library;
     protected Cards sideboard;
     protected Cards hand;
@@ -231,6 +233,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.loses = player.loses;
 
         this.library = player.library.copy();
+        this.startingDeckSize = player.startingDeckSize;
         this.sideboard = player.sideboard.copy();
         this.hand = player.hand.copy();
         this.graveyard = player.graveyard.copy();
@@ -615,7 +618,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         game.informPlayers(getLogName() + " taken turn control of " + playerUnderControl.getLogName() + info);
         if (!playerUnderControlId.equals(this.getId())) {
             this.playersUnderYourControl.add(playerUnderControlId);
-            if (!playerUnderControl.hasLeft() && !playerUnderControl.hasLost()) {
+            if (playerUnderControl.isInGame()) {
                 playerUnderControl.setGameUnderYourControl(game, false);
             }
             // control will reset on start of the turn
@@ -713,7 +716,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean canBeTargetedBy(MageObject sourceObject, UUID sourceControllerId, Ability source, Game game) {
-        if (this.hasLost() || this.hasLeft()) {
+        if (!this.isInGame()) {
             return false;
         }
         if (sourceObject != null) {
@@ -806,14 +809,24 @@ public abstract class PlayerImpl implements Player, Serializable {
                     + " card" + (numDrawn > 1 ? "s" : "")
                     + (isDrawsFromBottom() ? " from the bottom of their library" : ""));
         }
+
         // if this method was called from a replacement event, pass the number of cards back through
-        // (uncomment conditions if correct ruling is to only count cards drawn by the same player)
-        if (event instanceof DrawCardEvent /* && event.getPlayerId().equals(getId()) */) {
+        //
+        // cards drawn by another player instead of you (Notion Thief, Alms Collector) are counted too
+        //
+        // Onslaught FAQ for "drawn this way": "However, it doesn't matter *who* drew the cards. ... Plagiarize
+        // could cause another player to draw cards from Read the Runes instead of you; that would not affect
+        // the number of cards you'd need to discard."
+        // (Onslaught FAQ, 2002-09-22)
+        //
+        // 614.11b excludes only an additional action on that card itself (e.g. reveal it), not a count of drawn cards
+        if (event instanceof DrawCardEvent) {
             ((DrawCardEvent) event).incrementCardsDrawn(numDrawn);
         }
-        if (event instanceof DrawTwoOrMoreCardsEvent /* && event.getPlayerId().equals(getId()) */) {
+        if (event instanceof DrawTwoOrMoreCardsEvent) {
             ((DrawTwoOrMoreCardsEvent) event).incrementCardsDrawn(numDrawn);
         }
+
         return numDrawn;
     }
 
@@ -1571,18 +1584,30 @@ public abstract class PlayerImpl implements Player, Serializable {
         // Don't generate a new id because it's not necessary and breaks mana events, see #14822
         // ability.newId();
         ability.setControllerId(playerId);
-        if (ability.activate(game, false) && ability.resolve(game)) {
-            if (ability.isUndoPossible()) {
-                if (storedBookmark == -1 || storedBookmark > bookmark) { // e.g. useful for undo Nykthos, Shrine to Nyx
-                    setStoredBookmark(bookmark);
+        if (ability.activate(game, false)) {
+            fireActivatedAbilityEvent(ability, game);
+            if (ability.resolve(game)) {
+                if (ability.isUndoPossible()) {
+                    if (storedBookmark == -1 || storedBookmark > bookmark) { // e.g. useful for undo Nykthos, Shrine to Nyx
+                        setStoredBookmark(bookmark);
+                    }
+                } else {
+                    resetStoredBookmark(game);
                 }
-            } else {
-                resetStoredBookmark(game);
+                return true;
             }
-            return true;
         }
-        restoreState(bookmark, ability.getRule(), game);
+        // 605.3b "An activated mana ability doesn't go on the stack"
+        restoreStateKeepingStack(bookmark, ability.getRule(), game);
         return false;
+    }
+
+    /**
+     * Fire activated ability event for both normal abilities with stack and mana abilities without stack (602.2b + 601.2i, 605.3)
+     * Special actions aren't activated abilities and ignored here (116.1)
+     */
+    private void fireActivatedAbilityEvent(ActivatedAbility ability, Game game) {
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, ability.getId(), ability, playerId));
     }
 
     protected boolean playAbility(ActivatedAbility ability, Game game) {
@@ -1595,8 +1620,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             ability.setControllerId(playerId);
             game.getStack().push(game, new StackAbility(ability, playerId));
             if (ability.activate(game, false)) {
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY,
-                        ability.getId(), ability, playerId));
+                fireActivatedAbilityEvent(ability, game);
                 if (!game.isSimulation()) {
                     game.informPlayers(getLogName() + ability.getGameLogMessage(game));
                 }
@@ -1604,10 +1628,10 @@ public abstract class PlayerImpl implements Player, Serializable {
                 resetStoredBookmark(game);
                 return true;
             }
-            restoreState(bookmark, ability.getRule(), game);
         } else {
             // resolve without stack
             if (ability.activate(game, false)) {
+                fireActivatedAbilityEvent(ability, game);
                 ability.resolve(game);
                 game.removeBookmark(bookmark);
                 resetStoredBookmark(game);
@@ -1659,7 +1683,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                     return true;
                 }
             }
-            restoreState(bookmark, action.getRule(), game);
+            // like mana abilities, special mana payments don't use the stack
+            restoreStateKeepingStack(bookmark, action.getRule(), game);
         }
         return false;
     }
@@ -2486,18 +2511,19 @@ public abstract class PlayerImpl implements Player, Serializable {
         );
         if (!game.replaceEvent(addingAllEvent)) {
             int amount = addingAllEvent.getAmount();
-            int finalAmount = amount;
+            int startAmount = this.counters.getCount(counter.getName());
+            int addedAmount = amount;
             boolean isEffectFlag = addingAllEvent.getFlag();
             for (int i = 0; i < amount; i++) {
                 Counter eventCounter = counter.copy();
-                eventCounter.remove(eventCounter.getCount() - 1);
+                eventCounter.remove(eventCounter.getCount() - 1); // make 1 counter
                 GameEvent addingOneEvent = GameEvent.getEvent(
                         GameEvent.EventType.ADD_COUNTER, playerId, source,
                         playerAddingCounters, counter.getName(), 1
                 );
                 addingOneEvent.setFlag(isEffectFlag);
                 if (!game.replaceEvent(addingOneEvent)) {
-                    counters.addCounter(eventCounter);
+                    this.counters.addCounter(eventCounter);
                     GameEvent addedOneEvent = GameEvent.getEvent(
                             GameEvent.EventType.COUNTER_ADDED, playerId, source,
                             playerAddingCounters, counter.getName(), 1
@@ -2505,14 +2531,15 @@ public abstract class PlayerImpl implements Player, Serializable {
                     addedOneEvent.setFlag(addingOneEvent.getFlag());
                     game.fireEvent(addedOneEvent);
                 } else {
-                    finalAmount--;
+                    addedAmount--;
                     returnCode = false;
                 }
             }
-            if (finalAmount > 0) {
+            if (addedAmount > 0) {
+                CardUtil.informPlayersCountersChange(playerAddingCounters, counter.getName(), startAmount, startAmount + addedAmount, this, game, source);
                 GameEvent addedAllEvent = GameEvent.getEvent(
                         GameEvent.EventType.COUNTERS_ADDED, playerId, source,
-                        playerAddingCounters, counter.getName(), amount
+                        playerAddingCounters, counter.getName(), addedAmount
                 );
                 addedAllEvent.setFlag(addingAllEvent.getFlag());
                 game.fireEvent(addedAllEvent);
@@ -2531,7 +2558,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             return;
         }
 
-        int finalAmount = 0;
+        int startAmount = this.counters.getCount(counterName);
+        int removedAmount = 0;
         for (int i = 0; i < amount; i++) {
 
             GameEvent event = new RemoveCounterEvent(counterName, this, source, false);
@@ -2544,10 +2572,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             event = new CounterRemovedEvent(counterName, this, source, false);
             game.fireEvent(event);
-            finalAmount++;
+            removedAmount++;
         }
 
-        GameEvent event = new CountersRemovedEvent(counterName, this, source, finalAmount, false);
+        CardUtil.informPlayersCountersChange(null, counterName, startAmount, startAmount - removedAmount, this, game, source);
+        GameEvent event = new CountersRemovedEvent(counterName, this, source, removedAmount, false);
         game.fireEvent(event);
     }
 
@@ -2659,7 +2688,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void resetPassed() {
-        this.passed = this.loses || this.hasLeft();
+        this.passed = !this.isInGame();
     }
 
     @Override
@@ -2706,6 +2735,14 @@ public abstract class PlayerImpl implements Player, Serializable {
         game.setConcedingPlayer(playerId);
 
         lost(game); // it's ok to be ignored by "can't lose abilities" here (setConcedingPlayer done all work above)
+    }
+
+    @Override
+    public void setTechnicalResult(boolean won) {
+        // direct result without game events to stop errored game
+        this.wins = won;
+        this.loses = !won;
+        this.draws = false;
     }
 
     @Override
@@ -2784,10 +2821,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void lost(Game game) {
+    public boolean lost(Game game) {
         if (canLose(game)) {
             lostForced(game);
+            return true;
         }
+        return false;
     }
 
     @Override
@@ -2797,7 +2836,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (!this.wins) {
             this.loses = true;
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST, null, null, playerId));
-            game.informPlayers(this.getLogName() + " has lost the game.");
+            game.informPlayers(this.getLogName() + " has lost the game");
         } else {
             logger.debug(this.getName() + " has already won - stop lost");
         }
@@ -3039,18 +3078,33 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean seekCard(FilterCard filter, Ability source, Game game) {
-        Set<Card> cards = this.getLibrary()
-                .getCards(game)
-                .stream()
-                .filter(card -> filter.match(card, getId(), source, game))
-                .collect(Collectors.toSet());
-        Card card = RandomUtil.randomFromCollection(cards);
-        if (card == null) {
-            return false;
+        return seekCards(Collections.singletonList(filter), source, game) > 0;
+    }
+
+    @Override
+    public int seekCards(List<FilterCard> filters, Ability source, Game game) {
+        Cards soughtCards = new CardsImpl();
+        for (FilterCard filter : filters) {
+            Set<Card> cards = this.getLibrary()
+                    .getCards(game)
+                    .stream()
+                    .filter(card -> !soughtCards.contains(card.getId()))
+                    .filter(card -> filter.match(card, getId(), source, game))
+                    .collect(Collectors.toSet());
+            Card card = RandomUtil.randomFromCollection(cards);
+            if (card != null) {
+                soughtCards.add(card);
+            }
         }
-        game.informPlayers(this.getLogName() + " seeks a card from their library");
-        this.moveCards(card, Zone.HAND, source, game);
-        return true;
+        if (soughtCards.isEmpty()) {
+            return 0;
+        }
+        game.informPlayers(this.getLogName() + " seeks " + CardUtil.numberToText(soughtCards.size(), "a")
+                + (soughtCards.size() > 1 ? " cards" : " card") + " from their library");
+        this.moveCards(soughtCards, Zone.HAND, source, game);
+        // one seek action is one event, whatever the number of sought cards
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.SOUGHT, getId(), source, getId(), soughtCards.size()));
+        return soughtCards.size();
     }
 
     @Override
@@ -3483,6 +3537,24 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             dieRolls.clear();
             dieRolls.addAll(newRolls);
+        } else if (rollDiceEvent.getRollDieType() == RollDieType.PLANAR && rollDiceEvent.getAmount() > 1) {
+            final Choice choice = new ChoiceImpl(true);
+            choice.setMessage("Choose which die roll result to keep (the rest will be ignored)");
+            choice.setChoices(dieRolls.stream().map(RollDieResult::getPlanarResult).map(PlanarDieRollResult::toString).collect(Collectors.toSet()));
+            this.choose(Outcome.Neutral, choice, game);
+            final RollDieResult chosen = dieRolls.stream()
+                    .filter(o -> o.getPlanarResult().toString().equals(choice.getChoice()))
+                    .findFirst()
+                    .orElse(dieRolls.get(0));
+            dieRolls.remove(chosen);
+            ignoreMessage = String.format(
+                dieRolls.size() > 1 ? ", ignoring [%s]" : ", ignoring %s",
+                dieRolls.stream().map(RollDieResult::getPlanarResult).map(PlanarDieRollResult::toString).collect(Collectors.joining(", "))
+            );
+            dieRolls.clear();
+            dieRolls.add(chosen);
+            dieResults.clear();
+            dieResults.add(chosen.getPlanarResult());
         } else {
             ignoreMessage = "";
         }
@@ -4833,6 +4905,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public int getStartingDeckSize() {
+        return startingDeckSize;
+    }
+
+    @Override
+    public void initStartingDeckSize() {
+        this.startingDeckSize = getLibrary().size();
+    }
+
+    @Override
     public boolean canPlotFromTopOfLibrary() {
         return canPlotFromTopOfLibrary;
     }
@@ -5054,18 +5136,19 @@ public abstract class PlayerImpl implements Player, Serializable {
                     // 303.4g. If an Aura is entering the battlefield and there is no legal object or player for it to enchant,
                     // the Aura remains in its current zone, unless that zone is the stack. In that case, the Aura is put into
                     // its owner's graveyard instead of entering the battlefield. If the Aura is a token, it isn't created.
-                    if (card.hasSubtype(SubType.AURA, game) && !(source instanceof BestowAbility)) {
+                    Card auraCard = AuraReplacementEffect.findEnteringAura(game, card, faceDown);
+                    if (auraCard != null && !(source instanceof BestowAbility)) {
                         SpellAbility auraSpellAbility;
-                        if (source instanceof SpellAbility && card.getAbilities(game).contains(source)) {
+                        if (source instanceof SpellAbility && auraCard.getAbilities(game).contains(source)) {
                             // cast aura - use source ability
                             auraSpellAbility = (SpellAbility) source;
                         } else {
                             // put to battlefield by another effect - use default spell
-                            auraSpellAbility = card.getSpellAbility();
+                            auraSpellAbility = auraCard.getSpellAbility();
                         }
                         if (auraSpellAbility != null) {
                             if (auraSpellAbility.getTargets().isEmpty()) {
-                                throw new IllegalArgumentException("Something wrong, found etb aura with empty spell ability or without any targets: " + card + ", source: " + source);
+                                throw new IllegalArgumentException("Something wrong, found etb aura with empty spell ability or without any targets: " + auraCard + ", source: " + source);
                             }
                             if (!auraSpellAbility.getTargets().get(0).copy().withNotTarget(true).canChooseOrAlreadyChosen(byOwner ? card.getOwnerId() : getId(), source, game)) {
                                 continue;
@@ -5564,6 +5647,11 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (game.replaceEvent(event)) {
             return false;
         }
+        // 701.22b If a player is instructed to scry 0, no scry event occurs.
+        // Abilities that trigger whenever a player scries won't trigger.
+        if (event.getAmount() < 1) {
+            return false;
+        }
         game.informPlayers(getLogName() + " scries " + event.getAmount() + CardUtil.getSourceLogName(game, source));
         Cards cards = new CardsImpl();
         cards.addAllCards(getLibrary().getTopCards(game, event.getAmount()));
@@ -5595,18 +5683,24 @@ public abstract class PlayerImpl implements Player, Serializable {
         game.informPlayers(getLogName() + " surveils " + event.getAmount() + CardUtil.getSourceLogName(game, source));
         Cards cards = new CardsImpl();
         cards.addAllCards(getLibrary().getTopCards(game, event.getAmount()));
-        int totalCount = cards.size();
+        Cards cardsPutInGraveyard = new CardsImpl();
+        Cards cardsPutOnTop = new CardsImpl();
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY,
                     new FilterCard("card" + (cards.size() == 1 ? "" : "s")
                             + " to PUT into your GRAVEYARD (Surveil)"));
             chooseTarget(Outcome.Benefit, cards, target, source, game);
-            moveCards(new CardsImpl(target.getTargets()), Zone.GRAVEYARD, source, game);
+            Cards cardsToMove = new CardsImpl(target.getTargets());
+            if (!cardsToMove.isEmpty()) {
+                Set<Card> movedCards = moveCardsToGraveyardWithInfo(cardsToMove.getCards(game), source, game, Zone.LIBRARY);
+                cardsPutInGraveyard.addAllCards(movedCards);
+            }
             cards.removeIf(target.getTargets()::contains);
             putCardsOnTopOfLibrary(cards, game, source, true);
+            cardsPutOnTop.addAll(cards);
         }
-        game.fireEvent(new GameEvent(GameEvent.EventType.SURVEILED, getId(), source, getId(), event.getAmount(), true));
-        return SurveilResult.surveil(totalCount - cards.size(), cards.size());
+        game.fireEvent(new SurveilledEvent(getId(), source, event.getAmount(), cardsPutInGraveyard.getCards(game)));
+        return SurveilResult.surveil(cardsPutInGraveyard, cardsPutOnTop);
     }
 
     @Override

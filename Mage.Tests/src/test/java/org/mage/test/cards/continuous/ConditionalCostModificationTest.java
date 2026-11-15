@@ -10,7 +10,9 @@ import mage.abilities.keyword.EquipAbility;
 import mage.constants.PhaseStep;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.FilterAbility;
 import mage.filter.FilterCard;
+import mage.filter.predicate.other.AbilityClassPredicate;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -41,7 +43,10 @@ public class ConditionalCostModificationTest extends CardTestPlayerBase {
 
     @Test
     public void test_ModificationNormal() {
-        addCustomCardWithAbility("mod", playerA, new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(EquipAbility.class, "equip")));
+        FilterAbility filterEquip = new FilterAbility("equip");
+        filterEquip.add(new AbilityClassPredicate(EquipAbility.class));
+
+        addCustomCardWithAbility("mod", playerA, new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(filterEquip)));
 
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Dagger of the Worthy", 1);
@@ -59,9 +64,12 @@ public class ConditionalCostModificationTest extends CardTestPlayerBase {
 
     @Test
     public void test_ModificationConditionalActive() {
+        FilterAbility filterEquip = new FilterAbility("equip");
+        filterEquip.add(new AbilityClassPredicate(EquipAbility.class));
+
         addCustomCardWithAbility("mod", playerA, new SimpleStaticAbility(
                 new ConditionalCostModificationEffect(
-                        new AbilitiesCostReductionControllerEffect(EquipAbility.class, "equip"),
+                        new AbilitiesCostReductionControllerEffect(filterEquip),
                         MyTurnCondition.instance,
                         ""
                 )
@@ -83,9 +91,12 @@ public class ConditionalCostModificationTest extends CardTestPlayerBase {
 
     @Test
     public void test_ModificationConditionalNotActive() {
+        FilterAbility filterEquip = new FilterAbility("equip");
+        filterEquip.add(new AbilityClassPredicate(EquipAbility.class));
+
         addCustomCardWithAbility("mod", playerA, new SimpleStaticAbility(
                 new ConditionalCostModificationEffect(
-                        new AbilitiesCostReductionControllerEffect(EquipAbility.class, "equip"),
+                        new AbilitiesCostReductionControllerEffect(filterEquip),
                         NotMyTurnCondition.instance,
                         ""
                 )
@@ -107,9 +118,12 @@ public class ConditionalCostModificationTest extends CardTestPlayerBase {
 
     @Test
     public void test_ModificationConditionalNotActiveWithOtherEffect() {
+        FilterAbility filterEquip = new FilterAbility("equip");
+        filterEquip.add(new AbilityClassPredicate(EquipAbility.class));
+
         addCustomCardWithAbility("mod", playerA, new SimpleStaticAbility(
                 new ConditionalCostModificationEffect(
-                        new AbilitiesCostReductionControllerEffect(EquipAbility.class, "equip"),
+                        new AbilitiesCostReductionControllerEffect(filterEquip),
                         NotMyTurnCondition.instance,
                         new SpellsCostIncreasingAllEffect(1, new FilterCard(), TargetController.ANY),
                         ""

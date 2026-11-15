@@ -37,8 +37,7 @@ public final class RealmSeekers extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(
                         CounterType.P1P1.createInstance(), 
-                        CardsInAllHandsCount.instance,
-                        false), 
+                        CardsInAllHandsCount.instance), 
                 "with X +1/+1 counters on it, where X is the total number of cards in all players' hands"));
         
         // {2}{G}, Remove a +1/+1 counter from Realm Seekers: Search your library for a land card, reveal it, put it into your hand, then shuffle your library.

@@ -20,6 +20,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
@@ -77,7 +78,7 @@ class SuperiorSpiderManCopyEffect extends OneShotEffect {
                 player.choose(outcome, target, source, game);
                 Card copyFromCard = game.getCard(target.getFirstTarget());
                 if (copyFromCard != null) {
-                    Permanent newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
+                    Permanent newBluePrint = new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, copyFromCard), source.getControllerId(), game);
                     newBluePrint.assignNewId();
                     SuperiorSpiderManCopyApplier applier = new SuperiorSpiderManCopyApplier();
                     applier.apply(game, newBluePrint, source, source.getSourceId());

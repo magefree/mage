@@ -106,8 +106,9 @@ class DanceOfTheManseEffect extends OneShotEffect {
         if (CardUtil.getSourceCostsTag(game, source, "X", 0) < 6) {
             return true;
         }
-        cards.stream()
-                .map(game::getPermanent)
+        cards.getCards(game)
+                .stream()
+                .map(card -> CardUtil.getPermanentFromCardPutToBattlefield(card, game))
                 .filter(Objects::nonNull)
                 .forEach(permanent -> {
                     ContinuousEffect effect = new AddCardTypeTargetEffect(Duration.EndOfGame, CardType.CREATURE);

@@ -11,7 +11,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterAttackingCreature;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 
 import java.util.UUID;
 
@@ -20,7 +22,13 @@ import java.util.UUID;
  */
 public final class RampagingClassmate extends CardImpl {
 
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_ATTACKING_CREATURE, 1);
+    private static final FilterPermanent filter = new FilterAttackingCreature("other attacking creature");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
+
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
 
     public RampagingClassmate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

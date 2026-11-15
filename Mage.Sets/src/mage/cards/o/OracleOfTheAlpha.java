@@ -64,6 +64,7 @@ class OracleOfTheAlphaEffect extends OneShotEffect {
             "Mox Jet",
             "Mox Pearl",
             "Mox Ruby",
+            "Mox Sapphire",
             "Timetwister",
             "Time Walk"
     );

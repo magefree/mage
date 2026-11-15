@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class DemonicLore extends CardImpl {
 
-    private static final DynamicValue xValue = new MultipliedValue(CardsInControllerHandCount.ANY, 2);
+    private static final DynamicValue xValue = new MultipliedValue(CardsInControllerHandCount.ANY_SINGULAR, 2);
 
     public DemonicLore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
@@ -29,7 +29,6 @@ public final class DemonicLore extends CardImpl {
         // At the beginning of your end step, you lose 2 life for each card in your hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new LoseLifeSourceControllerEffect(xValue)
-                        .setText("you lose 2 life for each card in your hand")
         ));
     }
 

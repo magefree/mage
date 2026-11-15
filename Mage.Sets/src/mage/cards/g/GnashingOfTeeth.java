@@ -1,7 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
-
 import mage.abilities.Mode;
 import mage.abilities.effects.common.ExileTargetIfDiesEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
@@ -12,8 +10,10 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -21,7 +21,7 @@ import mage.target.common.TargetOpponent;
  */
 public final class GnashingOfTeeth extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures target opponent controls");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures target player controls");
 
     static {
         filter.add(TargetController.SOURCE_TARGETS.getControllerPredicate());
@@ -40,7 +40,7 @@ public final class GnashingOfTeeth extends CardImpl {
         this.getSpellAbility().addMode(
             new Mode(
                 new BoostAllEffect(-1, -1, Duration.EndOfTurn, filter, false)
-            ).addTarget(new TargetOpponent())
+            ).addTarget(new TargetPlayer())
         );
     }
 

@@ -52,6 +52,13 @@ public final class ArenaNewPlayerExperience extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 21, Rarity.LAND, mage.cards.basiclands.Plains.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 22, Rarity.LAND, mage.cards.basiclands.Plains.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 23, Rarity.LAND, mage.cards.basiclands.Plains.class, RETRO_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rise from the Grave", 38, Rarity.UNCOMMON, mage.cards.r.RiseFromTheGrave.class));
+        cards.add(new SetCardInfo("Shorecomber Crab", 37, Rarity.COMMON, mage.cards.s.ShorecomberCrab.class));
+        cards.add(new SetCardInfo("Snow-Covered Forest", 95850, Rarity.LAND, mage.cards.s.SnowCoveredForest.class, RETRO_ART));
+        cards.add(new SetCardInfo("Snow-Covered Island", 95847, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class, RETRO_ART));
+        cards.add(new SetCardInfo("Snow-Covered Mountain", 95849, Rarity.LAND, mage.cards.s.SnowCoveredMountain.class, RETRO_ART));
+        cards.add(new SetCardInfo("Snow-Covered Plains", 95846, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class, RETRO_ART));
+        cards.add(new SetCardInfo("Snow-Covered Swamp", 95848, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class, RETRO_ART));
         cards.add(new SetCardInfo("Swamp", "5a", Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", "6a", Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 12, Rarity.LAND, mage.cards.basiclands.Swamp.class, RETRO_ART_USE_VARIOUS));
@@ -60,5 +67,6 @@ public final class ArenaNewPlayerExperience extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 27, Rarity.LAND, mage.cards.basiclands.Swamp.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 28, Rarity.LAND, mage.cards.basiclands.Swamp.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 29, Rarity.LAND, mage.cards.basiclands.Swamp.class, RETRO_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Bauble", 36, Rarity.UNCOMMON, mage.cards.u.UrzasBauble.class));
     }
 }

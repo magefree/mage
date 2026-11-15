@@ -32,8 +32,7 @@ public final class HelixPinnacle extends CardImpl {
 
         // {X}: Put X tower counters on Helix Pinnacle.
         this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(
-                CounterType.TOWER.createInstance(), GetXValue.instance, true
-        ), new ManaCostsImpl<>("{X}")));
+                CounterType.TOWER.createInstance(), GetXValue.instance), new ManaCostsImpl<>("{X}")));
 
         // At the beginning of your upkeep, if there are 100 or more tower counters on Helix Pinnacle, you win the game.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect()).withInterveningIf(condition));

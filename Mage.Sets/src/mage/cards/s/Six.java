@@ -14,10 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.Predicates;
 
 import java.util.UUID;
 
@@ -25,12 +22,6 @@ import java.util.UUID;
  * @author Susucr
  */
 public final class Six extends CardImpl {
-
-    private static final FilterCard filter = new FilterPermanentCard("nonland permanent card");
-
-    static {
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
-    }
 
     public Six(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
@@ -52,7 +43,7 @@ public final class Six extends CardImpl {
         // As long as it's your turn, nonland permanent cards in your graveyard have retrace.
         this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(
-                        new GainRetraceYourGraveyardEffect(filter),
+                        new GainRetraceYourGraveyardEffect(StaticFilters.FILTER_CARD_NON_LAND_PERMANENT),
                         MyTurnCondition.instance,
                         "During your turn, nonland permanent cards in your graveyard have retrace."
                 )

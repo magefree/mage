@@ -176,7 +176,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 break;
                             case 9: // GIDEON CHAMPION OF JUSTICE 1
                                 sb.append("Put a loyalty counter on Urza for each creature target opponent controls.");
-                                effects.add(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(0), new PermanentsTargetOpponentControlsCount(new FilterCreaturePermanent()), true));
+                                effects.add(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(0), new PermanentsTargetOpponentControlsCount(new FilterCreaturePermanent())));
                                 target = new TargetOpponent();
                                 break;
                             case 10: // JACE ARCHITECT OF THOUGHT 1

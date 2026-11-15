@@ -1,20 +1,16 @@
 package mage.cards.z;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.PutCards;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +54,6 @@ class ZimonesExperimentEffect extends LookLibraryAndPickControllerEffect {
 
     ZimonesExperimentEffect() {
         super(5, 2, filterCard, PutCards.HAND, PutCards.BOTTOM_RANDOM);
-        this.revealCards = true;
         this.staticText = "look at the top five cards of your library. "
             + "You may reveal up to two creature and/or land cards from among them, "
             + "then put the rest on the bottom of your library in a random order. Put "
@@ -77,8 +72,9 @@ class ZimonesExperimentEffect extends LookLibraryAndPickControllerEffect {
 
     @Override
     protected boolean actionWithPickedCards(Game game, Ability source, Player player, Cards pickedCards, Cards otherCards) {
+        boolean result = putLookedCards.moveCards(player, otherCards, source, game);
         if (pickedCards.isEmpty()) {
-            return false;
+            return result;
         }
 
         Cards landCards = new CardsImpl();
@@ -96,7 +92,6 @@ class ZimonesExperimentEffect extends LookLibraryAndPickControllerEffect {
             }
         }
 
-        boolean result = false;
         if (!landCards.isEmpty()) {
             result |= PutCards.BATTLEFIELD_TAPPED.moveCards(player, landCards, source, game);
         }

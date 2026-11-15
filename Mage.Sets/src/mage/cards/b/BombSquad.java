@@ -170,8 +170,6 @@ class BombSquadBeginningEffect extends OneShotEffect {
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             permanent.addCounters(CounterType.FUSE.createInstance(), source.getControllerId(), source, game);
-
-            game.informPlayers(card.getName() + " puts a fuse counter on " + permanent.getName());
         }
         return true;
     }

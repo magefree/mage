@@ -3,6 +3,7 @@ package mage.cards.r;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,6 +18,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
+import mage.util.CardUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -106,7 +108,7 @@ class RetetherEffect extends OneShotEffect {
                                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                                 if (permanent != null && !permanent.cantBeAttachedBy(aura, source, game, true)) {
                                     auraMap.put(aura, permanent);
-                                    game.getState().setValue("attachTo:" + aura.getId(), permanent);
+                                    AttachEffect.setAttachTo(game, aura.getId(), permanent);
                                     continue auraCardsInGraveyard;
                                 }
                             }
@@ -120,7 +122,10 @@ class RetetherEffect extends OneShotEffect {
                 Card aura = entry.getKey();
                 Permanent permanent = entry.getValue();
                 if (aura != null && permanent != null) {
-                    permanent.addAttachment(aura.getId(), source, game);
+                    Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(aura, game);
+                    if (attachment != null) {
+                        permanent.addAttachment(attachment.getId(), source, game);
+                    }
                 }
             }
             return true;

@@ -19,6 +19,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -90,13 +94,17 @@ class GhoulsNightOutEffect extends OneShotEffect {
             }
             if (!cardsToBattlefield.isEmpty()) {
                 controller.moveCards(cardsToBattlefield, Zone.BATTLEFIELD, source, game);
-                cardsToBattlefield.removeIf(card -> game.getState().getZone(card.getId()) != Zone.BATTLEFIELD);
-                if (!cardsToBattlefield.isEmpty()) {
+                List<Permanent> permanents = cardsToBattlefield
+                        .stream()
+                        .map(card -> CardUtil.getPermanentFromCardPutToBattlefield(card, game))
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toList());
+                if (!permanents.isEmpty()) {
                     game.addEffect(new GhoulsNightOutTypeChangingEffect(
-                    ).setTargetPointer(new FixedTargets(cardsToBattlefield, game)), source);
+                    ).setTargetPointer(new FixedTargets(permanents, game)), source);
                     game.addEffect(new GainAbilityTargetEffect(
                             new DecayedAbility(), Duration.Custom
-                    ).setTargetPointer(new FixedTargets(cardsToBattlefield, game)), source);
+                    ).setTargetPointer(new FixedTargets(permanents, game)), source);
                     return true;
                 }
             }

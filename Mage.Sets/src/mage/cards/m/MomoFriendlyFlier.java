@@ -19,6 +19,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -38,7 +39,9 @@ public final class MomoFriendlyFlier extends CardImpl {
 
     static {
         filter.add(Predicates.not(SubType.LEMUR.getPredicate()));
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(new AbilityPredicate(FlyingAbility.class));
+        filter2.add(AnotherPredicate.instance);
         filter2.add(new AbilityPredicate(FlyingAbility.class));
     }
 

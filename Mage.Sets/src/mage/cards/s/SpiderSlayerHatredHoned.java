@@ -13,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.RobotFlyingToken;
 
@@ -50,6 +51,7 @@ public final class SpiderSlayerHatredHoned extends CardImpl {
 
         // {6}, Exile this card from your graveyard: Create two tapped 1/1 colorless Robot artifact creature tokens with flying.
         Ability ability = new SimpleActivatedAbility(
+                Zone.GRAVEYARD,
                 new CreateTokenEffect(new RobotFlyingToken(), 2, true),
                 new ManaCostsImpl<>("{6}")
         );

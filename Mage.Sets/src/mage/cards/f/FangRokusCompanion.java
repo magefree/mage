@@ -37,7 +37,7 @@ public final class FangRokusCompanion extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(TargetController.YOU.getControllerPredicate());
+        filter.add(SuperType.LEGENDARY.getPredicate());
     }
 
     public FangRokusCompanion(UUID ownerId, CardSetInfo setInfo) {
@@ -117,14 +117,14 @@ class FangRokusCompanionReturnEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Card card = game.getCard(source.getSourceId());
-        if (player == null || card == null) {
+        if (player == null || card == null || game.getState().getZone(card.getId()) != Zone.GRAVEYARD) {
             return false;
         }
         game.addEffect(new AddCardSubTypeTargetEffect(SubType.SPIRIT, Duration.Custom)
                 .setTargetPointer(new FixedTarget(new MageObjectReference(card, game, 1))), source);
         return player.moveCards(
-                card, Zone.BATTLEFIELD, source, game, true,
-                false, true, null
+                card, Zone.BATTLEFIELD, source, game, false,
+                false, false, null
         );
     }
 }

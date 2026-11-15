@@ -17,7 +17,6 @@ import mage.players.Player;
 
 import java.util.UUID;
 
-
 /**
  * @author Svyatoslav28
  */
@@ -80,10 +79,9 @@ class JukaiLiberatorEffect extends OneShotEffect {
         if (land) {
             player.seekCard(StaticFilters.FILTER_CARD_LAND, source, game);
         } else {
-            player.seekCard(StaticFilters.FILTER_CARD_NON_LAND, source, game);
+            player.seekCard(StaticFilters.FILTER_CARD_NON_LAND_PERMANENT, source, game);
         }
         return true;
     }
 }
-
 

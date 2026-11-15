@@ -113,11 +113,8 @@ class PanopticMirrorCastEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent PanopticMirror = game.getPermanent(source.getSourceId());
+        Permanent PanopticMirror = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        if (PanopticMirror == null) {
-            PanopticMirror = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        }
         if (PanopticMirror != null
                 && PanopticMirror.getImprinted() != null
                 && !PanopticMirror.getImprinted().isEmpty()

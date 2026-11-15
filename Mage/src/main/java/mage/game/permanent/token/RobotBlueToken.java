@@ -15,6 +15,7 @@ public final class RobotBlueToken extends TokenImpl {
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.ROBOT);
+        subtype.add(SubType.WARRIOR);
         power = new MageInt(3);
         toughness = new MageInt(3);
     }

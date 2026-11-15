@@ -26,11 +26,11 @@ public class DuelCommander extends Commander {
         banned.add("Emrakul, the Aeons Torn");
         banned.add("Entomb");
         banned.add("Fastbond");
-        banned.add("Force of Will");
         banned.add("Field of the Dead");
         banned.add("Fierce Guardianship");
         banned.add("Flawless Maneuver");
         banned.add("Food Chain");
+        banned.add("Force of Will");
         banned.add("Gaea's Cradle");
         banned.add("Genesis Storm");
         banned.add("Gifts Ungiven");
@@ -44,7 +44,6 @@ public class DuelCommander extends Commander {
         banned.add("Library of Alexandria");
         banned.add("Lion's Eye Diamond");
         banned.add("Lotus Petal");
-        banned.add("Lutri, the Spellchaser");
         banned.add("Maddening Hex");
         banned.add("Mana Crypt");
         banned.add("Mana Drain");
@@ -59,8 +58,8 @@ public class DuelCommander extends Commander {
         banned.add("Mox Ruby");
         banned.add("Mox Sapphire");
         banned.add("Mystical Tutor");
+        banned.add("Nadu, Winged Wisdom");
         banned.add("Natural Order");
-        banned.add("Necrotic Ooze");
         banned.add("Oath of Druids");
         banned.add("Price of Progress");
         banned.add("Protean Hulk");
@@ -76,13 +75,12 @@ public class DuelCommander extends Commander {
         banned.add("Thassa's Oracle");
         banned.add("The One Ring");
         banned.add("The Tabernacle at Pendrell Vale");
-        banned.add("Timetwister");
         banned.add("Time Vault");
         banned.add("Time Walk");
         banned.add("Time Warp");
+        banned.add("Timetwister");
         banned.add("Tinker");
         banned.add("Tolarian Academy");
-        banned.add("Trazyn The Infinite");
         banned.add("Treasure Cruise");
         banned.add("Underworld Breach");
         banned.add("Uro, Titan of Nature's Wrath");
@@ -92,32 +90,32 @@ public class DuelCommander extends Commander {
 
         bannedCommander.add("Ajani, Nacatl Pariah");
         bannedCommander.add("Arahbo, Roar of the World");
-        bannedCommander.add("Breya, Etherium Shaper");
         bannedCommander.add("Derevi, Empyrial Tactician");
         bannedCommander.add("Dihada, Binder of Wills");
         bannedCommander.add("Edgar Markov");
         bannedCommander.add("Edric, Spymaster of Trest");
-        bannedCommander.add("Emry, Lurker of the Loch");
         bannedCommander.add("Eris, Roar of the Storm");
         bannedCommander.add("Ezio Auditore da Firenze");
         bannedCommander.add("Geist of Saint Traft");
-        bannedCommander.add("Inalla, Archmage Ritualist");
         bannedCommander.add("Hogaak, Arisen Necropolis");
+        bannedCommander.add("Inalla, Archmage Ritualist");
         bannedCommander.add("Krark, the Thumbless");
+        bannedCommander.add("Lumra, Bellow of the Woods");
         bannedCommander.add("Minsc & Boo, Timeless Heroes");
-        bannedCommander.add("Nadu, Winged Wisdom");
-        bannedCommander.add("Najeela, the Blade-Blossom");
         bannedCommander.add("Old Stickfingers");
         bannedCommander.add("Oloro, Ageless Ascetic");
         bannedCommander.add("Omnath, Locus of Creation");
         bannedCommander.add("Prime Speaker Vannifar");
         bannedCommander.add("Raffine, Scheming Seer");
+        bannedCommander.add("Rograkh, Son of Rohgahh");
         bannedCommander.add("Shorikai, Genesis Engine");
+        bannedCommander.add("Spider-Man 2099");
         bannedCommander.add("Tamiyo, Inquisitive Student");
-        bannedCommander.add("Tasigur, the Golden Fang");
+        bannedCommander.add("The Fantasticar");
         bannedCommander.add("Urza, Lord High Artificer");
         bannedCommander.add("Vial Smasher the Fierce");
-        bannedCommander.add("Winota, Joiner of Forces");
         bannedCommander.add("Yuriko, the Tiger's Shadow");
+
+        bannedCompanion.add("Lutri, the Spellchaser");
     }
 }

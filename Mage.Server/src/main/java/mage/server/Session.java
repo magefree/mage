@@ -4,8 +4,10 @@ import mage.MageException;
 import mage.constants.Constants;
 import mage.interfaces.callback.ClientCallback;
 import mage.interfaces.callback.ClientCallbackMethod;
+import mage.interfaces.callback.ClientCallbacksQueue;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
+import mage.remote.CustomThreadPool;
 import mage.server.game.GamesRoom;
 import mage.server.managers.ConfigSettings;
 import mage.server.managers.ManagerFactory;
@@ -13,13 +15,13 @@ import mage.util.RandomUtil;
 import mage.util.ThreadUtils;
 import mage.utils.SystemUtil;
 import org.apache.log4j.Logger;
-import org.jboss.remoting.callback.AsynchInvokerCallbackHandler;
-import org.jboss.remoting.callback.Callback;
-import org.jboss.remoting.callback.HandleCallbackException;
-import org.jboss.remoting.callback.InvokerCallbackHandler;
+import org.jboss.remoting.callback.*;
+import org.jboss.util.threadpool.BlockingMode;
+import org.jboss.remoting.Client;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
@@ -47,6 +49,10 @@ public class Session {
     // - if server can't remove another user intance then restrict to connect (example: anon user connected, but there is another anon with diff IP)
     private static final boolean ANON_IDENTIFY_BY_HOST = true; // for anon mode only: true - kick all other users with same IP; false - keep first connected user
 
+    // TODO: async mode is outdated after network rework in #16434 (before rework it's never really works)
+    //   it's adds 2 secs timeout on each slow client call for client recive signal
+    //   DELETE after few releases
+    //
     // async data transfer for all callbacks (transfer of game updates from server to client):
     // - pros:
     //   * SIGNIFICANT performance boost and pings (yep, that's true);
@@ -59,7 +65,11 @@ public class Session {
     //     TODO: need research, possible problem: if something bad with server connection then it can generates
     //      too many requests to a client and can cause threads overflow/limit (example: watch AI only games?);
     //      visualvm can help with threads monitor
-    private static final boolean SUPER_DUPER_BUGGY_AND_FASTEST_ASYNC_CONNECTION = false; // TODO: enable after full research
+    //
+    // TODO: enable after full research
+    // can be enabled by -Dxmage.network.async.messages=true, disabled by default
+    private static final String ASYNC_MESSAGES_PROP = "xmage.network.async.messages";
+    private static final boolean ASYNC_MESSAGES = Boolean.getBoolean(ASYNC_MESSAGES_PROP); // get it from system.property
 
     private final ManagerFactory managerFactory;
     private final String sessionId;
@@ -75,6 +85,9 @@ public class Session {
     private final ReentrantLock callBackLock;
     private String lastCallbackInfo = "";
 
+    private final ClientCallbacksQueue callbacksQueue = new ClientCallbacksQueue(); // queue with waiting callback to send
+    private final AtomicBoolean sending = new AtomicBoolean(); // one of the thread sending the callback
+
     public Session(ManagerFactory managerFactory, String sessionId, InvokerCallbackHandler callbackHandler) {
         this.managerFactory = managerFactory;
         this.sessionId = sessionId;
@@ -83,6 +96,35 @@ public class Session {
         this.timeConnected = new Date();
         this.lock = new ReentrantLock();
         this.callBackLock = new ReentrantLock();
+
+        // inject custom thread pool instead buggy jboss's
+        if (ASYNC_MESSAGES) {
+            setupAsyncSendingPool(callbackHandler);
+        }
+    }
+
+    /**
+     * Async mode only, e.g. callbackHandler.handleCallbackOneway(callback, true);
+     *
+     * Inject improved oneway thread for better lifecycle control and memory leaks fixes,
+     * see CustomThreadPool for more details
+     *
+     * Must be called before a first async send
+     */
+    private static void setupAsyncSendingPool(InvokerCallbackHandler handler) {
+        if (!(handler instanceof ServerInvokerCallbackHandler)) {
+            logger.warn("Unknown callback handler, async sending pool is not replaced: " + handler.getClass().getName());
+            return;
+        }
+        Client client = ((ServerInvokerCallbackHandler) handler).getCallbackClient();
+        if (client == null) {
+            logger.warn("Callback client is missing, async sending pool is not replaced");
+            return;
+        }
+        CustomThreadPool pool = new CustomThreadPool("JBossRemoting Client Oneway fixed");
+        pool.setMaximumPoolSize(1); // send one by one, it's help to keep better message order
+        pool.setBlockingMode(BlockingMode.RUN); // if client freeze and wait queue reach the limit in 1024 then parent thread will call it directly without pool (same as default jboss's pool does)
+        client.setOnewayThreadPool(pool);
     }
 
     public String registerUser(String userName, String password, String email) {
@@ -426,52 +468,170 @@ public class Session {
     }
 
     /**
+     * Puts a message to a session queue WITHOUT sending it, a caller is never blocked by a network.
+     * <p>
+     * It's keep messages order so safe for any important callbacks
+     * Don't forget to call flushCallbacksQueue after fill complete
+     * Thread safe
+     */
+    public void addCallback(final ClientCallback call) {
+        List<ClientCallback> droppedAsOverflow = new ArrayList<>();
+        List<ClientCallback> droppedAsOutdated = new ArrayList<>();
+        try {
+            enqueueCallback(call, droppedAsOverflow, droppedAsOutdated);
+        } finally {
+            reportDropped(droppedAsOverflow, droppedAsOutdated);
+        }
+    }
+
+    /**
+     * Register and put new callback to special queue due important status
+     * Thread safe
+     * Real callbacks will be send on flush command or by another events/schedule
+     */
+    private void enqueueCallback(final ClientCallback call,
+                                 List<ClientCallback> droppedAsOverflow, List<ClientCallback> droppedAsOutdated) {
+        synchronized (this.callbacksQueue) {
+            call.setMessageId(messageId.incrementAndGet());
+            // split messages by two types:
+            // - important (sends first one by one)
+            // - not imprtant (sends last)
+            // see more details in ClientCallbacksQueue
+            // TODO: implement important in call.getMethod().getType()
+            boolean isImportant = !call.getMethod().getType().canComeInAnyOrder();
+            if (call.getMethod().getType().mustIgnoreOnOutdated()) {
+                this.callbacksQueue.addUpdate(call, droppedAsOverflow, droppedAsOutdated);
+            } else {
+                this.callbacksQueue.add(call, isImportant, droppedAsOverflow, droppedAsOutdated);
+            }
+        }
+    }
+
+    private void reportDropped(List<ClientCallback> droppedAsOverflow, List<ClientCallback> droppedAsOutdated) {
+        //droppedAsOverflow.forEach(drop -> LabState.onCallbackDroppedByOverflow(this.userId, drop.getMethod()));
+        //droppedAsOutdated.forEach(drop -> LabState.onCallbackDroppedByOutdated(this.userId, drop.getMethod()));
+    }
+
+    /**
      * Send event/command to the client
      */
     public void fireCallback(final ClientCallback call) {
-        boolean lockSet = false; // TODO: research about locks, why it here? 2023-12-06
-
+        List<ClientCallback> droppedAsOverflow = new ArrayList<>();
+        List<ClientCallback> droppedAsOutdated = new ArrayList<>();
         try {
-            if (valid && callBackLock.tryLock(50, TimeUnit.MILLISECONDS)) {
+            if (call != null) {
+                enqueueCallback(call, droppedAsOverflow, droppedAsOutdated);
+            }
+
+            // only one thread drains a session queue at a time, otherwise two threads can take
+            // two messages and deliver them in a wrong order
+            if (!this.sending.compareAndSet(false, true)) {
+                return;
+            }
+
+            try {
+                // two per call is enough to make a queue shrink while messages keep coming
+                // e.g. increase queue on bad connection and decrease queue on good connection;
+                // the rest of the queue is taken by flush re-run in finally
+                for (int i = 0; i < 2; i++) {
+                    ClientCallback next = this.callbacksQueue.poll();
+                    if (next == null) {
+                        return;
+                    }
+                    if (!sendCallback(next)) {
+                        // could not send, put it back to HEAD and stop trying for now
+                        boolean isImportant = !next.getMethod().getType().canComeInAnyOrder();
+                        this.callbacksQueue.returnBack(next, isImportant, droppedAsOverflow, droppedAsOutdated);
+                        return;
+                    }
+                }
+            } finally {
+                this.sending.set(false);
+                // re-run flush on new messages (if something come from other threads while sending)
+                // test lab's s05 scenarios with slow clients
+                // so no needs to wait 30 secs for global checkExpired
+                if (!this.callbacksQueue.isEmpty()) {
+                    flushCallbacksQueue();
+                }
+            }
+        } finally {
+            // drop stats
+            reportDropped(droppedAsOverflow, droppedAsOutdated);
+        }
+    }
+
+    /**
+     * @return false when a session was busy and a message must stay in a queue
+     */
+    private boolean sendCallback(final ClientCallback call) {
+        boolean lockSet = false;
+        try {
+            int lockMs = call.getMethod().getType().canComeInAnyOrder() ? 300 : 1500;
+            if (valid && callBackLock.tryLock(lockMs, TimeUnit.MILLISECONDS)) {
+                // normal send
                 lastCallbackInfo = call.getInfo();
-                call.setMessageId(messageId.incrementAndGet());
                 lockSet = true;
                 Callback callback = new Callback(call);
-                boolean sendAsync = SUPER_DUPER_BUGGY_AND_FASTEST_ASYNC_CONNECTION
+                boolean sendAsync = ASYNC_MESSAGES
                         && call.getMethod().getType().canComeInAnyOrder();
                 callbackHandler.handleCallbackOneway(callback, sendAsync);
+                return true;
             }
-        } catch (InterruptedException ex) {
-            // already sending another command (connection problem?)
-            // TODO: un-support multiple games/drafts at the same time?!?!?!?!
-            if (call.getMethod().equals(ClientCallbackMethod.GAME_INIT)
-                    || call.getMethod().equals(ClientCallbackMethod.START_GAME)) {
-                // it's ok, possible use cases:
-                // - user has connection problem so can't send game init (see sendInfoAboutPlayersNotJoinedYetAndTryToFixIt)
-            } else {
+            if (valid) {
+                // connection busy by another message, skip current call and send next time (depends on queue)
                 logger.warn("SESSION LOCK, possible connection problem - fireCallback - userId: "
-                        + userId + ", prev call: " + lastCallbackInfo + ", current call: " + call.getInfo(), ex);
+                        + userId + ", prev call: " + lastCallbackInfo + ", current call: " + call.getInfo());
+                return false; // keep call
             }
+            return true; // session is dead, no need to keep a message
+        } catch (InterruptedException ignore) {
+            // nothing to do, app is closing
+            return true;
         } catch (HandleCallbackException ex) {
             // general error
             // can raise on server freeze or normal connection problem from a client side
             // no need to print a full stack log here
-            logger.warn("SESSION CALLBACK EXCEPTION - " + ThreadUtils.findRootException(ex) + ", userId " + userId + ", messageId: " + call.getMessageId());
-
-            // do not send data anymore (user must reconnect)
-            this.valid = false;
+            logger.warn("SESSION CALLBACK EXCEPTION - " + ThreadUtils.findRootException(ex)
+                    + ", userId " + userId + ", messageId: " + call.getMessageId());
+            this.valid = false; // do not send data anymore (user must reconnect)
             managerFactory.sessionManager().disconnect(sessionId, DisconnectReason.LostConnection, true);
+            return true;
         } catch (Throwable ex) {
-            logger.error("SESSION CALLBACK UNKNOWN EXCEPTION - " + ThreadUtils.findRootException(ex) + ", userId " + userId + ", messageId: " + call.getMessageId(), ex);
-
-            // do not send data anymore (user must reconnect)
-            this.valid = false;
+            logger.error("SESSION CALLBACK UNKNOWN EXCEPTION - " + ThreadUtils.findRootException(ex)
+                    + ", userId " + userId + ", messageId: " + call.getMessageId(), ex);
+            this.valid = false; // do not send data anymore (user must reconnect)
             managerFactory.sessionManager().disconnect(sessionId, DisconnectReason.LostConnection, true);
+            return true;
         } finally {
             if (lockSet) {
                 callBackLock.unlock();
             }
         }
+    }
+
+    /**
+     * Resend not delivered messages to the client, e.g. on slow or bad connection
+     * Call it from any scheduled task like checkExpired
+     */
+    public void flushCallbacksQueue() {
+        //logger.info("flushing user " + this.userId + ", callbacksQueue=" + callbacksQueue.size() + ", sending=" + sending.get());
+        if (this.callbacksQueue.isEmpty() || this.sending.get()) {
+            return;
+        }
+        managerFactory.threadExecutor().getCallExecutor().execute(() -> {
+            // one send round per task (up to two messages, see fireCallback)
+            // if new messages arrive while sending then it's will create a new flush task
+            // no blocking code here, it's safe to call multiple flushes, only one will really work
+            managerFactory.threadExecutor().getCallExecutor().execute(() -> fireCallback(null));
+        });
+    }
+
+    public static boolean isAsyncMessagesEnabled() {
+        return ASYNC_MESSAGES;
+    }
+
+    public static String getAsyncMessagesProperty() {
+        return ASYNC_MESSAGES_PROP;
     }
 
     public UUID getUserId() {

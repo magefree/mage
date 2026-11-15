@@ -33,7 +33,7 @@ public final class FlameChainMauler extends CardImpl {
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn).setText("{this} gets +1/+0"), 
                 new ManaCostsImpl<>("{1}{R}")
         );
-        ability.addEffect(new GainAbilitySourceEffect(new MenaceAbility()).setText("and gains menace until end of turn"));
+        ability.addEffect(new GainAbilitySourceEffect(new MenaceAbility(), Duration.EndOfTurn).setText("and gains menace until end of turn"));
         this.addAbility(ability);
     }
 

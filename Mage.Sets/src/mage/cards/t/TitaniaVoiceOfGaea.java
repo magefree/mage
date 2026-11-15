@@ -1,6 +1,7 @@
 package mage.cards.t;
 
 import mage.MageInt;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
@@ -20,7 +21,8 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.events.ZoneChangeBatchEvent;
+import mage.game.events.ZoneChangeEvent;
 
 import java.util.UUID;
 
@@ -69,7 +71,7 @@ public final class TitaniaVoiceOfGaea extends CardImpl {
     }
 }
 
-class TitaniaVoiceOfGaeaTriggeredAbility extends TriggeredAbilityImpl {
+class TitaniaVoiceOfGaeaTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     public TitaniaVoiceOfGaeaTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(2));
@@ -86,20 +88,21 @@ class TitaniaVoiceOfGaeaTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
+    }
+
+    @Override
+    public boolean checkEvent(ZoneChangeEvent event, Game game) {
+        if (event.getToZone() != Zone.GRAVEYARD) {
+            return false;
+        }
+        Card card = game.getCard(event.getTargetId());
+        return card != null && card.isOwnedBy(getControllerId()) && card.isLand(game);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        return zEvent != null
-                && zEvent.getToZone() == Zone.GRAVEYARD
-                && zEvent.getCards() != null
-                && zEvent.getCards()
-                .stream()
-                .filter(card -> card.isLand(game))
-                .map(Card::getOwnerId)
-                .anyMatch(this::isControlledBy);
+        return !getFilteredEvents((ZoneChangeBatchEvent) event, game).isEmpty();
     }
 
     @Override

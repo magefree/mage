@@ -131,8 +131,6 @@ class TheAesirEscapeValhallaTwoEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(uuid);
         if (permanent != null) {
             permanent.addCounters(CounterType.P1P1.createInstance(mv), source.getControllerId(), source, game);
-            game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                    + mv + " +1/+1 counters on " + permanent.getLogName());
         }
         return true;
     }

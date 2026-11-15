@@ -1,14 +1,18 @@
 package mage.abilities.keyword;
 
+import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
+import mage.abilities.mana.ExhaustManaAbility;
 import mage.constants.AsThoughEffectType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
 
 /**
+ * 702.177a Exhaust: "[Cost]: [Effect]. Activate only once." For a mana ability use ExhaustManaAbility.
+ *
  * @author TheElk801
  */
 public class ExhaustAbility extends ActivatedAbilityImpl {
@@ -43,13 +47,9 @@ public class ExhaustAbility extends ActivatedAbilityImpl {
     @Override
     public boolean hasMoreActivationsThisTurn(Game game) {
         ActivationInfo info = getActivationInfo(game);
-        if (info != null && info.totalActivations >= getMaxActivationsPerGame(game)) {
-            boolean canActivate = !game.getContinuousEffects()
-                    .asThough(sourceId, AsThoughEffectType.ALLOW_EXHAUST_PER_TURN, this, controllerId, game)
-                    .isEmpty();
-            if (canActivate) {
-                return true;
-            }
+        if (info != null && info.totalActivations >= getMaxActivationsPerGame(game)
+                && canActivateAsThoughNotActivated(this, game)) {
+            return true;
         }
         return super.hasMoreActivationsThisTurn(game);
     }
@@ -59,5 +59,21 @@ public class ExhaustAbility extends ActivatedAbilityImpl {
         return "Exhaust &mdash; " + super.getRule() +
                 (timing == TimingRule.SORCERY ? " Activate only as a sorcery." : "") +
                 (withReminderText ? " <i>(Activate each exhaust ability only once.)</i>" : "");
+    }
+
+    /**
+     * Any exhaust ability, mana abilities included (e.g. for "whenever you activate an exhaust ability")
+     */
+    public static boolean isExhaust(Ability ability) {
+        return ability instanceof ExhaustAbility || ability instanceof ExhaustManaAbility;
+    }
+
+    /**
+     * Elvish Refueler: "you may activate exhaust abilities as though they haven't been activated"
+     */
+    public static boolean canActivateAsThoughNotActivated(Ability ability, Game game) {
+        return !game.getContinuousEffects()
+                .asThough(ability.getSourceId(), AsThoughEffectType.ALLOW_EXHAUST_PER_TURN, ability, ability.getControllerId(), game)
+                .isEmpty();
     }
 }

@@ -11,8 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
@@ -21,7 +20,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  */
 public final class ChainedToTheRocks extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledLandPermanent("Mountain you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountain you control");
 
     static {
         filter.add(SubType.MOUNTAIN.getPredicate());

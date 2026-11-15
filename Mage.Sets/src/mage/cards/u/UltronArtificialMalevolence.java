@@ -95,9 +95,13 @@ class UltronArtificialMaleveolenceEffect extends OneShotEffect {
                 effect.withAdditionalSubType(SubType.VILLAIN);
                 effect.setPower(2);
                 effect.setToughness(2);
+
+                effect.setSavedPermanent(permanent);
+
                 return effect.apply(game, source);
             } else {
                 CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId());
+                effect.setSavedPermanent(permanent);
                 return effect.apply(game, source);
             }
         }

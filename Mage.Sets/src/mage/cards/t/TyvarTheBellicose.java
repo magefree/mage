@@ -71,8 +71,7 @@ class TyvarTheBellicoseTriggeredAbility extends TriggeredAbilityImpl {
 
     TyvarTheBellicoseTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(0), SavedDamageValue.MANY, false
-        ));
+                CounterType.P1P1.createInstance(0), SavedDamageValue.MANY));
         this.setTriggersLimitEachTurn(1);
     }
 

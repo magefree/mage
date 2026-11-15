@@ -3,16 +3,19 @@ package mage.cards.m;
 import mage.abilities.Ability;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.SpellAbility;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.ZoneChangeAllTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
+import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CommanderPredicate;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.common.CommanderPlaysCountWatcher;
@@ -24,13 +27,6 @@ import java.util.UUID;
  */
 public final class MythUnbound extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent();
-
-    static {
-        filter.add(CommanderPredicate.instance);
-        filter.add(TargetController.YOU.getOwnerPredicate());
-    }
-
     public MythUnbound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
@@ -40,12 +36,7 @@ public final class MythUnbound extends CardImpl {
         ));
 
         // Whenever your commander is put into the command zone from anywhere, draw a card.
-        this.addAbility(new ZoneChangeAllTriggeredAbility(
-                Zone.BATTLEFIELD, Zone.ALL, Zone.COMMAND,
-                new DrawCardSourceControllerEffect(1), filter,
-                "Whenever your commander is put into "
-                        + "the command zone from anywhere, ", false
-        ));
+        this.addAbility(new MythUnboundTriggeredAbility());
     }
 
     private MythUnbound(final MythUnbound card) {
@@ -55,6 +46,44 @@ public final class MythUnbound extends CardImpl {
     @Override
     public MythUnbound copy() {
         return new MythUnbound(this);
+    }
+}
+
+class MythUnboundTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final FilterCard filter = new FilterCard();
+
+    static {
+        filter.add(CommanderPredicate.instance);
+        filter.add(TargetController.YOU.getOwnerPredicate());
+    }
+
+    MythUnboundTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
+        setTriggerPhrase("Whenever your commander is put into the command zone from anywhere, ");
+    }
+
+    private MythUnboundTriggeredAbility(final MythUnboundTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public MythUnboundTriggeredAbility copy() {
+        return new MythUnboundTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (((ZoneChangeEvent) event).getToZone() != Zone.COMMAND) {
+            return false;
+        }
+        Card card = game.getCard(event.getTargetId());
+        return card != null && !card.isCopy() && filter.match(card, getControllerId(), this, game);
     }
 }
 

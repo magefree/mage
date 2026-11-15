@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.Hint;
+import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 public enum ColorsAmongControlledPermanentsCount implements DynamicValue {
     ALL_PERMANENTS(StaticFilters.FILTER_CONTROLLED_PERMANENTS),
     MONOCOLORED_PERMANENTS(PermanentFilters.MONOCOLORED_PERMANENTS),
+    OTHER_ARTIFACTS(PermanentFilters.OTHER_ARTIFACTS),
     OTHER_LEGENDARY(PermanentFilters.OTHER_LEGENDARY),
     ALLIES(new FilterControlledPermanent(SubType.ALLY, "Allies you control"));
     private final FilterPermanent filter;
@@ -103,6 +105,13 @@ class PermanentFilters {
 
     static {
         MONOCOLORED_PERMANENTS.add(MonocoloredPredicate.instance);
+    }
+
+    static final FilterPermanent OTHER_ARTIFACTS = new FilterControlledPermanent("other artifacts you control");
+
+    static {
+        OTHER_ARTIFACTS.add(AnotherPredicate.instance);
+        OTHER_ARTIFACTS.add(CardType.ARTIFACT.getPredicate());
     }
 
     static final FilterPermanent OTHER_LEGENDARY = new FilterControlledPermanent("other legendary permanents you control");

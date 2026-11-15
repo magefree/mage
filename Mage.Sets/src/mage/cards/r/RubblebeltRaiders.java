@@ -28,7 +28,7 @@ public final class RubblebeltRaiders extends CardImpl {
 
         // Whenever Rubblebelt Raiders attacks, put a +1/+1 counter on it for each attacking creature you control.
         this.addAbility(new AttacksTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new AttackingCreatureCount("attacking creature you control"), true),false));
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new AttackingCreatureCount("attacking creature you control")),false));
     }
 
     private RubblebeltRaiders(final RubblebeltRaiders card) {

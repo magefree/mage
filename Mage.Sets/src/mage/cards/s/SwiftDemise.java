@@ -22,7 +22,7 @@ public final class SwiftDemise extends CardImpl {
             = new FilterCreaturePermanent("each creature you don't control that was dealt damage this turn");
 
     static {
-        filter.add(TargetController.NOT_YOU.getOwnerPredicate());
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
         filter.add(WasDealtDamageThisTurnPredicate.instance);
     }
 

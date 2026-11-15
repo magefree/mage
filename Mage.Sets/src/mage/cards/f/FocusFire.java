@@ -1,6 +1,7 @@
 package mage.cards.f;
 
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.hint.Hint;
@@ -30,7 +31,7 @@ public final class FocusFire extends CardImpl {
         ));
     }
 
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, 2);
+    private static final DynamicValue xValue = new IntPlusDynamicValue(2, new PermanentsOnBattlefieldCount(filter));
     private static final Hint hint = new ValueHint(
             "Creatures and/or Spacecraft you control", new PermanentsOnBattlefieldCount(filter)
     );

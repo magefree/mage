@@ -39,8 +39,7 @@ public final class Hexavus extends CardImpl {
 
         // Hexavus enters the battlefield with six +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(6), true
-        ), "with six +1/+1 counters on it"));
+                CounterType.P1P1.createInstance(6)), "with six +1/+1 counters on it"));
 
         // {1}, Remove a +1/+1 counter from Hexavus: Put a flying counter on another target creature.
         Ability ability = new SimpleActivatedAbility(

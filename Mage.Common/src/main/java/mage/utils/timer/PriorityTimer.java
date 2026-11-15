@@ -17,6 +17,10 @@ public class PriorityTimer extends TimerTask {
 
     private static final Logger logger = Logger.getLogger(PriorityTimer.class);
 
+    // timer must be cancelled explicitly, see cancel() below
+    // required to avoid memory leaks after java 18
+    private Timer timer;
+
     private final long delay;
     private final Action taskOnTimeout;
 
@@ -40,9 +44,12 @@ public class PriorityTimer extends TimerTask {
     }
 
     public void init(UUID gameId) {
+        if (this.timer != null) {
+            this.timer.cancel();
+        }
         state = States.INIT;
-        Timer timer = new Timer("Priority Timer-" + gameId.toString(), false);
         long delayMs = delay * (int) (1000L / delay);
+        this.timer = new Timer("Priority Timer-" + gameId.toString(), false);
         timer.scheduleAtFixedRate(this, delayMs, delayMs);
     }
 
@@ -122,6 +129,22 @@ public class PriorityTimer extends TimerTask {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    @Override
+    public boolean cancel() {
+        // PriorityTimer is a TimerTask, so inherited cancel() stops the TASK only - the Timer's
+        // own thread keeps waiting on its queue. Until java 17 that thread was auto-stopped by
+        // Timer's internal finalizer, but finalization is deprecated since JDK 18 (JEP 421) and
+        // going away, so the timer must be cancelled explicitly now, exactly as Timer's javadoc
+        // requires: "if a caller wants to terminate a timer's task execution thread rapidly,
+        // the caller should invoke the timer's cancel method"
+        boolean res = super.cancel();
+        if (this.timer != null) {
+            this.timer.cancel();
+            this.timer = null;
+        }
+        return res;
     }
 
 }

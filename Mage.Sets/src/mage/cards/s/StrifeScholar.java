@@ -27,7 +27,7 @@ public final class StrifeScholar extends PrepareCard {
         this.toughness = new MageInt(2);
 
         // Ward--Pay 2 life.
-        this.addAbility(new WardAbility(new PayLifeCost(2)));
+        this.addAbility(new WardAbility(new PayLifeCost(2), false));
 
         // This creature enters prepared.
         this.addAbility(new EntersPreparedAbility());

@@ -14,12 +14,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
-
-import static mage.filter.StaticFilters.FILTER_CREATURE_P1P1;
 
 /**
  *
@@ -39,16 +35,17 @@ public final class AquastrandSpider extends CardImpl {
 
         // {G}: Target creature with a +1/+1 counter on it gains reach until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                new GainAbilityTargetEffect(ReachAbility.getInstance(),
-                        Duration.EndOfTurn), new ManaCostsImpl<>("{G}"));
-        ability.addTarget(new TargetPermanent(FILTER_CREATURE_P1P1));
-        this.addAbility(ability.addCustomOutcome(Outcome.Benefit));        
+            new GainAbilityTargetEffect(ReachAbility.getInstance(), Duration.EndOfTurn),
+            new ManaCostsImpl<>("{G}")
+        );
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_P1P1));
+        this.addAbility(ability.addCustomOutcome(Outcome.Benefit));
     }
-    
+
     private AquastrandSpider(final AquastrandSpider card) {
         super(card);
     }
-    
+
     @Override
     public AquastrandSpider copy() {
         return new AquastrandSpider(this);

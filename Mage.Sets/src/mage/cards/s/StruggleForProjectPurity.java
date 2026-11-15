@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseModeEffect;
@@ -134,8 +133,7 @@ class StruggleForProjectRadCountersTriggeredAbility extends TriggeredAbilityImpl
 
         this.getEffects().clear();
         Effect effect = new AddCountersTargetEffect(
-                CounterType.RAD.createInstance(),
-                StaticValue.get(attackersOnYou.size() * 2)
+                CounterType.RAD.createInstance(attackersOnYou.size() * 2)
         );
         effect.setTargetPointer(new FixedTarget(attackingPlayer.getId()));
         this.getEffects().add(effect);

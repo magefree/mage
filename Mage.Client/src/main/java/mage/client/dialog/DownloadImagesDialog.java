@@ -78,6 +78,10 @@ public class DownloadImagesDialog extends MageDialog {
         this.labelGlobal.setText(info);
     }
 
+    public String getGlobalInfo() {
+        return this.labelGlobal.getText();
+    }
+
     public void setCurrentInfo(String info) {
         this.labelInfo.setText(info);
     }

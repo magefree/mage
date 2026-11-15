@@ -7,14 +7,13 @@ import mage.interfaces.callback.ClientCallbackMethod;
 import mage.players.Player;
 import mage.server.User;
 import mage.server.managers.UserManager;
+import mage.util.ThreadUtils;
 import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
 import mage.view.SimpleCardsView;
 import org.apache.log4j.Logger;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -31,6 +30,8 @@ public class GameSessionWatcher {
     protected boolean killed = false;
     protected final boolean isPlayer;
 
+    protected GameView lastGameView = null; // cached game view for non-game threads
+
     public GameSessionWatcher(UserManager userManager, UUID userId, Game game, boolean isPlayer) {
         this.userManager = userManager;
         this.userId = userId;
@@ -39,16 +40,35 @@ public class GameSessionWatcher {
     }
 
     public boolean init() {
+        return init(true);
+    }
+
+    /**
+     * @param sendNow send it or wait next tick, e.g. fill and flush, see GameController.startGame as example
+     */
+    public boolean init(boolean sendNow) {
         if (!killed) {
             Optional<User> user = userManager.getUser(userId);
             if (user.isPresent()) {
-                // TODO: can be called outside of the game thread, e.g. user start watching already running game
-                //    possible fix: getGameView must use last cached value in non game thread call (split by sessions)
-                user.get().fireCallback(new ClientCallback(ClientCallbackMethod.GAME_INIT, game.getId(), getGameView()));
+                ClientCallback call = new ClientCallback(ClientCallbackMethod.GAME_INIT, game.getId(), getGameView());
+                if (sendNow) {
+                    user.get().fireCallback(call);
+                } else {
+                    user.get().addCallback(call);
+                }
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Sends queued messages in a separate thread, a caller is not blocked
+     */
+    public void flushCallbacks() {
+        if (!killed) {
+            userManager.getUser(userId).ifPresent(User::flushCallbacksQueue);
+        }
     }
 
     public void update() {
@@ -59,10 +79,24 @@ public class GameSessionWatcher {
     }
 
     public void inform(final String message) {
-        if (!killed) {
-            userManager.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_UPDATE_AND_INFORM, game.getId(), new GameClientMessage(getGameView(), null, message))));
-        }
+        inform(message, true);
+    }
 
+    /**
+     * @param message additional text to show in feedback panel after update the battlefield
+     * @param sendNow send it or wait next tick, e.g. fill and flush, see GameController.startGame as example
+     */
+    public void inform(final String message, boolean sendNow) {
+        if (!killed) {
+            userManager.getUser(userId).ifPresent(user -> {
+                ClientCallback call = new ClientCallback(ClientCallbackMethod.GAME_UPDATE_AND_INFORM, game.getId(), new GameClientMessage(getGameView(), null, message));
+                if (sendNow) {
+                    user.fireCallback(call);
+                } else {
+                    user.addCallback(call);
+                }
+            });
+        }
     }
 
     public void informPersonal(final String message) {
@@ -99,13 +133,35 @@ public class GameSessionWatcher {
         killed = true;
     }
 
+    /**
+     * Bootstrap with default game view, so all non-game thread calls will be safe like start/watch
+     */
+    public void startWithGameView(GameView defaultGameView) {
+        if (GameView.ENABLE_GAME_VIEW_CACHE) {
+            this.lastGameView = defaultGameView;
+        }
+    }
+
+    static public GameView generateDefaultGameViewForWatcher(Game game) {
+        return new GameView(game.getState(), game, null, UUID.randomUUID());
+    }
+
     public GameView getGameView() {
         // game view calculation can take some time and can be called from non-game thread,
-        // so use copy for thread save (protection from ConcurrentModificationException)
-        Game sourceGame = game.copy();
+        // so recalculate game view by game thread only to protect from ConcurrentModificationException
+        // warning, don't forget to sync logci with GameSessionWatcher and GameSessionPlayer
+        if (this.lastGameView != null && !ThreadUtils.isRunGameThread()) {
+            return this.lastGameView;
+        }
 
-        GameView gameView = new GameView(sourceGame.getState(), sourceGame, null, userId);
-        processWatchedHands(sourceGame, userId, gameView);
+        // short processing for the watcher
+        GameView gameView = new GameView(game.getState(), game, null, userId);
+        processWatchedHands(game, userId, gameView);
+
+        if (GameView.ENABLE_GAME_VIEW_CACHE) {
+            this.lastGameView = gameView;
+        }
+
         return gameView;
     }
 

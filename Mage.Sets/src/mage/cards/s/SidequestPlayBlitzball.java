@@ -123,7 +123,7 @@ class SidequestPlayBlitzballEffect extends OneShotEffect {
         return Optional
                 .ofNullable(target.getFirstTarget())
                 .map(game::getPermanent)
-                .map(p -> p.addAttachment(p.getId(), source, game))
+                .map(p -> p.addAttachment(permanent.getId(), source, game))
                 .orElse(false);
     }
 }

@@ -116,6 +116,7 @@ public class CardView extends SimpleCardView {
     protected String rightSplitCostsStr;
     protected List<String> rightSplitRules;
     protected String rightSplitTypeLine;
+    protected String rightSplitSpellType;
 
     protected boolean isDoubleFacedCard;
 
@@ -238,6 +239,7 @@ public class CardView extends SimpleCardView {
         this.rightSplitCostsStr = cardView.rightSplitCostsStr;
         this.rightSplitRules = cardView.rightSplitRules == null ? null : new ArrayList<>(cardView.rightSplitRules);
         this.rightSplitTypeLine = cardView.rightSplitTypeLine;
+        this.rightSplitSpellType = cardView.rightSplitSpellType;
 
         this.isDoubleFacedCard = cardView.isDoubleFacedCard;
 
@@ -322,7 +324,6 @@ public class CardView extends SimpleCardView {
         if (game != null && card instanceof Spell) {
             card = ((Spell) card).getSpellAbility().getCharacteristics(game);
         }
-
         // use isFaceDown(game) only here to find real status, all other code must use this.faceDown
         this.faceDown = game != null && sourceCard.isFaceDown(game);
         boolean showFaceUp = !this.faceDown;
@@ -450,8 +451,9 @@ public class CardView extends SimpleCardView {
                 SpellOptionCard spellOptionCard = mainCard.getSpellCard();
                 rightSplitName = spellOptionCard.getName();
                 rightSplitCostsStr = String.join("", spellOptionCard.getManaCostSymbols());
-                rightSplitRules = spellOptionCard.getRules(game);
+                rightSplitRules = spellOptionCard.getInsetRules(game);
                 rightSplitTypeLine = getCardTypeLine(game, spellOptionCard);
+                rightSplitSpellType = spellOptionCard.getSpellType();
                 fullCardName = mainCard.getName() + MockCard.CARD_WITH_SPELL_OPTION_NAME_SEPARATOR + spellOptionCard.getName();
                 this.manaCostLeftStr = mainCard.getManaCostSymbols();
                 this.manaCostRightStr = spellOptionCard.getManaCostSymbols();
@@ -469,7 +471,11 @@ public class CardView extends SimpleCardView {
             this.name = card.getName();
             this.displayName = card.getName();
             this.displayFullName = fullCardName;
-            this.rules = new ArrayList<>(card.getRules(game));
+            // Spell-option cards render both parts above. Keep the combined
+            // spell rule for permanent views, where there is no inset frame.
+            this.rules = card instanceof CardWithSpellOption
+                    ? new ArrayList<>(((CardWithSpellOption) card).getSharedRules(game))
+                    : new ArrayList<>(card.getRules(game));
             this.manaValue = card.getManaValue();
         }
 
@@ -985,48 +991,94 @@ public class CardView extends SimpleCardView {
         fillEmptyWithImageInfo(null, null, false);
     }
 
-    public static boolean cardViewEquals(CardView a, CardView b) { // TODO: This belongs in CardView
-        if (a == b) {
-            return true;
-        }
-        if (a == null || b == null || a.getClass() != b.getClass()) {
-            return false;
-        }
+    /**
+     * Identity of this view in the rendered card image cache, so it must cover every field the card renderers read.
+     * The panel adds the art and its own state on top (see CardPanelRenderModeMTGO.imageKey).
+     */
+    public String getRenderSignature() {
+        StringBuilder sb = new StringBuilder();
+        appendRenderSignature(sb);
+        return sb.toString();
+    }
 
-        if (!(a.getDisplayName().equals(b.getDisplayName()) // TODO: Original code not checking everything. Why is it only checking these values?
-                && a.getPower().equals(b.getPower())
-                && a.getToughness().equals(b.getToughness())
-                && a.getLoyalty().equals(b.getLoyalty())
-                && a.getDefense().equals(b.getDefense())
-                && 0 == a.getColor().compareTo(b.getColor())
-                && a.getCardTypes().equals(b.getCardTypes())
-                && a.getSubTypes().equals(b.getSubTypes())
-                && a.getSuperTypes().equals(b.getSuperTypes())
-                && a.getManaCostStr().equals(b.getManaCostStr())
-                && a.getRules().equals(b.getRules())
-                && Objects.equals(a.getRarity(), b.getRarity())
-                && a.getFrameStyle() == b.getFrameStyle()
-                && Objects.equals(a.getCounters(), b.getCounters())
-                && a.isFaceDown() == b.isFaceDown())) {
-            return false;
-        }
+    protected void appendRenderSignature(StringBuilder sb) {
+        appendField(sb, getClass().getName());
 
-        if (!(Objects.equals(a.getExpansionSetCode(), b.getExpansionSetCode())
-                && Objects.equals(a.getCardNumber(), b.getCardNumber())
-                && Objects.equals(a.getImageNumber(), b.getImageNumber())
-                && Objects.equals(a.getImageFileName(), b.getImageFileName())
-                && Objects.equals(a.getUsesVariousArt(), b.getUsesVariousArt())
-        )) {
-            return false;
-        }
+        // which printing it is, which fixes the frame and the set symbol (the art is keyed by the panel)
+        appendField(sb, getExpansionSetCode());
+        appendField(sb, getCardNumber());
+        appendField(sb, getRarity());
+        appendField(sb, getFrameStyle());
+        appendField(sb, getFrameColor()); // recomputed per game for lands, so not fixed by the printing
+        appendField(sb, getArtRect());
 
-        if (!(a instanceof PermanentView)) {
-            return true;
+        // characteristics
+        appendField(sb, getDisplayName());
+        appendField(sb, getPower());
+        appendField(sb, getToughness());
+        appendMageInt(sb, getOriginalPower()); // P/T is coloured by how the current value compares to the base
+        appendMageInt(sb, getOriginalToughness());
+        appendField(sb, getLoyalty());
+        appendField(sb, getStartingLoyalty());
+        appendField(sb, getDefense());
+        appendField(sb, getStartingDefense());
+        appendField(sb, getColor());
+        appendField(sb, getManaCostStr());
+        appendList(sb, getCardTypes());
+        appendList(sb, getSuperTypes());
+        appendList(sb, getSubTypes());
+        appendList(sb, getRules());
+        appendList(sb, getCounters() == null ? null : getCounters().stream()
+                .map(counter -> counter.getName() + ':' + counter.getCount())
+                .collect(Collectors.toList()));
+
+        // role and marks
+        appendField(sb, getMageObjectType());
+        appendField(sb, isToken());
+        appendField(sb, isAbility());
+        appendField(sb, getAbilityType());
+        appendField(sb, isFaceDown());
+        appendField(sb, canTransform());
+        appendField(sb, isPlayable());
+        appendField(sb, isCanAttack());
+        appendField(sb, isCanBlock());
+
+        // split halves
+        appendField(sb, isSplitCard());
+        appendField(sb, getLeftSplitName());
+        appendField(sb, getLeftSplitCostsStr());
+        appendField(sb, getLeftSplitTypeLine());
+        appendList(sb, getLeftSplitRules());
+        appendField(sb, getRightSplitName());
+        appendField(sb, getRightSplitCostsStr());
+        appendField(sb, getRightSplitTypeLine());
+        appendField(sb, getRightSplitSpellType());
+        appendList(sb, getRightSplitRules());
+    }
+
+    protected static void appendField(StringBuilder sb, Object value) {
+        sb.append(value).append('|');
+    }
+
+    /**
+     * Size first, to keep neighbouring lists apart.
+     */
+    private static void appendList(StringBuilder sb, Collection<?> items) {
+        if (items == null) {
+            appendField(sb, null);
+            return;
         }
-        PermanentView aa = (PermanentView) a;
-        PermanentView bb = (PermanentView) b;
-        return aa.hasSummoningSickness() == bb.hasSummoningSickness()
-                && aa.getDamage() == bb.getDamage();
+        appendField(sb, items.size());
+        items.forEach(item -> appendField(sb, item));
+    }
+
+    private static void appendMageInt(StringBuilder sb, MageInt value) {
+        if (value == null) {
+            appendField(sb, null);
+            return;
+        }
+        appendField(sb, value.getValue());
+        appendField(sb, value.getModifiedBaseValue());
     }
 
     private void fillEmptyWithImageInfo(Game game, Card imageSourceCard, boolean isFaceDown) {
@@ -1433,6 +1485,10 @@ public class CardView extends SimpleCardView {
 
     public String getRightSplitTypeLine() {
         return rightSplitTypeLine;
+    }
+
+    public String getRightSplitSpellType() {
+        return rightSplitSpellType;
     }
 
     public ArtRect getArtRect() {

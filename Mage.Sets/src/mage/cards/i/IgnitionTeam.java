@@ -41,7 +41,7 @@ public final class IgnitionTeam extends CardImpl {
         // Ignition Team enters the battlefield with X +1/+1 counters on it, where X is the number of tapped lands on the battlefield.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(0),
-                new TappedLandsCount(), true), 
+                new TappedLandsCount()), 
                 "with X +1/+1 counters on it, where X is the number of tapped lands on the battlefield."));
         
         // {2}{R}, Remove a +1/+1 counter from Ignition Team: Target land becomes a 4/4 red Elemental creature until end of turn. It's still a land.

@@ -74,12 +74,12 @@ class RamsesAssassinLordTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.LOSES;
+        return event.getType() == GameEvent.EventType.LOST;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return RamsesAssassinLordWatcher.check(event.getTargetId(), getControllerId(), game);
+        return RamsesAssassinLordWatcher.check(event.getPlayerId(), getControllerId(), game);
     }
 
     @Override

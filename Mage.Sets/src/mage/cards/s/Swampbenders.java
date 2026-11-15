@@ -75,7 +75,7 @@ class SwampbendersEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Ability ability = new BlackManaAbility();
         for (Permanent land : game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_LAND, source.getControllerId(), game
+                StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, source.getControllerId(), game
         )) {
             // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
             // So the ability removing has to be done before Layer 6

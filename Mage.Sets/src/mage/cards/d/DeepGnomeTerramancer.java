@@ -1,6 +1,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -11,6 +12,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeBatchEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInLibrary;
@@ -48,7 +51,7 @@ public final class DeepGnomeTerramancer extends CardImpl {
     }
 }
 
-class DeepGnomeTerramancerTriggeredAbility extends TriggeredAbilityImpl {
+class DeepGnomeTerramancerTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     DeepGnomeTerramancerTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
@@ -65,14 +68,16 @@ class DeepGnomeTerramancerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent land = game.getPermanent(event.getTargetId());
-        PlayLandWatcher watcher = game.getState().getWatcher(PlayLandWatcher.class);
+    public boolean checkEvent(ZoneChangeEvent event, Game game) {
+        if (event.getToZone() != Zone.BATTLEFIELD) {
+            return false;
+        }
 
+        Permanent land = event.getTarget();
         if (land == null || !land.isLand(game)) { // Permanent is not a land
             return false;
         }
@@ -81,11 +86,18 @@ class DeepGnomeTerramancerTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
 
+        PlayLandWatcher watcher = game.getState().getWatcher(PlayLandWatcher.class);
         if (watcher.wasLandPlayed(land, game)) { // Land was played
             return false;
         }
 
         return true;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        // one or more lands - one trigger per batch, see https://github.com/magefree/mage/issues/10088
+        return !getFilteredEvents((ZoneChangeBatchEvent) event, game).isEmpty();
     }
 
     @Override

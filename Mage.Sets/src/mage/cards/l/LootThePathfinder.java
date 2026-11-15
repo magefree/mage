@@ -15,6 +15,7 @@ import mage.constants.SuperType;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.mana.ExhaustManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -45,7 +46,7 @@ public final class LootThePathfinder extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Exhaust -- {G}, {T}: Add three mana of any one color.
-        Ability abilityOne = new ExhaustAbility(new AddManaOfAnyColorEffect(3), new ManaCostsImpl<>("{G}"));
+        Ability abilityOne = new ExhaustManaAbility(new AddManaOfAnyColorEffect(3), new ManaCostsImpl<>("{G}"));
         abilityOne.addCost(new TapSourceCost());
         this.addAbility(abilityOne);
 

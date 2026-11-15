@@ -13,6 +13,7 @@ import mage.game.Game;
 import mage.game.permanent.token.Boar2Token;
 import mage.game.permanent.token.Token;
 
+import java.util.Collections;
 import java.util.UUID;
 
 public final class StampedeSurfer extends CardImpl {
@@ -63,7 +64,7 @@ class StampedeSurferEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
-            token.putOntoBattlefield(1, game, source, source.getControllerId(), true, true, playerId);
+            token.putOntoBattlefield(1, game, source, source.getControllerId(), true, true, Collections.singleton(playerId));
         }
         return true;
     }

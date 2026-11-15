@@ -241,6 +241,8 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Jin-Gitaxias, Progress Tyrant", 371, Rarity.MYTHIC, mage.cards.j.JinGitaxiasProgressTyrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jin-Gitaxias, Progress Tyrant", 427, Rarity.MYTHIC, mage.cards.j.JinGitaxiasProgressTyrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jin-Gitaxias, Progress Tyrant", 445, Rarity.MYTHIC, mage.cards.j.JinGitaxiasProgressTyrant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jin-Gitaxias, Progress Tyrant", 513, Rarity.MYTHIC, mage.cards.j.JinGitaxiasProgressTyrant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jin-Gitaxias, Progress Tyrant", 514, Rarity.MYTHIC, mage.cards.j.JinGitaxiasProgressTyrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jin-Gitaxias, Progress Tyrant", 59, Rarity.MYTHIC, mage.cards.j.JinGitaxiasProgressTyrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jugan Defends the Temple", 194, Rarity.MYTHIC, mage.cards.j.JuganDefendsTheTemple.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jugan Defends the Temple", 359, Rarity.MYTHIC, mage.cards.j.JuganDefendsTheTemple.class, NON_FULL_USE_VARIOUS));

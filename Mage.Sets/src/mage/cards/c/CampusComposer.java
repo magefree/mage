@@ -27,7 +27,7 @@ public final class CampusComposer extends PrepareCard {
         this.toughness = new MageInt(4);
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // This creature enters prepared.
         this.addAbility(new EntersPreparedAbility());

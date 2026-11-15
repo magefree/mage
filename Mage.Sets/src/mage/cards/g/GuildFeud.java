@@ -14,6 +14,7 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
@@ -81,9 +82,9 @@ class GuildFeudEffect extends OneShotEffect {
                                 topThreeCards.remove(creatureToBattlefield);
                                 if (player.moveCards(creatureToBattlefield, Zone.BATTLEFIELD, source, game)) {
                                     if (activePlayer == 0) {
-                                        opponentCreature = game.getPermanent(creatureToBattlefield.getId());
+                                        opponentCreature = CardUtil.getPermanentFromCardPutToBattlefield(creatureToBattlefield, game);
                                     } else {
-                                        controllerCreature = game.getPermanent(creatureToBattlefield.getId());
+                                        controllerCreature = CardUtil.getPermanentFromCardPutToBattlefield(creatureToBattlefield, game);
                                     }
                                 }
                             }

@@ -16,7 +16,6 @@ import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 import java.util.Map;
 import java.util.Objects;
@@ -107,7 +106,7 @@ class BattleAngelsOfTyrEffect extends OneShotEffect {
                 .map(Controllable::getControllerId)
                 .collect(Collectors.toMap(
                         Function.identity(), x -> 1,
-                        CardUtil::setOrIncrementValue
+                        Integer::sum
                 ));
         if (map.getOrDefault(player.getId(), 0) >
                 map.entrySet()

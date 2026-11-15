@@ -42,7 +42,7 @@ public final class ReliveThePast extends CardImpl {
         // They are 5/5 Elemental creatures in addition to their other types.
         getSpellAbility().addEffect(new BecomesCreatureTargetEffect(
                 new CreatureToken(5, 5, "5/5 Elemental creatures", SubType.ELEMENTAL),
-                false, false, Duration.Custom)
+                false, false, Duration.Custom).withKeepPriorTypes(true)
                 .setTargetPointer(new EachTargetPointer())
                 .setText("They are 5/5 Elemental creatures in addition to their other types."));
     }

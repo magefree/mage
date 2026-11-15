@@ -16,11 +16,11 @@ public final class DonatellosTechnique extends CardImpl {
     public DonatellosTechnique(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
 
-        // Sneak {U}
-        this.addAbility(new SneakAbility(this, "{U}"));
-
         // Draw two cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
+
+        // Sneak {U}
+        this.addAbility(new SneakAbility(this, "{U}"));
     }
 
     private DonatellosTechnique(final DonatellosTechnique card) {

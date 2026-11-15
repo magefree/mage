@@ -140,7 +140,7 @@ public final class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Samite Alchemist", "13b", Rarity.COMMON, mage.cards.s.SamiteAlchemist.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Sea Sprite", 38, Rarity.UNCOMMON, mage.cards.s.SeaSprite.class, RETRO_ART));
         cards.add(new SetCardInfo("Sea Troll", 39, Rarity.UNCOMMON, mage.cards.s.SeaTroll.class, RETRO_ART));
-        cards.add(new SetCardInfo("Sengir Autocrat", 56, Rarity.UNCOMMON, mage.cards.s.SengirAutocrat.class, RETRO_ART));
+        cards.add(new SetCardInfo("Sengir Autocrat", 56, Rarity.RARE, mage.cards.s.SengirAutocrat.class, RETRO_ART));
         cards.add(new SetCardInfo("Sengir Bats", "57a", Rarity.COMMON, mage.cards.s.SengirBats.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Sengir Bats", "57b", Rarity.COMMON, mage.cards.s.SengirBats.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Serra Aviary", 14, Rarity.RARE, mage.cards.s.SerraAviary.class, RETRO_ART));

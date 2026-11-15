@@ -26,6 +26,7 @@ public class JudgeGiftCards2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Imperial Seal", 6, Rarity.RARE, mage.cards.i.ImperialSeal.class));
         cards.add(new SetCardInfo("Mana Drain", 2, Rarity.RARE, mage.cards.m.ManaDrain.class));
         cards.add(new SetCardInfo("Mystic Confluence", 5, Rarity.RARE, mage.cards.m.MysticConfluence.class));
+        cards.add(new SetCardInfo("Stoneforge Mystic", 1, Rarity.RARE, mage.cards.s.StoneforgeMystic.class));
         cards.add(new SetCardInfo("Zur the Enchanter", 8, Rarity.RARE, mage.cards.z.ZurTheEnchanter.class));
      }
 }

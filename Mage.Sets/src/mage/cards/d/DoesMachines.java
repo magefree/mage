@@ -101,7 +101,8 @@ class DoesMachinesEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (!permanent.isCreature(game)) {
             ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(
-                new CreatureToken(0, 0, "0/0 Robot creature").withSubType(SubType.ROBOT), false, true, Duration.Custom);
+                new CreatureToken(0, 0, "0/0 Robot creature").withSubType(SubType.ROBOT), false, false, Duration.Custom
+            ).withKeepPriorTypes(true);
             continuousEffect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(continuousEffect, source);
             return true;

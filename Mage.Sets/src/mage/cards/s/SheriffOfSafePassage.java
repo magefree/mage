@@ -40,8 +40,7 @@ public final class SheriffOfSafePassage extends CardImpl {
                 new EntersBattlefieldAbility(
                         new AddCountersSourceEffect(
                                 CounterType.P1P1.createInstance(),
-                                xValue, false
-                        ),
+                                xValue),
                         "with a +1/+1 counter on it plus an additional +1/+1 counter on it for each other creature you control"
                 ).addHint(hint)
         );

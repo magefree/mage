@@ -32,7 +32,7 @@ public final class WoodworkProdigy extends PrepareCard {
 
         // At the beginning of your upkeep, if this creature isn't prepared, it becomes prepared.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-            new BecomePreparedSourceEffect(), false
+            new BecomePreparedSourceEffect(true), false
         ).withInterveningIf(SourcePreparedCondition.UNPREPARED));
 
         // Soul Tether

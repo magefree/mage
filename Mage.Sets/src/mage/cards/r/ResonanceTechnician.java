@@ -17,6 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -37,6 +38,7 @@ public final class ResonanceTechnician extends CardImpl {
 
     static {
         filter.add(TappedPredicate.UNTAPPED);
+        filter2.add(TargetController.YOU.getControllerPredicate());
     }
 
     public ResonanceTechnician(UUID ownerId, CardSetInfo setInfo) {

@@ -20,7 +20,7 @@ public final class SanguineBond extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
 
         // Whenever you gain life, target opponent loses that much life.
-        Ability ability = new GainLifeControllerTriggeredAbility(new LoseLifeTargetEffect(SavedGainedLifeValue.MUCH));
+        Ability ability = new GainLifeControllerTriggeredAbility(new LoseLifeTargetEffect(SavedGainedLifeValue.MUCH), false, true);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

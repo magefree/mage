@@ -182,17 +182,21 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
         Whenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors (in addition to the mana the land produces).
          */
         addCard(Zone.HAND, playerA, dReflection);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
 
         /*
         {2}{U}{U} Creature - Shapeshifter 0/0
         You may have Clever Impersonator enter the battlefield as a copy of any nonland permanent on the battlefield.
          */
         addCard(Zone.HAND, playerA, impersonator);
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
-
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 4);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, dReflection, "Forest"); // enchant a forest
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, impersonator);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 4);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, impersonator);
         setChoice(playerA, dReflection); // have Impersonator enter as copy of Dawn's Reflection
 
         setStopAt(1, PhaseStep.END_TURN);

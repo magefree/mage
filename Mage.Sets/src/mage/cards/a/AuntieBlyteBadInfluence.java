@@ -69,8 +69,7 @@ class AuntieBlyteBadInfluenceTriggeredAbility extends TriggeredAbilityImpl {
 
     AuntieBlyteBadInfluenceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(0), SavedDamageValue.MANY, false
-        ).setText("put that many +1/+1 counters on {this}"));
+                CounterType.P1P1.createInstance(0), SavedDamageValue.MANY).setText("put that many +1/+1 counters on {this}"));
         setTriggerPhrase("Whenever a source you control deals damage to you, ");
     }
 

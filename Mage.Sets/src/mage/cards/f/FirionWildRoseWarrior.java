@@ -96,7 +96,7 @@ class FirionWildRoseWarriorEffect extends OneShotEffect {
         effect.addAdditionalAbilities(new SimpleStaticAbility(new FirionWildRoseWarriorReductionEffect()));
         effect.setSavedPermanent(permanent);
         effect.apply(game, source);
-        effect.sacrificeTokensCreatedAtNextEndStep(game, source);
+        effect.removeTokensCreatedAt(game, source, false, PhaseStep.UPKEEP, TargetController.ANY);
         return true;
     }
 }

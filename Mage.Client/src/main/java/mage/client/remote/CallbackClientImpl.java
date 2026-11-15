@@ -507,7 +507,7 @@ public class CallbackClientImpl implements CallbackClient {
                         DraftClientMessage message = (DraftClientMessage) callback.getData();
                         DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
                         if (panel != null) {
-                            panel.loadBooster(message.getDraftPickView());
+                            panel.loadBooster(callback.getMessageId(), message.getDraftView(), message.getDraftPickView());
                         }
                         break;
                     }
