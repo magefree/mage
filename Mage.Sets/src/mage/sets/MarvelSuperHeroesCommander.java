@@ -762,6 +762,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Tragic Arrogance", 323, Rarity.RARE, mage.cards.t.TragicArrogance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tri-Sentinel, Act of Vengeance", 115, Rarity.RARE, mage.cards.t.TriSentinelActOfVengeance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tri-Sentinel, Act of Vengeance", 456, Rarity.RARE, mage.cards.t.TriSentinelActOfVengeance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Typhoid Mary, Fractured", 421, Rarity.RARE, mage.cards.t.TyphoidMaryFractured.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Typhoid Mary, Fractured", 99, Rarity.RARE, mage.cards.t.TyphoidMaryFractured.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimate Alliance", 611, Rarity.COMMON, mage.cards.u.UltimateAlliance.class));
         cards.add(new SetCardInfo("Ultimate Nullification", 26, Rarity.RARE, mage.cards.u.UltimateNullification.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimate Nullification", 324, Rarity.RARE, mage.cards.u.UltimateNullification.class, NON_FULL_USE_VARIOUS));
