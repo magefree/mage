@@ -23,7 +23,7 @@ import java.util.UUID;
 public final class SilverFurMaster extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Ninja and Rogue creatures");
-    private static final FilterAbility filterNinjutsu = new FilterAbility("Ninjutsu");
+    private static final FilterAbility filterNinjutsu = new FilterAbility("ninjutsu abilities you activate");
 
     static {
         filter.add(Predicates.or(
@@ -45,9 +45,7 @@ public final class SilverFurMaster extends CardImpl {
         this.addAbility(new NinjutsuAbility("{U}{B}"));
 
         // Ninjutsu abilities you activate cost {1} less to activate.
-        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(
-                filterNinjutsu
-        ).setText("ninjutsu abilities you activate cost {1} less to activate")));
+        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(filterNinjutsu)));
 
         // Other Ninja and Rogue creatures you control get +1/+1
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(

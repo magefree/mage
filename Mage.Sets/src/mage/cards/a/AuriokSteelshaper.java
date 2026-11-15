@@ -28,7 +28,7 @@ import mage.filter.predicate.other.AbilityClassPredicate;
 public final class AuriokSteelshaper extends CardImpl {
 
     private static final FilterCreaturePermanent soldiersOrKnights = new FilterCreaturePermanent();
-    private static final FilterAbility filterEquip = new FilterAbility("Equip");
+    private static final FilterAbility filterEquip = new FilterAbility("Equip costs you pay");
 
     static {
         soldiersOrKnights.add(Predicates.or(

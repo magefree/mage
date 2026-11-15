@@ -29,7 +29,7 @@ import java.util.UUID;
  */
 public final class EowynLadyOfRohan extends CardImpl {
 
-    private static final FilterAbility filterEquip = new FilterAbility("Equip");
+    private static final FilterAbility filterEquip = new FilterAbility("equip abilities you activate");
 
     static {
         filterEquip.add(new AbilityClassPredicate(EquipAbility.class));
@@ -52,9 +52,7 @@ public final class EowynLadyOfRohan extends CardImpl {
         this.addAbility(ability);
 
         // Equip abilities you activate cost {1} less to activate.
-        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(
-                filterEquip, 1
-        ).setText("equip abilities you activate cost {1} less to activate")));
+        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(filterEquip)));
     }
 
     private EowynLadyOfRohan(final EowynLadyOfRohan card) {

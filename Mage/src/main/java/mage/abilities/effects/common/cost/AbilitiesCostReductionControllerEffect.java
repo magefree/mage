@@ -28,9 +28,9 @@ public class AbilitiesCostReductionControllerEffect extends CostModificationEffe
     public AbilitiesCostReductionControllerEffect(FilterAbility filter, int amount, boolean excludeSource) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.filter = filter;
-        staticText = filter.getMessage() + " costs you pay cost {" + amount + "} less";
         this.amount = amount;
         this.excludeSource = excludeSource;
+        this.staticText = makeText(filter, amount, excludeSource);
     }
 
     public AbilitiesCostReductionControllerEffect(AbilitiesCostReductionControllerEffect effect) {
@@ -38,6 +38,21 @@ public class AbilitiesCostReductionControllerEffect extends CostModificationEffe
         this.filter = effect.filter;
         this.amount = effect.amount;
         this.excludeSource = effect.excludeSource;
+    }
+
+    /**
+     * Filter message is the subject of the text:
+     * <p>
+     * - abilities: "equip abilities you activate" -> "equip abilities you activate cost {1} less to activate"
+     * <p>
+     * - costs (old template): "Equip costs you pay" -> "Equip costs you pay cost {1} less"
+     */
+    private static String makeText(FilterAbility filter, int amount, boolean excludeSource) {
+        String message = filter.getMessage();
+        if (excludeSource && !message.contains("other ")) {
+            throw new IllegalArgumentException("Wrong code usage: filter message must contain other objects for excluded source - " + message);
+        }
+        return message + " cost {" + amount + "} less" + (message.contains("abilities") ? " to activate" : "");
     }
 
     @Override

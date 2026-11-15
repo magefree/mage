@@ -36,7 +36,7 @@ import java.util.UUID;
 public final class FighterClass extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an Equipment card");
-    private static final FilterAbility filterEquip = new FilterAbility("Equip");
+    private static final FilterAbility filterEquip = new FilterAbility("equip abilities you activate");
 
     static {
         filter.add(SubType.EQUIPMENT.getPredicate());
@@ -61,9 +61,7 @@ public final class FighterClass extends CardImpl {
 
         // Equip abilities you activate cost {2} less to activate.
         this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(
-                new AbilitiesCostReductionControllerEffect(
-                        filterEquip, 2
-                ).setText("equip abilities you activate cost {2} less to activate"), 2
+                new AbilitiesCostReductionControllerEffect(filterEquip, 2), 2
         )));
 
         // {3}{R}{W}: Level 3

@@ -35,7 +35,7 @@ import java.util.UUID;
 public final class NahiriStormOfStone extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("tapped creature");
-    private static final FilterAbility filterEquip = new FilterAbility("Equip");
+    private static final FilterAbility filterEquip = new FilterAbility("equip abilities you activate");
 
     static {
         filter.add(TappedPredicate.TAPPED);

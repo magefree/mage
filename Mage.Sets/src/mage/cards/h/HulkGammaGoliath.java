@@ -24,7 +24,7 @@ import mage.filter.predicate.other.AbilityClassPredicate;
  */
 public final class HulkGammaGoliath extends CardImpl {
 
-    private static final FilterAbility filterPowerUp = new FilterAbility("power-up abilities");
+    private static final FilterAbility filterPowerUp = new FilterAbility("power-up abilities of other creatures you control");
 
     static {
         filterPowerUp.add(new AbilityClassPredicate(PowerUpAbility.class));
@@ -47,9 +47,7 @@ public final class HulkGammaGoliath extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Power-up abilities of other creatures you control cost {3} less to activate.
-        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(
-            filterPowerUp, 3, true
-        ).setText("power-up abilities of other creatures you control cost {3} less to activate")));
+        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(filterPowerUp, 3, true)));
 
         // Power-up -- {6}{R}{G}: Put five +1/+1 counters on Hulk.
         this.addAbility(new PowerUpAbility(

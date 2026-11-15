@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class InquisitiveGlimmer extends CardImpl {
 
     private static final FilterCard filter = new FilterEnchantmentCard("enchantment spells");
-    private static final FilterAbility filterUnlock = new FilterAbility("Unlock");
+    private static final FilterAbility filterUnlock = new FilterAbility("Unlock costs you pay");
 
     static {
         filterUnlock.add(new AbilityClassPredicate(RoomUnlockAbility.class));

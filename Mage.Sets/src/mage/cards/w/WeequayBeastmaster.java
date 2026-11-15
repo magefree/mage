@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class WeequayBeastmaster extends CardImpl {
 
-    private static final FilterAbility filterMonstrosity = new FilterAbility("Monstrosity");
+    private static final FilterAbility filterMonstrosity = new FilterAbility("monstrosity abilities you activate");
 
     static {
         filterMonstrosity.add(new AbilityClassPredicate(MonstrosityAbility.class));

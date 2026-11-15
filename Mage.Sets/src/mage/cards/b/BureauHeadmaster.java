@@ -21,7 +21,7 @@ import java.util.UUID;
 public final class BureauHeadmaster extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Equipment spells");
-    private static final FilterAbility filterEquip = new FilterAbility("Equip");
+    private static final FilterAbility filterEquip = new FilterAbility("equip abilities you activate");
 
     static {
         filter.add(SubType.EQUIPMENT.getPredicate());
@@ -40,9 +40,7 @@ public final class BureauHeadmaster extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
 
         // Equip abilities you activate cost {1} less to activate.
-        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(
-                filterEquip, 1
-        ).setText("equip abilities you activate cost {1} less to activate")));
+        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(filterEquip)));
     }
 
     private BureauHeadmaster(final BureauHeadmaster card) {

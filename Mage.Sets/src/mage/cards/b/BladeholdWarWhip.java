@@ -3,7 +3,6 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -25,7 +24,7 @@ import mage.filter.predicate.other.AbilityClassPredicate;
  */
 public final class BladeholdWarWhip extends CardImpl {
 
-    private static final FilterAbility filterEquip = new FilterAbility("Equip");
+    private static final FilterAbility filterEquip = new FilterAbility("equip abilities you activate of other Equipment");
 
     static {
         filterEquip.add(new AbilityClassPredicate(EquipAbility.class));
@@ -40,11 +39,7 @@ public final class BladeholdWarWhip extends CardImpl {
         this.addAbility(new ForMirrodinAbility());
 
         // Equip abilities you activate of other Equipment cost {1} less to activate.
-        Ability ability = new SimpleStaticAbility(
-            new AbilitiesCostReductionControllerEffect(
-                    filterEquip, 1, true
-            ).setText("Equip abilities you activate of other Equipment cost {1} less to activate."));
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(filterEquip, 1, true)));
 
         // Equipped creature has double strike.
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(DoubleStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
