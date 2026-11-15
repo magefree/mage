@@ -10,7 +10,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterStackObject;
+import mage.filter.FilterAbility;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.other.PowerUpAbilityPredicate;
 import mage.cards.CardImpl;
@@ -24,7 +24,7 @@ import mage.constants.SetTargetPointer;
  */
 public final class MarvelBoyNohVarr extends CardImpl {
 
-    private static final FilterStackObject filter = new FilterStackObject("a power-up ability");
+    private static final FilterAbility filter = new FilterAbility("a power-up ability");
 
     static {
         filter.add(PowerUpAbilityPredicate.instance);

@@ -9,6 +9,8 @@ import mage.game.stack.StackObject;
 import java.util.UUID;
 
 /**
+ * Used to find and choose objects on stack so extends FilterStackObject (no needs in mana abilities and FilterAbility)
+ * 
  * @author TheElk801
  */
 public class FilterActivatedOrTriggeredAbility extends FilterStackObject {

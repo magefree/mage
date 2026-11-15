@@ -1,28 +1,27 @@
 package mage.filter.predicate.other;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackAbility;
-import mage.game.stack.StackObject;
 
 /**
  * @author notgreat
  */
-public enum AbilitySourceAttachedPredicate implements ObjectSourcePlayerPredicate<StackObject> {
+public enum AbilitySourceAttachedPredicate implements ObjectSourcePlayerPredicate<Ability> {
     instance;
 
     @Override
-    public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
-        MageObject obj = input.getObject();
+    public boolean apply(ObjectSourcePlayer<Ability> input, Game game) {
+        Ability ability = input.getObject();
         Ability source = input.getSource();
         Permanent sourcePermanent = source.getSourcePermanentOrLKI(game);
 
-        return sourcePermanent != null && obj instanceof StackAbility
-                && ((StackAbility) obj).getSourceId().equals(sourcePermanent.getAttachedTo());
+        // a creature sacrificed as a cost is not equipped any more when its ability becomes activated (602.2b, 601.2i)
+        return sourcePermanent != null
+                && ability.getSourceId().equals(sourcePermanent.getAttachedTo())
+                && game.getPermanent(ability.getSourceId()) != null;
     }
 
     @Override

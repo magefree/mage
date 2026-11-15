@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
-import mage.filter.FilterStackObject;
+import mage.filter.FilterAbility;
 import mage.filter.predicate.other.ExhaustAbilityPredicate;
 import mage.game.permanent.token.ThopterColorlessToken;
 
@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class RangersAetherhive extends CardImpl {
 
-    private static final FilterStackObject filter = new FilterStackObject("an exhaust ability");
+    private static final FilterAbility filter = new FilterAbility("an exhaust ability");
 
     static {
         filter.add(ExhaustAbilityPredicate.instance);

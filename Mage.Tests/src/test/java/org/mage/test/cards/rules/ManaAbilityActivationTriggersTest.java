@@ -338,6 +338,11 @@ public class ManaAbilityActivationTriggersTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Vizier of the Anointed");
         // Whenever a spell or ability is put onto the stack, if it has a single target, reselect its target at random.
         addCard(Zone.BATTLEFIELD, playerA, "Grip of Chaos");
+        // Whenever you activate an ability, if it isn't a mana ability, you may pay {2}. If you do, copy that ability.
+        addCard(Zone.BATTLEFIELD, playerA, "Rings of Brighthearth");
+        // Whenever you activate an ability of an artifact, if it isn't a mana ability, you may pay {R}. If you do,
+        // copy that ability.
+        addCard(Zone.BATTLEFIELD, playerA, "Kurkesh, Onakke Ancient");
         //
         addCard(Zone.BATTLEFIELD, playerA, "Blood Pet"); // Sacrifice this creature: Add {B}.
         addCard(Zone.BATTLEFIELD, playerA, "Sol Ring"); // {T}: Add {C}{C}.
@@ -356,6 +361,213 @@ public class ManaAbilityActivationTriggersTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Crackdown Construct", 2, 2);
         assertLife(playerA, 20 - 1);
         assertHandCount(playerA, 0);
+    }
+
+    @Test
+    public void test_RingsOfBrighthearth_NonManaAbility_Copy() {
+        // Whenever you activate an ability, if it isn't a mana ability, you may pay {2}. If you do, copy that ability.
+        addCard(Zone.BATTLEFIELD, playerA, "Rings of Brighthearth");
+        addCard(Zone.BATTLEFIELD, playerA, "Bottle Gnomes"); // Sacrifice this creature: You gain 3 life.
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice");
+        setChoice(playerA, true); // pay {2}
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20 + 3 + 3);
+    }
+
+    @Test
+    public void test_KurkeshOnakkeAncient_ArtifactAbility_Copy() {
+        // Whenever you activate an ability of an artifact, if it isn't a mana ability, you may pay {R}. If you do,
+        // copy that ability.
+        addCard(Zone.BATTLEFIELD, playerA, "Kurkesh, Onakke Ancient");
+        addCard(Zone.BATTLEFIELD, playerA, "Bottle Gnomes"); // Sacrifice this creature: You gain 3 life.
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice");
+        setChoice(playerA, true); // pay {R}
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20 + 3 + 3);
+    }
+
+    @Test
+    public void test_KurkeshOnakkeAncient_NonArtifactAbility_NoTrigger() {
+        // Whenever you activate an ability of an artifact, if it isn't a mana ability, you may pay {R}. If you do,
+        // copy that ability.
+        addCard(Zone.BATTLEFIELD, playerA, "Kurkesh, Onakke Ancient");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Prodigal Pyromancer"); // {T}: This creature deals 1 damage to any target.
+
+        // no pay dialog
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerB, 20 - 1);
+    }
+
+    @Test
+    public void test_BattlemagesBracers_EquippedCreatureAbility_Copy() {
+        // Whenever an ability of equipped creature is activated, if it isn't a mana ability, you may pay {1}. If you
+        // do, copy that ability.
+        addCard(Zone.BATTLEFIELD, playerA, "Battlemage's Bracers"); // Equip {2}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2 + 1);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Prodigal Pyromancer"); // {T}: This creature deals 1 damage to any target.
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {2}", "Prodigal Pyromancer");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", playerB);
+        setChoice(playerA, true); // pay {1}
+        setChoice(playerA, false); // no new target for copy
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerB, 20 - 1 - 1);
+    }
+
+    @Test
+    public void test_IllusionistsBracers_EquippedCreatureAbility_Copy() {
+        // Whenever an ability of equipped creature is activated, if it isn't a mana ability, copy that ability.
+        addCard(Zone.BATTLEFIELD, playerA, "Illusionist's Bracers"); // Equip {3}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Prodigal Pyromancer"); // {T}: This creature deals 1 damage to any target.
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {3}", "Prodigal Pyromancer");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", playerB);
+        setChoice(playerA, false); // no new target for copy
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerB, 20 - 1 - 1);
+    }
+
+    @Test
+    public void test_IllusionistsBracers_NotEquippedCreatureAbility_NoCopy() {
+        // Whenever an ability of equipped creature is activated, if it isn't a mana ability, copy that ability.
+        addCard(Zone.BATTLEFIELD, playerA, "Illusionist's Bracers"); // Equip {3}
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Prodigal Pyromancer"); // {T}: This creature deals 1 damage to any target.
+
+        // no copy dialog
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerB, 20 - 1);
+    }
+
+    @Test
+    public void test_IllusionistsBracers_EquippedCreatureSacrificedAsCost_NoCopy() {
+        // Whenever an ability of equipped creature is activated, if it isn't a mana ability, copy that ability.
+        // If the cost of an activated ability requires Illusionist's Bracers or the equipped creature to be
+        // sacrificed, the ability won't be copied. At the time the ability is considered activated (after all costs
+        // are paid), Illusionist's Bracers is no longer equipped to that creature.
+        // (2013-01-24)
+        addCard(Zone.BATTLEFIELD, playerA, "Illusionist's Bracers"); // Equip {3}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Bottle Gnomes"); // Sacrifice this creature: You gain 3 life.
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {3}", "Bottle Gnomes");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20 + 3);
+    }
+
+    @Test
+    public void test_IllusionistsBracers_EquippedCreatureManaAbility_NoCopy() {
+        // Whenever an ability of equipped creature is activated, if it isn't a mana ability, copy that ability.
+        addCard(Zone.BATTLEFIELD, playerA, "Illusionist's Bracers"); // Equip {3}
+        addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves"); // {T}: Add {G}.
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {3}", "Llanowar Elves");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}");
+        checkStackSize("no copy trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 0);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertTapped("Llanowar Elves", true);
+    }
+
+    @Test
+    public void test_UnboundFlourishing_ManaAbilityWithX_TriggersWithoutCopy() {
+        // Whenever you cast an instant or sorcery spell or activate an ability, if that spell's mana cost or that
+        // ability's activation cost contains {X}, copy that spell or ability.
+        // Mana abilities don't use the stack, so the trigger has nothing to copy:
+        // https://www.cranial-insertion.com/article/4160
+        addCard(Zone.BATTLEFIELD, playerA, "Unbound Flourishing");
+        addCard(Zone.BATTLEFIELD, playerA, "Wizard's Rockets"); // {X}, {T}, Sacrifice this artifact: Add X mana in any combination of colors.
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{X}, {T}, Sacrifice");
+        setChoice(playerA, "X=1");
+        setChoice(playerA, "Red");
+        setChoice(playerA, "Whenever you cast an instant or sorcery spell"); // trigger order: Unbound, Rockets draw
+        checkStackObject("trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Whenever you cast an instant or sorcery spell", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertHandCount(playerA, 1); // Rockets draw
+    }
+
+    @Test
+    public void test_MagusLuceaKane_ManaAbilityWithX_UsesUpDelayedTrigger() {
+        // When you next cast a spell with {X} in its mana cost or activate an ability with {X} in its activation
+        // cost this turn, copy that spell or ability.
+        // A mana ability with {X} triggers it too (nothing to copy), so the next {X} spell is not copied.
+        addCard(Zone.BATTLEFIELD, playerA, "Magus Lucea Kane"); // {T}: Add {C}{C} + delayed trigger
+        addCard(Zone.BATTLEFIELD, playerA, "Wizard's Rockets"); // {X}, {T}, Sacrifice this artifact: Add X mana in any combination of colors.
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.HAND, playerA, "Blaze"); // {X}{R}, X damage to any target
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "<i>Psychic Stimulus</i>");
+        // X paid by {C}{C}
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{X}, {T}, Sacrifice");
+        setChoice(playerA, "X=2");
+        setChoiceAmount(playerA, 0, 0, 0, 2, 0); // R x2
+        setChoice(playerA, "When you next cast a spell"); // trigger order: Magus, Rockets draw
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        // {R}{R} + Mountain
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blaze", playerB);
+        setChoice(playerA, "X=2");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertLife(playerB, 20 - 2);
     }
 
     @Test
