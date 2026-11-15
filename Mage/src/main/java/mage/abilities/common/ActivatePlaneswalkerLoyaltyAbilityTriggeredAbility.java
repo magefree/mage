@@ -51,7 +51,7 @@ public class ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility extends Triggere
         if (!event.getPlayerId().equals(getControllerId())) {
             return false;
         }
-        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getTargetId());
         if (stackAbility == null || !(stackAbility.getStackAbility() instanceof LoyaltyAbility)) {
             return false;
         }

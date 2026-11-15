@@ -84,9 +84,9 @@ class ImprisonTriggeredAbility extends TriggeredAbilityImpl {
         Permanent enchantment = game.getPermanentOrLKIBattlefield(sourceId);
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent enchantedPermanent = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
-            if (event.getSourceId().equals(enchantedPermanent.getId())) {
-                StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-                if (!stackAbility.getStackAbility().isManaActivatedAbility()) {
+            if (enchantedPermanent != null && event.getSourceId().equals(enchantedPermanent.getId())) {
+                StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getTargetId());
+                if (stackAbility != null && !stackAbility.getStackAbility().isManaActivatedAbility()) {
                     String abilityText = stackAbility.getRule(true);
                     if (abilityText.contains("{T},") || abilityText.contains("{T}:") || abilityText.contains("{T} or")) {
                         getEffects().get(0).setTargetPointer(new FixedTarget(stackAbility.getId()));

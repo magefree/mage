@@ -269,6 +269,8 @@ public class GameEvent implements Serializable {
         ACTIVATE_ABILITY, ACTIVATED_ABILITY,
         /* ACTIVATE_ABILITY, ACTIVATED_ABILITY,
          WARNING, do not use choose dialogs inside, can be calls multiple types, e.g. on playable checking
+         WARNING, fire for both normal and mana abilities (605.3), so can come without stack object, 
+         use game.getStack().getStackObject(event.getTargetId()) - Do not raise for Special actions (116.1)
          targetId    id of the ability to activate / use
          sourceId    sourceId of the object with that ability
          playerId    player that tries to use this ability

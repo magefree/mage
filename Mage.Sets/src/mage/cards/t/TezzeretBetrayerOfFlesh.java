@@ -114,7 +114,8 @@ class TezzeretBetrayerOfFleshWatcher extends Watcher {
         if (event.getType() != GameEvent.EventType.ACTIVATED_ABILITY) {
             return;
         }
-        Permanent permanent = game.getPermanent(event.getSourceId());
+        // sacrificed as a cost (e.g. Treasure)
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         if (permanent != null && permanent.isArtifact(game)) {
             playerSet.add(event.getPlayerId());
         }

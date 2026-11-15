@@ -1584,19 +1584,30 @@ public abstract class PlayerImpl implements Player, Serializable {
         // Don't generate a new id because it's not necessary and breaks mana events, see #14822
         // ability.newId();
         ability.setControllerId(playerId);
-        if (ability.activate(game, false) && ability.resolve(game)) {
-            if (ability.isUndoPossible()) {
-                if (storedBookmark == -1 || storedBookmark > bookmark) { // e.g. useful for undo Nykthos, Shrine to Nyx
-                    setStoredBookmark(bookmark);
+        if (ability.activate(game, false)) {
+            fireActivatedAbilityEvent(ability, game);
+            if (ability.resolve(game)) {
+                if (ability.isUndoPossible()) {
+                    if (storedBookmark == -1 || storedBookmark > bookmark) { // e.g. useful for undo Nykthos, Shrine to Nyx
+                        setStoredBookmark(bookmark);
+                    }
+                } else {
+                    resetStoredBookmark(game);
                 }
-            } else {
-                resetStoredBookmark(game);
+                return true;
             }
-            return true;
         }
         // 605.3b "An activated mana ability doesn't go on the stack"
         restoreStateKeepingStack(bookmark, ability.getRule(), game);
         return false;
+    }
+
+    /**
+     * Fire activated ability event for both normal abilities with stack and mana abilities without stack (602.2b + 601.2i, 605.3)
+     * Special actions aren't activated abilities and ignored here (116.1)
+     */
+    private void fireActivatedAbilityEvent(ActivatedAbility ability, Game game) {
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, ability.getId(), ability, playerId));
     }
 
     protected boolean playAbility(ActivatedAbility ability, Game game) {
@@ -1609,8 +1620,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             ability.setControllerId(playerId);
             game.getStack().push(game, new StackAbility(ability, playerId));
             if (ability.activate(game, false)) {
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY,
-                        ability.getId(), ability, playerId));
+                fireActivatedAbilityEvent(ability, game);
                 if (!game.isSimulation()) {
                     game.informPlayers(getLogName() + ability.getGameLogMessage(game));
                 }
@@ -1621,6 +1631,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         } else {
             // resolve without stack
             if (ability.activate(game, false)) {
+                fireActivatedAbilityEvent(ability, game);
                 ability.resolve(game);
                 game.removeBookmark(bookmark);
                 resetStoredBookmark(game);

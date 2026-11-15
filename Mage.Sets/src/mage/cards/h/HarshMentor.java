@@ -70,8 +70,8 @@ class HarshMentorTriggeredAbility extends TriggeredAbilityImpl {
         if (!event.getPlayerId().equals(getControllerId())) {
             Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
             if (source != null && (source.isArtifact(game) || source.isCreature(game) || source.isLand(game))) {
-                StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-                if (!stackAbility.getStackAbility().isManaActivatedAbility()) {
+                StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getTargetId());
+                if (stackAbility != null && !stackAbility.getStackAbility().isManaActivatedAbility()) {
                     for (Effect effect : getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                     }
