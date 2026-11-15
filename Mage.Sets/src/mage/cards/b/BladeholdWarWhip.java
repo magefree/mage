@@ -16,12 +16,20 @@ import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.FilterAbility;
+import mage.filter.predicate.other.AbilityClassPredicate;
 
 /**
  *
  * @author @stwalsh4118
  */
 public final class BladeholdWarWhip extends CardImpl {
+
+    private static final FilterAbility filterEquip = new FilterAbility("Equip");
+
+    static {
+        filterEquip.add(new AbilityClassPredicate(EquipAbility.class));
+    }
 
     public BladeholdWarWhip(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{R}{W}");
@@ -34,7 +42,7 @@ public final class BladeholdWarWhip extends CardImpl {
         // Equip abilities you activate of other Equipment cost {1} less to activate.
         Ability ability = new SimpleStaticAbility(
             new AbilitiesCostReductionControllerEffect(
-                    EquipAbility.class, "Equip", 1, true
+                    filterEquip, 1, true
             ).setText("Equip abilities you activate of other Equipment cost {1} less to activate."));
         this.addAbility(ability);
 

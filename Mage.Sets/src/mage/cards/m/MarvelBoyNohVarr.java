@@ -5,6 +5,7 @@ import mage.MageInt;
 import mage.abilities.common.ActivateAbilityTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.PowerUpAbility;
 import mage.abilities.meta.OrTriggeredAbility;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -12,7 +13,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterAbility;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.other.PowerUpAbilityPredicate;
+import mage.filter.predicate.other.AbilityClassPredicate;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,7 +28,7 @@ public final class MarvelBoyNohVarr extends CardImpl {
     private static final FilterAbility filter = new FilterAbility("a power-up ability");
 
     static {
-        filter.add(PowerUpAbilityPredicate.instance);
+        filter.add(new AbilityClassPredicate(PowerUpAbility.class));
     }
 
     public MarvelBoyNohVarr(UUID ownerId, CardSetInfo setInfo) {

@@ -10,8 +10,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.filter.FilterAbility;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.other.AbilityClassPredicate;
 
 import java.util.UUID;
 
@@ -21,12 +23,14 @@ import java.util.UUID;
 public final class SilverFurMaster extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Ninja and Rogue creatures");
+    private static final FilterAbility filterNinjutsu = new FilterAbility("Ninjutsu");
 
     static {
         filter.add(Predicates.or(
                 SubType.NINJA.getPredicate(),
                 SubType.ROGUE.getPredicate()
         ));
+        filterNinjutsu.add(new AbilityClassPredicate(NinjutsuAbility.class));
     }
 
     public SilverFurMaster(UUID ownerId, CardSetInfo setInfo) {
@@ -42,7 +46,7 @@ public final class SilverFurMaster extends CardImpl {
 
         // Ninjutsu abilities you activate cost {1} less to activate.
         this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(
-                NinjutsuAbility.class, "Ninjutsu"
+                filterNinjutsu
         ).setText("ninjutsu abilities you activate cost {1} less to activate")));
 
         // Other Ninja and Rogue creatures you control get +1/+1

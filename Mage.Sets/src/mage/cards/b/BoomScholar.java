@@ -15,8 +15,10 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.counters.CounterType;
+import mage.filter.FilterAbility;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.other.ExhaustAbilityPredicate;
 
 import java.util.UUID;
 
@@ -26,12 +28,14 @@ import java.util.UUID;
 public final class BoomScholar extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creatures and Vehicles");
+    private static final FilterAbility filterExhaust = new FilterAbility("exhaust abilities");
 
     static {
         filter.add(Predicates.or(
                 CardType.CREATURE.getPredicate(),
                 SubType.VEHICLE.getPredicate()
         ));
+        filterExhaust.add(ExhaustAbilityPredicate.instance);
     }
 
     public BoomScholar(UUID ownerId, CardSetInfo setInfo) {
@@ -44,7 +48,7 @@ public final class BoomScholar extends CardImpl {
 
         // Exhaust abilities of other permanents you control cost {2} less to activate.
         this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(
-                ExhaustAbility.class, "", 2, true
+                filterExhaust, 2, true
         ).setText("exhaust abilities of other permanents you control cost {2} less to activate")));
 
         // Exhaust -- {4}{R}{G}: Creatures and Vehicles you control gain trample until end of turn. Put two +1/+1 counters on this creature.

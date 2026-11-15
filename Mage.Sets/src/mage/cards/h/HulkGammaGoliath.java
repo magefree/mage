@@ -15,12 +15,20 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.FilterAbility;
+import mage.filter.predicate.other.AbilityClassPredicate;
 
 /**
  *
  * @author muz
  */
 public final class HulkGammaGoliath extends CardImpl {
+
+    private static final FilterAbility filterPowerUp = new FilterAbility("power-up abilities");
+
+    static {
+        filterPowerUp.add(new AbilityClassPredicate(PowerUpAbility.class));
+    }
 
     public HulkGammaGoliath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
@@ -40,7 +48,7 @@ public final class HulkGammaGoliath extends CardImpl {
 
         // Power-up abilities of other creatures you control cost {3} less to activate.
         this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(
-            PowerUpAbility.class, "", 3, true
+            filterPowerUp, 3, true
         ).setText("power-up abilities of other creatures you control cost {3} less to activate")));
 
         // Power-up -- {6}{R}{G}: Put five +1/+1 counters on Hulk.
