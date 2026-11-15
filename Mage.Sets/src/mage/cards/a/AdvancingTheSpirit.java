@@ -113,7 +113,7 @@ class AdvancingTheSpiritWatcher extends Watcher {
         if (event.getType() != GameEvent.EventType.ACTIVATED_ABILITY) {
             return;
         }
-        StackObject object = game.getStack().getStackObject(event.getSourceId());
+        StackObject object = game.getStack().getStackObject(event.getTargetId());
         if (object != null && object.getStackAbility() instanceof PowerUpAbility) {
             playerSet.add(event.getPlayerId());
         }

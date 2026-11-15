@@ -46,7 +46,7 @@ public class CycleControllerTriggeredAbility extends TriggeredAbilityImpl {
                 || (event.getSourceId().equals(this.getSourceId()) && excludeSource)) {
             return false;
         }
-        StackObject item = game.getState().getStack().getFirstOrNull();
+        StackObject item = game.getStack().getStackObject(event.getTargetId());
         return item instanceof StackAbility
                 && item.getStackAbility() instanceof CyclingAbility;
     }
