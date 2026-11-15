@@ -2,15 +2,13 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.dynamicvalue.common.CardsDiscardedThisTurnCount;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.game.Game;
 import mage.watchers.common.DiscardedCardWatcher;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.costs.common.DiscardHandCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.ReachAbility;
@@ -39,8 +37,8 @@ public final class AstonishingSpiderMan extends CardImpl {
 
         // Whenever Astonishing Spider-Man attacks, you may discard your hand. If you do, draw a card for each card you've discarded this turn.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(
-            new DrawCardSourceControllerEffect(AstonishingSpiderManValue.instance), new DiscardHandCost()
-        )), new DiscardedCardWatcher());
+            new DrawCardSourceControllerEffect(CardsDiscardedThisTurnCount.SINGULAR), new DiscardHandCost()
+        )).addHint(CardsDiscardedThisTurnCount.getHint()), new DiscardedCardWatcher());
     }
 
     private AstonishingSpiderMan(final AstonishingSpiderMan card) {
@@ -50,29 +48,5 @@ public final class AstonishingSpiderMan extends CardImpl {
     @Override
     public AstonishingSpiderMan copy() {
         return new AstonishingSpiderMan(this);
-    }
-}
-
-enum AstonishingSpiderManValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return DiscardedCardWatcher.getDiscarded(sourceAbility.getControllerId(), game);
-    }
-
-    @Override
-    public AstonishingSpiderManValue copy() {
-        return instance;
-    }
-
-    @Override
-    public String getMessage() {
-        return "card you've discarded this turn";
-    }
-
-    @Override
-    public String toString() {
-        return "1";
     }
 }

@@ -3,12 +3,9 @@ package mage.cards.l;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.CardsDiscardedThisTurnCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,7 +35,7 @@ public final class LivingLaser extends CardImpl {
 
         // Whenever Living Laser attacks, for each card you've discarded this turn, create a token that's a copy of Living Laser, except the token isn't legendary. The tokens enter tapped and attacking. Exile the tokens at the beginning of the next end step.
         Ability ability = new AttacksTriggeredAbility(new LivingLaserEffect());
-        ability.addHint(LivingLaserValue.getHint());
+        ability.addHint(CardsDiscardedThisTurnCount.getHint());
         this.addAbility(ability, new DiscardedCardWatcher());
     }
 
@@ -49,36 +46,6 @@ public final class LivingLaser extends CardImpl {
     @Override
     public LivingLaser copy() {
         return new LivingLaser(this);
-    }
-}
-
-enum LivingLaserValue implements DynamicValue {
-    instance;
-
-    private static final Hint hint = new ValueHint("Cards you've discarded this turn", instance);
-
-    public static Hint getHint() {
-        return hint;
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return DiscardedCardWatcher.getDiscarded(sourceAbility.getControllerId(), game);
-    }
-
-    @Override
-    public LivingLaserValue copy() {
-        return instance;
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return "card you've discarded this turn";
     }
 }
 
@@ -102,7 +69,7 @@ class LivingLaserEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = LivingLaserValue.instance.calculate(game, source, this);
+        int amount = CardsDiscardedThisTurnCount.SINGULAR.calculate(game, source, this);
         if (amount < 1) {
             return false;
         }
