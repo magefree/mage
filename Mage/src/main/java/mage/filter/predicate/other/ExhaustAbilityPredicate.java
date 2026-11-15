@@ -13,6 +13,6 @@ public enum ExhaustAbilityPredicate implements Predicate<Ability> {
 
     @Override
     public boolean apply(Ability input, Game game) {
-        return input instanceof ExhaustAbility;
+        return ExhaustAbility.isExhaust(input);
     }
 }
