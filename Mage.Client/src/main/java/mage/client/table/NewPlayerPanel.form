@@ -32,9 +32,9 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="btnPlayerDeck" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="btnPlayerDeck" min="-2" pref="-1" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnGenerate" min="-2" pref="87" max="-2" attributes="0"/>
+                      <Component id="btnGenerate" min="-2" pref="-1" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="lblLevel" min="-2" max="-2" attributes="0"/>
@@ -59,8 +59,8 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblPlayerDeck" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtPlayerDeck" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnPlayerDeck" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
-                  <Component id="btnGenerate" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
+                  <Component id="btnPlayerDeck" alignment="3" min="-2" pref="-1" max="-2" attributes="0"/>
+                  <Component id="btnGenerate" alignment="3" min="-2" pref="-1" max="-2" attributes="0"/>
               </Group>
           </Group>
       </Group>

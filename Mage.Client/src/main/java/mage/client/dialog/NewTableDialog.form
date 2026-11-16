@@ -102,9 +102,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnSettingsSave" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnOK" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="btnOK" min="-2" pref="-1" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnCancel" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="btnCancel" min="-2" pref="-1" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
                   <Component id="player1Panel" alignment="0" max="32767" attributes="0"/>
@@ -285,10 +285,10 @@
               <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnCancel" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="btnOK" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="btnSettingsLoad" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="btnSettingsSave" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="btnCancel" alignment="3" min="-2" pref="-1" max="-2" attributes="0"/>
+                  <Component id="btnOK" alignment="3" min="-2" pref="-1" max="-2" attributes="0"/>
+                  <Component id="btnSettingsLoad" alignment="3" min="-2" pref="-1" max="-2" attributes="0"/>
+                  <Component id="btnSettingsSave" alignment="3" min="-2" pref="-1" max="-2" attributes="0"/>
                   <Component id="lblSettings" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>

@@ -77,6 +77,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
     public DeckEditorPanel() {
         initComponents();
+        JScrollPane selectorScroll = mage.client.util.gui.GuiDisplayUtil.createHorizontalScrollPane(cardSelector);
+        selectorScroll.setMinimumSize(new Dimension(0, cardSelector.getMinimumSize().height));
+        panelRight.setTopComponent(selectorScroll);
 
         fcSelectDeck = new JFileChooser() {
             @Override
