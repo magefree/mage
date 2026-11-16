@@ -11,6 +11,7 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.client.util.gui.GuiDisplayUtil;
+import mage.client.util.gui.HiDpiRenderUtil;
 import mage.constants.Rarity;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.CardImageUtils;
@@ -37,6 +38,8 @@ public final class ManaSymbols {
 
     private static final String CSS_FILE_NAME = "mana-svg-settings.css";
     private static final String CSS_ADDITIONAL_SETTINGS = "";
+    private static final int MIN_RASTER_TIER = 16;
+    private static final int MAX_RASTER_TIER = 512;
 
     private static final Map<Integer, Map<String, BufferedImage>> manaImages = new HashMap<>();
     private static final Map<String, Map<Rarity, Image>> setImages = new ConcurrentHashMap<>();
@@ -416,8 +419,9 @@ public final class ManaSymbols {
     }
 
     public static void draw(Graphics g, String manaCost, int x, int y, int symbolWidth, Color symbolsTextColor, int symbolMarginX) {
-        if (!manaImages.containsKey(symbolWidth)) {
-            loadSymbolImages(symbolWidth);
+        int rasterWidth = getRasterTier(HiDpiRenderUtil.getRasterSize((Graphics2D) g, symbolWidth, symbolWidth).width);
+        if (!manaImages.containsKey(rasterWidth)) {
+            loadSymbolImages(rasterWidth);
         }
 
         // TODO: replace with jlabel render (look at table renderer)?
@@ -465,7 +469,7 @@ public final class ManaSymbols {
         g.drawImage(image, x, y, null);
          */
         // OLD version with custom draw
-        Map<String, BufferedImage> sizedSymbols = manaImages.get(symbolWidth);
+        Map<String, BufferedImage> sizedSymbols = manaImages.get(rasterWidth);
         if (manaCost.isEmpty()) {
             return;
         }
@@ -523,7 +527,7 @@ public final class ManaSymbols {
                 }
             } else {
                 // ICON draw
-                g.drawImage(image, x, y, null);
+                g.drawImage(image, x, y, symbolWidth, symbolWidth, null);
             }
             x += symbolWidth + symbolMarginX;
         }
@@ -688,5 +692,17 @@ public final class ManaSymbols {
         }
         Map<String, BufferedImage> sizedSymbols = manaImages.get(size);
         return sizedSymbols.get(symbol);
+    }
+
+    public static BufferedImage getHiDpiManaSymbol(String symbol, int pixelSize) {
+        return getSizedManaSymbol(symbol, getRasterTier(pixelSize));
+    }
+
+    private static int getRasterTier(int pixelSize) {
+        int size = MIN_RASTER_TIER;
+        while (size < pixelSize && size < MAX_RASTER_TIER) {
+            size *= 2;
+        }
+        return size;
     }
 }

@@ -1,10 +1,14 @@
 package mage.client.components;
 
+import mage.client.util.TransformedImageCache;
+import mage.client.util.gui.HiDpiRenderUtil;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.net.URL;
+import java.util.function.IntFunction;
 
 /**
  * An <CODE>Icon</CODE> that scales its image to fill the component area, excluding any border or insets, optionally maintaining the image's
@@ -30,6 +34,21 @@ public class StretchIcon extends ImageIcon {
      * component.
      */
     protected boolean proportionate = true;
+    private IntFunction<BufferedImage> rasterSource;
+    private int sourceSize = -1;
+    private BufferedImage sourceImage;
+
+    private StretchIcon() {
+        super();
+    }
+
+    /** Load vector-backed icons at the current display resolution, keeping component layout unchanged. */
+    public static StretchIcon fromRasterSource(IntFunction<BufferedImage> images, boolean proportionate) {
+        StretchIcon icon = new StretchIcon();
+        icon.rasterSource = images;
+        icon.proportionate = proportionate;
+        return icon;
+    }
 
     /**
      * Creates a <CODE>StretchIcon</CODE> from an array of bytes.
@@ -241,16 +260,28 @@ public class StretchIcon extends ImageIcon {
      */
     @Override
     public synchronized void paintIcon(Component c, Graphics g, int x, int y) {
-        Image image = getImage();
-        if (image == null) {
-            return;
-        }
         Insets insets = ((Container) c).getInsets();
         x = insets.left;
         y = insets.top;
 
         int w = c.getWidth() - x - insets.right;
         int h = c.getHeight() - y - insets.bottom;
+        if (w <= 0 || h <= 0) {
+            return;
+        }
+        Image image = getImage();
+        if (rasterSource != null) {
+            Dimension raster = HiDpiRenderUtil.getRasterSize((Graphics2D) g, w, h);
+            int pixels = Math.max(raster.width, raster.height);
+            if (pixels != sourceSize) {
+                sourceImage = rasterSource.apply(pixels);
+                sourceSize = pixels;
+            }
+            image = sourceImage;
+        }
+        if (image == null || image.getWidth(c) <= 0 || image.getHeight(c) <= 0) {
+            return;
+        }
 
         if (proportionate) {
             int iw = image.getWidth(c);
@@ -268,23 +299,20 @@ public class StretchIcon extends ImageIcon {
         }
         ImageObserver io = getImageObserver();
 
-        /*
-         * Added this code to generate nicer looking results when scaling. - bspkrs
-         * BEGIN CHANGES
-         */
-        BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_4BYTE_ABGR);
-        Graphics2D g2 = bi.createGraphics();
+        Graphics2D g2 = (Graphics2D) g.create();
         try {
-            g2.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY));
-            g2.drawImage(image, 0, 0, w, h, io == null ? c : io);
+            if (image instanceof BufferedImage) {
+                Dimension raster = HiDpiRenderUtil.getRasterSize(g2, w, h);
+                BufferedImage prepared = TransformedImageCache.getResizedImageExact((BufferedImage) image, raster.width, raster.height);
+                HiDpiRenderUtil.configureRasterDraw(g2, prepared, w, h);
+                g2.drawImage(prepared, x, y, w, h, io == null ? c : io);
+            } else {
+                g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+                g2.drawImage(image, x, y, w, h, io == null ? c : io);
+            }
         } finally {
             g2.dispose();
         }
-        /*
-         * END CHANGES
-         */
-
-        g.drawImage(bi, x, y, w, h, io == null ? c : io);
     }
 
     /**
