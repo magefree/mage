@@ -67,7 +67,8 @@ class GerrymanderingEffect extends OneShotEffect {
             // Exile all lands.
             Cards exiledCards = new CardsImpl();
             for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LANDS, source.getControllerId(), source, game)) {
-                exiledCards.add(permanent);
+                // double faced cards: a permanent is a side, but an exile zone contains a main card
+                exiledCards.add(permanent.getMainCard());
                 playerLandCount.putIfAbsent(permanent.getControllerId(), 0);
                 playerLandCount.put(permanent.getControllerId(), playerLandCount.get(permanent.getControllerId()) + 1);
                 controller.moveCardsToExile(permanent, source, game, true, CardUtil.getCardExileZoneId(game, source.getSourceId()), "Gerrymandering");
