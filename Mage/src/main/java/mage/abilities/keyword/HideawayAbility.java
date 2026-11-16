@@ -177,7 +177,7 @@ class HideawayWatcher extends Watcher {
                 .getState()
                 .getWatcher(HideawayWatcher.class)
                 .morMap
-                .getOrDefault(new MageObjectReference(source), Collections.emptySet())
+                .getOrDefault(new MageObjectReference(source, game), Collections.emptySet())
                 .contains(playerId);
     }
 }

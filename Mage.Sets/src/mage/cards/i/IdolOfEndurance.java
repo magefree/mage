@@ -230,7 +230,7 @@ class IdolOfEnduranceWatcher extends Watcher {
             return false;
         }
         IdolOfEnduranceWatcher watcher = game.getState().getWatcher(IdolOfEnduranceWatcher.class);
-        MageObjectReference mor = new MageObjectReference(source);
+        MageObjectReference mor = new MageObjectReference(source, game);
         return watcher
                 .morMap
                 .containsKey(mor)
@@ -241,7 +241,7 @@ class IdolOfEnduranceWatcher extends Watcher {
     }
 
     static void addPlayable(Ability source, Game game) {
-        MageObjectReference mor = new MageObjectReference(source);
+        MageObjectReference mor = new MageObjectReference(source, game);
         game.getState()
                 .getWatcher(IdolOfEnduranceWatcher.class)
                 .morMap

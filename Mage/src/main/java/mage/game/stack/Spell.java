@@ -362,7 +362,7 @@ public class Spell extends StackObjectImpl implements Card {
                     }
                 } else {
                     permId = card.getId();
-                    MageObjectReference mor = new MageObjectReference(getSpellAbility());
+                    MageObjectReference mor = new MageObjectReference(getSpellAbility(), game);
                     game.storePermanentCostsTags(mor, getSpellAbility());
                     permanentCreated = controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
                 }
@@ -395,7 +395,7 @@ public class Spell extends StackObjectImpl implements Card {
             }
             // Aura has no legal target and its a bestow enchantment -> Add it to battlefield as creature
             if (bestow) {
-                MageObjectReference mor = new MageObjectReference(getSpellAbility());
+                MageObjectReference mor = new MageObjectReference(getSpellAbility(), game);
                 game.storePermanentCostsTags(mor, getSpellAbility());
                 return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
             } else {
@@ -426,7 +426,7 @@ public class Spell extends StackObjectImpl implements Card {
                 token.putOntoBattlefield(1, game, ability, getControllerId(), needTapped, needAttacking, needAttackingDefenders, null, false);
                 return true;
             } else {
-                MageObjectReference mor = new MageObjectReference(getSpellAbility());
+                MageObjectReference mor = new MageObjectReference(getSpellAbility(), game);
                 game.storePermanentCostsTags(mor, getSpellAbility());
                 return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
             }

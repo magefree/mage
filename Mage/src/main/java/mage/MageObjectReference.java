@@ -59,28 +59,21 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
     }
 
     /**
-     * @deprecated use {@link #MageObjectReference(Ability, Game)}, which also works for an ability that isn't
-     * tied to an object yet
-     */
-    @Deprecated // cause of many bugs, see issue #10479
-    public MageObjectReference(Ability source) {
-        this(source, 0);
-    }
-
-    @Deprecated // cause of many bugs, see issue #10479
-    public MageObjectReference(Ability source, int modifier) {
-        this.sourceId = source.getSourceId();
-        this.zoneChangeCounter = source.getStackMomentSourceZCC() + modifier;
-    }
-
-    /**
      * References the object the ability's source was when the ability was put on the stack or its effect was
      * created. If the source moves, the reference stops matching (400.7), so a continuous effect created by the
      * ability doesn't follow the source to its new object. An ability that isn't tied to an object yet refers to
-     * the source's current object.
+     * the source's current object; for a permanent that is entering, that is the object it is entering from.
      */
     public MageObjectReference(Ability source, Game game) {
-        this(source.getSourceId(), CardUtil.getActualSourceObjectZoneChangeCounter(game, source), game);
+        this(source, game, 0);
+    }
+
+    /**
+     * As {@link #MageObjectReference(Ability, Game)}, offset by a number of zone changes, e.g. +1 for the object
+     * the source became after it moved once.
+     */
+    public MageObjectReference(Ability source, Game game, int offset) {
+        this(source.getSourceId(), CardUtil.getActualSourceObjectZoneChangeCounter(game, source) + offset, game);
     }
 
     /**

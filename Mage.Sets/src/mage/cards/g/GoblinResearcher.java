@@ -116,7 +116,7 @@ class GoblinResearcherWatcher extends Watcher {
         return game.getState()
                 .getWatcher(GoblinResearcherWatcher.class)
                 .map
-                .getOrDefault(new MageObjectReference(source, 0), Collections.emptySet())
+                .getOrDefault(new MageObjectReference(source, game), Collections.emptySet())
                 .contains(source.getControllerId());
     }
 }

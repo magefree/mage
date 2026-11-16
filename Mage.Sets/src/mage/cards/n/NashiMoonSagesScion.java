@@ -149,7 +149,7 @@ class NashiMoonSagesScionWatcher extends Watcher {
         game.getState()
                 .getWatcher(NashiMoonSagesScionWatcher.class)
                 .morMap
-                .computeIfAbsent(new MageObjectReference(source), x -> new HashSet<>())
+                .computeIfAbsent(new MageObjectReference(source, game), x -> new HashSet<>())
                 .add(cards
                         .stream()
                         .map(card -> new MageObjectReference(card, game))
@@ -160,7 +160,7 @@ class NashiMoonSagesScionWatcher extends Watcher {
         return game.getState()
                 .getWatcher(NashiMoonSagesScionWatcher.class)
                 .morMap
-                .getOrDefault(new MageObjectReference(source), Collections.emptySet())
+                .getOrDefault(new MageObjectReference(source, game), Collections.emptySet())
                 .stream()
                 .flatMap(Collection::stream)
                 .anyMatch(mor::equals);

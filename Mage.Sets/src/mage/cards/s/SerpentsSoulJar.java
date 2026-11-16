@@ -161,7 +161,7 @@ class SerpentsSoulJarWatcher extends Watcher {
         if (!playerId.equals(source.getControllerId())) {
             return false;
         }
-        MageObjectReference mor = new MageObjectReference(source);
+        MageObjectReference mor = new MageObjectReference(source, game);
         SerpentsSoulJarWatcher watcher = game.getState().getWatcher(SerpentsSoulJarWatcher.class);
         return watcher
                 .morMap
@@ -173,7 +173,7 @@ class SerpentsSoulJarWatcher extends Watcher {
     }
 
     static void addPlayable(Ability source, Game game) {
-        MageObjectReference mor = new MageObjectReference(source);
+        MageObjectReference mor = new MageObjectReference(source, game);
         game.getState()
                 .getWatcher(SerpentsSoulJarWatcher.class)
                 .morMap

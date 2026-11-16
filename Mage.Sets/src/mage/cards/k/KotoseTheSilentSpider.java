@@ -190,7 +190,7 @@ class KotoseTheSilentSpiderWatcher extends Watcher {
         game.getState()
                 .getWatcher(KotoseTheSilentSpiderWatcher.class)
                 .morMap
-                .computeIfAbsent(new MageObjectReference(source), x -> new HashSet<>())
+                .computeIfAbsent(new MageObjectReference(source, game), x -> new HashSet<>())
                 .add(cards
                         .stream()
                         .map(card -> new MageObjectReference(card, game))
@@ -201,7 +201,7 @@ class KotoseTheSilentSpiderWatcher extends Watcher {
         return game.getState()
                 .getWatcher(KotoseTheSilentSpiderWatcher.class)
                 .morMap
-                .getOrDefault(new MageObjectReference(source), Collections.emptySet())
+                .getOrDefault(new MageObjectReference(source, game), Collections.emptySet())
                 .stream()
                 .flatMap(Collection::stream)
                 .anyMatch(mor::equals);

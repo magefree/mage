@@ -111,7 +111,7 @@ class ShiftyDoppelgangerReturnEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.staticText = "sacrifice that creature. If you do, return {this} to the battlefield";
         this.creatureMor = new MageObjectReference(creature, game);
-        this.sourceMor = new MageObjectReference(source, 1);
+        this.sourceMor = new MageObjectReference(source, game, 1);
     }
 
     private ShiftyDoppelgangerReturnEffect(final ShiftyDoppelgangerReturnEffect effect) {

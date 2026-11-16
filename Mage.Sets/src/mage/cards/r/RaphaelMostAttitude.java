@@ -135,14 +135,14 @@ class RaphaelMostAttitudeWatcher extends Watcher {
         if (!playerId.equals(source.getControllerId())) {
             return false;
         }
-        MageObjectReference mor = new MageObjectReference(source);
+        MageObjectReference mor = new MageObjectReference(source, game);
         RaphaelMostAttitudeWatcher watcher = game.getState().getWatcher(RaphaelMostAttitudeWatcher.class);
         return watcher.morMap.containsKey(mor)
                 && watcher.morMap.get(mor).getOrDefault(playerId, 0) > 0;
     }
 
     static void addPlayable(Ability source, Game game) {
-        MageObjectReference mor = new MageObjectReference(source);
+        MageObjectReference mor = new MageObjectReference(source, game);
         game.getState()
                 .getWatcher(RaphaelMostAttitudeWatcher.class)
                 .morMap
