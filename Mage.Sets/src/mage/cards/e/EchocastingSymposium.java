@@ -3,7 +3,7 @@ package mage.cards.e;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
-import mage.abilities.keyword.ParadigmAbility;
+import mage.abilities.effects.keyword.ParadigmEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -35,7 +35,7 @@ public final class EchocastingSymposium extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Paradigm
-        this.addAbility(new ParadigmAbility());
+        this.getSpellAbility().addEffect(new ParadigmEffect());
     }
 
     private EchocastingSymposium(final EchocastingSymposium card) {

@@ -3,7 +3,7 @@ package mage.cards.i;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.ParadigmAbility;
+import mage.abilities.effects.keyword.ParadigmEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -30,7 +30,7 @@ public final class ImprovisationCapstone extends CardImpl {
         this.getSpellAbility().addEffect(new ImprovisationCapstoneEffect());
 
         // Paradigm
-        this.addAbility(new ParadigmAbility());
+        this.getSpellAbility().addEffect(new ParadigmEffect());
     }
 
     private ImprovisationCapstone(final ImprovisationCapstone card) {

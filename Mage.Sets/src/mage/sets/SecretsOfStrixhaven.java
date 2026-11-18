@@ -4,15 +4,11 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author TheElk801
  */
 public final class SecretsOfStrixhaven extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Decorum Dissertation", "Echocasting Symposium", "Germination Practicum", "Improvisation Capstone", "Restoration Seminar");
     private static final SecretsOfStrixhaven instance = new SecretsOfStrixhaven();
 
     public static SecretsOfStrixhaven getInstance() {
@@ -392,7 +388,5 @@ public final class SecretsOfStrixhaven extends ExpansionSet {
         cards.add(new SetCardInfo("Zaffai and the Tempests", 360, Rarity.RARE, mage.cards.z.ZaffaiAndTheTempests.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zealous Lorecaster", 137, Rarity.COMMON, mage.cards.z.ZealousLorecaster.class));
         cards.add(new SetCardInfo("Zimone's Experiment", 169, Rarity.UNCOMMON, mage.cards.z.ZimonesExperiment.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
     }
 }

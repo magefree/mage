@@ -1,7 +1,7 @@
 package mage.cards.g;
 
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
-import mage.abilities.keyword.ParadigmAbility;
+import mage.abilities.effects.keyword.ParadigmEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,7 +27,7 @@ public final class GerminationPracticum extends CardImpl {
         ));
 
         // Paradigm
-        this.addAbility(new ParadigmAbility());
+        this.getSpellAbility().addEffect(new ParadigmEffect());
     }
 
     private GerminationPracticum(final GerminationPracticum card) {
