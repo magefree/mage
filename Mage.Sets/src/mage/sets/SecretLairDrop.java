@@ -1848,6 +1848,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Retreat to Coralhelm", 407, Rarity.RARE, mage.cards.r.RetreatToCoralhelm.class));
         cards.add(new SetCardInfo("Return the Favor", 7080, Rarity.RARE, mage.cards.r.ReturnTheFavor.class));
         cards.add(new SetCardInfo("Revel in Riches", 1830, Rarity.RARE, mage.cards.r.RevelInRiches.class));
+        cards.add(new SetCardInfo("Reverend Mother Jessica", 2913, Rarity.MYTHIC, mage.cards.r.ReverendMotherJessica.class));
         cards.add(new SetCardInfo("Reverent Mantra", 2686, Rarity.RARE, mage.cards.r.ReverentMantra.class));
         cards.add(new SetCardInfo("Rewind", 1036, Rarity.RARE, mage.cards.r.Rewind.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rewind", 1368, Rarity.RARE, mage.cards.r.Rewind.class, NON_FULL_USE_VARIOUS));
