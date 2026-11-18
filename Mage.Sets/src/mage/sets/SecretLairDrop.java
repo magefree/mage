@@ -1626,6 +1626,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Path to Exile", 477, Rarity.RARE, mage.cards.p.PathToExile.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pathbreaker Ibex", 307, Rarity.RARE, mage.cards.p.PathbreakerIbex.class));
         cards.add(new SetCardInfo("Patron Wizard", 1002, Rarity.RARE, mage.cards.p.PatronWizard.class));
+        cards.add(new SetCardInfo("Paul Atreides, Ducal Heir", 2912, Rarity.MYTHIC, mage.cards.p.PaulAtreidesDucalHeir.class));
         cards.add(new SetCardInfo("Peacewalker Colossus", "1966b", Rarity.RARE, mage.cards.p.PeacewalkerColossus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Peacewalker Colossus", 1966, Rarity.RARE, mage.cards.p.PeacewalkerColossus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Peek", 401, Rarity.RARE, mage.cards.p.Peek.class));
