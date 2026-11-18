@@ -15,9 +15,11 @@ import mage.game.permanent.PermanentMeld;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
 import mage.util.FuzzyTestsUtil;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * Created by samuelsandeen on 9/6/16.
@@ -300,21 +302,23 @@ public final class ZonesHandler {
             }
         }
 
-        // update zone in main
-        if (targetCard instanceof RoomCardHalf && (toZone == Zone.BATTLEFIELD)) {
-            game.setZone(event.getTargetId(), Zone.OUTSIDE);
-        } else {
-            game.setZone(event.getTargetId(), event.getToZone());
-        }
-
-        // update zone in other parts (meld cards, mdf half cards)
-        cardsToUpdate.entrySet().forEach(entry -> {
-            for (Card card : entry.getValue().getCards(game)) {
-                if (!card.getId().equals(event.getTargetId())) {
-                    game.setZone(card.getId(), entry.getKey());
-                }
-            }
-        });
+        // update zones of the target and all its linked parts
+        Map<UUID, Zone> partZones = new LinkedHashMap<>();
+        cardsToUpdate.forEach((partZone, cards)
+                -> cards.getCards(game).forEach(card -> partZones.putIfAbsent(card.getId(), partZone)));
+        Stream.concat(
+                        Optional.ofNullable(targetCard)
+                                .map(Card::getOwnerId)
+                                .map(game::getPlayer)
+                                .map(player -> CardUtil.getCastableComponents(targetCard, null, source, player, game, null, false))
+                                .orElseGet(Collections::emptyList)
+                                .stream()
+                                .filter(part -> game.getState().getZone(part.getId()) != Zone.OUTSIDE)
+                                .map(Card::getId),
+                        Stream.of(event.getTargetId())
+                )
+                .forEach(id -> partZones.putIfAbsent(id, event.getToZone()));
+        partZones.forEach(game::setZone);
 
         // reset meld status
         if (targetCard instanceof MeldCard) {
