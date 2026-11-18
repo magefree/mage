@@ -49,6 +49,33 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
         Assert.assertTrue("Lazav, Dimir Mastermind must have flying", lazav.getAbilities().contains(FlyingAbility.getInstance()));
     }
 
+    // https://github.com/magefree/mage/issues/16429
+    @Test
+    public void testCopyDFC() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Lazav, Dimir Mastermind", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Codex Shredder", 1);
+
+        addCard(Zone.LIBRARY, playerB, "Voldaren Pariah", 1);
+        skipInitShuffling();
+
+        setChoice(playerA, true);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player mills a card.", playerB);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerB, "Voldaren Pariah", 1);
+        assertPermanentCount(playerA, "Lazav, Dimir Mastermind", 1);
+        assertPowerToughness(playerA, "Lazav, Dimir Mastermind", 3, 3);
+
+        Permanent lazav = getPermanent("Lazav, Dimir Mastermind", playerA.getId());
+        Assert.assertTrue(lazav.hasSubtype(SubType.VAMPIRE, currentGame));
+        Assert.assertTrue(lazav.hasSubtype(SubType.HORROR, currentGame));
+        Assert.assertTrue("Lazav, Dimir Mastermind must have flying", lazav.getAbilities().contains(FlyingAbility.getInstance()));
+    }
+
     /**
      * Tests copy card with static abilitiy gaining ability to other permanents
      */
