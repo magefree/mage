@@ -115,4 +115,56 @@ public class ChissGoriaForgeTyrantTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, CHISS, 1);
         assertTappedCount("Mountain", true, 7);
     }
+
+    @Test
+    public void testRemovingChissKeepsPermission() {
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerA, CHISS);
+        addCard(Zone.HAND, playerA, "Doom Blade");
+        addCard(Zone.LIBRARY, playerA, "Mountain", 3);
+        addCard(Zone.LIBRARY, playerA, "Ornithopter", 2);
+        skipInitShuffling();
+
+        attack(1, playerA, CHISS);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Doom Blade", CHISS, true);
+        checkPlayableAbility("first artifact playable after source dies", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Ornithopter", true);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Ornithopter", true);
+        checkPlayableAbility("no second artifact", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Ornithopter", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, CHISS, 1);
+        assertPermanentCount(playerA, "Ornithopter", 1);
+        assertExileCount(playerA, 4);
+    }
+
+    @Test
+    public void testRecastChissDoesNotAddPermission() {
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 9);
+        addCard(Zone.BATTLEFIELD, playerA, CHISS);
+        addCard(Zone.HAND, playerA, "Unsummon");
+        addCard(Zone.LIBRARY, playerA, "Mountain", 3);
+        addCard(Zone.LIBRARY, playerA, "Ornithopter", 2);
+        skipInitShuffling();
+
+        attack(1, playerA, CHISS);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Ornithopter", true);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Unsummon", CHISS, true);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, CHISS, true);
+        checkPlayableAbility("no second artifact", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Ornithopter", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, CHISS, 1);
+        assertPermanentCount(playerA, "Ornithopter", 1);
+        assertGraveyardCount(playerA, "Unsummon", 1);
+        assertExileCount(playerA, 4);
+    }
 }

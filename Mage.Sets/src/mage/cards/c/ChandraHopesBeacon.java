@@ -139,7 +139,7 @@ class ChandraHopesBeaconPlayEffect extends AsThoughEffectImpl {
 
 class ChandraHopesBeaconWatcher extends Watcher {
 
-    private final Map<MageObjectReference, Set<MageObjectReference>> morMap = new HashMap<>();
+    private final Map<UUID, Set<MageObjectReference>> abilityMap = new HashMap<>();
     private static final Set<MageObjectReference> emptySet = new HashSet<>();
 
     ChandraHopesBeaconWatcher() {
@@ -152,12 +152,12 @@ class ChandraHopesBeaconWatcher extends Watcher {
                 || event.getApprovingObject() == null) {
             return;
         }
-        MageObjectReference mor = event.getApprovingObject().getApprovingMageObjectReference();
+        UUID ability = event.getApprovingObject().getApprovingAbility().getId();
         Spell spell = game.getSpell(event.getTargetId());
-        if (mor == null || spell == null) {
+        if (ability == null || spell == null) {
             return;
         }
-        morMap.computeIfAbsent(mor, x -> new HashSet<>())
+        abilityMap.computeIfAbsent(ability, x -> new HashSet<>())
                 .add(new MageObjectReference(spell.getMainCard(), game, -1));
     }
 
@@ -165,8 +165,8 @@ class ChandraHopesBeaconWatcher extends Watcher {
         ChandraHopesBeaconWatcher watcher = game.getState().getWatcher(ChandraHopesBeaconWatcher.class);
         return watcher != null
                 && watcher
-                .morMap
-                .getOrDefault(new MageObjectReference(source.getSourceObject(game), game), emptySet)
+                .abilityMap
+                .getOrDefault(source.getId(), emptySet)
                 .stream()
                 .noneMatch(morSet::contains);
     }

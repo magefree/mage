@@ -158,7 +158,10 @@ class WhispersteelDaggerWatcher extends Watcher {
             if (event.getApprovingObject() == null) {
                 return;
             }
-            morMap.computeIfAbsent(event.getApprovingObject().getApprovingMageObjectReference(), m -> new HashMap<>())
+            Ability ability = event.getApprovingObject().getApprovingAbility();
+            morMap.computeIfAbsent(new MageObjectReference(
+                            ability.getSourceId(), ability.getStackMomentSourceZCC(), game
+                    ), m -> new HashMap<>())
                     .computeIfAbsent(game.getOwnerId(event.getSourceId()), m -> new HashMap<>())
                     .compute(event.getPlayerId(), (u, i) -> i == null ? 0 : Integer.sum(i, -1));
             return;
