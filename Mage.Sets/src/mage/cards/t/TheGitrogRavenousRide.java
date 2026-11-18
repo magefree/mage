@@ -105,6 +105,8 @@ class TheGitrogRavenousRideEffect extends OneShotEffect {
         TargetCard targetCard = new TargetCardInHand(0, power, StaticFilters.FILTER_CARD_LANDS);
         player.choose(outcome, player.getHand(), targetCard, source, game);
         Cards cards = new CardsImpl(targetCard.getTargets());
+        // Handle the dies event before moving the chosen lands clears its LKI.
+        game.getState().handleSimultaneousEvent(game);
         player.moveCards(
                 cards.getCards(game), Zone.BATTLEFIELD, source, game,
                 true, false, false, null
