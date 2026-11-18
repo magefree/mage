@@ -60,7 +60,7 @@ class AlienAngelTokenEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game, true);
         if (permanent == null) {
             discard();
             return false;

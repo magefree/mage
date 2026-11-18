@@ -113,9 +113,7 @@ class EtrataTheSilencerEffect extends OneShotEffect {
         game.processAction();
         Permanent etrataTheSilencer = source.getSourcePermanentIfItStillExists(game);
         if (etrataTheSilencer != null) {
-            if (etrataTheSilencer.isPhasedIn()) {
-                return new ShuffleIntoLibrarySourceEffect().apply(game, source);
-            }
+            return new ShuffleIntoLibrarySourceEffect().apply(game, source);
         }
         controller.shuffleLibrary(source, game);
         return true;

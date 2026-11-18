@@ -78,7 +78,7 @@ class TishanasTidebinderEffect extends OneShotEffect {
         }
         Permanent permanent = game.getPermanent(stackObject.getSourceId());
         game.getStack().counter(stackObject.getId(), source, game);
-        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game, true);
         if (permanent == null || sourcePermanent == null
                 || !permanent.isArtifact(game) && !permanent.isCreature(game) && !permanent.isPlaneswalker(game)) {
             return true;
