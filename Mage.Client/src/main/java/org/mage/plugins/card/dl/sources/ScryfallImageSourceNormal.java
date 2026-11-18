@@ -17,7 +17,7 @@ public class ScryfallImageSourceNormal extends ScryfallImageSource {
     }
 
     private static String innerModifyUrlString(String oneUrl) {
-        return oneUrl.replaceFirst("/large/", "/normal/").replaceFirst("format=image", "format=image&version=normal");
+        return oneUrl.replaceFirst("/display/", "/grid/").replaceFirst("format=image", "format=image&version=grid");
     }
 
     private static CardImageUrls innerModifyUrl(CardImageUrls cardUrls) {
@@ -44,8 +44,8 @@ public class ScryfallImageSourceNormal extends ScryfallImageSource {
 
     @Override
     public float getAverageSizeKb() {
-        // June 2024: MH3 set - 30500 Kb / 332 = 92 Kb
-        return 92f;
+    	// November 2026 (webp): MH3 set - 30848 Kb / 562 = 54 Kb
+        return 54f;
     }
 
     @Override
