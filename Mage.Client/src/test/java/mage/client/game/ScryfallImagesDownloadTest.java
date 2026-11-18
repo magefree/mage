@@ -51,21 +51,21 @@ public class ScryfallImagesDownloadTest {
 
         // normal card
         urls = imageSourceSmall.generateCardUrl(new CardDownloadData("Grizzly Bears", "10E", "268", false, 0));
-        Assert.assertEquals("https://api.scryfall.com/cards/10e/268/en?format=image&version=small", urls.getBaseUrl());
+        Assert.assertEquals("https://api.scryfall.com/cards/10e/268/en?format=image&version=thumb", urls.getBaseUrl());
 
         // various card
         urls = imageSourceSmall.generateCardUrl(new CardDownloadData("Grizzly Bears", "30A", "195", true, 1));
-        Assert.assertEquals("https://api.scryfall.com/cards/30a/195/en?format=image&version=small", urls.getBaseUrl());
+        Assert.assertEquals("https://api.scryfall.com/cards/30a/195/en?format=image&version=thumb", urls.getBaseUrl());
         urls = imageSourceSmall.generateCardUrl(new CardDownloadData("Grizzly Bears", "30A", "492", true, 2));
-        Assert.assertEquals("https://api.scryfall.com/cards/30a/492/en?format=image&version=small", urls.getBaseUrl());
+        Assert.assertEquals("https://api.scryfall.com/cards/30a/492/en?format=image&version=thumb", urls.getBaseUrl());
 
         // api link
         urls = imageSourceSmall.generateCardUrl(new CardDownloadData("Ajani, the Greathearted", "WAR", "184*", false, 0));
-        Assert.assertEquals("https://api.scryfall.com/cards/war/184★/en?format=image&version=small", urls.getBaseUrl());
+        Assert.assertEquals("https://api.scryfall.com/cards/war/184★/en?format=image&version=thumb", urls.getBaseUrl());
 
         // direct api link
         urls = imageSourceSmall.generateCardUrl(new CardDownloadData("Command Tower", "REX", "26b", false, 0));
-        Assert.assertEquals("https://api.scryfall.com/cards/rex/26/en?format=image&version=small&face=back", urls.getBaseUrl());
+        Assert.assertEquals("https://api.scryfall.com/cards/rex/26/en?format=image&version=thumb&face=back", urls.getBaseUrl());
 
         // the one ring
         Assert.assertTrue("LTR must use The One Ring with 001 number, not 0", TheLordOfTheRingsTalesOfMiddleEarth.getInstance().getSetCardInfo()
@@ -74,6 +74,6 @@ public class ScryfallImagesDownloadTest {
                 .anyMatch(c -> c.getCardNumber().equals("001"))
         );
         urls = imageSourceSmall.generateCardUrl(new CardDownloadData("The One Ring", "LTR", "001", false, 0));
-        Assert.assertEquals("https://api.scryfall.com/cards/ltr/0/qya?format=image&version=small", urls.getBaseUrl());
+        Assert.assertEquals("https://api.scryfall.com/cards/ltr/0/qya?format=image&version=thumb", urls.getBaseUrl());
     }
 }

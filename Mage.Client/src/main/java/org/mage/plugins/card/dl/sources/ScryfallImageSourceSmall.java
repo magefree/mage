@@ -17,7 +17,7 @@ public class ScryfallImageSourceSmall extends ScryfallImageSource {
     }
 
     private static String innerModifyUrlString(String oneUrl) {
-        return oneUrl.replaceFirst("/large/", "/small/").replaceFirst("format=image", "format=image&version=small");
+        return oneUrl.replaceFirst("/display/", "/thumb/").replaceFirst("format=image", "format=image&version=thumb");
     }
 
     private static CardImageUrls innerModifyUrl(CardImageUrls cardUrls) {
@@ -44,12 +44,13 @@ public class ScryfallImageSourceSmall extends ScryfallImageSource {
 
     @Override
     public float getAverageSizeKb() {
-        // June 2024: MH3 set - 4500 Kb / 332 = 14 Kb
-        return 14f;
+        // June 2024: MH3 set - 4500 Kb / 332 = 14 Kb (jpg)
+        // Nov 2026: webp images are about 62% of the jpg size, so 14 Kb * 0.62 = 9 Kb
+        return 9f;
     }
 
     @Override
     public String getImageQuality() {
-        return "small";
+        return "thumb";
     }
 }

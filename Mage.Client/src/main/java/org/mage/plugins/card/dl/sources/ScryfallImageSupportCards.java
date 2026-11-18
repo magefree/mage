@@ -855,7 +855,7 @@ public class ScryfallImageSupportCards {
     }
 
     public static boolean isApiLink(String link) {
-        return !link.endsWith(".jpg") && !link.endsWith(".png") && !link.contains("format=image");
+        return !link.endsWith(".jpg") && !link.endsWith(".png") && !link.endsWith(".webp") && !link.contains("format=image");
     }
 
     public static Map<String, String> getDirectDownloadLinks() {

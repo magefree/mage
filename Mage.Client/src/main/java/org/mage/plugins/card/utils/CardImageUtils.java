@@ -121,7 +121,20 @@ public final class CardImageUtils {
         return buildImagePathToTokens() + fixSetNameForWindows(setCode) + File.separator;
     }
 
-    public static String buildImagePathToCardOrToken(CardDownloadData card) {
+    /**
+     * Default image file extension, used only when there is no image file on disk yet for missing image info text.
+     */
+    private static final String IMAGE_EXTENSION_DEFAULT = ".webp";
+
+    /**
+     * Supported image file extensions for loading, ordered by preference.
+     */
+    private static final List<String> IMAGE_EXTENSIONS_BY_PREFERENCE = Arrays.asList(".webp", ".jpg");
+
+    /**
+     * Image file path without the extension. E.g., ...\C16\Burgeoning.full
+     */
+    private static String buildImagePathToCardOrTokenWithoutExtension(CardDownloadData card) {
         String setPath = buildImagePathToSet(card);
 
         String prefixType = "";
@@ -131,16 +144,81 @@ public final class CardImageUtils {
 
         String cardName = prepareCardNameForFile(card.getName());
 
-        String finalFileName;
         if (card.getUsesVariousArt()) {
             // different arts uses name + collector id
-            finalFileName = cardName + prefixType + '.' + card.getCollectorIdAsFileName() + ".full.jpg";
+            return setPath + cardName + prefixType + '.' + card.getCollectorIdAsFileName() + ".full";
         } else {
             // basic arts uses name
-            finalFileName = cardName + prefixType + ".full.jpg";
+            return setPath + cardName + prefixType + ".full";
+        }
+    }
+
+    /**
+     * Image path to SAVE a card or token image with the image data's real extension.
+     * <p>
+     * Use findImagePathToCardOrToken to LOAD an image instead.
+     *
+     * @param imageExtension extension of the downloaded image data, see CardImageSource.getImageExtension
+     */
+    public static String buildImagePathToCardOrToken(CardDownloadData card, String imageExtension) {
+        return buildImagePathToCardOrTokenWithoutExtension(card) + imageExtension;
+    }
+
+    /**
+     * Image path to a card or token image with the default extension (no image data on disk yet).
+     * <p>
+     * Use findImagePathToCardOrToken to LOAD an image instead.
+     */
+    public static String buildImagePathToCardOrToken(CardDownloadData card) {
+        return buildImagePathToCardOrToken(card, IMAGE_EXTENSION_DEFAULT);
+    }
+
+    /**
+     * Image path to LOAD a card or token image. Searches all supported extensions so old and new
+     * image collections can be mixed.
+     *
+     * @return Path to the existing image file or path with the default extension if nothing found
+     */
+    public static String findImagePathToCardOrToken(CardDownloadData card) {
+        String pathWithoutExtension = buildImagePathToCardOrTokenWithoutExtension(card);
+
+        for (String extension : IMAGE_EXTENSIONS_BY_PREFERENCE) {
+            String possiblePath = pathWithoutExtension + extension;
+            try {
+                if (new TFile(possiblePath).exists()) {
+                    return possiblePath;
+                }
+            } catch (Exception e) {
+                // broken path or archive, try next extension
+            }
         }
 
-        return setPath + finalFileName;
+        // nothing found, so return default path (used for missing images info, nothing else)
+        return pathWithoutExtension + IMAGE_EXTENSION_DEFAULT;
+    }
+
+    /**
+     * Image paths of the same card or token in other supported formats (e.g., an old jpg image on a full webp image redownload)
+     * <p>
+     * Must be deleted on save to keep one image only, otherwise a loading can find the old image first and a re-download will be useless
+     *
+     * @param imagePath path to an image file (can be inside a zip archive)
+     * @return paths with other supported extensions (files may not exist) or empty list for unsupported extension
+     */
+    public static List<String> findOtherFormatImagePaths(String imagePath) {
+        List<String> res = new ArrayList<>();
+        for (String extension : IMAGE_EXTENSIONS_BY_PREFERENCE) {
+            if (imagePath.endsWith(extension)) {
+                String pathWithoutExtension = imagePath.substring(0, imagePath.length() - extension.length());
+                for (String otherExtension : IMAGE_EXTENSIONS_BY_PREFERENCE) {
+                    if (!otherExtension.equals(extension)) {
+                        res.add(pathWithoutExtension + otherExtension);
+                    }
+                }
+                break;
+            }
+        }
+        return res;
     }
 
     /**
@@ -176,7 +254,7 @@ public final class CardImageUtils {
                     card.getUsesVariousArt(),
                     card.getImageNumber());
             cardData.setToken(true);
-            imageFile = CardImageUtils.buildImagePathToCardOrToken(cardData);
+            imageFile = CardImageUtils.findImagePathToCardOrToken(cardData);
         } else {
             // images from cards repository (card + token from cards)
             CardDownloadData cardData = new CardDownloadData(
@@ -186,13 +264,13 @@ public final class CardImageUtils {
                     card.getUsesVariousArt(), // TODO: need to use usesVariousArt instead card?
                     card.getImageNumber()
             );
-            imageFile = CardImageUtils.buildImagePathToCardOrToken(cardData);
+            imageFile = CardImageUtils.findImagePathToCardOrToken(cardData);
         }
         return imageFile;
     }
 
     public static String generateFaceImagePath(String cardName, String setCode) {
-        return getImagesDir() + File.separator + "FACE" + File.separator + fixSetNameForWindows(setCode) + File.separator + prepareCardNameForFile(cardName) + ".jpg";
+        return getImagesDir() + File.separator + "FACE" + File.separator + fixSetNameForWindows(setCode) + File.separator + prepareCardNameForFile(cardName) + IMAGE_EXTENSION_DEFAULT;
     }
 
     public static final String DOWNLOADING_FOLDER = "downloading"; // temp files of the images download

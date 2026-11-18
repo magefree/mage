@@ -73,7 +73,7 @@ public final class ImageCache {
                 TFile tokenFile;
 
                 // try normal token
-                path = CardImageUtils.buildImagePathToCardOrToken(info);
+                path = CardImageUtils.findImagePathToCardOrToken(info);
                 tokenFile = getTFile(path);
 
                 // try token from card
@@ -82,7 +82,7 @@ public final class ImageCache {
                 if (tokenFile == null || !tokenFile.exists()) {
                     CardDownloadData tempInfo = new CardDownloadData(info);
                     tempInfo.setToken(false);
-                    path = CardImageUtils.buildImagePathToCardOrToken(info);
+                    path = CardImageUtils.findImagePathToCardOrToken(info);
                     tokenFile = getTFile(path);
                 }
 
@@ -93,7 +93,7 @@ public final class ImageCache {
                 }
             } else {
                 // CARD
-                path = CardImageUtils.buildImagePathToCardOrToken(info);
+                path = CardImageUtils.findImagePathToCardOrToken(info);
             }
 
             TFile file = getTFile(path);
@@ -274,6 +274,11 @@ public final class ImageCache {
         try {
             try (TFileInputStream inputStream = new TFileInputStream(file)) {
                 image = ImageIO.read(inputStream);
+            }
+            if (image == null) {
+                // ImageIO finds a reader by image data, not by file extension, so it can be
+                // a broken file or an unsupported format without a registered ImageIO reader
+                LOGGER.warn("Can't read image data, unsupported format or broken file: " + file);
             }
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);

@@ -563,6 +563,45 @@ public class DownloadPicturesServiceTest {
     }
 
     @Test
+    public void test_ReDownload_ImageInOtherFormatReplaced_ZipMode() throws Exception {
+        assertImageInOtherFormatReplacedOnReDownload(true);
+    }
+
+    @Test
+    public void test_ReDownload_ImageInOtherFormatReplaced_FolderMode() throws Exception {
+        setCachedSetting(PreferencesDialog.KEY_CARD_IMAGES_SAVE_TO_ZIP, "false");
+        assertImageInOtherFormatReplacedOnReDownload(false);
+    }
+
+    private void assertImageInOtherFormatReplacedOnReDownload(boolean zipMode) throws Exception {
+        // a re-download must replace an image in other format, otherwise the old image will be loaded first
+        // and the re-download is useless (old image is webp, test source saves jpg images)
+        writeImageFile("TS1", "Card 0", IMAGE_SIZE_BYTES);
+        CardDownloadData card = new CardDownloadData("Card 0", "TS1", "1", false, 0);
+        String webpPath = CardImageUtils.buildImagePathToCardOrToken(card, ".webp");
+        String jpgPath = CardImageUtils.buildImagePathToCardOrToken(card, ".jpg");
+        Assert.assertTrue("wrong test: old webp image must exist", new TFile(webpPath).exists());
+
+        TestDownloadService service = runDownload(cards("TS1", 0, 2), 10);
+
+        Assert.assertFalse("old image in other format must be deleted", new TFile(webpPath).exists());
+        Assert.assertTrue("new image must be saved", new TFile(jpgPath).exists());
+        Assert.assertEquals("new image must be loaded", jpgPath, CardImageUtils.findImagePathToCardOrToken(card));
+        assertLogContains(service, "REPLACED: ");
+        assertNoTempFiles();
+        assertMissing(service, 0);
+
+        if (zipMode) {
+            // real archive's data (not a mounted archive's state)
+            TVFS.umount();
+            File zipFile = new File(imagesDir, "TS1.zip");
+            Assert.assertEquals("old image must be deleted from archive", 0, countZipEntries(zipFile, "TS1/Card 0.full.webp"));
+            Assert.assertEquals("new image must be saved in archive", 1, countZipEntries(zipFile, "TS1/Card 0.full.jpg"));
+            Assert.assertEquals("archive must contain new images only", 2, countZipEntries(zipFile, "TS1/"));
+        }
+    }
+
+    @Test
     public void test_Check_MissingAndBrokenFilesFoundOnly() throws Exception {
         // check step: existing good images are skipped, missing and broken images (small files) are queued
         List<CardInfo> cards = new ArrayList<>();
@@ -784,7 +823,8 @@ public class DownloadPicturesServiceTest {
      */
     private int readImageFile(String setCode, String cardName) throws IOException {
         CardDownloadData card = new CardDownloadData(cardName, setCode, "1", false, 0);
-        TFile file = new TFile(CardImageUtils.buildImagePathToCardOrToken(card));
+        // a game searches all supported image formats, same as ImageCache (test source saves jpg images)
+        TFile file = new TFile(CardImageUtils.findImagePathToCardOrToken(card));
         if (!file.exists()) {
             return -1;
         }

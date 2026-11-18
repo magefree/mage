@@ -276,7 +276,7 @@ public class ScryfallImageSource implements CardImageSource {
             throw new MageException("Couldn't find image_uris in card's JSON data: " + jsonUrl);
         }
 
-        return JsonUtil.getAsString(jsonImages, "large");
+        return JsonUtil.getAsString(jsonImages, "display");
     }
 
     @Override
@@ -962,8 +962,9 @@ public class ScryfallImageSource implements CardImageSource {
 
     @Override
     public float getAverageSizeKb() {
-        // June 2024: MH3 set - 46450 Kb / 332 = 140 Kb
-        return 140f;
+        // June 2024: MH3 set - 46450 Kb / 332 = 140 Kb (jpg)
+        // Nov 2026: webp images are about 62% of the jpg size, so 140 Kb * 0.62 = 87 Kb
+        return 87f;
     }
 
     @Override
@@ -1065,11 +1066,13 @@ public class ScryfallImageSource implements CardImageSource {
         return ScryfallImageSupportTokens.findTokenLink(setCode, cardName, tokenNumber) != null;
     }
 
-    /**
-     * Image quality
-     */
     public String getImageQuality() {
-        return "large";
+        return "display";
+    }
+
+    @Override
+    public String getImageExtension() {
+        return ".webp";
     }
 
     @Override
