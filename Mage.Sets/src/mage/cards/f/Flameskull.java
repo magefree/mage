@@ -121,7 +121,7 @@ class FlameskullPlayEffect extends AsThoughEffectImpl {
 
 class FlameskullWatcher extends Watcher {
 
-    private final Map<MageObjectReference, Set<MageObjectReference>> morMap = new HashMap<>();
+    private final Map<UUID, Set<MageObjectReference>> abilityMap = new HashMap<>();
     private static final Set<MageObjectReference> emptySet = new HashSet<>();
 
     FlameskullWatcher() {
@@ -134,12 +134,12 @@ class FlameskullWatcher extends Watcher {
                 || event.getApprovingObject() == null) {
             return;
         }
-        MageObjectReference mor = event.getApprovingObject().getApprovingMageObjectReference();
+        UUID approvingAbilityId = event.getApprovingObject().getApprovingAbility().getId();
         Spell spell = game.getSpell(event.getTargetId());
-        if (mor == null || spell == null) {
+        if (approvingAbilityId == null || spell == null) {
             return;
         }
-        morMap.computeIfAbsent(mor, x -> new HashSet<>())
+        abilityMap.computeIfAbsent(approvingAbilityId, x -> new HashSet<>())
                 .add(new MageObjectReference(spell.getMainCard(), game, -1));
     }
 
@@ -147,8 +147,8 @@ class FlameskullWatcher extends Watcher {
         FlameskullWatcher watcher = game.getState().getWatcher(FlameskullWatcher.class);
         return watcher != null
                 && watcher
-                .morMap
-                .getOrDefault(new MageObjectReference(source.getSourceObject(game), game), emptySet)
+                .abilityMap
+                .getOrDefault(source.getId(), emptySet)
                 .stream()
                 .noneMatch(morSet::contains);
     }

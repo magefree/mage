@@ -131,8 +131,10 @@ class NashiMoonSagesScionWatcher extends Watcher {
         if (spell == null) {
             return;
         }
+        Ability approvingAbility = event.getApprovingObject().getApprovingAbility();
         morMap.getOrDefault(
-                event.getApprovingObject().getApprovingMageObjectReference(), Collections.emptySet()
+                new MageObjectReference(approvingAbility.getSourceId(), approvingAbility.getStackMomentSourceZCC(), game),
+                Collections.emptySet()
         ).removeIf(set -> set
                 .stream()
                 .anyMatch(mor -> mor.getSourceId().equals(spell.getMainCard().getId())

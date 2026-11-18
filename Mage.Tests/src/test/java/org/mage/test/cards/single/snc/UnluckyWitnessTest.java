@@ -68,4 +68,32 @@ public class UnluckyWitnessTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Sol Ring", 1);
         assertExileCount(playerA, "Sol Ring", 1);
     }
+
+    @Test
+    public void recastSourceDoesNotAddPermission() {
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.BATTLEFIELD, playerA, unluckyWitness);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.HAND, playerA, "Doom Blade");
+        addCard(Zone.HAND, playerA, "Raise Dead");
+        addCard(Zone.LIBRARY, playerA, "Sol Ring", 2);
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Doom Blade", unluckyWitness, true);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sol Ring", true);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Raise Dead", unluckyWitness, true);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, unluckyWitness, true);
+        checkPlayableAbility("no second card", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Sol Ring", false);
+
+        execute();
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+
+        assertPermanentCount(playerA, unluckyWitness, 1);
+        assertPermanentCount(playerA, "Sol Ring", 1);
+        assertExileCount(playerA, "Sol Ring", 1);
+    }
 }

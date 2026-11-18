@@ -93,7 +93,8 @@ class RaphaelMostAttitudeEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (!RaphaelMostAttitudeWatcher.checkPermission(affectedControllerId, source, game)) {
+        if (source.getSourcePermanentIfItStillExists(game) == null
+                || !RaphaelMostAttitudeWatcher.checkPermission(affectedControllerId, source, game)) {
             return false;
         }
 
