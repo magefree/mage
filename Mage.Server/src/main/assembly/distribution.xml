@@ -38,6 +38,7 @@
                 <include>org.mage:mage-game-brawlfreeforall</include>
                 <include>org.mage:mage-game-momirduel</include>
                 <include>org.mage:mage-game-momirfreeforall</include>
+                <include>org.mage:mage-game-mentalmagic</include>
                 <include>org.mage:mage-game-custompillaroftheparunsduel</include>
                 <include>org.mage:mage-tournament-boosterdraft</include>
                 <include>org.mage:mage-tournament-sealed</include>
@@ -69,6 +70,7 @@
                 <exclude>org.mage:mage-game-brawlfreeforall</exclude>
                 <exclude>org.mage:mage-game-momirduel</exclude>
                 <exclude>org.mage:mage-game-momirfreeforall</exclude>
+                <exclude>org.mage:mage-game-mentalmagic</exclude>
                 <exclude>org.mage:mage-game-custompillaroftheparunsduel</exclude>
                 <exclude>org.mage:mage-tournament-boosterdraft</exclude>
                 <exclude>org.mage:mage-tournament-sealed</exclude>

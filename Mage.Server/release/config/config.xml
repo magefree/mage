@@ -83,6 +83,10 @@
         <gameType name="Brawl Free For All" jar="mage-game-brawlfreeforall-${project.version}.jar" className="mage.game.BrawlFreeForAllMatch" typeName="mage.game.BrawlFreeForAllType"/>
         <gameType name="Momir Basic Two Player Duel" jar="mage-game-momirduel-${project.version}.jar" className="mage.game.MomirDuelMatch" typeName="mage.game.MomirDuelType"/>
         <gameType name="Momir Basic Free For All" jar="mage-game-momirfreeforall-${project.version}.jar" className="mage.game.MomirFreeForAllMatch" typeName="mage.game.MomirFreeForAllType"/>
+        <gameType name="Mental Magic Two Player Duel" jar="mage-game-mentalmagic-${project.version}.jar" className="mage.game.MentalMagicDuelMatch" typeName="mage.game.MentalMagicDuelType"/>
+        <gameType name="Mental Magic (Same Type) Two Player Duel" jar="mage-game-mentalmagic-${project.version}.jar" className="mage.game.MentalMagicSameTypeDuelMatch" typeName="mage.game.MentalMagicSameTypeDuelType"/>
+        <gameType name="Mental Magic Free For All" jar="mage-game-mentalmagic-${project.version}.jar" className="mage.game.MentalMagicFreeForAllMatch" typeName="mage.game.MentalMagicFreeForAllType"/>
+        <gameType name="Mental Magic (Same Type) Free For All" jar="mage-game-mentalmagic-${project.version}.jar" className="mage.game.MentalMagicSameTypeFreeForAllMatch" typeName="mage.game.MentalMagicSameTypeFreeForAllType"/>
         <gameType name="Custom Pillar of the Paruns Two Player Duel" jar="mage-game-custompillaroftheparunsduel-${project.version}.jar" className="mage.game.CustomPillarOfTheParunsDuelMatch" typeName="mage.game.CustomPillarOfTheParunsDuelType"/>
     </gameTypes>
     <tournamentTypes>
