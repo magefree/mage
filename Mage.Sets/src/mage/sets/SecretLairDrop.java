@@ -1743,6 +1743,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Primordial Hydra", 1330, Rarity.MYTHIC, mage.cards.p.PrimordialHydra.class));
         cards.add(new SetCardInfo("Prince of Thralls", "1549*", Rarity.MYTHIC, mage.cards.p.PrinceOfThralls.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prince of Thralls", 1549, Rarity.MYTHIC, mage.cards.p.PrinceOfThralls.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Princess Irulan Corrino", 2919, Rarity.MYTHIC, mage.cards.p.PrincessIrulanCorrino.class));
         cards.add(new SetCardInfo("Prismatic Ending", 1868, Rarity.RARE, mage.cards.p.PrismaticEnding.class));
         cards.add(new SetCardInfo("Prismatic Omen", 1104, Rarity.RARE, mage.cards.p.PrismaticOmen.class));
         cards.add(new SetCardInfo("Prismatic Vista", 2699, Rarity.RARE, mage.cards.p.PrismaticVista.class));
