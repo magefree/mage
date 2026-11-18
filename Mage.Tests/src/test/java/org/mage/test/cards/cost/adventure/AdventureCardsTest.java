@@ -2,6 +2,8 @@ package org.mage.test.cards.cost.adventure;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.cards.AdventureCard;
+import mage.cards.repository.CardRepository;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
@@ -12,6 +14,20 @@ public class AdventureCardsTest extends CardTestPlayerBase {
 
     String abilityBrazenBorrowerMainCast = "Cast Brazen Borrower";
     String abilityBrazenBorrowerAdventureCast = "Cast Petty Theft";
+
+    @Test
+    public void testAdventureReminderTextUsesParentCardType() {
+        assertAdventureReminderText("Curious Pair", "cast the creature later from exile");
+        assertAdventureReminderText("Monster Manual", "cast the artifact later from exile");
+        assertAdventureReminderText("Promise of Aclazotz", "cast the enchantment later from exile");
+        assertAdventureReminderText("Jidoor, Aristocratic Capital", "play the land later from exile");
+    }
+
+    private void assertAdventureReminderText(String cardName, String expectedText) {
+        AdventureCard card = (AdventureCard) CardRepository.instance.findCard(cardName).createCard();
+        String rule = card.getSpellCard().getSpellAbility().getRule(false);
+        Assert.assertTrue(cardName + " should say \"" + expectedText + "\"", rule.contains(expectedText));
+    }
 
     @Test
     public void testCastTreatsToShare() {
