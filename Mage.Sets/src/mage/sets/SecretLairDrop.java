@@ -192,6 +192,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Baral, Chief of Compliance", 1447, Rarity.RARE, mage.cards.b.BaralChiefOfCompliance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Baral, Chief of Compliance", 2168, Rarity.RARE, mage.cards.b.BaralChiefOfCompliance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Barktooth Warbeard", 1931, Rarity.RARE, mage.cards.b.BarktoothWarbeard.class));
+        cards.add(new SetCardInfo("Baron Vladimir Harkonnen", 2915, Rarity.MYTHIC, mage.cards.b.BaronVladimirHarkonnen.class));
         cards.add(new SetCardInfo("Barrowgoyf", 2702, Rarity.RARE, mage.cards.b.Barrowgoyf.class));
         cards.add(new SetCardInfo("Basal Sliver", 629, Rarity.RARE, mage.cards.b.BasalSliver.class));
         cards.add(new SetCardInfo("Basilisk Collar", 1920, Rarity.RARE, mage.cards.b.BasiliskCollar.class, NON_FULL_USE_VARIOUS));
