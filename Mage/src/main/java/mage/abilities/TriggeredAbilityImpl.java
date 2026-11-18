@@ -11,6 +11,7 @@ import mage.game.Game;
 import mage.game.events.BatchEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -80,23 +81,31 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     // Used for triggers with a per-turn limit.
     private String getKeyLastTurnTriggered(Game game) {
-        return CardUtil.getCardZoneString(
-                "lastTurnTriggered|" + getOriginalId(), getSourceId(), game
-        );
+        return this.getTriggerLimitKey("lastTurnTriggered|", game);
     }
 
     // Used for triggers with a per-turn limit.
     private String getKeyLastTurnTriggeredCount(Game game) {
-        return CardUtil.getCardZoneString(
-                "lastTurnTriggeredCount|" + getOriginalId(), getSourceId(), game
-        );
+        return this.getTriggerLimitKey("lastTurnTriggeredCount|", game);
     }
 
     // Used for triggers with a per-game limit.
     private String getKeyGameTriggeredCount(Game game) {
-        return CardUtil.getCardZoneString(
-                "gameTriggeredCount|" + getOriginalId(), getSourceId(), game
-        );
+        return this.getTriggerLimitKey("gameTriggeredCount|", game);
+    }
+
+    private String getTriggerLimitKey(String prefix, Game game) {
+        if (this.isLeavesTheBattlefieldTrigger()
+                && game.checkShortLivingLKI(this.getSourceId(), Zone.BATTLEFIELD)
+                && !Zone.BATTLEFIELD.match(game.getState().getZone(this.getSourceId()))) {
+            // look back in time (603.10a)
+            MageObject lki = game.getLastKnownInformation(this.getSourceId(), Zone.BATTLEFIELD);
+            if (lki instanceof PermanentCard) {
+                return CardUtil.getObjectZoneString(prefix + this.getOriginalId(), this.getSourceId(), game, lki.getZoneChangeCounter(game), false);
+            }
+        }
+        // tokens have no card
+        return CardUtil.getCardZoneString(prefix + this.getOriginalId(), this.getSourceId(), game);
     }
 
     private void updateTurnCount(Game game) {
