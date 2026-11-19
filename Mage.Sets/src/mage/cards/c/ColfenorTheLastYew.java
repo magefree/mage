@@ -21,7 +21,6 @@ import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.GenericTargetAdjuster;
 
@@ -68,10 +67,9 @@ class ColfenorTheLastYewTargetAdjuster extends GenericTargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         Permanent permanent = (Permanent)ability.getEffects().get(0).getValue("creatureDied");
         ability.getTargets().clear();
-        Target newTarget = blueprintTarget.copy();
         FilterCard filterCard = new FilterCreatureCard("creature card with toughness less than " + permanent.getToughness().getValue());
         filterCard.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, permanent.getToughness().getValue()));
         filterCard.add(Predicates.not(new MageObjectReferencePredicate(new MageObjectReference(permanent, game))));
-        ability.addTarget(newTarget);
+        ability.addTarget(new TargetCardInYourGraveyard(0, 1, filterCard));
     }
 }
