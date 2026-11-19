@@ -225,4 +225,40 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, aLight, 1); // should have gained control of Angel
         assertPermanentCount(playerB, aLight, 0); // Angel no longer under opponent's control
     }
+
+    @Test
+    public void testSacrificeSource() {
+        // Daemogoth Woe-Eater {1}{B}{B/G}{G} 7/6
+        // At the beginning of your upkeep, sacrifice a creature.
+        // When you sacrifice Daemogoth Woe-Eater, each opponent discards a card, you draw a card, and you gain 2 life.
+        addCard(Zone.BATTLEFIELD, playerB, "Daemogoth Woe-Eater");
+
+        // Slave of Bolas {3}{U/R}{B}
+        // Gain control of target creature. Untap that creature. It gains haste until end of turn.
+        // Sacrifice it at the beginning of the next end step.
+        addCard(Zone.HAND, playerA, "Slave of Bolas");
+
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+
+        addCard(Zone.HAND, playerA, "Mountain", 2);
+        addCard(Zone.HAND, playerB, "Plains", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Slave of Bolas", "Daemogoth Woe-Eater");
+
+        addTarget(playerB, "Plains");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerB, "Daemogoth Woe-Eater", 1);
+
+        assertHandCount(playerA, 3);
+        assertHandCount(playerB, 1);
+
+        assertLife(playerA, 22);
+        assertLife(playerB, 20);
+    }
 }
