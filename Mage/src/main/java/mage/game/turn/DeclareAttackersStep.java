@@ -33,6 +33,10 @@ public class DeclareAttackersStep extends Step {
     public void beginStep(Game game, UUID activePlayerId) {
         super.beginStep(game, activePlayerId);
         game.getTurn().setDeclareAttackersStepStarted(true);
+        // 508.1b: attackers and their targets are announced when attackers are declared, so
+        // the possible defenders must be up to date here (a planeswalker that entered during
+        // the beginning of combat step can be attacked)
+        game.getCombat().setDefenders(game);
         game.getCombat().selectAttackers(game);
     }
 
