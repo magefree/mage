@@ -95,7 +95,6 @@ public class ArenaBeginnerSet extends ExpansionSet {
         cards.add(new SetCardInfo("Rampaging Brontodon", 102, Rarity.RARE, mage.cards.r.RampagingBrontodon.class));
         cards.add(new SetCardInfo("Reduce to Ashes", 83, Rarity.COMMON, mage.cards.r.ReduceToAshes.class));
         cards.add(new SetCardInfo("Riddlemaster Sphinx", 31, Rarity.RARE, mage.cards.r.RiddlemasterSphinx.class));
-        cards.add(new SetCardInfo("Rise from the Grave", "56b", Rarity.UNCOMMON, mage.cards.r.RiseFromTheGrave.class));
         cards.add(new SetCardInfo("River's Favor", 32, Rarity.COMMON, mage.cards.r.RiversFavor.class));
         cards.add(new SetCardInfo("Rumbling Baloth", 103, Rarity.COMMON, mage.cards.r.RumblingBaloth.class));
         cards.add(new SetCardInfo("Sanctuary Cat", 17, Rarity.COMMON, mage.cards.s.SanctuaryCat.class));
@@ -106,7 +105,6 @@ public class ArenaBeginnerSet extends ExpansionSet {
         cards.add(new SetCardInfo("Sentinel Spider", 104, Rarity.UNCOMMON, mage.cards.s.SentinelSpider.class));
         cards.add(new SetCardInfo("Serra Angel", 18, Rarity.UNCOMMON, mage.cards.s.SerraAngel.class));
         cards.add(new SetCardInfo("Shock", 84, Rarity.COMMON, mage.cards.s.Shock.class));
-        cards.add(new SetCardInfo("Shorecomber Crab", "32a", Rarity.COMMON, mage.cards.s.ShorecomberCrab.class));
         cards.add(new SetCardInfo("Shrine Keeper", 19, Rarity.COMMON, mage.cards.s.ShrineKeeper.class));
         cards.add(new SetCardInfo("Siege Dragon", 85, Rarity.RARE, mage.cards.s.SiegeDragon.class));
         cards.add(new SetCardInfo("Skeleton Archer", 61, Rarity.COMMON, mage.cards.s.SkeletonArcher.class));

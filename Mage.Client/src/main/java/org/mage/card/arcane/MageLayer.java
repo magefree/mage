@@ -53,6 +53,8 @@ public class MageLayer extends MageCard {
     JPanel spaceBottom;
 
     // drawing spaces, you must ignore it in animations and other calcs
+    private static final int ANIMATION_OUTER_SPACE_PADDING_PERCENT = 25; // of the card height, must be enough for icons outside the card
+
     MageCardSpace lastOuterSpace = MageCardSpace.empty;
 
     // card icons
@@ -244,6 +246,26 @@ public class MageLayer extends MageCard {
         return new MageCardSpace(0, 0, Math.round(renderHeight * 0f), 0);
     }
 
+    /**
+     * Extra space around the card for animations and icons:
+     * - tap/flip rotates the card around (width / 2, height - width / 2) by 90, 180 (flip cards) or 270 (tapped flip)
+     * degrees, so any side can get the farthest corner (top corners are the farthest from the rotation center);
+     * - icons panels are drawn partly outside the card (see CardIconsPanel), so add a padding on all sides
+     * (it rotates with the card too)
+     * <p>
+     * Old version used x2 of width/height on each side (x5 component size, slow repaints), see AnimationTest for
+     * the geometry checks
+     */
+    static MageCardSpace getAnimationOuterSpace(int width, int height) {
+        double originX = width / 2d;
+        double originY = height - originX;
+        // the farthest point of the card from the rotation center (top corners) + icons padding
+        double radius = Math.hypot(originX, originY) + height * ANIMATION_OUTER_SPACE_PADDING_PERCENT / 100.0;
+        int leftRightBottom = (int) Math.ceil(radius - originX); // left, right and bottom sides are at the same distance (width / 2)
+        int top = (int) Math.ceil(radius - originY);
+        return new MageCardSpace(leftRightBottom, leftRightBottom, top, leftRightBottom);
+    }
+
     @Override
     public void setCardBounds(int x, int y, int width, int height) {
         // base idea: child layers should not know about parent layer
@@ -252,7 +274,7 @@ public class MageLayer extends MageCard {
         // * scale the current layer to fit additional elemenst like icons
         // * draw child layer with new sizes
         //
-        // animation logic (maybe it can be change in the future):
+        // animation logic (maybe it can be changed in the future):
         // * animation implemented as g2d graphic context scale in Paint() method
         // * all layers and elements must be moved as one object
         // * only the main panel (child) can do a calcs for the animation (so send parent sizes to recalc it)
@@ -264,9 +286,7 @@ public class MageLayer extends MageCard {
             MageCardSpace innerSpace = getAdditionalSpaces(width, height);
 
             // extra space for animation and other drawing
-            // WTF, I'm tired with render calcs, so make BIG draw spaces for any needs
-            MageCardSpace outerSpace = new MageCardSpace(width * 2, width * 2, height * 2, height * 2);
-            //MageCardSpace outerSpace = new MageCardSpace(50, 30, 150, 20);
+            MageCardSpace outerSpace = getAnimationOuterSpace(width, height);
             this.lastOuterSpace = outerSpace;
 
             // construct new spaces (outer + inner)

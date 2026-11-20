@@ -95,8 +95,8 @@ class FlamescrollCelebrantTriggeredAbility extends TriggeredAbilityImpl {
         if (!game.getOpponents(event.getPlayerId()).contains(getControllerId())) {
             return false;
         }
-        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-        if (stackAbility.getStackAbility().isManaActivatedAbility()) {
+        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getTargetId());
+        if (stackAbility == null || stackAbility.getStackAbility().isManaActivatedAbility()) {
             return false;
         }
         getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));

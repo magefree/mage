@@ -72,6 +72,8 @@ class PoxEffect extends OneShotEffect {
                     player.loseLife(lifeToLose, game, source, false);
                 }
             }
+            game.processAction(); // each step is a separate event, e.g. for one or more triggers
+
             // then discards a third of the cards in their hand,
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
@@ -82,6 +84,8 @@ class PoxEffect extends OneShotEffect {
                     }
                 }
             }
+            game.processAction(); // each step is a separate event, e.g. for one or more triggers
+
             // then sacrifices a third of the creatures they control,
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
@@ -100,6 +104,8 @@ class PoxEffect extends OneShotEffect {
                     }
                 }
             }
+            game.processAction(); // each step is a separate event, e.g. for one or more triggers
+
             // then sacrifices a third of the lands they control.
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);

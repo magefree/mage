@@ -79,7 +79,7 @@ public class BlightAbility extends StaticAbility implements OptionalAdditionalSo
 
         additionalCost.activate();
         ability.addCost(additionalCost.copy());
-        CardUtil.setSourceCostsTag(game, ability, BLIGHT_ACTIVATION_VALUE_KEY, null);
+        ability.setCostsTag(BLIGHT_ACTIVATION_VALUE_KEY, null);
     }
 
     @Override

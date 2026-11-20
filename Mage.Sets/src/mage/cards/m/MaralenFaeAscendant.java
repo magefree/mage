@@ -184,7 +184,7 @@ class MaralenFaeAscendantCastFromExileEffect extends AsThoughEffectImpl {
                 source.getSourceId(),
                 source.getSourceObject(game).getZoneChangeCounter(game)
         );
-        if (!exileWatcher.isExiledThisTurn(exileZone, card.getId())) {
+        if (!exileWatcher.isExiledThisTurn(exileZone, card.getMainCard().getId())) {
             return false;
         }
         // Check mana value restriction and allow to play for free

@@ -67,7 +67,7 @@ enum SpinerockKnollCondition implements Condition {
         if (watcher == null) {
             return false;
         }
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+        for (UUID opponentId : game.getOpponents(source.getControllerId(), false)) {
             if (watcher.getDamageReceived(opponentId) >= 7) {
                 return true;
             }

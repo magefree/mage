@@ -4,7 +4,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -12,8 +11,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -21,6 +20,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Zone;
 
 /**
  *
@@ -51,9 +51,8 @@ public final class BolgsCompany extends CardImpl {
         )));
 
         // {T}, Sacrifice another Goblin: Add {B}{R}.
-        Ability ability = new SimpleActivatedAbility(
-            new BasicManaEffect(new Mana(0, 0, 1, 1, 0, 0, 0, 0)),
-            new TapSourceCost()
+        Ability ability = new SimpleManaAbility(
+            Zone.BATTLEFIELD, new Mana(0, 0, 1, 1, 0, 0, 0, 0), new TapSourceCost()
         );
         ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);

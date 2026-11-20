@@ -17,6 +17,7 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
 import mage.util.CardUtil;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -73,11 +74,14 @@ class ThievesAuctionEffect extends OneShotEffect {
         }
 
         // Exile all nontoken permanents.
-        Cards exiledCards = new CardsImpl();
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-            exiledCards.add(permanent);
+        List<Permanent> toExile = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
+        for (Permanent permanent : toExile) {
             controller.moveCardsToExile(permanent, source, game, true, CardUtil.getCardExileZoneId(game, source.getSourceId()), "Thieves' Auction");
         }
+        game.processAction();
+        // a permanent can leave the battlefield as other cards: a side of a double faced card becomes its main card,
+        // and a merged (mutated) permanent becomes one card per component (rule 731.3c)
+        Cards exiledCards = new CardsImpl(CardUtil.getAllCardsFromPermanentsLeftBattlefield(toExile, game));
 
         // Starting with you, each player
         PlayerList playerList = game.getState().getPlayersInRange(controller.getId(), game);

@@ -177,7 +177,6 @@ public interface Ability extends Controllable, Serializable {
      * Set tag for this ability to the value, initializes this ability's tags map if needed.
      * Should only be used from an {@link ActivatedAbility} (including {@link SpellAbility})
      */
-    @Deprecated // warning, for game engine usage only
     void setCostsTag(String tag, Object value);
 
     /**

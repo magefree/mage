@@ -30,7 +30,7 @@ public final class VenomsHunger extends CardImpl {
 
         // This spell costs {2} less to cast if you control a Villain.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(2, condition).setCanWorksOnStackOnly(true)
+                Zone.ALL, new SpellCostReductionSourceEffect(2, condition)
         ).setRuleAtTheTop(true));
 
         // Destroy target creature. You gain 2 life.

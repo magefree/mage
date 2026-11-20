@@ -41,7 +41,6 @@ import mage.game.permanent.PermanentMeld;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.Target;
@@ -1998,27 +1997,6 @@ public final class CardUtil {
         return defaultValue;
     }
 
-    /**
-     * Set a costs tag to the source ability on the stack (search it by id).
-     * Use it in code that runs after a mana payment step (non-mana costs, after activate, etc)
-     *
-     * @param game
-     * @param source
-     * @param tag    The tag's string identifier
-     * @param value  The tag's value
-     */
-    public static void setSourceCostsTag(Game game, Ability source, String tag, Object value) {
-        // warning, it's important to use id to find real object 
-        // (setSourceCostsTag can be wrongly called from outdated game state, e.g. after cost payment cancel's rollback)
-        StackObject stackObject = game.getStack().getStackObject(source.getId());
-        if (stackObject != null) {
-            stackObject.getStackAbility().setCostsTag(tag, value);
-        } else {
-            // ability without stack
-            source.setCostsTag(tag, value);
-        }
-    }
-
     public static int getSourceCostsTagX(Game game, Ability source, int defaultValue) {
         return getSourceCostsTag(game, source, "X", defaultValue);
     }
@@ -2562,6 +2540,19 @@ public final class CardUtil {
             res.addAll(((BatchEvent<?>) event).getTargetIds());
         } else if (event != null && event.getTargetId() != null) {
             res.add(event.getTargetId());
+        }
+        return res;
+    }
+
+    /**
+     * One single event can be a batch (contain multiple events)
+     */
+    public static Set<UUID> getEventSources(GameEvent event) {
+        Set<UUID> res = new HashSet<>();
+        if (event instanceof BatchEvent) {
+            res.addAll(((BatchEvent<?>) event).getSourceIds());
+        } else if (event != null && event.getSourceId() != null) {
+            res.add(event.getSourceId());
         }
         return res;
     }

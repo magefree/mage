@@ -5,9 +5,13 @@ import mage.abilities.Ability;
 import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.Sets;
 import mage.cards.ModalDoubleFacedCard;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardScanner;
+import mage.collation.BoosterCollator;
+import mage.collation.CardRun;
+import mage.collation.Rotater;
 import mage.constants.Rarity;
 import mage.constants.SubType;
 import mage.game.draft.ReshuffledSet;
@@ -20,6 +24,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.MageTestPlayerBase;
 
+import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -522,6 +527,74 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
             assertEquals("SWS booster must contain 15 cards", 15, StarWars.getInstance().createBooster().size());
             assertEquals("MH3 booster must contain 14 cards", 14, ModernHorizons3.getInstance().createBooster().size());
         }
+    }
+
+    @Test
+    public void test_Collators_AllCardNumbersMustExist() {
+        // collator's card numbers must be same as set's card numbers, otherwise booster generation fails with NPE
+        // (example: BRO meld cards used "163a" in collator, but "163" in set)
+        List<String> errors = new ArrayList<>();
+        for (ExpansionSet set : Sets.getInstance().values()) {
+            BoosterCollator collator = set.createCollator();
+            if (collator == null) {
+                continue;
+            }
+
+            // booster map is generated on first booster
+            try {
+                set.createBooster();
+            } catch (Exception ignore) {
+                // check it below
+            }
+            Set<String> boosterNumbers = getBoosterMap(set).keySet();
+            Set<String> missing = new TreeSet<>();
+            getCollatorNumbers(collator).stream()
+                    .filter(number -> !boosterNumbers.contains(number))
+                    .forEach(missing::add);
+            if (!missing.isEmpty()) {
+                errors.add(set.getCode() + " - " + set.getName() + ": unknown card numbers in collator " + missing);
+            }
+        }
+        errors.forEach(System.out::println);
+        assertEquals("Found collators with unknown card numbers, see logs above", 0, errors.size());
+    }
+
+    @SuppressWarnings("unchecked")
+    private static Map<String, CardInfo> getBoosterMap(ExpansionSet set) {
+        // workaround to get inner data instead refactor all collators
+        try {
+            Field field = ExpansionSet.class.getDeclaredField("inBoosterMap");
+            field.setAccessible(true);
+            return (Map<String, CardInfo>) field.get(set);
+        } catch (ReflectiveOperationException e) {
+            throw new IllegalStateException("Can't find booster map", e);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static Set<String> getCollatorNumbers(BoosterCollator collator) {
+        // workaround to get inner data instead refactor all collators
+        // all card runs of the collator (it uses fields in each set's collator class)
+        Set<String> res = new HashSet<>();
+        try {
+            Field itemsField = Rotater.class.getDeclaredField("items");
+            itemsField.setAccessible(true);
+            for (Class<?> clazz = collator.getClass(); clazz != null; clazz = clazz.getSuperclass()) {
+                for (Field field : clazz.getDeclaredFields()) {
+                    if (!CardRun.class.isAssignableFrom(field.getType())) {
+                        continue;
+                    }
+                    field.setAccessible(true);
+                    CardRun run = (CardRun) field.get(collator);
+                    if (run != null) {
+                        res.addAll((List<String>) itemsField.get(run));
+                    }
+                }
+            }
+        } catch (ReflectiveOperationException e) {
+            throw new IllegalStateException("Can't read collator's card numbers", e);
+        }
+        return res;
     }
 
     @Test

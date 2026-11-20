@@ -54,7 +54,7 @@ enum WhiplashTrapCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         PermanentsEnteredBattlefieldWatcher watcher = game.getState().getWatcher(PermanentsEnteredBattlefieldWatcher.class);
         if (watcher != null) {
-            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+            for (UUID opponentId : game.getOpponents(source.getControllerId(), false)) {
                 List<Permanent> permanents = watcher.getThisTurnEnteringPermanents(opponentId);
                 if (permanents != null) {
                     int count = 0;

@@ -27,6 +27,8 @@ import mage.target.targetpointer.FixedTarget;
 
 import java.util.Set;
 import java.util.UUID;
+import mage.util.CardUtil;
+import mage.game.permanent.Permanent;
 
 /**
  * @author LePwnerer
@@ -105,8 +107,12 @@ class WakeToSlaughterEffect extends OneShotEffect {
                     player.moveCards(cardToHand, Zone.HAND, source, game);
                 } else {
                     player.moveCards(card, Zone.BATTLEFIELD, source, game);
+                    Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+                    if (permanent == null) {
+                        continue;
+                    }
 
-                    FixedTarget blueprintTarget = new FixedTarget(card, game);
+                    FixedTarget blueprintTarget = new FixedTarget(permanent, game);
                     ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfGame);
                     effect.setTargetPointer(blueprintTarget.copy());
                     game.addEffect(effect, source);

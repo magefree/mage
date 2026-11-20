@@ -18,6 +18,11 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
 
 import java.util.UUID;
+import mage.util.CardUtil;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import mage.game.permanent.Permanent;
 
 /**
  * @author TheElk801
@@ -69,13 +74,17 @@ class WakeThePastEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(cards, Zone.BATTLEFIELD, source, game);
-        cards.removeIf(uuid -> game.getState().getZone(uuid) != Zone.BATTLEFIELD);
-        if (cards.isEmpty()) {
+        List<Permanent> permanents = cards.getCards(game)
+                .stream()
+                .map(card -> CardUtil.getPermanentFromCardPutToBattlefield(card, game))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        if (permanents.isEmpty()) {
             return true;
         }
         game.addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn
-        ).setTargetPointer(new FixedTargets(cards, game)), source);
+        ).setTargetPointer(new FixedTargets(permanents, game)), source);
         return true;
     }
 }

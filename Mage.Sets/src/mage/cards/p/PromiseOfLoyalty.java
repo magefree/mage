@@ -82,7 +82,7 @@ class PromiseOfLoyaltyEffect extends OneShotEffect {
             permanent.addCounters(CounterType.VOW.createInstance(), playerId, source, game);
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_PERMANENT_CREATURE, source.getSourceId(), game
+                StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game
         )) {
             if (permanent == null) {
                 continue;

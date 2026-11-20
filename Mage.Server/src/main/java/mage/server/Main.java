@@ -99,6 +99,11 @@ public final class Main {
         logger.info("Java version: " + System.getProperty("java.version"));
         DebugUtil.printLogsInfo(logger);
         logger.info("Default charset: " + Charset.defaultCharset());
+        if (!Charset.defaultCharset().toString().equals("UTF-8")) {
+            logger.warn("WARNING, bad charset. Some texts with non-ascii symbols can be broken (decks, server messages). You must:");
+            logger.warn("* Open launcher -> settings -> java -> server java options");
+            logger.warn("* Insert at the the end: -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8");
+        }
         String adminPassword = "";
 
         // enable test mode by default for developer build (if you run it from source code)

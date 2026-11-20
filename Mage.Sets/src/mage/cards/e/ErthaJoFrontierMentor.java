@@ -83,7 +83,7 @@ class ErthaJoFrontierMentorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
+        StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
         if (stackObject == null
                 || !event.getPlayerId().equals(getControllerId())
                 || !filter.match(stackObject, getControllerId(), this, game)

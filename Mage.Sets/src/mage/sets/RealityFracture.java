@@ -54,7 +54,9 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Break Under Pressure", 50, Rarity.UNCOMMON, mage.cards.b.BreakUnderPressure.class));
         cards.add(new SetCardInfo("Budding Insurgent", 99, Rarity.COMMON, mage.cards.b.BuddingInsurgent.class));
         cards.add(new SetCardInfo("Campus Crier", 4, Rarity.COMMON, mage.cards.c.CampusCrier.class));
-        cards.add(new SetCardInfo("Carnivorous Cultivator", 437, Rarity.RARE, mage.cards.c.CarnivorousCultivator.class));
+        cards.add(new SetCardInfo("Carnivorous Cultivator", 100, Rarity.RARE, mage.cards.c.CarnivorousCultivator.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Carnivorous Cultivator", 430, Rarity.RARE, mage.cards.c.CarnivorousCultivator.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Carnivorous Cultivator", 437, Rarity.RARE, mage.cards.c.CarnivorousCultivator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cast Away Doubt", 51, Rarity.COMMON, mage.cards.c.CastAwayDoubt.class));
         cards.add(new SetCardInfo("Chandra's Emberling", 76, Rarity.COMMON, mage.cards.c.ChandrasEmberling.class));
         cards.add(new SetCardInfo("Chandra, Chill of Compliance", 212, Rarity.MYTHIC, mage.cards.c.ChandraChillOfCompliance.class, NON_FULL_USE_VARIOUS));
@@ -207,6 +209,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 387, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Jace, Reality Sculptor", 216, Rarity.RARE, mage.cards.j.JaceRealitySculptor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jace, Reality Sculptor", 300, Rarity.RARE, mage.cards.j.JaceRealitySculptor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jace's Machinations", 32, Rarity.RARE, mage.cards.j.JacesMachinations.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jace's Machinations", 337, Rarity.RARE, mage.cards.j.JacesMachinations.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jiang Yanggu, Alone", 246, Rarity.UNCOMMON, mage.cards.j.JiangYangguAlone.class));
         cards.add(new SetCardInfo("Jiang Yanggu, Never Alone", 261, Rarity.UNCOMMON, mage.cards.j.JiangYangguNeverAlone.class));
         cards.add(new SetCardInfo("Karn, Argent Defender", 279, Rarity.RARE, mage.cards.k.KarnArgentDefender.class, NON_FULL_USE_VARIOUS));
@@ -334,6 +338,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Samut, Hazoret's Champion", 311, Rarity.RARE, mage.cards.s.SamutHazoretsChampion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Samut, Tyrant of Naktamun", 220, Rarity.RARE, mage.cards.s.SamutTyrantOfNaktamun.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Samut, Tyrant of Naktamun", 302, Rarity.RARE, mage.cards.s.SamutTyrantOfNaktamun.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sanctum Lurker", 342, Rarity.RARE, mage.cards.s.SanctumLurker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sanctum Lurker", 64, Rarity.RARE, mage.cards.s.SanctumLurker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Screeching Soulbreaker", 65, Rarity.COMMON, mage.cards.s.ScreechingSoulbreaker.class));
         cards.add(new SetCardInfo("Semester Foreseer", 39, Rarity.COMMON, mage.cards.s.SemesterForeseer.class));
         cards.add(new SetCardInfo("Shatterwing Pegasus", 21, Rarity.COMMON, mage.cards.s.ShatterwingPegasus.class));
@@ -352,7 +358,8 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Something Worth Saving", 114, Rarity.COMMON, mage.cards.s.SomethingWorthSaving.class));
         cards.add(new SetCardInfo("Sphinx of False Conclusions", 338, Rarity.RARE, mage.cards.s.SphinxOfFalseConclusions.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sphinx of False Conclusions", 40, Rarity.RARE, mage.cards.s.SphinxOfFalseConclusions.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sphinx's Approach", 41, Rarity.COMMON, mage.cards.s.SphinxsApproach.class));
+        cards.add(new SetCardInfo("Sphinx's Approach", 41, Rarity.COMMON, mage.cards.s.SphinxsApproach.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sphinx's Approach", 442, Rarity.RARE, mage.cards.s.SphinxsApproach.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stingcaster Mage", 329, Rarity.MYTHIC, mage.cards.s.StingcasterMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stingcaster Mage", 447, Rarity.MYTHIC, mage.cards.s.StingcasterMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stingcaster Mage", 457, Rarity.MYTHIC, mage.cards.s.StingcasterMage.class, NON_FULL_USE_VARIOUS));
@@ -415,6 +422,10 @@ public final class RealityFracture extends ExpansionSet {
         cards.add(new SetCardInfo("Traxos, Scourge Eternal", 280, Rarity.UNCOMMON, mage.cards.t.TraxosScourgeEternal.class));
         cards.add(new SetCardInfo("Twinned Vision", 157, Rarity.COMMON, mage.cards.t.TwinnedVision.class));
         cards.add(new SetCardInfo("Twisted Fates", 158, Rarity.UNCOMMON, mage.cards.t.TwistedFates.class));
+        cards.add(new SetCardInfo("Uldaros Theorix", 159, Rarity.MYTHIC, mage.cards.u.UldarosTheorix.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Uldaros Theorix", 358, Rarity.MYTHIC, mage.cards.u.UldarosTheorix.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Uldaros Theorix", 411, Rarity.MYTHIC, mage.cards.u.UldarosTheorix.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Uldaros Theorix", 421, Rarity.MYTHIC, mage.cards.u.UldarosTheorix.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Undulating Witness", 45, Rarity.COMMON, mage.cards.u.UndulatingWitness.class));
         cards.add(new SetCardInfo("Unflinching Hortimancer", 23, Rarity.COMMON, mage.cards.u.UnflinchingHortimancer.class));
         cards.add(new SetCardInfo("Unsummon", 46, Rarity.COMMON, mage.cards.u.Unsummon.class));

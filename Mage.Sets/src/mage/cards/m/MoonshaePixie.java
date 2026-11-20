@@ -121,7 +121,7 @@ class MoonshaePixieWatcher extends Watcher {
                 .getWatcher(MoonshaePixieWatcher.class)
                 .players
                 .stream()
-                .filter(game.getOpponents(playerId)::contains)
+                .filter(game.getOpponents(playerId, false)::contains)
                 .mapToInt(x -> 1)
                 .sum();
     }

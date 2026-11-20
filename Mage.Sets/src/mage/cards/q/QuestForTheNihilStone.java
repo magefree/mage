@@ -67,11 +67,7 @@ class QuestForTheNihilStoneTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent quest = game.getPermanent(super.getSourceId());
-        if (quest == null) {
-            Permanent questLKI = (Permanent) game.getLastKnownInformation(super.getSourceId(), Zone.BATTLEFIELD);
-            quest = questLKI;
-        }
+        Permanent quest = game.getPermanentOrLKIBattlefield(super.getSourceId());
         if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Player opponent = game.getPlayer(event.getPlayerId());
             if (opponent != null

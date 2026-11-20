@@ -1,6 +1,8 @@
 package mage.server.tournament;
 
 import mage.MageException;
+import mage.cards.Card;
+import mage.cards.RateCard;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
 import mage.cards.decks.DeckValidatorFactory;
@@ -24,12 +26,15 @@ import mage.server.draft.DraftController;
 import mage.server.managers.ManagerFactory;
 import mage.server.managers.TableManager;
 import mage.util.ThreadUtils;
+import mage.utils.LimitedDeckBuilder;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;
 import mage.view.TournamentView;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.UUID;
@@ -349,6 +354,17 @@ public class TournamentController {
         session.updateDeck(deck, ignoreMainBasicLands);
     }
 
+    private static Deck buildDeckFromPool(Deck deck, int deckMinSize) {
+        List<Card> pool = new ArrayList<>(deck.getSideboard());
+        Deck newDeck = LimitedDeckBuilder.buildDeck(deckMinSize, pool, RateCard.chooseDeckColors(pool));
+        newDeck.setName(deck.getName());
+        // other cards stay in the sideboard
+        pool.stream()
+                .filter(card -> !newDeck.getCards().contains(card))
+                .forEach(card -> newDeck.getSideboard().add(card));
+        return newDeck;
+    }
+
     public void timeout(UUID userId) {
         if (userPlayerMap.containsKey(userId)) {
             UUID playerId = userPlayerMap.get(userId);
@@ -356,6 +372,15 @@ public class TournamentController {
             if (tournamentPlayer.getDeck() != null) {
                 DeckValidator deckValidator = DeckValidatorFactory.instance.createDeckValidator(tournament.getOptions().getMatchOptions().getDeckType());
                 int deckMinSize = deckValidator != null ? deckValidator.getDeckMinSize() : 40;
+                Deck deck = tournamentPlayer.getDeck();
+                if (deck.getMaindeckCards().isEmpty() && !deck.getSideboard().isEmpty()) {
+                    // player didn't build a deck in time (e.g. deck editor wasn't opened or saved), so build it from
+                    // the pool like bots do instead a deck of basic lands only
+                    // (a cheater's deck is cleared with sideboard too, see TournamentPlayer.updateDeck, so it keeps basic lands only)
+                    tournamentPlayer.setDeck(buildDeckFromPool(deck, deckMinSize));
+                    logger.info("Tourney " + tournament.getId() + ": player " + tournamentPlayer.getPlayer().getName()
+                            + " didn't build a deck in time, so it was built from the pool");
+                }
                 tournament.autoSubmit(playerId, tournamentPlayer.generateDeck(deckMinSize));
             } else {
                 StringBuilder sb = new StringBuilder();

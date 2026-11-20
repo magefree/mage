@@ -97,8 +97,12 @@ class ElvishRefuelerWatcher extends Watcher {
         if (event.getType() != GameEvent.EventType.ACTIVATED_ABILITY) {
             return;
         }
-        StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
-        if (stackObject != null && stackObject.getStackAbility() instanceof ExhaustAbility) {
+        // mana abilities don't use the stack (605.3b)
+        StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
+        Ability ability = stackObject != null
+                ? stackObject.getStackAbility()
+                : game.getAbility(event.getTargetId(), event.getSourceId()).orElse(null);
+        if (ExhaustAbility.isExhaust(ability)) {
             activatedExhaustAbilities.put(event.getPlayerId(), true);
         }
     }

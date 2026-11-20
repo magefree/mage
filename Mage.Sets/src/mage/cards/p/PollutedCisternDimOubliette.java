@@ -1,6 +1,7 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.UnlockThisDoorTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -16,11 +17,14 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.events.ZoneChangeBatchEvent;
+import mage.game.events.ZoneChangeEvent;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -52,7 +56,7 @@ public final class PollutedCisternDimOubliette extends RoomCard {
     }
 }
 
-class PollutedCisternTriggeredAbility extends TriggeredAbilityImpl {
+class PollutedCisternTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     private enum PollutedCisternValue implements DynamicValue {
         instance;
@@ -104,18 +108,30 @@ class PollutedCisternTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
+    }
+
+    @Override
+    public boolean checkEvent(ZoneChangeEvent event, Game game) {
+        if (event.getFromZone() != Zone.LIBRARY || event.getToZone() != Zone.GRAVEYARD) {
+            return false;
+        }
+        Card card = game.getCard(event.getTargetId());
+        return card != null && card.isOwnedBy(getControllerId());
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        if (!Zone.GRAVEYARD.match(zEvent.getToZone())
-                || !Zone.LIBRARY.match(zEvent.getFromZone())
-                || !isControlledBy(zEvent.getPlayerId())) {
+        Set<Card> cards = getFilteredEvents((ZoneChangeBatchEvent) event, game)
+                .stream()
+                .map(ZoneChangeEvent::getTargetId)
+                .map(game::getCard)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
+        if (cards.isEmpty()) {
             return false;
         }
-        this.getAllEffects().setValue("cards", zEvent.getCards());
+        this.getAllEffects().setValue("cards", cards);
         return true;
     }
 }

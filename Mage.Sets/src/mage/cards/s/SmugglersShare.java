@@ -62,7 +62,7 @@ enum SmugglersShareDrawValue implements DynamicValue {
             return 0;
         }
         int drawCount = 0;
-        for (UUID opponentId : game.getOpponents(controller.getId())) {
+        for (UUID opponentId : game.getOpponents(controller.getId(), false)) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent != null && watcher.getAmountCardsDrawn(opponentId) >= 2) {
                 drawCount++;
@@ -98,7 +98,7 @@ enum SmugglersShareTreasureValue implements DynamicValue {
             return 0;
         }
         int treasureCount = 0;
-        for (UUID opponentId : game.getOpponents(controller.getId())) {
+        for (UUID opponentId : game.getOpponents(controller.getId(), false)) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent == null) {
                 continue;

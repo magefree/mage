@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 public interface MagePlugins {
 
@@ -41,9 +42,9 @@ public interface MagePlugins {
 
     void addGamesPlayed();
 
-    void onAddCard(MageCard card, int count);
+    CompletableFuture<Void> onAddCard(MageCard card);
 
-    void onRemoveCard(MageCard card, int count);
+    CompletableFuture<Void> onRemoveCard(MageCard card);
 
     JComponent getCardInfoPane();
 

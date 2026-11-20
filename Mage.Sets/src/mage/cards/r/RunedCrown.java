@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.Card;
@@ -17,6 +18,7 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -121,11 +123,12 @@ class RunedCrownEffect extends OneShotEffect {
         }
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
-            game.getState().setValue("attachTo:" + card.getId(), permanent);
+            AttachEffect.setAttachTo(game, card.getId(), permanent);
         }
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
         if (permanent != null) {
-            return permanent.addAttachment(card.getId(), source, game);
+            Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+            return attachment != null && permanent.addAttachment(attachment.getId(), source, game);
         }
         return true;
     }

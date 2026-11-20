@@ -98,7 +98,7 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
                 again = false;
             }
         }
-        CardUtil.setSourceCostsTag(game, ability, SQUAD_ACTIVATION_VALUE_KEY, cost.getActivateCount());
+        ability.setCostsTag(SQUAD_ACTIVATION_VALUE_KEY, cost.getActivateCount());
     }
 
     @Override

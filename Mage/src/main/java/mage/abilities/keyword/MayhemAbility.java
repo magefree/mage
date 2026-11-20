@@ -11,7 +11,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DiscardedCardsEvent;
 import mage.game.events.GameEvent;
-import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;
@@ -26,6 +25,10 @@ public class MayhemAbility extends SpellAbility {
     public static final String MAYHEM_ACTIVATION_VALUE_KEY = "mayhemActivation";
 
     private final String rule;
+
+    public static Watcher createWatcher() {
+        return new MayhemWatcher();
+    }
 
     public MayhemAbility(Card card, String manaString) {
         super(card.getSpellAbility());
@@ -63,7 +66,7 @@ public class MayhemAbility extends SpellAbility {
         if (!super.activate(game, allowedIdentifiers, noMana)) {
             return false;
         }
-        CardUtil.setSourceCostsTag(game, this, MAYHEM_ACTIVATION_VALUE_KEY, null);
+        this.setCostsTag(MAYHEM_ACTIVATION_VALUE_KEY, null);
         return true;
     }
 

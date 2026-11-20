@@ -128,7 +128,7 @@ class DeepwayNavigatorWatcher extends Watcher {
         if (event.getType() != GameEvent.EventType.ATTACKER_DECLARED) {
             return;
         }
-        Permanent permanent = game.getPermanent(event.getTargetId());
+        Permanent permanent = game.getPermanent(event.getSourceId());
         if (permanent != null && permanent.hasSubtype(SubType.MERFOLK, game)) {
             map.computeIfAbsent(permanent.getControllerId(), x -> new HashSet<>())
                     .add(new MageObjectReference(permanent, game));

@@ -44,6 +44,7 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -95,6 +96,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean indirectPhase = false;
     protected boolean faceDown;
     protected MageObjectReference attacking; // refers to defenderId if attacking, null if not attacking
+    protected Set<UUID> entersAttackingDefenders; // enters the battlefield attacking one of them (508.4), null if not
     protected int blocking;
     protected final Set<MageObjectReference> blockingSet = new HashSet<>(); // refers to blocked creatures
     // number of creatures the permanent can block
@@ -128,6 +130,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected Map<String, String> info = new LinkedHashMap<>(); // additional info for permanent's rules
     protected int createOrder;
     protected boolean legendRuleApplies = true;
+    protected boolean zeroLoyaltyRuleApplies = true;
     protected boolean prototyped;
 
     private static final List<UUID> emptyList = Collections.unmodifiableList(new ArrayList<>());
@@ -165,6 +168,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.indirectPhase = permanent.indirectPhase;
         this.faceDown = permanent.faceDown;
         this.attacking = permanent.attacking;
+        this.entersAttackingDefenders = permanent.entersAttackingDefenders == null ? null : new LinkedHashSet<>(permanent.entersAttackingDefenders);
         this.blocking = permanent.blocking;
         this.blockingSet.addAll(permanent.blockingSet);
         this.maxBlocks = permanent.maxBlocks;
@@ -204,6 +208,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.timesLoyaltyUsed = permanent.timesLoyaltyUsed;
         this.loyaltyActivationsAvailable = permanent.loyaltyActivationsAvailable;
         this.legendRuleApplies = permanent.legendRuleApplies;
+        this.zeroLoyaltyRuleApplies = permanent.zeroLoyaltyRuleApplies;
         this.transformCount = permanent.transformCount;
         this.protectorId = permanent.protectorId;
 
@@ -267,6 +272,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.goadingPlayers.clear();
         this.loyaltyActivationsAvailable = 1;
         this.legendRuleApplies = true;
+        this.zeroLoyaltyRuleApplies = true;
         this.canBeSacrificed = true;
     }
 
@@ -373,17 +379,24 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                             restrictHints.add(HintUtils.prepareText("Must block all attackers" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_REQUIRE));
                         }
 
-                        MageObject object = game.getObject(entry.getKey().mustAttackDefender(ability, game));
-                        if (object != null) {
-                            restrictHints.add(HintUtils.prepareText("Must attack defender " + object.getLogName() + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_REQUIRE));
-                        }
-                        Player player = game.getPlayer(entry.getKey().mustAttackDefender(ability, game));
-                        if (player != null) {
+                        String defendersInfo = entry.getKey().mustAttackDefenders(ability, game)
+                                .stream()
+                                .map(defenderId -> {
+                                    Player player = game.getPlayer(defenderId);
+                                    if (player != null) {
+                                        return player.getLogName();
+                                    }
+                                    MageObject defender = game.getObject(defenderId);
+                                    return defender == null ? null : defender.getLogName();
+                                })
+                                .filter(Objects::nonNull)
+                                .collect(Collectors.joining(" or "));
+                        if (!defendersInfo.isEmpty()) {
                             restrictHints.add(HintUtils.prepareText(
-                                    "Must attack defender " + player.getLogName() + addSourceObjectName(game, ability),
+                                    "Must attack defender " + defendersInfo + addSourceObjectName(game, ability),
                                     null, HintUtils.HINT_ICON_REQUIRE));
                         }
-                        object = game.getObject(entry.getKey().mustBlockAttacker(ability, game));
+                        MageObject object = game.getObject(entry.getKey().mustBlockAttacker(ability, game));
                         if (object != null) {
                             restrictHints.add(HintUtils.prepareText("Must block attacker " + object.getLogName() + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_REQUIRE));
                         }
@@ -602,6 +615,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean legendRuleApplies() {
         return this.legendRuleApplies;
+    }
+
+    @Override
+    public void setZeroLoyaltyRuleApplies(boolean zeroLoyaltyRuleApplies) {
+        this.zeroLoyaltyRuleApplies = zeroLoyaltyRuleApplies;
+    }
+
+    @Override
+    public boolean zeroLoyaltyRuleApplies() {
+        return this.zeroLoyaltyRuleApplies;
     }
 
     @Override
@@ -869,6 +892,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean phaseOut(Game game, boolean indirectPhase) {
         if (phasedIn && !replaceEvent(EventType.PHASE_OUT, game)) {
+            // a phased-out permanent is treated as though it doesn't exist, so keep its last known information
+            game.rememberLKI(Zone.BATTLEFIELD, this);
             for (UUID attachedId : this.getAttachments()) {
                 Permanent attachedPerm = game.getPermanent(attachedId);
                 if (attachedPerm != null) {
@@ -1170,7 +1195,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             return 0;
         }
         int lethal = getLethalDamage(attackerId, game);
-        MageObject attacker = game.getObject(attackerId);
+        MageObject attacker = game.getPermanentOrLKIBattlefield(attackerId);
+        if (attacker == null) {
+            attacker = game.getObject(attackerId);
+        }
         if (this.isCreature(game)) {
             if (checkWither(event, attacker, game)) {
                 if (markDamage) {
@@ -1742,6 +1770,21 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public void setEntersAttacking(Set<UUID> possibleDefenders) {
+        this.entersAttackingDefenders = possibleDefenders == null ? null : new LinkedHashSet<>(possibleDefenders);
+    }
+
+    @Override
+    public boolean isEntersAttacking() {
+        return this.entersAttackingDefenders != null;
+    }
+
+    @Override
+    public Set<UUID> getEntersAttackingDefenders() {
+        return this.entersAttackingDefenders;
+    }
+
+    @Override
     public MageObjectReference getAttacking() {
         return this.attacking;
     }
@@ -1946,6 +1989,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public UUID getPreparedSpellCopyId() {
+        return preparedSpellCopyId;
+    }
+
+    @Override
     public void setPrepared(boolean prepared, Game game) {
         // Rule 722.3a requires the permanent's current copiable values to include a prepare spell.
         if (prepared && getPrepareCharacteristicsSource() == null) {
@@ -1977,8 +2025,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 this, prepareCard.getSpellCard(), copy, getControllerId()
         );
         preparedSpellCopyId = copy.getId();
-        game.getState().keepCardCopyWhileSourceExists(copy.getId(), getId());
-        PrepareCastFromExileEffect effect = new PrepareCastFromExileEffect(copy.getId(), getId());
+        PrepareCastFromExileEffect effect = new PrepareCastFromExileEffect(copy.getId());
         // The permanent can have lost all abilities (for example to Darksteel Mutation).
         // The permission is linked by IDs above, so use the persistent copy's spell
         // ability as the continuous-effect source instead of an ability on the permanent.
@@ -2003,7 +2050,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (copyId == null) {
             return;
         }
-        game.getState().stopKeepingCardCopy(copyId);
         Card card = game.getCard(copyId);
         // Once cast, the copy is already on the stack and normal copied-spell cleanup owns it.
         if (card != null && game.getState().getZone(copyId) == Zone.EXILED) {

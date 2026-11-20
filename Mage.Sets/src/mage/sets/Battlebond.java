@@ -10,6 +10,7 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -344,7 +345,24 @@ public final class Battlebond extends ExpansionSet {
             addToBooster(booster, basicLands);
         }
 
-        return booster;
+        // cards order like in real boosters and collators: commons, uncommons, rares and lands at the end
+        // (partner logic above replaces the first card, so it must be done after the generation)
+        List<Card> res = new ArrayList<>();
+        addByRarity(res, booster, Rarity.COMMON);
+        addByRarity(res, booster, Rarity.UNCOMMON);
+        addByRarity(res, booster, Rarity.RARE, Rarity.MYTHIC);
+        addByRarity(res, booster, Rarity.LAND, Rarity.SPECIAL, Rarity.BONUS);
+        if (res.size() != booster.size()) {
+            throw new IllegalStateException("Wrong code usage: booster lost cards on reorder - " + booster.size() + " -> " + res.size());
+        }
+        return res;
+    }
+
+    private void addByRarity(List<Card> res, List<Card> booster, Rarity... rarities) {
+        List<Rarity> need = Arrays.asList(rarities);
+        booster.stream()
+                .filter(card -> need.contains(card.getRarity()))
+                .forEach(res::add);
     }
 
     private int addMissingPartner(List<Card> booster, boolean partnerAllowed, int max, int i) {

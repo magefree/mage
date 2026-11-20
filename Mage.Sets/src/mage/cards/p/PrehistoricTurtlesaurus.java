@@ -46,7 +46,7 @@ public final class PrehistoricTurtlesaurus extends CardImpl {
 
         // This spell costs {1} less to cast if you control a creature with a +1/+1 counter on it.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(1, condition).setCanWorksOnStackOnly(true)
+                Zone.ALL, new SpellCostReductionSourceEffect(1, condition)
         ).setRuleAtTheTop(true).addHint(hint));
 
         // Vigilance

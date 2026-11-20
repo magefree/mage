@@ -12,9 +12,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterNonlandCard;
+import mage.filter.common.FilterPermanentCard;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.filter.predicate.mageobject.PermanentPredicate;
 
 import java.util.UUID;
 
@@ -23,11 +23,11 @@ import java.util.UUID;
  */
 public final class WilfredMott extends CardImpl {
 
-    private static final FilterCard filter = new FilterNonlandCard("nonland permanent card with mana value 3 or less");
+    private static final FilterCard filter = new FilterPermanentCard("nonland permanent card with mana value 3 or less");
     private static final DynamicValue xValue = new CountersSourceCount(CounterType.TIME);
 
     static {
-        filter.add(PermanentPredicate.instance);
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 

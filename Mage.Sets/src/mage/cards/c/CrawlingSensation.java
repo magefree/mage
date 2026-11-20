@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
@@ -11,7 +12,8 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.events.ZoneChangeBatchEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.InsectToken;
 
 import java.util.UUID;
@@ -41,7 +43,7 @@ public final class CrawlingSensation extends CardImpl {
     }
 }
 
-class CrawlingSensationTriggeredAbility extends TriggeredAbilityImpl {
+class CrawlingSensationTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     public CrawlingSensationTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new InsectToken()), false);
@@ -53,28 +55,28 @@ class CrawlingSensationTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
+    }
+
+    @Override
+    public boolean checkEvent(ZoneChangeEvent event, Game game) {
+        if (event.getToZone() != Zone.GRAVEYARD) {
+            return false;
+        }
+        Card card = game.getCard(event.getTargetId());
+        return card != null && card.isOwnedBy(getControllerId()) && card.isLand(game);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        if (zEvent != null && Zone.GRAVEYARD == zEvent.getToZone() && zEvent.getCards() != null) {
-            // TODO: Switch to handle this with a game watcher because this does not work correctly if control changes
-            Integer usedOnTurn = (Integer) game.getState().getValue("usedOnTurn" + getControllerId() + getOriginalId());
-            if (usedOnTurn == null || usedOnTurn < game.getTurnNum()) {
-                for (Card card : zEvent.getCards()) {
-                    if (card != null) {
-                        UUID cardOwnerId = card.getOwnerId();
-                        if (cardOwnerId != null
-                                && card.isOwnedBy(getControllerId())
-                                && card.isLand(game)) {
-                            game.getState().setValue("usedOnTurn" + getControllerId() + getOriginalId(), game.getTurnNum());
-                            return true;
-                        }
-                    }
-                }
-            }
+        if (getFilteredEvents((ZoneChangeBatchEvent) event, game).isEmpty()) {
+            return false;
+        }
+        // TODO: Switch to handle this with a game watcher because this does not work correctly if control changes
+        Integer usedOnTurn = (Integer) game.getState().getValue("usedOnTurn" + getControllerId() + getOriginalId());
+        if (usedOnTurn == null || usedOnTurn < game.getTurnNum()) {
+            game.getState().setValue("usedOnTurn" + getControllerId() + getOriginalId(), game.getTurnNum());
+            return true;
         }
         return false;
     }

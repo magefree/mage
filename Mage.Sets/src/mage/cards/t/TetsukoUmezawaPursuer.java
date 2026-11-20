@@ -1,8 +1,7 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BlocksAllTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.ProwessAbility;
@@ -13,11 +12,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -26,6 +20,16 @@ import java.util.UUID;
  * @author miesma
  */
 public final class TetsukoUmezawaPursuer extends CardImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls with power or toughness 1 or less");
+
+    static {
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
+        filter.add(Predicates.or(
+                new PowerPredicate(ComparisonType.OR_LESS, 1),
+                new ToughnessPredicate(ComparisonType.OR_LESS, 1)
+        ));
+    }
 
     public TetsukoUmezawaPursuer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
@@ -43,7 +47,10 @@ public final class TetsukoUmezawaPursuer extends CardImpl {
         this.addAbility(new ProwessAbility());
 
         // Whenever a creature an opponent controls with power or toughness 1 or less blocks, Tetsuko Umezawa deals 1 damage to that creature’s controller.
-        this.addAbility(new TetsukoUmezawaPursuerTrigger());
+        this.addAbility(new BlocksAllTriggeredAbility(
+                new DamageTargetEffect(1).withTargetDescription("that creature's controller"),
+                false, filter, SetTargetPointer.PLAYER
+        ));
     }
 
     private TetsukoUmezawaPursuer(final TetsukoUmezawaPursuer card) {
@@ -55,47 +62,3 @@ public final class TetsukoUmezawaPursuer extends CardImpl {
         return new TetsukoUmezawaPursuer(this);
     }
 }
-
-class TetsukoUmezawaPursuerTrigger extends TriggeredAbilityImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with power or toughness 1 or less");
-    static {
-        filter.add(
-            Predicates.or(
-                new PowerPredicate(ComparisonType.OR_LESS, 1),
-                new ToughnessPredicate(ComparisonType.OR_LESS, 1)));
-    }
-
-    public TetsukoUmezawaPursuerTrigger() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(1)
-            .withTargetDescription("that creature's controller"));
-        setTriggerPhrase("Whenever a creature an opponent controls with power or toughness 1 or less blocks, ");
-    }
-
-    private TetsukoUmezawaPursuerTrigger(final TetsukoUmezawaPursuerTrigger ability) {
-        super(ability);
-    }
-
-    @Override
-    public TetsukoUmezawaPursuerTrigger copy() {
-        return new TetsukoUmezawaPursuerTrigger(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent blocker = game.getPermanent(event.getSourceId());
-        Player controller = game.getPlayer(this.getControllerId());
-        if (blocker != null && filter.match(blocker, game) && game.isOpponent(controller, blocker.getControllerId())) {
-            getEffects().get(0).setTargetPointer(new FixedTarget(blocker.getControllerId()));
-            return true;
-        }
-        return false;
-    }
-
-}
-

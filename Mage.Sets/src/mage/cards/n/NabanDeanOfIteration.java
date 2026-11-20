@@ -13,7 +13,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
 
@@ -75,17 +74,13 @@ class NabanDeanOfIterationEffect extends ReplacementEffectImpl {
             NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
             // Only triggers of the controller of Naban
             if (source.isControlledBy(event.getPlayerId())) {
-                GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
-                // Only EtB triggers
-                if (sourceEvent != null
-                        && sourceEvent.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
-                        && sourceEvent instanceof EntersTheBattlefieldEvent) {
-                    EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) sourceEvent;
-                    // Only for entering artifacts or creatures
-                    if (entersTheBattlefieldEvent.getTarget().hasSubtype(SubType.WIZARD, game)) {
-                        // Only for triggers of permanents
-                        return game.getPermanent(numberOfTriggersEvent.getSourceId()) != null;
-                    }
+                // Only for entering Wizards under your control
+                if (numberOfTriggersEvent.getEnteredPermanents(game)
+                        .stream()
+                        .anyMatch(permanent -> permanent.hasSubtype(SubType.WIZARD, game)
+                                && permanent.isControlledBy(source.getControllerId()))) {
+                    // Only for triggers of permanents
+                    return game.getPermanent(numberOfTriggersEvent.getSourceId()) != null;
                 }
             }
         }

@@ -4,12 +4,14 @@ Aetherdrift Commander|DRC|
 Aetherdrift|DFT|
 Alara Reborn|ARB|
 Alchemy: Dominaria|YDMU|
+Alchemy: Edge of Eternities|YEOE|
 Alchemy: Innistrad|Y22|
 Alchemy: Murders at Karlov Manor|YMKM|
 Alchemy: Secrets of Strixhaven|YSOS|
 Alchemy: Wilds of Eldraine|YWOE|
 Alliances|ALL|
 Amonkhet|AKH|
+Amonkhet Invocations|MP2|
 Anthologies|ATH|
 Antiquities|ATQ|
 Apocalypse|APC|
@@ -163,6 +165,7 @@ Jumpstart: Historic Horizons|J21|
 Jumpstart|JMP|
 Jurassic World Collection|REX|
 Kaladesh|KLD|
+Kaladesh Inventions|MPS|
 Kaldheim Commander|KHC|
 Kaldheim|KHM|
 Kamigawa: Neon Dynasty|NEO|
@@ -191,8 +194,6 @@ Marvel Super Heroes Commander|MSC|
 Marvel Super Heroes|MSH|
 Marvel's Spider-Man Eternal|SPE|
 Marvel's Spider-Man|SPM|
-Masterpiece Series Amonkhet||
-Masterpiece Series|MPS|
 Masters 25|A25|
 Masters Edition III|ME3|
 Masters Edition II|ME2|
@@ -216,6 +217,8 @@ Murders at Karlov Manor Commander|MKC|
 Murders at Karlov Manor|MKM|
 Mystery Booster 2|MB2|
 Mystery Booster Commander Edition|MBC|
+Nauctis: The Sunken Realm|NAU|
+Nauctis: The Sunken Realm Commander|NAC|
 Nemesis|NEM|
 Neon Dynasty Commander|NEC|
 New Capenna Commander|NCC|

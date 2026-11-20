@@ -135,7 +135,7 @@ class ProfessorHojoWatcher extends Watcher {
         if (event.getType() != GameEvent.EventType.ACTIVATED_ABILITY) {
             return;
         }
-        StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
+        StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
         if (stackObject != null
                 && stackObject.getStackAbility() instanceof ActivatedAbility
                 && CardUtil

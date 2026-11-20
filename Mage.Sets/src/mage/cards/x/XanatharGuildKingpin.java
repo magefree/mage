@@ -12,13 +12,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -43,8 +42,8 @@ public final class XanatharGuildKingpin extends CardImpl {
                 .setText(" you may look at the top card of their library any time,"));
         ability.addEffect(new XanatharPlayFromTopOfTargetLibraryEffect()
                 .setText(" you may play the top card of their library,"));
-        ability.addEffect(new XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect()
-                .setText(" and you may spend mana as thought it were mana of any color to cast spells this way"));
+        ability.addEffect(new XanatharGuildKingpinSpendManaAsAnyColorEffect()
+                .setText(" and you may spend mana as though it were mana of any color to cast spells this way"));
         ability.addCustomOutcome(Outcome.PreventCast);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -188,42 +187,13 @@ class XanatharPlayFromTopOfTargetLibraryEffect extends AsThoughEffectImpl {
     }
 }
 
-class XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect extends OneShotEffect {
+class XanatharGuildKingpinSpendManaAsAnyColorEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
-    XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect() {
-        super(Outcome.Benefit);
-    }
-
-    private XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect(final XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card topCard = game.getPlayer(source.getFirstTarget()).getLibrary().getFromTop(game);
-        if (topCard == null) {
-            return false;
-        }
-
-        int zcc = game.getState().getZoneChangeCounter(topCard.getId());
-        game.addEffect(new SpendManaAsAnyColorToCastTopOfLibraryTargetEffect().setTargetPointer(new FixedTarget(topCard.getId(), zcc)), source);
-        return true;
-    }
-
-    @Override
-    public XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect copy() {
-        return new XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect(this);
-    }
-
-}
-
-class SpendManaAsAnyColorToCastTopOfLibraryTargetEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
-
-    public SpendManaAsAnyColorToCastTopOfLibraryTargetEffect() {
+    XanatharGuildKingpinSpendManaAsAnyColorEffect() {
         super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.EndOfTurn, Outcome.Benefit);
     }
 
-    private SpendManaAsAnyColorToCastTopOfLibraryTargetEffect(final SpendManaAsAnyColorToCastTopOfLibraryTargetEffect effect) {
+    private XanatharGuildKingpinSpendManaAsAnyColorEffect(final XanatharGuildKingpinSpendManaAsAnyColorEffect effect) {
         super(effect);
     }
 
@@ -233,30 +203,29 @@ class SpendManaAsAnyColorToCastTopOfLibraryTargetEffect extends AsThoughEffectIm
     }
 
     @Override
-    public SpendManaAsAnyColorToCastTopOfLibraryTargetEffect copy() {
-        return new SpendManaAsAnyColorToCastTopOfLibraryTargetEffect(this);
+    public XanatharGuildKingpinSpendManaAsAnyColorEffect copy() {
+        return new XanatharGuildKingpinSpendManaAsAnyColorEffect(this);
     }
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        FixedTarget fixedTarget = ((FixedTarget) getTargetPointer());
-        UUID targetId = CardUtil.getMainCardId(game, fixedTarget.getTarget());
-
-        Card topCard = game.getPlayer(source.getFirstTarget()).getLibrary().getFromTop(game);
-        if (topCard == null) {
+        if (!source.isControlledBy(affectedControllerId)) {
             return false;
         }
-
-        // If top card of target opponent's library changed, discard the current ContinuousEffect and create a new one
-        if (!topCard.getId().equals(targetId) && canLookAtNextTopLibraryCard(game) && !this.isDiscarded()) {
-            int zcc = game.getState().getZoneChangeCounter(topCard.getId());
-            game.addEffect(new SpendManaAsAnyColorToCastTopOfLibraryTargetEffect().setTargetPointer(new FixedTarget(topCard.getId(), zcc)), source);
-            this.discard();
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (opponent == null) {
+            return false;
         }
-        return source.isControlledBy(affectedControllerId)
-                && Objects.equals(objectId, targetId)
-                && game.getState().getZoneChangeCounter(objectId) <= fixedTarget.getZoneChangeCounter() + 1
-                && (game.getState().getZone(objectId) == Zone.STACK || game.getState().getZone(objectId) == Zone.LIBRARY);
+        // not tied to a single card: any spell cast from the top of the opponent's library this turn
+        Spell spell = game.getSpell(objectId);
+        if (spell != null) {
+            return spell.isControlledBy(affectedControllerId)
+                    && opponent.getId().equals(spell.getOwnerId())
+                    && Zone.LIBRARY.equals(spell.getFromZone());
+        }
+        // playable check before casting: the card must be on top of the opponent's library
+        Card topCard = opponent.getLibrary().getFromTop(game);
+        return topCard != null && topCard.getId().equals(CardUtil.getMainCardId(game, objectId));
     }
 
     @Override

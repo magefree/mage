@@ -3,9 +3,10 @@ package mage.cards.e;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.ControllerLifeCount;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.SetPlayerLifeSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -63,8 +64,8 @@ public final class EnduringAngel extends TransformingDoubleFacedCard {
         ).setText("{this}'s power and toughness are each equal to your life total")));
 
         // Whenever Angelic Enforcer attacks, double your life total.
-        this.getRightHalfCard().addAbility(new AttacksTriggeredAbility(new GainLifeEffect(
-                ControllerLifeCount.instance
+        this.getRightHalfCard().addAbility(new AttacksTriggeredAbility(new SetPlayerLifeSourceEffect(
+                new MultipliedValue(ControllerLifeCount.instance, 2)
         ).setText("double your life total")));
     }
 

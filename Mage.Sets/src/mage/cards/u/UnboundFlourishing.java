@@ -12,15 +12,13 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
+import mage.filter.FilterAbility;
 import mage.filter.FilterSpell;
-import mage.filter.FilterStackObject;
-import mage.filter.common.FilterActivatedOrTriggeredAbility;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.PermanentPredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
-import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -35,13 +33,13 @@ public final class UnboundFlourishing extends CardImpl {
 
     private static final FilterSpell filterPermanent = new FilterSpell("a permanent spell with a mana cost that contains {X}");
     private static final FilterSpell filterInstantSorcery = new FilterInstantOrSorcerySpell("an instant or sorcery spell with a mana cost that contains {X}");
-    private static final FilterStackObject filterAbility = new FilterActivatedOrTriggeredAbility("an activated ability with an activation cost that contains {X}");
+    private static final FilterAbility filterAbility = new FilterAbility("an activated ability with an activation cost that contains {X}");
 
     static {
         filterPermanent.add(PermanentPredicate.instance);
         filterPermanent.add(UnboundFlourishingCostContainsXPredicate.instance);
         filterInstantSorcery.add(UnboundFlourishingCostContainsXPredicate.instance);
-        filterAbility.add(UnboundFlourishingCostContainsXPredicate.instance);
+        filterAbility.add(UnboundFlourishingAbilityCostContainsXPredicate.instance);
     }
 
     public UnboundFlourishing(UUID ownerId, CardSetInfo setInfo) {
@@ -77,13 +75,22 @@ enum UnboundFlourishingCostContainsXPredicate implements Predicate<StackObject> 
 
     @Override
     public boolean apply(StackObject input, Game game) {
-        if (input instanceof Spell) {
-            return ((Spell) input).getSpellAbility().getManaCostsToPay().containsX();
-        } else if (input instanceof StackAbility) {
-            return input.getStackAbility().getManaCostsToPay().containsX();
-        } else {
-            return false;
-        }
+        return input instanceof Spell
+                && ((Spell) input).getSpellAbility().getManaCostsToPay().containsX();
+    }
+
+    @Override
+    public String toString() {
+        return "Contains {X}";
+    }
+}
+
+enum UnboundFlourishingAbilityCostContainsXPredicate implements Predicate<Ability> {
+    instance;
+
+    @Override
+    public boolean apply(Ability input, Game game) {
+        return input.getManaCostsToPay().containsX();
     }
 
     @Override

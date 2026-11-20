@@ -66,7 +66,7 @@ enum ThoughtSpongeValue implements DynamicValue {
         if (watcher == null) {
             return 0;
         }
-        return game.getOpponents(sourceAbility.getControllerId())
+        return game.getOpponents(sourceAbility.getControllerId(), false)
                 .stream()
                 .map(watcher::getCardsDrawnThisTurn)
                 .max(Integer::compare)

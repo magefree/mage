@@ -1,5 +1,6 @@
 package mage.cards.a;
 
+import java.util.Collections;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
@@ -103,7 +104,7 @@ class AinokStrikeLeaderEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
-            new GoblinToken().putOntoBattlefield(1, game, source, source.getControllerId(), true, true, playerId);
+            new GoblinToken().putOntoBattlefield(1, game, source, source.getControllerId(), true, true, Collections.singleton(playerId));
         }
         return true;
     }

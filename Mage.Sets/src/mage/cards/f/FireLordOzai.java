@@ -23,6 +23,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetSacrifice;
 import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.*;
@@ -170,7 +171,7 @@ class FireLordOzaiWatcher extends Watcher {
             case LAND_PLAYED:
                 if (event.hasApprovingIdentifier(MageIdentifier.FireLordOzaiAlternateCast)) {
                     Optional.ofNullable(tokenMap.get(event.getPlayerId()))
-                            .map(map -> map.get(event.getTargetId()))
+                            .map(map -> map.get(CardUtil.getMainCardId(game, event.getSourceId())))
                             .ifPresent(usedTokens::add);
                 }
         }

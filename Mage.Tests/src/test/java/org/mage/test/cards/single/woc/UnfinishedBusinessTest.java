@@ -136,4 +136,42 @@ public class UnfinishedBusinessTest extends CardTestPlayerBase {
         // The equipment should have returned to the battlefield
         assertPermanentCount(playerA,EQUIPMENT, 1);
     }
+
+    @Test
+    public void test_ReturnAndAttach_ModalDoubleFacedCreature() {
+        addCard(Zone.HAND, playerA, UNFINISHEDBUSINESS); // {3}{W}{W}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        //
+        addCard(Zone.GRAVEYARD, playerA, "Tergrid, God of Fright"); // modal double-faced, front 4/5
+        addCard(Zone.GRAVEYARD, playerA, "Holy Strength"); // aura, +1/+2
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, UNFINISHEDBUSINESS, "Tergrid, God of Fright");
+        addTarget(playerA, "Holy Strength"); // aura to return
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertAttachedTo(playerA, "Holy Strength", "Tergrid, God of Fright", true);
+        assertPowerToughness(playerA, "Tergrid, God of Fright", 4 + 1, 5 + 2);
+    }
+
+    @Test
+    public void test_ReturnAndAttach_ModalDoubleFacedAura() {
+        addCard(Zone.HAND, playerA, UNFINISHEDBUSINESS); // {3}{W}{W}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        //
+        addCard(Zone.GRAVEYARD, playerA, BEAR); // bear 2/2
+        addCard(Zone.GRAVEYARD, playerA, "Glasswing Grace"); // modal double-faced aura, +2/+2, flying, lifelink
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, UNFINISHEDBUSINESS, BEAR);
+        addTarget(playerA, "Glasswing Grace"); // aura to return
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertAttachedTo(playerA, "Glasswing Grace", BEAR, true);
+        assertPowerToughness(playerA, BEAR, 2 + 2, 2 + 2);
+    }
 }

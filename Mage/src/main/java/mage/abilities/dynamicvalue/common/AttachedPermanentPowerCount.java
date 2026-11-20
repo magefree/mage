@@ -16,7 +16,7 @@ public enum AttachedPermanentPowerCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Permanent attachmentPermanent = game.getPermanent(sourceAbility.getSourceId());
+        Permanent attachmentPermanent = game.getPermanentOrLKIBattlefield(sourceAbility.getSourceId());
         if (attachmentPermanent == null) {
             attachmentPermanent = (Permanent) game.getLastKnownInformation(sourceAbility.getSourceId(), Zone.BATTLEFIELD, sourceAbility.getStackMomentSourceZCC());
         }

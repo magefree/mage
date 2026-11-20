@@ -16,6 +16,7 @@ import mage.abilities.keyword.SneakAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.DoubleFacedCard;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -92,10 +93,13 @@ class NinjaTeenAbilityEffect extends ContinuousEffectImpl {
             return false;
         }
         for (Card card : controller.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game)) {
-            Ability ability = new SneakAbility(card, "{3}{B}");
-            ability.setSourceId(card.getId());
-            ability.setControllerId(card.getOwnerId());
-            game.getState().addOtherAbility(card, ability);
+            // TODO: refactor GainRetraceYourGraveyardEffect, NinjaTeen and TannukSteadfastSecond to use shared effect and logic
+            // double-faced cards are cast by their front face, so it must have the sneak ability
+            Card face = card instanceof DoubleFacedCard ? ((DoubleFacedCard) card).getLeftHalfCard() : card;
+            Ability ability = new SneakAbility(face, "{3}{B}");
+            ability.setSourceId(face.getId());
+            ability.setControllerId(face.getOwnerId());
+            game.getState().addOtherAbility(face, ability);
         }
         return true;
     }

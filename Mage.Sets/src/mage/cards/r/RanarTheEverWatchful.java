@@ -2,6 +2,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,10 +16,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.events.ZoneChangeBatchEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.SpiritWhiteToken;
 
-import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.keyword.ForetellAbility;
 import mage.watchers.common.ForetoldWatcher;
@@ -95,7 +96,7 @@ class RanarTheEverWatchfulCostReductionEffect extends CostModificationEffectImpl
     }
 }
 
-class RanarTheEverWatchfulTriggeredAbility extends TriggeredAbilityImpl {
+class RanarTheEverWatchfulTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     RanarTheEverWatchfulTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken()), false);
@@ -112,31 +113,29 @@ class RanarTheEverWatchfulTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
+    }
+
+    @Override
+    public boolean checkEvent(ZoneChangeEvent event, Game game) {
+        if (event.getToZone() != Zone.EXILED) {
+            return false;
+        }
+        switch (event.getFromZone()) {
+            case BATTLEFIELD:
+                // a spell or ability you control exiles a permanent (card or token)
+                return event.getSource() != null && isControlledBy(event.getSource().getControllerId());
+            case HAND:
+                Card card = game.getCard(event.getTargetId());
+                return card != null && card.isOwnedBy(getControllerId());
+            default:
+                return false;
+        }
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        final int numberExiled = zEvent.getCards().size() + zEvent.getTokens().size();
-        if (zEvent.getToZone() != Zone.EXILED
-                || numberExiled == 0) {
-            return false;
-        }
-        switch (zEvent.getFromZone()) {
-            case BATTLEFIELD:
-                return zEvent.getSource() != null  // source ability/spell that exiled the permanent
-                        && controllerId.equals(zEvent.getSource().getControllerId())
-                        && numberExiled > 0;  // must include both card permanents and tokens on the battlefield
-            case HAND:
-                return zEvent
-                        .getCards()
-                        .stream()
-                        .filter(Objects::nonNull)
-                        .map(Card::getOwnerId)
-                        .anyMatch(this::isControlledBy);
-        }
-        return false;
+        return !getFilteredEvents((ZoneChangeBatchEvent) event, game).isEmpty();
     }
 
     @Override

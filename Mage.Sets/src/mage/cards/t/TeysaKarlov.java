@@ -14,7 +14,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
-import mage.game.events.ZoneChangeEvent;
 
 import java.util.UUID;
 
@@ -87,15 +86,11 @@ class TeysaKarlovEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event instanceof NumberOfTriggersEvent) {
             NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
-            if (source.isControlledBy(event.getPlayerId())
+            return source.isControlledBy(event.getPlayerId())
                     && game.getPermanentOrLKIBattlefield(numberOfTriggersEvent.getSourceId()) != null
-                    && numberOfTriggersEvent.getSourceEvent() instanceof ZoneChangeEvent) {
-                ZoneChangeEvent zEvent = (ZoneChangeEvent) numberOfTriggersEvent.getSourceEvent();
-                return zEvent != null
-                        && zEvent.isDiesEvent()
-                        && zEvent.isPermanentMoved()
-                        && zEvent.getTarget().isCreature(game);
-            }
+                    && numberOfTriggersEvent.getDiedPermanents(game)
+                    .stream()
+                    .anyMatch(permanent -> permanent.isCreature(game));
         }
         return false;
     }

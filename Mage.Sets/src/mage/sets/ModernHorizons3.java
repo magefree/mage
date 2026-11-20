@@ -678,19 +678,12 @@ public final class ModernHorizons3 extends ExpansionSet {
         List<CardInfo> list_SPG = findUniqueCards(SpecialGuests.getInstance().getCode(), Rarity.MYTHIC, 39, 48);
         List<CardInfo> list_M3C = findUniqueCards(ModernHorizons3Commander.getInstance().getCode(), Rarity.MYTHIC, 1, 8);
 
-        for (int i = 0; i < spg; i++) {
-            addToBooster(booster, list_SPG);
+        // cards order like in real boosters and collators: commons, uncommons, rares, special and lands at the end
+        for (int i = 0; i < common; i++) {
+            addToBooster(booster, list_MH3_C);
         }
-        double ratioMythic = (double) list_MH3_M.size() / (double) (list_MH3_M.size() + list_MH3_R.size() * 2);
-        for (int i = 0; i < rareOrMythic; i++) {
-            if (RandomUtil.nextDouble() <= ratioMythic) {
-                addToBooster(booster, list_MH3_M);
-            } else {
-                addToBooster(booster, list_MH3_R);
-            }
-        }
-        for (int i = 0; i < commander; i++) {
-            addToBooster(booster, list_M3C);
+        for (int i = 0; i < uncommon; i++) {
+            addToBooster(booster, list_MH3_U);
         }
         double ratioUncommonRTM = 0.75; // Uncommons relative to rare+mythic
         double ratioMythicRTM = (double) list_RTM_M.size() / (double) (list_RTM_M.size() + list_RTM_R.size() * 2); // mythics relative to rare
@@ -703,11 +696,19 @@ public final class ModernHorizons3 extends ExpansionSet {
                 addToBooster(booster, list_RTM_R);
             }
         }
-        for (int i = 0; i < uncommon; i++) {
-            addToBooster(booster, list_MH3_U);
+        for (int i = 0; i < commander; i++) {
+            addToBooster(booster, list_M3C);
         }
-        for (int i = 0; i < common; i++) {
-            addToBooster(booster, list_MH3_C);
+        double ratioMythic = (double) list_MH3_M.size() / (double) (list_MH3_M.size() + list_MH3_R.size() * 2);
+        for (int i = 0; i < rareOrMythic; i++) {
+            if (RandomUtil.nextDouble() <= ratioMythic) {
+                addToBooster(booster, list_MH3_M);
+            } else {
+                addToBooster(booster, list_MH3_R);
+            }
+        }
+        for (int i = 0; i < spg; i++) {
+            addToBooster(booster, list_SPG);
         }
         for (int i = 0; i < basicLand; i++) {
             addToBooster(booster, list_MH3_Basic);

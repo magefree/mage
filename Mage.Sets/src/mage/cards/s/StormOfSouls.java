@@ -17,6 +17,10 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
 
 import java.util.UUID;
+import mage.util.CardUtil;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author Alex-Vasile
@@ -74,10 +78,14 @@ class StormOfSoulsReturnEffect extends OneShotEffect {
         player.moveCards(cards, Zone.BATTLEFIELD, source, game);
 
         // Figure out which cards were successfuly moved so that they can be turned into 1/1 Spirits
-        cards.retainZone(Zone.BATTLEFIELD, game);
+        List<Permanent> permanents = cards.getCards(game)
+                .stream()
+                .map(card -> CardUtil.getPermanentFromCardPutToBattlefield(card, game))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
 
         // Change the creatures
-        game.addEffect(new StormOfSoulsChangeCreatureEffect().setTargetPointer(new FixedTargets(cards, game)), source);
+        game.addEffect(new StormOfSoulsChangeCreatureEffect().setTargetPointer(new FixedTargets(permanents, game)), source);
         return true;
     }
 }

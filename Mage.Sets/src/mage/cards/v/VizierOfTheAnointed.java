@@ -114,9 +114,9 @@ class VizierOfTheAnointedTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(getControllerId())) {
-            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-            if (stackAbility.getStackAbility() instanceof EternalizeAbility
-                    || stackAbility.getStackAbility() instanceof EmbalmAbility) {
+            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getTargetId());
+            if (stackAbility != null && (stackAbility.getStackAbility() instanceof EternalizeAbility
+                    || stackAbility.getStackAbility() instanceof EmbalmAbility)) {
                 return true;
             }
         }

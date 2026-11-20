@@ -20,6 +20,17 @@ public class JavaUtil {
         if (System.getProperty("java.net.preferIPv4Stack") == null) {
             System.setProperty("java.net.preferIPv4Stack", "true");
         }
+
+        // TODO: works with java 18+, all prev versions must use command line params by launcher
+        // workaround for broken images download, decks import and draft rating files:
+        // there are some images links with non-ascii chars, so non-utf8 systems 
+        // can't use it (example: encoding windows-1251 in old russian windows)
+        if (System.getProperty("file.encoding") == null) {
+            System.setProperty("file.encoding", "UTF-8");
+        }
+        if (System.getProperty("sun.jnu.encoding") == null) {
+            System.setProperty("sun.jnu.encoding", "UTF-8");
+        }
     }
 
     public static void applyDefaultServerSettings() {
@@ -36,16 +47,6 @@ public class JavaUtil {
         // TODO: remove after migrate to java 21+
         if (System.getProperty("java.util.Arrays.useLegacyMergeSort") == null) {
             System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
-        }
-
-        // workaround for broken images download:
-        // there are some images links with non-ascii chars, so non-utf8 systems 
-        // can't use it (example: encoding windows-1251 in old russian windows)
-        if (System.getProperty("file.encoding") == null) {
-            System.setProperty("file.encoding", "UTF-8");
-        }
-        if (System.getProperty("sun.jnu.encoding") == null) {
-            System.setProperty("sun.jnu.encoding", "UTF-8");
         }
 
         // workaround for bad graphic card drivers:

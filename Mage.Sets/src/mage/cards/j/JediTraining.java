@@ -13,7 +13,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.FilterAbility;
 import mage.filter.FilterCard;
+import mage.filter.predicate.other.AbilityClassPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -25,16 +27,18 @@ import mage.game.events.GameEvent.EventType;
 public final class JediTraining extends CardImpl {
 
     protected static final FilterCard filter = new FilterCard("Jedi spells");
+    private static final FilterAbility filterMeditate = new FilterAbility("meditate abilities you activate");
 
     static {
         filter.add(SubType.JEDI.getPredicate());
+        filterMeditate.add(new AbilityClassPredicate(MeditateAbility.class));
     }
 
     public JediTraining(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
 
-        // Meditate abilities you activate costs {1} less to activate.
-        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(MeditateAbility.class, "Meditate")));
+        // Meditate abilities you activate cost {1} less to activate.
+        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(filterMeditate)));
 
         // Whenever a Jedi creature you control meditates, scry 1.
         this.addAbility(new JediTrainingTriggeredAbility());
@@ -53,7 +57,8 @@ public final class JediTraining extends CardImpl {
 class JediTrainingTriggeredAbility extends TriggeredAbilityImpl {
 
     public JediTrainingTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ScryEffect(1));
+        super(Zone.BATTLEFIELD, new ScryEffect(1, false));
+        setTriggerPhrase("Whenever a Jedi creature you control meditates, ");
     }
 
     private JediTrainingTriggeredAbility(final JediTrainingTriggeredAbility ability) {
@@ -74,9 +79,5 @@ class JediTrainingTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {        
         Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
         return event.getPlayerId().equals(getControllerId()) && source != null && JediTraining.filter.match(source, game);
-    }
-
-    public String getRule() {
-        return "Whenever a Jedi creature you control meditates, scry 1";
     }
 }

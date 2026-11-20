@@ -24,7 +24,8 @@ public final class RealityFractureCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Archfiend of Despair", 46, Rarity.MYTHIC, mage.cards.a.ArchfiendOfDespair.class));
         cards.add(new SetCardInfo("Archon of Cruelty", 47, Rarity.MYTHIC, mage.cards.a.ArchonOfCruelty.class));
         cards.add(new SetCardInfo("Azorius Signet", 53, Rarity.UNCOMMON, mage.cards.a.AzoriusSignet.class));
-        cards.add(new SetCardInfo("Avacyn, Angel of Horror", 7, Rarity.RARE, mage.cards.a.AvacynAngelOfHorror.class));
+        cards.add(new SetCardInfo("Avacyn, Angel of Horror", 7, Rarity.RARE, mage.cards.a.AvacynAngelOfHorror.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Avacyn, Angel of Horror", 92, Rarity.RARE, mage.cards.a.AvacynAngelOfHorror.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Battlefield Forge", 65, Rarity.RARE, mage.cards.b.BattlefieldForge.class));
         cards.add(new SetCardInfo("Brainstorm", 39, Rarity.COMMON, mage.cards.b.Brainstorm.class));
         cards.add(new SetCardInfo("Brainsurge", 40, Rarity.UNCOMMON, mage.cards.b.Brainsurge.class));
@@ -35,6 +36,8 @@ public final class RealityFractureCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Contaminated Landscape", 68, Rarity.COMMON, mage.cards.c.ContaminatedLandscape.class));
         cards.add(new SetCardInfo("Currency Converter", 55, Rarity.RARE, mage.cards.c.CurrencyConverter.class));
         cards.add(new SetCardInfo("Cursed Mirror", 49, Rarity.RARE, mage.cards.c.CursedMirror.class));
+        cards.add(new SetCardInfo("Dack Fayden, Helping Hand", 4, Rarity.RARE, mage.cards.d.DackFaydenHelpingHand.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dack Fayden, Helping Hand", 89, Rarity.RARE, mage.cards.d.DackFaydenHelpingHand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Darksteel Angel", 98, Rarity.RARE, mage.cards.d.DarksteelAngel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Darksteel Angel", 13, Rarity.RARE, mage.cards.d.DarksteelAngel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Despark", 50, Rarity.UNCOMMON, mage.cards.d.Despark.class));
@@ -53,7 +56,9 @@ public final class RealityFractureCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Glacial Fortress", 73, Rarity.RARE, mage.cards.g.GlacialFortress.class));
         cards.add(new SetCardInfo("Grand Crescendo", 26, Rarity.RARE, mage.cards.g.GrandCrescendo.class));
         cards.add(new SetCardInfo("Isolated Chapel", 74, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
+        cards.add(new SetCardInfo("Jace, Multiverse Architect", 1, Rarity.MYTHIC, mage.cards.j.JaceMultiverseArchitect.class));
         cards.add(new SetCardInfo("Izzet Signet", 58, Rarity.UNCOMMON, mage.cards.i.IzzetSignet.class));
+        cards.add(new SetCardInfo("Jhoira, Weatherlight Corsair", 8, Rarity.RARE, mage.cards.j.JhoiraWeatherlightCorsair.class));
         cards.add(new SetCardInfo("Kher Keep", 75, Rarity.RARE, mage.cards.k.KherKeep.class));
         cards.add(new SetCardInfo("Lingering Souls", 27, Rarity.UNCOMMON, mage.cards.l.LingeringSouls.class));
         cards.add(new SetCardInfo("Martial Coup", 28, Rarity.RARE, mage.cards.m.MartialCoup.class));
@@ -64,9 +69,11 @@ public final class RealityFractureCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Nissa, Leyline Tamer", 2, Rarity.MYTHIC, mage.cards.n.NissaLeylineTamer.class));
         cards.add(new SetCardInfo("Niv-Mizzet, Ghost Counsel", 10, Rarity.RARE, mage.cards.n.NivMizzetGhostCounsel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Niv-Mizzet, Ghost Counsel", 95, Rarity.RARE, mage.cards.n.NivMizzetGhostCounsel.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ob Nixilis, the Ascended", 5, Rarity.RARE, mage.cards.o.ObNixilisTheAscended.class));
+        cards.add(new SetCardInfo("Ob Nixilis, the Ascended", 5, Rarity.RARE, mage.cards.o.ObNixilisTheAscended.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ob Nixilis, the Ascended", 90, Rarity.RARE, mage.cards.o.ObNixilisTheAscended.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Occult Epiphany", 43, Rarity.RARE, mage.cards.o.OccultEpiphany.class));
-        cards.add(new SetCardInfo("Omnath, Locus of the Void", 3, Rarity.RARE, mage.cards.o.OmnathLocusOfTheVoid.class));
+        cards.add(new SetCardInfo("Omnath, Locus of the Void", 3, Rarity.RARE, mage.cards.o.OmnathLocusOfTheVoid.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Omnath, Locus of the Void", 88, Rarity.RARE, mage.cards.o.OmnathLocusOfTheVoid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overlord of the Mistmoors", 29, Rarity.MYTHIC, mage.cards.o.OverlordOfTheMistmoors.class));
         cards.add(new SetCardInfo("Path of Ancestry", 77, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Path to Exile", 30, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
@@ -96,6 +103,12 @@ public final class RealityFractureCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Talisman of Dominance", 62, Rarity.UNCOMMON, mage.cards.t.TalismanOfDominance.class));
         cards.add(new SetCardInfo("Talisman of Indulgence", 63, Rarity.UNCOMMON, mage.cards.t.TalismanOfIndulgence.class));
         cards.add(new SetCardInfo("Talisman of Progress", 64, Rarity.UNCOMMON, mage.cards.t.TalismanOfProgress.class));
+        cards.add(new SetCardInfo("Tamiyo, Upriser Crowned", 11, Rarity.RARE, mage.cards.t.TamiyoUpriserCrowned.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tamiyo, Upriser Crowned", 96, Rarity.RARE, mage.cards.t.TamiyoUpriserCrowned.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Teferi's Reproach", 6, Rarity.RARE, mage.cards.t.TeferisReproach.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Teferi's Reproach", 91, Rarity.RARE, mage.cards.t.TeferisReproach.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Ur-Sphinx", 12, Rarity.RARE, mage.cards.t.TheUrSphinx.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Ur-Sphinx", 97, Rarity.RARE, mage.cards.t.TheUrSphinx.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turbulent Crater", 101, Rarity.RARE, mage.cards.t.TurbulentCrater.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turbulent Crater", 16, Rarity.RARE, mage.cards.t.TurbulentCrater.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turbulent Shore", 102, Rarity.RARE, mage.cards.t.TurbulentShore.class, NON_FULL_USE_VARIOUS));
@@ -103,6 +116,8 @@ public final class RealityFractureCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Turbulent Wetlands", 103, Rarity.RARE, mage.cards.t.TurbulentWetlands.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Turbulent Wetlands", 18, Rarity.RARE, mage.cards.t.TurbulentWetlands.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Underground River", 87, Rarity.RARE, mage.cards.u.UndergroundRiver.class));
+        cards.add(new SetCardInfo("Venser, Fervent Forger", 9, Rarity.RARE, mage.cards.v.VenserFerventForger.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Venser, Fervent Forger", 94, Rarity.RARE, mage.cards.v.VenserFerventForger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Whirlwind of Thought", 51, Rarity.RARE, mage.cards.w.WhirlwindOfThought.class));
         cards.add(new SetCardInfo("White Sun's Twilight", 38, Rarity.RARE, mage.cards.w.WhiteSunsTwilight.class));
         cards.add(new SetCardInfo("Windcrag Siege", 52, Rarity.RARE, mage.cards.w.WindcragSiege.class));

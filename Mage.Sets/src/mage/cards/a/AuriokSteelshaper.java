@@ -15,8 +15,10 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.FilterAbility;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.other.AbilityClassPredicate;
 
 /**
  *
@@ -26,12 +28,14 @@ import mage.filter.predicate.Predicates;
 public final class AuriokSteelshaper extends CardImpl {
 
     private static final FilterCreaturePermanent soldiersOrKnights = new FilterCreaturePermanent();
+    private static final FilterAbility filterEquip = new FilterAbility("Equip costs you pay");
 
     static {
         soldiersOrKnights.add(Predicates.or(
                 SubType.SOLDIER.getPredicate(),
                 SubType.KNIGHT.getPredicate()
         ));
+        filterEquip.add(new AbilityClassPredicate(EquipAbility.class));
     }
 
     public AuriokSteelshaper(UUID ownerId, CardSetInfo setInfo) {
@@ -42,7 +46,7 @@ public final class AuriokSteelshaper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Equip costs you pay cost {1} less.
-        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(EquipAbility.class, "Equip")));
+        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(filterEquip)));
 
         // As long as Auriok Steelshaper is equipped, each creature you control that's a Soldier or a Knight gets +1/+1.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(

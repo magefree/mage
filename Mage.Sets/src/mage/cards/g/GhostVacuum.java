@@ -91,8 +91,9 @@ class GhostVacuumEffect extends OneShotEffect {
         }
         player.moveCards(creatureCards, Zone.BATTLEFIELD, source, game);
 
-        creatureCards.stream()
-                .map(game::getPermanent)
+        creatureCards.getCards(game)
+                .stream()
+                .map(card -> CardUtil.getPermanentFromCardPutToBattlefield(card, game))
                 .filter(Objects::nonNull)
                 .forEach(permanent -> {
                     // Each of them is a 1/1 Spirit in addition to its other types.

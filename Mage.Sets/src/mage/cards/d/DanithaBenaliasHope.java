@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -16,6 +17,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -100,11 +102,14 @@ class DanithaBenaliasHopeEffect extends OneShotEffect {
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
             if (sourcePermanent != null) {
-                game.getState().setValue("attachTo:" + card.getId(), sourcePermanent);
+                AttachEffect.setAttachTo(game, card.getId(), sourcePermanent);
             }
             controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             if (sourcePermanent != null) {
-                sourcePermanent.addAttachment(card.getId(), source, game);
+                Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+                if (attachment != null) {
+                    sourcePermanent.addAttachment(attachment.getId(), source, game);
+                }
             }
         }
         return true;

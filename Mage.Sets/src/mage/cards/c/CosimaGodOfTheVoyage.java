@@ -19,6 +19,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -231,7 +232,7 @@ class CosimaGodOfTheVoyageReturnEffect extends OneShotEffect {
 
         // draw and boost
         player.drawCards(newCount, source, game);
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent != null) {
             permanent.addCounters(CounterType.P1P1.createInstance(newCount), player.getId(), source, game);
         }

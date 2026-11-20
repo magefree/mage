@@ -20,6 +20,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 import mage.util.functions.CopyTokenFunction;
 import mage.util.functions.EmptyCopyApplier;
@@ -42,7 +43,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     private final List<Ability> additionalAbilities;
     private final CardType additionalCardType;
     private final List<SubType> additionalSubTypes = new ArrayList<>();
-    private final UUID attackedPlayer;
+    private final Set<UUID> attackedDefenders;
     private UUID attachedTo = null;
     private final boolean attacking;
     private boolean becomesArtifact;
@@ -106,11 +107,11 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         this(playerId, additionalCardType, hasHaste, number, tapped, attacking, null);
     }
 
-    public CreateTokenCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean hasHaste, int number, boolean tapped, boolean attacking, UUID attackedPlayer) {
-        this(playerId, additionalCardType, hasHaste, number, tapped, attacking, attackedPlayer, Integer.MIN_VALUE, Integer.MIN_VALUE, false);
+    public CreateTokenCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean hasHaste, int number, boolean tapped, boolean attacking, Set<UUID> attackedDefenders) {
+        this(playerId, additionalCardType, hasHaste, number, tapped, attacking, attackedDefenders, Integer.MIN_VALUE, Integer.MIN_VALUE, false);
     }
 
-    public CreateTokenCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean hasHaste, int number, boolean tapped, boolean attacking, UUID attackedPlayer, int power, int toughness, boolean gainsFlying) {
+    public CreateTokenCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean hasHaste, int number, boolean tapped, boolean attacking, Set<UUID> attackedDefenders, int power, int toughness, boolean gainsFlying) {
         super(Outcome.PutCreatureInPlay);
         this.playerId = playerId;
         this.additionalCardType = additionalCardType;
@@ -119,7 +120,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         this.number = number;
         this.tapped = tapped;
         this.attacking = attacking;
-        this.attackedPlayer = attackedPlayer;
+        this.attackedDefenders = attackedDefenders;
         this.tokenPower = power;
         this.tokenToughness = toughness;
         this.gainsFlying = gainsFlying;
@@ -131,12 +132,18 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     protected CreateTokenCopyTargetEffect(final CreateTokenCopyTargetEffect effect) {
         super(effect);
 
+        // TODO: need resarch, miss deep copy and possible data leak/modification between game states
+        // - abilityClazzesToRemove
+        // - addedTokenPermanents
+        // - additionalAbilities
+        // - savedPermanent
+        // - permanentModifier
         this.abilityClazzesToRemove = new HashSet<>(effect.abilityClazzesToRemove);
         this.addedTokenPermanents = new ArrayList<>(effect.addedTokenPermanents);
         this.additionalAbilities = new ArrayList<>(effect.additionalAbilities);
         this.additionalCardType = effect.additionalCardType;
         this.additionalSubTypes.addAll(effect.additionalSubTypes);
-        this.attackedPlayer = effect.attackedPlayer;
+        this.attackedDefenders = CardUtil.deepCopyObject(effect.attackedDefenders);
         this.attachedTo = effect.attachedTo;
         this.attacking = effect.attacking;
         this.becomesArtifact = effect.becomesArtifact;
@@ -222,7 +229,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         }
         if (!creationList.isEmpty()) {
             Token firstToken = creationList.get(0);
-            firstToken.putOntoBattlefield(number, game, source, playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedPlayer, attachedTo, true, creationList);
+            firstToken.putOntoBattlefield(number, game, source, playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedDefenders, attachedTo, true, creationList);
             for (UUID tokenId : firstToken.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
                 Permanent tokenPermanent = game.getPermanent(tokenId);
                 if (tokenPermanent != null) {

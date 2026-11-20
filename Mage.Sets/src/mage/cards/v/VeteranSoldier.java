@@ -12,6 +12,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.SoldierToken;
 
+import java.util.Collections;
 import java.util.UUID;
 
 /**
@@ -64,7 +65,7 @@ class VeteranSoldierEffect extends OneShotEffect {
             if (game.getPlayer(opponentId) != null) {
                 new SoldierToken().putOntoBattlefield(
                         1, game, source, source.getControllerId(),
-                        true, true, opponentId
+                        true, true, Collections.singleton(opponentId)
                 );
             }
         }

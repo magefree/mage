@@ -52,7 +52,7 @@ enum RavenousTrapCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         CardsPutIntoGraveyardWatcher watcher = game.getState().getWatcher(CardsPutIntoGraveyardWatcher.class);
         if (watcher != null) {
-            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+            for (UUID opponentId : game.getOpponents(source.getControllerId(), false)) {
                 if (watcher.getAmountCardsPutToGraveyard(opponentId) > 2) {
                     return true;
                 }

@@ -2,6 +2,7 @@ package mage.abilities.common;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
@@ -56,9 +57,12 @@ class ReturnSourceAttachedToItEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (sourceCard != null && permanent != null && controller != null) {
-            game.getState().setValue("attachTo:" + sourceCard.getId(), permanent);
+            AttachEffect.setAttachTo(game, sourceCard.getId(), permanent);
             if (controller.moveCards(sourceCard, Zone.BATTLEFIELD, source, game)) {
-                permanent.addAttachment(sourceCard.getId(), source, game);
+                Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(sourceCard, game);
+                if (attachment != null) {
+                    permanent.addAttachment(attachment.getId(), source, game);
+                }
             }
             return true;
         }

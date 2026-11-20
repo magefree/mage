@@ -27,7 +27,7 @@ public final class LashwhipPredator extends CardImpl {
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
             new FilterOpponentsCreaturePermanent("your opponents control three or more creatures"),
-            ComparisonType.MORE_THAN, 2
+            ComparisonType.MORE_THAN, 2, false
     );
     private static final Hint hint = new ValueHint(
             "Creatures your opponents control",
@@ -44,7 +44,7 @@ public final class LashwhipPredator extends CardImpl {
 
         // This spell costs {2} less to cast if your opponents control three or more creatures.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(2, condition).setCanWorksOnStackOnly(true)
+                Zone.ALL, new SpellCostReductionSourceEffect(2, condition)
         ).setRuleAtTheTop(true).addHint(hint));
 
         // Reach

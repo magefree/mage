@@ -45,6 +45,6 @@ public class NoncombatDamageToPlayersWatcher extends Watcher {
 
     public boolean opponentWasDamaged(UUID controllerId, boolean lastTurn, Game game) {
         Set<UUID> damaged = lastTurn ? damagedLastTurn : damagedThisTurn;
-        return game.getOpponents(controllerId).stream().anyMatch(damaged::contains);
+        return game.getOpponents(controllerId, false).stream().anyMatch(damaged::contains);
     }
 }

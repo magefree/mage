@@ -116,7 +116,7 @@ public class EmergeAbility extends SpellAbility {
                     if (super.activate(game, allowedIdentifiers, reducedToZero)) {
                         MageObjectReference mor = new MageObjectReference(creature, game);
                         if (creature.sacrifice(this, game)) {
-                            CardUtil.setSourceCostsTag(game, this, EMERGE_ACTIVATION_CREATURE_REFERENCE, mor); //Can access with LKI afterwards
+                            this.setCostsTag(EMERGE_ACTIVATION_CREATURE_REFERENCE, mor); //Can access with LKI afterwards
                             return true;
                         } else {
                             activated = false; // TODO: research, why

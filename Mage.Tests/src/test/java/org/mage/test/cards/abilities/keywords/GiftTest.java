@@ -1,9 +1,6 @@
 package org.mage.test.cards.abilities.keywords;
 
 import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -12,12 +9,10 @@ import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
 
 import org.junit.Test;
+import org.mage.test.rollback.CanceledCost;
 import org.mage.test.serverside.base.CardTestPlayerBase;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -411,35 +406,5 @@ public class GiftTest extends CardTestPlayerBase {
         assertTapped("Golgari Signet", false);
         assertHandCount(playerB, 1);
         assertPermanentCount(playerB, "Ornithopter", 0);
-    }
-}
-
-/**
- * Payment cancel and rollback simulation (like HumanPlayer cancel a cost)
- * Use it if no cards available (current test uses both use cases as usage example)
- */
-class CanceledCost extends CostImpl {
-
-    CanceledCost() {
-        this.text = "canceled cost";
-    }
-
-    private CanceledCost(final CanceledCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        return false;
-    }
-
-    @Override
-    public CanceledCost copy() {
-        return new CanceledCost(this);
     }
 }

@@ -103,4 +103,26 @@ public class TorporOrbTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerA, "Moonshadow", 2, 2);
     }
+
+    @Test
+    public void test_OneOrMoreTokensEnter() {
+        // Creatures entering the battlefield don't cause abilities to trigger.
+        addCard(Zone.BATTLEFIELD, playerB, "Torpor Orb");
+        //
+        // Whenever one or more tokens enter the battlefield under your control, put that many +1/+1 counters on Woodland Champion.
+        addCard(Zone.BATTLEFIELD, playerA, "Woodland Champion"); // 2/2
+        //
+        // Create two 1/1 white Soldier creature tokens.
+        addCard(Zone.HAND, playerA, "Raise the Alarm"); // {1}{W}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raise the Alarm");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Soldier Token", 2);
+        assertPowerToughness(playerA, "Woodland Champion", 2, 2);
+    }
 }

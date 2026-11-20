@@ -21,6 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
+import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 
 /**
@@ -81,7 +82,7 @@ class DimirDoppelgangerEffect extends OneShotEffect {
                 Cards cardsToExile = new CardsImpl();
                 cardsToExile.add(copyFromCard);
                 controller.moveCards(cardsToExile, Zone.EXILED, source, game);
-                newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
+                newBluePrint = new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, copyFromCard), source.getControllerId(), game);
                 newBluePrint.assignNewId();
                 CopyApplier applier = new DimirDoppelgangerCopyApplier();
                 applier.apply(game, newBluePrint, source, dimirDoppelganger.getId());

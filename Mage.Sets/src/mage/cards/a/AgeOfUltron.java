@@ -10,6 +10,7 @@ import mage.filter.predicate.Predicates;
 import mage.game.permanent.token.RobotVillainToken;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
+import mage.target.targetpointer.EachTargetPointer;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.dynamicvalue.common.OpponentsCount;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -51,6 +52,7 @@ public final class AgeOfUltron extends CardImpl {
             this, SagaChapter.CHAPTER_I,
             ability -> {
                 ability.addEffect(new DestroyTargetEffect()
+                    .setTargetPointer(new EachTargetPointer())
                     .setText("For each opponent, destroy up to one target nonartifact creature that player controls"));
                 ability.addTarget(new TargetPermanent(0, 1, filter));
                 ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, true));

@@ -16,10 +16,12 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.events.ZoneChangeBatchEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.IzoniInsectToken;
 
 import java.util.Objects;
@@ -79,7 +81,18 @@ class AmzuSwarmsHungerEffect extends CreateTokenEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        final int greatest = ((ZoneChangeGroupEvent)(((TriggeredAbility)source).getTriggerEvent())).getCards().stream().mapToInt(Card::getManaValue).max().orElse(0);
+        // those cards = cards that left your graveyard
+        final int greatest = ((ZoneChangeBatchEvent) ((TriggeredAbility) source).getTriggerEvent())
+                .getEvents()
+                .stream()
+                .filter(e -> e.getFromZone() == Zone.GRAVEYARD)
+                .map(ZoneChangeEvent::getTargetId)
+                .map(game::getCard)
+                .filter(Objects::nonNull)
+                .filter(card -> card.isOwnedBy(source.getControllerId()))
+                .mapToInt(Card::getManaValue)
+                .max()
+                .orElse(0);
         return super.apply(game, source) &&
             this.getLastAddedTokenIds().stream().map(game::getPermanent).filter(Objects::nonNull).allMatch(token -> token.addCounters(CounterType.P1P1.createInstance(greatest), source.getControllerId(), source, game));
     }

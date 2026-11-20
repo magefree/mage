@@ -9,7 +9,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.filter.FilterAbility;
 import mage.filter.FilterCard;
+import mage.filter.predicate.other.AbilityClassPredicate;
 
 import java.util.UUID;
 
@@ -19,9 +21,11 @@ import java.util.UUID;
 public final class BureauHeadmaster extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Equipment spells");
+    private static final FilterAbility filterEquip = new FilterAbility("equip abilities you activate");
 
     static {
         filter.add(SubType.EQUIPMENT.getPredicate());
+        filterEquip.add(new AbilityClassPredicate(EquipAbility.class));
     }
 
     public BureauHeadmaster(UUID ownerId, CardSetInfo setInfo) {
@@ -36,9 +40,7 @@ public final class BureauHeadmaster extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
 
         // Equip abilities you activate cost {1} less to activate.
-        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(
-                EquipAbility.class, "Equip", 1
-        ).setText("equip abilities you activate cost {1} less to activate")));
+        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(filterEquip)));
     }
 
     private BureauHeadmaster(final BureauHeadmaster card) {

@@ -10,7 +10,6 @@ import mage.cards.Card;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.util.CardUtil;
 
 import java.util.Set;
 import java.util.UUID;
@@ -58,7 +57,7 @@ public class SpectacleAbility extends SpellAbility {
     @Override
     public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
         if (super.activate(game, allowedIdentifiers, noMana)) {
-            CardUtil.setSourceCostsTag(game, this, SPECTACLE_ACTIVATION_VALUE_KEY, null);
+            this.setCostsTag(SPECTACLE_ACTIVATION_VALUE_KEY, null);
             return true;
         }
         return false;

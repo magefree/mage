@@ -55,7 +55,7 @@ enum OpponentCastBlueSpellThisTurnCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         if (watcher != null) {
-            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+            for (UUID opponentId : game.getOpponents(source.getControllerId(), false)) {
                 if (opponentId != null) {
                     List<Spell> spells = watcher.getSpellsCastThisTurn(opponentId);
                     if (spells != null) {

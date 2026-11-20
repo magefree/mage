@@ -11,7 +11,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.filter.FilterAbility;
 import mage.filter.StaticFilters;
+import mage.filter.predicate.other.AbilityClassPredicate;
 
 import java.util.UUID;
 
@@ -21,6 +23,12 @@ import java.util.UUID;
  */
 public final class NerfHerder extends CardImpl {
 
+    private static final FilterAbility filterMonstrosity = new FilterAbility("monstrosity abilities you activate");
+
+    static {
+        filterMonstrosity.add(new AbilityClassPredicate(MonstrosityAbility.class));
+    }
+
     public NerfHerder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add(SubType.HUMAN);
@@ -28,7 +36,7 @@ public final class NerfHerder extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Monstrosity abilities you activate cost {1} less to activate.
-        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(MonstrosityAbility.class, "Monstrosity")));
+        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(filterMonstrosity)));
 
         // Each creature you control with a +1/+1 counter on it has trample.
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(

@@ -116,9 +116,9 @@ class RadiantGraceEffect extends OneShotEffect {
         }
 
         game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId() + card.getZoneChangeCounter(game), Boolean.TRUE);
-        game.getState().setValue("attachTo:" + card.getOtherSide().getId(), player.getId());
+        AttachEffect.setAttachTo(game, card.getOtherSide().getId(), player.getId());
         if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-            player.addAttachment(card.getId(), source, game);
+            player.addAttachment(card.getOtherSide().getId(), source, game);
         }
         return true;
     }

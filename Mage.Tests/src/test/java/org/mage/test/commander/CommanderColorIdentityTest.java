@@ -18,6 +18,7 @@ public class CommanderColorIdentityTest extends CardTestCommander3PlayersFFA {
         // Basic Colors
         Assert.assertEquals("{B}", getColorIdentityString("Sengir Vampire"));
         Assert.assertEquals("{G}", getColorIdentityString("Elvish Visionary"));
+        Assert.assertEquals("{B}", getColorIdentityString("Hela, Mistress of Darkness"));
         Assert.assertEquals("{R}", getColorIdentityString("Demolish"));
         Assert.assertEquals("{U}", getColorIdentityString("Negate"));
         Assert.assertEquals("{W}", getColorIdentityString("Silvercoat Lion"));

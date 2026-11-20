@@ -66,7 +66,7 @@ public abstract class AlternativeSourceCostsImpl extends StaticAbility implement
     @Override
     public boolean activateAlternativeCosts(Ability ability, Game game) {
         this.resetCost();
-        CardUtil.setSourceCostsTag(game, ability, activationKey, null);
+        ability.setCostsTag(activationKey, null);
         alternativeCost.activate();
 
         ability.clearManaCostsToPay();

@@ -36,7 +36,7 @@ public class CycleTriggeredAbility extends ZoneChangeTriggeredAbility {
         if (!event.getSourceId().equals(this.getSourceId())) {
             return false;
         }
-        StackObject object = game.getStack().getStackObject(event.getSourceId());
+        StackObject object = game.getStack().getStackObject(event.getTargetId());
         if (object == null || !(object.getStackAbility() instanceof CyclingAbility)) {
             return false;
         }

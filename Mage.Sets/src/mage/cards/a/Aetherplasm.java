@@ -20,6 +20,7 @@ import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 
 /**
  *
@@ -77,7 +78,7 @@ class AetherplasmEffect extends OneShotEffect {
                     if (player.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, false, null)
                             && game.getCombat() != null && blockedCreature != null) {
                         CombatGroup attacker = game.getCombat().findGroup(blockedCreature.getId());
-                        Permanent putIntoPlay = game.getPermanent(target.getFirstTarget());
+                        Permanent putIntoPlay = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                         if (putIntoPlay != null && putIntoPlay.isCreature(game) && attacker != null) {
                             game.getCombat().findGroup(blockedCreature.getId()).addBlocker(putIntoPlay.getId(), source.getControllerId(), game);
 

@@ -23,6 +23,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -125,14 +126,18 @@ class SemestersEndReturnEffect extends OneShotEffect {
         if (cards.isEmpty()) {
             return false;
         }
-        cards.stream().map(game::getPermanent).filter(Objects::nonNull).forEach(p -> {
-            if (p.isCreature(game)) {
-                p.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
-            }
-            if (p.isPlaneswalker(game)) {
-                p.addCounters(CounterType.LOYALTY.createInstance(), source.getControllerId(), source, game);
-            }
-        });
+        cards.getCards(game)
+                .stream()
+                .map(card -> CardUtil.getPermanentFromCardPutToBattlefield(card, game))
+                .filter(Objects::nonNull)
+                .forEach(p -> {
+                    if (p.isCreature(game)) {
+                        p.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
+                    }
+                    if (p.isPlaneswalker(game)) {
+                        p.addCounters(CounterType.LOYALTY.createInstance(), source.getControllerId(), source, game);
+                    }
+                });
         return true;
     }
 }
