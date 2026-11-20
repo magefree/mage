@@ -332,6 +332,8 @@ public final class MarvelSuperHeroesCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Heroes' Hangout", 804, Rarity.UNCOMMON, mage.cards.h.HeroesHangout.class));
         cards.add(new SetCardInfo("Heroic Return", 17, Rarity.RARE, mage.cards.h.HeroicReturn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Heroic Return", 309, Rarity.RARE, mage.cards.h.HeroicReturn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Heroic Sacrifice", 18, Rarity.RARE, mage.cards.h.HeroicSacrifice.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Heroic Sacrifice", 310, Rarity.RARE, mage.cards.h.HeroicSacrifice.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Heroic Teamwork", 597, Rarity.COMMON, mage.cards.h.HeroicTeamwork.class));
         cards.add(new SetCardInfo("Hinterland Harbor", 250, Rarity.RARE, mage.cards.h.HinterlandHarbor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hinterland Harbor", 480, Rarity.RARE, mage.cards.h.HinterlandHarbor.class, NON_FULL_USE_VARIOUS));
