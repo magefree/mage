@@ -1,16 +1,10 @@
 package org.mage.test.cards.single.mid;
 
-import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
-import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
-import mage.game.FreeForAll;
-import mage.game.Game;
-import mage.game.GameException;
-import mage.game.mulligan.MulliganType;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestMultiPlayerBase;
+import org.mage.test.serverside.base.CardTestCommander4Players;
 
 /**
  * 800.4a
@@ -27,18 +21,7 @@ import org.mage.test.serverside.base.CardTestMultiPlayerBase;
  *
  * @author DarioBarrabinoDev
  */
-public class AdelineResplendentCatharTest extends CardTestMultiPlayerBase {
-
-    @Override
-    protected Game createNewGameAndPlayers() throws GameException {
-        // Player order: A -> D -> C -> B
-        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20, 7);
-        playerA = createPlayer(game, "PlayerA");
-        playerB = createPlayer(game, "PlayerB");
-        playerC = createPlayer(game, "PlayerC");
-        playerD = createPlayer(game, "PlayerD");
-        return game;
-    }
+public class AdelineResplendentCatharTest extends CardTestCommander4Players {
 
     @Test
     public void test_IgnoreLeavedPlayers() {
