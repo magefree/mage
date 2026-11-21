@@ -38,30 +38,30 @@ public final class DeliverFromChaos extends CardImpl {
     public DeliverFromChaos copy() {
         return new DeliverFromChaos(this);
     }
-}
 
-enum DeliverFromChaosValue implements DynamicValue {
-    instance;
+    private enum DeliverFromChaosValue implements DynamicValue {
+        instance;
 
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        // the permanent is already exiled at this point, so its mana value comes from last known information
-        Permanent permanent = effect.getTargetPointer().getFirstTargetPermanentOrLKI(game, sourceAbility);
-        return permanent == null ? 0 : permanent.getManaValue();
-    }
+        @Override
+        public int calculate(Game game, Ability sourceAbility, Effect effect) {
+            // Use the target as it last existed on the battlefield if it has already left.
+            Permanent permanent = effect.getTargetPointer().getFirstTargetPermanentOrLKI(game, sourceAbility);
+            return permanent == null ? 0 : permanent.getManaValue();
+        }
 
-    @Override
-    public DeliverFromChaosValue copy() {
-        return instance;
-    }
+        @Override
+        public DeliverFromChaosValue copy() {
+            return this;
+        }
 
-    @Override
-    public String toString() {
-        return "X";
-    }
+        @Override
+        public String toString() {
+            return "X";
+        }
 
-    @Override
-    public String getMessage() {
-        return "that permanent's mana value";
+        @Override
+        public String getMessage() {
+            return "that permanent's mana value";
+        }
     }
 }
