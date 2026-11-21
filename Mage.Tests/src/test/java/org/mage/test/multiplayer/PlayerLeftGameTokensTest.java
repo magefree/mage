@@ -28,11 +28,9 @@ import org.mage.test.serverside.base.CardTestCommander4Players;
 public class PlayerLeftGameTokensTest extends CardTestCommander4Players {
 
     private void killPlayerB() {
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
-        addCard(Zone.HAND, playerA, "Lightning Bolt");
-        setLife(playerB, 3);
+        addCustomEffect_TargetDamage(playerA, 20);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "target damage 20", playerB);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         runCode("playerB lost", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             Assert.assertTrue("playerB must lose", playerB.hasLost());
