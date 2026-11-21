@@ -93,7 +93,7 @@ enum Vault12TheNecropolisValue implements DynamicValue {
         }
         return game
                 .getState()
-                .getPlayersInRange(sourceAbility.getControllerId(), game)
+                .getPlayersInRange(sourceAbility.getControllerId(), game, true)
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)

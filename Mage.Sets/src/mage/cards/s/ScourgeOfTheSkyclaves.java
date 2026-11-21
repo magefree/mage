@@ -64,7 +64,7 @@ enum ScourgeOfTheSkyclavesValue implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return 20 - game
                 .getState()
-                .getPlayersInRange(sourceAbility.getControllerId(), game)
+                .getPlayersInRange(sourceAbility.getControllerId(), game, true)
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
