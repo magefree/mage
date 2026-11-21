@@ -34,8 +34,8 @@ public final class SheoldredsRestoration extends CardImpl {
 
         // If this spell was kicked, you gain life equal to that card's mana value. Otherwise, you lose that much life.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new GainLifeEffect(TargetManaValue.instance),
-                new LoseLifeSourceControllerEffect(TargetManaValue.instance),
+                new GainLifeEffect(TargetManaValue.CARD),
+                new LoseLifeSourceControllerEffect(TargetManaValue.CARD),
                 KickedCondition.ONCE,
                 "If this spell was kicked, you gain life equal to that card's mana value. Otherwise, you lose that much life."
         ));

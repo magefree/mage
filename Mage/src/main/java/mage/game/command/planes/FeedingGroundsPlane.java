@@ -47,7 +47,7 @@ public class FeedingGroundsPlane extends Plane {
         this.getAbilities().add(ability);
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, target red or green creature gets X +1/+1 counters
-        Effect chaosEffect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(), TargetManaValue.instance);
+        Effect chaosEffect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(), TargetManaValue.CREATURE);
         Target chaosTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_A_CREATURE);
 
         List<Effect> chaosEffects = new ArrayList<>();

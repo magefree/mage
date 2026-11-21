@@ -23,7 +23,7 @@ public final class DivineOffering extends CardImpl {
 
         // Destroy target artifact. You gain life equal to its converted mana cost.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        Effect effect = new GainLifeEffect(TargetManaValue.instance);
+        Effect effect = new GainLifeEffect(TargetManaValue.ARTIFACT);
         effect.setText("You gain life equal to its mana value");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());

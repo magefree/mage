@@ -30,7 +30,7 @@ public final class WordOfBlasting extends CardImpl {
 
         // Destroy target Wall. It can't be regenerated. Word of Blasting deals damage equal to that Wall's converted mana cost to the Wall's controller.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        Effect effect = new DamageTargetControllerEffect(TargetManaValue.instance);
+        Effect effect = new DamageTargetControllerEffect(TargetManaValue.CREATURE);
         effect.setText("{this} deals damage equal to that Wall's mana value to the Wall's controller");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
