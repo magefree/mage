@@ -1,18 +1,12 @@
 package org.mage.test.multiplayer;
 
-import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
-import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.FreeForAll;
-import mage.game.Game;
-import mage.game.GameException;
-import mage.game.mulligan.MulliganType;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
-import org.mage.test.serverside.base.CardTestMultiPlayerBase;
+import org.mage.test.serverside.base.CardTestCommander4Players;
 
 /**
  * 800.4a
@@ -31,18 +25,7 @@ import org.mage.test.serverside.base.CardTestMultiPlayerBase;
  *
  * @author DarioBarrabinoDev
  */
-public class PlayerLeftGameTokensTest extends CardTestMultiPlayerBase {
-
-    @Override
-    protected Game createNewGameAndPlayers() throws GameException {
-        // Player order: A -> D -> C -> B
-        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20, 7);
-        playerA = createPlayer(game, "PlayerA");
-        playerB = createPlayer(game, "PlayerB");
-        playerC = createPlayer(game, "PlayerC");
-        playerD = createPlayer(game, "PlayerD");
-        return game;
-    }
+public class PlayerLeftGameTokensTest extends CardTestCommander4Players {
 
     private void killPlayerB() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
