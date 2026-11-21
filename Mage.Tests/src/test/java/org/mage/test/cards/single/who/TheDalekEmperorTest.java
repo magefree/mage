@@ -24,16 +24,13 @@ public class TheDalekEmperorTest extends CardTestCommander4Players {
         // At the beginning of combat on your turn, each opponent faces a villainous choice -- That player sacrifices
         // a creature of their choice, or you create a 3/3 black Dalek artifact creature token with menace.
         addCard(Zone.BATTLEFIELD, playerA, "The Dalek Emperor");
-        addCard(Zone.HAND, playerA, "Lightning Bolt"); // {R}
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCustomEffect_TargetDamage(playerA, 20);
         //
         addCard(Zone.BATTLEFIELD, playerC, "Grizzly Bears"); // bear 2/2
         addCard(Zone.BATTLEFIELD, playerD, "Silvercoat Lion"); // lion 2/2
-        //
-        setLife(playerB, 3);
 
         // playerB loses the game
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "target damage 20", playerB);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         runCode("playerB lost", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             Assert.assertTrue("playerB must lose", playerB.hasLost());

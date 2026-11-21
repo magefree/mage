@@ -316,13 +316,10 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         // creature token for each numbers vote.
         addCard(Zone.HAND, playerA, "Lieutenants of the Guard"); // {4}{W}, 2/2
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
-        addCard(Zone.HAND, playerA, "Lightning Bolt"); // {R}
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
-        //
-        setLife(playerB, 3);
+        addCustomEffect_TargetDamage(playerA, 20);
 
         // playerB loses the game
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "target damage 20", playerB);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         runCode("playerB lost", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             Assert.assertTrue("playerB must lose", playerB.hasLost());
