@@ -9,12 +9,27 @@ import mage.game.FreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.mulligan.MulliganType;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
 import java.io.FileNotFoundException;
 
 /**
+ * 702.116a
+ * Myriad is a triggered ability that may also create a delayed triggered ability. “Myriad” means “Whenever this
+ * creature attacks, for each opponent other than defending player, you may create a token that’s a copy of this
+ * creature that’s tapped and attacking that player or a planeswalker they control. If one or more tokens are created
+ * this way, exile the tokens at end of combat.”
+ * <p>
+ * 800.4a
+ * When a player leaves the game, all objects (see rule 109) owned by that player leave the game and any effects which
+ * give that player control of any objects or players end. Then, if that player controlled any objects on the stack not
+ * represented by cards, those objects cease to exist. Then, if there are any objects still controlled by that player,
+ * those objects are exiled. This is not a state-based action. It happens as soon as the player leaves the game. If the
+ * player who left the game had priority at the time they left, priority passes to the next player in turn order who’s
+ * still in the game.
+ *
  * @author LevelX2
  */
 public class MyriadTest extends CardTestMultiPlayerBase {
@@ -179,5 +194,35 @@ public class MyriadTest extends CardTestMultiPlayerBase {
         assertLife(playerA, 40 - 8);
         assertLife(playerB, 40 - 8);
         assertLife(playerC, 40 - 8);
+    }
+
+    @Test
+    public void test_MyriadIgnoreLeavedPlayers_CallerOfThePack() {
+        // Myriad (Whenever this creature attacks, for each opponent other than defending player, you may create a token
+        // copy that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)
+        addCard(Zone.BATTLEFIELD, playerA, "Caller of the Pack"); // 8/6, trample
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        //
+        setLife(playerB, 3);
+
+        // playerB loses the game
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        runCode("playerB lost", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Assert.assertTrue("playerB must lose", playerB.hasLost());
+        });
+
+        // turns: A, D, C, B
+        attack(1, playerA, "Caller of the Pack", playerC);
+        setChoice(playerA, true); // copy for playerD, no copy for the leaved playerB
+        checkPermanentCount("must have 2 packs", 1, PhaseStep.DECLARE_BLOCKERS, playerA, "Caller of the Pack", 2);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+
+        assertLife(playerC, 40 - 8);
+        assertLife(playerD, 40 - 8);
     }
 }
