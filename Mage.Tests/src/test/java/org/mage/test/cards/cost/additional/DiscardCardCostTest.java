@@ -125,6 +125,48 @@ public class DiscardCardCostTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
+    public void test_AdventureSpell_AloneInHand_NotPlayable() {
+        // Rather than pay the mana cost for a spell, its controller may discard a card that shares a color with that spell.
+        addCard(Zone.BATTLEFIELD, playerA, "Dream Halls");
+        // Lovestruck Beast can't attack unless you control a 1/1 creature.
+        // Heart's Desire {G}: Create a 1/1 white Human creature token.
+        addCard(Zone.HAND, playerA, "Lovestruck Beast"); // {2}{G}
+
+        // Dream Halls excludes the spell with AnotherPredicate, but an adventure spell's id isn't its card's id
+        checkPlayableAbility("not playable", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Heart's Desire", false);
+        checkPlayableAbility("not playable", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lovestruck Beast", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerA, "Lovestruck Beast", 1);
+    }
+
+    @Test
+    public void test_AdventureSpell_WithOtherCard_DiscardsIt() {
+        // Rather than pay the mana cost for a spell, its controller may discard a card that shares a color with that spell.
+        addCard(Zone.BATTLEFIELD, playerA, "Dream Halls");
+        // Lovestruck Beast can't attack unless you control a 1/1 creature.
+        // Heart's Desire {G}: Create a 1/1 white Human creature token.
+        addCard(Zone.HAND, playerA, "Lovestruck Beast"); // {2}{G}
+        addCard(Zone.HAND, playerA, "Grizzly Bears");
+
+        checkPlayableAbility("playable", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Heart's Desire", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Heart's Desire");
+        setChoice(playerA, "Cast with alternative cost: Discard a card that shares a color with that spell (source: Dream Halls");
+        setChoice(playerA, "Grizzly Bears"); // discard cost
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Grizzly Bears", 1);
+        assertPermanentCount(playerA, "Human Token", 1);
+        assertExileCount(playerA, "Lovestruck Beast", 1);
+    }
+
+    @Test
     public void test_AI_DontCastAloneInHand() {
         // As an additional cost to cast this spell, discard a card.
         // Draw two cards.
