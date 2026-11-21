@@ -6,8 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -304,7 +302,7 @@ class ForetellAddCostEffect extends ContinuousEffectImpl {
                 if (card instanceof SplitCard) {
                     if (foretellCost != null) {
                         SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
-                        ForetellCostAbility ability = new ForetellCostAbility(foretellCost);
+                        ForetellCostAbility ability = new ForetellCostAbility(leftHalfCard, foretellCost);
                         ability.setSourceId(leftHalfCard.getId());
                         ability.setControllerId(source.getControllerId());
                         ability.setSpellAbilityType(leftHalfCard.getSpellAbility().getSpellAbilityType());
@@ -313,7 +311,7 @@ class ForetellAddCostEffect extends ContinuousEffectImpl {
                     }
                     if (foretellSplitCost != null) {
                         SplitCardHalf rightHalfCard = ((SplitCard) card).getRightHalfCard();
-                        ForetellCostAbility ability = new ForetellCostAbility(foretellSplitCost);
+                        ForetellCostAbility ability = new ForetellCostAbility(rightHalfCard, foretellSplitCost);
                         ability.setSourceId(rightHalfCard.getId());
                         ability.setControllerId(source.getControllerId());
                         ability.setSpellAbilityType(rightHalfCard.getSpellAbility().getSpellAbilityType());
@@ -325,7 +323,7 @@ class ForetellAddCostEffect extends ContinuousEffectImpl {
                         ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
                         // some MDFC's are land IE: sea gate restoration
                         if (!leftHalfCard.isLand(game)) {
-                            ForetellCostAbility ability = new ForetellCostAbility(foretellCost);
+                            ForetellCostAbility ability = new ForetellCostAbility(leftHalfCard, foretellCost);
                             ability.setSourceId(leftHalfCard.getId());
                             ability.setControllerId(source.getControllerId());
                             ability.setSpellAbilityType(leftHalfCard.getSpellAbility().getSpellAbilityType());
@@ -337,7 +335,7 @@ class ForetellAddCostEffect extends ContinuousEffectImpl {
                         ModalDoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
                         // some MDFC's are land IE: sea gate restoration
                         if (!rightHalfCard.isLand(game)) {
-                            ForetellCostAbility ability = new ForetellCostAbility(foretellSplitCost);
+                            ForetellCostAbility ability = new ForetellCostAbility(rightHalfCard, foretellSplitCost);
                             ability.setSourceId(rightHalfCard.getId());
                             ability.setControllerId(source.getControllerId());
                             ability.setSpellAbilityType(rightHalfCard.getSpellAbility().getSpellAbilityType());
@@ -348,7 +346,7 @@ class ForetellAddCostEffect extends ContinuousEffectImpl {
                 } else if (card instanceof CardWithSpellOption) {
                     if (foretellCost != null) {
                         Card creatureCard = card.getMainCard();
-                        ForetellCostAbility ability = new ForetellCostAbility(foretellCost);
+                        ForetellCostAbility ability = new ForetellCostAbility(creatureCard, foretellCost);
                         ability.setSourceId(creatureCard.getId());
                         ability.setControllerId(source.getControllerId());
                         ability.setSpellAbilityType(creatureCard.getSpellAbility().getSpellAbilityType());
@@ -357,7 +355,7 @@ class ForetellAddCostEffect extends ContinuousEffectImpl {
                     }
                     if (foretellSplitCost != null) {
                         Card spellCard = ((CardWithSpellOption) card).getSpellCard();
-                        ForetellCostAbility ability = new ForetellCostAbility(foretellSplitCost);
+                        ForetellCostAbility ability = new ForetellCostAbility(spellCard, foretellSplitCost);
                         ability.setSourceId(spellCard.getId());
                         ability.setControllerId(source.getControllerId());
                         ability.setSpellAbilityType(spellCard.getSpellAbility().getSpellAbilityType());
@@ -366,14 +364,14 @@ class ForetellAddCostEffect extends ContinuousEffectImpl {
                     }
                 } else if (card instanceof TransformingDoubleFacedCard && foretellCost != null) {
                     Card frontCard = ((TransformingDoubleFacedCard) card).getLeftHalfCard();
-                    ForetellCostAbility ability = new ForetellCostAbility(foretellCost);
+                    ForetellCostAbility ability = new ForetellCostAbility(frontCard, foretellCost);
                     ability.setSourceId(frontCard.getId());
                     ability.setControllerId(source.getControllerId());
                     ability.setSpellAbilityType(frontCard.getSpellAbility().getSpellAbilityType());
                     ability.setAbilityName(frontCard.getName());
                     game.getState().addOtherAbility(frontCard, ability);
                 } else if (foretellCost != null) {
-                    ForetellCostAbility ability = new ForetellCostAbility(foretellCost);
+                    ForetellCostAbility ability = new ForetellCostAbility(card, foretellCost);
                     ability.setSourceId(card.getId());
                     ability.setControllerId(source.getControllerId());
                     ability.setSpellAbilityType(card.getSpellAbility().getSpellAbilityType());
@@ -396,10 +394,14 @@ class ForetellAddCostEffect extends ContinuousEffectImpl {
 class ForetellCostAbility extends SpellAbility {
 
     private String abilityName;
-    private SpellAbility spellAbilityToResolve;
 
-    ForetellCostAbility(String foretellCost) {
-        super(null, "Testing", Zone.EXILED, SpellAbilityType.BASE_ALTERNATE, SpellAbilityCastMode.NORMAL);
+    ForetellCostAbility(Card card, String foretellCost) {
+        // the card's spell ability with the foretell cost, so its own costs and cost adjuster are part of it
+        super(card.getSpellAbility());
+        this.newId();
+        this.zone = Zone.EXILED;
+        this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+        this.spellAbilityCastMode = SpellAbilityCastMode.NORMAL;
         // Needed for Dream Devourer and Ethereal Valkyrie reducing the cost of a colorless CMC 2 or less spell to 0
         // CardUtil.reduceCost returns an empty string in that case so we add a cost of 0 here
         // https://github.com/magefree/mage/issues/7607
@@ -408,6 +410,8 @@ class ForetellCostAbility extends SpellAbility {
         }
         this.setAdditionalCostsRuleVisible(false);
         this.name = "Foretell " + foretellCost;
+        this.clearManaCosts();
+        this.clearManaCostsToPay();
         this.addCost(new ManaCostsImpl<>(foretellCost));
     }
 
@@ -415,7 +419,6 @@ class ForetellCostAbility extends SpellAbility {
         super(ability);
         this.spellAbilityType = ability.spellAbilityType;
         this.abilityName = ability.abilityName;
-        this.spellAbilityToResolve = ability.spellAbilityToResolve;
     }
 
     @Override
@@ -470,78 +473,15 @@ class ForetellCostAbility extends SpellAbility {
     }
 
     @Override
-    public SpellAbility getSpellAbilityToResolve(Game game) {
-        Card card = game.getCard(getSourceId());
-        if (card != null) {
-            if (spellAbilityToResolve == null) {
-                SpellAbility spellAbilityCopy = null;
-                if (card instanceof SplitCard) {
-                    if (((SplitCard) card).getLeftHalfCard().getName().equals(abilityName)) {
-                        spellAbilityCopy = ((SplitCard) card).getLeftHalfCard().getSpellAbility().copy();
-                    } else if (((SplitCard) card).getRightHalfCard().getName().equals(abilityName)) {
-                        spellAbilityCopy = ((SplitCard) card).getRightHalfCard().getSpellAbility().copy();
-                    }
-                } else if (card instanceof ModalDoubleFacedCard) {
-                    if (((ModalDoubleFacedCard) card).getLeftHalfCard().getName().equals(abilityName)) {
-                        spellAbilityCopy = ((ModalDoubleFacedCard) card).getLeftHalfCard().getSpellAbility().copy();
-                    } else if (((ModalDoubleFacedCard) card).getRightHalfCard().getName().equals(abilityName)) {
-                        spellAbilityCopy = ((ModalDoubleFacedCard) card).getRightHalfCard().getSpellAbility().copy();
-                    }
-                } else if (card instanceof CardWithSpellOption) {
-                    if (card.getMainCard().getName().equals(abilityName)) {
-                        spellAbilityCopy = card.getMainCard().getSpellAbility().copy();
-                    } else if (((CardWithSpellOption) card).getSpellCard().getName().equals(abilityName)) {
-                        spellAbilityCopy = ((CardWithSpellOption) card).getSpellCard().getSpellAbility().copy();
-                    }
-                } else {
-                    spellAbilityCopy = card.getSpellAbility().copy();
-                }
-                if (spellAbilityCopy == null) {
-                    return null;
-                }
-                spellAbilityCopy.setId(this.getId());
-                spellAbilityCopy.clearManaCosts();
-                spellAbilityCopy.clearManaCostsToPay();
-                spellAbilityCopy.addCost(this.getCosts().copy());
-                spellAbilityCopy.addCost(this.getManaCosts().copy());
-                spellAbilityCopy.setSpellAbilityCastMode(this.getSpellAbilityCastMode());
-                spellAbilityToResolve = spellAbilityCopy;
-            }
-        }
-        return spellAbilityToResolve;
-    }
-
-    @Override
-    public Costs<Cost> getCosts() {
-        if (spellAbilityToResolve == null) {
-            return super.getCosts();
-        }
-        return spellAbilityToResolve.getCosts();
-    }
-
-    @Override
     public ForetellCostAbility copy() {
         return new ForetellCostAbility(this);
     }
 
     @Override
     public String getRule(boolean all) {
-        StringBuilder sbRule = new StringBuilder("Foretell");
-        if (!getCosts().isEmpty()) {
-            sbRule.append("&mdash;");
-        } else {
-            sbRule.append(' ');
-        }
-        if (!getManaCosts().isEmpty()) {
-            sbRule.append(getManaCosts().getText());
-        }
-        if (!getCosts().isEmpty()) {
-            if (!getManaCosts().isEmpty()) {
-                sbRule.append(", ");
-            }
-            sbRule.append(getCosts().getText());
-            sbRule.append('.');
-        }
+        // foretell cost is mana only, the card's own additional costs aren't part of it
+        StringBuilder sbRule = new StringBuilder("Foretell ");
+        sbRule.append(getManaCosts().getText());
         if (abilityName != null) {
             sbRule.append(' ');
             sbRule.append(abilityName);

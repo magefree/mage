@@ -5,8 +5,6 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
 import mage.abilities.SpellAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -199,7 +197,7 @@ class PlotAddSpellAbilityEffect extends ContinuousEffectImpl {
         List<Card> faces = CardUtil.getCastableComponents(mainCard, null, source, player, game, null, false);
         for (Card face : faces) {
             // Add the spell ability to each castable face to have the proper name/paramaters.
-            PlotSpellAbility ability = new PlotSpellAbility(face.getName());
+            PlotSpellAbility ability = new PlotSpellAbility(face);
             ability.setSourceId(face.getId());
             ability.setControllerId(player.getId());
             ability.setSpellAbilityType(face.getSpellAbility().getSpellAbilityType());
@@ -215,20 +213,25 @@ class PlotAddSpellAbilityEffect extends ContinuousEffectImpl {
 class PlotSpellAbility extends SpellAbility {
 
     private String faceCardName; // Same as with Foretell, we identify the proper face with its spell name.
-    private SpellAbility spellAbilityToResolve;
 
-    PlotSpellAbility(String faceCardName) {
-        super(null, faceCardName, Zone.EXILED, SpellAbilityType.BASE_ALTERNATE, SpellAbilityCastMode.PLOT);
+    PlotSpellAbility(Card face) {
+        // the face's spell ability cast without paying its mana cost, so its own costs and cost adjuster are part of it
+        super(face.getSpellAbility());
+        this.newId();
+        this.zone = Zone.EXILED;
+        this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+        this.setSpellAbilityCastMode(SpellAbilityCastMode.PLOT);
         this.setRuleVisible(false);
         this.setAdditionalCostsRuleVisible(false);
-        this.faceCardName = faceCardName;
+        this.faceCardName = face.getName();
+        this.clearManaCosts();
+        this.clearManaCostsToPay();
         this.addCost(new ManaCostsImpl<>("{0}"));
     }
 
     private PlotSpellAbility(final PlotSpellAbility ability) {
         super(ability);
         this.faceCardName = ability.faceCardName;
-        this.spellAbilityToResolve = ability.spellAbilityToResolve;
     }
 
     @Override
@@ -279,50 +282,5 @@ class PlotSpellAbility extends SpellAbility {
             }
         }
         return ActivationStatus.getFalse();
-    }
-
-    @Override
-    public SpellAbility getSpellAbilityToResolve(Game game) {
-        Card card = game.getCard(getSourceId());
-        if (card != null) {
-            if (spellAbilityToResolve == null) {
-                SpellAbility spellAbilityCopy = null;
-                // TODO: As with Foretell, this does not look very clean. Is the face card sometimes incorrect on calling getSpellAbilityToResolve?
-                if (card instanceof CardWithHalves) {
-                    if (((CardWithHalves) card).getLeftHalfCard().getName().equals(faceCardName)) {
-                        spellAbilityCopy = ((CardWithHalves) card).getLeftHalfCard().getSpellAbility().copy();
-                    } else if (((CardWithHalves) card).getRightHalfCard().getName().equals(faceCardName)) {
-                        spellAbilityCopy = ((CardWithHalves) card).getRightHalfCard().getSpellAbility().copy();
-                    }
-                } else if (card instanceof CardWithSpellOption) {
-                    if (card.getMainCard().getName().equals(faceCardName)) {
-                        spellAbilityCopy = card.getMainCard().getSpellAbility().copy();
-                    } else if (((CardWithSpellOption) card).getSpellCard().getName().equals(faceCardName)) {
-                        spellAbilityCopy = ((CardWithSpellOption) card).getSpellCard().getSpellAbility().copy();
-                    }
-                } else {
-                    spellAbilityCopy = card.getSpellAbility().copy();
-                }
-                if (spellAbilityCopy == null) {
-                    return null;
-                }
-                spellAbilityCopy.setId(this.getId());
-                spellAbilityCopy.clearManaCosts();
-                spellAbilityCopy.clearManaCostsToPay();
-                spellAbilityCopy.addCost(this.getCosts().copy());
-                spellAbilityCopy.addCost(this.getManaCosts().copy());
-                spellAbilityCopy.setSpellAbilityCastMode(this.getSpellAbilityCastMode());
-                spellAbilityToResolve = spellAbilityCopy;
-            }
-        }
-        return spellAbilityToResolve;
-    }
-
-    @Override
-    public Costs<Cost> getCosts() {
-        if (spellAbilityToResolve == null) {
-            return super.getCosts();
-        }
-        return spellAbilityToResolve.getCosts();
     }
 }
