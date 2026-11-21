@@ -86,6 +86,11 @@ public class GameEvent implements Serializable {
          playerId    controller of the card
          */
         MADNESS_CARD_EXILED,
+        /* MADNESS_CARD_PUT_INTO_GRAVEYARD,
+         targetId    id of the card with madness that wasn't cast
+         playerId    owner of the card
+         */
+        MADNESS_CARD_PUT_INTO_GRAVEYARD,
         INVESTIGATED, // playerId is the player who investigated
         KICKED,
         /* DISCARD_CARD
