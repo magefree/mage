@@ -22,7 +22,6 @@ import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -32,7 +31,7 @@ public final class IanMalcolmChaotician extends CardImpl {
 
     public IanMalcolmChaotician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SCIENTIST);
@@ -40,7 +39,9 @@ public final class IanMalcolmChaotician extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever a player draws their second card each turn, that player exiles the top card of their library.
-        this.addAbility(new IanMalcolmChaoticianDrawTriggerAbility(), new IanMalcolmChaoticianWatcher());
+        this.addAbility(new DrawNthCardTriggeredAbility(
+            new IanMalcolmChaoticianExileEffect(), false, TargetController.ANY, 2, true
+        ), new IanMalcolmChaoticianWatcher());
 
         // During each player's turn, that player may cast a spell from among the cards they don't own exiled with
         // Ian Malcolm, Chaotician, and mana of any type can be spent to cast it.
@@ -57,31 +58,6 @@ public final class IanMalcolmChaotician extends CardImpl {
     @Override
     public IanMalcolmChaotician copy() {
         return new IanMalcolmChaotician(this);
-    }
-}
-
-class IanMalcolmChaoticianDrawTriggerAbility extends DrawNthCardTriggeredAbility {
-
-    IanMalcolmChaoticianDrawTriggerAbility() {
-        super(new IanMalcolmChaoticianExileEffect(), false, TargetController.ANY, 2);
-    }
-
-    private IanMalcolmChaoticianDrawTriggerAbility(final IanMalcolmChaoticianDrawTriggerAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (super.checkTrigger(event, game)){
-            getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public IanMalcolmChaoticianDrawTriggerAbility copy() {
-        return new IanMalcolmChaoticianDrawTriggerAbility(this);
     }
 }
 
