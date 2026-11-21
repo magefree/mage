@@ -1,10 +1,7 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Pronoun;
 import mage.constants.PutCards;
@@ -16,10 +13,8 @@ import mage.players.Player;
 /**
  * @author LevelX2
  */
-public class ExileAndReturnSourceEffect extends OneShotEffect {
+public class ExileAndReturnSourceEffect extends ReturnSourceThenEffect {
 
-    private final Pronoun pronoun;
-    private final Effect additionalEffect;
     private final boolean returnUnderYourControl;
     private final PutCards putCards;
 
@@ -31,28 +26,21 @@ public class ExileAndReturnSourceEffect extends OneShotEffect {
         this(putCards, pronoun, false);
     }
 
-    public ExileAndReturnSourceEffect(PutCards putCards, Pronoun pronoun, boolean returnUnderYourControl) {
-        this(putCards, pronoun, returnUnderYourControl, null);
-    }
-
     /**
-     * @param pronoun
-     * @param additionalEffect       that effect is applies as source is exiled
      * @param returnUnderYourControl return under your or owner control
      */
-    public ExileAndReturnSourceEffect(PutCards putCards, Pronoun pronoun, boolean returnUnderYourControl, Effect additionalEffect) {
+    public ExileAndReturnSourceEffect(PutCards putCards, Pronoun pronoun, boolean returnUnderYourControl) {
         super(Outcome.Benefit);
-        this.pronoun = pronoun;
         this.putCards = putCards;
-        this.additionalEffect = additionalEffect;
         this.returnUnderYourControl = returnUnderYourControl;
+        this.staticText = "exile {this}, then return " + pronoun.getObjective() + ' ' +
+                putCards.getMessage(false, false).replace("onto", "to") + " under " +
+                (returnUnderYourControl ? "your" : pronoun.getPossessive() + " owner's") + " control";
     }
 
     protected ExileAndReturnSourceEffect(final ExileAndReturnSourceEffect effect) {
         super(effect);
         this.putCards = effect.putCards;
-        this.pronoun = effect.pronoun;
-        this.additionalEffect = effect.additionalEffect;
         this.returnUnderYourControl = effect.returnUnderYourControl;
     }
 
@@ -69,31 +57,21 @@ public class ExileAndReturnSourceEffect extends OneShotEffect {
         if (permanent == null || controller == null) {
             return true;
         }
+        Card card = permanent.getMainCard();
         controller.moveCards(permanent, Zone.EXILED, source, game);
         game.processAction();
-        putCards.moveCard(
-                returnUnderYourControl ? controller : game.getPlayer(permanent.getOwnerId()),
-                permanent.getMainCard(), source, game, "card"
-        );
-        if (additionalEffect == null || !game.getState().getZone(permanent.getMainCard().getId()).equals(Zone.BATTLEFIELD)) {
+        // only the card this exiled comes back; if a replacement put it anywhere else, there's nothing to return
+        if (game.getState().getZone(card.getId()) != Zone.EXILED) {
             return true;
         }
-        if (additionalEffect instanceof ContinuousEffect) {
-            game.addEffect((ContinuousEffect) additionalEffect, source);
-        } else {
-            additionalEffect.apply(game, source);
+        putCards.moveCard(
+                returnUnderYourControl ? controller : game.getPlayer(permanent.getOwnerId()),
+                card, source, game, "card"
+        );
+        Permanent returned = putCards.getPermanentPutOntoBattlefield(card, game);
+        if (returned != null) {
+            resolveAdditionalEffects(game, source, returned);
         }
         return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        return "exile {this}, then return " + pronoun.getObjective() + ' ' +
-                putCards.getMessage(false, false).replace("onto", "to") + " under " +
-                (returnUnderYourControl ? "your" : pronoun.getPossessive() + " owner's") + " control"
-                + (additionalEffect == null ? "" : ". If you do, " + additionalEffect.getText(mode));
     }
 }

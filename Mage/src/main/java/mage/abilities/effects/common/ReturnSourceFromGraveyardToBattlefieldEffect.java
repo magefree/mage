@@ -3,7 +3,6 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
@@ -13,13 +12,13 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.util.CardUtil;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect {
+public class ReturnSourceFromGraveyardToBattlefieldEffect extends ReturnSourceThenEffect {
 
     protected final boolean tapped;
     protected final boolean ownerControl;
@@ -79,21 +78,33 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect 
         if (player == null) {
             return false;
         }
-        if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-            player.moveCards(card, Zone.BATTLEFIELD, source, game, tapped, false, true, null);
-            if (haste) {
-                Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
-                if (permanent != null) {
-                    ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-                    effect.setTargetPointer(new FixedTarget(permanent, game));
-                    game.addEffect(effect, source);
-                }
-            }
-            if (attacking) {
-                game.getCombat().addAttackingCreature(card.getId(), game);
-            }
+        if (!canReturn(card, game, source)) {
+            return true;
         }
+        putOntoBattlefield(player, card, source, game);
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+        if (permanent == null) {
+            return true;
+        }
+        if (haste) {
+            ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
+            effect.setTargetPointer(new FixedTarget(permanent, game));
+            game.addEffect(effect, source);
+        }
+        if (attacking) {
+            game.getCombat().addAttackingCreature(permanent.getId(), game);
+        }
+        resolveAdditionalEffects(game, source, permanent);
         return true;
+    }
+
+    private boolean canReturn(Card card, Game game, Ability source) {
+        return game.getState().getZone(card.getId()) == Zone.GRAVEYARD
+                && source.getSourceCardIfItStillExists(game) != null;
+    }
+
+    protected void putOntoBattlefield(Player player, Card card, Ability source, Game game) {
+        player.moveCards(card, Zone.BATTLEFIELD, source, game, tapped, false, true, null);
     }
 
     private String setText() {

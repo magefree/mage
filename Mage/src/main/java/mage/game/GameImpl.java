@@ -2118,7 +2118,10 @@ public abstract class GameImpl implements Game {
     @Override
     public void addEffect(ContinuousEffect continuousEffect, Ability source) {
         Ability newAbility = source.copy();
-        newAbility.initSourceObjectZoneChangeCounter(this, true);
+        // 400.7: the effect refers to the object the ability knew, so keep the ability's counter --
+        // a source that changed zones since is a new object. A static ability has none yet (0), and
+        // takes the current one here, entering permanents included.
+        newAbility.initSourceObjectZoneChangeCounter(this, false);
         ContinuousEffect newEffect = continuousEffect.copy();
 
         newEffect.newId();

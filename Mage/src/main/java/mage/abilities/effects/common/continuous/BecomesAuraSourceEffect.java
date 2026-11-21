@@ -9,6 +9,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
+import mage.util.CardUtil;
 
 /**
  * @author LevelX2
@@ -42,7 +43,7 @@ public class BecomesAuraSourceEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
+        affectedObjectList.add(new MageObjectReference(source.getSourceId(), CardUtil.getActualSourceObjectZoneChangeCounter(game, source), game));
     }
 
     @Override

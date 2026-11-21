@@ -47,7 +47,7 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        affectedObjectList.add(new MageObjectReference(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()), game));
+        affectedObjectList.add(new MageObjectReference(source.getSourceId(), CardUtil.getActualSourceObjectZoneChangeCounter(game, source), game));
     }
 
     @Override

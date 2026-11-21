@@ -8,6 +8,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
+import mage.util.CardUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com, xenohedron
@@ -84,7 +85,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (getAffectedObjectsSet()) {
-            affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
+            affectedObjectList.add(new MageObjectReference(source.getSourceId(), CardUtil.getActualSourceObjectZoneChangeCounter(game, source), game));
         }
     }
 

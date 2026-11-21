@@ -10,11 +10,8 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.WaterbendCost;
 import mage.abilities.costs.common.WaterbendXCost;
 import mage.abilities.costs.mana.*;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.icon.CardIcon;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
@@ -235,48 +232,7 @@ public abstract class AbilityImpl implements Ability {
     }
 
     private boolean resolveMode(Game game) {
-        boolean result = true;
-        for (Effect effect : getEffects()) {
-            if (game.inCheckPlayableState() && !(effect instanceof ManaEffect)) {
-                continue; // Ignored non mana effects - see GameEvent.TAPPED_FOR_MANA
-            }
-            if (effect instanceof OneShotEffect) {
-                boolean effectResult = effect.apply(game, this);
-                result &= effectResult;
-                if (logger.isDebugEnabled()) {
-                    if (!this.isManaAbility()) {
-                        if (!effectResult) {
-                            if (this.getSourceId() != null) {
-                                MageObject mageObject = game.getObject(this.getSourceId());
-                                if (mageObject != null) {
-                                    logger.debug("AbilityImpl.resolve: object: " + mageObject.getName());
-                                }
-                            }
-                            logger.debug("AbilityImpl.resolve: effect returned false -" + effect.getText(this.getModes().getMode()));
-                        }
-                    }
-                }
-            } else {
-                game.addEffect((ContinuousEffect) effect, this);
-            }
-
-            /**
-             * All restrained trigger events are fired now. To restrain the
-             * events is mainly neccessary because of the movement of multiple
-             * object at once. If the event is fired directly as one object
-             * moved, other objects are not already in the correct zone to check
-             * for their effects. (e.g. Valakut, the Molten Pinnacle)
-             * <p>
-             * game.applyEffects() has to be done at least for every effect that
-             * moves cards/permanent between zones, or changes control of
-             * objects so Static effects work as intended if dependant from the
-             * moved objects zone it is in Otherwise for example were static
-             * abilities with replacement effects deactivated too late Example:
-             * {@link org.mage.test.cards.replacement.DryadMilitantTest#testDiesByDestroy testDiesByDestroy}
-             */
-            game.processAction();
-        }
-        return result;
+        return getEffects().resolve(game, this);
     }
 
     @Override
