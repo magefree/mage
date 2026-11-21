@@ -1,18 +1,10 @@
 package org.mage.test.cards.designations;
 
-import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
-import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
-import mage.game.FreeForAll;
-import mage.game.Game;
-import mage.game.GameException;
-import mage.game.mulligan.MulliganType;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestMultiPlayerBase;
-
-import java.io.FileNotFoundException;
+import org.mage.test.serverside.base.CardTestCommander4Players;
 
 /**
  * 726.2
@@ -30,18 +22,7 @@ import java.io.FileNotFoundException;
  *
  * @author DarioBarrabinoDev
  */
-public class InitiativeTest extends CardTestMultiPlayerBase {
-
-    @Override
-    protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
-        // Player order: A -> D -> C -> B
-        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20, 7);
-        playerA = createPlayer(game, "PlayerA");
-        playerB = createPlayer(game, "PlayerB");
-        playerC = createPlayer(game, "PlayerC");
-        playerD = createPlayer(game, "PlayerD");
-        return game;
-    }
+public class InitiativeTest extends CardTestCommander4Players {
 
     @Test
     public void test_InitiativeByDies_ActivePlayer() {
