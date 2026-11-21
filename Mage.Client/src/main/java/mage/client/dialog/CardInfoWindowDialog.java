@@ -85,6 +85,14 @@ public class CardInfoWindowDialog extends MageDialog implements MageDesktopIconi
                 break;
             case EXILE:
                 this.setFrameIcon(new ImageIcon(ImageManagerImpl.instance.getExileImage()));
+                this.setClosable(true);
+                this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+                this.addInternalFrameListener(new InternalFrameAdapter() {
+                    @Override
+                    public void internalFrameClosing(InternalFrameEvent e) {
+                        CardInfoWindowDialog.this.hideDialog();
+                    }
+                });
                 break;
             case COMPANION:
                 this.setFrameIcon(new ImageIcon(ImageManagerImpl.instance.getTokenIconImage()));
@@ -120,7 +128,9 @@ public class CardInfoWindowDialog extends MageDialog implements MageDesktopIconi
         setTitle(titel);
         this.setTitelBarToolTip(titel);
         if (!exile.isEmpty()) {
-            show();
+            if (!positioned || changed) {
+                show();
+            }
             if (changed) {
                 try {
                     this.setIcon(false);
