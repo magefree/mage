@@ -1,17 +1,11 @@
 package org.mage.test.multiplayer;
 
-import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
-import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.FreeForAll;
-import mage.game.Game;
-import mage.game.GameException;
-import mage.game.mulligan.MulliganType;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestMultiPlayerBase;
+import org.mage.test.serverside.base.CardTestCommander4Players;
 
 /**
  * Conditions and values that check opponents or players must ignore players who left the game this turn
@@ -36,18 +30,7 @@ import org.mage.test.serverside.base.CardTestMultiPlayerBase;
  *
  * @author DarioBarrabinoDev
  */
-public class PlayerLeftGameConditionsTest extends CardTestMultiPlayerBase {
-
-    @Override
-    protected Game createNewGameAndPlayers() throws GameException {
-        // Player order: A -> D -> C -> B
-        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20, 7);
-        playerA = createPlayer(game, "PlayerA");
-        playerB = createPlayer(game, "PlayerB");
-        playerC = createPlayer(game, "PlayerC");
-        playerD = createPlayer(game, "PlayerD");
-        return game;
-    }
+public class PlayerLeftGameConditionsTest extends CardTestCommander4Players {
 
     @Test
     public void test_OpponentHasNoCardsInHand_AvatarOfWill() {
