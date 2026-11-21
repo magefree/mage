@@ -1579,6 +1579,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     protected boolean playManaAbility(ActivatedManaAbilityImpl ability, Game game) {
         int bookmark = game.bookmarkState();
+        // Simulations skip bookmarks, but an attempt to pay mana can fail after tapping a source.
+        GameState simulatedState = game.isSimulation() && !ability.getManaCosts().isEmpty()
+                ? game.getState().copy() : null;
         // 20260116 - 109.4a
         // The controller of a mana ability is determined as though it were on the stack.
         // Don't generate a new id because it's not necessary and breaks mana events, see #14822
@@ -1598,6 +1601,10 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         }
         // 605.3b "An activated mana ability doesn't go on the stack"
+        if (simulatedState != null && !game.hasEnded()) {
+            game.getState().restore(simulatedState, true);
+            game.getPlayerList().setCurrent(simulatedState.getPlayerList().get());
+        }
         restoreStateKeepingStack(bookmark, ability.getRule(), game);
         return false;
     }
