@@ -122,7 +122,7 @@ class AbuelosAwakeningContinuousEffect extends ContinuousEffectImpl {
             }
         }
         if (creature == null) {
-            this.used = true;
+            this.discard();
             return false;
         }
         switch (layer) {
