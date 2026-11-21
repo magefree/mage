@@ -292,4 +292,49 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Counterspell", 2);
         assertGraveyardCount(playerB, "Unsummon", 1);
     }
+
+    @Test
+    public void test_TwoCavernsWithDifferentTypes() {
+        // each Cavern keeps its own creature type, so its colored mana is not for other creature types
+        // As Cavern of Souls enters, choose a creature type.
+        // {T}: Add {C}.
+        // {T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.
+        addCard(Zone.HAND, playerA, "Cavern of Souls", 2);
+        //
+        addCard(Zone.HAND, playerA, "Silvercoat Lion"); // {1}{W}, cat
+        addCard(Zone.HAND, playerA, "Runeclaw Bear"); // {1}{G}, bear
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cavern of Souls");
+        setChoice(playerA, "Bear"); // first Cavern for bears
+
+        playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cavern of Souls");
+        setChoice(playerA, "Elf"); // second Cavern for elves
+
+        checkPlayableAbility("no white mana for a cat", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Silvercoat Lion", false);
+        checkPlayableAbility("green mana for a bear", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Runeclaw Bear", true);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_ColoredManaNotForNonCreatureSpells() {
+        // https://github.com/magefree/mage/issues/12738
+        // As Cavern of Souls enters, choose a creature type.
+        // {T}: Add {C}.
+        // {T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.
+        addCard(Zone.HAND, playerA, "Cavern of Souls");
+        //
+        addCard(Zone.HAND, playerA, "Ancient Stirrings"); // {G}, sorcery
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cavern of Souls");
+        setChoice(playerA, "Eldrazi");
+
+        checkPlayableAbility("no green mana for a sorcery", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Ancient Stirrings", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
 }

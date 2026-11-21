@@ -80,4 +80,22 @@ public class EldraziTempleTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Abzan Banner", 1);
     }
+
+    @Test
+    public void test_RestrictedManaNotForOtherSpells() {
+        // https://github.com/magefree/mage/issues/12738
+        // https://github.com/magefree/mage/issues/6702
+        // {T}: Add {C}.
+        // {T}: Add {C}{C}. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi.
+        addCard(Zone.BATTLEFIELD, playerA, "Eldrazi Temple", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        //
+        addCard(Zone.HAND, playerA, "Concentrate", 1); // {2}{U}{U}, sorcery
+
+        checkPlayableAbility("only 3 mana for a non Eldrazi spell", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Concentrate", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
 }

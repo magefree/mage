@@ -467,8 +467,9 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
 
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assert.assertEquals("mana variations don't fit", 2, manaOptions.size());
         assertManaOptions("{C}", manaOptions);
+        assertManaOptions("{C}[{EldraziTempleCondition}]", manaOptions); // Eldrazi Temple's restricted mana stays a separate option
     }
 
     @Test
@@ -485,8 +486,9 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
 
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
-        assertManaOptions("{C}{C}", manaOptions);
+        Assert.assertEquals("mana variations don't fit", 2, manaOptions.size());
+        assertManaOptions("{C}", manaOptions);
+        assertManaOptions("{C}{C}[{EldraziTempleCondition}]", manaOptions); // only for colorless Eldrazi
     }
 
     @Test

@@ -63,11 +63,12 @@ class QarsiDeceiverConditionalMana extends ConditionalMana {
 
     public QarsiDeceiverConditionalMana(Mana mana) {
         super(mana);
-        addCondition(new QarsiDeceiverManaCondition());
+        addCondition(QarsiDeceiverManaCondition.instance);
     }
 }
 
-class QarsiDeceiverManaCondition implements Condition {
+enum QarsiDeceiverManaCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

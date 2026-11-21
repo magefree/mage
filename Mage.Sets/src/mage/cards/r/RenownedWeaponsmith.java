@@ -75,11 +75,12 @@ class RenownedWeaponsmithConditionalMana extends ConditionalMana {
 
     public RenownedWeaponsmithConditionalMana(Mana mana) {
         super(mana);
-        addCondition(new RenownedWeaponsmithCondition());
+        addCondition(RenownedWeaponsmithCondition.instance);
     }
 }
 
-class RenownedWeaponsmithCondition implements Condition {
+enum RenownedWeaponsmithCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

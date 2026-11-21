@@ -62,14 +62,15 @@ public class BrotherhoodHeadquarters extends CardImpl {
 
         public BrotherhoodHeadquartersConditionalMana(Mana mana) {
             super(mana);
-            addCondition(new BrotherhoodHeadquartersAssassinSpellManaCondition());
-            addCondition(new BrotherhoodHeadquartersFreerunningManaCondition());
-            addCondition(new BrotherhoodHeadquartersAssassinSourceManaCondition());
+            addCondition(BrotherhoodHeadquartersAssassinSpellManaCondition.instance);
+            addCondition(BrotherhoodHeadquartersFreerunningManaCondition.instance);
+            addCondition(BrotherhoodHeadquartersAssassinSourceManaCondition.instance);
             setComparisonScope(Filter.ComparisonScope.Any);
         }
     }
 
-    class BrotherhoodHeadquartersAssassinSpellManaCondition implements Condition {
+    enum BrotherhoodHeadquartersAssassinSpellManaCondition implements Condition {
+        instance;
 
         @Override
         public boolean apply(Game game, Ability source) {
@@ -82,7 +83,8 @@ public class BrotherhoodHeadquarters extends CardImpl {
         }
     }
 
-    class BrotherhoodHeadquartersFreerunningManaCondition implements Condition {
+    enum BrotherhoodHeadquartersFreerunningManaCondition implements Condition {
+        instance;
 
         @Override
         public boolean apply(Game game, Ability source) {
@@ -91,7 +93,8 @@ public class BrotherhoodHeadquarters extends CardImpl {
         }
     }
 
-    class BrotherhoodHeadquartersAssassinSourceManaCondition implements Condition {
+    enum BrotherhoodHeadquartersAssassinSourceManaCondition implements Condition {
+        instance;
 
         @Override
         public boolean apply(Game game, Ability source) {

@@ -20,6 +20,7 @@ import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.hint.common.*;
 import mage.abilities.keyword.*;
+import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.*;
 import mage.cards.decks.CardNameUtil;
 import mage.cards.decks.Deck;
@@ -1354,6 +1355,41 @@ public class VerifyCardDataTest {
         printMessages(errorsList);
         if (errorsList.size() > 0) {
             Assert.fail("Found card errors: " + errorsList.size());
+        }
+    }
+
+    @Test
+    public void test_checkManaConditions() {
+        // mana conditions are compared by class, so mana with the same restriction from different sources can be
+        // counted together (see ManaCondition). A condition with own settings must compare them too, otherwise
+        // mana with different restrictions will be counted as the same
+
+        Collection<String> errorsList = new ArrayList<>();
+
+        Reflections reflections = new Reflections("mage.");
+        Set<Class<? extends ManaCondition>> conditionClassesList = reflections.getSubTypesOf(ManaCondition.class);
+        Assert.assertFalse("Can't find mana condition classes", conditionClassesList.isEmpty());
+
+        for (Class<? extends ManaCondition> conditionClass : conditionClassesList) {
+            boolean hasSettings = false;
+            boolean hasEquals = false;
+            boolean hasHashCode = false;
+            for (Class<?> currentClass = conditionClass; !currentClass.equals(ManaCondition.class); currentClass = currentClass.getSuperclass()) {
+                hasSettings |= Arrays.stream(currentClass.getDeclaredFields())
+                        .anyMatch(field -> !Modifier.isStatic(field.getModifiers()) && !field.isSynthetic());
+                hasEquals |= Arrays.stream(currentClass.getDeclaredMethods())
+                        .anyMatch(method -> method.getName().equals("equals") && method.getParameterCount() == 1);
+                hasHashCode |= Arrays.stream(currentClass.getDeclaredMethods())
+                        .anyMatch(method -> method.getName().equals("hashCode") && method.getParameterCount() == 0);
+            }
+            if (hasSettings && !(hasEquals && hasHashCode)) {
+                errorsList.add("Error: mana condition with fields must override equals and hashCode: " + conditionClass.getName());
+            }
+        }
+
+        printMessages(errorsList);
+        if (errorsList.size() > 0) {
+            Assert.fail("Found wrong mana conditions: " + errorsList.size());
         }
     }
 

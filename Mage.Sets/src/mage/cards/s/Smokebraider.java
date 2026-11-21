@@ -63,11 +63,12 @@ class SmokebraiderConditionalMana extends ConditionalMana {
     public SmokebraiderConditionalMana(Mana mana) {
         super(mana);
         this.staticText = "Spend this mana only to cast Elemental spells or activate abilities of Elementals";
-        addCondition(new SmokebraiderManaCondition());
+        addCondition(SmokebraiderManaCondition.instance);
     }
 }
 
-class SmokebraiderManaCondition implements Condition {
+enum SmokebraiderManaCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

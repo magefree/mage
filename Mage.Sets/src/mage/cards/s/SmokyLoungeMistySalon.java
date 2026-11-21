@@ -77,11 +77,12 @@ class SmokyLoungeConditionalMana extends ConditionalMana {
 
     public SmokyLoungeConditionalMana(Mana mana) {
         super(mana);
-        addCondition(new SmokyLoungeManaCondition());
+        addCondition(SmokyLoungeManaCondition.instance);
     }
 }
 
-class SmokyLoungeManaCondition implements Condition {
+enum SmokyLoungeManaCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

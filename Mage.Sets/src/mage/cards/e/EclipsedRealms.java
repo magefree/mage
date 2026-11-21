@@ -121,4 +121,15 @@ class EclipsedRealmsManaCondition implements Condition {
         MageObject object = game.getObject(source);
         return object != null && object.hasSubtype(creatureType, game);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj != null && this.getClass() == obj.getClass()
+                && Objects.equals(this.creatureType, ((EclipsedRealmsManaCondition) obj).creatureType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getClass(), creatureType);
+    }
 }
