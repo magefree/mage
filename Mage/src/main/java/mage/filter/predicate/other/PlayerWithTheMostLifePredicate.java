@@ -21,7 +21,7 @@ public enum PlayerWithTheMostLifePredicate implements ObjectSourcePlayerPredicat
         }
 
         int mostLife = Integer.MIN_VALUE;
-        for (UUID playerId : game.getState().getPlayersInRange(input.getPlayerId(), game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(input.getPlayerId(), game, true)) {
             Player player = game.getPlayer(playerId);
             if (player != null && player.getLife() > mostLife) {
                 mostLife = player.getLife();
