@@ -201,13 +201,11 @@ public class MyriadTest extends CardTestMultiPlayerBase {
         // Myriad (Whenever this creature attacks, for each opponent other than defending player, you may create a token
         // copy that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)
         addCard(Zone.BATTLEFIELD, playerA, "Caller of the Pack"); // 8/6, trample
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
-        addCard(Zone.HAND, playerA, "Lightning Bolt");
         //
-        setLife(playerB, 3);
+        addCustomEffect_TargetDamage(playerA, 40); // kill playerB
 
         // playerB loses the game
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "target damage 40", playerB);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         runCode("playerB lost", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             Assert.assertTrue("playerB must lose", playerB.hasLost());

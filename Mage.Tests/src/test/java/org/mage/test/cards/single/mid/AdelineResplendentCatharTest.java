@@ -29,13 +29,11 @@ public class AdelineResplendentCatharTest extends CardTestCommander4Players {
         // that's tapped and attacking that player or a planeswalker they control.
         addCard(Zone.BATTLEFIELD, playerA, "Adeline, Resplendent Cathar"); // */4, vigilance
         addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2, attacker
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
-        addCard(Zone.HAND, playerA, "Lightning Bolt");
         //
-        setLife(playerB, 3);
+        addCustomEffect_TargetDamage(playerA, 20); // kill playerB
 
         // playerB loses the game
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "target damage 20", playerB);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         runCode("playerB lost", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             Assert.assertTrue("playerB must lose", playerB.hasLost());
