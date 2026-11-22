@@ -106,4 +106,91 @@ public class EchoTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * 702.30a
+     * Echo is a triggered ability. "Echo [cost]" means "At the beginning of your upkeep, if this permanent came under
+     * your control since the beginning of your last upkeep, sacrifice it unless you pay [cost]."
+     * <p>
+     * Control change between your upkeeps (example: opponent's Act of Treason) must trigger it again
+     */
+    @Test
+    public void testEchoTriggerAfterControlReturned() {
+        // Echo {G}
+        addCard(Zone.HAND, playerA, "Pouncing Jaguar"); // {G}, 2/2
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        //
+        // Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
+        addCard(Zone.HAND, playerB, "Act of Treason"); // {2}{R}
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pouncing Jaguar");
+
+        // turn 3: first echo trigger
+        setChoice(playerA, true); // pay echo
+
+        // turn 4: opponent gains control until end of turn
+        castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Act of Treason", "Pouncing Jaguar");
+        checkPermanentCount("taken", 4, PhaseStep.END_TURN, playerB, "Pouncing Jaguar", 1);
+
+        // turn 5: it came under your control again, so new echo trigger
+        setChoice(playerA, false); // don't pay echo
+
+        setStrictChooseMode(true);
+        setStopAt(5, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Pouncing Jaguar", 0);
+        assertGraveyardCount(playerA, "Pouncing Jaguar", 1);
+    }
+
+    @Test
+    public void testEchoTriggerOnlyOnceWithoutControlChange() {
+        // Echo {G}
+        addCard(Zone.HAND, playerA, "Pouncing Jaguar"); // {G}, 2/2
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pouncing Jaguar");
+
+        // turn 3: first echo trigger
+        setChoice(playerA, true); // pay echo
+
+        // turn 5: no echo trigger
+
+        setStrictChooseMode(true);
+        setStopAt(5, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Pouncing Jaguar", 1);
+    }
+
+    @Test
+    public void testEchoNoTriggerAfterControlChangeOfAnotherPermanent() {
+        // Echo {G}
+        addCard(Zone.HAND, playerA, "Pouncing Jaguar"); // {G}, 2/2
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // 2/2
+        //
+        // Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
+        addCard(Zone.HAND, playerB, "Act of Treason"); // {2}{R}
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pouncing Jaguar");
+
+        // turn 3: first echo trigger
+        setChoice(playerA, true); // pay echo
+
+        // turn 4: opponent gains control of another creature until end of turn
+        castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Act of Treason", "Grizzly Bears");
+        checkPermanentCount("taken", 4, PhaseStep.END_TURN, playerB, "Grizzly Bears", 1);
+
+        // turn 5: no echo trigger, Pouncing Jaguar didn't change control
+
+        setStrictChooseMode(true);
+        setStopAt(5, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Pouncing Jaguar", 1);
+        assertPermanentCount(playerA, "Grizzly Bears", 1);
+    }
+
 }

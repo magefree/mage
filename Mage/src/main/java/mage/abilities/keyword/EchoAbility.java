@@ -70,6 +70,7 @@ public class EchoAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
+                || event.getType() == GameEvent.EventType.GAINED_CONTROL
                 || event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
     }
 
@@ -80,6 +81,12 @@ public class EchoAbility extends TriggeredAbilityImpl {
                 && event.getTargetId().equals(this.getSourceId())) {
 
             this.echoPaid = false;
+        }
+        // reset the echo paid state back, if control changed (it can return before next upkeep, example: Act of Treason)
+        if (event.getType() == GameEvent.EventType.GAINED_CONTROL
+                && event.getTargetId().equals(this.getSourceId())) {
+            this.echoPaid = false;
+            return false;
         }
         if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE) {
             if (lastController != null) {
