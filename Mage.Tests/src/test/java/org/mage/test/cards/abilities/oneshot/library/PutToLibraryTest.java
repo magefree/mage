@@ -1,9 +1,15 @@
 package org.mage.test.cards.abilities.oneshot.library;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 import mage.cards.Card;
+import mage.cards.CardsImpl;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.util.RandomUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -13,6 +19,31 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * @author LevelX2
  */
 public class PutToLibraryTest extends CardTestPlayerBase {
+
+    @Test
+    public void testSeededRandomLibraryPlacement() {
+        addCard(Zone.GRAVEYARD, playerA, "Island", 6);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        CardsImpl cards = new CardsImpl(playerA.getGraveyard());
+        List<UUID> expected = new ArrayList<>(cards);
+        Random reference = new Random(123);
+        Collections.shuffle(expected, reference);
+        int nextValue = reference.nextInt();
+
+        RandomUtil.setSeed(123);
+        playerA.putCardsOnBottomOfLibrary(cards, currentGame, null, false);
+        List<UUID> library = playerA.getLibrary().getCardList();
+        Assert.assertEquals(expected, library.subList(library.size() - cards.size(), library.size()));
+        Assert.assertEquals(nextValue, RandomUtil.nextInt());
+
+        RandomUtil.setSeed(123);
+        playerA.putCardsOnTopOfLibrary(cards, currentGame, null, false);
+        Collections.reverse(expected);
+        Assert.assertEquals(expected, playerA.getLibrary().getCardList().subList(0, cards.size()));
+        Assert.assertEquals(nextValue, RandomUtil.nextInt());
+    }
 
     @Test
     public void testPutSecondFromTop() {
