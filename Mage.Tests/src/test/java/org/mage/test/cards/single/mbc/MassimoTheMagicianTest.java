@@ -2,6 +2,7 @@ package org.mage.test.cards.single.mbc;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -111,5 +112,27 @@ public class MassimoTheMagicianTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Divination", 1);
         assertExileCount(playerA, "Divination", 0);
+    }
+
+    @Test
+    public void testExileZoneNamedAfterCreature() {
+        addCard(Zone.BATTLEFIELD, playerA, massimo);
+        addCard(Zone.HAND, playerA, bears);
+        addCard(Zone.GRAVEYARD, playerA, bolt);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bears);
+        addTarget(playerA, bolt);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertExileCount(playerA, bolt, 1);
+        Assert.assertTrue("exiled card must be in an exile zone named after Massimo and the creature",
+                currentGame.getExile().getExileZones().stream()
+                        .filter(zone -> zone.getName().contains(massimo) && zone.getName().contains(bears))
+                        .anyMatch(zone -> zone.getCards(currentGame).stream()
+                                .anyMatch(card -> card.getName().equals(bolt))));
     }
 }

@@ -21,6 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -89,12 +90,19 @@ class MassimoTheMagicianExileEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
-        player.moveCards(card, Zone.EXILED, source, game);
-        if (game.getState().getZone(card.getId()) != Zone.EXILED) {
-            return true;
-        }
         Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (creature == null) {
+            player.moveCardsToExile(card, source, game, true, CardUtil.getExileZoneId(game, source),
+                    CardUtil.createObjectRelatedWindowTitle(source, game, null));
+            return true;
+        }
+        // separate exile zone per creature, so it's clear which creature each exiled card belongs to
+        UUID exileId = CardUtil.getExileZoneId(
+                "MassimoTheMagician_" + creature.getId() + "_" + creature.getZoneChangeCounter(game), game
+        );
+        player.moveCardsToExile(card, source, game, true, exileId,
+                CardUtil.createObjectRelatedWindowTitle(source, game, "(" + creature.getIdName() + ")"));
+        if (game.getState().getZone(card.getId()) != Zone.EXILED) {
             return true;
         }
         game.addEffect(new GainAbilityTargetEffect(
