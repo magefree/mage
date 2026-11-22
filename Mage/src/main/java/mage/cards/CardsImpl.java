@@ -87,7 +87,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
                 .stream().map(game::getObject)
                 .filter(Objects::nonNull)
                 .filter(Card.class::isInstance)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
 
         return (Card) RandomUtil.randomFromCollection(cardsForRandomPick);
     }

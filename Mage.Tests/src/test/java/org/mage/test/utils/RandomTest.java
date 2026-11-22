@@ -1,5 +1,9 @@
 package org.mage.test.utils;
 
+import mage.cards.Card;
+import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
+import mage.cards.basiclands.Island;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardScanner;
@@ -7,6 +11,7 @@ import mage.constants.MultiplayerAttackOption;
 import mage.constants.Outcome;
 import mage.constants.PlanarDieRollResult;
 import mage.constants.RangeOfInfluence;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.TwoPlayerDuel;
 import mage.game.mulligan.MulliganType;
@@ -24,6 +29,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -78,6 +85,29 @@ public class RandomTest {
 
         Assert.assertEquals("same seed must have same deck", infoSameA, infoSameB);
         Assert.assertNotEquals("different seed must have different deck", infoSameA, infoDifferent);
+    }
+
+    @Test
+    public void test_SeededCardPickUsesCollectionOrder() {
+        UUID ownerId = UUID.randomUUID();
+        Game game = new TwoPlayerDuel(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 60, 20, 7);
+        // Hash order is the reverse of collection order.
+        List<Card> cards = Arrays.asList(islandWithHash(ownerId, 1), islandWithHash(ownerId, 0));
+        game.loadCards(new LinkedHashSet<>(cards), ownerId);
+
+        RandomUtil.setSeed(123);
+        int index = RandomUtil.nextInt(cards.size());
+        RandomUtil.setSeed(123);
+        Assert.assertSame(cards.get(index), new CardsImpl(cards).getRandom(game));
+    }
+
+    private static Card islandWithHash(UUID ownerId, int hash) {
+        return new Island(ownerId, new CardSetInfo("Island", "10E", "368", Rarity.LAND)) {
+            @Override
+            public int hashCode() {
+                return hash;
+            }
+        };
     }
 
     @Test
