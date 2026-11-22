@@ -1493,6 +1493,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 891, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Mox Opal", 1072, Rarity.MYTHIC, mage.cards.m.MoxOpal.class, RETRO_ART));
         cards.add(new SetCardInfo("Mox Tantalite", 1073, Rarity.MYTHIC, mage.cards.m.MoxTantalite.class, RETRO_ART));
+        cards.add(new SetCardInfo("Muad'Dib, Prophet Foretold", 2918, Rarity.MYTHIC, mage.cards.m.MuadDibProphetForetold.class));
         cards.add(new SetCardInfo("Muddle the Mixture", 1254, Rarity.RARE, mage.cards.m.MuddleTheMixture.class));
         cards.add(new SetCardInfo("Mudhole", 62, Rarity.RARE, mage.cards.m.Mudhole.class));
         cards.add(new SetCardInfo("Mulldrifter", 168, Rarity.RARE, mage.cards.m.Mulldrifter.class, NON_FULL_USE_VARIOUS));
