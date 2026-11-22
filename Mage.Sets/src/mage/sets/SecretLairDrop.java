@@ -359,6 +359,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Chandra, Flame's Catalyst", 1420, Rarity.MYTHIC, mage.cards.c.ChandraFlamesCatalyst.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chandra, Flamecaller", 807, Rarity.MYTHIC, mage.cards.c.ChandraFlamecaller.class));
         cards.add(new SetCardInfo("Changeling Outcast", 894, Rarity.RARE, mage.cards.c.ChangelingOutcast.class));
+        cards.add(new SetCardInfo("Chani, Blade of Sietch Tabr", 2916, Rarity.MYTHIC, mage.cards.c.ChaniBladeOfSietchTabr.class));
         cards.add(new SetCardInfo("Chaos Warp", "741*", Rarity.RARE, mage.cards.c.ChaosWarp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chaos Warp", 2692, Rarity.RARE, mage.cards.c.ChaosWarp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chaos Warp", 741, Rarity.RARE, mage.cards.c.ChaosWarp.class, NON_FULL_USE_VARIOUS));
@@ -2002,8 +2003,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Shadowspear", 1505, Rarity.RARE, mage.cards.s.Shadowspear.class));
         cards.add(new SetCardInfo("Shalai, Voice of Plenty", 244, Rarity.RARE, mage.cards.s.ShalaiVoiceOfPlenty.class));
         cards.add(new SetCardInfo("Shaman of the Pack", 789, Rarity.RARE, mage.cards.s.ShamanOfThePack.class));
-
-
         cards.add(new SetCardInfo("Shared Roots", 2391, Rarity.RARE, mage.cards.s.SharedRoots.class));
         cards.add(new SetCardInfo("Shared Summons", 1308, Rarity.RARE, mage.cards.s.SharedSummons.class));
         cards.add(new SetCardInfo("Shattergang Brothers", "1315*", Rarity.MYTHIC, mage.cards.s.ShattergangBrothers.class, NON_FULL_USE_VARIOUS));
