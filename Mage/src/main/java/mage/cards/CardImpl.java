@@ -968,6 +968,17 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public boolean addAttachment(UUID permanentId, Ability source, Game game) {
+        // card's attachments are not restored by rollback, so remove outdated ones first
+        // (example: Animate Dead cast again after rollback to start of turn)
+        if (!(this instanceof Permanent)) {
+            this.attachments.removeIf(id -> {
+                Permanent attached = game.getPermanent(id);
+                if (attached == null) {
+                    attached = game.getPermanentEntering(id);
+                }
+                return attached == null || !this.objectId.equals(attached.getAttachedTo());
+            });
+        }
         if (permanentId == null
                 || this.attachments.contains(permanentId)
                 || permanentId.equals(this.getId())) {
