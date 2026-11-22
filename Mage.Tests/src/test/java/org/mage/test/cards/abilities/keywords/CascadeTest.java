@@ -238,6 +238,67 @@ public class CascadeTest extends CardTestPlayerBase {
         assertLibraryCount(playerA, "Breaking // Entering", 1);
     }
 
+    /**
+     * 702.85a
+     * ... You may cast that card without paying its mana cost if the resulting spell's mana value is less than
+     * this spell's mana value.
+     * <p>
+     * Adventurer card found by its creature half: the adventure half with the same mana value must not be castable.
+     */
+    @Test
+    public void testWithAdventureSpell_EqualManaValueNotCastable() {
+        skipInitShuffling();
+        // Giant Killer {W}, creature 1/2
+        // Chop Down {2}{W}, instant - adventure: Destroy target creature with power 4 or greater.
+        addCard(Zone.LIBRARY, playerA, "Giant Killer");
+        //
+        // Cascade
+        addCard(Zone.HAND, playerA, "Shardless Agent"); // {1}{G}{U}, mana value 3
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm"); // 6/4, legal target for Chop Down
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shardless Agent");
+        setChoice(playerA, true); // cast Giant Killer for free (Chop Down has mana value 3, so it's not allowed)
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Shardless Agent", 1);
+        assertPermanentCount(playerA, "Giant Killer", 1);
+        assertPermanentCount(playerB, "Craw Wurm", 1);
+    }
+
+    @Test
+    public void testWithAdventureSpell_LowerManaValueCastable() {
+        skipInitShuffling();
+        // Giant Killer {W}, creature 1/2
+        // Chop Down {2}{W}, instant - adventure: Destroy target creature with power 4 or greater.
+        addCard(Zone.LIBRARY, playerA, "Giant Killer");
+        //
+        // Cascade
+        addCard(Zone.HAND, playerA, "Bloodbraid Elf"); // {2}{R}{G}, mana value 4
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm"); // 6/4, legal target for Chop Down
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodbraid Elf");
+        setChoice(playerA, true); // cast for free
+        setChoice(playerA, "Cast Chop Down"); // both halves have lower mana value
+        addTarget(playerA, "Craw Wurm");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Bloodbraid Elf", 1);
+        assertGraveyardCount(playerB, "Craw Wurm", 1);
+        assertExileCount(playerA, "Giant Killer", 1); // on an adventure
+    }
+
     // https://github.com/magefree/mage/issues/14687
     @Test
     public void testWithXCost() {

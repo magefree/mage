@@ -1575,7 +1575,10 @@ public final class CardUtil {
         )) {
             return false;
         }
-        partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE));
+        // parts that don't match the filter must not be castable (example: cascade into an adventure card
+        // must not allow to cast an adventure with same or greater mana value)
+        List<Card> allParts = getCastableComponents(cardToCast, null, source, player, game, null, playLand);
+        allParts.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), partsToCast.contains(card)));
         ActivatedAbility chosenAbility;
         if (playLand) {
             chosenAbility = player.chooseLandOrSpellAbility(cardToCast, game, noMana);
@@ -1594,7 +1597,7 @@ public final class CardUtil {
         } else {
             result = false;
         }
-        partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null));
+        allParts.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null));
         if (result && spellCastTracker != null) {
             spellCastTracker.addCard(cardToCast, source, game);
         }
