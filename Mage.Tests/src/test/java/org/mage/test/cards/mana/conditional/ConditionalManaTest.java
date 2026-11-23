@@ -11,6 +11,8 @@ import mage.counters.CounterType;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+import java.util.UUID;
+
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 
 /**
@@ -45,8 +47,25 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Hidden Grotto");
         addCard(Zone.HAND, playerA, "Savannah Lions");
 
-        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {C}.");
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {C}. Spend this mana only");
         checkPlayableAbility("Artificer can pay for Grotto", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Savannah Lions", true);
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+    }
+
+    @Test
+    public void testCombinedManaKeepsEachSourcesRestrictions() {
+        addCard(Zone.BATTLEFIELD, playerA, "Chandra's Embercat");
+        addCard(Zone.BATTLEFIELD, playerA, "Automated Artificer");
+        addCard(Zone.BATTLEFIELD, playerA, "Cascading Cataracts");
+        addCard(Zone.HAND, playerA, "Lizard Blades"); // {1}{R}, artifact Lizard
+        addCard(Zone.HAND, playerA, "Bloodline Pretender"); // {3}, artifact with changeling
+
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}.");
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {C}. Spend this mana only");
+        checkPlayableAbility("Embercat cannot pay the red", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lizard Blades", false);
+        checkPlayableAbility("both sources can pay for an artifact Elemental", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Bloodline Pretender", true);
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -477,6 +496,21 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
         assertPermanentCount(playerA, "Gigantosaurus", 0);
+    }
+
+    @Test
+    public void testEquivalentRestrictedSourcesSharePaymentOptions() {
+        ManaOptions options = new ManaOptions();
+        int sources = 8;
+        for (int i = 0; i < sources; i++) {
+            ConditionalMana mana = new ConditionalMana(Mana.ColorlessMana(1));
+            mana.addCondition(AdamantCondition.WHITE);
+            mana.setManaProducerId(UUID.randomUUID());
+            options.addMana(mana);
+        }
+        options.removeFullyIncludedVariations();
+        Assert.assertTrue("at most one option per amount", options.size() <= sources + 1);
+        Assert.assertTrue("all eight mana are available", options.stream().anyMatch(mana -> mana.getColorless() == sources));
     }
 
     @Test

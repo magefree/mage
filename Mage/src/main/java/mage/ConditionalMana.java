@@ -11,9 +11,11 @@ import mage.game.Game;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * If subclassing and adding extra field, you must be sure to override equals() and hashCode to include the new fields.
@@ -75,6 +77,11 @@ public class ConditionalMana extends Mana implements Serializable, Emptiable {
     }
 
     public boolean apply(Ability ability, Game game, UUID manaProducerId, Cost costToPay) {
+        return allows(conditions, scope, ability, game, manaProducerId, costToPay);
+    }
+
+    private static boolean allows(List<Condition> conditions, Filter.ComparisonScope scope, Ability ability,
+                                  Game game, UUID manaProducerId, Cost costToPay) {
         if (conditions.isEmpty()) {
             throw new IllegalStateException("Conditional mana should contain at least one Condition");
         }
@@ -183,11 +190,58 @@ public class ConditionalMana extends Mana implements Serializable, Emptiable {
     @Override
     public void add(Mana mana) {
         if (mana instanceof ConditionalMana) {
-            for (Condition condition : ((ConditionalMana) mana).getConditions()) {
-                addCondition(condition);
-            }
+            List<Condition> combined = new ArrayList<>(asPaymentConditions());
+            combined.addAll(((ConditionalMana) mana).asPaymentConditions());
+            conditions = combined;
+            scope = Filter.ComparisonScope.All;
         }
         super.add(mana);
+    }
+
+    // Conditions from different sources must all hold. Keep each source's alternatives together.
+    private List<Condition> asPaymentConditions() {
+        boolean usesProducer = conditions.stream().anyMatch(c -> c instanceof ManaCondition && !(c instanceof SpendingRestriction));
+        if (!usesProducer && (scope == Filter.ComparisonScope.All || conditions.size() == 1)) {
+            return conditions;
+        }
+        return Collections.singletonList(new SpendingRestriction(this, usesProducer ? manaProducerId : null));
+    }
+
+    private static final class SpendingRestriction extends ManaCondition {
+        private final List<Condition> conditions;
+        private final Filter.ComparisonScope scope;
+        private final UUID producerId;
+
+        SpendingRestriction(ConditionalMana mana, UUID producerId) {
+            this.conditions = new ArrayList<>(mana.conditions);
+            this.scope = mana.scope;
+            this.producerId = producerId;
+        }
+
+        @Override
+        public boolean apply(Game game, Ability source, UUID fallbackId, Cost costToPay) {
+            return allows(conditions, scope, source, game, producerId != null ? producerId : fallbackId, costToPay);
+        }
+
+        @Override
+        public String getManaText() {
+            String separator = scope == Filter.ComparisonScope.Any ? " or " : " and ";
+            return conditions.stream().map(Condition::getManaText).collect(Collectors.joining(separator));
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (!(obj instanceof SpendingRestriction)) {
+                return false;
+            }
+            SpendingRestriction other = (SpendingRestriction) obj;
+            return scope == other.scope && conditions.equals(other.conditions) && Objects.equals(producerId, other.producerId);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(conditions, scope, producerId);
+        }
     }
 
     public String getConditionString() {
