@@ -19,6 +19,57 @@ import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 public class ConditionalManaTest extends CardTestPlayerBase {
 
     @Test
+    public void testCreatureManaCannotPayForHiddenGrotto() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mudflat Village");
+        addCard(Zone.BATTLEFIELD, playerA, "Hidden Grotto");
+        addCard(Zone.HAND, playerA, "Island");
+        addCard(Zone.HAND, playerA, "Savannah Lions"); // {W}
+        addCard(Zone.HAND, playerA, "Tidehollow Sculler"); // {W}{B}
+        addCard(Zone.HAND, playerA, "Zealous Persecution"); // {W}{B}, instant
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}");
+        checkPlayableAbility("Village cannot pay for Grotto", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Savannah Lions", false);
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Island");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}");
+        checkPlayableAbility("Island pays for Grotto", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Savannah Lions", true);
+        checkPlayableAbility("Village pays for the creature", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Tidehollow Sculler", true);
+        checkPlayableAbility("Village cannot pay for the instant", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Zealous Persecution", false);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+    }
+
+    @Test
+    public void testActivationManaCanPayForHiddenGrotto() {
+        addCard(Zone.BATTLEFIELD, playerA, "Automated Artificer");
+        addCard(Zone.BATTLEFIELD, playerA, "Hidden Grotto");
+        addCard(Zone.HAND, playerA, "Savannah Lions");
+
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {C}.");
+        checkPlayableAbility("Artificer can pay for Grotto", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Savannah Lions", true);
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+    }
+
+    @Test
+    public void testDoublingCubeCountsUnspentCreatureMana() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mudflat Village");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Doubling Cube");
+        addCard(Zone.HAND, playerA, "Duress"); // {B}
+        addCard(Zone.HAND, playerA, "Sign in Blood"); // {B}{B}
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 3);
+        checkPlayableAbility("Cube adds unrestricted black", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Duress", true);
+        checkPlayableAbility("original black remains restricted", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Sign in Blood", false);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+    }
+
+    @Test
     public void testNormalUse() {
         setStrictChooseMode(true);
 

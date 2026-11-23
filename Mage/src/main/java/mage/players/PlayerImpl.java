@@ -3649,10 +3649,6 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         ManaOptions availableMana = new ManaOptions();
         availableMana.addMana(manaPool.getMana());
-        // conditional mana
-        for (ConditionalMana conditionalMana : manaPool.getConditionalMana()) {
-            availableMana.addMana(conditionalMana);
-        }
 
         List<Abilities<ActivatedManaAbilityImpl>> sourceWithoutManaCosts = new ArrayList<>();
         List<Abilities<ActivatedManaAbilityImpl>> sourceWithCosts = new ArrayList<>();
@@ -3709,6 +3705,18 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         }
 
+        // Keep floating mana that can't pay for any mana ability available for the final spell or ability.
+        List<ConditionalMana> reservedMana = new ArrayList<>();
+        for (ConditionalMana mana : manaPool.getConditionalMana()) {
+            if (sourceWithCosts.isEmpty() || sourceWithCosts.stream().flatMap(Collection::stream)
+                    .anyMatch(ability -> !ability.getManaCosts().isEmpty()
+                            && mana.apply(ability, game, mana.getManaProducerId(), ability.getManaCosts()))) {
+                availableMana.addMana(mana);
+            } else {
+                reservedMana.add(mana);
+            }
+        }
+
         for (Abilities<ActivatedManaAbilityImpl> manaAbilities : sourceWithoutManaCosts) {
             availableMana.addMana(manaAbilities, game);
         }
@@ -3722,7 +3730,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (usePoolDependantAbilities || !manaAbilities.hasPoolDependantAbilities()) {
                     boolean used;
                     if (manaAbilities.hasPoolDependantAbilities()) {
-                        used = availableMana.addManaPoolDependant(manaAbilities, game);
+                        used = availableMana.addManaPoolDependant(manaAbilities, game, reservedMana);
                     } else {
                         used = availableMana.addManaWithCost(manaAbilities, game);
                     }
@@ -3738,6 +3746,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         }
 
+        reservedMana.forEach(availableMana::addMana);
         availableMana.removeFullyIncludedVariations();
         availableMana.remove(new Mana()); // Remove any empty mana that was left over from the way the code is written
 
