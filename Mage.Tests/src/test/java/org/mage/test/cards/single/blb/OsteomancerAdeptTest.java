@@ -14,6 +14,21 @@ public class OsteomancerAdeptTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void tappingManalithCannotSupplyThirdCard() {
+        addCard(Zone.GRAVEYARD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Manalith");
+        checkPlayable("Daggerfang Duo", 2, false);
+    }
+
+    @Test
+    public void sacrificingLotusPetalSuppliesThirdCard() {
+        addCard(Zone.GRAVEYARD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Lotus Petal");
+        checkPlayable("Daggerfang Duo", 2, true);
+        assertExileCount(playerA, "Lotus Petal", 1);
+    }
+
+    @Test
     public void canExileThreeOtherCards() {
         addCard(Zone.GRAVEYARD, playerA, "Forest", 3);
         checkPlayable("Daggerfang Duo", 3, true);

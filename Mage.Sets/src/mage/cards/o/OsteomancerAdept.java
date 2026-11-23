@@ -17,6 +17,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.counter.AddCounterEnteringCreatureEffect;
+import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
+import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.Card;
@@ -136,11 +138,26 @@ class OsteomancerAdeptEffect extends AsThoughEffectImpl {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(player.getId(), game)) {
             if (permanent.getAbilities(game).stream().anyMatch(TriggeredManaAbility.class::isInstance)
                     || permanent.getAbilities(game).getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, player.getId(), game)
-                            .stream().anyMatch(ability -> !(ability instanceof BasicManaAbility))) {
+                            .stream().anyMatch(ability -> !onlyTapsForMana(ability, game))) {
                 return true;
             }
         }
         return false;
+    }
+
+    private static boolean onlyTapsForMana(Ability ability, Game game) {
+        if (ability instanceof BasicManaAbility) {
+            return true;
+        }
+        if (ability.getClass() != AnyColorManaAbility.class || ability.getEffects().size() != 1
+                || ability.getEffects().get(0).getClass() != AddManaOfAnyColorEffect.class) {
+            return false;
+        }
+        Ability payment = ability.copy();
+        payment.adjustX(game);
+        game.getContinuousEffects().costModification(payment, game);
+        return payment.getManaCostsToPay().isEmpty() && payment.getCosts().size() == 1
+                && payment.getCosts().get(0).getClass() == TapSourceCost.class;
     }
 }
 
