@@ -11,11 +11,14 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
+import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.common.ForageCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.counter.AddCounterEnteringCreatureEffect;
+import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -25,6 +28,7 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.watchers.Watcher;
@@ -98,10 +102,10 @@ class OsteomancerAdeptEffect extends AsThoughEffectImpl {
             return false;
         }
         SpellAbility spell = card.getSpellAbility();
-        // During the playable check, the creature being cast is still in the graveyard.
+        // The card being cast leaves the graveyard before forage is paid.
         if (game.inCheckPlayableState() && player.getGraveyard().size() <= 3
-                && !new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_FOOD)
-                        .canPay(spell, spell, affectedControllerId, game)) {
+                && !new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_FOOD).canPay(spell, spell, affectedControllerId, game)
+                && !couldSupplyForageDuringCasting(card, player, game)) {
             return false;
         }
         Costs<Cost> newCosts = new CostsImpl<>();
@@ -112,6 +116,31 @@ class OsteomancerAdeptEffect extends AsThoughEffectImpl {
                 MageIdentifier.OsteomancerAdeptAlternateCast
         );
         return true;
+    }
+
+    private static boolean couldSupplyForageDuringCasting(Card card, Player player, Game game) {
+        // Another cost, such as sacrificing a creature, can be paid before forage.
+        SpellAbility spell = card.getSpellAbility().copy();
+        spell.adjustX(game);
+        game.getContinuousEffects().costModification(spell, game);
+        if (!spell.getCosts().isEmpty()
+                || card.getAbilities(game).stream().anyMatch(OptionalAdditionalSourceCosts.class::isInstance)) {
+            return true;
+        }
+        // A mana ability can also put cards into the graveyard (e.g. Blood Pet).
+        for (Card inHand : player.getHand().getCards(game)) {
+            if (!inHand.getAbilities(game).getActivatedManaAbilities(Zone.HAND).isEmpty()) {
+                return true;
+            }
+        }
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(player.getId(), game)) {
+            if (permanent.getAbilities(game).stream().anyMatch(TriggeredManaAbility.class::isInstance)
+                    || permanent.getAbilities(game).getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, player.getId(), game)
+                            .stream().anyMatch(ability -> !(ability instanceof BasicManaAbility))) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 
