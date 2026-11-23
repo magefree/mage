@@ -69,7 +69,7 @@ public class ComputerPlayer extends PlayerImpl {
     // keep current paying cost info for choose dialogs
     // mana abilities must ask payment too, so keep full chain
     // TODO: make sure it thread safe for AI simulations (all transient fields above and bottom)
-    private final transient Map<UUID, ManaCost> lastUnpaidMana = new LinkedHashMap<>();
+    private final transient Map<Ability, ManaCost> lastUnpaidMana = new LinkedHashMap<>();
 
     public ComputerPlayer(String name, RangeOfInfluence range) {
         super(name, range);
@@ -396,12 +396,12 @@ public class ComputerPlayer extends PlayerImpl {
     @Override
     public boolean playMana(Ability ability, ManaCost unpaid, String promptText, Game game) {
         payManaMode = true;
-        lastUnpaidMana.put(ability.getId(), unpaid.copy());
+        lastUnpaidMana.put(ability, unpaid.copy());
         try {
             return playManaHandling(ability, unpaid, game);
         } finally {
 
-            lastUnpaidMana.remove(ability.getId());
+            lastUnpaidMana.remove(ability);
             payManaMode = false;
         }
     }
@@ -698,6 +698,12 @@ public class ComputerPlayer extends PlayerImpl {
 
     private Abilities<ActivatedManaAbilityImpl> getManaAbilitiesSortedByManaCount(MageObject mageObject, final Game game) {
         Abilities<ActivatedManaAbilityImpl> manaAbilities = mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, playerId, game);
+        for (Ability paying : lastUnpaidMana.keySet()) {
+            if (mageObject.getId().equals(paying.getSourceId())) {
+                // A granted ability can get a new ID when continuous effects are reapplied during payment.
+                manaAbilities.removeIf(ability -> ability.getOriginalId().equals(paying.getOriginalId()));
+            }
+        }
         if (manaAbilities.size() > 1) {
             // Sort mana abilities by number of produced manas, to use ability first that produces most mana (maybe also conditional if possible)
             Collections.sort(manaAbilities, (a1, a2) -> {
