@@ -148,7 +148,7 @@ class CourtOfLocthwainSecondEffect extends OneShotEffect {
         game.addEffect(new CourtOfLocthwainCastForFreeEffect(mor), sourceWithIdentifier);
 
         // Can cast another spell among the exiled ones this turn.
-        watcher.setOrIncrementCastAvailable(controller.getId(), mor);
+        watcher.setOrIncrementCastAvailable(controller.getId(), new MageObjectReference(source, game));
         return true;
     }
 
@@ -201,7 +201,7 @@ class CourtOfLocthwainCastForFreeEffect extends AsThoughEffectImpl {
             return false;
         }
         // can this ability still be used this turn?
-        if (1 > watcher.castStillAvailable(controller.getId(), new MageObjectReference(sourceObject, game))) {
+        if (1 > watcher.castStillAvailable(controller.getId(), new MageObjectReference(source, game))) {
             return false;
         }
 

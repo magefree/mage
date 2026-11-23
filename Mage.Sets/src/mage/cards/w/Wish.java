@@ -102,7 +102,7 @@ class WishPlayFromSideboardEffect extends AsThoughEffectImpl {
             UUID mainCardId = CardUtil.getMainCardId(game, objectId);
             if (controller != null && sourceObject != null && controller.getSideboard().contains(mainCardId)) {
                 WishWatcher watcher = game.getState().getWatcher(WishWatcher.class);
-                return watcher != null && !watcher.isAbilityUsed(new MageObjectReference(sourceObject, game));
+                return watcher != null && !watcher.isAbilityUsed(new MageObjectReference(source, game));
             }
         }
         return false;

@@ -166,7 +166,7 @@ class ChandraHopesBeaconWatcher extends Watcher {
         return watcher != null
                 && watcher
                 .morMap
-                .getOrDefault(new MageObjectReference(source.getSourceObject(game), game), emptySet)
+                .getOrDefault(new MageObjectReference(source, game), emptySet)
                 .stream()
                 .noneMatch(morSet::contains);
     }

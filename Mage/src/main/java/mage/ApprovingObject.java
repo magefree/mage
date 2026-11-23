@@ -16,7 +16,8 @@ public class ApprovingObject implements Serializable {
     
     public ApprovingObject(Ability source, Game game) {
         this.approvingAbility = source;
-        this.approvingMageObjectReference = new MageObjectReference(source.getSourceId(), game);
+        // the object the ability knew: a permission keeps counting against it after its source moves (400.7)
+        this.approvingMageObjectReference = new MageObjectReference(source, game);
     }
 
     public Ability getApprovingAbility() {

@@ -132,6 +132,6 @@ class MarchOfRecklessJoyWatcher extends Watcher {
                 .getState()
                 .getWatcher(MarchOfRecklessJoyWatcher.class)
                 .morMap
-                .getOrDefault(new MageObjectReference(source, game, 1), 0) < 2;
+                .getOrDefault(new MageObjectReference(source, game), 0) < 2;
     }
 }
