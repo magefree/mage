@@ -6,11 +6,13 @@ import mage.MageIdentifier;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.ForageCost;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.counter.AddCounterEnteringCreatureEffect;
@@ -20,6 +22,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -94,8 +97,15 @@ class OsteomancerAdeptEffect extends AsThoughEffectImpl {
                 || !game.getState().getZone(objectId).match(Zone.GRAVEYARD)) {
             return false;
         }
+        SpellAbility spell = card.getSpellAbility();
+        // During the playable check, the creature being cast is still in the graveyard.
+        if (game.inCheckPlayableState() && player.getGraveyard().size() <= 3
+                && !new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_FOOD)
+                        .canPay(spell, spell, affectedControllerId, game)) {
+            return false;
+        }
         Costs<Cost> newCosts = new CostsImpl<>();
-        newCosts.addAll(card.getSpellAbility().getCosts());
+        newCosts.addAll(spell.getCosts());
         newCosts.add(new ForageCost());
         player.setCastSourceIdWithAlternateMana(
                 card.getId(), card.getManaCost(), newCosts,
