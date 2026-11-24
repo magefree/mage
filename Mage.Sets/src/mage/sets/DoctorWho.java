@@ -261,8 +261,8 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Dinosaurs on a Spaceship", 999, Rarity.RARE, mage.cards.d.DinosaursOnASpaceship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Displaced Dinosaurs", 100, Rarity.UNCOMMON, mage.cards.d.DisplacedDinosaurs.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Displaced Dinosaurs", 705, Rarity.UNCOMMON, mage.cards.d.DisplacedDinosaurs.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Don't Blink", 40, Rarity.UNCOMMON, mage.cards.d.DontBlink.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Don't Blink", 645, Rarity.UNCOMMON, mage.cards.d.DontBlink.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Don't Blink", 40, Rarity.UNCOMMON, mage.cards.d.DontBlink.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Don't Blink", 645, Rarity.UNCOMMON, mage.cards.d.DontBlink.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Donna Noble", 382, Rarity.RARE, mage.cards.d.DonnaNoble.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Donna Noble", 687, Rarity.RARE, mage.cards.d.DonnaNoble.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Donna Noble", 82, Rarity.RARE, mage.cards.d.DonnaNoble.class, NON_FULL_USE_VARIOUS));
