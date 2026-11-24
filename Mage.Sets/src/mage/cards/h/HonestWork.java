@@ -4,8 +4,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.RemoveAllCountersEnchantedEffect;
 import mage.abilities.effects.common.TapEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.ColorlessManaAbility;
@@ -38,7 +38,7 @@ public final class HonestWork extends CardImpl {
 
         // When this Aura enters, tap enchanted creature and remove all counters from it.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect());
-        ability.addEffect(new HonestWorkCountersEffect());
+        ability.addEffect(new RemoveAllCountersEnchantedEffect().concatBy("and"));
         this.addAbility(ability);
 
         // Enchanted creature loses all abilities and is a Citizen with base power and toughness 1/1 and "{T}: Add {C}" named Humble Merchant.
@@ -55,32 +55,6 @@ public final class HonestWork extends CardImpl {
     }
 }
 
-class HonestWorkCountersEffect extends OneShotEffect {
-
-    HonestWorkCountersEffect() {
-        super(Outcome.Benefit);
-        staticText = "and remove all counters from it";
-    }
-
-    private HonestWorkCountersEffect(final HonestWorkCountersEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public HonestWorkCountersEffect copy() {
-        return new HonestWorkCountersEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return Optional
-                .ofNullable((Permanent) getValue("permanentEnteredBattlefield"))
-                .map(Permanent::getAttachedTo)
-                .map(game::getPermanent)
-                .filter(permanent -> permanent.removeAllCounters(source, game) > 0)
-                .isPresent();
-    }
-}
 
 class HonestWorkAbilityEffect extends ContinuousEffectImpl {
 
