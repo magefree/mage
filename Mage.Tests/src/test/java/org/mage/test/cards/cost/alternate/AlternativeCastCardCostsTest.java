@@ -77,37 +77,6 @@ public class AlternativeCastCardCostsTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_Harmonize_CardCostIncrease_Cast() {
-        // As long as it's not your turn, this spell costs {3} more to cast.
-        // Return all nonland permanents to their owner's hands. End the turn.
-        addCard(Zone.GRAVEYARD, playerA, "Hurkyl's Final Meditation"); // {4}{U}{U}{U}
-        //
-        // Flash
-        // When this creature enters, target instant or sorcery card in your graveyard gains harmonize until end of turn.
-        // Its harmonize cost is equal to its mana cost.
-        addCard(Zone.HAND, playerA, "Songcrafter Mage"); // {G}{U}{R}
-        addCard(Zone.BATTLEFIELD, playerA, "Forest");
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 1 + 10); // 1 for Songcrafter Mage, 10 for harmonize
-
-        // turn 2 is playerB's turn, so Hurkyl's Final Meditation costs {3} more
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Songcrafter Mage");
-        addTarget(playerA, "Hurkyl's Final Meditation"); // gains harmonize
-        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
-
-        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Harmonize");
-        setChoice(playerA, false); // don't tap a creature to reduce the cost
-        // it ends the turn on resolve, so check the payment before it
-        checkPermanentTapped("paid", 2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Island", true, 1 + 10);
-
-        setStrictChooseMode(true);
-        setStopAt(3, PhaseStep.UPKEEP);
-        execute();
-
-        assertExileCount(playerA, "Hurkyl's Final Meditation", 1); // harmonize exiles it
-    }
-
-    @Test
     public void test_Foretell_CardCostIncrease_Playable() {
         removeAllCardsFromHand(playerA);
 

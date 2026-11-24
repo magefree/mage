@@ -3,10 +3,8 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
-import mage.abilities.costs.costadjusters.CompositeCostAdjuster;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -31,7 +29,6 @@ import java.util.UUID;
 public abstract class CastFromGraveyardAbility extends SpellAbility {
 
     protected String abilityName;
-    private final CostAdjuster cardCostAdjuster;
     private final Costs<Cost> ownCosts; // without the card's own costs, for the rules text
     private boolean replacementEffectAdded = false;
 
@@ -45,7 +42,6 @@ public abstract class CastFromGraveyardAbility extends SpellAbility {
         this.zone = Zone.GRAVEYARD;
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
         this.spellAbilityCastMode = spellAbilityCastMode;
-        this.cardCostAdjuster = this.getCostAdjuster();
         this.ownCosts = new CostsImpl<>();
         this.setAdditionalCostsRuleVisible(false);
         this.clearManaCosts();
@@ -58,7 +54,6 @@ public abstract class CastFromGraveyardAbility extends SpellAbility {
     protected CastFromGraveyardAbility(final CastFromGraveyardAbility ability) {
         super(ability);
         this.abilityName = ability.abilityName;
-        this.cardCostAdjuster = ability.cardCostAdjuster;
         this.ownCosts = ability.ownCosts.copy();
         this.replacementEffectAdded = ability.replacementEffectAdded;
     }
@@ -76,13 +71,6 @@ public abstract class CastFromGraveyardAbility extends SpellAbility {
      */
     protected Costs<Cost> getOwnCosts() {
         return ownCosts;
-    }
-
-    @Override
-    public CastFromGraveyardAbility setCostAdjuster(CostAdjuster costAdjuster) {
-        // the card's own cost adjuster still applies (e.g. Hurkyl's Final Meditation cast with harmonize)
-        super.setCostAdjuster(CompositeCostAdjuster.of(cardCostAdjuster, costAdjuster));
-        return this;
     }
 
     @Override
