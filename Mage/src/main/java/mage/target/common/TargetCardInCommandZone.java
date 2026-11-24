@@ -39,7 +39,8 @@ public class TargetCardInCommandZone extends TargetCard {
     @Override
     public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
         Card card = game.getCard(id);
-        return game.getState().getZone(id) == Zone.COMMAND
+        return super.canTarget(playerId, id, source, game)
+                && game.getState().getZone(id) == Zone.COMMAND
                 && game.getState().getPlayersInRange(getTargetController() == null ? playerId : getTargetController(), game).contains(game.getOwnerId(id))
                 && filter.match(card, game);
     }
