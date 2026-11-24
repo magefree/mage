@@ -16,6 +16,7 @@ import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ManaValueParityPredicate;
 import mage.game.Game;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -62,8 +63,7 @@ class LavabrinkVenturerEffect extends GainAbilitySourceEffect {
     }
 
     LavabrinkVenturerEffect() {
-        super(new ProtectionAbility(nullFilter));
-        this.ability.setRuleVisible(false);
+        super(new ProtectionAbility(nullFilter).setRuleVisible(false));
         staticText = "{this} has protection from each mana value of the chosen quality. <i>(Zero is even.)</i>";
     }
 
@@ -72,15 +72,22 @@ class LavabrinkVenturerEffect extends GainAbilitySourceEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    protected List<Ability> getAbilitiesToGrant(Game game, Ability source) {
+        // nullFilter carries ODD *and* EVEN so that it matches nothing until a mode is chosen,
+        // so the filter has to be replaced rather than added to
+        FilterObject chosen;
         if (ModeChoice.ODD.checkMode(game, source)) {
-            this.ability = new ProtectionAbility(oddFilter);
+            chosen = oddFilter;
         } else if (ModeChoice.EVEN.checkMode(game, source)) {
-            this.ability = new ProtectionAbility(evenFilter);
+            chosen = evenFilter;
         } else {
-            return false;
+            return super.getAbilitiesToGrant(game, source);
         }
-        return super.apply(game, source);
+        List<Ability> granted = copyOfGrantedAbilities();
+        granted.stream()
+                .filter(ProtectionAbility.class::isInstance)
+                .forEach(ability -> ((ProtectionAbility) ability).setFilter(chosen));
+        return granted;
     }
 
     @Override

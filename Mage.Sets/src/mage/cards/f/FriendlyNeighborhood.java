@@ -50,8 +50,7 @@ public final class FriendlyNeighborhood extends CardImpl {
                 new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability, AttachmentType.AURA, Duration.WhileOnBattlefield, null, "land")
-                .withQuotes(true)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability, AttachmentType.AURA, Duration.WhileOnBattlefield, null, "land")));
     }
 
     private FriendlyNeighborhood(final FriendlyNeighborhood card) {

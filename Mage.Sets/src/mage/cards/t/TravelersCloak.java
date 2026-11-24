@@ -17,25 +17,19 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 /**
  * @author emerald000
  */
 public final class TravelersCloak extends CardImpl {
-
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("chosen type");
-
-    static {
-        filter.add(TravelersCloakChosenSubtypePredicate.instance);
-    }
 
     public TravelersCloak(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
@@ -55,7 +49,7 @@ public final class TravelersCloak extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
 
         // Enchanted creature has landwalk of the chosen type.
-        Effect effect = new TravelersCloakGainAbilityAttachedEffect(filter);
+        Effect effect = new TravelersCloakGainAbilityAttachedEffect();
         effect.setText("Enchanted creature has landwalk of the chosen type");
         this.addAbility(new SimpleStaticAbility(effect));
     }
@@ -72,8 +66,8 @@ public final class TravelersCloak extends CardImpl {
 
 class TravelersCloakGainAbilityAttachedEffect extends GainAbilityAttachedEffect {
 
-    TravelersCloakGainAbilityAttachedEffect(FilterControlledLandPermanent filter) {
-        super(new LandwalkAbility(filter), AttachmentType.AURA);
+    TravelersCloakGainAbilityAttachedEffect() {
+        super(new LandwalkAbility(new FilterControlledLandPermanent("chosen type")), AttachmentType.AURA);
     }
 
     protected TravelersCloakGainAbilityAttachedEffect(final TravelersCloakGainAbilityAttachedEffect effect) {
@@ -86,22 +80,27 @@ class TravelersCloakGainAbilityAttachedEffect extends GainAbilityAttachedEffect 
     }
 
     @Override
-    public void afterGain(Game game, Ability source, Permanent permanent, Ability addedAbility) {
-        super.afterGain(game, source, permanent, addedAbility);
-
-        // ChooseLandTypeEffect keep settings in original source, but we must transfer it to real permanent
-        Object val = game.getState().getValue(source.getSourceId() + "_type");
-        game.getState().setValue(permanent.getId() + "_landwalk_type", val);
+    protected List<Ability> getAbilitiesToGrant(Game game, Ability source) {
+        // the land type is chosen on the Aura, but the granted ability is evaluated against the
+        // creature, so the predicate has to carry the Aura's id rather than read its own source
+        FilterControlledLandPermanent filter = new FilterControlledLandPermanent("chosen type");
+        filter.add(new ChosenLandTypePredicate(source.getSourceId()));
+        return Collections.singletonList(new LandwalkAbility(filter));
     }
 }
 
-enum TravelersCloakChosenSubtypePredicate implements ObjectSourcePlayerPredicate<MageObject> {
-    instance;
+class ChosenLandTypePredicate implements Predicate<MageObject> {
+
+    private final UUID auraId;
+
+    ChosenLandTypePredicate(UUID auraId) {
+        this.auraId = auraId;
+    }
 
     @Override
-    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
-        SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(input.getSourceId(), game, "_landwalk_type");
-        return input.getObject().hasSubtype(subType, game);
+    public boolean apply(MageObject input, Game game) {
+        SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(auraId, game);
+        return input.hasSubtype(subType, game);
     }
 
     @Override

@@ -2,7 +2,6 @@ package mage.cards.z;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.CompoundAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -54,8 +53,9 @@ public final class ZurEternalSchemer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Enchantment creatures you control have deathtouch, lifelink, and hexproof.
-        CompoundAbility compoundAbilities = new CompoundAbility(DeathtouchAbility.getInstance(), LifelinkAbility.getInstance(), HexproofAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(compoundAbilities, Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
+                Duration.WhileOnBattlefield, filter,
+                DeathtouchAbility.getInstance(), LifelinkAbility.getInstance(), HexproofAbility.getInstance())));
 
         // {1}{W}: Target non-Aura enchantment you control becomes a creature in addition to its other types and has base power and toughness each equal to its mana value.
         Ability ability = new SimpleActivatedAbility(new ZurEternalSchemerEffect(), new ManaCostsImpl<>("{1}{W}"));

@@ -1,7 +1,6 @@
 package mage.cards.d;
 
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.BoostGainAbilityGenericEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,12 +19,9 @@ public final class DiveDown extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Target creature you control gets +0/+3 and gains hexproof until end of turn. 
-        this.getSpellAbility().addEffect(new BoostTargetEffect(
-                0, 3, Duration.EndOfTurn
-        ).setText("Target creature you control gets +0/+3"));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
-                HexproofAbility.getInstance(), Duration.EndOfTurn
-        ).setText("and gains hexproof until end of turn"));
+        this.getSpellAbility().addEffect(new BoostGainAbilityGenericEffect(
+                0, 3, Duration.EndOfTurn, HexproofAbility.getInstance()
+        ));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 

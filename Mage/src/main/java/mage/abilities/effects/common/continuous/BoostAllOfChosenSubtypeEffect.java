@@ -1,36 +1,45 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.abilities.Ability;
+import mage.MageObject;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+
+enum isChosenTypePredicate implements ObjectSourcePlayerPredicate<MageObject> {
+    instance;
+
+    @Override
+    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
+        SubType type = ChooseCreatureTypeEffect.getChosenCreatureType(input.getSourceId(), game);
+        return input.getObject().hasSubtype(type, game);
+    }
+}
 
 /**
  * @author LevelX2
  */
 public class BoostAllOfChosenSubtypeEffect extends BoostAllEffect {
 
-    private SubType subtype = null;
-
     public BoostAllOfChosenSubtypeEffect(int power, int toughness, Duration duration, boolean excludeSource) {
-        super(power, toughness, duration, new FilterCreaturePermanent("creatures of the chosen type"), excludeSource);
+        this(power, toughness, duration, new FilterCreaturePermanent("creatures of the chosen type"), excludeSource);
     }
 
     public BoostAllOfChosenSubtypeEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
-        super(power, toughness, duration, filter, excludeSource);
+        this(StaticValue.get(power), StaticValue.get(toughness), duration, filter, excludeSource);
     }
 
     public BoostAllOfChosenSubtypeEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
-        super(power, toughness, duration, filter, excludeSource);
+        super(power, toughness, duration, modify(filter), excludeSource);
     }
 
     protected BoostAllOfChosenSubtypeEffect(final BoostAllOfChosenSubtypeEffect effect) {
         super(effect);
-        this.subtype = effect.subtype;
     }
 
     @Override
@@ -38,21 +47,9 @@ public class BoostAllOfChosenSubtypeEffect extends BoostAllEffect {
         return new BoostAllOfChosenSubtypeEffect(this);
     }
 
-    @Override
-    protected boolean selectedByRuntimeData(Permanent permanent, Ability source, Game game) {
-        if (subtype != null) {
-            return permanent.hasSubtype(subtype, game);
-        }
-        return false;
-    }
-
-    @Override
-    protected void setRuntimeData(Ability source, Game game) {
-        SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
-        if (subType != null) {
-            subtype = subType;
-        } else {
-            discard();
-        }
+    private static FilterCreaturePermanent modify(FilterCreaturePermanent filter) {
+        FilterCreaturePermanent copy = filter.copy();
+        copy.add(isChosenTypePredicate.instance);
+        return copy;
     }
 }

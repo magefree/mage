@@ -24,6 +24,8 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.util.GameLog;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -74,10 +76,10 @@ class TorrentOfLavaGainAbilityEffect extends GainAbilityAllEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    protected List<Ability> getAbilitiesToGrant(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(source.getSourceId());
         if (spell == null) {
-            return false;
+            return Collections.emptyList();
         }
 
         Effect effect = new TorrentOfLavaPreventionEffect(spell.getId(), spell.getZoneChangeCounter(game));
@@ -86,8 +88,7 @@ class TorrentOfLavaGainAbilityEffect extends GainAbilityAllEffect {
         effect.setText("Prevent the next 1 damage that would be dealt to {this} by "
                 + GameLog.getColoredObjectIdNameForTooltip(spell.getColor(game), idName) + " this turn");
 
-        ability = new SimpleActivatedAbility(effect, new TapSourceCost());
-        return super.apply(game, source);
+        return Collections.singletonList(new SimpleActivatedAbility(effect, new TapSourceCost()));
     }
 
     @Override

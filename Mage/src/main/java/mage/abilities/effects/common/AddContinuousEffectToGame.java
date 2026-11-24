@@ -39,7 +39,8 @@ public class AddContinuousEffectToGame extends OneShotEffect {
         for (Effect effect : this.effects) {
             // runtime check
             if (!effect.getTargetPointer().getClass().equals(FirstTargetPointer.class)
-                    && !effect.getTargetPointer().getClass().equals(this.getTargetPointer().getClass())) {
+                    && !effect.getTargetPointer().getClass().equals(this.getTargetPointer().getClass())
+                    && !effect.getTargetPointer().isSpecial()) {
                 throw new IllegalArgumentException("Wrong code usage: found diff target pointers, must set target pointers to AddContinuousEffectToGame, not to inner effects"
                         + " - " + source.getClass().getSimpleName()
                         + " - " + source

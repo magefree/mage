@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.dynamicvalue.common.SweepNumber;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.keyword.SweepEffect;
@@ -9,6 +8,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -22,7 +24,7 @@ public final class ChargeAcrossTheAraba extends CardImpl {
 
         // Sweep - Return any number of Plains you control to their owner's hand. Creatures you control get +1/+1 until end of turn for each Plains returned this way.
         this.getSpellAbility().addEffect(new SweepEffect(SubType.PLAINS));
-        this.getSpellAbility().addEffect(new BoostControlledEffect(SweepNumber.PLAINS, SweepNumber.PLAINS, Duration.EndOfTurn, null, false));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(SweepNumber.PLAINS, SweepNumber.PLAINS, Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES, false));
     }
 
     private ChargeAcrossTheAraba(final ChargeAcrossTheAraba card) {
