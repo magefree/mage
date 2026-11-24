@@ -19,6 +19,8 @@ public interface Effect extends Serializable, Copyable<Effect> {
 
     UUID getId();
 
+    UUID getOriginalId();
+
     void newId();
 
     /**

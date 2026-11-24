@@ -286,5 +286,38 @@ public class CloneTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2);
         assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2, Filter.ComparisonScope.All);
     }
-    
+
+    @Test
+    public void testSivitri() {
+        addCard(Zone.BATTLEFIELD, playerA, "Oath of Teferi");
+        addCard(Zone.BATTLEFIELD, playerA, "Sivitri, Dragon Master");
+        addCard(Zone.HAND, playerA, "Spark Double");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears");
+        addCard(Zone.HAND, playerA, "Fateful Absence");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
+        setChoice(playerA, true);
+        setChoice(playerA, "Sivitri, Dragon Master");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fateful Absence");
+        addTarget(playerA, "Sivitri, Dragon Master[no copy]");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Until");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Until");
+
+        attack(2, playerB, "Balduvian Bears", playerA);
+        setChoice(playerB, "Sivitri");
+        setChoice(playerB, true);
+        setChoice(playerB, true);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 18);
+        assertLife(playerB, 16);
+    }
 }
