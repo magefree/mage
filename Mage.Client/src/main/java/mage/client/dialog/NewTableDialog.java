@@ -645,6 +645,12 @@ public class NewTableDialog extends MageDialog {
                     return false;
                 }
                 break;
+            case "Variant Magic - Pauper Commander":
+                if (!options.getGameType().startsWith("Pauper Commander")) {
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Commander needs also a Commander game type", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
             case "Variant Magic - Freeform Commander":
                 if (!options.getGameType().startsWith("Freeform Commander")) {
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Freeform Commander needs also a Freeform Commander game type", "Error", JOptionPane.ERROR_MESSAGE);
@@ -693,7 +699,8 @@ public class NewTableDialog extends MageDialog {
                         && !options.getDeckType().equals("Variant Magic - MTGO 1v1 Commander")
                         && !options.getDeckType().equals("Variant Magic - Centurion Commander")
                         && !options.getDeckType().equals("Variant Magic - Freeform Commander")
-                        && !options.getDeckType().equals("Variant Magic - Penny Dreadful Commander")) {
+                        && !options.getDeckType().equals("Variant Magic - Penny Dreadful Commander")
+                        && !options.getDeckType().equals("Variant Magic - Pauper Commander")) {
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Commander needs also a Commander game type", "Error", JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
