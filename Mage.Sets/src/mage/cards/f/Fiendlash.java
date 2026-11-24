@@ -96,7 +96,7 @@ class FiendlashTriggeredAbility extends TriggeredAbilityImpl implements BatchTri
 class FiendlashEffect extends OneShotEffect {
 
     FiendlashEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Damage);
     }
 
     private FiendlashEffect(final FiendlashEffect effect) {

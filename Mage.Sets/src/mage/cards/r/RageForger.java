@@ -67,7 +67,7 @@ public final class RageForger extends CardImpl {
 class RageForgerDamageEffect extends OneShotEffect {
 
     RageForgerDamageEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Damage);
         this.staticText = "you may have that creature deal 1 damage to target player or planeswalker";
     }
 
