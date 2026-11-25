@@ -14,6 +14,7 @@ import mage.constants.SubType;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlaneswalkerPermanent;
+import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
 
@@ -40,6 +41,7 @@ public final class VolatileArsonist extends TransformingDoubleFacedCard {
 
         // Whenever Volatile Arsonist attacks, it deals 1 damage to each of up to one target creature, up to one target player, and/or up to one target planeswalker.
         Ability ability = new AttacksTriggeredAbility(new DamageTargetEffect(1)
+                .setTargetPointer(new EachTargetPointer())
                 .setText("it deals 1 damage to each of up to one target creature, up to one target player, and/or up to one target planeswalker"));
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         ability.addTarget(new TargetPlayer(0, 1, false));
@@ -59,7 +61,9 @@ public final class VolatileArsonist extends TransformingDoubleFacedCard {
         this.getRightHalfCard().addAbility(HasteAbility.getInstance());
 
         // Whenever Dire-Strain Anarchist attacks, it deals 2 damage to each of up to one target creature, up to one target player, and/or up to one target planeswalker.
-        Ability ability2 = new AttacksTriggeredAbility(new DamageTargetEffect(2).setText("it deals 2 damage to each of up to one target creature, up to one target player, and/or up to one target planeswalker"));
+        Ability ability2 = new AttacksTriggeredAbility(new DamageTargetEffect(2)
+                .setTargetPointer(new EachTargetPointer())
+                .setText("it deals 2 damage to each of up to one target creature, up to one target player, and/or up to one target planeswalker"));
         ability2.addTarget(new TargetCreaturePermanent(0, 1));
         ability2.addTarget(new TargetPlayer(0, 1, false));
         ability2.addTarget(new TargetPlaneswalkerPermanent(0, 1));
