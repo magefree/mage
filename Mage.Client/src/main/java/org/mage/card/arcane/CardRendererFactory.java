@@ -19,10 +19,10 @@ public class CardRendererFactory {
 
     public CardRenderer create(CardView card, int renderModeOverride) {
         int renderMode = renderModeOverride == -1 ? PreferencesDialog.getRenderMode() : renderModeOverride;
-        if (shouldRenderFuture(card, renderMode)) {
-            return new FutureCardRenderer(card);
-        } else if (card.isSplitCard()) {
+        if (card.isSplitCard()) {
             return new ModernSplitCardRenderer(card);
+        } else if (shouldRenderFuture(card, renderMode)) {
+            return new FutureCardRenderer(card);
         } else if (shouldRenderRetro(card, renderMode)) {
             // TODO: implement split card renderer for retro cards
             return new RetroCardRenderer(card);
