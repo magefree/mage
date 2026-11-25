@@ -50,6 +50,10 @@ public class TargetStackObject extends TargetObject {
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
+        // rule 115.5. A spell or ability on the stack is an illegal target for itself.
+        if (source != null && source.getId().equals(id)) {
+            return false;
+        }
         StackObject stackObject = game.getStack().getStackObject(id);
         return filter.match(stackObject, source.getControllerId(), source, game);
     }
@@ -63,6 +67,10 @@ public class TargetStackObject extends TargetObject {
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject : game.getStack()) {
+            // rule 115.5. A spell or ability on the stack is an illegal target for itself.
+            if (source != null && source.getId().equals(stackObject.getId())) {
+                continue;
+            }
             if (game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId())
                     && filter.match(stackObject, sourceControllerId, source, game)) {
                 possibleTargets.add(stackObject.getId());
