@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.List;
 
 /**
  * GUI tests: real costs to pay instead printed costs
@@ -74,7 +74,43 @@ public class PlayableCostsTest extends CardTestPlayerBase {
 
             PlayableObjectStats stats = gameView.getCanPlayObjects().getStats(cardView.getId());
             Assert.assertTrue("must be playable", stats.getPlayableAmount() > 0);
-            Assert.assertEquals("must not have real cost to pay", Collections.emptyList(), stats.getPlayableCostsToPay());
+            Assert.assertEquals("real cost to pay must be same as printed", Arrays.asList("{2}{U}"), stats.getPlayableCostsToPay());
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_AlternativeCost_InHand() {
+        // Spectacle {R} (You may cast this spell for its spectacle cost rather than its mana cost
+        // if an opponent lost life this turn.)
+        addCard(Zone.HAND, playerA, "Light Up the Stage", 1); // {2}{R}
+        addCard(Zone.HAND, playerA, "Shock", 1); // {R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+
+        // no opponent lost life yet, so only the normal cast is playable
+        runCode("no spectacle yet", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(player);
+            CardView cardView = gameView.getMyHand().values().stream()
+                    .filter(c -> c.getName().equals("Light Up the Stage")).findFirst().get();
+            PlayableObjectStats stats = gameView.getCanPlayObjects().getStats(cardView.getId());
+            Assert.assertEquals("must have normal cost only", Arrays.asList("{2}{R}"), stats.getPlayableCostsToPay());
+        });
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", playerB);
+
+        // opponent lost life, so spectacle cost is playable too
+        runCode("spectacle enabled", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(player);
+            CardView cardView = gameView.getMyHand().values().stream()
+                    .filter(c -> c.getName().equals("Light Up the Stage")).findFirst().get();
+            Assert.assertEquals("printed cost must be unchanged", "{2}{R}", cardView.getManaCostStr());
+
+            List<String> costsToPay = gameView.getCanPlayObjects().getStats(cardView.getId()).getPlayableCostsToPay();
+            Assert.assertTrue("must have normal cost: " + costsToPay, costsToPay.contains("{2}{R}"));
+            Assert.assertTrue("must have spectacle cost: " + costsToPay, costsToPay.contains("{R}"));
         });
 
         setStrictChooseMode(true);

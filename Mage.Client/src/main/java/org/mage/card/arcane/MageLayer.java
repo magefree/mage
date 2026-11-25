@@ -325,6 +325,17 @@ public class MageLayer extends MageCard {
         mainPanel.update(card);
     }
 
+    private static boolean hasOtherCostToPay(CardView card) {
+        // playable ability with a cost to pay different from the cost shown on the card
+        String shownCost = card.getManaCostStr();
+        for (String costToPay : card.getPlayableStats().getPlayableCostsToPay()) {
+            if (!costToPay.equals(shownCost)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void updateCardIcons(CardView card) {
         Map<CardIconsPanel, List<CardIcon>> newIcons = new HashMap<>();
         this.iconsPanels.forEach(panel -> newIcons.put(panel, new ArrayList<>()));
@@ -336,8 +347,8 @@ public class MageLayer extends MageCard {
         if (card.getPlayableStats().getPlayableImportantAmount() > 0) {
             allIcons.add(new PlayableCountIcon(card.getPlayableStats()));
         }
-        // real cost icons
-        if (!card.getPlayableStats().getPlayableCostsToPay().isEmpty()) {
+        // real cost icons (only if it differs from the shown cost, split cards show both halves instead)
+        if (!card.isSplitCard() && hasOtherCostToPay(card)) {
             allIcons.add(new CostToPayIcon(card.getPlayableStats()));
         }
 

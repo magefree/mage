@@ -3855,10 +3855,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         if (costsOutput != null) {
             // GUI: collect real cost to pay instead printed cost, see PlayableObjectsList
-            String costToPay = copy.getManaCostsToPay().getText();
-            if (!costToPay.equals(ability.getManaCostsToPay().getText())) {
-                costsOutput.put(ability.getId(), costToPay);
-            }
+            // (all playable abilities, so alternative casts like spectacle or flashback are included too)
+            costsOutput.put(ability.getId(), copy.getManaCostsToPay().getText());
         }
         boolean canBeCastRegularly = true;
         Set<MageIdentifier> allowedIdentifiers = null;

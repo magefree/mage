@@ -64,8 +64,10 @@ public class PlayableObjectStats implements Serializable, Copyable<PlayableObjec
             if (shortInfo.length() > 50) {
                 shortInfo = shortInfo.substring(0, 50 - 1) + "...";
             }
+            // alternative casts like spectacle or flashback are SpellAbility too, but not in basicCastAbilities
+            boolean castOrPlay = (ability instanceof SpellAbility) || (ability instanceof PlayLandAbility);
             dest.add(new PlayableObjectRecord(ability.getId(), shortInfo,
-                    costsToPay.getOrDefault(ability.getId(), "")));
+                    costsToPay.getOrDefault(ability.getId(), ""), castOrPlay));
         }
     }
 
@@ -115,14 +117,20 @@ public class PlayableObjectStats implements Serializable, Copyable<PlayableObjec
     }
 
     public List<String> getPlayableCostsToPay() {
-        // real costs to pay, only for abilities with modified costs (increased or reduced)
+        // real costs to pay for all ways to cast or play that object (activated abilities are ignored here)
         List<String> all = new ArrayList<>();
-        all.addAll(this.basicManaAbilities.stream().map(PlayableObjectRecord::getManaCostsToPay).collect(Collectors.toList()));
-        all.addAll(this.basicPlayAbilities.stream().map(PlayableObjectRecord::getManaCostsToPay).collect(Collectors.toList()));
-        all.addAll(this.basicCastAbilities.stream().map(PlayableObjectRecord::getManaCostsToPay).collect(Collectors.toList()));
-        all.addAll(this.other.stream().map(PlayableObjectRecord::getManaCostsToPay).collect(Collectors.toList()));
-        all.removeIf(String::isEmpty);
+        addCostsToPay(all, this.basicPlayAbilities);
+        addCostsToPay(all, this.basicCastAbilities);
+        addCostsToPay(all, this.other);
         return all;
+    }
+
+    private static void addCostsToPay(List<String> dest, List<PlayableObjectRecord> records) {
+        for (PlayableObjectRecord rec : records) {
+            if (rec.isCastOrPlay() && !rec.getManaCostsToPay().isEmpty()) {
+                dest.add(rec.getManaCostsToPay());
+            }
+        }
     }
 
     public int getPlayableImportantAmount() {
@@ -135,18 +143,21 @@ class PlayableObjectRecord implements Serializable, Copyable<PlayableObjectRecor
 
     UUID id;
     String value;
-    String manaCostsToPay; // empty if printed cost isn't modified
+    String manaCostsToPay; // real cost to pay, empty for abilities without mana cost
+    boolean castOrPlay; // cast or play ability, so it's a way to put that object to stack or battlefield
 
-    public PlayableObjectRecord(UUID id, String value, String manaCostsToPay) {
+    public PlayableObjectRecord(UUID id, String value, String manaCostsToPay, boolean castOrPlay) {
         this.id = id;
         this.value = value;
         this.manaCostsToPay = manaCostsToPay;
+        this.castOrPlay = castOrPlay;
     }
 
     private PlayableObjectRecord(final PlayableObjectRecord record) {
         this.id = record.id;
         this.value = record.value;
         this.manaCostsToPay = record.manaCostsToPay;
+        this.castOrPlay = record.castOrPlay;
     }
 
     public UUID getId() {
@@ -159,6 +170,10 @@ class PlayableObjectRecord implements Serializable, Copyable<PlayableObjectRecor
 
     public String getManaCostsToPay() {
         return manaCostsToPay;
+    }
+
+    public boolean isCastOrPlay() {
+        return castOrPlay;
     }
 
     @Override
