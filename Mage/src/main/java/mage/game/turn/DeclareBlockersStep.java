@@ -25,7 +25,7 @@ public class DeclareBlockersStep extends Step {
 
     @Override
     public boolean skipStep(Game game, UUID activePlayerId) {
-        if (game.getCombat().noAttackers()) {
+        if (game.getCombat().noAttackersDeclared()) {
             return true;
         }
         return super.skipStep(game, activePlayerId);
