@@ -46,6 +46,7 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetadjustment.GenericTargetAdjuster;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
@@ -1283,9 +1284,18 @@ public abstract class AbilityImpl implements Ability {
 
     protected static boolean canChooseTargetAbility(Ability ability, Modes modes, Game game, UUID controllerId) {
         int found = 0;
+        // "X target ..." with X = 0 has no targets (CR 601.2b, 601.2c): the blueprint target the adjuster
+        // later resizes needs no candidate while the adjusted count can be 0 (X is not announced yet)
+        boolean blueprintNeedsNoTarget = ability.getTargetAdjuster() instanceof TargetsCountAdjuster
+                && ((TargetsCountAdjuster) ability.getTargetAdjuster()).needsNoTargets(ability, game);
         for (Mode mode : modes.values()) {
             boolean validTargets = true;
+            boolean blueprint = blueprintNeedsNoTarget && mode.getTargets() == ability.getTargets();
             for (Target target : mode.getTargets()) {
+                if (blueprint) {
+                    blueprint = false; // the adjuster's blueprint is the mode's first target
+                    continue;
+                }
                 UUID abilityControllerId = target.getAffectedAbilityControllerId(controllerId);
                 if (!target.canChooseOrAlreadyChosen(abilityControllerId, ability, game)) {
                     validTargets = false;
