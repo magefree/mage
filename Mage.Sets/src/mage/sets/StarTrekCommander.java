@@ -225,6 +225,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Isolated Chapel", 539, Rarity.RARE, mage.cards.i.IsolatedChapel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jean-Luc Picard, Luminary", 3, Rarity.MYTHIC, mage.cards.j.JeanLucPicardLuminary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jean-Luc Picard, Luminary", 7, Rarity.MYTHIC, mage.cards.j.JeanLucPicardLuminary.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jean-Luc, Mon Capitaine", 190, Rarity.RARE, mage.cards.j.JeanLucMonCapitaine.class));
         cards.add(new SetCardInfo("Jefferies Tube", 114, Rarity.RARE, mage.cards.j.JefferiesTube.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jefferies Tube", 348, Rarity.RARE, mage.cards.j.JefferiesTube.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Join the Collective", 20, Rarity.RARE, mage.cards.j.JoinTheCollective.class, NON_FULL_USE_VARIOUS));
