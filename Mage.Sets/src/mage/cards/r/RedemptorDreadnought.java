@@ -5,6 +5,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
@@ -51,7 +52,8 @@ public final class RedemptorDreadnought extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Plasma Incinerator -- Whenever Redemptor Dreadnought attacks, if a card is exiled with it, it gets +X/+X until end of turn, where X is the power of the exiled card.
-        this.addAbility(new AttacksTriggeredAbility(new RedemptorDreadnoughtEffect()).withFlavorWord("Plasma Incinerator"));
+        this.addAbility(new AttacksTriggeredAbility(new RedemptorDreadnoughtEffect())
+                .withInterveningIf(RedemptorDreadnoughtCondition.instance).withFlavorWord("Plasma Incinerator"));
 
     }
 
@@ -65,11 +67,40 @@ public final class RedemptorDreadnought extends CardImpl {
     }
 }
 
+/**
+ * "if a card is exiled with it" is an intervening-if (CR 603.4): with nothing exiled with the
+ * permanent the ability must not trigger at all. Reads the same exile zone the cost wrote to and the
+ * effect reads at resolution (the permanent's zcc is one above the spell's).
+ */
+enum RedemptorDreadnoughtCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        // the trigger-check ability has no stack-moment zcc yet (0): read the permanent's own
+        int zcc = source.getStackMomentSourceZCC();
+        if (zcc == 0) {
+            Permanent permanent = source.getSourcePermanentOrLKI(game);
+            if (permanent == null) {
+                return false;
+            }
+            zcc = permanent.getZoneChangeCounter(game);
+        }
+        ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zcc - 1));
+        return exile != null && !exile.isEmpty();
+    }
+
+    @Override
+    public String toString() {
+        return "a card is exiled with it";
+    }
+}
+
 class RedemptorDreadnoughtEffect extends OneShotEffect {
 
     RedemptorDreadnoughtEffect() {
         super(Outcome.BoostCreature);
-        staticText = "if a card is exiled with it, it gets +X/+X until end of turn, where X is the power of the exiled card";
+        staticText = "it gets +X/+X until end of turn, where X is the power of the exiled card";
     }
 
     private RedemptorDreadnoughtEffect(final RedemptorDreadnoughtEffect effect) {
