@@ -49,6 +49,12 @@ public class EachTargetPointer extends TargetPointerImpl {
     }
 
     @Override
+    public void resetInitialized() {
+        clearInitialized();
+        this.zoneChangeCounter.clear();
+    }
+
+    @Override
     public List<UUID> getTargets(Game game, Ability source) {
         List<UUID> target = new ArrayList<>();
         if (!source.getTargets().isEmpty()) {
