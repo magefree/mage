@@ -46,6 +46,11 @@ public abstract class TargetPointerImpl implements TargetPointer {
     }
 
     @Override
+    public void resetInitialized() {
+        this.initialized = false;
+    }
+
+    @Override
     public Player getControllerOfFirstTargetOrLKI(Game game, Ability source) {
         Player targetController = null;
         Permanent permanent = this.getFirstTargetPermanentOrLKI(game, source);

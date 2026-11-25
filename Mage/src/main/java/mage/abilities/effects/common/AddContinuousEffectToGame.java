@@ -45,7 +45,15 @@ public class AddContinuousEffectToGame extends OneShotEffect {
                         + " - " + source
                 );
             }
-            effect.setTargetPointer(this.getTargetPointer().copy());
+            // A one-shot effect's default target pointer is initialized before
+            // the spell chooses targets (OneShotEffect.initNewTargetPointer).
+            // Copying it as-is makes the continuous effect skip its own init,
+            // so its NthTargetPointer has no zone-change counter and follows
+            // the same card id into a new object (CR 400.7). Clear the flag so
+            // the continuous effect's init records the current ZCC.
+            mage.target.targetpointer.TargetPointer pointer = this.getTargetPointer().copy();
+            pointer.resetInitialized();
+            effect.setTargetPointer(pointer);
             game.addEffect((ContinuousEffect) effect, source);
         }
         return true;

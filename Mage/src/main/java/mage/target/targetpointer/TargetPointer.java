@@ -26,6 +26,15 @@ public interface TargetPointer extends Serializable, Copyable<TargetPointer> {
 
     void setInitialized();
 
+    /**
+     * Clear the initialized flag so the next init (a continuous effect's, at
+     * resolution) records the object's zone-change counter. A one-shot
+     * effect's default FirstTargetPointer is initialized before targets are
+     * chosen; copying it into a continuous effect must not freeze that empty
+     * state (CR 611.2c / 400.7).
+     */
+    void resetInitialized();
+
     List<UUID> getTargets(Game game, Ability source);
 
     /**
