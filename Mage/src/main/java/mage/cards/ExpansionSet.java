@@ -115,6 +115,10 @@ public abstract class ExpansionSet implements Serializable {
                     || this.graphicInfo.getFrameStyle() == FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC
                     || this.graphicInfo.getFrameStyle() == FrameStyle.UGL_FULL_ART_BASIC);
         }
+
+        public boolean isFutureFrame() {
+            return this.graphicInfo != null && this.graphicInfo.getFrameStyle() == FrameStyle.FUTURE;
+        }
     }
 
     private enum ExpansionSetComparator implements Comparator<ExpansionSet> {
