@@ -62,7 +62,7 @@ public class MagicOnlineThemeDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Decree of Justice", "A3", Rarity.RARE, mage.cards.d.DecreeOfJustice.class, RETRO_ART));
         cards.add(new SetCardInfo("Dismantling Blow", "A4", Rarity.COMMON, mage.cards.d.DismantlingBlow.class, RETRO_ART));
         cards.add(new SetCardInfo("Dread Return", "A41", Rarity.UNCOMMON, mage.cards.d.DreadReturn.class));
-        cards.add(new SetCardInfo("Edge of Autumn", "A67", Rarity.COMMON, mage.cards.e.EdgeOfAutumn.class));
+        cards.add(new SetCardInfo("Edge of Autumn", "A67", Rarity.COMMON, mage.cards.e.EdgeOfAutumn.class, FUTURE_ART));
         cards.add(new SetCardInfo("Elfhame Palace", "A126", Rarity.UNCOMMON, mage.cards.e.ElfhamePalace.class, RETRO_ART));
         cards.add(new SetCardInfo("Elven Cache", "A68", Rarity.COMMON, mage.cards.e.ElvenCache.class, RETRO_ART));
         cards.add(new SetCardInfo("Elvish Visionary", "A69", Rarity.COMMON, mage.cards.e.ElvishVisionary.class));

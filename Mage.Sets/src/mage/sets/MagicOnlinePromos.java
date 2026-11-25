@@ -1471,7 +1471,7 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Kor Duelist", 36212, Rarity.UNCOMMON, mage.cards.k.KorDuelist.class));
         cards.add(new SetCardInfo("Kor Firewalker", 43574, Rarity.UNCOMMON, mage.cards.k.KorFirewalker.class));
         cards.add(new SetCardInfo("Kor Skyfisher", 43548, Rarity.COMMON, mage.cards.k.KorSkyfisher.class));
-        cards.add(new SetCardInfo("Korlash, Heir to Blackblade", 31961, Rarity.RARE, mage.cards.k.KorlashHeirToBlackblade.class));
+        cards.add(new SetCardInfo("Korlash, Heir to Blackblade", 31961, Rarity.RARE, mage.cards.k.KorlashHeirToBlackblade.class, FUTURE_ART));
         cards.add(new SetCardInfo("Kothophed, Soul Hoarder", 57590, Rarity.RARE, mage.cards.k.KothophedSoulHoarder.class));
         cards.add(new SetCardInfo("Kotori, Pilot Prodigy", 98091, Rarity.MYTHIC, mage.cards.k.KotoriPilotProdigy.class));
         cards.add(new SetCardInfo("Kotose, the Silent Spider", 98071, Rarity.RARE, mage.cards.k.KotoseTheSilentSpider.class));
@@ -2556,7 +2556,7 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Stoneforge Mystic", 62499, Rarity.RARE, mage.cards.s.StoneforgeMystic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stoneforge Mystic", 82814, Rarity.RARE, mage.cards.s.StoneforgeMystic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stoneforge Mystic", 99681, Rarity.RARE, mage.cards.s.StoneforgeMystic.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Storm Entity", 36020, Rarity.UNCOMMON, mage.cards.s.StormEntity.class));
+        cards.add(new SetCardInfo("Storm Entity", 36020, Rarity.UNCOMMON, mage.cards.s.StormEntity.class, FUTURE_ART));
         cards.add(new SetCardInfo("Storm Herald", 79907, Rarity.RARE, mage.cards.s.StormHerald.class));
         cards.add(new SetCardInfo("Storm of Souls", 95245, Rarity.RARE, mage.cards.s.StormOfSouls.class));
         cards.add(new SetCardInfo("Storm the Festival", 94042, Rarity.RARE, mage.cards.s.StormTheFestival.class));

@@ -27,7 +27,7 @@ public class MagicFest2026 extends ExpansionSet {
         cards.add(new SetCardInfo("Consecrated Sphinx", "4", Rarity.MYTHIC, mage.cards.c.ConsecratedSphinx.class, RETRO_ART));
         cards.add(new SetCardInfo("Counterspell", "5", Rarity.RARE, mage.cards.c.Counterspell.class, RETRO_ART));
         cards.add(new SetCardInfo("Preordain", "7", Rarity.RARE, mage.cards.p.Preordain.class, FULL_ART));
-        cards.add(new SetCardInfo("Llanowar Elves", "8", Rarity.RARE, mage.cards.l.LlanowarElves.class));
+        cards.add(new SetCardInfo("Llanowar Elves", "8", Rarity.RARE, mage.cards.l.LlanowarElves.class, FUTURE_ART));
         cards.add(new SetCardInfo("Utopia Sprawl", "9", Rarity.RARE, mage.cards.u.UtopiaSprawl.class, FULL_ART));
         cards.add(new SetCardInfo("Atraxa, Praetors' Voice", "10", Rarity.MYTHIC, mage.cards.a.AtraxaPraetorsVoice.class));
         cards.add(new SetCardInfo("Fact or Fiction", "12", Rarity.RARE, mage.cards.f.FactOrFiction.class));
