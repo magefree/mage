@@ -3,11 +3,10 @@ package org.mage.card.arcane;
 import mage.cards.FrameStyle;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.CardRenderMode;
-import mage.util.CardUtil;
 import mage.view.CardView;
 
 /**
- * @author StravantUser
+ * @author StravantUser, JayDi85
  */
 public class CardRendererFactory {
 
@@ -33,23 +32,9 @@ public class CardRendererFactory {
     }
 
     private static boolean shouldRenderFuture(CardView card, int renderMode) {
-        boolean renderMTGO = isFutureFramePrinting(card) && renderMode == CardRenderMode.MTGO.getId();
+        boolean renderMTGO = card.getFrameStyle() == FrameStyle.FUTURE && renderMode == CardRenderMode.MTGO.getId();
         boolean forcedFuture = renderMode == CardRenderMode.FORCED_FUTURE.getId();
         return renderMTGO || forcedFuture;
-    }
-
-    private static boolean isFutureFramePrinting(CardView card) {
-        // Future Sight's futureshifted sheet occupies collector numbers 81-180.
-        String cardNumber = card.getCardNumber();
-        if (!"FUT".equals(card.getExpansionSetCode()) || cardNumber == null || cardNumber.isEmpty()) {
-            return false;
-        }
-        try {
-            int number = CardUtil.parseCardNumberAsInt(cardNumber);
-            return number >= 81 && number <= 180;
-        } catch (IllegalArgumentException ignored) {
-            return false;
-        }
     }
 
     private static boolean shouldRenderRetro(CardView card, int renderMode) {
