@@ -41,6 +41,8 @@ public abstract class ExpansionSet implements Serializable {
     public static final CardGraphicInfo NON_FULL_USE_VARIOUS = new CardGraphicInfo(null, true); // TODO: rename to NORMAL_ART_USE_VARIOUS
     public static final CardGraphicInfo RETRO_ART = new CardGraphicInfo(FrameStyle.RETRO, false);
     public static final CardGraphicInfo RETRO_ART_USE_VARIOUS = new CardGraphicInfo(FrameStyle.RETRO, true);
+    public static final CardGraphicInfo FUTURE_ART = new CardGraphicInfo(FrameStyle.FUTURE, false);
+    public static final CardGraphicInfo FUTURE_ART_USE_VARIOUS = new CardGraphicInfo(FrameStyle.FUTURE, true);
     public static final CardGraphicInfo FULL_ART = new CardGraphicInfo(FrameStyle.MPOP_FULL_ART_BASIC, false);
     public static final CardGraphicInfo FULL_ART_USE_VARIOUS = new CardGraphicInfo(FrameStyle.MPOP_FULL_ART_BASIC, true);
 
@@ -112,6 +114,10 @@ public abstract class ExpansionSet implements Serializable {
                     && (this.graphicInfo.getFrameStyle() == FrameStyle.RETRO
                     || this.graphicInfo.getFrameStyle() == FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC
                     || this.graphicInfo.getFrameStyle() == FrameStyle.UGL_FULL_ART_BASIC);
+        }
+
+        public boolean isFutureFrame() {
+            return this.graphicInfo != null && this.graphicInfo.getFrameStyle() == FrameStyle.FUTURE;
         }
     }
 

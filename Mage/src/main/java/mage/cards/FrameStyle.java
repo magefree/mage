@@ -51,7 +51,11 @@ public enum FrameStyle {
     /**
      * Retro frame
      */
-    RETRO(BorderType.OLD, false);
+    RETRO(BorderType.OLD, false),
+    /**
+     * Futureshifted frame
+     */
+    FUTURE(BorderType.SPC, false);
 
 
     /**

@@ -785,11 +785,10 @@ public class VerifyCardDataTest {
 
     @Test
     @Ignore
-    public void test_checkWrongFullArtAndRetro() {
+    public void test_checkWrongCardFrames() {
         Collection<String> errorsList = new ArrayList<>();
         Collection<ExpansionSet> xmageSets = Sets.getInstance().values();
 
-        // CHECK: wrong card numbers
         for (ExpansionSet set : xmageSets) {
             if (skipListHaveName(SKIP_LIST_WRONG_CARD_NUMBERS, set.getCode())) {
                 continue;
@@ -799,6 +798,18 @@ public class VerifyCardDataTest {
                 MtgJsonCard jsonCard = MtgJsonService.cardFromSet(set.getCode(), card.getName(), card.getCardNumber());
                 if (jsonCard == null) {
                     continue;
+                }
+
+                // CHECK: must use future frame setting
+                if ("future".equals(jsonCard.frameVersion) && !card.isFutureFrame()) {
+                    errorsList.add("Error: card must use future art setting: "
+                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                }
+
+                // CHECK: must not use future frame setting
+                if (!"future".equals(jsonCard.frameVersion) && card.isFutureFrame()) {
+                    errorsList.add("Error: card must NOT use future art setting: "
+                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
 
                 // CHECK: full art lands must use full art setting
@@ -840,7 +851,7 @@ public class VerifyCardDataTest {
 
         printMessages(errorsList);
         if (errorsList.size() > 0) {
-            Assert.fail("Found wrong cards data in sets, errors: " + errorsList.size());
+            Assert.fail("Found wrong card frames, errors: " + errorsList.size());
         }
     }
 

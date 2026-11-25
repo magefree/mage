@@ -43,7 +43,7 @@ public class The30thAnniversaryPlayPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Niv-Mizzet, the Firemind", 14, Rarity.RARE, mage.cards.n.NivMizzetTheFiremind.class, RETRO_ART));
         cards.add(new SetCardInfo("Path of Ancestry", 25, Rarity.RARE, mage.cards.p.PathOfAncestry.class, RETRO_ART));
         cards.add(new SetCardInfo("Serra Angel", 1, Rarity.RARE, mage.cards.s.SerraAngel.class, RETRO_ART));
-        cards.add(new SetCardInfo("Tarmogoyf", 15, Rarity.RARE, mage.cards.t.Tarmogoyf.class));
+        cards.add(new SetCardInfo("Tarmogoyf", 15, Rarity.RARE, mage.cards.t.Tarmogoyf.class, FUTURE_ART));
         cards.add(new SetCardInfo("Temple of the False God", 11, Rarity.RARE, mage.cards.t.TempleOfTheFalseGod.class, RETRO_ART));
         cards.add(new SetCardInfo("Terastodon", 18, Rarity.RARE, mage.cards.t.Terastodon.class, RETRO_ART));
         cards.add(new SetCardInfo("Urza, Prince of Kroog", 30, Rarity.RARE, mage.cards.u.UrzaPrinceOfKroog.class, RETRO_ART));
