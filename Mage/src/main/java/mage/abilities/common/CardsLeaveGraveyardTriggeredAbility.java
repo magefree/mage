@@ -63,7 +63,16 @@ public class CardsLeaveGraveyardTriggeredAbility extends TriggeredAbilityImpl im
         if (yourTurn && !isControlledBy(game.getActivePlayerId())) {
             return false;
         }
-        return !getFilteredEvents((ZoneChangeBatchEvent) event, game).isEmpty();
+        ZoneChangeBatchEvent batch = (ZoneChangeBatchEvent) event;
+        // 603.10a: leaves-the-graveyard abilities look back to the game state immediately before the event.
+        // A source that itself enters the battlefield from another zone in this batch was not on the
+        // battlefield before it (e.g. it sat in the graveyard), so its ability wasn't functioning and can't trigger.
+        if (batch.getEvents().stream().anyMatch(e -> getSourceId().equals(e.getTargetId())
+                && e.getFromZone() != Zone.BATTLEFIELD
+                && e.getToZone() == Zone.BATTLEFIELD)) {
+            return false;
+        }
+        return !getFilteredEvents(batch, game).isEmpty();
     }
 
     @Override
