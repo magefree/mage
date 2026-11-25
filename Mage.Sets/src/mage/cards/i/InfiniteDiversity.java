@@ -8,6 +8,7 @@ import mage.abilities.dynamicvalue.common.FederationCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.*;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -33,6 +34,7 @@ public final class InfiniteDiversity extends CardImpl {
         this.getSpellAbility().addEffect(new InfiniteDiversityEffect());
         this.getSpellAbility().addEffect(new ExileSpellEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY));
+        this.getSpellAbility().setAbilityWord(AbilityWord.FEDERATION);
         this.getSpellAbility().addHint(FederationCount.instance.getHint());
     }
 
