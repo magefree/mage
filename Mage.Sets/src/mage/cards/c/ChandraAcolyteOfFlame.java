@@ -29,7 +29,10 @@ import mage.game.permanent.token.RedElementalToken;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -98,23 +101,26 @@ class ChandraAcolyteOfFlameEffect extends OneShotEffect {
         Token token = new RedElementalToken();
         token.putOntoBattlefield(2, game, source, source.getControllerId());
 
-        token.getLastAddedTokenIds().stream().forEach(permId -> {
+        List<Permanent> permanents = new ArrayList<>();
+        for (UUID permId : token.getLastAddedTokenIds()) {
             Permanent permanent = game.getPermanent(permId);
             if (permanent == null) {
-                return;
+                continue;
             }
+            permanents.add(permanent);
 
             ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
             effect.setTargetPointer(new FixedTarget(permId, game));
             game.addEffect(effect, source);
 
-            Effect effect2 = new SacrificeTargetEffect();
-            effect2.setTargetPointer(new FixedTarget(permId, game));
-            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect2), source);
-
             // extra info
             InfoEffect.addInfoToPermanent(game, source, permanent, "<i><b>Warning</b>: It will be sacrificed at the beginning of the next end step</i>");
-        });
+        }
+
+        // "Sacrifice them" is one instruction, so it is one delayed triggered ability for both tokens (CR 603.7a)
+        Effect sacrificeEffect = new SacrificeTargetEffect("sacrifice them", source.getControllerId());
+        sacrificeEffect.setTargetPointer(new FixedTargets(permanents, game));
+        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect), source);
 
         return true;
     }
