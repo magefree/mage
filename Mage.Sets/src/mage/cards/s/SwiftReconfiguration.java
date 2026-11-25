@@ -80,6 +80,8 @@ class SwiftReconfigurationEffect extends ContinuousEffectImpl {
             case TypeChangingEffects_4:
                 permanent.removeAllCardTypes(game);
                 permanent.addCardType(game, CardType.ARTIFACT);
+                // subtypes of the lost card types go with them (CR 205.1a)
+                permanent.retainAllArtifactSubTypes(game);
                 permanent.addSubType(game, SubType.VEHICLE);
                 return true;
             case AbilityAddingRemovingEffects_6:

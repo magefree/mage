@@ -40,7 +40,7 @@ public final class Reprobation extends CardImpl {
             new CreatureToken(0, 1, "loses all abilities and is a Coward creature with base power and toughness 0/1", SubType.COWARD),
             "Enchanted creature loses all abilities and is a Coward creature with base power and toughness 0/1. " +
             "<i>(It keeps all supertypes but loses all other types and creature types.)</i>",
-            Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ABILITIES_SUBTYPE
+            Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ALL_BUT_COLOR
         )));
     }
 
