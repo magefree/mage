@@ -29,6 +29,7 @@ import java.awt.image.BufferedImage;
 public class FutureCardRenderer extends ModernCardRenderer {
 
     private static final float TYPE_LINE_Y_FRAC_FUTURE = 0.58f;
+    private static final double ART_SCALE = 1.13;
     private static final int MANA_SLOTS = 6;
     private static final Color RAIL_SHADOW = new Color(0, 0, 0, 150);
     private static final Color INNER_HIGHLIGHT = new Color(255, 255, 255, 95);
@@ -63,7 +64,10 @@ public class FutureCardRenderer extends ModernCardRenderer {
         Graphics2D artGraphics = (Graphics2D) g.create();
         try {
             artGraphics.setClip(createArtWindow());
-            drawArtIntoRect(artGraphics, totalContentInset, artY, contentWidth, artHeight, sourceRect, true);
+            // Enlarge around the bottom center to keep the printed title and mana rail outside the window.
+            artGraphics.translate(totalContentInset - contentWidth * (ART_SCALE - 1) / 2, typeLineY);
+            artGraphics.scale(ART_SCALE, ART_SCALE);
+            drawArtIntoRect(artGraphics, 0, -artHeight, contentWidth, artHeight, sourceRect, true);
         } finally {
             artGraphics.dispose();
         }
