@@ -7,109 +7,97 @@ import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author Jmlundeen
  */
 public class TheSpotLivingPortalTest extends CardTestPlayerBase {
 
-    /*
-    The Spot, Living Portal
-    {3}{W}{B}
-    Legendary Creature - Human Scientist Villain
-    When The Spot enters, exile up to one target nonland permanent and up to one target nonland permanent card from a graveyard.
-    When The Spot dies, put him on the bottom of his owner's library. If you do, return the exiled cards to their owners' hands.
-    4/4
-    */
-    private static final String theSpotLivingPortal = "The Spot, Living Portal";
-
-    /*
-    Bear Cub
-    {1}{G}
-    Creature - Bear
-    
-    2/2
-    */
-    private static final String bearCub = "Bear Cub";
-
-    /*
-    Fugitive Wizard
-    {U}
-    Creature - Human Wizard
-    
-    1/1
-    */
-    private static final String fugitiveWizard = "Fugitive Wizard";
-
     @Test
-    public void testTheSpotLivingPortal() {
-        setStrictChooseMode(true);
-
+    public void test_ExilePermanentAndGraveyardCard_ReturnOnDies() {
         addCustomEffect_TargetDestroy(playerB);
-        addCard(Zone.HAND, playerA, theSpotLivingPortal);
-        addCard(Zone.GRAVEYARD, playerA, bearCub);
-        addCard(Zone.BATTLEFIELD, playerA, "Scrubland", 5);
-        addCard(Zone.BATTLEFIELD, playerB, fugitiveWizard);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, theSpotLivingPortal);
-        addTarget(playerA, bearCub);
-        addTarget(playerA, fugitiveWizard);
+        // When The Spot enters, exile up to one target nonland permanent and up to one target nonland permanent card
+        // from a graveyard.
+        // When The Spot dies, put him on the bottom of his owner's library. If you do, return the exiled cards to their
+        // owners' hands.
+        addCard(Zone.HAND, playerA, "The Spot, Living Portal"); // {3}{W}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Scrubland", 5);
+        //
+        addCard(Zone.GRAVEYARD, playerA, "Bear Cub"); // bear 2/2
+        addCard(Zone.BATTLEFIELD, playerB, "Fugitive Wizard"); // wizard 1/1
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Spot, Living Portal");
+        addTarget(playerA, "Fugitive Wizard"); // target for exile from the battlefield
+        addTarget(playerA, "Bear Cub"); // target for exile from a graveyard
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "target destroy");
-        addTarget(playerB, theSpotLivingPortal);
+        addTarget(playerB, "The Spot, Living Portal");
 
-        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertHandCount(playerA, bearCub, 1);
-        assertHandCount(playerB, fugitiveWizard, 1);
-        assertLibraryCount(playerA, theSpotLivingPortal, 1);
+        assertHandCount(playerA, "Bear Cub", 1);
+        assertHandCount(playerB, "Fugitive Wizard", 1);
+        assertLibraryCount(playerA, "The Spot, Living Portal", 1);
     }
 
     @Test
-    public void testOnlyGraveyard() {
-        setStrictChooseMode(true);
-
+    public void test_ExileGraveyardCardOnly_ReturnOnDies() {
         addCustomEffect_TargetDestroy(playerB);
-        addCard(Zone.HAND, playerA, theSpotLivingPortal);
-        addCard(Zone.GRAVEYARD, playerA, bearCub);
-        addCard(Zone.BATTLEFIELD, playerA, "Scrubland", 5);
-        addCard(Zone.BATTLEFIELD, playerB, fugitiveWizard);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, theSpotLivingPortal);
-        addTarget(playerA, TestPlayer.TARGET_SKIP);
-        addTarget(playerA, bearCub);
+        // When The Spot enters, exile up to one target nonland permanent and up to one target nonland permanent card
+        // from a graveyard.
+        // When The Spot dies, put him on the bottom of his owner's library. If you do, return the exiled cards to their
+        // owners' hands.
+        addCard(Zone.HAND, playerA, "The Spot, Living Portal"); // {3}{W}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Scrubland", 5);
+        //
+        addCard(Zone.GRAVEYARD, playerA, "Bear Cub"); // bear 2/2
+        addCard(Zone.BATTLEFIELD, playerB, "Fugitive Wizard"); // wizard 1/1
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Spot, Living Portal");
+        addTarget(playerA, TestPlayer.TARGET_SKIP); // no target from the battlefield
+        addTarget(playerA, "Bear Cub"); // target for exile from a graveyard
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "target destroy");
-        addTarget(playerB, theSpotLivingPortal);
+        addTarget(playerB, "The Spot, Living Portal");
 
-        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertHandCount(playerA, bearCub, 1);
-        assertLibraryCount(playerA, theSpotLivingPortal, 1);
+        assertHandCount(playerA, "Bear Cub", 1);
+        assertPermanentCount(playerB, "Fugitive Wizard", 1);
+        assertLibraryCount(playerA, "The Spot, Living Portal", 1);
     }
 
     @Test
-    public void testOnlyBattlefield() {
-        setStrictChooseMode(true);
-
+    public void test_ExilePermanentOnly_ReturnOnDies() {
         addCustomEffect_TargetDestroy(playerB);
-        addCard(Zone.HAND, playerA, theSpotLivingPortal);
-        addCard(Zone.GRAVEYARD, playerA, bearCub);
-        addCard(Zone.BATTLEFIELD, playerA, "Scrubland", 5);
-        addCard(Zone.BATTLEFIELD, playerB, fugitiveWizard);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, theSpotLivingPortal);
-        addTarget(playerA, fugitiveWizard);
-        addTarget(playerA, TestPlayer.TARGET_SKIP);
+        // When The Spot enters, exile up to one target nonland permanent and up to one target nonland permanent card
+        // from a graveyard.
+        // When The Spot dies, put him on the bottom of his owner's library. If you do, return the exiled cards to their
+        // owners' hands.
+        addCard(Zone.HAND, playerA, "The Spot, Living Portal"); // {3}{W}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Scrubland", 5);
+        //
+        addCard(Zone.GRAVEYARD, playerA, "Bear Cub"); // bear 2/2
+        addCard(Zone.BATTLEFIELD, playerB, "Fugitive Wizard"); // wizard 1/1
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Spot, Living Portal");
+        addTarget(playerA, "Fugitive Wizard"); // target for exile from the battlefield
+        addTarget(playerA, TestPlayer.TARGET_SKIP); // no target from a graveyard
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "target destroy");
-        addTarget(playerB, theSpotLivingPortal);
+        addTarget(playerB, "The Spot, Living Portal");
 
-        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertHandCount(playerB, fugitiveWizard, 1);
-        assertLibraryCount(playerA, theSpotLivingPortal, 1);
+        assertHandCount(playerB, "Fugitive Wizard", 1);
+        assertGraveyardCount(playerA, "Bear Cub", 1);
+        assertLibraryCount(playerA, "The Spot, Living Portal", 1);
     }
 }

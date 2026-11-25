@@ -135,7 +135,7 @@ class EstinienVarlineauWatcher extends Watcher {
         return game.getState()
                 .getWatcher(EstinienVarlineauWatcher.class)
                 .computeCount(
-                        game.getOpponents(source.getControllerId()),
+                        game.getOpponents(source.getControllerId(), false),
                         new MageObjectReference(source.getSourcePermanentOrLKI(game), game)
                 );
     }

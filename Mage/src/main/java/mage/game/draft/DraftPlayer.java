@@ -2,6 +2,7 @@
 package mage.game.draft;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,6 +28,7 @@ public class DraftPlayer {
     protected Set<UUID> hiddenCards;
     protected UUID markedCard; // user's choice for autopick on pick timeout, from the current booster only
     protected long pickDeadline; // end time of the current pick (from the first booster send to that player), 0 - not sent yet or unlimited time
+    protected List<DraftPickSuggest> pickSuggests; // suggested cards of the current booster, null - not calculated yet
 
     public DraftPlayer(Player player) {
         id = UUID.randomUUID();
@@ -70,6 +72,7 @@ public class DraftPlayer {
         booster.remove(card);
         picking = false;
         markedCard = null;
+        pickSuggests = null;
     }
 
     public void setBoosterAndLoad(List<Card> booster) {
@@ -93,6 +96,7 @@ public class DraftPlayer {
         this.boosterSent = false;
         this.markedCard = null;
         this.pickDeadline = 0;
+        this.pickSuggests = null;
     }
 
     public UUID getMarkedCard() {
@@ -134,6 +138,17 @@ public class DraftPlayer {
     
     public boolean isBoosterLoaded() {
         return boosterLoaded;
+    }
+
+    /**
+     * Suggested cards of the current booster, null - not calculated yet
+     */
+    public List<DraftPickSuggest> getPickSuggests() {
+        return pickSuggests == null ? null : Collections.unmodifiableList(pickSuggests);
+    }
+
+    public void setPickSuggests(List<DraftPickSuggest> pickSuggests) {
+        this.pickSuggests = pickSuggests == null ? null : new ArrayList<>(pickSuggests);
     }
 
     public long getPickDeadline() {

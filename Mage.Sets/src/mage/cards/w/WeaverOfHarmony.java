@@ -11,7 +11,7 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterStackObject;
+import mage.filter.common.FilterActivatedOrTriggeredAbility;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.EnchantmentSourcePredicate;
 import mage.target.common.TargetActivatedOrTriggeredAbility;
@@ -25,8 +25,8 @@ public final class WeaverOfHarmony extends CardImpl {
 
     private static final FilterCreaturePermanent filter
             = new FilterCreaturePermanent("enchantment creatures");
-    private static final FilterStackObject filter2
-            = new FilterStackObject("activated or triggered ability you control from an enchantment source");
+    private static final FilterActivatedOrTriggeredAbility filter2
+            = new FilterActivatedOrTriggeredAbility("activated or triggered ability you control from an enchantment source");
 
     static {
         filter.add(CardType.ENCHANTMENT.getPredicate());

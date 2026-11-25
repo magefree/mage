@@ -41,6 +41,58 @@ public class OneShotNonTargetTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void YuffieChooseOtherThanTargetTest() {
+        // When Yuffie enters, gain control of target noncreature artifact for as long as you control Yuffie.
+        // Then you may attach an Equipment you control to Yuffie.
+        String yuffie = "Yuffie, Materia Hunter"; // {2}{R} 3/3
+        addCard(Zone.HAND, playerA, yuffie);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Short Sword");
+        addCard(Zone.BATTLEFIELD, playerB, "Bonesplitter");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, yuffie);
+        addTarget(playerA, "Bonesplitter");
+        setChoice(playerA, "Short Sword");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Bonesplitter", 1);
+        assertAttachedTo(playerA, "Short Sword", yuffie, true);
+        assertAttachedTo(playerA, "Bonesplitter", yuffie, false);
+        assertPowerToughness(playerA, yuffie, 4, 4);
+    }
+
+    @Test
+    public void BoltbenderChooseSpellTest() {
+        // Disguise {1}{R}
+        // When Boltbender is turned face up, you may choose new targets for any number of other spells and/or abilities.
+        String boltbender = "Boltbender"; // {3}{R} 4/2
+        addCard(Zone.HAND, playerA, boltbender);
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Boltbender using Disguise", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{R}: Turn");
+        // a spell chosen on the stack must still be found when the new targets are chosen
+        setChoice(playerA, "Lightning Bolt");
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
+        setChoice(playerA, true); // change the target
+        addTarget(playerA, "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerB, "Grizzly Bears", 1);
+        assertPermanentCount(playerA, boltbender, 1);
+    }
+
+    @Test
     public void NonTargetAdjusterTest() {
         addCard(Zone.HAND, playerA, "Temporal Firestorm");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
@@ -61,6 +113,28 @@ public class OneShotNonTargetTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Squire", 0);
         assertGraveyardCount(playerA, "Python", 0);
         assertGraveyardCount(playerA, "Watchwolf", 1);
+    }
+
+    @Test
+    public void BlackSunsTwilightAdjusterWithTargetTest() {
+        // Up to one target creature gets -X/-X until end of turn. If X is 5 or more,
+        // return a creature card with mana value X or less from your graveyard to the battlefield tapped.
+        String twilight = "Black Sun's Twilight"; // {X}{B}
+        addCard(Zone.HAND, playerA, twilight);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
+        addCard(Zone.GRAVEYARD, playerA, "Craw Wurm"); // mana value 6
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
+
+        // strict mode fails if Craw Wurm is offered, since no choice is queued
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, twilight, "Grizzly Bears");
+        setChoice(playerA, "X=5");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerB, "Grizzly Bears", 1);
+        assertGraveyardCount(playerA, "Craw Wurm", 1);
     }
 
     @Test
@@ -158,5 +232,36 @@ public class OneShotNonTargetTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Island", 1);
         assertPermanentCount(playerA, "Squire", 1);
         assertPermanentCount(playerA, "Alpha Myr", 1);
+    }
+
+    // The chosen card must be referenced with its current zcc. With zcc 0 the play permission
+    // would follow it to a new object after it changed zones.
+    @Test
+    public void MuseVesselPermissionEndsOnZoneChangeTest() {
+        // {3}, {T}: Target player exiles a card from their hand. Activate only as a sorcery.
+        // {1}: Choose a card exiled with Muse Vessel. You may play that card this turn.
+        // Rest in Peace: If a card or token would be put into a graveyard from anywhere, exile it instead.
+        addCard(Zone.BATTLEFIELD, playerA, "Muse Vessel");
+        addCard(Zone.BATTLEFIELD, playerA, "Rest in Peace");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6); // one spare, so mana never blocks the second cast
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Target player", playerB);
+        setChoice(playerB, "Lightning Bolt");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: Choose");
+        setChoice(playerA, "Lightning Bolt");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("Chosen card can be cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lightning Bolt", true);
+        // Rest in Peace exiles it again on resolution, outside Muse Vessel's exile zone
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkExileCount("Bolt exiled again", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", 1);
+        checkPlayableAbility("New object can't be cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lightning Bolt", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertLife(playerB, 17);
     }
 }

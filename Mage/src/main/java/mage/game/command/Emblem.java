@@ -41,6 +41,7 @@ public abstract class Emblem extends CommandObjectImpl {
 
     public Emblem(String name) {
         super(name);
+        this.frameStyle = FrameStyle.M15_NORMAL;
     }
 
     protected Emblem(final Emblem emblem) {

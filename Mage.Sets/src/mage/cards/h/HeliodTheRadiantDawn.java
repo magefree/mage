@@ -91,7 +91,7 @@ class HeliodTheWarpedEclipseEffect extends CostModificationEffectImpl {
             return false;
         }
         int amount = game
-                .getOpponents(source.getControllerId())
+                .getOpponents(source.getControllerId(), false)
                 .stream()
                 .mapToInt(watcher::getCardsDrawnThisTurn)
                 .sum();

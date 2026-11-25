@@ -18,11 +18,11 @@ public final class SplintersTechnique extends CardImpl {
     public SplintersTechnique(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
 
-        // Sneak {1}{B}
-        this.addAbility(new SneakAbility(this, "{1}{B}"));
-
         // Search your library for a card, put that card into your hand, then shuffle.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false, true));
+
+        // Sneak {1}{B}
+        this.addAbility(new SneakAbility(this, "{1}{B}"));
     }
 
     private SplintersTechnique(final SplintersTechnique card) {

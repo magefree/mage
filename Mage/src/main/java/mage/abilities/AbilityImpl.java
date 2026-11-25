@@ -508,6 +508,7 @@ public abstract class AbilityImpl implements Ability {
             switch (((SpellAbility) this).getSpellAbilityCastMode()) {
                 case FLASHBACK:
                 case HARMONIZE:
+                case BEAM_ME_UP:
                 case MADNESS:
                 case TRANSFORMED:
                 case DISTURB:
@@ -1398,13 +1399,25 @@ public abstract class AbilityImpl implements Ability {
             return false;
         }
 
+        // there are game engine only special proxy/packed events like batch and number of triggers,
+        // so make sure it's spread to real game events
         List<GameEvent> allEvents = new ArrayList<>();
-        if (event instanceof BatchEvent) {
-            allEvents.addAll(((BatchEvent) event).getEvents());
-        } else if (event instanceof NumberOfTriggersEvent) {
-            allEvents.add(((NumberOfTriggersEvent) event).getSourceEvent());
+
+        // number of triggers support
+        GameEvent checkingEvent;
+        if (event instanceof NumberOfTriggersEvent) {
+            // number of triggers event must be checked by its source event 
+            // (e.g. doubler dies at the same time as other creatures)
+            checkingEvent = ((NumberOfTriggersEvent) event).getSourceEvent();
         } else {
-            allEvents.add(event);
+            checkingEvent = event;
+        }
+
+        // batch support
+        if (checkingEvent instanceof BatchEvent) {
+            allEvents.addAll(((BatchEvent) checkingEvent).getEvents());
+        } else if (checkingEvent != null) {
+            allEvents.add(checkingEvent);
         }
 
         return allEvents.stream().anyMatch(e -> {
@@ -1751,6 +1764,9 @@ public abstract class AbilityImpl implements Ability {
         Permanent permanent = getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
             permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, getStackMomentSourceZCC());
+        } else if (!permanent.isPhasedIn()) {
+            // phased-out permanent is treated as though it doesn't exist, so use its LKI (702.26b)
+            permanent = game.getPermanentOrLKIBattlefield(getSourceId());
         }
         return permanent;
     }
@@ -1850,7 +1866,7 @@ public abstract class AbilityImpl implements Ability {
             throw new IllegalStateException("Target adjuster being added but no targets are set!");
         }
         this.targetAdjuster = targetAdjuster;
-        this.targetAdjuster.addDefaultTargets(this);
+        this.targetAdjuster.addDefaultTargets(this.getTargets().isEmpty() ? null : this.getTargets().get(0));
         return this;
     }
 

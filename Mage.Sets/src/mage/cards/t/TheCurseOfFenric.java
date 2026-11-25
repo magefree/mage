@@ -78,7 +78,7 @@ public final class TheCurseOfFenric extends CardImpl {
                 new CreatureToken(6, 6, "6/6 legendary Horror creature named Fenric", SubType.HORROR)
                     .withSuperType(SuperType.LEGENDARY).withName("Fenric"),
                 true, false, EndOfGame, true
-            ),
+            ).withLoseOtherCardTypes(true),
             new TargetPermanent(nontokenFilter)
         );
 

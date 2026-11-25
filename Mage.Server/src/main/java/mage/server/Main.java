@@ -48,6 +48,11 @@ import java.util.*;
  */
 public final class Main {
 
+    static {
+        // must be first java code
+        JavaUtil.applyDefaultServerSettings();
+    }
+
     private static final Logger logger = Logger.getLogger(Main.class);
     private static final MageVersion version = new MageVersion(Main.class);
 
@@ -90,12 +95,15 @@ public final class Main {
     private static boolean detailsMode;
 
     public static void main(String[] args) {
-        JavaUtil.applyDefaultServerSettings();
-
         logger.info("Starting MAGE SERVER version: " + version);
         logger.info("Java version: " + System.getProperty("java.version"));
         DebugUtil.printLogsInfo(logger);
         logger.info("Default charset: " + Charset.defaultCharset());
+        if (!Charset.defaultCharset().toString().equals("UTF-8")) {
+            logger.warn("WARNING, bad charset. Some texts with non-ascii symbols can be broken (decks, server messages). You must:");
+            logger.warn("* Open launcher -> settings -> java -> server java options");
+            logger.warn("* Insert at the the end: -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8");
+        }
         String adminPassword = "";
 
         // enable test mode by default for developer build (if you run it from source code)

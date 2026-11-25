@@ -2,6 +2,7 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -11,6 +12,7 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -20,7 +22,8 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.events.ZoneChangeBatchEvent;
+import mage.game.events.ZoneChangeEvent;
 
 import java.util.UUID;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -81,7 +84,7 @@ public final class HeroOfBretagard extends CardImpl {
     }
 }
 
-class HeroOfBretagardTriggeredAbility extends TriggeredAbilityImpl {
+class HeroOfBretagardTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     HeroOfBretagardTriggeredAbility() {
         super(Zone.BATTLEFIELD, null, false);
@@ -98,34 +101,34 @@ class HeroOfBretagardTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
+    }
+
+    @Override
+    public boolean checkEvent(ZoneChangeEvent event, Game game) {
+        if (event.getToZone() != Zone.EXILED) {
+            return false;
+        }
+        switch (event.getFromZone()) {
+            case BATTLEFIELD:
+                // a spell or ability you control exiles a permanent (card or token)
+                return event.getSource() != null && isControlledBy(event.getSource().getControllerId());
+            case HAND:
+                Card card = game.getCard(event.getTargetId());
+                return card != null && card.isOwnedBy(getControllerId());
+            default:
+                return false;
+        }
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        if (zEvent.getToZone() != Zone.EXILED) {
-            return false;
-        }
-
-        int exiledCount = 0;
-
-        if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-            if (zEvent.getSource() != null && isControlledBy(zEvent.getSource().getControllerId())) {
-                exiledCount += zEvent.getCards().size() + zEvent.getTokens().size();
-            }
-        } else if (zEvent.getFromZone() == Zone.HAND) {
-            exiledCount += zEvent.getCards().stream()
-                    .filter(card -> card != null && isControlledBy(card.getOwnerId()))
-                    .count();
-        }
-
+        int exiledCount = getFilteredEvents((ZoneChangeBatchEvent) event, game).size();
         if (exiledCount > 0) {
             this.getEffects().clear();
             this.getEffects().add(new AddCountersSourceEffect(CounterType.P1P1.createInstance(exiledCount)));
             return true;
         }
-
         return false;
     }
 

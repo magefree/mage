@@ -1,5 +1,6 @@
 package mage.collectors.services;
 
+import java.lang.management.ManagementFactory;
 import java.util.*;
 
 import org.apache.log4j.Logger;
@@ -46,6 +47,9 @@ public class GameStateDiffBuilder {
     // null fields required for AI's duckdb and other tools
     private static final Gson gson = new GsonBuilder().serializeNulls().create();
 
+    // start time of the current JVM (server or test run)
+    private static final long RUN_START_MS = ManagementFactory.getRuntimeMXBean().getStartTime();
+
     /**
      * @param prevGame game state snapshot before resolve
      * @param game     game state after resolve
@@ -72,6 +76,7 @@ public class GameStateDiffBuilder {
         root.addProperty("step", game.getState().getTurnStepType() != null ? game.getState().getTurnStepType().toString() : null);
         root.addProperty("applied", applied);
         root.addProperty("timestampMs", System.currentTimeMillis());
+        root.addProperty("runStartMs", RUN_START_MS);
 
         // extra info for unit tests
         root.addProperty("testClassName", findCurrentTestClassName(game.getPlayers().values().iterator().next()));

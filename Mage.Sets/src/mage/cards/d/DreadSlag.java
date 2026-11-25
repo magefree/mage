@@ -31,9 +31,8 @@ public final class DreadSlag extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Dread Slag gets -4/-4 for each card in your hand.
-        DynamicValue amount = new MultipliedValue(CardsInControllerHandCount.ANY, -4);
+        DynamicValue amount = new MultipliedValue(CardsInControllerHandCount.ANY_SINGULAR, -4);
         Effect effect = new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield);
-        effect.setText("{this} gets -4/-4 for each card in your hand");
         this.addAbility(new SimpleStaticAbility(effect));
     }
 

@@ -90,7 +90,7 @@ class IndoraptorThePerfectHybridBloodthirstEffect extends OneShotEffect {
         }
         List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects"); // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
         int amount = 0;
-        for (UUID opponentId : game.getOpponents(player.getId())) {
+        for (UUID opponentId : game.getOpponents(player.getId(), false)) {
             MageObjectReference mor = new MageObjectReference(opponentId, game);
             amount += watcher.getDamagedObjects().getOrDefault(mor, 0);
         }

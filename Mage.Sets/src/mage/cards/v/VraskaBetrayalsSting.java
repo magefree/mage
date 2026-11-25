@@ -44,7 +44,7 @@ public final class VraskaBetrayalsSting extends CardImpl {
         // −2: Target creature becomes a Treasure artifact with "{T}, Sacrifice this artifact:
         // Add one mana of any color" and loses all other card types and abilities.
         ability = new LoyaltyAbility(new BecomesCreatureTargetEffect(
-                new TreasureToken(), true, false, Duration.WhileOnBattlefield, false, false, true)
+                new TreasureToken(), true, false, Duration.WhileOnBattlefield)
                 .setText("Target creature becomes a Treasure artifact with \"{T}, Sacrifice this artifact: " +
                         "Add one mana of any color\" and loses all other card types and abilities"), -2
         );

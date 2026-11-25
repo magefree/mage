@@ -11,8 +11,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterStackObject;
-import mage.filter.common.FilterActivatedOrTriggeredAbility;
+import mage.filter.FilterAbility;
 import mage.filter.predicate.other.AbilitySourceAttachedPredicate;
 import mage.filter.predicate.other.NotManaAbilityPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -24,7 +23,7 @@ import java.util.UUID;
  */
 public final class BattlemagesBracers extends CardImpl {
 
-    private static final FilterStackObject filter = new FilterActivatedOrTriggeredAbility("an ability of equipped creature");
+    private static final FilterAbility filter = new FilterAbility("an ability of equipped creature");
 
     static {
         filter.add(NotManaAbilityPredicate.instance);

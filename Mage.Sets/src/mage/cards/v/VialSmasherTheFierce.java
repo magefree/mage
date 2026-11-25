@@ -124,8 +124,6 @@ class VialSmasherTheFierceEffect extends OneShotEffect {
                         .stream()
                         .map(game::getPlayer)
                         .filter(Objects::nonNull)
-                        .filter(o -> !o.hasLost())
-                        .filter(o -> !o.hasLeft())
                         .collect(Collectors.toList());
                 if(opponents.isEmpty()){
                     return false;

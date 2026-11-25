@@ -102,8 +102,13 @@ class DarkImpostorContinuousEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source, 1));
-        if (permanent == null || exileZone == null || exileZone.isEmpty()) {
+        if (permanent == null) {
+            return false;
+        }
+        // static abilities have zcc=0, find the permanent's
+        ExileZone exileZone = game.getExile().getExileZone(
+                CardUtil.getExileZoneId(game, permanent.getId(), permanent.getZoneChangeCounter(game)));
+        if (exileZone == null || exileZone.isEmpty()) {
             return false;
         }
         for (Card card : exileZone.getCards(StaticFilters.FILTER_CARD_CREATURE, game)) {

@@ -15,6 +15,7 @@ import mage.game.permanent.Permanent;
 import mage.game.turn.Phase;
 import mage.game.turn.TurnMod;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 import java.util.UUID;
@@ -97,7 +98,7 @@ class IllusionistsGambitRequirementEffect extends RequirementEffect {
 
     private IllusionistsGambitRequirementEffect(final IllusionistsGambitRequirementEffect effect) {
         super(effect);
-        this.attackers = effect.attackers;
+        this.attackers = new HashSet<>(effect.attackers);
         this.phase = effect.phase;
     }
 
@@ -147,7 +148,7 @@ class IllusionistsGambitRestrictionEffect extends RestrictionEffect {
 
     private IllusionistsGambitRestrictionEffect(final IllusionistsGambitRestrictionEffect effect) {
         super(effect);
-        this.attackers = effect.attackers;
+        this.attackers = new HashSet<>(effect.attackers);
         this.phase = effect.phase;
     }
 

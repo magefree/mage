@@ -7,6 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.SubType;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -21,6 +22,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
+import mage.util.CardUtil;
 
 /**
  *
@@ -86,11 +88,12 @@ class IridescentDrakeEffect extends OneShotEffect {
                 && controller.canRespond()
                 && targetAuraCard != null
                 && new AuraCardCanAttachToPermanentId(permanent.getId()).apply(targetAuraCard, game)) {
-            Target target = targetAuraCard.getSpellAbility().getTargets().get(0);
+            Target target = CardUtil.getDefaultCardSideForBattlefield(game, targetAuraCard).getSpellAbility().getTargets().get(0);
             if (target != null) {
-                game.getState().setValue("attachTo:" + targetAuraCard.getId(), permanent);
+                AttachEffect.setAttachTo(game, targetAuraCard.getId(), permanent);
                 controller.moveCards(targetAuraCard, Zone.BATTLEFIELD, source, game);
-                return permanent.addAttachment(targetAuraCard.getId(), source, game);
+                Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(targetAuraCard, game);
+                return attachment != null && permanent.addAttachment(attachment.getId(), source, game);
             }
         }
         return false;

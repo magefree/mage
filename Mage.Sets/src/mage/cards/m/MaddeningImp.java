@@ -135,7 +135,7 @@ class MaddeningImpDelayedDestroyEffect extends OneShotEffect {
 
     private MaddeningImpDelayedDestroyEffect(final MaddeningImpDelayedDestroyEffect effect) {
         super(effect);
-        this.activeCreatures = effect.activeCreatures;
+        this.activeCreatures = new HashSet<>(effect.activeCreatures);
     }
 
     @Override

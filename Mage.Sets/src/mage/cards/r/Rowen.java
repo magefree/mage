@@ -2,15 +2,13 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DrawNthCardTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.InfoEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -39,12 +37,10 @@ public final class Rowen extends CardImpl {
     }
 }
 
-class RowenAbility extends TriggeredAbilityImpl {
-
-    private int lastTriggeredTurn;
+class RowenAbility extends DrawNthCardTriggeredAbility {
 
     RowenAbility() {
-        super(Zone.BATTLEFIELD, new InfoEffect(""), false);
+        super(new DrawCardSourceControllerEffect(1), false, 1);
     }
 
     private RowenAbility(final RowenAbility ability) {
@@ -57,33 +53,23 @@ class RowenAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DREW_CARD;
-    }
-
-    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(this.getControllerId())) {
-            if (game.isActivePlayer(this.getControllerId()) && this.lastTriggeredTurn != game.getTurnNum()) {
-                Card card = game.getCard(event.getTargetId());
-                Player controller = game.getPlayer(this.getControllerId());
-                Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(this.getSourceId());
-                if (card != null && controller != null && sourcePermanent != null) {
-                    lastTriggeredTurn = game.getTurnNum();
-                    controller.revealCards(sourcePermanent.getName(), new CardsImpl(card), game);
-                    this.getEffects().clear();
-                    if (card.isLand(game) && card.isBasic(game)) {
-                        this.addEffect(new DrawCardSourceControllerEffect(1));
-                    }
-                    return true;
-                }
-            }
+        if (!super.checkTrigger(event, game)) {
+            return false;
         }
-        return false;
+        // reveal the first card as it's drawn, then trigger only for basic land card
+        Card card = game.getCard(event.getTargetId());
+        Player controller = game.getPlayer(this.getControllerId());
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(this.getSourceId());
+        if (card == null || controller == null || sourcePermanent == null) {
+            return false;
+        }
+        controller.revealCards(sourcePermanent.getName(), new CardsImpl(card), game);
+        return card.isLand(game) && card.isBasic(game);
     }
 
     @Override
     public String getRule() {
         return "Reveal the first card you draw each turn. Whenever you reveal a basic land card this way, draw a card.";
-    }    
+    }
 }

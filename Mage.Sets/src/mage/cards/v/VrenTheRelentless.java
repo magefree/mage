@@ -123,7 +123,7 @@ class VrenTheRelentlessWatcher extends Watcher {
 
     int getCount(UUID playerId, Game game) {
         return game
-                .getOpponents(playerId)
+                .getOpponents(playerId, false)
                 .stream()
                 .mapToInt(uuid -> playerMap.getOrDefault(uuid, 0))
                 .sum();

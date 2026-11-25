@@ -68,10 +68,7 @@ class LordOfThePitEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent == null) {
-            sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        }
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (player == null || sourcePermanent == null) {
             return false;
         }

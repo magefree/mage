@@ -31,11 +31,11 @@ public final class MichelangelosTechnique extends CardImpl {
     public MichelangelosTechnique(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}");
 
-        // Sneak {3}{G}
-        this.addAbility(new SneakAbility(this, "{3}{G}"));
-
         // Look at the top eight cards of your library. Put up to two creature cards with total mana value 6 or less from among them onto the battlefield and the rest on the bottom of your library in a random order.
         this.getSpellAbility().addEffect(new MichelangelosTechniqueEffect());
+
+        // Sneak {3}{G}
+        this.addAbility(new SneakAbility(this, "{3}{G}"));
     }
 
     private MichelangelosTechnique(final MichelangelosTechnique card) {

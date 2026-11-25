@@ -52,7 +52,7 @@ enum LictorCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         return game
-                .getOpponents(source.getControllerId())
+                .getOpponents(source.getControllerId(), false)
                 .stream()
                 .anyMatch(uuid -> CreatureEnteredControllerWatcher.enteredCreatureForPlayer(uuid, game));
     }

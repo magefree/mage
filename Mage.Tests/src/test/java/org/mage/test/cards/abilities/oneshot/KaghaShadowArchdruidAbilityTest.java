@@ -162,4 +162,29 @@ public class KaghaShadowArchdruidAbilityTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Sol Ring", 1);
         assertGraveyardCount(playerA, "Mulch", 1);
     }
+
+    @Test
+    public void test_CastDoubleFacedCard() {
+        addCard(Zone.BATTLEFIELD, playerA, "Kagha, Shadow Archdruid");
+        addCard(Zone.HAND, playerA, "Thought Scour"); // {U}, target player mills two cards, draw a card
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        //
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, "Kazandu Mammoth"); // {1}{G}{G}, modal double-faced
+
+        // mill
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thought Scour", playerA);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkGraveyardCount("milled", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kazandu Mammoth", 1);
+
+        // cast from graveyard
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kazandu Mammoth");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Kazandu Mammoth", 1);
+    }
 }

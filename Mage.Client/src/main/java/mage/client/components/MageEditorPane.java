@@ -44,7 +44,8 @@ import java.util.*;
 public class MageEditorPane extends JEditorPane {
 
     private static final int CHAT_TOOLTIP_DELAY_MS = 50; // cards popup from chat must be fast all time
-    private static Element lastUrlElementEntered = null; // for cursor changes
+
+    private Element lastUrlElementEntered = null; // for cursor changes, element of this pane's document only
 
     final HTMLEditorKit kit = new HTMLEditorKit();
     final HTMLDocument doc;
@@ -102,51 +103,16 @@ public class MageEditorPane extends JEditorPane {
         if (Arrays.stream(getHyperlinkListeners()).findAny().isPresent()) {
             throw new IllegalStateException("Wrong code usage: popup links support enabled already");
         }
-        addHyperlinkListener(e -> MageUI.threadPoolPopups.submit(() -> {
+        addHyperlinkListener(e -> {
+            // hyperlink events come from mouse events in the swing thread, so the document is used here, in the swing
+            // thread only - a document change from another thread breaks the text views on the next layout
+            // (StateInvariantError: GlyphView: Stale view, ArrayIndexOutOfBoundsException in FlowView/BoxView)
             if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_DELAY, 300) == 0) {
                 // if disabled
                 return;
             }
 
-            // finds extra data in html element like object_id, alternative_name, etc
-            Map<String, String> extraData = new HashMap<>();
-            if (e.getSourceElement() instanceof HTMLDocument.RunElement) {
-                HTMLDocument.RunElement el = (HTMLDocument.RunElement) e.getSourceElement();
-                Enumeration attNames = el.getAttributeNames();
-                while (attNames.hasMoreElements()) {
-                    Object attName = attNames.nextElement();
-                    Object attValue = el.getAttribute(attName);
-                    // custom attributes in SimpleAttributeSet element
-                    if (attValue instanceof SimpleAttributeSet) {
-                        SimpleAttributeSet attReal = (SimpleAttributeSet) attValue;
-                        Enumeration attRealNames = attReal.getAttributeNames();
-                        while (attRealNames.hasMoreElements()) {
-                            Object attRealName = attRealNames.nextElement();
-                            Object attRealValue = attReal.getAttribute(attRealName);
-                            String name = attRealName.toString();
-                            String value = attRealValue.toString();
-                            extraData.put(name, value);
-                        }
-                    }
-                }
-            }
-
-            // try object first
-            CardView needCard = null;
-            GamePanel gamePanel = MageFrame.getGame(this.gameId);
-            if (gamePanel != null) {
-                try {
-                    UUID needObjectId = UUID.fromString(extraData.getOrDefault("object_id", ""));
-                    needCard = gamePanel.getLastGameData().findCard(needObjectId);
-                } catch (IllegalArgumentException ignore) {
-                }
-            }
-
-            String cardName = e.getDescription().substring(1);
-            String alternativeName = CardUtil.urlDecode(extraData.getOrDefault("alternative_name", ""));
-            if (!alternativeName.isEmpty()) {
-                cardName = alternativeName;
-            }
+            Map<String, String> extraData = getExtraData(e.getSourceElement());
 
             if (e.getEventType() == HyperlinkEvent.EventType.ENTERED) {
                 AttributeSet as = e.getSourceElement().getAttributes();
@@ -154,61 +120,15 @@ public class MageEditorPane extends JEditorPane {
                 if (asAnchor != null) {
                     urlHighlightEnable(e.getSourceElement());
                 }
-
-                // show real object by priority (workable card hints and actual info)
-                CardView cardView = needCard;
-
-                // if no game object found then show default card/object
-                if (cardView == null) {
-                    CardInfo card = CardRepository.instance.findCards(cardName).stream().findFirst().orElse(null);
-                    if (card != null) {
-                        cardView = new CardView(card.createMockCard());
-                    }
-                }
-
-                // plane
-                if (cardView == null) {
-                    Plane plane = Plane.createPlaneByFullName(cardName);
-                    if (plane != null) {
-                        cardView = new CardView(new PlaneView(plane, null));
-                    }
-                }
-
-                // dungeon
-                if (cardView == null) {
-                    Dungeon dungeon = Dungeon.createDungeon(cardName, false);
-                    if (dungeon != null) {
-                        cardView = new CardView(new DungeonView(dungeon));
-                    }
-                }
-
-                // TODO: add other objects like dungeon, emblem, commander
-
-                if (cardView != null) {
-                    cardInfo.init(cardView, this.bigCard, this.gameId);
-                    cardInfo.setTooltipDelay(CHAT_TOOLTIP_DELAY_MS);
-                    cardInfo.setPopupAutoLocationMode(TransferData.PopupAutoLocationMode.PUT_NEAR_MOUSE_POSITION);
-                    SwingUtilities.invokeLater(() -> {
-                        cardInfo.onMouseEntered(MouseInfo.getPointerInfo().getLocation());
-                        cardInfo.onMouseMoved(MouseInfo.getPointerInfo().getLocation());
-                    });
-                }
-            }
-
-            if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-                SwingUtilities.invokeLater(() -> {
-                    cardInfo.onMouseWheel(MouseInfo.getPointerInfo().getLocation());
-                });
             }
 
             if (e.getEventType() == HyperlinkEvent.EventType.EXITED) {
                 urlHighlightDisable();
-
-                SwingUtilities.invokeLater(() -> {
-                    cardInfo.onMouseExited();
-                });
             }
-        }));
+
+            // card search can be slow (database), so popup data is prepared outside the swing thread
+            MageUI.threadPoolPopups.submit(() -> showCardPopup(e, extraData));
+        });
 
         addMouseListener(new MouseAdapter() {
             // TODO: add popup mouse wheel here?
@@ -218,6 +138,109 @@ public class MageEditorPane extends JEditorPane {
                 setCursorToDefault();
             }
         });
+    }
+
+    /**
+     * Find extra data in html element like object_id, alternative_name, etc
+     */
+    private static Map<String, String> getExtraData(Element sourceElement) {
+        Map<String, String> extraData = new HashMap<>();
+        if (sourceElement instanceof HTMLDocument.RunElement) {
+            HTMLDocument.RunElement el = (HTMLDocument.RunElement) sourceElement;
+            Enumeration attNames = el.getAttributeNames();
+            while (attNames.hasMoreElements()) {
+                Object attName = attNames.nextElement();
+                Object attValue = el.getAttribute(attName);
+                // custom attributes in SimpleAttributeSet element
+                if (attValue instanceof SimpleAttributeSet) {
+                    SimpleAttributeSet attReal = (SimpleAttributeSet) attValue;
+                    Enumeration attRealNames = attReal.getAttributeNames();
+                    while (attRealNames.hasMoreElements()) {
+                        Object attRealName = attRealNames.nextElement();
+                        Object attRealValue = attReal.getAttribute(attRealName);
+                        String name = attRealName.toString();
+                        String value = attRealValue.toString();
+                        extraData.put(name, value);
+                    }
+                }
+            }
+        }
+        return extraData;
+    }
+
+    /**
+     * Card popup for hyperlink events, must be called outside the swing thread (can search cards in the database)
+     */
+    private void showCardPopup(HyperlinkEvent e, Map<String, String> extraData) {
+        // try object first
+        CardView needCard = null;
+        GamePanel gamePanel = MageFrame.getGame(this.gameId);
+        if (gamePanel != null) {
+            try {
+                UUID needObjectId = UUID.fromString(extraData.getOrDefault("object_id", ""));
+                needCard = gamePanel.getLastGameData().findCard(needObjectId);
+            } catch (IllegalArgumentException ignore) {
+            }
+        }
+
+        String cardName = e.getDescription().substring(1);
+        String alternativeName = CardUtil.urlDecode(extraData.getOrDefault("alternative_name", ""));
+        if (!alternativeName.isEmpty()) {
+            cardName = alternativeName;
+        }
+
+        if (e.getEventType() == HyperlinkEvent.EventType.ENTERED) {
+            // show real object by priority (workable card hints and actual info)
+            CardView cardView = needCard;
+
+            // if no game object found then show default card/object
+            if (cardView == null) {
+                CardInfo card = CardRepository.instance.findCards(cardName).stream().findFirst().orElse(null);
+                if (card != null) {
+                    cardView = new CardView(card.createMockCard());
+                }
+            }
+
+            // plane
+            if (cardView == null) {
+                Plane plane = Plane.createPlaneByFullName(cardName);
+                if (plane != null) {
+                    cardView = new CardView(new PlaneView(plane, null));
+                }
+            }
+
+            // dungeon
+            if (cardView == null) {
+                Dungeon dungeon = Dungeon.createDungeon(cardName, false);
+                if (dungeon != null) {
+                    cardView = new CardView(new DungeonView(dungeon));
+                }
+            }
+
+            // TODO: add other objects like dungeon, emblem, commander
+
+            if (cardView != null) {
+                cardInfo.init(cardView, this.bigCard, this.gameId);
+                cardInfo.setTooltipDelay(CHAT_TOOLTIP_DELAY_MS);
+                cardInfo.setPopupAutoLocationMode(TransferData.PopupAutoLocationMode.PUT_NEAR_MOUSE_POSITION);
+                SwingUtilities.invokeLater(() -> {
+                    cardInfo.onMouseEntered(MouseInfo.getPointerInfo().getLocation());
+                    cardInfo.onMouseMoved(MouseInfo.getPointerInfo().getLocation());
+                });
+            }
+        }
+
+        if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+            SwingUtilities.invokeLater(() -> {
+                cardInfo.onMouseWheel(MouseInfo.getPointerInfo().getLocation());
+            });
+        }
+
+        if (e.getEventType() == HyperlinkEvent.EventType.EXITED) {
+            SwingUtilities.invokeLater(() -> {
+                cardInfo.onMouseExited();
+            });
+        }
     }
 
     private void setCursorToDefault() {
@@ -265,6 +288,8 @@ public class MageEditorPane extends JEditorPane {
     @Override
     public void setText(String text) {
         // must use append to enable popup/hyperlinks support
+        // old elements are removed with the text, so the highlighted one must be forgotten
+        lastUrlElementEntered = null;
         super.setText("");
         append(text);
     }

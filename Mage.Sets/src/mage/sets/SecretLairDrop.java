@@ -192,6 +192,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Baral, Chief of Compliance", 1447, Rarity.RARE, mage.cards.b.BaralChiefOfCompliance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Baral, Chief of Compliance", 2168, Rarity.RARE, mage.cards.b.BaralChiefOfCompliance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Barktooth Warbeard", 1931, Rarity.RARE, mage.cards.b.BarktoothWarbeard.class));
+        cards.add(new SetCardInfo("Baron Vladimir Harkonnen", 2915, Rarity.MYTHIC, mage.cards.b.BaronVladimirHarkonnen.class));
         cards.add(new SetCardInfo("Barrowgoyf", 2702, Rarity.RARE, mage.cards.b.Barrowgoyf.class));
         cards.add(new SetCardInfo("Basal Sliver", 629, Rarity.RARE, mage.cards.b.BasalSliver.class));
         cards.add(new SetCardInfo("Basilisk Collar", 1920, Rarity.RARE, mage.cards.b.BasiliskCollar.class, NON_FULL_USE_VARIOUS));
@@ -358,6 +359,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Chandra, Flame's Catalyst", 1420, Rarity.MYTHIC, mage.cards.c.ChandraFlamesCatalyst.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chandra, Flamecaller", 807, Rarity.MYTHIC, mage.cards.c.ChandraFlamecaller.class));
         cards.add(new SetCardInfo("Changeling Outcast", 894, Rarity.RARE, mage.cards.c.ChangelingOutcast.class));
+        cards.add(new SetCardInfo("Chani, Blade of Sietch Tabr", 2916, Rarity.MYTHIC, mage.cards.c.ChaniBladeOfSietchTabr.class));
         cards.add(new SetCardInfo("Chaos Warp", "741*", Rarity.RARE, mage.cards.c.ChaosWarp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chaos Warp", 2692, Rarity.RARE, mage.cards.c.ChaosWarp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chaos Warp", 741, Rarity.RARE, mage.cards.c.ChaosWarp.class, NON_FULL_USE_VARIOUS));
@@ -1491,6 +1493,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 891, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Mox Opal", 1072, Rarity.MYTHIC, mage.cards.m.MoxOpal.class, RETRO_ART));
         cards.add(new SetCardInfo("Mox Tantalite", 1073, Rarity.MYTHIC, mage.cards.m.MoxTantalite.class, RETRO_ART));
+        cards.add(new SetCardInfo("Muad'Dib, Prophet Foretold", 2918, Rarity.MYTHIC, mage.cards.m.MuadDibProphetForetold.class));
         cards.add(new SetCardInfo("Muddle the Mixture", 1254, Rarity.RARE, mage.cards.m.MuddleTheMixture.class));
         cards.add(new SetCardInfo("Mudhole", 62, Rarity.RARE, mage.cards.m.Mudhole.class));
         cards.add(new SetCardInfo("Mulldrifter", 168, Rarity.RARE, mage.cards.m.Mulldrifter.class, NON_FULL_USE_VARIOUS));
@@ -1626,6 +1629,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Path to Exile", 477, Rarity.RARE, mage.cards.p.PathToExile.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pathbreaker Ibex", 307, Rarity.RARE, mage.cards.p.PathbreakerIbex.class));
         cards.add(new SetCardInfo("Patron Wizard", 1002, Rarity.RARE, mage.cards.p.PatronWizard.class));
+        cards.add(new SetCardInfo("Paul Atreides, Ducal Heir", 2912, Rarity.MYTHIC, mage.cards.p.PaulAtreidesDucalHeir.class));
         cards.add(new SetCardInfo("Peacewalker Colossus", "1966b", Rarity.RARE, mage.cards.p.PeacewalkerColossus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Peacewalker Colossus", 1966, Rarity.RARE, mage.cards.p.PeacewalkerColossus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Peek", 401, Rarity.RARE, mage.cards.p.Peek.class));
@@ -1846,6 +1850,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Retreat to Coralhelm", 407, Rarity.RARE, mage.cards.r.RetreatToCoralhelm.class));
         cards.add(new SetCardInfo("Return the Favor", 7080, Rarity.RARE, mage.cards.r.ReturnTheFavor.class));
         cards.add(new SetCardInfo("Revel in Riches", 1830, Rarity.RARE, mage.cards.r.RevelInRiches.class));
+        cards.add(new SetCardInfo("Reverend Mother Jessica", 2913, Rarity.MYTHIC, mage.cards.r.ReverendMotherJessica.class));
         cards.add(new SetCardInfo("Reverent Mantra", 2686, Rarity.RARE, mage.cards.r.ReverentMantra.class));
         cards.add(new SetCardInfo("Rewind", 1036, Rarity.RARE, mage.cards.r.Rewind.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rewind", 1368, Rarity.RARE, mage.cards.r.Rewind.class, NON_FULL_USE_VARIOUS));
@@ -1999,8 +2004,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Shadowspear", 1505, Rarity.RARE, mage.cards.s.Shadowspear.class));
         cards.add(new SetCardInfo("Shalai, Voice of Plenty", 244, Rarity.RARE, mage.cards.s.ShalaiVoiceOfPlenty.class));
         cards.add(new SetCardInfo("Shaman of the Pack", 789, Rarity.RARE, mage.cards.s.ShamanOfThePack.class));
-
-
         cards.add(new SetCardInfo("Shared Roots", 2391, Rarity.RARE, mage.cards.s.SharedRoots.class));
         cards.add(new SetCardInfo("Shared Summons", 1308, Rarity.RARE, mage.cards.s.SharedSummons.class));
         cards.add(new SetCardInfo("Shattergang Brothers", "1315*", Rarity.MYTHIC, mage.cards.s.ShattergangBrothers.class, NON_FULL_USE_VARIOUS));

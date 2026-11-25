@@ -113,15 +113,16 @@ class PainForAllSecondEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID permanentId = this.getTargetPointer().getFirst(game, source);
+        // the creature may be gone already, it still deals the damage (last known information)
+        Permanent permanent = this.getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         int damage = (Integer) this.getValue("damage");
-        if (permanentId == null || damage < 1) {
+        if (permanent == null || damage < 1) {
             return false;
         }
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Optional.ofNullable(opponentId)
                     .map(game::getPlayer)
-                    .ifPresent(player -> player.damage(damage, permanentId, source, game));
+                    .ifPresent(player -> player.damage(damage, permanent.getId(), source, game));
         }
         return true;
     }

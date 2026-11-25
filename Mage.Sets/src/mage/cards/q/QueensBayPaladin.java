@@ -41,7 +41,7 @@ public final class QueensBayPaladin extends CardImpl {
                 false
         );
         ability.addEffect(
-                new LoseLifeSourceControllerEffect(TargetManaValue.instance)
+                new LoseLifeSourceControllerEffect(TargetManaValue.CARD)
                         .setText("You lose life equal to its mana value")
         );
         ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter, false));

@@ -47,7 +47,7 @@ public final class DocOckEvilInventor extends CardImpl {
                         "8/8 Robot Villain artifact creature",
                         SubType.ROBOT, SubType.VILLAIN
                 ), false, false, Duration.Custom
-        ));
+        ).withKeepPriorTypes(true));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

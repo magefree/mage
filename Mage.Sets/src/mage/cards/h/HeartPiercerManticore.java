@@ -18,6 +18,7 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
 
@@ -89,6 +90,8 @@ class HeartPiercerManticoreEffect extends OneShotEffect {
                 new DamageTargetEffect(power), false,
                 "{this} deals damage equal to that creature's power to any target."
         );
+        trigger.addTarget(new TargetAnyTarget());
+        game.fireReflexiveTriggeredAbility(trigger, source);
         return true;
     }
 }

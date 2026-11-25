@@ -24,8 +24,9 @@ public final class AetherMutation extends CardImpl {
         // Return target creature to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        // create X 1/1 green Saproling creature tokens, where X is that creature's converted mana cost.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), TargetManaValue.instance));
+
+        // Create X 1/1 green Saproling creature tokens, where X is that creature's mana value.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), TargetManaValue.CREATURE));
     }
 
     private AetherMutation(final AetherMutation card) {

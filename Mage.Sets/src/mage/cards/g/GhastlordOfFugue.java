@@ -73,7 +73,8 @@ class GhastlordOfFugueEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source);
         if (targetPlayer != null
                 && sourceObject != null
-                && controller != null) {
+                && controller != null
+                && !targetPlayer.getHand().isEmpty()) {
 
             // reveal hand of target player 
             targetPlayer.revealCards(sourceObject.getName(), targetPlayer.getHand(), game);
@@ -86,7 +87,7 @@ class GhastlordOfFugueEffect extends OneShotEffect {
                 chosenCard = game.getCard(target.getFirstTarget());
             }
             if (chosenCard != null) {
-                controller.moveCards(chosenCard, Zone.EXILED, source, game);
+                targetPlayer.moveCards(chosenCard, Zone.EXILED, source, game);
             }
             return true;
         }

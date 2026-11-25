@@ -1,8 +1,6 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.Abilities;
-import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.ActivateAbilityTriggeredAbility;
@@ -13,8 +11,8 @@ import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterAbility;
 import mage.filter.FilterSpell;
-import mage.filter.FilterStackObject;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
@@ -25,7 +23,6 @@ import mage.target.Target;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author padfoot
@@ -33,11 +30,11 @@ import java.util.stream.Stream;
 public final class BillPotts extends CardImpl {
 
     private static final FilterSpell filterInstantOrSorcery = new FilterInstantOrSorcerySpell("an instant or sorcery spell that targets only {this}");
-    private static final FilterStackObject filterAbility = new FilterStackObject("an ability that targets only {this}");
+    private static final FilterAbility filterAbility = new FilterAbility("an ability that targets only {this}");
 
     static {
         filterInstantOrSorcery.add(BillPottsPredicate.instance);
-        filterAbility.add(BillPottsPredicate.instance);
+        filterAbility.add(BillPottsAbilityPredicate.instance);
     }
 
     public BillPotts(UUID ownerId, CardSetInfo setInfo) {
@@ -87,18 +84,22 @@ enum BillPottsPredicate implements ObjectSourcePlayerPredicate<StackObject> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
-        List<UUID> oneTargetList = Arrays.asList(input.getSourceId());
-        return (makeStream(input, game).collect(Collectors.toList()).equals(oneTargetList));
+        return input.getObject() instanceof Spell
+                && BillPottsAbilityPredicate.targetsOnlySource(((Spell) input.getObject()).getSpellAbilities(), input.getSourceId());
+    }
+}
+
+enum BillPottsAbilityPredicate implements ObjectSourcePlayerPredicate<Ability> {
+    instance;
+
+    @Override
+    public boolean apply(ObjectSourcePlayer<Ability> input, Game game) {
+        return targetsOnlySource(Collections.singletonList(input.getObject()), input.getSourceId());
     }
 
-    private static final Stream<UUID> makeStream(ObjectSourcePlayer<StackObject> input, Game game) {
-        Abilities<Ability> objectAbilities = new AbilitiesImpl<>();
-        if (input.getObject() instanceof Spell) {
-            objectAbilities.addAll(((Spell) input.getObject()).getSpellAbilities());
-        } else {
-            objectAbilities.add(input.getObject().getStackAbility());
-        }
-        return objectAbilities
+    static boolean targetsOnlySource(Collection<? extends Ability> abilities, UUID sourceId) {
+        List<UUID> oneTargetList = Arrays.asList(sourceId);
+        return abilities
                 .stream()
                 .map(Ability::getModes)
                 .flatMap(m -> m.getSelectedModes().stream().map(m::get))
@@ -109,6 +110,8 @@ enum BillPottsPredicate implements ObjectSourcePlayerPredicate<StackObject> {
                 .map(Target::getTargets)
                 .flatMap(Collection::stream)
                 .filter(Objects::nonNull)
-                .distinct();
+                .distinct()
+                .collect(Collectors.toList())
+                .equals(oneTargetList);
     }
 }

@@ -16,7 +16,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -80,14 +79,11 @@ class DrivnodCarnageDominusEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event instanceof NumberOfTriggersEvent) {
             NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
-            if (source.isControlledBy(event.getPlayerId())
+            return source.isControlledBy(event.getPlayerId())
                     && game.getPermanentOrLKIBattlefield(numberOfTriggersEvent.getSourceId()) != null
-                    && numberOfTriggersEvent.getSourceEvent() instanceof ZoneChangeEvent) {
-                ZoneChangeEvent zEvent = (ZoneChangeEvent) numberOfTriggersEvent.getSourceEvent();
-                return zEvent.isDiesEvent()
-                        && zEvent.isPermanentMoved()
-                        && zEvent.getTarget().isCreature(game);
-            }
+                    && numberOfTriggersEvent.getDiedPermanents(game)
+                    .stream()
+                    .anyMatch(permanent -> permanent.isCreature(game));
         }
         return false;
     }

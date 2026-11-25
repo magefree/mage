@@ -9,8 +9,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.filter.FilterAbility;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterEnchantmentCard;
+import mage.filter.predicate.other.AbilityClassPredicate;
 
 import java.util.UUID;
 
@@ -20,6 +22,11 @@ import java.util.UUID;
 public final class InquisitiveGlimmer extends CardImpl {
 
     private static final FilterCard filter = new FilterEnchantmentCard("enchantment spells");
+    private static final FilterAbility filterUnlock = new FilterAbility("Unlock costs you pay");
+
+    static {
+        filterUnlock.add(new AbilityClassPredicate(RoomUnlockAbility.class));
+    }
 
     public InquisitiveGlimmer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{W}{U}");
@@ -33,7 +40,7 @@ public final class InquisitiveGlimmer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
 
         // Unlock costs you pay cost {1} less.
-        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(RoomUnlockAbility.class, "Unlock")));
+        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(filterUnlock)));
 
     }
 

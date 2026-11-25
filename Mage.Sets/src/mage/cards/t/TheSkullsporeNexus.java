@@ -1,8 +1,8 @@
 package mage.cards.t;
 
-import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -21,8 +21,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.events.ZoneChangeBatchEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.FungusDinosaurToken;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
@@ -102,7 +104,7 @@ class TheSkullsporeNexusReductionEffect extends CostModificationEffectImpl {
     }
 }
 
-class TheSkullsporeNexusTrigger extends TriggeredAbilityImpl {
+class TheSkullsporeNexusTrigger extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     TheSkullsporeNexusTrigger() {
         super(Zone.BATTLEFIELD, null, false);
@@ -120,21 +122,28 @@ class TheSkullsporeNexusTrigger extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
+    }
+
+    @Override
+    public boolean checkEvent(ZoneChangeEvent event, Game game) {
+        if (!event.isDiesEvent()) {
+            return false;
+        }
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        return permanent != null
+                && !(permanent instanceof PermanentToken)
+                && permanent.isCreature(game)
+                && permanent.isControlledBy(getControllerId());
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        if (!zEvent.isDiesEvent()) {
-            return false;
-        }
-
-        List<Permanent> permanents = zEvent.getCards().stream()
-                .map(MageItem::getId)
+        List<Permanent> permanents = getFilteredEvents((ZoneChangeBatchEvent) event, game)
+                .stream()
+                .map(ZoneChangeEvent::getTargetId)
                 .map(game::getPermanentOrLKIBattlefield)
                 .filter(Objects::nonNull)
-                .filter(p -> p.isCreature(game) && p.isControlledBy(getControllerId()))
                 .collect(Collectors.toList());
 
         if (permanents.isEmpty()) {
@@ -166,7 +175,10 @@ class TheSkullsporeNexusTrigger extends TriggeredAbilityImpl {
 
     @Override
     public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
-        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+        return ((ZoneChangeBatchEvent) event)
+                .getEvents()
+                .stream()
+                .anyMatch(e -> TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, e, game));
     }
 }
 

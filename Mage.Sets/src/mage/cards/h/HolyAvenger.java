@@ -5,6 +5,7 @@ import mage.abilities.common.DealsCombatDamageEquippedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.EquipAbility;
@@ -18,6 +19,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -89,9 +91,10 @@ class HolyAvengerEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        game.getState().setValue("attachTo:" + card.getId(), permanent);
+        AttachEffect.setAttachTo(game, card.getId(), permanent);
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        if (!permanent.addAttachment(card.getId(), source, game)) {
+        Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+        if (attachment == null || !permanent.addAttachment(attachment.getId(), source, game)) {
             return false;
         }
         game.informPlayers(player.getLogName() + " put " + card.getLogName()

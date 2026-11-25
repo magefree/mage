@@ -1,22 +1,30 @@
 package mage.cards.a;
 
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.assignment.RoleAssignment;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+import mage.watchers.Watcher;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -33,6 +41,7 @@ public class AminatousAugury extends CardImpl {
         // Until end of turn, for each nonland card type, you may cast a card of that type from among the exiled cards
         // without paying its mana cost.
         this.getSpellAbility().addEffect(new AminatousAuguryEffect());
+        this.getSpellAbility().addWatcher(new AminatousAuguryWatcher());
     }
 
     private AminatousAugury(final AminatousAugury card) {
@@ -78,9 +87,9 @@ class AminatousAuguryEffect extends OneShotEffect {
         }
 
         // move cards from library to exile
-        game.getExile().createZone(source.getSourceId(), CardUtil.createObjectRelatedWindowTitle(source, game, null)).setCleanupOnEndTurn(true);
-        controller.moveCardsToExile(controller.getLibrary().getTopCards(game, 8), source, game, true, source.getSourceId(), CardUtil.createObjectRelatedWindowTitle(source, game, null));
-        ExileZone auguryExileZone = game.getExile().getExileZone(source.getSourceId());
+        game.getExile().createZone(CardUtil.getExileZoneId(game, source), CardUtil.createObjectRelatedWindowTitle(source, game, null)).setCleanupOnEndTurn(true);
+        controller.moveCardsToExile(controller.getLibrary().getTopCards(game, 8), source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.createObjectRelatedWindowTitle(source, game, null));
+        ExileZone auguryExileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
         if (auguryExileZone == null) {
             return true;
         }
@@ -111,7 +120,7 @@ class AminatousAuguryEffect extends OneShotEffect {
                 if (leftHalfCard != null
                         && !leftHalfCard.isLand(game)) {
                     AminatousAuguryCastFromExileEffect effect = new AminatousAuguryCastFromExileEffect();
-                    effect.setTargetPointer(new FixedTarget(leftHalfCard, game));
+                    effect.setTargetPointer(new FixedTarget(card, game));
                     game.addEffect(effect, source);
                 }
                 continue;
@@ -148,6 +157,12 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        AminatousAuguryWatcher.addPlayable(source, game);
+    }
+
+    @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Player player = game.getPlayer(affectedControllerId);
         if (player == null) {
@@ -158,15 +173,9 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
             return false;
         }
 
-        EnumSet<CardType> usedCardTypes;
-        if (game.getState().getValue(source.getSourceId().toString() + "cardTypes") == null) {
-            // The effect has not been applied fully yet, so there are no previously cast times
-            usedCardTypes = EnumSet.noneOf(CardType.class);
-        } else {
-            usedCardTypes = (EnumSet<CardType>) game.getState().getValue(source.getSourceId().toString() + "cardTypes");
-        }
+        List<Set<CardType>> castCardTypes = AminatousAuguryWatcher.getCastCardTypes(source, game);
 
-        if (objectId == null || !objectId.equals(getTargetPointer().getFirst(game, source))) {
+        if (objectId == null || !CardUtil.getMainCardId(game, objectId).equals(getTargetPointer().getFirst(game, source))) {
             return false;
         }
 
@@ -179,37 +188,60 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
             return false;
         }
 
-        // Figure out which of the current card's types have not been cast before
-        EnumSet<CardType> unusedCardTypes = EnumSet.noneOf(CardType.class);
-        for (CardType cardT : card.getCardType(game)) {
-            if (!usedCardTypes.contains(cardT)) {
-                unusedCardTypes.add(cardT);
-            }
-        }
-
-        // The current card has only card types that have been cast before, so it can't be cast
-        if (unusedCardTypes.isEmpty()) {
+        // Each spell cast this way needs its own card type, a card with multiple types can be cast as any of them
+        List<Set<CardType>> cardRoles = new ArrayList<>(castCardTypes);
+        cardRoles.add(EnumSet.copyOf(card.getCardType(game)));
+        if (RoleAssignment.getMaxAssignment(cardRoles) < cardRoles.size()) {
             return false;
         }
 
-        // some actions may not be done while the game only checks if a card can be cast
-        if (!game.inCheckPlayableState()) {
-            // Select the card type to consume and remove all not selected card types
-            if (unusedCardTypes.size() > 1) {
-                Choice choice = new ChoiceImpl(true);
-                choice.setMessage("Which card type do you want to consume?");
-                Set<String> choices = choice.getChoices();
-                for (CardType cardType : unusedCardTypes) {
-                    choices.add(cardType.toString());
-                }
-                player.choose(Outcome.Detriment, choice, game);
-                unusedCardTypes.removeIf(next -> !next.toString().equals(choice.getChoice()));
-                usedCardTypes.add(CardType.fromString(choice.getChoice()));
-            }
-            usedCardTypes.addAll(unusedCardTypes);
-            game.getState().setValue(source.getSourceId().toString() + "cardTypes", usedCardTypes);
-        }
         allowCardToPlayWithoutMana(objectId, source, player.getId(), game);
         return true;
+    }
+}
+
+/**
+ * Holds track of the card types of the spells cast with each Aminatou's Augury
+ */
+class AminatousAuguryWatcher extends Watcher {
+
+    private final Map<MageObjectReference, List<Set<CardType>>> morMap = new HashMap<>();
+
+    AminatousAuguryWatcher() {
+        super(WatcherScope.GAME);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getApprovingObject() == null) {
+            return;
+        }
+        List<Set<CardType>> castCardTypes = morMap.get(new MageObjectReference(event.getApprovingObject().getApprovingAbility()));
+        Spell spell = game.getSpell(event.getTargetId());
+        if (castCardTypes == null || spell == null) {
+            return;
+        }
+        // card types as cast (split half, adventure spell, mdf side), later changes on battlefield don't matter
+        castCardTypes.add(EnumSet.copyOf(spell.getCardType(game)));
+    }
+
+    @Override
+    public void reset() {
+        morMap.clear();
+        super.reset();
+    }
+
+    static void addPlayable(Ability source, Game game) {
+        game.getState()
+                .getWatcher(AminatousAuguryWatcher.class)
+                .morMap
+                .computeIfAbsent(new MageObjectReference(source), m -> new ArrayList<>());
+    }
+
+    static List<Set<CardType>> getCastCardTypes(Ability source, Game game) {
+        return game.getState()
+                .getWatcher(AminatousAuguryWatcher.class)
+                .morMap
+                .getOrDefault(new MageObjectReference(source), Collections.emptyList());
     }
 }

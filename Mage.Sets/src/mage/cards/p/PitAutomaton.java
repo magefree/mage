@@ -85,6 +85,7 @@ class PitAutomatonTriggeredAbility extends DelayedTriggeredAbility {
         if (!isControlledBy(event.getPlayerId())) {
             return false;
         }
+        // that isn't a mana ability - an ExhaustManaAbility has no stack object (605.3b)
         StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
         if (stackObject == null || !(stackObject.getStackAbility() instanceof ExhaustAbility)) {
             return false;

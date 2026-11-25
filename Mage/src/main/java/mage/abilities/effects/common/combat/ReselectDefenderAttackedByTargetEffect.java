@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.combat;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -10,6 +11,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
@@ -25,6 +27,7 @@ import mage.target.common.TargetDefender;
 public class ReselectDefenderAttackedByTargetEffect extends OneShotEffect {
     
     private final boolean includePermanents;
+    private final boolean each;
     private static final FilterPermanent filter = new FilterPermanent("permanent");
 
     static {
@@ -35,13 +38,19 @@ public class ReselectDefenderAttackedByTargetEffect extends OneShotEffect {
     }
 
     public ReselectDefenderAttackedByTargetEffect(boolean includePermanents) {
+        this(includePermanents, false);
+    }
+
+    public ReselectDefenderAttackedByTargetEffect(boolean includePermanents, boolean each) {
         super(Outcome.Benefit);
         this.includePermanents = includePermanents;
+        this.each = each;
     }
 
     protected ReselectDefenderAttackedByTargetEffect(final ReselectDefenderAttackedByTargetEffect effect) {
         super(effect);
         this.includePermanents = effect.includePermanents;
+        this.each = effect.each;
     }
 
     @Override
@@ -56,16 +65,14 @@ public class ReselectDefenderAttackedByTargetEffect extends OneShotEffect {
             return false;
         }
         
-        for (UUID id : getTargetPointer().getTargets(game, source)) {
-
-            Permanent attackingCreature = game.getPermanent(id);
-            if (attackingCreature == null) {
-                continue;
-            }
+        (this.each ?
+            game.getBattlefield().getActivePermanents(StaticFilters.FILTER_ATTACKING_CREATURES, source.getControllerId(), source, game).stream() :
+            this.getTargetPointer().getTargets(game, source).stream().map(game::getPermanent).filter(Objects::nonNull)
+        ).forEach(attackingCreature -> {
 
             CombatGroup combatGroupTarget = game.getCombat().findGroup(attackingCreature.getId());
             if (combatGroupTarget == null) {
-                continue;
+                return;
             }
 
             // 508.7b: While reselecting which player, planeswalker, or battle a creature is attacking, 
@@ -99,7 +106,7 @@ public class ReselectDefenderAttackedByTargetEffect extends OneShotEffect {
                     }
                 }
             }
-        }
+        });
 
         return true;
     }
@@ -109,7 +116,8 @@ public class ReselectDefenderAttackedByTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "reselect which " + (includePermanents ? "player or permanent " : "player ") + 
+        return (this.each ? "for each attacking creature, " : "") +
+            "reselect which " + (includePermanents ? "player or permanent " : "player ") +
             getTargetPointer().describeTargets(mode.getTargets(), "that creature") 
             + " is attacking";
     }

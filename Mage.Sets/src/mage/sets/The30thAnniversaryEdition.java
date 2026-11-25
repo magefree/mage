@@ -23,6 +23,7 @@ public class The30thAnniversaryEdition extends ExpansionSet {
         // https://mtg.fandom.com/wiki/30th_Anniversary_Edition
         // Approximately three out of every ten packs will contain a rare retro frame card
         this.enableDraftBooster(Integer.MAX_VALUE, 3, 7, 3, 1 + 1); // +1 to rare instead retro frame
+        this.ratioBoosterMythic = 0; // set has no mythic rares
 
         cards.add(new SetCardInfo("Air Elemental", 46, Rarity.UNCOMMON, mage.cards.a.AirElemental.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Air Elemental", 343, Rarity.UNCOMMON, mage.cards.a.AirElemental.class, RETRO_ART_USE_VARIOUS));

@@ -90,7 +90,7 @@ class ElvishBranchbenderEffect extends OneShotEffect {
                     "X/X Treefolk creature in addition to its other types, where X is the number of Elves you control",
                     SubType.TREEFOLK
                 ),
-                false, false, Duration.EndOfTurn)
+                false, false, Duration.EndOfTurn).withKeepPriorTypes(true)
                 .withDurationRuleAtStart(true);
         // works well with blinked effects
         effect.setTargetPointer(new FixedTarget(targetForest, game));

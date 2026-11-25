@@ -80,7 +80,7 @@ public class RollPlanarDieEffect extends OneShotEffect {
                             source.addTarget(target);
                         }
                         if (target != null) {
-                            effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
+                            effect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));
                         }
                         try {
                             effect.apply(game, source);

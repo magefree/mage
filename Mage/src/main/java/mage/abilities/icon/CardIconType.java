@@ -40,6 +40,8 @@ public enum CardIconType {
     RINGBEARER("prepared/ring.svg", CardIconCategory.COMMANDER, 100),
     COMMANDER("prepared/crown.svg", CardIconCategory.COMMANDER, 100), // TODO: fix big size, see CardIconsPanel
     //
+    DRAFT_PICK_SUGGEST("prepared/hexagon-fill.svg", CardIconCategory.COMMANDER, 100), // suggested pick in draft, text - place 1, 2, 3...
+    //
     SYSTEM_COMBINED("prepared/square-fill.svg", CardIconCategory.SYSTEM, 1000), // inner usage, must use last order
     SYSTEM_DEBUG("prepared/link.svg", CardIconCategory.SYSTEM, 1000); // used for test render dialog
 

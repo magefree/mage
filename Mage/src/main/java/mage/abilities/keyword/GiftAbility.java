@@ -165,8 +165,11 @@ class PromiseGiftEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        if (GiftWasPromisedCondition.FALSE.apply(game, source)) {
+            return false;
+        }
         Player player = game.getPlayer(CardUtil.getSourceCostsTag(
-                game, source, GiftAbility.GIFT_ACTIVATION_VALUE_KEY, (UUID) null
+                game, source, GiftAbility.GIFT_ACTIVATION_VALUE_KEY, new UUID(0, 0)
         ));
         if (player != null && giftType.applyGift(player, game, source)) {
             game.fireEvent(GameEvent.getEvent(

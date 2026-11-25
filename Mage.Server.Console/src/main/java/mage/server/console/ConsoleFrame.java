@@ -27,6 +27,11 @@ import java.util.prefs.Preferences;
  */
 public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
 
+    static {
+        // must be first java code
+        JavaUtil.applyDefaultClientSettings();
+    }
+
     private static final Logger logger = Logger.getLogger(ConsoleFrame.class);
 
     private static Session session;
@@ -219,8 +224,6 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        JavaUtil.applyDefaultClientSettings();
-
         logger.info("Starting MAGE ADMIN version " + version);
         logger.info("Java version: " + System.getProperty("java.version"));
         DebugUtil.printLogsInfo(logger);

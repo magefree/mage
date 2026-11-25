@@ -15,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
-import mage.filter.FilterStackObject;
+import mage.filter.common.FilterActivatedOrTriggeredAbility;
 import mage.target.common.TargetActivatedOrTriggeredAbility;
 
 import java.util.UUID;
@@ -25,8 +25,8 @@ import java.util.UUID;
  */
 public final class AdricMathematicalGenius extends CardImpl {
 
-    private static final FilterStackObject filter
-            = new FilterStackObject("activated or triggered ability you control");
+    private static final FilterActivatedOrTriggeredAbility filter
+            = new FilterActivatedOrTriggeredAbility("activated or triggered ability you control");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());

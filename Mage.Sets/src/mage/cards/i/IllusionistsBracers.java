@@ -10,8 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
-import mage.filter.FilterStackObject;
-import mage.filter.common.FilterActivatedOrTriggeredAbility;
+import mage.filter.FilterAbility;
 import mage.filter.predicate.other.AbilitySourceAttachedPredicate;
 import mage.filter.predicate.other.NotManaAbilityPredicate;
 
@@ -22,7 +21,7 @@ import java.util.UUID;
  */
 public final class IllusionistsBracers extends CardImpl {
 
-    private static final FilterStackObject filter = new FilterActivatedOrTriggeredAbility("an ability of equipped creature");
+    private static final FilterAbility filter = new FilterAbility("an ability of equipped creature");
 
     static {
         filter.add(NotManaAbilityPredicate.instance);

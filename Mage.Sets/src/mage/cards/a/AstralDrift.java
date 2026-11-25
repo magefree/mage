@@ -68,7 +68,7 @@ class AstralDriftTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        StackObject item = game.getState().getStack().getFirstOrNull();
+        StackObject item = game.getStack().getStackObject(event.getTargetId());
         if (!(item instanceof StackAbility
                 && item.getStackAbility() instanceof CyclingAbility)) {
             return false;

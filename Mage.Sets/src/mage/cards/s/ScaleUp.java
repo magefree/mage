@@ -32,7 +32,7 @@ public final class ScaleUp extends CardImpl {
                 new BecomesCreatureTargetEffect(
                         new CreatureToken(6, 4, "green Wurm with base power and toughness 6/4")
                                 .withColor("G").withSubType(SubType.WURM),
-                        true, false, Duration.EndOfTurn, false, true
+                        false, false, Duration.EndOfTurn
                 ).withDurationRuleAtStart(true));
     }
 

@@ -80,7 +80,7 @@ class SatoruUmezawaTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getTargetId());
-        return stackAbility.getStackAbility() instanceof NinjutsuAbility;
+        return stackAbility != null && stackAbility.getStackAbility() instanceof NinjutsuAbility;
     }
 }
 

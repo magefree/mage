@@ -50,6 +50,7 @@ public class GainRetraceYourGraveyardEffect extends ContinuousEffectImpl {
             if (card == null) {
                 continue;
             }
+            // TODO: refactor GainRetraceYourGraveyardEffect, NinjaTeen and TannukSteadfastSecond to use shared effect and logic
             for (Card faceCard : CardUtil.getCastableComponents(card, filter, source, controller, game, null, false)) {
                 Ability ability = new RetraceAbility(faceCard);
                 ability.setSourceId(cardId);

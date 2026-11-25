@@ -1,13 +1,14 @@
 package mage.cards.d;
 
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SetTargetPointer;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -26,7 +27,9 @@ public final class DemonicGifts extends CardImpl {
         ).setText("Until end of turn, target creature gets +2/+0"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 new DiesSourceTriggeredAbility(
-                        new ReturnSourceFromGraveyardToBattlefieldEffect(false, true), false
+                        new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false)
+                                .setText("return it to the battlefield under its owner's control"),
+                        false, SetTargetPointer.CARD
                 ), Duration.EndOfTurn, "and gains \"When this creature dies, " +
                 "return it to the battlefield under its owner's control.\""
         ));

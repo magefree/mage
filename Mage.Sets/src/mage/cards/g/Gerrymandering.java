@@ -2,7 +2,9 @@
 package mage.cards.g;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -66,11 +68,17 @@ class GerrymanderingEffect extends OneShotEffect {
         if (controller != null) {
             // Exile all lands.
             Cards exiledCards = new CardsImpl();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LANDS, source.getControllerId(), source, game)) {
-                exiledCards.add(permanent);
-                playerLandCount.putIfAbsent(permanent.getControllerId(), 0);
-                playerLandCount.put(permanent.getControllerId(), playerLandCount.get(permanent.getControllerId()) + 1);
+            List<Permanent> toExile = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LANDS, source.getControllerId(), source, game);
+            for (Permanent permanent : toExile) {
                 controller.moveCardsToExile(permanent, source, game, true, CardUtil.getCardExileZoneId(game, source.getSourceId()), "Gerrymandering");
+            }
+            game.processAction();
+            for (Permanent permanent : toExile) {
+                // a permanent can leave the battlefield as other cards: a side of a double faced card becomes its main
+                // card, and a merged (mutated) permanent becomes one card per component (rule 731.3c)
+                Set<Card> cards = CardUtil.getAllCardsFromPermanentLeftBattlefield(permanent, game);
+                exiledCards.addAllCards(cards);
+                playerLandCount.merge(permanent.getControllerId(), cards.size(), Integer::sum);
             }
 
             // Give each player a number of those cards chosen at random equal to the number of those cards the player controlled.

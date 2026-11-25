@@ -37,8 +37,6 @@ import java.util.List;
  */
 public class FeedingGroundsPlane extends Plane {
 
-    private static final String rule = "put X +1/+1 counters on target creature, where X is that creature's mana value";
-
     public FeedingGroundsPlane() {
         this.setPlaneType(Planes.PLANE_FEEDING_GROUNDS);
 
@@ -46,8 +44,9 @@ public class FeedingGroundsPlane extends Plane {
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new FeedingGroundsEffect());
         this.getAbilities().add(ability);
 
-        // Active player can roll the planar die: Whenever you roll {CHAOS}, target red or green creature gets X +1/+1 counters
-        Effect chaosEffect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(), TargetManaValue.instance);
+        // Whenever chaos ensues, put X +1/+1 counters on target creature, where X is that creature's mana value.
+        Effect chaosEffect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(), TargetManaValue.CREATURE)
+                .withTargetDescription("target creature");
         Target chaosTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_A_CREATURE);
 
         List<Effect> chaosEffects = new ArrayList<>();

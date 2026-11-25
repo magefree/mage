@@ -445,8 +445,21 @@ public abstract class StackObjectImpl implements StackObject {
         } else {
             objectAbilities.add(getStackAbility());
         }
+        // 707.10d
+        // Some effects copy a spell or ability for each player or object it “could target.” The copies are put onto
+        // the stack with those targets in the order of their controller’s choice. If the spell or ability has more
+        // than one target, each of its targets must be the same player or object. If that player or object isn’t a
+        // legal target for each instance of the word “target,” a copy isn’t created for that player or object.
+        //
+        // 707.10e
+        // Some effects copy a spell or ability and specify a new target for the copy. If the spell or ability has more
+        // than one target, each of the copy’s targets must be that player or object. If that player or object isn’t a
+        // legal target for each instance of the word “target,” the copy isn’t created. In the case where a replacement
+        // effect causes the copy to target more than one object, the copy’s controller chooses one of them to be the
+        // new target. The chosen target must be a legal target for that spell or ability.
+        boolean hasTargets = false;
         for (Ability ability : objectAbilities) {
-            if (ability.getModes()
+            List<Target> targets = ability.getModes()
                     .getSelectedModes()
                     .stream()
                     .map(ability.getModes()::get)
@@ -454,11 +467,15 @@ public abstract class StackObjectImpl implements StackObject {
                     .map(Mode::getTargets)
                     .flatMap(Collection::stream)
                     .filter(t -> !t.isNotTarget())
-                    .anyMatch(t -> t.canTarget(ability.getControllerId(), targetId, ability, game))) {
-                return true;
+                    .collect(Collectors.toList());
+            for (Target target : targets) {
+                if (!target.canTarget(ability.getControllerId(), targetId, ability, game)) {
+                    return false;
+                }
+                hasTargets = true;
             }
         }
-        return false;
+        return hasTargets;
     }
 
     private String getNameOftarget(UUID targetId, Game game) {

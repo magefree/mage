@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.FilterSpell;
-import mage.filter.FilterStackObject;
+import mage.filter.common.FilterActivatedOrTriggeredAbility;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.filter.predicate.mageobject.PermanentPredicate;
 import mage.target.TargetSpell;
@@ -24,8 +24,8 @@ import java.util.UUID;
  */
 public final class LithoformEngine extends CardImpl {
 
-    private static final FilterStackObject filter
-            = new FilterStackObject("activated or triggered ability you control");
+    private static final FilterActivatedOrTriggeredAbility filter
+            = new FilterActivatedOrTriggeredAbility("activated or triggered ability you control");
     private static final FilterSpell filter2
             = new FilterInstantOrSorcerySpell("instant or sorcery spell you control");
     private static final FilterSpell filter3

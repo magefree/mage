@@ -1,12 +1,17 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.Mana;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.mana.SimpleManaAbility;
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+
 import org.junit.Test;
+import org.mage.test.rollback.CanceledCost;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -236,5 +241,170 @@ public class GiftTest extends CardTestPlayerBase {
         assertHandCount(playerA, 0);
         assertGraveyardCount(playerA, 2);
         assertHandCount(playerB, 1);
+    }
+
+    @Test
+    public void test_CastWithConvoke_PromisedGift() {
+        // Gift a Treasure
+        // Blooming Blast deals 2 damage to target creature. If the gift was promised, Blooming Blast also deals
+        // 3 damage to that creature's controller.
+        addCard(Zone.HAND, playerA, "Blooming Blast"); // {1}{R}, instant
+        //
+        // {T}: The next spell you cast this turn has convoke.
+        addCard(Zone.BATTLEFIELD, playerA, "Wand of the Worldsoul");
+        addCard(Zone.BATTLEFIELD, playerA, "Runeclaw Bear"); // 2/2, for convoke
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // 2/2
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: The next spell you cast this turn");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blooming Blast", "Grizzly Bears");
+        setChoice(playerA, true); // promise
+        addTarget(playerA, "Runeclaw Bear"); // convoke for {1}
+        setChoice(playerA, playerB.getName()); // gift to
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerB, "Grizzly Bears", 1);
+        assertTapped("Runeclaw Bear", true);
+        assertPermanentCount(playerB, "Treasure Token", 1);
+        assertLife(playerB, 20 - 3);
+    }
+
+    @Test
+    public void test_CastWithConvoke_NotPromisedGift() {
+        // Gift a Treasure
+        // Blooming Blast deals 2 damage to target creature. If the gift was promised, Blooming Blast also deals
+        // 3 damage to that creature's controller.
+        addCard(Zone.HAND, playerA, "Blooming Blast"); // {1}{R}, instant
+        //
+        // {T}: The next spell you cast this turn has convoke.
+        addCard(Zone.BATTLEFIELD, playerA, "Wand of the Worldsoul");
+        addCard(Zone.BATTLEFIELD, playerA, "Runeclaw Bear"); // 2/2, for convoke
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // 2/2
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: The next spell you cast this turn");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blooming Blast", "Grizzly Bears");
+        setChoice(playerA, false); // no promise
+        addTarget(playerA, "Runeclaw Bear"); // convoke for {1}
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerB, "Grizzly Bears", 1);
+        assertTapped("Runeclaw Bear", true);
+        assertPermanentCount(playerB, "Treasure Token", 0);
+        assertLife(playerB, 20);
+    }
+
+    @Test
+    public void test_Rollback_MustNotLostGift_ManaAbilityCanceledWhilePaying() {
+        // a canceled mana ability while paying a spell rolls back the game (example: a human cancels the sacrifice
+        // of Ashnod's Altar), the spell must keep the promised gift after that
+        //
+        // Gift a Treasure
+        // Blooming Blast deals 2 damage to target creature. If the gift was promised, Blooming Blast also deals
+        // 3 damage to that creature's controller.
+        addCard(Zone.HAND, playerA, "Blooming Blast"); // {1}{R}, instant
+        addCustomCardWithAbility("canceled source", playerA, new SimpleManaAbility(Zone.BATTLEFIELD,
+                Mana.ColorlessMana(2), new CanceledCost()), null, CardType.LAND, "", Zone.BATTLEFIELD);
+        addCard(Zone.BATTLEFIELD, playerA, "Sol Ring"); // {T}: Add {C}{C}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // 2/2
+
+        // R from Mountain, then {1}: the canceled source goes first (a land), then Sol Ring
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blooming Blast", "Grizzly Bears");
+        setChoice(playerA, true); // promise
+        setChoice(playerA, playerB.getName()); // gift to
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerB, "Grizzly Bears", 1);
+        assertTapped("Sol Ring", true);
+        assertPermanentCount(playerB, "Treasure Token", 1);
+        assertLife(playerB, 20 - 3);
+    }
+
+    @Test
+    public void test_Rollback_MustNotLostGift_ManaAbilityFailedWhilePaying() {
+        // a failed mana ability while paying a spell rolls back the game, the spell must keep the promised gift after
+        // that (Rakdos Signet is tried for {1} when nothing is left to pay its own {1}, then convoke pays)
+        //
+        // Gift a Treasure
+        // Blooming Blast deals 2 damage to target creature. If the gift was promised, Blooming Blast also deals
+        // 3 damage to that creature's controller.
+        addCard(Zone.HAND, playerA, "Blooming Blast"); // {1}{R}, instant
+        //
+        // {T}: The next spell you cast this turn has convoke.
+        addCard(Zone.BATTLEFIELD, playerA, "Wand of the Worldsoul");
+        addCard(Zone.BATTLEFIELD, playerA, "Runeclaw Bear"); // 2/2, for convoke
+        addCard(Zone.BATTLEFIELD, playerA, "Rakdos Signet"); // {1}, {T}: Add {B}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // 2/2
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: The next spell you cast this turn");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blooming Blast", "Grizzly Bears");
+        setChoice(playerA, true); // promise
+        addTarget(playerA, "Runeclaw Bear"); // convoke for {1}
+        setChoice(playerA, playerB.getName()); // gift to
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerB, "Grizzly Bears", 1);
+        assertTapped("Runeclaw Bear", true);
+        assertTapped("Rakdos Signet", false);
+        assertPermanentCount(playerB, "Treasure Token", 1);
+        assertLife(playerB, 20 - 3);
+    }
+
+    @Test
+    public void test_Rollback_MustNotLostGift_PermanentManaAbilityFailedWhilePaying() {
+        // a failed mana ability while paying a permanent spell rolls back the game, the permanent must keep the promised
+        // gift after that (Golgari Signet is tried for {1} when nothing is left to pay its own {1}, then convoke pays)
+        //
+        // Gift a card
+        // When this creature enters, if the gift was promised, destroy target artifact or enchantment an opponent controls.
+        addCard(Zone.HAND, playerA, "Scrapshooter"); // {1}{G}{G}, creature
+        //
+        // {T}: The next spell you cast this turn has convoke.
+        addCard(Zone.BATTLEFIELD, playerA, "Wand of the Worldsoul");
+        addCard(Zone.BATTLEFIELD, playerA, "Runeclaw Bear"); // 2/2, for convoke
+        addCard(Zone.BATTLEFIELD, playerA, "Golgari Signet"); // {1}, {T}: Add {B}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Ornithopter"); // artifact 0/2
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: The next spell you cast this turn");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scrapshooter");
+        setChoice(playerA, true); // promise
+        addTarget(playerA, "Runeclaw Bear"); // convoke for {1}
+        setChoice(playerA, playerB.getName()); // gift to
+        setChoice(playerA, "When this permanent enters, if the gift was promised, they draw"); // triggers order
+        addTarget(playerA, "Ornithopter"); // destroy
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Scrapshooter", 1);
+        assertTapped("Runeclaw Bear", true);
+        assertTapped("Golgari Signet", false);
+        assertHandCount(playerB, 1);
+        assertPermanentCount(playerB, "Ornithopter", 0);
     }
 }

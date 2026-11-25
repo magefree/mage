@@ -661,14 +661,17 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             mouseResetTimer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    if (callback != null) {
-                        if (mouseClicksCount == 1) {
-                            callback.mouseClicked(e, data, false);
-                        } else if (mouseClicksCount > 1) {
-                            callback.mouseClicked(e, data, true);
+                    // timer thread here, but a click processing changes GUI, so it must be in the swing thread only
+                    SwingUtilities.invokeLater(() -> {
+                        if (callback != null) {
+                            if (mouseClicksCount == 1) {
+                                callback.mouseClicked(e, data, false);
+                            } else if (mouseClicksCount > 1) {
+                                callback.mouseClicked(e, data, true);
+                            }
                         }
-                    }
-                    mouseClicksCount = 0;
+                        mouseClicksCount = 0;
+                    });
                 }
             }, MOUSE_DOUBLE_CLICK_RESET_MS);
         }

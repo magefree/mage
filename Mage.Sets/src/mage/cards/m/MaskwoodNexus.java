@@ -57,6 +57,7 @@ class MaskwoodNexusEffect extends ModifyObjectAllMultiZoneEffect {
             (obj, source, game) -> { game.getState().getCreateMageObjectAttribute(obj, game).getSubtype().setIsAllCreatureTypes(true); },
             "every creature type"
         );
+        this.addDependedToType(DependencyType.BecomeCreature);
     }
 
     private MaskwoodNexusEffect(final MaskwoodNexusEffect effect) {

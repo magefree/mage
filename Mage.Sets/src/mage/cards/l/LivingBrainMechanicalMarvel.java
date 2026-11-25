@@ -43,7 +43,7 @@ public final class LivingBrainMechanicalMarvel extends CardImpl {
         CreatureToken token = new CreatureToken(3, 3, "artifact creature with base power and toughness 3/3")
                 .withType(CardType.ARTIFACT);
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new BecomesCreatureTargetEffect(token, false, false, Duration.EndOfTurn, false, true, false)
+                new BecomesCreatureTargetEffect(token, false, false, Duration.EndOfTurn)
         );
         ability.addEffect(new UntapTargetEffect("untap it"));
         ability.addTarget(new TargetPermanent(filter));

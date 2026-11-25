@@ -3,6 +3,7 @@ package mage.cards.u;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -19,7 +20,8 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.events.ZoneChangeBatchEvent;
+import mage.game.events.ZoneChangeEvent;
 
 /**
  *
@@ -91,7 +93,7 @@ class UnshakableTailSurveilTriggeredAbility extends TriggeredAbilityImpl {
 
 }
 
-class UnshakableTailInvestigateTriggeredAbility extends TriggeredAbilityImpl {
+class UnshakableTailInvestigateTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     UnshakableTailInvestigateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new InvestigateEffect(), false);
@@ -104,29 +106,21 @@ class UnshakableTailInvestigateTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
+    }
+
+    @Override
+    public boolean checkEvent(ZoneChangeEvent event, Game game) {
+        if (event.getFromZone() != Zone.LIBRARY || event.getToZone() != Zone.GRAVEYARD) {
+            return false;
+        }
+        Card card = game.getCard(event.getTargetId());
+        return card != null && card.isOwnedBy(getControllerId()) && card.isCreature(game);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        if (zEvent != null
-                && Zone.LIBRARY == zEvent.getFromZone()
-                && Zone.GRAVEYARD == zEvent.getToZone()
-                && zEvent.getCards() != null) {
-            for (Card card : zEvent.getCards()) {
-                if (card != null) {
-                    UUID cardOwnerId = card.getOwnerId();
-                    if (cardOwnerId != null
-                            && card.isOwnedBy(getControllerId())
-                            && card.isCreature(game)) {
-                        return true;
-                    }
-                }
-
-            }
-        }
-        return false;
+        return !getFilteredEvents((ZoneChangeBatchEvent) event, game).isEmpty();
     }
 
     @Override

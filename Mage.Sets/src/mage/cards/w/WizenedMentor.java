@@ -70,8 +70,8 @@ class WizenedMentorTriggeredAbility extends TriggeredAbilityImpl {
         if (!event.getPlayerId().equals(getControllerId())) {
             Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
             if (source != null) {
-                StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-                return !stackAbility.getStackAbility().isManaActivatedAbility();
+                StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getTargetId());
+                return stackAbility != null && !stackAbility.getStackAbility().isManaActivatedAbility();
             }
         }
         return false;

@@ -9,6 +9,7 @@ import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
+import mage.util.CardUtil;
 
 /**
  *
@@ -26,7 +27,8 @@ public class AuraCardCanAttachToLKIPermanentId implements Predicate<Card> {
     public boolean apply(Card input, Game game) {
         final Permanent permanent = game.getPermanentOrLKIBattlefield(toBeCheckedLKIPermanentId);
         Filter filter;
-        for (Target target : input.getSpellAbility().getTargets()) {
+        // double faced cards: a main card has no own spell ability, must check the side that enters the battlefield
+        for (Target target : CardUtil.getDefaultCardSideForBattlefield(game, input).getSpellAbility().getTargets()) {
             filter = target.getFilter();
             if (filter.match(permanent, game)) {
                 return true;

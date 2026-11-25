@@ -24,7 +24,7 @@ public final class TheEnd extends CardImpl {
         // This spell costs {2} less to cast if your life total is 5 or less.
         this.addAbility(new SimpleStaticAbility(Zone.ALL,
                 new SpellCostReductionSourceEffect(2, FatefulHourCondition.instance)
-                        .setCanWorksOnStackOnly(true)
+                        
                         .setText("This spell costs {2} less to cast if your life total is 5 or less.")
         ).setRuleAtTheTop(true));
 

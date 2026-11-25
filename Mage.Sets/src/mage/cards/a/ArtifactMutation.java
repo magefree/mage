@@ -23,8 +23,8 @@ public final class ArtifactMutation extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
 
-        // create X 1/1 green Saproling creature tokens, where X is that artifact's converted mana cost.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), TargetManaValue.instance).setText("create X 1/1 green Saproling creature tokens, where X is that artifact's mana value"));
+        // Create X 1/1 green Saproling creature tokens, where X is that artifact's mana value.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), TargetManaValue.ARTIFACT));
     }
 
     private ArtifactMutation(final ArtifactMutation card) {

@@ -92,7 +92,7 @@ class RetchedWretchReturnEffect extends OneShotEffect {
         }
         if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
             player.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
-            Permanent permanent = game.getPermanent(card.getId());
+            Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
             if (permanent != null) {
                 ContinuousEffect effect = new LoseAllAbilitiesTargetEffect(Duration.Custom);
                 effect.setTargetPointer(new FixedTarget(permanent, game));

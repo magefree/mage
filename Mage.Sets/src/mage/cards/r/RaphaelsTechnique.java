@@ -22,11 +22,11 @@ public final class RaphaelsTechnique extends CardImpl {
     public RaphaelsTechnique(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}{R}");
 
-        // Sneak {2}{R}
-        this.addAbility(new SneakAbility(this, "{2}{R}"));
-
         // Each player may discard their hand and draw seven cards.
         this.getSpellAbility().addEffect(new RaphaelsTechniqueEffect());
+
+        // Sneak {2}{R}
+        this.addAbility(new SneakAbility(this, "{2}{R}"));
     }
 
     private RaphaelsTechnique(final RaphaelsTechnique card) {

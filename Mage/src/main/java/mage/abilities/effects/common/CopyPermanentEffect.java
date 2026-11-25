@@ -80,7 +80,8 @@ public class CopyPermanentEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourcePermanent = game.getPermanentEntering(source.getSourceId());
         if (sourcePermanent == null) {
-            sourcePermanent = game.getObject(source);
+            // 400.7 a new object after a zone change (e.g. blink in response to a "becomes a copy" trigger)
+            sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         }
         if (controller == null || sourcePermanent == null) {
             return false;
@@ -158,7 +159,7 @@ public class CopyPermanentEffect extends OneShotEffect {
         // select new target
         auraTarget.withNotTarget(true);
 
-        UUID targetId = (UUID) game.getState().getValue("attachTo:" + sourcePermanent.getId());
+        UUID targetId = (UUID) AttachEffect.pollAttachTo(game, sourcePermanent.getId());
         if (targetId == null) {
             if (!controller.choose(auraOutcome, auraTarget, source, game)) {
                 return true;

@@ -7,9 +7,7 @@ import mage.abilities.effects.keyword.EmpowerJaceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -18,17 +16,11 @@ import mage.target.common.TargetOpponent;
  */
 public final class SolveForDisappointment extends CardImpl {
 
-    private static final FilterCard filter = new FilterPermanentCard("a nonland permanent card");
-
-    static {
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
-    }
-
     public SolveForDisappointment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card.
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter));
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(StaticFilters.FILTER_CARD_A_NON_LAND_PERMANENT));
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // Empower Jace 1.

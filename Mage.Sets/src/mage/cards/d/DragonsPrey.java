@@ -29,7 +29,7 @@ public final class DragonsPrey extends CardImpl {
 
         // This spell costs {2} more to cast if it targets a Dragon.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostIncreaseSourceEffect(2, condition).setCanWorksOnStackOnly(true)
+                Zone.ALL, new SpellCostIncreaseSourceEffect(2, condition)
         ).setRuleAtTheTop(true));
 
         // Destroy target creature.

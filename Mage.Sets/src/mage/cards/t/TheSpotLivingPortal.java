@@ -15,14 +15,13 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetNonlandPermanent;
 import mage.target.targetpointer.EachTargetPointer;
 
-import java.util.Arrays;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  *
@@ -30,16 +29,10 @@ import java.util.stream.Collectors;
  */
 public final class TheSpotLivingPortal extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("nonland permanent card from a graveyard");
+    private static final FilterCard filter = new FilterPermanentCard("nonland permanent card from a graveyard");
 
     static {
-        filter.add(Predicates.or(
-                Arrays.stream(CardType.values())
-                        .filter(CardType::isPermanentType)
-                        .filter(type -> type != CardType.LAND)
-                        .map(CardType::getPredicate)
-                        .collect(Collectors.toSet()))
-        );
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public TheSpotLivingPortal(UUID ownerId, CardSetInfo setInfo) {

@@ -47,6 +47,10 @@ public class ConditionalAnyColorManaAbility extends ActivatedManaAbilityImpl {
     @Override
     public List<Mana> getNetMana(Game game) {
         this.netMana.clear();
+        if (game == null && !(amount instanceof StaticValue)) {
+            // dynamic amount can be calculated in a game only (example: card info without a game)
+            return super.getNetMana(game);
+        }
         int count = amount.calculate(game, this, null);
         if (count > 0) {
             this.netMana.add(Mana.AnyMana(count));

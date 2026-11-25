@@ -50,7 +50,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl {
 
         // save permanents to become face down (one time usage on resolve)
         for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-            if (!perm.isFaceDown(game) && !perm.isTransformable()) {
+            if (!perm.isFaceDown(game) && BecomesFaceDownCreatureEffect.canBeTurnedFaceDown(perm)) {
                 affectedObjectList.add(new MageObjectReference(perm, game));
                 perm.setFaceDown(true, game);
                 // check for Morph

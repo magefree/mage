@@ -21,7 +21,7 @@ import java.util.UUID;
 public final class SwatAway extends CardImpl {
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
-            new FilterCreatureAttackingYou("a creature is attacking you")
+            new FilterCreatureAttackingYou("a creature is attacking you"), false
     );
     private static final FilterSpellOrPermanent filter = new FilterSpellOrPermanent("spell or creature");
 
@@ -34,7 +34,7 @@ public final class SwatAway extends CardImpl {
 
         // This spell costs {2} less to cast if a creature is attacking you.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(2, condition).setCanWorksOnStackOnly(true)
+                Zone.ALL, new SpellCostReductionSourceEffect(2, condition)
         ).setRuleAtTheTop(true));
 
         // The owner of target spell or creature puts it on their choice of the top or bottom of their library.

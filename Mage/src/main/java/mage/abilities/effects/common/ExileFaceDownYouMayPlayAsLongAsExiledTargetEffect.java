@@ -5,12 +5,15 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.asthought.MayLookAtTargetCardEffect;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CastManaAdjustment;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -39,9 +42,9 @@ public class ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect extends OneShotEf
             case NONE:
             case AS_THOUGH_ANY_MANA_TYPE:
             case AS_THOUGH_ANY_MANA_COLOR:
+            case WITHOUT_PAYING_MANA_COST:
                 this.manaAdjustment = manaAdjustment;
                 break;
-            case WITHOUT_PAYING_MANA_COST: // TODO when needed
             default:
                 throw new IllegalArgumentException("Wrong code usage, manaAdjustment is not yet supported: " + manaAdjustment);
         }
@@ -89,7 +92,11 @@ public class ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect extends OneShotEf
                         // TODO: untangle why there is a confusion between the two.
                         CardUtil.makeCardPlayable(game, source, card, useCastSpellOnly, Duration.Custom, true, controller.getId(), null);
                         break;
-                    case WITHOUT_PAYING_MANA_COST: // TODO.
+                    case WITHOUT_PAYING_MANA_COST:
+                        game.addEffect(new PlayFromNotOwnHandZoneTargetEffect(
+                                Zone.EXILED, TargetController.YOU, Duration.Custom, true, useCastSpellOnly
+                        ).setTargetPointer(new FixedTarget(card, game)), source);
+                        break;
                     default:
                         throw new IllegalArgumentException("Wrong code usage, manaAdjustment is not yet supported: " + manaAdjustment);
                 }

@@ -294,7 +294,13 @@ public class DrawEffectsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, excavation);
         // 3 cards in hand, notion thief -> instead opponent draws three
         // but cards were still drawn this way, so discard all three (no choice to make)
-        // if this turns out to be incorrect, modify the test accordingly
+        //
+        // "For each card drawn this way" ... However, it doesn't matter *who* drew the cards. The Torment card
+        // Plagiarize could cause another player to draw cards from Read the Runes instead of you; that would not
+        // affect the number of cards you'd need to discard.
+        // (Onslaught FAQ, 2002-09-22)
+        //
+        // 614.11b excludes only an additional action on that card itself (e.g. reveal it), not a count of drawn cards
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -324,8 +330,7 @@ public class DrawEffectsTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, excavation);
         // 3 cards in hand, alms collector -> instead each player draws one
-        // interpret as two cards were drawn this way in total
-        // if this turns out to be incorrect, modify the test accordingly
+        // two cards were drawn this way in total, it doesn't matter who drew them (see Notion Thief test)
         setChoice(playerA, "Shock"); // to discard
         setChoice(playerA, "Giant Growth"); // to discard
 

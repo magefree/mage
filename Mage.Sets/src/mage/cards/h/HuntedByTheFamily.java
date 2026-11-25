@@ -101,7 +101,7 @@ class HuntedByTheFamilyFirstChoice extends VillainousChoice {
                         .withSubType(SubType.HUMAN)
                         .withColor("W"),
                 true, false, Duration.Custom
-        ).setTargetPointer(new FixedTarget(permanent, game)), source);
+        ).withLoseOtherCardTypes(true).setTargetPointer(new FixedTarget(permanent, game)), source);
         return true;
     }
 }

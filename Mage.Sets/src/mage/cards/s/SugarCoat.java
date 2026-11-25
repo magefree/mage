@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -94,6 +95,9 @@ class SugarCoatEffect extends ContinuousEffectImpl {
                 permanent.addCardType(game, CardType.ARTIFACT);
                 permanent.addSubType(game, SubType.FOOD);
                 return true;
+            case ColorChangingEffects_5:
+                permanent.getColor(game).setColor(ObjectColor.COLORLESS);
+                return true;
             case AbilityAddingRemovingEffects_6:
                 permanent.removeAllAbilities(source.getSourceId(), game);
                 permanent.addAbility(ability, source.getSourceId(), game);
@@ -109,6 +113,8 @@ class SugarCoatEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.TypeChangingEffects_4 || layer == Layer.AbilityAddingRemovingEffects_6;
+        return layer == Layer.TypeChangingEffects_4
+                || layer == Layer.ColorChangingEffects_5
+                || layer == Layer.AbilityAddingRemovingEffects_6;
     }
 }

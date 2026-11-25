@@ -8,16 +8,14 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.watchers.Watcher;
+import mage.watchers.common.SurveilWatcher;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -53,7 +51,8 @@ public final class DarkbladeAgent extends CardImpl {
                 "and \"Whenever this creature deals "
                         + "combat damage to a player, you draw a card.\""
         ));
-        this.addAbility(ability, new DarkbladeAgentWatcher());
+        ability.addHint(new ConditionHint(DarkbladeAgentCondition.instance, "You've surveilled this turn"));
+        this.addAbility(ability, new SurveilWatcher());
     }
 
     private DarkbladeAgent(final DarkbladeAgent card) {
@@ -71,36 +70,8 @@ enum DarkbladeAgentCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        DarkbladeAgentWatcher watcher
-                = game.getState().getWatcher(
-                DarkbladeAgentWatcher.class);
+        SurveilWatcher watcher = game.getState().getWatcher(SurveilWatcher.class);
         return watcher != null
-                && watcher.getSurveiledThisTurn(source.getControllerId());
-    }
-}
-
-class DarkbladeAgentWatcher extends Watcher {
-
-    private final Set<UUID> surveiledThisTurn = new HashSet<>();
-
-    public DarkbladeAgentWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SURVEILED) {
-            this.surveiledThisTurn.add(event.getPlayerId());
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        this.surveiledThisTurn.clear();
-    }
-
-    public boolean getSurveiledThisTurn(UUID playerId) {
-        return this.surveiledThisTurn.contains(playerId);
+                && watcher.hasSurveilled(source.getControllerId());
     }
 }

@@ -3,6 +3,7 @@ package org.mage.test.cards.requirement;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -92,5 +93,46 @@ public class AttackRequirementTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 16);
         assertTapped("Berserkers of Blood Ridge", true);
+    }
+
+    @Test
+    public void test_SpecificDefender() {
+        // {T}: Target creature an opponent controls attacks you this turn if able.
+        addCard(Zone.BATTLEFIELD, playerA, "Alluring Siren");
+        addCard(Zone.BATTLEFIELD, playerA, "Ajani Goldmane"); // planeswalker, loyalty 4
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // bear 2/2
+
+        activateAbility(2, PhaseStep.UPKEEP, playerA, "{T}: Target creature an opponent controls attacks you this turn if able.", "Grizzly Bears"); // bear must attack playerA
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20 - 2);
+        assertCounterCount(playerA, "Ajani Goldmane", CounterType.LOYALTY, 4);
+    }
+
+    @Test
+    public void test_SpecificDefender_AttackCost_NotForced() {
+        // {T}: Target creature an opponent controls attacks you this turn if able.
+        addCard(Zone.BATTLEFIELD, playerA, "Alluring Siren");
+        // Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you.
+        addCard(Zone.BATTLEFIELD, playerA, "Propaganda");
+        addCard(Zone.BATTLEFIELD, playerA, "Ajani Goldmane"); // planeswalker, loyalty 4
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // bear 2/2
+
+        activateAbility(2, PhaseStep.UPKEEP, playerA, "{T}: Target creature an opponent controls attacks you this turn if able.", "Grizzly Bears"); // bear must attack playerA
+
+        // attacking playerA has a cost, so the requirement can't be obeyed and the bears don't have to attack Ajani instead
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertCounterCount(playerA, "Ajani Goldmane", CounterType.LOYALTY, 4);
+        assertTapped("Grizzly Bears", false);
     }
 }

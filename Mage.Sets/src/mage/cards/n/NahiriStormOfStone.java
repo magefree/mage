@@ -19,9 +19,11 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.filter.FilterAbility;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.other.AbilityClassPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 
@@ -33,9 +35,11 @@ import java.util.UUID;
 public final class NahiriStormOfStone extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("tapped creature");
+    private static final FilterAbility filterEquip = new FilterAbility("equip abilities you activate");
 
     static {
         filter.add(TappedPredicate.TAPPED);
+        filterEquip.add(new AbilityClassPredicate(EquipAbility.class));
     }
 
     public NahiriStormOfStone(UUID ownerId, CardSetInfo setInfo) {
@@ -55,7 +59,7 @@ public final class NahiriStormOfStone extends CardImpl {
         ));
         ability.addEffect(new ConditionalCostModificationEffect(
                 new AbilitiesCostReductionControllerEffect(
-                        EquipAbility.class, "Equip"
+                        filterEquip
                 ), MyTurnCondition.instance, "and equip abilities you activate cost {1} less to activate"
         ));
         ability.addHint(MyTurnHint.instance);

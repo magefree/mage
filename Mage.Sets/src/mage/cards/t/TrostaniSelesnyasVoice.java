@@ -4,6 +4,7 @@ package mage.cards.t;
 
 import java.util.Objects;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -117,10 +118,7 @@ class TrostaniSelesnyasVoiceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         UUID creatureId = (UUID) getValue("lifeSource");
         Integer zoneChangeCounter = (Integer) getValue("zoneChangeCounter");
-        Permanent creature = game.getPermanent(creatureId);
-        if (creature == null || creature.getZoneChangeCounter(game) != zoneChangeCounter) {
-            creature = (Permanent) game.getLastKnownInformation(creatureId, Zone.BATTLEFIELD, zoneChangeCounter);
-        }
+        Permanent creature = game.getPermanentOrLKIBattlefield(new MageObjectReference(creatureId, zoneChangeCounter, game));
         if (creature != null) {
             int amount = creature.getToughness().getValue();
             Player player = game.getPlayer(source.getControllerId());

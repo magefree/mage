@@ -24,12 +24,12 @@ public final class ShreddersTechnique extends CardImpl {
     public ShreddersTechnique(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
-        // Sneak {B}
-        this.addAbility(new SneakAbility(this, "{B}"));
-
         // Destroy target creature or enchantment. If an enchantment was destroyed this way, you lose 2 life.
         this.getSpellAbility().addEffect(new ShreddersTechniqueEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE_OR_ENCHANTMENT));
+
+        // Sneak {B}
+        this.addAbility(new SneakAbility(this, "{B}"));
     }
 
     private ShreddersTechnique(final ShreddersTechnique card) {

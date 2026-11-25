@@ -474,10 +474,10 @@ public class TestCardRenderDialog extends MageDialog {
 
         /* test meld cards in hands and battlefield
         cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "204")); // Hanweir Battlements
-        cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "130a")); // Hanweir Garrison
+        cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "130")); // Hanweir Garrison
         cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "130b")); // Hanweir, the Writhing Township
         cardViews.add(createPermanentCard(game, playerYou.getId(), "EMN", "204", 1, 1, 0, false, false, null)); // Hanweir Battlements
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "EMN", "130a", 1, 1, 0, false, false, null)); // Hanweir Garrison
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "EMN", "130", 1, 1, 0, false, false, null)); // Hanweir Garrison
         cardViews.add(createPermanentCard(game, playerYou.getId(), "EMN", "130b", 1, 1, 0, false, false, null)); // Hanweir, the Writhing Township
         //*/
 

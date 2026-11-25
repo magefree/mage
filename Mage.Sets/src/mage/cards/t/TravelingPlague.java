@@ -24,6 +24,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -135,9 +136,10 @@ class TravelingPlagueEffect extends OneShotEffect {
                 if (controllerOfEnchantedCreature.choose(Outcome.Detriment, target, source, game)) {
                     Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
                     if (!targetPermanent.cantBeAttachedBy(travelingPlague, source, game, false)) {
-                        game.getState().setValue("attachTo:" + travelingPlague.getId(), targetPermanent);
+                        AttachEffect.setAttachTo(game, travelingPlague.getId(), targetPermanent);
                         controllerOfEnchantedCreature.moveCards(travelingPlague, Zone.BATTLEFIELD, source, game);
-                        return targetPermanent.addAttachment(travelingPlague.getId(), source, game);
+                        Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(travelingPlague, game);
+                        return attachment != null && targetPermanent.addAttachment(attachment.getId(), source, game);
                     }
                 }
             }
