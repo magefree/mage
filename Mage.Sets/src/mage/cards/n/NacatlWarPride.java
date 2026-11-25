@@ -96,25 +96,25 @@ class NacatlWarPrideEffect extends OneShotEffect {
             count = game.getBattlefield().countAll(new FilterControlledCreaturePermanent(), defenderId, game);
         }
 
-        if (count == 0) {
+        List<Permanent> copies = new ArrayList<>();
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
-
-        List<Permanent> copies = new ArrayList<>();    
-        Player controller = game.getPlayer(source.getControllerId());
-        CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(controller.getId(), null, false, count, true, true);
-        effect.setTargetPointer(new FixedTarget(origNactalWarPride, game));
-        effect.apply(game, source);
-        copies.addAll(effect.getAddedPermanents());
-        
-        if (!copies.isEmpty()) {
-            FixedTargets blueprintTarget = new FixedTargets(copies, game);
-            ExileTargetEffect exileEffect = new ExileTargetEffect();
-            exileEffect.setTargetPointer(blueprintTarget.copy()).setText("exile the tokens");
-            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
-            return true;
+        if (count > 0) {
+            CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(controller.getId(), null, false, count, true, true);
+            effect.setTargetPointer(new FixedTarget(origNactalWarPride, game));
+            effect.apply(game, source);
+            copies.addAll(effect.getAddedPermanents());
         }
 
-        return false;
+        // CR 603.7a: the "exile the tokens" delayed trigger is created by the resolution whether or not
+        // any token was created. With none it triggers at the beginning of the next end step and exiles
+        // nothing (CR 603.7c).
+        FixedTargets blueprintTarget = new FixedTargets(copies, game);
+        ExileTargetEffect exileEffect = new ExileTargetEffect();
+        exileEffect.setTargetPointer(blueprintTarget.copy()).setText("exile the tokens");
+        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
+        return true;
     }
 }

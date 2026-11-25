@@ -135,11 +135,12 @@ class ShredderShadowMasterEffect extends OneShotEffect {
                 }
             }
         }
-        if (!tokens.isEmpty()) {
-            SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice those tokens");
-            sacrificeEffect.setTargetPointer(new FixedTargets(new ArrayList<>(tokens), game));
-            game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(sacrificeEffect), source);
-        }
+        // CR 603.7a: the "sacrifice those tokens" delayed trigger is created by the resolution whether
+        // or not any token was created. With none it triggers at end of combat and sacrifices nothing
+        // (CR 603.7c).
+        SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice those tokens");
+        sacrificeEffect.setTargetPointer(new FixedTargets(new ArrayList<>(tokens), game));
+        game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(sacrificeEffect), source);
         return true;
     }
 }

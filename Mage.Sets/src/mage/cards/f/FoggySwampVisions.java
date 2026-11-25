@@ -77,7 +77,7 @@ class FoggySwampVisionsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Cards cards = new CardsImpl(getTargetPointer().getTargets(game, source));
-        if (player == null || cards.isEmpty()) {
+        if (player == null) {
             return false;
         }
         player.moveCards(cards, Zone.EXILED, source, game);

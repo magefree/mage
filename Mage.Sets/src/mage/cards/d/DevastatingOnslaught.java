@@ -59,12 +59,17 @@ class DevastatingOnslaughtEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         int xValue = GetXValue.instance.calculate(game, source, this);
-        if (permanent == null || xValue < 1) {
+        if (permanent == null) {
             return false;
         }
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, null, true, xValue);
         effect.setSavedPermanent(permanent);
-        effect.apply(game, source);
+        if (xValue > 0) {
+            effect.apply(game, source);
+        }
+        // CR 603.7a: the "sacrifice them" delayed trigger is created by the resolution whether or not
+        // any token was created. With X = 0 it triggers at the beginning of the next end step and
+        // sacrifices nothing (CR 603.7c).
         effect.sacrificeTokensCreatedAtNextEndStep(game, source);
         return true;
     }
