@@ -18,8 +18,8 @@ public class PlayableObjectsList implements Serializable, Copyable<PlayableObjec
     public PlayableObjectsList() {
     }
 
-    public PlayableObjectsList(Map<UUID, List<ActivatedAbility>> playableObjects) {
-        load(playableObjects);
+    public PlayableObjectsList(Map<UUID, List<ActivatedAbility>> playableObjects, Map<UUID, String> costsToPay) {
+        load(playableObjects, costsToPay);
     }
 
     protected PlayableObjectsList(final PlayableObjectsList source) {
@@ -33,10 +33,13 @@ public class PlayableObjectsList implements Serializable, Copyable<PlayableObjec
         return new PlayableObjectsList(this);
     }
 
-    public void load(Map<UUID, List<ActivatedAbility>> playableObjects) {
+    /**
+     * @param costsToPay real costs to pay instead printed costs (ability id -> mana cost text)
+     */
+    public void load(Map<UUID, List<ActivatedAbility>> playableObjects, Map<UUID, String> costsToPay) {
         objects.clear();
         playableObjects.forEach((objectId, list) -> {
-            objects.put(objectId, new PlayableObjectStats(list));
+            objects.put(objectId, new PlayableObjectStats(list, costsToPay));
         });
     }
 

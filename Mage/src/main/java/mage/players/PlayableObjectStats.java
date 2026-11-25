@@ -10,6 +10,7 @@ import mage.util.Copyable;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -29,11 +30,14 @@ public class PlayableObjectStats implements Serializable, Copyable<PlayableObjec
     public PlayableObjectStats() {
     }
 
-    public PlayableObjectStats(List<ActivatedAbility> activatedAbilities) {
-        load(activatedAbilities);
+    public PlayableObjectStats(List<ActivatedAbility> activatedAbilities, Map<UUID, String> costsToPay) {
+        load(activatedAbilities, costsToPay);
     }
 
-    public void load(List<ActivatedAbility> activatedAbilities) {
+    /**
+     * @param costsToPay real costs to pay instead printed costs (ability id -> mana cost text)
+     */
+    public void load(List<ActivatedAbility> activatedAbilities, Map<UUID, String> costsToPay) {
         this.basicManaAbilities.clear();
         this.basicPlayAbilities.clear();
         this.basicCastAbilities.clear();
@@ -60,7 +64,8 @@ public class PlayableObjectStats implements Serializable, Copyable<PlayableObjec
             if (shortInfo.length() > 50) {
                 shortInfo = shortInfo.substring(0, 50 - 1) + "...";
             }
-            dest.add(new PlayableObjectRecord(ability.getId(), shortInfo));
+            dest.add(new PlayableObjectRecord(ability.getId(), shortInfo,
+                    costsToPay.getOrDefault(ability.getId(), "")));
         }
     }
 
@@ -109,6 +114,17 @@ public class PlayableObjectStats implements Serializable, Copyable<PlayableObjec
         return all;
     }
 
+    public List<String> getPlayableCostsToPay() {
+        // real costs to pay, only for abilities with modified costs (increased or reduced)
+        List<String> all = new ArrayList<>();
+        all.addAll(this.basicManaAbilities.stream().map(PlayableObjectRecord::getManaCostsToPay).collect(Collectors.toList()));
+        all.addAll(this.basicPlayAbilities.stream().map(PlayableObjectRecord::getManaCostsToPay).collect(Collectors.toList()));
+        all.addAll(this.basicCastAbilities.stream().map(PlayableObjectRecord::getManaCostsToPay).collect(Collectors.toList()));
+        all.addAll(this.other.stream().map(PlayableObjectRecord::getManaCostsToPay).collect(Collectors.toList()));
+        all.removeIf(String::isEmpty);
+        return all;
+    }
+
     public int getPlayableImportantAmount() {
         // return only important abilities (e.g. show it as card icons)
         return this.other.size();
@@ -119,15 +135,18 @@ class PlayableObjectRecord implements Serializable, Copyable<PlayableObjectRecor
 
     UUID id;
     String value;
+    String manaCostsToPay; // empty if printed cost isn't modified
 
-    public PlayableObjectRecord(UUID id, String value) {
+    public PlayableObjectRecord(UUID id, String value, String manaCostsToPay) {
         this.id = id;
         this.value = value;
+        this.manaCostsToPay = manaCostsToPay;
     }
 
     private PlayableObjectRecord(final PlayableObjectRecord record) {
         this.id = record.id;
         this.value = record.value;
+        this.manaCostsToPay = record.manaCostsToPay;
     }
 
     public UUID getId() {
@@ -136,6 +155,10 @@ class PlayableObjectRecord implements Serializable, Copyable<PlayableObjectRecor
 
     public String getValue() {
         return value;
+    }
+
+    public String getManaCostsToPay() {
+        return manaCostsToPay;
     }
 
     @Override

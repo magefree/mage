@@ -3,6 +3,7 @@ package org.mage.card.arcane;
 import mage.abilities.icon.CardIcon;
 import mage.abilities.icon.CardIconCategory;
 import mage.abilities.icon.CardIconRenderSettings;
+import mage.abilities.icon.system.CostToPayIcon;
 import mage.abilities.icon.system.PlayableCountIcon;
 import mage.cards.MageCard;
 import mage.cards.MageCardAnimationSettings;
@@ -334,6 +335,10 @@ public class MageLayer extends MageCard {
         // playable icons
         if (card.getPlayableStats().getPlayableImportantAmount() > 0) {
             allIcons.add(new PlayableCountIcon(card.getPlayableStats()));
+        }
+        // real cost icons
+        if (!card.getPlayableStats().getPlayableCostsToPay().isEmpty()) {
+            allIcons.add(new CostToPayIcon(card.getPlayableStats()));
         }
 
         // create panels
