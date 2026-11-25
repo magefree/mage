@@ -7,6 +7,7 @@ import mage.view.CardView;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Polygon;
@@ -21,10 +22,13 @@ import java.awt.image.BufferedImage;
  *
  * It builds on the normal generated-card renderer so rules text, icons,
  * counters, overlays and unusual card data continue to work.
+ *
+ * @author DoingOutstanding, JayDi85
  */
 public class FutureCardRenderer extends ModernCardRenderer {
 
     private static final float TYPE_LINE_Y_FRAC_FUTURE = 0.58f;
+    private static final int MANA_SLOTS = 6;
     private static final Color RAIL_SHADOW = new Color(0, 0, 0, 150);
     private static final Color INNER_HIGHLIGHT = new Color(255, 255, 255, 95);
 
@@ -107,7 +111,6 @@ public class FutureCardRenderer extends ModernCardRenderer {
                 cardWidth - totalContentInset - nameX - medallionSize / 2, boxHeight);
         drawTypeLine(g, attribs, getCardTypeLine(),
                 totalContentInset, typeLineY, contentWidth, boxHeight, true);
-        drawFutureManaCost(g, boxColor, borderPaint);
         drawTypeMedallion(g, boxColor, borderPaint, medallionSize);
 
         g.setColor(RAIL_SHADOW);
@@ -161,6 +164,7 @@ public class FutureCardRenderer extends ModernCardRenderer {
         g.setStroke(new BasicStroke(Math.max(1f, borderWidth * 0.35f)));
         g.draw(innerHighlight);
         g.setStroke(new BasicStroke(1));
+        drawFutureManaCost(g, boxColor, borderPaint, coloredSweep);
     }
 
     private Shape createArtWindow() {
@@ -277,38 +281,45 @@ public class FutureCardRenderer extends ModernCardRenderer {
         g.setStroke(new BasicStroke(1));
     }
 
-    private void drawFutureManaCost(Graphics2D g, Color boxColor, Paint borderPaint) {
-        if (cardView.isAbility() || cardView.isFaceDown() || manaCostString.trim().isEmpty()) {
+    private void drawFutureManaCost(Graphics2D g, Color boxColor, Paint borderPaint, Shape rail) {
+        if (cardView.isAbility() || cardView.isFaceDown()) {
             return;
         }
 
-        String[] symbols = manaCostString.trim().split("\\s+");
-        int diameter = Math.max(10, Math.min(boxHeight, manaRailWidth - 3));
-        int gap = Math.max(1, diameter / 7);
-        int available = Math.max(diameter, artHeight - 4);
-        int step = diameter + gap;
-        if (symbols.length > 1 && symbols.length * step > available) {
-            step = Math.max(3, (available - diameter) / (symbols.length - 1));
+        String cost = manaCostString.trim();
+        String[] symbols = cost.isEmpty() ? new String[0] : cost.split("\\s+");
+        int slots = Math.max(MANA_SLOTS, symbols.length);
+        float step = (float) artHeight / slots;
+        int diameter = Math.min(Math.min(boxHeight, manaRailWidth - 3), (int) step - 2);
+        if (diameter < 1) {
+            return;
         }
 
-        int y = artY + 2;
+        Shape oldClip = g.getClip();
         Object oldAntialias = g.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        for (String symbol : symbols) {
-            if (y + diameter > typeLineY - 1) {
-                break;
+        for (int i = 0; i < slots; i++) {
+            float progress = (i + 0.5f) / slots;
+            int x = Math.round(getManaCurveX(progress) - diameter * 0.55f);
+            int y = artY + Math.round(artHeight * progress - diameter / 2f);
+            if (i == symbols.length) {
+                // The art covers the inner half of each unused socket.
+                g.clip(rail);
             }
-            float symbolCenterY = y + diameter / 2f;
-            float curveProgress = Math.max(0f, Math.min(1f,
-                    (symbolCenterY - artY) / Math.max(1f, artHeight)));
-            int x = Math.round(getManaCurveX(curveProgress) - diameter * 0.72f);
+            if (i >= symbols.length) {
+                g.setColor(INNER_HIGHLIGHT);
+                g.fillOval(x - 1, y - 1, diameter + 2, diameter + 2);
+                g.setPaint(new GradientPaint(x, y, boxColor.darker(), x, y + diameter, boxColor));
+                g.fillOval(x, y, diameter, diameter);
+                continue;
+            }
 
+            String symbol = symbols[i];
             g.setPaint(borderPaint);
             g.fillOval(x - 1, y - 1, diameter + 2, diameter + 2);
             g.setColor(boxColor);
             g.fillOval(x, y, diameter, diameter);
-            BufferedImage mana = ManaSymbols.getSizedManaSymbol(symbol, Math.max(8, diameter - 3));
+            BufferedImage mana = ManaSymbols.getSizedManaSymbol(symbol, Math.max(1, diameter - 3));
             if (mana != null) {
                 int mx = x + (diameter - mana.getWidth()) / 2;
                 int my = y + (diameter - mana.getHeight()) / 2;
@@ -320,9 +331,9 @@ public class FutureCardRenderer extends ModernCardRenderer {
                 g.drawString(symbol, x + (diameter - textWidth) / 2,
                         y + diameter - Math.max(2, diameter / 5));
             }
-            y += step;
         }
 
+        g.setClip(oldClip);
         if (oldAntialias != null) {
             g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, oldAntialias);
         }
