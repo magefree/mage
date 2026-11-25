@@ -33,6 +33,7 @@ public class FutureCardRenderer extends ModernCardRenderer {
     private static final double ART_SCALE = 1.13;
     private static final int MANA_SLOTS = 6;
     private static final Color RAIL_SHADOW = new Color(0, 0, 0, 150);
+    private static final Color ART_EDGE_SHADOW = new Color(0, 0, 0, 55);
     private static final Color INNER_HIGHLIGHT = new Color(255, 255, 255, 95);
 
     private final QuadCurve2D.Float manaCurve = new QuadCurve2D.Float();
@@ -97,21 +98,31 @@ public class FutureCardRenderer extends ModernCardRenderer {
         int panelLeft = left + panelInset;
         int panelRight = right - panelInset;
         int nameLeft = left + boxHeight * 2 / 3;
+        float junctionX = cardWidth * 0.112f + boxHeight * 0.34f;
+        float rulesMidY = rulesY + rulesHeight / 2f;
+        float rulesControlX = right + borderWidth;
 
         Path2D.Float rulesBox = new Path2D.Float();
-        rulesBox.moveTo(panelLeft, rulesY);
+        rulesBox.moveTo(junctionX, rulesY);
         rulesBox.lineTo(panelRight, rulesY);
-        rulesBox.quadTo(right + borderWidth, rulesY + rulesHeight / 2f, panelRight, bottom);
+        rulesBox.quadTo(rulesControlX, rulesMidY, panelRight, bottom);
         rulesBox.lineTo(panelLeft, bottom);
-        rulesBox.quadTo(left - borderWidth, rulesY + rulesHeight / 2f, panelLeft, rulesY);
+        rulesBox.quadTo(left - borderWidth, rulesMidY, left, rulesY + boxHeight * 0.5f);
+        rulesBox.quadTo(panelLeft, rulesY, junctionX, rulesY);
         rulesBox.closePath();
-        drawInsetPanel(g, rulesBox, textboxPaint);
 
         // The left edge of the name bar continues into the outer bevel of the mana rail.
         Path2D.Float nameCurve = new Path2D.Float();
         nameCurve.moveTo(nameLeft, artY);
         nameCurve.quadTo(nameLeft + boxHeight / 2f, left, nameLeft + boxHeight * 1.5f, left);
-        drawFutureRail(g, railColor, boxColor, borderPaint, nameLeft, nameCurve);
+
+        // The lower mana rail is also the left edge of the type bar.
+        Path2D.Float typeEdge = new Path2D.Float();
+        typeEdge.moveTo(junctionX, rulesY);
+        typeEdge.curveTo(junctionX - boxHeight * 0.5f, rulesY,
+                cardWidth * 0.088f, typeLineY + boxHeight * 0.5f, cardWidth * 0.075f, typeLineY);
+        drawFutureRail(g, railColor, boxColor, borderPaint, nameLeft, nameCurve, typeEdge);
+        drawInsetPanel(g, rulesBox, textboxPaint);
 
         Path2D.Float nameBar = new Path2D.Float(nameCurve);
         nameBar.lineTo(right - borderWidth, left);
@@ -120,19 +131,35 @@ public class FutureCardRenderer extends ModernCardRenderer {
         nameBar.closePath();
         drawInsetPanel(g, nameBar, getBarPaint(barColor, left));
 
-        Path2D.Float typeBar = new Path2D.Float();
-        typeBar.moveTo(left, typeLineY);
+        Path2D.Float typeBar = new Path2D.Float(typeEdge);
         typeBar.lineTo(right, typeLineY);
-        typeBar.lineTo(panelRight, rulesY);
-        typeBar.lineTo(panelLeft, rulesY);
+        // Follow the rules box down to the foot of the frame and back along its inner edge.
+        typeBar.quadTo(rulesControlX + borderWidth, rulesMidY, right, bottom + panelInset);
+        typeBar.lineTo(panelRight - boxHeight, bottom);
+        typeBar.lineTo(panelRight, bottom);
+        typeBar.quadTo(rulesControlX, rulesMidY, panelRight, rulesY);
         typeBar.closePath();
         drawInsetPanel(g, typeBar, getBarPaint(barColor, typeLineY));
 
         int nameTextX = nameLeft + boxHeight / 2;
         drawNameLine(g, attribs, cardView.getDisplayName(), "",
                 nameTextX, left, right - 1 - nameTextX, boxHeight);
-        drawTypeLine(g, attribs, getCardTypeLine(),
-                panelLeft + 2, typeLineY, panelRight - panelLeft - 4, boxHeight, true);
+        int typeTextX = Math.round(junctionX) + 2;
+        int typeWidth = Math.max(1, panelRight - typeTextX - 2);
+        String types = getCardTypeLine();
+        Graphics2D typeGraphics = (Graphics2D) g.create();
+        try {
+            typeGraphics.translate(typeTextX, typeLineY);
+            // Retain the previous line capacity for long types inside the narrower bar.
+            if (typeGraphics.getFontMetrics(boxTextFont).stringWidth(types) + boxHeight > typeWidth) {
+                int fullWidth = Math.max(typeWidth, panelRight - panelLeft - 4);
+                typeGraphics.scale((double) typeWidth / fullWidth, 1);
+                typeWidth = fullWidth;
+            }
+            drawTypeLine(typeGraphics, attribs, types, 0, 0, typeWidth, boxHeight, true);
+        } finally {
+            typeGraphics.dispose();
+        }
         drawTypeMedallion(g, boxColor, borderPaint, Math.max(10, boxHeight));
         drawRulesText(g, textboxKeywords, textboxRules,
                 panelLeft + 2, rulesY + 3,
@@ -158,9 +185,9 @@ public class FutureCardRenderer extends ModernCardRenderer {
         g.setStroke(new BasicStroke(1));
     }
 
-    private void drawFutureRail(Graphics2D g, Color railColor, Color boxColor, Paint borderPaint, int nameLeft, Path2D nameCurve) {
-        Path2D.Float outerEdge = new Path2D.Float();
-        outerEdge.moveTo(cardWidth * 0.10f, typeLineY);
+    private void drawFutureRail(Graphics2D g, Color railColor, Color boxColor, Paint borderPaint,
+                                int nameLeft, Path2D nameCurve, Path2D typeEdge) {
+        Path2D.Float outerEdge = new Path2D.Float(typeEdge);
         outerEdge.curveTo(cardWidth * 0.05f, artY + artHeight * 0.76f,
                 cardWidth * 0.035f, artY + artHeight * 0.30f,
                 nameLeft, artY);
@@ -169,10 +196,24 @@ public class FutureCardRenderer extends ModernCardRenderer {
         Path2D.Float rail = new Path2D.Float(outerEdge);
         rail.append(manaCurve, true);
         rail.closePath();
+        // Cast a narrow shadow onto the art, beneath the mana symbols.
+        Graphics2D edge = (Graphics2D) g.create();
+        try {
+            edge.clipRect(0, artY, cardWidth, artHeight);
+            edge.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            float width = Math.max(1f, borderWidth * 0.28f);
+            edge.setColor(ART_EDGE_SHADOW);
+            edge.setStroke(new BasicStroke(2 * width));
+            edge.draw(manaCurve);
+            edge.setStroke(new BasicStroke(width));
+            edge.draw(manaCurve);
+        } finally {
+            edge.dispose();
+        }
+
         g.setPaint(new GradientPaint(borderWidth, artY, railColor, cardWidth / 3f, artY, boxColor));
         g.fill(rail);
 
-        // Bevel only the outside. The art itself defines the edge beside the mana sockets.
         g.setStroke(new BasicStroke(Math.max(2f, borderWidth * 0.8f)));
         g.setPaint(borderPaint);
         g.draw(outerEdge);
@@ -278,6 +319,33 @@ public class FutureCardRenderer extends ModernCardRenderer {
         g.fillOval(x, y, diameter, diameter);
     }
 
+    private void drawInsetManaSymbol(Graphics2D g, String symbol, int x, int y, int diameter,
+                                    Color railColor, Color boxColor) {
+        // Seat the disk just below and to the right of the socket center, exposing its upper-left wall.
+        int inset = Math.max(1, Math.round(diameter * 0.11f));
+        int size = Math.max(1, diameter - 2 * inset);
+        int symbolX = x + (diameter - size) / 2 + Math.round(diameter * 0.065f);
+        int symbolY = y + (diameter - size) / 2 + Math.round(diameter * 0.10f) - 1;
+        int lip = Math.max(1, Math.round(diameter * 0.065f));
+        g.setPaint(new GradientPaint(symbolX, symbolY, railColor.darker().darker(),
+                symbolX + size, symbolY + size, railColor.brighter()));
+        g.fillOval(symbolX - lip, symbolY - lip, size + 2 * lip, size + 2 * lip);
+
+        BufferedImage mana = ManaSymbols.getSizedManaSymbol(symbol, size);
+        if (mana != null) {
+            g.drawImage(mana, symbolX + (size - mana.getWidth()) / 2,
+                    symbolY + (size - mana.getHeight()) / 2, null);
+        } else {
+            g.setColor(boxColor);
+            g.fillOval(symbolX, symbolY, size, size);
+            g.setColor(MANA_ICONS_TEXT_COLOR);
+            g.setFont(boxTextFontNarrow.deriveFont(Math.max(1f, size * 0.7f)));
+            int textWidth = g.getFontMetrics().stringWidth(symbol);
+            int baseline = (size + g.getFontMetrics().getAscent() - g.getFontMetrics().getDescent()) / 2;
+            g.drawString(symbol, symbolX + (size - textWidth) / 2, symbolY + baseline);
+        }
+    }
+
     private void drawFutureManaCost(Graphics2D g, Color railColor, Color boxColor, Shape rail) {
         if (cardView.isAbility() || cardView.isFaceDown()) {
             return;
@@ -294,6 +362,8 @@ public class FutureCardRenderer extends ModernCardRenderer {
         }
 
         Shape oldClip = g.getClip();
+        g.clip(rail);
+        Shape socketClip = g.getClip();
         Object oldAntialias = g.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         for (int i = 0; i < slots; i++) {
@@ -302,28 +372,15 @@ public class FutureCardRenderer extends ModernCardRenderer {
             int diameter = Math.max(1, Math.round(maxDiameter * (0.72f + 0.28f * distanceFromMiddle)));
             int x = Math.round(getManaCurveX(progress) - diameter / 2f);
             int y = artY + Math.round(artHeight * progress - diameter / 2f);
-            if (i == symbols.length) {
-                // The art covers the inner half of each unused socket.
-                g.clip(rail);
-            }
+            // The art cuts through the same recess whether or not it holds a symbol.
+            g.setClip(socketClip);
             drawManaSocket(g, x, y, diameter, railColor, boxColor);
             if (i >= symbols.length) {
                 continue;
             }
 
-            String symbol = symbols[i];
-            BufferedImage mana = ManaSymbols.getSizedManaSymbol(symbol, Math.max(1, diameter - 3));
-            if (mana != null) {
-                int mx = x + (diameter - mana.getWidth()) / 2;
-                int my = y + (diameter - mana.getHeight()) / 2;
-                g.drawImage(mana, mx, my, null);
-            } else {
-                g.setColor(MANA_ICONS_TEXT_COLOR);
-                g.setFont(boxTextFontNarrow);
-                int textWidth = g.getFontMetrics().stringWidth(symbol);
-                g.drawString(symbol, x + (diameter - textWidth) / 2,
-                        y + diameter - Math.max(2, diameter / 5));
-            }
+            g.setClip(oldClip);
+            drawInsetManaSymbol(g, symbols[i], x, y, diameter, railColor, boxColor);
         }
 
         g.setClip(oldClip);
