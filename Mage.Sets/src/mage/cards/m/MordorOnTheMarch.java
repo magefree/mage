@@ -19,12 +19,15 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -76,33 +79,34 @@ class MordorOnTheMarchEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
+        // CR 603.7a: the "exile it at the beginning of the next end step" delayed trigger is created by the
+        // resolution whether or not a creature card was exiled; with no token it exiles nothing.
+        List<Permanent> addedPermanents = new ArrayList<>();
         TargetCard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
         target.withNotTarget(true);
-        if (!target.canChoose(source.getControllerId(), source, game)) {
-            return true;
+        if (target.canChoose(source.getControllerId(), source, game)) {
+            controller.choose(outcome, target, source, game);
+            Card card = game.getCard(target.getFirstTarget());
+            if (card != null) {
+                CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, false);
+                effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game) + 1));
+                controller.moveCards(card, Zone.EXILED, source, game);
+                effect.apply(game, source);
+                effect.getAddedPermanents().forEach(permanent -> {
+                    ContinuousEffect continuousEffect = new GainAbilityTargetEffect(
+                            HasteAbility.getInstance(), Duration.UntilYourNextTurn
+                    );
+                    continuousEffect.setTargetPointer(new FixedTarget(permanent, game));
+                    game.addEffect(continuousEffect, source);
+                });
+                addedPermanents.addAll(effect.getAddedPermanents());
+            }
         }
-        controller.choose(outcome, target, source, game);
-        Card card = game.getCard(target.getFirstTarget());
-        if (card != null) {
-            CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, false);
-            effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game) + 1));
-            controller.moveCards(card, Zone.EXILED, source, game);
-            effect.apply(game, source);
-            effect.getAddedPermanents().stream().forEach(permanent -> {
-                ContinuousEffect continuousEffect = new GainAbilityTargetEffect(
-                        HasteAbility.getInstance(), Duration.UntilYourNextTurn
-                );
-                continuousEffect.setTargetPointer(new FixedTarget(permanent, game));
-                game.addEffect(continuousEffect, source);
-            });
-            ExileTargetEffect exileEffect = new ExileTargetEffect();
-            exileEffect.setTargetPointer(new FixedTargets(effect.getAddedPermanents(), game));
-            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-            game.addDelayedTriggeredAbility(delayedAbility, source);
-            return true;
-        }
-
-        return false;
+        ExileTargetEffect exileEffect = new ExileTargetEffect();
+        exileEffect.setTargetPointer(new FixedTargets(addedPermanents, game));
+        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
+        game.addDelayedTriggeredAbility(delayedAbility, source);
+        return true;
     }
 
 }
