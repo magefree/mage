@@ -5,14 +5,12 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.ManaWasSpentCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 
 /**
@@ -29,8 +27,11 @@ public final class GruulScrapper extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        //When Gruul Scrapper enters the battlefield, if Red was spent to cast Gruul Scrapper, it gains haste until end of turn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalContinuousEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), ManaWasSpentCondition.RED, "if {R} was spent to cast it, it gains haste until end of turn")));
+        // When Gruul Scrapper enters the battlefield, if {R} was spent to cast it, it gains haste until end of turn.
+        // "If {R} was spent" is an intervening-if (CR 603.4): with no red spent the ability never triggers.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn))
+                .withInterveningIf(ManaWasSpentCondition.RED));
 
     }
 
