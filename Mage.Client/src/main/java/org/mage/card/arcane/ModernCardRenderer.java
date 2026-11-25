@@ -1234,10 +1234,6 @@ public class ModernCardRenderer extends CardRenderer {
             allRules.add(0, keywordsRule);
         }
 
-        if (isUnstableFullArtLand()) {
-            return;
-        }
-
         if (!forceRules && cardView.isLand() && allRules.size() == 1 && allRules.get(0) instanceof TextboxBasicManaRule) {
             drawBasicManaTextbox(g, x, y, w, h, ((TextboxBasicManaRule) allRules.get(0)).getBasicManaSymbol());
             return;
