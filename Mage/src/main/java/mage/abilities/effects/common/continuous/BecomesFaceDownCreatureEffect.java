@@ -265,8 +265,8 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
         List<Ability> abilitiesToRemove = new ArrayList<>();
         for (Ability ability : object.getAbilities()) {
 
-            // keep gained abilities from other sources, removes only own (card text)
-            if (card != null && !card.getAbilities().contains(ability)) {
+            // Keep abilities granted by another effect.
+            if (card != null && !hasPrintedAbility(card, ability)) {
                 continue;
             }
 
@@ -365,6 +365,18 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
         if (object instanceof Card) {
             ((Card) object).setRarity(Rarity.SPECIAL);
         }
+    }
+
+    static boolean hasPrintedAbility(Card card, Ability ability) {
+        if (card.getAbilities().contains(ability)) {
+            return true;
+        }
+        for (MageObject part : CardUtil.getObjectPartsAsObjects(card)) {
+            if (part != card && part instanceof Card && ((Card) part).getAbilities().contains(ability)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

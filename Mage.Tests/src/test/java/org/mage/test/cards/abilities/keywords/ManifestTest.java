@@ -41,6 +41,23 @@ public class ManifestTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_ManifestedRoomDoesNotDealDamage() {
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, "Glassworks // Shattered Yard");
+        addCard(Zone.HAND, playerA, "Soul Summons");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soul Summons");
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
+        assertLife(playerB, 20);
+    }
+
+    @Test
     public void test_Simple_ManifestFromHand() {
         // {T}: Manifest a card from your hand.
         addCard(Zone.BATTLEFIELD, playerA, "Scroll of Fate", 1);
