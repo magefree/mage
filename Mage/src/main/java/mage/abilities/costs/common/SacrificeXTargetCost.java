@@ -55,7 +55,9 @@ public class SacrificeXTargetCost extends VariableCostImpl implements SacrificeC
             return -1;
         }
         int canSacAmount = 0;
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllerId, game)) {
+        // with the source: "other creatures" (AnotherPredicate) must not count the source itself,
+        // or X could be announced as 1 for a source that has nothing else to sacrifice
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, controllerId, source, game)) {
             if (controller.canPaySacrificeCost(permanent, source, controllerId, game)) {
                 canSacAmount++;
             }
