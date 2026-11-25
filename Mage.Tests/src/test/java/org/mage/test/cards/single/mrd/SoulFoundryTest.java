@@ -37,4 +37,29 @@ public class SoulFoundryTest extends CardTestPlayerBase {
         assertExileCount("Bloodline Keeper", 1);
         assertPermanentCount(playerA, "Bloodline Keeper", 1);
     }
+
+    /**
+     * With nothing imprinted, "X is the mana value of that card" has no card to
+     * read, so X is 0 (CR 107.3c). The ability is still activatable for {0},
+     * taps as part of its cost, and its effect creates no token (CR 609.3).
+     */
+    @Test
+    public void testNothingImprintedActivatesForZero() {
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.HAND, playerA, "Soul Foundry"); // {4}
+        addCard(Zone.HAND, playerA, "Bloodline Keeper");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soul Foundry");
+        setChoice(playerA, false); // decline the optional imprint
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{X}, {T}: Create a token");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Soul Foundry", 1);
+        assertTapped("Soul Foundry", true);
+        assertHandCount(playerA, "Bloodline Keeper", 1);
+        assertPermanentCount(playerA, "Bloodline Keeper", 0);
+    }
 }

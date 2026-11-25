@@ -20,15 +20,19 @@ public enum ImprintedManaValueXCostAdjuster implements CostAdjuster {
 
     @Override
     public void prepareX(Ability ability, Game game) {
-        int manaValue = Integer.MAX_VALUE;
+        // CR 107.3c: X is defined by the ability's text. With no imprinted card
+        // (nothing was exiled, or the card is gone) there is no card whose mana
+        // value the text can read, so X is 0; the ability is still activatable
+        // (CR 609.3, the effect does as much as it can) and creates no token.
+        int manaValue = 0;
 
         Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
         if (sourcePermanent != null
                 && sourcePermanent.getImprinted() != null
                 && !sourcePermanent.getImprinted().isEmpty()) {
-            Card imprintedInstant = game.getCard(sourcePermanent.getImprinted().get(0));
-            if (imprintedInstant != null) {
-                manaValue = imprintedInstant.getManaValue();
+            Card imprintedCard = game.getCard(sourcePermanent.getImprinted().get(0));
+            if (imprintedCard != null) {
+                manaValue = imprintedCard.getManaValue();
             }
         }
 
