@@ -36,7 +36,7 @@ public class PermanentsEnterBattlefieldTappedEffect extends ReplacementEffectImp
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
         if (target != null) {
-            target.tap(source, game);
+            target.setTapped(true);
         }
         return false;
     }
