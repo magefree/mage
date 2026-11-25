@@ -11,6 +11,7 @@ import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Polygon;
+import java.awt.RadialGradientPaint;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.Path2D;
@@ -77,94 +78,105 @@ public class FutureCardRenderer extends ModernCardRenderer {
         Paint textboxPaint = getTextboxPaint(frameColors, cardView.getCardTypes(), cardWidth,
                 lessOpaqueRulesTextBox);
 
+        Color railColor = frameColors.getColorCount() == 1 ? getBorderColor(frameColors) : boxColor;
+        Color barColor = new Color((railColor.getRed() + boxColor.getRed()) / 2,
+                (railColor.getGreen() + boxColor.getGreen()) / 2,
+                (railColor.getBlue() + boxColor.getBlue()) / 2);
+
+        int left = totalContentInset;
+        int right = cardWidth - left;
         int bottom = cardHeight - borderWidth * 3;
         int rulesY = typeLineY + boxHeight;
         int rulesHeight = Math.max(0, bottom - rulesY);
+        int panelInset = borderWidth / 2;
+        int panelLeft = left + panelInset;
+        int panelRight = right - panelInset;
+        int nameLeft = left + boxHeight * 2 / 3;
 
-        g.setPaint(borderPaint);
-        g.drawRect(totalContentInset, totalContentInset,
-                contentWidth - 1, bottom - totalContentInset - 1);
-        g.setPaint(textboxPaint);
-        g.fillRect(totalContentInset + 1, rulesY,
-                contentWidth - 2, rulesHeight);
+        Path2D.Float rulesBox = new Path2D.Float();
+        rulesBox.moveTo(panelLeft, rulesY);
+        rulesBox.lineTo(panelRight, rulesY);
+        rulesBox.quadTo(right + borderWidth, rulesY + rulesHeight / 2f, panelRight, bottom);
+        rulesBox.lineTo(panelLeft, bottom);
+        rulesBox.quadTo(left - borderWidth, rulesY + rulesHeight / 2f, panelLeft, rulesY);
+        rulesBox.closePath();
+        drawInsetPanel(g, rulesBox, textboxPaint);
 
-        g.setPaint(borderPaint);
-        g.setStroke(new BasicStroke(Math.max(1f, borderWidth * 0.55f)));
-        g.draw(createArtWindow());
-        g.setStroke(new BasicStroke(1));
+        // The left edge of the name bar continues into the outer bevel of the mana rail.
+        Path2D.Float nameCurve = new Path2D.Float();
+        nameCurve.moveTo(nameLeft, artY);
+        nameCurve.quadTo(nameLeft + boxHeight / 2f, left, nameLeft + boxHeight * 1.5f, left);
+        drawFutureRail(g, railColor, boxColor, borderPaint, nameLeft, nameCurve);
 
-        drawFutureRail(g, borderPaint, boxColor);
+        Path2D.Float nameBar = new Path2D.Float(nameCurve);
+        nameBar.lineTo(right - borderWidth, left);
+        nameBar.quadTo(right, left, right, left + borderWidth);
+        nameBar.lineTo(right, artY);
+        nameBar.closePath();
+        drawInsetPanel(g, nameBar, getBarPaint(barColor, left));
 
-        int medallionSize = Math.max(10, boxHeight);
-        int nameX = totalContentInset + medallionSize / 2;
-        CardRendererUtils.drawRoundedBox(g,
-                nameX, totalContentInset,
-                cardWidth - borderWidth - nameX, boxHeight,
-                contentInset, borderPaint, boxColor);
-        CardRendererUtils.drawRoundedBox(g,
-                borderWidth, typeLineY,
-                cardWidth - 2 * borderWidth, boxHeight,
-                contentInset, borderPaint, boxColor);
+        Path2D.Float typeBar = new Path2D.Float();
+        typeBar.moveTo(left, typeLineY);
+        typeBar.lineTo(right, typeLineY);
+        typeBar.lineTo(panelRight, rulesY);
+        typeBar.lineTo(panelLeft, rulesY);
+        typeBar.closePath();
+        drawInsetPanel(g, typeBar, getBarPaint(barColor, typeLineY));
 
+        int nameTextX = nameLeft + boxHeight / 2;
         drawNameLine(g, attribs, cardView.getDisplayName(), "",
-                nameX + medallionSize / 2, totalContentInset,
-                cardWidth - totalContentInset - nameX - medallionSize / 2, boxHeight);
+                nameTextX, left, right - 1 - nameTextX, boxHeight);
         drawTypeLine(g, attribs, getCardTypeLine(),
-                totalContentInset, typeLineY, contentWidth, boxHeight, true);
-        drawTypeMedallion(g, boxColor, borderPaint, medallionSize);
-
-        g.setColor(RAIL_SHADOW);
-        g.fillRect(totalContentInset + 1, rulesY, contentWidth - 2, 1);
-
+                panelLeft + 2, typeLineY, panelRight - panelLeft - 4, boxHeight, true);
+        drawTypeMedallion(g, boxColor, borderPaint, Math.max(10, boxHeight));
         drawRulesText(g, textboxKeywords, textboxRules,
-                totalContentInset + 3, rulesY + 3,
-                contentWidth - 6, Math.max(0, rulesHeight - 5), false);
+                panelLeft + 2, rulesY + 3,
+                panelRight - panelLeft - 4, Math.max(0, rulesHeight - 5), false);
         drawBottomRight(g, attribs, borderPaint, boxColor);
     }
 
-    private void drawFutureRail(Graphics2D g, Paint borderPaint, Color boxColor) {
-        int left = totalContentInset;
-        int top = artY;
-        int bottom = typeLineY;
+    private Paint getBarPaint(Color color, int top) {
+        return new GradientPaint(0, top, color.darker(), 0, top + boxHeight / 3f, color);
+    }
 
-        Path2D.Float rail = new Path2D.Float();
-        rail.moveTo(left, top);
-        rail.lineTo(getManaCurveTopX(), top);
-        appendManaCurve(rail);
-        rail.lineTo(left, bottom);
-        rail.closePath();
-        g.setPaint(borderPaint);
-        g.fill(rail);
-        g.setColor(RAIL_SHADOW);
-        g.draw(rail);
-
-        int inset = Math.max(1, borderWidth / 2);
-        Path2D.Float coloredSweep = new Path2D.Float();
-        coloredSweep.moveTo(left + inset, top + inset);
-        coloredSweep.lineTo(getManaCurveTopX() - inset, top + inset);
-        coloredSweep.curveTo(
-                getManaCurveControl1X() - inset, top + artHeight * 0.17f,
-                getManaCurveControl2X() - inset, top + artHeight * 0.76f,
-                getManaCurveBottomX() - inset, bottom - inset);
-        coloredSweep.lineTo(left + inset, bottom - inset);
-        coloredSweep.closePath();
-        g.setColor(new Color(boxColor.getRed(), boxColor.getGreen(), boxColor.getBlue(), 205));
-        g.fill(coloredSweep);
+    private void drawInsetPanel(Graphics2D g, Shape panel, Paint fill) {
+        int bevel = Math.max(1, borderWidth / 4);
+        g.setStroke(new BasicStroke(bevel));
+        g.translate(0, bevel);
         g.setColor(INNER_HIGHLIGHT);
-        g.draw(coloredSweep);
-
-        // A second highlight along the inside edge gives the characteristic
-        // layered, metallic crescent visible on futureshifted frames.
-        Path2D.Float innerHighlight = new Path2D.Float();
-        innerHighlight.moveTo(getManaCurveTopX() - inset * 2, top + inset);
-        innerHighlight.curveTo(
-                getManaCurveControl1X() - inset * 2, top + artHeight * 0.17f,
-                getManaCurveControl2X() - inset * 2, top + artHeight * 0.76f,
-                getManaCurveBottomX() - inset * 2, bottom - inset);
-        g.setStroke(new BasicStroke(Math.max(1f, borderWidth * 0.35f)));
-        g.draw(innerHighlight);
+        g.draw(panel);
+        g.translate(0, -bevel);
+        g.setPaint(fill);
+        g.fill(panel);
+        g.setColor(RAIL_SHADOW);
+        g.draw(panel);
         g.setStroke(new BasicStroke(1));
-        drawFutureManaCost(g, boxColor, borderPaint, coloredSweep);
+    }
+
+    private void drawFutureRail(Graphics2D g, Color railColor, Color boxColor, Paint borderPaint, int nameLeft, Path2D nameCurve) {
+        Path2D.Float outerEdge = new Path2D.Float();
+        outerEdge.moveTo(totalContentInset, typeLineY);
+        outerEdge.curveTo(borderWidth, artY + artHeight * 0.76f,
+                borderWidth / 2f, artY + artHeight * 0.30f,
+                nameLeft, artY);
+        outerEdge.append(nameCurve, true);
+
+        Path2D.Float rail = new Path2D.Float(outerEdge);
+        rail.lineTo(getManaCurveTopX(), artY);
+        appendManaCurve(rail);
+        rail.closePath();
+        g.setPaint(new GradientPaint(borderWidth, artY, railColor, railRight + manaRailWidth, artY, boxColor));
+        g.fill(rail);
+
+        // Bevel only the outside. The art itself defines the edge beside the mana sockets.
+        g.setStroke(new BasicStroke(Math.max(2f, borderWidth * 0.8f)));
+        g.setPaint(borderPaint);
+        g.draw(outerEdge);
+        g.setStroke(new BasicStroke(Math.max(1f, borderWidth * 0.28f)));
+        g.setColor(INNER_HIGHLIGHT);
+        g.draw(outerEdge);
+        g.setStroke(new BasicStroke(1));
+        drawFutureManaCost(g, railColor, boxColor, rail);
     }
 
     private Shape createArtWindow() {
@@ -281,7 +293,19 @@ public class FutureCardRenderer extends ModernCardRenderer {
         g.setStroke(new BasicStroke(1));
     }
 
-    private void drawFutureManaCost(Graphics2D g, Color boxColor, Paint borderPaint, Shape rail) {
+    private void drawManaSocket(Graphics2D g, int x, int y, int diameter, Color railColor, Color boxColor) {
+        int bevel = Math.max(1, diameter / 10);
+        // Light strikes the raised lip from the upper left and the recessed face from the lower right.
+        g.setColor(RAIL_SHADOW);
+        g.fillOval(x, y, diameter + 2 * bevel, diameter + 2 * bevel);
+        g.setPaint(new GradientPaint(x, y, Color.WHITE, x + diameter, y + diameter, railColor.darker()));
+        g.fillOval(x - bevel, y - bevel, diameter + 2 * bevel, diameter + 2 * bevel);
+        g.setPaint(new RadialGradientPaint(x + diameter * 0.55f, y + diameter * 0.77f, diameter * 0.8f,
+                new float[]{0f, 0.65f, 1f}, new Color[]{boxColor, railColor, railColor.darker().darker()}));
+        g.fillOval(x, y, diameter, diameter);
+    }
+
+    private void drawFutureManaCost(Graphics2D g, Color railColor, Color boxColor, Shape rail) {
         if (cardView.isAbility() || cardView.isFaceDown()) {
             return;
         }
@@ -306,19 +330,12 @@ public class FutureCardRenderer extends ModernCardRenderer {
                 // The art covers the inner half of each unused socket.
                 g.clip(rail);
             }
+            drawManaSocket(g, x, y, diameter, railColor, boxColor);
             if (i >= symbols.length) {
-                g.setColor(INNER_HIGHLIGHT);
-                g.fillOval(x - 1, y - 1, diameter + 2, diameter + 2);
-                g.setPaint(new GradientPaint(x, y, boxColor.darker(), x, y + diameter, boxColor));
-                g.fillOval(x, y, diameter, diameter);
                 continue;
             }
 
             String symbol = symbols[i];
-            g.setPaint(borderPaint);
-            g.fillOval(x - 1, y - 1, diameter + 2, diameter + 2);
-            g.setColor(boxColor);
-            g.fillOval(x, y, diameter, diameter);
             BufferedImage mana = ManaSymbols.getSizedManaSymbol(symbol, Math.max(1, diameter - 3));
             if (mana != null) {
                 int mx = x + (diameter - mana.getWidth()) / 2;
