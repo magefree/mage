@@ -89,6 +89,28 @@ public class WaterbendTest extends CardTestPlayerBase {
         assertTapped("Island", true);
     }
 
+    /**
+     * CR 701.67a: the waterbend helpers pay the generic mana, so a Waterbend {X}
+     * activation with X = 1 is playable from an empty pool by tapping Katara
+     * herself. CR 302.6 restricts summoning sickness to {T} costs, not to
+     * waterbend's tap.
+     */
+    @Test
+    public void testXFromEmptyPool() {
+        addCard(Zone.BATTLEFIELD, playerA, katara);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "waterbend");
+        setChoice(playerA, "X=1");
+        setChoice(playerA, katara);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPowerToughness(playerA, katara, 1, 1);
+        assertTapped(katara, true);
+    }
+
     private static final String spirit = "Benevolent River Spirit";
 
     @Test
