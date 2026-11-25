@@ -15,6 +15,7 @@ import java.awt.RadialGradientPaint;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.Path2D;
+import java.awt.geom.QuadCurve2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
@@ -34,8 +35,7 @@ public class FutureCardRenderer extends ModernCardRenderer {
     private static final Color RAIL_SHADOW = new Color(0, 0, 0, 150);
     private static final Color INNER_HIGHLIGHT = new Color(255, 255, 255, 95);
 
-    private int manaRailWidth;
-    private int railRight;
+    private final QuadCurve2D.Float manaCurve = new QuadCurve2D.Float();
     private int artY;
     private int artHeight;
 
@@ -46,11 +46,12 @@ public class FutureCardRenderer extends ModernCardRenderer {
     @Override
     protected void layout(int cardWidth, int cardHeight) {
         super.layout(cardWidth, cardHeight);
-        manaRailWidth = Math.max(boxHeight, (int) (cardWidth * 0.135f));
         typeLineY = (int) (TYPE_LINE_Y_FRAC_FUTURE * cardHeight);
-        railRight = totalContentInset + manaRailWidth;
         artY = totalContentInset + boxHeight;
         artHeight = typeLineY - artY;
+        // A control point halfway down gives each socket the same vertical spacing on the curve.
+        manaCurve.setCurve(cardWidth * 0.21f, artY, -cardWidth * 0.045f, artY + artHeight / 2f,
+                cardWidth * 0.235f, typeLineY);
     }
 
     @Override
@@ -159,17 +160,16 @@ public class FutureCardRenderer extends ModernCardRenderer {
 
     private void drawFutureRail(Graphics2D g, Color railColor, Color boxColor, Paint borderPaint, int nameLeft, Path2D nameCurve) {
         Path2D.Float outerEdge = new Path2D.Float();
-        outerEdge.moveTo(totalContentInset, typeLineY);
-        outerEdge.curveTo(borderWidth, artY + artHeight * 0.76f,
-                borderWidth / 2f, artY + artHeight * 0.30f,
+        outerEdge.moveTo(cardWidth * 0.10f, typeLineY);
+        outerEdge.curveTo(cardWidth * 0.05f, artY + artHeight * 0.76f,
+                cardWidth * 0.035f, artY + artHeight * 0.30f,
                 nameLeft, artY);
         outerEdge.append(nameCurve, true);
 
         Path2D.Float rail = new Path2D.Float(outerEdge);
-        rail.lineTo(getManaCurveTopX(), artY);
-        appendManaCurve(rail);
+        rail.append(manaCurve, true);
         rail.closePath();
-        g.setPaint(new GradientPaint(borderWidth, artY, railColor, railRight + manaRailWidth, artY, boxColor));
+        g.setPaint(new GradientPaint(borderWidth, artY, railColor, cardWidth / 3f, artY, boxColor));
         g.fill(rail);
 
         // Bevel only the outside. The art itself defines the edge beside the mana sockets.
@@ -185,47 +185,16 @@ public class FutureCardRenderer extends ModernCardRenderer {
 
     private Shape createArtWindow() {
         Path2D.Float path = new Path2D.Float();
-        path.moveTo(getManaCurveTopX(), artY);
-        path.lineTo(cardWidth - totalContentInset, artY);
+        path.append(manaCurve, false);
         path.lineTo(cardWidth - totalContentInset, typeLineY);
-        path.lineTo(getManaCurveBottomX(), typeLineY);
-        path.curveTo(
-                getManaCurveControl2X(), artY + artHeight * 0.76f,
-                getManaCurveControl1X(), artY + artHeight * 0.17f,
-                getManaCurveTopX(), artY);
+        path.lineTo(cardWidth - totalContentInset, artY);
         path.closePath();
         return path;
     }
 
-    private void appendManaCurve(Path2D.Float path) {
-        path.curveTo(
-                getManaCurveControl1X(), artY + artHeight * 0.17f,
-                getManaCurveControl2X(), artY + artHeight * 0.76f,
-                getManaCurveBottomX(), typeLineY);
-    }
-
-    private int getManaCurveTopX() {
-        return railRight + Math.max(2, boxHeight / 2);
-    }
-
-    private int getManaCurveControl1X() {
-        return totalContentInset + Math.max(2, manaRailWidth / 4);
-    }
-
-    private int getManaCurveControl2X() {
-        return totalContentInset + Math.max(2, manaRailWidth / 3);
-    }
-
-    private int getManaCurveBottomX() {
-        return railRight;
-    }
-
     private float getManaCurveX(float t) {
         float inverse = 1f - t;
-        return inverse * inverse * inverse * getManaCurveTopX()
-                + 3f * inverse * inverse * t * getManaCurveControl1X()
-                + 3f * inverse * t * t * getManaCurveControl2X()
-                + t * t * t * getManaCurveBottomX();
+        return inverse * inverse * manaCurve.x1 + 2f * inverse * t * manaCurve.ctrlx + t * t * manaCurve.x2;
     }
 
     private void drawTypeMedallion(Graphics2D g, Color boxColor, Paint borderPaint, int size) {
@@ -318,8 +287,9 @@ public class FutureCardRenderer extends ModernCardRenderer {
         String[] symbols = cost.isEmpty() ? new String[0] : cost.split("\\s+");
         int slots = Math.max(MANA_SLOTS, symbols.length);
         float step = (float) artHeight / slots;
-        int diameter = Math.min(Math.min(boxHeight, manaRailWidth - 3), (int) step - 2);
-        if (diameter < 1) {
+        // Long costs need smaller sockets to leave room for the bevels.
+        float maxDiameter = Math.min(cardWidth * 0.09f, step * 0.8f);
+        if (maxDiameter < 1) {
             return;
         }
 
@@ -328,7 +298,9 @@ public class FutureCardRenderer extends ModernCardRenderer {
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         for (int i = 0; i < slots; i++) {
             float progress = (i + 0.5f) / slots;
-            int x = Math.round(getManaCurveX(progress) - diameter * 0.55f);
+            float distanceFromMiddle = Math.abs(2f * progress - 1f);
+            int diameter = Math.max(1, Math.round(maxDiameter * (0.72f + 0.28f * distanceFromMiddle)));
+            int x = Math.round(getManaCurveX(progress) - diameter / 2f);
             int y = artY + Math.round(artHeight * progress - diameter / 2f);
             if (i == symbols.length) {
                 // The art covers the inner half of each unused socket.
