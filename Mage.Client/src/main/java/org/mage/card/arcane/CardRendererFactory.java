@@ -1,5 +1,6 @@
 package org.mage.card.arcane;
 
+import mage.cards.ArtRect;
 import mage.cards.FrameStyle;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.CardRenderMode;
@@ -21,6 +22,8 @@ public class CardRendererFactory {
         int renderMode = renderModeOverride == -1 ? PreferencesDialog.getRenderMode() : renderModeOverride;
         if (card.isSplitCard()) {
             return new ModernSplitCardRenderer(card);
+        } else if (card.getArtRect() == ArtRect.FULL_LENGTH_LEFT || card.getArtRect() == ArtRect.FULL_LENGTH_RIGHT) {
+            return new ModernCardRenderer(card);
         } else if (shouldRenderFuture(card, renderMode)) {
             return new FutureCardRenderer(card);
         } else if (shouldRenderRetro(card, renderMode)) {

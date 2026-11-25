@@ -651,10 +651,7 @@ public class CardView extends SimpleCardView {
                 artRect = ArtRect.FULL_LENGTH_LEFT;
             } else if (card.getSubtype(game).contains(SubType.SAGA)) {
                 artRect = ArtRect.FULL_LENGTH_RIGHT;
-            }
-
-            // Retro border cards need different art cutout
-            if (card.getFrameStyle() == FrameStyle.RETRO) {
+            } else if (card.getFrameStyle() == FrameStyle.RETRO) {
                 this.artRect = ArtRect.RETRO;
             }
 
