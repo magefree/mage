@@ -34,6 +34,8 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Anguished Unmaking", 472, Rarity.RARE, mage.cards.a.AnguishedUnmaking.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Sanctum", 513, Rarity.UNCOMMON, mage.cards.a.ArcaneSanctum.class));
         cards.add(new SetCardInfo("Arcane Signet", 485, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
+        cards.add(new SetCardInfo("Assimilation Assessor", 270, Rarity.RARE, mage.cards.a.AssimilationAssessor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Assimilation Assessor", 56, Rarity.RARE, mage.cards.a.AssimilationAssessor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Astral Cornucopia", 338, Rarity.RARE, mage.cards.a.AstralCornucopia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Astral Cornucopia", 486, Rarity.RARE, mage.cards.a.AstralCornucopia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Augur of Autumn", 299, Rarity.RARE, mage.cards.a.AugurOfAutumn.class, NON_FULL_USE_VARIOUS));
