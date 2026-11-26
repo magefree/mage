@@ -189,6 +189,8 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Geordi La Forge, Innovator", 256, Rarity.RARE, mage.cards.g.GeordiLaForgeInnovator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Geordi La Forge, Innovator", 42, Rarity.RARE, mage.cards.g.GeordiLaForgeInnovator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Giant Space Amoeba", 43, Rarity.RARE, mage.cards.g.GiantSpaceAmoeba.class));
+        cards.add(new SetCardInfo("Gift of Perfection", 258, Rarity.RARE, mage.cards.g.GiftOfPerfection.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gift of Perfection", 44, Rarity.RARE, mage.cards.g.GiftOfPerfection.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gin'tak Charge", 163, Rarity.COMMON, mage.cards.g.GintakCharge.class));
         cards.add(new SetCardInfo("Glacial Fortress", 385, Rarity.RARE, mage.cards.g.GlacialFortress.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glacial Fortress", 535, Rarity.RARE, mage.cards.g.GlacialFortress.class, NON_FULL_USE_VARIOUS));
