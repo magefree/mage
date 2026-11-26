@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.counters.Counter;
-import mage.counters.CounterType;
 import mage.filter.common.FilterPermanentOrPlayer;
 import mage.filter.common.FilterPermanentOrPlayerWithCounter;
 import mage.game.Game;
@@ -65,8 +64,7 @@ public class ProliferateEffect extends OneShotEffect {
                 Permanent permanent = game.getPermanent(chosen);
                 if (permanent != null) {
                     for (Counter counter : permanent.getCounters(game).values()) {
-                        Counter newCounter = CounterType.findByName(counter.getName()).createInstance();
-                        permanent.addCounters(newCounter, source.getControllerId(), source, game);
+                        permanent.addCounters(createOneCounterOfSameKind(counter), source.getControllerId(), source, game);
                     }
                     continue;
                 }
@@ -75,9 +73,7 @@ public class ProliferateEffect extends OneShotEffect {
                     continue;
                 }
                 for (Counter counter : player.getCountersAsCopy().values()) {
-                    // TODO: this does not work with ability counters that are not explicitly in CounterType. Like the Hexproof from XXX counters from Indominus Rex, Alpha
-                    Counter newCounter = CounterType.findByName(counter.getName()).createInstance();
-                    player.addCounters(newCounter, source.getControllerId(), source, game);
+                    player.addCounters(createOneCounterOfSameKind(counter), source.getControllerId(), source, game);
                 }
             }
             game.fireEvent(GameEvent.getEvent(
@@ -86,6 +82,16 @@ public class ProliferateEffect extends OneShotEffect {
             ));
         }
         return true;
+    }
+
+    /**
+     * Copy instead CounterType lookup: ability counters can have a kind without CounterType
+     * (example: hexproof from planeswalkers counter from Indominus Rex, Alpha)
+     */
+    private static Counter createOneCounterOfSameKind(Counter counter) {
+        Counter newCounter = counter.copy();
+        newCounter.remove(newCounter.getCount() - 1);
+        return newCounter;
     }
 
     @Override
