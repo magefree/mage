@@ -10,6 +10,8 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.cards.Card;
+import mage.cards.DoubleFacedCardHalf;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -102,9 +104,23 @@ class PutIntoGraveFromAnywhereEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        UUID cardId = CardUtil.getMainCardId(game, source.getSourceId()); // for split cards
-        if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
-                && (event.getTargetId().equals(cardId) || event.getTargetId().equals(source.getSourceId()))) {
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.getToZone() != Zone.GRAVEYARD) {
+            return false;
+        }
+        UUID sourceId = source.getSourceId();
+        Card sourceCard = game.getCard(sourceId);
+        if (sourceCard instanceof DoubleFacedCardHalf && ((DoubleFacedCardHalf) sourceCard).isBackSide()) {
+            // DoubleFacedCardHalf puts both faces in hidden/exile zones; back-face abilities only exist on stack/battlefield.
+            Zone fromZone = zEvent.getFromZone();
+            boolean activeBackFace = (fromZone == Zone.STACK && game.getStack().getSpell(sourceId, false) != null)
+                    || (fromZone == Zone.BATTLEFIELD && game.getPermanent(sourceId) != null);
+            if (!activeBackFace) {
+                return false;
+            }
+        }
+        UUID cardId = CardUtil.getMainCardId(game, sourceId); // for split cards
+        if (zEvent.getTargetId().equals(cardId) || zEvent.getTargetId().equals(sourceId)) {
             return condition == null || condition.apply(game, source);
         }
         return false;
