@@ -434,6 +434,37 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBaseWithAIHelps {
         assertTapped(hGiant, true);
     }
 
+    // Roll back invalid block modifies combat group while iterating over it
+    // https://github.com/magefree/mage/issues/16471
+    @Test
+    public void tromokratisNotBlockedByAllMultipleBlockersAI() {
+        addCard(Zone.BATTLEFIELD, playerA, "Tromokratis");
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite");
+        addCard(Zone.BATTLEFIELD, playerB, "Hill Giant");
+        addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+
+        attack(1, playerA, "Tromokratis");
+        // Elite Vanguard doesn't block
+        block(1, playerB, "Grizzly Bears", "Tromokratis");
+        block(1, playerB, "Memnite", "Tromokratis");
+        block(1, playerB, "Hill Giant", "Tromokratis");
+        // AI rolls back invalid block
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        // all blockers removed
+        assertLife(playerB, 12);
+        assertPermanentCount(playerB, "Grizzly Bears", 1);
+        assertPermanentCount(playerB, "Memnite", 1);
+        assertPermanentCount(playerB, "Hill Giant", 1);
+        assertPermanentCount(playerB, "Elite Vanguard", 1);
+        assertTapped("Tromokratis", true);
+    }
+
     @Test
     public void underworldCerberusBlockedByOneTest() {
         /* Underworld Cerberus {3}{B}{3} 6/6
