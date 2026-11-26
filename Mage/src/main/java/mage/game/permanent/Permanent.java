@@ -254,6 +254,11 @@ public interface Permanent extends Card, Controllable {
     boolean fight(Permanent fightTarget, Ability source, Game game);
 
     /**
+     * @return the damage dealt by this permanent to fightTarget
+     */
+    int fight(Permanent fightTarget, Ability source, Game game, boolean batchTrigger);
+
+    /**
      * Resolves a fight and returns the amount of excess damage dealt to fightTarget
      */
     int fightWithExcess(Permanent fightTarget, Ability source, Game game, boolean batchTrigger);

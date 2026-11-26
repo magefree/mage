@@ -11,10 +11,6 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * CR 701.14a: when two creatures fight each other, each deals damage equal to its power to the other.
  * CR 702.15b: damage dealt by a source with lifelink causes its controller to gain that much life.
  * So a lifelink fighter gains its whole power, not only the part that is lethal to the other creature.
- * <p>
- * The excess-damage helper (Permanent.damageWithExcess) deals only min(lethal, damage) because its
- * "excess damage is dealt to that creature's controller instead" callers (Flame Spill and the like)
- * must not deal the excess twice; a fight must not borrow that truncation.
  */
 public class PlowThroughTest extends CardTestPlayerBase {
 
@@ -70,12 +66,6 @@ public class PlowThroughTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
     }
 
-    /**
-     * Control, must pass before and after the fight fix: Flame Spill's "excess damage is dealt to that
-     * creature's controller instead" still sends only the excess to the controller, and the creature
-     * is still dealt only its lethal part. Boros Reckoner reflects the damage it is dealt, so a
-     * damage-dealt count of 4 instead of 3 would show.
-     */
     @Test
     public void testFlameSpillExcessInsteadStillTruncated() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
@@ -94,7 +84,6 @@ public class PlowThroughTest extends CardTestPlayerBase {
         assertLife(playerA, 20 - 3);
     }
 
-    /** Control: the plain Flame Spill case from ExcessDamageTest, a 2/2 takes 2 and its controller 2. */
     @Test
     public void testFlameSpillOnBears() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
