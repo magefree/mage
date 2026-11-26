@@ -2335,7 +2335,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FIGHTED_PERMANENT, fightTarget.getId(), source, source.getControllerId()));
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FIGHTED_PERMANENT, getId(), source, source.getControllerId()));
         damage(fightTarget.getPower().getValue(), fightTarget.getId(), source, game);
-        int excess = fightTarget.damageWithExcess(getPower().getValue(), getId(), source, game);
+        // CR 701.14a: each creature deals damage equal to its whole power, so lifelink and damage-dealt
+        // effects count all of it. damageWithExcess would deal only min(lethal, power) because its other
+        // callers send the excess elsewhere instead; a fight only measures the excess, so deal the full
+        // amount here and compute the excess from the lethal damage taken before the damage.
+        int fightPower = getPower().getValue();
+        int excess = Math.max(CardUtil.overflowDec(fightPower, fightTarget.getLethalDamage(getId(), game)), 0);
+        fightTarget.damage(fightPower, getId(), source, game);
 
         if (batchTrigger) {
             Set<MageObjectReference> morSet = new HashSet<>();
