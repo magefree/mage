@@ -1,7 +1,9 @@
 package org.mage.test.cards.mana;
 
+import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
@@ -81,5 +83,20 @@ public class InfiniteManaUsagesTest extends CardTestPlayerBaseWithAIHelps {
         execute();
 
         assertPermanentCount(playerA, "Grizzly Bears", 1);
+    }
+
+    @Test
+    public void test_ThreeTreeMascot_CannotPayForItself() {
+        addCard(Zone.BATTLEFIELD, playerA, "Three Tree Mascot");
+        addCard(Zone.BATTLEFIELD, playerA, "Marvin, Murderous Mimic");
+        addCard(Zone.HAND, playerA, "Nettle Guard");
+
+        runCode("Try to cast Nettle Guard", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Card guard = player.getHand().getCards(game).iterator().next();
+            Assert.assertFalse(player.activateAbility(guard.getSpellAbility(), game));
+        });
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
     }
 }
