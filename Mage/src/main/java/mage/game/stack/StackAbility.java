@@ -669,6 +669,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public Permanent getSourcePermanentIfItStillExists(Game game, boolean includePhasedOut) {
+        return this.ability.getSourcePermanentIfItStillExists(game, includePhasedOut);
+    }
+
+    @Override
     public void setSourceObjectZoneChangeCounter(int zoneChangeCounter) {
         ability.setSourceObjectZoneChangeCounter(zoneChangeCounter);
     }

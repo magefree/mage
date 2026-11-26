@@ -1733,6 +1733,15 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public MageObject getSourceObjectIfItStillExists(Game game) {
+        MageObject mageObject = getSourceObjectIfZccNotChanged(game);
+        if (mageObject instanceof Permanent && !((Permanent) mageObject).isPhasedIn()) {
+            // phased-out permanent is treated as though it doesn't exist (702.26b)
+            return null;
+        }
+        return mageObject;
+    }
+
+    private MageObject getSourceObjectIfZccNotChanged(Game game) {
         if (getStackMomentSourceZCC() == 0
                 || getStackMomentSourceZCC() == getCurrentSourceObjectZoneChangeCounter(game)) {
             // exists or lki from battlefield
@@ -1752,7 +1761,12 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public Permanent getSourcePermanentIfItStillExists(Game game) {
-        MageObject mageObject = getSourceObjectIfItStillExists(game);
+        return getSourcePermanentIfItStillExists(game, false);
+    }
+
+    @Override
+    public Permanent getSourcePermanentIfItStillExists(Game game, boolean includePhasedOut) {
+        MageObject mageObject = includePhasedOut ? getSourceObjectIfZccNotChanged(game) : getSourceObjectIfItStillExists(game);
         if (mageObject instanceof Permanent) {
             return (Permanent) mageObject;
         }
@@ -1761,7 +1775,7 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public Permanent getSourcePermanentOrLKI(Game game) {
-        Permanent permanent = getSourcePermanentIfItStillExists(game);
+        Permanent permanent = getSourcePermanentIfItStillExists(game, true);
         if (permanent == null) {
             permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, getStackMomentSourceZCC());
         } else if (!permanent.isPhasedIn()) {

@@ -157,7 +157,7 @@ class GideonBattleForgedEffect extends RequirementEffect {
                 || !game.isActivePlayer(permanent.getControllerId())) {
             return false;
         }
-        Permanent planeswalker = source.getSourcePermanentIfItStillExists(game);
+        Permanent planeswalker = source.getSourcePermanentIfItStillExists(game, true);
         if (planeswalker == null) {
             discard();
             return false;
