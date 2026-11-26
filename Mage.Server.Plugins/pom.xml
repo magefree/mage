@@ -23,6 +23,7 @@
         <module>Mage.Game.FreeForAll</module>
         <module>Mage.Game.MomirDuel</module>
         <module>Mage.Game.MomirGame</module>
+        <module>Mage.Game.MentalMagic</module>
         <module>Mage.Game.TinyLeadersDuel</module>
         <module>Mage.Game.CanadianHighlanderDuel</module>
         <module>Mage.Game.PennyDreadfulCommanderFreeForAll</module>
