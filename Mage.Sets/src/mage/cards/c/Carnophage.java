@@ -25,7 +25,7 @@ public final class Carnophage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, tap Carnophage unless you pay 1 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(1))));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(1), false)));
     }
 
     private Carnophage(final Carnophage card) {

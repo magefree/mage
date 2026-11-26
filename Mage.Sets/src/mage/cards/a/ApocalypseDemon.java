@@ -30,7 +30,7 @@ public final class ApocalypseDemon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CARDS))));
 
         // At the beginning of your upkeep, tap Apocalypse Demon unless you sacrifice another creature.
-        TapSourceUnlessPaysEffect tapEffect = new TapSourceUnlessPaysEffect(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
+        TapSourceUnlessPaysEffect tapEffect = new TapSourceUnlessPaysEffect(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE), false);
         tapEffect.setText("tap {this} unless you sacrifice another creature.");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(tapEffect));
     }
