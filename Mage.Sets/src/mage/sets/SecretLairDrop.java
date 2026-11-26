@@ -2002,6 +2002,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Shadowborn Apostle", 688, Rarity.RARE, mage.cards.s.ShadowbornApostle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shadowheart, Dark Justiciar", 2483, Rarity.RARE, mage.cards.s.ShadowheartDarkJusticiar.class));
         cards.add(new SetCardInfo("Shadowspear", 1505, Rarity.RARE, mage.cards.s.Shadowspear.class));
+        cards.add(new SetCardInfo("Shai-Hulud", 2920, Rarity.MYTHIC, mage.cards.s.ShaiHulud.class));
         cards.add(new SetCardInfo("Shalai, Voice of Plenty", 244, Rarity.RARE, mage.cards.s.ShalaiVoiceOfPlenty.class));
         cards.add(new SetCardInfo("Shaman of the Pack", 789, Rarity.RARE, mage.cards.s.ShamanOfThePack.class));
         cards.add(new SetCardInfo("Shared Roots", 2391, Rarity.RARE, mage.cards.s.SharedRoots.class));
