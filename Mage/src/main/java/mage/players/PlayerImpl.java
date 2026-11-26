@@ -3845,7 +3845,12 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         String costToPay = ability.getManaCostsToPay().getText();
         if (costToPay.isEmpty()) {
-            return;
+            if (ability.getManaCosts().isEmpty()) {
+                // nothing to pay at all, e.g. a land or a spell with an unpayable cost
+                return;
+            }
+            // cost reduced down to nothing, so it must be visible as free
+            costToPay = "{0}";
         }
         List<String> costs = costsOutput.computeIfAbsent(ability.getSourceId(), x -> new ArrayList<>());
         if (!costs.contains(costToPay)) {
