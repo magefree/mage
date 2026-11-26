@@ -10,6 +10,7 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
@@ -25,6 +26,7 @@ public class DrawNthCardTriggeredAbility extends TriggeredAbilityImpl {
     );
     private final TargetController targetController;
     private final int cardNumber;
+    private final boolean setTargetPointer;
 
     public DrawNthCardTriggeredAbility(Effect effect) {
         this(effect, false);
@@ -42,10 +44,19 @@ public class DrawNthCardTriggeredAbility extends TriggeredAbilityImpl {
         this(Zone.BATTLEFIELD, effect, optional, targetController, cardNumber);
     }
 
+    public DrawNthCardTriggeredAbility(Effect effect, boolean optional, TargetController targetController, int cardNumber, boolean setTargetPointer) {
+        this(Zone.BATTLEFIELD, effect, optional, targetController, cardNumber, setTargetPointer);
+    }
+
     public DrawNthCardTriggeredAbility(Zone zone, Effect effect, boolean optional, TargetController targetController, int cardNumber) {
+        this(zone, effect, optional, targetController, cardNumber, false);
+    }
+
+    public DrawNthCardTriggeredAbility(Zone zone, Effect effect, boolean optional, TargetController targetController, int cardNumber, boolean setTargetPointer) {
         super(zone, effect, optional);
         this.targetController = targetController;
         this.cardNumber = cardNumber;
+        this.setTargetPointer = setTargetPointer;
         if (targetController == TargetController.YOU) {
             this.addHint(hint);
         }
@@ -57,6 +68,7 @@ public class DrawNthCardTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
         this.targetController = ability.targetController;
         this.cardNumber = ability.cardNumber;
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
@@ -88,7 +100,13 @@ public class DrawNthCardTriggeredAbility extends TriggeredAbilityImpl {
             default:
                 throw new IllegalArgumentException("TargetController " + targetController + " not supported");
         }
-        return DrawNthCardWatcher.checkEvent(event.getPlayerId(), event.getId(), game) + 1 == cardNumber;
+        if (DrawNthCardWatcher.checkEvent(event.getPlayerId(), event.getId(), game) + 1 != cardNumber) {
+            return false;
+        }
+        if (setTargetPointer) {
+            getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+        }
+        return true;
     }
 
     public String generateTriggerPhrase() {
