@@ -64,9 +64,8 @@ class HellfireEffect extends OneShotEffect {
                     destroyedCreature++;
                 }
             }
-            if (destroyedCreature > 0) {
-                new DamageControllerEffect(destroyedCreature + 3).apply(game, source);
-            }
+            // X may be 0 (nothing died), it still deals 3 damage (CR 608.2c)
+            new DamageControllerEffect(destroyedCreature + 3).apply(game, source);
             return true;
         }
         return false;
