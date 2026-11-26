@@ -204,4 +204,24 @@ public class OverloadTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, 3);
         assertGraveyardCount(playerB, 1);
     }
+
+    // https://github.com/magefree/mage/issues/16120
+    @Test
+    public void testMultipleEffects() {
+        addCard(Zone.BATTLEFIELD, playerA, "Sol Ring");
+        addCard(Zone.BATTLEFIELD, playerA, "Arcane Signet");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        addCard(Zone.HAND, playerA, "Rise and Shine");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rise and Shine with overload");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Sol Ring", 1);
+        assertPermanentCount(playerA, "Arcane Signet", 1);
+        assertPowerToughness(playerA, "Sol Ring", 4, 4);
+        assertPowerToughness(playerA, "Arcane Signet", 4, 4);
+    }
 }
