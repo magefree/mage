@@ -106,7 +106,6 @@ Nightbound|new|
 Ninjutsu|manaString|
 Offspring|manaString|
 Outlast|cost|
-Paradigm|new|
 Partner|instance|
 Persist|new|
 Phasing|instance|
