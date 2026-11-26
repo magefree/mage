@@ -117,7 +117,7 @@ class BorosStrikeCaptainWatcher extends Watcher {
             return;
         }
         Optional.ofNullable(event)
-                .map(GameEvent::getTargetId)
+                .map(GameEvent::getSourceId)
                 .map(game::getPermanent)
                 .ifPresent(permanent -> map
                         .computeIfAbsent(permanent.getControllerId(), x -> new HashSet<>())
