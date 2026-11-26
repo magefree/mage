@@ -501,4 +501,153 @@ public class PlayableCostsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
     }
+
+    @Test
+    public void test_ReducedCost_FromGrantedAffinityToInstants() {
+        // Instant and sorcery spells you cast have affinity for creatures.
+        addCard(Zone.BATTLEFIELD, playerA, "Witherbloom, the Balancer", 1); // a creature itself
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears", 5); // six creatures in total
+        addCard(Zone.HAND, playerA, "Shock", 1); // {R}, nothing to reduce
+        addCard(Zone.HAND, playerA, "Cancel", 1); // {1}{U}{U}
+        addCard(Zone.HAND, playerA, "Divination", 1); // {2}{U}
+        addCard(Zone.HAND, playerA, "Grizzly Bears", 1); // {1}{G}, a creature spell
+
+        runCode("six creatures on battlefield", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Assert.assertEquals("colored only, nothing to reduce",
+                    Arrays.asList("{R}"), getCostsToPay(player, "Shock"));
+            Assert.assertEquals("generic mana must be gone",
+                    Arrays.asList("{U}{U}"), getCostsToPay(player, "Cancel"));
+            Assert.assertEquals("generic mana must be gone",
+                    Arrays.asList("{U}"), getCostsToPay(player, "Divination"));
+            Assert.assertEquals("creature spells don't get the affinity",
+                    Arrays.asList("{1}{G}"), getCostsToPay(player, "Grizzly Bears"));
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_ReducedCost_FromTransformedPermanent() {
+        // Aang, Master of Elements (back side): spells you cast cost {W}{U}{B}{R}{G} less to cast.
+        // this one converts the unused colored part into generic mana, so a cheap spell becomes free
+        addCard(Zone.BATTLEFIELD, playerA, "Aang, Master of Elements", 1);
+        addCard(Zone.HAND, playerA, "Divination", 1); // {2}{U}
+
+        // "you may transform" trigger on each upkeep
+        setChoice(playerA, "No");
+
+        runCode("colored mana reduced by the back side", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Assert.assertEquals("must show nothing left to pay",
+                    Arrays.asList("{0}"), getCostsToPay(player, "Divination"));
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_ReducedCost_SeveralReducers() {
+        // Bontu's Monument: black creature spells cost {1} less
+        // Urza's Incubator: creature spells of the chosen type cost {2} less
+        addCard(Zone.BATTLEFIELD, playerA, "Bontu's Monument", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 3);
+        addCard(Zone.HAND, playerA, "Urza's Incubator", 1); // {3}
+        addCard(Zone.HAND, playerA, "Diregraf Colossus", 1); // {2}{B}, black zombie
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Urza's Incubator");
+        setChoice(playerA, "Zombie");
+
+        runCode("both reducers applied", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, (info, player, game) -> {
+            Assert.assertEquals("reduction must stop at the colored mana",
+                    Arrays.asList("{B}"), getCostsToPay(player, "Diregraf Colossus"));
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_IncreasedCost_SeveralIncreasers() {
+        // God-Pharaoh's Statue: opponent spells cost {2} more
+        // Aura of Silence: opponent artifact and enchantment spells cost {2} more
+        addCard(Zone.BATTLEFIELD, playerB, "God-Pharaoh's Statue", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Aura of Silence", 1);
+        addCard(Zone.HAND, playerA, "Sol Ring", 1); // {1}, both apply
+        addCard(Zone.HAND, playerA, "Divination", 1); // {2}{U}, only the statue applies
+
+        runCode("both increasers applied", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Assert.assertEquals("artifact must pay both increases",
+                    Arrays.asList("{5}"), getCostsToPay(player, "Sol Ring"));
+            Assert.assertEquals("other spells must pay the statue only",
+                    Arrays.asList("{4}{U}"), getCostsToPay(player, "Divination"));
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_ReducedAndIncreasedCost_Chained() {
+        // increase from the opponent and reduction from your own permanent on the same spell
+        addCard(Zone.BATTLEFIELD, playerB, "God-Pharaoh's Statue", 1); // {2} more
+        addCard(Zone.BATTLEFIELD, playerA, "Bontu's Monument", 1); // {1} less
+        addCard(Zone.HAND, playerA, "Ravenous Chupacabra", 1); // {2}{B}{B}
+
+        runCode("increase and reduction together", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Assert.assertEquals("must show the result of both",
+                    Arrays.asList("{3}{B}{B}"), getCostsToPay(player, "Ravenous Chupacabra"));
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_Cost_WithAlternativeCostSource() {
+        // Fist of Suns offers "pay {W}{U}{B}{R}{G} rather than the mana cost", which is an option
+        // chosen when casting, so the card keeps showing what the normal cast costs
+        addCard(Zone.BATTLEFIELD, playerA, "Fist of Suns", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Bontu's Monument", 1);
+        addCard(Zone.HAND, playerA, "Diregraf Colossus", 1); // {2}{B}, black creature
+
+        runCode("fist of suns with a reduction", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Assert.assertEquals("must show the reduced normal cost",
+                    Arrays.asList("{1}{B}"), getCostsToPay(player, "Diregraf Colossus"));
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_IncreasedCost_UntilYourNextTurn() {
+        // Tax -- Until your next turn, spells your opponents cast cost {1} more to cast.
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        addCard(Zone.HAND, playerB, "Tax Collector", 1); // {1}{W}
+        addCard(Zone.HAND, playerA, "Divination", 1); // {2}{U}
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Tax Collector");
+        setModeChoice(playerB, "1"); // Tax
+
+        runCode("tax is on", 3, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Assert.assertEquals("must show the increased cost",
+                    Arrays.asList("{3}{U}"), getCostsToPay(player, "Divination"));
+        });
+
+        runCode("tax is over", 4, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Assert.assertEquals("must be back to the printed cost",
+                    Arrays.asList("{2}{U}"), getCostsToPay(player, "Divination"));
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(4, PhaseStep.END_TURN);
+        execute();
+    }
 }
