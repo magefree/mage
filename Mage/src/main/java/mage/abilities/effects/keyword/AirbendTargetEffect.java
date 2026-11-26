@@ -54,7 +54,10 @@ public class AirbendTargetEffect extends OneShotEffect {
                 .getTargetPointer()
                 .getTargets(game, source)
                 .stream()
-                .map(uuid -> Optional.ofNullable((Card) game.getPermanent(uuid)).orElseGet(() -> game.getSpell(uuid)))
+                .map(uuid -> Optional.<Card>ofNullable(game.getPermanent(uuid))
+                        .orElseGet(() -> Optional.ofNullable(game.getSpell(uuid))
+                                .map(spell -> spell.isCopy() ? spell : spell.getCard())
+                                .orElse(null)))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
         if (objects.isEmpty()) {
