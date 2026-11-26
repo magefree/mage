@@ -27,6 +27,7 @@ public class SacrificeSourceTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.ALL, effect, optional);
         this.setTargetPointer = setTargetPointer;
         setTriggerPhrase("When you sacrifice {this}, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     protected SacrificeSourceTriggeredAbility(final SacrificeSourceTriggeredAbility ability) {
