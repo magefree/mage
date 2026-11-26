@@ -49,6 +49,7 @@ public class SimulationTriggersAITest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
+    @Ignore // TODO: requires x3 memory to run tests (900 MB instead 350 MB), so disabled until integration tests introduced
     public void test_DeepglowSkate_PerformanceOnTooManyChoices() {
         // https://github.com/magefree/mage/issues/9438
         int quantity = 1;
