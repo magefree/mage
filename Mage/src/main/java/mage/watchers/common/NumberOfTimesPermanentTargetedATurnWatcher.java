@@ -10,6 +10,7 @@ import mage.watchers.Watcher;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  *
@@ -18,6 +19,8 @@ import java.util.Map;
 public class NumberOfTimesPermanentTargetedATurnWatcher extends Watcher {
 
     private final Map<MageObjectReference, Integer> permanentsTargeted = new HashMap<>();
+    // The same counts split by the controller of the targeting spell or ability.
+    private final Map<MageObjectReference, Map<UUID, Integer>> permanentsTargetedByController = new HashMap<>();
 
     public NumberOfTimesPermanentTargetedATurnWatcher() {
         super(WatcherScope.GAME);
@@ -37,6 +40,9 @@ public class NumberOfTimesPermanentTargetedATurnWatcher extends Watcher {
             MageObjectReference mor = new MageObjectReference(permanent, game);
             int nTimes = permanentsTargeted.getOrDefault(mor, 0);
             permanentsTargeted.put(mor, nTimes + 1);
+            permanentsTargetedByController
+                    .computeIfAbsent(mor, k -> new HashMap<>())
+                    .merge(targetingObject.getControllerId(), 1, Integer::sum);
         }
     }
 
@@ -44,9 +50,15 @@ public class NumberOfTimesPermanentTargetedATurnWatcher extends Watcher {
         return permanentsTargeted.getOrDefault(new MageObjectReference(permanent, game), 0);
     }
 
+    public int numTimesTargetedThisTurnByController(Permanent permanent, UUID controllerId, Game game) {
+        Map<UUID, Integer> byController = permanentsTargetedByController.get(new MageObjectReference(permanent, game));
+        return byController == null ? 0 : byController.getOrDefault(controllerId, 0);
+    }
+
     @Override
     public void reset() {
         super.reset();
         permanentsTargeted.clear();
+        permanentsTargetedByController.clear();
     }
 }

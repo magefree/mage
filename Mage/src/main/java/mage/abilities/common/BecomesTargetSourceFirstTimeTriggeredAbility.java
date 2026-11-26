@@ -33,9 +33,13 @@ public class BecomesTargetSourceFirstTimeTriggeredAbility extends BecomesTargetS
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         NumberOfTimesPermanentTargetedATurnWatcher watcher = game.getState().getWatcher(NumberOfTimesPermanentTargetedATurnWatcher.class);
-        if (permanent == null || watcher == null || watcher.numTimesTargetedThisTurn(permanent, game) > 1) {
+        if (permanent == null || watcher == null || numTimesTargetedThisTurn(watcher, permanent, game) > 1) {
             return false;
         }
         return super.checkTrigger(event, game);
+    }
+
+    protected int numTimesTargetedThisTurn(NumberOfTimesPermanentTargetedATurnWatcher watcher, Permanent permanent, Game game) {
+        return watcher.numTimesTargetedThisTurn(permanent, game);
     }
 }
