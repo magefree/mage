@@ -33,9 +33,10 @@ public final class NecromasterDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Whenever Necromaster Dragon deals combat damage to a player, you may pay {2}. If you do, create a 2/2 black Zombie creature token and each opponent puts the top two cards of their library into their graveyard
+        // Both results hang on the payment (CR 608.2c), so the mill joins the DoIfCostPaid.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
-            new DoIfCostPaid(new CreateTokenEffect(new ZombieToken(), 1), new ManaCostsImpl<>("{2}")), false);
-        ability.addEffect(new MillCardsEachPlayerEffect(2, TargetController.OPPONENT).concatBy("and"));
+            new DoIfCostPaid(new CreateTokenEffect(new ZombieToken(), 1), new ManaCostsImpl<>("{2}"))
+                .addEffect(new MillCardsEachPlayerEffect(2, TargetController.OPPONENT).concatBy("and")), false);
         this.addAbility(ability);
     }
 
