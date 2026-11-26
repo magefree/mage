@@ -665,8 +665,32 @@ public class PlayableCostsTest extends CardTestPlayerBase {
             PlayableObjectStats stats = gameView.getCanPlayObjects().getStats(cardView.getId());
             List<String> costsToPay = stats.getPlayableCostsToPay();
             Assert.assertTrue("must be playable without the mana", stats.getPlayableAmount() > 0);
-            Assert.assertTrue("must show the printed cost: " + costsToPay, costsToPay.contains("{4}{R}{R}"));
-            Assert.assertTrue("must show the free alternative: " + costsToPay, costsToPay.contains("{0}"));
+            Assert.assertEquals("mana replaced by a sacrifice, so the printed cost must stay",
+                    Arrays.asList("{4}{R}{R}"), costsToPay);
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_Cost_WithFreeCast() {
+        // You may cast nonland cards from your hand without paying their mana costs.
+        addCard(Zone.BATTLEFIELD, playerA, "Omniscience", 1);
+        addCard(Zone.HAND, playerA, "Divination", 1); // {2}{U}
+        // no lands on battlefield, so the mana cost can't be paid
+
+        runCode("free cast without any other cost", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(player);
+            CardView cardView = gameView.getMyHand().values().stream()
+                    .filter(c -> c.getName().equals("Divination")).findFirst().get();
+
+            PlayableObjectStats stats = gameView.getCanPlayObjects().getStats(cardView.getId());
+            List<String> costsToPay = stats.getPlayableCostsToPay();
+            Assert.assertTrue("must be playable without the mana", stats.getPlayableAmount() > 0);
+            Assert.assertTrue("must show the printed cost: " + costsToPay, costsToPay.contains("{2}{U}"));
+            Assert.assertTrue("must show the free cast: " + costsToPay, costsToPay.contains("{0}"));
         });
 
         setStrictChooseMode(true);

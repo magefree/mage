@@ -3872,12 +3872,16 @@ public abstract class PlayerImpl implements Player, Serializable {
      * see PlayableObjectsList
      *
      * @param costsOutput    object id -> real costs to pay
-     * @param alternateCosts mana costs of that alternative, null or empty for a free cast
+     * @param alternateCosts mana costs of that alternative, null or empty if it needs no mana
+     * @param hasOtherCosts  true if that alternative replaces the mana by another kind of cost
      */
-    private static void addAlternativeCostToPay(Map<UUID, List<String>> costsOutput, Ability ability, ManaCosts alternateCosts) {
+    private static void addAlternativeCostToPay(Map<UUID, List<String>> costsOutput, Ability ability, ManaCosts alternateCosts, boolean hasOtherCosts) {
         String costToPay = alternateCosts == null ? "" : alternateCosts.getText();
         if (costToPay.isEmpty()) {
-            // no mana to pay that way, other costs like discard or sacrifice are part of the rules text
+            if (hasOtherCosts) {
+                // mana replaced by discard, sacrifice or similar, so the printed cost must stay
+                return;
+            }
             costToPay = "{0}";
         }
         addCostToPay(costsOutput, ability.getSourceId(), costToPay);
@@ -3948,7 +3952,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (canPutToPlay) {
                 if (costsOutput != null) {
                     // GUI: alternative way to cast, see PlayableObjectsList
-                    addAlternativeCostToPay(costsOutput, copy, alternateCosts);
+                    addAlternativeCostToPay(costsOutput, copy, alternateCosts, costs != null && !costs.isEmpty());
                 }
                 return true;
             }
@@ -4097,28 +4101,33 @@ public abstract class PlayerImpl implements Player, Serializable {
                 continue;
             }
             ManaCostsImpl manaCosts = new ManaCostsImpl<>();
+            boolean hasOtherCosts = false; // GUI: mana replaced by another kind of cost, e.g. discard or sacrifice
             for (Cost cost : alternateSourceCostsAbility.getCosts()) {
                 // AlternativeCost2 replaced by real cost on activate, so getPlayable need to extract that costs here
                 if (cost instanceof AlternativeCost) {
                     if (((AlternativeCost) cost).getCost() instanceof ManaCost) {
                         manaCosts.add((ManaCost) ((AlternativeCost) cost).getCost());
+                    } else {
+                        hasOtherCosts = true;
                     }
                 } else {
                     if (cost instanceof ManaCost) {
                         manaCosts.add((ManaCost) cost);
+                    } else {
+                        hasOtherCosts = true;
                     }
                 }
             }
 
             if (manaCosts.isEmpty()) {
                 if (costsOutput != null) {
-                    addAlternativeCostToPay(costsOutput, ability, null);
+                    addAlternativeCostToPay(costsOutput, ability, null, hasOtherCosts);
                 }
                 return true;
             } else {
                 if (availableMana == null) {
                     if (costsOutput != null) {
-                        addAlternativeCostToPay(costsOutput, ability, manaCosts);
+                        addAlternativeCostToPay(costsOutput, ability, manaCosts, hasOtherCosts);
                     }
                     return true;
                 }
@@ -4134,7 +4143,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 // reduced all cost
                 if (copyAbility.getManaCostsToPay().isEmpty()) {
                     if (costsOutput != null) {
-                        addAlternativeCostToPay(costsOutput, ability, null);
+                        addAlternativeCostToPay(costsOutput, ability, null, hasOtherCosts);
                     }
                     return true;
                 }
@@ -4142,7 +4151,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 for (Mana mana : copyAbility.getManaCostsToPay().getOptions()) {
                     if (availableMana.enough(mana)) {
                         if (costsOutput != null) {
-                            addAlternativeCostToPay(costsOutput, ability, copyAbility.getManaCostsToPay());
+                            addAlternativeCostToPay(costsOutput, ability, copyAbility.getManaCostsToPay(), hasOtherCosts);
                         }
                         return true;
                     }
@@ -4166,15 +4175,20 @@ public abstract class PlayerImpl implements Player, Serializable {
                 continue;
             }
             ManaCostsImpl manaCosts = new ManaCostsImpl<>();
+            boolean hasOtherCosts = false; // GUI: mana replaced by another kind of cost, e.g. discard or sacrifice
             for (Cost cost : ((Ability) alternateSourceCosts).getCosts()) {
                 // AlternativeCost2 replaced by real cost on activate, so getPlayable need to extract that costs here
                 if (cost instanceof AlternativeCost) {
                     if (((AlternativeCost) cost).getCost() instanceof ManaCost) {
                         manaCosts.add((ManaCost) ((AlternativeCost) cost).getCost());
+                    } else {
+                        hasOtherCosts = true;
                     }
                 } else {
                     if (cost instanceof ManaCost) {
                         manaCosts.add((ManaCost) cost);
+                    } else {
+                        hasOtherCosts = true;
                     }
                 }
             }
@@ -4196,10 +4210,16 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
             if (manaCosts.isEmpty()) {
+                if (costsOutput != null) {
+                    addAlternativeCostToPay(costsOutput, ability, null, hasOtherCosts);
+                }
                 return true;
             } else {
                 // TODO: Why is it returning true if availableMana == null, one would think it should return false
                 if (availableMana == null) {
+                    if (costsOutput != null) {
+                        addAlternativeCostToPay(costsOutput, ability, manaCosts, hasOtherCosts);
+                    }
                     return true;
                 }
 
@@ -4213,11 +4233,17 @@ public abstract class PlayerImpl implements Player, Serializable {
 
                 // reduced all cost
                 if (copyAbility.getManaCostsToPay().isEmpty()) {
+                    if (costsOutput != null) {
+                        addAlternativeCostToPay(costsOutput, ability, null, hasOtherCosts);
+                    }
                     return true;
                 }
 
                 for (Mana mana : copyAbility.getManaCostsToPay().getOptions()) {
                     if (availableMana.enough(mana)) {
+                        if (costsOutput != null) {
+                            addAlternativeCostToPay(costsOutput, ability, copyAbility.getManaCostsToPay(), hasOtherCosts);
+                        }
                         return true;
                     }
                 }
