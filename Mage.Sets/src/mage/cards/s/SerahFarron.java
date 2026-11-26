@@ -76,7 +76,10 @@ public final class SerahFarron extends TransformingDoubleFacedCard {
 
         // Crystallized Serah
         // The first legendary creature spell you cast each turn costs {2} less to cast.
-        this.getRightHalfCard().addAbility(ability.copy());
+        // needs its own effect: a copy shares the effect id with the front face, so the reduction applies once per ability
+        ability = new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 2));
+        ability.addWatcher(new SerahFarronWatcher());
+        this.getRightHalfCard().addAbility(ability);
 
         // Legendary creatures you control get +2/+2.
         this.getRightHalfCard().addAbility(new SimpleStaticAbility(new BoostControlledEffect(
