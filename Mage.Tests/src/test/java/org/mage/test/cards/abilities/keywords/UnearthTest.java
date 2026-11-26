@@ -106,4 +106,35 @@ public class UnearthTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * 702.84a
+     * ... "Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the
+     * next end step. ..."
+     * <p>
+     * The next end step can be opponent's end step (example: own turn ended by Sundial of the Infinite)
+     */
+    @Test
+    public void testUnearthExileOnNextEndStepOfAnyPlayer() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        // Unearth {B}
+        addCard(Zone.GRAVEYARD, playerA, "Dregscape Zombie", 1); // 2/1
+        //
+        // {1}, {T}: End the turn. Activate only during your turn.
+        addCard(Zone.BATTLEFIELD, playerA, "Sundial of the Infinite", 1);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unearth");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{1}, {T}: End the turn");
+
+        // turn 1: no end step
+        checkPermanentCount("after turn 1", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Dregscape Zombie", 1);
+        // turn 2: exile on opponent's end step
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.UPKEEP);
+        execute();
+
+        assertPermanentCount(playerA, "Dregscape Zombie", 0);
+        assertExileCount(playerA, "Dregscape Zombie", 1);
+    }
+
 }

@@ -82,9 +82,7 @@ class UnearthDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getPlayerId().equals(this.controllerId)) {
-            return false;
-        }
+        // next end step of any player (example: own turn ended by Sundial of the Infinite)
         // The delayed trigger source is the card in the graveyard.
         // So we need to exile the zcc + 1 permanent
         MageObjectReference object = new MageObjectReference(getSourceId(), getStackMomentSourceZCC() + 1, game);
