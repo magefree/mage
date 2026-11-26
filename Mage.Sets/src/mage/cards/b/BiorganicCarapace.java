@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAttachToTarget;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -39,7 +39,7 @@ public final class BiorganicCarapace extends CardImpl {
         this.addAbility(new EntersBattlefieldAttachToTarget());
 
         // Equipped creature gets +2/+2 and has "Whenever this creature deals combat damage to a player, draw a card for each modified creature you control."
-        Ability gainedAbility = new DealsCombatDamageTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)), false);
+        Ability gainedAbility = new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)), false);
         Ability equipAbility = new SimpleStaticAbility(new BoostEquippedEffect(2, 2));
         equipAbility.addEffect(new GainAbilityAttachedEffect(gainedAbility, null)
                 .concatBy("and"));
