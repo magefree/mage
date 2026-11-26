@@ -697,4 +697,36 @@ public class PlayableCostsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
     }
+
+    @Test
+    public void test_Cost_FromTransformingDoubleFacedCard() {
+        // the back side is never cast from hand, so only the front side cost must be shown
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.HAND, playerA, "Avatar Aang", 1); // {R}{G}{W}{U} // Aang, Master of Elements
+
+        runCode("front side cost only", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Assert.assertEquals("must show the front side cost",
+                    Arrays.asList("{R}{G}{W}{U}"), getCostsToPay(player, "Avatar Aang"));
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_Cost_FromModalDoubleFacedCard() {
+        // both sides can be cast from hand, but the card shows the front side cost
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.HAND, playerA, "Valki, God of Lies", 1); // {1}{B} // Tibalt, Cosmic Impostor {4}{R}{R}
+
+        runCode("front side cost only", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Assert.assertEquals("back side cost must not be shown on the card",
+                    Arrays.asList("{1}{B}"), getCostsToPay(player, "Valki, God of Lies"));
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
 }

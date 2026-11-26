@@ -3843,16 +3843,66 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (!(ability instanceof SpellAbility) && !(ability instanceof PlayLandAbility)) {
             return;
         }
-        String costToPay = ability.getManaCostsToPay().getText();
-        if (costToPay.isEmpty()) {
-            if (ability.getManaCosts().isEmpty()) {
-                // nothing to pay at all, e.g. a land or a spell with an unpayable cost
-                return;
-            }
-            // cost reduced down to nothing, so it must be visible as free
-            costToPay = "{0}";
+        String costToPay = getCostToPayText(ability);
+        if (costToPay != null) {
+            addCostToPay(costsOutput, ability.getSourceId(), costToPay);
         }
-        addCostToPay(costsOutput, ability.getSourceId(), costToPay);
+    }
+
+    /**
+     * GUI only: collect the real cost to pay for a card in own hand, even if it can't be cast
+     * right now (example: sorcery on opponent's turn), see PlayableObjectsList
+     *
+     * @param costsOutput object id -> real costs to pay
+     * @param card        card in own hand
+     */
+    private static void addHandCostToPay(Map<UUID, List<String>> costsOutput, Card card, Game game) {
+        // double faced cards keep their cast abilities on the front half, but GUI asks for the main card
+        Card frontCard = card;
+        if (card instanceof TransformingDoubleFacedCard) {
+            frontCard = ((TransformingDoubleFacedCard) card).getLeftHalfCard();
+        } else if (card instanceof ModalDoubleFacedCard) {
+            frontCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
+        }
+
+        for (Ability ability : frontCard.getAbilities(game)) {
+            if (!(ability instanceof SpellAbility)) {
+                continue;
+            }
+            // normal cast of the front face only, alternative casts come from canPlay
+            SpellAbilityType spellAbilityType = ((SpellAbility) ability).getSpellAbilityType();
+            if (spellAbilityType != SpellAbilityType.BASE
+                    && spellAbilityType != SpellAbilityType.TRANSFORMED_LEFT
+                    && spellAbilityType != SpellAbilityType.MODAL_LEFT) {
+                continue;
+            }
+            ActivatedAbility costAbility = (ActivatedAbility) ability.copy();
+            costAbility.adjustX(game);
+            game.getContinuousEffects().costModification(costAbility, game);
+            String costToPay = getCostToPayText(costAbility);
+            if (costToPay != null) {
+                addCostToPay(costsOutput, card.getId(), costToPay);
+            }
+        }
+    }
+
+    /**
+     * GUI only: real cost to pay for a way to cast or play an object, see PlayableObjectsList
+     *
+     * @param ability ability with already applied cost modification
+     * @return null if there is nothing to show
+     */
+    private static String getCostToPayText(ActivatedAbility ability) {
+        String costToPay = ability.getManaCostsToPay().getText();
+        if (!costToPay.isEmpty()) {
+            return costToPay;
+        }
+        if (ability.getManaCosts().isEmpty()) {
+            // nothing to pay at all, e.g. a land or a spell with an unpayable cost
+            return null;
+        }
+        // cost reduced down to nothing, so it must be visible as free
+        return "{0}";
     }
 
     /**
@@ -4493,6 +4543,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         ManaOptions availableMana = getManaAvailable(game); // get available mana options (mana pool and conditional mana added (but conditional still lose condition))
         if (hidden && fromZone.match(Zone.HAND)) {
             for (Card card : hand.getCards(game)) {
+                if (costsOutput != null) {
+                    addHandCostToPay(costsOutput, card, game);
+                }
                 for (Ability ability : card.getAbilities(game)) { // gets this activated ability from hand? (Morph?)
                     if (ability.getZone().match(Zone.HAND)) {
                         boolean isPlaySpell = (ability instanceof SpellAbility);
@@ -4502,16 +4555,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                         // TODO: maybe better way to ignore
                         if (isPlaySpell && ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.TRANSFORMED_RIGHT) {
                             continue;
-                        }
-
-                        // GUI: real cost to pay for a card in own hand, even if it can't be cast
-                        // right now (example: sorcery on opponent's turn), see PlayableObjectsList
-                        if (costsOutput != null && isPlaySpell
-                                && ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.BASE) {
-                            ActivatedAbility costAbility = (ActivatedAbility) ability.copy();
-                            costAbility.adjustX(game);
-                            game.getContinuousEffects().costModification(costAbility, game);
-                            addCostToPay(costsOutput, costAbility);
                         }
 
                         // play land restrictions
