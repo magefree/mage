@@ -3852,10 +3852,35 @@ public abstract class PlayerImpl implements Player, Serializable {
             // cost reduced down to nothing, so it must be visible as free
             costToPay = "{0}";
         }
-        List<String> costs = costsOutput.computeIfAbsent(ability.getSourceId(), x -> new ArrayList<>());
+        addCostToPay(costsOutput, ability.getSourceId(), costToPay);
+    }
+
+    /**
+     * GUI only: collect a cost to pay for an object, see PlayableObjectsList
+     *
+     * @param costsOutput object id -> real costs to pay
+     */
+    private static void addCostToPay(Map<UUID, List<String>> costsOutput, UUID objectId, String costToPay) {
+        List<String> costs = costsOutput.computeIfAbsent(objectId, x -> new ArrayList<>());
         if (!costs.contains(costToPay)) {
             costs.add(costToPay);
         }
+    }
+
+    /**
+     * GUI only: collect an alternative way to cast an object, e.g. Fist of Suns or a free cast,
+     * see PlayableObjectsList
+     *
+     * @param costsOutput    object id -> real costs to pay
+     * @param alternateCosts mana costs of that alternative, null or empty for a free cast
+     */
+    private static void addAlternativeCostToPay(Map<UUID, List<String>> costsOutput, Ability ability, ManaCosts alternateCosts) {
+        String costToPay = alternateCosts == null ? "" : alternateCosts.getText();
+        if (costToPay.isEmpty()) {
+            // no mana to pay that way, other costs like discard or sacrifice are part of the rules text
+            costToPay = "{0}";
+        }
+        addCostToPay(costsOutput, ability.getSourceId(), costToPay);
     }
 
     /**
@@ -3921,13 +3946,17 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
             if (canPutToPlay) {
+                if (costsOutput != null) {
+                    // GUI: alternative way to cast, see PlayableObjectsList
+                    addAlternativeCostToPay(costsOutput, copy, alternateCosts);
+                }
                 return true;
             }
         }
 
         // ALTERNATIVE COST from source card (any AlternativeSourceCosts)
         if (AbilityType.SPELL.equals(ability.getAbilityType())) {
-            return canPlayCardByAlternateCost(game.getCard(ability.getSourceId()), availableMana, copy, game);
+            return canPlayCardByAlternateCost(game.getCard(ability.getSourceId()), availableMana, copy, game, costsOutput);
         }
         return false;
     }
@@ -4038,7 +4067,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param game          The game to check for.
      * @return Boolean, true if the card can be played by *any* of the available alternative costs, false otherwise.
      */
-    protected boolean canPlayCardByAlternateCost(Card sourceObject, ManaOptions availableMana, Ability ability, Game game) {
+    protected boolean canPlayCardByAlternateCost(Card sourceObject, ManaOptions availableMana, Ability ability, Game game, Map<UUID, List<String>> costsOutput) {
         // TODO: Why is the "sourceObject instanceof Permanent" in there?
         if (sourceObject == null || (sourceObject instanceof Permanent)) {
             return false;
@@ -4082,9 +4111,15 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
             if (manaCosts.isEmpty()) {
+                if (costsOutput != null) {
+                    addAlternativeCostToPay(costsOutput, ability, null);
+                }
                 return true;
             } else {
                 if (availableMana == null) {
+                    if (costsOutput != null) {
+                        addAlternativeCostToPay(costsOutput, ability, manaCosts);
+                    }
                     return true;
                 }
 
@@ -4098,11 +4133,17 @@ public abstract class PlayerImpl implements Player, Serializable {
 
                 // reduced all cost
                 if (copyAbility.getManaCostsToPay().isEmpty()) {
+                    if (costsOutput != null) {
+                        addAlternativeCostToPay(costsOutput, ability, null);
+                    }
                     return true;
                 }
 
                 for (Mana mana : copyAbility.getManaCostsToPay().getOptions()) {
                     if (availableMana.enough(mana)) {
+                        if (costsOutput != null) {
+                            addAlternativeCostToPay(costsOutput, ability, copyAbility.getManaCostsToPay());
+                        }
                         return true;
                     }
                 }
@@ -4239,7 +4280,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             boolean canUse;
             if (ability instanceof MorphAbility && object instanceof Card && (game.canPlaySorcery(getId())
                     || (!game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.CAST_AS_INSTANT, playAbility, this.getId(), game).isEmpty()))) {
-                canUse = canPlayCardByAlternateCost((Card) object, availableMana, playAbility, game);
+                canUse = canPlayCardByAlternateCost((Card) object, availableMana, playAbility, game, costsOutput);
             } else {
                 canUse = canPlay(playAbility, availableMana, object, game, costsOutput); // canPlay already checks alternative source costs and all conditions
             }

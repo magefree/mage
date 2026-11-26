@@ -650,4 +650,27 @@ public class PlayableCostsTest extends CardTestPlayerBase {
         setStopAt(4, PhaseStep.END_TURN);
         execute();
     }
+
+    @Test
+    public void test_Cost_PlayableByAlternativeCostOnly() {
+        // You may sacrifice two Mountains rather than pay Fireblast's mana cost.
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2); // not enough mana for the printed cost
+        addCard(Zone.HAND, playerA, "Fireblast", 1); // {4}{R}{R}
+
+        runCode("playable by the alternative cost", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(player);
+            CardView cardView = gameView.getMyHand().values().stream()
+                    .filter(c -> c.getName().equals("Fireblast")).findFirst().get();
+
+            PlayableObjectStats stats = gameView.getCanPlayObjects().getStats(cardView.getId());
+            List<String> costsToPay = stats.getPlayableCostsToPay();
+            Assert.assertTrue("must be playable without the mana", stats.getPlayableAmount() > 0);
+            Assert.assertTrue("must show the printed cost: " + costsToPay, costsToPay.contains("{4}{R}{R}"));
+            Assert.assertTrue("must show the free alternative: " + costsToPay, costsToPay.contains("{0}"));
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
 }
