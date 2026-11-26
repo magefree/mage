@@ -276,4 +276,42 @@ public class PlayableCostsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
     }
+
+    @Test
+    public void test_NoCost_FromActivatedAbility() {
+        // Cycling {3}{B}{B} - an activated ability must not replace the cost to cast the card
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+        addCard(Zone.HAND, playerA, "Decree of Pain", 1); // {6}{B}{B}
+
+        runCode("cycling must keep the cast cost", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(player);
+            CardView cardView = gameView.getMyHand().values().stream().findFirst().get();
+            Assert.assertEquals("printed cost must be unchanged", "{6}{B}{B}", cardView.getManaCostStr());
+
+            PlayableObjectStats stats = gameView.getCanPlayObjects().getStats(cardView.getId());
+            Assert.assertTrue("cycling must be playable", stats.getPlayableAmount() > 0);
+            Assert.assertEquals("must show the cast cost, not the cycling cost",
+                    Arrays.asList("{6}{B}{B}"), stats.getPlayableCostsToPay());
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_NoCost_FromAdventureSpell() {
+        // adventure is another way to cast, but its cost belongs to the spell card, not to the main card
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.HAND, playerA, "Bonecrusher Giant", 1); // {2}{R}, adventure Stomp {1}{R}
+
+        runCode("adventure must keep the main cost", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Assert.assertEquals("must show the main cast cost only",
+                    Arrays.asList("{2}{R}"), getCostsToPay(player, "Bonecrusher Giant"));
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
 }
