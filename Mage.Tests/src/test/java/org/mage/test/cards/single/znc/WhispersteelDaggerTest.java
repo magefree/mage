@@ -56,4 +56,31 @@ public class WhispersteelDaggerTest extends CardTestPlayerBase {
 
         assertLife(playerB, 20 - 3);
     }
+
+    @Test
+    public void testSourceLeavingDoesNotAddPermission() {
+        addCard(Zone.BATTLEFIELD, playerA, dagger);
+        addCard(Zone.BATTLEFIELD, playerA, forest, 9);
+        addCard(Zone.BATTLEFIELD, playerA, goblin);
+        addCard(Zone.HAND, playerA, "Naturalize");
+
+        addCard(Zone.GRAVEYARD, playerB, lion, 2);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", goblin);
+
+        attack(1, playerA, goblin, playerB);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Naturalize", dagger, true);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lion, true);
+
+        checkPlayableAbility("no second lion", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Silvercoat", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, lion, 1);
+        assertGraveyardCount(playerA, dagger, 1);
+    }
 }
