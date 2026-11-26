@@ -20,8 +20,8 @@ public final class CostToPayIcon extends CardIconImpl {
     private static String getHint(PlayableObjectStats objectStats) {
         String res = "Real cost to pay instead printed cost:";
         List<String> list = objectStats.getPlayableCostsToPay();
-        for (String costToPay : list) {
-            res += "<br> " + costToPay;
+        if (!list.isEmpty()) {
+            res += "<br> " + String.join("<br> ", list);
         }
         return res;
     }

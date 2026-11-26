@@ -1824,7 +1824,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 if (needChosen.contains(card.getId())) {
                     card.setSelected(true);
                 }
-                if (needPlayable.containsObject(card.getId())) {
+                if (needPlayable.hasObject(card.getId())) {
                     card.setPlayableStats(needPlayable.getStats(card.getId()));
                 }
             }
@@ -1838,7 +1838,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 if (needChosen.contains(card.getId())) {
                     card.setSelected(true);
                 }
-                if (needPlayable.containsObject(card.getId())) {
+                if (needPlayable.hasObject(card.getId())) {
                     card.setPlayableStats(needPlayable.getStats(card.getId()));
                 }
             }
@@ -1852,7 +1852,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 if (needChosen.contains(card.getId())) {
                     card.setSelected(true);
                 }
-                if (needPlayable.containsObject(card.getId())) {
+                if (needPlayable.hasObject(card.getId())) {
                     card.setPlayableStats(needPlayable.getStats(card.getId()));
                 }
             }
@@ -1868,7 +1868,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     card.getValue().setSelected(true);
                 }
                 // users can activate abilities of the spell on the stack (example: Lightning Storm);
-                if (needPlayable.containsObject(card.getKey())) {
+                if (needPlayable.hasObject(card.getKey())) {
                     card.getValue().setPlayableStats(needPlayable.getStats(card.getKey()));
                 }
             }
@@ -1884,7 +1884,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (needChosen.contains(perm.getKey())) {
                         perm.getValue().setSelected(true);
                     }
-                    if (needPlayable.containsObject(perm.getKey())) {
+                    if (needPlayable.hasObject(perm.getKey())) {
                         perm.getValue().setPlayableStats(needPlayable.getStats(perm.getKey()));
                     }
                 }
@@ -1901,7 +1901,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (needChosen.contains(card.getKey())) {
                         card.getValue().setSelected(true);
                     }
-                    if (needPlayable.containsObject(card.getKey())) {
+                    if (needPlayable.hasObject(card.getKey())) {
                         card.getValue().setPlayableStats(needPlayable.getStats(card.getKey()));
                     }
                 }
@@ -1918,7 +1918,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (needChosen.contains(card.getKey())) {
                         card.getValue().setSelected(true);
                     }
-                    if (needPlayable.containsObject(card.getKey())) {
+                    if (needPlayable.hasObject(card.getKey())) {
                         card.getValue().setPlayableStats(needPlayable.getStats(card.getKey()));
                     }
                 }
@@ -1938,7 +1938,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (needChosen.contains(card.getId())) {
                         card.setSelected(true);
                     }
-                    if (needPlayable.containsObject(card.getId())) {
+                    if (needPlayable.hasObject(card.getId())) {
                         card.setPlayableStats(needPlayable.getStats(card.getId()));
                     }
                 }
@@ -1953,7 +1953,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (needChosen.contains(card.getKey())) {
                         card.getValue().setSelected(true);
                     }
-                    if (needPlayable.containsObject(card.getKey())) {
+                    if (needPlayable.hasObject(card.getKey())) {
                         card.getValue().setPlayableStats(needPlayable.getStats(card.getKey()));
                     }
                 }
@@ -1970,7 +1970,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (needChosen.contains(com.getId())) {
                         com.setSelected(true);
                     }
-                    if (needPlayable.containsObject(com.getId())) {
+                    if (needPlayable.hasObject(com.getId())) {
                         com.setPlayableStats(needPlayable.getStats(com.getId()));
                     }
                 }
@@ -1986,7 +1986,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 if (needChosen.contains(card.getKey())) {
                     card.getValue().setSelected(true);
                 }
-                if (needPlayable.containsObject(card.getKey())) {
+                if (needPlayable.hasObject(card.getKey())) {
                     card.getValue().setPlayableStats(needPlayable.getStats(card.getKey()));
                 }
             }
@@ -2001,7 +2001,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 if (needChosen.contains(card.getKey())) {
                     card.getValue().setSelected(true);
                 }
-                if (needPlayable.containsObject(card.getKey())) {
+                if (needPlayable.hasObject(card.getKey())) {
                     card.getValue().setPlayableStats(needPlayable.getStats(card.getKey()));
                 }
             }
@@ -2012,7 +2012,7 @@ public final class GamePanel extends javax.swing.JPanel {
         // looked at (current cards)
         for (LookedAtView look : lastGameData.game.getLookedAt()) {
             for (Map.Entry<UUID, SimpleCardView> card : look.getCards().entrySet()) {
-                if (needPlayable.containsObject(card.getKey())) {
+                if (needPlayable.hasObject(card.getKey())) {
                     card.getValue().setPlayableStats(needPlayable.getStats(card.getKey()));
                 }
             }
@@ -2034,7 +2034,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 CardView cardView = mageCard.getOriginal();
                 cardView.setChoosable(needSelectable.contains(cardView.getId()));
                 cardView.setSelected(needChosen.contains(cardView.getId()));
-                if (needPlayable.containsObject(cardView.getId())) {
+                if (needPlayable.hasObject(cardView.getId())) {
                     cardView.setPlayableStats(needPlayable.getStats(cardView.getId()));
                 } else {
                     cardView.setPlayableStats(new PlayableObjectStats());

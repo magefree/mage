@@ -3832,13 +3832,35 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     /**
+     * GUI only: collect the real cost to pay for a way to cast or play an
+     * object, see PlayableObjectsList
+     *
+     * @param costsOutput object id -> real costs to pay
+     * @param ability     ability with already applied cost modification
+     */
+    private static void addCostToPay(Map<UUID, List<String>> costsOutput, ActivatedAbility ability) {
+        // activated abilities are ignored here, their costs are part of the rules text
+        if (!(ability instanceof SpellAbility) && !(ability instanceof PlayLandAbility)) {
+            return;
+        }
+        String costToPay = ability.getManaCostsToPay().getText();
+        if (costToPay.isEmpty()) {
+            return;
+        }
+        List<String> costs = costsOutput.computeIfAbsent(ability.getSourceId(), x -> new ArrayList<>());
+        if (!costs.contains(costToPay)) {
+            costs.add(costToPay);
+        }
+    }
+
+    /**
      * @param ability
      * @param availableMana if null, it won't be checked if enough mana is
      *                      available
      * @param game
      * @return
      */
-    protected boolean canPlay(ActivatedAbility ability, ManaOptions availableMana, MageObject sourceObject, Game game, Map<UUID, String> costsOutput) {
+    protected boolean canPlay(ActivatedAbility ability, ManaOptions availableMana, MageObject sourceObject, Game game, Map<UUID, List<String>> costsOutput) {
         if (ability.isManaActivatedAbility()) {
             return false;
         }
@@ -3855,8 +3877,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         if (costsOutput != null) {
             // GUI: collect real cost to pay instead printed cost, see PlayableObjectsList
-            // (all playable abilities, so alternative casts like spectacle or flashback are included too)
-            costsOutput.put(ability.getId(), copy.getManaCostsToPay().getText());
+            // (all ways to cast, so alternative casts like spectacle or flashback are included too)
+            addCostToPay(costsOutput, copy);
         }
         boolean canBeCastRegularly = true;
         Set<MageIdentifier> allowedIdentifiers = null;
@@ -4158,7 +4180,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         return false;
     }
 
-    protected ActivatedAbility findActivatedAbilityFromPlayable(MageObject object, ManaOptions availableMana, Ability ability, Game game, Map<UUID, String> costsOutput) {
+    protected ActivatedAbility findActivatedAbilityFromPlayable(MageObject object, ManaOptions availableMana, Ability ability, Game game, Map<UUID, List<String>> costsOutput) {
 
         // special mana to pay spell cost
         ManaOptions manaFull = availableMana.copy();
@@ -4192,7 +4214,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         return null;
     }
 
-    protected ActivatedAbility findActivatedAbilityFromAlternativeSourceCost(MageObject object, ManaOptions availableMana, Ability ability, Game game, Map<UUID, String> costsOutput) {
+    protected ActivatedAbility findActivatedAbilityFromAlternativeSourceCost(MageObject object, ManaOptions availableMana, Ability ability, Game game, Map<UUID, List<String>> costsOutput) {
         // return play ability that can activate AlternativeSourceCosts
         if (ability instanceof AlternativeSourceCosts && object != null && !(object instanceof Permanent)) {
             ActivatedAbility playAbility = null;
@@ -4224,7 +4246,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         return null;
     }
 
-    private void getPlayableFromObjectAll(Game game, Zone fromZone, MageObject object, ManaOptions availableMana, List<ActivatedAbility> output, Map<UUID, String> costsOutput) {
+    private void getPlayableFromObjectAll(Game game, Zone fromZone, MageObject object, ManaOptions availableMana, List<ActivatedAbility> output, Map<UUID, List<String>> costsOutput) {
         if (fromZone == null || object == null) {
             return;
         }
@@ -4261,7 +4283,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         // DYNAMIC ADDED abilities are adds in getAbilities(game)
     }
 
-    private void getPlayableFromObjectSingle(Game game, Zone fromZone, MageObject object, Abilities<Ability> candidateAbilities, ManaOptions availableMana, List<ActivatedAbility> output, Map<UUID, String> costsOutput) {
+    private void getPlayableFromObjectSingle(Game game, Zone fromZone, MageObject object, Abilities<Ability> candidateAbilities, ManaOptions availableMana, List<ActivatedAbility> output, Map<UUID, List<String>> costsOutput) {
         // check "can play" condition as affected controller (BUT play from not own hand zone must be checked as original controller)
         // must check all abilities, not activated only
         for (Ability ability : candidateAbilities) {
@@ -4386,10 +4408,10 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     /**
      * @param costsOutput GUI only: if not null then it will be filled by real
-     *                    costs to pay (ability id -> mana cost text), see
+     *                    costs to pay (object id -> mana cost texts), see
      *                    PlayableObjectsList
      */
-    public List<ActivatedAbility> getPlayable(Game originalGame, boolean hidden, Zone fromZone, boolean hideDuplicatedAbilities, Map<UUID, String> costsOutput) {
+    public List<ActivatedAbility> getPlayable(Game originalGame, boolean hidden, Zone fromZone, boolean hideDuplicatedAbilities, Map<UUID, List<String>> costsOutput) {
         List<ActivatedAbility> playable = new ArrayList<>();
         if (shouldSkipGettingPlayable(originalGame)) {
             return playable;
@@ -4408,6 +4430,16 @@ public abstract class PlayerImpl implements Player, Serializable {
                         // TODO: maybe better way to ignore
                         if (isPlaySpell && ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.TRANSFORMED_RIGHT) {
                             continue;
+                        }
+
+                        // GUI: real cost to pay for a card in own hand, even if it can't be cast
+                        // right now (example: sorcery on opponent's turn), see PlayableObjectsList
+                        if (costsOutput != null && isPlaySpell
+                                && ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.BASE) {
+                            ActivatedAbility costAbility = (ActivatedAbility) ability.copy();
+                            costAbility.adjustX(game);
+                            game.getContinuousEffects().costModification(costAbility, game);
+                            addCostToPay(costsOutput, costAbility);
                         }
 
                         // play land restrictions
@@ -4591,7 +4623,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public PlayableObjectsList getPlayableObjects(Game game, Zone zone) {
         // collect abilities per object
-        Map<UUID, String> costsToPay = new HashMap<>();
+        Map<UUID, List<String>> costsToPay = new HashMap<>();
         List<ActivatedAbility> playableAbilities = getPlayable(game, true, zone, false, costsToPay); // do not hide duplicated abilities/cards
         Map<UUID, List<ActivatedAbility>> playableObjects = new HashMap<>();
         for (ActivatedAbility ability : playableAbilities) {
