@@ -276,7 +276,7 @@ public class ScryfallImageSource implements CardImageSource {
             throw new MageException("Couldn't find image_uris in card's JSON data: " + jsonUrl);
         }
 
-        return JsonUtil.getAsString(jsonImages, "large");
+        return JsonUtil.getAsString(jsonImages, "display");
     }
 
     @Override
@@ -962,8 +962,8 @@ public class ScryfallImageSource implements CardImageSource {
 
     @Override
     public float getAverageSizeKb() {
-        // June 2024: MH3 set - 46450 Kb / 332 = 140 Kb
-        return 140f;
+    	// November 2026 (webp): MH3 set - 42772 Kb / 562 = 76 Kb
+        return 76f;
     }
 
     @Override

@@ -131,12 +131,12 @@ public class ScryfallTokensBulkDataTest {
         // large images
         ScryfallImageSource source = ScryfallImageSource.getInstance();
         Assert.assertTrue(source.prepareDownloadList(new TestServiceInfo(), downloadList));
-        Assert.assertEquals(expectedImage(links.get(tokenEn), "en", "large", "front"), source.generateTokenUrl(tokens.get(tokenEn)).getBaseUrl());
-        Assert.assertEquals(expectedImage(links.get(tokenNoLang), "en", "large", "front"), source.generateTokenUrl(tokens.get(tokenNoLang)).getBaseUrl());
-        Assert.assertEquals(expectedImage(links.get(tokenBack), "en", "large", "back"), source.generateTokenUrl(tokens.get(tokenBack)).getBaseUrl());
-        Assert.assertEquals(expectedImage(links.get(tokenFront), "en", "large", "front"), source.generateTokenUrl(tokens.get(tokenFront)).getBaseUrl());
-        Assert.assertEquals(expectedImage(links.get(tokenStar), "en", "large", "front"), source.generateTokenUrl(tokens.get(tokenStar)).getBaseUrl());
-        Assert.assertEquals(expectedImage(links.get(tokenJapanOnly), "ja", "large", "front"), source.generateTokenUrl(tokens.get(tokenJapanOnly)).getBaseUrl());
+        Assert.assertEquals(expectedImage(links.get(tokenEn), "en", "display", "front"), source.generateTokenUrl(tokens.get(tokenEn)).getBaseUrl());
+        Assert.assertEquals(expectedImage(links.get(tokenNoLang), "en", "display", "front"), source.generateTokenUrl(tokens.get(tokenNoLang)).getBaseUrl());
+        Assert.assertEquals(expectedImage(links.get(tokenBack), "en", "display", "back"), source.generateTokenUrl(tokens.get(tokenBack)).getBaseUrl());
+        Assert.assertEquals(expectedImage(links.get(tokenFront), "en", "display", "front"), source.generateTokenUrl(tokens.get(tokenFront)).getBaseUrl());
+        Assert.assertEquals(expectedImage(links.get(tokenStar), "en", "display", "front"), source.generateTokenUrl(tokens.get(tokenStar)).getBaseUrl());
+        Assert.assertEquals(expectedImage(links.get(tokenJapanOnly), "ja", "display", "front"), source.generateTokenUrl(tokens.get(tokenJapanOnly)).getBaseUrl());
         // not found in bulk data - api link as before
         Assert.assertEquals(links.get(tokenMissing), source.generateTokenUrl(tokens.get(tokenMissing)).getBaseUrl());
         if (tokenNonApi != null) {
@@ -146,9 +146,9 @@ public class ScryfallTokensBulkDataTest {
         // small images
         ScryfallImageSource sourceSmall = ScryfallImageSourceSmall.getInstance();
         Assert.assertTrue(sourceSmall.prepareDownloadList(new TestServiceInfo(), downloadList));
-        Assert.assertEquals(expectedImage(links.get(tokenEn), "en", "small", "front"), sourceSmall.generateTokenUrl(tokens.get(tokenEn)).getBaseUrl());
-        Assert.assertEquals(expectedImage(links.get(tokenBack), "en", "small", "back"), sourceSmall.generateTokenUrl(tokens.get(tokenBack)).getBaseUrl());
-        Assert.assertEquals(links.get(tokenMissing).replace("format=image", "format=image&version=small"),
+        Assert.assertEquals(expectedImage(links.get(tokenEn), "en", "thumb", "front"), sourceSmall.generateTokenUrl(tokens.get(tokenEn)).getBaseUrl());
+        Assert.assertEquals(expectedImage(links.get(tokenBack), "en", "thumb", "back"), sourceSmall.generateTokenUrl(tokens.get(tokenBack)).getBaseUrl());
+        Assert.assertEquals(links.get(tokenMissing).replace("format=image", "format=image&version=thumb"),
                 sourceSmall.generateTokenUrl(tokens.get(tokenMissing)).getBaseUrl());
     }
 
@@ -239,7 +239,7 @@ public class ScryfallTokensBulkDataTest {
 
     private static Map<String, String> imageUris(String set, String number, String lang, String face) {
         Map<String, String> res = new LinkedHashMap<>();
-        for (String quality : Arrays.asList("small", "normal", "large")) {
+        for (String quality : Arrays.asList("thumb", "grid", "display")) {
             res.put(quality, imageLink(set, number, lang, quality, face));
         }
         return res;
