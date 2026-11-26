@@ -53,6 +53,48 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Tin Street Hooligan", 1);
     }
+    @Test
+    public void testGruulScrapperNoRedSpentDoesNotTrigger() {
+        // Gruul Scrapper - Creature 3/2 {3}{G}
+        // When Gruul Scrapper enters the battlefield, if {R} was spent to cast it, it gains haste until end of turn.
+        // "If {R} was spent" is an intervening-if (CR 603.4): with no red spent the ability never triggers.
+        addCard(Zone.HAND, playerA, "Gruul Scrapper");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gruul Scrapper");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1); // resolve the creature, no trigger may follow
+        checkStackSize("no intervening-if trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 0);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Gruul Scrapper", 1);
+        assertAbility(playerA, "Gruul Scrapper", HasteAbility.getInstance(), false);
+    }
+
+    @Test
+    public void testGruulScrapperRedSpentGainsHaste() {
+        // Gruul Scrapper - Creature 3/2 {3}{G}
+        // When Gruul Scrapper enters the battlefield, if {R} was spent to cast it, it gains haste until end of turn.
+        addCard(Zone.HAND, playerA, "Gruul Scrapper");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gruul Scrapper");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1); // resolve the creature
+        checkStackSize("intervening-if trigger on the stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 1);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1); // resolve the trigger
+        checkStackSize("trigger resolved", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 0);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Gruul Scrapper", 1);
+        assertAbility(playerA, "Gruul Scrapper", HasteAbility.getInstance(), true);
+    }
+
     //ManaWasSpentCondition gives false negative after permanent leaves battlefield
     //Fixed by using MageObjectReference instead of UUID
     @Test
